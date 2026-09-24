@@ -6,9 +6,11 @@ Every entry here is a real artifact — a GIF, an image, or a video — produced
 
 ## Gallery
 
-| Date | Group | Proposition | What it proves | Preview | Host environment | Verified up to |
-| --- | --- | --- | --- | --- | --- | --- |
-| _awaiting first approved entry_ | | | | | | |
+| Date | Group | Proposition | Adapter | What it proves | Preview | Host environment | Verified up to |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| _awaiting first approved entry_ | | | | | | | |
+
+`Adapter` names the repository the sample was produced against — for example `dcc-mcp/dcc-mcp-blender` — so every row links back to the adapter it proves.
 
 The gallery is empty on purpose. Artifacts are drafted internally and published here one at a time, after review. Nothing lands in this repository by default.
 

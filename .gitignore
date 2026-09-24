@@ -1,9 +1,12 @@
-# Local render / capture scratch — never commit work-in-progress frames
-*.png.tmp
-frame_*.png
-*.exr
-*.blend1
-*.blend2
-*.swp
+# Local render / capture scratch — never commit work-in-progress frames.
+# Patterns are anchored with a leading "/" so they only match at the repository
+# root. Unanchored patterns match at any depth and would silently ignore
+# published artifacts such as media/<date>-<slug>/frame_0001.png.
+/frame_*.png
+/*.exr
+/*.blend1
+/*.blend2
+/*.png.tmp
+/*.swp
 .DS_Store
 Thumbs.db
