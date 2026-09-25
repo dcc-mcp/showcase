@@ -14,6 +14,27 @@ supplied the capability). One verified sample fills one cell.
 
 32 sampleable + 9 blocked = 41 skills.
 
+## Where the 170 declared pairs land
+
+The two counts above are about skills and about pairs this machine can act on. Neither is the
+same as "every pair the catalog declares", so the four buckets below reconcile the full 170.
+
+| Bucket | Pairs | Enumerated in this ledger |
+| --- | --- | --- |
+| Skill declares a host installed here | 94 | yes — one ⬜ per pair in the matrix below |
+| Host-neutral, declared as `any` | 3 | yes — see *Host-neutral skills* |
+| Blocked skills, all of their declared hosts | 25 | yes — see *Blocked: host not installed here* |
+| Sampleable skill against a host **not** installed here | 48 | **no** — see the note below |
+
+The 48 are pairs that a skill sampleable here declares against some other host — for example
+`dcc-asset-kenney` declaring `godot`, `unity`, `unreal` and `zbrush`, or `dcc-asset-polyhaven`
+declaring `photoshop`. No proposition on this machine can close them, so they are not drawn as
+cells. They are still real declared support, and they are the raw material for the gap this
+project feeds back upstream.
+
+So this file is a ledger of what the sampling machine can act on, not a full transcription of
+the catalog: 122 of the 170 declared pairs are enumerated here.
+
 Source of truth: [`marketplace.json`](https://github.com/dcc-mcp/marketplace/blob/main/marketplace.json)
 at catalog version `1.15.1`. Regenerate this file — and the Coverage section of `README.md`,
 which links here instead of repeating these counts — when the catalog moves.

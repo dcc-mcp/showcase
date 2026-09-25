@@ -18,7 +18,7 @@ The gallery is empty on purpose. Artifacts are drafted internally and published 
 
 ## Coverage
 
-[`coverage.md`](coverage.md) is the ledger: every marketplace skill against every DCC it declares, marked as proven, drafted, open, or blocked. The catalog counts live there and only there — this page links to them instead of copying them, so there is a single place to update when the catalog moves. A proposition that chains one skill through several hosts, or several skills inside one host, closes more than one cell per run — that is the shape we prefer, because the parallel budget is small.
+[`coverage.md`](coverage.md) is the ledger: every marketplace skill against every DCC it declares **that this machine can sample**, plus every skill whose declared hosts are all missing here — marked as proven, drafted, open, or blocked. It reconciles the full catalog against what it enumerates, so the pairs a sampleable skill declares against an uninstalled host are accounted for rather than silently dropped. The catalog counts live there and only there — this page links to them instead of copying them, so there is a single place to update when the catalog moves. A proposition that chains one skill through several hosts, or several skills inside one host, closes more than one cell per run — that is the shape we prefer, because the parallel budget is small.
 
 ## What counts as an entry
 
