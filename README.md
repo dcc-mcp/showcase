@@ -6,13 +6,19 @@ Every entry here is a real artifact — a GIF, an image, or a video — produced
 
 ## Gallery
 
-| Date | Group | Proposition | Adapter | What it proves | Preview | Host environment | Verified up to |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| _awaiting first approved entry_ | | | | | | | |
+| Date | Group | Proposition | Adapter | Skill | What it proves | Preview | Host environment | Verified up to |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| _awaiting first approved entry_ | | | | | | | | |
 
 `Adapter` names the repository the sample was produced against — for example `dcc-mcp/dcc-mcp-blender` — so every row links back to the adapter it proves.
 
+`Skill` names the marketplace package that supplied the capability, or `—` when the sample proves the adapter alone. Together the two columns make each row a cell in the [coverage matrix](coverage.md).
+
 The gallery is empty on purpose. Artifacts are drafted internally and published here one at a time, after review. Nothing lands in this repository by default.
+
+## Coverage
+
+[`coverage.md`](coverage.md) is the ledger: every marketplace skill against every DCC it declares **that this machine can sample**, plus every skill whose declared hosts are all missing here — marked as proven, drafted, open, or blocked. It reconciles the full catalog against what it enumerates, so the pairs a sampleable skill declares against an uninstalled host are accounted for rather than silently dropped. The catalog counts live there and only there — this page links to them instead of copying them, so there is a single place to update when the catalog moves. A proposition that chains one skill through several hosts, or several skills inside one host, closes more than one cell per run — that is the shape we prefer, because the parallel budget is small.
 
 ## What counts as an entry
 
