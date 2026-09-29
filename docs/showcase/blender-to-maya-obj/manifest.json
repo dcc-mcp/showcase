@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "reference": null,
+  "blender_application": "Blender",
+  "blender_version": "5.1.1",
+  "maya_application": "Maya",
+  "maya_version": "2026",
+  "adapter": "dcc-mcp-blender 0.2.4",
+  "core": "core 0.20.28",
+  "instance": "cfd7edb0",
+  "transport": "MCP over Streamable HTTP",
+  "capture_provider": "host-native",
+  "capture_policy": "unretouched host viewport capture and verdict read-out; no absolute paths, user names or tokens in frame",
+  "files": [
+    {
+      "path": "blender-source.jpg",
+      "sha256": "415854d4f0972fecadab13e753d298a119301d057ef46dc7a3e7185e1aba48c9",
+      "bytes": 65871,
+      "width": 1600,
+      "height": 856,
+      "bit_depth": 8,
+      "caption": "Blender 5.1.1 viewport capture of the calibration asset"
+    },
+    {
+      "path": "roundtrip-verdict.png",
+      "sha256": "6cb0bd800b3240fa9360c4bfcba8d3c30616bf85f3b8c416a1cccbc342006ef2",
+      "bytes": 128797,
+      "width": 1180,
+      "height": 884,
+      "bit_depth": 8,
+      "caption": "Three-way comparison and verdict read-out"
+    },
+    {
+      "path": "cal_asset.obj",
+      "sha256": "12fbabae14afc47a44bb1d167416b7022a6d6b11f18b3181a9cd5f6fe57bddda",
+      "bytes": 11041,
+      "verts": 122,
+      "faces": 134,
+      "object_names": [
+        "CAL_Box",
+        "CAL_Sphere"
+      ]
+    }
+  ]
+}

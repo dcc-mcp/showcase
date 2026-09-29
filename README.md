@@ -40,8 +40,18 @@ If a sample shows a capability that was partly reached with in-host scripting ra
 ## Repository layout
 
 ```text
-media/   approved artifacts, grouped by proposition
+docs/showcase/<slug>/   one entry per proposition — report, inventory, evidence, artifacts
+scripts/                structural checks for entries
+media/                  approved artifacts, grouped by proposition
 ```
+
+`docs/showcase/` is where an entry is authored and reviewed. Each directory is
+a claim plus the numbers that let a reader check it without running anything:
+a report, an inventory of artifacts with hashes, and machine-readable
+measurements. The full rules are in [`docs/showcase/CONTRACT.md`](docs/showcase/CONTRACT.md).
+
+`media/` is the published wall. An entry reaches it only after it is approved,
+one at a time.
 
 Large media should go through Git LFS or an external link. Do not commit large binaries directly — this repository is meant to stay cheap to clone.
 
@@ -50,6 +60,12 @@ Adapter repositories carry a single hero still, one line of explanation, and a l
 ## Reproducing an entry
 
 Open an issue with the proposition you tried, the host and version, and the adapter/core versions. Include what you got back from the tool calls — entries are accepted or rejected on real return values, not on a reported success flag.
+
+Before submitting, check that the entry is structurally complete:
+
+```bash
+python scripts/validate_entry.py docs/showcase/<slug>
+```
 
 ## License
 
