@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "slug": "blender-mcp-gimbal-turntable",
+  "title": "Mechanical gimbal turntable (Blender + Cycles)",
+  "one_line": "The DCC-MCP Blender adapter boots inside a real Blender 5.1.1 host, builds a 24-part gimbal assembly, and renders a hero frame plus a seamless 48-frame turntable.",
+  "reference": "https://github.com/dcc-mcp/dcc-mcp-blender",
+  "blender_application": "Blender",
+  "blender_version": "5.1.1",
+  "capture_provider": "Blender Cycles GPU render running inside the live host; turntable frames encoded to a 128-colour palettised GIF; contact sheet converted to JPEG q82 with Pillow",
+  "produced_at": "2026-09-29",
+  "files": [
+    {
+      "path": "hero_v2.jpg",
+      "role": "hero still",
+      "bytes": 52999,
+      "sha256": "405618fb7cb427a027edd7f3ecb81e07dce786962403d22ddb8bc5a74e3c0869",
+      "width": 1600,
+      "height": 900,
+      "proves": "the host really rendered the assembly: 1600x900, mean luma 53.8, 72.9 percent of pixels lit, subject centred at uv (0.516, 0.629)"
+    },
+    {
+      "path": "turntable_v2.gif",
+      "role": "turntable animation",
+      "bytes": 2662913,
+      "sha256": "c7f87bd4552f1e21a416a490f3753404064bd829a237a0d8f612e3e5ba65998f",
+      "width": 900,
+      "height": 506,
+      "frames": 48,
+      "fps_mean": 12.0,
+      "loop": 0,
+      "proves": "48 rendered frames, every inter-frame step non-zero, and the loop seam statistically indistinguishable from any other step"
+    },
+    {
+      "path": "contact_sheet_v2.jpg",
+      "role": "cycle contact sheet",
+      "bytes": 27860,
+      "sha256": "f2141f817166842e79a8b595be80300be57733dbcca2c98c8313ffe72dad4eb9",
+      "width": 1232,
+      "height": 354,
+      "grid": "4x2",
+      "proves": "eight evenly spaced samples across the rotation cycle, so the motion claim can be checked by eye without scrubbing"
+    },
+    {
+      "path": "showcase_v2.blend",
+      "role": "source scene",
+      "bytes": 100281,
+      "sha256": "83459e4f98a5fc3edf272f97653b504e7c438d2e18fab26dbc474aa689979d30",
+      "proves": "the entry is reproducible: re-rendering this scene regenerates both the hero frame and the 48 turntable frames"
+    }
+  ]
+}

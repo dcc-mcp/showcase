@@ -1,5 +1,11 @@
 # Blender to Maya: what survives an OBJ round trip
 
+> **Secondary entry — measurement contrast, not the headline sample.**
+> The asset here is deliberately trivial. What this entry contributes is the
+> *method*: how a cross‑host round trip is measured closely enough to catch
+> faults that both hosts report as success. For the headline capability
+> sample, see [`blender-mcp-gimbal-turntable`](../blender-mcp-gimbal-turntable/).
+
 ![Blender viewport capture of the calibration asset](blender-source.jpg)
 
 A calibration asset — a 2 × 4 × 6 m box and a 2 m sphere, **122 vertices,
