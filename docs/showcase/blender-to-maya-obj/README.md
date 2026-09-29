@@ -4,7 +4,7 @@
 > The asset here is deliberately trivial. What this entry contributes is the
 > *method*: how a cross‑host round trip is measured closely enough to catch
 > faults that both hosts report as success. For the headline capability
-> sample, see [`blender-mcp-gimbal-turntable`](../blender-mcp-gimbal-turntable/).
+> sample, see [`blender-mcp-gimbal-turntable`](../blender-mcp-gimbal-turntable/README.md).
 
 ![Blender viewport capture of the calibration asset](blender-source.jpg)
 
