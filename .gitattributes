@@ -1,0 +1,2 @@
+# Keep producer artwork, evidence and pinned manifest bytes identical on every OS.
+docs/brands/brand-family-v2/** -text
