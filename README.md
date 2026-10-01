@@ -52,6 +52,9 @@ Python 3.12 or later; no build dependencies.
 python scripts/validate_entry.py docs/showcase
 python scripts/test_validate_collection.py
 python scripts/validate_collection.py
+python scripts/test_validate_brand_gallery.py
+python scripts/validate_brand_gallery.py
+python scripts/test_brand_build.py
 python scripts/test_build_site.py
 python scripts/build_site.py
 python -m http.server 8765 --bind 127.0.0.1 --directory _site
@@ -61,6 +64,30 @@ Open the local address in the user's own browser. Before publishing, check the
 wall and details on desktop and mobile, filters/search, media, back navigation,
 resource links, keyboard access and the empty state. Build/contract checks do
 not substitute for browser acceptance.
+
+## Brand gallery
+
+`brand-gallery.json` separately selects brand resources without changing the
+three-case collection. Until verified replacement assets and their actual MCP
+production records are ready, `enabled` stays `false`: the production build
+adds no brand navigation, pages or files. Existing defective marks are not
+presented as corrected work.
+
+For local layout review only:
+
+```powershell
+python scripts/build_site.py --preview-brands --out _site-brand-preview
+python -m http.server 8766 --bind 127.0.0.1 --directory _site-brand-preview
+```
+
+This explicitly marked development preview uses pending text, with no asset
+images or download links, and is excluded from the normal Pages workflow.
+The preview flag refuses the production output directory. See the
+[brand contract](docs/brands/CONTRACT.md) for the asset handoff and publication
+checks. In production each mark includes background previews, verified SVG
+and PNG downloads, file hashes, source provenance, rights, software versions,
+actual MCP tools and evidence boundaries. The site code's MIT license does
+not relicense software vendors' trademarks or source artwork.
 
 ## Add a case
 

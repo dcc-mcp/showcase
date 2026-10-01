@@ -346,8 +346,10 @@ def case_metadata(case: dict) -> dict:
         "keywords": case["software"] + case["capabilities"],
     }
 
-def sitemap_text(cases: list[dict]) -> str:
+def sitemap_text(cases: list[dict], brand_slugs: list[str] | None = None) -> str:
     urls = [SITE_URL] + [public_url("cases/%s/" % case["slug"]) for case in cases]
+    if brand_slugs:
+        urls += [public_url("brands/")] + [public_url("brands/%s/" % slug) for slug in brand_slugs]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
             "".join("  <url><loc>%s</loc></url>\n" % esc(url) for url in urls) + "</urlset>\n")
@@ -483,17 +485,35 @@ def output_path(root: str, out_dir: str) -> str:
         raise ValueError("output directory must stay inside repository")
     return out_abs
 
-def build(root: str, out_dir: str) -> tuple[list[str], list[str], list[str]]:
+def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[str], list[str], list[str]]:
     """Return published paths, problems, and notes; validate before deleting."""
     published: list[str] = []
     notes: list[str] = []
     try:
         out_abs = output_path(root, out_dir)
+        if brand_preview and out_dir != "_site-brand-preview":
+            raise ValueError("brand development previews require --out _site-brand-preview")
         collection_path = resolve_public(root, "collection.json")
         import validate_collection
         problems = validate_collection.validate(collection_path, root=root)
         if problems:
             return [], problems, []
+        import validate_brand_gallery
+        brand_catalog, brand_assets, problems = validate_brand_gallery.read_and_validate(root)
+        if problems:
+            return [], problems, []
+        brands_visible = bool(brand_catalog.get("enabled")) or brand_preview
+        brand_pages = {}
+        if brands_visible:
+            import brand_pages as brand_renderer
+            brand_pages = brand_renderer.generate(brand_catalog, root, preview=brand_preview)
+        brand_nav = '<a href="brands/">品牌画廊</a>' if brands_visible else ""
+        brand_portal = ('<section class="project-portal" aria-label="品牌画廊"><p>标识、组合与矢量资源。'
+                        '逐项记录制作过程、版本、来源及使用许可。</p><div class="project-links">'
+                        '<a href="brands/">浏览品牌画廊 →</a></div></section>') if brands_visible else ""
+        if brand_preview:
+            notes.append("LOCAL DEVELOPMENT PREVIEW: pending brand assets are not approved for publication")
+            brand_portal = '<aside class="evidence-note"><strong>品牌画廊开发预览</strong><p>等待修正版资产与验证记录；占位内容仅用于本地开发。</p></aside>' + brand_portal
         with open(collection_path, encoding="utf-8-sig") as fh:
             cases = json.load(fh)["cases"]
         with open(resolve_public(root, "index.html"), encoding="utf-8-sig") as fh:
@@ -502,6 +522,7 @@ def build(root: str, out_dir: str) -> tuple[list[str], list[str], list[str]]:
         capabilities = sorted({value for case in cases for value in case["capabilities"]})
         substitutions = {"CASE_COUNT": str(len(cases)), "SOFTWARE_COUNT": str(len(software)),
                          "SOFTWARE_FILTERS": filters(software), "CAPABILITY_FILTERS": filters(capabilities),
+                         "BRAND_NAV": brand_nav, "BRAND_PORTAL": brand_portal,
                           "CASE_CARDS": cards_markup(cases, root),
                          "SEO_HEAD": seo_tags(
                              "DCC-MCP Showcase · 真实 DCC 作品与可复用流程",
@@ -512,15 +533,27 @@ def build(root: str, out_dir: str) -> tuple[list[str], list[str], list[str]]:
         if re.search(r"\{\{[A-Z_]+\}\}", template):
             raise ValueError("unresolved homepage template token")
         pages = {"index.html": template,
-                 "sitemap.xml": sitemap_text(cases),
+                 "sitemap.xml": sitemap_text(cases, [item["slug"] for item in brand_catalog.get("items", [])] if brands_visible and not brand_preview else None),
                  "robots.txt": "User-agent: *\nAllow: /showcase/\nSitemap: " + public_url("sitemap.xml") + "\n"}
+        pages.update(brand_pages)
+        if brand_preview:
+            pages["robots.txt"] = "User-agent: *\nDisallow: /\n"
+            pages["index.html"] = pages["index.html"].replace("index, follow, max-image-preview:large", "noindex, nofollow")
         pages.update(compatibility_pages())
         assets = {"assets/site.css", "assets/gallery.js", "assets/detail.js"}
+        if brands_visible:
+            assets.update({"assets/brand.css", "assets/brand.js"})
+            assets.update(brand_assets)
         for index, case in enumerate(cases):
             if not SLUG.fullmatch(case["slug"]):
                 raise ValueError("invalid case slug")
             pages["cases/%s/index.html" % case["slug"]] = detail_page(
                 case, root, cases[(index + 1) % len(cases)] if len(cases) > 1 else None)
+            if brands_visible:
+                case_path = "cases/%s/index.html" % case["slug"]
+                pages[case_path] = pages[case_path].replace('<a href="https://dcc-mcp.github.io/">DCC-MCP 官网', '<a href="../../brands/">品牌画廊</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网')
+                if brand_preview:
+                    pages[case_path] = pages[case_path].replace("index, follow, max-image-preview:large", "noindex, nofollow")
             base = "docs/showcase/%s" % case["slug"]
             for required in ("README.md", "manifest.json", "validation.json"):
                 assets.add(base + "/" + required)
@@ -541,7 +574,10 @@ def build(root: str, out_dir: str) -> tuple[list[str], list[str], list[str]]:
         sources = {rel: resolve_public(root, rel) for rel in sorted(assets)}
         problems = []
         for rel, src in sources.items():
-            problems.extend(check_media(rel, src))
+            # Brand download sizes, SVG safety and hashes have their own contract.
+            # The case display-width ceiling must not reject a verified large PNG download.
+            if rel not in brand_assets:
+                problems.extend(check_media(rel, src))
         for rel, text in pages.items():
             for child in refs_of(text, rel):
                 if child not in pages and child not in sources:
@@ -577,9 +613,10 @@ def build(root: str, out_dir: str) -> tuple[list[str], list[str], list[str]]:
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--out", default="_site", help="top-level output directory (_site or _site-*)")
+    parser.add_argument("--preview-brands", action="store_true", help="local unpublished brand development preview (requires --out _site-brand-preview)")
     args = parser.parse_args(argv[1:])
     root = repo_root()
-    published, problems, notes = build(root, args.out)
+    published, problems, notes = build(root, args.out, brand_preview=args.preview_brands)
     if not problems:
         total = sum(os.path.getsize(os.path.join(root, args.out, rel)) for rel in published)
         print("built %d files into %s/ (%.1f MiB)" % (len(published), args.out, total / 1048576.0))
