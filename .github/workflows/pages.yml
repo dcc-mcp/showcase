@@ -29,6 +29,12 @@ jobs:
       - name: Validate showcase entries
         run: python scripts/validate_entry.py docs/showcase
 
+      - name: Verify collection publication guards
+        run: python scripts/test_validate_collection.py
+
+      - name: Validate selected collection and provenance
+        run: python scripts/validate_collection.py
+
       - name: Verify the build guards still bite
         run: python scripts/test_build_site.py
 

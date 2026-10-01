@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "slug": "painted-wood",
+  "title": "橄榄绿旧漆木材",
+  "reference": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/README.md",
+  "source_revision": "38623dd51721a958b8dc5d2e8957e991908333ac",
+  "capture_provider": "Existing published DCC outputs; webpage derivatives from original PNG bytes, JPEG q82, complete frame",
+  "produced_at": "2026-09-10",
+  "curated_at": "2026-10-01",
+  "software_execution_this_run": false,
+  "adapter_version": null,
+  "core_version": null,
+  "files": [
+    {
+      "path": "before.jpg",
+      "sha256": "49bd870be7b3736bbfeaa958babbdb09ec3e3eb2491c0f44ffc237e2492e3a36",
+      "bytes": 118059,
+      "width": 1024,
+      "height": 1024,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "color.jpg",
+      "sha256": "2a30f5c3518c0d24b38de4734cb94e907a90a11e3545498a343053326a5f7235",
+      "bytes": 81150,
+      "width": 1024,
+      "height": 1024,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "derivatives.json",
+      "sha256": "30c646a71c62589cafbf85ec916c73530d890d224569d2b43deccbdb3027243d",
+      "bytes": 4050,
+      "role": "Website derivative provenance"
+    },
+    {
+      "path": "graph.jpg",
+      "sha256": "8700e0d6db6a9d0cee9a36e1a60bb70f969fa266f4a1d413266916fb184fe043",
+      "bytes": 124749,
+      "width": 1568,
+      "height": 931,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "f6b76a213c736b241f8124efdaf1ab0af0a2810bc19c913c1cafdc6494103e88",
+      "bytes": 153765,
+      "width": 1568,
+      "height": 931,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "LICENSE.source.txt",
+      "sha256": "996ccdd37e61acff5617165b3b209bf9f6b5ff8736c9af6b9fe5d13ef4eb215e",
+      "bytes": 1065,
+      "role": "Upstream MIT license and author attribution"
+    },
+    {
+      "path": "reference.jpg",
+      "sha256": "4507c36df2e053485ab0f0a29f0fc3d20db10aa401ccd5aca73c26e40fee2439",
+      "bytes": 226077,
+      "width": 1254,
+      "height": 1254,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "43d1a62bdc533237084b99d252e6513b59ce70f71c3dd92c511c10b62e0042a5",
+      "bytes": 2772,
+      "role": "Unmodified upstream artifact inventory"
+    }
+  ],
+  "designer_application": "Substance 3D Designer",
+  "designer_version": "16.0.0"
+}

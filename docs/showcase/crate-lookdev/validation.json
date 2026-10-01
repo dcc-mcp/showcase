@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "slug": "crate-lookdev",
+  "verification_level": "published_source_evidence_not_reproduced",
+  "integrated_at": "2026-10-01",
+  "produced_at": "2026-09-10",
+  "source": {
+    "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/README.md",
+    "commit": "38623dd51721a958b8dc5d2e8957e991908333ac"
+  },
+  "environment": {
+    "source_reported_hosts": [
+      {
+        "label": "材质软件",
+        "value": "Substance 3D Designer 16.0.0"
+      },
+      {
+        "label": "建模与渲染",
+        "value": "Blender 5.2.0 LTS · Cycles · 128 samples"
+      },
+      {
+        "label": "主图",
+        "value": "1600 × 1600 · 源报告记录"
+      },
+      {
+        "label": "图截图",
+        "value": "DCC-CUA 1.8.2 · 完整画面"
+      },
+      {
+        "label": "适配器 / Core",
+        "value": "未公开记录（unrecorded）"
+      }
+    ],
+    "adapter_version": null,
+    "core_version": null,
+    "software_execution_this_run": false,
+    "scope": "Website content curation and public-source hash verification only"
+  },
+  "actual_execution": {
+    "dcc_tool_calls": null,
+    "dcc_software_launched": false,
+    "original_prompt": null,
+    "prompt_kind": "reusable",
+    "artifact_download_and_hash_check": true,
+    "website_image_conversion": "Pillow JPEG quality 82, complete frame, maximum longer edge 1600"
+  },
+  "checks": [
+    {
+      "name": "源图一致性（本轮）",
+      "result": "pass",
+      "observed": "9 张下载原图的 SHA-256 与原 manifest 一致；网页副本单独记录哈希。"
+    },
+    {
+      "name": "保存后重开（历史记录）",
+      "result": "pass",
+      "observed": "source-validation 记录 Blender reopened=true；木材 37 节点、钢材 35 节点均重开并原生重算。"
+    },
+    {
+      "name": "打包与色彩空间（历史记录）",
+      "result": "pass",
+      "observed": "13 张打包图片；记录的材质图槽 packed_bytes_match_export=true，颜色 sRGB / 数据 Non-Color。"
+    },
+    {
+      "name": "地面接触（历史记录）",
+      "result": "pass",
+      "observed": "四支脚 gap=0.0 m；箱体包围盒约 2.252 × 1.527 × 1.138 m。"
+    },
+    {
+      "name": "完整 MCP 调用轨迹",
+      "result": "fail",
+      "observed": "公开包未包含完整 tools/call 日志、参数或 adapter/core 版本；本轮没有补造记录。",
+      "expected": "Public source supplies actual tool traces and reproducible software evidence"
+    }
+  ],
+  "not_claimed": [
+    "本轮没有在 DCC 中复现；所有软件测量取自公开历史记录，网页图哈希核对才是本轮实际执行。",
+    "原始提示词、完整 MCP 工具调用日志与 adapter/core 版本未公开。",
+    "历史参考图由 Codex 图像生成产生；它是参考输入，不是通过 DCC-MCP 制作的成品。",
+    "尺寸、风化与损伤是艺术估计；边缘磨损取自 Designer 板材分布，不是曲率烘焙。",
+    "这是密集 lookdev 场景：平铺/重叠 UV，不是游戏可用拓扑或唯一烘焙图集。",
+    "源记录只声明可重开和重算，不声明重算 PNG 字节完全一致。",
+    "源仓库整体声明 MIT；作品、生成参考图与材质没有另列许可。Adobe 内置库资源仅通过 sbs:// 引用，不在本站分发。"
+  ],
+  "derivative_inventory": "derivatives.json",
+  "public_source_manifest": "source-manifest.json",
+  "capture_privacy_review": {
+    "result": "pass",
+    "method": "Visual readback of full gallery images; no visible hostnames, credentials, private file paths or personal account data"
+  },
+  "public_source_validation": "source-validation.json",
+  "historical_measurement_values": {
+    "source": "source-validation.json",
+    "crate_mesh_count": 178,
+    "wood_mesh_count": 83,
+    "attached_fiber_meshes": 59,
+    "packed_image_count": 13,
+    "uv_mesh_count": 178,
+    "crate_bounds_m": [
+      2.252000093460083,
+      1.5268184542655945,
+      1.1375535726547241
+    ],
+    "nominal_length_m": 2.2,
+    "batten_thickness_m": 0.03,
+    "gouge_depth_m": 0.016,
+    "ground_support_gaps_m": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "fine_grain_tile_width_m": 0.45,
+    "displacement_scale_m": 0.004,
+    "displacement_midlevel": 0.52,
+    "render_subdivision_level": 2,
+    "designer_authoring_nodes": {
+      "wood": 37,
+      "steel": 35
+    },
+    "wood_map_resolution_px": [
+      2048,
+      2048
+    ],
+    "steel_map_resolution_px": [
+      1024,
+      1024
+    ],
+    "render": {
+      "engine": "CYCLES",
+      "samples": 128,
+      "resolution_px": [
+        1600,
+        1600
+      ]
+    }
+  },
+  "public_report_parameter_values": {
+    "source": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/README.md",
+    "evidence_kind": "Public README description; not independently remeasured this run",
+    "paint_coverage": 0.735,
+    "roughness": {
+      "bare_steel": 0.4,
+      "rust": 0.84,
+      "polished_scratches": 0.23
+    },
+    "latch_curves": 2,
+    "studio_floors": 1
+  }
+}

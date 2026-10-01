@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "slug": "crate-lookdev",
+  "title": "风化木箱",
+  "reference": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/README.md",
+  "source_revision": "38623dd51721a958b8dc5d2e8957e991908333ac",
+  "capture_provider": "Existing published DCC outputs; webpage derivatives from original PNG bytes, JPEG q82, complete frame",
+  "produced_at": "2026-09-10",
+  "curated_at": "2026-10-01",
+  "software_execution_this_run": false,
+  "adapter_version": null,
+  "core_version": null,
+  "files": [
+    {
+      "path": "derivatives.json",
+      "sha256": "f9c37727bbc7d3602e2b14397c46033bf876c9698377c4af743f97ddac83a8de",
+      "bytes": 7159,
+      "role": "Website derivative provenance"
+    },
+    {
+      "path": "detail.jpg",
+      "sha256": "c8e2ff5befa536c519882624f7557e52ed03469e9e442d32acb79145671833ef",
+      "bytes": 191316,
+      "width": 1400,
+      "height": 1100,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "9e4a70390fb56bc5182d36c97d8a70ee45cfad1bc65afb7c6b48b6543b752f7c",
+      "bytes": 143237,
+      "width": 1600,
+      "height": 1600,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "LICENSE.source.txt",
+      "sha256": "996ccdd37e61acff5617165b3b209bf9f6b5ff8736c9af6b9fe5d13ef4eb215e",
+      "bytes": 1065,
+      "role": "Upstream MIT license and author attribution"
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "5ad126465f2726d6f23855be27d054385eba4a0a04c0fd9959b061446e8215f9",
+      "bytes": 7452,
+      "role": "Unmodified upstream artifact inventory"
+    },
+    {
+      "path": "source-validation.json",
+      "sha256": "db0a00035bfeb621398b646f0c04f25e5acb6866252a64a6ae4af288c9b0f82f",
+      "bytes": 10373,
+      "role": "Unmodified upstream historical measurements; not a new DCC validation run"
+    },
+    {
+      "path": "splinters.jpg",
+      "sha256": "028e3b5de78121ef3e853ea144e10d9efe778f4d1e0a8a0e096641a1da0a9d7d",
+      "bytes": 240936,
+      "width": 1400,
+      "height": 1100,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "steel-color.jpg",
+      "sha256": "3077baac89e4ee3d4b8970b9bc840467cb3902cea4e9bb5e5d4b1cb095c73047",
+      "bytes": 238028,
+      "width": 1024,
+      "height": 1024,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "steel-graph.jpg",
+      "sha256": "04a709bc4454bce1cf666df2e99c8c70b4ea8e814eb2f8e866e509422e337437",
+      "bytes": 146592,
+      "width": 1568,
+      "height": 931,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "uv-checker.jpg",
+      "sha256": "036489222f545f85ee180377eb186240c33cd8cfd5864ce2133553a9456b8ff0",
+      "bytes": 173555,
+      "width": 1200,
+      "height": 1200,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "uv-layout.jpg",
+      "sha256": "a8cd54b3d8a64a8d61781dc546a13196dcb007db059c8ac2b3408d30cd746251",
+      "bytes": 110531,
+      "width": 1600,
+      "height": 1227,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "wood-color.jpg",
+      "sha256": "950bda011de64cbee8a495cb08770281545b7392ba8ea9f49c6f7d145ad151e6",
+      "bytes": 319685,
+      "width": 1600,
+      "height": 1600,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "wood-graph.jpg",
+      "sha256": "dbd6021b0d2b7ee6ab07873d28321e0b65c1ba2d5b7686fd0cbbf2ce5b4a3086",
+      "bytes": 148341,
+      "width": 1568,
+      "height": 931,
+      "bit_depth": 8,
+      "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    }
+  ],
+  "blender_application": "Blender",
+  "blender_version": "5.2.0 LTS",
+  "designer_application": "Substance 3D Designer",
+  "designer_version": "16.0.0"
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "slug": "painted-wood",
+  "verification_level": "published_source_evidence_not_reproduced",
+  "integrated_at": "2026-10-01",
+  "produced_at": "2026-09-10",
+  "source": {
+    "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/README.md",
+    "commit": "38623dd51721a958b8dc5d2e8957e991908333ac"
+  },
+  "environment": {
+    "source_reported_hosts": [
+      {
+        "label": "材质软件",
+        "value": "Substance 3D Designer 16.0.0"
+      },
+      {
+        "label": "作者图",
+        "value": "crate_painted_wood · 19 nodes"
+      },
+      {
+        "label": "输出",
+        "value": "1024 × 1024 · 5 PBR 通道"
+      },
+      {
+        "label": "色彩工作流",
+        "value": "Designer legacy · 原生导出无额外 gamma 变换"
+      },
+      {
+        "label": "图截图",
+        "value": "DCC-CUA 1.8.2"
+      },
+      {
+        "label": "适配器 / Core",
+        "value": "未公开记录（unrecorded）"
+      }
+    ],
+    "adapter_version": null,
+    "core_version": null,
+    "software_execution_this_run": false,
+    "scope": "Website content curation and public-source hash verification only"
+  },
+  "actual_execution": {
+    "dcc_tool_calls": null,
+    "dcc_software_launched": false,
+    "original_prompt": null,
+    "prompt_kind": "reusable",
+    "artifact_download_and_hash_check": true,
+    "website_image_conversion": "Pillow JPEG quality 82, complete frame, maximum longer edge 1600"
+  },
+  "checks": [
+    {
+      "name": "源图一致性（本轮）",
+      "result": "pass",
+      "observed": "5 张下载原图的 SHA-256 与源 manifest 一致；原图及网页副本分别记录哈希。"
+    },
+    {
+      "name": "可编辑源与参数（历史记录）",
+      "result": "pass",
+      "observed": "源 manifest 记录 graph=crate_painted_wood、19 个作者节点、paint_coverage=0.7，公开 SBS/SBSAR。"
+    },
+    {
+      "name": "输出规格（历史记录）",
+      "result": "pass",
+      "observed": "源 manifest 为五个 PBR 输出记录 1024×1024 尺寸及 PNG 位深，Normal RGBA16 / Height Gray16。"
+    },
+    {
+      "name": "软件复现与完整 MCP 轨迹",
+      "result": "fail",
+      "observed": "本轮未运行 Designer；源包没有 validation.json 或完整 tools/call 轨迹，适配器与 Core 版本未记录。",
+      "expected": "Public source supplies actual tool traces and reproducible software evidence"
+    }
+  ],
+  "not_claimed": [
+    "本轮只核对公开资产哈希与来源，没有在 Designer 中重新执行，未证明当前适配器可复现。",
+    "公开案例没有原始提示词、validation.json、tools/call 日志或 adapter/core 版本。",
+    "历史参考图由 Codex 图像生成产生，属于参考输入；它不是程序化材质的导出结果。",
+    "圆角立方体是 Designer 预览网格。没有木箱几何、硬件、特定边缘磨损或 UV 重建。",
+    "颜色是艺术估计，不是物理 albedo 测量。Normal Y 方向仍须与目标渲染器匹配。",
+    "源仓库整体声明 MIT；作品、参考图和材质未另列许可。SBS 用 sbs:// 引用安装的 Adobe 标准库，本站不分发标准库源码。"
+  ],
+  "derivative_inventory": "derivatives.json",
+  "public_source_manifest": "source-manifest.json",
+  "capture_privacy_review": {
+    "result": "pass",
+    "method": "Visual readback of full gallery images; no visible hostnames, credentials, private file paths or personal account data"
+  },
+  "source_validation_file": null,
+  "historical_manifest_values": {
+    "source": "source-manifest.json",
+    "graph": "crate_painted_wood",
+    "authoring_node_count": 19,
+    "paint_coverage": 0.7,
+    "output_resolution_px": [
+      1024,
+      1024
+    ],
+    "output_channels": [
+      "baseColor",
+      "height",
+      "normal",
+      "roughness",
+      "metallic"
+    ],
+    "png_bit_depth": {
+      "baseColor": 8,
+      "height": 16,
+      "normal": 16,
+      "roughness": 8,
+      "metallic": 8
+    }
+  },
+  "public_report_parameter_values": {
+    "source": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/README.md",
+    "evidence_kind": "Public README description; not independently remeasured this run",
+    "paint_rgb_before": [
+      87,
+      89,
+      62
+    ],
+    "paint_rgb_after": [
+      99,
+      96,
+      74
+    ],
+    "wood_rgb_before": [
+      [
+        0.4,
+        0.29,
+        0.16
+      ],
+      [
+        0.76,
+        0.64,
+        0.44
+      ]
+    ],
+    "wood_rgb_after": [
+      [
+        0.35,
+        0.29,
+        0.215
+      ],
+      [
+        0.69,
+        0.6,
+        0.46
+      ]
+    ],
+    "metallic": 0
+  }
+}
