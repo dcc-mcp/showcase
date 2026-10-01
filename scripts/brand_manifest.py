@@ -215,7 +215,24 @@ def _family_evidence(root, base, publication, actual, matrices):
         _require(palette.get("vendor_official_palette_claimed") is False and palette.get("master_palette_changes") is False,
                  "palette reference boundary required")
         sources[family] = {"path": source_path, "metadata": metadata}
-    return {"qa_path": qa_path, "policy_path": policy_path, "policies": policies, "owners": owners, "sources": sources}
+    composites = qa.get("composites", [])
+    _require(isinstance(composites, list) and all(isinstance(row, dict) for row in composites),
+             "QA composite records must be an object array")
+    composite_files, seen = [], set()
+    for row in composites:
+        rel = row.get("path")
+        _require(rel in {"evidence/family-first-six-light-qa.png", "evidence/family-first-six-dark-qa.png"}
+                 and rel not in seen and _sha(row.get("sha256")) and _integer(row.get("bytes")),
+                 "reviewed QA composite identity required")
+        image = _file(base, rel, root)
+        data = image.read_bytes()
+        _require(data.startswith(b"\x89PNG\r\n\x1a\n") and len(data) == row["bytes"]
+                 and hashlib.sha256(data).hexdigest() == row["sha256"], "QA composite integrity mismatch")
+        seen.add(rel)
+        composite_files.append({"path": image, "sha256": row["sha256"],
+                                "theme": "light" if "-light-" in rel else "dark"})
+    return {"qa_path": qa_path, "policy_path": policy_path, "policies": policies, "owners": owners,
+            "sources": sources, "composites": composite_files}
 
 
 def _snapshot(root, manifest_rel):
@@ -455,6 +472,12 @@ def _family_item(root, base, manifest, family, row, extra, core, production_sour
                         {"label": "本家族素材语义、来源与权利说明", "url": url(source_info["path"])}]
     item["sources"].append({"id": "reference", "label": "原家族历史参考 · 固定来源，未作为作品下载分发", "url": reference["source_url"], "commit": reference["source_commit"], "sha256": reference["sha256"], "author": "原仓库素材贡献者；厂商标识权利另列"})
     item["sources"].append({"id": "policy", "label": "家族来源与权利分析快照", "url": url(extra["policy_path"]), "sha256": hashlib.sha256(extra["policy_path"].read_bytes()).hexdigest(), "author": "DCC-MCP contributors"})
+    for composite in extra["composites"]:
+        label = "六家族实际成品 QA 总览 · " + ("浅色背景" if composite["theme"] == "light" else "深色背景")
+        item["evidence"].append({"label": label, "url": url(composite["path"])})
+        item["sources"].append({"id": "qa-" + composite["theme"], "label": label,
+                                "url": url(composite["path"]), "sha256": composite["sha256"],
+                                "author": "DCC-MCP contributors"})
     item["rights"][0]["scope"] = "独立制作的 DCC-MCP 几何与" + motif + "、计划及元数据；原参考和厂商图形未在本作品中重新授权。"
     item["rights"][2].update(holder="DCC-MCP 品牌权利人；" + vendor_owners, scope=title + " 的名称用于独立兼容性说明；当前家族作品不含厂商 Logo 或 glyph。",
                              notice=metadata["rights"]["trademark_notice_plan"])

@@ -311,6 +311,45 @@ class BrandProjection(unittest.TestCase):
             svg = [v for v in item["variants"] if v["format"] == "svg"]
             self.assertEqual((5, 2), (sum("可编辑" in v["label"] for v in svg), sum("轮廓化发布" in v["label"] for v in svg)))
 
+    def with_qa_composites(self):
+        self.with_six()
+        self.family_qa["composites"] = []
+        for theme in ("light", "dark"):
+            rel = "evidence/family-first-six-" + theme + "-qa.png"
+            image = self.base / rel
+            image.parent.mkdir(parents=True, exist_ok=True)
+            data = png(640, 180)
+            image.write_bytes(data)
+            self.family_qa["composites"].append({"path": rel, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
+
+    def test_qa_composites_are_selected_as_hashed_public_evidence(self):
+        self.with_qa_composites()
+        for item in self.project()["items"][1:]:
+            evidence_urls = {row["url"] for row in item["evidence"]}
+            for row in item["sources"]:
+                if row["id"].startswith("qa-"):
+                    self.assertIn(row["url"], evidence_urls)
+                    self.assertEqual(hashlib.sha256((self.root / row["url"]).read_bytes()).hexdigest(), row["sha256"])
+            self.assertEqual(2, sum(row["id"].startswith("qa-") for row in item["sources"]))
+
+    def test_referenced_qa_composite_cannot_be_missing(self):
+        self.with_qa_composites()
+        (self.base / self.family_qa["composites"][0]["path"]).unlink()
+        with self.assertRaises(ValueError):
+            self.project()
+
+    def test_referenced_qa_composite_cannot_be_modified(self):
+        self.with_qa_composites()
+        (self.base / self.family_qa["composites"][0]["path"]).write_bytes(png(641, 180))
+        with self.assertRaises(ValueError):
+            self.project()
+
+    def test_qa_composite_cannot_admit_an_unreviewed_file(self):
+        self.with_qa_composites()
+        self.family_qa["composites"][0]["path"] = "evidence/private-reference.png"
+        with self.assertRaises(ValueError):
+            self.project()
+
     def test_currentcolor_pending_release_never_gets_href(self):
         self.with_six()
         item = self.project()["items"][1]
