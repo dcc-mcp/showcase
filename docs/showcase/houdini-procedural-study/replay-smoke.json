@@ -1,0 +1,2068 @@
+{
+  "schema_version": 1,
+  "kind": "Fresh dedicated empty-host replay without Render switch",
+  "result": "pass",
+  "executed_recipe_steps": 47,
+  "skipped_render_steps": 1,
+  "typed_request_response_count": 49,
+  "no_new_render": true,
+  "environment": {
+    "Houdini": "22.0.368",
+    "adapter": "dcc-mcp-houdini 0.43.1",
+    "adapter_source_commit": "9957e58e987147e448819384a0e8a8be5756de18",
+    "Core_CLI": "0.20.28",
+    "observed_gateway": "0.20.22, transitional: guardian version takeovers observed. This smoke is not claimed to use the production run gateway 0.20.28."
+  },
+  "guard_fixture": {
+    "result": "pass",
+    "independent_AST_fixture_cases": 22,
+    "scope": "Explicit boolean success, numeric zero node count, explicit boolean false hip_has_file; missing/null/string/inconsistent types rejected before mutation."
+  },
+  "geometry": {
+    "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+    "point_count": 115776,
+    "primitive_count": 115200,
+    "vertex_count": 460800,
+    "bounds_min": [
+      -1.0318803787231445,
+      0.0,
+      -1.0318803787231445
+    ],
+    "bounds_max": [
+      1.031880497932434,
+      2.2490625381469727,
+      1.0318803787231445
+    ],
+    "bounds_size": [
+      2.0637608766555786,
+      2.2490625381469727,
+      2.063760757446289
+    ]
+  },
+  "exported_obj": {
+    "bytes": 35869290,
+    "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9",
+    "original_bytes_identical": true
+  },
+  "redaction": {
+    "REPLAY_CASE_DIR": "User-selected private replay output directory",
+    "removed": "Host/process/instance identifiers and private absolute paths."
+  },
+  "boundary": "No repeated Mantra render, PNG metadata processing or cross-DCC import in this smoke. Main case production receipt remains separate.",
+  "calls": [
+    {
+      "step": 1,
+      "tool": "houdini_scene__get_scene_info",
+      "request_arguments": {},
+      "response": {
+        "success": true,
+        "message": "Retrieved Houdini scene information",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": null,
+          "hip_has_file": false,
+          "frame": 1.0,
+          "start_frame": 1.0,
+          "end_frame": 240.0,
+          "obj_node_count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 2,
+      "tool": "houdini_nodes__create_node",
+      "request_arguments": {
+        "parent_path": "/obj",
+        "node_type": "geo",
+        "node_name": "showcase_20261001_ceramic",
+        "run_init_scripts": false
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic",
+            "name": "showcase_20261001_ceramic",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 3,
+      "tool": "houdini_geometry__create_curve_guides",
+      "request_arguments": {
+        "parent_path": "/obj/showcase_20261001_ceramic",
+        "node_name": "PROFILE_ceramic",
+        "set_display": false,
+        "guides": [
+          {
+            "guide_id": 1,
+            "cluster_id": 1,
+            "cluster_name": "ceramic_section",
+            "curve_type": "polyline",
+            "cvs": [
+              [
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.55,
+                0.0,
+                0.0
+              ],
+              [
+                0.55,
+                0.07,
+                0.0
+              ],
+              [
+                0.58,
+                0.09,
+                0.0
+              ],
+              [
+                0.68,
+                0.24,
+                0.0
+              ],
+              [
+                0.75,
+                0.38,
+                0.0
+              ],
+              [
+                0.79,
+                0.4,
+                0.0
+              ],
+              [
+                0.78,
+                0.44,
+                0.0
+              ],
+              [
+                0.83,
+                0.55,
+                0.0
+              ],
+              [
+                0.86,
+                0.58,
+                0.0
+              ],
+              [
+                0.84,
+                0.62,
+                0.0
+              ],
+              [
+                0.92,
+                0.8,
+                0.0
+              ],
+              [
+                0.94,
+                0.84,
+                0.0
+              ],
+              [
+                0.92,
+                0.88,
+                0.0
+              ],
+              [
+                1.0,
+                0.99,
+                0.0
+              ],
+              [
+                1.02,
+                1.02,
+                0.0
+              ],
+              [
+                0.99,
+                1.06,
+                0.0
+              ],
+              [
+                1.02,
+                1.2,
+                0.0
+              ],
+              [
+                1.04,
+                1.24,
+                0.0
+              ],
+              [
+                1.01,
+                1.28,
+                0.0
+              ],
+              [
+                1.0,
+                1.4,
+                0.0
+              ],
+              [
+                1.02,
+                1.44,
+                0.0
+              ],
+              [
+                0.98,
+                1.48,
+                0.0
+              ],
+              [
+                0.93,
+                1.6,
+                0.0
+              ],
+              [
+                0.94,
+                1.64,
+                0.0
+              ],
+              [
+                0.89,
+                1.68,
+                0.0
+              ],
+              [
+                0.76,
+                1.82,
+                0.0
+              ],
+              [
+                0.65,
+                1.93,
+                0.0
+              ],
+              [
+                0.5,
+                2.03,
+                0.0
+              ],
+              [
+                0.46,
+                2.09,
+                0.0
+              ],
+              [
+                0.46,
+                2.16,
+                0.0
+              ],
+              [
+                0.48,
+                2.19,
+                0.0
+              ],
+              [
+                0.49,
+                2.22,
+                0.0
+              ],
+              [
+                0.48,
+                2.25,
+                0.0
+              ],
+              [
+                0.42,
+                2.25,
+                0.0
+              ],
+              [
+                0.39,
+                2.22,
+                0.0
+              ],
+              [
+                0.39,
+                2.17,
+                0.0
+              ],
+              [
+                0.39,
+                2.1,
+                0.0
+              ],
+              [
+                0.43,
+                2.04,
+                0.0
+              ],
+              [
+                0.58,
+                1.94,
+                0.0
+              ],
+              [
+                0.71,
+                1.82,
+                0.0
+              ],
+              [
+                0.85,
+                1.64,
+                0.0
+              ],
+              [
+                0.94,
+                1.42,
+                0.0
+              ],
+              [
+                0.96,
+                1.22,
+                0.0
+              ],
+              [
+                0.94,
+                1.02,
+                0.0
+              ],
+              [
+                0.86,
+                0.82,
+                0.0
+              ],
+              [
+                0.79,
+                0.6,
+                0.0
+              ],
+              [
+                0.71,
+                0.4,
+                0.0
+              ],
+              [
+                0.6,
+                0.22,
+                0.0
+              ],
+              [
+                0.49,
+                0.11,
+                0.0
+              ],
+              [
+                0.0,
+                0.11,
+                0.0
+              ]
+            ]
+          }
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Created bounded Houdini curve guides",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_ceramic",
+          "node_path": "/obj/showcase_20261001_ceramic/PROFILE_ceramic",
+          "source": {
+            "kind": "inline_json"
+          },
+          "topology": [
+            "polyline"
+          ],
+          "cv_order": "root_to_tip",
+          "metrics": {
+            "curve_count": 1,
+            "cv_count": 51,
+            "cluster_count": 1,
+            "root_count": 1,
+            "root_to_tip_valid": true,
+            "bounds": {
+              "min": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "max": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ],
+              "size": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ]
+            }
+          },
+          "attribute_schema": {
+            "point": [
+              "u",
+              "root_flag",
+              "Cd",
+              "width"
+            ],
+            "primitive": [
+              "guide_id",
+              "cluster_id",
+              "cluster_name"
+            ]
+          },
+          "rejected_guides": [],
+          "limits": {
+            "max_guides": 10000,
+            "max_total_cvs": 1000000,
+            "max_cvs_per_guide": 4096,
+            "max_input_bytes": 33554432
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 4,
+      "tool": "houdini_mesh_ops__lathe_profile",
+      "request_arguments": {
+        "profile": "/obj/showcase_20261001_ceramic/PROFILE_ceramic",
+        "axis": "y",
+        "segments": 144,
+        "node_name": "LATHE_body"
+      },
+      "response": {
+        "success": true,
+        "message": "Created and verified Revolve SOP",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "profile": "/obj/showcase_20261001_ceramic/PROFILE_ceramic",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/LATHE_body",
+            "name": "LATHE_body",
+            "type": "revolve::2.0"
+          },
+          "parameters": {
+            "axis": "y",
+            "axis_direction": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "origin": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "segments": 144
+          },
+          "readback": {
+            "point_count": 7344,
+            "primitive_count": 7200,
+            "vertex_count": 28800,
+            "bounds_min": [
+              -1.0399999618530273,
+              0.0,
+              -1.0399999618530273
+            ],
+            "bounds_max": [
+              1.0399999618530273,
+              2.25,
+              1.0399999618530273
+            ],
+            "bounds_size": [
+              2.0799999237060547,
+              2.25,
+              2.0799999237060547
+            ],
+            "verified": true,
+            "before": {
+              "point_count": 51,
+              "primitive_count": 1,
+              "vertex_count": 51,
+              "bounds_min": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "bounds_max": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ],
+              "bounds_size": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ]
+            }
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 5,
+      "tool": "houdini_nodes__create_node",
+      "request_arguments": {
+        "parent_path": "/obj/showcase_20261001_ceramic",
+        "node_type": "subdivide",
+        "node_name": "SUBDIV_surface"
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_ceramic",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+            "name": "SUBDIV_surface",
+            "type": "subdivide"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 6,
+      "tool": "houdini_nodes__connect_nodes",
+      "request_arguments": {
+        "input_node_path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+        "output_node_path": "/obj/showcase_20261001_ceramic/LATHE_body"
+      },
+      "response": {
+        "success": true,
+        "message": "Connected Houdini nodes",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "input_node": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+          "output_node": "/obj/showcase_20261001_ceramic/LATHE_body",
+          "input_index": 0,
+          "output_index": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 7,
+      "tool": "houdini_materials__create_material",
+      "request_arguments": {
+        "material_name": "showcase_glazed_teal"
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/mat",
+          "requested_shader_type": "principledshader::2.0",
+          "shader_type": "principledshader::2.0",
+          "material": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameters": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 8,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+        "parameters": {
+          "iterations": 2
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+            "name": "SUBDIV_surface",
+            "type": "subdivide"
+          },
+          "parameters": [
+            "iterations"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 9,
+      "tool": "houdini_mesh_ops__add_normals",
+      "request_arguments": {
+        "input_path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+        "attribute_class": "vertex",
+        "node_name": "OUT_ceramic"
+      },
+      "response": {
+        "success": true,
+        "message": "Created normal SOP",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "input_path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+            "name": "OUT_ceramic",
+            "type": "normal"
+          },
+          "attribute_class": "vertex"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 10,
+      "tool": "houdini_object_ops__set_node_flags",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+        "display": true,
+        "render": true
+      },
+      "response": {
+        "success": true,
+        "message": "Updated node flags",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "applied": {
+            "display": true,
+            "render": true
+          },
+          "unsupported": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 11,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/mat/showcase_glazed_teal",
+        "parameters": {
+          "basecolor": [
+            0.035,
+            0.21,
+            0.18
+          ],
+          "basecolor_usePointColor": 0,
+          "rough": 0.24,
+          "coat": 0.5,
+          "coatrough": 0.18
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "basecolor",
+            "basecolor_usePointColor",
+            "rough",
+            "coat",
+            "coatrough"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 12,
+      "tool": "houdini_materials__assign_material",
+      "request_arguments": {
+        "target_node_path": "/obj/showcase_20261001_ceramic",
+        "material_node_path": "/mat/showcase_glazed_teal"
+      },
+      "response": {
+        "success": true,
+        "message": "Assigned Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "target": {
+            "path": "/obj/showcase_20261001_ceramic",
+            "name": "showcase_20261001_ceramic",
+            "type": "geo"
+          },
+          "material": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameter_name": "shop_materialpath"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 13,
+      "tool": "houdini_nodes__create_node",
+      "request_arguments": {
+        "parent_path": "/obj",
+        "node_type": "geo",
+        "node_name": "showcase_20261001_floor",
+        "run_init_scripts": false
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_floor",
+            "name": "showcase_20261001_floor",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 14,
+      "tool": "houdini_geometry__create_primitive",
+      "request_arguments": {
+        "parent_path": "/obj/showcase_20261001_floor",
+        "primitive": "box",
+        "node_name": "FLOOR_contact",
+        "set_display": true
+      },
+      "response": {
+        "success": true,
+        "message": "Created SOP primitive",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_floor",
+          "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+          "node_name": "FLOOR_contact",
+          "primitive": "box",
+          "sop_type": "box"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 15,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+        "parameters": {
+          "size": [
+            200,
+            0.1,
+            200
+          ],
+          "t": [
+            0,
+            -0.05,
+            0
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_floor/FLOOR_contact",
+            "name": "FLOOR_contact",
+            "type": "box"
+          },
+          "parameters": [
+            "size",
+            "t"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 16,
+      "tool": "houdini_materials__create_material",
+      "request_arguments": {
+        "material_name": "showcase_warm_floor",
+        "parameters": {
+          "basecolor": [
+            0.46,
+            0.4,
+            0.32
+          ],
+          "basecolor_usePointColor": 0,
+          "rough": 0.65
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/mat",
+          "requested_shader_type": "principledshader::2.0",
+          "shader_type": "principledshader::2.0",
+          "material": {
+            "path": "/mat/showcase_warm_floor",
+            "name": "showcase_warm_floor",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "basecolor",
+            "basecolor_usePointColor",
+            "rough"
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 17,
+      "tool": "houdini_materials__assign_material",
+      "request_arguments": {
+        "target_node_path": "/obj/showcase_20261001_floor",
+        "material_node_path": "/mat/showcase_warm_floor"
+      },
+      "response": {
+        "success": true,
+        "message": "Assigned Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "target": {
+            "path": "/obj/showcase_20261001_floor",
+            "name": "showcase_20261001_floor",
+            "type": "geo"
+          },
+          "material": {
+            "path": "/mat/showcase_warm_floor",
+            "name": "showcase_warm_floor",
+            "type": "principledshader::2.0"
+          },
+          "parameter_name": "shop_materialpath"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 18,
+      "tool": "houdini_nodes__create_node",
+      "request_arguments": {
+        "parent_path": "/obj",
+        "node_type": "null",
+        "node_name": "showcase_20261001_focus",
+        "run_init_scripts": false
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_focus",
+            "name": "showcase_20261001_focus",
+            "type": "null"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 19,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_focus",
+        "parameters": {
+          "t": [
+            0,
+            1.1,
+            0
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_focus",
+            "name": "showcase_20261001_focus",
+            "type": "null"
+          },
+          "parameters": [
+            "t"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 20,
+      "tool": "houdini_camera_light__create_camera",
+      "request_arguments": {
+        "name": "showcase_20261001_camera",
+        "translate": [
+          3.8,
+          2.9,
+          5.4
+        ],
+        "resolution": [
+          960,
+          1200
+        ],
+        "focal": 100
+      },
+      "response": {
+        "success": true,
+        "message": "Created camera",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_camera",
+            "name": "showcase_20261001_camera",
+            "type": "cam"
+          },
+          "applied": {
+            "t": [
+              3.8,
+              2.9,
+              5.4
+            ],
+            "resolution": [
+              960,
+              1200
+            ],
+            "focal": 100.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 21,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_camera",
+        "parameters": {
+          "lookatpath": "/obj/showcase_20261001_focus"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_camera",
+            "name": "showcase_20261001_camera",
+            "type": "cam"
+          },
+          "parameters": [
+            "lookatpath"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 22,
+      "tool": "houdini_camera_light__create_light",
+      "request_arguments": {
+        "light_type": "grid",
+        "name": "showcase_20261001_key",
+        "translate": [
+          -3.5,
+          5,
+          4
+        ],
+        "intensity": 1,
+        "exposure": 5,
+        "color": [
+          1,
+          0.88,
+          0.72
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_key",
+            "name": "showcase_20261001_key",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "t": [
+              -3.5,
+              5,
+              4
+            ],
+            "light_type": "grid",
+            "intensity": 1.0,
+            "color": [
+              1,
+              0.88,
+              0.72
+            ],
+            "exposure": 5.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 23,
+      "tool": "houdini_camera_light__create_light",
+      "request_arguments": {
+        "light_type": "grid",
+        "name": "showcase_20261001_fill",
+        "translate": [
+          4,
+          3,
+          1
+        ],
+        "intensity": 1,
+        "exposure": 3,
+        "color": [
+          0.7,
+          0.84,
+          1
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_fill",
+            "name": "showcase_20261001_fill",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "t": [
+              4,
+              3,
+              1
+            ],
+            "light_type": "grid",
+            "intensity": 1.0,
+            "color": [
+              0.7,
+              0.84,
+              1
+            ],
+            "exposure": 3.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 24,
+      "tool": "houdini_camera_light__create_light",
+      "request_arguments": {
+        "light_type": "grid",
+        "name": "showcase_20261001_rim",
+        "translate": [
+          1,
+          4,
+          -3
+        ],
+        "intensity": 1,
+        "exposure": 4.5,
+        "color": [
+          1,
+          0.94,
+          0.83
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_rim",
+            "name": "showcase_20261001_rim",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "t": [
+              1,
+              4,
+              -3
+            ],
+            "light_type": "grid",
+            "intensity": 1.0,
+            "color": [
+              1,
+              0.94,
+              0.83
+            ],
+            "exposure": 4.5
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 25,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_key",
+        "parameters": {
+          "lookatpath": "/obj/showcase_20261001_focus",
+          "areasize": [
+            3,
+            3
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_key",
+            "name": "showcase_20261001_key",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "lookatpath",
+            "areasize"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 26,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_fill",
+        "parameters": {
+          "lookatpath": "/obj/showcase_20261001_focus",
+          "areasize": [
+            4,
+            4
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_fill",
+            "name": "showcase_20261001_fill",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "lookatpath",
+            "areasize"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 27,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_rim",
+        "parameters": {
+          "lookatpath": "/obj/showcase_20261001_focus",
+          "areasize": [
+            2,
+            3
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_rim",
+            "name": "showcase_20261001_rim",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "lookatpath",
+            "areasize"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 28,
+      "tool": "houdini_nodes__create_node",
+      "request_arguments": {
+        "parent_path": "/out",
+        "node_type": "ifd",
+        "node_name": "showcase_20261001_mantra"
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/out",
+          "node": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 29,
+      "tool": "houdini_render__set_render_settings",
+      "request_arguments": {
+        "rop_path": "/out/showcase_20261001_mantra",
+        "camera": "/obj/showcase_20261001_camera",
+        "resolution": [
+          640,
+          800
+        ],
+        "frame_range": [
+          1,
+          1,
+          1
+        ],
+        "output_path": "$HIP/preview.png"
+      },
+      "response": {
+        "success": true,
+        "message": "Set render settings",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "applied": {
+            "camera": "/obj/showcase_20261001_camera",
+            "resolution": [
+              640,
+              800
+            ],
+            "frame_range": [
+              1.0,
+              1.0
+            ],
+            "output_path": "$HIP/preview.png"
+          },
+          "unsupported": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 30,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "parameters": {
+          "vm_renderengine": "pbrraytrace",
+          "vm_samplesx": 3,
+          "vm_samplesy": 3,
+          "vm_minraysamples": 1,
+          "vm_maxraysamples": 9,
+          "vm_diffuselimit": 2,
+          "vm_reflectlimit": 4,
+          "vm_gamma": 2.2
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "parameters": [
+            "vm_renderengine",
+            "vm_samplesx",
+            "vm_samplesy",
+            "vm_minraysamples",
+            "vm_maxraysamples",
+            "vm_diffuselimit",
+            "vm_reflectlimit",
+            "vm_gamma"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 31,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+        "parameters": {
+          "size": [
+            1000,
+            0.1,
+            1000
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_floor/FLOOR_contact",
+            "name": "FLOOR_contact",
+            "type": "box"
+          },
+          "parameters": [
+            "size"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 32,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_camera",
+        "parameters": {
+          "res": [
+            1200,
+            1500
+          ],
+          "focal": 90
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_camera",
+            "name": "showcase_20261001_camera",
+            "type": "cam"
+          },
+          "parameters": [
+            "res",
+            "focal"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 33,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_key",
+        "parameters": {
+          "light_exposure": 4.2
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_key",
+            "name": "showcase_20261001_key",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_exposure"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 34,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_fill",
+        "parameters": {
+          "light_exposure": 2.5
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_fill",
+            "name": "showcase_20261001_fill",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_exposure"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 35,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_rim",
+        "parameters": {
+          "light_exposure": 3.3
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_rim",
+            "name": "showcase_20261001_rim",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_exposure"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 36,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/mat/showcase_glazed_teal",
+        "parameters": {
+          "rough": 0.3,
+          "coat": 0.35,
+          "coatrough": 0.24
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "rough",
+            "coat",
+            "coatrough"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 37,
+      "tool": "houdini_render__set_render_settings",
+      "request_arguments": {
+        "rop_path": "/out/showcase_20261001_mantra",
+        "resolution": [
+          1200,
+          1500
+        ],
+        "output_path": "$HIP/hero.png",
+        "frame_range": [
+          1,
+          1,
+          1
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Set render settings",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "applied": {
+            "resolution": [
+              1200,
+              1500
+            ],
+            "frame_range": [
+              1.0,
+              1.0
+            ],
+            "output_path": "$HIP/hero.png"
+          },
+          "unsupported": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 38,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "parameters": {
+          "vm_samplesx": 4,
+          "vm_samplesy": 4,
+          "vm_maxraysamples": 16
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "parameters": [
+            "vm_samplesx",
+            "vm_samplesy",
+            "vm_maxraysamples"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 39,
+      "tool": "houdini_camera_light__create_light",
+      "request_arguments": {
+        "light_type": "environment",
+        "name": "showcase_20261001_studio_environment",
+        "intensity": 1,
+        "exposure": -3,
+        "color": [
+          0.35,
+          0.32,
+          0.28
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_studio_environment",
+            "name": "showcase_20261001_studio_environment",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "light_type": "environment",
+            "intensity": 1.0,
+            "color": [
+              0.35,
+              0.32,
+              0.28
+            ],
+            "exposure": -3.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 40,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_studio_environment",
+        "parameters": {
+          "light_intensity": 0
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_studio_environment",
+            "name": "showcase_20261001_studio_environment",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_intensity"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 41,
+      "tool": "houdini_nodes__create_node",
+      "request_arguments": {
+        "parent_path": "/obj",
+        "node_type": "geo",
+        "node_name": "showcase_20261001_backdrop",
+        "run_init_scripts": false
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_backdrop",
+            "name": "showcase_20261001_backdrop",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 42,
+      "tool": "houdini_geometry__create_primitive",
+      "request_arguments": {
+        "parent_path": "/obj/showcase_20261001_backdrop",
+        "primitive": "box",
+        "node_name": "BACKDROP",
+        "set_display": true
+      },
+      "response": {
+        "success": true,
+        "message": "Created SOP primitive",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_backdrop",
+          "node_path": "/obj/showcase_20261001_backdrop/BACKDROP",
+          "node_name": "BACKDROP",
+          "primitive": "box",
+          "sop_type": "box"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 43,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_backdrop/BACKDROP",
+        "parameters": {
+          "size": [
+            200,
+            80,
+            0.1
+          ],
+          "t": [
+            0,
+            30,
+            -50
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_backdrop/BACKDROP",
+            "name": "BACKDROP",
+            "type": "box"
+          },
+          "parameters": [
+            "size",
+            "t"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 44,
+      "tool": "houdini_materials__create_material",
+      "request_arguments": {
+        "material_name": "showcase_backdrop",
+        "parameters": {
+          "basecolor": [
+            0,
+            0,
+            0
+          ],
+          "basecolor_usePointColor": 0,
+          "rough": 1,
+          "emitcolor": [
+            0.07,
+            0.065,
+            0.055
+          ],
+          "emitint": 1,
+          "emitillum": 0
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Created Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/mat",
+          "requested_shader_type": "principledshader::2.0",
+          "shader_type": "principledshader::2.0",
+          "material": {
+            "path": "/mat/showcase_backdrop",
+            "name": "showcase_backdrop",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "basecolor",
+            "basecolor_usePointColor",
+            "rough",
+            "emitcolor",
+            "emitint",
+            "emitillum"
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 45,
+      "tool": "houdini_materials__assign_material",
+      "request_arguments": {
+        "target_node_path": "/obj/showcase_20261001_backdrop",
+        "material_node_path": "/mat/showcase_backdrop"
+      },
+      "response": {
+        "success": true,
+        "message": "Assigned Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "target": {
+            "path": "/obj/showcase_20261001_backdrop",
+            "name": "showcase_20261001_backdrop",
+            "type": "geo"
+          },
+          "material": {
+            "path": "/mat/showcase_backdrop",
+            "name": "showcase_backdrop",
+            "type": "principledshader::2.0"
+          },
+          "parameter_name": "shop_materialpath"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 46,
+      "tool": "houdini_nodes__set_node_parms",
+      "request_arguments": {
+        "node_path": "/mat/showcase_backdrop",
+        "parameters": {
+          "emitcolor": [
+            0.002,
+            0.0019,
+            0.0016
+          ]
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/mat/showcase_backdrop",
+            "name": "showcase_backdrop",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "emitcolor"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 47,
+      "tool": "houdini_automation__save_hip_file",
+      "request_arguments": {
+        "file_path": "REPLAY_CASE_DIR/CASE.hip"
+      },
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "REPLAY_CASE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    },
+    {
+      "step": 48,
+      "tool": "houdini_interchange__export_geometry",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+        "output_path": "REPLAY_CASE_DIR/ceramic.obj"
+      },
+      "response": {
+        "success": true,
+        "message": "Exported geometry",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "output_path": "REPLAY_CASE_DIR/ceramic.obj",
+          "format": "obj",
+          "written_files": [
+            "REPLAY_CASE_DIR/ceramic.obj"
+          ],
+          "skipped": [],
+          "warnings": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": "completed"
+    },
+    {
+      "step": 49,
+      "tool": "houdini_geometry__get_geometry_info",
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic"
+      },
+      "response": {
+        "success": true,
+        "message": "Read geometry info",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "point_count": 115776,
+          "primitive_count": 115200,
+          "vertex_count": 460800,
+          "bounds_min": [
+            -1.0318803787231445,
+            0.0,
+            -1.0318803787231445
+          ],
+          "bounds_max": [
+            1.031880497932434,
+            2.2490625381469727,
+            1.0318803787231445
+          ],
+          "bounds_size": [
+            2.0637608766555786,
+            2.2490625381469727,
+            2.063760757446289
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "terminal_job_status": null
+    }
+  ]
+}

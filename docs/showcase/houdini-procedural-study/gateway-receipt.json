@@ -1,0 +1,66 @@
+{
+  "total_calls": 93,
+  "successful_calls": 93,
+  "failed_calls": 0,
+  "filters": {
+    "dcc_type": "houdini",
+    "session_id": "showcase-houdini-procedural-20261001"
+  },
+  "stats_coverage": {
+    "source": "gateway_admin_sqlite",
+    "configured_call_route": "gateway",
+    "configured_route_recorded": true,
+    "excluded_control_routes": [
+      "local_mcp_direct"
+    ],
+    "session_id_meta_path": "_meta.agent_context.session_id",
+    "hint": "Use --require-gateway for every task call when gateway stats are required evidence."
+  },
+  "top_tools": [
+    {
+      "name": "houdini.INSTANCE.houdini_nodes__set_node_parms",
+      "count": 19
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_parameters__get_parms",
+      "count": 9
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_nodes__create_node",
+      "count": 7
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_automation__save_hip_file",
+      "count": 6
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_parameters__list_parms",
+      "count": 6
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_render__get_render_job",
+      "count": 6
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_camera_light__create_light",
+      "count": 4
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_geometry__get_geometry_info",
+      "count": 4
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_render__render_rop",
+      "count": 4
+    },
+    {
+      "name": "houdini.INSTANCE.houdini_materials__assign_material",
+      "count": 3
+    }
+  ],
+  "asset_validation_checkpoint": {
+    "total_calls": 89,
+    "successful_calls": 89,
+    "failed_calls": 0
+  }
+}

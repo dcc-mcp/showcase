@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "slug": "houdini-procedural-study",
+  "packaged_at": "2026-10-01",
+  "source_revision": "9957e58e987147e448819384a0e8a8be5756de18",
+  "source_repository": "https://github.com/dcc-mcp/dcc-mcp-houdini",
+  "release_url": "https://github.com/dcc-mcp/showcase/releases/tag/2026-10-01-houdini-procedural-study",
+  "package": {
+    "filename": "houdini-procedural-study-assets.zip",
+    "bytes": 8266635,
+    "sha256": "7ec68e566f2d70b88206c342ff15ed77c5fab80186dc2127f338735c1647f1c7",
+    "download_url": "https://github.com/dcc-mcp/showcase/releases/download/2026-10-01-houdini-procedural-study/houdini-procedural-study-assets.zip",
+    "archive_member_count": 20,
+    "zip_crc_and_extraction_verified": true,
+    "extracted_file_hash_match_count": 20,
+    "native_hip_included": false,
+    "license": "MIT; SideFX software and shader library not redistributed"
+  },
+  "evidence_scope": "Actual typed DCC-MCP production: geometry, materials, camera, lighting, four Mantra renders, private HIP reopen, and same-Houdini OBJ export/reimport. PNG author metadata removed through adapter-exposed MCP automation with compressed image data and decoded pixels unchanged. A second dedicated empty host completed 47 non-render recipe steps and 49 typed request/response calls; exported OBJ is byte-identical to the first. Production Core/CLI/Gateway0.20.28 and follow-up CLI/Core0.20.28 with observed transitional Gateway0.20.22 are recorded separately. No second full render or anonymous native HIP export is claimed.",
+  "privacy_audit": {
+    "crc_test": "pass",
+    "full_extraction_sha256_check": "pass",
+    "privacy_text_scan": "pass",
+    "extracted_png_metadata_scan": "pass"
+  },
+  "reproduction_requirements": [
+    "Use the recorded Houdini and DCC-MCP versions in a dedicated empty host.",
+    "Read recipe preconditions, choose a writable CASE_DIR, use require-gateway and a stable session ID.",
+    "Run replay-cli.ps1 with a discovered InstanceId; Render is opt-in.",
+    "OBJ does not retain SOP history, materials, lights or the native scene.",
+    "Audit native HIP and private CLI logs before any further publication."
+  ],
+  "integrity_wrapper_scope": "This site-side wrapper is excluded from the ZIP to avoid an archive self-hash. The ZIP carries its own member manifest and independently extracted hashes."
+}
