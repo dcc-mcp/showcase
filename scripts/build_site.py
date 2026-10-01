@@ -385,8 +385,9 @@ def engineering_section(case: dict, root: str, prefix: str) -> tuple[str, list[d
             action = "下载工程"
             download = ' download="%s"' % esc(filename)
         else:
-            meta = ext + " · 外部源项目"
-            action = "查看源工程"
+            release_asset = parsed.netloc == "github.com" and "/releases/download/" in parsed.path
+            meta = ext + (" · GitHub Release" if release_asset else " · 外部源项目")
+            action = "下载工程包" if release_asset else "查看源工程"
             download = ""
         rows.append('<li class="engineering-file"><div><strong>%s</strong><span>%s</span></div><a href="%s"%s>%s <span aria-hidden="true">↗</span></a></li>' %
                     (esc(item["label"]), esc(meta), esc(url), download, action))

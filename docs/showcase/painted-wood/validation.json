@@ -69,6 +69,19 @@
       "result": "fail",
       "observed": "本轮未运行 Designer；源包没有 validation.json 或完整 tools/call 轨迹，适配器与 Core 版本未记录。",
       "expected": "Public source supplies actual tool traces and reproducible software evidence"
+    },
+    {
+      "name": "工程源码包静态审核（本轮）",
+      "result": "pass",
+      "observed": {
+        "archive_bytes": 14683628,
+        "archive_sha256": "8da5b5c45c480e162f27c3237683a14527bf1be889d54446a4ae813bf6175c46",
+        "extracted_members_verified": 17,
+        "original_bytes_preserved": true,
+        "private_path_findings": 0,
+        "software_reopened_this_run": false,
+        "basis": "完整解压与逐文件哈希；原生文件/依赖/元数据离线审阅。不是本轮软件复现。"
+      }
     }
   ],
   "not_claimed": [
@@ -148,5 +161,11 @@
       ]
     ],
     "metallic": 0
+  },
+  "engineering_downloads": {
+    "record": "downloads.json",
+    "source_bytes_unchanged": true,
+    "archive_extraction_verified": true,
+    "software_reopen_executed": false
   }
 }

@@ -70,6 +70,19 @@
       "result": "fail",
       "observed": "公开包未包含完整 tools/call 日志、参数或 adapter/core 版本；本轮没有补造记录。",
       "expected": "Public source supplies actual tool traces and reproducible software evidence"
+    },
+    {
+      "name": "工程源码包静态审核（本轮）",
+      "result": "pass",
+      "observed": {
+        "archive_bytes": 158771095,
+        "archive_sha256": "032e397d12f13b4dc23e23b98600c5bb46544618017d0210aad2ccbb54e2bd02",
+        "extracted_members_verified": 37,
+        "original_bytes_preserved": true,
+        "private_path_findings": 0,
+        "software_reopened_this_run": false,
+        "basis": "完整解压与逐文件哈希；原生文件/依赖/元数据离线审阅。不是本轮软件复现。"
+      }
     }
   ],
   "not_claimed": [
@@ -145,5 +158,11 @@
     },
     "latch_curves": 2,
     "studio_floors": 1
+  },
+  "engineering_downloads": {
+    "record": "downloads.json",
+    "source_bytes_unchanged": true,
+    "archive_extraction_verified": true,
+    "software_reopen_executed": false
   }
 }

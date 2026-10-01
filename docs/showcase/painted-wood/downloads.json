@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "slug": "painted-wood",
+  "packaged_at": "2026-10-01",
+  "source_revision": "38623dd51721a958b8dc5d2e8957e991908333ac",
+  "source_repository": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer",
+  "release_url": "https://github.com/dcc-mcp/showcase/releases/tag/source-packages-2026-10-01",
+  "package": {
+    "filename": "dcc-mcp-painted-wood-sources-38623dd.zip",
+    "slug": "painted-wood",
+    "bytes": 14683628,
+    "sha256": "8da5b5c45c480e162f27c3237683a14527bf1be889d54446a4ae813bf6175c46",
+    "archive_member_count": 17,
+    "uncompressed_payload_bytes": 14983357,
+    "zip_crc_and_extraction_verified": true,
+    "extracted_file_hash_match_count": 17,
+    "source_revision": "38623dd51721a958b8dc5d2e8957e991908333ac",
+    "software_reopen_executed": false,
+    "private_path_findings": 0,
+    "license": "Preserved upstream MIT; no additional third-party rights asserted",
+    "download_url": "https://github.com/dcc-mcp/showcase/releases/download/source-packages-2026-10-01/dcc-mcp-painted-wood-sources-38623dd.zip"
+  },
+  "evidence_scope": "Offline native-file, metadata, dependency, hash and extraction audit. Blender and Designer were not reopened or recomputed in this packaging run. No new DCC production or MCP tool trace is claimed.",
+  "license_scope": "Unmodified upstream MIT declaration and original authorship retained. No rights to Adobe software or vendor library source are granted. Installed standard-library sources are not redistributed.",
+  "reproduction_requirements": [
+    "Preserve the relative docs/showcase folder layout.",
+    "Use the host versions recorded in this case.",
+    "Install the licensed Adobe standard resource library separately; its source is not bundled."
+  ]
+}

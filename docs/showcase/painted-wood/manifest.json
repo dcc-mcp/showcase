@@ -73,6 +73,12 @@
       "sha256": "43d1a62bdc533237084b99d252e6513b59ce70f71c3dd92c511c10b62e0042a5",
       "bytes": 2772,
       "role": "Unmodified upstream artifact inventory"
+    },
+    {
+      "path": "downloads.json",
+      "sha256": "78079cc8a8c0115ea4ff3a262a256239a5169ee51e18970e08c169f4404d21c8",
+      "bytes": 1752,
+      "role": "Native engineering package identity, checksums, license and offline audit scope"
     }
   ],
   "designer_application": "Substance 3D Designer",
