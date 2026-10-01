@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-01T11:44:23.926065+00:00",
+  "reviewer": "Independent native-route reviewer",
+  "qa_status": "verified",
+  "brand_design_acceptance": "awaiting_user_review",
+  "visual_review_complete": true,
+  "scope": "Read actual native SVG; crop/composite actual software PNG pixels. No SVG authoring/rendering or UI observation.",
+  "native_sources": [
+    {
+      "path": "assets/native/dcc-mcp-master.svg",
+      "bytes": 7257,
+      "sha256": "8ebd38f695a53ceef88c180ed72f9a3cc9fd60e63b82c63cd063634c14831f4b"
+    },
+    {
+      "path": "brand-family-v2/assets/native/dcc-mcp-master-corrected.svg",
+      "bytes": 7280,
+      "sha256": "40bfe7ee60c2b68b73c25740310697a1c996e595f7b4d22725326b054e339330"
+    },
+    {
+      "path": "assets/native/dcc-mcp-wordmark-dark.svg",
+      "bytes": 7031,
+      "sha256": "bb313775ed6771eaf18062e2263c74245e84f2f6df9b822a5bd0ead77c8249d4"
+    },
+    {
+      "path": "brand-family-v2/assets/native/dcc-mcp-wordmark-dark-corrected.svg",
+      "bytes": 7054,
+      "sha256": "f4f873d6e5f3d8a3fe67204fccc8d47d6aa48a79e8ca03594d313843ec1bd74a"
+    }
+  ],
+  "actual_native_paths_match_proposed": {
+    "dcc-c1": true,
+    "dcc-c2": true
+  },
+  "dark_native_paths_match_proposed": {
+    "dcc-c1": true,
+    "dcc-c2": true
+  },
+  "changed_native_ids_light": [
+    "dcc-c1",
+    "dcc-c2"
+  ],
+  "changed_native_ids_dark": [
+    "dcc-c1",
+    "dcc-c2"
+  ],
+  "non_cc_native_attribute_changes": [],
+  "c1": {
+    "curve_joins": [
+      {
+        "point": [
+          419.0,
+          148.0
+        ],
+        "types": "C-C",
+        "tangent_turn_degrees": 2.0602820179315486e-07
+      },
+      {
+        "point": [
+          373.0,
+          230.0
+        ],
+        "types": "C-C",
+        "tangent_turn_degrees": 0.0
+      },
+      {
+        "point": [
+          389.970816,
+          270.205696
+        ],
+        "types": "C-Q",
+        "tangent_turn_degrees": 1.9177622254945775e-07
+      },
+      {
+        "point": [
+          395.93216,
+          271.357632
+        ],
+        "types": "Q-C",
+        "tangent_turn_degrees": 1.8916972580708643e-06
+      },
+      {
+        "point": [
+          488.0,
+          315.0
+        ],
+        "types": "C-C",
+        "tangent_turn_degrees": 2.2173801700834977e-14
+      },
+      {
+        "point": [
+          438.0,
+          263.0
+        ],
+        "types": "C-C",
+        "tangent_turn_degrees": 0.0
+      },
+      {
+        "point": [
+          427.0,
+          182.0
+        ],
+        "types": "C-C",
+        "tangent_turn_degrees": 0.0
+      }
+    ],
+    "max_internal_curve_tangent_turn_degrees": 1.8916972580708643e-06,
+    "continuity_claim": "G1 within numeric rounding, not G2 or uniform-thickness claim",
+    "old_notch_turn_degrees": 104.23319425830367,
+    "old_bottom_join_turn_degrees": 5.680890817965884,
+    "terminal_widths_design_px": [
+      36.124783736376884,
+      38.897300677553446
+    ],
+    "layout": "Original interlocking D tail and flat diagonal C1 end faces retained"
+  },
+  "c2": {
+    "outer_center_recovered_from_actual_path": [
+      613.9999992193991,
+      216.99999996308702
+    ],
+    "inner_center_recovered_from_actual_path": [
+      614.0000002961929,
+      217.00000021588573
+    ],
+    "center_separation_design_px": 1.1060705094452913e-06,
+    "radii_design_px": [
+      100.0,
+      63.0
+    ],
+    "nominal_radial_thickness_design_px": 37,
+    "actual_terminal_widths_design_px": [
+      36.99999960744422,
+      36.99999916255805
+    ],
+    "max_center_error_at_1024px": 1.258462446302198e-06,
+    "body_thickness_bounds_design_px": [
+      36.999998893929494,
+      37.000001106070506
+    ],
+    "previous_inner_upper_y_error_corrected": true,
+    "curve_definition": "Major circular arcs with radial flat terminals"
+  },
+  "raster_sources": [
+    {
+      "path": "reference/website-logo-admin-light.png",
+      "bytes": 145775,
+      "sha256": "ffb41ef554f22ce2b1872b87b77fef48b9cb285ccd728eff2fa3585b64cc2bde",
+      "size": [
+        900,
+        400
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "assets/png/dcc-mcp-wordmark-light-1024.png",
+      "bytes": 53811,
+      "sha256": "ee29d26c114e59dab1d919c12afcf13662f1fbb8dd4f11343ce48fe4d00ee1fa",
+      "size": [
+        1024,
+        455
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "brand-family-v2/evidence/cc-final-light-1024.png",
+      "bytes": 53269,
+      "sha256": "ff3349c67b493175ed341c3dca34a6dd6423e3369eaed25e836b3bbf601ff995",
+      "size": [
+        1024,
+        455
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "assets/png/dcc-mcp-wordmark-light-128.png",
+      "bytes": 4903,
+      "sha256": "5ff4c24710a5ca8347614bd004220a41dad926d14a6b7b39643c2007670aad89",
+      "size": [
+        128,
+        57
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "brand-family-v2/evidence/cc-final-light-128.png",
+      "bytes": 4912,
+      "sha256": "000bbfc5fc78ea3d627b4d5ffa1047bb082c39207f46bf5a2a251192b1fd7e6b",
+      "size": [
+        128,
+        57
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "brand-family-v2/evidence/cc-final-dark-1024.png",
+      "bytes": 59457,
+      "sha256": "cf9ef5f7dbdae9e39365a4cb488d7c0ce850e5d43b769df5dc648ee2e3f543a8",
+      "size": [
+        1024,
+        455
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "brand-family-v2/evidence/cc-final-dark-128.png",
+      "bytes": 5063,
+      "sha256": "10dff2fb924e5aa1177544d85cb28f1f5a3491e196ccf6fcb67d04b562e6291d",
+      "size": [
+        128,
+        57
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "light_before_after_pixel_changes": {
+    "changed_pixels": 5849,
+    "difference_bbox_pixels": [
+      337,
+      133,
+      767,
+      364
+    ]
+  },
+  "comparison": {
+    "path": "brand-family-v2/evidence/cc-before-after.png",
+    "bytes": 455149,
+    "sha256": "c20e5d9cb0dffcbc191c36df9c8896557c0c52a33e47673b463f56f64b0dbc61",
+    "size": [
+      3336,
+      1940
+    ],
+    "crop_regions": [
+      {
+        "source": "reference/website-logo-admin-light.png",
+        "source_pixels": [
+          900,
+          400
+        ],
+        "crop_pixels": [
+          385,
+          112,
+          679,
+          322
+        ],
+        "magnification": 3,
+        "resampling": "nearest-neighbour"
+      },
+      {
+        "source": "assets/png/dcc-mcp-wordmark-light-1024.png",
+        "source_pixels": [
+          1024,
+          455
+        ],
+        "crop_pixels": [
+          438,
+          127,
+          773,
+          366
+        ],
+        "magnification": 3,
+        "resampling": "nearest-neighbour"
+      },
+      {
+        "source": "brand-family-v2/evidence/cc-final-light-1024.png",
+        "source_pixels": [
+          1024,
+          455
+        ],
+        "crop_pixels": [
+          438,
+          127,
+          773,
+          366
+        ],
+        "magnification": 3,
+        "resampling": "nearest-neighbour"
+      }
+    ],
+    "small_exports": "Actual light/dark native128 at1x; light nearest enlargement, no1024 downsampling"
+  },
+  "caption_font": {
+    "path": "fonts/Montserrat-wght.ttf",
+    "bytes": 744936,
+    "sha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+    "family": "Montserrat",
+    "weight_axis": 650,
+    "license": "SIL Open Font License 1.1",
+    "license_file": "fonts/OFL.txt"
+  },
+  "visual_findings": [
+    {
+      "subject": "C1 fillet and lower bowl",
+      "finding": "Actual final 3x nearest crop shows the concave D-tail/C1 junction softened and the lower-bowl join without the former tangent kink. Saved path joins are G1 within rounding. Interlocking D tail and existing C1 proportions remain recognizable.",
+      "status": "pass"
+    },
+    {
+      "subject": "C1 thickness and open ends",
+      "finding": "C1 preserves the original asymmetric interlocking geometry and flat diagonal terminals, widths36.12/38.90 designpx. Uniform C1 thickness or G2 continuity is not claimed.",
+      "status": "retained_design"
+    },
+    {
+      "subject": "C2 sweep and radial terminals",
+      "finding": "Actual final crop shows a visibly rounder left bowl and smooth major-arc sweep with clean flat end faces. Recovered circle centres coincide within1.11e-6 designpx; both terminal widths are37px within8.4e-7. The earlier upper-inner-y calculation error is corrected in the actual native file.",
+      "status": "pass"
+    },
+    {
+      "subject": "Actual128 light and dark",
+      "finding": "Both genuine128x57 software exports were viewed at original size on intended light/dark backgrounds; light nearest enlargement was also inspected. DCC/MCP silhouettes remain distinct. Fine protocol-line/node separation is reduced at this scale.",
+      "status": "pass"
+    },
+    {
+      "subject": "Dark1024",
+      "finding": "Final dark1024 export was inspected in a QA composite on#081325; white MCP text and protocol line remain visible. Its C1/C2 saved paths exactly match the light version.",
+      "status": "pass"
+    },
+    {
+      "subject": "Website reference",
+      "finding": "Official900x400 raster was reviewed alongside actualv1/final outputs. Interwoven layout remains recognizable; raster edge treatment and gradient differences remain, so exact pixel identity is not asserted.",
+      "status": "reviewed"
+    },
+    {
+      "subject": "Scope integrity",
+      "finding": "Onlydcc-c1/dcc-c2 native attributes changed fromv1 in both light and dark documents; D, detached pixels, protocol curve/nodes, hexagon and MCP label attributes stayed identical. Original first ZIP, asset map and candidate SVGs were not edited.",
+      "status": "pass"
+    }
+  ],
+  "superseded_candidate": {
+    "native": {
+      "path": "brand-family-v2/assets/native/dcc-mcp-master.svg",
+      "bytes": 7256,
+      "sha256": "19d9b5d897a50c0fa8ac3b2a64ed3ee3643ac6c8d1d9c4df3ee5a2a2cd06e54d"
+    },
+    "inner_upper_y": 164.221,
+    "center_separation_design_px": 0.4870644412985136,
+    "terminal_widths_design_px": [
+      36.54574838473003,
+      37.00085616576999
+    ],
+    "status": "Historical first candidate; excluded from final correction acceptance",
+    "preserved_unchanged_by_reviewer": true
+  },
+  "visual_reviewed_utc": "2026-10-01T11:46:00.758291+00:00"
+}

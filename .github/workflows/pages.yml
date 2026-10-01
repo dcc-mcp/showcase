@@ -35,6 +35,18 @@ jobs:
       - name: Validate selected collection and provenance
         run: python scripts/validate_collection.py
 
+      - name: Verify brand asset publication guards
+        run: python scripts/test_validate_brand_gallery.py
+
+      - name: Validate selected brand gallery and rights
+        run: python scripts/validate_brand_gallery.py
+
+      - name: Verify authoritative brand manifest projection
+        run: python scripts/test_brand_manifest.py
+
+      - name: Verify brand gallery build integration
+        run: python scripts/test_brand_build.py
+
       - name: Verify the build guards still bite
         run: python scripts/test_build_site.py
 
