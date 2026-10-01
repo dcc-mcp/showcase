@@ -1,0 +1,37 @@
+{
+  "family": "blender",
+  "display_name": "Blender",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-blender",
+    "source_commit": "6adcf294f82c87ee1a4ae450cd9fcc35024d93d2",
+    "source_path": "docs/assets/dcc-mcp-blender.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-blender/6adcf294f82c87ee1a4ae450cd9fcc35024d93d2/docs/assets/dcc-mcp-blender.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-blender/docs/assets/dcc-mcp-blender.svg",
+    "sha256": "757fd73505c3c1e1c639aa7ef1124e8737aa5a007524056f5b486ef955f03a01",
+    "bytes": 1226231,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#F86800",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#F86800",
+    "dark": "#FA9A54",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "camera-rays-and-mesh",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Blender identifies the referenced software/workflow and remains with Blender Foundation. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Blender software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

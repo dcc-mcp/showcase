@@ -69,19 +69,23 @@ not substitute for browser acceptance.
 ## Brand gallery
 
 The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
-selects resources without changing the three-case collection. Its first batch
-contains one corrected core wordmark with eight verified files: light/dark
-editable SVGs, software-outlined SVGs, and genuine 1024/128 PNG exports.
-Only this wordmark is delivered; other Core variants and the remaining 36
-planned families are still pending. Plans have no placeholder download links.
+selects resources without changing the three-case collection. The first core
+release contains eight verified files. Its incremental batch adds Maya,
+3ds Max, Blender, Houdini, ZBrush and Photoshop families with 16 files each:
+seven actual families and 104 files out of 37 planned families. All artwork
+is authored and exported through DCC-MCP in Inkscape; family names identify
+referenced workflows, not the software used for these production calls.
+Other Core variants, six currentColor outlined SVGs and the remaining 30
+families are pending. Plans have no placeholder download links.
 
 `brand-gallery.json` points to the producer's authoritative
 `docs/brands/brand-family-v2/manifest.json` public snapshot. The builder derives
 page data at runtime; it does not keep a second hand-maintained asset inventory.
 Original SVG/PNG bytes remain unchanged. The snapshot preserves the original
 manifest hash and documents removal of private routing, paths and process IDs.
-Eight real successful gateway requests/responses and the geometric/raster
-review are published with explicit evidence coverage. This site integration
+104 real successful gateway requests/responses (32 builds and 72 exports),
+per-file family QA and the geometric/raster review are published with explicit
+evidence coverage. This site integration
 did not rerun Inkscape production. The installed development adapter and its
 public draft source are distinct from a released integration.
 
@@ -89,8 +93,9 @@ Native SVGs retain editable Montserrat text; editing requires the corresponding
 font. Outlined SVGs display independently of that installation. Project-owned
 geometry is MIT, font inputs retain SIL OFL notices, and brand/trademark rights
 remain reserved. The old reference image is not redistributed in this batch.
-The recorded GUI launch is not visual acceptance; final design approval is
-still awaiting user feedback. C1's checks establish G1 within rounding and
+The corrected core has a partial native GUI observation; the complete canvas
+and the six families have not passed full GUI acceptance. Final design approval
+is still awaiting user feedback. C1's checks establish G1 within rounding and
 do not establish G2 or uniform thickness.
 
 For local layout review only:

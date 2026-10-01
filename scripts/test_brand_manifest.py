@@ -47,7 +47,8 @@ class BrandProjection(unittest.TestCase):
         for theme in ("light", "dark"):
             for role in ("editable", "release"):
                 live = b'<text x="2" y="12">MCP</text>' if role == "editable" else b'<path d="M0 0H20V10H0Z"/>'
-                data = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">' + live + b'</svg>'
+                shared = b'<path id="dcc-c1" d="M1 1H4"/><path id="dcc-c2" d="M7 1H10"/>'
+                data = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">' + shared + live + b'</svg>'
                 self.add_asset(theme, "svg", role, "%s-%s.svg" % (theme, role), data, viewbox=[0, 0, 900, 400], live_text=role == "editable")
             for width, height in ((1024, 455), (128, 57)):
                 self.add_asset(theme, "png", "release", "%s-%d.png" % (theme, width), png(width, height), size=[width, height], transparent=True, corner_alpha=[0, 0, 0, 0])
@@ -56,32 +57,95 @@ class BrandProjection(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text("Original geometry is MIT; Montserrat is OFL; trademark rights reserved.", encoding="utf-8")
 
-    def add_asset(self, theme, kind, role, filename, data, **details):
-        key = "core-" + filename.replace(".", "-")
-        rel = "assets/" + filename
+    def add_asset(self, theme, kind, role, filename, data, family="core", **details):
+        key = family + "-" + filename.replace(".", "-")
+        rel = "assets/" + ("families/" + family + "/" if family != "core" else "") + filename
         target = self.base / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
         digest = hashlib.sha256(data).hexdigest()
         operation = "document_build" if role == "editable" else "document_export"
-        asset = {"asset_id": key, "path": rel, "family": "core", "theme": theme, "kind": kind, "role": role, "status": "actual", "qa_status": "verified", "license": "MIT", "bytes": len(data), "sha256": digest,
+        asset = {"asset_id": key, "path": rel, "family": family, "theme": theme, "kind": kind, "role": role, "status": "actual", "qa_status": "verified", "license": "MIT", "bytes": len(data), "sha256": digest,
                  "producer": {"application": "Inkscape 1.4.4", "source_commit": self.runtime, "receipt_key": key}, **details}
         self.manifest["assets"].append(asset)
-        self.manifest["families"][0]["actual_asset_ids"].append(key)
+        next(row for row in self.manifest["families"] if row["family_id"] == family)["actual_asset_ids"].append(key)
         self.manifest["mcp_receipts"].append({"key": key, "operation": operation, "recorded_utc": self.stamp, "source_commit": self.runtime, "control_route": "gateway", "output_sha256": digest})
         self.ledger["calls"].append({"key": key, "tool": brand_manifest.TOOLS[operation], "arguments": {"plan": {"canvas": {"width": 900, "height": 400}}}, "response": {"success": True, "context": {"sha256": digest, "bytes": len(data)}}, "recorded_utc": self.stamp, "source_commit": self.runtime, "control_route": "gateway", "gateway_stats_recorded": True, "artifact_sha256": digest, "original_completed_record_sha256": "b" * 64})
-        if kind == "png" or role == "editable":
+        if family != "core" and role == "release":
+            self.ledger["calls"][-1]["arguments"] = {"source_file": "snapshot/assets/families/" + family + "/" + theme + "-editable" + ("-optical" if details.get("optical") else "") + ".svg", "format": kind}
+        if family == "core" and (kind == "png" or role == "editable"):
             self.visual["raster_sources" if kind == "png" else "native_sources"].append({"path": "snapshot/" + rel, "sha256": digest, "bytes": len(data), **({"size": details["size"]} if kind == "png" else {})})
 
     def tearDown(self):
         self.temp.cleanup()
 
     def project(self):
-        for rel, data in (("manifest.json", self.manifest), ("evidence/calls.json", self.ledger), ("evidence/visual.json", self.visual)):
+        files = [("manifest.json", self.manifest), ("evidence/calls.json", self.ledger), ("evidence/visual.json", self.visual)]
+        if hasattr(self, "family_qa"):
+            files += [("evidence/family-qa.json", self.family_qa), ("evidence/policy.json", self.policy)]
+            files += [("assets/families/" + family + "/source-and-rights.json", data) for family, data in self.source_metadata.items()]
+        if hasattr(self, "ui"):
+            files += [("evidence/ui.json", self.ui)]
+        for rel, data in files:
             target = self.base / rel
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(data), encoding="utf-8")
         return brand_manifest.project(self.root, "docs/brands/snapshot/manifest.json")
+
+    def with_six(self):
+        """Independent fixture encodes the expected shapes, never real files."""
+        self.manifest.update(status="partial_actual_core_and_first_six", generated_utc=self.stamp, family_count=37, actual_family_count=7, actual_asset_count=104)
+        self.manifest["acceptance"].update(family_first_six_file_and_bitmap_qa="verified", family_production="paused_pending_native_birth_race_repair")
+        self.manifest["publication"].update(family_qa="evidence/family-qa.json", family_policy="evidence/policy.json")
+        core = self.manifest["families"][0]
+        self.manifest["families"] = [core]
+        self.family_qa = {"scope": "Actual file and bitmap checks; separate GUI scope.", "pass": True, "missing": [], "families": []}
+        self.policy = {"families": [], "vendor_policy_groups": {"vendor": {"owner": "Original software rights holder"}}}
+        self.source_metadata = {}
+        source_commit = "c" * 40
+        for family in ("maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop"):
+            rights = {"third_party_mark_in_final_plan": False, "vendor_mark_permission_inferred_from_repo_mit": False, "affiliation_claimed": False,
+                      "trademark_notice_plan": "Software name is referential; no endorsement."}
+            phrase = "for use with " + family + " software"
+            self.manifest["families"].append({"family_id": family, "display_product": family.title(), "production_status": "partial_actual_verified", "actual_asset_ids": [],
+                                            "currentcolor_release_status": "pending_software_outlined_export", "rights": rights, "compatibility_phrase": phrase,
+                                            "drawing_brief": "Old unrelated prepared brief must not become actual description"})
+            reference = {"source_url": "https://raw.githubusercontent.com/example/brand/" + source_commit + "/" + family + ".svg", "source_commit": source_commit, "sha256": "d" * 64,
+                         "native_editable_source_established": False}
+            self.policy["families"].append({"family_id": family, "original_reference": reference, "rights": rights, "policy_ids": ["vendor"]})
+            self.source_metadata[family] = {"family": family, "display_name": family, "reference": {**reference, "byte_hash_verified": True},
+                                           "motif_semantics": brand_manifest.MOTIFS[family][0], "rights": rights, "compatibility_phrase": phrase, "artwork_author": "DCC-MCP contributors",
+                                           "third_party_glyphs_embedded": False, "palette": {"vendor_official_palette_claimed": False, "master_palette_changes": False},
+                                           "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."}
+            for theme in ("light", "dark", "currentcolor"):
+                roles = (("editable", False),) if theme == "currentcolor" else (("editable", False), ("release", False), ("editable", True))
+                for role, optical in roles:
+                    label = theme + "-" + role + ("-optical" if optical else "") + ".svg"
+                    live = b'<text>MCP</text>' if role == "editable" else b'<path d="M3 3H5"/>'
+                    data = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560"><path id="dcc-c1" d="M1 1H4"/><path id="dcc-c2" d="M7 1H10"/>' + live + b'</svg>'
+                    self.add_asset(theme, "svg", role, label, data, family=family, optical=optical, live_text=role == "editable", viewbox=[0, 0, 1200, 560])
+                sizes = ((512, 239),) if theme == "currentcolor" else ((1024, 478), (512, 239), (256, 119), (128, 60))
+                for width, height in sizes:
+                    self.add_asset(theme, "png", "release", theme + "-" + str(width) + ".png", png(width, height), family=family, optical=width == 128,
+                                   size=[width, height], transparent=True, corner_alpha=[0, 0, 0, 0], currentcolor_default="black" if theme == "currentcolor" else None)
+            checks = []
+            for asset in self.manifest["assets"]:
+                if asset["family"] != family:
+                    continue
+                check = {"path": asset["path"], "bytes": asset["bytes"], "sha256": asset["sha256"], "format": asset["kind"], "pass": True, "failures": []}
+                if asset["kind"] == "png":
+                    check.update(size=asset["size"], mode="RGBA", alpha_extrema=[0, 255])
+                else:
+                    check.update(text_count=1 if asset["live_text"] else 0, mode="release" if asset["role"] == "release" else "native_optical" if asset["optical"] else "native")
+                checks.append(check)
+            self.family_qa["families"].append({"family": family, "checks": checks, "pass": True})
+        self.manifest["families"] += [{"family_id": "planned-" + str(index), "display_product": "Planned " + str(index), "production_status": "planned_not_executed", "actual_asset_ids": []} for index in range(30)]
+
+    def with_partial_gui(self):
+        self.manifest["publication"]["ui_evidence"] = "evidence/ui.json"
+        self.manifest["acceptance"].update(new_core_gui="verified_partial_canvas", full_page_gui_acceptance="incomplete")
+        self.ui = {"status": "verified_partial_canvas", "native_software_reopened_observed": True, "full_page_visible": False, "brand_design_acceptance": "awaiting_user_review",
+                   "native_document": {"sha256": self.manifest["assets"][0]["sha256"]}}
 
     def reject(self, phrase):
         with self.assertRaisesRegex(ValueError, phrase):
@@ -232,6 +296,146 @@ class BrandProjection(unittest.TestCase):
         self.project()
         self.ledger["calls"][0]["recorded_utc"] = "2026-10-01T19:46:01+08:00"
         self.reject("timestamp mismatch")
+
+    def test_six_family_snapshot_projects_104_actual_files_not_37_complete(self):
+        self.with_six()
+        self.with_partial_gui()
+        catalog = self.project()
+        self.assertEqual((7, 37, 104), tuple(catalog["progress"][key] for key in ("completed", "total", "assets")))
+        self.assertEqual([8, 16, 16, 16, 16, 16, 16], [len(item["variants"]) for item in catalog["items"]])
+        self.assertEqual(30, sum(row["status"] == "planned_not_executed" for row in catalog["progress"]["planned"]))
+        for item in catalog["items"][1:]:
+            self.assertEqual((128, 60), (item["small_previews"]["light"]["width"], item["small_previews"]["light"]["height"]))
+            self.assertEqual(["Inkscape"], item["software"])
+            self.assertFalse(any("Old unrelated" in item[field] for field in ("summary", "title")))
+            svg = [v for v in item["variants"] if v["format"] == "svg"]
+            self.assertEqual((5, 2), (sum("可编辑" in v["label"] for v in svg), sum("轮廓化发布" in v["label"] for v in svg)))
+
+    def test_currentcolor_pending_release_never_gets_href(self):
+        self.with_six()
+        item = self.project()["items"][1]
+        current = [v for v in item["variants"] if "currentcolor" in v["url"]]
+        self.assertEqual(2, len(current))
+        svg, raster = next(v for v in current if v["format"] == "svg"), next(v for v in current if v["format"] == "png")
+        self.assertIn("原生可编辑", svg["label"])
+        self.assertIn("轮廓化", svg["note"])
+        self.assertIn("固定黑色", raster["label"])
+        self.assertIn("不会继承", raster["note"])
+        pending = next(v for v in item["checks"] if v["name"] == "currentColor 轮廓化发布 SVG")
+        self.assertEqual("not_run", pending["result"])
+        self.assertNotIn("url", pending)
+
+    def test_wrong_family_count_cannot_publish(self):
+        self.with_six()
+        self.manifest["actual_family_count"] = 37
+        self.reject("actual family count")
+
+    def test_currentcolor_cannot_be_marked_complete(self):
+        self.with_six()
+        self.manifest["families"][1]["currentcolor_release_status"] = "completed"
+        self.reject("outlined release must remain pending")
+
+    def test_family_optical_flag_must_match_actual_128_size(self):
+        self.with_six()
+        asset = next(v for v in self.manifest["assets"] if v["family"] == "maya" and v["kind"] == "png" and v["size"][0] == 128)
+        asset["optical"] = False
+        self.reject("actual optical")
+
+    def test_small_export_must_reference_optical_native_document(self):
+        self.with_six()
+        asset = next(v for v in self.manifest["assets"] if v["family"] == "maya" and v["kind"] == "png" and v["size"][0] == 128)
+        call = next(v for v in self.ledger["calls"] if v["key"] == asset["producer"]["receipt_key"])
+        call["arguments"]["source_file"] = call["arguments"]["source_file"].replace("-optical", "")
+        self.reject("optical document mismatch")
+
+    def test_currentcolor_png_default_is_fixed_black(self):
+        self.with_six()
+        asset = next(v for v in self.manifest["assets"] if v["family"] == "maya" and v["theme"] == "currentcolor" and v["kind"] == "png")
+        asset["currentcolor_default"] = "dynamic_css"
+        self.reject("black-default currentColor")
+
+    def test_family_bitmap_qa_failure_is_not_verified(self):
+        self.with_six()
+        self.family_qa["families"][0]["checks"][0]["pass"] = False
+        self.reject("QA asset proof")
+
+    def test_family_qa_hash_must_match_manifest(self):
+        self.with_six()
+        self.family_qa["families"][0]["checks"][0]["sha256"] = "e" * 64
+        self.reject("QA asset proof")
+
+    def test_family_qa_missing_file_cannot_publish(self):
+        self.with_six()
+        self.family_qa["missing"] = ["planned artifact"]
+        self.reject("scoped family file QA")
+
+    def test_family_qa_cannot_omit_a_manifest_asset(self):
+        self.with_six()
+        self.family_qa["families"][0]["checks"].pop()
+        self.reject("QA asset inventory")
+
+    def test_actual_motif_comes_from_source_and_rights(self):
+        self.with_six()
+        blender = next(v for v in self.project()["items"] if v["slug"] == "dcc-mcp-blender-v2")
+        self.assertIn("相机射线与网格", blender["summary"])
+        self.source_metadata["blender"]["motif_semantics"] = "old-proposed-glyph"
+        self.reject("motif and rights metadata")
+
+    def test_vendor_glyph_inclusion_cannot_use_independent_geometry_scope(self):
+        self.with_six()
+        self.source_metadata["maya"]["third_party_glyphs_embedded"] = True
+        self.reject("motif and rights metadata")
+
+    def test_vendor_mark_permission_is_not_inferred_from_repository_license(self):
+        self.with_six()
+        self.policy["families"][0]["rights"]["vendor_mark_permission_inferred_from_repo_mit"] = True
+        self.reject("independent geometry")
+
+    def test_family_reference_hash_must_match_rights_record(self):
+        self.with_six()
+        self.source_metadata["maya"]["reference"]["sha256"] = "e" * 64
+        self.reject("reference identity mismatch")
+
+    def test_reference_palette_is_not_official_vendor_palette(self):
+        self.with_six()
+        self.source_metadata["maya"]["palette"]["vendor_official_palette_claimed"] = True
+        self.reject("palette reference boundary")
+
+    def test_family_source_metadata_cannot_leak_private_runtime_ids(self):
+        self.with_six()
+        self.source_metadata["maya"]["instance_id"] = "private-session"
+        self.reject("private runtime identifiers")
+
+    def test_core_gui_partial_canvas_is_not_complete_acceptance(self):
+        self.with_six()
+        self.with_partial_gui()
+        item = self.project()["items"][0]
+        check = next(v for v in item["checks"] if v["name"] == "GUI 视觉验收")
+        self.assertEqual("unknown", check["result"])
+        self.assertIn("局部画布", check["observed"])
+        self.assertTrue(any("局部画布" in v["label"] for v in item["evidence"]))
+        self.ui["full_page_visible"] = True
+        self.reject("partial-canvas GUI")
+
+    def test_partial_gui_requires_actual_bound_native_file(self):
+        self.with_partial_gui()
+        self.ui["native_document"]["sha256"] = "e" * 64
+        self.reject("GUI native document hash")
+
+    def test_changed_shared_c_geometry_fails_even_if_other_records_agree(self):
+        self.with_six()
+        asset = next(v for v in self.manifest["assets"] if v["family"] == "maya" and v["kind"] == "svg")
+        target = self.base / asset["path"]
+        data = target.read_bytes().replace(b'M1 1H4', b'M1 1H5')
+        target.write_bytes(data)
+        digest = hashlib.sha256(data).hexdigest()
+        asset["sha256"] = digest
+        key = asset["producer"]["receipt_key"]
+        next(v for v in self.manifest["mcp_receipts"] if v["key"] == key)["output_sha256"] = digest
+        call = next(v for v in self.ledger["calls"] if v["key"] == key)
+        call["artifact_sha256"] = call["response"]["context"]["sha256"] = digest
+        next(v for v in self.family_qa["families"][0]["checks"] if v["path"] == asset["path"])["sha256"] = digest
+        self.reject("corrected C geometry differs")
 
 
 if __name__ == "__main__":

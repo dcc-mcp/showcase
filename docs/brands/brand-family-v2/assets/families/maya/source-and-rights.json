@@ -1,0 +1,37 @@
+{
+  "family": "maya",
+  "display_name": "Maya",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-maya",
+    "source_commit": "739f0fdbd2dca6450724ac3a3dc21c14b53e468e",
+    "source_path": "docs/assets/dcc-mcp-maya.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-maya/739f0fdbd2dca6450724ac3a3dc21c14b53e468e/docs/assets/dcc-mcp-maya.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-maya/docs/assets/dcc-mcp-maya.svg",
+    "sha256": "ae477951dadf9fabc0d97e3d2450caa9e9a1110f7175a82dffdc386934649fc3",
+    "bytes": 1514188,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#007088",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#007088",
+    "dark": "#549FAF",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "triangular-wireframe-mesh",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Autodesk Maya identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Autodesk Maya software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

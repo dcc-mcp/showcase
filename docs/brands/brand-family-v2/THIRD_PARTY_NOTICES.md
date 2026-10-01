@@ -8,16 +8,20 @@ wordmark fonts. Outlining is performed by the actual Inkscape software.
 Vendor names and marks remain with their owners. The captured
 `evidence/family-policy-plan.json` partitions project geometry, references,
 fonts and potential GIMP-derived artwork. Its 37 descriptions are plans;
-they do not claim permission for protected vendor logos or completed artwork.
+the actual completed subset is identified exclusively in `manifest.json`.
+They do not claim permission for protected vendor logos.
 Default planned treatments use independent workflow geometry and separate
 referential compatibility typography. No permission is inferred from a
 software repository's MIT/GPL license.
 
-The collected official GIMP reference in `evidence/policy-reference/` is by
-Aryeom Han, sourced from GIMP's official current artwork, under CC BY-SA 4.0.
-Any future derived GIMP lockup requires the same license, attribution, source
-and change notice, and editable derivative. It is not part of the MIT-only
-actual corrected core outputs in the initial snapshot.
+The collected official GIMP reference in the private
+`evidence/policy-reference/` working directory is by Aryeom Han, under
+CC BY-SA 4.0. This reference and other vendor reference rasters, embedded-
+image SVGs and analysis images are excluded from public delivery. The GIMP
+family uses original brush geometry without official Wilber artwork.
+Any future derivative of official GIMP artwork requires the same license,
+attribution, source, change notice and editable derivative. No such
+derivative is included in the current actual subset.
 
 Inkscape, Core, CLI/gateway and the adapter are separately installed tools.
 Their software binaries are not bundled. The public adapter source is at

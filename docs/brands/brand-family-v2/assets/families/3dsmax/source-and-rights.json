@@ -1,0 +1,37 @@
+{
+  "family": "3dsmax",
+  "display_name": "3ds Max",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-3dsmax",
+    "source_commit": "4ab2998e4f0241809c5880074134b54f40d2c3d9",
+    "source_path": "docs/assets/dcc-mcp-3dsmax.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-3dsmax/4ab2998e4f0241809c5880074134b54f40d2c3d9/docs/assets/dcc-mcp-3dsmax.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-3dsmax/docs/assets/dcc-mcp-3dsmax.svg",
+    "sha256": "aa8f5ce16c0913212b064d261247a571b08803a14fdcbae0479b66975b1c7141",
+    "bytes": 1450223,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#088898",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#088898",
+    "dark": "#5AAFBA",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "mesh-and-modifier-stack",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Autodesk 3ds Max identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Autodesk 3ds Max software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

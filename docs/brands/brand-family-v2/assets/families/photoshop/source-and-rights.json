@@ -1,0 +1,37 @@
+{
+  "family": "photoshop",
+  "display_name": "Photoshop",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-photoshop",
+    "source_commit": "6d6b001fc3eacc35d8d7749123f393e7b47fc70c",
+    "source_path": "docs/assets/dcc-mcp-photoshop.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-photoshop/6d6b001fc3eacc35d8d7749123f393e7b47fc70c/docs/assets/dcc-mcp-photoshop.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-photoshop/docs/assets/dcc-mcp-photoshop.svg",
+    "sha256": "0cbccddd4d289474694a31b45cd89a5ef3a30078a4fa3f3596892f7946e78fd9",
+    "bytes": 1791973,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#0098E8",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#0098E8",
+    "dark": "#54BAF0",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "raster-layers-and-brush",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Adobe Photoshop identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Adobe Photoshop software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

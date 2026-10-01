@@ -1,0 +1,2270 @@
+{
+  "schema_version": 1,
+  "status": "publishable_policy_and_production_plan_not_final_artwork_acceptance",
+  "generated_at_utc": "2026-10-01T11:45:30.231738+00:00",
+  "inventory_source": {
+    "path": "family-inventory/inventory.json",
+    "sha256": "f50dfa96aeda659d8fa0547923319d48708d7f771759c6963a5d411085a0e5bf",
+    "family_count": 37,
+    "software_integrations": 33,
+    "primary_sources_all_contain_raster": true
+  },
+  "scope": "Plan only. No old frozen archive/evidence, root C plans, native session, or gallery website was changed by this task.",
+  "decision_rule": "Use an official vendor component only when its actual source and relevant reuse terms are verified. Otherwise use accurate separate compatibility typography with original generic workflow geometry drawn through MCP. Preserve observed semantics; do not invent or trace missing vendor icons.",
+  "common_native_workflow": {
+    "shared_master_owner": "parent task",
+    "authoring_and_exports": "DCC-MCP typed operations in the actual Inkscape host; every created document/export requires its own execution receipt.",
+    "source_copying_rule": "Historical SVG containers are references, not editable-vector proof. New SVGs must contain actual vector objects and no bitmap logo embedding.",
+    "font_scope": "Use the case Montserrat assets only with their existing OFL notices if distributed; no vendor-proprietary typography is reused.",
+    "publication_scope": "Gallery may describe a unified restoration with vendor-sensitive adaptations, not an exact reproduction where a protected badge is replaced.",
+    "review_requirements": [
+      "Shared C curvature and spacing match the parent-approved v2 master.",
+      "Each family retains its listed actual workflow semantics and product referential label.",
+      "Partial GUI previews are not treated as full asset acceptance.",
+      "Per-file notices/overrides are carried into the new manifest and archive."
+    ],
+    "tiny_icon_scope": "Fine workflow accessories are optically simplified rather than scaling every detail."
+  },
+  "vendor_policy_groups": {
+    "adobe": {
+      "owner": "Adobe",
+      "primary_urls": [
+        "https://www.adobe.com/legal/permissions/trademarks.html"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "vendor_logo_specific_authorization_required",
+      "finding": "Prior written license or equivalent authorization is required to incorporate Adobe product logos or icon designs into a third-party product/company/app mark.",
+      "conditions": [
+        "Use accurate for-use-with wording and generic product descriptors.",
+        "DCC-MCP identity remains more prominent.",
+        "Include Adobe trademark attribution and avoid implied endorsement."
+      ],
+      "verification_gaps": []
+    },
+    "autodesk": {
+      "owner": "Autodesk",
+      "primary_urls": [
+        "https://www.autodesk.com/company/legal-notices-trademarks/trademarks/guidelines-for-use"
+      ],
+      "evidence_scope": "official_primary_policy_read_by_parallel_agent",
+      "status": "vendor_logo_specific_authorization_required",
+      "finding": "Referential compatibility phrases have conditions; product icons and logos require prior permission under a specific agreement.",
+      "conditions": [
+        "Use a separate for / for use with / compatible with phrase.",
+        "Keep the project name more prominent.",
+        "Include the vendor trademark and non-affiliation footer."
+      ],
+      "verification_gaps": []
+    },
+    "maxon": {
+      "owner": "Maxon",
+      "primary_urls": [
+        "https://www.maxon.net/en/legal"
+      ],
+      "evidence_scope": "official_primary_policy_read_by_parallel_agent",
+      "status": "specific_plugin_brand_permission_not_established",
+      "finding": "Website graphics remain protected and reuse requires contacting the website owner; no public permission to rebuild or incorporate ZBrush/Cinema 4D glyphs into this plugin brand was established.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "derivative": {
+      "owner": "Derivative",
+      "primary_urls": [
+        "https://derivative.ca/brand-guidelines-and-assets"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "program_icon_in_third_party_brand_prohibited",
+      "finding": "Official TouchDesigner program icons cannot be modified or incorporated into third-party plugin/product branding.",
+      "conditions": [
+        "Use a separate referential phrase such as integrates with TouchDesigner.",
+        "Use an independent operator-network motif; the name is less prominent than DCC-MCP."
+      ],
+      "verification_gaps": []
+    },
+    "sidefx": {
+      "owner": "SideFX",
+      "primary_urls": [
+        "https://www.sidefx.com/company/press/",
+        "https://media.sidefx.com/uploads/company/press/logos/sidefx_logo_usage_guidelines_may2024.pdf"
+      ],
+      "evidence_scope": "official_primary_policy_read_by_parallel_agent",
+      "status": "press_partner_art_scope_not_plugin_brand_grant",
+      "finding": "Press/partner assets and supplied-wordmark rules do not establish permission to recreate a Houdini swirl or combine it with a plugin brand.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "foundry": {
+      "owner": "Foundry",
+      "primary_urls": [
+        "https://www.foundry.com/web-terms-of-use"
+      ],
+      "evidence_scope": "official_primary_policy_read_by_parallel_agent",
+      "status": "website_terms_no_branding_license",
+      "finding": "The March 2026 web terms protect Branding and do not grant a Branding license; personal website-content permissions are not a public plugin-logo grant.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "audiokinetic": {
+      "owner": "Audiokinetic",
+      "primary_urls": [
+        "https://www.audiokinetic.com/en/trademarks",
+        "https://www.audiokinetic.com/en/register-plugin/"
+      ],
+      "evidence_scope": "official_primary_endpoints_checked_by_parallel_agent",
+      "status": "full_policy_body_not_verified",
+      "finding": "Official trademark/plugin policy endpoints were found; exact logo-use terms could not be verified.",
+      "conditions": [],
+      "verification_gaps": [
+        "Body fetch returned 403 or empty 202 challenge.",
+        "No approval is inferred from a repository logo or a press download."
+      ]
+    },
+    "vicon": {
+      "owner": "Vicon",
+      "primary_urls": [
+        "https://www.vicon.com/terms-and-conditions/"
+      ],
+      "evidence_scope": "official_primary_policy_read_by_parallel_agent",
+      "status": "plugin_brand_permission_not_established",
+      "finding": "Website terms allow limited noncommercial use, restrict standalone graphics/modification, and grant no additional IP rights.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "blender": {
+      "owner": "Blender Foundation",
+      "primary_urls": [
+        "https://www.blender.org/about/logo/",
+        "https://www.blender.org/news/reinforcing-the-blender-trademark-guidelines/"
+      ],
+      "evidence_scope": "official_primary_search_index_content_checked",
+      "status": "credit_or_secondary_brand_not_own_logo",
+      "finding": "The logo is a separate trademark outside GPL and must not serve as the third-party project logo.",
+      "conditions": [
+        "Reference Blender separately and keep DCC-MCP prominent.",
+        "A separately presented credit mark, if later used, must follow the official unchanged-art rules."
+      ],
+      "verification_gaps": [
+        "Direct logo-page open returned 402; the same official page content was available in the search index."
+      ]
+    },
+    "godot": {
+      "owner": "Godot Engine",
+      "primary_urls": [
+        "https://godotengine.org/press/"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "cc_by_4_logo_with_separate_identity_conditions",
+      "finding": "The logo artwork is CC BY 4.0, but the press policy says it must represent Godot rather than the third-party project.",
+      "conditions": [
+        "Preserve aspect ratio and attribution if used separately.",
+        "Do not imply Godot developers endorse this project.",
+        "No combined-logo integration permission is inferred."
+      ],
+      "verification_gaps": []
+    },
+    "unity": {
+      "owner": "Unity Technologies",
+      "primary_urls": [
+        "https://unity.com/legal/branding-trademarks"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "restricted_logo_uses_not_combined_brand_grant",
+      "finding": "Official Unity logos must remain unmodified and clearly separate; permitted logo uses and attribution are restricted.",
+      "conditions": [
+        "Use an accurate compatibility phrase and required attribution.",
+        "Do not combine/imitate the cube mark as this project identity."
+      ],
+      "verification_gaps": []
+    },
+    "epic": {
+      "owner": "Epic Games",
+      "primary_urls": [
+        "https://www.unrealengine.com/en-US/branding",
+        "https://brand.epicgames.com/unreal-engine"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "specific_logo_license_not_verified",
+      "finding": "The current branding route leads to the Epic brand portal; this collection has no executed trademark-license agreement.",
+      "conditions": [],
+      "verification_gaps": [
+        "Brand portal fetch was inaccessible.",
+        "No permission to redraw the Unreal U glyph or merge it into DCC-MCP is established."
+      ]
+    },
+    "openusd": {
+      "owner": "OpenUSD / Pixar / Alliance for OpenUSD",
+      "primary_urls": [
+        "https://raw.githubusercontent.com/PixarAnimationStudios/OpenUSD/release/LICENSE.txt",
+        "https://openusd.org/release/intro.html"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "software_license_excludes_trademark_grant",
+      "finding": "TOST 1.0 section 6 does not grant product-name/trademark permissions beyond required notices.",
+      "conditions": [
+        "Scene composition/layer semantics may inform original workflow geometry.",
+        "Do not trace the official nested-corner USD emblem."
+      ],
+      "verification_gaps": []
+    },
+    "trimble": {
+      "owner": "Trimble / SketchUp",
+      "primary_urls": [
+        "https://www.trimble.com/en/legal/trademark-guidelines",
+        "https://www.trimble.com/en/legal/terms-and-conditions/terms-of-use"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "no_combination_of_vendor_marks",
+      "finding": "The guidelines do not themselves authorize marks and prohibit combining Trimble marks with third-party trademarks.",
+      "conditions": [
+        "Use accurate referential product wording.",
+        "Do not copy the SketchUp cube glyph or vendor trade dress."
+      ],
+      "verification_gaps": []
+    },
+    "gimp": {
+      "owner": "GIMP project / Aryeom Han",
+      "primary_urls": [
+        "https://www.gimp.org/about/linking.html",
+        "https://gitlab.gnome.org/GNOME/gimp-data/-/raw/main/images/logo/gimp-logo.svg"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "verified_official_art_reuse_with_cc_by_sa_4",
+      "finding": "The official page identifies current Wilber by Aryeom Han and permits reuse/adaptation under CC BY-SA 4.0.",
+      "conditions": [
+        "Use the actually collected current official source, not the historical AI mascot interpretation.",
+        "Attribute Aryeom Han, source URL and CC BY-SA 4.0; mark changes.",
+        "Use CC BY-SA 4.0 for the GIMP derived lockup files and provide editable source.",
+        "Represent a GIMP integration; avoid claims of official GIMP sponsorship."
+      ],
+      "verification_gaps": []
+    },
+    "krita": {
+      "owner": "Krita Foundation",
+      "primary_urls": [
+        "https://krita.org/en/posts/2013/krita-trademark-policy/",
+        "https://krita.org/en/about/press/"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "referential_component_mark_use_with_conditions",
+      "finding": "The policy permits identifying Krita as a distinct software component and compatible products without confusion.",
+      "conditions": [
+        "Krita remains a secondary referential identity.",
+        "A future official-mark use requires the exact current asset and its artwork-license attribution."
+      ],
+      "verification_gaps": [
+        "An official icon file with its specific artwork copyright/license was not collected here; do not trace the old raster badge."
+      ]
+    },
+    "tiled": {
+      "owner": "Tiled / mapeditor",
+      "primary_urls": [
+        "https://raw.githubusercontent.com/mapeditor/tiled/master/COPYING",
+        "https://discourse.mapeditor.org/tos"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "no_specific_plugin_logo_grant_established",
+      "finding": "The software distribution has per-component licenses; site terms do not transfer trademark rights.",
+      "conditions": [
+        "Use independently drawn map/tile workflow geometry."
+      ],
+      "verification_gaps": [
+        "No asset-specific logo or integration-brand permission was established."
+      ]
+    },
+    "material_maker": {
+      "owner": "Material Maker / Rodolphe Suescun and contributors",
+      "primary_urls": [
+        "https://raw.githubusercontent.com/rodzill4/material-maker/master/LICENSE.md",
+        "https://www.materialmaker.org/doc"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "software_mit_not_specific_mark_grant",
+      "finding": "The official repository MIT license covers software/documentation; it is not treated as a blanket product-mark license.",
+      "conditions": [],
+      "verification_gaps": [
+        "No separate mascot/logo integration policy was established."
+      ]
+    },
+    "comfy": {
+      "owner": "Comfy / ComfyUI",
+      "primary_urls": [
+        "https://comfy.org/terms-of-service",
+        "https://raw.githubusercontent.com/Comfy-Org/ComfyUI_frontend/main/LICENSE"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "no_specific_plugin_logo_grant_established",
+      "finding": "The official terms and frontend GPLv3 source do not establish a separate permission for the product glyph in this combined brand.",
+      "conditions": [],
+      "verification_gaps": [
+        "No specific yellow C-mark integration-brand license was established."
+      ]
+    },
+    "marmoset": {
+      "owner": "Marmoset",
+      "primary_urls": [
+        "https://marmoset.co/eula/"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "no_specific_plugin_logo_grant_established",
+      "finding": "The EULA preserves software/library rights and ownership of user-created works; this is not a logo-skull reuse grant.",
+      "conditions": [],
+      "verification_gaps": [
+        "No asset-specific plugin-brand permission for the skull was established."
+      ]
+    },
+    "freecad": {
+      "owner": "FreeCAD Project Association",
+      "primary_urls": [
+        "https://blog.freecad.org/2022/10/12/the-freecad-project-association-now-owns-a-trademark/"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "registered_logo_no_plugin_brand_grant_established",
+      "finding": "The FPA reports registered name/logo rights; no permission to combine the F/gear glyph into this product brand was established.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "openscad": {
+      "owner": "OpenSCAD project",
+      "primary_urls": [
+        "https://openscad.org/about.html",
+        "https://github.com/openscad/openscad/blob/master/COPYING"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "software_license_not_specific_logo_grant",
+      "finding": "The GPL software license is recorded separately from the logo artwork and trademark question.",
+      "conditions": [],
+      "verification_gaps": [
+        "No specific green/yellow CSG-logo integration permission was established."
+      ]
+    },
+    "renderdoc": {
+      "owner": "RenderDoc / Baldur Karlsson and contributors",
+      "primary_urls": [
+        "https://raw.githubusercontent.com/baldurk/renderdoc/v1.x/LICENSE.md"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "software_license_not_specific_logo_grant",
+      "finding": "The official MIT software license was checked; no independent brand/avatar integration permission was established.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "mgear": {
+      "owner": "mGear contributors",
+      "primary_urls": [
+        "https://mgear4.readthedocs.io/en/latest/license.html",
+        "https://github.com/mgear-dev/mgear/blob/master/LICENSE"
+      ],
+      "evidence_scope": "official_primary_policy",
+      "status": "software_mit_not_specific_mark_grant",
+      "finding": "The mGear software MIT grant is not extended to an unverified product-badge trademark grant.",
+      "conditions": [],
+      "verification_gaps": []
+    },
+    "dcc_project": {
+      "owner": "DCC-MCP project",
+      "primary_urls": [
+        "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-core/39c80c5d73cd370cf00560aa43c405c8169528ed/docs/assets/brand/dcc-mcp-logo.png",
+        "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-agent-plugins/cd4cf8ece8ffcc8e53a5b93cb40d957392d2ac2a/plugins/dcc-mcp/assets/logo.png"
+      ],
+      "evidence_scope": "user_authorization_and_actual_project_references",
+      "status": "user_authorized_project_brand_reconstruction",
+      "finding": "The user authorized reconstruction and public case assets for the DCC-MCP project. Original vendor components retain their separate rights.",
+      "conditions": [],
+      "verification_gaps": []
+    }
+  },
+  "family_groups": {
+    "software_integration": 33,
+    "main_brand": 2,
+    "extension": 2
+  },
+  "families": [
+    {
+      "family_id": "maya",
+      "group": "software_integration",
+      "repository": "dcc-mcp-maya",
+      "display_product": "Autodesk Maya",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "compatibility_phrase": "for use with Autodesk Maya software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-maya/739f0fdbd2dca6450724ac3a3dc21c14b53e468e/docs/assets/dcc-mcp-maya.svg",
+        "source_commit": "739f0fdbd2dca6450724ac3a3dc21c14b53e468e",
+        "sha256": "ae477951dadf9fabc0d97e3d2450caa9e9a1110f7175a82dffdc386934649fc3",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-maya/docs/assets/dcc-mcp-maya.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Faceted teal mesh peaks",
+          "Wireframe floor and small cube"
+        ],
+        "workflow_id": "mesh",
+        "reference_accent_semantics": "teal",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Triangulated mesh peaks with a low wireframe floor and one editable vertex handle.",
+        "vendor_graphics_not_to_trace": [
+          "Autodesk Maya glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk Maya identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "3dsmax",
+      "group": "software_integration",
+      "repository": "dcc-mcp-3dsmax",
+      "display_product": "Autodesk 3ds Max",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "compatibility_phrase": "for use with Autodesk 3ds Max software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-3dsmax/4ab2998e4f0241809c5880074134b54f40d2c3d9/docs/assets/dcc-mcp-3dsmax.svg",
+        "source_commit": "4ab2998e4f0241809c5880074134b54f40d2c3d9",
+        "sha256": "aa8f5ce16c0913212b064d261247a571b08803a14fdcbae0479b66975b1c7141",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-3dsmax/docs/assets/dcc-mcp-3dsmax.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Extruded number-like form",
+          "Wireframe floor and small cubes"
+        ],
+        "workflow_id": "mesh",
+        "reference_accent_semantics": "teal",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three wireframe boxes on the source-like mesh floor, with one modeling edge highlighted.",
+        "vendor_graphics_not_to_trace": [
+          "Autodesk numeral/product glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk 3ds Max identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "blender",
+      "group": "software_integration",
+      "repository": "dcc-mcp-blender",
+      "display_product": "Blender",
+      "policy_ids": [
+        "blender"
+      ],
+      "compatibility_phrase": "for use with Blender software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-blender/6adcf294f82c87ee1a4ae450cd9fcc35024d93d2/docs/assets/dcc-mcp-blender.svg",
+        "source_commit": "6adcf294f82c87ee1a4ae450cd9fcc35024d93d2",
+        "sha256": "757fd73505c3c1e1c639aa7ef1124e8737aa5a007524056f5b486ef955f03a01",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-blender/docs/assets/dcc-mcp-blender.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Orange Blender emblem",
+          "Wireframe cube and linked geometry"
+        ],
+        "workflow_id": "mesh",
+        "reference_accent_semantics": "orange",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "One wireframe cube linked to two procedural nodes; retain the source geometry/cube semantics with a small orange edge accent.",
+        "vendor_graphics_not_to_trace": [
+          "Blender emblem"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Blender identifies the referenced software/workflow and remains with Blender Foundation. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "houdini",
+      "group": "software_integration",
+      "repository": "dcc-mcp-houdini",
+      "display_product": "SideFX Houdini",
+      "policy_ids": [
+        "sidefx"
+      ],
+      "compatibility_phrase": "for use with SideFX Houdini software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-houdini/b9ed9dc14be8014ae69dd834d375d5a29006a684/docs/assets/dcc-mcp-houdini.svg",
+        "source_commit": "b9ed9dc14be8014ae69dd834d375d5a29006a684",
+        "sha256": "99b7e5a6639d355ad1ec1e5a74f2a341e5371642d896423a8d2de8d5aae14be8",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-houdini/docs/assets/dcc-mcp-houdini.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Orange swirl",
+          "Procedural wireframe surface and connected points"
+        ],
+        "workflow_id": "nodes",
+        "reference_accent_semantics": "orange",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A three-stage procedural graph feeding a small deformed grid; use original routing, not a swirl silhouette.",
+        "vendor_graphics_not_to_trace": [
+          "Houdini swirl/wordmark"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name SideFX Houdini identifies the referenced software/workflow and remains with SideFX. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "zbrush",
+      "group": "software_integration",
+      "repository": "dcc-mcp-zbrush",
+      "display_product": "Maxon ZBrush",
+      "policy_ids": [
+        "maxon"
+      ],
+      "compatibility_phrase": "for use with Maxon ZBrush software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-zbrush/574b99311d9c61cadeb8f6ce97dce4aeb763b09c/docs/assets/dcc-mcp-zbrush.svg",
+        "source_commit": "574b99311d9c61cadeb8f6ce97dce4aeb763b09c",
+        "sha256": "19184e89769812b31e53a2b4d22debffab41dc5fdc73d3347100376f10066164",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-zbrush/docs/assets/dcc-mcp-zbrush.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Orange action silhouette",
+          "Sculptural mesh and wireframe floor"
+        ],
+        "workflow_id": "sculpt",
+        "reference_accent_semantics": "orange",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A faceted mesh patch and two original sculpt/contour strokes above the low wireframe floor.",
+        "vendor_graphics_not_to_trace": [
+          "ZBrush orange action glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Maxon ZBrush identifies the referenced software/workflow and remains with Maxon. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "photoshop",
+      "group": "software_integration",
+      "repository": "dcc-mcp-photoshop",
+      "display_product": "Adobe Photoshop",
+      "policy_ids": [
+        "adobe"
+      ],
+      "compatibility_phrase": "for use with Adobe Photoshop software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-photoshop/6d6b001fc3eacc35d8d7749123f393e7b47fc70c/docs/assets/dcc-mcp-photoshop.svg",
+        "source_commit": "6d6b001fc3eacc35d8d7749123f393e7b47fc70c",
+        "sha256": "0cbccddd4d289474694a31b45cd89a5ef3a30078a4fa3f3596892f7946e78fd9",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-photoshop/docs/assets/dcc-mcp-photoshop.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Ps lettering",
+          "Stacked image/layer planes"
+        ],
+        "workflow_id": "layers",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three offset layer cards with a short retouch/brush stroke and one selection handle.",
+        "vendor_graphics_not_to_trace": [
+          "Ps icon/badge lettering"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Photoshop identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "mobu",
+      "group": "software_integration",
+      "repository": "dcc-mcp-mobu",
+      "display_product": "Autodesk MotionBuilder",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "compatibility_phrase": "for use with Autodesk MotionBuilder software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-mobu/7f9fb97e260f4d873ad4a78d1fd73f7ded3810aa/docs/assets/dcc-mcp-mobu.svg",
+        "source_commit": "7f9fb97e260f4d873ad4a78d1fd73f7ded3810aa",
+        "sha256": "ae4fa43c7de7507b6678b2905efc2fccb232e9acd121e0ceeb1c4af5d50e1c3f",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-mobu/docs/assets/dcc-mcp-mobu.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Teal motion figure",
+          "Rig joints and wireframe ground"
+        ],
+        "workflow_id": "rig",
+        "reference_accent_semantics": "teal",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A new five-joint motion rig with an arc trail over the original-like capture floor; the pose and proportions are independently drawn.",
+        "vendor_graphics_not_to_trace": [
+          "MotionBuilder vendor mark",
+          "Exact depicted human pose"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk MotionBuilder identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "nuke",
+      "group": "software_integration",
+      "repository": "dcc-mcp-nuke",
+      "display_product": "Foundry Nuke",
+      "policy_ids": [
+        "foundry"
+      ],
+      "compatibility_phrase": "for use with Foundry Nuke software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-nuke/15002542c5c8a3924f250b137eab7e43dce243f3/docs/assets/dcc-mcp-nuke.svg",
+        "source_commit": "15002542c5c8a3924f250b137eab7e43dce243f3",
+        "sha256": "c643d27c235e4992ef5ebd5f446f12c5fa735ec1a7814ee670cead8df32041b6",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-nuke/docs/assets/dcc-mcp-nuke.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Yellow circular Nuke glyph",
+          "Frame-like cards connected across a graph"
+        ],
+        "workflow_id": "compositing",
+        "reference_accent_semantics": "yellow",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three compositing frame nodes entering a distinct merge junction and one output card.",
+        "vendor_graphics_not_to_trace": [
+          "Nuke three-blade/circle icon"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Foundry Nuke identifies the referenced software/workflow and remains with Foundry. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "openusd",
+      "group": "software_integration",
+      "repository": "dcc-mcp-openusd",
+      "display_product": "OpenUSD",
+      "policy_ids": [
+        "openusd"
+      ],
+      "compatibility_phrase": "for OpenUSD workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-openusd/fc0601388a5ce4c6f421d4e3d22983498072f101/docs/assets/dcc-mcp-openusd.svg",
+        "source_commit": "fc0601388a5ce4c6f421d4e3d22983498072f101",
+        "sha256": "fd4808c3902c37d1c1539f04ab5fd2e20d04795b3457076763771be7cbdbf50c",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-openusd/docs/assets/dcc-mcp-openusd.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Blue layered planes",
+          "Scene/cube connector"
+        ],
+        "workflow_id": "layers",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three original offset scene-layer cards composed into one wireframe scene cube.",
+        "vendor_graphics_not_to_trace": [
+          "Official USD nested-corner emblem"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name OpenUSD identifies the referenced software/workflow and remains with OpenUSD / Pixar / Alliance for OpenUSD. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "unreal",
+      "group": "software_integration",
+      "repository": "dcc-mcp-unreal",
+      "display_product": "Unreal Engine",
+      "policy_ids": [
+        "epic"
+      ],
+      "compatibility_phrase": "for use with Unreal Engine software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-unreal/cf25363997c902e7f66b742b00012ea3eb4517f0/docs/assets/dcc-mcp-unreal.svg",
+        "source_commit": "cf25363997c902e7f66b742b00012ea3eb4517f0",
+        "sha256": "902cd62f1e728113b36a586f2abef7784939ae72c7441a478bc1bd1850b5614e",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-unreal/docs/assets/dcc-mcp-unreal.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Unreal U badge",
+          "Small connected scene/engine workflow"
+        ],
+        "workflow_id": "runtime",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "An independently drawn scene cube routed through two runtime/build nodes to an output frame.",
+        "vendor_graphics_not_to_trace": [
+          "Unreal U/circle glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Unreal Engine identifies the referenced software/workflow and remains with Epic Games. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "unity",
+      "group": "software_integration",
+      "repository": "dcc-mcp-unity",
+      "display_product": "Unity",
+      "policy_ids": [
+        "unity"
+      ],
+      "compatibility_phrase": "for use with Unity software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-unity/bddf5dee6b92169a8f61d732bec2a0fd253113ab/docs/assets/dcc-mcp-unity.svg",
+        "source_commit": "bddf5dee6b92169a8f61d732bec2a0fd253113ab",
+        "sha256": "7bf344d45fd06d9929688ddc77b4103a5fe2d25ecc879f110db592aebded2f8d",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-unity/docs/assets/dcc-mcp-unity.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Unity cube badge",
+          "Wireframe scene cubes and nodes"
+        ],
+        "workflow_id": "runtime",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Two original scene cubes plus a compact transform-axis handle connected to an output node.",
+        "vendor_graphics_not_to_trace": [
+          "Unity cube silhouette"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Unity identifies the referenced software/workflow and remains with Unity Technologies. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "substance3d-designer",
+      "group": "software_integration",
+      "repository": "dcc-mcp-substance3d-designer",
+      "display_product": "Adobe Substance 3D Designer",
+      "policy_ids": [
+        "adobe"
+      ],
+      "compatibility_phrase": "for use with Adobe Substance 3D Designer software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-designer/38623dd51721a958b8dc5d2e8957e991908333ac/docs/assets/dcc-mcp-substance3d-designer.svg",
+        "source_commit": "38623dd51721a958b8dc5d2e8957e991908333ac",
+        "sha256": "952a457be3d89fd9ad4255015b537c7c607fc1a7750125fa5cf2a4a9e5d74b02",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-substance3d-designer/docs/assets/dcc-mcp-substance3d-designer.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Ds icons",
+          "Material node chain and sample outputs"
+        ],
+        "workflow_id": "material_graph",
+        "reference_accent_semantics": "green",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A three-node material graph branching into three small output swatches.",
+        "vendor_graphics_not_to_trace": [
+          "Ds icon or official tile design"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Substance 3D Designer identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "substance3d-painter",
+      "group": "software_integration",
+      "repository": "dcc-mcp-substance3d-painter",
+      "display_product": "Adobe Substance 3D Painter",
+      "policy_ids": [
+        "adobe"
+      ],
+      "compatibility_phrase": "for use with Adobe Substance 3D Painter software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-painter/f790936495de731776ab539177acf5c012ec1f6b/docs/assets/dcc-mcp-substance3d-painter.svg",
+        "source_commit": "f790936495de731776ab539177acf5c012ec1f6b",
+        "sha256": "19eff0e74f70629ec671d503261f31395ab7208419072faac0f49592cd17ff05",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-substance3d-painter/docs/assets/dcc-mcp-substance3d-painter.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Pt icon",
+          "Textured sample and layer/output cards"
+        ],
+        "workflow_id": "material_paint",
+        "reference_accent_semantics": "green",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "An independently shaded material sample disc, two layer cards and a short paint stroke.",
+        "vendor_graphics_not_to_trace": [
+          "Pt icon or official tile design"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Substance 3D Painter identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "premiere",
+      "group": "software_integration",
+      "repository": "dcc-mcp-premiere",
+      "display_product": "Adobe Premiere Pro",
+      "policy_ids": [
+        "adobe"
+      ],
+      "compatibility_phrase": "for use with Adobe Premiere Pro software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-premiere/4384270148a1ad4998a59de20d5074351ff63b6f/docs/assets/dcc-mcp-premiere.svg",
+        "source_commit": "4384270148a1ad4998a59de20d5074351ff63b6f",
+        "sha256": "87151aad8547bb377d227b1d59cbe5703dd1405c78fc5742808d8ac10dac6dac",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-premiere/docs/assets/dcc-mcp-premiere.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Pr icon",
+          "Purple multi-track timeline"
+        ],
+        "workflow_id": "timeline",
+        "reference_accent_semantics": "purple",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three timeline clip tracks and a vertical playhead with one original triangular transport pointer.",
+        "vendor_graphics_not_to_trace": [
+          "Pr icon or official tile design"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Premiere Pro identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "aftereffects",
+      "group": "software_integration",
+      "repository": "dcc-mcp-aftereffects",
+      "display_product": "Adobe After Effects",
+      "policy_ids": [
+        "adobe"
+      ],
+      "compatibility_phrase": "for use with Adobe After Effects software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-aftereffects/38a0b2048e4d8df251d143c1fd3dcef40abb9636/docs/assets/dcc-mcp-aftereffects.svg",
+        "source_commit": "38a0b2048e4d8df251d143c1fd3dcef40abb9636",
+        "sha256": "79d1e48e66e6a866021271e3c726dfa4d41fea21d09103f884e677c87e2b3444",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-aftereffects/docs/assets/dcc-mcp-aftereffects.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Ae icon",
+          "Purple composition/keyframe graph"
+        ],
+        "workflow_id": "keyframes",
+        "reference_accent_semantics": "purple",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Two composition layers joined to a keyframe curve with three diamond keys.",
+        "vendor_graphics_not_to_trace": [
+          "Ae icon or official tile design"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe After Effects identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "katana",
+      "group": "software_integration",
+      "repository": "dcc-mcp-katana",
+      "display_product": "Foundry Katana",
+      "policy_ids": [
+        "foundry"
+      ],
+      "compatibility_phrase": "for use with Foundry Katana software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-katana/06e837f7c8158b3cec4a9e086f1d74b88c76f5ae/docs/assets/dcc-mcp-katana.svg",
+        "source_commit": "06e837f7c8158b3cec4a9e086f1d74b88c76f5ae",
+        "sha256": "6574c5be116bb60bef9cd3eb1aa71694d66dbe95dcf5f7b4cbddaf23ac226027",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-katana/docs/assets/dcc-mcp-katana.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Yellow circular Katana glyph",
+          "Hierarchical node graph and diamond output"
+        ],
+        "workflow_id": "lighting",
+        "reference_accent_semantics": "yellow",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A branching lighting graph ending in a small original light-ray fan and a diamond output.",
+        "vendor_graphics_not_to_trace": [
+          "Katana blade/circle icon"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Foundry Katana identifies the referenced software/workflow and remains with Foundry. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "godot",
+      "group": "software_integration",
+      "repository": "dcc-mcp-godot",
+      "display_product": "Godot Engine",
+      "policy_ids": [
+        "godot"
+      ],
+      "compatibility_phrase": "for Godot Engine workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-godot/787780daa67df446dbc972290878094d2dec7846/docs/assets/dcc-mcp-godot.svg",
+        "source_commit": "787780daa67df446dbc972290878094d2dec7846",
+        "sha256": "13300e24d904d9f3e076fbcefd5c7af15e595f5646a66fffa9f469e21ba76d61",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-godot/docs/assets/dcc-mcp-godot.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Blue Godot head badge",
+          "Shared protocol flow without a separate clear workflow accessory"
+        ],
+        "workflow_id": "game_scene",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry.",
+        "fidelity_gap": "The old distinguishing accessory is principally a vendor badge. The proposed workflow symbol is a new semantic interpretation, openly disclosed; it is not an exact restoration of that badge."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A small scene tree feeding a game frame. This is a new workflow interpretation because the non-mark accessory is minimal in the old image.",
+        "vendor_graphics_not_to_trace": [
+          "Godot face silhouette"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Godot Engine identifies the referenced software/workflow and remains with Godot Engine. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "renderdoc",
+      "group": "software_integration",
+      "repository": "dcc-mcp-renderdoc",
+      "display_product": "RenderDoc",
+      "policy_ids": [
+        "renderdoc"
+      ],
+      "compatibility_phrase": "for RenderDoc workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-renderdoc/89ce0a7eaeab185ac768534906bea2f1c1610c4a/docs/assets/dcc-mcp-renderdoc.svg",
+        "source_commit": "89ce0a7eaeab185ac768534906bea2f1c1610c4a",
+        "sha256": "709eaf1f1b08d0746579db95b3da49fdcbb8625542f5f12dcd7eaf8f0c9e17c6",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-renderdoc/docs/assets/dcc-mcp-renderdoc.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Green avatar emblem",
+          "Capture graph, output frames and mesh analysis symbols"
+        ],
+        "workflow_id": "capture",
+        "reference_accent_semantics": "green",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "A frame-capture box feeding mesh and texture inspection cells with one selected sample point.",
+        "vendor_graphics_not_to_trace": [
+          "RenderDoc avatar/profile mark"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name RenderDoc identifies the referenced software/workflow and remains with RenderDoc / Baldur Karlsson and contributors. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "gimp",
+      "group": "software_integration",
+      "repository": "dcc-mcp-gimp",
+      "display_product": "GIMP",
+      "policy_ids": [
+        "gimp"
+      ],
+      "compatibility_phrase": "for GIMP workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-gimp/35c4aff962a71aa6a61853ba2ae3ad8c8b7f49e5/docs/assets/dcc-mcp-gimp.svg",
+        "source_commit": "35c4aff962a71aa6a61853ba2ae3ad8c8b7f49e5",
+        "sha256": "683150ae66390a46bbc1635e41d08acb4b2a5915197f7b22d4e512c701f120bd",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-gimp/docs/assets/dcc-mcp-gimp.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Wilber mascot interpretation",
+          "Layer cards and flowing brush line"
+        ],
+        "workflow_id": "image_edit",
+        "reference_accent_semantics": "neutral",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "licensed_official_vector_secondary_component_and_original_workflow",
+        "drawing_brief": "Use the verified official current Wilber vector as a separately identifiable secondary GIMP component; retain two original layer cards and a brush line.",
+        "vendor_graphics_not_to_trace": [
+          "Historical AI Wilber rendering"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task",
+        "approved_official_source": {
+          "url": "https://gitlab.gnome.org/GNOME/gimp-data/-/raw/main/images/logo/gimp-logo.svg",
+          "collected": true,
+          "path": "brand-family-v2/evidence/policy-reference/gimp-official-current.svg",
+          "bytes": 7666,
+          "sha256": "f16e91ac7ad855e30e5bf7b14eb734ece683ea65c743fb5ccdb7514aa2f549c6",
+          "element_count": 20,
+          "viewbox": "0 0 25.612032 25.612",
+          "raster_embedded": false,
+          "source_mutable_ref_note": "Upstream URL uses main; included bytes are identified by SHA-256."
+        },
+        "source_import_rule": "Import or recreate the actual vector object geometry only via DCC-MCP/Inkscape; preserve aspect ratio and retain a separate editable component. Do not embed the PNG.",
+        "nonblocking_fallback": "If the production tool cannot import the verified Wilber vector faithfully, use two original layer cards and a brush stroke with for GIMP workflows; disclose that mascot was omitted."
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "Derived GIMP family artwork files have a CC BY-SA 4.0 override; the common master remains separately licensed.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": true,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "asset_license_override": "CC-BY-SA-4.0",
+        "required_author_attribution": "Wilber by Aryeom Han; source https://www.gimp.org/about/linking.html and current official SVG; adapted for DCC-MCP.",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "change_notice_required": true,
+        "editable_derivative_source_required": true,
+        "trademark_notice_plan": "Name GIMP identifies the referenced software/workflow and remains with GIMP project / Aryeom Han. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "tiled",
+      "group": "software_integration",
+      "repository": "dcc-mcp-tiled",
+      "display_product": "Tiled",
+      "policy_ids": [
+        "tiled"
+      ],
+      "compatibility_phrase": "for Tiled workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-tiled/8d09626ec71ded0e5cbcfa914189950e4196c341/docs/images/dcc-mcp-tiled.svg",
+        "source_commit": "8d09626ec71ded0e5cbcfa914189950e4196c341",
+        "sha256": "fb6c67689c62b3f1689b3df85fa4cab778e5253ee0b1eebbc6a927ea8b9f2a5e",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-tiled/docs/images/dcc-mcp-tiled.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Purple tile-like badge",
+          "Isometric map/tile planes"
+        ],
+        "workflow_id": "tiles",
+        "reference_accent_semantics": "purple",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three independently drawn isometric tile panels with one selected cell and a routing node.",
+        "vendor_graphics_not_to_trace": [
+          "Unverified Tiled app badge"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Tiled identifies the referenced software/workflow and remains with Tiled / mapeditor. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "krita",
+      "group": "software_integration",
+      "repository": "dcc-mcp-krita",
+      "display_product": "Krita",
+      "policy_ids": [
+        "krita"
+      ],
+      "compatibility_phrase": "for Krita workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-krita/b56af4307655e90fee2521e8c310c3f44452832e/docs/images/dcc-mcp-krita.svg",
+        "source_commit": "b56af4307655e90fee2521e8c310c3f44452832e",
+        "sha256": "bed3c921c411c9ec6e8dae4e2c4d30dfc8060c8999698e158ce313faf206866d",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-krita/docs/images/dcc-mcp-krita.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Color-wheel/brush badge",
+          "Three curved painting strokes"
+        ],
+        "workflow_id": "paint",
+        "reference_accent_semantics": "multicolor",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three original flowing paint strokes and three small color swatches; retain the painting/color semantics without copying the logo circle.",
+        "vendor_graphics_not_to_trace": [
+          "Unverified exact Krita badge artwork"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task",
+        "conditional_official_mark_route": "Policy allows a distinct component reference, but exact official artwork/asset license has not been collected. Use the original brush/swatches plan now; no guessed icon or inferred copyright grant."
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Krita identifies the referenced software/workflow and remains with Krita Foundation. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "material-maker",
+      "group": "software_integration",
+      "repository": "dcc-mcp-material-maker",
+      "display_product": "Material Maker",
+      "policy_ids": [
+        "material_maker"
+      ],
+      "compatibility_phrase": "for Material Maker workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-material-maker/9aa6e1125af27d5714cebb9c51e09982a037ca3c/docs/images/dcc-mcp-material-maker.svg",
+        "source_commit": "9aa6e1125af27d5714cebb9c51e09982a037ca3c",
+        "sha256": "ad8299070e3275a5616bff472bae2af2ef15af03c81806d596f31b7d5c6d8242",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-material-maker/docs/images/dcc-mcp-material-maker.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Purple mascot/orbit badge",
+          "Material/operator node chain"
+        ],
+        "workflow_id": "material_graph",
+        "reference_accent_semantics": "purple",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three original material graph nodes, two output swatches and a small parameter slider.",
+        "vendor_graphics_not_to_trace": [
+          "Unverified Material Maker mascot glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Material Maker identifies the referenced software/workflow and remains with Material Maker / Rodolphe Suescun and contributors. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "comfyui",
+      "group": "software_integration",
+      "repository": "dcc-mcp-comfyui",
+      "display_product": "ComfyUI",
+      "policy_ids": [
+        "comfy"
+      ],
+      "compatibility_phrase": "for ComfyUI workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-comfyui/e73c69bbcc5dea954a6fcc9d21c520c532d6080d/docs/assets/dcc-mcp-comfyui.svg",
+        "source_commit": "e73c69bbcc5dea954a6fcc9d21c520c532d6080d",
+        "sha256": "36d204bf3f421c4d3cd5b2d9db26e1b60ec537900080ea29ae01f4ae8ad94bb1",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-comfyui/docs/assets/dcc-mcp-comfyui.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Yellow C badge",
+          "Node workflow with branch/output cards"
+        ],
+        "workflow_id": "image_graph",
+        "reference_accent_semantics": "yellow",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "An independently drawn branched node graph with two image-output cards and one muted yellow processing node.",
+        "vendor_graphics_not_to_trace": [
+          "ComfyUI yellow C-mark"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name ComfyUI identifies the referenced software/workflow and remains with Comfy / ComfyUI. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "touchdesigner",
+      "group": "software_integration",
+      "repository": "dcc-mcp-touchdesigner",
+      "display_product": "TouchDesigner",
+      "policy_ids": [
+        "derivative"
+      ],
+      "compatibility_phrase": "integrates with TouchDesigner",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-touchdesigner/c99151370e7c66565d9dc1d0f00d8af1929ece13/docs/assets/dcc-mcp-touchdesigner.svg",
+        "source_commit": "c99151370e7c66565d9dc1d0f00d8af1929ece13",
+        "sha256": "d281572f6bc68155e40dcd250287340043786228c50bc772a085232763f3e396",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-touchdesigner/docs/assets/dcc-mcp-touchdesigner.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Original operator/network nodes",
+          "Separate integrates-with wording"
+        ],
+        "workflow_id": "operators",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Preserve the original independent three-operator network and flowing route; keep a distinct integrates with TouchDesigner phrase.",
+        "vendor_graphics_not_to_trace": [
+          "TouchDesigner official program icon"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name TouchDesigner identifies the referenced software/workflow and remains with Derivative. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "marmoset",
+      "group": "software_integration",
+      "repository": "dcc-mcp-marmoset",
+      "display_product": "Marmoset Toolbag",
+      "policy_ids": [
+        "marmoset"
+      ],
+      "compatibility_phrase": "for Marmoset Toolbag workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-marmoset/8e26aee4625fb03de0e2826372ce6cfa3250d70e/docs/assets/dcc-mcp-marmoset.svg",
+        "source_commit": "8e26aee4625fb03de0e2826372ce6cfa3250d70e",
+        "sha256": "b93da973c96c40b7d66b42346163b6bbb9ce59832375dc2c762371eb59c1485f",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-marmoset/docs/assets/dcc-mcp-marmoset.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Pink skull badge",
+          "Material sphere and bake/render swatches"
+        ],
+        "workflow_id": "lookdev",
+        "reference_accent_semantics": "pink",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "An independently shaded sample disc feeding three bake/output swatches and one light handle.",
+        "vendor_graphics_not_to_trace": [
+          "Marmoset skull"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Marmoset Toolbag identifies the referenced software/workflow and remains with Marmoset. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "wwise",
+      "group": "software_integration",
+      "repository": "dcc-mcp-wwise",
+      "display_product": "Audiokinetic Wwise",
+      "policy_ids": [
+        "audiokinetic"
+      ],
+      "compatibility_phrase": "for use with Audiokinetic Wwise software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-wwise/948c0692a2bf7c86befddec9919ab7292dce2274/docs/assets/dcc-mcp-wwise.svg",
+        "source_commit": "948c0692a2bf7c86befddec9919ab7292dce2274",
+        "sha256": "b002020a60c33296917a91cdb60d6d7b4b30edef050eee2964edab531ef7d584",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-wwise/docs/assets/dcc-mcp-wwise.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Audio waveform row",
+          "Small routing/event nodes"
+        ],
+        "workflow_id": "audio",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Preserve a compact audio waveform rhythm and connect it to two original event-bus nodes.",
+        "vendor_graphics_not_to_trace": [
+          "Wwise or Audiokinetic vendor glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Audiokinetic Wwise identifies the referenced software/workflow and remains with Audiokinetic. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "freecad",
+      "group": "software_integration",
+      "repository": "dcc-mcp-freecad",
+      "display_product": "FreeCAD",
+      "policy_ids": [
+        "freecad"
+      ],
+      "compatibility_phrase": "for FreeCAD workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-freecad/84bc9c93f447403451857f939b77fcaf076e861f/docs/assets/dcc-mcp-freecad.svg",
+        "source_commit": "84bc9c93f447403451857f939b77fcaf076e861f",
+        "sha256": "5dea992aff3504e4d13762c0dcc1d7e1c327ed54e638e0b4cfb739acbbbaab91",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-freecad/docs/assets/dcc-mcp-freecad.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "F/gear icon",
+          "Sketch axes and a wireframe solid"
+        ],
+        "workflow_id": "cad",
+        "reference_accent_semantics": "red_blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Two original sketch axes, a dimension span, and one extruded wireframe box.",
+        "vendor_graphics_not_to_trace": [
+          "FreeCAD F/gear glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name FreeCAD identifies the referenced software/workflow and remains with FreeCAD Project Association. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "cinema4d",
+      "group": "software_integration",
+      "repository": "dcc-mcp-cinema4d",
+      "display_product": "Maxon Cinema 4D",
+      "policy_ids": [
+        "maxon"
+      ],
+      "compatibility_phrase": "for use with Maxon Cinema 4D software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-cinema4d/18c38e3df3e08e72f674614a9e0af6d62247e08c/docs/assets/dcc-mcp-cinema4d.svg",
+        "source_commit": "18c38e3df3e08e72f674614a9e0af6d62247e08c",
+        "sha256": "cc39c9e85b904384f86003a57f32c0971e336d4b0336672666d0ce826e8f0b9a",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-cinema4d/docs/assets/dcc-mcp-cinema4d.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Cinema 4D orb badge",
+          "Blue cube chain and curved routing"
+        ],
+        "workflow_id": "motion_graphics",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Preserve a three-cube motion-graphics chain and its original-like flowing connector; no orb outline.",
+        "vendor_graphics_not_to_trace": [
+          "Cinema 4D orb"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Maxon Cinema 4D identifies the referenced software/workflow and remains with Maxon. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "sketchup",
+      "group": "software_integration",
+      "repository": "dcc-mcp-sketchup",
+      "display_product": "SketchUp",
+      "policy_ids": [
+        "trimble"
+      ],
+      "compatibility_phrase": "for SketchUp workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-sketchup/15bc231a89069e500d2261dc5b2996ca0c886b36/docs/assets/dcc-mcp-sketchup.svg",
+        "source_commit": "15bc231a89069e500d2261dc5b2996ca0c886b36",
+        "sha256": "a547efcc379a714fbc22aadb36abda7ce497af4c5ace481cd01a00ade2f3b02c",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-sketchup/docs/assets/dcc-mcp-sketchup.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "SketchUp cube badge",
+          "Architectural wireframe volumes and vertical dimension"
+        ],
+        "workflow_id": "architecture",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Two original architectural volumes, an extrusion arrow and a single dimension guide.",
+        "vendor_graphics_not_to_trace": [
+          "SketchUp nested cube glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name SketchUp identifies the referenced software/workflow and remains with Trimble / SketchUp. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "openscad",
+      "group": "software_integration",
+      "repository": "dcc-mcp-openscad",
+      "display_product": "OpenSCAD",
+      "policy_ids": [
+        "openscad"
+      ],
+      "compatibility_phrase": "for OpenSCAD workflows",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-openscad/3ed0c620e6aa2f3ae484b4cb3613f3fe8290ceff/docs/assets/dcc-mcp-openscad.svg",
+        "source_commit": "3ed0c620e6aa2f3ae484b4cb3613f3fe8290ceff",
+        "sha256": "86a96191528909852654743850451bb7fe14baccfc3395d1720fc4ab7ce57d28",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-openscad/docs/assets/dcc-mcp-openscad.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Green/yellow CSG form",
+          "Orange wireframe box and route"
+        ],
+        "workflow_id": "csg",
+        "reference_accent_semantics": "orange",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Use a wireframe box and an independently drawn subtraction/cutout operation node; preserve the source CAD operation semantics.",
+        "vendor_graphics_not_to_trace": [
+          "Exact OpenSCAD CSG-logo silhouette"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name OpenSCAD identifies the referenced software/workflow and remains with OpenSCAD project. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "illustrator",
+      "group": "software_integration",
+      "repository": "dcc-mcp-illustrator",
+      "display_product": "Adobe Illustrator",
+      "policy_ids": [
+        "adobe"
+      ],
+      "compatibility_phrase": "for use with Adobe Illustrator software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-illustrator/f2b239cae680d751aa72513bf976ae15a3d1b139/docs/assets/dcc-mcp-illustrator.svg",
+        "source_commit": "f2b239cae680d751aa72513bf976ae15a3d1b139",
+        "sha256": "6fb4328bdf356664d867bf29814f18ddafac3e5f700c11e0f6cf121b605920e9",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-illustrator/docs/assets/dcc-mcp-illustrator.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Ai official icon layered over raster DCC mark",
+          "Orange Bezier curve with editable handles"
+        ],
+        "workflow_id": "bezier",
+        "reference_accent_semantics": "orange",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Preserve the original independent Bezier segment with three anchors and two control handles.",
+        "vendor_graphics_not_to_trace": [
+          "Ai icon/tile"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Illustrator identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "shogun",
+      "group": "software_integration",
+      "repository": "dcc-mcp-shogun",
+      "display_product": "Vicon Shogun",
+      "policy_ids": [
+        "vicon"
+      ],
+      "compatibility_phrase": "for use with Vicon Shogun software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-shogun/ea7810736f001ef6f6afbe5353358b6e9655c5f3/docs/assets/dcc-mcp-shogun.svg",
+        "source_commit": "ea7810736f001ef6f6afbe5353358b6e9655c5f3",
+        "sha256": "589a7cfde0682d550a342fab9bcdcda79ced7b90722419453cc587fd380c017f",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-shogun/docs/assets/dcc-mcp-shogun.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Vicon wordmark badge",
+          "Motion-capture floor/axes and marker paths"
+        ],
+        "workflow_id": "mocap",
+        "reference_accent_semantics": "orange",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "An original capture floor, four marker points and one motion trail connected to a rig node.",
+        "vendor_graphics_not_to_trace": [
+          "Vicon/Shogun official wordmark"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Vicon Shogun identifies the referenced software/workflow and remains with Vicon. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "core",
+      "group": "main_brand",
+      "repository": "dcc-mcp-core",
+      "display_product": "Core",
+      "policy_ids": [
+        "dcc_project"
+      ],
+      "compatibility_phrase": "Core",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-core/39c80c5d73cd370cf00560aa43c405c8169528ed/docs/assets/brand/dcc-mcp-logo.png",
+        "source_commit": "39c80c5d73cd370cf00560aa43c405c8169528ed",
+        "sha256": "60ff40ea31a8876b606e6dfdbaeb175aa9eb365d07a6defb8bb210bf461473ae",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-core/docs/assets/brand/dcc-mcp-logo.png",
+        "container_format": ".png",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "DCC-MCP main mark",
+          "Protocol curve and nodes"
+        ],
+        "workflow_id": "core",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Reuse the new smooth shared DCC-MCP master, with its native pixel D and protocol nodes; no software accessory.",
+        "vendor_graphics_not_to_trace": [],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      }
+    },
+    {
+      "family_id": "agent-plugins",
+      "group": "main_brand",
+      "repository": "dcc-mcp-agent-plugins",
+      "display_product": "Agent Plugins",
+      "policy_ids": [
+        "dcc_project"
+      ],
+      "compatibility_phrase": "Agent Plugins",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-agent-plugins/cd4cf8ece8ffcc8e53a5b93cb40d957392d2ac2a/plugins/dcc-mcp/assets/logo.png",
+        "source_commit": "cd4cf8ece8ffcc8e53a5b93cb40d957392d2ac2a",
+        "sha256": "d4dd202dfc92a7dae4c58050270fbbaa5a2d90938d917ee4a4a8d27dca632e23",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-agent-plugins/plugins/dcc-mcp/assets/logo.png",
+        "container_format": ".png",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "DCC-MCP main mark",
+          "Four downward connector/port nodes"
+        ],
+        "workflow_id": "plugins",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Preserve four original connector/port nodes beneath the unchanged shared master.",
+        "vendor_graphics_not_to_trace": [],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      }
+    },
+    {
+      "family_id": "shotgrid",
+      "group": "software_integration",
+      "repository": "dcc-mcp-fpt",
+      "display_product": "Autodesk Flow Production Tracking (ShotGrid)",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "compatibility_phrase": "for use with Autodesk Flow Production Tracking (ShotGrid) software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-fpt/39174590c788234cba21bd982a71d11f42955444/docs/assets/dcc-mcp-shotgrid.svg",
+        "source_commit": "39174590c788234cba21bd982a71d11f42955444",
+        "sha256": "8f8c2dfc603ebd5a048deb4602f80b4bb2638b0155123f880cab7abfbd76c718",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-fpt/docs/assets/dcc-mcp-shotgrid.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "ShotGrid footer",
+          "Shot/media cards, connectors and globe-like output"
+        ],
+        "workflow_id": "production_tracking",
+        "reference_accent_semantics": "blue",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Three original shot cards with a review/check node and a delivery arrow; retain the source ShotGrid workflow semantics.",
+        "vendor_graphics_not_to_trace": [
+          "Autodesk Flow/ShotGrid glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk Flow Production Tracking (ShotGrid) identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      }
+    },
+    {
+      "family_id": "cache-inspector",
+      "group": "extension",
+      "repository": "dcc-mcp-cache-inspector",
+      "display_product": "Cache Inspector",
+      "policy_ids": [
+        "dcc_project"
+      ],
+      "compatibility_phrase": "Cache Inspector",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-cache-inspector/a5af985fdd5c2079a974a278514fcc6831ba91ba/docs/assets/dcc-mcp-cache-inspector.svg",
+        "source_commit": "a5af985fdd5c2079a974a278514fcc6831ba91ba",
+        "sha256": "66412ef6e9b6c7b944f320d30dbf040d203c7c08ce25a37b127794fb45001380",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-cache-inspector/docs/assets/dcc-mcp-cache-inspector.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Data card",
+          "Check circle and small metric bars"
+        ],
+        "workflow_id": "inspection",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Preserve an original cache/data card, a check circle and three compact metric bars.",
+        "vendor_graphics_not_to_trace": [],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      }
+    },
+    {
+      "family_id": "maya-mgear",
+      "group": "extension",
+      "repository": "dcc-mcp-maya-mgear",
+      "display_product": "mGear in Autodesk Maya",
+      "policy_ids": [
+        "autodesk",
+        "mgear",
+        "dcc_project"
+      ],
+      "compatibility_phrase": "for mGear in Autodesk Maya software",
+      "original_reference": {
+        "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-maya-mgear/19fafba4c4c78e234b6207bafbe2ca4584e40a2d/docs/assets/dcc-mcp-maya-mgear.svg",
+        "source_commit": "19fafba4c4c78e234b6207bafbe2ca4584e40a2d",
+        "sha256": "befe86ec02611f40e179df716a1829e6a325380e0c0e7e340869a1db57eb1e8f",
+        "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-maya-mgear/docs/assets/dcc-mcp-maya-mgear.svg",
+        "container_format": ".svg",
+        "contains_raster": true,
+        "native_editable_source_established": false
+      },
+      "recognition": {
+        "observed_source_components": [
+          "Mgear-letter badge",
+          "Rig/mesh semantics are mostly carried by the badge"
+        ],
+        "workflow_id": "rigging",
+        "reference_accent_semantics": "cyan",
+        "source_observation": "Actually viewed pinned reference contact sheet; the brief below is a proposed new drawing, not existing geometry.",
+        "fidelity_gap": "The old distinguishing accessory is principally a vendor badge. The proposed workflow symbol is a new semantic interpretation, openly disclosed; it is not an exact restoration of that badge."
+      },
+      "native_vector_plan": {
+        "treatment": "project_owned_shared_master_and_original_workflow_with_referential_typography",
+        "drawing_brief": "Draw a new connected rig-joint motif and a mesh-control handle. This interprets the old rigging badge, rather than claiming an exact non-mark accessory exists.",
+        "vendor_graphics_not_to_trace": [
+          "Mgear vendor-like badge",
+          "Autodesk Maya glyph"
+        ],
+        "shared_mark": "Reuse the parent-owned smooth C master unchanged.",
+        "accessory_placement": "Separate accessory zone derived from the old lower workflow area; keep both C counters and the protocol curve readable.",
+        "secondary_type": "Use case-licensed plain typography, not the vendor wordmark font or icon-letter tile.",
+        "small_size_rule": "Below 48 px use the common pixel-D/protocol icon or one independently authored workflow silhouette; omit fine accessories and the compatibility line.",
+        "requires_new_native_mcp_execution": true,
+        "production_status": "planned_not_executed_by_this_policy_task"
+      },
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      }
+    }
+  ],
+  "license_partition": {
+    "new_project_geometry": "Parent-selected project license applies only to independently authored DCC-MCP objects/motifs.",
+    "gimp_family": "CC-BY-SA-4.0 with Aryeom Han credit, source, changes and editable derivative; no blanket MIT treatment.",
+    "font_files": "Existing SIL Open Font License notices remain separate.",
+    "historical_and_vendor_references": "Unchanged reference assets are not relicensed by this plan; vendor marks retain their rights.",
+    "copyright_vs_trademark": "Artwork/code copyright licenses and product identity/trademark permissions are separate.",
+    "no_vendor_contact_or_permission_fabricated": true
+  },
+  "open_rights_questions_nonblocking": [
+    "Krita specific official artwork/license source has not been collected; the current plan uses original brush geometry.",
+    "Audiokinetic policy body and Epic brand portal could not be fully retrieved; the current plan uses independent workflow geometry.",
+    "Tiled, Material Maker, ComfyUI, RenderDoc, OpenSCAD and Marmoset do not have a specific combined-brand mark grant established here; their software licenses are not used as substitute trademark permission.",
+    "Generic workflow plans for Godot and Maya-mGear are disclosed interpretations because the old distinct accessory is chiefly a badge."
+  ],
+  "execution_claims": {
+    "new_logo_artwork_created_by_this_task": false,
+    "new_mcp_calls": 0,
+    "new_vector_exports": 0,
+    "ai_image_generation_used": false,
+    "vendor_permissions_requested": false,
+    "user_confirmation_required_for_the_fallback_plan": false
+  }
+}

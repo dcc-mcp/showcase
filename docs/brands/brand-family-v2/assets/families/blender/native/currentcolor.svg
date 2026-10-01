@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1200px"
+   height="560px"
+   viewBox="0.0 0.0 1200.0 560.0"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <g
+     id="shared-master"
+     transform="matrix(1.25 0 0 1.25 45 10)">
+    <g
+       inkscape:groupmode="layer"
+       id="protocol-frame"
+       inkscape:label="01 Protocol hexagon">
+      <path
+         id="protocol-hex"
+         d="M 623,118 L 679,82 Q 687,76 695,82 L 779,133 Q 787,139 787,149 L 785,274 Q 785,282 777,287 L 701,332 Q 691,339 682,333 L 636,306"
+         style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:14;stroke-linejoin:round" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="letterforms"
+       inkscape:label="02 DCC letterforms">
+      <path
+         id="dcc-c1"
+         d="M 531,135 C 493,108 450,111 419,148 C 400.5,170.080645 389,201 373,230 C 351,269.875 328,290 294,296 L 294,316 C 335.28,314.08 365.5008,295.5712 389.970816,270.205696 Q 392.96303,267.103981 395.93216,271.357632 C 419.8016,305.5536 453.44,323.64 488,315 C 508,310 524,301 538,285 L 511,257 C 489,283 460,287 438,263 C 416,239 410,209 427,182 C 444,155 477,143 507,162 Z"
+         style="fill:currentColor" />
+      <path
+         id="dcc-d"
+         d="M 192,105 H 274 C 332,105 384,141 392,199 C 386,254 346,312 284,318 H 192 V 264 H 207 V 236 H 177 V 212 H 207 V 180 H 192 Z M 240,146 V 278 H 273 C 317,278 345,248 345,211 C 345,175 315,146 273,146 Z"
+         style="fill:currentColor;fill-rule:evenodd" />
+      <path
+         id="dcc-c2"
+         d="M 669.919290,134.096243 A 100,100 0 1 0 672.778525,297.901699 L 651.030471,267.968071 A 63,63 0 1 1 649.229153,164.770633 Z"
+         style="fill:currentColor" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="pixel-origin"
+       inkscape:label="03 Pixel origin">
+      <rect
+         id="pixel-0"
+         width="20"
+         height="20"
+         x="97"
+         y="197"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-1"
+         width="18"
+         height="18"
+         x="124"
+         y="232"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-2"
+         width="14"
+         height="14"
+         x="156"
+         y="261"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-3"
+         width="27"
+         height="27"
+         x="159"
+         y="233"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-4"
+         width="24"
+         height="24"
+         x="136"
+         y="188"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-5"
+         width="16"
+         height="16"
+         x="134"
+         y="154"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-6"
+         width="13"
+         height="13"
+         x="156"
+         y="134"
+         style="fill:currentColor" />
+      <rect
+         id="pixel-7"
+         width="22"
+         height="22"
+         x="170"
+         y="168"
+         style="fill:currentColor" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="protocol-flow"
+       inkscape:label="04 Protocol curve and nodes">
+      <path
+         id="protocol-flow-line"
+         d="M 294,297 C 341,292 378,269 406,237 C 434,207 447,188 471,188 C 514,188 530,243 553,267 C 567,283 579,291 591,297"
+         style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:3.2" />
+      <circle
+         id="left-node"
+         cy="297"
+         r="6.5"
+         cx="294"
+         style="fill:none;stroke:currentColor;stroke-width:2.5" />
+      <circle
+         id="cross-node"
+         cy="237"
+         r="8"
+         cx="406"
+         style="fill:none;stroke:currentColor;stroke-width:2.5" />
+      <circle
+         id="peak-node"
+         cy="188"
+         r="6.5"
+         cx="471"
+         style="fill:none;stroke:currentColor;stroke-width:2.5" />
+      <circle
+         id="end-node"
+         cy="297"
+         r="6.5"
+         cx="591"
+         style="fill:none;stroke:currentColor;stroke-width:1.5" />
+      <circle
+         id="hex-top"
+         cy="79"
+         r="11"
+         cx="687"
+         style="fill:none;stroke:currentColor;stroke-width:5" />
+      <circle
+         id="hex-right"
+         cy="275"
+         r="11"
+         cx="785"
+         style="fill:none;stroke:currentColor;stroke-width:5" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="mcp-label"
+       inkscape:label="05 Editable MCP label"
+       style="fill:currentColor">
+      <text
+         id="mcp-text"
+         x="603"
+         y="238"
+         style="fill:currentColor;font-family:Montserrat;font-weight:800;font-size:67">MCP</text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="motif-blender"
+     inkscape:label="06 Blender workflow motif">
+    <rect
+       id="motif-blender-1"
+       width="49"
+       rx="4"
+       height="28"
+       x="289"
+       y="442"
+       style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round" />
+    <circle
+       id="motif-blender-2"
+       cy="456"
+       r="8"
+       cx="313.5"
+       style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round" />
+    <path
+       id="motif-blender-3"
+       d="M 338 448 L 359 441 L 359 471 L 338 464 M 367 455 L 408 439 M 367 457 L 408 472"
+       style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round" />
+    <path
+       id="motif-blender-4"
+       d="M 413 450.3333333333333 L 432.0 440 L 451 450.3333333333333 L 451 460.6666666666667 L 432.0 471 L 413 460.6666666666667 Z M 413 450.3333333333333 L 432.0 460.6666666666667 L 451 450.3333333333333 M 432.0 460.6666666666667 L 432.0 471"
+       style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round" />
+    <path
+       id="motif-blender-5"
+       d="M 459 456 C 477 446 493 446 511 456 M 459 462 C 477 452 493 452 511 462"
+       style="fill:none;stroke-linecap:round;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="family-caption"
+     inkscape:label="07 Editable compatibility label"
+     style="fill:currentColor">
+    <text
+       id="family-caption-text"
+       x="600"
+       y="516"
+       style="fill:currentColor;font-family:Montserrat;font-weight:800;text-anchor:middle;font-size:23">for use with Blender software</text>
+    <text
+       id="family-note-text"
+       x="600"
+       y="545"
+       style="fill:currentColor;font-family:Montserrat;font-weight:500;text-anchor:middle;font-size:14">DIGITAL CONTENT CREATION | MODEL CONTEXT PROTOCOL</text>
+  </g>
+</svg>
