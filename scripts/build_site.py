@@ -251,10 +251,156 @@ def cards_markup(cases: list[dict], root: str) -> str:
              esc(case["summary"]), tags, href))
     return "\n".join(cards)
 
+# Verified public endpoints. Keep the project-site slash: the organization site
+# also contains a VitePress route and must not capture collection navigation.
+SITE_URL = "https://dcc-mcp.github.io/showcase/"
+OFFICIAL_URL = "https://dcc-mcp.github.io/"
+GUIDE_URL = "https://dcc-mcp.github.io/zh/agents"
+CORE_URL = "https://github.com/dcc-mcp/dcc-mcp-core"
+ADAPTER_PROJECTS = {
+    "Blender": "https://github.com/dcc-mcp/dcc-mcp-blender",
+    "Houdini": "https://github.com/dcc-mcp/dcc-mcp-houdini",
+    "Substance 3D Designer": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer",
+}
+ENGINEERING_EXTENSIONS = {
+    ".blend", ".sbs", ".sbsar", ".hip", ".hiplc", ".hipnc", ".ma", ".mb",
+    ".max", ".c4d", ".nk", ".psd", ".spp", ".ztl", ".unitypackage", ".zip",
+}
+
+def public_url(path: str = "") -> str:
+    if not path:
+        return SITE_URL
+    has_slash = path.endswith("/")
+    return SITE_URL + safe_rel(path.rstrip("/")) + ("/" if has_slash else "")
+
+def structured_json(value: dict) -> str:
+    # JSON-LD remains data even when a user-supplied title contains </script>.
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace(
+        "<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+
+def seo_tags(title: str, description: str, path: str, cover: dict,
+             root: str, structured: dict) -> str:
+    canonical = public_url(path)
+    rows = [
+        "<title>%s</title>" % esc(title),
+        '<meta name="description" content="%s">' % esc(description),
+        '<meta name="robots" content="index, follow, max-image-preview:large">',
+        '<link rel="canonical" href="%s">' % esc(canonical),
+        '<link rel="sitemap" type="application/xml" href="%s">' % esc(public_url("sitemap.xml")),
+        '<meta property="og:type" content="%s">' % ("article" if path else "website"),
+        '<meta property="og:site_name" content="DCC-MCP Showcase">',
+        '<meta property="og:locale" content="zh_CN">',
+        '<meta property="og:title" content="%s">' % esc(title),
+        '<meta property="og:description" content="%s">' % esc(description),
+        '<meta property="og:url" content="%s">' % esc(canonical),
+        '<meta name="twitter:title" content="%s">' % esc(title),
+        '<meta name="twitter:description" content="%s">' % esc(description),
+    ]
+    image = cover.get("poster", cover["src"])
+    if os.path.splitext(image)[1].lower() in (".jpg", ".jpeg", ".png", ".webp"):
+        image_url = public_url(image)
+        rows.extend([
+            '<meta property="og:image" content="%s">' % esc(image_url),
+            '<meta property="og:image:alt" content="%s">' % esc(cover["alt"]),
+            '<meta name="twitter:card" content="summary_large_image">',
+            '<meta name="twitter:image" content="%s">' % esc(image_url),
+            '<meta name="twitter:image:alt" content="%s">' % esc(cover["alt"]),
+        ])
+        src = resolve_public(root, image)
+        ext = os.path.splitext(image)[1].lower()
+        dims = png_size(src) if ext == ".png" else jpeg_size(src) if ext in (".jpg", ".jpeg") else None
+        if dims:
+            rows.extend(['<meta property="og:image:width" content="%d">' % dims[0],
+                         '<meta property="og:image:height" content="%d">' % dims[1]])
+    else:
+        rows.append('<meta name="twitter:card" content="summary">')
+    rows.append('<script type="application/ld+json">%s</script>' % structured_json(structured))
+    return "\n".join(rows)
+
+def collection_metadata(cases: list[dict]) -> dict:
+    return {
+        "@context": "https://schema.org", "@type": "CollectionPage",
+        "name": "DCC-MCP Showcase · 真实 DCC 作品与可复用流程",
+        "url": SITE_URL, "inLanguage": "zh-CN",
+        "isPartOf": {"@type": "WebSite", "name": "DCC-MCP", "url": OFFICIAL_URL},
+        "mainEntity": {
+            "@type": "ItemList", "numberOfItems": len(cases),
+            "itemListElement": [
+                {"@type": "ListItem", "position": index + 1,
+                 "name": case["title"], "url": public_url("cases/%s/" % case["slug"])}
+                for index, case in enumerate(cases)
+            ],
+        },
+    }
+
+def case_metadata(case: dict) -> dict:
+    return {
+        "@context": "https://schema.org", "@type": "CreativeWork",
+        "name": case["title"], "description": case["summary"],
+        "url": public_url("cases/%s/" % case["slug"]), "inLanguage": "zh-CN",
+        "image": public_url(case["cover"].get("poster", case["cover"]["src"])),
+        "creditText": case["credits"]["author"], "isBasedOn": case["source"]["url"],
+        "isPartOf": {"@type": "CollectionPage", "name": "DCC-MCP Showcase", "url": SITE_URL},
+        "keywords": case["software"] + case["capabilities"],
+    }
+
+def sitemap_text(cases: list[dict]) -> str:
+    urls = [SITE_URL] + [public_url("cases/%s/" % case["slug"]) for case in cases]
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+            "".join("  <url><loc>%s</loc></url>\n" % esc(url) for url in urls) + "</urlset>\n")
+
+def related_projects(case: dict) -> str:
+    projects = [(name + " 适配器", ADAPTER_PROJECTS[name]) for name in case["software"] if name in ADAPTER_PROJECTS]
+    parsed = urlsplit(case["source"]["url"])
+    source_parts = parsed.path.strip("/").split("/")
+    if parsed.netloc == "github.com" and len(source_parts) >= 2 and source_parts[0] == "dcc-mcp":
+        source_repo = "https://github.com/" + "/".join(source_parts[:2])
+        if source_repo not in [url for _, url in projects]:
+            projects.append(("案例源项目", source_repo))
+    projects.extend([("DCC-MCP Core", CORE_URL), ("安装与连接指南", GUIDE_URL)])
+    return "".join('<li><a href="%s">%s <span aria-hidden="true">↗</span></a></li>' %
+                   (esc(resource_url(url)), esc(label)) for label, url in projects)
+
+def engineering_resource(item: dict) -> bool:
+    return os.path.splitext(urlsplit(item["url"]).path)[1].lower() in ENGINEERING_EXTENSIONS
+
+def engineering_section(case: dict, root: str, prefix: str) -> tuple[str, list[dict]]:
+    all_engineering = [item for item in case["resources"] if engineering_resource(item)]
+    local = [item for item in all_engineering if not urlsplit(item["url"]).scheme]
+    chosen = local if local else all_engineering
+    remaining = [item for item in case["resources"] if item not in chosen]
+    if not chosen:
+        return "", remaining
+    rows = []
+    for item in chosen:
+        parsed = urlsplit(item["url"])
+        ext = os.path.splitext(parsed.path)[1].lstrip(".").upper()
+        filename = os.path.basename(parsed.path)
+        url = resource_url(item["url"], prefix)
+        if not parsed.scheme:
+            size = os.path.getsize(resolve_public(root, item["url"]))
+            display_size = "%.1f MiB" % (size / 1048576) if size >= 1048576 else "%.1f KiB" % (size / 1024)
+            meta = ext + " · " + display_size
+            action = "下载工程"
+            download = ' download="%s"' % esc(filename)
+        else:
+            meta = ext + " · 外部源项目"
+            action = "查看源工程"
+            download = ""
+        rows.append('<li class="engineering-file"><div><strong>%s</strong><span>%s</span></div><a href="%s"%s>%s <span aria-hidden="true">↗</span></a></li>' %
+                    (esc(item["label"]), esc(meta), esc(url), download, action))
+    return ('<section class="detail-section" id="downloads"><h2>工程文件</h2>'
+            '<p>选择所需的原生工程。打开前请查看本案例的软件版本、依赖与许可。</p>'
+            '<ul class="engineering-files">%s</ul></section>' % "".join(rows)), remaining
+
 def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
     prefix = "../../"
     nav_sections = [("goal", "创作目标"), ("prompt", "提示词"), ("environment", "软件与工具"),
-                    ("process", "分步过程"), ("results", "成果"), ("evidence", "验证与边界"), ("resources", "资源与许可")]
+                    ("process", "分步过程"), ("results", "成果"), ("evidence", "验证与边界"), ("downloads", "工程文件"), ("resources", "资源与许可")]
+    downloads, general_resources = engineering_section(case, root, prefix)
+    if not downloads:
+        nav_sections = [item for item in nav_sections if item[0] != "downloads"]
     nav = "".join('<a href="#%s">%s</a>' % item for item in nav_sections)
     metadata = "".join("<span>%s</span>" % esc(value) for value in case["software"] + case["capabilities"])
     environment = "".join("<div><dt>%s</dt><dd>%s</dd></div>" % (esc(item["label"]), esc(item["value"])) for item in case["environment"])
@@ -272,17 +418,19 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
         checks.append('<tr><td>%s</td><td><span class="check-result %s">%s</span></td><td>%s</td></tr>' %
                       (esc(item["name"]), css, esc(result_labels.get(result, result)), esc(text_value(item["observed"]))))
     resources = "".join('<li><a href="%s">%s <span aria-hidden="true">↗</span></a></li>' %
-                        (esc(resource_url(item["url"], prefix)), esc(item["label"])) for item in case["resources"])
+                        (esc(resource_url(item["url"], prefix)), esc(item["label"])) for item in general_resources)
     limitations = "".join("<li>%s</li>" % esc(value) for value in case["limitations"])
     prompt_label = "原始提示词" if case["prompt"]["kind"] == "original" else "可复用提示词模板"
     next_link = ('<a href="../%s/">下一个案例：%s <span aria-hidden="true">→</span></a>' % (next_case["slug"], esc(next_case["title"]))) if next_case else ""
     title = esc(case["title"])
+    head = seo_tags(case["title"] + " · " + case["subtitle"] + " | DCC-MCP Showcase",
+                    case["summary"][:220], "cases/%s/" % case["slug"], case["cover"], root, case_metadata(case))
     return """<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>%s · DCC-MCP Showcase</title><meta name="description" content="%s"><meta name="theme-color" content="#101311">
+%s<meta name="theme-color" content="#101311">
 <link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/detail.js" defer></script></head>
 <body><a class="skip-link" href="#goal">跳到案例内容</a>
-<header class="site-header wrap"><a class="brand" href="../../" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a><nav aria-label="主导航"><a href="../../#works">作品合集</a><a href="https://github.com/dcc-mcp/showcase">GitHub <span aria-hidden="true">↗</span></a></nav></header>
+<header class="site-header wrap"><a class="brand" href="../../" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a><nav aria-label="主导航"><a href="../../#works">作品合集</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://dcc-mcp.github.io/zh/agents">开始使用 ↗</a></nav></header>
 <main class="wrap"><a class="detail-back" href="../../#works"><span aria-hidden="true">←</span> 返回作品合集</a>
 <div class="detail-heading"><div class="detail-meta">%s</div><h1>%s</h1><p class="subtitle">%s</p></div>
 <figure class="detail-cover">%s<figcaption>%s</figcaption></figure>
@@ -290,21 +438,34 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
 <div class="detail-layout"><nav class="detail-nav" aria-label="案例目录">%s</nav><div class="detail-content">
 <section class="detail-section" id="goal"><h2>创作目标</h2><p>%s</p><p>%s</p></section>
 <section class="detail-section" id="prompt"><h2>提示词</h2><div class="prompt-label"><strong>%s</strong><button class="copy-button" id="copy-prompt" type="button" hidden>复制提示词</button></div><pre class="prompt" id="reusable-prompt">%s</pre><div class="copy-status" id="copy-status" role="status" aria-live="polite"></div><p class="prompt-note">%s</p></section>
-<section class="detail-section" id="environment"><h2>软件与工具</h2><dl class="environment">%s</dl><ul class="tool-list">%s</ul></section>
+<section class="detail-section" id="environment"><h2>软件与工具</h2><dl class="environment">%s</dl><ul class="tool-list">%s</ul><h3 class="related-heading">适配器与相关项目</h3><p class="prompt-note">安装、兼容性和当前工具能力以项目文档为准；案例的实际环境与执行证据见上述记录。</p><ul class="related-projects">%s</ul></section>
 <section class="detail-section" id="process"><h2>分步过程</h2><ol class="process-list">%s</ol></section>
 <section class="detail-section" id="results"><h2>成果</h2>%s</section>
 <section class="detail-section" id="evidence"><h2>验证与边界</h2><table class="checks"><caption class="notice">检查记录；历史测量与本轮审阅以各行文字为准。</caption><thead><tr><th scope="col">检查</th><th scope="col">结果</th><th scope="col">观测与依据</th></tr></thead><tbody>%s</tbody></table><h3 style="margin-top:26px">证据边界</h3><ul class="limitations">%s</ul><p class="source-line">最近审阅：%s</p></section>
-<section class="detail-section" id="resources"><h2>资源与许可</h2><ul class="resource-links">%s</ul><p class="source-line">来源：<a class="text-link" href="%s">公开源案例</a><br>来源提交：<code>%s</code></p><div class="credit-block"><strong>作者</strong>：%s<br><strong>许可范围</strong>：%s<br>%s</div></section>
+%s
+<section class="detail-section" id="resources"><h2>资源与许可</h2><ul class="resource-links">%s</ul><p class="source-line">来源：<a class="text-link" href="%s">来源与代码</a><br>来源提交：<code>%s</code></p><div class="credit-block"><strong>作者</strong>：%s<br><strong>许可范围</strong>：%s<br>%s</div></section>
 </div></div><div class="detail-footer"><a href="../../#works">← 返回作品合集</a>%s</div></main>
-<footer class="site-footer wrap"><p>DCC-MCP Showcase</p><p>真实软件 · 可查看的过程 · 可追溯的证据</p><a href="https://github.com/dcc-mcp/showcase">参与完善 ↗</a></footer></body></html>
-""" % (title, esc(case["summary"][:220]), metadata, title, esc(case["subtitle"]),
+<footer class="site-footer wrap"><p>DCC-MCP Showcase</p><nav aria-label="页脚导航"><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://github.com/dcc-mcp/dcc-mcp-core">核心项目 ↗</a><a href="https://github.com/dcc-mcp/showcase">合集源码 ↗</a></nav></footer></body></html>
+""" % (head, metadata, title, esc(case["subtitle"]),
        media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]),
        esc(case["evidence_label"]), esc(case["evidence_scope"]), nav, esc(case["goal"]), esc(case["summary"]),
-       prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools,
+       prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools, related_projects(case),
        "".join(steps), "".join(figure(item, root, prefix) for item in case["results"]), "".join(checks),
-       limitations, esc(case["verified_at"]), resources, esc(resource_url(case["source"]["url"])),
+       limitations, esc(case["verified_at"]), downloads, resources, esc(resource_url(case["source"]["url"])),
        esc(case["source"]["commit"]), esc(case["credits"]["author"]), esc(case["credits"]["license"]),
        esc(case["credits"]["note"]), next_link)
+
+def compatibility_pages() -> dict[str, str]:
+    """Only the published Wwise legacy routes are bridged across the Pages mount."""
+    target = "https://dcc-mcp.github.io/examples/wwise"
+    page = """<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wwise 案例已迁移 · DCC-MCP</title><meta name="robots" content="noindex, follow">
+<link rel="canonical" href="%s"><meta http-equiv="refresh" content="0;url=%s"></head>
+<body><main><h1>Wwise 案例已迁移</h1><p><a href="%s">前往 DCC-MCP 官网的 Wwise 案例</a></p>
+<p><a href="%s">返回 DCC-MCP Showcase 作品合集</a></p></main></body></html>
+""" % (esc(target), esc(target), esc(target), esc(SITE_URL))
+    return {"wwise/index.html": page, "wwise.html": page}
 
 def output_path(root: str, out_dir: str) -> str:
     # Prevent --out . or --out docs from deleting source data.
@@ -338,12 +499,19 @@ def build(root: str, out_dir: str) -> tuple[list[str], list[str], list[str]]:
         capabilities = sorted({value for case in cases for value in case["capabilities"]})
         substitutions = {"CASE_COUNT": str(len(cases)), "SOFTWARE_COUNT": str(len(software)),
                          "SOFTWARE_FILTERS": filters(software), "CAPABILITY_FILTERS": filters(capabilities),
-                         "CASE_CARDS": cards_markup(cases, root)}
+                          "CASE_CARDS": cards_markup(cases, root),
+                         "SEO_HEAD": seo_tags(
+                             "DCC-MCP Showcase · 真实 DCC 作品与可复用流程",
+                             "DCC-MCP 官方作品合集：真实 DCC 软件中的建模、程序化材质与跨软件创作，附提示词、步骤、工程资源及验证证据。",
+                             "", cases[0]["cover"], root, collection_metadata(cases))}
         for key, value in substitutions.items():
             template = template.replace("{{%s}}" % key, value)
         if re.search(r"\{\{[A-Z_]+\}\}", template):
             raise ValueError("unresolved homepage template token")
-        pages = {"index.html": template}
+        pages = {"index.html": template,
+                 "sitemap.xml": sitemap_text(cases),
+                 "robots.txt": "User-agent: *\nAllow: /showcase/\nSitemap: " + public_url("sitemap.xml") + "\n"}
+        pages.update(compatibility_pages())
         assets = {"assets/site.css", "assets/gallery.js", "assets/detail.js"}
         for index, case in enumerate(cases):
             if not SLUG.fullmatch(case["slug"]):

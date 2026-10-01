@@ -5,6 +5,12 @@ software versions, evidence boundaries and downloadable source resources.
 
 GitHub Pages destination: [dcc-mcp.github.io/showcase](https://dcc-mcp.github.io/showcase/).
 Deployment is produced from `main` by the repository's existing Pages workflow.
+The collection is part of [the DCC-MCP project](https://dcc-mcp.github.io/),
+with [installation and agent setup](https://dcc-mcp.github.io/zh/agents),
+[Core / Gateway / CLI](https://github.com/dcc-mcp/dcc-mcp-core), and each
+case's software adapter linked from the site. The official site's broader
+[examples](https://dcc-mcp.github.io/examples) remain distinct from the
+collection's downloadable, individually documented case records.
 
 The first collection brings together two published Substance 3D Designer
 studies: a weathered crate with Blender lookdev, and a procedural painted-wood
@@ -56,6 +62,18 @@ Retain authorship and asset licenses. Check images and text for credentials,
 private paths, internal addresses and unrelated content before selecting a
 case. New DCC work must use DCC-MCP; do not present direct host scripts or
 external software automation as an MCP run.
+
+## Native projects and reproduction packages
+
+Case pages link to native scene and material files when available. Keep large
+engineering packages in a release of this repository rather than preloading
+them with the gallery. Each package should include its original authorship,
+asset-specific license, software and plugin requirements, reproduction steps,
+actual MCP call records, a file inventory and SHA-256 checksums. Verify archive
+extraction and references; report whether opening the saved project was tested.
+Do not redistribute commercial libraries merely because a scene references
+them. Keep private execution logs outside the public package and describe any
+redactions in its public evidence record.
 
 ## License
 
