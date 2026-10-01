@@ -1,5 +1,43 @@
 (() => {
 "use strict";
+// Fixed IDs from the official site's former ShowcaseGallery component.
+// Keep existing shared links useful without accepting arbitrary redirect targets.
+const legacyTargets = {
+  "#blender-designer-crate": "cases/crate-lookdev/",
+  "#blender-lookdev": "https://dcc-mcp.github.io/examples#blender-lookdev",
+  "#blender-stylized-red-swings": "https://dcc-mcp.github.io/examples#blender-stylized-red-swings",
+  "#marmoset-lookdev": "https://dcc-mcp.github.io/examples#marmoset-lookdev",
+  "#wwise-audio": "https://dcc-mcp.github.io/examples#wwise-audio",
+  "#houdini-portal": "https://dcc-mcp.github.io/examples#houdini-portal",
+  "#openscad-parametric-pipeline": "https://dcc-mcp.github.io/examples#openscad-parametric-pipeline",
+  "#freecad-game-ready-pipeline": "https://dcc-mcp.github.io/examples#freecad-game-ready-pipeline",
+  "#speedtree-to-unreal-engine": "https://dcc-mcp.github.io/examples#speedtree-to-unreal-engine",
+  "#cinema4d-typed-scene": "https://dcc-mcp.github.io/examples#cinema4d-typed-scene",
+  "#comfyui-typed-workflow": "https://dcc-mcp.github.io/examples#comfyui-typed-workflow",
+  "#illustrator-typed-vector-workflow": "https://dcc-mcp.github.io/examples#illustrator-typed-vector-workflow",
+  "#sketchup-typed-modeling": "https://dcc-mcp.github.io/examples#sketchup-typed-modeling",
+  "#touchdesigner-typed-operator-workflow": "https://dcc-mcp.github.io/examples#touchdesigner-typed-operator-workflow",
+  "#cache-inspection-workflow": "https://dcc-mcp.github.io/examples#cache-inspection-workflow",
+  "#shogun-typed-mocap-workflow": "https://dcc-mcp.github.io/examples#shogun-typed-mocap-workflow",
+  "#tiled-typed-map-workflow": "https://dcc-mcp.github.io/examples#tiled-typed-map-workflow",
+  "#material-maker-typed-material-workflow": "https://dcc-mcp.github.io/examples#material-maker-typed-material-workflow",
+  "#krita-typed-paint-workflow": "https://dcc-mcp.github.io/examples#krita-typed-paint-workflow",
+  "#gimp-typed-image-workflow": "https://dcc-mcp.github.io/examples#gimp-typed-image-workflow",
+  "#katana-typed-lookdev-workflow": "https://dcc-mcp.github.io/examples#katana-typed-lookdev-workflow",
+  "#premiere-typed-edit-workflow": "https://dcc-mcp.github.io/examples#premiere-typed-edit-workflow",
+  "#hunyuan3d": "https://dcc-mcp.github.io/examples#hunyuan3d",
+  "#geospatial-city": "https://dcc-mcp.github.io/examples#geospatial-city",
+  "#maya-architecture": "https://dcc-mcp.github.io/examples#maya-architecture",
+  "#kenney-assets": "https://dcc-mcp.github.io/examples#kenney-assets",
+  "#zbrush-fantasy-dragon": "https://dcc-mcp.github.io/examples#zbrush-fantasy-dragon",
+  "#zbrush-maya-roundtrip": "https://dcc-mcp.github.io/examples#zbrush-maya-roundtrip",
+  "#office-powerpoint-deck": "https://dcc-mcp.github.io/examples#office-powerpoint-deck"
+};
+const legacyTarget = legacyTargets[window.location.hash];
+if (legacyTarget) {
+window.location.replace(new URL(legacyTarget, window.location.href).href);
+return;
+}
 const controls = document.querySelector("#gallery-controls");
 if (!controls) return;
 const cards = Array.from(document.querySelectorAll(".case-card"));

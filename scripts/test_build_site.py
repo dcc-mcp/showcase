@@ -17,6 +17,7 @@ import os
 import struct
 import sys
 import tempfile
+import xml.etree.ElementTree as ET
 import zlib
 from unittest.mock import patch
 
@@ -108,6 +109,10 @@ def integration_guards() -> None:
         case = fixture_case()
         with open(os.path.join(case_dir, "cover.png"), "wb") as fh:
             fh.write(make_png(120, 80))
+        with open(os.path.join(case_dir, "sample.blend"), "wb") as fh:
+            fh.write(b"BLENDER native fixture")
+        case["resources"].append({"label": "Native scene",
+                                  "url": "docs/showcase/sample-case/sample.blend"})
         for name in ("README.md", "validation.json"):
             with open(os.path.join(case_dir, name), "w", encoding="utf-8") as fh:
                 fh.write("{}" if name.endswith(".json") else "# A case")
@@ -118,7 +123,7 @@ def integration_guards() -> None:
             with open(os.path.join(tmp, "assets", name), "w", encoding="utf-8") as fh:
                 fh.write("/* local UI */")
         with open(os.path.join(tmp, "index.html"), "w", encoding="utf-8") as fh:
-            fh.write('<html><a href="cases/sample-case/">Detail</a>{{CASE_COUNT}}{{CASE_CARDS}}</html>')
+            fh.write('<html><head>{{SEO_HEAD}}</head><a href="cases/sample-case/">Detail</a>{{CASE_COUNT}}{{CASE_CARDS}}</html>')
         collection = os.path.join(tmp, "collection.json")
 
         def save():
@@ -143,6 +148,52 @@ def integration_guards() -> None:
             check("prompt HTML is escaped", "&lt;tool&gt;&amp; content" in detail, True)
             check("caption HTML is escaped", "&lt;b&gt;not HTML&lt;/b&gt;" in detail, True)
             check("image dimensions reserve layout space", 'width="120" height="80"' in detail, True)
+            check("case canonical preserves project prefix and trailing slash",
+                  'rel="canonical" href="https://dcc-mcp.github.io/showcase/cases/sample-case/"' in detail, True)
+            check("case share image uses the actual public cover",
+                  'property="og:image" content="https://dcc-mcp.github.io/showcase/docs/showcase/sample-case/cover.png"' in detail, True)
+            check("Twitter preview has accessible real-image description",
+                  'name="twitter:image:alt" content="A &quot;quoted&quot; image"' in detail, True)
+            check("official website is visible in detail navigation",
+                  'href="https://dcc-mcp.github.io/">DCC-MCP 官网' in detail, True)
+            check("current official getting-started guide is linked",
+                  'href="https://dcc-mcp.github.io/zh/agents"' in detail, True)
+            check("native scene has an explicit download link",
+                  'href="../../docs/showcase/sample-case/sample.blend" download="sample.blend"' in detail, True)
+            check("native engineering section is anchored", 'id="downloads"' in detail, True)
+            check("native files are not embedded for automatic loading",
+                  '<source src="../../docs/showcase/sample-case/sample.blend"' in detail or
+                  '<iframe' in detail or 'rel="prefetch"' in detail, False)
+            payload = {"name": "</script><script>alert(1)</script>"}
+            encoded = build_site.structured_json(payload)
+            check("structured data cannot terminate a script element", "</script>" in encoded, False)
+            check("escaped structured data round trips", json.loads(encoded), payload)
+            with open(os.path.join(tmp, "_site", "index.html"), encoding="utf-8") as fh:
+                homepage = fh.read()
+            check("homepage canonical points to the collection, not organization root",
+                  'rel="canonical" href="https://dcc-mcp.github.io/showcase/"' in homepage, True)
+            sitemap = ET.parse(os.path.join(tmp, "_site", "sitemap.xml"))
+            sitemap_urls = [item.text for item in sitemap.findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+            check("sitemap includes exactly the collection and selected detail pages",
+                  sitemap_urls, ["https://dcc-mcp.github.io/showcase/",
+                                 "https://dcc-mcp.github.io/showcase/cases/sample-case/"])
+            for legacy in ("wwise/index.html", "wwise.html"):
+                with open(os.path.join(tmp, "_site", *legacy.split("/")), encoding="utf-8") as fh:
+                    bridge = fh.read()
+                check("known legacy Wwise route bridges to official examples: " + legacy,
+                      'content="0;url=https://dcc-mcp.github.io/examples/wwise"' in bridge and
+                      'content="noindex, follow"' in bridge, True)
+            check("compatibility does not manufacture arbitrary archive routes",
+                  "examples/index.html" in published, False)
+            with open(os.path.join(tmp, "_site", "robots.txt"), encoding="utf-8") as fh:
+                check("robots advertises the project sitemap",
+                      "Sitemap: https://dcc-mcp.github.io/showcase/sitemap.xml" in fh.read(), True)
+            fake_blender = fixture_case()
+            fake_blender["software"] = ["Blender", "Substance 3D Designer"]
+            links = build_site.related_projects(fake_blender)
+            check("verified adapters are associated with their case software",
+                  "https://github.com/dcc-mcp/dcc-mcp-blender" in links and
+                  "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer" in links, True)
             check("video controls are supported", "controls playsinline" in build_site.media_markup(
                 {"src": "docs/showcase/sample-case/demo.mp4", "alt": "demo"}, tmp), True)
             for value in (".", "docs", "../outside", "/tmp/out", "_site/../docs"):

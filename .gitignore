@@ -13,6 +13,7 @@ Thumbs.db
 
 # Site build output — produced by scripts/build_site.py, never committed.
 /_site/
+/_site-brand/
 
 # Python contract/build checks.
 __pycache__/

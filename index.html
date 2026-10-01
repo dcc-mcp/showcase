@@ -3,17 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="DCC-MCP 作品合集：真实软件中的材质、建模与渲染，附提示词、流程、成果和验证证据。">
 <meta name="theme-color" content="#101311">
-<title>DCC-MCP Showcase · 从提示词到真实作品</title>
+{{SEO_HEAD}}
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/gallery.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#works">跳到作品合集</a>
-<header class="site-header wrap"><a class="brand" href="./" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a><nav aria-label="主导航"><a href="#works">作品合集</a><a href="#about">关于证据</a><a href="https://github.com/dcc-mcp/showcase">GitHub <span aria-hidden="true">↗</span></a></nav></header>
+<header class="site-header wrap">
+<a class="brand" href="./" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a>
+<nav aria-label="主导航"><a href="#works">作品合集</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 <span aria-hidden="true">↗</span></a><a href="https://dcc-mcp.github.io/zh/agents">开始使用 <span aria-hidden="true">↗</span></a></nav>
+</header>
 <main class="wrap">
-<section class="hero" aria-labelledby="hero-title"><p class="eyebrow">在真实软件里，把想法做出来</p><h1 id="hero-title">从提示词，<br>到看得见的作品。</h1><p class="hero-intro">用 DCC-MCP 驱动创作。每个案例都附上过程、成果与证据，供你查看、理解和复用。</p><a class="text-link" href="#works">浏览作品 <span aria-hidden="true">↘</span></a></section>
+<section class="hero" aria-labelledby="hero-title">
+<p class="eyebrow">DCC-MCP 作品合集</p>
+<h1 id="hero-title">从提示词，<br>到真实 DCC 作品。</h1>
+<p class="hero-intro">DCC-MCP 连接 AI agent 与真实创作软件。这里记录材质、建模和跨软件流程，每个案例都附过程、证据与资源。</p>
+<a class="text-link" href="#works">浏览作品 <span aria-hidden="true">↘</span></a>
+</section>
+<nav class="project-portal" aria-label="DCC-MCP 项目入口">
+<a href="https://dcc-mcp.github.io/"><strong>DCC-MCP 官网 <span aria-hidden="true">↗</span></strong><span>认识工具链与创作生态</span></a>
+<a href="https://github.com/dcc-mcp/dcc-mcp-core"><strong>核心项目源码 <span aria-hidden="true">↗</span></strong><span>Core、Gateway 与 CLI</span></a>
+<a href="https://dcc-mcp.github.io/zh/agents"><strong>安装与入门 <span aria-hidden="true">↗</span></strong><span>连接你的 agent 与软件</span></a>
+<a href="https://github.com/dcc-mcp/showcase/blob/main/docs/showcase/CONTRACT.md"><strong>参与案例合集 <span aria-hidden="true">↗</span></strong><span>按规范提交作品和证据</span></a>
+</nav>
 <section class="collection" id="works" aria-labelledby="works-title">
 <div class="collection-heading"><h2 id="works-title">作品合集</h2><p>{{CASE_COUNT}} 个案例 <span aria-hidden="true">/</span> {{SOFTWARE_COUNT}} 种软件</p></div>
 <div class="gallery-controls" id="gallery-controls" hidden>
@@ -26,8 +39,13 @@
 <div class="empty-state" id="empty-state" hidden><h3>没有匹配的作品</h3><p>换一个关键词，或清除筛选查看全部案例。</p><button class="primary-button" id="empty-reset" type="button">查看全部作品</button></div>
 <noscript><p class="notice">作品与详情无需 JavaScript 即可查看；启用 JavaScript 后可使用搜索和筛选。</p></noscript>
 </section>
+<section class="project-intro" id="project" aria-labelledby="project-title">
+<h2 id="project-title">DCC-MCP 是什么？</h2>
+<div class="about-columns"><p>DCC-MCP 是连接 AI agent 与数字内容创作软件的开源工具链。Core 提供共享运行时与工具契约，Gateway 负责发现和路由，软件适配器连接真实宿主，Skills 保存可复用的工作流知识。</p><p>跨软件任务可以把建模、材质、导出和渲染串在同一创作流程中。Agent 先发现并了解工具，再验证参数、执行操作和检查结果。具体兼容性、数据转换和可用能力由各适配器及工作流文档说明。</p></div>
+<div class="project-actions"><a class="text-link" href="https://dcc-mcp.github.io/why-dcc-mcp">了解项目设计 <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/dcc-mcp/dcc-mcp-agent-plugins">Agent 插件与 Skills <span aria-hidden="true">↗</span></a></div>
+</section>
 <section class="about" id="about" aria-labelledby="about-title"><h2 id="about-title">好作品，也要有清楚的来路。</h2><div class="about-columns"><p>这里收录通过 DCC-MCP 操作真实 DCC 软件的案例。你可以从成品进入详情，查看目标、提示词、工具、逐步过程和资源。</p><p>每个案例单独说明证据范围。既有公开记录、本轮实际运行、待验证环节都会明确标注。未公开的原始提示词会以注明来源的复用模板呈现。</p></div><a class="text-link" href="https://github.com/dcc-mcp/showcase/blob/main/docs/showcase/CONTRACT.md">查看案例记录规范 <span aria-hidden="true">↗</span></a></section>
 </main>
-<footer class="site-footer wrap"><p>DCC-MCP Showcase</p><p>真实软件 · 可查看的过程 · 可追溯的证据</p><a href="https://github.com/dcc-mcp/showcase">参与完善 <span aria-hidden="true">↗</span></a></footer>
+<footer class="site-footer wrap"><p>DCC-MCP Showcase</p><nav aria-label="页脚导航"><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://github.com/dcc-mcp/dcc-mcp-core">核心项目 ↗</a><a href="https://github.com/dcc-mcp/showcase">合集源码 ↗</a></nav></footer>
 </body>
 </html>
