@@ -64,7 +64,7 @@ class BrandProjection(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(data)
         digest = hashlib.sha256(data).hexdigest()
-        operation = "document_build" if role == "editable" else "document_export"
+        operation = "document_build" if role in ("editable", "editable_outlined") else "document_export"
         asset = {"asset_id": key, "path": rel, "family": family, "theme": theme, "kind": kind, "role": role, "status": "actual", "qa_status": "verified", "license": "MIT", "bytes": len(data), "sha256": digest,
                  "producer": {"application": "Inkscape 1.4.4", "source_commit": self.runtime, "receipt_key": key}, **details}
         self.manifest["assets"].append(asset)
@@ -86,15 +86,22 @@ class BrandProjection(unittest.TestCase):
             files += [("assets/families/" + family + "/source-and-rights.json", data) for family, data in self.source_metadata.items()]
         if hasattr(self, "ui"):
             files += [("evidence/ui.json", self.ui)]
+        if hasattr(self, "core_current_qa"):
+            files += [("evidence/core-current-qa.json", self.core_current_qa)]
+        if hasattr(self, "historical_qa"):
+            files += [("evidence/historical-six-qa.json", self.historical_qa)]
+        if hasattr(self, "family_visual"):
+            files += [("evidence/family-visual.json", self.family_visual)]
         for rel, data in files:
             target = self.base / rel
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(data), encoding="utf-8")
         return brand_manifest.project(self.root, "docs/brands/snapshot/manifest.json")
 
-    def with_six(self):
+    def with_six(self, families=None):
         """Independent fixture encodes the expected shapes, never real files."""
-        self.manifest.update(status="partial_actual_core_and_first_six", generated_utc=self.stamp, family_count=37, actual_family_count=7, actual_asset_count=104)
+        families = families or ("maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop")
+        self.manifest.update(status="partial_actual_core_and_first_six", generated_utc=self.stamp, family_count=37, actual_family_count=1 + len(families), actual_asset_count=8 + 16 * len(families))
         self.manifest["acceptance"].update(family_first_six_file_and_bitmap_qa="verified", family_production="paused_pending_native_birth_race_repair")
         self.manifest["publication"].update(family_qa="evidence/family-qa.json", family_policy="evidence/policy.json")
         core = self.manifest["families"][0]
@@ -103,7 +110,7 @@ class BrandProjection(unittest.TestCase):
         self.policy = {"families": [], "vendor_policy_groups": {"vendor": {"owner": "Original software rights holder"}}}
         self.source_metadata = {}
         source_commit = "c" * 40
-        for family in ("maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop"):
+        for family in families:
             rights = {"third_party_mark_in_final_plan": False, "vendor_mark_permission_inferred_from_repo_mit": False, "affiliation_claimed": False,
                       "trademark_notice_plan": "Software name is referential; no endorsement."}
             phrase = "for use with " + family + " software"
@@ -118,6 +125,8 @@ class BrandProjection(unittest.TestCase):
                                            "third_party_glyphs_embedded": False, "palette": {"vendor_official_palette_claimed": False, "master_palette_changes": False},
                                            "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."}
             for theme in ("light", "dark", "currentcolor"):
+                if family in ("nuke", "openusd") or (family == "mobu" and theme == "currentcolor"):
+                    self.runtime = "f" * 40
                 roles = (("editable", False),) if theme == "currentcolor" else (("editable", False), ("release", False), ("editable", True))
                 for role, optical in roles:
                     label = theme + "-" + role + ("-optical" if optical else "") + ".svg"
@@ -139,7 +148,38 @@ class BrandProjection(unittest.TestCase):
                     check.update(text_count=1 if asset["live_text"] else 0, mode="release" if asset["role"] == "release" else "native_optical" if asset["optical"] else "native")
                 checks.append(check)
             self.family_qa["families"].append({"family": family, "checks": checks, "pass": True})
-        self.manifest["families"] += [{"family_id": "planned-" + str(index), "display_product": "Planned " + str(index), "production_status": "planned_not_executed", "actual_asset_ids": []} for index in range(30)]
+        self.manifest["families"] += [{"family_id": "planned-" + str(index), "display_product": "Planned " + str(index), "production_status": "planned_not_executed", "actual_asset_ids": []} for index in range(36 - len(families))]
+
+    def with_nine(self):
+        self.with_six(("maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop", "mobu", "nuke", "openusd"))
+        self.manifest.update(status="partial_actual_verified_in_progress", actual_asset_count=155)
+        self.manifest["acceptance"].update(family_first_nine_file_and_bitmap_qa="verified", family_production="resumed_after_native_birth_repair")
+        self.manifest["toolchain"].update(runtime_source_commit="f" * 40, public_head_commit="f" * 40)
+        self.manifest["publication"]["core_current_qa"] = "evidence/core-current-qa.json"
+        self.manifest["families"][0].update(production_status="actual_verified_published_themes", currentcolor_release_status="actual_verified")
+        self.core_current_qa = {"scope": "Actual core currentColor file checks; GUI is separate.", "generated_utc": self.stamp, "pass": True, "artwork_written_or_rendered": False, "checks": []}
+        for role in ("editable", "editable_outlined", "release"):
+            text = b'<text>MCP</text>' if role == "editable" else b'<path d="M3 3H5"/>'
+            data = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400"><path id="dcc-c1" d="M1 1H4"/><path id="dcc-c2" d="M7 1H10"/>' + text + b'</svg>'
+            self.add_asset("currentcolor", "svg", role, "currentcolor-" + role + ".svg", data, optical=False, live_text=role == "editable", viewbox=[0, 0, 900, 400])
+            asset = self.manifest["assets"][-1]
+            self.core_current_qa["checks"].append({"path": asset["path"], "bytes": asset["bytes"], "sha256": asset["sha256"], "format": "svg", "text_count": 1 if role == "editable" else 0, "pass": True, "failures": []})
+
+    def with_nine_composites_and_history(self):
+        self.with_nine()
+        self.manifest["publication"].update(historical_family_qa="evidence/historical-six-qa.json", family_visual_evidence="evidence/family-visual.json")
+        self.historical_qa = copy.deepcopy(self.family_qa)
+        self.historical_qa["families"] = self.historical_qa["families"][:6]
+        for label, qa in (("six", self.historical_qa), ("nine", self.family_qa)):
+            qa["composites"] = []
+            for theme in ("light", "dark"):
+                rel = "evidence/family-first-" + label + "-" + theme + "-qa.png"
+                data = png(640, 180 if label == "six" else 240)
+                (self.base / rel).parent.mkdir(exist_ok=True)
+                (self.base / rel).write_bytes(data)
+                qa["composites"].append({"path": rel, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
+        self.family_visual = {"status": "verified_for_current_completed_outputs", "reviewed_utc": self.stamp, "brand_design_acceptance": "awaiting_user_review",
+                              "families": [row["family"] for row in self.family_qa["families"]], "evidence": [{"path": row["path"], "sha256": row["sha256"]} for row in self.family_qa["composites"]]}
 
     def with_partial_gui(self):
         self.manifest["publication"]["ui_evidence"] = "evidence/ui.json"
@@ -475,6 +515,103 @@ class BrandProjection(unittest.TestCase):
         call["artifact_sha256"] = call["response"]["context"]["sha256"] = digest
         next(v for v in self.family_qa["families"][0]["checks"] if v["path"] == asset["path"])["sha256"] = digest
         self.reject("corrected C geometry differs")
+
+    def test_nine_families_and_core_currentcolor_project_155_files(self):
+        self.with_nine()
+        catalog = self.project()
+        self.assertEqual((10, 37, 155), tuple(catalog["progress"][key] for key in ("completed", "total", "assets")))
+        self.assertEqual([11] + [16] * 9, [len(item["variants"]) for item in catalog["items"]])
+        self.assertEqual(27, sum(row["status"] == "planned_not_executed" for row in catalog["progress"]["planned"]))
+        self.assertEqual({"dcc-mcp-mobu-v2", "dcc-mcp-nuke-v2", "dcc-mcp-openusd-v2"}, {item["slug"] for item in catalog["items"][-3:]})
+        self.assertIn("动画骨架与运动轨迹", catalog["items"][-3]["summary"])
+        self.assertIn("合成合并节点图", catalog["items"][-2]["summary"])
+        self.assertIn("场景图层堆栈与基元", catalog["items"][-1]["summary"])
+        core_current = [v for v in catalog["items"][0]["variants"] if "currentcolor" in v["url"]]
+        self.assertEqual(3, len(core_current))
+        self.assertEqual(1, sum("可编辑原生" in v["label"] for v in core_current))
+        self.assertEqual(1, sum("轮廓化原生" in v["label"] for v in core_current))
+
+    def test_item_environment_preserves_each_actual_source_revision(self):
+        self.with_nine()
+        catalog = self.project()
+        core, maya, mobu, nuke = catalog["items"][0], catalog["items"][1], catalog["items"][-3], catalog["items"][-2]
+        env = lambda item: next(row["value"] for row in item["environment"] if "适配器" in row["label"])
+        self.assertIn("7" * 40, env(core))
+        self.assertIn("f" * 40, env(core))
+        self.assertIn("7" * 40, env(maya))
+        self.assertNotIn("f" * 40, env(maya))
+        self.assertIn("7" * 40, env(mobu))
+        self.assertIn("f" * 40, env(mobu))
+        self.assertNotIn("7" * 40, env(nuke))
+        self.assertIn("f" * 40, env(nuke))
+        self.assertTrue(all("制作已恢复" in item["limitations"][-1] for item in catalog["items"][1:]))
+
+    def test_core_currentcolor_file_qa_hash_is_required(self):
+        self.with_nine()
+        self.core_current_qa["checks"][0]["sha256"] = "e" * 64
+        self.reject("core currentColor QA proof")
+
+    def test_core_currentcolor_file_qa_scope_cannot_omit_asset(self):
+        self.with_nine()
+        self.core_current_qa["checks"].pop()
+        self.reject("core currentColor QA inventory")
+
+    def test_native_outlined_is_real_build_not_live_text_export(self):
+        self.with_nine()
+        asset = next(v for v in self.manifest["assets"] if v["role"] == "editable_outlined")
+        receipt = next(v for v in self.manifest["mcp_receipts"] if v["key"] == asset["producer"]["receipt_key"])
+        receipt["operation"] = "document_export"
+        self.reject("tool and operation mismatch")
+
+    def test_nine_qa_and_historical_six_resources_both_remain_selected(self):
+        self.with_nine_composites_and_history()
+        catalog = self.project()
+        old, new = catalog["items"][1], catalog["items"][-1]
+        old_links = {e["url"] for e in old["evidence"]}
+        new_links = {e["url"] for e in new["evidence"]}
+        self.assertTrue(any("historical-six-qa.json" in url for url in old_links))
+        self.assertTrue(any("family-first-six-light-qa.png" in url for url in old_links))
+        self.assertTrue(any("family-first-nine-light-qa.png" in url for url in old_links))
+        self.assertFalse(any("family-first-six" in url for url in new_links))
+        self.assertTrue(any("family-first-nine" in url for url in new_links))
+        self.assertTrue(any("family-visual.json" in url for url in new_links))
+
+    def test_historical_six_composite_cannot_disappear_when_nine_is_current(self):
+        self.with_nine_composites_and_history()
+        self.project()
+        (self.base / self.historical_qa["composites"][0]["path"]).unlink()
+        self.reject("safe existing local file")
+
+    def test_historical_six_composite_replacement_fails_integrity(self):
+        self.with_nine_composites_and_history()
+        (self.base / self.historical_qa["composites"][0]["path"]).write_bytes(png(641, 180))
+        self.reject("composite integrity mismatch")
+
+    def test_nine_visual_review_cannot_refer_to_unrelated_composite(self):
+        self.with_nine_composites_and_history()
+        self.family_visual["evidence"][0]["sha256"] = "e" * 64
+        self.reject("visual composite hash mismatch")
+
+    def test_nine_visual_review_is_not_user_design_approval(self):
+        self.with_nine_composites_and_history()
+        self.family_visual["brand_design_acceptance"] = "verified"
+        self.reject("visual review scope mismatch")
+
+    def test_actual_family_currentcolor_release_is_derived_from_its_matrix(self):
+        self.with_nine()
+        row = next(v for v in self.manifest["families"] if v["family_id"] == "nuke")
+        row.update(currentcolor_release_status="actual_verified", production_status="actual_verified_published_themes")
+        data = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560"><path id="dcc-c1" d="M1 1H4"/><path id="dcc-c2" d="M7 1H10"/></svg>'
+        self.add_asset("currentcolor", "svg", "release", "currentcolor-release.svg", data, family="nuke", optical=False, live_text=False, viewbox=[0, 0, 1200, 560])
+        asset = self.manifest["assets"][-1]
+        qa = next(v for v in self.family_qa["families"] if v["family"] == "nuke")
+        qa["checks"].append({"path": asset["path"], "bytes": asset["bytes"], "sha256": asset["sha256"], "format": "svg", "pass": True, "failures": [], "mode": "release", "text_count": 0})
+        self.manifest["actual_asset_count"] = 156
+        catalog = self.project()
+        item = next(v for v in catalog["items"] if v["slug"] == "dcc-mcp-nuke-v2")
+        self.assertEqual(17, len(item["variants"]))
+        self.assertEqual(156, catalog["progress"]["assets"])
+        self.assertEqual("pass", next(v for v in item["checks"] if v["name"] == "currentColor 轮廓化发布 SVG")["result"])
 
 
 if __name__ == "__main__":

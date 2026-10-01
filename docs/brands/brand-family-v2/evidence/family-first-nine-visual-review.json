@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "reviewed_utc": "2026-10-01T13:51:32.858500+00:00",
+  "reviewer": "Root task agent",
+  "status": "verified_for_current_completed_outputs",
+  "brand_design_acceptance": "awaiting_user_review",
+  "families": [
+    "maya",
+    "3dsmax",
+    "blender",
+    "houdini",
+    "zbrush",
+    "photoshop",
+    "mobu",
+    "nuke",
+    "openusd"
+  ],
+  "actual_observations": [
+    "Both actual-export light and dark composites viewed",
+    "Corrected C curves consistent across the nine native masters",
+    "No visible clipping; workflow accessories remain distinct",
+    "128px native optical variants omit fine accessories and keep plain software names"
+  ],
+  "evidence": [
+    {
+      "path": "evidence/family-first-nine-light-qa.png",
+      "sha256": "94493e14fe6b5b6439067328aa22269282234746dca967510bd21f3951643ac9"
+    },
+    {
+      "path": "evidence/family-first-nine-dark-qa.png",
+      "sha256": "1cbcca753e438c35c4eab9f074af93317c0eaaa58ff0d64ad6a27e1b12d05113"
+    }
+  ],
+  "remaining": [
+    "Family outlined currentColor native build and export",
+    "Full-page GUI acceptance remains incomplete"
+  ]
+}

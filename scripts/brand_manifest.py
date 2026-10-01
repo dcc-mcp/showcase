@@ -22,13 +22,16 @@ SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 COMMIT = re.compile(r"[0-9a-f]{40}\Z")
 TOOLS = {"document_build": "inkscape_vector__document_build",
          "document_export": "inkscape_vector__document_export"}
-SOFTWARE_FAMILIES = {"maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop"}
+SOFTWARE_FAMILIES = {"maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop", "mobu", "nuke", "openusd"}
 MOTIFS = {"maya": ("triangular-wireframe-mesh", "三角线框网格"),
           "3dsmax": ("mesh-and-modifier-stack", "网格与修改器堆栈"),
           "blender": ("camera-rays-and-mesh", "相机射线与网格"),
           "houdini": ("procedural-node-network", "程序化节点网络"),
           "zbrush": ("sculpt-brush-and-wire-surface", "雕刻笔刷与线框表面"),
-          "photoshop": ("raster-layers-and-brush", "栅格图层与笔刷")}
+          "photoshop": ("raster-layers-and-brush", "栅格图层与笔刷"),
+          "mobu": ("animation-skeleton-and-motion", "动画骨架与运动轨迹"),
+          "nuke": ("compositing-merge-graph", "合成合并节点图"),
+          "openusd": ("scene-layer-stack-and-prims", "场景图层堆栈与基元")}
 
 
 def _require(condition, message):
@@ -182,7 +185,7 @@ def _family_evidence(root, base, publication, actual, matrices):
                 _require(check.get("size") == asset["size"] and check.get("mode") == "RGBA"
                          and check.get("alpha_extrema") == [0, 255], "family PNG bitmap QA mismatch")
             else:
-                expected_mode = "release" if asset["role"] == "release" else "native_optical" if asset["optical"] else "native"
+                expected_mode = "release" if asset["role"] in ("release", "editable_outlined") else "native_optical" if asset["optical"] else "native"
                 _require(check.get("mode") == expected_mode and _integer(check.get("text_count"))
                          and (check["text_count"] > 0) == asset["live_text"], "family SVG role QA mismatch")
                 _require(c_paths(asset) == core_paths, "family corrected C geometry differs from shared master")
@@ -221,7 +224,8 @@ def _family_evidence(root, base, publication, actual, matrices):
     composite_files, seen = [], set()
     for row in composites:
         rel = row.get("path")
-        _require(rel in {"evidence/family-first-six-light-qa.png", "evidence/family-first-six-dark-qa.png"}
+        batch = "nine" if len(actual) == 9 else "six"
+        _require(rel in {"evidence/family-first-" + batch + "-light-qa.png", "evidence/family-first-" + batch + "-dark-qa.png"}
                  and rel not in seen and _sha(row.get("sha256")) and _integer(row.get("bytes")),
                  "reviewed QA composite identity required")
         image = _file(base, rel, root)
@@ -231,8 +235,26 @@ def _family_evidence(root, base, publication, actual, matrices):
         seen.add(rel)
         composite_files.append({"path": image, "sha256": row["sha256"],
                                 "theme": "light" if "-light-" in rel else "dark"})
-    return {"qa_path": qa_path, "policy_path": policy_path, "policies": policies, "owners": owners,
-            "sources": sources, "composites": composite_files}
+    result = {"qa_path": qa_path, "policy_path": policy_path, "policies": policies, "owners": owners,
+              "sources": sources, "composites": composite_files}
+    if publication.get("historical_family_qa"):
+        historical = {family: row for family, row in actual.items() if family in {"maya", "3dsmax", "blender", "houdini", "zbrush", "photoshop"}}
+        _require(len(historical) == 6, "historical six-family scope required")
+        old_publication = {**publication, "family_qa": publication["historical_family_qa"], "historical_family_qa": None, "family_visual_evidence": None}
+        result["historical"] = _family_evidence(root, base, old_publication, historical, matrices)
+    if publication.get("family_visual_evidence"):
+        visual_path = _file(base, publication["family_visual_evidence"], root)
+        review = _json(visual_path)
+        _require(review.get("status") == "verified_for_current_completed_outputs"
+                 and review.get("brand_design_acceptance") == "awaiting_user_review"
+                 and isinstance(review.get("families"), list) and set(review["families"]) == set(actual), "family bitmap visual review scope mismatch")
+        _utc(review.get("reviewed_utc"))
+        evidence = _indexed(_rows(review.get("evidence"), "family visual evidence"), "path", "family visual evidence")
+        _require(set(evidence) == {row["path"].relative_to(base).as_posix() for row in composite_files}
+                 and all(evidence[row["path"].relative_to(base).as_posix()].get("sha256") == row["sha256"] for row in composite_files),
+                 "family visual composite hash mismatch")
+        result["visual_path"] = visual_path
+    return result
 
 
 def _snapshot(root, manifest_rel):
@@ -242,7 +264,7 @@ def _snapshot(root, manifest_rel):
     manifest = _json(manifest_path)
     _require(type(manifest.get("schema_version")) is int and manifest["schema_version"] == 2,
              "producer schema 2 required")
-    _require(manifest.get("authoritative_asset_map") is True and manifest.get("status") in ("partial_actual_core", "partial_actual_core_and_first_six"),
+    _require(manifest.get("authoritative_asset_map") is True and manifest.get("status") in ("partial_actual_core", "partial_actual_core_and_first_six", "partial_actual_verified_in_progress"),
              "reviewed partial-core snapshot required")
     publication = manifest.get("publication", {})
     _require(isinstance(publication, dict) and _sha(publication.get("source_manifest_sha256")),
@@ -266,22 +288,26 @@ def _snapshot(root, manifest_rel):
              "safe family identity required")
     _require(type(manifest.get("family_count")) is int and manifest["family_count"] == len(families),
              "declared family count mismatch")
-    _require("core" in families and families["core"].get("production_status") == "partial_actual_core_wordmarks",
+    _require("core" in families and families["core"].get("production_status") in ("partial_actual_core_wordmarks", "actual_verified_published_themes"),
              "core must remain partially delivered")
+    core_current = families["core"].get("production_status") == "actual_verified_published_themes"
+    if core_current:
+        _require(families["core"].get("currentcolor_release_status") == "actual_verified", "core currentColor release status mismatch")
     actual = {}
     for key, row in families.items():
-        if key in SOFTWARE_FAMILIES and row.get("production_status") == "partial_actual_verified":
-            _require(row.get("currentcolor_release_status") == "pending_software_outlined_export",
+        if key in SOFTWARE_FAMILIES and row.get("production_status") in ("partial_actual_verified", "actual_verified_published_themes"):
+            _require(row.get("currentcolor_release_status") in ("pending_software_outlined_export", "actual_verified")
+                     and (row["currentcolor_release_status"] == "pending_software_outlined_export") == (row["production_status"] == "partial_actual_verified"),
                      "currentColor outlined release must remain pending")
             actual[key] = row
         elif key != "core":
             _require(row.get("production_status") == "planned_not_executed" and row.get("actual_asset_ids") == [],
                      "unsupported or unexecuted family cannot publish")
-    _require((bool(actual) and manifest["status"] == "partial_actual_core_and_first_six")
+    _require((bool(actual) and manifest["status"] in ("partial_actual_core_and_first_six", "partial_actual_verified_in_progress"))
              or (not actual and manifest["status"] == "partial_actual_core"), "snapshot status and actual family scope mismatch")
     assets = _rows(manifest.get("assets"), "assets")
     indexed_assets = _indexed(assets, "asset_id", "asset")
-    _require(len(assets) == 8 + 16 * len(actual) and type(manifest.get("actual_asset_count")) is int
+    _require(type(manifest.get("actual_asset_count")) is int
              and manifest["actual_asset_count"] == len(assets), "declared actual asset count mismatch")
     _require(type(manifest.get("actual_family_count")) is int and manifest["actual_family_count"] == 1 + len(actual),
              "declared actual family count mismatch")
@@ -304,10 +330,10 @@ def _snapshot(root, manifest_rel):
     acceptance = manifest.get("acceptance", {})
     _require(acceptance.get("geometry_and_raster_visual_review") == "verified"
              and acceptance.get("brand_design_acceptance") == "awaiting_user_review"
-             and acceptance.get("family_production") in ("in_progress", "paused_pending_native_birth_race_repair"),
+             and acceptance.get("family_production") in ("in_progress", "paused_pending_native_birth_race_repair", "resumed_after_native_birth_repair"),
              "acceptance scope mismatch")
     if actual:
-        _require(acceptance.get("family_first_six_file_and_bitmap_qa") == "verified",
+        _require(acceptance.get("family_first_nine_file_and_bitmap_qa" if len(actual) == 9 else "family_first_six_file_and_bitmap_qa") == "verified",
                  "family file and bitmap acceptance required")
         _utc(manifest.get("generated_utc"))
     matrices, paths, receipt_keys = {family: {} for family in {"core", *actual}}, set(), set()
@@ -323,8 +349,9 @@ def _snapshot(root, manifest_rel):
         paths.add(path)
         data = _integrity(asset, path)
         theme, kind, role = asset.get("theme"), asset.get("kind"), asset.get("role")
-        _require(theme in (("light", "dark") if is_core else ("light", "dark", "currentcolor"))
-                 and kind in ("svg", "png") and role in ("editable", "release")
+        _require(theme in (("light", "dark", "currentcolor") if (not is_core or core_current) else ("light", "dark"))
+                 and kind in ("svg", "png") and role in ("editable", "release", "editable_outlined")
+                 and (role != "editable_outlined" or (theme == "currentcolor" and kind == "svg"))
                  and path.suffix == "." + kind, "supported asset role and format required")
         optical = asset.get("optical", False)
         _require(type(optical) is bool and (not is_core or not optical), "valid optical variant declaration required")
@@ -356,7 +383,7 @@ def _snapshot(root, manifest_rel):
                  "unique actual output receipt required")
         receipt_keys.add(key)
         receipt, call = receipts[key], calls[key]
-        operation = "document_build" if role == "editable" else "document_export"
+        operation = "document_build" if role in ("editable", "editable_outlined") else "document_export"
         _require(receipt.get("operation") == operation and call.get("tool") == TOOLS[operation],
                  "actual MCP tool and operation mismatch")
         digest = asset["sha256"]
@@ -370,30 +397,53 @@ def _snapshot(root, manifest_rel):
         _require(isinstance(call.get("arguments"), dict) and call["arguments"]
                  and call.get("gateway_stats_recorded") is True and _sha(call.get("original_completed_record_sha256")),
                  "actual request and recorded gateway response required")
-        _require(producer.get("source_commit") == receipt.get("source_commit") == call.get("source_commit")
-                 == toolchain["runtime_source_commit"] and producer.get("application") == toolchain["application_version"],
+        _require(_commit(producer.get("source_commit"))
+                 and producer["source_commit"] == receipt.get("source_commit") == call.get("source_commit")
+                 and producer.get("application") == toolchain["application_version"],
                  "production source revision mismatch")
         _require(receipt.get("control_route") == call.get("control_route") == "gateway", "gateway route required")
         _require(_utc(call.get("recorded_utc")) == _utc(receipt.get("recorded_utc")), "receipt timestamp mismatch")
     expected = {(theme, "svg", role) for theme in ("light", "dark") for role in ("editable", "release")}
     expected |= {(theme, "png", width) for theme in ("light", "dark") for width in (128, 1024)}
+    if core_current:
+        expected |= {("currentcolor", "svg", role) for role in ("editable", "editable_outlined", "release")}
     _require(set(matrices["core"]) == expected and receipt_keys == set(calls) == set(receipts), "complete two-theme output matrix required")
     family_expected = {(theme, "svg", "editable", optical) for theme in ("light", "dark") for optical in (False, True)}
     family_expected |= {(theme, "svg", "release", False) for theme in ("light", "dark")}
     family_expected |= {(theme, "png", width, width == 128) for theme in ("light", "dark") for width in (128, 256, 512, 1024)}
     family_expected |= {("currentcolor", "svg", "editable", False), ("currentcolor", "png", 512, False)}
     for family in actual:
-        _require(set(matrices[family]) == family_expected, "complete partial-family output matrix required")
+        required = set(family_expected)
+        if actual[family]["currentcolor_release_status"] == "actual_verified":
+            required.add(("currentcolor", "svg", "release", False))
+            if ("currentcolor", "svg", "editable_outlined", False) in matrices[family]:
+                required.add(("currentcolor", "svg", "editable_outlined", False))
+        _require(set(matrices[family]) == required, "complete partial-family output matrix required")
         for asset in matrices[family].values():
             if asset["role"] != "release":
                 continue
-            source = matrices[family][(asset["theme"], "svg", "editable", asset["optical"])]
+            source_role = "editable_outlined" if asset["theme"] == "currentcolor" and ("currentcolor", "svg", "editable_outlined", False) in matrices[family] and asset["kind"] == "svg" else "editable"
+            source = matrices[family][(asset["theme"], "svg", source_role, asset["optical"])]
             source_file = calls[asset["producer"]["receipt_key"]]["arguments"].get("source_file")
             _require(isinstance(source_file, str) and (source_file == source["path"] or source_file.endswith("/" + source["path"])),
                      "actual export source or optical document mismatch")
-    _visual_check(visual, [asset for asset in assets if asset["family"] == "core"])
+    _visual_check(visual, [asset for asset in assets if asset["family"] == "core" and asset["theme"] != "currentcolor"])
     extra = _family_evidence(root, base, publication, actual, matrices)
     extra.update(actual=actual, matrices=matrices)
+    if core_current:
+        qa_path = _file(base, publication.get("core_current_qa"), root)
+        qa = _json(qa_path)
+        _require(qa.get("pass") is True and qa.get("artwork_written_or_rendered") is False and _string(qa.get("scope")), "actual core currentColor QA required")
+        _utc(qa.get("generated_utc"))
+        checks = _indexed(_rows(qa.get("checks"), "core currentColor QA"), "path", "core currentColor QA")
+        current_assets = [a for a in assets if a["family"] == "core" and a["theme"] == "currentcolor"]
+        _require(set(checks) == {a["path"] for a in current_assets}, "core currentColor QA inventory mismatch")
+        for asset in current_assets:
+            check = checks[asset["path"]]
+            _require(check.get("pass") is True and check.get("failures") == [] and check.get("bytes") == asset["bytes"]
+                     and check.get("sha256") == asset["sha256"] and check.get("format") == "svg"
+                     and _integer(check.get("text_count")) and (check["text_count"] > 0) == asset["live_text"], "core currentColor QA proof mismatch")
+        extra.update(core_current=True, core_current_qa_path=qa_path, core_current_verified_at=qa["generated_utc"])
     if publication.get("ui_evidence"):
         ui_path = _file(base, publication["ui_evidence"], root)
         ui = _json(ui_path)
@@ -425,12 +475,12 @@ def _family_item(root, base, manifest, family, row, extra, core, production_sour
                 "width": asset["size"][0], "height": asset["size"][1]}
     variants = []
     for asset in [a for a in manifest["assets"] if a["family"] == family]:
-        theme = {"light": "浅色", "dark": "深色", "currentcolor": "currentColor 单色（原生可编辑）" if asset["kind"] == "svg" else "固定黑色单色光栅"}[asset["theme"]]
+        theme = {"light": "浅色", "dark": "深色", "currentcolor": ("currentColor 单色（原生可编辑）" if asset["role"] == "editable" else "currentColor 单色") if asset["kind"] == "svg" else "固定黑色单色光栅"}[asset["theme"]]
         optical = " · 小尺寸 optical" if asset["optical"] else ""
         if asset["kind"] == "svg":
-            label = "可编辑原生 SVG · 文字保留" if asset["role"] == "editable" else "轮廓化发布 SVG · 文字转路径"
+            label = "可编辑原生 SVG · 文字保留" if asset["role"] == "editable" else "轮廓化原生 SVG" if asset["role"] == "editable_outlined" else "轮廓化发布 SVG · 文字转路径"
             note = ("可编辑文字依赖 Montserrat，字体文件未随作品分发。" if asset["role"] == "editable" else "文字已由实际软件转路径，显示无需安装字体。")
-            if asset["theme"] == "currentcolor":
+            if asset["theme"] == "currentcolor" and row["currentcolor_release_status"] != "actual_verified":
                 note += "这是保留文字的原生单色版本；轮廓化 currentColor 发布 SVG 尚未完成。"
             if asset["optical"]:
                 note += "使用独立 optical 计划简化小尺寸细节。"
@@ -451,6 +501,7 @@ def _family_item(root, base, manifest, family, row, extra, core, production_sour
                 version="v2 · 软件家族首款", summary="在修正核心母版下加入独立绘制的" + motif + "，以分离的兼容性文字说明 " + title + " 工作流；提供深浅主题与独立小尺寸版本。",
                 verified_at=manifest["generated_utc"], previews={theme: preview(theme, 1024) for theme in ("light", "dark")},
                 small_previews={theme: preview(theme, 128) for theme in ("light", "dark")}, variants=variants)
+    item["environment"] = _environment(manifest, family)
     item["prompt"] = {"kind": "reusable", "text": "通过 DCC-MCP 的 Inkscape 原生矢量工具创建 " + title + " 家族标识。复用修正后的 DCC-MCP 母版和两处 C 路径；在 1200 × 560 画布的独立配件区绘制" + motif + "，不描摹厂商 Logo。保持项目标识更突出，用普通 Montserrat 文字单独标明“" + metadata["compatibility_phrase"] + "”。分别构建深浅、currentColor 单色和独立 optical 小尺寸原生 SVG。实际软件导出深浅轮廓 SVG 与透明 1024 × 478、512 × 239、256 × 119 PNG；128 × 60 PNG 来自 optical 文档。保留真实输出收据、请求响应、文件哈希与位图检查。currentColor 轮廓化发布 SVG 尚未完成时只说明状态，不生成该下载链接。",
                       "note": "根据真实素材语义和本轮目标整理的可复用提示词，并非逐字原始提示。完整实际构建计划与导出参数以 MCP 记录为准；来源说明中的 prepared plan 状态本身不证明执行。"}
     item["steps"] = [{"title": "复用核心母版，绘制工作流配件", "description": "实际构建请求复用两个修正 C 的路径，并在独立区域绘制" + motif + "。原生与轮廓 SVG 均核对母版路径，兼容性文字与品牌主体分开。"},
@@ -472,18 +523,44 @@ def _family_item(root, base, manifest, family, row, extra, core, production_sour
                         {"label": "本家族素材语义、来源与权利说明", "url": url(source_info["path"])}]
     item["sources"].append({"id": "reference", "label": "原家族历史参考 · 固定来源，未作为作品下载分发", "url": reference["source_url"], "commit": reference["source_commit"], "sha256": reference["sha256"], "author": "原仓库素材贡献者；厂商标识权利另列"})
     item["sources"].append({"id": "policy", "label": "家族来源与权利分析快照", "url": url(extra["policy_path"]), "sha256": hashlib.sha256(extra["policy_path"].read_bytes()).hexdigest(), "author": "DCC-MCP contributors"})
-    for composite in extra["composites"]:
-        label = "六家族实际成品 QA 总览 · " + ("浅色背景" if composite["theme"] == "light" else "深色背景")
-        item["evidence"].append({"label": label, "url": url(composite["path"])})
-        item["sources"].append({"id": "qa-" + composite["theme"], "label": label,
-                                "url": url(composite["path"]), "sha256": composite["sha256"],
-                                "author": "DCC-MCP contributors"})
+    groups = [(extra, "qa-", str(len(extra["actual"])) + " 家族当前实际成品 QA 总览")]
+    if "historical" in extra and family in extra["historical"]["sources"]:
+        old = extra["historical"]
+        item["evidence"].append({"label": "首批六家族历史文件 QA · 原记录保留", "url": url(old["qa_path"])})
+        groups.append((old, "historical-qa-", "首批六家族历史成品 QA 总览"))
+    for group, identity, heading in groups:
+        for composite in group["composites"]:
+            label = heading + " · " + ("浅色背景" if composite["theme"] == "light" else "深色背景")
+            item["evidence"].append({"label": label, "url": url(composite["path"])})
+            item["sources"].append({"id": identity + composite["theme"], "label": label,
+                                    "url": url(composite["path"]), "sha256": composite["sha256"], "author": "DCC-MCP contributors"})
+    if "visual_path" in extra:
+        item["evidence"].append({"label": "实际输出位图视觉审阅 · 与 GUI 验收分开", "url": url(extra["visual_path"])})
     item["rights"][0]["scope"] = "独立制作的 DCC-MCP 几何与" + motif + "、计划及元数据；原参考和厂商图形未在本作品中重新授权。"
     item["rights"][2].update(holder="DCC-MCP 品牌权利人；" + vendor_owners, scope=title + " 的名称用于独立兼容性说明；当前家族作品不含厂商 Logo 或 glyph。",
                              notice=metadata["rights"]["trademark_notice_plan"])
     item["contributors"] = [metadata["artwork_author"]]
     item["limitations"] = ["本家族首款已交付 16 个文件；轮廓化 currentColor 发布 SVG 尚未制作完成。", "软件家族名称说明集成目标；本作品实际生产软件为 Inkscape，不声称在对应目标软件中制作。", "来源说明是事前计划元数据，实际执行仅由成功 MCP 调用与输出哈希证明。", "文件和位图 QA 与界面视觉验收分别记录，未声称本家族完整 GUI 验收通过。", "128 像素 optical 版本保留更少细节；位图检查不等同于所有小字均可读或用户已接受设计。", "currentColor PNG 是黑色默认光栅，不能随网页文字颜色变化；原生 currentColor SVG 保留 Montserrat 字体依赖。", "依据历史参考语义重新绘制，并非找回原始可编辑源文件或像素完全一致。", "公开记录移除私人连接和实例标识；站点集成未重新执行 DCC 生产。", "其余家族仍按清单状态分批制作；当前生产暂停等待原生路由修复，不影响已完成文件的存在与验证。"]
+    item["checks"][0]["observed"] = "本家族 %d 个输出的字节数和 SHA-256 与对应成功 Gateway 响应、manifest 及文件 QA 一致；各输出保留其实际生产提交，不改标为当前运行版本。" % len(variants)
+    item["checks"][2]["observed"] = "原生保留文字与文字轮廓化文件按实际 live_text 和 MCP 角色分别列明；字体来源与许可另列。"
+    item["checks"][1]["observed"] = "本家族 %d 份 SVG 的两个 C 路径与修正核心母版一致，不声称新的 G2 验证。" % sum(v["format"] == "svg" for v in variants)
+    item["limitations"][0] = "本家族首款已交付 %d 个文件；" % len(variants) + ("currentColor 轮廓 SVG 已验证，其他制作计划仍按清单分批完成。" if row["currentcolor_release_status"] == "actual_verified" else "轮廓化 currentColor 发布 SVG 尚未制作完成。")
+    if row["currentcolor_release_status"] == "actual_verified":
+        next(check for check in item["checks"] if check["name"] == "currentColor 轮廓化发布 SVG").update(result="pass", observed="实际 currentColor 轮廓 SVG 已有成功软件导出和文件 QA，其字节、哈希与清单一致。")
+        item["steps"][-1]["description"] = "单色原生、黑色默认 PNG 与轮廓化 currentColor 发布 SVG 均按清单中实际已验证文件提供；保留文字的原生版本仍有字体依赖。"
+    if manifest["acceptance"]["family_production"] == "resumed_after_native_birth_repair":
+        item["limitations"][-1] = "原生路由修复后制作已恢复；历史失败请求仍保持失败，新输出使用独立成功请求证明，不改写旧记录。"
+    item["evidence_scope"] = "本家族 %d 次实际成功构建/导出及文件、位图 QA；各输出的生产源码提交分别保留。GUI 完整验收与用户设计接受度仍独立记录，站点集成未重跑生产。" % len(variants)
     return item
+
+
+def _environment(manifest, family):
+    chain = manifest["toolchain"]
+    revisions = sorted({asset["producer"]["source_commit"] for asset in manifest["assets"] if asset["family"] == family})
+    return [{"label": "Inkscape", "value": chain["application_version"]},
+            {"label": "DCC-MCP 适配器 · 本条目实际生产", "value": "；".join("commit " + revision for revision in revisions) + "。逐输出提交保留于制作记录；当前公开 draft 提交另列，不表示历史文件在当前版本重跑。"},
+            {"label": "DCC-MCP Core", "value": chain["core_version"]},
+            {"label": "DCC-MCP Gateway / CLI", "value": chain["gateway_cli_version"]}]
 
 
 def _project(root, manifest_rel):
@@ -501,8 +578,8 @@ def _project(root, manifest_rel):
                 "width": asset["size"][0], "height": asset["size"][1]}
     variants = []
     for asset in [row for row in manifest["assets"] if row["family"] == "core"]:
-        theme = "浅色" if asset["theme"] == "light" else "深色"
-        label = ("可编辑原生 SVG · MCP 文字保留" if asset["role"] == "editable" else "轮廓化 SVG · MCP 文字转路径") if asset["kind"] == "svg" else "PNG · %d × %d" % tuple(asset["size"])
+        theme = {"light": "浅色", "dark": "深色", "currentcolor": "currentColor 单色"}[asset["theme"]]
+        label = ("可编辑原生 SVG · MCP 文字保留" if asset["role"] == "editable" else "轮廓化原生 SVG · 文字路径保留" if asset["role"] == "editable_outlined" else "轮廓化 SVG · MCP 文字转路径") if asset["kind"] == "svg" else "PNG · %d × %d" % tuple(asset["size"])
         variant = {"label": theme + " · " + label, "url": asset_url(asset), "format": asset["kind"], "bytes": asset["bytes"], "sha256": asset["sha256"],
                    "rights_ids": ["artwork", "font", "trademark"], "source_id": "production"}
         if asset["kind"] == "svg":
@@ -556,14 +633,24 @@ def _project(root, manifest_rel):
                    {"id": "trademark", "holder": "DCC-MCP 品牌权利人及各软件名称权利人", "license": "商标权利保留", "scope": "版权许可不授予品牌、厂商标识或背书权利；本首款不包含厂商 Logo。", "url": url(trademark_path), "notice": "软件名称用于说明制作环境。未来家族仅列制作计划，未获商标许可或完成作品的推定。"}],
         "contributors": ["DCC-MCP contributors"],
         "limitations": ["当前仅核心字标首款交付；Core 其他变体及其余家族尚未制作完成。", "网站集成检查已有成品及记录，未重新执行 Inkscape 生产。", "公开请求保留矢量计划与哈希，移除私人路径、主机、实例标识和服务连接参数。", "核心 GUI 记录仅证明启动观察；本证据范围不声称原生界面的完整验收。", "几何和像素验证与用户的设计接受度分别记录，用户评价仍待完成。", "这是依据参考布局重新构建并修正的矢量，不声称找回原始 Logo 源文件或像素完全一致。", "C1 采用 G1 接合并保留非等厚设计，不声称 G2 连续。", "前后对照图包含未确认公开许可的参考图，未纳入公开下载。"]}
+    item["environment"] = _environment(manifest, "core")
+    item["checks"][0]["observed"] = "%d 个核心输出的字节数和 SHA-256 与原始 manifest、对应 Gateway 成功响应及导出收据一致。各文件保留实际生产提交。" % len(variants)
+    if extra.get("core_current"):
+        item["verified_at"] = extra["core_current_verified_at"]
+        item["evidence"].append({"label": "核心 currentColor 实际原生与发布文件 QA", "url": url(extra["core_current_qa_path"])})
+        item["checks"].append({"name": "核心 currentColor 三份 SVG", "result": "pass", "observed": "保留文字的原生、已轮廓化的原生及软件导出的发布 SVG 均核对真实成功调用和文件 QA。字体依赖仅适用于保留文字的版本。"})
+        next(check for check in item["checks"] if check["name"] == "透明 PNG 与 SVG 角色")["observed"] = "深浅四张 PNG 透明角点通过；三份 SVG 保留文字，其余四份 SVG 已是文字路径。可编辑文字与轮廓文件按实际角色分别提供。"
+        item["steps"].append({"title": "补齐核心 currentColor", "description": "原生路由修复后用独立实际请求构建可编辑文字与文字路径版本，再由软件导出 currentColor 发布 SVG；未将旧深浅输出标为新版本重跑。"})
+        item["limitations"][0] = "核心深浅与 currentColor 主题已有实际文件；其他尺寸及全部家族计划的完成度仍以单一制作清单为准。"
     if "ui" in extra:
         gui_check = next(row for row in item["checks"] if row["name"] == "GUI 视觉验收")
-        gui_check.update(result="unknown", observed="制作记录证明核心原生文件已重新打开并观察局部画布；162% 缩放下右侧六边形被裁切，完整页面 GUI 验收仍未完成。")
+        gui_check.update(result="unknown", observed="制作记录证明浅色修正母版已重新打开并观察局部画布；162% 缩放下右侧六边形被裁切，完整页面 GUI 验收仍未完成。此记录不覆盖新增 currentColor 文档的界面验收。")
         item["limitations"][3] = "核心原生 GUI 已观察局部画布；完整页面未成功适配，不声称完整 GUI 验收通过。"
         item["evidence"].append({"label": "核心原生 GUI · 仅局部画布观察", "url": url(extra["ui_path"])})
     items = [item]
     if extra["actual"]:
-        item["limitations"][0] = "核心字标首款及 %d 个软件家族已有交付；Core 其他变体、家族 currentColor 轮廓 SVG 与其余组尚未完成。" % len(extra["actual"])
+        if not extra.get("core_current"):
+            item["limitations"][0] = "核心字标首款及 %d 个软件家族已有交付；Core 其他变体、家族 currentColor 轮廓 SVG 与其余组尚未完成。" % len(extra["actual"])
         item["rights"][2]["notice"] = "本核心作品的软件名称用于说明制作环境；已交付软件家族各自记录兼容性与权利范围。未制作家族仍是计划，不推定商标许可或作品完成。"
         for family, row in extra["actual"].items():
             items.append(_family_item(root, base, manifest, family, row, extra, item, production_source))
