@@ -172,6 +172,11 @@
           "name": "完整 MCP 调用轨迹",
           "result": "fail",
           "observed": "公开包未包含完整 tools/call 日志、参数或 adapter/core 版本；本轮没有补造记录。"
+        },
+        {
+          "name": "工程源码包静态审核（本轮）",
+          "result": "pass",
+          "observed": "本轮归档已完整解压并核对 37 个成员的字节数与哈希；原件未改，离线路径/凭据审核无发现。ZIP 151.4 MiB，完整 SHA-256 见 downloads.json。Blender / Designer 本轮未重开、重算或重新渲染。"
         }
       ],
       "limitations": [
@@ -184,6 +189,14 @@
         "源仓库整体声明 MIT；作品、生成参考图与材质没有另列许可。Adobe 内置库资源仅通过 sbs:// 引用，不在本站分发。"
       ],
       "resources": [
+        {
+          "label": "原生工程与复现包 · 151.4 MiB · 保留源 MIT",
+          "url": "https://github.com/dcc-mcp/showcase/releases/download/source-packages-2026-10-01/dcc-mcp-crate-lookdev-sources-38623dd.zip"
+        },
+        {
+          "label": "下载包清单、SHA-256 与审核范围",
+          "url": "docs/showcase/crate-lookdev/downloads.json"
+        },
         {
           "label": "本合集报告",
           "url": "docs/showcase/crate-lookdev/README.md"
@@ -394,6 +407,11 @@
           "name": "软件复现与完整 MCP 轨迹",
           "result": "fail",
           "observed": "本轮未运行 Designer；源包没有 validation.json 或完整 tools/call 轨迹，适配器与 Core 版本未记录。"
+        },
+        {
+          "name": "工程源码包静态审核（本轮）",
+          "result": "pass",
+          "observed": "本轮归档已完整解压并核对 17 个成员的字节数与哈希；原件未改，离线路径/凭据审核无发现。ZIP 14.0 MiB，完整 SHA-256 见 downloads.json。Blender / Designer 本轮未重开、重算或重新渲染。"
         }
       ],
       "limitations": [
@@ -405,6 +423,14 @@
         "源仓库整体声明 MIT；作品、参考图和材质未另列许可。SBS 用 sbs:// 引用安装的 Adobe 标准库，本站不分发标准库源码。"
       ],
       "resources": [
+        {
+          "label": "原生工程与复现包 · 14.0 MiB · 保留源 MIT",
+          "url": "https://github.com/dcc-mcp/showcase/releases/download/source-packages-2026-10-01/dcc-mcp-painted-wood-sources-38623dd.zip"
+        },
+        {
+          "label": "下载包清单、SHA-256 与审核范围",
+          "url": "docs/showcase/painted-wood/downloads.json"
+        },
         {
           "label": "本合集报告",
           "url": "docs/showcase/painted-wood/README.md"

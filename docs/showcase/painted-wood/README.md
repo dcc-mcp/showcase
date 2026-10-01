@@ -121,6 +121,14 @@ JSON 字段中的未知记录明确为 null 或 unrecorded。本轮没有产生�
 - 颜色是艺术估计，不是物理 albedo 测量。Normal Y 方向仍须与目标渲染器匹配。
 - 源仓库整体声明 MIT；作品、参考图和材质未另列许可。SBS 用 sbs:// 引用安装的 Adobe 标准库，本站不分发标准库源码。
 
+## 工程与复现包
+
+[下载原生工程包（14.0 MiB）](https://github.com/dcc-mcp/showcase/releases/download/source-packages-2026-10-01/dcc-mcp-painted-wood-sources-38623dd.zip) · [清单与 SHA-256](downloads.json)
+
+工程原件来自上述固定来源提交，附源作者 MIT 声明、软件版本、依赖和复现说明。归档本轮已实际解压，17 个成员的字节数与哈希核对通过；原件未修改。原生文件、贴图元数据与 Adobe 标准库依赖已离线审阅，未发现私人路径或凭据；标准库源码不在包内。Blender / Designer 本轮没有重开、重算或重新渲染，下载包不代表一次新的 MCP 制作记录。
+
+归档 SHA-256：`8da5b5c45c480e162f27c3237683a14527bf1be889d54446a4ae813bf6175c46`。
+
 ## 来源、作者与许可
 
 作者：Long Hao / loonghao · DCC-MCP。源仓库 MIT；作品与素材未另列独立许可。

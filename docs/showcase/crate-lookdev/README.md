@@ -135,6 +135,14 @@ JSON 字段中的未知记录明确为 null 或 unrecorded。本轮没有产生�
 - 源记录只声明可重开和重算，不声明重算 PNG 字节完全一致。
 - 源仓库整体声明 MIT；作品、生成参考图与材质没有另列许可。Adobe 内置库资源仅通过 sbs:// 引用，不在本站分发。
 
+## 工程与复现包
+
+[下载原生工程包（151.4 MiB）](https://github.com/dcc-mcp/showcase/releases/download/source-packages-2026-10-01/dcc-mcp-crate-lookdev-sources-38623dd.zip) · [清单与 SHA-256](downloads.json)
+
+工程原件来自上述固定来源提交，附源作者 MIT 声明、软件版本、依赖和复现说明。归档本轮已实际解压，37 个成员的字节数与哈希核对通过；原件未修改。原生文件、贴图元数据与 Adobe 标准库依赖已离线审阅，未发现私人路径或凭据；标准库源码不在包内。Blender / Designer 本轮没有重开、重算或重新渲染，下载包不代表一次新的 MCP 制作记录。
+
+归档 SHA-256：`032e397d12f13b4dc23e23b98600c5bb46544618017d0210aad2ccbb54e2bd02`。
+
 ## 来源、作者与许可
 
 作者：Long Hao / loonghao · DCC-MCP。源仓库 MIT；作品与素材未另列独立许可。

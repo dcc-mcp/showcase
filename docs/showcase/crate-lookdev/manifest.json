@@ -115,6 +115,12 @@
       "height": 931,
       "bit_depth": 8,
       "role": "Public-source webpage derivative; see derivatives.json for original PNG identity"
+    },
+    {
+      "path": "downloads.json",
+      "sha256": "33e7efad99cced56b908f225ba754951742cb121ef8713afaf2c3513374b3c27",
+      "bytes": 1758,
+      "role": "Native engineering package identity, checksums, license and offline audit scope"
     }
   ],
   "blender_application": "Blender",
