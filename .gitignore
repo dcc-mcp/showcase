@@ -10,3 +10,9 @@
 /*.swp
 .DS_Store
 Thumbs.db
+
+# Site build output — produced by scripts/build_site.py, never committed.
+/_site/
+
+# Python contract/build checks.
+__pycache__/

@@ -1,0 +1,330 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "source": {
+      "host": "Blender",
+      "version": "5.1.1",
+      "driven_through": "DCC-MCP",
+      "adapter": "dcc-mcp-blender 0.2.4",
+      "core": "core 0.20.28",
+      "instance": "cfd7edb0",
+      "transport": "MCP over Streamable HTTP",
+      "unit_system": "METRIC",
+      "scale_length": 1.0,
+      "up_axis": "Z"
+    },
+    "target": {
+      "host": "Maya",
+      "version": "2026",
+      "session": "maya.standalone",
+      "scene_graph": "real",
+      "linear_unit": "cm",
+      "up_axis": "y",
+      "loaded_plugins": [
+        "objExport"
+      ],
+      "adapter": "dcc-mcp-maya",
+      "adapter_autoloaded": false
+    },
+    "reached_verification_level": [
+      "in-host"
+    ],
+    "not_reached_verification_level": [
+      "gateway",
+      "real tool return",
+      "cross-host conservation"
+    ],
+    "reached_verification_level_by_host": {
+      "blender": [
+        "in-host",
+        "gateway",
+        "real tool return"
+      ],
+      "maya": [
+        "in-host"
+      ]
+    }
+  },
+  "objects": [
+    {
+      "name": "CAL_Box",
+      "kind": "box",
+      "half_extents_m": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "centre_m": [
+        3.0,
+        5.0,
+        7.0
+      ],
+      "verts": 8,
+      "edges": 12,
+      "faces": 6,
+      "bbox_min_m": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "bbox_max_m": [
+        4.0,
+        7.0,
+        10.0
+      ],
+      "dims_m": [
+        2.0,
+        4.0,
+        6.0
+      ]
+    },
+    {
+      "name": "CAL_Sphere",
+      "kind": "uv_sphere",
+      "segments": 16,
+      "rings": 8,
+      "radius_m": 1.0,
+      "centre_m": [
+        -2.0,
+        0.0,
+        1.5
+      ],
+      "verts": 114,
+      "edges": 240,
+      "faces": 128,
+      "bbox_min_m": [
+        -3.0,
+        -1.0,
+        0.5
+      ],
+      "bbox_max_m": [
+        -1.0,
+        1.0,
+        2.5
+      ],
+      "dims_m": [
+        2.0,
+        2.0,
+        2.0
+      ]
+    }
+  ],
+  "export": {
+    "operator": "bpy.ops.wm.obj_export",
+    "global_scale": 1.0,
+    "up_axis": "Z",
+    "forward_axis": "NEGATIVE_Y",
+    "export_materials": false
+  },
+  "stages": {
+    "blender_scene": {
+      "unit": "m",
+      "object_count": 2,
+      "verts": 122,
+      "edges": 252,
+      "faces": 134,
+      "bbox_min_m": [
+        -3.0,
+        -1.0,
+        0.5
+      ],
+      "bbox_max_m": [
+        4.0,
+        7.0,
+        10.0
+      ],
+      "dims_m": [
+        7.0,
+        8.0,
+        9.5
+      ]
+    },
+    "obj_file": {
+      "unit": "unitless",
+      "bytes": 11041,
+      "object_count": 2,
+      "object_names": [
+        "CAL_Box",
+        "CAL_Sphere"
+      ],
+      "verts": 122,
+      "faces": 134,
+      "bbox_min_unitless": [
+        -4.0,
+        -7.0,
+        0.5
+      ],
+      "bbox_max_unitless": [
+        3.0,
+        1.0,
+        10.0
+      ],
+      "dims_unitless": [
+        7.0,
+        8.0,
+        9.5
+      ]
+    },
+    "maya_scene": {
+      "unit": "cm",
+      "mesh_count": 1,
+      "mesh_name": "Mesh",
+      "shape_name": "MeshShape",
+      "verts": 122,
+      "edges": 252,
+      "faces": 134,
+      "bbox_min_cm": [
+        -4.0,
+        -7.0,
+        0.5
+      ],
+      "bbox_max_cm": [
+        3.0,
+        1.0,
+        10.0
+      ],
+      "dims_cm": [
+        7.0,
+        8.0,
+        9.5
+      ],
+      "top_transforms": [
+        "persp",
+        "top",
+        "front",
+        "side",
+        "Mesh"
+      ]
+    }
+  },
+  "placement_transform": {
+    "between": [
+      "blender_scene",
+      "obj_file"
+    ],
+    "formula": "(x, y, z) -> (-x, -y, z)",
+    "description": "180 degree rotation about world Z; consequence of up_axis=Z combined with forward_axis=NEGATIVE_Y",
+    "preserves_dims": true,
+    "preserves_position": false,
+    "evidence": "blender bbox [-3, -1, 0.5]-[4, 7, 10] negates to obj bbox [-4, -7, 0.5]-[3, 1, 10]"
+  },
+  "conservation": [
+    {
+      "quantity": "verts",
+      "blender_scene": 122,
+      "obj_file": 122,
+      "maya_scene": 122,
+      "conserved": true
+    },
+    {
+      "quantity": "edges",
+      "blender_scene": 252,
+      "obj_file": null,
+      "maya_scene": 252,
+      "conserved": true,
+      "note": "OBJ has no edge records; edges are derived on import"
+    },
+    {
+      "quantity": "faces",
+      "blender_scene": 134,
+      "obj_file": 134,
+      "maya_scene": 134,
+      "conserved": true
+    },
+    {
+      "quantity": "dims",
+      "blender_scene": [
+        7.0,
+        8.0,
+        9.5
+      ],
+      "obj_file": [
+        7.0,
+        8.0,
+        9.5
+      ],
+      "maya_scene": [
+        7.0,
+        8.0,
+        9.5
+      ],
+      "conserved": true
+    },
+    {
+      "quantity": "bbox_position_xy",
+      "blender_scene": "[-3, -1] - [4, 7]",
+      "obj_file": "[-4, -7] - [3, 1]",
+      "maya_scene": "[-4, -7] - [3, 1]",
+      "conserved": false
+    },
+    {
+      "quantity": "object_count",
+      "blender_scene": 2,
+      "obj_file": 2,
+      "maya_scene": 1,
+      "conserved": false
+    },
+    {
+      "quantity": "unit_interpretation",
+      "blender_scene": "m",
+      "obj_file": "unitless",
+      "maya_scene": "cm",
+      "conserved": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "vertex_count",
+      "result": "pass",
+      "observed": "8 + 114 = 122 in both hosts"
+    },
+    {
+      "name": "edge_count",
+      "result": "pass",
+      "observed": "12 + 240 = 252 in both hosts"
+    },
+    {
+      "name": "face_count",
+      "result": "pass",
+      "observed": "6 + 128 = 134 in both hosts"
+    },
+    {
+      "name": "world_bounding_box_vs_obj_on_disk",
+      "result": "pass",
+      "observed": "[-4, -7, 0.5] - [3, 1, 10] identical"
+    },
+    {
+      "name": "units",
+      "result": "fail",
+      "expected": "9.5 m",
+      "observed": "9.5 cm - silent 100x rescale",
+      "reported_as_error_by_host": false
+    },
+    {
+      "name": "up_axis",
+      "result": "fail",
+      "expected": "Blender Z-up converted to Maya Y-up",
+      "observed": "vertical extent 9.5 arrives on Maya Z (depth); no conversion",
+      "reported_as_error_by_host": false
+    },
+    {
+      "name": "object_separation",
+      "result": "fail",
+      "expected": 2,
+      "observed": 1,
+      "reported_as_error_by_host": false
+    },
+    {
+      "name": "target_adapter_available",
+      "result": "fail",
+      "expected": "dcc-mcp-maya auto-loads in Maya 2026 GUI",
+      "observed": "plugin did not auto-load; import performed via maya.cmds"
+    }
+  ],
+  "not_claimed": [
+    "This is not an MCP-orchestrated import on the Maya side; the Maya plugin did not auto-load and the import ran through maya.cmds.",
+    "Only geometry is tested. Materials, UVs, normals, animation and scene hierarchy were not checked.",
+    "The placement transform and the unit rescale are properties of the OBJ path as configured, not of the OBJ format.",
+    "Verified on Blender 5.1.1 and Maya 2026 only; the result does not generalise to other host versions."
+  ]
+}

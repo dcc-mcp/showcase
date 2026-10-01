@@ -1,0 +1,329 @@
+{
+  "schema_version": "1.0",
+  "slug": "blender-mcp-gimbal-turntable",
+  "produced_at": "2026-09-29",
+  "verification_level": "host_in_process_adapter_boot",
+  "verification_level_meaning": "The DCC-MCP adapter was imported and booted inside a real Blender 5.1.1 host, and that host performed the build and the render. The job did not issue MCP tools/call requests; see not_claimed.",
+  "environment": {
+    "host_application": "Blender",
+    "host_version": "5.1.1",
+    "interpreter": "CPython 3.13.9",
+    "platform": "Windows",
+    "engine": "CYCLES",
+    "device": "GPU",
+    "adapter": {
+      "package": "dcc_mcp_blender",
+      "version": "0.2.4",
+      "core_package": "dcc_mcp_core",
+      "core_version": "0.20.28"
+    },
+    "adapter_boot": {
+      "first_import": "failed",
+      "first_import_error": "ModuleNotFoundError: No module named 'dcc_mcp_blender'",
+      "root_cause": "Blender 5.x runs an isolated interpreter that does not inherit the exported package path, so the adapter is unimportable on a plain host start",
+      "remedy": "bootstrap injects the resolved adapter and core package roots into sys.path before importing",
+      "roots_injected": 3,
+      "roots_resolved_ok": 3,
+      "second_import": "ok"
+    },
+    "mcp_endpoint_published_by_host": "http://127.0.0.1:<host-assigned-port>/mcp",
+    "launcher_addon": {
+      "name": "dcc_mcp_blender_launcher",
+      "loaded": false,
+      "cause": "No module named 'dcc_mcp_blender_launcher'"
+    }
+  },
+  "counts": {
+    "scene_objects": 24,
+    "materials": 5,
+    "lights": 4,
+    "turntable_frames": 48,
+    "build_errors": 0
+  },
+  "scene": {
+    "assembly": [
+      "Base",
+      "BaseRing",
+      "Pedestal",
+      "Collar",
+      "RingOuter",
+      "RingMid",
+      "RingInner",
+      "Core",
+      "CoreCage",
+      "Bolt_00 .. Bolt_11 (12 radial bolts)",
+      "Pin_0",
+      "Pin_1",
+      "Floor"
+    ],
+    "materials": [
+      {
+        "name": "Steel",
+        "metallic": 1.0,
+        "roughness": 0.28
+      },
+      {
+        "name": "Copper",
+        "metallic": 1.0,
+        "roughness": 0.33
+      },
+      {
+        "name": "DarkShell",
+        "metallic": 0.35,
+        "roughness": 0.45
+      },
+      {
+        "name": "EmissiveCore",
+        "metallic": 0.0,
+        "roughness": 0.3
+      },
+      {
+        "name": "Floor",
+        "metallic": 0.1,
+        "roughness": 0.62
+      }
+    ],
+    "lights": [
+      {
+        "name": "Key",
+        "type": "AREA",
+        "energy": 420.0
+      },
+      {
+        "name": "Fill",
+        "type": "AREA",
+        "energy": 130.0
+      },
+      {
+        "name": "Rim",
+        "type": "AREA",
+        "energy": 300.0
+      },
+      {
+        "name": "Top",
+        "type": "AREA",
+        "energy": 90.0
+      }
+    ],
+    "camera": {
+      "lens_mm": 85.0,
+      "location": [
+        5.0542,
+        3.1582,
+        2.759
+      ],
+      "rotation_degrees": [
+        74.0,
+        0.0,
+        122.0
+      ],
+      "depth_of_field": true
+    }
+  },
+  "render": {
+    "hero": {
+      "resolution": [
+        1600,
+        900
+      ],
+      "samples": 512,
+      "denoiser": "OpenImageDenoise",
+      "seconds": 6.01
+    },
+    "turntable": {
+      "frames": 48,
+      "samples_per_frame": 320,
+      "total_seconds": 80.23,
+      "frame_seconds_min": 1.57,
+      "frame_seconds_mean": 1.67,
+      "frame_seconds_max": 1.82
+    }
+  },
+  "image_metrics": {
+    "hero": {
+      "reported_mean_luma": 53.92,
+      "reported_std_luma": 34.86,
+      "independent_mean_luma": 53.8,
+      "independent_std_luma": 34.9,
+      "independent_method": "recomputed from hero_v2.png with Pillow; agrees with the producing run to within 0.15",
+      "near_black_frac": 0.2245,
+      "lit_area_frac": 0.7292,
+      "subject_center_uv": [
+        0.516,
+        0.629
+      ],
+      "coverage_uv": [
+        0.999,
+        0.79
+      ]
+    },
+    "turntable": {
+      "step_mean": 3.5239,
+      "step_range": [
+        2.717,
+        4.0098
+      ],
+      "wrap_delta": 3.1473,
+      "wrap_z": -1.0883,
+      "wrap_within_step_range": true,
+      "luma_drift": 0.007,
+      "independent_step_range": [
+        2.644,
+        3.92
+      ],
+      "independent_changed_pixels_pct_range": [
+        8.39,
+        12.41
+      ],
+      "independent_note": "recomputed on the palettised GIF rather than the source PNG frames, so values sit slightly below the reported range; both prove continuous motion with no still frames"
+    },
+    "turntable_drift_history": {
+      "v1": 10.618,
+      "v1_48_frame_rework": 6.361,
+      "v2": 0.007
+    }
+  },
+  "media_specs": {
+    "turntable_v2.gif": {
+      "width": 900,
+      "height": 506,
+      "frames": 48,
+      "frame_delays_cs": [
+        8,
+        9
+      ],
+      "total_cs": 400,
+      "total_seconds": 4.0,
+      "fps_mean": 12.0,
+      "fps_max_instantaneous": 12.5,
+      "loop": 0,
+      "bytes": 2662913,
+      "timing_note": "GIF stores delays in 10 ms units; 1000/12 = 83.33 ms is not representable, so the encoder alternates 80 and 90 ms delays to average 83.33 ms. Mean frame rate is exactly 12.00 fps and the cycle is 4.000 s; 8 of 48 frames carry an 80 ms delay and therefore play at 12.5 fps instantaneously."
+    },
+    "hero_v2.jpg": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 52999,
+      "encoding": "JPEG quality 82",
+      "source": "hero_v2.png (1359373 bytes, 1600x900)"
+    },
+    "contact_sheet_v2.jpg": {
+      "width": 1232,
+      "height": 354,
+      "bytes": 27860,
+      "encoding": "JPEG quality 82",
+      "source": "contact_sheet_v2.png (1390739 bytes, 1232x354)",
+      "grid": "4 columns x 2 rows",
+      "grid_verified_by": "column-edge profile on the luminance channel detected gutters at 24, 50, 75 and 99 percent width"
+    },
+    "showcase_v2.blend": {
+      "bytes": 100281,
+      "role": "source scene; re-rendering it regenerates the hero frame and the 48 turntable frames"
+    }
+  },
+  "checks": [
+    {
+      "name": "adapter_imports_in_host",
+      "result": "pass",
+      "detail": "dcc_mcp_blender 0.2.4 and dcc_mcp_core 0.20.28 imported inside Blender 5.1.1 after 3 of 3 package roots were injected"
+    },
+    {
+      "name": "host_is_real_blender",
+      "result": "pass",
+      "detail": "bootstrap reports blender_version=5.1.1 and python=3.13.9 from inside the running host"
+    },
+    {
+      "name": "scene_object_count",
+      "result": "pass",
+      "detail": "24 objects recorded, matching the 24-part assembly (9 body parts, 12 radial bolts, 2 axial pins, 1 floor)"
+    },
+    {
+      "name": "material_count",
+      "result": "pass",
+      "detail": "5 materials recorded: Steel, Copper, DarkShell, EmissiveCore, Floor"
+    },
+    {
+      "name": "light_count",
+      "result": "pass",
+      "detail": "4 AREA lights recorded: Key 420, Fill 130, Rim 300, Top 90"
+    },
+    {
+      "name": "build_error_free",
+      "result": "pass",
+      "detail": "build report errors array is empty"
+    },
+    {
+      "name": "hero_resolution",
+      "result": "pass",
+      "detail": "hero frame rendered at 1600x900"
+    },
+    {
+      "name": "hero_render_used_gpu_cycles",
+      "result": "pass",
+      "detail": "engine CYCLES, device GPU, 512 samples, OpenImageDenoise"
+    },
+    {
+      "name": "hero_luma_independently_reproduced",
+      "result": "pass",
+      "detail": "independent recomputation gives mean 53.8 / std 34.9 against reported 53.92 / 34.86"
+    },
+    {
+      "name": "turntable_frame_count",
+      "result": "pass",
+      "detail": "48 frames rendered, 48 frames present in the encoded GIF, no dropped frames"
+    },
+    {
+      "name": "turntable_motion_continuous",
+      "result": "pass",
+      "detail": "every inter-frame step is non-zero and inside the 2.717 to 4.0098 range; independent check on the GIF gives 2.644 to 3.920"
+    },
+    {
+      "name": "turntable_loop_seamless",
+      "result": "pass",
+      "detail": "wrap delta 3.1473 is inside the step range (wrap z -1.0883), so the last-to-first step is indistinguishable from any other step"
+    },
+    {
+      "name": "turntable_luma_drift",
+      "result": "pass",
+      "detail": "0.007, against 10.618 for the v1 turntable and 6.361 for the intermediate rework"
+    },
+    {
+      "name": "gif_width",
+      "result": "pass",
+      "detail": "900 px, within the 900 px GIF cap"
+    },
+    {
+      "name": "gif_mean_fps",
+      "result": "pass",
+      "detail": "12.00 fps mean, within the 12 fps GIF cap"
+    },
+    {
+      "name": "gif_size",
+      "result": "pass",
+      "detail": "2662913 bytes, within the 8 MB GIF cap"
+    },
+    {
+      "name": "gif_loops",
+      "result": "pass",
+      "detail": "loop count 0 (infinite)"
+    },
+    {
+      "name": "contact_sheet_grid",
+      "result": "pass",
+      "detail": "4x2 grid independently confirmed by column-edge gutter detection"
+    },
+    {
+      "name": "source_scene_published",
+      "result": "pass",
+      "detail": "showcase_v2.blend (100281 bytes) ships with the entry so the frames are regenerable"
+    }
+  ],
+  "not_claimed": [
+    "MCP tool-level round trip: the scene was built and rendered through Blender's Python API inside the host, not through MCP tools/call requests. The adapter was booted but its tool surface was not exercised by the job that produced these frames.",
+    "A sustained interactive MCP session: long-lived background hosts are reaped between agent tool calls in this environment, so the job ran as a single in-process invocation.",
+    "Availability of the dcc_mcp_blender_launcher add-on: it was not installed on this host, so automatic MCP server startup on host launch was not exercised.",
+    "Cross-host data conservation: this entry involves one host only and makes no claim about transferring the scene to another DCC application.",
+    "Geometric or material ground truth: no mesh, vertex, UV or shader values were measured. Every visual claim rests on the reported and independently recomputed luma statistics.",
+    "Aesthetic sign-off: composition is expressed only through the measured subject centre, coverage and lit-area fractions, not through human review."
+  ]
+}

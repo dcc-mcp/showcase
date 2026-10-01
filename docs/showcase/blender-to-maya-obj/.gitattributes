@@ -1,0 +1,3 @@
+# Keep line endings byte-stable: the manifest hashes these files, and any
+# checkout-time CRLF conversion would change the bytes and break the hashes.
+*.obj -text

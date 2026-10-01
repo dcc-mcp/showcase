@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "slug": "crate-lookdev",
+      "title": "风化木箱",
+      "subtitle": "从 Designer 材质图到 Blender lookdev",
+      "software": [
+        "Blender",
+        "Substance 3D Designer"
+      ],
+      "capabilities": [
+        "建模",
+        "程序化材质",
+        "跨软件 Lookdev",
+        "渲染",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/crate-lookdev/hero.jpg",
+        "alt": "Blender Cycles 渲染的橄榄绿风化长木箱，带金属包角、锁扣和断裂压条"
+      },
+      "evidence_label": "公开案例 · 本轮未复现",
+      "evidence_scope": "整合 2026-09-10 发布的真实作品与源仓库测量记录。源报告声明 Blender 建模通过 DCC-MCP 完成；本轮仅下载、核对哈希、优化网页图和审阅公开证据，没有重新运行 Designer、Blender 或 DCC 工具。公开包未提供完整 tools/call 轨迹，不能据此声称本轮全程 MCP 复现。",
+      "summary": "把木纹、掉漆、铁锈与划痕分成可编辑材质图，再把厚度、断裂、纤维和接触阴影落实到一个可重开的木箱场景。178 个箱体网格、两套 Designer 图和 13 张打包贴图组成最终 lookdev。",
+      "goal": "从已有参考建立一只约 2.2 m 长的风化木箱，保留宽木板、薄压条、金属包角和曲线锁扣。用程序化材质控制旧漆和锈蚀，以真实几何构造断裂轮廓，并让导出的 PBR 贴图在 Blender 中保持正确色彩空间与物理纹理密度。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过 DCC-MCP，在 Substance 3D Designer 与 Blender 中制作一只约 2.2 m 长的风化木箱。使用宽木板、30 mm 压条、包角铆钉与弯曲锁扣；橄榄绿油漆自然剥落，铁锈与划痕分别控制金属和粗糙度。压条应有多层断裂与附着的渐尖木纤维，前下板有渐尖凹痕。木材输出 2048×2048、钢材输出 1024×1024 PBR 贴图，保留可编辑 SBS/SBSAR；使用 sRGB 颜色贴图和 Non-Color 数据贴图。木纹细节保持约 0.45 m 一次的物理密度。让四个支脚与地面真实接触，使用 Cycles 输出主图、断裂与凹痕细节、UV 检查图和完整节点图。重新打开保存的场景与材质，核对贴图打包字节、网格数、包围盒和文件哈希。记录实际 MCP 工具调用；遇到不可用能力明确报告，不绕用直接软件脚本。",
+        "note": "原始对话提示词没有公开。此文本根据公开 README 与 validation 改写，用于下一次复现；本轮未执行，也不是原始提示词。参考图原由 Codex 图像生成产生，属于历史输入，不是 DCC 成品。"
+      },
+      "environment": [
+        {
+          "label": "材质软件",
+          "value": "Substance 3D Designer 16.0.0"
+        },
+        {
+          "label": "建模与渲染",
+          "value": "Blender 5.2.0 LTS · Cycles · 128 samples"
+        },
+        {
+          "label": "主图",
+          "value": "1600 × 1600 · 源报告记录"
+        },
+        {
+          "label": "图截图",
+          "value": "DCC-CUA 1.8.2 · 完整画面"
+        },
+        {
+          "label": "适配器 / Core",
+          "value": "未公开记录（unrecorded）"
+        }
+      ],
+      "tools": [
+        {
+          "name": "DCC-MCP / Blender（源报告）",
+          "description": "源 README 声明建模通过 DCC-MCP 完成；具体工具名、参数和原始 tools/call 日志没有公开。"
+        },
+        {
+          "name": "Designer 材质图工作流（源报告）",
+          "description": "公开可编辑 SBS、SBSAR、完整节点图和原生导出贴图；具体 MCP 调用与适配器版本没有公开。"
+        },
+        {
+          "name": "DCC-CUA 1.8.2",
+          "description": "源 manifest 记录节点图截图来源。截图展示 37 个木材与 35 个钢材作者节点，不展开 Adobe 库内部图。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "确定结构与比例",
+          "description": "按已有生成参考建立约 2.2 m 的长木箱，使用宽木板、30 mm 压条、包角和曲线锁扣。参考图只用于外观判断，尺寸、损伤与风化位置是艺术估计。",
+          "image": {
+            "src": "docs/showcase/painted-wood/reference.jpg",
+            "alt": "历史 Codex 生成的风化木箱参考图"
+          }
+        },
+        {
+          "title": "构建旧漆木材图",
+          "description": "37 个作者节点把 Wood Fibers、Grunge Leaky Paint、Shape 与 Directional Scratches 组合成油漆、裸木、刮痕及高度层；paint_coverage 保存为 0.735，额外的 16-bit grain 输出供 Blender 细节使用。",
+          "image": {
+            "src": "docs/showcase/crate-lookdev/wood-graph.jpg",
+            "alt": "Substance 3D Designer 的完整 37 节点旧漆木材图"
+          }
+        },
+        {
+          "title": "构建锈蚀钢材图",
+          "description": "35 个作者节点用 Grunge Rust Fine 分离非金属锈层与裸钢，划痕降低粗糙度并露出亮金属。源报告记录裸钢、铁锈和抛光刮痕粗糙度分别为 0.40、0.84、0.23。",
+          "image": {
+            "src": "docs/showcase/crate-lookdev/steel-graph.jpg",
+            "alt": "Substance 3D Designer 的完整 35 节点锈蚀钢材图"
+          }
+        },
+        {
+          "title": "用几何建立断裂和纤维",
+          "description": "箱体记录 178 个网格，其中 83 个木材网格、59 个附着纤维网格。分层断裂和渐尖凹痕改变轮廓；两根压条使用原生 16-bit 高度与细木纹，置换范围 0.004 m、midlevel 0.52。",
+          "image": {
+            "src": "docs/showcase/crate-lookdev/detail.jpg",
+            "alt": "破裂压条的分层木材轮廓与金属反射细节"
+          }
+        },
+        {
+          "title": "控制 UV 密度并检查接触",
+          "description": "BoardUV 保留板材的漆磨损分布，WoodDetailUV 按 0.45 m 每次平铺统一细木纹密度。UV 使用重叠与平铺。源 validation 记录四个支脚与地面间隙均为 0.0 m。",
+          "image": {
+            "src": "docs/showcase/crate-lookdev/uv-checker.jpg",
+            "alt": "木箱全模型 UV 棋盘格检查图"
+          }
+        },
+        {
+          "title": "打包贴图并重开渲染",
+          "description": "木材导出 2048×2048、钢材 1024×1024，场景打包 13 张图；颜色为 sRGB，数据为 Non-Color。源记录核对了打包图字节，并重开 SBS 与 Blender 场景，以 Cycles 128 samples 渲染主图。",
+          "image": {
+            "src": "docs/showcase/crate-lookdev/hero.jpg",
+            "alt": "最终 Cycles 主图"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/crate-lookdev/hero.jpg",
+          "alt": "风化木箱最终 Cycles 主图",
+          "caption": "最终 lookdev：1600×1600。当前为网页 JPEG，源 PNG 可从资源链接取得。"
+        },
+        {
+          "src": "docs/showcase/crate-lookdev/detail.jpg",
+          "alt": "破裂压条和锈蚀包角近景",
+          "caption": "断裂轮廓来自几何，压条还使用真实置换。"
+        },
+        {
+          "src": "docs/showcase/crate-lookdev/splinters.jpg",
+          "alt": "前下板的凹痕和附着纤维",
+          "caption": "渐尖凹痕与纤维细节。"
+        },
+        {
+          "src": "docs/showcase/crate-lookdev/wood-color.jpg",
+          "alt": "导出的旧漆木材 Base Color",
+          "caption": "木材 Base Color 网页预览；原始贴图 2048×2048。"
+        },
+        {
+          "src": "docs/showcase/crate-lookdev/steel-color.jpg",
+          "alt": "导出的锈蚀钢材 Base Color",
+          "caption": "钢材 Base Color；原始贴图 1024×1024。"
+        },
+        {
+          "src": "docs/showcase/crate-lookdev/uv-layout.jpg",
+          "alt": "前下板与断裂压条两层 UV 的实际坐标图",
+          "caption": "实际 UV 坐标。源图 1800×1380，网页副本缩至 1600 px 宽。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "源图一致性（本轮）",
+          "result": "pass",
+          "observed": "9 张下载原图的 SHA-256 与原 manifest 一致；网页副本单独记录哈希。"
+        },
+        {
+          "name": "保存后重开（历史记录）",
+          "result": "pass",
+          "observed": "source-validation 记录 Blender reopened=true；木材 37 节点、钢材 35 节点均重开并原生重算。"
+        },
+        {
+          "name": "打包与色彩空间（历史记录）",
+          "result": "pass",
+          "observed": "13 张打包图片；记录的材质图槽 packed_bytes_match_export=true，颜色 sRGB / 数据 Non-Color。"
+        },
+        {
+          "name": "地面接触（历史记录）",
+          "result": "pass",
+          "observed": "四支脚 gap=0.0 m；箱体包围盒约 2.252 × 1.527 × 1.138 m。"
+        },
+        {
+          "name": "完整 MCP 调用轨迹",
+          "result": "fail",
+          "observed": "公开包未包含完整 tools/call 日志、参数或 adapter/core 版本；本轮没有补造记录。"
+        }
+      ],
+      "limitations": [
+        "本轮没有在 DCC 中复现；所有软件测量取自公开历史记录，网页图哈希核对才是本轮实际执行。",
+        "原始提示词、完整 MCP 工具调用日志与 adapter/core 版本未公开。",
+        "历史参考图由 Codex 图像生成产生；它是参考输入，不是通过 DCC-MCP 制作的成品。",
+        "尺寸、风化与损伤是艺术估计；边缘磨损取自 Designer 板材分布，不是曲率烘焙。",
+        "这是密集 lookdev 场景：平铺/重叠 UV，不是游戏可用拓扑或唯一烘焙图集。",
+        "源记录只声明可重开和重算，不声明重算 PNG 字节完全一致。",
+        "源仓库整体声明 MIT；作品、生成参考图与材质没有另列许可。Adobe 内置库资源仅通过 sbs:// 引用，不在本站分发。"
+      ],
+      "resources": [
+        {
+          "label": "本合集报告",
+          "url": "docs/showcase/crate-lookdev/README.md"
+        },
+        {
+          "label": "合集文件清单与哈希",
+          "url": "docs/showcase/crate-lookdev/manifest.json"
+        },
+        {
+          "label": "证据范围与验证记录",
+          "url": "docs/showcase/crate-lookdev/validation.json"
+        },
+        {
+          "label": "源测量 JSON",
+          "url": "docs/showcase/crate-lookdev/source-validation.json"
+        },
+        {
+          "label": "原图与网页副本映射",
+          "url": "docs/showcase/crate-lookdev/derivatives.json"
+        },
+        {
+          "label": "公开源案例",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/README.md"
+        },
+        {
+          "label": "原始 render.png",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/render.png"
+        },
+        {
+          "label": "Blender 源场景（约 74 MiB）",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/crate.blend"
+        },
+        {
+          "label": "木材 SBS",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/wood/material.sbs"
+        },
+        {
+          "label": "木材 SBSAR",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/wood/material.sbsar"
+        },
+        {
+          "label": "钢材 SBS",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/steel/material.sbs"
+        },
+        {
+          "label": "钢材 SBSAR",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/steel/material.sbsar"
+        },
+        {
+          "label": "源许可",
+          "url": "docs/showcase/crate-lookdev/LICENSE.source.txt"
+        }
+      ],
+      "credits": {
+        "author": "Long Hao / loonghao · DCC-MCP",
+        "license": "源仓库 MIT；作品与素材未另列独立许可",
+        "note": "保留源作者与完整 MIT 声明。参考图源于 Codex 图像生成；Adobe Substance 3D Designer 是第三方软件，标准库仅引用、不分发。当前图片是原公开成果的网页派生副本。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/README.md",
+        "commit": "38623dd51721a958b8dc5d2e8957e991908333ac"
+      },
+      "verified_at": "2026-10-01"
+    },
+    {
+      "slug": "painted-wood",
+      "title": "橄榄绿旧漆木材",
+      "subtitle": "从生成参考到可编辑的程序化表面",
+      "software": [
+        "Substance 3D Designer"
+      ],
+      "capabilities": [
+        "程序化材质",
+        "参数控制",
+        "PBR 导出",
+        "颜色校正"
+      ],
+      "cover": {
+        "src": "docs/showcase/painted-wood/hero.jpg",
+        "alt": "Designer 实际界面同时显示旧漆木材节点图、2D 输出与圆角立方体预览"
+      },
+      "evidence_label": "公开案例 · 本轮未复现",
+      "evidence_scope": "整合源仓库 2026-09-10 发布的 Designer 图、前后颜色图、原生贴图与文件清单。公开报告声明通过 DCC-MCP 编写实时材质图；本轮核对 5 张原图哈希并制作网页副本，没有启动 Designer。源包未提供 validation.json、原始提示词、完整 tools/call 日志或 adapter/core 版本。",
+      "summary": "19 个作者节点把木纤维、裸木颜色和剥落油漆变成可编辑的 PBR 材质。颜色校正有前后图，paint_coverage 暴露为参数，五类原生输出保留明确的位深和色彩解释。",
+      "goal": "以已有生成木箱参考的表面为视觉目标，建立一套不使用参考图像素烘焙的程序化旧漆木材。保留可调油漆覆盖率、裸木颜色、木纹高度与粗糙度，并导出能用于其他渲染软件的原生 PBR 通道。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过 DCC-MCP 在 Substance 3D Designer 16 中制作可编辑的橄榄绿旧漆木材。已有木箱参考仅用于观察颜色和磨损，不把参考图像素烘焙进材质。用 Wood Fibers 1 建立木纹，以两种裸木颜色混合；用 Grunge Leaky Paint 与 Levels 建立剥落油漆遮罩，并驱动粗糙度、Height 与 Normal，Metallic 保持零。暴露 paint_coverage 参数并保存为 0.70。将油漆 RGB 由 87/89/62 校正为 99/96/74，裸木端点校正为 0.35/0.29/0.215 与 0.69/0.60/0.46。原生导出 1024×1024 的 Base Color、Height、Normal、Roughness、Metallic，保存 SBS 与 SBSAR，拍摄完整节点图和实时材质预览，记录文件哈希及实际工具调用。缺少能力时报告限制，不绕用直接软件脚本。",
+        "note": "原始对话提示词未公开。此文本根据公开步骤改写，供未来复现使用；不是原话，本轮未执行。原参考由 Codex 图像生成产生，材质图由源报告声明的实时 DCC-MCP 工作流制作。"
+      },
+      "environment": [
+        {
+          "label": "材质软件",
+          "value": "Substance 3D Designer 16.0.0"
+        },
+        {
+          "label": "作者图",
+          "value": "crate_painted_wood · 19 nodes"
+        },
+        {
+          "label": "输出",
+          "value": "1024 × 1024 · 5 PBR 通道"
+        },
+        {
+          "label": "色彩工作流",
+          "value": "Designer legacy · 原生导出无额外 gamma 变换"
+        },
+        {
+          "label": "图截图",
+          "value": "DCC-CUA 1.8.2"
+        },
+        {
+          "label": "适配器 / Core",
+          "value": "未公开记录（unrecorded）"
+        }
+      ],
+      "tools": [
+        {
+          "name": "DCC-MCP / Designer（源报告）",
+          "description": "源 README 和 manifest 声明通过 DCC-MCP 在实时 Designer 图中编写材质并导出。完整工具名、调用参数和轨迹未公开。"
+        },
+        {
+          "name": "DCC-CUA 1.8.2",
+          "description": "原公开 manifest 记录截图 provider；完整节点图与实时 session 保留 2D 输出和预览信息。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "把参考分解成表面特征",
+          "description": "观察历史生成参考中的木纤维、裸木和橄榄绿剥落漆。参考用于艺术估计，不直接烘焙成贴图；本案例只做材质，未重建木箱几何或 UV。",
+          "image": {
+            "src": "docs/showcase/painted-wood/reference.jpg",
+            "alt": "Codex 历史生成木箱参考"
+          }
+        },
+        {
+          "title": "搭建 19 节点的材质图",
+          "description": "Wood Fibers 1 驱动两种木色混合；Grunge Leaky Paint 和 Levels 控制油漆覆盖。磨损遮罩同时影响 Roughness，木纹和漆层起伏影响 Height 与 Normal，Metallic 为零。",
+          "image": {
+            "src": "docs/showcase/painted-wood/graph.jpg",
+            "alt": "19 个作者节点完整连接图"
+          }
+        },
+        {
+          "title": "校正过绿、过黄的颜色",
+          "description": "源报告记录油漆 RGB 从 87/89/62 改为 99/96/74；裸木端点由偏黄组合改为较中性的 0.35/0.29/0.215 与 0.69/0.60/0.46。颜色是从带光照参考作出的艺术估计。",
+          "image": {
+            "src": "docs/showcase/painted-wood/before.jpg",
+            "alt": "颜色校正前的旧漆木材 Base Color"
+          }
+        },
+        {
+          "title": "暴露油漆覆盖率并实时预览",
+          "description": "paint_coverage 通过参数函数连接到油漆生成器的 balance，保存为 0.70。Designer 的圆角立方体只用于材质预览，不是最终木箱模型。",
+          "image": {
+            "src": "docs/showcase/painted-wood/hero.jpg",
+            "alt": "Designer 内实时图、纹理和圆角立方体预览"
+          }
+        },
+        {
+          "title": "导出原生 PBR 与可编辑源",
+          "description": "五个 PBR 通道均为 1024×1024。Base Color 为 RGB8，Height 为 Gray16，Normal 为 RGBA16，Roughness 和 Metallic 为 RGB8。颜色按 sRGB，数据按 raw/non-color 使用，避免二次 gamma 变换。",
+          "image": {
+            "src": "docs/showcase/painted-wood/color.jpg",
+            "alt": "校正后的旧漆木材 Base Color"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/painted-wood/hero.jpg",
+          "alt": "实时 Designer 预览",
+          "caption": "公开实际 Designer session：19 节点图、2D 纹理和圆角立方体材质预览。"
+        },
+        {
+          "src": "docs/showcase/painted-wood/before.jpg",
+          "alt": "颜色校正前 Base Color",
+          "caption": "校正前：漆偏绿、裸木偏黄。"
+        },
+        {
+          "src": "docs/showcase/painted-wood/color.jpg",
+          "alt": "颜色校正后 Base Color",
+          "caption": "校正后：更中性的旧漆与裸木。"
+        },
+        {
+          "src": "docs/showcase/painted-wood/graph.jpg",
+          "alt": "完整旧漆木材节点图",
+          "caption": "全部作者节点与连接；Adobe 库节点内部实现未展开。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "源图一致性（本轮）",
+          "result": "pass",
+          "observed": "5 张下载原图的 SHA-256 与源 manifest 一致；原图及网页副本分别记录哈希。"
+        },
+        {
+          "name": "可编辑源与参数（历史记录）",
+          "result": "pass",
+          "observed": "源 manifest 记录 graph=crate_painted_wood、19 个作者节点、paint_coverage=0.7，公开 SBS/SBSAR。"
+        },
+        {
+          "name": "输出规格（历史记录）",
+          "result": "pass",
+          "observed": "源 manifest 为五个 PBR 输出记录 1024×1024 尺寸及 PNG 位深，Normal RGBA16 / Height Gray16。"
+        },
+        {
+          "name": "软件复现与完整 MCP 轨迹",
+          "result": "fail",
+          "observed": "本轮未运行 Designer；源包没有 validation.json 或完整 tools/call 轨迹，适配器与 Core 版本未记录。"
+        }
+      ],
+      "limitations": [
+        "本轮只核对公开资产哈希与来源，没有在 Designer 中重新执行，未证明当前适配器可复现。",
+        "公开案例没有原始提示词、validation.json、tools/call 日志或 adapter/core 版本。",
+        "历史参考图由 Codex 图像生成产生，属于参考输入；它不是程序化材质的导出结果。",
+        "圆角立方体是 Designer 预览网格。没有木箱几何、硬件、特定边缘磨损或 UV 重建。",
+        "颜色是艺术估计，不是物理 albedo 测量。Normal Y 方向仍须与目标渲染器匹配。",
+        "源仓库整体声明 MIT；作品、参考图和材质未另列许可。SBS 用 sbs:// 引用安装的 Adobe 标准库，本站不分发标准库源码。"
+      ],
+      "resources": [
+        {
+          "label": "本合集报告",
+          "url": "docs/showcase/painted-wood/README.md"
+        },
+        {
+          "label": "合集文件清单与哈希",
+          "url": "docs/showcase/painted-wood/manifest.json"
+        },
+        {
+          "label": "证据范围与验证记录",
+          "url": "docs/showcase/painted-wood/validation.json"
+        },
+        {
+          "label": "原图与网页副本映射",
+          "url": "docs/showcase/painted-wood/derivatives.json"
+        },
+        {
+          "label": "源文件清单",
+          "url": "docs/showcase/painted-wood/source-manifest.json"
+        },
+        {
+          "label": "公开源案例",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/README.md"
+        },
+        {
+          "label": "Editable SBS",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/painted-wood.sbs"
+        },
+        {
+          "label": "SBSAR",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/painted-wood.sbsar"
+        },
+        {
+          "label": "Base Color 原生 PNG",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/baseColor.png"
+        },
+        {
+          "label": "Height 原生 PNG",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/height.png"
+        },
+        {
+          "label": "Normal 原生 PNG",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/normal.png"
+        },
+        {
+          "label": "Roughness 原生 PNG",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/roughness.png"
+        },
+        {
+          "label": "Metallic 原生 PNG",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/metallic.png"
+        },
+        {
+          "label": "历史生成参考",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/reference.png"
+        },
+        {
+          "label": "源许可",
+          "url": "docs/showcase/painted-wood/LICENSE.source.txt"
+        }
+      ],
+      "credits": {
+        "author": "Long Hao / loonghao · DCC-MCP",
+        "license": "源仓库 MIT；作品与素材未另列独立许可",
+        "note": "源报告注明参考由 Codex 生成、材质和导出文件为该仓库创作。保留作者与源许可；Adobe 标准库内容仅引用、不分发。当前图片是原公开成果的网页派生副本。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/README.md",
+        "commit": "38623dd51721a958b8dc5d2e8957e991908333ac"
+      },
+      "verified_at": "2026-10-01"
+    }
+  ]
+}

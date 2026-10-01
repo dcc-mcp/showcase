@@ -1,0 +1,77 @@
+{
+  "source_revision": "38623dd51721a958b8dc5d2e8957e991908333ac",
+  "generated_at": "2026-10-01",
+  "purpose": "Website delivery only; this is not new DCC production or a DCC rerun",
+  "files": [
+    {
+      "path": "hero.jpg",
+      "source_path": "designer-session.png",
+      "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-designer/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/designer-session.png",
+      "source_sha256": "c589cc52964b8044d8b1d13fd771f5420b119b53e3eab133a0b62279ccfbf66f",
+      "source_bytes": 657397,
+      "source_width": 1568,
+      "source_height": 931,
+      "web_sha256": "f6b76a213c736b241f8124efdaf1ab0af0a2810bc19c913c1cafdc6494103e88",
+      "web_bytes": 153765,
+      "web_width": 1568,
+      "web_height": 931,
+      "transformation": "JPEG q82; full image retained; resized only when longer edge exceeds 1600px; alpha composited over neutral dark background; no retouching"
+    },
+    {
+      "path": "graph.jpg",
+      "source_path": "designer-graph.png",
+      "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-designer/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/designer-graph.png",
+      "source_sha256": "e17cf5301be0984a40c7d27b6c393fc890485406a652c7b6791d59e156f1bbff",
+      "source_bytes": 446855,
+      "source_width": 1568,
+      "source_height": 931,
+      "web_sha256": "8700e0d6db6a9d0cee9a36e1a60bb70f969fa266f4a1d413266916fb184fe043",
+      "web_bytes": 124749,
+      "web_width": 1568,
+      "web_height": 931,
+      "transformation": "JPEG q82; full image retained; resized only when longer edge exceeds 1600px; alpha composited over neutral dark background; no retouching"
+    },
+    {
+      "path": "before.jpg",
+      "source_path": "basecolor-before.png",
+      "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-designer/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/basecolor-before.png",
+      "source_sha256": "605a833c545173c365bb9b60209a0b35ae726c64de6bcde631f28d2f29210311",
+      "source_bytes": 963126,
+      "source_width": 1024,
+      "source_height": 1024,
+      "web_sha256": "49bd870be7b3736bbfeaa958babbdb09ec3e3eb2491c0f44ffc237e2492e3a36",
+      "web_bytes": 118059,
+      "web_width": 1024,
+      "web_height": 1024,
+      "transformation": "JPEG q82; full image retained; resized only when longer edge exceeds 1600px; alpha composited over neutral dark background; no retouching"
+    },
+    {
+      "path": "color.jpg",
+      "source_path": "baseColor.png",
+      "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-designer/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/baseColor.png",
+      "source_sha256": "cdc66b7a17feaf412e829a4b5f492b402bc8af73d3320c480d26bd28f8dcd2d2",
+      "source_bytes": 863693,
+      "source_width": 1024,
+      "source_height": 1024,
+      "web_sha256": "2a30f5c3518c0d24b38de4734cb94e907a90a11e3545498a343053326a5f7235",
+      "web_bytes": 81150,
+      "web_width": 1024,
+      "web_height": 1024,
+      "transformation": "JPEG q82; full image retained; resized only when longer edge exceeds 1600px; alpha composited over neutral dark background; no retouching"
+    },
+    {
+      "path": "reference.jpg",
+      "source_path": "reference.png",
+      "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-substance3d-designer/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/painted-wood/reference.png",
+      "source_sha256": "6b628d137c02563968680764730718fbdf03b9c66c0d3bda7d59fa551c0aeccf",
+      "source_bytes": 2375754,
+      "source_width": 1254,
+      "source_height": 1254,
+      "web_sha256": "4507c36df2e053485ab0f0a29f0fc3d20db10aa401ccd5aca73c26e40fee2439",
+      "web_bytes": 226077,
+      "web_width": 1254,
+      "web_height": 1254,
+      "transformation": "JPEG q82; full image retained; resized only when longer edge exceeds 1600px; alpha composited over neutral dark background; no retouching"
+    }
+  ]
+}
