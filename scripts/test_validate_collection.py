@@ -154,6 +154,14 @@ class CollectionContractTests(unittest.TestCase):
         self.case["environment"][1]["value"] = ""
         self.assertTrue(any("versions require" in p for p in self.problems()))
 
+    def test_published_reproduction_scripts_are_privacy_scanned(self):
+        for extension in (".py", ".ps1", ".sh"):
+            with self.subTest(extension=extension):
+                report = self.root / ("replay" + extension)
+                report.write_text("private = 'C:/private/scene.hip'\n", encoding="utf-8")
+                self.case["resources"] = [{"label": "Replay", "url": report.name}]
+                self.assertTrue(any("private filesystem" in p for p in self.problems()))
+
     def test_selected_public_report_is_privacy_scanned(self):
         (self.entry / "README.md").write_text("Connect to https://10.0.0.1/api", encoding="utf-8")
         self.assertTrue(any("private network" in p for p in self.problems()))

@@ -1,0 +1,3193 @@
+{
+  "schema_version": 1,
+  "capture_scope": "Actual CLI response logs. Requests are included only where recorded at the time (evidence 70 onward). Earlier response logs are not reconstructed requests.",
+  "redaction": {
+    "CASE_DIR": "User-selected case directory",
+    "JOB_DIR": "Adapter-owned isolated render job directory",
+    "PRIVATE_NATIVE_DIR": "Local directory retaining the HIP withheld from public distribution",
+    "removed": "Private host, process/instance identifiers, internal absolute paths and unrelated update announcements."
+  },
+  "transport": "MCP typed calls through gateway",
+  "require_gateway": true,
+  "agent_session_id": "showcase-houdini-procedural-20261001",
+  "calls": [
+    {
+      "evidence": "100-save-background-native",
+      "tool": "houdini_automation__save_hip_file",
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "CASE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "CASE_DIR/CASE.hip"
+      },
+      "recorded_at_utc": "2026-10-01T07:22:20.3444929Z"
+    },
+    {
+      "evidence": "101-start-background-final",
+      "tool": "houdini_render__render_rop",
+      "response": {
+        "success": true,
+        "message": "Started background ROP render",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "background": true,
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "7dd7c652438d452fb518e047ae099344",
+          "state": "queued",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "owned_by_current_process": true,
+          "worker_liveness": "alive"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "rop_path": "/out/showcase_20261001_mantra",
+        "frame_range": [
+          1,
+          1,
+          1
+        ],
+        "background": true
+      },
+      "recorded_at_utc": "2026-10-01T07:22:21.1356761Z"
+    },
+    {
+      "evidence": "102-probe-export",
+      "tool": "houdini_interchange__probe_file",
+      "response": {
+        "success": true,
+        "message": "Probed file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "file_path": "CASE_DIR/ceramic.obj",
+          "exists": true,
+          "format": "obj",
+          "is_supported_import": true,
+          "size_bytes": 35869290
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "CASE_DIR/ceramic.obj"
+      },
+      "recorded_at_utc": "2026-10-01T07:23:37.5833503Z"
+    },
+    {
+      "evidence": "103-final-render-verified",
+      "tool": "houdini_render__get_render_job",
+      "response": {
+        "success": true,
+        "message": "Read background ROP job",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "7dd7c652438d452fb518e047ae099344",
+          "state": "completed",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "started_at": 1790839352.9526308,
+          "expected_outputs": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_snapshot": {
+            "CASE_DIR/hero.png": {
+              "mtime_ns": 1790838655963319300,
+              "size": 1250891
+            }
+          },
+          "execution_mode": "render",
+          "elapsed_secs": 119.231,
+          "written_files": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_verification": {
+            "state": "verified",
+            "expected_output_count": 1,
+            "written_file_count": 1
+          },
+          "warnings": [],
+          "finished_at": 1790839472.1839101,
+          "owned_by_current_process": false,
+          "worker_liveness": "stopped",
+          "completed": 1,
+          "total": 1,
+          "progress": 1.0,
+          "eta_secs": 0.0,
+          "warning_count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "job_id": "7dd7c652438d452fb518e047ae099344",
+        "include_details": true
+      },
+      "recorded_at_utc": "2026-10-01T07:25:01.2117691Z"
+    },
+    {
+      "evidence": "104-match-backdrop-tone",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/mat/showcase_backdrop",
+            "name": "showcase_backdrop",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "emitcolor"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/mat/showcase_backdrop",
+        "parameters": {
+          "emitcolor": [
+            0.002,
+            0.0019,
+            0.0016
+          ]
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:26:52.5726618Z"
+    },
+    {
+      "evidence": "105-save-final-studio",
+      "tool": "houdini_automation__save_hip_file",
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "CASE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "CASE_DIR/CASE.hip"
+      },
+      "recorded_at_utc": "2026-10-01T07:26:54.0211089Z"
+    },
+    {
+      "evidence": "106-start-final-tone-render",
+      "tool": "houdini_render__render_rop",
+      "response": {
+        "success": true,
+        "message": "Started background ROP render",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "background": true,
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "31b24bea0da34036b204df115a114e32",
+          "state": "queued",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "owned_by_current_process": true,
+          "worker_liveness": "alive"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "rop_path": "/out/showcase_20261001_mantra",
+        "frame_range": [
+          1,
+          1,
+          1
+        ],
+        "background": true
+      },
+      "recorded_at_utc": "2026-10-01T07:26:55.0721629Z"
+    },
+    {
+      "evidence": "107-final-completed",
+      "tool": "houdini_render__get_render_job",
+      "response": {
+        "success": true,
+        "message": "Read background ROP job",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "31b24bea0da34036b204df115a114e32",
+          "state": "completed",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "started_at": 1790839622.3217244,
+          "expected_outputs": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_snapshot": {
+            "CASE_DIR/hero.png": {
+              "mtime_ns": 1790839471693831300,
+              "size": 1224524
+            }
+          },
+          "execution_mode": "render",
+          "elapsed_secs": 115.92,
+          "written_files": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_verification": {
+            "state": "verified",
+            "expected_output_count": 1,
+            "written_file_count": 1
+          },
+          "warnings": [],
+          "finished_at": 1790839738.2419384,
+          "owned_by_current_process": false,
+          "worker_liveness": "stopped",
+          "completed": 1,
+          "total": 1,
+          "progress": 1.0,
+          "eta_secs": 0.0,
+          "warning_count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "job_id": "31b24bea0da34036b204df115a114e32",
+        "include_details": true
+      },
+      "recorded_at_utc": "2026-10-01T07:30:39.7362355Z"
+    },
+    {
+      "evidence": "108-private-final-native",
+      "tool": "houdini_automation__save_hip_file",
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "PRIVATE_NATIVE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "PRIVATE_NATIVE_DIR/CASE.hip"
+      },
+      "recorded_at_utc": "2026-10-01T07:30:41.2490043Z"
+    },
+    {
+      "evidence": "109-reopen-final-native",
+      "tool": "houdini_automation__load_hip_file",
+      "response": {
+        "success": true,
+        "message": "Loaded Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "PRIVATE_NATIVE_DIR/CASE.hip"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "PRIVATE_NATIVE_DIR/CASE.hip",
+        "suppress_save_prompt": true
+      },
+      "recorded_at_utc": "2026-10-01T07:30:42.4066134Z"
+    },
+    {
+      "evidence": "11-empty-scene-official-gateway",
+      "tool": "houdini_scene__get_scene_info",
+      "response": {
+        "success": true,
+        "message": "Retrieved Houdini scene information",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": null,
+          "hip_has_file": false,
+          "frame": 1.0,
+          "start_frame": 1.0,
+          "end_frame": 240.0,
+          "obj_node_count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "110-reopened-scene",
+      "tool": "houdini_scene__get_scene_info",
+      "response": {
+        "success": true,
+        "message": "Retrieved Houdini scene information",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "PRIVATE_NATIVE_DIR/CASE.hip",
+          "hip_has_file": true,
+          "frame": 1.0,
+          "start_frame": 1.0,
+          "end_frame": 240.0,
+          "obj_node_count": 9
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {},
+      "recorded_at_utc": "2026-10-01T07:30:43.7014171Z"
+    },
+    {
+      "evidence": "111-reopened-surface",
+      "tool": "houdini_geometry__get_geometry_info",
+      "response": {
+        "success": true,
+        "message": "Read geometry info",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "point_count": 115776,
+          "primitive_count": 115200,
+          "vertex_count": 460800,
+          "bounds_min": [
+            -1.0318803787231445,
+            0.0,
+            -1.0318803787231445
+          ],
+          "bounds_max": [
+            1.031880497932434,
+            2.2490625381469727,
+            1.0318803787231445
+          ],
+          "bounds_size": [
+            2.0637608766555786,
+            2.2490625381469727,
+            2.063760757446289
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic"
+      },
+      "recorded_at_utc": "2026-10-01T07:30:44.5674697Z"
+    },
+    {
+      "evidence": "112-reopened-camera",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_camera",
+          "values": {
+            "res": [
+              1200,
+              1500
+            ],
+            "focal": 90.0,
+            "t": [
+              3.8,
+              2.9,
+              5.4
+            ],
+            "lookatpath": "/obj/showcase_20261001_focus"
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_camera",
+        "names": [
+          "res",
+          "focal",
+          "t",
+          "lookatpath"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:30:46.3437690Z"
+    },
+    {
+      "evidence": "113-reopened-glaze",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/mat/showcase_glazed_teal",
+          "values": {
+            "basecolor": [
+              0.035,
+              0.21,
+              0.18
+            ],
+            "rough": 0.3,
+            "coat": 0.35,
+            "coatrough": 0.24
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/mat/showcase_glazed_teal",
+        "names": [
+          "basecolor",
+          "rough",
+          "coat",
+          "coatrough"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:30:48.6106185Z"
+    },
+    {
+      "evidence": "114-reopened-render-settings",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "values": {
+            "camera": "/obj/showcase_20261001_camera",
+            "vm_picture": "PRIVATE_NATIVE_DIR/hero.png",
+            "vm_samplesx": 4,
+            "vm_samplesy": 4,
+            "vm_maxraysamples": 16,
+            "vm_renderengine": "pbrraytrace"
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "names": [
+          "camera",
+          "vm_picture",
+          "vm_samplesx",
+          "vm_samplesy",
+          "vm_maxraysamples",
+          "vm_renderengine"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:30:49.3296811Z"
+    },
+    {
+      "evidence": "115-reopened-backdrop",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/mat/showcase_backdrop",
+          "values": {
+            "emitcolor": [
+              0.002,
+              0.0019,
+              0.0016
+            ],
+            "emitint": 1.0,
+            "emitillum": 0
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/mat/showcase_backdrop",
+        "names": [
+          "emitcolor",
+          "emitint",
+          "emitillum"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:30:50.2252549Z"
+    },
+    {
+      "evidence": "116-reopened-contact-floor",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+          "values": {
+            "size": [
+              1000.0,
+              0.1,
+              1000.0
+            ],
+            "t": [
+              0.0,
+              -0.05,
+              0.0
+            ]
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+        "names": [
+          "size",
+          "t"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:30:51.2042288Z"
+    },
+    {
+      "evidence": "117-obj-validation-geo",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_obj_validation",
+            "name": "showcase_20261001_obj_validation",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "parent_path": "/obj",
+        "node_type": "geo",
+        "node_name": "showcase_20261001_obj_validation",
+        "run_init_scripts": false
+      },
+      "recorded_at_utc": "2026-10-01T07:30:52.0112191Z"
+    },
+    {
+      "evidence": "118-hide-obj-validation",
+      "tool": "houdini_object_ops__set_node_flags",
+      "response": {
+        "success": true,
+        "message": "Updated node flags",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_obj_validation",
+          "applied": {
+            "display": false
+          },
+          "unsupported": [
+            "render"
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_obj_validation",
+        "display": false,
+        "render": false
+      },
+      "recorded_at_utc": "2026-10-01T07:30:52.7736036Z"
+    },
+    {
+      "evidence": "119-reimport-obj",
+      "tool": "houdini_interchange__import_geometry",
+      "response": {
+        "success": true,
+        "message": "Imported geometry",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_obj_validation",
+          "node": {
+            "path": "/obj/showcase_20261001_obj_validation/REIMPORT_obj",
+            "name": "REIMPORT_obj",
+            "type": "file"
+          },
+          "file_path": "CASE_DIR/ceramic.obj",
+          "format": "obj",
+          "point_count": 115776,
+          "primitive_count": 115200,
+          "warnings": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "core_job_status": "completed",
+      "wait": {
+        "terminal": true,
+        "completed": true,
+        "owner": "core",
+        "job_id": "6821bc2f-cf16-4928-ac17-9ed536c4c581",
+        "status": "completed",
+        "tracking_status": null,
+        "job_resubmitted": false
+      },
+      "request_arguments": {
+        "parent_path": "/obj/showcase_20261001_obj_validation",
+        "file_path": "CASE_DIR/ceramic.obj",
+        "node_name": "REIMPORT_obj",
+        "cook": true
+      },
+      "recorded_at_utc": "2026-10-01T07:30:54.4367025Z"
+    },
+    {
+      "evidence": "120-obj-reimport-readback",
+      "tool": "houdini_geometry__get_geometry_info",
+      "response": {
+        "success": true,
+        "message": "Read geometry info",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_obj_validation/REIMPORT_obj",
+          "point_count": 115776,
+          "primitive_count": 115200,
+          "vertex_count": 460800,
+          "bounds_min": [
+            -1.0318803787231445,
+            0.0,
+            -1.0318803787231445
+          ],
+          "bounds_max": [
+            1.031880497932434,
+            2.2490625381469727,
+            1.0318803787231445
+          ],
+          "bounds_size": [
+            2.0637608766555786,
+            2.2490625381469727,
+            2.063760757446289
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_obj_validation/REIMPORT_obj"
+      },
+      "recorded_at_utc": "2026-10-01T07:30:58.8442223Z"
+    },
+    {
+      "evidence": "123-image-artist-parms",
+      "tool": "houdini_parameters__list_parms",
+      "response": {
+        "success": true,
+        "message": "Listed parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "parms": [
+            {
+              "name": "vm_image_artist",
+              "value": ""
+            }
+          ],
+          "count": 1
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "name_filter": "artist"
+      },
+      "recorded_at_utc": "2026-10-01T07:42:24.4432292Z"
+    },
+    {
+      "evidence": "124-mcp-png-publication",
+      "tool": "houdini_automation__run_python_file",
+      "response": {
+        "success": true,
+        "message": "Python file executed successfully",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "file_path": "CASE_DIR/sanitize_png_metadata.py",
+          "stdout": "",
+          "stderr": "",
+          "result": {
+            "operation": "PNG metadata-only publication via DCC-MCP automation fallback",
+            "pixel_editing": false,
+            "outputs": [
+              {
+                "source_file": "hero.png",
+                "public_file": "hero-public.png",
+                "source_bytes": 1244257,
+                "public_bytes": 1244231,
+                "source_sha256": "557bdd4d16b56e6ae21cb025971ed2b8340d4efae6571c41d482158b0ad47e2b",
+                "public_sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9",
+                "idat_sha256": "af1bdc865089d647eff086e7c6dad86e9e9aa1eefc74d4537071b242a0dc5bb1",
+                "idat_unchanged": true,
+                "crc_validation": "pass",
+                "removed_metadata": [
+                  {
+                    "chunk": "tEXt",
+                    "keyword": "Artist"
+                  }
+                ],
+                "width": 1200,
+                "height": 1500,
+                "decoded_rgba_sha256": "d246e0da4f5d1cf3c561b2718fc8820e7c2c561f44c4e68fd0887e6596303f61"
+              },
+              {
+                "source_file": "preview.png",
+                "public_file": "preview-public.png",
+                "source_bytes": 907829,
+                "public_bytes": 907803,
+                "source_sha256": "4619bf66e510cb0b5c16d2a5d3521ad41fc4157fc6ebf54ab968520561711646",
+                "public_sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be",
+                "idat_sha256": "295200fd1d22f840914529f76eafc9be8ba1d58a44caeb7319470262f804dc9c",
+                "idat_unchanged": true,
+                "crc_validation": "pass",
+                "removed_metadata": [
+                  {
+                    "chunk": "tEXt",
+                    "keyword": "Artist"
+                  }
+                ],
+                "width": 960,
+                "height": 1200,
+                "decoded_rgba_sha256": "f35deb5fabb4bfa0cca3456fcb8eb5c85df87a3a16cc435c21d5cf7c8890423d"
+              }
+            ]
+          },
+          "output_summary": {
+            "mode": "structured",
+            "stdout_chars": 0,
+            "stderr_chars": 0,
+            "result_chars": 1256,
+            "truncated": {
+              "stdout": false,
+              "stderr": false,
+              "result": false
+            },
+            "artifacts": {}
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "CASE_DIR/sanitize_png_metadata.py",
+        "args": [
+          {
+            "source": "PRIVATE_PATH_REDACTED",
+            "target": "PRIVATE_PATH_REDACTED"
+          },
+          {
+            "source": "PRIVATE_PATH_REDACTED",
+            "target": "PRIVATE_PATH_REDACTED"
+          }
+        ],
+        "output_mode": "structured"
+      },
+      "recorded_at_utc": "2026-10-01T07:45:32.2882788Z"
+    },
+    {
+      "evidence": "126-reopen-retained-native",
+      "tool": "houdini_automation__load_hip_file",
+      "response": {
+        "success": true,
+        "message": "Loaded Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "PRIVATE_NATIVE_DIR/CASE.hip"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "PRIVATE_NATIVE_DIR/CASE.hip",
+        "suppress_save_prompt": true
+      },
+      "recorded_at_utc": "2026-10-01T07:57:13.6869446Z"
+    },
+    {
+      "evidence": "127-retained-native-geometry",
+      "tool": "houdini_geometry__get_geometry_info",
+      "response": {
+        "success": true,
+        "message": "Read geometry info",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "point_count": 115776,
+          "primitive_count": 115200,
+          "vertex_count": 460800,
+          "bounds_min": [
+            -1.0318803787231445,
+            0.0,
+            -1.0318803787231445
+          ],
+          "bounds_max": [
+            1.031880497932434,
+            2.2490625381469727,
+            1.0318803787231445
+          ],
+          "bounds_size": [
+            2.0637608766555786,
+            2.2490625381469727,
+            2.063760757446289
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic"
+      },
+      "recorded_at_utc": "2026-10-01T07:57:15.4789884Z"
+    },
+    {
+      "evidence": "13-create-ceramic-geo",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic",
+            "name": "showcase_20261001_ceramic",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "26-create-profile",
+      "tool": "houdini_geometry__create_curve_guides",
+      "response": {
+        "success": true,
+        "message": "Created bounded Houdini curve guides",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_ceramic",
+          "node_path": "/obj/showcase_20261001_ceramic/PROFILE_ceramic",
+          "source": {
+            "kind": "inline_json"
+          },
+          "topology": [
+            "polyline"
+          ],
+          "cv_order": "root_to_tip",
+          "metrics": {
+            "curve_count": 1,
+            "cv_count": 51,
+            "cluster_count": 1,
+            "root_count": 1,
+            "root_to_tip_valid": true,
+            "bounds": {
+              "min": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "max": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ],
+              "size": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ]
+            }
+          },
+          "attribute_schema": {
+            "point": [
+              "u",
+              "root_flag",
+              "Cd",
+              "width"
+            ],
+            "primitive": [
+              "guide_id",
+              "cluster_id",
+              "cluster_name"
+            ]
+          },
+          "rejected_guides": [],
+          "limits": {
+            "max_guides": 10000,
+            "max_total_cvs": 1000000,
+            "max_cvs_per_guide": 4096,
+            "max_input_bytes": 33554432
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "27-lathe-body",
+      "tool": "houdini_mesh_ops__lathe_profile",
+      "response": {
+        "success": true,
+        "message": "Created and verified Revolve SOP",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "profile": "/obj/showcase_20261001_ceramic/PROFILE_ceramic",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/LATHE_body",
+            "name": "LATHE_body",
+            "type": "revolve::2.0"
+          },
+          "parameters": {
+            "axis": "y",
+            "axis_direction": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "origin": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "segments": 144
+          },
+          "readback": {
+            "point_count": 7344,
+            "primitive_count": 7200,
+            "vertex_count": 28800,
+            "bounds_min": [
+              -1.0399999618530273,
+              0.0,
+              -1.0399999618530273
+            ],
+            "bounds_max": [
+              1.0399999618530273,
+              2.25,
+              1.0399999618530273
+            ],
+            "bounds_size": [
+              2.0799999237060547,
+              2.25,
+              2.0799999237060547
+            ],
+            "verified": true,
+            "before": {
+              "point_count": 51,
+              "primitive_count": 1,
+              "vertex_count": 51,
+              "bounds_min": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "bounds_max": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ],
+              "bounds_size": [
+                1.0399999618530273,
+                2.25,
+                0.0
+              ]
+            }
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "30-create-subdiv",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_ceramic",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+            "name": "SUBDIV_surface",
+            "type": "subdivide"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "31-connect-subdiv",
+      "tool": "houdini_nodes__connect_nodes",
+      "response": {
+        "success": true,
+        "message": "Connected Houdini nodes",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "input_node": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+          "output_node": "/obj/showcase_20261001_ceramic/LATHE_body",
+          "input_index": 0,
+          "output_index": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "32-create-teal-material",
+      "tool": "houdini_materials__create_material",
+      "response": {
+        "success": true,
+        "message": "Created Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/mat",
+          "requested_shader_type": "principledshader::2.0",
+          "shader_type": "principledshader::2.0",
+          "material": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameters": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "33-query-basecolor",
+      "tool": "houdini_parameters__list_parms",
+      "response": {
+        "success": true,
+        "message": "Listed parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/mat/showcase_glazed_teal",
+          "parms": [
+            {
+              "name": "basecolorr",
+              "value": 0.2
+            },
+            {
+              "name": "basecolorg",
+              "value": 0.2
+            },
+            {
+              "name": "basecolorb",
+              "value": 0.2
+            },
+            {
+              "name": "basecolor_usePointColor",
+              "value": 1
+            },
+            {
+              "name": "basecolor_usePackedColor",
+              "value": 0
+            },
+            {
+              "name": "basecolor_useTexture",
+              "value": 0
+            },
+            {
+              "name": "basecolor_texture",
+              "value": ""
+            },
+            {
+              "name": "basecolor_textureIntensity",
+              "value": 1.0
+            },
+            {
+              "name": "basecolor_textureWrap",
+              "value": "repeat"
+            },
+            {
+              "name": "basecolor_textureColorSpace",
+              "value": "auto"
+            },
+            {
+              "name": "basecolor_useTextureAlpha",
+              "value": 0
+            }
+          ],
+          "count": 11
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "34-query-coat",
+      "tool": "houdini_parameters__list_parms",
+      "response": {
+        "success": true,
+        "message": "Listed parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/mat/showcase_glazed_teal",
+          "parms": [
+            {
+              "name": "coatspecmodel",
+              "value": "ggx"
+            },
+            {
+              "name": "coat",
+              "value": 0.0
+            },
+            {
+              "name": "coatrough",
+              "value": 0.0
+            },
+            {
+              "name": "coat_useTexture",
+              "value": 0
+            },
+            {
+              "name": "coat_texture",
+              "value": ""
+            },
+            {
+              "name": "coat_monoChannel",
+              "value": 0
+            },
+            {
+              "name": "coat_textureWrap",
+              "value": "repeat"
+            },
+            {
+              "name": "coat_textureColorSpace",
+              "value": "linear"
+            },
+            {
+              "name": "coatrough_useTexture",
+              "value": 0
+            },
+            {
+              "name": "coatrough_texture",
+              "value": ""
+            },
+            {
+              "name": "coatrough_monoChannel",
+              "value": 0
+            },
+            {
+              "name": "coatrough_textureWrap",
+              "value": "repeat"
+            },
+            {
+              "name": "coatrough_textureColorSpace",
+              "value": "linear"
+            },
+            {
+              "name": "separateCoatNormals",
+              "value": 0
+            },
+            {
+              "name": "coatBumpAndNormal_enable",
+              "value": 1
+            },
+            {
+              "name": "coatBumpAndNormal_type",
+              "value": "normal"
+            },
+            {
+              "name": "coatBump_colorSpace",
+              "value": "linear"
+            },
+            {
+              "name": "coatBump_bumpScale",
+              "value": 0.05
+            },
+            {
+              "name": "coatBump_bumpTexture",
+              "value": ""
+            },
+            {
+              "name": "coatBump_wrap",
+              "value": "repeat"
+            },
+            {
+              "name": "coatBump_filter",
+              "value": "gauss"
+            },
+            {
+              "name": "coatBump_filterWidth",
+              "value": 1.0
+            },
+            {
+              "name": "coatBump_channel",
+              "value": 0
+            },
+            {
+              "name": "coatBump_imagePlane",
+              "value": ""
+            },
+            {
+              "name": "coatNormal_colorspace",
+              "value": "linear"
+            },
+            {
+              "name": "coatNormal_vectorSpace",
+              "value": "uvtangent"
+            },
+            {
+              "name": "coatNormal_scale",
+              "value": 1.0
+            },
+            {
+              "name": "coatNormal_texture",
+              "value": ""
+            },
+            {
+              "name": "coatNormal_wrap",
+              "value": "repeat"
+            },
+            {
+              "name": "coatNormal_filter",
+              "value": "gauss"
+            },
+            {
+              "name": "coatNormal_filterWidth",
+              "value": 1.0
+            },
+            {
+              "name": "coatNormal_channel",
+              "value": 0
+            },
+            {
+              "name": "coatNormal_imagePlane",
+              "value": ""
+            },
+            {
+              "name": "coatNormal_space",
+              "value": 0
+            },
+            {
+              "name": "coatNormal_flipX",
+              "value": 0
+            },
+            {
+              "name": "coatNormal_flipY",
+              "value": 0
+            },
+            {
+              "name": "coatlabel",
+              "value": "coat"
+            },
+            {
+              "name": "coatN1",
+              "value": 0.0
+            },
+            {
+              "name": "coatN2",
+              "value": 0.0
+            },
+            {
+              "name": "coatN3",
+              "value": 0.0
+            }
+          ],
+          "count": 40
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "35-query-subdiv",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+          "values": {
+            "iterations": 1
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "38-smooth-surface",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+            "name": "SUBDIV_surface",
+            "type": "subdivide"
+          },
+          "parameters": [
+            "iterations"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "39-add-normals",
+      "tool": "houdini_mesh_ops__add_normals",
+      "response": {
+        "success": true,
+        "message": "Created normal SOP",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "input_path": "/obj/showcase_20261001_ceramic/SUBDIV_surface",
+          "node": {
+            "path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+            "name": "OUT_ceramic",
+            "type": "normal"
+          },
+          "attribute_class": "vertex"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "40-final-sop-flags",
+      "tool": "houdini_object_ops__set_node_flags",
+      "response": {
+        "success": true,
+        "message": "Updated node flags",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "applied": {
+            "display": true,
+            "render": true
+          },
+          "unsupported": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "41-set-glaze",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "basecolor",
+            "basecolor_usePointColor",
+            "rough",
+            "coat",
+            "coatrough"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "42-assign-glaze",
+      "tool": "houdini_materials__assign_material",
+      "response": {
+        "success": true,
+        "message": "Assigned Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "target": {
+            "path": "/obj/showcase_20261001_ceramic",
+            "name": "showcase_20261001_ceramic",
+            "type": "geo"
+          },
+          "material": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameter_name": "shop_materialpath"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "43-floor-geo",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_floor",
+            "name": "showcase_20261001_floor",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "44-floor-box",
+      "tool": "houdini_geometry__create_primitive",
+      "response": {
+        "success": true,
+        "message": "Created SOP primitive",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_floor",
+          "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+          "node_name": "FLOOR_contact",
+          "primitive": "box",
+          "sop_type": "box"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "45-floor-dimensions",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_floor/FLOOR_contact",
+            "name": "FLOOR_contact",
+            "type": "box"
+          },
+          "parameters": [
+            "size",
+            "t"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "46-floor-material",
+      "tool": "houdini_materials__create_material",
+      "response": {
+        "success": true,
+        "message": "Created Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/mat",
+          "requested_shader_type": "principledshader::2.0",
+          "shader_type": "principledshader::2.0",
+          "material": {
+            "path": "/mat/showcase_warm_floor",
+            "name": "showcase_warm_floor",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "basecolor",
+            "basecolor_usePointColor",
+            "rough"
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "47-assign-floor",
+      "tool": "houdini_materials__assign_material",
+      "response": {
+        "success": true,
+        "message": "Assigned Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "target": {
+            "path": "/obj/showcase_20261001_floor",
+            "name": "showcase_20261001_floor",
+            "type": "geo"
+          },
+          "material": {
+            "path": "/mat/showcase_warm_floor",
+            "name": "showcase_warm_floor",
+            "type": "principledshader::2.0"
+          },
+          "parameter_name": "shop_materialpath"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "48-focus-null",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_focus",
+            "name": "showcase_20261001_focus",
+            "type": "null"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "49-focus-height",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_focus",
+            "name": "showcase_20261001_focus",
+            "type": "null"
+          },
+          "parameters": [
+            "t"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "50-hero-camera",
+      "tool": "houdini_camera_light__create_camera",
+      "response": {
+        "success": true,
+        "message": "Created camera",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_camera",
+            "name": "showcase_20261001_camera",
+            "type": "cam"
+          },
+          "applied": {
+            "t": [
+              3.8,
+              2.9,
+              5.4
+            ],
+            "resolution": [
+              960,
+              1200
+            ],
+            "focal": 100.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "51-camera-aim",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_camera",
+            "name": "showcase_20261001_camera",
+            "type": "cam"
+          },
+          "parameters": [
+            "lookatpath"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "52-key-softbox",
+      "tool": "houdini_camera_light__create_light",
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_key",
+            "name": "showcase_20261001_key",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "t": [
+              -3.5,
+              5,
+              4
+            ],
+            "light_type": "grid",
+            "intensity": 1.0,
+            "color": [
+              1,
+              0.88,
+              0.72
+            ],
+            "exposure": 5.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "53-fill-softbox",
+      "tool": "houdini_camera_light__create_light",
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_fill",
+            "name": "showcase_20261001_fill",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "t": [
+              4,
+              3,
+              1
+            ],
+            "light_type": "grid",
+            "intensity": 1.0,
+            "color": [
+              0.7,
+              0.84,
+              1
+            ],
+            "exposure": 3.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "54-rim-softbox",
+      "tool": "houdini_camera_light__create_light",
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_rim",
+            "name": "showcase_20261001_rim",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "t": [
+              1,
+              4,
+              -3
+            ],
+            "light_type": "grid",
+            "intensity": 1.0,
+            "color": [
+              1,
+              0.94,
+              0.83
+            ],
+            "exposure": 4.5
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "55-aim-key",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_key",
+            "name": "showcase_20261001_key",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "lookatpath",
+            "areasize"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "56-aim-fill",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_fill",
+            "name": "showcase_20261001_fill",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "lookatpath",
+            "areasize"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "57-aim-rim",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_rim",
+            "name": "showcase_20261001_rim",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "lookatpath",
+            "areasize"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "58-mantra-rop",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/out",
+          "node": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "61-surface-readback",
+      "tool": "houdini_geometry__get_geometry_info",
+      "response": {
+        "success": true,
+        "message": "Read geometry info",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+          "point_count": 115776,
+          "primitive_count": 115200,
+          "vertex_count": 460800,
+          "bounds_min": [
+            -1.0318803787231445,
+            0.0,
+            -1.0318803787231445
+          ],
+          "bounds_max": [
+            1.031880497932434,
+            2.2490625381469727,
+            1.0318803787231445
+          ],
+          "bounds_size": [
+            2.0637608766555786,
+            2.2490625381469727,
+            2.063760757446289
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "62-query-render-parameters",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "values": {
+            "vm_renderengine": "raytrace",
+            "vm_samplesx": 3,
+            "vm_samplesy": 3,
+            "vm_minraysamples": 1,
+            "vm_maxraysamples": 9,
+            "vm_diffuselimit": 0,
+            "vm_reflectlimit": 10,
+            "vm_gamma": 1.0,
+            "vm_quantize": "half"
+          },
+          "missing": [
+            "vm_rayvariance",
+            "vm_numthreads"
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "63-save-native",
+      "tool": "houdini_automation__save_hip_file",
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "CASE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "64-render-engine-template",
+      "tool": "houdini_parameters__get_parm_templates",
+      "response": {
+        "success": true,
+        "message": "Read parameter template",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "template": {
+            "name": "vm_renderengine",
+            "label": "Rendering Engine",
+            "data_type": "parmData.String",
+            "template_type": "parmTemplateType.String",
+            "num_components": 1
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "65-preview-settings",
+      "tool": "houdini_render__set_render_settings",
+      "response": {
+        "success": true,
+        "message": "Set render settings",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "applied": {
+            "camera": "/obj/showcase_20261001_camera",
+            "resolution": [
+              640,
+              800
+            ],
+            "frame_range": [
+              1.0,
+              1.0
+            ],
+            "output_path": "$HIP/preview.png"
+          },
+          "unsupported": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "66-preview-quality",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "parameters": [
+            "vm_renderengine",
+            "vm_samplesx",
+            "vm_samplesy",
+            "vm_minraysamples",
+            "vm_maxraysamples",
+            "vm_diffuselimit",
+            "vm_reflectlimit",
+            "vm_gamma"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "67-save-preview-state",
+      "tool": "houdini_automation__save_hip_file",
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "CASE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "68-start-preview-render",
+      "tool": "houdini_render__render_rop",
+      "response": {
+        "success": true,
+        "message": "Started background ROP render",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "background": true,
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/preview.png",
+          "ignore_inputs": false,
+          "job_id": "24916c2cbb3844ffb647e990a6de2681",
+          "state": "queued",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "owned_by_current_process": true,
+          "worker_liveness": "alive"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "69-preview-render-status",
+      "tool": "houdini_render__get_render_job",
+      "response": {
+        "success": true,
+        "message": "Read background ROP job",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/preview.png",
+          "ignore_inputs": false,
+          "job_id": "24916c2cbb3844ffb647e990a6de2681",
+          "state": "running",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "started_at": 1790838066.277879,
+          "owned_by_current_process": true,
+          "worker_liveness": "alive",
+          "completed": 0,
+          "total": 1,
+          "progress": 0.0,
+          "elapsed_secs": 35.03,
+          "eta_secs": null,
+          "warning_count": 0,
+          "written_file_count": 0,
+          "recent_written_files": [],
+          "recent_warnings": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "evidence": "70-preview-render-detailed",
+      "tool": "houdini_render__get_render_job",
+      "response": {
+        "success": true,
+        "message": "Read background ROP job",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/preview.png",
+          "ignore_inputs": false,
+          "job_id": "24916c2cbb3844ffb647e990a6de2681",
+          "state": "completed",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "started_at": 1790838066.277879,
+          "expected_outputs": [
+            "CASE_DIR/preview.png"
+          ],
+          "output_snapshot": {},
+          "execution_mode": "render",
+          "elapsed_secs": 78.178,
+          "written_files": [
+            "CASE_DIR/preview.png"
+          ],
+          "output_verification": {
+            "state": "verified",
+            "expected_output_count": 1,
+            "written_file_count": 1
+          },
+          "warnings": [],
+          "finished_at": 1790838144.4563048,
+          "owned_by_current_process": false,
+          "worker_liveness": "stopped",
+          "completed": 1,
+          "total": 1,
+          "progress": 1.0,
+          "eta_secs": 0.0,
+          "warning_count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "job_id": "24916c2cbb3844ffb647e990a6de2681",
+        "include_details": true
+      },
+      "recorded_at_utc": "2026-10-01T07:02:55.9251484Z"
+    },
+    {
+      "evidence": "71-extend-studio-floor",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_floor/FLOOR_contact",
+            "name": "FLOOR_contact",
+            "type": "box"
+          },
+          "parameters": [
+            "size"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_floor/FLOOR_contact",
+        "parameters": {
+          "size": [
+            1000,
+            0.1,
+            1000
+          ]
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:31.3723000Z"
+    },
+    {
+      "evidence": "72-final-camera",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_camera",
+            "name": "showcase_20261001_camera",
+            "type": "cam"
+          },
+          "parameters": [
+            "res",
+            "focal"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_camera",
+        "parameters": {
+          "res": [
+            1200,
+            1500
+          ],
+          "focal": 90
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:35.1962580Z"
+    },
+    {
+      "evidence": "73-final-key",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_key",
+            "name": "showcase_20261001_key",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_exposure"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_key",
+        "parameters": {
+          "light_exposure": 4.2
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:36.9610391Z"
+    },
+    {
+      "evidence": "74-final-fill",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_fill",
+            "name": "showcase_20261001_fill",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_exposure"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_fill",
+        "parameters": {
+          "light_exposure": 2.5
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:37.7272322Z"
+    },
+    {
+      "evidence": "75-final-rim",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_rim",
+            "name": "showcase_20261001_rim",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_exposure"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_rim",
+        "parameters": {
+          "light_exposure": 3.3
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:38.4786745Z"
+    },
+    {
+      "evidence": "76-final-glaze",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/mat/showcase_glazed_teal",
+            "name": "showcase_glazed_teal",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "rough",
+            "coat",
+            "coatrough"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/mat/showcase_glazed_teal",
+        "parameters": {
+          "rough": 0.3,
+          "coat": 0.35,
+          "coatrough": 0.24
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:39.2564401Z"
+    },
+    {
+      "evidence": "77-final-render-output",
+      "tool": "houdini_render__set_render_settings",
+      "response": {
+        "success": true,
+        "message": "Set render settings",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "applied": {
+            "resolution": [
+              1200,
+              1500
+            ],
+            "frame_range": [
+              1.0,
+              1.0
+            ],
+            "output_path": "$HIP/hero.png"
+          },
+          "unsupported": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "rop_path": "/out/showcase_20261001_mantra",
+        "resolution": [
+          1200,
+          1500
+        ],
+        "output_path": "$HIP/hero.png",
+        "frame_range": [
+          1,
+          1,
+          1
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:08:39.7592616Z"
+    },
+    {
+      "evidence": "78-final-render-quality",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "parameters": [
+            "vm_samplesx",
+            "vm_samplesy",
+            "vm_maxraysamples"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "parameters": {
+          "vm_samplesx": 4,
+          "vm_samplesy": 4,
+          "vm_maxraysamples": 16
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:08:40.2259026Z"
+    },
+    {
+      "evidence": "79-save-final-native",
+      "tool": "houdini_automation__save_hip_file",
+      "response": {
+        "success": true,
+        "message": "Saved Houdini hip file",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "hip_file": "CASE_DIR/CASE.hip",
+          "atomic_replace": true,
+          "unsaved_changes": null
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "file_path": "CASE_DIR/CASE.hip"
+      },
+      "recorded_at_utc": "2026-10-01T07:08:43.4853645Z"
+    },
+    {
+      "evidence": "80-start-final-render",
+      "tool": "houdini_render__render_rop",
+      "response": {
+        "success": true,
+        "message": "Started background ROP render",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "rop": {
+            "path": "/out/showcase_20261001_mantra",
+            "name": "showcase_20261001_mantra",
+            "type": "ifd"
+          },
+          "background": true,
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "7b9ff83a963848229ac52b9f8f5f4a62",
+          "state": "queued",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "owned_by_current_process": true,
+          "worker_liveness": "alive"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "rop_path": "/out/showcase_20261001_mantra",
+        "frame_range": [
+          1,
+          1,
+          1
+        ],
+        "background": true
+      },
+      "recorded_at_utc": "2026-10-01T07:08:46.9739099Z"
+    },
+    {
+      "evidence": "81-final-render-status",
+      "tool": "houdini_render__get_render_job",
+      "response": {
+        "success": true,
+        "message": "Read background ROP job",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "7b9ff83a963848229ac52b9f8f5f4a62",
+          "state": "running",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "started_at": 1790838543.3154483,
+          "expected_outputs": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_snapshot": {},
+          "owned_by_current_process": true,
+          "worker_liveness": "alive",
+          "completed": 0,
+          "total": 1,
+          "progress": 0.0,
+          "written_files": [],
+          "elapsed_secs": 79.391,
+          "eta_secs": null,
+          "warning_count": 0,
+          "warnings": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "job_id": "7b9ff83a963848229ac52b9f8f5f4a62",
+        "include_details": true
+      },
+      "recorded_at_utc": "2026-10-01T07:10:18.9491760Z"
+    },
+    {
+      "evidence": "82-final-render-detailed",
+      "tool": "houdini_render__get_render_job",
+      "response": {
+        "success": true,
+        "message": "Read background ROP job",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "job_kind": "render",
+          "hip_path": "JOB_DIR/CASE_bak1.hip",
+          "rop_path": "/out/showcase_20261001_mantra",
+          "frame_range": [
+            1,
+            1,
+            1
+          ],
+          "output_pattern": "$HIP/hero.png",
+          "ignore_inputs": false,
+          "job_id": "7b9ff83a963848229ac52b9f8f5f4a62",
+          "state": "completed",
+          "stdout_path": "JOB_DIR/stdout.log",
+          "stderr_path": "JOB_DIR/stderr.log",
+          "source_hip_path": "CASE_DIR/CASE.hip",
+          "hip_snapshot_owned": true,
+          "started_at": 1790838543.3154483,
+          "expected_outputs": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_snapshot": {},
+          "execution_mode": "render",
+          "elapsed_secs": 113.059,
+          "written_files": [
+            "CASE_DIR/hero.png"
+          ],
+          "output_verification": {
+            "state": "verified",
+            "expected_output_count": 1,
+            "written_file_count": 1
+          },
+          "warnings": [],
+          "finished_at": 1790838656.374336,
+          "owned_by_current_process": false,
+          "worker_liveness": "stopped",
+          "completed": 1,
+          "total": 1,
+          "progress": 1.0,
+          "eta_secs": 0.0,
+          "warning_count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "job_id": "7b9ff83a963848229ac52b9f8f5f4a62",
+        "include_details": true
+      },
+      "recorded_at_utc": "2026-10-01T07:14:05.6440259Z"
+    },
+    {
+      "evidence": "83-rop-resolution-parms",
+      "tool": "houdini_parameters__list_parms",
+      "response": {
+        "success": true,
+        "message": "Listed parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "parms": [
+            {
+              "name": "override_camerares",
+              "value": 0
+            },
+            {
+              "name": "res_fraction",
+              "value": "0.5"
+            },
+            {
+              "name": "res_overridex",
+              "value": 1200
+            },
+            {
+              "name": "res_overridey",
+              "value": 1500
+            },
+            {
+              "name": "res_overrideMenu",
+              "value": "640 480 1"
+            },
+            {
+              "name": "soho_compression",
+              "value": "ext"
+            },
+            {
+              "name": "vm_deepresolver",
+              "value": "null"
+            },
+            {
+              "name": "vm_image_tiff_compression",
+              "value": "LZW"
+            },
+            {
+              "name": "vm_image_exr_compression",
+              "value": "zips"
+            },
+            {
+              "name": "vm_alfprogress",
+              "value": 0
+            }
+          ],
+          "count": 10
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "name_filter": "res"
+      },
+      "recorded_at_utc": "2026-10-01T07:14:11.4281625Z"
+    },
+    {
+      "evidence": "87-studio-environment",
+      "tool": "houdini_camera_light__create_light",
+      "response": {
+        "success": true,
+        "message": "Created light",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_studio_environment",
+            "name": "showcase_20261001_studio_environment",
+            "type": "hlight::2.0"
+          },
+          "applied": {
+            "light_type": "environment",
+            "intensity": 1.0,
+            "color": [
+              0.35,
+              0.32,
+              0.28
+            ],
+            "exposure": -3.0
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "light_type": "environment",
+        "name": "showcase_20261001_studio_environment",
+        "intensity": 1,
+        "exposure": -3,
+        "color": [
+          0.35,
+          0.32,
+          0.28
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:17:58.3084449Z"
+    },
+    {
+      "evidence": "88-environment-background-parms",
+      "tool": "houdini_parameters__list_parms",
+      "response": {
+        "success": true,
+        "message": "Listed parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_studio_environment",
+          "parms": [],
+          "count": 0
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_studio_environment",
+        "name_filter": "background"
+      },
+      "recorded_at_utc": "2026-10-01T07:17:58.8231295Z"
+    },
+    {
+      "evidence": "89-environment-readback",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/obj/showcase_20261001_studio_environment",
+          "values": {
+            "light_type": 8,
+            "light_color": [
+              0.35,
+              0.32,
+              0.28
+            ],
+            "light_intensity": 1.0,
+            "light_exposure": -3.0
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_studio_environment",
+        "names": [
+          "light_type",
+          "light_color",
+          "light_intensity",
+          "light_exposure"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:18:52.8736413Z"
+    },
+    {
+      "evidence": "90-export-ceramic-obj",
+      "tool": "houdini_interchange__export_geometry",
+      "response": {
+        "job_id": "63bc6c01-2409-4da3-a703-a4c880539784",
+        "status": "pending"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+        "output_path": "CASE_DIR/ceramic.obj"
+      },
+      "recorded_at_utc": "2026-10-01T07:18:53.6668937Z"
+    },
+    {
+      "evidence": "91-rop-resolution-mode-template",
+      "tool": "houdini_parameters__get_parm_templates",
+      "response": {
+        "success": true,
+        "message": "Read parameter template",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "template": {
+            "name": "res_fraction",
+            "label": "Resolution Scale",
+            "data_type": "parmData.String",
+            "template_type": "parmTemplateType.String",
+            "num_components": 1
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "parm_name": "res_fraction"
+      },
+      "recorded_at_utc": "2026-10-01T07:19:22.5162431Z"
+    },
+    {
+      "evidence": "92-backdrop-shader-parameters",
+      "tool": "houdini_parameters__get_parms",
+      "response": {
+        "success": true,
+        "message": "Read parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/mat/showcase_warm_floor",
+          "values": {
+            "emitcolor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "emitint": 0.0,
+            "emitillum": 1
+          },
+          "missing": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/mat/showcase_warm_floor",
+        "names": [
+          "emitcolor",
+          "emitint",
+          "emitillum"
+        ]
+      },
+      "recorded_at_utc": "2026-10-01T07:20:15.2101400Z"
+    },
+    {
+      "evidence": "93-mantra-background-parms",
+      "tool": "houdini_parameters__list_parms",
+      "response": {
+        "success": true,
+        "message": "Listed parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node_path": "/out/showcase_20261001_mantra",
+          "parms": [
+            {
+              "name": "executebackground",
+              "value": "0"
+            }
+          ],
+          "count": 1
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/out/showcase_20261001_mantra",
+        "name_filter": "background"
+      },
+      "recorded_at_utc": "2026-10-01T07:20:19.5256908Z"
+    },
+    {
+      "evidence": "94-disable-trial-environment",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_studio_environment",
+            "name": "showcase_20261001_studio_environment",
+            "type": "hlight::2.0"
+          },
+          "parameters": [
+            "light_intensity"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_studio_environment",
+        "parameters": {
+          "light_intensity": 0
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:22:07.7722280Z"
+    },
+    {
+      "evidence": "95-create-backdrop",
+      "tool": "houdini_nodes__create_node",
+      "response": {
+        "success": true,
+        "message": "Created Houdini node",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj",
+          "node": {
+            "path": "/obj/showcase_20261001_backdrop",
+            "name": "showcase_20261001_backdrop",
+            "type": "geo"
+          }
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "parent_path": "/obj",
+        "node_type": "geo",
+        "node_name": "showcase_20261001_backdrop",
+        "run_init_scripts": false
+      },
+      "recorded_at_utc": "2026-10-01T07:22:12.6942464Z"
+    },
+    {
+      "evidence": "96-backdrop-box",
+      "tool": "houdini_geometry__create_primitive",
+      "response": {
+        "success": true,
+        "message": "Created SOP primitive",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/obj/showcase_20261001_backdrop",
+          "node_path": "/obj/showcase_20261001_backdrop/BACKDROP",
+          "node_name": "BACKDROP",
+          "primitive": "box",
+          "sop_type": "box"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "parent_path": "/obj/showcase_20261001_backdrop",
+        "primitive": "box",
+        "node_name": "BACKDROP",
+        "set_display": true
+      },
+      "recorded_at_utc": "2026-10-01T07:22:13.3560416Z"
+    },
+    {
+      "evidence": "97-backdrop-extent",
+      "tool": "houdini_nodes__set_node_parms",
+      "response": {
+        "success": true,
+        "message": "Updated Houdini node parameters",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "node": {
+            "path": "/obj/showcase_20261001_backdrop/BACKDROP",
+            "name": "BACKDROP",
+            "type": "box"
+          },
+          "parameters": [
+            "size",
+            "t"
+          ],
+          "pressed_buttons": []
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "node_path": "/obj/showcase_20261001_backdrop/BACKDROP",
+        "parameters": {
+          "size": [
+            200,
+            80,
+            0.1
+          ],
+          "t": [
+            0,
+            30,
+            -50
+          ]
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:22:14.4276577Z"
+    },
+    {
+      "evidence": "98-backdrop-material",
+      "tool": "houdini_materials__create_material",
+      "response": {
+        "success": true,
+        "message": "Created Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "parent_path": "/mat",
+          "requested_shader_type": "principledshader::2.0",
+          "shader_type": "principledshader::2.0",
+          "material": {
+            "path": "/mat/showcase_backdrop",
+            "name": "showcase_backdrop",
+            "type": "principledshader::2.0"
+          },
+          "parameters": [
+            "basecolor",
+            "basecolor_usePointColor",
+            "rough",
+            "emitcolor",
+            "emitint",
+            "emitillum"
+          ]
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "material_name": "showcase_backdrop",
+        "parameters": {
+          "basecolor": [
+            0,
+            0,
+            0
+          ],
+          "basecolor_usePointColor": 0,
+          "rough": 1,
+          "emitcolor": [
+            0.07,
+            0.065,
+            0.055
+          ],
+          "emitint": 1,
+          "emitillum": 0
+        }
+      },
+      "recorded_at_utc": "2026-10-01T07:22:16.2292354Z"
+    },
+    {
+      "evidence": "99-assign-backdrop",
+      "tool": "houdini_materials__assign_material",
+      "response": {
+        "success": true,
+        "message": "Assigned Houdini material",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "target": {
+            "path": "/obj/showcase_20261001_backdrop",
+            "name": "showcase_20261001_backdrop",
+            "type": "geo"
+          },
+          "material": {
+            "path": "/mat/showcase_backdrop",
+            "name": "showcase_backdrop",
+            "type": "principledshader::2.0"
+          },
+          "parameter_name": "shop_materialpath"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "request_arguments": {
+        "target_node_path": "/obj/showcase_20261001_backdrop",
+        "material_node_path": "/mat/showcase_backdrop"
+      },
+      "recorded_at_utc": "2026-10-01T07:22:18.9337563Z"
+    }
+  ]
+}

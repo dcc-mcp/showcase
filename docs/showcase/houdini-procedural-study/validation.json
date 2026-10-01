@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-01",
+  "environment": {
+    "Houdini": "22.0.368",
+    "Python": "3.13.10",
+    "renderer": "Mantra PBR Ray Tracing",
+    "adapter": "dcc-mcp-houdini 0.43.1",
+    "adapter_source_commit": "9957e58e987147e448819384a0e8a8be5756de18",
+    "Core_CLI_Gateway": "0.20.28",
+    "gateway_binary_sha256": "f519f45c89832e192239dbe9bf134c6e6ea7d59139433d0d419eab7bcd8feb78"
+  },
+  "checks": [
+    {
+      "name": "Dedicated empty scene",
+      "result": "pass",
+      "observed": "Initial typed scene readback: hip_has_file=false, /obj count=0. Existing concurrent scenes were not edited.",
+      "evidence": "11-empty-scene-official-gateway"
+    },
+    {
+      "name": "Actual final Mantra output",
+      "result": "pass",
+      "observed": "Completed in 115.92 seconds; isolated worker stopped, expected/written outputs 1/1, verified, no warnings. PNG IHDR 1200×1500; file is nonblank.",
+      "evidence": "107-final-completed"
+    },
+    {
+      "name": "Native save and reopen",
+      "result": "pass",
+      "observed": "Typed private save and load succeeded; reopened scene hip_has_file=true and /obj count=9. Reopened SOP, camera, glaze, backdrop and renderer readbacks matched final settings. Native stays local.",
+      "evidence": "108–116"
+    },
+    {
+      "name": "Geometry and floor contact",
+      "result": "pass",
+      "observed": "115,776 points / 115,200 primitives / 460,800 vertices. Bounds size 2.06376088×2.24906254×2.06376076; minimum Y=0. Floor top Y=0.",
+      "evidence": "111-reopened-surface;116-reopened-contact-floor"
+    },
+    {
+      "name": "Final camera and material",
+      "result": "pass",
+      "observed": "Camera res=1200×1500, focal=90; glaze basecolor=[0.035,0.21,0.18], rough=0.30, coat=0.35, coatrough=0.24 after reopen.",
+      "evidence": "112-reopened-camera;113-reopened-glaze"
+    },
+    {
+      "name": "OBJ export and same-Houdini reimport",
+      "result": "pass",
+      "observed": "Typed exported 35,869,290 bytes, file probe confirmed OBJ; completed typed reimport reproduces all point/primitive/vertex counts and bounds. OBJ text audit found no private paths, hosts or credentials.",
+      "evidence": "90-export-ceramic-obj;102-probe-export;119-reimport-obj;120-obj-reimport-readback"
+    },
+    {
+      "name": "Gateway audit checkpoint",
+      "result": "pass",
+      "observed": "Gateway-recorded session checkpoint: 89 total, 89 successful, 0 failed. Public response trace is a selected actual tool-call subset; search/load/control operations are not all reproduced there.",
+      "evidence": "gateway-receipt.json"
+    },
+    {
+      "name": "Preview resolution report mismatch",
+      "result": "fail",
+      "observed": "set_render_settings applied [640,800]/unsupported=[] but actual preview was 960×1200. Mantra override_camerares remained 0. Final camera resolution was set with typed set_node_parms and actual final dimensions independently checked. This run did not use the later adapter patch.",
+      "evidence": "65-preview-settings;83-rop-resolution-parms"
+    },
+    {
+      "name": "Native HIP public privacy",
+      "result": "fail",
+      "observed": "CPIO variables, native authors, HDA library paths and Base64 Stash artist/hostname contain private metadata. Existing typed save/project/tagging tools do not fully sanitize these. HIP is withheld from the public folder and ZIP.",
+      "evidence": "Local native audit; publication boundary enforced"
+    },
+    {
+      "name": "Public PNG metadata via MCP automation",
+      "result": "pass",
+      "observed": "Only automatic Artist tEXt removed to explicit -public copies by adapter-exposed run_python_file. CRC, unchanged compressed IDAT hash, decoded RGBA hash and dimensions pass; independent Pillow decoded comparison also passes. Originals retained privately. This publication step uses MCP automation because a dedicated typed cleanup tool was not found.",
+      "evidence": "124-mcp-png-publication;png-publication.json;sanitize_png_metadata.py"
+    },
+    {
+      "name": "Fresh no-Render CLI replay",
+      "result": "pass",
+      "observed": "Strict success/empty-scene guard fixtures 22/22 pass. Fresh empty owned host completed 47 recipe steps plus empty/final checks (49 typed responses), with no repeated render. OBJ bytes and geometry counts/bounds exactly match original. CLI/Core 0.20.28 and adapter 0.43.1; gateway observed 0.20.22/transitional, recorded separately from main production.",
+      "evidence": "replay-smoke.json;replay-cli.ps1"
+    }
+  ],
+  "geometry": {
+    "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+    "point_count": 115776,
+    "primitive_count": 115200,
+    "vertex_count": 460800,
+    "bounds_min": [
+      -1.0318803787231445,
+      0.0,
+      -1.0318803787231445
+    ],
+    "bounds_max": [
+      1.031880497932434,
+      2.2490625381469727,
+      1.0318803787231445
+    ],
+    "bounds_size": [
+      2.0637608766555786,
+      2.2490625381469727,
+      2.063760757446289
+    ]
+  },
+  "obj": {
+    "points": 115776,
+    "faces": 115200,
+    "normals": 460800,
+    "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9",
+    "bytes": 35869290
+  },
+  "native_publication": "withheld_private_metadata; original saved/reopened locally",
+  "not_claimed": [
+    "Public downloadable HIP or complete native metadata sanitization.",
+    "GUI interaction acceptance or other Houdini versions.",
+    "OBJ reimport into another DCC, material/light transfer, Karma, animation, or manifold certification.",
+    "Later resolution patch used during this asset run.",
+    "Original request bodies for the early response-only part of the run.",
+    "All publication processing being dedicated typed tools: PNG metadata-only cleanup uses the discovered MCP automation tool and its public source."
+  ],
+  "png_publication": {
+    "operation": "PNG metadata-only publication via DCC-MCP automation fallback",
+    "pixel_editing": false,
+    "outputs": [
+      {
+        "source_file": "hero.png",
+        "public_file": "hero-public.png",
+        "source_bytes": 1244257,
+        "public_bytes": 1244231,
+        "source_sha256": "557bdd4d16b56e6ae21cb025971ed2b8340d4efae6571c41d482158b0ad47e2b",
+        "public_sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9",
+        "idat_sha256": "af1bdc865089d647eff086e7c6dad86e9e9aa1eefc74d4537071b242a0dc5bb1",
+        "idat_unchanged": true,
+        "crc_validation": "pass",
+        "removed_metadata": [
+          {
+            "chunk": "tEXt",
+            "keyword": "Artist"
+          }
+        ],
+        "width": 1200,
+        "height": 1500,
+        "decoded_rgba_sha256": "d246e0da4f5d1cf3c561b2718fc8820e7c2c561f44c4e68fd0887e6596303f61"
+      },
+      {
+        "source_file": "preview.png",
+        "public_file": "preview-public.png",
+        "source_bytes": 907829,
+        "public_bytes": 907803,
+        "source_sha256": "4619bf66e510cb0b5c16d2a5d3521ad41fc4157fc6ebf54ab968520561711646",
+        "public_sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be",
+        "idat_sha256": "295200fd1d22f840914529f76eafc9be8ba1d58a44caeb7319470262f804dc9c",
+        "idat_unchanged": true,
+        "crc_validation": "pass",
+        "removed_metadata": [
+          {
+            "chunk": "tEXt",
+            "keyword": "Artist"
+          }
+        ],
+        "width": 960,
+        "height": 1200,
+        "decoded_rgba_sha256": "f35deb5fabb4bfa0cca3456fcb8eb5c85df87a3a16cc435c21d5cf7c8890423d"
+      }
+    ]
+  },
+  "retained_native_reopen": {
+    "success": true,
+    "geometry_matches": true,
+    "private_file_sha256": "9c0ba27eb5986a9eb81a03a098ad0895bb9b1eda15952306786d99b687f7fac6",
+    "evidence": [
+      "126-reopen-retained-native",
+      "127-retained-native-geometry"
+    ]
+  },
+  "replay_smoke_summary": {
+    "schema_version": 1,
+    "kind": "Fresh dedicated empty-host replay without Render switch",
+    "result": "pass",
+    "executed_recipe_steps": 47,
+    "skipped_render_steps": 1,
+    "typed_request_response_count": 49,
+    "no_new_render": true,
+    "environment": {
+      "Houdini": "22.0.368",
+      "adapter": "dcc-mcp-houdini 0.43.1",
+      "adapter_source_commit": "9957e58e987147e448819384a0e8a8be5756de18",
+      "Core_CLI": "0.20.28",
+      "observed_gateway": "0.20.22, transitional: guardian version takeovers observed. This smoke is not claimed to use the production run gateway 0.20.28."
+    },
+    "guard_fixture": {
+      "result": "pass",
+      "independent_AST_fixture_cases": 22,
+      "scope": "Explicit boolean success, numeric zero node count, explicit boolean false hip_has_file; missing/null/string/inconsistent types rejected before mutation."
+    },
+    "geometry": {
+      "node_path": "/obj/showcase_20261001_ceramic/OUT_ceramic",
+      "point_count": 115776,
+      "primitive_count": 115200,
+      "vertex_count": 460800,
+      "bounds_min": [
+        -1.0318803787231445,
+        0.0,
+        -1.0318803787231445
+      ],
+      "bounds_max": [
+        1.031880497932434,
+        2.2490625381469727,
+        1.0318803787231445
+      ],
+      "bounds_size": [
+        2.0637608766555786,
+        2.2490625381469727,
+        2.063760757446289
+      ]
+    },
+    "exported_obj": {
+      "bytes": 35869290,
+      "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9",
+      "original_bytes_identical": true
+    },
+    "boundary": "No repeated Mantra render, PNG metadata processing or cross-DCC import in this smoke. Main case production receipt remains separate."
+  }
+}

@@ -31,7 +31,7 @@ CASE_FIELDS = (
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 SHA = re.compile(r"[0-9a-fA-F]{40}\Z")
 MEDIA_EXT = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".mp4", ".webm"}
-TEXT_EXT = {".md", ".json", ".txt", ".html", ".htm", ".css", ".js",
+TEXT_EXT = {".md", ".json", ".txt", ".html", ".htm", ".css", ".js", ".py", ".ps1", ".sh",
             ".xml", ".csv", ".yaml", ".yml", ".svg", ".obj", ".mtl"}
 UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|"
                      r"未(?:公开|记录|知)|未知|无法核实", re.I)

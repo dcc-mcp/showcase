@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "application": "Houdini",
+  "application_version": "22.0.368",
+  "adapter": "dcc-mcp-houdini 0.43.1",
+  "core": "0.20.28",
+  "artifact_policy": "Public web encodings and redacted evidence only. Native HIP and original PNG retained privately. Actual OBJ and explicitly metadata-cleaned pixel-identical public PNG in independently audited Release ZIP.",
+  "files": [
+    {
+      "path": "calls.json",
+      "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0",
+      "bytes": 89771
+    },
+    {
+      "path": "derivatives.json",
+      "sha256": "69a75b3aeb080cd4fca4c163fdc99dff73d43dee9430d0ca667801aad3f5633f",
+      "bytes": 3581
+    },
+    {
+      "path": "gateway-receipt.json",
+      "sha256": "836770095343c8b6ad8727f48c6d80a8811e41e69a7f10cab5ca415c280f4136",
+      "bytes": 1635
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "ab77fb216e715cdeb44313054de3e2d5ac039755f8c82e21f61a2777011ef623",
+      "bytes": 52728,
+      "width": 1200,
+      "height": 1500,
+      "bit_depth": 8
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a",
+      "bytes": 1064
+    },
+    {
+      "path": "lighting-study.jpg",
+      "sha256": "4b37fca00dbeaa4d222646cc333eb4fe851c4649859e793a66f4e9b4c9e90e43",
+      "bytes": 54284,
+      "width": 1200,
+      "height": 1500,
+      "bit_depth": 8
+    },
+    {
+      "path": "png-publication.json",
+      "sha256": "a1715f1e72f0d6034c39cbf344bf8142b805f6d5bfd342f09c76bcfb60a1a797",
+      "bytes": 1599
+    },
+    {
+      "path": "preview.jpg",
+      "sha256": "e396bf7044a8feada7ee59ce76e80c6719d37b34847599e9f55657d8db0fb6d8",
+      "bytes": 45736,
+      "width": 960,
+      "height": 1200,
+      "bit_depth": 8
+    },
+    {
+      "path": "profile.json",
+      "sha256": "64032138438d5acb395de7f83e09a0bdc856c04818c116b603e43f640a3e33d3",
+      "bytes": 3795
+    },
+    {
+      "path": "prompt.md",
+      "sha256": "329d100c4bccf7bef00195f0d5b00b94f55d65fbac3497a65372738fe83e610a",
+      "bytes": 1820
+    },
+    {
+      "path": "README.md",
+      "sha256": "426bca242dce77cbc4d70bcbb10e905387913d70cafd8932476a87f34d98670c",
+      "bytes": 7904
+    },
+    {
+      "path": "recipe.json",
+      "sha256": "df014d3210393e196d95910a37b7a1bb2edd22d6d75df9e253da1baa1d4e1b30",
+      "bytes": 20934
+    },
+    {
+      "path": "replay-cli.ps1",
+      "sha256": "6c9f43a13e99b73c9cddb0281fdd57b6ae06a4fb834da70ed4ea4f22fb358fa9",
+      "bytes": 4286
+    },
+    {
+      "path": "replay-smoke.json",
+      "sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc",
+      "bytes": 52691
+    },
+    {
+      "path": "sanitize_png_metadata.py",
+      "sha256": "876b1810518ad7547260413db2c0ec99eb66d562f85ef1a0bdb064f1c0e2ab96",
+      "bytes": 4428
+    },
+    {
+      "path": "validation.json",
+      "sha256": "6a875a57ed8766ac1ef444527babaee34b48e8499a3f9948585e6f9a88b2e966",
+      "bytes": 9581
+    },
+    {
+      "path": "downloads.json",
+      "bytes": 2345,
+      "sha256": "2fbf62b4438e1fcf6aa093c2c56be301e5d413675be96a3d07420b376d6e8668"
+    }
+  ]
+}

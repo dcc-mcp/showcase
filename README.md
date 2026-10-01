@@ -12,12 +12,24 @@ case's software adapter linked from the site. The official site's broader
 [examples](https://dcc-mcp.github.io/examples) remain distinct from the
 collection's downloadable, individually documented case records.
 
-The first collection brings together two published Substance 3D Designer
-studies: a weathered crate with Blender lookdev, and a procedural painted-wood
-material. Their detail pages distinguish the original public evidence from
-this collection's integration work. Neither was reproduced in this round.
-Original conversation prompts and complete MCP call traces were not published;
-the prompts here are clearly labeled adaptations for future reproduction.
+The collection combines a procedural Houdini studio study produced in this
+round through DCC-MCP with two published Substance 3D Designer studies: a
+weathered crate with Blender lookdev, and a procedural painted-wood material.
+Each detail page distinguishes actual execution from historical evidence.
+The historical studies were not reproduced in this round; their original
+conversation prompts and complete MCP traces were not published, so their
+prompts are clearly labeled adaptations for future reproduction.
+
+The Houdini study records actual modeling, materials, lighting, rendering,
+saved-project reopening and OBJ export/reimport. Its public records explain
+trace coverage and the observed Mantra resolution issue. The native HIP is
+retained privately because automatic saved-file metadata contains personal
+machine information; the public reproduction resources do not include it.
+The public package supplies the verified OBJ and an ordered typed MCP replay
+for editable reconstruction. This is not a native HIP download. The current
+official save APIs were investigated without finding a validated complete
+metadata sanitizer. PNG author metadata is removed through the adapter's
+MCP automation tool; compressed image data and decoded pixels remain identical.
 
 ## Browse and reproduce
 

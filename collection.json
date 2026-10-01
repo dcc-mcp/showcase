@@ -2,6 +2,258 @@
   "schema_version": 1,
   "cases": [
     {
+      "slug": "houdini-procedural-study",
+      "title": "青釉环纹器皿",
+      "subtitle": "Houdini · 51 点剖面到真实 Mantra 成图",
+      "software": [
+        "Houdini"
+      ],
+      "capabilities": [
+        "建模",
+        "程序化几何",
+        "材质",
+        "渲染",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/houdini-procedural-study/hero.jpg",
+        "alt": "Houdini Mantra 渲染的青釉环纹器皿，具有空心口沿、柔和反射和地面接触阴影"
+      },
+      "evidence_label": "本轮实际运行 · DCC-MCP 创作",
+      "evidence_scope": "2026-10-01 在独立空场景中实际运行：造型、釉面、灯光、相机、保存、四轮单帧 Mantra 渲染、工程重开及 OBJ 导出/同 Houdini 回导入均通过 typed DCC-MCP。Gateway checkpoint 89/89 successful。公开响应日志明确脱敏；早期请求未单独保存，复用 recipe 不是完整原始请求轨迹。原生 HIP 受私人元数据阻塞，仅本地保留；公开 OBJ、像素一致的公开 PNG、复用输入和证据。 最终 gateway session 93/93 successful。原 PNG 自动 Artist 元数据保留私有；公开 -public PNG 通过已发现的 MCP 自动化工具仅移除该文本 chunk，CRC、IDAT 及 decoded RGBA 哈希均保持一致。资产制作和渲染为专用 typed 工具，PNG 元数据整理明确使用 MCP 自动化 fallback。",
+      "summary": "51 点剖面定义环纹、肩部、口沿、内壁与底厚。144 段车削和两级细分形成 115,200 面的可编辑器皿；青釉、三块软箱与暖灰地面完成真实产品式主图。",
+      "goal": "通过 DCC-MCP 制作一个有真实厚度和开口的程序化陶瓷器皿，保留剖面控制链，验证地面接触、釉面、真实渲染和保存重开，并公开可复用输入与几何。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "只通过 typed DCC-MCP，在独立且确认空场景的 Houdini 宿主制作一件青釉环纹陶瓷器皿。不得改动其他任务场景，不得直接运行 Houdini 资产制作脚本。创建 51 点的半径/高度剖面，连续定义底部、环纹外壁、肩部、口沿和内壁，绕 Y 轴旋转 144 段；建立两级 Subdivide 和顶点法线。保留完整可编辑 SOP 链。\n\n用 Principled Shader 设置青绿色 basecolor=[0.035,0.21,0.18]，禁用点颜色，roughness=0.30、coat=0.35、coatrough=0.24。地面 basecolor=[0.46,0.40,0.32]、roughness=0.65；地面顶面和模型最低点均为 y=0，不使用外部贴图。建立 90 mm 镜头和三块 grid 软箱，保持完整开口、肩部环纹及底部接触阴影可见。\n\n先保存并渲染真实中间图，依据图像有限调整灯光与构图，再输出真实 1200×1500 Mantra 主图，PBR Ray Tracing、4×4 像素采样、最多 16 条次级射线。输出使用 `$HIP/hero.png`，保存工程、等待隔离渲染作业完成并核对文件；随后重开工程，重新读回几何计数、材质、相机和渲染路径。\n\n所有正式 CLI 调用使用 `--require-gateway` 和稳定 `--agent-session-id`。先 inventory、scoped search、load-skill/describe，再按实际 schema 调用。记录实际工具名、请求/响应和失败，不用工具 applied 字段替代实际文件尺寸检查。公开文档用 `CASE_DIR` / `JOB_DIR` 明确脱敏，审计原生工程里的私有元数据，保留作者和 MIT 许可。任何能力缺失都写明，不使用生成图片或历史成图冒充本轮渲染。",
+        "note": "可复用生产说明，按本轮实际执行的 typed 步骤整理；不是用户原话逐字稿。剖面输入与实际调用响应另附。"
+      },
+      "environment": [
+        {
+          "label": "软件 / 渲染器",
+          "value": "Houdini 22.0.368 · Mantra PBR Ray Tracing"
+        },
+        {
+          "label": "实际适配器",
+          "value": "dcc-mcp-houdini 0.43.1 · clean source 9957e58e987147e448819384a0e8a8be5756de18"
+        },
+        {
+          "label": "Core / CLI / Gateway",
+          "value": "0.20.28 · 已安装版本匹配 runtime"
+        },
+        {
+          "label": "最终成图",
+          "value": "1200 × 1500 · 4 × 4 pixel samples · max rays 16"
+        },
+        {
+          "label": "工程范围",
+          "value": "本地 HIP 重开通过；公开 OBJ + 像素一致 PNG + recipe"
+        }
+      ],
+      "tools": [
+        {
+          "name": "create_curve_guides / lathe_profile",
+          "description": "写入实际 51 点剖面并围绕 Y 轴旋转 144 段，形成内外壁、口沿和底厚。"
+        },
+        {
+          "name": "create_node / connect_nodes / set_node_parms / add_normals",
+          "description": "建立两级细分、法线、接触地面、背板及最终参数；没有直接资产制作脚本。"
+        },
+        {
+          "name": "create_material / assign_material / create_camera / create_light",
+          "description": "实际生成 Principled Shader 釉面、三块 grid 软箱与镜头，读回最终参数。"
+        },
+        {
+          "name": "save_hip_file / load_hip_file / render_rop / get_render_job",
+          "description": "保存及重开本地工程；执行并核实隔离 Mantra 作业真实落盘。"
+        },
+        {
+          "name": "export_geometry / import_geometry / get_geometry_info",
+          "description": "真实导出 OBJ 并回导入同一 Houdini，核对计数和包围盒。"
+        },
+        {
+          "name": "run_python_file（PNG 元数据整理）",
+          "description": "专用 typed 净化能力缺口经 scoped search 记录；通过正式 MCP 自动化执行公开参数化 PNG cleaner，仅移除 Artist 文本，保留所有 IDAT 与 RGBA 像素。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "定义器皿剖面",
+          "description": "51 点连续定义底厚、环纹外壁、肩部、口沿和内壁；原输入公开于 profile.json。"
+        },
+        {
+          "title": "车削与细分",
+          "description": "Y 轴旋转 144 段；两级 Subdivide 和顶点法线输出 115,776 点、115,200 面。"
+        },
+        {
+          "title": "第一次真实渲染",
+          "description": "建立青釉、三块软箱和地面。首张预览保留强高光和较紧构图，作为真实中间成果。",
+          "image": {
+            "src": "docs/showcase/houdini-procedural-study/preview.jpg",
+            "alt": "首次真实 Mantra 预览，环纹青釉器皿具有较强高光和较紧构图"
+          }
+        },
+        {
+          "title": "调整灯光与留白",
+          "description": "降低主光和轮廓光，提高粗糙度，并改为 90 mm 镜头；中间图的黑色天空说明后续背板需求。",
+          "image": {
+            "src": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
+            "alt": "调整曝光和构图后的实际中间渲染，顶部仍有黑色天空"
+          }
+        },
+        {
+          "title": "真实主图与重开验证",
+          "description": "typed 背板调整后完成 1200×1500 主图；重开本地 HIP，核对几何、釉面、相机、采样与相对输出路径。",
+          "image": {
+            "src": "docs/showcase/houdini-procedural-study/hero.jpg",
+            "alt": "本轮最终 Mantra 1200×1500 产品式主图"
+          }
+        },
+        {
+          "title": "公开几何与证据",
+          "description": "OBJ 实际导出并在同 Houdini 回导入，计数和包围盒一致。HIP 含私人元数据暂扣；公开输入、recipe、日志与许可。 原 PNG 的自动 Artist 元数据通过 MCP 自动化整理为像素一致的公开副本，原件本地保留。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/houdini-procedural-study/hero.jpg",
+          "alt": "青釉环纹器皿最终 Mantra 成图",
+          "caption": "真实 1200×1500 Mantra 单帧 · 网页 JPEG 仅编码转换"
+        },
+        {
+          "src": "docs/showcase/houdini-procedural-study/preview.jpg",
+          "alt": "本轮首次 Mantra 预览",
+          "caption": "真实 960×1200 中间图；工具分辨率 applied 字段与实际尺寸存在已记录差异"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Dedicated empty scene",
+          "result": "pass",
+          "observed": "Initial typed scene readback: hip_has_file=false, /obj count=0. Existing concurrent scenes were not edited."
+        },
+        {
+          "name": "Actual final Mantra output",
+          "result": "pass",
+          "observed": "Completed in 115.92 seconds; isolated worker stopped, expected/written outputs 1/1, verified, no warnings. PNG IHDR 1200×1500; file is nonblank."
+        },
+        {
+          "name": "Native save and reopen",
+          "result": "pass",
+          "observed": "Typed private save and load succeeded; reopened scene hip_has_file=true and /obj count=9. Reopened SOP, camera, glaze, backdrop and renderer readbacks matched final settings. Native stays local."
+        },
+        {
+          "name": "Geometry and floor contact",
+          "result": "pass",
+          "observed": "115,776 points / 115,200 primitives / 460,800 vertices. Bounds size 2.06376088×2.24906254×2.06376076; minimum Y=0. Floor top Y=0."
+        },
+        {
+          "name": "Final camera and material",
+          "result": "pass",
+          "observed": "Camera res=1200×1500, focal=90; glaze basecolor=[0.035,0.21,0.18], rough=0.30, coat=0.35, coatrough=0.24 after reopen."
+        },
+        {
+          "name": "OBJ export and same-Houdini reimport",
+          "result": "pass",
+          "observed": "Typed exported 35,869,290 bytes, file probe confirmed OBJ; completed typed reimport reproduces all point/primitive/vertex counts and bounds. OBJ text audit found no private paths, hosts or credentials."
+        },
+        {
+          "name": "Gateway audit checkpoint",
+          "result": "pass",
+          "observed": "Gateway-recorded session checkpoint: 89 total, 89 successful, 0 failed. Public response trace is a selected actual tool-call subset; search/load/control operations are not all reproduced there."
+        },
+        {
+          "name": "Preview resolution report mismatch",
+          "result": "fail",
+          "observed": "set_render_settings applied [640,800]/unsupported=[] but actual preview was 960×1200. Mantra override_camerares remained 0. Final camera resolution was set with typed set_node_parms and actual final dimensions independently checked. This run did not use the later adapter patch."
+        },
+        {
+          "name": "Native HIP public privacy",
+          "result": "fail",
+          "observed": "CPIO variables, native authors, HDA library paths and Base64 Stash artist/hostname contain private metadata. Existing typed save/project/tagging tools do not fully sanitize these. HIP is withheld from the public folder and ZIP."
+        },
+        {
+          "name": "Public PNG metadata via MCP automation",
+          "result": "pass",
+          "observed": "Only automatic Artist tEXt removed to explicit -public copies by adapter-exposed run_python_file. CRC, unchanged compressed IDAT hash, decoded RGBA hash and dimensions pass; independent Pillow decoded comparison also passes. Originals retained privately. This publication step uses MCP automation because a dedicated typed cleanup tool was not found."
+        },
+        {
+          "name": "Fresh no-Render CLI replay",
+          "result": "pass",
+          "observed": "Strict success/empty-scene guard fixtures 22/22 pass. Fresh empty owned host completed 47 recipe steps plus empty/final checks (49 typed responses), with no repeated render. OBJ bytes and geometry counts/bounds exactly match original. CLI/Core 0.20.28 and adapter 0.43.1; gateway observed 0.20.22/transitional, recorded separately from main production."
+        }
+      ],
+      "limitations": [
+        "HIP 因私人原生元数据暂不公开，完整净化能力仍待补；可编辑 typed 输入与 CLI 重放入口已提供。",
+        "OBJ 不保留程序化 SOP 链、完整着色器与灯光；本轮未在其他 DCC 回导入 OBJ 验证。",
+        "本轮未验证 GUI 交互、其他 Houdini 版本、Karma、动画或封闭流形。",
+        "本轮生产未使用后续分辨率修复 PR；最终真实像素尺寸通过 typed 相机设置与文件解析保证。",
+        "早期仅保存响应；recipe 按实际输入整理，并在第二个空宿主通过无渲染重放；未重复完整带渲染流程。",
+        "PNG 元数据整理使用已发现的 MCP 自动化工具，专用 typed 净化能力未找到；CRC、IDAT 与 RGBA 像素一致。"
+      ],
+      "resources": [
+        {
+          "label": "资源 ZIP：实际 OBJ / 像素一致的公开 PNG / 复用输入与证据",
+          "url": "https://github.com/dcc-mcp/showcase/releases/download/2026-10-01-houdini-procedural-study/houdini-procedural-study-assets.zip"
+        },
+        {
+          "label": "typed 复用步骤",
+          "url": "docs/showcase/houdini-procedural-study/recipe.json"
+        },
+        {
+          "label": "原始剖面输入",
+          "url": "docs/showcase/houdini-procedural-study/profile.json"
+        },
+        {
+          "label": "实际调用响应（明确脱敏）",
+          "url": "docs/showcase/houdini-procedural-study/calls.json"
+        },
+        {
+          "label": "验证记录",
+          "url": "docs/showcase/houdini-procedural-study/validation.json"
+        },
+        {
+          "label": "文件与哈希",
+          "url": "docs/showcase/houdini-procedural-study/manifest.json"
+        },
+        {
+          "label": "实际运行 Adapter 源码",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/tree/9957e58e987147e448819384a0e8a8be5756de18"
+        },
+        {
+          "label": "MCP 元数据整理代码（公开参数化）",
+          "url": "docs/showcase/houdini-procedural-study/sanitize_png_metadata.py"
+        },
+        {
+          "label": "CLI typed 重放入口（无渲染烟测通过）",
+          "url": "docs/showcase/houdini-procedural-study/replay-cli.ps1"
+        },
+        {
+          "label": "分辨率缺陷修复 draft PR（本轮生产未使用）",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/333"
+        },
+        {
+          "label": "独立空宿主无渲染重放证据",
+          "url": "docs/showcase/houdini-procedural-study/replay-smoke.json"
+        },
+        {
+          "label": "下载身份、许可与审计范围",
+          "url": "docs/showcase/houdini-procedural-study/downloads.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase · 本轮通过 typed MCP 实际生成",
+        "license": "MIT",
+        "note": "无外部模型、参考图或贴图。文档、模型与渲染按仓库 MIT 许可提供；SideFX 软件及内置着色器不独立重新分发。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/tree/9957e58e987147e448819384a0e8a8be5756de18",
+        "commit": "9957e58e987147e448819384a0e8a8be5756de18",
+        "title": "实际运行的 Adapter 工具源码（作品另见本案例哈希）"
+      },
+      "verified_at": "2026-10-01"
+    },
+    {
       "slug": "crate-lookdev",
       "title": "风化木箱",
       "subtitle": "从 Designer 材质图到 Blender lookdev",

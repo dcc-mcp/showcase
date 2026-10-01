@@ -1,0 +1,46 @@
+{
+  "operation": "PNG metadata-only publication via DCC-MCP automation fallback",
+  "pixel_editing": false,
+  "outputs": [
+    {
+      "source_file": "hero.png",
+      "public_file": "hero-public.png",
+      "source_bytes": 1244257,
+      "public_bytes": 1244231,
+      "source_sha256": "557bdd4d16b56e6ae21cb025971ed2b8340d4efae6571c41d482158b0ad47e2b",
+      "public_sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9",
+      "idat_sha256": "af1bdc865089d647eff086e7c6dad86e9e9aa1eefc74d4537071b242a0dc5bb1",
+      "idat_unchanged": true,
+      "crc_validation": "pass",
+      "removed_metadata": [
+        {
+          "chunk": "tEXt",
+          "keyword": "Artist"
+        }
+      ],
+      "width": 1200,
+      "height": 1500,
+      "decoded_rgba_sha256": "d246e0da4f5d1cf3c561b2718fc8820e7c2c561f44c4e68fd0887e6596303f61"
+    },
+    {
+      "source_file": "preview.png",
+      "public_file": "preview-public.png",
+      "source_bytes": 907829,
+      "public_bytes": 907803,
+      "source_sha256": "4619bf66e510cb0b5c16d2a5d3521ad41fc4157fc6ebf54ab968520561711646",
+      "public_sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be",
+      "idat_sha256": "295200fd1d22f840914529f76eafc9be8ba1d58a44caeb7319470262f804dc9c",
+      "idat_unchanged": true,
+      "crc_validation": "pass",
+      "removed_metadata": [
+        {
+          "chunk": "tEXt",
+          "keyword": "Artist"
+        }
+      ],
+      "width": 960,
+      "height": 1200,
+      "decoded_rgba_sha256": "f35deb5fabb4bfa0cca3456fcb8eb5c85df87a3a16cc435c21d5cf7c8890423d"
+    }
+  ]
+}

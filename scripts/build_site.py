@@ -265,6 +265,8 @@ ADAPTER_PROJECTS = {
 ENGINEERING_EXTENSIONS = {
     ".blend", ".sbs", ".sbsar", ".hip", ".hiplc", ".hipnc", ".ma", ".mb",
     ".max", ".c4d", ".nk", ".psd", ".spp", ".ztl", ".unitypackage", ".zip",
+    ".obj", ".mtl", ".fbx", ".gltf", ".glb", ".usd", ".usda", ".usdc",
+    ".abc", ".stl", ".step", ".iges", ".3mf",
 }
 
 def public_url(path: str = "") -> str:
@@ -392,7 +394,7 @@ def engineering_section(case: dict, root: str, prefix: str) -> tuple[str, list[d
         rows.append('<li class="engineering-file"><div><strong>%s</strong><span>%s</span></div><a href="%s"%s>%s <span aria-hidden="true">↗</span></a></li>' %
                     (esc(item["label"]), esc(meta), esc(url), download, action))
     return ('<section class="detail-section" id="downloads"><h2>工程文件</h2>'
-            '<p>选择所需的原生工程。打开前请查看本案例的软件版本、依赖与许可。</p>'
+            '<p>选择工程、复现包或导出资源。使用前请查看本案例的软件版本、依赖、格式边界与许可。</p>'
             '<ul class="engineering-files">%s</ul></section>' % "".join(rows)), remaining
 
 def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
