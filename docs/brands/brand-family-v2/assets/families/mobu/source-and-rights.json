@@ -1,0 +1,37 @@
+{
+  "family": "mobu",
+  "display_name": "MotionBuilder",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-mobu",
+    "source_commit": "7f9fb97e260f4d873ad4a78d1fd73f7ded3810aa",
+    "source_path": "docs/assets/dcc-mcp-mobu.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-mobu/7f9fb97e260f4d873ad4a78d1fd73f7ded3810aa/docs/assets/dcc-mcp-mobu.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-mobu/docs/assets/dcc-mcp-mobu.svg",
+    "sha256": "ae4fa43c7de7507b6678b2905efc2fccb232e9acd121e0ceeb1c4af5d50e1c3f",
+    "bytes": 1502537,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#006880",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#006880",
+    "dark": "#549AAA",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "animation-skeleton-and-motion",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Autodesk MotionBuilder identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Autodesk MotionBuilder software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

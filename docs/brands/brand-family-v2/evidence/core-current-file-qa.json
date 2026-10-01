@@ -1,0 +1,41 @@
+{
+  "scope": "Read-only file QA of actual native core outputs; GUI and design approval are separate.",
+  "generated_utc": "2026-10-01T13:53:49.185466+00:00",
+  "checks": [
+    {
+      "path": "assets/native/dcc-mcp-currentcolor-corrected.svg",
+      "bytes": 4988,
+      "sha256": "7119299a3206aa44f9b4b3e1306b442a4f867f4c14a361196119f65efcbb8894",
+      "format": "svg",
+      "element_count": 29,
+      "text_count": 1,
+      "mode": "native",
+      "failures": [],
+      "pass": true
+    },
+    {
+      "path": "assets/native/dcc-mcp-currentcolor-outlined.svg",
+      "bytes": 6121,
+      "sha256": "0ed36f16548b3519cc724eafd7334ebb91be732c9903e1f98f0eff79bcffad23",
+      "format": "svg",
+      "element_count": 29,
+      "text_count": 0,
+      "mode": "release",
+      "failures": [],
+      "pass": true
+    },
+    {
+      "path": "assets/svg/dcc-mcp-wordmark-currentcolor.svg",
+      "bytes": 5257,
+      "sha256": "b7dc9178ff2c39ed18ed8ad7e458fbcf543add18106d902d60cc6fbe7372ff24",
+      "format": "svg",
+      "element_count": 28,
+      "text_count": 0,
+      "mode": "release",
+      "failures": [],
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "artwork_written_or_rendered": false
+}

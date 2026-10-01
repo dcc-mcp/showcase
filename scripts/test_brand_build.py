@@ -96,6 +96,19 @@ class BrandBuildGuards(unittest.TestCase):
         self.assertIn("2 × 1 px", detail)
         self.assertNotIn("— × —", detail)
 
+    def test_published_themes_plan_status_has_a_chinese_label(self):
+        self.catalog["progress"] = {"completed": 10, "total": 37, "assets": 155,
+                                    "planned": [{"id": "core", "title": "DCC-MCP",
+                                                 "status": "actual_verified_published_themes"}]}
+        self.save()
+        _, problems, _ = self.build()
+        self.assertEqual([], problems)
+        gallery = self.page("brands/index.html")
+        self.assertIn("深浅及单色主题已交付", gallery)
+        self.assertNotIn("actual_verified_published_themes", gallery)
+        self.assertIn('<progress value="10" max="37"', gallery)
+        self.assertIn("<strong>155</strong> 个实际文件", gallery)
+
     def test_local_preview_cannot_target_production_directory(self):
         published, problems, _ = self.build(preview=True)
         self.assertEqual([], published)

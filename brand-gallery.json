@@ -2,5 +2,5 @@
   "schema_version": 1,
   "enabled": true,
   "manifest": "docs/brands/brand-family-v2/manifest.json",
-  "manifest_sha256": "72caf89a62cf54767a9e7f32131d481070a153686c96cb8860d92d620111d47b"
+  "manifest_sha256": "9c237290d35f0c2e87233bc1dd68ab3b97fcf5cbaf2c3c8ebed3ed73f4053fca"
 }

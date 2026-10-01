@@ -1,0 +1,37 @@
+{
+  "family": "openusd",
+  "display_name": "OpenUSD",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-openusd",
+    "source_commit": "fc0601388a5ce4c6f421d4e3d22983498072f101",
+    "source_path": "docs/assets/dcc-mcp-openusd.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-openusd/fc0601388a5ce4c6f421d4e3d22983498072f101/docs/assets/dcc-mcp-openusd.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-openusd/docs/assets/dcc-mcp-openusd.svg",
+    "sha256": "fd4808c3902c37d1c1539f04ab5fd2e20d04795b3457076763771be7cbdbf50c",
+    "bytes": 1438351,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#007080",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#007080",
+    "dark": "#549FAA",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "scene-layer-stack-and-prims",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name OpenUSD identifies the referenced software/workflow and remains with OpenUSD / Pixar / Alliance for OpenUSD. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for OpenUSD workflows",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

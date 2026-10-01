@@ -1,0 +1,37 @@
+{
+  "family": "nuke",
+  "display_name": "Nuke",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-nuke",
+    "source_commit": "15002542c5c8a3924f250b137eab7e43dce243f3",
+    "source_path": "docs/assets/dcc-mcp-nuke.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-nuke/15002542c5c8a3924f250b137eab7e43dce243f3/docs/assets/dcc-mcp-nuke.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-nuke/docs/assets/dcc-mcp-nuke.svg",
+    "sha256": "c643d27c235e4992ef5ebd5f446f12c5fa735ec1a7814ee670cead8df32041b6",
+    "bytes": 1375268,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#D08800",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#D08800",
+    "dark": "#E0AF54",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "compositing-merge-graph",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Foundry Nuke identifies the referenced software/workflow and remains with Foundry. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Foundry Nuke software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

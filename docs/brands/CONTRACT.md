@@ -11,7 +11,7 @@ byte-identical. Do not maintain a duplicate webpage asset map.
 time. It cross-checks actual family/file counts, the two-theme output matrix,
 per-output successful MCP responses and hashes, recorded versions, visual
 review and precise acceptance limits. This mapping supports the reviewed core
-and six software families. Later families require their own completed handoff and
+and nine software families. Later families require their own completed handoff and
 an explicit reviewed mapping; extra files in the producer directory are never
 selected by crawling. Missing or disabled catalogs publish zero brand files.
 Pending placeholders are local development content only.
@@ -71,18 +71,27 @@ Record browser ownership accurately. Only then enable the catalog, use the
 normal repository PR/Pages process, and verify the actual public URL again.
 
 The core-first release has eight actual files. The incremental snapshot adds
-six software families with 16 files each: seven partially delivered families
-out of 37 planned, with 104 actual files. Core's remaining variants, each new
-family's currentColor outlined SVG and the other 30 families are not completed.
-CurrentColor native SVGs retain live text; their raster exports are fixed
-black PNGs and cannot inherit CSS color. Normal release SVGs are outlined.
-New family QA and source/rights records must match actual file bytes, motifs,
+software families with 16 files each. The current reviewed snapshot contains
+11 core files (including live-text, outlined-native and release currentColor
+SVGs) and nine software families: ten actual families out of 37 planned, with
+155 files. Each role must match real text/path content, output operation and
+core QA. Core's remaining variants, each software family's currentColor
+outlined SVG and the other 27 families are not completed.
+Software-family currentColor native SVGs retain live text; their raster exports
+are fixed black PNGs and cannot inherit CSS color. Core has separately verified
+live-text, outlined-native and release currentColor SVGs. Normal release SVGs
+are outlined.
+Current nine-family QA and source/rights records must match actual file bytes, motifs,
 output receipts and optical 128 × 60 PNGs. Old drawing briefs are plans, not
 final geometry evidence. Show progress and plans as text without dead
-downloads. Production source and public draft commits share the `src` subtree;
-their complete repository trees differ by a test-fixture change. Do not claim
-the public review commit was the production runtime, partial core GUI
-observation was complete canvas or six-family GUI acceptance, or the user has
+downloads. Historical `7657bafe` production and `02a0fa6d` public-review commits
+share their old `src` subtree, but the repaired `fd5a71d4` changes production
+code. It is both the current actual runtime and public draft source. Preserve
+each output's actual historical revision; do not claim old outputs were rerun
+under the repaired source. Keep historical first-six QA URLs and their hashes
+available alongside current nine-family QA and its composite images. Do not
+claim partial core GUI observation was complete canvas, new-currentColor or
+software-family GUI acceptance, or the user has
 already approved the design. Original reference
 imagery whose redistribution terms are not established stays outside this
 publication batch.

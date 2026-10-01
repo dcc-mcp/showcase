@@ -70,12 +70,13 @@ not substitute for browser acceptance.
 
 The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
 selects resources without changing the three-case collection. The first core
-release contains eight verified files. Its incremental batch adds Maya,
-3ds Max, Blender, Houdini, ZBrush and Photoshop families with 16 files each:
-seven actual families and 104 files out of 37 planned families. All artwork
+release contains eight verified files. Incremental batches add Maya,
+3ds Max, Blender, Houdini, ZBrush, Photoshop, MotionBuilder, Nuke and OpenUSD
+families with 16 files each, plus three actual core currentColor SVGs:
+ten actual families and 155 files out of 37 planned families. All artwork
 is authored and exported through DCC-MCP in Inkscape; family names identify
 referenced workflows, not the software used for these production calls.
-Other Core variants, six currentColor outlined SVGs and the remaining 30
+Other Core variants, nine software-family currentColor outlined SVGs and the remaining 27
 families are pending. Plans have no placeholder download links.
 
 `brand-gallery.json` points to the producer's authoritative
@@ -83,18 +84,23 @@ families are pending. Plans have no placeholder download links.
 page data at runtime; it does not keep a second hand-maintained asset inventory.
 Original SVG/PNG bytes remain unchanged. The snapshot preserves the original
 manifest hash and documents removal of private routing, paths and process IDs.
-104 real successful gateway requests/responses (32 builds and 72 exports),
+155 real successful gateway requests/responses (49 builds and 106 exports),
 per-file family QA and the geometric/raster review are published with explicit
 evidence coverage. This site integration
 did not rerun Inkscape production. The installed development adapter and its
-public draft source are distinct from a released integration.
+public draft source are distinct from a released integration. Actual per-output
+revisions remain recorded: 118 outputs use the historical `7657bafe` source,
+37 use the repaired `fd5a71d4` source. Its source tree differs from the older
+implementation; old outputs are not represented as new-version reruns.
 
-Native SVGs retain editable Montserrat text; editing requires the corresponding
-font. Outlined SVGs display independently of that installation. Project-owned
+Live-text native SVGs retain editable Montserrat text; editing that text
+requires the corresponding font. Outlined native and release SVGs edit glyphs
+as paths and display independently of that installation. Project-owned
 geometry is MIT, font inputs retain SIL OFL notices, and brand/trademark rights
 remain reserved. The old reference image is not redistributed in this batch.
 The corrected core has a partial native GUI observation; the complete canvas
-and the six families have not passed full GUI acceptance. Final design approval
+and the software families and new core currentColor files have not passed full
+GUI acceptance. Final design approval
 is still awaiting user feedback. C1's checks establish G1 within rounding and
 do not establish G2 or uniform thickness.
 

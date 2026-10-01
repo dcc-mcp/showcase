@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1200px"
+   height="560px"
+   viewBox="0.0 0.0 1200.0 560.0"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="letter-d"
+       x2="392"
+       x1="192"
+       y1="305"
+       y2="112"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.0"
+         style="stop-color:#0B1F45;stop-opacity:1"
+         id="stop1" />
+      <stop
+         offset="0.5"
+         style="stop-color:#0B1F45;stop-opacity:1"
+         id="stop2" />
+      <stop
+         offset="1.0"
+         style="stop-color:#0A74DA;stop-opacity:1"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       id="letter-c"
+       x2="551"
+       x1="384"
+       y1="297"
+       y2="132"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.0"
+         style="stop-color:#0B1F45;stop-opacity:1"
+         id="stop4" />
+      <stop
+         offset="0.5"
+         style="stop-color:#0A74DA;stop-opacity:1"
+         id="stop5" />
+      <stop
+         offset="1.0"
+         style="stop-color:#16B9E6;stop-opacity:1"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="letter-c2"
+       x2="656"
+       x1="545"
+       y1="290"
+       y2="133"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.0"
+         style="stop-color:#0A3D80;stop-opacity:1"
+         id="stop7" />
+      <stop
+         offset="0.5"
+         style="stop-color:#0A74DA;stop-opacity:1"
+         id="stop8" />
+      <stop
+         offset="1.0"
+         style="stop-color:#16B9E6;stop-opacity:1"
+         id="stop9" />
+    </linearGradient>
+    <linearGradient
+       id="protocol-color"
+       x2="591"
+       x1="294"
+       y1="210"
+       y2="280"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.0"
+         style="stop-color:#0B1F45;stop-opacity:1"
+         id="stop10" />
+      <stop
+         offset="0.5"
+         style="stop-color:#0A74DA;stop-opacity:1"
+         id="stop11" />
+      <stop
+         offset="1.0"
+         style="stop-color:#FFFFFF;stop-opacity:1"
+         id="stop12" />
+    </linearGradient>
+    <linearGradient
+       id="hex-color"
+       x2="703"
+       x1="730"
+       y1="321"
+       y2="84"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0.0"
+         style="stop-color:#0A74DA;stop-opacity:1"
+         id="stop13" />
+      <stop
+         offset="1.0"
+         style="stop-color:#16B9E6;stop-opacity:1"
+         id="stop14" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <g
+     id="shared-master"
+     transform="matrix(1.25 0 0 1.25 45 10)">
+    <g
+       inkscape:groupmode="layer"
+       id="protocol-frame"
+       inkscape:label="01 Protocol hexagon">
+      <path
+         id="protocol-hex"
+         d="M 623,118 L 679,82 Q 687,76 695,82 L 779,133 Q 787,139 787,149 L 785,274 Q 785,282 777,287 L 701,332 Q 691,339 682,333 L 636,306"
+         style="fill:none;stroke-linecap:round;stroke-width:14;stroke-linejoin:round;stroke:url(#hex-color)" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="letterforms"
+       inkscape:label="02 DCC letterforms">
+      <path
+         id="dcc-c1"
+         d="M 531,135 C 493,108 450,111 419,148 C 400.5,170.080645 389,201 373,230 C 351,269.875 328,290 294,296 L 294,316 C 335.28,314.08 365.5008,295.5712 389.970816,270.205696 Q 392.96303,267.103981 395.93216,271.357632 C 419.8016,305.5536 453.44,323.64 488,315 C 508,310 524,301 538,285 L 511,257 C 489,283 460,287 438,263 C 416,239 410,209 427,182 C 444,155 477,143 507,162 Z"
+         style="fill:url(#letter-c)" />
+      <path
+         id="dcc-d"
+         d="M 192,105 H 274 C 332,105 384,141 392,199 C 386,254 346,312 284,318 H 192 V 264 H 207 V 236 H 177 V 212 H 207 V 180 H 192 Z M 240,146 V 278 H 273 C 317,278 345,248 345,211 C 345,175 315,146 273,146 Z"
+         style="fill:url(#letter-d);fill-rule:evenodd" />
+      <path
+         id="dcc-c2"
+         d="M 669.919290,134.096243 A 100,100 0 1 0 672.778525,297.901699 L 651.030471,267.968071 A 63,63 0 1 1 649.229153,164.770633 Z"
+         style="fill:url(#letter-c2)" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="pixel-origin"
+       inkscape:label="03 Pixel origin">
+      <rect
+         id="pixel-0"
+         width="20"
+         height="20"
+         x="97"
+         y="197"
+         style="fill:#0B1F45" />
+      <rect
+         id="pixel-1"
+         width="18"
+         height="18"
+         x="124"
+         y="232"
+         style="fill:#0B1F45" />
+      <rect
+         id="pixel-2"
+         width="14"
+         height="14"
+         x="156"
+         y="261"
+         style="fill:#0B1F45" />
+      <rect
+         id="pixel-3"
+         width="27"
+         height="27"
+         x="159"
+         y="233"
+         style="fill:#0B1F45" />
+      <rect
+         id="pixel-4"
+         width="24"
+         height="24"
+         x="136"
+         y="188"
+         style="fill:#0A74DA" />
+      <rect
+         id="pixel-5"
+         width="16"
+         height="16"
+         x="134"
+         y="154"
+         style="fill:#0B1F45" />
+      <rect
+         id="pixel-6"
+         width="13"
+         height="13"
+         x="156"
+         y="134"
+         style="fill:#0B1F45" />
+      <rect
+         id="pixel-7"
+         width="22"
+         height="22"
+         x="170"
+         y="168"
+         style="fill:#0B1F45" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="protocol-flow"
+       inkscape:label="04 Protocol curve and nodes">
+      <path
+         id="protocol-flow-line"
+         d="M 294,297 C 341,292 378,269 406,237 C 434,207 447,188 471,188 C 514,188 530,243 553,267 C 567,283 579,291 591,297"
+         style="fill:none;stroke-linecap:round;stroke-width:3.2;stroke:url(#protocol-color)" />
+      <circle
+         id="left-node"
+         cx="294"
+         r="6.5"
+         cy="297"
+         style="fill:#FFFFFF;stroke-width:2.5;stroke:#0B1F45" />
+      <circle
+         id="cross-node"
+         cx="406"
+         r="8"
+         cy="237"
+         style="fill:#FFFFFF;stroke-width:2.5;stroke:#16B9E6" />
+      <circle
+         id="peak-node"
+         cx="471"
+         r="6.5"
+         cy="188"
+         style="fill:#0A74DA;stroke-width:2.5;stroke:#FFFFFF" />
+      <circle
+         id="end-node"
+         cx="591"
+         r="6.5"
+         cy="297"
+         style="fill:#FFFFFF;stroke-width:1.5;stroke:#FFFFFF" />
+      <circle
+         id="hex-top"
+         cx="687"
+         r="11"
+         cy="79"
+         style="fill:#FFFFFF;stroke-width:5;stroke:#16B9E6" />
+      <circle
+         id="hex-right"
+         cx="785"
+         r="11"
+         cy="275"
+         style="fill:#FFFFFF;stroke-width:5;stroke:#0A74DA" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="mcp-label"
+       inkscape:label="05 Editable MCP label">
+      <text
+         id="mcp-text"
+         x="603"
+         y="238"
+         style="fill:#0B1F45;font-family:Montserrat;font-size:67;font-weight:800">MCP</text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="optical-caption"
+     inkscape:label="06 Optical small wordmark">
+    <text
+       id="family-caption-text"
+       x="600"
+       y="516"
+       style="fill:#0B1F45;font-family:Montserrat;text-anchor:middle;font-size:42;font-weight:800">OpenUSD</text>
+  </g>
+</svg>

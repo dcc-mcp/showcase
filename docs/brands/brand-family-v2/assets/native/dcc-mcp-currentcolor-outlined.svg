@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="900px"
+   height="400px"
+   viewBox="0.0 0.0 900.0 400.0"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <g
+     inkscape:groupmode="layer"
+     id="protocol-frame"
+     inkscape:label="01 Protocol hexagon">
+    <path
+       id="protocol-hex"
+       d="M 623,118 L 679,82 Q 687,76 695,82 L 779,133 Q 787,139 787,149 L 785,274 Q 785,282 777,287 L 701,332 Q 691,339 682,333 L 636,306"
+       style="stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:14;fill:none" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="letterforms"
+     inkscape:label="02 DCC letterforms">
+    <path
+       id="dcc-c1"
+       d="M 531,135 C 493,108 450,111 419,148 C 400.5,170.080645 389,201 373,230 C 351,269.875 328,290 294,296 L 294,316 C 335.28,314.08 365.5008,295.5712 389.970816,270.205696 Q 392.96303,267.103981 395.93216,271.357632 C 419.8016,305.5536 453.44,323.64 488,315 C 508,310 524,301 538,285 L 511,257 C 489,283 460,287 438,263 C 416,239 410,209 427,182 C 444,155 477,143 507,162 Z"
+       style="fill:currentColor" />
+    <path
+       id="dcc-d"
+       d="M 192,105 H 274 C 332,105 384,141 392,199 C 386,254 346,312 284,318 H 192 V 264 H 207 V 236 H 177 V 212 H 207 V 180 H 192 Z M 240,146 V 278 H 273 C 317,278 345,248 345,211 C 345,175 315,146 273,146 Z"
+       style="fill:currentColor;fill-rule:evenodd" />
+    <path
+       id="dcc-c2"
+       d="M 669.919290,134.096243 A 100,100 0 1 0 672.778525,297.901699 L 651.030471,267.968071 A 63,63 0 1 1 649.229153,164.770633 Z"
+       style="fill:currentColor" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="pixel-origin"
+     inkscape:label="03 Pixel origin">
+    <rect
+       id="pixel-0"
+       y="197"
+       height="20"
+       x="97"
+       width="20"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-1"
+       y="232"
+       height="18"
+       x="124"
+       width="18"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-2"
+       y="261"
+       height="14"
+       x="156"
+       width="14"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-3"
+       y="233"
+       height="27"
+       x="159"
+       width="27"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-4"
+       y="188"
+       height="24"
+       x="136"
+       width="24"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-5"
+       y="154"
+       height="16"
+       x="134"
+       width="16"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-6"
+       y="134"
+       height="13"
+       x="156"
+       width="13"
+       style="fill:currentColor" />
+    <rect
+       id="pixel-7"
+       y="168"
+       height="22"
+       x="170"
+       width="22"
+       style="fill:currentColor" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="protocol-flow"
+     inkscape:label="04 Protocol curve and nodes">
+    <path
+       id="protocol-flow-line"
+       d="M 294,297 C 341,292 378,269 406,237 C 434,207 447,188 471,188 C 514,188 530,243 553,267 C 567,283 579,291 591,297"
+       style="stroke:currentColor;stroke-linecap:round;stroke-width:3.2;fill:none" />
+    <circle
+       id="left-node"
+       cx="294"
+       r="6.5"
+       cy="297"
+       style="stroke:currentColor;stroke-width:2.5;fill:none" />
+    <circle
+       id="cross-node"
+       cx="406"
+       r="8"
+       cy="237"
+       style="stroke:currentColor;stroke-width:2.5;fill:none" />
+    <circle
+       id="peak-node"
+       cx="471"
+       r="6.5"
+       cy="188"
+       style="stroke:currentColor;stroke-width:2.5;fill:none" />
+    <circle
+       id="end-node"
+       cx="591"
+       r="6.5"
+       cy="297"
+       style="stroke:currentColor;stroke-width:1.5;fill:none" />
+    <circle
+       id="hex-top"
+       cx="687"
+       r="11"
+       cy="79"
+       style="stroke:currentColor;stroke-width:5;fill:none" />
+    <circle
+       id="hex-right"
+       cx="785"
+       r="11"
+       cy="275"
+       style="stroke:currentColor;stroke-width:5;fill:none" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="mcp-label"
+     inkscape:label="05 Editable MCP label"
+     style="fill:currentColor">
+    <path
+       id="mcp-text"
+       d="m 607.69,238 v -46.9 h 10.921 l 19.43,31.892 h -5.762 L 651.173,191.1 h 10.921 l 0.134,46.9 H 650.034 L 649.9,209.659 h 2.077 l -14.137,23.718 h -5.896 l -14.539,-23.718 h 2.546 V 238 Z m 87.30103,0.938 q -5.561,0 -10.318,-1.742 -4.69,-1.809 -8.174,-5.092 -3.417,-3.283 -5.36,-7.705 -1.943,-4.489 -1.943,-9.849 0,-5.36 1.943,-9.782 1.943,-4.489 5.36,-7.772 3.484,-3.283 8.174,-5.025 4.757,-1.809 10.318,-1.809 6.499,0 11.591,2.278 5.159,2.278 8.576,6.566 l -8.442,7.638 q -2.278,-2.68 -5.025,-4.087 -2.68,-1.407 -6.03,-1.407 -2.881,0 -5.293,0.938 -2.412,0.938 -4.154,2.747 -1.675,1.742 -2.68,4.221 -0.938,2.479 -0.938,5.494 0,3.015 0.938,5.494 1.005,2.479 2.68,4.288 1.742,1.742 4.154,2.68 2.412,0.938 5.293,0.938 3.35,0 6.03,-1.407 2.747,-1.407 5.025,-4.087 l 8.442,7.638 q -3.417,4.221 -8.576,6.566 -5.092,2.278 -11.591,2.278 z M 720.518,238 v -46.9 h 21.44 q 6.432,0 11.055,2.077 4.69,2.077 7.236,6.03 2.546,3.886 2.546,9.246 0,5.293 -2.546,9.179 -2.546,3.886 -7.236,6.03 -4.623,2.077 -11.055,2.077 h -14.07 l 5.896,-5.762 V 238 Z m 13.266,-16.616 -5.896,-6.097 h 13.266 q 4.154,0 6.164,-1.809 2.077,-1.809 2.077,-5.025 0,-3.283 -2.077,-5.092 -2.01,-1.809 -6.164,-1.809 h -13.266 l 5.896,-6.097 z"
+       style="stroke:none;fill:currentColor" />
+  </g>
+</svg>

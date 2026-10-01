@@ -127,7 +127,9 @@ def _progress(catalog):
     plans = []
     for row in progress.get('planned', []):
         status = row.get('status', 'planned')
-        if 'partial' in status:
+        if status == 'actual_verified_published_themes':
+            label = '深浅及单色主题已交付'
+        elif 'partial' in status:
             label = '首款字标已交付 · 其他变体待制作'
         elif status in ('actual', 'verified', 'completed', 'delivered'):
             label = '已交付首款'
