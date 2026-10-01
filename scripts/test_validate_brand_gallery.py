@@ -6,7 +6,9 @@ import json
 from pathlib import Path
 import struct
 import tempfile
+import types
 import unittest
+from unittest.mock import patch
 import zlib
 
 import validate_brand_gallery as gallery
@@ -16,9 +18,9 @@ def chunk(tag, data):
     return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xffffffff)
 
 
-def png(metadata=b""):
-    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", 2, 1, 8, 6, 0, 0, 0))
-            + metadata + chunk(b"IDAT", zlib.compress(b"\x00" + b"\xff\x00\x00\xff" * 2)) + chunk(b"IEND", b""))
+def png(metadata=b"", width=2, height=1):
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 6, 0, 0, 0))
+            + metadata + chunk(b"IDAT", zlib.compress((b"\x00" + b"\xff\x00\x00\xff" * width) * height)) + chunk(b"IEND", b""))
 
 
 SVG = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 10"><defs><linearGradient id="paint"><stop offset="0" stop-color="#f00"/></linearGradient></defs><path d="M0 0H20V10H0Z" fill="url(#paint)"/></svg>'
@@ -311,6 +313,129 @@ class BrandGuards(unittest.TestCase):
         source["url"] = "https://example.com/original.svg"
         _, selected, _ = self.check()
         self.assertNotIn("original.svg", selected)
+
+    def test_native_live_text_and_precise_passive_namedview_are_supported(self):
+        native = (b'<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" '
+                  b'xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" viewBox="0 0 20 10">'
+                  b'<sodipodi:namedview id="view" pagecolor="#ffffff" borderopacity="0.25" inkscape:deskcolor="#ddd" '
+                  b'inkscape:showpageshadow="2" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm"/>'
+                  b'<g inkscape:label="Editable text" inkscape:groupmode="layer"><text x="1" y="8" '
+                  b'style="fill:#111;font-family:Montserrat;font-size:6;font-weight:800"><tspan>MCP</tspan></text></g></svg>')
+        self.change_svg(native)
+        self.check()
+
+    def test_native_editor_namespaces_cannot_admit_active_or_unknown_content(self):
+        start = (b'<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" '
+                 b'xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" viewBox="0 0 20 10">')
+        for bad in (b'<sodipodi:namedview><script>alert(1)</script></sodipodi:namedview>',
+                    b'<sodipodi:namedview onload="alert(1)"/>',
+                    b'<sodipodi:namedview inkscape:export-filename="x.svg"/>',
+                    b'<inkscape:path/>', b'<path inkscape:unknown="static"/>',
+                    b'<text><foreignObject/></text>', b'<style>text{fill:red}</style>',
+                    b'<text style="font-family:url(https://example.com/font)">MCP</text>'):
+            with self.subTest(payload=bad):
+                self.change_svg(start + bad + b'</svg>')
+                self.assertTrue(self.check("SVG")[2])
+
+    def test_unknown_namespace_declarations_and_attributes_rejected(self):
+        for bad in (SVG.replace(b'viewBox=', b'xmlns:other="https://example.com/namespace" viewBox='),
+                    SVG.replace(b'<path d=', b'<path xmlns:other="https://example.com/namespace" other:property="value" d=')):
+            with self.subTest(svg=bad):
+                self.change_svg(bad)
+                self.check("namespace")
+
+    def test_adapter_fixed_commit_is_valid_without_invented_semver(self):
+        self.item["environment"][1]["value"] = "unreleased source commit 7657bafe78dad0c59c833e25da6f330067c2e64b"
+        self.check()
+        self.item["environment"][1]["value"] = "unreleased source commit 7657baf"
+        self.check("fixed commit")
+
+    def test_manifest_pointer_uses_projection_and_selects_single_authoritative_manifest(self):
+        original = copy.deepcopy(self.catalog)
+        manifest = self.assets / "manifest.json"
+        manifest.write_text(json.dumps({"schema_version": 2, "scope": "Only actual assets"}), encoding="utf-8")
+        self.catalog = {"schema_version": 1, "enabled": True, "manifest": "brand/manifest.json"}
+        module = types.SimpleNamespace(project=lambda root, path: original)
+        with patch.dict("sys.modules", {"brand_manifest": module}):
+            catalog, selected, _ = self.check()
+        self.assertEqual(original, catalog)
+        self.assertIn("brand/manifest.json", selected)
+        self.assertFalse((self.assets / "items.json").exists())
+
+    def test_manifest_pointer_rejects_private_authoritative_metadata(self):
+        original = copy.deepcopy(self.catalog)
+        (self.assets / "manifest.json").write_text(json.dumps({"schema_version": 2, "path": "C:\\Users\\private\\original.svg"}), encoding="utf-8")
+        self.catalog = {"schema_version": 1, "enabled": True, "manifest": "brand/manifest.json"}
+        with patch.dict("sys.modules", {"brand_manifest": types.SimpleNamespace(project=lambda root, path: original)}):
+            self.check("private filesystem path")
+
+    def test_manifest_pointer_does_not_project_when_disabled(self):
+        self.catalog = {"schema_version": 1, "enabled": False, "manifest": "missing.json"}
+        with patch.dict("sys.modules", {"brand_manifest": types.SimpleNamespace(project=lambda root, path: self.fail("disabled projection must not run"))}):
+            _, selected, _ = self.check()
+        self.assertEqual(set(), selected)
+
+    def test_manifest_pointer_rejects_non_json_or_invalid_projection(self):
+        self.catalog = {"schema_version": 1, "enabled": True, "manifest": "brand/LICENSE.txt"}
+        self.check("safe local JSON")
+        (self.assets / "manifest.json").write_text("{}", encoding="utf-8")
+        self.catalog["manifest"] = "brand/manifest.json"
+        for projected in ({"schema_version": True, "enabled": True}, {"schema_version": 1, "enabled": False}, []):
+            with self.subTest(projected=projected), patch.dict("sys.modules", {"brand_manifest": types.SimpleNamespace(project=lambda root, path: projected)}):
+                self.check("projection must return")
+
+    def test_manifest_pointer_digest_pins_actual_snapshot_before_projection(self):
+        original = copy.deepcopy(self.catalog)
+        path = self.assets / "manifest.json"
+        path.write_text('{"schema_version":2}', encoding="utf-8")
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        self.catalog = {"schema_version": 1, "enabled": True, "manifest": "brand/manifest.json", "manifest_sha256": digest}
+        with patch.dict("sys.modules", {"brand_manifest": types.SimpleNamespace(project=lambda root, rel: original)}):
+            self.check()
+        path.write_text('{"schema_version":2,"replaced":true}', encoding="utf-8")
+        with patch.dict("sys.modules", {"brand_manifest": types.SimpleNamespace(project=lambda root, rel: self.fail("hash mismatch must stop projection"))}):
+            self.check("actual manifest SHA-256 mismatch")
+
+    def test_manifest_pointer_digest_requires_complete_hash(self):
+        (self.assets / "manifest.json").write_text("{}", encoding="utf-8")
+        for bad in (True, "short", "g" * 64, None):
+            self.catalog = {"schema_version": 1, "enabled": True, "manifest": "brand/manifest.json", "manifest_sha256": bad}
+            with self.subTest(digest=bad):
+                self.check("full 64-digit")
+
+    def install_small_previews(self):
+        (self.assets / "small.png").write_bytes(png(width=128, height=57))
+        self.item["variants"].append(self.asset("small.png", "png", width=128, height=57))
+        self.item["small_previews"] = {theme: {"src": "brand/small.png", "alt": theme + " native 128px output", "width": 128, "height": 57} for theme in ("light", "dark")}
+
+    def test_small_previews_use_actual_128px_variant(self):
+        self.install_small_previews()
+        self.check()
+
+    def test_small_preview_nonvariant_or_remote_asset_rejected(self):
+        self.install_small_previews()
+        (self.assets / "unverified-small.png").write_bytes(png(width=128, height=57))
+        self.item["small_previews"]["light"]["src"] = "brand/unverified-small.png"
+        self.check("validated variant asset")
+        self.item["small_previews"]["light"]["src"] = "https://example.com/small.png"
+        self.check("only public HTTPS or safe local")
+
+    def test_small_preview_css_dimensions_cannot_claim_actual_128px_export(self):
+        self.install_small_previews()
+        self.item["small_previews"]["light"]["src"] = "brand/mark.png"
+        self.check("actual PNG dimensions must match")
+        self.item["small_previews"]["light"]["src"] = "brand/mark.svg"
+        self.check("actual 128px PNG required")
+
+    def test_small_preview_missing_alt_wrong_height_or_extra_theme_rejected(self):
+        self.install_small_previews()
+        del self.item["small_previews"]["light"]["alt"]
+        self.check("alt: nonempty string")
+        self.item["small_previews"]["light"]["alt"] = "Small export"
+        self.item["small_previews"]["light"]["height"] = 56
+        self.check("actual PNG dimensions must match")
+        self.item["small_previews"]["other"] = {"src": "unverified.png"}
+        self.check("exactly light and dark")
 
 
 if __name__ == "__main__":

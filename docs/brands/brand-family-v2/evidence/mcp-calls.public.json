@@ -1,0 +1,1017 @@
+{
+  "schema_version": 1,
+  "evidence_scope": "Eight actual successful DCC-MCP gateway calls: final light/dark vector construction, native 1024/128 PNG export and software-outlined SVG export. Public records omit private host routing and locations; no production or rendering was re-run by this gallery integration.",
+  "redactions": [
+    "removed backend_port",
+    "removed ephemeral application-instance prefix from tool slug; operation name unchanged",
+    "removed extension_pid",
+    "removed host_invocation",
+    "removed instance_id",
+    "removed nonce",
+    "removed parent_executable",
+    "removed parent_pid",
+    "removed parent_probe_error",
+    "removed pid",
+    "removed requested_pid",
+    "removed service_session",
+    "replaced private filesystem or local service location"
+  ],
+  "calls": [
+    {
+      "key": "cc-final-build-light",
+      "tool": "inkscape_vector__document_build",
+      "arguments": {
+        "plan": {
+          "canvas": {
+            "width": 900,
+            "height": 400,
+            "view_box": "0 0 900 400"
+          },
+          "nodes": [
+            {
+              "type": "linearGradient",
+              "id": "letter-d",
+              "x1": 192,
+              "y1": 305,
+              "x2": 392,
+              "y2": 112,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0B1F45",
+                  "opacity": 1
+                },
+                {
+                  "offset": 0.5,
+                  "color": "#0B1F45",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "letter-c",
+              "x1": 384,
+              "y1": 297,
+              "x2": 551,
+              "y2": 132,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0B1F45",
+                  "opacity": 1
+                },
+                {
+                  "offset": 0.5,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#16B9E6",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "letter-c2",
+              "x1": 545,
+              "y1": 290,
+              "x2": 656,
+              "y2": 133,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0A3D80",
+                  "opacity": 1
+                },
+                {
+                  "offset": 0.5,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#16B9E6",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "protocol-color",
+              "x1": 294,
+              "y1": 210,
+              "x2": 591,
+              "y2": 280,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0B1F45",
+                  "opacity": 1
+                },
+                {
+                  "offset": 0.5,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#FFFFFF",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "hex-color",
+              "x1": 730,
+              "y1": 321,
+              "x2": 703,
+              "y2": 84,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#16B9E6",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "layer",
+              "id": "protocol-frame",
+              "label": "01 Protocol hexagon"
+            },
+            {
+              "type": "path",
+              "id": "protocol-hex",
+              "d": "M 623,118 L 679,82 Q 687,76 695,82 L 779,133 Q 787,139 787,149 L 785,274 Q 785,282 777,287 L 701,332 Q 691,339 682,333 L 636,306",
+              "fill": "none",
+              "stroke": "url(#hex-color)",
+              "stroke_width": 14,
+              "stroke_linecap": "round",
+              "stroke_linejoin": "round",
+              "parent": "protocol-frame"
+            },
+            {
+              "type": "layer",
+              "id": "letterforms",
+              "label": "02 DCC letterforms"
+            },
+            {
+              "type": "path",
+              "id": "dcc-c1",
+              "d": "M 531,135 C 493,108 450,111 419,148 C 400.5,170.080645 389,201 373,230 C 351,269.875 328,290 294,296 L 294,316 C 335.28,314.08 365.5008,295.5712 389.970816,270.205696 Q 392.96303,267.103981 395.93216,271.357632 C 419.8016,305.5536 453.44,323.64 488,315 C 508,310 524,301 538,285 L 511,257 C 489,283 460,287 438,263 C 416,239 410,209 427,182 C 444,155 477,143 507,162 Z",
+              "fill": "url(#letter-c)",
+              "parent": "letterforms"
+            },
+            {
+              "type": "path",
+              "id": "dcc-d",
+              "d": "M 192,105 H 274 C 332,105 384,141 392,199 C 386,254 346,312 284,318 H 192 V 264 H 207 V 236 H 177 V 212 H 207 V 180 H 192 Z M 240,146 V 278 H 273 C 317,278 345,248 345,211 C 345,175 315,146 273,146 Z",
+              "fill": "url(#letter-d)",
+              "fill_rule": "evenodd",
+              "parent": "letterforms"
+            },
+            {
+              "type": "path",
+              "id": "dcc-c2",
+              "d": "M 669.919290,134.096243 A 100,100 0 1 0 672.778525,297.901699 L 651.030471,267.968071 A 63,63 0 1 1 649.229153,164.770633 Z",
+              "fill": "url(#letter-c2)",
+              "parent": "letterforms"
+            },
+            {
+              "type": "layer",
+              "id": "pixel-origin",
+              "label": "03 Pixel origin"
+            },
+            {
+              "type": "layer",
+              "id": "protocol-flow",
+              "label": "04 Protocol curve and nodes"
+            },
+            {
+              "type": "path",
+              "id": "protocol-flow-line",
+              "d": "M 294,297 C 341,292 378,269 406,237 C 434,207 447,188 471,188 C 514,188 530,243 553,267 C 567,283 579,291 591,297",
+              "fill": "none",
+              "stroke": "url(#protocol-color)",
+              "stroke_width": 3.2,
+              "stroke_linecap": "round",
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "layer",
+              "id": "mcp-label",
+              "label": "05 Editable MCP label"
+            },
+            {
+              "type": "text",
+              "id": "mcp-text",
+              "x": 603,
+              "y": 238,
+              "text": "MCP",
+              "font_family": "Montserrat",
+              "font_size": 67,
+              "font_weight": 800,
+              "fill": "#0B1F45",
+              "parent": "mcp-label"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-0",
+              "x": 97,
+              "y": 197,
+              "width": 20,
+              "height": 20,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-1",
+              "x": 124,
+              "y": 232,
+              "width": 18,
+              "height": 18,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-2",
+              "x": 156,
+              "y": 261,
+              "width": 14,
+              "height": 14,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-3",
+              "x": 159,
+              "y": 233,
+              "width": 27,
+              "height": 27,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-4",
+              "x": 136,
+              "y": 188,
+              "width": 24,
+              "height": 24,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-5",
+              "x": 134,
+              "y": 154,
+              "width": 16,
+              "height": 16,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-6",
+              "x": 156,
+              "y": 134,
+              "width": 13,
+              "height": 13,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-7",
+              "x": 170,
+              "y": 168,
+              "width": 22,
+              "height": 22,
+              "fill": "#0B1F45",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "circle",
+              "id": "left-node",
+              "cx": 294,
+              "cy": 297,
+              "r": 6.5,
+              "fill": "#FFFFFF",
+              "stroke": "#0B1F45",
+              "stroke_width": 2.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "cross-node",
+              "cx": 406,
+              "cy": 237,
+              "r": 8,
+              "fill": "#FFFFFF",
+              "stroke": "#16B9E6",
+              "stroke_width": 2.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "peak-node",
+              "cx": 471,
+              "cy": 188,
+              "r": 6.5,
+              "fill": "#0A74DA",
+              "stroke": "#FFFFFF",
+              "stroke_width": 2.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "end-node",
+              "cx": 591,
+              "cy": 297,
+              "r": 6.5,
+              "fill": "#FFFFFF",
+              "stroke": "#FFFFFF",
+              "stroke_width": 1.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "hex-top",
+              "cx": 687,
+              "cy": 79,
+              "r": 11,
+              "fill": "#FFFFFF",
+              "stroke": "#16B9E6",
+              "stroke_width": 5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "hex-right",
+              "cx": 785,
+              "cy": 275,
+              "r": 11,
+              "fill": "#FFFFFF",
+              "stroke": "#0A74DA",
+              "stroke_width": 5,
+              "parent": "protocol-flow"
+            }
+          ]
+        },
+        "output_file": "brand-family-v2/assets/native/dcc-mcp-master-corrected.svg"
+      },
+      "response": {
+        "success": true,
+        "message": "Native vector document created",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 7280,
+          "sha256": "40bfe7ee60c2b68b73c25740310697a1c996e595f7b4d22725326b054e339330",
+          "producer": "Inkscape",
+          "native_effect": {
+            "self_call": "true",
+            "document_path": "",
+            "object_count": 30,
+            "producer": "Inkscape native inkex effect",
+            "windows_process_lineage": [
+              {
+                "exit_status": 259,
+                "creation_time": 134353283483448688,
+                "exit_time": 0,
+                "image_win32": "[private location redacted]",
+                "image_native": "[private location redacted]"
+              },
+              {
+                "exit_status": 0,
+                "creation_time": 134353283482850899,
+                "exit_time": 134353283483714220,
+                "image_win32_error": 31,
+                "image_native": "[private location redacted]"
+              },
+              {
+                "exit_status": 259,
+                "creation_time": 134353283460398536,
+                "exit_time": 0,
+                "image_win32": "[private location redacted]",
+                "image_native": "[private location redacted]"
+              }
+            ],
+            "early_parent_handle_retained": true,
+            "early_parent_handle_error": null,
+            "provenance_mode": "windows-glib-helper",
+            "controller_helper_observation": "exact-match"
+          },
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:39:05.572988+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "40bfe7ee60c2b68b73c25740310697a1c996e595f7b4d22725326b054e339330",
+      "original_completed_record_sha256": "88ad045461af43da7d137e5998d3babd287e5461a0bc1f511486c0b642159f1a"
+    },
+    {
+      "key": "cc-final-build-dark",
+      "tool": "inkscape_vector__document_build",
+      "arguments": {
+        "plan": {
+          "canvas": {
+            "width": 900,
+            "height": 400,
+            "view_box": "0 0 900 400"
+          },
+          "nodes": [
+            {
+              "type": "linearGradient",
+              "id": "letter-d",
+              "x1": 192,
+              "y1": 305,
+              "x2": 392,
+              "y2": 112,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1,
+                  "color": "#69BAFF",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "letter-c",
+              "x1": 384,
+              "y1": 297,
+              "x2": 551,
+              "y2": 132,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0B1F45",
+                  "opacity": 1
+                },
+                {
+                  "offset": 0.5,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#16B9E6",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "letter-c2",
+              "x1": 545,
+              "y1": 290,
+              "x2": 656,
+              "y2": 133,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0A3D80",
+                  "opacity": 1
+                },
+                {
+                  "offset": 0.5,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#16B9E6",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "protocol-color",
+              "x1": 294,
+              "y1": 210,
+              "x2": 591,
+              "y2": 280,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0,
+                  "color": "#FFFFFF",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1,
+                  "color": "#FFFFFF",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "linearGradient",
+              "id": "hex-color",
+              "x1": 730,
+              "y1": 321,
+              "x2": 703,
+              "y2": 84,
+              "gradient_units": "userSpaceOnUse",
+              "stops": [
+                {
+                  "offset": 0.0,
+                  "color": "#0A74DA",
+                  "opacity": 1
+                },
+                {
+                  "offset": 1.0,
+                  "color": "#16B9E6",
+                  "opacity": 1
+                }
+              ]
+            },
+            {
+              "type": "layer",
+              "id": "protocol-frame",
+              "label": "01 Protocol hexagon"
+            },
+            {
+              "type": "path",
+              "id": "protocol-hex",
+              "d": "M 623,118 L 679,82 Q 687,76 695,82 L 779,133 Q 787,139 787,149 L 785,274 Q 785,282 777,287 L 701,332 Q 691,339 682,333 L 636,306",
+              "fill": "none",
+              "stroke": "url(#hex-color)",
+              "stroke_width": 14,
+              "stroke_linecap": "round",
+              "stroke_linejoin": "round",
+              "parent": "protocol-frame"
+            },
+            {
+              "type": "layer",
+              "id": "letterforms",
+              "label": "02 DCC letterforms"
+            },
+            {
+              "type": "path",
+              "id": "dcc-c1",
+              "d": "M 531,135 C 493,108 450,111 419,148 C 400.5,170.080645 389,201 373,230 C 351,269.875 328,290 294,296 L 294,316 C 335.28,314.08 365.5008,295.5712 389.970816,270.205696 Q 392.96303,267.103981 395.93216,271.357632 C 419.8016,305.5536 453.44,323.64 488,315 C 508,310 524,301 538,285 L 511,257 C 489,283 460,287 438,263 C 416,239 410,209 427,182 C 444,155 477,143 507,162 Z",
+              "fill": "url(#letter-c)",
+              "parent": "letterforms"
+            },
+            {
+              "type": "path",
+              "id": "dcc-d",
+              "d": "M 192,105 H 274 C 332,105 384,141 392,199 C 386,254 346,312 284,318 H 192 V 264 H 207 V 236 H 177 V 212 H 207 V 180 H 192 Z M 240,146 V 278 H 273 C 317,278 345,248 345,211 C 345,175 315,146 273,146 Z",
+              "fill": "url(#letter-d)",
+              "fill_rule": "evenodd",
+              "parent": "letterforms"
+            },
+            {
+              "type": "path",
+              "id": "dcc-c2",
+              "d": "M 669.919290,134.096243 A 100,100 0 1 0 672.778525,297.901699 L 651.030471,267.968071 A 63,63 0 1 1 649.229153,164.770633 Z",
+              "fill": "url(#letter-c2)",
+              "parent": "letterforms"
+            },
+            {
+              "type": "layer",
+              "id": "pixel-origin",
+              "label": "03 Pixel origin"
+            },
+            {
+              "type": "layer",
+              "id": "protocol-flow",
+              "label": "04 Protocol curve and nodes"
+            },
+            {
+              "type": "path",
+              "id": "protocol-flow-line",
+              "d": "M 294,297 C 341,292 378,269 406,237 C 434,207 447,188 471,188 C 514,188 530,243 553,267 C 567,283 579,291 591,297",
+              "fill": "none",
+              "stroke": "url(#protocol-color)",
+              "stroke_width": 3.2,
+              "stroke_linecap": "round",
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "layer",
+              "id": "mcp-label",
+              "label": "05 Editable MCP label"
+            },
+            {
+              "type": "text",
+              "id": "mcp-text",
+              "x": 603,
+              "y": 238,
+              "text": "MCP",
+              "font_family": "Montserrat",
+              "font_size": 67,
+              "font_weight": 800,
+              "fill": "#FFFFFF",
+              "parent": "mcp-label"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-0",
+              "x": 97,
+              "y": 197,
+              "width": 20,
+              "height": 20,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-1",
+              "x": 124,
+              "y": 232,
+              "width": 18,
+              "height": 18,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-2",
+              "x": 156,
+              "y": 261,
+              "width": 14,
+              "height": 14,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-3",
+              "x": 159,
+              "y": 233,
+              "width": 27,
+              "height": 27,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-4",
+              "x": 136,
+              "y": 188,
+              "width": 24,
+              "height": 24,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-5",
+              "x": 134,
+              "y": 154,
+              "width": 16,
+              "height": 16,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-6",
+              "x": 156,
+              "y": 134,
+              "width": 13,
+              "height": 13,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "rect",
+              "id": "pixel-7",
+              "x": 170,
+              "y": 168,
+              "width": 22,
+              "height": 22,
+              "fill": "#0A74DA",
+              "parent": "pixel-origin"
+            },
+            {
+              "type": "circle",
+              "id": "left-node",
+              "cx": 294,
+              "cy": 297,
+              "r": 6.5,
+              "fill": "#FFFFFF",
+              "stroke": "#0B1F45",
+              "stroke_width": 2.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "cross-node",
+              "cx": 406,
+              "cy": 237,
+              "r": 8,
+              "fill": "#FFFFFF",
+              "stroke": "#16B9E6",
+              "stroke_width": 2.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "peak-node",
+              "cx": 471,
+              "cy": 188,
+              "r": 6.5,
+              "fill": "#0A74DA",
+              "stroke": "#FFFFFF",
+              "stroke_width": 2.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "end-node",
+              "cx": 591,
+              "cy": 297,
+              "r": 6.5,
+              "fill": "#FFFFFF",
+              "stroke": "#FFFFFF",
+              "stroke_width": 1.5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "hex-top",
+              "cx": 687,
+              "cy": 79,
+              "r": 11,
+              "fill": "#FFFFFF",
+              "stroke": "#16B9E6",
+              "stroke_width": 5,
+              "parent": "protocol-flow"
+            },
+            {
+              "type": "circle",
+              "id": "hex-right",
+              "cx": 785,
+              "cy": 275,
+              "r": 11,
+              "fill": "#FFFFFF",
+              "stroke": "#0A74DA",
+              "stroke_width": 5,
+              "parent": "protocol-flow"
+            }
+          ]
+        },
+        "output_file": "brand-family-v2/assets/native/dcc-mcp-wordmark-dark-corrected.svg"
+      },
+      "response": {
+        "success": true,
+        "message": "Native vector document created",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 7054,
+          "sha256": "f4f873d6e5f3d8a3fe67204fccc8d47d6aa48a79e8ca03594d313843ec1bd74a",
+          "producer": "Inkscape",
+          "native_effect": {
+            "self_call": "true",
+            "document_path": "",
+            "object_count": 30,
+            "producer": "Inkscape native inkex effect",
+            "windows_process_lineage": [
+              {
+                "exit_status": 259,
+                "creation_time": 134353283632093620,
+                "exit_time": 0,
+                "image_win32": "[private location redacted]",
+                "image_native": "[private location redacted]"
+              },
+              {
+                "exit_status": 0,
+                "creation_time": 134353283631691934,
+                "exit_time": 134353283632216169,
+                "image_win32_error": 31,
+                "image_native": "[private location redacted]"
+              },
+              {
+                "exit_status": 259,
+                "creation_time": 134353283617282184,
+                "exit_time": 0,
+                "image_win32": "[private location redacted]",
+                "image_native": "[private location redacted]"
+              }
+            ],
+            "early_parent_handle_retained": true,
+            "early_parent_handle_error": null,
+            "provenance_mode": "windows-glib-helper",
+            "controller_helper_observation": "exact-match"
+          },
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:39:21.471337+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "f4f873d6e5f3d8a3fe67204fccc8d47d6aa48a79e8ca03594d313843ec1bd74a",
+      "original_completed_record_sha256": "4f047de58dda3e0dbd5e801b12ccfaa60d74323335e2d5128676be7a8ea9870d"
+    },
+    {
+      "key": "cc-final-release-light",
+      "tool": "inkscape_vector__document_export",
+      "arguments": {
+        "source_file": "brand-family-v2/assets/native/dcc-mcp-master-corrected.svg",
+        "output_file": "brand-family-v2/assets/svg/dcc-mcp-wordmark-light.svg",
+        "format": "svg",
+        "plain_svg": true,
+        "text_to_path": true
+      },
+      "response": {
+        "success": true,
+        "message": "Native document exported",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 7615,
+          "sha256": "dc32cc5ca9c904540159b6c721396f86cb46bccff02f214b9d8e5af059581211",
+          "producer": "Inkscape",
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:45:21.631721+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "dc32cc5ca9c904540159b6c721396f86cb46bccff02f214b9d8e5af059581211",
+      "original_completed_record_sha256": "d16605e3474865e39361b90c8569840a5c91ee81c63a0b74af1fb95c67bc00db"
+    },
+    {
+      "key": "cc-final-release-dark",
+      "tool": "inkscape_vector__document_export",
+      "arguments": {
+        "source_file": "brand-family-v2/assets/native/dcc-mcp-wordmark-dark-corrected.svg",
+        "output_file": "brand-family-v2/assets/svg/dcc-mcp-wordmark-dark.svg",
+        "format": "svg",
+        "plain_svg": true,
+        "text_to_path": true
+      },
+      "response": {
+        "success": true,
+        "message": "Native document exported",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 7389,
+          "sha256": "e10fdf1aed5b5f60c0c10719e72e3477fb129895becb4b95d07b6b3e63ab11bc",
+          "producer": "Inkscape",
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:45:35.110617+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "e10fdf1aed5b5f60c0c10719e72e3477fb129895becb4b95d07b6b3e63ab11bc",
+      "original_completed_record_sha256": "7fc0647ab35589c8e2add9b4d585914b3a48faa9738f66bea550c6f19a1903b5"
+    },
+    {
+      "key": "cc-final-export-light-1024",
+      "tool": "inkscape_vector__document_export",
+      "arguments": {
+        "source_file": "brand-family-v2/assets/native/dcc-mcp-master-corrected.svg",
+        "output_file": "brand-family-v2/evidence/cc-final-light-1024.png",
+        "format": "png",
+        "width": 1024,
+        "height": 455,
+        "background_opacity": 0
+      },
+      "response": {
+        "success": true,
+        "message": "Native document exported",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 53269,
+          "sha256": "ff3349c67b493175ed341c3dca34a6dd6423e3369eaed25e836b3bbf601ff995",
+          "producer": "Inkscape",
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:39:12.892290+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "ff3349c67b493175ed341c3dca34a6dd6423e3369eaed25e836b3bbf601ff995",
+      "original_completed_record_sha256": "7c8d84c24b5bca0d89b9ce2ef276e90d0ae09c2a33fd9496641c2d06bc21a23c"
+    },
+    {
+      "key": "cc-final-export-light-128",
+      "tool": "inkscape_vector__document_export",
+      "arguments": {
+        "source_file": "brand-family-v2/assets/native/dcc-mcp-master-corrected.svg",
+        "output_file": "brand-family-v2/evidence/cc-final-light-128.png",
+        "format": "png",
+        "width": 128,
+        "height": 57,
+        "background_opacity": 0
+      },
+      "response": {
+        "success": true,
+        "message": "Native document exported",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 4912,
+          "sha256": "000bbfc5fc78ea3d627b4d5ffa1047bb082c39207f46bf5a2a251192b1fd7e6b",
+          "producer": "Inkscape",
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:39:19.497811+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "000bbfc5fc78ea3d627b4d5ffa1047bb082c39207f46bf5a2a251192b1fd7e6b",
+      "original_completed_record_sha256": "cad73e67b2dfb2ec7740a94c056331fa51dea347fa8d6b2dbdbaf5068436b207"
+    },
+    {
+      "key": "cc-final-export-dark-1024",
+      "tool": "inkscape_vector__document_export",
+      "arguments": {
+        "source_file": "brand-family-v2/assets/native/dcc-mcp-wordmark-dark-corrected.svg",
+        "output_file": "brand-family-v2/evidence/cc-final-dark-1024.png",
+        "format": "png",
+        "width": 1024,
+        "height": 455,
+        "background_opacity": 0
+      },
+      "response": {
+        "success": true,
+        "message": "Native document exported",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 59457,
+          "sha256": "cf9ef5f7dbdae9e39365a4cb488d7c0ce850e5d43b769df5dc648ee2e3f543a8",
+          "producer": "Inkscape",
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:39:23.876044+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "cf9ef5f7dbdae9e39365a4cb488d7c0ce850e5d43b769df5dc648ee2e3f543a8",
+      "original_completed_record_sha256": "2daaefac478d4f3edb263eb98eae5c1b85c6dcf4542a3be7bc7fda4544c709c4"
+    },
+    {
+      "key": "cc-final-export-dark-128",
+      "tool": "inkscape_vector__document_export",
+      "arguments": {
+        "source_file": "brand-family-v2/assets/native/dcc-mcp-wordmark-dark-corrected.svg",
+        "output_file": "brand-family-v2/evidence/cc-final-dark-128.png",
+        "format": "png",
+        "width": 128,
+        "height": 57,
+        "background_opacity": 0
+      },
+      "response": {
+        "success": true,
+        "message": "Native document exported",
+        "context": {
+          "output_path": "[private location redacted]",
+          "bytes": 5063,
+          "sha256": "10dff2fb924e5aa1177544d85cb28f1f5a3491e196ccf6fcb67d04b562e6291d",
+          "producer": "Inkscape",
+          "evidence_path": "[private location redacted]"
+        }
+      },
+      "recorded_utc": "2026-10-01T11:39:26.980519+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "artifact_sha256": "10dff2fb924e5aa1177544d85cb28f1f5a3491e196ccf6fcb67d04b562e6291d",
+      "original_completed_record_sha256": "bd2bd579a75f8ff131264a87ca9a2b4a64744110d37db0588b271f4265d49a96"
+    }
+  ]
+}

@@ -54,6 +54,7 @@ python scripts/test_validate_collection.py
 python scripts/validate_collection.py
 python scripts/test_validate_brand_gallery.py
 python scripts/validate_brand_gallery.py
+python scripts/test_brand_manifest.py
 python scripts/test_brand_build.py
 python scripts/test_build_site.py
 python scripts/build_site.py
@@ -67,11 +68,30 @@ not substitute for browser acceptance.
 
 ## Brand gallery
 
-`brand-gallery.json` separately selects brand resources without changing the
-three-case collection. Until verified replacement assets and their actual MCP
-production records are ready, `enabled` stays `false`: the production build
-adds no brand navigation, pages or files. Existing defective marks are not
-presented as corrected work.
+The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
+selects resources without changing the three-case collection. Its first batch
+contains one corrected core wordmark with eight verified files: light/dark
+editable SVGs, software-outlined SVGs, and genuine 1024/128 PNG exports.
+Only this wordmark is delivered; other Core variants and the remaining 36
+planned families are still pending. Plans have no placeholder download links.
+
+`brand-gallery.json` points to the producer's authoritative
+`docs/brands/brand-family-v2/manifest.json` public snapshot. The builder derives
+page data at runtime; it does not keep a second hand-maintained asset inventory.
+Original SVG/PNG bytes remain unchanged. The snapshot preserves the original
+manifest hash and documents removal of private routing, paths and process IDs.
+Eight real successful gateway requests/responses and the geometric/raster
+review are published with explicit evidence coverage. This site integration
+did not rerun Inkscape production. The installed development adapter and its
+public draft source are distinct from a released integration.
+
+Native SVGs retain editable Montserrat text; editing requires the corresponding
+font. Outlined SVGs display independently of that installation. Project-owned
+geometry is MIT, font inputs retain SIL OFL notices, and brand/trademark rights
+remain reserved. The old reference image is not redistributed in this batch.
+The recorded GUI launch is not visual acceptance; final design approval is
+still awaiting user feedback. C1's checks establish G1 within rounding and
+do not establish G2 or uniform thickness.
 
 For local layout review only:
 
@@ -86,8 +106,9 @@ The preview flag refuses the production output directory. See the
 [brand contract](docs/brands/CONTRACT.md) for the asset handoff and publication
 checks. In production each mark includes background previews, verified SVG
 and PNG downloads, file hashes, source provenance, rights, software versions,
-actual MCP tools and evidence boundaries. The site code's MIT license does
-not relicense software vendors' trademarks or source artwork.
+actual MCP tools and evidence boundaries. A missing or disabled brand catalog
+adds zero brand files to production. The site code's MIT license does not
+relicense software vendors' trademarks or source artwork.
 
 ## Add a case
 

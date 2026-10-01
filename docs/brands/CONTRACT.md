@@ -1,10 +1,24 @@
 # Brand gallery publication contract
 
-The existing showcase collection remains independent. `brand-gallery.json`
-uses `schema_version: 1`, a boolean `enabled`, `title`, `description`,
-`updated_at`, and `items`. Missing or disabled catalogs publish zero brand
-files. Enabled catalogs must contain verified items; pending placeholders
-are local development content only.
+The existing showcase collection remains independent. The actual first-batch
+`brand-gallery.json` uses `schema_version: 1`, a boolean `enabled`, a safe local
+`manifest` pointer and its `manifest_sha256`. The producer's schema-2 manifest
+is the single authoritative asset inventory. Its public snapshot retains the
+original snapshot hash and declares metadata redactions; artwork files remain
+byte-identical. Do not maintain a duplicate webpage asset map.
+
+`scripts/brand_manifest.py` derives the renderer's schema-1 catalog at build
+time. It cross-checks actual family/file counts, the two-theme output matrix,
+per-output successful MCP responses and hashes, recorded versions, visual
+review and precise acceptance limits. This first mapping supports only the
+reviewed core batch. Later families require their own completed handoff and
+an explicit reviewed mapping; extra files in the producer directory are never
+selected by crawling. Missing or disabled catalogs publish zero brand files.
+Pending placeholders are local development content only.
+
+For legacy fixtures the validator also accepts the direct catalog shape:
+`title`, `description`, `updated_at`, and verified `items`. The following
+fields describe the derived renderer data, not a second production manifest.
 
 Each item records:
 
@@ -14,6 +28,9 @@ Each item records:
 - `previews.light` and `previews.dark`, each with a local `src` and accurate
   `alt`. They must reference validated downloadable variants. Background
   switching previews these delivered files; web code does not redraw logos.
+- Optional `small_previews` requires the actual light/dark 128px PNGs with
+  `src`, `alt`, `width` and `height` matching the validated variants. Show
+  them at their original 128px CSS width instead of downscaling a large export.
 - `variants`: `label`, local `url`, `format` (`svg` or `png`), actual `bytes`,
   SHA-256, and `rights_ids`. PNGs include actual `width` and `height`; SVGs
   include the actual numeric `viewBox`. Each file has a `source` object or
@@ -44,7 +61,7 @@ light/dark variants and small-size readability. Run the contract tests,
 validator, build integration guards and normal site build before publishing.
 The contract rejects unverified items, inconsistent hashes/dimensions, private
 paths and addresses, active SVG content, external SVG dependencies, missing
-rights and inadequate MCP records. It checks consistency of supplied evidence;
+  rights and inadequate MCP records. It checks consistency of supplied evidence;
 it does not establish authenticity or visual quality by itself.
 
 Use the user's PC8 browser to verify gallery navigation, combined family and
@@ -52,3 +69,13 @@ software filters, search/empty/reset, desktop/mobile overflow, decoded media,
 background switching, detail/back, keyboard access and downloaded file hashes.
 Record browser ownership accurately. Only then enable the catalog, use the
 normal repository PR/Pages process, and verify the actual public URL again.
+
+The initial snapshot is one partially delivered Core family out of 37 planned
+families, with eight actual files. Core's remaining variants and the other
+36 families are not completed. Show progress and plans as text without dead
+downloads. Production source and public draft commits share the `src` subtree;
+their complete repository trees differ by a test-fixture change. Do not claim
+the public review commit was the production runtime, GUI launch was visual
+acceptance, or the user has already approved the design. Original reference
+imagery whose redistribution terms are not established stays outside this
+publication batch.

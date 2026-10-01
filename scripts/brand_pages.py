@@ -113,6 +113,42 @@ def _option(values):
     return '<option value="all">全部</option>' + ''.join('<option value="%s">%s</option>' % (site.esc(value), site.esc(value)) for value in values)
 
 
+def _progress(catalog):
+    site = _helpers()
+    progress = catalog.get('progress')
+    if not progress:
+        return ''
+    counts = [progress.get(key) for key in ('completed', 'total', 'assets')]
+    if any(not isinstance(value, int) or isinstance(value, bool) or value < 0 for value in counts):
+        raise ValueError('brand progress counts must be nonnegative integers')
+    completed, total, assets = counts
+    if not total or completed > total:
+        raise ValueError('brand progress requires a positive total and a bounded completed count')
+    plans = []
+    for row in progress.get('planned', []):
+        status = row.get('status', 'planned')
+        if 'partial' in status:
+            label = '首款字标已交付 · 其他变体待制作'
+        elif status in ('actual', 'verified', 'completed', 'delivered'):
+            label = '已交付首款'
+        elif status in ('planned', 'planned_not_executed', 'pending'):
+            label = '待制作'
+        else:
+            label = status
+        plans.append('<li data-plan-id="%s"><span>%s</span><span>%s</span></li>' % (
+            site.esc(row.get('id', '')), site.esc(row.get('title', row.get('label', row.get('id', '')))), site.esc(label)))
+    planned = ('<details class="brand-plans"><summary>查看 %d 组制作计划</summary>'
+               '<p>此处仅列出制作范围；待制作条目尚无作品页或下载。</p><ul id="brand-plan-list">%s</ul></details>') % (
+                   len(plans), ''.join(plans)) if plans else ''
+    return ('<section class="brand-progress" aria-labelledby="brand-progress-title">'
+            '<div class="brand-progress-heading"><h2 id="brand-progress-title">制作进度</h2>'
+            '<p><strong>%d / %d</strong> 组已交付首款 <span>·</span> <strong>%d</strong> 个实际文件</p></div>'
+            '<progress value="%d" max="%d" aria-label="已交付首款的品牌组数">%d / %d</progress>'
+            '<p class="brand-progress-description">%s</p>%s</section>') % (
+                completed, total, assets, completed, total, completed, total,
+                site.esc(progress.get('description', '')), planned)
+
+
 def _card(item, root):
     site = _helpers()
     search = ' '.join([item['title'], item.get('summary', ''), item.get('family', '')] + item.get('software', []))
@@ -137,14 +173,14 @@ def _gallery(catalog, items, root, preview):
     description = catalog.get('description', '统一品牌语言，保留每件资产的实际制作步骤、工具、来源与许可。')
     empty = len(items) == 0
     content = '''<section class="brand-hero"><p class="eyebrow">DCC-MCP · BRAND LIBRARY</p><h1>%s</h1><p>%s</p>
-<div class="brand-hero-meta"><span>实际资源 · 深浅背景</span><span>制作过程 · 可核验下载</span></div></section>%s
+<div class="brand-hero-meta"><span>实际资源 · 深浅背景</span><span>制作过程 · 可核验下载</span></div></section>%s%s
 <section class="brand-collection" aria-labelledby="brand-wall-title"><div class="brand-collection-heading"><h2 id="brand-wall-title">品牌家族</h2><p>从品牌标识到适配器视觉</p></div>
 <div class="brand-controls" id="brand-controls" hidden><label class="brand-search"><span>搜索品牌</span><input id="brand-search" type="search" maxlength="200" placeholder="品牌、软件或关键词" autocomplete="off"></label>
 <div class="brand-filter-row"><label>家族<select id="brand-family" aria-label="品牌家族">%s</select></label><label>软件<select id="brand-software" aria-label="DCC 软件">%s</select></label><button type="button" class="reset-button" id="brand-reset">重置筛选</button></div>%s</div>
 <noscript><p class="notice">当前显示全部条目。已验证资产同时提供深浅背景实图；详情、下载与许可无需 JavaScript 即可查看。</p></noscript>
 <p class="result-count" id="brand-count" role="status" aria-live="polite">全部 %d 个品牌条目</p>
 <div class="brand-wall" id="brand-wall">%s</div><div class="empty-state" id="brand-empty"%s><h3>没有匹配的品牌</h3><p>试试其他软件、家族或关键词。</p><button class="primary-button" id="brand-empty-reset" type="button" hidden>显示全部</button></div></section>''' % (
-        site.esc(title), site.esc(description), notice, _option(families), _option(software), _theme_controls(), len(items),
+        site.esc(title), site.esc(description), notice, _progress(catalog), _option(families), _option(software), _theme_controls(), len(items),
         ''.join(_card(item, root) for item in items), '' if empty else ' hidden')
     return _shell(content, _head(title + ' | DCC-MCP Showcase', description, 'brands/', root, items, preview), '../')
 
@@ -155,6 +191,28 @@ def _bytes(value):
     if value >= 1024:
         return '%.1f KiB' % (value / 1024)
     return '%d B' % value
+
+
+def _small_previews(item, root, prefix):
+    site = _helpers()
+    previews = item.get('small_previews')
+    if item.get('status') != 'verified' or not previews:
+        return ''
+    rows = []
+    for theme, label in (('light', '浅色背景'), ('dark', '深色背景')):
+        image = previews[theme]
+        source = site.resolve_public(root, image['src'])
+        dimensions = site.png_size(source)
+        if not dimensions or dimensions[0] != 128:
+            raise ValueError('small brand previews must use actual 128px PNG resources')
+        width, height = dimensions
+        rows.append('<figure class="brand-small-preview"><div class="brand-small-stage" data-background="%s">'
+                    '<img src="%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async" data-brand-small-image>'
+                    '</div><figcaption>%s · %d × %d px · 原尺寸</figcaption></figure>' % (
+                        theme, _url(image['src'], root, prefix), site.esc(image['alt']), width, height, label, width, height))
+    return ('<section class="detail-section" id="size-preview"><h2>小尺寸预览</h2>'
+            '<p>两张 128 像素实际导出图按原尺寸展示，便于检查小尺寸轮廓和文字；深浅版本同时可见。</p>'
+            '<div class="brand-small-previews">%s</div></section>') % ''.join(rows)
 
 
 def _downloads(item, root, prefix):
@@ -171,10 +229,11 @@ def _downloads(item, root, prefix):
         label = site.esc(variant['label'])
         size = '%s × %s' % (variant.get('width', '—'), variant.get('height', '—'))
         download = ' download' if not urlsplit(variant['url']).scheme else ''
+        note = '<p class="brand-download-note">%s</p>' % site.esc(variant['note']) if variant.get('note') else ''
         rows.append('''<li class="brand-download"><div class="brand-download-heading"><h3>%s</h3><a href="%s"%s>下载 <span aria-hidden="true">↓</span></a></div>
-<p class="brand-file-meta">%s · %s · %s</p><p class="brand-file-rights">%s</p><div class="brand-checksum"><span>SHA-256</span><code>%s</code></div></li>''' % (
+<p class="brand-file-meta">%s · %s · %s</p><p class="brand-file-rights">%s</p>%s<div class="brand-checksum"><span>SHA-256</span><code>%s</code></div></li>''' % (
             label, _url(variant['url'], root, prefix), download, site.esc(variant['format'].upper()), site.esc(size),
-            _bytes(variant['bytes']), ' / '.join(right_links), site.esc(variant['sha256'])))
+            _bytes(variant['bytes']), ' / '.join(right_links), note, site.esc(variant['sha256'])))
     return '<ul class="brand-downloads">%s</ul>' % ''.join(rows)
 
 
@@ -218,10 +277,14 @@ def _detail(item, catalog, root, preview):
     checks_html = '<table class="checks"><caption class="brand-table-caption">实际验证记录；证据范围以各项观测为准。</caption><thead><tr><th scope="col">检查</th><th scope="col">结果</th><th scope="col">观测与依据</th></tr></thead><tbody>%s</tbody></table>' % ''.join(checks) if checks else pending
     status = '已验证资源 · 可核验文件' if verified else '待完成 · 仅本地预览'
     notice = '<aside class="brand-draft-notice"><strong>此详情尚未发布</strong><p>预览结构不代表作品已完成；不引用旧缺陷图，也不提供待验证资产下载。</p></aside>' if not verified else ''
-    nav = ''.join('<a href="#%s">%s</a>' % row for row in [('downloads', '资源下载'), ('prompt', '提示词'), ('environment', '制作工具'), ('process', '分步过程'), ('evidence', '验证记录'), ('rights', '来源与许可')])
+    small = _small_previews(item, root, prefix)
+    sections = [('downloads', '资源下载'), ('prompt', '提示词'), ('environment', '制作工具'), ('process', '分步过程'), ('evidence', '验证记录'), ('rights', '来源与许可')]
+    if small:
+        sections.insert(0, ('size-preview', '小尺寸预览'))
+    nav = ''.join('<a href="#%s">%s</a>' % row for row in sections)
     content = '''<a class="detail-back" data-brand-back href="../"><span aria-hidden="true">←</span> 返回品牌画廊</a><div class="detail-heading"><div class="detail-meta">%s</div><h1>%s</h1><p class="subtitle">%s</p>%s</div>%s
 <div class="brand-detail-stage">%s%s<p class="brand-stage-caption">%s</p></div>
-<div class="detail-layout"><nav class="detail-nav" aria-label="品牌详情目录">%s</nav><div class="detail-content">
+<div class="detail-layout"><nav class="detail-nav" aria-label="品牌详情目录">%s</nav><div class="detail-content">%s
 <section class="detail-section" id="downloads"><h2>资源下载</h2><p>每个变体单独保留尺寸、文件哈希与适用许可。查看页面不会自动下载源文件。</p>%s</section>
 <section class="detail-section" id="prompt"><h2>提示词</h2>%s</section>
 <section class="detail-section" id="environment"><h2>制作工具与版本</h2><dl class="environment">%s</dl><ul class="tool-list">%s</ul>%s</section>
@@ -230,7 +293,7 @@ def _detail(item, catalog, root, preview):
 <section class="detail-section" id="rights"><h2>来源与许可</h2>%s%s%s</section></div></div>
 <div class="detail-footer"><a data-brand-back href="../">← 返回品牌画廊</a><a href="../../#works">查看 DCC-MCP 作品合集 ↗</a></div>''' % (
         metadata, site.esc(item['title']), site.esc(item.get('summary', '新品牌资源与实际制作证据正在准备。')), version, notice,
-        _stage(item, root, prefix, eager=True), _theme_controls() if verified else '', status, nav,
+        _stage(item, root, prefix, eager=True), _theme_controls() if verified else '', status, nav, small,
         _downloads(item, root, prefix) if verified else pending, prompt_html, environment, tools, '' if verified else pending,
         ''.join(steps), '' if steps else pending, checks_html, _links(item.get('evidence', []), root, prefix) if verified else '',
         limitations, _links(item.get('sources', []), root, prefix) if verified else pending, ''.join(rights), credit)

@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 from datetime import date, datetime
 import hashlib
+import io
 import json
 import math
 from pathlib import Path
@@ -28,7 +29,17 @@ SHA256 = re.compile(r"[0-9a-fA-F]{64}\Z")
 COMMIT = re.compile(r"[0-9a-fA-F]{40}\Z")
 SVG_TAGS = {"svg", "g", "defs", "path", "rect", "circle", "ellipse", "line",
             "polyline", "polygon", "linearGradient", "radialGradient", "stop",
-            "clipPath", "mask", "use", "title", "desc"}
+            "clipPath", "mask", "use", "title", "desc", "text", "tspan"}
+SVG_NS = "http://www.w3.org/2000/svg"
+INKSCAPE_NS = "http://www.inkscape.org/namespaces/inkscape"
+SODIPODI_NS = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+XML_NS = "http://www.w3.org/XML/1998/namespace"
+XLINK_NS = "http://www.w3.org/1999/xlink"
+NAMEDVIEW = "{" + SODIPODI_NS + "}namedview"
+NAMEDVIEW_ATTRS = {"id", "pagecolor", "bordercolor", "borderopacity"} | {
+    "{" + INKSCAPE_NS + "}" + key for key in
+    ("showpageshadow", "pageopacity", "pagecheckerboard", "deskcolor", "document-units")}
+EDITOR_ATTRS = {"{" + INKSCAPE_NS + "}" + key for key in ("label", "groupmode")}
 MAX_METADATA = 1024 * 1024
 DEFAULT = {"schema_version": 1, "enabled": False, "items": []}
 
@@ -181,6 +192,9 @@ def svg_check(data, where):
         return None, problems + [f"{where}: DTD, entities or processing instructions forbidden"]
     try:
         doc = ET.fromstring(text)
+        for _, (prefix, namespace) in ET.iterparse(io.StringIO(text), events=("start-ns",)):
+            if namespace not in (SVG_NS, INKSCAPE_NS, SODIPODI_NS, XML_NS, XLINK_NS):
+                problems.append(f"{where}: unknown SVG namespace forbidden")
     except ET.ParseError:
         return None, problems + [f"{where}: invalid SVG XML"]
     if doc.tag != "{http://www.w3.org/2000/svg}svg":
@@ -190,12 +204,23 @@ def svg_check(data, where):
         problems.append(f"{where}: duplicate SVG id")
     for element in doc.iter():
         tag = element.tag.split("}")[-1]
-        if tag not in SVG_TAGS or (element.tag.startswith("{") and
-                                  not element.tag.startswith("{http://www.w3.org/2000/svg}")):
+        editor_view = element.tag == NAMEDVIEW
+        if editor_view:
+            if len(element) or (element.text and element.text.strip()) or any(key not in NAMEDVIEW_ATTRS for key in element.attrib):
+                problems.append(f"{where}: namedview must contain only known passive editor attributes")
+        elif tag not in SVG_TAGS or not element.tag.startswith("{" + SVG_NS + "}"):
             problems.append(f"{where}: SVG contains unsupported or active element")
         for raw_key, value in element.attrib.items():
             key = raw_key.split("}")[-1].lower()
-            if raw_key == "{http://www.w3.org/XML/1998/namespace}base":
+            if raw_key.startswith("{"):
+                namespace = raw_key[1:].split("}")[0]
+                permitted = ((editor_view and raw_key in NAMEDVIEW_ATTRS) or
+                             (not editor_view and element.tag == "{" + SVG_NS + "}g" and raw_key in EDITOR_ATTRS) or
+                             (namespace == XML_NS and key in ("space", "lang")) or
+                             (namespace == XLINK_NS and key == "href"))
+                if not permitted:
+                    problems.append(f"{where}: unknown or unsupported namespaced SVG attribute forbidden")
+            if raw_key == "{" + XML_NS + "}base":
                 problems.append(f"{where}: SVG xml:base forbidden")
             if key.startswith("on"):
                 problems.append(f"{where}: SVG event attribute forbidden")
@@ -259,6 +284,24 @@ def _read_and_validate(root, catalog_path=None):
         return catalog, selected, problems + ["brands.enabled: boolean required"]
     if not catalog["enabled"]:
         return catalog, selected, problems
+    if "manifest" in catalog:
+        # A manifest pointer replaces a second hand-maintained item inventory.
+        # Projection is read-only; its owner supplies the ordinary catalog shape.
+        problems.extend(common.scan_values(catalog, "brands pointer"))
+        manifest = select(catalog["manifest"], root, selected, "brands.manifest", problems, local_only=True)
+        if not manifest or manifest.suffix.lower() != ".json":
+            return catalog, selected, problems + ["brands.manifest: safe local JSON manifest required"]
+        if "manifest_sha256" in catalog:
+            digest = catalog["manifest_sha256"]
+            if not isinstance(digest, str) or not SHA256.fullmatch(digest):
+                return catalog, selected, problems + ["brands.manifest_sha256: full 64-digit SHA-256 required"]
+            if hashlib.sha256(manifest.read_bytes()).hexdigest() != digest.lower():
+                return catalog, selected, problems + ["brands.manifest_sha256: actual manifest SHA-256 mismatch"]
+        import brand_manifest
+        catalog = brand_manifest.project(root, catalog["manifest"])
+        if (not isinstance(catalog, dict) or type(catalog.get("schema_version")) is not int
+                or catalog["schema_version"] != 1 or catalog.get("enabled") is not True):
+            return {}, selected, problems + ["brands.manifest: projection must return an enabled schema-1 catalog"]
     problems.extend(common.scan_values(catalog, "brands"))
     require(catalog, ("title", "description", "updated_at"), "brands", problems)
     seen = set()
@@ -305,12 +348,17 @@ def _read_and_validate(root, catalog_path=None):
             matching = [row for row in environment if re.search(label, str(row.get("label", "")), re.I)]
             return any(re.search(r"\d+(?:\.\d+)+", str(row.get("value", ""))) and
                        not common.UNKNOWN.search(str(row.get("value", ""))) for row in matching)
+        def recorded_adapter():
+            if recorded_version(r"adapter|适配器"):
+                return True
+            return any(re.search(r"adapter|适配器", str(row.get("label", "")), re.I) and
+                       re.search(r"\b(?:commit|revision|提交)\s*[:=]?\s*[0-9a-fA-F]{40}\b", str(row.get("value", "")), re.I) and
+                       not common.UNKNOWN.search(str(row.get("value", ""))) for row in environment)
         for software in item.get("software", []) if isinstance(item.get("software"), list) else []:
             if isinstance(software, str) and not recorded_version(re.escape(software)):
                 problems.append(f"{where}.environment: actual software version required")
-        for label in (r"adapter|适配器", r"core|核心"):
-            if not recorded_version(label):
-                problems.append(f"{where}.environment: actual adapter and Core versions required")
+        if not recorded_adapter() or not recorded_version(r"core|核心"):
+            problems.append(f"{where}.environment: actual adapter version/fixed commit and Core version required")
         rights = {}
         for row in rows(item, "rights", where, problems):
             require(row, ("id", "holder", "license", "scope", "url", "notice"), where + ".rights", problems)
@@ -376,6 +424,31 @@ def _read_and_validate(root, catalog_path=None):
                 target = select(preview.get("src"), root, selected, where + ".previews." + theme, problems, local_only=True)
                 if target and target not in variant_paths:
                     problems.append(f"{where}.previews.{theme}: preview must be a validated variant asset")
+        if "small_previews" in item:
+            small = item["small_previews"]
+            if not isinstance(small, dict) or set(small) != {"light", "dark"}:
+                problems.append(f"{where}.small_previews: exactly light and dark preview objects required")
+            if isinstance(small, dict):
+                for theme in ("light", "dark"):
+                    loc = f"{where}.small_previews.{theme}"
+                    preview = small.get(theme)
+                    if not isinstance(preview, dict):
+                        problems.append(f"{loc}: preview object required")
+                        continue
+                    require(preview, ("src", "alt"), loc, problems)
+                    target = select(preview.get("src"), root, selected, loc + ".src", problems, local_only=True)
+                    if target and target not in variant_paths:
+                        problems.append(f"{loc}: small preview must be a validated variant asset")
+                    if target:
+                        if target.suffix.lower() != ".png":
+                            problems.append(f"{loc}: actual 128px PNG required")
+                        else:
+                            dims, issues = png_check(target.read_bytes(), loc)
+                            problems.extend(issues)
+                            if (type(preview.get("width")) is not int or preview["width"] != 128
+                                    or type(preview.get("height")) is not int or not dims or dims[0] != 128
+                                    or dims != (preview.get("width"), preview.get("height"))):
+                                problems.append(f"{loc}: declared and actual PNG dimensions must match at width 128")
         observed, scoped = set(), nonempty(item.get("evidence_scope"))
         for evidence in rows(item, "evidence", where, problems):
             require(evidence, ("label", "url"), where + ".evidence", problems)
@@ -406,7 +479,7 @@ def read_and_validate(root, catalog_path=None):
     """Public fail-closed wrapper; malformed records never escape as exceptions."""
     try:
         return _read_and_validate(root, catalog_path)
-    except (OSError, ValueError, TypeError, RecursionError, OverflowError):
+    except (OSError, ValueError, TypeError, RecursionError, OverflowError, ImportError):
         return {}, set(), ["brands: malformed or unreadable publication record"]
 
 

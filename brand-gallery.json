@@ -1,8 +1,6 @@
 {
   "schema_version": 1,
-  "enabled": false,
-  "title": "DCC-MCP 品牌家族",
-  "description": "统一的标识与组合，记录矢量细节、尺寸资源、制作过程及来源许可。",
-  "updated_at": "2026-10-01",
-  "items": []
+  "enabled": true,
+  "manifest": "docs/brands/brand-family-v2/manifest.json",
+  "manifest_sha256": "e55da421114d3987243e7679fed6814a36d33283966a95bac14d85a1a3c9f172"
 }

@@ -1,0 +1,1287 @@
+{
+  "schema_version": 2,
+  "generated_utc": "2026-10-01T12:06:27.691190+00:00",
+  "status": "partial_actual_core",
+  "authoritative_asset_map": true,
+  "path_base": "brand-family-v2 directory",
+  "scope": "Only corrected core light/dark wordmarks are actual in this snapshot; 37-family batches remain planned.",
+  "family_count": 37,
+  "actual_family_count": 1,
+  "actual_asset_count": 8,
+  "families": [
+    {
+      "family_id": "maya",
+      "group": "software_integration",
+      "repository": "dcc-mcp-maya",
+      "display_product": "Autodesk Maya",
+      "compatibility_phrase": "for use with Autodesk Maya software",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk Maya identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Triangulated mesh peaks with a low wireframe floor and one editable vertex handle.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "3dsmax",
+      "group": "software_integration",
+      "repository": "dcc-mcp-3dsmax",
+      "display_product": "Autodesk 3ds Max",
+      "compatibility_phrase": "for use with Autodesk 3ds Max software",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk 3ds Max identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three wireframe boxes on the source-like mesh floor, with one modeling edge highlighted.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "blender",
+      "group": "software_integration",
+      "repository": "dcc-mcp-blender",
+      "display_product": "Blender",
+      "compatibility_phrase": "for use with Blender software",
+      "policy_ids": [
+        "blender"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Blender identifies the referenced software/workflow and remains with Blender Foundation. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "One wireframe cube linked to two procedural nodes; retain the source geometry/cube semantics with a small orange edge accent.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "houdini",
+      "group": "software_integration",
+      "repository": "dcc-mcp-houdini",
+      "display_product": "SideFX Houdini",
+      "compatibility_phrase": "for use with SideFX Houdini software",
+      "policy_ids": [
+        "sidefx"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name SideFX Houdini identifies the referenced software/workflow and remains with SideFX. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A three-stage procedural graph feeding a small deformed grid; use original routing, not a swirl silhouette.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "zbrush",
+      "group": "software_integration",
+      "repository": "dcc-mcp-zbrush",
+      "display_product": "Maxon ZBrush",
+      "compatibility_phrase": "for use with Maxon ZBrush software",
+      "policy_ids": [
+        "maxon"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Maxon ZBrush identifies the referenced software/workflow and remains with Maxon. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A faceted mesh patch and two original sculpt/contour strokes above the low wireframe floor.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "photoshop",
+      "group": "software_integration",
+      "repository": "dcc-mcp-photoshop",
+      "display_product": "Adobe Photoshop",
+      "compatibility_phrase": "for use with Adobe Photoshop software",
+      "policy_ids": [
+        "adobe"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Photoshop identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three offset layer cards with a short retouch/brush stroke and one selection handle.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "mobu",
+      "group": "software_integration",
+      "repository": "dcc-mcp-mobu",
+      "display_product": "Autodesk MotionBuilder",
+      "compatibility_phrase": "for use with Autodesk MotionBuilder software",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk MotionBuilder identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A new five-joint motion rig with an arc trail over the original-like capture floor; the pose and proportions are independently drawn.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "nuke",
+      "group": "software_integration",
+      "repository": "dcc-mcp-nuke",
+      "display_product": "Foundry Nuke",
+      "compatibility_phrase": "for use with Foundry Nuke software",
+      "policy_ids": [
+        "foundry"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Foundry Nuke identifies the referenced software/workflow and remains with Foundry. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three compositing frame nodes entering a distinct merge junction and one output card.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "openusd",
+      "group": "software_integration",
+      "repository": "dcc-mcp-openusd",
+      "display_product": "OpenUSD",
+      "compatibility_phrase": "for OpenUSD workflows",
+      "policy_ids": [
+        "openusd"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name OpenUSD identifies the referenced software/workflow and remains with OpenUSD / Pixar / Alliance for OpenUSD. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three original offset scene-layer cards composed into one wireframe scene cube.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "unreal",
+      "group": "software_integration",
+      "repository": "dcc-mcp-unreal",
+      "display_product": "Unreal Engine",
+      "compatibility_phrase": "for use with Unreal Engine software",
+      "policy_ids": [
+        "epic"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Unreal Engine identifies the referenced software/workflow and remains with Epic Games. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "An independently drawn scene cube routed through two runtime/build nodes to an output frame.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "unity",
+      "group": "software_integration",
+      "repository": "dcc-mcp-unity",
+      "display_product": "Unity",
+      "compatibility_phrase": "for use with Unity software",
+      "policy_ids": [
+        "unity"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Unity identifies the referenced software/workflow and remains with Unity Technologies. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Two original scene cubes plus a compact transform-axis handle connected to an output node.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "substance3d-designer",
+      "group": "software_integration",
+      "repository": "dcc-mcp-substance3d-designer",
+      "display_product": "Adobe Substance 3D Designer",
+      "compatibility_phrase": "for use with Adobe Substance 3D Designer software",
+      "policy_ids": [
+        "adobe"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Substance 3D Designer identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A three-node material graph branching into three small output swatches.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "substance3d-painter",
+      "group": "software_integration",
+      "repository": "dcc-mcp-substance3d-painter",
+      "display_product": "Adobe Substance 3D Painter",
+      "compatibility_phrase": "for use with Adobe Substance 3D Painter software",
+      "policy_ids": [
+        "adobe"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Substance 3D Painter identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "An independently shaded material sample disc, two layer cards and a short paint stroke.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "premiere",
+      "group": "software_integration",
+      "repository": "dcc-mcp-premiere",
+      "display_product": "Adobe Premiere Pro",
+      "compatibility_phrase": "for use with Adobe Premiere Pro software",
+      "policy_ids": [
+        "adobe"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Premiere Pro identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three timeline clip tracks and a vertical playhead with one original triangular transport pointer.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "aftereffects",
+      "group": "software_integration",
+      "repository": "dcc-mcp-aftereffects",
+      "display_product": "Adobe After Effects",
+      "compatibility_phrase": "for use with Adobe After Effects software",
+      "policy_ids": [
+        "adobe"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe After Effects identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Two composition layers joined to a keyframe curve with three diamond keys.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "katana",
+      "group": "software_integration",
+      "repository": "dcc-mcp-katana",
+      "display_product": "Foundry Katana",
+      "compatibility_phrase": "for use with Foundry Katana software",
+      "policy_ids": [
+        "foundry"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Foundry Katana identifies the referenced software/workflow and remains with Foundry. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A branching lighting graph ending in a small original light-ray fan and a diamond output.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "godot",
+      "group": "software_integration",
+      "repository": "dcc-mcp-godot",
+      "display_product": "Godot Engine",
+      "compatibility_phrase": "for Godot Engine workflows",
+      "policy_ids": [
+        "godot"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Godot Engine identifies the referenced software/workflow and remains with Godot Engine. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A small scene tree feeding a game frame. This is a new workflow interpretation because the non-mark accessory is minimal in the old image.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "renderdoc",
+      "group": "software_integration",
+      "repository": "dcc-mcp-renderdoc",
+      "display_product": "RenderDoc",
+      "compatibility_phrase": "for RenderDoc workflows",
+      "policy_ids": [
+        "renderdoc"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name RenderDoc identifies the referenced software/workflow and remains with RenderDoc / Baldur Karlsson and contributors. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "A frame-capture box feeding mesh and texture inspection cells with one selected sample point.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "gimp",
+      "group": "software_integration",
+      "repository": "dcc-mcp-gimp",
+      "display_product": "GIMP",
+      "compatibility_phrase": "for GIMP workflows",
+      "policy_ids": [
+        "gimp"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "Derived GIMP family artwork files have a CC BY-SA 4.0 override; the common master remains separately licensed.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": true,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "asset_license_override": "CC-BY-SA-4.0",
+        "required_author_attribution": "Wilber by Aryeom Han; source https://www.gimp.org/about/linking.html and current official SVG; adapted for DCC-MCP.",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "change_notice_required": true,
+        "editable_derivative_source_required": true,
+        "trademark_notice_plan": "Name GIMP identifies the referenced software/workflow and remains with GIMP project / Aryeom Han. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Use the verified official current Wilber vector as a separately identifiable secondary GIMP component; retain two original layer cards and a brush line.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "tiled",
+      "group": "software_integration",
+      "repository": "dcc-mcp-tiled",
+      "display_product": "Tiled",
+      "compatibility_phrase": "for Tiled workflows",
+      "policy_ids": [
+        "tiled"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Tiled identifies the referenced software/workflow and remains with Tiled / mapeditor. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three independently drawn isometric tile panels with one selected cell and a routing node.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "krita",
+      "group": "software_integration",
+      "repository": "dcc-mcp-krita",
+      "display_product": "Krita",
+      "compatibility_phrase": "for Krita workflows",
+      "policy_ids": [
+        "krita"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Krita identifies the referenced software/workflow and remains with Krita Foundation. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three original flowing paint strokes and three small color swatches; retain the painting/color semantics without copying the logo circle.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "material-maker",
+      "group": "software_integration",
+      "repository": "dcc-mcp-material-maker",
+      "display_product": "Material Maker",
+      "compatibility_phrase": "for Material Maker workflows",
+      "policy_ids": [
+        "material_maker"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Material Maker identifies the referenced software/workflow and remains with Material Maker / Rodolphe Suescun and contributors. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three original material graph nodes, two output swatches and a small parameter slider.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "comfyui",
+      "group": "software_integration",
+      "repository": "dcc-mcp-comfyui",
+      "display_product": "ComfyUI",
+      "compatibility_phrase": "for ComfyUI workflows",
+      "policy_ids": [
+        "comfy"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name ComfyUI identifies the referenced software/workflow and remains with Comfy / ComfyUI. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "An independently drawn branched node graph with two image-output cards and one muted yellow processing node.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "touchdesigner",
+      "group": "software_integration",
+      "repository": "dcc-mcp-touchdesigner",
+      "display_product": "TouchDesigner",
+      "compatibility_phrase": "integrates with TouchDesigner",
+      "policy_ids": [
+        "derivative"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name TouchDesigner identifies the referenced software/workflow and remains with Derivative. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Preserve the original independent three-operator network and flowing route; keep a distinct integrates with TouchDesigner phrase.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "marmoset",
+      "group": "software_integration",
+      "repository": "dcc-mcp-marmoset",
+      "display_product": "Marmoset Toolbag",
+      "compatibility_phrase": "for Marmoset Toolbag workflows",
+      "policy_ids": [
+        "marmoset"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Marmoset Toolbag identifies the referenced software/workflow and remains with Marmoset. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "An independently shaded sample disc feeding three bake/output swatches and one light handle.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "wwise",
+      "group": "software_integration",
+      "repository": "dcc-mcp-wwise",
+      "display_product": "Audiokinetic Wwise",
+      "compatibility_phrase": "for use with Audiokinetic Wwise software",
+      "policy_ids": [
+        "audiokinetic"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Audiokinetic Wwise identifies the referenced software/workflow and remains with Audiokinetic. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Preserve a compact audio waveform rhythm and connect it to two original event-bus nodes.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "freecad",
+      "group": "software_integration",
+      "repository": "dcc-mcp-freecad",
+      "display_product": "FreeCAD",
+      "compatibility_phrase": "for FreeCAD workflows",
+      "policy_ids": [
+        "freecad"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name FreeCAD identifies the referenced software/workflow and remains with FreeCAD Project Association. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Two original sketch axes, a dimension span, and one extruded wireframe box.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "cinema4d",
+      "group": "software_integration",
+      "repository": "dcc-mcp-cinema4d",
+      "display_product": "Maxon Cinema 4D",
+      "compatibility_phrase": "for use with Maxon Cinema 4D software",
+      "policy_ids": [
+        "maxon"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Maxon Cinema 4D identifies the referenced software/workflow and remains with Maxon. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Preserve a three-cube motion-graphics chain and its original-like flowing connector; no orb outline.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "sketchup",
+      "group": "software_integration",
+      "repository": "dcc-mcp-sketchup",
+      "display_product": "SketchUp",
+      "compatibility_phrase": "for SketchUp workflows",
+      "policy_ids": [
+        "trimble"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name SketchUp identifies the referenced software/workflow and remains with Trimble / SketchUp. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Two original architectural volumes, an extrusion arrow and a single dimension guide.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "openscad",
+      "group": "software_integration",
+      "repository": "dcc-mcp-openscad",
+      "display_product": "OpenSCAD",
+      "compatibility_phrase": "for OpenSCAD workflows",
+      "policy_ids": [
+        "openscad"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name OpenSCAD identifies the referenced software/workflow and remains with OpenSCAD project. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Use a wireframe box and an independently drawn subtraction/cutout operation node; preserve the source CAD operation semantics.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "illustrator",
+      "group": "software_integration",
+      "repository": "dcc-mcp-illustrator",
+      "display_product": "Adobe Illustrator",
+      "compatibility_phrase": "for use with Adobe Illustrator software",
+      "policy_ids": [
+        "adobe"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Adobe Illustrator identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Preserve the original independent Bezier segment with three anchors and two control handles.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "shogun",
+      "group": "software_integration",
+      "repository": "dcc-mcp-shogun",
+      "display_product": "Vicon Shogun",
+      "compatibility_phrase": "for use with Vicon Shogun software",
+      "policy_ids": [
+        "vicon"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Vicon Shogun identifies the referenced software/workflow and remains with Vicon. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "An original capture floor, four marker points and one motion trail connected to a rig node.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "core",
+      "group": "main_brand",
+      "repository": "dcc-mcp-core",
+      "display_product": "Core",
+      "compatibility_phrase": "Core",
+      "policy_ids": [
+        "dcc_project"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      },
+      "drawing_brief": "Reuse the new smooth shared DCC-MCP master, with its native pixel D and protocol nodes; no software accessory.",
+      "production_status": "partial_actual_core_wordmarks",
+      "actual_asset_ids": [
+        "core-light-editable-dcc-mcp-master-corrected",
+        "core-dark-editable-dcc-mcp-wordmark-dark-corrected",
+        "core-light-release-dcc-mcp-wordmark-light",
+        "core-dark-release-dcc-mcp-wordmark-dark",
+        "core-light-release-cc-final-light-1024",
+        "core-light-release-cc-final-light-128",
+        "core-dark-release-cc-final-dark-1024",
+        "core-dark-release-cc-final-dark-128"
+      ]
+    },
+    {
+      "family_id": "agent-plugins",
+      "group": "main_brand",
+      "repository": "dcc-mcp-agent-plugins",
+      "display_product": "Agent Plugins",
+      "compatibility_phrase": "Agent Plugins",
+      "policy_ids": [
+        "dcc_project"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      },
+      "drawing_brief": "Preserve four original connector/port nodes beneath the unchanged shared master.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "shotgrid",
+      "group": "software_integration",
+      "repository": "dcc-mcp-fpt",
+      "display_product": "Autodesk Flow Production Tracking (ShotGrid)",
+      "compatibility_phrase": "for use with Autodesk Flow Production Tracking (ShotGrid) software",
+      "policy_ids": [
+        "autodesk"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false,
+        "trademark_notice_plan": "Name Autodesk Flow Production Tracking (ShotGrid) identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
+      },
+      "drawing_brief": "Three original shot cards with a review/check node and a delivery arrow; retain the source ShotGrid workflow semantics.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "cache-inspector",
+      "group": "extension",
+      "repository": "dcc-mcp-cache-inspector",
+      "display_product": "Cache Inspector",
+      "compatibility_phrase": "Cache Inspector",
+      "policy_ids": [
+        "dcc_project"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      },
+      "drawing_brief": "Preserve an original cache/data card, a check circle and three compact metric bars.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    },
+    {
+      "family_id": "maya-mgear",
+      "group": "extension",
+      "repository": "dcc-mcp-maya-mgear",
+      "display_product": "mGear in Autodesk Maya",
+      "compatibility_phrase": "for mGear in Autodesk Maya software",
+      "policy_ids": [
+        "autodesk",
+        "mgear",
+        "dcc_project"
+      ],
+      "rights": {
+        "vendor_mark_permission_inferred_from_repo_mit": false,
+        "license_scope": "New independently authored geometry only; vendor references remain separate.",
+        "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+        "third_party_mark_in_final_plan": false,
+        "affiliation_claimed": false,
+        "policy_uncertainty_blocks_whole_family": false
+      },
+      "drawing_brief": "Draw a new connected rig-joint motif and a mesh-control handle. This interprets the old rigging badge, rather than claiming an exact non-mark accessory exists.",
+      "production_status": "planned_not_executed",
+      "actual_asset_ids": []
+    }
+  ],
+  "planned_batches": [
+    {
+      "batch": 1,
+      "count": 10,
+      "family_ids": [
+        "core",
+        "maya",
+        "3dsmax",
+        "blender",
+        "houdini",
+        "zbrush",
+        "photoshop",
+        "mobu",
+        "nuke",
+        "openusd"
+      ],
+      "status": "planned_with_core_partial"
+    },
+    {
+      "batch": 2,
+      "count": 12,
+      "family_ids": [
+        "unreal",
+        "unity",
+        "substance3d-designer",
+        "substance3d-painter",
+        "premiere",
+        "aftereffects",
+        "katana",
+        "godot",
+        "renderdoc",
+        "gimp",
+        "tiled",
+        "krita"
+      ],
+      "status": "planned"
+    },
+    {
+      "batch": 3,
+      "count": 12,
+      "family_ids": [
+        "material-maker",
+        "comfyui",
+        "touchdesigner",
+        "marmoset",
+        "wwise",
+        "freecad",
+        "cinema4d",
+        "sketchup",
+        "openscad",
+        "illustrator",
+        "shogun",
+        "agent-plugins"
+      ],
+      "status": "planned"
+    },
+    {
+      "batch": 4,
+      "count": 3,
+      "family_ids": [
+        "shotgrid",
+        "cache-inspector",
+        "maya-mgear"
+      ],
+      "status": "planned"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/native/dcc-mcp-master-corrected.svg",
+      "bytes": 7280,
+      "sha256": "40bfe7ee60c2b68b73c25740310697a1c996e595f7b4d22725326b054e339330",
+      "file_modified_utc": "2026-10-01T11:39:08.984751+00:00",
+      "asset_id": "core-light-editable-dcc-mcp-master-corrected",
+      "family": "core",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-build-light"
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        900.0,
+        400.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/native/dcc-mcp-wordmark-dark-corrected.svg",
+      "bytes": 7054,
+      "sha256": "f4f873d6e5f3d8a3fe67204fccc8d47d6aa48a79e8ca03594d313843ec1bd74a",
+      "file_modified_utc": "2026-10-01T11:39:23.744995+00:00",
+      "asset_id": "core-dark-editable-dcc-mcp-wordmark-dark-corrected",
+      "family": "core",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-build-dark"
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        900.0,
+        400.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/svg/dcc-mcp-wordmark-light.svg",
+      "bytes": 7615,
+      "sha256": "dc32cc5ca9c904540159b6c721396f86cb46bccff02f214b9d8e5af059581211",
+      "file_modified_utc": "2026-10-01T11:45:25.039412+00:00",
+      "asset_id": "core-light-release-dcc-mcp-wordmark-light",
+      "family": "core",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-release-light"
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        900.0,
+        400.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/svg/dcc-mcp-wordmark-dark.svg",
+      "bytes": 7389,
+      "sha256": "e10fdf1aed5b5f60c0c10719e72e3477fb129895becb4b95d07b6b3e63ab11bc",
+      "file_modified_utc": "2026-10-01T11:45:42.319301+00:00",
+      "asset_id": "core-dark-release-dcc-mcp-wordmark-dark",
+      "family": "core",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-release-dark"
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        900.0,
+        400.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "evidence/cc-final-light-1024.png",
+      "bytes": 53269,
+      "sha256": "ff3349c67b493175ed341c3dca34a6dd6423e3369eaed25e836b3bbf601ff995",
+      "file_modified_utc": "2026-10-01T11:39:17.261192+00:00",
+      "asset_id": "core-light-release-cc-final-light-1024",
+      "family": "core",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-export-light-1024"
+      },
+      "size": [
+        1024,
+        455
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "evidence/cc-final-light-128.png",
+      "bytes": 4912,
+      "sha256": "000bbfc5fc78ea3d627b4d5ffa1047bb082c39207f46bf5a2a251192b1fd7e6b",
+      "file_modified_utc": "2026-10-01T11:39:21.319791+00:00",
+      "asset_id": "core-light-release-cc-final-light-128",
+      "family": "core",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-export-light-128"
+      },
+      "size": [
+        128,
+        57
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "evidence/cc-final-dark-1024.png",
+      "bytes": 59457,
+      "sha256": "cf9ef5f7dbdae9e39365a4cb488d7c0ce850e5d43b769df5dc648ee2e3f543a8",
+      "file_modified_utc": "2026-10-01T11:39:26.844340+00:00",
+      "asset_id": "core-dark-release-cc-final-dark-1024",
+      "family": "core",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-export-dark-1024"
+      },
+      "size": [
+        1024,
+        455
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "evidence/cc-final-dark-128.png",
+      "bytes": 5063,
+      "sha256": "10dff2fb924e5aa1177544d85cb28f1f5a3491e196ccf6fcb67d04b562e6291d",
+      "file_modified_utc": "2026-10-01T11:39:28.724584+00:00",
+      "asset_id": "core-dark-release-cc-final-dark-128",
+      "family": "core",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "cc-final-export-dark-128"
+      },
+      "size": [
+        128,
+        57
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/cc-visual-review.json",
+      "bytes": 11577,
+      "sha256": "5836c33cb14e5bea34d2c04866bfd03d8e0898cc34fa0baeeb7b3f5c1775cb42",
+      "file_modified_utc": "2026-10-01T11:46:00.759294+00:00",
+      "role": "qa"
+    }
+  ],
+  "mcp_receipts": [
+    {
+      "key": "cc-final-build-light",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:39:05.572988+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "40bfe7ee60c2b68b73c25740310697a1c996e595f7b4d22725326b054e339330"
+    },
+    {
+      "key": "cc-final-build-dark",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:39:21.471337+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "f4f873d6e5f3d8a3fe67204fccc8d47d6aa48a79e8ca03594d313843ec1bd74a"
+    },
+    {
+      "key": "cc-final-release-light",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:45:21.631721+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "dc32cc5ca9c904540159b6c721396f86cb46bccff02f214b9d8e5af059581211"
+    },
+    {
+      "key": "cc-final-release-dark",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:45:35.110617+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "e10fdf1aed5b5f60c0c10719e72e3477fb129895becb4b95d07b6b3e63ab11bc"
+    },
+    {
+      "key": "cc-final-export-light-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:39:12.892290+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "ff3349c67b493175ed341c3dca34a6dd6423e3369eaed25e836b3bbf601ff995"
+    },
+    {
+      "key": "cc-final-export-light-128",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:39:19.497811+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "000bbfc5fc78ea3d627b4d5ffa1047bb082c39207f46bf5a2a251192b1fd7e6b"
+    },
+    {
+      "key": "cc-final-export-dark-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:39:23.876044+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "cf9ef5f7dbdae9e39365a4cb488d7c0ce850e5d43b769df5dc648ee2e3f543a8"
+    },
+    {
+      "key": "cc-final-export-dark-128",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:39:26.980519+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "output_sha256": "10dff2fb924e5aa1177544d85cb28f1f5a3491e196ccf6fcb67d04b562e6291d"
+    }
+  ],
+  "policy_snapshot": {
+    "path": "evidence/family-policy-plan.json",
+    "sha256": "1b8d6a17c75393b6abb115a4e8e712a562493a30e0ad0fbe7c92242fff573b07",
+    "inventory_sha256": "f50dfa96aeda659d8fa0547923319d48708d7f771759c6963a5d411085a0e5bf",
+    "license_partition": {
+      "new_project_geometry": "Parent-selected project license applies only to independently authored DCC-MCP objects/motifs.",
+      "gimp_family": "CC-BY-SA-4.0 with Aryeom Han credit, source, changes and editable derivative; no blanket MIT treatment.",
+      "font_files": "Existing SIL Open Font License notices remain separate.",
+      "historical_and_vendor_references": "Unchanged reference assets are not relicensed by this plan; vendor marks retain their rights.",
+      "copyright_vs_trademark": "Artwork/code copyright licenses and product identity/trademark permissions are separate.",
+      "no_vendor_contact_or_permission_fabricated": true
+    }
+  },
+  "toolchain": {
+    "runtime_source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+    "public_repository": "https://github.com/dcc-mcp/dcc-mcp-inkscape",
+    "draft_pull_request": "https://github.com/dcc-mcp/dcc-mcp-inkscape/pull/1",
+    "public_head_commit": "02a0fa6d47ce936f69e25c7a8bec5e6eebe4368a",
+    "core_version": "0.20.36",
+    "gateway_cli_version": "0.20.38",
+    "application_version": "Inkscape 1.4.4",
+    "identical_production_src_subtree": "8041547f328eec5af732ab316c5ca1ea318d3ef0"
+  },
+  "acceptance": {
+    "geometry_and_raster_visual_review": "verified",
+    "new_core_gui": "launch_observed_only_not_visual_acceptance",
+    "brand_design_acceptance": "awaiting_user_review",
+    "family_production": "in_progress"
+  },
+  "historical_scope": {
+    "v1_archive": "unchanged historical first delivery",
+    "superseded_candidates": [
+      "assets/native/dcc-mcp-master.svg",
+      "assets/native/dcc-mcp-wordmark-dark.svg"
+    ],
+    "cc_geometry_change_json": "Historical prepared candidate; cc-visual-review.json describes the corrected final geometry."
+  },
+  "publication": {
+    "source_manifest_sha256": "acca2a0b70a8e65ccbe3a3231f7d3ae2d050382266dcaf52e5fb35a0801b9399",
+    "scope": "Only the eight verified corrected core outputs in this producer snapshot. Other families remain planned.",
+    "metadata_redactions": [
+      "removed backend_port",
+      "removed ephemeral application-instance prefix from tool slug; operation name unchanged",
+      "removed extension_pid",
+      "removed host_invocation",
+      "removed instance_id",
+      "removed nonce",
+      "removed parent_executable",
+      "removed parent_pid",
+      "removed parent_probe_error",
+      "removed pid",
+      "removed requested_pid",
+      "removed service_session",
+      "replaced private filesystem or local service location"
+    ],
+    "asset_bytes_changed": false,
+    "source_verification": {
+      "runtime_root_tree": "c4a95e311ed989ef441df675aeb587f54b6267d9",
+      "public_root_tree": "7299dc19747cb99f776445885cc2afd5c45dbec0",
+      "shared_src_tree": "8041547f328eec5af732ab316c5ca1ea318d3ef0",
+      "scope": "The two commits share the production src subtree. The public commit changes a test fixture; complete repository trees differ. No production rerun at the public review commit is claimed."
+    },
+    "mcp_evidence": "evidence/mcp-calls.public.json",
+    "visual_evidence": "evidence/cc-visual-review.json",
+    "font_notice": "fonts/OFL.txt",
+    "comparison_published": false,
+    "reference_notice": "Before/after input imagery is not redistributed in this batch; the producer's geometric and raster review record is preserved."
+  }
+}
