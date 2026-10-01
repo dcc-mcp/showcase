@@ -1,0 +1,37 @@
+{
+  "family": "zbrush",
+  "display_name": "ZBrush",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-zbrush",
+    "source_commit": "574b99311d9c61cadeb8f6ce97dce4aeb763b09c",
+    "source_path": "docs/assets/dcc-mcp-zbrush.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-zbrush/574b99311d9c61cadeb8f6ce97dce4aeb763b09c/docs/assets/dcc-mcp-zbrush.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-zbrush/docs/assets/dcc-mcp-zbrush.svg",
+    "sha256": "19184e89769812b31e53a2b4d22debffab41dc5fdc73d3347100376f10066164",
+    "bytes": 1605398,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#E85810",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#E85810",
+    "dark": "#F08F5F",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "sculpt-brush-and-wire-surface",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name Maxon ZBrush identifies the referenced software/workflow and remains with Maxon. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with Maxon ZBrush software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

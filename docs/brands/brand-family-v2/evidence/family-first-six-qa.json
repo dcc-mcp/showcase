@@ -1,0 +1,1759 @@
+{
+  "scope": "Actual Inkscape output file and bitmap QA; GUI/brand approval are recorded separately.",
+  "families": [
+    {
+      "family": "maya",
+      "checks": [
+        {
+          "path": "assets/families/maya/native/light.svg",
+          "bytes": 10171,
+          "sha256": "a4d8512956b98391b85c97f841394e7beffb0920dd5fdad0cf746b4bb79e7f8b",
+          "format": "svg",
+          "element_count": 62,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/native/dark.svg",
+          "bytes": 9945,
+          "sha256": "c52943be8f2819b6dfd82082097d68a22fe4ac923a94bb4b80e47088113eb610",
+          "format": "svg",
+          "element_count": 60,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/native/currentcolor.svg",
+          "bytes": 7981,
+          "sha256": "a656aaf361e9c70d103b41686f44316ef142fdea7c767d3a4bad1de352a05091",
+          "format": "svg",
+          "element_count": 43,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/native/light-optical.svg",
+          "bytes": 7950,
+          "sha256": "4b2cbfb1553ec2391ede0be2faefc7213c814c3742313ed45350ade52d4e7b4c",
+          "format": "svg",
+          "element_count": 51,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/native/dark-optical.svg",
+          "bytes": 7724,
+          "sha256": "6df06d1477a981422ffcc63a36ae745228cefda9d9a067f2623fa1b970bc829a",
+          "format": "svg",
+          "element_count": 49,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/svg/light.svg",
+          "bytes": 36625,
+          "sha256": "45e0533e28281b9977204ac2310b0ef6627336afa6e2731640ea13d7a092fbae",
+          "format": "svg",
+          "element_count": 61,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/svg/dark.svg",
+          "bytes": 36399,
+          "sha256": "08416e1a42f32cf6e188ba18d66f43eb267e181f866e068c6989b4fc39cdfcfe",
+          "format": "svg",
+          "element_count": 59,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/light-1024.png",
+          "bytes": 68681,
+          "sha256": "5aff9b9982b4c1f20e29a8f4c683bdfa3bc597df466868521af52d977ceefdb0",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/light-512.png",
+          "bytes": 29610,
+          "sha256": "f6fd2d2dbdeaf27b42894a24c0b307b426bf35a3517e3608fed0b68c22ee8cc4",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/light-256.png",
+          "bytes": 12389,
+          "sha256": "305203afeb64fba2616cf42f57ec1698770324f3a2914ea910477a8621e100fe",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/light-128.png",
+          "bytes": 4779,
+          "sha256": "e30976b4d2d4e7a0a4eab8a15e30e9d7ac4c22c426971be14ea042ec4899c65c",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            57
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/dark-1024.png",
+          "bytes": 67348,
+          "sha256": "18640d6eec54901c46f4daa5ae95bc7294dd9c669846427670137aa840f3a149",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/dark-512.png",
+          "bytes": 28872,
+          "sha256": "10fccc224336d5ce936ec9e4fd23172105f35d87ee5945b47581bfe0fba85c26",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/dark-256.png",
+          "bytes": 12203,
+          "sha256": "d9adc06a6dc4d3af5357fbcfe7b604aadfa212f4a3e16c9e6f52445ca1465ada",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/dark-128.png",
+          "bytes": 4898,
+          "sha256": "790a1db3a93a6f5aecf42bf409624535d588db8e145c3d2387a361897bb7e2c9",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            57
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/maya/png/currentcolor-512.png",
+          "bytes": 16776,
+          "sha256": "c8e629790a64e984b1b4b2d1ee8d18b9549db105b1dfaa6c2d961fff646c5cb9",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "family": "3dsmax",
+      "checks": [
+        {
+          "path": "assets/families/3dsmax/native/light.svg",
+          "bytes": 9987,
+          "sha256": "a01b74db98c99c13d801665e8336897cdc5432e23eced2e31a3e57eae6e6e6fa",
+          "format": "svg",
+          "element_count": 59,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/native/dark.svg",
+          "bytes": 9761,
+          "sha256": "288a284e5b4203d1886af78cb790c00dc70cd055a5f9c156fb00413ea2d958c3",
+          "format": "svg",
+          "element_count": 57,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/native/currentcolor.svg",
+          "bytes": 7742,
+          "sha256": "e94224c62b5109cfeffc74162a51d61641d23a87c79d87a72d5a6c4ec04f662d",
+          "format": "svg",
+          "element_count": 40,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/native/light-optical.svg",
+          "bytes": 7953,
+          "sha256": "80edf0e8fb09cc454e54670ceff6c0c7d724be0b9eb8c110dc37f6ab23893cfb",
+          "format": "svg",
+          "element_count": 51,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/native/dark-optical.svg",
+          "bytes": 7727,
+          "sha256": "aac2ad62b7f4bbab284035bef87cdf56cc543427be22b1e17cf1802a50a74ff3",
+          "format": "svg",
+          "element_count": 49,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/svg/light.svg",
+          "bytes": 37592,
+          "sha256": "ba88e73f6803ffc4f908c35d5c4a8313b26f2744afffab21b82eb34ea839b7e0",
+          "format": "svg",
+          "element_count": 58,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/svg/dark.svg",
+          "bytes": 37366,
+          "sha256": "b9b0d1431f268911a89930de479ad33b7c08ce4626ec40329d12be0b02cd70b8",
+          "format": "svg",
+          "element_count": 56,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/light-1024.png",
+          "bytes": 68464,
+          "sha256": "2d1c19ae58a3bd9c7da4a31ca7509544c40e2af21d152becd4c5c9457b41a974",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/light-512.png",
+          "bytes": 29703,
+          "sha256": "9a8bb74e3a6eab98d835e307f20ee8e816820defa945606dbf4966d39c2ec511",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/light-256.png",
+          "bytes": 12363,
+          "sha256": "a4f6c711759b68b654855e1b1648c1e659762720e683ccdb3686a9697b3940ef",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/light-128.png",
+          "bytes": 4849,
+          "sha256": "e0897142c43aa259bb3891e41a3ee8024c1f8d7c727057beb633b099a53071fb",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/dark-1024.png",
+          "bytes": 66608,
+          "sha256": "6546abe7721b0a2e1c9157e5612811f0fc0b2bc46f3418d4ad17d0f29a17a5af",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/dark-512.png",
+          "bytes": 28611,
+          "sha256": "53f8d6034f5aa2d45d576c5232d768eabf1675da44f9ef64ce43956ab4d120fd",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/dark-256.png",
+          "bytes": 12101,
+          "sha256": "15bace7a0da3da6f176343141485806627445b3f281a0537505faef2f6f6af3f",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/dark-128.png",
+          "bytes": 4941,
+          "sha256": "319ab59353430744975eecd382f4ae1bae7dbb3e702c849c70ef5294c62e4a01",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/3dsmax/png/currentcolor-512.png",
+          "bytes": 16613,
+          "sha256": "745305d4f5c5d0efe135816fdc1715228576b23bab6ec059b880534e7a095295",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "family": "blender",
+      "checks": [
+        {
+          "path": "assets/families/blender/native/light.svg",
+          "bytes": 9602,
+          "sha256": "d5a2508f78858f2871a3278acad3c3f775c4f40ab0b4d2c83965ef268ab23211",
+          "format": "svg",
+          "element_count": 58,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/native/dark.svg",
+          "bytes": 9376,
+          "sha256": "78535d73526d5f56cb04796f593b6ce8dc4af9dda17abadde8c59a48991d86da",
+          "format": "svg",
+          "element_count": 56,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/native/currentcolor.svg",
+          "bytes": 7352,
+          "sha256": "fe1218f14dd0f763e486c74328d27f53791046739626ee9c0ab0621002a89d05",
+          "format": "svg",
+          "element_count": 39,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/native/light-optical.svg",
+          "bytes": 7953,
+          "sha256": "0262ecacfec655bc380d6bc901807691a339cf49fb364677add1a74203431b47",
+          "format": "svg",
+          "element_count": 51,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/native/dark-optical.svg",
+          "bytes": 7727,
+          "sha256": "403fb2e7ae5896c58474d1e8ee695299c778c3bae4187ef6c5237a48b1b3abe2",
+          "format": "svg",
+          "element_count": 49,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/svg/light.svg",
+          "bytes": 33594,
+          "sha256": "38c3878a6baa6d338bacce81099ec47f95a85b151e309b2b650063c067fb2588",
+          "format": "svg",
+          "element_count": 57,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/svg/dark.svg",
+          "bytes": 33368,
+          "sha256": "526bddbbc04ed7b7f407b39f8c59c557131b5494410a5ef1f0fbb7d56888f715",
+          "format": "svg",
+          "element_count": 55,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/light-1024.png",
+          "bytes": 67182,
+          "sha256": "1b54e7e237cd8f1777107e34eaf4c60b09aeb89fc9d0dfd25c343774e5a2b724",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/light-512.png",
+          "bytes": 28946,
+          "sha256": "842a74fe06393a7ac90bc7d2e55b72cf2e1929525b610c3e55c3defbe3e690e0",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/light-256.png",
+          "bytes": 12184,
+          "sha256": "4e694bf8eb9309209d1a9d4c32fedb32ba24e8ab6c8f3a403494032875fe6cc1",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/light-128.png",
+          "bytes": 4868,
+          "sha256": "be7d768ce86a43968fc5f84e583af2dcd3c80617354b1792545b61d74582dd32",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/dark-1024.png",
+          "bytes": 66675,
+          "sha256": "f18c55695d93cca1c7aafec8d45a9cc6ae66cede91f01356787008f65caf1559",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/dark-512.png",
+          "bytes": 28452,
+          "sha256": "be0fba1e60316d0a7aa58bf08a181c4fd092fb64229b321d5d6269f2c3e15638",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/dark-256.png",
+          "bytes": 12075,
+          "sha256": "fd62dd7fe497bce3a81d6011e22d09bf3b9f547a21adfd48055a243f96a04b29",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/dark-128.png",
+          "bytes": 4950,
+          "sha256": "b7f79c2e2e8bd77cebfabfdccfd6b8edcc3d546c876a9755228e48022f358725",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/blender/png/currentcolor-512.png",
+          "bytes": 16346,
+          "sha256": "9aebc835b2f255aa2150cb8af5c7ee0f807474473c0384ab54b42a79017d7456",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "family": "houdini",
+      "checks": [
+        {
+          "path": "assets/families/houdini/native/light.svg",
+          "bytes": 10179,
+          "sha256": "2ef77bfbde24c8efa10b8b827771c96eef0c794d0831497c9f5c2becc4930241",
+          "format": "svg",
+          "element_count": 62,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/native/dark.svg",
+          "bytes": 9953,
+          "sha256": "a9b915423db1b28eaa36005241d6772cb58e33833f04bbd6d2f4cc45afd5f5fb",
+          "format": "svg",
+          "element_count": 60,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/native/currentcolor.svg",
+          "bytes": 7949,
+          "sha256": "6976f598e484099f8f59dd6cb6846f6ca0c31fea08e6e36df2553ece5d45def2",
+          "format": "svg",
+          "element_count": 43,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/native/light-optical.svg",
+          "bytes": 7953,
+          "sha256": "8b42653dd9c81b09286f8c98425f1568e1d29b77fcd5e2017d9fc924cd7ed170",
+          "format": "svg",
+          "element_count": 51,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/native/dark-optical.svg",
+          "bytes": 7727,
+          "sha256": "3027930fb83adb29e41a8355fe528535cc23ba8729d1a1a56c267189a04ea4dc",
+          "format": "svg",
+          "element_count": 49,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/svg/light.svg",
+          "bytes": 36399,
+          "sha256": "5095a03b2bfdee749ea18ec01b7a7295ed0b5e53e734f25ca0b2afcf66835acf",
+          "format": "svg",
+          "element_count": 61,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/svg/dark.svg",
+          "bytes": 36173,
+          "sha256": "abdd639d0945c6fa128e47cc23639245bcdc9121a81e0f1b9b98e62f958bf8c7",
+          "format": "svg",
+          "element_count": 59,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/light-1024.png",
+          "bytes": 66706,
+          "sha256": "7fe62134c8c309142ac7307d3456f3f4de3b054f26ecb029ea0a73e2a948d9dd",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/light-512.png",
+          "bytes": 28919,
+          "sha256": "2c918bb34b18702cd05272c3a7daa582820b6ddb6a7a36c8eb3d50e16112a04a",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/light-256.png",
+          "bytes": 12199,
+          "sha256": "1e3bddccd056260800cfff0e9ce65a97feefbcc4345910dcc6baca8e0f6be0d5",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/light-128.png",
+          "bytes": 4880,
+          "sha256": "a78e0c68cf7f9465caf606eb99eab8a63f6052db981260748ec2ce2b6035c617",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/dark-1024.png",
+          "bytes": 65353,
+          "sha256": "31eee6dd2dc9ce0534ef76301b4bd40cae0fd91a2645c8665eff5e370a6fb074",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/dark-512.png",
+          "bytes": 28101,
+          "sha256": "99ba9eb7ecc79d82f3cb2b6fc3f08da0aaa4c59b8319d961f450e611fc37631c",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/dark-256.png",
+          "bytes": 11948,
+          "sha256": "31c4fcb5cecd9f1ebd2c606fbfb45de51c1e64679f9881d2033cb2510a8a0a43",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/dark-128.png",
+          "bytes": 4943,
+          "sha256": "9886d55301248fb168507c3159c0f15ce6ac8125e3b7e039efa46647ab793300",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/houdini/png/currentcolor-512.png",
+          "bytes": 16234,
+          "sha256": "f8d74116037ccd9a2cc9438c6ede58efdb9148bf971c53d96a851d201f8a06b3",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "family": "zbrush",
+      "checks": [
+        {
+          "path": "assets/families/zbrush/native/light.svg",
+          "bytes": 9082,
+          "sha256": "13b1bb8458f5e4c2e5d9d6adcb4f4d6c4f682f3c66f146dbbdb538316a2eacbb",
+          "format": "svg",
+          "element_count": 56,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/native/dark.svg",
+          "bytes": 8856,
+          "sha256": "0ff8a6afba06a1ab066c932f99a6858d64c88b8d35fe61562f79a8aac290e76f",
+          "format": "svg",
+          "element_count": 54,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/native/currentcolor.svg",
+          "bytes": 6822,
+          "sha256": "f0d6c8363c564ff3747b7a7ca6fcdbd3085c71e0c47780186873f89a38f76281",
+          "format": "svg",
+          "element_count": 37,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/native/light-optical.svg",
+          "bytes": 7952,
+          "sha256": "4b4d9ad44c9f70f6d05aa10a82ff822ffc5283e507c5e7c231caa3dca17b2932",
+          "format": "svg",
+          "element_count": 51,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/native/dark-optical.svg",
+          "bytes": 7726,
+          "sha256": "0f06cc204fc5e3ae7d8b0e82bf6d597c7eda2c57f407bf3fe774dc90c5d1906f",
+          "format": "svg",
+          "element_count": 49,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/svg/light.svg",
+          "bytes": 34298,
+          "sha256": "3e6fb0ebd9fbcaacb4a53352893ce4e1f5610a766b8951dc40f343fee2ef65ae",
+          "format": "svg",
+          "element_count": 55,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/svg/dark.svg",
+          "bytes": 34072,
+          "sha256": "34b349f71cc90985b7c04a90b755e95fd72fb8ca80c4178c384ea7ae6b06b703",
+          "format": "svg",
+          "element_count": 53,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/light-1024.png",
+          "bytes": 68046,
+          "sha256": "3ec1ad544ebe5699b22d99c5ade91496f673e44ce2bdfcaeab7d2778a2c0ebe4",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/light-512.png",
+          "bytes": 29312,
+          "sha256": "7337c34c13af8af49e747bd06c5725c639b9a5b97ac115a5ef6366e9c7d561f9",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/light-256.png",
+          "bytes": 12336,
+          "sha256": "5eafa6a6eac8d3403f5feb3f81ed81e3935235f5f362fb272ca9adc75bdb76ae",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/light-128.png",
+          "bytes": 4835,
+          "sha256": "4f794eb4003d9342ab7322d3ea70d87cefeed396dc9b2fdc35f7f911be59c4e5",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/dark-1024.png",
+          "bytes": 66669,
+          "sha256": "9420d3d15db1691ea176a6f88fcfd0ce4413a1ec8807bc7e486596b893f3d661",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/dark-512.png",
+          "bytes": 28468,
+          "sha256": "f1ec20e8f294891dfeb559638b5e5449e65eacaeb0643d9298d08ee01233573d",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/dark-256.png",
+          "bytes": 12105,
+          "sha256": "3ad7efe70241c287a34be5ca50dedf39a3d730cf2c1e2a6920cce4ee1782bb44",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/dark-128.png",
+          "bytes": 4932,
+          "sha256": "5d93c93be401929acfaa15d3da7aa74f6d688419685b005e22c30284fa5586be",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            56
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/zbrush/png/currentcolor-512.png",
+          "bytes": 16455,
+          "sha256": "c4ca34cf2e718d0d0330a6c59d5f4b2f0d5dd91f1309f9f79cd70b76586a3815",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "family": "photoshop",
+      "checks": [
+        {
+          "path": "assets/families/photoshop/native/light.svg",
+          "bytes": 9890,
+          "sha256": "576bcd0efa92e43bd7711f2a4ff351133b0a47fac3825df90780be69fb1b1d2e",
+          "format": "svg",
+          "element_count": 60,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/native/dark.svg",
+          "bytes": 9664,
+          "sha256": "5b13e024f0aedb736db08ee72f8d3186b909c7b9ebc5a02af742e1b7ee4734c4",
+          "format": "svg",
+          "element_count": 58,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/native/currentcolor.svg",
+          "bytes": 7650,
+          "sha256": "93862a384a86ef1bdf5afd7641ed917674ebe4a7328495c2044fb4800ab3f088",
+          "format": "svg",
+          "element_count": 41,
+          "text_count": 3,
+          "mode": "native",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/native/light-optical.svg",
+          "bytes": 7955,
+          "sha256": "ce92dcacb3a78b2bd500720d50454690280f68b6c11382433ce67c8ffa9a9677",
+          "format": "svg",
+          "element_count": 51,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/native/dark-optical.svg",
+          "bytes": 7729,
+          "sha256": "5580cded8859968be01337de0843d74ef1a6be97f140545e877c3e69f3107264",
+          "format": "svg",
+          "element_count": 49,
+          "text_count": 2,
+          "mode": "native_optical",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/svg/light.svg",
+          "bytes": 38229,
+          "sha256": "c50421a140e5c1580f09bd798af38e8b4c3e34dff3571219bc602d613bf34bed",
+          "format": "svg",
+          "element_count": 59,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/svg/dark.svg",
+          "bytes": 38003,
+          "sha256": "31b57d16ebd301dc8645db73bc9bf5cb0c12f8bda8fcde057c7f8cb349c43a57",
+          "format": "svg",
+          "element_count": 57,
+          "text_count": 0,
+          "mode": "release",
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/light-1024.png",
+          "bytes": 67900,
+          "sha256": "c80a9fbb08b95c1148a426949c84d6ad359d8a4ad02b21c7894b73fdfeb461b7",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/light-512.png",
+          "bytes": 29534,
+          "sha256": "eb76c07089034830b110548859b0f5d40fcf0f0b7885ebcd431fec92c4f20f19",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/light-256.png",
+          "bytes": 12361,
+          "sha256": "502f6cf6e409ec38f8df0b99ec225ff32b947c1975d936ed744bf33545403377",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/light-128.png",
+          "bytes": 4952,
+          "sha256": "0ae123bbb21e7d4bd4d672247391e95fce88f2201be16a11a009ee6694d5128d",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            57
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/dark-1024.png",
+          "bytes": 66404,
+          "sha256": "34146fdf9a1c7417bfb209be4ad250535c775cfcd9768c26291f3b88954f0607",
+          "format": "png",
+          "size": [
+            1024,
+            478
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            141,
+            78,
+            891,
+            468
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/dark-512.png",
+          "bytes": 28593,
+          "sha256": "186782671ba6d44906be0ad4025f28a5af6d1c43adee6aee9b041f98728f8ca0",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/dark-256.png",
+          "bytes": 12170,
+          "sha256": "366784401a6766e361d9da8e7d2f3b8dd99739d6b8cea74e007d32e0547ac3cc",
+          "format": "png",
+          "size": [
+            256,
+            119
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            35,
+            19,
+            223,
+            117
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/dark-128.png",
+          "bytes": 5009,
+          "sha256": "ad1b9212bcd6586a42081207582bd626dda78067e8d53520f60c1ac7558745df",
+          "format": "png",
+          "size": [
+            128,
+            60
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            17,
+            9,
+            112,
+            57
+          ],
+          "failures": [],
+          "pass": true
+        },
+        {
+          "path": "assets/families/photoshop/png/currentcolor-512.png",
+          "bytes": 16616,
+          "sha256": "a1f660dd6e347f32aa5e7dc52b06c7ed9433e63aae7cd5fb6385ca4d7b5f3a29",
+          "format": "png",
+          "size": [
+            512,
+            239
+          ],
+          "mode": "RGBA",
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "paint_bbox": [
+            70,
+            39,
+            446,
+            234
+          ],
+          "failures": [],
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "missing": [],
+  "composites": [
+    {
+      "path": "evidence/family-first-six-light-qa.png",
+      "bytes": 106222,
+      "sha256": "cdc9d2903cbfaab10043e8f3e354bee306740bbb17cffb39e0a7cce271ef065e"
+    },
+    {
+      "path": "evidence/family-first-six-dark-qa.png",
+      "bytes": 108626,
+      "sha256": "b95f72aac0c92bc475423da4e1eabd1908a6da6cc698b70c474e22792e34e811"
+    }
+  ]
+}

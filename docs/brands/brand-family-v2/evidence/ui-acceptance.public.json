@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-01T12:20:23.651055+00:00",
+  "reviewer": "Independent native-route reviewer",
+  "status": "verified_partial_canvas",
+  "brand_design_acceptance": "awaiting_user_review",
+  "native_software_reopened_observed": true,
+  "full_page_visible": false,
+  "provider": "dcc-cua",
+  "runtime_version": "1.9.1",
+  "ui_control_skill_version": "0.5.0",
+  "core_version": "0.20.36",
+  "cli_version": "0.20.38",
+  "observed": [
+    "Actual corrected native file title and Inkscape canvas",
+    "Corrected C1/C2 outlines, D letter and detached pixels",
+    "Protocol curve/nodes and MCP text glyphs",
+    "Current layer status prefix: 05 Editable MCP",
+    "No font-substitution or missing-glyph warning visible"
+  ],
+  "viewport": {
+    "zoom_percent": 162,
+    "right_hexagon_clipped": true,
+    "full_canvas_export_check": "cc-visual-review.json",
+    "screen_capture_downscaled_by_official_tool": true
+  },
+  "layer_and_text_evidence": {
+    "gui_status_layer_prefix_visible": true,
+    "gui_layer_panel_not_enumerated": true,
+    "uia_semantic_node_count": 1,
+    "saved_native_svg_read_only_layer_records": [
+      {
+        "id": "layer1",
+        "label": "Layer 1"
+      },
+      {
+        "id": "protocol-frame",
+        "label": "01 Protocol hexagon"
+      },
+      {
+        "id": "letterforms",
+        "label": "02 DCC letterforms"
+      },
+      {
+        "id": "pixel-origin",
+        "label": "03 Pixel origin"
+      },
+      {
+        "id": "protocol-flow",
+        "label": "04 Protocol curve and nodes"
+      },
+      {
+        "id": "mcp-label",
+        "label": "05 Editable MCP label"
+      }
+    ],
+    "saved_native_svg_read_only_text_records": [
+      {
+        "id": "mcp-text",
+        "text": "MCP",
+        "style": "fill:#0B1F45;font-weight:800;font-family:Montserrat;font-size:67"
+      }
+    ]
+  },
+  "page_fit": {
+    "requested_menu_path": [
+      "View",
+      "Zoom",
+      "Page"
+    ],
+    "attempts": 2,
+    "fresh_exact_target_snapshot_between_attempts": true,
+    "success": false,
+    "error": "session_refresh_required",
+    "no_menu_success_claimed": true,
+    "raw_input_enabled": false,
+    "resume_or_policy_override_used": false,
+    "limitation": "Runtime rejected the semantic action even after a successful fresh exact-target snapshot. Full-page GUI acceptance remains incomplete; full native exports were independently reviewed."
+  },
+  "cleanup": {
+    "session_stop_success": true,
+    "active": false,
+    "cleanup_pending": false,
+    "helper_process_stopped": true,
+    "helper_identity_checked": true,
+    "native_gui_left_running": true,
+    "no_other_process_stopped": true
+  },
+  "publication_scope": "A redacted metadata projection of partial corrected-core GUI observation. The private GUI screenshot and routing receipts are not redistributed. This is not full-page GUI acceptance or six-family GUI acceptance.",
+  "original_record_sha256": "fe4c00691f5da6298ba2099c201c0158f881b3308158af555f2d756031af441f",
+  "native_document": {
+    "bytes": 7280,
+    "sha256": "40bfe7ee60c2b68b73c25740310697a1c996e595f7b4d22725326b054e339330"
+  }
+}

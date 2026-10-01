@@ -227,7 +227,10 @@ def _downloads(item, root, prefix):
             right_links.append('<a href="#rights-%s">%s · %s</a>' % (
                 site.esc(right['id']), site.esc(right['holder']), site.esc(right['license'])))
         label = site.esc(variant['label'])
-        size = '%s × %s' % (variant.get('width', '—'), variant.get('height', '—'))
+        if variant['format'] == 'svg' and variant.get('viewBox'):
+            size = 'viewBox ' + ' '.join('%g' % value for value in variant['viewBox'])
+        else:
+            size = '%s × %s px' % (variant.get('width', '—'), variant.get('height', '—'))
         download = ' download' if not urlsplit(variant['url']).scheme else ''
         note = '<p class="brand-download-note">%s</p>' % site.esc(variant['note']) if variant.get('note') else ''
         rows.append('''<li class="brand-download"><div class="brand-download-heading"><h3>%s</h3><a href="%s"%s>下载 <span aria-hidden="true">↓</span></a></div>

@@ -10,8 +10,8 @@ byte-identical. Do not maintain a duplicate webpage asset map.
 `scripts/brand_manifest.py` derives the renderer's schema-1 catalog at build
 time. It cross-checks actual family/file counts, the two-theme output matrix,
 per-output successful MCP responses and hashes, recorded versions, visual
-review and precise acceptance limits. This first mapping supports only the
-reviewed core batch. Later families require their own completed handoff and
+review and precise acceptance limits. This mapping supports the reviewed core
+and six software families. Later families require their own completed handoff and
 an explicit reviewed mapping; extra files in the producer directory are never
 selected by crawling. Missing or disabled catalogs publish zero brand files.
 Pending placeholders are local development content only.
@@ -70,12 +70,19 @@ background switching, detail/back, keyboard access and downloaded file hashes.
 Record browser ownership accurately. Only then enable the catalog, use the
 normal repository PR/Pages process, and verify the actual public URL again.
 
-The initial snapshot is one partially delivered Core family out of 37 planned
-families, with eight actual files. Core's remaining variants and the other
-36 families are not completed. Show progress and plans as text without dead
+The core-first release has eight actual files. The incremental snapshot adds
+six software families with 16 files each: seven partially delivered families
+out of 37 planned, with 104 actual files. Core's remaining variants, each new
+family's currentColor outlined SVG and the other 30 families are not completed.
+CurrentColor native SVGs retain live text; their raster exports are fixed
+black PNGs and cannot inherit CSS color. Normal release SVGs are outlined.
+New family QA and source/rights records must match actual file bytes, motifs,
+output receipts and optical 128 × 60 PNGs. Old drawing briefs are plans, not
+final geometry evidence. Show progress and plans as text without dead
 downloads. Production source and public draft commits share the `src` subtree;
 their complete repository trees differ by a test-fixture change. Do not claim
-the public review commit was the production runtime, GUI launch was visual
-acceptance, or the user has already approved the design. Original reference
+the public review commit was the production runtime, partial core GUI
+observation was complete canvas or six-family GUI acceptance, or the user has
+already approved the design. Original reference
 imagery whose redistribution terms are not established stays outside this
 publication batch.

@@ -1,2 +1,3 @@
 # Keep producer artwork, evidence and pinned manifest bytes identical on every OS.
-docs/brands/brand-family-v2/** -text
+# Original producer records include CRLF; it is intentional byte provenance.
+docs/brands/brand-family-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -1,0 +1,37 @@
+{
+  "family": "houdini",
+  "display_name": "Houdini",
+  "reference": {
+    "repository": "dcc-mcp/dcc-mcp-houdini",
+    "source_commit": "b9ed9dc14be8014ae69dd834d375d5a29006a684",
+    "source_path": "docs/assets/dcc-mcp-houdini.svg",
+    "source_url": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-houdini/b9ed9dc14be8014ae69dd834d375d5a29006a684/docs/assets/dcc-mcp-houdini.svg",
+    "reference_path": "family-inventory/references/pinned-adapters/dcc-mcp-houdini/docs/assets/dcc-mcp-houdini.svg",
+    "sha256": "99b7e5a6639d355ad1ec1e5a74f2a341e5371642d896423a8d2de8d5aae14be8",
+    "bytes": 1367443,
+    "byte_hash_verified": true
+  },
+  "palette": {
+    "reference_hue": "#F85800",
+    "source_method": "bitmap_footer_quantized",
+    "light": "#F85800",
+    "dark": "#FA8F54",
+    "currentcolor": "currentColor",
+    "vendor_official_palette_claimed": false,
+    "master_palette_changes": false
+  },
+  "motif_semantics": "procedural-node-network",
+  "rights": {
+    "vendor_mark_permission_inferred_from_repo_mit": false,
+    "license_scope": "New independently authored geometry only; vendor references remain separate.",
+    "default_original_geometry_license": "MIT only for original DCC-MCP case geometry if the parent selects that project license.",
+    "third_party_mark_in_final_plan": false,
+    "affiliation_claimed": false,
+    "policy_uncertainty_blocks_whole_family": false,
+    "trademark_notice_plan": "Name SideFX Houdini identifies the referenced software/workflow and remains with SideFX. DCC-MCP is an independent integration; no endorsement is implied."
+  },
+  "compatibility_phrase": "for use with SideFX Houdini software",
+  "artwork_author": "DCC-MCP contributors",
+  "third_party_glyphs_embedded": false,
+  "production_status": "Prepared plan only; actual execution tracked in the shared MCP ledger."
+}

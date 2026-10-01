@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_utc": "2026-10-01T12:06:27.691190+00:00",
-  "status": "partial_actual_core",
+  "generated_utc": "2026-10-01T12:38:00.978536+00:00",
+  "status": "partial_actual_core_and_first_six",
   "authoritative_asset_map": true,
   "path_base": "brand-family-v2 directory",
-  "scope": "Only corrected core light/dark wordmarks are actual in this snapshot; 37-family batches remain planned.",
+  "scope": "Corrected core light/dark wordmarks and 16 actual files for each of six software families are verified; remaining family batches and published currentColor family SVGs remain incomplete.",
   "family_count": 37,
-  "actual_family_count": 1,
-  "actual_asset_count": 8,
+  "actual_family_count": 7,
+  "actual_asset_count": 104,
   "families": [
     {
       "family_id": "maya",
@@ -28,8 +28,26 @@
         "trademark_notice_plan": "Name Autodesk Maya identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
       },
       "drawing_brief": "Triangulated mesh peaks with a low wireframe floor and one editable vertex handle.",
-      "production_status": "planned_not_executed",
-      "actual_asset_ids": []
+      "production_status": "partial_actual_verified",
+      "actual_asset_ids": [
+        "family-maya-light-build",
+        "family-maya-light-release",
+        "family-maya-light-png-1024",
+        "family-maya-light-png-512",
+        "family-maya-light-png-256",
+        "family-maya-light-optical-build",
+        "family-maya-light-png-128-optical",
+        "family-maya-dark-build",
+        "family-maya-dark-release",
+        "family-maya-dark-png-1024",
+        "family-maya-dark-png-512",
+        "family-maya-dark-png-256",
+        "family-maya-dark-optical-build",
+        "family-maya-dark-png-128-optical",
+        "family-maya-currentcolor-build",
+        "family-maya-currentcolor-png-512"
+      ],
+      "currentcolor_release_status": "pending_software_outlined_export"
     },
     {
       "family_id": "3dsmax",
@@ -50,8 +68,26 @@
         "trademark_notice_plan": "Name Autodesk 3ds Max identifies the referenced software/workflow and remains with Autodesk. DCC-MCP is an independent integration; no endorsement is implied."
       },
       "drawing_brief": "Three wireframe boxes on the source-like mesh floor, with one modeling edge highlighted.",
-      "production_status": "planned_not_executed",
-      "actual_asset_ids": []
+      "production_status": "partial_actual_verified",
+      "actual_asset_ids": [
+        "family-3dsmax-light-build",
+        "family-3dsmax-light-release",
+        "family-3dsmax-light-png-1024",
+        "family-3dsmax-light-png-512",
+        "family-3dsmax-light-png-256",
+        "family-3dsmax-light-optical-build",
+        "family-3dsmax-light-png-128-optical",
+        "family-3dsmax-dark-build",
+        "family-3dsmax-dark-release",
+        "family-3dsmax-dark-png-1024",
+        "family-3dsmax-dark-png-512",
+        "family-3dsmax-dark-png-256",
+        "family-3dsmax-dark-optical-build",
+        "family-3dsmax-dark-png-128-optical",
+        "family-3dsmax-currentcolor-build",
+        "family-3dsmax-currentcolor-png-512"
+      ],
+      "currentcolor_release_status": "pending_software_outlined_export"
     },
     {
       "family_id": "blender",
@@ -72,8 +108,26 @@
         "trademark_notice_plan": "Name Blender identifies the referenced software/workflow and remains with Blender Foundation. DCC-MCP is an independent integration; no endorsement is implied."
       },
       "drawing_brief": "One wireframe cube linked to two procedural nodes; retain the source geometry/cube semantics with a small orange edge accent.",
-      "production_status": "planned_not_executed",
-      "actual_asset_ids": []
+      "production_status": "partial_actual_verified",
+      "actual_asset_ids": [
+        "family-blender-light-build",
+        "family-blender-light-release",
+        "family-blender-light-png-1024",
+        "family-blender-light-png-512",
+        "family-blender-light-png-256",
+        "family-blender-light-optical-build",
+        "family-blender-light-png-128-optical",
+        "family-blender-dark-build",
+        "family-blender-dark-release",
+        "family-blender-dark-png-1024",
+        "family-blender-dark-png-512",
+        "family-blender-dark-png-256",
+        "family-blender-dark-optical-build",
+        "family-blender-dark-png-128-optical",
+        "family-blender-currentcolor-build",
+        "family-blender-currentcolor-png-512"
+      ],
+      "currentcolor_release_status": "pending_software_outlined_export"
     },
     {
       "family_id": "houdini",
@@ -94,8 +148,26 @@
         "trademark_notice_plan": "Name SideFX Houdini identifies the referenced software/workflow and remains with SideFX. DCC-MCP is an independent integration; no endorsement is implied."
       },
       "drawing_brief": "A three-stage procedural graph feeding a small deformed grid; use original routing, not a swirl silhouette.",
-      "production_status": "planned_not_executed",
-      "actual_asset_ids": []
+      "production_status": "partial_actual_verified",
+      "actual_asset_ids": [
+        "family-houdini-light-build",
+        "family-houdini-light-release",
+        "family-houdini-light-png-1024",
+        "family-houdini-light-png-512",
+        "family-houdini-light-png-256",
+        "family-houdini-light-optical-build",
+        "family-houdini-light-png-128-optical",
+        "family-houdini-dark-build",
+        "family-houdini-dark-release",
+        "family-houdini-dark-png-1024",
+        "family-houdini-dark-png-512",
+        "family-houdini-dark-png-256",
+        "family-houdini-dark-optical-build",
+        "family-houdini-dark-png-128-optical",
+        "family-houdini-currentcolor-build",
+        "family-houdini-currentcolor-png-512"
+      ],
+      "currentcolor_release_status": "pending_software_outlined_export"
     },
     {
       "family_id": "zbrush",
@@ -116,8 +188,26 @@
         "trademark_notice_plan": "Name Maxon ZBrush identifies the referenced software/workflow and remains with Maxon. DCC-MCP is an independent integration; no endorsement is implied."
       },
       "drawing_brief": "A faceted mesh patch and two original sculpt/contour strokes above the low wireframe floor.",
-      "production_status": "planned_not_executed",
-      "actual_asset_ids": []
+      "production_status": "partial_actual_verified",
+      "actual_asset_ids": [
+        "family-zbrush-light-build",
+        "family-zbrush-light-release",
+        "family-zbrush-light-png-1024",
+        "family-zbrush-light-png-512",
+        "family-zbrush-light-png-256",
+        "family-zbrush-light-optical-build",
+        "family-zbrush-light-png-128-optical",
+        "family-zbrush-dark-build",
+        "family-zbrush-dark-release",
+        "family-zbrush-dark-png-1024",
+        "family-zbrush-dark-png-512",
+        "family-zbrush-dark-png-256",
+        "family-zbrush-dark-optical-build",
+        "family-zbrush-dark-png-128-optical",
+        "family-zbrush-currentcolor-build",
+        "family-zbrush-currentcolor-png-512"
+      ],
+      "currentcolor_release_status": "pending_software_outlined_export"
     },
     {
       "family_id": "photoshop",
@@ -138,8 +228,26 @@
         "trademark_notice_plan": "Name Adobe Photoshop identifies the referenced software/workflow and remains with Adobe. DCC-MCP is an independent integration; no endorsement is implied."
       },
       "drawing_brief": "Three offset layer cards with a short retouch/brush stroke and one selection handle.",
-      "production_status": "planned_not_executed",
-      "actual_asset_ids": []
+      "production_status": "partial_actual_verified",
+      "actual_asset_ids": [
+        "family-photoshop-light-build",
+        "family-photoshop-light-release",
+        "family-photoshop-light-png-1024",
+        "family-photoshop-light-png-512",
+        "family-photoshop-light-png-256",
+        "family-photoshop-light-optical-build",
+        "family-photoshop-light-png-128-optical",
+        "family-photoshop-dark-build",
+        "family-photoshop-dark-release",
+        "family-photoshop-dark-png-1024",
+        "family-photoshop-dark-png-512",
+        "family-photoshop-dark-png-256",
+        "family-photoshop-dark-optical-build",
+        "family-photoshop-dark-png-128-optical",
+        "family-photoshop-currentcolor-build",
+        "family-photoshop-currentcolor-png-512"
+      ],
+      "currentcolor_release_status": "pending_software_outlined_export"
     },
     {
       "family_id": "mobu",
@@ -852,7 +960,7 @@
         "nuke",
         "openusd"
       ],
-      "status": "planned_with_core_partial"
+      "status": "partial_actual_core_plus_six"
     },
     {
       "batch": 2,
@@ -1139,6 +1247,3210 @@
         0,
         0
       ]
+    },
+    {
+      "path": "assets/families/maya/native/light.svg",
+      "bytes": 10171,
+      "sha256": "a4d8512956b98391b85c97f841394e7beffb0920dd5fdad0cf746b4bb79e7f8b",
+      "file_modified_utc": "2026-10-01T11:57:44.450921+00:00",
+      "asset_id": "family-maya-light-build",
+      "family": "maya",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/maya/svg/light.svg",
+      "bytes": 36625,
+      "sha256": "45e0533e28281b9977204ac2310b0ef6627336afa6e2731640ea13d7a092fbae",
+      "file_modified_utc": "2026-10-01T11:57:51.267845+00:00",
+      "asset_id": "family-maya-light-release",
+      "family": "maya",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/maya/png/light-1024.png",
+      "bytes": 68681,
+      "sha256": "5aff9b9982b4c1f20e29a8f4c683bdfa3bc597df466868521af52d977ceefdb0",
+      "file_modified_utc": "2026-10-01T11:57:55.349726+00:00",
+      "asset_id": "family-maya-light-png-1024",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/png/light-512.png",
+      "bytes": 29610,
+      "sha256": "f6fd2d2dbdeaf27b42894a24c0b307b426bf35a3517e3608fed0b68c22ee8cc4",
+      "file_modified_utc": "2026-10-01T11:58:02.819025+00:00",
+      "asset_id": "family-maya-light-png-512",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/png/light-256.png",
+      "bytes": 12389,
+      "sha256": "305203afeb64fba2616cf42f57ec1698770324f3a2914ea910477a8621e100fe",
+      "file_modified_utc": "2026-10-01T11:58:09.731192+00:00",
+      "asset_id": "family-maya-light-png-256",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/native/light-optical.svg",
+      "bytes": 7950,
+      "sha256": "4b2cbfb1553ec2391ede0be2faefc7213c814c3742313ed45350ade52d4e7b4c",
+      "file_modified_utc": "2026-10-01T11:58:18.723416+00:00",
+      "asset_id": "family-maya-light-optical-build",
+      "family": "maya",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/maya/png/light-128.png",
+      "bytes": 4779,
+      "sha256": "e30976b4d2d4e7a0a4eab8a15e30e9d7ac4c22c426971be14ea042ec4899c65c",
+      "file_modified_utc": "2026-10-01T11:58:23.630864+00:00",
+      "asset_id": "family-maya-light-png-128-optical",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-light-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/native/dark.svg",
+      "bytes": 9945,
+      "sha256": "c52943be8f2819b6dfd82082097d68a22fe4ac923a94bb4b80e47088113eb610",
+      "file_modified_utc": "2026-10-01T11:58:31.057616+00:00",
+      "asset_id": "family-maya-dark-build",
+      "family": "maya",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/maya/svg/dark.svg",
+      "bytes": 36399,
+      "sha256": "08416e1a42f32cf6e188ba18d66f43eb267e181f866e068c6989b4fc39cdfcfe",
+      "file_modified_utc": "2026-10-01T11:58:38.904228+00:00",
+      "asset_id": "family-maya-dark-release",
+      "family": "maya",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/maya/png/dark-1024.png",
+      "bytes": 67348,
+      "sha256": "18640d6eec54901c46f4daa5ae95bc7294dd9c669846427670137aa840f3a149",
+      "file_modified_utc": "2026-10-01T11:58:42.792615+00:00",
+      "asset_id": "family-maya-dark-png-1024",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/png/dark-512.png",
+      "bytes": 28872,
+      "sha256": "10fccc224336d5ce936ec9e4fd23172105f35d87ee5945b47581bfe0fba85c26",
+      "file_modified_utc": "2026-10-01T11:58:49.166071+00:00",
+      "asset_id": "family-maya-dark-png-512",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/png/dark-256.png",
+      "bytes": 12203,
+      "sha256": "d9adc06a6dc4d3af5357fbcfe7b604aadfa212f4a3e16c9e6f52445ca1465ada",
+      "file_modified_utc": "2026-10-01T11:58:55.708710+00:00",
+      "asset_id": "family-maya-dark-png-256",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/native/dark-optical.svg",
+      "bytes": 7724,
+      "sha256": "6df06d1477a981422ffcc63a36ae745228cefda9d9a067f2623fa1b970bc829a",
+      "file_modified_utc": "2026-10-01T11:59:02.978908+00:00",
+      "asset_id": "family-maya-dark-optical-build",
+      "family": "maya",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/maya/png/dark-128.png",
+      "bytes": 4898,
+      "sha256": "790a1db3a93a6f5aecf42bf409624535d588db8e145c3d2387a361897bb7e2c9",
+      "file_modified_utc": "2026-10-01T11:59:10.489739+00:00",
+      "asset_id": "family-maya-dark-png-128-optical",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-dark-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/maya/native/currentcolor.svg",
+      "bytes": 7981,
+      "sha256": "a656aaf361e9c70d103b41686f44316ef142fdea7c767d3a4bad1de352a05091",
+      "file_modified_utc": "2026-10-01T11:59:23.104426+00:00",
+      "asset_id": "family-maya-currentcolor-build",
+      "family": "maya",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-currentcolor-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/maya/png/currentcolor-512.png",
+      "bytes": 16776,
+      "sha256": "c8e629790a64e984b1b4b2d1ee8d18b9549db105b1dfaa6c2d961fff646c5cb9",
+      "file_modified_utc": "2026-10-01T11:59:31.997922+00:00",
+      "asset_id": "family-maya-currentcolor-png-512",
+      "family": "maya",
+      "kind": "png",
+      "role": "release",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-maya-currentcolor-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": "black"
+    },
+    {
+      "path": "assets/families/3dsmax/native/light.svg",
+      "bytes": 9987,
+      "sha256": "a01b74db98c99c13d801665e8336897cdc5432e23eced2e31a3e57eae6e6e6fa",
+      "file_modified_utc": "2026-10-01T11:59:45.506751+00:00",
+      "asset_id": "family-3dsmax-light-build",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/3dsmax/svg/light.svg",
+      "bytes": 37592,
+      "sha256": "ba88e73f6803ffc4f908c35d5c4a8313b26f2744afffab21b82eb34ea839b7e0",
+      "file_modified_utc": "2026-10-01T12:00:04.684787+00:00",
+      "asset_id": "family-3dsmax-light-release",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/3dsmax/png/light-1024.png",
+      "bytes": 68464,
+      "sha256": "2d1c19ae58a3bd9c7da4a31ca7509544c40e2af21d152becd4c5c9457b41a974",
+      "file_modified_utc": "2026-10-01T12:00:22.433146+00:00",
+      "asset_id": "family-3dsmax-light-png-1024",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/png/light-512.png",
+      "bytes": 29703,
+      "sha256": "9a8bb74e3a6eab98d835e307f20ee8e816820defa945606dbf4966d39c2ec511",
+      "file_modified_utc": "2026-10-01T12:00:43.170213+00:00",
+      "asset_id": "family-3dsmax-light-png-512",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/png/light-256.png",
+      "bytes": 12363,
+      "sha256": "a4f6c711759b68b654855e1b1648c1e659762720e683ccdb3686a9697b3940ef",
+      "file_modified_utc": "2026-10-01T12:00:59.110088+00:00",
+      "asset_id": "family-3dsmax-light-png-256",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/native/light-optical.svg",
+      "bytes": 7953,
+      "sha256": "80edf0e8fb09cc454e54670ceff6c0c7d724be0b9eb8c110dc37f6ab23893cfb",
+      "file_modified_utc": "2026-10-01T12:01:23.043676+00:00",
+      "asset_id": "family-3dsmax-light-optical-build",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/3dsmax/png/light-128.png",
+      "bytes": 4849,
+      "sha256": "e0897142c43aa259bb3891e41a3ee8024c1f8d7c727057beb633b099a53071fb",
+      "file_modified_utc": "2026-10-01T12:01:35.474333+00:00",
+      "asset_id": "family-3dsmax-light-png-128-optical",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-light-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/native/dark.svg",
+      "bytes": 9761,
+      "sha256": "288a284e5b4203d1886af78cb790c00dc70cd055a5f9c156fb00413ea2d958c3",
+      "file_modified_utc": "2026-10-01T12:01:42.236457+00:00",
+      "asset_id": "family-3dsmax-dark-build",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/3dsmax/svg/dark.svg",
+      "bytes": 37366,
+      "sha256": "b9b0d1431f268911a89930de479ad33b7c08ce4626ec40329d12be0b02cd70b8",
+      "file_modified_utc": "2026-10-01T12:01:45.036891+00:00",
+      "asset_id": "family-3dsmax-dark-release",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/3dsmax/png/dark-1024.png",
+      "bytes": 66608,
+      "sha256": "6546abe7721b0a2e1c9157e5612811f0fc0b2bc46f3418d4ad17d0f29a17a5af",
+      "file_modified_utc": "2026-10-01T12:01:50.201953+00:00",
+      "asset_id": "family-3dsmax-dark-png-1024",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/png/dark-512.png",
+      "bytes": 28611,
+      "sha256": "53f8d6034f5aa2d45d576c5232d768eabf1675da44f9ef64ce43956ab4d120fd",
+      "file_modified_utc": "2026-10-01T12:01:52.764575+00:00",
+      "asset_id": "family-3dsmax-dark-png-512",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/png/dark-256.png",
+      "bytes": 12101,
+      "sha256": "15bace7a0da3da6f176343141485806627445b3f281a0537505faef2f6f6af3f",
+      "file_modified_utc": "2026-10-01T12:01:59.428913+00:00",
+      "asset_id": "family-3dsmax-dark-png-256",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/native/dark-optical.svg",
+      "bytes": 7727,
+      "sha256": "aac2ad62b7f4bbab284035bef87cdf56cc543427be22b1e17cf1802a50a74ff3",
+      "file_modified_utc": "2026-10-01T12:02:04.691110+00:00",
+      "asset_id": "family-3dsmax-dark-optical-build",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/3dsmax/png/dark-128.png",
+      "bytes": 4941,
+      "sha256": "319ab59353430744975eecd382f4ae1bae7dbb3e702c849c70ef5294c62e4a01",
+      "file_modified_utc": "2026-10-01T12:02:11.810188+00:00",
+      "asset_id": "family-3dsmax-dark-png-128-optical",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-dark-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/3dsmax/native/currentcolor.svg",
+      "bytes": 7742,
+      "sha256": "e94224c62b5109cfeffc74162a51d61641d23a87c79d87a72d5a6c4ec04f662d",
+      "file_modified_utc": "2026-10-01T12:02:18.180783+00:00",
+      "asset_id": "family-3dsmax-currentcolor-build",
+      "family": "3dsmax",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-currentcolor-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/3dsmax/png/currentcolor-512.png",
+      "bytes": 16613,
+      "sha256": "745305d4f5c5d0efe135816fdc1715228576b23bab6ec059b880534e7a095295",
+      "file_modified_utc": "2026-10-01T12:02:28.829129+00:00",
+      "asset_id": "family-3dsmax-currentcolor-png-512",
+      "family": "3dsmax",
+      "kind": "png",
+      "role": "release",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-3dsmax-currentcolor-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": "black"
+    },
+    {
+      "path": "assets/families/blender/native/light.svg",
+      "bytes": 9602,
+      "sha256": "d5a2508f78858f2871a3278acad3c3f775c4f40ab0b4d2c83965ef268ab23211",
+      "file_modified_utc": "2026-10-01T12:02:42.751371+00:00",
+      "asset_id": "family-blender-light-build",
+      "family": "blender",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/blender/svg/light.svg",
+      "bytes": 33594,
+      "sha256": "38c3878a6baa6d338bacce81099ec47f95a85b151e309b2b650063c067fb2588",
+      "file_modified_utc": "2026-10-01T12:02:53.790222+00:00",
+      "asset_id": "family-blender-light-release",
+      "family": "blender",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/blender/png/light-1024.png",
+      "bytes": 67182,
+      "sha256": "1b54e7e237cd8f1777107e34eaf4c60b09aeb89fc9d0dfd25c343774e5a2b724",
+      "file_modified_utc": "2026-10-01T12:03:05.048750+00:00",
+      "asset_id": "family-blender-light-png-1024",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/png/light-512.png",
+      "bytes": 28946,
+      "sha256": "842a74fe06393a7ac90bc7d2e55b72cf2e1929525b610c3e55c3defbe3e690e0",
+      "file_modified_utc": "2026-10-01T12:03:16.617317+00:00",
+      "asset_id": "family-blender-light-png-512",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/png/light-256.png",
+      "bytes": 12184,
+      "sha256": "4e694bf8eb9309209d1a9d4c32fedb32ba24e8ab6c8f3a403494032875fe6cc1",
+      "file_modified_utc": "2026-10-01T12:03:35.959792+00:00",
+      "asset_id": "family-blender-light-png-256",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/native/light-optical.svg",
+      "bytes": 7953,
+      "sha256": "0262ecacfec655bc380d6bc901807691a339cf49fb364677add1a74203431b47",
+      "file_modified_utc": "2026-10-01T12:03:53.759064+00:00",
+      "asset_id": "family-blender-light-optical-build",
+      "family": "blender",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/blender/png/light-128.png",
+      "bytes": 4868,
+      "sha256": "be7d768ce86a43968fc5f84e583af2dcd3c80617354b1792545b61d74582dd32",
+      "file_modified_utc": "2026-10-01T12:04:05.722276+00:00",
+      "asset_id": "family-blender-light-png-128-optical",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-light-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/native/dark.svg",
+      "bytes": 9376,
+      "sha256": "78535d73526d5f56cb04796f593b6ce8dc4af9dda17abadde8c59a48991d86da",
+      "file_modified_utc": "2026-10-01T12:04:22.015761+00:00",
+      "asset_id": "family-blender-dark-build",
+      "family": "blender",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/blender/svg/dark.svg",
+      "bytes": 33368,
+      "sha256": "526bddbbc04ed7b7f407b39f8c59c557131b5494410a5ef1f0fbb7d56888f715",
+      "file_modified_utc": "2026-10-01T12:04:28.073444+00:00",
+      "asset_id": "family-blender-dark-release",
+      "family": "blender",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/blender/png/dark-1024.png",
+      "bytes": 66675,
+      "sha256": "f18c55695d93cca1c7aafec8d45a9cc6ae66cede91f01356787008f65caf1559",
+      "file_modified_utc": "2026-10-01T12:04:35.416841+00:00",
+      "asset_id": "family-blender-dark-png-1024",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/png/dark-512.png",
+      "bytes": 28452,
+      "sha256": "be0fba1e60316d0a7aa58bf08a181c4fd092fb64229b321d5d6269f2c3e15638",
+      "file_modified_utc": "2026-10-01T12:04:42.390256+00:00",
+      "asset_id": "family-blender-dark-png-512",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/png/dark-256.png",
+      "bytes": 12075,
+      "sha256": "fd62dd7fe497bce3a81d6011e22d09bf3b9f547a21adfd48055a243f96a04b29",
+      "file_modified_utc": "2026-10-01T12:04:46.814985+00:00",
+      "asset_id": "family-blender-dark-png-256",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/native/dark-optical.svg",
+      "bytes": 7727,
+      "sha256": "403fb2e7ae5896c58474d1e8ee695299c778c3bae4187ef6c5237a48b1b3abe2",
+      "file_modified_utc": "2026-10-01T12:04:52.060371+00:00",
+      "asset_id": "family-blender-dark-optical-build",
+      "family": "blender",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/blender/png/dark-128.png",
+      "bytes": 4950,
+      "sha256": "b7f79c2e2e8bd77cebfabfdccfd6b8edcc3d546c876a9755228e48022f358725",
+      "file_modified_utc": "2026-10-01T12:05:04.838208+00:00",
+      "asset_id": "family-blender-dark-png-128-optical",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-dark-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/blender/native/currentcolor.svg",
+      "bytes": 7352,
+      "sha256": "fe1218f14dd0f763e486c74328d27f53791046739626ee9c0ab0621002a89d05",
+      "file_modified_utc": "2026-10-01T12:05:12.314467+00:00",
+      "asset_id": "family-blender-currentcolor-build",
+      "family": "blender",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-currentcolor-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/blender/png/currentcolor-512.png",
+      "bytes": 16346,
+      "sha256": "9aebc835b2f255aa2150cb8af5c7ee0f807474473c0384ab54b42a79017d7456",
+      "file_modified_utc": "2026-10-01T12:05:18.333015+00:00",
+      "asset_id": "family-blender-currentcolor-png-512",
+      "family": "blender",
+      "kind": "png",
+      "role": "release",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-blender-currentcolor-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": "black"
+    },
+    {
+      "path": "assets/families/houdini/native/light.svg",
+      "bytes": 10179,
+      "sha256": "2ef77bfbde24c8efa10b8b827771c96eef0c794d0831497c9f5c2becc4930241",
+      "file_modified_utc": "2026-10-01T12:05:26.601920+00:00",
+      "asset_id": "family-houdini-light-build",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/houdini/svg/light.svg",
+      "bytes": 36399,
+      "sha256": "5095a03b2bfdee749ea18ec01b7a7295ed0b5e53e734f25ca0b2afcf66835acf",
+      "file_modified_utc": "2026-10-01T12:05:43.044244+00:00",
+      "asset_id": "family-houdini-light-release",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/houdini/png/light-1024.png",
+      "bytes": 66706,
+      "sha256": "7fe62134c8c309142ac7307d3456f3f4de3b054f26ecb029ea0a73e2a948d9dd",
+      "file_modified_utc": "2026-10-01T12:06:01.454973+00:00",
+      "asset_id": "family-houdini-light-png-1024",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/png/light-512.png",
+      "bytes": 28919,
+      "sha256": "2c918bb34b18702cd05272c3a7daa582820b6ddb6a7a36c8eb3d50e16112a04a",
+      "file_modified_utc": "2026-10-01T12:06:19.472616+00:00",
+      "asset_id": "family-houdini-light-png-512",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/png/light-256.png",
+      "bytes": 12199,
+      "sha256": "1e3bddccd056260800cfff0e9ce65a97feefbcc4345910dcc6baca8e0f6be0d5",
+      "file_modified_utc": "2026-10-01T12:06:30.483962+00:00",
+      "asset_id": "family-houdini-light-png-256",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/native/light-optical.svg",
+      "bytes": 7953,
+      "sha256": "8b42653dd9c81b09286f8c98425f1568e1d29b77fcd5e2017d9fc924cd7ed170",
+      "file_modified_utc": "2026-10-01T12:06:44.793757+00:00",
+      "asset_id": "family-houdini-light-optical-build",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/houdini/png/light-128.png",
+      "bytes": 4880,
+      "sha256": "a78e0c68cf7f9465caf606eb99eab8a63f6052db981260748ec2ce2b6035c617",
+      "file_modified_utc": "2026-10-01T12:06:48.462426+00:00",
+      "asset_id": "family-houdini-light-png-128-optical",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-light-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/native/dark.svg",
+      "bytes": 9953,
+      "sha256": "a9b915423db1b28eaa36005241d6772cb58e33833f04bbd6d2f4cc45afd5f5fb",
+      "file_modified_utc": "2026-10-01T12:06:52.574233+00:00",
+      "asset_id": "family-houdini-dark-build",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/houdini/svg/dark.svg",
+      "bytes": 36173,
+      "sha256": "abdd639d0945c6fa128e47cc23639245bcdc9121a81e0f1b9b98e62f958bf8c7",
+      "file_modified_utc": "2026-10-01T12:07:00.351245+00:00",
+      "asset_id": "family-houdini-dark-release",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/houdini/png/dark-1024.png",
+      "bytes": 65353,
+      "sha256": "31eee6dd2dc9ce0534ef76301b4bd40cae0fd91a2645c8665eff5e370a6fb074",
+      "file_modified_utc": "2026-10-01T12:07:03.458141+00:00",
+      "asset_id": "family-houdini-dark-png-1024",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/png/dark-512.png",
+      "bytes": 28101,
+      "sha256": "99ba9eb7ecc79d82f3cb2b6fc3f08da0aaa4c59b8319d961f450e611fc37631c",
+      "file_modified_utc": "2026-10-01T12:07:07.428636+00:00",
+      "asset_id": "family-houdini-dark-png-512",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/png/dark-256.png",
+      "bytes": 11948,
+      "sha256": "31c4fcb5cecd9f1ebd2c606fbfb45de51c1e64679f9881d2033cb2510a8a0a43",
+      "file_modified_utc": "2026-10-01T12:07:10.849789+00:00",
+      "asset_id": "family-houdini-dark-png-256",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/native/dark-optical.svg",
+      "bytes": 7727,
+      "sha256": "3027930fb83adb29e41a8355fe528535cc23ba8729d1a1a56c267189a04ea4dc",
+      "file_modified_utc": "2026-10-01T12:07:14.606029+00:00",
+      "asset_id": "family-houdini-dark-optical-build",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/houdini/png/dark-128.png",
+      "bytes": 4943,
+      "sha256": "9886d55301248fb168507c3159c0f15ce6ac8125e3b7e039efa46647ab793300",
+      "file_modified_utc": "2026-10-01T12:07:16.380026+00:00",
+      "asset_id": "family-houdini-dark-png-128-optical",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-dark-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/houdini/native/currentcolor.svg",
+      "bytes": 7949,
+      "sha256": "6976f598e484099f8f59dd6cb6846f6ca0c31fea08e6e36df2553ece5d45def2",
+      "file_modified_utc": "2026-10-01T12:07:19.697925+00:00",
+      "asset_id": "family-houdini-currentcolor-build",
+      "family": "houdini",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-currentcolor-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/houdini/png/currentcolor-512.png",
+      "bytes": 16234,
+      "sha256": "f8d74116037ccd9a2cc9438c6ede58efdb9148bf971c53d96a851d201f8a06b3",
+      "file_modified_utc": "2026-10-01T12:07:22.072078+00:00",
+      "asset_id": "family-houdini-currentcolor-png-512",
+      "family": "houdini",
+      "kind": "png",
+      "role": "release",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-houdini-currentcolor-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": "black"
+    },
+    {
+      "path": "assets/families/zbrush/native/light.svg",
+      "bytes": 9082,
+      "sha256": "13b1bb8458f5e4c2e5d9d6adcb4f4d6c4f682f3c66f146dbbdb538316a2eacbb",
+      "file_modified_utc": "2026-10-01T12:07:24.463884+00:00",
+      "asset_id": "family-zbrush-light-build",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/zbrush/svg/light.svg",
+      "bytes": 34298,
+      "sha256": "3e6fb0ebd9fbcaacb4a53352893ce4e1f5610a766b8951dc40f343fee2ef65ae",
+      "file_modified_utc": "2026-10-01T12:07:26.645165+00:00",
+      "asset_id": "family-zbrush-light-release",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/zbrush/png/light-1024.png",
+      "bytes": 68046,
+      "sha256": "3ec1ad544ebe5699b22d99c5ade91496f673e44ce2bdfcaeab7d2778a2c0ebe4",
+      "file_modified_utc": "2026-10-01T12:07:28.456760+00:00",
+      "asset_id": "family-zbrush-light-png-1024",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/png/light-512.png",
+      "bytes": 29312,
+      "sha256": "7337c34c13af8af49e747bd06c5725c639b9a5b97ac115a5ef6366e9c7d561f9",
+      "file_modified_utc": "2026-10-01T12:07:30.365932+00:00",
+      "asset_id": "family-zbrush-light-png-512",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/png/light-256.png",
+      "bytes": 12336,
+      "sha256": "5eafa6a6eac8d3403f5feb3f81ed81e3935235f5f362fb272ca9adc75bdb76ae",
+      "file_modified_utc": "2026-10-01T12:07:34.535352+00:00",
+      "asset_id": "family-zbrush-light-png-256",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/native/light-optical.svg",
+      "bytes": 7952,
+      "sha256": "4b4d9ad44c9f70f6d05aa10a82ff822ffc5283e507c5e7c231caa3dca17b2932",
+      "file_modified_utc": "2026-10-01T12:07:37.349688+00:00",
+      "asset_id": "family-zbrush-light-optical-build",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/zbrush/png/light-128.png",
+      "bytes": 4835,
+      "sha256": "4f794eb4003d9342ab7322d3ea70d87cefeed396dc9b2fdc35f7f911be59c4e5",
+      "file_modified_utc": "2026-10-01T12:07:39.766038+00:00",
+      "asset_id": "family-zbrush-light-png-128-optical",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-light-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/native/dark.svg",
+      "bytes": 8856,
+      "sha256": "0ff8a6afba06a1ab066c932f99a6858d64c88b8d35fe61562f79a8aac290e76f",
+      "file_modified_utc": "2026-10-01T12:07:45.287654+00:00",
+      "asset_id": "family-zbrush-dark-build",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/zbrush/svg/dark.svg",
+      "bytes": 34072,
+      "sha256": "34b349f71cc90985b7c04a90b755e95fd72fb8ca80c4178c384ea7ae6b06b703",
+      "file_modified_utc": "2026-10-01T12:07:47.945830+00:00",
+      "asset_id": "family-zbrush-dark-release",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/zbrush/png/dark-1024.png",
+      "bytes": 66669,
+      "sha256": "9420d3d15db1691ea176a6f88fcfd0ce4413a1ec8807bc7e486596b893f3d661",
+      "file_modified_utc": "2026-10-01T12:07:50.228245+00:00",
+      "asset_id": "family-zbrush-dark-png-1024",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/png/dark-512.png",
+      "bytes": 28468,
+      "sha256": "f1ec20e8f294891dfeb559638b5e5449e65eacaeb0643d9298d08ee01233573d",
+      "file_modified_utc": "2026-10-01T12:07:52.905044+00:00",
+      "asset_id": "family-zbrush-dark-png-512",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/png/dark-256.png",
+      "bytes": 12105,
+      "sha256": "3ad7efe70241c287a34be5ca50dedf39a3d730cf2c1e2a6920cce4ee1782bb44",
+      "file_modified_utc": "2026-10-01T12:07:58.225803+00:00",
+      "asset_id": "family-zbrush-dark-png-256",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/native/dark-optical.svg",
+      "bytes": 7726,
+      "sha256": "0f06cc204fc5e3ae7d8b0e82bf6d597c7eda2c57f407bf3fe774dc90c5d1906f",
+      "file_modified_utc": "2026-10-01T12:08:06.850044+00:00",
+      "asset_id": "family-zbrush-dark-optical-build",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/zbrush/png/dark-128.png",
+      "bytes": 4932,
+      "sha256": "5d93c93be401929acfaa15d3da7aa74f6d688419685b005e22c30284fa5586be",
+      "file_modified_utc": "2026-10-01T12:08:11.418296+00:00",
+      "asset_id": "family-zbrush-dark-png-128-optical",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-dark-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/zbrush/native/currentcolor.svg",
+      "bytes": 6822,
+      "sha256": "f0d6c8363c564ff3747b7a7ca6fcdbd3085c71e0c47780186873f89a38f76281",
+      "file_modified_utc": "2026-10-01T12:08:16.706162+00:00",
+      "asset_id": "family-zbrush-currentcolor-build",
+      "family": "zbrush",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-currentcolor-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/zbrush/png/currentcolor-512.png",
+      "bytes": 16455,
+      "sha256": "c4ca34cf2e718d0d0330a6c59d5f4b2f0d5dd91f1309f9f79cd70b76586a3815",
+      "file_modified_utc": "2026-10-01T12:08:21.343333+00:00",
+      "asset_id": "family-zbrush-currentcolor-png-512",
+      "family": "zbrush",
+      "kind": "png",
+      "role": "release",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-zbrush-currentcolor-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": "black"
+    },
+    {
+      "path": "assets/families/photoshop/native/light.svg",
+      "bytes": 9890,
+      "sha256": "576bcd0efa92e43bd7711f2a4ff351133b0a47fac3825df90780be69fb1b1d2e",
+      "file_modified_utc": "2026-10-01T12:08:28.382596+00:00",
+      "asset_id": "family-photoshop-light-build",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/photoshop/svg/light.svg",
+      "bytes": 38229,
+      "sha256": "c50421a140e5c1580f09bd798af38e8b4c3e34dff3571219bc602d613bf34bed",
+      "file_modified_utc": "2026-10-01T12:08:33.729353+00:00",
+      "asset_id": "family-photoshop-light-release",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/photoshop/png/light-1024.png",
+      "bytes": 67900,
+      "sha256": "c80a9fbb08b95c1148a426949c84d6ad359d8a4ad02b21c7894b73fdfeb461b7",
+      "file_modified_utc": "2026-10-01T12:08:39.657478+00:00",
+      "asset_id": "family-photoshop-light-png-1024",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/png/light-512.png",
+      "bytes": 29534,
+      "sha256": "eb76c07089034830b110548859b0f5d40fcf0f0b7885ebcd431fec92c4f20f19",
+      "file_modified_utc": "2026-10-01T12:08:51.831513+00:00",
+      "asset_id": "family-photoshop-light-png-512",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/png/light-256.png",
+      "bytes": 12361,
+      "sha256": "502f6cf6e409ec38f8df0b99ec225ff32b947c1975d936ed744bf33545403377",
+      "file_modified_utc": "2026-10-01T12:09:02.337959+00:00",
+      "asset_id": "family-photoshop-light-png-256",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/native/light-optical.svg",
+      "bytes": 7955,
+      "sha256": "ce92dcacb3a78b2bd500720d50454690280f68b6c11382433ce67c8ffa9a9677",
+      "file_modified_utc": "2026-10-01T12:09:19.736611+00:00",
+      "asset_id": "family-photoshop-light-optical-build",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/photoshop/png/light-128.png",
+      "bytes": 4952,
+      "sha256": "0ae123bbb21e7d4bd4d672247391e95fce88f2201be16a11a009ee6694d5128d",
+      "file_modified_utc": "2026-10-01T12:09:38.121955+00:00",
+      "asset_id": "family-photoshop-light-png-128-optical",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "light",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-light-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/native/dark.svg",
+      "bytes": 9664,
+      "sha256": "5b13e024f0aedb736db08ee72f8d3186b909c7b9ebc5a02af742e1b7ee4734c4",
+      "file_modified_utc": "2026-10-01T12:09:55.949794+00:00",
+      "asset_id": "family-photoshop-dark-build",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/photoshop/svg/dark.svg",
+      "bytes": 38003,
+      "sha256": "31b57d16ebd301dc8645db73bc9bf5cb0c12f8bda8fcde057c7f8cb349c43a57",
+      "file_modified_utc": "2026-10-01T12:10:08.222830+00:00",
+      "asset_id": "family-photoshop-dark-release",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-release",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": false
+    },
+    {
+      "path": "assets/families/photoshop/png/dark-1024.png",
+      "bytes": 66404,
+      "sha256": "34146fdf9a1c7417bfb209be4ad250535c775cfcd9768c26291f3b88954f0607",
+      "file_modified_utc": "2026-10-01T12:10:19.347284+00:00",
+      "asset_id": "family-photoshop-dark-png-1024",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-png-1024",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        1024,
+        478
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/png/dark-512.png",
+      "bytes": 28593,
+      "sha256": "186782671ba6d44906be0ad4025f28a5af6d1c43adee6aee9b041f98728f8ca0",
+      "file_modified_utc": "2026-10-01T12:10:30.209788+00:00",
+      "asset_id": "family-photoshop-dark-png-512",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/png/dark-256.png",
+      "bytes": 12170,
+      "sha256": "366784401a6766e361d9da8e7d2f3b8dd99739d6b8cea74e007d32e0547ac3cc",
+      "file_modified_utc": "2026-10-01T12:10:46.664706+00:00",
+      "asset_id": "family-photoshop-dark-png-256",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-png-256",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        256,
+        119
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/native/dark-optical.svg",
+      "bytes": 7729,
+      "sha256": "5580cded8859968be01337de0843d74ef1a6be97f140545e877c3e69f3107264",
+      "file_modified_utc": "2026-10-01T12:10:54.408208+00:00",
+      "asset_id": "family-photoshop-dark-optical-build",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-optical-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/photoshop/png/dark-128.png",
+      "bytes": 5009,
+      "sha256": "ad1b9212bcd6586a42081207582bd626dda78067e8d53520f60c1ac7558745df",
+      "file_modified_utc": "2026-10-01T12:10:59.050859+00:00",
+      "asset_id": "family-photoshop-dark-png-128-optical",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "dark",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": true,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-dark-png-128-optical",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        128,
+        60
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": null
+    },
+    {
+      "path": "assets/families/photoshop/native/currentcolor.svg",
+      "bytes": 7650,
+      "sha256": "93862a384a86ef1bdf5afd7641ed917674ebe4a7328495c2044fb4800ab3f088",
+      "file_modified_utc": "2026-10-01T12:11:04.408404+00:00",
+      "asset_id": "family-photoshop-currentcolor-build",
+      "family": "photoshop",
+      "kind": "svg",
+      "role": "editable",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-currentcolor-build",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "viewbox": [
+        0.0,
+        0.0,
+        1200.0,
+        560.0
+      ],
+      "live_text": true
+    },
+    {
+      "path": "assets/families/photoshop/png/currentcolor-512.png",
+      "bytes": 16616,
+      "sha256": "a1f660dd6e347f32aa5e7dc52b06c7ed9433e63aae7cd5fb6385ca4d7b5f3a29",
+      "file_modified_utc": "2026-10-01T12:11:14.837116+00:00",
+      "asset_id": "family-photoshop-currentcolor-png-512",
+      "family": "photoshop",
+      "kind": "png",
+      "role": "release",
+      "theme": "currentcolor",
+      "status": "actual",
+      "qa_status": "verified",
+      "license": "MIT",
+      "optical": false,
+      "producer": {
+        "application": "Inkscape 1.4.4",
+        "route": "installed-dcc-mcp-inkscape-native-effect",
+        "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+        "receipt_key": "family-photoshop-currentcolor-png-512",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      },
+      "size": [
+        512,
+        239
+      ],
+      "mode": "RGBA",
+      "transparent": true,
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "currentcolor_default": "black"
     }
   ],
   "evidence": [
@@ -1147,6 +4459,27 @@
       "bytes": 11577,
       "sha256": "5836c33cb14e5bea34d2c04866bfd03d8e0898cc34fa0baeeb7b3f5c1775cb42",
       "file_modified_utc": "2026-10-01T11:46:00.759294+00:00",
+      "role": "qa"
+    },
+    {
+      "path": "evidence/family-first-six-qa.json",
+      "bytes": 47316,
+      "sha256": "3cf97603035f17a2d0f0775a542feb34ca56188a41753cd1ec76ac472fe73594",
+      "file_modified_utc": "2026-10-01T12:15:07.158031+00:00",
+      "role": "qa"
+    },
+    {
+      "path": "evidence/family-first-six-light-qa.png",
+      "bytes": 106222,
+      "sha256": "cdc9d2903cbfaab10043e8f3e354bee306740bbb17cffb39e0a7cce271ef065e",
+      "file_modified_utc": "2026-10-01T12:15:07.129572+00:00",
+      "role": "qa"
+    },
+    {
+      "path": "evidence/family-first-six-dark-qa.png",
+      "bytes": 108626,
+      "sha256": "b95f72aac0c92bc475423da4e1eabd1908a6da6cc698b70c474e22792e34e811",
+      "file_modified_utc": "2026-10-01T12:15:07.155275+00:00",
       "role": "qa"
     }
   ],
@@ -1214,6 +4547,1062 @@
       "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
       "control_route": "gateway",
       "output_sha256": "10dff2fb924e5aa1177544d85cb28f1f5a3491e196ccf6fcb67d04b562e6291d"
+    },
+    {
+      "key": "family-maya-light-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:57:41.368755+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a4d8512956b98391b85c97f841394e7beffb0920dd5fdad0cf746b4bb79e7f8b",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "dd0998e6043dcda45dd3f4bd949566e9f9ed169d19f25cf568859b5148de22a4"
+    },
+    {
+      "key": "family-maya-light-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:57:47.756123+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "45e0533e28281b9977204ac2310b0ef6627336afa6e2731640ea13d7a092fbae",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "aad52887ce4befcb41597a2f1a6be645af504aec842a659bda9c35418545632f"
+    },
+    {
+      "key": "family-maya-light-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:57:52.724345+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "5aff9b9982b4c1f20e29a8f4c683bdfa3bc597df466868521af52d977ceefdb0",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "e25a89e63fd91f12d48d4adc33a348c391ce4da135770a76945380f2b67fa831"
+    },
+    {
+      "key": "family-maya-light-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:57:59.807790+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "f6fd2d2dbdeaf27b42894a24c0b307b426bf35a3517e3608fed0b68c22ee8cc4",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b706ac8ab4378599a72795c5159a33f6fb8ccf39e84bdd7ccfbfedd30fc70884"
+    },
+    {
+      "key": "family-maya-light-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:58:04.929279+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "305203afeb64fba2616cf42f57ec1698770324f3a2914ea910477a8621e100fe",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "bc2f2e81855b7fd16cffb8370c6eb2d2508bc73a1c3cb08a4842b092b98698c5"
+    },
+    {
+      "key": "family-maya-light-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:58:13.604054+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "4b2cbfb1553ec2391ede0be2faefc7213c814c3742313ed45350ade52d4e7b4c",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "834777cffda58d72b514f1ceb2a8fdcc60b59e6e25b06341a7cf6caee83ebc99"
+    },
+    {
+      "key": "family-maya-light-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:58:20.729429+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "e30976b4d2d4e7a0a4eab8a15e30e9d7ac4c22c426971be14ea042ec4899c65c",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "f16078b730cd37c112055bd2271a181cad22f8e82df71693f4eb987fc7f9a89f"
+    },
+    {
+      "key": "family-maya-dark-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:58:23.689665+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "c52943be8f2819b6dfd82082097d68a22fe4ac923a94bb4b80e47088113eb610",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "9cdfb0ed07d97b443e309962913cc32cdcfe201219a99d1a24c28a3dbb63c892"
+    },
+    {
+      "key": "family-maya-dark-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:58:32.866043+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "08416e1a42f32cf6e188ba18d66f43eb267e181f866e068c6989b4fc39cdfcfe",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "2edca90a3054ebe21c852208224f5099c3bae94ba414b3aa79042643fe0dae9e"
+    },
+    {
+      "key": "family-maya-dark-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:58:40.054490+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "18640d6eec54901c46f4daa5ae95bc7294dd9c669846427670137aa840f3a149",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "c9f1e6e975dad8d7c90d3dce91967ac7acd0a62bf5e5c9cd969f5ff407e621df"
+    },
+    {
+      "key": "family-maya-dark-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:58:43.961077+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "10fccc224336d5ce936ec9e4fd23172105f35d87ee5945b47581bfe0fba85c26",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "e3332c88dc6100cfb0fbb83674997b11a30c12b75be6074f2cbf65260f036d5c"
+    },
+    {
+      "key": "family-maya-dark-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:58:51.344959+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "d9adc06a6dc4d3af5357fbcfe7b604aadfa212f4a3e16c9e6f52445ca1465ada",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "e616dcffb2c4f2e59cbc9f867b4283a213972f93ec46e7fc35b04a22b3fce060"
+    },
+    {
+      "key": "family-maya-dark-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:58:59.391256+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "6df06d1477a981422ffcc63a36ae745228cefda9d9a067f2623fa1b970bc829a",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "91c07c75df74260d3018281eb18ce9461d11727fe6c0e5d371581cd29d919657"
+    },
+    {
+      "key": "family-maya-dark-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:59:05.070673+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "790a1db3a93a6f5aecf42bf409624535d588db8e145c3d2387a361897bb7e2c9",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "ee698c60e962c159ecd7d749e0198c1e39a542dbf1d2debabf604f65fdad8678"
+    },
+    {
+      "key": "family-maya-currentcolor-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:59:13.237119+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a656aaf361e9c70d103b41686f44316ef142fdea7c767d3a4bad1de352a05091",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "515201545a061579f9e597fe37408472252c6a503b04da2f2804d2894c9550be"
+    },
+    {
+      "key": "family-maya-currentcolor-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:59:28.350972+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "c8e629790a64e984b1b4b2d1ee8d18b9549db105b1dfaa6c2d961fff646c5cb9",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "04f646ef1470b5116bb1ed63f03c81a061426fa2bb52a600738a789225e0edcc"
+    },
+    {
+      "key": "family-3dsmax-light-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T11:59:32.129526+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a01b74db98c99c13d801665e8336897cdc5432e23eced2e31a3e57eae6e6e6fa",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "42476348d9aab8da355ecfb2be94fe6f84bbf4c597ad7a33a969f1fbc504ae45"
+    },
+    {
+      "key": "family-3dsmax-light-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T11:59:53.682775+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "ba88e73f6803ffc4f908c35d5c4a8313b26f2744afffab21b82eb34ea839b7e0",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "21d01d97b6a5f09053c50f88363722a11ab587612849f1d57a4b11e1efe0b3b7"
+    },
+    {
+      "key": "family-3dsmax-light-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:00:11.788969+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "2d1c19ae58a3bd9c7da4a31ca7509544c40e2af21d152becd4c5c9457b41a974",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "2b4a7bb236622f8b3b507f8c9eddf187a81135f4550825aa2ed05d6ec8fa5ae5"
+    },
+    {
+      "key": "family-3dsmax-light-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:00:30.750932+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "9a8bb74e3a6eab98d835e307f20ee8e816820defa945606dbf4966d39c2ec511",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "8f4bf3ebadcf1ac95cb002f23a1127ada770d04908eeced92b0395979c897fe4"
+    },
+    {
+      "key": "family-3dsmax-light-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:00:50.352914+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a4f6c711759b68b654855e1b1648c1e659762720e683ccdb3686a9697b3940ef",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "9b5969cef78a4bd051db42e0df0f23fbfbee560fbad9cf9b4c35f73adea2c320"
+    },
+    {
+      "key": "family-3dsmax-light-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:01:06.470093+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "80edf0e8fb09cc454e54670ceff6c0c7d724be0b9eb8c110dc37f6ab23893cfb",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "3a7d16fba8ebf5cb65b2b77f99082e09dfcfe4225ae1c5cffc8871bd0e4fc44b"
+    },
+    {
+      "key": "family-3dsmax-light-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:01:30.149217+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "e0897142c43aa259bb3891e41a3ee8024c1f8d7c727057beb633b099a53071fb",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "c78c67ca33b769eff7ab3a7449bed6a698f8c815ad64b8a6490e0e4cdf7c28fc"
+    },
+    {
+      "key": "family-3dsmax-dark-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:01:35.594606+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "288a284e5b4203d1886af78cb790c00dc70cd055a5f9c156fb00413ea2d958c3",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "43ea607dc684d6d7c37c2085355e13c286076ad59b1a70c58ae26916d43a2dde"
+    },
+    {
+      "key": "family-3dsmax-dark-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:01:42.326125+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "b9b0d1431f268911a89930de479ad33b7c08ce4626ec40329d12be0b02cd70b8",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "bb0e4b3b8cf0bc2e519412829a995104d6e33136b767aaa91f63149d3addcd37"
+    },
+    {
+      "key": "family-3dsmax-dark-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:01:45.172672+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "6546abe7721b0a2e1c9157e5612811f0fc0b2bc46f3418d4ad17d0f29a17a5af",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b7b127460add98551c54742b5a2e7b79b4e4494582a7ed7d68375d7644086e6d"
+    },
+    {
+      "key": "family-3dsmax-dark-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:01:50.326736+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "53f8d6034f5aa2d45d576c5232d768eabf1675da44f9ef64ce43956ab4d120fd",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "1be4a8a5a068ff2dfedf73c7cea9d9050f4e0f7576d381c10fc8fd4fedca6300"
+    },
+    {
+      "key": "family-3dsmax-dark-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:01:52.919099+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "15bace7a0da3da6f176343141485806627445b3f281a0537505faef2f6f6af3f",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "646a1bc0e9276ada955126dd049a539f14ae5be79123e1287dd6059f741fea77"
+    },
+    {
+      "key": "family-3dsmax-dark-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:02:00.896281+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "aac2ad62b7f4bbab284035bef87cdf56cc543427be22b1e17cf1802a50a74ff3",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "3c647cb57965c1f0321f65652016b5184e4f32423b6737df8a966af2002054cd"
+    },
+    {
+      "key": "family-3dsmax-dark-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:02:07.478142+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "319ab59353430744975eecd382f4ae1bae7dbb3e702c849c70ef5294c62e4a01",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "f322ca937554572c2ddf56d97fac7e4706b077ec01a9266102fb40b8067db237"
+    },
+    {
+      "key": "family-3dsmax-currentcolor-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:02:13.164665+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "e94224c62b5109cfeffc74162a51d61641d23a87c79d87a72d5a6c4ec04f662d",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b7b31232178ee2e563348c8e8dc63b18aa104e5db87f5619582665eac23247b3"
+    },
+    {
+      "key": "family-3dsmax-currentcolor-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:02:21.993218+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "745305d4f5c5d0efe135816fdc1715228576b23bab6ec059b880534e7a095295",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "86198021bba9bdec72874f903a19f7b5157ce0220c72c835188a4e576dc021b7"
+    },
+    {
+      "key": "family-blender-light-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:02:28.984319+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "d5a2508f78858f2871a3278acad3c3f775c4f40ab0b4d2c83965ef268ab23211",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "9ba66cd60aa419edfb7354789491663cef8ce16f3a847c93472f72e66fbed721"
+    },
+    {
+      "key": "family-blender-light-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:02:43.005477+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "38c3878a6baa6d338bacce81099ec47f95a85b151e309b2b650063c067fb2588",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "fedcefad4d8ddd17645424066d37873cabb434deb1dd0d7d376b1d0e6f5969ef"
+    },
+    {
+      "key": "family-blender-light-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:02:53.933018+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "1b54e7e237cd8f1777107e34eaf4c60b09aeb89fc9d0dfd25c343774e5a2b724",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b1d396955868b7d61dd13f2b18047bf577fd14863677af5bccac3add1f14d596"
+    },
+    {
+      "key": "family-blender-light-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:03:05.191248+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "842a74fe06393a7ac90bc7d2e55b72cf2e1929525b610c3e55c3defbe3e690e0",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "4b10fbec48947999d0647db4aba41d480ee836c004fa181022a62e68b4683ad4"
+    },
+    {
+      "key": "family-blender-light-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:03:25.143818+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "4e694bf8eb9309209d1a9d4c32fedb32ba24e8ab6c8f3a403494032875fe6cc1",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "ee750ab59f27dfe4953990545cd76ab1bfe3f2eeb933514ee5805043a9ef08af"
+    },
+    {
+      "key": "family-blender-light-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:03:36.079565+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "0262ecacfec655bc380d6bc901807691a339cf49fb364677add1a74203431b47",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "78d103d9724550bfa7a66ef20adbe56f4d0365eb23d19392800bbbe91deb57e2"
+    },
+    {
+      "key": "family-blender-light-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:03:53.970310+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "be7d768ce86a43968fc5f84e583af2dcd3c80617354b1792545b61d74582dd32",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "4bdbf01a07e1df809a05c1a6c10711dd10988717586eff650249ee2557f3c561"
+    },
+    {
+      "key": "family-blender-dark-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:04:05.852339+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "78535d73526d5f56cb04796f593b6ce8dc4af9dda17abadde8c59a48991d86da",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "42c7c982bc046622bc8cd59eb13afc6fb90b6cfc5b1d3f27171a86bf19c7b787"
+    },
+    {
+      "key": "family-blender-dark-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:04:22.240117+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "526bddbbc04ed7b7f407b39f8c59c557131b5494410a5ef1f0fbb7d56888f715",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "db4a17365dcbac9870acb29516410abd34d53a4a9b2372c4975e95070e4a1a12"
+    },
+    {
+      "key": "family-blender-dark-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:04:28.150930+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "f18c55695d93cca1c7aafec8d45a9cc6ae66cede91f01356787008f65caf1559",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "5a44e0ec30beff94ba4d16ca633f1c5b101079ae2f35f9f0b0d208b639f86f15"
+    },
+    {
+      "key": "family-blender-dark-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:04:38.134068+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "be0fba1e60316d0a7aa58bf08a181c4fd092fb64229b321d5d6269f2c3e15638",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "05c17d8460fa833394f6791e7a3930386f77b0d6762af69dccdccd56ef4eb667"
+    },
+    {
+      "key": "family-blender-dark-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:04:43.724187+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "fd62dd7fe497bce3a81d6011e22d09bf3b9f547a21adfd48055a243f96a04b29",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "e9c78f67f6a99c0823d48054f2e2cb2fa8ad2f71c65129ef05722d0d6d3886f4"
+    },
+    {
+      "key": "family-blender-dark-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:04:46.958814+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "403fb2e7ae5896c58474d1e8ee695299c778c3bae4187ef6c5237a48b1b3abe2",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "a1c643764ebca7efffcde2937ca3ca5c0051a0c685c2c0bf94b54530bc607be7"
+    },
+    {
+      "key": "family-blender-dark-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:04:55.472032+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "b7f79c2e2e8bd77cebfabfdccfd6b8edcc3d546c876a9755228e48022f358725",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "629e2b4688d0803b9cfc7685cd2bb797e1c4aedfab9e426b84c6ac83e3cadb8b"
+    },
+    {
+      "key": "family-blender-currentcolor-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:05:04.964122+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "fe1218f14dd0f763e486c74328d27f53791046739626ee9c0ab0621002a89d05",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "8620b393c8a0815b0d834438ab514d4dc9194a2e42bfb9ad62ca15d573e3ded4"
+    },
+    {
+      "key": "family-blender-currentcolor-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:05:16.019916+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "9aebc835b2f255aa2150cb8af5c7ee0f807474473c0384ab54b42a79017d7456",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "1accde5fd0fc6a7bb7da509397c9297332b46f56ec7c52591b1b8475102070ff"
+    },
+    {
+      "key": "family-houdini-light-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:05:18.486537+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "2ef77bfbde24c8efa10b8b827771c96eef0c794d0831497c9f5c2becc4930241",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "9fd0cff6fbe5b6b5879a81cb03f88df90b0aca15ca85619925dbd47b76390f7f"
+    },
+    {
+      "key": "family-houdini-light-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:05:34.487780+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "5095a03b2bfdee749ea18ec01b7a7295ed0b5e53e734f25ca0b2afcf66835acf",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "ce711ff36ceecf70cdfaf47e6256ccd77791c108680ec3f6b69d381aac1916ea"
+    },
+    {
+      "key": "family-houdini-light-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:05:50.325745+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "7fe62134c8c309142ac7307d3456f3f4de3b054f26ecb029ea0a73e2a948d9dd",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "61a14e482e1505655964c7d86888ad026025371d5d5258911fdfcf05414ca536"
+    },
+    {
+      "key": "family-houdini-light-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:06:08.568665+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "2c918bb34b18702cd05272c3a7daa582820b6ddb6a7a36c8eb3d50e16112a04a",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "bf3c6526b5ca718b4bee7b87405d7bd6724ef657afb2006da68c4605b60875c8"
+    },
+    {
+      "key": "family-houdini-light-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:06:19.544587+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "1e3bddccd056260800cfff0e9ce65a97feefbcc4345910dcc6baca8e0f6be0d5",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "e3f2168c017b5bcc38c1d56befa39a1fcab82b89ce196f03c7b1496f0eff69be"
+    },
+    {
+      "key": "family-houdini-light-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:06:30.598769+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "8b42653dd9c81b09286f8c98425f1568e1d29b77fcd5e2017d9fc924cd7ed170",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "eee7fdb2f933ad81c596b574f3936f985f02c9287dd37181ddd9e6b2e4386537"
+    },
+    {
+      "key": "family-houdini-light-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:06:45.026536+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a78e0c68cf7f9465caf606eb99eab8a63f6052db981260748ec2ce2b6035c617",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b69ddb5c3e4b22756aee50a391c56cd30d17736a24d5071bab4727c854f683ea"
+    },
+    {
+      "key": "family-houdini-dark-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:06:48.627760+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a9b915423db1b28eaa36005241d6772cb58e33833f04bbd6d2f4cc45afd5f5fb",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "cdbfa8bf6c1596202ef4a6c69fab600a79222f9b8289fa343af5f1a1c15c5d4a"
+    },
+    {
+      "key": "family-houdini-dark-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:06:52.820540+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "abdd639d0945c6fa128e47cc23639245bcdc9121a81e0f1b9b98e62f958bf8c7",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "188dcb70b326d093787fbd5de770f3ac656de291afbe6e018f85bda56ea8b833"
+    },
+    {
+      "key": "family-houdini-dark-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:00.489851+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "31eee6dd2dc9ce0534ef76301b4bd40cae0fd91a2645c8665eff5e370a6fb074",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b2698e7b0fa180956520815dde6b99c69d86628f523fbe5f7809386a870363c2"
+    },
+    {
+      "key": "family-houdini-dark-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:03.584839+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "99ba9eb7ecc79d82f3cb2b6fc3f08da0aaa4c59b8319d961f450e611fc37631c",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "024f8e84ae6a3615046472539c5dac0b87fb83fbef552c4f9387ebef53ab7500"
+    },
+    {
+      "key": "family-houdini-dark-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:07.544448+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "31c4fcb5cecd9f1ebd2c606fbfb45de51c1e64679f9881d2033cb2510a8a0a43",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "18ab0f15d18eb8ccee737fbf2e3125049ff69ac45f252eba3eae6e30a98d2afb"
+    },
+    {
+      "key": "family-houdini-dark-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:07:11.098452+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "3027930fb83adb29e41a8355fe528535cc23ba8729d1a1a56c267189a04ea4dc",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "858df3e35baa73f49728e3e41beebd670b64a20eeb42ea0f855666be28230094"
+    },
+    {
+      "key": "family-houdini-dark-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:14.721221+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "9886d55301248fb168507c3159c0f15ce6ac8125e3b7e039efa46647ab793300",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b175373727b8fd60579041d85a5f61f173907feab23c930825287bee04d68e52"
+    },
+    {
+      "key": "family-houdini-currentcolor-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:07:16.501707+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "6976f598e484099f8f59dd6cb6846f6ca0c31fea08e6e36df2553ece5d45def2",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "fd46dc1cc215774304cfdf5cf7dbea65697d1d8ec42707dc42ca7a6084e8a022"
+    },
+    {
+      "key": "family-houdini-currentcolor-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:19.922792+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "f8d74116037ccd9a2cc9438c6ede58efdb9148bf971c53d96a851d201f8a06b3",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "ebc9d8f5c7fc1a80bb839aebfaf4d683dee6798b5d71679deb4baa66365df064"
+    },
+    {
+      "key": "family-zbrush-light-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:07:22.190683+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "13b1bb8458f5e4c2e5d9d6adcb4f4d6c4f682f3c66f146dbbdb538316a2eacbb",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "996eff88f9f3c66c45104896865d7e34703cc0bc93f01983dca7ca6b7b7352be"
+    },
+    {
+      "key": "family-zbrush-light-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:24.599883+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "3e6fb0ebd9fbcaacb4a53352893ce4e1f5610a766b8951dc40f343fee2ef65ae",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "1cc8051ab9cc6e64220df0e66016bbe26471524f243377f1f801031db4693f15"
+    },
+    {
+      "key": "family-zbrush-light-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:26.776386+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "3ec1ad544ebe5699b22d99c5ade91496f673e44ce2bdfcaeab7d2778a2c0ebe4",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "da7e04f59bd9b2696d684db34c6c4dcbddd78f384b7b697004d42554be3c2675"
+    },
+    {
+      "key": "family-zbrush-light-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:28.590546+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "7337c34c13af8af49e747bd06c5725c639b9a5b97ac115a5ef6366e9c7d561f9",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "091d65d519bf8847d4bdaafd95d8b7d5f5196fe9ed219684e7a81a6a4730ef82"
+    },
+    {
+      "key": "family-zbrush-light-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:30.494991+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "5eafa6a6eac8d3403f5feb3f81ed81e3935235f5f362fb272ca9adc75bdb76ae",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b25819d0ad9d6da94e176850fb66fb43ffa0cc58288aee56a641c248a44206f0"
+    },
+    {
+      "key": "family-zbrush-light-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:07:34.675535+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "4b4d9ad44c9f70f6d05aa10a82ff822ffc5283e507c5e7c231caa3dca17b2932",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b60dfc75dfa874efb1154a40e7d92ad00b9317cdb28e981cdc0351177f8563d7"
+    },
+    {
+      "key": "family-zbrush-light-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:37.527476+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "4f794eb4003d9342ab7322d3ea70d87cefeed396dc9b2fdc35f7f911be59c4e5",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "59365f40b7c41e77118599ec81009e1ddc96e3173d746039b9ef5ecab0b2f694"
+    },
+    {
+      "key": "family-zbrush-dark-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:07:39.893573+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "0ff8a6afba06a1ab066c932f99a6858d64c88b8d35fe61562f79a8aac290e76f",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "32d8904d77af47b22e51dbf7264bf1532d469d2cc4d6532ce01ed9e0dc17baa3"
+    },
+    {
+      "key": "family-zbrush-dark-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:45.529283+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "34b349f71cc90985b7c04a90b755e95fd72fb8ca80c4178c384ea7ae6b06b703",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "9b0d5d9586036de45dc3f3ee684966cd492125a500212e140407f22531838b98"
+    },
+    {
+      "key": "family-zbrush-dark-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:48.069588+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "9420d3d15db1691ea176a6f88fcfd0ce4413a1ec8807bc7e486596b893f3d661",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "8b07c1aec1fc2e8f86ec3a84674f098b1c20db955b04accd8442166b28337c29"
+    },
+    {
+      "key": "family-zbrush-dark-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:50.355217+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "f1ec20e8f294891dfeb559638b5e5449e65eacaeb0643d9298d08ee01233573d",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "db511484d64eb63580ce7e31707f7cfbd0ece545800fac42cd6548748343c6c7"
+    },
+    {
+      "key": "family-zbrush-dark-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:07:52.970428+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "3ad7efe70241c287a34be5ca50dedf39a3d730cf2c1e2a6920cce4ee1782bb44",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "56c827448d8983b3197aa43993c93fc9e7959e53d73bbbc1d395102a115edf22"
+    },
+    {
+      "key": "family-zbrush-dark-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:08:01.458758+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "0f06cc204fc5e3ae7d8b0e82bf6d597c7eda2c57f407bf3fe774dc90c5d1906f",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "7545862f5fded6e1e18551c889091358e23fa4208676fde90621bda4c4034bdb"
+    },
+    {
+      "key": "family-zbrush-dark-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:08:09.146892+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "5d93c93be401929acfaa15d3da7aa74f6d688419685b005e22c30284fa5586be",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "864e768060c31fdb32e9a001d8d8cffb995fd4ceeb143f4d53a3af50efebabb0"
+    },
+    {
+      "key": "family-zbrush-currentcolor-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:08:11.539293+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "f0d6c8363c564ff3747b7a7ca6fcdbd3085c71e0c47780186873f89a38f76281",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "3874ff8b8489cfeee4302461188322c60c763e36c2c84ef7e471689ab4a1f95b"
+    },
+    {
+      "key": "family-zbrush-currentcolor-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:08:18.334027+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "c4ca34cf2e718d0d0330a6c59d5f4b2f0d5dd91f1309f9f79cd70b76586a3815",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b5073755fcff156d3e6d9c5d5e1f16373f6407314739c06535e3beadd0875368"
+    },
+    {
+      "key": "family-photoshop-light-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:08:24.513256+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "576bcd0efa92e43bd7711f2a4ff351133b0a47fac3825df90780be69fb1b1d2e",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "b9657f1f789fd73dc65f4c48dd35df420199a6af90fc9c4c2a35c00c548b44b1"
+    },
+    {
+      "key": "family-photoshop-light-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:08:29.832386+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "c50421a140e5c1580f09bd798af38e8b4c3e34dff3571219bc602d613bf34bed",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "fcb10b90d340afbbf0d94825222fe860fdbb0b281e58919c8e5925050c8f4504"
+    },
+    {
+      "key": "family-photoshop-light-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:08:34.859579+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "c80a9fbb08b95c1148a426949c84d6ad359d8a4ad02b21c7894b73fdfeb461b7",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "fb70942fea342869aa8af53b7a79e56ef64a72292498c9dfb7936fb6aaa11388"
+    },
+    {
+      "key": "family-photoshop-light-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:08:45.826387+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "eb76c07089034830b110548859b0f5d40fcf0f0b7885ebcd431fec92c4f20f19",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "4fe29e511f3ceb9a453d06629aa326489e8ca47f314162b28de41c2259acbedf"
+    },
+    {
+      "key": "family-photoshop-light-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:08:57.937901+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "502f6cf6e409ec38f8df0b99ec225ff32b947c1975d936ed744bf33545403377",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "65ed813945e7d034ddfc2a71672c5fdf725204a4c739016cbc9ef46690f59a6f"
+    },
+    {
+      "key": "family-photoshop-light-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:09:02.600615+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "ce92dcacb3a78b2bd500720d50454690280f68b6c11382433ce67c8ffa9a9677",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "d50449ba04e169e6efb758fe204f18de6cf39eac7ab6fa9536e1cbe764863bc9"
+    },
+    {
+      "key": "family-photoshop-light-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:09:26.982893+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "0ae123bbb21e7d4bd4d672247391e95fce88f2201be16a11a009ee6694d5128d",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "ee2ffd566df06e8fc7b8e42e80a37578a7e0865d8192dd73e80e3021d4ad4ec4"
+    },
+    {
+      "key": "family-photoshop-dark-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:09:38.248647+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "5b13e024f0aedb736db08ee72f8d3186b909c7b9ebc5a02af742e1b7ee4734c4",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "5488cbed992e1a19e9880956b406f16625a1e81a82a6c1aeaa7e527cf73cb51c"
+    },
+    {
+      "key": "family-photoshop-dark-release",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:09:56.113568+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "31b57d16ebd301dc8645db73bc9bf5cb0c12f8bda8fcde057c7f8cb349c43a57",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "9f2cd8585cc334555c8e35060fa485bd07a60812c381e26dfa12b3922d919b6f"
+    },
+    {
+      "key": "family-photoshop-dark-png-1024",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:10:08.342936+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "34146fdf9a1c7417bfb209be4ad250535c775cfcd9768c26291f3b88954f0607",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "d53de681a10b655ce2836c8e36a8ba0716b8aacfc751d5e38e8f1d02307ce1a2"
+    },
+    {
+      "key": "family-photoshop-dark-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:10:19.473109+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "186782671ba6d44906be0ad4025f28a5af6d1c43adee6aee9b041f98728f8ca0",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "888baef974266b07f86a6308ae78ea761fca516be7a37bcbae29f321b39032e7"
+    },
+    {
+      "key": "family-photoshop-dark-png-256",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:10:38.515246+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "366784401a6766e361d9da8e7d2f3b8dd99739d6b8cea74e007d32e0547ac3cc",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "bd919576ac7a46385746a1b3d3c330dff331cfd71c11c3248ba63435883460d8"
+    },
+    {
+      "key": "family-photoshop-dark-optical-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:10:48.947305+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "5580cded8859968be01337de0843d74ef1a6be97f140545e877c3e69f3107264",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "3c4bb340b0af71a39b8a929a057d3eab5acf74179cad090b054ea0092f0a02af"
+    },
+    {
+      "key": "family-photoshop-dark-png-128-optical",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:10:54.714951+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "ad1b9212bcd6586a42081207582bd626dda78067e8d53520f60c1ac7558745df",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "f8dcff1a2f09d6cd82352398141c22f16a561f56718855ef5b1036c5d8eedfcd"
+    },
+    {
+      "key": "family-photoshop-currentcolor-build",
+      "operation": "document_build",
+      "recorded_utc": "2026-10-01T12:10:59.166945+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "93862a384a86ef1bdf5afd7641ed917674ebe4a7328495c2044fb4800ab3f088",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "5dc4bca9a6a1ac1896945548d24541a5f46ace638cdbb7d7e35f332de0db4d02"
+    },
+    {
+      "key": "family-photoshop-currentcolor-png-512",
+      "operation": "document_export",
+      "recorded_utc": "2026-10-01T12:11:04.660814+00:00",
+      "source_commit": "7657bafe78dad0c59c833e25da6f330067c2e64b",
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "output_sha256": "a1f660dd6e347f32aa5e7dc52b06c7ed9433e63aae7cd5fb6385ca4d7b5f3a29",
+      "public_ledger_path": "evidence/mcp-calls.public.json",
+      "raw_line_sha256": "62d03faa43fadb15829496819ff2ea6dcadb3dcfdee840a81b392e5f4169597b"
     }
   ],
   "policy_snapshot": {
@@ -1241,9 +5630,11 @@
   },
   "acceptance": {
     "geometry_and_raster_visual_review": "verified",
-    "new_core_gui": "launch_observed_only_not_visual_acceptance",
+    "new_core_gui": "verified_partial_canvas",
     "brand_design_acceptance": "awaiting_user_review",
-    "family_production": "in_progress"
+    "family_production": "paused_pending_native_birth_race_repair",
+    "full_page_gui_acceptance": "incomplete",
+    "family_first_six_file_and_bitmap_qa": "verified"
   },
   "historical_scope": {
     "v1_archive": "unchanged historical first delivery",
@@ -1253,9 +5644,34 @@
     ],
     "cc_geometry_change_json": "Historical prepared candidate; cc-visual-review.json describes the corrected final geometry."
   },
+  "actual_family_ids": [
+    "core",
+    "maya",
+    "3dsmax",
+    "blender",
+    "houdini",
+    "zbrush",
+    "photoshop"
+  ],
+  "production_gaps": [
+    {
+      "family": "mobu",
+      "receipt_key": "family-mobu-currentcolor-build",
+      "status": "failed_output_absent",
+      "output": "assets/families/mobu/native/currentcolor.svg",
+      "error": "502 native Windows GLib lineage chain validation failure",
+      "disposition": "Production paused for generic strict birth-race repair; successful prior artifacts remain valid. Repair test is separate from native acceptance."
+    }
+  ],
+  "safe_mcp_ledger": {
+    "path": "evidence/mcp-calls.public.json",
+    "sha256": "eb93495deada8996336e6b24b0fbcd7439b7ee36d339105117f47bef8da7cd77",
+    "format": "json",
+    "calls": 104
+  },
   "publication": {
-    "source_manifest_sha256": "acca2a0b70a8e65ccbe3a3231f7d3ae2d050382266dcaf52e5fb35a0801b9399",
-    "scope": "Only the eight verified corrected core outputs in this producer snapshot. Other families remain planned.",
+    "source_manifest_sha256": "5a9e56c6a96ad07dd65c9bb9fb6af4761d4e2be9c2e8244a811189edc72c6121",
+    "scope": "Seven actual families and 104 verified outputs in this producer snapshot. Six software families each have 16 files; their currentColor outlined release remains pending. The other 30 families are planned, not produced.",
     "metadata_redactions": [
       "removed backend_port",
       "removed ephemeral application-instance prefix from tool slug; operation name unchanged",
@@ -1267,6 +5683,7 @@
       "removed parent_pid",
       "removed parent_probe_error",
       "removed pid",
+      "removed request_id",
       "removed requested_pid",
       "removed service_session",
       "replaced private filesystem or local service location"
@@ -1282,6 +5699,15 @@
     "visual_evidence": "evidence/cc-visual-review.json",
     "font_notice": "fonts/OFL.txt",
     "comparison_published": false,
-    "reference_notice": "Before/after input imagery is not redistributed in this batch; the producer's geometric and raster review record is preserved."
+    "reference_notice": "Before/after input imagery is not redistributed in this batch; the producer's geometric and raster review record is preserved.",
+    "family_qa": "evidence/family-first-six-qa.json",
+    "family_policy": "evidence/family-policy-plan.public.json",
+    "family_policy_source_sha256": "1b8d6a17c75393b6abb115a4e8e712a562493a30e0ad0fbe7c92242fff573b07",
+    "ui_evidence": "evidence/ui-acceptance.public.json",
+    "ui_evidence_source_sha256": "fe4c00691f5da6298ba2099c201c0158f881b3308158af555f2d756031af441f",
+    "excluded_producer_ledger": {
+      "source_sha256": "2b37563234d9ac3d612908b7a56133d421137f379f9ccb089bb801c7f6c879da",
+      "scope": "The producer JSONL includes private routing and is not redistributed. The selected 104 successful output calls are published as redacted JSON instead."
+    }
   }
 }

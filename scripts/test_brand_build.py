@@ -87,6 +87,15 @@ class BrandBuildGuards(unittest.TestCase):
         self.assertTrue(any("SHA-256 mismatch" in problem for problem in problems))
         self.assertEqual("previous deployment", (output / "sentinel.txt").read_text(encoding="utf-8"))
 
+    def test_download_dimensions_distinguish_svg_viewbox_and_png_pixels(self):
+        self.save()
+        _, problems, _ = self.build()
+        self.assertEqual([], problems)
+        detail = self.page("brands/dcc-mcp-mark/index.html")
+        self.assertIn("viewBox 0 0 20 10", detail)
+        self.assertIn("2 × 1 px", detail)
+        self.assertNotIn("— × —", detail)
+
     def test_local_preview_cannot_target_production_directory(self):
         published, problems, _ = self.build(preview=True)
         self.assertEqual([], published)
