@@ -140,7 +140,7 @@ def _gallery(catalog, items, root, preview):
 <div class="brand-hero-meta"><span>实际资源 · 深浅背景</span><span>制作过程 · 可核验下载</span></div></section>%s
 <section class="brand-collection" aria-labelledby="brand-wall-title"><div class="brand-collection-heading"><h2 id="brand-wall-title">品牌家族</h2><p>从品牌标识到适配器视觉</p></div>
 <div class="brand-controls" id="brand-controls" hidden><label class="brand-search"><span>搜索品牌</span><input id="brand-search" type="search" maxlength="200" placeholder="品牌、软件或关键词" autocomplete="off"></label>
-<div class="brand-filter-row"><label>家族<select id="brand-family">%s</select></label><label>软件<select id="brand-software">%s</select></label><button type="button" class="reset-button" id="brand-reset">重置筛选</button></div>%s</div>
+<div class="brand-filter-row"><label>家族<select id="brand-family" aria-label="品牌家族">%s</select></label><label>软件<select id="brand-software" aria-label="DCC 软件">%s</select></label><button type="button" class="reset-button" id="brand-reset">重置筛选</button></div>%s</div>
 <noscript><p class="notice">当前显示全部条目。已验证资产同时提供深浅背景实图；详情、下载与许可无需 JavaScript 即可查看。</p></noscript>
 <p class="result-count" id="brand-count" role="status" aria-live="polite">全部 %d 个品牌条目</p>
 <div class="brand-wall" id="brand-wall">%s</div><div class="empty-state" id="brand-empty"%s><h3>没有匹配的品牌</h3><p>试试其他软件、家族或关键词。</p><button class="primary-button" id="brand-empty-reset" type="button" hidden>显示全部</button></div></section>''' % (
