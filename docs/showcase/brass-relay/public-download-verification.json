@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "PENDING_PUBLIC_HOSTING_AND_DOWNLOAD_VERIFICATION",
+  "case": "brass-relay",
+  "release_url": null,
+  "assets": [
+    {
+      "role": "core",
+      "filename": "brass-relay-editable-core-v1.zip",
+      "bytes": 1944805,
+      "sha256": "f1d4777024663b501429ebc1bbfd8cbc45176d073ef2df5917f3fb9e70cc7856",
+      "member_count": 53,
+      "public_url": null,
+      "download_verified": false
+    },
+    {
+      "role": "full",
+      "filename": "brass-relay-native-projects-v1.zip",
+      "bytes": 143693251,
+      "sha256": "a7fe8122fca0ee3dc70f7805716a0f730e237a3e382ea6407c4933e147a77b0f",
+      "member_count": 152,
+      "public_url": null,
+      "download_verified": false
+    }
+  ],
+  "scope": "The listed hashes are locally assembled package identities. They are not evidence of public availability or a successful remote download."
+}

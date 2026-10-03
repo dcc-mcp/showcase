@@ -155,6 +155,15 @@ media companion has its own availability and SHA-256 record. Case artwork and
 source assets are excluded from the site-code MIT license; see the case
 [rights and provenance](docs/showcase/crystal-freight-native-film/LICENSES.md).
 
+## Brass Relay
+
+Brass Relay adds a FreeCAD → Blender → Kdenlive four-bar study with 13
+editable CAD parts, three native scenes and a corrected 432-frame timeline.
+The compact native source package requires the full companion media for its
+editor timeline. Case artwork and source assets are excluded from the site-code
+MIT license; see the case
+[rights and provenance](docs/showcase/brass-relay/LICENSES.md).
+
 ## License
 
 Site code is [MIT](LICENSE). Each case records its source license and any

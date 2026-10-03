@@ -972,6 +972,240 @@
         "title": "实际 Blender 适配器基线；其他版本、修正源码哈希及公开证据边界见验收文件"
       },
       "verified_at": "2026-10-03T18:56:59Z"
+    },
+    {
+      "slug": "brass-relay",
+      "title": "BRASS RELAY · 黄铜四连杆",
+      "subtitle": "FreeCAD → Blender → Kdenlive · 从参数零件到可核对的机构运动",
+      "software": [
+        "FreeCAD",
+        "Blender",
+        "Kdenlive"
+      ],
+      "capabilities": [
+        "程序化几何",
+        "材质与灯光",
+        "动画",
+        "跨软件制作",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/brass-relay/hero.jpg",
+        "alt": "黄铜镂孔飞轮、暗红连杆与银色摇杆，在象牙色仪器底座上组成完整四杆机构"
+      },
+      "evidence_label": "本轮实际运行 · 三软件 DCC-MCP 创作",
+      "evidence_scope": "实际 FreeCAD → Blender → Kdenlive MCP 创作：13件参数CAD、3份原生BLEND、96张原生运动帧和432帧影片。修正时间线的98张原媒体、390个文字效果身份及样式均保留；迁移重渲染、未改参数的原生保存重开与同一显示环境的432帧RGB/RGBA和MP4比较通过。GUI控件只观察了结尾两个效果条目与第一个文字字段；公开证据是精选调用与结果。",
+      "summary": "镂孔黄铜飞轮匀速旋转，带动暗红连杆与银色摇杆往复摆动。零件尺寸、轴向分层、孔轴位置与原生关键帧都可检查和继续编辑。",
+      "goal": "用明确的几何约束组织一件精致机械演示，将参数CAD、原生场景与实际影片连接成可复用的制作链路。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过真实DCC-MCP制作一件黄铜四杆演示仪。固定轴间距70毫米、输入半径25毫米、连杆80毫米、摇杆50毫米。先在FreeCAD原生建立可编辑零件与真实通孔，检查有效闭合实体；将实际STL数据按毫米除以20映射到Blender。用黄铜、暗红、银色、象牙白和深灰配色，制作清楚的材质、倒角、照明和原生文字。每一帧由同一几何解计算铰点，验证原生矩阵、关键值与保存重开。渲染96帧一周运动，在Kdenlive剪成18秒演示，明确区分连续输入和摆动输出。保留原生工程、改进前后、实际MCP证据、版本、许可和迁移验收；不声称动力学或制造验证。",
+        "note": "按实际制作流程整理的复用说明，不是用户原话。"
+      },
+      "environment": [
+        {
+          "label": "FreeCAD",
+          "value": "1.0.0；历史CAD创作用0.4.1模块实现，最终原生视图副本用0.4.2源码及独立增强"
+        },
+        {
+          "label": "Blender",
+          "value": "4.3.2；0.1.43兼容适配器与记录的几何、文字、渲染和原生副本增强"
+        },
+        {
+          "label": "Kdenlive / MLT",
+          "value": "24.12.3 / 7.30.0；0.1.1与相对媒体打包增强"
+        },
+        {
+          "label": "Core / Server / CLI",
+          "value": "历史创作与96帧渲染使用0.20.39；最终原生副本、CAD视图、影片编辑与迁移验收使用0.20.41"
+        },
+        {
+          "label": "Units",
+          "value": "CAD为毫米；Blender示意坐标=CAD毫米÷20，坐标轴不变"
+        },
+        {
+          "label": "Adapter 适配器",
+          "value": "FreeCAD历史0.4.1 / 最终视图0.4.2、Blender0.1.43兼容实现、Kdenlive0.1.1及记录的本地增强"
+        }
+      ],
+      "tools": [
+        {
+          "name": "create_document / add_primitive / boolean_operation / export_geometry",
+          "description": "实际FreeCAD MCP创建13个原生参数零件，检查拓扑与尺寸，导出STEP/STL"
+        },
+        {
+          "name": "save_copy with visible_objects",
+          "description": "有界本地增强通过FreeCAD原生视图API保存可见最终零件与相机，保存重开验证；代表零件另有GUI首次打开验收"
+        },
+        {
+          "name": "create_mesh_from_data / inspect_data_geometry / create_text",
+          "description": "从实际原生STL读入数值几何，核对顶点与拓扑；建立原生文字和可编辑材质"
+        },
+        {
+          "name": "set_keyframe / set_current_frame / render_scene",
+          "description": "原生97姿态、1455关键值与96张运动渲染；逐帧检查铰点位置"
+        },
+        {
+          "name": "add_media / insert_clip / add_effect / package_project / render_project",
+          "description": "实际Kdenlive MCP建立可编辑18秒时间线，打包相对媒体并进行完整迁移复核"
+        }
+      ],
+      "steps": [
+        {
+          "title": "从参数零件开始",
+          "description": "13件独立参数零件，布尔操作数仍可编辑；各最终形体均有效、闭合且只有一个实体"
+        },
+        {
+          "title": "让材质服务机构",
+          "description": "黄铜输入、暗红连杆、银色输出形成清晰层级；真实通孔、支座、销轴与端帽均来自原生几何",
+          "image": {
+            "src": "docs/showcase/brass-relay/hero.jpg",
+            "alt": "完整四杆仪器主视觉"
+          }
+        },
+        {
+          "title": "用同一几何解驱动运动",
+          "description": "固定杆70mm、输入25mm、连杆80mm、输出50mm；96个原生渲染位置的最大铰点误差为0.00000723mm"
+        },
+        {
+          "title": "保留俯视与实际改进过程",
+          "description": "俯视母版展示90°输入时的杆件关系。早期图保留原像素，但相机、分辨率与场景修饰不同，不当作同机位对比",
+          "image": {
+            "src": "docs/showcase/brass-relay/plan.jpg",
+            "alt": "90度输入角时的四杆机构俯视图"
+          }
+        },
+        {
+          "title": "从原生帧到可迁移影片",
+          "description": "96张实际运动帧构成4秒一周，影片重复两遍来分别强调输入与输出；原媒体不可用时全部432视频帧一致"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/brass-relay/hero.jpg",
+          "alt": "Brass Relay最终主视觉",
+          "caption": "1600×1000原生PNG母版的网页JPEG预览"
+        },
+        {
+          "src": "docs/showcase/brass-relay/plan.jpg",
+          "alt": "四连杆俯视图",
+          "caption": "原生相机与场景保留在独立brass-plan.blend中"
+        },
+        {
+          "src": "docs/showcase/brass-relay/film-1280.mp4",
+          "alt": "四连杆实际运动与制作说明",
+          "caption": "1280×800，24fps，432帧，18秒；静音影片"
+        },
+        {
+          "src": "docs/showcase/brass-relay/before.jpg",
+          "alt": "真实早期材质与构图版本",
+          "caption": "真实早期lookdev，非同机位、非同分辨率对比；原生像素未重绘"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Parametric CAD",
+          "result": "pass",
+          "observed": "13 native parts; valid closed single solids, editable links, STEP volume/readback and STL geometry handoff"
+        },
+        {
+          "name": "Native motion",
+          "result": "pass",
+          "observed": "97 native poses,1455 keyframe values;96 rendered poses have maximum hinge error7.226413753188325e-06mm"
+        },
+        {
+          "name": "Portable BLEND",
+          "result": "pass",
+          "observed": "Three clean native copies reopen with original sources unavailable; geometry, text, camera, keys and full-production referenceRGBA match"
+        },
+        {
+          "name": "Native CAD presentation",
+          "result": "pass",
+          "observed": "13 MCP presentation copies reopen with selected final objects and camera; representative flywheel opens visibly in actualFreeCAD withoutShow/Fit correction"
+        },
+        {
+          "name": "Film relocation",
+          "result": "pass",
+          "observed": "All432 decoded video-frame hashes match with original package and media unavailable"
+        },
+        {
+          "name": "Corrected native editor",
+          "result": "pass",
+          "observed": "Exact 519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2; empty root,98 PNGs,390 identities/styles; scoped native GUI and untouched save/reopen,432-frame headless and same-display comparisons. Parameter Undo excluded."
+        },
+        {
+          "name": "Public native download",
+          "result": "fail",
+          "observed": "Corrected compact/full packages are assembled and locally verified. Full public hosting and actual downloaded-byte verification are pending; full URL is null."
+        }
+      ],
+      "limitations": [
+        "运动为几何解驱动的预定关键帧；不是刚体动力学、应力、承载或制造验证",
+        "铰点误差为数值读回结果，不是物理测量精度；不声称连续时间碰撞认证",
+        "96张独立原生运动帧在18秒影片中重复两遍；不声称432张不同运动渲染",
+        "Native CAD包包含13个参数零件；完整装配保存在Blender，不声称FreeCAD约束装配",
+        "FreeCAD首次打开GUI验收只覆盖单独的代表飞轮证明副本；13件最终工程均有原生视图保存重开读回",
+        "Kdenlive原生控件视觉验收只覆盖结尾两个效果条目和首个文字字段；390项身份及样式均有序列化比较。参数编辑、Undo与最终来源监视器未获本轮资格",
+        "历史Core0.20.39创作记录与0.20.41最终资格分开保留；不追认旧记录为新版本验收",
+        "不声称完全无缝像素循环、跨机器一致渲染或适配器已发布"
+      ],
+      "resources": [
+        {
+          "label": "制作报告",
+          "url": "docs/showcase/brass-relay/README.md"
+        },
+        {
+          "label": "可编辑精简工程",
+          "url": "docs/showcase/brass-relay/editable-core.zip"
+        },
+        {
+          "label": "下载状态与校验",
+          "url": "docs/showcase/brass-relay/downloads.json"
+        },
+        {
+          "label": "原生工程完整清单",
+          "url": "docs/showcase/brass-relay/native-package.json"
+        },
+        {
+          "label": "实际MCP调用节选",
+          "url": "docs/showcase/brass-relay/mcp-evidence.public.json"
+        },
+        {
+          "label": "测量及验收",
+          "url": "docs/showcase/brass-relay/validation.json"
+        },
+        {
+          "label": "文件清单",
+          "url": "docs/showcase/brass-relay/manifest.json"
+        },
+        {
+          "label": "方法及边界",
+          "url": "docs/showcase/brass-relay/METHODS.md"
+        },
+        {
+          "label": "作品权利与来源",
+          "url": "docs/showcase/brass-relay/LICENSES.md"
+        },
+        {
+          "label": "隐私及完整性检查",
+          "url": "docs/showcase/brass-relay/privacy-audit.json"
+        },
+        {
+          "label": "公开下载核验",
+          "url": "docs/showcase/brass-relay/public-download-verification.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "Case artwork and native/source assets: rights reserved; no additional license grant. Separately identified upstream font/software notices retain their scope.",
+        "note": "未导入第三方模型、纹理、参考影片或音乐"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-freecad/tree/aebbdb5e3926d24e23cdabc641499e69539f70f2",
+        "commit": "aebbdb5e3926d24e23cdabc641499e69539f70f2",
+        "title": "FreeCAD官方源码基线；历史与修正编辑工程的版本资格见制作说明"
+      },
+      "verified_at": "2026-10-03T19:42:43Z"
     }
   ]
 }

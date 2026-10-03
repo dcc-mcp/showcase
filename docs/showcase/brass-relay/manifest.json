@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "freecad_application": "FreeCAD",
+  "freecad_version": "1.0.0",
+  "blender_application": "Blender",
+  "blender_version": "4.3.2",
+  "kdenlive_application": "Kdenlive",
+  "kdenlive_version": "24.12.3 / MLT7.30.0",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 1732,
+      "sha256": "f69d5bbd2370e178a12687a8017cd93ed664ad9aa93bd83815ab0a894809e960"
+    },
+    {
+      "path": "METHODS.md",
+      "bytes": 3288,
+      "sha256": "c60bbae1148b298bd9697af06d04406ca7c00a4d7ab9299143c702357b35ce6a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4432,
+      "sha256": "e3f0bf7c56c624b58874e691b041881a1b195a4b95b48033c3855ebec6880a53"
+    },
+    {
+      "path": "before.jpg",
+      "bytes": 48119,
+      "sha256": "3d9baf389badf30504a7bb0f157fe0d5873f394b35fed0e0b68fac142d1d90be",
+      "width": 1100,
+      "height": 850
+    },
+    {
+      "path": "downloads.json",
+      "bytes": 760,
+      "sha256": "4f6dad976209adaac5ec41ad7940668f1169df925c9a816606eefc6c98aa93e6"
+    },
+    {
+      "path": "editable-core.zip",
+      "bytes": 1944805,
+      "sha256": "f1d4777024663b501429ebc1bbfd8cbc45176d073ef2df5917f3fb9e70cc7856"
+    },
+    {
+      "path": "film-1280.mp4",
+      "bytes": 1986459,
+      "sha256": "f2f3eaa047fc3622e0aab775053bb28653fa3e32548325947c3611be9bf83b36",
+      "width": 1280,
+      "height": 800,
+      "frames": 432,
+      "fps": 24,
+      "video_seconds": 18,
+      "container_seconds": 18.005
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 77376,
+      "sha256": "fe6c4495a3a0468fa6f41c646db64d32d7f401fb8756ae7371f122472c28f930",
+      "width": 1600,
+      "height": 1000
+    },
+    {
+      "path": "mcp-evidence.public.json",
+      "bytes": 126271,
+      "sha256": "32e2b5ecf58082937d472136f601c57053a4f0cac76cb04d07b21100e84b87d1"
+    },
+    {
+      "path": "native-package.json",
+      "bytes": 42113,
+      "sha256": "15538916d7c7c7ecf8362a8cac9c9a6c1ca8abef84808bccb155af34e1b97c6f"
+    },
+    {
+      "path": "plan.jpg",
+      "bytes": 76694,
+      "sha256": "1e2852a5479a4f93b86751b319dffbfbbab1ca9131562061b7ed6d4a64f3f034",
+      "width": 1600,
+      "height": 1000
+    },
+    {
+      "path": "privacy-audit.json",
+      "bytes": 1387,
+      "sha256": "b7560970b6c2a484a628271cdacf2ec33153578d04485f32cfffe9521b4f36d1"
+    },
+    {
+      "path": "public-download-verification.json",
+      "bytes": 877,
+      "sha256": "98abd6d3bb7fe102390bf98258d95ba43da7e6ad7edcc084e9142122382ee2ea"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 13949,
+      "sha256": "fe01e36f983f0c5be501bf11c6bd38553ff0e3f0a02c5159d182e2d5c4e31877"
+    }
+  ]
+}
