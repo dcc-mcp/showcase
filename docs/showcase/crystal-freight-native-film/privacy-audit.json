@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "status": "PASS_FILE_ONLY_PREPUBLICATION",
+  "original_reused_full_members": 135,
+  "original_reused_compact_members": 11,
+  "original_media_files": 122,
+  "qualified_native_bytes_unchanged": false,
+  "all_reused_member_hashes_rechecked": true,
+  "archive_CRC_and_relative_paths": true,
+  "embedded_PNG_text_and_image_exif_checked": true,
+  "uncompressed_BLENDER_bytes_scanned": true,
+  "credential_and_private_path_findings": 0,
+  "raw_logs_and_private_traces_excluded": true,
+  "runtime_source_and_third_party_media_excluded": true,
+  "new_asset_license_grants": false,
+  "native_render_rerun": false,
+  "scope": "Bounded private-path and credential-pattern screening plus declared provenance review; not proof of universal secret detection.",
+  "qualified_native_bytes_scope": "All four BLENDs and the a77ec Kdenlive project unchanged; the SCAD has exactly one header-comment change, independently bound below.",
+  "all_122_PNG_bytes_unchanged": true,
+  "SCAD_header_only_change": {
+    "original_sha256": "d5dd1cc0133af2b2a197c71e48d201c349431bc50f5db2e75be3e94ec79cfa4a",
+    "publication_sha256": "d7b416d28130cab540fca17b5f7a9c6a3a3d9b793ade94cf882647238ffc1742",
+    "non_comment_sha256": "48f23f19d455af7f16c141b31cda78d2cc201b2802662c790f6feee4b6591982"
+  },
+  "selected_payload_unsupported_license_grants": 0
+}

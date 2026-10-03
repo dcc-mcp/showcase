@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "case": "crystal-freight",
+  "core": {
+    "filename": "crystal-freight-editable-core-v5.zip",
+    "url": "editable-core.zip",
+    "bytes": 2927669,
+    "sha256": "5952fa4b99c3c4e415251dee52f449042d6f93687aa6261faa52103cfa752e05",
+    "scope": "Self-contained CAD and Blender; editor media omitted"
+  },
+  "full": {
+    "filename": "crystal-freight-native-projects-v5.zip",
+    "url": null,
+    "bytes": 233614591,
+    "sha256": "9d025a411e969c0c0bec293c2e618b2bd7bba920d656fae528ce7735e50a843b",
+    "scope": "All accepted native source/media plus corrected editor",
+    "status": "Prepared and audited; upload and public download verification pending"
+  }
+}

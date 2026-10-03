@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "path": "openscad/crystal-freight-kit.scad",
+  "change": "Removed one unsupported license suffix from the standalone author-attribution line comment; preserved attribution. No other source byte changed.",
+  "line": 3,
+  "original": {
+    "path": "openscad/crystal-freight-kit.scad",
+    "bytes": 1833,
+    "sha256": "d5dd1cc0133af2b2a197c71e48d201c349431bc50f5db2e75be3e94ec79cfa4a"
+  },
+  "publication": {
+    "path": "openscad/crystal-freight-kit.scad",
+    "bytes": 1824,
+    "sha256": "d7b416d28130cab540fca17b5f7a9c6a3a3d9b793ade94cf882647238ffc1742"
+  },
+  "removed_comment_bytes": 9,
+  "all_other_bytes_identical": true,
+  "line_comment_context": "First three physical lines are standalone // comments; no preceding string/block-comment context. The changed line ends at its original newline.",
+  "string_aware_comment_lexer": "Non-comment bytes, including string literals and every preserved newline, are identical.",
+  "non_comment_bytes": 1624,
+  "non_comment_sha256": "48f23f19d455af7f16c141b31cda78d2cc201b2802662c790f6feee4b6591982",
+  "native_launch_or_render": false,
+  "qualification_scope": "Header-only source proof; not a fresh OpenSCAD compile. All four BLENDs, the qualified Kdenlive timeline and all 122 PNGs retain exact accepted bytes. Historical authoring receipts keep their original source hashes."
+}

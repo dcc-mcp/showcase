@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "counts": {
+    "objects": 148,
+    "mesh_objects": 132,
+    "base_vertices": 14369,
+    "base_faces": 15660,
+    "materials": 21,
+    "shader_and_geometry_node_trees": 21,
+    "shader_and_geometry_nodes": 56
+  },
+  "interchange_totals": {
+    "parts": 3,
+    "base_vertices": 4423,
+    "base_faces": 8598,
+    "millimetres_to_metres_factor": 0.001
+  },
+  "animation": {
+    "native_fps": 12,
+    "native_frame_renders": 120,
+    "distinct_native_rgb_images": 115,
+    "native_frame_range": [
+      1,
+      120
+    ],
+    "native_resolution": [
+      1280,
+      960
+    ],
+    "samples": 96,
+    "frame_manifest_count": 120,
+    "film_fps": 24,
+    "film_duration_s": 20.0,
+    "film_frames": 480,
+    "action_frame_hold": 2,
+    "freight_pickups": 1,
+    "car_spacing_m": 2.4,
+    "rail_gauge_mm": 600,
+    "sleeper_count": 112,
+    "method": "Explicit native kinematic keyframes, including intentional holds"
+  },
+  "stills": {
+    "hero_resolution": [
+      1600,
+      1200
+    ],
+    "hero_samples": 384,
+    "detail_resolution": [
+      1600,
+      1200
+    ],
+    "detail_samples": 256,
+    "native_jpeg_direct_exports": 2,
+    "development_comparison": "Earlier revision rerendered with final train and camera pose; matched final native frame supplied",
+    "rendered_pixels_unretouched": true,
+    "path_metadata_only_sanitized": true
+  },
+  "reported_measurements": {
+    "maximum_sampled_wheel_gap_mm": 0.713,
+    "minimum_sampled_gateway_clearance_mm": 106.0
+  },
+  "environment": {
+    "blender_host": "4.3.2",
+    "blender_base_adapter_version": "0.1.43",
+    "blender_base_adapter_commit": "1f1dacc54c1bb9fa0f8b347f345437f59c23e40d",
+    "openscad_host": "2021.01",
+    "openscad_base_adapter_version": "0.3.0",
+    "openscad_base_adapter_commit": "11ad4f38a0a823b9a72b5a9413d7651c9b68a5c9",
+    "kdenlive_host": "24.12.3",
+    "mlt_host": "7.30.0",
+    "core": "0.20.39",
+    "mcp_sdk": "2.2.0",
+    "renderer": "Cycles CPU, denoising disabled; host has no OpenImageDenoise",
+    "qualification_core": "0.20.41",
+    "qualification_adapter_source_sha256": "5edb15bf392c2c2cd85371b1152c708fa4170844442890d8dd94a8adea0520c5",
+    "qualification_adapter_modules": {
+      "project": "d49956843993e73109dcffddc312232f657d32851ec93dd94f3377274148e32e",
+      "catalog": "ceb9c59e0b461b58a722963d5a09a9d64d6005bc24c3bd4ebe3b329477e1f83f",
+      "packaging": "c5d189886273ea5b9b6b3797b63478797aee5f8df64974a17b9d60424d070bed",
+      "render": "2b976983fed2b0b75b67c3b4be5ed7f83d7a9744d6f09c93763ef688a82a4eb8"
+    },
+    "adapter_scope": "Historical authoring versions above; corrected timeline qualified with a separately pinned development source. No newly released adapter or cross-version compatibility claim."
+  },
+  "checks": [
+    {
+      "name": "rails_unit_axis_topology_conservation",
+      "result": "pass",
+      "source_vertices": 1536,
+      "source_faces": 3072,
+      "scaled_position_float32_sha256": "5c53ef1254f45bba52222d4824be59dc1f77c7771f8e81956467712f0cb4f80e",
+      "native_position_float32_sha256": "5c53ef1254f45bba52222d4824be59dc1f77c7771f8e81956467712f0cb4f80e",
+      "source_topology_sha256": "c5dd8678ee8293a0d33b1e5945d9b6a65b2bae60aff8af0a52b4fae46c2a3713",
+      "native_topology_sha256": "c5dd8678ee8293a0d33b1e5945d9b6a65b2bae60aff8af0a52b4fae46c2a3713",
+      "native_dims_m": [
+        12.248000144958496,
+        8.04800033569336,
+        0.07999998331069946
+      ],
+      "bbox_min_m": [
+        -6.124,
+        -4.024,
+        0.7
+      ],
+      "bbox_max_m": [
+        6.124,
+        4.024,
+        0.78
+      ]
+    },
+    {
+      "name": "sleepers_unit_axis_topology_conservation",
+      "result": "pass",
+      "source_vertices": 896,
+      "source_faces": 1344,
+      "scaled_position_float32_sha256": "ef09394919856d3a2227145ea267757c43dc04d2652376518cfbe8a641751f69",
+      "native_position_float32_sha256": "ef09394919856d3a2227145ea267757c43dc04d2652376518cfbe8a641751f69",
+      "source_topology_sha256": "d491d005a113d404b3d9fa8d7f102d1deb61df81c8c22af563fe7384b1b6799d",
+      "native_topology_sha256": "d491d005a113d404b3d9fa8d7f102d1deb61df81c8c22af563fe7384b1b6799d",
+      "native_dims_m": [
+        12.619999885559082,
+        8.420000076293945,
+        0.12999999523162842
+      ],
+      "bbox_min_m": [
+        -6.31,
+        -4.21,
+        0.57
+      ],
+      "bbox_max_m": [
+        6.31,
+        4.21,
+        0.7
+      ]
+    },
+    {
+      "name": "trestle_unit_axis_topology_conservation",
+      "result": "pass",
+      "source_vertices": 1991,
+      "source_faces": 4182,
+      "scaled_position_float32_sha256": "e1a933b1f9a381a4175f955968a67c0d00f557410e280cbb8867db2ee8c296ca",
+      "native_position_float32_sha256": "e1a933b1f9a381a4175f955968a67c0d00f557410e280cbb8867db2ee8c296ca",
+      "source_topology_sha256": "8e5b0476f8117ba352c9ea11d514feee2a178236514a1028789f6251aebb4587",
+      "native_topology_sha256": "8e5b0476f8117ba352c9ea11d514feee2a178236514a1028789f6251aebb4587",
+      "native_dims_m": [
+        12.411649703979492,
+        4.693990707397461,
+        1.8949999809265137
+      ],
+      "bbox_min_m": [
+        -6.11188,
+        -4.31,
+        -1.31
+      ],
+      "bbox_max_m": [
+        6.2997700000000005,
+        0.38399099999999997,
+        0.585
+      ]
+    },
+    {
+      "name": "native_wheel_tread_contact_at_10_frames_7_axles",
+      "result": "pass",
+      "observations": 70,
+      "maximum_vertical_gap_m": 0.0007132732536703212,
+      "minimum_vertical_gap_m": -4.768371586472142e-09,
+      "maximum_centerline_implicit_error": 6.854224765540096e-08,
+      "tolerance_m": 0.0011
+    },
+    {
+      "name": "car_body_obb_separation_all_authored_integer_frames",
+      "result": "pass",
+      "frames": 120,
+      "clear_frames": 120,
+      "method": "Conservative XY body rectangles; coupling rods intentionally connect pin-to-pin and are excluded",
+      "between_frame_continuous_collision": "not established"
+    },
+    {
+      "name": "portal_inner_bore_cab_clearance_revised_geometry",
+      "result": "pass",
+      "before": {
+        "minimum_signed_clearance_m": -0.031834978186635055,
+        "tested_clipped_vertices": 8195,
+        "worst": {
+          "frame": 109,
+          "car": 0,
+          "gateway_degrees": 58,
+          "material_group": "EnginePaint",
+          "point_yz_m": [
+            -0.5256423518348289,
+            1.6050000000000004
+          ]
+        }
+      },
+      "after": {
+        "minimum_signed_clearance_m": 0.1060381072350741,
+        "tested_clipped_vertices": 8195,
+        "worst": {
+          "frame": 109,
+          "car": 0,
+          "gateway_degrees": 58,
+          "material_group": "EnginePaint",
+          "point_yz_m": [
+            -0.5256423518348289,
+            1.6050000000000004
+          ]
+        }
+      },
+      "method": "Every supplied body-mesh face edge clipped to gateway length; convex bore half-plane margins at all 120 authored integer frames",
+      "limits": "Excludes bevel expansion and surrounding rockwork; no continuous-time dynamics claim"
+    },
+    {
+      "name": "native_transform_readback_matches_clearance_inputs",
+      "result": "pass",
+      "sampled_transforms": 30,
+      "max_position_error_m": 1.8992632505563028e-07
+    },
+    {
+      "name": "loading_target_unchanged_after_car_spacing_revision",
+      "result": "pass",
+      "native_samples": 5,
+      "max_wagon_cargo_xy_error_m": 0.0
+    },
+    {
+      "name": "released_cargo_rests_on_wagon_floor",
+      "result": "pass",
+      "floor_top_z_m": 1.35,
+      "native_cargo_base_gaps_m": [
+        2.3841857821338408e-08,
+        2.3841857821338408e-08,
+        2.3841857821338408e-08
+      ]
+    },
+    {
+      "name": "native_coupling_rods_join_the_car_pins",
+      "result": "pass",
+      "endpoint_observations": 40,
+      "max_endpoint_error_m": 4.453639146680785e-07
+    },
+    {
+      "name": "hoist_cable_meets_reach_calibrated_crane_tip",
+      "result": "pass",
+      "max_tip_error_m": 3.764541777035199e-08,
+      "native_samples": 5
+    },
+    {
+      "name": "earlier_body_envelope_revision",
+      "result": "fail",
+      "expected": 120,
+      "observed": 116,
+      "overlap_flag_count": 4,
+      "scope": "Preserved development failure: conservative 2D envelopes overlap at 4 integer positions, not observed mesh collisions. Resolved by 2.4 m spacing and final native target/coupler checks."
+    },
+    {
+      "name": "earlier_gateway_bore_revision",
+      "result": "fail",
+      "expected": "positive inner-bore clearance",
+      "observed": {
+        "minimum_signed_clearance_m": -0.03209190048007145,
+        "tested_clipped_vertices": 8535,
+        "worst": {
+          "frame": 110,
+          "car": 0,
+          "gateway_degrees": 58,
+          "material_group": "EnginePaint",
+          "point_yz_m": [
+            -0.5259390201453815,
+            1.6050000000000004
+          ]
+        }
+      },
+      "scope": "Preserved development failure; widened in final scene."
+    },
+    {
+      "name": "direct_native_jpeg_film_preflight",
+      "result": "fail",
+      "expected": "Native still pixels visible under text",
+      "observed": "White JPEG clip frames in the released file producer and experimental qimage route. PNG route visibly correct.",
+      "scope": "Excluded from final film; original native JPEGs retained unchanged."
+    },
+    {
+      "name": "save_render_result_image_buffer",
+      "result": "fail",
+      "expected": "Save decoded Render Result buffer as JPEG",
+      "observed": "Native headless Render Result reported has_data=false; save rejected. Direct native JPEG render and decoded-source PNG save succeeded instead.",
+      "scope": "Recorded limitation; no failed output shipped."
+    },
+    {
+      "name": "corrected_editor_project",
+      "result": "pass",
+      "observed": {
+        "sha256": "a77ec3142a18790b7602829ab2f73678470c954233a9272cd6ba07fb389afc9f",
+        "bytes": 93802,
+        "root": "",
+        "qimage_producers": 123,
+        "unique_relative_PNGs": 122,
+        "native_dynamictext_controls": 7
+      }
+    },
+    {
+      "name": "corrected_headless_accepted_and_relocated_render",
+      "result": "pass",
+      "observed": {
+        "frames": 480,
+        "accepted_RGBA_exact": true,
+        "relocated_RGBA_exact": true,
+        "accepted_MP4_bytes_exact": true,
+        "relocated_MP4_bytes_exact": true,
+        "original_sources_unavailable": true,
+        "movie_sha256": "87a8d6b18d35bf7cfd9fd560908c9cf2c5e62ff7d0275c97939b71b8ffa3b5f6"
+      }
+    },
+    {
+      "name": "native_GUI_controls_Save_Copy_and_reopen",
+      "result": "pass",
+      "observed": {
+        "source_sha256": "a77ec3142a18790b7602829ab2f73678470c954233a9272cd6ba07fb389afc9f",
+        "saved_copy_sha256": "50595adf36365990fe5f82b10d7232ab7c9dbfae342352ed9010005b84e55193",
+        "all_seven_controls": true,
+        "caption_arguments_exact": true,
+        "sample_frames_before_after": [
+          0,
+          95,
+          96,
+          97,
+          98,
+          99,
+          336,
+          432,
+          479
+        ],
+        "cwd_outside_project": true,
+        "manual_relink": false,
+        "parameter_edit": false,
+        "Undo": false
+      }
+    },
+    {
+      "name": "native_GUI_untouched_save_same_display_export",
+      "result": "pass",
+      "observed": {
+        "frames_per_movie": 480,
+        "dimensions": [
+          1280,
+          960
+        ],
+        "fps": 24,
+        "duration_seconds": 20,
+        "all_RGB_RGBA_frames_exact": true,
+        "MP4_bytes_exact": true,
+        "MP4_bytes": 2432136,
+        "MP4_sha256": "6f59979266fa9ecf8c07cac01391c6082b902ed52f137f352152ff9046e2c1a0"
+      }
+    },
+    {
+      "name": "four_Blender_native_relocations",
+      "result": "pass",
+      "observed": {
+        "files": 4,
+        "all_decoded_RGBA_exact": true
+      }
+    },
+    {
+      "name": "SCAD_attribution_comment_correction",
+      "result": "pass",
+      "observed": {
+        "schema_version": 1,
+        "path": "openscad/crystal-freight-kit.scad",
+        "change": "Removed one unsupported license suffix from the standalone author-attribution line comment; preserved attribution. No other source byte changed.",
+        "line": 3,
+        "original": {
+          "path": "openscad/crystal-freight-kit.scad",
+          "bytes": 1833,
+          "sha256": "d5dd1cc0133af2b2a197c71e48d201c349431bc50f5db2e75be3e94ec79cfa4a"
+        },
+        "publication": {
+          "path": "openscad/crystal-freight-kit.scad",
+          "bytes": 1824,
+          "sha256": "d7b416d28130cab540fca17b5f7a9c6a3a3d9b793ade94cf882647238ffc1742"
+        },
+        "removed_comment_bytes": 9,
+        "all_other_bytes_identical": true,
+        "line_comment_context": "First three physical lines are standalone // comments; no preceding string/block-comment context. The changed line ends at its original newline.",
+        "string_aware_comment_lexer": "Non-comment bytes, including string literals and every preserved newline, are identical.",
+        "non_comment_bytes": 1624,
+        "non_comment_sha256": "48f23f19d455af7f16c141b31cda78d2cc201b2802662c790f6feee4b6591982",
+        "native_launch_or_render": false,
+        "qualification_scope": "Header-only source proof; not a fresh OpenSCAD compile. All four BLENDs, the qualified Kdenlive timeline and all 122 PNGs retain exact accepted bytes. Historical authoring receipts keep their original source hashes."
+      }
+    }
+  ],
+  "blender_relocation": [
+    {
+      "name": "action",
+      "clean_sha256": "08b800d33bad769c40fc188579b063753363879285f27cf25a6ffd03cf4019c6",
+      "frame": 1,
+      "geometry_reopen_equal": true,
+      "poses_reopen_equal": true,
+      "original_and_clean_source_hidden_during_render": true,
+      "decoded_rgba_equal": true,
+      "decoded_rgba_sha256": "86a336ea1677b79f80a5a1d1a11501b00e1a1f1d8cf71aaeb72a3aad9a653ef0",
+      "dimensions": [
+        1280,
+        960
+      ]
+    },
+    {
+      "name": "hero",
+      "clean_sha256": "06b1fbdcb10d147ecf9dd6303aff28bcf4f602e2e44ca1b983b636e7d7d9746e",
+      "frame": 1,
+      "geometry_reopen_equal": true,
+      "poses_reopen_equal": true,
+      "original_and_clean_source_hidden_during_render": true,
+      "decoded_rgba_equal": true,
+      "decoded_rgba_sha256": "24e35aacf16e9e58842534fc1b14bc35cec2223b0c367a3d6ee87bc3f5f3d5c2",
+      "dimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "name": "detail",
+      "clean_sha256": "c319e25764d0ebb911ca611aeca774bb1e6e3c76c0dff10c1bfcabd6cc48472d",
+      "frame": 75,
+      "geometry_reopen_equal": true,
+      "poses_reopen_equal": true,
+      "original_and_clean_source_hidden_during_render": true,
+      "decoded_rgba_equal": true,
+      "decoded_rgba_sha256": "a9d47d11b7a7cbc8d73a0dab4ddbde49e0d7b2d5f734111c0d916820effe339e",
+      "dimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "name": "before",
+      "clean_sha256": "c0633ae645a16748c3a34617539c31fca0fca83087394e4154b7a612429af6c6",
+      "frame": 1,
+      "geometry_reopen_equal": true,
+      "poses_reopen_equal": true,
+      "original_and_clean_source_hidden_during_render": true,
+      "decoded_rgba_equal": true,
+      "decoded_rgba_sha256": "613d47ea63d53ad2577a82947bbbe9559bc684f3a2240c9d7e523103e34e6faf",
+      "dimensions": [
+        1280,
+        960
+      ]
+    }
+  ],
+  "evidence_binding": [
+    {
+      "record": "historical-production-validation",
+      "bytes": 210469,
+      "sha256": "f04bc5a5e2497e61aede86258bcec428a41a75540ce95f15ac3e2f27c8a47463"
+    },
+    {
+      "record": "corrected-native-qualification",
+      "bytes": 150110,
+      "sha256": "1d962c6a411b76ae36eadda4863f76b39efce15faa9c84a65c7e83ec77e595f7"
+    },
+    {
+      "record": "native-GUI-qualification",
+      "bytes": 38600,
+      "sha256": "022ce780cc48d2ea0827d45d70e72189464634182aa0d05de71064c883e70ecc"
+    },
+    {
+      "record": "independent-timeline-package-audit",
+      "bytes": 6438,
+      "sha256": "b085239803c1afbbf398bd468e3b496819430ccb872eca84839df221b6ccb557"
+    }
+  ],
+  "not_claimed": [
+    "Railway safety, structural engineering, rigid-body or suspension simulation",
+    "Continuous-time collision certification, every parameter variant, or a seamless loop",
+    "24 fps independently animated source frames: native motion is deliberately 12 fps",
+    "Parameter editing or parameter Undo on the final corrected timeline; a separate host limitation remains unqualified",
+    "Identical typography or pixels across machines, display modes, render engines or font stacks",
+    "This packaging pass did not reopen a host or render; BLEND/editor/media proof is bound to unchanged member hashes; SCAD has a separately proved header-only comment correction",
+    "Complete public production trace or bundled application/adapter runtime",
+    "A new artwork license or public-domain waiver"
+  ]
+}
