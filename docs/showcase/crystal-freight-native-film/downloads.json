@@ -10,10 +10,12 @@
   },
   "full": {
     "filename": "crystal-freight-native-projects-v5.zip",
-    "url": null,
+    "url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-crystal-freight-2026-10-03/crystal-freight-native-projects-v5.zip",
     "bytes": 233614591,
     "sha256": "9d025a411e969c0c0bec293c2e618b2bd7bba920d656fae528ce7735e50a843b",
     "scope": "All accepted native source/media plus corrected editor",
-    "status": "Prepared and audited; upload and public download verification pending"
-  }
+    "status": "Verified anonymous public download: exact bytes and SHA-256",
+    "verified_at": "2026-10-03T22:40:35.218530+00:00"
+  },
+  "verification": "public-download-validation.json"
 }

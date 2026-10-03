@@ -4,7 +4,7 @@
 
 Crystal Freight connects OpenSCAD, Blender and Kdenlive through actual DCC-MCP calls. Three transferred CAD parts preserve 4,423 vertices and 8,598 faces. A 148-object native scene stages one freight pickup across 120 rendered positions at 12 fps. The finished 20-second, 24 fps film has 480 frames. The corrected editor project now exposes all seven native caption controls and passed untouched Save Copy, reopen and full-frame export comparisons.
 
-[Hero](hero.jpg) · [Detail](detail.jpg) · [Film](film-1280.mp4) · [Contact sheet](film-contact-sheet.jpg) · [Editable core](editable-core.zip) · [Downloads and hashes](downloads.json) · [Package members](native-package.json) · [Actual MCP excerpts](mcp-evidence.public.json) · [Methods](METHODS.md) · [SCAD header proof](source-header-change.json) · [Rights](LICENSES.md) · [Privacy](privacy-audit.json) · [Validation](validation.json) · [Manifest](manifest.json)
+[Hero](hero.jpg) · [Detail](detail.jpg) · [Film](film-1280.mp4) · [Contact sheet](film-contact-sheet.jpg) · [Editable core](editable-core.zip) · [Downloads and hashes](downloads.json) · [Package members](native-package.json) · [Actual MCP excerpts](mcp-evidence.public.json) · [Methods](METHODS.md) · [SCAD header proof](source-header-change.json) · [Public download verification](public-download-validation.json) · [Rights](LICENSES.md) · [Privacy](privacy-audit.json) · [Validation](validation.json) · [Manifest](manifest.json)
 
 ## One freight pickup
 

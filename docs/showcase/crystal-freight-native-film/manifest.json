@@ -20,8 +20,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4873,
-      "sha256": "f060b294431eb5aad77b6d9f2b705954e3704f37c7d9aa7f9785a5ba0c3492ed"
+      "bytes": 4940,
+      "sha256": "c5b48b86edd50fc9a17e73b87346fcb37439826cf8268949caf00c1b1e35ba41"
     },
     {
       "path": "detail.jpg",
@@ -33,8 +33,8 @@
     },
     {
       "path": "downloads.json",
-      "bytes": 687,
-      "sha256": "8499d38b60f52fce2d2facf146a6c7f0c4951f9674c647c45e5430780bd92623"
+      "bytes": 917,
+      "sha256": "2a4159ce1a180dc90b73def45629ba6a0378b4c97908eea10a82d4e9e9be65b2"
     },
     {
       "path": "editable-core.zip",
@@ -82,6 +82,11 @@
       "path": "privacy-audit.json",
       "bytes": 1349,
       "sha256": "ba4c36456c41155fca7855027e19d47e767d7aead17068b2797bd798504ae5a1"
+    },
+    {
+      "path": "public-download-validation.json",
+      "bytes": 1198,
+      "sha256": "4f7c842144acd2a95b787e57880e0fff78ad86c8dcf1d6407fec0abbbaafa3ca"
     },
     {
       "path": "source-header-change.json",

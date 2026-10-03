@@ -897,8 +897,8 @@
         },
         {
           "name": "Full native download",
-          "result": "fail",
-          "observed": "Corrected full archive prepared and audited; public upload/download verification pending. Compact CAD/Blender/editor source is included on this page."
+          "result": "pass",
+          "observed": "Both v5 archives are publicly downloadable without login; the full 233,614,591-byte companion matches its declared SHA-256 and includes all 122 PNG dependencies."
         }
       ],
       "limitations": [
@@ -908,7 +908,7 @@
         "早期JPEG白帧、门架及投影包围盒失败保留在证据中；最终影片使用已核验的PNG输入。",
         "开发前后对比为早期几何/材质版本在最终车距与相机姿态下重新渲染，已明确标注。",
         "最终工程已验收原生控件、未改参数的保存副本与重开；参数编辑/参数Undo及跨环境像素一致不在本次范围内。",
-        "精简包可独立打开CAD/Blender；Kdenlive需要完整版的122张PNG。完整包公开上传与下载核验待完成。",
+        "精简包可独立打开 CAD/Blender；Kdenlive 需要完整包中的 122 张 PNG。完整包已通过免登录下载和 SHA-256 核验。",
         "公开证据为精选实际工具调用投影，完整私有日志、软件运行时及字体文件不随包分发。"
       ],
       "resources": [
@@ -919,6 +919,10 @@
         {
           "label": "可编辑精简工程",
           "url": "docs/showcase/crystal-freight-native-film/editable-core.zip"
+        },
+        {
+          "label": "完整原生工程与影片素材",
+          "url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-crystal-freight-2026-10-03/crystal-freight-native-projects-v5.zip"
         },
         {
           "label": "下载状态与校验",
@@ -951,6 +955,10 @@
         {
           "label": "隐私及完整性检查",
           "url": "docs/showcase/crystal-freight-native-film/privacy-audit.json"
+        },
+        {
+          "label": "公开下载核验",
+          "url": "docs/showcase/crystal-freight-native-film/public-download-validation.json"
         }
       ],
       "credits": {

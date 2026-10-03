@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-03T22:40:35.218530+00:00",
+  "release_url": "https://github.com/dcc-mcp/showcase/releases/tag/showcase-media-crystal-freight-2026-10-03",
+  "method": "Anonymous HTTPS download, streamed byte count and SHA-256; no authenticated session was used. Original archive member CRC/native/media checks remain separately recorded.",
+  "assets": [
+    {
+      "filename": "crystal-freight-editable-core-v5.zip",
+      "public_url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-crystal-freight-2026-10-03/crystal-freight-editable-core-v5.zip",
+      "bytes": 2927669,
+      "sha256": "5952fa4b99c3c4e415251dee52f449042d6f93687aa6261faa52103cfa752e05",
+      "HTTP_status": 200,
+      "authenticated": false
+    },
+    {
+      "filename": "crystal-freight-native-projects-v5.zip",
+      "public_url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-crystal-freight-2026-10-03/crystal-freight-native-projects-v5.zip",
+      "bytes": 233614591,
+      "sha256": "9d025a411e969c0c0bec293c2e618b2bd7bba920d656fae528ce7735e50a843b",
+      "HTTP_status": 200,
+      "authenticated": false
+    }
+  ],
+  "all_pass": true
+}
