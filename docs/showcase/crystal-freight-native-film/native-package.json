@@ -1,0 +1,873 @@
+{
+  "schema_version": 1,
+  "case": "crystal-freight",
+  "qualified_native_sha256": "a77ec3142a18790b7602829ab2f73678470c954233a9272cd6ba07fb389afc9f",
+  "layout": "Full includes the compact native assets, corrected editor and all 122 PNGs. Compact Kdenlive timeline requires full companion media.",
+  "archives": [
+    {
+      "role": "core",
+      "filename": "crystal-freight-editable-core-v5.zip",
+      "bytes": 2927669,
+      "sha256": "5952fa4b99c3c4e415251dee52f449042d6f93687aa6261faa52103cfa752e05",
+      "member_count": 20,
+      "manifest_member": {
+        "path": "MEMBER-MANIFEST.json",
+        "bytes": 4754,
+        "sha256": "0bfacbe8961c09b45af40cbd4d85868f249b1a095696a4a032c141eead015abe"
+      }
+    },
+    {
+      "role": "full",
+      "filename": "crystal-freight-native-projects-v5.zip",
+      "bytes": 233614591,
+      "sha256": "9d025a411e969c0c0bec293c2e618b2bd7bba920d656fae528ce7735e50a843b",
+      "member_count": 144,
+      "manifest_member": {
+        "path": "MEMBER-MANIFEST.json",
+        "bytes": 32064,
+        "sha256": "b707b8b084466dcde9e9ce0791ddaf311ae8428fccc5392853fdf40f4bed3e70"
+      }
+    }
+  ],
+  "members_by_archive": {
+    "crystal-freight-editable-core-v5.zip": [
+      {
+        "path": "LICENSES.md",
+        "bytes": 2143,
+        "sha256": "554775666202f0d332b2d7aee8a466faf44602d3ed37693b74a18e72e8c01d30"
+      },
+      {
+        "path": "METHODS.md",
+        "bytes": 3278,
+        "sha256": "7af6bfd097e45e21cc99b9d6339c6371ffef3b5dc3f67bedb6f0f96fb786fc97"
+      },
+      {
+        "path": "README.txt",
+        "bytes": 1537,
+        "sha256": "8080af80bc3eb68183c82bdcf7261b8982d7291e4e7b1bfedd141f9ef9893919"
+      },
+      {
+        "path": "blender/crystal-freight.blend",
+        "bytes": 3429644,
+        "sha256": "08b800d33bad769c40fc188579b063753363879285f27cf25a6ffd03cf4019c6"
+      },
+      {
+        "path": "blender/detail-view.blend",
+        "bytes": 3429644,
+        "sha256": "c319e25764d0ebb911ca611aeca774bb1e6e3c76c0dff10c1bfcabd6cc48472d"
+      },
+      {
+        "path": "blender/hero-view.blend",
+        "bytes": 3429644,
+        "sha256": "06b1fbdcb10d147ecf9dd6303aff28bcf4f602e2e44ca1b983b636e7d7d9746e"
+      },
+      {
+        "path": "development/before-matched-pose.blend",
+        "bytes": 2258560,
+        "sha256": "c0633ae645a16748c3a34617539c31fca0fca83087394e4154b7a612429af6c6"
+      },
+      {
+        "path": "kdenlive/project.kdenlive",
+        "bytes": 93802,
+        "sha256": "a77ec3142a18790b7602829ab2f73678470c954233a9272cd6ba07fb389afc9f"
+      },
+      {
+        "path": "masters/detail-1600.jpg",
+        "bytes": 341087,
+        "sha256": "484db37f543028b6771a7b66be1611565988886a8f9484a979904f2661a02035"
+      },
+      {
+        "path": "masters/hero-1600.jpg",
+        "bytes": 189104,
+        "sha256": "bbba7149465ad258fc2fe213d97090acbec866bd403a1a5d616e7b088b506121"
+      },
+      {
+        "path": "mcp-evidence.public.json",
+        "bytes": 91073,
+        "sha256": "cd050dd0ed85d13261baca91aa00a6c1eda1094f7067bf9035f2f0791726c800"
+      },
+      {
+        "path": "openscad/crystal-freight-kit.scad",
+        "bytes": 1824,
+        "sha256": "d7b416d28130cab540fca17b5f7a9c6a3a3d9b793ade94cf882647238ffc1742"
+      },
+      {
+        "path": "openscad/kit.stl",
+        "bytes": 654084,
+        "sha256": "ca9b20c4f0a14aaa380aede5fb94629a5f4a4e49f02d745a40965dfc7c6e774c"
+      },
+      {
+        "path": "openscad/rails-gauge-500.off",
+        "bytes": 78700,
+        "sha256": "d30622c3c0dc48599b4fd80daf3f592a40de10639b879b68fda076a8134e3379"
+      },
+      {
+        "path": "openscad/rails.off",
+        "bytes": 78676,
+        "sha256": "8a3eb11bea7cfd76cb8c1bc6e665224fad31dd8c8f4774c8ea102aa753e21c81"
+      },
+      {
+        "path": "openscad/sleepers.off",
+        "bytes": 37569,
+        "sha256": "b3c7bbaebd549a9df2d140c6f02161c392074079b9e694b1d4abe2e518d74143"
+      },
+      {
+        "path": "openscad/trestle.off",
+        "bytes": 111787,
+        "sha256": "019a4273cc3a99f4a93b24d10bf906740371113639079bc0e9f200be7685cd95"
+      },
+      {
+        "path": "source-header-change.json",
+        "bytes": 1355,
+        "sha256": "0d8a12d278ec9c0bfbe015054d38af1639c0e039532811bbca7472855bfe4cee"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 16897,
+        "sha256": "66e9526c74073b1f1e332caa15c366a51b086fcc7644a36716518ea0d7ab02b1"
+      }
+    ],
+    "crystal-freight-native-projects-v5.zip": [
+      {
+        "path": "LICENSES.md",
+        "bytes": 2143,
+        "sha256": "554775666202f0d332b2d7aee8a466faf44602d3ed37693b74a18e72e8c01d30"
+      },
+      {
+        "path": "METHODS.md",
+        "bytes": 3278,
+        "sha256": "7af6bfd097e45e21cc99b9d6339c6371ffef3b5dc3f67bedb6f0f96fb786fc97"
+      },
+      {
+        "path": "README.txt",
+        "bytes": 1537,
+        "sha256": "8080af80bc3eb68183c82bdcf7261b8982d7291e4e7b1bfedd141f9ef9893919"
+      },
+      {
+        "path": "blender/crystal-freight.blend",
+        "bytes": 3429644,
+        "sha256": "08b800d33bad769c40fc188579b063753363879285f27cf25a6ffd03cf4019c6"
+      },
+      {
+        "path": "blender/detail-view.blend",
+        "bytes": 3429644,
+        "sha256": "c319e25764d0ebb911ca611aeca774bb1e6e3c76c0dff10c1bfcabd6cc48472d"
+      },
+      {
+        "path": "blender/hero-view.blend",
+        "bytes": 3429644,
+        "sha256": "06b1fbdcb10d147ecf9dd6303aff28bcf4f602e2e44ca1b983b636e7d7d9746e"
+      },
+      {
+        "path": "development/after-matched-pose.png",
+        "bytes": 1836907,
+        "sha256": "6e39e848a3469ba1962f36bc43c9b3fe7f00c9a002b9901ec090a9c9ec81a268"
+      },
+      {
+        "path": "development/before-matched-pose.blend",
+        "bytes": 2258560,
+        "sha256": "c0633ae645a16748c3a34617539c31fca0fca83087394e4154b7a612429af6c6"
+      },
+      {
+        "path": "development/before-matched-pose.png",
+        "bytes": 1683650,
+        "sha256": "0693d8638870e8bc47e1f4d208d943510ff013a63c9d733639353ec3617e7521"
+      },
+      {
+        "path": "kdenlive/media/0056189aad6c1400777b89c771373ee6ea2ebe63000f7064c2d6353da6d19c7c.png",
+        "bytes": 1879953,
+        "sha256": "0056189aad6c1400777b89c771373ee6ea2ebe63000f7064c2d6353da6d19c7c"
+      },
+      {
+        "path": "kdenlive/media/01f193ab3245530d02bfbecbed5d65289cb14d8065c548809831edba1bccb810.png",
+        "bytes": 1875750,
+        "sha256": "01f193ab3245530d02bfbecbed5d65289cb14d8065c548809831edba1bccb810"
+      },
+      {
+        "path": "kdenlive/media/033b21c3ce71c7e772a6251aa0c6b8eafdb595633d945bebd9644bf0dd55f8b3.png",
+        "bytes": 1870818,
+        "sha256": "033b21c3ce71c7e772a6251aa0c6b8eafdb595633d945bebd9644bf0dd55f8b3"
+      },
+      {
+        "path": "kdenlive/media/0524aabdb36334b4b36147f914b76764b7aa29d2812e6e2c707b066f55a5f821.png",
+        "bytes": 1875510,
+        "sha256": "0524aabdb36334b4b36147f914b76764b7aa29d2812e6e2c707b066f55a5f821"
+      },
+      {
+        "path": "kdenlive/media/06c8f8ff70a6b83c8b3d85d74043f9f7dfab64e83078d2464decac1d1c592ea8.png",
+        "bytes": 1878767,
+        "sha256": "06c8f8ff70a6b83c8b3d85d74043f9f7dfab64e83078d2464decac1d1c592ea8"
+      },
+      {
+        "path": "kdenlive/media/073c96c1f6266b7ccbdb587538d7b0b5005abe98b7b43db6df4f4cbcd80430ba.png",
+        "bytes": 1878081,
+        "sha256": "073c96c1f6266b7ccbdb587538d7b0b5005abe98b7b43db6df4f4cbcd80430ba"
+      },
+      {
+        "path": "kdenlive/media/09113e502e5487d8ab993f5ae38c797335ccd77e83cb99fdc578de53a41bc453.png",
+        "bytes": 1873994,
+        "sha256": "09113e502e5487d8ab993f5ae38c797335ccd77e83cb99fdc578de53a41bc453"
+      },
+      {
+        "path": "kdenlive/media/09473273adfd1b29819583a7ef4ca668eda65e99ab734231c9d7fea8a61405db.png",
+        "bytes": 1865433,
+        "sha256": "09473273adfd1b29819583a7ef4ca668eda65e99ab734231c9d7fea8a61405db"
+      },
+      {
+        "path": "kdenlive/media/099f95410f2dc02d68262c8921c0ada33d03b45edd1b5da93d53eb932e4a4cc1.png",
+        "bytes": 1876194,
+        "sha256": "099f95410f2dc02d68262c8921c0ada33d03b45edd1b5da93d53eb932e4a4cc1"
+      },
+      {
+        "path": "kdenlive/media/107ed4ef37f88b8b7cf031442d520fcef28c6e5a5bb037244499c33f0e42c965.png",
+        "bytes": 1874097,
+        "sha256": "107ed4ef37f88b8b7cf031442d520fcef28c6e5a5bb037244499c33f0e42c965"
+      },
+      {
+        "path": "kdenlive/media/166401f91543603281919b32a2652fa66e8c40519787201a1121edc7b2df72fe.png",
+        "bytes": 1836478,
+        "sha256": "166401f91543603281919b32a2652fa66e8c40519787201a1121edc7b2df72fe"
+      },
+      {
+        "path": "kdenlive/media/16aa045e26579f74fed4f23ea1c97682086bc469e2bcd0bff0bb5c8698d91a7b.png",
+        "bytes": 1871218,
+        "sha256": "16aa045e26579f74fed4f23ea1c97682086bc469e2bcd0bff0bb5c8698d91a7b"
+      },
+      {
+        "path": "kdenlive/media/1956716921df4aa11fec999f8004213f1ceb466f76f8282e9fb64cae3aa95e58.png",
+        "bytes": 1876863,
+        "sha256": "1956716921df4aa11fec999f8004213f1ceb466f76f8282e9fb64cae3aa95e58"
+      },
+      {
+        "path": "kdenlive/media/1b3932a7cc6e7635da661db3d049ffd1a56b12e2ae26b3c61592a633abda01d7.png",
+        "bytes": 1878813,
+        "sha256": "1b3932a7cc6e7635da661db3d049ffd1a56b12e2ae26b3c61592a633abda01d7"
+      },
+      {
+        "path": "kdenlive/media/1b85abb84dd1cea73f3aedbf4668c0d73908e88a114fc86d5396767a8795ed84.png",
+        "bytes": 1875937,
+        "sha256": "1b85abb84dd1cea73f3aedbf4668c0d73908e88a114fc86d5396767a8795ed84"
+      },
+      {
+        "path": "kdenlive/media/1ded7359f6d28042eb7b1cb0379079a5c54b4e5fb65029d195db52e7fda10ad5.png",
+        "bytes": 1874737,
+        "sha256": "1ded7359f6d28042eb7b1cb0379079a5c54b4e5fb65029d195db52e7fda10ad5"
+      },
+      {
+        "path": "kdenlive/media/24be11cbc8b19378427f1b333e49255b11b51a962485cda6a4cbe6ac0495ae83.png",
+        "bytes": 1865429,
+        "sha256": "24be11cbc8b19378427f1b333e49255b11b51a962485cda6a4cbe6ac0495ae83"
+      },
+      {
+        "path": "kdenlive/media/2b916d1d39135da9edbcde38dd4572055898fdc00dcce10966341b91e7457752.png",
+        "bytes": 1870831,
+        "sha256": "2b916d1d39135da9edbcde38dd4572055898fdc00dcce10966341b91e7457752"
+      },
+      {
+        "path": "kdenlive/media/2d35f76a2b9999706651e79b4a02a5c0e5894b7e33b105a132df9ee605eec2b3.png",
+        "bytes": 1863927,
+        "sha256": "2d35f76a2b9999706651e79b4a02a5c0e5894b7e33b105a132df9ee605eec2b3"
+      },
+      {
+        "path": "kdenlive/media/2e914b6f763c1a62653a74ec9394040f96aa90f180f5ce1c81efc30c2074abae.png",
+        "bytes": 1879659,
+        "sha256": "2e914b6f763c1a62653a74ec9394040f96aa90f180f5ce1c81efc30c2074abae"
+      },
+      {
+        "path": "kdenlive/media/30dd6898c6b629456640500e7b83958cb78beafa1c3ecf5c07c237cf2da55af0.png",
+        "bytes": 1863558,
+        "sha256": "30dd6898c6b629456640500e7b83958cb78beafa1c3ecf5c07c237cf2da55af0"
+      },
+      {
+        "path": "kdenlive/media/327bfab1701ba0d4efafa3191ff6481785d6b187365b21da60c450229a3c3690.png",
+        "bytes": 1873313,
+        "sha256": "327bfab1701ba0d4efafa3191ff6481785d6b187365b21da60c450229a3c3690"
+      },
+      {
+        "path": "kdenlive/media/343be2d860f06dfc6e0478797b15b499e6029c8342b987deab490ac172af5b2a.png",
+        "bytes": 1838317,
+        "sha256": "343be2d860f06dfc6e0478797b15b499e6029c8342b987deab490ac172af5b2a"
+      },
+      {
+        "path": "kdenlive/media/360de97837af1693fe376daa3bd9979fff0f60351778e9c424e7eced2fbea617.png",
+        "bytes": 1838547,
+        "sha256": "360de97837af1693fe376daa3bd9979fff0f60351778e9c424e7eced2fbea617"
+      },
+      {
+        "path": "kdenlive/media/38e81b65d9597a0bdb1c92d2caf725b6d48fb2a92cd626f986591cf6dc2792f1.png",
+        "bytes": 1875857,
+        "sha256": "38e81b65d9597a0bdb1c92d2caf725b6d48fb2a92cd626f986591cf6dc2792f1"
+      },
+      {
+        "path": "kdenlive/media/3c2213f30eb424c96607eaebb1693b6f33e7b5a21019060ff70e6c49121e9004.png",
+        "bytes": 1875967,
+        "sha256": "3c2213f30eb424c96607eaebb1693b6f33e7b5a21019060ff70e6c49121e9004"
+      },
+      {
+        "path": "kdenlive/media/3e05cd6990ca50d6eb5821a0dd8701ca56693a7b992e73ac07488dc5c5329cb3.png",
+        "bytes": 1840176,
+        "sha256": "3e05cd6990ca50d6eb5821a0dd8701ca56693a7b992e73ac07488dc5c5329cb3"
+      },
+      {
+        "path": "kdenlive/media/3e81b988efd1046583991e46aa6b46dd79732f90370c3292be90803f6d9c5b89.png",
+        "bytes": 1874993,
+        "sha256": "3e81b988efd1046583991e46aa6b46dd79732f90370c3292be90803f6d9c5b89"
+      },
+      {
+        "path": "kdenlive/media/3ea721e4cfb95ce64163fcdf1542d5ca1acba33b7bd763ee9db75e0af2ab2f2f.png",
+        "bytes": 1879147,
+        "sha256": "3ea721e4cfb95ce64163fcdf1542d5ca1acba33b7bd763ee9db75e0af2ab2f2f"
+      },
+      {
+        "path": "kdenlive/media/41d640c6a4a0971ae830a9f35e4ffcb3f7930185f721fbcc363f440ceda5f634.png",
+        "bytes": 1871560,
+        "sha256": "41d640c6a4a0971ae830a9f35e4ffcb3f7930185f721fbcc363f440ceda5f634"
+      },
+      {
+        "path": "kdenlive/media/42d45c34977674b10b42961d373312b30d2db43f931ab6a9471050c62e145246.png",
+        "bytes": 1863989,
+        "sha256": "42d45c34977674b10b42961d373312b30d2db43f931ab6a9471050c62e145246"
+      },
+      {
+        "path": "kdenlive/media/430d42ff9d3f30d50fbe79f4dfc207d61690630d5854cd7b241062220473e0bc.png",
+        "bytes": 1863400,
+        "sha256": "430d42ff9d3f30d50fbe79f4dfc207d61690630d5854cd7b241062220473e0bc"
+      },
+      {
+        "path": "kdenlive/media/4563c7153242a151629a86de84c62fff2455bd47f72b4a56d1249f7d7cb6346d.png",
+        "bytes": 1875422,
+        "sha256": "4563c7153242a151629a86de84c62fff2455bd47f72b4a56d1249f7d7cb6346d"
+      },
+      {
+        "path": "kdenlive/media/4beac9134b2030eab972a20fb1580b7e9b195d189ba0afdd58f946402c55d5cd.png",
+        "bytes": 1836824,
+        "sha256": "4beac9134b2030eab972a20fb1580b7e9b195d189ba0afdd58f946402c55d5cd"
+      },
+      {
+        "path": "kdenlive/media/4dc3892e7c2867a42dacd60b7e092bd6126716088d00833d57333384c28051f4.png",
+        "bytes": 1864808,
+        "sha256": "4dc3892e7c2867a42dacd60b7e092bd6126716088d00833d57333384c28051f4"
+      },
+      {
+        "path": "kdenlive/media/4df60e4d63f10990334c60ce77318991ad0a38d7bb1527d05cf03ae07364ee0f.png",
+        "bytes": 1877884,
+        "sha256": "4df60e4d63f10990334c60ce77318991ad0a38d7bb1527d05cf03ae07364ee0f"
+      },
+      {
+        "path": "kdenlive/media/4e642c2ee7b350e907f2b224c608bb8111f13bd90936ba406ddb912ef0c19715.png",
+        "bytes": 1871973,
+        "sha256": "4e642c2ee7b350e907f2b224c608bb8111f13bd90936ba406ddb912ef0c19715"
+      },
+      {
+        "path": "kdenlive/media/504a44d36aa30658e7b58dc8a45787863f06d670e265537b60510b74adca9fd6.png",
+        "bytes": 1874300,
+        "sha256": "504a44d36aa30658e7b58dc8a45787863f06d670e265537b60510b74adca9fd6"
+      },
+      {
+        "path": "kdenlive/media/5065970dae6b5d31d5bc95b9b6d8810c8ebcbbd65584311b65cb22c830146c42.png",
+        "bytes": 1872191,
+        "sha256": "5065970dae6b5d31d5bc95b9b6d8810c8ebcbbd65584311b65cb22c830146c42"
+      },
+      {
+        "path": "kdenlive/media/51f0dd99a3f3daa1a6e9c87f48c12eeddc91326d638d173476d173a2c9b934a1.png",
+        "bytes": 1838421,
+        "sha256": "51f0dd99a3f3daa1a6e9c87f48c12eeddc91326d638d173476d173a2c9b934a1"
+      },
+      {
+        "path": "kdenlive/media/528d88983e66d1981250c7bf651c9cfc228941f1c18b786fa4edc4ea3d0e53ec.png",
+        "bytes": 1874737,
+        "sha256": "528d88983e66d1981250c7bf651c9cfc228941f1c18b786fa4edc4ea3d0e53ec"
+      },
+      {
+        "path": "kdenlive/media/54a440918fe240eb1b6460ccbcf5fa66d5f8c9c735603a4bb1a152aaeaf7e7b8.png",
+        "bytes": 1870744,
+        "sha256": "54a440918fe240eb1b6460ccbcf5fa66d5f8c9c735603a4bb1a152aaeaf7e7b8"
+      },
+      {
+        "path": "kdenlive/media/563f2963939ce87ddac15db9b30e5f612932b3e5f53b88434618d2a370e87fa9.png",
+        "bytes": 1837849,
+        "sha256": "563f2963939ce87ddac15db9b30e5f612932b3e5f53b88434618d2a370e87fa9"
+      },
+      {
+        "path": "kdenlive/media/57c1d303f528f378ad284b69d32fc3f8029c562762fe4f4529c72825bbbe8384.png",
+        "bytes": 1870825,
+        "sha256": "57c1d303f528f378ad284b69d32fc3f8029c562762fe4f4529c72825bbbe8384"
+      },
+      {
+        "path": "kdenlive/media/5a38f780af130e2040c8b94de56471600a8fc3b8893cf142b4b5a51cfda9eb5c.png",
+        "bytes": 1865511,
+        "sha256": "5a38f780af130e2040c8b94de56471600a8fc3b8893cf142b4b5a51cfda9eb5c"
+      },
+      {
+        "path": "kdenlive/media/5b1104782ccc399fca0ec0d3b38916e5c7e7ff79227df1779df2d0421db80f26.png",
+        "bytes": 1862928,
+        "sha256": "5b1104782ccc399fca0ec0d3b38916e5c7e7ff79227df1779df2d0421db80f26"
+      },
+      {
+        "path": "kdenlive/media/5f852832f23f821fb287ddf989dce316d6b1603cfc2a9f6b493b9fd597a77483.png",
+        "bytes": 1836513,
+        "sha256": "5f852832f23f821fb287ddf989dce316d6b1603cfc2a9f6b493b9fd597a77483"
+      },
+      {
+        "path": "kdenlive/media/6036a6b820d8c542bfb1161bf7c83ef3723326e4fa946afc9d383d0b8f2d47e9.png",
+        "bytes": 1875855,
+        "sha256": "6036a6b820d8c542bfb1161bf7c83ef3723326e4fa946afc9d383d0b8f2d47e9"
+      },
+      {
+        "path": "kdenlive/media/618995004b55e855a08a3526dac43ccd15c6c14bb5b9046ebc7e8bd518852615.png",
+        "bytes": 1876249,
+        "sha256": "618995004b55e855a08a3526dac43ccd15c6c14bb5b9046ebc7e8bd518852615"
+      },
+      {
+        "path": "kdenlive/media/6874d5d9059c93708c934e21f8c817b3329d34f6d6d6e8007d703edc396516c6.png",
+        "bytes": 1866389,
+        "sha256": "6874d5d9059c93708c934e21f8c817b3329d34f6d6d6e8007d703edc396516c6"
+      },
+      {
+        "path": "kdenlive/media/6d2e6789528438dd29cce379b55cc51d1fbca165c3b812ccd3fb9112dbeed3fa.png",
+        "bytes": 1841508,
+        "sha256": "6d2e6789528438dd29cce379b55cc51d1fbca165c3b812ccd3fb9112dbeed3fa"
+      },
+      {
+        "path": "kdenlive/media/6dd709a8c5941b9d9bf8064e5365774cd0e4fb3438898243c52c93b1a533520f.png",
+        "bytes": 1840026,
+        "sha256": "6dd709a8c5941b9d9bf8064e5365774cd0e4fb3438898243c52c93b1a533520f"
+      },
+      {
+        "path": "kdenlive/media/6e39e848a3469ba1962f36bc43c9b3fe7f00c9a002b9901ec090a9c9ec81a268.png",
+        "bytes": 1836907,
+        "sha256": "6e39e848a3469ba1962f36bc43c9b3fe7f00c9a002b9901ec090a9c9ec81a268"
+      },
+      {
+        "path": "kdenlive/media/73b332a39d9fad0d181641e5f9f2052e06100b8ce1b3dd4fb2cf96f880690ad2.png",
+        "bytes": 1871091,
+        "sha256": "73b332a39d9fad0d181641e5f9f2052e06100b8ce1b3dd4fb2cf96f880690ad2"
+      },
+      {
+        "path": "kdenlive/media/757e76ae1f1d70f15158766b7910c9d68e02c51c87a910d8f645bd3f2b84fb7b.png",
+        "bytes": 1871587,
+        "sha256": "757e76ae1f1d70f15158766b7910c9d68e02c51c87a910d8f645bd3f2b84fb7b"
+      },
+      {
+        "path": "kdenlive/media/76704dc6401d92e297b6c5340ea865558e694d97872f017d58129b9a4a5ffd49.png",
+        "bytes": 1876400,
+        "sha256": "76704dc6401d92e297b6c5340ea865558e694d97872f017d58129b9a4a5ffd49"
+      },
+      {
+        "path": "kdenlive/media/768fb2ab809e71b1fa1f6b0c0da3af25b5f0f0fad0fa72ee68ffdcc31388f81a.png",
+        "bytes": 1863843,
+        "sha256": "768fb2ab809e71b1fa1f6b0c0da3af25b5f0f0fad0fa72ee68ffdcc31388f81a"
+      },
+      {
+        "path": "kdenlive/media/771dd348712169368a3af45b80684d4979cce8bcb428b9e1eb52ff3c741cf3c1.png",
+        "bytes": 1841482,
+        "sha256": "771dd348712169368a3af45b80684d4979cce8bcb428b9e1eb52ff3c741cf3c1"
+      },
+      {
+        "path": "kdenlive/media/7a3869d4760df7642dc385d3a5a7b1cd899cd6a96bd464c8e2ee61fad35a1a9d.png",
+        "bytes": 1837911,
+        "sha256": "7a3869d4760df7642dc385d3a5a7b1cd899cd6a96bd464c8e2ee61fad35a1a9d"
+      },
+      {
+        "path": "kdenlive/media/7a9a78035d78cbc87c8825e2be9c12d296d013fdabd392eb4fe11ceda632fabd.png",
+        "bytes": 1869817,
+        "sha256": "7a9a78035d78cbc87c8825e2be9c12d296d013fdabd392eb4fe11ceda632fabd"
+      },
+      {
+        "path": "kdenlive/media/7ae7742175b9402983d90adc6253643f36afcc12b63e391a488616a2bd6053d4.png",
+        "bytes": 1876565,
+        "sha256": "7ae7742175b9402983d90adc6253643f36afcc12b63e391a488616a2bd6053d4"
+      },
+      {
+        "path": "kdenlive/media/7b5c25150ea4d4769647e89be4062d737ebad20734cbb877491af72acffcd404.png",
+        "bytes": 1878577,
+        "sha256": "7b5c25150ea4d4769647e89be4062d737ebad20734cbb877491af72acffcd404"
+      },
+      {
+        "path": "kdenlive/media/7c32b67cbf4093aa505a244ec106f4300ae69b569658b5a7e98e950cf9cef01d.png",
+        "bytes": 1870595,
+        "sha256": "7c32b67cbf4093aa505a244ec106f4300ae69b569658b5a7e98e950cf9cef01d"
+      },
+      {
+        "path": "kdenlive/media/7d4625defe5c33ab05e763cb426470d31332377c3593d3e5decda352cda26c53.png",
+        "bytes": 1840114,
+        "sha256": "7d4625defe5c33ab05e763cb426470d31332377c3593d3e5decda352cda26c53"
+      },
+      {
+        "path": "kdenlive/media/7dbf34c6a7258992f65237467eb5d00b36add02d7fa54ac241b60bee302692fe.png",
+        "bytes": 1876559,
+        "sha256": "7dbf34c6a7258992f65237467eb5d00b36add02d7fa54ac241b60bee302692fe"
+      },
+      {
+        "path": "kdenlive/media/7dcb6e6d0fe6c6e1853813a677ec2fe52da30bc8cbdc7166df81086687574472.png",
+        "bytes": 1876372,
+        "sha256": "7dcb6e6d0fe6c6e1853813a677ec2fe52da30bc8cbdc7166df81086687574472"
+      },
+      {
+        "path": "kdenlive/media/8152def808cb9870705200a8747a48a1e3d5bd2f7273ae069a065fe8c6d98c13.png",
+        "bytes": 1864839,
+        "sha256": "8152def808cb9870705200a8747a48a1e3d5bd2f7273ae069a065fe8c6d98c13"
+      },
+      {
+        "path": "kdenlive/media/843c9f225ce400457ecb4795523db051640ebe97c1de15350262076aae222013.png",
+        "bytes": 1875643,
+        "sha256": "843c9f225ce400457ecb4795523db051640ebe97c1de15350262076aae222013"
+      },
+      {
+        "path": "kdenlive/media/843dcc25551693a6b985a05966b7c312441b21d39d47cc0423838da73f3917d2.png",
+        "bytes": 1874494,
+        "sha256": "843dcc25551693a6b985a05966b7c312441b21d39d47cc0423838da73f3917d2"
+      },
+      {
+        "path": "kdenlive/media/86951194b9b8e82c6b4229178060f6f691191b47308a121d1f19e6daf6bb92ca.png",
+        "bytes": 1877693,
+        "sha256": "86951194b9b8e82c6b4229178060f6f691191b47308a121d1f19e6daf6bb92ca"
+      },
+      {
+        "path": "kdenlive/media/882ef9a6493e99ed851040697394a777df1b790205f42949393add8b06f528c2.png",
+        "bytes": 1876249,
+        "sha256": "882ef9a6493e99ed851040697394a777df1b790205f42949393add8b06f528c2"
+      },
+      {
+        "path": "kdenlive/media/8acaad8759e381b9cd0bb0ee3bbb7b0d76862dc11b7136e399761f96a55c5f7b.png",
+        "bytes": 1874737,
+        "sha256": "8acaad8759e381b9cd0bb0ee3bbb7b0d76862dc11b7136e399761f96a55c5f7b"
+      },
+      {
+        "path": "kdenlive/media/8ef100343c63c593f97941701e7fc3fff604072b8cc022c9c493cb069783014c.png",
+        "bytes": 1875283,
+        "sha256": "8ef100343c63c593f97941701e7fc3fff604072b8cc022c9c493cb069783014c"
+      },
+      {
+        "path": "kdenlive/media/8f3fef3ae51a88cb32f2033bbe9580c055d0ab7181642aac222766168e99413a.png",
+        "bytes": 1836441,
+        "sha256": "8f3fef3ae51a88cb32f2033bbe9580c055d0ab7181642aac222766168e99413a"
+      },
+      {
+        "path": "kdenlive/media/9113488df6db11cfb9f05b5f581f1f3a6ce5deb122d8008a3810257202a7f302.png",
+        "bytes": 1875993,
+        "sha256": "9113488df6db11cfb9f05b5f581f1f3a6ce5deb122d8008a3810257202a7f302"
+      },
+      {
+        "path": "kdenlive/media/92052c760880ff06cc43424541b2b400e36129995733acdbed13f44ee0a687b5.png",
+        "bytes": 1864906,
+        "sha256": "92052c760880ff06cc43424541b2b400e36129995733acdbed13f44ee0a687b5"
+      },
+      {
+        "path": "kdenlive/media/93a2f52622f12adf10fa046d3cf84b61974d59b4be3b9ee95d603b8ca42caa29.png",
+        "bytes": 1874737,
+        "sha256": "93a2f52622f12adf10fa046d3cf84b61974d59b4be3b9ee95d603b8ca42caa29"
+      },
+      {
+        "path": "kdenlive/media/99f813be98e6e3ae3deb71919e51655e5cafad20cd61e32900633fd23215e387.png",
+        "bytes": 1869167,
+        "sha256": "99f813be98e6e3ae3deb71919e51655e5cafad20cd61e32900633fd23215e387"
+      },
+      {
+        "path": "kdenlive/media/9a4316274f901a15a9c3eda238b7d1bbf1732aad56d5bbb087dda094d1ff3ae6.png",
+        "bytes": 1872921,
+        "sha256": "9a4316274f901a15a9c3eda238b7d1bbf1732aad56d5bbb087dda094d1ff3ae6"
+      },
+      {
+        "path": "kdenlive/media/9d796fe2a45b903f84ae9d70a5611551c6e31e31d98ba026f26bcc96d2032574.png",
+        "bytes": 1865950,
+        "sha256": "9d796fe2a45b903f84ae9d70a5611551c6e31e31d98ba026f26bcc96d2032574"
+      },
+      {
+        "path": "kdenlive/media/a2f2f483397cb8e17eabe45bb04f6f1fa81532fd6fbbf6e668f4b9a1902fafba.png",
+        "bytes": 1838527,
+        "sha256": "a2f2f483397cb8e17eabe45bb04f6f1fa81532fd6fbbf6e668f4b9a1902fafba"
+      },
+      {
+        "path": "kdenlive/media/a37bfe673ffb76d16d7484c030e9ee9ee3632a97f1950030d2fc4c5562aa5136.png",
+        "bytes": 1875934,
+        "sha256": "a37bfe673ffb76d16d7484c030e9ee9ee3632a97f1950030d2fc4c5562aa5136"
+      },
+      {
+        "path": "kdenlive/media/a6d01b314e75544db428075ef3a560d27c937eb0b1f0ddf9b8c7f818191a2b49.png",
+        "bytes": 1865200,
+        "sha256": "a6d01b314e75544db428075ef3a560d27c937eb0b1f0ddf9b8c7f818191a2b49"
+      },
+      {
+        "path": "kdenlive/media/a882cb2a0aefe26e7c732196960d028934a1311f4e31c5e992248e9308e69593.png",
+        "bytes": 1200581,
+        "sha256": "a882cb2a0aefe26e7c732196960d028934a1311f4e31c5e992248e9308e69593"
+      },
+      {
+        "path": "kdenlive/media/a9dbc6e45caef86563a446a9b536002a2cf27fc02233665e7efd8026d82c2c31.png",
+        "bytes": 1875081,
+        "sha256": "a9dbc6e45caef86563a446a9b536002a2cf27fc02233665e7efd8026d82c2c31"
+      },
+      {
+        "path": "kdenlive/media/aa89db34d0efe7ce56cb0c248977dcdc901e65e3d6022db850497a7c9f3c7de3.png",
+        "bytes": 1875692,
+        "sha256": "aa89db34d0efe7ce56cb0c248977dcdc901e65e3d6022db850497a7c9f3c7de3"
+      },
+      {
+        "path": "kdenlive/media/aed299d1fcc76b8d0a1ea623aa43d64b01239f13e8d36a6f0b352f6e84fed978.png",
+        "bytes": 1874706,
+        "sha256": "aed299d1fcc76b8d0a1ea623aa43d64b01239f13e8d36a6f0b352f6e84fed978"
+      },
+      {
+        "path": "kdenlive/media/af4a11b0bcf61a9905dacb1199d804a43946e64a31d49ae6e650d98e98409e1e.png",
+        "bytes": 1871147,
+        "sha256": "af4a11b0bcf61a9905dacb1199d804a43946e64a31d49ae6e650d98e98409e1e"
+      },
+      {
+        "path": "kdenlive/media/b8173351ee27fb4d729d50ab49e7b06a40d2edbb176349d851debf813b68d64e.png",
+        "bytes": 1875760,
+        "sha256": "b8173351ee27fb4d729d50ab49e7b06a40d2edbb176349d851debf813b68d64e"
+      },
+      {
+        "path": "kdenlive/media/b8c9885e9e7d1506693b4340486ffb32a4bd746396ea9f430b63d41747e7e185.png",
+        "bytes": 1838550,
+        "sha256": "b8c9885e9e7d1506693b4340486ffb32a4bd746396ea9f430b63d41747e7e185"
+      },
+      {
+        "path": "kdenlive/media/b983c05e80fce9abbf9b6f14b2587f928ff2aeaa8075efdbbfd2bfadf8b086f4.png",
+        "bytes": 1841022,
+        "sha256": "b983c05e80fce9abbf9b6f14b2587f928ff2aeaa8075efdbbfd2bfadf8b086f4"
+      },
+      {
+        "path": "kdenlive/media/bb9bca9b13efe6f0e879a6b1321c5311a5ebe231d3490ab7f20b5c3400b4e326.png",
+        "bytes": 1876561,
+        "sha256": "bb9bca9b13efe6f0e879a6b1321c5311a5ebe231d3490ab7f20b5c3400b4e326"
+      },
+      {
+        "path": "kdenlive/media/c367b6a63225c7752a389111f6f2a5a1883b81da7c00e0d32a8820e89c73607f.png",
+        "bytes": 1876109,
+        "sha256": "c367b6a63225c7752a389111f6f2a5a1883b81da7c00e0d32a8820e89c73607f"
+      },
+      {
+        "path": "kdenlive/media/c522409ba597fa11903b96e1d9bd69c034a3e3cedb375b20816ba5197e754c74.png",
+        "bytes": 1875901,
+        "sha256": "c522409ba597fa11903b96e1d9bd69c034a3e3cedb375b20816ba5197e754c74"
+      },
+      {
+        "path": "kdenlive/media/c85e2b994f91e435a31618db51c176b915926390ef4c004c64ac23525ac0d5e0.png",
+        "bytes": 1875643,
+        "sha256": "c85e2b994f91e435a31618db51c176b915926390ef4c004c64ac23525ac0d5e0"
+      },
+      {
+        "path": "kdenlive/media/c9b506417d9960ec18f38c1ed40663a8282bd7141d8b2077afb330c547db7119.png",
+        "bytes": 1864098,
+        "sha256": "c9b506417d9960ec18f38c1ed40663a8282bd7141d8b2077afb330c547db7119"
+      },
+      {
+        "path": "kdenlive/media/cb9d6bb0b6dbaf121b622187ec52cc506f4fd31bcae7daf729f059b27349c680.png",
+        "bytes": 2130692,
+        "sha256": "cb9d6bb0b6dbaf121b622187ec52cc506f4fd31bcae7daf729f059b27349c680"
+      },
+      {
+        "path": "kdenlive/media/cd439eb5a096a517b306433015e9c42c11dceff8523c9f7657250b5d7e56df87.png",
+        "bytes": 1873389,
+        "sha256": "cd439eb5a096a517b306433015e9c42c11dceff8523c9f7657250b5d7e56df87"
+      },
+      {
+        "path": "kdenlive/media/d274c543b60cdb96fbeab172bbab336ea2ac4c84d6b566b0e7b633303927749e.png",
+        "bytes": 1875495,
+        "sha256": "d274c543b60cdb96fbeab172bbab336ea2ac4c84d6b566b0e7b633303927749e"
+      },
+      {
+        "path": "kdenlive/media/d2a6f83dca945208af6ce2c304b12e0039c78e5cdcc112cee3d74ce03504f1ba.png",
+        "bytes": 1864920,
+        "sha256": "d2a6f83dca945208af6ce2c304b12e0039c78e5cdcc112cee3d74ce03504f1ba"
+      },
+      {
+        "path": "kdenlive/media/d4758bb0340a591c8ec1ab5c0223aef26fab93cc353d9d12a015d78abac95b7c.png",
+        "bytes": 1875041,
+        "sha256": "d4758bb0340a591c8ec1ab5c0223aef26fab93cc353d9d12a015d78abac95b7c"
+      },
+      {
+        "path": "kdenlive/media/d579c17249b8a005566c2eb846a96cf68953a42e435e20508c4898a387b448b5.png",
+        "bytes": 1874737,
+        "sha256": "d579c17249b8a005566c2eb846a96cf68953a42e435e20508c4898a387b448b5"
+      },
+      {
+        "path": "kdenlive/media/d5dcf35a191353ddb92cbe8f2c11c22fdac5d6c9ced0b52a6fda99e0c3d143e8.png",
+        "bytes": 1878841,
+        "sha256": "d5dcf35a191353ddb92cbe8f2c11c22fdac5d6c9ced0b52a6fda99e0c3d143e8"
+      },
+      {
+        "path": "kdenlive/media/d7417a519a0f6be40239277ff97e5d9d0ed969b1e655badd3c5c08129dc325fa.png",
+        "bytes": 1838990,
+        "sha256": "d7417a519a0f6be40239277ff97e5d9d0ed969b1e655badd3c5c08129dc325fa"
+      },
+      {
+        "path": "kdenlive/media/d7872e7080c261434a210b6dca564872dedca515c7e1e2e71f3ba94b32f2638f.png",
+        "bytes": 1838800,
+        "sha256": "d7872e7080c261434a210b6dca564872dedca515c7e1e2e71f3ba94b32f2638f"
+      },
+      {
+        "path": "kdenlive/media/d863deb323728e8a0f93b8a9de8fdb9760ebe009013a89acc450725839ad53ce.png",
+        "bytes": 1873685,
+        "sha256": "d863deb323728e8a0f93b8a9de8fdb9760ebe009013a89acc450725839ad53ce"
+      },
+      {
+        "path": "kdenlive/media/da9b1b8f1c9abb8d293a943973d0eefc3c30c749ba15c0369541b02718f49c3a.png",
+        "bytes": 1875736,
+        "sha256": "da9b1b8f1c9abb8d293a943973d0eefc3c30c749ba15c0369541b02718f49c3a"
+      },
+      {
+        "path": "kdenlive/media/dd31f5a8ec1247a982ee39b84ac4d0c0eb8508e1667f4c8ce0a76b263f1d4aca.png",
+        "bytes": 1867377,
+        "sha256": "dd31f5a8ec1247a982ee39b84ac4d0c0eb8508e1667f4c8ce0a76b263f1d4aca"
+      },
+      {
+        "path": "kdenlive/media/e4ed88883f65136697559fbc5e93e13ed25d25d5e6132bffddbc292ce5a56931.png",
+        "bytes": 1836983,
+        "sha256": "e4ed88883f65136697559fbc5e93e13ed25d25d5e6132bffddbc292ce5a56931"
+      },
+      {
+        "path": "kdenlive/media/e76f144a30385bbd679992f9c93e479bfca6c49e1205063c732e0e7ee42d9576.png",
+        "bytes": 1875325,
+        "sha256": "e76f144a30385bbd679992f9c93e479bfca6c49e1205063c732e0e7ee42d9576"
+      },
+      {
+        "path": "kdenlive/media/e84228ed51de4f90086a302486f8ed9751f195cf80f6a8d149753975ca0f2e18.png",
+        "bytes": 1872269,
+        "sha256": "e84228ed51de4f90086a302486f8ed9751f195cf80f6a8d149753975ca0f2e18"
+      },
+      {
+        "path": "kdenlive/media/eb4716fbcb4cefecd502a591c817b2c454b562777763f9128248d79098a11620.png",
+        "bytes": 1880099,
+        "sha256": "eb4716fbcb4cefecd502a591c817b2c454b562777763f9128248d79098a11620"
+      },
+      {
+        "path": "kdenlive/media/ebdaebbe89718f6803381f2680891581791f493723e89ab7702ed343fb1eda30.png",
+        "bytes": 1875934,
+        "sha256": "ebdaebbe89718f6803381f2680891581791f493723e89ab7702ed343fb1eda30"
+      },
+      {
+        "path": "kdenlive/media/edfc5c26f61bf8a11b3df4cd2bbd7513cf8b62c5f739e5af119a578afa78cdd5.png",
+        "bytes": 1878643,
+        "sha256": "edfc5c26f61bf8a11b3df4cd2bbd7513cf8b62c5f739e5af119a578afa78cdd5"
+      },
+      {
+        "path": "kdenlive/media/eef705a1dd417d88f08e6a051f3e24f204b786551a4edaf3f31b62267f4d4171.png",
+        "bytes": 1841125,
+        "sha256": "eef705a1dd417d88f08e6a051f3e24f204b786551a4edaf3f31b62267f4d4171"
+      },
+      {
+        "path": "kdenlive/media/f0998305586c55b20dadd7c193c3ef012350c9e240b0013ea4a71c7866175a89.png",
+        "bytes": 1839901,
+        "sha256": "f0998305586c55b20dadd7c193c3ef012350c9e240b0013ea4a71c7866175a89"
+      },
+      {
+        "path": "kdenlive/media/f274d5f14f45cb533c79a9d03d9b88c203d0c75287c003bea3bf8e9ee82d47c5.png",
+        "bytes": 1835788,
+        "sha256": "f274d5f14f45cb533c79a9d03d9b88c203d0c75287c003bea3bf8e9ee82d47c5"
+      },
+      {
+        "path": "kdenlive/media/f446a370a167f25ce60f0e68b9628b4a10ec71a907a6c842c58aab604eaa407b.png",
+        "bytes": 1876267,
+        "sha256": "f446a370a167f25ce60f0e68b9628b4a10ec71a907a6c842c58aab604eaa407b"
+      },
+      {
+        "path": "kdenlive/media/f599b2f3d7764710c3f8bf2bdfc335246a02e2d24722d487e1563fef27069b5b.png",
+        "bytes": 1865338,
+        "sha256": "f599b2f3d7764710c3f8bf2bdfc335246a02e2d24722d487e1563fef27069b5b"
+      },
+      {
+        "path": "kdenlive/media/f6ec1c50da650c8bd2ec423efcf1569b1cc6adfdd539dcbdc215cbce160eda41.png",
+        "bytes": 1865236,
+        "sha256": "f6ec1c50da650c8bd2ec423efcf1569b1cc6adfdd539dcbdc215cbce160eda41"
+      },
+      {
+        "path": "kdenlive/media/f872da200543cdd20631a4cd20d0fb9120906914280ae597f6ecdd27c61d016e.png",
+        "bytes": 1870215,
+        "sha256": "f872da200543cdd20631a4cd20d0fb9120906914280ae597f6ecdd27c61d016e"
+      },
+      {
+        "path": "kdenlive/media/fbc5ad06f4a991ff6e487564ea798bf067bb5b65dcc1bc1a16cf4f3a1911303a.png",
+        "bytes": 1839016,
+        "sha256": "fbc5ad06f4a991ff6e487564ea798bf067bb5b65dcc1bc1a16cf4f3a1911303a"
+      },
+      {
+        "path": "kdenlive/project.kdenlive",
+        "bytes": 93802,
+        "sha256": "a77ec3142a18790b7602829ab2f73678470c954233a9272cd6ba07fb389afc9f"
+      },
+      {
+        "path": "masters/detail-1600.jpg",
+        "bytes": 341087,
+        "sha256": "484db37f543028b6771a7b66be1611565988886a8f9484a979904f2661a02035"
+      },
+      {
+        "path": "masters/hero-1600.jpg",
+        "bytes": 189104,
+        "sha256": "bbba7149465ad258fc2fe213d97090acbec866bd403a1a5d616e7b088b506121"
+      },
+      {
+        "path": "mcp-evidence.public.json",
+        "bytes": 91073,
+        "sha256": "cd050dd0ed85d13261baca91aa00a6c1eda1094f7067bf9035f2f0791726c800"
+      },
+      {
+        "path": "openscad/crystal-freight-kit.scad",
+        "bytes": 1824,
+        "sha256": "d7b416d28130cab540fca17b5f7a9c6a3a3d9b793ade94cf882647238ffc1742"
+      },
+      {
+        "path": "openscad/kit.stl",
+        "bytes": 654084,
+        "sha256": "ca9b20c4f0a14aaa380aede5fb94629a5f4a4e49f02d745a40965dfc7c6e774c"
+      },
+      {
+        "path": "openscad/rails-gauge-500.off",
+        "bytes": 78700,
+        "sha256": "d30622c3c0dc48599b4fd80daf3f592a40de10639b879b68fda076a8134e3379"
+      },
+      {
+        "path": "openscad/rails.off",
+        "bytes": 78676,
+        "sha256": "8a3eb11bea7cfd76cb8c1bc6e665224fad31dd8c8f4774c8ea102aa753e21c81"
+      },
+      {
+        "path": "openscad/sleepers.off",
+        "bytes": 37569,
+        "sha256": "b3c7bbaebd549a9df2d140c6f02161c392074079b9e694b1d4abe2e518d74143"
+      },
+      {
+        "path": "openscad/trestle.off",
+        "bytes": 111787,
+        "sha256": "019a4273cc3a99f4a93b24d10bf906740371113639079bc0e9f200be7685cd95"
+      },
+      {
+        "path": "source-header-change.json",
+        "bytes": 1355,
+        "sha256": "0d8a12d278ec9c0bfbe015054d38af1639c0e039532811bbca7472855bfe4cee"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 16897,
+        "sha256": "66e9526c74073b1f1e332caa15c366a51b086fcc7644a36716518ea0d7ab02b1"
+      }
+    ]
+  },
+  "qualification_inheritance": "All four BLENDs, the qualified editor and all 122 PNGs retain their accepted identities. The SCAD has exactly one non-executable comment suffix removed with all other bytes unchanged. New source-header proof and wrapper files were file-audited; no fresh native run.",
+  "SCAD_header_comment_change": {
+    "schema_version": 1,
+    "path": "openscad/crystal-freight-kit.scad",
+    "change": "Removed one unsupported license suffix from the standalone author-attribution line comment; preserved attribution. No other source byte changed.",
+    "line": 3,
+    "original": {
+      "path": "openscad/crystal-freight-kit.scad",
+      "bytes": 1833,
+      "sha256": "d5dd1cc0133af2b2a197c71e48d201c349431bc50f5db2e75be3e94ec79cfa4a"
+    },
+    "publication": {
+      "path": "openscad/crystal-freight-kit.scad",
+      "bytes": 1824,
+      "sha256": "d7b416d28130cab540fca17b5f7a9c6a3a3d9b793ade94cf882647238ffc1742"
+    },
+    "removed_comment_bytes": 9,
+    "all_other_bytes_identical": true,
+    "line_comment_context": "First three physical lines are standalone // comments; no preceding string/block-comment context. The changed line ends at its original newline.",
+    "string_aware_comment_lexer": "Non-comment bytes, including string literals and every preserved newline, are identical.",
+    "non_comment_bytes": 1624,
+    "non_comment_sha256": "48f23f19d455af7f16c141b31cda78d2cc201b2802662c790f6feee4b6591982",
+    "native_launch_or_render": false,
+    "qualification_scope": "Header-only source proof; not a fresh OpenSCAD compile. All four BLENDs, the qualified Kdenlive timeline and all 122 PNGs retain exact accepted bytes. Historical authoring receipts keep their original source hashes."
+  }
+}

@@ -146,6 +146,15 @@ Do not redistribute commercial libraries merely because a scene references
 them. Keep private execution logs outside the public package and describe any
 redactions in its public evidence record.
 
+## Crystal Freight
+
+Crystal Freight adds an OpenSCAD → Blender → Kdenlive miniature with native
+CAD/scene files, a corrected editable timeline, and bounded native editor
+qualification. The compact source download is included with the case; the full
+media companion has its own availability and SHA-256 record. Case artwork and
+source assets are excluded from the site-code MIT license; see the case
+[rights and provenance](docs/showcase/crystal-freight-native-film/LICENSES.md).
+
 ## License
 
 Site code is [MIT](LICENSE). Each case records its source license and any

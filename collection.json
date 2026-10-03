@@ -754,6 +754,224 @@
         "commit": "38623dd51721a958b8dc5d2e8957e991908333ac"
       },
       "verified_at": "2026-10-01"
+    },
+    {
+      "slug": "crystal-freight-native-film",
+      "title": "CRYSTAL FREIGHT · 悬浮采石场",
+      "subtitle": "OpenSCAD → Blender → Kdenlive · 参数轨道、原生动作与可编辑影片",
+      "software": [
+        "OpenSCAD",
+        "Blender",
+        "Kdenlive"
+      ],
+      "capabilities": [
+        "参数化建模",
+        "程序化几何",
+        "材质与灯光",
+        "动画",
+        "跨软件制作",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/crystal-freight-native-film/hero.jpg",
+        "alt": "深色背景中的悬浮岩岛、琥珀色矿晶、绿色窄轨机车与木制栈桥"
+      },
+      "evidence_label": "本轮实际运行 · 三软件 DCC-MCP 创作",
+      "evidence_scope": "实际 OpenSCAD → Blender → Kdenlive MCP 创作。四份原生 BLEND 迁移后重开并通过像素比较；修正编辑工程的全部480帧通过迁移比较。七个原生文字效果控件及未改参数的 Save Copy/重开已验收，同一显示环境下全部RGB/RGBA帧和MP4字节一致。公开证据是实际调用的精选脱敏投影，不是完整原始日志。",
+      "summary": "600毫米轨距、112根轨枕和148个原生对象构成一座小型采石场。机车停靠、矿晶落入货车、吊钩回收，列车穿过石质门架驶离。",
+      "goal": "让参数化 CAD 构件成为有清晰装载动作的原创微缩世界，并保留可编辑工程、可复现配方及实际软件调用证据。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过真实 typed DCC-MCP 制作原创窄轨矿场微缩场景。先在 OpenSCAD 写入自包含参数源，导出轨道、轨枕和栈桥；以毫米除以1000映射到 Blender，校验顶点及拓扑。创建低多边形岩岛、矿晶、机车、两节货车和吊机，以12fps原生关键帧表现接近、装载和离开。最终货车弧长间距2.4m，检查轮轨接触、连接杆、货物落点及门架净空。在 Kdenlive 建立24fps、20秒可编辑时间线，保持每张动作图两帧。迁移工程后实际重开渲染，比较原生成图及影片全部帧；保留失败路线、许可证和完整调用记录。",
+        "note": "依据实际制作流程整理的复用说明，不是原始用户逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "OpenSCAD",
+          "value": "2021.01；0.3.0基线及独立本地源写入增强"
+        },
+        {
+          "label": "Blender",
+          "value": "4.3.2；兼容0.1.43适配器及已记录的本地补丁；Cycles CPU最多4线程"
+        },
+        {
+          "label": "Kdenlive / MLT",
+          "value": "24.12.3 / MLT 7.30.0；修正 qimage、相对根路径和原生文字效果标识已验收"
+        },
+        {
+          "label": "Adapter 适配器",
+          "value": "OpenSCAD 0.3.0、Blender 0.1.43、Kdenlive 0.1.1 历史基线；修正开发源码哈希见 validation.json，本批不发布软件"
+        },
+        {
+          "label": "Core / SDK",
+          "value": "原始制作 Core 0.20.39 / SDK 2.2.0；修正验收 Core 0.20.41，精确源码哈希见 validation.json"
+        }
+      ],
+      "tools": [
+        {
+          "name": "write_model_source / compile_model / export_model",
+          "description": "通过有边界的真实MCP工具写入并导出可编辑SCAD参数源，验证轨距变体。"
+        },
+        {
+          "name": "create_mesh_from_data / native material and animation tools",
+          "description": "从实际OFF顶点及面进入Blender，原生构建材质、灯光、机车与吊机关键帧。"
+        },
+        {
+          "name": "render_scene / save_portable_scene_copy",
+          "description": "输出120张原生动作图及高采样静帧，以原生RNA操作清理路径缓冲区后迁移验收。"
+        },
+        {
+          "name": "add_media / insert_clip / add_effect / package_project / render_project",
+          "description": "通过实际Kdenlive MCP创作时间线、文字、相对媒体包和原生MLT影片。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "参数轨道进入原生场景",
+          "description": "三份OFF构件合计4423顶点、8598面；缩放后的float32坐标与拓扑哈希完全保留。"
+        },
+        {
+          "title": "装载动作与机械接触",
+          "description": "最终车距2.4m；70次原生轮轨观察中最大间隙0.713mm，采样门架净空106.0mm。",
+          "image": {
+            "src": "docs/showcase/crystal-freight-native-film/detail.jpg",
+            "alt": "装载后的矿晶、货车轮组、吊机和栈桥支撑细节"
+          }
+        },
+        {
+          "title": "可编辑的20秒影片",
+          "description": "120张12fps动作图各占两帧，形成24fps时间线；标题、细节和结尾保留可编辑结构。"
+        },
+        {
+          "title": "迁移和逐帧核对",
+          "description": "在原媒体和原工程不可用时重新渲染相对媒体包，全部480帧的解码哈希与原片一致。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/crystal-freight-native-film/hero.jpg",
+          "alt": "Crystal Freight原生主视觉",
+          "caption": "1600×1200、384采样原生JPEG；只清除路径元数据，压缩像素负载及解码像素不变。"
+        },
+        {
+          "src": "docs/showcase/crystal-freight-native-film/detail.jpg",
+          "alt": "装载动作细节",
+          "caption": "1600×1200、256采样原生细节，最终2.4m车距。"
+        },
+        {
+          "src": "docs/showcase/crystal-freight-native-film/film-1280.mp4",
+          "alt": "Crystal Freight完整20秒影片",
+          "caption": "原生MLT输出，1280×960，24fps，共480帧；动作源为明确声明的12fps节奏。"
+        },
+        {
+          "src": "docs/showcase/crystal-freight-native-film/film-contact-sheet.jpg",
+          "alt": "实际影片关键帧的验收联系表",
+          "caption": "从交付影片解码提取的19帧验收预览；缩略图及帧号用于QA。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "OpenSCAD → Blender handoff",
+          "result": "pass",
+          "observed": "Three OFF parts preserve 4,423 vertices and 8,598 faces after the documented mm-to-metre conversion."
+        },
+        {
+          "name": "Native scene relocation",
+          "result": "pass",
+          "observed": "All four final BLEND copies pass raw path-padding checks, native reopen, and exact decoded reference-image comparison."
+        },
+        {
+          "name": "Kdenlive relocation",
+          "result": "pass",
+          "observed": "Every one of 480 decoded video-frame hashes matches while the original package and authorized source media are unavailable."
+        },
+        {
+          "name": "Native editor controls and untouched save",
+          "result": "pass",
+          "observed": "All seven caption controls visible; untouched Save Copy and reopen verified; all 480 RGB/RGBA frames and MP4 bytes exact within one display environment. Parameter Undo not qualified."
+        },
+        {
+          "name": "Native cadence and sound",
+          "result": "pass",
+          "observed": "120 native action frames at 12 fps, 115 distinct images including holds. One AAC stream is present; all decoded PCM samples are zero."
+        },
+        {
+          "name": "Full native download",
+          "result": "pass",
+          "observed": "Both v5 archives are publicly downloadable without login; the full 233,614,591-byte companion matches its declared SHA-256 and includes all 122 PNG dependencies."
+        }
+      ],
+      "limitations": [
+        "这是原创运动学微缩场景，不是铁路安全、结构工程或刚体/悬挂/流体仿真。",
+        "仅检查有限采样及整数关键帧，不声称连续时间碰撞认证、完整绕行或无缝循环。",
+        "120张动作图按12fps节奏播放；不声称24fps独立运动帧或音轨设计。",
+        "早期JPEG白帧、门架及投影包围盒失败保留在证据中；最终影片使用已核验的PNG输入。",
+        "开发前后对比为早期几何/材质版本在最终车距与相机姿态下重新渲染，已明确标注。",
+        "最终工程已验收原生控件、未改参数的保存副本与重开；参数编辑/参数Undo及跨环境像素一致不在本次范围内。",
+        "精简包可独立打开 CAD/Blender；Kdenlive 需要完整包中的 122 张 PNG。完整包已通过免登录下载和 SHA-256 核验。",
+        "公开证据为精选实际工具调用投影，完整私有日志、软件运行时及字体文件不随包分发。"
+      ],
+      "resources": [
+        {
+          "label": "制作报告",
+          "url": "docs/showcase/crystal-freight-native-film/README.md"
+        },
+        {
+          "label": "可编辑精简工程",
+          "url": "docs/showcase/crystal-freight-native-film/editable-core.zip"
+        },
+        {
+          "label": "完整原生工程与影片素材",
+          "url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-crystal-freight-2026-10-03/crystal-freight-native-projects-v5.zip"
+        },
+        {
+          "label": "下载状态与校验",
+          "url": "docs/showcase/crystal-freight-native-film/downloads.json"
+        },
+        {
+          "label": "原生工程完整清单",
+          "url": "docs/showcase/crystal-freight-native-film/native-package.json"
+        },
+        {
+          "label": "实际 MCP 调用节选",
+          "url": "docs/showcase/crystal-freight-native-film/mcp-evidence.public.json"
+        },
+        {
+          "label": "测量及验收",
+          "url": "docs/showcase/crystal-freight-native-film/validation.json"
+        },
+        {
+          "label": "文件清单",
+          "url": "docs/showcase/crystal-freight-native-film/manifest.json"
+        },
+        {
+          "label": "方法及边界",
+          "url": "docs/showcase/crystal-freight-native-film/METHODS.md"
+        },
+        {
+          "label": "作品权利与来源",
+          "url": "docs/showcase/crystal-freight-native-film/LICENSES.md"
+        },
+        {
+          "label": "隐私及完整性检查",
+          "url": "docs/showcase/crystal-freight-native-film/privacy-audit.json"
+        },
+        {
+          "label": "公开下载核验",
+          "url": "docs/showcase/crystal-freight-native-film/public-download-validation.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "作品与工程保留权利；本次未授予额外许可，站点MIT不适用于这些案例资产",
+        "note": "未导入第三方模型、参考图像、影视素材或音乐。创作参考只提供制作原则；作者链接和范围见LICENSES.md。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/1f1dacc54c1bb9fa0f8b347f345437f59c23e40d",
+        "commit": "1f1dacc54c1bb9fa0f8b347f345437f59c23e40d",
+        "title": "实际 Blender 适配器基线；其他版本、修正源码哈希及公开证据边界见验收文件"
+      },
+      "verified_at": "2026-10-03T18:56:59Z"
     }
   ]
 }

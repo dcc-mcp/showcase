@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "openscad_application": "OpenSCAD",
+  "openscad_version": "2021.01",
+  "blender_application": "Blender",
+  "blender_version": "4.3.2",
+  "kdenlive_application": "Kdenlive",
+  "kdenlive_version": "24.12.3 / MLT 7.30.0",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 2143,
+      "sha256": "554775666202f0d332b2d7aee8a466faf44602d3ed37693b74a18e72e8c01d30"
+    },
+    {
+      "path": "METHODS.md",
+      "bytes": 3278,
+      "sha256": "7af6bfd097e45e21cc99b9d6339c6371ffef3b5dc3f67bedb6f0f96fb786fc97"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4940,
+      "sha256": "c5b48b86edd50fc9a17e73b87346fcb37439826cf8268949caf00c1b1e35ba41"
+    },
+    {
+      "path": "detail.jpg",
+      "bytes": 341087,
+      "sha256": "484db37f543028b6771a7b66be1611565988886a8f9484a979904f2661a02035",
+      "width": 1600,
+      "height": 1200,
+      "bit_depth": 8
+    },
+    {
+      "path": "downloads.json",
+      "bytes": 917,
+      "sha256": "2a4159ce1a180dc90b73def45629ba6a0378b4c97908eea10a82d4e9e9be65b2"
+    },
+    {
+      "path": "editable-core.zip",
+      "bytes": 2927669,
+      "sha256": "5952fa4b99c3c4e415251dee52f449042d6f93687aa6261faa52103cfa752e05"
+    },
+    {
+      "path": "film-1280.mp4",
+      "bytes": 2424628,
+      "sha256": "87a8d6b18d35bf7cfd9fd560908c9cf2c5e62ff7d0275c97939b71b8ffa3b5f6",
+      "width": 1280,
+      "height": 960,
+      "codec": "H.264",
+      "fps": 24,
+      "frames": 480,
+      "duration_seconds": 20
+    },
+    {
+      "path": "film-contact-sheet.jpg",
+      "bytes": 298384,
+      "sha256": "6499b80c3af066c5f1bdda8c81f61604bb2cf6880f467f45750367d11396f8a5",
+      "width": 1280,
+      "height": 1300,
+      "bit_depth": 8
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 189104,
+      "sha256": "bbba7149465ad258fc2fe213d97090acbec866bd403a1a5d616e7b088b506121",
+      "width": 1600,
+      "height": 1200,
+      "bit_depth": 8
+    },
+    {
+      "path": "mcp-evidence.public.json",
+      "bytes": 91073,
+      "sha256": "cd050dd0ed85d13261baca91aa00a6c1eda1094f7067bf9035f2f0791726c800"
+    },
+    {
+      "path": "native-package.json",
+      "bytes": 37953,
+      "sha256": "0b576fad5c2b0c562b96b9dea6dffa8d2a04b4eb48d88ed061450c9e0d965b2b"
+    },
+    {
+      "path": "privacy-audit.json",
+      "bytes": 1349,
+      "sha256": "ba4c36456c41155fca7855027e19d47e767d7aead17068b2797bd798504ae5a1"
+    },
+    {
+      "path": "public-download-validation.json",
+      "bytes": 1198,
+      "sha256": "4f7c842144acd2a95b787e57880e0fff78ad86c8dcf1d6407fec0abbbaafa3ca"
+    },
+    {
+      "path": "source-header-change.json",
+      "bytes": 1355,
+      "sha256": "0d8a12d278ec9c0bfbe015054d38af1639c0e039532811bbca7472855bfe4cee"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 16897,
+      "sha256": "66e9526c74073b1f1e332caa15c366a51b086fcc7644a36716518ea0d7ab02b1"
+    }
+  ]
+}
