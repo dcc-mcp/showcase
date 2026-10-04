@@ -1,0 +1,211 @@
+{
+  "schema": "d015-versioned-case-capability-coverage-v1",
+  "scope": "One bounded two-application case. Denominators are the exact bundled adapter skill schemas, not the entire DCC-MCP ecosystem or all framework tools. Invocation counts are separate from native successful/error/cleanup qualification.",
+  "components": [
+    {
+      "application": "ParaView",
+      "source_declared_tool_count": 14,
+      "source_schema_sha256": "5a245035142e5bcfca5ff8bba6d3664181cad66b5dfae9144d2aa2197afff3d2",
+      "source_declared_tools": [
+        "inspect_pipeline",
+        "create_sphere",
+        "edit_sphere",
+        "clip_plane",
+        "save_state",
+        "reopen_state",
+        "export_dataset",
+        "open_dataset",
+        "render_preview",
+        "contour",
+        "get_adapter_info",
+        "slice_plane",
+        "inspect_presentation",
+        "capture_current_view"
+      ],
+      "actually_discovered_declared_tools": [
+        "inspect_pipeline",
+        "create_sphere",
+        "edit_sphere",
+        "clip_plane",
+        "save_state",
+        "reopen_state",
+        "export_dataset",
+        "open_dataset",
+        "render_preview",
+        "contour",
+        "get_adapter_info",
+        "slice_plane",
+        "inspect_presentation",
+        "capture_current_view"
+      ],
+      "distinct_native_tools_invoked": 9,
+      "actual_native_tool_call_counts": {
+        "capture_current_view": 10,
+        "contour": 2,
+        "inspect_pipeline": 1,
+        "inspect_presentation": 15,
+        "open_dataset": 1,
+        "render_preview": 5,
+        "reopen_state": 10,
+        "save_state": 5,
+        "slice_plane": 3
+      },
+      "unexercised_declared_tools": [
+        "create_sphere",
+        "edit_sphere",
+        "clip_plane",
+        "export_dataset",
+        "get_adapter_info"
+      ],
+      "loaded_skills": [
+        "paraview-pipeline"
+      ],
+      "bound_trace_sources": [
+        {
+          "sha256": "b2225397ea8f12ca5f2db84c0505f3ea5f637a62137af2e75b701b63b182b11d",
+          "records": 210
+        }
+      ],
+      "schema_source": {
+        "qualified_public_commit": "9b9de65d64f77356eaad4709535c79c49a852eb4",
+        "current_docs_only_public_commit": "4c4939b1a6ee6785d86f74461ea97ff2a34815a9",
+        "schema_bytes_unchanged": true
+      }
+    },
+    {
+      "application": "GIMP",
+      "source_declared_tool_count": 25,
+      "source_schema_sha256": "abcce3f406667f50499780ec1233ad109cd8dae0e5cb776c5d9aaecb66959292",
+      "source_declared_tools": [
+        "get_status",
+        "list_images",
+        "get_active_image",
+        "inspect_image",
+        "list_layers",
+        "create_image",
+        "open_image",
+        "save_image",
+        "export_image",
+        "create_layer",
+        "fill_layer",
+        "set_layer_properties",
+        "set_active_layer",
+        "delete_layer",
+        "flatten_image",
+        "close_image",
+        "create_group",
+        "import_layer",
+        "place_layer",
+        "set_layer_mode",
+        "paint_shape",
+        "create_text",
+        "list_fonts",
+        "export_layer",
+        "export_preview"
+      ],
+      "actually_discovered_declared_tools": [
+        "get_status",
+        "list_images",
+        "get_active_image",
+        "inspect_image",
+        "list_layers",
+        "create_image",
+        "open_image",
+        "save_image",
+        "export_image",
+        "create_layer",
+        "fill_layer",
+        "set_layer_properties",
+        "set_active_layer",
+        "delete_layer",
+        "flatten_image",
+        "close_image",
+        "create_group",
+        "import_layer",
+        "place_layer",
+        "set_layer_mode",
+        "paint_shape",
+        "create_text",
+        "list_fonts",
+        "export_layer",
+        "export_preview"
+      ],
+      "distinct_native_tools_invoked": 16,
+      "actual_native_tool_call_counts": {
+        "close_image": 5,
+        "create_group": 5,
+        "create_image": 2,
+        "create_text": 19,
+        "export_image": 5,
+        "export_layer": 5,
+        "export_preview": 4,
+        "get_active_image": 6,
+        "get_status": 2,
+        "import_layer": 5,
+        "inspect_image": 28,
+        "list_fonts": 1,
+        "list_images": 10,
+        "open_image": 3,
+        "place_layer": 5,
+        "save_image": 6
+      },
+      "unexercised_declared_tools": [
+        "list_layers",
+        "create_layer",
+        "fill_layer",
+        "set_layer_properties",
+        "set_active_layer",
+        "delete_layer",
+        "flatten_image",
+        "set_layer_mode",
+        "paint_shape"
+      ],
+      "loaded_skills": [
+        "gimp-session"
+      ],
+      "bound_trace_sources": [
+        {
+          "sha256": "8698ef9c54ba153a1bc516661bbe3b3a79a5edbe2be101a8539f5572059701e9",
+          "records": 202
+        },
+        {
+          "sha256": "5a4ff6bef3e8b219a8ca8af68bf91f1d77d9c26d9c8fef32bef22feeced0d813",
+          "records": 195
+        }
+      ],
+      "schema_source": {
+        "metadatafix_public_commit": "ea9270a82bd0821993f0c611d9cad2d36e06405d",
+        "preview_candidate_commit": "a3b45aaa237aef954247c8571fb0762afe5cface",
+        "preview_candidate_tree": "4e855af540036b3ab5ee041be5402f3bc0f98dc7",
+        "preview_is_additional_reviewed_development_increment": true,
+        "preview_public_pull_request": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/15",
+        "preview_public_merge_commit": "943e2cd6855da6f4876032bc124556e3eac54bc9",
+        "preview_public_merge_tree": "300e1eacf12871b9e7cc10297653718a40e97d22",
+        "preview_public_source_continuity": {
+          "receipt_sha256": "588741e792de2ecdee09a6bcc8698786ea15610cd17d20f2f6a69c8126f6c922",
+          "compared_public_head": "aa519354a568dfe1f6ec4ce96385e6cf3bd29638",
+          "compared_head_and_public_merge_tree_equal": true,
+          "tracked_files": 69,
+          "identical_source_files": 68,
+          "changed_source_files": [
+            "tests/test_preview_export.py"
+          ],
+          "all_file_modes_unchanged": true,
+          "packaged_runtime_files": 42,
+          "all_runtime_plugin_schema_and_build_inputs_byte_identical": true,
+          "native_qualified_wheel_sha256": "adb43849349ca54944bd9280a8497d90bca77e6726733c3fca5991164fe1a1ad",
+          "author_pinned_Linux_rebuild_whole_wheel_byte_identical": true,
+          "historical_source_and_native_bindings_preserved": true,
+          "scope": "The public source differs only in host-free test setup and fault injection. The author's pinned Linux build reproduces the qualified wheel. This is source/runtime continuity evidence, not a new native execution of the public merge or a software release."
+        }
+      }
+    }
+  ],
+  "limits": [
+    "GIMP composition used the 24-tool metadata-fix source; the 25-tool preview candidate adds export_preview. Both trace and source identities are preserved in companion evidence.",
+    "Actually loaded and exercised bundled skills are paraview-pipeline and gimp-session only. Core-discovered placeholder skills are not marked exercised.",
+    "Native preview includes one intended failed JPEG job. Global template or native-test coverage is not inferred from successful artwork.",
+    "No claim of 100% tool or skill coverage.",
+    "Preview invocation counts refer to corrected native02; the former missing-value active-image assertion is not credited."
+  ]
+}

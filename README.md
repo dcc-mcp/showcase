@@ -164,6 +164,17 @@ editor timeline. Case artwork and source assets are excluded from the site-code
 MIT license; see the case
 [rights and provenance](docs/showcase/brass-relay/LICENSES.md).
 
+## Seismic Lens
+
+ParaView → GIMP synthetic science exhibition plate with editable native views,
+layered XCF, actual MCP call evidence and an exact-source reproduction package.
+Case artwork, native/source assets and production recipes are excluded from
+the site-code MIT license; see the case
+[rights and provenance](docs/showcase/seismic-lens/LICENSES.md).
+The compact download includes the analytic input, five native states, grouped
+image master, native preview and versioned recipes; no large media companion is
+required.
+
 ## License
 
 Site code is [MIT](LICENSE). Each case records its source license and any

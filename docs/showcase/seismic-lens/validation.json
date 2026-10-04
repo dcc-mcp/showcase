@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "state": "NATIVE_QUALIFIED_READY_FOR_PUBLICATION_REVIEW",
+  "environment": {
+    "ParaView": "5.13.2",
+    "GIMP": "3.0.4",
+    "Core_Server_CLI": "0.20.41",
+    "SDK": "1.30.0"
+  },
+  "checks": [
+    {
+      "name": "Analytic data and native geometry",
+      "result": "pass",
+      "observed": "Independent formulas checked at all 510,705 points; three Cut sources and two Contour sources have matching geometry, planes, bounds and scalar ranges."
+    },
+    {
+      "name": "Native ParaView reproduction and relocation",
+      "result": "pass",
+      "observed": "Actual public-source run: 210 SDK events, 52 operations, 36 completed jobs. All five native PNG/PVSM files match the qualified package; saved/relocated presentation and pixels persist without reapplying parameters."
+    },
+    {
+      "name": "GIMP native composition and editable reopen",
+      "result": "pass",
+      "observed": "Fresh full-authoring: 45 planned operations, 202 SDK events. XCF bytes, 19 saved text parasites, editable hierarchy, all imported panels and full RGBA match; owned cleanup passes."
+    },
+    {
+      "name": "Copied XCF without original inputs",
+      "result": "pass",
+      "observed": "42 SDK events; original master and five input PNG locations unavailable, copied XCF metadata/tree/RGBA match and original file hashes restored."
+    },
+    {
+      "name": "Native GIMP web preview",
+      "result": "pass",
+      "observed": "Corrected native02:195 trace records,52 successful native jobs and one intended format rejection. Three actual positive-integer active-image pairs match their intended source. Source full RGBA/metadata and preview reopen pass; accepted image differs only by generated PNG tIME. Old missing-value assertion is not credited."
+    }
+  ],
+  "not_claimed": [
+    "Deployment/browser/download acceptance or new software release",
+    "Physical seismic/PDE/geology validation",
+    "All adapter tools or skipped native tests",
+    "Cross-machine pixel identity",
+    "PNG file-byte identity for GIMP exports"
+  ]
+}

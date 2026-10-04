@@ -1210,6 +1210,209 @@
         "title": "FreeCAD官方源码基线；历史与修正编辑工程的版本资格见制作说明"
       },
       "verified_at": "2026-10-03T23:59:22.506129+00:00"
+    },
+    {
+      "slug": "seismic-lens",
+      "title": "SEISMIC LENS · 合成场切片",
+      "subtitle": "ParaView → GIMP · 从数值切片到可编辑科学展板",
+      "software": [
+        "ParaView",
+        "GIMP"
+      ],
+      "capabilities": [
+        "科学可视化",
+        "图像合成",
+        "跨软件制作",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/seismic-lens/hero.png",
+        "alt": "三张共享色标的正交切片与两条等值线，排列在深色科学展板上"
+      },
+      "evidence_label": "实际运行 · 两软件 DCC-MCP 制作",
+      "evidence_scope": "ParaView MCP 创建三张切面、两条等值线与保存视图，当前公开源码复现记录 210 条 SDK 事件。GIMP 的 45 项制作操作与 202 条事件完成十九个可编辑文字、五组版式、XCF 重开与全图 RGBA 比较；另以 42 条事件验证复制的 XCF，修正验证器后的195 条事件验证原生副本预览工具。公开证据为明确脱敏的实际调用节选及结果，包含完整复现脚本；事件包含发现和轮询，不等同于创作操作数。",
+      "summary": "同一个解析函数，在三个方向显露出不同截面。两条等值线以相同视图比例并列，展示中心区域随阈值收缩。",
+      "goal": "把真实数值输入、原生视图、透明的科学边界和可编辑版式连成一条可复现制作流程。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "用 ParaView MCP 对合成解析场建立 X/Y/Z 三个真实切面，并在中心纵向切面生成 80 和 150 的两条等值线。统一时间色标，使用清楚的单位、原生相机和可读图例。保存原生状态并在原数据不可用时验证副本。把五张原生图交给 GIMP MCP，制作深色科学展板，保留五个图层组和可编辑文字、公式、免责声明。保存并重开 XCF，逐像素核对输入、构图和结果。输入为原创解析示意，明确不声称地震实测、物理解算或地质结论。",
+        "note": "根据实际流程整理的复用说明，不是用户原话。"
+      },
+      "environment": [
+        {
+          "label": "ParaView",
+          "value": "5.13.2；真实 Slice、只读视图检查、原生截图及有界图例/线宽增强已合并"
+        },
+        {
+          "label": "GIMP",
+          "value": "3.0.4；metadata 修复 PR14 已合并；原生临时副本 NoHalo 预览为另一个经过源码/单测/原生复核的开发增量，精确基线和补丁随包提供"
+        },
+        {
+          "label": "Core / Server / CLI",
+          "value": "0.20.41；MCP SDK 1.30.0"
+        },
+        {
+          "label": "Data",
+          "value": "81 × 65 × 97 点，原点(-2,-1.6,0)，间距(0.05,0.05,0.025)；示意坐标单位 km，z 向下"
+        },
+        {
+          "label": "Adapter 适配器",
+          "value": "ParaView 0.1.0，9b9de65d 的原生证明与 4c4939b1 文档后续内容等价；GIMP 0.4.1，metadata 基线 ea9270a8 与预览 a3b45aaa 增量分阶段绑定"
+        }
+      ],
+      "tools": [
+        {
+          "name": "open_dataset / slice_plane / contour",
+          "description": "读入解析 VTI，原生生成真实切面和等值线，核对点、三角面、边界与标量范围"
+        },
+        {
+          "name": "render_preview / inspect_presentation / capture_current_view",
+          "description": "原生设置相机、共享色标及线宽；读回已经存在的视图，重开后直接截图，不重新施加样式"
+        },
+        {
+          "name": "save_state / reopen_state",
+          "description": "相对路径保存；只通过当前会话可信状态和复制数据哈希重开，验证原始路径不可用时的结果"
+        },
+        {
+          "name": "create_image / create_group / import_layer / place_layer / create_text",
+          "description": "GIMP 原生创建图像、分组、图层位置与可编辑文字，导入的五张图逐像素核对"
+        },
+        {
+          "name": "save_image / open_image / inspect_image / export_image",
+          "description": "实际完成 XCF 原生层级、十九份文字metadata字节与完整图像重开比较；只覆盖本制作流程"
+        },
+        {
+          "name": "export_preview",
+          "description": "从原生临时副本作 NoHalo 等比例缩放并导出 PNG，不放大；保留原图像素、文字、图层、selection 与 metadata，已完成实际 MCP 验收。独立开发增量精确来源随包记录。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "从同一个解析函数出发",
+          "description": "Python 只生成确定性的输入数据；后续切面、等值线和原生视图全部通过 DCC MCP 完成。公式与示意单位直接保留在展板中。"
+        },
+        {
+          "title": "保持数值尺度可比较",
+          "description": "三张切面使用同一色域；两条等值线使用同一相机比例。输入网格从粗采样细化，保留实际早期图供比较。"
+        },
+        {
+          "title": "把版式保留为原生图层",
+          "description": "五个图层组、十九个可编辑文字组成展板，五张输入逐像素核对。实际 XCF 重开后层级、文字、metadata与全图RGBA保持一致。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/seismic-lens/hero.png",
+          "alt": "Seismic Lens 五面板展板",
+          "caption": "1600 × 1000 原生 GIMP MCP 预览；2560 × 1600 分层母版保持可编辑，副本缩放、透明 alpha、保存重开与全图 RGBA 已实际验证"
+        },
+        {
+          "src": "docs/showcase/seismic-lens/section-y.png",
+          "alt": "中心纵向切面和原生色标",
+          "caption": "原生 ParaView 输入图，720×480；与2560×1600 XCF 母版中的导入面板像素一致。网站1600×1000总览经过原生缩放。"
+        },
+        {
+          "src": "docs/showcase/seismic-lens/earlier-coarse-section-y.png",
+          "alt": "早期粗网格纵向切片",
+          "caption": "实际较早 ParaView 输出，保留原始像素；不是完整展板的同构图比较"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Analytic data and native geometry",
+          "result": "pass",
+          "observed": "Independent formulas checked at all 510,705 points; three Cut sources and two Contour sources have matching geometry, planes, bounds and scalar ranges."
+        },
+        {
+          "name": "Native ParaView reproduction and relocation",
+          "result": "pass",
+          "observed": "Actual public-source run: 210 SDK events, 52 operations, 36 completed jobs. All five native PNG/PVSM files match the qualified package; saved/relocated presentation and pixels persist without reapplying parameters."
+        },
+        {
+          "name": "GIMP native composition and editable reopen",
+          "result": "pass",
+          "observed": "Fresh full-authoring: 45 planned operations, 202 SDK events. XCF bytes, 19 saved text parasites, editable hierarchy, all imported panels and full RGBA match; owned cleanup passes."
+        },
+        {
+          "name": "Copied XCF without original inputs",
+          "result": "pass",
+          "observed": "42 SDK events; original master and five input PNG locations unavailable, copied XCF metadata/tree/RGBA match and original file hashes restored."
+        },
+        {
+          "name": "Native GIMP web preview",
+          "result": "pass",
+          "observed": "Fresh native02:195 records,52 successful jobs and one intended rejection. Nested active-image IDs are strictly verified against the intended source; pixels, metadata and cleanup pass. The original missing-value comparison is not credited."
+        }
+      ],
+      "limitations": [
+        "原创解析示意，没有地震实测数据、PDE 解算或地质推断",
+        "当前环境未暴露 CameraClippingRange；验收覆盖实际可读属性与图像像素",
+        "MCP 重开限于本会话保存的可信状态；没有放开任意外部 PVSM 导入",
+        "开发增量与实际测试版本逐项记录，不冒称 PyPI 已发行能力",
+        "静态科学展板；不声称影片或跨机器像素一致",
+        "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内"
+      ],
+      "resources": [
+        {
+          "label": "制作与复现说明",
+          "url": "docs/showcase/seismic-lens/README.md"
+        },
+        {
+          "label": "完整可编辑工程与复现包 · 5.96 MB",
+          "url": "docs/showcase/seismic-lens/editable-source.zip"
+        },
+        {
+          "label": "ParaView 实际调用节选",
+          "url": "docs/showcase/seismic-lens/paraview-mcp-evidence.public.json"
+        },
+        {
+          "label": "GIMP 实际调用节选",
+          "url": "docs/showcase/seismic-lens/gimp-mcp-evidence.public.json"
+        },
+        {
+          "label": "当前公开 ParaView 源码原生复现",
+          "url": "docs/showcase/seismic-lens/paraview-public-native-validation.json"
+        },
+        {
+          "label": "GIMP 母版原生验证",
+          "url": "docs/showcase/seismic-lens/fresh-gimp-native-validation.json"
+        },
+        {
+          "label": "原生预览验证",
+          "url": "docs/showcase/seismic-lens/native-preview-validation.json"
+        },
+        {
+          "label": "工具及技能实际覆盖",
+          "url": "docs/showcase/seismic-lens/capability-coverage.json"
+        },
+        {
+          "label": "方法与边界",
+          "url": "docs/showcase/seismic-lens/METHODS.md"
+        },
+        {
+          "label": "作品权利与来源",
+          "url": "docs/showcase/seismic-lens/LICENSES.md"
+        },
+        {
+          "label": "预览隐私与格式核验",
+          "url": "docs/showcase/seismic-lens/preview-png-privacy.json"
+        },
+        {
+          "label": "文件清单",
+          "url": "docs/showcase/seismic-lens/manifest.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "Artwork and native/source assets: rights reserved; no additional license grant. Separately identified upstream notices retain their scope.",
+        "note": "原创合成数据；没有第三方测量数据、模型、贴图、音乐或字体二进制"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-paraview/tree/9b9de65d64f77356eaad4709535c79c49a852eb4",
+        "commit": "9b9de65d64f77356eaad4709535c79c49a852eb4",
+        "title": "已合并 ParaView 实际来源；GIMP 已合并基线与精确预览增量见原生包"
+      },
+      "verified_at": "2026-10-04T07:55:40Z"
     }
   ]
 }

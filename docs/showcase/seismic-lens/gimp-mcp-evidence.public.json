@@ -1,0 +1,1066 @@
+{
+  "schema": "d015-selected-actual-gimp-mcp-calls-v1",
+  "scope": "Projection of recorded actual MCP tools/call arguments and matched terminal jobs from master authoring and the corrected native02 preview run. This is not a complete raw trace or invented transcript.",
+  "normalization": [
+    "Absolute task-controlled argument paths are replaced with $TASK_FILES and a verified relative suffix.",
+    "Ephemeral native image/layer/parent IDs are consistently relabeled within each phase.",
+    "Discovery, polling details, raw responses, endpoint/host/process/job identifiers, logs and private environment values are omitted.",
+    "Each selected original request/response JSONL entry and each complete private trace has a SHA256 binding."
+  ],
+  "phases": [
+    {
+      "phase": "master-authoring",
+      "raw_trace_records": 202,
+      "raw_trace_sha256": "8698ef9c54ba153a1bc516661bbe3b3a79a5edbe2be101a8539f5572059701e9",
+      "selected_calls": 40,
+      "calls": [
+        {
+          "trace_line": 16,
+          "tool": "create_image",
+          "arguments_with_documented_normalization": {
+            "width": 2560,
+            "height": 1600,
+            "name": "Seismic Lens - synthetic analytic field",
+            "background_color": [
+              11,
+              16,
+              23,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "5babb62b90466692528d210afbb8eba57441359d615f7af9fbba90d8158c5895",
+          "initial_isError": false,
+          "terminal_trace_line": 18,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 19,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Title",
+            "text": "SEISMIC LENS",
+            "size": 72,
+            "x": 120,
+            "y": 70,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "050c3d28ff14f82cdbc456802790244af447fc243c0c23a1e623c71a86caae97",
+          "initial_isError": false,
+          "terminal_trace_line": 21,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 22,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Synthetic subtitle",
+            "text": "SYNTHETIC ANALYTIC FIELD",
+            "size": 26,
+            "x": 120,
+            "y": 156,
+            "color": [
+              102,
+              188,
+              201,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "321537dff35204a384f15a790e6866882ab22197c51873cd6f066f6cf3c54ccd",
+          "initial_isError": false,
+          "terminal_trace_line": 24,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 25,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Shared native section scale",
+            "text": "SHARED TIME SCALE   0.600 to 1.724 s",
+            "size": 22,
+            "x": 120,
+            "y": 806,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "a4480b278d4cb2d18ba7614f3697b3ddd638afabceaf59d014d963f6d66e1994",
+          "initial_isError": false,
+          "terminal_trace_line": 27,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 28,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Analytic formula q",
+            "text": "q = ((x−0.2)/0.9)² + ((y+0.1)/0.65)² + ((z−1.2)/0.30)²",
+            "size": 24,
+            "x": 120,
+            "y": 1350,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "d0cd3aec0f610b51f574ff21034b80ee2fff8844e0dc73a8d437efec8045ed01",
+          "initial_isError": false,
+          "terminal_trace_line": 30,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 31,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Analytic formula delay",
+            "text": "Δt = 220 exp(−q)  [illustrative ms]",
+            "size": 24,
+            "x": 120,
+            "y": 1386,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "3db55ea9c59f89fb0b54a9bfa09d65c39d75b6133ef9f46f33b2f5cf4c02a55a",
+          "initial_isError": false,
+          "terminal_trace_line": 33,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 34,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Analytic formula time",
+            "text": "t = 0.6 + 0.4z + 0.025(x²+y²) − Δt/1000  [illustrative s]",
+            "size": 24,
+            "x": 120,
+            "y": 1422,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "066f5f0fcfe542fdc2aa9bc2db7feab9ce36a7d03f8522994636010072caf807",
+          "initial_isError": false,
+          "terminal_trace_line": 36,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 37,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Synthetic scientific disclaimer",
+            "text": "Synthetic analytic scalar field. No measured seismic data. No PDE or physics validation.",
+            "size": 22,
+            "x": 120,
+            "y": 1460,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "11fba68b3a7636bd13d00d5b1a80b4f611f8b729e781009850fc8cb2571cad49",
+          "initial_isError": false,
+          "terminal_trace_line": 39,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 40,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Illustrative coordinate units",
+            "text": "Coordinates: illustrative km; z positive downward. Scalar units: illustrative seconds and milliseconds.",
+            "size": 22,
+            "x": 120,
+            "y": 1500,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "04f1b95884d950b3852dc6c001d98d2a8da6bc7d4a0406cbcf4233d5d8b42206",
+          "initial_isError": false,
+          "terminal_trace_line": 42,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 43,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "Sampled grid and model limits",
+            "text": "Sampled grid: 81 x 65 x 97 points. Analytic model only; no solver or geological inference.",
+            "size": 22,
+            "x": 120,
+            "y": 1536,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ],
+            "font": "DejaVu Sans Book"
+          },
+          "request_response_entry_sha256": "27a4ccb2a80be0be562bd4f9cf64dd8b8037b319988d7c00dd92b8cb4061f4a3",
+          "initial_isError": false,
+          "terminal_trace_line": 45,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 46,
+          "tool": "create_group",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "01 SectionX",
+            "position": 0
+          },
+          "request_response_entry_sha256": "3786e1406418c3735bcaea9e1a7f89dcfcd4678bcbd12d25393a0886e7c488e6",
+          "initial_isError": false,
+          "terminal_trace_line": 48,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 49,
+          "tool": "import_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/inputs/panel-x.png",
+            "name": "Native SectionX",
+            "parent_id": "$layer1",
+            "position": 0
+          },
+          "request_response_entry_sha256": "7edb95c6fb0c6345978a48009980e56bee0beaeaa52dc998570bf9ac13da9251",
+          "initial_isError": false,
+          "terminal_trace_line": 52,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 53,
+          "tool": "place_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "layer_id": "$layer2",
+            "parent_id": "$layer1",
+            "position": 0,
+            "x": 120,
+            "y": 250
+          },
+          "request_response_entry_sha256": "7a10ec80925d5bc3b4714463ebbb6af4fdb515aa2f0ef4df6029a28b8531d578",
+          "initial_isError": false,
+          "terminal_trace_line": 55,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 56,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer1",
+            "text": "X = 0.2 km | Y / Z",
+            "name": "SectionX plane/value label",
+            "font": "DejaVu Sans Book",
+            "size": 24,
+            "x": 120,
+            "y": 210,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "549d1bae7e6f17809399a497a6184f9263c7267974dd381b99f31cc18102ce89",
+          "initial_isError": false,
+          "terminal_trace_line": 58,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 59,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer1",
+            "text": "Y -1.6 to 1.6 km | Z 0 to 2.4 km (down)",
+            "name": "SectionX domain label",
+            "font": "DejaVu Sans Book",
+            "size": 22,
+            "x": 120,
+            "y": 756,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "94960aef09565b9b05c444846b56d2bea47b5f2f8ce0fb313b89e10724da70e4",
+          "initial_isError": false,
+          "terminal_trace_line": 61,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 62,
+          "tool": "create_group",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "02 SectionY",
+            "position": 0
+          },
+          "request_response_entry_sha256": "2294dec4638f669b4427c9b4a570c4c94b1c8eddda236ba3140773c34733a2d0",
+          "initial_isError": false,
+          "terminal_trace_line": 64,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 65,
+          "tool": "import_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/inputs/panel-y.png",
+            "name": "Native SectionY",
+            "parent_id": "$layer3",
+            "position": 0
+          },
+          "request_response_entry_sha256": "ccc5b2d10ebd4642f4c1331a2af4aa777f8143298aab3213bc586dd6bc33727f",
+          "initial_isError": false,
+          "terminal_trace_line": 67,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 68,
+          "tool": "place_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "layer_id": "$layer4",
+            "parent_id": "$layer3",
+            "position": 0,
+            "x": 920,
+            "y": 250
+          },
+          "request_response_entry_sha256": "3139c86ab3e013ef11c0431d7632aecbfbbfb2e29c608c145a0ae38be49b8c19",
+          "initial_isError": false,
+          "terminal_trace_line": 70,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 71,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer3",
+            "text": "Y = -0.1 km | X / Z",
+            "name": "SectionY plane/value label",
+            "font": "DejaVu Sans Book",
+            "size": 24,
+            "x": 920,
+            "y": 210,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "294668f839b9b12a0e97481e70be36e2589150e6b74d598edd7bdcf45febe722",
+          "initial_isError": false,
+          "terminal_trace_line": 73,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 74,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer3",
+            "text": "X -2 to 2 km | Z 0 to 2.4 km (down)",
+            "name": "SectionY domain label",
+            "font": "DejaVu Sans Book",
+            "size": 22,
+            "x": 920,
+            "y": 756,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "df465bb85ed56e1b7bfc8bc6ef5d1d0a9dc7ffcf7f997055c1261ee4ce0d8f41",
+          "initial_isError": false,
+          "terminal_trace_line": 76,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 77,
+          "tool": "create_group",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "03 SectionZ",
+            "position": 0
+          },
+          "request_response_entry_sha256": "68f14e3f65050c1d915dd0d6345d0578168f4ab6a302e3f044c62626a4ea8178",
+          "initial_isError": false,
+          "terminal_trace_line": 79,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 80,
+          "tool": "import_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/inputs/panel-z.png",
+            "name": "Native SectionZ",
+            "parent_id": "$layer5",
+            "position": 0
+          },
+          "request_response_entry_sha256": "0989784d55e7904aabd18d64aeea0b169596ee2f957578ff042da9ac1f7266c2",
+          "initial_isError": false,
+          "terminal_trace_line": 82,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 83,
+          "tool": "place_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "layer_id": "$layer6",
+            "parent_id": "$layer5",
+            "position": 0,
+            "x": 1720,
+            "y": 250
+          },
+          "request_response_entry_sha256": "abb5d31ca9a18268372be4b00294383aa8cd9ee6007010fc328b60bd724936a9",
+          "initial_isError": false,
+          "terminal_trace_line": 85,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 86,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer5",
+            "text": "Z = 1.2 km | X / Y",
+            "name": "SectionZ plane/value label",
+            "font": "DejaVu Sans Book",
+            "size": 24,
+            "x": 1720,
+            "y": 210,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "203fcf35ed2118edf4bb19f43801869634cfc71092e44c1cb15ef335eebb59a4",
+          "initial_isError": false,
+          "terminal_trace_line": 88,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 89,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer5",
+            "text": "X -2 to 2 km | Y -1.6 to 1.6 km",
+            "name": "SectionZ domain label",
+            "font": "DejaVu Sans Book",
+            "size": 22,
+            "x": 1720,
+            "y": 756,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "171b0681bb4aaa55ab0c87a893328acb6ad9ba4b660fb6e78bdd6c96146280c6",
+          "initial_isError": false,
+          "terminal_trace_line": 91,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 92,
+          "tool": "create_group",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "04 Delay80",
+            "position": 0
+          },
+          "request_response_entry_sha256": "2315c3798f7984db3375f17234689d8fd24b28fc9b2ae938e1dea57787a40108",
+          "initial_isError": false,
+          "terminal_trace_line": 94,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 95,
+          "tool": "import_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/inputs/isoline-80.png",
+            "name": "Native Delay80",
+            "parent_id": "$layer7",
+            "position": 0
+          },
+          "request_response_entry_sha256": "e4c97a9ddeeb5b7fe9090ea024c2fb281dc71c0935008375934e597d017681cb",
+          "initial_isError": false,
+          "terminal_trace_line": 97,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 98,
+          "tool": "place_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "layer_id": "$layer8",
+            "parent_id": "$layer7",
+            "position": 0,
+            "x": 120,
+            "y": 930
+          },
+          "request_response_entry_sha256": "f4f8a4e76f335fd9003ed70762e08d4e9a59cfa4ac5d9bc561614def7a2b8670",
+          "initial_isError": false,
+          "terminal_trace_line": 100,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 101,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer7",
+            "text": "80 ms | outer lens",
+            "name": "Delay80 plane/value label",
+            "font": "DejaVu Sans Book",
+            "size": 24,
+            "x": 120,
+            "y": 872,
+            "color": [
+              59,
+              196,
+              219,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "072d7a40f24aad63ad15f2e459a9970840455c7ab1791e271b384713eac8d4b9",
+          "initial_isError": false,
+          "terminal_trace_line": 103,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 104,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer7",
+            "text": "Section domain: X -2 to 2 km | Z 0 to 2.4 km | Y = -0.1 km",
+            "name": "Delay80 domain label",
+            "font": "DejaVu Sans Book",
+            "size": 22,
+            "x": 120,
+            "y": 1292,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "d14c9fdf7658114ec7f603b1358364ddb4c603e328ff49f85b56c6925910af61",
+          "initial_isError": false,
+          "terminal_trace_line": 106,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 107,
+          "tool": "create_group",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "name": "05 Delay150",
+            "position": 0
+          },
+          "request_response_entry_sha256": "058f3f4b65f487eb7d7aea0723417f40354f2ccbe3bf1ffc24878804b97496f3",
+          "initial_isError": false,
+          "terminal_trace_line": 109,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 110,
+          "tool": "import_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/inputs/isoline-150.png",
+            "name": "Native Delay150",
+            "parent_id": "$layer9",
+            "position": 0
+          },
+          "request_response_entry_sha256": "1735b3b23f72fe486aa471a56964b48e69993d6c62c7afe6873935a2e158c31e",
+          "initial_isError": false,
+          "terminal_trace_line": 112,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 113,
+          "tool": "place_layer",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "layer_id": "$layer10",
+            "parent_id": "$layer9",
+            "position": 0,
+            "x": 1380,
+            "y": 930
+          },
+          "request_response_entry_sha256": "cfea953919ffae0d2e48cb9173508ae4ac49ecf3d432d02f5195cd7d67451230",
+          "initial_isError": false,
+          "terminal_trace_line": 115,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 116,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer9",
+            "text": "150 ms | inner core",
+            "name": "Delay150 plane/value label",
+            "font": "DejaVu Sans Book",
+            "size": 24,
+            "x": 1380,
+            "y": 872,
+            "color": [
+              235,
+              191,
+              91,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "9a915d43186ccac41a2f0ba6c2a9de1cb76be6f91f7e1757ac43ace0191d74b0",
+          "initial_isError": false,
+          "terminal_trace_line": 118,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 119,
+          "tool": "create_text",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "parent_id": "$layer9",
+            "text": "Section domain: X -2 to 2 km | Z 0 to 2.4 km | Y = -0.1 km",
+            "name": "Delay150 domain label",
+            "font": "DejaVu Sans Book",
+            "size": 22,
+            "x": 1380,
+            "y": 1292,
+            "color": [
+              237,
+              239,
+              235,
+              255
+            ]
+          },
+          "request_response_entry_sha256": "61336fb844f252aa0c30ddc824d1a4054eeff5923c5deaebd221f8aab49da363",
+          "initial_isError": false,
+          "terminal_trace_line": 121,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 153,
+          "tool": "save_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/seismic-lens-master.xcf",
+            "overwrite": false
+          },
+          "request_response_entry_sha256": "cf46ed5fe76e2e20a838f6e4707eb23c145fb6bc9dec711061901af397c125e5",
+          "initial_isError": false,
+          "terminal_trace_line": 155,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 159,
+          "tool": "export_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/seismic-lens-master.png",
+            "overwrite": false
+          },
+          "request_response_entry_sha256": "a8712772e1ac7a8204f691a8362e36a94a166a8dcf296f0a2322b3983aed76a2",
+          "initial_isError": false,
+          "terminal_trace_line": 165,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 169,
+          "tool": "open_image",
+          "arguments_with_documented_normalization": {
+            "path": "$TASK_FILES/seismic-lens-master.xcf"
+          },
+          "request_response_entry_sha256": "09eabe75ee6db4a0c4aafab077bc788a8620e9c32f82fd53ebff54ffd9e2e096",
+          "initial_isError": false,
+          "terminal_trace_line": 171,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 175,
+          "tool": "export_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image2",
+            "path": "$TASK_FILES/seismic-lens-master-reopened.png",
+            "overwrite": false
+          },
+          "request_response_entry_sha256": "6aecb341186e218b66bedd2ace6c8f052cb65f1cf3e48c75ebb211ca420f271e",
+          "initial_isError": false,
+          "terminal_trace_line": 181,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 185,
+          "tool": "save_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image2",
+            "path": "$TASK_FILES/reopened-after-export.xcf",
+            "overwrite": false
+          },
+          "request_response_entry_sha256": "5123a1f7dc90b90fd40bc26c68cbaa10f3f031dfa7f05441cfa91f3e7bd77dae",
+          "initial_isError": false,
+          "terminal_trace_line": 187,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        }
+      ]
+    },
+    {
+      "phase": "corrected-native-preview",
+      "raw_trace_records": 195,
+      "raw_trace_sha256": "5a4ff6bef3e8b219a8ca8af68bf91f1d77d9c26d9c8fef32bef22feeced0d813",
+      "selected_calls": 14,
+      "calls": [
+        {
+          "trace_line": 13,
+          "tool": "open_image",
+          "arguments_with_documented_normalization": {
+            "path": "$TASK_FILES/copied-master.xcf"
+          },
+          "request_response_entry_sha256": "fc0cb69d2f6b9dde521434715f754c67f0ada7f9be33d370eed33f26410dd039",
+          "initial_isError": false,
+          "terminal_trace_line": 17,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 21,
+          "tool": "export_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/copied-master-export.png"
+          },
+          "request_response_entry_sha256": "3e73949687b24da16b8f3c974f91db8911dd84ed475000c02c238116ae5362d0",
+          "initial_isError": false,
+          "terminal_trace_line": 27,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 28,
+          "tool": "save_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/master-before-preview.xcf"
+          },
+          "request_response_entry_sha256": "177f17dc1830767381cc486a40700db70b8b7502e1d7a05cf85bc4fa92fc531e",
+          "initial_isError": false,
+          "terminal_trace_line": 30,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 40,
+          "tool": "export_preview",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/unsupported-preview.jpg",
+            "max_width": 1600,
+            "max_height": 1600
+          },
+          "request_response_entry_sha256": "d38a68af86128b2e2ed4599a33773494ec1cd5f8a095fe34c16e2f5e960f9e1b",
+          "initial_isError": false,
+          "terminal_trace_line": 42,
+          "terminal_status": "failed",
+          "terminal_result_success": null,
+          "expected_rejection": true
+        },
+        {
+          "trace_line": 58,
+          "tool": "export_preview",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/seismic-lens-preview-1600.png",
+            "max_width": 1600,
+            "max_height": 1600
+          },
+          "request_response_entry_sha256": "b77de5b82cf6357e7c35d6b1e17cbc512e46b1f78bfe4fc0289efe2b614e2911",
+          "initial_isError": false,
+          "terminal_trace_line": 71,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 81,
+          "tool": "export_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/master-after-preview.png"
+          },
+          "request_response_entry_sha256": "7a6a8a0c3f788e89c2618cffb351298dd74f1d67bad22ffa2735d43f8b3ad6b8",
+          "initial_isError": false,
+          "terminal_trace_line": 87,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 88,
+          "tool": "save_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image1",
+            "path": "$TASK_FILES/master-after-preview.xcf"
+          },
+          "request_response_entry_sha256": "7bc956e88c2e9371c33b3e61f444d00d45ac4e7bb5b5e13237843a3dcfa2ff8c",
+          "initial_isError": false,
+          "terminal_trace_line": 90,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 103,
+          "tool": "open_image",
+          "arguments_with_documented_normalization": {
+            "path": "$TASK_FILES/seismic-lens-preview-1600.png"
+          },
+          "request_response_entry_sha256": "06a32eec0d7724b2133f8f2fb7ca063c1360a5d5dcc0779d2e2ef31d8aedb8da",
+          "initial_isError": false,
+          "terminal_trace_line": 106,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 110,
+          "tool": "export_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image2",
+            "path": "$TASK_FILES/preview-reopened.png"
+          },
+          "request_response_entry_sha256": "0fbc7b35e3c556a17d5077412b7a885ff10797976f6560edc17f0dd4688332c3",
+          "initial_isError": false,
+          "terminal_trace_line": 115,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 116,
+          "tool": "save_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image2",
+            "path": "$TASK_FILES/preview-reopened.xcf"
+          },
+          "request_response_entry_sha256": "5060488cb4ca5642e30faee2a5082de940808eb6a18a598334f9808ef935c9df",
+          "initial_isError": false,
+          "terminal_trace_line": 118,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 128,
+          "tool": "create_image",
+          "arguments_with_documented_normalization": {
+            "width": 7,
+            "height": 13,
+            "name": "Preview alpha fixture",
+            "background_color": [
+              80,
+              120,
+              220,
+              128
+            ]
+          },
+          "request_response_entry_sha256": "99710c5194416d6939888e6cf961cf9917047524b06e9aa25d346e78998a27ee",
+          "initial_isError": false,
+          "terminal_trace_line": 130,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 143,
+          "tool": "export_preview",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image3",
+            "path": "$TASK_FILES/alpha-no-upscale.png",
+            "max_width": 2048,
+            "max_height": 2048
+          },
+          "request_response_entry_sha256": "5ccb6e14933c97e63502cd500d858528e55060c2765133f108d934451bb2696e",
+          "initial_isError": false,
+          "terminal_trace_line": 146,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 165,
+          "tool": "export_preview",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image3",
+            "path": "$TASK_FILES/alpha-downscaled.png",
+            "max_width": 5,
+            "max_height": 6
+          },
+          "request_response_entry_sha256": "bd9be80e3a1bfd649041c04fd4e2beb70d1741f6c7a198d89d69214c0f9b3182",
+          "initial_isError": false,
+          "terminal_trace_line": 168,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        },
+        {
+          "trace_line": 181,
+          "tool": "save_image",
+          "arguments_with_documented_normalization": {
+            "image_id": "$image3",
+            "path": "$TASK_FILES/alpha-source.xcf"
+          },
+          "request_response_entry_sha256": "ab3082b5345e896603604aee9c192f0fc9713ed9eaaff5e97b7bb57ba35e2647",
+          "initial_isError": false,
+          "terminal_trace_line": 183,
+          "terminal_status": "completed",
+          "terminal_result_success": true,
+          "expected_rejection": false
+        }
+      ]
+    }
+  ]
+}
