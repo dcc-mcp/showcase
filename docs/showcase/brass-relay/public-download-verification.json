@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "PASS_ANONYMOUS_PUBLIC_DOWNLOAD_BYTES_AND_SHA256",
+  "case": "brass-relay",
+  "checked_utc": "2026-10-03T23:57:55.766886+00:00",
+  "release_url": "https://github.com/dcc-mcp/showcase/releases/tag/showcase-media-brass-relay-2026-10-03",
+  "assets": [
+    {
+      "role": "core",
+      "filename": "brass-relay-editable-core-v1.zip",
+      "bytes": 1944805,
+      "sha256": "f1d4777024663b501429ebc1bbfd8cbc45176d073ef2df5917f3fb9e70cc7856",
+      "member_count": 53,
+      "public_url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-brass-relay-2026-10-03/brass-relay-editable-core-v1.zip",
+      "download_verified": true,
+      "http_status": 200,
+      "authenticated": false
+    },
+    {
+      "role": "full",
+      "filename": "brass-relay-native-projects-v1.zip",
+      "bytes": 143693251,
+      "sha256": "a7fe8122fca0ee3dc70f7805716a0f730e237a3e382ea6407c4933e147a77b0f",
+      "member_count": 152,
+      "public_url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-brass-relay-2026-10-03/brass-relay-native-projects-v1.zip",
+      "download_verified": true,
+      "http_status": 200,
+      "authenticated": false
+    }
+  ],
+  "scope": "Both exact published assets were independently streamed over public HTTPS without authentication. Size and SHA-256 matched the independently audited local packages. No extra large local download copy was retained."
+}

@@ -1,0 +1,1050 @@
+{
+  "schema_version": 1,
+  "case": "brass-relay",
+  "qualified_native_sha256": "519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2",
+  "original_archive_sha256": "a9c42bc53a3ced97663734c4cfb910ffd4390d933b09013790f7e15eec2ad2d7",
+  "layout": "Full retains all CAD/scene files and98 original media PNGs. Compact contains all13 CAD parts,26 exchanges,3 BLENDs and corrected editor; its timeline requires the full or original kdenlive/media folder.",
+  "archives": [
+    {
+      "role": "core",
+      "filename": "brass-relay-editable-core-v1.zip",
+      "bytes": 1944805,
+      "sha256": "f1d4777024663b501429ebc1bbfd8cbc45176d073ef2df5917f3fb9e70cc7856",
+      "member_count": 53
+    },
+    {
+      "role": "full",
+      "filename": "brass-relay-native-projects-v1.zip",
+      "bytes": 143693251,
+      "sha256": "a7fe8122fca0ee3dc70f7805716a0f730e237a3e382ea6407c4933e147a77b0f",
+      "member_count": 152
+    }
+  ],
+  "members_by_archive": {
+    "brass-relay-editable-core-v1.zip": [
+      {
+        "path": "LICENSES.md",
+        "bytes": 1732,
+        "sha256": "f69d5bbd2370e178a12687a8017cd93ed664ad9aa93bd83815ab0a894809e960"
+      },
+      {
+        "path": "METHODS.md",
+        "bytes": 3288,
+        "sha256": "c60bbae1148b298bd9697af06d04406ca7c00a4d7ab9299143c702357b35ce6a"
+      },
+      {
+        "path": "README.txt",
+        "bytes": 1661,
+        "sha256": "ea9fb1144259573ee5147d5722a1e1a3cf4075255b3406747f5fc38f279190f1"
+      },
+      {
+        "path": "TIMELINE-CORRECTION.json",
+        "bytes": 898,
+        "sha256": "d5bba42050832c4f3aa4bc9cb9b01b57b0d18013eebd97eb42ae13d8a9df7e2a"
+      },
+      {
+        "path": "blender/brass-animation.blend",
+        "bytes": 2141244,
+        "sha256": "ceaad41190a19678e2491524f230038202b75818a2b032e96471fa73f4adfdc5"
+      },
+      {
+        "path": "blender/brass-hero.blend",
+        "bytes": 2141244,
+        "sha256": "12cd08f813dff5382e3a7ef0b5ff08080cb554b5f403e1c4cbc7adc7945f5e67"
+      },
+      {
+        "path": "blender/brass-plan.blend",
+        "bytes": 2141244,
+        "sha256": "f4522c8f49f6e3f1b764a375ff6184be8faaf9c899e7a676e0027f7e3f354102"
+      },
+      {
+        "path": "freecad/exchange/AxleA.step",
+        "bytes": 3490,
+        "sha256": "c1a01502f9504008d1972bcf7ee86f691758225dec86dcdf5bf5b8962ab5af8d"
+      },
+      {
+        "path": "freecad/exchange/AxleA.stl",
+        "bytes": 28684,
+        "sha256": "76fb697eca6b16935f3603f387ddc3ab57430a0de7f268615e680682e7afa749"
+      },
+      {
+        "path": "freecad/exchange/AxleB.step",
+        "bytes": 3480,
+        "sha256": "0dbebbbd3e91d23f5249cc3092cd86ace1b0e9b97deaab51b9dcb064fea8887f"
+      },
+      {
+        "path": "freecad/exchange/AxleB.stl",
+        "bytes": 28684,
+        "sha256": "c7a13a93bdb5ff0123e14ac40825f8605a1c26c7a36751b691581ffff2104580"
+      },
+      {
+        "path": "freecad/exchange/Base.step",
+        "bytes": 18552,
+        "sha256": "62f2a2c3a625eefb4e8dc063e27ff88261735d5c56b76b1107e1b78c669a00e3"
+      },
+      {
+        "path": "freecad/exchange/Base.stl",
+        "bytes": 116084,
+        "sha256": "ec63d3eb80ee286c6e1f9476d39465656743f845b98edaca6541ac2bd5733454"
+      },
+      {
+        "path": "freecad/exchange/Cap.step",
+        "bytes": 3496,
+        "sha256": "2277ab575b0d4f297408bf1e86f7cae578e321e45050c8b3d75f5e95a130b13f"
+      },
+      {
+        "path": "freecad/exchange/Cap.stl",
+        "bytes": 28684,
+        "sha256": "1d058a2f3c6058916a48b51de376ecd31c037ef60a7f7493f552a72ce4f2742e"
+      },
+      {
+        "path": "freecad/exchange/Coupler.step",
+        "bytes": 20426,
+        "sha256": "c6260d0012c25326a8f99f6dc6dace35b402685ddeaa0fca249384f4e0a78a62"
+      },
+      {
+        "path": "freecad/exchange/Coupler.stl",
+        "bytes": 116284,
+        "sha256": "442f37af2870dda2ebd1a83dd2e80002d2425e66bd581d5cd6b101ccde649593"
+      },
+      {
+        "path": "freecad/exchange/Flywheel.step",
+        "bytes": 15371,
+        "sha256": "e0c4b11fa731745a781f7b2430de36827e414a9dd0064825ad12371e1fccfc60"
+      },
+      {
+        "path": "freecad/exchange/Flywheel.stl",
+        "bytes": 260684,
+        "sha256": "af4459c1f55edeef10238f04cfe4579687d44d34f92ceb4c10f0da63479c3a5e"
+      },
+      {
+        "path": "freecad/exchange/Foot.step",
+        "bytes": 3488,
+        "sha256": "00a0c40c8fc83096963b01d5455b247a24689d70e06a7f57212c0e123bc56e7d"
+      },
+      {
+        "path": "freecad/exchange/Foot.stl",
+        "bytes": 28684,
+        "sha256": "ac1f7890b202333cb3b742e80941ded74e95a6fec3880f4ad99dcb4d8286026f"
+      },
+      {
+        "path": "freecad/exchange/JointPin.step",
+        "bytes": 3483,
+        "sha256": "3c6274b63347a09ff93525ea1425340bbeff0faff80d9f2e277984cf9e5b0af5"
+      },
+      {
+        "path": "freecad/exchange/JointPin.stl",
+        "bytes": 28684,
+        "sha256": "6cc327142a440ede47ed65c0460d2248c3f7273e79c64e55123fadfbca4de812"
+      },
+      {
+        "path": "freecad/exchange/JournalA.step",
+        "bytes": 4889,
+        "sha256": "0885386741bf1c14fbfc7446b436c37d211716899f2b0308aa8e3ca8eb324f63"
+      },
+      {
+        "path": "freecad/exchange/JournalA.stl",
+        "bytes": 57684,
+        "sha256": "f485d88f637cda3267383e7204b3dfd6dcc248e4a3d2ac9ba0c9088ffca94c01"
+      },
+      {
+        "path": "freecad/exchange/JournalB.step",
+        "bytes": 4889,
+        "sha256": "1412fe51d4b3bc2237e20ac2e9182800c648848a25df559ab517c9b06d2218d3"
+      },
+      {
+        "path": "freecad/exchange/JournalB.stl",
+        "bytes": 57684,
+        "sha256": "070679772f3a6957e260f219d63d05e38ee8fa53e29ec41a9ff6288a79f8c0d8"
+      },
+      {
+        "path": "freecad/exchange/Rocker.step",
+        "bytes": 20427,
+        "sha256": "a595a871a1bb4829a8dd3aa720e15457602398c47974dd36b6ed3ff48e96953d"
+      },
+      {
+        "path": "freecad/exchange/Rocker.stl",
+        "bytes": 116284,
+        "sha256": "568d75dbed43879d16a0f776f5c9c7898d63572918d3421572e7815da18dcf38"
+      },
+      {
+        "path": "freecad/exchange/WasherA.step",
+        "bytes": 4889,
+        "sha256": "4d4eadc79405d5757b0108200cf1384c8c6d569bd433fdae634b81e32a3a14c6"
+      },
+      {
+        "path": "freecad/exchange/WasherA.stl",
+        "bytes": 57684,
+        "sha256": "e439aed27720ec9801b3560f54bd0bdf0e1c334d2a0505c0f14cabec2a725b1d"
+      },
+      {
+        "path": "freecad/exchange/WasherB.step",
+        "bytes": 4884,
+        "sha256": "5757288248ce9591661094b6aba4b1ff7a88c86d768d4f2a182dad6ccdc77419"
+      },
+      {
+        "path": "freecad/exchange/WasherB.stl",
+        "bytes": 57684,
+        "sha256": "570bf57d1213c799bdc8941443aa71caa22fefd36101cb9117ad845d8182fd51"
+      },
+      {
+        "path": "freecad/parts/AxleA.FCStd",
+        "bytes": 3656,
+        "sha256": "788e7be7c232dd76d1af51ef8eef46feb956dba8b6f4f7773919937c48e48132"
+      },
+      {
+        "path": "freecad/parts/AxleB.FCStd",
+        "bytes": 3655,
+        "sha256": "4db439d8f6f4914aad0a0c2bc43c01d998cdc8ecddf655c1c02765ed7c4af9f3"
+      },
+      {
+        "path": "freecad/parts/Base.FCStd",
+        "bytes": 20353,
+        "sha256": "a179441df34a19052cfffba5fe2b422d12181e1ec32d2c4e7ab2320acbdaf259"
+      },
+      {
+        "path": "freecad/parts/Cap.FCStd",
+        "bytes": 3656,
+        "sha256": "41a4c570a94a96fecd1718496e4b64ca867c1434acc518a1818e77375eda7ac8"
+      },
+      {
+        "path": "freecad/parts/Coupler.FCStd",
+        "bytes": 20625,
+        "sha256": "601deea2be734e97d3ba39e25f1cb7f96c112398e1b19a81299ca932f740e9b6"
+      },
+      {
+        "path": "freecad/parts/Flywheel.FCStd",
+        "bytes": 32835,
+        "sha256": "3356ab33be8662f0ce7a5036bd294330419c93830868ea39aa0d7c68e042ce15"
+      },
+      {
+        "path": "freecad/parts/Foot.FCStd",
+        "bytes": 3652,
+        "sha256": "26e33230148ae02f4d4dbbf5854936ac1a2d51fbd3b9737a5055c891e0a4ab47"
+      },
+      {
+        "path": "freecad/parts/JointPin.FCStd",
+        "bytes": 3660,
+        "sha256": "194035fe2979c9c656dd8b3063bda4cb6976d66d9aa2c7344b35043235031fd1"
+      },
+      {
+        "path": "freecad/parts/JournalA.FCStd",
+        "bytes": 6489,
+        "sha256": "92f7fe10e91034a8b966f6cc1559fecc5c3a6fea6f8bd9ad8bfbf98bf731ab75"
+      },
+      {
+        "path": "freecad/parts/JournalB.FCStd",
+        "bytes": 6490,
+        "sha256": "daa844b58481b6e675ece60e18afdb57ae71d7ee097ca9fcdb72f25393ae8e91"
+      },
+      {
+        "path": "freecad/parts/Rocker.FCStd",
+        "bytes": 20607,
+        "sha256": "6066e064454e17a268da92fdd58d7f8c1c18e060ddddb3353cf1245a8da46a08"
+      },
+      {
+        "path": "freecad/parts/WasherA.FCStd",
+        "bytes": 6509,
+        "sha256": "395d98ff446f5998701d753bd2814753e50427166f3eb274169626dfd2d099a8"
+      },
+      {
+        "path": "freecad/parts/WasherB.FCStd",
+        "bytes": 6483,
+        "sha256": "48c12c1b44ec9dc07a3633b4bf2ec2f309fe31da334bd58b431d4ed85118c6d1"
+      },
+      {
+        "path": "kdenlive/project.kdenlive",
+        "bytes": 384377,
+        "sha256": "519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2"
+      },
+      {
+        "path": "licenses/DejaVu-font-NOTICE.txt",
+        "bytes": 2723,
+        "sha256": "70eb8068d5428d47f3b3cc8790757fc5ec47db5d6ad84c0a4be689e691fa87a3"
+      },
+      {
+        "path": "mcp-evidence.public.json",
+        "bytes": 126271,
+        "sha256": "32e2b5ecf58082937d472136f601c57053a4f0cac76cb04d07b21100e84b87d1"
+      },
+      {
+        "path": "previews/hero.jpg",
+        "bytes": 77376,
+        "sha256": "fe6c4495a3a0468fa6f41c646db64d32d7f401fb8756ae7371f122472c28f930"
+      },
+      {
+        "path": "previews/plan.jpg",
+        "bytes": 76694,
+        "sha256": "1e2852a5479a4f93b86751b319dffbfbbab1ca9131562061b7ed6d4a64f3f034"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 13949,
+        "sha256": "fe01e36f983f0c5be501bf11c6bd38553ff0e3f0a02c5159d182e2d5c4e31877"
+      }
+    ],
+    "brass-relay-native-projects-v1.zip": [
+      {
+        "path": "LICENSES.md",
+        "bytes": 1732,
+        "sha256": "f69d5bbd2370e178a12687a8017cd93ed664ad9aa93bd83815ab0a894809e960"
+      },
+      {
+        "path": "METHODS.md",
+        "bytes": 3288,
+        "sha256": "c60bbae1148b298bd9697af06d04406ca7c00a4d7ab9299143c702357b35ce6a"
+      },
+      {
+        "path": "README.txt",
+        "bytes": 1661,
+        "sha256": "ea9fb1144259573ee5147d5722a1e1a3cf4075255b3406747f5fc38f279190f1"
+      },
+      {
+        "path": "TIMELINE-CORRECTION.json",
+        "bytes": 898,
+        "sha256": "d5bba42050832c4f3aa4bc9cb9b01b57b0d18013eebd97eb42ae13d8a9df7e2a"
+      },
+      {
+        "path": "blender/brass-animation.blend",
+        "bytes": 2141244,
+        "sha256": "ceaad41190a19678e2491524f230038202b75818a2b032e96471fa73f4adfdc5"
+      },
+      {
+        "path": "blender/brass-hero.blend",
+        "bytes": 2141244,
+        "sha256": "12cd08f813dff5382e3a7ef0b5ff08080cb554b5f403e1c4cbc7adc7945f5e67"
+      },
+      {
+        "path": "blender/brass-plan.blend",
+        "bytes": 2141244,
+        "sha256": "f4522c8f49f6e3f1b764a375ff6184be8faaf9c899e7a676e0027f7e3f354102"
+      },
+      {
+        "path": "development/before-lookdev.png",
+        "bytes": 1272122,
+        "sha256": "b541a843669a94434e54b5416d20c4bb47f68aa87e894c421e118d92c87be463"
+      },
+      {
+        "path": "freecad/exchange/AxleA.step",
+        "bytes": 3490,
+        "sha256": "c1a01502f9504008d1972bcf7ee86f691758225dec86dcdf5bf5b8962ab5af8d"
+      },
+      {
+        "path": "freecad/exchange/AxleA.stl",
+        "bytes": 28684,
+        "sha256": "76fb697eca6b16935f3603f387ddc3ab57430a0de7f268615e680682e7afa749"
+      },
+      {
+        "path": "freecad/exchange/AxleB.step",
+        "bytes": 3480,
+        "sha256": "0dbebbbd3e91d23f5249cc3092cd86ace1b0e9b97deaab51b9dcb064fea8887f"
+      },
+      {
+        "path": "freecad/exchange/AxleB.stl",
+        "bytes": 28684,
+        "sha256": "c7a13a93bdb5ff0123e14ac40825f8605a1c26c7a36751b691581ffff2104580"
+      },
+      {
+        "path": "freecad/exchange/Base.step",
+        "bytes": 18552,
+        "sha256": "62f2a2c3a625eefb4e8dc063e27ff88261735d5c56b76b1107e1b78c669a00e3"
+      },
+      {
+        "path": "freecad/exchange/Base.stl",
+        "bytes": 116084,
+        "sha256": "ec63d3eb80ee286c6e1f9476d39465656743f845b98edaca6541ac2bd5733454"
+      },
+      {
+        "path": "freecad/exchange/Cap.step",
+        "bytes": 3496,
+        "sha256": "2277ab575b0d4f297408bf1e86f7cae578e321e45050c8b3d75f5e95a130b13f"
+      },
+      {
+        "path": "freecad/exchange/Cap.stl",
+        "bytes": 28684,
+        "sha256": "1d058a2f3c6058916a48b51de376ecd31c037ef60a7f7493f552a72ce4f2742e"
+      },
+      {
+        "path": "freecad/exchange/Coupler.step",
+        "bytes": 20426,
+        "sha256": "c6260d0012c25326a8f99f6dc6dace35b402685ddeaa0fca249384f4e0a78a62"
+      },
+      {
+        "path": "freecad/exchange/Coupler.stl",
+        "bytes": 116284,
+        "sha256": "442f37af2870dda2ebd1a83dd2e80002d2425e66bd581d5cd6b101ccde649593"
+      },
+      {
+        "path": "freecad/exchange/Flywheel.step",
+        "bytes": 15371,
+        "sha256": "e0c4b11fa731745a781f7b2430de36827e414a9dd0064825ad12371e1fccfc60"
+      },
+      {
+        "path": "freecad/exchange/Flywheel.stl",
+        "bytes": 260684,
+        "sha256": "af4459c1f55edeef10238f04cfe4579687d44d34f92ceb4c10f0da63479c3a5e"
+      },
+      {
+        "path": "freecad/exchange/Foot.step",
+        "bytes": 3488,
+        "sha256": "00a0c40c8fc83096963b01d5455b247a24689d70e06a7f57212c0e123bc56e7d"
+      },
+      {
+        "path": "freecad/exchange/Foot.stl",
+        "bytes": 28684,
+        "sha256": "ac1f7890b202333cb3b742e80941ded74e95a6fec3880f4ad99dcb4d8286026f"
+      },
+      {
+        "path": "freecad/exchange/JointPin.step",
+        "bytes": 3483,
+        "sha256": "3c6274b63347a09ff93525ea1425340bbeff0faff80d9f2e277984cf9e5b0af5"
+      },
+      {
+        "path": "freecad/exchange/JointPin.stl",
+        "bytes": 28684,
+        "sha256": "6cc327142a440ede47ed65c0460d2248c3f7273e79c64e55123fadfbca4de812"
+      },
+      {
+        "path": "freecad/exchange/JournalA.step",
+        "bytes": 4889,
+        "sha256": "0885386741bf1c14fbfc7446b436c37d211716899f2b0308aa8e3ca8eb324f63"
+      },
+      {
+        "path": "freecad/exchange/JournalA.stl",
+        "bytes": 57684,
+        "sha256": "f485d88f637cda3267383e7204b3dfd6dcc248e4a3d2ac9ba0c9088ffca94c01"
+      },
+      {
+        "path": "freecad/exchange/JournalB.step",
+        "bytes": 4889,
+        "sha256": "1412fe51d4b3bc2237e20ac2e9182800c648848a25df559ab517c9b06d2218d3"
+      },
+      {
+        "path": "freecad/exchange/JournalB.stl",
+        "bytes": 57684,
+        "sha256": "070679772f3a6957e260f219d63d05e38ee8fa53e29ec41a9ff6288a79f8c0d8"
+      },
+      {
+        "path": "freecad/exchange/Rocker.step",
+        "bytes": 20427,
+        "sha256": "a595a871a1bb4829a8dd3aa720e15457602398c47974dd36b6ed3ff48e96953d"
+      },
+      {
+        "path": "freecad/exchange/Rocker.stl",
+        "bytes": 116284,
+        "sha256": "568d75dbed43879d16a0f776f5c9c7898d63572918d3421572e7815da18dcf38"
+      },
+      {
+        "path": "freecad/exchange/WasherA.step",
+        "bytes": 4889,
+        "sha256": "4d4eadc79405d5757b0108200cf1384c8c6d569bd433fdae634b81e32a3a14c6"
+      },
+      {
+        "path": "freecad/exchange/WasherA.stl",
+        "bytes": 57684,
+        "sha256": "e439aed27720ec9801b3560f54bd0bdf0e1c334d2a0505c0f14cabec2a725b1d"
+      },
+      {
+        "path": "freecad/exchange/WasherB.step",
+        "bytes": 4884,
+        "sha256": "5757288248ce9591661094b6aba4b1ff7a88c86d768d4f2a182dad6ccdc77419"
+      },
+      {
+        "path": "freecad/exchange/WasherB.stl",
+        "bytes": 57684,
+        "sha256": "570bf57d1213c799bdc8941443aa71caa22fefd36101cb9117ad845d8182fd51"
+      },
+      {
+        "path": "freecad/parts/AxleA.FCStd",
+        "bytes": 3656,
+        "sha256": "788e7be7c232dd76d1af51ef8eef46feb956dba8b6f4f7773919937c48e48132"
+      },
+      {
+        "path": "freecad/parts/AxleB.FCStd",
+        "bytes": 3655,
+        "sha256": "4db439d8f6f4914aad0a0c2bc43c01d998cdc8ecddf655c1c02765ed7c4af9f3"
+      },
+      {
+        "path": "freecad/parts/Base.FCStd",
+        "bytes": 20353,
+        "sha256": "a179441df34a19052cfffba5fe2b422d12181e1ec32d2c4e7ab2320acbdaf259"
+      },
+      {
+        "path": "freecad/parts/Cap.FCStd",
+        "bytes": 3656,
+        "sha256": "41a4c570a94a96fecd1718496e4b64ca867c1434acc518a1818e77375eda7ac8"
+      },
+      {
+        "path": "freecad/parts/Coupler.FCStd",
+        "bytes": 20625,
+        "sha256": "601deea2be734e97d3ba39e25f1cb7f96c112398e1b19a81299ca932f740e9b6"
+      },
+      {
+        "path": "freecad/parts/Flywheel.FCStd",
+        "bytes": 32835,
+        "sha256": "3356ab33be8662f0ce7a5036bd294330419c93830868ea39aa0d7c68e042ce15"
+      },
+      {
+        "path": "freecad/parts/Foot.FCStd",
+        "bytes": 3652,
+        "sha256": "26e33230148ae02f4d4dbbf5854936ac1a2d51fbd3b9737a5055c891e0a4ab47"
+      },
+      {
+        "path": "freecad/parts/JointPin.FCStd",
+        "bytes": 3660,
+        "sha256": "194035fe2979c9c656dd8b3063bda4cb6976d66d9aa2c7344b35043235031fd1"
+      },
+      {
+        "path": "freecad/parts/JournalA.FCStd",
+        "bytes": 6489,
+        "sha256": "92f7fe10e91034a8b966f6cc1559fecc5c3a6fea6f8bd9ad8bfbf98bf731ab75"
+      },
+      {
+        "path": "freecad/parts/JournalB.FCStd",
+        "bytes": 6490,
+        "sha256": "daa844b58481b6e675ece60e18afdb57ae71d7ee097ca9fcdb72f25393ae8e91"
+      },
+      {
+        "path": "freecad/parts/Rocker.FCStd",
+        "bytes": 20607,
+        "sha256": "6066e064454e17a268da92fdd58d7f8c1c18e060ddddb3353cf1245a8da46a08"
+      },
+      {
+        "path": "freecad/parts/WasherA.FCStd",
+        "bytes": 6509,
+        "sha256": "395d98ff446f5998701d753bd2814753e50427166f3eb274169626dfd2d099a8"
+      },
+      {
+        "path": "freecad/parts/WasherB.FCStd",
+        "bytes": 6483,
+        "sha256": "48c12c1b44ec9dc07a3633b4bf2ec2f309fe31da334bd58b431d4ed85118c6d1"
+      },
+      {
+        "path": "kdenlive/media/013d6d3cf160f21b0b3fb44a91f7c31a57c30f3689f71b95954403b810eed202.png",
+        "bytes": 1385495,
+        "sha256": "013d6d3cf160f21b0b3fb44a91f7c31a57c30f3689f71b95954403b810eed202"
+      },
+      {
+        "path": "kdenlive/media/017d21596113b2e12d7dac7da854ee00917361fc0bdab595ec9902467c6dad89.png",
+        "bytes": 1369928,
+        "sha256": "017d21596113b2e12d7dac7da854ee00917361fc0bdab595ec9902467c6dad89"
+      },
+      {
+        "path": "kdenlive/media/02bd58e9a0fe4cc591e22bca719fac234d3490abff2f2f9682f82a2bb673c7c7.png",
+        "bytes": 1388081,
+        "sha256": "02bd58e9a0fe4cc591e22bca719fac234d3490abff2f2f9682f82a2bb673c7c7"
+      },
+      {
+        "path": "kdenlive/media/07b1cb4f3f09e6056ff90f8567443289552df2a65329f39b85b6f29f86c96c4e.png",
+        "bytes": 1386253,
+        "sha256": "07b1cb4f3f09e6056ff90f8567443289552df2a65329f39b85b6f29f86c96c4e"
+      },
+      {
+        "path": "kdenlive/media/0b826cc5d56049a78051d0bb4c8cdef0bc90423c47e4bf4e050e621da9d0b333.png",
+        "bytes": 1384238,
+        "sha256": "0b826cc5d56049a78051d0bb4c8cdef0bc90423c47e4bf4e050e621da9d0b333"
+      },
+      {
+        "path": "kdenlive/media/0cb7f2d3e31bef66ed67a5614f075d332db1001e178c1bd9c23c65a6bce6d6e1.png",
+        "bytes": 1387795,
+        "sha256": "0cb7f2d3e31bef66ed67a5614f075d332db1001e178c1bd9c23c65a6bce6d6e1"
+      },
+      {
+        "path": "kdenlive/media/18e5041a43460567f81ce162a5d93d7a0bfb1a6bdf30cafd7de3f0d6cc67c5a8.png",
+        "bytes": 1380676,
+        "sha256": "18e5041a43460567f81ce162a5d93d7a0bfb1a6bdf30cafd7de3f0d6cc67c5a8"
+      },
+      {
+        "path": "kdenlive/media/1a4502051617886ac716e45fd25b791e3c00e6d73d161fa57c82258c8eaee897.png",
+        "bytes": 1381586,
+        "sha256": "1a4502051617886ac716e45fd25b791e3c00e6d73d161fa57c82258c8eaee897"
+      },
+      {
+        "path": "kdenlive/media/1b665553e54ad3f1885f22755a3c7bdcda6d3fa6ea30fdea3b81a3bec2130972.png",
+        "bytes": 1383103,
+        "sha256": "1b665553e54ad3f1885f22755a3c7bdcda6d3fa6ea30fdea3b81a3bec2130972"
+      },
+      {
+        "path": "kdenlive/media/1bd52a6967459418f99ce1c35b0726588893aae5986bfde8563cea6aa8137494.png",
+        "bytes": 1381305,
+        "sha256": "1bd52a6967459418f99ce1c35b0726588893aae5986bfde8563cea6aa8137494"
+      },
+      {
+        "path": "kdenlive/media/1bea7fc2be5cb64f66297168ea7d6db6530e8c61a2d4c630318c072787315319.png",
+        "bytes": 1369182,
+        "sha256": "1bea7fc2be5cb64f66297168ea7d6db6530e8c61a2d4c630318c072787315319"
+      },
+      {
+        "path": "kdenlive/media/1d7c2956b7d69393802e2642eb593057c9a0e6993c6e5c7a73047597e97be6d4.png",
+        "bytes": 1376978,
+        "sha256": "1d7c2956b7d69393802e2642eb593057c9a0e6993c6e5c7a73047597e97be6d4"
+      },
+      {
+        "path": "kdenlive/media/1ebc5cb610a0a9159d88ecdc8dabb6239e0d033766d5bcab726d0a128fb347b8.png",
+        "bytes": 1380231,
+        "sha256": "1ebc5cb610a0a9159d88ecdc8dabb6239e0d033766d5bcab726d0a128fb347b8"
+      },
+      {
+        "path": "kdenlive/media/25447e774f633db2f38c3f4f7b9dde55204edfbf0fcff6d4a1b3bec4e9a12920.png",
+        "bytes": 1383235,
+        "sha256": "25447e774f633db2f38c3f4f7b9dde55204edfbf0fcff6d4a1b3bec4e9a12920"
+      },
+      {
+        "path": "kdenlive/media/2569cdb351092c71ad306d6668dbedf4706e969875c96618bd19226e72927554.png",
+        "bytes": 2015075,
+        "sha256": "2569cdb351092c71ad306d6668dbedf4706e969875c96618bd19226e72927554"
+      },
+      {
+        "path": "kdenlive/media/28b01fdf9612fc805855011ec6d005838817448ab51d868d08ec2bb1f37a422d.png",
+        "bytes": 1387967,
+        "sha256": "28b01fdf9612fc805855011ec6d005838817448ab51d868d08ec2bb1f37a422d"
+      },
+      {
+        "path": "kdenlive/media/28da18af641b87c0f9b3f79dae3c4ccb004a0bc17119b1bd8b10f692f56cf329.png",
+        "bytes": 1385789,
+        "sha256": "28da18af641b87c0f9b3f79dae3c4ccb004a0bc17119b1bd8b10f692f56cf329"
+      },
+      {
+        "path": "kdenlive/media/2b92c4da2874a809ac6d5a2972910f1e182e3639991ce87a3479f6461af79e61.png",
+        "bytes": 1368030,
+        "sha256": "2b92c4da2874a809ac6d5a2972910f1e182e3639991ce87a3479f6461af79e61"
+      },
+      {
+        "path": "kdenlive/media/2daf9d9b80e90a7651482937a15842f9841ef4957305db831750145e68d52aef.png",
+        "bytes": 1383248,
+        "sha256": "2daf9d9b80e90a7651482937a15842f9841ef4957305db831750145e68d52aef"
+      },
+      {
+        "path": "kdenlive/media/30abd7e19eaf6d74abc6a843f337a0f2231023da929bd43456b3f193b9d709f8.png",
+        "bytes": 1379264,
+        "sha256": "30abd7e19eaf6d74abc6a843f337a0f2231023da929bd43456b3f193b9d709f8"
+      },
+      {
+        "path": "kdenlive/media/328d6f6eba591ed2795b284c8c03d357aaa3082140d361bfe8d649390d4142d4.png",
+        "bytes": 1378060,
+        "sha256": "328d6f6eba591ed2795b284c8c03d357aaa3082140d361bfe8d649390d4142d4"
+      },
+      {
+        "path": "kdenlive/media/36cd2d0aa1c6520d5b9331df473ec36f587e0eb95dffb6614646cc1f06a27593.png",
+        "bytes": 1383613,
+        "sha256": "36cd2d0aa1c6520d5b9331df473ec36f587e0eb95dffb6614646cc1f06a27593"
+      },
+      {
+        "path": "kdenlive/media/38a3dde98c8d00445af3a0a9b51fc17c66b1995607b86b8d15f05ade089cbeae.png",
+        "bytes": 1374304,
+        "sha256": "38a3dde98c8d00445af3a0a9b51fc17c66b1995607b86b8d15f05ade089cbeae"
+      },
+      {
+        "path": "kdenlive/media/38b1c96dabd148b8d8c6afabd15e51eb277064e3a6d9e9091224413dfaba3802.png",
+        "bytes": 1374925,
+        "sha256": "38b1c96dabd148b8d8c6afabd15e51eb277064e3a6d9e9091224413dfaba3802"
+      },
+      {
+        "path": "kdenlive/media/3e3f4221d3db59cc3b6be1bcfd92ada9019c00e68b0965959feecb4c537043ea.png",
+        "bytes": 1381214,
+        "sha256": "3e3f4221d3db59cc3b6be1bcfd92ada9019c00e68b0965959feecb4c537043ea"
+      },
+      {
+        "path": "kdenlive/media/3e9217d04d801c5cef4b970a715a26b1c82812f15d3ebe3e760eb6e0ccd5a42d.png",
+        "bytes": 1366914,
+        "sha256": "3e9217d04d801c5cef4b970a715a26b1c82812f15d3ebe3e760eb6e0ccd5a42d"
+      },
+      {
+        "path": "kdenlive/media/3fc23461e49901e05320d28c05cd407d283d34a7fddc013de1558408997f9ce6.png",
+        "bytes": 1385047,
+        "sha256": "3fc23461e49901e05320d28c05cd407d283d34a7fddc013de1558408997f9ce6"
+      },
+      {
+        "path": "kdenlive/media/40902830303c9fd46ddb7243d792d30ca427ff5698b599f09fbe233106aefe5c.png",
+        "bytes": 1387490,
+        "sha256": "40902830303c9fd46ddb7243d792d30ca427ff5698b599f09fbe233106aefe5c"
+      },
+      {
+        "path": "kdenlive/media/41231cff707078d623f844ea479599429d914e09d0d9fe003eda2640724d0350.png",
+        "bytes": 1383127,
+        "sha256": "41231cff707078d623f844ea479599429d914e09d0d9fe003eda2640724d0350"
+      },
+      {
+        "path": "kdenlive/media/419a90b98b6b2583ca82b9bdb29aac54b2b3dd3584077dba98ad029946ca0cb9.png",
+        "bytes": 2044082,
+        "sha256": "419a90b98b6b2583ca82b9bdb29aac54b2b3dd3584077dba98ad029946ca0cb9"
+      },
+      {
+        "path": "kdenlive/media/438371fe02b403a8d79de8125e3cae8988c0b9bd12b608a4d38fc50648f17939.png",
+        "bytes": 1382151,
+        "sha256": "438371fe02b403a8d79de8125e3cae8988c0b9bd12b608a4d38fc50648f17939"
+      },
+      {
+        "path": "kdenlive/media/4397f8bd804809f26af13eea84b4e12f28cd9a2fa3b8949c0c1ea9ba079fad1e.png",
+        "bytes": 1383108,
+        "sha256": "4397f8bd804809f26af13eea84b4e12f28cd9a2fa3b8949c0c1ea9ba079fad1e"
+      },
+      {
+        "path": "kdenlive/media/47488cb6f71938ead16ecbd2b1b8ef56748bb2009e34bbfcce75b64a714648eb.png",
+        "bytes": 1383421,
+        "sha256": "47488cb6f71938ead16ecbd2b1b8ef56748bb2009e34bbfcce75b64a714648eb"
+      },
+      {
+        "path": "kdenlive/media/4a88b7f30154d5a418042710e6503aa51c82ad7b5469cd3e319a80b94da7bb4f.png",
+        "bytes": 1383903,
+        "sha256": "4a88b7f30154d5a418042710e6503aa51c82ad7b5469cd3e319a80b94da7bb4f"
+      },
+      {
+        "path": "kdenlive/media/4b2111cb18326cff8a3e5ee5f7f9f57856233389bbe77d3f9ec00f22116a8087.png",
+        "bytes": 1381408,
+        "sha256": "4b2111cb18326cff8a3e5ee5f7f9f57856233389bbe77d3f9ec00f22116a8087"
+      },
+      {
+        "path": "kdenlive/media/50f6cb0eb40db519fb84a5d03bdac62aba8f18aeb90ee2a8bbcb463a11b7be9a.png",
+        "bytes": 1383340,
+        "sha256": "50f6cb0eb40db519fb84a5d03bdac62aba8f18aeb90ee2a8bbcb463a11b7be9a"
+      },
+      {
+        "path": "kdenlive/media/56343eb1a582e1775ebcfffea5437ac1313a4169d2a1d3007561ad0865142fae.png",
+        "bytes": 1378739,
+        "sha256": "56343eb1a582e1775ebcfffea5437ac1313a4169d2a1d3007561ad0865142fae"
+      },
+      {
+        "path": "kdenlive/media/564384e2b3f1929f665a45f769d29e21748b1719777db6ac46ab7454fc8b8144.png",
+        "bytes": 1370092,
+        "sha256": "564384e2b3f1929f665a45f769d29e21748b1719777db6ac46ab7454fc8b8144"
+      },
+      {
+        "path": "kdenlive/media/59ac0469837c832fadefd09706d45792c81ee2d51b635f41257823edac784a73.png",
+        "bytes": 1371687,
+        "sha256": "59ac0469837c832fadefd09706d45792c81ee2d51b635f41257823edac784a73"
+      },
+      {
+        "path": "kdenlive/media/5aeddbaeca9bc967856ba2e71b7f5386420a6107763fbe3445ab9aebc159ad40.png",
+        "bytes": 1383509,
+        "sha256": "5aeddbaeca9bc967856ba2e71b7f5386420a6107763fbe3445ab9aebc159ad40"
+      },
+      {
+        "path": "kdenlive/media/611767e3afdacda40e715b532f28348b57fc638cbb525166db4bbd26ce3f8a02.png",
+        "bytes": 1383109,
+        "sha256": "611767e3afdacda40e715b532f28348b57fc638cbb525166db4bbd26ce3f8a02"
+      },
+      {
+        "path": "kdenlive/media/634b29d478fdbeba83ea0f5606a2896ef52a9866b9f9ae01efbcda9cdfa7db08.png",
+        "bytes": 1376830,
+        "sha256": "634b29d478fdbeba83ea0f5606a2896ef52a9866b9f9ae01efbcda9cdfa7db08"
+      },
+      {
+        "path": "kdenlive/media/66cab187387161231673cd84c1f7490be0696b805b9b3e3a5d7411c2d965552e.png",
+        "bytes": 1383509,
+        "sha256": "66cab187387161231673cd84c1f7490be0696b805b9b3e3a5d7411c2d965552e"
+      },
+      {
+        "path": "kdenlive/media/671fa2cdacfe0e06eecee56a8103442febe65b80066190f5fc8cb8c103ba0271.png",
+        "bytes": 1387474,
+        "sha256": "671fa2cdacfe0e06eecee56a8103442febe65b80066190f5fc8cb8c103ba0271"
+      },
+      {
+        "path": "kdenlive/media/6eafdd98e22e0db0a62693b353a0248dc200850f5b27c43cf06f515b2aaaee6f.png",
+        "bytes": 1387472,
+        "sha256": "6eafdd98e22e0db0a62693b353a0248dc200850f5b27c43cf06f515b2aaaee6f"
+      },
+      {
+        "path": "kdenlive/media/72ed7dfdb40ad2e9895fadaec518e0859f7c08c60e184fd092c20ed80d178e8a.png",
+        "bytes": 1365685,
+        "sha256": "72ed7dfdb40ad2e9895fadaec518e0859f7c08c60e184fd092c20ed80d178e8a"
+      },
+      {
+        "path": "kdenlive/media/740c3da5ceb46e5cf6f2c96e1498436d30a89cdfb6fc53e4459323f1b72b1e93.png",
+        "bytes": 1386488,
+        "sha256": "740c3da5ceb46e5cf6f2c96e1498436d30a89cdfb6fc53e4459323f1b72b1e93"
+      },
+      {
+        "path": "kdenlive/media/746f4e681ecd3b9d6f0bcafb355b35f291d38f61b8fa1cfc01e0481666a7a5dd.png",
+        "bytes": 1380994,
+        "sha256": "746f4e681ecd3b9d6f0bcafb355b35f291d38f61b8fa1cfc01e0481666a7a5dd"
+      },
+      {
+        "path": "kdenlive/media/78a890cd8111b05e121c82209d46bc69c479225790ee03d31fc52e34a48dbeb1.png",
+        "bytes": 1369743,
+        "sha256": "78a890cd8111b05e121c82209d46bc69c479225790ee03d31fc52e34a48dbeb1"
+      },
+      {
+        "path": "kdenlive/media/7ab6f2b9ccca909554614b6655a723027b9bf22d7dbb63e1dbf64202f64ffdb5.png",
+        "bytes": 1370641,
+        "sha256": "7ab6f2b9ccca909554614b6655a723027b9bf22d7dbb63e1dbf64202f64ffdb5"
+      },
+      {
+        "path": "kdenlive/media/7b7b3b8aba9a066ee36f3a555a1ef1e8035f582e64777cc2fcdca8ddd452f4d6.png",
+        "bytes": 1372397,
+        "sha256": "7b7b3b8aba9a066ee36f3a555a1ef1e8035f582e64777cc2fcdca8ddd452f4d6"
+      },
+      {
+        "path": "kdenlive/media/7fe6901aff6e8b576b48f5ec026510bc0ca37f817be5d1d03e3fcce46ba341bc.png",
+        "bytes": 1381744,
+        "sha256": "7fe6901aff6e8b576b48f5ec026510bc0ca37f817be5d1d03e3fcce46ba341bc"
+      },
+      {
+        "path": "kdenlive/media/82ef0d96ea9eb3e349922ead25ebc138648b18142c2e018ca5940eaa707d6449.png",
+        "bytes": 1383281,
+        "sha256": "82ef0d96ea9eb3e349922ead25ebc138648b18142c2e018ca5940eaa707d6449"
+      },
+      {
+        "path": "kdenlive/media/841ff030c088afe7b2e6b1632753943dd63f18d446d683de07d114d2cab0272b.png",
+        "bytes": 1380805,
+        "sha256": "841ff030c088afe7b2e6b1632753943dd63f18d446d683de07d114d2cab0272b"
+      },
+      {
+        "path": "kdenlive/media/8598e6b71d1a543fb8572c5c66d16a9f56a499c801e1de5a4012c2afb38d9e46.png",
+        "bytes": 1366500,
+        "sha256": "8598e6b71d1a543fb8572c5c66d16a9f56a499c801e1de5a4012c2afb38d9e46"
+      },
+      {
+        "path": "kdenlive/media/911bb686cbe347d32ea3e28d8e938bb7e903ae2cab5039350eb66aba05fc0294.png",
+        "bytes": 1382306,
+        "sha256": "911bb686cbe347d32ea3e28d8e938bb7e903ae2cab5039350eb66aba05fc0294"
+      },
+      {
+        "path": "kdenlive/media/92903aa8b4ffcfc47af04eee399fd6fcef3383df41df6181828d3bc3f4e76702.png",
+        "bytes": 1375359,
+        "sha256": "92903aa8b4ffcfc47af04eee399fd6fcef3383df41df6181828d3bc3f4e76702"
+      },
+      {
+        "path": "kdenlive/media/92fa9a5e8c48ecb245177a3b33753379a949b1a27bf985988bd32ef84b402da7.png",
+        "bytes": 1376614,
+        "sha256": "92fa9a5e8c48ecb245177a3b33753379a949b1a27bf985988bd32ef84b402da7"
+      },
+      {
+        "path": "kdenlive/media/965212d1d462437d12c67412c9748739cda60e552f4e8e1c596c57df31d581e6.png",
+        "bytes": 1387385,
+        "sha256": "965212d1d462437d12c67412c9748739cda60e552f4e8e1c596c57df31d581e6"
+      },
+      {
+        "path": "kdenlive/media/9798769379c0c6facafaec974cfe6fbfd27c2b055d83f47abf49f03af199d804.png",
+        "bytes": 1381178,
+        "sha256": "9798769379c0c6facafaec974cfe6fbfd27c2b055d83f47abf49f03af199d804"
+      },
+      {
+        "path": "kdenlive/media/9ec4569eed2af88e953c74887cd8eb2194771445f43d511102e200adb0354039.png",
+        "bytes": 1385087,
+        "sha256": "9ec4569eed2af88e953c74887cd8eb2194771445f43d511102e200adb0354039"
+      },
+      {
+        "path": "kdenlive/media/a02ab9b398e7419d3e88201530f92524886c7bba27f3b959fbe555db63d83bd8.png",
+        "bytes": 1384624,
+        "sha256": "a02ab9b398e7419d3e88201530f92524886c7bba27f3b959fbe555db63d83bd8"
+      },
+      {
+        "path": "kdenlive/media/a3df251c0113034dcecbb26454f2854996dc7e0cc15e16ae18b94d188604fe43.png",
+        "bytes": 1380808,
+        "sha256": "a3df251c0113034dcecbb26454f2854996dc7e0cc15e16ae18b94d188604fe43"
+      },
+      {
+        "path": "kdenlive/media/a6ea97544b5c9bff438c746ec0b6df7aae0a2db916e15179ce676be19e2915b7.png",
+        "bytes": 1372122,
+        "sha256": "a6ea97544b5c9bff438c746ec0b6df7aae0a2db916e15179ce676be19e2915b7"
+      },
+      {
+        "path": "kdenlive/media/aa7b5976bd8a36f80f8c6b566c369152ee6eb8fb3dd9be5a3dec889b641f2458.png",
+        "bytes": 1384157,
+        "sha256": "aa7b5976bd8a36f80f8c6b566c369152ee6eb8fb3dd9be5a3dec889b641f2458"
+      },
+      {
+        "path": "kdenlive/media/b13a04360280bd1150049285ff7d1099733d086b6bcc8bd1f2b0198b0990ffe0.png",
+        "bytes": 1388327,
+        "sha256": "b13a04360280bd1150049285ff7d1099733d086b6bcc8bd1f2b0198b0990ffe0"
+      },
+      {
+        "path": "kdenlive/media/b33309dec4926c86bc4d8b845dbfa4e877eada0e8f8f299438330dbeea9ec182.png",
+        "bytes": 1379357,
+        "sha256": "b33309dec4926c86bc4d8b845dbfa4e877eada0e8f8f299438330dbeea9ec182"
+      },
+      {
+        "path": "kdenlive/media/b4e1aac45a40c097d3a1f57b17754ae2ca8c0c629958fabfe1d7ff2ba38b675b.png",
+        "bytes": 1387303,
+        "sha256": "b4e1aac45a40c097d3a1f57b17754ae2ca8c0c629958fabfe1d7ff2ba38b675b"
+      },
+      {
+        "path": "kdenlive/media/b723128048eb55370d1923543a863272ed1c1689dbd369c911ae33faf6e2662b.png",
+        "bytes": 1366910,
+        "sha256": "b723128048eb55370d1923543a863272ed1c1689dbd369c911ae33faf6e2662b"
+      },
+      {
+        "path": "kdenlive/media/b8c01187651733b6fca195e7a2a2fc5db2cd490f2e2f4b17f7c061648c78cec0.png",
+        "bytes": 1385970,
+        "sha256": "b8c01187651733b6fca195e7a2a2fc5db2cd490f2e2f4b17f7c061648c78cec0"
+      },
+      {
+        "path": "kdenlive/media/b95b9d46353930d6b78e511dc8901e4b603854802908d6954979c225f2821092.png",
+        "bytes": 1376910,
+        "sha256": "b95b9d46353930d6b78e511dc8901e4b603854802908d6954979c225f2821092"
+      },
+      {
+        "path": "kdenlive/media/bc1aaf9168939f841e7af9d5f122f945048e2ed15c26739495f6681fa667b184.png",
+        "bytes": 1383638,
+        "sha256": "bc1aaf9168939f841e7af9d5f122f945048e2ed15c26739495f6681fa667b184"
+      },
+      {
+        "path": "kdenlive/media/bebbf7a6aae527908851483f79cdafc357f2f5872d31786aa8fecd6e960b1c23.png",
+        "bytes": 1373437,
+        "sha256": "bebbf7a6aae527908851483f79cdafc357f2f5872d31786aa8fecd6e960b1c23"
+      },
+      {
+        "path": "kdenlive/media/c5f63aea9b9791c60ac0f49edd0800b77ddaa29d41b2f97eddec5538f0bb109b.png",
+        "bytes": 1383846,
+        "sha256": "c5f63aea9b9791c60ac0f49edd0800b77ddaa29d41b2f97eddec5538f0bb109b"
+      },
+      {
+        "path": "kdenlive/media/c8f9f4f586f3453f21e9161a23050562aa5fbca984e616d21340e4ff183ad463.png",
+        "bytes": 1376769,
+        "sha256": "c8f9f4f586f3453f21e9161a23050562aa5fbca984e616d21340e4ff183ad463"
+      },
+      {
+        "path": "kdenlive/media/c91279b238e3f31a95b483892f5bd1dcbe977332f58cbb487fc57d04ca499664.png",
+        "bytes": 1381784,
+        "sha256": "c91279b238e3f31a95b483892f5bd1dcbe977332f58cbb487fc57d04ca499664"
+      },
+      {
+        "path": "kdenlive/media/cbd318892413348f0065a73393c65b640401181af7a0896a41cb2bb714095638.png",
+        "bytes": 1384871,
+        "sha256": "cbd318892413348f0065a73393c65b640401181af7a0896a41cb2bb714095638"
+      },
+      {
+        "path": "kdenlive/media/d25a07d18c2ee03c01d0a1c94091d960f8658cee29ee152b3a26c0390ea8a9aa.png",
+        "bytes": 1377121,
+        "sha256": "d25a07d18c2ee03c01d0a1c94091d960f8658cee29ee152b3a26c0390ea8a9aa"
+      },
+      {
+        "path": "kdenlive/media/d575e35d1c682feb1e3067af02840491117c4e4103164b173728898ab9da16e4.png",
+        "bytes": 1384496,
+        "sha256": "d575e35d1c682feb1e3067af02840491117c4e4103164b173728898ab9da16e4"
+      },
+      {
+        "path": "kdenlive/media/dc8a87671150b7365785dcf1984b10e105b15944d77d7d8d06927d1a1f3480e7.png",
+        "bytes": 1382263,
+        "sha256": "dc8a87671150b7365785dcf1984b10e105b15944d77d7d8d06927d1a1f3480e7"
+      },
+      {
+        "path": "kdenlive/media/ddfdc6b0b8b2d4b96e2cbfa0b9133616eb7939ba7eec5ec1395359c2296477cc.png",
+        "bytes": 1383006,
+        "sha256": "ddfdc6b0b8b2d4b96e2cbfa0b9133616eb7939ba7eec5ec1395359c2296477cc"
+      },
+      {
+        "path": "kdenlive/media/df15b253328728f2600330c0769f95eb3f2c0532c16e2c99dc465aca4239c5f8.png",
+        "bytes": 1376658,
+        "sha256": "df15b253328728f2600330c0769f95eb3f2c0532c16e2c99dc465aca4239c5f8"
+      },
+      {
+        "path": "kdenlive/media/e0401e853df4c650bc827d9e363610b5ba7ecb188f12ff56ecabdd38706056eb.png",
+        "bytes": 1385564,
+        "sha256": "e0401e853df4c650bc827d9e363610b5ba7ecb188f12ff56ecabdd38706056eb"
+      },
+      {
+        "path": "kdenlive/media/e0d28a6f45d176ec78f21dd09b2d1a37d8be70a53615c8be25fe8413f8aaad19.png",
+        "bytes": 1386179,
+        "sha256": "e0d28a6f45d176ec78f21dd09b2d1a37d8be70a53615c8be25fe8413f8aaad19"
+      },
+      {
+        "path": "kdenlive/media/e15514e1cf9937958abf735d72fefe9e72e208aa9f5ad1a8cbf5190dca06db94.png",
+        "bytes": 1384133,
+        "sha256": "e15514e1cf9937958abf735d72fefe9e72e208aa9f5ad1a8cbf5190dca06db94"
+      },
+      {
+        "path": "kdenlive/media/e25b224bde128d63bd6db40d80768125de87680180eb6adc52de5be9c939fbb4.png",
+        "bytes": 1366203,
+        "sha256": "e25b224bde128d63bd6db40d80768125de87680180eb6adc52de5be9c939fbb4"
+      },
+      {
+        "path": "kdenlive/media/e3b720cb389a3c12a601b10838a9f37354a366de8067498f10cf56de81904e2a.png",
+        "bytes": 1377934,
+        "sha256": "e3b720cb389a3c12a601b10838a9f37354a366de8067498f10cf56de81904e2a"
+      },
+      {
+        "path": "kdenlive/media/e81778cbbb10d93c638b654004047754e36f4d5ee6fcd7c39431c127d77c693a.png",
+        "bytes": 1380016,
+        "sha256": "e81778cbbb10d93c638b654004047754e36f4d5ee6fcd7c39431c127d77c693a"
+      },
+      {
+        "path": "kdenlive/media/f80bc51e44e7160883bc4c203e54de12840dbe022cba90aa95d3f4c7862afae7.png",
+        "bytes": 1379871,
+        "sha256": "f80bc51e44e7160883bc4c203e54de12840dbe022cba90aa95d3f4c7862afae7"
+      },
+      {
+        "path": "kdenlive/media/f84b14ed777d0c89aa919bf242557498f20aafbef11894180138838e2f19b477.png",
+        "bytes": 1385527,
+        "sha256": "f84b14ed777d0c89aa919bf242557498f20aafbef11894180138838e2f19b477"
+      },
+      {
+        "path": "kdenlive/media/fa6449b01bf3c40cd0b95a5426da9bf8bed36a6bf1c17f7d2552bc66f9c63e7c.png",
+        "bytes": 1387524,
+        "sha256": "fa6449b01bf3c40cd0b95a5426da9bf8bed36a6bf1c17f7d2552bc66f9c63e7c"
+      },
+      {
+        "path": "kdenlive/media/fa8dd44aa4a8f021f997d5c1fb2382883a0dcc5c2c57e02ef27c6a1448378969.png",
+        "bytes": 1379879,
+        "sha256": "fa8dd44aa4a8f021f997d5c1fb2382883a0dcc5c2c57e02ef27c6a1448378969"
+      },
+      {
+        "path": "kdenlive/media/fcc71ec3ca6221c6e9a56897cb0e63da5662065b829e6adb8d767084af73993a.png",
+        "bytes": 1385341,
+        "sha256": "fcc71ec3ca6221c6e9a56897cb0e63da5662065b829e6adb8d767084af73993a"
+      },
+      {
+        "path": "kdenlive/media/fd9bbb001906737cb43532d3ca261615c23eb124d1217e380b8a3f1ed9d442e6.png",
+        "bytes": 1384157,
+        "sha256": "fd9bbb001906737cb43532d3ca261615c23eb124d1217e380b8a3f1ed9d442e6"
+      },
+      {
+        "path": "kdenlive/media/fdb6ff5733698b8f2371e43bbb09875352b009f59b184db1b6664becb383a984.png",
+        "bytes": 1387121,
+        "sha256": "fdb6ff5733698b8f2371e43bbb09875352b009f59b184db1b6664becb383a984"
+      },
+      {
+        "path": "kdenlive/media/fe6a6122b7d364ba2365797c311c9329d4e0deeb655ef7241f7b54b04dff3b6f.png",
+        "bytes": 1380017,
+        "sha256": "fe6a6122b7d364ba2365797c311c9329d4e0deeb655ef7241f7b54b04dff3b6f"
+      },
+      {
+        "path": "kdenlive/media/fe86a3ebba33637e86bc6962b8b66eb1beea1934a15f368e50d77adf6177c19c.png",
+        "bytes": 1381799,
+        "sha256": "fe86a3ebba33637e86bc6962b8b66eb1beea1934a15f368e50d77adf6177c19c"
+      },
+      {
+        "path": "kdenlive/media/fea878d43de544abcb8dea736bf3fddcfe2d6e35b01cd7c36b0ffb45d55b2905.png",
+        "bytes": 1384101,
+        "sha256": "fea878d43de544abcb8dea736bf3fddcfe2d6e35b01cd7c36b0ffb45d55b2905"
+      },
+      {
+        "path": "kdenlive/project.kdenlive",
+        "bytes": 384377,
+        "sha256": "519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2"
+      },
+      {
+        "path": "licenses/DejaVu-font-NOTICE.txt",
+        "bytes": 2723,
+        "sha256": "70eb8068d5428d47f3b3cc8790757fc5ec47db5d6ad84c0a4be689e691fa87a3"
+      },
+      {
+        "path": "masters/hero-1600.png",
+        "bytes": 2015075,
+        "sha256": "2569cdb351092c71ad306d6668dbedf4706e969875c96618bd19226e72927554"
+      },
+      {
+        "path": "masters/plan-1600.png",
+        "bytes": 2044082,
+        "sha256": "419a90b98b6b2583ca82b9bdb29aac54b2b3dd3584077dba98ad029946ca0cb9"
+      },
+      {
+        "path": "mcp-evidence.public.json",
+        "bytes": 126271,
+        "sha256": "32e2b5ecf58082937d472136f601c57053a4f0cac76cb04d07b21100e84b87d1"
+      },
+      {
+        "path": "validation.json",
+        "bytes": 13949,
+        "sha256": "fe01e36f983f0c5be501bf11c6bd38553ff0e3f0a02c5159d182e2d5c4e31877"
+      }
+    ]
+  },
+  "original_members_retained": {
+    "core": 43,
+    "full": 144
+  },
+  "qualification_inheritance": "All CAD/BLEND/media members retain original qualified identities; the replacement editor retains its separately qualified exact identity. New wrappers and archive structure were file-checked; no new native save/render.",
+  "rights": "No new artwork, native asset or production-source license is granted; see LICENSES.md."
+}

@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "cad_parts": 13,
+  "cad_valid_closed_solids_each": 1,
+  "native_mesh_instances": 22,
+  "native_text_objects": 2,
+  "native_animation_poses": 97,
+  "native_scalar_key_values": 1455,
+  "rendered_motion_frames": 96,
+  "native_pose_max_hinge_error_mm": 7.226413753188325e-06,
+  "film": {
+    "video_frames": 432,
+    "fps": 24,
+    "seconds": 18,
+    "width": 1280,
+    "height": 800,
+    "cycle_repeats": 2,
+    "silent": true,
+    "relocated_video_frames_exact": 432
+  },
+  "masters": {
+    "width": 1600,
+    "height": 1000,
+    "samples": 512
+  },
+  "motion_samples": 128,
+  "qualification_versions": {
+    "historical_creation_and_motion_render": "Core/server0.20.39",
+    "final_native_copy_presentation_film_relocation": "Core/server/CLI0.20.41"
+  },
+  "status": "NATIVE_MEDIA_QUALIFIED_CURRENT_PUBLIC_PACKAGE",
+  "web_film": {
+    "bytes": 1986459,
+    "sha256": "f2f3eaa047fc3622e0aab775053bb28653fa3e32548325947c3611be9bf83b36"
+  },
+  "native_source": {
+    "path": "kdenlive/project.kdenlive",
+    "bytes": 384377,
+    "sha256": "519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2",
+    "root": "",
+    "qimage_producers": 195,
+    "relative_PNG_resources": 98,
+    "DynamicText_filters": 390
+  },
+  "editor_headless": {
+    "all_accepted_RGBA_frames_exact": true,
+    "accepted_MP4_bytes_exact": true,
+    "all_moved_RGBA_frames_exact": true,
+    "moved_MP4_bytes_exact": true,
+    "authoring_and_package_sources_unavailable": true,
+    "historical_originals_unchanged": true,
+    "MCP_events": 955,
+    "source_manifest_sha256": "fafd903933da0de30f351a12fdba7ac457d728f7dbcd2fa68214d5744afa8376"
+  },
+  "editor_GUI": {
+    "receipt_sha256": "cfa46aa782e35391936bb25b3bab08784ccea18a71919b610bd1032e9b6f306d",
+    "untouched_save_reopen": true,
+    "saved_copy_sha256": "5bcc058650898b265bfba73d1324bd46602dd09b443d103d145903b0149508b5",
+    "preview_frames": [
+      0,
+      71,
+      72,
+      73,
+      168,
+      264,
+      359,
+      360,
+      431
+    ],
+    "visual_controls": "Only closing producer: two native Dynamic Text stack entries and first text field; no second-field, other-pair, or reopened-controls visual claim",
+    "all390_serialized_identities_text_styles_preserved": true,
+    "same_display_export": {
+      "frames": 432,
+      "profile": {
+        "width": 1280,
+        "height": 800,
+        "fps": 24
+      },
+      "duration_seconds": 18,
+      "all432_RGB_exact": true,
+      "all432_RGBA_exact": true,
+      "MP4_bytes_exact": true,
+      "movie_sha256": {
+        "before": "32616927feccc9cbb9670c944eed5de5dfcafb7b9d55ef426470f43e0b4f5c23",
+        "after": "32616927feccc9cbb9670c944eed5de5dfcafb7b9d55ef426470f43e0b4f5c23"
+      },
+      "movie_bytes": {
+        "before": 1995601,
+        "after": 1995601
+      }
+    },
+    "source_monitor_qualified": false,
+    "parameter_editing_or_Undo_qualified": false,
+    "earlier_Delete_Undo_not_transferred": true
+  },
+  "CAD_presentation_scope": "13 final native files have save/reopen readback; visible first-open GUI evidence is a representative separately hashed proof-copy flywheel, not every final packet file.",
+  "native_bindings": [
+    {
+      "path": "blender/brass-animation.blend",
+      "bytes": 2141244,
+      "sha256": "ceaad41190a19678e2491524f230038202b75818a2b032e96471fa73f4adfdc5"
+    },
+    {
+      "path": "blender/brass-hero.blend",
+      "bytes": 2141244,
+      "sha256": "12cd08f813dff5382e3a7ef0b5ff08080cb554b5f403e1c4cbc7adc7945f5e67"
+    },
+    {
+      "path": "blender/brass-plan.blend",
+      "bytes": 2141244,
+      "sha256": "f4522c8f49f6e3f1b764a375ff6184be8faaf9c899e7a676e0027f7e3f354102"
+    },
+    {
+      "path": "freecad/parts/AxleA.FCStd",
+      "bytes": 3656,
+      "sha256": "788e7be7c232dd76d1af51ef8eef46feb956dba8b6f4f7773919937c48e48132"
+    },
+    {
+      "path": "freecad/parts/AxleB.FCStd",
+      "bytes": 3655,
+      "sha256": "4db439d8f6f4914aad0a0c2bc43c01d998cdc8ecddf655c1c02765ed7c4af9f3"
+    },
+    {
+      "path": "freecad/parts/Base.FCStd",
+      "bytes": 20353,
+      "sha256": "a179441df34a19052cfffba5fe2b422d12181e1ec32d2c4e7ab2320acbdaf259"
+    },
+    {
+      "path": "freecad/parts/Cap.FCStd",
+      "bytes": 3656,
+      "sha256": "41a4c570a94a96fecd1718496e4b64ca867c1434acc518a1818e77375eda7ac8"
+    },
+    {
+      "path": "freecad/parts/Coupler.FCStd",
+      "bytes": 20625,
+      "sha256": "601deea2be734e97d3ba39e25f1cb7f96c112398e1b19a81299ca932f740e9b6"
+    },
+    {
+      "path": "freecad/parts/Flywheel.FCStd",
+      "bytes": 32835,
+      "sha256": "3356ab33be8662f0ce7a5036bd294330419c93830868ea39aa0d7c68e042ce15"
+    },
+    {
+      "path": "freecad/parts/Foot.FCStd",
+      "bytes": 3652,
+      "sha256": "26e33230148ae02f4d4dbbf5854936ac1a2d51fbd3b9737a5055c891e0a4ab47"
+    },
+    {
+      "path": "freecad/parts/JointPin.FCStd",
+      "bytes": 3660,
+      "sha256": "194035fe2979c9c656dd8b3063bda4cb6976d66d9aa2c7344b35043235031fd1"
+    },
+    {
+      "path": "freecad/parts/JournalA.FCStd",
+      "bytes": 6489,
+      "sha256": "92f7fe10e91034a8b966f6cc1559fecc5c3a6fea6f8bd9ad8bfbf98bf731ab75"
+    },
+    {
+      "path": "freecad/parts/JournalB.FCStd",
+      "bytes": 6490,
+      "sha256": "daa844b58481b6e675ece60e18afdb57ae71d7ee097ca9fcdb72f25393ae8e91"
+    },
+    {
+      "path": "freecad/parts/Rocker.FCStd",
+      "bytes": 20607,
+      "sha256": "6066e064454e17a268da92fdd58d7f8c1c18e060ddddb3353cf1245a8da46a08"
+    },
+    {
+      "path": "freecad/parts/WasherA.FCStd",
+      "bytes": 6509,
+      "sha256": "395d98ff446f5998701d753bd2814753e50427166f3eb274169626dfd2d099a8"
+    },
+    {
+      "path": "freecad/parts/WasherB.FCStd",
+      "bytes": 6483,
+      "sha256": "48c12c1b44ec9dc07a3633b4bf2ec2f309fe31da334bd58b431d4ed85118c6d1"
+    }
+  ],
+  "evidence_binding": [
+    {
+      "record": "final-review/public-audit-summary.json",
+      "bytes": 2007,
+      "sha256": "d56669989ed1881dd22c0085bc837ec1490333edaeeb0a9f8fde2ea05886596b"
+    },
+    {
+      "record": "final-review/independent-content-audit.json",
+      "bytes": 70678,
+      "sha256": "453f2defbd4859acadc0c7d7f687c6876682004c6bb23f1362b1435a4593f55f"
+    },
+    {
+      "record": "final-review/final-snapshot-native-audit.json",
+      "bytes": 969,
+      "sha256": "204500c0daf254e6cd0e1be97ea4cf9dc7a53b86645e409ca5a432aac4308e35"
+    },
+    {
+      "record": "final-review/media-metadata-audit.json",
+      "bytes": 663,
+      "sha256": "8df06e77fab0ccda2a5c7d889a4a1220d4188fea6b02526f37688344aecf3701"
+    },
+    {
+      "record": "native-core2041-01/validation.json",
+      "bytes": 4158,
+      "sha256": "d11aee6ca793b233f42421ae26122ded3fff3f41f08ce204ebe4de5964af7ec6"
+    },
+    {
+      "record": "cad-presentation-final-01/acceptance.json",
+      "bytes": 5150,
+      "sha256": "1bc500f8b9c01414cc2a0f93709228743ba0a2d11b6de601840177b8ef68758d"
+    },
+    {
+      "record": "cad-presentation-wheel-01/acceptance.json",
+      "bytes": 397,
+      "sha256": "52a08a3e79ec3c47f243e504716ca55eeab620219dcd89f96a910a9e30472bc3"
+    },
+    {
+      "record": "gui-qa-02/acceptance.json",
+      "bytes": 539,
+      "sha256": "6217f6ae4a5d961154584341d3b455342afa0571b4f7150b0e69da1ccbdc726d"
+    },
+    {
+      "record": "cad-05/validation.json",
+      "bytes": 52967,
+      "sha256": "4040ecea998073d044aeee752920e68a359ad8c7c0601007a39761972e2ca997"
+    },
+    {
+      "record": "animation-proof-01/validation.json",
+      "bytes": 349436,
+      "sha256": "c626891a86bcbefbf2350730561d6c52b4b2bc513d67e856b29a7d0a23f026fb"
+    },
+    {
+      "record": "final-native-01/validation.json",
+      "bytes": 428,
+      "sha256": "a637a242bb3f82e44efeb0d0cba5aadf0a40c2b170610a8e8847d7322dd24c58"
+    },
+    {
+      "record": "film-final-package-01/frame-comparison.json",
+      "bytes": 37972,
+      "sha256": "d2354e382fa8fc6acdc47ba3baf0ea011ddf3353463a35fe46bacb0466a3db1c"
+    },
+    {
+      "record": "D02-native-effects-01/qualification.json",
+      "bytes": 452133,
+      "sha256": "e4b97a7183034808ba297804387029eb0221e41ca11979bc7cfefe38d6d02a7c"
+    },
+    {
+      "record": "d02-native-effects-gui-01/native-gui-receipt.json",
+      "bytes": 15611,
+      "sha256": "cfa46aa782e35391936bb25b3bab08784ccea18a71919b610bd1032e9b6f306d"
+    },
+    {
+      "record": "export-proof/independent-verification.json",
+      "bytes": 693955,
+      "sha256": "3ec98c387c1e7d1c5e5107fde23e0f2f9ca3d3dd53d7303a20f8582083ce674d"
+    },
+    {
+      "record": "D02-update-audit-03/review.json",
+      "bytes": 11864,
+      "sha256": "17a45303a2249e857162d5f98d45aac070b55b94efeb2614a6985cad51e52f44"
+    },
+    {
+      "record": "D02-update-audit-03/all-original-media-hashes.json",
+      "bytes": 32639,
+      "sha256": "d142671c65e4bd2741f4dff7694bfa5d83a5387cf6666db5c39396ca63d90a8e"
+    }
+  ],
+  "not_claimed": [
+    "A new native/render execution in this packaging pass",
+    "Every native editor control visually inspected",
+    "Parameter editing or Undo on the final graph",
+    "Source-monitor frame qualification in the final GUI gate",
+    "Every final CAD part visually opened in GUI",
+    "Dynamics, manufacturing, safety or continuous collision certification",
+    "Exact seamless-pixel loop or cross-environment deterministic rendering",
+    "A new copyright license or public-domain waiver",
+    "Complete public production traces or bundled application/adapter/font binaries"
+  ],
+  "publication_status": "Both media-only release assets are public and anonymous download bytes/SHA-256 match the independently audited packages. Final site CI/review and browser acceptance remain separate publication gates, not claims of this native/artifact qualification record.",
+  "environment": {
+    "FreeCAD": "1.0.0；历史CAD创作用0.4.1模块实现，最终原生视图副本用0.4.2源码及独立增强",
+    "Blender": "4.3.2；0.1.43兼容适配器与记录的几何、文字、渲染和原生副本增强",
+    "Kdenlive / MLT": "24.12.3 / 7.30.0；0.1.1与相对媒体打包增强",
+    "Core / Server / CLI": "历史创作与96帧渲染使用0.20.39；最终原生副本、CAD视图、影片编辑与迁移验收使用0.20.41",
+    "Units": "CAD为毫米；Blender示意坐标=CAD毫米÷20，坐标轴不变",
+    "Adapter 适配器": "FreeCAD历史0.4.1 / 最终视图0.4.2、Blender0.1.43兼容实现、Kdenlive0.1.1及记录的本地增强",
+    "Corrected editor": "Core/server/CLI0.20.41, Kdenlive24.12.3 / MLT7.30.0, pinned development source manifest fafd903933da0de30f351a12fdba7ac457d728f7dbcd2fa68214d5744afa8376"
+  },
+  "checks": [
+    {
+      "name": "Parametric CAD",
+      "result": "pass",
+      "observed": "13 native parts; valid closed single solids, editable links, STEP volume/readback and STL geometry handoff"
+    },
+    {
+      "name": "Native motion",
+      "result": "pass",
+      "observed": "97 native poses,1455 keyframe values;96 rendered poses have maximum hinge error7.226413753188325e-06mm"
+    },
+    {
+      "name": "Portable BLEND",
+      "result": "pass",
+      "observed": "Three clean native copies reopen with original sources unavailable; geometry, text, camera, keys and full-production referenceRGBA match"
+    },
+    {
+      "name": "Film relocation",
+      "result": "pass",
+      "observed": "All432 decoded video-frame hashes match with original package and media unavailable"
+    },
+    {
+      "name": "Native CAD presentation",
+      "result": "pass",
+      "observed": "13 final native files have save/reopen readback; visible first-open GUI evidence is a representative separately hashed proof-copy flywheel, not every final packet file."
+    },
+    {
+      "name": "Corrected editor native identity",
+      "result": "pass",
+      "observed": {
+        "path": "kdenlive/project.kdenlive",
+        "bytes": 384377,
+        "sha256": "519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2",
+        "root": "",
+        "qimage_producers": 195,
+        "relative_PNG_resources": 98,
+        "DynamicText_filters": 390
+      }
+    },
+    {
+      "name": "Corrected accepted and relocated output",
+      "result": "pass",
+      "observed": {
+        "all_accepted_RGBA_frames_exact": true,
+        "accepted_MP4_bytes_exact": true,
+        "all_moved_RGBA_frames_exact": true,
+        "moved_MP4_bytes_exact": true,
+        "authoring_and_package_sources_unavailable": true,
+        "historical_originals_unchanged": true,
+        "MCP_events": 955,
+        "source_manifest_sha256": "fafd903933da0de30f351a12fdba7ac457d728f7dbcd2fa68214d5744afa8376"
+      }
+    },
+    {
+      "name": "Scoped GUI untouched save/reopen and same-display output",
+      "result": "pass",
+      "observed": {
+        "receipt_sha256": "cfa46aa782e35391936bb25b3bab08784ccea18a71919b610bd1032e9b6f306d",
+        "untouched_save_reopen": true,
+        "saved_copy_sha256": "5bcc058650898b265bfba73d1324bd46602dd09b443d103d145903b0149508b5",
+        "preview_frames": [
+          0,
+          71,
+          72,
+          73,
+          168,
+          264,
+          359,
+          360,
+          431
+        ],
+        "visual_controls": "Only closing producer: two native Dynamic Text stack entries and first text field; no second-field, other-pair, or reopened-controls visual claim",
+        "all390_serialized_identities_text_styles_preserved": true,
+        "same_display_export": {
+          "frames": 432,
+          "profile": {
+            "width": 1280,
+            "height": 800,
+            "fps": 24
+          },
+          "duration_seconds": 18,
+          "all432_RGB_exact": true,
+          "all432_RGBA_exact": true,
+          "MP4_bytes_exact": true,
+          "movie_sha256": {
+            "before": "32616927feccc9cbb9670c944eed5de5dfcafb7b9d55ef426470f43e0b4f5c23",
+            "after": "32616927feccc9cbb9670c944eed5de5dfcafb7b9d55ef426470f43e0b4f5c23"
+          },
+          "movie_bytes": {
+            "before": 1995601,
+            "after": 1995601
+          }
+        },
+        "source_monitor_qualified": false,
+        "parameter_editing_or_Undo_qualified": false,
+        "earlier_Delete_Undo_not_transferred": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,3657 @@
+{
+  "schema_version": 1,
+  "scope": "First and last actual calls for each listed tool in each source stage, with the corresponding recorded final asynchronous result when one exists. This is a bounded projection, not a complete trace or replay. Paths, process/routing fields and opaque record IDs are removed or aliased. Native arguments, numerical values and result hashes retain their meaning. No new tool execution occurred. Diagnostic stdout, stderr, tracebacks and logs are omitted with hashes of the original values; a historical export diagnostic contains machine-identifying text and is not public.",
+  "stages": [
+    {
+      "stage": "freecad-authoring",
+      "source_record_sha256": "a26c8402196218db033fe8dfce4ccd67f909b5863dc84305a8fd1e22425ad9ac",
+      "source_event_count": 898,
+      "published_call_count": 14,
+      "calls": [
+        {
+          "source_event_index": 7,
+          "tool": "create_document",
+          "arguments": {
+            "timeout_secs": 120,
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 12,
+            "response": {
+              "tool": "freecad_session__create_document",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document created.",
+                "context": {
+                  "name": "Coupler",
+                  "label": "Coupler",
+                  "file_name": "<artifact-path>",
+                  "object_count": 0,
+                  "objects": [],
+                  "duration_secs": 0.101,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "create_duration_secs": 0.101,
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 1037,
+                  "document_sha256": "dbf6d731d72eddf90cecf2fa21b2a6a45b8d3901454fe6d54facc02860a932fd",
+                  "overwritten": false,
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 13,
+          "tool": "add_primitive",
+          "arguments": {
+            "timeout_secs": 120,
+            "document_path": "<artifact-path>",
+            "primitive": "box",
+            "name": "P01",
+            "dimensions": {
+              "length": 80,
+              "width": 8,
+              "height": 2
+            },
+            "translation": [
+              0,
+              -4.0,
+              0
+            ]
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 21,
+            "response": {
+              "tool": "freecad_modeling__add_primitive",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD primitive added.",
+                "context": {
+                  "object": {
+                    "name": "P01",
+                    "label": "P01",
+                    "type_id": "Part::Box",
+                    "placement": {
+                      "translation": [
+                        0.0,
+                        -4.0,
+                        0.0
+                      ],
+                      "rotation_axis": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "rotation_degrees": 0.0
+                    },
+                    "outgoing_links": [],
+                    "incoming_links": [],
+                    "shape": {
+                      "shape_type": "Solid",
+                      "valid": true,
+                      "closed": true,
+                      "solids": 1,
+                      "shells": 1,
+                      "faces": 6,
+                      "edges": 12,
+                      "vertices": 8,
+                      "volume": 1279.9999999999998,
+                      "area": 1631.9999999999998,
+                      "length": 720.0,
+                      "bounding_box": {
+                        "min": [
+                          0.0,
+                          -4.0,
+                          0.0
+                        ],
+                        "max": [
+                          80.0,
+                          4.0,
+                          2.0
+                        ],
+                        "size": [
+                          80.0,
+                          8.0,
+                          2.0
+                        ],
+                        "center": [
+                          40.0,
+                          0.0,
+                          1.0
+                        ]
+                      }
+                    }
+                  },
+                  "document": {
+                    "name": "Coupler",
+                    "label": "Coupler",
+                    "file_name": "<artifact-path>",
+                    "object_count": 1,
+                    "objects": [
+                      {
+                        "name": "P01",
+                        "label": "P01",
+                        "type_id": "Part::Box",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [],
+                        "incoming_links": [],
+                        "shape": {
+                          "shape_type": "Solid",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 6,
+                          "edges": 12,
+                          "vertices": 8,
+                          "volume": 1279.9999999999998,
+                          "area": 1631.9999999999998,
+                          "length": 720.0,
+                          "bounding_box": {
+                            "min": [
+                              0.0,
+                              -4.0,
+                              0.0
+                            ],
+                            "max": [
+                              80.0,
+                              4.0,
+                              2.0
+                            ],
+                            "size": [
+                              80.0,
+                              8.0,
+                              2.0
+                            ],
+                            "center": [
+                              40.0,
+                              0.0,
+                              1.0
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "duration_secs": 0.252,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 2447,
+                  "document_sha256": "1321c4f322e847d6d6b4913875101f4326e6d00b261bd2f48666041943f22bd3",
+                  "verified_checks": [
+                    "object.exists",
+                    "dimension.Length",
+                    "dimension.Width",
+                    "dimension.Height",
+                    "object.shape.not_null",
+                    "object.shape.valid",
+                    "object.type_id",
+                    "object.placement"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "object.exists",
+                    "dimension.Length",
+                    "dimension.Width",
+                    "dimension.Height",
+                    "object.shape.not_null",
+                    "object.shape.valid",
+                    "object.type_id",
+                    "object.placement"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 30,
+          "tool": "boolean_operation",
+          "arguments": {
+            "timeout_secs": 120,
+            "document_path": "<artifact-path>",
+            "operation": "union",
+            "base_object": "P01",
+            "tool_object": "P02",
+            "result_name": "F03"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 38,
+            "response": {
+              "tool": "freecad_modeling__boolean_operation",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD boolean operation completed.",
+                "context": {
+                  "object": {
+                    "name": "F03",
+                    "label": "F03",
+                    "type_id": "Part::Fuse",
+                    "placement": {
+                      "translation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "rotation_axis": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "rotation_degrees": 0.0
+                    },
+                    "outgoing_links": [
+                      "P01",
+                      "P02"
+                    ],
+                    "incoming_links": [],
+                    "shape": {
+                      "shape_type": "Compound",
+                      "valid": true,
+                      "closed": true,
+                      "solids": 1,
+                      "shells": 1,
+                      "faces": 10,
+                      "edges": 18,
+                      "vertices": 10,
+                      "volume": 1330.2654824574367,
+                      "area": 1691.3982236861546,
+                      "length": 820.5309649148733,
+                      "bounding_box": {
+                        "min": [
+                          -4.0,
+                          -4.0,
+                          0.0
+                        ],
+                        "max": [
+                          80.0,
+                          4.0,
+                          2.0
+                        ],
+                        "size": [
+                          84.0,
+                          8.0,
+                          2.0
+                        ],
+                        "center": [
+                          38.0,
+                          0.0,
+                          1.0
+                        ]
+                      }
+                    }
+                  },
+                  "operation": "union",
+                  "duration_secs": 0.302,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document": {
+                    "name": "Coupler",
+                    "label": "Coupler",
+                    "file_name": "<artifact-path>",
+                    "object_count": 3,
+                    "objects": [
+                      {
+                        "name": "P01",
+                        "label": "P01",
+                        "type_id": "Part::Box",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [],
+                        "incoming_links": [
+                          "F03"
+                        ],
+                        "shape": {
+                          "shape_type": "Solid",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 6,
+                          "edges": 12,
+                          "vertices": 8,
+                          "volume": 1279.9999999999998,
+                          "area": 1631.9999999999998,
+                          "length": 720.0,
+                          "bounding_box": {
+                            "min": [
+                              0.0,
+                              -4.0,
+                              0.0
+                            ],
+                            "max": [
+                              80.0,
+                              4.0,
+                              2.0
+                            ],
+                            "size": [
+                              80.0,
+                              8.0,
+                              2.0
+                            ],
+                            "center": [
+                              40.0,
+                              0.0,
+                              1.0
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "P02",
+                        "label": "P02",
+                        "type_id": "Part::Cylinder",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [],
+                        "incoming_links": [
+                          "F03"
+                        ],
+                        "shape": {
+                          "shape_type": "Solid",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 3,
+                          "edges": 3,
+                          "vertices": 2,
+                          "volume": 100.53096491487337,
+                          "area": 150.79644737231,
+                          "length": 104.53096491487338,
+                          "bounding_box": {
+                            "min": [
+                              -4.0,
+                              -4.0,
+                              0.0
+                            ],
+                            "max": [
+                              4.0,
+                              4.0,
+                              2.0
+                            ],
+                            "size": [
+                              8.0,
+                              8.0,
+                              2.0
+                            ],
+                            "center": [
+                              0.0,
+                              0.0,
+                              1.0
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "F03",
+                        "label": "F03",
+                        "type_id": "Part::Fuse",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [
+                          "P01",
+                          "P02"
+                        ],
+                        "incoming_links": [],
+                        "shape": {
+                          "shape_type": "Compound",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 10,
+                          "edges": 18,
+                          "vertices": 10,
+                          "volume": 1330.2654824574367,
+                          "area": 1691.3982236861546,
+                          "length": 820.5309649148733,
+                          "bounding_box": {
+                            "min": [
+                              -4.0,
+                              -4.0,
+                              0.0
+                            ],
+                            "max": [
+                              80.0,
+                              4.0,
+                              2.0
+                            ],
+                            "size": [
+                              84.0,
+                              8.0,
+                              2.0
+                            ],
+                            "center": [
+                              38.0,
+                              0.0,
+                              1.0
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 4979,
+                  "document_sha256": "3a80ad26886aad8b62d98840c5ac0b792d4e34a4382addb2fb5ad1c84b22235f",
+                  "verified_checks": [
+                    "result.exists",
+                    "result.type_id",
+                    "result.base",
+                    "result.tool",
+                    "result.shape.not_null",
+                    "result.shape.valid",
+                    "result.solids",
+                    "result.volume_relation"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "result.exists",
+                    "result.type_id",
+                    "result.base",
+                    "result.tool",
+                    "result.shape.not_null",
+                    "result.shape.valid",
+                    "result.solids",
+                    "result.volume_relation"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 90,
+          "tool": "inspect_document",
+          "arguments": {
+            "timeout_secs": 120,
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 95,
+            "response": {
+              "tool": "freecad_session__inspect_document",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document inspected.",
+                "context": {
+                  "name": "Coupler",
+                  "label": "Coupler",
+                  "file_name": "<artifact-path>",
+                  "object_count": 9,
+                  "objects": [
+                    {
+                      "name": "P01",
+                      "label": "P01",
+                      "type_id": "Part::Box",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          -4.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [],
+                      "incoming_links": [
+                        "F03"
+                      ],
+                      "shape": {
+                        "shape_type": "Solid",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 6,
+                        "edges": 12,
+                        "vertices": 8,
+                        "volume": 1279.9999999999998,
+                        "area": 1631.9999999999998,
+                        "length": 720.0,
+                        "bounding_box": {
+                          "min": [
+                            0.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            80.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            80.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            40.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "P02",
+                      "label": "P02",
+                      "type_id": "Part::Cylinder",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [],
+                      "incoming_links": [
+                        "F03"
+                      ],
+                      "shape": {
+                        "shape_type": "Solid",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 3,
+                        "edges": 3,
+                        "vertices": 2,
+                        "volume": 100.53096491487337,
+                        "area": 150.79644737231,
+                        "length": 104.53096491487338,
+                        "bounding_box": {
+                          "min": [
+                            -4.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            4.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            8.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "F03",
+                      "label": "F03",
+                      "type_id": "Part::Fuse",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [
+                        "P01",
+                        "P02"
+                      ],
+                      "incoming_links": [
+                        "F05"
+                      ],
+                      "shape": {
+                        "shape_type": "Compound",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 10,
+                        "edges": 18,
+                        "vertices": 10,
+                        "volume": 1330.2654824574367,
+                        "area": 1691.3982236861546,
+                        "length": 820.5309649148733,
+                        "bounding_box": {
+                          "min": [
+                            -4.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            80.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            84.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            38.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "P04",
+                      "label": "P04",
+                      "type_id": "Part::Cylinder",
+                      "placement": {
+                        "translation": [
+                          80.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [],
+                      "incoming_links": [
+                        "F05"
+                      ],
+                      "shape": {
+                        "shape_type": "Solid",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 3,
+                        "edges": 3,
+                        "vertices": 2,
+                        "volume": 100.5309649148734,
+                        "area": 150.79644737231,
+                        "length": 104.53096491487338,
+                        "bounding_box": {
+                          "min": [
+                            76.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            84.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            8.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            80.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "F05",
+                      "label": "F05",
+                      "type_id": "Part::Fuse",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [
+                        "F03",
+                        "P04"
+                      ],
+                      "incoming_links": [
+                        "F07"
+                      ],
+                      "shape": {
+                        "shape_type": "Compound",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 15,
+                        "edges": 25,
+                        "vertices": 12,
+                        "volume": 1380.5309649148733,
+                        "area": 1750.7964473723096,
+                        "length": 925.0619298297463,
+                        "bounding_box": {
+                          "min": [
+                            -4.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            84.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            88.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            40.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "P06",
+                      "label": "P06",
+                      "type_id": "Part::Cylinder",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          -1.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [],
+                      "incoming_links": [
+                        "F07"
+                      ],
+                      "shape": {
+                        "shape_type": "Solid",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 3,
+                        "edges": 3,
+                        "vertices": 2,
+                        "volume": 60.821233773498406,
+                        "area": 85.70264758992957,
+                        "length": 63.29203070318036,
+                        "bounding_box": {
+                          "min": [
+                            -2.2,
+                            -2.2,
+                            -1.0
+                          ],
+                          "max": [
+                            2.2,
+                            2.2,
+                            3.0
+                          ],
+                          "size": [
+                            4.4,
+                            4.4,
+                            4.0
+                          ],
+                          "center": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "F07",
+                      "label": "F07",
+                      "type_id": "Part::Cut",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [
+                        "F05",
+                        "P06"
+                      ],
+                      "incoming_links": [
+                        "F09"
+                      ],
+                      "shape": {
+                        "shape_type": "Compound",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 16,
+                        "edges": 34,
+                        "vertices": 18,
+                        "volume": 1350.1203480281242,
+                        "area": 1748.0318458371505,
+                        "length": 966.7539605329259,
+                        "bounding_box": {
+                          "min": [
+                            -4.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            84.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            88.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            40.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "P08",
+                      "label": "P08",
+                      "type_id": "Part::Cylinder",
+                      "placement": {
+                        "translation": [
+                          80.0,
+                          0.0,
+                          -1.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [],
+                      "incoming_links": [
+                        "F09"
+                      ],
+                      "shape": {
+                        "shape_type": "Solid",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 3,
+                        "edges": 3,
+                        "vertices": 2,
+                        "volume": 60.82123377349842,
+                        "area": 85.70264758992957,
+                        "length": 63.29203070318036,
+                        "bounding_box": {
+                          "min": [
+                            77.8,
+                            -2.2,
+                            -1.0
+                          ],
+                          "max": [
+                            82.2,
+                            2.2,
+                            3.0
+                          ],
+                          "size": [
+                            4.400000000000006,
+                            4.4,
+                            4.0
+                          ],
+                          "center": [
+                            80.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "F09",
+                      "label": "F09",
+                      "type_id": "Part::Cut",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [
+                        "F07",
+                        "P08"
+                      ],
+                      "incoming_links": [],
+                      "shape": {
+                        "shape_type": "Compound",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 17,
+                        "edges": 43,
+                        "vertices": 24,
+                        "volume": 1319.7097311413745,
+                        "area": 1745.267244301991,
+                        "length": 1008.445991236106,
+                        "bounding_box": {
+                          "min": [
+                            -4.0,
+                            -4.0,
+                            0.0
+                          ],
+                          "max": [
+                            84.0,
+                            4.0,
+                            2.0
+                          ],
+                          "size": [
+                            88.0,
+                            8.0,
+                            2.0
+                          ],
+                          "center": [
+                            40.0,
+                            0.0,
+                            1.0
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "duration_secs": 0.252,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 15404,
+                  "document_sha256": "8ee72bbb4221b4c98904dbd0bbf0ef87891a342742e4a88e8bfc2d86e83c16b6",
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 96,
+          "tool": "validate_document",
+          "arguments": {
+            "timeout_secs": 120,
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 101,
+            "response": {
+              "tool": "freecad_session__validate_document",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document validation finished.",
+                "context": {
+                  "valid": true,
+                  "invalid_objects": [],
+                  "empty_shape_objects": [],
+                  "object_count": 9,
+                  "duration_secs": 0.252,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 102,
+          "tool": "export_geometry",
+          "arguments": {
+            "timeout_secs": 120,
+            "document_path": "<artifact-path>",
+            "object_names": [
+              "F09"
+            ],
+            "output_path": "<artifact-path>",
+            "linear_deflection": 0.03,
+            "angular_deflection_degrees": 5
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 107,
+            "response": {
+              "tool": "freecad_modeling__export_geometry",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD geometry exported.",
+                "context": {
+                  "object_names": [
+                    "F09"
+                  ],
+                  "format": "step",
+                  "duration_secs": 0.251,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document_path": "<artifact-path>",
+                  "output_path": "<artifact-path>",
+                  "bytes": 20426,
+                  "sha256": "c6260d0012c25326a8f99f6dc6dace35b402685ddeaa0fca249384f4e0a78a62",
+                  "overwritten": false,
+                  "verified_checks": [
+                    "artifact.non_empty",
+                    "artifact.shape_not_null",
+                    "artifact.solids",
+                    "artifact.volume"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "artifact.non_empty",
+                    "artifact.shape_not_null",
+                    "artifact.solids",
+                    "artifact.volume"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 116,
+          "tool": "save_copy",
+          "arguments": {
+            "timeout_secs": 120,
+            "source_path": "<artifact-path>",
+            "output_path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 121,
+            "response": {
+              "tool": "freecad_session__save_copy",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document copy saved.",
+                "context": {
+                  "object_count": 9,
+                  "object_names": [
+                    "F03",
+                    "F05",
+                    "F07",
+                    "F09",
+                    "P01",
+                    "P02",
+                    "P04",
+                    "P06",
+                    "P08"
+                  ],
+                  "duration_secs": 0.251,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "source_path": "<artifact-path>",
+                  "output_path": "<artifact-path>",
+                  "bytes": 15412,
+                  "sha256": "f8e0719d0effd47ae7957303716c78a14b9c1ab2d3a9acc246bb08cd7554842d",
+                  "overwritten": false,
+                  "verified_checks": [
+                    "artifact.non_empty",
+                    "copy.objects"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "artifact.non_empty",
+                    "copy.objects"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 675,
+          "tool": "boolean_operation",
+          "arguments": {
+            "timeout_secs": 120,
+            "document_path": "<artifact-path>",
+            "operation": "cut",
+            "base_object": "P01",
+            "tool_object": "P02",
+            "result_name": "F03"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 680,
+            "response": {
+              "tool": "freecad_modeling__boolean_operation",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD boolean operation completed.",
+                "context": {
+                  "object": {
+                    "name": "F03",
+                    "label": "F03",
+                    "type_id": "Part::Cut",
+                    "placement": {
+                      "translation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "rotation_axis": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "rotation_degrees": 0.0
+                    },
+                    "outgoing_links": [
+                      "P01",
+                      "P02"
+                    ],
+                    "incoming_links": [],
+                    "shape": {
+                      "shape_type": "Compound",
+                      "valid": true,
+                      "closed": true,
+                      "solids": 1,
+                      "shells": 1,
+                      "faces": 4,
+                      "edges": 6,
+                      "vertices": 4,
+                      "volume": 63.33450789637022,
+                      "area": 171.9079500044335,
+                      "length": 184.95573684677206,
+                      "bounding_box": {
+                        "min": [
+                          -5.0,
+                          -5.0,
+                          0.0
+                        ],
+                        "max": [
+                          5.0,
+                          5.0,
+                          1.0
+                        ],
+                        "size": [
+                          10.0,
+                          10.0,
+                          1.0
+                        ],
+                        "center": [
+                          0.0,
+                          0.0,
+                          0.5
+                        ]
+                      }
+                    }
+                  },
+                  "operation": "cut",
+                  "duration_secs": 0.252,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document": {
+                    "name": "WasherB",
+                    "label": "WasherB",
+                    "file_name": "<artifact-path>",
+                    "object_count": 3,
+                    "objects": [
+                      {
+                        "name": "P01",
+                        "label": "P01",
+                        "type_id": "Part::Cylinder",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [],
+                        "incoming_links": [
+                          "F03"
+                        ],
+                        "shape": {
+                          "shape_type": "Solid",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 3,
+                          "edges": 3,
+                          "vertices": 2,
+                          "volume": 78.53981633974482,
+                          "area": 188.4955592153876,
+                          "length": 127.66370614359172,
+                          "bounding_box": {
+                            "min": [
+                              -5.0,
+                              -5.0,
+                              0.0
+                            ],
+                            "max": [
+                              5.0,
+                              5.0,
+                              1.0
+                            ],
+                            "size": [
+                              10.0,
+                              10.0,
+                              1.0
+                            ],
+                            "center": [
+                              0.0,
+                              0.0,
+                              0.5
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "P02",
+                        "label": "P02",
+                        "type_id": "Part::Cylinder",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            0.0,
+                            -1.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [],
+                        "incoming_links": [
+                          "F03"
+                        ],
+                        "shape": {
+                          "shape_type": "Solid",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 3,
+                          "edges": 3,
+                          "vertices": 2,
+                          "volume": 45.61592533012381,
+                          "area": 71.87963991413447,
+                          "length": 61.29203070318036,
+                          "bounding_box": {
+                            "min": [
+                              -2.2,
+                              -2.2,
+                              -1.0
+                            ],
+                            "max": [
+                              2.2,
+                              2.2,
+                              2.0
+                            ],
+                            "size": [
+                              4.4,
+                              4.4,
+                              3.0
+                            ],
+                            "center": [
+                              0.0,
+                              0.0,
+                              0.5
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "F03",
+                        "label": "F03",
+                        "type_id": "Part::Cut",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [
+                          "P01",
+                          "P02"
+                        ],
+                        "incoming_links": [],
+                        "shape": {
+                          "shape_type": "Compound",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 4,
+                          "edges": 6,
+                          "vertices": 4,
+                          "volume": 63.33450789637022,
+                          "area": 171.9079500044335,
+                          "length": 184.95573684677206,
+                          "bounding_box": {
+                            "min": [
+                              -5.0,
+                              -5.0,
+                              0.0
+                            ],
+                            "max": [
+                              5.0,
+                              5.0,
+                              1.0
+                            ],
+                            "size": [
+                              10.0,
+                              10.0,
+                              1.0
+                            ],
+                            "center": [
+                              0.0,
+                              0.0,
+                              0.5
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 4037,
+                  "document_sha256": "d3d3f97d80d285df8b6118325ea6b6fac4d4ac9d2cc980c88b837af9e4467a1c",
+                  "verified_checks": [
+                    "result.exists",
+                    "result.type_id",
+                    "result.base",
+                    "result.tool",
+                    "result.shape.not_null",
+                    "result.shape.valid",
+                    "result.volume_relation"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "result.exists",
+                    "result.type_id",
+                    "result.base",
+                    "result.tool",
+                    "result.shape.not_null",
+                    "result.shape.valid",
+                    "result.volume_relation"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 863,
+          "tool": "create_document",
+          "arguments": {
+            "timeout_secs": 120,
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 866,
+            "response": {
+              "tool": "freecad_session__create_document",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document created.",
+                "context": {
+                  "name": "Foot",
+                  "label": "Foot",
+                  "file_name": "<artifact-path>",
+                  "object_count": 0,
+                  "objects": [],
+                  "duration_secs": 0.101,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "create_duration_secs": 0.101,
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 1036,
+                  "document_sha256": "d806dda891e303e1364e76b1a488865ba218b165746835f1faa418e0c1d9b839",
+                  "overwritten": false,
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 867,
+          "tool": "add_primitive",
+          "arguments": {
+            "timeout_secs": 120,
+            "document_path": "<artifact-path>",
+            "primitive": "cylinder",
+            "name": "P01",
+            "dimensions": {
+              "radius": 6,
+              "height": 3
+            },
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 872,
+            "response": {
+              "tool": "freecad_modeling__add_primitive",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD primitive added.",
+                "context": {
+                  "object": {
+                    "name": "P01",
+                    "label": "P01",
+                    "type_id": "Part::Cylinder",
+                    "placement": {
+                      "translation": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "rotation_axis": [
+                        0.0,
+                        0.0,
+                        1.0
+                      ],
+                      "rotation_degrees": 0.0
+                    },
+                    "outgoing_links": [],
+                    "incoming_links": [],
+                    "shape": {
+                      "shape_type": "Solid",
+                      "valid": true,
+                      "closed": true,
+                      "solids": 1,
+                      "shells": 1,
+                      "faces": 3,
+                      "edges": 3,
+                      "vertices": 2,
+                      "volume": 339.29200658769764,
+                      "area": 339.2920065876977,
+                      "length": 156.7964473723101,
+                      "bounding_box": {
+                        "min": [
+                          -6.0,
+                          -6.0,
+                          0.0
+                        ],
+                        "max": [
+                          6.0,
+                          6.0,
+                          3.0
+                        ],
+                        "size": [
+                          12.0,
+                          12.0,
+                          3.0
+                        ],
+                        "center": [
+                          0.0,
+                          0.0,
+                          1.5
+                        ]
+                      }
+                    }
+                  },
+                  "document": {
+                    "name": "Foot",
+                    "label": "Foot",
+                    "file_name": "<artifact-path>",
+                    "object_count": 1,
+                    "objects": [
+                      {
+                        "name": "P01",
+                        "label": "P01",
+                        "type_id": "Part::Cylinder",
+                        "placement": {
+                          "translation": [
+                            0.0,
+                            0.0,
+                            0.0
+                          ],
+                          "rotation_axis": [
+                            0.0,
+                            0.0,
+                            1.0
+                          ],
+                          "rotation_degrees": 0.0
+                        },
+                        "outgoing_links": [],
+                        "incoming_links": [],
+                        "shape": {
+                          "shape_type": "Solid",
+                          "valid": true,
+                          "closed": true,
+                          "solids": 1,
+                          "shells": 1,
+                          "faces": 3,
+                          "edges": 3,
+                          "vertices": 2,
+                          "volume": 339.29200658769764,
+                          "area": 339.2920065876977,
+                          "length": 156.7964473723101,
+                          "bounding_box": {
+                            "min": [
+                              -6.0,
+                              -6.0,
+                              0.0
+                            ],
+                            "max": [
+                              6.0,
+                              6.0,
+                              3.0
+                            ],
+                            "size": [
+                              12.0,
+                              12.0,
+                              3.0
+                            ],
+                            "center": [
+                              0.0,
+                              0.0,
+                              1.5
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "duration_secs": 0.252,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 2151,
+                  "document_sha256": "0f88be6dea65f3e1627cf7fdc50ed7f270d2840c1860fb50ef16965fbdaeba96",
+                  "verified_checks": [
+                    "object.exists",
+                    "dimension.Radius",
+                    "dimension.Height",
+                    "object.shape.not_null",
+                    "object.shape.valid",
+                    "object.type_id",
+                    "object.placement"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "object.exists",
+                    "dimension.Radius",
+                    "dimension.Height",
+                    "object.shape.not_null",
+                    "object.shape.valid",
+                    "object.type_id",
+                    "object.placement"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 877,
+          "tool": "validate_document",
+          "arguments": {
+            "timeout_secs": 120,
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 880,
+            "response": {
+              "tool": "freecad_session__validate_document",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document validation finished.",
+                "context": {
+                  "valid": true,
+                  "invalid_objects": [],
+                  "empty_shape_objects": [],
+                  "object_count": 1,
+                  "duration_secs": 0.201,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 885,
+          "tool": "export_geometry",
+          "arguments": {
+            "timeout_secs": 120,
+            "document_path": "<artifact-path>",
+            "object_names": [
+              "P01"
+            ],
+            "output_path": "<artifact-path>",
+            "linear_deflection": 0.03,
+            "angular_deflection_degrees": 5
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 889,
+            "response": {
+              "tool": "freecad_modeling__export_geometry",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD geometry exported.",
+                "context": {
+                  "object_names": [
+                    "P01"
+                  ],
+                  "format": "stl",
+                  "duration_secs": 0.402,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document_path": "<artifact-path>",
+                  "output_path": "<artifact-path>",
+                  "bytes": 28684,
+                  "sha256": "ac1f7890b202333cb3b742e80941ded74e95a6fec3880f4ad99dcb4d8286026f",
+                  "overwritten": false,
+                  "verified_checks": [
+                    "artifact.non_empty",
+                    "artifact.mesh_non_empty",
+                    "artifact.bounding_box"
+                  ],
+                  "stdout_omitted_sha256": "a9a60f1970921b1633dc242903141e3be110b098927d0de6d9cb35ad2ef4b269",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "artifact.non_empty",
+                    "artifact.mesh_non_empty",
+                    "artifact.bounding_box"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 890,
+          "tool": "save_copy",
+          "arguments": {
+            "timeout_secs": 120,
+            "source_path": "<artifact-path>",
+            "output_path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 893,
+            "response": {
+              "tool": "freecad_session__save_copy",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document copy saved.",
+                "context": {
+                  "object_count": 1,
+                  "object_names": [
+                    "P01"
+                  ],
+                  "duration_secs": 0.201,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "source_path": "<artifact-path>",
+                  "output_path": "<artifact-path>",
+                  "bytes": 2162,
+                  "sha256": "0736a8e51c1b705b741f2e29bd31a0335ae47566b2dacfc6eec2063b8887a9a4",
+                  "overwritten": false,
+                  "verified_checks": [
+                    "artifact.non_empty",
+                    "copy.objects"
+                  ],
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                "postcondition": {
+                  "method": "native_document_readback",
+                  "checks": [
+                    "artifact.non_empty",
+                    "copy.objects"
+                  ],
+                  "verified": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 894,
+          "tool": "inspect_document",
+          "arguments": {
+            "timeout_secs": 120,
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 897,
+            "response": {
+              "tool": "freecad_session__inspect_document",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "success": true,
+                "message": "FreeCAD document inspected.",
+                "context": {
+                  "name": "Foot_reopened",
+                  "label": "Foot-reopened",
+                  "file_name": "<artifact-path>",
+                  "object_count": 1,
+                  "objects": [
+                    {
+                      "name": "P01",
+                      "label": "P01",
+                      "type_id": "Part::Cylinder",
+                      "placement": {
+                        "translation": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "rotation_axis": [
+                          0.0,
+                          0.0,
+                          1.0
+                        ],
+                        "rotation_degrees": 0.0
+                      },
+                      "outgoing_links": [],
+                      "incoming_links": [],
+                      "shape": {
+                        "shape_type": "Solid",
+                        "valid": true,
+                        "closed": true,
+                        "solids": 1,
+                        "shells": 1,
+                        "faces": 3,
+                        "edges": 3,
+                        "vertices": 2,
+                        "volume": 339.29200658769764,
+                        "area": 339.2920065876977,
+                        "length": 156.7964473723101,
+                        "bounding_box": {
+                          "min": [
+                            -6.0,
+                            -6.0,
+                            0.0
+                          ],
+                          "max": [
+                            6.0,
+                            6.0,
+                            3.0
+                          ],
+                          "size": [
+                            12.0,
+                            12.0,
+                            3.0
+                          ],
+                          "center": [
+                            0.0,
+                            0.0,
+                            1.5
+                          ]
+                        }
+                      }
+                    }
+                  ],
+                  "duration_secs": 0.202,
+                  "stdout_truncated": false,
+                  "stderr_truncated": false,
+                  "document_path": "<artifact-path>",
+                  "document_bytes": 2162,
+                  "document_sha256": "0736a8e51c1b705b741f2e29bd31a0335ae47566b2dacfc6eec2063b8887a9a4",
+                  "stdout_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_omitted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "stage": "blender-motion",
+      "source_record_sha256": "e79feae8d96c0bbfbb5f020c16ad0706c109b8e39ea0e66e5d7ce9e7a5b0150e",
+      "source_event_count": 1702,
+      "published_call_count": 6,
+      "calls": [
+        {
+          "source_event_index": 20,
+          "tool": "set_keyframe",
+          "arguments": {
+            "object_name": "CJoint",
+            "data_paths": [
+              "location"
+            ],
+            "interpolation": "LINEAR"
+          },
+          "response": {
+            "success": true,
+            "message": "Keyframe set on CJoint at frame 1",
+            "error": null,
+            "prompt": "Keyframe inserted. Use set_current_frame to navigate the timeline.",
+            "context": {
+              "object_name": "CJoint",
+              "frame": 1,
+              "data_paths": [
+                "location"
+              ],
+              "interpolation": "LINEAR"
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 1084,
+          "tool": "set_keyframe",
+          "arguments": {
+            "object_name": "OutputRocker",
+            "data_paths": [
+              "rotation_euler"
+            ],
+            "interpolation": "LINEAR"
+          },
+          "response": {
+            "success": true,
+            "message": "Keyframe set on OutputRocker at frame 97",
+            "error": null,
+            "prompt": "Keyframe inserted. Use set_current_frame to navigate the timeline.",
+            "context": {
+              "object_name": "OutputRocker",
+              "frame": 97,
+              "data_paths": [
+                "rotation_euler"
+              ],
+              "interpolation": "LINEAR"
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 1085,
+          "tool": "set_frame_range",
+          "arguments": {
+            "start": 1,
+            "end": 96
+          },
+          "response": {
+            "success": true,
+            "message": "Frame range set: 1 - 96",
+            "error": null,
+            "prompt": "Frame range updated.",
+            "context": {
+              "frame_start": 1,
+              "frame_end": 96
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 1087,
+          "tool": "inspect_data_geometry",
+          "arguments": {
+            "name": "InputFlywheel"
+          },
+          "response": {
+            "success": true,
+            "message": "Native geometry inspected",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "object_name": "InputFlywheel",
+              "type": "MESH",
+              "location": [
+                0.0,
+                0.0,
+                0.5249999761581421
+              ],
+              "matrix_world": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.5249999761581421
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "matrix_parent_inverse": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "parent": null,
+              "dimensions_local": [
+                3.0,
+                3.0,
+                0.15000000596046448
+              ],
+              "materials": [
+                "WarmBrass"
+              ],
+              "vertex_count": 2592,
+              "edge_count": 7818,
+              "face_count": 5212,
+              "position_float32_sha256": "2f8571e89702c3a2ef9a6e84c80638e3ff41d6d58289d500b4a805dbd7512af2",
+              "topology_sha256": "41f8095968212be786ee1406838e02264fcd6c5224f8d56c3665dbcd51775c60"
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 1667,
+          "tool": "inspect_data_geometry",
+          "arguments": {
+            "name": "PinD"
+          },
+          "response": {
+            "success": true,
+            "message": "Native geometry inspected",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "object_name": "PinD",
+              "type": "MESH",
+              "location": [
+                0.0,
+                0.0,
+                0.4749999940395355
+              ],
+              "matrix_world": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  4.541666507720947
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  2.272648334503174
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.4749999940395355
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "matrix_parent_inverse": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "parent": "DJoint",
+              "dimensions_local": [
+                0.20000000298023224,
+                0.20000000298023224,
+                0.5249999761581421
+              ],
+              "materials": [
+                "NickelPin"
+              ],
+              "vertex_count": 288,
+              "edge_count": 858,
+              "face_count": 572,
+              "position_float32_sha256": "62299fa7f67c08289b362136ba4291f62f31e572b3d094485812dc939bcecb0c",
+              "topology_sha256": "50cacb88ea1e14b1e6f15268f5a4a602e7973d837919db323f4b22cd4951d40e"
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 1685,
+          "tool": "save_scene",
+          "arguments": {
+            "filepath": "<artifact-path>"
+          },
+          "response": {
+            "success": true,
+            "message": "Scene saved to <artifact-path>",
+            "error": null,
+            "prompt": "Scene saved successfully.",
+            "context": {
+              "filepath": "<artifact-path>"
+            }
+          },
+          "is_error": false
+        }
+      ]
+    },
+    {
+      "stage": "blender-portability",
+      "source_record_sha256": "d99a9c4570ff8e6935115959b3e060148652af5a7b5bf8af351560216beb1fe0",
+      "source_event_count": 205,
+      "published_call_count": 8,
+      "calls": [
+        {
+          "source_event_index": 14,
+          "tool": "inspect_data_geometry",
+          "arguments": {
+            "name": "EnamelBase"
+          },
+          "response": {
+            "success": true,
+            "message": "Native geometry inspected",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "object_name": "EnamelBase",
+              "type": "MESH",
+              "location": [
+                0.0,
+                0.0,
+                -0.20000000298023224
+              ],
+              "matrix_world": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  -0.20000000298023224
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "matrix_parent_inverse": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "parent": null,
+              "dimensions_local": [
+                8.399999618530273,
+                3.799999952316284,
+                0.20000000298023224
+              ],
+              "materials": [
+                "IvoryEnamel"
+              ],
+              "vertex_count": 1158,
+              "edge_count": 3480,
+              "face_count": 2320,
+              "position_float32_sha256": "02ba278bb9bd6390fa8890f607a25d8c7a67395f53ef5b021a9d49eaccf7bae5",
+              "topology_sha256": "20afc819b3f3a200c4dfccf4cb67af0a37b420b9392eba8d9e99d78061d1fcf7"
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 36,
+          "tool": "inspect_text",
+          "arguments": {
+            "name": "PlateTitle"
+          },
+          "response": {
+            "success": true,
+            "message": "Native text inspected",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "object_name": "PlateTitle",
+              "type": "FONT",
+              "text": "BRASS RELAY",
+              "size": 0.30000001192092896,
+              "extrude": 0.000699999975040555,
+              "align_x": "CENTER",
+              "font": "Bfont Regular",
+              "location": [
+                2.299999952316284,
+                -1.2999999523162842,
+                0.006000000052154064
+              ],
+              "dimensions": [
+                1.7453999519348145,
+                0.21000002324581146,
+                0.00139999995008111
+              ],
+              "materials": [
+                "PlateInk"
+              ]
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 44,
+          "tool": "save_portable_scene_copy",
+          "arguments": {
+            "filepath": "<artifact-path>",
+            "render_path": "<artifact-path>"
+          },
+          "response": {
+            "success": true,
+            "message": "New native scene copy saved and path-audited",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "path": "<artifact-path>",
+              "bytes": 2141244,
+              "sha256": "12cd08f813dff5382e3a7ef0b5ff08080cb554b5f403e1c4cbc7adc7945f5e67",
+              "browser_directories_sanitized": 1,
+              "render_path": "<artifact-path>",
+              "scope": "Self-contained scene; render path and file-browser directory metadata",
+              "not_claimed": [
+                "comprehensive secret detection",
+                "arbitrary scene sanitization",
+                "native reopen or render acceptance"
+              ]
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 76,
+          "tool": "render_scene",
+          "arguments": {
+            "output_path": "<artifact-path>",
+            "write_still": true
+          },
+          "response": {
+            "success": true,
+            "message": "Scene rendered",
+            "error": null,
+            "prompt": "Render complete. The image has been saved to the output path.",
+            "context": {
+              "output_path": "<artifact-path>",
+              "write_still": true
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 172,
+          "tool": "save_portable_scene_copy",
+          "arguments": {
+            "filepath": "<artifact-path>",
+            "render_path": "<artifact-path>"
+          },
+          "response": {
+            "success": true,
+            "message": "New native scene copy saved and path-audited",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "path": "<artifact-path>",
+              "bytes": 2141244,
+              "sha256": "ceaad41190a19678e2491524f230038202b75818a2b032e96471fa73f4adfdc5",
+              "browser_directories_sanitized": 1,
+              "render_path": "<artifact-path>",
+              "scope": "Self-contained scene; render path and file-browser directory metadata",
+              "not_claimed": [
+                "comprehensive secret detection",
+                "arbitrary scene sanitization",
+                "native reopen or render acceptance"
+              ]
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 195,
+          "tool": "inspect_data_geometry",
+          "arguments": {
+            "name": "Foot4"
+          },
+          "response": {
+            "success": true,
+            "message": "Native geometry inspected",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "object_name": "Foot4",
+              "type": "MESH",
+              "location": [
+                5.400000095367432,
+                1.25,
+                -0.3499999940395355
+              ],
+              "matrix_world": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  5.400000095367432
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  1.25
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  -0.3499999940395355
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "matrix_parent_inverse": [
+                [
+                  1.0,
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  1.0
+                ]
+              ],
+              "parent": null,
+              "dimensions_local": [
+                0.6000000238418579,
+                0.6000000238418579,
+                0.15000000596046448
+              ],
+              "materials": [
+                "Rubber"
+              ],
+              "vertex_count": 288,
+              "edge_count": 858,
+              "face_count": 572,
+              "position_float32_sha256": "4d9a11c423dfada599db4470776c68ede62a7ba10c0d0065e6c13848c2c33542",
+              "topology_sha256": "e7ebc6cd7defc9ba90aa90bd95563794c09c55e0ba8c8c3c3566f1522a1378e6"
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 197,
+          "tool": "inspect_text",
+          "arguments": {
+            "name": "PlateSubtitle"
+          },
+          "response": {
+            "success": true,
+            "message": "Native text inspected",
+            "error": null,
+            "prompt": null,
+            "context": {
+              "object_name": "PlateSubtitle",
+              "type": "FONT",
+              "text": "FOUR-BAR STUDY / 01",
+              "size": 0.11999999731779099,
+              "extrude": 0.000699999975040555,
+              "align_x": "CENTER",
+              "font": "Bfont Regular",
+              "location": [
+                2.299999952316284,
+                -1.5299999713897705,
+                0.006000000052154064
+              ],
+              "dimensions": [
+                1.1668800115585327,
+                0.08399999886751175,
+                0.00139999995008111
+              ],
+              "materials": [
+                "PlateInk"
+              ]
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 204,
+          "tool": "render_scene",
+          "arguments": {
+            "output_path": "<artifact-path>",
+            "write_still": true
+          },
+          "response": {
+            "success": true,
+            "message": "Scene rendered",
+            "error": null,
+            "prompt": "Render complete. The image has been saved to the output path.",
+            "context": {
+              "output_path": "<artifact-path>",
+              "write_still": true
+            }
+          },
+          "is_error": false
+        }
+      ]
+    },
+    {
+      "stage": "corrected-editor",
+      "source_record_sha256": "7f3f1055eb96db15dccde893c3fed4494629b39fbba6892d2fae4bd90c16dfa2",
+      "source_event_count": 955,
+      "published_call_count": 11,
+      "calls": [
+        {
+          "source_event_index": 11,
+          "tool": "validate_project",
+          "arguments": {
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "valid": true,
+            "elements": 596,
+            "fps": "24"
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 12,
+          "tool": "remove_effect",
+          "arguments": {
+            "effect_id": "effect_389",
+            "path": "<artifact-path>",
+            "output_path": "<artifact-path>",
+            "expected_sha256": "38a2b60920bec3c8aede3b77a96b5931302fdcadf361855429e8f7a5bc9a9e97"
+          },
+          "response": {
+            "path": "<artifact-path>",
+            "sha256": "1ef31ac28552bb7099a924150e579625aaee0d29d5d59529d8cbc684a9e57341",
+            "bytes": 383721,
+            "source_sha256": "38a2b60920bec3c8aede3b77a96b5931302fdcadf361855429e8f7a5bc9a9e97",
+            "editor_state": "file_only"
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 401,
+          "tool": "remove_effect",
+          "arguments": {
+            "effect_id": "effect_0",
+            "path": "<artifact-path>",
+            "output_path": "<artifact-path>",
+            "expected_sha256": "50b8291a4e563b23b721f417541adf8dddc7da3f3b894dcd655a7fc80557fb6c"
+          },
+          "response": {
+            "path": "<artifact-path>",
+            "sha256": "23439de8402af5e6e9d061e7b404a5f8dfcb059d14bd208740628f648cdb3903",
+            "bytes": 107235,
+            "source_sha256": "50b8291a4e563b23b721f417541adf8dddc7da3f3b894dcd655a7fc80557fb6c",
+            "editor_state": "file_only"
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 402,
+          "tool": "add_effect",
+          "arguments": {
+            "element_id": "clip_0",
+            "service": "dynamictext",
+            "effect_id": "dynamictext",
+            "parameters": {
+              "argument": "BRASS RELAY  /  A FOUR-BAR STUDY",
+              "geometry": "50 36 1170 36",
+              "family": "DejaVu Sans",
+              "size": "21",
+              "weight": "600",
+              "fgcolour": "#fff0e8d8",
+              "bgcolour": "#00000000",
+              "olcolour": "#aa000000",
+              "outline": "1",
+              "pad": "0",
+              "halign": "left",
+              "valign": "top"
+            },
+            "path": "<artifact-path>",
+            "output_path": "<artifact-path>",
+            "expected_sha256": "23439de8402af5e6e9d061e7b404a5f8dfcb059d14bd208740628f648cdb3903"
+          },
+          "response": {
+            "path": "<artifact-path>",
+            "sha256": "f75f79e49f1dc63091093f30671286127763ca582a4684b65adff069b0183ae3",
+            "bytes": 107932,
+            "source_sha256": "23439de8402af5e6e9d061e7b404a5f8dfcb059d14bd208740628f648cdb3903",
+            "editor_state": "file_only",
+            "effect_id": "effect_0"
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 791,
+          "tool": "add_effect",
+          "arguments": {
+            "element_id": "clip_194",
+            "service": "dynamictext",
+            "effect_id": "dynamictext",
+            "parameters": {
+              "argument": "FreeCAD  →  Blender  →  Kdenlive     |     Kinematic illustration; no dynamics validation",
+              "geometry": "50 750 1180 30",
+              "family": "DejaVu Sans",
+              "size": "17",
+              "weight": "400",
+              "fgcolour": "#ffd6dedb",
+              "bgcolour": "#00000000",
+              "olcolour": "#aa000000",
+              "outline": "1",
+              "pad": "0",
+              "halign": "left",
+              "valign": "top"
+            },
+            "path": "<artifact-path>",
+            "output_path": "<artifact-path>",
+            "expected_sha256": "0b5ed281e723598750db86a54074e490d32696a262236121d837ecdaf362e7c0"
+          },
+          "response": {
+            "path": "<artifact-path>",
+            "sha256": "9ce862e5e2019509634fac4b751a0130b87e1f042a894103e8ad03545f98f920",
+            "bytes": 384482,
+            "source_sha256": "0b5ed281e723598750db86a54074e490d32696a262236121d837ecdaf362e7c0",
+            "editor_state": "file_only",
+            "effect_id": "effect_389"
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 794,
+          "tool": "render_project",
+          "arguments": {
+            "path": "<artifact-path>",
+            "output_path": "<artifact-path>",
+            "preset": "mp4",
+            "start": 0,
+            "end": 431,
+            "timeout": 1800
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 869,
+            "response": {
+              "tool": "kdenlive_export__render_project",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "path": "<artifact-path>",
+                "bytes": 1986459,
+                "source_sha256": "9ce862e5e2019509634fac4b751a0130b87e1f042a894103e8ad03545f98f920",
+                "status": "completed",
+                "streams": [
+                  {
+                    "index": 0,
+                    "codec_name": "h264",
+                    "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                    "profile": "High",
+                    "codec_type": "video",
+                    "codec_tag_string": "avc1",
+                    "codec_tag": "0x31637661",
+                    "width": 1280,
+                    "height": 800,
+                    "coded_width": 1280,
+                    "coded_height": 800,
+                    "closed_captions": 0,
+                    "film_grain": 0,
+                    "has_b_frames": 2,
+                    "sample_aspect_ratio": "1:1",
+                    "display_aspect_ratio": "8:5",
+                    "pix_fmt": "yuv420p",
+                    "level": 32,
+                    "color_range": "tv",
+                    "color_space": "bt709",
+                    "color_transfer": "bt709",
+                    "color_primaries": "bt709",
+                    "chroma_location": "left",
+                    "field_order": "progressive",
+                    "refs": 1,
+                    "is_avc": "true",
+                    "nal_length_size": "4",
+                    "id": "0x1",
+                    "r_frame_rate": "24/1",
+                    "avg_frame_rate": "24/1",
+                    "time_base": "1/12288",
+                    "start_pts": 0,
+                    "start_time": "0.000000",
+                    "duration_ts": 221184,
+                    "duration": "18.000000",
+                    "bit_rate": "874385",
+                    "bits_per_raw_sample": "8",
+                    "nb_frames": "432",
+                    "extradata_size": 49,
+                    "disposition": {
+                      "default": 1,
+                      "dub": 0,
+                      "original": 0,
+                      "comment": 0,
+                      "lyrics": 0,
+                      "karaoke": 0,
+                      "forced": 0,
+                      "hearing_impaired": 0,
+                      "visual_impaired": 0,
+                      "clean_effects": 0,
+                      "attached_pic": 0,
+                      "timed_thumbnails": 0,
+                      "non_diegetic": 0,
+                      "captions": 0,
+                      "descriptions": 0,
+                      "metadata": 0,
+                      "dependent": 0,
+                      "still_image": 0,
+                      "multilayer": 0
+                    },
+                    "tags": {
+                      "language": "und",
+                      "handler_name": "VideoHandler",
+                      "vendor_id": "[0][0][0][0]"
+                    }
+                  },
+                  {
+                    "index": 1,
+                    "codec_name": "aac",
+                    "codec_long_name": "AAC (Advanced Audio Coding)",
+                    "profile": "LC",
+                    "codec_type": "audio",
+                    "codec_tag_string": "mp4a",
+                    "codec_tag": "0x6134706d",
+                    "sample_fmt": "fltp",
+                    "sample_rate": "48000",
+                    "channels": 2,
+                    "channel_layout": "stereo",
+                    "bits_per_sample": 0,
+                    "initial_padding": 0,
+                    "id": "0x2",
+                    "r_frame_rate": "0/0",
+                    "avg_frame_rate": "0/0",
+                    "time_base": "1/48000",
+                    "start_pts": 0,
+                    "start_time": "0.000000",
+                    "duration_ts": 864240,
+                    "duration": "18.005000",
+                    "bit_rate": "2280",
+                    "nb_frames": "845",
+                    "extradata_size": 5,
+                    "disposition": {
+                      "default": 1,
+                      "dub": 0,
+                      "original": 0,
+                      "comment": 0,
+                      "lyrics": 0,
+                      "karaoke": 0,
+                      "forced": 0,
+                      "hearing_impaired": 0,
+                      "visual_impaired": 0,
+                      "clean_effects": 0,
+                      "attached_pic": 0,
+                      "timed_thumbnails": 0,
+                      "non_diegetic": 0,
+                      "captions": 0,
+                      "descriptions": 0,
+                      "metadata": 0,
+                      "dependent": 0,
+                      "still_image": 0,
+                      "multilayer": 0
+                    },
+                    "tags": {
+                      "language": "und",
+                      "handler_name": "SoundHandler",
+                      "vendor_id": "[0][0][0][0]"
+                    }
+                  }
+                ],
+                "format": {
+                  "nb_streams": 2,
+                  "nb_programs": 0,
+                  "nb_stream_groups": 0,
+                  "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+                  "format_long_name": "QuickTime / MOV",
+                  "start_time": "0.000000",
+                  "duration": "18.005000",
+                  "size": "1986459",
+                  "bit_rate": "882625",
+                  "probe_score": 100,
+                  "tags": {
+                    "major_brand": "isom",
+                    "minor_version": "512",
+                    "compatible_brands": "isomiso2avc1mp41",
+                    "encoder": "Lavf61.7.103"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 870,
+          "tool": "probe_media",
+          "arguments": {
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "h264",
+                "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "profile": "High",
+                "codec_type": "video",
+                "codec_tag_string": "avc1",
+                "codec_tag": "0x31637661",
+                "width": 1280,
+                "height": 800,
+                "coded_width": 1280,
+                "coded_height": 800,
+                "closed_captions": 0,
+                "film_grain": 0,
+                "has_b_frames": 2,
+                "sample_aspect_ratio": "1:1",
+                "display_aspect_ratio": "8:5",
+                "pix_fmt": "yuv420p",
+                "level": 32,
+                "color_range": "tv",
+                "color_space": "bt709",
+                "color_transfer": "bt709",
+                "color_primaries": "bt709",
+                "chroma_location": "left",
+                "field_order": "progressive",
+                "refs": 1,
+                "is_avc": "true",
+                "nal_length_size": "4",
+                "id": "0x1",
+                "r_frame_rate": "24/1",
+                "avg_frame_rate": "24/1",
+                "time_base": "1/12288",
+                "start_pts": 0,
+                "start_time": "0.000000",
+                "duration_ts": 221184,
+                "duration": "18.000000",
+                "bit_rate": "874385",
+                "bits_per_raw_sample": "8",
+                "nb_frames": "432",
+                "extradata_size": 49,
+                "disposition": {
+                  "default": 1,
+                  "dub": 0,
+                  "original": 0,
+                  "comment": 0,
+                  "lyrics": 0,
+                  "karaoke": 0,
+                  "forced": 0,
+                  "hearing_impaired": 0,
+                  "visual_impaired": 0,
+                  "clean_effects": 0,
+                  "attached_pic": 0,
+                  "timed_thumbnails": 0,
+                  "non_diegetic": 0,
+                  "captions": 0,
+                  "descriptions": 0,
+                  "metadata": 0,
+                  "dependent": 0,
+                  "still_image": 0,
+                  "multilayer": 0
+                },
+                "tags": {
+                  "language": "und",
+                  "handler_name": "VideoHandler",
+                  "vendor_id": "[0][0][0][0]"
+                }
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "codec_tag_string": "mp4a",
+                "codec_tag": "0x6134706d",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "channel_layout": "stereo",
+                "bits_per_sample": 0,
+                "initial_padding": 0,
+                "id": "0x2",
+                "r_frame_rate": "0/0",
+                "avg_frame_rate": "0/0",
+                "time_base": "1/48000",
+                "start_pts": 0,
+                "start_time": "0.000000",
+                "duration_ts": 864240,
+                "duration": "18.005000",
+                "bit_rate": "2280",
+                "nb_frames": "845",
+                "extradata_size": 5,
+                "disposition": {
+                  "default": 1,
+                  "dub": 0,
+                  "original": 0,
+                  "comment": 0,
+                  "lyrics": 0,
+                  "karaoke": 0,
+                  "forced": 0,
+                  "hearing_impaired": 0,
+                  "visual_impaired": 0,
+                  "clean_effects": 0,
+                  "attached_pic": 0,
+                  "timed_thumbnails": 0,
+                  "non_diegetic": 0,
+                  "captions": 0,
+                  "descriptions": 0,
+                  "metadata": 0,
+                  "dependent": 0,
+                  "still_image": 0,
+                  "multilayer": 0
+                },
+                "tags": {
+                  "language": "und",
+                  "handler_name": "SoundHandler",
+                  "vendor_id": "[0][0][0][0]"
+                }
+              }
+            ],
+            "format": {
+              "filename": "<artifact-path>",
+              "nb_streams": 2,
+              "nb_programs": 0,
+              "nb_stream_groups": 0,
+              "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+              "format_long_name": "QuickTime / MOV",
+              "start_time": "0.000000",
+              "duration": "18.005000",
+              "size": "1986459",
+              "bit_rate": "882625",
+              "probe_score": 100,
+              "tags": {
+                "major_brand": "isom",
+                "minor_version": "512",
+                "compatible_brands": "isomiso2avc1mp41",
+                "encoder": "Lavf61.7.103"
+              }
+            }
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 871,
+          "tool": "package_project",
+          "arguments": {
+            "path": "<artifact-path>",
+            "output_directory": "<artifact-path>",
+            "allowed_media_roots": [
+              "<artifact-path>"
+            ],
+            "max_total_bytes": 536870912,
+            "expected_sha256": "9ce862e5e2019509634fac4b751a0130b87e1f042a894103e8ad03545f98f920"
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 873,
+            "response": {
+              "tool": "kdenlive_project__package_project",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "directory": "<artifact-path>",
+                "project_path": "<artifact-path>",
+                "manifest_path": "<artifact-path>",
+                "media_files": 98,
+                "media_bytes": 136591937,
+                "source_dependency_paths_disclosed": false
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 875,
+          "tool": "validate_project",
+          "arguments": {
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "valid": true,
+            "elements": 596,
+            "fps": "24"
+          },
+          "is_error": false
+        },
+        {
+          "source_event_index": 876,
+          "tool": "render_project",
+          "arguments": {
+            "path": "<artifact-path>",
+            "output_path": "<artifact-path>",
+            "preset": "mp4",
+            "start": 0,
+            "end": 431,
+            "timeout": 1800
+          },
+          "response": {
+            "status": "pending",
+            "_meta": {
+              "status": "pending",
+              "dcc": {
+                "jobId": "<record-id>",
+                "coreJobId": "<record-id>",
+                "jobOwner": "core",
+                "pollTool": "jobs_get_status",
+                "parentJobId": null
+              }
+            }
+          },
+          "is_error": false,
+          "recorded_completion": {
+            "source_event_index": 953,
+            "response": {
+              "tool": "kdenlive_export__render_project",
+              "status": "completed",
+              "progress": null,
+              "error": null,
+              "result": {
+                "path": "<artifact-path>",
+                "bytes": 1986459,
+                "source_sha256": "519debe83aea23ad818b814e121024eac10abf1b08f590d3909797474886def2",
+                "status": "completed",
+                "streams": [
+                  {
+                    "index": 0,
+                    "codec_name": "h264",
+                    "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                    "profile": "High",
+                    "codec_type": "video",
+                    "codec_tag_string": "avc1",
+                    "codec_tag": "0x31637661",
+                    "width": 1280,
+                    "height": 800,
+                    "coded_width": 1280,
+                    "coded_height": 800,
+                    "closed_captions": 0,
+                    "film_grain": 0,
+                    "has_b_frames": 2,
+                    "sample_aspect_ratio": "1:1",
+                    "display_aspect_ratio": "8:5",
+                    "pix_fmt": "yuv420p",
+                    "level": 32,
+                    "color_range": "tv",
+                    "color_space": "bt709",
+                    "color_transfer": "bt709",
+                    "color_primaries": "bt709",
+                    "chroma_location": "left",
+                    "field_order": "progressive",
+                    "refs": 1,
+                    "is_avc": "true",
+                    "nal_length_size": "4",
+                    "id": "0x1",
+                    "r_frame_rate": "24/1",
+                    "avg_frame_rate": "24/1",
+                    "time_base": "1/12288",
+                    "start_pts": 0,
+                    "start_time": "0.000000",
+                    "duration_ts": 221184,
+                    "duration": "18.000000",
+                    "bit_rate": "874385",
+                    "bits_per_raw_sample": "8",
+                    "nb_frames": "432",
+                    "extradata_size": 49,
+                    "disposition": {
+                      "default": 1,
+                      "dub": 0,
+                      "original": 0,
+                      "comment": 0,
+                      "lyrics": 0,
+                      "karaoke": 0,
+                      "forced": 0,
+                      "hearing_impaired": 0,
+                      "visual_impaired": 0,
+                      "clean_effects": 0,
+                      "attached_pic": 0,
+                      "timed_thumbnails": 0,
+                      "non_diegetic": 0,
+                      "captions": 0,
+                      "descriptions": 0,
+                      "metadata": 0,
+                      "dependent": 0,
+                      "still_image": 0,
+                      "multilayer": 0
+                    },
+                    "tags": {
+                      "language": "und",
+                      "handler_name": "VideoHandler",
+                      "vendor_id": "[0][0][0][0]"
+                    }
+                  },
+                  {
+                    "index": 1,
+                    "codec_name": "aac",
+                    "codec_long_name": "AAC (Advanced Audio Coding)",
+                    "profile": "LC",
+                    "codec_type": "audio",
+                    "codec_tag_string": "mp4a",
+                    "codec_tag": "0x6134706d",
+                    "sample_fmt": "fltp",
+                    "sample_rate": "48000",
+                    "channels": 2,
+                    "channel_layout": "stereo",
+                    "bits_per_sample": 0,
+                    "initial_padding": 0,
+                    "id": "0x2",
+                    "r_frame_rate": "0/0",
+                    "avg_frame_rate": "0/0",
+                    "time_base": "1/48000",
+                    "start_pts": 0,
+                    "start_time": "0.000000",
+                    "duration_ts": 864240,
+                    "duration": "18.005000",
+                    "bit_rate": "2280",
+                    "nb_frames": "845",
+                    "extradata_size": 5,
+                    "disposition": {
+                      "default": 1,
+                      "dub": 0,
+                      "original": 0,
+                      "comment": 0,
+                      "lyrics": 0,
+                      "karaoke": 0,
+                      "forced": 0,
+                      "hearing_impaired": 0,
+                      "visual_impaired": 0,
+                      "clean_effects": 0,
+                      "attached_pic": 0,
+                      "timed_thumbnails": 0,
+                      "non_diegetic": 0,
+                      "captions": 0,
+                      "descriptions": 0,
+                      "metadata": 0,
+                      "dependent": 0,
+                      "still_image": 0,
+                      "multilayer": 0
+                    },
+                    "tags": {
+                      "language": "und",
+                      "handler_name": "SoundHandler",
+                      "vendor_id": "[0][0][0][0]"
+                    }
+                  }
+                ],
+                "format": {
+                  "nb_streams": 2,
+                  "nb_programs": 0,
+                  "nb_stream_groups": 0,
+                  "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+                  "format_long_name": "QuickTime / MOV",
+                  "start_time": "0.000000",
+                  "duration": "18.005000",
+                  "size": "1986459",
+                  "bit_rate": "882625",
+                  "probe_score": 100,
+                  "tags": {
+                    "major_brand": "isom",
+                    "minor_version": "512",
+                    "compatible_brands": "isomiso2avc1mp41",
+                    "encoder": "Lavf61.7.103"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "source_event_index": 954,
+          "tool": "probe_media",
+          "arguments": {
+            "path": "<artifact-path>"
+          },
+          "response": {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "h264",
+                "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "profile": "High",
+                "codec_type": "video",
+                "codec_tag_string": "avc1",
+                "codec_tag": "0x31637661",
+                "width": 1280,
+                "height": 800,
+                "coded_width": 1280,
+                "coded_height": 800,
+                "closed_captions": 0,
+                "film_grain": 0,
+                "has_b_frames": 2,
+                "sample_aspect_ratio": "1:1",
+                "display_aspect_ratio": "8:5",
+                "pix_fmt": "yuv420p",
+                "level": 32,
+                "color_range": "tv",
+                "color_space": "bt709",
+                "color_transfer": "bt709",
+                "color_primaries": "bt709",
+                "chroma_location": "left",
+                "field_order": "progressive",
+                "refs": 1,
+                "is_avc": "true",
+                "nal_length_size": "4",
+                "id": "0x1",
+                "r_frame_rate": "24/1",
+                "avg_frame_rate": "24/1",
+                "time_base": "1/12288",
+                "start_pts": 0,
+                "start_time": "0.000000",
+                "duration_ts": 221184,
+                "duration": "18.000000",
+                "bit_rate": "874385",
+                "bits_per_raw_sample": "8",
+                "nb_frames": "432",
+                "extradata_size": 49,
+                "disposition": {
+                  "default": 1,
+                  "dub": 0,
+                  "original": 0,
+                  "comment": 0,
+                  "lyrics": 0,
+                  "karaoke": 0,
+                  "forced": 0,
+                  "hearing_impaired": 0,
+                  "visual_impaired": 0,
+                  "clean_effects": 0,
+                  "attached_pic": 0,
+                  "timed_thumbnails": 0,
+                  "non_diegetic": 0,
+                  "captions": 0,
+                  "descriptions": 0,
+                  "metadata": 0,
+                  "dependent": 0,
+                  "still_image": 0,
+                  "multilayer": 0
+                },
+                "tags": {
+                  "language": "und",
+                  "handler_name": "VideoHandler",
+                  "vendor_id": "[0][0][0][0]"
+                }
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "codec_tag_string": "mp4a",
+                "codec_tag": "0x6134706d",
+                "sample_fmt": "fltp",
+                "sample_rate": "48000",
+                "channels": 2,
+                "channel_layout": "stereo",
+                "bits_per_sample": 0,
+                "initial_padding": 0,
+                "id": "0x2",
+                "r_frame_rate": "0/0",
+                "avg_frame_rate": "0/0",
+                "time_base": "1/48000",
+                "start_pts": 0,
+                "start_time": "0.000000",
+                "duration_ts": 864240,
+                "duration": "18.005000",
+                "bit_rate": "2280",
+                "nb_frames": "845",
+                "extradata_size": 5,
+                "disposition": {
+                  "default": 1,
+                  "dub": 0,
+                  "original": 0,
+                  "comment": 0,
+                  "lyrics": 0,
+                  "karaoke": 0,
+                  "forced": 0,
+                  "hearing_impaired": 0,
+                  "visual_impaired": 0,
+                  "clean_effects": 0,
+                  "attached_pic": 0,
+                  "timed_thumbnails": 0,
+                  "non_diegetic": 0,
+                  "captions": 0,
+                  "descriptions": 0,
+                  "metadata": 0,
+                  "dependent": 0,
+                  "still_image": 0,
+                  "multilayer": 0
+                },
+                "tags": {
+                  "language": "und",
+                  "handler_name": "SoundHandler",
+                  "vendor_id": "[0][0][0][0]"
+                }
+              }
+            ],
+            "format": {
+              "filename": "<artifact-path>",
+              "nb_streams": 2,
+              "nb_programs": 0,
+              "nb_stream_groups": 0,
+              "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+              "format_long_name": "QuickTime / MOV",
+              "start_time": "0.000000",
+              "duration": "18.005000",
+              "size": "1986459",
+              "bit_rate": "882625",
+              "probe_score": 100,
+              "tags": {
+                "major_brand": "isom",
+                "minor_version": "512",
+                "compatible_brands": "isomiso2avc1mp41",
+                "encoder": "Lavf61.7.103"
+              }
+            }
+          },
+          "is_error": false
+        }
+      ]
+    }
+  ]
+}

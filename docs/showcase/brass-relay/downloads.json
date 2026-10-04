@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "case": "brass-relay",
+  "core": {
+    "filename": "brass-relay-editable-core-v1.zip",
+    "url": "editable-core.zip",
+    "bytes": 1944805,
+    "sha256": "f1d4777024663b501429ebc1bbfd8cbc45176d073ef2df5917f3fb9e70cc7856",
+    "scope": "13 CAD parts,26 exchanges,3 Blender scenes and corrected editor; editor image sequence omitted",
+    "release_url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-brass-relay-2026-10-03/brass-relay-editable-core-v1.zip"
+  },
+  "full": {
+    "filename": "brass-relay-native-projects-v1.zip",
+    "url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-brass-relay-2026-10-03/brass-relay-native-projects-v1.zip",
+    "bytes": 143693251,
+    "sha256": "a7fe8122fca0ee3dc70f7805716a0f730e237a3e382ea6407c4933e147a77b0f",
+    "scope": "All accepted native source/media plus corrected editor,98 original relative PNGs",
+    "status": "PASS: anonymous public download bytes and SHA-256 verified"
+  },
+  "release_url": "https://github.com/dcc-mcp/showcase/releases/tag/showcase-media-brass-relay-2026-10-03"
+}
