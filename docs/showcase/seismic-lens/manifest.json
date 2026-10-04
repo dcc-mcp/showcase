@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "capture_provider": "host-native",
+  "state": "READY_FOR_FINAL_PUBLICATION_REVIEW",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 1036,
+      "sha256": "b69a41f8aefe044ed9b1461aa3271a496508fd59cacaaae450de1cdf32528ac7"
+    },
+    {
+      "path": "METHODS.md",
+      "bytes": 3740,
+      "sha256": "0255e5d4ad415586f8561429978e6a19d626ce941fb84b4eb9153be472c21736"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2959,
+      "sha256": "70ca95773352d091b6b247d709e1e2ae2df7c564977bdfd5a3e272e30c87b963"
+    },
+    {
+      "path": "capability-coverage.json",
+      "bytes": 7372,
+      "sha256": "b744cdc39aea130bb2cac72c8f67463985bde05016ed8c8a2eb03caeda135afa"
+    },
+    {
+      "path": "earlier-coarse-section-y.png",
+      "bytes": 54156,
+      "sha256": "2ae74e8f4b93b676b9db9f907576439e05d986bbffef81e9d04e039940e7e879",
+      "width": 720,
+      "height": 480
+    },
+    {
+      "path": "editable-source.zip",
+      "bytes": 5965838,
+      "sha256": "6e6aaf6197ccc0c7ad245bb6f4a7e8fbbb16255b4de99a17b24019f521d0b439"
+    },
+    {
+      "path": "fresh-gimp-native-validation.json",
+      "bytes": 5906,
+      "sha256": "0c6afba536bea9fd1e93cda452ac1e8c6e678851e36943b207cbf9d88357698f"
+    },
+    {
+      "path": "gimp-mcp-evidence.public.json",
+      "bytes": 38065,
+      "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8"
+    },
+    {
+      "path": "hero.png",
+      "bytes": 249425,
+      "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e",
+      "width": 1600,
+      "height": 1000
+    },
+    {
+      "path": "native-preview-validation.json",
+      "bytes": 13650,
+      "sha256": "a635e2234eafa28ef8fb41736022974d30391784130c91bb6822259340ae8daa"
+    },
+    {
+      "path": "paraview-mcp-evidence.public.json",
+      "bytes": 28987,
+      "sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319"
+    },
+    {
+      "path": "paraview-public-native-validation.json",
+      "bytes": 11526,
+      "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526"
+    },
+    {
+      "path": "preview-png-privacy.json",
+      "bytes": 2643,
+      "sha256": "7616b5774f6244fef0e9d9d1b71209e552658e61f0f74bd019461f12720089a9"
+    },
+    {
+      "path": "section-y.png",
+      "bytes": 44640,
+      "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3",
+      "width": 720,
+      "height": 480
+    },
+    {
+      "path": "validation.json",
+      "bytes": 2066,
+      "sha256": "7976de4f6357c236b236a1943e405fa2e09adda030360cfa48966b972a8f28eb"
+    }
+  ]
+}

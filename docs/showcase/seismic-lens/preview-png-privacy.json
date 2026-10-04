@@ -1,0 +1,62 @@
+{
+  "schema": "dcc-artifact-png-privacy-visual-review-v1",
+  "status": "PASS_ARTIFACT_PRIVACY_AND_NATIVE_SIZE_VISUAL_REVIEW",
+  "artifact": {
+    "filename": "seismic-lens-preview-1600.png",
+    "bytes": 249425,
+    "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e",
+    "dimensions": [
+      1600,
+      1000
+    ],
+    "format": "PNG",
+    "mode": "RGBA8",
+    "alpha": "fully opaque",
+    "decoded_RGBA_sha256": "6a009a9e9fb6dc9585d59a2b6981bb523d0f3d1b4011e1f5c6754d8c181823be"
+  },
+  "checks": {
+    "PNG_structure_all_chunks_CRC_and_exact_EOF": "pass",
+    "joined_IDAT_complete_zlib_and_expected_scanline_size": "pass",
+    "full_raw_file_and_metadata_privacy_scan": "pass_no_unresolved_findings",
+    "wide_encoding_private_marker_scan": "pass",
+    "text_or_compressed_text_metadata_chunks_present": false,
+    "EXIF_IFD0_empty": true,
+    "EXIF_IFD1_tags_are_thumbnail_layout_only": true,
+    "embedded_JPEG_has_only_standard_JFIF_header_metadata": true,
+    "embedded_thumbnail_depicts_same_plate": true,
+    "source_unchanged": true
+  },
+  "thumbnail": {
+    "dimensions": [
+      256,
+      160
+    ],
+    "bytes": 5835,
+    "sha256": "6dc474195580a646251f7b3d627ef4b998c1cbd4227f71f44d4e0c4395bc4a40"
+  },
+  "resolved_raw_pixel_findings": [
+    {
+      "category": "short_drive_prefix_shaped_bytes",
+      "offset": 11210,
+      "chunk": "IDAT",
+      "printable_run_bytes": 8,
+      "resolution": "Compressed pixel coincidence; PNG CRC, full zlib structure and metadata separation verified"
+    },
+    {
+      "category": "short_drive_prefix_shaped_bytes",
+      "offset": 125220,
+      "chunk": "IDAT",
+      "printable_run_bytes": 3,
+      "resolution": "Compressed pixel coincidence; PNG CRC, full zlib structure and metadata separation verified"
+    }
+  ],
+  "metadata_scope": "Only image layout, color, resolution, same-artwork thumbnail and generated PNG artifact-time metadata. No detected user paths, author/contact identifiers, internal addresses, credentials or private report content. No metadata was removed or changed.",
+  "visual_review": {
+    "intrinsic_size_reviewed": true,
+    "title_five_panel_labels_formulas_and_synthetic_disclaimer_readable_and_intact": true,
+    "visible_clipping_or_overlap_detected": false,
+    "thumbnail_reviewed": true,
+    "limitation": "Small scalar-bar tick labels require full-size viewing; final responsive website behavior was not reviewed."
+  },
+  "limits": "File-only bounded pattern/format and visual inspection of this exact PNG. Not a universal absence guarantee, native-operation proof, final website approval or publication authorization."
+}
