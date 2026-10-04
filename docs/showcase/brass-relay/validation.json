@@ -274,7 +274,7 @@
     "A new copyright license or public-domain waiver",
     "Complete public production traces or bundled application/adapter/font binaries"
   ],
-  "publication_status": "Public hosting, actual download verification, final site CI/review and browser acceptance remain pending",
+  "publication_status": "Both media-only release assets are public and anonymous download bytes/SHA-256 match the independently audited packages. Final site CI/review and browser acceptance remain separate publication gates, not claims of this native/artifact qualification record.",
   "environment": {
     "FreeCAD": "1.0.0；历史CAD创作用0.4.1模块实现，最终原生视图副本用0.4.2源码及独立增强",
     "Blender": "4.3.2；0.1.43兼容适配器与记录的几何、文字、渲染和原生副本增强",

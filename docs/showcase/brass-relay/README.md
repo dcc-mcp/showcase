@@ -6,7 +6,7 @@ A brass input flywheel drives an oxblood coupler and a silver rocker above an iv
 
 ## Download status
 
-The compact native sources are included with this case. The full media companion is assembled; public hosting and downloaded-byte verification are pending. See downloads.json for exact package identities. A null full URL means no verified public full download is available.
+The compact native sources are included with this case. The [full native and media companion](https://github.com/dcc-mcp/showcase/releases/download/showcase-media-brass-relay-2026-10-03/brass-relay-native-projects-v1.zip) is hosted in the same repository’s [media-only release](https://github.com/dcc-mcp/showcase/releases/tag/showcase-media-brass-relay-2026-10-03). Both release assets were downloaded anonymously and their exact sizes and SHA-256 hashes matched the independently reviewed packages. See downloads.json and public-download-verification.json for the recorded identities.
 
 ## What is editable
 

@@ -20,8 +20,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4432,
-      "sha256": "e3f0bf7c56c624b58874e691b041881a1b195a4b95b48033c3855ebec6880a53"
+      "bytes": 4747,
+      "sha256": "6b2abf3abf0692d7980c1d61623966ccbeb315256d47c501ea7508a586bfc08d"
     },
     {
       "path": "before.jpg",
@@ -32,8 +32,8 @@
     },
     {
       "path": "downloads.json",
-      "bytes": 760,
-      "sha256": "4f6dad976209adaac5ec41ad7940668f1169df925c9a816606eefc6c98aa93e6"
+      "bytes": 1110,
+      "sha256": "41023286338b4b1a4be5a88c222f9cf2079be8512efa6e0a3984d92e22f13985"
     },
     {
       "path": "editable-core.zip",
@@ -82,13 +82,13 @@
     },
     {
       "path": "public-download-verification.json",
-      "bytes": 877,
-      "sha256": "98abd6d3bb7fe102390bf98258d95ba43da7e6ad7edcc084e9142122382ee2ea"
+      "bytes": 1445,
+      "sha256": "02705cdc6ac6fd825a067044d53f2754d2bbf8b8951683e64ed146ee77b5d5a2"
     },
     {
       "path": "validation.json",
-      "bytes": 13949,
-      "sha256": "fe01e36f983f0c5be501bf11c6bd38553ff0e3f0a02c5159d182e2d5c4e31877"
+      "bytes": 14101,
+      "sha256": "c559eded42e3637ceebd6dfce8da240fd1fe61db2a4f8c7a11c7a5b6b51afba2"
     }
   ]
 }

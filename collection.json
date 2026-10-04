@@ -1135,8 +1135,8 @@
         },
         {
           "name": "Public native download",
-          "result": "fail",
-          "observed": "Corrected compact/full packages are assembled and locally verified. Full public hosting and actual downloaded-byte verification are pending; full URL is null."
+          "result": "pass",
+          "observed": "Both exact compact/full ZIPs are public in the same-repository media-only release; anonymous HTTP200 downloads matched independently audited sizes and SHA-256 hashes."
         }
       ],
       "limitations": [
@@ -1157,6 +1157,10 @@
         {
           "label": "可编辑精简工程",
           "url": "docs/showcase/brass-relay/editable-core.zip"
+        },
+        {
+          "label": "完整原生工程与影片媒体",
+          "url": "https://github.com/dcc-mcp/showcase/releases/download/showcase-media-brass-relay-2026-10-03/brass-relay-native-projects-v1.zip"
         },
         {
           "label": "下载状态与校验",
@@ -1205,7 +1209,7 @@
         "commit": "aebbdb5e3926d24e23cdabc641499e69539f70f2",
         "title": "FreeCAD官方源码基线；历史与修正编辑工程的版本资格见制作说明"
       },
-      "verified_at": "2026-10-03T19:42:43Z"
+      "verified_at": "2026-10-03T23:59:22.506129+00:00"
     }
   ]
 }
