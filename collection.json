@@ -1413,6 +1413,265 @@
         "title": "已合并 ParaView 实际来源；GIMP 已合并基线与精确预览增量见原生包"
       },
       "verified_at": "2026-10-04T07:55:40Z"
+    },
+    {
+      "slug": "orbit-post-office",
+      "title": "ORBIT POST OFFICE · 星间邮局",
+      "subtitle": "GIMP → Godot · 分层原画与原生时间窗口小游戏",
+      "software": [
+        "GIMP",
+        "Godot"
+      ],
+      "capabilities": [
+        "图像绘制",
+        "分层原画",
+        "游戏交互",
+        "跨软件制作",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/orbit-post-office/restored-normal-delivery.png",
+        "alt": "星间邮局原生游戏画面：01/08 投递，迟到零，暂停状态"
+      },
+      "evidence_label": "实际运行 · GIMP → Godot · 已知失败保留",
+      "evidence_scope": "GIMP 八角色分层制作与四批原生复现；Godot 原生建场景、自动完整班次回放、代表性代理键鼠操作及相同 48 文件的归档恢复冷启动。5,015 行是 authoring run07、replay run11、manual A/B、restored-native 及清理的完整归一化逻辑流，不是所有历史尝试、全部 GIMP 原始轨迹或原始传输抓包。GIMP 另附 783 条选定证据与复现包。功能/清理通过的同时，Vulkan 日志、50 ms 性能及组 B 样本上限 FAIL 明确保留。",
+      "summary": "八封信，三个有各自公转节奏的小世界。读地址、选航线、等待发射窗口；迟到的信可重新申请投递。纸色界面与透明绘画素材汇合为可编辑的原生工程。",
+      "goal": "把分层原画真正接进可编辑原生游戏：读地址、选航线、抓住发射窗口；用相对素材、可回看的状态与明确失败边界，让图像制作与交互验证衔接起来。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过 GIMP MCP 制作 Orbit Post Office 的八个透明 512 × 512 角色：封口信、展开信、加急包裹、轨道邮票、发射箭头、签收印、退回印和到达信标。使用纸白、深蓝、珊瑚与薄荷色；形状分层，邮票文字保留可编辑性。保存 XCF，原生导出 PNG，并检查浅深背景下的 128/64 像素可读性。\n\n通过 Godot MCP 构建 1280 × 720 的原生时间窗口小游戏：读信、选择 Lumen/Moss/Ember 航线、在窗口内发送；错误航线拒绝，迟到可重投，一班八封信。保存相对素材路径与可编辑场景、脚本；支持鼠标、Space、1/2/3、Tab/Enter、P 暂停和 R 重启。\n\n先按发现的 schema 和技能建立操作范围，记录真实请求、结果及失败。区分自动回放与代理键鼠验收；重开归档恢复的工程，核对源文件、节点、信号、贴图、正常投递和有状态重启。保存实际原生帧和归一化逻辑证据，不用图片或请求计数替代运行验收，不隐藏日志或性能失败。",
+        "note": "从实际制作与交付物整理的复用创作说明，不是用户原始对话逐字稿；具体重建请遵循包内精确版本、依赖和权利条件。"
+      },
+      "environment": [
+        {
+          "label": "GIMP",
+          "value": "3.0.4 · Linux x86_64 · DejaVu Sans Book · 512 × 512 RGBA/U8 sRGB、straight alpha"
+        },
+        {
+          "label": "Godot",
+          "value": "4.6.3 · observed build 7d41c59c4 · Linux x86_64 · 原生画面 1280 × 720"
+        },
+        {
+          "label": "GIMP 适配器",
+          "value": "0.4.1 · 已合并源码 943e2cd6855da6f4876032bc124556e3eac54bc9 · whole-wheel SHA-256 见 RUNTIME-PINS.json"
+        },
+        {
+          "label": "Godot 适配器",
+          "value": "0.9.1 开发候选 · 公开基线 689ca4f725de7d9aa40d3298caeda27b018a0aa7 + 精确 restart/PID 补丁；不是发行能力声明"
+        },
+        {
+          "label": "Core / Server / CLI",
+          "value": "0.20.41 · MCP SDK 1.30.0；仅声明记录时测试版本，不推断当前最新版本"
+        },
+        {
+          "label": "原生验证条件",
+          "value": "MCP 辅助、两个 CPU 的子进程范围、DRI_PRIME=0；完整 pins 和依赖行为见下载包"
+        }
+      ],
+      "tools": [
+        {
+          "name": "GIMP: create_image / create_layer / paint_shape / create_text",
+          "description": "原生图像、透明底层与分离形状组成八个角色；邮票文字保持可编辑。GIMP 记录 162 项创作操作，不能与任务轮询次数相加作为创作量。"
+        },
+        {
+          "name": "GIMP: save_image / open_image / inspect_image / export_image / export_preview",
+          "description": "保存与重开分层 XCF；透明 PNG、128/64 像素及浅深底预览逐项保留，分别核对结构、XCF 字节和解码 RGBA。"
+        },
+        {
+          "name": "Godot: create_scene / add_node / update_property / write_script / attach_script / connect_signal",
+          "description": "原生建立 29 节点场景和六个信号，写入游戏规则；工具实际请求计数单独列出，读回或轮询不冒充创作步骤。"
+        },
+        {
+          "name": "Godot: assign_ui_texture / get_scene_dependencies / save_scene / open_scene",
+          "description": "相对路径绑定八个 PNG，保存和重开场景，检查引用与恢复工程的源文件连续性。"
+        },
+        {
+          "name": "Godot: play_scene / execute_typed_action / get_game_node_properties / get_game_screenshot / stop_scene",
+          "description": "原生启动、独立自动回放、状态与截图读回、清理。代理键鼠输入与回放 fixture 分开归因。"
+        },
+        {
+          "name": "load_skill / get_runtime_status",
+          "description": "八种 Godot 技能在五个指定运行各加载一次；运行状态轮询另计。技能被加载不代表其全部工具运行，更不代表整个适配器覆盖完成。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先让一封信有可编辑的形状",
+          "description": "八个角色使用统一纸色、深蓝轮廓与透明背景。展开信的绘画层可独立编辑；游戏 PNG 保持原生导出字节。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/open-envelope.png",
+            "alt": "GIMP 原生透明展开信 PNG，奶油色纸张和珊瑚色地址标记"
+          }
+        },
+        {
+          "title": "把邮票文字留在原画里",
+          "description": "轨道邮票的 OP 与 07 为两个 DejaVu Sans Book 可编辑文字层；其余形状仍为绘画层。原生 XCF 与浅深底缩略预览随完整包交付。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/orbital-stamp.png",
+            "alt": "GIMP 原生透明轨道邮票 PNG，OP 与 07 来自可编辑文字层"
+          }
+        },
+        {
+          "title": "从原画接到轨道与发射窗口",
+          "description": "Godot 场景通过相对路径使用八个 PNG；原生节点、信号和脚本承担读信、选航线与时限。下图为正常自动回放中的第一封信在途，并非通关图。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/run11-relocated-success-inflight.png",
+            "alt": "正常自动回放中的第一封信飞向 Lumen，投递计数仍为 00/08"
+          }
+        },
+        {
+          "title": "让键盘焦点与失败状态可见",
+          "description": "代理实际操作 Tab/Enter 和 Space，读回选择与反馈；迟到后保留退回状态。迟到重投组的样本上限失败没有删除或改写。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/manual-group-a-focused-shortcut.png",
+            "alt": "原生暂停画面，Lumen 按钮保持焦点边框"
+          }
+        },
+        {
+          "title": "从恢复的原生源完成一次投递",
+          "description": "精确归档恢复的 48 个游戏文件通过 MCP 辅助冷启动；实际鼠标投递后暂停，括住状态与按钮读回。随后用 R/P 验证已填充计数与账本清零，重启检查没有另造 PNG。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/restored-normal-delivery.png",
+            "alt": "实际正常投递后的 01/08 暂停原生画面，迟到数为零"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/orbit-post-office/restored-normal-delivery.png",
+          "alt": "实际鼠标投递后的1280×720原生画面：已投递01/08、迟到0，游戏暂停以作原生状态核验。",
+          "caption": "实际鼠标投递后的1280×720原生画面：已投递01/08、迟到0，游戏暂停以作原生状态核验。"
+        },
+        {
+          "src": "docs/showcase/orbit-post-office/manual-group-b-late-return.png",
+          "alt": "实际迟到退回的原生画面：迟到1、投递00/08。后续重投成功有失败前的完整根状态读回；该组整体样本上限FAIL保留。",
+          "caption": "实际迟到退回的原生画面：迟到1、投递00/08。后续重投成功有失败前的完整根状态读回；该组整体样本上限FAIL保留。"
+        },
+        {
+          "src": "docs/showcase/orbit-post-office/manual-group-a-focused-shortcut.png",
+          "alt": "Tab/Enter焦点选择与全局Space验证后的原生画面；按键组合的外部操作记录与MCP状态证据分开归因。",
+          "caption": "Tab/Enter焦点选择与全局Space验证后的原生画面；按键组合的外部操作记录与MCP状态证据分开归因。"
+        },
+        {
+          "src": "docs/showcase/orbit-post-office/run11-relocated-success-inflight.png",
+          "alt": "搬移工程全流程回放中的第一封信飞行画面；此图本身不代表通关。",
+          "caption": "搬移工程全流程回放中的第一封信飞行画面；此图本身不代表通关。"
+        },
+        {
+          "src": "docs/showcase/orbit-post-office/run11-late-inflight.png",
+          "alt": "迟到回放中的原生飞行画面；完整回放结果为8投递、1迟到、9次尝试。",
+          "caption": "迟到回放中的原生飞行画面；完整回放结果为8投递、1迟到、9次尝试。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "GIMP 分层原画与复现",
+          "result": "pass",
+          "observed": "8 个角色、76 个绘画图层、2 个可编辑文字图层；4 批真实 MCP 复现，40 份 XCF 字节一致，88 份 PNG 解码 RGBA 一致。"
+        },
+        {
+          "name": "Godot 原生结构与素材衔接",
+          "result": "pass",
+          "observed": "29 个原生节点、6 个信号连接、8 个 PNG 引用；48 个游戏源文件共 910,075 字节，与已冷启动核验的归档恢复游戏逐字节一致。"
+        },
+        {
+          "name": "完整班次自动回放",
+          "result": "pass",
+          "observed": "正常回放：8 投递、0 迟到、8 次尝试、tick 1920；迟到回放：8 投递、1 迟到、9 次尝试、tick 2640。输入及账本匹配。"
+        },
+        {
+          "name": "代理键鼠与原生恢复",
+          "result": "pass",
+          "observed": "代表性鼠标/键盘操作验证错误航线、暂停无动作、Tab/Enter、Space、正常投递及已填充状态 R 重启。恢复运行的功能与清理通过；主图只显示 01/08 投递后的暂停状态。"
+        },
+        {
+          "name": "严格原生日志",
+          "result": "fail",
+          "observed": "已知 Vulkan 原生日志错误保留；run11 与恢复运行的总体结果仍为 FAIL。"
+        },
+        {
+          "name": "50 ms 进程观察性能门槛",
+          "result": "fail",
+          "observed": "run11 超限 103 次；恢复运行超限 76 次，最大间隔约 121.768 ms。200 ms 是独立中止阈值，不代表性能通过或硬实时保证。"
+        },
+        {
+          "name": "迟到重投组完整观察",
+          "result": "fail",
+          "observed": "手动组 B 达到样本上限，整体及功能状态为 FAIL。迟到和一次重投成功有完整根状态读回；缺少重投成功后的完整检查点与 PNG。"
+        },
+        {
+          "name": "精确下载归档与逻辑记录",
+          "result": "pass",
+          "observed": "ZIP 为 3,214,346 字节、144 个成员；独立文件审核覆盖 338 个递归对象。5,015 行仅覆盖指定 Godot 运行及清理；GIMP 为另附选定证据。"
+        }
+      ],
+      "limitations": [
+        "原生资格限于 Linux GIMP 3.0.4 / Godot 4.6.3 与精确固定的 MCP 开发环境；Windows、跨机器执行和无监听器手动启动未测试。",
+        "Godot 0.9.1 使用未发布的 restart/PID 开发补丁；包内保留精确公开基线、补丁与哈希，不声称官方发行版已有该能力。安装的 Godot 二进制与官方源码标签等价性未核实。",
+        "严格 Vulkan 日志 FAIL、50 ms 性能 FAIL 和组 B 样本上限 FAIL 全部保留；通过的功能和清理检查不覆盖这些失败。",
+        "键鼠验收由代理完成，只覆盖代表性交互；完整八封信班次由自动回放验证，不声称人类完整通关或用户背书。",
+        "5,015 行是指定 Godot authoring run07、replay run11、manual A/B、restored-native 及清理的完整归一化逻辑流；不含所有早期失败尝试，也不含全部历史 GIMP 原始轨迹；不是原始传输抓包。",
+        "没有影片、网页可玩导出或应用程序二进制。原生游戏冷启动证明绑定相同的 48 个文件，不声称最终证据包装 ZIP 本身再次原生打开。",
+        "GIMP 选择蒙版字节的独立资格、跨软件色彩完全一致和跨机器像素一致均未建立。字体、软件、wheel 和运行环境须单独准备；原 Godot 私有监督器不分发。",
+        "合并前验证采用静态模板与文件检查；公开页面的桌面/移动浏览器验收及下载核验仍待部署后完成。"
+      ],
+      "resources": [
+        {
+          "label": "原生可编辑工程与复现包 · 3.21 MB",
+          "url": "docs/showcase/orbit-post-office/Orbit-Post-Office-D058-final-review-v1.zip"
+        },
+        {
+          "label": "制作、操作与复现说明",
+          "url": "docs/showcase/orbit-post-office/README.md"
+        },
+        {
+          "label": "精确下载字节数与 SHA-256",
+          "url": "docs/showcase/orbit-post-office/downloads.json"
+        },
+        {
+          "label": "原生验收与保留的失败",
+          "url": "docs/showcase/orbit-post-office/validation.json"
+        },
+        {
+          "label": "工具、技能与逻辑记录范围",
+          "url": "docs/showcase/orbit-post-office/capability-coverage.json"
+        },
+        {
+          "label": "素材角色、原生图层与文件索引",
+          "url": "docs/showcase/orbit-post-office/ASSET-INDEX.json"
+        },
+        {
+          "label": "精确软件来源与运行 pins",
+          "url": "docs/showcase/orbit-post-office/RUNTIME-PINS.json"
+        },
+        {
+          "label": "GIMP 已合并源码 · Godot 未发布补丁另见运行 pins",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/943e2cd6855da6f4876032bc124556e3eac54bc9"
+        },
+        {
+          "label": "方法与复现边界",
+          "url": "docs/showcase/orbit-post-office/METHODS.md"
+        },
+        {
+          "label": "作品权利与上游声明范围",
+          "url": "docs/showcase/orbit-post-office/LICENSES.md"
+        },
+        {
+          "label": "全部页面资源清单与哈希",
+          "url": "docs/showcase/orbit-post-office/manifest.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创作品、游戏内容和配方保留权利；不新增 MIT 或 CC0。标明的上游软件与字体声明保留各自范围。",
+        "note": "原创 GIMP 图像与 Godot 游戏；不含字体或应用程序二进制。网站软件 MIT 不适用于本案例的作品、源素材与下载包。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/943e2cd6855da6f4876032bc124556e3eac54bc9",
+        "commit": "943e2cd6855da6f4876032bc124556e3eac54bc9",
+        "title": "已合并 GIMP 源码；Godot 公开基线与未发布精确补丁见运行 pins 和下载包"
+      },
+      "verified_at": "2026-10-04"
     }
   ]
 }

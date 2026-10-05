@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "case_id": "D058",
+  "capture_provider": "host-native",
+  "gimp_application": "GIMP",
+  "gimp_version": "3.0.4",
+  "godot_application": "Godot",
+  "godot_version": "4.6.3",
+  "image_derivatives": "None; all page PNGs are exact source copies",
+  "files": [
+    {
+      "path": "ASSET-INDEX.json",
+      "bytes": 10080,
+      "sha256": "a5a0f30cd56011ddac56f3fdd9c743adbe57a83ba2efbe2a8579b1227f0ff830"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 1405,
+      "sha256": "2e35f51c4f166426ca123c19456b1234005abc0207f03c72c969abc0ba329bce"
+    },
+    {
+      "path": "METHODS.md",
+      "bytes": 4360,
+      "sha256": "5342187b664fb4d6ea06ed3a33be563daeefad5eae8cc016fa96c1454c1b8e0f"
+    },
+    {
+      "path": "Orbit-Post-Office-D058-final-review-v1.zip",
+      "bytes": 3214346,
+      "sha256": "88a20e2986523ca2726cdb94ba65ccad3f45d17eacc86c308e733763ff8e792f",
+      "container_kind": "ZIP",
+      "members": 144
+    },
+    {
+      "path": "README.md",
+      "bytes": 5666,
+      "sha256": "fbbc1245ba6f32d06be92ca9fcb2e0ffd98da4c211a4b7b45cd64b30214dcaca"
+    },
+    {
+      "path": "RUNTIME-PINS.json",
+      "bytes": 4918,
+      "sha256": "c4904fab4bee6a4a88f39182a586798bd23ff9f6c7b169da02173ed9a6443eb7"
+    },
+    {
+      "path": "capability-coverage.json",
+      "bytes": 12830,
+      "sha256": "745bb10fc3abe0e5263f5f17c917005094c1513c794a79e25b65d919aeda9fa4"
+    },
+    {
+      "path": "downloads.json",
+      "bytes": 857,
+      "sha256": "cbbc53b0d3eb24dc256e34a7e0eee834fef3fb95d1653587bc2d1bcdbf0cd0a5"
+    },
+    {
+      "path": "manual-group-a-focused-shortcut.png",
+      "bytes": 78332,
+      "sha256": "a64c4bf8590a783c754b15b6884e48dcc9bc8489e6516ba2dc26913c97266f8d",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "manual-group-b-late-return.png",
+      "bytes": 77505,
+      "sha256": "237ac253e2030014b7c514ada3490de8e17e35c5c034e0b7806789b9b2a8e3ac",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "open-envelope.png",
+      "bytes": 16574,
+      "sha256": "c18ac6381c6bf0e2348e096fcf22e50e758e4eebbd408ebef00b386e846e45fc",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8
+    },
+    {
+      "path": "orbital-stamp.png",
+      "bytes": 20501,
+      "sha256": "33f2c70668cc98b5cfc4d283b73f6647b8d9a32c18e85c964e034802ccd22f74",
+      "width": 512,
+      "height": 512,
+      "bit_depth": 8
+    },
+    {
+      "path": "restored-normal-delivery.png",
+      "bytes": 76841,
+      "sha256": "b1e820d5438108746b91329d5c11b650d8e68cf768fdfe0422b74d00370236f2",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "run11-late-inflight.png",
+      "bytes": 77695,
+      "sha256": "f67dbdfa7307a90264d9eeddeec1efdce35b713d30b5d5580bcb9531a873693f",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "run11-relocated-success-inflight.png",
+      "bytes": 77628,
+      "sha256": "d703f340b55fb30165cc5220ecfd68a10ffea5de4d8ef6b6af1e52ce631fc34f",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "validation.json",
+      "bytes": 7461,
+      "sha256": "e35c2193199e767c101172a75d11162c4ad420b610b5510c0999e4a2ba99eadb"
+    }
+  ]
+}

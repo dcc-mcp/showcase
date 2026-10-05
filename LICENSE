@@ -19,3 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Orbit Post Office case exclusion
+
+The original artwork, game scene/script/content, production recipes, data and
+downloadable package in docs/showcase/orbit-post-office/ are excluded from the
+MIT grant above. They retain their existing rights and separately scoped
+upstream notices. See docs/showcase/orbit-post-office/LICENSES.md. This exclusion
+does not change the scope of any other case's recorded rights.

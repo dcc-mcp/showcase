@@ -1,0 +1,290 @@
+{
+  "schema": "D058-portable-asset-index-v1",
+  "assets": [
+    {
+      "role": "sealed-envelope",
+      "purpose": "Unread letter",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/sealed-envelope.png",
+        "bytes": 20580,
+        "sha256": "fd5e54605129496fc485a4c9eab57cefee15f571033f03dd9a068865e4a1c9eb"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/sealed-envelope.xcf",
+        "bytes": 74057,
+        "sha256": "b32faa47967987a809dc80dae06fdd8a94b777db66bdd6285a4aacea1b665d71"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 11,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/sealed-envelope/transparent-512.png",
+        "xcf": "assets/sealed-envelope/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "open-envelope",
+      "purpose": "Read letter",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/open-envelope.png",
+        "bytes": 16574,
+        "sha256": "c18ac6381c6bf0e2348e096fcf22e50e758e4eebbd408ebef00b386e846e45fc"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/open-envelope.xcf",
+        "bytes": 75629,
+        "sha256": "caf72c8c0b02bbab2dd893b4525bbbb9f45bc7bc1882963ff92c9e3eaf251a00"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 12,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/open-envelope/transparent-512.png",
+        "xcf": "assets/open-envelope/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "orbital-stamp",
+      "purpose": "Collectible postage",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/orbital-stamp.png",
+        "bytes": 20501,
+        "sha256": "33f2c70668cc98b5cfc4d283b73f6647b8d9a32c18e85c964e034802ccd22f74"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/orbital-stamp.xcf",
+        "bytes": 66259,
+        "sha256": "2161c99a98d3cc7809416fdcf548b38a6301a7b2b4d14f99abb1c6ef8976a846"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 8,
+      "editable_text_layers": 2,
+      "font_face": "DejaVu Sans Book",
+      "text_size_px": 27,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/orbital-stamp/transparent-512.png",
+        "xcf": "assets/orbital-stamp/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "dispatch-arrow",
+      "purpose": "Send item",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/dispatch-arrow.png",
+        "bytes": 19435,
+        "sha256": "5198d4753a775b0dd7a60aab7d6f7edcc36bd0e38de40f50acd52fe7654cef5b"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/dispatch-arrow.xcf",
+        "bytes": 37808,
+        "sha256": "e9f2fbb842219c90353245c1d38726b1fb715cfd76f4b1012734626b745c0300"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 7,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/dispatch-arrow/transparent-512.png",
+        "xcf": "assets/dispatch-arrow/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "arrival-beacon",
+      "purpose": "New delivery notification",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/arrival-beacon.png",
+        "bytes": 18460,
+        "sha256": "0f7302421fa56210a11ad82e8ce1de0291968be368e7a868284d3ce2af085dba"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/arrival-beacon.xcf",
+        "bytes": 45239,
+        "sha256": "8c3f21c4016faf6c8c198f8f4ca15c12f1e489a0492d9eac6a2c5b0c6d29d0ce"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 10,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/arrival-beacon/transparent-512.png",
+        "xcf": "assets/arrival-beacon/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "priority-parcel",
+      "purpose": "Priority parcel inventory",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/priority-parcel.png",
+        "bytes": 23107,
+        "sha256": "1d697c7d010334172a453a6dafc2fef92180699a53e8d016092a4bd46b28a613"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/priority-parcel.xcf",
+        "bytes": 63850,
+        "sha256": "d0456bfb6327242c7db7ef2ced8cd536b5799172d2e2e095068afb2d4510f07d"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 10,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/priority-parcel/transparent-512.png",
+        "xcf": "assets/priority-parcel/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "accepted-seal",
+      "purpose": "Delivery accepted",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/accepted-seal.png",
+        "bytes": 30429,
+        "sha256": "5c8c785116d381ae12287e4ecf96f0cd578dc73cab7d8bd70b6c38efeefbff9a"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/accepted-seal.xcf",
+        "bytes": 68106,
+        "sha256": "522e681ecef79929152c93a6e05337ce97b66f10cbe647d55444f8e4358dde16"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 8,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/accepted-seal/transparent-512.png",
+        "xcf": "assets/accepted-seal/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    },
+    {
+      "role": "return-seal",
+      "purpose": "Delivery return request",
+      "dimensions": [
+        512,
+        512
+      ],
+      "png": {
+        "path": "game/assets/orbit-post/return-seal.png",
+        "bytes": 12382,
+        "sha256": "5a78e74f4e74d12d759790e6d37c1c09357b5fba4d75652c0cc5f9f10ae907f6"
+      },
+      "editable_xcf": {
+        "path": "game/source-art/return-seal.xcf",
+        "bytes": 53021,
+        "sha256": "541f369e25f4b4918bc00a408f375e84ce0135e2fc628d0e6c3680e2e2ae6115"
+      },
+      "pixel_format": "RGBA/U8 straight alpha",
+      "color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+      "png_color_chunks_hex": {
+        "sRGB": "01",
+        "gAMA": "0000b18f",
+        "cHRM": "00007a26000080840000fa00000080e8000075300000ea6000003a9800001770"
+      },
+      "paint_layers": 10,
+      "editable_text_layers": 0,
+      "font_face": null,
+      "text_size_px": null,
+      "original_component_byte_equal": true,
+      "original_component_members": {
+        "png": "assets/return-seal/transparent-512.png",
+        "xcf": "assets/return-seal/source.xcf"
+      },
+      "rights": "Original artwork rights reserved. No additional artwork license grant."
+    }
+  ],
+  "asset_count": 8,
+  "paint_layer_total": 76,
+  "editable_text_layer_total": 2,
+  "relative_paths_from": "This document directory",
+  "color_scope": "GIMP native sRGB/straight-alpha and PNG color chunks retained. Cross-platform/native-render color equality is not newly certified."
+}

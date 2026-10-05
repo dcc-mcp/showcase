@@ -175,6 +175,16 @@ The compact download includes the analytic input, five native states, grouped
 image master, native preview and versioned recipes; no large media companion is
 required.
 
+## Orbit Post Office
+
+GIMP → Godot orbital mail game with eight editable art roles, a native scene
+and script, exact source pins, normalized selected-run evidence and a compact
+native download. Full-shift replay and representative agent mouse/keyboard
+checks are distinguished; known native log, performance and sample-cap failures
+remain visible. Artwork, game content, recipes and downloads are excluded from
+the site-code MIT license; see the case
+[rights and provenance](docs/showcase/orbit-post-office/LICENSES.md).
+
 ## License
 
 Site code is [MIT](LICENSE). Each case records its source license and any
