@@ -34,7 +34,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     collection = json.loads(Path("collection.json").read_text(encoding="utf-8"))
     cases = collection["cases"]
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
-              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": []}
+              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -128,6 +128,27 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                 "anchor_visible": True, "horizontal_overflow": False,
                                 "screenshot": image_name,
                                 "sha256": hashlib.sha256((output / image_name).read_bytes()).hexdigest()})
+                            if case["slug"] == "orbit-post-office":
+                                active_context["stage"] = "orbit_film_controls"
+                                page.get_by_role("link", name="成果", exact=True).click()
+                                video = page.locator("#results video")
+                                expect(video).to_have_count(1)
+                                expect(video).to_be_visible()
+                                expect(video).to_have_js_property("controls", True)
+                                page.wait_for_function("() => { const v = document.querySelector('#results video'); return v.readyState >= 1 && v.videoWidth === 1280 && v.videoHeight === 720; }")
+                                duration = video.evaluate("v => v.duration")
+                                if abs(duration - 7.018) > 0.05:
+                                    raise AssertionError("Unexpected Orbit film duration")
+                                video.press("Space")
+                                page.wait_for_function("() => { const v = document.querySelector('#results video'); return !v.paused && v.currentTime >= 0.2; }")
+                                video.press("Space")
+                                expect(video).to_have_js_property("paused", True)
+                                film_name = layout + "-orbit-post-office-film.png"
+                                video.locator("..").screenshot(path=str(output / film_name), animations="disabled")
+                                report["films"].append({"layout": layout, "case_slug": case["slug"],
+                                    "duration_seconds": duration, "width": 1280, "height": 720,
+                                    "keyboard_play_and_pause": True, "screenshot": film_name,
+                                    "sha256": hashlib.sha256((output / film_name).read_bytes()).hexdigest()})
                         if errors:
                             raise AssertionError("Browser reported resource or script errors")
                     finally:

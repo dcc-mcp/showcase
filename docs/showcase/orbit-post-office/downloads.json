@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "first-delivery-720p.mp4",
+      "bytes": 258093,
+      "sha256": "2cd8cca471f64569f861b495214de799bf9d2592c67532cd7c0b7a829c65d827",
+      "purpose": "Current seven-second silent first-delivery film"
+    },
+    {
+      "path": "Orbit-Post-Office-D058-final-review-v1.zip",
+      "bytes": 3214346,
+      "sha256": "88a20e2986523ca2726cdb94ba65ccad3f45d17eacc86c308e733763ff8e792f",
+      "members": 144,
+      "purpose": "Historical v1 icon-focused prototype and its native sources/evidence; not the current station/worlds game or film",
+      "rights": "Original artwork, game content and recipe rights reserved; identified upstream notices retain their scope"
+    }
+  ],
+  "current_native_projects": {
+    "availability": "unavailable publicly",
+    "scope": "Current Godot game,10GIMP XCFs and Kdenlive project/media retained separately; no current source download link is offered"
+  },
+  "publication": "Links become public only after deployment; a local file does not establish remote availability."
+}

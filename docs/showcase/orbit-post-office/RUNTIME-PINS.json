@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "scope": "Current station/worlds game and first-delivery film; historical-v1/RUNTIME-PINS.json preserves earlier prototype pins",
+  "software_used": {
+    "GIMP": "3.0.4",
+    "Godot": "4.6.3.stable.official.7d41c59c4",
+    "Core_server": "0.20.41",
+    "Godot_adapter_commit": "72558dd6885ca0bc5e82648b0961e1f67d3c04a7",
+    "GIMP_adapter_base": "943e2cd6855da6f4876032bc124556e3eac54bc9",
+    "reviewed_GIMP_bridge_sha256": "4e438394c0e30142a75b373dff73f7495a8b895ac93a7f5a9be84ef32137085c"
+  },
+  "Kdenlive": "24.12.3",
+  "MLT": "7.30.0",
+  "Kdenlive_adapter_version": "Unrecorded in recovered delivery package; no newer release capability claim",
+  "Core_server": "0.20.41",
+  "font": "DejaVu Sans; binaries not bundled",
+  "standalone_game": "Compatibility OpenGL; saved main scene launched with F5, stopped with F8, no addon/Core/SDK/listener started in that recorded run",
+  "source_packages": {
+    "game_art_archive_sha256": "df70801fb579b3dab712782b1dc1d148d2077161259793bc704c0b87bca70641",
+    "film_archive_sha256": "db57aeef8468b06af68a2fc50baa454af20a910c5565def74e23f06eef705462",
+    "public_source_download": false
+  },
+  "native_rerun_during_publication": false
+}

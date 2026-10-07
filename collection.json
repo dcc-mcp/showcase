@@ -1845,6 +1845,312 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         }
       ]
+    },
+    {
+      "slug": "orbit-post-office",
+      "title": "ORBIT POST OFFICE · 星间邮局",
+      "subtitle": "GIMP → Godot → Kdenlive · 手绘小世界、八封信与七秒短片",
+      "software": [
+        "GIMP",
+        "Godot",
+        "Kdenlive"
+      ],
+      "capabilities": [
+        "图像绘制",
+        "分层原画",
+        "游戏交互",
+        "视频剪辑",
+        "跨软件制作",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/orbit-post-office/standalone-main-native.jpg",
+        "alt": "真实独立 Godot 游戏中的邮局与 Lumen、Moss、Ember 三个手绘世界"
+      },
+      "evidence_label": "实际原生链路 · 七秒影片 / 独立八封信验证",
+      "evidence_scope": "四个新 GIMP 分层世界进入 Godot 游戏，再由 Kdenlive 制成七秒第一投递影片。完整 8 封信、10 枚邮票的原生游戏验证单独记录。保留原生重开、搬移、重导资格和失败边界；本次发布恢复只验证文件、像素与页面，没有重新运行 DCC。当前可编辑项目无公开下载。",
+      "summary": "在钟楼邮局分拣来信，让两位快递员穿梭于天文台、花园和炉火工坊。原创分层小世界变成可编辑原生游戏，再剪成一段真实首投递短片。",
+      "goal": "用真实跨软件制作连接原画、游戏逻辑与影片：画面里的小世界承担实际投递目的地，保存可编辑原生工程，并把首投递短片与完整游戏验收分清。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过 GIMP MCP 绘制分层邮局、Lumen 天文台、Moss 花园与 Ember 炉火工坊，768 × 768，统一纸色与深蓝轮廓；保留透明度、图层和可编辑 XCF。通过 Godot MCP 把相对资源接到三条投递航线和两位快递员，支持读信、选路、窗口内发送、迟到退回再盖章，以及暂停、重启和键盘焦点。用原生状态和通关帧单独验证一班八封信。通过 Kdenlive MCP 把站点原画、真实首投递画面和可编辑文字编成 1280 × 720 / 30 fps 七秒短片；保存相对媒体、重开和重导，核验成片。记录失败，不用短片替代完整游戏验证。",
+        "note": "根据实际制作与保存交付物整理的复用说明，不是用户原始对话逐字稿；当前原生工程未公开下载，精确复现需要对应源文件。"
+      },
+      "environment": [
+        {
+          "label": "GIMP",
+          "value": "3.0.4 · four new 768 × 768 layered worlds; six historical 512 × 512 icons"
+        },
+        {
+          "label": "Godot",
+          "value": "4.6.3 · observed build 7d41c59c4 · 1280 × 720 · Compatibility OpenGL"
+        },
+        {
+          "label": "Kdenlive",
+          "value": "24.12.3 · MLT 7.30.0 · DejaVu Sans · 1280 × 720 / 30 fps"
+        },
+        {
+          "label": "Adapter / Core",
+          "value": "Core 0.20.41; GIMP adapter base 943e2cd6855da6f4876032bc124556e3eac54bc9; Godot adapter 72558dd6885ca0bc5e82648b0961e1f67d3c04a7; Kdenlive adapter version unknown"
+        },
+        {
+          "label": "Qualification",
+          "value": "Recorded Linux native runs; current publication recovery is file/pixel verification, not a new native execution"
+        }
+      ],
+      "tools": [
+        {
+          "name": "GIMP MCP · 分层形状、文字、保存与导出",
+          "description": "真实原生绘制四个世界；通过 MCP 保存、重开、导出并比较结构与像素。工具和创作操作计数分开，不将轮询视为创作。"
+        },
+        {
+          "name": "Godot MCP · 原生场景、脚本、信号与相对资源",
+          "description": "原画接入邮局、三个目的地与快递员；原生场景和脚本保存游戏规则，记录状态及实际画面。"
+        },
+        {
+          "name": "Godot MCP · typed action / 状态读回 / 游戏截图",
+          "description": "验证班次、错误路线、迟到恢复、暂停和重启；另有不启动 bridge 的正常 F5/F8 独立运行。"
+        },
+        {
+          "name": "Kdenlive MCP · 时间线、文字、保存与导出",
+          "description": "真实素材构成 210 帧短片，保留五个可编辑文字效果、站点 Transform 和 117 个相对媒体；历史保存副本和重导资格单独记录。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先画一个有功能的邮局",
+          "description": "钟楼、分拣台、信箱、包裹、吊机和传送带组成站点；36 个可编辑节点保留在 768 × 768 XCF。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/sorting-station.png",
+            "alt": "原创分层邮局站点的原生 GIMP 导出"
+          }
+        },
+        {
+          "title": "给三条航线各自的目的地",
+          "description": "Lumen 是天文台，Moss 是花园梯台，Ember 是炉火工坊；各自 11 个可编辑节点，真实导出进入 Godot。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/lumen.png",
+            "alt": "Lumen 天文台世界的原生透明 PNG"
+          }
+        },
+        {
+          "title": "让八封信真正送达",
+          "description": "原生通关图与状态显示 8 封信、10 枚邮票、零迟到、快递员全部返回；这与下方第一投递短片是两项独立证据。",
+          "image": {
+            "src": "docs/showcase/orbit-post-office/completed-shift-native.png",
+            "alt": "原生完整班次通关，8/8 封信、10/10 邮票与全部快递员返回"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/orbit-post-office/first-delivery-720p.mp4",
+          "alt": "七秒真实首投递短片",
+          "caption": "真实 Kdenlive 成片：2 秒邮局原画、4 秒 Godot 首投递、1 秒片尾，1280 × 720 / 30 fps，有意静音；不展示完整八封信班次。"
+        },
+        {
+          "src": "docs/showcase/orbit-post-office/moss.png",
+          "alt": "Moss 花园梯台",
+          "caption": "Moss：园丁的收件世界，原生 GIMP 导出。"
+        },
+        {
+          "src": "docs/showcase/orbit-post-office/ember.png",
+          "alt": "Ember 炉火工坊",
+          "caption": "Ember：炉火工坊的收件世界；原始 deadline failure 保留，后续原生图像资格通过。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "四个新世界的 GIMP 原生资格",
+          "result": "pass",
+          "observed": "记录中的四份 XCF 搬移、重开、重导通过；站点 36 节点，各目的地 11 节点。保存字节、图层/元数据与解码 RGBA/alpha、标准 sRGB 语义一致；不扩大到六个旧图标。"
+        },
+        {
+          "name": "独立完整班次验证",
+          "result": "pass",
+          "observed": "真实原生状态与通关 PNG 记录 8 封信按时送达、10 枚邮票、零迟到、快递员全部返回；影片仅展示第一投递。"
+        },
+        {
+          "name": "控制与恢复",
+          "result": "pass",
+          "observed": "记录覆盖错误航线、暂停、Tab/Enter、原生按钮信号、有回执及返航快递员时重启、迟到后重新盖章；按钮信号不冒充 OS 坐标点击。"
+        },
+        {
+          "name": "独立启动的 33 文件游戏",
+          "result": "pass",
+          "observed": "记录中的干净副本通过正常 F5 启动已保存主场景，F8 停止并正常退出；未启动 addon/Core/SDK/listener，33 文件不变。游戏 OS exit code 未观察。"
+        },
+        {
+          "name": "七秒影片当前文件验证",
+          "result": "pass",
+          "observed": "258,093 字节；H.264 1280 × 720、30 fps、210 帧完整解码，视频 7 秒；AAC 解码绝对峰值为 0，容器 7.018 秒。已实看开头、中段与结尾。"
+        },
+        {
+          "name": "原生影片历史资格",
+          "result": "pass",
+          "observed": "记录中的 Kdenlive Save Copy 与重导字节一致；搬移工程播放到片尾后正常退出，119 文件不变。当前读取确认五个 Dynamic Text、117 个媒体依赖；本次没有重跑原生软件。"
+        },
+        {
+          "name": "保留旧原型失败",
+          "result": "fail",
+          "observed": "历史 v1 的严格 Vulkan 日志、50 ms 性能和迟到重投组样本上限均保留 FAIL；详见 historical-v1/validation.json，不用新版功能通过覆盖。"
+        },
+        {
+          "name": "保留新制作中的原始失败",
+          "result": "fail",
+          "observed": "Ember 初始整轮 deadline failure 和 Kdenlive 瞬时退出判定失败保留；后续图像资格、正常清理与交付结果分别记录。"
+        }
+      ],
+      "limitations": [
+        "当前游戏、XCF 原画和 Kdenlive 工程无公开下载；公开 ZIP 仅为历史图标原型，不是画面中新版工程。",
+        "原始制作模型名和推理强度没有可核配置记录，保留未知；当前审阅配置不能追认历史制作。",
+        "影片只有第一投递，完整 8 封信通关有独立原生证据；不声称影片展示完整班次。",
+        "保留音频回退、V-Sync 与 Vulkan surface 警告，以及历史日志/性能/样本上限失败；无警告、跨平台和硬实时未验证。",
+        "原生按钮信号不是 OS 鼠标坐标证据；游戏 OS exit code 未观察。后来迟到恢复 PNG 未恢复，不以旧版图片冒充。",
+        "选定证据不是完整当前 MCP 传输轨迹，也不代表整个适配器或全部技能覆盖。当前发布未重新执行原生 DCC。",
+        "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。"
+      ],
+      "resources": [
+        {
+          "label": "观看 / 下载七秒 MP4 · 258 KB",
+          "url": "docs/showcase/orbit-post-office/first-delivery-720p.mp4"
+        },
+        {
+          "label": "历史 v1 图标原型工程 · 3.21 MB（不是当前新版）",
+          "url": "docs/showcase/orbit-post-office/Orbit-Post-Office-D058-final-review-v1.zip"
+        },
+        {
+          "label": "当前制作与公开边界",
+          "url": "docs/showcase/orbit-post-office/README.md"
+        },
+        {
+          "label": "下载字节数与 SHA-256",
+          "url": "docs/showcase/orbit-post-office/downloads.json"
+        },
+        {
+          "label": "原生资格与保留的失败",
+          "url": "docs/showcase/orbit-post-office/validation.json"
+        },
+        {
+          "label": "影片文件与历史原生检查",
+          "url": "docs/showcase/orbit-post-office/film-validation.json"
+        },
+        {
+          "label": "选定原生游戏证据",
+          "url": "docs/showcase/orbit-post-office/selected-native-evidence.json"
+        },
+        {
+          "label": "原画像素资格",
+          "url": "docs/showcase/orbit-post-office/native-art-pixel-qualification.json"
+        },
+        {
+          "label": "工具与技能范围",
+          "url": "docs/showcase/orbit-post-office/capability-coverage.json"
+        },
+        {
+          "label": "素材图层索引（保留工程内路径）",
+          "url": "docs/showcase/orbit-post-office/ASSET-INDEX.json"
+        },
+        {
+          "label": "运行软件与源码版本",
+          "url": "docs/showcase/orbit-post-office/RUNTIME-PINS.json"
+        },
+        {
+          "label": "方法与复现边界",
+          "url": "docs/showcase/orbit-post-office/METHODS.md"
+        },
+        {
+          "label": "权利与来源",
+          "url": "docs/showcase/orbit-post-office/LICENSES.md"
+        },
+        {
+          "label": "公开资源清单与哈希",
+          "url": "docs/showcase/orbit-post-office/manifest.json"
+        },
+        {
+          "label": "历史原型说明与旧失败",
+          "url": "docs/showcase/orbit-post-office/historical-v1/README.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创作品、游戏内容和配方保留权利；不新增 MIT 或 CC0。标明的上游软件与字体声明保留各自范围。",
+        "note": "原创 GIMP 图像、Godot 游戏与 Kdenlive 影片；无第三方图包、音乐、应用或字体二进制。网站 MIT 不适用于作品与案例下载包。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/943e2cd6855da6f4876032bc124556e3eac54bc9",
+        "commit": "943e2cd6855da6f4876032bc124556e3eac54bc9",
+        "title": "GIMP 已记录源码基线；Godot 固定 commit 与 Kdenlive 版本见运行记录"
+      },
+      "verified_at": "2026-10-07",
+      "model_attribution": [
+        {
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "保留的原始制作证据未记载可核验的模型名与推理强度；当前审阅配置不用于追认历史。",
+          "scope": "原始站点 / 世界原画、游戏与影片；不是当前页面复核。",
+          "stage": "原始策划与艺术方向",
+          "stage_id": "planning"
+        },
+        {
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "保留的原始制作证据未记载可核验的模型名与推理强度；当前审阅配置不用于追认历史。",
+          "scope": "原始站点 / 世界原画、游戏与影片；不是当前页面复核。",
+          "stage": "原始资产制作 / DCC 操作",
+          "stage_id": "creation"
+        },
+        {
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "保留的原始制作证据未记载可核验的模型名与推理强度；当前审阅配置不用于追认历史。",
+          "scope": "原始站点 / 世界原画、游戏与影片；不是当前页面复核。",
+          "stage": "原始工具与代码实现",
+          "stage_id": "code"
+        },
+        {
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "保留的原始制作证据未记载可核验的模型名与推理强度；当前审阅配置不用于追认历史。",
+          "scope": "原始站点 / 世界原画、游戏与影片；不是当前页面复核。",
+          "stage": "参考图生成 / 输入",
+          "stage_id": "reference"
+        },
+        {
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "保留的原始制作证据未记载可核验的模型名与推理强度；当前审阅配置不用于追认历史。",
+          "scope": "原始站点 / 世界原画、游戏与影片；不是当前页面复核。",
+          "stage": "原始影片与后期制作",
+          "stage_id": "post_production"
+        },
+        {
+          "stage": "本次独立发布复核",
+          "model": "GPT-6 Astra",
+          "reasoning_effort": "ultra",
+          "record_status": "configured",
+          "basis": "本次独立复核的被接受任务配置明确指定 gpt-6-astra / ultra；这仅记录配置，不是后端模型身份鉴证，也不追认原始制作。",
+          "scope": "2026-10-07 实际检查当前图片与影片抽帧、210 帧解码、静音、保留原生文件结构与哈希、公开边界及页面源码测试；未重新执行原生 DCC。浏览器与部署结果另行记录。",
+          "stage_id": "review"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "历史 v1 图标原型",
+          "date": "2026-10-04",
+          "change": "保留原型原生 ZIP、PNG 与验收记录，旧失败不覆盖。"
+        },
+        {
+          "version": "站点 / 世界与首投递影片",
+          "date": "2026-10-07",
+          "change": "发布四个分层世界的图片、独立完整班次证据与七秒第一投递影片；当前可编辑源未公开下载。相同 D058 的改版，不计为第二个案例。"
+        }
+      ]
     }
   ]
 }

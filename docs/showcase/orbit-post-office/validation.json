@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "case_id": "D058",
+  "revision": "station-worlds-first-delivery-film",
+  "environment": [
+    {
+      "label": "GIMP",
+      "value": "3.0.4 · four new 768 × 768 layered worlds; six historical 512 × 512 icons"
+    },
+    {
+      "label": "Godot",
+      "value": "4.6.3 · observed build 7d41c59c4 · 1280 × 720 · Compatibility OpenGL"
+    },
+    {
+      "label": "Kdenlive",
+      "value": "24.12.3 · MLT 7.30.0 · DejaVu Sans · 1280 × 720 / 30 fps"
+    },
+    {
+      "label": "Adapter / Core",
+      "value": "Core 0.20.41; GIMP adapter base 943e2cd6855da6f4876032bc124556e3eac54bc9; Godot adapter 72558dd6885ca0bc5e82648b0961e1f67d3c04a7; Kdenlive adapter version unknown"
+    },
+    {
+      "label": "Qualification",
+      "value": "Recorded Linux native runs; current publication recovery is file/pixel verification, not a new native execution"
+    }
+  ],
+  "checks": [
+    {
+      "name": "四个新世界的 GIMP 原生资格",
+      "result": "pass",
+      "observed": "记录中的四份 XCF 搬移、重开、重导通过；站点 36 节点，各目的地 11 节点。保存字节、图层/元数据与解码 RGBA/alpha、标准 sRGB 语义一致；不扩大到六个旧图标。"
+    },
+    {
+      "name": "独立完整班次验证",
+      "result": "pass",
+      "observed": "真实原生状态与通关 PNG 记录 8 封信按时送达、10 枚邮票、零迟到、快递员全部返回；影片仅展示第一投递。"
+    },
+    {
+      "name": "控制与恢复",
+      "result": "pass",
+      "observed": "记录覆盖错误航线、暂停、Tab/Enter、原生按钮信号、有回执及返航快递员时重启、迟到后重新盖章；按钮信号不冒充 OS 坐标点击。"
+    },
+    {
+      "name": "独立启动的 33 文件游戏",
+      "result": "pass",
+      "observed": "记录中的干净副本通过正常 F5 启动已保存主场景，F8 停止并正常退出；未启动 addon/Core/SDK/listener，33 文件不变。游戏 OS exit code 未观察。"
+    },
+    {
+      "name": "七秒影片当前文件验证",
+      "result": "pass",
+      "observed": "258,093 字节；H.264 1280 × 720、30 fps、210 帧完整解码，视频 7 秒；AAC 解码绝对峰值为 0，容器 7.018 秒。已实看开头、中段与结尾。"
+    },
+    {
+      "name": "原生影片历史资格",
+      "result": "pass",
+      "observed": "记录中的 Kdenlive Save Copy 与重导字节一致；搬移工程播放到片尾后正常退出，119 文件不变。当前读取确认五个 Dynamic Text、117 个媒体依赖；本次没有重跑原生软件。"
+    },
+    {
+      "name": "保留旧原型失败",
+      "result": "fail",
+      "observed": "历史 v1 的严格 Vulkan 日志、50 ms 性能和迟到重投组样本上限均保留 FAIL；详见 historical-v1/validation.json，不用新版功能通过覆盖。"
+    },
+    {
+      "name": "保留新制作中的原始失败",
+      "result": "fail",
+      "observed": "Ember 初始整轮 deadline failure 和 Kdenlive 瞬时退出判定失败保留；后续图像资格、正常清理与交付结果分别记录。"
+    }
+  ],
+  "historical_validation": "historical-v1/validation.json",
+  "native_rerun_during_publication": false,
+  "current_file_verification": "film-validation.json",
+  "source_evidence": "selected-native-evidence.json",
+  "public_native_source_download": false,
+  "not_claimed": [
+    "当前游戏、XCF 原画和 Kdenlive 工程无公开下载；公开 ZIP 仅为历史图标原型，不是画面中新版工程。",
+    "原始制作模型名和推理强度没有可核配置记录，保留未知；当前审阅配置不能追认历史制作。",
+    "影片只有第一投递，完整 8 封信通关有独立原生证据；不声称影片展示完整班次。",
+    "保留音频回退、V-Sync 与 Vulkan surface 警告，以及历史日志/性能/样本上限失败；无警告、跨平台和硬实时未验证。",
+    "原生按钮信号不是 OS 鼠标坐标证据；游戏 OS exit code 未观察。后来迟到恢复 PNG 未恢复，不以旧版图片冒充。",
+    "选定证据不是完整当前 MCP 传输轨迹，也不代表整个适配器或全部技能覆盖。当前发布未重新执行原生 DCC。",
+    "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。"
+  ]
+}

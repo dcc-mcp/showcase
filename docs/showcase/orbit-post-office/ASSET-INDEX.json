@@ -1,0 +1,261 @@
+{
+  "schema": "D058-quality-revision-editable-asset-index-v1",
+  "assets": [
+    {
+      "id": "accepted-seal",
+      "role": "Delivery accepted",
+      "png": "game/assets/orbit-post/accepted-seal.png",
+      "png_sha256": "5c8c785116d381ae12287e4ecf96f0cd578dc73cab7d8bd70b6c38efeefbff9a",
+      "xcf": "art/icons/accepted-seal.xcf",
+      "xcf_sha256": "522e681ecef79929152c93a6e05337ce97b66f10cbe647d55444f8e4358dde16",
+      "dimensions": [
+        512,
+        512
+      ],
+      "paint_layers": 8,
+      "editable_text_layers": 0,
+      "source_scope": "Unchanged previously accepted icon family; no new redraw or new relocation claim",
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "open-envelope",
+      "role": "Read letter",
+      "png": "game/assets/orbit-post/open-envelope.png",
+      "png_sha256": "c18ac6381c6bf0e2348e096fcf22e50e758e4eebbd408ebef00b386e846e45fc",
+      "xcf": "art/icons/open-envelope.xcf",
+      "xcf_sha256": "caf72c8c0b02bbab2dd893b4525bbbb9f45bc7bc1882963ff92c9e3eaf251a00",
+      "dimensions": [
+        512,
+        512
+      ],
+      "paint_layers": 12,
+      "editable_text_layers": 0,
+      "source_scope": "Unchanged previously accepted icon family; no new redraw or new relocation claim",
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "orbital-stamp",
+      "role": "Collectible postage",
+      "png": "game/assets/orbit-post/orbital-stamp.png",
+      "png_sha256": "33f2c70668cc98b5cfc4d283b73f6647b8d9a32c18e85c964e034802ccd22f74",
+      "xcf": "art/icons/orbital-stamp.xcf",
+      "xcf_sha256": "2161c99a98d3cc7809416fdcf548b38a6301a7b2b4d14f99abb1c6ef8976a846",
+      "dimensions": [
+        512,
+        512
+      ],
+      "paint_layers": 8,
+      "editable_text_layers": 2,
+      "source_scope": "Unchanged previously accepted icon family; no new redraw or new relocation claim",
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "priority-parcel",
+      "role": "Priority parcel inventory",
+      "png": "game/assets/orbit-post/priority-parcel.png",
+      "png_sha256": "1d697c7d010334172a453a6dafc2fef92180699a53e8d016092a4bd46b28a613",
+      "xcf": "art/icons/priority-parcel.xcf",
+      "xcf_sha256": "d0456bfb6327242c7db7ef2ced8cd536b5799172d2e2e095068afb2d4510f07d",
+      "dimensions": [
+        512,
+        512
+      ],
+      "paint_layers": 10,
+      "editable_text_layers": 0,
+      "source_scope": "Unchanged previously accepted icon family; no new redraw or new relocation claim",
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "return-seal",
+      "role": "Delivery return request",
+      "png": "game/assets/orbit-post/return-seal.png",
+      "png_sha256": "5a78e74f4e74d12d759790e6d37c1c09357b5fba4d75652c0cc5f9f10ae907f6",
+      "xcf": "art/icons/return-seal.xcf",
+      "xcf_sha256": "541f369e25f4b4918bc00a408f375e84ce0135e2fc628d0e6c3680e2e2ae6115",
+      "dimensions": [
+        512,
+        512
+      ],
+      "paint_layers": 10,
+      "editable_text_layers": 0,
+      "source_scope": "Unchanged previously accepted icon family; no new redraw or new relocation claim",
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "sealed-envelope",
+      "role": "Unread letter",
+      "png": "game/assets/orbit-post/sealed-envelope.png",
+      "png_sha256": "fd5e54605129496fc485a4c9eab57cefee15f571033f03dd9a068865e4a1c9eb",
+      "xcf": "art/icons/sealed-envelope.xcf",
+      "xcf_sha256": "b32faa47967987a809dc80dae06fdd8a94b777db66bdd6285a4aacea1b665d71",
+      "dimensions": [
+        512,
+        512
+      ],
+      "paint_layers": 11,
+      "editable_text_layers": 0,
+      "source_scope": "Unchanged previously accepted icon family; no new redraw or new relocation claim",
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "station",
+      "role": "Central sorting station and outbound conveyor",
+      "png": "game/assets/orbit-post-v2/sorting-station.png",
+      "png_sha256": "da9660d44ec360797c113ac3f44ac9faa273cd7145523b2cc3bab433a27a2bbf",
+      "xcf": "art/worlds/sorting-station.xcf",
+      "xcf_sha256": "540c93e405345beabd0ff333ffa3d5cd123b477126d487586e07ea802522193c",
+      "recipe": "art/recipes/station.json",
+      "recipe_sha256": "c1eaa25532b1aecd13589e60ef14dbcf4014b244d21f571eb135909bb12580a4",
+      "dimensions": [
+        768,
+        768
+      ],
+      "pivot": [
+        384,
+        384
+      ],
+      "dock": [
+        661,
+        503
+      ],
+      "editable_nodes": 36,
+      "decoded_rgba_sha256": "871f3044e9ff42fa36a174fa211780a6dad4e20ab11c151ff49d0dc9ab0be2bd",
+      "decoded_alpha_sha256": "cc4423d832f820f5a2a75af8a929797cd128c621c4a4823bc4bce07b4eb94752",
+      "alpha_bounds": [
+        79,
+        68,
+        719,
+        689
+      ],
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB; unstored native effective ICC recorded independently",
+      "native_relocation": "PASS: unchanged XCF bytes, layers, metadata, decoded RGBA and alpha",
+      "original_art_run_status": "PASS",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "lumen",
+      "role": "Observatory receiving station",
+      "png": "game/assets/orbit-post-v2/lumen.png",
+      "png_sha256": "b1f6b1cf00b397a3abc6b491fc4e8d94eaf5a37a59702e6b5d23f79c12e3e151",
+      "xcf": "art/worlds/lumen.xcf",
+      "xcf_sha256": "88c92640967a920ffb24c478084d3d50e56aae034d9b78b6f1bd3249c30d5c72",
+      "recipe": "art/recipes/lumen.json",
+      "recipe_sha256": "a5a21a69c39d6ab0c9b9d79e2474db3d1f01773470eb020f4a8a41841791bbed",
+      "dimensions": [
+        768,
+        768
+      ],
+      "pivot": [
+        384,
+        384
+      ],
+      "dock": [
+        124,
+        494
+      ],
+      "editable_nodes": 11,
+      "decoded_rgba_sha256": "fab6b2e8a2142cb747d4004454c242eb6713bacf0f1e484d05d9519f913c9fe5",
+      "decoded_alpha_sha256": "1fec0072669587234293da36538e45eb26d599694851d754dc454e47b3b3d8d7",
+      "alpha_bounds": [
+        66,
+        138,
+        648,
+        702
+      ],
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB; unstored native effective ICC recorded independently",
+      "native_relocation": "PASS: unchanged XCF bytes, layers, metadata, decoded RGBA and alpha",
+      "original_art_run_status": "PASS",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "moss",
+      "role": "Garden terraces receiving station",
+      "png": "game/assets/orbit-post-v2/moss.png",
+      "png_sha256": "58e90ac6d3f1ffd81bf15e3bb82484efdd7836116de37e8ac25000b8eb7e9ad6",
+      "xcf": "art/worlds/moss.xcf",
+      "xcf_sha256": "f8a17f8db3264d20fd8969f11b6fb3346b5beecd5c788afe0852352b4a0f4225",
+      "recipe": "art/recipes/moss.json",
+      "recipe_sha256": "ecfe11ca031f98796c3aebb92d72bcdadce70cf1368c20b6927be21f6a484e62",
+      "dimensions": [
+        768,
+        768
+      ],
+      "pivot": [
+        384,
+        384
+      ],
+      "dock": [
+        124,
+        494
+      ],
+      "editable_nodes": 11,
+      "decoded_rgba_sha256": "a04613387e0a0b402405c6cd96381e55963e277cb56cc7465d3ef3b2787a13dd",
+      "decoded_alpha_sha256": "6ba00dde89eecbfb6a360c05c0b8ff52235089c03c667636b57c834d85e02b0e",
+      "alpha_bounds": [
+        66,
+        96,
+        658,
+        708
+      ],
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB; unstored native effective ICC recorded independently",
+      "native_relocation": "PASS: unchanged XCF bytes, layers, metadata, decoded RGBA and alpha",
+      "original_art_run_status": "PASS",
+      "rights": "Rights reserved; unchanged"
+    },
+    {
+      "id": "ember",
+      "role": "Furnace works receiving station",
+      "png": "game/assets/orbit-post-v2/ember.png",
+      "png_sha256": "d8f49fbb9c6f36ba49c6a6b26cd4e922e2963a1bf2b9e8a97e983feda66f89e0",
+      "xcf": "art/worlds/ember.xcf",
+      "xcf_sha256": "677fceeeb2dc6ac19e586061f3600e33a7b15037fc8cb2a364f9d813302f0ecf",
+      "recipe": "art/recipes/ember.json",
+      "recipe_sha256": "23c307c596492ef59f933e04d0dc72d468704ac45773764aefc8e3ee3c3410a9",
+      "dimensions": [
+        768,
+        768
+      ],
+      "pivot": [
+        384,
+        384
+      ],
+      "dock": [
+        124,
+        494
+      ],
+      "editable_nodes": 11,
+      "decoded_rgba_sha256": "48dad7ed3ec880026da47d4641c9fc8559bf6da0df0df30e24c7dacd41e9edce",
+      "decoded_alpha_sha256": "278c587ecc86b71579c9ed73792cdc6ba1b95598dba39d41dc74d5470afd1321",
+      "alpha_bounds": [
+        66,
+        88,
+        668,
+        712
+      ],
+      "alpha": "PNG straight RGBA",
+      "color": "Explicit standard sRGB; unstored native effective ICC recorded independently",
+      "native_relocation": "PASS: unchanged XCF bytes, layers, metadata, decoded RGBA and alpha",
+      "original_art_run_status": "FAIL_DEADLINE_EXCEEDED_WITH_VALID_ARTIFACT",
+      "rights": "Rights reserved; unchanged"
+    }
+  ],
+  "asset_count": 10,
+  "relative_paths_from": "package root",
+  "new_license_grant": false,
+  "publication_note": "Paths in this asset index identify retained native sources, not current public download links. Current game/art sources are not publicly downloadable."
+}

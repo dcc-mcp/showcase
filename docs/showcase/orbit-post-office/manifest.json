@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "case_id": "D058",
+  "files": [
+    {
+      "path": "ASSET-INDEX.json",
+      "bytes": 9647,
+      "sha256": "bf128ef447edc09c349c13994b9e54dc93dc1ae1720f93d1e0f7e357346650fe"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 1681,
+      "sha256": "d29758c1540051bd2b51903d180eee0d0529e5b43f81ba64ffe938e274655a82"
+    },
+    {
+      "path": "METHODS.md",
+      "bytes": 4011,
+      "sha256": "f8ae4be6a6930e0050df384534c0cf803ffc5ed6ce0895252e7713ddab4c52f1"
+    },
+    {
+      "path": "Orbit-Post-Office-D058-final-review-v1.zip",
+      "bytes": 3214346,
+      "sha256": "88a20e2986523ca2726cdb94ba65ccad3f45d17eacc86c308e733763ff8e792f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8576,
+      "sha256": "1e6f4529c5c232ea018c77c4ffa827b244317392a74496c9f8e7e94fa62722bb"
+    },
+    {
+      "path": "RUNTIME-PINS.json",
+      "bytes": 1210,
+      "sha256": "6ae54497a51a4c22b5c69cab37c7598754c225fec3de13c6dfcee1ce21510beb"
+    },
+    {
+      "path": "capability-coverage.json",
+      "bytes": 2586,
+      "sha256": "b499ae4a1c58b8018b5bb6f67f50f6f260bf0eb6090c4f70636aea1befcb53a1"
+    },
+    {
+      "path": "completed-shift-native.png",
+      "bytes": 179754,
+      "sha256": "7b60231dfe666089ade728cd8ab1cd168de788969784472fd20abe6d781c4139",
+      "width": 1228,
+      "height": 690,
+      "mode": "RGBA"
+    },
+    {
+      "path": "downloads.json",
+      "bytes": 1065,
+      "sha256": "fe0a4e10e2c83c9c060de23965615658cfc8a43cca142ffbc80301d0fe287742"
+    },
+    {
+      "path": "ember.png",
+      "bytes": 64988,
+      "sha256": "d8f49fbb9c6f36ba49c6a6b26cd4e922e2963a1bf2b9e8a97e983feda66f89e0",
+      "width": 768,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "film-validation.json",
+      "bytes": 1734,
+      "sha256": "a683d6b7164b593687addbd4a88811ec7819ca6b403a45b4a45c99bd6e16aaa3"
+    },
+    {
+      "path": "first-delivery-720p.mp4",
+      "bytes": 258093,
+      "sha256": "2cd8cca471f64569f861b495214de799bf9d2592c67532cd7c0b7a829c65d827",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "frames": 210,
+      "video_seconds": 7
+    },
+    {
+      "path": "historical-v1/ASSET-INDEX.json",
+      "bytes": 10080,
+      "sha256": "a5a0f30cd56011ddac56f3fdd9c743adbe57a83ba2efbe2a8579b1227f0ff830"
+    },
+    {
+      "path": "historical-v1/LICENSES.md",
+      "bytes": 1405,
+      "sha256": "2e35f51c4f166426ca123c19456b1234005abc0207f03c72c969abc0ba329bce"
+    },
+    {
+      "path": "historical-v1/METHODS.md",
+      "bytes": 4360,
+      "sha256": "5342187b664fb4d6ea06ed3a33be563daeefad5eae8cc016fa96c1454c1b8e0f"
+    },
+    {
+      "path": "historical-v1/Orbit-Post-Office-D058-final-review-v1.zip",
+      "bytes": 3214346,
+      "sha256": "88a20e2986523ca2726cdb94ba65ccad3f45d17eacc86c308e733763ff8e792f"
+    },
+    {
+      "path": "historical-v1/README.md",
+      "bytes": 5666,
+      "sha256": "fbbc1245ba6f32d06be92ca9fcb2e0ffd98da4c211a4b7b45cd64b30214dcaca"
+    },
+    {
+      "path": "historical-v1/RUNTIME-PINS.json",
+      "bytes": 4918,
+      "sha256": "c4904fab4bee6a4a88f39182a586798bd23ff9f6c7b169da02173ed9a6443eb7"
+    },
+    {
+      "path": "historical-v1/capability-coverage.json",
+      "bytes": 12830,
+      "sha256": "745bb10fc3abe0e5263f5f17c917005094c1513c794a79e25b65d919aeda9fa4"
+    },
+    {
+      "path": "historical-v1/downloads.json",
+      "bytes": 857,
+      "sha256": "cbbc53b0d3eb24dc256e34a7e0eee834fef3fb95d1653587bc2d1bcdbf0cd0a5"
+    },
+    {
+      "path": "historical-v1/manifest.json",
+      "bytes": 3302,
+      "sha256": "87ddedafeec1df661db90a5efb71234725fbf39e6666c04d241f824d19d3ff20"
+    },
+    {
+      "path": "historical-v1/manual-group-a-focused-shortcut.png",
+      "bytes": 78332,
+      "sha256": "a64c4bf8590a783c754b15b6884e48dcc9bc8489e6516ba2dc26913c97266f8d",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/manual-group-b-late-return.png",
+      "bytes": 77505,
+      "sha256": "237ac253e2030014b7c514ada3490de8e17e35c5c034e0b7806789b9b2a8e3ac",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/open-envelope.png",
+      "bytes": 16574,
+      "sha256": "c18ac6381c6bf0e2348e096fcf22e50e758e4eebbd408ebef00b386e846e45fc",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/orbital-stamp.png",
+      "bytes": 20501,
+      "sha256": "33f2c70668cc98b5cfc4d283b73f6647b8d9a32c18e85c964e034802ccd22f74",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/restored-normal-delivery.png",
+      "bytes": 76841,
+      "sha256": "b1e820d5438108746b91329d5c11b650d8e68cf768fdfe0422b74d00370236f2",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/run11-late-inflight.png",
+      "bytes": 77695,
+      "sha256": "f67dbdfa7307a90264d9eeddeec1efdce35b713d30b5d5580bcb9531a873693f",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/run11-relocated-success-inflight.png",
+      "bytes": 77628,
+      "sha256": "d703f340b55fb30165cc5220ecfd68a10ffea5de4d8ef6b6af1e52ce631fc34f",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "historical-v1/validation.json",
+      "bytes": 7461,
+      "sha256": "e35c2193199e767c101172a75d11162c4ad420b610b5510c0999e4a2ba99eadb"
+    },
+    {
+      "path": "lumen.png",
+      "bytes": 65647,
+      "sha256": "b1f6b1cf00b397a3abc6b491fc4e8d94eaf5a37a59702e6b5d23f79c12e3e151",
+      "width": 768,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "manual-group-a-focused-shortcut.png",
+      "bytes": 78332,
+      "sha256": "a64c4bf8590a783c754b15b6884e48dcc9bc8489e6516ba2dc26913c97266f8d",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "manual-group-b-late-return.png",
+      "bytes": 77505,
+      "sha256": "237ac253e2030014b7c514ada3490de8e17e35c5c034e0b7806789b9b2a8e3ac",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "moss.png",
+      "bytes": 74910,
+      "sha256": "58e90ac6d3f1ffd81bf15e3bb82484efdd7836116de37e8ac25000b8eb7e9ad6",
+      "width": 768,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "native-art-pixel-qualification.json",
+      "bytes": 1085,
+      "sha256": "26f2c086edf231950120aeedf94da38064ba46ecb032c744e2ea6349132ddb03"
+    },
+    {
+      "path": "open-envelope.png",
+      "bytes": 16574,
+      "sha256": "c18ac6381c6bf0e2348e096fcf22e50e758e4eebbd408ebef00b386e846e45fc",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "path": "orbital-stamp.png",
+      "bytes": 20501,
+      "sha256": "33f2c70668cc98b5cfc4d283b73f6647b8d9a32c18e85c964e034802ccd22f74",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "path": "restored-normal-delivery.png",
+      "bytes": 76841,
+      "sha256": "b1e820d5438108746b91329d5c11b650d8e68cf768fdfe0422b74d00370236f2",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "run11-late-inflight.png",
+      "bytes": 77695,
+      "sha256": "f67dbdfa7307a90264d9eeddeec1efdce35b713d30b5d5580bcb9531a873693f",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "run11-relocated-success-inflight.png",
+      "bytes": 77628,
+      "sha256": "d703f340b55fb30165cc5220ecfd68a10ffea5de4d8ef6b6af1e52ce631fc34f",
+      "width": 1280,
+      "height": 720,
+      "mode": "RGBA"
+    },
+    {
+      "path": "selected-native-evidence.json",
+      "bytes": 3549,
+      "sha256": "a3192e710234db00f4cd3dd222f5a550a6ac18dcd8d8b2f87964a32c5ee59561"
+    },
+    {
+      "path": "sorting-station.png",
+      "bytes": 138904,
+      "sha256": "da9660d44ec360797c113ac3f44ac9faa273cd7145523b2cc3bab433a27a2bbf",
+      "width": 768,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "standalone-main-native.jpg",
+      "bytes": 152021,
+      "sha256": "1fd3a8fb9e423d584e0d5dcb8bfcfb8b5b4f24fa9d3db050e3b90b1d9677d064",
+      "width": 1228,
+      "height": 691,
+      "mode": "RGB"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 4361,
+      "sha256": "616b282c8096c71ab25108d878f4c9c45afe219d9f11da5c93d4dc75b4f67b7c"
+    }
+  ],
+  "note": "Current native source packages are unavailable publicly; v1 ZIP and historical-v1 records identify the unchanged older prototype."
+}

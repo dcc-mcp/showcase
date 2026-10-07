@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "kind": "retained historical native acceptance summary",
+  "new_artwork": {
+    "station": {
+      "editable_nodes": 36,
+      "creative_calls": 279,
+      "paint_operations": 217
+    },
+    "lumen": {
+      "editable_nodes": 11,
+      "creative_calls": 70
+    },
+    "moss": {
+      "editable_nodes": 11,
+      "creative_calls": 72
+    },
+    "ember": {
+      "editable_nodes": 11,
+      "creative_calls": 72,
+      "original_whole_run": "FAIL_DEADLINE_EXCEEDED",
+      "artifact_and_later_relocated_native_pixel_checks": "PASS"
+    }
+  },
+  "relocated_native_checks": {
+    "assets": 4,
+    "xcf_bytes_preserved": true,
+    "editable_layers_and_metadata_match": true,
+    "decoded_RGBA_and_alpha_match": true,
+    "standard_sRGB_semantics_match": true,
+    "cross_session_unstored_ICC_byte_equality": "UNCLAIMED"
+  },
+  "applies_to": "Four new768x768world XCFs; six reused512x512icons retain earlier qualification",
+  "native_rerun_during_publication": false,
+  "source_summary_sha256": "af63113331c68e9441ce2645017346c907d627f8e2e5a6b3957572d86bff52a7"
+}

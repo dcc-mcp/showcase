@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "scope": "Selected native capabilities, not complete adapter or skill coverage",
+  "GIMP": {
+    "four_new_layered_worlds": {
+      "station": {
+        "editable_nodes": 36,
+        "creative_calls": 279,
+        "paint_operations": 217
+      },
+      "lumen": {
+        "editable_nodes": 11,
+        "creative_calls": 70
+      },
+      "moss": {
+        "editable_nodes": 11,
+        "creative_calls": 72
+      },
+      "ember": {
+        "editable_nodes": 11,
+        "creative_calls": 72,
+        "original_whole_run": "FAIL_DEADLINE_EXCEEDED",
+        "artifact_and_later_relocated_native_pixel_checks": "PASS"
+      }
+    },
+    "new_worlds_relocated_reopened_reexported": {
+      "assets": 4,
+      "xcf_bytes_preserved": true,
+      "editable_layers_and_metadata_match": true,
+      "decoded_RGBA_and_alpha_match": true,
+      "standard_sRGB_semantics_match": true,
+      "cross_session_unstored_ICC_byte_equality": "UNCLAIMED"
+    },
+    "six_icon_masters": "Reused historical masters; no new four-world relocation claim applies to icons"
+  },
+  "Godot": {
+    "full_shift_on_time_deliveries": 8,
+    "full_shift_stamps": 10,
+    "wrong_route_rejected": true,
+    "pause_observed": true,
+    "Tab_Enter_begin_observed": true,
+    "native_button_signal_observed": true,
+    "mouse_coordinate_claim": false,
+    "restart_with_returning_courier_and_visible_receipt": true,
+    "late_return_and_successful_restamp_observed": true
+  },
+  "Godot_standalone": {
+    "fresh_project_copy": true,
+    "saved_main_scene_launched_via_normal_F5": true,
+    "actual_frame_reviewed": true,
+    "normal_F8_and_Quit": true,
+    "raw_editor_wait": 0,
+    "foreground_author_wait": 0,
+    "unchanged_source_files": 33,
+    "addon_or_Core_or_SDK_listener_started": false,
+    "game_OS_exit": "UNOBSERVED",
+    "cloud_platform_fallback_warnings": "Audio dummy fallback, V-Sync limitation and Vulkan surface-extension initialization errors were logged; actual game used Compatibility OpenGL and displayed correctly."
+  },
+  "Kdenlive": {
+    "editable_dynamic_text_effects": 5,
+    "editable_station_transform": true,
+    "relative_media_dependencies": 117,
+    "native_save_copy_and_matching_reexport": "Recorded historical qualification"
+  },
+  "counting": "Creative calls, paint operations, polling, loading skills and native checks are distinct categories. No whole-adapter denominator is claimed.",
+  "complete_current_transport_trace": "Not part of this recovered publication summary; historical v1 normalized records remain in the explicitly historical archive."
+}

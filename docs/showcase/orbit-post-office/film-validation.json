@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "current file checks plus separately labelled historical native qualification",
+  "file": {
+    "path": "first-delivery-720p.mp4",
+    "bytes": 258093,
+    "sha256": "2cd8cca471f64569f861b495214de799bf9d2592c67532cd7c0b7a829c65d827",
+    "video_codec": "H.264",
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": 210,
+    "video_seconds": 7,
+    "container_seconds": 7.018,
+    "audio": "Intentionally silent AAC; full decoded absolute peak0"
+  },
+  "current_file_checks": {
+    "all210frames_decode": true,
+    "decoded_silence_peak": 0,
+    "reviewed_frames": [
+      0,
+      105,
+      209
+    ],
+    "native_project_dynamic_text_effects": 5,
+    "native_project_relative_media_files": 117,
+    "native_project_profile": "1280x720/30fps",
+    "native_project_export_range_inclusive": [
+      0,
+      209
+    ]
+  },
+  "historical_native_qualification": {
+    "native_saved_copy_and_MCP_reexport_byte_equal_to_final": true,
+    "native_cold_open_seek_playback_control_edit_save_copy_recorded": true,
+    "relocated_project_played_to_end_card_and_quit_normally": true,
+    "native_files_unchanged": 119,
+    "native_replay_performed_in_this_publication": false
+  },
+  "scope": "Only first delivery:2s station/title,4s gameplay,1s end card. Separate full-game acceptance completed8letters; this film does not show that whole shift.",
+  "retained_source_package": "db57aeef8468b06af68a2fc50baa454af20a910c5565def74e23f06eef705462",
+  "current_native_source_publicly_downloadable": false,
+  "failures_retained": [
+    "Original instantaneous shutdown-gate failure; later cleanup and accepted artifacts are separate",
+    "Optional Frei0r startup warning; no Frei0r effect used"
+  ]
+}

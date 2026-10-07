@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "historical-native-summary-and-current-file-verification",
+  "native_rerun_during_publication": false,
+  "source_summary_sha256": "af63113331c68e9441ce2645017346c907d627f8e2e5a6b3957572d86bff52a7",
+  "source_packages": {
+    "game_art_archive_sha256": "df70801fb579b3dab712782b1dc1d148d2077161259793bc704c0b87bca70641",
+    "film_archive_sha256": "db57aeef8468b06af68a2fc50baa454af20a910c5565def74e23f06eef705462",
+    "public_source_download": false
+  },
+  "historical_acceptance": {
+    "scope": "Selected actual native acceptance; no claim of complete tool or skill coverage",
+    "new_artwork": {
+      "station": {
+        "editable_nodes": 36,
+        "creative_calls": 279,
+        "paint_operations": 217
+      },
+      "lumen": {
+        "editable_nodes": 11,
+        "creative_calls": 70
+      },
+      "moss": {
+        "editable_nodes": 11,
+        "creative_calls": 72
+      },
+      "ember": {
+        "editable_nodes": 11,
+        "creative_calls": 72,
+        "original_whole_run": "FAIL_DEADLINE_EXCEEDED",
+        "artifact_and_later_relocated_native_pixel_checks": "PASS"
+      }
+    },
+    "native_art_relocation": {
+      "assets": 4,
+      "xcf_bytes_preserved": true,
+      "editable_layers_and_metadata_match": true,
+      "decoded_RGBA_and_alpha_match": true,
+      "standard_sRGB_semantics_match": true,
+      "cross_session_unstored_ICC_byte_equality": "UNCLAIMED"
+    },
+    "gameplay": {
+      "full_shift_on_time_deliveries": 8,
+      "full_shift_stamps": 10,
+      "wrong_route_rejected": true,
+      "pause_observed": true,
+      "Tab_Enter_begin_observed": true,
+      "native_button_signal_observed": true,
+      "mouse_coordinate_claim": false,
+      "restart_with_returning_courier_and_visible_receipt": true,
+      "late_return_and_successful_restamp_observed": true
+    },
+    "standalone": {
+      "fresh_project_copy": true,
+      "saved_main_scene_launched_via_normal_F5": true,
+      "actual_frame_reviewed": true,
+      "normal_F8_and_Quit": true,
+      "raw_editor_wait": 0,
+      "foreground_author_wait": 0,
+      "unchanged_source_files": 33,
+      "addon_or_Core_or_SDK_listener_started": false,
+      "game_OS_exit": "UNOBSERVED",
+      "cloud_platform_fallback_warnings": "Audio dummy fallback, V-Sync limitation and Vulkan surface-extension initialization errors were logged; actual game used Compatibility OpenGL and displayed correctly."
+    },
+    "software_used": {
+      "GIMP": "3.0.4",
+      "Godot": "4.6.3.stable.official.7d41c59c4",
+      "Core_server": "0.20.41",
+      "Godot_adapter_commit": "72558dd6885ca0bc5e82648b0961e1f67d3c04a7",
+      "GIMP_adapter_base": "943e2cd6855da6f4876032bc124556e3eac54bc9",
+      "reviewed_GIMP_bridge_sha256": "4e438394c0e30142a75b373dff73f7495a8b895ac93a7f5a9be84ef32137085c"
+    },
+    "remaining": [
+      "Postdeployment public browser and download acceptance"
+    ],
+    "new_rights_grant": false,
+    "raw_private_execution_receipts_included": false,
+    "film_delivery": {
+      "bundled_here": false,
+      "scope": "Separate seven-second first-delivery film and native Kdenlive timeline/media archive",
+      "video_sha256": "2cd8cca471f64569f861b495214de799bf9d2592c67532cd7c0b7a829c65d827",
+      "full_eight_letter_shift_film": false
+    }
+  },
+  "publication_recovery": {
+    "video_and_source_package_hashes_match_retained_delivery": true,
+    "completed_shift_png_matches_original_sha256": true,
+    "late_recovery_png": "Not recovered for this publication; no replacement image is fabricated."
+  }
+}

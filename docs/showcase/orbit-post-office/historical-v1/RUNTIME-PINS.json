@@ -1,0 +1,79 @@
+{
+  "schema": "D058-portable-runtime-pins-v1",
+  "native_apps": {
+    "godot": {
+      "version": "4.6.3",
+      "reported_build": "7d41c59c4",
+      "observed_linux_x86_64_binary_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+      "official_source_tag_equivalence": "UNVERIFIED",
+      "binary_included": false
+    },
+    "gimp": {
+      "version": "3.0.4",
+      "platform": "Linux x86_64",
+      "binary_included": false
+    }
+  },
+  "godot_adapter": {
+    "repository": "https://github.com/dcc-mcp/dcc-mcp-godot",
+    "base_commit": "689ca4f725de7d9aa40d3298caeda27b018a0aa7",
+    "base_tree": "ba07c943b8cf19c6f4b4e62f7bb148c299e49aa9",
+    "candidate_development_commit": "c4b7a9220ba2f9bb5a9af4dee2a948e5986a88d4",
+    "candidate_tree": "1bf0a6a108e209a35904a58f53a6731022819596",
+    "candidate_is_public_main": false,
+    "change_patch_sha256": "9259516132f3c5d4071d844b3814753887d85cfdb658371ba368e7272873457d",
+    "patch_application_reconstructs_exact_tree": true,
+    "changed_files": {
+      "docs/playtest-actions.md": "f062d830a0dfd85a16342dc695f34d8a0e1395f44ca8ae9c953da331a676e529",
+      "src/dcc_mcp_godot/bridge.py": "7729ef3c8ec84f5404ac6df778de0fa6746ab153aac8524371a1770fc319ed32",
+      "src/dcc_mcp_godot/godot_addon/addons/dcc_mcp_godot/plugin.gd": "335967bbb2a61797bbf4834c8ce8132421e71e4a74b1199d93619117156a23ec",
+      "src/dcc_mcp_godot/godot_addon/addons/dcc_mcp_godot/runtime_peer.gd": "9987aef4ff20c5e731f154bafb6d121fd74f4fa8b380d6de278d75da3b433a44",
+      "src/dcc_mcp_godot/skills/godot-runtime/SKILL.md": "af4927c126c5b1f4516c2719b463459029567b8b194ceeca10622f7bfb8d0111",
+      "src/dcc_mcp_godot/skills/godot-runtime/tools.yaml": "f102ab157ffa430824975f9373385de2945b104ca99c757a9e80137a24a4efdd",
+      "tests/godot_project/debugger_session_project.godot": "ba73b97cbf12eeba7ce5d2e985454b818b9efb02e2120e4698ad41560f6fce5f",
+      "tests/godot_project/debugger_session_runner/README.md": "b09bdba9bb027b84020c2a68b881c5f848d56f3238879c27444903dcf41789f1",
+      "tests/godot_project/debugger_session_runner/plugin.cfg": "9857a996e035d1fd399b30659b301992d25bd5bcaf16626b83f5564a481fbe51",
+      "tests/godot_project/debugger_session_runner/plugin.gd": "c143a2eebf9d97d9886d749666a835763a18c286b97a19049dcea3d446d32ee8",
+      "tests/godot_project/debugger_session_smoke.gd": "e1b7798bd0869c5eab01a3d91aaeaed937b7608b594c46bdef00d417718c109e",
+      "tests/godot_project/typed_action_smoke.gd": "efd1d382a53c89e6f987e05e14b74108558096aeb988c1c1aab49f793b9e4af8",
+      "tests/live_godot_smoke.py": "427cd2b61acce765353b77f64441462232cb690b1a2371a621104cdd0d18499b",
+      "tests/test_bridge.py": "a1efd62e1205ddd6c0da70ede686fc625b8410e67dcf279b246738332e241013",
+      "tests/test_debugger_session_harness.py": "2cf798d6365a9cf56f78778d51f29561ca607463022c81eec5c0ac61aaec0f62",
+      "tests/test_live_godot_smoke_wait.py": "31d3f64f3c2c32033ccc2e4efde628f770bdc58323b00948d52b1cafee2e2224",
+      "tests/test_runtime_status_output_contract.py": "b7928a1a7c5c05cb0512acbaf2bd069b9e367ff2c4d3a909f53679c9c46a9d58",
+      "tools/generate_capability_skills.py": "e6805c26a5dfd6121f18f2df19e9437d6caba4958adf841f20c8fa2e89f7a327"
+    },
+    "production_payload_files": 124,
+    "production_src_git_tree": "02418467624d0b145653c1e14d0694529b9b220a",
+    "sdk_development_commit": "7ac6882c9b34899b27012ed6abd1418f9bcc2b6f",
+    "sdk_development_tree": "c41fdb4df670e69542cca36c5a929faa62d60e79",
+    "production_payload_equal_across_sdk_unit_source_wheel_and_install": true,
+    "wheel_filename": "dcc_mcp_godot-0.9.1-py3-none-any.whl",
+    "wheel_sha256": "9990d150cb82c39293b73b04e4dc3d9c2c767a75092ee7c46ad4b0bfcfb4551f",
+    "fresh_wheel_archive_equals_native_wheel": true,
+    "fresh_sdist_sha256": "f8ccacb7c111c3eac2d94f47ebd42db1f5a0e7aed7744ca86cc13b98e14196d9",
+    "full_source_git_archive_sha256": "3385fbb2bebf99038da8df1ccf275939fa0cea6ac97c93b17aa0b2f470633f4a",
+    "source_history_included": false
+  },
+  "native_run_sdk_source_commit": "7ac6882c9b34899b27012ed6abd1418f9bcc2b6f",
+  "native_run_runtime_packages": {
+    "dcc-mcp-core": "0.20.41",
+    "dcc-mcp-server": "0.20.41",
+    "dcc-mcp-cli": "0.20.41",
+    "mcp": "1.30.0",
+    "psutil": "7.2.2",
+    "httpx": "0.28.1",
+    "PyYAML": "6.0.3",
+    "jsonschema": "4.26.0",
+    "Pillow": "12.3.0",
+    "socksio": "1.0.0"
+  },
+  "gimp_adapter": {
+    "merge_commit": "943e2cd6855da6f4876032bc124556e3eac54bc9",
+    "version": "0.4.1",
+    "wheel_sha256": "adb43849349ca54944bd9280a8497d90bca77e6726733c3fca5991164fe1a1ad",
+    "documentation": "gimp-reproduction/REPRODUCE.md"
+  },
+  "availability": "Godot restart/PID repair is an unpublished development candidate. Version strings do not identify these exact software bytes. This packet does not claim current released capabilities or current package-registry availability.",
+  "native_apps_and_environments_included": false
+}
