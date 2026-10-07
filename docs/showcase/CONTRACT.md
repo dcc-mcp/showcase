@@ -154,10 +154,15 @@ traceable.
 ## Model and effort attribution
 
 Every selected case must include nonempty `model_attribution` and
-`revision_notes` arrays. Add `model_attribution` rows with `stage`, `model`,
+`revision_notes` arrays. Add `model_attribution` rows with `stage_id`, `stage`, `model`,
 `reasoning_effort`, `record_status`, `basis` and `scope`. Separate planning,
 creation, code, reference generation, post-production and independent review.
-Use `unknown` records with explicit unknown model and effort when production
+The stable IDs `planning`, `creation`, `code`, `reference` and `post_production`
+are required, plus at least one of `review`, `review_visual` or `review_technical`.
+Use both separate review rows when their scopes differ. Display labels remain
+independent of these IDs. IDs and display labels must be unique.
+Use `unknown` records with an exact unknown model and effort value (for example
+`Unknown` or `未知`, not a model name with an unknown qualifier) when production
 evidence is absent. `configured` requires an accepted task configuration
 record actually checked by the reviewer; a report's self-description or a
 later reviewer's configuration is insufficient. The validator checks structure,

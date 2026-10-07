@@ -99,9 +99,10 @@ def fixture_case() -> dict:
         "credits": {"author": "Artist", "license": "MIT", "note": "Public"},
         "source": {"url": "https://example.com/source", "commit": "a" * 40},
         "verified_at": "2026-10-01",
-        "model_attribution": [{"stage": "Original creation", "model": "Unknown",
+        "model_attribution": [{"stage_id": stage, "stage": stage, "model": "Unknown",
                                "reasoning_effort": "Unknown", "record_status": "unknown",
-                               "basis": "Historical configuration unrecorded", "scope": "Original artwork"}],
+                               "basis": "Historical configuration unrecorded", "scope": "Original artwork"}
+                              for stage in ("planning", "creation", "code", "reference", "post_production", "review")],
         "revision_notes": [{"version": "Imported baseline", "date": "2026-10-01",
                             "change": "No new DCC execution"}]
     }

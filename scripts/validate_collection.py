@@ -35,11 +35,14 @@ TEXT_EXT = {".md", ".json", ".txt", ".html", ".htm", ".css", ".js", ".py", ".ps1
             ".xml", ".csv", ".yaml", ".yml", ".svg", ".obj", ".mtl"}
 UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|"
                      r"未(?:公开|记录|知)|未知|无法核实", re.I)
+ATTRIBUTION_UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|未(?:公开|记录|知)|未知|无法核实", re.I)
+REQUIRED_STAGE_IDS = {"planning", "creation", "code", "reference", "post_production"}
+REVIEW_STAGE_IDS = {"review", "review_visual", "review_technical"}
 PRIVATE_PATTERNS = (
     ("private filesystem path", re.compile(r"\b[A-Z]:[\\/]|\\\\[\w.-]+[\\/]|"
                                           r"/(?:Users|home)/[^/\s]+|file:///", re.I)),
     ("private execution path", re.compile(
-        r"(?<![\w./-])/(?:workspace|tmp|root)(?=/|$|[\s\"'<>),;])", re.I)),
+        r"(?<![\w./-])/(?:workspace|tmp|root|var|private|mnt|media|run|opt|srv|etc|usr|Volumes)(?=/|$|[\s\"'<>),;])", re.I)),
     ("private host name", re.compile(r"\bHALLONG(?:-[A-Z0-9_-]+)?\b|"
                                     r"\b(?:localhost|[\w.-]+\.(?:local|internal|lan))\b", re.I)),
     ("credential token", re.compile(r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|"
@@ -340,10 +343,18 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
                     problems.append(f"{where}.prompt.note: must explicitly label the prompt kind")
         if "model_attribution" in case:
             attribution = object_rows(case, "model_attribution",
-                                      ("stage", "model", "reasoning_effort", "record_status", "basis", "scope"),
+                                      ("stage_id", "stage", "model", "reasoning_effort", "record_status", "basis", "scope"),
                                       where, problems)
             stages = set()
+            stage_ids = set()
             for row in attribution:
+                stage_id = row.get("stage_id")
+                if not isinstance(stage_id, str) or stage_id not in REQUIRED_STAGE_IDS | REVIEW_STAGE_IDS:
+                    problems.append(f"{where}.model_attribution: invalid stage_id")
+                elif stage_id in stage_ids:
+                    problems.append(f"{where}.model_attribution: duplicate stage_id")
+                else:
+                    stage_ids.add(stage_id)
                 stage = row.get("stage")
                 if isinstance(stage, str):
                     if stage in stages:
@@ -354,12 +365,14 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
                 # rather than accepting a free-text claim as result-bound proof.
                 if status not in ("unknown", "configured"):
                     problems.append(f"{where}.model_attribution: invalid record_status")
-                if status == "unknown" and any(not UNKNOWN.search(str(row.get(field, "")))
+                if status == "unknown" and any(not ATTRIBUTION_UNKNOWN.fullmatch(str(row.get(field, "")).strip())
                                                for field in ("model", "reasoning_effort")):
                     problems.append(f"{where}.model_attribution: unknown record requires unknown model and effort")
                 if status == "configured" and any(UNKNOWN.search(str(row.get(field, "")))
                                                                    for field in ("model", "reasoning_effort")):
                     problems.append(f"{where}.model_attribution: attributed record requires explicit model and effort")
+            if not REQUIRED_STAGE_IDS.issubset(stage_ids) or not (stage_ids & REVIEW_STAGE_IDS):
+                problems.append(f"{where}.model_attribution: missing required stage categories")
         if "revision_notes" in case:
             revision_notes = object_rows(case, "revision_notes", ("version", "date", "change"), where, problems)
             for row in revision_notes:

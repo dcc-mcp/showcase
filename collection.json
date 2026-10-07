@@ -259,7 +259,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "planning"
         },
         {
           "stage": "原始资产制作 / DCC 操作",
@@ -267,7 +268,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "creation"
         },
         {
           "stage": "工具与代码实现",
@@ -275,7 +277,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "code"
         },
         {
           "stage": "原始后期制作",
@@ -283,7 +286,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "post_production"
         },
         {
           "stage": "参考图生成 / 输入",
@@ -291,7 +295,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有公开流程未记录图像生成步骤；不从软件或画面推断图像模型。",
-          "scope": "参考输入与原生 DCC 成果分开记录。"
+          "scope": "参考输入与原生 DCC 成果分开记录。",
+          "stage_id": "reference"
         },
         {
           "stage": "独立视觉复核",
@@ -299,7 +304,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。"
+          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。",
+          "stage_id": "review_visual"
         },
         {
           "stage": "独立技术复核",
@@ -307,7 +313,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。"
+          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
+          "stage_id": "review_technical"
         }
       ],
       "revision_notes": [
@@ -584,7 +591,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "planning"
         },
         {
           "stage": "原始资产制作 / DCC 操作",
@@ -592,7 +600,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "creation"
         },
         {
           "stage": "工具与代码实现",
@@ -600,7 +609,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "code"
         },
         {
           "stage": "原始后期制作",
@@ -608,7 +618,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "post_production"
         },
         {
           "stage": "参考图生成 / 输入",
@@ -616,7 +627,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "源记录提到 Codex 图像生成参考，但未记录具体模型与强度；参考图不作为 DCC 成品。",
-          "scope": "参考输入与原生 DCC 成果分开记录。"
+          "scope": "参考输入与原生 DCC 成果分开记录。",
+          "stage_id": "reference"
         },
         {
           "stage": "独立视觉复核",
@@ -624,7 +636,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。"
+          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。",
+          "stage_id": "review_visual"
         },
         {
           "stage": "独立技术复核",
@@ -632,7 +645,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。"
+          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
+          "stage_id": "review_technical"
         }
       ],
       "revision_notes": [
@@ -891,7 +905,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "planning"
         },
         {
           "stage": "原始资产制作 / DCC 操作",
@@ -899,7 +914,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "creation"
         },
         {
           "stage": "工具与代码实现",
@@ -907,7 +923,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "code"
         },
         {
           "stage": "原始后期制作",
@@ -915,7 +932,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "post_production"
         },
         {
           "stage": "参考图生成 / 输入",
@@ -923,7 +941,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "源记录提到 Codex 图像生成参考，但未记录具体模型与强度；参考图不作为 DCC 成品。",
-          "scope": "参考输入与原生 DCC 成果分开记录。"
+          "scope": "参考输入与原生 DCC 成果分开记录。",
+          "stage_id": "reference"
         },
         {
           "stage": "独立视觉复核",
@@ -931,7 +950,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。"
+          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。",
+          "stage_id": "review_visual"
         },
         {
           "stage": "独立技术复核",
@@ -939,7 +959,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。"
+          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
+          "stage_id": "review_technical"
         }
       ],
       "revision_notes": [
@@ -1174,7 +1195,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "planning"
         },
         {
           "stage": "原始资产制作 / DCC 操作",
@@ -1182,7 +1204,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "creation"
         },
         {
           "stage": "工具与代码实现",
@@ -1190,7 +1213,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "code"
         },
         {
           "stage": "原始后期制作",
@@ -1198,7 +1222,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "post_production"
         },
         {
           "stage": "参考图生成 / 输入",
@@ -1206,7 +1231,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有公开流程未记录图像生成步骤；不从软件或画面推断图像模型。",
-          "scope": "参考输入与原生 DCC 成果分开记录。"
+          "scope": "参考输入与原生 DCC 成果分开记录。",
+          "stage_id": "reference"
         },
         {
           "stage": "独立视觉复核",
@@ -1214,7 +1240,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 实际查看已发布图像与影片采样，评估构图、材质和可读性；未重新渲染或修改作品。"
+          "scope": "2026-10-07 实际查看已发布图像与影片采样，评估构图、材质和可读性；未重新渲染或修改作品。",
+          "stage_id": "review_visual"
         },
         {
           "stage": "独立技术复核",
@@ -1222,7 +1249,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。"
+          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
+          "stage_id": "review_technical"
         }
       ],
       "revision_notes": [
@@ -1477,7 +1505,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "planning"
         },
         {
           "stage": "原始资产制作 / DCC 操作",
@@ -1485,7 +1514,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "creation"
         },
         {
           "stage": "工具与代码实现",
@@ -1493,7 +1523,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "code"
         },
         {
           "stage": "原始后期制作",
@@ -1501,7 +1532,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "post_production"
         },
         {
           "stage": "参考图生成 / 输入",
@@ -1509,7 +1541,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有公开流程未记录图像生成步骤；不从软件或画面推断图像模型。",
-          "scope": "参考输入与原生 DCC 成果分开记录。"
+          "scope": "参考输入与原生 DCC 成果分开记录。",
+          "stage_id": "reference"
         },
         {
           "stage": "独立视觉复核",
@@ -1517,7 +1550,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 实际查看已发布图像与影片采样，评估构图、材质和可读性；未重新渲染或修改作品。"
+          "scope": "2026-10-07 实际查看已发布图像与影片采样，评估构图、材质和可读性；未重新渲染或修改作品。",
+          "stage_id": "review_visual"
         },
         {
           "stage": "独立技术复核",
@@ -1525,7 +1559,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。"
+          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
+          "stage_id": "review_technical"
         }
       ],
       "revision_notes": [
@@ -1745,7 +1780,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "planning"
         },
         {
           "stage": "原始资产制作 / DCC 操作",
@@ -1753,7 +1789,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "creation"
         },
         {
           "stage": "工具与代码实现",
@@ -1761,7 +1798,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "code"
         },
         {
           "stage": "原始后期制作",
@@ -1769,7 +1807,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有制作记录未记载具体模型与推理强度；不以当前默认模型或本次审阅补填历史。",
-          "scope": "原始作品；保留已公开作者、软件版本与制作证据。"
+          "scope": "原始作品；保留已公开作者、软件版本与制作证据。",
+          "stage_id": "post_production"
         },
         {
           "stage": "参考图生成 / 输入",
@@ -1777,7 +1816,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "现有公开流程未记录图像生成步骤；不从软件或画面推断图像模型。",
-          "scope": "参考输入与原生 DCC 成果分开记录。"
+          "scope": "参考输入与原生 DCC 成果分开记录。",
+          "stage_id": "reference"
         },
         {
           "stage": "独立视觉复核",
@@ -1785,7 +1825,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。"
+          "scope": "2026-10-07 实际查看已发布图像，评估构图、材质和可读性；未重新渲染或修改作品。",
+          "stage_id": "review_visual"
         },
         {
           "stage": "独立技术复核",
@@ -1793,7 +1834,8 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
-          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。"
+          "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
+          "stage_id": "review_technical"
         }
       ],
       "revision_notes": [
