@@ -1,75 +1,27 @@
-# Methods, evidence scope and reproduction boundaries
+# Production and verification scope
 
-## Native production versus this site integration
+The current station-and-worlds edition follows GIMP → Godot → Kdenlive through recorded native MCP operations. It is distinct from the earlier icon prototype, whose complete methods and failures remain in historical-v1/METHODS.md and the historical ZIP.
 
-The native work was performed through GIMP and Godot DCC-MCP. The site
-integration copies the exact reviewed archive and original image bytes; it
-does not rerun native production. Hash and build checks establish file identity
-and publication structure, not new native acceptance. The measurements and
-source bindings are in validation.json and the downloadable evidence.
+## Artwork and game
 
-The public provenance link points to the merged GIMP adapter source. Godot has
-a separate public base and pinned, unpublished restart/PID development patch;
-its exact source instructions are bundled. That public GIMP link is not an
-assertion that the game or Godot patch already exists at that repository commit.
+Four original 768 × 768 GIMP masters contain the station and three destination worlds. The station retains 36 editable nodes; each world retains 11. Six 512 × 512 icon masters are reused from the earlier work. The four new XCFs were relocated, reopened in native GIMP and re-exported; saved bytes, layer structure and metadata, decoded RGBA/alpha and standard sRGB semantics were compared. This does not qualify cross-session unstored ICC byte equality or extend the new-world test to the six old icons.
 
-## Logical evidence and capability counts
+The Godot game uses relative resources, three destination worlds and two couriers. Recorded typed inputs and state readbacks reached eight on-time deliveries, ten stamps and all couriers returned. Separate control tests covered a wrong route, pause, Tab/Enter, native button signals, restart with a returning courier and visible receipt, and late return followed by successful re-stamping. A native button signal is not proof of an OS mouse-coordinate click. The later recovery PNG was not recovered for this publication; its acceptance-summary record is retained without inventing a replacement image.
 
-The Godot set contains every original logical JSONL row from authoring-run07,
-replay-run11, manual-group-a, manual-group-b and restored-native, including each
-cleanup stream. It preserves ordering, original call correlation when available,
-missing results and exceptions. Earlier development attempts are not included.
-Absolute machine paths and ephemeral identities are replaced with stable class
-tokens; the reverse map and raw wire data are not distributed. The archive's
-normalization policy describes the exact projection. One authoring status call
-has both a result and an exception, and two read-only close-time status calls
-have no returned result. These anomalies are retained, not filled or retried.
+A fresh 33-file copy launched the saved main scene through normal F5 without an addon, Core, SDK or listener. Its image was inspected, F8 stopped the game and the editor quit normally. All 33 source files stayed unchanged. The separate game OS exit code was not observed. This current standalone result does not rewrite the older MCP-assisted 48-file prototype qualification.
 
-GIMP is separate: its accepted art/reproduction archive contains selected
-normalized creative/verification operations and completed-job results. It does
-not publish the entire historical raw trail. Creative calls, native invocations,
-completed jobs, polling, logical rows and skill loads are different units.
-capability-coverage.json records their own counts. Loading a skill does not
-establish execution of its entire tool set. There is no asserted whole-adapter
-tool or skill coverage denominator.
+## Film
 
-## Manual interactions and replay
+Kdenlive assembled two seconds of station art/title, four seconds of actual gameplay and a one-second end card. The intended export is frames 0–209 inclusive: 210 frames at 30 fps, 1280 × 720. Outer project metadata has 211 frames; it does not redefine the seven-second video. An intentionally silent AAC track pads the container to 7.018 seconds.
 
-The full normal and late shifts were automated replay tests. Separate actual
-agent mouse/keyboard observations cover representative controls. The late-return
-image belongs to manual group B, whose sample-cap failure remains explicit;
-one successful reflight root state is not a complete accepted checkpoint or PNG.
-The cover comes from a restored-source normal delivery and shows a paused
-partial shift. Populated-state reset has state/button snapshots but no image.
+The retained native project contains five Dynamic Text effects, an editable station Transform and 117 relative media dependencies. Earlier native qualification recorded cold opening, seeking, playback/control checks, Save Copy and an exactly matching portable re-export. A relocated project played to the end card and quit normally with 119 native files unchanged. The earlier 120-frame gameplay pixel comparison was lossy-codec validation, not PNG byte equality.
 
-The exact archived/restored game files were cold-launched through an MCP-assisted
-Linux profile. The later wrapper added public documentation/evidence around
-those same game bytes. This is not a claim of a new wrapper-native run, portable
-application, listener-free play, Windows support or a human endorsement.
+## Current publication recovery
 
-## Reproduction
+The retained game/art and film packages were recovered by their recorded SHA-256 values. Current read-only checks inspect the native project structure and referenced media, fully decode the MP4 and verify intentionally silent audio. Sample frames 0, 105 and 209 and the full-shift screenshot were actually viewed. No new native GIMP, Godot or Kdenlive run is claimed during this publication.
 
-First verify the download's SHA-256 and run its file verifier after extraction.
-Use the README, AUTHORING-AND-REUSE.md and RUNTIME-PINS.json inside the archive
-before opening or editing. The native editor plugin and runtime autoload remain
-enabled; opening the editor initializes tooling and attempts its bridge
-connection. Import caches regenerate. No application/font binary, wheel or
-Python environment is bundled. The game script's gameplay has no bridge calls,
-but listener-free native launch has not been tested.
+Public visitors can verify the MP4 and images against manifest.json. Current editable game/art/film packages are retained privately and have no public download link. The public v1 ZIP is explicitly the historical icon prototype, not a source download for the shown station/worlds revision. Selected summaries are not a complete current MCP transport trace or complete adapter-coverage proof.
 
-The GIMP recipe supplies exact public source/build/runtime instructions and
-requires the qualified font. The original Godot supervisor is not distributed:
-the normalized scene-creation/script/signal/texture calls are reconstruction
-evidence, not a turnkey executable replay of that private controller. Changing
-source, assets or dependencies requires new validation. GIMP native shutdown
-warnings and its host exit after requested termination remain documented in
-the art package; the recipe wrapper's success does not erase them.
+## Failures and limits
 
-## Publication acceptance
-
-All selected source PNG pixels have been viewed. The normal site's existing
-template and build contracts are used unchanged. Premerge validation used
-static/template checks; public desktop/mobile browser and download verification
-remains pending after deployment. This includes filters/search, keyboard/back
-navigation and the downloaded archive hash. Local file existence is not public
-availability.
+Preserve Ember's original deadline failure despite later successful artifact checks, Kdenlive's initial instantaneous shutdown-gate failure despite later accepted cleanup, and standalone audio/V-Sync/Vulkan surface warnings. No Frei0r effect is used despite an optional startup warning. The historical prototype's Vulkan-log, 50 ms performance and late-group sample-cap failures remain unchanged in historical-v1/validation.json. No cross-platform, warning-free, hard-real-time, browser-playable-game or human-endorsement claim is made.

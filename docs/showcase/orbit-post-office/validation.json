@@ -1,168 +1,83 @@
 {
   "schema_version": 1,
   "case_id": "D058",
+  "revision": "station-worlds-first-delivery-film",
   "environment": [
     {
       "label": "GIMP",
-      "value": "3.0.4 · Linux x86_64 · DejaVu Sans Book · 512 × 512 RGBA/U8 sRGB、straight alpha"
+      "value": "3.0.4 · four new 768 × 768 layered worlds; six historical 512 × 512 icons"
     },
     {
       "label": "Godot",
-      "value": "4.6.3 · observed build 7d41c59c4 · Linux x86_64 · 原生画面 1280 × 720"
+      "value": "4.6.3 · observed build 7d41c59c4 · 1280 × 720 · Compatibility OpenGL"
     },
     {
-      "label": "GIMP 适配器",
-      "value": "0.4.1 · 已合并源码 943e2cd6855da6f4876032bc124556e3eac54bc9 · whole-wheel SHA-256 见 RUNTIME-PINS.json"
+      "label": "Kdenlive",
+      "value": "24.12.3 · MLT 7.30.0 · DejaVu Sans · 1280 × 720 / 30 fps"
     },
     {
-      "label": "Godot 适配器",
-      "value": "0.9.1 开发候选 · 公开基线 689ca4f725de7d9aa40d3298caeda27b018a0aa7 + 精确 restart/PID 补丁；不是发行能力声明"
+      "label": "Adapter / Core",
+      "value": "Core 0.20.41; GIMP adapter base 943e2cd6855da6f4876032bc124556e3eac54bc9; Godot adapter 72558dd6885ca0bc5e82648b0961e1f67d3c04a7; Kdenlive adapter version unknown"
     },
     {
-      "label": "Core / Server / CLI",
-      "value": "0.20.41 · MCP SDK 1.30.0；仅声明记录时测试版本，不推断当前最新版本"
-    },
-    {
-      "label": "原生验证条件",
-      "value": "MCP 辅助、两个 CPU 的子进程范围、DRI_PRIME=0；完整 pins 和依赖行为见下载包"
+      "label": "Qualification",
+      "value": "Recorded Linux native runs; current publication recovery is file/pixel verification, not a new native execution"
     }
   ],
-  "measurements": {
-    "gimp_roles": 8,
-    "paint_layers": 76,
-    "editable_text_layers": 2,
-    "substrate_layers": 8,
-    "art_dimensions_px": [
-      512,
-      512
-    ],
-    "preview_dimensions_px": [
-      128,
-      64
-    ],
-    "native_batches": 4,
-    "byte_equal_xcf_comparisons": 40,
-    "decoded_rgba_equal_png_comparisons": 88,
-    "godot_nodes": 29,
-    "signal_connections": 6,
-    "png_references": 8,
-    "game_source_files": 48,
-    "game_source_bytes": 910075,
-    "native_frame_count": 5,
-    "native_frame_dimensions_px": [
-      1280,
-      720
-    ],
-    "normal_replay": {
-      "delivered": 8,
-      "late": 0,
-      "attempts": 8,
-      "tick": 1920
-    },
-    "late_replay": {
-      "delivered": 8,
-      "late": 1,
-      "attempts": 9,
-      "tick": 2640
-    },
-    "cover_state": {
-      "delivered": 1,
-      "late": 0,
-      "attempts": 1,
-      "paused": true
-    },
-    "process_gate_ms": 50,
-    "abort_threshold_ms": 200,
-    "run11_process_misses": 103,
-    "restored_process_misses": 76,
-    "restored_max_process_gap_seconds": 0.12176790299417917,
-    "selected_godot_logical_rows": 5015,
-    "selected_godot_requests": 2482,
-    "selected_godot_results": 2480,
-    "selected_godot_exceptions": 3,
-    "gimp_selected_evidence_records": 783,
-    "gimp_creative_operations": 162,
-    "archive_members": 144,
-    "archive_recursive_objects_reviewed": 338
-  },
   "checks": [
     {
-      "name": "GIMP 分层原画与复现",
+      "name": "四个新世界的 GIMP 原生资格",
       "result": "pass",
-      "observed": "8 个角色、76 个绘画图层、2 个可编辑文字图层；4 批真实 MCP 复现，40 份 XCF 字节一致，88 份 PNG 解码 RGBA 一致。"
+      "observed": "记录中的四份 XCF 搬移、重开、重导通过；站点 36 节点，各目的地 11 节点。保存字节、图层/元数据与解码 RGBA/alpha、标准 sRGB 语义一致；不扩大到六个旧图标。"
     },
     {
-      "name": "Godot 原生结构与素材衔接",
+      "name": "独立完整班次验证",
       "result": "pass",
-      "observed": "29 个原生节点、6 个信号连接、8 个 PNG 引用；48 个游戏源文件共 910,075 字节，与已冷启动核验的归档恢复游戏逐字节一致。"
+      "observed": "真实原生状态与通关 PNG 记录 8 封信按时送达、10 枚邮票、零迟到、快递员全部返回；影片仅展示第一投递。"
     },
     {
-      "name": "完整班次自动回放",
+      "name": "控制与恢复",
       "result": "pass",
-      "observed": "正常回放：8 投递、0 迟到、8 次尝试、tick 1920；迟到回放：8 投递、1 迟到、9 次尝试、tick 2640。输入及账本匹配。"
+      "observed": "记录覆盖错误航线、暂停、Tab/Enter、原生按钮信号、有回执及返航快递员时重启、迟到后重新盖章；按钮信号不冒充 OS 坐标点击。"
     },
     {
-      "name": "代理键鼠与原生恢复",
+      "name": "独立启动的 33 文件游戏",
       "result": "pass",
-      "observed": "代表性鼠标/键盘操作验证错误航线、暂停无动作、Tab/Enter、Space、正常投递及已填充状态 R 重启。恢复运行的功能与清理通过；主图只显示 01/08 投递后的暂停状态。"
+      "observed": "记录中的干净副本通过正常 F5 启动已保存主场景，F8 停止并正常退出；未启动 addon/Core/SDK/listener，33 文件不变。游戏 OS exit code 未观察。"
     },
     {
-      "name": "严格原生日志",
+      "name": "七秒影片当前文件验证",
+      "result": "pass",
+      "observed": "258,093 字节；H.264 1280 × 720、30 fps、210 帧完整解码，视频 7 秒；AAC 解码绝对峰值为 0，容器 7.018 秒。已实看开头、中段与结尾。"
+    },
+    {
+      "name": "原生影片历史资格",
+      "result": "pass",
+      "observed": "记录中的 Kdenlive Save Copy 与重导字节一致；搬移工程播放到片尾后正常退出，119 文件不变。当前读取确认五个 Dynamic Text、117 个媒体依赖；本次没有重跑原生软件。"
+    },
+    {
+      "name": "保留旧原型失败",
       "result": "fail",
-      "observed": "已知 Vulkan 原生日志错误保留；run11 与恢复运行的总体结果仍为 FAIL。",
-      "expected": "No strict native log failures"
+      "observed": "历史 v1 的严格 Vulkan 日志、50 ms 性能和迟到重投组样本上限均保留 FAIL；详见 historical-v1/validation.json，不用新版功能通过覆盖。"
     },
     {
-      "name": "50 ms 进程观察性能门槛",
+      "name": "保留新制作中的原始失败",
       "result": "fail",
-      "observed": "run11 超限 103 次；恢复运行超限 76 次，最大间隔约 121.768 ms。200 ms 是独立中止阈值，不代表性能通过或硬实时保证。",
-      "expected": "All process observations within 50 ms"
-    },
-    {
-      "name": "迟到重投组完整观察",
-      "result": "fail",
-      "observed": "手动组 B 达到样本上限，整体及功能状态为 FAIL。迟到和一次重投成功有完整根状态读回；缺少重投成功后的完整检查点与 PNG。",
-      "expected": "Complete accepted-state checkpoint and native frame before the sample cap"
-    },
-    {
-      "name": "精确下载归档与逻辑记录",
-      "result": "pass",
-      "observed": "ZIP 为 3,214,346 字节、144 个成员；独立文件审核覆盖 338 个递归对象。5,015 行仅覆盖指定 Godot 运行及清理；GIMP 为另附选定证据。"
+      "observed": "Ember 初始整轮 deadline failure 和 Kdenlive 瞬时退出判定失败保留；后续图像资格、正常清理与交付结果分别记录。"
     }
   ],
-  "evidence_bindings": {
-    "native_archive": {
-      "path": "Orbit-Post-Office-D058-final-review-v1.zip",
-      "bytes": 3214346,
-      "sha256": "88a20e2986523ca2726cdb94ba65ccad3f45d17eacc86c308e733763ff8e792f"
-    },
-    "embedded_manifest_sha256": "a43956d687dc9016ef4396ef7cb88cb77fa9ce6156c4c5a7338cc6d83c7f4471",
-    "independent_final_archive_review_sha256": "95c9f5feb494a8381d58895b146f992094c43050d1d66c7d0a6c942c033bf9e8",
-    "within_archive": [
-      "evidence/FINAL-REVIEW.json",
-      "evidence/restored-native-audit-summary.json",
-      "evidence/run11-selected-summary.json",
-      "evidence/manual-group-a-audit-summary.json",
-      "evidence/manual-group-b-audit-summary.json",
-      "evidence/logical-mcp/INDEX.json",
-      "gimp-reproduction/qualification-continuity.json"
-    ]
-  },
-  "integration_review": {
-    "native_runs_during_site_integration": false,
-    "web_images": "Exact copied PNG bytes; no crop, redraw, resize or metadata rewrite",
-    "all_seven_selected_pngs_actually_viewed": true,
-    "browser_acceptance": "Premerge validation used static/template checks; public desktop/mobile browser and download verification remains pending after deployment.",
-    "human_endorsement_claimed": false
-  },
+  "historical_validation": "historical-v1/validation.json",
+  "native_rerun_during_publication": false,
+  "current_file_verification": "film-validation.json",
+  "source_evidence": "selected-native-evidence.json",
+  "public_native_source_download": false,
   "not_claimed": [
-    "原生资格限于 Linux GIMP 3.0.4 / Godot 4.6.3 与精确固定的 MCP 开发环境；Windows、跨机器执行和无监听器手动启动未测试。",
-    "Godot 0.9.1 使用未发布的 restart/PID 开发补丁；包内保留精确公开基线、补丁与哈希，不声称官方发行版已有该能力。安装的 Godot 二进制与官方源码标签等价性未核实。",
-    "严格 Vulkan 日志 FAIL、50 ms 性能 FAIL 和组 B 样本上限 FAIL 全部保留；通过的功能和清理检查不覆盖这些失败。",
-    "键鼠验收由代理完成，只覆盖代表性交互；完整八封信班次由自动回放验证，不声称人类完整通关或用户背书。",
-    "5,015 行是指定 Godot authoring run07、replay run11、manual A/B、restored-native 及清理的完整归一化逻辑流；不含所有早期失败尝试，也不含全部历史 GIMP 原始轨迹；不是原始传输抓包。",
-    "没有影片、网页可玩导出或应用程序二进制。原生游戏冷启动证明绑定相同的 48 个文件，不声称最终证据包装 ZIP 本身再次原生打开。",
-    "GIMP 选择蒙版字节的独立资格、跨软件色彩完全一致和跨机器像素一致均未建立。字体、软件、wheel 和运行环境须单独准备；原 Godot 私有监督器不分发。",
-    "合并前验证采用静态模板与文件检查；公开页面的桌面/移动浏览器验收及下载核验仍待部署后完成。"
+    "当前游戏、XCF 原画和 Kdenlive 工程无公开下载；公开 ZIP 仅为历史图标原型，不是画面中新版工程。",
+    "原始制作模型名和推理强度没有可核配置记录，保留未知；当前审阅配置不能追认历史制作。",
+    "影片只有第一投递，完整 8 封信通关有独立原生证据；不声称影片展示完整班次。",
+    "保留音频回退、V-Sync 与 Vulkan surface 警告，以及历史日志/性能/样本上限失败；无警告、跨平台和硬实时未验证。",
+    "原生按钮信号不是 OS 鼠标坐标证据；游戏 OS exit code 未观察。后来迟到恢复 PNG 未恢复，不以旧版图片冒充。",
+    "选定证据不是完整当前 MCP 传输轨迹，也不代表整个适配器或全部技能覆盖。当前发布未重新执行原生 DCC。",
+    "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。"
   ]
 }

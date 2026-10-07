@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "Orbit-Post-Office-D058-final-review-v1.zip",
+      "bytes": 3214346,
+      "sha256": "88a20e2986523ca2726cdb94ba65ccad3f45d17eacc86c308e733763ff8e792f",
+      "members": 144,
+      "purpose": "Native editable Godot game, layered GIMP sources, reproduction instructions, normalized selected-run evidence and scoped notices",
+      "rights": "Original artwork, game content and recipe rights reserved; identified upstream notices retain their scope"
+    }
+  ],
+  "publication": "Repository-relative resource; a local build does not establish public availability",
+  "native_open_scope": "The exact 48 game files equal the archived/restored game used for MCP-assisted cold-native verification; the later evidence-only wrapper was not separately opened natively",
+  "uncompressed_game_bytes": 910075
+}

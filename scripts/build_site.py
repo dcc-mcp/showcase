@@ -399,10 +399,31 @@ def engineering_section(case: dict, root: str, prefix: str) -> tuple[str, list[d
             '<p>选择工程、复现包或导出资源。使用前请查看本案例的软件版本、依赖、格式边界与许可。</p>'
             '<ul class="engineering-files">%s</ul></section>' % "".join(rows)), remaining
 
+def model_attribution_section(case: dict) -> str:
+    """Render role-scoped model configuration without rewriting making history."""
+    models = case.get("model_attribution", [])
+    revisions = case.get("revision_notes", [])
+    if not models and not revisions:
+        return ""
+    rows = "".join(
+        '<div><dt>%s</dt><dd><strong>%s</strong> · 推理强度：<strong>%s</strong>'
+        '<p class="prompt-note">%s<br>%s</p></dd></div>' %
+        (esc(row["stage"]), esc(row["model"]), esc(row["reasoning_effort"]),
+         esc(row["basis"]), esc(row["scope"])) for row in models)
+    history = "".join('<li><strong>%s</strong> · <time datetime="%s">%s</time><p>%s</p></li>' %
+                      (esc(row["version"]), esc(row["date"]), esc(row["date"]), esc(row["change"]))
+                      for row in revisions)
+    return ('<section class="detail-section" id="models"><h2>模型与版本</h2>'
+            '<p>制作、后期与审阅分别归属。未知表示没有足够记录，不代表由当前模型制作。</p>'
+            '<dl class="environment">%s</dl><h3>版本记录</h3><ul>%s</ul></section>' % (rows, history))
+
 def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
     prefix = "../../"
     nav_sections = [("goal", "创作目标"), ("prompt", "提示词"), ("environment", "软件与工具"),
                     ("process", "分步过程"), ("results", "成果"), ("evidence", "验证与边界"), ("downloads", "工程文件"), ("resources", "资源与许可")]
+    models = model_attribution_section(case)
+    if models:
+        nav_sections.insert(1, ("models", "模型与版本"))
     downloads, general_resources = engineering_section(case, root, prefix)
     if not downloads:
         nav_sections = [item for item in nav_sections if item[0] != "downloads"]
@@ -442,6 +463,7 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
 <aside class="evidence-note" aria-label="证据范围"><strong>%s</strong><p>%s</p></aside>
 <div class="detail-layout"><nav class="detail-nav" aria-label="案例目录">%s</nav><div class="detail-content">
 <section class="detail-section" id="goal"><h2>创作目标</h2><p>%s</p><p>%s</p></section>
+%s
 <section class="detail-section" id="prompt"><h2>提示词</h2><div class="prompt-label"><strong>%s</strong><button class="copy-button" id="copy-prompt" type="button" hidden>复制提示词</button></div><pre class="prompt" id="reusable-prompt">%s</pre><div class="copy-status" id="copy-status" role="status" aria-live="polite"></div><p class="prompt-note">%s</p></section>
 <section class="detail-section" id="environment"><h2>软件与工具</h2><dl class="environment">%s</dl><ul class="tool-list">%s</ul><h3 class="related-heading">适配器与相关项目</h3><p class="prompt-note">安装、兼容性和当前工具能力以项目文档为准；案例的实际环境与执行证据见上述记录。</p><ul class="related-projects">%s</ul></section>
 <section class="detail-section" id="process"><h2>分步过程</h2><ol class="process-list">%s</ol></section>
@@ -454,7 +476,7 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
 """ % (head, metadata, title, esc(case["subtitle"]),
        media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]),
        esc(case["evidence_label"]), esc(case["evidence_scope"]), nav, esc(case["goal"]), esc(case["summary"]),
-       prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools, related_projects(case),
+       models, prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools, related_projects(case),
        "".join(steps), "".join(figure(item, root, prefix) for item in case["results"]), "".join(checks),
        limitations, esc(case["verified_at"]), downloads, resources, esc(resource_url(case["source"]["url"])),
        esc(case["source"]["commit"]), esc(case["credits"]["author"]), esc(case["credits"]["license"]),
