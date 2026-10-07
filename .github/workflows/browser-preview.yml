@@ -23,7 +23,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install locked browser driver
-        run: python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
       - name: Install official Chromium and system dependencies
         run: python -m playwright install --with-deps chromium
       - name: Build exact candidate
