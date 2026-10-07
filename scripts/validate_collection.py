@@ -26,7 +26,7 @@ CASE_FIELDS = (
     "slug", "title", "subtitle", "software", "capabilities", "cover",
     "evidence_label", "evidence_scope", "summary", "goal", "prompt",
     "environment", "tools", "steps", "results", "checks", "limitations",
-    "resources", "credits", "source", "verified_at",
+    "resources", "credits", "source", "verified_at", "model_attribution", "revision_notes",
 )
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 SHA = re.compile(r"[0-9a-fA-F]{40}\Z")
@@ -38,6 +38,8 @@ UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|"
 PRIVATE_PATTERNS = (
     ("private filesystem path", re.compile(r"\b[A-Z]:[\\/]|\\\\[\w.-]+[\\/]|"
                                           r"/(?:Users|home)/[^/\s]+|file:///", re.I)),
+    ("private execution path", re.compile(
+        r"(?<![\w./-])/(?:workspace|tmp|root)(?=/|$|[\s\"'<>),;])", re.I)),
     ("private host name", re.compile(r"\bHALLONG(?:-[A-Z0-9_-]+)?\b|"
                                     r"\b(?:localhost|[\w.-]+\.(?:local|internal|lan))\b", re.I)),
     ("credential token", re.compile(r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|"
@@ -336,6 +338,35 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
                 label = r"原始|原话|original|verbatim" if kind == "original" else r"复用|复现|改写|reusable|adapted"
                 if not re.search(label, prompt["note"], re.I):
                     problems.append(f"{where}.prompt.note: must explicitly label the prompt kind")
+        if "model_attribution" in case:
+            attribution = object_rows(case, "model_attribution",
+                                      ("stage", "model", "reasoning_effort", "record_status", "basis", "scope"),
+                                      where, problems)
+            stages = set()
+            for row in attribution:
+                stage = row.get("stage")
+                if isinstance(stage, str):
+                    if stage in stages:
+                        problems.append(f"{where}.model_attribution: duplicate stage")
+                    stages.add(stage)
+                status = row.get("record_status")
+                # No receipt binding format is implemented. Reject the status
+                # rather than accepting a free-text claim as result-bound proof.
+                if status not in ("unknown", "configured"):
+                    problems.append(f"{where}.model_attribution: invalid record_status")
+                if status == "unknown" and any(not UNKNOWN.search(str(row.get(field, "")))
+                                               for field in ("model", "reasoning_effort")):
+                    problems.append(f"{where}.model_attribution: unknown record requires unknown model and effort")
+                if status == "configured" and any(UNKNOWN.search(str(row.get(field, "")))
+                                                                   for field in ("model", "reasoning_effort")):
+                    problems.append(f"{where}.model_attribution: attributed record requires explicit model and effort")
+        if "revision_notes" in case:
+            revision_notes = object_rows(case, "revision_notes", ("version", "date", "change"), where, problems)
+            for row in revision_notes:
+                try:
+                    date.fromisoformat(row.get("date", ""))
+                except (ValueError, TypeError):
+                    problems.append(f"{where}.revision_notes: invalid date")
         environment = object_rows(case, "environment", ("label", "value"), where, problems)
         for software in case.get("software", []) if isinstance(case.get("software"), list) else []:
             if not isinstance(software, str):

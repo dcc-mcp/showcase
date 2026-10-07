@@ -150,3 +150,23 @@ exactly the artifacts on disk with matching sha256 and byte counts, that
 exceeds the size spec. Exit code 0 means the entry is structurally complete.
 It does not mean the numbers are right — only that they are present and
 traceable.
+
+## Model and effort attribution
+
+Every selected case must include nonempty `model_attribution` and
+`revision_notes` arrays. Add `model_attribution` rows with `stage`, `model`,
+`reasoning_effort`, `record_status`, `basis` and `scope`. Separate planning,
+creation, code, reference generation, post-production and independent review.
+Use `unknown` records with explicit unknown model and effort when production
+evidence is absent. `configured` requires an accepted task configuration
+record actually checked by the reviewer; a report's self-description or a
+later reviewer's configuration is insufficient. The validator checks structure,
+not the factual authenticity of that record. `receipt_bound` is not supported
+and must fail validation until a receipt-reference and result-binding contract
+is implemented. Do not infer historical creation from a current review or
+publish private prompts, task IDs, or execution paths such as absolute workspace,
+temporary-directory, or home-directory paths.
+
+Add dated `revision_notes` (`version`, ISO `date`, `change`) for documentation,
+review or asset updates. Keep old native files and evidence. A documentation
+revision or a new visual version retains the same case slug and case count.

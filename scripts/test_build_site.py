@@ -98,7 +98,12 @@ def fixture_case() -> dict:
             {"label": "Report", "url": "docs/showcase/sample-case/README.md"}],
         "credits": {"author": "Artist", "license": "MIT", "note": "Public"},
         "source": {"url": "https://example.com/source", "commit": "a" * 40},
-        "verified_at": "2026-10-01"
+        "verified_at": "2026-10-01",
+        "model_attribution": [{"stage": "Original creation", "model": "Unknown",
+                               "reasoning_effort": "Unknown", "record_status": "unknown",
+                               "basis": "Historical configuration unrecorded", "scope": "Original artwork"}],
+        "revision_notes": [{"version": "Imported baseline", "date": "2026-10-01",
+                            "change": "No new DCC execution"}]
     }
 
 
@@ -221,6 +226,20 @@ def integration_guards() -> None:
             check("missing selected artifact stops publishing",
                   any("missing" in item for item in problems), True)
 
+def model_attribution_guards() -> None:
+    check("legacy case has no invented model", build_site.model_attribution_section({}), "")
+    section = build_site.model_attribution_section({
+        "model_attribution": [{"stage": "Creation <unsafe>", "model": "Unknown", "reasoning_effort": "Unknown",
+                               "basis": "No receipt", "scope": "Original artwork"},
+                              {"stage": "Review", "model": "GPT-6 Astra", "reasoning_effort": "ultra",
+                               "basis": "Task configuration", "scope": "Actual published pixels"}],
+        "revision_notes": [{"version": "Documentation", "date": "2026-10-07", "change": "No artwork changes <script>"}]})
+    check("model role escaped", "Creation &lt;unsafe&gt;" in section, True)
+    check("revision escaped", "&lt;script&gt;" in section, True)
+    check("model and effort visible", "GPT-6 Astra</strong> · 推理强度：<strong>ultra" in section, True)
+    check("revision date accessible", '<time datetime="2026-10-07">' in section, True)
+    check("separate known and unknown roles", section.count("<dt>"), 2)
+
 def main(argv: list[str]) -> int:
     page = "docs/showcase/entry/README.md"
     text = ('![a](../other/pic.png) ![b](/root.png) ![c](#anchor)\n'
@@ -259,6 +278,7 @@ def main(argv: list[str]) -> int:
               build_site.check_media("cal_asset.obj", payload), [])
 
     integration_guards()
+    model_attribution_guards()
 
     if FAILURES:
         print("\n%d failing case(s): %s" % (len(FAILURES), ", ".join(FAILURES)))
