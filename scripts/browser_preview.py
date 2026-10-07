@@ -34,7 +34,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     collection = json.loads(Path("collection.json").read_text(encoding="utf-8"))
     cases = collection["cases"]
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
-              "playwright": version("playwright"), "status": "running", "pages": []}
+              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -73,7 +73,28 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
                         if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
                             raise AssertionError("Homepage horizontal overflow")
+                        active_context["stage"] = "gallery_images"
+                        covers = page.locator(".case-card img")
+                        expect(covers).to_have_count(len(cases))
+                        loaded_images = []
+                        for index in range(len(cases)):
+                            cover = covers.nth(index)
+                            cover.scroll_into_view_if_needed()
+                            expect(cover).to_have_js_property("complete", True)
+                            dimensions = cover.evaluate("image => ({width: image.naturalWidth, height: image.naturalHeight})")
+                            if dimensions["width"] <= 0 or dimensions["height"] <= 0:
+                                raise AssertionError("Cover image did not load")
+                            cover.evaluate("image => image.decode()")
+                            loaded_images.append({"src": cover.get_attribute("src"), "loaded": True,
+                                                  "naturalWidth": dimensions["width"],
+                                                  "naturalHeight": dimensions["height"]})
+                        page.locator("h1").click()
+                        page.keyboard.press("Control+Home")
+                        page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
                         page.screenshot(path=str(output / (layout + "-gallery.png")), full_page=True)
+                        report["galleries"].append({"layout": layout, "covers": loaded_images,
+                            "screenshot": layout + "-gallery.png",
+                            "focused_element": page.evaluate("document.activeElement.tagName")})
                         for case in cases:
                             active_context = {"stage": "models_navigation", "layout": layout,
                                               "case_slug": case["slug"]}
