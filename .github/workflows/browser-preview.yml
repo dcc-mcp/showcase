@@ -1,0 +1,42 @@
+name: Browser preview
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    name: Public pages browser smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out exact candidate
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Install locked browser driver
+        run: python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
+      - name: Install official Chromium and system dependencies
+        run: python -m playwright install --with-deps chromium
+      - name: Build exact candidate
+        run: python scripts/build_site.py
+      - name: Verify desktop and mobile public pages
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/browser_preview.py --site _site --output "${{ runner.temp }}/showcase-browser-preview" --expected-head "$EXPECTED_HEAD_SHA"
+      - name: Keep public screenshots and result
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: public-browser-preview-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/showcase-browser-preview
+          if-no-files-found: error
+          retention-days: 7

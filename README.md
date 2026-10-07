@@ -187,3 +187,18 @@ required.
 Site code is [MIT](LICENSE). Each case records its source license and any
 separate reference-input limitations; the site license does not relicense
 third-party inputs.
+
+## Browser acceptance in CI
+
+The Browser preview workflow builds the exact pull-request head on a
+GitHub-hosted Ubuntu runner. It uses hash-locked Python3.12 Linux dependencies
+and the official Playwright Chromium revision. Its token is read-only and
+checkout does not retain credentials. Browser page requests stay within the
+locally served public build; no private project files or user sessions enter
+the screenshots.
+
+The smoke test checks gallery search/reset, every case's model/effort rows, the
+`#models` navigation link, and horizontal overflow at desktop and mobile sizes.
+A seven-day artifact contains the actual screenshots and head/tree/browser
+identity report. Screenshots still require human visual inspection before a
+release; a green check is not artistic approval. This workflow does not deploy.
