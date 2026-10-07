@@ -12,14 +12,21 @@ case's software adapter linked from the site. The official site's broader
 [examples](https://dcc-mcp.github.io/examples) remain distinct from the
 collection's downloadable, individually documented case records.
 
-The collection combines a procedural Houdini studio study produced in this
-round through DCC-MCP with two published Substance 3D Designer studies: a
-weathered crate with Blender lookdev, and a procedural painted-wood material.
-Each detail page distinguishes actual execution from historical evidence.
-The historical studies were not reproduced in this round; their original
-conversation prompts and complete MCP traces were not published, so their
-prompts are clearly labeled adaptations for future reproduction.
+The collection currently contains six individually documented cases: a Houdini
+vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
+Relay and Seismic Lens. Each page separates original production from later
+visual/technical review. Historical exact models and reasoning effort remain
+unknown where production records did not capture them; a later review
+does not establish the attribution of earlier artwork. The existing review
+reports name a model themselves, but their accepted configuration receipts have
+not been verified, so those review model and effort fields also remain unknown.
 
+Model attribution is recorded by stage in `collection.json`, with both model
+name and reasoning effort, evidence basis and scope. Version notes distinguish
+documentation/review updates from changed artwork. The 2026-10-07 attribution
+update preserves all existing media and native project bytes and does not add
+cases. A task configuration record is not an independent backend model identity
+attestation.
 The Houdini study records actual modeling, materials, lighting, rendering,
 saved-project reopening and OBJ export/reimport. Its public records explain
 trace coverage and the observed Mantra resolution issue. The native HIP is
@@ -69,7 +76,7 @@ not substitute for browser acceptance.
 ## Brand gallery
 
 The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
-selects resources without changing the three-case collection. The first core
+selects resources without changing the six-case collection. The first core
 release contains eight verified files. Incremental batches add Maya,
 3ds Max, Blender, Houdini, ZBrush, Photoshop, MotionBuilder, Nuke and OpenUSD
 families with 16 files each, plus three actual core currentColor SVGs:
@@ -180,3 +187,18 @@ required.
 Site code is [MIT](LICENSE). Each case records its source license and any
 separate reference-input limitations; the site license does not relicense
 third-party inputs.
+
+## Browser acceptance in CI
+
+The Browser preview workflow builds the exact pull-request head on a
+GitHub-hosted Ubuntu runner. It uses hash-locked Python3.12 Linux dependencies
+and the official Playwright Chromium revision. Its token is read-only and
+checkout does not retain credentials. Browser page requests stay within the
+locally served public build; no private project files or user sessions enter
+the screenshots.
+
+The smoke test checks gallery search/reset, every case's model/effort rows, the
+`#models` navigation link, and horizontal overflow at desktop and mobile sizes.
+A seven-day artifact contains the actual screenshots and head/tree/browser
+identity report. Screenshots still require human visual inspection before a
+release; a green check is not artistic approval. This workflow does not deploy.

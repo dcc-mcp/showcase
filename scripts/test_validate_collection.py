@@ -56,6 +56,9 @@ class CollectionContractTests(unittest.TestCase):
             "credits": {"author": "Public author", "license": "MIT", "note": "Attribution retained."},
             "source": {"url": "https://example.org/commit/" + "a" * 40, "commit": "a" * 40},
             "verified_at": "2026-10-01",
+            "model_attribution": self.complete_attribution(),
+            "revision_notes": [{"version": "Imported historical baseline", "date": "2026-10-01",
+                                "change": "Historical artifact; making model unrecorded"}],
         }
 
     @staticmethod
@@ -66,6 +69,141 @@ class CollectionContractTests(unittest.TestCase):
         path = self.root / "collection.json"
         self.write_json(path, {"schema_version": 1, "cases": cases or [self.case]})
         return validate_collection.validate(path)
+
+    def attribution(self):
+        return {"stage_id": "creation", "stage": "Creation", "model": "Unknown", "reasoning_effort": "Unknown",
+                "record_status": "unknown", "basis": "Historical model unrecorded",
+                "scope": "Original artwork, not current review"}
+
+    def complete_attribution(self, creation=None):
+        rows = [dict(self.attribution(), stage_id=stage, stage=stage)
+                for stage in ("planning", "creation", "code", "reference", "post_production", "review")]
+        if creation is not None:
+            rows[1] = creation
+        return rows
+
+    def test_incomplete_stage_categories_fail_closed(self):
+        self.case["model_attribution"] = [self.attribution()]
+        self.assertTrue(any("missing required stage categories" in p for p in self.problems()))
+        for stage in ("planning", "creation", "code", "reference", "post_production", "review"):
+            with self.subTest(stage=stage):
+                self.case["model_attribution"] = [r for r in self.complete_attribution() if r["stage_id"] != stage]
+                self.assertTrue(any("missing required stage categories" in p for p in self.problems()))
+
+    def test_invalid_and_duplicate_stage_ids_rejected(self):
+        for bad in ("creation", "unrecognized", ["creation"]):
+            with self.subTest(stage_id=bad):
+                self.case["model_attribution"] = self.complete_attribution()
+                self.case["model_attribution"][0]["stage_id"] = bad
+                self.assertTrue(any("stage_id" in p for p in self.problems()))
+
+    def test_split_visual_and_technical_review_allowed(self):
+        rows = self.complete_attribution()[:-1]
+        rows += [dict(self.attribution(), stage_id=s, stage=s) for s in ("review_visual", "review_technical")]
+        self.case["model_attribution"] = rows
+        self.assertEqual(self.problems(), [])
+
+    def test_unknown_cannot_contain_a_model_or_effort_claim(self):
+        for field, value in (("model", "GPT-6 Astra (configuration unknown)"),
+                             ("reasoning_effort", "ultra (unknown record)")):
+            with self.subTest(field=field):
+                self.case["model_attribution"] = self.complete_attribution(dict(self.attribution(), **{field: value}))
+                self.assertTrue(any("unknown record" in p for p in self.problems()))
+
+    def test_additional_execution_roots_rejected_without_echo(self):
+        for path in ("/var/tmp/private-task.json", "/private/tmp/task.json", "/mnt/data/task.json",
+                     "/run/user/task.json", "/opt/project/task.json", "/srv/project/task.json"):
+            for prefix in ("Saved ", "path:"):
+                with self.subTest(path=path, prefix=prefix):
+                    self.case["model_attribution"] = self.complete_attribution(dict(self.attribution(), basis=prefix+path))
+                    problems = self.problems()
+                    self.assertTrue(any("private execution path" in p for p in problems))
+                    self.assertNotIn(path, "\n".join(problems))
+
+    def test_missing_model_attribution_fails_closed(self):
+        del self.case["model_attribution"]
+        self.assertTrue(any("missing required field model_attribution" in p for p in self.problems()))
+
+    def test_missing_revision_notes_fails_closed(self):
+        del self.case["revision_notes"]
+        self.assertTrue(any("missing required field revision_notes" in p for p in self.problems()))
+
+    def test_empty_required_attribution_and_revisions_are_rejected(self):
+        for field in ("model_attribution", "revision_notes"):
+            with self.subTest(field=field):
+                previous = self.case[field]
+                self.case[field] = []
+                self.assertTrue(any(field + ": must be a nonempty array" in p for p in self.problems()))
+                self.case[field] = previous
+
+    def test_receipt_bound_without_receipt_is_not_supported(self):
+        self.case["model_attribution"] = [dict(self.attribution(), model="gpt-6-astra",
+            reasoning_effort="ultra", record_status="receipt_bound", basis="Some receipt")]
+        self.assertTrue(any("invalid record_status" in p for p in self.problems()))
+
+    def test_receipt_bound_cannot_pass_with_unchecked_receipt_text(self):
+        self.case["model_attribution"] = [dict(self.attribution(), model="gpt-6-astra",
+            reasoning_effort="ultra", record_status="receipt_bound", receipt="pretend proof")]
+        self.assertTrue(any("invalid record_status" in p for p in self.problems()))
+
+    def test_execution_paths_in_attribution_are_rejected_without_echo(self):
+        for path in ("/workspace/shared/private-project/task.json", "/tmp/private-task.json",
+                     "/root/private-task.json"):
+            for field in ("basis", "scope"):
+                with self.subTest(path=path, field=field):
+                    self.case["model_attribution"] = [dict(self.attribution(), **{field: "Saved " + path})]
+                    problems = self.problems()
+                    self.assertTrue(any("private execution path" in p for p in problems))
+                    self.assertNotIn(path, "\n".join(problems))
+
+    def test_relative_and_public_paths_are_not_execution_paths(self):
+        for text in ("docs/showcase/workspace/public-config.json", "docs/showcase/tmp/public-config.json",
+                     "docs/showcase/root/public-config.json", "https://example.org/tmp/public-config.json", "https://example.org/var/tmp/public.json",
+                     "docs/showcase/opt/public.json"):
+            with self.subTest(text=text):
+                self.case["model_attribution"] = self.complete_attribution(dict(self.attribution(), basis=text))
+                self.assertEqual(self.problems(), [])
+
+    def test_execution_paths_after_colon_are_rejected_without_echo(self):
+        for path in ("/workspace/shared/private-task.json", "/tmp/private.json", "/root/private.json"):
+            with self.subTest(path=path):
+                self.case["model_attribution"] = [dict(self.attribution(), basis="path:" + path)]
+                problems = self.problems()
+                self.assertTrue(any("private execution path" in p for p in problems))
+                self.assertNotIn(path, "\n".join(problems))
+
+    def test_model_unknown_and_current_config_stay_separate(self):
+        review = dict(self.attribution(), stage_id="review", stage="Independent review", model="GPT-6 Astra",
+                      reasoning_effort="ultra", record_status="configured",
+                      basis="Accepted task configuration, not backend attestation")
+        self.case["model_attribution"] = self.complete_attribution()[:-1] + [review]
+        self.case["revision_notes"] = [{"version": "Documentation 2026-10-07", "date": "2026-10-07",
+                                        "change": "Attribution only; artwork bytes unchanged"}]
+        self.assertEqual(self.problems(), [])
+
+    def test_unknown_attribution_cannot_claim_known_model(self):
+        self.case["model_attribution"] = [dict(self.attribution(), model="GPT-6 Astra")]
+        self.assertTrue(any("unknown record" in p for p in self.problems()))
+
+    def test_configured_attribution_requires_effort(self):
+        self.case["model_attribution"] = [dict(self.attribution(), model="GPT-6 Astra", record_status="configured")]
+        self.assertTrue(any("explicit model and effort" in p for p in self.problems()))
+
+    def test_duplicate_model_stage_is_rejected(self):
+        self.case["model_attribution"] = [self.attribution(), self.attribution()]
+        self.assertTrue(any("duplicate stage" in p for p in self.problems()))
+
+    def test_invalid_attribution_status_is_rejected(self):
+        self.case["model_attribution"] = [dict(self.attribution(), record_status="guessed")]
+        self.assertTrue(any("invalid record_status" in p for p in self.problems()))
+
+    def test_invalid_revision_date_is_rejected(self):
+        self.case["revision_notes"] = [{"version": "v1", "date": "2026-02-30", "change": "Review only"}]
+        self.assertTrue(any("invalid date" in p for p in self.problems()))
+
+    def test_model_basis_is_privacy_scanned(self):
+        self.case["model_attribution"] = [dict(self.attribution(), basis="Private path /home/example/private.json")]
+        self.assertTrue(any("private filesystem path" in p for p in self.problems()))
 
     def test_valid_historical_case_preserves_unknown_boundaries(self):
         self.assertEqual(self.problems(), [])
