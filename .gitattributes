@@ -1,3 +1,13 @@
 # Keep producer artwork, evidence and pinned manifest bytes identical on every OS.
 # Original producer records include CRLF; it is intentional byte provenance.
 docs/brands/brand-family-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Showcase artifacts are large binaries; store them in Git LFS so the git
+# history stays small. Only the rendered media types below are tracked this
+# way -- text such as README.md, coverage.md and LICENSE stays a normal blob.
+media/**/*.png filter=lfs diff=lfs merge=lfs -text
+media/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+media/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+media/**/*.gif filter=lfs diff=lfs merge=lfs -text
+media/**/*.exr filter=lfs diff=lfs merge=lfs -text
+media/**/*.mp4 filter=lfs diff=lfs merge=lfs -text

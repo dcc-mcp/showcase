@@ -2,12 +2,14 @@
 # Patterns are anchored with a leading "/" so they only match at the repository
 # root. Unanchored patterns match at any depth and would silently ignore
 # published artifacts such as media/<date>-<slug>/frame_0001.png.
+# "*.swp" is the deliberate exception: editor swap files are scratch at any
+# depth and never a published artifact, so it stays unanchored.
 /frame_*.png
 /*.exr
 /*.blend1
 /*.blend2
 /*.png.tmp
-/*.swp
+*.swp
 .DS_Store
 Thumbs.db
 

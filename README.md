@@ -141,6 +141,11 @@ private paths, internal addresses and unrelated content before selecting a
 case. New DCC work must use DCC-MCP; do not present direct host scripts or
 external software automation as an MCP run.
 
+Submitted media is stored through Git LFS, so contributors need `git-lfs`
+installed and initialized (`git lfs install`) before adding artifacts under
+`media/`. Without it, media files are committed as plain blobs and grow the
+git history permanently.
+
 ## Native projects and reproduction packages
 
 Case pages link to native scene and material files when available. Keep large
