@@ -1,0 +1,18 @@
+{
+  "source": "Real REAPER stock ReaSynth native MIDI render through typed DCC-MCP",
+  "frames": 336000,
+  "sample_rate": 48000,
+  "channels": 2,
+  "sample_width": 3,
+  "duration_seconds": 7.0,
+  "peak_dbfs": -3.0000082935834738,
+  "rms_dbfs": -17.59571860388306,
+  "clipped_samples": 0,
+  "native_midi_notes": 29,
+  "native_tracks": 5,
+  "pcm_sha256": "3bb88c3a7472b035f8d15fe5ade1a10169c68757b57118f06d47d4ab00166f0d",
+  "original_native_sha256": "3c933de6e03cb947b2137001256f4175151644b3b6a3dd6b77b7946e21359d56",
+  "public_wav_sha256": "93068c4dd4f4dbb5606a269546f99f22e0cf138bb922f149cb3d216707fee812",
+  "metadata_cleanup_pcm_identical": true,
+  "subjective_listening": "not claimed"
+}

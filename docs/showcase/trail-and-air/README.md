@@ -37,3 +37,7 @@
 本案例原创音频CC0-1.0，代码MIT；只适用于本案例原创资源，不改变其他案例许可。没有分发REAPER、其他应用二进制、账号或密钥。REAPER是付费软件，60天evaluation不是长期免费，开源或非商业用途不免除其许可。
 
 使用者已确认方向并授权发布。没有记录主观听评，不以零clipping冒充听觉验收。原生项目、代码、素材已公开，但不包含任何游戏项目、场景、图片、录像或其名称。没有宣称Unreal内触发、空间化、衰减、步行动画或完整链路已经验证。下载包是在授权发布前形成的技术快照，其中旧的“待试听/草稿”标记不构成已完成听评的声明。
+
+## Related native MIDI film scores
+
+The same real REAPER/DCC-MCP pipeline now produces individually timed music for [Crystal Freight](https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/), [Brass Relay](https://dcc-mcp.github.io/showcase/cases/brass-relay/) and [Orbit Post Office](https://dcc-mcp.github.io/showcase/cases/orbit-post-office/). Each retains the original silent film, adds a separate scored version and offers an editable MIDI/ReaSynth project with source audio and scoped licenses.
