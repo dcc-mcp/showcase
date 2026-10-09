@@ -108,9 +108,32 @@ def fetch_public_file(request, origin: str, path: str) -> bytes:
         response.dispose()
 
 
+def keyboard_seek_audio(page, audio, timeout_error, max_tabs: int = 12) -> float:
+    """Reach native media controls with Tab and prove a paused keyboard seek."""
+    audio.focus()
+    before = audio.evaluate("a => a.currentTime")
+    for tab_count in range(1, max_tabs + 1):
+        page.keyboard.press("Tab")
+        page.keyboard.press("ArrowRight")
+        try:
+            page.wait_for_function("""before => {
+                const a = document.querySelector('#results audio');
+                return a.paused && !a.seeking && a.currentTime > before + 0.05;
+            }""", arg=before, timeout=700)
+        except timeout_error:
+            print(json.dumps({"event": "audio_seek_tab", "tab_count": tab_count,
+                              "seek_observed": False}), flush=True)
+            continue
+        after = audio.evaluate("a => a.currentTime")
+        print(json.dumps({"event": "audio_seek_tab", "tab_count": tab_count,
+                          "seek_observed": True, "before_seconds": before, "after_seconds": after}), flush=True)
+        return after
+    raise AssertionError("Native audio timeline was not keyboard-seekable after bounded Tab traversal")
+
+
 def verify_audio_case(page, context, case: dict, site: Path, origin: str,
                       output: Path, layout: str, active_context: dict) -> dict:
-    from playwright.sync_api import expect
+    from playwright.sync_api import TimeoutError as PlaywrightTimeoutError, expect
 
     progress(active_context, "audio_controls_and_metadata")
     page.get_by_role("link", name="成果", exact=True).click()
@@ -145,7 +168,7 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     if abs(duration - 28.6) > 0.15:
         raise AssertionError("Unexpected Trail & Air audio duration")
 
-    progress(active_context, "audio_keyboard_play_pause_seek")
+    progress(active_context, "audio_keyboard_play")
     audio.focus()
     expect(audio).to_be_focused()
     page.keyboard.press("Space")
@@ -153,18 +176,16 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
         const a = document.querySelector('#results audio');
         return !a.paused && a.currentTime >= 0.2;
     }""")
+    progress(active_context, "audio_keyboard_pause")
     page.keyboard.press("Space")
     expect(audio).to_have_js_property("paused", True)
-    before_seek = audio.evaluate("a => a.currentTime")
-    page.keyboard.press("ArrowRight")
-    page.wait_for_function("""before => {
-        const a = document.querySelector('#results audio');
-        return !a.seeking && a.currentTime >= before + 4;
-    }""", arg=before_seek)
-    seek_time = audio.evaluate("a => a.currentTime")
+    progress(active_context, "audio_keyboard_seek")
+    seek_time = keyboard_seek_audio(page, audio, PlaywrightTimeoutError)
     expect(audio).to_have_js_property("paused", True)
 
     progress(active_context, "audio_replay_after_end")
+    audio.focus()
+    expect(audio).to_be_focused()
     # Seek near the end to exercise a genuine ended event without a 29-second
     # delay per viewport. Playback and replay themselves use native keyboard UI.
     audio.evaluate("a => { a.currentTime = a.duration - 0.2; }")

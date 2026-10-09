@@ -7,11 +7,13 @@ No Playwright installation or browser is required for these contract tests.
 from __future__ import annotations
 
 import ast
+import contextlib
 import copy
 import hashlib
 import inspect
+import io
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, call
 
 import browser_preview
 
@@ -30,6 +32,39 @@ class MediaNavigationTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         waits = [keyword.value.value for keyword in calls[0].keywords if keyword.arg == "wait_until"]
         self.assertEqual(waits, ["domcontentloaded"])
+
+
+class NativeAudioSeekTests(unittest.TestCase):
+    def test_tabs_into_native_controls_until_real_small_seek_is_observed(self):
+        page, audio = Mock(), Mock()
+        audio.evaluate.side_effect = [0.2, 0.4]
+        page.wait_for_function.side_effect = [TimeoutError(), None]
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(browser_preview.keyboard_seek_audio(page, audio, TimeoutError), 0.4)
+        audio.focus.assert_called_once_with()
+        self.assertEqual(page.keyboard.press.call_args_list,
+                         [call("Tab"), call("ArrowRight"), call("Tab"), call("ArrowRight")])
+        for arguments in audio.evaluate.call_args_list:
+            self.assertEqual(arguments.args, ("a => a.currentTime",))
+        expression = page.wait_for_function.call_args.args[0]
+        self.assertIn("a.paused && !a.seeking", expression)
+        self.assertIn("before + 0.05", expression)
+
+    def test_keyboard_traversal_is_bounded_and_does_not_fake_success(self):
+        page, audio = Mock(), Mock()
+        audio.evaluate.return_value = 0.2
+        page.wait_for_function.side_effect = TimeoutError()
+        with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(AssertionError, "bounded Tab"):
+            browser_preview.keyboard_seek_audio(page, audio, TimeoutError, max_tabs=3)
+        self.assertEqual(page.keyboard.press.call_count, 6)
+        self.assertEqual(page.wait_for_function.call_count, 3)
+
+    def test_non_timeout_browser_errors_are_not_hidden(self):
+        page, audio = Mock(), Mock()
+        audio.evaluate.return_value = 0.2
+        page.wait_for_function.side_effect = RuntimeError("Browser closed")
+        with self.assertRaisesRegex(RuntimeError, "Browser closed"):
+            browser_preview.keyboard_seek_audio(page, audio, TimeoutError)
 
 
 def fixture():
