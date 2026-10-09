@@ -9,10 +9,45 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import version
 import json
 from pathlib import Path, PurePosixPath
+import re
 import subprocess
 import threading
 from urllib.parse import quote, urlsplit
 
+
+
+def safe_error_text(error: Exception, origin: str = "") -> str:
+    """Keep public assertion details without leaking runner paths or tokens."""
+    text = str(error)
+    text = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", text)
+    if origin:
+        text = text.replace(origin, "<preview-origin>")
+    text = re.sub(r"https?://[^\s<>\"']+", "<url>", text)
+    text = re.sub(r"(?:[A-Za-z]:[\\/]|/(?:home|Users|workspace|tmp|root|opt|var|private|mnt|run)/)[^\s\"'<>]+",
+                  "<runner-path>", text)
+    text = re.sub(r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|"
+                  r"sk-(?:proj-)?[A-Za-z0-9_-]{20,}|AKIA[A-Z0-9]{16})\b", "<redacted>", text)
+    text = re.sub(r"(?i)\b(?:Bearer\s+\S+|(?:password|api[_-]?key|access[_-]?token|secret)\s*[=:]\s*\S+)",
+                  "<redacted>", text)
+    return text[:4000]
+
+
+def progress(context: dict, stage: str | None = None) -> None:
+    if stage is not None:
+        context["stage"] = stage
+    print(json.dumps({"event": "browser_stage", **context}, ensure_ascii=False), flush=True)
+
+
+def media_diagnostics(page) -> list[dict]:
+    """Only numeric/player state from public pages, never runner/browser internals."""
+    return page.locator("audio, video").evaluate_all("""elements => elements.map(media => ({
+        tag: media.tagName.toLowerCase(), ready_state: media.readyState,
+        network_state: media.networkState, paused: media.paused, ended: media.ended,
+        duration_seconds: Number.isFinite(media.duration) ? media.duration : null,
+        current_time: media.currentTime, controls: media.controls, autoplay: media.autoplay,
+        width: media.videoWidth || null, height: media.videoHeight || null,
+        error_code: media.error ? media.error.code : null
+    }))""")
 
 def public_file_url(origin: str, path: str) -> str:
     """Only construct URLs beneath the isolated local public-site origin."""
@@ -77,7 +112,7 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
                       output: Path, layout: str, active_context: dict) -> dict:
     from playwright.sync_api import expect
 
-    active_context["stage"] = "audio_controls_and_metadata"
+    progress(active_context, "audio_controls_and_metadata")
     page.get_by_role("link", name="成果", exact=True).click()
     page.wait_for_url("**/#results")
     results = page.locator("#results")
@@ -110,7 +145,7 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     if abs(duration - 28.6) > 0.15:
         raise AssertionError("Unexpected Trail & Air audio duration")
 
-    active_context["stage"] = "audio_keyboard_play_pause_seek"
+    progress(active_context, "audio_keyboard_play_pause_seek")
     audio.focus()
     expect(audio).to_be_focused()
     page.keyboard.press("Space")
@@ -129,7 +164,7 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     seek_time = audio.evaluate("a => a.currentTime")
     expect(audio).to_have_js_property("paused", True)
 
-    active_context["stage"] = "audio_replay_after_end"
+    progress(active_context, "audio_replay_after_end")
     # Seek near the end to exercise a genuine ended event without a 29-second
     # delay per viewport. Playback and replay themselves use native keyboard UI.
     audio.evaluate("a => { a.currentTime = a.duration - 0.2; }")
@@ -145,7 +180,7 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     page.keyboard.press("Space")
     expect(audio).to_have_js_property("paused", True)
 
-    active_context["stage"] = "audio_public_resource_integrity"
+    progress(active_context, "audio_public_resource_integrity")
     manifest_path = "docs/showcase/" + case["slug"] + "/manifest.json"
     manifest_bytes = fetch_public_file(context.request, origin, manifest_path)
     if manifest_bytes != (site / manifest_path).read_bytes():
@@ -178,7 +213,7 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     downloaded = check_public_payload(media["src"], Path(download.path()).read_bytes(),
                                       selected[media["src"]])
 
-    active_context["stage"] = "audio_results_screenshots"
+    progress(active_context, "audio_results_screenshots")
     audio.scroll_into_view_if_needed()
     if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
         raise AssertionError("Audio case horizontal overflow")
@@ -228,6 +263,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     thread.start()
     origin = "http://127.0.0.1:%d" % server.server_address[1]
     active_context = {"stage": "browser_launch"}
+    progress(active_context)
     try:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch()
@@ -252,6 +288,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                     page.on("response", lambda response: errors.append("http_error") if response.status >= 400 else None)
                     try:
                         active_context = {"stage": "gallery_search_reset", "layout": layout}
+                        progress(active_context)
                         page.goto(origin + "/", wait_until="networkidle")
                         page.evaluate("document.fonts.ready")
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
@@ -261,7 +298,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
                         if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
                             raise AssertionError("Homepage horizontal overflow")
-                        active_context["stage"] = "gallery_images"
+                        progress(active_context, "gallery_images")
                         covers = page.locator(".case-card img")
                         expect(covers).to_have_count(len(cases))
                         loaded_images = []
@@ -286,6 +323,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                         for case in cases:
                             active_context = {"stage": "models_navigation", "layout": layout,
                                               "case_slug": case["slug"]}
+                            progress(active_context)
                             path = "/cases/%s/" % case["slug"]
                             page.goto(origin + path, wait_until="networkidle")
                             page.evaluate("document.fonts.ready")
@@ -295,7 +333,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             section = page.locator("#models")
                             expect(section).to_be_in_viewport()
                             expect(section.locator("dt")).to_have_count(len(case["model_attribution"]))
-                            active_context["stage"] = "model_fields"
+                            progress(active_context, "model_fields")
                             for index, row in enumerate(case["model_attribution"]):
                                 stage = section.locator("dt").nth(index)
                                 expect(stage).to_have_text(row["stage"])
@@ -309,7 +347,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             if not no_overflow:
                                 raise AssertionError("Case page horizontal overflow")
                             image_name = layout + "-" + case["slug"] + "-models.png"
-                            active_context["stage"] = "screenshot"
+                            progress(active_context, "screenshot")
                             section.screenshot(path=str(output / image_name), animations="disabled")
                             report["pages"].append({"layout": layout, "path": path + "#models",
                                 "viewport": viewport, "attribution_rows": len(case["model_attribution"]),
@@ -317,20 +355,24 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                 "screenshot": image_name,
                                 "sha256": hashlib.sha256((output / image_name).read_bytes()).hexdigest()})
                             if case["slug"] == "orbit-post-office":
-                                active_context["stage"] = "orbit_film_controls"
+                                progress(active_context, "orbit_film_controls")
                                 page.get_by_role("link", name="成果", exact=True).click()
                                 video = page.locator("#results video")
                                 expect(video).to_have_count(1)
                                 expect(video).to_be_visible()
                                 expect(video).to_have_js_property("controls", True)
+                                progress(active_context, "orbit_film_metadata")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video'); return v.readyState >= 1 && v.videoWidth === 1280 && v.videoHeight === 720; }")
                                 duration = video.evaluate("v => v.duration")
                                 if abs(duration - 7.018) > 0.05:
                                     raise AssertionError("Unexpected Orbit film duration")
+                                progress(active_context, "orbit_film_keyboard_play")
                                 video.press("Space")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video'); return !v.paused && v.currentTime >= 0.2; }")
+                                progress(active_context, "orbit_film_keyboard_pause")
                                 video.press("Space")
                                 expect(video).to_have_js_property("paused", True)
+                                progress(active_context, "orbit_film_screenshot")
                                 film_name = layout + "-orbit-post-office-film.png"
                                 video.locator("..").screenshot(path=str(output / film_name), animations="disabled")
                                 report["films"].append({"layout": layout, "case_slug": case["slug"],
@@ -342,6 +384,12 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                     page, context, case, site, origin, output, layout, active_context))
                         if errors:
                             raise AssertionError("Browser reported resource or script errors")
+                    except Exception:
+                        try:
+                            report["media_state"] = media_diagnostics(page)
+                        except Exception:
+                            report["media_state"] = {"unavailable": True}
+                        raise
                     finally:
                         context.close()
             finally:
@@ -351,6 +399,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     except Exception as error:
         report["status"] = "failed"
         report["error_type"] = type(error).__name__
+        report["error_message"] = safe_error_text(error, origin)
         report["failure_context"] = active_context
         return 1
     finally:
@@ -358,7 +407,13 @@ def run(site: Path, output: Path, expected_head: str) -> int:
         server.server_close()
         thread.join(timeout=5)
         (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(json.dumps({"status": report["status"], "source_head": head, "page_checks": len(report["pages"])}))
+        summary = {"status": report["status"], "source_head": head,
+                   "page_checks": len(report["pages"]), "film_checks": len(report["films"]),
+                   "audio_checks": len(report["audio"])}
+        for key in ("error_type", "error_message", "failure_context", "media_state"):
+            if key in report:
+                summary[key] = report[key]
+        print(json.dumps(summary, ensure_ascii=False), flush=True)
 
 
 if __name__ == "__main__":
