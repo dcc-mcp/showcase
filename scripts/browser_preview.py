@@ -8,6 +8,7 @@ import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import version
 import json
+import os
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
@@ -46,6 +47,8 @@ def media_diagnostics(page) -> list[dict]:
         duration_seconds: Number.isFinite(media.duration) ? media.duration : null,
         current_time: media.currentTime, controls: media.controls, autoplay: media.autoplay,
         width: media.videoWidth || null, height: media.videoHeight || null,
+        seekable: Array.from({length: media.seekable.length}, (_, i) => [media.seekable.start(i), media.seekable.end(i)]),
+        buffered: Array.from({length: media.buffered.length}, (_, i) => [media.buffered.start(i), media.buffered.end(i)]),
         error_code: media.error ? media.error.code : null
     }))""")
 
@@ -108,32 +111,29 @@ def fetch_public_file(request, origin: str, path: str) -> bytes:
         response.dispose()
 
 
-def keyboard_seek_audio(page, audio, timeout_error, max_tabs: int = 12) -> float:
-    """Reach native media controls with Tab and prove a paused keyboard seek."""
-    audio.focus()
+def keyboard_seek_audio(page, audio) -> float:
+    """Activate the accessible forward button with a genuine keyboard event."""
+    button = audio.locator("..").locator('button[data-audio-seek="5"]')
+    button.wait_for(state="visible")
+    if not button.is_enabled():
+        raise AssertionError("Audio forward button is disabled after metadata loaded")
     before = audio.evaluate("a => a.currentTime")
-    for tab_count in range(1, max_tabs + 1):
-        page.keyboard.press("Tab")
-        page.keyboard.press("ArrowRight")
-        try:
-            page.wait_for_function("""before => {
-                const a = document.querySelector('#results audio');
-                return a.paused && !a.seeking && a.currentTime > before + 0.05;
-            }""", arg=before, timeout=700)
-        except timeout_error:
-            print(json.dumps({"event": "audio_seek_tab", "tab_count": tab_count,
-                              "seek_observed": False}), flush=True)
-            continue
-        after = audio.evaluate("a => a.currentTime")
-        print(json.dumps({"event": "audio_seek_tab", "tab_count": tab_count,
-                          "seek_observed": True, "before_seconds": before, "after_seconds": after}), flush=True)
-        return after
-    raise AssertionError("Native audio timeline was not keyboard-seekable after bounded Tab traversal")
+    button.focus()
+    if not button.evaluate("button => document.activeElement === button"):
+        raise AssertionError("Audio forward button did not receive keyboard focus")
+    print(json.dumps({"event": "audio_seek_before", "media_state": media_diagnostics(page)}), flush=True)
+    page.keyboard.press("Enter")
+    page.wait_for_function("""before => {
+        const a = document.querySelector('#results audio');
+        return a.paused && !a.seeking && a.currentTime >= before + 4;
+    }""", arg=before)
+    print(json.dumps({"event": "audio_seek_after", "media_state": media_diagnostics(page)}), flush=True)
+    return audio.evaluate("a => a.currentTime")
 
 
 def verify_audio_case(page, context, case: dict, site: Path, origin: str,
                       output: Path, layout: str, active_context: dict) -> dict:
-    from playwright.sync_api import TimeoutError as PlaywrightTimeoutError, expect
+    from playwright.sync_api import expect
 
     progress(active_context, "audio_controls_and_metadata")
     page.get_by_role("link", name="成果", exact=True).click()
@@ -179,8 +179,8 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     progress(active_context, "audio_keyboard_pause")
     page.keyboard.press("Space")
     expect(audio).to_have_js_property("paused", True)
-    progress(active_context, "audio_keyboard_seek")
-    seek_time = keyboard_seek_audio(page, audio, PlaywrightTimeoutError)
+    progress(active_context, "audio_keyboard_seek_button")
+    seek_time = keyboard_seek_audio(page, audio)
     expect(audio).to_have_js_property("paused", True)
 
     progress(active_context, "audio_replay_after_end")
@@ -252,14 +252,92 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
     return {"layout": layout, "case_slug": case["slug"], "duration_seconds": duration,
             "native_controls": True, "accessible_label": media["alt"], "preload": "metadata",
             "autoplay": False, "keyboard_play_and_pause": True, "keyboard_seek": True,
-            "seek_seconds": seek_time, "replay_after_end": True, "horizontal_overflow": False,
+            "seek_seconds": seek_time, "seek_control": "explicit_5_second_buttons", "replay_after_end": True, "horizontal_overflow": False,
             "manifest": manifest_path, "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
             "public_files": fetched, "fallback_download": downloaded, "screenshots": screenshots}
+
+
+def parse_byte_range(value: str, size: int) -> tuple[int, int]:
+    """Resolve one bytes range to inclusive offsets; reject multipart ranges."""
+    match = re.fullmatch(r"bytes=([0-9]*)-([0-9]*)", value.strip())
+    if not match or size <= 0 or not any(match.groups()):
+        raise ValueError("Invalid or unsatisfiable byte range")
+    first, last = match.groups()
+    if not first:
+        suffix = int(last)
+        if suffix <= 0:
+            raise ValueError("Invalid or unsatisfiable byte range")
+        return max(0, size - suffix), size - 1
+    start = int(first)
+    end = min(int(last), size - 1) if last else size - 1
+    if start >= size or start > end:
+        raise ValueError("Invalid or unsatisfiable byte range")
+    return start, end
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+    def end_headers(self):
+        self.send_header("Accept-Ranges", "bytes")
+        super().end_headers()
+
+    def send_head(self):
+        self._range_remaining = None
+        ranges = self.headers.get_all("Range", [])
+        # HEAD ignores Range. Delegate ordinary and conditional responses to
+        # the stdlib, including redirects, cache validation and full transfers.
+        # Ignoring Range for conditional requests is safe; it avoids treating
+        # an unverified If-Range validator as permission to return partial data.
+        if (self.command != "GET" or not ranges or "If-Range" in self.headers
+                or "If-Modified-Since" in self.headers):
+            return super().send_head()
+        path = self.translate_path(self.path)
+        if os.path.isdir(path):
+            return super().send_head()
+        if path.endswith("/"):
+            self.send_error(404, "File not found")
+            return None
+        try:
+            source = open(path, "rb")
+        except OSError:
+            self.send_error(404, "File not found")
+            return None
+        try:
+            stat = os.fstat(source.fileno())
+            try:
+                start, end = parse_byte_range(",".join(ranges), stat.st_size)
+            except ValueError:
+                source.close()
+                self.send_response(416)
+                self.send_header("Content-Range", f"bytes */{stat.st_size}")
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return None
+            source.seek(start)
+            self._range_remaining = end - start + 1
+            self.send_response(206)
+            self.send_header("Content-type", self.guess_type(path))
+            self.send_header("Content-Range", f"bytes {start}-{end}/{stat.st_size}")
+            self.send_header("Content-Length", str(self._range_remaining))
+            self.send_header("Last-Modified", self.date_time_string(stat.st_mtime))
+            self.end_headers()
+            return source
+        except BaseException:
+            source.close()
+            raise
+
+    def copyfile(self, source, outputfile):
+        if self._range_remaining is None:
+            return super().copyfile(source, outputfile)
+        remaining = self._range_remaining
+        while remaining:
+            chunk = source.read(min(64 * 1024, remaining))
+            if not chunk:
+                break
+            outputfile.write(chunk)
+            remaining -= len(chunk)
 
 
 def git_value(*args: str) -> str:

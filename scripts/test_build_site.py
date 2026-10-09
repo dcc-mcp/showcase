@@ -266,7 +266,8 @@ class MediaParser(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag in self.parents:
-            self.parents = self.parents[:self.parents.index(tag)]
+            index = len(self.parents) - 1 - self.parents[::-1].index(tag)
+            self.parents = self.parents[:index]
 
 
 def audio_guards() -> None:
@@ -283,6 +284,10 @@ def audio_guards() -> None:
             attrs, parents = audio[0][1:]
             check("audio is not inside an image link: " + suffix, "a" in parents, False)
             check("native controls enabled: " + suffix, "controls" in attrs, True)
+            buttons = [item[1] for item in parser.elements if item[0] == "button"]
+            check("accessible five-second seek buttons: " + suffix,
+                  [(b.get("data-audio-seek"), b.get("aria-label"), b.get("type"), "disabled" in b) for b in buttons],
+                  [("-5", "后退 5 秒", "button", True), ("5", "快进 5 秒", "button", True)])
             check("audio never autoplays: " + suffix, "autoplay" in attrs, False)
             check("metadata-only preload: " + suffix, attrs.get("preload"), "metadata")
             check("audio keyboard focus: " + suffix, attrs.get("tabindex"), "0")

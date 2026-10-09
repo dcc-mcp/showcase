@@ -220,8 +220,11 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
     if extension in AUDIO_TYPES:
         return ('<div class="audio-player"><audio controls preload="metadata" aria-label="%s" tabindex="0">'
                 '<source src="%s" type="%s">你的浏览器不支持此音频，可使用下方链接下载。'
-                '</audio><p class="audio-download">无法播放？'
-                '<a href="%s" download="%s">下载音频（%s）</a></p></div>') % (
+                '</audio><div class="audio-actions"><div class="audio-seek" role="group" aria-label="音频快进与后退">'
+                '<button type="button" data-audio-seek="-5" aria-label="后退 5 秒" disabled>−5 秒</button>'
+                '<button type="button" data-audio-seek="5" aria-label="快进 5 秒" disabled>+5 秒</button>'
+                '</div><p class="audio-download">无法播放？'
+                '<a href="%s" download="%s">下载音频（%s）</a></p></div></div>') % (
                     alt, url, AUDIO_TYPES[extension], url, esc(os.path.basename(rel)), extension[1:].upper())
     if os.path.splitext(rel)[1].lower() in (".mp4", ".webm"):
         poster = (' poster="%s"' % esc(resource_url(media["poster"], prefix))) if media.get("poster") else ""
