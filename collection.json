@@ -2151,6 +2151,241 @@
           "change": "发布四个分层世界的图片、独立完整班次证据与七秒第一投递影片；当前可编辑源未公开下载。相同 D058 的改版，不计为第二个案例。"
         }
       ]
+    },
+    {
+      "slug": "trail-and-air",
+      "title": "Trail & Air · 原创步行音频素材",
+      "subtitle": "REAPER · 17 个可复用脚步、环境循环与交互音效",
+      "software": [
+        "REAPER"
+      ],
+      "capabilities": [
+        "音频",
+        "程序化合成",
+        "原生导出",
+        "循环",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/trail-and-air/hero.jpg",
+        "alt": "根据实际导出音频绘制的脚步、环境与音乐波形图；不是软件或游戏截图"
+      },
+      "evidence_label": "本轮原生音频验证 · 可在线试听",
+      "evidence_scope": "本轮通过 typed DCC-MCP 生成原创确定性声源，再由实际 REAPER 导入、建立原生音频图谱、逐资源渲染、保存与重开。17 个导出与声源 PCM 逐样本一致。封面为测量波形，在线试听是实际导出的片段组合，不冒充 GUI 截图、游戏场景或现场录音。使用者已确认制作方向并授权公开；没有记录主观听评，不把数值检测当作听觉验收。",
+      "summary": "两组各六种单声道脚步、20 秒风与叶片环境循环、19.2 秒轻音乐循环，以及三个克制的交互提示。保留无损 WAV、原生项目与可复用合成/导出技能。",
+      "goal": "建立可供步行和探索原型使用的原创通用音频素材库，并用真正的 REAPER / Gateway / CLI 验证资源生成、原生导出、循环长度与工程可移植性。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "在确认空白且干净的 REAPER 项目中，通过 typed DCC-MCP 制作一组原创通用步行音频：六种碎石/石面脚步、六种草地/泥土脚步、轻微风与叶片环境循环、稀疏轻音乐循环以及三个交互音效。所有 WAV 为 48 kHz/24-bit，脚步/SFX 为 mono，背景循环为 stereo。不能使用外部采样、私人游戏场景或第三方录音。\n\n先 inventory、scoped search、load-skill、describe，再调用原生生成与渲染工具。保存并重开原生 RPP，逐项核对帧数、声道、循环边界和 PCM。保留相对媒体路径、确定性生成器、元数据、许可证以及失败保护。完成实际试听前不得将数值检查当作听觉验收；公开展示只包含通用原创音频和脱敏流程。",
+        "note": "按实际执行整理的可复用流程，不是用户原话逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "软件",
+          "value": "REAPER 7.82 · Linux x86_64 · vendor-documented headless libSwell"
+        },
+        {
+          "label": "适配器",
+          "value": "dcc-mcp-reaper 0.1.0 + 修复 commit 867ce6837c916aa7ca89a5cb14deae9869f09d00（draft PR #3）"
+        },
+        {
+          "label": "Core / CLI / Gateway",
+          "value": "Core 0.20.41 · CLI/server 0.20.42 · external reapy_boost 0.10.201"
+        },
+        {
+          "label": "音频规格",
+          "value": "48 kHz / 24-bit PCM；12 mono 脚步 + 3 mono SFX + 2 stereo loops"
+        }
+      ],
+      "tools": [
+        {
+          "name": "reaper_game_audio__generate_pack",
+          "description": "附加 typed 技能：确定性原创声源生成并进入真实原生 REAPER 图谱。"
+        },
+        {
+          "name": "reaper_game_audio__render_assets",
+          "description": "附加 typed 技能：逐区域原生离线渲染，严格核对帧数、声道和格式；失败写检查记录且不覆盖。"
+        },
+        {
+          "name": "reaper_stem_session__open_project / audit_session",
+          "description": "重开原生 RPP 并检查实际媒体依赖。"
+        },
+        {
+          "name": "reaper_session / reaper_project / reaper_tracks",
+          "description": "修复后的内置只读工具返回真实结构化状态。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "生成原创声源",
+          "description": "固定 seed 73，全部使用数学合成；不使用录音或外部采样。单独记录供游戏混音起步的增益、音高和变体选择建议。"
+        },
+        {
+          "title": "通过真正的 REAPER 导出",
+          "description": "建立 17 个非重叠区域，禁用导入自动淡入淡出以保持循环边界；17 次原生离线渲染保留48k/24-bit与mono/stereo。"
+        },
+        {
+          "title": "保存、重开与脱敏",
+          "description": "保存原生项目，重开后验证全部媒体。将交付项目调整为相对 Audio 路径，再次通过真实宿主重开。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3",
+          "alt": "Trail & Air 28.6 秒音频试听",
+          "caption": "点击播放：石面脚步、草地脚步、8秒环境、8秒音乐与三个交互音效。由真实 REAPER 导出组合；试听循环片段有短淡入淡出，下载的无损循环未改变。播放器不会自动播放。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实 typed Gateway/CLI 生成与导出",
+          "result": "pass",
+          "observed": "实际 REAPER 7.82；17 个独立原生 WAV 导出，原生 RPP 重开成功。"
+        },
+        {
+          "name": "逐样本与循环验证",
+          "result": "pass",
+          "observed": "17 个导出的 PCM 与原始确定性合成逐样本一致；48 kHz/24-bit，零 clipping，循环边界与频谱/电平检查通过。"
+        },
+        {
+          "name": "交付与脱敏",
+          "result": "pass",
+          "observed": "四个 ZIP 均小于 6 MB，完整性与逐文件哈希通过；原生项目使用相对 Audio 路径，已重开；无私人场景、画面、路径、软件二进制或账号数据。"
+        },
+        {
+          "name": "适配器修复",
+          "result": "pass",
+          "observed": "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。"
+        },
+        {
+          "name": "实际试听",
+          "result": "not_run",
+          "observed": "当前运行环境不支持音频输入，等待使用者听觉验收；没有以无 clipping 替代听觉评审。"
+        },
+        {
+          "name": "发布授权",
+          "result": "pass",
+          "observed": "使用者确认音频方向并明确授权发布通用素材案例；没有授权公开任何私人游戏场景。"
+        }
+      ],
+      "limitations": [
+        "没有记录主观听评；技术检测不替代目标播放设备与游戏内混音的试听。",
+        "没有宣称在任何游戏场景中完成触发、空间化、衰减或行走验证。",
+        "环境与脚步是风格化程序化音频，不是现场录音。",
+        "REAPER 是付费软件；60 天 evaluation 不等于长期免费，开源用途不免除其许可证。"
+      ],
+      "resources": [
+        {
+          "label": "脚步与交互音效 · 无损 ZIP",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-OneShots.zip"
+        },
+        {
+          "label": "20秒环境循环 · 无损 ZIP",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-Ambience.zip"
+        },
+        {
+          "label": "19.2秒轻音乐循环 · 无损 ZIP",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-Music.zip"
+        },
+        {
+          "label": "原生工程 / 技能 / 生成器",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-Source.zip"
+        },
+        {
+          "label": "试听 MP3",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3"
+        },
+        {
+          "label": "逐文件规格与游戏增益建议",
+          "url": "docs/showcase/trail-and-air/audio-manifest.json"
+        },
+        {
+          "label": "调用证据（路径脱敏）",
+          "url": "docs/showcase/trail-and-air/mcp-evidence.public.json"
+        },
+        {
+          "label": "验证与未完成项",
+          "url": "docs/showcase/trail-and-air/validation.json"
+        },
+        {
+          "label": "许可证与复现说明",
+          "url": "docs/showcase/trail-and-air/README.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "本案例原创音频 CC0-1.0；代码 MIT。仅适用于本案例原创资源，不改变其他案例或软件的许可证。",
+        "note": "没有包含应用程序、账号信息、外部录音、第三方采样或私人游戏资料。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-reaper/tree/867ce6837c916aa7ca89a5cb14deae9869f09d00",
+        "commit": "867ce6837c916aa7ca89a5cb14deae9869f09d00",
+        "title": "实际验证的 REAPER 适配器修复 commit；附加制作技能在本案例源码包"
+      },
+      "verified_at": "2026-10-09T15:43:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "音频制作与原生操作",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "code",
+          "stage": "工具实现",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考输入",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "试听与波形图",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术验证",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生音频素材",
+          "date": "2026-10-09",
+          "change": "完成真实原生导出、循环/样本验证、便携下载与用户授权；提供点击播放的在线试听，游戏内集成结果不在本案例声称范围内。"
+        }
+      ]
     }
   ]
 }

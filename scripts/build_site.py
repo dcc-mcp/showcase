@@ -25,6 +25,7 @@ EXTERNAL = re.compile(r'^(?:[a-z][a-z0-9+.-]*:|//|#)')
 FOLLOW = (".html", ".htm", ".md")
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 FORBIDDEN = {".git", ".agents", ".codex", ".aws", "node_modules"}
+AUDIO_TYPES = {".mp3": "audio/mpeg", ".wav": "audio/wav", ".ogg": "audio/ogg"}
 
 def repo_root() -> str:
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -215,6 +216,13 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
     rel = safe_rel(media["src"])
     url = esc(prefix + rel)
     alt = esc(media["alt"])
+    extension = os.path.splitext(rel)[1].lower()
+    if extension in AUDIO_TYPES:
+        return ('<div class="audio-player"><audio controls preload="metadata" aria-label="%s" tabindex="0">'
+                '<source src="%s" type="%s">你的浏览器不支持此音频，可使用下方链接下载。'
+                '</audio><p class="audio-download">无法播放？'
+                '<a href="%s" download="%s">下载音频（%s）</a></p></div>') % (
+                    alt, url, AUDIO_TYPES[extension], url, esc(os.path.basename(rel)), extension[1:].upper())
     if os.path.splitext(rel)[1].lower() in (".mp4", ".webm"):
         poster = (' poster="%s"' % esc(resource_url(media["poster"], prefix))) if media.get("poster") else ""
         return '<video controls playsinline preload="metadata"%s aria-label="%s"><source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>' % (poster, alt, url, url)
@@ -223,7 +231,7 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
 
 def figure(media: dict, root: str, prefix: str) -> str:
     visual = media_markup(media, root, prefix)
-    if os.path.splitext(media["src"])[1].lower() not in (".mp4", ".webm"):
+    if os.path.splitext(media["src"])[1].lower() not in {".mp4", ".webm", *AUDIO_TYPES}:
         visual = '<a href="%s" aria-label="%s">%s</a>' % (esc(prefix + media["src"]), esc("查看原尺寸：" + media["alt"]), visual)
     caption = media.get("caption", media["alt"])
     return '<figure class="artifact">%s<figcaption>%s</figcaption></figure>' % (visual, esc(caption))

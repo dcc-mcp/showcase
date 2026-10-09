@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "NATIVE_AUDIO_VALIDATED_PUBLICATION_AUTHORIZED",
+  "environment": {
+    "host": "REAPER 7.82 Linux x86_64",
+    "core": "0.20.41",
+    "cli_server": "0.20.42",
+    "reapy_boost": "0.10.201",
+    "adapter_commit": "867ce6837c916aa7ca89a5cb14deae9869f09d00",
+    "display": "Vendor-documented NOGDK=1 libSwell"
+  },
+  "checks": [
+    {
+      "name": "真实 typed Gateway/CLI 生成与导出",
+      "result": "pass",
+      "observed": "实际 REAPER 7.82；17 个独立原生 WAV 导出，原生 RPP 重开成功。"
+    },
+    {
+      "name": "逐样本与循环验证",
+      "result": "pass",
+      "observed": "17 个导出的 PCM 与原始确定性合成逐样本一致；48 kHz/24-bit，零 clipping，循环边界与频谱/电平检查通过。"
+    },
+    {
+      "name": "交付与脱敏",
+      "result": "pass",
+      "observed": "四个 ZIP 均小于 6 MB，完整性与逐文件哈希通过；原生项目使用相对 Audio 路径，已重开；无私人场景、画面、路径、软件二进制或账号数据。"
+    },
+    {
+      "name": "适配器修复",
+      "result": "pass",
+      "observed": "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。"
+    }
+  ],
+  "not_claimed": [
+    "Subjective listening review is pending.",
+    "No game-engine integration, scene footage or native GUI screenshots are claimed.",
+    "Built-in adapter remains read-only; mutation/render uses included added skills."
+  ],
+  "publication_approval": "User explicitly approved direction and publication on2026-10-09; this is not a claim of recorded subjective listening."
+}

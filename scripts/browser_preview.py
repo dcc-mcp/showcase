@@ -8,11 +8,197 @@ import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import version
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import subprocess
 import threading
+from urllib.parse import quote, urlsplit
 
-from playwright.sync_api import expect, sync_playwright
+
+def public_file_url(origin: str, path: str) -> str:
+    """Only construct URLs beneath the isolated local public-site origin."""
+    parts = urlsplit(path)
+    if (not path or parts.scheme or parts.netloc or parts.query or parts.fragment
+            or path.startswith("/") or "\\" in path or "%" in path
+            or any(part in ("", ".", "..") for part in path.split("/"))):
+        raise ValueError("Expected a safe relative public file path")
+    return origin + "/" + quote(path, safe="/")
+
+
+def selected_public_files(case: dict, manifest: dict) -> dict[str, dict]:
+    """Require hashes for the selected cover, result media and local resources."""
+    entry = "docs/showcase/" + case["slug"] + "/"
+    rows = {}
+    for row in manifest["files"]:
+        path = entry + row["path"]
+        public_file_url("http://127.0.0.1", path)
+        if path in rows:
+            raise ValueError("Duplicate public manifest file")
+        rows[path] = row
+    paths = {case["cover"]["src"]}
+    paths.update(result["src"] for result in case["results"])
+    paths.update(item["url"] for item in case["resources"]
+                 if not urlsplit(item["url"]).scheme)
+    selected = {}
+    for path in sorted(paths):
+        public_file_url("http://127.0.0.1", path)
+        if not path.startswith(entry) or path not in rows:
+            raise ValueError("Selected public file is absent from its entry manifest")
+        row = rows[path]
+        if (type(row.get("bytes")) is not int or row["bytes"] <= 0
+                or not isinstance(row.get("sha256"), str)
+                or len(row["sha256"]) != 64
+                or any(char not in "0123456789abcdef" for char in row["sha256"])):
+            raise ValueError("Selected public file requires a byte count and SHA-256")
+        selected[path] = row
+    return selected
+
+
+def check_public_payload(path: str, payload: bytes, expected: dict) -> dict:
+    digest = hashlib.sha256(payload).hexdigest()
+    if len(payload) != expected["bytes"] or digest != expected["sha256"]:
+        raise AssertionError("Public file bytes or SHA-256 differ from manifest: " + path)
+    return {"path": path, "bytes": len(payload), "sha256": digest}
+
+
+def fetch_public_file(request, origin: str, path: str) -> bytes:
+    # APIRequestContext does not use page routing. Validate before sending, and
+    # forbid redirects so a public reference can never fetch an external URL.
+    url = public_file_url(origin, path)
+    response = request.get(url, max_redirects=0)
+    try:
+        if response.status != 200 or response.url != url:
+            raise AssertionError("Public file did not return local HTTP 200: " + path)
+        return response.body()
+    finally:
+        response.dispose()
+
+
+def verify_audio_case(page, context, case: dict, site: Path, origin: str,
+                      output: Path, layout: str, active_context: dict) -> dict:
+    from playwright.sync_api import expect
+
+    active_context["stage"] = "audio_controls_and_metadata"
+    page.get_by_role("link", name="成果", exact=True).click()
+    page.wait_for_url("**/#results")
+    results = page.locator("#results")
+    expect(results).to_be_in_viewport()
+    audio = results.locator("audio")
+    expect(audio).to_have_count(1)
+    expect(audio).to_be_visible()
+    media = next(item for item in case["results"] if item["src"].endswith(".mp3"))
+    expected_url = public_file_url(origin, media["src"])
+    expect(audio).to_have_js_property("controls", True)
+    expect(audio).to_have_attribute("aria-label", media["alt"])
+    expect(audio).to_have_attribute("preload", "metadata")
+    expect(audio).to_have_attribute("tabindex", "0")
+    expect(audio).to_have_js_property("autoplay", False)
+    if audio.get_attribute("autoplay") is not None:
+        raise AssertionError("Audio must not include any autoplay attribute")
+    expect(audio.locator("source")).to_have_count(1)
+    expect(audio.locator("source")).to_have_attribute("type", "audio/mpeg")
+    expect(audio.locator("source")).to_have_js_property("src", expected_url)
+    page.wait_for_function("""() => {
+        const a = document.querySelector('#results audio');
+        return a.readyState >= 1 && Number.isFinite(a.duration) && a.duration > 0;
+    }""")
+    expect(audio).to_have_js_property("currentSrc", expected_url)
+    expect(audio).to_have_js_property("paused", True)
+    expect(audio).to_have_js_property("currentTime", 0)
+    if audio.evaluate("a => a.played.length") != 0:
+        raise AssertionError("Audio played before a user gesture")
+    duration = audio.evaluate("a => a.duration")
+    if abs(duration - 28.6) > 0.15:
+        raise AssertionError("Unexpected Trail & Air audio duration")
+
+    active_context["stage"] = "audio_keyboard_play_pause_seek"
+    audio.focus()
+    expect(audio).to_be_focused()
+    page.keyboard.press("Space")
+    page.wait_for_function("""() => {
+        const a = document.querySelector('#results audio');
+        return !a.paused && a.currentTime >= 0.2;
+    }""")
+    page.keyboard.press("Space")
+    expect(audio).to_have_js_property("paused", True)
+    before_seek = audio.evaluate("a => a.currentTime")
+    page.keyboard.press("ArrowRight")
+    page.wait_for_function("""before => {
+        const a = document.querySelector('#results audio');
+        return !a.seeking && a.currentTime >= before + 4;
+    }""", arg=before_seek)
+    seek_time = audio.evaluate("a => a.currentTime")
+    expect(audio).to_have_js_property("paused", True)
+
+    active_context["stage"] = "audio_replay_after_end"
+    # Seek near the end to exercise a genuine ended event without a 29-second
+    # delay per viewport. Playback and replay themselves use native keyboard UI.
+    audio.evaluate("a => { a.currentTime = a.duration - 0.2; }")
+    page.wait_for_function("() => !document.querySelector('#results audio').seeking")
+    page.keyboard.press("Space")
+    page.wait_for_function("() => document.querySelector('#results audio').ended")
+    expect(audio).to_have_js_property("paused", True)
+    page.keyboard.press("Space")
+    page.wait_for_function("""() => {
+        const a = document.querySelector('#results audio');
+        return !a.paused && !a.ended && a.currentTime >= 0.1 && a.currentTime < 3;
+    }""")
+    page.keyboard.press("Space")
+    expect(audio).to_have_js_property("paused", True)
+
+    active_context["stage"] = "audio_public_resource_integrity"
+    manifest_path = "docs/showcase/" + case["slug"] + "/manifest.json"
+    manifest_bytes = fetch_public_file(context.request, origin, manifest_path)
+    if manifest_bytes != (site / manifest_path).read_bytes():
+        raise AssertionError("Served entry manifest differs from the public build")
+    manifest = json.loads(manifest_bytes)
+    selected = selected_public_files(case, manifest)
+    linked_resources = page.locator("#resources a, #downloads a").evaluate_all(
+        "links => links.map(link => ({url: link.href, download: link.getAttribute('download')}))")
+    for item in case["resources"]:
+        if urlsplit(item["url"]).scheme:
+            continue
+        url = public_file_url(origin, item["url"])
+        matches = [link for link in linked_resources if link["url"] == url]
+        if not matches:
+            raise AssertionError("Selected local resource link is missing")
+        if item["url"].endswith(".zip") and not any(
+                link["download"] == PurePosixPath(item["url"]).name for link in matches):
+            raise AssertionError("ZIP resource requires its native download link")
+    fetched = [check_public_payload(path, fetch_public_file(context.request, origin, path), row)
+               for path, row in selected.items()]
+    fallback = audio.locator("..").locator("a[download]")
+    expect(fallback).to_have_count(1)
+    expect(fallback).to_have_js_property("href", expected_url)
+    expect(fallback).to_have_attribute("download", PurePosixPath(media["src"]).name)
+    with page.expect_download() as download_info:
+        fallback.click()
+    download = download_info.value
+    if download.failure() is not None or download.suggested_filename != PurePosixPath(media["src"]).name:
+        raise AssertionError("Audio fallback download failed")
+    downloaded = check_public_payload(media["src"], Path(download.path()).read_bytes(),
+                                      selected[media["src"]])
+
+    active_context["stage"] = "audio_results_screenshots"
+    audio.scroll_into_view_if_needed()
+    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+        raise AssertionError("Audio case horizontal overflow")
+    if not audio.evaluate("""a => {
+        const r = a.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && r.left >= -1 && r.right <= innerWidth + 1;
+    }"""):
+        raise AssertionError("Audio controls overflow the viewport")
+    screenshots = []
+    for label, target in (("results", results), ("player", audio.locator(".."))):
+        name = layout + "-" + case["slug"] + "-" + label + ".png"
+        target.screenshot(path=str(output / name), animations="disabled")
+        screenshots.append({"screenshot": name,
+                            "sha256": hashlib.sha256((output / name).read_bytes()).hexdigest()})
+    return {"layout": layout, "case_slug": case["slug"], "duration_seconds": duration,
+            "native_controls": True, "accessible_label": media["alt"], "preload": "metadata",
+            "autoplay": False, "keyboard_play_and_pause": True, "keyboard_seek": True,
+            "seek_seconds": seek_time, "replay_after_end": True, "horizontal_overflow": False,
+            "manifest": manifest_path, "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+            "public_files": fetched, "fallback_download": downloaded, "screenshots": screenshots}
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -25,6 +211,8 @@ def git_value(*args: str) -> str:
 
 
 def run(site: Path, output: Path, expected_head: str) -> int:
+    from playwright.sync_api import expect, sync_playwright
+
     head = git_value("rev-parse", "HEAD")
     if head != expected_head:
         raise ValueError("Checkout does not match the requested head")
@@ -34,7 +222,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     collection = json.loads(Path("collection.json").read_text(encoding="utf-8"))
     cases = collection["cases"]
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
-              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": []}
+              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": [], "audio": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -49,7 +237,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                          ("mobile", {"width": 390, "height": 844})):
                     context = browser.new_context(viewport=viewport, device_scale_factor=1,
                                                   reduced_motion="reduce", locale="zh-CN",
-                                                  service_workers="block")
+                                                  service_workers="block", accept_downloads=True)
                     errors = []
                     def route(request_route):
                         if request_route.request.url.startswith(origin + "/"):
@@ -149,6 +337,9 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                     "duration_seconds": duration, "width": 1280, "height": 720,
                                     "keyboard_play_and_pause": True, "screenshot": film_name,
                                     "sha256": hashlib.sha256((output / film_name).read_bytes()).hexdigest()})
+                            if case["slug"] == "trail-and-air":
+                                report["audio"].append(verify_audio_case(
+                                    page, context, case, site, origin, output, layout, active_context))
                         if errors:
                             raise AssertionError("Browser reported resource or script errors")
                     finally:

@@ -12,6 +12,7 @@ so it runs on a bare CI runner in under a second.
 
 from __future__ import annotations
 
+from html.parser import HTMLParser
 import json
 import os
 import struct
@@ -113,6 +114,10 @@ def integration_guards() -> None:
         case_dir = os.path.join(tmp, "docs", "showcase", "sample-case")
         os.makedirs(case_dir)
         case = fixture_case()
+        with open(os.path.join(case_dir, "audition.mp3"), "wb") as fh:
+            fh.write(b"ID3 synthetic publication fixture")
+        case["results"].append({"src": "docs/showcase/sample-case/audition.mp3",
+                                "alt": "Original audio preview", "caption": "Click play to listen."})
         with open(os.path.join(case_dir, "cover.png"), "wb") as fh:
             fh.write(make_png(120, 80))
         with open(os.path.join(case_dir, "sample.blend"), "wb") as fh:
@@ -123,7 +128,7 @@ def integration_guards() -> None:
             with open(os.path.join(case_dir, name), "w", encoding="utf-8") as fh:
                 fh.write("{}" if name.endswith(".json") else "# A case")
         with open(os.path.join(case_dir, "manifest.json"), "w", encoding="utf-8") as fh:
-            json.dump({"files": [{"path": "cover.png"}]}, fh)
+            json.dump({"files": [{"path": "cover.png"}, {"path": "audition.mp3"}]}, fh)
         os.makedirs(os.path.join(tmp, "assets"))
         for name in ("site.css", "gallery.js", "detail.js"):
             with open(os.path.join(tmp, "assets", name), "w", encoding="utf-8") as fh:
@@ -150,6 +155,12 @@ def integration_guards() -> None:
             detail_path = os.path.join(tmp, "_site", "cases", "sample-case", "index.html")
             with open(detail_path, encoding="utf-8") as fh:
                 detail = fh.read()
+            check("audio result is copied into the selected public build",
+                  "docs/showcase/sample-case/audition.mp3" in published, True)
+            check("detail embeds native audio without autoplay",
+                  '<audio controls preload="metadata"' in detail and 'autoplay' not in detail, True)
+            check("audio fallback link is published",
+                  'href="../../docs/showcase/sample-case/audition.mp3" download="audition.mp3"' in detail, True)
             check("case title HTML is escaped", "<script>" in detail, False)
             check("prompt HTML is escaped", "&lt;tool&gt;&amp; content" in detail, True)
             check("caption HTML is escaped", "&lt;b&gt;not HTML&lt;/b&gt;" in detail, True)
@@ -241,6 +252,60 @@ def model_attribution_guards() -> None:
     check("revision date accessible", '<time datetime="2026-10-07">' in section, True)
     check("separate known and unknown roles", section.count("<dt>"), 2)
 
+
+class MediaParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.elements = []
+        self.parents = []
+
+    def handle_starttag(self, tag, attrs):
+        self.elements.append((tag, dict(attrs), tuple(self.parents)))
+        if tag not in ("source", "img", "br", "meta", "link"):
+            self.parents.append(tag)
+
+    def handle_endtag(self, tag):
+        if tag in self.parents:
+            self.parents = self.parents[:self.parents.index(tag)]
+
+
+def audio_guards() -> None:
+    with tempfile.TemporaryDirectory() as root:
+        for suffix, mime in ((".mp3", "audio/mpeg"), (".wav", "audio/wav"), (".ogg", "audio/ogg"),
+                             (".MP3", "audio/mpeg")):
+            path = "docs/showcase/sample-case/audition" + suffix
+            markup = build_site.figure({"src": path, "alt": 'Preview "title" <unsafe>',
+                                        "caption": "A <caption>"}, root, "../../")
+            parser = MediaParser()
+            parser.feed(markup)
+            audio = [item for item in parser.elements if item[0] == "audio"]
+            check("one native audio player: " + suffix, len(audio), 1)
+            attrs, parents = audio[0][1:]
+            check("audio is not inside an image link: " + suffix, "a" in parents, False)
+            check("native controls enabled: " + suffix, "controls" in attrs, True)
+            check("audio never autoplays: " + suffix, "autoplay" in attrs, False)
+            check("metadata-only preload: " + suffix, attrs.get("preload"), "metadata")
+            check("audio keyboard focus: " + suffix, attrs.get("tabindex"), "0")
+            check("accessible audio label survives escaping: " + suffix,
+                  attrs.get("aria-label"), 'Preview "title" <unsafe>')
+            check("audio caption is escaped: " + suffix, "A &lt;caption&gt;" in markup, True)
+            sources = [item[1] for item in parser.elements if item[0] == "source"]
+            check("audio MIME type: " + suffix, sources, [{"src": "../../" + path, "type": mime}])
+            downloads = [item for item in parser.elements if item[0] == "a" and "download" in item[1]]
+            check("persistent audio fallback link: " + suffix, len(downloads), 1)
+            check("fallback visible even in supporting browsers: " + suffix,
+                  "audio" in downloads[0][2], False)
+            check("fallback preserves original downloadable file: " + suffix,
+                  downloads[0][1], {"href": "../../" + path, "download": "audition" + suffix})
+            check("audio is not emitted as an image: " + suffix,
+                  any(item[0] == "img" for item in parser.elements), False)
+            check("both source and fallback enter public reference validation: " + suffix,
+                  build_site.refs_of(markup, "cases/sample-case/index.html"), [path, path])
+        for unsafe in ("../outside.mp3", "%2e%2e/outside.wav", "https://example.com/audio.ogg",
+                       "javascript:alert(1).mp3", "C:/outside.wav"):
+            rejects("unsafe audio URL rejected: " + unsafe,
+                    lambda value=unsafe: build_site.media_markup({"src": value, "alt": "Audio"}, root))
+
 def main(argv: list[str]) -> int:
     page = "docs/showcase/entry/README.md"
     text = ('![a](../other/pic.png) ![b](/root.png) ![c](#anchor)\n'
@@ -280,6 +345,7 @@ def main(argv: list[str]) -> int:
 
     integration_guards()
     model_attribution_guards()
+    audio_guards()
 
     if FAILURES:
         print("\n%d failing case(s): %s" % (len(FAILURES), ", ".join(FAILURES)))
