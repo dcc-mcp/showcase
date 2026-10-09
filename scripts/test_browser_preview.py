@@ -6,8 +6,10 @@ No Playwright installation or browser is required for these contract tests.
 """
 from __future__ import annotations
 
+import ast
 import copy
 import hashlib
+import inspect
 import unittest
 from unittest.mock import Mock
 
@@ -16,6 +18,18 @@ import browser_preview
 
 ORIGIN = "http://127.0.0.1:8765"
 ENTRY = "docs/showcase/trail-and-air/"
+
+
+class MediaNavigationTests(unittest.TestCase):
+    def test_case_navigation_does_not_wait_for_media_network_idle(self):
+        tree = ast.parse(inspect.getsource(browser_preview.run))
+        calls = [node for node in ast.walk(tree)
+                 if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+                 and node.func.attr == "goto" and node.args
+                 and any(isinstance(part, ast.Name) and part.id == "path" for part in ast.walk(node.args[0]))]
+        self.assertEqual(len(calls), 1)
+        waits = [keyword.value.value for keyword in calls[0].keywords if keyword.arg == "wait_until"]
+        self.assertEqual(waits, ["domcontentloaded"])
 
 
 def fixture():

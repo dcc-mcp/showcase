@@ -325,7 +325,9 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                               "case_slug": case["slug"]}
                             progress(active_context)
                             path = "/cases/%s/" % case["slug"]
-                            page.goto(origin + path, wait_until="networkidle")
+                            # Media preload/range requests need not become network-idle.
+                            # Fonts, page content and media readiness are awaited below.
+                            page.goto(origin + path, wait_until="domcontentloaded")
                             page.evaluate("document.fonts.ready")
                             expect(page.locator("h1")).to_have_text(case["title"])
                             page.get_by_role("link", name="模型与版本", exact=True).click()
