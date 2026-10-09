@@ -1,0 +1,799 @@
+[
+  {
+    "command": [
+      "call",
+      "reaper_game_audio__generate_pack",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{\"output_dir\": \"WORKSPACE/audio-output/trail-and-air-v1\", \"seed\": 73}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_game_audio__generate_pack",
+      "output": {
+        "success": true,
+        "message": "Original audio generated and imported into native REAPER atlas",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "project": "WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp",
+          "source_manifest": "WORKSPACE/audio-output/trail-and-air-v1/media/manifest.json",
+          "assets": 17,
+          "tracks": 5,
+          "host_version": "7.82/linux-x86_64",
+          "seed": 73
+        }
+      },
+      "validation_skipped": false,
+      "request_id": "dcc-mcp-cli-133-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  },
+  {
+    "command": [
+      "call",
+      "reaper_game_audio__render_assets",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{\"project_dir\": \"WORKSPACE/audio-output/trail-and-air-v1\"}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_game_audio__render_assets",
+      "output": {
+        "success": true,
+        "message": "All game audio assets exported by native REAPER",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "project": "WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp",
+          "asset_count": 17,
+          "sample_rate": 48000,
+          "bit_depth": 24,
+          "results": [
+            {
+              "id": "footstep_stone_01",
+              "file": "footstep_stone_01.wav",
+              "frames": 13920,
+              "channels": 1,
+              "sha256": "22c0b7fabfb616863ee2ebc83b1d1ce3fc0ed715ff11617f3ef64b0eddbb292f",
+              "pcm_sha256": "7232e9d3fdec287d403bc895983f9931549d7e1a1ef62f7f2b1a7e2835432b94"
+            },
+            {
+              "id": "footstep_stone_02",
+              "file": "footstep_stone_02.wav",
+              "frames": 16320,
+              "channels": 1,
+              "sha256": "f66059d3809753cbaf6a689c86632fea22014234480d21c4b390fdecd47326d8",
+              "pcm_sha256": "3351e51ee348a55673c68a4647867f53acff17383be36a41b72da4d419a89a01"
+            },
+            {
+              "id": "footstep_stone_03",
+              "file": "footstep_stone_03.wav",
+              "frames": 14880,
+              "channels": 1,
+              "sha256": "d3e2a66c641035a8e9ac780d65bc34c77090e452d004358db9fb2741b7886fb1",
+              "pcm_sha256": "81a757efec1355a4311a46d6c08ef2ef3b2187f303044bb2811c43fa3becd2ad"
+            },
+            {
+              "id": "footstep_stone_04",
+              "file": "footstep_stone_04.wav",
+              "frames": 17760,
+              "channels": 1,
+              "sha256": "b5024321f40c32fff163352f1a07c7df7c6007289afbd446520615a03c1591a7",
+              "pcm_sha256": "25b502a14337dbfc48fb64c36a79da129e76bb21532a3b809e0ec16baf9babbb"
+            },
+            {
+              "id": "footstep_stone_05",
+              "file": "footstep_stone_05.wav",
+              "frames": 15840,
+              "channels": 1,
+              "sha256": "65badef2e45ea16f15617de500ba97a8eb79292663b7cdfdd0f3cdcc877adf17",
+              "pcm_sha256": "3913a3325255447578d64117c718a71999379e2db08492a301f29d6115cee3d3"
+            },
+            {
+              "id": "footstep_stone_06",
+              "file": "footstep_stone_06.wav",
+              "frames": 19680,
+              "channels": 1,
+              "sha256": "85028648fe1da243cda22b904f91b6f9be5b647f42fa08143746a3f8590fadb6",
+              "pcm_sha256": "15382e698b9d00c3dc5068926bc5795a315f4b5c387a3959aa2e6a7320f998c1"
+            },
+            {
+              "id": "footstep_grass_01",
+              "file": "footstep_grass_01.wav",
+              "frames": 13440,
+              "channels": 1,
+              "sha256": "b59732e0f2e5d8631c74870ea77a337ec58a17cba4a276238c323fdf4be4b4c8",
+              "pcm_sha256": "b2bfb78bcf41487395b2083fb52755130f1bfca40a2461780c61edf9ae53510b"
+            },
+            {
+              "id": "footstep_grass_02",
+              "file": "footstep_grass_02.wav",
+              "frames": 16800,
+              "channels": 1,
+              "sha256": "d23f15d0490230f98eec841d1a42a12b639d8cf38731a398ede7941287397f9a",
+              "pcm_sha256": "0335f8f2a0a2bdd8c3bdbfa84d38bd9a07203e6349328bbd31506756a5524054"
+            },
+            {
+              "id": "footstep_grass_03",
+              "file": "footstep_grass_03.wav",
+              "frames": 15360,
+              "channels": 1,
+              "sha256": "f63a7a6714d0792df593d2ece8b8a5b48ca110e53be0969369595c6834a23832",
+              "pcm_sha256": "eae0b6567cad02e050ba3571fb3f4357e3b00981934358788062dd765057472c"
+            },
+            {
+              "id": "footstep_grass_04",
+              "file": "footstep_grass_04.wav",
+              "frames": 18240,
+              "channels": 1,
+              "sha256": "9e9f454b0bfff5af1ae07a987c631c70688cd0911188b3a600d048c175b0d459",
+              "pcm_sha256": "82a943d6f0faa26a7ab659d3ea6126da68879194b3cc18a9a2f62a0c2c5cc515"
+            },
+            {
+              "id": "footstep_grass_05",
+              "file": "footstep_grass_05.wav",
+              "frames": 14400,
+              "channels": 1,
+              "sha256": "6f090d67e7d607892f9e1fb2420c96f9e7d025c995eca22e4d5bd03d244ee41b",
+              "pcm_sha256": "b243627c1e14fc1afa02f6c0c65c1aa3ec2b6bab2b7fbc23df44fe99a8c3c5db"
+            },
+            {
+              "id": "footstep_grass_06",
+              "file": "footstep_grass_06.wav",
+              "frames": 20160,
+              "channels": 1,
+              "sha256": "58bbdb939965d798493185982e0778310deb45faba8d26345d8d5eda028e0109",
+              "pcm_sha256": "1020d1f052a32a65e49dd4d6fd3077ed7c5de28bb131a84d8b5cdc7bdf276a8e"
+            },
+            {
+              "id": "environment_soft_wind_foliage_loop",
+              "file": "environment_soft_wind_foliage_loop.wav",
+              "frames": 960000,
+              "channels": 2,
+              "sha256": "ea23cfb9bb733d3746fa3da94785debd2e12736b91085ce7cf5aa5132e539fa1",
+              "pcm_sha256": "7b7d5b3f5ca473b0e83d895e25334094f01b52b8db4386da94a881b79bad37b3"
+            },
+            {
+              "id": "music_sparse_tonal_loop",
+              "file": "music_sparse_tonal_loop.wav",
+              "frames": 921600,
+              "channels": 2,
+              "sha256": "1e9199d93d519f20c7209b585a7d860c3d8bd65642f625d13d47f0c14b727e65",
+              "pcm_sha256": "59a1c81153b856890cadb57dc1d2e0afbc4f59fbc1a44cfc93a342d3191ad327"
+            },
+            {
+              "id": "interaction_confirm",
+              "file": "interaction_confirm.wav",
+              "frames": 26400,
+              "channels": 1,
+              "sha256": "768ae8734be59ae4607b258b32da4cee3ec3f8cd0f57a6492e949a5d2473147d",
+              "pcm_sha256": "56b0d4e71dd80e01d0f92f40da50d23857c34a1b39b513eee9e64a8ed12377e7"
+            },
+            {
+              "id": "interaction_discovery",
+              "file": "interaction_discovery.wav",
+              "frames": 79200,
+              "channels": 1,
+              "sha256": "ad10b8cc857c6401b9229f498bc700566ee18f985f21b03c7dce1d30c9c22b27",
+              "pcm_sha256": "85c1efad2f943ec92ba87269d28b6ef2e422ce08d373f75f5c417c7f2a8d0201"
+            },
+            {
+              "id": "interaction_soft_impact",
+              "file": "interaction_soft_impact.wav",
+              "frames": 29760,
+              "channels": 1,
+              "sha256": "534e1305bd7a393b43c6518541114f7794fe877893d6b7d5f5968740ffb7732f",
+              "pcm_sha256": "6bb970cc1b7e15ff6ab987e4c97cd5e38b9757db48d581eb67277bde4a6c665a"
+            }
+          ],
+          "journal": "WORKSPACE/audio-output/trail-and-air-v1/native-render-validation.json"
+        }
+      },
+      "validation_skipped": false,
+      "request_id": "dcc-mcp-cli-151-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  },
+  {
+    "command": [
+      "call",
+      "reaper_stem_session__open_project",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{\"project_path\": \"WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp\"}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_stem_session__open_project",
+      "output": {
+        "success": true,
+        "message": "Native RPP reopened in REAPER",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "host_version": "7.82/linux-x86_64",
+          "project": "WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp",
+          "dirty": false,
+          "tempo": 100.0,
+          "duration": 54.12,
+          "tracks": [
+            {
+              "index": 0,
+              "name": "footstep / stone",
+              "guid": "{56F44923-5658-5C1D-8A82-172B5468657A}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 0.0,
+                  "length": 0.29,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_01.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 0.79,
+                  "length": 0.34,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_02.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 1.63,
+                  "length": 0.31,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_03.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 2.44,
+                  "length": 0.37,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_04.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 3.31,
+                  "length": 0.33,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_05.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 4.14,
+                  "length": 0.41,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_06.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "name": "footstep / grass",
+              "guid": "{29E68731-FE3C-C636-A51A-17B6B15A665D}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 5.05,
+                  "length": 0.28,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_01.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 5.83,
+                  "length": 0.35,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_02.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 6.68,
+                  "length": 0.32,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_03.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 7.5,
+                  "length": 0.38,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_04.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 8.38,
+                  "length": 0.3,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_05.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 9.18,
+                  "length": 0.42,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_06.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "name": "environment",
+              "guid": "{B08878A7-3E93-2C20-B6D4-C3996F3D51B7}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 10.1,
+                  "length": 20.0,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/environment_soft_wind_foliage_loop.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 3,
+              "name": "music",
+              "guid": "{0DECCBB0-E480-92C4-BE94-F28BB4FE40EF}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 30.6,
+                  "length": 19.2,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/music_sparse_tonal_loop.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 4,
+              "name": "interaction",
+              "guid": "{C215441F-2493-3895-DC2D-2490F1C3AC99}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 50.3,
+                  "length": 0.55,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/interaction_confirm.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 51.35,
+                  "length": 1.65,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/interaction_discovery.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 53.5,
+                  "length": 0.62,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/interaction_soft_impact.wav",
+                  "source_exists": true
+                }
+              ]
+            }
+          ],
+          "track_count": 5,
+          "media_item_count": 17
+        }
+      },
+      "validation_skipped": false,
+      "request_id": "dcc-mcp-cli-467-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  },
+  {
+    "command": [
+      "call",
+      "reaper_stem_session__audit_session",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_stem_session__audit_session",
+      "output": {
+        "success": true,
+        "message": "Live REAPER session audited",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "host_version": "7.82/linux-x86_64",
+          "project": "WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp",
+          "dirty": false,
+          "tempo": 100.0,
+          "duration": 54.12,
+          "tracks": [
+            {
+              "index": 0,
+              "name": "footstep / stone",
+              "guid": "{56F44923-5658-5C1D-8A82-172B5468657A}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 0.0,
+                  "length": 0.29,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_01.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 0.79,
+                  "length": 0.34,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_02.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 1.63,
+                  "length": 0.31,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_03.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 2.44,
+                  "length": 0.37,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_04.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 3.31,
+                  "length": 0.33,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_05.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 4.14,
+                  "length": 0.41,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_stone_06.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 1,
+              "name": "footstep / grass",
+              "guid": "{29E68731-FE3C-C636-A51A-17B6B15A665D}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 5.05,
+                  "length": 0.28,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_01.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 5.83,
+                  "length": 0.35,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_02.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 6.68,
+                  "length": 0.32,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_03.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 7.5,
+                  "length": 0.38,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_04.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 8.38,
+                  "length": 0.3,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_05.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 9.18,
+                  "length": 0.42,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/footstep_grass_06.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "name": "environment",
+              "guid": "{B08878A7-3E93-2C20-B6D4-C3996F3D51B7}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 10.1,
+                  "length": 20.0,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/environment_soft_wind_foliage_loop.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 3,
+              "name": "music",
+              "guid": "{0DECCBB0-E480-92C4-BE94-F28BB4FE40EF}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 30.6,
+                  "length": 19.2,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/music_sparse_tonal_loop.wav",
+                  "source_exists": true
+                }
+              ]
+            },
+            {
+              "index": 4,
+              "name": "interaction",
+              "guid": "{C215441F-2493-3895-DC2D-2490F1C3AC99}",
+              "gain": 1.0,
+              "pan": 0.0,
+              "muted": false,
+              "fx_count": 0,
+              "items": [
+                {
+                  "position": 50.3,
+                  "length": 0.55,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/interaction_confirm.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 51.35,
+                  "length": 1.65,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/interaction_discovery.wav",
+                  "source_exists": true
+                },
+                {
+                  "position": 53.5,
+                  "length": 0.62,
+                  "source": "WORKSPACE/audio-output/trail-and-air-v1/media/interaction_soft_impact.wav",
+                  "source_exists": true
+                }
+              ]
+            }
+          ],
+          "track_count": 5,
+          "media_item_count": 17
+        }
+      },
+      "validation_skipped": true,
+      "request_id": "dcc-mcp-cli-478-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  },
+  {
+    "command": [
+      "call",
+      "reaper_session__list_projects",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_session__list_projects",
+      "output": {
+        "success": true,
+        "message": "Open REAPER project tabs",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "host_available": true,
+          "transport": "external",
+          "project_count": 1,
+          "projects": [
+            {
+              "index": 0,
+              "path": "WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp",
+              "name": "Trail-and-Air.rpp",
+              "active": true
+            }
+          ]
+        }
+      },
+      "validation_skipped": true,
+      "request_id": "dcc-mcp-cli-488-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  },
+  {
+    "command": [
+      "call",
+      "reaper_project__project_info",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_project__project_info",
+      "output": {
+        "success": true,
+        "message": "Active REAPER project",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "host_available": true,
+          "transport": "external",
+          "project": {
+            "path": "WORKSPACE/audio-output/trail-and-air-v1/Trail-and-Air.rpp",
+            "name": "Trail-and-Air.rpp",
+            "dirty": false,
+            "length": 54.12,
+            "tempo": 100.0
+          }
+        }
+      },
+      "validation_skipped": true,
+      "request_id": "dcc-mcp-cli-498-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  },
+  {
+    "command": [
+      "call",
+      "reaper_tracks__list_tracks",
+      "--dcc-type",
+      "reaper",
+      "--instance-id",
+      "762939fe-0010-49d6-a082-e38e5474f30f",
+      "--json",
+      "{}"
+    ],
+    "returncode": 0,
+    "result": {
+      "slug": "reaper_tracks__list_tracks",
+      "output": {
+        "success": true,
+        "message": "REAPER project tracks",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "host_available": true,
+          "transport": "external",
+          "tracks": [
+            {
+              "index": 0,
+              "name": "footstep / stone",
+              "guid": "{56F44923-5658-5C1D-8A82-172B5468657A}",
+              "muted": false,
+              "soloed": false,
+              "fx_count": 0
+            },
+            {
+              "index": 1,
+              "name": "footstep / grass",
+              "guid": "{29E68731-FE3C-C636-A51A-17B6B15A665D}",
+              "muted": false,
+              "soloed": false,
+              "fx_count": 0
+            },
+            {
+              "index": 2,
+              "name": "environment",
+              "guid": "{B08878A7-3E93-2C20-B6D4-C3996F3D51B7}",
+              "muted": false,
+              "soloed": false,
+              "fx_count": 0
+            },
+            {
+              "index": 3,
+              "name": "music",
+              "guid": "{0DECCBB0-E480-92C4-BE94-F28BB4FE40EF}",
+              "muted": false,
+              "soloed": false,
+              "fx_count": 0
+            },
+            {
+              "index": 4,
+              "name": "interaction",
+              "guid": "{C215441F-2493-3895-DC2D-2490F1C3AC99}",
+              "muted": false,
+              "soloed": false,
+              "fx_count": 0
+            }
+          ]
+        }
+      },
+      "validation_skipped": false,
+      "request_id": "dcc-mcp-cli-508-0",
+      "_meta": {
+        "dcc": {
+          "dcc_type": "reaper",
+          "instance_id": "762939fe-0010-49d6-a082-e38e5474f30f",
+          "instance_short": "762939fe",
+          "display_id": "reaper@7.82-762939fe"
+        }
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  }
+]

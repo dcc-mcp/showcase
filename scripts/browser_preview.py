@@ -8,16 +8,336 @@ import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from importlib.metadata import version
 import json
-from pathlib import Path
+import os
+from pathlib import Path, PurePosixPath
+import re
 import subprocess
 import threading
+from urllib.parse import quote, urlsplit
 
-from playwright.sync_api import expect, sync_playwright
+
+
+def safe_error_text(error: Exception, origin: str = "") -> str:
+    """Keep public assertion details without leaking runner paths or tokens."""
+    text = str(error)
+    text = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", text)
+    if origin:
+        text = text.replace(origin, "<preview-origin>")
+    text = re.sub(r"https?://[^\s<>\"']+", "<url>", text)
+    text = re.sub(r"(?:[A-Za-z]:[\\/]|/(?:home|Users|workspace|tmp|root|opt|var|private|mnt|run)/)[^\s\"'<>]+",
+                  "<runner-path>", text)
+    text = re.sub(r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|"
+                  r"sk-(?:proj-)?[A-Za-z0-9_-]{20,}|AKIA[A-Z0-9]{16})\b", "<redacted>", text)
+    text = re.sub(r"(?i)\b(?:Bearer\s+\S+|(?:password|api[_-]?key|access[_-]?token|secret)\s*[=:]\s*\S+)",
+                  "<redacted>", text)
+    return text[:4000]
+
+
+def progress(context: dict, stage: str | None = None) -> None:
+    if stage is not None:
+        context["stage"] = stage
+    print(json.dumps({"event": "browser_stage", **context}, ensure_ascii=False), flush=True)
+
+
+def media_diagnostics(page) -> list[dict]:
+    """Only numeric/player state from public pages, never runner/browser internals."""
+    return page.locator("audio, video").evaluate_all("""elements => elements.map(media => ({
+        tag: media.tagName.toLowerCase(), ready_state: media.readyState,
+        network_state: media.networkState, paused: media.paused, ended: media.ended,
+        duration_seconds: Number.isFinite(media.duration) ? media.duration : null,
+        current_time: media.currentTime, controls: media.controls, autoplay: media.autoplay,
+        width: media.videoWidth || null, height: media.videoHeight || null,
+        seekable: Array.from({length: media.seekable.length}, (_, i) => [media.seekable.start(i), media.seekable.end(i)]),
+        buffered: Array.from({length: media.buffered.length}, (_, i) => [media.buffered.start(i), media.buffered.end(i)]),
+        error_code: media.error ? media.error.code : null
+    }))""")
+
+def public_file_url(origin: str, path: str) -> str:
+    """Only construct URLs beneath the isolated local public-site origin."""
+    parts = urlsplit(path)
+    if (not path or parts.scheme or parts.netloc or parts.query or parts.fragment
+            or path.startswith("/") or "\\" in path or "%" in path
+            or any(part in ("", ".", "..") for part in path.split("/"))):
+        raise ValueError("Expected a safe relative public file path")
+    return origin + "/" + quote(path, safe="/")
+
+
+def selected_public_files(case: dict, manifest: dict) -> dict[str, dict]:
+    """Require hashes for the selected cover, result media and local resources."""
+    entry = "docs/showcase/" + case["slug"] + "/"
+    rows = {}
+    for row in manifest["files"]:
+        path = entry + row["path"]
+        public_file_url("http://127.0.0.1", path)
+        if path in rows:
+            raise ValueError("Duplicate public manifest file")
+        rows[path] = row
+    paths = {case["cover"]["src"]}
+    paths.update(result["src"] for result in case["results"])
+    paths.update(item["url"] for item in case["resources"]
+                 if not urlsplit(item["url"]).scheme)
+    selected = {}
+    for path in sorted(paths):
+        public_file_url("http://127.0.0.1", path)
+        if not path.startswith(entry) or path not in rows:
+            raise ValueError("Selected public file is absent from its entry manifest")
+        row = rows[path]
+        if (type(row.get("bytes")) is not int or row["bytes"] <= 0
+                or not isinstance(row.get("sha256"), str)
+                or len(row["sha256"]) != 64
+                or any(char not in "0123456789abcdef" for char in row["sha256"])):
+            raise ValueError("Selected public file requires a byte count and SHA-256")
+        selected[path] = row
+    return selected
+
+
+def check_public_payload(path: str, payload: bytes, expected: dict) -> dict:
+    digest = hashlib.sha256(payload).hexdigest()
+    if len(payload) != expected["bytes"] or digest != expected["sha256"]:
+        raise AssertionError("Public file bytes or SHA-256 differ from manifest: " + path)
+    return {"path": path, "bytes": len(payload), "sha256": digest}
+
+
+def fetch_public_file(request, origin: str, path: str) -> bytes:
+    # APIRequestContext does not use page routing. Validate before sending, and
+    # forbid redirects so a public reference can never fetch an external URL.
+    url = public_file_url(origin, path)
+    response = request.get(url, max_redirects=0)
+    try:
+        if response.status != 200 or response.url != url:
+            raise AssertionError("Public file did not return local HTTP 200: " + path)
+        return response.body()
+    finally:
+        response.dispose()
+
+
+def keyboard_seek_audio(page, audio) -> float:
+    """Activate the accessible forward button with a genuine keyboard event."""
+    button = audio.locator("..").locator('button[data-audio-seek="5"]')
+    button.wait_for(state="visible")
+    if not button.is_enabled():
+        raise AssertionError("Audio forward button is disabled after metadata loaded")
+    before = audio.evaluate("a => a.currentTime")
+    button.focus()
+    if not button.evaluate("button => document.activeElement === button"):
+        raise AssertionError("Audio forward button did not receive keyboard focus")
+    print(json.dumps({"event": "audio_seek_before", "media_state": media_diagnostics(page)}), flush=True)
+    page.keyboard.press("Enter")
+    page.wait_for_function("""before => {
+        const a = document.querySelector('#results audio');
+        return a.paused && !a.seeking && a.currentTime >= before + 4;
+    }""", arg=before)
+    print(json.dumps({"event": "audio_seek_after", "media_state": media_diagnostics(page)}), flush=True)
+    return audio.evaluate("a => a.currentTime")
+
+
+def verify_audio_case(page, context, case: dict, site: Path, origin: str,
+                      output: Path, layout: str, active_context: dict) -> dict:
+    from playwright.sync_api import expect
+
+    progress(active_context, "audio_controls_and_metadata")
+    page.get_by_role("link", name="成果", exact=True).click()
+    page.wait_for_url("**/#results")
+    results = page.locator("#results")
+    expect(results).to_be_in_viewport()
+    audio = results.locator("audio")
+    expect(audio).to_have_count(1)
+    expect(audio).to_be_visible()
+    media = next(item for item in case["results"] if item["src"].endswith(".mp3"))
+    expected_url = public_file_url(origin, media["src"])
+    expect(audio).to_have_js_property("controls", True)
+    expect(audio).to_have_attribute("aria-label", media["alt"])
+    expect(audio).to_have_attribute("preload", "metadata")
+    expect(audio).to_have_attribute("tabindex", "0")
+    expect(audio).to_have_js_property("autoplay", False)
+    if audio.get_attribute("autoplay") is not None:
+        raise AssertionError("Audio must not include any autoplay attribute")
+    expect(audio.locator("source")).to_have_count(1)
+    expect(audio.locator("source")).to_have_attribute("type", "audio/mpeg")
+    expect(audio.locator("source")).to_have_js_property("src", expected_url)
+    page.wait_for_function("""() => {
+        const a = document.querySelector('#results audio');
+        return a.readyState >= 1 && Number.isFinite(a.duration) && a.duration > 0;
+    }""")
+    expect(audio).to_have_js_property("currentSrc", expected_url)
+    expect(audio).to_have_js_property("paused", True)
+    expect(audio).to_have_js_property("currentTime", 0)
+    if audio.evaluate("a => a.played.length") != 0:
+        raise AssertionError("Audio played before a user gesture")
+    duration = audio.evaluate("a => a.duration")
+    if abs(duration - 28.6) > 0.15:
+        raise AssertionError("Unexpected Trail & Air audio duration")
+
+    progress(active_context, "audio_keyboard_play")
+    audio.focus()
+    expect(audio).to_be_focused()
+    page.keyboard.press("Space")
+    page.wait_for_function("""() => {
+        const a = document.querySelector('#results audio');
+        return !a.paused && a.currentTime >= 0.2;
+    }""")
+    progress(active_context, "audio_keyboard_pause")
+    page.keyboard.press("Space")
+    expect(audio).to_have_js_property("paused", True)
+    progress(active_context, "audio_keyboard_seek_button")
+    seek_time = keyboard_seek_audio(page, audio)
+    expect(audio).to_have_js_property("paused", True)
+
+    progress(active_context, "audio_replay_after_end")
+    audio.focus()
+    expect(audio).to_be_focused()
+    # Seek near the end to exercise a genuine ended event without a 29-second
+    # delay per viewport. Playback and replay themselves use native keyboard UI.
+    audio.evaluate("a => { a.currentTime = a.duration - 0.2; }")
+    page.wait_for_function("() => !document.querySelector('#results audio').seeking")
+    page.keyboard.press("Space")
+    page.wait_for_function("() => document.querySelector('#results audio').ended")
+    expect(audio).to_have_js_property("paused", True)
+    page.keyboard.press("Space")
+    page.wait_for_function("""() => {
+        const a = document.querySelector('#results audio');
+        return !a.paused && !a.ended && a.currentTime >= 0.1 && a.currentTime < 3;
+    }""")
+    page.keyboard.press("Space")
+    expect(audio).to_have_js_property("paused", True)
+
+    progress(active_context, "audio_public_resource_integrity")
+    manifest_path = "docs/showcase/" + case["slug"] + "/manifest.json"
+    manifest_bytes = fetch_public_file(context.request, origin, manifest_path)
+    if manifest_bytes != (site / manifest_path).read_bytes():
+        raise AssertionError("Served entry manifest differs from the public build")
+    manifest = json.loads(manifest_bytes)
+    selected = selected_public_files(case, manifest)
+    linked_resources = page.locator("#resources a, #downloads a").evaluate_all(
+        "links => links.map(link => ({url: link.href, download: link.getAttribute('download')}))")
+    for item in case["resources"]:
+        if urlsplit(item["url"]).scheme:
+            continue
+        url = public_file_url(origin, item["url"])
+        matches = [link for link in linked_resources if link["url"] == url]
+        if not matches:
+            raise AssertionError("Selected local resource link is missing")
+        if item["url"].endswith(".zip") and not any(
+                link["download"] == PurePosixPath(item["url"]).name for link in matches):
+            raise AssertionError("ZIP resource requires its native download link")
+    fetched = [check_public_payload(path, fetch_public_file(context.request, origin, path), row)
+               for path, row in selected.items()]
+    fallback = audio.locator("..").locator("a[download]")
+    expect(fallback).to_have_count(1)
+    expect(fallback).to_have_js_property("href", expected_url)
+    expect(fallback).to_have_attribute("download", PurePosixPath(media["src"]).name)
+    with page.expect_download() as download_info:
+        fallback.click()
+    download = download_info.value
+    if download.failure() is not None or download.suggested_filename != PurePosixPath(media["src"]).name:
+        raise AssertionError("Audio fallback download failed")
+    downloaded = check_public_payload(media["src"], Path(download.path()).read_bytes(),
+                                      selected[media["src"]])
+
+    progress(active_context, "audio_results_screenshots")
+    audio.scroll_into_view_if_needed()
+    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+        raise AssertionError("Audio case horizontal overflow")
+    if not audio.evaluate("""a => {
+        const r = a.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && r.left >= -1 && r.right <= innerWidth + 1;
+    }"""):
+        raise AssertionError("Audio controls overflow the viewport")
+    screenshots = []
+    for label, target in (("results", results), ("player", audio.locator(".."))):
+        name = layout + "-" + case["slug"] + "-" + label + ".png"
+        target.screenshot(path=str(output / name), animations="disabled")
+        screenshots.append({"screenshot": name,
+                            "sha256": hashlib.sha256((output / name).read_bytes()).hexdigest()})
+    return {"layout": layout, "case_slug": case["slug"], "duration_seconds": duration,
+            "native_controls": True, "accessible_label": media["alt"], "preload": "metadata",
+            "autoplay": False, "keyboard_play_and_pause": True, "keyboard_seek": True,
+            "seek_seconds": seek_time, "seek_control": "explicit_5_second_buttons", "replay_after_end": True, "horizontal_overflow": False,
+            "manifest": manifest_path, "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+            "public_files": fetched, "fallback_download": downloaded, "screenshots": screenshots}
+
+
+def parse_byte_range(value: str, size: int) -> tuple[int, int]:
+    """Resolve one bytes range to inclusive offsets; reject multipart ranges."""
+    match = re.fullmatch(r"bytes=([0-9]*)-([0-9]*)", value.strip())
+    if not match or size <= 0 or not any(match.groups()):
+        raise ValueError("Invalid or unsatisfiable byte range")
+    first, last = match.groups()
+    if not first:
+        suffix = int(last)
+        if suffix <= 0:
+            raise ValueError("Invalid or unsatisfiable byte range")
+        return max(0, size - suffix), size - 1
+    start = int(first)
+    end = min(int(last), size - 1) if last else size - 1
+    if start >= size or start > end:
+        raise ValueError("Invalid or unsatisfiable byte range")
+    return start, end
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+    def end_headers(self):
+        self.send_header("Accept-Ranges", "bytes")
+        super().end_headers()
+
+    def send_head(self):
+        self._range_remaining = None
+        ranges = self.headers.get_all("Range", [])
+        # HEAD ignores Range. Delegate ordinary and conditional responses to
+        # the stdlib, including redirects, cache validation and full transfers.
+        # Ignoring Range for conditional requests is safe; it avoids treating
+        # an unverified If-Range validator as permission to return partial data.
+        if (self.command != "GET" or not ranges or "If-Range" in self.headers
+                or "If-Modified-Since" in self.headers):
+            return super().send_head()
+        path = self.translate_path(self.path)
+        if os.path.isdir(path):
+            return super().send_head()
+        if path.endswith("/"):
+            self.send_error(404, "File not found")
+            return None
+        try:
+            source = open(path, "rb")
+        except OSError:
+            self.send_error(404, "File not found")
+            return None
+        try:
+            stat = os.fstat(source.fileno())
+            try:
+                start, end = parse_byte_range(",".join(ranges), stat.st_size)
+            except ValueError:
+                source.close()
+                self.send_response(416)
+                self.send_header("Content-Range", f"bytes */{stat.st_size}")
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return None
+            source.seek(start)
+            self._range_remaining = end - start + 1
+            self.send_response(206)
+            self.send_header("Content-type", self.guess_type(path))
+            self.send_header("Content-Range", f"bytes {start}-{end}/{stat.st_size}")
+            self.send_header("Content-Length", str(self._range_remaining))
+            self.send_header("Last-Modified", self.date_time_string(stat.st_mtime))
+            self.end_headers()
+            return source
+        except BaseException:
+            source.close()
+            raise
+
+    def copyfile(self, source, outputfile):
+        if self._range_remaining is None:
+            return super().copyfile(source, outputfile)
+        remaining = self._range_remaining
+        while remaining:
+            chunk = source.read(min(64 * 1024, remaining))
+            if not chunk:
+                break
+            outputfile.write(chunk)
+            remaining -= len(chunk)
 
 
 def git_value(*args: str) -> str:
@@ -25,6 +345,8 @@ def git_value(*args: str) -> str:
 
 
 def run(site: Path, output: Path, expected_head: str) -> int:
+    from playwright.sync_api import expect, sync_playwright
+
     head = git_value("rev-parse", "HEAD")
     if head != expected_head:
         raise ValueError("Checkout does not match the requested head")
@@ -34,12 +356,13 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     collection = json.loads(Path("collection.json").read_text(encoding="utf-8"))
     cases = collection["cases"]
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
-              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": []}
+              "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": [], "audio": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     origin = "http://127.0.0.1:%d" % server.server_address[1]
     active_context = {"stage": "browser_launch"}
+    progress(active_context)
     try:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch()
@@ -49,7 +372,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                          ("mobile", {"width": 390, "height": 844})):
                     context = browser.new_context(viewport=viewport, device_scale_factor=1,
                                                   reduced_motion="reduce", locale="zh-CN",
-                                                  service_workers="block")
+                                                  service_workers="block", accept_downloads=True)
                     errors = []
                     def route(request_route):
                         if request_route.request.url.startswith(origin + "/"):
@@ -64,6 +387,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                     page.on("response", lambda response: errors.append("http_error") if response.status >= 400 else None)
                     try:
                         active_context = {"stage": "gallery_search_reset", "layout": layout}
+                        progress(active_context)
                         page.goto(origin + "/", wait_until="networkidle")
                         page.evaluate("document.fonts.ready")
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
@@ -73,7 +397,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
                         if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
                             raise AssertionError("Homepage horizontal overflow")
-                        active_context["stage"] = "gallery_images"
+                        progress(active_context, "gallery_images")
                         covers = page.locator(".case-card img")
                         expect(covers).to_have_count(len(cases))
                         loaded_images = []
@@ -98,8 +422,11 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                         for case in cases:
                             active_context = {"stage": "models_navigation", "layout": layout,
                                               "case_slug": case["slug"]}
+                            progress(active_context)
                             path = "/cases/%s/" % case["slug"]
-                            page.goto(origin + path, wait_until="networkidle")
+                            # Media preload/range requests need not become network-idle.
+                            # Fonts, page content and media readiness are awaited below.
+                            page.goto(origin + path, wait_until="domcontentloaded")
                             page.evaluate("document.fonts.ready")
                             expect(page.locator("h1")).to_have_text(case["title"])
                             page.get_by_role("link", name="模型与版本", exact=True).click()
@@ -107,7 +434,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             section = page.locator("#models")
                             expect(section).to_be_in_viewport()
                             expect(section.locator("dt")).to_have_count(len(case["model_attribution"]))
-                            active_context["stage"] = "model_fields"
+                            progress(active_context, "model_fields")
                             for index, row in enumerate(case["model_attribution"]):
                                 stage = section.locator("dt").nth(index)
                                 expect(stage).to_have_text(row["stage"])
@@ -121,7 +448,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             if not no_overflow:
                                 raise AssertionError("Case page horizontal overflow")
                             image_name = layout + "-" + case["slug"] + "-models.png"
-                            active_context["stage"] = "screenshot"
+                            progress(active_context, "screenshot")
                             section.screenshot(path=str(output / image_name), animations="disabled")
                             report["pages"].append({"layout": layout, "path": path + "#models",
                                 "viewport": viewport, "attribution_rows": len(case["model_attribution"]),
@@ -129,28 +456,41 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                 "screenshot": image_name,
                                 "sha256": hashlib.sha256((output / image_name).read_bytes()).hexdigest()})
                             if case["slug"] == "orbit-post-office":
-                                active_context["stage"] = "orbit_film_controls"
+                                progress(active_context, "orbit_film_controls")
                                 page.get_by_role("link", name="成果", exact=True).click()
                                 video = page.locator("#results video")
                                 expect(video).to_have_count(1)
                                 expect(video).to_be_visible()
                                 expect(video).to_have_js_property("controls", True)
+                                progress(active_context, "orbit_film_metadata")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video'); return v.readyState >= 1 && v.videoWidth === 1280 && v.videoHeight === 720; }")
                                 duration = video.evaluate("v => v.duration")
                                 if abs(duration - 7.018) > 0.05:
                                     raise AssertionError("Unexpected Orbit film duration")
+                                progress(active_context, "orbit_film_keyboard_play")
                                 video.press("Space")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video'); return !v.paused && v.currentTime >= 0.2; }")
+                                progress(active_context, "orbit_film_keyboard_pause")
                                 video.press("Space")
                                 expect(video).to_have_js_property("paused", True)
+                                progress(active_context, "orbit_film_screenshot")
                                 film_name = layout + "-orbit-post-office-film.png"
                                 video.locator("..").screenshot(path=str(output / film_name), animations="disabled")
                                 report["films"].append({"layout": layout, "case_slug": case["slug"],
                                     "duration_seconds": duration, "width": 1280, "height": 720,
                                     "keyboard_play_and_pause": True, "screenshot": film_name,
                                     "sha256": hashlib.sha256((output / film_name).read_bytes()).hexdigest()})
+                            if case["slug"] == "trail-and-air":
+                                report["audio"].append(verify_audio_case(
+                                    page, context, case, site, origin, output, layout, active_context))
                         if errors:
                             raise AssertionError("Browser reported resource or script errors")
+                    except Exception:
+                        try:
+                            report["media_state"] = media_diagnostics(page)
+                        except Exception:
+                            report["media_state"] = {"unavailable": True}
+                        raise
                     finally:
                         context.close()
             finally:
@@ -160,6 +500,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     except Exception as error:
         report["status"] = "failed"
         report["error_type"] = type(error).__name__
+        report["error_message"] = safe_error_text(error, origin)
         report["failure_context"] = active_context
         return 1
     finally:
@@ -167,7 +508,13 @@ def run(site: Path, output: Path, expected_head: str) -> int:
         server.server_close()
         thread.join(timeout=5)
         (output / "report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        print(json.dumps({"status": report["status"], "source_head": head, "page_checks": len(report["pages"])}))
+        summary = {"status": report["status"], "source_head": head,
+                   "page_checks": len(report["pages"]), "film_checks": len(report["films"]),
+                   "audio_checks": len(report["audio"])}
+        for key in ("error_type", "error_message", "failure_context", "media_state"):
+            if key in report:
+                summary[key] = report[key]
+        print(json.dumps(summary, ensure_ascii=False), flush=True)
 
 
 if __name__ == "__main__":

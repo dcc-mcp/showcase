@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3744,
+      "sha256": "10c27532bbe660b10c944df290ea93d50bfd700895ef51d27d74ac84aac374f6"
+    },
+    {
+      "path": "Trail-and-Air-Ambience.zip",
+      "bytes": 5239926,
+      "sha256": "60560da452928ac8b8e51eca8b5e745d92595643f705524e878928fec383b097"
+    },
+    {
+      "path": "Trail-and-Air-Music.zip",
+      "bytes": 5204648,
+      "sha256": "7338eadfc1205e47300d8896f2222bd3e1ea6e584c50c5679f63cab0d040f99a"
+    },
+    {
+      "path": "Trail-and-Air-OneShots.zip",
+      "bytes": 869470,
+      "sha256": "b1332611266cf20e47eb423401491415a39e9b77c0774fe1edd17ea9edc7988e"
+    },
+    {
+      "path": "Trail-and-Air-Source.zip",
+      "bytes": 59362,
+      "sha256": "4b9dddad33c5e97f2269f1cdea5b5417853ca64cf0e72bf02fa93704a830ac10"
+    },
+    {
+      "path": "Trail-and-Air-audition.mp3",
+      "bytes": 687788,
+      "sha256": "2a3ea68fcab4143928dca3fcc14b72bc428861c5ccddc14badcdc75f58f7a4af"
+    },
+    {
+      "path": "audio-manifest.json",
+      "bytes": 55696,
+      "sha256": "0c562baf4d649e2f0897eee499f30aa76ff22403d1f153eea4f4419075540127"
+    },
+    {
+      "path": "downloads.json",
+      "bytes": 610,
+      "sha256": "8a2148ebee47a35d6a1bb9b92328d24dfddf75ebbcdd0d8785e2f10b0d6238de"
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 127919,
+      "sha256": "bdbc1f204eec90fa68002a8b51658e8e75f1a186afce4de19434b0f07c695fef",
+      "width": 1440,
+      "height": 960
+    },
+    {
+      "path": "mcp-evidence.public.json",
+      "bytes": 27339,
+      "sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05"
+    },
+    {
+      "path": "native-signal-checks.json",
+      "bytes": 6939,
+      "sha256": "5df31c800e9149b7b4add4dc7daab2dd33296325544654e0d5b5d20d85e7ec5c"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 1640,
+      "sha256": "06693474ce2396fed55b7592e4575b9980643c41b3782ccd0e814771c27a7e86"
+    }
+  ]
+}
