@@ -20,8 +20,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4747,
-      "sha256": "6b2abf3abf0692d7980c1d61623966ccbeb315256d47c501ea7508a586bfc08d"
+      "bytes": 6223,
+      "sha256": "12bdbd165b66227df70a459dc6362d30f15d66b5faf43179fe02d235f08491c2"
     },
     {
       "path": "before.jpg",
@@ -89,6 +89,41 @@
       "path": "validation.json",
       "bytes": 14101,
       "sha256": "c559eded42e3637ceebd6dfce8da240fd1fe61db2a4f8c7a11c7a5b6b51afba2"
+    },
+    {
+      "path": "soundtrack-native-audit.json",
+      "bytes": 2295,
+      "sha256": "3fc2f10cd58a920bd67ef5459545ebded4ca1cef04a010e2c7f8d60e500fd494"
+    },
+    {
+      "path": "soundtrack-cues.json",
+      "bytes": 2075,
+      "sha256": "525e0a5b59115709231981b333bd9d84eca81aa4e03f76d396264ed8d014636b"
+    },
+    {
+      "path": "soundtrack-native-validation.json",
+      "bytes": 693,
+      "sha256": "3f3c60bb4d20f50b4705b6cce36f5e95c06f80555eb177927a77c12aad6e1b11"
+    },
+    {
+      "path": "soundtrack-media-qa.json",
+      "bytes": 2531,
+      "sha256": "15333c48f8486dfdf4ad5281e2518d60f5e724d9c198c07a2370b739d88833f7"
+    },
+    {
+      "path": "SOUNDTRACK-LICENSES.md",
+      "bytes": 1032,
+      "sha256": "e25c3fa104c5ea1c1bdd8c63f0f4eee3f7fe9250f4e4324f1afd2c9dde53403d"
+    },
+    {
+      "path": "brass-relay-native-score.zip",
+      "bytes": 3665256,
+      "sha256": "10f1419c7f03b1da6d43cc8fed83ba22d8aa795949e7c3bbb8e40a9b2a73d409"
+    },
+    {
+      "path": "brass-relay-scored.mp4",
+      "bytes": 2387530,
+      "sha256": "cb3987ab8ed23caaf434d9ee3739bf8d195344891345838e441c6d92e237174d"
     }
   ]
 }

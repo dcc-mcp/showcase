@@ -257,6 +257,43 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
             "public_files": fetched, "fallback_download": downloaded, "screenshots": screenshots}
 
 
+
+def verify_scored_video(page, context, case, origin, output, layout, active_context):
+    """Exercise newly scored public films without replacing original-film checks."""
+    from playwright.sync_api import expect
+    slug = case["slug"]
+    progress(active_context, "scored_film_metadata")
+    page.get_by_role("link", name="成果", exact=True).click()
+    video = page.locator('#results video:has(source[src$="' + slug + '-scored.mp4"])')
+    expect(video).to_have_count(1)
+    video.scroll_into_view_if_needed()
+    expect(video).to_be_visible()
+    expect(video).to_have_js_property("controls", True)
+    expect(video).to_have_js_property("autoplay", False)
+    expect(video).to_have_js_property("paused", True)
+    video.evaluate("v => v.load()")
+    page.wait_for_function("slug => document.querySelector('#results video:has(source[src$=\"' + slug + '-scored.mp4\"])').readyState >= 1", arg=slug, timeout=15000)
+    qa_path = "docs/showcase/" + slug + "/soundtrack-media-qa.json"
+    qa = json.loads(fetch_public_file(context.request, origin, qa_path))
+    actual = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
+    if abs(actual["duration"] - qa["video_seconds"]) > .06 or actual["width"] != qa["video_width"] or actual["height"] != qa["video_height"]:
+        raise AssertionError("Scored media dimensions or duration do not match verified picture")
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Scored video played before a user gesture")
+    progress(active_context, "scored_film_keyboard_play_pause")
+    video.press("Space")
+    page.wait_for_function("slug => { const v = document.querySelector('#results video:has(source[src$=\"' + slug + '-scored.mp4\"])'); return !v.paused && v.currentTime >= .2; }", arg=slug, timeout=15000)
+    video.press("Space")
+    expect(video).to_have_js_property("paused", True)
+    data = fetch_public_file(context.request, origin, "docs/showcase/" + slug + "/" + slug + "-scored.mp4")
+    if hashlib.sha256(data).hexdigest() != qa["scored_sha256"]:
+        raise AssertionError("Served scored movie differs from verified file")
+    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+        raise AssertionError("Scored video page horizontal overflow")
+    name = layout + "-" + slug + "-scored-film.png"
+    video.locator("..").screenshot(path=str(output/name), animations="disabled")
+    return {"layout":layout,"case_slug":slug,"duration_seconds":actual["duration"],"width":actual["width"],"height":actual["height"],"keyboard_play_and_pause":True,"autoplay":False,"served_sha256":qa["scored_sha256"],"screenshot":name,"sha256":hashlib.sha256((output/name).read_bytes()).hexdigest()}
+
 def parse_byte_range(value: str, size: int) -> tuple[int, int]:
     """Resolve one bytes range to inclusive offsets; reject multipart ranges."""
     match = re.fullmatch(r"bytes=([0-9]*)-([0-9]*)", value.strip())
@@ -458,7 +495,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             if case["slug"] == "orbit-post-office":
                                 progress(active_context, "orbit_film_controls")
                                 page.get_by_role("link", name="成果", exact=True).click()
-                                video = page.locator("#results video")
+                                video = page.locator('#results video:has(source[src$="first-delivery-720p.mp4"])')
                                 expect(video).to_have_count(1)
                                 expect(video).to_be_visible()
                                 expect(video).to_have_js_property("controls", True)
@@ -480,6 +517,8 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                     "duration_seconds": duration, "width": 1280, "height": 720,
                                     "keyboard_play_and_pause": True, "screenshot": film_name,
                                     "sha256": hashlib.sha256((output / film_name).read_bytes()).hexdigest()})
+                            if case["slug"] in {"crystal-freight-native-film", "brass-relay", "orbit-post-office"}:
+                                report["films"].append(verify_scored_video(page, context, case, origin, output, layout, active_context))
                             if case["slug"] == "trail-and-air":
                                 report["audio"].append(verify_audio_case(
                                     page, context, case, site, origin, output, layout, active_context))

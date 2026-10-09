@@ -52,3 +52,14 @@ Exact-head CI checks the public pages on desktop and mobile. Public player and d
 ## Model and version attribution
 
 Original planning, artwork, DCC operation, code, reference generation and film-making model names and reasoning effort are unrecorded in the retained production evidence. They remain unknown. The case page separately records the current publication review configuration and its limited scope; it cannot establish historical creation identity or backend identity. This update presents the station/worlds revision and seven-second film while preserving the earlier icon prototype unchanged.
+
+
+## 2026-10-09 · Added native REAPER score
+
+[Play/download the newly scored film](orbit-post-office-scored.mp4). [Native MIDI project, original sources, skills and lossless WAV](orbit-post-office-native-score.zip).
+
+The original silent film remains unchanged. This new version uses 29 editable native MIDI notes with stock REAPER ReaSynth, plus separately labeled original procedural SFX. A real typed DCC-MCP workflow composed notes, configured actual instrument parameters, saved/reopened the RPP and rendered an exact 7.0-second stereo 48 kHz/24-bit master. Native peak normalization targets -3 dBFS with short endpoint fades.
+
+FFmpeg only copied the unchanged H.264 stream and encoded the actual native master to AAC. Every decoded video frame, frame count and picture duration matches the original; AAC aligns to the native master with zero sample offset. [Media checks](soundtrack-media-qa.json), [native state](soundtrack-native-audit.json), [native signal checks](soundtrack-native-validation.json), [cue timings](soundtrack-cues.json) and [scoped soundtrack rights](SOUNDTRACK-LICENSES.md) are retained. Fine cue timings follow public visual sampling, approximately ±0.25 s for non-edit events. No subjective listening or private game integration is claimed.
+
+See the [Trail & Air audio workflow](https://dcc-mcp.github.io/showcase/cases/trail-and-air/) for the related reusable audio pipeline. Original visual rights are unchanged; CC0 applies only to new standalone audio.

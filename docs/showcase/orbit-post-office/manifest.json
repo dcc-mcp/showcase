@@ -24,8 +24,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8576,
-      "sha256": "1e6f4529c5c232ea018c77c4ffa827b244317392a74496c9f8e7e94fa62722bb"
+      "bytes": 10063,
+      "sha256": "4abb586ff58324db3e9f4672bd14d564f59cc4a83dfb49f022c70ea47a0471e8"
     },
     {
       "path": "RUNTIME-PINS.json",
@@ -281,6 +281,41 @@
       "path": "validation.json",
       "bytes": 4361,
       "sha256": "616b282c8096c71ab25108d878f4c9c45afe219d9f11da5c93d4dc75b4f67b7c"
+    },
+    {
+      "path": "soundtrack-native-audit.json",
+      "bytes": 1917,
+      "sha256": "aeab5ee7dde8625439ae6f827bcbfa0571113a92edc0a54da1acb43fa3904d0d"
+    },
+    {
+      "path": "orbit-post-office-native-score.zip",
+      "bytes": 1610383,
+      "sha256": "57cabc020ac4d2750860fd760f14113c81c959d71c7c23cc62e26121c56875ee"
+    },
+    {
+      "path": "soundtrack-cues.json",
+      "bytes": 2056,
+      "sha256": "36c5e3372b0d9993bc4382770efadee74a19bd08fd40d5394d997737a0cbc0d9"
+    },
+    {
+      "path": "soundtrack-native-validation.json",
+      "bytes": 691,
+      "sha256": "575636479a7be70f095964256f065ba9985f0074a214a3201db2d998506263d9"
+    },
+    {
+      "path": "soundtrack-media-qa.json",
+      "bytes": 2557,
+      "sha256": "224dcc7c5eb16905fa94be74ec5ab9791abf0f5409dc5b8dd8284e9f2fcaa96d"
+    },
+    {
+      "path": "orbit-post-office-scored.mp4",
+      "bytes": 421041,
+      "sha256": "c9548dbbb33db5cff37729876b97863fb6cce5375fa29104cb8f0920b4293444"
+    },
+    {
+      "path": "SOUNDTRACK-LICENSES.md",
+      "bytes": 1032,
+      "sha256": "e25c3fa104c5ea1c1bdd8c63f0f4eee3f7fe9250f4e4324f1afd2c9dde53403d"
     }
   ],
   "note": "Current native source packages are unavailable publicly; v1 ZIP and historical-v1 records identify the unchanged older prototype."

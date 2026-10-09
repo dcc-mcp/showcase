@@ -1,0 +1,63 @@
+{
+  "slug": "crystal-freight-native-film",
+  "duration_seconds": 20,
+  "fps": 24,
+  "title": "Crystal Freight — quarry miniature",
+  "music": "Warm whimsical chamber miniature: soft mallet/celesta motif, rounded bass, quiet wood-click ostinato. Suggested 120 BPM, 10 bars. Sparse and toy-scale, not a heavy cinematic trailer.",
+  "cues": [
+    [
+      0,
+      4,
+      "Title and static world",
+      "Introduce two-note mallet motif, warm sustained harmony; no literal running wheels yet."
+    ],
+    [
+      4,
+      7,
+      "Train approaches loading position",
+      "Soft wheel/rail clicks in a gently accelerating or steady restrained rhythm; subtly pan left toward right."
+    ],
+    [
+      7.3,
+      8.2,
+      "Crystal lowers into wagon",
+      "Short hoist whirr with descending contour, kept below melody."
+    ],
+    [
+      8.2,
+      8.35,
+      "Crystal reaches wagon",
+      "Small woody/stone contact plus a soft high crystal ping; exact landing approximately 8.2s from quarter-second visual samples, not a certified physics timestamp."
+    ],
+    [
+      8.3,
+      9.8,
+      "Hook retracts",
+      "Brief upward mechanical whirr, light ticking; no repeated impacts."
+    ],
+    [
+      10,
+      14,
+      "Train departs through gate",
+      "Return wheel pulse with brighter answering melody; fade literal rail effects by cut."
+    ],
+    [
+      14,
+      18,
+      "Detail shot",
+      "Remove running-train SFX; resolve melody with a gentle sustained chord and sparse shimmer."
+    ],
+    [
+      18,
+      20,
+      "Closing wide shot and credit",
+      "Final small cadence, natural short decay ending before 20s."
+    ]
+  ],
+  "source_case_url": "https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/",
+  "source_video_url": "https://dcc-mcp.github.io/showcase/docs/showcase/crystal-freight-native-film/film-1280.mp4",
+  "source_license_url": "https://dcc-mcp.github.io/showcase/docs/showcase/crystal-freight-native-film/LICENSES.md",
+  "rights": "Original artwork/video rights reserved; excluded from site MIT. User specifically requests adding original music/SFX to their existing showcase. Preserve attribution and scoped rights; do not add MIT/CC0 to original visuals.",
+  "cue_evidence": "Frame contact sheets at 1fps, targeted train/gameplay at 4fps; train/brass editorial cuts cross-checked against public Kdenlive XML. Fine event times approximate ±0.25s unless cut boundary.",
+  "delivery": "Native REAPER project + 48kHz stereo WAV from actual MCP host; web AAC MP4 is packaging derivative. Preserve original H264 video bytes using stream copy. Keep original silent video."
+}

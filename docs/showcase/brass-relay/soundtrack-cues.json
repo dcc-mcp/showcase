@@ -1,0 +1,45 @@
+{
+  "slug": "brass-relay",
+  "duration_seconds": 18,
+  "fps": 24,
+  "title": "Brass Relay — precise mechanical study",
+  "music": "Clean 120 BPM precision pulse. Original muted metallic/mallet tones with warm restrained bass and dry alternating micro-clicks. 4-second rotation maps to two 4/4 bars; distinguish steady input from oscillating output.",
+  "cues": [
+    [
+      0,
+      3,
+      "Title and static mechanism",
+      "Open with delicate metallic motif and low soft chord; no false rotation Foley."
+    ],
+    [
+      3,
+      7,
+      "Continuous input: first 4s rotation",
+      "Start even 0.5s ticks and subtle four-note ostinato; small pitch accent once per revolution."
+    ],
+    [
+      7,
+      11,
+      "Oscillating output: second 4s rotation",
+      "Same tempo, alternating stereo/pitch answer to suggest swing; no clattering that masks geometry."
+    ],
+    [
+      11,
+      15,
+      "Static plan / geometry explanation",
+      "Drop mechanical clicks, leave airy chord and brief mallet answer."
+    ],
+    [
+      15,
+      18,
+      "Closing hero view",
+      "Warm cadence; end tail within exact 18s."
+    ]
+  ],
+  "source_case_url": "https://dcc-mcp.github.io/showcase/cases/brass-relay/",
+  "source_video_url": "https://dcc-mcp.github.io/showcase/docs/showcase/brass-relay/film-1280.mp4",
+  "source_license_url": "https://dcc-mcp.github.io/showcase/docs/showcase/brass-relay/LICENSES.md",
+  "rights": "Original artwork/video rights reserved; excluded from site MIT. User specifically requests adding original music/SFX to their existing showcase. Preserve attribution and scoped rights; do not add MIT/CC0 to original visuals.",
+  "cue_evidence": "Frame contact sheets at 1fps, targeted train/gameplay at 4fps; train/brass editorial cuts cross-checked against public Kdenlive XML. Fine event times approximate ±0.25s unless cut boundary.",
+  "delivery": "Native REAPER project + 48kHz stereo WAV from actual MCP host; web AAC MP4 is packaging derivative. Preserve original H264 video bytes using stream copy. Keep original silent video."
+}

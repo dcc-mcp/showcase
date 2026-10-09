@@ -978,7 +978,8 @@
       "software": [
         "OpenSCAD",
         "Blender",
-        "Kdenlive"
+        "Kdenlive",
+        "REAPER"
       ],
       "capabilities": [
         "参数化建模",
@@ -986,7 +987,9 @@
         "材质与灯光",
         "动画",
         "跨软件制作",
-        "验证"
+        "验证",
+        "音频",
+        "MIDI配乐"
       ],
       "cover": {
         "src": "docs/showcase/crystal-freight-native-film/hero.jpg",
@@ -1021,6 +1024,10 @@
         {
           "label": "Core / SDK",
           "value": "原始制作 Core 0.20.39 / SDK 2.2.0；修正验收 Core 0.20.41，精确源码哈希见 validation.json"
+        },
+        {
+          "label": "新增音轨 / REAPER",
+          "value": "REAPER 7.82 / stock ReaSynth；Core 0.20.41，CLI/server 0.20.42，adapter commit 867ce6837c916aa7ca89a5cb14deae9869f09d00"
         }
       ],
       "tools": [
@@ -1039,6 +1046,10 @@
         {
           "name": "add_media / insert_clip / add_effect / package_project / render_project",
           "description": "通过实际Kdenlive MCP创作时间线、文字、相对媒体包和原生MLT影片。"
+        },
+        {
+          "name": "reaper_film_score__compose_score / render_score / audit_score",
+          "description": "附加 typed 技能：固定原创音符配方，真实 MIDI 项目与 stock ReaSynth，逐画面时长原生渲染、保存与重开。"
         }
       ],
       "steps": [
@@ -1061,9 +1072,18 @@
         {
           "title": "迁移和逐帧核对",
           "description": "在原媒体和原工程不可用时重新渲染相对媒体包，全部480帧的解码哈希与原片一致。"
+        },
+        {
+          "title": "另添原生 MIDI 配乐版本",
+          "description": "83 个可编辑 MIDI 音符，由真实 ReaSynth 合成；保留独立程序化效果音源和按公开影片整理的 cue。原始画面和静音版本未修改。"
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-scored.mp4",
+          "alt": "新增 REAPER 原生 MIDI 配乐版",
+          "caption": "2026-10-09 新增音轨：83 个原生 MIDI 音符、stock ReaSynth 与原创效果音；20.0 秒。原 H.264 比特流与每一帧完全保留，原静音版仍在下方。只有新增独立音频为 CC0；画面权利不变。"
+        },
         {
           "src": "docs/showcase/crystal-freight-native-film/hero.jpg",
           "alt": "Crystal Freight原生主视觉",
@@ -1115,6 +1135,11 @@
           "name": "Full native download",
           "result": "pass",
           "observed": "Both v5 archives are publicly downloadable without login; the full 233,614,591-byte companion matches its declared SHA-256 and includes all 122 PNG dependencies."
+        },
+        {
+          "name": "新增音轨与画面保护",
+          "result": "pass",
+          "observed": "实际 REAPER 保存、重开和原生渲染通过；MIDI notes=83。H.264 stream hash 和全部 decoded frames 与原片一致；AAC 无 clipping，与原生音轨零采样偏移。主观听评未记录。"
         }
       ],
       "limitations": [
@@ -1125,7 +1150,8 @@
         "开发前后对比为早期几何/材质版本在最终车距与相机姿态下重新渲染，已明确标注。",
         "最终工程已验收原生控件、未改参数的保存副本与重开；参数编辑/参数Undo及跨环境像素一致不在本次范围内。",
         "精简包可独立打开 CAD/Blender；Kdenlive 需要完整包中的 122 张 PNG。完整包已通过免登录下载和 SHA-256 核验。",
-        "公开证据为精选实际工具调用投影，完整私有日志、软件运行时及字体文件不随包分发。"
+        "公开证据为精选实际工具调用投影，完整私有日志、软件运行时及字体文件不随包分发。",
+        "新增音轨不代表原视觉工程被重新制作；没有记录主观听评，也不涉及私人游戏项目的集成验证。"
       ],
       "resources": [
         {
@@ -1175,12 +1201,32 @@
         {
           "label": "公开下载核验",
           "url": "docs/showcase/crystal-freight-native-film/public-download-validation.json"
+        },
+        {
+          "label": "新增配乐版 MP4",
+          "url": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-scored.mp4"
+        },
+        {
+          "label": "原生 MIDI 配乐工程 / 无损 WAV",
+          "url": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-native-score.zip"
+        },
+        {
+          "label": "新音轨验证",
+          "url": "docs/showcase/crystal-freight-native-film/soundtrack-media-qa.json"
+        },
+        {
+          "label": "新音轨许可边界",
+          "url": "docs/showcase/crystal-freight-native-film/SOUNDTRACK-LICENSES.md"
+        },
+        {
+          "label": "相关音频案例 Trail & Air",
+          "url": "https://dcc-mcp.github.io/showcase/cases/trail-and-air/"
         }
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
         "license": "作品与工程保留权利；本次未授予额外许可，站点MIT不适用于这些案例资产",
-        "note": "未导入第三方模型、参考图像、影视素材或音乐。创作参考只提供制作原则；作者链接和范围见LICENSES.md。"
+        "note": "未导入第三方模型、参考图像、影视素材或音乐。创作参考只提供制作原则；作者链接和范围见LICENSES.md。 新增音轨说明见 SOUNDTRACK-LICENSES.md；独立音频 CC0，原画面和作品权利不变。"
       },
       "source": {
         "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/1f1dacc54c1bb9fa0f8b347f345437f59c23e40d",
@@ -1258,6 +1304,11 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "独立新增 MIDI 配乐版",
+          "date": "2026-10-09",
+          "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
         }
       ]
     },
@@ -1268,14 +1319,17 @@
       "software": [
         "FreeCAD",
         "Blender",
-        "Kdenlive"
+        "Kdenlive",
+        "REAPER"
       ],
       "capabilities": [
         "程序化几何",
         "材质与灯光",
         "动画",
         "跨软件制作",
-        "验证"
+        "验证",
+        "音频",
+        "MIDI配乐"
       ],
       "cover": {
         "src": "docs/showcase/brass-relay/hero.jpg",
@@ -1314,6 +1368,10 @@
         {
           "label": "Adapter 适配器",
           "value": "FreeCAD历史0.4.1 / 最终视图0.4.2、Blender0.1.43兼容实现、Kdenlive0.1.1及记录的本地增强"
+        },
+        {
+          "label": "新增音轨 / REAPER",
+          "value": "REAPER 7.82 / stock ReaSynth；Core 0.20.41，CLI/server 0.20.42，adapter commit 867ce6837c916aa7ca89a5cb14deae9869f09d00"
         }
       ],
       "tools": [
@@ -1336,6 +1394,10 @@
         {
           "name": "add_media / insert_clip / add_effect / package_project / render_project",
           "description": "实际Kdenlive MCP建立可编辑18秒时间线，打包相对媒体并进行完整迁移复核"
+        },
+        {
+          "name": "reaper_film_score__compose_score / render_score / audit_score",
+          "description": "附加 typed 技能：固定原创音符配方，真实 MIDI 项目与 stock ReaSynth，逐画面时长原生渲染、保存与重开。"
         }
       ],
       "steps": [
@@ -1366,9 +1428,18 @@
         {
           "title": "从原生帧到可迁移影片",
           "description": "96张实际运动帧构成4秒一周，影片重复两遍来分别强调输入与输出；原媒体不可用时全部432视频帧一致"
+        },
+        {
+          "title": "另添原生 MIDI 配乐版本",
+          "description": "58 个可编辑 MIDI 音符，由真实 ReaSynth 合成；保留独立程序化效果音源和按公开影片整理的 cue。原始画面和静音版本未修改。"
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/brass-relay/brass-relay-scored.mp4",
+          "alt": "新增 REAPER 原生 MIDI 配乐版",
+          "caption": "2026-10-09 新增音轨：58 个原生 MIDI 音符、stock ReaSynth 与原创效果音；18.0 秒。原 H.264 比特流与每一帧完全保留，原静音版仍在下方。只有新增独立音频为 CC0；画面权利不变。"
+        },
         {
           "src": "docs/showcase/brass-relay/hero.jpg",
           "alt": "Brass Relay最终主视觉",
@@ -1425,6 +1496,11 @@
           "name": "Public native download",
           "result": "pass",
           "observed": "Both exact compact/full ZIPs are public in the same-repository media-only release; anonymous HTTP200 downloads matched independently audited sizes and SHA-256 hashes."
+        },
+        {
+          "name": "新增音轨与画面保护",
+          "result": "pass",
+          "observed": "实际 REAPER 保存、重开和原生渲染通过；MIDI notes=58。H.264 stream hash 和全部 decoded frames 与原片一致；AAC 无 clipping，与原生音轨零采样偏移。主观听评未记录。"
         }
       ],
       "limitations": [
@@ -1435,7 +1511,8 @@
         "FreeCAD首次打开GUI验收只覆盖单独的代表飞轮证明副本；13件最终工程均有原生视图保存重开读回",
         "Kdenlive原生控件视觉验收只覆盖结尾两个效果条目和首个文字字段；390项身份及样式均有序列化比较。参数编辑、Undo与最终来源监视器未获本轮资格",
         "历史Core0.20.39创作记录与0.20.41最终资格分开保留；不追认旧记录为新版本验收",
-        "不声称完全无缝像素循环、跨机器一致渲染或适配器已发布"
+        "不声称完全无缝像素循环、跨机器一致渲染或适配器已发布",
+        "新增音轨不代表原视觉工程被重新制作；没有记录主观听评，也不涉及私人游戏项目的集成验证。"
       ],
       "resources": [
         {
@@ -1485,12 +1562,32 @@
         {
           "label": "公开下载核验",
           "url": "docs/showcase/brass-relay/public-download-verification.json"
+        },
+        {
+          "label": "新增配乐版 MP4",
+          "url": "docs/showcase/brass-relay/brass-relay-scored.mp4"
+        },
+        {
+          "label": "原生 MIDI 配乐工程 / 无损 WAV",
+          "url": "docs/showcase/brass-relay/brass-relay-native-score.zip"
+        },
+        {
+          "label": "新音轨验证",
+          "url": "docs/showcase/brass-relay/soundtrack-media-qa.json"
+        },
+        {
+          "label": "新音轨许可边界",
+          "url": "docs/showcase/brass-relay/SOUNDTRACK-LICENSES.md"
+        },
+        {
+          "label": "相关音频案例 Trail & Air",
+          "url": "https://dcc-mcp.github.io/showcase/cases/trail-and-air/"
         }
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
         "license": "Case artwork and native/source assets: rights reserved; no additional license grant. Separately identified upstream font/software notices retain their scope.",
-        "note": "未导入第三方模型、纹理、参考影片或音乐"
+        "note": "未导入第三方模型、纹理、参考影片或音乐 新增音轨说明见 SOUNDTRACK-LICENSES.md；独立音频 CC0，原画面和作品权利不变。"
       },
       "source": {
         "url": "https://github.com/dcc-mcp/dcc-mcp-freecad/tree/aebbdb5e3926d24e23cdabc641499e69539f70f2",
@@ -1568,6 +1665,11 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "独立新增 MIDI 配乐版",
+          "date": "2026-10-09",
+          "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
         }
       ]
     },
@@ -1853,7 +1955,8 @@
       "software": [
         "GIMP",
         "Godot",
-        "Kdenlive"
+        "Kdenlive",
+        "REAPER"
       ],
       "capabilities": [
         "图像绘制",
@@ -1861,7 +1964,9 @@
         "游戏交互",
         "视频剪辑",
         "跨软件制作",
-        "验证"
+        "验证",
+        "音频",
+        "MIDI配乐"
       ],
       "cover": {
         "src": "docs/showcase/orbit-post-office/standalone-main-native.jpg",
@@ -1896,6 +2001,10 @@
         {
           "label": "Qualification",
           "value": "Recorded Linux native runs; current publication recovery is file/pixel verification, not a new native execution"
+        },
+        {
+          "label": "新增音轨 / REAPER",
+          "value": "REAPER 7.82 / stock ReaSynth；Core 0.20.41，CLI/server 0.20.42，adapter commit 867ce6837c916aa7ca89a5cb14deae9869f09d00"
         }
       ],
       "tools": [
@@ -1914,6 +2023,10 @@
         {
           "name": "Kdenlive MCP · 时间线、文字、保存与导出",
           "description": "真实素材构成 210 帧短片，保留五个可编辑文字效果、站点 Transform 和 117 个相对媒体；历史保存副本和重导资格单独记录。"
+        },
+        {
+          "name": "reaper_film_score__compose_score / render_score / audit_score",
+          "description": "附加 typed 技能：固定原创音符配方，真实 MIDI 项目与 stock ReaSynth，逐画面时长原生渲染、保存与重开。"
         }
       ],
       "steps": [
@@ -1940,9 +2053,18 @@
             "src": "docs/showcase/orbit-post-office/completed-shift-native.png",
             "alt": "原生完整班次通关，8/8 封信、10/10 邮票与全部快递员返回"
           }
+        },
+        {
+          "title": "另添原生 MIDI 配乐版本",
+          "description": "29 个可编辑 MIDI 音符，由真实 ReaSynth 合成；保留独立程序化效果音源和按公开影片整理的 cue。原始画面和静音版本未修改。"
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/orbit-post-office/orbit-post-office-scored.mp4",
+          "alt": "新增 REAPER 原生 MIDI 配乐版",
+          "caption": "2026-10-09 新增音轨：29 个原生 MIDI 音符、stock ReaSynth 与原创效果音；7.0 秒。原 H.264 比特流与每一帧完全保留，原静音版仍在下方。只有新增独立音频为 CC0；画面权利不变。"
+        },
         {
           "src": "docs/showcase/orbit-post-office/first-delivery-720p.mp4",
           "alt": "七秒真实首投递短片",
@@ -1999,6 +2121,11 @@
           "name": "保留新制作中的原始失败",
           "result": "fail",
           "observed": "Ember 初始整轮 deadline failure 和 Kdenlive 瞬时退出判定失败保留；后续图像资格、正常清理与交付结果分别记录。"
+        },
+        {
+          "name": "新增音轨与画面保护",
+          "result": "pass",
+          "observed": "实际 REAPER 保存、重开和原生渲染通过；MIDI notes=29。H.264 stream hash 和全部 decoded frames 与原片一致；AAC 无 clipping，与原生音轨零采样偏移。主观听评未记录。"
         }
       ],
       "limitations": [
@@ -2008,7 +2135,8 @@
         "保留音频回退、V-Sync 与 Vulkan surface 警告，以及历史日志/性能/样本上限失败；无警告、跨平台和硬实时未验证。",
         "原生按钮信号不是 OS 鼠标坐标证据；游戏 OS exit code 未观察。后来迟到恢复 PNG 未恢复，不以旧版图片冒充。",
         "选定证据不是完整当前 MCP 传输轨迹，也不代表整个适配器或全部技能覆盖。当前发布未重新执行原生 DCC。",
-        "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。"
+        "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。",
+        "新增音轨不代表原视觉工程被重新制作；没有记录主观听评，也不涉及私人游戏项目的集成验证。"
       ],
       "resources": [
         {
@@ -2070,12 +2198,32 @@
         {
           "label": "历史原型说明与旧失败",
           "url": "docs/showcase/orbit-post-office/historical-v1/README.md"
+        },
+        {
+          "label": "新增配乐版 MP4",
+          "url": "docs/showcase/orbit-post-office/orbit-post-office-scored.mp4"
+        },
+        {
+          "label": "原生 MIDI 配乐工程 / 无损 WAV",
+          "url": "docs/showcase/orbit-post-office/orbit-post-office-native-score.zip"
+        },
+        {
+          "label": "新音轨验证",
+          "url": "docs/showcase/orbit-post-office/soundtrack-media-qa.json"
+        },
+        {
+          "label": "新音轨许可边界",
+          "url": "docs/showcase/orbit-post-office/SOUNDTRACK-LICENSES.md"
+        },
+        {
+          "label": "相关音频案例 Trail & Air",
+          "url": "https://dcc-mcp.github.io/showcase/cases/trail-and-air/"
         }
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
         "license": "原创作品、游戏内容和配方保留权利；不新增 MIT 或 CC0。标明的上游软件与字体声明保留各自范围。",
-        "note": "原创 GIMP 图像、Godot 游戏与 Kdenlive 影片；无第三方图包、音乐、应用或字体二进制。网站 MIT 不适用于作品与案例下载包。"
+        "note": "原创 GIMP 图像、Godot 游戏与 Kdenlive 影片；无第三方图包、音乐、应用或字体二进制。网站 MIT 不适用于作品与案例下载包。 新增音轨说明见 SOUNDTRACK-LICENSES.md；独立音频 CC0，原画面和作品权利不变。"
       },
       "source": {
         "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/943e2cd6855da6f4876032bc124556e3eac54bc9",
@@ -2149,6 +2297,11 @@
           "version": "站点 / 世界与首投递影片",
           "date": "2026-10-07",
           "change": "发布四个分层世界的图片、独立完整班次证据与七秒第一投递影片；当前可编辑源未公开下载。相同 D058 的改版，不计为第二个案例。"
+        },
+        {
+          "version": "独立新增 MIDI 配乐版",
+          "date": "2026-10-09",
+          "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
         }
       ]
     },
@@ -2310,6 +2463,18 @@
         {
           "label": "许可证与复现说明",
           "url": "docs/showcase/trail-and-air/README.md"
+        },
+        {
+          "label": "原生 MIDI 配乐联动 · crystal-freight-native-film",
+          "url": "https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/"
+        },
+        {
+          "label": "原生 MIDI 配乐联动 · brass-relay",
+          "url": "https://dcc-mcp.github.io/showcase/cases/brass-relay/"
+        },
+        {
+          "label": "原生 MIDI 配乐联动 · orbit-post-office",
+          "url": "https://dcc-mcp.github.io/showcase/cases/orbit-post-office/"
         }
       ],
       "credits": {
