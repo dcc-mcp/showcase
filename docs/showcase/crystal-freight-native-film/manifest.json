@@ -20,8 +20,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4940,
-      "sha256": "c5b48b86edd50fc9a17e73b87346fcb37439826cf8268949caf00c1b1e35ba41"
+      "bytes": 6448,
+      "sha256": "99adf8509d379b9046a6b22f1ee4b87696b4ffeb3a022bf38650da22fbbf4088"
     },
     {
       "path": "detail.jpg",
@@ -97,6 +97,41 @@
       "path": "validation.json",
       "bytes": 16897,
       "sha256": "66e9526c74073b1f1e332caa15c366a51b086fcc7644a36716518ea0d7ab02b1"
+    },
+    {
+      "path": "soundtrack-native-audit.json",
+      "bytes": 2301,
+      "sha256": "9277ed02e14531c7c2c05707a862c69919b0234624001ce66ca24d90c169724f"
+    },
+    {
+      "path": "soundtrack-cues.json",
+      "bytes": 2635,
+      "sha256": "1f3facf82972d87f600cd4e4e1e6aea227f2b842c8fe397b5f9fb000978d7b02"
+    },
+    {
+      "path": "soundtrack-native-validation.json",
+      "bytes": 692,
+      "sha256": "17aef56a8b3bdc7a35198e49bf073e0094a1b994644512d16ca97e2003858770"
+    },
+    {
+      "path": "soundtrack-media-qa.json",
+      "bytes": 2580,
+      "sha256": "77f7d8f26f2c2618fb3772f09a9989dea981aacd974d1f4042fbc83fd75b604a"
+    },
+    {
+      "path": "SOUNDTRACK-LICENSES.md",
+      "bytes": 1032,
+      "sha256": "e25c3fa104c5ea1c1bdd8c63f0f4eee3f7fe9250f4e4324f1afd2c9dde53403d"
+    },
+    {
+      "path": "crystal-freight-native-film-scored.mp4",
+      "bytes": 2880041,
+      "sha256": "5fa44c41c8144e8a3f44f960d3de5282c712013c1a69057eb007176352fd24e8"
+    },
+    {
+      "path": "crystal-freight-native-film-native-score.zip",
+      "bytes": 5043962,
+      "sha256": "eb1747b42ca632293d1dd74cc8b61368e0fc6f50aa7acd387f2a781402832546"
     }
   ]
 }

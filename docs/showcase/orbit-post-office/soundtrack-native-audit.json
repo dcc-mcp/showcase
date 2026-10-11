@@ -1,0 +1,94 @@
+{
+  "host": "7.82/linux-x86_64",
+  "project": "SCORE_DIR/Score.rpp",
+  "dirty": false,
+  "duration": 7.0,
+  "tempo": 120.0,
+  "tracks": [
+    {
+      "name": "Letter-flight celesta",
+      "guid": "{1B72ED0E-F864-4939-17D6-DA5C1CABC36D}",
+      "gain": 0.23,
+      "pan": -0.1,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 7.0,
+          "notes": 11
+        }
+      ]
+    },
+    {
+      "name": "Delivery received",
+      "guid": "{DAE4E323-6463-70BF-E86A-C01E8B14A9C5}",
+      "gain": 0.2,
+      "pan": 0.16,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 7.0,
+          "notes": 3
+        }
+      ]
+    },
+    {
+      "name": "Warm harmonic bed",
+      "guid": "{AC793D1D-44EA-F7C6-1933-3741B8F8792F}",
+      "gain": 0.1,
+      "pan": 0.0,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 7.0,
+          "notes": 12
+        }
+      ]
+    },
+    {
+      "name": "Rounded bass",
+      "guid": "{6F531FA5-4C6E-C7AB-30E7-294034028E87}",
+      "gain": 0.18,
+      "pan": 0.0,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 7.0,
+          "notes": 3
+        }
+      ]
+    },
+    {
+      "name": "mechanical procedural SFX",
+      "guid": "{A8CB9B27-FE79-A503-EBA7-1E9FE82C689E}",
+      "gain": 1.0,
+      "pan": 0.0,
+      "fx": [],
+      "items": [
+        {
+          "is_midi": false,
+          "start": 0.0,
+          "duration": 7.0,
+          "source": "SCORE_DIR/mechanical-source.wav",
+          "source_exists": true
+        }
+      ]
+    }
+  ],
+  "total_midi_notes": 29
+}

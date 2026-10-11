@@ -40,3 +40,14 @@ The public MCP file contains selected real request and structured-result excerpt
 The first gateway clearance and an earlier body-envelope pass failed before revision. JPEG preflight and an empty render-buffer route also failed. Their failure records remain in validation.json. Final parameter editing and parameter Undo were not qualified by the untouched-save test.
 
 This is a silent, deliberately stepped kinematic miniature. It does not establish railway safety, continuous-time collision freedom, rigid-body physics or a seamless loop. The case assets are published with rights reserved as described in LICENSES.md; the site's MIT license does not license the artwork.
+
+
+## 2026-10-09 · Added native REAPER score
+
+[Play/download the newly scored film](crystal-freight-native-film-scored.mp4). [Native MIDI project, original sources, skills and lossless WAV](crystal-freight-native-film-native-score.zip).
+
+The original silent film remains unchanged. This new version uses 83 editable native MIDI notes with stock REAPER ReaSynth, plus separately labeled original procedural SFX. A real typed DCC-MCP workflow composed notes, configured actual instrument parameters, saved/reopened the RPP and rendered an exact 20.0-second stereo 48 kHz/24-bit master. Native peak normalization targets -3 dBFS with short endpoint fades.
+
+FFmpeg only copied the unchanged H.264 stream and encoded the actual native master to AAC. Every decoded video frame, frame count and picture duration matches the original; AAC aligns to the native master with zero sample offset. [Media checks](soundtrack-media-qa.json), [native state](soundtrack-native-audit.json), [native signal checks](soundtrack-native-validation.json), [cue timings](soundtrack-cues.json) and [scoped soundtrack rights](SOUNDTRACK-LICENSES.md) are retained. Fine cue timings follow public visual sampling, approximately ±0.25 s for non-edit events. No subjective listening or private game integration is claimed.
+
+See the [Trail & Air audio workflow](https://dcc-mcp.github.io/showcase/cases/trail-and-air/) for the related reusable audio pipeline. Original visual rights are unchanged; CC0 applies only to new standalone audio.

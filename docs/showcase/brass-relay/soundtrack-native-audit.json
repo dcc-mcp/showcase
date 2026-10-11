@@ -1,0 +1,110 @@
+{
+  "host": "7.82/linux-x86_64",
+  "project": "SCORE_DIR/Score.rpp",
+  "dirty": false,
+  "duration": 18.0,
+  "tempo": 120.0,
+  "tracks": [
+    {
+      "name": "Brass precision motif",
+      "guid": "{96500835-42B2-5C18-6C07-D2E48869540E}",
+      "gain": 0.2,
+      "pan": -0.18,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 18.0,
+          "notes": 25
+        }
+      ]
+    },
+    {
+      "name": "Oscillating answer",
+      "guid": "{425A9A55-B14C-E04C-1975-0FCA8DA1C1E3}",
+      "gain": 0.13,
+      "pan": 0.3,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 18.0,
+          "notes": 8
+        }
+      ]
+    },
+    {
+      "name": "Warm harmonic bed",
+      "guid": "{CDCCCD90-4CB9-515C-604D-CEAA9BC022EA}",
+      "gain": 0.1,
+      "pan": 0.0,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 18.0,
+          "notes": 20
+        }
+      ]
+    },
+    {
+      "name": "Rounded bass",
+      "guid": "{158FBD3B-C646-BD70-6B24-304DE9CA4ADF}",
+      "gain": 0.18,
+      "pan": 0.0,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 18.0,
+          "notes": 5
+        }
+      ]
+    },
+    {
+      "name": "mechanical procedural SFX",
+      "guid": "{5EFDBE27-F761-3F75-DEE3-9BC39A745418}",
+      "gain": 1.0,
+      "pan": 0.0,
+      "fx": [],
+      "items": [
+        {
+          "is_midi": false,
+          "start": 0.0,
+          "duration": 18.0,
+          "source": "SCORE_DIR/mechanical-source.wav",
+          "source_exists": true
+        }
+      ]
+    },
+    {
+      "name": "accents procedural SFX",
+      "guid": "{884DAD49-C556-96AA-D683-E1E50E62317D}",
+      "gain": 1.0,
+      "pan": 0.0,
+      "fx": [],
+      "items": [
+        {
+          "is_midi": false,
+          "start": 0.0,
+          "duration": 18.0,
+          "source": "SCORE_DIR/accents-source.wav",
+          "source_exists": true
+        }
+      ]
+    }
+  ],
+  "total_midi_notes": 58
+}

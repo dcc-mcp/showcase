@@ -1,0 +1,110 @@
+{
+  "host": "7.82/linux-x86_64",
+  "project": "SCORE_DIR/Score.rpp",
+  "dirty": false,
+  "duration": 20.0,
+  "tempo": 120.0,
+  "tracks": [
+    {
+      "name": "Quarry music-box motif",
+      "guid": "{00366E64-9D1B-5AD5-2186-2755D1CC86FC}",
+      "gain": 0.24,
+      "pan": -0.13,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 20.0,
+          "notes": 25
+        }
+      ]
+    },
+    {
+      "name": "Tiny timber ostinato",
+      "guid": "{F6340F6B-D8AC-C716-28E4-49E8789DBCBC}",
+      "gain": 0.11,
+      "pan": 0.22,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 20.0,
+          "notes": 28
+        }
+      ]
+    },
+    {
+      "name": "Warm harmonic bed",
+      "guid": "{0E169A90-37F7-3ABF-C7D4-F54637012E9E}",
+      "gain": 0.1,
+      "pan": 0.0,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 20.0,
+          "notes": 24
+        }
+      ]
+    },
+    {
+      "name": "Rounded bass",
+      "guid": "{29CE3D54-A0DA-89E1-02CC-86EF1A4F15A0}",
+      "gain": 0.18,
+      "pan": 0.0,
+      "fx": [
+        "VSTi: ReaSynth (Cockos)"
+      ],
+      "items": [
+        {
+          "is_midi": true,
+          "start": 0.0,
+          "duration": 20.0,
+          "notes": 6
+        }
+      ]
+    },
+    {
+      "name": "mechanical procedural SFX",
+      "guid": "{E52DFB5F-608B-4C44-7C9F-A40AF45D10CA}",
+      "gain": 1.0,
+      "pan": 0.0,
+      "fx": [],
+      "items": [
+        {
+          "is_midi": false,
+          "start": 0.0,
+          "duration": 20.0,
+          "source": "SCORE_DIR/mechanical-source.wav",
+          "source_exists": true
+        }
+      ]
+    },
+    {
+      "name": "accents procedural SFX",
+      "guid": "{96724644-8E46-3B1E-842B-27982875787D}",
+      "gain": 1.0,
+      "pan": 0.0,
+      "fx": [],
+      "items": [
+        {
+          "is_midi": false,
+          "start": 0.0,
+          "duration": 20.0,
+          "source": "SCORE_DIR/accents-source.wav",
+          "source_exists": true
+        }
+      ]
+    }
+  ],
+  "total_midi_notes": 83
+}

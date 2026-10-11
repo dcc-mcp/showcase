@@ -82,6 +82,59 @@ class CollectionContractTests(unittest.TestCase):
             rows[1] = creation
         return rows
 
+    def add_audio(self, extension="mp3"):
+        filename = "audition." + extension
+        payload = b"Synthetic audio bytes for publication-contract tests"
+        (self.entry / filename).write_bytes(payload)
+        manifest_path = self.entry / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["files"].append({"path": filename, "bytes": len(payload),
+                                  "sha256": hashlib.sha256(payload).hexdigest()})
+        self.write_json(manifest_path, manifest)
+        return {"src": "docs/showcase/sample/" + filename, "alt": "Original audio preview",
+                "caption": "Original audio preview; playback requires user action."}
+
+    def test_inventoried_audio_results_are_supported(self):
+        for extension in ("mp3", "wav", "ogg"):
+            with self.subTest(extension=extension):
+                self.case["results"].append(self.add_audio(extension))
+                self.assertEqual(self.problems(), [])
+
+    def test_audio_is_not_allowed_as_a_visual_cover_or_step_image(self):
+        audio = self.add_audio()
+        for location in ("cover", "step"):
+            with self.subTest(location=location):
+                self.case["cover"] = {"src": self.asset, "alt": "A render"}
+                self.case["steps"][0].pop("image", None)
+                if location == "cover":
+                    self.case["cover"] = audio
+                else:
+                    self.case["steps"][0]["image"] = audio
+                self.assertTrue(any("audio belongs in results" in item for item in self.problems()))
+
+    def test_audio_requires_safe_local_inventoried_paths(self):
+        audio = self.add_audio()
+        self.case["results"] = [audio]
+        for path in ("https://example.org/audition.mp3", "../audition.wav", "%2e%2e/audition.ogg",
+                     "javascript:alert(1).mp3", "docs/showcase/sample/missing.wav"):
+            with self.subTest(path=path):
+                audio["src"] = path
+                self.assertTrue(self.problems())
+        (self.root / "unlisted.mp3").write_bytes(b"unlisted audio")
+        audio["src"] = "unlisted.mp3"
+        self.assertTrue(any("absent from selected case artifact manifests" in item for item in self.problems()))
+
+    def test_audio_hash_changes_are_rejected(self):
+        self.case["results"] = [self.add_audio()]
+        (self.entry / "audition.mp3").write_bytes(b"changed audio bytes")
+        self.assertTrue(any("sha256 mismatch" in item for item in self.problems()))
+
+    def test_audio_requires_an_accessible_description(self):
+        audio = self.add_audio()
+        audio["alt"] = " "
+        self.case["results"] = [audio]
+        self.assertTrue(any("alt: must be a nonempty string" in item for item in self.problems()))
+
     def test_incomplete_stage_categories_fail_closed(self):
         self.case["model_attribution"] = [self.attribution()]
         self.assertTrue(any("missing required stage categories" in p for p in self.problems()))

@@ -30,7 +30,8 @@ CASE_FIELDS = (
 )
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 SHA = re.compile(r"[0-9a-fA-F]{40}\Z")
-MEDIA_EXT = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".mp4", ".webm"}
+AUDIO_EXT = {".mp3", ".wav", ".ogg"}
+MEDIA_EXT = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".mp4", ".webm"} | AUDIO_EXT
 TEXT_EXT = {".md", ".json", ".txt", ".html", ".htm", ".css", ".js", ".py", ".ps1", ".sh",
             ".xml", ".csv", ".yaml", ".yml", ".svg", ".obj", ".mtl"}
 UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|"
@@ -399,13 +400,13 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
         object_rows(case, "tools", ("name", "description"), where, problems)
         steps = object_rows(case, "steps", ("title", "description"), where, problems)
         results = object_rows(case, "results", ("src", "alt", "caption"), where, problems)
-        images = [(case.get("cover"), f"{where}.cover")]
-        images.extend((step["image"], f"{where}.steps[{n}].image")
+        images = [(case.get("cover"), f"{where}.cover", False)]
+        images.extend((step["image"], f"{where}.steps[{n}].image", False)
                       for n, step in enumerate(steps) if "image" in step)
-        images.extend((result, f"{where}.results[{n}]") for n, result in enumerate(results))
-        for image, location in images:
+        images.extend((result, f"{where}.results[{n}]", True) for n, result in enumerate(results))
+        for image, location, audio_allowed in images:
             if not isinstance(image, dict):
-                problems.append(f"{location}: must be an image object")
+                problems.append(f"{location}: must be a media object")
                 continue
             require_strings(image, ("src", "alt"), location, problems)
             problems.extend(link_problems(image.get("src"), root, f"{location}.src", external=False))
@@ -413,6 +414,8 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
             if target is not None:
                 if target.suffix.lower() not in MEDIA_EXT:
                     problems.append(f"{location}.src: expected a supported media file")
+                elif target.suffix.lower() in AUDIO_EXT and not audio_allowed:
+                    problems.append(f"{location}.src: audio belongs in results, not a visual cover or step image")
                 media.append((target, location))
         checks = object_rows(case, "checks", ("name", "result", "observed"), where, problems)
         for n, check in enumerate(checks):

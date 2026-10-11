@@ -31,3 +31,14 @@ The current editor's native GUI evidence covers untouched Save Copy/reopen, nine
 This is sampled prescribed kinematics. It does not establish dynamics, manufacturing tolerances, stress, load capacity, safety, continuous collision freedom, cross-machine rendering equality or a seamless pixel loop. FreeCAD parts remain separate; the assembled view is in Blender. The earlier look-development image has a different camera and resolution, so it is not a matched-pose comparison.
 
 The public evidence contains selected recorded calls and results. Private diagnostics are omitted with hashes; paths and execution identifiers are removed or aliased. The archive assembly used existing qualified sources; it performed no new native save, host launch, rendering or media retouching. Original receipts and delivered files are preserved separately. Original artwork and native/source assets have the rights reservation in LICENSES.md; the site-code MIT license does not license them.
+
+
+## 2026-10-09 · Added native REAPER score
+
+[Play/download the newly scored film](brass-relay-scored.mp4). [Native MIDI project, original sources, skills and lossless WAV](brass-relay-native-score.zip).
+
+The original silent film remains unchanged. This new version uses 58 editable native MIDI notes with stock REAPER ReaSynth, plus separately labeled original procedural SFX. A real typed DCC-MCP workflow composed notes, configured actual instrument parameters, saved/reopened the RPP and rendered an exact 18.0-second stereo 48 kHz/24-bit master. Native peak normalization targets -3 dBFS with short endpoint fades.
+
+FFmpeg only copied the unchanged H.264 stream and encoded the actual native master to AAC. Every decoded video frame, frame count and picture duration matches the original; AAC aligns to the native master with zero sample offset. [Media checks](soundtrack-media-qa.json), [native state](soundtrack-native-audit.json), [native signal checks](soundtrack-native-validation.json), [cue timings](soundtrack-cues.json) and [scoped soundtrack rights](SOUNDTRACK-LICENSES.md) are retained. Fine cue timings follow public visual sampling, approximately ±0.25 s for non-edit events. No subjective listening or private game integration is claimed.
+
+See the [Trail & Air audio workflow](https://dcc-mcp.github.io/showcase/cases/trail-and-air/) for the related reusable audio pipeline. Original visual rights are unchanged; CC0 applies only to new standalone audio.

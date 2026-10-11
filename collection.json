@@ -319,10 +319,10 @@
         {
           "stage_id": "review",
           "stage": "本次归属与站点发布复核",
-          "model": "GPT-6 Astra",
-          "reasoning_effort": "ultra",
-          "record_status": "configured",
-          "basis": "任务记录载明配置为 gpt-6-astra / ultra，原始回执未导出。仅记录任务配置，不是后端模型身份鉴证，也不追认原始制作或此前艺术审查。",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
           "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
@@ -336,6 +336,11 @@
           "version": "发布复核归属补录",
           "date": "2026-10-07",
           "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -665,10 +670,10 @@
         {
           "stage_id": "review",
           "stage": "本次归属与站点发布复核",
-          "model": "GPT-6 Astra",
-          "reasoning_effort": "ultra",
-          "record_status": "configured",
-          "basis": "任务记录载明配置为 gpt-6-astra / ultra，原始回执未导出。仅记录任务配置，不是后端模型身份鉴证，也不追认原始制作或此前艺术审查。",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
           "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
@@ -682,6 +687,11 @@
           "version": "发布复核归属补录",
           "date": "2026-10-07",
           "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -993,10 +1003,10 @@
         {
           "stage_id": "review",
           "stage": "本次归属与站点发布复核",
-          "model": "GPT-6 Astra",
-          "reasoning_effort": "ultra",
-          "record_status": "configured",
-          "basis": "任务记录载明配置为 gpt-6-astra / ultra，原始回执未导出。仅记录任务配置，不是后端模型身份鉴证，也不追认原始制作或此前艺术审查。",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
           "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
@@ -1010,6 +1020,11 @@
           "version": "发布复核归属补录",
           "date": "2026-10-07",
           "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1020,7 +1035,8 @@
       "software": [
         "OpenSCAD",
         "Blender",
-        "Kdenlive"
+        "Kdenlive",
+        "REAPER"
       ],
       "capabilities": [
         "参数化建模",
@@ -1028,7 +1044,9 @@
         "材质与灯光",
         "动画",
         "跨软件制作",
-        "验证"
+        "验证",
+        "音频",
+        "MIDI配乐"
       ],
       "cover": {
         "src": "docs/showcase/crystal-freight-native-film/hero.jpg",
@@ -1063,6 +1081,10 @@
         {
           "label": "Core / SDK",
           "value": "原始制作 Core 0.20.39 / SDK 2.2.0；修正验收 Core 0.20.41，精确源码哈希见 validation.json"
+        },
+        {
+          "label": "新增音轨 / REAPER",
+          "value": "REAPER 7.82 / stock ReaSynth；Core 0.20.41，CLI/server 0.20.42，adapter commit 867ce6837c916aa7ca89a5cb14deae9869f09d00"
         }
       ],
       "tools": [
@@ -1081,6 +1103,10 @@
         {
           "name": "add_media / insert_clip / add_effect / package_project / render_project",
           "description": "通过实际Kdenlive MCP创作时间线、文字、相对媒体包和原生MLT影片。"
+        },
+        {
+          "name": "reaper_film_score__compose_score / render_score / audit_score",
+          "description": "附加 typed 技能：固定原创音符配方，真实 MIDI 项目与 stock ReaSynth，逐画面时长原生渲染、保存与重开。"
         }
       ],
       "steps": [
@@ -1103,9 +1129,18 @@
         {
           "title": "迁移和逐帧核对",
           "description": "在原媒体和原工程不可用时重新渲染相对媒体包，全部480帧的解码哈希与原片一致。"
+        },
+        {
+          "title": "另添原生 MIDI 配乐版本",
+          "description": "83 个可编辑 MIDI 音符，由真实 ReaSynth 合成；保留独立程序化效果音源和按公开影片整理的 cue。原始画面和静音版本未修改。"
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-scored.mp4",
+          "alt": "新增 REAPER 原生 MIDI 配乐版",
+          "caption": "2026-10-09 新增音轨：83 个原生 MIDI 音符、stock ReaSynth 与原创效果音；20.0 秒。原 H.264 比特流与每一帧完全保留，原静音版仍在下方。只有新增独立音频为 CC0；画面权利不变。"
+        },
         {
           "src": "docs/showcase/crystal-freight-native-film/hero.jpg",
           "alt": "Crystal Freight原生主视觉",
@@ -1157,6 +1192,11 @@
           "name": "Full native download",
           "result": "pass",
           "observed": "Both v5 archives are publicly downloadable without login; the full 233,614,591-byte companion matches its declared SHA-256 and includes all 122 PNG dependencies."
+        },
+        {
+          "name": "新增音轨与画面保护",
+          "result": "pass",
+          "observed": "实际 REAPER 保存、重开和原生渲染通过；MIDI notes=83。H.264 stream hash 和全部 decoded frames 与原片一致；AAC 无 clipping，与原生音轨零采样偏移。主观听评未记录。"
         }
       ],
       "limitations": [
@@ -1167,7 +1207,8 @@
         "开发前后对比为早期几何/材质版本在最终车距与相机姿态下重新渲染，已明确标注。",
         "最终工程已验收原生控件、未改参数的保存副本与重开；参数编辑/参数Undo及跨环境像素一致不在本次范围内。",
         "精简包可独立打开 CAD/Blender；Kdenlive 需要完整包中的 122 张 PNG。完整包已通过免登录下载和 SHA-256 核验。",
-        "公开证据为精选实际工具调用投影，完整私有日志、软件运行时及字体文件不随包分发。"
+        "公开证据为精选实际工具调用投影，完整私有日志、软件运行时及字体文件不随包分发。",
+        "新增音轨不代表原视觉工程被重新制作；没有记录主观听评，也不涉及私人游戏项目的集成验证。"
       ],
       "resources": [
         {
@@ -1217,12 +1258,32 @@
         {
           "label": "公开下载核验",
           "url": "docs/showcase/crystal-freight-native-film/public-download-validation.json"
+        },
+        {
+          "label": "新增配乐版 MP4",
+          "url": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-scored.mp4"
+        },
+        {
+          "label": "原生 MIDI 配乐工程 / 无损 WAV",
+          "url": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-native-score.zip"
+        },
+        {
+          "label": "新音轨验证",
+          "url": "docs/showcase/crystal-freight-native-film/soundtrack-media-qa.json"
+        },
+        {
+          "label": "新音轨许可边界",
+          "url": "docs/showcase/crystal-freight-native-film/SOUNDTRACK-LICENSES.md"
+        },
+        {
+          "label": "相关音频案例 Trail & Air",
+          "url": "https://dcc-mcp.github.io/showcase/cases/trail-and-air/"
         }
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
         "license": "作品与工程保留权利；本次未授予额外许可，站点MIT不适用于这些案例资产",
-        "note": "未导入第三方模型、参考图像、影视素材或音乐。创作参考只提供制作原则；作者链接和范围见LICENSES.md。"
+        "note": "未导入第三方模型、参考图像、影视素材或音乐。创作参考只提供制作原则；作者链接和范围见LICENSES.md。 新增音轨说明见 SOUNDTRACK-LICENSES.md；独立音频 CC0，原画面和作品权利不变。"
       },
       "source": {
         "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/1f1dacc54c1bb9fa0f8b347f345437f59c23e40d",
@@ -1297,10 +1358,10 @@
         {
           "stage_id": "review",
           "stage": "本次归属与站点发布复核",
-          "model": "GPT-6 Astra",
-          "reasoning_effort": "ultra",
-          "record_status": "configured",
-          "basis": "任务记录载明配置为 gpt-6-astra / ultra，原始回执未导出。仅记录任务配置，不是后端模型身份鉴证，也不追认原始制作或此前艺术审查。",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
           "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
@@ -1314,6 +1375,16 @@
           "version": "发布复核归属补录",
           "date": "2026-10-07",
           "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "独立新增 MIDI 配乐版",
+          "date": "2026-10-09",
+          "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1324,14 +1395,17 @@
       "software": [
         "FreeCAD",
         "Blender",
-        "Kdenlive"
+        "Kdenlive",
+        "REAPER"
       ],
       "capabilities": [
         "程序化几何",
         "材质与灯光",
         "动画",
         "跨软件制作",
-        "验证"
+        "验证",
+        "音频",
+        "MIDI配乐"
       ],
       "cover": {
         "src": "docs/showcase/brass-relay/hero.jpg",
@@ -1370,6 +1444,10 @@
         {
           "label": "Adapter 适配器",
           "value": "FreeCAD历史0.4.1 / 最终视图0.4.2、Blender0.1.43兼容实现、Kdenlive0.1.1及记录的本地增强"
+        },
+        {
+          "label": "新增音轨 / REAPER",
+          "value": "REAPER 7.82 / stock ReaSynth；Core 0.20.41，CLI/server 0.20.42，adapter commit 867ce6837c916aa7ca89a5cb14deae9869f09d00"
         }
       ],
       "tools": [
@@ -1392,6 +1470,10 @@
         {
           "name": "add_media / insert_clip / add_effect / package_project / render_project",
           "description": "实际Kdenlive MCP建立可编辑18秒时间线，打包相对媒体并进行完整迁移复核"
+        },
+        {
+          "name": "reaper_film_score__compose_score / render_score / audit_score",
+          "description": "附加 typed 技能：固定原创音符配方，真实 MIDI 项目与 stock ReaSynth，逐画面时长原生渲染、保存与重开。"
         }
       ],
       "steps": [
@@ -1422,9 +1504,18 @@
         {
           "title": "从原生帧到可迁移影片",
           "description": "96张实际运动帧构成4秒一周，影片重复两遍来分别强调输入与输出；原媒体不可用时全部432视频帧一致"
+        },
+        {
+          "title": "另添原生 MIDI 配乐版本",
+          "description": "58 个可编辑 MIDI 音符，由真实 ReaSynth 合成；保留独立程序化效果音源和按公开影片整理的 cue。原始画面和静音版本未修改。"
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/brass-relay/brass-relay-scored.mp4",
+          "alt": "新增 REAPER 原生 MIDI 配乐版",
+          "caption": "2026-10-09 新增音轨：58 个原生 MIDI 音符、stock ReaSynth 与原创效果音；18.0 秒。原 H.264 比特流与每一帧完全保留，原静音版仍在下方。只有新增独立音频为 CC0；画面权利不变。"
+        },
         {
           "src": "docs/showcase/brass-relay/hero.jpg",
           "alt": "Brass Relay最终主视觉",
@@ -1481,6 +1572,11 @@
           "name": "Public native download",
           "result": "pass",
           "observed": "Both exact compact/full ZIPs are public in the same-repository media-only release; anonymous HTTP200 downloads matched independently audited sizes and SHA-256 hashes."
+        },
+        {
+          "name": "新增音轨与画面保护",
+          "result": "pass",
+          "observed": "实际 REAPER 保存、重开和原生渲染通过；MIDI notes=58。H.264 stream hash 和全部 decoded frames 与原片一致；AAC 无 clipping，与原生音轨零采样偏移。主观听评未记录。"
         }
       ],
       "limitations": [
@@ -1491,7 +1587,8 @@
         "FreeCAD首次打开GUI验收只覆盖单独的代表飞轮证明副本；13件最终工程均有原生视图保存重开读回",
         "Kdenlive原生控件视觉验收只覆盖结尾两个效果条目和首个文字字段；390项身份及样式均有序列化比较。参数编辑、Undo与最终来源监视器未获本轮资格",
         "历史Core0.20.39创作记录与0.20.41最终资格分开保留；不追认旧记录为新版本验收",
-        "不声称完全无缝像素循环、跨机器一致渲染或适配器已发布"
+        "不声称完全无缝像素循环、跨机器一致渲染或适配器已发布",
+        "新增音轨不代表原视觉工程被重新制作；没有记录主观听评，也不涉及私人游戏项目的集成验证。"
       ],
       "resources": [
         {
@@ -1541,12 +1638,32 @@
         {
           "label": "公开下载核验",
           "url": "docs/showcase/brass-relay/public-download-verification.json"
+        },
+        {
+          "label": "新增配乐版 MP4",
+          "url": "docs/showcase/brass-relay/brass-relay-scored.mp4"
+        },
+        {
+          "label": "原生 MIDI 配乐工程 / 无损 WAV",
+          "url": "docs/showcase/brass-relay/brass-relay-native-score.zip"
+        },
+        {
+          "label": "新音轨验证",
+          "url": "docs/showcase/brass-relay/soundtrack-media-qa.json"
+        },
+        {
+          "label": "新音轨许可边界",
+          "url": "docs/showcase/brass-relay/SOUNDTRACK-LICENSES.md"
+        },
+        {
+          "label": "相关音频案例 Trail & Air",
+          "url": "https://dcc-mcp.github.io/showcase/cases/trail-and-air/"
         }
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
         "license": "Case artwork and native/source assets: rights reserved; no additional license grant. Separately identified upstream font/software notices retain their scope.",
-        "note": "未导入第三方模型、纹理、参考影片或音乐"
+        "note": "未导入第三方模型、纹理、参考影片或音乐 新增音轨说明见 SOUNDTRACK-LICENSES.md；独立音频 CC0，原画面和作品权利不变。"
       },
       "source": {
         "url": "https://github.com/dcc-mcp/dcc-mcp-freecad/tree/aebbdb5e3926d24e23cdabc641499e69539f70f2",
@@ -1621,10 +1738,10 @@
         {
           "stage_id": "review",
           "stage": "本次归属与站点发布复核",
-          "model": "GPT-6 Astra",
-          "reasoning_effort": "ultra",
-          "record_status": "configured",
-          "basis": "任务记录载明配置为 gpt-6-astra / ultra，原始回执未导出。仅记录任务配置，不是后端模型身份鉴证，也不追认原始制作或此前艺术审查。",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
           "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
@@ -1638,6 +1755,16 @@
           "version": "发布复核归属补录",
           "date": "2026-10-07",
           "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "独立新增 MIDI 配乐版",
+          "date": "2026-10-09",
+          "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1910,10 +2037,10 @@
         {
           "stage_id": "review",
           "stage": "本次归属与站点发布复核",
-          "model": "GPT-6 Astra",
-          "reasoning_effort": "ultra",
-          "record_status": "configured",
-          "basis": "任务记录载明配置为 gpt-6-astra / ultra，原始回执未导出。仅记录任务配置，不是后端模型身份鉴证，也不追认原始制作或此前艺术审查。",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
           "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
@@ -1927,6 +2054,11 @@
           "version": "发布复核归属补录",
           "date": "2026-10-07",
           "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1937,7 +2069,8 @@
       "software": [
         "GIMP",
         "Godot",
-        "Kdenlive"
+        "Kdenlive",
+        "REAPER"
       ],
       "capabilities": [
         "图像绘制",
@@ -1945,7 +2078,9 @@
         "游戏交互",
         "视频剪辑",
         "跨软件制作",
-        "验证"
+        "验证",
+        "音频",
+        "MIDI配乐"
       ],
       "cover": {
         "src": "docs/showcase/orbit-post-office/standalone-main-native.jpg",
@@ -1980,6 +2115,10 @@
         {
           "label": "Qualification",
           "value": "Recorded Linux native runs; current publication recovery is file/pixel verification, not a new native execution"
+        },
+        {
+          "label": "新增音轨 / REAPER",
+          "value": "REAPER 7.82 / stock ReaSynth；Core 0.20.41，CLI/server 0.20.42，adapter commit 867ce6837c916aa7ca89a5cb14deae9869f09d00"
         }
       ],
       "tools": [
@@ -1998,6 +2137,10 @@
         {
           "name": "Kdenlive MCP · 时间线、文字、保存与导出",
           "description": "真实素材构成 210 帧短片，保留五个可编辑文字效果、站点 Transform 和 117 个相对媒体；历史保存副本和重导资格单独记录。"
+        },
+        {
+          "name": "reaper_film_score__compose_score / render_score / audit_score",
+          "description": "附加 typed 技能：固定原创音符配方，真实 MIDI 项目与 stock ReaSynth，逐画面时长原生渲染、保存与重开。"
         }
       ],
       "steps": [
@@ -2024,9 +2167,18 @@
             "src": "docs/showcase/orbit-post-office/completed-shift-native.png",
             "alt": "原生完整班次通关，8/8 封信、10/10 邮票与全部快递员返回"
           }
+        },
+        {
+          "title": "另添原生 MIDI 配乐版本",
+          "description": "29 个可编辑 MIDI 音符，由真实 ReaSynth 合成；保留独立程序化效果音源和按公开影片整理的 cue。原始画面和静音版本未修改。"
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/orbit-post-office/orbit-post-office-scored.mp4",
+          "alt": "新增 REAPER 原生 MIDI 配乐版",
+          "caption": "2026-10-09 新增音轨：29 个原生 MIDI 音符、stock ReaSynth 与原创效果音；7.0 秒。原 H.264 比特流与每一帧完全保留，原静音版仍在下方。只有新增独立音频为 CC0；画面权利不变。"
+        },
         {
           "src": "docs/showcase/orbit-post-office/first-delivery-720p.mp4",
           "alt": "七秒真实首投递短片",
@@ -2083,6 +2235,11 @@
           "name": "保留新制作中的原始失败",
           "result": "fail",
           "observed": "Ember 初始整轮 deadline failure 和 Kdenlive 瞬时退出判定失败保留；后续图像资格、正常清理与交付结果分别记录。"
+        },
+        {
+          "name": "新增音轨与画面保护",
+          "result": "pass",
+          "observed": "实际 REAPER 保存、重开和原生渲染通过；MIDI notes=29。H.264 stream hash 和全部 decoded frames 与原片一致；AAC 无 clipping，与原生音轨零采样偏移。主观听评未记录。"
         }
       ],
       "limitations": [
@@ -2092,7 +2249,8 @@
         "保留音频回退、V-Sync 与 Vulkan surface 警告，以及历史日志/性能/样本上限失败；无警告、跨平台和硬实时未验证。",
         "原生按钮信号不是 OS 鼠标坐标证据；游戏 OS exit code 未观察。后来迟到恢复 PNG 未恢复，不以旧版图片冒充。",
         "选定证据不是完整当前 MCP 传输轨迹，也不代表整个适配器或全部技能覆盖。当前发布未重新执行原生 DCC。",
-        "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。"
+        "无浏览器可玩导出或应用程序二进制；原创作品、影片与内容保留权利。",
+        "新增音轨不代表原视觉工程被重新制作；没有记录主观听评，也不涉及私人游戏项目的集成验证。"
       ],
       "resources": [
         {
@@ -2154,12 +2312,32 @@
         {
           "label": "历史原型说明与旧失败",
           "url": "docs/showcase/orbit-post-office/historical-v1/README.md"
+        },
+        {
+          "label": "新增配乐版 MP4",
+          "url": "docs/showcase/orbit-post-office/orbit-post-office-scored.mp4"
+        },
+        {
+          "label": "原生 MIDI 配乐工程 / 无损 WAV",
+          "url": "docs/showcase/orbit-post-office/orbit-post-office-native-score.zip"
+        },
+        {
+          "label": "新音轨验证",
+          "url": "docs/showcase/orbit-post-office/soundtrack-media-qa.json"
+        },
+        {
+          "label": "新音轨许可边界",
+          "url": "docs/showcase/orbit-post-office/SOUNDTRACK-LICENSES.md"
+        },
+        {
+          "label": "相关音频案例 Trail & Air",
+          "url": "https://dcc-mcp.github.io/showcase/cases/trail-and-air/"
         }
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
         "license": "原创作品、游戏内容和配方保留权利；不新增 MIT 或 CC0。标明的上游软件与字体声明保留各自范围。",
-        "note": "原创 GIMP 图像、Godot 游戏与 Kdenlive 影片；无第三方图包、音乐、应用或字体二进制。网站 MIT 不适用于作品与案例下载包。"
+        "note": "原创 GIMP 图像、Godot 游戏与 Kdenlive 影片；无第三方图包、音乐、应用或字体二进制。网站 MIT 不适用于作品与案例下载包。 新增音轨说明见 SOUNDTRACK-LICENSES.md；独立音频 CC0，原画面和作品权利不变。"
       },
       "source": {
         "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/943e2cd6855da6f4876032bc124556e3eac54bc9",
@@ -2233,6 +2411,258 @@
           "version": "站点 / 世界与首投递影片",
           "date": "2026-10-07",
           "change": "发布四个分层世界的图片、独立完整班次证据与七秒第一投递影片；当前可编辑源未公开下载。相同 D058 的改版，不计为第二个案例。"
+        },
+        {
+          "version": "独立新增 MIDI 配乐版",
+          "date": "2026-10-09",
+          "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        }
+      ]
+    },
+    {
+      "slug": "trail-and-air",
+      "title": "Trail & Air · 原创步行音频素材",
+      "subtitle": "REAPER · 17 个可复用脚步、环境循环与交互音效",
+      "software": [
+        "REAPER"
+      ],
+      "capabilities": [
+        "音频",
+        "程序化合成",
+        "原生导出",
+        "循环",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/trail-and-air/hero.jpg",
+        "alt": "根据实际导出音频绘制的脚步、环境与音乐波形图；不是软件或游戏截图"
+      },
+      "evidence_label": "本轮原生音频验证 · 可在线试听",
+      "evidence_scope": "本轮通过 typed DCC-MCP 生成原创确定性声源，再由实际 REAPER 导入、建立原生音频图谱、逐资源渲染、保存与重开。17 个导出与声源 PCM 逐样本一致。封面为测量波形，在线试听是实际导出的片段组合，不冒充 GUI 截图、游戏场景或现场录音。使用者已确认制作方向并授权公开；没有记录主观听评，不把数值检测当作听觉验收。",
+      "summary": "两组各六种单声道脚步、20 秒风与叶片环境循环、19.2 秒轻音乐循环，以及三个克制的交互提示。保留无损 WAV、原生项目与可复用合成/导出技能。",
+      "goal": "建立可供步行和探索原型使用的原创通用音频素材库，并用真正的 REAPER / Gateway / CLI 验证资源生成、原生导出、循环长度与工程可移植性。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "在确认空白且干净的 REAPER 项目中，通过 typed DCC-MCP 制作一组原创通用步行音频：六种碎石/石面脚步、六种草地/泥土脚步、轻微风与叶片环境循环、稀疏轻音乐循环以及三个交互音效。所有 WAV 为 48 kHz/24-bit，脚步/SFX 为 mono，背景循环为 stereo。不能使用外部采样、私人游戏场景或第三方录音。\n\n先 inventory、scoped search、load-skill、describe，再调用原生生成与渲染工具。保存并重开原生 RPP，逐项核对帧数、声道、循环边界和 PCM。保留相对媒体路径、确定性生成器、元数据、许可证以及失败保护。完成实际试听前不得将数值检查当作听觉验收；公开展示只包含通用原创音频和脱敏流程。",
+        "note": "按实际执行整理的可复用流程，不是用户原话逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "软件",
+          "value": "REAPER 7.82 · Linux x86_64 · vendor-documented headless libSwell"
+        },
+        {
+          "label": "适配器",
+          "value": "dcc-mcp-reaper 0.1.0 + 修复 commit 867ce6837c916aa7ca89a5cb14deae9869f09d00（draft PR #3）"
+        },
+        {
+          "label": "Core / CLI / Gateway",
+          "value": "Core 0.20.41 · CLI/server 0.20.42 · external reapy_boost 0.10.201"
+        },
+        {
+          "label": "音频规格",
+          "value": "48 kHz / 24-bit PCM；12 mono 脚步 + 3 mono SFX + 2 stereo loops"
+        }
+      ],
+      "tools": [
+        {
+          "name": "reaper_game_audio__generate_pack",
+          "description": "附加 typed 技能：确定性原创声源生成并进入真实原生 REAPER 图谱。"
+        },
+        {
+          "name": "reaper_game_audio__render_assets",
+          "description": "附加 typed 技能：逐区域原生离线渲染，严格核对帧数、声道和格式；失败写检查记录且不覆盖。"
+        },
+        {
+          "name": "reaper_stem_session__open_project / audit_session",
+          "description": "重开原生 RPP 并检查实际媒体依赖。"
+        },
+        {
+          "name": "reaper_session / reaper_project / reaper_tracks",
+          "description": "修复后的内置只读工具返回真实结构化状态。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "生成原创声源",
+          "description": "固定 seed 73，全部使用数学合成；不使用录音或外部采样。单独记录供游戏混音起步的增益、音高和变体选择建议。"
+        },
+        {
+          "title": "通过真正的 REAPER 导出",
+          "description": "建立 17 个非重叠区域，禁用导入自动淡入淡出以保持循环边界；17 次原生离线渲染保留48k/24-bit与mono/stereo。"
+        },
+        {
+          "title": "保存、重开与脱敏",
+          "description": "保存原生项目，重开后验证全部媒体。将交付项目调整为相对 Audio 路径，再次通过真实宿主重开。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3",
+          "alt": "Trail & Air 28.6 秒音频试听",
+          "caption": "点击播放：石面脚步、草地脚步、8秒环境、8秒音乐与三个交互音效。由真实 REAPER 导出组合；试听循环片段有短淡入淡出，下载的无损循环未改变。播放器不会自动播放。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实 typed Gateway/CLI 生成与导出",
+          "result": "pass",
+          "observed": "实际 REAPER 7.82；17 个独立原生 WAV 导出，原生 RPP 重开成功。"
+        },
+        {
+          "name": "逐样本与循环验证",
+          "result": "pass",
+          "observed": "17 个导出的 PCM 与原始确定性合成逐样本一致；48 kHz/24-bit，零 clipping，循环边界与频谱/电平检查通过。"
+        },
+        {
+          "name": "交付与脱敏",
+          "result": "pass",
+          "observed": "四个 ZIP 均小于 6 MB，完整性与逐文件哈希通过；原生项目使用相对 Audio 路径，已重开；无私人场景、画面、路径、软件二进制或账号数据。"
+        },
+        {
+          "name": "适配器修复",
+          "result": "pass",
+          "observed": "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。"
+        },
+        {
+          "name": "实际试听",
+          "result": "not_run",
+          "observed": "当前运行环境不支持音频输入，等待使用者听觉验收；没有以无 clipping 替代听觉评审。"
+        },
+        {
+          "name": "发布授权",
+          "result": "pass",
+          "observed": "使用者确认音频方向并明确授权发布通用素材案例；没有授权公开任何私人游戏场景。"
+        }
+      ],
+      "limitations": [
+        "没有记录主观听评；技术检测不替代目标播放设备与游戏内混音的试听。",
+        "没有宣称在任何游戏场景中完成触发、空间化、衰减或行走验证。",
+        "环境与脚步是风格化程序化音频，不是现场录音。",
+        "REAPER 是付费软件；60 天 evaluation 不等于长期免费，开源用途不免除其许可证。"
+      ],
+      "resources": [
+        {
+          "label": "脚步与交互音效 · 无损 ZIP",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-OneShots.zip"
+        },
+        {
+          "label": "20秒环境循环 · 无损 ZIP",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-Ambience.zip"
+        },
+        {
+          "label": "19.2秒轻音乐循环 · 无损 ZIP",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-Music.zip"
+        },
+        {
+          "label": "原生工程 / 技能 / 生成器",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-Source.zip"
+        },
+        {
+          "label": "试听 MP3",
+          "url": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3"
+        },
+        {
+          "label": "逐文件规格与游戏增益建议",
+          "url": "docs/showcase/trail-and-air/audio-manifest.json"
+        },
+        {
+          "label": "调用证据（路径脱敏）",
+          "url": "docs/showcase/trail-and-air/mcp-evidence.public.json"
+        },
+        {
+          "label": "验证与未完成项",
+          "url": "docs/showcase/trail-and-air/validation.json"
+        },
+        {
+          "label": "许可证与复现说明",
+          "url": "docs/showcase/trail-and-air/README.md"
+        },
+        {
+          "label": "原生 MIDI 配乐联动 · crystal-freight-native-film",
+          "url": "https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/"
+        },
+        {
+          "label": "原生 MIDI 配乐联动 · brass-relay",
+          "url": "https://dcc-mcp.github.io/showcase/cases/brass-relay/"
+        },
+        {
+          "label": "原生 MIDI 配乐联动 · orbit-post-office",
+          "url": "https://dcc-mcp.github.io/showcase/cases/orbit-post-office/"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "本案例原创音频 CC0-1.0；代码 MIT。仅适用于本案例原创资源，不改变其他案例或软件的许可证。",
+        "note": "没有包含应用程序、账号信息、外部录音、第三方采样或私人游戏资料。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-reaper/tree/867ce6837c916aa7ca89a5cb14deae9869f09d00",
+        "commit": "867ce6837c916aa7ca89a5cb14deae9869f09d00",
+        "title": "实际验证的 REAPER 适配器修复 commit；附加制作技能在本案例源码包"
+      },
+      "verified_at": "2026-10-09T15:43:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "音频制作与原生操作",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "code",
+          "stage": "工具实现",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考输入",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "试听与波形图",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术验证",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "本案例未记录可核验的具体模型与推理强度，不根据最终文件推断。",
+          "scope": "本轮对应阶段的音频制作、代码或验证。"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生音频素材",
+          "date": "2026-10-09",
+          "change": "完成真实原生导出、循环/样本验证、便携下载与用户授权；提供点击播放的在线试听，游戏内集成结果不在本案例声称范围内。"
         }
       ]
     }
