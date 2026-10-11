@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "freecad": "1.1.4",
+    "host_python": "3.11.14",
+    "adapter": "dcc-mcp-freecad 0.8.0",
+    "adapter_commit": "15fda96f2345e646a5a850e74d4c15e3cd0a4bb3",
+    "core_gateway_cli": "0.20.42",
+    "cad_transport": "Official DCC-MCP gateway default REST route",
+    "os": "Debian 13.6",
+    "blender": "4.5.14 LTS",
+    "render_engine": "Cycles CPU",
+    "render_route": "direct Blender CLI; not MCP"
+  },
+  "native": {
+    "objects": 255,
+    "visible_parts": 244,
+    "constraint_count": 11,
+    "expressions": 17,
+    "volume_mm3": 102886459.92885932,
+    "valid": true,
+    "sketch_fully_constrained": true
+  },
+  "design_counts": {
+    "drawer_fronts": 5,
+    "lens_bodies": 9
+  },
+  "roundtrip": {
+    "source": {
+      "solids": 294,
+      "volume_mm3": 102886459.92885864,
+      "bbox_min_mm": [
+        0.0,
+        -24.0,
+        0.0
+      ],
+      "bbox_max_mm": [
+        1080.0,
+        420.0,
+        1040.0
+      ]
+    },
+    "step_reimport": {
+      "solids": 294,
+      "volume_mm3": 102886459.92885864,
+      "bbox_min_mm": [
+        0.0,
+        -24.0,
+        0.0
+      ],
+      "bbox_max_mm": [
+        1080.0,
+        420.0,
+        1040.0
+      ]
+    },
+    "expression_test": {
+      "before_mm": 1056.0,
+      "changed_mm": 1116.0,
+      "restored_mm": 1056.0
+    },
+    "sketch": {
+      "fully_constrained": true,
+      "constraints": 11
+    },
+    "all_shapes_valid": true,
+    "volume_relative_error": 0.0
+  },
+  "render_transfer": {
+    "cad_mesh_objects": 244,
+    "raw_mesh_vertices": 34834,
+    "raw_mesh_triangles": 68492,
+    "bbox_min_m": [
+      0.0,
+      -0.024000000208616257,
+      0.0
+    ],
+    "bbox_max_m": [
+      1.0800000429153442,
+      0.41999998688697815,
+      1.0399999618530273
+    ],
+    "source_vertices": 34834,
+    "source_triangles": 68492,
+    "scope": "Raw mesh transfer only; presentation bevel modifiers are not evaluated."
+  },
+  "images": [
+    {
+      "file": "hero.jpg",
+      "source_png_sha256": "3f86f5986a4f80d72d17df624b84a73a4a5683db39f18cb9279bc806002b7a8a",
+      "display_sha256": "8a36b31c4050458920ec40be952cbe6f42de65b01d53a16e1c3a18af0f290345",
+      "resolution_px": [
+        1600,
+        1400
+      ],
+      "source": "Blender Cycles CPU, direct CLI, FreeCAD tessellation",
+      "samples": 96
+    },
+    {
+      "file": "detail.jpg",
+      "source_png_sha256": "d80dffa22fb1e43fdca6339c1176b0cc217c0f2ada555ed627857033a2227bc0",
+      "display_sha256": "d00fea0e188c0b3d9d8c2328bee2ac82487a37a130c8fcd9ae8d792b5bf0b2ec",
+      "resolution_px": [
+        1400,
+        1400
+      ],
+      "source": "Blender Cycles CPU, direct CLI, FreeCAD tessellation",
+      "samples": 96
+    },
+    {
+      "file": "exploded.jpg",
+      "source_png_sha256": "71411353e017039593bf3f9056a5afb72914007c97cc98af1ee2f1059230f015",
+      "display_sha256": "8150092afa7fdcde2e51892a2e833f9d57a0a6174664191bdf76bdbb8c2042e1",
+      "resolution_px": [
+        1600,
+        1400
+      ],
+      "source": "Blender Cycles CPU, direct CLI, FreeCAD tessellation",
+      "samples": 96
+    },
+    {
+      "file": "preview-detail.jpg",
+      "source_png_sha256": "2e6bc738fc950b5d8521d0fa9948645b0bf631a40ee03dd63953eeaf53195fb4",
+      "display_sha256": "3e84b0d97f4be86df816921cf192ccecd279ac24c545ff4293c4373cb2c17bdf",
+      "resolution_px": [
+        1400,
+        1400
+      ],
+      "source": "First-pass Blender CPU render before reed cutout correction",
+      "samples": 96
+    }
+  ],
+  "privacy": [
+    {
+      "file": "tidal.FCStd",
+      "private_path_or_routing_patterns": []
+    },
+    {
+      "file": "tidal-exploded.FCStd",
+      "private_path_or_routing_patterns": []
+    }
+  ],
+  "exploded_native_reopened": {
+    "valid": true,
+    "invalid_objects": [],
+    "empty_shape_objects": [],
+    "object_count": 244,
+    "exit_code": 0
+  },
+  "checks": [
+    {
+      "name": "Native file reopens and validates",
+      "result": "pass",
+      "observed": {
+        "valid": true,
+        "invalid_objects": [],
+        "empty_shape_objects": [],
+        "object_count": 255,
+        "exit_code": 0
+      }
+    },
+    {
+      "name": "STEP solid count, bounds and volume conservation",
+      "result": "pass",
+      "observed": {
+        "source": {
+          "solids": 294,
+          "volume_mm3": 102886459.92885864,
+          "bbox_min_mm": [
+            0.0,
+            -24.0,
+            0.0
+          ],
+          "bbox_max_mm": [
+            1080.0,
+            420.0,
+            1040.0
+          ]
+        },
+        "step_reimport": {
+          "solids": 294,
+          "volume_mm3": 102886459.92885864,
+          "bbox_min_mm": [
+            0.0,
+            -24.0,
+            0.0
+          ],
+          "bbox_max_mm": [
+            1080.0,
+            420.0,
+            1040.0
+          ]
+        },
+        "expression_test": {
+          "before_mm": 1056.0,
+          "changed_mm": 1116.0,
+          "restored_mm": 1056.0
+        },
+        "sketch": {
+          "fully_constrained": true,
+          "constraints": 11
+        },
+        "all_shapes_valid": true,
+        "volume_relative_error": 0.0
+      }
+    },
+    {
+      "name": "Native expression changes and restores right side placement",
+      "result": "pass",
+      "observed": {
+        "before_mm": 1056.0,
+        "changed_mm": 1116.0,
+        "restored_mm": 1056.0
+      }
+    },
+    {
+      "name": "Tray profile fully constrained",
+      "result": "pass",
+      "observed": {
+        "fully_constrained": true,
+        "constraints": 11
+      }
+    },
+    {
+      "name": "Actual rendered pixels reviewed",
+      "result": "pass",
+      "observed": {
+        "images": 3,
+        "review": "Author inspected all final images; not independent or user approval."
+      }
+    }
+  ],
+  "not_claimed": [
+    "FreeCAD GUI or viewport interaction. Headless native verification only; images are auxiliary Blender renders.",
+    "Blender MCP orchestration. Only CAD creation, reopen, validation and exchange used the official FreeCAD adapter/gateway.",
+    "Mechanical assembly constraints, sliding simulation, fastening specification, manufacturability, stability or load-bearing safety, moisture control or manufacturing tolerances. Exploded view is a presentation copy.",
+    "All parts resize coherently for arbitrary spreadsheet edits. The structural envelope has live expressions; decorative reeds and interior layout are fixed design dimensions requiring review after edits.",
+    "Every object has native feature history. Main panels use editable Part primitives; the tray is Sketcher+Pad; detailed reeds, handles and neutral camera proxies are static Part features.",
+    "Drawer boxes, runners and fasteners. The model includes drawer fronts and internal support shelves, not a fabrication-ready drawer assembly.",
+    "STEP carries expressions, sketch constraints, materials or native edit history. Only measured BREP geometry is compared.",
+    "Native FreeCAD material persistence. Render RGB and procedural wood are auxiliary presentation material recipes."
+  ]
+}

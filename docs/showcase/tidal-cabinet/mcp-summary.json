@@ -1,0 +1,50 @@
+{
+  "scope": "Selected whitelisted fields from actual gateway results. Not raw traces. Blender rendering is direct CLI, not MCP.",
+  "receipts": [
+    {
+      "stage": "CAD build",
+      "tool": "freecad_session__run_script",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "exit_code": 0,
+      "script_sha256": "cc5399cad7ed8c85adb76e5afab99da3042547cf435a85e31a621d518a1f11a0"
+    },
+    {
+      "stage": "Native reopen and STEP exchange",
+      "tool": "freecad_session__run_script",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "exit_code": 0,
+      "script_sha256": "ac5c6b356d6c12c8fd35bd8b0a2c259927044f64d92d6b51405624b47a9b5bf3"
+    },
+    {
+      "stage": "Native validation",
+      "tool": "freecad_session__validate_document",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "exit_code": 0,
+      "script_sha256": null
+    },
+    {
+      "stage": "Native readback",
+      "tool": "freecad_session__inspect_document",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "exit_code": 0,
+      "script_sha256": null
+    },
+    {
+      "stage": "Exploded native reopen",
+      "tool": "freecad_session__validate_document",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "exit_code": 0,
+      "script_sha256": null
+    }
+  ]
+}

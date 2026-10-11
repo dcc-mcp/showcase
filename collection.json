@@ -2551,6 +2551,252 @@
           "change": "完成真实原生导出、循环/样本验证、便携下载与用户授权；提供点击播放的在线试听，游戏内集成结果不在本案例声称范围内。"
         }
       ]
+    },
+    {
+      "slug": "tidal-cabinet",
+      "title": "Tidal · 潮汐摄影器材柜",
+      "subtitle": "FreeCAD · 参数尺寸、约束草图与 STEP 实测守恒",
+      "software": [
+        "FreeCAD",
+        "Blender"
+      ],
+      "capabilities": [
+        "参数化建模",
+        "装配展示",
+        "渲染",
+        "导出",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/tidal-cabinet/hero.jpg",
+        "alt": "真实CPU渲染的浅木框青绿竖纹摄影器材柜"
+      },
+      "evidence_label": "FreeCAD MCP 实作 · 原生重开与 STEP 回导入",
+      "evidence_scope": "官方 FreeCAD MCP 构建、原生重开、typed验证和STEP实测；辅助Blender CPU成图使用直接CLI，不声称Blender MCP或FreeCAD viewport。",
+      "summary": "青绿竖纹、浅木框和黄铜轨道构成原创器材柜。294个实体通过STEP往返保留计数与毫米边界，原生保留尺寸表达式和完全约束托盘草图。",
+      "goal": "把工业设计真实成图与原生参数化/交换几何分开验收，交付可下载编辑的CAD概念。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过官方FreeCAD MCP创作原创摄影器材柜。先查已有技能；采用内置Part、Spreadsheet、Sketcher，保留结构参数与完全约束托盘。保存重开原生文件，以STEP导出回导入计数、边界与体积。真实CAD tessellation交给Blender辅助CPU渲染主图、细节和拆解图。明确MCP与CLI边界，禁止用图像生成替代实际宿主图。提供源码、许可和最小脱敏证据。",
+        "note": "可复用制作说明，不是用户逐字原话。"
+      },
+      "environment": [
+        {
+          "label": "CAD",
+          "value": "FreeCAD 1.1.4 · Python 3.11.14 · Debian 13.6"
+        },
+        {
+          "label": "官方适配器",
+          "value": "dcc-mcp-freecad 0.8.0"
+        },
+        {
+          "label": "Core / Gateway / CLI",
+          "value": "0.20.42"
+        },
+        {
+          "label": "辅助渲染",
+          "value": "Blender 4.5.14 LTS · Cycles CPU · 96 samples · direct CLI"
+        }
+      ],
+      "tools": [
+        {
+          "name": "freecad_session__run_script",
+          "description": "官方escape hatch：表达式、草图、重复几何、保存重开与STEP测量。"
+        },
+        {
+          "name": "freecad_session__validate_document / inspect_document",
+          "description": "typed原生文件重开、有效性和对象回读。"
+        },
+        {
+          "name": "Blender background CLI",
+          "description": "真实CAD tessellation的辅助材质/灯光与三图渲染；不是MCP调用。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "原生结构和约束",
+          "description": "17个表达式、11项约束的fully-constrained托盘；装饰与器材布局保留为独立Part features。"
+        },
+        {
+          "title": "尺寸与交换实测",
+          "description": "右侧板位置改动后恢复；STEP实体计数、包围盒与体积测量。"
+        },
+        {
+          "title": "辅助材质研究",
+          "description": "使用CAD实际tessellation，主图、近景、拆解图真实CPU渲染。",
+          "image": {
+            "src": "docs/showcase/tidal-cabinet/detail.jpg",
+            "alt": "竖纹抽屉与镜头层板细节"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/tidal-cabinet/hero.jpg",
+          "alt": "摄影器材柜主视图",
+          "caption": "真实Blender辅助渲染；浅木框、青绿竖纹与黄铜细节。"
+        },
+        {
+          "src": "docs/showcase/tidal-cabinet/detail.jpg",
+          "alt": "器材柜近景",
+          "caption": "实际CAD几何细节；器材为无品牌布局代理。"
+        },
+        {
+          "src": "docs/showcase/tidal-cabinet/exploded.jpg",
+          "alt": "器材柜拆解展示",
+          "caption": "静态展示副本，不是机械装配或运动验证。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生保存重开",
+          "result": "pass",
+          "observed": "255对象，零无效或空形状，17表达式。"
+        },
+        {
+          "name": "托盘草图",
+          "result": "pass",
+          "observed": "11 constraints，FreeCAD fully_constrained=true。"
+        },
+        {
+          "name": "STEP交换",
+          "result": "pass",
+          "observed": "294→294 solids，毫米边界精确匹配，体积相对误差0.0。"
+        },
+        {
+          "name": "真实像素",
+          "result": "pass",
+          "observed": "作者实际查看三张CPU图；不是独立专家或用户批准。"
+        }
+      ],
+      "limitations": [
+        "未验收FreeCAD GUI/viewport；原生验证为headless。",
+        "只有结构外框有尺寸表达式，内饰和装饰需在改尺寸后人工复核。",
+        "拆解为静态presentation copy，不声称机械约束、制造公差、防潮性能或承重安全。",
+        "STEP只比较BREP几何，不保留参数历史、材质和草图约束。",
+        "辅助Blender成图为CLI，不冒充MCP。"
+      ],
+      "resources": [
+        {
+          "label": "原生FreeCAD工程",
+          "url": "docs/showcase/tidal-cabinet/tidal.FCStd"
+        },
+        {
+          "label": "拆解CAD副本",
+          "url": "docs/showcase/tidal-cabinet/tidal-exploded.FCStd"
+        },
+        {
+          "label": "STEP交换文件",
+          "url": "docs/showcase/tidal-cabinet/tidal.step"
+        },
+        {
+          "label": "制作与复现报告",
+          "url": "docs/showcase/tidal-cabinet/README.md"
+        },
+        {
+          "label": "CAD构建源码",
+          "url": "docs/showcase/tidal-cabinet/build_tidal.py"
+        },
+        {
+          "label": "辅助CPU渲染源码",
+          "url": "docs/showcase/tidal-cabinet/render_tidal.py"
+        },
+        {
+          "label": "实际测量",
+          "url": "docs/showcase/tidal-cabinet/validation.json"
+        },
+        {
+          "label": "工件哈希",
+          "url": "docs/showcase/tidal-cabinet/manifest.json"
+        },
+        {
+          "label": "许可与来源",
+          "url": "docs/showcase/tidal-cabinet/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创美术 CC-BY-4.0；原创代码 MIT。",
+        "note": "无外部模型或贴图，无私人项目素材。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-freecad/tree/15fda96f2345e646a5a850e74d4c15e3cd0a4bb3",
+        "commit": "15fda96f2345e646a5a850e74d4c15e3cd0a4bb3",
+        "title": "实际运行的官方FreeCAD适配器"
+      },
+      "verified_at": "2026-10-11T15:29:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "planning",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "Cabinet concept"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "creation",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "CAD and rendering"
+        },
+        {
+          "stage_id": "code",
+          "stage": "code",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "Original Python recipes"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "reference",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "No generated reference image"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "post_production",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "JPEG conversion only"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "review_visual",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "Author pixel inspection"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "review_technical",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "No independently verified task configuration receipt.",
+          "scope": "Native and STEP checks"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-11",
+          "change": "Original CAD concept, measured native constraints and STEP exchange; auxiliary CPU material study."
+        }
+      ]
     }
   ]
 }

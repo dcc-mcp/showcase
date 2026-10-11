@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "freecad_application": "FreeCAD",
+  "freecad_version": "1.1.4",
+  "capture_provider": "host-native auxiliary Blender CPU render",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "sha256": "992ac25f07cf0e44d1b2be3d43bf5726bc3446d5bf9c8da1e6eb6344648fb1f0",
+      "bytes": 933
+    },
+    {
+      "path": "README.md",
+      "sha256": "d3cf6980cce73c65cb48e3c36f91131c05c29d73cba7bdd2a859d05b003be57e",
+      "bytes": 5934
+    },
+    {
+      "path": "build_tidal.py",
+      "sha256": "cc5399cad7ed8c85adb76e5afab99da3042547cf435a85e31a621d518a1f11a0",
+      "bytes": 6070
+    },
+    {
+      "path": "cad_meshes.json",
+      "sha256": "2250218045d3bddad24b94ad16a00a9744e7a3547186263446ce2ff319fdd4af",
+      "bytes": 2717555
+    },
+    {
+      "path": "detail.jpg",
+      "sha256": "d00fea0e188c0b3d9d8c2328bee2ac82487a37a130c8fcd9ae8d792b5bf0b2ec",
+      "bytes": 207338,
+      "width": 1400,
+      "height": 1400,
+      "bit_depth": 8
+    },
+    {
+      "path": "exploded.jpg",
+      "sha256": "8150092afa7fdcde2e51892a2e833f9d57a0a6174664191bdf76bdbb8c2042e1",
+      "bytes": 154809,
+      "width": 1600,
+      "height": 1400,
+      "bit_depth": 8
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "8a36b31c4050458920ec40be952cbe6f42de65b01d53a16e1c3a18af0f290345",
+      "bytes": 177121,
+      "width": 1600,
+      "height": 1400,
+      "bit_depth": 8
+    },
+    {
+      "path": "mcp-summary.json",
+      "sha256": "80fe3801b823415c4972477f7dcaaac4270ae7befde37e5de1bea2910ebbe463",
+      "bytes": 1500
+    },
+    {
+      "path": "measure_render.py",
+      "sha256": "6b1c934e9b0a8d37d879322b003fe5fdd025496be42f94d517c1c5d44fc6d147",
+      "bytes": 1099
+    },
+    {
+      "path": "preview-detail.jpg",
+      "sha256": "3e84b0d97f4be86df816921cf192ccecd279ac24c545ff4293c4373cb2c17bdf",
+      "bytes": 208843,
+      "width": 1400,
+      "height": 1400,
+      "bit_depth": 8
+    },
+    {
+      "path": "render_tidal.py",
+      "sha256": "8e3bac8ff2d29f33446b519565be2278b160d8c725cc1db6e9de9053127008f4",
+      "bytes": 4329
+    },
+    {
+      "path": "roundtrip.py",
+      "sha256": "ac5c6b356d6c12c8fd35bd8b0a2c259927044f64d92d6b51405624b47a9b5bf3",
+      "bytes": 2142
+    },
+    {
+      "path": "tidal-exploded.FCStd",
+      "sha256": "e10b6eca100b352a34112c0be8f1eaf85490424ed5ac37cc68368af9aad2a3ca",
+      "bytes": 244209
+    },
+    {
+      "path": "tidal.FCStd",
+      "sha256": "9d99e66ffb1ac38630777ce1c5c9c0e17e60c97f0a98236a7b381287b0992ed8",
+      "bytes": 181468
+    },
+    {
+      "path": "tidal.step",
+      "sha256": "46a558090e3e7550909a918ab6438a7e915301dbac246202e20fb463dda71cdf",
+      "bytes": 778190
+    },
+    {
+      "path": "validation.json",
+      "sha256": "ce5d1d020fbf385bb161b9e62a1a293ba859a741b10ac42945fe4cf81302eb54",
+      "bytes": 7065
+    },
+    {
+      "path": "visible.json",
+      "sha256": "3f69764b58fe70d4166965078341b2595f2deacd75192119caba74d2f3b4b680",
+      "bytes": 4155
+    }
+  ]
+}
