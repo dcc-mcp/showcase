@@ -1,0 +1,86 @@
+{
+  "before": {
+    "objects": 491,
+    "meshes": 454,
+    "curves": 32,
+    "cameras": [
+      "01_Window still life",
+      "02_Rain and tea"
+    ],
+    "materials": 64,
+    "images": [
+      {
+        "name": "Rainroom postcard original ink",
+        "packed": true,
+        "size": [
+          128,
+          128
+        ],
+        "filepath": "//textures/postcard.png"
+      }
+    ],
+    "water_beads": 330,
+    "rivulets": 26,
+    "render_engine": "CYCLES",
+    "samples": 128,
+    "resolution": [
+      1440,
+      1440
+    ],
+    "moods": [
+      {
+        "frame": 1,
+        "lamp_watts": 42.0,
+        "sky_watts": 110.0
+      },
+      {
+        "frame": 2,
+        "lamp_watts": 0.0,
+        "sky_watts": 420.0
+      }
+    ]
+  },
+  "after": {
+    "objects": 491,
+    "meshes": 454,
+    "curves": 32,
+    "cameras": [
+      "01_Window still life",
+      "02_Rain and tea"
+    ],
+    "materials": 64,
+    "images": [
+      {
+        "name": "Rainroom postcard original ink",
+        "packed": true,
+        "size": [
+          128,
+          128
+        ],
+        "filepath": "//textures/postcard.png"
+      }
+    ],
+    "water_beads": 330,
+    "rivulets": 26,
+    "render_engine": "CYCLES",
+    "samples": 128,
+    "resolution": [
+      1440,
+      1440
+    ],
+    "moods": [
+      {
+        "frame": 1,
+        "lamp_watts": 42.0,
+        "sky_watts": 110.0
+      },
+      {
+        "frame": 2,
+        "lamp_watts": 0.0,
+        "sky_watts": 420.0
+      }
+    ]
+  },
+  "exact": true,
+  "excluded_transient": "Unsaved Viewer Node scratch buffer, not an authored texture."
+}

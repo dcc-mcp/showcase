@@ -2551,6 +2551,266 @@
           "change": "完成真实原生导出、循环/样本验证、便携下载与用户授权；提供点击播放的在线试听，游戏内集成结果不在本案例声称范围内。"
         }
       ]
+    },
+    {
+      "slug": "rainroom-two-hours",
+      "title": "Rainroom · 雨窗的两个时刻",
+      "subtitle": "Blender · 同一原生场景的雨夜与清晨",
+      "software": [
+        "Blender"
+      ],
+      "capabilities": [
+        "建模",
+        "材质",
+        "灯光",
+        "渲染",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/rainroom-two-hours/night.jpg",
+        "alt": "雨夜窗边静物，水珠玻璃、茶杯、书本与暖色铜灯"
+      },
+      "evidence_label": "本轮实际运行 · 官方 DCC-MCP",
+      "evidence_scope": "官方 gateway 中实际创建 491 个可编辑物体，typed 图片打包、保存、清空场景、从新目录重开与 CPU 渲染；定制几何通过已审阅的 scripting 技能制作，非 typed-only。真实 1440px 双光照主图与第二视角。无生成图片冒充渲染。",
+      "summary": "330 颗几何雨滴与 26 条曲线水痕，真实玻璃、釉面陶瓷、亚麻帘、胡桃木与铜灯。帧 1 为暖灯雨夜，帧 2 为清晨。",
+      "goal": "验证小型室内的材质层次、玻璃可读性、同场景光照变体、原生可编辑与贴图打包便携性。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "先查官方 MCP 技能与免费扩展，适用则复用。通过 Blender 官方 DCC-MCP 制作一处雨窗静物，保留可编辑几何雨滴、水痕、玻璃与室内材质。建立暖灯雨夜和清晨两种光照，实际 CPU 多视角渲染并审阅。保存、关闭场景，再把 packed textures 原生工程复制到无外部贴图的新目录重开。发布原生工程、复现脚本、真实图片与最小脱敏证据；不使用生成图冒充渲染。",
+        "note": "可复用说明，非用户原话逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "Host",
+          "value": "Blender 4.5.14 LTS · CPU Cycles"
+        },
+        {
+          "label": "Adapter / Core",
+          "value": "dcc-mcp-blender 0.2.16 / Core–Gateway–CLI 0.20.42"
+        },
+        {
+          "label": "Output",
+          "value": "1440 × 1440; 128 samples for the two main moods; 96 for detail; denoising enabled"
+        }
+      ],
+      "tools": [
+        {
+          "name": "blender_scripting__execute_script_file",
+          "description": "自定义雨滴/车削陶瓷/窗帘/材质组装与画面修订；已先查 typed 能力。"
+        },
+        {
+          "name": "blender_material_library__pack_image / image_file_status",
+          "description": "原创明信片位图真正打包；新目录里外部文件不存在而 packed 状态成立。"
+        },
+        {
+          "name": "blender_scene__save_scene / new_scene / open_scene",
+          "description": "原生保存、关闭旧场景并在独立目录重开；读回原生数据。"
+        },
+        {
+          "name": "blender_render__set_render_settings / start_render_job / start_multiview_render_job / get_render_job",
+          "description": "真实 CPU 两光照、多视角渲染与终态核验。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "制作前能力检查",
+          "description": "审阅官方技能、Dynamic Sky 扩展与 Asset Library 文档。天空扩展不适合此处精确室内双光照，不安装；公开说明查询边界。"
+        },
+        {
+          "title": "第一张真实预览",
+          "description": "真实渲染发现天空软箱穿过玻璃直接可见；保留最初图作为过程证据。",
+          "image": {
+            "src": "docs/showcase/rainroom-two-hours/preview.jpg",
+            "alt": "首次 CPU 预览，可见尚未修正的天空软箱"
+          }
+        },
+        {
+          "title": "场景内修订",
+          "description": "关闭软箱 camera/transmission 可见性，补齐墙面，调整构图；夜灯与清晨外景分别 keyframe；独立预览复核发现共面墙板黑块，修正不重叠墙块并重渲最终三图。"
+        },
+        {
+          "title": "便携重开",
+          "description": "压缩 native 复制到无外部素材目录，清空场景后重新打开；原生物体与打包图像读回一致。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/rainroom-two-hours/night.jpg",
+          "alt": "Rainroom 暖灯雨夜",
+          "caption": "真实 CPU Cycles · 1440 × 1440 · 128 samples"
+        },
+        {
+          "src": "docs/showcase/rainroom-two-hours/morning.jpg",
+          "alt": "Rainroom 清晨，台灯熄灭",
+          "caption": "同一原生场景的帧 2 · 128 samples"
+        },
+        {
+          "src": "docs/showcase/rainroom-two-hours/detail.jpg",
+          "alt": "从左侧观察茶杯、玻璃雨滴和铜灯",
+          "caption": "新目录重开的原生工程 · 第二相机 · 96 samples"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生便携与贴图",
+          "result": "pass",
+          "observed": "491 objects, 454 meshes, 32 curves, 2 cameras, 64 materials；330 beads / 26 rivulets；128×128 原创位图 packed，外部不存在。Viewer Node 临时缓冲排除后 save/reopen 数据完全一致。"
+        },
+        {
+          "name": "实际渲染与画面审阅",
+          "result": "pass",
+          "observed": "两光照和第二相机的实际 CPU 图片经过作者视觉审阅；灯光泄露在场景中修正。"
+        },
+        {
+          "name": "隐私扫描",
+          "result": "pass",
+          "observed": "未压缩 native 扫描私有路径与凭据模式为零；公开 JPG 无元数据。"
+        },
+        {
+          "name": "GUI / 用户验收",
+          "result": "not_run",
+          "observed": "当前验证为 headless，未声称 GUI 检查或用户最终认可。"
+        }
+      ],
+      "limitations": [
+        "艺术化静物，不是施工模型或流体模拟。",
+        "不声称跨 DCC 材质一致性。",
+        "公开 MCP 记录是脱敏最小子集，不是完整原始 trace。",
+        "确切 backend model 与 reasoning effort 无已核验记录，均为 unknown。"
+      ],
+      "resources": [
+        {
+          "label": "Native Blender scene",
+          "url": "docs/showcase/rainroom-two-hours/rainroom.blend"
+        },
+        {
+          "label": "Reproduction script",
+          "url": "docs/showcase/rainroom-two-hours/build_rainroom.py"
+        },
+        {
+          "label": "Scene revisions",
+          "url": "docs/showcase/rainroom-two-hours/refine_rainroom.py"
+        },
+        {
+          "label": "Final lighting",
+          "url": "docs/showcase/rainroom-two-hours/finalize_lighting.py"
+        },
+        {
+          "label": "Wall repair",
+          "url": "docs/showcase/rainroom-two-hours/fix_wall.py"
+        },
+        {
+          "label": "Validation",
+          "url": "docs/showcase/rainroom-two-hours/validation.json"
+        },
+        {
+          "label": "MCP results",
+          "url": "docs/showcase/rainroom-two-hours/mcp-summary.json"
+        },
+        {
+          "label": "Native roundtrip",
+          "url": "docs/showcase/rainroom-two-hours/native-roundtrip.json"
+        },
+        {
+          "label": "Image provenance",
+          "url": "docs/showcase/rainroom-two-hours/image-provenance.json"
+        },
+        {
+          "label": "Plugin review",
+          "url": "docs/showcase/rainroom-two-hours/plugin-review.md"
+        },
+        {
+          "label": "Licenses",
+          "url": "docs/showcase/rainroom-two-hours/LICENSES.md"
+        },
+        {
+          "label": "Guide",
+          "url": "docs/showcase/rainroom-two-hours/README.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP Rainroom showcase contributors",
+        "license": "Original artwork/native assets rights reserved; reproduction scripts MIT.",
+        "note": "无外部素材、第三方贴图或字体。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/f831dc8a4a87d70eff0b1ca7eafca87058f20bd7",
+        "commit": "f831dc8a4a87d70eff0b1ca7eafca87058f20bd7",
+        "title": "Inspected official adapter source reference; installed wheel version is recorded separately, not a binary identity claim."
+      },
+      "verified_at": "2026-10-11",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "Planning",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        },
+        {
+          "stage_id": "creation",
+          "stage": "Native creation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        },
+        {
+          "stage_id": "code",
+          "stage": "Reproduction scripts",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        },
+        {
+          "stage_id": "reference",
+          "stage": "Official documentation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "JPEG derivatives",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "Actual image review",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "Native and tool checks",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Rainroom production/review stage."
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-11",
+          "change": "Original real MCP production; softbox visibility corrected after preview; packed native reopened in a new directory."
+        }
+      ]
     }
   ]
 }

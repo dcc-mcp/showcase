@@ -1,0 +1,46 @@
+[
+  {
+    "output": "preview.jpg",
+    "source_kind": "Actual Blender CPU Cycles PNG",
+    "source_sha256": "1e008cb70d13a55e0fe343132554fcb5a055f2c335e27e96094e72ad0e87199f",
+    "source_size": [
+      900,
+      900
+    ],
+    "derivative": "JPEG quality 86, no retouching or content edits",
+    "output_sha256": "ec81fbc22abcb5913e350646a47508789732dc8d7aca1323ca87b29be7d65dd4"
+  },
+  {
+    "output": "night.jpg",
+    "source_kind": "Actual Blender CPU Cycles PNG",
+    "source_sha256": "8f16348e1241732f5e7859a96e21cc0db19d9e1328e4d2effcbea60710326722",
+    "source_size": [
+      1440,
+      1440
+    ],
+    "derivative": "JPEG quality 86, no retouching or content edits",
+    "output_sha256": "6c93d479d897f9052920094184b05f14fae66fcd5a8ea619a1c760e624de9c34"
+  },
+  {
+    "output": "morning.jpg",
+    "source_kind": "Actual Blender CPU Cycles PNG",
+    "source_sha256": "7a5be94972e99425e8b0dbee72d81ad9841bd41171f43e87c78dccb7c79691f0",
+    "source_size": [
+      1440,
+      1440
+    ],
+    "derivative": "JPEG quality 86, no retouching or content edits",
+    "output_sha256": "b66bc2b6663ca39fc7e5282f262fc04befe0b6a713668fd0d9955add704956e9"
+  },
+  {
+    "output": "detail.jpg",
+    "source_kind": "Actual Blender CPU Cycles PNG",
+    "source_sha256": "01ac6eead4a9ac90f3a86ee76fdad39363fe5d7578769fda5113ff2dae3d7d1f",
+    "source_size": [
+      1440,
+      1440
+    ],
+    "derivative": "JPEG quality 86, no retouching or content edits",
+    "output_sha256": "85b0788fcd1f1a6c8faaec432aeefa2a0b2cab327f73cf64f987c849e95fe809"
+  }
+]

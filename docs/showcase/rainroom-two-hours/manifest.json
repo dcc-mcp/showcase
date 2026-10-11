@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "application": "Blender",
+  "version": "4.5.14 LTS",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "sha256": "0d9a3d1439de7e8ca89eb82dc02efb1600b6e14700541057dae0a83190fe8663",
+      "bytes": 1739
+    },
+    {
+      "path": "README.md",
+      "sha256": "e9dacee4c2883192527750075cd7e2013db8dfe8cb49d38dad56fde9dec26093",
+      "bytes": 4750
+    },
+    {
+      "path": "build_rainroom.py",
+      "sha256": "273a66d5020a6e2edf3386d127b8e535ffa12b37902affdfdb3b6c275ab944e2",
+      "bytes": 11694
+    },
+    {
+      "path": "detail.jpg",
+      "sha256": "85b0788fcd1f1a6c8faaec432aeefa2a0b2cab327f73cf64f987c849e95fe809",
+      "bytes": 155803,
+      "width": 1440,
+      "height": 1440,
+      "bit_depth": 8
+    },
+    {
+      "path": "finalize_lighting.py",
+      "sha256": "cf3d2f22d76dc33a278071fe9ed95cbf35f67a0cc61f1c9a6cbc9af1692987f3",
+      "bytes": 902
+    },
+    {
+      "path": "fix_wall.py",
+      "sha256": "48d497e24a1bc445546571bc764ef585ada38907d2e9cdb17d40d2989ad25795",
+      "bytes": 634
+    },
+    {
+      "path": "image-provenance.json",
+      "sha256": "30a0127071fee0809645901e8987fce64e3b6a26341a4f5a4678d4e34c627962",
+      "bytes": 1545
+    },
+    {
+      "path": "inspect_rainroom.py",
+      "sha256": "26e3af8f058ff0689261ad583b37a4b4cd2a48ac6ed8263932d5c107b8ba0811",
+      "bytes": 911
+    },
+    {
+      "path": "mcp-summary.json",
+      "sha256": "14557240c532754af118bb76918c9c1d11f4d5e21865fb4d9e67bb9d95104843",
+      "bytes": 3229
+    },
+    {
+      "path": "morning.jpg",
+      "sha256": "b66bc2b6663ca39fc7e5282f262fc04befe0b6a713668fd0d9955add704956e9",
+      "bytes": 155515,
+      "width": 1440,
+      "height": 1440,
+      "bit_depth": 8
+    },
+    {
+      "path": "native-roundtrip.json",
+      "sha256": "33fa303ce29d5e14ff7e5940a59194bc888bc2006f462d6fe108b4b4a0c7c48c",
+      "bytes": 1586
+    },
+    {
+      "path": "night.jpg",
+      "sha256": "6c93d479d897f9052920094184b05f14fae66fcd5a8ea619a1c760e624de9c34",
+      "bytes": 150125,
+      "width": 1440,
+      "height": 1440,
+      "bit_depth": 8
+    },
+    {
+      "path": "plugin-review.md",
+      "sha256": "93988a07b527c498629965f1210bc47eff795010f04ed5b9a73a0598b66ccc72",
+      "bytes": 1134
+    },
+    {
+      "path": "preview.jpg",
+      "sha256": "ec81fbc22abcb5913e350646a47508789732dc8d7aca1323ca87b29be7d65dd4",
+      "bytes": 79669,
+      "width": 900,
+      "height": 900,
+      "bit_depth": 8
+    },
+    {
+      "path": "rainroom.blend",
+      "sha256": "f8920e3d5265eaedfceb4c1b8dfe63081479cd0386e684ced0dc42644d164ff3",
+      "bytes": 531992
+    },
+    {
+      "path": "refine_rainroom.py",
+      "sha256": "d17ed6b79b8d64be3593a42a63b36275cc1c54c012fc5c57700a08375991186e",
+      "bytes": 1493
+    },
+    {
+      "path": "sanitize_native.py",
+      "sha256": "94780e2c8650216ac2d753ff1db6bc631f5e59b9057b1ca724339288dffacb22",
+      "bytes": 897
+    },
+    {
+      "path": "validation.json",
+      "sha256": "5bf51ce4641fc3dfbabe9b2dd73cef4cfafd86b554c76684454390b2a6100940",
+      "bytes": 4712
+    }
+  ]
+}
