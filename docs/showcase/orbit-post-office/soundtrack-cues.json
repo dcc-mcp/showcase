@@ -1,0 +1,45 @@
+{
+  "slug": "orbit-post-office",
+  "duration_seconds": 7,
+  "fps": 30,
+  "title": "Orbit Post Office — first-delivery vignette",
+  "music": "Tiny cozy storybook cue: celesta/plucked notes, soft warm pad, no percussion wash. Suggested 120 BPM; build one coherent 7-second phrase rather than arbitrary looping.",
+  "cues": [
+    [
+      0,
+      2,
+      "Title and original station art",
+      "Two soft bell/pluck notes open the world."
+    ],
+    [
+      2,
+      2.25,
+      "Gameplay begins; courier launches",
+      "Small envelope/UI tap then gentle rising glide, not a loud impact."
+    ],
+    [
+      2.25,
+      5,
+      "Courier travels to observatory",
+      "Quiet light ascending motif follows journey."
+    ],
+    [
+      5,
+      5.25,
+      "First delivery accepted; counter becomes 01/08",
+      "Short happy two/three-note received chime; visual accepted state first seen near 5.0s in quarter-second samples."
+    ],
+    [
+      6,
+      7,
+      "First delivery received end card",
+      "Resolve softly and fade within 7s; do not imply all eight letters delivered."
+    ]
+  ],
+  "source_case_url": "https://dcc-mcp.github.io/showcase/cases/orbit-post-office/",
+  "source_video_url": "https://dcc-mcp.github.io/showcase/docs/showcase/orbit-post-office/first-delivery-720p.mp4",
+  "source_license_url": "https://dcc-mcp.github.io/showcase/docs/showcase/orbit-post-office/LICENSES.md",
+  "rights": "Original artwork/video rights reserved; excluded from site MIT. User specifically requests adding original music/SFX to their existing showcase. Preserve attribution and scoped rights; do not add MIT/CC0 to original visuals.",
+  "cue_evidence": "Frame contact sheets at 1fps, targeted train/gameplay at 4fps; train/brass editorial cuts cross-checked against public Kdenlive XML. Fine event times approximate ±0.25s unless cut boundary.",
+  "delivery": "Native REAPER project + 48kHz stereo WAV from actual MCP host; web AAC MP4 is packaging derivative. Preserve original H264 video bytes using stream copy. Keep original silent video."
+}

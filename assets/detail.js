@@ -14,3 +14,23 @@ status.textContent = "已选中提示词，请使用复制快捷键。";
 }
 });
 })();
+
+(() => {
+"use strict";
+document.querySelectorAll(".audio-player").forEach(player => {
+const audio = player.querySelector("audio");
+if (!audio) return;
+const buttons = Array.from(player.querySelectorAll("[data-audio-seek]"));
+const ready = () => audio.readyState >= 1 && Number.isFinite(audio.duration) && audio.duration > 0 && !audio.error;
+const update = () => buttons.forEach(button => { button.disabled = !ready(); });
+for (const event of ["loadedmetadata", "durationchange", "emptied", "error"]) audio.addEventListener(event, update);
+buttons.forEach(button => button.addEventListener("click", () => {
+const delta = Number(button.dataset.audioSeek);
+if (button.disabled || !ready() || !Number.isFinite(delta)) return;
+const current = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+// User activation changes position only; never call play() or pause().
+audio.currentTime = Math.max(0, Math.min(audio.duration, current + delta));
+}));
+update();
+});
+})();

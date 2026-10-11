@@ -1,0 +1,22 @@
+[
+  {
+    "file": "Trail-and-Air-OneShots.zip",
+    "bytes": 869470,
+    "sha256": "b1332611266cf20e47eb423401491415a39e9b77c0774fe1edd17ea9edc7988e"
+  },
+  {
+    "file": "Trail-and-Air-Ambience.zip",
+    "bytes": 5239926,
+    "sha256": "60560da452928ac8b8e51eca8b5e745d92595643f705524e878928fec383b097"
+  },
+  {
+    "file": "Trail-and-Air-Music.zip",
+    "bytes": 5204648,
+    "sha256": "7338eadfc1205e47300d8896f2222bd3e1ea6e584c50c5679f63cab0d040f99a"
+  },
+  {
+    "file": "Trail-and-Air-Source.zip",
+    "bytes": 59362,
+    "sha256": "4b9dddad33c5e97f2269f1cdea5b5417853ca64cf0e72bf02fa93704a830ac10"
+  }
+]
