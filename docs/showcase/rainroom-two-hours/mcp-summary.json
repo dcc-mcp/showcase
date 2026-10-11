@@ -1,0 +1,125 @@
+{
+  "scope": "Minimal selected real results, not a complete trace. Private routing and paths removed.",
+  "results": [
+    {
+      "tool": "blender_scripting__execute_script_file",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_material_library__pack_image",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "result": {
+        "image": {
+          "name": "Rainroom postcard original ink",
+          "filepath": "",
+          "size": [
+            128,
+            128
+          ],
+          "colorspace": "sRGB",
+          "source": "FILE"
+        },
+        "packed": true,
+        "changed": true
+      }
+    },
+    {
+      "tool": "blender_scene__save_scene",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_scripting__execute_script_file",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_scripting__execute_script_file",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_render__set_render_settings",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_scene__new_scene",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_scene__open_scene",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_material_library__image_file_status",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "result": {
+        "image": {
+          "name": "Rainroom postcard original ink",
+          "filepath": "//textures/postcard.png",
+          "size": [
+            128,
+            128
+          ],
+          "colorspace": "sRGB",
+          "source": "FILE"
+        },
+        "state": "packed",
+        "packed": true,
+        "exists_on_disk": false,
+        "is_dirty": false
+      }
+    },
+    {
+      "tool": "blender_scripting__execute_script_file",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "blender_render__get_render_job",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "status": "completed",
+      "images": [
+        {
+          "camera": "02_Rain and tea",
+          "pass": "beauty",
+          "status": "completed",
+          "image": {
+            "sha256": "01ac6eead4a9ac90f3a86ee76fdad39363fe5d7578769fda5113ff2dae3d7d1f",
+            "width": 1440,
+            "height": 1440,
+            "size_bytes": 2492785
+          }
+        }
+      ]
+    },
+    {
+      "tool": "blender_render__get_render_job",
+      "success": true,
+      "control_route": "gateway",
+      "gateway_stats_recorded": true,
+      "status": "completed",
+      "expected_frame_count": 2,
+      "written_frame_count": 2,
+      "progress": 1.0
+    }
+  ]
+}
