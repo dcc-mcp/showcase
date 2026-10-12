@@ -431,6 +431,9 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     cases = collection["cases"]
     # Retain original-language evidence assertions alongside bilingual coverage.
     locale_base = "/zh/" if (site / "zh/index.html").is_file() else "/"
+    import localization
+    source_copy = localization.catalog(str(Path.cwd()), locale="zh") if locale_base == "/zh/" else {}
+    display_text = lambda value: source_copy.get(value, value)
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
               "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": [], "audio": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
@@ -513,12 +516,12 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             progress(active_context, "model_fields")
                             for index, row in enumerate(case["model_attribution"]):
                                 stage = section.locator("dt").nth(index)
-                                expect(stage).to_have_text(row["stage"])
+                                expect(stage).to_have_text(display_text(row["stage"]))
                                 expect(stage).to_be_visible()
                                 cell = section.locator("dd").nth(index)
-                                expect(cell.locator("strong").nth(0)).to_have_text(row["model"])
+                                expect(cell.locator("strong").nth(0)).to_have_text(display_text(row["model"]))
                                 expect(cell.locator("strong").nth(0)).to_be_visible()
-                                expect(cell.locator("strong").nth(1)).to_have_text(row["reasoning_effort"])
+                                expect(cell.locator("strong").nth(1)).to_have_text(display_text(row["reasoning_effort"]))
                                 expect(cell.locator("strong").nth(1)).to_be_visible()
                             no_overflow = page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
                             if not no_overflow:

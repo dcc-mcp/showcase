@@ -77,5 +77,6 @@
   "技术审查": "Technical review",
   "技术审查阶段；原创程序化解谜与原生验收": "Technical-review stage; original procedural puzzle and native acceptance",
   "v1 原生光路解谜": "v1 native light-path puzzle",
-  "真实MCP制作；实际键鼠三关通关；修正反射术语并重新出图，包含小窗口、原生ZIP与PCK重开证据。": "Real MCP production; all three levels completed with real keyboard/mouse input; reflection terminology corrected and imagery recaptured. Includes small-window checks and reopening evidence for the native ZIP and PCK."
+  "真实MCP制作；实际键鼠三关通关；修正反射术语并重新出图，包含小窗口、原生ZIP与PCK重开证据。": "Real MCP production; all three levels completed with real keyboard/mouse input; reflection terminology corrected and imagery recaptured. Includes small-window checks and reopening evidence for the native ZIP and PCK.",
+  "原始交付仅提供原生工程与PCK；后续新增的Web版本及其浏览器验收独立列出，原生历史记录不代表Web验收。": "The original delivery provided only the native project and PCK. The later Web export and its browser acceptance are documented separately; the historical native records do not establish Web acceptance."
 }
