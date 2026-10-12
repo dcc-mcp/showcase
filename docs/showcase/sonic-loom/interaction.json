@@ -1,0 +1,153 @@
+{
+  "bpm": 108,
+  "events": [
+    {
+      "action": "reset",
+      "bpm": 104,
+      "playing": false,
+      "step": -1
+    },
+    {
+      "action": "cell",
+      "bpm": 104,
+      "lane": 0,
+      "playing": false,
+      "step": 1,
+      "value": 1
+    },
+    {
+      "action": "tempo",
+      "bpm": 108,
+      "playing": false,
+      "step": -1
+    },
+    {
+      "action": "save",
+      "bpm": 108,
+      "playing": false,
+      "step": -1
+    },
+    {
+      "action": "play",
+      "bpm": 108,
+      "playing": true,
+      "step": 0
+    },
+    {
+      "action": "pause",
+      "bpm": 108,
+      "playing": false,
+      "step": 7
+    },
+    {
+      "action": "mute",
+      "bpm": 108,
+      "lane": 0,
+      "playing": false,
+      "step": 7,
+      "value": true
+    },
+    {
+      "action": "reset",
+      "bpm": 104,
+      "playing": false,
+      "step": -1
+    },
+    {
+      "action": "load",
+      "bpm": 108,
+      "playing": false,
+      "step": -1
+    }
+  ],
+  "muted": [
+    false,
+    false,
+    false,
+    false
+  ],
+  "pattern": [
+    [
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "playing": false,
+  "checks": {
+    "mouse_step": true,
+    "tempo_button": true,
+    "play_pause": true,
+    "mute": true,
+    "saved_pattern_reopened": true,
+    "reset_twice": true
+  },
+  "passed": true
+}

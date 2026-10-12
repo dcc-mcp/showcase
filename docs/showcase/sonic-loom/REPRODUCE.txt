@@ -1,0 +1,15 @@
+Open native/project.godot with Godot 4.6.3 and run the main scene.
+Click any step to toggle it. Click a voice name to mute it.
+Play/pause: button or Space. Tempo: +/- buttons (4 BPM) or up/down arrows (1 BPM).
+Save: button or S. Load: button or L. Reset: button or R.
+The pattern is automatically loaded from the local Godot user-data file on startup.
+Save and Load use local device storage, with no account, network, or upload.
+The original pattern is restored by Reset; the saved pattern remains available until Save overwrites it.
+
+Checks:
+godot --headless --editor --path native --import
+godot --headless --path native -- --test
+
+Render a native video with real mixed audio on a windowed desktop:
+godot --path native --write-movie demo.avi --fixed-fps 30 --quit-after 390 -- --demo
+The standalone source has no MCP dependency. To reproduce MCP authoring, install the official dcc-mcp-godot add-on into a separate project copy, load godot-script and godot-scene-management skills, create the source with create_script, create a Node2D root, attach_script and save_scene. Exact typed calls and source digest are in mcp-evidence.json.
