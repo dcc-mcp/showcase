@@ -5,6 +5,7 @@ import tempfile
 import unittest
 
 import build_site as site
+import localization as i18n
 from test_build_site import fixture_case, make_png
 
 
@@ -60,6 +61,40 @@ class GalleryTests(unittest.TestCase):
         self.case['results'].append({'src': 'docs/showcase/sample-case/clip.webm'})
         self.assertEqual(site.media_kinds(self.case, True), ['video', 'interactive', 'audio'])
         self.assertEqual(site.preview_media(self.case)['src'], 'docs/showcase/sample-case/clip.webm')
+
+    def test_source_evidence_is_visible_outside_the_media_and_escaped(self):
+        self.case['evidence_label'] = '<b>Partial excerpt</b> · Not final acceptance'
+        self.case['results'].insert(0, {'src': 'docs/showcase/sample-case/partial.mp4', 'alt': 'Partial test video'})
+        markup = site.cards_markup([self.case], str(self.root))
+        self.assertIn('<p class="card-evidence">&lt;b&gt;Partial excerpt&lt;/b&gt; · Not final acceptance</p>', markup)
+        # The evidence is ordinary card text, outside the preview/video layer.
+        self.assertGreater(markup.index('class="card-evidence"'), markup.index('class="card-title"'))
+        self.assertNotIn('card-evidence" hidden', markup)
+        self.assertNotIn('class="sr-only card-evidence"', markup)
+
+    def test_partial_fixture_retains_exact_source_evidence_in_both_locales(self):
+        source = '历史成果 · 新镜头仅为未完成阶段证据'
+        target = 'Historical artwork · New camera attempt is partial stage evidence'
+        self.case['evidence_label'] = source
+        self.case['results'].insert(0, {'src': 'docs/showcase/sample-case/partial.mp4', 'alt': 'Partial test video'})
+        markup = site.cards_markup([self.case], str(self.root))
+        root = str(Path(__file__).resolve().parents[1])
+        for locale, expected in [('en', target), ('zh', source)]:
+            translations = i18n.catalog(root, locale=locale)
+            if locale == 'en':
+                translations[source] = target
+            parser = i18n.LocalizedHTML('index.html', locale, {'index.html'}, translations)
+            parser.feed(markup)
+            parser.close()
+            self.assertFalse(parser.missing)
+            self.assertIn('<p class="card-evidence">' + expected + '</p>', ''.join(parser.output))
+
+    def test_evidence_is_not_inferred_from_video_name_or_duration(self):
+        self.case['evidence_label'] = 'Published evidence'
+        self.case['results'].insert(0, {'src': 'docs/showcase/sample-case/partial-short.mp4', 'alt': 'A short clip', 'duration': 2.083})
+        markup = site.cards_markup([self.case], str(self.root))
+        self.assertIn('<p class="card-evidence">Published evidence</p>', markup)
+        self.assertNotIn('>Partial excerpt<', markup)
 
     def test_current_main_assets_are_not_changed_by_rendering(self):
         root = Path(__file__).resolve().parents[1]

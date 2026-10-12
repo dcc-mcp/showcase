@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 from functools import partial
 from http.server import ThreadingHTTPServer
 import json
@@ -26,7 +27,8 @@ def run(site: Path, output: Path, expected_head: str):
     threading.Thread(target=server.serve_forever, daemon=True).start()
     origin = 'http://127.0.0.1:' + str(server.server_port)
     base = origin + '/showcase/'
-    case_count = len(json.loads(Path('collection.json').read_text(encoding='utf-8'))['cases'])
+    source_cases = json.loads(Path('collection.json').read_text(encoding='utf-8'))['cases']
+    case_count = len(source_cases)
     errors, requests = [], []
     page = None
     stage = 'launch'
@@ -68,6 +70,8 @@ def run(site: Path, output: Path, expected_head: str):
                 assert page.locator('.card-preview').evaluate_all('(videos)=>videos.every(v=>!v.hasAttribute("src") && v.paused && v.muted && !v.autoplay && v.preload==="none")')
                 assert not any(path.endswith(('.mp4', '.webm', '.wasm', '.pck')) for path in requests)
                 assert page.locator('iframe').count() == 0
+                expect(page.locator('.card-evidence')).to_have_count(case_count)
+                assert page.locator('.card-evidence').evaluate_all('(items)=>items.every(item=>item.textContent.trim() && getComputedStyle(item).display!=="none")')
                 capture(page, locale + '-desktop-gallery.png')
                 checked(locale + ': static artwork before intent; no video or engine request')
                 stage = locale + ' hover'
@@ -163,6 +167,51 @@ def run(site: Path, output: Path, expected_head: str):
             assert data['usage_rights']['evaluation']['status'] == 'not-granted'
             checked('catalog preserves separate conservative usage rights')
             ctx.close()
+            # Isolated markup fixture, never written into _site or the catalog.
+            # Its video bytes are an existing selected public asset; the changed
+            # evidence/title below are TEST DATA, not a new production claim.
+            import build_site as renderer
+            import localization as i18n
+            partial_case = copy.deepcopy(next(case for case in source_cases if renderer.preview_media(case)))
+            partial_case['slug'] = 'partial-preview-contract-fixture'
+            partial_case['title'] = 'TEST FIXTURE — not a published showcase'
+            source_label = '历史成果 · 新镜头仅为未完成阶段证据'
+            english_label = 'Historical artwork · New camera attempt is partial stage evidence'
+            partial_case['evidence_label'] = source_label
+            root = str(Path.cwd())
+            for touch in [False, True]:
+                stage = 'partial evidence fixture ' + ('touch' if touch else 'desktop')
+                ctx = context(viewport={'width': 390 if touch else 1486, 'height': 844 if touch else 1059}, is_mobile=touch, has_touch=touch)
+                page = ctx.new_page()
+                for prefix, locale in [('', 'en'), ('zh/', 'zh')]:
+                    translations = i18n.catalog(root, locale=locale)
+                    if locale == 'en':
+                        translations[source_label] = english_label
+                    parser = i18n.LocalizedHTML('index.html', locale, {'index.html'}, translations)
+                    parser.feed(renderer.cards_markup([partial_case], root))
+                    parser.close()
+                    assert not parser.missing
+                    page.goto(base + prefix, wait_until='domcontentloaded')
+                    page.set_content('<!doctype html><html lang="' + ('en' if locale == 'en' else 'zh-CN') + '"><head><base href="' + base + prefix + '"><link rel="stylesheet" href="' + base + 'assets/site.css"><script src="' + base + 'assets/preview.js" defer></script></head><body><main class="gallery-main"><h1>TEST FIXTURE</h1><div class="work-wall">' + ''.join(parser.output) + '</div></main></body></html>')
+                    card = page.locator('.case-card')
+                    label = card.locator('.card-evidence')
+                    expected = english_label if locale == 'en' else source_label
+                    expect(label).to_have_text(expected)
+                    expect(label).to_be_visible()
+                    if touch:
+                        card.locator('.preview-toggle').tap()
+                    else:
+                        card.locator('.card-visual').hover()
+                    expect(card).to_have_attribute('data-preview-state', 'playing')
+                    expect(label).to_have_text(expected)
+                    expect(label).to_be_visible()
+                    assert label.bounding_box()['y'] >= card.locator('.card-media').bounding_box()['y'] + card.locator('.card-media').bounding_box()['height']
+                    card.locator('.preview-toggle').click()
+                    expect(card).to_have_attribute('data-preview-state', 'idle')
+                    expect(label).to_have_text(expected)
+                    expect(label).to_be_visible()
+                    checked(locale + ': partial TEST FIXTURE evidence survives ' + ('touch' if touch else 'hover') + ' preview start/stop outside the media layer')
+                ctx.close()
             browser.close()
             if errors:
                 raise AssertionError('; '.join(errors))
