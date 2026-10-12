@@ -195,7 +195,7 @@ def run(site: Path, output: Path, expected_head: str):
                     fixture_html = ('<!doctype html><html lang="' + ('en' if locale == 'en' else 'zh-CN') + '"><head><base href="' + base + prefix + '"><link rel="stylesheet" href="' + base + 'assets/site.css"><script src="' + base + 'assets/preview.js" defer></script></head><body><main class="gallery-main"><h1>TEST FIXTURE</h1><div class="work-wall">' + ''.join(parser.output) + '</div></main></body></html>')
                     # A fresh served document avoids document.write inheriting
                     # timers/listeners from the previous live gallery document.
-                    page.route(fixture_url, lambda route, body=fixture_html: route.fulfill(status=200, content_type='text/html', body=body))
+                    page.route(fixture_url, lambda route: route.fulfill(status=200, content_type='text/html', body=fixture_html))
                     page.mouse.move(0, 0)
                     page.goto(fixture_url, wait_until='networkidle')
                     card = page.locator('.case-card')
