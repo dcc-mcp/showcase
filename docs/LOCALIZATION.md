@@ -20,7 +20,11 @@ language hints normalize to English; explicit page URLs always take precedence.
 `collection.json`, producer manifests, native projects, source archives,
 artwork, embedded artistic text, original prompts and evidence files remain
 unchanged. `locales/en/` contains English presentation translations keyed by
-exact original Chinese strings. Software names, API names, versions, hashes,
+exact original Chinese strings. The source also contains English evidence prose;
+`locales/zh/collection.json` localizes that prose, resource labels and rights
+statements for Chinese readers. Serialized measurement JSON keeps its machine
+keys, hashes, booleans and numbers; only human-readable string values change.
+Software names, API names, versions, hashes,
 paths and filter identifiers are not translated.
 
 The English prompt section links directly to its original Chinese counterpart.
@@ -45,7 +49,9 @@ Open Graph locale, canonical URL, reciprocal `hreflang` entries, JSON-LD and a
 bilingual sitemap. Media and source resources are shared once.
 
 New or changed Chinese presentation text without a matching English entry
-blocks publication **before** replacing the previous output directory. There is
+blocks publication **before** replacing the previous output directory. The
+schema-aware Chinese gate also rejects missing translations of English source
+prose in evidence, limitations, rights, prompts, stages and resource labels. There is
 no partial-word substitution or silent mixed-language fallback. A small set of
 registered UI compositions (case/image label prefixes, counts and review dates)
 is assembled from complete translated values. Case SEO titles are composed from

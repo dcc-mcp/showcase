@@ -36,33 +36,87 @@ def route(path):
     return path[:-10] if path.endswith('index.html') else path
 
 
-def catalog(root, demos=None):
+def required_chinese_sources(cases):
+    """Natural-language source fields must have Chinese presentation entries.
+
+    This schema-aware gate handles the collection's mixed Chinese/English
+    source records without guessing that software/API identifiers are prose.
+    """
+    technical_labels = {software for case in cases for software in case['software']}
+    technical_labels.update({'Core / CLI / Gateway', 'Core / Server / CLI', 'Core / SDK',
+                             'Kdenlive / MLT', 'OpenSCAD', 'FreeCAD', 'ParaView', 'GIMP'})
+    fields = {'subtitle', 'summary', 'goal', 'evidence_scope', 'evidence_label',
+              'description', 'note', 'basis', 'scope', 'change', 'license', 'text', 'stage'}
+    required = set()
+    def walk(value, path):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                walk(child, path + (key,))
+        elif isinstance(value, list):
+            for child in value:
+                walk(child, path + ('[]',))
+        elif isinstance(value, str) and value.strip() and not CJK.search(value):
+            key = path[-1]
+            if value.startswith(('https://', 'http://', 'docs/', 'play/')) or re.fullmatch('[a-fA-F0-9]{7,64}', value):
+                return
+            if key == 'license' and re.fullmatch('[A-Za-z0-9.+-]+', value):
+                return  # SPDX identifiers are not prose.
+            if key == 'name' and re.fullmatch('[a-z0-9]+(?:_[a-z0-9]+)+', value):
+                return  # Machine-readable check identifiers stay stable.
+            prose = key in fields or 'limitations' in path or key == 'observed'
+            prose = prose or (key in ('name', 'source') and 'checks' in path)
+            if key == 'label' and value not in technical_labels and not re.fullmatch('[A-Z0-9 /._-]+', value):
+                prose = True
+            if not prose or not re.search('[A-Za-z]', value):
+                return
+            if value.lstrip().startswith(('{', '[', '"')):
+                try:
+                    parsed = json.loads(value)
+                except (ValueError, TypeError):
+                    pass
+                else:
+                    if isinstance(parsed, str):
+                        walk(parsed, path)
+                    else:
+                        walk(parsed, path + ('json',))
+                    return
+            required.add(value)
+    for case in cases:
+        walk(case, ())
+    return required
+
+
+def catalog(root, demos=None, locale="en"):
     folder = Path(root) / 'locales'
     config = json.loads((folder / 'config.json').read_text(encoding='utf-8'))
     if config != {'schema_version': 1, 'default_locale': 'en', 'locales': ['en', 'zh'], 'source_locale': 'zh'}:
         raise ValueError('unsupported localization configuration')
     result = {}
     # Exact source text acts as the key. New or changed copy needs a new review.
-    for path in sorted((folder / 'en').rglob('*.json')):
+    for path in sorted((folder / locale).rglob('*.json')):
         rows = json.loads(path.read_text(encoding='utf-8'))
         if not isinstance(rows, dict):
             raise ValueError('translation catalogs must be source-text dictionaries')
         for source, target in rows.items():
-            if not isinstance(target, str) or not source.strip() or not target.strip() or CJK.search(target):
-                raise ValueError('invalid English translation in ' + path.name)
+            if not isinstance(target, str) or not source.strip() or not target.strip() or (locale == 'en' and CJK.search(target)):
+                raise ValueError('invalid translation in ' + path.name)
             if source in result and result[source] != target:
-                raise ValueError('conflicting English translation for ' + repr(source))
+                raise ValueError('conflicting translation for ' + repr(source))
             result[source] = target
     collection = json.loads((Path(root) / 'collection.json').read_text(encoding='utf-8'))
     for case in collection['cases']:
         title, subtitle, summary = case['title'], case['subtitle'], case['summary']
-        if title in result and subtitle in result:
+        if locale == 'en' and title in result and subtitle in result:
             result[title + ' · ' + subtitle + ' | DCC-MCP Showcase'] = result[title] + ' · ' + result[subtitle] + ' | DCC-MCP Showcase'
-        if summary in result:
+        if locale == 'en' and summary in result:
             result[summary[:220]] = result[summary]
+    if locale == 'zh':
+        missing = required_chinese_sources(collection['cases']) - result.keys()
+        if missing:
+            raise ValueError('Missing Chinese source translations (publication blocked):\n' + '\n'.join(sorted(missing)))
     for demo in (demos or {}).values():
         for key in ('controls', 'notes'):
-            result[demo[key]['zh']] = demo[key]['en']
+            result[demo[key]['zh' if locale == 'en' else 'en']] = demo[key][locale]
     return result
 
 
@@ -80,30 +134,51 @@ class LocalizedHTML(HTMLParser):
         self.script_data = []
 
     def text(self, value):
-        if self.locale == 'zh' or not CJK.search(value):
-            return value
         stripped = value.strip()
-        if stripped not in self.translations:
-            prefixes = {'查看原尺寸：': 'View full size: ', '查看案例：': 'View case: ',
-                        '下一个案例：': 'Next case: ', '：': ': '}
-            for source, target in prefixes.items():
-                if stripped.startswith(source):
-                    rest = stripped[len(source):]
-                    translated = self.text(rest)
-                    if not CJK.search(translated):
-                        return value[:len(value) - len(value.lstrip())] + target + translated + value[len(value.rstrip()):]
-            formats = [(r'(\d+) 个案例', '{} cases'), (r'(\d+) 种软件', '{} applications'),
-                       (r'显示全部 (\d+) 个案例', 'Showing all {} cases'),
-                       (r'最近审阅：([0-9TZ:.+\-]+)', 'Last reviewed: {}')]
-            for pattern, template in formats:
-                match = re.fullmatch(pattern, stripped)
-                if match:
-                    return template.format(*match.groups())
-            self.missing.add(stripped)
-            return value
         start = len(value) - len(value.lstrip())
         end = len(value.rstrip())
-        return value[:start] + self.translations[stripped] + value[end:]
+        if stripped in self.translations:
+            return value[:start] + self.translations[stripped] + value[end:]
+        if self.locale == 'zh':
+            # A subset of the original case records is English. Localize that
+            # prose too, while preserving measurement JSON keys and numbers.
+            if stripped.startswith(('{', '[', '"')):
+                try:
+                    parsed = json.loads(stripped)
+                except (ValueError, TypeError):
+                    pass
+                else:
+                    def translate_json(item):
+                        if isinstance(item, dict):
+                            return {key: translate_json(child) for key, child in item.items()}
+                        if isinstance(item, list):
+                            return [translate_json(child) for child in item]
+                        return self.text(item) if isinstance(item, str) else item
+                    translated = translate_json(parsed)
+                    if translated != parsed:
+                        return value[:start] + json.dumps(translated, ensure_ascii=False) + value[end:]
+            if stripped.startswith('：'):
+                return value[:start] + '：' + self.text(stripped[1:]) + value[end:]
+            return value
+        if not CJK.search(value):
+            return value
+        prefixes = {'查看原尺寸：': 'View full size: ', '查看案例：': 'View case: ',
+                    '下一个案例：': 'Next case: ', '：': ': '}
+        for source, target in prefixes.items():
+            if stripped.startswith(source):
+                rest = stripped[len(source):]
+                translated = self.text(rest)
+                if not CJK.search(translated):
+                    return value[:start] + target + translated + value[end:]
+        formats = [(r'(\d+) 个案例', '{} cases'), (r'(\d+) 种软件', '{} applications'),
+                   (r'显示全部 (\d+) 个案例', 'Showing all {} cases'),
+                   (r'最近审阅：([0-9TZ:.+\-]+)', 'Last reviewed: {}')]
+        for pattern, template in formats:
+            match = re.fullmatch(pattern, stripped)
+            if match:
+                return template.format(*match.groups())
+        self.missing.add(stripped)
+        return value
 
     def url(self, value):
         parsed = urlsplit(value)
@@ -169,7 +244,7 @@ class LocalizedHTML(HTMLParser):
                 elif key == 'data-search':
                     # Both locales expose the same bilingual aliases. A query
                     # stays useful after switching language; filter IDs stay raw.
-                    aliases = [target for source, target in self.translations.items() if source in value]
+                    aliases = [target for source, target in getattr(self, 'search_translations', self.translations).items() if source in value]
                     value = ' '.join([value] + list(dict.fromkeys(aliases)))
                 elif key in TEXT_ATTRS:
                     value = self.text(value)
@@ -241,13 +316,14 @@ class LocalizedHTML(HTMLParser):
 
 
 def localize_pages(root, original_pages, demos=None):
-    translations = catalog(root, demos)
+    translations = {locale: catalog(root, demos, locale) for locale in LOCALES}
     source_pages = {path for path in original_pages if path.endswith('.html')}
     result = {path: content for path, content in original_pages.items() if path not in source_pages}
     missing = {}
     for path in sorted(source_pages):
         for locale in LOCALES:
-            parser = LocalizedHTML(path, locale, source_pages, translations)
+            parser = LocalizedHTML(path, locale, source_pages, translations[locale])
+            parser.search_translations = translations['en']
             parser.feed(original_pages[path])
             parser.close()
             content = ''.join(parser.output)

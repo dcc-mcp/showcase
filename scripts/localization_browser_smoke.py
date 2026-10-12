@@ -16,7 +16,7 @@ import threading
 from urllib.parse import unquote, urljoin, urlsplit
 
 from browser_preview import QuietHandler, safe_error_text
-from localization import LOCALES, SITE
+from localization import LOCALES, SITE, catalog
 from validate_brand_gallery import read_and_validate
 
 
@@ -72,6 +72,8 @@ def run(site, output):
 
     output.mkdir(parents=True, exist_ok=True)
     cases = json.loads(Path('collection.json').read_text(encoding='utf-8'))['cases']
+    cases_by_slug = {case['slug']: case for case in cases}
+    chinese_copy = catalog(str(Path.cwd()), locale='zh')
     brands, _, problems = read_and_validate(str(Path.cwd()))
     if problems:
         raise ValueError('Invalid brand source catalog')
@@ -92,7 +94,7 @@ def run(site, output):
             browser = pw.chromium.launch()
             report['browser'] = browser.version
             for layout, viewport in (('desktop', {'width': 1440, 'height': 1000}), ('mobile', {'width': 390, 'height': 844})):
-                context = browser.new_context(viewport=viewport, reduced_motion='reduce', service_workers='block', accept_downloads=True)
+                context = browser.new_context(viewport=viewport, reduced_motion='reduce', service_workers='block', accept_downloads=True, permissions=['clipboard-read', 'clipboard-write'])
                 errors = []
                 def guard(route):
                     if route.request.url.startswith(base):
@@ -158,11 +160,17 @@ def run(site, output):
                         if path.startswith('cases/'):
                             expect(page.locator('#reusable-prompt')).not_to_be_empty()
                             expect(page.locator('.detail-cover img')).to_have_count(1)
+                            if locale == 'zh':
+                                case = cases_by_slug[path.split('/')[1]]
+                                for limitation in case['limitations']:
+                                    expect(page.locator('.limitations')).to_contain_text(chinese_copy.get(limitation, limitation))
+                                expect(page.locator('.credit-block')).to_contain_text(chinese_copy.get(case['credits']['license'], case['credits']['license']))
                             if locale == 'en':
                                 expect(page.locator('.translation-note a')).to_have_attribute('href', re.compile('zh/cases/.*#prompt'))
                         report['pages'].append({'locale': locale, 'layout': layout, 'path': relative, 'screenshot': screenshot, 'overflow': False, 'images_loaded': page.locator('img').count()})
 
                     # Search and stable filter values survive a same-page language switch.
+                    active = layout + ' ' + locale + ' gallery interactions'
                     home = base + settings['prefix']
                     page.goto(home, wait_until='networkidle')
                     expect(page.locator('.case-card:visible')).to_have_count(len(cases))
@@ -195,14 +203,17 @@ def run(site, output):
                         page.locator('[data-locale-link="zh"]').click()
                         expect(page.locator('.case-card:visible')).to_have_count(1)
                         expect(page.locator('#search')).to_have_value('optical console')
+                    active = layout + ' ' + locale + ' clipboard success and refusal'
                     page.goto(home + 'cases/prism-tide/#prompt', wait_until='domcontentloaded')
                     page.locator('#copy-prompt').click()
                     expect(page.locator('#copy-status')).to_have_text('Prompt copied.' if locale == 'en' else '提示词已复制。')
+                    assert page.evaluate('navigator.clipboard.readText()') == page.locator('#reusable-prompt').text_content()
                     # Interrupted copy uses a localized, selectable fallback.
                     page.evaluate('navigator.clipboard.writeText = async () => { throw new Error("Test denied"); }')
                     page.locator('#copy-prompt').click()
                     expect(page.locator('#copy-status')).to_have_text('Prompt selected. Use your copy shortcut.' if locale == 'en' else '已选中提示词，请使用复制快捷键。')
                     assert page.evaluate('getSelection().toString()') == page.locator('#reusable-prompt').text_content()
+                    active = layout + ' ' + locale + ' brand theme and Back'
                     page.goto(home + 'brands/', wait_until='networkidle')
                     page.locator('[data-brand-theme="light"]').click()
                     expect(page.locator('[data-brand-theme="light"]')).to_have_attribute('aria-pressed', 'true')
@@ -219,6 +230,7 @@ def run(site, output):
                 context.close()
             # The content, alternate language links and source downloads also
             # remain navigable without JavaScript.
+            active = 'no-JavaScript navigation'
             context = browser.new_context(java_script_enabled=False, viewport={'width': 390, 'height': 844})
             page = context.new_page()
             for prefix, language in (('', 'en'), ('zh/', 'zh-CN')):

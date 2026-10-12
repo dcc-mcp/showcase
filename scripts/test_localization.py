@@ -91,6 +91,26 @@ class LocaleGuards(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):
                 i18n.localize_pages(tmp, {'index.html': '<p>Content</p>'})
 
+    def test_english_source_prose_has_chinese_presentation(self):
+        source = 'Listening has not been performed.'
+        target = '尚未进行主观听评。'
+        result, missing = self.render('<p>' + source + '</p><p>：' + source + '</p>', locale='zh', translations={source: target})
+        self.assertFalse(missing)
+        self.assertEqual(result, '<p>' + target + '</p><p>：' + target + '</p>')
+
+    def test_measurement_json_preserves_keys_numbers_and_hashes(self):
+        source = {'name': 'step toggles on', 'pass': True, 'samples': 21168, 'sha256': 'a' * 64}
+        markup = '<td>' + json.dumps(source) + '</td>'
+        result, _ = self.render(markup, locale='zh', translations={'step toggles on': '步进开启'})
+        rendered = json.loads(result.removeprefix('<td>').removesuffix('</td>'))
+        self.assertEqual(rendered, dict(source, name='步进开启'))
+
+    def test_chinese_gate_distinguishes_prose_and_technical_keys(self):
+        cases = [{'software': ['Godot'], 'limitations': ['Not tested on physical phones.'],
+                  'credits': {'license': 'MIT'}, 'environment': [{'label': 'Godot'}],
+                  'checks': [{'name': 'web_playable_acceptance', 'observed': json.dumps({'name': 'step toggles on', 'source': 'https://example.com', 'count': 9})}]}]
+        self.assertEqual(i18n.required_chinese_sources(cases), {'Not tested on physical phones.', 'step toggles on'})
+
     def test_unknown_hints_fall_back_to_english(self):
         for value in (None, '', 'de', '../../zh', '<script>', 'EN'):
             self.assertEqual(i18n.normalize_locale(value), 'en')
