@@ -55,7 +55,7 @@ try:
                 source.click()
             download = event.value
             assert download.failure() is None
-            original = a.site / 'docs/showcase/prism-tide-switchyard/Prism-Tide-Source.zip'
+            original = a.site / 'docs/showcase/prism-tide/Prism-Tide-Source.zip'
             assert hashlib.sha256(Path(download.path()).read_bytes()).digest() == hashlib.sha256(original.read_bytes()).digest()
             checked = set()
             for href in page.locator('a[href]').evaluate_all('(links)=>links.map(a=>a.href)'):
