@@ -148,6 +148,8 @@ def run(site: Path, output: Path, expected_head: str):
                 assert page.locator('.detail-actions a[href="#play"]').count() == 1
                 capture(page, locale + '-mobile-detail.png')
                 page.locator('a[href="#play"]').first.click()
+                page.locator('#play').scroll_into_view_if_needed()
+                expect(page.locator('#play')).to_be_in_viewport()
                 # The engine remains user-started; fallback/source links stay available.
                 assert page.locator('iframe').count() == 0
                 capture(page, locale + '-mobile-playable-idle.png')
