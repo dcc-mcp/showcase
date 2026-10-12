@@ -28,7 +28,8 @@ jobs:
           python scripts/test_agent_pages.py
           node scripts/test_preview_controls.js
       - name: Install locked browser driver
-        run: python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
       - name: Install official Chromium
         run: python -m playwright install --with-deps chromium
       - name: Materialize pinned official Godot runtime

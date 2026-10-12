@@ -26,6 +26,7 @@ def run(site: Path, output: Path, expected_head: str):
     threading.Thread(target=server.serve_forever, daemon=True).start()
     origin = 'http://127.0.0.1:' + str(server.server_port)
     base = origin + '/showcase/'
+    case_count = len(json.loads(Path('collection.json').read_text(encoding='utf-8'))['cases'])
     errors, requests = [], []
     page = None
     stage = 'launch'
@@ -53,13 +54,13 @@ def run(site: Path, output: Path, expected_head: str):
                 ctx.route('**/*', guard)
                 ctx.on('page', lambda pg: pg.on('pageerror', lambda _: errors.append('JavaScript error')))
                 return ctx
-            ctx = context(viewport={'width': 1487, 'height': 1058})
+            ctx = context(viewport={'width': 1486, 'height': 1059})
             page = ctx.new_page()
             page.set_default_timeout(20000)
             def home(prefix=''):
                 page.goto(base + prefix, wait_until='networkidle')
                 page.evaluate('document.fonts.ready')
-                expect(page.locator('.case-card')).to_have_count(12)
+                expect(page.locator('.case-card')).to_have_count(case_count)
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
             for prefix, locale in [('', 'en'), ('zh/', 'zh')]:
                 stage = locale + ' initial'
@@ -90,7 +91,7 @@ def run(site: Path, output: Path, expected_head: str):
                 expect(page.locator('#empty-state')).to_be_visible()
                 assert video.get_attribute('src') is None
                 page.locator('#empty-reset').click()
-                expect(page.locator('.case-card:visible')).to_have_count(12)
+                expect(page.locator('.case-card:visible')).to_have_count(case_count)
                 page.locator('[data-filter="media"] [data-value="interactive"]').click()
                 expect(page.locator('.case-card:visible')).to_have_count(2)
                 opposite = 'zh' if locale == 'en' else 'en'
@@ -109,7 +110,7 @@ def run(site: Path, output: Path, expected_head: str):
             checked('offscreen stops and releases preview')
             ctx.close()
             for preference in ['reduced-motion', 'save-data']:
-                ctx = context(viewport={'width': 1487, 'height': 1058}, reduced_motion='reduce' if preference == 'reduced-motion' else 'no-preference')
+                ctx = context(viewport={'width': 1486, 'height': 1059}, reduced_motion='reduce' if preference == 'reduced-motion' else 'no-preference')
                 if preference == 'save-data':
                     # Explicit browser-test fixture, never used by the production page.
                     ctx.add_init_script('Object.defineProperty(navigator,"connection",{value:{saveData:true,addEventListener(){},removeEventListener(){}}})')
@@ -154,7 +155,7 @@ def run(site: Path, output: Path, expected_head: str):
                 capture(page, locale + '-mobile-agent-data.png')
                 checked(locale + ': touch start/stop, detail actions, idle Godot fallback, Agent/Data layout')
             data = page.request.get(base + 'data/catalog.json').json()
-            assert data['record_count'] == 12 and not data['future_use']['available_dataset']
+            assert data['record_count'] == case_count and not data['future_use']['available_dataset']
             assert data['usage_rights']['training']['status'] == 'not-granted'
             assert data['usage_rights']['evaluation']['status'] == 'not-granted'
             checked('catalog preserves separate conservative usage rights')
