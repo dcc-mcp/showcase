@@ -174,7 +174,15 @@ def run(site, output):
                         # Review representative long translated copy beyond the hero.
                         if path in ('cases/prism-tide/index.html', 'brands/dcc-mcp-maya-v2/index.html'):
                             section = '#prompt' if path.startswith('cases/') else '#rights'
-                            page.locator(section).screenshot(path=str(output / (screenshot[:-4] + '-copy.png')), animations='disabled')
+                            page.locator(section).evaluate("node => node.scrollIntoView({block: 'start'})")
+                            # Capture the actual viewport. Oversized element
+                            # screenshots can include fixed, offscreen skip links
+                            # outside the viewport and misrepresent visible UI.
+                            assert page.locator('.skip-link').evaluate('node => node.getBoundingClientRect().bottom <= 0')
+                            page.screenshot(path=str(output / (screenshot[:-4] + '-copy.png')), animations='disabled')
+                            if section == '#rights':
+                                page.locator('#rights-trademark').evaluate("node => node.scrollIntoView({block: 'start'})")
+                                page.screenshot(path=str(output / (screenshot[:-4] + '-trademark.png')), animations='disabled')
                         report['pages'].append({'locale': locale, 'layout': layout, 'path': relative, 'screenshot': screenshot, 'overflow': False, 'images_loaded': page.locator('img').count()})
 
                     # Search and stable filter values survive a same-page language switch.
