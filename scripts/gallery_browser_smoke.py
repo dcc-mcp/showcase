@@ -131,6 +131,7 @@ def run(site: Path, output: Path, expected_head: str):
             page = ctx.new_page()
             for prefix, locale in [('', 'en'), ('zh/', 'zh')]:
                 home(prefix)
+                assert page.locator('.media-tabs button').evaluate_all('(items)=>items.every(item=>Math.abs(item.getBoundingClientRect().top-items[0].getBoundingClientRect().top)<2)')
                 capture(page, locale + '-mobile-gallery.png')
                 sonic = page.locator('[data-case="sonic-loom"]')
                 sonic.locator('.preview-toggle').scroll_into_view_if_needed()
