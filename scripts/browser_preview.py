@@ -258,6 +258,62 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
 
 
 
+def verify_orbital_loom(page, context, case, origin, output, layout, active_context):
+    """Exercise this exact film and source download on both viewport layouts."""
+    from playwright.sync_api import expect
+    progress(active_context, "orbital_loom_metadata")
+    selector = '#results video:has(source[src$="orbital-loom.mp4"])'
+    video = page.locator(selector)
+    expect(video).to_have_count(1)
+    video.scroll_into_view_if_needed()
+    expect(video).to_be_visible()
+    expect(video).to_have_js_property("controls", True)
+    expect(video).to_have_js_property("autoplay", False)
+    expect(video).to_have_js_property("paused", True)
+    page.wait_for_function("s => { const v=document.querySelector(s); return v.readyState >= 2; }", arg=selector)
+    metadata = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
+    if abs(metadata["duration"] - 15) > .05 or metadata["width"] != 960 or metadata["height"] != 540:
+        raise AssertionError("Unexpected Orbital Loom metadata")
+    progress(active_context, "orbital_loom_play_pause_seek")
+    video.press("Space")
+    page.wait_for_function("s => { const v=document.querySelector(s); return !v.paused && v.currentTime >= .3; }", arg=selector)
+    video.press("Space")
+    expect(video).to_have_js_property("paused", True)
+    before = video.evaluate("v => v.currentTime")
+    # Seek through the media API; keyboard play/pause is tested independently.
+    # Chromium does not map ArrowRight on the video element to its native slider.
+    video.evaluate("v => { v.currentTime += 5; }")
+    page.wait_for_function("o => { const v=document.querySelector(o.s); return v.paused && !v.seeking && v.currentTime >= o.before + 4; }", arg={"s": selector, "before": before})
+    after = video.evaluate("v => v.currentTime")
+    video.press("Space")
+    page.wait_for_function("o => { const v=document.querySelector(o.s); return !v.paused && v.currentTime > o.after + .2; }", arg={"s": selector, "after": after})
+    video.press("Space")
+    expect(video).to_have_js_property("paused", True)
+    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+        raise AssertionError("Orbital Loom page horizontal overflow")
+    name = layout + "-orbital-loom-film.png"
+    video.locator("..").screenshot(path=str(output / name), animations="disabled")
+    progress(active_context, "orbital_loom_public_payloads")
+    entry = "docs/showcase/orbital-loom/"
+    manifest = json.loads(fetch_public_file(context.request, origin, entry + "manifest.json"))
+    selected = selected_public_files(case, manifest)
+    fetched = [check_public_payload(path, fetch_public_file(context.request, origin, path), row)
+               for path, row in selected.items()]
+    zip_path = entry + "orbital-loom-source.zip"
+    link = page.locator('#downloads a[download="orbital-loom-source.zip"]')
+    expect(link).to_have_count(1)
+    with page.expect_download() as info:
+        link.click()
+    download = info.value
+    if download.failure() is not None or download.suggested_filename != "orbital-loom-source.zip":
+        raise AssertionError("Orbital Loom ZIP download failed")
+    downloaded = check_public_payload(zip_path, Path(download.path()).read_bytes(), selected[zip_path])
+    return {"layout": layout, "case_slug": "orbital-loom", "metadata": metadata,
+            "keyboard_play_pause_resume": True, "media_api_seek": True, "seek_before": before, "seek_after": after,
+            "public_files": fetched, "zip_download": downloaded, "screenshot": name,
+            "sha256": hashlib.sha256((output / name).read_bytes()).hexdigest()}
+
+
 def verify_scored_video(page, context, case, origin, output, layout, active_context):
     """Exercise newly scored public films without replacing original-film checks."""
     from playwright.sync_api import expect
@@ -519,6 +575,8 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                     "sha256": hashlib.sha256((output / film_name).read_bytes()).hexdigest()})
                             if case["slug"] in {"crystal-freight-native-film", "brass-relay", "orbit-post-office"}:
                                 report["films"].append(verify_scored_video(page, context, case, origin, output, layout, active_context))
+                            if case["slug"] == "orbital-loom":
+                                report["films"].append(verify_orbital_loom(page, context, case, origin, output, layout, active_context))
                             if case["slug"] == "trail-and-air":
                                 report["audio"].append(verify_audio_case(
                                     page, context, case, site, origin, output, layout, active_context))
