@@ -209,7 +209,7 @@ def run(site, output):
                     expect(page.locator('#copy-status')).to_have_text('Prompt copied.' if locale == 'en' else '提示词已复制。')
                     assert page.evaluate('navigator.clipboard.readText()') == page.locator('#reusable-prompt').text_content()
                     # Interrupted copy uses a localized, selectable fallback.
-                    page.evaluate('navigator.clipboard.writeText = async () => { throw new Error("Test denied"); }')
+                    page.evaluate('() => { navigator.clipboard.writeText = async () => { throw new Error("Test denied"); }; }')
                     page.locator('#copy-prompt').click()
                     expect(page.locator('#copy-status')).to_have_text('Prompt selected. Use your copy shortcut.' if locale == 'en' else '已选中提示词，请使用复制快捷键。')
                     assert page.evaluate('getSelection().toString()') == page.locator('#reusable-prompt').text_content()
