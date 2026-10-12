@@ -170,7 +170,8 @@ def run(site, output):
                     page.locator('[data-filter="software"] [data-value="Godot"]').click()
                     page.locator('[data-filter="capability"] [data-value="交互"]').click()
                     expect(page.locator('.case-card:visible')).to_have_count(1)
-                    page.locator('a[href="#works"]').first.click()
+                    page.locator('.skip-link').focus()
+                    page.keyboard.press('Enter')
                     opposite = 'zh' if locale == 'en' else 'en'
                     switch = page.locator('[data-locale-link="' + opposite + '"]')
                     switch.focus()

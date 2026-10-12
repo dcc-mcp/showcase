@@ -33,7 +33,10 @@ const legacyTargets = {
   "#zbrush-maya-roundtrip": "https://dcc-mcp.github.io/examples#zbrush-maya-roundtrip",
   "#office-powerpoint-deck": "https://dcc-mcp.github.io/examples#office-powerpoint-deck"
 };
-const legacyTarget = legacyTargets[window.location.hash];
+let legacyTarget = legacyTargets[window.location.hash];
+if (legacyTarget && document.documentElement.lang.startsWith("zh") && legacyTarget.startsWith("https://dcc-mcp.github.io/examples")) {
+legacyTarget = legacyTarget.replace("https://dcc-mcp.github.io/examples", "https://dcc-mcp.github.io/zh/examples");
+}
 if (legacyTarget) {
 window.location.replace(new URL(legacyTarget, window.location.href).href);
 return;
