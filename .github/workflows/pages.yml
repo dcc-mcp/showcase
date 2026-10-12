@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Materialize pinned official Godot Web runtime
+        run: python scripts/godot_web/materialize_runtime.py
+
       - name: Validate showcase entries
         run: python scripts/validate_entry.py docs/showcase
 

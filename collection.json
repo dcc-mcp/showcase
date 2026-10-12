@@ -3220,11 +3220,21 @@
           "name": "主观听评",
           "result": "not_run",
           "observed": "当前环境无可用听觉输入；请通过播放器试听，技术 PCM 检测不代替听评。"
+        },
+        {
+          "name": "web_playable_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification.json\",\"run_id\":38199186635,\"tested_commit\":\"e43fc55a0c0b04f65fb5d026f7fcff0419437815\",\"combined_checks\":27,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
+        },
+        {
+          "name": "web_portrait_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification-portrait.json\",\"run_id\":38202157612,\"tested_commit\":\"e8d3fc3f33ba61fca006116ba08c3a865c4a7405\",\"combined_checks\":40,\"viewport_css\":[390,844],\"output_channels\":2,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
         }
       ],
       "limitations": [
         "Subjective listening has not been performed. Use the audio player to audition on the target listening device.",
-        "Native desktop interaction was verified under Linux Xvfb; browser playable Godot export, mobile touch and hardware audio-device latency were not tested.",
+        "The original native validation covered Linux Xvfb desktop interaction. The separately added Web export has its own browser verification and does not establish physical phone testing or hardware audio-device latency.",
         "MCP authored and saved the source and scene. CI rendering and Movie Maker capture invoke Godot directly; they are not an MCP scene-preview return.",
         "The small top-right animation is decorative, and THE THREAD is pattern density. Only waveform.png is measured from real audio PCM.",
         "The movie uses a scripted demonstration of edits; separate xdotool keyboard/mouse evidence establishes actual UI input.",
@@ -3273,6 +3283,10 @@
         {
           "label": "许可证",
           "url": "docs/showcase/sonic-loom/LICENSES.md"
+        },
+        {
+          "label": "Web 试玩验收",
+          "url": "play/verification-portrait.json"
         }
       ],
       "credits": {
@@ -3485,11 +3499,21 @@
           "name": "原生视觉审查",
           "result": "pass",
           "observed": "最终hero、通关帧、影片采样及864×540小窗口已实看；修正反射术语，无重叠裁切。"
+        },
+        {
+          "name": "web_playable_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification.json\",\"run_id\":38199186635,\"tested_commit\":\"e43fc55a0c0b04f65fb5d026f7fcff0419437815\",\"combined_checks\":27,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
+        },
+        {
+          "name": "web_portrait_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification-portrait.json\",\"run_id\":38202157612,\"tested_commit\":\"e8d3fc3f33ba61fca006116ba08c3a865c4a7405\",\"combined_checks\":40,\"viewport_css\":[390,844],\"output_channels\":2,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
         }
       ],
       "limitations": [
         "桌面1280×800为设计目标；864×540仅验证布局拟合，不表示触屏或手机可读性已验收。",
-        "没有Web版本或独立可执行程序；PCK需要兼容Godot。",
+        "原始交付仅提供原生工程与PCK；后续新增的Web版本及其浏览器验收独立列出，原生历史记录不代表Web验收。",
         "光路是确定性的正交格点模型，并非物理光线追踪。",
         "美术由GDScript绘制；镜面和挡板可编辑数据，但不是独立场景网格。",
         "本机headless只用于制作与逻辑验证；像素来自另一原生CI运行。无音轨。"
@@ -3530,6 +3554,10 @@
         {
           "label": "许可与来源",
           "url": "docs/showcase/prism-tide/LICENSES.md"
+        },
+        {
+          "label": "Web 试玩验收",
+          "url": "play/verification-portrait.json"
         }
       ],
       "credits": {
