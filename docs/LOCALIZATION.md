@@ -22,7 +22,9 @@ artwork, embedded artistic text, original prompts and evidence files remain
 unchanged. `locales/en/` contains English presentation translations keyed by
 exact original Chinese strings. The source also contains English evidence prose;
 `locales/zh/collection.json` localizes that prose, resource labels and rights
-statements for Chinese readers. Serialized measurement JSON keeps its machine
+statements for Chinese readers. `locales/zh/brands.json` also covers English
+brand evidence prose and trademark notices; original ownership and no-endorsement
+statements are preserved. Serialized measurement JSON keeps its machine
 keys, hashes, booleans and numbers; only human-readable string values change.
 Software names, API names, versions, hashes,
 paths and filter identifiers are not translated.
@@ -51,7 +53,8 @@ bilingual sitemap. Media and source resources are shared once.
 New or changed Chinese presentation text without a matching English entry
 blocks publication **before** replacing the previous output directory. The
 schema-aware Chinese gate also rejects missing translations of English source
-prose in evidence, limitations, rights, prompts, stages and resource labels. There is
+prose in cases and published brands, including evidence, limitations, rights,
+trademark notices, prompts, stages and resource labels. There is
 no partial-word substitution or silent mixed-language fallback. A small set of
 registered UI compositions (case/image label prefixes, counts and review dates)
 is assembled from complete translated values. Case SEO titles are composed from
@@ -62,8 +65,10 @@ To add or update content:
 1. Edit its authoritative source and preserve its evidence/rights boundaries.
 2. Add the exact new source string and complete English translation to the
    corresponding `locales/en/cases/<slug>.json`, `brands.json` or `ui.json`.
-3. Run the build. It reports every missing string with the affected page.
-4. Review both languages, especially long prompts, accessibility descriptions,
+3. Add Chinese translations for English source prose to `locales/zh/collection.json`
+   or `locales/zh/brands.json`; keep product names and license identifiers intact.
+4. Run the build. It reports every missing string with the affected page.
+5. Review both languages, especially long prompts, accessibility descriptions,
    unknown/unverified qualifiers and small-screen wrapping.
 
 `locales/config.json` defines the supported routes. The source-language renderer

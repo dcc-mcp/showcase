@@ -111,6 +111,13 @@ class LocaleGuards(unittest.TestCase):
                   'checks': [{'name': 'web_playable_acceptance', 'observed': json.dumps({'name': 'step toggles on', 'source': 'https://example.com', 'count': 9})}]}]
         self.assertEqual(i18n.required_chinese_sources(cases), {'Not tested on physical phones.', 'step toggles on'})
 
+    def test_missing_chinese_brand_notice_blocks_publication(self):
+        brands = {'items': [{'software': ['Inkscape'], 'rights': [{'notice': 'No endorsement is implied.', 'license': 'SIL Open Font License 1.1'}]}]}
+        with patch('localization.catalog', return_value={}):
+            with self.assertRaisesRegex(ValueError, 'Missing Chinese brand translations'):
+                i18n.localize_pages('.', {'index.html': '<p>Content</p>'}, brands=brands)
+        self.assertEqual(i18n.required_chinese_sources(brands['items']), {'No endorsement is implied.'})
+
     def test_unknown_hints_fall_back_to_english(self):
         for value in (None, '', 'de', '../../zh', '<script>', 'EN'):
             self.assertEqual(i18n.normalize_locale(value), 'en')

@@ -619,7 +619,7 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
                     assets.add(safe_rel(item["url"]))
         import localization
         if localize:
-            pages = localization.localize_pages(root, pages, playable_demos)
+            pages = localization.localize_pages(root, pages, playable_demos, brand_catalog if brands_visible else None)
         if localize:
             assets.add("assets/locale.js")
         # Every file is selected explicitly, rather than discovered by crawling.
