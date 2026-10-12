@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "godot_version": "4.6.3.stable.official.7d41c59c4",
+    "adapter_version": "0.9.6",
+    "core_version": "0.20.42",
+    "viewport_width_px": 1280,
+    "viewport_height_px": 720,
+    "local_display": "headless",
+    "native_nodes": 1,
+    "incoming_lanes": 2,
+    "destinations": 3,
+    "capacity": 6,
+    "render_validation": "pending CI native capture"
+  },
+  "checks": [
+    {
+      "name": "three_destinations",
+      "result": "pass",
+      "observed": {
+        "delivered": 3,
+        "missed": 0,
+        "streak": 3
+      }
+    },
+    {
+      "name": "wrong_route",
+      "result": "pass",
+      "observed": {
+        "missed": 1,
+        "streak": 0
+      }
+    },
+    {
+      "name": "capacity_boundary",
+      "result": "pass",
+      "observed": {
+        "active": 6,
+        "attempts": 8,
+        "sent": 6
+      }
+    },
+    {
+      "name": "keyboard_route_1",
+      "result": "pass",
+      "observed": {
+        "selected": 0
+      }
+    },
+    {
+      "name": "keyboard_route_2",
+      "result": "pass",
+      "observed": {
+        "selected": 1
+      }
+    },
+    {
+      "name": "keyboard_route_3",
+      "result": "pass",
+      "observed": {
+        "selected": 2
+      }
+    },
+    {
+      "name": "auto_enable",
+      "result": "pass",
+      "observed": {}
+    },
+    {
+      "name": "auto_disable",
+      "result": "pass",
+      "observed": {}
+    },
+    {
+      "name": "repeated_reset",
+      "result": "pass",
+      "observed": {
+        "active": 0,
+        "delivered": 0,
+        "missed": 0,
+        "sent": 0
+      }
+    },
+    {
+      "name": "typed_mcp_authoring",
+      "result": "pass",
+      "observed": {
+        "authoring_calls": 9,
+        "control_route": "gateway"
+      }
+    },
+    {
+      "name": "local_native_render",
+      "result": "fail",
+      "expected": "windowed pixel capture",
+      "observed": "Xorg Unix socket setup blocked; typed preview correctly refused headless dummy renderer"
+    }
+  ],
+  "not_claimed": [
+    "Visual quality and pixel captures pending native CI rendering.",
+    "Mouse interaction not tested.",
+    "Packaged executable and browser export not verified.",
+    "Headless mode cannot render this scene.",
+    "Art is editable GDScript, not individual art nodes.",
+    "Model identity and reasoning configuration not independently verified."
+  ]
+}

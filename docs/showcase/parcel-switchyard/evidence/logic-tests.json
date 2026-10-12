@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "delivered": 3,
+      "missed": 0,
+      "name": "three_destinations",
+      "pass": true,
+      "streak": 3
+    },
+    {
+      "missed": 1,
+      "name": "wrong_route",
+      "pass": true,
+      "streak": 0
+    },
+    {
+      "active": 6,
+      "attempts": 8,
+      "name": "capacity_boundary",
+      "pass": true,
+      "sent": 6
+    },
+    {
+      "name": "keyboard_route_1",
+      "pass": true,
+      "selected": 0
+    },
+    {
+      "name": "keyboard_route_2",
+      "pass": true,
+      "selected": 1
+    },
+    {
+      "name": "keyboard_route_3",
+      "pass": true,
+      "selected": 2
+    },
+    {
+      "name": "auto_enable",
+      "pass": true
+    },
+    {
+      "name": "auto_disable",
+      "pass": true
+    },
+    {
+      "active": 0,
+      "delivered": 0,
+      "missed": 0,
+      "name": "repeated_reset",
+      "pass": true,
+      "sent": 0
+    }
+  ],
+  "passed": true
+}
