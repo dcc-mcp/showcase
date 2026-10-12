@@ -43,9 +43,11 @@ try:
             assert video.evaluate('(v) => v.videoWidth === 1280 && v.videoHeight === 720 && Math.abs(v.duration - 8) < .1 && !v.autoplay')
             video.focus()
             page.keyboard.press('Space')
-            page.wait_for_function('!document.querySelector("video").paused')
+            page.wait_for_function('!document.querySelector("video").paused && document.querySelector("video").currentTime > 0.4 && document.querySelector("video").readyState >= 3')
             page.keyboard.press('Space')
-            page.wait_for_function('document.querySelector("video").paused')
+            page.wait_for_function('document.querySelector("video").paused && document.querySelector("video").readyState >= 3')
+            played = video.evaluate('(v)=>v.currentTime')
+            page.wait_for_timeout(300)
             video.locator('..').screenshot(path=str(a.output / (layout + '-parcel-film.png')))
             source = page.locator('a[download="Parcel-Switchyard-Source.zip"]')
             with page.expect_download() as event:
@@ -68,7 +70,7 @@ try:
             expect(page.locator('.case-card:visible')).to_have_count(0)
             page.locator('#reset-filters').click()
             expect(page.locator('.case-card:visible')).not_to_have_count(0)
-            report['layouts'].append({'layout':layout,'search_filters_reset_empty_back':True,'native_video_keyboard_play_pause':True,'source_download_hash_match':True,'public_links_checked':len(checked),'horizontal_overflow':False})
+            report['layouts'].append({'layout':layout,'search_filters_reset_empty_back':True,'native_video_keyboard_play_pause':True,'video_advanced_seconds':played,'source_download_hash_match':True,'public_links_checked':len(checked),'horizontal_overflow':False})
             context.close()
         browser.close()
     report['passed'] = True

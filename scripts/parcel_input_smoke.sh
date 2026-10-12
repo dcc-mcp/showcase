@@ -9,7 +9,7 @@ xdotool windowfocus --sync "$W"
 xdotool key --window "$W" 2 space
 sleep 4
 xdotool mousemove --window "$W" 1080 316 click 1
-xdotool key --window "$W" space
+xdotool mousemove --window "$W" 1080 534 click 1
 sleep 4
 xdotool key --window "$W" F12
 sleep 1

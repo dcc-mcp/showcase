@@ -12,7 +12,9 @@
     {
       "path": "Parcel-Switchyard-Source.zip",
       "bytes": 9554,
-      "sha256": "903a313b73f22e64e4d2c764c1107d2468658e2d753c7e5b8dbe3d3ace87fc8e"
+      "sha256": "903a313b73f22e64e4d2c764c1107d2468658e2d753c7e5b8dbe3d3ace87fc8e",
+      "container_kind": "ZIP",
+      "member_count": 8
     },
     {
       "path": "demo.mp4",
@@ -98,7 +100,10 @@
     {
       "path": "parcel.pck",
       "bytes": 16884,
-      "sha256": "926739e71f51c15b7cca8be3a1dd40c3f69f78c011e34d655aae249e1a33eae8"
+      "sha256": "926739e71f51c15b7cca8be3a1dd40c3f69f78c011e34d655aae249e1a33eae8",
+      "container_kind": "Godot PCK",
+      "scene_count": 1,
+      "external_dependencies": []
     },
     {
       "path": "small-window.png",
