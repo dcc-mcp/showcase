@@ -32,6 +32,8 @@ jobs:
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
       - name: Install official Chromium and system dependencies
         run: python -m playwright install --with-deps chromium
+      - name: Materialize pinned official Godot Web runtime
+        run: python scripts/godot_web/materialize_runtime.py
       - name: Build exact candidate
         run: python scripts/build_site.py
       - name: Verify desktop and mobile public pages

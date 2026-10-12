@@ -28,6 +28,7 @@ jobs:
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
+          python scripts/godot_web/materialize_runtime.py
           python scripts/build_site.py
           python scripts/prism_tide_page_smoke.py --site _site --output "${{ runner.temp }}/prism-tide-pages"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
