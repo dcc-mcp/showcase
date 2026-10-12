@@ -77,6 +77,7 @@ def run(site, output):
     brands, _, problems = read_and_validate(str(Path.cwd()))
     if problems:
         raise ValueError('Invalid brand source catalog')
+    brands_by_slug = {item['slug']: item for item in brands.get('items', [])}
     base_paths = ['index.html'] + ['cases/' + case['slug'] + '/index.html' for case in cases]
     if brands.get('enabled'):
         base_paths += ['brands/index.html'] + ['brands/' + item['slug'] + '/index.html' for item in brands['items']]
@@ -167,6 +168,13 @@ def run(site, output):
                                 expect(page.locator('.credit-block')).to_contain_text(chinese_copy.get(case['credits']['license'], case['credits']['license']))
                             if locale == 'en':
                                 expect(page.locator('.translation-note a')).to_have_attribute('href', re.compile('zh/cases/.*#prompt'))
+                        if locale == 'zh' and path.startswith('brands/') and path != 'brands/index.html':
+                            for rights in brands_by_slug[path.split('/')[1]]['rights']:
+                                expect(page.locator('body')).to_contain_text(chinese_copy.get(rights['notice'], rights['notice']))
+                        # Review representative long translated copy beyond the hero.
+                        if path in ('cases/prism-tide/index.html', 'brands/dcc-mcp-maya-v2/index.html'):
+                            section = '#prompt' if path.startswith('cases/') else '#rights'
+                            page.locator(section).screenshot(path=str(output / (screenshot[:-4] + '-copy.png')), animations='disabled')
                         report['pages'].append({'locale': locale, 'layout': layout, 'path': relative, 'screenshot': screenshot, 'overflow': False, 'images_loaded': page.locator('img').count()})
 
                     # Search and stable filter values survive a same-page language switch.

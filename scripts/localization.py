@@ -44,9 +44,10 @@ def required_chinese_sources(cases):
     """
     technical_labels = {software for case in cases for software in case['software']}
     technical_labels.update({'Core / CLI / Gateway', 'Core / Server / CLI', 'Core / SDK',
-                             'Kdenlive / MLT', 'OpenSCAD', 'FreeCAD', 'ParaView', 'GIMP'})
+                             'Kdenlive / MLT', 'OpenSCAD', 'FreeCAD', 'ParaView', 'GIMP',
+                             'DCC-MCP Core', 'DCC-MCP Gateway / CLI'})
     fields = {'subtitle', 'summary', 'goal', 'evidence_scope', 'evidence_label',
-              'description', 'note', 'basis', 'scope', 'change', 'license', 'text', 'stage'}
+              'description', 'note', 'notice', 'basis', 'scope', 'change', 'license', 'text', 'stage'}
     required = set()
     def walk(value, path):
         if isinstance(value, dict):
@@ -59,7 +60,7 @@ def required_chinese_sources(cases):
             key = path[-1]
             if value.startswith(('https://', 'http://', 'docs/', 'play/')) or re.fullmatch('[a-fA-F0-9]{7,64}', value):
                 return
-            if key == 'license' and re.fullmatch('[A-Za-z0-9.+-]+', value):
+            if key == 'license' and (re.fullmatch('[A-Za-z0-9.+-]+', value) or value == 'SIL Open Font License 1.1'):
                 return  # SPDX identifiers are not prose.
             if key == 'name' and re.fullmatch('[a-z0-9]+(?:_[a-z0-9]+)+', value):
                 return  # Machine-readable check identifiers stay stable.
@@ -315,8 +316,11 @@ class LocalizedHTML(HTMLParser):
         self.output.append('<!' + value + '>')
 
 
-def localize_pages(root, original_pages, demos=None):
+def localize_pages(root, original_pages, demos=None, brands=None):
     translations = {locale: catalog(root, demos, locale) for locale in LOCALES}
+    missing_brands = required_chinese_sources((brands or {}).get('items', [])) - translations['zh'].keys()
+    if missing_brands:
+        raise ValueError('Missing Chinese brand translations (publication blocked):\n' + '\n'.join(sorted(missing_brands)))
     source_pages = {path for path in original_pages if path.endswith('.html')}
     result = {path: content for path, content in original_pages.items() if path not in source_pages}
     missing = {}
