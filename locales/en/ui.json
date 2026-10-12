@@ -120,5 +120,18 @@
   "打开交互体验": "Open interactive demo",
   "关闭体验": "Close demo",
   "在独立页面打开 ↗": "Open standalone ↗",
-  "WebGL 2 · Godot 4.6.3 · 点击后才加载。关闭体验会丢弃未保存的状态。": "WebGL 2 · Godot 4.6.3 · Loads only after a click. Closing the demo discards unsaved state."
+  "WebGL 2 · Godot 4.6.3 · 点击后才加载。关闭体验会丢弃未保存的状态。": "WebGL 2 · Godot 4.6.3 · Loads only after a click. Closing the demo discards unsaved state.",
+  "仅本地预览": "Local preview only",
+  "品牌画廊开发预览": "Brand gallery development preview",
+  "品牌资产待完成": "Brand assets pending",
+  "当前预览不包含 Logo 图像": "This preview contains no logo images",
+  "待完成 · 仅本地预览": "Pending · Local preview only",
+  "待完成 · 本地预览": "Pending · Local preview",
+  "待新资产": "Awaiting new assets",
+  "待新资产及对应实际记录验证完成后补齐。": "To be completed after the new assets and their actual records have been verified.",
+  "此详情尚未发布": "This detail page is not published",
+  "此页面用于审阅画廊结构。待完成条目没有 Logo 图像或下载；正式发布只接收验证通过的新资产。": "This page is for reviewing the gallery structure. Pending entries have no logo images or downloads; production accepts only verified new assets.",
+  "等待修正版资产与验证记录；占位内容仅用于本地开发。": "Awaiting corrected assets and verification records; placeholders are for local development only.",
+  "预览结构不代表作品已完成；不引用旧缺陷图，也不提供待验证资产下载。": "The preview structure does not mean the artwork is complete. It neither references older defective images nor offers unverified asset downloads.",
+  "验证完成后展示实际品牌文件": "Actual brand files will appear after verification."
 }
