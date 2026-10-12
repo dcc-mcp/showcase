@@ -38,6 +38,10 @@ jobs:
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python scripts/browser_preview.py --site _site --output "${{ runner.temp }}/showcase-browser-preview" --expected-head "$EXPECTED_HEAD_SHA"
+      - name: Verify Parcel page media and downloads
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/parcel_page_smoke.py --site _site --output "${{ runner.temp }}/showcase-browser-preview"
       - name: Keep public screenshots and result
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

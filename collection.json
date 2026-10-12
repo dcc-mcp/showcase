@@ -3322,7 +3322,7 @@
           "reasoning_effort": "未知",
           "record_status": "unknown",
           "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
-          "scope": "实际图像与视频采样审查；含父线程独立像素复核"
+          "scope": "实际图像与视频采样审查；含独立视觉复核"
         },
         {
           "stage_id": "review_technical",

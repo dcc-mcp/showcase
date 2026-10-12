@@ -20,7 +20,7 @@
     "video_duration_s": 8,
     "small_viewport_width_px": 960,
     "small_viewport_height_px": 540,
-    "visual_review": "Creator and independent parent inspected final hero and real-input screenshot; passed."
+    "visual_review": "Creator and independent reviewer inspected final hero and real-input screenshot; passed."
   },
   "checks": [
     {
