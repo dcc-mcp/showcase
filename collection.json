@@ -2811,6 +2811,280 @@
           "change": "Original real MCP production; softbox visibility corrected after preview; packed native reopened in a new directory."
         }
       ]
+    },
+    {
+      "slug": "resonance-atlas",
+      "title": "Resonance Atlas · 共振图谱",
+      "subtitle": "Inkscape · 三联矢量海报与真实图层组装短片",
+      "software": [
+        "Inkscape",
+        "FFmpeg"
+      ],
+      "capabilities": [
+        "矢量设计",
+        "排版",
+        "动画",
+        "导出",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/resonance-atlas/hero.jpg",
+        "alt": "深蓝、米白与紫色的三联声学矢量海报"
+      },
+      "evidence_label": "本轮实际运行 · Native Inkscape + DCC-MCP",
+      "evidence_scope": "55次真实gateway调用，9组原生SVG/PNG/PDF与文字转路径重开。制作依赖尚未合并的Linux适配修复精确commit；非纯脚本SVG。影片是原生PNG的组装剪辑，不是录屏。",
+      "summary": "31组相位轨迹、48道双源波前与42条谐波线，统一网格与编辑式排版。附12秒静音组装影片。",
+      "goal": "以原创矢量作品验证真实Inkscape图层创建、曲线、字体、PDF、文字转路径及保存重开，并用真实产物展示制作层次。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过真实Inkscape DCC-MCP制作三张原创声学示意海报。使用图层、曲线和编辑式排版，原生保存并重开，输出SVG、PNG、PDF和outlined SVG。根据实际PNG制作约12秒组装影片，明确非录屏。先低清审阅再输出正式片，不以AI图伪造软件操作。",
+        "note": "复用说明，非用户逐字原话。"
+      },
+      "environment": [
+        {
+          "label": "Host",
+          "value": "Inkscape 1.4.4 / Ubuntu 24.04 / CI-owned Xvfb"
+        },
+        {
+          "label": "Adapter",
+          "value": "0.1.0 source 498982a; unmerged PR #3 dependency"
+        },
+        {
+          "label": "Core / CLI / Gateway",
+          "value": "0.20.42"
+        },
+        {
+          "label": "Output",
+          "value": "1587×2116 PNG; native SVG/PDF; 1280×720 / 24fps / 12s silent video"
+        },
+        {
+          "label": "Post-production",
+          "value": "FFmpeg 7.1.5 / Pillow 12.3.0"
+        }
+      ],
+      "tools": [
+        {
+          "name": "inkscape_vector__document_build",
+          "description": "9组typed plans通过软件原生inkex效果创建矢量。"
+        },
+        {
+          "name": "inkscape_vector__document_inspect",
+          "description": "原生重开查询，包含转路径后text=0。"
+        },
+        {
+          "name": "inkscape_vector__document_export",
+          "description": "原生PNG、PDF与outlined SVG导出。"
+        },
+        {
+          "name": "Pillow / FFmpeg",
+          "description": "对真实PNG做保比例细节取景与三阶段组装；非Inkscape原生动画。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "原生方案",
+          "description": "三主题共9组typed plans，经真实gateway而非外部XML写入器创建。"
+        },
+        {
+          "title": "保存与复核",
+          "description": "每组原生重开，输出PNG/PDF，转路径后再次重开；DejaVu字体嵌入检查通过。"
+        },
+        {
+          "title": "真实影像组装",
+          "description": "低清审阅后加入大幅细节近景，纠正取景比例，保留完整海报与最终三联展。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/resonance-atlas/resonance-atlas.mp4",
+          "alt": "12秒真实矢量图层组装影片",
+          "caption": "1280×720，24fps，12秒；静音；原生PNG组装影片，非录屏。"
+        },
+        {
+          "src": "docs/showcase/resonance-atlas/poster-1.jpg",
+          "alt": "Phase / locked",
+          "caption": "Inkscape原生PNG的JPEG展示衍生图 · 1587×2116；完整无损PNG另附"
+        },
+        {
+          "src": "docs/showcase/resonance-atlas/poster-2.jpg",
+          "alt": "Between / waves",
+          "caption": "Inkscape原生PNG的JPEG展示衍生图 · 1587×2116；完整无损PNG另附"
+        },
+        {
+          "src": "docs/showcase/resonance-atlas/poster-3.jpg",
+          "alt": "After / sound",
+          "caption": "Inkscape原生PNG的JPEG展示衍生图 · 1587×2116；完整无损PNG另附"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生创建/保存重开",
+          "result": "pass",
+          "observed": "55次真实gateway调用；9组原生创建、导出与重开通过。"
+        },
+        {
+          "name": "字体与轮廓",
+          "result": "pass",
+          "observed": "DejaVu Sans/Bold嵌入PDF；outlined SVG不含text元素；PDF提取文本核对。"
+        },
+        {
+          "name": "像素与影片",
+          "result": "pass",
+          "observed": "三张海报逐图审阅；288帧影片完整decode。"
+        },
+        {
+          "name": "GUI / 用户最终验收",
+          "result": "not_run",
+          "observed": "未声称GUI交互录屏或用户最终验收。"
+        }
+      ],
+      "limitations": [
+        "声学曲线为数学示意，不是实测数据或压力场模拟。",
+        "影片有意静音，不含音轨；PNG合成，非原生Inkscape动画或软件录屏。",
+        "依赖未合并Linux原生修复commit，不代表正式release已支持。",
+        "公开证据为脱敏摘要，非完整原始trace。"
+      ],
+      "resources": [
+        {
+          "label": "Guide",
+          "url": "docs/showcase/resonance-atlas/README.md"
+        },
+        {
+          "label": "Typed plan generator",
+          "url": "docs/showcase/resonance-atlas/generate_plans.py"
+        },
+        {
+          "label": "Assembly script",
+          "url": "docs/showcase/resonance-atlas/compose_video.py"
+        },
+        {
+          "label": "Native MCP evidence",
+          "url": "docs/showcase/resonance-atlas/mcp-summary.json"
+        },
+        {
+          "label": "Validation",
+          "url": "docs/showcase/resonance-atlas/validation.json"
+        },
+        {
+          "label": "Licenses",
+          "url": "docs/showcase/resonance-atlas/LICENSES.md"
+        },
+        {
+          "label": "Poster 1 SVG",
+          "url": "docs/showcase/resonance-atlas/poster-1.svg"
+        },
+        {
+          "label": "Poster 1 PDF",
+          "url": "docs/showcase/resonance-atlas/poster-1.pdf"
+        },
+        {
+          "label": "Poster 2 SVG",
+          "url": "docs/showcase/resonance-atlas/poster-2.svg"
+        },
+        {
+          "label": "Poster 2 PDF",
+          "url": "docs/showcase/resonance-atlas/poster-2.pdf"
+        },
+        {
+          "label": "Poster 3 SVG",
+          "url": "docs/showcase/resonance-atlas/poster-3.svg"
+        },
+        {
+          "label": "Poster 3 PDF",
+          "url": "docs/showcase/resonance-atlas/poster-3.pdf"
+        },
+        {
+          "label": "Video validation",
+          "url": "docs/showcase/resonance-atlas/video-validation.json"
+        },
+        {
+          "label": "Original lossless PNG exports",
+          "url": "docs/showcase/resonance-atlas/native-png-exports.zip"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP Resonance Atlas showcase contributors",
+        "license": "Original artwork, video and new scripts: rights reserved; no additional MIT grant. Existing repository and third-party licenses unchanged.",
+        "note": "无第三方图像、AI生成位图或音轨。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-inkscape/tree/498982ae7d4eedefeff31811c251795f5ff93be6",
+        "commit": "498982ae7d4eedefeff31811c251795f5ff93be6",
+        "title": "Exact native adapter used in CI; unmerged PR #3 dependency."
+      },
+      "verified_at": "2026-10-11",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "planning",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "creation",
+          "stage": "creation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "code",
+          "stage": "code",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "reference",
+          "stage": "reference",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "post_production",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "review_visual",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "review_technical",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-11",
+          "change": "Original native vector creation and assembly film; proportional detail crop verified."
+        }
+      ]
     }
   ]
 }

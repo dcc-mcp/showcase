@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="960px"
+   height="1280px"
+   viewBox="0 0 960 1280"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <g
+     inkscape:groupmode="layer"
+     id="paper"
+     inkscape:label="01 / Paper">
+    <rect
+       id="background"
+       height="1280"
+       width="960"
+       x="0"
+       y="0"
+       style="fill:#f0eadc" />
+    <text
+       id="brand"
+       x="64"
+       y="66"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:15;letter-spacing:4">RESONANCE ATLAS</text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="grid"
+     inkscape:label="02 / Measurement grid">
+    <path
+       id="grid-x-80"
+       d="M80.000,300.000 L80.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-120"
+       d="M120.000,300.000 L120.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-160"
+       d="M160.000,300.000 L160.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-200"
+       d="M200.000,300.000 L200.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-240"
+       d="M240.000,300.000 L240.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-280"
+       d="M280.000,300.000 L280.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-320"
+       d="M320.000,300.000 L320.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-360"
+       d="M360.000,300.000 L360.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-400"
+       d="M400.000,300.000 L400.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-440"
+       d="M440.000,300.000 L440.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-480"
+       d="M480.000,300.000 L480.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-520"
+       d="M520.000,300.000 L520.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-560"
+       d="M560.000,300.000 L560.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-600"
+       d="M600.000,300.000 L600.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-640"
+       d="M640.000,300.000 L640.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-680"
+       d="M680.000,300.000 L680.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-720"
+       d="M720.000,300.000 L720.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-760"
+       d="M760.000,300.000 L760.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-800"
+       d="M800.000,300.000 L800.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-840"
+       d="M840.000,300.000 L840.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-x-880"
+       d="M880.000,300.000 L880.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-300"
+       d="M80.000,300.000 L880.000,300.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-340"
+       d="M80.000,340.000 L880.000,340.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-380"
+       d="M80.000,380.000 L880.000,380.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-420"
+       d="M80.000,420.000 L880.000,420.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-460"
+       d="M80.000,460.000 L880.000,460.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-500"
+       d="M80.000,500.000 L880.000,500.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-540"
+       d="M80.000,540.000 L880.000,540.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-580"
+       d="M80.000,580.000 L880.000,580.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-620"
+       d="M80.000,620.000 L880.000,620.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-660"
+       d="M80.000,660.000 L880.000,660.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-700"
+       d="M80.000,700.000 L880.000,700.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-740"
+       d="M80.000,740.000 L880.000,740.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-780"
+       d="M80.000,780.000 L880.000,780.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-820"
+       d="M80.000,820.000 L880.000,820.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-860"
+       d="M80.000,860.000 L880.000,860.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-900"
+       d="M80.000,900.000 L880.000,900.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-940"
+       d="M80.000,940.000 L880.000,940.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+    <path
+       id="grid-y-980"
+       d="M80.000,980.000 L880.000,980.000"
+       style="fill:none;stroke-width:0.7;stroke:#132332;opacity:0.12" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="signal"
+     inkscape:label="03 / Signal geometry">
+    <circle
+       id="wave-a-1"
+       cx="365"
+       cy="640"
+       r="12"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-1"
+       cx="595"
+       cy="640"
+       r="12"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-2"
+       cx="365"
+       cy="640"
+       r="24"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-2"
+       cx="595"
+       cy="640"
+       r="24"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-3"
+       cx="365"
+       cy="640"
+       r="36"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-3"
+       cx="595"
+       cy="640"
+       r="36"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-4"
+       cx="365"
+       cy="640"
+       r="48"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-4"
+       cx="595"
+       cy="640"
+       r="48"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-5"
+       cx="365"
+       cy="640"
+       r="60"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-5"
+       cx="595"
+       cy="640"
+       r="60"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-6"
+       cx="365"
+       cy="640"
+       r="72"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-6"
+       cx="595"
+       cy="640"
+       r="72"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-7"
+       cx="365"
+       cy="640"
+       r="84"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-7"
+       cx="595"
+       cy="640"
+       r="84"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-8"
+       cx="365"
+       cy="640"
+       r="96"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-8"
+       cx="595"
+       cy="640"
+       r="96"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-9"
+       cx="365"
+       cy="640"
+       r="108"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-9"
+       cx="595"
+       cy="640"
+       r="108"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-10"
+       cx="365"
+       cy="640"
+       r="120"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-10"
+       cx="595"
+       cy="640"
+       r="120"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-11"
+       cx="365"
+       cy="640"
+       r="132"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-11"
+       cx="595"
+       cy="640"
+       r="132"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-12"
+       cx="365"
+       cy="640"
+       r="144"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-12"
+       cx="595"
+       cy="640"
+       r="144"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-13"
+       cx="365"
+       cy="640"
+       r="156"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-13"
+       cx="595"
+       cy="640"
+       r="156"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-14"
+       cx="365"
+       cy="640"
+       r="168"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-14"
+       cx="595"
+       cy="640"
+       r="168"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-15"
+       cx="365"
+       cy="640"
+       r="180"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-15"
+       cx="595"
+       cy="640"
+       r="180"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-16"
+       cx="365"
+       cy="640"
+       r="192"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-16"
+       cx="595"
+       cy="640"
+       r="192"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-17"
+       cx="365"
+       cy="640"
+       r="204"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-17"
+       cx="595"
+       cy="640"
+       r="204"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-18"
+       cx="365"
+       cy="640"
+       r="216"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-18"
+       cx="595"
+       cy="640"
+       r="216"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-19"
+       cx="365"
+       cy="640"
+       r="228"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-19"
+       cx="595"
+       cy="640"
+       r="228"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-20"
+       cx="365"
+       cy="640"
+       r="240"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-20"
+       cx="595"
+       cy="640"
+       r="240"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-21"
+       cx="365"
+       cy="640"
+       r="252"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-21"
+       cx="595"
+       cy="640"
+       r="252"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-22"
+       cx="365"
+       cy="640"
+       r="264"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-22"
+       cx="595"
+       cy="640"
+       r="264"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-23"
+       cx="365"
+       cy="640"
+       r="276"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-23"
+       cx="595"
+       cy="640"
+       r="276"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="wave-a-24"
+       cx="365"
+       cy="640"
+       r="288"
+       style="fill:none;stroke-width:1.9;stroke:#c95137;opacity:0.78" />
+    <circle
+       id="wave-b-24"
+       cx="595"
+       cy="640"
+       r="288"
+       style="fill:none;stroke-width:1.9;stroke:#317e81;opacity:0.78" />
+    <circle
+       id="source-a"
+       cx="365"
+       cy="640"
+       r="7"
+       style="fill:#132332" />
+    <circle
+       id="source-b"
+       cx="595"
+       cy="640"
+       r="7"
+       style="fill:#132332" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="annotations"
+     inkscape:label="04 / Notes and scales">
+    <path
+       id="rule"
+       d="M64.000,1050.000 L896.000,1050.000"
+       style="fill:none;stroke-width:1;stroke:#132332" />
+    <text
+       id="note"
+       x="64"
+       y="1093"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:19">Two origins. A shared field of interference.</text>
+    <text
+       id="formula-a"
+       x="64"
+       y="1135"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:16;opacity:0.72">Two equal point sources</text>
+    <text
+       id="formula-b"
+       x="64"
+       y="1161"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:16;opacity:0.72">Concentric wavefront study</text>
+    <text
+       id="count"
+       x="896"
+       y="1135"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:13;text-anchor:end">48 WAVEFRONTS</text>
+    <path
+       id="tick-80"
+       d="M80.000,987.000 L80.000,997.000"
+       style="fill:none;stroke-width:1;stroke:#132332" />
+    <path
+       id="tick-280"
+       d="M280.000,987.000 L280.000,997.000"
+       style="fill:none;stroke-width:1;stroke:#132332" />
+    <path
+       id="tick-480"
+       d="M480.000,987.000 L480.000,997.000"
+       style="fill:none;stroke-width:1;stroke:#132332" />
+    <path
+       id="tick-680"
+       d="M680.000,987.000 L680.000,997.000"
+       style="fill:none;stroke-width:1;stroke:#132332" />
+    <path
+       id="tick-880"
+       d="M880.000,987.000 L880.000,997.000"
+       style="fill:none;stroke-width:1;stroke:#132332" />
+    <text
+       id="scale-a"
+       x="80"
+       y="1022"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:12">0</text>
+    <text
+       id="scale-b"
+       x="480"
+       y="1022"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:12;text-anchor:middle;letter-spacing:2">NORMALIZED / SCHEMATIC</text>
+    <text
+       id="scale-c"
+       x="880"
+       y="1022"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:12;text-anchor:end">1</text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="type"
+     inkscape:label="05 / Editorial typography">
+    <text
+       id="edition"
+       x="896"
+       y="66"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:13;text-anchor:end;letter-spacing:1">VECTOR STUDIES / 2026</text>
+    <text
+       id="number"
+       x="64"
+       y="166"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:54;font-weight:bold;opacity:0.4">02</text>
+    <text
+       id="title"
+       x="64"
+       y="252"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:70;font-weight:bold;letter-spacing:-3">Between / waves</text>
+    <text
+       id="footer"
+       x="64"
+       y="1234"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:12;letter-spacing:2">FORM FOLLOWS FREQUENCY</text>
+    <text
+       id="footer-index"
+       x="896"
+       y="1234"
+       style="fill:#132332;font-family:DejaVu Sans;font-size:12;text-anchor:end">RESEARCH SERIES    02 / 03</text>
+  </g>
+</svg>
