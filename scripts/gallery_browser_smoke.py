@@ -192,10 +192,10 @@ def run(site: Path, output: Path, expected_head: str):
                     parser.close()
                     assert not parser.missing
                     fixture_url = base + prefix + '__partial_contract_fixture.html'
-                    fixture_html = ('<!doctype html><html lang="' + ('en' if locale == 'en' else 'zh-CN') + '"><head><base href="' + base + prefix + '"><link rel="stylesheet" href="' + base + 'assets/site.css"><script src="' + base + 'assets/preview.js" defer></script></head><body><main class="gallery-main"><h1>TEST FIXTURE</h1><div class="work-wall">' + ''.join(parser.output) + '</div></main></body></html>')
+                    fixture_html = ('<!doctype html><html lang="' + ('en' if locale == 'en' else 'zh-CN') + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="' + base + prefix + '"><link rel="stylesheet" href="' + base + 'assets/site.css"><script src="' + base + 'assets/preview.js" defer></script></head><body><main class="gallery-main"><h1>TEST FIXTURE</h1><div class="work-wall">' + ''.join(parser.output) + '</div></main></body></html>')
                     # A fresh served document avoids document.write inheriting
                     # timers/listeners from the previous live gallery document.
-                    page.route(fixture_url, lambda route: route.fulfill(status=200, content_type='text/html', body=fixture_html))
+                    page.route(fixture_url, lambda route: route.fulfill(status=200, content_type='text/html; charset=utf-8', body=fixture_html))
                     page.mouse.move(0, 0)
                     page.goto(fixture_url, wait_until='networkidle')
                     card = page.locator('.case-card')
