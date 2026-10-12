@@ -5,13 +5,13 @@
   "files": [
     {
       "path": "LICENSES.md",
-      "bytes": 917,
-      "sha256": "ae53103d2f5968721699428b5c1efd7f509640b8ab19b3e916c7da39cb92ee5e"
+      "bytes": 933,
+      "sha256": "79b1e7662b4ca046fc27b2b2c21bc77a4669db2a935f1cbf6add6f6d6640ea5c"
     },
     {
       "path": "Prism-Tide-Source.zip",
-      "bytes": 7060,
-      "sha256": "7244662a472593e9222e3a17d0ffb12284e72619d60d5ace348079bf4d9fb25b",
+      "bytes": 6744,
+      "sha256": "3c22710cdab4b97a7f378147371042c2704303144282eae157be02e8e2ee3d8d",
       "container_kind": "ZIP",
       "member_count": 8
     },
