@@ -5,3 +5,5 @@ The site repository MIT license applies to site software. This case directory, a
 Publication grants no additional copyright license and makes no public-domain dedication. Rights, to the extent applicable, remain with their respective holders. Public hosting and editable source availability do not imply permission to reuse, redistribute, sublicense or sell the artwork. No new MIT or CC0 grant is made.
 
 The synthetic field and composition were authored for this showcase. No third-party measured dataset, model, texture pack, music, reference footage, application binary, adapter tree or font binary is included. ParaView and GIMP retain their upstream terms. DejaVu Sans is installed separately; its upstream notice accompanies the native package. No vendor endorsement or trademark rights are granted.
+
+The 2026-10-12 process video and its native-window poster show the existing artwork in GIMP. They remain rights reserved under the same scope above, with no new MIT, CC0, music or other asset license grant. GIMP interface marks remain with their respective holders. No application binary, font binary, third-party footage or audio is distributed.

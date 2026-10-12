@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-12",
+  "scope": "New real GIMP layer-visibility demonstration of the unchanged existing master; not a new ParaView simulation or original authoring replay.",
+  "environment": {
+    "host": "GIMP 3.0.4 on Linux",
+    "core": "0.20.43",
+    "adapter_base": "fa19b03f76df95968b1183d2ad95851cbe6001ec",
+    "adapter_version": "0.5.0",
+    "install_readiness_patch": "17458b808d351acd861a1d9c92b973eeddbbb069",
+    "patch_pr": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/22",
+    "patch_status_at_recording": "unmerged Draft PR",
+    "native_execution": "Official typed GIMP session tools through real loopback HTTP MCP; asynchronous Core jobs awaited."
+  },
+  "attribution": {
+    "scope": "2026-10-12 process-video preparation and review only",
+    "actual_model": "Unknown",
+    "actual_reasoning_effort": "Unknown",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "ultra",
+    "basis": "Requested configuration is preserved separately. No accepted runtime configuration receipt was available; no confirmed model or effort claim is made. Historical model records are unchanged."
+  },
+  "source": {
+    "archive": "editable-source.zip",
+    "archive_sha256": "6e6aaf6197ccc0c7ad245bb6f4a7e8fbbb16255b4de99a17b24019f521d0b439",
+    "xcf_member": "gimp/native/gimp/seismic-lens-master.xcf",
+    "original_xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+    "saved_copy_xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+    "original_archive_and_artwork_unchanged": true
+  },
+  "native_roundtrip": {
+    "original_xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+    "copy_xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+    "layers_equal_except_session_ids": true,
+    "layer_count": 30,
+    "text_layer_count": 19,
+    "rgba_pixels_identical_after_save_close_reopen_export": true,
+    "image_size": [
+      2560,
+      1600
+    ],
+    "metadata_no_private_info": true,
+    "names_reviewed": true,
+    "actual_model": "Unknown",
+    "actual_reasoning_effort": "Unknown",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "ultra",
+    "seismic-lens-after-demo.png_rgba_identical": true,
+    "seismic-lens-png-roundtrip.png_rgba_identical": true
+  },
+  "capture": {
+    "file": "seismic-lens-native-layers.mp4",
+    "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+    "bytes": 88406,
+    "codec": "H.264",
+    "pixel_format": "yuv420p",
+    "width": 1178,
+    "height": 814,
+    "fps": 15,
+    "duration_seconds": 8.0,
+    "decoded_frames": 120,
+    "unique_decoded_frame_hashes": 98,
+    "audio_streams": 0,
+    "audio_intent": "Intentionally silent; listening is not applicable.",
+    "method": "One continuous X11 capture of the exact task-owned GIMP window, verified against its process identity; live typed MCP group-visibility changes during capture. No desktop-wide capture.",
+    "encoder": "FFmpeg libx264, one thread, CRF 19, fast preset, faststart; no cuts, retiming, overlays, image synthesis or composited software UI.",
+    "timing_note": "Below are actual MCP request/terminal receipt times relative to capture process start, not claims of exact onscreen frame onset.",
+    "events": [
+      {
+        "group": "01 SectionX",
+        "operation": "gimp_session__set_layer_properties",
+        "visible": true,
+        "request_seconds": 1.0,
+        "completion_seconds": 1.662,
+        "success": true
+      },
+      {
+        "group": "02 SectionY",
+        "operation": "gimp_session__set_layer_properties",
+        "visible": true,
+        "request_seconds": 2.2,
+        "completion_seconds": 3.212,
+        "success": true
+      },
+      {
+        "group": "03 SectionZ",
+        "operation": "gimp_session__set_layer_properties",
+        "visible": true,
+        "request_seconds": 3.402,
+        "completion_seconds": 4.215,
+        "success": true
+      },
+      {
+        "group": "04 Delay80",
+        "operation": "gimp_session__set_layer_properties",
+        "visible": true,
+        "request_seconds": 4.6,
+        "completion_seconds": 5.257,
+        "success": true
+      },
+      {
+        "group": "05 Delay150",
+        "operation": "gimp_session__set_layer_properties",
+        "visible": true,
+        "request_seconds": 5.803,
+        "completion_seconds": 6.312,
+        "success": true
+      }
+    ]
+  },
+  "review": {
+    "native_view_and_layer_privacy": "passed",
+    "save_close_reopen_export": "passed",
+    "exported_png_native_reopen_and_reexport": "passed",
+    "full_120_frame_decode": "passed",
+    "continuous_capture_and_mcp_timing": "passed",
+    "visual_start_middle_end_and_five_transitions": "passed",
+    "visual_observation": "Five native groups appear in X/Y/Z/80 ms/150 ms order. The entire plate remains framed with GIMP menus and layer dock. Final frame holds all panels. Some long layer names are truncated by the dock width; full editable names remain in the original XCF.",
+    "audio": "not-applicable: no audio stream",
+    "browser_play_pause_resume_seek": "not-tested at packaging; see exact-head browser CI",
+    "deployed_site": "not-tested: draft only"
+  },
+  "privacy": {
+    "reviewed": "Actual GIMP pixels, all 30 layer names, 19 text-layer payloads and image metadata. Only the task-owned window is included. No other application, notification, credential, local endpoint, machine path or user identity is included in public media.",
+    "raw_diagnostics": "Private originals retained. This public file contains selected measured summaries, not a complete raw transcript.",
+    "asset_rights": "Existing rights-reserved notice applies to the new media; no additional license grant."
+  },
+  "research_before_capture": {
+    "official_sources": [
+      "https://www.gimp.org/news/2026/10/01/liam-quin-interview-lgm2017/",
+      "https://www.gimp.org/news/2026/07/10/nara-oliveira-interview-lgm2017/",
+      "https://www.gimp.org/registry/",
+      "https://developer.gimp.org/resource/writing-a-plug-in/tutorial-python/"
+    ],
+    "interpretation": "The 2026 posts republish 2017 artist interviews, not evidence of a new 2026 trend. Use clear editing structure and native single-window context. No external artwork was copied. The retired plugin registry was not presented as a live store.",
+    "marketplace_query": "GIMP capture layers",
+    "marketplace_dcc": "gimp",
+    "marketplace_result_count": 0,
+    "selected_reuse": "Existing free official dcc-mcp-gimp adapter; no additional art/plugin assets installed."
+  },
+  "limits": [
+    "Only Linux GIMP 3.0.4 was natively exercised.",
+    "The film reveals existing groups; it does not reconstruct the artwork or numerically animate the synthetic field.",
+    "Screen-capture bytes depend on display, timing and encoder; cross-machine video identity is not claimed.",
+    "The old full production qualification is preserved, not rerun."
+  ]
+}
