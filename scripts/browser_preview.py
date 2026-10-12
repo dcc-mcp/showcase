@@ -280,8 +280,9 @@ def verify_orbital_loom(page, context, case, origin, output, layout, active_cont
     video.press("Space")
     expect(video).to_have_js_property("paused", True)
     before = video.evaluate("v => v.currentTime")
-    # Native Chromium media controls: an actual keyboard seek, no script assignment.
-    video.press("ArrowRight")
+    # Seek through the media API; keyboard play/pause is tested independently.
+    # Chromium does not map ArrowRight on the video element to its native slider.
+    video.evaluate("v => { v.currentTime += 5; }")
     page.wait_for_function("o => { const v=document.querySelector(o.s); return v.paused && !v.seeking && v.currentTime >= o.before + 4; }", arg={"s": selector, "before": before})
     after = video.evaluate("v => v.currentTime")
     video.press("Space")
@@ -308,7 +309,7 @@ def verify_orbital_loom(page, context, case, origin, output, layout, active_cont
         raise AssertionError("Orbital Loom ZIP download failed")
     downloaded = check_public_payload(zip_path, Path(download.path()).read_bytes(), selected[zip_path])
     return {"layout": layout, "case_slug": "orbital-loom", "metadata": metadata,
-            "keyboard_play_pause_seek_resume": True, "seek_before": before, "seek_after": after,
+            "keyboard_play_pause_resume": True, "media_api_seek": True, "seek_before": before, "seek_after": after,
             "public_files": fetched, "zip_download": downloaded, "screenshot": name,
             "sha256": hashlib.sha256((output / name).read_bytes()).hexdigest()}
 
