@@ -3358,6 +3358,263 @@
           "change": "通过真实 MCP 制作、真实 Godot 含声录制，修复快速队列点击及日志字段问题，保存并重开原生工程；主观听评明确未完成。"
         }
       ]
+    },
+    {
+      "slug": "prism-tide",
+      "title": "Prism Tide · 棱镜潮汐",
+      "subtitle": "Godot · 三关镜面光路解谜",
+      "software": [
+        "Godot"
+      ],
+      "capabilities": [
+        "交互",
+        "游戏原型",
+        "程序化绘制",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/prism-tide/hero.png",
+        "alt": "深海色光学仪台中，薄荷绿光束经黄铜反射镜到达接收器，左侧显示CONNECTED"
+      },
+      "evidence_label": "真实 MCP 制作 · 三关实际键鼠通关",
+      "evidence_scope": "十次真实 Gateway 制作调用创建、挂载、保存和设置原生工程，并修正反射术语。图像和15秒视频来自另行运行的官方Godot 4.6.3原生CI/Xvfb；演示状态变化与独立OS键鼠输入证据分开记录。没有将直接原生渲染冒称MCP渲染返回。",
+      "summary": "一座安静的深海光学仪台。转动黄铜镜片、打开挡板，让薄荷绿信号回到接收器。三关从简单折线路径逐步扩展到六次反射与两道闸门。",
+      "goal": "制作可保存、重开和实际操作的原创桌面解谜游戏，以真实MCP制作记录、三关正反路径测试和原生画面形成完整证据。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过真实Godot MCP创建原创三关镜面光路解谜。使用深海仪台视觉、黄铜镜面和清晰的发射/接收装置。支持点击镜面旋转和挡板开关，也支持键盘选择、旋转、重置与胜利后下一关。各关初始不可解通，提供确定性光路、错误镜向与关闭挡板测试、实际键鼠通关、保存重开、原生截图和短片。无外部美术资产；图形环境不可用时使用标准CI/Xvfb，不伪造像素。",
+        "note": "面向复现的制作说明，不是用户私聊逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "宿主",
+          "value": "Godot 4.6.3 · Linux x86_64"
+        },
+        {
+          "label": "Adapter / Core",
+          "value": "dcc-mcp-godot 0.9.6 · Core / CLI 0.20.42"
+        },
+        {
+          "label": "原生渲染",
+          "value": "Ubuntu Xvfb · Compatibility OpenGL · Mesa software rendering"
+        },
+        {
+          "label": "媒体",
+          "value": "1280 × 800 · 15秒 · H.264 · 30 fps · 无音轨"
+        }
+      ],
+      "tools": [
+        {
+          "name": "godot_script__create_script / edit_script / attach_script",
+          "description": "实际Gateway写入原创游戏、挂载到场景；视觉审查后通过MCP修正REFLECTION术语。"
+        },
+        {
+          "name": "godot_scene_management__create_scene / save_scene",
+          "description": "创建并保存可重开的Node2D原生场景。"
+        },
+        {
+          "name": "godot_project_management__set_project_setting",
+          "description": "设置主场景、窗口尺寸、伸缩和Compatibility渲染器。"
+        },
+        {
+          "name": "Godot native / xdotool / FFmpeg",
+          "description": "单独的官方原生运行、OS输入测试、Movie Maker捕获和媒体编码；不是MCP返回。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先确认每一道光路",
+          "description": "三关全部从未连通状态开始，17项断言涵盖标准解、错误镜向、还原、重置和闭闸阻断。"
+        },
+        {
+          "title": "通过真实MCP持久化",
+          "description": "脚本、场景、挂载、保存和设置完成后独立重开。可移植原生副本移除编辑器及适配器安装元数据，玩法脚本字节保持一致。"
+        },
+        {
+          "title": "实际输入而非演示状态",
+          "description": "独立X11键盘与鼠标完成三关、Tab选择、错误路径、挡板阻断、重复键盘与鼠标重置。",
+          "image": {
+            "src": "docs/showcase/prism-tide/interaction.png",
+            "alt": "实际鼠标打开两道挡板并完成第三关后的原生画面"
+          }
+        },
+        {
+          "title": "审查像素与小窗口",
+          "description": "审查最终静帧、15秒影片采样与864×540小窗口。首次独立审查纠正了把反射称为折射的标题；最终媒体重新捕获。",
+          "image": {
+            "src": "docs/showcase/prism-tide/small-window.png",
+            "alt": "864×540原生小窗口，完整光学仪台布局仍可见"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/prism-tide/demo.mp4",
+          "alt": "Prism Tide三关原生光路演示",
+          "caption": "15秒Godot Movie Maker原生输出，H.264编码，无音轨。脚本驱动演示与独立键鼠测试明确区分。"
+        },
+        {
+          "src": "docs/showcase/prism-tide/hero.png",
+          "alt": "第一关双转向连接成功",
+          "caption": "最终Godot viewport原生捕获，无后期绘制或截图重构。"
+        },
+        {
+          "src": "docs/showcase/prism-tide/interaction.png",
+          "alt": "第三关六次反射与两道开启的挡板",
+          "caption": "独立真实鼠标输入后的通关状态；六次调整连通接收器。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实MCP制作",
+          "result": "pass",
+          "observed": "10次成功制作调用；源脚本、原生场景、挂载、保存、设置及文案修订均有脱敏请求响应。"
+        },
+        {
+          "name": "三关正反路径",
+          "result": "pass",
+          "observed": "17项确定性断言全部通过；原生项目与PCK分别启动重跑。"
+        },
+        {
+          "name": "真实键鼠输入",
+          "result": "pass",
+          "observed": "9项OS输入检查通过：3关通关、键盘选择、错误镜向、闭闸阻断、两种重复重置及最终归零。"
+        },
+        {
+          "name": "原生视觉审查",
+          "result": "pass",
+          "observed": "最终hero、通关帧、影片采样及864×540小窗口已实看；修正反射术语，无重叠裁切。"
+        }
+      ],
+      "limitations": [
+        "桌面1280×800为设计目标；864×540仅验证布局拟合，不表示触屏或手机可读性已验收。",
+        "没有Web版本或独立可执行程序；PCK需要兼容Godot。",
+        "光路是确定性的正交格点模型，并非物理光线追踪。",
+        "美术由GDScript绘制；镜面和挡板可编辑数据，但不是独立场景网格。",
+        "本机headless只用于制作与逻辑验证；像素来自另一原生CI运行。无音轨。"
+      ],
+      "resources": [
+        {
+          "label": "原生工程ZIP",
+          "url": "docs/showcase/prism-tide/Prism-Tide-Source.zip"
+        },
+        {
+          "label": "Godot资源包",
+          "url": "docs/showcase/prism-tide/prism-tide.pck"
+        },
+        {
+          "label": "制作与复现说明",
+          "url": "docs/showcase/prism-tide/README.md"
+        },
+        {
+          "label": "真实MCP调用",
+          "url": "docs/showcase/prism-tide/evidence/mcp-calls.json"
+        },
+        {
+          "label": "原生CI与源文件绑定",
+          "url": "docs/showcase/prism-tide/evidence/ci-verification.json"
+        },
+        {
+          "label": "实际键鼠结果",
+          "url": "docs/showcase/prism-tide/evidence/interaction-result.json"
+        },
+        {
+          "label": "机器可读验证",
+          "url": "docs/showcase/prism-tide/validation.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/prism-tide/manifest.json"
+        },
+        {
+          "label": "许可与来源",
+          "url": "docs/showcase/prism-tide/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创代码MIT；原创视觉设计与原生图像/影片CC BY 4.0，详见LICENSES.md。",
+        "note": "全部原创程序化图形，无第三方素材。软件、插件和字体文件未随工程分发。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/tree/f7b0b52aac4dc607c1b1bb0826a18243930c0f0f/tests/fixtures/prism-tide",
+        "commit": "f7b0b52aac4dc607c1b1bb0826a18243930c0f0f",
+        "title": "已验证原生fixture源文件"
+      },
+      "verified_at": "2026-10-11T16:15:20Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "策划阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "制作阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "代码阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "参考阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "媒体处理阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "视觉审查阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "技术审查阶段；原创程序化解谜与原生验收"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生光路解谜",
+          "date": "2026-10-11",
+          "change": "真实MCP制作；实际键鼠三关通关；修正反射术语并重新出图，包含小窗口、原生ZIP与PCK重开证据。"
+        }
+      ]
     }
   ]
 }
