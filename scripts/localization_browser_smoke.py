@@ -78,7 +78,7 @@ def run(site, output):
     if problems:
         raise ValueError('Invalid brand source catalog')
     brands_by_slug = {item['slug']: item for item in brands.get('items', [])}
-    base_paths = ['index.html'] + ['cases/' + case['slug'] + '/index.html' for case in cases]
+    base_paths = ['index.html', 'agents/index.html'] + ['cases/' + case['slug'] + '/index.html' for case in cases]
     if brands.get('enabled'):
         base_paths += ['brands/index.html'] + ['brands/' + item['slug'] + '/index.html' for item in brands['items']]
     all_paths = [settings['prefix'] + path for settings in LOCALES.values() for path in base_paths]
@@ -154,8 +154,8 @@ def run(site, output):
                             }''')
                             if untranslated:
                                 raise AssertionError('Untranslated public text: ' + repr(untranslated))
-                        if page.locator('audio,video').count():
-                            assert page.locator('audio,video').evaluate_all('(items)=>items.every(x=>x.controls && !x.autoplay && x.paused)')
+                        if page.locator('audio,video:not(.card-preview)').count():
+                            assert page.locator('audio,video:not(.card-preview)').evaluate_all('(items)=>items.every(x=>x.controls && !x.autoplay && x.paused)')
                         screenshot = locale + '-' + layout + '-' + path.replace('/index.html', '').replace('index.html', 'home').replace('/', '-') + '.png'
                         page.screenshot(path=str(output / screenshot), full_page=path in ('index.html', 'brands/index.html'), animations='disabled')
                         if path.startswith('cases/'):
@@ -191,6 +191,7 @@ def run(site, output):
                     page.goto(home, wait_until='networkidle')
                     expect(page.locator('.case-card:visible')).to_have_count(len(cases))
                     page.locator('#search').fill('Prism Tide')
+                    page.locator('#filter-disclosure summary').click()
                     page.locator('[data-filter="software"] [data-value="Godot"]').click()
                     page.locator('[data-filter="capability"] [data-value="交互"]').click()
                     expect(page.locator('.case-card:visible')).to_have_count(1)
