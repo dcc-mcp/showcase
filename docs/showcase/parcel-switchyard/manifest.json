@@ -10,14 +10,19 @@
       "sha256": "086443237f8b78d5da45b990526cb1ef999d408fdaa8274186d6d1f51d8d08b3"
     },
     {
+      "path": "evidence/initial-script.gd.txt",
+      "bytes": 14310,
+      "sha256": "b5411376f267db401931b8e80920c63d9f38c72e9a407164b90f330ef6d1fa99"
+    },
+    {
       "path": "evidence/logic-tests.json",
       "bytes": 915,
       "sha256": "65b610218639a3a29a72eebe99f3822135d1781995aea4321e7035cc286ec0be"
     },
     {
       "path": "evidence/mcp-calls.json",
-      "bytes": 9201,
-      "sha256": "cbe0a62f3a1c96b408af573f46ee28f2bced97fc7fb56fde1df7e720c72bbdb7"
+      "bytes": 10615,
+      "sha256": "4a588e5a049a5c71e00d68c3041e146d0b4ed7b78d4b8ac9dd7beee1a2be8ba2"
     },
     {
       "path": "native/export_presets.cfg",
@@ -31,8 +36,13 @@
     },
     {
       "path": "native/parcel_game.gd",
-      "bytes": 15298,
-      "sha256": "5b1c8c43b0c9a19a1d420f27a3180393be226a24581c8e4dd8ae4d8bdc9849b1"
+      "bytes": 15991,
+      "sha256": "2152b8f6bcbbe2a3cf6b71c70457953236267ea53f427ae4a608a39792c50b50"
+    },
+    {
+      "path": "native/parcel_game.gd.uid",
+      "bytes": 20,
+      "sha256": "8e7de9f6fe226d59f5a0d1de9f50210388b2220c50dde83a6c4c77aa14da9c72"
     },
     {
       "path": "native/project.godot",

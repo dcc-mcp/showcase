@@ -26,6 +26,8 @@ var sparks: Array[Dictionary] = []
 var notice := "All tracks clear. Let's make a good delivery."
 var notice_time := 0.0
 var demo_mode := false
+var observe_input := false
+var capture_path := ""
 var send_rect := Rect2(961, 509, 258, 50)
 var auto_rect := Rect2(1049, 108, 183, 32)
 
@@ -37,6 +39,7 @@ func _ready() -> void:
 	if "--test" in args:
 		get_tree().quit(0 if _run_tests() else 1)
 		return
+	observe_input = "--observe-input" in args
 	demo_mode = "--demo" in args
 	if demo_mode:
 		selected = 1
@@ -48,6 +51,8 @@ func _ready() -> void:
 		selected = 2
 		auto_send = true
 	for argument in args:
+		if argument.begins_with("--capture-path="):
+			capture_path = argument.trim_prefix("--capture-path=")
 		if argument.begins_with("--screenshot="):
 			_capture(argument.trim_prefix("--screenshot="))
 
@@ -71,6 +76,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_SPACE: _dispatch()
 			KEY_A: auto_send = not auto_send
 			KEY_R: _reset()
+			KEY_F12:
+				if not capture_path.is_empty(): _capture(capture_path)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var cursor := get_local_mouse_position()
 		for i in range(3):
@@ -78,7 +85,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				selected = i
 		if send_rect.has_point(cursor): _dispatch()
 		if auto_rect.has_point(cursor): auto_send = not auto_send
+	if observe_input and ((event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed)):
+		_report_state("input")
 	queue_redraw()
+
+func _report_state(kind: String) -> void:
+	print("PARCEL_RUNTIME_STATE " + JSON.stringify({"event": kind, "selected": selected, "auto": auto_send, "sent": sent, "delivered": delivered, "missed": missed, "active": parcels.size()}))
 
 func _process(delta: float) -> void:
 	_advance(minf(delta, 0.1))
@@ -126,6 +138,7 @@ func _deliver(target: int, route: int) -> void:
 		notice = "Wrong stop. Match the parcel's label to its destination."
 	notice_time = 2.0
 	sparks.append({"at": ENDPOINTS[route], "life": 0.75, "correct": correct})
+	if observe_input: _report_state("delivery")
 
 func _reset() -> void:
 	selected = 1
@@ -246,7 +259,7 @@ func _draw() -> void:
 	_line(Vector2(49, 62), Vector2(66, 46), TEAL, 3)
 	_line(Vector2(58, 62), Vector2(66, 54), GOLD, 3)
 	_txt(Vector2(91, 51), "SMALL WORKS / INTERACTIVE SERIES", 12)
-	_txt(Vector2(91, 70), "NO. 008     •     A LITTLE GAME ABOUT GETTING THERE", 11, Color("60756e"))
+	_txt(Vector2(91, 70), "SHIFT 01     •     A LITTLE GAME ABOUT GETTING THERE", 11, Color("60756e"))
 	_txt(Vector2(40, 119), "Parcel Switchyard", 41)
 	_txt(Vector2(432, 116), "A good day starts with the right turn.", 17, Color("60756e"))
 	_rr(auto_rect, INK if auto_send else Color("e3e3d5"), 16)
@@ -258,8 +271,8 @@ func _draw() -> void:
 	for x in range(65, 904, 26):
 		for y in range(191, 563, 26): draw_circle(Vector2(x, y), 1.0, Color("2d474d"))
 	_txt(Vector2(66, 203), "THE SORTING FLOOR", 12, PAPER)
-	draw_circle(Vector2(785, 198), 3, TEAL)
-	_txt(Vector2(797, 203), "LIVE SHIFT", 11, MUTED)
+	draw_circle(Vector2(625, 198), 3, TEAL)
+	_txt(Vector2(637, 203), "LIVE SHIFT", 11, MUTED)
 	_txt(Vector2(75, 240), "INTAKE  A", 11, MUTED)
 	_txt(Vector2(75, 525), "INTAKE  B", 11, MUTED)
 	for lane in range(2): _belt(_incoming(lane), Color("80998e"), true)

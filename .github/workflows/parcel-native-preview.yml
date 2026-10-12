@@ -2,8 +2,9 @@ name: Parcel native preview
 on:
   pull_request:
     paths:
-      - 'docs/showcase/parcel-switchyard/**'
+      - 'docs/showcase/parcel-switchyard/native/**'
       - '.github/workflows/parcel-native-preview.yml'
+      - 'scripts/parcel_input_smoke.sh'
 permissions:
   contents: read
 jobs:
@@ -22,7 +23,7 @@ jobs:
           unzip -q "$RUNNER_TEMP/godot.zip" -d "$RUNNER_TEMP/godot"
           echo "$RUNNER_TEMP/godot" >> "$GITHUB_PATH"
           sudo apt-get update -qq
-          sudo apt-get install -y xvfb ffmpeg libgl1-mesa-dri
+          sudo apt-get install -y xvfb ffmpeg xdotool libgl1-mesa-dri
       - name: Reopen and test native project
         run: |
           mkdir -p "$RUNNER_TEMP/parcel-preview"
@@ -44,6 +45,13 @@ jobs:
           ffprobe -v quiet -print_format json -show_streams "$O/demo.mp4" > "$O/video-info.json"
           printf '%s\n' '${{ github.event.pull_request.head.sha }}' > "$O/source-commit.txt"
           sha256sum "$P"/*.gd "$P"/*.tscn "$P"/project.godot > "$O/source-hashes.txt"
+      - name: Verify real keyboard and mouse interaction
+        run: |
+          G=Godot_v4.6.3-stable_linux.x86_64
+          P=docs/showcase/parcel-switchyard/native
+          O="$RUNNER_TEMP/parcel-preview"
+          timeout 60 xvfb-run -a -s '-screen 0 1280x720x24' bash scripts/parcel_input_smoke.sh "$G" "$P" "$O"
+          timeout 30 xvfb-run -a -s '-screen 0 1280x720x24' "$G" --path "$P" --audio-driver Dummy --resolution 960x540 --quit-after 30 -- --demo --screenshot="$O/small-window.png" > "$O/small-window.log" 2>&1
       - name: Export and reopen resource package
         run: |
           G=Godot_v4.6.3-stable_linux.x86_64

@@ -299,6 +299,54 @@
         "control_route": "gateway",
         "gateway_stats_recorded": true
       }
+    },
+    {
+      "arguments": {
+        "path": "res://parcel_game.gd",
+        "source_sha256": "882650bb3d810ab55715c8539864226eb737a3075b9703fceca49b5fe56fe91a"
+      },
+      "response": {
+        "slug": "godot_script__edit_script",
+        "output": {
+          "success": true,
+          "message": "Godot action edit_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "bytes": 15299,
+            "path": "res://parcel_game.gd",
+            "written": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-373-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "arguments": {
+        "path": "res://parcel_game.gd",
+        "source_sha256": "2152b8f6bcbbe2a3cf6b71c70457953236267ea53f427ae4a608a39792c50b50"
+      },
+      "response": {
+        "slug": "godot_script__edit_script",
+        "output": {
+          "success": true,
+          "message": "Godot action edit_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "bytes": 15991,
+            "path": "res://parcel_game.gd",
+            "written": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-372-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
     }
   ]
 }

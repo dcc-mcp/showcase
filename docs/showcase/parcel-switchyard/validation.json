@@ -85,7 +85,7 @@
       "name": "typed_mcp_authoring",
       "result": "pass",
       "observed": {
-        "authoring_calls": 9,
+        "authoring_calls": 11,
         "control_route": "gateway"
       }
     },
@@ -94,6 +94,17 @@
       "result": "fail",
       "expected": "windowed pixel capture",
       "observed": "Xorg Unix socket setup blocked; typed preview correctly refused headless dummy renderer"
+    },
+    {
+      "name": "portable_pack_reopen",
+      "result": "pass",
+      "observed": {
+        "exit_code": 0,
+        "all_logic_tests_pass": true,
+        "package_type": "Godot PCK",
+        "first_export_warning": "Missing script UID fell back to valid text path; original UID sidecar restored for next run",
+        "uid_sidecar_repaired": true
+      }
     }
   ],
   "not_claimed": [
