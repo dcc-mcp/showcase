@@ -3085,6 +3085,262 @@
           "change": "Original native vector creation and assembly film; proportional detail crop verified."
         }
       ]
+    },
+    {
+      "slug": "parcel-switchyard",
+      "title": "Parcel Switchyard · 包裹转辙场",
+      "subtitle": "Godot · 双进料轨道与三站点互动分拣",
+      "software": [
+        "Godot"
+      ],
+      "capabilities": [
+        "交互",
+        "游戏原型",
+        "程序化绘制",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/parcel-switchyard/hero.png",
+        "alt": "Godot实际运行画面：奶油色操作面板、深蓝分拣场、三色目的地与包裹输送轨道"
+      },
+      "evidence_label": "真实 typed MCP 制作 · 原生像素与输入验证",
+      "evidence_scope": "原生脚本、场景、挂载与项目设置由实际 typed Gateway 调用完成。云端本机 headless 可制作及逻辑验证，但不能渲染；真实画面与视频来自固定官方 Godot 的 CI/Xvfb 原生运行。包含实际键鼠输入、保存重开、PCK 导出重跑。没有把 CI 媒体生成描述为 MCP 渲染返回。",
+      "summary": "一个克制、温暖的微型包裹分拣游戏：从两条进料带发送包裹，在港口、花园和市场之间选对路线。保留可编辑工程、实际调用证据、短片与资源包。",
+      "goal": "验证 Godot typed MCP 能否把原创可互动构想变成可保存、重开、测试与打包的原生工程，并严格区分制作证据、渲染环境和真实输入验收。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "在干净的 Godot 工程里制作原创包裹分拣小游戏。用两条进料轨道、一个转辙器和三个带文字标签的目的地建立清晰玩法。提供键盘与鼠标操作、正确与错误计数、自动发送和重置。采用原创程序化图形，不引入私有项目或外部素材。先发现、加载、描述真实 typed DCC-MCP 工具，再创建脚本、场景、挂载并保存。保留请求响应、原生工程、编译与逻辑测试、实际画面、键鼠验收和打包重跑证据；如 headless 渲染拒绝应如实记录。",
+        "note": "根据本次实际工作整理的复现说明，不是用户私聊逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "宿主",
+          "value": "Godot 4.6.3 · Linux x86_64"
+        },
+        {
+          "label": "适配器 / Core / CLI",
+          "value": "dcc-mcp-godot 0.9.6 · Core / CLI 0.20.42"
+        },
+        {
+          "label": "真实渲染",
+          "value": "CI/Xvfb · Compatibility OpenGL · Mesa llvmpipe"
+        },
+        {
+          "label": "媒体",
+          "value": "1280 × 720 · 8 秒 · H.264 · 30 fps"
+        }
+      ],
+      "tools": [
+        {
+          "name": "godot_script__create_script / edit_script / attach_script",
+          "description": "通过真实 gateway 写入原创 GDScript、修订并挂到原生场景。"
+        },
+        {
+          "name": "godot_scene_management__create_scene / save_scene",
+          "description": "创建 Node2D 原生场景并持久保存。"
+        },
+        {
+          "name": "godot_project_management__set_project_setting",
+          "description": "设置主场景、窗口尺寸与渲染模式。"
+        },
+        {
+          "name": "godot_script__validate_script",
+          "description": "实际宿主编译检查；最终逻辑另由原生运行重新验证。"
+        },
+        {
+          "name": "godot_editor__render_scene_preview",
+          "description": "在本机 headless 环境真实拒绝，不把失败包成成功。后续像素由正常图形 CI 运行取得。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先让分拣规则可检查",
+          "description": "确定性测试涵盖三个站点、错分反馈、满载边界、键盘路线、自动开关与重复重置。"
+        },
+        {
+          "title": "真实调用创建原生工程",
+          "description": "脚本、场景、挂载、保存和项目设置均保留 typed gateway 请求响应。可移植副本移除适配器安装信息，不冒充再次 MCP 制作。"
+        },
+        {
+          "title": "审查真实像素再修订",
+          "description": "首轮发现港口标签与状态文字靠得太近，经 MCP 修正后重新捕获。保留固定尺寸和小窗口画面，区分布局拟合与手机可用性。",
+          "image": {
+            "src": "docs/showcase/parcel-switchyard/small-window.png",
+            "alt": "真实960×540 Godot小窗口画面；完整布局可见，小字仍以桌面为目标"
+          }
+        },
+        {
+          "title": "真正操作并重新打包",
+          "description": "真实X11键盘和鼠标路线完成两次配送、重复重置、自动开关与第三路线选择；PCK资源包重新启动后通过逻辑检查。",
+          "image": {
+            "src": "docs/showcase/parcel-switchyard/interaction.png",
+            "alt": "实际键盘与鼠标操作后的Godot画面，配送计数为二"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/parcel-switchyard/demo.mp4",
+          "alt": "Parcel Switchyard原生8秒演示",
+          "caption": "Godot Movie Maker实际输出，随后转为H.264。无配音、无音轨；自动演示展示轨道、包裹和计数变化。"
+        },
+        {
+          "src": "docs/showcase/parcel-switchyard/hero.png",
+          "alt": "最终原生分拣场静帧",
+          "caption": "未修图的Godot viewport捕获；状态文字与港口标签已分离。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实 MCP 制作",
+          "result": "pass",
+          "observed": "11条成功typed制作调用，含源脚本、挂载、保存、设置及视觉修订；保留真实返回。"
+        },
+        {
+          "name": "原生逻辑与实际输入",
+          "result": "pass",
+          "observed": "9项确定性逻辑检查；真实键鼠路径完成两次配送、重复重置与自动开关。"
+        },
+        {
+          "name": "原生重开与导出",
+          "result": "pass",
+          "observed": "Godot编辑器重新导入、原生运行、PCK导出及资源包再运行通过。"
+        },
+        {
+          "name": "本机 headless 渲染",
+          "result": "fail",
+          "observed": "dummy renderer 无像素回读，官方 typed 预览按设计拒绝；CI图形运行另行验证。"
+        },
+        {
+          "name": "视觉与小窗口",
+          "result": "pass",
+          "observed": "审查实际最终静帧、交互帧、小窗口与视频采样帧；修复首轮标签重叠。小窗口检查只证明布局完整。"
+        }
+      ],
+      "limitations": [
+        "面向桌面1280×720；960×540检查不代表手机小字可读或触屏玩法已验收。",
+        "未导出Web版本；PCK需要兼容的Godot可执行程序，不是独立安装包。",
+        "美术由可编辑GDScript程序化绘制，并非逐物件可编辑的场景网格。",
+        "本机headless制作与CI原生渲染是不同验证阶段；没有伪造MCP渲染成功。"
+      ],
+      "resources": [
+        {
+          "label": "原生工程 ZIP",
+          "url": "docs/showcase/parcel-switchyard/Parcel-Switchyard-Source.zip"
+        },
+        {
+          "label": "Godot资源包 PCK",
+          "url": "docs/showcase/parcel-switchyard/parcel.pck"
+        },
+        {
+          "label": "制作与复现说明",
+          "url": "docs/showcase/parcel-switchyard/README.md"
+        },
+        {
+          "label": "实际MCP请求与响应",
+          "url": "docs/showcase/parcel-switchyard/evidence/mcp-calls.json"
+        },
+        {
+          "label": "CI与源文件绑定证据",
+          "url": "docs/showcase/parcel-switchyard/evidence/ci-verification.json"
+        },
+        {
+          "label": "机器可读验证",
+          "url": "docs/showcase/parcel-switchyard/validation.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/parcel-switchyard/manifest.json"
+        },
+        {
+          "label": "许可边界",
+          "url": "docs/showcase/parcel-switchyard/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "本案例素材与工程不随站点MIT重新许可；没有新增CC0或版权授权。详见LICENSES.md。",
+        "note": "原创程序化画面；无私有项目、第三方素材包或外部图像。Godot与适配器不打包分发。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/showcase/tree/c80c3df08e45e14270e0432477599c90b07887d4/docs/showcase/parcel-switchyard/native",
+        "commit": "c80c3df08e45e14270e0432477599c90b07887d4",
+        "title": "实际CI验证的原生源文件版本"
+      },
+      "verified_at": "2026-10-11T14:23:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "原创分拣玩法与界面规划"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "原生制作",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "实际typed MCP写入和场景保存"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "玩法、绘制、测试与输入观测"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考输入",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "无外部参考图生成，原创程序化构图"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "Godot原生帧与FFmpeg H.264编码"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "实际图像与视频采样审查；含父线程独立像素复核"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "源文件哈希、真实调用和测试结果审查"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生互动作品",
+          "date": "2026-10-11",
+          "change": "由真实typed MCP创建；修复像素审查发现的标签重叠，补齐真实键鼠、原生短片和资源包重开验证。"
+        }
+      ]
     }
   ]
 }

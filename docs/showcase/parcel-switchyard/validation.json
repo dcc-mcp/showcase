@@ -11,7 +11,16 @@
     "incoming_lanes": 2,
     "destinations": 3,
     "capacity": 6,
-    "render_validation": "pending CI native capture"
+    "render_validation": "real native frames captured and visually reviewed",
+    "ci_native_source_commit": "c80c3df08e45e14270e0432477599c90b07887d4",
+    "ci_native_run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38146693195",
+    "render_engine": "Godot Compatibility / OpenGL / Mesa llvmpipe",
+    "capture_frames": 240,
+    "capture_fps": 30,
+    "video_duration_s": 8,
+    "small_viewport_width_px": 960,
+    "small_viewport_height_px": 540,
+    "visual_review": "Creator and independent parent inspected final hero and real-input screenshot; passed."
   },
   "checks": [
     {
@@ -105,14 +114,84 @@
         "first_export_warning": "Missing script UID fell back to valid text path; original UID sidecar restored for next run",
         "uid_sidecar_repaired": true
       }
+    },
+    {
+      "name": "native_pixel_capture",
+      "result": "pass",
+      "observed": {
+        "width_px": 1280,
+        "height_px": 720,
+        "frames": 240,
+        "duration_s": 8,
+        "source_commit": "c80c3df08e45e14270e0432477599c90b07887d4"
+      }
+    },
+    {
+      "name": "native_mouse_keyboard",
+      "result": "pass",
+      "observed": {
+        "keyboard_dispatch": true,
+        "mouse_route_dispatch": true,
+        "two_real_time_deliveries": true,
+        "repeated_keyboard_reset": true,
+        "mouse_auto_toggle": true,
+        "mouse_market_route": true
+      }
+    },
+    {
+      "name": "native_pack_reopen_ci",
+      "result": "pass",
+      "observed": {
+        "all_logic_tests_pass": true,
+        "source_commit": "c80c3df08e45e14270e0432477599c90b07887d4"
+      }
+    },
+    {
+      "name": "visual_review",
+      "result": "pass",
+      "observed": "Actual hero, runtime interaction frame, smaller window and video frame sampling inspected. Initial Harbor/status overlap corrected; final labels separated."
+    },
+    {
+      "name": "source_archive",
+      "result": "pass",
+      "observed": {
+        "member_count": 8,
+        "safe_relative_paths": true,
+        "integrity": true
+      }
+    },
+    {
+      "name": "extracted_archive_native_reopen",
+      "result": "pass",
+      "observed": {
+        "exit_code": 0,
+        "all_logic_tests_pass": true,
+        "warnings": 0
+      }
     }
   ],
   "not_claimed": [
-    "Visual quality and pixel captures pending native CI rendering.",
-    "Mouse interaction not tested.",
-    "Packaged executable and browser export not verified.",
-    "Headless mode cannot render this scene.",
-    "Art is editable GDScript, not individual art nodes.",
-    "Model identity and reasoning configuration not independently verified."
-  ]
+    "Touch/mobile gameplay and browser export have not been verified.",
+    "The desktop game is designed for a 1280 by 720 viewport; the 960 by 540 check establishes layout fit, not small-text usability on a phone.",
+    "The PCK needs a compatible Godot executable; no standalone executable or application binary is bundled.",
+    "Headless authoring is verified; headless rendering remains unavailable. CI native rendering is direct Godot execution, not a fabricated MCP render return.",
+    "Art is procedural editable GDScript, not a hierarchy of individually editable scene meshes.",
+    "Exact model identity and reasoning configuration are unverified and recorded as unknown."
+  ],
+  "counts": {
+    "native_scene_nodes": 1,
+    "source_scripts": 1,
+    "incoming_lanes": 2,
+    "destination_routes": 3,
+    "max_active_parcels": 6,
+    "logic_checks": 9,
+    "runtime_input_checks": 6,
+    "typed_authoring_calls": 11
+  },
+  "geometry": {
+    "canvas_dims_px": [
+      1280,
+      720
+    ]
+  }
 }

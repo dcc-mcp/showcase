@@ -1,0 +1,124 @@
+{
+  "source_commit": "c80c3df08e45e14270e0432477599c90b07887d4",
+  "artifact_sha256": "9c50dac6c5fb0bfe2122bac823cfaa940e08fc80957454e2c63279e6aabdce24",
+  "workflow_run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38146693195",
+  "native_source_hashes": {
+    "native/parcel_game.gd.uid": "8e7de9f6fe226d59f5a0d1de9f50210388b2220c50dde83a6c4c77aa14da9c72",
+    "native/export_presets.cfg": "52553020b4ebe524cfe6a15ecd53012c40247b86c1c81dafc70e10e483f4afd6",
+    "native/project.godot": "defd919015021299f76d3aaf68d54feb06c93f4dbf8b458c5a2252b58487cb7b",
+    "native/main.tscn": "963b36af8d096fa47e7557cf3cb0199e946bafc5f48da7e6a6ed5fe2f7da5047",
+    "native/parcel_game.gd": "2152b8f6bcbbe2a3cf6b71c70457953236267ea53f427ae4a608a39792c50b50"
+  },
+  "logic_report": {
+    "checks": [
+      {
+        "delivered": 3,
+        "missed": 0,
+        "name": "three_destinations",
+        "pass": true,
+        "streak": 3
+      },
+      {
+        "missed": 1,
+        "name": "wrong_route",
+        "pass": true,
+        "streak": 0
+      },
+      {
+        "active": 6,
+        "attempts": 8,
+        "name": "capacity_boundary",
+        "pass": true,
+        "sent": 6
+      },
+      {
+        "name": "keyboard_route_1",
+        "pass": true,
+        "selected": 0
+      },
+      {
+        "name": "keyboard_route_2",
+        "pass": true,
+        "selected": 1
+      },
+      {
+        "name": "keyboard_route_3",
+        "pass": true,
+        "selected": 2
+      },
+      {
+        "name": "auto_enable",
+        "pass": true
+      },
+      {
+        "name": "auto_disable",
+        "pass": true
+      },
+      {
+        "active": 0,
+        "delivered": 0,
+        "missed": 0,
+        "name": "repeated_reset",
+        "pass": true,
+        "sent": 0
+      }
+    ],
+    "passed": true
+  },
+  "pack_report": {
+    "checks": [
+      {
+        "delivered": 3,
+        "missed": 0,
+        "name": "three_destinations",
+        "pass": true,
+        "streak": 3
+      },
+      {
+        "missed": 1,
+        "name": "wrong_route",
+        "pass": true,
+        "streak": 0
+      },
+      {
+        "active": 6,
+        "attempts": 8,
+        "name": "capacity_boundary",
+        "pass": true,
+        "sent": 6
+      },
+      {
+        "name": "keyboard_route_1",
+        "pass": true,
+        "selected": 0
+      },
+      {
+        "name": "keyboard_route_2",
+        "pass": true,
+        "selected": 1
+      },
+      {
+        "name": "keyboard_route_3",
+        "pass": true,
+        "selected": 2
+      },
+      {
+        "name": "auto_enable",
+        "pass": true
+      },
+      {
+        "name": "auto_disable",
+        "pass": true
+      },
+      {
+        "active": 0,
+        "delivered": 0,
+        "missed": 0,
+        "name": "repeated_reset",
+        "pass": true,
+        "sent": 0
+      }
+    ],
+    "passed": true
+  }
+}

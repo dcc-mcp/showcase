@@ -12,9 +12,9 @@ case's software adapter linked from the site. The official site's broader
 [examples](https://dcc-mcp.github.io/examples) remain distinct from the
 collection's downloadable, individually documented case records.
 
-The collection currently contains eight individually documented cases: a Houdini
+The collection currently contains nine individually documented cases: a Houdini
 vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
-Relay, Seismic Lens, Orbit Post Office and Trail & Air. Each page separates original production from later
+Relay, Seismic Lens, Orbit Post Office, Trail & Air and Parcel Switchyard. Each page separates original production from later
 visual/technical review. Historical exact models and reasoning effort remain
 unknown where production records did not capture them; a later review
 does not establish the attribution of earlier artwork. The existing review
@@ -76,7 +76,7 @@ not substitute for browser acceptance.
 ## Brand gallery
 
 The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
-selects resources without changing the eight-case collection. The first core
+selects resources without changing the nine-case collection. The first core
 release contains eight verified files. Incremental batches add Maya,
 3ds Max, Blender, Houdini, ZBrush, Photoshop, MotionBuilder, Nuke and OpenUSD
 families with 16 files each, plus three actual core currentColor SVGs:
@@ -211,3 +211,7 @@ release; a green check is not artistic approval. This workflow does not deploy.
 ## Orbit Post Office revision
 
 The current GIMP → Godot → Kdenlive case publishes the station/worlds artwork, separate eight-letter gameplay evidence and the seven-second first-delivery film. Current game/art/film native projects are not publicly downloadable. The unchanged v1 ZIP is explicitly the historical icon prototype. Its earlier failure records remain available; recovery checks and recorded native runs are kept separate.
+
+## Parcel Switchyard
+
+An original Godot parcel sorter, authored through typed DCC-MCP with native source, real keyboard/mouse tests, actual Godot CI captures and PCK replay. The [case report](docs/showcase/parcel-switchyard/README.md) distinguishes local headless rendering failure from successful windowed CI verification. Artwork and native source retain the case-specific rights notice.
