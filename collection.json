@@ -3277,7 +3277,7 @@
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
-        "license": "原创代码、界面和合成音频 MIT；软件和默认字体遵循各自许可证。",
+        "license": "Original source and test code, visual design, native assets and media: rights reserved; no new MIT, Creative Commons or other license grant. Existing site-code MIT and third-party licenses remain separate.",
         "note": "不含第三方采样、软件二进制、账号资料或私有素材。"
       },
       "source": {
