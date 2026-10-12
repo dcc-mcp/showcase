@@ -9,14 +9,14 @@ from pathlib import Path
 import threading
 from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright, expect
-from browser_preview import RangeRequestHandler
+from browser_preview import QuietHandler
 
 p = argparse.ArgumentParser()
 p.add_argument('--site', type=Path, required=True)
 p.add_argument('--output', type=Path, required=True)
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=True)
-server = ThreadingHTTPServer(('127.0.0.1', 0), partial(RangeRequestHandler, directory=str(a.site)))
+server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(a.site)))
 threading.Thread(target=server.serve_forever, daemon=True).start()
 origin = 'http://127.0.0.1:' + str(server.server_port)
 report = {'head_sha': os.environ.get('EXPECTED_HEAD_SHA'), 'layouts': []}
