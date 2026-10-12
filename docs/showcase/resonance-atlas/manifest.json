@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "application": "Inkscape",
+  "version": "1.4.4",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 1348,
+      "sha256": "956c92864202fc97d42df7dabf95962241b96d73aa5fa363b4fae7a1cf1a8650"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2544,
+      "sha256": "c6dd0409ee02b75a871362937d53a430fa2a58f9b990c639154e283f9332a1af"
+    },
+    {
+      "path": "compose_video.py",
+      "bytes": 3444,
+      "sha256": "92fad12249b1631d4d0b322d0f78a6cd74d0bbf95e482735bac7b59fed8b2129"
+    },
+    {
+      "path": "generate_plans.py",
+      "bytes": 5183,
+      "sha256": "324c83f6f97edd5f4bf1616133ce4b8c2456bc924ebf2b3de17eb8298a7504ef"
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 286803,
+      "sha256": "9be7925456be4400af71d7c00d7658be2ea4e08a415242908195c302422b536b",
+      "width": 1480,
+      "height": 660,
+      "bit_depth": 8
+    },
+    {
+      "path": "mcp-summary.json",
+      "bytes": 3181,
+      "sha256": "62ed72e9b5b979464f70f3a00577d4ce85d973dffb4db643ee9e11cba0bf013d"
+    },
+    {
+      "path": "native-png-exports.zip",
+      "bytes": 3933862,
+      "sha256": "dd37a0b6bce84201f6df84da1a09dcb336e209fd88ee7bbbad8c60e56c9726a4"
+    },
+    {
+      "path": "poster-1-outlined.svg",
+      "bytes": 459449,
+      "sha256": "e42d5c54443b12c2c826188ced0db9cd680a074190c44b8618c04e5821371c64"
+    },
+    {
+      "path": "poster-1.jpg",
+      "bytes": 593595,
+      "sha256": "f0031b3a680a13b3a9c79a96663e0e30fb3f3ac9be23fae6041dc986786a0b8b",
+      "width": 1587,
+      "height": 2116,
+      "bit_depth": 8
+    },
+    {
+      "path": "poster-1.pdf",
+      "bytes": 205937,
+      "sha256": "c094b0d79416090b817093ede98d0b5b6b95c2941f0cd0b297911e30b0896136"
+    },
+    {
+      "path": "poster-1.svg",
+      "bytes": 393892,
+      "sha256": "83cb7743a971c2396a7fc97c6ff4d8c739c28d8eb819152223dd5c545c63971d"
+    },
+    {
+      "path": "poster-2-outlined.svg",
+      "bytes": 91843,
+      "sha256": "3dd797ea8b0f1991744e5e78325116768586938e631bbe0ce9f9d2b251ca560c"
+    },
+    {
+      "path": "poster-2.jpg",
+      "bytes": 436433,
+      "sha256": "0f676d229584f79f997e24fc44c9718812bc806e0c7da719603d8fc6e5d731cd",
+      "width": 1587,
+      "height": 2116,
+      "bit_depth": 8
+    },
+    {
+      "path": "poster-2.pdf",
+      "bytes": 102811,
+      "sha256": "66a4cb2185701526bd86ddfb7efcdbe628c5c363c54306c38ac9743b5bbad6bb"
+    },
+    {
+      "path": "poster-2.svg",
+      "bytes": 17932,
+      "sha256": "ddb5ce261c3b3aedab5b7ba1b6443773b996ef4fe41cc475afc00ca8a1fca468"
+    },
+    {
+      "path": "poster-3-outlined.svg",
+      "bytes": 320416,
+      "sha256": "17bf1581ec3ddcf688efb48bec4277e07951ba802b8b4c2ff9ffe576022aab77"
+    },
+    {
+      "path": "poster-3.jpg",
+      "bytes": 406934,
+      "sha256": "1e4f22db5d379213235c1a68a067c43d7ee46910ced0919da3eb50245bbc4d46",
+      "width": 1587,
+      "height": 2116,
+      "bit_depth": 8
+    },
+    {
+      "path": "poster-3.pdf",
+      "bytes": 199490,
+      "sha256": "124ee5156d1d78ba3995012d8c6b054f9b3a9f8f8f5f12f7c209405c445cd175"
+    },
+    {
+      "path": "poster-3.svg",
+      "bytes": 244377,
+      "sha256": "eac155a4680b9c99ef01cbeb9d7bfb0db740457ad7ae36f3f8ac3c67b626a4dd"
+    },
+    {
+      "path": "resonance-atlas.mp4",
+      "bytes": 3319412,
+      "sha256": "4137108965c1da499e11cb35e4dff95eef2e1ae9c0a1e2ddededca22cdd27001",
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 12,
+      "fps": 24
+    },
+    {
+      "path": "validation.json",
+      "bytes": 3033,
+      "sha256": "3725bc6eebdaa3b2c15cea03c0401d557aa6123d2a185e7e889575fe8f06cb14"
+    },
+    {
+      "path": "video-validation.json",
+      "bytes": 2154,
+      "sha256": "fa2b27446f81c50e64e77ef97e69014893e902fa2e77783dbc6425292f4fbcd3"
+    }
+  ]
+}
