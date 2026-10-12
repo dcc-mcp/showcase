@@ -3534,7 +3534,7 @@
       ],
       "credits": {
         "author": "DCC-MCP showcase contributors",
-        "license": "原创代码MIT；原创视觉设计与原生图像/影片CC BY 4.0，详见LICENSES.md。",
+        "license": "Original source and test code, visual design, native assets and media: rights reserved; no new MIT, Creative Commons or other license grant. Existing site-code MIT and third-party licenses remain separate.",
         "note": "全部原创程序化图形，无第三方素材。软件、插件和字体文件未随工程分发。"
       },
       "source": {
