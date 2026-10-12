@@ -294,6 +294,43 @@ def verify_scored_video(page, context, case, origin, output, layout, active_cont
     video.locator("..").screenshot(path=str(output/name), animations="disabled")
     return {"layout":layout,"case_slug":slug,"duration_seconds":actual["duration"],"width":actual["width"],"height":actual["height"],"keyboard_play_and_pause":True,"autoplay":False,"served_sha256":qa["scored_sha256"],"screenshot":name,"sha256":hashlib.sha256((output/name).read_bytes()).hexdigest()}
 
+def verify_resonance_video(page, context, case, origin, output, layout, active_context):
+    """Exercise the original silent Resonance assembly film without replacing original-film checks."""
+    from playwright.sync_api import expect
+    slug = case["slug"]
+    progress(active_context, "resonance_film_metadata")
+    page.get_by_role("link", name="成果", exact=True).click()
+    video = page.locator('#results video:has(source[src$="' + slug + '.mp4"])')
+    expect(video).to_have_count(1)
+    video.scroll_into_view_if_needed()
+    expect(video).to_be_visible()
+    expect(video).to_have_js_property("controls", True)
+    expect(video).to_have_js_property("autoplay", False)
+    expect(video).to_have_js_property("paused", True)
+    video.evaluate("v => v.load()")
+    page.wait_for_function("slug => document.querySelector('#results video:has(source[src$=\"' + slug + '.mp4\"])').readyState >= 1", arg=slug, timeout=15000)
+    manifest = json.loads(fetch_public_file(context.request, origin, "docs/showcase/" + slug + "/manifest.json"))
+    item = next(row for row in manifest["files"] if row["path"] == slug + ".mp4")
+    qa = {"video_seconds":12, "video_width":1280, "video_height":720, "scored_sha256":item["sha256"]}
+    actual = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
+    if abs(actual["duration"] - qa["video_seconds"]) > .06 or actual["width"] != qa["video_width"] or actual["height"] != qa["video_height"]:
+        raise AssertionError("Resonance media dimensions or duration do not match verified picture")
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Resonance video played before a user gesture")
+    progress(active_context, "resonance_film_keyboard_play_pause")
+    video.press("Space")
+    page.wait_for_function("slug => { const v = document.querySelector('#results video:has(source[src$=\"' + slug + '.mp4\"])'); return !v.paused && v.currentTime >= .2; }", arg=slug, timeout=15000)
+    video.press("Space")
+    expect(video).to_have_js_property("paused", True)
+    data = fetch_public_file(context.request, origin, "docs/showcase/" + slug + "/" + slug + ".mp4")
+    if hashlib.sha256(data).hexdigest() != qa["scored_sha256"]:
+        raise AssertionError("Served Resonance movie differs from verified file")
+    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+        raise AssertionError("Resonance video page horizontal overflow")
+    name = layout + "-" + slug + "-film.png"
+    video.locator("..").screenshot(path=str(output/name), animations="disabled")
+    return {"layout":layout,"case_slug":slug,"duration_seconds":actual["duration"],"width":actual["width"],"height":actual["height"],"keyboard_play_and_pause":True,"autoplay":False,"served_sha256":qa["scored_sha256"],"screenshot":name,"sha256":hashlib.sha256((output/name).read_bytes()).hexdigest()}
+
 def parse_byte_range(value: str, size: int) -> tuple[int, int]:
     """Resolve one bytes range to inclusive offsets; reject multipart ranges."""
     match = re.fullmatch(r"bytes=([0-9]*)-([0-9]*)", value.strip())
@@ -519,6 +556,8 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                     "sha256": hashlib.sha256((output / film_name).read_bytes()).hexdigest()})
                             if case["slug"] in {"crystal-freight-native-film", "brass-relay", "orbit-post-office"}:
                                 report["films"].append(verify_scored_video(page, context, case, origin, output, layout, active_context))
+                            if case["slug"] == "resonance-atlas":
+                                report["films"].append(verify_resonance_video(page, context, case, origin, output, layout, active_context))
                             if case["slug"] == "trail-and-air":
                                 report["audio"].append(verify_audio_case(
                                     page, context, case, site, origin, output, layout, active_context))
