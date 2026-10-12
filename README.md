@@ -12,9 +12,10 @@ case's software adapter linked from the site. The official site's broader
 [examples](https://dcc-mcp.github.io/examples) remain distinct from the
 collection's downloadable, individually documented case records.
 
-The collection currently contains eight individually documented cases: a Houdini
+The collection currently contains twelve individually documented cases: a Houdini
 vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
-Relay, Seismic Lens, Orbit Post Office and Trail & Air. Each page separates original production from later
+Relay, Seismic Lens, Orbit Post Office, Trail & Air, Rainroom, Resonance Atlas,
+Sonic Loom and Prism Tide. Each page separates original production from later
 visual/technical review. Historical exact models and reasoning effort remain
 unknown where production records did not capture them; a later review
 does not establish the attribution of earlier artwork. The existing review
@@ -37,6 +38,14 @@ for editable reconstruction. This is not a native HIP download. The current
 official save APIs were investigated without finding a validated complete
 metadata sanitizer. PNG author metadata is removed through the adapter's
 MCP automation tool; compressed image data and decoded pixels remain identical.
+
+## Languages
+
+Every collection and brand page is available in English at the existing root
+routes and Simplified Chinese under `zh/`, matching the official website. Use
+the language links to stay on the same case or gallery. Source files, original
+artwork and evidence retain their original language and bytes. See the
+[localization contract](docs/LOCALIZATION.md) for translation and browser checks.
 
 ## Browse and reproduce
 
@@ -76,7 +85,7 @@ not substitute for browser acceptance.
 ## Brand gallery
 
 The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
-selects resources without changing the eight-case collection. The first core
+selects resources without changing the twelve-case collection. The first core
 release contains eight verified files. Incremental batches add Maya,
 3ds Max, Blender, Houdini, ZBrush, Photoshop, MotionBuilder, Nuke and OpenUSD
 families with 16 files each, plus three actual core currentColor SVGs:
@@ -211,3 +220,18 @@ release; a green check is not artistic approval. This workflow does not deploy.
 ## Orbit Post Office revision
 
 The current GIMP → Godot → Kdenlive case publishes the station/worlds artwork, separate eight-letter gameplay evidence and the seven-second first-delivery film. Current game/art/film native projects are not publicly downloadable. The unchanged v1 ZIP is explicitly the historical icon prototype. Its earlier failure records remain available; recovery checks and recorded native runs are kept separate.
+
+## Optional browser demos
+
+`play/manifest.json`, when present, is an explicit allowlist of published Web
+exports. Every file records its repository-relative `play/` path, bytes and
+SHA-256; only inventoried files are copied. Demos must refer to selected cases,
+use single-thread Godot Compatibility exports, and supply English/Chinese shell
+controls and notes. Native artwork language is recorded separately.
+
+The case page creates an iframe only after **Open interactive demo**. The demo
+shell also requires Start before downloading/running the engine. Exit removes
+the iframe, releasing that session; unsaved state is lost. A standalone link
+works without the collection's JavaScript. No manifest means no demo assets or
+player script are added to the build. Run `python scripts/test_playable.py` when
+changing this contract.

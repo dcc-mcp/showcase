@@ -6,11 +6,11 @@ const status = document.querySelector("#copy-status");
 if (!button || !prompt || !status) return;
 button.hidden = false;
 button.addEventListener("click",async () => {
-try {await navigator.clipboard.writeText(prompt.textContent); status.textContent = "提示词已复制。";}
+try {await navigator.clipboard.writeText(prompt.textContent); status.textContent = document.documentElement.lang.startsWith("zh") ? "提示词已复制。" : "Prompt copied.";}
 catch (_) {
 const range = document.createRange(); range.selectNodeContents(prompt);
 const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
-status.textContent = "已选中提示词，请使用复制快捷键。";
+status.textContent = document.documentElement.lang.startsWith("zh") ? "已选中提示词，请使用复制快捷键。" : "Prompt selected. Use your copy shortcut.";
 }
 });
 })();

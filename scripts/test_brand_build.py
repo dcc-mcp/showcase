@@ -43,7 +43,7 @@ class BrandBuildGuards(unittest.TestCase):
     def build(self, out="_site", preview=False):
         # The independent collection validator has its own contract tests.
         with patch("validate_collection.validate", return_value=[]):
-            return build_site.build(str(self.root), out, brand_preview=preview)
+            return build_site.build(str(self.root), out, brand_preview=preview, localize=False)
 
     def page(self, rel, out="_site"):
         return (self.root / out / rel).read_text(encoding="utf-8")

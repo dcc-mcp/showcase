@@ -38,6 +38,8 @@ jobs:
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python scripts/browser_preview.py --site _site --output "${{ runner.temp }}/showcase-browser-preview" --expected-head "$EXPECTED_HEAD_SHA"
+      - name: Verify every language, page and viewport
+        run: python scripts/localization_browser_smoke.py --site _site --output "${{ runner.temp }}/showcase-browser-preview/localization"
       - name: Verify Sonic Loom audio, video and source download
         run: python scripts/sonic_loom_browser_smoke.py --site _site --output "${{ runner.temp }}/showcase-browser-preview/sonic-loom"
       - name: Keep public screenshots and result

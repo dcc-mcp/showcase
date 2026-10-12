@@ -62,7 +62,7 @@ const software = JSON.parse(card.dataset.software);
 const capabilities = JSON.parse(card.dataset.capabilities);
 const match = (state.software === "all" || software.includes(state.software)) &&
 (state.capability === "all" || capabilities.includes(state.capability)) &&
-(!query || card.dataset.search.toLocaleLowerCase().includes(query));
+(!query || (card.dataset.search + " " + card.textContent).toLocaleLowerCase().includes(query));
 card.hidden = !match;
 if (match) visible += 1;
 });
@@ -71,7 +71,9 @@ group.querySelectorAll("button").forEach(button => button.setAttribute("aria-pre
 });
 wall.classList.toggle("has-many",visible >= 3);
 empty.hidden = visible !== 0;
-count.textContent = visible === cards.length ? "显示全部 " + visible + " 个案例" : "显示 " + visible + " / " + cards.length + " 个案例";
+count.textContent = document.documentElement.lang.startsWith("zh")
+  ? (visible === cards.length ? "显示全部 " + visible + " 个案例" : "显示 " + visible + " / " + cards.length + " 个案例")
+  : (visible === cards.length ? "Showing all " + visible + " cases" : "Showing " + visible + " / " + cards.length + " cases");
 const next = new URLSearchParams();
 if (state.software !== "all") next.set("software",state.software);
 if (state.capability !== "all") next.set("capability",state.capability);
