@@ -253,13 +253,26 @@ class RealRepositoryCases(unittest.TestCase):
         self.assertNotIn("LICENSE", selected)
         self.assertNotIn("play/runtime/godot-4.6.3.wasm", selected)
 
-    def test_crate_legacy_without_video_preserves_unknowns(self):
+    def test_crate_current_inventory_preserves_historical_unknowns(self):
         case = self.get_case("crate-lookdev")
         before = checker.digest(ROOT / "collection.json")
         result = checker.inspect_case(ROOT, case)
         self.assertEqual(result["manifest_errors"], [])
-        self.assertEqual(result["video_paths"], [])
-        self.assertIn("missing_video", result["unresolved_stages"])
+        # The historical baseline has no video; later partial supplements may
+        # add one without changing original attribution or accepting the film.
+        manifest = checker.read_json(ROOT / "docs/showcase/crate-lookdev/manifest.json")
+        expected_videos = sorted({"docs/showcase/crate-lookdev/" + item["path"]
+                                  for item in manifest["files"]
+                                  if Path(item["path"]).suffix.lower() in checker.VIDEO_EXTENSIONS})
+        self.assertEqual(result["video_paths"], expected_videos)
+        self.assertEqual("missing_video" in result["unresolved_stages"], not expected_videos)
+        expected_attribution = [{key: row[key] for key in
+                                 ("stage_id", "model", "reasoning_effort", "record_status", "basis", "scope")}
+                                for row in case["model_attribution"]]
+        self.assertEqual(result["model_attribution"], expected_attribution)
+        self.assertFalse(result["optional_record_present"])
+        self.assertIn("continuous_frames", result["unresolved_stages"])
+        self.assertEqual(result["quality_approval"], "not-assessed-by-this-tool")
         self.assertIn("creation", result["unknown_model_stages"])
         self.assertIn("review_visual", result["unknown_model_stages"])
         self.assertFalse(result["ready_for_human_decision"])
