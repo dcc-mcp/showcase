@@ -503,8 +503,9 @@ def detail_page(case: dict, root: str, next_case: dict | None = None, demo=None)
 <body><a class="skip-link" href="#goal">跳到案例内容</a>
 <header class="site-header wrap"><a class="brand" href="../../" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a><nav aria-label="主导航"><a href="../../#works">作品合集</a><a href="../../agents/">Agent / Data</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://dcc-mcp.github.io/zh/agents">开始使用 ↗</a></nav></header>
 <main class="wrap"><a class="detail-back" href="../../#works"><span aria-hidden="true">←</span> 返回作品合集</a>
-<div class="detail-heading"><div class="detail-meta">%s</div><h1>%s</h1><p class="subtitle">%s</p></div>
+<div class="detail-heading"><h1>%s</h1><p class="subtitle">%s</p></div>
 %s<figure class="detail-cover">%s<figcaption>%s</figcaption></figure>
+<div class="detail-meta">%s</div>
 <aside class="evidence-note" aria-label="证据范围"><strong>%s</strong><p>%s</p></aside>
 <div class="detail-layout"><nav class="detail-nav" aria-label="案例目录">%s</nav><div class="detail-content">
 <section class="detail-section" id="goal"><h2>创作目标</h2><p>%s</p><p>%s</p></section>
@@ -518,8 +519,8 @@ def detail_page(case: dict, root: str, next_case: dict | None = None, demo=None)
 <section class="detail-section" id="resources"><h2>资源与许可</h2><ul class="resource-links">%s</ul><p class="source-line">来源：<a class="text-link" href="%s">来源与代码</a><br>来源提交：<code>%s</code></p><div class="credit-block"><strong>作者</strong>：%s<br><strong>许可范围</strong>：%s<br>%s</div></section>
 </div></div><div class="detail-footer"><a href="../../#works">← 返回作品合集</a>%s</div></main>
 <footer class="site-footer wrap"><p>DCC-MCP Showcase</p><nav aria-label="页脚导航"><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://github.com/dcc-mcp/dcc-mcp-core">核心项目 ↗</a><a href="https://github.com/dcc-mcp/showcase">合集源码 ↗</a></nav></footer></body></html>
-""" % (head, metadata, title, esc(case["subtitle"]), action_bar,
-       media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]),
+""" % (head, title, esc(case["subtitle"]), action_bar,
+       media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]), metadata,
        esc(case["evidence_label"]), esc(case["evidence_scope"]), nav, esc(case["goal"]), esc(case["summary"]),
        models, prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools, related_projects(case),
        "".join(steps), "".join(figure(item, root, prefix) for item in case["results"]), "".join(checks),
