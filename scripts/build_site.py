@@ -281,8 +281,8 @@ def cards_markup(cases: list[dict], root: str, demos=None) -> str:
         capabilities = esc(json.dumps(case["capabilities"], ensure_ascii=False))
         search = esc(" ".join([case["title"], case["subtitle"], case["summary"]] + case["software"] + case["capabilities"]))
         kind = ' / '.join(labels[value] for value in kinds)
-        cards.append('<article class="case-card" data-case="%s" data-software="%s" data-capabilities="%s" data-media="%s" data-search="%s"%s><div class="card-media"><a class="card-visual%s" href="%s" aria-label="%s">%s%s<span class="card-kind">%s</span></a>%s</div><h3 class="card-title"><a href="%s">%s</a></h3><div class="card-meta"><span class="card-software" title="%s">%s</span></div><p class="sr-only card-summary">%s</p></article>' % (
-            esc(case['slug']), software, capabilities, esc(json.dumps(kinds)), search, attrs, fit, href, esc('查看案例：' + case['title']), media_markup(case['cover'], root, eager=index < 3), preview_html, esc(kind), button, href, esc(case['title']), esc(' / '.join(case['software'])), esc(' / '.join(case['software'])), esc(case['summary'])))
+        cards.append('<article class="case-card" data-case="%s" data-software="%s" data-capabilities="%s" data-media="%s" data-search="%s"%s><div class="card-media"><a class="card-visual%s" href="%s" aria-label="%s">%s%s<span class="card-kind">%s</span></a>%s</div><h3 class="card-title"><a href="%s">%s</a></h3><div class="card-meta"><span class="card-software" title="%s">%s</span></div><p class="card-evidence">%s</p><p class="sr-only card-summary">%s</p></article>' % (
+            esc(case['slug']), software, capabilities, esc(json.dumps(kinds)), search, attrs, fit, href, esc('查看案例：' + case['title']), media_markup(case['cover'], root, eager=index < 3), preview_html, esc(kind), button, href, esc(case['title']), esc(' / '.join(case['software'])), esc(' / '.join(case['software'])), esc(case['evidence_label']), esc(case['summary'])))
     return "\n".join(cards)
 
 # Verified public endpoints. Keep the project-site slash: the organization site
