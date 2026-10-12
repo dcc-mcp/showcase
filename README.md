@@ -139,6 +139,12 @@ relicense software vendors' trademarks or source artwork.
 
 ## Add a case
 
+Agents should start with the [showcase production Skill](skills/dcc-showcase-production/SKILL.md)
+for research, native production, audiovisual/interaction acceptance and honest
+evidence. Its [discovery guide](skills/dcc-showcase-production/references/discovery.md)
+explains direct use and existing agent-host installation routes.
+
+
 Follow [the entry contract](docs/showcase/CONTRACT.md). Record actual DCC-MCP
 tools and host versions, preserve intermediate and final artifacts, and state
 precisely what was measured. Mark unknown versions and missing evidence as
