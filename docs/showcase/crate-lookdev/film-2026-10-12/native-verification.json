@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "scope": "Partial camera checkpoint: 55 native wide frames completed, 50-frame excerpt delivered; 144-frame target unmet. Native camera scenes are saved, not proof of complete rendering.",
+  "delivery_status": "partial_stage_evidence",
+  "full_film_completed": false,
+  "software": {
+    "blender": "4.5.14 LTS",
+    "build_hash": "62c1db4208e8",
+    "dcc_mcp_blender": "0.2.16",
+    "dcc_mcp_core": "0.20.42"
+  },
+  "source": {
+    "repository": "dcc-mcp/dcc-mcp-substance3d-designer",
+    "commit": "38623dd51721a958b8dc5d2e8957e991908333ac",
+    "path": "docs/showcase/crate-lookdev/crate.blend",
+    "bytes": 77739815,
+    "sha256": "39f113b549bfea986d064be128a242f21b288775ccc0be81784c14c01e4e9716"
+  },
+  "native_scenes": [
+    {
+      "file": "crate-film-wide.blend",
+      "bytes": 78036556,
+      "sha256": "1928a2e44125ae01ef83cd1aeacf2c86a9a81068ffa5fd8c026acfd8eb940a41",
+      "save_and_reopen": "pass",
+      "reopened_session": {
+        "blender_version": "4.5.14",
+        "fps": 24,
+        "frame_start": 1,
+        "frame_end": 96,
+        "object_count": 187,
+        "mesh_count": 179,
+        "material_count": 7
+      },
+      "animation_readback": {
+        "object_name": "Film_Orbit_Rig",
+        "keyframe_count": 6,
+        "fcurves": [
+          {
+            "data_path": "rotation_euler",
+            "array_index": 0,
+            "frames": [
+              1.0,
+              97.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "rotation_euler",
+            "array_index": 1,
+            "frames": [
+              1.0,
+              97.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "rotation_euler",
+            "array_index": 2,
+            "frames": [
+              1.0,
+              97.0
+            ],
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "file": "crate-film-detail.blend",
+      "bytes": 78035842,
+      "sha256": "f7c081ce794e43b2abfd1f3f9de39365bf52a877555fb9f1c28ad757c9113e48",
+      "save_and_reopen": "pass",
+      "reopened_session": {
+        "blender_version": "4.5.14",
+        "fps": 24,
+        "frame_start": 1,
+        "frame_end": 48,
+        "object_count": 187,
+        "mesh_count": 179,
+        "material_count": 7
+      },
+      "animation_readback": {
+        "object_name": "Detail_BrokenBatten",
+        "keyframe_count": 6,
+        "fcurves": [
+          {
+            "data_path": "location",
+            "array_index": 0,
+            "frames": [
+              1.0,
+              49.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "location",
+            "array_index": 1,
+            "frames": [
+              1.0,
+              49.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "location",
+            "array_index": 2,
+            "frames": [
+              1.0,
+              49.0
+            ],
+            "count": 2
+          }
+        ]
+      }
+    }
+  ],
+  "render_settings": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 12,
+    "denoiser": "OPENIMAGEDENOISE",
+    "threads": 2,
+    "persistent_data": true,
+    "max_bounces": 4,
+    "diffuse_bounces": 2,
+    "glossy_bounces": 2,
+    "resolution": [
+      960,
+      540
+    ],
+    "fps": 24
+  },
+  "render_readback": {
+    "engine": "CYCLES",
+    "resolution_x": 960,
+    "resolution_y": 540,
+    "resolution_percentage": 100,
+    "file_format": "PNG",
+    "active_camera": "Camera_Reference",
+    "cycles_samples": 12,
+    "cycles_device": "CPU"
+  },
+  "geometry_export": {
+    "file": "crate-film-geometry.glb",
+    "retained_locally": true,
+    "bytes": 40607520,
+    "sha256": "70a5bde56d89e4fbab46cb467122be367e0123cde1589f55a94677fbaaeeb9fc",
+    "format": "GLB",
+    "materials_exported": false,
+    "animations_exported": false,
+    "cameras_exported": false,
+    "lights_exported": false,
+    "mesh_count_before": 179,
+    "empty_scene_mesh_count": 0,
+    "mesh_count_after_import": 179,
+    "sample_bounds_absolute_tolerance": 0.0001,
+    "sample_bounds": [
+      {
+        "object_name": "Wood_Front_Board_1",
+        "before": {
+          "min": [
+            -1.0835000276565552,
+            -0.6659610867500305,
+            -0.001579970121383667
+          ],
+          "max": [
+            1.0835000276565552,
+            -0.5794783234596252,
+            0.4418800175189972
+          ]
+        },
+        "after": {
+          "min": [
+            -1.0835000276565552,
+            -0.6659610867500305,
+            -0.001579970121383667
+          ],
+          "max": [
+            1.0835000276565552,
+            -0.5794783234596252,
+            0.4418800175189972
+          ]
+        },
+        "maximum_absolute_bounds_delta": 0.0
+      },
+      {
+        "object_name": "Wood_Lid_Plank_1",
+        "before": {
+          "min": [
+            -1.0945000648498535,
+            -0.6330950260162354,
+            1.054921269416809
+          ],
+          "max": [
+            1.0945000648498535,
+            -0.3829050064086914,
+            1.0999387502670288
+          ]
+        },
+        "after": {
+          "min": [
+            -1.0945000648498535,
+            -0.6330950260162354,
+            1.054921269416809
+          ],
+          "max": [
+            1.0945000648498535,
+            -0.3829050064086914,
+            1.0999387502670288
+          ]
+        },
+        "maximum_absolute_bounds_delta": 0.0
+      }
+    ],
+    "limitations": "Geometry-only export/import. Two named mesh bounds are sampled; no material, animation or full geometry equivalence is claimed. glTF normal/UV splits and triangulation can change vertex and face counts."
+  },
+  "replay_smoke": {
+    "status": "pass",
+    "public_script_sha256": "d65f880a23631747c2631951924e8a30e10b3ab6cfd10f0de064dbef48608082",
+    "real_mcp_rebuild": true,
+    "new_native_files_saved_and_reopened": 2,
+    "frames_rerendered_in_smoke": 0,
+    "camera_matrix_absolute_tolerance": 1e-05,
+    "comparisons": {
+      "wide": {
+        "camera": "Camera_Reference",
+        "lens": 60.0,
+        "sampled_frames": [
+          1,
+          48,
+          96
+        ],
+        "maximum_absolute_camera_matrix_delta": 0.0,
+        "render_settings_match": true
+      },
+      "detail": {
+        "camera": "Detail_BrokenBatten",
+        "lens": 82.0,
+        "sampled_frames": [
+          1,
+          24,
+          48
+        ],
+        "maximum_absolute_camera_matrix_delta": 0.0,
+        "render_settings_match": true
+      }
+    },
+    "scope": "Actual public replay client rebuild, native reopen and sampled camera/render-state comparison against production. This smoke does not rerender the 144 frames or promise binary-identical native files."
+  },
+  "denoising_thread_environment": {
+    "wide_frames_1_to_50": "OIDN_NUM_THREADS unset; Blender render threads fixed at 2",
+    "local_wide_checkpoint_frames_51_to_55": "OIDN_NUM_THREADS=2; render-quality settings unchanged",
+    "detail_qualification_previews": "OIDN_NUM_THREADS unset; not included in the published excerpt",
+    "future_recipe_recommendation": "Launch with OIDN_NUM_THREADS=2; the missing frames were not produced",
+    "calibration": {
+      "frame": 50,
+      "native_rgb_exact_match": false,
+      "rgb_max_abs_8bit_difference": 2,
+      "rgb_mean_absolute_8bit_difference": 0.0013123713991769548,
+      "changed_channel_values": 2040,
+      "controlled_change": {
+        "OIDN_NUM_THREADS": "2"
+      }
+    },
+    "failure_cause": "not established; no claim of demonstrated peak-memory reduction"
+  },
+  "native_delivery": "Both new native scenes and the geometry GLB remain local. The public original ZIP is historical. Rebuild the new cameras from the pinned input using replay.py.",
+  "preview_frame_reuse": [
+    {
+      "native_frame": "wide/0001",
+      "actual_render": "preview-cycles-wide.png",
+      "evaluated_frame": 1,
+      "source_and_sequence_bytes_identical": true,
+      "sha256": "32da4d7db00c196380cc6479a3e2ad9408ab47562bf24bb53976363d721a1eeb"
+    },
+    {
+      "native_frame": "wide/0002",
+      "actual_render": "preview-cycles-warm.png",
+      "evaluated_frame": 2,
+      "source_and_sequence_bytes_identical": true,
+      "sha256": "622bf83b48c511ebe38fad11391c251ed0ccfff4462f918e5a50468ffe5ccf81"
+    }
+  ],
+  "preview_frame_reuse_verification": {
+    "method": "Selected actual MCP operation sequence checked against private receipts",
+    "sequence": [
+      "set_current_frame(1)",
+      "save wide scene",
+      "reopen the same wide scene",
+      "get_session_info.frame_current = 1",
+      "get_keyframes: linear rotation keys at 1 and 97",
+      "render preview-cycles-wide.png",
+      "set_current_frame(2), readback frame_current = 2",
+      "render preview-cycles-warm.png"
+    ],
+    "camera_or_render_setting_mutation_between_these_two_renders": false,
+    "limitation": "Frame-by-frame camera matrices were not captured at these two original render calls; the evaluated frame state, unchanged scene/settings, animation and byte reuse were verified."
+  }
+}

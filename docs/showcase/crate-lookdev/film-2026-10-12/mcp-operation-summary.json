@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "Manually scoped allowlist summary of actual MCP operations; not full requests, responses or transport logs.",
+  "scope": "Existing public crate asset, new partial camera supplement. Complete private receipts are retained locally. No missing frames are implied.",
+  "omitted": "RPC and session identifiers, timestamps, host or process details, local paths and endpoints, environment/compiler inventory, free-text responses, stdout/stderr, full scene inventories and transport logs.",
+  "path_tokens": {
+    "SOURCE_BLEND": "Public input pinned in native-verification.json",
+    "CASE_DIR": "Caller-selected output root, not an actual path"
+  },
+  "operations": [
+    {
+      "stage": "source_open",
+      "request": {
+        "tool": "blender_scene__open_scene",
+        "arguments": {
+          "filepath": "SOURCE_BLEND"
+        }
+      },
+      "result": {
+        "isError": false,
+        "success": true
+      }
+    },
+    {
+      "stage": "orbit_rig",
+      "request": {
+        "tool": "blender_objects__create_object",
+        "arguments": {
+          "object_type": "empty",
+          "name": "Film_Orbit_Rig",
+          "location": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "result": {
+        "isError": false,
+        "success": true
+      }
+    },
+    {
+      "stage": "parent_warning",
+      "request": {
+        "tool": "blender_objects__parent_object",
+        "arguments": {
+          "child_name": "Camera_Reference",
+          "parent_name": "Film_Orbit_Rig"
+        }
+      },
+      "result": {
+        "isError": true,
+        "success": false,
+        "world_transform_preserved": false,
+        "world_transform_delta": 1.430511474609375e-06
+      },
+      "readback_after_explicit_pose_recovery": {
+        "parent": "Film_Orbit_Rig",
+        "location": [
+          2.299999952316284,
+          -6.0,
+          2.7315499782562256
+        ],
+        "rotation_euler_degrees": [
+          71.33992569200333,
+          0.0,
+          20.97349432775671
+        ]
+      }
+    },
+    {
+      "stage": "render_settings",
+      "request": {
+        "tool": "blender_render__set_render_settings",
+        "arguments": {
+          "engine": "CYCLES",
+          "resolution_x": 960,
+          "resolution_y": 540,
+          "samples": 12,
+          "fps": 24,
+          "file_format": "PNG"
+        }
+      },
+      "result": {
+        "isError": false,
+        "success": true,
+        "engine": "CYCLES",
+        "resolution_x": 960,
+        "resolution_y": 540,
+        "resolution_percentage": 100,
+        "fps": 24
+      }
+    },
+    {
+      "stage": "denoise_compatibility",
+      "unavailable_request": {
+        "tool": "blender_render__set_render_denoise",
+        "arguments": {
+          "enabled": true,
+          "denoiser": "OPENIMAGEDENOISE",
+          "input_passes": "RGB_ALBEDO_NORMAL",
+          "prefilter": "ACCURATE",
+          "use_gpu": false
+        }
+      },
+      "unavailable_result": {
+        "isError": true,
+        "success": false
+      },
+      "unavailable_property": "scene.cycles.use_denoising_use_gpu",
+      "working_request": {
+        "tool": "blender_render__set_render_denoise",
+        "arguments": {
+          "enabled": true,
+          "denoiser": "OPENIMAGEDENOISE"
+        }
+      },
+      "working_result": {
+        "isError": false,
+        "success": true,
+        "use_denoising": true,
+        "denoiser": "OPENIMAGEDENOISE"
+      }
+    },
+    {
+      "stage": "wide_saved_reopened",
+      "save": {
+        "request": {
+          "tool": "blender_scene__save_scene",
+          "arguments": {
+            "filepath": "CASE_DIR/crate-film-wide.blend"
+          }
+        },
+        "result": {
+          "isError": false,
+          "success": true
+        }
+      },
+      "reopen": {
+        "request": {
+          "tool": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "CASE_DIR/crate-film-wide.blend"
+          }
+        },
+        "result": {
+          "isError": false,
+          "success": true
+        }
+      },
+      "readback_tool": "blender_scene__get_session_info",
+      "readback": {
+        "blender_version": "4.5.14",
+        "object_count": 187,
+        "mesh_count": 179,
+        "material_count": 7,
+        "frame_start": 1,
+        "frame_end": 96,
+        "fps": 24
+      },
+      "animation_request": {
+        "tool": "blender_animation__get_keyframes",
+        "arguments": {
+          "object_name": "Film_Orbit_Rig"
+        }
+      },
+      "animation_readback": {
+        "keyframe_count": 6,
+        "fcurves": [
+          {
+            "data_path": "rotation_euler",
+            "array_index": 0,
+            "frames": [
+              1.0,
+              97.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "rotation_euler",
+            "array_index": 1,
+            "frames": [
+              1.0,
+              97.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "rotation_euler",
+            "array_index": 2,
+            "frames": [
+              1.0,
+              97.0
+            ],
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "stage": "detail_saved_reopened",
+      "save": {
+        "request": {
+          "tool": "blender_scene__save_scene",
+          "arguments": {
+            "filepath": "CASE_DIR/crate-film-detail.blend"
+          }
+        },
+        "result": {
+          "isError": false,
+          "success": true
+        }
+      },
+      "reopen": {
+        "request": {
+          "tool": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "CASE_DIR/crate-film-detail.blend"
+          }
+        },
+        "result": {
+          "isError": false,
+          "success": true
+        }
+      },
+      "readback_tool": "blender_scene__get_session_info",
+      "readback": {
+        "blender_version": "4.5.14",
+        "object_count": 187,
+        "mesh_count": 179,
+        "material_count": 7,
+        "frame_start": 1,
+        "frame_end": 48,
+        "fps": 24
+      },
+      "animation_request": {
+        "tool": "blender_animation__get_keyframes",
+        "arguments": {
+          "object_name": "Detail_BrokenBatten"
+        }
+      },
+      "animation_readback": {
+        "keyframe_count": 6,
+        "fcurves": [
+          {
+            "data_path": "location",
+            "array_index": 0,
+            "frames": [
+              1.0,
+              49.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "location",
+            "array_index": 1,
+            "frames": [
+              1.0,
+              49.0
+            ],
+            "count": 2
+          },
+          {
+            "data_path": "location",
+            "array_index": 2,
+            "frames": [
+              1.0,
+              49.0
+            ],
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "stage": "published_excerpt_last_frame",
+      "request": {
+        "tool": "blender_render__render_scene",
+        "arguments": {
+          "output_path": "CASE_DIR/frames/wide/frame_0050.png"
+        }
+      },
+      "result": {
+        "isError": false,
+        "success": true,
+        "write_still": true
+      },
+      "frame": 50
+    },
+    {
+      "stage": "geometry_round_trip",
+      "export": {
+        "request": {
+          "tool": "blender_interchange__export_gltf",
+          "arguments": {
+            "path": "CASE_DIR/crate-film-geometry.glb",
+            "options": {
+              "export_format": "GLB",
+              "export_materials": "NONE",
+              "export_animations": false,
+              "export_cameras": false,
+              "export_lights": false,
+              "export_apply": true
+            }
+          }
+        },
+        "result": {
+          "isError": false,
+          "success": true
+        }
+      },
+      "empty_scene": {
+        "request": {
+          "tool": "blender_scene__new_scene",
+          "arguments": {}
+        },
+        "result": {
+          "isError": false,
+          "success": true
+        }
+      },
+      "empty_mesh_count": 0,
+      "import": {
+        "request": {
+          "tool": "blender_interchange__import_file",
+          "arguments": {
+            "path": "CASE_DIR/crate-film-geometry.glb"
+          }
+        },
+        "result": {
+          "isError": false,
+          "success": true,
+          "imported_count": 180
+        }
+      },
+      "readback_tool": "blender_scene__get_session_info",
+      "imported_mesh_count": 179,
+      "limitations": "Materials and animation excluded. Only two mesh bounds were compared; details in native-verification.json."
+    }
+  ],
+  "delivery": {
+    "planned_frames": 144,
+    "native_wide_frames_completed": 55,
+    "published_wide_frames": 50,
+    "native_detail_sequence_frames": 0,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "status": "partial_stage_evidence",
+    "full_film_completed": false
+  },
+  "replay": "replay.py is an executable recipe. Its save/reopen smoke passed; it did not rerender the incomplete film."
+}

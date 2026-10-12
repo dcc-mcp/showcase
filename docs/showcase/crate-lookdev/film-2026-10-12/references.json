@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-10-12",
+  "scope": "Official references checked before the new camera work; reference artwork and extension code are not copied.",
+  "references": [
+    {
+      "url": "https://extensions.blender.org/add-ons/turnaround-camera/",
+      "title": "Turnaround Camera",
+      "observed_version": "0.3.0",
+      "observed_compatibility": "Blender 4.2 LTS and newer",
+      "observation": "Official Blender Extensions listing describes a camera orbit around the selected object. Previously bundled community add-on, limited support, no special permissions.",
+      "decision": "Existing installed dcc-mcp-blender camera, objects and animation skills expose the small rig needed here, so no extension install or extra dependency is necessary."
+    },
+    {
+      "url": "https://extensions.blender.org/add-ons/turntable-camera/",
+      "title": "Turntable Camera",
+      "observed_version": "0.1.2",
+      "observed_license": "GPL-3.0-or-later",
+      "observation": "Official extension listing offers editable camera turntable keyframes, root empty and elevation controls.",
+      "decision": "Reuse the same ordinary camera-rig idea through existing typed MCP tools, without installing or copying the add-on."
+    },
+    {
+      "url": "https://studio.blender.org/projects/charge/blog/",
+      "title": "Charge production articles",
+      "observation": "The official Studio index includes set design, battery prop design and EEVEE production articles, including 2025 entries.",
+      "decision": "Use purposeful material and silhouette views with visible real geometry. No Studio artwork, assets or textures enter this case."
+    },
+    {
+      "url": "https://conference.blender.org/2023/presentations/1910/",
+      "title": "Blender Studio Production Session: Charge! vs. Wing It!",
+      "observation": "Official presentation describes both productions using EEVEE.",
+      "decision": "Evaluate EEVEE with an actual frame on the available host before choosing a renderer; an official reference does not establish compatibility on this machine."
+    }
+  ]
+}
