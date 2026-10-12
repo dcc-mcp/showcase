@@ -518,7 +518,7 @@ def output_path(root: str, out_dir: str) -> str:
         raise ValueError("output directory must stay inside repository")
     return out_abs
 
-def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[str], list[str], list[str]]:
+def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool = True) -> tuple[list[str], list[str], list[str]]:
     """Return published paths, problems, and notes; validate before deleting."""
     published: list[str] = []
     notes: list[str] = []
@@ -549,6 +549,8 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
             brand_portal = '<aside class="evidence-note"><strong>品牌画廊开发预览</strong><p>等待修正版资产与验证记录；占位内容仅用于本地开发。</p></aside>' + brand_portal
         with open(collection_path, encoding="utf-8-sig") as fh:
             cases = json.load(fh)["cases"]
+        import playable
+        playable_demos, playable_assets = playable.read_and_validate(root, cases)
         with open(resolve_public(root, "index.html"), encoding="utf-8-sig") as fh:
             template = fh.read()
         software = sorted({value for case in cases for value in case["software"]})
@@ -574,6 +576,9 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
             pages["index.html"] = pages["index.html"].replace("index, follow, max-image-preview:large", "noindex, nofollow")
         pages.update(compatibility_pages())
         assets = {"assets/site.css", "assets/gallery.js", "assets/detail.js"}
+        assets.update(playable_assets)
+        if playable_demos:
+            assets.add("assets/playable.js")
         if brands_visible:
             assets.update({"assets/brand.css", "assets/brand.js"})
             assets.update(brand_assets)
@@ -587,6 +592,15 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
                 pages[case_path] = pages[case_path].replace('<a href="https://dcc-mcp.github.io/">DCC-MCP 官网', '<a href="../../brands/">品牌画廊</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网')
                 if brand_preview:
                     pages[case_path] = pages[case_path].replace("index, follow, max-image-preview:large", "noindex, nofollow")
+            if case["slug"] in playable_demos:
+                case_path = "cases/%s/index.html" % case["slug"]
+                pages[case_path] = pages[case_path].replace(
+                    '<section class="detail-section" id="results">',
+                    playable.section(playable_demos[case["slug"]]) + '<section class="detail-section" id="results">')
+                pages[case_path] = pages[case_path].replace(
+                    '<a href="#results">成果</a>', '<a href="#play">交互体验</a><a href="#results">成果</a>')
+                pages[case_path] = pages[case_path].replace(
+                    '</head>', '<script src="../../assets/playable.js" defer></script></head>')
             base = "docs/showcase/%s" % case["slug"]
             for required in ("README.md", "manifest.json", "validation.json"):
                 assets.add(base + "/" + required)
@@ -603,6 +617,11 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
                 resource_url(item["url"])
                 if not urlsplit(item["url"]).scheme:
                     assets.add(safe_rel(item["url"]))
+        import localization
+        if localize:
+            pages = localization.localize_pages(root, pages, playable_demos)
+        if localize:
+            assets.add("assets/locale.js")
         # Every file is selected explicitly, rather than discovered by crawling.
         sources = {rel: resolve_public(root, rel) for rel in sorted(assets)}
         problems = []

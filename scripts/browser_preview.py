@@ -429,6 +429,8 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     output.mkdir(parents=True, exist_ok=False)
     collection = json.loads(Path("collection.json").read_text(encoding="utf-8"))
     cases = collection["cases"]
+    # Retain original-language evidence assertions alongside bilingual coverage.
+    locale_base = "/zh/" if (site / "zh/index.html").is_file() else "/"
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
               "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": [], "audio": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
@@ -462,7 +464,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                     try:
                         active_context = {"stage": "gallery_search_reset", "layout": layout}
                         progress(active_context)
-                        page.goto(origin + "/", wait_until="networkidle")
+                        page.goto(origin + locale_base, wait_until="networkidle")
                         page.evaluate("document.fonts.ready")
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
                         page.locator("#search").fill(cases[0]["title"])
@@ -497,7 +499,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             active_context = {"stage": "models_navigation", "layout": layout,
                                               "case_slug": case["slug"]}
                             progress(active_context)
-                            path = "/cases/%s/" % case["slug"]
+                            path = locale_base + "cases/%s/" % case["slug"]
                             # Media preload/range requests need not become network-idle.
                             # Fonts, page content and media readiness are awaited below.
                             page.goto(origin + path, wait_until="domcontentloaded")

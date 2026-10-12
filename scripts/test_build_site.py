@@ -147,7 +147,7 @@ def integration_guards() -> None:
         # Evidence contracts are tested by test_validate_collection.py. This
         # fixture isolates the publishing, HTML and deletion safety contracts.
         with patch("validate_collection.validate", return_value=[]):
-            published, problems, _ = build_site.build(tmp, "_site")
+            published, problems, _ = build_site.build(tmp, "_site", localize=False)
             check("complete fixture builds", problems, [])
             check("static detail is generated", "cases/sample-case/index.html" in published, True)
             check("unselected files stay private", "private.txt" in published, False)
@@ -227,14 +227,14 @@ def integration_guards() -> None:
                 fh.write("keep prior output on failed validation")
             case["resources"].append({"label": "Unsafe", "url": "../private.txt"})
             save()
-            _, problems, _ = build_site.build(tmp, "_site")
+            _, problems, _ = build_site.build(tmp, "_site", localize=False)
             check("unsafe resource stops publishing", bool(problems), True)
             check("failed build preserves prior output",
                   os.path.isfile(os.path.join(tmp, "_site", "sentinel.txt")), True)
             case["resources"].pop()
             case["cover"]["src"] = "docs/showcase/sample-case/missing.png"
             save()
-            _, problems, _ = build_site.build(tmp, "_site")
+            _, problems, _ = build_site.build(tmp, "_site", localize=False)
             check("missing selected artifact stops publishing",
                   any("missing" in item for item in problems), True)
 

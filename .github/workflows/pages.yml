@@ -50,6 +50,11 @@ jobs:
       - name: Verify the build guards still bite
         run: python scripts/test_build_site.py
 
+      - name: Verify localization and optional player guards
+        run: |
+          python scripts/test_localization.py
+          python scripts/test_playable.py
+
       - name: Build the site
         run: python scripts/build_site.py
 
