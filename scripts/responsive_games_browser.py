@@ -143,9 +143,15 @@ def run(site, output):
                 check(slug+f'/touch-orientation-{width}x{height}',canvas=g)
                 if width==844:
                     shot(page,slug+'-touch-landscape.png')
-                    name=slug+'-touch-landscape-full-stage.png'
-                    page.locator('.game-stage').screenshot(path=str(output/name))
-                    report['screenshots'].append(name)
+                    # Element screenshots can expand the emulated viewport and
+                    # temporarily change its pointer media query. Keep the real
+                    # touch viewport and scroll the outer page to show the HUD.
+                    frame.locator('#alternate-label').scroll_into_view_if_needed()
+                    shot(page,slug+'-touch-landscape-controls.png')
+                    assert frame.evaluate('window.__showcaseState.mobile_layout') is True
+                    assert geometry(frame)['contained'] and not geometry(frame)['bodyOverflow']
+                    assert frame.evaluate("matchMedia('(pointer:coarse)').matches")
+                    check(slug+'/touch-landscape-visible-controls-after-scroll')
             page.locator('[data-game-exit]').click()
         ctx.close();browser.close();report['passed']=True
     except Exception as error:
