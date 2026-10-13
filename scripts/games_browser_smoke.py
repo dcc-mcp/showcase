@@ -93,7 +93,8 @@ def run(site, output):
                     if not mobile:
                         page.locator('[data-game-fullscreen]').click()
                         page.wait_for_function('!!document.fullscreenElement')
-                        page.keyboard.press('Escape')
+                        assert frame.locator('canvas').evaluate('(c)=>c.getBoundingClientRect().bottom<=innerHeight+1')
+                        page.locator('[data-game-leave-full]').click()
                         page.wait_for_function('!document.fullscreenElement')
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
                     shot(page,f'{locale}-'+('mobile' if mobile else 'desktop')+'-sonic-running.png')

@@ -28,6 +28,7 @@
   const exit = document.querySelector('[data-game-exit]');
   const reset = document.querySelector('[data-game-reset]');
   const full = document.querySelector('[data-game-fullscreen]');
+  const leaveFull = stage.querySelector('[data-game-leave-full]');
   const sound = document.querySelector('[data-game-sound]');
   const destination = new URL(stage.dataset.gameUrl, location.href);
   if (destination.origin !== location.origin) return;
@@ -84,6 +85,12 @@
   full.addEventListener('click', async () => {
     try { if (document.fullscreenElement) await document.exitFullscreen(); else if (stage.requestFullscreen) await stage.requestFullscreen(); else status.textContent = t.fullscreen; }
     catch (_) { status.textContent = t.fullscreen; }
+  });
+  leaveFull.addEventListener('click', () => document.exitFullscreen?.().catch(() => { status.textContent = t.fullscreen; }));
+  document.addEventListener('fullscreenchange', () => {
+    leaveFull.hidden = document.fullscreenElement !== stage;
+    if (!leaveFull.hidden) leaveFull.focus();
+    else if (!full.hidden) full.focus();
   });
   sound.addEventListener('click', () => {
     enabled = !enabled;

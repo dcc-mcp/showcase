@@ -8,3 +8,4 @@ body[data-embed=true] header,body[data-embed=true] #intro,body[data-embed=true] 
 body[data-embed=true] #status{margin:14px;font-size:13px}body[data-embed=true][data-state=running] #status{display:none}
 body[data-embed=true] #progress{margin:14px;width:calc(100% - 28px)}
 body[data-embed=true] #stage{margin:0 auto}body[data-embed=true] #alternate{margin:10px}
+body[data-embed=true]:not([data-layout=mobile]) #stage{max-width:min(100vw,160vh)}

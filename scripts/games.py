@@ -55,7 +55,7 @@ def pages(cases, demos, root):
 <div class="game-layout"><section class="game-primary" aria-labelledby="game-title">
 <div class="game-stage" id="game-stage" data-game-stage data-game-slug="%s" data-game-url="%s" data-state="idle">
 <div class="game-poster" data-game-poster>%s<div class="game-poster-caption"><span class="game-engine">Godot Web</span><h2>%s</h2><button class="primary-button" data-game-start type="button" hidden>开始游戏</button><p>点击后才下载游戏。共享引擎约 36 MiB，首次启动可能需要片刻。</p></div></div>
-<div class="game-frame" data-game-frame></div></div>
+<div class="game-frame" data-game-frame></div><button class="game-full-exit" data-game-leave-full type="button" hidden>退出全屏</button></div>
 <div class="game-toolbar"><p data-game-status role="status" aria-live="polite">准备就绪，尚未加载游戏。</p>
 <div class="game-actions"><button type="button" data-game-sound hidden>点击开声</button><button type="button" data-game-reset hidden>重新开始</button><button type="button" data-game-fullscreen hidden>全屏</button><button type="button" data-game-exit hidden>退出游戏</button></div></div>
 <div class="game-title-row"><div><p class="eyebrow">PLAY / GODOT</p><h1 id="game-title">%s</h1><p class="game-subtitle">%s</p>%s</div><a class="text-link" href="../../cases/%s/">制作过程与源码 ↗</a></div>
