@@ -77,16 +77,25 @@ def run(site: Path, output: Path, expected_head: str):
                 stage = locale + ' hover'
                 sonic = page.locator('[data-case="sonic-loom"]')
                 video = sonic.locator('video')
-                sonic.locator('.card-visual').hover()
+                assert sonic.get_attribute('data-preview-autoplay') == 'true'
+                assert sonic.locator('.preview-hint').is_visible()
+                assert sonic.locator('.preview-toggle').evaluate('(button)=>getComputedStyle(button).opacity') == '0'
+                # Hovering the title is sufficient: the whole card is the trigger.
+                sonic.locator('.card-title').hover()
                 expect(sonic).to_have_attribute('data-preview-state', 'playing')
                 page.wait_for_function('document.querySelector("[data-case=sonic-loom] video").currentTime > 0.2')
-                assert video.evaluate('(v)=>v.muted && v.videoWidth > 0 && v.readyState >= 2')
+                assert video.evaluate('(v)=>v.muted && v.loop && v.videoWidth > 0 && v.readyState >= 2')
+                before_cover = video.evaluate('(v)=>v.currentTime')
+                sonic.locator('.card-visual').hover()
+                assert video.evaluate('(v)=>v.currentTime') >= before_cover
+                assert sonic.locator('.preview-status').text_content().strip()
+                assert not sonic.locator('.preview-hint').is_visible()
                 assert page.locator('.card-preview').evaluate_all('(vs)=>vs.filter(v=>!v.paused).length===1')
                 capture(page, locale + '-desktop-hover.png')
                 page.locator('h1').hover()
                 expect(sonic).to_have_attribute('data-preview-state', 'idle')
                 assert video.get_attribute('src') is None
-                checked(locale + ': decoded muted hover, one active, leave releases source')
+                checked(locale + ': whole-card immediate muted hover, seamless title-to-cover, one active, leave releases source')
                 stage = locale + ' controls'
                 sonic.locator('.preview-toggle').focus()
                 page.keyboard.press('Enter')
@@ -113,6 +122,31 @@ def run(site: Path, output: Path, expected_head: str):
             expect(sonic).to_have_attribute('data-preview-state', 'idle')
             checked('offscreen stops and releases preview')
             ctx.close()
+            stage = 'interrupted hover and stalled network fallback'
+            ctx = context(viewport={'width': 1486, 'height': 1059})
+            # Isolated failure fixture: deliberately keep play unresolved. This
+            # never fakes decoded playback or alters any production asset.
+            ctx.add_init_script('HTMLMediaElement.prototype.play = function(){return new Promise(()=>{})}')
+            page = ctx.new_page()
+            home()
+            sonic = page.locator('[data-case="sonic-loom"]')
+            sonic.locator('.card-title').hover()
+            expect(sonic).to_have_attribute('data-preview-state', 'loading')
+            assert sonic.locator('.preview-status').text_content().strip()
+            assert sonic.locator('video').evaluate('(v)=>getComputedStyle(v).opacity') == '0'
+            capture(page, 'desktop-loading.png')
+            page.locator('h1').hover()
+            expect(sonic).to_have_attribute('data-preview-state', 'idle')
+            assert sonic.locator('video').get_attribute('src') is None
+            sonic.locator('.card-visual').hover()
+            expect(sonic).to_have_attribute('data-preview-state', 'loading')
+            expect(sonic).to_have_attribute('data-preview-state', 'error', timeout=15000)
+            assert sonic.locator('video').get_attribute('src') is None
+            assert sonic.locator('.preview-status').text_content().strip()
+            assert sonic.locator('.preview-toggle').evaluate('(b)=>getComputedStyle(b).opacity') == '1'
+            capture(page, 'desktop-timeout-retry.png')
+            checked('loading retains poster; rapid exit/reentry cleans up; timeout exposes manual retry')
+            ctx.close()
             for preference in ['reduced-motion', 'save-data']:
                 ctx = context(viewport={'width': 1486, 'height': 1059}, reduced_motion='reduce' if preference == 'reduced-motion' else 'no-preference')
                 if preference == 'save-data':
@@ -122,7 +156,7 @@ def run(site: Path, output: Path, expected_head: str):
                 page.goto(base, wait_until='networkidle')
                 sonic = page.locator('[data-case="sonic-loom"]')
                 sonic.locator('.card-visual').hover()
-                page.wait_for_timeout(400)  # Intent threshold is a timing acceptance criterion.
+                page.wait_for_timeout(400)  # Ensure policy gates keep rejecting automatic playback over time.
                 assert sonic.locator('video').get_attribute('src') is None
                 sonic.locator('.preview-toggle').click()
                 expect(sonic).to_have_attribute('data-preview-state', 'playing')

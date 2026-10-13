@@ -148,6 +148,7 @@ test("initialization is source-free, silent and progressive", () => {
     idle(card);
     assert.equal(card.video.playCount, 0); assert.equal(card.video.loadCount, 0);
     assert.equal(card.video.preload, "none"); assert.equal(card.video.autoplay, false);
+    assert.equal(card.video.loop, true); assert.equal(card.dataset.previewAutoplay, "true");
     assert.equal(card.video.muted, true); assert.equal(card.video.defaultMuted, true);
     assert.equal(card.video.playsInline, true); assert.equal(card.video.tabIndex, -1);
     assert.equal(card.video.getAttribute("aria-hidden"), "true");
@@ -156,12 +157,48 @@ test("initialization is source-free, silent and progressive", () => {
   }
 });
 
-test("hover waits 250 ms and a fly-by never requests a source", () => {
-  const f = fixture(), card = f.cards[0];
-  enter(card); f.advance(249);
-  assert.equal(card.dataset.previewState, "pending"); assert.equal(card.video.hasAttribute("src"), false);
-  card.emit("pointerleave"); f.advance(1000);
-  idle(card); assert.equal(card.video.playCount, 0); assert.equal(card.video.loadCount, 0);
+test("hover immediately requests playback and leaving during loading releases it", async () => {
+  const f = fixture({playMode: "defer", setup(cards) {
+    cards[0].dataset.loadingLabel = "Loading preview…";
+    cards[0].dataset.playingLabel = "Muted preview playing";
+  }}), card = f.cards[0];
+  enter(card);
+  assert.equal(card.dataset.previewState, "loading");
+  assert.equal(card.video.playCount, 1); assert.equal(f.timers.size, 1);
+  assert.equal(card.video.hasAttribute("src"), true);
+  assert.equal(card.status.textContent, "Loading preview…");
+  card.emit("pointerleave");
+  card.video.requests[0].resolve(); await flush();
+  idle(card); assert.equal(card.status.textContent, "");
+  assert.equal(card.video.loadCount, 1);
+});
+
+test("loading feedback becomes a playing label only after the first frame can play", async () => {
+  const f = fixture({playMode: "defer", setup(cards) {
+    cards[0].dataset.loadingLabel = "Loading preview…";
+    cards[0].dataset.playingLabel = "Muted preview playing";
+  }}), card = f.cards[0];
+  enter(card); assert.equal(card.dataset.previewState, "loading");
+  card.video.requests[0].resolve(); await flush();
+  assert.equal(card.dataset.previewState, "playing");
+  assert.equal(card.status.textContent, "Muted preview playing");
+  enter(card); assert.equal(card.video.playCount, 1);
+});
+
+test("stalled loading times out, preserves retry, and clears the deadline on success", async () => {
+  const f = fixture({playMode: "defer"}), card = f.cards[0];
+  enter(card); f.advance(11999);
+  assert.equal(card.dataset.previewState, "loading");
+  f.advance(1);
+  assert.equal(card.dataset.previewState, "error");
+  assert.equal(card.video.hasAttribute("src"), false);
+  assert.equal(card.status.textContent, card.dataset.errorLabel);
+  card.video.mode = "resolve"; click(card); await flush();
+  assert.equal(card.dataset.previewState, "playing");
+  assert.equal(f.timers.size, 0);
+  f.advance(12000); assert.equal(card.dataset.previewState, "playing");
+  card.video.requests[0].resolve(); await flush();
+  assert.equal(card.dataset.previewState, "playing");
 });
 
 test("deliberate hover plays muted media then leave resets and releases it", async () => {
@@ -177,19 +214,23 @@ test("deliberate hover plays muted media then leave resets and releases it", asy
   assert.equal(card.video.loadCount, 1); assert.equal(card.button.textContent, "Play preview");
 });
 
-test("only one card plays and newer hover intent cancels older pending intent", async () => {
-  const f = fixture(), [first, second] = f.cards;
-  enter(first); f.advance(150); enter(second); f.advance(100);
-  idle(first); assert.equal(first.video.playCount, 0);
-  f.advance(150); await flush(); assert.equal(second.dataset.previewState, "playing");
-  click(first); await flush(); idle(second);
-  assert.equal(first.dataset.previewState, "playing");
+test("entering a new card immediately cancels the previous loading preview", async () => {
+  const f = fixture({playMode: "defer"}), [first, second] = f.cards;
+  enter(first); enter(second);
+  idle(first); assert.equal(first.video.playCount, 1);
+  assert.equal(second.video.playCount, 1);
+  first.video.requests[0].resolve(); await flush(); idle(first);
+  second.video.requests[0].resolve(); await flush();
+  assert.equal(second.dataset.previewState, "playing");
+  click(first); idle(second);
+  assert.equal(first.dataset.previewState, "loading");
   assert.equal(second.video.listenerCount(), 0);
 });
 
 test("automatic previews honor pointer, reduced-motion and data-saving preferences", async () => {
   for (const options of [{hover: false}, {reducedMotion: true}, {saveData: true}, {noMatchMedia: true}]) {
     const f = fixture(options), card = f.cards[0];
+    assert.equal(card.dataset.previewAutoplay, "false");
     enter(card); f.advance(1000); idle(card); assert.equal(card.video.playCount, 0);
     click(card); await flush();
     assert.equal(card.dataset.previewState, "playing"); assert.equal(card.video.muted, true);
@@ -217,13 +258,13 @@ test("explicit button activation stops propagation and preserves a label span", 
   assert.equal(card.button.getAttribute("aria-label"), "Stop preview");
 });
 
-test("changes to any motion, pointer or network policy cancel active and queued playback", async () => {
+test("changes to any motion, pointer or network policy cancel active playback and refresh manual-control visibility", async () => {
   for (const target of ["hover", "reducedMotion", "connection"]) {
     const f = fixture(), [first, second] = f.cards;
     click(first); await flush(); enter(second);
     f[target].emit("change");
     idle(first); idle(second); assert.equal(f.timers.size, 0);
-    f.advance(1000); assert.equal(second.video.playCount, 0);
+    f.advance(1000); assert.equal(second.video.playCount, 1);
   }
 });
 
@@ -256,11 +297,11 @@ test("edge-touching intersection observations do not lock a visible card out", a
   assert.equal(card.dataset.previewState, "playing");
 });
 
-test("filter notifications and hidden documents cancel pending previews", async () => {
+test("filter notifications and hidden documents cancel loading previews", async () => {
   for (const notify of [f => f.document.emit("gallery:filter"), f => { f.document.hidden = true; f.document.emit("visibilitychange"); }]) {
     const f = fixture(), [first, second] = f.cards;
     click(first); await flush(); enter(second); notify(f);
-    idle(first); idle(second); f.advance(1000); assert.equal(second.video.playCount, 0);
+    idle(first); idle(second); f.advance(1000); assert.equal(second.video.playCount, 1);
   }
 });
 
@@ -366,7 +407,7 @@ test("pagehide releases media, removes listeners, and rejects late completions",
   assert.ok(f.intersectionObservers.every(observer => observer.disconnected));
   assert.ok(f.mutationObservers.every(observer => observer.disconnected));
   first.video.requests[0].resolve(); await flush(); idle(first);
-  click(second); assert.equal(second.video.playCount, 0);
+  click(second); assert.equal(second.video.playCount, 1);
 });
 
 test("back-forward cache restores remain stopped but explicitly reusable", async () => {

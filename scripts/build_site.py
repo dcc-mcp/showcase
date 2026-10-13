@@ -271,9 +271,9 @@ def cards_markup(cases: list[dict], root: str, demos=None) -> str:
         href = "cases/%s/" % case["slug"]
         kinds = media_kinds(case, case["slug"] in demos)
         preview = preview_media(case)
-        attrs = (' data-preview-src="%s" data-preview-kind="video" data-error-label="预览暂不可用，请进入作品观看。"' % esc(resource_url(preview["src"]))) if preview else ""
+        attrs = (' data-preview-src="%s" data-preview-kind="video" data-loading-label="正在加载预览…" data-playing-label="静音预览中" data-error-label="预览暂不可用，请进入作品观看。"' % esc(resource_url(preview["src"]))) if preview else ""
         preview_html = ('<video class="card-preview" muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video><progress class="preview-progress" max="1" value="0" aria-hidden="true"></progress>') if preview else ""
-        button = ('<button class="preview-toggle" type="button" data-play-label="静音预览" data-stop-label="停止预览" aria-label="静音预览" aria-pressed="false" hidden><span class="preview-toggle-label">静音预览</span></button><span class="preview-status" aria-live="polite"></span>') if preview else ""
+        button = ('<button class="preview-toggle" type="button" data-play-label="静音预览" data-stop-label="停止预览" aria-label="静音预览" aria-pressed="false" hidden><span class="preview-toggle-label">静音预览</span></button><span class="preview-status" aria-live="polite"></span><span class="preview-hint" aria-hidden="true">悬停即预览</span>') if preview else ""
         cover = resolve_public(root, case["cover"]["src"])
         dims = png_size(cover) if cover.lower().endswith('.png') else jpeg_size(cover)
         fit = ' contain' if dims and (dims[0] / dims[1] < .9 or dims[0] / dims[1] > 2) else ''
