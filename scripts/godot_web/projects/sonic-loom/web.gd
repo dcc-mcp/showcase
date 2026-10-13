@@ -16,6 +16,7 @@ func _ready():
 		get_tree().quit(0 if run_web_audio_tests() else 1)
 		return
 	web_ready()
+	if "--web-layout-test" in OS.get_cmdline_user_args(): web_layout_test()
 func _process(delta):
 	super._process(delta)
 	web_tick(delta)
@@ -61,6 +62,9 @@ func web_pause():
 	for p in note_players: p.stop()
 func web_command(args):
 	if args.is_empty(): return
+	if str(args[0]) in ["layout:mobile", "layout:desktop"]:
+		web_layout(str(args[0]) == "layout:mobile")
+		return
 	var command = str(args[0])
 	var parts = command.split(":")
 	if parts.size() == 3 and parts[0] == "cell":
@@ -208,3 +212,24 @@ func _draw():
 	elif status == "SAVE FAILED / STORAGE UNAVAILABLE": short_status = "Storage unavailable. Not saved."
 	elif status == "NO SAVED PATTERN YET": short_status = "No saved pattern yet."
 	txt(Vector2(32,1294),short_status,32,MUTED)
+
+# Browser layout changes preserve the native game/session; only presentation changes.
+func web_layout(mobile: bool):
+	mobile_layout = mobile
+	get_window().content_scale_size = MOBILE_SIZE if mobile else Vector2i(1280, 800)
+	get_window().content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
+	queue_redraw()
+	web_publish()
+
+func web_layout_test():
+	var before = JSON.stringify(pattern)
+	var checks = []
+	for compact in [true, false, true, false]:
+		web_layout(compact)
+		checks.append(mobile_layout == compact)
+		checks.append(get_window().content_scale_size == (MOBILE_SIZE if compact else Vector2i(1280,800)))
+		checks.append(JSON.stringify(pattern) == before)
+	var passed = checks.all(func(value): return value)
+	print("RESPONSIVE_LAYOUT " + JSON.stringify({"passed":passed,"checks":checks.size(),"case":"sonic-loom"}))
+	get_tree().quit(0 if passed else 1)

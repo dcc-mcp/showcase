@@ -22,7 +22,7 @@ def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(site)))
     threading.Thread(target=server.serve_forever, daemon=True).start()
     origin = f'http://127.0.0.1:{server.server_port}'
-    report = {'passed': False, 'scope': 'isolated Chromium preview, not deployment or physical mobile',
+    report = {'passed': False, 'scope': 'isolated Chromium desktop and touch-viewport preview, not deployment or physical mobile',
               'input': 'Native video keyboard Space for play/pause/resume/replay; HTML media API for seek',
               'audio': 'not-applicable: intentionally silent', 'checks': []}
     try:
@@ -32,7 +32,12 @@ def main():
             for locale, prefix in [('en', ''), ('zh', '/zh')]:
                 for view, width, height in [('desktop', 1440, 1000), ('mobile', 390, 844)]:
                     label = f'{locale}-{view}'
-                    context = browser.new_context(viewport={'width': width, 'height': height}, accept_downloads=True)
+                    context = browser.new_context(viewport={'width': width, 'height': height},
+                        is_mobile=view == 'mobile', has_touch=view == 'mobile',
+                        reduced_motion='reduce', accept_downloads=True)
+                    media_requests = []
+                    context.on('request', lambda request: media_requests.append(request.url)
+                               if request.url.split('?')[0].endswith('.mp4') else None)
                     context.route('**/*', lambda route: route.continue_()
                                   if route.request.url.startswith(origin + '/') else route.abort())
                     page = context.new_page()
@@ -44,15 +49,17 @@ def main():
                     video.scroll_into_view_if_needed()
                     expect(video).to_have_js_property('controls', True)
                     expect(video).to_have_js_property('autoplay', False)
-                    video.evaluate('v => v.load()')
-                    page.wait_for_function('document.querySelector("video").readyState >= 2')
-                    assert abs(video.evaluate('v => v.duration') - 8) < .05
-                    assert video.evaluate('v => [v.videoWidth, v.videoHeight]') == [1178, 814]
+                    assert not media_requests, 'Video requested before user activation'
                     expect(video).to_have_js_property('paused', True)
+                    expect(video).to_have_attribute('data-preview-audio', 'false')
+                    expect(page.locator('.video-audio-note')).to_have_text('No audio track' if locale == 'en' else '无音轨')
                     video.focus()
                     expect(video).to_be_focused()
                     page.keyboard.press('Space')
                     page.wait_for_function('!document.querySelector("video").paused && document.querySelector("video").currentTime > .3')
+                    assert abs(video.evaluate('v => v.duration') - 8) < .05
+                    assert video.evaluate('v => [v.videoWidth, v.videoHeight]') == [1178, 814]
+                    expect(video).to_have_js_property('muted', True)
                     page.keyboard.press('Space')
                     expect(video).to_have_js_property('paused', True)
                     video.evaluate('v => { v.currentTime = 4; }')
@@ -90,7 +97,9 @@ def main():
                         'duration_seconds': 8, 'native_keyboard_play_pause_resume_replay': True,
                         'api_seek': True, 'whole_clip_played_to_end': True, 'decoded_browser_frames': frames,
                         'source_download_sha256': archive_hash, 'video_sha256': hashlib.sha256(expected).hexdigest(),
-                        'video_source_present': bool(src), 'no_horizontal_overflow': True})
+                        'video_source_present': bool(src), 'no_horizontal_overflow': True,
+                        'no_video_request_before_activation': True, 'verified_silent_label': True,
+                        'touch_viewport_emulation': view == 'mobile'})
                     context.close()
             browser.close()
         report['passed'] = len(report['checks']) == 4

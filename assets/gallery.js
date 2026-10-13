@@ -48,10 +48,10 @@ const search = document.querySelector("#search");
 const count = document.querySelector("#result-count");
 const empty = document.querySelector("#empty-state");
 const wall = document.querySelector("#work-wall");
-const state = {software:"all", capability:"all", query:""};
+const state = {software:"all", capability:"all", media:"all", query:""};
 const params = new URLSearchParams(window.location.search);
 const validFilter = (type,value) => Array.from(document.querySelectorAll('[data-filter="' + type + '"] button')).some(button => button.dataset.value === value);
-["software","capability"].forEach(type => {
+["software","capability","media"].forEach(type => {
 const value = params.get(type);
 if (value && validFilter(type,value)) state[type] = value;
 });
@@ -63,12 +63,20 @@ let visible = 0;
 cards.forEach(card => {
 const software = JSON.parse(card.dataset.software);
 const capabilities = JSON.parse(card.dataset.capabilities);
-const match = (state.software === "all" || software.includes(state.software)) &&
+const media = JSON.parse(card.dataset.media || '["image"]');
+const match = (state.media === "all" || media.includes(state.media)) &&
+(state.software === "all" || software.includes(state.software)) &&
 (state.capability === "all" || capabilities.includes(state.capability)) &&
-(!query || (card.dataset.search + " " + card.textContent).toLocaleLowerCase().includes(query));
+(!query || (card.dataset.search || "").toLocaleLowerCase().includes(query));
 card.hidden = !match;
 if (match) visible += 1;
 });
+const games = document.querySelector('#games');
+if (games) {
+const visibleSlugs = new Set(cards.filter(card => !card.hidden).map(card => card.dataset.case));
+games.querySelectorAll('[data-game-case]').forEach(card => { card.hidden = !visibleSlugs.has(card.dataset.gameCase); });
+games.hidden = !['all', 'interactive'].includes(state.media) || !games.querySelector('[data-game-case]:not([hidden])');
+}
 document.querySelectorAll("[data-filter]").forEach(group => {
 group.querySelectorAll("button").forEach(button => button.setAttribute("aria-pressed",String(state[group.dataset.filter] === button.dataset.value)));
 });
@@ -80,9 +88,11 @@ count.textContent = document.documentElement.lang.startsWith("zh")
 const next = new URLSearchParams();
 if (state.software !== "all") next.set("software",state.software);
 if (state.capability !== "all") next.set("capability",state.capability);
+if (state.media !== "all") next.set("media",state.media);
 if (state.query.trim()) next.set("q",state.query.trim());
 const queryString = next.toString();
 window.history.replaceState(null,"",window.location.pathname + (queryString ? "?" + queryString : "") + window.location.hash);
+document.dispatchEvent(new Event("gallery:filter"));
 };
 document.querySelectorAll("[data-filter]").forEach(group => {
 group.addEventListener("click",event => {
@@ -92,8 +102,14 @@ state[group.dataset.filter] = button.dataset.value; apply();
 });
 });
 search.addEventListener("input",() => {state.query = search.value; apply();});
-const reset = () => {state.software = state.capability = "all"; state.query = search.value = ""; apply();};
+const reset = () => {state.software = state.capability = state.media = "all"; state.query = search.value = ""; apply();};
 document.querySelector("#reset-filters").addEventListener("click",reset);
 document.querySelector("#empty-reset").addEventListener("click",reset);
-controls.hidden = false; apply();
+controls.hidden = false; search.disabled = false;
+const disclosure = document.querySelector("#filter-disclosure");
+if (disclosure) disclosure.addEventListener("keydown", event => {
+if (event.key === "Escape" && disclosure.open) { disclosure.open = false; disclosure.querySelector("summary").focus(); }
+});
+if (disclosure && (state.software !== "all" || state.capability !== "all")) disclosure.open = true;
+apply();
 })();
