@@ -30,6 +30,7 @@ def shelf(cases, demos, root):
 
 def pages(cases, demos, root):
     import build_site as site
+    from asset_versions import game_revision
     selected = [case for case in cases if case['slug'] in demos]
     result = {}
     for case in selected:
@@ -47,13 +48,13 @@ def pages(cases, demos, root):
         result['games/%s/index.html' % slug] = '''<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 %s<link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/games.css">
-<script src="../../assets/games.js" defer></script></head><body>
+<script src="../../assets/games.js" defer></script></head><body class="game-page">
 <a class="skip-link" href="#game-stage">跳到游戏</a>
 <header class="site-header wrap"><a class="brand" href="../../"><strong>DCC-MCP</strong><span>Showcase</span></a>
 <nav aria-label="主导航"><a href="../../#games">游戏</a><a href="../../#works">作品合集</a><a href="../../agents/">Agent / Data</a></nav></header>
 <main class="wrap games-main"><a class="detail-back" href="../../#games">← 返回游戏合集</a>
 <div class="game-layout"><section class="game-primary" aria-labelledby="game-title">
-<div class="game-stage" id="game-stage" data-game-stage data-game-slug="%s" data-game-url="%s" data-state="idle">
+<div class="game-stage" id="game-stage" data-game-stage data-game-slug="%s" data-portrait-ratio="%s" data-game-url="%s" data-game-revision="%s" data-state="idle">
 <div class="game-poster" data-game-poster>%s<div class="game-poster-caption"><span class="game-engine">Godot Web</span><h2>%s</h2><button class="primary-button" data-game-start type="button" hidden>开始游戏</button><p>点击后才下载游戏。共享引擎约 36 MiB，首次启动可能需要片刻。</p></div></div>
 <div class="game-frame" data-game-frame></div><button class="game-full-exit" data-game-leave-full type="button" hidden>退出全屏</button></div>
 <div class="game-toolbar"><p data-game-status role="status" aria-live="polite">准备就绪，尚未加载游戏。</p>
@@ -64,7 +65,7 @@ def pages(cases, demos, root):
 <noscript><p class="notice">启用 JavaScript 后即可在此试玩，也可使用上方独立页面链接。</p></noscript>
 </section><aside class="more-games" aria-labelledby="more-games-title"><div class="games-heading"><h2 id="more-games-title">更多游戏</h2><a href="../../#games">查看全部</a></div><div class="more-games-grid">%s</div></aside></div></main>
 <footer class="site-footer wrap"><p>DCC-MCP Showcase</p><a href="../../cases/%s/">查看本作的创作过程、来源与许可</a></footer></body></html>''' % (
-            metadata, site.esc(slug), site.esc('../../' + demo['url']),
+            metadata, site.esc(slug), {'sonic-loom':'720/1320','prism-tide':'720/1760'}.get(slug,'720/1280'), site.esc('../../' + demo['url']), game_revision(root, demo['url']),
             site.media_markup(case['cover'], root, '../../', eager=True), title, title,
             site.esc(case['subtitle']), language_note, site.esc(slug), site.esc(demo['controls']['zh']),
             site.esc(demo['notes']['zh']), site.esc(demo['engine']), site.esc('../../' + demo['url']),

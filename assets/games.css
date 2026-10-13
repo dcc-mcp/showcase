@@ -12,3 +12,15 @@
 .game-language-note{font-size:11px;color:var(--muted);line-height:1.6;margin:9px 0 0}
 
 .game-full-exit{position:absolute;top:12px;right:12px;z-index:4;min-height:44px;padding:9px 16px;border:1px solid var(--accent);border-radius:6px;background:#101311ee;color:var(--accent);font-size:13px}
+
+/* Size the theater from available CSS pixels, including browser zoom. The
+   portrait canvas expands the outer page, never an independently scrolling iframe. */
+.game-page .games-main,.game-page>.site-header,.game-page>.site-footer{max-width:1880px;width:100%;padding-inline:clamp(16px,3vw,64px)}
+.game-page .game-layout{grid-template-columns:minmax(0,1fr) clamp(220px,17vw,300px);gap:clamp(18px,2vw,32px)}
+.game-stage{aspect-ratio:auto;min-height:0;height:var(--stage-height, min(65vw,75svh));max-height:none}
+.game-stage[data-layout=mobile]{height:var(--stage-height,74svh)}
+.game-stage:fullscreen{height:100dvh!important;max-height:none;padding-top:56px}
+.game-stage:fullscreen .game-frame{top:56px}
+.game-page .game-actions button{min-height:44px}
+@media(max-width:1100px){.game-page .game-layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:700px){.game-page .games-main{padding-inline:12px}.game-page .site-header{padding-inline:16px}.game-poster-caption{max-width:100%;padding:20px}.game-poster h2{font-size:clamp(25px,7vw,38px)}}

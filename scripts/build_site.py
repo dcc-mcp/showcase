@@ -228,7 +228,7 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
                     alt, url, AUDIO_TYPES[extension], url, esc(os.path.basename(rel)), extension[1:].upper())
     if os.path.splitext(rel)[1].lower() in (".mp4", ".webm"):
         poster = (' poster="%s"' % esc(resource_url(media["poster"], prefix))) if media.get("poster") else ""
-        return '<video controls playsinline preload="metadata"%s aria-label="%s"><source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>' % (poster, alt, url, url)
+        return '<video controls playsinline preload="none" data-hover-preview data-preview-audio="%s"%s aria-label="%s"><source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>' % (esc(media.get("preview_audio", "unknown")), poster, alt, url, url)
     load = ' loading="eager" fetchpriority="high"' if eager else ' loading="lazy"'
     return '<img src="%s" alt="%s"%s%s decoding="async">' % (url, alt, dimensions(root, rel), load)
 
@@ -236,6 +236,8 @@ def figure(media: dict, root: str, prefix: str) -> str:
     visual = media_markup(media, root, prefix)
     if os.path.splitext(media["src"])[1].lower() not in {".mp4", ".webm", *AUDIO_TYPES}:
         visual = '<a href="%s" aria-label="%s">%s</a>' % (esc(prefix + media["src"]), esc("查看原尺寸：" + media["alt"]), visual)
+    if os.path.splitext(media["src"])[1].lower() in {".mp4", ".webm"}:
+        visual = '<div class="detail-video">' + visual + '</div>'
     caption = media.get("caption", media["alt"])
     return '<figure class="artifact">%s<figcaption>%s</figcaption></figure>' % (visual, esc(caption))
 
@@ -458,6 +460,16 @@ def model_attribution_section(case: dict) -> str:
 
 def detail_page(case: dict, root: str, next_case: dict | None = None, demo=None) -> str:
     prefix = "../../"
+    import preview_audio
+    audio_tracks = preview_audio.read(root) if preview_media(case) else {}
+
+    def detail_figure(item):
+        # Presentation-only defaults never alter the publication inventory.
+        if os.path.splitext(item["src"])[1].lower() in {".mp4", ".webm"}:
+            item = dict(item, poster=item.get("poster", case["cover"]["src"]),
+                        preview_audio=audio_tracks.get(item["src"], "unknown"))
+        return figure(item, root, prefix)
+
     nav_sections = [("goal", "创作目标"), ("prompt", "提示词"), ("environment", "软件与工具"),
                     ("process", "分步过程"), ("results", "成果"), ("evidence", "验证与边界"), ("downloads", "工程文件"), ("resources", "资源与许可")]
     models = model_attribution_section(case)
@@ -472,7 +484,7 @@ def detail_page(case: dict, root: str, next_case: dict | None = None, demo=None)
     tools = "".join("<li><code>%s</code><p>%s</p></li>" % (esc(item["name"]), esc(item["description"])) for item in case["tools"])
     steps = []
     for item in case["steps"]:
-        visual = figure(item["image"], root, prefix) if item.get("image") else ""
+        visual = detail_figure(item["image"]) if item.get("image") else ""
         steps.append('<li class="process-step"><div class="step-heading"><h3>%s</h3></div><p>%s</p>%s</li>' %
                      (esc(item["title"]), esc(item["description"]), visual))
     checks = []
@@ -528,7 +540,7 @@ def detail_page(case: dict, root: str, next_case: dict | None = None, demo=None)
        media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]), metadata,
        esc(case["evidence_label"]), esc(case["evidence_scope"]), nav, esc(case["goal"]), esc(case["summary"]),
        models, prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools, related_projects(case),
-       "".join(steps), "".join(figure(item, root, prefix) for item in case["results"]), "".join(checks),
+       "".join(steps), "".join(detail_figure(item) for item in case["results"]), "".join(checks),
        limitations, esc(case["verified_at"]), downloads, resources, esc(resource_url(case["source"]["url"])),
        esc(case["source"]["commit"]), esc(case["credits"]["author"]), esc(case["credits"]["license"]),
        esc(case["credits"]["note"]), next_link)
@@ -590,6 +602,7 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         with open(collection_path, encoding="utf-8-sig") as fh:
             cases = json.load(fh)["cases"]
         import playable
+        import asset_versions
         playable_demos, playable_assets = playable.read_and_validate(root, cases)
         import games
         with open(resolve_public(root, "index.html"), encoding="utf-8-sig") as fh:
@@ -646,7 +659,7 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
                 case_path = "cases/%s/index.html" % case["slug"]
                 pages[case_path] = pages[case_path].replace(
                     '<section class="detail-section" id="results">',
-                    playable.section(playable_demos[case["slug"]]) + '<section class="detail-section" id="results">')
+                    playable.section(playable_demos[case["slug"]]).replace('data-playable', 'data-playable data-play-revision="' + asset_versions.game_revision(root, playable_demos[case['slug']]['url']) + '"', 1) + '<section class="detail-section" id="results">')
                 pages[case_path] = pages[case_path].replace(
                     '<a href="#results">成果</a>', '<a href="#play">交互体验</a><a href="#results">成果</a>')
                 pages[case_path] = pages[case_path].replace(
@@ -695,7 +708,10 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         if os.path.isdir(out_abs):
             shutil.rmtree(out_abs)
         os.makedirs(out_abs)
+        import asset_versions
         for rel, text in pages.items():
+            if rel.endswith(".html"):
+                text = asset_versions.version_html(text, rel, sources)
             dst = os.path.join(out_abs, *rel.split("/"))
             os.makedirs(os.path.dirname(dst), exist_ok=True)
             with open(dst, "w", encoding="utf-8", newline="\n") as fh:

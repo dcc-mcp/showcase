@@ -59,13 +59,14 @@ def main():
             config=json.loads(match.group(1))
             if config.get('threadPoolSize') not in (None,0): raise SystemExit('Threaded export rejected')
             config['executable']='../runtime/godot-'+VERSION
+            config['showcasePackSha256']=digest(out/'game.pck')
             config['ensureCrossOriginIsolationHeaders']=False
             config['emscriptenPoolSize']=0
             config['godotPoolSize']=0
             config['fileSizes']={'../runtime/godot-'+VERSION+'.wasm':(runtime/f'godot-{VERSION}.wasm').stat().st_size,'game.pck':(out/'game.pck').stat().st_size}
             dest=ROOT/'play'/slug;dest.mkdir(exist_ok=True)
             shutil.copyfile(out/'game.pck',dest/'game.pck')
-            shell=(ROOT/'scripts/godot_web/shell.html').read_text().replace('__SLUG__',slug).replace('__TITLE__',title).replace('__CONFIG__',json.dumps(config,separators=(',',':')))
+            shell=(ROOT/'scripts/godot_web/shell.html').read_text().replace('__SLUG__',slug).replace('__TITLE__',title).replace('__CONFIG__',json.dumps(config,separators=(',',':'))).replace('__SHELL_VERSION__',hashlib.sha256((ROOT/'play/shell.js').read_bytes()+(ROOT/'play/shell.css').read_bytes()).hexdigest()[:12])
             (dest/'index.html').write_text(shell)
             records.append({'case':slug,'source_archive':f'docs/showcase/{slug}/'+('Sonic-Loom-Source.zip' if slug=='sonic-loom' else 'Prism-Tide-Source.zip'),'source_archive_sha256':digest(ROOT/f'docs/showcase/{slug}'/('Sonic-Loom-Source.zip' if slug=='sonic-loom' else 'Prism-Tide-Source.zip')),'project_files':[{ 'path':str(f.relative_to(ROOT)), 'sha256':digest(f)} for f in sorted(src.rglob('*')) if f.is_file() and '.godot' not in f.parts]})
         (ROOT/'play/export-provenance.json').write_text(json.dumps({'engine':version,'editor_sha256':EDITOR_SHA256,'editor_archive_sha256':EDITOR_ARCHIVE_SHA256,'editor_archive_url':'https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip','template_sha256':TEMPLATE_SHA256,'official_release':'https://godotengine.org/download/archive/4.6.3-stable/','threads':False,'pwa':False,'renderer':'gl_compatibility','projects':sorted(records,key=lambda r:[slug for slug,_ in CASES].index(r['case']))},indent=2)+'\n')

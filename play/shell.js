@@ -45,6 +45,44 @@
   // tap as canvas mouse input. Never call the game command bridge from this path.
   let touchStart=null;
   const canvas=id('canvas');
+  // CSS size and Godot logical size are separate. Reflow live when the iframe
+  // width changes; resizing never reloads the game or resets its state/audio.
+  let mobileLayout=null;
+  function resizeLayout() {
+    const mobile=document.documentElement.clientWidth<720 || matchMedia('(pointer:coarse)').matches;
+    if (mobile!==mobileLayout) {
+      mobileLayout=mobile;
+      const width=mobile?720:1280, height=mobile?(sonic?1320:1760):800;
+      document.body.dataset.layout=mobile?'mobile':'desktop';
+      canvas.width=width;canvas.height=height;
+      id('stage').style.setProperty('--canvas-ratio',width/height);
+      id('stage').style.aspectRatio=`${width} / ${height}`;
+      id('instructions').textContent=t[sonic?(mobile?'sonicMobile':'sonic'):(mobile?'prismMobile':'prism')];
+      if(started)command(mobile?'layout:mobile':'layout:desktop');
+      if(embedded)parent.postMessage({type:'showcase:layout',mode:mobile?'mobile':'desktop',width,height},location.origin);
+    }
+    fitCanvas();
+  }
+  function fitCanvas() {
+    const stage=id('stage');
+    if(stage.hidden)return;
+    const ratio=canvas.width/canvas.height;
+    const width=Math.min(stage.clientWidth,stage.clientHeight*ratio,mobileLayout?720:Infinity);
+    if(width>0){canvas.style.width=width+'px';canvas.style.height=width/ratio+'px';}
+  }
+  // Legacy case-page embeds also grow with content, so portrait controls stay
+  // on the outer document's scroll path instead of inside a nested viewport.
+  if(parent!==window && !embedded)new ResizeObserver(()=>{
+    parent.postMessage({type:'showcase:resize',height:Math.ceil(document.querySelector('main').getBoundingClientRect().height)},location.origin);
+  }).observe(document.querySelector('main'));
+  new ResizeObserver(resizeLayout).observe(document.documentElement);
+  new ResizeObserver(fitCanvas).observe(id('stage'));
+  window.addEventListener('resize',resizeLayout);
+  window.visualViewport?.addEventListener('resize',resizeLayout);
+  document.addEventListener('fullscreenchange',()=>{resizeLayout();fitCanvas();});
+  id('alternate').addEventListener('toggle',fitCanvas);
+  resizeLayout();
+
   canvas.addEventListener('touchstart',event=>{
     if(document.body.dataset.layout!=='mobile')return;
     event.stopImmediatePropagation();
@@ -96,19 +134,24 @@
       if(!pending)return;
       if(!Engine.isWebGLAvailable(2))throw new Error(t.unsupported);
       const config=JSON.parse(id('export-config').textContent);
-      const mobile=matchMedia('(max-width:700px), (pointer:coarse)').matches;
-      if(mobile){const height=sonic?1320:1760;config.args=['--','--mobile-layout'];id('canvas').width=720;id('canvas').height=height;id('stage').style.aspectRatio=`720 / ${height}`;id('stage').style.setProperty('--mobile-ratio',720/height);document.body.dataset.layout='mobile';}
-      id('alternate').open=!mobile;id('instructions').textContent=t[sonic?(mobile?'sonicMobile':'sonic'):(mobile?'prismMobile':'prism')];
+      resizeLayout();
+      const mobile=mobileLayout;
+      config.args=mobile?['--','--mobile-layout']:[];
+      id('alternate').open=!embedded&&!mobile;
       engine=new Engine({...config,canvas:id('canvas'),executable:'../runtime/godot-4.6.3',mainPack:'game.pck',canvasResizePolicy:0,focusCanvas:true,locale:lang,onProgress:(n,total)=>{if(total){id('progress').max=total;id('progress').value=n;}},onExit:()=>{if(document.body.dataset.state!=='error')location.reload();}});
       id('stage').hidden=false;
       // Await the public load promise first: this official runtime's init()
       // does not propagate a failed WASM fetch to startGame().
       await Engine.load(config.executable, config.fileSizes[config.executable+'.wasm']);
       if(!pending)return;
-      await engine.startGame();
+      const packURL='game.pck'+(config.showcasePackSha256?'?v='+config.showcasePackSha256:'');
+      // Public Engine APIs let a versioned URL retain the stable virtual path.
+      // Old cached PCKs cannot silently omit the responsive native adapter.
+      await engine.preloadFile(packURL,'game.pck');
+      await engine.start({args:['--main-pack','game.pck',...config.args]});
       if(!pending){engine.requestQuit();return;}
       clearTimeout(loadTimer);id('cancel').hidden=true;
-      pending=false;started=true;id('start').hidden=true;id('exit').hidden=false;id('fullscreen').hidden=false;id('controls').hidden=false;id('alternate').hidden=false;id('pads').hidden=!sonic;id('progress').hidden=true;id('status').textContent=t.running;document.body.dataset.state='running';report('running');id('canvas').focus();
+      pending=false;started=true;command(mobileLayout?'layout:mobile':'layout:desktop');fitCanvas();id('start').hidden=true;id('exit').hidden=false;id('fullscreen').hidden=false;id('controls').hidden=false;id('alternate').hidden=false;id('pads').hidden=!sonic;id('progress').hidden=true;id('status').textContent=t.running;document.body.dataset.state='running';report('running');id('canvas').focus();
     }catch(error){fail(error);}
   });
   id('cancel').addEventListener('click',()=>location.reload());

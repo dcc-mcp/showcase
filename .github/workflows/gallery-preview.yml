@@ -11,7 +11,7 @@ jobs:
   gallery:
     name: Artwork gallery browser acceptance
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - name: Check out exact candidate
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -28,6 +28,7 @@ jobs:
           python scripts/test_agent_pages.py
           python scripts/test_games.py
           node scripts/test_preview_controls.js
+          node scripts/test_detail_video_controls.js
       - name: Install locked browser driver
         run: |
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
@@ -41,8 +42,12 @@ jobs:
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python scripts/gallery_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview" --expected-head "$EXPECTED_HEAD_SHA"
+      - name: Verify every gallery and result video hover
+        run: python scripts/video_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview/videos"
       - name: Verify playable stages and preview sound
         run: python scripts/games_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview/games"
+      - name: Verify native reflow, viewport, zoom and fullscreen
+        run: python scripts/responsive_games_browser.py --site _site --output "${{ runner.temp }}/gallery-preview/responsive"
       - name: Keep public screenshots and report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
