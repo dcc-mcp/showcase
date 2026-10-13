@@ -73,7 +73,6 @@ const idle = e => {
   assert.equal(e.video.muted, true);
   assert.equal(e.video.hasAttribute("src"), false);
   assert.equal(e.video.currentTime, 0);
-  assert.equal(e.video.controls, true);
 };
 
 test("native fallback and preload none remain usable before any intent", () => {
@@ -81,7 +80,7 @@ test("native fallback and preload none remain usable before any intent", () => {
     idle(e); assert.equal(e.video.playCount, 0); assert.equal(e.video.preload, "none");
     assert.ok(e.source.getAttribute("src")); assert.equal(e.video.autoplay, false);
     assert.equal(e.video.loadCount, 0); assert.equal(e.video.srcAssignments, 0);
-    assert.equal(e.video.tabIndex, 0);
+    assert.equal(e.video.tabIndex, 0); assert.equal(e.video.controls, true);
   }
 });
 test("hover immediately starts muted preview and leave releases decoder/source", async () => {
@@ -89,7 +88,7 @@ test("hover immediately starts muted preview and leave releases decoder/source",
   await flush(); assert.equal(e.host.dataset.videoState, "preview");
   assert.equal(e.video.muted, true); assert.equal(e.video.loop, true);
   e.video.currentTime = 5; leave(e); idle(e);
-  assert.equal(e.source.hasAttribute("src"), false);
+  assert.equal(e.source.hasAttribute("src"), false); assert.equal(e.video.controls, false);
   assert.equal(e.video.loadCount, 1); assert.equal(e.video.loadWithSourceCount, 0);
 });
 test("explicit watching enables native audio, seeking and survives pointer exit", async () => {
@@ -109,19 +108,23 @@ test("native controls play adopts the session without restarting or double play"
   assert.equal(e.video.currentTime, 2); assert.equal(e.video.muted, false);
   leave(e); assert.equal(e.video.paused, false);
 });
-test("native pointer, keyboard and assistive intent restore released sources once without play", async () => {
-  for (const [event, data] of [["pointerdown", {}], ["keydown", {key: "ArrowRight"}], ["click", {}]]) {
-    const e = fixture().entries[0]; enter(e); await flush(); leave(e);
-    assert.equal(e.source.hasAttribute("src"), false); assert.equal(e.video.src, null);
-    const plays = e.video.playCount, loads = e.video.loadCount, assignments = e.video.srcAssignments;
-    e.video.emit(event, data);
-    assert.equal(e.video.src, "https://example.com/showcase/media/film-0.mp4");
-    assert.equal(e.video.playCount, plays); assert.equal(e.video.loadCount, loads);
-    e.video.emit("click"); assert.equal(e.video.srcAssignments, assignments + 1);
-    e.video.emit("play"); e.video.emit("playing");
-    assert.equal(e.host.dataset.videoState, "watching"); assert.equal(e.video.playCount, plays);
-    watch(e); idle(e); assert.equal(e.video.loadWithSourceCount, 0);
-  }
+test("released poster pointerdown stays inert and one click starts exactly once", async () => {
+  const e = fixture().entries[0]; enter(e); await flush(); leave(e);
+  assert.equal(e.source.hasAttribute("src"), false); assert.equal(e.video.src, null);
+  assert.equal(e.video.controls, false);
+  const plays = e.video.playCount, assignments = e.video.srcAssignments; let prevented = 0;
+  e.video.emit("pointerdown"); e.video.emit("keydown", {key: "ArrowRight"});
+  assert.equal(e.video.srcAssignments, assignments); assert.equal(e.video.playCount, plays);
+  e.video.emit("click", {preventDefault() { prevented++; }}); await flush();
+  assert.equal(prevented, 1); assert.equal(e.video.playCount, plays + 1);
+  assert.equal(e.video.srcAssignments, assignments + 1); assert.equal(e.video.controls, true);
+  assert.equal(e.host.dataset.videoState, "watching"); assert.equal(e.video.muted, false);
+  // A later native click must not be intercepted or restart the source.
+  e.video.currentTime = 3;
+  e.video.emit("pointerdown"); e.video.emit("click", {preventDefault() { prevented++; }});
+  assert.equal(prevented, 1); assert.equal(e.video.playCount, plays + 1);
+  assert.equal(e.video.srcAssignments, assignments + 1); assert.equal(e.video.currentTime, 3);
+  watch(e); idle(e); assert.equal(e.video.loadWithSourceCount, 0);
 });
 test("released-idle Space and Enter restart once and suppress the disabled native default", async () => {
   for (const key of [" ", "Enter"]) {

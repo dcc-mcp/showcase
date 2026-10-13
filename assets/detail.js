@@ -90,7 +90,7 @@ update();
     const video = entry.video;
     video.pause();
     video.muted = true;
-    video.controls = true;
+    video.controls = false; // Empty native controls swallow clicks; show a clickable poster instead.
     video.loop = false;
     entry.nativeIntent = false;
     try { video.currentTime = 0; } catch (_) { /* Metadata may not exist yet. */ }
@@ -204,7 +204,9 @@ update();
       else start(entry, false);
     });
     const nativeIntent = () => {
-      if (!available(entry)) return;
+      // Released posters are handled on click, never pointerdown: preparing a
+      // source here would make that click download/restart the same media twice.
+      if (!video.controls || !available(entry)) return;
       entry.nativeIntent = true;
       // A stopped player has no live sources. Restore one synchronously before
       // the native control's default action; never issue a second play() here.
@@ -218,7 +220,15 @@ update();
       }
     };
     listen(video, "pointerdown", nativeIntent, {capture: true});
-    listen(video, "click", nativeIntent, {capture: true}); // Assistive activation need not emit pointerdown.
+    listen(video, "click", event => {
+      const released = !video.controls && !video.hasAttribute("src") && !sources.some(item => item.hasAttribute("src"));
+      if (released && available(entry)) {
+        event.preventDefault();
+        start(entry, false); // One poster click restores the source and native controls.
+        return;
+      }
+      nativeIntent(); // Preserve every active native pause/seek/volume gesture.
+    }, {capture: true});
     listen(video, "keydown", event => {
       const released = entry.host.dataset.videoState === "idle" && !video.hasAttribute("src") &&
         !sources.some(item => item.hasAttribute("src"));

@@ -22,7 +22,7 @@ from localization_browser_smoke import MountHandler
 # Observers only: no media methods or browser policies are replaced.
 MEDIA_DIAGNOSTICS = """(() => {
   window.__mediaDiagnosticEvents = [];
-  for (const event of ['loadstart', 'emptied', 'loadedmetadata', 'loadeddata', 'suspend', 'progress', 'abort', 'error', 'play', 'playing', 'pause', 'waiting', 'pointerenter', 'pointerdown']) {
+  for (const event of ['loadstart', 'emptied', 'loadedmetadata', 'loadeddata', 'suspend', 'progress', 'abort', 'error', 'play', 'playing', 'pause', 'waiting', 'pointerenter', 'pointerdown', 'click']) {
     document.addEventListener(event, e => {
       const v = e.target;
       if (!(v instanceof HTMLVideoElement) || window.__mediaDiagnosticEvents.length >= 500) return;
@@ -257,10 +257,11 @@ def run(site: Path, output: Path):
                                 expect(host).to_have_attribute('data-video-state', 'idle')
                                 assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-native-stop')
                                 if not mobile:
-                                    stage = f'{locale}/{kind}: released native pointer {slug}/{index}'
-                                    # One click on Chromium's native lower-left play
-                                    # button must be enough after full source release.
-                                    # Moving within this host does not re-enter hover.
+                                    stage = f'{locale}/{kind}: released poster single click {slug}/{index}'
+                                    # Keep the same lower-left single-click target.
+                                    # Fully released players show a clickable poster,
+                                    # not a disabled native control that eats input.
+                                    assert video.evaluate('(v)=>!v.controls')
                                     box = video.bounding_box()
                                     assert box is not None
                                     video.click(position={'x': 30, 'y': box['height'] - 25})
@@ -269,8 +270,8 @@ def run(site: Path, output: Path):
                                     before_stop = len(media_requests())
                                     host.locator('.video-watch').click()
                                     expect(host).to_have_attribute('data-video-state', 'idle')
-                                    assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-pointer-stop')
-                                pointer_scope = ' and native pointer' if not mobile else ''
+                                    assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-poster-stop')
+                                pointer_scope = ' and poster single click' if not mobile else ''
                                 check(f'{locale}/{kind}: {item["src"]} decoded; hover/manual/released keyboard{pointer_scope}; cleanup without refetch')
                             assert not any(url.split('?')[0].endswith(('.wasm', '.pck')) for url in requests)
                             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
