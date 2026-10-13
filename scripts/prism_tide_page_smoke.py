@@ -31,6 +31,8 @@ try:
             page.goto(origin + '/', wait_until='networkidle')
             page.locator('#search').fill('Prism Tide')
             expect(page.locator('.case-card:visible')).to_have_count(1)
+            if page.locator('.filter-disclosure').get_attribute('open') is None:
+                page.locator('.filter-disclosure summary').click()
             page.locator('[data-filter="software"] [data-value="Godot"]').click()
             page.locator('[data-filter="capability"] [data-value="交互"]').click()
             expect(page.locator('.case-card:visible')).to_have_count(1)

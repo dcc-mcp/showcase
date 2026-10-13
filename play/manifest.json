@@ -68,8 +68,8 @@
     },
     {
       "path": "play/shell.js",
-      "bytes": 17114,
-      "sha256": "f077a15f236d7f537326897e89f32f85f56bc0ac8c48cf232c7347e27adcaa9b"
+      "bytes": 17182,
+      "sha256": "a6430d5e43921f381a733a1cff2ca93dc533a2100a46b0b5c7df2b58589df1e3"
     },
     {
       "path": "play/export-provenance.json",
@@ -149,22 +149,22 @@
     {
       "path": "play/sonic-loom/index.html",
       "bytes": 1906,
-      "sha256": "873695e8d916b579dddcb628ce1325e687d6c13270ea034a084604dfb6099f9a"
+      "sha256": "a7f69e623cad7940a38e76c1cd66e6ca42e57ff9902fe3a26576c0a1d87a833a"
     },
     {
       "path": "play/sonic-loom/game.pck",
       "bytes": 25212,
-      "sha256": "61bb00064ac834a236d88d2420a501e7bea088c81b873e8adc2a026654d1d63b"
+      "sha256": "dc87fd79473b8a253eaae8bce6785f3664a02934cb90eacf705330679f29b344"
     },
     {
       "path": "play/prism-tide/index.html",
       "bytes": 1906,
-      "sha256": "467adb962c6886da58df3406936a71e556afebf1ad49162fae38c072a5a954ba"
+      "sha256": "2ec70522c89cf9b31fd853d782b76c171b08b9f0763bdf0f5180c7790bbab504"
     },
     {
       "path": "play/prism-tide/game.pck",
       "bytes": 23192,
-      "sha256": "0cc5877e88c3797f711b9ed11e0c3c0891cc2af1349d9c0be89fba7d1dd0df4f"
+      "sha256": "7308582b1b5757348b5ad322e6a03f3844cd51e628db0ebb9ca972d161871758"
     }
   ],
   "demos": [
@@ -212,8 +212,8 @@
     }
   ],
   "budget": {
-    "raw_bytes": 40036428,
-    "gzip_equivalent_bytes": 11259039,
+    "raw_bytes": 40036496,
+    "gzip_equivalent_bytes": 11259086,
     "raw_limit_bytes": 41943040,
     "gzip_equivalent_limit_bytes": 11534336,
     "note": "Gzip equivalent is measured locally; actual Pages Content-Encoding must be verified after an authorized deployment."

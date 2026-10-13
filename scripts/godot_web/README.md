@@ -60,8 +60,10 @@ The browser meter uses periodic 2048-sample windows, and rendering stalls can le
 ## Live responsive reflow
 
 The shell separates the canvas logical dimensions from its displayed contain-fit
-rectangle. Below 720 CSS pixels of actual iframe width it selects the original
-portrait adapter; at wider sizes it selects the desktop composition. Resize,
+rectangle. Below 720 CSS pixels of actual iframe width, or with a coarse touch pointer,
+it selects the original portrait adapter; a wider fine-pointer view selects
+the desktop composition. Touch orientation changes retain the legible phone
+controls and vertical pan, rather than shrinking the desktop matrix. Resize,
 orientation changes and fullscreen switch the native content scale in-place,
 preserving pattern, tempo, puzzle state and the audio gate. Portrait dedicated
 stages grow with their content and legacy case embeds report their natural

@@ -18,7 +18,7 @@
       const frame=holder.querySelector('iframe');
       if(!frame || event.source!==frame.contentWindow || event.origin!==destination.origin || event.data?.type!=='showcase:resize')return;
       const height=event.data.height;
-      if(Number.isInteger(height) && height>=160 && height<=10000){frame.style.height=height+'px';frame.style.maxHeight='none';}
+      if(Number.isInteger(height) && height>=160 && height<=10000){const border=frame.offsetHeight-frame.clientHeight;frame.style.height=Math.ceil(height+border)+'px';frame.style.maxHeight='none';}
     });
     start.hidden = false;
     start.addEventListener("click", () => {

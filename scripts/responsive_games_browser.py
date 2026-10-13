@@ -18,11 +18,11 @@ def run(site, output):
     def shot(page,name):
         page.screenshot(path=str(output/name));report['screenshots'].append(name)
     def geometry(frame):
-        return frame.locator('#canvas').evaluate('''c=>{const r=c.getBoundingClientRect(),s=document.querySelector('#stage').getBoundingClientRect();return {w:r.width,h:r.height,ratio:c.width/c.height,contained:r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,overflow:document.documentElement.scrollWidth>innerWidth+1,bodyOverflow:document.documentElement.scrollHeight>innerHeight+2}}''')
+        return frame.locator('#canvas').evaluate('''c=>{const r=c.getBoundingClientRect(),s=document.querySelector('#stage').getBoundingClientRect();return {w:r.width,h:r.height,ratio:c.width/c.height,contained:r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,overflow:document.documentElement.scrollWidth>innerWidth+1,bodyOverflow:document.documentElement.scrollHeight>innerHeight+1}}''')
     try:
       with sync_playwright() as pw:
         browser=pw.chromium.launch(args=['--enable-unsafe-swiftshader'])
-        ctx=browser.new_context(viewport={'width':2048,'height':1016},has_touch=True,service_workers='block')
+        ctx=browser.new_context(viewport={'width':2048,'height':1016},has_touch=False,service_workers='block')
         ctx.route('**/*',lambda r:r.continue_() if r.request.url.startswith(base) else r.abort())
         page=ctx.new_page();page.set_default_timeout(30000)
         for slug in ['sonic-loom','prism-tide']:
@@ -36,7 +36,7 @@ def run(site, output):
             # Change actual native state using keyboard, then retain it across every reflow.
             frame.locator('canvas').focus()
             if slug=='sonic-loom':
-                page.keyboard.press('ArrowUp');frame.wait_for_function('window.__showcaseState.bpm===108')
+                page.keyboard.press('ArrowUp');frame.wait_for_function('window.__showcaseState.bpm===105')
             else:
                 page.keyboard.press('Space');frame.wait_for_function('window.__showcaseState.moves===1')
             for width,height in [(2048,1016),(1366,768),(900,600),(390,844),(844,390),(320,640),(1024,768),(2048,1016)]:
@@ -48,7 +48,7 @@ def run(site, output):
                 assert g['contained'] and not g['overflow'] and not g['bodyOverflow'],g
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
                 state=frame.evaluate('window.__showcaseState')
-                assert state.get('bpm',108)==108 and state.get('moves',1)==1,state
+                assert state.get('bpm',105)==105 and state.get('moves',1)==1,state
                 check(slug+f'/{width}x{height}',mobile=mobile,canvas=g)
                 if width in [2048,390,844]:
                     page.locator('.game-stage').scroll_into_view_if_needed()
@@ -81,12 +81,41 @@ def run(site, output):
             page.locator('[data-play-start]').click()
             frame=page.frames[1];frame.locator('#start').click()
             frame.wait_for_function("document.body.dataset.state==='running'",timeout=120000)
-            page.wait_for_function('''()=>{const f=document.querySelector('[data-play-frame] iframe');return f&&f.clientHeight>=f.contentDocument.querySelector('main').getBoundingClientRect().height-2}''')
+            page.wait_for_function('''()=>{const f=document.querySelector('[data-play-frame] iframe');return f&&f.clientHeight>=f.contentDocument.querySelector('main').getBoundingClientRect().height-1}''')
             g=geometry(frame);assert g['contained'] and not g['overflow']
             assert not g['bodyOverflow'],g
             check(slug+'/legacy-detail-iframe-auto-height')
             page.locator('[data-play-exit]').click()
+        ctx.close()
+        # Actual touch contexts retain the readable native phone layout when
+        # rotated; desktop's tiny 16-column HUD must never replace it on a phone.
+        ctx=browser.new_context(viewport={'width':390,'height':844},has_touch=True,is_mobile=True,service_workers='block')
+        page=ctx.new_page();page.set_default_timeout(30000)
+        for slug in ['sonic-loom','prism-tide']:
+            page.goto(base+'games/'+slug+'/')
+            page.locator('[data-game-start]').click()
+            expect(page.locator('[data-game-stage]')).to_have_attribute('data-state','running',timeout=120000)
+            frame=page.frames[1]
+            for width,height in [(390,844),(844,390),(390,844)]:
+                page.set_viewport_size({'width':width,'height':height})
+                frame.wait_for_function('window.__showcaseState?.mobile_layout===true')
+                page.wait_for_timeout(150)
+                g=geometry(frame)
+                assert g['contained'] and not g['bodyOverflow'] and not g['overflow'],g
+                assert 32*g['w']/720>=16,g
+                assert frame.locator('canvas').evaluate("c=>getComputedStyle(c).touchAction==='pan-y'")
+                check(slug+f'/touch-orientation-{width}x{height}',canvas=g)
+                if width==844:shot(page,slug+'-touch-landscape.png')
+            page.locator('[data-game-exit]').click()
         ctx.close();browser.close();report['passed']=True
+    except Exception as error:
+        report['error']=str(error)
+        try:
+            report['last_native_state']=frame.evaluate('window.__showcaseState')
+            shot(page,'failure.png')
+        except Exception:
+            pass
+        raise
     finally:
         server.shutdown();(output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
 

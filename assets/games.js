@@ -41,12 +41,12 @@
   function resizeStage() {
     const width = stage.clientWidth;
     if (!width) return;
-    const mobile = width < 720;
+    const mobile = width < 720 || matchMedia('(pointer:coarse)').matches;
     // The child may supply its actual logical layout. Only reuse it when it
     // agrees with this width breakpoint, avoiding a feedback loop during resize.
     const layout = reportedLayout?.mode === (mobile ? 'mobile' : 'desktop') ? reportedLayout : null;
     const ratio = layout ? layout.width / layout.height : mobile ? portrait[0]/portrait[1] : 1280/800;
-    const natural = width / ratio + 46; // room for accessible controls inside the iframe
+    const natural = (mobile ? Math.min(width,720) : width) / ratio + 46; // room for accessible controls inside the iframe
     const available = Math.max(280, (window.visualViewport?.height || innerHeight) - 180);
     stage.dataset.layout = mobile ? 'mobile' : 'desktop';
     stage.style.setProperty('--stage-height', Math.round(mobile ? natural : Math.min(natural, available)) + 'px');

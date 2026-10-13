@@ -49,7 +49,7 @@
   // width changes; resizing never reloads the game or resets its state/audio.
   let mobileLayout=null;
   function resizeLayout() {
-    const mobile=document.documentElement.clientWidth<720;
+    const mobile=document.documentElement.clientWidth<720 || matchMedia('(pointer:coarse)').matches;
     if (mobile!==mobileLayout) {
       mobileLayout=mobile;
       const width=mobile?720:1280, height=mobile?(sonic?1320:1760):800;
@@ -67,7 +67,7 @@
     const stage=id('stage');
     if(stage.hidden)return;
     const ratio=canvas.width/canvas.height;
-    const width=Math.min(stage.clientWidth,stage.clientHeight*ratio);
+    const width=Math.min(stage.clientWidth,stage.clientHeight*ratio,mobileLayout?720:Infinity);
     if(width>0){canvas.style.width=width+'px';canvas.style.height=width/ratio+'px';}
   }
   // Legacy case-page embeds also grow with content, so portrait controls stay
