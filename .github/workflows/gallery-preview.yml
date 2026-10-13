@@ -42,12 +42,12 @@ jobs:
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python scripts/gallery_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview" --expected-head "$EXPECTED_HEAD_SHA"
+      - name: Verify every gallery and result video hover
+        run: python scripts/video_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview/videos"
       - name: Verify playable stages and preview sound
         run: python scripts/games_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview/games"
       - name: Verify native reflow, viewport, zoom and fullscreen
         run: python scripts/responsive_games_browser.py --site _site --output "${{ runner.temp }}/gallery-preview/responsive"
-      - name: Verify every gallery and result video hover
-        run: python scripts/video_browser_smoke.py --site _site --output "${{ runner.temp }}/gallery-preview/videos"
       - name: Keep public screenshots and report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
