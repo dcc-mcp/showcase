@@ -150,6 +150,17 @@ def run(site: Path, output: Path):
                 page = context.new_page()
                 page.set_default_timeout(20000)
                 page.on('pageerror', lambda error: errors.append(str(error)))
+                def media_requests():
+                    return [url for url in requests if url.split('?')[0].endswith(('.mp4', '.webm'))]
+                def assert_released(video, before, label):
+                    # Observe beyond the stop event: a decoder reset must not
+                    # silently reopen a retained SOURCE in the next event loop.
+                    page.wait_for_timeout(500)
+                    unexpected = media_requests()[before:]
+                    if unexpected:
+                        diagnose_unexpected_media(browser, page, output, report, request_details, mobile, label)
+                    assert not unexpected, 'Media refetched after stop: ' + repr(unexpected)
+                    assert video.evaluate('(v)=>v.paused && v.muted && !v.hasAttribute("src") && !v.querySelector("source[src]")')
                 for prefix, locale in [('', 'en'), ('zh/', 'zh')]:
                     requests.clear()
                     request_details.clear()
@@ -196,9 +207,10 @@ def run(site: Path, output: Path):
                                 video.hover()
                                 expect(host).to_have_attribute('data-video-state', 'preview')
                                 assert video.evaluate('(v)=>v.muted && v.videoWidth>0 && v.loop && v.controls')
+                                before_stop = len(media_requests())
                                 page.mouse.move(1, 1)
                                 expect(host).to_have_attribute('data-video-state', 'idle')
-                                assert video.evaluate('(v)=>v.paused && v.muted && !v.hasAttribute("src")')
+                                assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-hover-stop')
                             # The visible explicit control works for touch and
                             # keyboard without depending on autoplay permission.
                             if mobile:
@@ -220,18 +232,21 @@ def run(site: Path, output: Path):
                             assert await_time > 0
                             if slug == 'sonic-loom':
                                 capture(page, f'{locale}-{kind}-detail-controls.png')
+                            before_stop = len(media_requests())
                             host.locator('.video-watch').click()
                             expect(host).to_have_attribute('data-video-state', 'idle')
-                            assert video.evaluate('(v)=>v.paused && v.muted && !v.hasAttribute("src")')
+                            assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-watch-stop')
                             # Exercise native keyboard play from idle, rather
                             # than calling HTMLMediaElement.play in the test.
                             video.focus()
                             page.keyboard.press('Space')
                             expect(host).to_have_attribute('data-video-state', 'watching')
                             assert video.evaluate('(v)=>!v.paused && v.controls')
+                            before_stop = len(media_requests())
                             host.locator('.video-watch').click()
                             expect(host).to_have_attribute('data-video-state', 'idle')
-                            check(f'{locale}/{kind}: {item["src"]} decoded; hover/manual/native keyboard and cleanup')
+                            assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-native-stop')
+                            check(f'{locale}/{kind}: {item["src"]} decoded; hover/manual/native keyboard and cleanup without refetch')
                         assert not any(url.split('?')[0].endswith(('.wasm', '.pck')) for url in requests)
                         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
                 context.close()

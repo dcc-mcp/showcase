@@ -95,8 +95,9 @@ update();
     entry.nativeIntent = false;
     try { video.currentTime = 0; } catch (_) { /* Metadata may not exist yet. */ }
     video.removeAttribute("src");
-    // preload=none leaves the native SOURCE fallback usable without downloading
-    // it. load() releases the previous decoder/fetch and restores the poster.
+    entry.sources.forEach(item => item.removeAttribute("src"));
+    // load() ignores the preload hint in Chromium. Detach every source first
+    // so releasing the old decoder cannot start a fresh background download.
     video.load();
     state(entry, value);
   }
@@ -175,16 +176,19 @@ update();
       toolbar.append(note);
     }
     host.append(toolbar);
-    // Retain SOURCE for native controls and no-JS fallback. preload=none makes
-    // it inert until hover or an explicit native play action requests playback.
+    // Keep the initial static SOURCE for native controls and no-JS fallback.
+    // Do not load() during initialization: real Chromium downloads media after
+    // an explicit load() even with preload=none and an offscreen poster.
     video.pause();
     video.muted = video.defaultMuted = true;
     video.autoplay = false;
     video.preload = "none";
     video.playsInline = true;
-    const entry = {host, video, button, status, source, hasAudio, nativeIntent: false};
+    video.controls = true;
+    video.loop = false;
+    const entry = {host, video, button, status, source, sources, hasAudio, nativeIntent: false};
     entries.push(entry);
-    stop(entry);
+    state(entry, "idle");
     listen(host, "pointerenter", event => {
       if (event.pointerType !== "touch") start(entry, true);
     });
@@ -199,7 +203,11 @@ update();
       else start(entry, false);
     });
     const nativeIntent = () => {
+      if (!available(entry)) return;
       entry.nativeIntent = true;
+      // A stopped player has no live sources. Restore one synchronously before
+      // the native control's default action; never issue a second play() here.
+      if (!video.hasAttribute("src") && !sources.some(item => item.hasAttribute("src"))) video.src = source;
       if (active && active.entry === entry && active.automatic) {
         // Native pause/seek/volume gestures keep their browser meaning. Merely
         // pressing pause must not make a muted hover preview suddenly audible.
@@ -208,11 +216,11 @@ update();
         state(entry, "watching");
       }
     };
-    listen(video, "pointerdown", nativeIntent);
-    listen(video, "click", nativeIntent); // Assistive activation need not emit pointerdown.
+    listen(video, "pointerdown", nativeIntent, {capture: true});
+    listen(video, "click", nativeIntent, {capture: true}); // Assistive activation need not emit pointerdown.
     listen(video, "keydown", event => {
       if ([" ", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) nativeIntent();
-    });
+    }, {capture: true});
     listen(video, "play", () => {
       if (active && active.entry === entry) return;
       if (!entry.nativeIntent || !available(entry)) { video.muted = true; video.pause(); return; }

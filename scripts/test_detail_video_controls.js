@@ -30,12 +30,12 @@ function fixture(options = {}) {
     const source = node(); source.setAttribute("src", "../../media/film-" + index + ".mp4");
     const host = node();
     const video = node({parentElement: host, dataset: {previewAudio: options.audio ?? "true"},
-      paused: true, controls: true, currentTime: 0, requests: [], playCount: 0, loadCount: 0, mode: options.mode || "resolve",
+      paused: true, controls: true, currentTime: 0, requests: [], playCount: 0, loadCount: 0, loadWithSourceCount: 0, srcAssignments: 0, mode: options.mode || "resolve",
       rect: {width: 640, height: 360, top: 50, left: 0, bottom: 410, right: 640},
       querySelectorAll() { return [source]; },
       getBoundingClientRect() { return this.rect; },
       pause() { this.paused = true; },
-      load() { this.loadCount++; this.paused = true; this.currentTime = 0; },
+      load() { this.loadCount++; if (this.hasAttribute("src") || source.hasAttribute("src")) this.loadWithSourceCount++; this.paused = true; this.currentTime = 0; },
       play() {
         this.playCount++;
         this.emit("play");
@@ -47,7 +47,7 @@ function fixture(options = {}) {
         return Promise.resolve();
       }
     });
-    Object.defineProperty(video, "src", {get() { return this.getAttribute("src"); }, set(v) { this.setAttribute("src", v); }});
+    Object.defineProperty(video, "src", {get() { return this.getAttribute("src"); }, set(v) { this.srcAssignments++; this.setAttribute("src", v); }});
     return {host, video, source};
   });
   const hover = node({matches: options.hover !== false}), reduced = node({matches: !!options.reduced}), connection = node({saveData: !!options.saveData});
@@ -80,6 +80,7 @@ test("native fallback and preload none remain usable before any intent", () => {
   for (const e of fixture().entries) {
     idle(e); assert.equal(e.video.playCount, 0); assert.equal(e.video.preload, "none");
     assert.ok(e.source.getAttribute("src")); assert.equal(e.video.autoplay, false);
+    assert.equal(e.video.loadCount, 0); assert.equal(e.video.srcAssignments, 0);
   }
 });
 test("hover immediately starts muted preview and leave releases decoder/source", async () => {
@@ -87,6 +88,8 @@ test("hover immediately starts muted preview and leave releases decoder/source",
   await flush(); assert.equal(e.host.dataset.videoState, "preview");
   assert.equal(e.video.muted, true); assert.equal(e.video.loop, true);
   e.video.currentTime = 5; leave(e); idle(e);
+  assert.equal(e.source.hasAttribute("src"), false);
+  assert.equal(e.video.loadCount, 1); assert.equal(e.video.loadWithSourceCount, 0);
 });
 test("explicit watching enables native audio, seeking and survives pointer exit", async () => {
   const f = fixture(), [e, other] = f.entries; enter(e); await flush(); watch(e); await flush();
@@ -104,6 +107,20 @@ test("native controls play adopts the session without restarting or double play"
   assert.equal(e.host.dataset.videoState, "watching"); assert.equal(e.video.playCount, 0);
   assert.equal(e.video.currentTime, 2); assert.equal(e.video.muted, false);
   leave(e); assert.equal(e.video.paused, false);
+});
+test("native pointer, keyboard and assistive intent restore released sources once without play", async () => {
+  for (const [event, data] of [["pointerdown", {}], ["keydown", {key: " "}], ["click", {}]]) {
+    const e = fixture().entries[0]; enter(e); await flush(); leave(e);
+    assert.equal(e.source.hasAttribute("src"), false); assert.equal(e.video.src, null);
+    const plays = e.video.playCount, loads = e.video.loadCount, assignments = e.video.srcAssignments;
+    e.video.emit(event, data);
+    assert.equal(e.video.src, "https://example.com/showcase/media/film-0.mp4");
+    assert.equal(e.video.playCount, plays); assert.equal(e.video.loadCount, loads);
+    e.video.emit("click"); assert.equal(e.video.srcAssignments, assignments + 1);
+    e.video.emit("play"); e.video.emit("playing");
+    assert.equal(e.host.dataset.videoState, "watching"); assert.equal(e.video.playCount, plays);
+    watch(e); idle(e); assert.equal(e.video.loadWithSourceCount, 0);
+  }
 });
 test("native hover pause/seek gestures preserve mute and native control semantics", async () => {
   const e = fixture().entries[0]; enter(e); await flush();

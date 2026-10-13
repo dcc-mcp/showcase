@@ -43,6 +43,7 @@ def run(site, output):
             page.set_viewport_size({'width':2048,'height':1016})
             page.goto(base+'zh/games/'+slug+'/')
             assert page.locator('iframe').count()==0
+            shot(page,slug+'-idle-wide.png')
             page.locator('[data-game-start]').click()
             expect(page.locator('[data-game-stage]')).to_have_attribute('data-state','running',timeout=120000)
             frame=page.frames[1];frame.wait_for_function('!!window.__showcaseState')
@@ -84,6 +85,10 @@ def run(site, output):
                 if width in [2048,390,844]:
                     page.locator('.game-stage').scroll_into_view_if_needed()
                     shot(page,f'{slug}-{width}x{height}.png')
+                    if width==390:
+                        name=slug+'-portrait-full-stage.png'
+                        page.locator('.game-stage').screenshot(path=str(output/name))
+                        report['screenshots'].append(name)
             # Zoom-induced CSS reflow: ratio stays exact, state survives, no clipping.
             page.evaluate("document.body.style.zoom='1.5'")
             page.wait_for_timeout(200)
@@ -136,7 +141,11 @@ def run(site, output):
                 assert 32*g['w']/720>=16,g
                 assert frame.locator('canvas').evaluate("c=>getComputedStyle(c).touchAction==='pan-y'")
                 check(slug+f'/touch-orientation-{width}x{height}',canvas=g)
-                if width==844:shot(page,slug+'-touch-landscape.png')
+                if width==844:
+                    shot(page,slug+'-touch-landscape.png')
+                    name=slug+'-touch-landscape-full-stage.png'
+                    page.locator('.game-stage').screenshot(path=str(output/name))
+                    report['screenshots'].append(name)
             page.locator('[data-game-exit]').click()
         ctx.close();browser.close();report['passed']=True
     except Exception as error:
