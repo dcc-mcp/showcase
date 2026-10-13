@@ -36,6 +36,7 @@ def pages(cases, demos, root):
         slug = case['slug']
         demo = demos[slug]
         title = site.esc(case['title'])
+        language_note = '<p class="game-language-note">原作画面与游戏内文字保留英文，页面和操作说明提供中英文。</p>' if demo.get('nativeTextLanguage') == 'en' else ''
         metadata = site.seo_tags(case['title'], case['summary'], 'games/%s/' % slug,
                                  case['cover'], root, {
             '@context': 'https://schema.org', '@type': 'VideoGame', 'name': case['title'],
@@ -57,7 +58,7 @@ def pages(cases, demos, root):
 <div class="game-frame" data-game-frame></div></div>
 <div class="game-toolbar"><p data-game-status role="status" aria-live="polite">准备就绪，尚未加载游戏。</p>
 <div class="game-actions"><button type="button" data-game-sound hidden>点击开声</button><button type="button" data-game-reset hidden>重新开始</button><button type="button" data-game-fullscreen hidden>全屏</button><button type="button" data-game-exit hidden>退出游戏</button></div></div>
-<div class="game-title-row"><div><p class="eyebrow">PLAY / GODOT</p><h1 id="game-title">%s</h1><p class="game-subtitle">%s</p></div><a class="text-link" href="../../cases/%s/">制作过程与源码 ↗</a></div>
+<div class="game-title-row"><div><p class="eyebrow">PLAY / GODOT</p><h1 id="game-title">%s</h1><p class="game-subtitle">%s</p>%s</div><a class="text-link" href="../../cases/%s/">制作过程与源码 ↗</a></div>
 <section class="game-instructions"><h2>怎么玩</h2><p>%s</p><p>电脑支持键盘，手机可直接轻触。点击游戏画面后开始操作；退出会丢弃未保存的进度。</p>
 <details><summary>运行说明与验证范围</summary><p>%s</p><p>%s · WebGL 2 · <a href="%s?lang=zh">在独立页面打开 ↗</a></p></details></section>
 <noscript><p class="notice">启用 JavaScript 后即可在此试玩，也可使用上方独立页面链接。</p></noscript>
@@ -65,7 +66,7 @@ def pages(cases, demos, root):
 <footer class="site-footer wrap"><p>DCC-MCP Showcase</p><a href="../../cases/%s/">查看本作的创作过程、来源与许可</a></footer></body></html>''' % (
             metadata, site.esc(slug), site.esc('../../' + demo['url']),
             site.media_markup(case['cover'], root, '../../', eager=True), title, title,
-            site.esc(case['subtitle']), site.esc(slug), site.esc(demo['controls']['zh']),
+            site.esc(case['subtitle']), language_note, site.esc(slug), site.esc(demo['controls']['zh']),
             site.esc(demo['notes']['zh']), site.esc(demo['engine']), site.esc('../../' + demo['url']),
             others, site.esc(slug))
     return result

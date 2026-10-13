@@ -27,9 +27,17 @@
   // context so a later explicit HTML Play click can unlock it, just like the
   // engine's own canvas input does. Nothing resumes on page load.
   const audioContexts=new Set();
+  const audioOutputs=new Map();
+  if(embedded && window.AudioNode){
+    const connect=AudioNode.prototype.connect;
+    AudioNode.prototype.connect=function(destination,...args){
+      const output=audioOutputs.get(this.context);
+      return connect.call(this,output && this!==output && destination===this.context.destination ? output : destination,...args);
+    };
+  }
   const NativeAudio=window.AudioContext || window.webkitAudioContext;
   if(NativeAudio){
-    const TrackedAudio=new Proxy(NativeAudio,{construct(target,args){const context=new target(...args);audioContexts.add(context);context.addEventListener('statechange',()=>{if(shellMuted && context.state==='running')context.suspend().catch(()=>{});});return context;}});
+    const TrackedAudio=new Proxy(NativeAudio,{construct(target,args){const context=new target(...args);audioContexts.add(context);if(embedded){const output=context.createGain();output.gain.value=shellMuted?0:1;output.connect(context.destination);audioOutputs.set(context,output);}return context;}});
     if(window.AudioContext)window.AudioContext=TrackedAudio;else window.webkitAudioContext=TrackedAudio;
   }
   // The official Godot touch listener prevents page scrolling. These demos use
@@ -117,6 +125,7 @@
     if(type==='showcase:reset' && started){command('reset');canvas.focus();}
     if(type==='showcase:sound-on' || type==='showcase:sound-off'){
       shellMuted=type==='showcase:sound-off';
+      for(const output of audioOutputs.values())output.gain.value=shellMuted?0:1;
       for(const context of audioContexts)(shellMuted?context.suspend():context.resume()).catch(()=>{});
     }
   });

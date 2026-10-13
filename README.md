@@ -87,7 +87,21 @@ artwork and evidence retain their original language and bytes. See the
 
 ## Browse and reproduce
 
-The wall supports software and capability filters and a text search. Each
+The wall supports software and capability filters and a text search. The Games
+shelf is derived only from the verified `play/manifest.json` allowlist. Start game
+opens a dedicated bilingual `games/<case-slug>/` stage; an ordinary direct visit
+does not load Godot. A one-use, short-lived session intent carries an explicit
+Start click across navigation. Reset, exit, fullscreen and game-appropriate sound
+controls sit beside the stage, with more games and the original case record.
+
+Video previews start muted. A visible sound button enables sound only for the
+current preview; leaving, filtering, switching cards or hiding the page stops it
+and resets mute. `assets/preview-audio.json` records actual ffprobe audio streams
+bound to each preview's SHA-256. Missing evidence is labeled unverified rather
+than silent. Reinspect and update this evidence when changing a preview file.
+Run `python scripts/test_games.py`, `node scripts/test_preview_controls.js` and
+`python scripts/games_browser_smoke.py --site _site --output <evidence-dir>` for
+these interactions. Browser checks verify state, not subjective listening. Each
 static detail page provides the goal, prompt, process, intermediate and final
 images, tools and version records, measured checks, source links and attribution.
 Source files remain in their original repositories; web images are optimized

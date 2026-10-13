@@ -12,6 +12,7 @@ from localization_browser_smoke import MountHandler
 
 def run(site, output):
     from playwright.sync_api import sync_playwright, expect
+    from godot_web.browser_test import AUDIO_PROBE
     output.mkdir(parents=True, exist_ok=True)
     server=ThreadingHTTPServer(('127.0.0.1',0),partial(MountHandler,directory=str(site)))
     threading.Thread(target=server.serve_forever,daemon=True).start()
@@ -24,11 +25,12 @@ def run(site, output):
         page.screenshot(path=str(output/name));report['screenshots'].append(name)
     try:
         with sync_playwright() as pw:
-            browser=pw.chromium.launch()
+            browser=pw.chromium.launch(args=['--enable-unsafe-swiftshader'],ignore_default_args=['--mute-audio'])
             report['browser']=browser.version
             for mobile in [False,True]:
                 context=browser.new_context(viewport={'width':390 if mobile else 1486,'height':844 if mobile else 1059},
                                            has_touch=mobile,is_mobile=mobile,service_workers='block')
+                context.add_init_script(AUDIO_PROBE)
                 requests=[]
                 context.route('**/*',lambda r:r.continue_() if r.request.url.startswith(base) else r.abort())
                 context.on('request',lambda r:requests.append(r.url))
@@ -75,9 +77,24 @@ def run(site, output):
                     assert frame.locator('canvas').evaluate('(c)=>c.width>0 && c.height>0')
                     if mobile:expect(frame.locator('body')).to_have_attribute('data-layout','mobile')
                     expect(page.locator('[data-game-sound]')).to_be_visible()
+                    frame.locator('canvas').press('Space')
+                    frame.wait_for_function('window.__showcaseState.playing===true')
+                    frame.wait_for_function('window.__audioSamples>0')
+                    assert frame.evaluate('window.__audioPeak')==0
                     page.locator('[data-game-sound]').click()
                     expect(page.locator('[data-game-sound]')).to_have_attribute('aria-pressed','true')
+                    frame.wait_for_function('window.__audioPeak>0.001')
+                    page.locator('[data-game-sound]').click()
+                    frame.wait_for_function('window.__audioContexts.every(c=>c.state==="suspended")')
+                    page.locator('[data-game-sound]').click()
+                    frame.wait_for_function('window.__audioContexts.some(c=>c.state==="running")')
                     page.locator('[data-game-reset]').click()
+                    frame.wait_for_function('window.__showcaseState.playing===false')
+                    if not mobile:
+                        page.locator('[data-game-fullscreen]').click()
+                        page.wait_for_function('!!document.fullscreenElement')
+                        page.keyboard.press('Escape')
+                        page.wait_for_function('!document.fullscreenElement')
                     assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
                     shot(page,f'{locale}-'+('mobile' if mobile else 'desktop')+'-sonic-running.png')
                     page.locator('[data-game-exit]').click()

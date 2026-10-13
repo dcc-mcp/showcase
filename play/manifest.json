@@ -68,8 +68,8 @@
     },
     {
       "path": "play/shell.js",
-      "bytes": 14502,
-      "sha256": "b1001c099a42f14c6d52e0d8a55feacdddb69c074fd11d8cb28bd402209588ef"
+      "bytes": 14982,
+      "sha256": "f8a85534682f42b23b53e15aabd6c247444d4996384c262a9fa961a8917f1de8"
     },
     {
       "path": "play/export-provenance.json",
@@ -212,8 +212,8 @@
     }
   ],
   "budget": {
-    "raw_bytes": 40029048,
-    "gzip_equivalent_bytes": 11255631,
+    "raw_bytes": 40031406,
+    "gzip_equivalent_bytes": 11256355,
     "raw_limit_bytes": 41943040,
     "gzip_equivalent_limit_bytes": 11534336,
     "note": "Gzip equivalent is measured locally; actual Pages Content-Encoding must be verified after an authorized deployment."
