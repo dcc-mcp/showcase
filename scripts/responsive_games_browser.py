@@ -17,6 +17,20 @@ def run(site, output):
         report['checks'].append({'name':name,**evidence});print('PASS',name,evidence,flush=True)
     def shot(page,name):
         page.screenshot(path=str(output/name));report['screenshots'].append(name)
+    def native_point(page, frame, x, y, touch=False):
+        logical=frame.evaluate('window.__showcaseState.layout_size')
+        canvas=frame.locator('#canvas');box=canvas.bounding_box()
+        px=box['x']+x*box['width']/logical[0];py=box['y']+y*box['height']/logical[1]
+        viewport=page.evaluate('innerHeight')
+        if py<40 or py>viewport-40:
+            page.evaluate('dy=>window.scrollBy(0,dy)',py-viewport/2)
+            page.wait_for_timeout(100);box=canvas.bounding_box()
+            px=box['x']+x*box['width']/logical[0];py=box['y']+y*box['height']/logical[1]
+        (page.touchscreen.tap if touch else page.mouse.click)(px,py)
+    def saved_state(frame, slug):
+        state=frame.evaluate('window.__showcaseState')
+        keys=['pattern','bpm','muted'] if slug=='sonic-loom' else ['level','moves','selected','won','mirrors','gates']
+        return {key:state[key] for key in keys}
     def geometry(frame):
         return frame.locator('#canvas').evaluate('''c=>{const r=c.getBoundingClientRect(),s=document.querySelector('#stage').getBoundingClientRect();return {w:r.width,h:r.height,ratio:c.width/c.height,contained:r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,overflow:document.documentElement.scrollWidth>innerWidth+1,bodyOverflow:document.documentElement.scrollHeight>innerHeight+1}}''')
     try:
@@ -39,6 +53,7 @@ def run(site, output):
                 page.keyboard.press('ArrowUp');frame.wait_for_function('window.__showcaseState.bpm===105')
             else:
                 page.keyboard.press('Space');frame.wait_for_function('window.__showcaseState.moves===1')
+            expected_state=saved_state(frame,slug)
             for width,height in [(2048,1016),(1366,768),(900,600),(390,844),(844,390),(320,640),(1024,768),(2048,1016)]:
                 page.set_viewport_size({'width':width,'height':height})
                 mobile=page.locator('.game-stage').evaluate('e=>e.clientWidth<720')
@@ -47,8 +62,24 @@ def run(site, output):
                 g=geometry(frame)
                 assert g['contained'] and not g['overflow'] and not g['bodyOverflow'],g
                 assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
-                state=frame.evaluate('window.__showcaseState')
-                assert state.get('bpm',105)==105 and state.get('moves',1)==1,state
+                assert saved_state(frame,slug)==expected_state,(saved_state(frame,slug),expected_state)
+                # Actual native hit-testing after reflow, not just DOM geometry.
+                if width in [900,390]:
+                    page.wait_for_timeout(120)
+                    state=frame.evaluate('window.__showcaseState')
+                    if slug=='sonic-loom':
+                        target=state['native_targets']['cell:0:1'] if mobile else [333,300,51,66]
+                        native_point(page,frame,target[0]+target[2]/2,target[1]+target[3]/2)
+                        frame.wait_for_function('(before)=>window.__showcaseState.pattern[0][1]!==before',arg=state['pattern'][0][1])
+                    else:
+                        if mobile:
+                            target=state['native_targets']['objects'][1]
+                            native_point(page,frame,target['center_x'],target['center_y'])
+                            frame.wait_for_function('window.__showcaseState.selected===1')
+                            frame.locator('canvas').press('Space')
+                        else:native_point(page,frame,609,324)
+                        frame.wait_for_function('(before)=>window.__showcaseState.moves===before+1',arg=state['moves'])
+                    expected_state=saved_state(frame,slug)
                 check(slug+f'/{width}x{height}',mobile=mobile,canvas=g)
                 if width in [2048,390,844]:
                     page.locator('.game-stage').scroll_into_view_if_needed()
