@@ -35,6 +35,9 @@ class GalleryTests(unittest.TestCase):
         self.assertNotIn('autoplay', markup)
         self.assertNotIn('<iframe', markup)
         self.assertIn('class="preview-toggle"', markup)
+        self.assertIn('data-loading-label="正在加载预览…"', markup)
+        self.assertIn('data-playing-label="静音预览中"', markup)
+        self.assertIn('class="preview-hint" aria-hidden="true">悬停即预览</span>', markup)
         self.assertIn(' hidden', markup)
         self.assertIn('href="cases/sample-case/"', markup)
 

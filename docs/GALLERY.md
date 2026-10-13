@@ -7,13 +7,18 @@ The source assets, original attribution and established routes are unchanged.
 
 ## Preview contract
 
-- Video is assigned a source only after 250 ms of hover intent on a fine pointer,
+- Video is assigned a source immediately on entering any part of a card with a fine pointer,
   or an explicit press of the preview control. Touch and keyboard use the button.
-- Preview is muted and inline. At most one preview is active. Pointer exit,
+- Loading retains the poster with a localized status; the decoded first frame fades in.
+  An idle hint makes hover discoverable without presenting a play button on hover-enabled devices.
+- Preview is muted, inline and looping. At most one preview is active. Pointer exit,
   offscreen/filter visibility, hidden document and page lifecycle stop playback
   and release the source. An explicit touch press is not cancelled by touch exit.
 - Reduced motion and Save-Data disable automatic previews; explicit play remains
-  available. Errors leave the poster, localized message and work link available.
+  available. Stalled loading times out after 12 seconds with a manual retry. Errors leave the poster, localized message and work link available.
+- Browser autoplay follows the [Chrome muted-playback policy](https://developer.chrome.com/blog/autoplay/)
+  and [WebKit inline video policy](https://webkit.org/blog/6784/new-video-policies-for-ios/).
+  Rejected playback keeps a manual retry button and ordinary detail link.
 - Preview controls are separate from the work link. Without JavaScript, the
   artwork and ordinary detail links remain usable; the inactive button is hidden.
 - Godot never starts from a gallery preview. Detail-page start controls and the

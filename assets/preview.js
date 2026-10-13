@@ -11,7 +11,6 @@
   const entries = [];
   const disposers = [];
   let active = null;
-  let pending = null;
   let destroyed = false;
 
   function listen(target, event, action, options) {
@@ -21,7 +20,7 @@
 
   function setState(entry, state) {
     entry.card.dataset.previewState = state;
-    const busy = state === "pending" || state === "loading" || state === "playing";
+    const busy = state === "loading" || state === "playing";
     const label = busy ? entry.button.dataset.stopLabel : entry.button.dataset.playLabel;
     if (label) {
       (entry.button.querySelector(".preview-toggle-label") || entry.button).textContent = label;
@@ -29,7 +28,8 @@
       entry.button.title = label;
     }
     entry.button.setAttribute("aria-pressed", String(busy));
-    if (entry.status) entry.status.textContent = state === "error" ? entry.errorLabel : "";
+    if (entry.status) entry.status.textContent = state === "error" ? entry.errorLabel
+      : state === "loading" ? entry.loadingLabel : state === "playing" ? entry.playingLabel : "";
   }
 
   function progress(entry) {
@@ -65,10 +65,6 @@
   const canAutoplay = () => Boolean(hover && hover.matches && !(reducedMotion && reducedMotion.matches) && !(connection && connection.saveData));
 
   function stop(entry, state = "idle") {
-    if (pending && pending.entry === entry) {
-      window.clearTimeout(pending.timer);
-      pending = null;
-    }
     if (active && active.entry === entry) {
       const previous = active;
       active = null; // Invalidate callbacks before pause/load dispatch media events.
@@ -87,20 +83,18 @@
   }
 
   function stopAll() {
-    const currentEntries = new Set([active && active.entry, pending && pending.entry]);
-    currentEntries.forEach(entry => { if (entry) stop(entry); });
+    if (active) stop(active.entry);
   }
 
   function stopUnavailable() {
     if (active && !available(active.entry)) stop(active.entry);
-    if (pending && !available(pending.entry)) stop(pending.entry);
   }
 
   function start(entry, automatic) {
     if (!available(entry) || (automatic && !canAutoplay())) { stop(entry); return; }
     stopAll();
     const video = entry.video;
-    const run = {entry, automatic, removeListeners: () => {}};
+    const run = {entry, automatic, loadingTimer: null, removeListeners: () => {}};
     active = run;
     setState(entry, "loading");
 
@@ -113,6 +107,8 @@
         return;
       }
       if (!available(entry) || (automatic && !canAutoplay())) { stop(entry); return; }
+      window.clearTimeout(run.loadingTimer);
+      run.loadingTimer = null;
       setState(entry, "playing");
       progress(entry);
     };
@@ -120,7 +116,13 @@
     const ended = () => { if (active === run) stop(entry); };
     const listeners = {playing, error: failed, timeupdate: update, durationchange: update, ended};
     Object.entries(listeners).forEach(([event, action]) => video.addEventListener(event, action));
-    run.removeListeners = () => Object.entries(listeners).forEach(([event, action]) => video.removeEventListener(event, action));
+    run.removeListeners = () => {
+      window.clearTimeout(run.loadingTimer);
+      Object.entries(listeners).forEach(([event, action]) => video.removeEventListener(event, action));
+    };
+    // A stalled network or unresolved play promise must not leave a card busy
+    // forever. Manual retry remains available and starts a fresh bounded request.
+    run.loadingTimer = window.setTimeout(failed, 12000);
 
     // Source assignment happens only after a deliberate hover or button press.
     video.muted = true;
@@ -134,20 +136,12 @@
     } catch (_) { failed(); }
   }
 
-  function schedule(entry, event) {
+  function hoverStart(entry, event) {
     if (event.pointerType === "touch" || !canAutoplay() || !available(entry)) return;
-    entry.hovering = true;
     if (active && active.entry === entry) return;
-    if (pending) stop(pending.entry);
-    const request = {entry, timer: null};
-    pending = request;
-    setState(entry, "pending");
-    request.timer = window.setTimeout(() => {
-      if (pending !== request) return;
-      pending = null;
-      if (entry.hovering && available(entry) && canAutoplay()) start(entry, true);
-      else stop(entry);
-    }, 250);
+    // The whole card is the hover target. Request the first frame immediately;
+    // retain the poster and show loading feedback until playback really starts.
+    start(entry, true);
   }
 
   cards.forEach(card => {
@@ -163,10 +157,13 @@
     } catch (_) { return; }
     const status = card.querySelector(".preview-status");
     const entry = {card, video, button, source, status, progress: card.querySelector(".preview-progress"),
-      hovering: false, inViewport: true,
+      inViewport: true,
+      loadingLabel: card.dataset.loadingLabel || "", playingLabel: card.dataset.playingLabel || "",
       errorLabel: card.dataset.errorLabel || button.dataset.errorLabel || (status && status.dataset.errorLabel) || ""};
     entries.push(entry);
+    card.dataset.previewAutoplay = String(canAutoplay());
     video.autoplay = false;
+    video.loop = true;
     video.preload = "none";
     video.muted = true;
     video.defaultMuted = true;
@@ -179,25 +176,27 @@
     button.hidden = false;
     setState(entry, "idle");
     resetProgress(entry);
-    listen(card, "pointerenter", event => schedule(entry, event));
+    listen(card, "pointerenter", event => hoverStart(entry, event));
     listen(card, "pointerleave", event => {
       // Touch dispatches pointerleave when contact ends, often around click.
       // Lifting the finger must not undo explicit mobile playback immediately.
       if (event.pointerType === "touch") return;
-      entry.hovering = false;
       stop(entry);
     });
-    listen(card, "pointercancel", () => { entry.hovering = false; stop(entry); });
+    listen(card, "pointercancel", () => stop(entry));
     listen(button, "click", event => {
       event.preventDefault();
       event.stopPropagation();
-      if ((active && active.entry === entry) || (pending && pending.entry === entry)) stop(entry);
+      if (active && active.entry === entry) stop(entry);
       else start(entry, false); // Explicit activation also works on touch/reduced-motion/data-saving devices.
     });
   });
   if (!entries.length) return;
 
-  function policyChange() { stopAll(); }
+  function policyChange() {
+    stopAll();
+    entries.forEach(entry => { entry.card.dataset.previewAutoplay = String(canAutoplay()); });
+  }
   [hover, reducedMotion, connection].forEach(target => {
     if (!target) return;
     if (target.addEventListener) listen(target, "change", policyChange);
