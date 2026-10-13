@@ -97,6 +97,12 @@
           "channels": 2
         }
       ]
+    },
+    {
+      "src": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+      "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+      "has_audio": false,
+      "audio_streams": []
     }
   ]
 }

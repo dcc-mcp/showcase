@@ -71,5 +71,21 @@
   "独立技术复核": "Independent technical review",
   "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。": "On 2026-10-07, public pages, downloads, hashes, archives and native file structures were checked; DCC applications were not rerun, and interactive editing was not acceptance-tested.",
   "文档修订 2026-10-07": "Documentation revision 2026-10-07",
-  "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。": "Added stage-specific model names, reasoning effort and independent-review scope. Historical unknowns remain unknown; image, film and native-project bytes are unchanged, and this does not count as a new case."
+  "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。": "Added stage-specific model names, reasoning effort and independent-review scope. Historical unknowns remain unknown; image, film and native-project bytes are unchanged, and this does not count as a new case.",
+  "八秒 GIMP 原生图层演示": "Eight-second native GIMP layer demonstration",
+  "2026-10-12 新增：连续录制真实 GIMP 窗口，通过 typed MCP 依次显示原母版的五组切片与等值线。8.0 秒、1178 × 814、15 fps、120 帧，有意静音。不是重新绘制，也不是地震场动画。": "Added 2026-10-12: a continuous recording of the actual GIMP window while typed MCP reveals the original master’s five slice and contour groups. 8.0 seconds, 1178 × 814, 15 fps, 120 frames, intentionally silent. This is neither a repaint nor an animated seismic field.",
+  "新增过程视频环境": "New process-video environment",
+  "2026-10-12：GIMP 3.0.4 / Core 0.20.43 / GIMP adapter 0.5.0，另用未合并 PR22 的 GUI readiness 修复；原始制作环境记录不变。": "2026-10-12: GIMP 3.0.4 / Core 0.20.43 / GIMP adapter 0.5.0, with the GUI readiness fix from unmerged PR22; original production environment records remain unchanged.",
+  "新增视频模型记录": "New video model record",
+  "实际模型与推理强度均未知；请求配置为 gpt-6-astra / ultra，但未取得可审计的运行配置回执。仅记录本轮视频，不补写历史模型。": "Actual model and reasoning effort are both Unknown. The requested configuration was gpt-6-astra / ultra, but no auditable runtime configuration receipt was available. This applies only to the new video and does not backfill historical models.",
+  "真实软件视图与往返检查": "Real software view and round-trip checks",
+  "2026-10-12 实际 MCP 保存副本、关闭重开、导出并原生重开 PNG。XCF 副本 SHA256 与原母版相同；30 图层、19 文字层及完整 RGBA 保持一致。": "Actual MCP save-copy, close/reopen, export and native PNG reopen on 2026-10-12. The saved XCF SHA256 matches the original master; 30 layers, 19 text layers and full RGBA remain identical.",
+  "连续窗口录制与解码": "Continuous window capture and decode",
+  "仅录制经 PID 核对的任务 GIMP 窗口；五次 typed MCP 显示操作均完成。全部 120 帧完整解码，检查首中尾与五处变化；无音轨。": "Only the task-owned GIMP window, verified against its PID, was captured. All five typed MCP reveal operations completed. All 120 frames decoded; start, middle, end and all five changes were inspected. No audio stream.",
+  "静态科学展板另附八秒真实 GIMP 图层演示；不声称重做 ParaView 计算、原始创作全过程或跨机器像素一致。": "The static scientific plate now includes an eight-second real GIMP layer demonstration; this does not claim a new ParaView computation, a replay of the original creation, or cross-machine pixel identity.",
+  "视频与本轮原生核验记录": "Video and new native validation record",
+  "视频复现与边界": "Video reproduction and limits",
+  "GIMP readiness 修复 Draft PR22": "GIMP readiness fix Draft PR22",
+  "新增真实软件视频 2026-10-12": "Real software video added 2026-10-12",
+  "增加八秒连续 GIMP 图层演示、单独的本轮环境和请求模型记录；原图、完整下载及历史未知模型保持不变。影片权利保留，无新增许可授权。": "Added an eight-second continuous GIMP layer demonstration, with separate records for this run’s environment and requested model. Original images, complete download and historical Unknown models are unchanged. Video rights are reserved; no additional license is granted."
 }

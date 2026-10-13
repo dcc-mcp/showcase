@@ -1720,6 +1720,14 @@
         {
           "label": "Adapter 适配器",
           "value": "ParaView 0.1.0，9b9de65d 的原生证明与 4c4939b1 文档后续内容等价；GIMP 0.4.1，metadata 基线 ea9270a8 与预览 a3b45aaa 增量分阶段绑定"
+        },
+        {
+          "label": "新增过程视频环境",
+          "value": "2026-10-12：GIMP 3.0.4 / Core 0.20.43 / GIMP adapter 0.5.0，另用未合并 PR22 的 GUI readiness 修复；原始制作环境记录不变。"
+        },
+        {
+          "label": "新增视频模型记录",
+          "value": "实际模型与推理强度均未知；请求配置为 gpt-6-astra / ultra，但未取得可审计的运行配置回执。仅记录本轮视频，不补写历史模型。"
         }
       ],
       "tools": [
@@ -1764,6 +1772,12 @@
       ],
       "results": [
         {
+          "src": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+          "poster": "docs/showcase/seismic-lens/seismic-lens-native-poster.png",
+          "alt": "八秒 GIMP 原生图层演示",
+          "caption": "2026-10-12 新增：连续录制真实 GIMP 窗口，通过 typed MCP 依次显示原母版的五组切片与等值线。8.0 秒、1178 × 814、15 fps、120 帧，有意静音。不是重新绘制，也不是地震场动画。"
+        },
+        {
           "src": "docs/showcase/seismic-lens/hero.png",
           "alt": "Seismic Lens 五面板展板",
           "caption": "1600 × 1000 原生 GIMP MCP 预览；2560 × 1600 分层母版保持可编辑，副本缩放、透明 alpha、保存重开与全图 RGBA 已实际验证"
@@ -1804,6 +1818,16 @@
           "name": "Native GIMP web preview",
           "result": "pass",
           "observed": "Fresh native02:195 records,52 successful jobs and one intended rejection. Nested active-image IDs are strictly verified against the intended source; pixels, metadata and cleanup pass. The original missing-value comparison is not credited."
+        },
+        {
+          "name": "真实软件视图与往返检查",
+          "result": "pass",
+          "observed": "2026-10-12 实际 MCP 保存副本、关闭重开、导出并原生重开 PNG。XCF 副本 SHA256 与原母版相同；30 图层、19 文字层及完整 RGBA 保持一致。"
+        },
+        {
+          "name": "连续窗口录制与解码",
+          "result": "pass",
+          "observed": "仅录制经 PID 核对的任务 GIMP 窗口；五次 typed MCP 显示操作均完成。全部 120 帧完整解码，检查首中尾与五处变化；无音轨。"
         }
       ],
       "limitations": [
@@ -1811,7 +1835,7 @@
         "当前环境未暴露 CameraClippingRange；验收覆盖实际可读属性与图像像素",
         "MCP 重开限于本会话保存的可信状态；没有放开任意外部 PVSM 导入",
         "开发增量与实际测试版本逐项记录，不冒称 PyPI 已发行能力",
-        "静态科学展板；不声称影片或跨机器像素一致",
+        "静态科学展板另附八秒真实 GIMP 图层演示；不声称重做 ParaView 计算、原始创作全过程或跨机器像素一致。",
         "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内"
       ],
       "resources": [
@@ -1862,6 +1886,18 @@
         {
           "label": "文件清单",
           "url": "docs/showcase/seismic-lens/manifest.json"
+        },
+        {
+          "label": "视频与本轮原生核验记录",
+          "url": "docs/showcase/seismic-lens/native-process-video.json"
+        },
+        {
+          "label": "视频复现与边界",
+          "url": "docs/showcase/seismic-lens/PROCESS-VIDEO.md"
+        },
+        {
+          "label": "GIMP readiness 修复 Draft PR22",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/22"
         }
       ],
       "credits": {
@@ -1945,6 +1981,11 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "新增真实软件视频 2026-10-12",
+          "date": "2026-10-12",
+          "change": "增加八秒连续 GIMP 图层演示、单独的本轮环境和请求模型记录；原图、完整下载及历史未知模型保持不变。影片权利保留，无新增许可授权。"
         }
       ]
     },
