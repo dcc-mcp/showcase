@@ -81,6 +81,7 @@ test("native fallback and preload none remain usable before any intent", () => {
     idle(e); assert.equal(e.video.playCount, 0); assert.equal(e.video.preload, "none");
     assert.ok(e.source.getAttribute("src")); assert.equal(e.video.autoplay, false);
     assert.equal(e.video.loadCount, 0); assert.equal(e.video.srcAssignments, 0);
+    assert.equal(e.video.tabIndex, 0);
   }
 });
 test("hover immediately starts muted preview and leave releases decoder/source", async () => {
@@ -109,7 +110,7 @@ test("native controls play adopts the session without restarting or double play"
   leave(e); assert.equal(e.video.paused, false);
 });
 test("native pointer, keyboard and assistive intent restore released sources once without play", async () => {
-  for (const [event, data] of [["pointerdown", {}], ["keydown", {key: " "}], ["click", {}]]) {
+  for (const [event, data] of [["pointerdown", {}], ["keydown", {key: "ArrowRight"}], ["click", {}]]) {
     const e = fixture().entries[0]; enter(e); await flush(); leave(e);
     assert.equal(e.source.hasAttribute("src"), false); assert.equal(e.video.src, null);
     const plays = e.video.playCount, loads = e.video.loadCount, assignments = e.video.srcAssignments;
@@ -121,6 +122,26 @@ test("native pointer, keyboard and assistive intent restore released sources onc
     assert.equal(e.host.dataset.videoState, "watching"); assert.equal(e.video.playCount, plays);
     watch(e); idle(e); assert.equal(e.video.loadWithSourceCount, 0);
   }
+});
+test("released-idle Space and Enter restart once and suppress the disabled native default", async () => {
+  for (const key of [" ", "Enter"]) {
+    const e = fixture().entries[0]; enter(e); await flush(); leave(e);
+    const before = e.video.playCount; let prevented = 0;
+    e.video.emit("keydown", {key, preventDefault() { prevented++; }});
+    await flush();
+    assert.equal(prevented, 1); assert.equal(e.video.playCount, before + 1);
+    assert.equal(e.host.dataset.videoState, "watching"); assert.equal(e.video.muted, false);
+    e.video.emit("keydown", {key, preventDefault() { prevented++; }});
+    assert.equal(prevented, 1); assert.equal(e.video.playCount, before + 1);
+  }
+});
+test("initial native play and active pause/seek keys keep their browser defaults", async () => {
+  const e = fixture().entries[0]; let prevented = 0;
+  e.video.emit("keydown", {key: " ", preventDefault() { prevented++; }});
+  assert.equal(prevented, 0); assert.equal(e.video.playCount, 0);
+  enter(e); await flush();
+  for (const key of [" ", "ArrowRight", "ArrowUp"]) e.video.emit("keydown", {key, preventDefault() { prevented++; }});
+  assert.equal(prevented, 0); assert.equal(e.video.playCount, 1);
 });
 test("native hover pause/seek gestures preserve mute and native control semantics", async () => {
   const e = fixture().entries[0]; enter(e); await flush();

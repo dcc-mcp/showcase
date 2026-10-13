@@ -184,6 +184,7 @@ update();
     video.autoplay = false;
     video.preload = "none";
     video.playsInline = true;
+    video.tabIndex = 0;
     video.controls = true;
     video.loop = false;
     const entry = {host, video, button, status, source, sources, hasAudio, nativeIntent: false};
@@ -219,6 +220,15 @@ update();
     listen(video, "pointerdown", nativeIntent, {capture: true});
     listen(video, "click", nativeIntent, {capture: true}); // Assistive activation need not emit pointerdown.
     listen(video, "keydown", event => {
+      const released = entry.host.dataset.videoState === "idle" && !video.hasAttribute("src") &&
+        !sources.some(item => item.hasAttribute("src"));
+      if ([" ", "Enter"].includes(event.key) && released && available(entry)) {
+        // With no source, Chromium disables its native play control. Handle
+        // this one restart ourselves; otherwise preserve native key behavior.
+        event.preventDefault();
+        start(entry, false);
+        return;
+      }
       if ([" ", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) nativeIntent();
     }, {capture: true});
     listen(video, "play", () => {
