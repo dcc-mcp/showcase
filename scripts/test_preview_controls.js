@@ -76,14 +76,16 @@ function fixture(options = {}) {
       querySelector(selector) { return selector === ".preview-toggle-label" ? label : null; }});
     const progress = element();
     const status = element();
+    const sound = element({hidden:true});
+    const audioNote = element({hidden:true});
     const card = element({
       dataset: {previewSrc: "media/preview-" + index + ".mp4", previewKind: "video", errorLabel: "Preview unavailable. Open case for details."},
       rect: {width: 360, height: 260, left: 100, top: 100, right: 460, bottom: 360},
       parentElement: root, display: "block", visibility: "visible",
-      querySelector(selector) { return {".card-preview": video, ".preview-toggle": button, ".preview-progress": progress, ".preview-status": status}[selector] || null; },
+      querySelector(selector) { return {".card-preview": video, ".preview-toggle": button, ".preview-progress": progress, ".preview-status": status, '.preview-sound':sound, '.preview-audio-note':audioNote}[selector] || null; },
       getBoundingClientRect() { return this.rect; }
     });
-    return Object.assign(card, {video, button, progress, status, label});
+    return Object.assign(card, {video, button, progress, status, label, sound, audioNote});
   });
   if (options.setup) options.setup(cards);
   const hover = emitter({matches: options.hover !== false});
@@ -137,10 +139,37 @@ const idle = card => {
   assert.equal(card.dataset.previewState, "idle");
   assert.equal(card.video.hasAttribute("src"), false);
   assert.equal(card.video.paused, true);
+  assert.equal(card.video.muted, true);
   assert.equal(card.video.currentTime, 0);
   assert.equal(card.progress.value, 0);
   assert.equal(card.button.getAttribute("aria-pressed"), "false");
+  assert.equal(card.sound.hidden, true);
 };
+
+test('sound only unmutes the current preview after explicit activation and resets on every stop', async () => {
+  for (const cancel of [f=>f.cards[0].emit('pointerleave'),f=>f.document.emit('gallery:filter'),
+    f=>{f.document.hidden=true;f.document.emit('visibilitychange');},f=>enter(f.cards[1])]) {
+    const f=fixture({setup(cards){cards[0].dataset.previewAudio='true';}}),card=f.cards[0];
+    enter(card);await flush();assert.equal(card.sound.hidden,false);assert.equal(card.video.muted,true);
+    const plays=card.video.playCount;let prevented=0,stopped=0;
+    card.sound.emit('click',{preventDefault(){prevented++;},stopPropagation(){stopped++;}});
+    assert.equal(card.video.muted,false);assert.equal(card.video.playCount,plays);
+    assert.equal(prevented,1);assert.equal(stopped,1);assert.equal(card.sound.getAttribute('aria-pressed'),'true');
+    assert.equal(card.status.textContent,'Preview with sound');
+    cancel(f);idle(card);
+  }
+});
+
+test('verified silent and unknown audio are distinct, without engine loading', async () => {
+  const f=fixture({setup(cards){cards[0].dataset.previewAudio='false';}});
+  assert.equal(f.cards[0].audioNote.textContent,'No audio track');
+  assert.equal(f.cards[1].audioNote.textContent,'Audio unverified');
+  enter(f.cards[0]);await flush();assert.equal(f.cards[0].sound.hidden,true);
+  f.cards[0].sound.emit('click');assert.equal(f.cards[0].video.muted,true);
+  enter(f.cards[1]);await flush();assert.equal(f.cards[1].sound.hidden,false);
+  f.cards[1].sound.emit('click');assert.equal(f.cards[1].video.muted,false);
+  f.cards[1].sound.emit('click');assert.equal(f.cards[1].video.muted,true);
+});
 
 test("initialization is source-free, silent and progressive", () => {
   const {cards} = fixture();

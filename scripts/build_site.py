@@ -262,6 +262,8 @@ def preview_media(case):
     return next((item for item in case["results"] if os.path.splitext(item["src"])[1].lower() in (".mp4", ".webm")), None)
 
 def cards_markup(cases: list[dict], root: str, demos=None) -> str:
+    import preview_audio
+    audio_tracks = preview_audio.read(root)
     demos = demos or {}
     ranked = {slug: index for index, slug in enumerate(GALLERY_PRIORITY)}
     ordered = sorted(enumerate(cases), key=lambda item: (ranked.get(item[1]["slug"], len(ranked)), item[0]))
@@ -274,6 +276,9 @@ def cards_markup(cases: list[dict], root: str, demos=None) -> str:
         attrs = (' data-preview-src="%s" data-preview-kind="video" data-loading-label="正在加载预览…" data-playing-label="静音预览中" data-error-label="预览暂不可用，请进入作品观看。"' % esc(resource_url(preview["src"]))) if preview else ""
         preview_html = ('<video class="card-preview" muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video><progress class="preview-progress" max="1" value="0" aria-hidden="true"></progress>') if preview else ""
         button = ('<button class="preview-toggle" type="button" data-play-label="静音预览" data-stop-label="停止预览" aria-label="静音预览" aria-pressed="false" hidden><span class="preview-toggle-label">静音预览</span></button><span class="preview-status" aria-live="polite"></span><span class="preview-hint" aria-hidden="true">悬停即预览</span>') if preview else ""
+        if preview:
+            attrs += ' data-preview-audio="%s"' % audio_tracks.get(preview['src'], 'unknown')
+            button += '<button class="preview-sound" type="button" aria-pressed="false" hidden>开启声音</button><span class="preview-audio-note" hidden></span>'
         cover = resolve_public(root, case["cover"]["src"])
         dims = png_size(cover) if cover.lower().endswith('.png') else jpeg_size(cover)
         fit = ' contain' if dims and (dims[0] / dims[1] < .9 or dims[0] / dims[1] > 2) else ''
@@ -586,6 +591,7 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
             cases = json.load(fh)["cases"]
         import playable
         playable_demos, playable_assets = playable.read_and_validate(root, cases)
+        import games
         with open(resolve_public(root, "index.html"), encoding="utf-8-sig") as fh:
             template = fh.read()
         software = sorted({value for case in cases for value in case["software"]})
@@ -594,6 +600,8 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
                          "SOFTWARE_FILTERS": filters(software), "CAPABILITY_FILTERS": filters(capabilities),
                          "BRAND_NAV": brand_nav, "BRAND_PORTAL": brand_portal,
                           "CASE_CARDS": cards_markup(cases, root, playable_demos),
+                         "GAMES_SHELF": games.shelf(cases, playable_demos, root),
+                         "GAMES_ASSETS": '<link rel="stylesheet" href="assets/games.css"><script src="assets/games.js" defer></script>' if playable_demos else "",
                          "SEO_HEAD": seo_tags(
                              "DCC-MCP Showcase · 真实 DCC 作品与可复用流程",
                              "DCC-MCP 官方作品合集：真实 DCC 软件中的建模、程序化材质与跨软件创作，附提示词、步骤、工程资源及验证证据。",
@@ -606,6 +614,7 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
                  "sitemap.xml": sitemap_text(cases, [item["slug"] for item in brand_catalog.get("items", [])] if brands_visible and not brand_preview else None),
                  "robots.txt": "User-agent: *\nAllow: /showcase/\nSitemap: " + public_url("sitemap.xml") + "\n"}
         pages.update(brand_pages)
+        pages.update(games.pages(cases, playable_demos, root))
         import agent_pages
         agent_html, agent_data = agent_pages.generate(root, cases, playable_demos)
         pages.update(agent_html)
@@ -615,9 +624,11 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
             pages["index.html"] = pages["index.html"].replace("index, follow, max-image-preview:large", "noindex, nofollow")
         pages.update(compatibility_pages())
         assets = {"assets/site.css", "assets/gallery.js", "assets/detail.js", "assets/preview.js"}
+        if os.path.isfile(os.path.join(root, 'assets/preview-audio.json')):
+            assets.add('assets/preview-audio.json')
         assets.update(playable_assets)
         if playable_demos:
-            assets.add("assets/playable.js")
+            assets.update({"assets/playable.js", "assets/games.css", "assets/games.js"})
         if brands_visible:
             assets.update({"assets/brand.css", "assets/brand.js"})
             assets.update(brand_assets)

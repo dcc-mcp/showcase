@@ -63,13 +63,13 @@
     },
     {
       "path": "play/shell.css",
-      "bytes": 2207,
-      "sha256": "33f61fdf134ee983e16ca004b1b206a8a8d5381edcf6ead352a54a9e18e43176"
+      "bytes": 2854,
+      "sha256": "0c05af5579d383280b6dd1a2d4f2663939b57fe0a5116bfd1b3a189b6609182e"
     },
     {
       "path": "play/shell.js",
-      "bytes": 13271,
-      "sha256": "7acbf44684d3ef9436b96654953af8dcf50c56b70bc26680b2d5c2eb0b275563"
+      "bytes": 14502,
+      "sha256": "b1001c099a42f14c6d52e0d8a55feacdddb69c074fd11d8cb28bd402209588ef"
     },
     {
       "path": "play/export-provenance.json",

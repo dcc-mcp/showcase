@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "verification": "ffprobe stream inspection; presence does not assert audible content or listening review",
+  "files": [
+    {
+      "src": "docs/showcase/crystal-freight-native-film/crystal-freight-native-film-scored.mp4",
+      "sha256": "5fa44c41c8144e8a3f44f960d3de5282c712013c1a69057eb007176352fd24e8",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
+    },
+    {
+      "src": "docs/showcase/brass-relay/brass-relay-scored.mp4",
+      "sha256": "cb3987ab8ed23caaf434d9ee3739bf8d195344891345838e441c6d92e237174d",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
+    },
+    {
+      "src": "docs/showcase/orbit-post-office/orbit-post-office-scored.mp4",
+      "sha256": "c9548dbbb33db5cff37729876b97863fb6cce5375fa29104cb8f0920b4293444",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
+    },
+    {
+      "src": "docs/showcase/resonance-atlas/resonance-atlas.mp4",
+      "sha256": "4137108965c1da499e11cb35e4dff95eef2e1ae9c0a1e2ddededca22cdd27001",
+      "has_audio": false,
+      "audio_streams": []
+    },
+    {
+      "src": "docs/showcase/sonic-loom/demo.mp4",
+      "sha256": "bfb73a73dc55c13f88ea7c5c123cede60db7033954cf2273b9ce0a08cfb74e57",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
+    },
+    {
+      "src": "docs/showcase/prism-tide/demo.mp4",
+      "sha256": "465a2bd25c207af38c7fea0e295b638def7a83a6211187d777b9ccd364c9b422",
+      "has_audio": false,
+      "audio_streams": []
+    }
+  ]
+}

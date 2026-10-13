@@ -71,6 +71,12 @@ const match = (state.media === "all" || media.includes(state.media)) &&
 card.hidden = !match;
 if (match) visible += 1;
 });
+const games = document.querySelector('#games');
+if (games) {
+const visibleSlugs = new Set(cards.filter(card => !card.hidden).map(card => card.dataset.case));
+games.querySelectorAll('[data-game-case]').forEach(card => { card.hidden = !visibleSlugs.has(card.dataset.gameCase); });
+games.hidden = !['all', 'interactive'].includes(state.media) || !games.querySelector('[data-game-case]:not([hidden])');
+}
 document.querySelectorAll("[data-filter]").forEach(group => {
 group.querySelectorAll("button").forEach(button => button.setAttribute("aria-pressed",String(state[group.dataset.filter] === button.dataset.value)));
 });
