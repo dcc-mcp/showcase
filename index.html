@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#101311">
 {{SEO_HEAD}}
 <link rel="stylesheet" href="assets/site.css">
+{{GAMES_ASSETS}}
 <script src="assets/gallery.js" defer></script>
 <script src="assets/preview.js" defer></script>
 </head>
@@ -22,11 +23,12 @@
 <div class="collection-heading sr-only"><h2 id="works-title">作品合集</h2><p>{{CASE_COUNT}} 个案例 <span aria-hidden="true">/</span> {{SOFTWARE_COUNT}} 种软件</p></div>
 <div class="gallery-controls" id="gallery-controls" hidden>
 <div class="media-filter-row"><div class="filter-options media-tabs" role="group" aria-label="按媒体筛选" data-filter="media">
-<button class="filter-button" type="button" data-value="all" aria-pressed="true">全部</button><button class="filter-button" type="button" data-value="video" aria-pressed="false">影像</button><button class="filter-button" type="button" data-value="interactive" aria-pressed="false">交互</button><button class="filter-button" type="button" data-value="image" aria-pressed="false">静帧</button><button class="filter-button" type="button" data-value="audio" aria-pressed="false">音频</button></div>
+<button class="filter-button" type="button" data-value="all" aria-pressed="true">全部</button><button class="filter-button" type="button" data-value="video" aria-pressed="false">影像</button><button class="filter-button" type="button" data-value="interactive" aria-pressed="false">游戏</button><button class="filter-button" type="button" data-value="image" aria-pressed="false">静帧</button><button class="filter-button" type="button" data-value="audio" aria-pressed="false">音频</button></div>
 <details class="filter-disclosure" id="filter-disclosure"><summary>软件与能力筛选</summary><div class="advanced-filters"><div class="filter-group" role="group" aria-label="按软件筛选"><span class="filter-label">软件</span><div class="filter-options" data-filter="software">{{SOFTWARE_FILTERS}}</div></div><div class="filter-group" role="group" aria-label="按能力筛选"><span class="filter-label">能力</span><div class="filter-options" data-filter="capability">{{CAPABILITY_FILTERS}}</div></div></div></details>
 <button class="reset-button" id="reset-filters" type="button">清除筛选</button></div>
 </div>
 <p class="result-count" id="result-count" role="status" aria-live="polite">显示全部 {{CASE_COUNT}} 个案例</p>
+{{GAMES_SHELF}}
 <div class="work-wall" id="work-wall">{{CASE_CARDS}}</div>
 <div class="empty-state" id="empty-state" hidden><h3>没有匹配的作品</h3><p>换一个关键词，或清除筛选查看全部案例。</p><button class="primary-button" id="empty-reset" type="button">查看全部作品</button></div>
 <noscript><p class="notice">作品与详情无需 JavaScript 即可查看；启用 JavaScript 后可使用搜索和筛选。</p></noscript>

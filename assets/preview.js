@@ -12,6 +12,22 @@
   const disposers = [];
   let active = null;
   let destroyed = false;
+  const zh = String(document.documentElement.lang || '').startsWith('zh');
+  const audioLabels = zh ? {on:'开启声音', off:'静音', silent:'无音轨', unknown:'音轨未核验', playing:'有声预览中'}
+    : {on:'Enable sound', off:'Mute', silent:'No audio track', unknown:'Audio unverified', playing:'Preview with sound'};
+
+  function updateSound(entry) {
+    if (entry.sound) {
+      const enabled = !entry.video.muted;
+      entry.sound.textContent = enabled ? audioLabels.off : audioLabels.on;
+      entry.sound.setAttribute('aria-label', entry.sound.textContent);
+      entry.sound.setAttribute('aria-pressed', String(enabled));
+      entry.sound.hidden = entry.hasAudio === 'false' || entry.card.dataset.previewState !== 'playing';
+    }
+    if (entry.status && entry.card.dataset.previewState === 'playing') {
+      entry.status.textContent = entry.video.muted ? entry.playingLabel : audioLabels.playing;
+    }
+  }
 
   function listen(target, event, action, options) {
     target.addEventListener(event, action, options);
@@ -30,6 +46,7 @@
     entry.button.setAttribute("aria-pressed", String(busy));
     if (entry.status) entry.status.textContent = state === "error" ? entry.errorLabel
       : state === "loading" ? entry.loadingLabel : state === "playing" ? entry.playingLabel : "";
+    updateSound(entry);
   }
 
   function progress(entry) {
@@ -71,6 +88,7 @@
       previous.removeListeners();
     }
     entry.video.pause();
+    entry.video.muted = true;
     try { entry.video.currentTime = 0; } catch (_) { /* Metadata may not exist yet. */ }
     // Removing src then load() releases the decoder and cancels pending fetches.
     // Never assign src="", which could fetch the page itself in some browsers.
@@ -157,6 +175,7 @@
     } catch (_) { return; }
     const status = card.querySelector(".preview-status");
     const entry = {card, video, button, source, status, progress: card.querySelector(".preview-progress"),
+      sound:card.querySelector('.preview-sound'), hasAudio:card.dataset.previewAudio || 'unknown',
       inViewport: true,
       loadingLabel: card.dataset.loadingLabel || "", playingLabel: card.dataset.playingLabel || "",
       errorLabel: card.dataset.errorLabel || button.dataset.errorLabel || (status && status.dataset.errorLabel) || ""};
@@ -174,6 +193,11 @@
     // The static template leaves controls hidden, so failed/disabled JS keeps
     // ordinary poster and detail links usable with no dead preview button.
     button.hidden = false;
+    const audioNote = card.querySelector('.preview-audio-note');
+    if (audioNote && entry.hasAudio !== 'true') {
+      audioNote.textContent = entry.hasAudio === 'false' ? audioLabels.silent : audioLabels.unknown;
+      audioNote.hidden = false;
+    }
     setState(entry, "idle");
     resetProgress(entry);
     listen(card, "pointerenter", event => hoverStart(entry, event));
@@ -189,6 +213,15 @@
       event.stopPropagation();
       if (active && active.entry === entry) stop(entry);
       else start(entry, false); // Explicit activation also works on touch/reduced-motion/data-saving devices.
+    });
+    if (entry.sound) listen(entry.sound, 'click', event => {
+      event.preventDefault();
+      event.stopPropagation();
+      // Only this explicit click can unmute the currently playing preview.
+      // Do not restart video or navigate the card when toggling sound.
+      if (!active || active.entry !== entry || entry.card.dataset.previewState !== 'playing' || entry.hasAudio === 'false') return;
+      video.muted = !video.muted;
+      updateSound(entry);
     });
   });
   if (!entries.length) return;
