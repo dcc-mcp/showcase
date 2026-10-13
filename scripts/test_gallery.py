@@ -41,6 +41,21 @@ class GalleryTests(unittest.TestCase):
         self.assertIn(' hidden', markup)
         self.assertIn('href="cases/sample-case/"', markup)
 
+    def test_detail_videos_are_all_hover_enabled_with_native_fallback(self):
+        self.case['results'].extend([
+            {'src': 'docs/showcase/sample-case/first.mp4', 'alt': 'First film'},
+            {'src': 'docs/showcase/sample-case/second.webm', 'alt': 'Second film'},
+        ])
+        markup = site.detail_page(self.case, str(self.root))
+        self.assertEqual(markup.count('class="detail-video"'), 2)
+        self.assertEqual(markup.count('data-hover-preview'), 2)
+        self.assertEqual(markup.count('controls playsinline preload="none"'), 2)
+        self.assertEqual(markup.count('data-preview-audio="unknown"'), 2)
+        self.assertEqual(markup.count('poster="../../docs/showcase/sample-case/cover.png"'), 2)
+        self.assertIn('<source src="../../docs/showcase/sample-case/second.webm">', markup)
+        self.assertNotIn('autoplay', markup)
+        self.assertNotIn('poster', self.case['results'][-1])
+
     def test_static_work_has_no_preview_control(self):
         markup = site.cards_markup([self.case], str(self.root))
         self.assertNotIn('card-preview', markup)

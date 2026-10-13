@@ -271,17 +271,17 @@ def verify_scored_video(page, context, case, origin, output, layout, active_cont
     expect(video).to_have_js_property("controls", True)
     expect(video).to_have_js_property("autoplay", False)
     expect(video).to_have_js_property("paused", True)
-    video.evaluate("v => v.load()")
+    # preload=none is intentional: native keyboard intent loads the film.
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Scored video played before a user gesture")
+    progress(active_context, "scored_film_keyboard_play_pause")
+    video.press("Space")
     page.wait_for_function("slug => document.querySelector('#results video:has(source[src$=\"' + slug + '-scored.mp4\"])').readyState >= 1", arg=slug, timeout=15000)
     qa_path = "docs/showcase/" + slug + "/soundtrack-media-qa.json"
     qa = json.loads(fetch_public_file(context.request, origin, qa_path))
     actual = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
     if abs(actual["duration"] - qa["video_seconds"]) > .06 or actual["width"] != qa["video_width"] or actual["height"] != qa["video_height"]:
         raise AssertionError("Scored media dimensions or duration do not match verified picture")
-    if video.evaluate("v => v.played.length"):
-        raise AssertionError("Scored video played before a user gesture")
-    progress(active_context, "scored_film_keyboard_play_pause")
-    video.press("Space")
     page.wait_for_function("slug => { const v = document.querySelector('#results video:has(source[src$=\"' + slug + '-scored.mp4\"])'); return !v.paused && v.currentTime >= .2; }", arg=slug, timeout=15000)
     video.press("Space")
     expect(video).to_have_js_property("paused", True)
@@ -307,7 +307,11 @@ def verify_resonance_video(page, context, case, origin, output, layout, active_c
     expect(video).to_have_js_property("controls", True)
     expect(video).to_have_js_property("autoplay", False)
     expect(video).to_have_js_property("paused", True)
-    video.evaluate("v => v.load()")
+    # preload=none is intentional: native keyboard intent loads the film.
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Resonance video played before a user gesture")
+    progress(active_context, "resonance_film_keyboard_play_pause")
+    video.press("Space")
     page.wait_for_function("slug => document.querySelector('#results video:has(source[src$=\"' + slug + '.mp4\"])').readyState >= 1", arg=slug, timeout=15000)
     manifest = json.loads(fetch_public_file(context.request, origin, "docs/showcase/" + slug + "/manifest.json"))
     item = next(row for row in manifest["files"] if row["path"] == slug + ".mp4")
@@ -315,10 +319,6 @@ def verify_resonance_video(page, context, case, origin, output, layout, active_c
     actual = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
     if abs(actual["duration"] - qa["video_seconds"]) > .06 or actual["width"] != qa["video_width"] or actual["height"] != qa["video_height"]:
         raise AssertionError("Resonance media dimensions or duration do not match verified picture")
-    if video.evaluate("v => v.played.length"):
-        raise AssertionError("Resonance video played before a user gesture")
-    progress(active_context, "resonance_film_keyboard_play_pause")
-    video.press("Space")
     page.wait_for_function("slug => { const v = document.querySelector('#results video:has(source[src$=\"' + slug + '.mp4\"])'); return !v.paused && v.currentTime >= .2; }", arg=slug, timeout=15000)
     video.press("Space")
     expect(video).to_have_js_property("paused", True)
@@ -541,13 +541,18 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                 expect(video).to_have_count(1)
                                 expect(video).to_be_visible()
                                 expect(video).to_have_js_property("controls", True)
+                                video.scroll_into_view_if_needed()
+                                expect(video).to_have_js_property("autoplay", False)
+                                expect(video).to_have_js_property("paused", True)
+                                if video.evaluate("v => v.played.length"):
+                                    raise AssertionError("Orbit video played before a user gesture")
+                                progress(active_context, "orbit_film_keyboard_play")
+                                video.press("Space")
                                 progress(active_context, "orbit_film_metadata")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video:has(source[src$=\"first-delivery-720p.mp4\"])'); return v.readyState >= 1 && v.videoWidth === 1280 && v.videoHeight === 720; }")
                                 duration = video.evaluate("v => v.duration")
                                 if abs(duration - 7.018) > 0.05:
                                     raise AssertionError("Unexpected Orbit film duration")
-                                progress(active_context, "orbit_film_keyboard_play")
-                                video.press("Space")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video:has(source[src$=\"first-delivery-720p.mp4\"])'); return !v.paused && v.currentTime >= 0.2; }")
                                 progress(active_context, "orbit_film_keyboard_pause")
                                 video.press("Space")

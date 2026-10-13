@@ -68,7 +68,7 @@
         },
         {
           "path": "scripts/godot_web/projects/sonic-loom/web.gd",
-          "sha256": "542bbdaab5d535393e0f1deaa743ee43f6bf0e1c5d2ded3b997b3549e5d30de4"
+          "sha256": "bc006635412dfa520e55997a9d17dcb4091b63aabb0dc2045433f0c89cddea3b"
         },
         {
           "path": "scripts/godot_web/projects/sonic-loom/web.gd.uid",
@@ -119,7 +119,7 @@
         },
         {
           "path": "scripts/godot_web/projects/prism-tide/web.gd",
-          "sha256": "3a8f92787e13adea259094ec61ad42bf22bd167eb2be7c1f56f0eba8396cb6ee"
+          "sha256": "705f57c5bd285134e47b7375b83742a5e942cb38ed33991a85a7aa4c70da4181"
         },
         {
           "path": "scripts/godot_web/projects/prism-tide/web.gd.uid",

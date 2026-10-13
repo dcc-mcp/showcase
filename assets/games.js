@@ -34,7 +34,28 @@
   if (destination.origin !== location.origin) return;
   destination.searchParams.set('lang', zh ? 'zh' : 'en');
   destination.searchParams.set('embed', '1');
+  destination.searchParams.set('v', stage.dataset.gameRevision || '1');
   let frame = null, timeout = null, enabled = false;
+  const portrait = (stage.dataset.portraitRatio || '720/1320').split('/').map(Number);
+  let reportedLayout = null;
+  function resizeStage() {
+    const width = stage.clientWidth;
+    if (!width) return;
+    const mobile = width < 720;
+    // The child may supply its actual logical layout. Only reuse it when it
+    // agrees with this width breakpoint, avoiding a feedback loop during resize.
+    const layout = reportedLayout?.mode === (mobile ? 'mobile' : 'desktop') ? reportedLayout : null;
+    const ratio = layout ? layout.width / layout.height : mobile ? portrait[0]/portrait[1] : 1280/800;
+    const natural = width / ratio + 46; // room for accessible controls inside the iframe
+    const available = Math.max(280, (window.visualViewport?.height || innerHeight) - 180);
+    stage.dataset.layout = mobile ? 'mobile' : 'desktop';
+    stage.style.setProperty('--stage-height', Math.round(mobile ? natural : Math.min(natural, available)) + 'px');
+  }
+  new ResizeObserver(resizeStage).observe(stage);
+  window.addEventListener('resize', resizeStage);
+  window.visualViewport?.addEventListener('resize', resizeStage);
+  resizeStage();
+
   start.hidden = false;
   function send(type) { frame?.contentWindow?.postMessage({type:'showcase:' + type}, destination.origin); }
   function stop(message, failed = false) {
@@ -67,6 +88,14 @@
   window.addEventListener('message', event => {
     if (!frame || event.source !== frame.contentWindow || event.origin !== destination.origin) return;
     if (event.data?.type === 'showcase:ready') send('start');
+    if (event.data?.type === 'showcase:layout') {
+      const {width,height,mode}=event.data;
+      if (Number.isInteger(width) && Number.isInteger(height) && width>=320 && width<=4096 && height>=320 && height<=4096 && ['mobile','desktop'].includes(mode)) {
+        reportedLayout={width,height,mode};resizeStage();
+      }
+      return;
+    }
+
     if (event.data?.type !== 'showcase:state') return;
     if (event.data.state === 'error') { stop(t.error, true); start.focus(); }
     if (event.data.state === 'running') {
@@ -89,6 +118,7 @@
   leaveFull.addEventListener('click', () => document.exitFullscreen?.().catch(() => { status.textContent = t.fullscreen; }));
   document.addEventListener('fullscreenchange', () => {
     leaveFull.hidden = document.fullscreenElement !== stage;
+    resizeStage();
     if (!leaveFull.hidden) leaveFull.focus();
     else if (!full.hidden) full.focus();
   });

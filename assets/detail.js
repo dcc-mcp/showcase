@@ -34,3 +34,225 @@ audio.currentTime = Math.max(0, Math.min(audio.duration, current + delta));
 update();
 });
 })();
+
+(() => {
+  "use strict";
+  // The static HTML remains an ordinary native player without JavaScript.
+  // Enhanced videos use on-demand, silent hover; an explicit watch action
+  // switches to normal native controls and is never interrupted by hover.
+  const videos = Array.from(document.querySelectorAll(".detail-video video[data-hover-preview]"));
+  if (!videos.length) return;
+  const hover = window.matchMedia ? window.matchMedia("(hover: hover) and (pointer: fine)") : null;
+  const reduced = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const zh = String(document.documentElement.lang || "").startsWith("zh");
+  const labels = zh ? {
+    watch: "观看视频", stop: "停止观看", hover: "悬停即静音预览，点击观看", tap: "点击观看视频", loading: "正在加载视频…",
+    preview: "静音预览中，点击观看", watching: "使用播放器控制声音与进度", error: "视频暂不可用，请重试或使用下载链接。",
+    silent: "无音轨", unknown: "音轨未核验"
+  } : {
+    watch: "Watch video", stop: "Stop watching", hover: "Hover for muted preview; click to watch", tap: "Click to watch video", loading: "Loading video…",
+    preview: "Muted preview; click to watch", watching: "Use player controls for sound and seeking", error: "Video unavailable. Retry or use the download link.",
+    silent: "No audio track", unknown: "Audio unverified"
+  };
+  const entries = [], disposers = [];
+  let active = null, destroyed = false;
+  const automaticAllowed = () => Boolean(hover && hover.matches && !(reduced && reduced.matches) && !(connection && connection.saveData));
+  function listen(target, event, action, options) {
+    target.addEventListener(event, action, options);
+    disposers.push(() => target.removeEventListener(event, action, options));
+  }
+  function state(entry, value) {
+    entry.host.dataset.videoState = value;
+    const watching = active && active.entry === entry && !active.automatic;
+    entry.button.textContent = watching ? labels.stop : labels.watch;
+    entry.button.setAttribute("aria-pressed", String(Boolean(watching)));
+    entry.status.textContent = value === "error" ? labels.error : value === "loading" ? labels.loading :
+      value === "preview" ? labels.preview : value === "watching" ? labels.watching : automaticAllowed() ? labels.hover : labels.tap;
+  }
+  function available(entry) {
+    if (destroyed || document.hidden || entry.host.isConnected === false || entry.host.closest("[hidden], [aria-hidden='true']")) return false;
+    if (window.getComputedStyle) {
+      const style = window.getComputedStyle(entry.host);
+      if (style.display === "none" || style.visibility === "hidden" || style.visibility === "collapse") return false;
+    }
+    const rect = entry.video.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0 &&
+      rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.left < (window.innerWidth || document.documentElement.clientWidth);
+  }
+  function stop(entry, value = "idle") {
+    if (active && active.entry === entry) {
+      const old = active;
+      active = null;
+      old.dispose();
+    }
+    const video = entry.video;
+    video.pause();
+    video.muted = true;
+    video.controls = true;
+    video.loop = false;
+    entry.nativeIntent = false;
+    try { video.currentTime = 0; } catch (_) { /* Metadata may not exist yet. */ }
+    video.removeAttribute("src");
+    // preload=none leaves the native SOURCE fallback usable without downloading
+    // it. load() releases the previous decoder/fetch and restores the poster.
+    video.load();
+    state(entry, value);
+  }
+  const stopAll = () => { if (active) stop(active.entry); };
+  function start(entry, automatic, adoptNativePlayback = false) {
+    if (!available(entry) || (automatic && !automaticAllowed())) return;
+    // Passing another video must not interrupt intentional viewing or seeking.
+    if (automatic && active && (!active.automatic || active.entry === entry)) return;
+    stopAll();
+    const video = entry.video;
+    const run = {entry, automatic, timer: null, dispose() {}};
+    active = run;
+    const failed = error => {
+      if (active !== run) return;
+      // Pausing native controls while play() is pending is an intentional
+      // interruption, not a failed video. Keep its source and seek position.
+      if (!run.automatic && video.paused && error && error.name === "AbortError") {
+        window.clearTimeout(run.timer);
+        run.timer = null;
+        state(entry, "watching");
+      } else stop(entry, "error");
+    };
+    const playing = () => {
+      if (active !== run) {
+        if (!active || active.entry !== entry) video.pause();
+        return;
+      }
+      if (document.hidden || (run.automatic && (!automaticAllowed() || !available(entry)))) { stop(entry); return; }
+      window.clearTimeout(run.timer);
+      run.timer = null;
+      state(entry, run.automatic ? "preview" : "watching");
+    };
+    const handlers = {playing, error: failed};
+    Object.entries(handlers).forEach(([name, callback]) => video.addEventListener(name, callback));
+    run.dispose = () => {
+      window.clearTimeout(run.timer);
+      Object.entries(handlers).forEach(([name, callback]) => video.removeEventListener(name, callback));
+    };
+    video.muted = automatic || entry.hasAudio === "false";
+    video.controls = true;
+    video.loop = automatic;
+    if (!adoptNativePlayback) video.src = entry.source;
+    state(entry, "loading");
+    run.timer = window.setTimeout(failed, 12000);
+    if (adoptNativePlayback) return; // The native play action is already underway.
+    try {
+      const promise = video.play();
+      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(playing, failed);
+    } catch (_) { failed(); }
+  }
+  videos.forEach(video => {
+    const host = video.parentElement;
+    const sources = Array.from(video.querySelectorAll("source[src]"));
+    const raw = video.getAttribute("src") || (sources[0] && sources[0].getAttribute("src"));
+    if (!raw || !host) return;
+    let source;
+    try {
+      const url = new URL(raw, document.baseURI);
+      if (!["http:", "https:"].includes(url.protocol)) return;
+      source = url.href;
+    } catch (_) { return; }
+    const toolbar = document.createElement("div");
+    toolbar.className = "detail-video-actions";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "video-watch";
+    const status = document.createElement("span");
+    status.className = "video-status";
+    status.setAttribute("aria-live", "polite");
+    toolbar.append(button, status);
+    const hasAudio = video.dataset.previewAudio || "unknown";
+    if (hasAudio !== "true") {
+      const note = document.createElement("span");
+      note.className = "video-audio-note";
+      note.textContent = hasAudio === "false" ? labels.silent : labels.unknown;
+      toolbar.append(note);
+    }
+    host.append(toolbar);
+    // Retain SOURCE for native controls and no-JS fallback. preload=none makes
+    // it inert until hover or an explicit native play action requests playback.
+    video.pause();
+    video.muted = video.defaultMuted = true;
+    video.autoplay = false;
+    video.preload = "none";
+    video.playsInline = true;
+    const entry = {host, video, button, status, source, hasAudio, nativeIntent: false};
+    entries.push(entry);
+    stop(entry);
+    listen(host, "pointerenter", event => {
+      if (event.pointerType !== "touch") start(entry, true);
+    });
+    listen(host, "pointerleave", event => {
+      if (event.pointerType !== "touch" && active && active.entry === entry && active.automatic) stop(entry);
+    });
+    listen(host, "pointercancel", () => {
+      if (active && active.entry === entry && active.automatic) stop(entry);
+    });
+    listen(button, "click", () => {
+      if (active && active.entry === entry && !active.automatic) stop(entry);
+      else start(entry, false);
+    });
+    const nativeIntent = () => {
+      entry.nativeIntent = true;
+      if (active && active.entry === entry && active.automatic) {
+        // Native pause/seek/volume gestures keep their browser meaning. Merely
+        // pressing pause must not make a muted hover preview suddenly audible.
+        active.automatic = false;
+        video.loop = false;
+        state(entry, "watching");
+      }
+    };
+    listen(video, "pointerdown", nativeIntent);
+    listen(video, "click", nativeIntent); // Assistive activation need not emit pointerdown.
+    listen(video, "keydown", event => {
+      if ([" ", "Enter", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) nativeIntent();
+    });
+    listen(video, "play", () => {
+      if (active && active.entry === entry) return;
+      if (!entry.nativeIntent || !available(entry)) { video.muted = true; video.pause(); return; }
+      // Native controls start playback themselves. Adopt that session without
+      // restarting it or fighting the browser's play/pause default action.
+      start(entry, false, true);
+    });
+  });
+  if (!entries.length) return;
+  function stopOffscreen() {
+    if (active && active.automatic && !available(active.entry)) stop(active.entry);
+  }
+  function policyChange() {
+    if (active && active.automatic) stop(active.entry);
+    entries.forEach(entry => {
+      if (!active || active.entry !== entry) state(entry, "idle");
+    });
+  }
+  [hover, reduced, connection].forEach(target => {
+    if (!target) return;
+    if (target.addEventListener) listen(target, "change", policyChange);
+    else if (target.addListener) {
+      target.addListener(policyChange);
+      disposers.push(() => target.removeListener(policyChange));
+    }
+  });
+  listen(document, "visibilitychange", () => { if (document.hidden) stopAll(); });
+  listen(document, "keydown", event => { if (event.key === "Escape" && !document.fullscreenElement) stopAll(); });
+  listen(document, "scroll", stopOffscreen, {capture: true, passive: true});
+  listen(window, "resize", stopOffscreen, {passive: true});
+  if (window.IntersectionObserver) {
+    const observer = new window.IntersectionObserver(stopOffscreen, {threshold: 0});
+    entries.forEach(entry => observer.observe(entry.video));
+    disposers.push(() => observer.disconnect());
+  }
+  listen(window, "pagehide", event => {
+    stopAll();
+    if (!event.persisted) {
+      destroyed = true;
+      disposers.splice(0).forEach(dispose => dispose());
+    }
+  });
+})();

@@ -22,6 +22,7 @@ func _ready():
 		get_window().content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	super._ready()
 	web_ready()
+	if "--web-layout-test" in OS.get_cmdline_user_args(): web_layout_test()
 	if "--web-test" in OS.get_cmdline_user_args(): web_test()
 func _process(delta):
 	super._process(delta)
@@ -111,6 +112,9 @@ func web_load():
 	save_status = "loaded"
 func web_command(args):
 	if args.is_empty(): return
+	if str(args[0]) in ["layout:mobile", "layout:desktop"]:
+		web_layout(str(args[0]) == "layout:mobile")
+		return
 	match str(args[0]):
 		"select": selected = (selected + 1) % (mirrors.size() + shutters.size())
 		"turn": activate(selected)
@@ -280,3 +284,25 @@ func mobile_input_checks():
 	var targets = web_state().native_targets
 	checks["mobile_read_only_target_geometry"] = targets.objects.size() == 5 and targets.turn.center_x == MOBILE_CONTROLS.turn.get_center().x
 	return checks
+
+# Browser layout changes preserve the native game/session; only presentation changes.
+func web_layout(mobile: bool):
+	mobile_layout = mobile
+	get_window().content_scale_size = MOBILE_SIZE if mobile else Vector2i(1280, 800)
+	get_window().content_scale_mode = Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
+	get_window().content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
+	trace()
+	queue_redraw()
+	web_publish()
+
+func web_layout_test():
+	var before = JSON.stringify([level,moves,selected,won,mirrors,shutters])
+	var checks = []
+	for compact in [true, false, true, false]:
+		web_layout(compact)
+		checks.append(mobile_layout == compact)
+		checks.append(get_window().content_scale_size == (MOBILE_SIZE if compact else Vector2i(1280,800)))
+		checks.append(JSON.stringify([level,moves,selected,won,mirrors,shutters]) == before)
+	var passed = checks.all(func(value): return value)
+	print("RESPONSIVE_LAYOUT " + JSON.stringify({"passed":passed,"checks":checks.size(),"case":"prism-tide"}))
+	get_tree().quit(0 if passed else 1)

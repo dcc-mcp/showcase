@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+"""Real-engine viewport/iframe resize regressions; no state-command test shortcuts."""
+import argparse, json, threading
+from pathlib import Path
+from functools import partial
+from http.server import ThreadingHTTPServer
+from localization_browser_smoke import MountHandler
+
+def run(site, output):
+    from playwright.sync_api import sync_playwright, expect
+    output.mkdir(parents=True, exist_ok=True)
+    server=ThreadingHTTPServer(('127.0.0.1',0),partial(MountHandler,directory=str(site)))
+    threading.Thread(target=server.serve_forever,daemon=True).start()
+    base=f'http://127.0.0.1:{server.server_port}/showcase/'
+    report={'passed':False,'checks':[],'screenshots':[],'scope':'Actual Godot WASM in Chromium; touch emulation; CSS zoom plus layout viewport equivalents, not OS-level browser zoom or physical phones'}
+    def check(name, **evidence):
+        report['checks'].append({'name':name,**evidence});print('PASS',name,evidence,flush=True)
+    def shot(page,name):
+        page.screenshot(path=str(output/name));report['screenshots'].append(name)
+    def geometry(frame):
+        return frame.locator('#canvas').evaluate('''c=>{const r=c.getBoundingClientRect(),s=document.querySelector('#stage').getBoundingClientRect();return {w:r.width,h:r.height,ratio:c.width/c.height,contained:r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,overflow:document.documentElement.scrollWidth>innerWidth+1,bodyOverflow:document.documentElement.scrollHeight>innerHeight+2}}''')
+    try:
+      with sync_playwright() as pw:
+        browser=pw.chromium.launch(args=['--enable-unsafe-swiftshader'])
+        ctx=browser.new_context(viewport={'width':2048,'height':1016},has_touch=True,service_workers='block')
+        ctx.route('**/*',lambda r:r.continue_() if r.request.url.startswith(base) else r.abort())
+        page=ctx.new_page();page.set_default_timeout(30000)
+        for slug in ['sonic-loom','prism-tide']:
+            page.set_viewport_size({'width':2048,'height':1016})
+            page.goto(base+'zh/games/'+slug+'/')
+            assert page.locator('iframe').count()==0
+            page.locator('[data-game-start]').click()
+            expect(page.locator('[data-game-stage]')).to_have_attribute('data-state','running',timeout=120000)
+            frame=page.frames[1];frame.wait_for_function('!!window.__showcaseState')
+            assert page.locator('.game-stage').bounding_box()['width']>1200
+            # Change actual native state using keyboard, then retain it across every reflow.
+            frame.locator('canvas').focus()
+            if slug=='sonic-loom':
+                page.keyboard.press('ArrowUp');frame.wait_for_function('window.__showcaseState.bpm===108')
+            else:
+                page.keyboard.press('Space');frame.wait_for_function('window.__showcaseState.moves===1')
+            for width,height in [(2048,1016),(1366,768),(900,600),(390,844),(844,390),(320,640),(1024,768),(2048,1016)]:
+                page.set_viewport_size({'width':width,'height':height})
+                mobile=page.locator('.game-stage').evaluate('e=>e.clientWidth<720')
+                frame.wait_for_function('(mobile)=>window.__showcaseState.mobile_layout===mobile',arg=mobile)
+                frame.wait_for_function('''()=>{const c=document.querySelector('#canvas'),r=c.getBoundingClientRect();return r.width>0&&Math.abs(r.width/r.height-c.width/c.height)<.005}''')
+                g=geometry(frame)
+                assert g['contained'] and not g['overflow'] and not g['bodyOverflow'],g
+                assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+                state=frame.evaluate('window.__showcaseState')
+                assert state.get('bpm',108)==108 and state.get('moves',1)==1,state
+                check(slug+f'/{width}x{height}',mobile=mobile,canvas=g)
+                if width in [2048,390,844]:
+                    page.locator('.game-stage').scroll_into_view_if_needed()
+                    shot(page,f'{slug}-{width}x{height}.png')
+            # Zoom-induced CSS reflow: ratio stays exact, state survives, no clipping.
+            page.evaluate("document.body.style.zoom='1.5'")
+            page.wait_for_timeout(200)
+            assert geometry(frame)['contained']
+            assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+            shot(page,slug+'-css-zoom150.png')
+            page.evaluate("document.body.style.zoom='1'")
+            page.locator('[data-game-fullscreen]').click()
+            page.wait_for_function('!!document.fullscreenElement')
+            page.wait_for_timeout(200)
+            assert geometry(frame)['contained'] and not geometry(frame)['bodyOverflow']
+            shot(page,slug+'-fullscreen.png')
+            page.locator('[data-game-leave-full]').click()
+            page.wait_for_function('!document.fullscreenElement')
+            # Accessible fallback can open without covering/cropping the native canvas.
+            frame.locator('#alternate-label').click()
+            page.wait_for_timeout(100)
+            assert geometry(frame)['contained'] and not geometry(frame)['bodyOverflow']
+            frame.locator('[data-command=reset]').click()
+            check(slug+'/zoom-fullscreen-accessible-controls')
+            page.locator('[data-game-exit]').click()
+            assert page.locator('iframe').count()==0
+            # Existing detail page must also resize its full standalone shell naturally.
+            page.set_viewport_size({'width':390,'height':844})
+            page.goto(base+'zh/cases/'+slug+'/')
+            page.locator('[data-play-start]').click()
+            frame=page.frames[1];frame.locator('#start').click()
+            frame.wait_for_function("document.body.dataset.state==='running'",timeout=120000)
+            page.wait_for_function('''()=>{const f=document.querySelector('[data-play-frame] iframe');return f&&f.clientHeight>=f.contentDocument.querySelector('main').getBoundingClientRect().height-2}''')
+            g=geometry(frame);assert g['contained'] and not g['overflow']
+            assert not g['bodyOverflow'],g
+            check(slug+'/legacy-detail-iframe-auto-height')
+            page.locator('[data-play-exit]').click()
+        ctx.close();browser.close();report['passed']=True
+    finally:
+        server.shutdown();(output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--site',type=Path,default=Path('_site'));p.add_argument('--output',type=Path,required=True);a=p.parse_args();run(a.site,a.output)

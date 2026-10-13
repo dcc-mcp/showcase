@@ -61,6 +61,42 @@
       "sha256": "465a2bd25c207af38c7fea0e295b638def7a83a6211187d777b9ccd364c9b422",
       "has_audio": false,
       "audio_streams": []
+    },
+    {
+      "src": "docs/showcase/crystal-freight-native-film/film-1280.mp4",
+      "sha256": "87a8d6b18d35bf7cfd9fd560908c9cf2c5e62ff7d0275c97939b71b8ffa3b5f6",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
+    },
+    {
+      "src": "docs/showcase/brass-relay/film-1280.mp4",
+      "sha256": "f2f3eaa047fc3622e0aab775053bb28653fa3e32548325947c3611be9bf83b36",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
+    },
+    {
+      "src": "docs/showcase/orbit-post-office/first-delivery-720p.mp4",
+      "sha256": "2cd8cca471f64569f861b495214de799bf9d2592c67532cd7c0b7a829c65d827",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
     }
   ]
 }
