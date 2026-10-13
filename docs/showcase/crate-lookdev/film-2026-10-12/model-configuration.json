@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "production_date": "2026-10-12",
+  "scope": "New camera animation, rendering and film delivery only. The historical material/model attribution is unchanged.",
+  "requested": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "ultra"
+  },
+  "accepted": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "ultra"
+  },
+  "record_status": "configured",
+  "configuration_time_utc": "2026-10-12T04:57:50Z",
+  "basis": "Requested model and reasoning effort were accepted by the production task configuration. This is not an independent runtime or backend identity attestation."
+}

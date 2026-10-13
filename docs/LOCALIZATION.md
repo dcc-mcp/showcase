@@ -95,3 +95,12 @@ retained under `/zh/`, alongside the existing Sonic Loom and Prism Tide checks.
 
 CI screenshots and its JSON report are review evidence. Schema/build success
 alone is not visual acceptance or new validation of the underlying artwork.
+
+## Later production on a historical case
+
+An additive film or other newly executed production may use the optional model
+stage IDs `supplement_creation`, `supplement_post_production` and
+`supplement_review`. These do not replace the required historical stages or the
+original review records. A configured supplement must identify its date and
+scope and retain unknown historical attribution. Duplicate stage IDs and
+unsupported record statuses remain rejected.

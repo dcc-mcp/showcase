@@ -39,6 +39,8 @@ UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|"
 ATTRIBUTION_UNKNOWN = re.compile(r"unknown|unrecorded|not (?:recorded|published|disclosed)|未(?:公开|记录|知)|未知|无法核实", re.I)
 REQUIRED_STAGE_IDS = {"planning", "creation", "code", "reference", "post_production"}
 REVIEW_STAGE_IDS = {"review", "review_visual", "review_technical"}
+# Additive later production must never overwrite unknown historical attribution.
+SUPPLEMENT_STAGE_IDS = {"supplement_creation", "supplement_post_production", "supplement_review"}
 PRIVATE_PATTERNS = (
     ("private filesystem path", re.compile(r"\b[A-Z]:[\\/]|\\\\[\w.-]+[\\/]|"
                                           r"/(?:Users|home)/[^/\s]+|file:///", re.I)),
@@ -350,7 +352,7 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
             stage_ids = set()
             for row in attribution:
                 stage_id = row.get("stage_id")
-                if not isinstance(stage_id, str) or stage_id not in REQUIRED_STAGE_IDS | REVIEW_STAGE_IDS:
+                if not isinstance(stage_id, str) or stage_id not in REQUIRED_STAGE_IDS | REVIEW_STAGE_IDS | SUPPLEMENT_STAGE_IDS:
                     problems.append(f"{where}.model_attribution: invalid stage_id")
                 elif stage_id in stage_ids:
                     problems.append(f"{where}.model_attribution: duplicate stage_id")
