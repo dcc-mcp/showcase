@@ -81,10 +81,14 @@
   "左侧原始，右侧降噪 · 同步 144 帧 · 轻微平滑，仍有残余噪点 · 新的匹配展示编码": "Raw on the left, denoised on the right · 144 synchronized frames · Modest smoothing with residual noise · New matched display encode",
   "完整帧与时间轴诊断": "Complete-frame and timeline diagnostics",
   "两份母版与两份交付视频均完整解码 144 帧；无相邻完全重复帧，交付视频保留精确时间戳；逐帧匹配为有限范围诊断。": "Both masters and both delivery videos fully decode 144 frames. There are no exact consecutive duplicate frames, and delivery videos retain exact timestamps. Frame matching is a bounded diagnostic.",
-  "浏览器 H.264 播放与跳转": "Browser H.264 playback and seeking",
-  "本地完整解码通过；可用浏览器缺少 H.264 解码支持，网页播放和跳转尚未验收。": "Complete native decoding passes. The available browser lacks H.264 decoding support, so webpage playback and seeking remain unverified.",
-  "公开案例包含脱敏测量与制作说明；dcc-media-enhance 源码发布另行审查，本草案不宣称工具已经公开。": "The public case contains sanitized measurements and production instructions. The dcc-media-enhance source release is under separate review; this draft does not claim the tool is already public.",
   "同步对照验证": "Synchronized comparison validation",
   "帧完整性与时间轴诊断": "Frame integrity and timeline diagnostics",
-  "补充同步降噪前后视频、dcc-media-enhance 工具归属和时间轴诊断，保留浏览器播放及连续运动验收边界。": "Add synchronized before/after video, dcc-media-enhance attribution and timeline diagnostics, retaining the browser-playback and continuous-motion acceptance limits."
+  "补充同步降噪前后视频、dcc-media-enhance 工具归属和时间轴诊断，保留浏览器播放及连续运动验收边界。": "Add synchronized before/after video, dcc-media-enhance attribution and timeline diagnostics, retaining the browser-playback and continuous-motion acceptance limits.",
+  "浏览器 H.264 解码与交互": "Browser H.264 decoding and interaction",
+  "GitHub CI 在提交 e2b1690 上验证三段视频的英中桌面及触控视口解码、显式播放、跳转状态、键盘控制和释放；未验证完整播放至结尾。详见 CI 验证记录。": "GitHub CI at commit e2b1690 verified all three videos in English/Chinese desktop and touch viewports: decoding, explicit playback, seek state, keyboard controls and release. End-to-end playback was not verified. See the CI verification record.",
+  "dcc-media-enhance 源码已独立公开并采用 MIT 许可；本案例原创资产仍保留权利，FFmpeg 等后端许可证和分发义务不变。": "The dcc-media-enhance source is independently public under MIT. Original case assets retain their rights, and backend licenses and distribution obligations, including FFmpeg, remain unchanged.",
+  "浏览器完整播放至结尾": "Browser playback through the end",
+  "CI 覆盖解码与交互状态；尚未验证完整播放至结尾，也不替代自然速度画面审阅。": "CI covers decoding and interaction state. Playback through the end remains unverified, and these checks do not replace natural-speed visual review.",
+  "CI 浏览器与本地验证边界": "CI browser results and local verification limits",
+  "开源降噪工具源码（MIT）": "Open-source denoising tool source (MIT)"
 }

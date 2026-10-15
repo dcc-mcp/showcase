@@ -12,13 +12,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 9472,
-      "sha256": "1dc2ba77d79a7921e79e94f930512afe88f61d40b8229e761f19becda21e2cef"
+      "bytes": 10128,
+      "sha256": "ccf0a57951ad04769637d70356e496f13d6678991f2a9f6d0014ce3ca57a475d"
+    },
+    {
+      "path": "ci-verification.json",
+      "bytes": 3065,
+      "sha256": "d5449e956cb228f44a10cb7b0879c150b5987b4bde32a29fb4e7627c6f182825"
     },
     {
       "path": "comparison-validation.json",
-      "bytes": 754,
-      "sha256": "04d263736ed412dd6900ad77b3abfb81fb3930c4bd488caf7fc9913e069b85a2"
+      "bytes": 928,
+      "sha256": "f0b7e9384cb9de21aa96b5260c74455bace74439c4fc1e4a001ad68c4972e286"
     },
     {
       "path": "comparison.jpg",
@@ -100,8 +105,8 @@
     },
     {
       "path": "temporal-integrity-summary.json",
-      "bytes": 1074,
-      "sha256": "c0bdd2e806c2b456ff625f3729144183d9988f470829ae22ebcb965e8817741e"
+      "bytes": 1297,
+      "sha256": "b83d5f1a525c981f1b0aa1380ed0f0f50da7e72cf9f6b22ca413453d167dbe06"
     },
     {
       "path": "validation.json",

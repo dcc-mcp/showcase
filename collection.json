@@ -146,9 +146,14 @@
           "observed": "抽样静帧和连续帧窗口审阅不等同于完整连续播放的视觉认证。"
         },
         {
-          "name": "浏览器 H.264 播放与跳转",
+          "name": "浏览器 H.264 解码与交互",
+          "result": "pass",
+          "observed": "GitHub CI 在提交 e2b1690 上验证三段视频的英中桌面及触控视口解码、显式播放、跳转状态、键盘控制和释放；未验证完整播放至结尾。详见 CI 验证记录。"
+        },
+        {
+          "name": "浏览器完整播放至结尾",
           "result": "not_run",
-          "observed": "本地完整解码通过；可用浏览器缺少 H.264 解码支持，网页播放和跳转尚未验收。"
+          "observed": "CI 覆盖解码与交互状态；尚未验证完整播放至结尾，也不替代自然速度画面审阅。"
         },
         {
           "name": "用户最终视觉验收",
@@ -162,7 +167,7 @@
         "网站 MP4 是 H.264/yuv420p 展示编码；原始 RGB PNG 与转换后的 FFV1 像素不相同。",
         "公开原生文件经过路径清理，字节不同于原件；未宣称重新渲染逐像素一致。",
         "模型与推理强度缺少经核验的任务配置证据，所有制作和审阅阶段均记为未知。",
-        "公开案例包含脱敏测量与制作说明；dcc-media-enhance 源码发布另行审查，本草案不宣称工具已经公开。"
+        "dcc-media-enhance 源码已独立公开并采用 MIT 许可；本案例原创资产仍保留权利，FFmpeg 等后端许可证和分发义务不变。"
       ],
       "resources": [
         {
@@ -208,6 +213,14 @@
         {
           "label": "权利与使用边界",
           "url": "docs/showcase/brass-pendulum-denoise/LICENSES.md"
+        },
+        {
+          "label": "CI 浏览器与本地验证边界",
+          "url": "docs/showcase/brass-pendulum-denoise/ci-verification.json"
+        },
+        {
+          "label": "开源降噪工具源码（MIT）",
+          "url": "https://github.com/dcc-mcp/dcc-media-enhance"
         }
       ],
       "credits": {
