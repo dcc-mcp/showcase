@@ -103,6 +103,24 @@
       "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
       "has_audio": false,
       "audio_streams": []
+    },
+    {
+      "src": "docs/showcase/brass-pendulum-denoise/pendulum-raw.mp4",
+      "sha256": "267bccb3e1eb97f3f3ffa6144ca6bed6612b41c0cb12ed7c6e0e4edd717d6003",
+      "has_audio": false,
+      "audio_streams": []
+    },
+    {
+      "src": "docs/showcase/brass-pendulum-denoise/pendulum-denoised.mp4",
+      "sha256": "50a237ea1af799f8aae3a54da100ceccc612b539aba13e3bf8442df411166f8b",
+      "has_audio": false,
+      "audio_streams": []
+    },
+    {
+      "src": "docs/showcase/brass-pendulum-denoise/pendulum-synchronized-comparison.mp4",
+      "sha256": "7b261ad04aebd2a121935518c6d457faa499f80d6b54349645326c57cd79a00c",
+      "has_audio": false,
+      "audio_streams": []
     }
   ]
 }

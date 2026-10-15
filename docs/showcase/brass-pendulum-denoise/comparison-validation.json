@@ -1,0 +1,23 @@
+{
+  "filename": "pendulum-synchronized-comparison.mp4",
+  "bytes": 3364354,
+  "sha256": "7b261ad04aebd2a121935518c6d457faa499f80d6b54349645326c57cd79a00c",
+  "dimensions": [
+    1280,
+    544
+  ],
+  "frames": 144,
+  "frame_rate": "24000/1001",
+  "duration_seconds": 6.006,
+  "audio_streams": 0,
+  "full_native_decode": "passed",
+  "exact_rational_pts": "passed",
+  "source": "Matching limited-range FFV1 masters, raw on left and denoised on right",
+  "derivative": "New labeled side-by-side H.264 encode for user review; not byte-identical to either original delivery video",
+  "boundaries": [
+    "No natural-speed visual review certified",
+    "No browser playback/seek acceptance certified"
+  ],
+  "schema_version": 1,
+  "verified_at": "2026-10-15"
+}
