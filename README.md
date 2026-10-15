@@ -28,6 +28,11 @@ Each case links its software adapters. The official site's broader
 
 ## Start with a work
 
+- Animation and denoising: [Brass Pendulum](docs/showcase/brass-pendulum-denoise/README.md)
+  compares a low-sample original Blender animation with actual temporal
+  denoising, preserving matched previews, a path-cleaned editable scene and
+  explicit quality limits.
+
 - Films: [Crystal Freight](https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/)
   and [Brass Relay](https://dcc-mcp.github.io/showcase/cases/brass-relay/)
   combine editable CAD, Blender scenes and Kdenlive timelines, with the published
@@ -50,7 +55,7 @@ or model-training permission.
 
 ## Collection and evidence
 
-The collection currently contains twelve individually documented cases: a Houdini
+The collection currently contains thirteen individually documented cases: Brass Pendulum, a Houdini
 vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
 Relay, Seismic Lens, Orbit Post Office, Trail & Air, Rainroom, Resonance Atlas,
 Sonic Loom and Prism Tide. Each page separates original production from later

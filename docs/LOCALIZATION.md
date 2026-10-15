@@ -85,8 +85,8 @@ python scripts/localization_browser_smoke.py --site _site --output /tmp/showcase
 ```
 
 The browser workflow runs against the exact PR head and the real `/showcase/`
-mount. It renders all 24 content pages in both languages at desktop and mobile
-widths (96 page/viewport checks), decodes actual images, checks local links and
+mount. It renders every selected content page in both languages at desktop and mobile
+widths (with the page/viewport count recorded in its report), decodes actual images, checks local links and
 fragment targets, checks localized accessibility and SEO, and exercises search,
 filters, empty states, keyboard language changes, query/hash preservation,
 Back, clipboard success/fallback and brand themes. A no-JavaScript pass checks

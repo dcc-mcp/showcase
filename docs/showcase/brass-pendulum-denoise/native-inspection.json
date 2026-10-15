@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "title": "Brass pendulum native file inspection",
+  "inspected_with": {
+    "application": "Blender",
+    "version": "4.5.13 LTS",
+    "build_hash": "daeeeca98fb0",
+    "mode": "background, automatic script execution disabled"
+  },
+  "original": {
+    "filename": "scene.blend",
+    "bytes": 1351653,
+    "sha256": "fbb8401facebc2d4c91d9b2d2953129e7aac3db356a767a01b2835877d79793e",
+    "included_in_public_case": false
+  },
+  "public_copy": {
+    "filename": "scene-public.blend",
+    "bytes": 1351653,
+    "sha256": "5f94f06a8f9662606559e5c8325bb9f425b1a30cc3a63496682c955240634ca2",
+    "byte_identical_to_original": false,
+    "reopened_successfully": true,
+    "storage": "uncompressed Blender native file"
+  },
+  "sanitization": {
+    "method": "Changed the two path fields through Blender RNA, scrubbed their fixed-size buffers, and saved a separate public copy. The source file was not modified.",
+    "changed_fields": [
+      {
+        "field": "Screen[Shading].areas[*].spaces[FILE_BROWSER].params.directory",
+        "old_value_category": "absolute private runtime home directory",
+        "new_value": "//",
+        "reason": "Remove embedded private filesystem location from the saved file-browser UI."
+      },
+      {
+        "field": "Scene.render.filepath",
+        "old_value_category": "absolute temporary output directory",
+        "new_value": "//renders/frame_####",
+        "reason": "Use a portable scene-relative render output destination."
+      }
+    ],
+    "path_only_semantic_changes_verified": true,
+    "binary_identical_claim": false,
+    "rendered_equivalence_tested": false,
+    "rendered_equivalence_note": "No new image render was performed. Equality was checked for the inspected native scene data and evaluated transforms/lens values across all 144 frames."
+  },
+  "measured_scene": {
+    "object_count": 26,
+    "objects_by_type": {
+      "MESH": 19,
+      "CURVE": 2,
+      "EMPTY": 1,
+      "CAMERA": 1,
+      "LIGHT": 3
+    },
+    "geometry": {
+      "native_mesh_count": 19,
+      "native_mesh_vertices": 7426,
+      "native_mesh_polygons": 7783,
+      "curve_count": 2,
+      "curve_control_points": 98,
+      "geometry_count_scope": "Native mesh counts exclude tessellated curve bevels; curve control points are reported separately."
+    },
+    "materials": [
+      "Backdrop",
+      "Brass",
+      "Petrol",
+      "Porcelain"
+    ],
+    "animation": {
+      "actions": 2,
+      "frame_range": [
+        1,
+        144
+      ],
+      "animated_properties": [
+        "Pendulum_Pivot.rotation_euler",
+        "Hero_Camera.lens"
+      ],
+      "keyframe_samples": [
+        {
+          "frame": 1,
+          "pivot_rotation_degrees": [
+            0.0,
+            -28.000000209988553,
+            0.0
+          ],
+          "camera_lens_mm": 48.0
+        },
+        {
+          "frame": 25,
+          "pivot_rotation_degrees": [
+            0.0,
+            22.999999501668448,
+            0.0
+          ],
+          "camera_lens_mm": 50.34965133666992
+        },
+        {
+          "frame": 49,
+          "pivot_rotation_degrees": [
+            0.0,
+            -18.999999959540737,
+            0.0
+          ],
+          "camera_lens_mm": 52.699302673339844
+        },
+        {
+          "frame": 73,
+          "pivot_rotation_degrees": [
+            0.0,
+            15.000000417413029,
+            0.0
+          ],
+          "camera_lens_mm": 55.0489501953125
+        },
+        {
+          "frame": 97,
+          "pivot_rotation_degrees": [
+            0.0,
+            -12.000000333930423,
+            0.0
+          ],
+          "camera_lens_mm": 57.39860153198242
+        },
+        {
+          "frame": 121,
+          "pivot_rotation_degrees": [
+            0.0,
+            9.000000250447817,
+            0.0
+          ],
+          "camera_lens_mm": 59.748252868652344
+        },
+        {
+          "frame": 144,
+          "pivot_rotation_degrees": [
+            0.0,
+            -6.000000166965211,
+            0.0
+          ],
+          "camera_lens_mm": 62.0
+        }
+      ],
+      "all_frames_checked": 144,
+      "evaluated_world_transforms_and_lens_sha256": "8f7586275c73eb270e196d28d8052db0eaba9b44aa9a05de6de49505bee59e61"
+    },
+    "units": {
+      "system": "METRIC",
+      "system_rotation": "DEGREES",
+      "scale_length": 1.0,
+      "use_separate": false,
+      "length_unit": "METERS",
+      "mass_unit": "KILOGRAMS",
+      "time_unit": "SECONDS",
+      "temperature_unit": "KELVIN"
+    },
+    "render": {
+      "engine": "CYCLES",
+      "resolution_x": 640,
+      "resolution_y": 480,
+      "percentage": 100,
+      "samples": 32,
+      "use_denoising": false,
+      "fps": 24,
+      "fps_base": 1.0010000467300415,
+      "frame_start": 1,
+      "frame_end": 144,
+      "filepath": "//renders/frame_####",
+      "device": "CPU",
+      "file_format": "PNG",
+      "color_mode": "RGBA",
+      "color_depth": "8",
+      "view_transform": "AgX",
+      "look": "None",
+      "exposure": 0.0,
+      "gamma": 1.0
+    }
+  },
+  "dependency_and_privacy_audit": {
+    "linked_libraries": 0,
+    "external_asset_paths": [],
+    "image_datablocks": 0,
+    "texture_datablocks": 0,
+    "text_blocks": 0,
+    "custom_properties_reviewed": true,
+    "custom_properties_summary": "Only Cycles numeric settings and typed-tool light-rig metadata containing public object names and numeric energy values were present. No private data was found in these properties.",
+    "id_string_properties_reviewed": true,
+    "file_browser_paths_reviewed": true,
+    "binary_audit": {
+      "encoding": "uncompressed native bytes plus printable-string inspection",
+      "pattern_match_counts": {
+        "private_workspace_directory": 0,
+        "absolute_home_directory": 0,
+        "absolute_temporary_directory": 0,
+        "http_or_https_url": 0,
+        "email_address": 0,
+        "github_token_prefix": 0,
+        "private_key_header": 0,
+        "openai_api_key_shape": 0
+      },
+      "passed": true,
+      "caveat": "Pattern-based privacy audit and Blender data inspection reduce risk; they are not a mathematical guarantee against every possible sensitive string."
+    },
+    "animation_drivers": 0,
+    "shader_script_nodes": 0
+  },
+  "semantic_comparison": {
+    "normalized_original_sha256": "f845e10a8c8b63b9d3bb91b75c45ac2247c37a6b31076520fef25b64750ef2e2",
+    "normalized_public_sha256": "f845e10a8c8b63b9d3bb91b75c45ac2247c37a6b31076520fef25b64750ef2e2",
+    "normalization": "Exclude the inspected file-browser directory and render output filepath. All remaining inspected fields compare exactly.",
+    "equal": true,
+    "sections": {
+      "geometry": {
+        "equal": true,
+        "original_sha256": "edabe0278c6095c3190f1a721f8325edad60ba18ee6b4eaca6d27286bef26e45",
+        "public_sha256": "edabe0278c6095c3190f1a721f8325edad60ba18ee6b4eaca6d27286bef26e45"
+      },
+      "objects": {
+        "equal": true,
+        "original_sha256": "be62f83f25ebca7a14e57f2aaf4245991a36723ec1346967e1cf058f5f5eae1c",
+        "public_sha256": "be62f83f25ebca7a14e57f2aaf4245991a36723ec1346967e1cf058f5f5eae1c"
+      },
+      "objects_full": {
+        "equal": true,
+        "original_sha256": "0f7b85887371632a16010f2f7178474b442c10b508619ce9ab210cbf25cc10d7",
+        "public_sha256": "0f7b85887371632a16010f2f7178474b442c10b508619ce9ab210cbf25cc10d7"
+      },
+      "camera_full": {
+        "equal": true,
+        "original_sha256": "a5583790e4ecef8f0bb220a1906aa3653d81c8be3ae69b2dab9c140f56bf97b9",
+        "public_sha256": "a5583790e4ecef8f0bb220a1906aa3653d81c8be3ae69b2dab9c140f56bf97b9"
+      },
+      "lights_full": {
+        "equal": true,
+        "original_sha256": "f3b220076578a64ebb5f6a2df8f1ac740ae4a5a08de16adade87bb68588a3957",
+        "public_sha256": "f3b220076578a64ebb5f6a2df8f1ac740ae4a5a08de16adade87bb68588a3957"
+      },
+      "materials_full": {
+        "equal": true,
+        "original_sha256": "69d90df6de477a339b6ba5d0cbb0375e5b62361372d9f23184092a3cf2d85dd1",
+        "public_sha256": "69d90df6de477a339b6ba5d0cbb0375e5b62361372d9f23184092a3cf2d85dd1"
+      },
+      "world": {
+        "equal": true,
+        "original_sha256": "bb32cc0dd10e22f76e159fe95814db992c2c790581c8bdc3c8bff6c64041683b",
+        "public_sha256": "bb32cc0dd10e22f76e159fe95814db992c2c790581c8bdc3c8bff6c64041683b"
+      },
+      "animation_full": {
+        "equal": true,
+        "original_sha256": "4aa4eafaf8de39eaebb4df4e0a3fc5daf60037a9656d3e71a873edf8702683e9",
+        "public_sha256": "4aa4eafaf8de39eaebb4df4e0a3fc5daf60037a9656d3e71a873edf8702683e9"
+      },
+      "unit_settings": {
+        "equal": true,
+        "original_sha256": "bea60b919a8b049c40e66c1b671d118ba33986ab195f760616b851ae9488b24b",
+        "public_sha256": "bea60b919a8b049c40e66c1b671d118ba33986ab195f760616b851ae9488b24b"
+      },
+      "render_full": {
+        "equal": true,
+        "original_sha256": "8d00c93d78d6836c4659554b0aa834daf569b4cb50d2135bcb3083a34285bb53",
+        "public_sha256": "8d00c93d78d6836c4659554b0aa834daf569b4cb50d2135bcb3083a34285bb53"
+      },
+      "custom_properties": {
+        "equal": true,
+        "original_sha256": "cd08dedda78aff25874aec11fb280753d62f9bc94882fe42ee399ce3579a4f69",
+        "public_sha256": "cd08dedda78aff25874aec11fb280753d62f9bc94882fe42ee399ce3579a4f69"
+      },
+      "data_groups": {
+        "equal": true,
+        "original_sha256": "cdcffe120fc41703a028a26e0ea184406e89adb788d45014570d5c2787754f2e",
+        "public_sha256": "cdcffe120fc41703a028a26e0ea184406e89adb788d45014570d5c2787754f2e"
+      },
+      "all_frame_sample_sha256": {
+        "equal": true,
+        "original_sha256": "a1b627abc25cc597df6073290b2ee58a2f36b138df9f21852c32220a5760a18f",
+        "public_sha256": "a1b627abc25cc597df6073290b2ee58a2f36b138df9f21852c32220a5760a18f"
+      }
+    }
+  },
+  "recipe": {
+    "filename": "scene-recipe.json",
+    "sha256": "5dc8b64975816593e89c6bcc9f309a3d53705e5a19a70d9655715e64434125c5",
+    "step_count": 78,
+    "status": "Extracted from successful original typed-call request arguments; not replayed during this inspection."
+  }
+}

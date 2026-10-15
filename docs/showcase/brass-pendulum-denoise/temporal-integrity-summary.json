@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-10-15T01:10:33.766544+00:00",
+  "scope": "Integrity and temporal diagnostics of the original renders, FFV1 masters and delivered raw/denoised MP4s. These checks do not certify perceptual quality.",
+  "checks": {
+    "all_144_original_png_hashes_match": true,
+    "original_scene_hash_matches": true,
+    "all_20_frozen_package_files_match": true,
+    "all_four_input_hashes_match_recorded_receipts": true,
+    "all_four_videos_fully_decode_144_frames": true,
+    "master_pts_identical": true,
+    "both_previews_exact_1001_tick_cadence_at_24000_timebase": true,
+    "no_identical_consecutive_decoded_frames": true,
+    "all_preview_frames_best_match_same_master_index": true
+  },
+  "notes": [
+    "The 20-file freeze check describes the package before the synchronized comparison and this summary were added.",
+    "Same-index matching uses a bounded +/-3-frame downsampled diagnostic, not ground-truth motion or quality assessment.",
+    "Natural-speed artistic review and browser playback/seek remain unverified."
+  ]
+}
