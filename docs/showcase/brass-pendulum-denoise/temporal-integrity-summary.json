@@ -16,6 +16,6 @@
   "notes": [
     "The 20-file freeze check describes the package before the synchronized comparison and this summary were added.",
     "Same-index matching uses a bounded +/-3-frame downsampled diagnostic, not ground-truth motion or quality assessment.",
-    "Natural-speed artistic review and browser playback/seek remain unverified."
+    "At the time of these native-only diagnostics, natural-speed artistic review and browser playback/seek were unverified. Later bounded CI decoding and interaction results are recorded separately in ci-verification.json; natural-speed visual acceptance and playback through the end remain unverified."
   ]
 }
