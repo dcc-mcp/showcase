@@ -67,6 +67,23 @@
         target.mean <= nearestMean + LIMITS.nearestSlack};
   }
 
+  function validateKeyframeRecords(records) {
+    if (!Array.isArray(records) || records.length !== 3 ||
+        new Set(records.map(record => record?.frame)).size !== 3 ||
+        records.some(record => ![1, 73, 144].includes(record?.frame))) {
+      throw new Error("Missing, duplicate or invalid PNG keyframe numbers");
+    }
+  }
+
+  function compareKeyframe(actual, frame, keyframes, mask) {
+    const numbers = [1, 73, 144];
+    if (!numbers.includes(frame)) throw new Error("Invalid PNG keyframe number");
+    // Keep the absolute and nearest limits within this same-encoding PNG set.
+    // Never mix its error baseline into the all-JPEG sequence's search.
+    const result = compare(actual, numbers.indexOf(frame), numbers.map(number => keyframes[number]), mask);
+    return {...result, frame, nearestFrame: numbers[result.nearestFrame - 1]};
+  }
+
   function validate(receipt) {
     const errors = [...(receipt.errors || [])];
     if (!receipt.done || receipt.ended !== 1) errors.push("Natural playback did not reach ended exactly once");
@@ -79,6 +96,9 @@
     if (!(receipt.elapsedMs >= 5756 && receipt.elapsedMs <= 25000)) errors.push("Not complete natural-speed playback");
     if (!receipt.start?.passed || !receipt.end?.passed) errors.push("First or final decoded picture mismatch");
     if (!receipt.displayedEnd?.passed) errors.push("Final displayed screenshot mismatch");
+    if ((receipt.keyframeSamples || []).some(sample => !sample.passed)) {
+      errors.push("Independently observed PNG keyframe mismatch");
+    }
     const samples = receipt.samples || [];
     if (samples.length < LIMITS.minimumCallbacks || samples.some(sample => !sample.passed)) {
       errors.push("Insufficient or mismatching presented pictures");
@@ -105,6 +125,7 @@
   async function install(video, spec) {
     if (typeof video.requestVideoFrameCallback !== "function" ||
         typeof video.getVideoPlaybackQuality !== "function") throw new Error("Required decoded-frame APIs unavailable");
+    validateKeyframeRecords(spec.keyframes);
     const canvas = document.createElement("canvas");
     canvas.width = 160; canvas.height = 120;
     const context = canvas.getContext("2d", {willReadFrequently: true});
@@ -119,22 +140,26 @@
     };
     const atlas = await load(spec.atlas.url);
     if (atlas.naturalWidth !== 1280 || atlas.naturalHeight !== 2160) throw new Error("Unexpected atlas dimensions");
-    const references = [];
+    const atlasReferences = [];
     for (let index = 0; index < 144; index++) {
       context.drawImage(atlas, (index % 8) * 160, Math.floor(index / 8) * 120, 160, 120, 0, 0, 160, 120);
-      references.push(context.getImageData(0, 0, 160, 120).data);
+      atlasReferences.push(context.getImageData(0, 0, 160, 120).data);
     }
+    const keyframes = {};
     for (const reference of spec.keyframes) {
       const image = await load(reference.url);
       if (image.naturalWidth !== 960 || image.naturalHeight !== 720) throw new Error("Unexpected keyframe dimensions");
       context.drawImage(image, 0, 0, 160, 120);
-      references[reference.frame - 1] = context.getImageData(0, 0, 160, 120).data;
+      keyframes[reference.frame] = context.getImageData(0, 0, 160, 120).data;
     }
-    const mask = motionMask(references, 160, 120);
-    const receipt = {done: false, errors: [], samples: [], rates: [video.playbackRate],
+    const mask = motionMask(atlasReferences, 160, 120);
+    const receipt = {done: false, errors: [], samples: [], keyframeSamples: [], rates: [video.playbackRate],
       playEvents: 0, seeks: 0, ended: 0, visibleChanges: 0, motionMaskPixels: mask.length,
       motionRoi: ROI, pixelLimits: LIMITS, referenceBasis: spec.reference_basis,
-      comparisonResolution: [160, 120], fullKeyframeResolution: [960, 720]};
+      comparisonResolution: [160, 120], fullKeyframeResolution: [960, 720],
+      sequenceReference: "All 144 same-encoding JPEG atlas tiles; no PNG substitutions",
+      keyframeReference: "Separate unprofiled PNG set with absolute and same-set nearest limits; frame73 checked when naturally observed",
+      middleKeyframe: {frame: 73, status: "not_observed"}};
     const pictures = {};
     let lastPixels, playStarted, callback;
     const fail = error => { receipt.errors.push(String(error?.message || error)); receipt.done = true; };
@@ -158,7 +183,7 @@
     video.addEventListener("loadeddata", () => {
       try {
         if (video.currentTime > 1001 / 24000 / 2) throw new Error("Initial actual frame was not observed");
-        receipt.start = compare(pixels(), 0, references, mask);
+        receipt.start = compareKeyframe(pixels(), 1, keyframes, mask);
         fullPicture("first-decoded");
       } catch (error) { fail(error); }
     }, {once: true});
@@ -170,8 +195,16 @@
         const actual = pixels();
         if (lastPixels && difference(actual, lastPixels, mask).mean > 0.35) receipt.visibleChanges++;
         lastPixels = actual;
-        receipt.samples.push({...compare(actual, index, references, mask), mediaTime: metadata.mediaTime,
+        receipt.samples.push({...compare(actual, index, atlasReferences, mask), mediaTime: metadata.mediaTime,
           presentedFrames: metadata.presentedFrames, expectedDisplayTime: metadata.expectedDisplayTime});
+        if (keyframes[index + 1]) {
+          const checked = {...compareKeyframe(actual, index + 1, keyframes, mask), mediaTime: metadata.mediaTime};
+          receipt.keyframeSamples.push(checked);
+          if (index === 72) {
+            receipt.middleKeyframe = {...checked, status: checked.passed ? "pass" : "fail"};
+            fullPicture("middle-decoded");
+          }
+        }
         receipt.rates.push(video.playbackRate);
         callback = video.requestVideoFrameCallback(observe);
       } catch (error) { fail(error); }
@@ -183,7 +216,7 @@
         receipt.elapsedMs = performance.now() - playStarted;
         receipt.duration = Math.round(video.duration * 1000000) / 1000000;
         receipt.width = video.videoWidth; receipt.height = video.videoHeight;
-        receipt.end = compare(pixels(), 143, references, mask);
+        receipt.end = compareKeyframe(pixels(), 144, keyframes, mask);
         fullPicture("last-decoded");
         const quality = video.getVideoPlaybackQuality();
         receipt.quality = {totalVideoFrames: quality.totalVideoFrames, droppedVideoFrames: quality.droppedVideoFrames,
@@ -201,11 +234,11 @@
         const width = 960 * scale, height = 720 * scale;
         context.drawImage(image, (image.naturalWidth - width) / 2, (image.naturalHeight - height) / 2,
           width, height, 0, 0, 160, 120);
-        receipt.displayedEnd = compare(context.getImageData(0, 0, 160, 120).data, 143, references, mask);
+        receipt.displayedEnd = compareKeyframe(context.getImageData(0, 0, 160, 120).data, 144, keyframes, mask);
         return receipt.displayedEnd;
       }};
   }
-  const api = {LIMITS, ROI, motionMask, difference, compare, validate, install};
+  const api = {LIMITS, ROI, motionMask, difference, compare, compareKeyframe, validateKeyframeRecords, validate, install};
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PendulumPlayback = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);
