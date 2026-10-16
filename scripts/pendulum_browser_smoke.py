@@ -19,11 +19,33 @@ import re
 import stat
 import subprocess
 import threading
+import zlib
 
 from browser_preview import safe_error_text
 from localization_browser_smoke import MountHandler
 
 ENTRY = 'docs/showcase/brass-pendulum-denoise/'
+PNG_COLOR_CHUNKS = {b'cICP', b'gAMA', b'cHRM', b'sRGB', b'iCCP'}
+
+
+def validate_unprofiled_png(data: bytes):
+    """References are decoded RGB samples, with no extra image color transform."""
+    assert data[:8] == b'\x89PNG\r\n\x1a\n', 'Invalid reference PNG signature'
+    offset, kinds = 8, []
+    while offset < len(data):
+        assert offset + 12 <= len(data), 'Truncated reference PNG chunk'
+        size = int.from_bytes(data[offset:offset + 4], 'big')
+        end = offset + 12 + size
+        assert end <= len(data), 'Truncated reference PNG payload'
+        kind = data[offset + 4:offset + 8]
+        payload = data[offset + 8:end - 4]
+        assert zlib.crc32(kind + payload) & 0xffffffff == int.from_bytes(data[end - 4:end], 'big'), 'Reference PNG CRC differs'
+        assert kind not in PNG_COLOR_CHUNKS, 'Reference PNG must contain unprofiled RGB samples; unexpected ' + kind.decode('ascii')
+        kinds.append(kind)
+        if kind == b'IEND':
+            assert size == 0 and end == len(data), 'Invalid reference PNG end'
+        offset = end
+    assert kinds and kinds[0] == b'IHDR' and b'IDAT' in kinds and kinds[-1] == b'IEND', 'Incomplete reference PNG'
 
 
 def tracked_bytes_receipt(repo: Path) -> dict:
@@ -123,6 +145,8 @@ def load_references(site: Path) -> dict:
         data = (folder / path).read_bytes()
         assert len(data) == record['bytes'], 'Reference byte count differs'
         assert hashlib.sha256(data).hexdigest() == record['sha256'], 'Reference digest differs'
+        if path.suffix.lower() == '.png':
+            validate_unprofiled_png(data)
     return spec
 
 
