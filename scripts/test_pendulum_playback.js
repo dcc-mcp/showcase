@@ -3,7 +3,7 @@
 // counted as browser playback or evidence for the delivered artwork.
 const assert = require("node:assert/strict");
 const {test} = require("node:test");
-const {motionMask, compare, validate, install} = require("./pendulum_playback.js");
+const {motionMask, compare, compareKeyframe, validateKeyframeRecords, validate, install} = require("./pendulum_playback.js");
 
 function frames() {
   return Array.from({length: 144}, (_, index) => {
@@ -32,6 +32,75 @@ function receipt() {
 test("same-source picture tolerates bounded codec/JPEG pixel differences", () => {
   const pixels = references[72].map((value, index) => index % 4 === 3 ? value : Math.min(255, value + 3));
   assert.equal(compare(pixels, 72, references, mask).passed, true);
+});
+
+test("sequence nearest-frame checks use one atlas encoding, not a mixed PNG baseline", () => {
+  const atlas = references.map(frame => frame.map((value, index) => index % 4 === 3 ? value : value + 5));
+  const atlasMask = motionMask(atlas, 160, 120);
+  const keyframes = {1: references[0], 73: references[72], 144: references[143]};
+  const actual = references[73]; // Adjacent source poses can legitimately be identical.
+  assert.deepEqual(actual, keyframes[73]);
+  assert.equal(compare(actual, 73, atlas, atlasMask).passed, true);
+  const mixed = atlas.slice(); mixed[72] = keyframes[73];
+  const wrongBaseline = compare(actual, 73, mixed, atlasMask);
+  assert.equal(wrongBaseline.mean, 5);
+  assert.equal(wrongBaseline.nearestMean, 0);
+  assert.equal(wrongBaseline.passed, false);
+  assert.equal(compareKeyframe(keyframes[73], 73, keyframes, atlasMask).passed, true);
+  assert.equal(compare(references[0], 143, atlas, atlasMask).passed, false);
+  assert.equal(compare(references[12], 143, atlas, atlasMask).passed, false);
+  assert.equal(compare(actual, 73, atlas, atlasMask).passed, true);
+});
+
+test("independent PNG start middle and end checks reject wrong pictures and missing references", () => {
+  const keyframes = {1: references[0], 73: references[72], 144: references[143]};
+  for (const frame of [1, 73, 144]) {
+    assert.equal(compareKeyframe(keyframes[frame], frame, keyframes, mask).passed, true);
+    const wrong = frame === 1 ? references[143] : references[0];
+    assert.equal(compareKeyframe(wrong, frame, keyframes, mask).passed, false);
+  }
+  assert.throws(() => compareKeyframe(references[72], 73, {}, mask), /Missing/);
+  const result = receipt();
+  result.keyframeSamples = [compareKeyframe(references[0], 73, keyframes, mask)];
+  assert.equal(validate(result).passed, false);
+  for (const field of ["start", "end", "displayedEnd"]) {
+    const bad = receipt();
+    bad[field] = compareKeyframe(references[12], field === "start" ? 1 : 144, keyframes, mask);
+    assert.equal(validate(bad).passed, false);
+  }
+});
+
+test("PNG keyframes must be the distinct actual frame numbers 1 73 and 144", () => {
+  validateKeyframeRecords([1, 73, 144].map(frame => ({frame})));
+  for (const values of [[], [1, 144], [1, 73, 73], [1, 2, 3], [1, 73, 145], [1, "73", 144]]) {
+    assert.throws(() => validateKeyframeRecords(values.map(frame => ({frame}))), /keyframe numbers/);
+  }
+  assert.throws(() => compareKeyframe(references[0], 2, {2: references[0]}, mask), /Invalid/);
+  const result = compareKeyframe(references[143], 144, {1: references[0], 73: references[72], 144: references[143]}, mask);
+  assert.equal(result.frame, 144);
+  assert.equal(result.nearestFrame, 144); // Actual source frame, not three-slot index 3.
+  assert.throws(() => compareKeyframe(references[0], 1, {1: references[0]}, mask), /Missing/);
+});
+
+test("PNG same-set nearest limit rejects an absolute-tolerance target when another PNG is closer", () => {
+  const actual = references[0];
+  const offset = amount => actual.map((value, index) => index % 4 === 3 ? value : value + amount);
+  const result = compareKeyframe(actual, 1, {1: offset(5), 73: actual, 144: offset(3)}, mask);
+  assert.equal(result.mean, 5);
+  assert.equal(result.p95, 5);
+  assert.equal(result.nearestMean, 0);
+  assert.equal(result.nearestFrame, 73);
+  assert.equal(result.passed, false);
+});
+
+test("legal callback omission of exact middle keyframe keeps the complete atlas gate", () => {
+  const result = receipt();
+  result.samples = result.samples.filter(sample => sample.frame !== 73);
+  result.keyframeSamples = [];
+  result.middleKeyframe = {frame: 73, status: "not_observed"};
+  assert.equal(validate(result).passed, true);
+  result.samples[100] = {...result.samples[100], ...compare(references[0], result.samples[100].frame - 1, references, mask)};
+  assert.equal(validate(result).passed, false);
 });
 
 test("frozen picture fails even while mediaTime and presented count advance", () => {
