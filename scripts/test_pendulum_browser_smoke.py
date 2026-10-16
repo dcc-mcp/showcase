@@ -41,6 +41,19 @@ class NativeFullscreenTests(unittest.TestCase):
         other_video = dict(node, backendDOMNodeId=99)
         self.assertEqual(native_fullscreen_ax_node([other_video, node], dom), node)
 
+    def test_enter_exit_semantics_cannot_cross_match(self):
+        dom, node = native_fixture()
+        for mode, names in [('enter', ['enter full screen', '进入全屏']),
+                            ('exit', ['exit full screen', '退出全屏'])]:
+            for name in names:
+                control = dict(node, name={'value': name})
+                with self.subTest(mode=mode, name=name):
+                    self.assertEqual(native_fullscreen_ax_node([control], dom, mode), control)
+                    with self.assertRaisesRegex(AssertionError, 'missing or ambiguous'):
+                        native_fullscreen_ax_node([control], dom, 'exit' if mode == 'enter' else 'enter')
+        with self.assertRaisesRegex(AssertionError, 'Invalid'):
+            native_fullscreen_ax_node([node], dom, 'toggle')
+
     def test_missing_ambiguous_disabled_or_unrelated_control_fails(self):
         dom, node = native_fixture()
         disabled = dict(node, properties=[{'name': 'disabled', 'value': {'value': True}}])
@@ -120,18 +133,32 @@ class NativeFullscreenTests(unittest.TestCase):
         events = Mock()
         events.attach_mock(page.touchscreen.tap, 'tap')
         events.attach_mock(video.screenshot, 'screenshot')
-        events.attach_mock(page.keyboard.press, 'key')
         observation = {}
         with patch('pendulum_browser_smoke.ended_media_state', side_effect=[ended_fixture(), ended_fixture(True), ended_fixture()]), \
-                patch('pendulum_browser_smoke.locate_native_fullscreen', return_value={'x': 315, 'y': 265}):
+                patch('pendulum_browser_smoke.locate_native_fullscreen', side_effect=[{'x': 315, 'y': 265}, {'x': 340, 'y': 810}]) as locate:
             inspect_touch_fullscreen(page, context, video, 0, Path('/unused'), 'fullscreen.png', observation)
-        self.assertEqual([call[0] for call in events.mock_calls], ['tap', 'screenshot', 'key'])
-        page.touchscreen.tap.assert_called_once_with(315, 265)
-        page.keyboard.press.assert_called_once_with('Escape')
+        self.assertEqual([call[0] for call in events.mock_calls], ['tap', 'screenshot', 'tap'])
+        self.assertEqual([call.args for call in page.touchscreen.tap.call_args_list], [(315, 265), (340, 810)])
+        self.assertEqual(locate.call_args_list[-1].args[-1], 'exit')
+        page.keyboard.press.assert_not_called()
         self.assertFalse(observation['comparison']['passed'])  # Never substitute a passing result.
         self.assertTrue(observation['inspected'])
         self.assertFalse(observation['after_exit']['fullscreen'])
         self.assertEqual(page.wait_for_function.call_args_list[-1].args[0], 'document.fullscreenElement === null')
+
+    def test_missing_native_exit_fails_without_second_tap_or_key_fallback(self):
+        page, context, video = Mock(), Mock(), Mock()
+        video.screenshot.return_value = b'fixture'
+        observation = {}
+        with patch('pendulum_browser_smoke.ended_media_state', side_effect=[ended_fixture(), ended_fixture(True)]), \
+                patch('pendulum_browser_smoke.locate_native_fullscreen', side_effect=[{'x': 315, 'y': 265}, AssertionError('missing exit')]):
+            with self.assertRaisesRegex(AssertionError, 'missing exit'):
+                inspect_touch_fullscreen(page, context, video, 0, Path('/unused'), 'fullscreen.png', observation)
+        page.touchscreen.tap.assert_called_once_with(315, 265)
+        video.screenshot.assert_called_once()
+        page.keyboard.press.assert_not_called()
+        self.assertIn('comparison', observation)
+        self.assertNotIn('inspected', observation)
 
     def test_missing_control_or_replay_fails_before_screenshot(self):
         page, context, video = Mock(), Mock(), Mock()
