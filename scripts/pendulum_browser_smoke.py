@@ -13,6 +13,7 @@ from functools import partial
 import hashlib
 from http.server import ThreadingHTTPServer
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -26,6 +27,113 @@ from localization_browser_smoke import MountHandler
 
 ENTRY = 'docs/showcase/brass-pendulum-denoise/'
 PNG_COLOR_CHUNKS = {b'cICP', b'gAMA', b'cHRM', b'sRGB', b'iCCP'}
+
+
+def native_fullscreen_ax_node(nodes: list, video_dom: dict) -> dict:
+    """Select one visible native button inside this video's user-agent shadow."""
+    assert video_dom.get('localName') == 'video', 'Fullscreen target is not the actual video'
+    attributes = video_dom.get('attributes', [])
+    attrs = dict(zip(attributes[::2], attributes[1::2]))
+    assert attrs.get('src', '').split('?')[0].endswith('/pendulum-oidn.mp4'), 'Wrong fullscreen video source'
+    native_ids = set()
+
+    def collect(node):
+        native_ids.add(node.get('backendNodeId'))
+        for child in node.get('children', []) + node.get('shadowRoots', []):
+            collect(child)
+
+    for shadow in video_dom.get('shadowRoots', []):
+        if shadow.get('shadowRootType') == 'user-agent':
+            collect(shadow)
+    native_ids.discard(None)
+    matches = []
+    for node in nodes:
+        name = node.get('name', {}).get('value', '').strip()
+        is_enter = re.fullmatch(r'(?:enter )?full[ -]?screen', name, re.I) or name in ('进入全屏', '全屏')
+        if (not node.get('ignored', True) and node.get('role', {}).get('value') == 'button'
+                and is_enter and node.get('backendDOMNodeId') in native_ids):
+            assert not any(p.get('name') == 'disabled' and p.get('value', {}).get('value')
+                for p in node.get('properties', [])), 'Native fullscreen button is disabled'
+            matches.append(node)
+    assert len(matches) == 1, 'Native fullscreen button is missing or ambiguous within target video'
+    return matches[0]
+
+
+def native_control_center(quad: list, box: dict, viewport: dict) -> dict:
+    assert len(quad) == 8 and all(isinstance(n, (int, float)) and math.isfinite(n) for n in quad), 'Invalid native control bounds'
+    left, right = min(quad[::2]), max(quad[::2])
+    top, bottom = min(quad[1::2]), max(quad[1::2])
+    assert right > left and bottom > top, 'Native control has no visible size'
+    assert (box['x'] - 1 <= left < right <= box['x'] + box['width'] + 1 and
+            box['y'] - 1 <= top < bottom <= box['y'] + box['height'] + 1), 'Native control is outside target video'
+    assert 0 <= left < right <= viewport['width'] and 0 <= top < bottom <= viewport['height'], 'Native control is outside viewport'
+    return {'x': (left + right) / 2, 'y': (top + bottom) / 2}
+
+
+def locate_native_fullscreen(page, context, video, index: int) -> dict:
+    # CDP only observes the real browser's UA accessibility/DOM geometry.
+    # The action below is a trusted touchscreen tap, never a DOM/script click.
+    session = context.new_cdp_session(page)
+    try:
+        root = session.send('DOM.getDocument', {'depth': 0})['root']['nodeId']
+        videos = session.send('DOM.querySelectorAll', {'nodeId': root, 'selector': 'video'})['nodeIds']
+        assert index < len(videos), 'Actual video disappeared before fullscreen'
+        dom = session.send('DOM.describeNode', {'nodeId': videos[index], 'depth': -1, 'pierce': True})['node']
+        node = native_fullscreen_ax_node(session.send('Accessibility.getFullAXTree')['nodes'], dom)
+        quad = session.send('DOM.getBoxModel', {'backendNodeId': node['backendDOMNodeId']})['model']['border']
+        point = native_control_center(quad, video.bounding_box(), page.viewport_size)
+        return {'accessible_name': node['name']['value'], 'role': 'button', 'within_target_native_controls': True, **point}
+    finally:
+        session.detach()
+
+
+def ended_media_state(video) -> dict:
+    return video.evaluate('''v => {
+        const r = window.__pendulumPlayback.receipt, q = v.getVideoPlaybackQuality();
+        return {ended:v.ended, paused:v.paused, controls:v.controls, muted:v.muted, loop:v.loop,
+            currentTime:v.currentTime, duration:v.duration, rate:v.playbackRate,
+            sourceName:v.currentSrc.split('/').pop(), objectFit:getComputedStyle(v).objectFit,
+            fullscreen:document.fullscreenElement === v,
+            playEvents:r.playEvents, seeks:r.seeks, endedEvents:r.ended,
+            quality:{totalVideoFrames:q.totalVideoFrames, droppedVideoFrames:q.droppedVideoFrames,
+                corruptedVideoFrames:q.corruptedVideoFrames}};
+    }''')
+
+
+def verify_ended_ui_transition(before: dict, after: dict, fullscreen: bool):
+    for state in (before, after):
+        assert state['ended'] and state['paused'] and state['controls'] and state['muted'] and not state['loop'], 'Native view changed ended media or controls'
+        assert state['rate'] == 1 and state['playEvents'] == state['endedEvents'] == 1 and state['seeks'] == 0, 'Native view replayed, sought or retimed media'
+        assert state['quality']['totalVideoFrames'] == 144 and state['quality']['corruptedVideoFrames'] == 0, 'Native view changed complete decode'
+        assert state['objectFit'] == 'contain' and state['sourceName'] == 'pendulum-oidn.mp4', 'Native view changed picture presentation'
+    assert after['fullscreen'] is fullscreen, 'Native fullscreen transition did not complete'
+    assert {k: v for k, v in before.items() if k != 'fullscreen'} == {k: v for k, v in after.items() if k != 'fullscreen'}, 'Native view changed end-frame time or decode state'
+
+
+def inspect_touch_fullscreen(page, context, video, index: int, output: Path, image: str, observation: dict):
+    """Use the actual native button, retain the ended picture, then exit by key."""
+    before = ended_media_state(video)
+    verify_ended_ui_transition(before, before, False)
+    observation['before_entry'] = before
+    control = locate_native_fullscreen(page, context, video, index)
+    observation['native_button'] = control
+    page.touchscreen.tap(control['x'], control['y'])
+    page.wait_for_function('(index) => document.fullscreenElement === document.querySelectorAll("video")[index]',
+                           arg=index, timeout=5000)
+    entered = ended_media_state(video)
+    observation['after_entry'] = entered
+    verify_ended_ui_transition(before, entered, True)
+    screenshot = video.screenshot(path=str(output / image))
+    observation['screenshot'] = image
+    observation['comparison'] = page.evaluate('(url) => window.__pendulumPlayback.compareDisplayedEnd(url)',
+        'data:image/png;base64,' + base64.b64encode(screenshot).decode())
+    # Escape is a real keyboard event. No script requests or exits fullscreen.
+    page.keyboard.press('Escape')
+    page.wait_for_function('document.fullscreenElement === null', timeout=5000)
+    exited = ended_media_state(video)
+    observation['after_exit'] = exited
+    verify_ended_ui_transition(before, exited, False)
+    observation['inspected'] = True
 
 
 def validate_unprofiled_png(data: bytes):
@@ -155,9 +263,10 @@ def run(site: Path, output: Path, expected_head: str):
 
     output.mkdir(parents=True, exist_ok=True)
     actual_head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
-    report = {'passed': False, 'head_sha': actual_head, 'checks': [], 'screenshots': [],
+    report = {'passed': False, 'head_sha': actual_head, 'checks': [], 'screenshots': [], 'displayed_views': [],
         'scope': 'Exact candidate; Chromium English/Chinese desktop and touch-viewport emulation.',
         'limitations': ['Touch emulation is not a physical-device test.',
+            'Touch playback remains inline; final displayed pixels are checked in native fullscreen after ended. Inline native-controls occlusion is separately retained, not claimed unobstructed.',
             'Same-delivery pixel matching does not certify source-render fidelity or subjective motion quality.',
             'No merge, deployment or final user artistic acceptance is implied.']}
     server = None
@@ -234,8 +343,26 @@ def run(site: Path, output: Path, expected_head: str):
                     image = label + '-last-displayed.png'
                     screenshot = video.screenshot(path=str(output / image))
                     report['screenshots'].append(image)
-                    page.evaluate('(url) => window.__pendulumPlayback.compareDisplayedEnd(url)',
+                    inline = page.evaluate('(url) => window.__pendulumPlayback.compareDisplayedEnd(url)',
                         'data:image/png;base64,' + base64.b64encode(screenshot).decode())
+                    # The paused native touch controls remain opaque by design.
+                    # Keep that actual inline screenshot and its error, even when
+                    # inspecting the same ended picture through native fullscreen.
+                    views = {'locale': locale, 'viewport': layout,
+                        'inline': {'screenshot': image, 'comparison': inline,
+                            'motion_region_pixel_match': inline['passed']}}
+                    report['displayed_views'].append(views)
+                    page.evaluate('''() => {
+                        const r = window.__pendulumPlayback.receipt;
+                        r.inlineDisplayedEnd = {...r.displayedEnd}; r.displayedEndMode = 'inline';
+                    }''')
+                    if mobile:
+                        views['inline']['native_controls_retained'] = video.evaluate('(v) => v.controls')
+                        views['fullscreen'] = {'inspected': False}
+                        image = label + '-last-displayed-fullscreen.png'
+                        inspect_touch_fullscreen(page, context, video, index, output, image, views['fullscreen'])
+                        report['screenshots'].append(image)
+                        page.evaluate('window.__pendulumPlayback.receipt.displayedEndMode = "native_fullscreen_after_natural_ended"')
                     evidence = page.evaluate('''() => ({receipt: window.__pendulumPlayback.receipt,
                         pictures: window.__pendulumPlayback.pictures,
                         verdict: PendulumPlayback.validate(window.__pendulumPlayback.receipt)})''')
@@ -244,7 +371,7 @@ def run(site: Path, output: Path, expected_head: str):
                         (output / filename).write_bytes(base64.b64decode(data_url.split(',', 1)[1]))
                         report['screenshots'].append(filename)
                     evidence.update(locale=locale, viewport=layout, page_errors=errors,
-                        no_media_before_intent=True, touch_emulation=mobile)
+                        no_media_before_intent=True, touch_emulation=mobile, displayed_views=views)
                     report['checks'].append(evidence)
                     assert evidence['verdict']['passed'], evidence['verdict']['errors']
                     assert not errors, errors
