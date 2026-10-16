@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-13",
+  "concept": "Signal Garden: original rotating branch network, botanical glow and no time pressure. Not a Prism Tide mirror puzzle or Parcel courier simulation.",
+  "sources": [
+    {
+      "url": "https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html",
+      "selected": "Godot 4.6.3 Compatibility single-thread pinned runtime already cached; share engine bytes."
+    },
+    {
+      "url": "https://store.godotengine.org/asset/kenney/starter-kit-match-3/",
+      "candidate": "Kenney Starter Kit Match-3, MIT",
+      "decision": "Rejected: matching tiles is not connected-network topology; no asset downloaded."
+    },
+    {
+      "url": "https://godotengine.org/asset-library/asset?filter=template&page=0&sort=updated",
+      "query": "2D puzzle template",
+      "decision": "No selected native template fits bounded original connectivity puzzle."
+    },
+    {
+      "url": "https://github.com/dcc-mcp/dcc-mcp-core/blob/bf10706d7eaae679e6f6fac5526d37219e0826ab/crates/dcc-mcp-gateway/src/gateway/native_resources/agent_workflows.md",
+      "contract": "dcc-mcp-production-reuse/v1",
+      "method": "Read existing verified Core source checkout."
+    }
+  ],
+  "reuse": [
+    "Existing installed Godot scene/script/project typed authoring tools",
+    "Existing export template and same-origin Web runtime",
+    "Noto Sans CJK subset, SIL OFL; original procedural drawing and generated PCM"
+  ],
+  "model_record": "Requested gpt-6-astra/ultra, backend routing not independently verified."
+}
