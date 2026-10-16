@@ -13,8 +13,10 @@ from functools import partial
 import hashlib
 from http.server import ThreadingHTTPServer
 import json
+import os
 from pathlib import Path
 import re
+import stat
 import subprocess
 import threading
 
@@ -22,6 +24,85 @@ from browser_preview import safe_error_text
 from localization_browser_smoke import MountHandler
 
 ENTRY = 'docs/showcase/brass-pendulum-denoise/'
+
+
+def tracked_bytes_receipt(repo: Path) -> dict:
+    """Bind all tracked bytes to HEAD without Git clean/smudge filters.
+
+    Old media blobs can be ordinary binary Git objects despite their LFS
+    attributes. A clean filter then reports them dirty even when checkout bytes
+    match HEAD. Do not whitelist those paths or trust a filtered status result.
+    """
+    repo = repo.resolve()
+
+    def git(*args):
+        return subprocess.check_output(['git', '--no-optional-locks', *args], cwd=repo)
+
+    status = subprocess.run(['git', '--no-optional-locks', 'status', '--porcelain',
+        '--untracked-files=no'], cwd=repo, capture_output=True, check=True)
+    head = git('rev-parse', 'HEAD').decode().strip()
+    algorithm = git('rev-parse', '--show-object-format').decode().strip()
+    assert algorithm in ('sha1', 'sha256'), 'Unsupported Git object format'
+    expected = {}
+    for entry in git('ls-tree', '-rz', '--full-tree', 'HEAD').split(b'\0'):
+        if entry:
+            metadata, path = entry.split(b'\t', 1)
+            mode, kind, digest = metadata.split()
+            expected[path] = (mode, kind, digest)
+    expected_index = {path: [(mode, digest, b'0')]
+        for path, (mode, _kind, digest) in expected.items()}
+
+    def index_entries():
+        records = {}
+        for entry in git('ls-files', '--stage', '-z').split(b'\0'):
+            if entry:
+                metadata, path = entry.split(b'\t', 1)
+                records.setdefault(path, []).append(tuple(metadata.split()))
+        return records
+
+    index = index_entries()
+    changes = []
+    for path in sorted(set(index) | set(expected_index)):
+        if index.get(path) != expected_index.get(path):
+            changes.append({'path': os.fsdecode(path), 'reason': 'index differs from HEAD'})
+    checked = 0
+    for name, (mode, kind, expected_digest) in expected.items():
+        path = repo / os.fsdecode(name)
+        reason = None
+        try:
+            # Reject parent-directory symlinks rather than read outside checkout.
+            if any(parent.is_symlink() for parent in path.parents if parent != repo and repo in parent.parents):
+                raise ValueError('tracked parent directory is a symlink')
+            info = path.lstat()
+            if kind != b'blob':
+                raise ValueError('unsupported non-blob tracked entry')
+            if mode == b'120000':
+                if not stat.S_ISLNK(info.st_mode):
+                    raise ValueError('tracked symlink type differs')
+                data = os.fsencode(os.readlink(path))
+                digest = hashlib.new(algorithm, b'blob ' + str(len(data)).encode() + b'\0' + data)
+            else:
+                if mode not in (b'100644', b'100755') or not stat.S_ISREG(info.st_mode):
+                    raise ValueError('tracked regular-file type differs')
+                if bool(info.st_mode & 0o111) != (mode == b'100755'):
+                    raise ValueError('tracked executable mode differs')
+                digest = hashlib.new(algorithm, b'blob ' + str(info.st_size).encode() + b'\0')
+                with path.open('rb') as source:
+                    for chunk in iter(lambda: source.read(1024 * 1024), b''):
+                        digest.update(chunk)
+            if digest.hexdigest().encode() != expected_digest:
+                raise ValueError('raw Git blob hash differs from HEAD')
+            checked += 1
+        except (OSError, ValueError) as error:
+            reason = str(error) if isinstance(error, ValueError) else type(error).__name__
+        if reason:
+            changes.append({'path': os.fsdecode(name), 'reason': reason})
+    if git('rev-parse', 'HEAD').decode().strip() != head or index_entries() != index:
+        changes.append({'path': '', 'reason': 'HEAD or index changed during verification'})
+    return {'passed': not changes, 'head_sha': head, 'method': 'unfiltered Git blob hashes, file modes/types, and exact HEAD/index entries',
+        'tracked_entries': len(expected), 'raw_hashes_matched': checked,
+        'git_status_porcelain': status.stdout.decode('utf-8', errors='replace'),
+        'git_status_stderr': status.stderr.decode('utf-8', errors='replace'), 'changes': changes}
 
 
 def load_references(site: Path) -> dict:
@@ -61,8 +142,10 @@ def run(site: Path, output: Path, expected_head: str):
     label = 'setup'
     try:
         assert expected_head and actual_head == expected_head, 'Exact candidate head mismatch'
-        assert not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], text=True).strip(), \
-            'Tracked worktree changes cannot be reported as exact-head acceptance'
+        report['tracked_source'] = tracked_bytes_receipt(Path.cwd())
+        assert report['tracked_source']['head_sha'] == expected_head, 'Tracked source head mismatch'
+        assert report['tracked_source']['passed'], \
+            'Tracked source bytes or index differ from exact HEAD: ' + str(report['tracked_source']['changes'])
         spec = load_references(site)
         report['reference'] = spec
         server = ThreadingHTTPServer(('127.0.0.1', 0), partial(MountHandler, directory=str(site)))
