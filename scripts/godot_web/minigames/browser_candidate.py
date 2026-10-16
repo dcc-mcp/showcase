@@ -41,6 +41,7 @@ def main():
   if touch:p.touchscreen.tap(x,y)
   else:p.mouse.click(x,y)
  def native_control(p,key,touch=False):
+  wait(p,'window.__showcaseState && window.__showcaseState.native_targets['+json.dumps(key)+']')
   s=state(p);target=s['native_targets'][key];canvas=p.locator('#canvas');canvas.scroll_into_view_if_needed();r=canvas.bounding_box();x=r['x']+(target['x']+target['width']/2)*r['width']/s['layout_width'];y=r['y']+(target['y']+target['height']/2)*r['height']/s['layout_height']
   if touch:p.touchscreen.tap(x,y)
   else:p.mouse.click(x,y)
@@ -75,7 +76,10 @@ def main():
     p.evaluate('''() => {const video=document.getElementById('canvas').captureStream(30);const audio=window.__captureStreams.flatMap(s=>s.getAudioTracks());if(!audio.length)throw new Error('Actual game audio stream missing');window.__nativeRecordingChunks=[];window.__nativeRecorder=new MediaRecorder(new MediaStream([...video.getVideoTracks(),...audio]),{mimeType:'video/webm;codecs=vp8,opus',videoBitsPerSecond:900000,audioBitsPerSecond:96000});window.__nativeRecorder.ondataavailable=e=>{if(e.data.size)window.__nativeRecordingChunks.push(e.data);};window.__nativeRecorder.start(250);}''')
     p.wait_for_timeout(700)
     native(p,2,mobile);wait(p,'window.__showcaseState.moves === 1');action(p,'save');wait(p,'window.__showcaseState.status === "saved"');saved=state(p)['masks'];action(p,'reset');wait(p,'window.__showcaseState.moves === 0');action(p,'load');wait(p,'window.__showcaseState.status === "loaded"');assert state(p)['masks']==saved;check(f'{lang}: save/reset/load')
-    action(p,'toggle');wait(p,'window.__showcaseState.paused');moves=state(p)['moves'];native(p,0,mobile);p.wait_for_timeout(150);assert state(p)['moves']==moves;action(p,'toggle');wait(p,'!window.__showcaseState.paused');check(f'{lang}: paused game ignores board input')
+    native_control(p,'toggle',mobile);wait(p,'window.__showcaseState.paused');moves=state(p)['moves'];native(p,0,mobile);p.wait_for_timeout(150);assert state(p)['moves']==moves
+    native_control(p,'toggle',mobile);wait(p,'!window.__showcaseState.paused');check(f'{lang}: native bottom-row Pause and Resume both work')
+    native_control(p,'toggle',mobile);wait(p,'window.__showcaseState.paused');native_control(p,'resume',mobile);wait(p,'!window.__showcaseState.paused');check(f'{lang}: native overlay Continue works independently')
+    check(f'{lang}: paused game ignores board input')
     action(p,'reset');wait(p,'window.__showcaseState.moves === 0')
     for level in range(3):
      solve(p,mobile);p.wait_for_timeout(700);p.screenshot(path=str(out/f'{lang}-garden-{level+1}-won.png'));check(f'{lang}: garden {level+1} won by actual input',moves=state(p)['moves'])

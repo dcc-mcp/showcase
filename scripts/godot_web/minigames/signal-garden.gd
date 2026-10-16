@@ -217,7 +217,7 @@ func _draw():
 		_panel(r,Color("ecf5d9"),20)
 		_center(Vector2(r.get_center().x,r.position.y+54),tr2("GARDEN AWAKE" if won else "TAKE A BREATH","花园醒来了" if won else "休息一下"),36,BG)
 		_center(Vector2(r.get_center().x,r.position.y+96),tr2("Every little light is connected." if won else "Your garden will wait.","每一道微光都已相连。" if won else "花园会在这里等你。"),22,Color("37634d"))
-		_button("next" if won else "toggle",Rect2(r.get_center().x-130,r.position.y+116,260,108 if mobile else 58),tr2("Next garden" if won else "Continue","下一座花园" if won else "继续"))
+		_button("next" if won else "resume",Rect2(r.get_center().x-130,r.position.y+116,260,108 if mobile else 58),tr2("Next garden" if won else "Continue","下一座花园" if won else "继续"))
 func _draw_tile(i):
 	var r=Rect2(origin+Vector2(i%4,int(i/4))*cell+Vector2(4,4),Vector2.ONE*(cell-8))
 	var p=r.get_center();var live=powered[i]
