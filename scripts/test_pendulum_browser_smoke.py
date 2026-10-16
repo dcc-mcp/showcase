@@ -2,11 +2,99 @@
 """Lightweight reference-contract checks; no browser, render or media decode."""
 import hashlib
 import json
+import os
 from pathlib import Path
+import shlex
+import subprocess
+import sys
 import tempfile
 import unittest
 
-from pendulum_browser_smoke import ENTRY, load_references
+from pendulum_browser_smoke import ENTRY, load_references, tracked_bytes_receipt
+
+
+class TrackedBytesTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.repo = Path(self.temp.name)
+        self.git('init', '-q')
+        self.original = b'\x00actual binary media\xff\n'
+        self.file = self.repo / 'sample.bin'
+        self.file.write_bytes(self.original)
+        (self.repo / '.gitattributes').write_text('sample.bin filter=fixture -text\n')
+        self.git('add', '.')
+        self.git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+                 'commit', '-qm', 'fixture raw blob')
+
+    def git(self, *args):
+        return subprocess.check_output(['git', *args], cwd=self.repo, stderr=subprocess.PIPE)
+
+    def receipt(self):
+        return tracked_bytes_receipt(self.repo)
+
+    def test_exact_raw_bytes_pass(self):
+        receipt = self.receipt()
+        self.assertTrue(receipt['passed'], receipt)
+        self.assertEqual(receipt['raw_hashes_matched'], 2)
+
+    def test_clean_filter_false_dirty_keeps_status_and_requires_exact_raw_bytes(self):
+        code = "import sys; sys.stdin.buffer.read(); sys.stdout.write('synthetic pointer\\n')"
+        self.git('config', 'filter.fixture.clean', shlex.quote(sys.executable) + ' -c ' + shlex.quote(code))
+        self.file.write_bytes(self.original)
+        os.utime(self.file, (self.file.stat().st_atime, self.file.stat().st_mtime + 5))
+        receipt = self.receipt()
+        self.assertIn(' M sample.bin', receipt['git_status_porcelain'])
+        self.assertTrue(receipt['passed'], receipt)
+        self.file.write_bytes(b'changed real bytes')
+        self.assertFalse(self.receipt()['passed'])
+
+    def test_unstaged_byte_change_fails(self):
+        self.file.write_bytes(b'wrong picture')
+        self.assertFalse(self.receipt()['passed'])
+
+    def test_missing_tracked_file_fails(self):
+        self.file.unlink()
+        self.assertFalse(self.receipt()['passed'])
+
+    def test_extra_index_entry_fails_even_if_all_head_bytes_match(self):
+        (self.repo / 'extra.txt').write_text('staged addition')
+        self.git('add', 'extra.txt')
+        receipt = self.receipt()
+        self.assertEqual(receipt['raw_hashes_matched'], 2)
+        self.assertFalse(receipt['passed'])
+
+    def test_index_change_fails_after_worktree_bytes_restored(self):
+        self.file.write_bytes(b'staged replacement')
+        self.git('add', 'sample.bin')
+        self.file.write_bytes(self.original)
+        receipt = self.receipt()
+        self.assertEqual(receipt['raw_hashes_matched'], 2)
+        self.assertFalse(receipt['passed'])
+
+    def test_index_deletion_fails_even_with_worktree_file_preserved(self):
+        self.git('rm', '--cached', 'sample.bin')
+        self.assertFalse(self.receipt()['passed'])
+
+    def test_executable_mode_change_fails(self):
+        self.file.chmod(0o755)
+        self.assertFalse(self.receipt()['passed'])
+
+    def test_symlink_substitution_fails_even_with_identical_target_bytes(self):
+        (self.repo / 'copy.bin').write_bytes(self.original)
+        self.file.unlink()
+        self.file.symlink_to('copy.bin')
+        self.assertFalse(self.receipt()['passed'])
+
+    def test_tracked_symlink_target_is_hashed_without_following(self):
+        link = self.repo / 'link'
+        link.symlink_to('sample.bin')
+        self.git('add', 'link')
+        self.git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid', 'commit', '-qm', 'link')
+        self.assertTrue(self.receipt()['passed'])
+        link.unlink()
+        link.symlink_to('missing-target')
+        self.assertFalse(self.receipt()['passed'])
 
 
 class ReferenceContractTests(unittest.TestCase):
