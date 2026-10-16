@@ -1,79 +1,11 @@
 {
-  "schema_version": 1,
-  "recorded_at_utc": "2026-10-15T08:58:00Z",
-  "repository": "dcc-mcp/showcase",
-  "pull_request": "https://github.com/dcc-mcp/showcase/pull/41",
-  "tested_head_sha": "e2b16906456d7fafa2f920e5ab27df86454ede87",
-  "scope": "Results below apply to the exact tested commit. This evidence-only follow-up and later commits require their own CI; the media assets are unchanged.",
-  "workflows": [
-    {
-      "name": "Build site",
-      "run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38708720298",
-      "conclusion": "success"
-    },
-    {
-      "name": "Prism Tide page acceptance",
-      "run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38708720419",
-      "conclusion": "success"
-    },
-    {
-      "name": "Browser preview",
-      "run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38708720190",
-      "conclusion": "success"
-    },
-    {
-      "name": "Gallery preview",
-      "run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38708720205",
-      "conclusion": "success"
-    }
-  ],
-  "browser_media": {
-    "job_url": "https://github.com/dcc-mcp/showcase/actions/runs/38708720205/job/116334499357",
-    "script": "scripts/video_browser_smoke.py",
-    "result": "pass",
-    "media": [
-      "pendulum-denoised.mp4",
-      "pendulum-synchronized-comparison.mp4",
-      "pendulum-raw.mp4"
-    ],
-    "languages": [
-      "en",
-      "zh"
-    ],
-    "viewports": [
-      "desktop",
-      "touch-viewport emulation"
-    ],
-    "verified": [
-      "H.264 decoded frames with nonzero video dimensions",
-      "Muted gallery previews advance, stop and release",
-      "Explicit detail playback starts and exposes native controls",
-      "Pause plus currentTime seek-state check",
-      "Released-player keyboard controls",
-      "Desktop hover and poster single-click controls",
-      "Stop cleans media sources without refetch"
-    ],
-    "not_verified": [
-      "Playback continuously through the end",
-      "Natural-speed motion and flicker visual acceptance",
-      "Final artistic acceptance",
-      "Physical mobile devices"
-    ]
-  },
-  "localization": {
-    "run_url": "https://github.com/dcc-mcp/showcase/actions/runs/38708720190",
-    "step": "Verify every language, page and viewport",
-    "result": "pass"
-  },
-  "earlier_local_limits": {
-    "h264": "The earlier local headless Chromium could not decode H.264, including baseline media. That local limitation is separate from the successful GitHub runner tests.",
-    "full_site_localization": "Earlier local full-site runs timed out on unrelated pages. Focused local case checks passed; the GitHub full-site localization step subsequently passed."
-  },
-  "tool_source": {
-    "url": "https://github.com/dcc-mcp/dcc-media-enhance",
-    "visibility": "public",
-    "license": "MIT",
-    "verified_at_utc": "2026-10-15T08:54:30Z",
-    "scope": "The source repository is public. This is not a claim of a new package or binary release. Backend and model licenses remain separate; original artwork and case-asset rights are unchanged."
-  }
+  "status": "new_film_head_not_run",
+  "scope": "No historical CI pass is transferred to this candidate film.",
+  "previous_case": "historical-atadenoise/ci-verification.json",
+  "required": [
+    "English and Chinese desktop/touch",
+    "natural-speed playback through ended",
+    "actual frame content matches independent decode references",
+    "last visible video picture matches actual final frame"
+  ]
 }

@@ -1,119 +1,102 @@
 {
-  "schema_version": 1,
-  "decision": "Accept for a modest technical-workflow showcase, with the limits below.",
-  "reviewed_media": {
-    "source": "32-sample render, explicitly converted to limited-range BT.709 YUV444 8-bit",
-    "processed": "FFmpeg atadenoise=s=5, lossless FFV1 intermediate",
-    "width": 640,
-    "height": 480,
-    "frame_count": 144,
-    "frame_rate": "24000/1001",
-    "matched_range_and_matrix": true
-  },
-  "inspection": {
-    "basis": "Actual decoded lossless source/output frames, synchronized before/after at native pixel scale. No retouching.",
-    "paired_full_frames": [
-      1,
-      13,
-      25,
-      37,
-      49,
-      61,
-      73,
-      97,
-      121,
-      144
+  "status": "static_contact_sheet_review_complete_playback_pending",
+  "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+  "short_pilot": {
+    "source_frames": [
+      7,
+      30
     ],
-    "consecutive_native_crop_windows": [
-      [
+    "all24_offline_frames_inspected": true,
+    "observations": "No obvious jumps, ghost silhouettes or exposure flashes in the inspected short contact sheet; this does not certify motion quality.",
+    "native_monitor": "failed_end_frame_visual_consistency",
+    "failure": "Kdenlive OSD advanced to frame23, but final screenshot matched source14 instead of expected source30. Failure and correction retained."
+  },
+  "full144_contact_sheets": {
+    "scope": "Static contact-sheet review of all144 frames and native-size spot checks; not natural-speed playback or final artistic acceptance",
+    "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+    "method": {
+      "all144_frames": "Six6x4 contact sheets with480x360 source tiles; tool display can resize the sheets",
+      "native_size_source_png_frames": [
         1,
-        3
-      ],
-      [
-        11,
-        15
-      ],
-      [
-        23,
-        27
-      ],
-      [
-        35,
-        39
-      ],
-      [
-        47,
-        51
-      ],
-      [
-        59,
-        63
-      ],
-      [
-        71,
-        75
-      ],
-      [
-        83,
-        87
-      ],
-      [
-        95,
-        99
-      ],
-      [
-        107,
-        111
-      ],
-      [
-        119,
-        123
-      ],
-      [
-        131,
-        135
-      ],
-      [
-        142,
+        13,
+        73,
         144
       ]
+    },
+    "observations": [
+      "Complete pedestal remains visible throughout; native timeline audit independently reports minimum conservative margin4.7345%.",
+      "The bob and pedestal have smooth silhouettes in the inspected views; former large planar facets are not obvious.",
+      "Consecutive contact sheets show alternating swings with decreasing amplitude and gradual camera enlargement, with no obvious missing-object jump, duplicate block or abrupt exposure flash.",
+      "Fine bright speckling and edge aliasing remain on the gold ring/rod and a few bob-edge pixels; spatial denoising is not a claim of noise-free imagery."
     ],
-    "coverage": [
-      "Start and end",
-      "Fast swing passages near center crossings",
-      "Swing reversals",
-      "Thin rod",
-      "Arch and metallic highlights",
-      "Bob silhouette and faceting",
-      "Bob/arch overlap and revealed background",
-      "Teal base and moving shadows"
+    "status": "no_blocking_static_defect_observed_at_inspected_scales",
+    "contact_sheets": [
+      {
+        "frames": [
+          1,
+          24
+        ],
+        "sha256": "4c8366c82f8cab6e016c8d6000f04e1a56a0ba34b0d055c6d8766343e0975c65"
+      },
+      {
+        "frames": [
+          25,
+          48
+        ],
+        "sha256": "6e3682146986ef810d025de9e8f90964dc2403f675d9358e0362bfb5e43882e4"
+      },
+      {
+        "frames": [
+          49,
+          72
+        ],
+        "sha256": "9675dbf57f2b982f3a51767a3eb7ce71cd9c76e4a2f159794c5e59427d5f0a4c"
+      },
+      {
+        "frames": [
+          73,
+          96
+        ],
+        "sha256": "621c9d4188407b064fc0f3e3052347e50b51f2683410228ee698c85778cc1196"
+      },
+      {
+        "frames": [
+          97,
+          120
+        ],
+        "sha256": "9b515a0ba9d31ce062e20016d5bba5037986cadfb789ed0146ab0577eef82e7b"
+      },
+      {
+        "frames": [
+          121,
+          144
+        ],
+        "sha256": "d7fcc3dbd3d256d0be30485881efdebac5a0eacfe7e9161aea74bc0106a6319d"
+      }
     ],
-    "continuous_browser_playback": {
-      "status": "not_run",
-      "note": "Continuous motion and natural-speed flicker are not visually certified in this independent review."
+    "natural_speed_playback": "not_run",
+    "high_sample_quality_reference": "not_run",
+    "final_user_artistic_acceptance": {
+      "status": "approved_current_film_for_publication",
+      "channel": "voice",
+      "confirmed_date": "2026-10-16",
+      "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+      "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
     }
   },
-  "observations": [
-    "The processed frames show modestly smoother grain in the background, ground and shadow areas. The result remains visibly noisy, especially on the teal top surface and near the bob silhouette.",
-    "The thin pendulum rod, arch outline, bright metallic highlight line and small base details remain visible in the inspected pairs. The bob retains the faceted appearance already present in the source.",
-    "No obvious doubled rod or bob, displaced multi-frame trail, gross silhouette break or large color shift was observed in the inspected frames and consecutive windows.",
-    "Start and end windows do not show an obvious blank frame or abrupt denoise-state jump in the sampled images."
-  ],
+  "browser_natural_speed_full_playback": "not_run",
+  "native_natural_speed_full_playback": "not_run",
+  "final_user_artistic_acceptance": {
+    "status": "approved_current_film_for_publication",
+    "channel": "voice",
+    "confirmed_date": "2026-10-16",
+    "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+    "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
+  },
   "limits": [
-    "This is a small 640 by 480, six-second example with one scene and one fixed filter setting.",
-    "Consecutive-frame still inspection cannot establish natural-speed flicker, subtle temporal artifacts or all possible ghosting.",
-    "There is no high-sample reference. No fidelity, accuracy or perceptual-quality score is claimed.",
-    "The review does not establish a dramatic quality improvement, artifact-free output or suitability for other content.",
-    "The published H.264 videos and JPEG images are delivery derivatives; the pixel review used PNG frames decoded from the lossless intermediates."
+    "Spatial OIDN only",
+    "No high-sample ground truth or reference quality score",
+    "Technical integrity, offline visual inspection and actual playback are separate gates"
   ],
-  "presentation_assets": {
-    "comparison.jpg": {
-      "frame": 73,
-      "description": "Before and after at native 640 by 480 per panel, with labels. No retouching; JPEG delivery derivative."
-    },
-    "hero.jpg": {
-      "frame": 73,
-      "description": "Processed frame at native 640 by 480. No retouching; JPEG delivery derivative."
-    }
-  }
+  "full144_source_pngs_individually_inspected_at_native_size": false
 }

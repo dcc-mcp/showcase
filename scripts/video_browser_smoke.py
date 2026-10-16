@@ -18,6 +18,11 @@ import threading
 from localization_browser_smoke import MountHandler
 
 
+def assert_no_media_requests_since(requests, before):
+    unexpected = requests[before:]
+    assert not unexpected, 'Media refetched after stop: ' + repr(unexpected)
+
+
 
 # Observers only: no media methods or browser policies are replaced.
 MEDIA_DIAGNOSTICS = """(() => {
@@ -163,7 +168,7 @@ def run(site: Path, output: Path):
                         unexpected = media_requests()[before:]
                         if unexpected:
                             diagnose_unexpected_media(browser, page, output, report, request_details, mobile, label)
-                        assert not unexpected, 'Media refetched after stop: ' + repr(unexpected)
+                        assert_no_media_requests_since(media_requests(), before)
                         assert video.evaluate('(v)=>v.paused && v.muted && !v.hasAttribute("src") && !v.querySelector("source[src]")')
                     for prefix, locale in [('', 'en'), ('zh/', 'zh')]:
                         stage = f'{locale}/{kind}: gallery initial'
@@ -236,6 +241,10 @@ def run(site: Path, output: Path):
                                 # Native pause/seek/play remains owned by the viewer;
                                 # no hover handler is allowed to restart or clear it.
                                 video.evaluate('(v)=>{v.pause();v.currentTime=Math.min(1,v.duration/2)}')
+                                # currentTime changes immediately, before the seek's
+                                # Range request completes. Finish that native seek
+                                # before taking the stop guard's request baseline.
+                                expect(video).to_have_js_property('seeking', False)
                                 expect(host).to_have_attribute('data-video-state', 'watching')
                                 await_time = video.evaluate('(v)=>v.currentTime')
                                 assert await_time > 0

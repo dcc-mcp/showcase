@@ -1,425 +1,94 @@
 {
-  "schema_version": 1,
-  "verification_level": [
-    "in-host",
-    "real tool return",
-    "native CLI execution"
+  "status": "technical_decode_pass",
+  "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+  "bytes": 614199,
+  "source_frames": [
+    1,
+    144
   ],
-  "verified_at": "2026-10-15",
+  "dimensions": [
+    960,
+    720
+  ],
+  "frame_count": 144,
+  "fps": "24000/1001",
+  "time_base": "1/24000",
+  "pts_increment": 1001,
+  "duration_rational": "3003/500",
+  "duration_seconds": 6.006,
+  "audio_streams": 0,
+  "full_decode": true,
+  "consecutive_exact_duplicates": 0,
+  "color_transform": "AgX sRGB PNG -> explicit zscale sRGB transfer to limited BT.709 YUV 4:2:0",
+  "visual_review": "see visual-review.json; technical checks are separate",
+  "browser_playback": "not_run",
+  "motion_compensated_temporal_denoising": false,
+  "denoising": "dcc-media-enhance 0.2.0 Blender compositor spatial OIDN with actual albedo/normal guides; sequence must be separately reviewed",
+  "file": "pendulum-oidn.mp4",
+  "native_playback": "short pilot failed final-picture consistency; full film not yet accepted",
+  "schema_version": 1,
+  "verified_at": "2026-10-16",
   "environment": {
-    "source_renderer": "Blender",
-    "source_renderer_version": "4.5.13 LTS",
-    "render_engine": "Cycles CPU",
-    "samples_per_pixel": 32,
-    "render_denoising": false,
-    "postprocess_cli": "dcc-media-enhance",
-    "postprocess_cli_version": "0.2.0",
-    "postprocess_source_revision": "bd4aca72488ca6165816ebdf95c99df5800a192a",
-    "postprocess_binary_sha256": "363babca4e93869a77ee0971b7ae82043695ed30cacc4de9b12212fcc31359db",
-    "ffmpeg_version": "7.1.5-0+deb13u1",
-    "execution_route": "Direct native CLI; no new Core gateway created",
-    "dcc_mcp_core_version": "0.20.44",
-    "adapter_baseline_version": "0.2.20",
-    "adapter_patched_source_commit": "397d2aaa8049857bb33aedd6efdc9ef4234deb62"
-  },
-  "scene": {
-    "object_count": 26,
-    "objects_by_type": {
-      "MESH": 19,
-      "CURVE": 2,
-      "EMPTY": 1,
-      "CAMERA": 1,
-      "LIGHT": 3
-    },
-    "geometry": {
-      "native_mesh_count": 19,
-      "native_mesh_vertices": 7426,
-      "native_mesh_polygons": 7783,
-      "curve_count": 2,
-      "curve_control_points": 98,
-      "geometry_count_scope": "Native mesh counts exclude tessellated curve bevels; curve control points are reported separately."
-    },
-    "materials": [
-      "Backdrop",
-      "Brass",
-      "Petrol",
-      "Porcelain"
+    "renderer": "Blender 4.5.13 LTS / Cycles CPU",
+    "resolution": [
+      960,
+      720
     ],
-    "animation": {
-      "actions": 2,
-      "frame_range": [
-        1,
-        144
-      ],
-      "animated_properties": [
-        "Pendulum_Pivot.rotation_euler",
-        "Hero_Camera.lens"
-      ],
-      "keyframe_samples": [
-        {
-          "frame": 1,
-          "pivot_rotation_degrees": [
-            0.0,
-            -28.000000209988553,
-            0.0
-          ],
-          "camera_lens_mm": 48.0
-        },
-        {
-          "frame": 25,
-          "pivot_rotation_degrees": [
-            0.0,
-            22.999999501668448,
-            0.0
-          ],
-          "camera_lens_mm": 50.34965133666992
-        },
-        {
-          "frame": 49,
-          "pivot_rotation_degrees": [
-            0.0,
-            -18.999999959540737,
-            0.0
-          ],
-          "camera_lens_mm": 52.699302673339844
-        },
-        {
-          "frame": 73,
-          "pivot_rotation_degrees": [
-            0.0,
-            15.000000417413029,
-            0.0
-          ],
-          "camera_lens_mm": 55.0489501953125
-        },
-        {
-          "frame": 97,
-          "pivot_rotation_degrees": [
-            0.0,
-            -12.000000333930423,
-            0.0
-          ],
-          "camera_lens_mm": 57.39860153198242
-        },
-        {
-          "frame": 121,
-          "pivot_rotation_degrees": [
-            0.0,
-            9.000000250447817,
-            0.0
-          ],
-          "camera_lens_mm": 59.748252868652344
-        },
-        {
-          "frame": 144,
-          "pivot_rotation_degrees": [
-            0.0,
-            -6.000000166965211,
-            0.0
-          ],
-          "camera_lens_mm": 62.0
-        }
-      ],
-      "all_frames_checked": 144,
-      "evaluated_world_transforms_and_lens_sha256": "8f7586275c73eb270e196d28d8052db0eaba9b44aa9a05de6de49505bee59e61"
-    },
-    "units": {
-      "system": "METRIC",
-      "system_rotation": "DEGREES",
-      "scale_length": 1.0,
-      "use_separate": false,
-      "length_unit": "METERS",
-      "mass_unit": "KILOGRAMS",
-      "time_unit": "SECONDS",
-      "temperature_unit": "KELVIN"
-    },
-    "render": {
-      "engine": "CYCLES",
-      "resolution_x": 640,
-      "resolution_y": 480,
-      "percentage": 100,
-      "samples": 32,
-      "use_denoising": false,
-      "fps": 24,
-      "fps_base": 1.0010000467300415,
-      "frame_start": 1,
-      "frame_end": 144,
-      "filepath": "//renders/frame_####",
-      "device": "CPU",
-      "file_format": "PNG",
-      "color_mode": "RGBA",
-      "color_depth": "8",
-      "view_transform": "AgX",
-      "look": "None",
-      "exposure": 0.0,
-      "gamma": 1.0
-    }
-  },
-  "native_publication": {
-    "original": {
-      "filename": "scene.blend",
-      "bytes": 1351653,
-      "sha256": "fbb8401facebc2d4c91d9b2d2953129e7aac3db356a767a01b2835877d79793e",
-      "included_in_public_case": false
-    },
-    "public_copy": {
-      "filename": "scene-public.blend",
-      "bytes": 1351653,
-      "sha256": "5f94f06a8f9662606559e5c8325bb9f425b1a30cc3a63496682c955240634ca2",
-      "byte_identical_to_original": false,
-      "reopened_successfully": true,
-      "storage": "uncompressed Blender native file"
-    },
-    "path_fields_changed_count": 2,
-    "semantic_comparison_equal": true,
-    "frames_compared": 144,
-    "new_render_performed": false,
-    "recipe_calls": 78,
-    "recipe_replayed": false
-  },
-  "processing": {
-    "operation": "Temporal video denoise",
-    "filter": "atadenoise=s=5",
-    "motion_compensated": false,
-    "neural": false,
-    "input_sha256": "9ed664df4ef7ed94e9a42b12df3ac86f0efa732813e0d6e4795914089ed08043",
-    "output_sha256": "1c5582ac0d1e6bcfa34663028848c3deda61f0269e7e1f072018c75fbb71e262",
-    "output_codec": "FFV1 level 3",
-    "limits": {
-      "max_input_mb": 128,
-      "max_output_mb": 128,
-      "max_pixels": 307200,
-      "memory_mb": 512,
-      "min_free_disk_mb": 2048,
-      "threads": 1,
-      "timeout_secs": 180
-    },
-    "backend_resource_receipt": {
-      "elapsed_ms": 2463,
-      "exit_code": 0,
-      "memory_enforcement": "sampled_process_group_watchdog_not_hard_limit",
-      "sampled_peak_rss_kib": 99340
-    },
-    "total_cli_elapsed_seconds": 15.01440025199554,
-    "source_unchanged": true,
-    "native_verification": {
-      "dimensions": true,
-      "pixel_decode": true,
-      "quality_reference": "not_run",
-      "video": {
-        "absolute_origin": "normalized",
-        "audio_codec_sequence_equal": true,
-        "audio_extradata_equal": true,
-        "audio_packet_sha256_equal": true,
-        "audio_packet_side_data_equal": true,
-        "audio_relative_timestamps_equal": true,
-        "frame_count_equal": true,
-        "relative_frame_timestamps_equal": true,
-        "timestamp_tolerance_seconds": 0.0011
-      },
-      "visual_review": "not_run"
-    },
-    "output_hash_matches_manifest": true,
-    "mean_absolute_rgb_change_0_255": 0.18562537676022375,
-    "max_absolute_rgb_change_0_255": 10,
-    "changed_pixel_fraction": 0.1445824291087963,
-    "metric_interpretation": "Pixel change only; neither a noise-reduction score nor a fidelity/quality measurement."
-  },
-  "ingestion": {
-    "source": "Original render PNG sequence",
-    "conversion": "Opaque display-referred RGB to limited-range BT.709 YUV 4:4:4, 8-bit; no resize or interpolation",
-    "codec": "FFV1 level 3",
-    "codec_lossless": true,
-    "rgb_conversion_lossless": false,
-    "rgb_roundtrip_mean_absolute_channel_error_0_255": 0.4004232901114005,
-    "rgb_roundtrip_root_mean_squared_channel_error_0_255": 0.6364382476883831,
-    "rgb_roundtrip_max_absolute_channel_error_0_255": 2,
-    "matroska_timestamp_quantization_max_error_seconds": 0.0005,
-    "superseded_trial": "An earlier full-range input was converted to limited range during processing. The final run uses matching limited-range source/output for a controlled comparison; the earlier trial is not evidence of proven color corruption."
-  },
-  "media": {
-    "raw_master": {
-      "filename": "raw-limited-ffv1.mkv",
-      "sha256": "9ed664df4ef7ed94e9a42b12df3ac86f0efa732813e0d6e4795914089ed08043",
-      "bytes": 32852954,
-      "codec": "ffv1",
-      "width": 640,
-      "height": 480,
-      "frames": 144,
-      "frame_rate": "24000/1001",
-      "time_base": "1/1000",
-      "duration_seconds": 6.006,
-      "pixel_format": "yuv444p",
-      "color_range": "tv",
-      "color_matrix": "bt709",
-      "audio_stream_count": 0,
-      "pts_strictly_increasing": true
-    },
-    "raw_preview": {
-      "filename": "pendulum-raw.mp4",
-      "sha256": "267bccb3e1eb97f3f3ffa6144ca6bed6612b41c0cb12ed7c6e0e4edd717d6003",
-      "bytes": 862839,
-      "codec": "h264",
-      "width": 640,
-      "height": 480,
-      "frames": 144,
-      "frame_rate": "24000/1001",
-      "time_base": "1/24000",
-      "duration_seconds": 6.006,
-      "pixel_format": "yuv420p",
-      "color_range": "tv",
-      "color_matrix": "bt709",
-      "audio_stream_count": 0,
-      "pts_strictly_increasing": true
-    },
-    "denoised_master": {
-      "filename": "denoised-limited-ffv1.mkv",
-      "sha256": "1c5582ac0d1e6bcfa34663028848c3deda61f0269e7e1f072018c75fbb71e262",
-      "bytes": 32448042,
-      "codec": "ffv1",
-      "width": 640,
-      "height": 480,
-      "frames": 144,
-      "frame_rate": "24000/1001",
-      "time_base": "1/1000",
-      "duration_seconds": 6.006,
-      "pixel_format": "yuv444p",
-      "color_range": "tv",
-      "color_matrix": "bt709",
-      "audio_stream_count": 0,
-      "pts_strictly_increasing": true
-    },
-    "denoised_preview": {
-      "filename": "pendulum-denoised.mp4",
-      "sha256": "50a237ea1af799f8aae3a54da100ceccc612b539aba13e3bf8442df411166f8b",
-      "bytes": 841325,
-      "codec": "h264",
-      "width": 640,
-      "height": 480,
-      "frames": 144,
-      "frame_rate": "24000/1001",
-      "time_base": "1/24000",
-      "duration_seconds": 6.006,
-      "pixel_format": "yuv420p",
-      "color_range": "tv",
-      "color_matrix": "bt709",
-      "audio_stream_count": 0,
-      "pts_strictly_increasing": true
-    }
-  },
-  "preview_encoding": {
-    "codec": "H.264",
-    "preset": "slow",
-    "crf": 18,
-    "pixel_format": "yuv420p",
-    "frame_rate": "24000/1001",
-    "duration_seconds": 6.006,
-    "count": 144,
-    "pts_step": 1001,
-    "time_base": "1/24000",
-    "audio_stream_count": 0,
-    "retiming": false,
-    "frame_interpolation": false,
-    "upscaling": false,
-    "same_encoder_settings_for_comparison": true
+    "samples": 96,
+    "render_denoising": false,
+    "core_version": "0.20.44",
+    "postprocess_cli": "dcc-media-enhance 0.2.0",
+    "postprocess_source_revision": "bd4aca72488ca6165816ebdf95c99df5800a192a",
+    "backend": "Blender 4.5.13 compositor OIDN in a separate empty process",
+    "input_precision": "Combined / Albedo HALF16; Normal / Depth FLOAT32",
+    "ffmpeg_version": "7.1.5-0+deb13u1"
   },
   "checks": [
     {
-      "name": "All original PNG and scene hashes unchanged",
+      "name": "native_public_save_reopen",
       "result": "pass",
-      "observed": true
+      "observed": "26 objects; inspected render settings and all 144 projected bounds match after reopen. No pixel-identical rerender claim."
     },
     {
-      "name": "Native processing complete and output hash verified",
+      "name": "complete_real_guided_processing",
       "result": "pass",
-      "observed": true
+      "observed": "All 144 original EXR and spatial-OIDN output hashes verified; output image decode completed. Actual Albedo/Normal guides, no temporal algorithm."
     },
     {
-      "name": "All four videos decode 144 frames",
+      "name": "complete_delivery_decode_and_timing",
       "result": "pass",
-      "observed": {
-        "raw_master": 144,
-        "raw_preview": 144,
-        "denoised_master": 144,
-        "denoised_preview": 144
-      }
+      "observed": "144 decoded frames, 960x720, 24000/1001fps, 1/24000 timebase, PTS step 1001, duration 6.006s, audio streams 0, exact consecutive duplicates 0."
     },
     {
-      "name": "Final source/output color range matches",
+      "name": "complete_source_to_delivery_hash_chain",
       "result": "pass",
-      "observed": "limited-range (tv) BT.709"
+      "observed": "All 144 raw EXR headers,linear output hashes,display PNG hashes and delivery frame records checked. Inherited PNG Frame001 is not chronology evidence."
     },
     {
-      "name": "Master source/output relative timestamps match",
+      "name": "static_contact_sheet_review",
       "result": "pass",
-      "observed": true
-    },
-    {
-      "name": "MP4 exact rational frame cadence",
-      "result": "pass",
-      "observed": "144 frames; PTS 0..143143 step1001 at time_base1/24000"
-    },
-    {
-      "name": "MP4 full decode",
-      "result": "pass",
-      "observed": {
-        "raw_exit": 0,
-        "denoised_exit": 0
-      }
-    },
-    {
-      "name": "No audio streams in previews",
-      "result": "pass",
-      "observed": 0
-    },
-    {
-      "name": "Sanitized native project reopens",
-      "result": "pass",
-      "observed": true
-    },
-    {
-      "name": "Native semantic equality excluding two path fields",
-      "result": "pass",
-      "observed": true
-    },
-    {
-      "name": "Public native dependency and privacy inspection",
-      "result": "pass",
-      "observed": true
+      "observed": "Six contact sheets cover all 144 frames; native-size source spot checks 1/13/73/144. No blocking static defect at inspected scales; fine highlight speckling/aliasing remains. Natural-speed playback is separate."
     }
   ],
-  "not_run_checks": [
-    {
-      "name": "High-sample ground-truth quality score",
-      "result": "not_run"
-    },
-    {
-      "name": "Pixel-identical rerender of public native copy",
-      "result": "not_run"
-    },
-    {
-      "name": "Fresh typed scene recipe replay",
-      "result": "not_run"
-    },
-    {
-      "name": "Final user artistic acceptance",
-      "result": "not_run"
-    }
+  "pending_checks": [
+    "Current-head English/Chinese desktop/touch browser playback and actual displayed end-frame consistency",
+    "Full-film natural-speed visible playback review"
   ],
   "not_claimed": [
-    "No high-sample ground truth or objective perceptual-quality score.",
-    "No CineRecon reconstruction or benchmark result.",
-    "No motion-compensated or neural denoising.",
-    "No EXR, OIDN or auxiliary render passes used.",
-    "Lossless FFV1 coding does not make the RGB-to-YUV ingestion conversion mathematically lossless.",
-    "H.264 delivery previews are lossy, matched encodes.",
-    "CLI technical validation does not establish artistic quality.",
-    "No independent model attribution record is present.",
-    "No pixel-identical rerender of the sanitized native copy is claimed.",
-    "The typed scene recipe was not replayed during publication review.",
-    "No final user artistic acceptance is recorded."
+    "No natural-speed playback pass or current-head browser pass is claimed before actual execution.",
+    "No temporal denoising or motion compensation in the new film.",
+    "No high-sample ground truth,PSNR/SSIM or objective perceptual-quality certification.",
+    "No noise-free imagery; fine highlight speckling and aliasing remain.",
+    "No full-resolution browser pixel-identity test; comparison is a160x120 motion-region thumbnail check.",
+    "No pixel-identical rerender from the public native copy.",
+    "Historical raw/atadenoise controls and old CI are not evidence for this new film.",
+    "No physical-device testing, merge or deployment."
   ],
-  "visual_review_evidence": "visual-review.json",
-  "synchronized_comparison_evidence": "comparison-validation.json",
-  "temporal_integrity_evidence": "temporal-integrity-summary.json"
+  "user_acceptance": {
+    "status": "approved_current_film_for_publication",
+    "channel": "voice",
+    "confirmed_date": "2026-10-16",
+    "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+    "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
+  }
 }

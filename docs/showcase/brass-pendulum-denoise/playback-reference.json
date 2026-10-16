@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "width": 960,
+  "height": 720,
+  "frame_count": 144,
+  "frame_rate": "24000/1001",
+  "reference_basis": "Independent decode of the exact final H.264 delivery; not a source-render quality reference.",
+  "video": {
+    "path": "pendulum-oidn.mp4",
+    "bytes": 614199,
+    "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83"
+  },
+  "atlas": {
+    "path": "playback-atlas.jpg",
+    "bytes": 405788,
+    "sha256": "ffa22490c541055a6da7c0aa8297939ce09850c1f75c3e3530b0f0c4598bd19b",
+    "columns": 8,
+    "rows": 18,
+    "tile_width": 160,
+    "tile_height": 120,
+    "jpeg_encoding": "Explicit BT.601 / full range / 4:4:4, quality3; independently decoded final MP4 resized with Lanczos."
+  },
+  "keyframes": [
+    {
+      "path": "playback-frame-0001.png",
+      "bytes": 231418,
+      "sha256": "db0096d44579e6ad3ad7e7e38b3e1c546af8d9d8722bdf35f9eedbc1db7a5f48",
+      "frame": 1
+    },
+    {
+      "path": "playback-frame-0073.png",
+      "bytes": 264954,
+      "sha256": "d10878892fa374d196682a7eee1a59ad1c04f5aca168a2bff83ea829b8661c28",
+      "frame": 73
+    },
+    {
+      "path": "playback-frame-0144.png",
+      "bytes": 262816,
+      "sha256": "49b26e798b334b90d7bb70c74dfe3459bce0c1a53f3b51359f9ae19184ec65e6",
+      "frame": 144
+    }
+  ],
+  "comparison": {
+    "dimensions": [
+      160,
+      120
+    ],
+    "method": "Motion-region thumbnail comparison; full-resolution pixel identity is not claimed.",
+    "first_middle_last_reference_dimensions": [
+      960,
+      720
+    ]
+  }
+}

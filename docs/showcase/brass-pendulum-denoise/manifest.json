@@ -3,30 +3,59 @@
   "blender_application": "Blender",
   "blender_version": "4.5.13 LTS",
   "ffmpeg_version": "7.1.5",
-  "capture_provider": "host-native render output; JPEG display derivatives",
+  "capture_provider": "Actual native render and independent final-delivery decode derivatives",
+  "historical_snapshot": {
+    "directory": "historical-atadenoise",
+    "head_sha": "112478120b050f7191e1c3a83cf35dce7aa75a8c",
+    "files_unchanged": 17,
+    "scope": "Byte-identical oldcase; oldCI is not transferred to the newfilm."
+  },
   "files": [
     {
       "path": "LICENSES.md",
+      "bytes": 947,
+      "sha256": "6757561a58a7a25a5f48d8ab5b90ab2256a3079cb732747a08eb4405ea13bc58"
+    },
+    {
+      "path": "README.md",
+      "bytes": 15148,
+      "sha256": "bb92c657df41dc31e844f9b993ce10cff29334c44885f7d09c3ff9338a8ccb87"
+    },
+    {
+      "path": "ci-verification.json",
+      "bytes": 412,
+      "sha256": "dd6ca5d75ac58a73ff6bcb04a31c49437e58db5eeed2e82911be2d497093df7f"
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 42337,
+      "sha256": "c34e35261b7683e829fc3c62ed07568b9f19e22779e5bb4b76a44040de5cb4ca",
+      "width": 960,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "historical-atadenoise/LICENSES.md",
       "bytes": 927,
       "sha256": "78ebc28d4ae7dcadd631cabefe282be122870b77360f0d36e02a68bf5ded1998"
     },
     {
-      "path": "README.md",
+      "path": "historical-atadenoise/README.md",
       "bytes": 10128,
       "sha256": "ccf0a57951ad04769637d70356e496f13d6678991f2a9f6d0014ce3ca57a475d"
     },
     {
-      "path": "ci-verification.json",
+      "path": "historical-atadenoise/ci-verification.json",
       "bytes": 3065,
       "sha256": "d5449e956cb228f44a10cb7b0879c150b5987b4bde32a29fb4e7627c6f182825"
     },
     {
-      "path": "comparison-validation.json",
+      "path": "historical-atadenoise/comparison-validation.json",
       "bytes": 928,
       "sha256": "f0b7e9384cb9de21aa96b5260c74455bace74439c4fc1e4a001ad68c4972e286"
     },
     {
-      "path": "comparison.jpg",
+      "path": "historical-atadenoise/comparison.jpg",
       "bytes": 354400,
       "sha256": "22e0cabdd9b76cb5f7a72aeb99d262427876b2f100913ac8ae07bc81c00e2cc2",
       "width": 1280,
@@ -34,7 +63,7 @@
       "bit_depth": 8
     },
     {
-      "path": "hero.jpg",
+      "path": "historical-atadenoise/hero.jpg",
       "bytes": 164919,
       "sha256": "8744207b6972fd3c6f0a0383f6072040a39225c122fe2614892eac9bd4b16fde",
       "width": 640,
@@ -42,12 +71,17 @@
       "bit_depth": 8
     },
     {
-      "path": "native-inspection.json",
+      "path": "historical-atadenoise/manifest.json",
+      "bytes": 3589,
+      "sha256": "85a49df178cf1da33902c4220e45844ecac931d186323147cf0264cd2005f651"
+    },
+    {
+      "path": "historical-atadenoise/native-inspection.json",
       "bytes": 10078,
       "sha256": "aeb4ca7f1ee5b0504392df78f1197fe845c86b017af6bc00a312a204b840f338"
     },
     {
-      "path": "pendulum-denoised.mp4",
+      "path": "historical-atadenoise/pendulum-denoised.mp4",
       "bytes": 841325,
       "sha256": "50a237ea1af799f8aae3a54da100ceccc612b539aba13e3bf8442df411166f8b",
       "container_kind": "MPEG-4",
@@ -60,7 +94,7 @@
       "audio_stream_count": 0
     },
     {
-      "path": "pendulum-raw.mp4",
+      "path": "historical-atadenoise/pendulum-raw.mp4",
       "bytes": 862839,
       "sha256": "267bccb3e1eb97f3f3ffa6144ca6bed6612b41c0cb12ed7c6e0e4edd717d6003",
       "container_kind": "MPEG-4",
@@ -73,7 +107,7 @@
       "audio_stream_count": 0
     },
     {
-      "path": "pendulum-synchronized-comparison.mp4",
+      "path": "historical-atadenoise/pendulum-synchronized-comparison.mp4",
       "bytes": 3364354,
       "sha256": "7b261ad04aebd2a121935518c6d457faa499f80d6b54349645326c57cd79a00c",
       "container_kind": "MPEG-4",
@@ -86,12 +120,12 @@
       "audio_stream_count": 0
     },
     {
-      "path": "processing-validation.json",
+      "path": "historical-atadenoise/processing-validation.json",
       "bytes": 7730,
       "sha256": "e3493b0dc0eacf31d4de71cbefbf044fa1099a522287616ce5e60ad81086d7f3"
     },
     {
-      "path": "scene-public.blend",
+      "path": "historical-atadenoise/scene-public.blend",
       "bytes": 1351653,
       "sha256": "5f94f06a8f9662606559e5c8325bb9f425b1a30cc3a63496682c955240634ca2",
       "container_kind": "Blender native",
@@ -99,24 +133,117 @@
       "external_dependencies": []
     },
     {
-      "path": "scene-recipe.json",
+      "path": "historical-atadenoise/scene-recipe.json",
       "bytes": 34300,
       "sha256": "5dc8b64975816593e89c6bcc9f309a3d53705e5a19a70d9655715e64434125c5"
     },
     {
-      "path": "temporal-integrity-summary.json",
+      "path": "historical-atadenoise/temporal-integrity-summary.json",
       "bytes": 1297,
       "sha256": "b83d5f1a525c981f1b0aa1380ed0f0f50da7e72cf9f6b22ca413453d167dbe06"
     },
     {
-      "path": "validation.json",
+      "path": "historical-atadenoise/validation.json",
       "bytes": 12754,
       "sha256": "681f1d2380e945f1c9b5ddb0abf0552f915aebef809bec57d2a2c5c012b6e684"
     },
     {
-      "path": "visual-review.json",
+      "path": "historical-atadenoise/visual-review.json",
       "bytes": 3482,
       "sha256": "945eef7271bac97b000e36d8e2c30ff55f27ee1650e489173ca7f1715cb719bf"
+    },
+    {
+      "path": "native-inspection.json",
+      "bytes": 35239,
+      "sha256": "dba41e2f4384c6f1045667423fd07a36b832aafce2664c8bc4a146891b8238a7"
+    },
+    {
+      "path": "pendulum-oidn.mp4",
+      "bytes": 614199,
+      "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+      "container_kind": "MPEG-4",
+      "codec": "H.264",
+      "width": 960,
+      "height": 720,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "duration_seconds": 6.006,
+      "audio_stream_count": 0
+    },
+    {
+      "path": "playback-atlas.jpg",
+      "bytes": 405788,
+      "sha256": "ffa22490c541055a6da7c0aa8297939ce09850c1f75c3e3530b0f0c4598bd19b",
+      "width": 1280,
+      "height": 2160,
+      "bit_depth": 8
+    },
+    {
+      "path": "playback-frame-0001.png",
+      "bytes": 231418,
+      "sha256": "db0096d44579e6ad3ad7e7e38b3e1c546af8d9d8722bdf35f9eedbc1db7a5f48",
+      "width": 960,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "playback-frame-0073.png",
+      "bytes": 264954,
+      "sha256": "d10878892fa374d196682a7eee1a59ad1c04f5aca168a2bff83ea829b8661c28",
+      "width": 960,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "playback-frame-0144.png",
+      "bytes": 262816,
+      "sha256": "49b26e798b334b90d7bb70c74dfe3459bce0c1a53f3b51359f9ae19184ec65e6",
+      "width": 960,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "playback-reference.json",
+      "bytes": 1546,
+      "sha256": "ef301b92749787db6bc7b84f0e18c00d8d7db8c90384f2b014d2e9da6da7cacd"
+    },
+    {
+      "path": "processing-validation.json",
+      "bytes": 67178,
+      "sha256": "dcfdadab0e7badaa44d6dd5a220fe7133f59fb5bd921dfbd164f4f257fa666a1"
+    },
+    {
+      "path": "scene-public.blend",
+      "bytes": 1548243,
+      "sha256": "0984242bf971084590c931cbb2e42cb8d95f109d24c9ffbb6e3979d18730d0a5",
+      "container_kind": "Blender native",
+      "object_count": 26,
+      "external_dependencies": []
+    },
+    {
+      "path": "scene-recipe.json",
+      "bytes": 50570,
+      "sha256": "4a283ee6f14ae4ea248321db3ed1c89343abc01702a0e01ebbad75e993baec16"
+    },
+    {
+      "path": "software-capability-coverage.json",
+      "bytes": 4040,
+      "sha256": "bbd5e06a0802c75a02ece61a6891f4f17f2f0b0e57a909e95175a5178d0344bd"
+    },
+    {
+      "path": "temporal-integrity-summary.json",
+      "bytes": 421995,
+      "sha256": "d53d6abc4ce2f7a6718c9c1c1f3e3f2d1966630186f1d080a1067fd8b4f9db9e"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 4110,
+      "sha256": "20f79233fc4c682acafbb65d20cac626517642ab2a0aee86894798887d8fb2d4"
+    },
+    {
+      "path": "visual-review.json",
+      "bytes": 4038,
+      "sha256": "c93d89c28dbec8abee82ceaac25a8466f23909dab18934cf72b4c21e972b9e0c"
     }
   ]
 }

@@ -1,0 +1,1568 @@
+{
+  "schema_version": 1,
+  "title": "Brass pendulum: typed Blender scene recipe",
+  "kind": "readable_recipe_not_a_standalone_runtime",
+  "provenance": {
+    "origin": "Successful typed MCP request arguments from the scene construction and final render-configuration runs.",
+    "source_programs": [
+      "build_preview.py",
+      "render_sequence.py"
+    ],
+    "scene_original_sha256": "fbb8401facebc2d4c91d9b2d2953129e7aac3db356a767a01b2835877d79793e",
+    "excludes": [
+      "transport URLs",
+      "runtime launch settings",
+      "private workspace paths",
+      "task identifiers",
+      "response prompts",
+      "read-only inspection calls",
+      "preview render calls"
+    ],
+    "path_substitution": "Only the final save destination is substituted with ${OUTPUT_DIR}/scene.blend."
+  },
+  "requirements": {
+    "blender_version_observed": "4.5.13 LTS",
+    "typed_api": "Blender typed MCP tools with the names listed in the steps. A compatible host must already be installed and running.",
+    "external_images_textures_or_linked_assets": false
+  },
+  "instructions": [
+    "Start a fresh Blender session through a compatible typed MCP host. The new_scene step clears the active scene; use a disposable session.",
+    "Send each step as an MCP tools/call request with the listed name and arguments, in order. Check success before continuing.",
+    "Replace ${OUTPUT_DIR} with your chosen absolute local output directory before the final save call. Do not pass the placeholder literally.",
+    "The steps preserve the original construction sequence, including the temporary 20-sample setup; the final steps select 32 samples and disable render denoising.",
+    "This recipe describes scene creation and the raw Cycles render configuration only. Video denoising and video encoding are separate steps documented by the showcase.",
+    "For the least setup, open scene-public.blend directly in Blender. It contains all geometry, materials, animation, camera, and lights."
+  ],
+  "expected_result": {
+    "objects": 26,
+    "mesh_objects": 19,
+    "curve_objects": 2,
+    "camera_objects": 1,
+    "light_objects": 3,
+    "empty_objects": 1,
+    "materials": 4,
+    "frame_range": [
+      1,
+      144
+    ],
+    "fps_numerator": 24,
+    "fps_base_nominal": 1.001,
+    "render_resolution": [
+      640,
+      480
+    ],
+    "cycles_samples": 32,
+    "render_denoising": false
+  },
+  "step_count": 78,
+  "steps": [
+    {
+      "step": 1,
+      "name": "blender_scene__new_scene",
+      "arguments": {}
+    },
+    {
+      "step": 2,
+      "name": "blender_render__set_render_settings",
+      "arguments": {
+        "engine": "CYCLES",
+        "resolution_x": 640,
+        "resolution_y": 480,
+        "resolution_percentage": 100,
+        "fps": 24,
+        "fps_base": 1.001,
+        "samples": 20,
+        "file_format": "PNG"
+      }
+    },
+    {
+      "step": 3,
+      "name": "blender_animation__set_frame_range",
+      "arguments": {
+        "start": 1,
+        "end": 144
+      }
+    },
+    {
+      "step": 4,
+      "name": "blender_light_rig__set_render_view_transform",
+      "arguments": {
+        "view_transform": "AgX",
+        "exposure": 0.0,
+        "gamma": 1.0
+      }
+    },
+    {
+      "step": 5,
+      "name": "blender_lighting__set_world_background",
+      "arguments": {
+        "color": [
+          0.08,
+          0.11,
+          0.13
+        ],
+        "strength": 0.28
+      }
+    },
+    {
+      "step": 6,
+      "name": "blender_materials__create_material",
+      "arguments": {
+        "name": "Petrol",
+        "color": [
+          0.022,
+          0.1,
+          0.12
+        ],
+        "metallic": 0.1,
+        "roughness": 0.32
+      }
+    },
+    {
+      "step": 7,
+      "name": "blender_materials__create_material",
+      "arguments": {
+        "name": "Brass",
+        "color": [
+          0.63,
+          0.33,
+          0.08
+        ],
+        "metallic": 0.85,
+        "roughness": 0.24
+      }
+    },
+    {
+      "step": 8,
+      "name": "blender_materials__create_material",
+      "arguments": {
+        "name": "Porcelain",
+        "color": [
+          0.82,
+          0.76,
+          0.59
+        ],
+        "metallic": 0.0,
+        "roughness": 0.28
+      }
+    },
+    {
+      "step": 9,
+      "name": "blender_materials__create_material",
+      "arguments": {
+        "name": "Backdrop",
+        "color": [
+          0.045,
+          0.065,
+          0.075
+        ],
+        "metallic": 0.0,
+        "roughness": 0.6
+      }
+    },
+    {
+      "step": 10,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Infinite_Floor",
+        "object_type": "plane",
+        "location": [
+          0,
+          0,
+          -0.04
+        ],
+        "scale": [
+          200,
+          200,
+          1
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 11,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Infinite_Floor",
+        "material_name": "Backdrop"
+      }
+    },
+    {
+      "step": 12,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Pedestal_Main",
+        "object_type": "cylinder",
+        "location": [
+          0,
+          0,
+          0.25
+        ],
+        "scale": [
+          1.8,
+          1.8,
+          0.25
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 13,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Pedestal_Main",
+        "material_name": "Petrol"
+      }
+    },
+    {
+      "step": 14,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Pedestal_Gold_Rim",
+        "object_type": "cylinder",
+        "location": [
+          0,
+          0,
+          0.51
+        ],
+        "scale": [
+          1.78,
+          1.78,
+          0.025
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 15,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Pedestal_Gold_Rim",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 16,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Pedestal_Inlay",
+        "object_type": "cylinder",
+        "location": [
+          0,
+          0,
+          0.545
+        ],
+        "scale": [
+          1.69,
+          1.69,
+          0.015
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 17,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Pedestal_Inlay",
+        "material_name": "Petrol"
+      }
+    },
+    {
+      "step": 18,
+      "name": "blender_data_geometry__create_curve_from_points",
+      "arguments": {
+        "name": "Brass_Arch",
+        "splines": [
+          [
+            [
+              1.42,
+              0,
+              2.08
+            ],
+            [
+              1.4169596709988168,
+              0,
+              2.172872443506803
+            ],
+            [
+              1.4078517031508107,
+              0,
+              2.2653471929524733
+            ],
+            [
+              1.392715098172587,
+              0,
+              2.357028257262902
+            ],
+            [
+              1.371614673330477,
+              0,
+              2.4475230440455795
+            ],
+            [
+              1.34464078388305,
+              0,
+              2.5364440407304896
+            ],
+            [
+              1.311908936166027,
+              0,
+              2.6234104739584274
+            ],
+            [
+              1.2735592929764175,
+              0,
+              2.708049940110982
+            ],
+            [
+              1.2297560733739028,
+              0,
+              2.79
+            ],
+            [
+              1.180686849469614,
+              0,
+              2.868909730887835
+            ],
+            [
+              1.126561743213554,
+              0,
+              2.9444412291923836
+            ],
+            [
+              1.067612526620148,
+              0,
+              3.016271057442098
+            ],
+            [
+              1.0040916292848976,
+              0,
+              3.0840916292848974
+            ],
+            [
+              0.9362710574420977,
+              0,
+              3.147612526620148
+            ],
+            [
+              0.8644412291923833,
+              0,
+              3.206561743213554
+            ],
+            [
+              0.7889097308878353,
+              0,
+              3.2606868494696144
+            ],
+            [
+              0.7100000000000001,
+              0,
+              3.3097560733739027
+            ],
+            [
+              0.6280499401109817,
+              0,
+              3.3535592929764175
+            ],
+            [
+              0.5434104739584276,
+              0,
+              3.3919089361660273
+            ],
+            [
+              0.4564440407304896,
+              0,
+              3.42464078388305
+            ],
+            [
+              0.36752304404557945,
+              0,
+              3.451614673330477
+            ],
+            [
+              0.2770282572629022,
+              0,
+              3.4727150981725874
+            ],
+            [
+              0.18534719295247343,
+              0,
+              3.4878517031508105
+            ],
+            [
+              0.09287244350680345,
+              0,
+              3.496959670998817
+            ],
+            [
+              8.694992273946207e-17,
+              0,
+              3.5
+            ],
+            [
+              -0.09287244350680326,
+              0,
+              3.496959670998817
+            ],
+            [
+              -0.18534719295247326,
+              0,
+              3.4878517031508105
+            ],
+            [
+              -0.27702825726290203,
+              0,
+              3.4727150981725874
+            ],
+            [
+              -0.3675230440455793,
+              0,
+              3.451614673330477
+            ],
+            [
+              -0.45644404073048944,
+              0,
+              3.42464078388305
+            ],
+            [
+              -0.5434104739584271,
+              0,
+              3.3919089361660273
+            ],
+            [
+              -0.6280499401109816,
+              0,
+              3.3535592929764175
+            ],
+            [
+              -0.7099999999999996,
+              0,
+              3.3097560733739027
+            ],
+            [
+              -0.7889097308878352,
+              0,
+              3.2606868494696144
+            ],
+            [
+              -0.8644412291923833,
+              0,
+              3.206561743213554
+            ],
+            [
+              -0.9362710574420977,
+              0,
+              3.147612526620148
+            ],
+            [
+              -1.0040916292848974,
+              0,
+              3.084091629284898
+            ],
+            [
+              -1.0676125266201477,
+              0,
+              3.016271057442098
+            ],
+            [
+              -1.1265617432135537,
+              0,
+              2.9444412291923836
+            ],
+            [
+              -1.1806868494696139,
+              0,
+              2.8689097308878355
+            ],
+            [
+              -1.2297560733739028,
+              0,
+              2.79
+            ],
+            [
+              -1.273559292976417,
+              0,
+              2.7080499401109823
+            ],
+            [
+              -1.311908936166027,
+              0,
+              2.623410473958428
+            ],
+            [
+              -1.3446407838830499,
+              0,
+              2.5364440407304896
+            ],
+            [
+              -1.3716146733304768,
+              0,
+              2.44752304404558
+            ],
+            [
+              -1.392715098172587,
+              0,
+              2.357028257262902
+            ],
+            [
+              -1.4078517031508107,
+              0,
+              2.2653471929524738
+            ],
+            [
+              -1.4169596709988168,
+              0,
+              2.172872443506803
+            ],
+            [
+              -1.42,
+              0,
+              2.08
+            ],
+            [
+              -1.4169596709988168,
+              0,
+              1.9871275564931972
+            ],
+            [
+              -1.4078517031508107,
+              0,
+              1.8946528070475266
+            ],
+            [
+              -1.3927150981725873,
+              0,
+              1.8029717427370984
+            ],
+            [
+              -1.371614673330477,
+              0,
+              1.7124769559544206
+            ],
+            [
+              -1.34464078388305,
+              0,
+              1.6235559592695108
+            ],
+            [
+              -1.3119089361660272,
+              0,
+              1.5365895260415727
+            ],
+            [
+              -1.2735592929764172,
+              0,
+              1.451950059889018
+            ],
+            [
+              -1.229756073373903,
+              0,
+              1.3700000000000006
+            ],
+            [
+              -1.1806868494696146,
+              0,
+              1.2910902691121653
+            ],
+            [
+              -1.126561743213554,
+              0,
+              1.2155587708076168
+            ],
+            [
+              -1.067612526620148,
+              0,
+              1.1437289425579023
+            ],
+            [
+              -1.004091629284898,
+              0,
+              1.0759083707151031
+            ],
+            [
+              -0.936271057442098,
+              0,
+              1.0123874733798524
+            ],
+            [
+              -0.8644412291923836,
+              0,
+              0.9534382567864466
+            ],
+            [
+              -0.788909730887835,
+              0,
+              0.899313150530386
+            ],
+            [
+              -0.7100000000000006,
+              0,
+              0.8502439266260977
+            ],
+            [
+              -0.6280499401109819,
+              0,
+              0.8064407070235828
+            ],
+            [
+              -0.5434104739584271,
+              0,
+              0.7680910638339729
+            ],
+            [
+              -0.4564440407304897,
+              0,
+              0.7353592161169502
+            ],
+            [
+              -0.3675230440455793,
+              0,
+              0.708385326669523
+            ],
+            [
+              -0.2770282572629027,
+              0,
+              0.6872849018274132
+            ],
+            [
+              -0.18534719295247332,
+              0,
+              0.6721482968491894
+            ],
+            [
+              -0.09287244350680267,
+              0,
+              0.6630403290011833
+            ],
+            [
+              -2.608497682183862e-16,
+              0,
+              0.6600000000000001
+            ],
+            [
+              0.09287244350680215,
+              0,
+              0.663040329001183
+            ],
+            [
+              0.1853471929524728,
+              0,
+              0.6721482968491892
+            ],
+            [
+              0.2770282572629022,
+              0,
+              0.687284901827413
+            ],
+            [
+              0.3675230440455788,
+              0,
+              0.708385326669523
+            ],
+            [
+              0.4564440407304893,
+              0,
+              0.73535921611695
+            ],
+            [
+              0.5434104739584266,
+              0,
+              0.7680910638339726
+            ],
+            [
+              0.6280499401109815,
+              0,
+              0.8064407070235824
+            ],
+            [
+              0.7100000000000001,
+              0,
+              0.8502439266260973
+            ],
+            [
+              0.7889097308878346,
+              0,
+              0.8993131505303855
+            ],
+            [
+              0.8644412291923822,
+              0,
+              0.9534382567864454
+            ],
+            [
+              0.936271057442098,
+              0,
+              1.0123874733798526
+            ],
+            [
+              1.0040916292848971,
+              0,
+              1.0759083707151025
+            ],
+            [
+              1.067612526620148,
+              0,
+              1.1437289425579025
+            ],
+            [
+              1.1265617432135535,
+              0,
+              1.2155587708076165
+            ],
+            [
+              1.1806868494696134,
+              0,
+              1.291090269112164
+            ],
+            [
+              1.2297560733739024,
+              0,
+              1.3699999999999994
+            ],
+            [
+              1.2735592929764172,
+              0,
+              1.4519500598890183
+            ],
+            [
+              1.3119089361660272,
+              0,
+              1.536589526041573
+            ],
+            [
+              1.3446407838830499,
+              0,
+              1.6235559592695101
+            ],
+            [
+              1.3716146733304766,
+              0,
+              1.7124769559544195
+            ],
+            [
+              1.3927150981725869,
+              0,
+              1.8029717427370973
+            ],
+            [
+              1.4078517031508107,
+              0,
+              1.8946528070475268
+            ],
+            [
+              1.4169596709988168,
+              0,
+              1.9871275564931974
+            ]
+          ]
+        ],
+        "closed": true,
+        "dimensions": "3D",
+        "bevel_depth": 0.055,
+        "bevel_resolution": 3,
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 19,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "object_type": "empty",
+        "location": [
+          0,
+          0,
+          3.45
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 20,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Pivot_Cap",
+        "object_type": "sphere",
+        "location": [
+          0,
+          0,
+          3.45
+        ],
+        "scale": [
+          0.11,
+          0.11,
+          0.11
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 21,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Pivot_Cap",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 22,
+      "name": "blender_data_geometry__create_curve_from_points",
+      "arguments": {
+        "name": "Pendulum_Rod",
+        "splines": [
+          [
+            [
+              0,
+              0,
+              3.45
+            ],
+            [
+              0,
+              0,
+              1.64
+            ]
+          ]
+        ],
+        "closed": false,
+        "dimensions": "3D",
+        "bevel_depth": 0.027,
+        "bevel_resolution": 3,
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 23,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Porcelain_Bob",
+        "object_type": "sphere",
+        "location": [
+          0,
+          0,
+          1.5
+        ],
+        "scale": [
+          0.36,
+          0.36,
+          0.36
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 24,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Porcelain_Bob",
+        "material_name": "Porcelain"
+      }
+    },
+    {
+      "step": 25,
+      "name": "blender_objects__parent_object",
+      "arguments": {
+        "child_name": "Pendulum_Rod",
+        "parent_name": "Pendulum_Pivot"
+      }
+    },
+    {
+      "step": 26,
+      "name": "blender_objects__parent_object",
+      "arguments": {
+        "child_name": "Porcelain_Bob",
+        "parent_name": "Pendulum_Pivot"
+      }
+    },
+    {
+      "step": 27,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_00",
+        "object_type": "sphere",
+        "location": [
+          1.45,
+          -0.0,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 28,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_00",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 29,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_01",
+        "object_type": "sphere",
+        "location": [
+          1.400592448119149,
+          -0.37528761539865507,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 30,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_01",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 31,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_02",
+        "object_type": "sphere",
+        "location": [
+          1.255736835487436,
+          -0.7249999999999999,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 32,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_02",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 33,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_03",
+        "object_type": "sphere",
+        "location": [
+          1.0253048327204939,
+          -1.0253048327204939,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 34,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_03",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 35,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_04",
+        "object_type": "sphere",
+        "location": [
+          0.7250000000000001,
+          -1.2557368354874359,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 36,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_04",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 37,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_05",
+        "object_type": "sphere",
+        "location": [
+          0.37528761539865507,
+          -1.400592448119149,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 38,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_05",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 39,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_06",
+        "object_type": "sphere",
+        "location": [
+          8.878689293818311e-17,
+          -1.45,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 40,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_06",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 41,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_07",
+        "object_type": "sphere",
+        "location": [
+          -0.37528761539865524,
+          -1.400592448119149,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 42,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_07",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 43,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_08",
+        "object_type": "sphere",
+        "location": [
+          -0.7249999999999996,
+          -1.255736835487436,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 44,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_08",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 45,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_09",
+        "object_type": "sphere",
+        "location": [
+          -1.0253048327204939,
+          -1.0253048327204939,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 46,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_09",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 47,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_10",
+        "object_type": "sphere",
+        "location": [
+          -1.255736835487436,
+          -0.7249999999999999,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 48,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_10",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 49,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_11",
+        "object_type": "sphere",
+        "location": [
+          -1.400592448119149,
+          -0.37528761539865546,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 50,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_11",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 51,
+      "name": "blender_objects__create_object",
+      "arguments": {
+        "name": "Dial_Mark_12",
+        "object_type": "sphere",
+        "location": [
+          -1.45,
+          -1.7757378587636622e-16,
+          0.58
+        ],
+        "scale": [
+          0.035,
+          0.035,
+          0.018
+        ],
+        "size": 2.0
+      }
+    },
+    {
+      "step": 52,
+      "name": "blender_materials__assign_material",
+      "arguments": {
+        "object_name": "Dial_Mark_12",
+        "material_name": "Brass"
+      }
+    },
+    {
+      "step": 53,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          -28,
+          0
+        ]
+      }
+    },
+    {
+      "step": 54,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 1,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 55,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          23,
+          0
+        ]
+      }
+    },
+    {
+      "step": 56,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 25,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 57,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          -19,
+          0
+        ]
+      }
+    },
+    {
+      "step": 58,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 49,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 59,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          15,
+          0
+        ]
+      }
+    },
+    {
+      "step": 60,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 73,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 61,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          -12,
+          0
+        ]
+      }
+    },
+    {
+      "step": 62,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 97,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 63,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          9,
+          0
+        ]
+      }
+    },
+    {
+      "step": 64,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 121,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 65,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Pendulum_Pivot",
+        "rotation": [
+          0,
+          -6,
+          0
+        ]
+      }
+    },
+    {
+      "step": 66,
+      "name": "blender_animation__set_keyframe",
+      "arguments": {
+        "object_name": "Pendulum_Pivot",
+        "frame": 144,
+        "data_paths": [
+          "rotation_euler"
+        ],
+        "interpolation": "BEZIER"
+      }
+    },
+    {
+      "step": 67,
+      "name": "blender_camera__create_camera",
+      "arguments": {
+        "name": "Hero_Camera",
+        "location": [
+          5.5,
+          -9,
+          5.4
+        ],
+        "lens": 48,
+        "set_as_active": true
+      }
+    },
+    {
+      "step": 68,
+      "name": "blender_objects__rotate_object",
+      "arguments": {
+        "name": "Hero_Camera",
+        "rotation": [
+          70.76625003256794,
+          0,
+          31.429565614838516
+        ]
+      }
+    },
+    {
+      "step": 69,
+      "name": "blender_camera__set_camera_properties",
+      "arguments": {
+        "name": "Hero_Camera",
+        "lens": 48
+      }
+    },
+    {
+      "step": 70,
+      "name": "blender_camera__set_camera_keyframe",
+      "arguments": {
+        "name": "Hero_Camera",
+        "frame": 1,
+        "data_path": "lens",
+        "interpolation": "LINEAR"
+      }
+    },
+    {
+      "step": 71,
+      "name": "blender_camera__set_camera_properties",
+      "arguments": {
+        "name": "Hero_Camera",
+        "lens": 62
+      }
+    },
+    {
+      "step": 72,
+      "name": "blender_camera__set_camera_keyframe",
+      "arguments": {
+        "name": "Hero_Camera",
+        "frame": 144,
+        "data_path": "lens",
+        "interpolation": "LINEAR"
+      }
+    },
+    {
+      "step": 73,
+      "name": "blender_light_rig__create_three_point_light_rig",
+      "arguments": {
+        "name": "Studio",
+        "target_object": "Porcelain_Bob",
+        "key": {
+          "location": [
+            -3,
+            -4,
+            7
+          ],
+          "energy": 950,
+          "size": 4,
+          "color": [
+            1,
+            0.82,
+            0.61
+          ]
+        },
+        "fill": {
+          "location": [
+            5,
+            -2,
+            4
+          ],
+          "energy": 500,
+          "size": 3,
+          "color": [
+            0.53,
+            0.77,
+            1
+          ]
+        },
+        "rim": {
+          "location": [
+            1,
+            4,
+            5
+          ],
+          "energy": 1200,
+          "size": 3,
+          "color": [
+            1,
+            0.72,
+            0.37
+          ]
+        }
+      }
+    },
+    {
+      "step": 74,
+      "name": "blender_animation__set_current_frame",
+      "arguments": {
+        "frame": 1
+      }
+    },
+    {
+      "step": 75,
+      "name": "blender_render__set_render_denoise",
+      "arguments": {
+        "enabled": false
+      }
+    },
+    {
+      "step": 76,
+      "name": "blender_render__set_render_settings",
+      "arguments": {
+        "samples": 32,
+        "file_format": "PNG"
+      }
+    },
+    {
+      "step": 77,
+      "name": "blender_animation__set_current_frame",
+      "arguments": {
+        "frame": 1
+      }
+    },
+    {
+      "step": 78,
+      "name": "blender_scene__save_scene",
+      "arguments": {
+        "filepath": "${OUTPUT_DIR}/scene.blend"
+      }
+    }
+  ],
+  "optional_raw_sequence_render": {
+    "name": "blender_render__start_render_job",
+    "arguments": {
+      "output_pattern": "${OUTPUT_DIR}/frames/frame_####",
+      "start_frame": 1,
+      "end_frame": 144,
+      "step": 1,
+      "resume_missing": false,
+      "device": "CPU",
+      "factory_startup": true,
+      "output_format": "PNG"
+    },
+    "notes": [
+      "Create the frames directory first and replace ${OUTPUT_DIR}.",
+      "Rendering is optional and was not repeated as part of this native-file privacy verification.",
+      "Poll the returned job using the compatible host; job IDs and host-specific ports are intentionally not part of the recipe."
+    ]
+  }
+}

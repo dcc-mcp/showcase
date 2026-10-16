@@ -4,7 +4,7 @@
     {
       "slug": "brass-pendulum-denoise",
       "title": "Brass Pendulum · 黄铜摆锤",
-      "subtitle": "Blender · 原创低采样动画与时域降噪对照",
+      "subtitle": "Blender · 原生动画细化与引导式空间降噪",
       "software": [
         "Blender",
         "dcc-media-enhance",
@@ -20,207 +20,206 @@
       ],
       "cover": {
         "src": "docs/showcase/brass-pendulum-denoise/hero.jpg",
-        "alt": "深青色底座上的黄铜圆环和瓷质摆锤，来自实际 Blender 动画渲染"
+        "alt": "新候选中的黄铜圆环、瓷质摆锤与完整深青色底座，来自实际 960 × 720 原生渲染"
       },
-      "evidence_label": "原生 Blender 渲染 · 实际降噪流程",
-      "evidence_scope": "原创场景通过 typed DCC-MCP 创建，Cycles CPU 输出 144 帧低采样 PNG。后期使用 dcc-media-enhance 0.2.0 执行 FFmpeg atadenoise=s=5；公开原始与降噪视频、同步对照、脱敏原生工程及技术证据。",
-      "summary": "黄铜圆环围住逐渐收敛的瓷质摆锤，镜头由 48 mm 推至 62 mm。640 × 480、32 samples 的真实渲染经过时域降噪，保留原始对照与 24000/1001 fps、6.006 秒的时间基准。",
-      "goal": "以可编辑的原创动画检查相机光学关键帧、分数帧率及低采样序列的实际降噪交付，并清楚展示画质边界。",
+      "evidence_label": "原生 Cycles 渲染 · 真实引导通道 · 空间 OIDN",
+      "evidence_scope": "真实 DCC-MCP 编辑与保存重开；960 × 720、96 samples 的原生多层线性 EXR，经统一 dcc-media-enhance CLI 调用 Blender compositor OIDN，再通过明确 AgX 与 sRGB→BT.709 链生成展示视频。完整片与当前提交浏览器结果单独记录。",
+      "summary": "黄铜圆环和瓷质摆锤经过原生几何细化，42→44 mm 镜头保留完整底座。高分辨率候选使用真实 Albedo/Normal 引导逐帧空间降噪；成片为 144 帧、24000/1001 fps、6.006 秒，无音轨。旧低采样时域案例作为独立历史实验保留。",
+      "goal": "在保留可编辑原生场景的前提下提升几何、构图与成片清晰度，并分别核验引导式降噪、色彩转换、真实帧序和自然速度完整播放。",
       "prompt": {
         "kind": "reusable",
-        "text": "创建原创黄铜圆环、瓷质摆锤和深青色底座，以 typed DCC-MCP 设置衰减摆动及镜头焦距关键帧。保存原生 Blender 工程，重开核对，输出关闭原生降噪的低采样 PNG 序列。通过实际媒体流程执行 FFmpeg 时域降噪，保留原始帧、精确时间基准和处理前后对照；公开证据前清理私有路径。",
+        "text": "保留原创黄铜圆环、瓷质摆锤和深青色底座，通过真实 DCC-MCP 编辑细化原生几何、衰减摆动和 42→44 mm 镜头。保存并重开 Blender 场景，以关闭渲染内降噪的 Cycles 输出混合精度多层线性 EXR。用统一 CLI 与实际 Albedo/Normal 引导执行独立逐帧空间 OIDN，再明确执行 AgX 和 sRGB→BT.709 编码。保留原始帧与全链哈希，分别检查精确时间基准、连续帧和自然速度完整播放，公开前清理本地路径及元数据。",
         "note": "按实际制作过程整理的可复用说明，非用户逐字原话或私有任务提示词。"
       },
       "environment": [
         {
           "label": "Blender",
-          "value": "Blender 4.5.13 LTS · Cycles CPU · 32 samples"
+          "value": "Blender 4.5.13 LTS · Cycles CPU · 96 samples"
         },
         {
           "label": "dcc-media-enhance",
           "value": "0.2.0 · bd4aca72488ca6165816ebdf95c99df5800a192a"
         },
         {
-          "label": "FFmpeg",
-          "value": "FFmpeg 7.1.5 · atadenoise=s=5"
+          "label": "实际降噪后端",
+          "value": "独立 Blender compositor OIDN；内嵌 OIDN 版本未独立核验"
         },
         {
-          "label": "适配器源码",
-          "value": "dcc-mcp-blender 0.2.20 基线 + 相机光学/时间基准补丁；精确源码见链接"
+          "label": "EXR 精度",
+          "value": "Combined / Albedo HALF16；Normal / Depth FLOAT32"
+        },
+        {
+          "label": "FFmpeg",
+          "value": "FFmpeg 7.1.5 · 显式 sRGB→BT.709 · H.264/yuv420p · 限制范围"
         },
         {
           "label": "DCC-MCP Core",
           "value": "0.20.44"
         },
         {
-          "label": "输出与时间基准",
-          "value": "640 × 480 · 144 frames · 24000/1001 fps · 6.006 s"
+          "label": "适配器记录",
+          "value": "dcc-mcp-blender 0.2.20基线及397d2aaa相机/时间基准源码补丁；冻结快照，不宣称新正式版"
         },
         {
-          "label": "原生工程",
-          "value": "仅清理路径的公开副本；原件哈希另存于证据"
+          "label": "输出与时间基准",
+          "value": "960 × 720 · 144 frames · 24000/1001 fps · 6.006 s"
+        },
+        {
+          "label": "原生公开副本",
+          "value": "路径已清理并保存重开；仅声明已检查设置和144帧边界一致"
         }
       ],
       "tools": [
         {
-          "name": "blender_objects / blender_data_geometry / blender_materials",
-          "description": "通过强类型工具生成原生几何、曲线、材质和父子层级。"
+          "name": "Blender DCC-MCP",
+          "description": "真实宿主调用修改原生几何、相机和场景设置，保存并重新打开后检查。"
         },
         {
-          "name": "blender_camera__set_camera_keyframe / blender_animation__set_keyframe",
-          "description": "设置焦距和摆锤旋转关键帧，保存后在新宿主中读取确认。"
+          "name": "Cycles CPU",
+          "description": "96 samples、固定seed42、无自适应采样或动画随机种子、关闭渲染内降噪，输出真实多层EXR及引导通道。"
         },
         {
-          "name": "blender_render__start_render_job",
-          "description": "Cycles CPU 渲染完整 PNG 序列，原生降噪关闭。"
+          "name": "dcc-media-enhance 0.2.0 / Blender compositor OIDN",
+          "description": "统一原生CLI使用独立空白Blender进程，以真实Albedo/Normal引导逐帧空间降噪；没有时域算法或运动补偿。"
         },
         {
-          "name": "dcc-media-enhance 0.2.0 / FFmpeg atadenoise",
-          "description": "通过 dcc-media-enhance 原生 CLI 实际执行 atadenoise=s=5；该时域滤镜不使用运动补偿或神经网络。"
+          "name": "Blender AgX / FFmpeg zscale",
+          "description": "float32线性美术输出经AgX转16-bit PNG，再显式sRGB→BT.709编码；无补帧、变速或放大。"
         }
       ],
       "steps": [
         {
-          "title": "原生造型与运动",
-          "description": "26 个对象构成底座、圆环、刻度和摆锤；焦距从 48 mm 线性变化至 62 mm，摆动使用逐渐减小的关键帧幅度。"
+          "title": "细化几何并保留完整构图",
+          "description": "26个对象；圆环控制点96→384，圆环倒角分辨率3→6，摆杆倒角分辨率6。42→44 mm镜头的144帧投影边界检查记录最小4.73%边距。"
         },
         {
-          "title": "保留低采样原件",
-          "description": "输出 144 张 640 × 480 PNG，32 samples，关闭 Blender 原生降噪。原始帧保持不变，网站视频为展示编码。"
+          "title": "保留原生线性输入",
+          "description": "保存重开后渲染96samples混合精度多层EXR。原始文件不改写；内部路径与原始执行记录不直接公开。"
         },
         {
-          "title": "执行时域降噪",
-          "description": "以明确的 BT.709 限制范围 RGB→YUV444 8-bit 转换进入 FFV1，再实际执行 atadenoise=s=5。FFV1 编码无损不代表与原始 RGB 像素相同。"
+          "title": "真实引导式空间降噪",
+          "description": "制作宿主退出后，以独立进程调用已安装的Blender compositor OIDN。逐帧使用真实Albedo/Normal通道，输出float32线性RGBA EXR。"
         },
         {
-          "title": "对照与公开整理",
-          "description": "分别检查帧数、时间基准、解码和画面，提供对照；原生公开副本只清理路径，保留原始哈希和重开比较。"
+          "title": "明确色彩链与独立播放验收",
+          "description": "以AgX/Look None/exposure0/gamma1输出展示PNG，显式转换sRGB→BT.709。帧序由真实EXR头、全链hash、转换回执及MP4PTS建立；不使用降噪子场景写入的PNG Frame=001作为时序证据。"
         }
       ],
       "results": [
         {
-          "src": "docs/showcase/brass-pendulum-denoise/pendulum-denoised.mp4",
-          "alt": "黄铜摆锤：时域降噪后的完整动画",
-          "caption": "时域降噪版 · 640 × 480 · 24000/1001 fps · 6.006 秒 · 无音轨"
+          "src": "docs/showcase/brass-pendulum-denoise/pendulum-oidn.mp4",
+          "alt": "黄铜摆锤：新的引导式空间OIDN候选动画",
+          "caption": "新候选 · 960 × 720 · 96 samples · 逐帧空间 OIDN · 6.006秒 · 无音轨"
         },
         {
-          "src": "docs/showcase/brass-pendulum-denoise/pendulum-synchronized-comparison.mp4",
-          "alt": "黄铜摆锤：原始与降噪画面的同步并排视频",
-          "caption": "左侧原始，右侧降噪 · 同步 144 帧 · 轻微平滑，仍有残余噪点 · 新的匹配展示编码"
-        },
-        {
-          "src": "docs/showcase/brass-pendulum-denoise/comparison.jpg",
-          "alt": "同一帧的低采样原始画面与时域降噪画面并排对照",
-          "caption": "处理前后对照；保留残余噪点、原有分面和明暗结构，不承诺高采样质量。"
-        },
-        {
-          "src": "docs/showcase/brass-pendulum-denoise/pendulum-raw.mp4",
-          "alt": "黄铜摆锤：未经时域降噪的低采样对照视频",
-          "caption": "未经时域降噪的对照编码 · 相同尺寸、帧数与时间基准 · 无音轨"
+          "src": "docs/showcase/brass-pendulum-denoise/historical-atadenoise/pendulum-synchronized-comparison.mp4",
+          "alt": "历史实验：640 × 480、32 samples的旧raw与atadenoise同步对照",
+          "caption": "历史版本：旧几何与48→62 mm镜头；只比较当时同源raw/processed，不是新成片的raw control"
         }
       ],
       "checks": [
         {
-          "name": "原生运动与焦距重开",
+          "name": "原生公开副本保存重开",
           "result": "pass",
-          "observed": "第 1、73、144 帧的相机焦距与摆锤旋转在新 Blender 宿主中读回一致。"
+          "observed": "26对象，无外链和嵌入文本脚本；已核对指定渲染设置及全部144帧投影边界。未重新渲染证明像素一致。"
         },
         {
-          "name": "真实降噪执行",
+          "name": "完整144帧技术链",
           "result": "pass",
-          "observed": "实际流程成功执行 FFmpeg atadenoise=s=5；技术数据见公开验证文件。"
+          "observed": "完整144帧的原始EXR、空间OIDN输出、展示PNG和交付视频哈希链已核验；全片完整解码，PTS步进1001、时间基准1/24000、时长6.006秒，没有相邻完全重复帧。"
         },
         {
-          "name": "完整帧与时间轴诊断",
+          "name": "全片静态联系表审阅",
           "result": "pass",
-          "observed": "两份母版与两份交付视频均完整解码 144 帧；无相邻完全重复帧，交付视频保留精确时间戳；逐帧匹配为有限范围诊断。"
+          "observed": "全部144帧的6张联系表及原生尺寸第1、13、73、144帧已实际检查；未观察到阻断性静态缺陷，完整底座保留。金属环杆高光和少数球边像素仍有细小亮点或锯齿；不代表自然速度动态验收。"
+        },
+        {
+          "name": "真实自然速度画面验收",
+          "result": "not_run",
+          "observed": "早期Kdenlive短段末图与末时码不符，该次原生播放被拒绝。完整片实际画面与动态稳定需要另行检查。"
+        },
+        {
+          "name": "当前head浏览器完整播放",
+          "result": "not_run",
+          "observed": "新增英中desktop/touch门禁要求自然速度ended、真实解码呈现推进、运动区域同源像素匹配及最终显示截图；等待当前提交实际CI，不使用旧e2b1690结果。"
         },
         {
           "name": "高采样真值与定量画质评分",
           "result": "not_run",
-          "observed": "未输出高采样参考，未运行 PSNR/SSIM 真值比较或 CineRecon 质量评分。"
+          "observed": "没有更高采样真值、PSNR/SSIM或客观感知质量认证；像素匹配只证明展示与交付参考一致。"
         },
         {
-          "name": "连续运动与闪烁视觉认证",
-          "result": "not_run",
-          "observed": "抽样静帧和连续帧窗口审阅不等同于完整连续播放的视觉认证。"
-        },
-        {
-          "name": "浏览器 H.264 解码与交互",
+          "name": "用户当前成片验收",
           "result": "pass",
-          "observed": "GitHub CI 在提交 e2b1690 上验证三段视频的英中桌面及触控视口解码、显式播放、跳转状态、键盘控制和释放；未验证完整播放至结尾。详见 CI 验证记录。"
-        },
-        {
-          "name": "浏览器完整播放至结尾",
-          "result": "not_run",
-          "observed": "CI 覆盖解码与交互状态；尚未验证完整播放至结尾，也不替代自然速度画面审阅。"
-        },
-        {
-          "name": "用户最终视觉验收",
-          "result": "not_run",
-          "observed": "技术检查和独立画面审阅不代替用户最终验收。"
+          "observed": "用户已于2026-10-16通过语音批准当前6.006秒成片发布；该主观接受不等于客观画质认证，当前head网页完整播放门禁仍须通过。"
         }
       ],
       "limitations": [
-        "本案例为原创程序化动画，不是 CineRecon 视频重建结果、基准测试或模型质量分数。",
-        "时域滤镜不是 OIDN 或神经网络降噪；低采样残余噪点、几何分面和潜在运动软化需要结合对照查看。",
-        "网站 MP4 是 H.264/yuv420p 展示编码；原始 RGB PNG 与转换后的 FFV1 像素不相同。",
-        "公开原生文件经过路径清理，字节不同于原件；未宣称重新渲染逐像素一致。",
-        "模型与推理强度缺少经核验的任务配置证据，所有制作和审阅阶段均记为未知。",
-        "dcc-media-enhance 源码已独立公开并采用 MIT 许可；本案例原创资产仍保留权利，FFmpeg 等后端许可证和分发义务不变。"
+        "本案例为原创程序化动画，不是CineRecon重建、物理摆仿真、基准测试或模型质量评分。",
+        "OIDN在此逐帧独立运行，属于空间降噪；没有时域算法或运动补偿，单帧成功不证明动态稳定。",
+        "历史atadenoise实验的几何、镜头、尺寸与采样不同；旧raw视频不能作为新成片的同源控制。",
+        "MP4为有损展示编码。浏览器参考由该最终MP4独立解码取得，只核验交付显示一致性，不是原生EXR或高采样画质真值。",
+        "公开原生副本字节不同于制作原件；只声明已检查设置与投影边界一致，未证明重新渲染像素一致。",
+        "触控测试是Chromium视口模拟，不是实体设备验收；当前提交CI结果、连续运动审阅及用户最终艺术验收分别记录。",
+        "模型与推理强度没有可独立核验的已接受任务配置记录，各阶段继续Unknown。",
+        "dcc-media-enhance源码采用MIT许可；原创案例资产仍保留权利，上游Blender、OIDN和FFmpeg许可义务不变。"
       ],
       "resources": [
         {
-          "label": "案例说明",
+          "label": "双语案例说明",
           "url": "docs/showcase/brass-pendulum-denoise/README.md"
         },
         {
-          "label": "可编辑原生工程（路径已清理）",
+          "label": "新候选原生工程（路径已清理）",
           "url": "docs/showcase/brass-pendulum-denoise/scene-public.blend"
         },
         {
-          "label": "可复用强类型场景配方",
+          "label": "本次原生编辑配方",
           "url": "docs/showcase/brass-pendulum-denoise/scene-recipe.json"
         },
         {
-          "label": "原生检查与公开整理证据",
+          "label": "本次原生检查与清理范围",
           "url": "docs/showcase/brass-pendulum-denoise/native-inspection.json"
         },
         {
-          "label": "技术验证",
+          "label": "本次技术验证",
           "url": "docs/showcase/brass-pendulum-denoise/validation.json"
         },
         {
-          "label": "处理测量",
+          "label": "真实空间降噪与色彩链证据",
           "url": "docs/showcase/brass-pendulum-denoise/processing-validation.json"
         },
         {
-          "label": "独立画面审阅",
+          "label": "本次画面审阅与未验收项",
           "url": "docs/showcase/brass-pendulum-denoise/visual-review.json"
         },
         {
-          "label": "同步对照验证",
-          "url": "docs/showcase/brass-pendulum-denoise/comparison-validation.json"
+          "label": "帧序与精确时间基准",
+          "url": "docs/showcase/brass-pendulum-denoise/temporal-integrity-summary.json"
         },
         {
-          "label": "帧完整性与时间轴诊断",
-          "url": "docs/showcase/brass-pendulum-denoise/temporal-integrity-summary.json"
+          "label": "实际软件版本与能力边界",
+          "url": "docs/showcase/brass-pendulum-denoise/software-capability-coverage.json"
+        },
+        {
+          "label": "浏览器同源参考契约",
+          "url": "docs/showcase/brass-pendulum-denoise/playback-reference.json"
         },
         {
           "label": "文件清单与哈希",
           "url": "docs/showcase/brass-pendulum-denoise/manifest.json"
         },
         {
+          "label": "完整历史atadenoise案例与旧CI证据",
+          "url": "docs/showcase/brass-pendulum-denoise/historical-atadenoise/README.md"
+        },
+        {
           "label": "权利与使用边界",
           "url": "docs/showcase/brass-pendulum-denoise/LICENSES.md"
         },
         {
-          "label": "CI 浏览器与本地验证边界",
-          "url": "docs/showcase/brass-pendulum-denoise/ci-verification.json"
-        },
-        {
-          "label": "开源降噪工具源码（MIT）",
-          "url": "https://github.com/dcc-mcp/dcc-media-enhance"
+          "label": "实际统一CLI源码（MIT）",
+          "url": "https://github.com/dcc-mcp/dcc-media-enhance/tree/bd4aca72488ca6165816ebdf95c99df5800a192a"
         }
       ],
       "credits": {
@@ -229,11 +228,11 @@
         "note": "无外部图像纹理、生成式位图或配乐；所有画面源于原生 Blender 场景。"
       },
       "source": {
-        "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/397d2aaa8049857bb33aedd6efdc9ef4234deb62",
-        "commit": "397d2aaa8049857bb33aedd6efdc9ef4234deb62",
-        "title": "原始制作所用相机光学/时间基准补丁源码；不宣称正式版已支持"
+        "url": "https://github.com/dcc-mcp/dcc-media-enhance/tree/bd4aca72488ca6165816ebdf95c99df5800a192a",
+        "commit": "bd4aca72488ca6165816ebdf95c99df5800a192a",
+        "title": "实际使用的统一降噪CLI源码；后端版本与运行证据另行记录"
       },
-      "verified_at": "2026-10-15",
+      "verified_at": "2026-10-16",
       "model_attribution": [
         {
           "stage_id": "planning",
@@ -309,6 +308,11 @@
           "version": "v2",
           "date": "2026-10-15",
           "change": "补充同步降噪前后视频、dcc-media-enhance 工具归属和时间轴诊断，保留浏览器播放及连续运动验收边界。"
+        },
+        {
+          "version": "v3",
+          "date": "2026-10-16",
+          "change": "加入完整960 × 720引导式空间OIDN候选与真实144帧技术证据；静态联系表已审阅，历史atadenoise独立保留。新增完整真实画面播放门禁，当前head浏览器验收仍未完成；用户已通过语音批准当前成片发布。"
         }
       ]
     },
