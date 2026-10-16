@@ -4,11 +4,13 @@ import argparse,hashlib,json,os,re,shutil,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 EDITOR_SHA='f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3'
+def require_sha256(path,expected,label):
+ if hashlib.sha256(Path(path).read_bytes()).hexdigest()!=expected:raise ValueError(label+' SHA-256 mismatch')
 def main():
  p=argparse.ArgumentParser();p.add_argument('--native',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--godot',default='godot');p.add_argument('--template',type=Path,required=True);a=p.parse_args()
  editor=Path(shutil.which(a.godot) or a.godot)
- assert hashlib.sha256(editor.read_bytes()).hexdigest()==EDITOR_SHA
- assert hashlib.sha256(a.template.read_bytes()).hexdigest()=='1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9'
+ require_sha256(editor,EDITOR_SHA,'Godot editor')
+ require_sha256(a.template,'1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9','Godot Web template')
  project=a.native.resolve();output=a.output.resolve();output.mkdir(parents=True,exist_ok=True)
  export=output/'play/signal-garden';export.mkdir(parents=True,exist_ok=True)
  preset=project/'export_presets.cfg';original_preset=preset.read_text();s=original_preset;s+='\ncustom_template/release="'+str(a.template.resolve())+'"\n';preset.write_text(s)

@@ -1,7 +1,7 @@
 name: Original minigames acceptance
 on:
   pull_request:
-    paths: ['scripts/godot_web/minigames/**', 'play/minigame-shell.*', '.github/workflows/minigames-preview.yml']
+    paths: ['scripts/godot_web/minigames/**', 'scripts/test_minigame_shell.js', 'play/minigame-shell.*', '.github/workflows/minigames-preview.yml']
   workflow_dispatch:
 concurrency:
   group: minigames-${{ github.event.pull_request.number || github.ref }}
@@ -30,7 +30,9 @@ jobs:
           ffprobe -version
           test -r /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
       - name: Test media duration metadata and streaming fallback
-        run: python -m unittest discover -s scripts/godot_web/minigames -p 'test_*.py'
+        run: |
+          python -m unittest discover -s scripts/godot_web/minigames -p 'test_*.py'
+          node scripts/test_minigame_shell.js
       - name: Install pinned official host, adapter and browser test tools
         shell: bash
         run: |
