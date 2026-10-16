@@ -162,7 +162,18 @@
       middleKeyframe: {frame: 73, status: "not_observed"}};
     const pictures = {};
     let lastPixels, playStarted, callback;
-    const fail = error => { receipt.errors.push(String(error?.message || error)); receipt.done = true; };
+    const snapshot = (stage, metadata) => ({stage, readyState: video.readyState, networkState: video.networkState,
+      width: video.videoWidth, height: video.videoHeight, currentTime: video.currentTime,
+      paused: video.paused, ended: video.ended, seeking: video.seeking,
+      sourceName: (video.currentSrc || "").split(/[?#]/)[0].split("/").pop(),
+      mediaErrorCode: video.error?.code || null,
+      ...(metadata ? {callback: {mediaTime: metadata.mediaTime, presentedFrames: metadata.presentedFrames,
+        width: metadata.width, height: metadata.height, expectedDisplayTime: metadata.expectedDisplayTime}} : {})});
+    receipt.observations = {installed: snapshot("installed")};
+    const fail = (error, stage, metadata) => {
+      receipt.observations.failure = snapshot(stage, metadata);
+      receipt.errors.push(String(error?.message || error)); receipt.done = true;
+    };
     const pixels = () => {
       if (video.readyState < 2 || video.videoWidth !== 960 || video.videoHeight !== 720) {
         throw new Error("Video has no correctly sized decoded picture");
@@ -179,16 +190,24 @@
     video.addEventListener("play", () => { receipt.playEvents++; playStarted ??= performance.now(); });
     video.addEventListener("seeking", () => receipt.seeks++);
     video.addEventListener("ratechange", () => receipt.rates.push(video.playbackRate));
-    video.addEventListener("error", () => fail("Media decode/network error " + video.error?.code));
+    video.addEventListener("error", () => fail("Media decode/network error " + video.error?.code, "media-error"));
     video.addEventListener("loadeddata", () => {
+      if (receipt.done) return;
+      receipt.observations.loadeddata = snapshot("loadeddata");
       try {
         if (video.currentTime > 1001 / 24000 / 2) throw new Error("Initial actual frame was not observed");
         receipt.start = compareKeyframe(pixels(), 1, keyframes, mask);
+        if (!receipt.start.passed) throw new Error("Initial decoded picture mismatch");
         fullPicture("first-decoded");
-      } catch (error) { fail(error); }
+        // Arm only after this actual first picture is available and verified.
+        // Compositor callbacks are not a loadeddata/readyState barrier. The
+        // unchanged coverage gate still requires the first presented frame <=2.
+        callback = video.requestVideoFrameCallback(observe);
+      } catch (error) { fail(error, "loadeddata"); }
     }, {once: true});
     const observe = (_now, metadata) => {
       if (receipt.done) return;
+      receipt.observations.firstCallback ??= snapshot("rVFC", metadata);
       try {
         const index = Math.round(metadata.mediaTime * 24000 / 1001);
         if (index < 0 || index >= 144) throw new Error("Presented frame timestamp out of range");
@@ -207,10 +226,11 @@
         }
         receipt.rates.push(video.playbackRate);
         callback = video.requestVideoFrameCallback(observe);
-      } catch (error) { fail(error); }
+      } catch (error) { fail(error, "rVFC", metadata); }
     };
-    callback = video.requestVideoFrameCallback(observe);
     video.addEventListener("ended", () => {
+      if (receipt.done) return;
+      receipt.observations.ended = snapshot("ended");
       try {
         receipt.ended++;
         receipt.elapsedMs = performance.now() - playStarted;
@@ -222,8 +242,8 @@
         receipt.quality = {totalVideoFrames: quality.totalVideoFrames, droppedVideoFrames: quality.droppedVideoFrames,
           corruptedVideoFrames: quality.corruptedVideoFrames};
         receipt.done = true;
-        video.cancelVideoFrameCallback(callback);
-      } catch (error) { fail(error); }
+        if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+      } catch (error) { fail(error, "ended"); }
     }, {once: true});
     window.__pendulumPlayback = {receipt, pictures,
       async compareDisplayedEnd(dataUrl) {

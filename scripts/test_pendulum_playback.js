@@ -3,6 +3,8 @@
 // counted as browser playback or evidence for the delivered artwork.
 const assert = require("node:assert/strict");
 const {test} = require("node:test");
+const {readFileSync} = require("node:fs");
+const vm = require("node:vm");
 const {motionMask, compare, compareKeyframe, validateKeyframeRecords, validate, install} = require("./pendulum_playback.js");
 
 function frames() {
@@ -20,6 +22,49 @@ function frames() {
 const references = frames();
 const mask = motionMask(references, 160, 120);
 
+// Exercise the actual observer installation/event handlers with synthetic
+// images and a fake media element, never claiming a real browser decode.
+async function observerFixture() {
+  const listeners = new Map(), callbacks = [];
+  const video = {readyState: 0, networkState: 2, videoWidth: 0, videoHeight: 0,
+    currentTime: 0, currentSrc: "https://private.invalid/path/pendulum-oidn.mp4?private=hidden",
+    paused: true, ended: false, seeking: false, playbackRate: 1, fixtureFrame: 0,
+    addEventListener(name, fn, options) { listeners.set(name, {fn, once: options?.once}); },
+    requestVideoFrameCallback(fn) { callbacks.push(fn); return callbacks.length; },
+    cancelVideoFrameCallback() {},
+    getVideoPlaybackQuality() { return {totalVideoFrames: 144, droppedVideoFrames: 0, corruptedVideoFrames: 0}; }};
+  const sandbox = {module: {exports: {}}, window: {}, performance: {now: () => 0},
+    Image: class {
+      set src(url) { this.url = url; this.naturalWidth = url === "atlas" ? 1280 : 960;
+        this.naturalHeight = url === "atlas" ? 2160 : 720; }
+      async decode() {}
+    },
+    document: {createElement() {
+      let drawn;
+      return {getContext: () => ({
+        drawImage(image, ...args) {
+          const index = image === video ? video.fixtureFrame : image.url === "atlas" ?
+            args[1] / 120 * 8 + args[0] / 160 : Number(image.url) - 1;
+          drawn = references[index];
+        },
+        getImageData: () => ({data: drawn}),
+      }), toDataURL: () => "data:image/png;base64,c3ludGhldGlj"};
+    }},
+  };
+  vm.runInNewContext(readFileSync(require.resolve("./pendulum_playback.js"), "utf8"), sandbox);
+  await sandbox.module.exports.install(video, {atlas: {url: "atlas"},
+    keyframes: [1, 73, 144].map(frame => ({frame, url: String(frame)})), reference_basis: "synthetic test only"});
+  return {video, callbacks, receipt: sandbox.window.__pendulumPlayback.receipt,
+    pictures: sandbox.window.__pendulumPlayback.pictures,
+    emit(name) { const item = listeners.get(name); if (!item) return;
+      if (item.once) listeners.delete(name); item.fn(); },
+    ready() { Object.assign(video, {readyState: 2, videoWidth: 960, videoHeight: 720}); },
+    present(frame) { video.fixtureFrame = frame - 1; video.currentTime = (frame - 1) * 1001 / 24000;
+      callbacks.at(-1)(0, {mediaTime: video.currentTime, presentedFrames: frame,
+        width: 960, height: 720, expectedDisplayTime: 0}); },
+  };
+}
+
 function receipt() {
   return {done: true, ended: 1, playEvents: 1, seeks: 0, rates: [1, 1], errors: [],
     width: 960, height: 720, duration: 6.006, elapsedMs: 6100, visibleChanges: 100,
@@ -28,6 +73,62 @@ function receipt() {
       passed: true, presentedFrames: index + 1, mediaTime: index * 1001 / 24000})),
     quality: {totalVideoFrames: 144, droppedVideoFrames: 0, corruptedVideoFrames: 0}};
 }
+
+test("observer arms only after loadeddata verifies and captures the actual first picture", async () => {
+  const fixture = await observerFixture();
+  assert.equal(fixture.callbacks.length, 0);
+  fixture.emit("play");
+  assert.equal(fixture.callbacks.length, 0);
+  fixture.ready(); fixture.emit("loadeddata");
+  assert.equal(fixture.receipt.start.passed, true);
+  assert(fixture.pictures["first-decoded"]);
+  assert.equal(fixture.callbacks.length, 1);
+  fixture.present(2); // A legitimately already-presented first frame is still checked above.
+  assert.equal(fixture.receipt.samples[0].frame, 2);
+  assert.equal(fixture.receipt.samples[0].passed, true);
+  assert.equal(fixture.callbacks.length, 2);
+  assert.equal(fixture.receipt.observations.firstCallback.readyState, 2);
+  assert.equal(fixture.receipt.observations.loadeddata.sourceName, "pendulum-oidn.mp4");
+  assert(!JSON.stringify(fixture.receipt.observations).includes("private"));
+});
+
+test("unready wrong-sized late or mismatched initial picture fails without arming", async () => {
+  for (const change of [f => { f.video.readyState = 1; }, f => { f.video.videoWidth = 640; },
+                       f => { f.video.currentTime = 0.1; }, f => { f.video.fixtureFrame = 143; }]) {
+    const fixture = await observerFixture();
+    fixture.ready(); change(fixture); fixture.emit("loadeddata");
+    assert.equal(fixture.callbacks.length, 0);
+    assert.equal(fixture.receipt.done, true);
+    assert(fixture.receipt.errors.length);
+    assert.equal(fixture.receipt.observations.failure.stage, "loadeddata");
+    assert.equal(validate(fixture.receipt).passed, false);
+  }
+});
+
+test("a later unready callback still fails with exact stage and media metadata", async () => {
+  const fixture = await observerFixture();
+  fixture.ready(); fixture.emit("loadeddata");
+  fixture.video.readyState = 1;
+  fixture.present(2);
+  assert.equal(fixture.callbacks.length, 1); // No silent retry or ignored bad callback.
+  assert.equal(fixture.receipt.done, true);
+  const failure = fixture.receipt.observations.failure;
+  assert.equal(failure.stage, "rVFC");
+  assert.equal(failure.readyState, 1);
+  assert.equal(failure.width, 960);
+  assert.equal(failure.callback.presentedFrames, 2);
+  assert.equal(failure.callback.mediaTime, 1001 / 24000);
+  assert.equal(validate(fixture.receipt).passed, false);
+});
+
+test("missing loadeddata or late callback coverage cannot pass", async () => {
+  const fixture = await observerFixture();
+  fixture.emit("play");
+  assert.equal(fixture.callbacks.length, 0);
+  assert.equal(validate(fixture.receipt).passed, false);
+  const tooLate = receipt(); tooLate.samples = tooLate.samples.slice(2);
+  assert.equal(validate(tooLate).passed, false);
+});
 
 test("same-source picture tolerates bounded codec/JPEG pixel differences", () => {
   const pixels = references[72].map((value, index) => index % 4 === 3 ? value : Math.min(255, value + 3));
