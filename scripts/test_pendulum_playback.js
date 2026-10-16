@@ -25,7 +25,8 @@ const mask = motionMask(references, 160, 120);
 // Exercise the actual observer installation/event handlers with synthetic
 // images and a fake media element, never claiming a real browser decode.
 async function observerFixture() {
-  const listeners = new Map(), callbacks = [];
+  const listeners = new Map(), callbacks = [], captures = [], encodes = [];
+  let encodingError = false;
   const video = {readyState: 0, networkState: 2, videoWidth: 0, videoHeight: 0,
     currentTime: 0, currentSrc: "https://private.invalid/path/pendulum-oidn.mp4?private=hidden",
     paused: true, ended: false, seeking: false, playbackRate: 1, fixtureFrame: 0,
@@ -40,22 +41,29 @@ async function observerFixture() {
       async decode() {}
     },
     document: {createElement() {
-      let drawn;
+      let drawn, drawnIndex;
       return {getContext: () => ({
         drawImage(image, ...args) {
           const index = image === video ? video.fixtureFrame : image.url === "atlas" ?
             args[1] / 120 * 8 + args[0] / 160 : Number(image.url) - 1;
           drawn = references[index];
+          drawnIndex = index;
+          if (image === video && args.length === 2) captures.push(index + 1);
         },
         getImageData: () => ({data: drawn}),
-      }), toDataURL: () => "data:image/png;base64,c3ludGhldGlj"};
+      }), toDataURL: () => {
+        if (encodingError) throw new Error("Synthetic PNG encoding failure");
+        encodes.push(drawnIndex + 1);
+        return "data:image/png;base64," + String(drawnIndex + 1);
+      }};
     }},
   };
   vm.runInNewContext(readFileSync(require.resolve("./pendulum_playback.js"), "utf8"), sandbox);
   await sandbox.module.exports.install(video, {atlas: {url: "atlas"},
     keyframes: [1, 73, 144].map(frame => ({frame, url: String(frame)})), reference_basis: "synthetic test only"});
-  return {video, callbacks, receipt: sandbox.window.__pendulumPlayback.receipt,
+  return {video, callbacks, captures, encodes, receipt: sandbox.window.__pendulumPlayback.receipt,
     pictures: sandbox.window.__pendulumPlayback.pictures,
+    failEncoding() { encodingError = true; },
     emit(name) { const item = listeners.get(name); if (!item) return;
       if (item.once) listeners.delete(name); item.fn(); },
     ready() { Object.assign(video, {readyState: 2, videoWidth: 960, videoHeight: 720}); },
@@ -74,14 +82,16 @@ function receipt() {
     quality: {totalVideoFrames: 144, droppedVideoFrames: 0, corruptedVideoFrames: 0}};
 }
 
-test("observer arms only after loadeddata verifies and captures the actual first picture", async () => {
+test("observer verifies and captures the first picture without blocking on PNG encoding", async () => {
   const fixture = await observerFixture();
   assert.equal(fixture.callbacks.length, 0);
   fixture.emit("play");
   assert.equal(fixture.callbacks.length, 0);
   fixture.ready(); fixture.emit("loadeddata");
   assert.equal(fixture.receipt.start.passed, true);
-  assert(fixture.pictures["first-decoded"]);
+  assert.deepEqual(fixture.captures, [1]);
+  assert.equal(fixture.pictures["first-decoded"], undefined);
+  assert.deepEqual(fixture.encodes, []);
   assert.equal(fixture.callbacks.length, 1);
   fixture.present(2); // A legitimately already-presented first frame is still checked above.
   assert.equal(fixture.receipt.samples[0].frame, 2);
@@ -90,6 +100,32 @@ test("observer arms only after loadeddata verifies and captures the actual first
   assert.equal(fixture.receipt.observations.firstCallback.readyState, 2);
   assert.equal(fixture.receipt.observations.loadeddata.sourceName, "pendulum-oidn.mp4");
   assert(!JSON.stringify(fixture.receipt.observations).includes("private"));
+});
+
+test("PNG encoding waits for ended and preserves the captured first middle and final pixels", async () => {
+  const fixture = await observerFixture();
+  fixture.ready(); fixture.emit("loadeddata");
+  fixture.present(2); fixture.present(73); fixture.present(144);
+  assert.deepEqual(fixture.captures, [1, 73]);
+  assert.deepEqual(fixture.encodes, []);
+  assert.equal(Object.keys(fixture.pictures).length, 0);
+  fixture.emit("ended");
+  assert.deepEqual(fixture.captures, [1, 73, 144]);
+  assert.deepEqual(fixture.encodes, [1, 73, 144]);
+  for (const [name, frame] of [["first-decoded", 1], ["middle-decoded", 73], ["last-decoded", 144]]) {
+    assert.equal(fixture.pictures[name], "data:image/png;base64," + frame);
+  }
+  assert.equal(fixture.receipt.done, true);
+});
+
+test("deferred PNG encoding failures still reject the playback receipt", async () => {
+  const fixture = await observerFixture();
+  fixture.ready(); fixture.emit("loadeddata"); fixture.present(144);
+  fixture.failEncoding(); fixture.emit("ended");
+  assert.equal(fixture.receipt.done, true);
+  assert(fixture.receipt.errors.includes("Synthetic PNG encoding failure"));
+  assert.equal(fixture.receipt.observations.failure.stage, "ended");
+  assert.equal(validate(fixture.receipt).passed, false);
 });
 
 test("unready wrong-sized late or mismatched initial picture fails without arming", async () => {
