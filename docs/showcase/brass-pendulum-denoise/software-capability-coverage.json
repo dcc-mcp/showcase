@@ -80,18 +80,24 @@
     },
     {
       "name": "Chromium",
-      "version": "To be recorded by actual CI runtime",
-      "actual_use": [],
+      "version": "153.0.8010.12",
+      "actual_use": [
+        "Actual English/Chinese desktop and touch-viewport pages: explicit normal-speed playback through ended",
+        "144 decoded frames, zero dropped/corrupt frames or seeks; 143 presented callbacks and 142 visible changes in each context",
+        "Independent delivery-reference motion-region checks at160x120; first/middle/final decoded pictures",
+        "Desktop inline final displayed picture; touch native fullscreen final displayed picture entered/exited with real controls, then Stop without refetch"
+      ],
       "limits": [
-        "Newfilm browser natural-speed full playback and visible-frame consistency not run yet"
-      ]
+        "Touch is viewport emulation, not a physical device",
+        "Normal touch-inline controls partly obscure the ended image; that inline pixel mismatch is retained",
+        "No source-render fidelity, temporal-denoising or objective quality certification",
+        "Recorded results bind only the named immutable commit"
+      ],
+      "tested_head": "508004143e41e404b38b149a8baf05fd18ef7ece",
+      "evidence": "ci-verification.json"
     }
   ],
-  "pending_gates": [
-    "Actual full-film natural-speed playback and visible final-frame consistency",
-    "Newhead English/Chinese desktop/touch browser CI",
-    "Physical-device testing"
-  ],
+  "pending_gates": [],
   "not_claimed": [
     "AI-generated execution imagery",
     "OIDN as temporal denoising",
@@ -105,6 +111,13 @@
     "channel": "voice",
     "confirmed_date": "2026-10-16",
     "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
-    "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
-  }
+    "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
+  },
+  "not_exercised": [
+    "Physical devices",
+    "Safari/Firefox",
+    "Full-film native-player acceptance",
+    "High-sample ground-truth quality scoring",
+    "Production hosting"
+  ]
 }

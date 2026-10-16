@@ -13,18 +13,18 @@
   "files": [
     {
       "path": "LICENSES.md",
-      "bytes": 947,
-      "sha256": "6757561a58a7a25a5f48d8ab5b90ab2256a3079cb732747a08eb4405ea13bc58"
+      "bytes": 950,
+      "sha256": "05142684000859f8389bc0c9ffe893b2cbcbf173f0b45ff1a5a10098336edfbc"
     },
     {
       "path": "README.md",
-      "bytes": 15739,
-      "sha256": "8318724dd30bd20e8c99a07d02465ebd3c5b12cdce5a5e744580375aa57d6375"
+      "bytes": 17309,
+      "sha256": "bba31b46932f0bb6da08192dbc334dfc7a4a614e6c707f25725efefa093cd83b"
     },
     {
       "path": "ci-verification.json",
-      "bytes": 412,
-      "sha256": "dd6ca5d75ac58a73ff6bcb04a31c49437e58db5eeed2e82911be2d497093df7f"
+      "bytes": 16075,
+      "sha256": "c6c04658d040cd76b818f4d19e09d637fdbafd51e61ec525951df1e46c87f8a2"
     },
     {
       "path": "hero.jpg",
@@ -227,8 +227,8 @@
     },
     {
       "path": "software-capability-coverage.json",
-      "bytes": 4040,
-      "sha256": "bbd5e06a0802c75a02ece61a6891f4f17f2f0b0e57a909e95175a5178d0344bd"
+      "bytes": 4916,
+      "sha256": "80017db7f35bffa4abc2b7bc93d4c5d83398271e2aa2b46f28d3f7c47555d8b1"
     },
     {
       "path": "temporal-integrity-summary.json",
@@ -237,13 +237,13 @@
     },
     {
       "path": "validation.json",
-      "bytes": 4110,
-      "sha256": "20f79233fc4c682acafbb65d20cac626517642ab2a0aee86894798887d8fb2d4"
+      "bytes": 5505,
+      "sha256": "dcb030e22de47fb88d3358da520a3ba7ff34595c14e22dd48c0548e727367e0d"
     },
     {
       "path": "visual-review.json",
-      "bytes": 4038,
-      "sha256": "c93d89c28dbec8abee82ceaac25a8466f23909dab18934cf72b4c21e972b9e0c"
+      "bytes": 5146,
+      "sha256": "5a62401085c6a0807482de71d7719a25e94c5fcebe39feaa8c0652731bd746f9"
     }
   ]
 }
