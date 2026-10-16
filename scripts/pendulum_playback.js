@@ -160,7 +160,7 @@
       sequenceReference: "All 144 same-encoding JPEG atlas tiles; no PNG substitutions",
       keyframeReference: "Separate unprofiled PNG set with absolute and same-set nearest limits; frame73 checked when naturally observed",
       middleKeyframe: {frame: 73, status: "not_observed"}};
-    const pictures = {};
+    const pictures = {}, capturedPictures = {};
     let lastPixels, playStarted, callback;
     const snapshot = (stage, metadata) => ({stage, readyState: video.readyState, networkState: video.networkState,
       width: video.videoWidth, height: video.videoHeight, currentTime: video.currentTime,
@@ -185,7 +185,9 @@
       const full = document.createElement("canvas");
       full.width = video.videoWidth; full.height = video.videoHeight;
       full.getContext("2d").drawImage(video, 0, 0);
-      pictures[name] = full.toDataURL("image/png");
+      // Preserve the actual pixels now, but do not synchronously PNG-encode
+      // during playback: encoding can block the first presentation callback.
+      capturedPictures[name] = full;
     };
     video.addEventListener("play", () => { receipt.playEvents++; playStarted ??= performance.now(); });
     video.addEventListener("seeking", () => receipt.seeks++);
@@ -241,6 +243,11 @@
         const quality = video.getVideoPlaybackQuality();
         receipt.quality = {totalVideoFrames: quality.totalVideoFrames, droppedVideoFrames: quality.droppedVideoFrames,
           corruptedVideoFrames: quality.corruptedVideoFrames};
+        // Serialize only the previously captured canvases after natural ended.
+        // No video read, seek, replay or substitute image is used for this step.
+        for (const [name, captured] of Object.entries(capturedPictures)) {
+          pictures[name] = captured.toDataURL("image/png");
+        }
         receipt.done = true;
         if (callback !== undefined) video.cancelVideoFrameCallback(callback);
       } catch (error) { fail(error, "ended"); }
