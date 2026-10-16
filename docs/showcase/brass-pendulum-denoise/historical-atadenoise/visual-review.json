@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "decision": "Accept for a modest technical-workflow showcase, with the limits below.",
+  "reviewed_media": {
+    "source": "32-sample render, explicitly converted to limited-range BT.709 YUV444 8-bit",
+    "processed": "FFmpeg atadenoise=s=5, lossless FFV1 intermediate",
+    "width": 640,
+    "height": 480,
+    "frame_count": 144,
+    "frame_rate": "24000/1001",
+    "matched_range_and_matrix": true
+  },
+  "inspection": {
+    "basis": "Actual decoded lossless source/output frames, synchronized before/after at native pixel scale. No retouching.",
+    "paired_full_frames": [
+      1,
+      13,
+      25,
+      37,
+      49,
+      61,
+      73,
+      97,
+      121,
+      144
+    ],
+    "consecutive_native_crop_windows": [
+      [
+        1,
+        3
+      ],
+      [
+        11,
+        15
+      ],
+      [
+        23,
+        27
+      ],
+      [
+        35,
+        39
+      ],
+      [
+        47,
+        51
+      ],
+      [
+        59,
+        63
+      ],
+      [
+        71,
+        75
+      ],
+      [
+        83,
+        87
+      ],
+      [
+        95,
+        99
+      ],
+      [
+        107,
+        111
+      ],
+      [
+        119,
+        123
+      ],
+      [
+        131,
+        135
+      ],
+      [
+        142,
+        144
+      ]
+    ],
+    "coverage": [
+      "Start and end",
+      "Fast swing passages near center crossings",
+      "Swing reversals",
+      "Thin rod",
+      "Arch and metallic highlights",
+      "Bob silhouette and faceting",
+      "Bob/arch overlap and revealed background",
+      "Teal base and moving shadows"
+    ],
+    "continuous_browser_playback": {
+      "status": "not_run",
+      "note": "Continuous motion and natural-speed flicker are not visually certified in this independent review."
+    }
+  },
+  "observations": [
+    "The processed frames show modestly smoother grain in the background, ground and shadow areas. The result remains visibly noisy, especially on the teal top surface and near the bob silhouette.",
+    "The thin pendulum rod, arch outline, bright metallic highlight line and small base details remain visible in the inspected pairs. The bob retains the faceted appearance already present in the source.",
+    "No obvious doubled rod or bob, displaced multi-frame trail, gross silhouette break or large color shift was observed in the inspected frames and consecutive windows.",
+    "Start and end windows do not show an obvious blank frame or abrupt denoise-state jump in the sampled images."
+  ],
+  "limits": [
+    "This is a small 640 by 480, six-second example with one scene and one fixed filter setting.",
+    "Consecutive-frame still inspection cannot establish natural-speed flicker, subtle temporal artifacts or all possible ghosting.",
+    "There is no high-sample reference. No fidelity, accuracy or perceptual-quality score is claimed.",
+    "The review does not establish a dramatic quality improvement, artifact-free output or suitability for other content.",
+    "The published H.264 videos and JPEG images are delivery derivatives; the pixel review used PNG frames decoded from the lossless intermediates."
+  ],
+  "presentation_assets": {
+    "comparison.jpg": {
+      "frame": 73,
+      "description": "Before and after at native 640 by 480 per panel, with labels. No retouching; JPEG delivery derivative."
+    },
+    "hero.jpg": {
+      "frame": 73,
+      "description": "Processed frame at native 640 by 480. No retouching; JPEG delivery derivative."
+    }
+  }
+}
