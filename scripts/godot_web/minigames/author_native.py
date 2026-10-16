@@ -119,11 +119,12 @@ def main():
   call('godot_scene_management__stop_scene',{})
   dest=out/'native/signal-garden';dest.mkdir(parents=True)
   for name in ['game.gd','main.tscn','garden-font.otf']:shutil.copyfile(project/name,dest/name)
+  shutil.copyfile(recipe/'FONT-LICENSE.txt',dest/'FONT-LICENSE.txt')
   cfg=(project/'project.godot').read_text()
   for section in ['autoload','editor_plugins']:cfg=re.sub(r'\n\['+section+r'\].*?(?=\n\[|\Z)','',cfg,flags=re.S)
   (dest/'project.godot').write_text(cfg)
   shutil.copyfile(recipe.parent/'projects/prism-tide/export_presets.cfg',dest/'export_presets.cfg')
-  report={'date':'2026-10-13','route':'direct MCP HTTP to task-owned Godot adapter; typed tools','editor_mode':'headless' if args.headless else 'real window under CI Xvfb','godot':subprocess.check_output([args.godot,'--version'],text=True).strip(),'adapter':importlib.metadata.version('dcc-mcp-godot'),'core':importlib.metadata.version('dcc-mcp-core'),'editor_restarted':True,'native_files':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in dest.iterdir()},'tool_calls':[{'name':r['params']['name'],'arguments':{k:hashlib.sha256(v.encode()).hexdigest() if k=='source' else v for k,v in r['params']['arguments'].items()},'returned_without_error':True} for r in receipts if r['method']=='tools/call']}
+  report={'date':time.strftime('%Y-%m-%d',time.gmtime()),'route':'direct MCP HTTP to task-owned Godot adapter; typed tools','editor_mode':'headless' if args.headless else 'real window under CI Xvfb','godot':subprocess.check_output([args.godot,'--version'],text=True).strip(),'adapter':importlib.metadata.version('dcc-mcp-godot'),'core':importlib.metadata.version('dcc-mcp-core'),'editor_restarted':True,'native_files':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in dest.iterdir()},'tool_calls':[{'name':r['params']['name'],'arguments':{k:hashlib.sha256(v.encode()).hexdigest() if k=='source' else v for k,v in r['params']['arguments'].items()},'returned_without_error':True} for r in receipts if r['method']=='tools/call']}
   (out/'authoring.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))
  finally:
   if editor is not None and editor.poll() is None:editor.terminate();editor.wait(timeout=20)

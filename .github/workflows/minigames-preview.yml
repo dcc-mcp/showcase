@@ -47,6 +47,8 @@ jobs:
         run: xvfb-run -a python scripts/godot_web/minigames/author_native.py --godot Godot_v4.6.3-stable_linux.x86_64 --output "$RUNNER_TEMP/minigame-native"
       - name: Validate game logic and make official Web export
         run: python scripts/godot_web/minigames/export_candidate.py --godot Godot_v4.6.3-stable_linux.x86_64 --native "$RUNNER_TEMP/minigame-native/native/signal-garden" --template "$RUNNER_TEMP/templates/web_nothreads_release.zip" --output "$RUNNER_TEMP/minigame-site"
+      - name: Verify the self-contained downloadable candidate
+        run: python scripts/godot_web/minigames/verify_candidate.py --site "$RUNNER_TEMP/minigame-site"
       - name: Real browser input, audio, three gardens, mobile and recovery
         run: python scripts/godot_web/minigames/browser_candidate.py --site "$RUNNER_TEMP/minigame-site" --output "$RUNNER_TEMP/minigame-evidence"
       - name: Encode and fully decode real audiovisual previews
@@ -65,5 +67,6 @@ jobs:
             ${{ runner.temp }}/minigame-native/mcp-raw.json
             ${{ runner.temp }}/minigame-native/native
             ${{ runner.temp }}/minigame-site/export.json
-            ${{ runner.temp }}/minigame-site/play/signal-garden
+            ${{ runner.temp }}/minigame-site/README.txt
+            ${{ runner.temp }}/minigame-site/play
             ${{ runner.temp }}/minigame-evidence

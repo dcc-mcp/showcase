@@ -11,3 +11,5 @@ Original game source, generated tones and procedural art: copyright 2026 dcc-mcp
 The research record is research.json. Pocket Pulse and Lunar Skipper remain planned; this candidate only creates Signal Garden. Do not advertise the other games as implemented.
 
 Verification limits remain explicit: browser viewport touch simulation is not physical-phone acceptance; sampled audio is not subjective listening; CI staging is not a live public deployment. A green workflow still requires pixel/motion review and parent approval before adding a public case and manifest.
+
+The downloadable CI candidate includes the complete `minigame-site/play` tree, shared runtime, shell, engine/font notices and a `README.txt` with local HTTP serving instructions. Keep that tree intact; opening only `signal-garden/index.html` without its sibling dependencies does not start the game. The native source bundle also includes the font license. The package validator rejects missing runtime, shell or notice files and mismatched PCK bytes. Browser acceptance separately checks both the bottom-row Resume control and the pause overlay's Continue control with actual mouse/emulated-touch input.
