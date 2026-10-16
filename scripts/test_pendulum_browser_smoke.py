@@ -4,14 +4,161 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from copy import deepcopy
 import shlex
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import Mock, patch
 import zlib
 
-from pendulum_browser_smoke import ENTRY, load_references, tracked_bytes_receipt, validate_unprofiled_png
+from pendulum_browser_smoke import (ENTRY, inspect_touch_fullscreen, load_references,
+    locate_native_fullscreen, native_control_center, native_fullscreen_ax_node,
+    tracked_bytes_receipt, validate_unprofiled_png, verify_ended_ui_transition)
+
+
+def native_fixture():
+    dom = {'localName': 'video', 'attributes': ['src', '/showcase/pendulum-oidn.mp4'],
+        'shadowRoots': [{'shadowRootType': 'user-agent', 'backendNodeId': 10,
+            'children': [{'backendNodeId': 11}]}]}
+    node = {'ignored': False, 'role': {'value': 'button'}, 'name': {'value': 'enter full screen'},
+        'backendDOMNodeId': 11, 'properties': []}
+    return dom, node
+
+
+def ended_fixture(fullscreen=False):
+    return {'ended': True, 'paused': True, 'controls': True, 'muted': True, 'loop': False,
+        'currentTime': 6.006, 'duration': 6.006, 'rate': 1, 'sourceName': 'pendulum-oidn.mp4',
+        'objectFit': 'contain', 'fullscreen': fullscreen, 'playEvents': 1, 'seeks': 0,
+        'endedEvents': 1, 'quality': {'totalVideoFrames': 144, 'droppedVideoFrames': 0,
+            'corruptedVideoFrames': 0}}
+
+
+class NativeFullscreenTests(unittest.TestCase):
+    def test_unique_real_native_control_is_selected(self):
+        dom, node = native_fixture()
+        other_video = dict(node, backendDOMNodeId=99)
+        self.assertEqual(native_fullscreen_ax_node([other_video, node], dom), node)
+
+    def test_missing_ambiguous_disabled_or_unrelated_control_fails(self):
+        dom, node = native_fixture()
+        disabled = dict(node, properties=[{'name': 'disabled', 'value': {'value': True}}])
+        for nodes in [[], [node, node], [dict(node, backendDOMNodeId=99)],
+                      [dict(node, ignored=True)], [dict(node, role={'value': 'link'})],
+                      [dict(node, name={'value': 'exit full screen'})], [disabled]]:
+            with self.subTest(nodes=nodes), self.assertRaises(AssertionError):
+                native_fullscreen_ax_node(nodes, dom)
+
+    def test_author_shadow_or_wrong_video_fails(self):
+        dom, node = native_fixture()
+        for change in ['author-shadow', 'wrong-source', 'wrong-element']:
+            altered = deepcopy(dom)
+            if change == 'author-shadow':
+                altered['shadowRoots'][0]['shadowRootType'] = 'open'
+            elif change == 'wrong-source':
+                altered['attributes'] = ['src', '/different.mp4']
+            else:
+                altered['localName'] = 'div'
+            with self.subTest(change=change), self.assertRaises(AssertionError):
+                native_fullscreen_ax_node([node], altered)
+
+    def test_control_geometry_must_be_inside_video_and_viewport(self):
+        box = {'x': 20, 'y': 100, 'width': 348, 'height': 196}
+        viewport = {'width': 390, 'height': 844}
+        self.assertEqual(native_control_center([300, 250, 330, 250, 330, 280, 300, 280], box, viewport),
+                         {'x': 315, 'y': 265})
+        for quad in [[0] * 8, [float('nan')] * 8, [300, 250],
+                     [380, 250, 410, 250, 410, 280, 380, 280],
+                     [300, 850, 330, 850, 330, 880, 300, 880]]:
+            with self.subTest(quad=quad), self.assertRaises(AssertionError):
+                native_control_center(quad, box, viewport)
+        with self.assertRaisesRegex(AssertionError, 'viewport'):
+            native_control_center([380, 250, 410, 250, 410, 280, 380, 280],
+                {'x': 0, 'y': 0, 'width': 500, 'height': 844}, viewport)
+
+    def test_locator_uses_only_read_only_cdp_and_detaches(self):
+        dom, node = native_fixture()
+        session = Mock()
+        responses = {'DOM.getDocument': {'root': {'nodeId': 1}},
+            'DOM.querySelectorAll': {'nodeIds': [2]}, 'DOM.describeNode': {'node': dom},
+            'Accessibility.getFullAXTree': {'nodes': [node]},
+            'DOM.getBoxModel': {'model': {'border': [300, 250, 330, 250, 330, 280, 300, 280]}}}
+        session.send.side_effect = lambda method, *args: responses[method]
+        context, page, video = Mock(), Mock(), Mock()
+        context.new_cdp_session.return_value = session
+        page.viewport_size = {'width': 390, 'height': 844}
+        video.bounding_box.return_value = {'x': 20, 'y': 100, 'width': 348, 'height': 196}
+        self.assertEqual(locate_native_fullscreen(page, context, video, 0)['x'], 315)
+        self.assertEqual([call.args[0] for call in session.send.call_args_list], list(responses))
+        session.detach.assert_called_once()
+
+    def test_enter_and_exit_preserve_complete_ended_state(self):
+        verify_ended_ui_transition(ended_fixture(), ended_fixture(True), True)
+        verify_ended_ui_transition(ended_fixture(True), ended_fixture(), False)
+
+    def test_replay_seek_decode_time_controls_or_presentation_change_fails(self):
+        for key, value in [('ended', False), ('paused', False), ('controls', False),
+                           ('muted', False), ('loop', True), ('rate', 2), ('playEvents', 2),
+                           ('endedEvents', 2), ('seeks', 1), ('currentTime', 6),
+                           ('duration', 6), ('objectFit', 'cover'), ('sourceName', 'other.mp4'),
+                           ('fullscreen', False)]:
+            altered = ended_fixture(True)
+            altered[key] = value
+            with self.subTest(key=key), self.assertRaises(AssertionError):
+                verify_ended_ui_transition(ended_fixture(), altered, True)
+        for key, value in [('totalVideoFrames', 145), ('droppedVideoFrames', 1), ('corruptedVideoFrames', 1)]:
+            altered = ended_fixture(True)
+            altered['quality'][key] = value
+            with self.subTest(key=key), self.assertRaises(AssertionError):
+                verify_ended_ui_transition(ended_fixture(), altered, True)
+
+    def test_real_input_order_and_failed_pixel_result_are_retained(self):
+        page, context, video = Mock(), Mock(), Mock()
+        video.screenshot.return_value = b'actual screenshot fixture'
+        page.evaluate.return_value = {'frame': 144, 'passed': False, 'mean': 12, 'p95': 41}
+        events = Mock()
+        events.attach_mock(page.touchscreen.tap, 'tap')
+        events.attach_mock(video.screenshot, 'screenshot')
+        events.attach_mock(page.keyboard.press, 'key')
+        observation = {}
+        with patch('pendulum_browser_smoke.ended_media_state', side_effect=[ended_fixture(), ended_fixture(True), ended_fixture()]), \
+                patch('pendulum_browser_smoke.locate_native_fullscreen', return_value={'x': 315, 'y': 265}):
+            inspect_touch_fullscreen(page, context, video, 0, Path('/unused'), 'fullscreen.png', observation)
+        self.assertEqual([call[0] for call in events.mock_calls], ['tap', 'screenshot', 'key'])
+        page.touchscreen.tap.assert_called_once_with(315, 265)
+        page.keyboard.press.assert_called_once_with('Escape')
+        self.assertFalse(observation['comparison']['passed'])  # Never substitute a passing result.
+        self.assertTrue(observation['inspected'])
+        self.assertFalse(observation['after_exit']['fullscreen'])
+        self.assertEqual(page.wait_for_function.call_args_list[-1].args[0], 'document.fullscreenElement === null')
+
+    def test_missing_control_or_replay_fails_before_screenshot(self):
+        page, context, video = Mock(), Mock(), Mock()
+        with patch('pendulum_browser_smoke.ended_media_state', return_value=ended_fixture()), \
+                patch('pendulum_browser_smoke.locate_native_fullscreen', side_effect=AssertionError('missing')):
+            with self.assertRaisesRegex(AssertionError, 'missing'):
+                inspect_touch_fullscreen(page, context, video, 0, Path('/unused'), 'fullscreen.png', {})
+        page.touchscreen.tap.assert_not_called()
+        altered = ended_fixture(True)
+        altered['playEvents'] = 2
+        with patch('pendulum_browser_smoke.ended_media_state', side_effect=[ended_fixture(), altered]), \
+                patch('pendulum_browser_smoke.locate_native_fullscreen', return_value={'x': 315, 'y': 265}):
+            with self.assertRaisesRegex(AssertionError, 'replayed'):
+                inspect_touch_fullscreen(page, context, video, 0, Path('/unused'), 'fullscreen.png', {})
+        video.screenshot.assert_not_called()
+
+    def test_failed_fullscreen_entry_or_exit_fails_closed(self):
+        for failing_wait in (0, 1):
+            page, context, video = Mock(), Mock(), Mock()
+            video.screenshot.return_value = b'fixture'
+            page.wait_for_function.side_effect = [RuntimeError('transition failed')] if failing_wait == 0 else [None, RuntimeError('transition failed')]
+            with patch('pendulum_browser_smoke.ended_media_state', side_effect=[ended_fixture(), ended_fixture(True)]), \
+                    patch('pendulum_browser_smoke.locate_native_fullscreen', return_value={'x': 315, 'y': 265}):
+                observation = {}
+                with self.subTest(failing_wait=failing_wait), self.assertRaisesRegex(RuntimeError, 'transition failed'):
+                    inspect_touch_fullscreen(page, context, video, 0, Path('/unused'), 'fullscreen.png', observation)
+                self.assertNotIn('inspected', observation)
 
 
 def png_chunk(kind, payload):
