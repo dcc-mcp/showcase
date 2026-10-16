@@ -29,8 +29,9 @@ ENTRY = 'docs/showcase/brass-pendulum-denoise/'
 PNG_COLOR_CHUNKS = {b'cICP', b'gAMA', b'cHRM', b'sRGB', b'iCCP'}
 
 
-def native_fullscreen_ax_node(nodes: list, video_dom: dict) -> dict:
+def native_fullscreen_ax_node(nodes: list, video_dom: dict, mode: str = 'enter') -> dict:
     """Select one visible native button inside this video's user-agent shadow."""
+    assert mode in ('enter', 'exit'), 'Invalid native fullscreen action'
     assert video_dom.get('localName') == 'video', 'Fullscreen target is not the actual video'
     attributes = video_dom.get('attributes', [])
     attrs = dict(zip(attributes[::2], attributes[1::2]))
@@ -49,9 +50,10 @@ def native_fullscreen_ax_node(nodes: list, video_dom: dict) -> dict:
     matches = []
     for node in nodes:
         name = node.get('name', {}).get('value', '').strip()
-        is_enter = re.fullmatch(r'(?:enter )?full[ -]?screen', name, re.I) or name in ('进入全屏', '全屏')
+        matches_action = (re.fullmatch(r'(?:enter )?full[ -]?screen', name, re.I) or name in ('进入全屏', '全屏')) \
+            if mode == 'enter' else name.lower() == 'exit full screen' or name == '退出全屏'
         if (not node.get('ignored', True) and node.get('role', {}).get('value') == 'button'
-                and is_enter and node.get('backendDOMNodeId') in native_ids):
+                and matches_action and node.get('backendDOMNodeId') in native_ids):
             assert not any(p.get('name') == 'disabled' and p.get('value', {}).get('value')
                 for p in node.get('properties', [])), 'Native fullscreen button is disabled'
             matches.append(node)
@@ -70,7 +72,7 @@ def native_control_center(quad: list, box: dict, viewport: dict) -> dict:
     return {'x': (left + right) / 2, 'y': (top + bottom) / 2}
 
 
-def locate_native_fullscreen(page, context, video, index: int) -> dict:
+def locate_native_fullscreen(page, context, video, index: int, mode: str = 'enter') -> dict:
     # CDP only observes the real browser's UA accessibility/DOM geometry.
     # The action below is a trusted touchscreen tap, never a DOM/script click.
     session = context.new_cdp_session(page)
@@ -79,10 +81,10 @@ def locate_native_fullscreen(page, context, video, index: int) -> dict:
         videos = session.send('DOM.querySelectorAll', {'nodeId': root, 'selector': 'video'})['nodeIds']
         assert index < len(videos), 'Actual video disappeared before fullscreen'
         dom = session.send('DOM.describeNode', {'nodeId': videos[index], 'depth': -1, 'pierce': True})['node']
-        node = native_fullscreen_ax_node(session.send('Accessibility.getFullAXTree')['nodes'], dom)
+        node = native_fullscreen_ax_node(session.send('Accessibility.getFullAXTree')['nodes'], dom, mode)
         quad = session.send('DOM.getBoxModel', {'backendNodeId': node['backendDOMNodeId']})['model']['border']
         point = native_control_center(quad, video.bounding_box(), page.viewport_size)
-        return {'accessible_name': node['name']['value'], 'role': 'button', 'within_target_native_controls': True, **point}
+        return {'action': mode, 'accessible_name': node['name']['value'], 'role': 'button', 'within_target_native_controls': True, **point}
     finally:
         session.detach()
 
@@ -111,7 +113,7 @@ def verify_ended_ui_transition(before: dict, after: dict, fullscreen: bool):
 
 
 def inspect_touch_fullscreen(page, context, video, index: int, output: Path, image: str, observation: dict):
-    """Use the actual native button, retain the ended picture, then exit by key."""
+    """Use the actual native enter/exit buttons without changing the ended media."""
     before = ended_media_state(video)
     verify_ended_ui_transition(before, before, False)
     observation['before_entry'] = before
@@ -127,8 +129,11 @@ def inspect_touch_fullscreen(page, context, video, index: int, output: Path, ima
     observation['screenshot'] = image
     observation['comparison'] = page.evaluate('(url) => window.__pendulumPlayback.compareDisplayedEnd(url)',
         'data:image/png;base64,' + base64.b64encode(screenshot).decode())
-    # Escape is a real keyboard event. No script requests or exits fullscreen.
-    page.keyboard.press('Escape')
+    # Resolve the now-changed native exit label and geometry again. Touch
+    # emulation does not necessarily exit media fullscreen on an Escape key.
+    exit_control = locate_native_fullscreen(page, context, video, index, 'exit')
+    observation['native_exit_button'] = exit_control
+    page.touchscreen.tap(exit_control['x'], exit_control['y'])
     page.wait_for_function('document.fullscreenElement === null', timeout=5000)
     exited = ended_media_state(video)
     observation['after_exit'] = exited
