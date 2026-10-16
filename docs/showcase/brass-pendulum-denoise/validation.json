@@ -1,5 +1,5 @@
 {
-  "status": "technical_decode_pass",
+  "status": "technical_and_recorded_browser_pass",
   "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
   "bytes": 614199,
   "source_frames": [
@@ -21,7 +21,14 @@
   "consecutive_exact_duplicates": 0,
   "color_transform": "AgX sRGB PNG -> explicit zscale sRGB transfer to limited BT.709 YUV 4:2:0",
   "visual_review": "see visual-review.json; technical checks are separate",
-  "browser_playback": "not_run",
+  "browser_playback": {
+    "status": "passed_on_recorded_immutable_head",
+    "tested_head": "508004143e41e404b38b149a8baf05fd18ef7ece",
+    "receipt": "ci-verification.json",
+    "workflow_url": "https://github.com/dcc-mcp/showcase/actions/runs/38851171681",
+    "scope": "English/Chinese desktop and touch-viewport Chromium 153.0.8010.12; natural 1x playback through ended, decoded/presented motion-region pictures, final displayed picture and Stop. Later commits require their own CI results.",
+    "touch_display": "Playback is inline with normal native controls. The ended inline picture is partly obscured; its failing ROI comparison is retained. The same ended picture passes separately in native fullscreen entered and exited by real touch, with time, decode count and controls unchanged."
+  },
   "motion_compensated_temporal_denoising": false,
   "denoising": "dcc-media-enhance 0.2.0 Blender compositor spatial OIDN with actual albedo/normal guides; sequence must be separately reviewed",
   "file": "pendulum-oidn.mp4",
@@ -68,27 +75,30 @@
       "name": "static_contact_sheet_review",
       "result": "pass",
       "observed": "Six contact sheets cover all 144 frames; native-size source spot checks 1/13/73/144. No blocking static defect at inspected scales; fine highlight speckling/aliasing remains. Natural-speed playback is separate."
+    },
+    {
+      "name": "complete_browser_playback_and_displayed_pictures",
+      "result": "pass",
+      "observed": "Immutable tested head 508004143e41e404b38b149a8baf05fd18ef7ece: English/Chinese desktop/touch, 144 decoded, zero dropped/corrupt/seek, 143 callbacks covering frames2..144, 142 visible changes; first/middle/final decoded pictures and final displayed motion-region comparisons pass. Touch final display is inspected through real native fullscreen controls; inline occlusion is retained. Stop releases media without refetch. See ci-verification.json."
     }
   ],
-  "pending_checks": [
-    "Current-head English/Chinese desktop/touch browser playback and actual displayed end-frame consistency",
-    "Full-film natural-speed visible playback review"
-  ],
+  "pending_checks": [],
   "not_claimed": [
-    "No natural-speed playback pass or current-head browser pass is claimed before actual execution.",
+    "Recorded browser results apply only to immutable tested head 508004143e41e404b38b149a8baf05fd18ef7ece; later commits require their own CI results.",
     "No temporal denoising or motion compensation in the new film.",
     "No high-sample ground truth,PSNR/SSIM or objective perceptual-quality certification.",
     "No noise-free imagery; fine highlight speckling and aliasing remain.",
     "No full-resolution browser pixel-identity test; comparison is a160x120 motion-region thumbnail check.",
     "No pixel-identical rerender from the public native copy.",
     "Historical raw/atadenoise controls and old CI are not evidence for this new film.",
-    "No physical-device testing, merge or deployment."
+    "No physical-device testing, merge or deployment.",
+    "Touch inline end-picture pixels are partly obscured by normal native controls; no unobstructed inline-picture pass is claimed."
   ],
   "user_acceptance": {
     "status": "approved_current_film_for_publication",
     "channel": "voice",
     "confirmed_date": "2026-10-16",
     "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
-    "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
+    "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
   }
 }

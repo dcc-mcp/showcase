@@ -1,5 +1,5 @@
 {
-  "status": "static_contact_sheet_review_complete_playback_pending",
+  "status": "static_review_complete_and_recorded_browser_playback_pass",
   "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
   "short_pilot": {
     "source_frames": [
@@ -74,29 +74,37 @@
         "sha256": "d7fcc3dbd3d256d0be30485881efdebac5a0eacfe7e9161aea74bc0106a6319d"
       }
     ],
-    "natural_speed_playback": "not_run",
+    "natural_speed_playback": "Separate Chromium playback passed on immutable tested head 508004143e41e404b38b149a8baf05fd18ef7ece; see ci-verification.json.",
     "high_sample_quality_reference": "not_run",
     "final_user_artistic_acceptance": {
       "status": "approved_current_film_for_publication",
       "channel": "voice",
       "confirmed_date": "2026-10-16",
       "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
-      "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
+      "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
     }
   },
-  "browser_natural_speed_full_playback": "not_run",
+  "browser_natural_speed_full_playback": {
+    "status": "passed_on_recorded_immutable_head",
+    "tested_head": "508004143e41e404b38b149a8baf05fd18ef7ece",
+    "receipt": "ci-verification.json",
+    "workflow_url": "https://github.com/dcc-mcp/showcase/actions/runs/38851171681",
+    "scope": "English/Chinese desktop and touch-viewport Chromium 153.0.8010.12; natural 1x playback through ended, decoded/presented motion-region pictures, final displayed picture and Stop. Later commits require their own CI results.",
+    "touch_display": "Playback is inline with normal native controls. The ended inline picture is partly obscured; its failing ROI comparison is retained. The same ended picture passes separately in native fullscreen entered and exited by real touch, with time, decode count and controls unchanged."
+  },
   "native_natural_speed_full_playback": "not_run",
   "final_user_artistic_acceptance": {
     "status": "approved_current_film_for_publication",
     "channel": "voice",
     "confirmed_date": "2026-10-16",
     "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
-    "scope": "Subjective user acceptance of this film; current-head browser and publication gates remain separate."
+    "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
   },
   "limits": [
     "Spatial OIDN only",
     "No high-sample ground truth or reference quality score",
-    "Technical integrity, offline visual inspection and actual playback are separate gates"
+    "Technical integrity, offline visual inspection and actual playback are separate gates",
+    "Normal touch-inline native controls partly obscure the ended image; the separate native-fullscreen end-picture inspection does not claim unobstructed inline pixels."
   ],
   "full144_source_pngs_individually_inspected_at_native_size": false
 }
