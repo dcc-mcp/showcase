@@ -7,7 +7,7 @@ The bounded target is a compact warm low-poly island: readable palm silhouettes,
 - Kay Lousberg's [Forest Nature Pack](https://kaylousberg.itch.io/kaykit-forest), free package 1.0: small bush/rock meshes suit the target silhouette after shared matte materials. The author page and bundled License.txt state CC0. The exact 6,435,630-byte archive was obtained from the official free download and safely inspected; source/output hashes are in the game's tropical source manifest.
 - [KayKit Adventurers](https://kaylousberg.itch.io/kaykit-adventurers), free package 2.0: the Ranger head and compatible 23-bone rig provide a coherent character base. Compatible Idle_A and Walking_A are reused, while beach clothing and swimming keys are original. The exact 13,024,345-byte free archive and its CC0 notice were checked. Free glTF is used; the separately paid Blender source package is excluded.
 
-Only the listed static glTF/buffer/image/license files were extracted, with path, symlink and size checks. No downloaded script ran. The final source can be redistributed under the stated asset terms, independently of Blender's software license and the case's original creative rights. All credited upstream geometry/actions remain CC0.
+Only the listed static glTF/buffer/image/license files were extracted, with path, symlink and size checks. No downloaded script ran. The selected upstream CC0 assets may be redistributed under their upstream terms. Blender's software license does not alter the separate rights stated for this case's original work. All credited upstream geometry/actions remain CC0.
 
 ## Capability discovery and limits
 
