@@ -25,3 +25,7 @@ Local unit tests only validate the harness's isolation and failure guards. They 
 - Browser wheels use the repository's existing hash-pinned `requirements/browser-preview.lock`; the official template fetcher verifies member hashes.
 
 This candidate is not published, deployed, merged, or added to a gallery by the workflow. Software-rendered CI and emulated portrait are not physical-device or subjective visual acceptance.
+
+## Shared downloader provenance
+
+The bounded 1 MiB range downloader and its tests are reused unchanged from the independently reviewed Showcase draft #42, commit `858e8e04c56811c9cff379249699911ba568af24`. Official archive/member pins and fail-closed range checks are retained. Native capture runs before Web template retrieval, so a transport outage does not suppress the visual preview. The source immutability check is scoped to this recipe and workflow; legacy gallery media have existing LFS normalization warnings.

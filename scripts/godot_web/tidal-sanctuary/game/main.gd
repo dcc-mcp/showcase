@@ -24,6 +24,7 @@ var timer := 0.0
 var game_time := 0.0
 var save_time := 0.0
 var completed := false
+var beacon_awakened := false
 var capture := false
 var demo := false
 var demo_phase := 0
@@ -40,6 +41,7 @@ var pulse_rings: Array[MeshInstance3D] = []
 var touch_move := Vector2.ZERO
 var touch_origin := Vector2.ZERO
 var touch_active := false
+var touch_index := -1
 var tip_until := 0.0
 var sea: MeshInstance3D
 var screenshot_index := 0
@@ -352,7 +354,7 @@ func make_player() -> void:
  box(Vector3(0,.57,.17),Vector3(.21,.28,.14),mat(Color("665e45")),avatar)
  for side in [-1,1]: box(Vector3(side*.1,.14,0),Vector3(.12,.28,.14),mat(Color("4a5650")),avatar)
  camera=Camera3D.new();camera.name="FollowCamera";camera.fov=52;camera.near=.18;camera.far=190;add_child(camera)
- camera.position=player.position+Vector3(10,12,15)
+ camera.position=player.position+Vector3(-10,12,15)
  camera.look_at(player.position+Vector3(0,.4,-2.0))
 
 func make_lanterns() -> void:
@@ -426,6 +428,8 @@ func interact() -> void:
    print("TIDAL_LANTERN ",i)
    return
  if completed and player.position.distance_to(beacon.position)<2.7:
+  beacon_awakened=true
+  save_game()
   objective.text="You brought the light home" if language=="en" else "你带回了光"
   prompt.text="R  ·  Begin another quiet voyage" if language=="en" else "R · 再启一段宁静旅程"
 
@@ -435,11 +439,19 @@ func _unhandled_input(event: InputEvent) -> void:
   if event.keycode==KEY_R:reset_game()
   if event.keycode==KEY_L:language="zh" if language=="en" else "en";update_state()
   if event.keycode==KEY_H:ui_visible=not ui_visible;ui.visible=ui_visible
- if event is InputEventScreenTouch:
+ if event is InputEventScreenTouch and event.pressed and not touch_active:
   if event.position.x<get_viewport().get_visible_rect().size.x*.65:
-   touch_active=event.pressed;touch_origin=event.position
-   if not touch_active:touch_move=Vector2.ZERO
- if event is InputEventScreenDrag and touch_active:touch_move=(event.position-touch_origin).limit_length(70)/70
+   touch_active=true;touch_origin=event.position;touch_index=event.index
+
+func _input(event:InputEvent) -> void:
+ if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
+  touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
+ elif event is InputEventScreenDrag and touch_active and event.index==touch_index:
+  touch_move=(event.position-touch_origin).limit_length(70)/70
+
+func _notification(what:int) -> void:
+ if what==NOTIFICATION_APPLICATION_FOCUS_OUT:
+  touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
 
 func _physics_process(delta:float) -> void:
  if player==null:return
@@ -451,7 +463,11 @@ func _physics_process(delta:float) -> void:
  if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):input.y+=1
  input+=touch_move
  input=input.limit_length()
- var move:=Vector3(input.x,0,input.y).rotated(Vector3.UP,-.58)
+ var right:=camera.global_basis.x
+ right.y=0;right=right.normalized()
+ var forward:=-camera.global_basis.z
+ forward.y=0;forward=forward.normalized()
+ var move:Vector3=(right*input.x-forward*input.y).normalized()*input.length()
  if demo:
   var target:Vector3=lantern_points[mini(demo_phase,2)] if demo_phase<3 else beacon.position
   var flat:=Vector3(target.x-player.position.x,0,target.z-player.position.z)
@@ -477,16 +493,22 @@ func _physics_process(delta:float) -> void:
  if save_time>4:save_game();save_time=0
  # A high, collision-free diorama camera keeps the destination visible without orbit surprises.
  var aim:=player.position+Vector3(0,.5,-2.0)
- var desired:=player.position+Vector3(9.5,12.5,15)
+ var desired:=player.position+Vector3(-9.5,12.5,15)
  var portrait:=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y<.85
- if portrait:desired=player.position+Vector3(7.8,15,17)
+ if portrait:desired=player.position+Vector3(-7.8,15,17)
  var ray:=PhysicsRayQueryParameters3D.create(aim,desired)
  ray.exclude=[player.get_rid()]
  var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
  if not hit.is_empty():desired=hit.position+hit.normal*.55
  camera.position=camera.position.lerp(desired,1-exp(-delta*3.5))
  camera.look_at(aim)
- if game_time>tip_until and not completed:
+ if game_time>tip_until and completed:
+  if beacon_awakened:
+   objective.text="You brought the light home" if language=="en" else "你带回了光"
+   prompt.text="R · Begin another quiet voyage" if language=="en" else "R · 再启一段宁静旅程"
+  else:
+   prompt.text=("E · Return the light" if player.position.distance_to(beacon.position)<2.7 else "Return to the ring of light") if language=="en" else ("E · 归还光芒" if player.position.distance_to(beacon.position)<2.7 else "返回光之环")
+ elif game_time>tip_until:
   prompt.text=""
   for i in range(3):
    if not activated[i] and player.position.distance_to(lantern_points[i])<2.1:prompt.text="E  ·  Wake the tide lantern" if language=="en" else "E · 点亮潮汐灯"
@@ -495,6 +517,8 @@ func _process(delta:float) -> void:
  timer+=delta
  if objective:
   var width:=get_viewport().get_visible_rect().size.x
+  message.offset_top=-24 if width<600 else -38
+  message.offset_bottom=-2 if width<600 else -15
   objective.add_theme_font_size_override("font_size",19 if width<600 else 24)
   message.text=("Drag to move · Tap LIGHT" if language=="en" else "左侧拖动移动 · 轻触点亮") if width<600 else ("W A S D / arrows · E interact · R restart · L language" if language=="en" else "方向键移动 · E 互动 · R 重新开始 · L 语言")
   prompt.add_theme_font_size_override("font_size",15 if width<600 else 19)
@@ -522,7 +546,7 @@ func capture_frame(index:int) -> void:
 func save_game() -> void:
  if capture or demo:return
  var file:=FileAccess.open(SAVE_PATH,FileAccess.WRITE)
- if file:file.store_string(JSON.stringify({"schema":1,"activated":activated,"player":[player.position.x,player.position.y,player.position.z],"language":language}))
+ if file:file.store_string(JSON.stringify({"schema":1,"activated":activated,"player":[player.position.x,player.position.y,player.position.z],"language":language,"beacon_awakened":beacon_awakened}))
 
 func load_game() -> void:
  if not FileAccess.file_exists(SAVE_PATH):return
@@ -534,10 +558,11 @@ func load_game() -> void:
  var p=data.get("player",[])
  if p is Array and p.size()==3 and island_radius(float(p[0]),float(p[2]))<.86:
   player.position=Vector3(float(p[0]),maxf(float(p[1]),height_at(float(p[0]),float(p[2]))+.1),float(p[2]))
- language=str(data.get("language","en"))
+ language="zh" if data.get("language","en")=="zh" else "en"
+ beacon_awakened=bool(data.get("beacon_awakened",false)) and activated==[true,true,true]
 
 func reset_game() -> void:
- activated=[false,false,false];completed=false;player.position=Vector3(1.3,height_at(1.3,10)+.9,10);update_state();save_game()
+ activated=[false,false,false];completed=false;beacon_awakened=false;player.position=Vector3(1.3,height_at(1.3,10)+.9,10);update_state();save_game()
 
 func count_nodes(node:Node) -> int:
  var count:=1

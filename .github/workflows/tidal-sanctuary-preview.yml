@@ -48,9 +48,10 @@ jobs:
           echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/tidal-godot.zip" | sha256sum -c -
           unzip -q "$RUNNER_TEMP/tidal-godot.zip" -d "$RUNNER_TEMP/tidal-godot"
           echo "$RUNNER_TEMP/tidal-godot" >> "$GITHUB_PATH"
-          python scripts/godot_web/fetch_templates.py --output "$RUNNER_TEMP/tidal-templates"
       - name: Validate capture harness guards
-        run: python -m unittest discover -s "$RECIPE/ci" -p 'test_*.py' -v
+        run: |
+          python -m unittest discover -s "$RECIPE/ci" -p 'test_*.py' -v
+          python scripts/godot_web/test_materialize_runtime.py
       - name: Actual typed MCP create, save, restart and reopen
         id: author
         shell: bash
@@ -67,9 +68,20 @@ jobs:
           xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/capture_native.py" \
             --native "$RUNNER_TEMP/tidal-author/native" --godot Godot_v4.6.3-stable_linux.x86_64 \
             --output "$RUNNER_TEMP/tidal-native"
+      - name: Fetch verified official Web templates after native capture
+        id: templates
+        if: ${{ !cancelled() && steps.author.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if python scripts/godot_web/fetch_templates.py --output "$RUNNER_TEMP/tidal-templates"; then exit 0; fi
+            if [ "$attempt" -lt 3 ]; then sleep 3; fi
+          done
+          exit 1
       - name: Official single-thread Web export
         id: export
-        if: ${{ !cancelled() && steps.author.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.author.outcome == 'success' && steps.templates.outcome == 'success' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -81,7 +93,7 @@ jobs:
         run: python "$RECIPE/ci/capture_browser.py" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
       - name: Verify tracked source was not modified
         if: ${{ !cancelled() }}
-        run: git diff --exit-code
+        run: git diff --exit-code -- "$RECIPE" .github/workflows/tidal-sanctuary-preview.yml
       - name: Preserve unpublished source, receipts and actual runtime media
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
