@@ -353,7 +353,7 @@ def main():
                 "state_before_capture_request":observed,"kind":"actual-input off-route contact; passive state is not exact framebuffer synchronization"})
         try:
             run_chart_exploration(lambda: records("native-input.log", "TIDAL_STATE"), move, time.sleep, exploration_screenshot, evidence=exploration)
-            if {item["name"] for item in exploration_images} != {"native-chart-blocker-east.png","native-chart-blocker-west.png"}:
+            if {item["name"] for item in exploration_images} != {"native-chart-blocker-first.png","native-chart-blocker-opposed.png"}:
                 raise RuntimeError("Missing opposing actual-input collision captures")
         finally:
             write_json(out / "native-off-route-exploration.json", {**exploration,"input_events":events,"captures":exploration_images,

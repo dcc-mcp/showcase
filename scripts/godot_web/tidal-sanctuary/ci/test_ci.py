@@ -147,7 +147,7 @@ class HarnessTests(unittest.TestCase):
 
     def language_receipt(self):
         return {"schema": 1, "change_id": 1, "previous": "en", "language": "zh", "trigger": "key_L",
-                "labels": {**CHINESE_LABELS, "prompt": "E · 阅读海图"}, "missing_codepoints": []}
+                "labels": {**CHINESE_LABELS, "prompt": "靠近后即可互动"}, "missing_codepoints": []}
 
     def test_touch_validation_computes_actual_horizontal_distance(self):
         self.assertAlmostEqual(validate_touch_release(self.touch_receipt()), .5)
@@ -182,7 +182,7 @@ class HarnessTests(unittest.TestCase):
     def test_language_validation_requires_actual_rendered_chinese_labels(self):
         labels = validate_language_frame(self.language_receipt())
         self.assertEqual(labels["title"], "潮 汐 圣 所")
-        self.assertEqual(labels["prompt"], "E · 阅读海图")
+        self.assertEqual(labels["prompt"], "靠近后即可互动")
 
     def test_language_validation_rejects_untranslated_prompt_and_missing_glyph(self):
         receipt = self.language_receipt()
@@ -197,6 +197,13 @@ class HarnessTests(unittest.TestCase):
         receipt["labels"]["title"] = "TIDAL SANCTUARY"
         with self.assertRaisesRegex(ValueError, "title"):
             validate_language_frame(receipt)
+
+    def test_fresh_spawn_language_rejects_empty_or_reachable_prompt(self):
+        for prompt in ("", "E · 阅读海图", "Move closer to interact", None):
+            receipt = self.language_receipt()
+            receipt["labels"]["prompt"] = prompt
+            with self.subTest(prompt=prompt), self.assertRaisesRegex(ValueError, "prompt"):
+                validate_language_frame(receipt)
 
     def test_language_validation_rejects_stale_or_non_keyboard_transition(self):
         with self.assertRaisesRegex(ValueError, "stale"):
