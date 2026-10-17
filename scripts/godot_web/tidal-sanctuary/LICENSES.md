@@ -1,6 +1,6 @@
 # Rights and source review
 
-- Original game code, generated terrain/ruins geometry, level, character, materials, interface and shader: copyright 2026 dcc-mcp contributors, all rights reserved. This prototype is prepared for review in the original Showcase repository.
+- Original game code, generated terrain/ruins geometry, level, character, material definitions, interface and shader (excluding explicitly credited third-party assets): copyright 2026 dcc-mcp contributors, all rights reserved. This prototype is prepared for review in the original Showcase repository.
 - `game/sanctuary-font.otf`: a newly generated subset of Noto Sans CJK SC Regular from Debian's Noto CJK package. Source: https://github.com/notofonts/noto-cjk . SIL Open Font License 1.1; full upstream package notice is retained in `game/FONT-LICENSE.txt`. It is not sold by itself. No reserved-name claim is made for the subset.
 - `game/assets/*.tscn`: four meshes derived from Kenney Nature Kit 2.1 (CC0 1.0 Universal), imported and normalized with Godot, with new matte material overrides. Original source names/hashes and the official archive URL are recorded in `game/assets/SOURCE.json`; bundled upstream notice is `game/assets/KENNEY-LICENSE.txt`. No textures, scripts, animations or external dependencies are included.
 - Godot editor and Web runtime: MIT and third-party notices. The CI export preserves the repository's existing runtime notices. Runtime code is downloaded only from the pinned official Godot release/template, not committed with the source.
@@ -15,7 +15,7 @@ Official Web and renderer capability documentation informed the Compatibility an
 https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html
 https://docs.godotengine.org/en/4.6/tutorials/rendering/renderers.html
 
-Kenney Nature Kit (330 assets, CC0) and Poly Haven (CC0) were checked as potential small-asset sources. Following actual visual review, four tiny Kenney meshes were selected and bundled as self-contained Godot scenes: two shore rocks, one irregular branching tree, and one narrow pine. Their default metallic materials were replaced with the same matte island palette. Poly Haven remains an unused candidate; no Poly Haven asset is bundled.
+Kenney Nature Kit (330 assets, CC0) and Poly Haven (CC0) were checked as potential small-asset sources. Following actual visual review, four tiny Kenney meshes were selected and bundled as self-contained Godot scenes: two shore rocks, one irregular branching tree, and one narrow pine. Their default metallic materials were replaced with the same matte island palette. The initial passes did not bundle Poly Haven; the fourth hero pass now includes the specifically credited surfaces and ferns below.
 https://kenney.nl/assets/nature-kit
 https://polyhaven.com/license
 

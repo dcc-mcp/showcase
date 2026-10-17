@@ -26,7 +26,7 @@ No audio is present in this initial visual study. The art direction calls for re
 
 ## Source and rights
 
-The terrain, ruins, palette, shader, character, level layout and game logic are original for this study. Four compact tree/rock meshes are adapted from Kenney Nature Kit (CC0), with matte palette overrides. No third-party music, sound or game code was copied. The existing Showcase capture architecture is reused within the same repository. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
+The terrain, ruins, palette, shader, character, level layout and game logic are original for this study. Four compact tree/rock meshes are adapted from Kenney Nature Kit (CC0), with matte palette overrides. The sanctuary entrance additionally uses Poly Haven Rock 04 surfaces and Fern 02 meshes (CC0). No third-party music, sound or game code was copied. The existing Showcase capture architecture is reused within the same repository. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
 
 ## Fourth visual pass: sanctuary entrance
 
