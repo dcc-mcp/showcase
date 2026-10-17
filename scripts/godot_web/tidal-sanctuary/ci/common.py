@@ -10,8 +10,8 @@ from pathlib import Path
 GODOT_VERSION = "4.6.3.stable.official.7d41c59c4"
 GODOT_BINARY_SHA256 = "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3"
 WEB_TEMPLATE_SHA256 = "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9"
-GAME_FILES = ("main.gd", "swim_controller.gd", "verify_swimming.gd", "verify_treasure.gd", "water.gdshader", "start.tscn", "project.godot",
-              "sanctuary-font.otf", "FONT-LICENSE.txt",
+GAME_FILES = ("main.gd", "swim_controller.gd", "verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd", "water.gdshader", "start.tscn", "project.godot",
+              "sanctuary-font.otf", "FONT-LICENSE.txt", "FONT-NOTICE.txt", "FONT-SOURCE.json",
               "assets/shore-rock-a.tscn", "assets/shore-rock-d.tscn",
               "assets/coastal-tree.tscn", "assets/needle-pine.tscn",
               "assets/KENNEY-LICENSE.txt", "assets/SOURCE.json",
@@ -23,6 +23,14 @@ GAME_FILES = ("main.gd", "swim_controller.gd", "verify_swimming.gd", "verify_tre
               "assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json")
 ASSET_NOTICE_FILES = ("assets/KENNEY-LICENSE.txt", "assets/SOURCE.json",
                       "assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json")
+TROPICAL_FILES = ("assets/tropical/palm-a.glb", "assets/tropical/palm-b.glb",
+                  "assets/tropical/understory-a.glb", "assets/tropical/understory-b.glb",
+                  "assets/tropical/bush-a.glb", "assets/tropical/shore-stone-a.glb",
+                  "assets/tropical/shore-stone-b.glb", "assets/tropical/explorer.glb")
+TROPICAL_NOTICES = ("assets/tropical/FOREST-LICENSE.txt", "assets/tropical/ADVENTURERS-LICENSE.txt",
+                    "assets/tropical/SOURCE.json")
+GAME_FILES += TROPICAL_FILES + TROPICAL_NOTICES
+ASSET_NOTICE_FILES += TROPICAL_NOTICES
 # Only these manifest-owned static image buffers are copied/exported as raw bytes.
 RAW_IMAGE_FILES = tuple(name for name in GAME_FILES if name.endswith(".bin"))
 

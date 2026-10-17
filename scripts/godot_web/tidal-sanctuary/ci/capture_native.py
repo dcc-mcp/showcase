@@ -9,9 +9,10 @@ import signal
 import subprocess
 import time
 from pathlib import Path
+from exploration import run_chart_exploration
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
-from observers import observer_receipts
-from common import checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
+from observers import finite_vector, observer_receipts
+from common import TROPICAL_FILES, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
 
 
 def require_running(process, message):
@@ -41,6 +42,47 @@ def wait_for(process, predicate, timeout, message):
             return
         time.sleep(.1)
     raise TimeoutError(message)
+
+
+
+def wait_for_neutral_movement(process, read_states, baseline, timeout=10):
+    """Observe post-keyup physics before any re-press; never consume game logs."""
+    validate_state(baseline, expected_demo=False)
+    observed = None
+
+    def neutral_after_release():
+        nonlocal observed
+        states = read_states()
+        if not states:
+            return False
+        state = states[-1]
+        validate_state(state, expected_demo=False)
+        movement = finite_vector(state.get("movement_input"), 2, "movement_input")
+        if (state["sample_id"] <= baseline["sample_id"]
+                or state["physics_frame"] <= baseline["physics_frame"]):
+            return False
+        if any(abs(value) > 1e-6 for value in movement):
+            return False
+        observed = state
+        return True
+
+    wait_for(process, neutral_after_release, timeout, "fresh neutral physics input after actual X11 key release")
+    return {"after_sample_id": baseline["sample_id"], "after_physics_frame": baseline["physics_frame"],
+            "observed": observed}
+
+
+def apply_movement_keys(direction, pressed, send_key, release_barrier):
+    wanted = keyboard_direction(direction)
+    released = pressed - wanted
+    for name in sorted(released):
+        send_key(name, False)
+    for name in sorted(wanted - pressed):
+        send_key(name, True)
+    # An X11 screenshot can finish before a slow rendered frame has processed
+    # keyup. Require an actual neutral physics sample before a subsequent press.
+    # Shared held keys at ordinary path turns keep their existing input stream.
+    if released and not wanted:
+        release_barrier()
 
 
 def stop_input_runtime(process):
@@ -96,6 +138,29 @@ def collect_composition_studies(frames, native_log):
     return studies
 
 
+def import_native_resources(godot, project, out):
+    """Import the clean copied source, never borrow an editor's generated cache."""
+    result = subprocess.run([godot, "--headless", "--path", str(project), "--editor", "--import", "--quit"],
+        env=isolated_env(out / "import-session"), capture_output=True, text=True, timeout=240)
+    output = result.stdout + result.stderr
+    (out / "native-import.log").write_text(output)
+    check_engine_log(output)
+    if result.returncode != 0:
+        raise RuntimeError("Fresh native resource import exited nonzero")
+    imports = []
+    for name in TROPICAL_FILES:
+        metadata = project / (name + ".import")
+        if not metadata.is_file():
+            raise RuntimeError("Fresh native scene import metadata is missing: " + name)
+        text = metadata.read_text()
+        if 'importer="scene"' not in text or 'type="PackedScene"' not in text:
+            raise RuntimeError("Fresh native resource is not an imported PackedScene: " + name)
+        imports.append({"source": name, "source_sha256": sha256(project / name),
+                        "import_metadata_sha256": sha256(metadata)})
+    return {"name": "official resource import of fresh native source copy", "passed": True,
+            "source_imports": imports, "scope": "import only; not rendered or physical-input acceptance"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--native", type=Path, required=True)
@@ -115,7 +180,7 @@ def main():
               "audio": "No audio stream; this prototype currently has no audio", "checks": [],
               "limitations": ["CI software OpenGL under Xvfb, not physical hardware performance."]}
     runtime = recorder = None
-    pressed, events, screenshots = set(), [], []
+    pressed, events, screenshots, movement_releases = set(), [], [], []
 
     def launch(log_name, env, extra=()):
         log = (out / log_name).open("w")
@@ -150,12 +215,16 @@ def main():
         time.sleep(.07)
         key(name, False)
 
+    def release_barrier():
+        # Baseline is deliberately taken AFTER every physical keyup completed.
+        states = records("native-input.log", "TIDAL_STATE")
+        if not states:
+            raise RuntimeError("No actual physics baseline after X11 key release")
+        movement_releases.append(wait_for_neutral_movement(runtime,
+            lambda: records("native-input.log", "TIDAL_STATE"), states[-1]))
+
     def move(direction):
-        wanted = keyboard_direction(direction)
-        for name in sorted(pressed - wanted):
-            key(name, False)
-        for name in sorted(wanted - pressed):
-            key(name, True)
+        apply_movement_keys(direction, pressed, key, release_barrier)
 
     def screenshot(name, state=None):
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "x11grab",
@@ -173,8 +242,10 @@ def main():
         subprocess.run(["xdotool", "windowfocus", "--sync", windows[-1]], check=True, timeout=10)
 
     try:
+        report["checks"].append(import_native_resources(godot, project, out))
         for script, prefix in (("verify_swimming.gd", "TIDAL_SWIMMING_CHECK"),
-                               ("verify_treasure.gd", "TIDAL_TREASURE_CHECK")):
+                               ("verify_treasure.gd", "TIDAL_TREASURE_CHECK"),
+                               ("verify_collision.gd", "TIDAL_COLLISION_CHECK")):
             regression = subprocess.run([godot, "--headless", "--path", str(project), "--script", "res://" + script,
                                          "--fixed-fps", "240"], env=isolated_env(out / (script + "-session")),
                                         capture_output=True, text=True, timeout=180)
@@ -272,13 +343,30 @@ def main():
         wait_for(recorder, recorded_first_frame, 30, "first actual X11 input-video frame")
         input_movie_first_id = max(item["sample_id"] for item in records("native-input.log", "TIDAL_STATE"))
         input_movie_started = time.monotonic()
+        exploration = {}
+        exploration_images = []
+        def exploration_screenshot(name):
+            observed = records("native-input.log", "TIDAL_STATE")[-1]
+            screenshot(name)
+            subprocess.run(["ffmpeg", "-v", "error", "-xerror", "-i", str(out / name), "-f", "null", "-"], check=True, timeout=30)
+            exploration_images.append({"name":name,"sha256":sha256(out/name),"bytes":(out/name).stat().st_size,
+                "state_before_capture_request":observed,"kind":"actual-input off-route contact; passive state is not exact framebuffer synchronization"})
+        try:
+            run_chart_exploration(lambda: records("native-input.log", "TIDAL_STATE"), move, time.sleep, exploration_screenshot, evidence=exploration)
+            if {item["name"] for item in exploration_images} != {"native-chart-blocker-first.png","native-chart-blocker-opposed.png"}:
+                raise RuntimeError("Missing opposing actual-input collision captures")
+        finally:
+            write_json(out / "native-off-route-exploration.json", {**exploration,"input_events":events,"captures":exploration_images,
+                "movement_release_receipts":movement_releases})
+        report["checks"].append({"name": "actual keyboard opposing chart collision and off-route encirclement", "passed": True, "receipt": exploration})
         driver = RouteDriver(lambda: records("native-input.log", "TIDAL_STATE"), move,
                              lambda state: tap("e"), time.sleep, screenshot)
         try:
             route = driver.run()
         finally:
             write_json(out / "native-input-route.json", {"input_events": events, "samples": driver.samples,
-                "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions})
+                "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions,
+                "movement_release_receipts": movement_releases})
         time.sleep(1)
         require_running(recorder, "completion of actual keyboard-route recording")
         input_movie_states = [item for item in records("native-input.log", "TIDAL_STATE")
@@ -364,7 +452,7 @@ def main():
         stop_process(recorder)
         stop_process(runtime)
         engine_errors = []
-        for log_name in ("verify_swimming.gd.log", "verify_treasure.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
+        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "verify_collision.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
             path = out / log_name
             if path.exists():
                 try:

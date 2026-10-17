@@ -7,9 +7,10 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
-from capture_browser import capture_png, completed_route_save, secondary_touch_tap, validate_web_exit
-from capture_native import validate_input_movie_span
-from gameplay import (ROUTE, RouteDriver, complete, direction_to, keyboard_direction,
+from capture_browser import capture_png, completed_route_save, route_diagnostics, secondary_touch_tap, validate_web_exit
+from capture_native import apply_movement_keys, validate_input_movie_span, wait_for_neutral_movement
+from gameplay import (ROUTE, RouteDriver, complete, direction_to, inside_approach,
+                      inside_interaction_region, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
 
 
@@ -19,7 +20,9 @@ class GameplayObserverTests(unittest.TestCase):
                   "position": [1.3, 1, 10], "locomotion": "walk", "water_depth": 0.0,
                   "camera_right": [1, 0], "camera_forward": [0, -1],
                   "action_rect": [1100, 620, 100, 40], "quest_stage": 0,
-                  "treasures": [False, False], "completed": False, "language": "en"}
+                  "treasures": [False, False], "completed": False, "language": "en",
+                  "movement_input": [0, 0], "velocity": [0, 0, 0],
+                  "interaction_available": True, "interaction_reason": "available"}
         result.update(changes)
         return result
 
@@ -34,14 +37,26 @@ class GameplayObserverTests(unittest.TestCase):
     def driver(self, samples, interact=None):
         return RouteDriver(lambda: samples, Mock(), interact or Mock(), Mock(), Mock())
 
+    def settle(self, driver, samples, initial, point):
+        driver.stop_for_action(initial, point)
+        settled = {**initial, "sample_id": initial["sample_id"] + 1,
+                   "physics_frame": initial["physics_frame"] + 12,
+                   "movement_input": [0, 0], "velocity": [0, 0, 0]}
+        samples.append(settled)
+        driver.observe()
+        return settled
+
     def crossing(self):
         return [self.state(sample_id=i + 1, physics_frame=60 + i * 30, locomotion=mode, water_depth=1.2 if mode == "swim" else 0.2)
                 for i, mode in enumerate(["walk", "wade", "swim", "swim", "swim", "wade", "walk"])]
 
     def test_route_and_source_files_are_explicit(self):
         self.assertEqual([point.get("stage") for point in ROUTE if point.get("stage")], [1, 2, 3, 4])
-        self.assertTrue({"swim_controller.gd", "verify_swimming.gd", "verify_treasure.gd"}.issubset(GAME_FILES))
+        self.assertTrue({"swim_controller.gd", "verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd"}.issubset(GAME_FILES))
         self.assertEqual(ROUTE[3]["target"], [8.2, 5.5])
+        self.assertEqual(ROUTE[-1]["target"], [0, -11.7])
+        self.assertEqual(ROUTE[-1]["approach"], [0, -10.25])
+        self.assertEqual(ROUTE[-1]["radius"], .25)
 
     def test_valid_passive_state(self):
         self.assertEqual(validate_state(self.state()), self.state())
@@ -53,12 +68,16 @@ class GameplayObserverTests(unittest.TestCase):
                  ("position", [1, float("nan"), 2]), ("position", [1, 2]), ("locomotion", "flying"),
                  ("camera_right", [0, 0]), ("camera_forward", [1, 0]), ("action_rect", [1, 2, 0, 4]),
                  ("quest_stage", True), ("quest_stage", 5), ("treasures", [1, 1]), ("treasures", [True]),
-                 ("completed", 1), ("water_depth", float("nan")), ("water_depth", -1), ("language", "xx")]
+                 ("completed", 1), ("water_depth", float("nan")), ("water_depth", -1), ("language", "xx"),
+                 ("movement_input", [float("nan"), 0]), ("movement_input", [0]),
+                 ("velocity", [0, float("inf"), 0]), ("velocity", [0, 0]),
+                 ("interaction_available", 1), ("interaction_reason", False)]
         for field, value in cases:
             with self.subTest(field=field, value=value), self.assertRaises(ValueError):
                 validate_state(self.state(**{field: value}))
         for field in ("schema", "sample_id", "physics_frame", "demo", "position", "locomotion", "camera_right",
-                      "camera_forward", "action_rect", "quest_stage", "treasures", "completed", "water_depth", "language"):
+                      "camera_forward", "action_rect", "quest_stage", "treasures", "completed", "water_depth", "language",
+                      "movement_input", "velocity", "interaction_available"):
             value = self.state()
             del value[field]
             with self.subTest(missing=field), self.assertRaises(ValueError):
@@ -71,6 +90,66 @@ class GameplayObserverTests(unittest.TestCase):
                 validate_state(state, self.state())
         with self.assertRaisesRegex(ValueError, "regressed"):
             validate_state(self.state(sample_id=2, physics_frame=72), self.state(quest_stage=1))
+
+    def test_native_release_waits_for_new_neutral_physics_after_keyup(self):
+        baseline = self.state(movement_input=[0, 0])
+        fresh = self.state(sample_id=4, physics_frame=90, movement_input=[0, 0])
+        read = Mock(side_effect=[[baseline],
+            [self.state(sample_id=2, movement_input=[0, 0])],
+            [self.state(sample_id=3, physics_frame=80, movement_input=[1, 0])], [fresh]])
+        with patch("capture_native.time.sleep"):
+            receipt = wait_for_neutral_movement(Mock(poll=Mock(return_value=None)), read, baseline)
+        self.assertEqual(read.call_count, 4)
+        self.assertEqual(receipt["observed"], fresh)
+        self.assertEqual(receipt["after_physics_frame"], baseline["physics_frame"])
+        self.assertEqual(receipt["after_sample_id"], baseline["sample_id"])
+
+    def test_native_release_refuses_stale_partial_or_absent_input_until_timeout(self):
+        baseline = self.state(movement_input=[0, 0])
+        for states in [[], [baseline], [self.state(sample_id=2, movement_input=[0, 0])],
+                       [self.state(sample_id=2, physics_frame=80, movement_input=[.1, 0])]]:
+            clock = [0.0]
+            with self.subTest(states=states), patch("capture_native.time.monotonic", side_effect=lambda: clock[0]), \
+                    patch("capture_native.time.sleep", side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)), \
+                    self.assertRaisesRegex(TimeoutError, "fresh neutral"):
+                wait_for_neutral_movement(Mock(poll=Mock(return_value=None)), lambda: states, baseline, timeout=.2)
+
+    def test_native_release_rejects_invalid_input_and_wrong_route(self):
+        baseline = self.state(movement_input=[0, 0])
+        for movement in (None, [float("nan"), 0], [0, float("inf")], [True, 0], [0]):
+            fresh = self.state(sample_id=2, physics_frame=80, movement_input=movement)
+            with self.subTest(movement=movement), self.assertRaises(ValueError):
+                wait_for_neutral_movement(Mock(poll=Mock(return_value=None)), lambda: [fresh], baseline)
+        with self.assertRaisesRegex(ValueError, "wrong input route"):
+            wait_for_neutral_movement(Mock(poll=Mock(return_value=None)),
+                lambda: [self.state(sample_id=2, physics_frame=80, movement_input=[0, 0], demo=True)], baseline)
+
+    def test_native_release_requires_live_runtime_before_and_after_receipt(self):
+        baseline = self.state(movement_input=[0, 0])
+        fresh = self.state(sample_id=2, physics_frame=80, movement_input=[0, 0])
+        for polls in ([0], [None, 0]):
+            with self.subTest(polls=polls), self.assertRaisesRegex(RuntimeError, "exited"):
+                wait_for_neutral_movement(Mock(poll=Mock(side_effect=polls)), lambda: [fresh], baseline)
+
+    def test_native_release_barrier_only_follows_actual_all_keyup(self):
+        pressed, calls = {"d", "w"}, []
+        def key(name, down):
+            calls.append((name, down))
+            pressed.add(name) if down else pressed.discard(name)
+        barrier = Mock(side_effect=lambda: self.assertEqual(pressed, set()))
+        apply_movement_keys((1, 0), pressed, key, barrier)
+        self.assertEqual(calls, [("w", False)])
+        barrier.assert_not_called()
+        apply_movement_keys((1, 0), pressed, key, barrier)
+        self.assertEqual(calls, [("w", False)])
+        apply_movement_keys((0, 0), pressed, key, barrier)
+        self.assertEqual(calls, [("w", False), ("d", False)])
+        barrier.assert_called_once()
+        apply_movement_keys((0, 0), pressed, key, barrier)
+        barrier.assert_called_once()
+        apply_movement_keys((1, 0), pressed, key, barrier)
+        self.assertEqual(calls[-1], ("d", True))
+        barrier.assert_called_once()
 
     def test_real_input_direction_uses_observed_camera_axes(self):
         self.assertEqual(direction_to(self.state(), [1.3, 8]), (0, -1))
@@ -127,15 +206,16 @@ class GameplayObserverTests(unittest.TestCase):
         callback = Mock()
         driver = self.driver(samples, callback)
         driver.observe()
+        at_map = self.settle(driver, samples, at_map, ROUTE[0])
         driver.request_action(at_map, ROUTE[0])
         callback.assert_called_once_with(at_map)
-        samples.append(self.at_stage(1, sample_id=2, physics_frame=72, position=[1.3, 1, 7.8]))
+        samples.append(self.at_stage(1, sample_id=3, physics_frame=84, position=[1.3, 1, 7.8]))
         driver.observe()
         self.assertEqual(driver.accepted_stage, 1)
         self.assertIsNone(driver.pending_action)
-        self.assertEqual(driver.actions[0]["accepted_sample_id"], 2)
+        self.assertEqual(driver.actions[0]["accepted_sample_id"], 3)
         # The same action cannot authorize a second, unrequested stage transition.
-        samples.append(self.at_stage(2, sample_id=3, physics_frame=84, position=[1.3, 1, 7.8]))
+        samples.append(self.at_stage(2, sample_id=4, physics_frame=96, position=[1.3, 1, 7.8]))
         with self.assertRaisesRegex(ValueError, "without.*callback"):
             driver.observe()
 
@@ -161,12 +241,13 @@ class GameplayObserverTests(unittest.TestCase):
         samples = [initial]
         driver = self.driver(samples)
         driver.observe()
-        with self.assertRaisesRegex(ValueError, "away"):
+        with self.assertRaisesRegex(ValueError, "outside the authored interaction range"):
             driver.request_action(initial, {**ROUTE[0], "target": [20, 20]})
+        initial = self.settle(driver, samples, initial, ROUTE[0])
         driver.request_action(initial, ROUTE[0])
         with self.assertRaisesRegex(ValueError, "predates"):
             driver.accept_progress(self.at_stage(1, position=[1.3, 1, 7.8]), initial)
-        distant = self.at_stage(1, sample_id=2, physics_frame=180, position=[5, 1, 7.8])
+        distant = self.at_stage(1, sample_id=3, physics_frame=180, position=[5, 1, 7.8])
         with self.assertRaisesRegex(ValueError, "interaction location"):
             driver.accept_progress(distant, initial)
 
@@ -175,9 +256,10 @@ class GameplayObserverTests(unittest.TestCase):
         samples = [initial]
         driver = self.driver(samples, Mock(side_effect=RuntimeError("OS input failed")))
         driver.observe()
+        initial = self.settle(driver, samples, initial, ROUTE[0])
         with self.assertRaisesRegex(RuntimeError, "OS input failed"):
             driver.request_action(initial, ROUTE[0])
-        samples.append(self.at_stage(1, sample_id=2, physics_frame=72, position=[1.3, 1, 7.8]))
+        samples.append(self.at_stage(1, sample_id=3, physics_frame=84, position=[1.3, 1, 7.8]))
         with self.assertRaisesRegex(ValueError, "without.*callback"):
             driver.observe()
 
@@ -198,8 +280,9 @@ class GameplayObserverTests(unittest.TestCase):
         samples = [initial]
         driver = self.driver(samples)
         driver.observe()
+        initial = self.settle(driver, samples, initial, ROUTE[0])
         driver.request_action(initial, ROUTE[0])
-        acknowledged = self.at_stage(1, sample_id=2, physics_frame=72,
+        acknowledged = self.at_stage(1, sample_id=3, physics_frame=84,
                                      position=[1.3135, .4668, 6.8344])
         samples.append(acknowledged)
         driver.observe()
@@ -224,16 +307,244 @@ class GameplayObserverTests(unittest.TestCase):
         initial = self.at_stage(0, position=[1.3, 1, 7.8])
         samples, clock = [initial], [1.0]
         callback = Mock(side_effect=lambda _: samples.append(
-            self.at_stage(0, sample_id=2, physics_frame=72, position=[1.3, 1, 6.84])))
+            self.at_stage(0, sample_id=3, physics_frame=84, position=[1.3, 1, 6.84])))
         driver = self.driver(samples, callback)
         driver.timeout = .5
-        driver.pause = lambda seconds: clock.__setitem__(0, clock[0] + seconds)
+        def pause(seconds):
+            clock[0] += seconds
+            if len(samples) == 1:
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.pause = pause
         with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]):
             with self.assertRaisesRegex(RuntimeError, "could not reach/complete"):
                 driver.run()
-        callback.assert_called_once_with(initial)
+        callback.assert_called_once_with(samples[1])
         self.assertEqual(len(driver.actions), 1)
         self.assertTrue(all(call.args == ((0, 0),) for call in driver.move.call_args_list))
+
+    def test_action_waits_for_new_settled_physics_after_stop_callback_return(self):
+        initial = self.at_stage(0, position=[1.3, 1, 7.8], movement_input=[0, -1], velocity=[0, 0, -4])
+        buffered_neutral = self.at_stage(0, sample_id=2, physics_frame=72, position=[1.3, 1, 7.8])
+        samples = [initial]
+        driver = self.driver(samples)
+        driver.observe()
+        # A long physical callback delivered this neutral sample before return.
+        # Its existence must not authorize an immediate stale-position action.
+        driver.move.side_effect = lambda _: samples.append(buffered_neutral)
+        boundary = driver.stop_for_action(initial, ROUTE[0])
+        self.assertEqual(boundary, buffered_neutral)
+        self.assertEqual(driver.stop_boundary["after_sample_id"], 2)
+        for changes in ({}, {"sample_id": 3}, {"physics_frame": 84},
+                        {"sample_id": 3, "physics_frame": 84, "movement_input": [.00001, 0]},
+                        {"sample_id": 3, "physics_frame": 84, "velocity": [.081, 0, 0]},
+                        {"sample_id": 3, "physics_frame": 84, "velocity": [.06, 0, .06]}):
+            stale_or_moving = {**buffered_neutral, **changes}
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, "fresh neutral and settled"):
+                driver.request_action(stale_or_moving, ROUTE[0])
+        driver.interact.assert_not_called()
+        fresh = {**buffered_neutral, "sample_id": 3, "physics_frame": 84}
+        for available in (False, None, 1):
+            with self.subTest(available=available), self.assertRaisesRegex(ValueError, "unavailable"):
+                driver.request_action({**fresh, "interaction_available": available}, ROUTE[0])
+        samples.append(fresh)
+        driver.observe()
+        driver.request_action(fresh, ROUTE[0])
+        driver.interact.assert_called_once_with(fresh)
+        self.assertEqual(driver.actions[0]["stop"]["settled_sample_id"], 3)
+        with self.assertRaisesRegex(ValueError, "already pending"):
+            driver.request_action(fresh, ROUTE[0])
+        with self.assertRaisesRegex(ValueError, "pending"):
+            driver.stop_for_action(fresh, ROUTE[0])
+
+    def test_actual_interaction_region_is_independent_of_steering_approach_radius(self):
+        point = {**ROUTE[-1], "stage": 1}
+        # Hosted desktop sample 166 was physically ready and settled here, but
+        # was wrongly re-steered because it lay outside the .25 m aiming disk.
+        initial = self.state(position=[-.5133, 3.9459, -10.3726], velocity=[-.0411, 0, -.011])
+        samples = [initial]
+        driver = self.driver(samples)
+        driver.observe()
+        settled = self.settle(driver, samples, initial, point)
+        self.assertFalse(inside_approach(settled, point))
+        self.assertTrue(inside_interaction_region(settled, point))
+        # Inside the approach disk but still outside the genuine 1.55 m target
+        # radius: never substitute the approach point for the quest target.
+        with self.assertRaisesRegex(ValueError, "outside the authored interaction range"):
+            driver.request_action({**settled, "position": [0, 1, -10.03]}, point)
+        for distance in (1.55, 1.550001, 2):
+            outside = {**settled, "position": [0, 1, distance]}
+            distant_point = {**point, "target": [0, 0], "approach": [0, 1.45]}
+            self.assertFalse(inside_interaction_region(outside, distant_point))
+            with self.subTest(distance=distance), self.assertRaisesRegex(ValueError, "outside the authored interaction range"):
+                driver.request_action(outside, distant_point)
+        driver.interact.assert_not_called()
+        driver.request_action(settled, point)
+        self.assertEqual(driver.actions[0]["target"], [0, -11.7])
+        self.assertEqual(driver.actions[0]["stop"]["approach"], [0, -10.25])
+        driver.interact.assert_called_once_with(settled)
+        with self.assertRaisesRegex(ValueError, "already pending"):
+            driver.request_action(settled, point)
+
+    def test_ready_outside_aiming_disk_stops_then_uses_one_fresh_settled_action(self):
+        point = {**ROUTE[-1], "stage": 1, "screenshot": "checkpoint.png"}
+        initial = self.state(position=[-.4842, 3.9459, -10.3648],
+                             movement_input=[-1, 0], velocity=[-.3584, 0, -.0963])
+        buffered = {**initial, "sample_id": 2, "physics_frame": 72,
+                    "position": [-.5133, 3.9459, -10.3726],
+                    "movement_input": [0, 0], "velocity": [-.0411, 0, -.011]}
+        samples, clock = [initial], [1.0]
+        driver = self.driver(samples)
+        driver.snapshot.side_effect = [None, RuntimeError("accepted checkpoint captured")]
+        def move(direction):
+            self.assertEqual(direction, (0, 0))
+            if len(samples) == 1:
+                samples.append(buffered)
+        def pause(seconds):
+            clock[0] += seconds
+            if len(samples) == 2:
+                driver.interact.assert_not_called()
+                samples.append({**buffered, "sample_id": 3, "physics_frame": 84})
+        driver.move.side_effect, driver.pause = move, pause
+        driver.interact.side_effect = lambda state: samples.append(
+            {**state, "sample_id": 4, "physics_frame": 96, "quest_stage": 1})
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [point]), \
+                self.assertRaisesRegex(RuntimeError, "accepted checkpoint captured"):
+            driver.run()
+        self.assertFalse(inside_approach(initial, point))
+        self.assertFalse(inside_approach(samples[2], point))
+        driver.interact.assert_called_once_with(samples[2])
+        self.assertEqual(len(driver.stops), 1)
+        self.assertEqual(driver.actions[0]["stop"]["after_sample_id"], 2)
+        self.assertEqual(driver.actions[0]["stop"]["settled_sample_id"], 3)
+        self.assertEqual(driver.actions[0]["accepted_sample_id"], 4)
+        self.assertNotIn("drifted_sample_id", driver.stops[0])
+
+    def test_ready_region_still_rejects_stale_moving_and_unavailable_actions(self):
+        point = {**ROUTE[-1], "stage": 1}
+        initial = self.state(position=[-.6732, 3.9459, -10.4254])
+        samples = [initial]
+        driver = self.driver(samples)
+        driver.observe()
+        driver.stop_for_action(initial, point)
+        fresh = {**initial, "sample_id": 2, "physics_frame": 72}
+        for state in (initial, {**fresh, "physics_frame": 60}, {**fresh, "sample_id": 1},
+                      {**fresh, "movement_input": [.00001, 0]}, {**fresh, "velocity": [.081, 0, 0]}):
+            with self.subTest(state=state), self.assertRaisesRegex(ValueError, "fresh neutral and settled"):
+                driver.request_action(state, point)
+        for reason in ("too_far", "too_high", "blocked"):
+            unavailable = {**fresh, "interaction_available": False, "interaction_reason": reason}
+            self.assertFalse(inside_interaction_region(unavailable, point))
+            with self.subTest(reason=reason), self.assertRaisesRegex(ValueError, "unavailable"):
+                driver.request_action(unavailable, point)
+        driver.interact.assert_not_called()
+        self.assertEqual(driver.actions, [])
+
+    def test_lost_actual_availability_after_stop_reapproaches_without_action(self):
+        point = {**ROUTE[-1], "stage": 1}
+        for reason in ("too_high", "blocked"):
+            initial = self.state(position=[-.5133, 3.9459, -10.3726])
+            buffered = {**initial, "sample_id": 2, "physics_frame": 72,
+                        "interaction_available": False, "interaction_reason": reason}
+            samples, clock = [initial], [1.0]
+            driver = self.driver(samples)
+            def move(direction):
+                if direction != (0, 0):
+                    self.assertEqual(direction, direction_to(samples[-1], point["approach"]))
+                    self.assertEqual(samples[-1]["sample_id"], 3)
+                    raise RuntimeError("physical reapproach requested")
+                if len(samples) == 1:
+                    samples.append(buffered)
+            def pause(seconds):
+                clock[0] += seconds
+                if len(samples) == 2:
+                    samples.append({**buffered, "sample_id": 3, "physics_frame": 84})
+            driver.move.side_effect, driver.pause = move, pause
+            with self.subTest(reason=reason), patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                    patch("gameplay.ROUTE", [point]), self.assertRaisesRegex(RuntimeError, "physical reapproach requested"):
+                driver.run()
+            driver.interact.assert_not_called()
+            self.assertEqual(len(driver.stops), 1)
+            self.assertEqual(driver.stops[0]["drifted_sample_id"], 3)
+
+    def test_path_only_waypoint_keeps_its_radius_even_when_interaction_is_available(self):
+        point = {"name": "path-only point", "target": [1.3, 9], "screenshot": "checkpoint.png"}
+        initial = self.state()
+        samples = [initial]
+        driver = self.driver(samples)
+        driver.snapshot.side_effect = [None, RuntimeError("path checkpoint captured")]
+        def move(direction):
+            if direction != (0, 0):
+                self.assertEqual(direction, (0, -1))
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72, "position": [1.3, 1, 9.7]})
+        driver.move.side_effect = move
+        self.assertTrue(inside_interaction_region(initial, point))
+        self.assertFalse(inside_approach(initial, point))
+        with patch("gameplay.ROUTE", [point]), self.assertRaisesRegex(RuntimeError, "path checkpoint captured"):
+            driver.run()
+        self.assertEqual(driver.milestones[0]["sample"]["sample_id"], 2)
+        self.assertEqual(driver.stops, [])
+        driver.interact.assert_not_called()
+
+    def test_delayed_stop_drift_reapproaches_and_resettles_before_sole_action(self):
+        point = {**ROUTE[-1], "stage": 1, "screenshot": "checkpoint.png"}
+        initial = self.state(position=[0, 1, -10.25], movement_input=[0, -1], velocity=[0, 0, -4])
+        drifted = self.state(sample_id=2, physics_frame=120, position=[0, 1, -13.33])
+        samples, clock = [initial], [1.0]
+        driver = self.driver(samples)
+        driver.snapshot.side_effect = [None, RuntimeError("accepted checkpoint captured")]
+        def move(direction):
+            if direction == (0, 0):
+                if len(samples) == 1:
+                    samples.append(drifted)
+                elif samples[-1]["sample_id"] == 4:
+                    samples.append({**initial, "sample_id": 5, "physics_frame": 204,
+                                    "movement_input": [0, 0], "velocity": [0, 0, .2]})
+            else:
+                self.assertEqual(samples[-1]["sample_id"], 3)
+                driver.interact.assert_not_called()
+                samples.append({**initial, "sample_id": 4, "physics_frame": 192,
+                                "movement_input": [0, 1], "velocity": [0, 0, 4]})
+        def pause(seconds):
+            clock[0] += seconds
+            if samples[-1]["sample_id"] == 2:
+                samples.append({**drifted, "sample_id": 3, "physics_frame": 132})
+            elif samples[-1]["sample_id"] == 5:
+                samples.append({**initial, "sample_id": 6, "physics_frame": 216,
+                                "movement_input": [0, 0], "velocity": [0, 0, 0]})
+        def interact(state):
+            self.assertEqual(state["sample_id"], 6)
+            samples.append({**state, "sample_id": 7, "physics_frame": 228, "quest_stage": 1})
+        driver.move.side_effect, driver.pause = move, pause
+        driver.interact.side_effect = interact
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [point]):
+            with self.assertRaisesRegex(RuntimeError, "accepted checkpoint captured"):
+                driver.run()
+        driver.interact.assert_called_once_with(samples[5])
+        self.assertEqual(len(driver.actions), 1)
+        self.assertEqual(driver.actions[0]["accepted_sample_id"], 7)
+        self.assertEqual(driver.actions[0]["stop"]["after_sample_id"], 5)
+        self.assertEqual(driver.actions[0]["stop"]["settled_sample_id"], 6)
+        self.assertEqual(len(driver.stops), 2)
+        self.assertEqual(driver.stops[0]["after_sample_id"], 2)
+        self.assertEqual(driver.stops[0]["drifted_sample_id"], 3)
+        self.assertIn(((0, 1),), [call.args for call in driver.move.call_args_list])
+
+    def test_neutral_but_still_moving_never_authorizes_action(self):
+        initial = self.at_stage(0, position=[1.3, 1, 7.8])
+        samples, clock = [initial], [1.0]
+        driver = self.driver(samples)
+        driver.timeout = .4
+        def pause(seconds):
+            clock[0] += seconds
+            previous = samples[-1]
+            samples.append({**previous, "sample_id": previous["sample_id"] + 1,
+                            "physics_frame": previous["physics_frame"] + 12, "velocity": [.2, 0, 0]})
+        driver.pause = pause
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]):
+            with self.assertRaisesRegex(RuntimeError, "could not reach/complete"):
+                driver.run()
+        driver.interact.assert_not_called()
+        self.assertEqual(driver.actions, [])
 
     def test_slow_snapshot_requires_fresh_real_observation_after_capture(self):
         for advances in (True, False):
@@ -268,6 +579,192 @@ class GameplayObserverTests(unittest.TestCase):
             validate_restored(receipt, missing)
 
 
+class WaypointBudgetTests(unittest.TestCase):
+    state = GameplayObserverTests.state
+
+    def driver(self, samples, **options):
+        return RouteDriver(lambda: samples, Mock(), Mock(), Mock(), Mock(),
+                           **{"physics_timeout": 15, "absolute_wall_timeout": 240, **options})
+
+    def test_profiles_are_finite_paired_and_bounded(self):
+        for bad in (0, -1, True, float("nan"), float("inf"), "15"):
+            for field in ("timeout", "physics_timeout", "absolute_wall_timeout"):
+                with self.subTest(field=field, bad=bad), self.assertRaises(ValueError):
+                    self.driver([self.state()], **{field: bad})
+        for options in ({"physics_timeout": 15.1}, {"absolute_wall_timeout": 241},
+                        {"physics_timeout": None}, {"absolute_wall_timeout": None}):
+            with self.subTest(options=options), self.assertRaises(ValueError):
+                self.driver([self.state()], **options)
+        self.assertEqual(self.driver([]).budget_policy["physics_limit_seconds"], 15)
+        self.assertEqual(self.driver([]).budget_policy["absolute_wall_limit_seconds"], 240)
+
+    def test_native_default_retains_75_active_wall_seconds_and_ignores_physics_cap(self):
+        clock, initial = [0.0], self.state()
+        driver = self.driver([initial], physics_timeout=None, absolute_wall_timeout=None)
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]):
+            driver.begin_waypoint_budget(ROUTE[0], initial)
+            driver.capture_seconds = 10
+            clock[0] = 80
+            driver.check_waypoint_budget(self.state(sample_id=2, physics_frame=9060))
+            clock[0] = 85
+            with self.assertRaisesRegex(RuntimeError, "active_wall"):
+                driver.check_waypoint_budget(self.state(sample_id=2, physics_frame=9060))
+        self.assertEqual(driver.budgets[0]["expired_budgets"], ["active_wall"])
+
+    def test_fresh_observations_never_renew_either_deadline(self):
+        clock, initial = [0.0], self.state()
+        driver = self.driver([initial])
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]):
+            budget = driver.begin_waypoint_budget(ROUTE[0], initial)
+            for index, (wall, frame) in enumerate(((30, 120), (80, 180), (120, 600)), start=2):
+                clock[0] = wall
+                driver.check_waypoint_budget(self.state(sample_id=index, physics_frame=frame))
+                self.assertEqual((budget["absolute_wall_deadline"], budget["physics_frame_deadline"]), (240, 960))
+            clock[0] = 130
+            with self.assertRaisesRegex(TimeoutError, "physics"):
+                driver.check_waypoint_budget(self.state(sample_id=5, physics_frame=960))
+        self.assertEqual(budget["expired_budgets"], ["physics"])
+
+    def test_slow_valid_stop_and_action_can_finish_beyond_old_wall_budget(self):
+        initial = self.state(position=[1.3, 1, 7.8])
+        samples, clock = [initial], [0.0]
+        driver = self.driver(samples)
+        driver.snapshot.side_effect = [None, RuntimeError("accepted checkpoint captured")]
+        def pause(_):
+            clock[0] += 80 if len(samples) == 1 else 1
+            if len(samples) == 1:
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.pause = pause
+        driver.interact.side_effect = lambda state: samples.append(
+            {**state, "sample_id": 3, "physics_frame": 84, "quest_stage": 1})
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                patch("gameplay.ROUTE", [{**ROUTE[0], "screenshot": "checkpoint.png"}]), \
+                self.assertRaisesRegex(RuntimeError, "accepted checkpoint captured"):
+            driver.run()
+        driver.interact.assert_called_once()
+        self.assertEqual(driver.budgets[0]["status"], "completed")
+        self.assertGreater(driver.budgets[0]["elapsed_wall_seconds"], 75)
+        self.assertLess(driver.budgets[0]["elapsed_physics_seconds"], 15)
+
+    def test_budget_baseline_drains_observations_after_preceding_screenshot(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        def screenshot(name, _):
+            if name == "tidal-01.png":
+                clock[0] = 80
+                samples.append(self.state(sample_id=2, physics_frame=1200))
+            else:
+                raise RuntimeError("checkpoint captured")
+        driver.snapshot.side_effect = screenshot
+        point = {"name": "already reached path point", "target": [1.3, 10], "screenshot": "checkpoint.png"}
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [point]), \
+                self.assertRaisesRegex(RuntimeError, "checkpoint captured"):
+            driver.run()
+        budget = driver.budgets[0]
+        self.assertEqual((budget["baseline_sample_id"], budget["baseline_physics_frame"]), (2, 1200))
+        self.assertEqual((budget["absolute_wall_deadline"], budget["physics_frame_deadline"]), (320, 2100))
+        self.assertEqual(budget["elapsed_physics_frames"], 0)
+
+    def test_frozen_observations_still_fail_the_ten_second_silence_guard(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        driver.pause = lambda _: clock.__setitem__(0, clock[0] + 1)
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(RuntimeError, "observations stopped advancing"):
+            driver.run()
+        self.assertEqual(driver.budgets[0]["status"], "failed")
+        self.assertEqual(driver.budgets[0]["expired_budgets"], [])
+        self.assertLess(driver.budgets[0]["elapsed_wall_seconds"], 240)
+        driver.interact.assert_not_called()
+
+    def test_moving_physics_without_spatial_progress_expires_simulation_budget(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        def pause(_):
+            clock[0] += .1
+            previous = samples[-1]
+            samples.append({**previous, "sample_id": previous["sample_id"] + 1,
+                            "physics_frame": previous["physics_frame"] + 60})
+        driver.pause = pause
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "physics"):
+            driver.run()
+        self.assertEqual(driver.budgets[0]["expired_budgets"], ["physics"])
+        self.assertEqual(driver.budgets[0]["elapsed_physics_frames"], 900)
+        driver.interact.assert_not_called()
+
+    def test_absolute_wall_limit_counts_capture_time_and_preserves_failure_receipts(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        def move(direction):
+            if direction != (0, 0) and len(samples) == 1:
+                samples.append(self.state(sample_id=2, physics_frame=72, locomotion="wade", water_depth=.2))
+        def screenshot(name, _):
+            if name == "tidal-03.png":
+                clock[0] += 241
+                samples.append(self.state(sample_id=3, physics_frame=84, locomotion="wade", water_depth=.2))
+        driver.move.side_effect, driver.snapshot.side_effect = move, screenshot
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "absolute_wall"):
+            driver.run()
+        diagnostics = route_diagnostics(driver)
+        budget = diagnostics["waypoint_budgets"][0]
+        self.assertEqual(budget["expired_budgets"], ["absolute_wall"])
+        self.assertEqual(budget["measured_capture_seconds"], 241)
+        self.assertEqual(budget["elapsed_active_wall_seconds"], 0)
+        self.assertEqual(diagnostics["current_waypoint"], ROUTE[0]["name"])
+        self.assertIn("physical_stops", diagnostics)
+        self.assertIn("current_stop", diagnostics)
+        driver.interact.assert_not_called()
+
+    def test_stop_callback_overrun_fails_before_action_and_retains_stop(self):
+        initial = self.state(position=[1.3, 1, 7.8])
+        samples, clock = [initial], [0.0]
+        driver = self.driver(samples)
+        def move(_):
+            if len(samples) == 1:
+                clock[0] = 240
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.move.side_effect = move
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "absolute_wall"):
+            driver.run()
+        diagnostics = route_diagnostics(driver)
+        self.assertEqual(diagnostics["current_stop"]["after_sample_id"], 2)
+        self.assertEqual(len(diagnostics["physical_stops"]), 1)
+        self.assertEqual(diagnostics["waypoint_budgets"][0]["expired_budgets"], ["absolute_wall"])
+        driver.interact.assert_not_called()
+
+    def test_action_callback_cannot_complete_after_simulation_deadline(self):
+        initial = self.state(position=[1.3, 1, 7.8])
+        samples, clock = [initial], [0.0]
+        driver = self.driver(samples)
+        def pause(_):
+            clock[0] += .1
+            if len(samples) == 1:
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.pause = pause
+        driver.interact.side_effect = lambda state: samples.append(
+            {**state, "sample_id": 3, "physics_frame": 960, "quest_stage": 1})
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "physics"):
+            driver.run()
+        driver.interact.assert_called_once()
+        self.assertEqual(driver.budgets[0]["status"], "expired")
+        self.assertEqual(driver.milestones, [])
+
+    def test_malformed_frames_fail_before_any_budget_acceptance(self):
+        for bad in (True, 0, 72.5, float("nan"), float("inf")):
+            samples, clock = [self.state()], [0.0]
+            driver = self.driver(samples)
+            driver.move.side_effect = lambda _, value=bad: samples.append(self.state(sample_id=2, physics_frame=value)) if len(samples) == 1 else None
+            with self.subTest(frame=bad), patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                    patch("gameplay.ROUTE", [ROUTE[0]]), self.assertRaises(ValueError):
+                driver.run()
+            self.assertEqual(driver.budgets[0]["status"], "failed")
+            driver.interact.assert_not_called()
+
+
 class AuthoringBoundaryTests(unittest.TestCase):
     def response(self, **changes):
         sample = {"schema": 1, "scanning": False, "process_frame": 42,
@@ -278,7 +775,7 @@ class AuthoringBoundaryTests(unittest.TestCase):
     def test_initial_editor_scan_excludes_uncreated_dependencies_and_regression_fixtures(self):
         initial = set(initial_copy_files())
         self.assertFalse(initial & {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES})
-        self.assertEqual(set(DEFERRED_TEST_FILES), {"verify_swimming.gd", "verify_treasure.gd"})
+        self.assertEqual(set(DEFERRED_TEST_FILES), {"verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd"})
         self.assertTrue(set(DEFERRED_TEST_FILES).issubset(GAME_FILES))
         self.assertEqual(initial | {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}, set(GAME_FILES))
         self.assertNotIn(EDITOR_PROBE_PATH.removeprefix("res://"), GAME_FILES)

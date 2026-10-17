@@ -31,7 +31,7 @@ def envelope(response):
 
 # Regression fixtures depend on the authored scripts and never belong in the
 # editor's initial scan. They enter only the stopped, finished native package.
-DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd")
+DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd")
 EDITOR_PROBE_PATH = "res://tidal_ci_editor_probe.gd"
 EDITOR_PROBE_SOURCE = """@tool
 extends RefCounted

@@ -66,7 +66,8 @@ CHINESE_LABELS = {
     "footer": "方向键行走或游泳 · E 互动 · R 重来 · L 语言",
     "action": "E · 互动",
 }
-CHINESE_PROMPTS = ("", "E · 阅读海图")
+# Language acceptance runs at the untouched fresh spawn, outside chart reach.
+CHINESE_PROMPTS = ("靠近后即可互动",)
 
 
 def validate_language_frame(receipt, previous_change_id=0):
