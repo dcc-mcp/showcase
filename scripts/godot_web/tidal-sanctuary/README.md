@@ -31,5 +31,3 @@ The terrain, ruins, palette, shader, character, level layout and game logic are 
 ## Fourth visual pass: sanctuary entrance
 
 This is an internal layout prototype under visual review, not a finished premium game. The current pass narrows detail work to a weathered arch, broken return wall, uneven threshold, grouped fern growth and warmer ring light. Rock 04 and Fern 02 are official Poly Haven CC0 assets; their precise provenance and technical conversions are included. `hero-composition.png` and `hero-wide.png` are actual Godot fixed-camera composition studies captured after the scripted traversal, separate from ordinary camera and physical-input evidence. They do not claim manual gameplay. No additional gameplay or audio is introduced by this pass.
-
-The final bounded visual check unifies stone/soil shading, smooths terrain normals, softens the warm-key/cool-fill balance, lowers lantern glare and replaces regular sea bands with restrained irregular motion. The fixed study camera and ordinary playable camera remain separately labeled. Visual review still identifies this as an in-progress prototype.
