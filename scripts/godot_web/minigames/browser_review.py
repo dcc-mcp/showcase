@@ -54,6 +54,10 @@ def main():
                     for media_id in ('original-video', 'original-audio'):
                         page.locator('#' + media_id).wait_for(state='visible')
                         assert page.locator('#' + media_id).evaluate('(e) => e.paused && e.playbackRate === 1')
+                    for media_id, record in [('original-video', expected['recordings'][lang]),
+                                             ('original-audio', expected['audio'][lang])]:
+                        page.wait_for_function("id => {const m=document.getElementById(id); return Number.isFinite(m.duration) && m.duration > 1}", arg=media_id)
+                        assert abs(page.locator('#' + media_id).evaluate('(e) => e.duration') - record['seconds']) < .25
                     check(label + ': truthful localized boundaries, original speed and no autoplay/deferred engine')
                     # Verify every local page/resource link, including the actual source-download click.
                     links = page.locator('[href], [src]').evaluate_all("els => els.map(e => e.getAttribute('href') || e.getAttribute('src'))")
@@ -78,7 +82,14 @@ def main():
                         page.wait_for_function("id => {const m=document.getElementById(id); return !m.paused && m.currentTime > .35}", arg=media_id)
                         player.press('Space')
                         page.wait_for_function("id => document.getElementById(id).paused", arg=media_id)
-                        check(label + ': ' + media_id + ' actual keyboard playback and pause',
+                        before_seek = player.evaluate('(e) => e.currentTime')
+                        player.press('ArrowRight')
+                        page.wait_for_function("({id, before}) => {const m=document.getElementById(id); return m.paused && !m.seeking && m.currentTime > before + 2}",
+                                               arg={'id': media_id, 'before': before_seek})
+                        player.press('ArrowLeft')
+                        page.wait_for_function("({id, before}) => {const m=document.getElementById(id); return m.paused && !m.seeking && Math.abs(m.currentTime - before) < 1}",
+                                               arg={'id': media_id, 'before': before_seek})
+                        check(label + ': ' + media_id + ' actual keyboard playback, pause and seek/return',
                               seconds=player.evaluate('(e) => e.currentTime'))
                     # Evidence captures follow actual playback; a metadata-only poster can still
                     # carry a loading spinner and is not the final reviewed player state.

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import html
 import json
+import math
 import re
 import shutil
 import subprocess
@@ -28,6 +29,55 @@ def digest(path):
 def require(condition, message):
     if not condition:
         raise ValueError(message)
+
+
+def packet_timeline(path, stream):
+    result = subprocess.check_output([
+        'ffprobe', '-v', 'error', '-select_streams', stream, '-show_packets',
+        '-show_data_hash', 'sha256', '-show_entries',
+        'packet=data_hash,pts_time,dts_time,duration_time', '-of', 'json', str(path)], text=True)
+    return json.loads(result)['packets']
+
+
+def verify_packet_identity(original, remuxed):
+    require(bool(original) and len(original) == len(remuxed), 'Remux changed packet count')
+    for before, after in zip(original, remuxed):
+        require(before.get('data_hash') == after.get('data_hash'), 'Remux changed packet bytes/order')
+        for clock in ('pts_time', 'dts_time'):
+            require(clock in before and clock in after and
+                    abs(float(before[clock]) - float(after[clock])) < .000001,
+                    'Remux changed packet timing')
+        # MediaRecorder omits video packet durations. Stream copy may populate that
+        # container metadata; all actual presentation/decode timestamps stay exact.
+        if 'duration_time' in before:
+            require('duration_time' in after and
+                    abs(float(before['duration_time']) - float(after['duration_time'])) < .000001,
+                    'Remux changed an existing packet duration')
+    return {'packets': len(original),
+            'packet_hash_sequence_sha256': hashlib.sha256(
+                '\n'.join(p['data_hash'] for p in original).encode()).hexdigest(),
+            'presentation_and_decode_timestamps': 'identical',
+            'existing_packet_durations': 'identical'}
+
+
+def remux_recording(source, target):
+    # Supply duration/cues missing from MediaRecorder WebM without transcoding.
+    subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-threads', '1', '-copyts', '-i', str(source),
+                    '-map', '0:v:0', '-map', '0:a:0', '-c', 'copy',
+                    '-avoid_negative_ts', 'disabled', '-y', str(target)], check=True)
+    streams = {kind: verify_packet_identity(packet_timeline(source, selector),
+                                           packet_timeline(target, selector))
+               for kind, selector in [('video', 'v:0'), ('audio', 'a:0')]}
+    meta = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries',
+                      'format=duration', '-of', 'json', str(target)], text=True))
+    seconds = float(meta['format']['duration'])
+    require(math.isfinite(seconds) and seconds > 0, 'Remux lacks finite duration')
+    subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-threads', '1', '-i', str(target),
+                    '-f', 'null', '-'], check=True)
+    return {'file': target.name, 'sha256': digest(target), 'raw_source_sha256': digest(source),
+            'seconds': seconds, 'playback_speed': 1, 'full_decode': 'passed',
+            'processing': 'Lossless stream-copy remux adds duration/cues; no re-encoding or retiming',
+            'stream_identity': streams}
 
 
 def original_audio(source, target):
@@ -87,7 +137,7 @@ COPY = {
         'play': 'Play the candidate', 'source': 'Download native source',
         'scope': 'One game · Three gardens · Native English / Chinese',
         'boundary': 'Review build only. This page does not publish a Showcase entry or grant final artistic approval.',
-        'video': 'Watch the real playthrough', 'video_note': 'Original 1× canvas recording with actual game audio. Full session, without cuts.',
+        'video': 'Watch the real playthrough', 'video_note': 'Original 1× canvas recording with actual game audio. Consecutive capture, without cuts; lossless remux adds seeking metadata.',
         'overview': 'Open the clearly labelled 3× overview',
         'listen': 'Listen at the original speed',
         'listen_note': 'Decoded original output, without speed, pitch, gain or sample-rate adjustment. Subjective listening is still not tested.',
@@ -104,7 +154,7 @@ COPY = {
         'play': '试玩候选版本', 'source': '下载原生工程',
         'scope': '一个游戏 · 三个关卡 · 原生中英双语',
         'boundary': '仅供审查。本页不会发布 Showcase 作品入口，也不代表最终美术验收通过。',
-        'video': '观看真实通关过程', 'video_note': '原速 1× 画布录制与实际游戏声音。完整连续过程，没有剪去中间环节。',
+        'video': '观看真实通关过程', 'video_note': '原速 1× 画布录制与实际游戏声音。连续过程无剪切；无损重封装补齐定位元数据。',
         'overview': '打开明确标注的 3× 快速预览',
         'listen': '按原速试听',
         'listen_note': '从实际输出解码，未调整速度、音高、增益或采样率。主观听感仍未验收。',
@@ -146,12 +196,14 @@ def prepare(site, native, evidence, source_commit, run_id=None):
     require(run_id is None or bool(re.fullmatch(r'[0-9]+', run_id)), 'Expected numeric CI run ID')
     review.mkdir()  # Refuse stale output: do not index unrelated files from an earlier build.
     audio = {}
+    recordings = {}
     for lang in LANGUAGES:
         source = evidence / (lang + '-native-gameplay-with-audio.webm')
         # Inspect every source video frame and all audio, not only the shortened overview.
         subprocess.run(['ffmpeg', '-v', 'error', '-xerror', '-threads', '1', '-i', str(source),
                         '-f', 'null', '-'], check=True)
-        for name in [source.name, lang + '-native-gameplay-with-audio.mp4', lang + '-start.png']:
+        recordings[lang] = remux_recording(source, review / source.name)
+        for name in [lang + '-native-gameplay-with-audio.mp4', lang + '-start.png']:
             shutil.copyfile(evidence / name, review / name)
         target = review / (lang + '-listening.wav')
         audio[lang] = original_audio(source, target)
@@ -180,7 +232,7 @@ def prepare(site, native, evidence, source_commit, run_id=None):
                'browser_checks_passed': len(browser['checks']),
                'browser_diagnostics_count': len(browser.get('diagnostics', [])),
                'diagnostics_note': 'Consult the separate raw CI report; a pass is not an error-free-log claim.',
-               'audio': audio,
+               'audio': audio, 'recordings': recordings,
                'files': {p.name: {'bytes': p.stat().st_size, 'sha256': digest(p)}
                          for p in sorted(review.iterdir()) if p.is_file() and p.name != 'evidence.json'}}
     (review / 'evidence.json').write_text(json.dumps(bounded, indent=2, ensure_ascii=False) + '\n')

@@ -108,6 +108,21 @@ class ReviewInputTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Media verification mismatch'):
             self.validate()
 
+    def test_remux_packet_identity_rejects_content_and_timing_changes(self):
+        before = [{'data_hash': 'SHA256:a', 'pts_time': '0.095000', 'dts_time': '0.095000'},
+                  {'data_hash': 'SHA256:b', 'pts_time': '0.195000', 'dts_time': '0.195000', 'duration_time': '0.060000'}]
+        self.assertEqual(review.verify_packet_identity(before, before)['packets'], 2)
+        populated = [dict(p) for p in before]
+        populated[0]['duration_time'] = '0.001000'
+        self.assertEqual(review.verify_packet_identity(before, populated)['packets'], 2)
+        for bad in ([before[0]], list(reversed(before)),
+                    [dict(before[0], data_hash='SHA256:c'), before[1]],
+                    [dict(before[0], pts_time='0.196000'), before[1]],
+                    [dict(before[0], dts_time='0.000000'), before[1]],
+                    [before[0], dict(before[1], duration_time='0.061000')]):
+            with self.subTest(changed=bad), self.assertRaises(ValueError):
+                review.verify_packet_identity(before, bad)
+
     def test_pages_keep_review_and_listening_boundaries(self):
         for lang in review.LANGUAGES:
             text = review.page(lang)
