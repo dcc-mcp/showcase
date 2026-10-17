@@ -5,21 +5,39 @@ import argparse
 import json
 import os
 import re
+import signal
 import subprocess
 import time
 from pathlib import Path
 from common import checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
 
 
+def require_running(process, message):
+    status = process.poll()
+    if status is not None:
+        raise RuntimeError(f"Native runtime exited with status {status} before {message}")
+
+
 def wait_for(process, predicate, timeout, message):
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
+        # Stale readiness/save evidence cannot make an exited process pass.
+        require_running(process, message)
         if predicate():
+            require_running(process, message)
             return
-        if process.poll() is not None:
-            raise RuntimeError(f"Native runtime exited before {message}")
         time.sleep(.1)
     raise TimeoutError(message)
+
+
+def stop_input_runtime(process):
+    # The input test has no self-quit path. Establish liveness before our own stop.
+    require_running(process, "deliberate input-test shutdown")
+    stop_process(process)
+    # Detect a crash racing with shutdown too. Only a normal exit or our SIGTERM
+    # is expected; a forced kill or any other signal must not be a green check.
+    if process.returncode not in (0, -signal.SIGTERM):
+        raise RuntimeError(f"Native input runtime ended with unexpected status {process.returncode}")
 
 
 def main():
@@ -44,13 +62,20 @@ def main():
 
     def launch(log_name, env, extra=()):
         log = (out / log_name).open("w")
-        process = subprocess.Popen([godot, "--path", str(project), "--rendering-method", "gl_compatibility",
+        process = subprocess.Popen([godot, "--path", str(project), "--rendering-method", "gl_compatibility", "--rendering-driver", "opengl3",
             "--audio-driver", "Dummy", "--resolution", "1280x720", "--position", "0,0", "--single-window",
             "--fullscreen", *(["--", *extra] if extra else [])], env=env, stdout=log, stderr=log)
         log.close()
-        wait_for(process, lambda: "TIDAL_READY " in (out / log_name).read_text(), 90, "TIDAL_READY")
-        time.sleep(1)
-        return process
+        try:
+            # _ready() precedes costly first-frame shader compilation on llvmpipe.
+            wait_for(process, lambda: "TIDAL_FRAME_READY" in (out / log_name).read_text(),
+                     150, "TIDAL_FRAME_READY after actual frame_post_draw")
+            report.setdefault("readiness", []).append({"log": log_name, "boundary": "TIDAL_FRAME_READY"})
+            time.sleep(.5)
+            return process
+        except Exception:
+            stop_process(process)
+            raise
 
     def key(name, down):
         subprocess.run(["xdotool", "keydown" if down else "keyup", name], check=True, timeout=10)
@@ -134,7 +159,7 @@ def main():
         key("w", True)
         activated = False
         start = time.monotonic()
-        while time.monotonic() - start < 2.2:
+        while time.monotonic() - start < 15:
             tap("e")
             if "TIDAL_LANTERN 0" in (out / "native-input.log").read_text():
                 activated = True
@@ -145,8 +170,14 @@ def main():
             raise RuntimeError("Physical W/E smoke did not activate lantern I; inspect native-input.log and before screenshot")
         screenshot("native-input-after.png")
         save_file = Path(input_env["XDG_DATA_HOME"]) / "godot/app_userdata/Tidal Sanctuary/tidal-sanctuary-v1.json"
-        wait_for(runtime, save_file.exists, 20, "real game save after E interaction")
-        saved = json.loads(save_file.read_text())
+        def read_saved():
+            try:
+                return json.loads(save_file.read_text())
+            except (OSError, ValueError):
+                return {}
+        wait_for(runtime, lambda: read_saved().get("activated") == [True, False, False],
+                 20, "real game save after E interaction")
+        saved = read_saved()
         position = saved.get("player", [])
         if saved.get("activated") != [True, False, False] or len(position) != 3:
             raise RuntimeError("Runtime save did not confirm exactly lantern I activated")
@@ -157,12 +188,13 @@ def main():
             "horizontal_displacement": displacement, "actual_saved_state": saved,
             "no_demo_no_state_injection": True})
         tap("r")
-        time.sleep(.3)
-        reset = json.loads(save_file.read_text())
+        wait_for(runtime, lambda: read_saved().get("activated") == [False, False, False],
+                 15, "real game save after physical R reset")
+        reset = read_saved()
         if reset.get("activated") != [False, False, False]:
             raise RuntimeError("Physical R did not reset the actual game state")
         report["checks"].append({"name": "physical R resets lantern progress", "passed": True})
-        stop_process(runtime)
+        stop_input_runtime(runtime)
         check_engine_log((out / "native-input.log").read_text())
         runtime = None
 
@@ -183,7 +215,21 @@ def main():
                 pass
         stop_process(recorder)
         stop_process(runtime)
+        # Preserve engine errors even if input already failed for another reason.
+        engine_errors = []
+        for log_name in ("audit.log", "scripted-traversal.log", "native-input.log"):
+            log_path = out / log_name
+            if log_path.exists():
+                try:
+                    check_engine_log(log_path.read_text())
+                except RuntimeError as error:
+                    engine_errors.append({"log": log_name, "error": str(error)})
+        report["engine_errors"] = engine_errors
+        if engine_errors:
+            report["passed"] = False
         write_json(out / "native-validation.json", report)
+        if engine_errors:
+            raise RuntimeError("Native engine ERROR diagnostics recorded; inspect native-validation.json")
 
 
 if __name__ == "__main__":

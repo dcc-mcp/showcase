@@ -13,6 +13,7 @@ var activated: Array[bool] = [false,false,false]
 var lantern_points := [Vector3(3.8,0,6.1),Vector3(-4.7,0,0.2),Vector3(2.5,0,-6.7)]
 var sky_env: WorldEnvironment
 var beacon: Node3D
+var beacon_ring: MeshInstance3D
 var beam: MeshInstance3D
 var ui: CanvasLayer
 var objective: Label
@@ -48,6 +49,8 @@ var screenshot_index := 0
 var game_font:Font
 var subtitle:Label
 var action_button:Button
+var title_panel:Panel
+var footer_panel:Panel
 
 func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  var m := StandardMaterial3D.new()
@@ -56,9 +59,13 @@ func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  return m
 
 func _ready() -> void:
- var font_file:=FontFile.new()
- font_file.load_dynamic_font("res://sanctuary-font.otf")
- game_font=font_file
+ if OS.has_feature("web"):
+  game_font=load("res://sanctuary-font.otf")
+ else:
+  var font_file:=FontFile.new()
+  var font_error:=font_file.load_dynamic_font("res://sanctuary-font.otf")
+  assert(font_error==OK,"Font failed to load")
+  game_font=font_file
  rng.seed=834217
  noise.seed=428
  noise.frequency=.17
@@ -86,6 +93,7 @@ func _ready() -> void:
   player.position=Vector3(1.3,height_at(1.3,10.0)+.95,10)
  update_state()
  if "--audit" in OS.get_cmdline_user_args(): audit.call_deferred()
+ mark_frame_ready.call_deferred()
  print("TIDAL_READY ",JSON.stringify({"nodes":count_nodes(self),"renderer":RenderingServer.get_current_rendering_method(),"player":str(player.position),"saved":activated}))
 
 func make_environment() -> void:
@@ -102,9 +110,9 @@ func make_environment() -> void:
  env.sky=sky
  env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
  env.ambient_light_color=Color("a7c0bc")
- env.ambient_light_energy=.65
- env.tonemap_mode=Environment.TONE_MAPPER_FILMIC
- env.tonemap_exposure=1.0
+ env.ambient_light_energy=.30
+ env.tonemap_mode=Environment.TONE_MAPPER_ACES
+ env.tonemap_exposure=.95
  env.fog_enabled=true
  env.fog_light_color=Color("a6cbc7")
  env.fog_light_energy=.6
@@ -116,9 +124,9 @@ func make_environment() -> void:
  sun.name="LateAfternoonSun"
  sun.rotation_degrees=Vector3(-43,-32,0)
  sun.light_color=Color("ffe4b6")
- sun.light_energy=1.55
+ sun.light_energy=.78
  sun.shadow_enabled=true
- sun.directional_shadow_max_distance=65
+ sun.directional_shadow_max_distance=45
  sun.directional_shadow_mode=DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
  add_child(sun)
  sea=MeshInstance3D.new()
@@ -152,11 +160,11 @@ func path_x(z:float) -> float:
 func terrain_color(p: Vector3) -> Color:
  var r:=island_radius(p.x,p.z)
  var variation:=noise.get_noise_2d(p.x*3,p.z*3)*.08
- var c:=Color("afbd80")
+ var c:=Color("89996d")
  if r>.80: c=Color("d9ceab")
- elif r>.71: c=Color("b9bb8a")
+ elif r>.71: c=Color("a5ab80")
  if abs(p.x-path_x(p.z))<1.2 and p.z<12 and p.z> -10: c=Color("d7cba6")
- if p.z< -7 and abs(p.x)<5.5: c=Color("c2c49a")
+ if p.z< -7 and abs(p.x)<5.5: c=Color("a3a88b")
  return Color(c.r+variation,c.g+variation,c.b+variation)
 
 func triangle(st: SurfaceTool,a:Vector3,b:Vector3,c:Vector3,ca:Color,cb:Color,cc:Color) -> void:
@@ -186,6 +194,7 @@ func make_terrain() -> void:
  terrain_mesh.mesh=st.commit()
  var m:=mat(Color.WHITE)
  m.vertex_color_use_as_albedo=true
+ m.vertex_color_is_srgb=true
  terrain_mesh.material_override=m
  add_child(terrain_mesh)
  terrain_mesh.create_trimesh_collision()
@@ -245,15 +254,15 @@ func make_shore() -> void:
   pulse_rings.append(n)
 
 func make_rocks() -> void:
- for i in range(65):
+ for i in range(38):
   var a:=rng.randf()*TAU
-  var r:=rng.randf_range(.80,1.05)
+  var r:=rng.randf_range(.87,1.01)
   var x:=cos(a)*12*shore_radius(a)*r
   var z:=sin(a)*16.5*shore_radius(a)*r
   if z>7 and abs(x)<4: continue
-  var s:=rng.randf_range(.65,2.3)
-  var stone:=mat(Color("c4baa0").lightened(rng.randf_range(-.15,.12)))
-  rock(Vector3(x,height_at(x,z)+s*.18,z),Vector3(s*1.6,s*.9,s),stone,i+600)
+  var s:=rng.randf_range(1.1,2.8)
+  var stone:=mat(Color("8e9587").lightened(rng.randf_range(-.1,.08)))
+  rock(Vector3(x,height_at(x,z)-s*.08,z),Vector3(s*1.7,s*.9,s),stone,i+600)
  # Layered sea stacks frame the horizon.
  for i in range(3):
   rock(Vector3(19+i*2,-.2,-15-i*5),Vector3(4,4+i*2,3.5),material_stone,750+i)
@@ -312,39 +321,39 @@ func tree(x:float,z:float,s:float,seed_value:int) -> void:
  var trunkmat:=mat(Color("675c47"))
  var trunk_top:=origin+Vector3(-.3*s,3.4*s,.12*s)
  branch_between(origin,trunk_top,.16*s,trunkmat)
- for j in range(5):
+ for j in range(4):
   var a:=j*2.4+seed_value
   var endpoint:=trunk_top+Vector3(cos(a)*1.3*s,-.4*s+j*.23*s,sin(a)*.9*s)
   branch_between(origin+Vector3(-.12*s,(1.7+j*.23)*s,0),endpoint,.075*s,trunkmat)
-  var leaf:=rock(endpoint,Vector3(2.4*s,.75*s,1.65*s),material_leaves[j%4],seed_value*10+j)
+  var leaf:=rock(endpoint,Vector3((2.25+j*.17)*s,(.65+j*.09)*s,(1.55+j*.08)*s),material_leaves[j%4],seed_value*10+j)
   leaf.rotation.z=rng.randf_range(-.1,.1)
 
 func make_nature() -> void:
- for t in [Vector3(-7,1.15,8),Vector3(7.3,1.25,5.5),Vector3(-7.8,1.4,-4),Vector3(7.4,.9,-8),Vector3(-5.8,1,-12),Vector3(6.5,.8,10.5),Vector3(-5,1.4,10.5)]: tree(t.x,t.z,t.y,2000+int(t.x*10+t.z))
+ for t in [Vector3(-7,1.15,8),Vector3(7.3,1.25,5.5),Vector3(-7.8,1.4,-4),Vector3(7.4,.9,-8),Vector3(-5.8,1,-12),Vector3(6.5,.8,10.5),Vector3(-7.2,.94,10.7)]: tree(t.x,t.z,t.y,2000+int(t.x*10+t.z))
  # Small layered bushes, not uniformly scattered noise.
- for i in range(34):
+ for i in range(22):
   var x:=rng.randf_range(-10,10);var z:=rng.randf_range(-12,11)
   if island_radius(x,z)>.76 or abs(x-path_x(z))<2.0 or (z< -5 and abs(x)<5): continue
   rock(Vector3(x,height_at(x,z)+.22,z),Vector3(1.2,.7,.95),material_leaves[i%4],3000+i)
  var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
- for i in range(650):
+ for i in range(390):
   var x:=rng.randf_range(-11,11);var z:=rng.randf_range(-14,12)
-  if island_radius(x,z)>.78 or abs(x-path_x(z))<1.7 or (z< -5 and abs(x)<5.3):continue
+  if island_radius(x,z)>.78 or abs(x-path_x(z))<2.15 or (z< -5 and abs(x)<5.3):continue
   var y:=height_at(x,z)+.03
   var a:=rng.randf()*TAU;var w:=rng.randf_range(.06,.14);var h:=rng.randf_range(.20,.47)
   var base:=Vector3(x,y,z);var dir:=Vector3(cos(a),0,sin(a))
   var c:=Color("7b9460").lightened(rng.randf_range(-.12,.15))
   triangle(st,base-dir*w,base+dir*w,base+Vector3(.13,h,0),c,c,c)
   triangle(st,base+dir*w,base-dir*w,base+Vector3(.13,h,0),c,c,c)
- var gm:=mat(Color.WHITE);gm.vertex_color_use_as_albedo=true;gm.cull_mode=BaseMaterial3D.CULL_DISABLED
+ var gm:=mat(Color.WHITE);gm.vertex_color_use_as_albedo=true;gm.vertex_color_is_srgb=true;gm.cull_mode=BaseMaterial3D.CULL_DISABLED
  grass.append(mesh_node(st.commit(),Vector3.ZERO,gm))
 
 func make_player() -> void:
  player=CharacterBody3D.new();player.name="Wayfarer";add_child(player)
  player.position=Vector3(1.3,height_at(1.3,10)+.9,10)
  var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.22;shape.height=.95;col.shape=shape;col.position.y=.48;player.add_child(col)
- avatar=Node3D.new();player.add_child(avatar)
- var coat:=mat(Color("c56443"))
+ avatar=Node3D.new();avatar.scale=Vector3.ONE*1.15;player.add_child(avatar)
+ var coat:=mat(Color("294b5d"))
  var body:=CylinderMesh.new();body.top_radius=.14;body.bottom_radius=.26;body.height=.55;body.radial_segments=10
  mesh_node(body,Vector3(0,.5,0),coat,avatar)
  var head:=SphereMesh.new();head.radius=.14;head.height=.28;head.radial_segments=12;head.rings=6
@@ -361,21 +370,21 @@ func make_lanterns() -> void:
  for i in range(3):
   var p:Vector3=lantern_points[i];p.y=height_at(p.x,p.z);lantern_points[i]=p
   var root:=Node3D.new();root.position=p;add_child(root);lanterns.append(root)
-  cylinder(Vector3(0,.12,0),.57,.24,material_stone,root)
-  cylinder(Vector3(0,.54,0),.20,.65,material_stone,root)
+  cylinder(Vector3(0,.12,0),.57,.24,material_dark,root)
+  cylinder(Vector3(0,.54,0),.20,.65,material_dark,root)
   cylinder(Vector3(0,.9,0),.34,.10,material_gold,root)
   var crystal:=SphereMesh.new();crystal.radius=.17;crystal.height=.38;crystal.radial_segments=8;crystal.rings=4
-  var cmat:=mat(Color("73c5b1"),.25);cmat.emission_enabled=true;cmat.emission=Color("a2efce");cmat.emission_energy_multiplier=.5
+  var cmat:=mat(Color("eeb95f"),.25);cmat.emission_enabled=true;cmat.emission=Color("ffc771");cmat.emission_energy_multiplier=.5
   var gem:=mesh_node(crystal,Vector3(0,1.2,0),cmat,root);gem.name="Gem"
-  var light:=OmniLight3D.new();light.position=Vector3(0,1.3,0);light.light_color=Color("a4ffdb");light.omni_range=3;light.light_energy=0;root.add_child(light);lantern_lights.append(light)
-  var label:=Label3D.new();label.text=["I","II","III"][i];label.position=Vector3(0,1.8,0);label.font_size=32;label.pixel_size=.009;label.modulate=Color("f2e3be");label.billboard=BaseMaterial3D.BILLBOARD_ENABLED;root.add_child(label)
+  var light:=OmniLight3D.new();light.position=Vector3(0,1.3,0);light.light_color=Color("ffc771");light.omni_range=3;light.light_energy=0;root.add_child(light);lantern_lights.append(light)
 
 func make_beacon() -> void:
  beacon=Node3D.new();beacon.position=Vector3(0,height_at(0,-11.7),-11.7);add_child(beacon)
  cylinder(Vector3(0,.17,0),1.15,.34,material_stone,beacon)
  cylinder(Vector3(0,.5,0),.80,.35,material_stone,beacon)
  var torus:=TorusMesh.new();torus.inner_radius=.60;torus.outer_radius=.76;torus.rings=24;torus.ring_segments=12
- var ring:=mesh_node(torus,Vector3(0,1.55,0),material_gold,beacon);ring.rotation.x=PI/2
+ var ring_mat:=mat(Color("b18a48"),.5);ring_mat.emission_enabled=true;ring_mat.emission=Color("ffc771");ring_mat.emission_energy_multiplier=0
+ beacon_ring=mesh_node(torus,Vector3(0,1.55,0),ring_mat,beacon);beacon_ring.rotation.x=PI/2
  cylinder(Vector3(-.65,1.0,0),.08,1.0,material_gold,beacon)
  cylinder(Vector3(.65,1.0,0),.08,1.0,material_gold,beacon)
  var bmat:=mat(Color("fff2b3"));bmat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;bmat.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;bmat.albedo_color.a=.28
@@ -388,19 +397,29 @@ func make_birds() -> void:
   for side in [-1,1]:
    var wing:=box(Vector3(side*.19,0,0),Vector3(.42,.025,.08),m,n);wing.rotation.z=side*.25
 
+func ui_panel(p:Vector2,sz:Vector2,color:Color,parent:Node) -> Panel:
+ var panel:=Panel.new();panel.position=p;panel.size=sz;panel.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ var style:=StyleBoxFlat.new();style.bg_color=color;style.set_corner_radius_all(9)
+ panel.add_theme_stylebox_override("panel",style);parent.add_child(panel);return panel
+
 func label_at(text_value:String,size:int,color:Color) -> Label:
  var l:=Label.new();l.text=text_value;l.add_theme_font_size_override("font_size",size);l.add_theme_font_override("font",game_font);l.add_theme_color_override("font_color",color);l.add_theme_color_override("font_shadow_color",Color(0,0,0,.4));l.add_theme_constant_override("shadow_offset_x",1);l.add_theme_constant_override("shadow_offset_y",2);return l
 
 func make_ui() -> void:
  ui=CanvasLayer.new();add_child(ui)
  var root:=Control.new();root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);root.mouse_filter=Control.MOUSE_FILTER_IGNORE;ui.add_child(root)
+ title_panel=ui_panel(Vector2(20,18),Vector2(390,150),Color(.025,.075,.065,.72),root)
+ footer_panel=ui_panel(Vector2(20,0),Vector2(460,30),Color(.025,.075,.065,.68),root)
  title=label_at("TIDAL  SANCTUARY",21,Color("fff2d2"));title.position=Vector2(34,28);root.add_child(title)
  subtitle=label_at("A quiet voyage · playable study",12,Color("e2e2c9"));subtitle.position=Vector2(36,57);root.add_child(subtitle)
- objective=label_at("Wake the three tide lanterns",24,Color("fff4d7"));objective.position=Vector2(34,91);root.add_child(objective)
+ objective=label_at("Wake three tide lanterns",24,Color("fff4d7"));objective.position=Vector2(34,91);root.add_child(objective)
  progress=label_at("○  ○  ○",22,Color("cce5ce"));progress.position=Vector2(36,126);root.add_child(progress)
  prompt=label_at("",19,Color("fff1ce"));prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;prompt.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);prompt.position=Vector2(-300,-106);prompt.size=Vector2(600,40);root.add_child(prompt)
  message=label_at("W A S D / arrows  ·  E interact  ·  R restart  ·  L language",13,Color("e2e7d2"));message.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);message.position=Vector2(34,-38);root.add_child(message)
- action_button=Button.new();var action:=action_button;action.add_theme_font_override("font",game_font);action.text="E  ·  LIGHT";action.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);action.position=Vector2(-160,-75);action.size=Vector2(130,48);action.pressed.connect(interact);root.add_child(action)
+ action_button=Button.new();var action:=action_button;action.add_theme_font_override("font",game_font);action.text="E  ·  LIGHT";action.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);action.position=Vector2(-160,-75);action.size=Vector2(130,48);
+ var button_style:=StyleBoxFlat.new();button_style.bg_color=Color(.05,.16,.14,.94);button_style.border_color=Color("cfba87");button_style.set_border_width_all(1);button_style.set_corner_radius_all(8)
+ action.add_theme_stylebox_override("normal",button_style);action.add_theme_color_override("font_color",Color("fff1d2"));action.add_theme_font_size_override("font_size",16)
+ action.pressed.connect(interact);root.add_child(action)
 
 func update_state() -> void:
  var count:=0
@@ -412,8 +431,11 @@ func update_state() -> void:
   m.emission_energy_multiplier=2.5 if activated[i] else .3
  progress.text="%s  %s  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]
  completed=count==3
- beam.visible=completed
- objective.text=("The sanctuary remembers" if completed else "Wake the three tide lanterns") if language=="en" else ("圣所已苏醒" if completed else "点亮三座潮汐灯")
+ beam.visible=beacon_awakened
+ var ring_material:StandardMaterial3D=beacon_ring.material_override
+ ring_material.emission_energy_multiplier=1.5 if beacon_awakened else (.6 if completed else .0)
+ action_button.visible=not beacon_awakened
+ objective.text=("The sanctuary remembers" if completed else "Wake three tide lanterns") if language=="en" else ("圣所已苏醒" if completed else "点亮三座潮汐灯")
  title.text="TIDAL  SANCTUARY" if language=="en" else "潮 汐 圣 所"
  subtitle.text="A quiet voyage · playable study" if language=="en" else "一段宁静旅程 · 可玩原型"
  message.text="W A S D / arrows  ·  E interact  ·  R restart  ·  L language" if language=="en" else "方向键移动 · E 互动 · R 重新开始 · L 语言"
@@ -429,6 +451,7 @@ func interact() -> void:
    return
  if completed and player.position.distance_to(beacon.position)<2.7:
   beacon_awakened=true
+  update_state()
   save_game()
   objective.text="You brought the light home" if language=="en" else "你带回了光"
   prompt.text="R  ·  Begin another quiet voyage" if language=="en" else "R · 再启一段宁静旅程"
@@ -516,7 +539,11 @@ func _physics_process(delta:float) -> void:
 func _process(delta:float) -> void:
  timer+=delta
  if objective:
-  var width:=get_viewport().get_visible_rect().size.x
+  var view_size:=get_viewport().get_visible_rect().size
+  var width:=view_size.x
+  title_panel.size.x=minf(390,width-40)
+  footer_panel.position=Vector2(20,view_size.y-(31 if width<600 else 44))
+  footer_panel.size=Vector2(minf(460,width-40),30)
   message.offset_top=-24 if width<600 else -38
   message.offset_bottom=-2 if width<600 else -15
   objective.add_theme_font_size_override("font_size",19 if width<600 else 24)
@@ -579,3 +606,10 @@ func _exit_tree() -> void:
  if is_instance_valid(player):print("TIDAL_FINAL ",JSON.stringify({"time":game_time,"position":str(player.position),"activated":activated,"demo_phase":demo_phase,"velocity":str(player.velocity),"floor":player.is_on_floor(),"wall":player.is_on_wall(),"ceiling":player.is_on_ceiling(),"height_expected":height_at(player.position.x,player.position.z),"collisions":player.get_slide_collision_count()}))
  if is_instance_valid(player):
   for i in range(player.get_slide_collision_count()):print("TIDAL_COLLISION ",player.get_slide_collision(i).get_normal()," ",player.get_slide_collision(i).get_collider().get_parent().name," ",player.get_slide_collision(i).get_position())
+
+func mark_frame_ready() -> void:
+ if DisplayServer.get_name()=="headless":return
+ await RenderingServer.frame_post_draw
+ await get_tree().physics_frame
+ await get_tree().physics_frame
+ print("TIDAL_FRAME_READY ",JSON.stringify({"time":game_time,"viewport":str(get_viewport().get_visible_rect().size),"font_ascii":game_font.has_char(65)}))

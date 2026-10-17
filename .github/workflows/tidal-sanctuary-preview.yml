@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends xvfb xauth xdotool ffmpeg libgl1-mesa-dri fonts-dejavu-core
+          sudo apt-get install --yes --no-install-recommends xvfb xauth xdotool ffmpeg libgl1-mesa-dri mesa-vulkan-drivers fonts-dejavu-core
           ffmpeg -version
           ffprobe -version
       - name: Pin official Godot, typed adapter and Chromium
@@ -68,6 +68,19 @@ jobs:
           xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/capture_native.py" \
             --native "$RUNNER_TEMP/tidal-author/native" --godot Godot_v4.6.3-stable_linux.x86_64 \
             --output "$RUNNER_TEMP/tidal-native"
+      - name: Upload early native art previews and input diagnostics
+        if: ${{ !cancelled() && steps.author.outcome == 'success' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: tidal-sanctuary-native-preview-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/tidal-native/*.json
+            ${{ runner.temp }}/tidal-native/*.log
+            ${{ runner.temp }}/tidal-native/*.png
+            ${{ runner.temp }}/tidal-native/*.mp4
+            ${{ runner.temp }}/tidal-native/scripted-traversal-frames
       - name: Fetch verified official Web templates after native capture
         id: templates
         if: ${{ !cancelled() && steps.author.outcome == 'success' }}

@@ -74,7 +74,7 @@ def main():
 
     def launch():
         return subprocess.Popen([godot, "--editor", "--audio-driver", "Dummy", "--path", str(project),
-                                 "--rendering-method", "gl_compatibility"], stdout=log, stderr=log)
+                                 "--rendering-method", "gl_compatibility", "--rendering-driver", "opengl3"], stdout=log, stderr=log)
 
     def ready():
         deadline = time.monotonic() + 90

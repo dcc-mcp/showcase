@@ -66,6 +66,7 @@ def stop_process(process: subprocess.Popen | None) -> None:
 
 def check_engine_log(text: str) -> None:
     failures = [line for line in text.splitlines() if any(token in line for token in (
-        "SCRIPT ERROR:", "Parse Error:", "Shader compilation failed", "Failed to load script"))]
+        "ERROR:", "Parse Error:", "Shader compilation failed", "Failed to load script",
+        "handle_crash:", "Program crashed with signal"))]
     if failures:
-        raise RuntimeError("Godot reported runtime/parse failures: " + " | ".join(failures[:8]))
+        raise RuntimeError("Godot reported engine failures: " + " | ".join(failures[:8]))

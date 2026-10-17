@@ -2,7 +2,7 @@
 
 An original small 3D exploration study for Godot 4.6.3 and WebGL 2.
 
-A coral-cloaked traveller arrives on a limestone island. Follow the weathered processional path, wake three tide lanterns, and return their light to an ancient ring. Warm limestone, olive pines, and turquoise water share one restrained palette. The game is deliberately compact: this first study establishes the environment, movement and interaction before a larger puzzle is designed.
+A blue-cloaked traveller arrives on a limestone island. Follow the weathered processional path, wake three tide lanterns, and return their light to an ancient ring. Warm limestone, olive pines, and muted turquoise water share one restrained palette. The game is deliberately compact: this first study establishes the environment, movement and interaction before a larger puzzle is designed.
 
 ## Play
 
