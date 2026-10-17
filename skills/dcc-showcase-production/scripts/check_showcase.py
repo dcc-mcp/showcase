@@ -174,6 +174,8 @@ def existing_evidence(root, case):
     manifest_path = root / "play/manifest.json"
     if manifest_path.is_file():
         manifest = read_json(local_path(root, "play/manifest.json"))
+        if not isinstance(manifest, dict):
+            raise ValueError("play/manifest.json must be an object")
         for demo in manifest.get("demos", []):
             if isinstance(demo, dict) and demo.get("case_slug") == case["slug"]:
                 playable.append({"url": demo.get("url"), "source": "play/manifest.json", "status_this_run": "not-tested"})
@@ -205,6 +207,8 @@ def selected_output_refs(root, slug):
             and row["path"] not in {"manifest.json", "production-evidence.json"}}
     if (root / "play/manifest.json").is_file():
         play = read_json(local_path(root, "play/manifest.json"))
+        if not isinstance(play, dict):
+            raise ValueError("play/manifest.json must be an object")
         prefix = f"play/{slug}/"
         selected = any(isinstance(d, dict) and d.get("case_slug") == slug and
                        isinstance(d.get("url"), str) and d["url"].startswith(prefix)
@@ -381,14 +385,15 @@ def inspect_case(root, case, decode=False, evidence_path=None, threads=1):
     else:
         record = read_json(path)
         report["optional_record_present"] = True
-        if isinstance(record, dict):
-            raw_rights = record.get("usage_rights")
-            if isinstance(raw_rights, dict):
-                report["usage_rights"] = dict(default_usage_rights(), **raw_rights)
         if isinstance(record, dict) and record.get("interactive") is True:
             interactive = True
             report["interactive_requirements"] = True
         errors, missing = validate_record(root, record, report["slug"], interactive)
+        raw_rights = record.get("usage_rights") if isinstance(record, dict) else None
+        if isinstance(raw_rights, dict):
+            for purpose in report["usage_rights"]:
+                if purpose in raw_rights and not any(e.startswith(f"usage_rights.{purpose}") for e in errors):
+                    report["usage_rights"][purpose] = raw_rights[purpose]
         report["record_errors"] = errors
         report["unresolved_stages"] = missing
         report["record_status"] = "failed" if errors else "passed"

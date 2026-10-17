@@ -186,6 +186,54 @@ class EvidenceChecks(unittest.TestCase):
         self.assertEqual(result["usage_rights"]["evaluation"]["status"], "not-granted")
         self.assertFalse(result["rights_verified"])
 
+    def test_rejected_rights_keep_only_the_affected_purpose_default(self):
+        valid = {purpose: {"status": "granted", "evidence": [self.ref]}
+                 for purpose in checker.default_usage_rights()}
+        invalid_rows = (
+            {"status": "granted", "evidence": []},
+            {"status": "granted", "evidence": [dict(self.ref, sha256="0" * 64)]},
+            "granted",
+        )
+        for purpose in valid:
+            for invalid in invalid_rows:
+                with self.subTest(purpose=purpose, invalid=invalid):
+                    self.record["usage_rights"] = deepcopy(valid)
+                    self.record["usage_rights"][purpose] = invalid
+                    self.refresh()
+                    result = checker.inspect_case(self.root, self.case)
+                    expected = deepcopy(valid)
+                    expected[purpose] = checker.default_usage_rights()[purpose]
+                    self.assertEqual(result["usage_rights"], expected)
+                    self.assertTrue(any(e.startswith(f"usage_rights.{purpose}") for e in result["record_errors"]))
+                    self.assertEqual(result["record_status"], "failed")
+                    self.assertFalse(result["rights_verified"])
+
+    def test_report_exports_only_known_rights_purposes(self):
+        valid = deepcopy(self.record["usage_rights"])
+        self.record["usage_rights"]["resale"] = {"status": "granted", "evidence": [self.ref]}
+        self.refresh()
+        result = checker.inspect_case(self.root, self.case)
+        self.assertEqual(result["usage_rights"], valid)
+        self.assertEqual(result["record_errors"], [])
+        self.assertFalse(result["rights_verified"])
+
+    def test_play_manifest_requires_an_object_at_both_readers(self):
+        (self.root / "play").mkdir()
+        for value in ([], None, "manifest", False, 3):
+            with self.subTest(value=value):
+                self.write(self.root / "play/manifest.json", value)
+                output = io.StringIO()
+                with redirect_stdout(output):
+                    code = checker.main(["--repo", str(self.root), "--case", "sample"])
+                self.assertEqual(code, 2)
+                error = json.loads(output.getvalue())
+                self.assertIn("play/manifest.json must be an object", error["error"])
+                self.assertEqual(error["quality_approval"], "not-assessed-by-this-tool")
+                for reader in (lambda: checker.existing_evidence(self.root, self.case),
+                               lambda: checker.selected_output_refs(self.root, "sample")):
+                    with self.assertRaisesRegex(ValueError, "play/manifest.json must be an object"):
+                        reader()
+
     def test_measured_budget_and_recovery_need_evidence(self):
         self.record["task"]["reproduction_budget"]["measured_seconds"] = 12
         self.record["failure_recovery"] = [{"stage": "real_mcp", "status": "passed", "minimal_reproducer": self.ref}]
