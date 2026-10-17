@@ -139,6 +139,13 @@ def inside_approach(state, point):
     return horizontal_distance(state, point.get("approach", point["target"])) <= point.get("radius", .8)
 
 
+def inside_interaction_region(state, point):
+    # The approach point guides steering, not the game's usable pickup region.
+    # Actual availability also establishes production height/line-of-sight checks.
+    return (state.get("interaction_available") is True
+            and horizontal_distance(state, point["target"]) < INTERACTION_RADIUS)
+
+
 def mode_sequence(samples):
     result = []
     for sample in samples:
@@ -321,8 +328,6 @@ class RouteDriver:
             raise ValueError("Physical action does not match the next exact quest milestone")
         if self.pending_action is not None:
             raise ValueError("A physical action is already pending for this milestone")
-        if not inside_approach(state, point):
-            raise ValueError("Physical action was requested away from its authored waypoint")
         if horizontal_distance(state, point["target"]) >= INTERACTION_RADIUS:
             raise ValueError("Physical action was requested outside the authored interaction range")
         if not self.settled_after_stop(state, point):
@@ -446,15 +451,15 @@ class RouteDriver:
                         self.move((0, 0))
                     elif self.stop_boundary is not None:
                         if self.settled_after_stop(state, point):
-                            if not inside_approach(state, point) or horizontal_distance(state, point["target"]) >= INTERACTION_RADIUS:
-                                # Delivery latency/inertia moved us out of range.
-                                # Re-approach physically before the sole action.
+                            if not inside_interaction_region(state, point):
+                                # Delivery latency/inertia lost actual reach or
+                                # availability. Re-approach before the sole action.
                                 self.stop_boundary["drifted_sample_id"] = state["sample_id"]
                                 self.stop_boundary = None
                                 self.move(direction_to(state, approach))
-                            elif state["interaction_available"]:
+                            else:
                                 self.request_action(state, point)
-                    elif inside_approach(state, point) and horizontal_distance(state, point["target"]) < INTERACTION_RADIUS:
+                    elif "stage" in point and inside_interaction_region(state, point):
                         if state["sample_id"] > self.last_action_sample_id:
                             self.stop_for_action(state, point)
                     else:
