@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "LICENSES.md",
-      "bytes": 1036,
-      "sha256": "b69a41f8aefe044ed9b1461aa3271a496508fd59cacaaae450de1cdf32528ac7"
+      "bytes": 1384,
+      "sha256": "6c356d863e0634514ff2271a046ec187674a22c4c84e0af61f0c0cc71088f78b"
     },
     {
       "path": "METHODS.md",
@@ -14,9 +14,14 @@
       "sha256": "0255e5d4ad415586f8561429978e6a19d626ce941fb84b4eb9153be472c21736"
     },
     {
+      "path": "PROCESS-VIDEO.md",
+      "bytes": 6018,
+      "sha256": "d0b91382de467231332b8245b1f939088f16f05c1945f1024d6c140257a34444"
+    },
+    {
       "path": "README.md",
-      "bytes": 2959,
-      "sha256": "70ca95773352d091b6b247d709e1e2ae2df7c564977bdfd5a3e272e30c87b963"
+      "bytes": 3920,
+      "sha256": "e1eb2f60f05e2cbfbc032a8744ba81705a8825ad593e5de4f23050b0b34e8cef"
     },
     {
       "path": "capability-coverage.json",
@@ -28,7 +33,8 @@
       "bytes": 54156,
       "sha256": "2ae74e8f4b93b676b9db9f907576439e05d986bbffef81e9d04e039940e7e879",
       "width": 720,
-      "height": 480
+      "height": 480,
+      "bit_depth": 8
     },
     {
       "path": "editable-source.zip",
@@ -50,12 +56,18 @@
       "bytes": 249425,
       "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e",
       "width": 1600,
-      "height": 1000
+      "height": 1000,
+      "bit_depth": 8
     },
     {
       "path": "native-preview-validation.json",
       "bytes": 13650,
       "sha256": "a635e2234eafa28ef8fb41736022974d30391784130c91bb6822259340ae8daa"
+    },
+    {
+      "path": "native-process-video.json",
+      "bytes": 7003,
+      "sha256": "13ae30d71993685621a74a080a2a7a9b4e09d515da900361c55a5fc8cef70668"
     },
     {
       "path": "paraview-mcp-evidence.public.json",
@@ -77,12 +89,33 @@
       "bytes": 44640,
       "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3",
       "width": 720,
-      "height": 480
+      "height": 480,
+      "bit_depth": 8
+    },
+    {
+      "path": "seismic-lens-native-layers.mp4",
+      "bytes": 88406,
+      "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+      "width": 1178,
+      "height": 814,
+      "duration_seconds": 8.0,
+      "frames": 120,
+      "fps": 15,
+      "codec": "h264"
+    },
+    {
+      "path": "seismic-lens-native-poster.png",
+      "bytes": 257750,
+      "sha256": "1f5305baf11d53ff08db13c859540b96d4b2b14904c09efec8e5e859115d166a",
+      "width": 1178,
+      "height": 814,
+      "bit_depth": 8
     },
     {
       "path": "validation.json",
-      "bytes": 2066,
-      "sha256": "7976de4f6357c236b236a1943e405fa2e09adda030360cfa48966b972a8f28eb"
+      "bytes": 9946,
+      "sha256": "a7b885eb9dfa31d278b07a0b3c917e45c8e252bfd326a5f1541a536bdaacb7bf"
     }
-  ]
+  ],
+  "process_video_capture_provider": "desktop-window"
 }

@@ -16,7 +16,7 @@ function fixture(initial = {}) {
   const buttons = [-5, 5].map(delta => ({disabled: true, dataset: {audioSeek: String(delta)},
     addEventListener(name, action) { this[name] = action; }}));
   const player = {querySelector() { return audio; }, querySelectorAll() { return buttons; }};
-  const document = {querySelector() { return null; }, querySelectorAll() { return [player]; }};
+  const document = {querySelector() { return null; }, querySelectorAll(selector) { return selector === ".audio-player" ? [player] : []; }};
   vm.runInNewContext(source, {document});
   return {audio, buttons, events};
 }

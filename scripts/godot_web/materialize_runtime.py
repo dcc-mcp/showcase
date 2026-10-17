@@ -4,12 +4,14 @@
 No credentials, Godot editor, third-party hosting or runtime network request is needed.
 HTTP ranges avoid fetching the 1.2 GB cross-platform export-template archive.
 """
-import argparse,hashlib,io,json,tempfile,urllib.request,zipfile
+import argparse,hashlib,http.client,io,json,tempfile,time,urllib.error,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 URL='https://godot-releases.nbg1.your-objectstorage.com/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz'
 TEMPLATE_SHA='1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9'
 MEMBER='templates/web_nothreads_release.zip'
+RANGE_CHUNK_SIZE=1024*1024
+RANGE_ATTEMPTS=3
 
 class RemoteZip(io.RawIOBase):
     def __init__(self):
@@ -25,14 +27,39 @@ class RemoteZip(io.RawIOBase):
     def read(self,length=-1):
         end=self.size if length<0 else min(self.position+length,self.size)
         if end<=self.position:return b''
-        request=urllib.request.Request(URL,headers={'Range':f'bytes={self.position}-{end-1}'})
-        with urllib.request.urlopen(request,timeout=180) as response:
-            if response.status!=206:raise ValueError('Server did not honor HTTP range; refusing full archive')
-            if response.headers.get('Content-Range') != f'bytes {self.position}-{end-1}/{self.size}':raise ValueError('Unexpected Content-Range')
-            data=response.read(end-self.position+1)
-        if len(data)!=end-self.position:raise ValueError('Truncated range response')
+        # ZIP members can request several MiB at once. Bound each transfer and
+        # retain the original file position unless the entire read succeeds.
+        cursor=self.position;chunks=[]
+        while cursor<end:
+            chunk_end=min(cursor+RANGE_CHUNK_SIZE,end)
+            chunks.append(self._read_range(cursor,chunk_end))
+            cursor=chunk_end
+        data=b''.join(chunks)
         self.position=end
         return data
+
+    def _read_range(self,start,end):
+        expected=end-start
+        label=f'bytes {start}-{end-1}/{self.size}'
+        for attempt in range(RANGE_ATTEMPTS):
+            try:
+                request=urllib.request.Request(URL,headers={'Range':f'bytes={start}-{end-1}'})
+                with urllib.request.urlopen(request,timeout=180) as response:
+                    if response.status!=206:raise ValueError('Server did not honor HTTP range; refusing full archive')
+                    if response.headers.get('Content-Range')!=label:raise ValueError('Unexpected Content-Range: expected '+label)
+                    data=response.read(expected+1)
+                if len(data)>expected:
+                    raise ValueError(f'Excess range response: {label}; expected {expected}, received {len(data)}')
+                if len(data)==expected:return data
+                failure=ValueError(f'Truncated range response: {label}; expected {expected}, received {len(data)}')
+            except urllib.error.HTTPError:
+                # An HTTP status is a protocol response, not a transport retry.
+                raise
+            except (OSError,http.client.IncompleteRead) as error:
+                failure=error
+            if attempt+1<RANGE_ATTEMPTS:
+                time.sleep(.25*(2**attempt))
+        raise failure
 
 def materialize():
     manifest=json.loads((ROOT/'play/manifest.json').read_text())

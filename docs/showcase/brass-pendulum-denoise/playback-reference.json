@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "width": 960,
+  "height": 720,
+  "frame_count": 144,
+  "frame_rate": "24000/1001",
+  "reference_basis": "Independent decode of the exact final H.264 delivery; not a source-render quality reference.",
+  "video": {
+    "path": "pendulum-oidn.mp4",
+    "bytes": 614199,
+    "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83"
+  },
+  "atlas": {
+    "path": "playback-atlas.jpg",
+    "bytes": 405788,
+    "sha256": "ffa22490c541055a6da7c0aa8297939ce09850c1f75c3e3530b0f0c4598bd19b",
+    "columns": 8,
+    "rows": 18,
+    "tile_width": 160,
+    "tile_height": 120,
+    "jpeg_encoding": "Explicit BT.601 / full range / 4:4:4, quality3; independently decoded final MP4 resized with Lanczos."
+  },
+  "keyframes": [
+    {
+      "path": "playback-frame-0001.png",
+      "bytes": 231342,
+      "sha256": "538540938f4ddb5bba2662d0131fccf823c7bc7c82e537526ff719a703633c27",
+      "frame": 1,
+      "profiled_decode_source_sha256": "db0096d44579e6ad3ad7e7e38b3e1c546af8d9d8722bdf35f9eedbc1db7a5f48",
+      "unchanged_idat_sha256": "70765f491229b5f2aec96dc232e3ad0a382270167f8a07fb2d13a16bf434610a",
+      "removed_color_chunks": [
+        "cICP",
+        "cHRM",
+        "gAMA"
+      ]
+    },
+    {
+      "path": "playback-frame-0073.png",
+      "bytes": 264878,
+      "sha256": "e0245f1970286ec5a381b40f8077aca12b2cc1b1ccfa06eca174f3491d77b17d",
+      "frame": 73,
+      "profiled_decode_source_sha256": "d10878892fa374d196682a7eee1a59ad1c04f5aca168a2bff83ea829b8661c28",
+      "unchanged_idat_sha256": "0c2e300d4991aac07ee36cd93865d6d17a1530da39480b733993a2c6d3d1296b",
+      "removed_color_chunks": [
+        "cICP",
+        "cHRM",
+        "gAMA"
+      ]
+    },
+    {
+      "path": "playback-frame-0144.png",
+      "bytes": 262740,
+      "sha256": "0d825a65ddd44c086223c6ce42f2ca145fccb47726ae9b860a348cce28d86cd1",
+      "frame": 144,
+      "profiled_decode_source_sha256": "49b26e798b334b90d7bb70c74dfe3459bce0c1a53f3b51359f9ae19184ec65e6",
+      "unchanged_idat_sha256": "87fb265e54e1c9d915af2c4f7ca856e82b3d8c389642ff4e3d9e67b9f0be4895",
+      "removed_color_chunks": [
+        "cICP",
+        "cHRM",
+        "gAMA"
+      ]
+    }
+  ],
+  "comparison": {
+    "dimensions": [
+      160,
+      120
+    ],
+    "method": "Motion-region thumbnail comparison; full-resolution pixel identity is not claimed.",
+    "first_middle_last_reference_dimensions": [
+      960,
+      720
+    ]
+  },
+  "png_reference_encoding": "Unprofiled independent final-MP4 decoded RGB samples; cICP/cHRM/gAMA interpretation chunks removed with IDAT and all RGB sample values unchanged. References are not browser screenshots and do not certify colorimetric fidelity."
+}

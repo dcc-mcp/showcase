@@ -1,0 +1,110 @@
+{
+  "status": "static_review_complete_and_recorded_browser_playback_pass",
+  "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+  "short_pilot": {
+    "source_frames": [
+      7,
+      30
+    ],
+    "all24_offline_frames_inspected": true,
+    "observations": "No obvious jumps, ghost silhouettes or exposure flashes in the inspected short contact sheet; this does not certify motion quality.",
+    "native_monitor": "failed_end_frame_visual_consistency",
+    "failure": "Kdenlive OSD advanced to frame23, but final screenshot matched source14 instead of expected source30. Failure and correction retained."
+  },
+  "full144_contact_sheets": {
+    "scope": "Static contact-sheet review of all144 frames and native-size spot checks; not natural-speed playback or final artistic acceptance",
+    "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+    "method": {
+      "all144_frames": "Six6x4 contact sheets with480x360 source tiles; tool display can resize the sheets",
+      "native_size_source_png_frames": [
+        1,
+        13,
+        73,
+        144
+      ]
+    },
+    "observations": [
+      "Complete pedestal remains visible throughout; native timeline audit independently reports minimum conservative margin4.7345%.",
+      "The bob and pedestal have smooth silhouettes in the inspected views; former large planar facets are not obvious.",
+      "Consecutive contact sheets show alternating swings with decreasing amplitude and gradual camera enlargement, with no obvious missing-object jump, duplicate block or abrupt exposure flash.",
+      "Fine bright speckling and edge aliasing remain on the gold ring/rod and a few bob-edge pixels; spatial denoising is not a claim of noise-free imagery."
+    ],
+    "status": "no_blocking_static_defect_observed_at_inspected_scales",
+    "contact_sheets": [
+      {
+        "frames": [
+          1,
+          24
+        ],
+        "sha256": "4c8366c82f8cab6e016c8d6000f04e1a56a0ba34b0d055c6d8766343e0975c65"
+      },
+      {
+        "frames": [
+          25,
+          48
+        ],
+        "sha256": "6e3682146986ef810d025de9e8f90964dc2403f675d9358e0362bfb5e43882e4"
+      },
+      {
+        "frames": [
+          49,
+          72
+        ],
+        "sha256": "9675dbf57f2b982f3a51767a3eb7ce71cd9c76e4a2f159794c5e59427d5f0a4c"
+      },
+      {
+        "frames": [
+          73,
+          96
+        ],
+        "sha256": "621c9d4188407b064fc0f3e3052347e50b51f2683410228ee698c85778cc1196"
+      },
+      {
+        "frames": [
+          97,
+          120
+        ],
+        "sha256": "9b515a0ba9d31ce062e20016d5bba5037986cadfb789ed0146ab0577eef82e7b"
+      },
+      {
+        "frames": [
+          121,
+          144
+        ],
+        "sha256": "d7fcc3dbd3d256d0be30485881efdebac5a0eacfe7e9161aea74bc0106a6319d"
+      }
+    ],
+    "natural_speed_playback": "Separate Chromium playback passed on immutable tested head 508004143e41e404b38b149a8baf05fd18ef7ece; see ci-verification.json.",
+    "high_sample_quality_reference": "not_run",
+    "final_user_artistic_acceptance": {
+      "status": "approved_current_film_for_publication",
+      "channel": "voice",
+      "confirmed_date": "2026-10-16",
+      "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+      "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
+    }
+  },
+  "browser_natural_speed_full_playback": {
+    "status": "passed_on_recorded_immutable_head",
+    "tested_head": "508004143e41e404b38b149a8baf05fd18ef7ece",
+    "receipt": "ci-verification.json",
+    "workflow_url": "https://github.com/dcc-mcp/showcase/actions/runs/38851171681",
+    "scope": "English/Chinese desktop and touch-viewport Chromium 153.0.8010.12; natural 1x playback through ended, decoded/presented motion-region pictures, final displayed picture and Stop. Later commits require their own CI results.",
+    "touch_display": "Playback is inline with normal native controls. The ended inline picture is partly obscured; its failing ROI comparison is retained. The same ended picture passes separately in native fullscreen entered and exited by real touch, with time, decode count and controls unchanged."
+  },
+  "native_natural_speed_full_playback": "not_run",
+  "final_user_artistic_acceptance": {
+    "status": "approved_current_film_for_publication",
+    "channel": "voice",
+    "confirmed_date": "2026-10-16",
+    "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+    "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
+  },
+  "limits": [
+    "Spatial OIDN only",
+    "No high-sample ground truth or reference quality score",
+    "Technical integrity, offline visual inspection and actual playback are separate gates",
+    "Normal touch-inline native controls partly obscure the ended image; the separate native-fullscreen end-picture inspection does not claim unobstructed inline pixels."
+  ],
+  "full144_source_pngs_individually_inspected_at_native_size": false
+}

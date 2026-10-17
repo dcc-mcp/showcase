@@ -56,3 +56,24 @@ Re-export one adapter without changing the other already-verified PCK:
     python scripts/godot_web/export.py --case sonic-loom --template /tmp/godot-web-templates/web_nothreads_release.zip
 
 The browser meter uses periodic 2048-sample windows, and rendering stalls can leave gaps. Its headroom checks mean only that captured windows contain nonzero audio and no over-range samples. They do not establish continuous peak coverage. The separate native PCM triangle bound supplies the all-alignment guarantee. Increasing windows and measuring temporal coverage is a possible future test enhancement, not an acceptance claim of this PR.
+
+## Live responsive reflow
+
+The shell separates the canvas logical dimensions from its displayed contain-fit
+rectangle. Below 720 CSS pixels of actual iframe width, or with a coarse touch pointer,
+it selects the original portrait adapter; a wider fine-pointer view selects
+the desktop composition. Touch orientation changes retain the legible phone
+controls and vertical pan, rather than shrinking the desktop matrix. Resize,
+orientation changes and fullscreen switch the native content scale in-place,
+preserving pattern, tempo, puzzle state and the audio gate. Portrait dedicated
+stages grow with their content and legacy case embeds report their natural
+height, so the outer page owns scrolling. Accessible HTML controls remain a
+44-pixel alternative, including narrow or short full-screen viewports.
+
+`--web-layout-test` checks both native adapters round-trip without resetting state.
+`responsive_games_browser.py` checks actual WASM at 320–2048 CSS-pixel widths,
+portrait/landscape, CSS zoom and equivalent layout viewport changes, fullscreen,
+state preservation and the older case-page embed. This is not physical-device,
+OS browser-zoom, Safari or Firefox acceptance. The official Engine `preloadFile`
+and `start` methods fetch a hash-versioned PCK into its stable virtual filename;
+shell assets and generated page JS/CSS also use content-bound cache versions.

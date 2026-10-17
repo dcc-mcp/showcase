@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "source_renderer": "Blender",
+    "source_renderer_version": "4.5.13 LTS",
+    "render_engine": "Cycles CPU",
+    "samples_per_pixel": 32,
+    "render_denoising": false,
+    "postprocess_cli": "dcc-media-enhance",
+    "postprocess_cli_version": "0.2.0",
+    "postprocess_source_revision": "bd4aca72488ca6165816ebdf95c99df5800a192a",
+    "postprocess_binary_sha256": "363babca4e93869a77ee0971b7ae82043695ed30cacc4de9b12212fcc31359db",
+    "ffmpeg_version": "7.1.5-0+deb13u1",
+    "execution_route": "Direct native CLI; no new Core gateway created"
+  },
+  "original_source": {
+    "frame_count": 144,
+    "width": 640,
+    "height": 480,
+    "format": "8-bit RGBA PNG",
+    "alpha_min": 255,
+    "alpha_max": 255,
+    "original_scene_sha256": "fbb8401facebc2d4c91d9b2d2953129e7aac3db356a767a01b2835877d79793e",
+    "all_frame_hashes_unchanged": true,
+    "scene_hash_unchanged": true
+  },
+  "ingestion": {
+    "source": "Original render PNG sequence",
+    "conversion": "Opaque display-referred RGB to limited-range BT.709 YUV 4:4:4, 8-bit; no resize or interpolation",
+    "codec": "FFV1 level 3",
+    "codec_lossless": true,
+    "rgb_conversion_lossless": false,
+    "rgb_roundtrip_mean_absolute_channel_error_0_255": 0.4004232901114005,
+    "rgb_roundtrip_root_mean_squared_channel_error_0_255": 0.6364382476883831,
+    "rgb_roundtrip_max_absolute_channel_error_0_255": 2,
+    "matroska_timestamp_quantization_max_error_seconds": 0.0005,
+    "superseded_trial": "An earlier full-range input was converted to limited range during processing. The final run uses matching limited-range source/output for a controlled comparison; the earlier trial is not evidence of proven color corruption."
+  },
+  "processing": {
+    "operation": "Temporal video denoise",
+    "filter": "atadenoise=s=5",
+    "motion_compensated": false,
+    "neural": false,
+    "input_sha256": "9ed664df4ef7ed94e9a42b12df3ac86f0efa732813e0d6e4795914089ed08043",
+    "output_sha256": "1c5582ac0d1e6bcfa34663028848c3deda61f0269e7e1f072018c75fbb71e262",
+    "output_codec": "FFV1 level 3",
+    "limits": {
+      "max_input_mb": 128,
+      "max_output_mb": 128,
+      "max_pixels": 307200,
+      "memory_mb": 512,
+      "min_free_disk_mb": 2048,
+      "threads": 1,
+      "timeout_secs": 180
+    },
+    "backend_resource_receipt": {
+      "elapsed_ms": 2463,
+      "exit_code": 0,
+      "memory_enforcement": "sampled_process_group_watchdog_not_hard_limit",
+      "sampled_peak_rss_kib": 99340
+    },
+    "total_cli_elapsed_seconds": 15.01440025199554,
+    "source_unchanged": true,
+    "native_verification": {
+      "dimensions": true,
+      "pixel_decode": true,
+      "quality_reference": "not_run",
+      "video": {
+        "absolute_origin": "normalized",
+        "audio_codec_sequence_equal": true,
+        "audio_extradata_equal": true,
+        "audio_packet_sha256_equal": true,
+        "audio_packet_side_data_equal": true,
+        "audio_relative_timestamps_equal": true,
+        "frame_count_equal": true,
+        "relative_frame_timestamps_equal": true,
+        "timestamp_tolerance_seconds": 0.0011
+      },
+      "visual_review": "not_run"
+    },
+    "output_hash_matches_manifest": true,
+    "mean_absolute_rgb_change_0_255": 0.18562537676022375,
+    "max_absolute_rgb_change_0_255": 10,
+    "changed_pixel_fraction": 0.1445824291087963,
+    "metric_interpretation": "Pixel change only; neither a noise-reduction score nor a fidelity/quality measurement."
+  },
+  "media": {
+    "raw_master": {
+      "filename": "raw-limited-ffv1.mkv",
+      "sha256": "9ed664df4ef7ed94e9a42b12df3ac86f0efa732813e0d6e4795914089ed08043",
+      "bytes": 32852954,
+      "codec": "ffv1",
+      "width": 640,
+      "height": 480,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "time_base": "1/1000",
+      "duration_seconds": 6.006,
+      "pixel_format": "yuv444p",
+      "color_range": "tv",
+      "color_matrix": "bt709",
+      "audio_stream_count": 0,
+      "pts_strictly_increasing": true
+    },
+    "raw_preview": {
+      "filename": "pendulum-raw.mp4",
+      "sha256": "267bccb3e1eb97f3f3ffa6144ca6bed6612b41c0cb12ed7c6e0e4edd717d6003",
+      "bytes": 862839,
+      "codec": "h264",
+      "width": 640,
+      "height": 480,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "time_base": "1/24000",
+      "duration_seconds": 6.006,
+      "pixel_format": "yuv420p",
+      "color_range": "tv",
+      "color_matrix": "bt709",
+      "audio_stream_count": 0,
+      "pts_strictly_increasing": true
+    },
+    "denoised_master": {
+      "filename": "denoised-limited-ffv1.mkv",
+      "sha256": "1c5582ac0d1e6bcfa34663028848c3deda61f0269e7e1f072018c75fbb71e262",
+      "bytes": 32448042,
+      "codec": "ffv1",
+      "width": 640,
+      "height": 480,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "time_base": "1/1000",
+      "duration_seconds": 6.006,
+      "pixel_format": "yuv444p",
+      "color_range": "tv",
+      "color_matrix": "bt709",
+      "audio_stream_count": 0,
+      "pts_strictly_increasing": true
+    },
+    "denoised_preview": {
+      "filename": "pendulum-denoised.mp4",
+      "sha256": "50a237ea1af799f8aae3a54da100ceccc612b539aba13e3bf8442df411166f8b",
+      "bytes": 841325,
+      "codec": "h264",
+      "width": 640,
+      "height": 480,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "time_base": "1/24000",
+      "duration_seconds": 6.006,
+      "pixel_format": "yuv420p",
+      "color_range": "tv",
+      "color_matrix": "bt709",
+      "audio_stream_count": 0,
+      "pts_strictly_increasing": true
+    }
+  },
+  "preview_encoding": {
+    "codec": "H.264",
+    "preset": "slow",
+    "crf": 18,
+    "pixel_format": "yuv420p",
+    "frame_rate": "24000/1001",
+    "duration_seconds": 6.006,
+    "count": 144,
+    "pts_step": 1001,
+    "time_base": "1/24000",
+    "audio_stream_count": 0,
+    "retiming": false,
+    "frame_interpolation": false,
+    "upscaling": false,
+    "same_encoder_settings_for_comparison": true
+  },
+  "checks": [
+    {
+      "name": "All original PNG and scene hashes unchanged",
+      "result": "pass",
+      "observed": true
+    },
+    {
+      "name": "Native processing complete and output hash verified",
+      "result": "pass",
+      "observed": true
+    },
+    {
+      "name": "All four videos decode 144 frames",
+      "result": "pass",
+      "observed": {
+        "raw_master": 144,
+        "raw_preview": 144,
+        "denoised_master": 144,
+        "denoised_preview": 144
+      }
+    },
+    {
+      "name": "Final source/output color range matches",
+      "result": "pass",
+      "observed": "limited-range (tv) BT.709"
+    },
+    {
+      "name": "Master source/output relative timestamps match",
+      "result": "pass",
+      "observed": true
+    },
+    {
+      "name": "MP4 exact rational frame cadence",
+      "result": "pass",
+      "observed": "144 frames; PTS 0..143143 step1001 at time_base1/24000"
+    },
+    {
+      "name": "MP4 full decode",
+      "result": "pass",
+      "observed": {
+        "raw_exit": 0,
+        "denoised_exit": 0
+      }
+    },
+    {
+      "name": "No audio streams in previews",
+      "result": "pass",
+      "observed": 0
+    }
+  ],
+  "not_claimed": [
+    "No high-sample ground truth or objective perceptual-quality score.",
+    "No CineRecon reconstruction or benchmark result.",
+    "No motion-compensated or neural denoising.",
+    "No EXR, OIDN or auxiliary render passes used.",
+    "Lossless FFV1 coding does not make the RGB-to-YUV ingestion conversion mathematically lossless.",
+    "H.264 delivery previews are lossy, matched encodes.",
+    "CLI technical validation does not establish artistic quality.",
+    "No independent model attribution record is present."
+  ]
+}

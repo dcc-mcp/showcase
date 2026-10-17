@@ -63,18 +63,18 @@
     },
     {
       "path": "play/shell.css",
-      "bytes": 2207,
-      "sha256": "33f61fdf134ee983e16ca004b1b206a8a8d5381edcf6ead352a54a9e18e43176"
+      "bytes": 3828,
+      "sha256": "47007268191955191e6e3d791f1846fcd90dbb36c2654193ec5fcb37b389c9cc"
     },
     {
       "path": "play/shell.js",
-      "bytes": 13271,
-      "sha256": "7acbf44684d3ef9436b96654953af8dcf50c56b70bc26680b2d5c2eb0b275563"
+      "bytes": 17182,
+      "sha256": "a6430d5e43921f381a733a1cff2ca93dc533a2100a46b0b5c7df2b58589df1e3"
     },
     {
       "path": "play/export-provenance.json",
       "bytes": 5822,
-      "sha256": "cfb734431931330914719dbdabbb550de87623ad85386e01d34bdcad6285c4b5"
+      "sha256": "34cc37901ca3b76f940dc4b7c7d9b88cfb44e050bd19a6b3c36dbec7dc95dd91"
     },
     {
       "path": "play/README.md",
@@ -148,23 +148,23 @@
     },
     {
       "path": "play/sonic-loom/index.html",
-      "bytes": 1788,
-      "sha256": "6155f5ddbd0786d2617f4fdb797a6abbe0caf23e6bb3a2a1c83ba07e71478411"
+      "bytes": 1906,
+      "sha256": "a7f69e623cad7940a38e76c1cd66e6ca42e57ff9902fe3a26576c0a1d87a833a"
     },
     {
       "path": "play/sonic-loom/game.pck",
-      "bytes": 24444,
-      "sha256": "16f77dcdb2b10f0093c608646eb0556ad1ffe0a2fb535b084437c92dc6295f8b"
+      "bytes": 25212,
+      "sha256": "dc87fd79473b8a253eaae8bce6785f3664a02934cb90eacf705330679f29b344"
     },
     {
       "path": "play/prism-tide/index.html",
-      "bytes": 1788,
-      "sha256": "cfeeea1c933c9859ab99b1a54db58392d4a4d79f80b3f1dbdf2f6f09003d6675"
+      "bytes": 1906,
+      "sha256": "2ec70522c89cf9b31fd853d782b76c171b08b9f0763bdf0f5180c7790bbab504"
     },
     {
       "path": "play/prism-tide/game.pck",
-      "bytes": 22280,
-      "sha256": "3a8e96bdcb694815f4f10988c34580de2c6f546c4526b797f9c84e8dd8c831c1"
+      "bytes": 23192,
+      "sha256": "7308582b1b5757348b5ad322e6a03f3844cd51e628db0ebb9ca972d161871758"
     }
   ],
   "demos": [
@@ -212,8 +212,8 @@
     }
   ],
   "budget": {
-    "raw_bytes": 40029048,
-    "gzip_equivalent_bytes": 11255631,
+    "raw_bytes": 40036496,
+    "gzip_equivalent_bytes": 11259086,
     "raw_limit_bytes": 41943040,
     "gzip_equivalent_limit_bytes": 11534336,
     "note": "Gzip equivalent is measured locally; actual Pages Content-Encoding must be verified after an authorized deployment."

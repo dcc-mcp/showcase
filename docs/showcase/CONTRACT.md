@@ -9,6 +9,25 @@ picture nobody can verify.
 
 ## Layout
 
+Before production in any DCC, follow the shared [production reuse gate](https://github.com/dcc-mcp/dcc-mcp-core/blob/main/crates/dcc-mcp-gateway/src/gateway/native_resources/agent_workflows.md#production-reuse-gate).
+Record bounded discovery and candidate evaluation before implementation.
+Blender must reuse the existing `blender-extension-store` provider to
+`blender-extensions` host package chain when suitable; see the shared example.
+
+For plugin/asset reuse claims, retain dated evidence for real discovery,
+exact-version acquisition and checksum verification, installation/enabling,
+MCP capability calls, parameter/seed recipe, native save/reopen, and independent
+rebuild from a blank scene. In `validation.json`, bind each completed step to
+its actual tool return and measured host/artifact result; inventory retained
+evidence in `manifest.json`. Compare rebuild counts, geometry/bounds, materials
+and controlled renders against declared tolerances. Record missing steps in
+`not_claimed`; structural validation alone cannot certify this production gate.
+
+Separate historical evidence from new acceptance runs. New experiments cannot
+retroactively prove old provider discovery/download or zero-scene rebuilding.
+Canal v11 remains under quality review with those gaps, without automatic
+publication. Internal Unreal scenes must not be publicly distributed.
+
 One directory per entry, named after the proposition slug:
 
 ```text

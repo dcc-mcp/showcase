@@ -31,6 +31,8 @@ try:
             page.goto(origin + '/', wait_until='networkidle')
             page.locator('#search').fill('Prism Tide')
             expect(page.locator('.case-card:visible')).to_have_count(1)
+            if page.locator('.filter-disclosure').get_attribute('open') is None:
+                page.locator('.filter-disclosure summary').click()
             page.locator('[data-filter="software"] [data-value="Godot"]').click()
             page.locator('[data-filter="capability"] [data-value="交互"]').click()
             expect(page.locator('.case-card:visible')).to_have_count(1)
@@ -40,10 +42,14 @@ try:
             page.screenshot(path=str(a.output / (layout + '-prism-tide-top.png')))
             video = page.locator('video').first
             video.scroll_into_view_if_needed()
-            page.wait_for_function('document.querySelector("video").readyState >= 2')
-            assert video.evaluate('(v) => v.videoWidth === 1280 && v.videoHeight === 800 && Math.abs(v.duration - 15) < .1 && !v.autoplay')
+            expect(video).to_have_js_property('controls', True)
+            expect(video).to_have_js_property('paused', True)
+            assert video.evaluate('(v) => !v.autoplay && v.played.length === 0')
+            # Explicit native keyboard playback also loads preload=none media.
             video.focus()
             page.keyboard.press('Space')
+            page.wait_for_function('document.querySelector("video").readyState >= 2')
+            assert video.evaluate('(v) => v.videoWidth === 1280 && v.videoHeight === 800 && Math.abs(v.duration - 15) < .1 && !v.autoplay')
             page.wait_for_function('!document.querySelector("video").paused && document.querySelector("video").currentTime > 0.4 && document.querySelector("video").readyState >= 3')
             page.keyboard.press('Space')
             page.wait_for_function('document.querySelector("video").paused && document.querySelector("video").readyState >= 3')
