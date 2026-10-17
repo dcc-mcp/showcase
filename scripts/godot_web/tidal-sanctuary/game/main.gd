@@ -32,7 +32,7 @@ var demo_phase := 0
 var demo_wait := 0.0
 var ui_visible := true
 var language := "en"
-var material_stone: StandardMaterial3D
+var material_stone: Material
 var material_dark: StandardMaterial3D
 var material_gold: StandardMaterial3D
 var grass: Array[MeshInstance3D] = []
@@ -58,7 +58,7 @@ var touch_drag_events:=0
 var touch_gesture_id:=0
 var language_change_id:=0
 var hero_camera_locked:=false
-var stone_materials:Array[StandardMaterial3D]=[]
+var stone_materials:Array[Material]=[]
 var fern_material:StandardMaterial3D
 var fern_meshes:Array[Mesh]=[]
 
@@ -120,8 +120,8 @@ func make_environment() -> void:
  sky.sky_material=sm
  env.sky=sky
  env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
- env.ambient_light_color=Color("8faec5")
- env.ambient_light_energy=.28
+ env.ambient_light_color=Color("8caabe")
+ env.ambient_light_energy=.42
  env.tonemap_mode=Environment.TONE_MAPPER_ACES
  env.tonemap_exposure=.95
  env.fog_enabled=true
@@ -133,10 +133,12 @@ func make_environment() -> void:
  add_child(sky_env)
  var sun := DirectionalLight3D.new()
  sun.name="LateAfternoonSun"
- sun.rotation_degrees=Vector3(-43,-32,0)
- sun.light_color=Color("ffdab0")
- sun.light_energy=.82
+ sun.rotation_degrees=Vector3(-32,-42,0)
+ sun.light_color=Color("ffe8c9")
+ sun.light_energy=.60
  sun.shadow_enabled=true
+ sun.shadow_opacity=.82
+ sun.shadow_blur=1.4
  sun.shadow_bias=.35
  sun.shadow_normal_bias=4.0
  sun.directional_shadow_max_distance=38
@@ -188,7 +190,10 @@ func terrain_color(p: Vector3) -> Color:
   c=Color("596a66").lerp(Color("849083"),strata*.55)
   if p.z>5.5:c=c.lerp(Color("afa184"),smoothstep(.78,.97,r)*.75)
  if p.y<.08:c=Color("355c59")
- if p.z< -6.5 and abs(p.x)<4.9:c=c.lerp(Color("7d8b7c"),.6)
+ if p.z< -6.5 and abs(p.x)<4.9:c=c.lerp(Color("5d6654"),.9)
+ var wall_distance:float=absf(p.x+4.25)+maxf(0,p.z+5.0)+maxf(0,-10.0-p.z)
+ var moss:=(1.0-smoothstep(.2,1.05,wall_distance))*(.55+patch*.45)
+ c=c.lerp(Color("475a43"),moss*.75)
  return c
 
 func triangle(st: SurfaceTool,a:Vector3,b:Vector3,c:Vector3,ca:Color,cb:Color,cc:Color) -> void:
@@ -197,6 +202,12 @@ func triangle(st: SurfaceTool,a:Vector3,b:Vector3,c:Vector3,ca:Color,cb:Color,cc
  st.set_color(ca);st.add_vertex(a)
  st.set_color(cc);st.add_vertex(c)
  st.set_color(cb);st.add_vertex(b)
+
+func terrain_triangle(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3) -> void:
+ for p in [a,c,b]:
+  var e:=.12
+  var normal:=Vector3(height_at(p.x-e,p.z)-height_at(p.x+e,p.z),e*2,height_at(p.x,p.z-e)-height_at(p.x,p.z+e)).normalized()
+  st.set_normal(normal);st.set_color(terrain_color(p));st.add_vertex(p)
 
 func make_terrain() -> void:
  var st:=SurfaceTool.new()
@@ -211,14 +222,13 @@ func make_terrain() -> void:
    var c:=Vector3(x,height_at(x,z+step),z+step)
    var d:=Vector3(x+step,height_at(x+step,z+step),z+step)
    if minf(minf(a.y,b.y),minf(c.y,d.y))<-.58: continue
-   triangle(st,a,c,b,terrain_color(a),terrain_color(c),terrain_color(b))
-   triangle(st,b,c,d,terrain_color(b),terrain_color(c),terrain_color(d))
+   terrain_triangle(st,a,c,b)
+   terrain_triangle(st,b,c,d)
  terrain_mesh=MeshInstance3D.new()
  terrain_mesh.name="SculptedIsland"
  terrain_mesh.mesh=st.commit()
- var m:=mat(Color.WHITE)
- m.vertex_color_use_as_albedo=true
- m.vertex_color_is_srgb=true
+ var m:ShaderMaterial=stone_materials[0].duplicate()
+ m.set_shader_parameter("terrain_surface",true)
  terrain_mesh.material_override=m
  add_child(terrain_mesh)
  terrain_mesh.create_trimesh_collision()
@@ -311,14 +321,12 @@ func prepare_surface_assets() -> void:
  var diffuse:=encoded_texture("res://assets/polyhaven/stone-diff.jpg.bin")
  var normal:=encoded_texture("res://assets/polyhaven/stone-normal.png.bin")
  var rough:=encoded_texture("res://assets/polyhaven/stone-rough.jpg.bin")
- for tint in [Color("c5c4ad"),Color("a7b19e"),Color("c1bba4"),Color("959f91")]:
-  var material:=mat(tint)
-  material.albedo_texture=diffuse
-  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.38
-  material.roughness_texture=rough
-  material.uv1_triplanar=true;material.uv1_world_triplanar=true
-  material.uv1_scale=Vector3.ONE*.66
-  material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+ for tint in [Vector3(1.0,1.0,1.0),Vector3(.93,.97,.94),Vector3(1.04,1.01,.96),Vector3(.90,.94,.92)]:
+  var material:=ShaderMaterial.new();material.shader=load("res://surface.gdshader")
+  material.set_shader_parameter("grain_texture",diffuse)
+  material.set_shader_parameter("normal_texture",normal)
+  material.set_shader_parameter("rough_texture",rough)
+  material.set_shader_parameter("stone_tint",tint)
   stone_materials.append(material)
  fern_material=mat(Color("a8b394"))
  fern_material.albedo_texture=encoded_texture("res://assets/polyhaven/fern-albedo.png.bin")
@@ -389,8 +397,9 @@ func make_ruins() -> void:
    if (row==0 and col==0) or (row==2 and col==4) or (row==3 and col==0):continue
    var x:float=-2.65+col*1.32+rng.randf_range(-.10,.10)
    var z:float=-6.5-row*1.30+rng.randf_range(-.11,.11)
-   var tile:=beveled_block(Vector3(x,h-.06+rng.randf_range(-.04,.025),z),Vector3(rng.randf_range(1.12,1.28),.22,rng.randf_range(1.11,1.3)),stone_materials[(row+col)%4],1500+row*5+col,.40)
-   tile.rotation.y=rng.randf_range(-.05,.05)
+   var tile:=beveled_block(Vector3(x,h-.06+rng.randf_range(-.04,.025),z),Vector3(rng.randf_range(1.24,1.34),.22,rng.randf_range(1.23,1.35)),stone_materials[(row+col)%4],1500+row*5+col,.40)
+   tile.rotation.y=rng.randf_range(-.035,.035)
+   if col==4 and row==0:tile.rotation.z=.11;tile.position.y-=.06
  # Four survivors, different heights and broken caps, replace the clean colonnade.
  for info in [Vector3(-3.8,1.0,-5.9),Vector3(-3.65,3.5,-9.3),Vector3(3.7,.75,-6.2),Vector3(3.8,2.55,-10.1)]:
   var base:=height_at(info.x,info.z)
@@ -415,6 +424,7 @@ func make_ruins() -> void:
  # Broken return wall, tapering irregularly toward the entrance.
  for row in range(4):
   for column in range(5-row):
+   if row==2 and column==2:continue
    var z:float=-8.65+column*.87
    var x:float=-4.25+rng.randf_range(-.045,.045)
    var wall:=beveled_block(Vector3(x,height_at(x,z)+.24+row*.43,z),Vector3(.67,.44,.87),stone_materials[(row+column)%4],2300+row*8+column,.29)
@@ -443,6 +453,10 @@ func make_sanctuary_details() -> void:
   var size:=rng.randf_range(.12,.42)
   var pebble:=rock(Vector3(x,height_at(x,z)+size*.12,z),Vector3(size,size*.42,size*.7),stone_materials[i%4],3000+i)
   pebble.rotation.y=rng.randf()*TAU
+ for i in range(10):
+  var x:=rng.randf_range(-4.1,-3.25);var z:=rng.randf_range(-6.9,-5.6)
+  var chip:=beveled_block(Vector3(x,height_at(x,z)+.04,z),Vector3(rng.randf_range(.12,.35),.10,rng.randf_range(.18,.36)),stone_materials[i%4],3700+i,.65)
+  chip.rotation=Vector3(.1,rng.randf()*TAU,.12)
 
 func make_nature() -> void:
  # Authored CC0 silhouettes: open branching trees with a few thin conifers behind.
@@ -450,19 +464,6 @@ func make_nature() -> void:
   place_asset("res://assets/coastal-tree.tscn",Vector3(t.x,height_at(t.x,t.z)-.08,t.z),Vector3(t.y*.95,t.y,t.y*.85),rng.randf()*TAU)
  for t in [Vector3(-8.8,3.8,-6.0)]:
   place_asset("res://assets/needle-pine.tscn",Vector3(t.x,height_at(t.x,t.z)-.08,t.z),Vector3.ONE*t.y,rng.randf()*TAU)
- var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
- for i in range(230):
-  var x:=rng.randf_range(-11,11);var z:=rng.randf_range(-14,12)
-  if island_radius(x,z)>.76 or abs(x-path_x(z))<2.0 or (z< -5 and abs(x)<5.3):continue
-  if noise.get_noise_2d(x*1.4+55,z*1.4)<.06:continue
-  var y:=height_at(x,z)+.02
-  var a:=rng.randf()*TAU;var w:=rng.randf_range(.045,.09);var h:=rng.randf_range(.13,.30)
-  var base:=Vector3(x,y,z);var dir:=Vector3(cos(a),0,sin(a))
-  var c:=Color("526f50").lightened(rng.randf_range(-.07,.10))
-  triangle(st,base-dir*w,base+dir*w,base+Vector3(.10,h,0),c,c,c)
-  triangle(st,base+dir*w,base-dir*w,base+Vector3(.10,h,0),c,c,c)
- var gm:=mat(Color.WHITE);gm.vertex_color_use_as_albedo=true;gm.vertex_color_is_srgb=true;gm.cull_mode=BaseMaterial3D.CULL_DISABLED
- grass.append(mesh_node(st.commit(),Vector3.ZERO,gm))
 
 func make_player() -> void:
  player=CharacterBody3D.new();player.name="Wayfarer";add_child(player)
@@ -548,16 +549,16 @@ func update_state() -> void:
  var count:=0
  for i in range(3):
   if activated[i]:count+=1
-  lantern_lights[i].light_energy=1.2 if activated[i] else .0
+  lantern_lights[i].light_energy=.48 if activated[i] else .0
   var gem:MeshInstance3D=lanterns[i].get_node("Gem")
   var m:StandardMaterial3D=gem.material_override
-  m.emission_energy_multiplier=2.5 if activated[i] else .3
+  m.emission_energy_multiplier=.55 if activated[i] else .12
  progress.text="%s  %s  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]
  completed=count==3
  beam.visible=completed
  beacon.get_node("RingLight").light_energy=.7 if beacon_awakened else (.25 if completed else 0.0)
  var ring_material:StandardMaterial3D=beacon_ring.material_override
- ring_material.emission_energy_multiplier=1.5 if beacon_awakened else (.6 if completed else .0)
+ ring_material.emission_energy_multiplier=1.2 if beacon_awakened else (.6 if completed else .0)
  action_button.visible=true
  language_button.text="EN" if language=="en" else "ZH"
  objective.text=("The sanctuary remembers" if completed else "Wake three tide lanterns") if language=="en" else ("圣所已苏醒" if completed else "点亮三座潮汐灯")
