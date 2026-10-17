@@ -1,0 +1,152 @@
+{
+  "schema": "dcc-showcase-production/v1",
+  "case_slug": "replace-with-case-slug",
+  "recorded_at": "replace-with-actual-ISO-8601-time",
+  "environment": [
+    {
+      "role": "host",
+      "component": "host",
+      "version": "unknown",
+      "reason": "Not recorded yet"
+    },
+    {
+      "role": "adapter",
+      "component": "adapter",
+      "version": "unknown",
+      "reason": "Not recorded yet"
+    },
+    {
+      "role": "core",
+      "component": "core",
+      "version": "unknown",
+      "reason": "Not recorded yet"
+    }
+  ],
+  "recipe": {
+    "path": "replace-with-recipe-path",
+    "sha256": ""
+  },
+  "sources": [],
+  "checks": {
+    "research": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "reuse_discovery": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "rights": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "real_mcp": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "save_reopen": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "export_reopen": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "recipe_rebuild": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "continuous_frames": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "visual_review": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "audio_review": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "browser_playback": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "privacy": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    },
+    "locales": {
+      "status": "not-tested",
+      "summary": "No acceptance run recorded yet.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "No execution scope recorded yet."
+    }
+  },
+  "interactive": false,
+  "task": {
+    "goal": "Describe the observable task without private prompts.",
+    "inputs": [],
+    "capabilities": [
+      "replace-with-actual-capability"
+    ],
+    "reproduction_budget": {
+      "estimated_seconds": null,
+      "measured_seconds": null,
+      "cost_ceiling": null
+    }
+  },
+  "outputs": [],
+  "failure_recovery": [],
+  "usage_rights": {
+    "display": {
+      "status": "unknown",
+      "evidence": []
+    },
+    "training": {
+      "status": "not-granted",
+      "evidence": []
+    },
+    "evaluation": {
+      "status": "not-granted",
+      "evidence": []
+    }
+  }
+}
