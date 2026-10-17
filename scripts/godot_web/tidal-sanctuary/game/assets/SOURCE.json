@@ -1,0 +1,29 @@
+{
+  "source": "https://kenney.nl/assets/nature-kit",
+  "archive": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+  "archive_sha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+  "license": "CC0 1.0 Universal; see KENNEY-LICENSE.txt",
+  "conversion": "Godot 4.6.3 GLTFDocument, self-contained PackedScene, normalized dimensions, metallic=0 palette overrides; no script attached",
+  "files": {
+    "shore-rock-a.tscn": {
+      "source_file": "rock_largeA.glb",
+      "source_sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25",
+      "source_bytes": 7552
+    },
+    "shore-rock-d.tscn": {
+      "source_file": "rock_largeD.glb",
+      "source_sha256": "e4fefd8d8d7deab42be61bd222bcd088330012f0025789146b81f25a46095ffd",
+      "source_bytes": 7992
+    },
+    "coastal-tree.tscn": {
+      "source_file": "tree_thin.glb",
+      "source_sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3",
+      "source_bytes": 17200
+    },
+    "needle-pine.tscn": {
+      "source_file": "tree_pineTallB_detailed.glb",
+      "source_sha256": "a26b4434e1592ec1a83f364a54688bb34c48d9521bfccbe63f0cc37b381c4696",
+      "source_bytes": 12632
+    }
+  }
+}

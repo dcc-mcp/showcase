@@ -1,0 +1,132 @@
+{
+  "retrieved_utc": "2026-10-17T05:23:04.797845+00:00",
+  "license": "CC0-1.0",
+  "license_url": "https://polyhaven.com/license",
+  "asset_pages": [
+    "https://polyhaven.com/a/rock_04",
+    "https://polyhaven.com/a/fern_02"
+  ],
+  "asset_total_bytes": 4590433,
+  "files": [
+    {
+      "path": "rock_04/rock_04_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_04/rock_04_diff_1k.jpg",
+      "bytes": 815398,
+      "md5": "cf0ec6db74559af9204840dbe1e30a37",
+      "sha256": "0c7e1d0a014d141dc5ba13b55657922ae8de045f509a3a8eefeb5de445a839ed"
+    },
+    {
+      "path": "rock_04/rock_04_nor_gl_1k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_04/rock_04_nor_gl_1k.png",
+      "bytes": 2167854,
+      "md5": "8db7a7f8585aae6441870f1045990322",
+      "sha256": "50fbc3c05987f368eb50b110c5574baf556d19448aa1558f8d4fad1d0897622d"
+    },
+    {
+      "path": "rock_04/rock_04_rough_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_04/rock_04_rough_1k.jpg",
+      "bytes": 346231,
+      "md5": "98c2580599e79a5d004ab00072d167c3",
+      "sha256": "32971a6c5fd2207969fdb85dd588ec0afbfe7d8e73491978b855703f36fe6055"
+    },
+    {
+      "path": "fern_02/fern_02_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/fern_02/fern_02_1k.gltf",
+      "bytes": 6899,
+      "md5": "cf276874d37bfb73c299504a6b355b77",
+      "sha256": "33974295ee19670af4877705fc7d91f33f42d6302f0d44a625e072271223031f"
+    },
+    {
+      "path": "fern_02/textures/fern_02_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_arm_1k.jpg",
+      "bytes": 280359,
+      "md5": "1bbb2b22951f450720d28e17d93a2987",
+      "sha256": "ebfb5d76ce9cbdaec20bcd22dce9b755f0b1b8650ef29ca13555e3e6961025d7"
+    },
+    {
+      "path": "fern_02/textures/fern_02_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_diff_1k.jpg",
+      "bytes": 315705,
+      "md5": "82c18a6cfd5ae91c37c0e078f591181c",
+      "sha256": "a828a6e7b4c01c826911e2eac4b3afc7457dab7b3b392a31c681ed88b7d50029"
+    },
+    {
+      "path": "fern_02/textures/fern_02_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/fern_02/fern_02_nor_gl_1k.jpg",
+      "bytes": 367222,
+      "md5": "43aed63dff79554f6064627515afd9d7",
+      "sha256": "45bce132c6e96a0864bc89ab5da51361ab3f4afa83a6669ae499ab5ca811f621"
+    },
+    {
+      "path": "fern_02/fern_02.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/fern_02/fern_02.bin",
+      "bytes": 176176,
+      "md5": "c061e9255f7d36ae9ce0e92ef3e100b2",
+      "sha256": "fe1abb762bcbbc7ad9e86925c8080437a62add257d9280e9142fdc85c226e64c"
+    },
+    {
+      "path": "fern_02/textures/fern_02_alpha_1k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/fern_02/fern_02_alpha_1k.png",
+      "bytes": 114589,
+      "md5": "1421e5e36946c23a7ddcc907de89025c",
+      "sha256": "ea3c64284c7ebdeedf484d2d816eae92825ec526140c3bb83859ddc7a64001f9",
+      "purpose": "Supplemental official alpha mask omitted from published glTF dependency list; needed to supply base-color alpha for MASK material"
+    }
+  ],
+  "notes": [
+    "Original source assets are unchanged. Fern glTF declares alphaMode MASK but its base-color image is JPEG; combine the official diffuse JPEG with supplemental alpha PNG for a correct RGBA albedo during integration.",
+    "Fern geometry bin is shared across resolutions; the official API lists its URL under gltf/8k, but it is only 176176 bytes and is the exact 1k glTF dependency."
+  ],
+  "conversion": {
+    "tool": "Godot 4.6.3 GLTFDocument and Image APIs, offline static conversion",
+    "meshes": "Four fern meshes retain original positions/normals/UVs; original materials removed and replaced by shared alpha-scissor material. Variant order b,c,a,d.",
+    "textures": "Rock diffuse/rough JPEG bytes retained; OpenGL rock normal reduced to 512 px. Fern diffuse combined with official normalized 16-bit alpha using Godot Image get_pixel/set_pixel, then 512px Lanczos. Fern OpenGL normal 512px JPEG quality0.9. Binary .bin suffix preserves exact source image bytes for explicit native/Web in-memory decoding; these are image data, not executables."
+  },
+  "derived_files": [
+    {
+      "path": "polyhaven/fern-0.res",
+      "bytes": 32861,
+      "sha256": "1db0beca840c81e0268e8823f52f9613810c9a6f5e06e28720d439a66a2c2504"
+    },
+    {
+      "path": "polyhaven/fern-1.res",
+      "bytes": 31011,
+      "sha256": "34eab07a672d03e16daa4965943d1bd8752c6698f9c2af399b5cfa437f952322"
+    },
+    {
+      "path": "polyhaven/fern-2.res",
+      "bytes": 12008,
+      "sha256": "1b489dfac792614304f5a5850ba7f1c8bcd53b341237689aa76b938db94133e3"
+    },
+    {
+      "path": "polyhaven/fern-3.res",
+      "bytes": 11815,
+      "sha256": "11f9a367af5cb6cc39aaf2e91f3823fa50f7ea634ba90a258c946dd463bf9e4a"
+    },
+    {
+      "path": "polyhaven/fern-albedo.png.bin",
+      "bytes": 306690,
+      "sha256": "2afe86b1b9838b7c4e06d5309c1acb51850128bb533e8ee90bce57d3930d741f"
+    },
+    {
+      "path": "polyhaven/fern-normal.jpg.bin",
+      "bytes": 35856,
+      "sha256": "58e75e4722b42beb792b8df5b60bde690b0b73b8dc17a89896e44b31e4cbcfc2"
+    },
+    {
+      "path": "polyhaven/stone-diff.jpg.bin",
+      "bytes": 815398,
+      "sha256": "0c7e1d0a014d141dc5ba13b55657922ae8de045f509a3a8eefeb5de445a839ed"
+    },
+    {
+      "path": "polyhaven/stone-normal.png.bin",
+      "bytes": 545444,
+      "sha256": "8b6b08524e0525184c65b0ad48a62e6f0430813335a42a17f033ec10e9d54c33"
+    },
+    {
+      "path": "polyhaven/stone-rough.jpg.bin",
+      "bytes": 346231,
+      "sha256": "32971a6c5fd2207969fdb85dd588ec0afbfe7d8e73491978b855703f36fe6055"
+    }
+  ]
+}
