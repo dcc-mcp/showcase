@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import json
+import math
 import threading
 import tempfile
 import time
@@ -12,7 +13,7 @@ from pathlib import Path
 from common import check_engine_log, isolated_output, sha256, write_json
 from playwright.sync_api import sync_playwright
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored
-from observers import observer_receipts, positive_integer, validate_language_frame, validate_touch_release
+from observers import finite_vector, observer_receipts, positive_integer, validate_language_frame, validate_touch_release
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -46,13 +47,51 @@ BROWSER_ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-sw
 def secondary_touch_tap(send_touch, primary_points, action, pause):
     if len(primary_points) != 1 or primary_points[0].get("id") != 0 or action.get("id") != 1:
         raise ValueError("Second-finger tap requires the original held primary finger")
-    # CDP touchEnd/touchCancel must contain no points. During an active gesture,
-    # touchMove diffs the active ID set: adding 1 presses it, removing 1 releases
-    # it while retaining 0. A nonempty touchEnd incorrectly released finger 0.
-    # https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchTouchEvent
-    send_touch("touchMove", primary_points + [action])
+    # The default Chromium DispatchWebTouchEvent path takes CHANGED points,
+    # unlike its optional SyntheticPointerActions active-set path. End only ID 1;
+    # sending ID 0 ends steering, while omitting ID 1 in touchMove never ends it.
+    # https://raw.githubusercontent.com/chromium/chromium/153.0.8010.12/content/browser/devtools/protocol/input_handler.cc
+    send_touch("touchStart", [action])
     pause(.09)
-    send_touch("touchMove", primary_points)
+    send_touch("touchEnd", [action])
+
+
+def completed_route_save(console, start, expected):
+    """Select a real save after this physical route's actual completion receipt."""
+    completed_index = None
+    for index in range(start, len(console)):
+        receipts = observer_receipts(console[index:index + 1], "TIDAL_COMPLETE")
+        if receipts:
+            receipt = receipts[0]
+            if receipt.get("demo") is not False or type(receipt.get("stage")) is not int or receipt["stage"] != 4:
+                raise ValueError("Save boundary lacks an actual physical-route completion")
+            completed_index = index
+            break
+    if completed_index is None:
+        return None
+    saves = observer_receipts(console, "TIDAL_SAVE", completed_index + 1)
+    if not saves:
+        return None
+    saved = saves[-1]
+    if type(saved.get("schema")) is not int or saved["schema"] != 1 or not complete(saved):
+        raise ValueError("Actual completion save is malformed or incomplete")
+    before = finite_vector(expected.get("position"), 3, "completed route position")
+    after = finite_vector(saved.get("position"), 3, "actual saved position")
+    if saved.get("language") != expected.get("language") or math.hypot(before[0] - after[0], before[2] - after[2]) > .35:
+        raise ValueError("Actual completion save differs from the completed route")
+    return saved
+
+
+def wait_completed_route_save(page, console, start, expected, timeout=90):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if page.is_closed():
+            raise RuntimeError("Browser closed before the actual completion save")
+        saved = completed_route_save(console, start, expected)
+        if saved is not None:
+            return saved
+        page.wait_for_timeout(100)
+    raise TimeoutError("No actual save after the physical-route completion")
 
 
 def capture_png(page, path, diagnostic=False):
@@ -222,6 +261,7 @@ def main():
                         touch_boundary = len(console)
                         touch_points = [{"id": 0, "x": origin[0], "y": origin[1]}]
                         send_touch("touchStart", touch_points)
+                    route_console_boundary = len(console)
                     driver = RouteDriver(states, move, interact, lambda seconds: page.wait_for_timeout(seconds * 1000), screenshot)
                     try:
                         route = driver.run()
@@ -242,12 +282,11 @@ def main():
                         raise RuntimeError("Actual browser route did not capture its five playable milestones")
                     report["checks"].append({"name": label + " actual input completes treasure loop and walks/wades/swims/returns to shore", "passed": True})
 
-                    # Wait for a real post-route save, then terminate Chromium entirely.
-                    # A new Chromium OS process must restore the same origin's IndexedDB.
-                    boundary = len(console)
-                    saved = wait_observer(page, console, "TIDAL_SAVE", boundary, timeout=20)
-                    if not complete(saved):
-                        raise RuntimeError("Actual Web save receipt did not contain completed treasure progress")
+                    # Completion saves immediately. Screenshots can take longer than
+                    # the auto-save interval; retain that real receipt, not a new
+                    # wall-clock window unrelated to the game's simulation time.
+                    saved = wait_completed_route_save(page, console, route_console_boundary, route["completed_state"])
+                    # A new Chromium OS process must restore the untouched IndexedDB.
                     page.wait_for_timeout(2500)
                     check_engine_log("\n".join(item["text"] for item in console))
                     result["restore"] = {"status": "running", "saved": saved, "fresh_browser_process": True}

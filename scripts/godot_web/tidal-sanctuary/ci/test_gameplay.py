@@ -1,11 +1,12 @@
 """Fail-closed unit fixtures, not claims that real input or rendering has passed."""
 import copy
+import json
 import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
-from capture_browser import capture_png, secondary_touch_tap
+from capture_browser import capture_png, completed_route_save, secondary_touch_tap
 from capture_native import validate_input_movie_span
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
@@ -303,18 +304,40 @@ class AuthoringBoundaryTests(unittest.TestCase):
 
 
 class BrowserInputTests(unittest.TestCase):
-    def test_second_finger_uses_active_set_moves_and_never_releases_primary(self):
+    def test_second_finger_sends_only_changed_id_and_can_be_repeated(self):
         primary = [{"id": 0, "x": 80, "y": 600}]
         action = {"id": 1, "x": 304, "y": 787}
         send, pause = Mock(), Mock()
         secondary_touch_tap(send, primary, action, pause)
         self.assertEqual([(call.args[0], [point["id"] for point in call.args[1]])
-                          for call in send.call_args_list], [("touchMove", [0, 1]), ("touchMove", [0])])
+                          for call in send.call_args_list], [("touchStart", [1]), ("touchEnd", [1])])
         self.assertEqual(primary, [{"id": 0, "x": 80, "y": 600}])
         pause.assert_called_once_with(.09)
+        secondary_touch_tap(send, primary, action, pause)
+        self.assertEqual([call.args[0] for call in send.call_args_list],
+                         ["touchStart", "touchEnd", "touchStart", "touchEnd"])
         for invalid in ([], [{"id": 1}], primary + [action]):
             with self.assertRaises(ValueError):
                 secondary_touch_tap(send, invalid, action, pause)
+
+    def test_completion_save_survives_slow_capture_without_accepting_old_or_fake_save(self):
+        saved = {"schema": 1, "quest_stage": 4, "treasures": [True, True],
+                 "completed": True, "position": [0, 4, -11.7], "language": "en"}
+        def line(prefix, value):
+            return {"text": prefix + " " + json.dumps(value)}
+        complete_line = line("TIDAL_COMPLETE", {"demo": False, "stage": 4})
+        save_line = line("TIDAL_SAVE", saved)
+        console = [save_line, complete_line, save_line]
+        self.assertEqual(completed_route_save(console, 1, saved), saved)
+        self.assertIsNone(completed_route_save(console, 2, saved))
+        self.assertIsNone(completed_route_save([save_line], 0, saved))
+        self.assertIsNone(completed_route_save([complete_line], 0, saved))
+        for changes in ({"schema": True}, {"completed": False}, {"treasures": [False, False]},
+                        {"position": [float("nan"), 4, 0]}, {"position": [20, 4, 0]}, {"language": "zh"}):
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                completed_route_save([complete_line, line("TIDAL_SAVE", {**saved, **changes})], 0, saved)
+        with self.assertRaises(ValueError):
+            completed_route_save([line("TIDAL_COMPLETE", {"demo": True, "stage": 4}), save_line], 0, saved)
 
     def test_required_screenshot_timeout_is_finite_and_errors_are_not_masked(self):
         page = Mock()
