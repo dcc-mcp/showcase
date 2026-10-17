@@ -54,7 +54,10 @@ def main():
     project = out / "authoring-project"
     project.mkdir()
     shutil.copytree(Path(dcc_mcp_godot.__file__).parent / "godot_addon/addons", project / "addons")
-    for name in ("water.gdshader", "sanctuary-font.otf", "FONT-LICENSE.txt"):
+    for name in GAME_FILES:
+        if name in ("main.gd", "start.tscn", "project.godot"):
+            continue  # These are created/configured through the typed authoring flow below.
+        (project / name).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source / name, project / name)
     config = (source / "project.godot").read_text()
     config = re.sub(r'^run/main_scene=.*\n', '', config, flags=re.M)
@@ -177,7 +180,10 @@ def main():
         stop_process(editor)
         native = out / "native"
         native.mkdir()
-        for name in ("main.gd", "water.gdshader", "start.tscn", "sanctuary-font.otf", "FONT-LICENSE.txt"):
+        for name in GAME_FILES:
+            if name == "project.godot":
+                continue
+            (native / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(project / name, native / name)
         # Preserve the original playable project settings, without shipping an editor addon.
         shutil.copyfile(source / "project.godot", native / "project.godot")

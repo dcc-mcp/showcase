@@ -10,11 +10,32 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from common import check_engine_log, isolated_output, sha256, write_json
 from playwright.sync_api import sync_playwright
+from observers import observer_receipts, positive_integer, validate_language_frame, validate_touch_release
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+
+def last_observer_id(console, prefix, field):
+    return max((positive_integer(item.get(field), field) for item in observer_receipts(console, prefix)), default=0)
+
+
+def wait_observer(page, console, prefix, start, timeout=15):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if page.is_closed():
+            raise RuntimeError(f"Browser page closed before {prefix}")
+        if any(item.get("text", "").startswith("TIDAL_FINAL ") for item in console[start:]):
+            raise RuntimeError(f"Game exited before {prefix} could be accepted")
+        receipts = observer_receipts(console, prefix, start)
+        if receipts:
+            if len(receipts) != 1:
+                raise RuntimeError(f"Expected exactly one fresh {prefix} receipt")
+            return receipts[0]
+        page.wait_for_timeout(100)
+    raise TimeoutError(f"Actual game did not emit a fresh {prefix} receipt")
 
 
 def main():
@@ -39,7 +60,8 @@ def main():
             for width, height, mobile in ((1280, 720, False), (390, 844, True)):
                 label = "portrait-390x844" if mobile else "desktop-1280x720"
                 result = {"name": label, "width": width, "height": height,
-                          "passed": False, "rendered": False, "input": {"status": "not_run"}}
+                          "passed": False, "rendered": False, "input": {"status": "not_run"},
+                          "language": {"status": "not_run"}}
                 report["viewports"].append(result)
                 context = browser.new_context(viewport={"width": width, "height": height},
                     device_scale_factor=1, is_mobile=mobile, has_touch=mobile)
@@ -96,20 +118,45 @@ def main():
                         page.screenshot(path=str(out / "desktop-after-w-e.png"))
                         result["input"]["status"] = "passed"
                         report["checks"].append({"name": "browser W/E activates actual lantern I", "passed": True})
+                        result["language"] = {"status": "running", "route": "physical browser L"}
+                        previous_change = last_observer_id(console, "TIDAL_LANGUAGE_FRAME", "change_id")
+                        language_boundary = len(console)
+                        canvas.focus()
+                        page.keyboard.press("l", delay=80)
+                        language_receipt = wait_observer(page, console, "TIDAL_LANGUAGE_FRAME", language_boundary)
+                        result["language"]["receipt"] = language_receipt
+                        validate_language_frame(language_receipt, previous_change)
+                        page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                        page.screenshot(path=str(out / "desktop-zh.png"))
+                        result["language"]["status"] = "passed"
+                        report["checks"].append({"name": "physical L changes sampled rendered desktop UI from English to Chinese", "passed": True})
                     else:
-                        # Delivery is genuine emulated touch, but delivery alone is not movement proof.
+                        result["input"] = {"status": "running", "route": "actual Chromium-emulated touch drag",
+                                           "hold_seconds": 2, "receipt_timeout_seconds": 15}
+                        previous_gesture = last_observer_id(console, "TIDAL_TOUCH_RELEASE", "gesture_id")
+                        touch_boundary = len(console)
                         session = context.new_cdp_session(page)
-                        session.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"x": 80, "y": 600}]})
-                        session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [{"x": 80, "y": 540}]})
-                        page.wait_for_timeout(650)
-                        session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
-                        page.wait_for_timeout(300)
+                        session.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"id": 0, "x": 80, "y": 600}]})
+                        try:
+                            session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [{"id": 0, "x": 80, "y": 540}]})
+                            page.wait_for_timeout(2000)
+                        finally:
+                            session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+                        touch_receipt = wait_observer(page, console, "TIDAL_TOUCH_RELEASE", touch_boundary)
+                        result["input"]["receipt"] = touch_receipt
+                        displacement = validate_touch_release(touch_receipt, previous_gesture, expected_touch_index=0)
+                        page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
                         page.screenshot(path=str(out / "portrait-after-touch.png"))
-                        result["input"] = {"status": "delivered_unverified", "route": "emulated touch drag",
-                                           "limitation": "Movement is not separately asserted"}
+                        result["input"].update({"status": "passed", "horizontal_displacement": displacement,
+                            "limitation": "One emulated gesture; not a physical-phone compatibility test"})
+                        report["checks"].append({"name": "one portrait touch gesture moves the actual player more than 0.25 horizontally", "passed": True,
+                                                "horizontal_displacement": displacement})
                     result["passed"] = True
                 except Exception as error:
                     result["blocker"] = str(error)
+                    for stage in ("input", "language"):
+                        if result[stage]["status"] == "running":
+                            result[stage]["status"] = "failed"
                     try:
                         page.screenshot(path=str(out / (label + "-failure.png")))
                     except Exception as screenshot_error:

@@ -10,7 +10,11 @@ void vertex() {
 void fragment() {
  float wave = sin(world_position.x*0.4 + world_position.z*0.23 + TIME*0.45)*0.5+0.5;
  float broad = sin(world_position.z*0.19-world_position.x*0.15+TIME*0.21)*0.5+0.5;
- ALBEDO = mix(deep_color,light_color,wave*0.22+broad*0.16);
+ float a = atan(world_position.z/16.5,world_position.x/12.0);
+ float coastline = 1.0+0.075*sin(a*3.0+0.6)+0.055*sin(a*7.0)+0.025*cos(a*11.0);
+ float radius = length(vec2(world_position.x/12.0,world_position.z/16.5))/coastline;
+ float shallows = 1.0-smoothstep(1.0,1.22,radius);
+ ALBEDO = mix(deep_color,light_color,wave*0.14+broad*0.10+shallows*0.52);
  ROUGHNESS=0.85;
  SPECULAR=0.0;
 }

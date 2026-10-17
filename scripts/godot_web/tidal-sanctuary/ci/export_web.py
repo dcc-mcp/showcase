@@ -86,6 +86,10 @@ progressive_web_app/enabled=false
         for name in ("LICENSE.txt", "COPYRIGHT.txt"):
             shutil.copyfile(args.license_dir / name, site / name)
         shutil.copyfile(args.native / "FONT-LICENSE.txt", site / "FONT-LICENSE.txt")
+        notices = site / "assets"
+        notices.mkdir()
+        for name in ("KENNEY-LICENSE.txt", "SOURCE.json"):
+            shutil.copyfile(args.native / "assets" / name, notices / name)
         for name in ("index.html", "index.js", "index.wasm", "index.pck"):
             if not (site / name).is_file() or (site / name).stat().st_size == 0:
                 raise RuntimeError(f"Expected official Web export file is missing: {name}")
@@ -99,10 +103,11 @@ progressive_web_app/enabled=false
             "The native movie is an explicitly scripted traversal of the real game.\n"
             "Browser portrait evidence is emulation, not a physical-phone test.\n"
             "Godot runtime notices: LICENSE.txt and COPYRIGHT.txt.\n"
-            "Subset font: SIL Open Font License, see FONT-LICENSE.txt.\n")
+            "Subset font: SIL Open Font License, see FONT-LICENSE.txt.\n"
+            "Kenney models: CC0, see assets/KENNEY-LICENSE.txt and assets/SOURCE.json.\n")
         report.update({"passed": True, "godot": subprocess.check_output([godot, "--version"], text=True).strip(),
-            "web_config": config, "files": {item.name: {"sha256": sha256(item), "bytes": item.stat().st_size}
-            for item in site.iterdir() if item.is_file()}})
+            "web_config": config, "files": {item.relative_to(site).as_posix(): {"sha256": sha256(item), "bytes": item.stat().st_size}
+            for item in site.rglob("*") if item.is_file()}})
     except Exception as error:
         report["blocker"] = str(error)
         raise

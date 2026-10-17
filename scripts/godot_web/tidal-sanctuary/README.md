@@ -2,7 +2,7 @@
 
 An original small 3D exploration study for Godot 4.6.3 and WebGL 2.
 
-A blue-cloaked traveller arrives on a limestone island. Follow the weathered processional path, wake three tide lanterns, and return their light to an ancient ring. Warm limestone, olive pines, and muted turquoise water share one restrained palette. The game is deliberately compact: this first study establishes the environment, movement and interaction before a larger puzzle is designed.
+A blue-cloaked traveller arrives on a rising coastal sanctuary. Follow the weathered processional path, wake three tide lanterns, and return their light to an ancient ring. Cool weathered stone, olive foliage, and muted turquoise water share one restrained palette. The game is deliberately compact: this first study establishes the environment, movement and interaction before a larger puzzle is designed.
 
 ## Play
 
@@ -11,7 +11,8 @@ A blue-cloaked traveller arrives on a limestone island. Follow the weathered pro
 - R: restart
 - L: English / Simplified Chinese
 - H: hide interface for inspection
-- Touch: drag the left side to move; tap LIGHT to interact
+- Touch: drag the left side to move; tap the action button to interact or restart
+- EN / ZH button: change language without a keyboard
 
 Progress saves locally. No account, network gameplay, analytics or external assets are loaded by the game. Restart resets this game's local progress.
 
@@ -25,4 +26,4 @@ No audio is present in this initial visual study. The art direction calls for re
 
 ## Source and rights
 
-The game geometry, palette, shader, character, level layout and logic are original for this study. No third-party art, music, sound or game code was copied. The existing Showcase capture architecture is reused within the same repository. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
+The terrain, ruins, palette, shader, character, level layout and game logic are original for this study. Four compact tree/rock meshes are adapted from Kenney Nature Kit (CC0), with matte palette overrides. No third-party music, sound or game code was copied. The existing Showcase capture architecture is reused within the same repository. See `LICENSES.md` and `game/FONT-LICENSE.txt`.

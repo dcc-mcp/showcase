@@ -11,7 +11,10 @@ GODOT_VERSION = "4.6.3.stable.official.7d41c59c4"
 GODOT_BINARY_SHA256 = "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3"
 WEB_TEMPLATE_SHA256 = "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9"
 GAME_FILES = ("main.gd", "water.gdshader", "start.tscn", "project.godot",
-              "sanctuary-font.otf", "FONT-LICENSE.txt")
+              "sanctuary-font.otf", "FONT-LICENSE.txt",
+              "assets/shore-rock-a.tscn", "assets/shore-rock-d.tscn",
+              "assets/coastal-tree.tscn", "assets/needle-pine.tscn",
+              "assets/KENNEY-LICENSE.txt", "assets/SOURCE.json")
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -53,6 +56,7 @@ def checked_godot(command: str) -> str:
 def copy_game(source: Path, destination: Path) -> None:
     destination.mkdir(parents=True, exist_ok=True)
     for name in GAME_FILES:
+        (destination / name).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source / name, destination / name)
 
 def stop_process(process: subprocess.Popen | None) -> None:
