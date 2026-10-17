@@ -655,6 +655,15 @@ func _unhandled_input(event: InputEvent) -> void:
    touch_start_position=player.position;touch_start_frame=Engine.get_physics_frames();touch_drag_events=0;touch_gesture_id+=1
 
 func _input(event:InputEvent) -> void:
+ # Button uses primary-pointer mouse emulation; a second finger must remain a
+ # real touch action while finger one continues steering the swimmer.
+ if event is InputEventScreenTouch and event.pressed and touch_active and event.index!=touch_index:
+  if action_button.get_global_rect().has_point(event.position):
+   var before:=quest_stage();on_action_pressed()
+   print("TIDAL_ACTION_TOUCH ",JSON.stringify({"schema":1,"touch_index":event.index,"steering_index":touch_index,"before":before,"after":quest_stage(),"demo":demo}))
+   get_viewport().set_input_as_handled();return
+  if language_button.get_global_rect().has_point(event.position):
+   change_language("touch_button");get_viewport().set_input_as_handled();return
  if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
   touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
   print("TIDAL_TOUCH_RELEASE ",JSON.stringify({"schema":1,"gesture_id":touch_gesture_id,"touch_index":event.index,"before":[touch_start_position.x,touch_start_position.y,touch_start_position.z],"after":[player.position.x,player.position.y,player.position.z],"physics_frames_elapsed":Engine.get_physics_frames()-touch_start_frame,"drag_events":touch_drag_events,"canceled":event.canceled,"demo":demo,"active_after":touch_active,"move_after":[touch_move.x,touch_move.y]}))
