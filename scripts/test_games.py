@@ -49,6 +49,47 @@ class GamePages(unittest.TestCase):
         self.assertEqual('../../../play/sample-case/index.html', parser.url('../../play/sample-case/index.html'))
         self.assertEqual('../../#games', parser.url('../../#games'))
 
+    def test_native_language_notes_are_accurate_in_both_page_locales(self):
+        notes = {
+            'en': ('原作画面与游戏内文字保留英文，页面和操作说明提供中英文。',
+                   'The original artwork and in-game text remain in English. This page and the instructions are available in English and Chinese.'),
+            'en-zh': ('游戏内文字提供英文与简体中文。',
+                      'In-game text is available in English and Simplified Chinese.'),
+        }
+        root = Path(__file__).resolve().parents[1]
+        path = 'games/sample-case/index.html'
+        page_paths = {'index.html', path, 'cases/sample-case/index.html'}
+        for language, (chinese, english) in notes.items():
+            self.demo['nativeTextLanguage'] = language
+            page = games.pages([self.case], {'sample-case': self.demo}, str(self.root))[path]
+            self.assertEqual(page.count('class="game-language-note"'), 1)
+            self.assertIn(chinese, page)
+            for locale, expected in (('en', english), ('zh', chinese)):
+                with self.subTest(native_language=language, page_locale=locale):
+                    parser = localization.LocalizedHTML(
+                        path, locale, page_paths, localization.catalog(root, locale=locale))
+                    parser.feed(page)
+                    parser.close()
+                    self.assertFalse(parser.missing)
+                    rendered = ''.join(parser.output)
+                    self.assertIn('<p class="game-language-note">' + expected + '</p>', rendered)
+                    other = notes['en-zh' if language == 'en' else 'en']
+                    self.assertNotIn(other[0], rendered)
+                    self.assertNotIn(other[1], rendered)
+                    self.assertNotIn('<iframe', rendered)
+                    self.assertNotIn('autoplay', rendered)
+
+    def test_bilingual_language_note_requires_its_exact_translation(self):
+        self.demo['nativeTextLanguage'] = 'en-zh'
+        path = 'games/sample-case/index.html'
+        page = games.pages([self.case], {'sample-case': self.demo}, str(self.root))[path]
+        translations = localization.catalog(Path(__file__).resolve().parents[1])
+        del translations['游戏内文字提供英文与简体中文。']
+        parser = localization.LocalizedHTML(path, 'en', {path, 'index.html'}, translations)
+        parser.feed(page)
+        parser.close()
+        self.assertEqual(parser.missing, {'游戏内文字提供英文与简体中文。'})
+
     def test_audio_unknown_is_not_silent_and_hash_mismatch_blocks(self):
         self.assertEqual({}, preview_audio.read(self.root))
         source=self.root / 'test.mp4';source.write_bytes(b'fixture')
