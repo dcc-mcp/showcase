@@ -55,6 +55,10 @@ jobs:
         run: python scripts/godot_web/minigames/browser_candidate.py --site "$RUNNER_TEMP/minigame-site" --output "$RUNNER_TEMP/minigame-evidence"
       - name: Encode and fully decode real audiovisual previews
         run: python scripts/godot_web/minigames/verify_media.py --evidence "$RUNNER_TEMP/minigame-evidence"
+      - name: Prepare unpublished bilingual entry and original-speed listening packet
+        run: python scripts/godot_web/minigames/prepare_review.py --site "$RUNNER_TEMP/minigame-site" --native "$RUNNER_TEMP/minigame-native" --evidence "$RUNNER_TEMP/minigame-evidence" --source-commit "${{ github.event.pull_request.head.sha || github.sha }}" --run-id "$GITHUB_RUN_ID"
+      - name: Verify bilingual entry, original-speed players and actual game navigation
+        run: python scripts/godot_web/minigames/browser_review.py --site "$RUNNER_TEMP/minigame-site" --output "$RUNNER_TEMP/minigame-review-evidence"
       - name: Preserve reviewable candidates and full interaction videos
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -71,4 +75,8 @@ jobs:
             ${{ runner.temp }}/minigame-site/export.json
             ${{ runner.temp }}/minigame-site/README.txt
             ${{ runner.temp }}/minigame-site/play
+            ${{ runner.temp }}/minigame-site/index.html
+            ${{ runner.temp }}/minigame-site/zh
+            ${{ runner.temp }}/minigame-site/review
+            ${{ runner.temp }}/minigame-review-evidence
             ${{ runner.temp }}/minigame-evidence

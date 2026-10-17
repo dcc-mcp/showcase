@@ -36,6 +36,46 @@ class PlayableGuards(unittest.TestCase):
         self.assertNotIn('autoplay', markup)
         self.assertIn('data-play-url="../../play/sample/index.html"', markup)
 
+    def test_native_text_declarations_preserve_english_and_allow_bilingual(self):
+        for language in ('en', 'en-zh'):
+            with self.subTest(language=language):
+                self.manifest['demos'][0]['nativeTextLanguage'] = language
+                self.write()
+                demos, assets = playable.read_and_validate(str(self.root), self.cases)
+                self.assertEqual(demos['sample']['nativeTextLanguage'], language)
+                self.assertEqual(demos['sample'], self.manifest['demos'][0])
+                self.assertEqual(assets, {'play/manifest.json', 'play/sample/index.html'})
+
+    def test_missing_unknown_or_malformed_native_text_declarations_fail(self):
+        for language in (None, '', 'zh', 'fr', 'EN', 'bilingual',
+                         ['en', 'zh'], {'en': True}, True, 1):
+            with self.subTest(language=language):
+                self.manifest['demos'][0]['nativeTextLanguage'] = language
+                self.write()
+                with self.assertRaisesRegex(ValueError, 'nativeTextLanguage'):
+                    playable.read_and_validate(str(self.root), self.cases)
+        del self.manifest['demos'][0]['nativeTextLanguage']
+        self.write()
+        with self.assertRaisesRegex(ValueError, 'nativeTextLanguage'):
+            playable.read_and_validate(str(self.root), self.cases)
+
+    def test_bilingual_native_text_does_not_relax_shell_locale_or_publication_guards(self):
+        self.manifest['demos'][0]['nativeTextLanguage'] = 'en-zh'
+        for locales in (None, ['en'], ['zh', 'en'], ['en', 'zh', 'fr']):
+            with self.subTest(locales=locales):
+                self.manifest['demos'][0]['localeSupport'] = locales
+                self.write()
+                with self.assertRaises(ValueError):
+                    playable.read_and_validate(str(self.root), self.cases)
+        self.manifest['demos'][0]['localeSupport'] = ['en', 'zh']
+        self.write()
+        with self.assertRaisesRegex(ValueError, 'unique selected case'):
+            playable.read_and_validate(str(self.root), [])
+        self.manifest['files'][0]['sha256'] = '0' * 64
+        self.write()
+        with self.assertRaisesRegex(ValueError, 'SHA-256 mismatch'):
+            playable.read_and_validate(str(self.root), self.cases)
+
     def test_invalid_manifests_fail_closed(self):
         mutations = [lambda m: m['files'][0].update(sha256='0' * 64),
                      lambda m: m['files'][0].update(bytes=1),

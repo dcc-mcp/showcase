@@ -37,7 +37,11 @@ def pages(cases, demos, root):
         slug = case['slug']
         demo = demos[slug]
         title = site.esc(case['title'])
-        language_note = '<p class="game-language-note">原作画面与游戏内文字保留英文，页面和操作说明提供中英文。</p>' if demo.get('nativeTextLanguage') == 'en' else ''
+        language_text = {
+            'en': '原作画面与游戏内文字保留英文，页面和操作说明提供中英文。',
+            'en-zh': '游戏内文字提供英文与简体中文。',
+        }.get(demo.get('nativeTextLanguage'), '')
+        language_note = '<p class="game-language-note">%s</p>' % site.esc(language_text) if language_text else ''
         metadata = site.seo_tags(case['title'], case['summary'], 'games/%s/' % slug,
                                  case['cover'], root, {
             '@context': 'https://schema.org', '@type': 'VideoGame', 'name': case['title'],
