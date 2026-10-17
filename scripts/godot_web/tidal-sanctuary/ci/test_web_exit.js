@@ -27,11 +27,12 @@ try {
   assert.equal(f.state.isFinished(), true);
   assert.deepEqual(f.events.at(-1), ['show', 'Saved. Safe to leave.', true]);
   f.ui.press({isTrusted: true}); assert.equal(f.quits(), 1);
-  for (const mode of ['old-save', 'auto-save', 'error', 'storage', 'exit-code', 'untrusted', 'unsolicited']) {
+  for (const mode of ['old-save', 'auto-save', 'error', 'engine-leak', 'storage', 'exit-code', 'untrusted', 'unsolicited']) {
     const t = fixture(); save(t);
     if (mode !== 'unsolicited') t.ui.press({isTrusted: mode !== 'untrusted'});
     if (mode !== 'old-save') save(t, mode !== 'storage', mode === 'auto-save' ? 'auto' : 'exit');
     if (mode === 'error') t.config.onPrintError('Failed to save IDB file system: quota');
+    if (mode === 'engine-leak') t.config.onPrintError('ERROR: Pages in use exist at exit in PagedAllocator: N16WorkerThreadPool5GroupE');
     t.config.onExit(mode === 'exit-code' ? 1 : 0);
     assert.equal(t.state.isFinished(), false, mode);
     assert.equal(t.events.at(-1)[2], false, mode);

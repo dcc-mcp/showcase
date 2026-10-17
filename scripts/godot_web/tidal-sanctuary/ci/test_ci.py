@@ -46,8 +46,13 @@ class HarnessTests(unittest.TestCase):
                 self.assertTrue(Path(env[key]).is_relative_to(root))
                 self.assertTrue(Path(env[key]).is_dir())
 
+    def test_explicit_three_dimensional_physics_backends(self):
+        project = (Path(__file__).resolve().parent.parent / "game/project.godot").read_text()
+        self.assertIn('3d/physics_engine="Jolt Physics"', project)
+        self.assertIn('2d/physics_engine="Dummy"', project)
+
     def test_runtime_errors_fail(self):
-        for message in ("SCRIPT ERROR: Invalid call", "ERROR: Cannot load font", "ERROR: Required extension VK_KHR_surface not found.", "Parse Error: Unexpected token", "Shader compilation failed"):
+        for message in ("SCRIPT ERROR: Invalid call", "ERROR: Cannot load font", "ERROR: Pages in use exist at exit in PagedAllocator: N16WorkerThreadPool5GroupE", "ERROR: Required extension VK_KHR_surface not found.", "Parse Error: Unexpected token", "Shader compilation failed"):
             with self.assertRaises(RuntimeError):
                 check_engine_log(message)
         check_engine_log("TIDAL_READY {}")
