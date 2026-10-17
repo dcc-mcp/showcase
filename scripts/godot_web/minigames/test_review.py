@@ -89,11 +89,14 @@ class ReviewInputTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checked-out recipe'):
             self.validate()
 
-    def test_missing_complete_gardens_cannot_pass(self):
-        self.browser['checks'].pop()
-        self.write(self.evidence / 'verification.json', self.browser)
-        with self.assertRaisesRegex(ValueError, 'Incomplete real game'):
-            self.validate()
+    def test_each_required_startup_and_garden_check_is_mandatory(self):
+        complete = self.browser['checks']
+        for missing in sorted(review.REQUIRED_CHECKS):
+            with self.subTest(missing=missing):
+                self.browser['checks'] = [c for c in complete if c['name'] != missing]
+                self.write(self.evidence / 'verification.json', self.browser)
+                with self.assertRaisesRegex(ValueError, 'Incomplete real game'):
+                    self.validate()
 
     def test_media_hash_and_traversal_rejected(self):
         self.media[0]['original_complete_recording'] = '../private.webm'

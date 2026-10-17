@@ -55,7 +55,6 @@ def main():
                         page.locator('#' + media_id).wait_for(state='visible')
                         assert page.locator('#' + media_id).evaluate('(e) => e.paused && e.playbackRate === 1')
                     check(label + ': truthful localized boundaries, original speed and no autoplay/deferred engine')
-                    page.screenshot(path=str(args.output / (label + '-portal.png')), full_page=True)
                     # Verify every local page/resource link, including the actual source-download click.
                     links = page.locator('[href], [src]').evaluate_all("els => els.map(e => e.getAttribute('href') || e.getAttribute('src'))")
                     for link in links:
@@ -81,6 +80,11 @@ def main():
                         page.wait_for_function("id => document.getElementById(id).paused", arg=media_id)
                         check(label + ': ' + media_id + ' actual keyboard playback and pause',
                               seconds=player.evaluate('(e) => e.currentTime'))
+                    # Evidence captures follow actual playback; a metadata-only poster can still
+                    # carry a loading spinner and is not the final reviewed player state.
+                    page.wait_for_function("() => {const m=document.getElementById('original-video'); return m.readyState >= 2 && m.paused && !m.seeking && m.currentTime > .35}")
+                    page.locator('header').scroll_into_view_if_needed()
+                    page.screenshot(path=str(args.output / (label + '-portal.png')), full_page=True)
                     page.locator('#play-candidate').focus()
                     page.keyboard.press('Enter')
                     page.wait_for_url('**/play/signal-garden/index.html?lang=' + lang)
