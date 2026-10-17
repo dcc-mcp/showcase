@@ -25,12 +25,12 @@ def last_observer_id(console, prefix, field):
     return max((positive_integer(item.get(field), field) for item in observer_receipts(console, prefix)), default=0)
 
 
-def wait_observer(page, console, prefix, start, timeout=15):
+def wait_observer(page, console, prefix, start, timeout=15, allow_runtime_exit=False):
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         if page.is_closed():
             raise RuntimeError(f"Browser page closed before {prefix}")
-        if any(item.get("text", "").startswith("TIDAL_FINAL ") for item in console[start:]):
+        if not allow_runtime_exit and any(item.get("text", "").startswith("TIDAL_FINAL ") for item in console[start:]):
             raise RuntimeError(f"Game exited before {prefix} could be accepted")
         receipts = observer_receipts(console, prefix, start)
         if receipts:
@@ -92,6 +92,24 @@ def wait_completed_route_save(page, console, start, expected, timeout=90):
             return saved
         page.wait_for_timeout(100)
     raise TimeoutError("No actual save after the physical-route completion")
+
+
+
+def validate_web_exit(receipt, expected):
+    if (type(receipt.get("schema")) is not int or receipt["schema"] != 1 or
+            type(receipt.get("code")) is not int or receipt["code"] != 0 or
+            any(receipt.get(key) is not True for key in ("requested", "trusted", "ok", "save_after_request"))):
+        raise ValueError("Save/return lacks a successful real-input final-sync exit")
+    saved = receipt.get("saved")
+    if (not isinstance(saved, dict) or type(saved.get("schema")) is not int or saved["schema"] != 1 or
+            saved.get("persistent") is not True or saved.get("reason") != "exit" or not complete(saved)):
+        raise ValueError("Save/return lacks the actual completed final save")
+    before = finite_vector(expected.get("position"), 3, "completed route position")
+    after = finite_vector(saved.get("position"), 3, "final saved position")
+    if (saved.get("language") != expected.get("language") or
+            math.hypot(before[0] - after[0], before[2] - after[2]) > .35):
+        raise ValueError("Final save differs from the completed route")
+    return saved
 
 
 def capture_png(page, path, diagnostic=False):
@@ -286,10 +304,25 @@ def main():
                     # the auto-save interval; retain that real receipt, not a new
                     # wall-clock window unrelated to the game's simulation time.
                     saved = wait_completed_route_save(page, console, route_console_boundary, route["completed_state"])
+                    # Exercise the shipped Save & return control through actual input.
+                    # Godot's public normal-exit API awaits final FS synchronization.
+                    # This does not certify abrupt tab-close persistence.
+                    boundary = len(console)
+                    exit_button = page.locator("#tidal-save-return")
+                    if mobile:
+                        exit_button.tap()
+                    else:
+                        exit_button.click()
+                    exited = wait_observer(page, console, "TIDAL_WEB_EXIT", boundary,
+                                           timeout=120, allow_runtime_exit=True)
+                    saved = validate_web_exit(exited, saved)
+                    if page.locator("#tidal-exit-panel").get_attribute("data-saved") != "true":
+                        raise RuntimeError("Actual Save & return UI did not confirm completion")
+                    capture(label + "-saved-return.png")
+                    result["save_return"] = {"status": "passed", "trigger": "touch" if mobile else "mouse", "receipt": exited}
                     # A new Chromium OS process must restore the untouched IndexedDB.
-                    page.wait_for_timeout(2500)
                     check_engine_log("\n".join(item["text"] for item in console))
-                    result["restore"] = {"status": "running", "saved": saved, "fresh_browser_process": True}
+                    result["restore"] = {"status": "running", "saved": saved, "fresh_browser_process": True, "shutdown": "actual Save & return control; official normal exit"}
                     context.close()
                     context = None
                     context = launch()

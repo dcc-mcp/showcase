@@ -51,8 +51,13 @@ def read_and_validate(root, cases):
             raise ValueError('play demo entry must be an inventoried index.html')
         if demo.get('threads') is not False or demo.get('renderer') != 'gl_compatibility':
             raise ValueError('play demos require single-thread Compatibility exports')
-        if demo.get('localeSupport') != ['en', 'zh'] or demo.get('nativeTextLanguage') != 'en':
-            raise ValueError('play shell must support en/zh and declare original artwork language')
+        if demo.get('localeSupport') != ['en', 'zh']:
+            raise ValueError('play shell must support en/zh')
+        # This is a closed publication declaration, not a locale fallback:
+        # existing English-only native art stays "en"; "en-zh" explicitly
+        # declares native English/Chinese text, independently of the shell.
+        if demo.get('nativeTextLanguage') not in ('en', 'en-zh'):
+            raise ValueError('play nativeTextLanguage must be en or en-zh')
         for key in ('title', 'engine'):
             if not isinstance(demo.get(key), str) or not demo[key].strip():
                 raise ValueError('play demo requires ' + key)

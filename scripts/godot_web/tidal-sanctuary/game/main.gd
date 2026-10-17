@@ -116,6 +116,7 @@ func _ready() -> void:
  make_beacon()
  make_birds()
  make_ui()
+ if OS.has_feature("web"):get_tree().auto_accept_quit=false
  load_game()
  if demo:
   activated=[false,false,false]
@@ -578,8 +579,8 @@ func update_state() -> void:
  objective.text=english[stage] if language=="en" else chinese[stage]
  title.text="TIDAL SANCTUARY" if language=="en" else "潮 汐 圣 所"
  progress.text=("Chart  %s    Key  %s    Pearl  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]) if language=="en" else ("海图 %s   钥匙 %s   珍珠 %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"])
- var clues:=["A weathered chart waits on the shore.","Look between the leaning trees.","A red flag marks the sheltered cove.","Leave the water by the northern beach.","The sea's story is yours. Progress saved."]
- var zh:=["岸边的石台上留着一张海图","线索藏在倾斜的树木之间","红旗标记着海湾里的宝藏","从北侧沙滩上岸，返回遗迹","海的故事属于你，进度已保存"]
+ var clues:=["A weathered chart waits on the shore.","Look between the leaning trees.","A red flag marks the sheltered cove.","Leave the water by the northern beach.","The sea's story is yours."]
+ var zh:=["岸边的石台上留着一张海图","线索藏在倾斜的树木之间","红旗标记着海湾里的宝藏","从北侧沙滩上岸，返回遗迹","海的故事属于你"]
  subtitle.text=clues[stage] if language=="en" else zh[stage]
  language_button.text="EN" if language=="en" else "ZH"
  action_button.text=("RESTART" if beacon_awakened else "E · INTERACT") if language=="en" else ("重新开始" if beacon_awakened else "E · 互动")
@@ -601,7 +602,7 @@ func update_prompt() -> void:
  if game_time<tip_until:
   prompt.text=hint_text;return
  if beacon_awakened:
-  prompt.text="Treasure recovered · saved locally" if language=="en" else "寻宝完成 · 进度已保存";return
+  prompt.text="Treasure recovered" if language=="en" else "寻宝完成";return
  var stage:=quest_stage()
  if flat_distance(player.position,target_point())<1.55:
   var en:=["E · Read the chart","E · Open the grove chest","E · Recover the tide pearl","E · Place the pearl"]
@@ -676,6 +677,8 @@ func _input(event:InputEvent) -> void:
   touch_drag_events+=1
 
 func _notification(what:int) -> void:
+ if what==NOTIFICATION_WM_CLOSE_REQUEST and OS.has_feature("web"):
+  save_game("exit");get_tree().quit();return
  if what==NOTIFICATION_APPLICATION_FOCUS_OUT:
   touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
 
@@ -778,14 +781,16 @@ func capture_frame(index:int) -> void:
  var path:=output.path_join("tidal-%02d.png"%index)
  print("TIDAL_CAPTURE ",path," ",image.save_png(path))
 
-func save_game() -> void:
+func save_game(reason:String="auto") -> void:
  if capture or demo:return
  var data:=progress_data();data["schema"]=2;data["activated"]=activated;data["player"]=data["position"];data["beacon_awakened"]=beacon_awakened
  var file:=FileAccess.open(SAVE_PATH,FileAccess.WRITE)
  if file:
   file.store_string(JSON.stringify(data));file.flush()
-  if file.get_error()==OK:
-   var receipt:=progress_data();receipt["schema"]=1;print("TIDAL_SAVE ",JSON.stringify(receipt))
+  var saved_ok:=file.get_error()==OK
+  file.close()
+  if saved_ok:
+   var receipt:=progress_data();receipt["schema"]=1;receipt["persistent"]=OS.is_userfs_persistent();receipt["reason"]=reason;print("TIDAL_SAVE ",JSON.stringify(receipt))
 
 func load_game() -> void:
  if demo or not FileAccess.file_exists(SAVE_PATH):return

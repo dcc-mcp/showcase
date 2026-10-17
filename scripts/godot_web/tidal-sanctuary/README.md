@@ -15,7 +15,7 @@ Read the mariner's chart on the shore, search the leaning grove for a brass key,
 
 The character automatically wades and swims according to actual water depth, and walks again on a shallow shore. The objective, clue, distance and movement state stay visible. Swimming has a horizontal body pose, limb strokes and a small surface wake. Treasure interactions open the land chest and light the sanctuary on completion.
 
-Progress is saved locally to a version-2 save. The earlier lantern-study save is left untouched. No account, network gameplay, analytics or external assets are loaded by the game. Restart affects only this game's current local progress.
+Progress is written locally to a version-2 save. On Web, use **Save & return** and wait for its saved confirmation before leaving. Immediately closing the tab can interrupt the browser’s asynchronous save; that abrupt-close case is not guaranteed. The earlier lantern-study save is left untouched. No account, network gameplay, analytics or external assets are loaded by the game. Restart affects only this game's current local progress.
 
 ## Build and review
 

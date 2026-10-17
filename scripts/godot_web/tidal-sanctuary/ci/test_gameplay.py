@@ -1,12 +1,13 @@
 """Fail-closed unit fixtures, not claims that real input or rendering has passed."""
 import copy
 import json
+import subprocess
 import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
-from capture_browser import capture_png, completed_route_save, secondary_touch_tap
+from capture_browser import capture_png, completed_route_save, secondary_touch_tap, validate_web_exit
 from capture_native import validate_input_movie_span
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
@@ -338,6 +339,25 @@ class BrowserInputTests(unittest.TestCase):
                 completed_route_save([complete_line, line("TIDAL_SAVE", {**saved, **changes})], 0, saved)
         with self.assertRaises(ValueError):
             completed_route_save([line("TIDAL_COMPLETE", {"demo": True, "stage": 4}), save_line], 0, saved)
+
+    def test_real_save_return_requires_final_persistent_save_and_clean_exit(self):
+        saved = {"schema": 1, "quest_stage": 4, "treasures": [True, True],
+                 "completed": True, "position": [0, 4, -12], "language": "en", "persistent": True, "reason": "exit"}
+        receipt = {"schema": 1, "code": 0, "requested": True, "trusted": True,
+                   "ok": True, "save_after_request": True, "saved": saved}
+        self.assertEqual(validate_web_exit(receipt, saved), saved)
+        for changes in ({"code": True}, {"code": 1}, {"ok": False}, {"trusted": False},
+                        {"requested": False}, {"save_after_request": False}, {"saved": None},
+                        {"saved": {**saved, "persistent": False}},
+                        {"saved": {**saved, "reason": "auto"}},
+                        {"saved": {**saved, "quest_stage": 3}},
+                        {"saved": {**saved, "position": [10, 4, 0]}}):
+            with self.subTest(changes=changes), self.assertRaises(ValueError):
+                validate_web_exit({**receipt, **changes}, saved)
+
+    def test_public_web_exit_callbacks_fail_closed(self):
+        subprocess.run(["node", str(Path(__file__).with_name("test_web_exit.js"))], check=True,
+                       capture_output=True, text=True, timeout=10)
 
     def test_required_screenshot_timeout_is_finite_and_errors_are_not_masked(self):
         page = Mock()

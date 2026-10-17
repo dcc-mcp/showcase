@@ -97,7 +97,16 @@ progressive_web_app/enabled=false
         config["emscriptenPoolSize"] = 0
         config["godotPoolSize"] = 0
         page = page[:match.start(1)] + json.dumps(config) + page[match.end(1):]
+        marker = "const engine = new Engine(GODOT_CONFIG);"
+        if page.count(marker) != 1:
+            raise RuntimeError("Official shell engine marker changed")
+        page = page.replace(marker, "const tidalExit = window.TidalSaveExit.attach(GODOT_CONFIG, () => engine.requestQuit());\n" + marker)
+        page = page.replace('<script src="index.js"></script>', '<script src="index.js"></script>\n<script src="save-exit.js"></script>')
+        if 'src="save-exit.js"' not in page:
+            raise RuntimeError("Official shell script marker changed")
         (site / "index.html").write_text(page)
+        shutil.copyfile(Path(__file__).with_name("web_exit.js"), site / "save-exit.js")
+        shutil.copyfile(args.native / "sanctuary-font.otf", site / "sanctuary-font.otf")
         for name in ("LICENSE.txt", "COPYRIGHT.txt"):
             shutil.copyfile(args.license_dir / name, site / name)
         shutil.copyfile(args.native / "FONT-LICENSE.txt", site / "FONT-LICENSE.txt")
@@ -112,6 +121,7 @@ progressive_web_app/enabled=false
             "WASD / arrows: walk, wade and swim. E: interact. R: restart. L: language. H: hide UI.\n"
             "Touch: drag on the left to move; tap the action button to interact.\n"
             "Read the beach map, recover the inland and sea treasures, then return to the ring.\n\n"
+            "Web: use Save & return and wait for Saved before leaving. Immediate tab close can interrupt storage.\n"
             "This is CI staging, not a public deployment.\n"
             "The native movie is an explicitly scripted traversal of the real game.\n"
             "Browser portrait evidence is emulation, not a physical-phone test.\n"
