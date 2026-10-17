@@ -1,0 +1,107 @@
+name: Tidal Sanctuary original 3D acceptance
+on:
+  pull_request:
+    paths:
+      - 'scripts/godot_web/tidal-sanctuary/**'
+      - 'scripts/godot_web/fetch_templates.py'
+      - 'scripts/godot_web/materialize_runtime.py'
+      - 'requirements/browser-preview.lock'
+      - '.github/workflows/tidal-sanctuary-preview.yml'
+  workflow_dispatch:
+concurrency:
+  group: tidal-sanctuary-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  original-3d:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      RECIPE: scripts/godot_web/tidal-sanctuary
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Install X11 software renderer and media tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends xvfb xauth xdotool ffmpeg libgl1-mesa-dri fonts-dejavu-core
+          ffmpeg -version
+          ffprobe -version
+      - name: Pin official Godot, typed adapter and Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install 'dcc-mcp-godot==0.9.6' 'dcc-mcp-core==0.20.42'
+          python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
+          python -m playwright install --with-deps chromium
+          curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip -o "$RUNNER_TEMP/tidal-godot.zip"
+          echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/tidal-godot.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/tidal-godot.zip" -d "$RUNNER_TEMP/tidal-godot"
+          echo "$RUNNER_TEMP/tidal-godot" >> "$GITHUB_PATH"
+          python scripts/godot_web/fetch_templates.py --output "$RUNNER_TEMP/tidal-templates"
+      - name: Validate capture harness guards
+        run: python -m unittest discover -s "$RECIPE/ci" -p 'test_*.py' -v
+      - name: Actual typed MCP create, save, restart and reopen
+        id: author
+        shell: bash
+        run: |
+          set -euo pipefail
+          xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/author_native.py" \
+            --source "$RECIPE/game" --godot Godot_v4.6.3-stable_linux.x86_64 \
+            --output "$RUNNER_TEMP/tidal-author"
+      - name: Actual native W/E/R smoke and 18-second X11 scripted traversal
+        id: native
+        shell: bash
+        run: |
+          set -euo pipefail
+          xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/capture_native.py" \
+            --native "$RUNNER_TEMP/tidal-author/native" --godot Godot_v4.6.3-stable_linux.x86_64 \
+            --output "$RUNNER_TEMP/tidal-native"
+      - name: Official single-thread Web export
+        id: export
+        if: ${{ !cancelled() && steps.author.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
+            --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/tidal-templates/web_nothreads_release.zip" \
+            --license-dir play/runtime --output "$RUNNER_TEMP/tidal-web"
+      - name: Real Chromium desktop and portrait captures
+        if: ${{ !cancelled() && steps.export.outcome == 'success' }}
+        run: python "$RECIPE/ci/capture_browser.py" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
+      - name: Verify tracked source was not modified
+        if: ${{ !cancelled() }}
+        run: git diff --exit-code
+      - name: Preserve unpublished source, receipts and actual runtime media
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: tidal-sanctuary-candidate-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/tidal-author/authoring.json
+            ${{ runner.temp }}/tidal-author/mcp-raw.json
+            ${{ runner.temp }}/tidal-author/mcp-tool-schemas.json
+            ${{ runner.temp }}/tidal-author/editor.log
+            ${{ runner.temp }}/tidal-author/native
+            ${{ runner.temp }}/tidal-native/*.json
+            ${{ runner.temp }}/tidal-native/*.log
+            ${{ runner.temp }}/tidal-native/*.png
+            ${{ runner.temp }}/tidal-native/*.mp4
+            ${{ runner.temp }}/tidal-native/scripted-traversal-frames
+            ${{ runner.temp }}/tidal-web/export.json
+            ${{ runner.temp }}/tidal-web/*.log
+            ${{ runner.temp }}/tidal-web/site
+            ${{ runner.temp }}/tidal-browser
+            ${{ runner.temp }}/tidal-templates/provenance.json
