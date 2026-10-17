@@ -27,3 +27,7 @@ No audio is present in this initial visual study. The art direction calls for re
 ## Source and rights
 
 The terrain, ruins, palette, shader, character, level layout and game logic are original for this study. Four compact tree/rock meshes are adapted from Kenney Nature Kit (CC0), with matte palette overrides. No third-party music, sound or game code was copied. The existing Showcase capture architecture is reused within the same repository. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
+
+## Fourth visual pass: sanctuary entrance
+
+This is an internal layout prototype under visual review, not a finished premium game. The current pass narrows detail work to a weathered arch, broken return wall, uneven threshold, grouped fern growth and warmer ring light. Rock 04 and Fern 02 are official Poly Haven CC0 assets; their precise provenance and technical conversions are included. `hero-composition.png` and `hero-wide.png` are actual Godot fixed-camera composition studies captured after the scripted traversal, separate from ordinary camera and physical-input evidence. They do not claim manual gameplay. No additional gameplay or audio is introduced by this pass.

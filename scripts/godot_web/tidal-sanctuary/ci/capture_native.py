@@ -40,6 +40,49 @@ def stop_input_runtime(process):
         raise RuntimeError(f"Native input runtime ended with unexpected status {process.returncode}")
 
 
+def collect_composition_studies(frames, native_log):
+    """Keep fixed-camera visual studies separate from all gameplay/input evidence."""
+    names = ("hero-composition.png", "hero-wide.png")
+    fifth_frame = next((index for index, line in enumerate(native_log.splitlines())
+                        if re.fullmatch(r"TIDAL_CAPTURE .*tidal-05[.]png 0", line)), None)
+    if fifth_frame is None:
+        raise RuntimeError("Hero studies require the successful fifth regular capture first")
+    receipts = {}
+    for index, line in enumerate(native_log.splitlines()):
+        if not line.startswith("TIDAL_HERO_CAPTURE "):
+            continue
+        try:
+            receipt = json.loads(line.split(" ", 1)[1])
+        except (ValueError, TypeError) as error:
+            raise RuntimeError("Malformed actual Godot hero capture receipt") from error
+        if not isinstance(receipt, dict) or receipt.get("file") not in names:
+            raise RuntimeError("Unexpected hero capture receipt")
+        name = receipt["file"]
+        if index <= fifth_frame or name in receipts:
+            raise RuntimeError("Hero captures must each occur once after the five regular frames")
+        if type(receipt.get("error")) is not int or receipt["error"] != 0:
+            raise RuntimeError("Actual Godot hero PNG save failed: " + name)
+        if receipt.get("kind") != "fixed-camera-study":
+            raise RuntimeError("Hero capture lacks the explicit fixed-camera-study label")
+        receipts[name] = receipt
+    if set(receipts) != set(names):
+        raise RuntimeError("Both actual Godot fixed-camera study receipts are required")
+    studies = []
+    for name in names:
+        path = frames / name
+        if not path.is_file():
+            raise RuntimeError("Actual fixed-camera PNG is missing: " + name)
+        data = path.read_bytes()
+        if len(data) < 33 or data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
+            raise RuntimeError("Fixed-camera output is not a PNG: " + name)
+        width, height = int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
+        if (width, height) != (1280, 720):
+            raise RuntimeError("Fixed-camera PNG differs from the actual 1280x720 viewport: " + name)
+        studies.append({"name": name, "kind": "fixed-camera-study", "width": width, "height": height,
+                        "bytes": len(data), "sha256": sha256(path), "receipt": receipts[name]})
+    return studies
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--native", type=Path, required=True)
@@ -55,6 +98,7 @@ def main():
     report = {"passed": False, "input_route": "actual X11/XTest keyboard input via xdotool",
               "movie_route": "continuous ffmpeg x11grab of the actual native Godot window",
               "movie_label": "Scripted traversal (--demo); not manual-input or completion proof",
+              "composition_label": "Actual Godot fixed-camera composition studies after the five regular traversal frames; not physical-input screenshots",
               "audio": "No audio stream; this prototype currently has no audio",
               "checks": [], "limitations": ["CI software OpenGL under Xvfb, not physical hardware performance."]}
     runtime = recorder = None
@@ -136,6 +180,12 @@ def main():
         report["actual_captures"] = [{"name": item.name, "bytes": item.stat().st_size, "sha256": sha256(item)} for item in captures]
         if len(captures) != 5:
             raise RuntimeError(f"Expected five actual runtime PNG captures, observed {len(captures)}")
+        studies = collect_composition_studies(frames, (out / "scripted-traversal.log").read_text())
+        report["composition_studies"] = studies
+        for study in studies:
+            subprocess.run(["ffmpeg", "-v", "error", "-xerror", "-i", str(frames / study["name"]),
+                            "-f", "null", "-"], check=True, timeout=30)
+        report["checks"].append({"name": "two separately labeled actual Godot fixed-camera PNGs fully decode", "passed": True})
         probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(movie)], text=True))
         video = next(stream for stream in probe["streams"] if stream["codec_type"] == "video")
         duration = float(probe["format"]["duration"])

@@ -57,6 +57,10 @@ var touch_start_frame:=0
 var touch_drag_events:=0
 var touch_gesture_id:=0
 var language_change_id:=0
+var hero_camera_locked:=false
+var stone_materials:Array[StandardMaterial3D]=[]
+var fern_material:StandardMaterial3D
+var fern_meshes:Array[Mesh]=[]
 
 func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  var m := StandardMaterial3D.new()
@@ -78,7 +82,8 @@ func _ready() -> void:
  noise.noise_type=FastNoiseLite.TYPE_SIMPLEX_SMOOTH
  capture="--capture" in OS.get_cmdline_user_args()
  demo="--demo" in OS.get_cmdline_user_args()
- material_stone=mat(Color("959f98"))
+ prepare_surface_assets()
+ material_stone=stone_materials[0]
  material_dark=mat(Color("405851"))
  material_gold=mat(Color("c89043"),.4)
  make_environment()
@@ -87,6 +92,7 @@ func _ready() -> void:
  make_rocks()
  make_ruins()
  make_nature()
+ make_sanctuary_details()
  make_player()
  make_lanterns()
  make_beacon()
@@ -107,29 +113,29 @@ func make_environment() -> void:
  env.background_mode=Environment.BG_SKY
  var sky := Sky.new()
  var sm := ProceduralSkyMaterial.new()
- sm.sky_top_color=Color("83adb8")
- sm.sky_horizon_color=Color("d9e3d2")
- sm.ground_horizon_color=Color("d9e3d2")
+ sm.sky_top_color=Color("7397ad")
+ sm.sky_horizon_color=Color("d2d8cc")
+ sm.ground_horizon_color=Color("d2d8cc")
  sm.ground_bottom_color=Color("729f9b")
  sky.sky_material=sm
  env.sky=sky
  env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
- env.ambient_light_color=Color("a7b8c0")
- env.ambient_light_energy=.35
+ env.ambient_light_color=Color("8faec5")
+ env.ambient_light_energy=.28
  env.tonemap_mode=Environment.TONE_MAPPER_ACES
  env.tonemap_exposure=.95
  env.fog_enabled=true
  env.fog_light_color=Color("a6cbc7")
  env.fog_light_energy=.6
- env.fog_density=.006
+ env.fog_density=.008
  env.fog_sky_affect=.25
  sky_env.environment=env
  add_child(sky_env)
  var sun := DirectionalLight3D.new()
  sun.name="LateAfternoonSun"
  sun.rotation_degrees=Vector3(-43,-32,0)
- sun.light_color=Color("fff5e9")
- sun.light_energy=.52
+ sun.light_color=Color("ffdab0")
+ sun.light_energy=.82
  sun.shadow_enabled=true
  sun.shadow_bias=.35
  sun.shadow_normal_bias=4.0
@@ -216,11 +222,6 @@ func make_terrain() -> void:
  terrain_mesh.material_override=m
  add_child(terrain_mesh)
  terrain_mesh.create_trimesh_collision()
- # Low, overlapping distant islets retain a dark water contact.
- var far_mat:=mat(Color("416a6b"));far_mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
- rock(Vector3(-29,-1.1,-44),Vector3(23,5.5,11),far_mat,201)
- rock(Vector3(-19,-1.4,-47),Vector3(15,4.2,9),far_mat,202)
- rock(Vector3(30,-1.6,-39),Vector3(19,5.0,12),far_mat,203)
 
 func mesh_node(mesh: Mesh, p: Vector3, m: Material, parent: Node = self) -> MeshInstance3D:
  var n:=MeshInstance3D.new()
@@ -298,56 +299,156 @@ func place_asset(path:String,p:Vector3,sz:Vector3,yaw:float) -> Node3D:
  node.position=p;node.scale=sz;node.rotation.y=yaw;add_child(node)
  return node
 
+func encoded_texture(path:String) -> ImageTexture:
+ var image:=Image.new()
+ var buffer:=FileAccess.get_file_as_bytes(path)
+ var error:=image.load_png_from_buffer(buffer) if path.ends_with(".png.bin") else image.load_jpg_from_buffer(buffer)
+ assert(error==OK,"Static surface texture could not be decoded")
+ image.generate_mipmaps()
+ return ImageTexture.create_from_image(image)
+
+func prepare_surface_assets() -> void:
+ var diffuse:=encoded_texture("res://assets/polyhaven/stone-diff.jpg.bin")
+ var normal:=encoded_texture("res://assets/polyhaven/stone-normal.png.bin")
+ var rough:=encoded_texture("res://assets/polyhaven/stone-rough.jpg.bin")
+ for tint in [Color("c5c4ad"),Color("a7b19e"),Color("c1bba4"),Color("959f91")]:
+  var material:=mat(tint)
+  material.albedo_texture=diffuse
+  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.38
+  material.roughness_texture=rough
+  material.uv1_triplanar=true;material.uv1_world_triplanar=true
+  material.uv1_scale=Vector3.ONE*.66
+  material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+  stone_materials.append(material)
+ fern_material=mat(Color("a8b394"))
+ fern_material.albedo_texture=encoded_texture("res://assets/polyhaven/fern-albedo.png.bin")
+ fern_material.normal_enabled=true
+ fern_material.normal_texture=encoded_texture("res://assets/polyhaven/fern-normal.jpg.bin")
+ fern_material.normal_scale=.45
+ fern_material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+ fern_material.alpha_scissor_threshold=.38
+ fern_material.cull_mode=BaseMaterial3D.CULL_DISABLED
+ fern_material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+ for i in range(4):fern_meshes.append(load("res://assets/polyhaven/fern-%d.res"%i))
+
+func beveled_block(p:Vector3,sz:Vector3,m:Material,seed_value:int,wear:float=.08) -> MeshInstance3D:
+ var rr:=RandomNumberGenerator.new();rr.seed=seed_value
+ var h:=sz*.5
+ var bevel:=minf(minf(h.x,h.y),h.z)*wear
+ var points:Dictionary={}
+ for x in [-1,1]:
+  for y in [-1,1]:
+   for z in [-1,1]:
+    var cut:=bevel*rr.randf_range(.7,1.8)
+    points[Vector3i(x,y,z)]=[Vector3(x*h.x,y*(h.y-cut),z*(h.z-cut)),Vector3(x*(h.x-cut),y*h.y,z*(h.z-cut)),Vector3(x*(h.x-cut),y*(h.y-cut),z*h.z)]
+ var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+ for axis in range(3):
+  for side in [-1,1]:
+   var face:Array[Vector3]=[]
+   for uv in [Vector2i(-1,-1),Vector2i(1,-1),Vector2i(1,1),Vector2i(-1,1)]:
+    var key:=Vector3i.ZERO;key[axis]=side;key[(axis+1)%3]=uv.x;key[(axis+2)%3]=uv.y
+    face.append(points[key][axis])
+   stone_face(st,face)
+ for axis in range(3):
+  for side_a in [-1,1]:
+   for side_b in [-1,1]:
+    var a:=Vector3i.ZERO;a[axis]=-1;a[(axis+1)%3]=side_a;a[(axis+2)%3]=side_b
+    var b:=a;b[axis]=1
+    stone_face(st,[points[a][(axis+1)%3],points[b][(axis+1)%3],points[b][(axis+2)%3],points[a][(axis+2)%3]])
+ for key in points:stone_face(st,points[key])
+ return mesh_node(st.commit(),p,m)
+
+func stone_face(st:SurfaceTool,points:Array) -> void:
+ var center:=Vector3.ZERO
+ for p:Vector3 in points:center+=p
+ center/=points.size()
+ for i in range(1,points.size()-1):
+  var a:Vector3=points[0];var b:Vector3=points[i];var c:Vector3=points[i+1]
+  if (b-a).cross(c-a).dot(center)<0:triangle(st,a,c,b,Color.WHITE,Color.WHITE,Color.WHITE)
+  else:triangle(st,a,b,c,Color.WHITE,Color.WHITE,Color.WHITE)
+
 func make_ruins() -> void:
-  # Ancient processional path, each slab slightly sunk and individually weathered.
- for i in range(28):
-  var z:=10.7-i*.74
-  var x:=path_x(z)+rng.randf_range(-.16,.16)
-  var slab:=rock(Vector3(x,height_at(x,z)+.06,z),Vector3(1.36,.20,.69),mat(Color("9ca394").darkened(rng.randf_range(0,.1))),i+1000)
-  slab.rotation.y=rng.randf_range(-.13,.13)
- # Ruined courtyard at the destination.
+ # Sparse buried remnants, with earth between groups instead of an even zipper path.
+ for group_z in [8.8,5.5,2.2,-1.2]:
+  for i in range(3):
+   var z:float=group_z+rng.randf_range(-.6,.6)
+   var x:=path_x(z)+rng.randf_range(-.7,.7)
+   var slab:=beveled_block(Vector3(x,height_at(x,z)+.005,z),Vector3(rng.randf_range(.58,1.05),.14,rng.randf_range(.43,.7)),stone_materials[i%4],1000+i+int(group_z*10),.32)
+   slab.rotation=Vector3(rng.randf_range(-.06,.06),rng.randf_range(-.6,.6),rng.randf_range(-.04,.04))
+ # Broad, uneven threshold steps follow the existing walkable terrain.
+ for row in range(4):
+  var z:float=-4.2-row*.63
+  var x:=path_x(z)*.5
+  for side in [-1,1]:
+   var px:float=x+side*.75+rng.randf_range(-.08,.08)
+   var slab:=beveled_block(Vector3(px,height_at(px,z)+.015,z),Vector3(1.5,.22,rng.randf_range(.60,.76)),stone_materials[row%4],1210+row*3+side,.38)
+   slab.rotation.y=rng.randf_range(-.09,.09)
  var h:=height_at(0,-8.0)
- for i in range(5):
-  for j in range(4):
-   var tile:=box(Vector3(-2.9+i*1.45,h-.06,-6.2-j*1.45),Vector3(1.4,.2,1.4),material_stone)
-   tile.rotation.y=rng.randf_range(-.018,.018)
- for side in [-1,1]:
-  for j in range(3):
-   var x:float=side*3.7;var z:float=-6.4-j*2.0;var base:=height_at(x,z)
-   var intact:bool=(j==2 or side==-1)
-   var height:=3.8 if intact else 1.2+j*.45
-   cylinder(Vector3(x,base+.18,z),.64,.32,material_stone)
-   var column:=cylinder(Vector3(x,base+height*.5+.34,z),.36,height,material_stone,self,.31)
-   column.create_trimesh_collision()
-   cylinder(Vector3(x,base+height+.38,z),.52,.22,material_stone)
-   # Dark seams and shallow fluting make the columns read as carved stone.
-   for ring in range(3): cylinder(Vector3(x,base+.6+ring*1.0,z),.365,.035,mat(Color("a59e88")))
-   if intact: box(Vector3(x,base+height+.58,z),Vector3(.95,.22,.85),material_stone)
- # A curved portal made of individual wedge stones.
- var center:=Vector3(0,h+2.9,-10.0)
+ for row in range(4):
+  for col in range(5):
+   if (row==0 and col==0) or (row==2 and col==4) or (row==3 and col==0):continue
+   var x:float=-2.65+col*1.32+rng.randf_range(-.10,.10)
+   var z:float=-6.5-row*1.30+rng.randf_range(-.11,.11)
+   var tile:=beveled_block(Vector3(x,h-.06+rng.randf_range(-.04,.025),z),Vector3(rng.randf_range(1.12,1.28),.22,rng.randf_range(1.11,1.3)),stone_materials[(row+col)%4],1500+row*5+col,.40)
+   tile.rotation.y=rng.randf_range(-.05,.05)
+ # Four survivors, different heights and broken caps, replace the clean colonnade.
+ for info in [Vector3(-3.8,1.0,-5.9),Vector3(-3.65,3.5,-9.3),Vector3(3.7,.75,-6.2),Vector3(3.8,2.55,-10.1)]:
+  var base:=height_at(info.x,info.z)
+  var material:=stone_materials[rng.randi_range(0,3)]
+  var foot:=beveled_block(Vector3(info.x,base+.13,info.z),Vector3(1.0,.30,1.0),material,rng.randi(),.3)
+  foot.rotation.y=.12
+  var column:=cylinder(Vector3(info.x,base+info.y*.5+.23,info.z),.37,info.y,material,self,.32)
+  column.create_trimesh_collision()
+  var cap:=beveled_block(Vector3(info.x,base+info.y+.23,info.z),Vector3(.82,.22,.75),material,rng.randi(),.34)
+  cap.rotation=Vector3(.045,-.09,.07)
+ # Worn arch stones: narrow dark joints and chipped edges, no smooth white facade.
+ var center:=Vector3(0,h+2.68,-10.0)
  for side in [-1,1]:
   for layer in range(5):
-   var n:=box(Vector3(side*1.65,h+.27+layer*.52,-10),Vector3(.66,.50,.85),material_stone)
-   n.rotation.y=rng.randf_range(-.025,.025)
+   var n:=beveled_block(Vector3(side*1.65,h+.25+layer*.49,-10),Vector3(.66,.48,.92),stone_materials[(layer+2)%4],2000+layer*3+side,.24)
+   n.rotation.y=rng.randf_range(-.035,.035)
    n.create_trimesh_collision()
  for i in range(11):
   var a:=float(i)/10.0*PI
-  var n:=box(center+Vector3(cos(a)*1.65,sin(a)*1.65,0),Vector3(.63,.70,.83),material_stone)
+  var n:=beveled_block(center+Vector3(cos(a)*1.65,sin(a)*1.65,0),Vector3(.62,.69,.94),stone_materials[i%4],2100+i,.20)
   n.rotation.z=a-PI/2
- # Deliberately broken lintel and fallen pieces.
- var lintel:=box(Vector3(-3.7,h+4.4,-8.4),Vector3(.85,.4,4.8),material_stone)
- lintel.rotation.z=.025
- for i in range(11):
-  var x:=rng.randf_range(-5.6,5.6);var z:=rng.randf_range(-11.8,-5.0)
-  if abs(x)<2.2: continue
-  var b:=box(Vector3(x,height_at(x,z)+.16,z),Vector3(rng.randf_range(.35,.9),.3,rng.randf_range(.4,.9)),material_stone)
-  b.rotation=Vector3(rng.randf_range(-.12,.12),rng.randf()*TAU,rng.randf_range(-.15,.15))
+ # Broken return wall, tapering irregularly toward the entrance.
+ for row in range(4):
+  for column in range(5-row):
+   var z:float=-8.65+column*.87
+   var x:float=-4.25+rng.randf_range(-.045,.045)
+   var wall:=beveled_block(Vector3(x,height_at(x,z)+.24+row*.43,z),Vector3(.67,.44,.87),stone_materials[(row+column)%4],2300+row*8+column,.29)
+   wall.rotation.y=rng.randf_range(-.04,.04)
+ for i in range(19):
+  var x:=rng.randf_range(-5.1,5.2);var z:=rng.randf_range(-11.5,-4.1)
+  if abs(x)<2.6:continue
+  var slab:=beveled_block(Vector3(x,height_at(x,z)+.08,z),Vector3(rng.randf_range(.20,.65),rng.randf_range(.12,.3),rng.randf_range(.24,.61)),stone_materials[i%4],2500+i,.55)
+  slab.rotation=Vector3(rng.randf_range(-.25,.25),rng.randf()*TAU,rng.randf_range(-.2,.2))
+
+func make_sanctuary_details() -> void:
+ # Ferns grow in clustered damp seams; the central walking line stays open.
+ for center in [Vector3(-3.0,0,-4.6),Vector3(-4.9,0,-6.0),Vector3(-4.5,0,-9.5),Vector3(3.5,0,-5.1),Vector3(4.9,0,-8.4),Vector3(2.7,0,-11.6)]:
+  for i in range(7):
+   var x:float=center.x+rng.randf_range(-.7,.7);var z:float=center.z+rng.randf_range(-.55,.55)
+   var variant:=2+i%2 if i>1 else i
+   var fern:=mesh_node(fern_meshes[variant],Vector3(x,height_at(x,z)+.01,z),fern_material)
+   fern.scale=Vector3.ONE*rng.randf_range(.85,1.65)
+   fern.rotation.y=rng.randf()*TAU
+ # Small stone/moss pockets ground the wall and leave larger quiet areas intact.
+ for i in range(48):
+  var side:float=-1 if i%2==0 else 1
+  var x:float=side*rng.randf_range(2.75,5.8)
+  var z:=rng.randf_range(-12.4,-3.6)
+  if noise.get_noise_2d(x*2,z*2)<-.1:continue
+  var size:=rng.randf_range(.12,.42)
+  var pebble:=rock(Vector3(x,height_at(x,z)+size*.12,z),Vector3(size,size*.42,size*.7),stone_materials[i%4],3000+i)
+  pebble.rotation.y=rng.randf()*TAU
 
 func make_nature() -> void:
  # Authored CC0 silhouettes: open branching trees with a few thin conifers behind.
- for t in [Vector3(-7.6,4.8,6.8),Vector3(7.7,4.0,3.0),Vector3(-8.0,4.4,-3.5),Vector3(7.4,3.6,-8.0),Vector3(-6.1,3.4,-12.0)]:
+ for t in [Vector3(-7.6,4.8,6.8),Vector3(7.7,4.0,3.0),Vector3(-8.0,4.4,-3.5)]:
   place_asset("res://assets/coastal-tree.tscn",Vector3(t.x,height_at(t.x,t.z)-.08,t.z),Vector3(t.y*.95,t.y,t.y*.85),rng.randf()*TAU)
- for t in [Vector3(-8.8,3.8,-6.0),Vector3(6.7,3.2,-11.7),Vector3(-6.8,3.1,-10.2)]:
+ for t in [Vector3(-8.8,3.8,-6.0)]:
   place_asset("res://assets/needle-pine.tscn",Vector3(t.x,height_at(t.x,t.z)-.08,t.z),Vector3.ONE*t.y,rng.randf()*TAU)
  var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
  for i in range(230):
@@ -408,6 +509,7 @@ func make_beacon() -> void:
  var bmat:=mat(Color.WHITE);bmat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;bmat.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;bmat.albedo_texture=glow;bmat.billboard_mode=BaseMaterial3D.BILLBOARD_ENABLED;bmat.no_depth_test=false
  var quad:=QuadMesh.new();quad.size=Vector2(2.3,2.3)
  beam=mesh_node(quad,Vector3(0,1.55,.06),bmat,beacon);beam.visible=false
+ var lamp:=OmniLight3D.new();lamp.name="RingLight";lamp.position=Vector3(0,1.65,.4);lamp.light_color=Color("ffbf70");lamp.light_energy=0;lamp.omni_range=4.8;beacon.add_child(lamp)
 
 func make_birds() -> void:
  var m:=mat(Color("ecedda"))
@@ -453,6 +555,7 @@ func update_state() -> void:
  progress.text="%s  %s  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]
  completed=count==3
  beam.visible=completed
+ beacon.get_node("RingLight").light_energy=.7 if beacon_awakened else (.25 if completed else 0.0)
  var ring_material:StandardMaterial3D=beacon_ring.material_override
  ring_material.emission_energy_multiplier=1.5 if beacon_awakened else (.6 if completed else .0)
  action_button.visible=true
@@ -552,8 +655,9 @@ func _physics_process(delta:float) -> void:
  ray.exclude=[player.get_rid()]
  var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
  if not hit.is_empty():desired=hit.position+hit.normal*.55
- camera.position=camera.position.lerp(desired,1-exp(-delta*3.5))
- camera.look_at(aim)
+ if not hero_camera_locked:
+  camera.position=camera.position.lerp(desired,1-exp(-delta*3.5))
+  camera.look_at(aim)
  if game_time>tip_until and completed:
   if beacon_awakened:
    objective.text="You brought the light home" if language=="en" else "你带回了光"
@@ -602,13 +706,24 @@ func capture_frame(index:int) -> void:
  var path:=output.path_join("tidal-%02d.png"%index)
  print("TIDAL_CAPTURE ",path," ",image.save_png(path))
  if index>=5:
-  # Explicitly labeled rendering diagnostic; not an alternate gameplay screenshot.
-  var sun:DirectionalLight3D=get_node("LateAfternoonSun")
-  sun.shadow_enabled=false
+  # Actual rendered composition studies after the scripted traversal, never input proof.
+  hero_camera_locked=true
+  ui.visible=false
+  camera.fov=49
+  camera.position=Vector3(-5.5,6.9,-1.3)
+  camera.look_at(Vector3(-.15,5.5,-9.4))
   await RenderingServer.frame_post_draw
-  var diagnostic:=get_viewport().get_texture().get_image()
-  print("TIDAL_SHADOW_DIAGNOSTIC ",diagnostic.save_png(output.path_join("diagnostic-no-shadows.png")))
-  sun.shadow_enabled=true
+  await RenderingServer.frame_post_draw
+  var hero:=get_viewport().get_texture().get_image()
+  var error:=hero.save_png(output.path_join("hero-composition.png"))
+  print("TIDAL_HERO_CAPTURE ",JSON.stringify({"file":"hero-composition.png","error":error,"kind":"fixed-camera-study"}))
+  camera.position=Vector3(5.2,7.3,-.4)
+  camera.look_at(Vector3(-.6,5.6,-8.8))
+  await RenderingServer.frame_post_draw
+  await RenderingServer.frame_post_draw
+  hero=get_viewport().get_texture().get_image()
+  error=hero.save_png(output.path_join("hero-wide.png"))
+  print("TIDAL_HERO_CAPTURE ",JSON.stringify({"file":"hero-wide.png","error":error,"kind":"fixed-camera-study"}))
   get_tree().quit()
 
 func save_game() -> void:

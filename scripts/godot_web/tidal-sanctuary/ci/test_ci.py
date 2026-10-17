@@ -1,14 +1,17 @@
 """Fast tests of isolation/failure guards. These do not claim native/browser acceptance."""
 import tempfile
 import json
+import struct
+import zlib
 import unittest
 import signal
 from unittest.mock import Mock, patch
 from pathlib import Path
 from author_native import envelope
-from common import GAME_FILES, check_engine_log, copy_game, isolated_env, isolated_output
-from capture_native import stop_input_runtime, wait_for
+from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, check_engine_log, copy_game, isolated_env, isolated_output
+from capture_native import collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
+from export_web import copy_asset_notices, raw_include_filter
 
 
 class HarnessTests(unittest.TestCase):
@@ -210,6 +213,85 @@ class HarnessTests(unittest.TestCase):
         for suffix in ("invalid", "[]"):
             with self.assertRaises(ValueError):
                 observer_receipts([{"text": marker + " " + suffix}], marker)
+
+    def write_study_fixture(self, directory, name, width=1280, height=720):
+        # Unit fixture only, never production visual evidence.
+        def chunk(kind, data):
+            return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data))
+        data = b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0))
+        data += chunk(b"IDAT", zlib.compress((b"\0" + bytes(width * 3)) * height)) + chunk(b"IEND", b"")
+        (directory / name).write_bytes(data)
+
+    def study_log(self):
+        return "TIDAL_CAPTURE /temporary/tidal-05.png 0\n" + "\n".join(
+            "TIDAL_HERO_CAPTURE " + json.dumps({"file": name, "error": 0, "kind": "fixed-camera-study"})
+            for name in ("hero-composition.png", "hero-wide.png"))
+
+    def test_composition_studies_stay_separate_with_actual_save_receipts(self):
+        with tempfile.TemporaryDirectory() as root:
+            frames = Path(root)
+            for name in ("hero-composition.png", "hero-wide.png"):
+                self.write_study_fixture(frames, name)
+            records = collect_composition_studies(frames, self.study_log())
+            self.assertEqual([item["name"] for item in records], ["hero-composition.png", "hero-wide.png"])
+            self.assertTrue(all(item["kind"] == "fixed-camera-study" for item in records))
+            self.assertTrue(all(len(item["sha256"]) == 64 for item in records))
+
+    def test_composition_studies_require_fifth_frame_and_both_successful_receipts(self):
+        with tempfile.TemporaryDirectory() as root:
+            frames = Path(root)
+            for name in ("hero-composition.png", "hero-wide.png"):
+                self.write_study_fixture(frames, name)
+            log = self.study_log()
+            cases = [log.replace("tidal-05.png 0", "tidal-05.png 1"),
+                     log.replace('"error": 0', '"error": 1'),
+                     log.replace('"error": 0', '"error": false'),
+                     log.replace('"fixed-camera-study"', '"physical-input"'),
+                     "\n".join(log.splitlines()[:-1]),
+                     "\n".join(log.splitlines()[1:] + log.splitlines()[:1]),
+                     log + "\n" + log.splitlines()[-1]]
+            for bad_log in cases:
+                with self.subTest(log=bad_log), self.assertRaises(RuntimeError):
+                    collect_composition_studies(frames, bad_log)
+
+    def test_composition_studies_reject_missing_corrupt_or_wrong_size_png(self):
+        with tempfile.TemporaryDirectory() as root:
+            frames = Path(root)
+            self.write_study_fixture(frames, "hero-composition.png")
+            with self.assertRaisesRegex(RuntimeError, "missing"):
+                collect_composition_studies(frames, self.study_log())
+            (frames / "hero-wide.png").write_bytes(b"not a png")
+            with self.assertRaisesRegex(RuntimeError, "not a PNG"):
+                collect_composition_studies(frames, self.study_log())
+            self.write_study_fixture(frames, "hero-wide.png", width=640, height=360)
+            with self.assertRaisesRegex(RuntimeError, "viewport"):
+                collect_composition_studies(frames, self.study_log())
+
+    def test_polyhaven_manifest_and_exact_raw_export_paths(self):
+        expected_buffers = {
+            "assets/polyhaven/fern-albedo.png.bin", "assets/polyhaven/fern-normal.jpg.bin",
+            "assets/polyhaven/stone-diff.jpg.bin", "assets/polyhaven/stone-normal.png.bin",
+            "assets/polyhaven/stone-rough.jpg.bin",
+        }
+        self.assertEqual(set(RAW_IMAGE_FILES), expected_buffers)
+        self.assertEqual(set(raw_include_filter().split(",")), {"*.otf", *expected_buffers})
+        self.assertNotIn("*.bin", raw_include_filter())
+        expected = expected_buffers | {f"assets/polyhaven/fern-{index}.res" for index in range(4)}
+        expected |= {"assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json"}
+        self.assertTrue(expected.issubset(GAME_FILES))
+        self.assertEqual(len(GAME_FILES), len(set(GAME_FILES)))
+
+    def test_export_preserves_all_asset_notices_byte_for_byte(self):
+        with tempfile.TemporaryDirectory() as root:
+            native, site = Path(root) / "native", Path(root) / "site"
+            for name in ASSET_NOTICE_FILES:
+                source = native / name
+                source.parent.mkdir(parents=True, exist_ok=True)
+                source.write_bytes(("original source/license: " + name).encode())
+            copy_asset_notices(native, site)
+            for name in ASSET_NOTICE_FILES:
+                self.assertEqual((site / name).read_bytes(), (native / name).read_bytes())
+            self.assertEqual(len(list(site.rglob("*.txt"))) + len(list(site.rglob("*.json"))), 4)
 
 
 if __name__ == "__main__":

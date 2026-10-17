@@ -7,7 +7,20 @@ import re
 import shutil
 import subprocess
 from pathlib import Path
-from common import GAME_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
+from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
+
+
+def raw_include_filter():
+    # Godot imports ordinary resources normally. Static image byte buffers are
+    # retained by exact manifest path, never a blanket binary-file inclusion.
+    return ",".join(("*.otf", *RAW_IMAGE_FILES))
+
+
+def copy_asset_notices(native, site):
+    for name in ASSET_NOTICE_FILES:
+        destination = site / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(native / name, destination)
 
 
 def main():
@@ -40,7 +53,7 @@ name="Web"
 platform="Web"
 runnable=true
 export_filter="all_resources"
-include_filter="*.otf"
+include_filter="__RAW_INCLUDE_FILTER__"
 exclude_filter=""
 export_path=""
 script_export_mode=2
@@ -54,10 +67,12 @@ html/canvas_resize_policy=2
 html/focus_canvas_on_start=true
 progressive_web_app/enabled=false
 '''
+    preset = preset.replace('__RAW_INCLUDE_FILTER__', raw_include_filter())
     preset += 'custom_template/release=' + json.dumps(str(args.template.resolve())) + '\n'
     (project / "export_presets.cfg").write_text(preset)
     report = {"passed": False, "threads": False, "renderer": "gl_compatibility",
               "official_template_sha256": WEB_TEMPLATE_SHA256,
+              "raw_image_files": list(RAW_IMAGE_FILES), "include_filter": raw_include_filter(),
               "native_sha256": {name: sha256(args.native / name) for name in GAME_FILES}}
     try:
         for name, extra in (("import", ["--editor", "--import", "--quit"]),
@@ -86,10 +101,7 @@ progressive_web_app/enabled=false
         for name in ("LICENSE.txt", "COPYRIGHT.txt"):
             shutil.copyfile(args.license_dir / name, site / name)
         shutil.copyfile(args.native / "FONT-LICENSE.txt", site / "FONT-LICENSE.txt")
-        notices = site / "assets"
-        notices.mkdir()
-        for name in ("KENNEY-LICENSE.txt", "SOURCE.json"):
-            shutil.copyfile(args.native / "assets" / name, notices / name)
+        copy_asset_notices(args.native, site)
         for name in ("index.html", "index.js", "index.wasm", "index.pck"):
             if not (site / name).is_file() or (site / name).stat().st_size == 0:
                 raise RuntimeError(f"Expected official Web export file is missing: {name}")
@@ -104,7 +116,8 @@ progressive_web_app/enabled=false
             "Browser portrait evidence is emulation, not a physical-phone test.\n"
             "Godot runtime notices: LICENSE.txt and COPYRIGHT.txt.\n"
             "Subset font: SIL Open Font License, see FONT-LICENSE.txt.\n"
-            "Kenney models: CC0, see assets/KENNEY-LICENSE.txt and assets/SOURCE.json.\n")
+            "Kenney models: CC0, see assets/KENNEY-LICENSE.txt and assets/SOURCE.json.\n"
+            "Poly Haven models/textures: CC0, see assets/POLYHAVEN-LICENSE.txt and assets/POLYHAVEN-SOURCE.json.\n")
         report.update({"passed": True, "godot": subprocess.check_output([godot, "--version"], text=True).strip(),
             "web_config": config, "files": {item.relative_to(site).as_posix(): {"sha256": sha256(item), "bytes": item.stat().st_size}
             for item in site.rglob("*") if item.is_file()}})

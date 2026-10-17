@@ -14,7 +14,18 @@ GAME_FILES = ("main.gd", "water.gdshader", "start.tscn", "project.godot",
               "sanctuary-font.otf", "FONT-LICENSE.txt",
               "assets/shore-rock-a.tscn", "assets/shore-rock-d.tscn",
               "assets/coastal-tree.tscn", "assets/needle-pine.tscn",
-              "assets/KENNEY-LICENSE.txt", "assets/SOURCE.json")
+              "assets/KENNEY-LICENSE.txt", "assets/SOURCE.json",
+              "assets/polyhaven/fern-0.res", "assets/polyhaven/fern-1.res",
+              "assets/polyhaven/fern-2.res", "assets/polyhaven/fern-3.res",
+              "assets/polyhaven/fern-albedo.png.bin", "assets/polyhaven/fern-normal.jpg.bin",
+              "assets/polyhaven/stone-diff.jpg.bin", "assets/polyhaven/stone-normal.png.bin",
+              "assets/polyhaven/stone-rough.jpg.bin",
+              "assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json")
+ASSET_NOTICE_FILES = ("assets/KENNEY-LICENSE.txt", "assets/SOURCE.json",
+                      "assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json")
+# Only these manifest-owned static image buffers are copied/exported as raw bytes.
+RAW_IMAGE_FILES = tuple(name for name in GAME_FILES if name.endswith(".bin"))
+
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()

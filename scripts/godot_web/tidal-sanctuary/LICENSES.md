@@ -20,3 +20,7 @@ https://kenney.nl/assets/nature-kit
 https://polyhaven.com/license
 
 Do not describe online discovery, a headless launch, or a passing acceptance check as subjective visual or audio approval. No synthetic image is substituted for a game screenshot.
+
+## Poly Haven surfaces and ferns (hero composition pass)
+
+Rock 04 by Rob Tuytel and Fern 02 by Rico Cilliers/Rob Tuytel are official CC0 assets. Exact URLs, original MD5/SHA256, byte sizes and derived-file hashes are recorded in `game/assets/POLYHAVEN-SOURCE.json`; the notice is `game/assets/POLYHAVEN-LICENSE.txt`. The bounded official static download totals 4,590,433 bytes. Four fern meshes are converted with Godot GLTFDocument; the missing glTF alpha channel is restored from the separately verified official alpha map. Reduced texture resolutions and original materials are documented there. No third-party scripts execute. These assets retain CC0, independently of this original scene’s creative rights.
