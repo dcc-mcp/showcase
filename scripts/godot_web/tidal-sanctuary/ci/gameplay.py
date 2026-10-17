@@ -17,6 +17,7 @@ ROUTE = [
 ]
 FINAL_STAGE = 4
 STATE_PREFIX = "TIDAL_STATE"
+INTERACTION_RADIUS = 1.55
 
 
 def validate_state(state, previous=None, expected_demo=False):
@@ -55,8 +56,11 @@ def validate_state(state, previous=None, expected_demo=False):
         distance = math.hypot(position[0] - previous["position"][0], position[2] - previous["position"][2])
         if distance > elapsed * 8 + .35:
             raise ValueError("Physical route contains an impossible horizontal jump")
-        if state["quest_stage"] < previous["quest_stage"]:
+        advance = state["quest_stage"] - previous["quest_stage"]
+        if advance < 0:
             raise ValueError("Quest progress regressed during physical-input route")
+        if advance > 1:
+            raise ValueError("Quest progress skipped an intermediate stage")
     return state
 
 
@@ -69,6 +73,9 @@ def validate_progress(state):
         raise ValueError("Actual treasure flags must be two booleans")
     if type(state.get("completed")) is not bool:
         raise ValueError("Actual completion must be a boolean")
+    expected_treasures = ([False, False], [False, False], [True, False], [True, True], [True, True])[stage]
+    if treasures != expected_treasures or state["completed"] != (stage == FINAL_STAGE):
+        raise ValueError("Quest stage, treasure flags and completion are inconsistent")
     return state
 
 
@@ -151,6 +158,53 @@ class RouteDriver:
         self.last_action = 0
         self.last_action_sample_id = 0
         self.last_observation_time = time.monotonic()
+        self.pending_action = None
+        self.actions = []
+        self.accepted_stage = 0
+
+    def request_action(self, state, point):
+        """Record the physical callback request, never grant progress by itself."""
+        validate_progress(state)
+        target_stage = point.get("stage")
+        if target_stage != self.accepted_stage + 1 or state["quest_stage"] != self.accepted_stage:
+            raise ValueError("Physical action does not match the next exact quest milestone")
+        distance = math.hypot(state["position"][0] - point["target"][0], state["position"][2] - point["target"][1])
+        if distance > point.get("radius", .8):
+            raise ValueError("Physical action was requested away from its authored waypoint")
+        action = {"from_stage": self.accepted_stage, "target_stage": target_stage,
+                  "after_sample_id": state["sample_id"], "after_physics_frame": state["physics_frame"],
+                  "target": list(point["target"]), "position": list(state["position"]),
+                  "waypoint": point["name"], "requested_at": time.monotonic(), "callback_returned": False}
+        self.actions.append(action)
+        self.pending_action = action
+        self.interact(state)
+        action["callback_returned"] = True
+        self.last_action = time.monotonic()
+        self.last_action_sample_id = state["sample_id"]
+
+    def accept_progress(self, state, previous):
+        if previous is None:
+            if state["quest_stage"] != 0:
+                raise ValueError("Physical route did not start at the fresh quest stage")
+            return
+        if state["quest_stage"] == previous["quest_stage"]:
+            return
+        action = self.pending_action
+        if action is None or action["callback_returned"] is not True:
+            raise ValueError("Quest advanced without a completed physical-action callback")
+        if (previous["quest_stage"] != self.accepted_stage or
+                action["from_stage"] != previous["quest_stage"] or
+                action["target_stage"] != state["quest_stage"]):
+            raise ValueError("Quest advance does not match the requested physical action")
+        if state["sample_id"] <= action["after_sample_id"] or state["physics_frame"] <= action["after_physics_frame"]:
+            raise ValueError("Quest advance predates the requested physical action")
+        distance = math.hypot(state["position"][0] - action["target"][0], state["position"][2] - action["target"][1])
+        if distance >= INTERACTION_RADIUS:
+            raise ValueError("Quest advanced outside the requested interaction location")
+        action["accepted_sample_id"] = state["sample_id"]
+        action["accepted_physics_frame"] = state["physics_frame"]
+        self.accepted_stage = state["quest_stage"]
+        self.pending_action = None
 
     def observe(self):
         fresh = self.read_states()
@@ -159,6 +213,7 @@ class RouteDriver:
             if previous and item.get("sample_id", 0) <= previous["sample_id"]:
                 continue
             validate_state(item, previous)
+            self.accept_progress(item, previous)
             self.samples.append(item)
             self.last_observation_time = time.monotonic()
             previous = item
@@ -190,21 +245,24 @@ class RouteDriver:
         self.snapshot("tidal-01.png", state)
         try:
             for point in ROUTE:
+                expected_stage = point.get("stage", self.accepted_stage)
+                if expected_stage not in (self.accepted_stage, self.accepted_stage + 1):
+                    raise ValueError("Authored route skips a required quest milestone")
                 deadline = time.monotonic() + self.timeout
                 reached = False
                 while time.monotonic() < deadline:
                     state = self.observe()
+                    if state["quest_stage"] > expected_stage:
+                        raise ValueError("Quest advanced beyond the exact current route milestone")
                     target = point["target"]
                     distance = math.hypot(state["position"][0] - target[0], state["position"][2] - target[1])
                     if distance <= point.get("radius", .8):
                         self.move((0, 0))
-                        if point.get("stage") is None or state["quest_stage"] >= point["stage"]:
+                        if state["quest_stage"] == expected_stage:
                             reached = True
                             break
                         if state["sample_id"] > self.last_action_sample_id and time.monotonic() - self.last_action > .4:
-                            self.interact(state)
-                            self.last_action = time.monotonic()
-                            self.last_action_sample_id = state["sample_id"]
+                            self.request_action(state, point)
                     else:
                         self.move(direction_to(state, target))
                     self.pause(.1)
@@ -216,11 +274,12 @@ class RouteDriver:
             self.move((0, 0))
             self.pause(.4)
             state = self.observe()
-            if not complete(state):
+            if self.accepted_stage != FINAL_STAGE or self.pending_action is not None or not complete(state):
                 raise RuntimeError("Actual physical-input treasure loop was not completed")
             crossing = validate_water_crossing(self.samples)
             self.snapshot("tidal-05.png", state)
             return {"passed": True, "samples": self.samples, "milestones": self.milestones,
-                    "crossing": crossing, "completed_state": state, "no_demo_no_state_injection": True}
+                    "crossing": crossing, "completed_state": state, "physical_actions": self.actions,
+                    "no_demo_no_state_injection": True}
         finally:
             self.move((0, 0))

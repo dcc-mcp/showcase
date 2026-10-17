@@ -28,6 +28,48 @@ def envelope(response):
     return response
 
 
+
+# Regression fixtures depend on the authored scripts and never belong in the
+# editor's initial scan. They enter only the stopped, finished native package.
+DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd")
+EDITOR_PROBE_PATH = "res://tidal_ci_editor_probe.gd"
+EDITOR_PROBE_SOURCE = """@tool
+extends RefCounted
+
+func inspect(arguments: Dictionary) -> Dictionary:
+ var filesystem := EditorInterface.get_resource_filesystem()
+ var scanning := filesystem.is_scanning()
+ var types: Dictionary = {}
+ if not scanning:
+  for path: String in arguments.get("paths", []):
+   types[path] = filesystem.get_file_type(path)
+ return {"schema": 1, "scanning": scanning, "process_frame": Engine.get_process_frames(), "types": types}
+"""
+
+
+def initial_copy_files():
+    excluded = {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}
+    return tuple(name for name in GAME_FILES if name not in excluded)
+
+
+def editor_idle_sample(body, expected_types):
+    """Validate the actual v0.9.6 execute_editor_script envelope, fail closed."""
+    if not isinstance(body, dict):
+        raise ValueError("Editor probe response must be an object")
+    context = body.get("context", body)
+    if not isinstance(context, dict) or context.get("executed") is not True:
+        raise ValueError("Official editor probe was not executed")
+    sample = context.get("result")
+    if not isinstance(sample, dict) or type(sample.get("schema")) is not int or sample["schema"] != 1:
+        raise ValueError("Unsupported editor probe result")
+    if type(sample.get("scanning")) is not bool or type(sample.get("process_frame")) is not int or sample["process_frame"] <= 0:
+        raise ValueError("Editor probe did not establish real scan/frame state")
+    types = sample.get("types")
+    if not isinstance(types, dict):
+        raise ValueError("Editor probe lacks filesystem file-type readback")
+    idle = sample["scanning"] is False and all(types.get(path) == kind for path, kind in expected_types.items())
+    return sample, idle
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, required=True)
@@ -54,11 +96,12 @@ def main():
     project = out / "authoring-project"
     project.mkdir()
     shutil.copytree(Path(dcc_mcp_godot.__file__).parent / "godot_addon/addons", project / "addons")
-    for name in GAME_FILES:
-        if name in ("main.gd", "swim_controller.gd", "start.tscn", "project.godot"):
-            continue  # These are created/configured through the typed authoring flow below.
+    for name in initial_copy_files():
         (project / name).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source / name, project / name)
+    # Read-only diagnostic method, invoked only through the official adapter.
+    # It is never copied to the playable package or added as an editor plugin.
+    (project / EDITOR_PROBE_PATH.removeprefix("res://")).write_text(EDITOR_PROBE_SOURCE)
     config = (source / "project.godot").read_text()
     config = re.sub(r'^run/main_scene=.*\n', '', config, flags=re.M)
     config += '\n[editor_plugins]\nenabled=PackedStringArray("res://addons/dcc_mcp_godot/plugin.cfg")\n'
@@ -73,7 +116,10 @@ def main():
     log = (out / "editor.log").open("w")
     report = {"passed": False, "route": "real typed MCP HTTP to Godot editor under Xvfb",
               "source_sha256": {name: sha256(source / name) for name in GAME_FILES},
-              "adapter": "0.9.6", "core": "0.20.42", "editor_restarted": False}
+              "adapter": "0.9.6", "core": "0.20.42", "editor_restarted": False,
+              "deferred_test_files": list(DEFERRED_TEST_FILES),
+              "editor_probe_sha256": hashlib.sha256(EDITOR_PROBE_SOURCE.encode()).hexdigest(),
+              "editor_probe_source": EDITOR_PROBE_SOURCE}
 
     def launch():
         return subprocess.Popen([godot, "--editor", "--audio-driver", "Dummy", "--path", str(project),
@@ -148,21 +194,57 @@ def main():
             raise RuntimeError("Typed MCP validation failed: " + json.dumps(body))
         return body
 
+    def wait_editor_idle(boundary, expected_types):
+        deadline = time.monotonic() + 90
+        previous = None
+        expected_types = {EDITOR_PROBE_PATH: "GDScript", **expected_types}
+        while time.monotonic() < deadline:
+            if editor.poll() is not None:
+                raise RuntimeError("Godot editor exited before " + boundary)
+            log.flush()
+            check_engine_log((out / "editor.log").read_text())
+            response = call("godot_editor__execute_editor_script", {
+                "path": EDITOR_PROBE_PATH, "method": "inspect", "arguments": {"paths": list(expected_types)},
+                "budget_ms": 50, "chunked": False})
+            sample, idle = editor_idle_sample(response, expected_types)
+            if editor.poll() is not None:
+                raise RuntimeError("Godot editor exited during " + boundary)
+            log.flush()
+            check_engine_log((out / "editor.log").read_text())
+            if idle:
+                if previous is not None and sample["process_frame"] >= previous["process_frame"] + 2:
+                    report.setdefault("editor_idle_boundaries", []).append({"boundary": boundary,
+                        "expected_types": expected_types, "samples": [previous, sample]})
+                    return
+                if previous is None:
+                    previous = sample
+            else:
+                previous = None
+            time.sleep(.1)
+        raise TimeoutError("Editor did not establish scan-idle file readback at " + boundary)
+
     try:
         editor = launch()
         ready()
         inventory()
-        call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script"]})
+        call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script", "godot-editor"]})
         inventory()
+        wait_editor_idle("initial dependency-free project", {})
         call("godot_project_management__get_project_info", {})
         call("godot_script__create_script", {"path": "res://swim_controller.gd", "source": (source / "swim_controller.gd").read_text(), "overwrite": True})
+        wait_editor_idle("after swim script creation", {"res://swim_controller.gd": "GDScript"})
         call("godot_script__validate_script", {"path": "res://swim_controller.gd"})
         call("godot_script__create_script", {"path": "res://main.gd", "source": (source / "main.gd").read_text(), "overwrite": True})
+        scripts = {"res://swim_controller.gd": "GDScript", "res://main.gd": "GDScript"}
+        wait_editor_idle("after main script creation", scripts)
         call("godot_script__validate_script", {"path": "res://main.gd"})
+        wait_editor_idle("before scene creation", scripts)
         call("godot_scene_management__create_scene", {"path": "res://start.tscn", "root_type": "Node3D", "root_name": "TidalSanctuary", "open": True})
+        wait_editor_idle("after scene creation before attachment", {**scripts, "res://start.tscn": "PackedScene"})
         call("godot_script__attach_script", {"node_path": ".", "script_path": "res://main.gd"})
         call("godot_scene_management__save_scene", {"path": "res://start.tscn"})
         call("godot_project_management__set_project_setting", {"key": "application/run/main_scene", "value": "res://start.tscn"})
+        wait_editor_idle("before saved-scene editor shutdown", {**scripts, "res://start.tscn": "PackedScene"})
         before = sha256(project / "start.tscn")
         stop_process(editor)
         deadline = time.monotonic() + 15
@@ -172,7 +254,9 @@ def main():
             raise RuntimeError("Old editor bridge did not disconnect; restart is not established")
         editor = launch()
         ready()
+        wait_editor_idle("fresh editor before scene reopen", {**scripts, "res://start.tscn": "PackedScene"})
         call("godot_scene_management__open_scene", {"path": "res://start.tscn"})
+        wait_editor_idle("after saved-scene reopen", {**scripts, "res://start.tscn": "PackedScene"})
         tree = call("godot_scene_management__get_scene_tree", {"path": "res://start.tscn"})
         if "Node3D" not in json.dumps(tree) or "TidalSanctuary" not in json.dumps(tree):
             raise RuntimeError("Reopened MCP scene tree did not identify the original Node3D scene")
@@ -186,7 +270,8 @@ def main():
             if name == "project.godot":
                 continue
             (native / name).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(project / name, native / name)
+            origin = source if name in DEFERRED_TEST_FILES else project
+            shutil.copyfile(origin / name, native / name)
         # Preserve the original playable project settings, without shipping an editor addon.
         shutil.copyfile(source / "project.godot", native / "project.godot")
         for name in GAME_FILES:

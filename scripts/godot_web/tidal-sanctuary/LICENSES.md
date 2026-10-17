@@ -24,3 +24,11 @@ Do not describe online discovery, a headless launch, or a passing acceptance che
 ## Poly Haven surfaces and ferns (hero composition pass)
 
 Rock 04 by Rob Tuytel and Fern 02 by Rico Cilliers/Rob Tuytel are official CC0 assets. Exact URLs, original MD5/SHA256, byte sizes and derived-file hashes are recorded in `game/assets/POLYHAVEN-SOURCE.json`; the notice is `game/assets/POLYHAVEN-LICENSE.txt`. The bounded official static download totals 4,590,433 bytes. Four fern meshes are converted with Godot GLTFDocument; the missing glTF alpha channel is restored from the separately verified official alpha map. Reduced texture resolutions and original materials are documented there. No third-party scripts execute. These assets retain CC0, independently of this original scene’s creative rights.
+
+## Treasure and swimming iteration
+
+The compact treasure route, walk/wade/swim controller, swimming animation, cove shape, water shader and generated surface variation are original. Existing CC0 assets are reused; no new external model, texture, sound or game-code download is introduced. The Noto CJK subset was regenerated from the same installed upstream font to cover the new English/Chinese interface while retaining the renamed Sanctuary Sans family and full OFL notice.
+
+The implementation consulted official Godot CharacterBody3D and Button documentation for floor snapping, slope behavior and multitouch limitations; no third-party implementation was copied:
+https://docs.godotengine.org/en/4.6/classes/class_characterbody3d.html
+https://docs.godotengine.org/en/4.6/classes/class_button.html
