@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 import sys
 import threading
 from functools import partial
@@ -26,7 +27,7 @@ def main():
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(args.site.resolve())))
     threading.Thread(target=server.serve_forever, daemon=True).start()
     origin = f'http://127.0.0.1:{server.server_port}'
-    report = {'checks': [], 'media_ranges': [], 'passed': False, 'pack_sha256': expected['pack_sha256'],
+    report = {'checks': [], 'media_ranges': [], 'capture_receipts': [], 'passed': False, 'pack_sha256': expected['pack_sha256'],
               'source_commit': expected['source_commit'], 'limitations': [
                   'Chromium only; mobile is viewport/touch emulation, not a physical phone.',
                   'Audio player progression is not subjective listening approval.',
@@ -92,7 +93,9 @@ def main():
                         player.press('Space')
                         page.wait_for_function("id => document.getElementById(id).paused", arg=media_id)
                         before_seek = player.evaluate('(e) => e.currentTime')
-                        seek_positions = {'before': before_seek, 'forward': [], 'backward': []}
+                        key_count = max(3, math.ceil(300 / player.evaluate('(e) => e.duration')))
+                        seek_positions = {'before': before_seek, 'key_presses_each_direction': key_count,
+                                          'forward': [], 'backward': []}
                         try:
                             page.wait_for_function("id => {const m=document.getElementById(id); return m.seekable.length && m.seekable.end(m.seekable.length - 1) >= m.duration - .25}", arg=media_id)
                             # Chromium's native step=any timeline moves 1% per key,
@@ -101,7 +104,7 @@ def main():
                             # See Chromium 153.0.8010.12 range_input_type.cc:209-216
                             # and media_controls_impl.cc:1709-1725.
                             for key, direction, field in [('ArrowRight', 1, 'forward'), ('ArrowLeft', -1, 'backward')]:
-                                for _ in range(3):
+                                for _ in range(key_count):
                                     previous = player.evaluate('(e) => e.currentTime')
                                     player.press(key)
                                     page.wait_for_function("({id, previous, direction}) => {const m=document.getElementById(id); return m.paused && !m.seeking && (m.currentTime - previous) * direction > .1}",
@@ -118,9 +121,29 @@ def main():
                             raise
                         check(label + ': ' + media_id + ' actual keyboard playback, pause and seek/return',
                               seconds=player.evaluate('(e) => e.currentTime'), seek_positions=seek_positions)
-                    # Evidence captures follow actual playback; a metadata-only poster can still
-                    # carry a loading spinner and is not the final reviewed player state.
-                    page.wait_for_function("() => {const m=document.getElementById('original-video'); return m.readyState >= 2 && m.paused && !m.seeking && m.currentTime > .35}")
+                    # Native timeline timeupdates can lag the pause timestamp; a
+                    # successful return may be earlier than the initial .35s play
+                    # gate. Obtain a fresh real-play frame instead of waiting on a
+                    # paused clock or weakening the seek/return acceptance above.
+                    video = page.locator('#original-video')
+                    capture_before = video.evaluate('(e) => e.currentTime')
+                    capture_target = max(1, capture_before + .35)
+                    try:
+                        video.scroll_into_view_if_needed()
+                        video.focus()
+                        video.press('Space')
+                        page.wait_for_function("target => {const m=document.getElementById('original-video'); return !m.paused && m.currentTime > target}", arg=capture_target)
+                        video.press('Space')
+                        page.wait_for_function("target => {const m=document.getElementById('original-video'); return m.readyState >= 2 && m.paused && !m.seeking && m.currentTime > target}", arg=capture_target)
+                    except Exception:
+                        report['failed_capture'] = {'layout': label, 'before': capture_before,
+                                                    'target': capture_target, 'players': media_diagnostics(page)}
+                        page.screenshot(path=str(args.output / (label + '-failed-capture.png')), full_page=True)
+                        raise
+                    report['capture_receipts'].append({'layout': label, 'before': capture_before,
+                        'target': capture_target, 'after': video.evaluate('(e) => e.currentTime'),
+                        'paused': video.evaluate('(e) => e.paused'), 'seeking': video.evaluate('(e) => e.seeking'),
+                        'duration': video.evaluate('(e) => e.duration'), 'ready_state': video.evaluate('(e) => e.readyState')})
                     page.locator('header').scroll_into_view_if_needed()
                     page.screenshot(path=str(args.output / (label + '-portal.png')), full_page=True)
                     page.locator('#play-candidate').focus()
