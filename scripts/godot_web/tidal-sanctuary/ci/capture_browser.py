@@ -12,13 +12,20 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from common import check_engine_log, isolated_output, sha256, write_json
 from playwright.sync_api import sync_playwright
-from gameplay import RouteDriver, complete, keyboard_direction, validate_restored
+from gameplay import (BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS, BROWSER_PHYSICS_LIMIT_SECONDS,
+                      RouteDriver, complete, keyboard_direction, validate_restored)
 from observers import finite_vector, observer_receipts, positive_integer, validate_language_frame, validate_touch_release
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
+
+
+def route_diagnostics(driver):
+    return {"budget_policy": driver.budget_policy, "waypoint_budgets": driver.budgets,
+            "current_waypoint": driver.current_waypoint, "physical_stops": driver.stops,
+            "current_stop": driver.stop_boundary, "physical_actions": driver.actions}
 
 
 def last_observer_id(console, prefix, field):
@@ -280,7 +287,10 @@ def main():
                         touch_points = [{"id": 0, "x": origin[0], "y": origin[1]}]
                         send_touch("touchStart", touch_points)
                     route_console_boundary = len(console)
-                    driver = RouteDriver(states, move, interact, lambda seconds: page.wait_for_timeout(seconds * 1000), screenshot)
+                    driver = RouteDriver(states, move, interact, lambda seconds: page.wait_for_timeout(seconds * 1000), screenshot,
+                        physics_timeout=BROWSER_PHYSICS_LIMIT_SECONDS,
+                        absolute_wall_timeout=BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS)
+                    result["input"]["budget_policy"] = driver.budget_policy
                     try:
                         route = driver.run()
                     finally:
@@ -365,9 +375,12 @@ def main():
                             result[name + "_browser_errors"] = errors
                             result["passed"] = False
                         write_json(out / (label + "-" + name + "-console.json"), {"console": lines, "failures": errors})
+                    diagnostics = route_diagnostics(driver) if driver else {}
+                    if driver:
+                        result["input"]["diagnostics"] = diagnostics
                     write_json(out / (label + "-input-route.json"), {"input_events": events,
                         "samples": driver.samples if driver else [], "milestones": driver.milestones if driver else [],
-                        "physical_actions": driver.actions if driver else [], "screenshots": screenshots})
+                        "physical_actions": driver.actions if driver else [], "screenshots": screenshots, **diagnostics})
                     write_json(out / (label + "-result.json"), result)
         failed = [item["name"] for item in report["viewports"] if not item["passed"]]
         if failed:

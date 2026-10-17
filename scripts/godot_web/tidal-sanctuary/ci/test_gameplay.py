@@ -7,7 +7,7 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
-from capture_browser import capture_png, completed_route_save, secondary_touch_tap, validate_web_exit
+from capture_browser import capture_png, completed_route_save, route_diagnostics, secondary_touch_tap, validate_web_exit
 from capture_native import apply_movement_keys, validate_input_movie_span, wait_for_neutral_movement
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
@@ -469,6 +469,192 @@ class GameplayObserverTests(unittest.TestCase):
         del missing["language"]
         with self.assertRaises(ValueError):
             validate_restored(receipt, missing)
+
+
+class WaypointBudgetTests(unittest.TestCase):
+    state = GameplayObserverTests.state
+
+    def driver(self, samples, **options):
+        return RouteDriver(lambda: samples, Mock(), Mock(), Mock(), Mock(),
+                           **{"physics_timeout": 15, "absolute_wall_timeout": 240, **options})
+
+    def test_profiles_are_finite_paired_and_bounded(self):
+        for bad in (0, -1, True, float("nan"), float("inf"), "15"):
+            for field in ("timeout", "physics_timeout", "absolute_wall_timeout"):
+                with self.subTest(field=field, bad=bad), self.assertRaises(ValueError):
+                    self.driver([self.state()], **{field: bad})
+        for options in ({"physics_timeout": 15.1}, {"absolute_wall_timeout": 241},
+                        {"physics_timeout": None}, {"absolute_wall_timeout": None}):
+            with self.subTest(options=options), self.assertRaises(ValueError):
+                self.driver([self.state()], **options)
+        self.assertEqual(self.driver([]).budget_policy["physics_limit_seconds"], 15)
+        self.assertEqual(self.driver([]).budget_policy["absolute_wall_limit_seconds"], 240)
+
+    def test_native_default_retains_75_active_wall_seconds_and_ignores_physics_cap(self):
+        clock, initial = [0.0], self.state()
+        driver = self.driver([initial], physics_timeout=None, absolute_wall_timeout=None)
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]):
+            driver.begin_waypoint_budget(ROUTE[0], initial)
+            driver.capture_seconds = 10
+            clock[0] = 80
+            driver.check_waypoint_budget(self.state(sample_id=2, physics_frame=9060))
+            clock[0] = 85
+            with self.assertRaisesRegex(RuntimeError, "active_wall"):
+                driver.check_waypoint_budget(self.state(sample_id=2, physics_frame=9060))
+        self.assertEqual(driver.budgets[0]["expired_budgets"], ["active_wall"])
+
+    def test_fresh_observations_never_renew_either_deadline(self):
+        clock, initial = [0.0], self.state()
+        driver = self.driver([initial])
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]):
+            budget = driver.begin_waypoint_budget(ROUTE[0], initial)
+            for index, (wall, frame) in enumerate(((30, 120), (80, 180), (120, 600)), start=2):
+                clock[0] = wall
+                driver.check_waypoint_budget(self.state(sample_id=index, physics_frame=frame))
+                self.assertEqual((budget["absolute_wall_deadline"], budget["physics_frame_deadline"]), (240, 960))
+            clock[0] = 130
+            with self.assertRaisesRegex(TimeoutError, "physics"):
+                driver.check_waypoint_budget(self.state(sample_id=5, physics_frame=960))
+        self.assertEqual(budget["expired_budgets"], ["physics"])
+
+    def test_slow_valid_stop_and_action_can_finish_beyond_old_wall_budget(self):
+        initial = self.state(position=[1.3, 1, 7.8])
+        samples, clock = [initial], [0.0]
+        driver = self.driver(samples)
+        driver.snapshot.side_effect = [None, RuntimeError("accepted checkpoint captured")]
+        def pause(_):
+            clock[0] += 80 if len(samples) == 1 else 1
+            if len(samples) == 1:
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.pause = pause
+        driver.interact.side_effect = lambda state: samples.append(
+            {**state, "sample_id": 3, "physics_frame": 84, "quest_stage": 1})
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                patch("gameplay.ROUTE", [{**ROUTE[0], "screenshot": "checkpoint.png"}]), \
+                self.assertRaisesRegex(RuntimeError, "accepted checkpoint captured"):
+            driver.run()
+        driver.interact.assert_called_once()
+        self.assertEqual(driver.budgets[0]["status"], "completed")
+        self.assertGreater(driver.budgets[0]["elapsed_wall_seconds"], 75)
+        self.assertLess(driver.budgets[0]["elapsed_physics_seconds"], 15)
+
+    def test_budget_baseline_drains_observations_after_preceding_screenshot(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        def screenshot(name, _):
+            if name == "tidal-01.png":
+                clock[0] = 80
+                samples.append(self.state(sample_id=2, physics_frame=1200))
+            else:
+                raise RuntimeError("checkpoint captured")
+        driver.snapshot.side_effect = screenshot
+        point = {"name": "already reached path point", "target": [1.3, 10], "screenshot": "checkpoint.png"}
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [point]), \
+                self.assertRaisesRegex(RuntimeError, "checkpoint captured"):
+            driver.run()
+        budget = driver.budgets[0]
+        self.assertEqual((budget["baseline_sample_id"], budget["baseline_physics_frame"]), (2, 1200))
+        self.assertEqual((budget["absolute_wall_deadline"], budget["physics_frame_deadline"]), (320, 2100))
+        self.assertEqual(budget["elapsed_physics_frames"], 0)
+
+    def test_frozen_observations_still_fail_the_ten_second_silence_guard(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        driver.pause = lambda _: clock.__setitem__(0, clock[0] + 1)
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(RuntimeError, "observations stopped advancing"):
+            driver.run()
+        self.assertEqual(driver.budgets[0]["status"], "failed")
+        self.assertEqual(driver.budgets[0]["expired_budgets"], [])
+        self.assertLess(driver.budgets[0]["elapsed_wall_seconds"], 240)
+        driver.interact.assert_not_called()
+
+    def test_moving_physics_without_spatial_progress_expires_simulation_budget(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        def pause(_):
+            clock[0] += .1
+            previous = samples[-1]
+            samples.append({**previous, "sample_id": previous["sample_id"] + 1,
+                            "physics_frame": previous["physics_frame"] + 60})
+        driver.pause = pause
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "physics"):
+            driver.run()
+        self.assertEqual(driver.budgets[0]["expired_budgets"], ["physics"])
+        self.assertEqual(driver.budgets[0]["elapsed_physics_frames"], 900)
+        driver.interact.assert_not_called()
+
+    def test_absolute_wall_limit_counts_capture_time_and_preserves_failure_receipts(self):
+        samples, clock = [self.state()], [0.0]
+        driver = self.driver(samples)
+        def move(direction):
+            if direction != (0, 0) and len(samples) == 1:
+                samples.append(self.state(sample_id=2, physics_frame=72, locomotion="wade", water_depth=.2))
+        def screenshot(name, _):
+            if name == "tidal-03.png":
+                clock[0] += 241
+                samples.append(self.state(sample_id=3, physics_frame=84, locomotion="wade", water_depth=.2))
+        driver.move.side_effect, driver.snapshot.side_effect = move, screenshot
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "absolute_wall"):
+            driver.run()
+        diagnostics = route_diagnostics(driver)
+        budget = diagnostics["waypoint_budgets"][0]
+        self.assertEqual(budget["expired_budgets"], ["absolute_wall"])
+        self.assertEqual(budget["measured_capture_seconds"], 241)
+        self.assertEqual(budget["elapsed_active_wall_seconds"], 0)
+        self.assertEqual(diagnostics["current_waypoint"], ROUTE[0]["name"])
+        self.assertIn("physical_stops", diagnostics)
+        self.assertIn("current_stop", diagnostics)
+        driver.interact.assert_not_called()
+
+    def test_stop_callback_overrun_fails_before_action_and_retains_stop(self):
+        initial = self.state(position=[1.3, 1, 7.8])
+        samples, clock = [initial], [0.0]
+        driver = self.driver(samples)
+        def move(_):
+            if len(samples) == 1:
+                clock[0] = 240
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.move.side_effect = move
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "absolute_wall"):
+            driver.run()
+        diagnostics = route_diagnostics(driver)
+        self.assertEqual(diagnostics["current_stop"]["after_sample_id"], 2)
+        self.assertEqual(len(diagnostics["physical_stops"]), 1)
+        self.assertEqual(diagnostics["waypoint_budgets"][0]["expired_budgets"], ["absolute_wall"])
+        driver.interact.assert_not_called()
+
+    def test_action_callback_cannot_complete_after_simulation_deadline(self):
+        initial = self.state(position=[1.3, 1, 7.8])
+        samples, clock = [initial], [0.0]
+        driver = self.driver(samples)
+        def pause(_):
+            clock[0] += .1
+            if len(samples) == 1:
+                samples.append({**initial, "sample_id": 2, "physics_frame": 72})
+        driver.pause = pause
+        driver.interact.side_effect = lambda state: samples.append(
+            {**state, "sample_id": 3, "physics_frame": 960, "quest_stage": 1})
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(TimeoutError, "physics"):
+            driver.run()
+        driver.interact.assert_called_once()
+        self.assertEqual(driver.budgets[0]["status"], "expired")
+        self.assertEqual(driver.milestones, [])
+
+    def test_malformed_frames_fail_before_any_budget_acceptance(self):
+        for bad in (True, 0, 72.5, float("nan"), float("inf")):
+            samples, clock = [self.state()], [0.0]
+            driver = self.driver(samples)
+            driver.move.side_effect = lambda _, value=bad: samples.append(self.state(sample_id=2, physics_frame=value)) if len(samples) == 1 else None
+            with self.subTest(frame=bad), patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                    patch("gameplay.ROUTE", [ROUTE[0]]), self.assertRaises(ValueError):
+                driver.run()
+            self.assertEqual(driver.budgets[0]["status"], "failed")
+            driver.interact.assert_not_called()
 
 
 class AuthoringBoundaryTests(unittest.TestCase):

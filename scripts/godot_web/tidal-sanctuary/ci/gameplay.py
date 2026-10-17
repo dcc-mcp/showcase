@@ -20,6 +20,14 @@ FINAL_STAGE = 4
 STATE_PREFIX = "TIDAL_STATE"
 INTERACTION_RADIUS = 1.55
 SETTLED_HORIZONTAL_SPEED = .08
+BROWSER_PHYSICS_LIMIT_SECONDS = 15
+BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS = 240
+
+
+def finite_seconds(value, name, maximum=None):
+    if type(value) not in (int, float) or not math.isfinite(value) or value <= 0 or (maximum is not None and value > maximum):
+        raise ValueError(name + " must be a finite positive duration within its supported limit")
+    return value
 
 
 def validate_state(state, previous=None, expected_demo=False):
@@ -167,9 +175,17 @@ def validate_water_crossing(samples):
 
 class RouteDriver:
     """Callbacks must send physical OS/browser input. Observations are passive logs."""
-    def __init__(self, read_states, move, interact, pause, snapshot, timeout=75):
+    def __init__(self, read_states, move, interact, pause, snapshot, timeout=75,
+                 physics_timeout=None, absolute_wall_timeout=None):
         self.read_states, self.move, self.interact = read_states, move, interact
-        self.pause, self.snapshot, self.timeout = pause, snapshot, timeout
+        self.pause, self.snapshot = pause, snapshot
+        self.timeout = finite_seconds(timeout, "Legacy waypoint timeout")
+        if (physics_timeout is None) != (absolute_wall_timeout is None):
+            raise ValueError("Browser waypoint budgets require both physics and absolute wall limits")
+        self.physics_timeout = None if physics_timeout is None else finite_seconds(
+            physics_timeout, "Physics waypoint timeout", BROWSER_PHYSICS_LIMIT_SECONDS)
+        self.absolute_wall_timeout = None if absolute_wall_timeout is None else finite_seconds(
+            absolute_wall_timeout, "Absolute wall waypoint timeout", BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS)
         self.samples, self.milestones, self.captured = [], [], set()
         self.last_action = 0
         self.last_action_sample_id = 0
@@ -180,6 +196,69 @@ class RouteDriver:
         self.capture_seconds = 0.0
         self.stop_boundary = None
         self.stops = []
+        self.budgets = []
+        self.active_budget = None
+        self.current_waypoint = None
+
+    @property
+    def budget_policy(self):
+        if self.physics_timeout is None:
+            return {"kind": "legacy_active_wall", "active_wall_limit_seconds": self.timeout,
+                    "excludes_measured_screenshots": True, "observation_silence_limit_seconds": 10}
+        return {"kind": "physics_and_absolute_wall", "physics_limit_seconds": self.physics_timeout,
+                "absolute_wall_limit_seconds": self.absolute_wall_timeout,
+                "excludes_measured_screenshots": False, "observation_silence_limit_seconds": 10}
+
+    def begin_waypoint_budget(self, point, state):
+        started = time.monotonic()
+        frame = positive_integer(state["physics_frame"], "budget baseline physics_frame")
+        budget = {"schema": 1, "waypoint": point["name"], "policy": self.budget_policy,
+                  "started_at": started, "baseline_sample_id": state["sample_id"],
+                  "baseline_physics_frame": frame, "capture_seconds_before": self.capture_seconds,
+                  "status": "running", "expired_budgets": []}
+        if self.physics_timeout is not None:
+            budget["absolute_wall_deadline"] = started + self.absolute_wall_timeout
+            budget["physics_frame_deadline"] = frame + self.physics_timeout * 60
+        else:
+            budget["active_wall_limit_seconds"] = self.timeout
+        self.active_budget = budget
+        self.budgets.append(budget)
+        self.update_waypoint_budget(state)
+        return budget
+
+    def update_waypoint_budget(self, state):
+        budget = self.active_budget
+        frame = positive_integer(state["physics_frame"], "budget physics_frame")
+        sample = positive_integer(state["sample_id"], "budget sample_id")
+        if frame < budget["baseline_physics_frame"] or sample < budget["baseline_sample_id"]:
+            raise ValueError("Waypoint budget observations regressed")
+        wall = time.monotonic() - budget["started_at"]
+        captures = self.capture_seconds - budget["capture_seconds_before"]
+        budget.update({"elapsed_wall_seconds": wall, "measured_capture_seconds": captures,
+                       "elapsed_active_wall_seconds": wall - captures,
+                       "elapsed_physics_frames": frame - budget["baseline_physics_frame"],
+                       "elapsed_physics_seconds": (frame - budget["baseline_physics_frame"]) / 60,
+                       "last_sample_id": sample, "last_physics_frame": frame})
+        return budget
+
+    def expired_waypoint_budgets(self, budget):
+        if self.physics_timeout is None:
+            return ["active_wall"] if budget["elapsed_active_wall_seconds"] >= budget["active_wall_limit_seconds"] else []
+        expired = []
+        if budget["last_physics_frame"] >= budget["physics_frame_deadline"]:
+            expired.append("physics")
+        if budget["elapsed_wall_seconds"] >= budget["absolute_wall_deadline"] - budget["started_at"]:
+            expired.append("absolute_wall")
+        return expired
+
+    def check_waypoint_budget(self, state):
+        budget = self.update_waypoint_budget(state)
+        expired = self.expired_waypoint_budgets(budget)
+        if expired:
+            budget.update({"status": "expired", "expired_budgets": expired})
+            error_type = RuntimeError if self.physics_timeout is None else TimeoutError
+            raise error_type("Physical route could not reach/complete " + budget["waypoint"]
+                             + ": waypoint budget expired " + str(budget) + "; last state: " + str(state))
 
     def capture(self, name, state):
         started = time.monotonic()
@@ -332,14 +411,21 @@ class RouteDriver:
         self.capture("tidal-01.png", state)
         try:
             for point in ROUTE:
+                self.current_waypoint = point["name"]
                 expected_stage = point.get("stage", self.accepted_stage)
                 if expected_stage not in (self.accepted_stage, self.accepted_stage + 1):
                     raise ValueError("Authored route skips a required quest milestone")
-                deadline = time.monotonic() + self.timeout
-                captures_before = self.capture_seconds
-                reached = False
-                while time.monotonic() - (self.capture_seconds - captures_before) < deadline:
+                if self.physics_timeout is not None:
+                    # Drain passive observations after the preceding screenshot.
+                    # Historical startup/preflight frames cannot spend this leg's
+                    # physics budget; neither deadline is renewed after this.
                     state = self.observe()
+                self.begin_waypoint_budget(point, state)
+                while True:
+                    self.check_waypoint_budget(state)
+                    state = self.observe()
+                    if self.physics_timeout is not None:
+                        self.check_waypoint_budget(state)
                     if state["quest_stage"] > expected_stage:
                         raise ValueError("Quest advanced beyond the exact current route milestone")
                     approach = point.get("approach", point["target"])
@@ -349,7 +435,9 @@ class RouteDriver:
                         # the held key in the earlier hosted bay-entry capture.
                         if "stage" in point:
                             self.move((0, 0))
-                        reached = True
+                        if self.physics_timeout is not None:
+                            state = self.observe()
+                            self.check_waypoint_budget(state)
                         break
                     if self.pending_action is not None:
                         # One real action per milestone. Wait for its actual
@@ -371,9 +459,14 @@ class RouteDriver:
                             self.stop_for_action(state, point)
                     else:
                         self.move(direction_to(state, approach))
+                    if self.physics_timeout is not None:
+                        # Count slow input delivery and captures too. An action
+                        # callback cannot finish beyond a limit and still pass.
+                        state = self.observe()
+                        self.check_waypoint_budget(state)
                     self.pause(.1)
-                if not reached:
-                    raise RuntimeError("Physical route could not reach/complete " + point["name"] + ": " + str(state))
+                self.update_waypoint_budget(state)["status"] = "completed"
+                self.active_budget = None
                 self.milestones.append({"name": point["name"], "sample": state})
                 if point.get("screenshot"):
                     self.capture(point["screenshot"], state)
@@ -387,6 +480,14 @@ class RouteDriver:
             return {"passed": True, "samples": self.samples, "milestones": self.milestones,
                     "crossing": crossing, "completed_state": state, "physical_actions": self.actions,
                     "physical_stops": self.stops,
+                    "budget_policy": self.budget_policy, "waypoint_budgets": self.budgets,
                     "no_demo_no_state_injection": True}
+        except Exception as error:
+            if self.active_budget is not None:
+                budget = self.update_waypoint_budget(self.samples[-1])
+                budget["expired_budgets"] = self.expired_waypoint_budgets(budget)
+                budget["status"] = "expired" if budget["expired_budgets"] else "failed"
+                budget["error"] = str(error)
+            raise
         finally:
             self.move((0, 0))
