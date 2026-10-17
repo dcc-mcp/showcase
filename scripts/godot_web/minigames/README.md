@@ -23,3 +23,11 @@ The generator binds native/export/browser/PCK/media bytes, fails on incomplete a
 This preparatory change leaves `collection.json` and `play/manifest.json` unchanged. The public-game contract separately allows explicit `nativeTextLanguage: "en-zh"` so a future reviewed entry can state native bilingual support truthfully; existing `"en"` entries retain their original disclosure. Final visual/motion approval, subjective listening, physical-phone and Safari/Firefox acceptance remain unverified. No merge or deployment follows from this Draft.
 
 MediaRecorder WebM captures can omit finite duration/cue metadata. The review desk uses a lossless stream-copy WebM remux with finite duration, while retaining each raw capture in `minigame-evidence`. Every encoded audio/video packet hash and order, PTS/DTS and every originally present packet duration must match by stream type; no re-encoding or retiming is permitted. Missing video packet-duration metadata may be populated. The bounded record retains both source and review-file hashes. Chromium must observe finite matching durations and exercise actual keyboard seek/return while paused, not just time progression. Final portal screenshots are captured only after real playback, pause and seek recovery.
+
+The review desk's media host must support HTTP byte ranges. The acceptance server reuses the gallery's tested `QuietHandler` and verifies exact 206 responses and the browser's seekable range before keyboard seek/return. Plain `python -m http.server` can serve the game, but does not implement byte ranges and is not the certified media-seeking setup. To review a downloaded artifact from this repository checkout, replace `/path/to/minigame-site` below with the extracted site directory:
+
+```sh
+python -c 'import sys; sys.path.insert(0, "scripts"); from browser_preview import QuietHandler; from functools import partial; from http.server import ThreadingHTTPServer; ThreadingHTTPServer(("127.0.0.1", 8765), partial(QuietHandler, directory="/path/to/minigame-site")).serve_forever()'
+```
+
+Open `http://127.0.0.1:8765/` in the review browser. This is local review only, not deployment.

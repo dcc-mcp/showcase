@@ -22,6 +22,18 @@ REQUIRED_CHECKS = {f'{lang}: garden {level} won by actual input'
     f'{lang}: real Godot startup' for lang in LANGUAGES}
 
 
+def review_instructions():
+    return '''
+Review desk: open /index.html or /zh/index.html on a byte-range-capable HTTP server.
+Original-speed recordings and listening WAVs are under review/.
+Native media seeking requires HTTP byte ranges (206 responses). Plain python -m http.server does not provide them; its game-serving instructions above do not certify media seeking.
+From the dcc-mcp/showcase repository checkout, replace /path/to/minigame-site with this extracted directory and run:
+python -c 'import sys; sys.path.insert(0, "scripts"); from browser_preview import QuietHandler; from functools import partial; from http.server import ThreadingHTTPServer; ThreadingHTTPServer(("127.0.0.1", 8765), partial(QuietHandler, directory="/path/to/minigame-site")).serve_forever()'
+Then open http://127.0.0.1:8765/ in the review browser. This is local review only, not deployment.
+No subjective listening or public release approval is implied.
+'''
+
+
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -240,7 +252,7 @@ def prepare(site, native, evidence, source_commit, run_id=None):
     (site / 'zh').mkdir(exist_ok=True)
     (site / 'zh/index.html').write_text(page('zh'))
     readme = site / 'README.txt'
-    readme.write_text(readme.read_text() + '\nReview desk: open /index.html or /zh/index.html on the same HTTP server.\nOriginal-speed recordings and listening WAVs are under review/.\nNo subjective listening or public release approval is implied.\n')
+    readme.write_text(readme.read_text() + review_instructions())
     return bounded
 
 

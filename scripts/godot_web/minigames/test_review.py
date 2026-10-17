@@ -136,6 +136,13 @@ class ReviewInputTests(unittest.TestCase):
         self.assertIn('href="../play/', review.page('zh'))
         self.assertIn('href="zh/index.html"', review.page('en'))
 
+    def test_download_instructions_require_byte_range_media_host(self):
+        text = review.review_instructions()
+        for required in ('206 responses', 'QuietHandler', '127.0.0.1',
+                         '/path/to/minigame-site', 'does not provide them',
+                         'No subjective listening or public release approval'):
+            self.assertIn(required, text)
+
 
 if __name__ == '__main__':
     unittest.main()
