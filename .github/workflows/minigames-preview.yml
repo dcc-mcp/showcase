@@ -1,7 +1,7 @@
 name: Original minigames acceptance
 on:
   pull_request:
-    paths: ['scripts/godot_web/minigames/**', 'scripts/test_minigame_shell.js', 'play/minigame-shell.*', '.github/workflows/minigames-preview.yml']
+    paths: ['scripts/godot_web/minigames/**', 'scripts/godot_web/materialize_runtime.py', 'scripts/godot_web/test_materialize_runtime.py', 'scripts/godot_web/fetch_templates.py', 'scripts/browser_preview.py', 'scripts/test_media_ranges.py', 'scripts/test_minigame_shell.js', 'play/minigame-shell.*', '.github/workflows/minigames-preview.yml']
   workflow_dispatch:
 concurrency:
   group: minigames-${{ github.event.pull_request.number || github.ref }}
@@ -32,6 +32,8 @@ jobs:
       - name: Test media duration metadata and streaming fallback
         run: |
           python -m unittest discover -s scripts/godot_web/minigames -p 'test_*.py'
+          python scripts/godot_web/test_materialize_runtime.py
+          python scripts/test_media_ranges.py
           node scripts/test_minigame_shell.js
       - name: Install pinned official host, adapter and browser test tools
         shell: bash
