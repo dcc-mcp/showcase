@@ -8,7 +8,7 @@ import signal
 from unittest.mock import Mock, patch
 from pathlib import Path
 from author_native import envelope
-from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, check_engine_log, copy_game, isolated_env, isolated_output
+from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, TROPICAL_FILES, TROPICAL_NOTICES, check_engine_log, copy_game, isolated_env, isolated_output
 from capture_native import collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
 from export_web import copy_asset_notices, raw_include_filter
@@ -286,6 +286,36 @@ class HarnessTests(unittest.TestCase):
         self.assertTrue(expected.issubset(GAME_FILES))
         self.assertEqual(len(GAME_FILES), len(set(GAME_FILES)))
 
+    def test_tropical_manifest_has_exact_scene_and_notice_paths(self):
+        names = {"palm-a", "palm-b", "understory-a", "understory-b", "bush-a",
+                 "shore-stone-a", "shore-stone-b", "explorer"}
+        self.assertEqual(set(TROPICAL_FILES), {f"assets/tropical/{name}.glb" for name in names})
+        self.assertEqual(set(TROPICAL_NOTICES), {"assets/tropical/FOREST-LICENSE.txt",
+            "assets/tropical/ADVENTURERS-LICENSE.txt", "assets/tropical/SOURCE.json"})
+        self.assertTrue(set(TROPICAL_FILES + TROPICAL_NOTICES).issubset(GAME_FILES))
+        self.assertTrue(set(TROPICAL_NOTICES).issubset(ASSET_NOTICE_FILES))
+
+    def test_tropical_glbs_match_source_manifest_and_are_embedded(self):
+        import hashlib
+        import json
+        source = Path(__file__).resolve().parent.parent / "game/assets/tropical"
+        records = json.loads((source / "SOURCE.json").read_text())["game_assets"]
+        self.assertEqual(set(records), {Path(name).name for name in TROPICAL_FILES})
+        for filename, record in records.items():
+            with self.subTest(filename=filename):
+                raw = (source / filename).read_bytes()
+                self.assertEqual(len(raw), record["bytes"])
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), record["sha256"])
+                self.assertEqual(struct.unpack_from("<4sII", raw), (b"glTF", 2, len(raw)))
+                size, kind = struct.unpack_from("<I4s", raw, 12)
+                self.assertEqual(kind, b"JSON")
+                content = json.loads(raw[20:20+size])
+                self.assertFalse([row for field in ("buffers", "images")
+                                  for row in content.get(field, []) if "uri" in row])
+                if filename == "explorer.glb":
+                    self.assertEqual({clip["name"] for clip in content["animations"]}, {"Idle", "Walk", "Swim"})
+                    self.assertEqual(len(content["skins"][0]["joints"]), 23)
+
     def test_export_preserves_all_asset_notices_byte_for_byte(self):
         with tempfile.TemporaryDirectory() as root:
             native, site = Path(root) / "native", Path(root) / "site"
@@ -296,7 +326,7 @@ class HarnessTests(unittest.TestCase):
             copy_asset_notices(native, site)
             for name in ASSET_NOTICE_FILES:
                 self.assertEqual((site / name).read_bytes(), (native / name).read_bytes())
-            self.assertEqual(len(list(site.rglob("*.txt"))) + len(list(site.rglob("*.json"))), 4)
+            self.assertEqual(len(list(site.rglob("*.txt"))) + len(list(site.rglob("*.json"))), len(ASSET_NOTICE_FILES))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,77 @@
+{
+  "source": "KayKit Adventurers 2.0 FREE",
+  "source_license": "CC0-1.0",
+  "source_url": "https://kaylousberg.itch.io/kaykit-adventurers",
+  "source_official_url": "https://kaylousberg.com/game-assets/characters-adventurers",
+  "source_archive": {
+    "name": "adventurers-free-2.zip",
+    "sha256": "abe48f4763fba0896bab486ee9e6d08ca6b5b3884b9601f235c8847ae94dc479",
+    "bytes": 13024345
+  },
+  "source_files": [
+    {
+      "path": "Characters/gltf/Ranger.glb",
+      "sha256": "3a0b0166b9d61d58dcaaa739c3cc0538be46e00d2928dd5cb513d9a41770d2e9"
+    },
+    {
+      "path": "Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+      "sha256": "5f725c0f745f36078c7238968cd5c04843cbc6260689eb6e7f5e2bbd7ffdd7ad"
+    },
+    {
+      "path": "Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+      "sha256": "11422afd50abf7e8c92ea107e2e0bc94abd38023d6d15f55ad580347efbfa29e"
+    }
+  ],
+  "created_with": "Blender 4.3.2",
+  "original_additions": [
+    "Coral short-sleeved shirt",
+    "Teal shorts and hems",
+    "Skin limbs and sandals",
+    "Canvas sun hat and compass details",
+    "Swim action with 24 fps keyframes"
+  ],
+  "rig_bones": 23,
+  "animations": {
+    "Idle": {
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "duration_seconds": 1.0
+    },
+    "Walk": {
+      "frames": [
+        0.0,
+        24.0
+      ],
+      "duration_seconds": 1.0
+    },
+    "Swim": {
+      "frames": [
+        1.0,
+        25.0
+      ],
+      "duration_seconds": 1.0
+    }
+  },
+  "orientation": {
+    "godot_forward": [
+      0,
+      0,
+      -1
+    ],
+    "godot_up": [
+      0,
+      1,
+      0
+    ],
+    "feet_origin": [
+      0,
+      0,
+      0
+    ],
+    "height_m": 1.2,
+    "swim_game_wrapper_rotation_x_degrees": -90,
+    "swim_action_contains_prone_rotation": false
+  }
+}

@@ -23,6 +23,14 @@ GAME_FILES = ("main.gd", "swim_controller.gd", "verify_swimming.gd", "verify_tre
               "assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json")
 ASSET_NOTICE_FILES = ("assets/KENNEY-LICENSE.txt", "assets/SOURCE.json",
                       "assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json")
+TROPICAL_FILES = ("assets/tropical/palm-a.glb", "assets/tropical/palm-b.glb",
+                  "assets/tropical/understory-a.glb", "assets/tropical/understory-b.glb",
+                  "assets/tropical/bush-a.glb", "assets/tropical/shore-stone-a.glb",
+                  "assets/tropical/shore-stone-b.glb", "assets/tropical/explorer.glb")
+TROPICAL_NOTICES = ("assets/tropical/FOREST-LICENSE.txt", "assets/tropical/ADVENTURERS-LICENSE.txt",
+                    "assets/tropical/SOURCE.json")
+GAME_FILES += TROPICAL_FILES + TROPICAL_NOTICES
+ASSET_NOTICE_FILES += TROPICAL_NOTICES
 # Only these manifest-owned static image buffers are copied/exported as raw bytes.
 RAW_IMAGE_FILES = tuple(name for name in GAME_FILES if name.endswith(".bin"))
 

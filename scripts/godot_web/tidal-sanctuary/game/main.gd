@@ -64,8 +64,8 @@ var hero_camera_locked:=false
 var stone_materials:Array[StandardMaterial3D]=[]
 var swim := SwimController.new()
 var avatar_body:Node3D
-var arms:Array[Node3D]=[]
-var legs:Array[Node3D]=[]
+var explorer_animation:AnimationPlayer
+var explorer_clip:StringName=&""
 var swim_wake:MeshInstance3D
 var compass:Label
 var state_clock:=0.0
@@ -77,8 +77,7 @@ var route_phase:=0
 var demo_captures:Dictionary={}
 var loaded_found:=false
 var last_move:=Vector3.ZERO
-var fern_material:StandardMaterial3D
-var fern_meshes:Array[Mesh]=[]
+
 
 func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  var m := StandardMaterial3D.new()
@@ -202,9 +201,11 @@ func path_x(z:float) -> float:
 
 func terrain_color(p: Vector3) -> Color:
  var patch:=noise.get_noise_2d(p.x*.72+35,p.z*.72-50)*.5+.5
- var c:=Color("6a8064").lerp(Color("87916e"),smoothstep(.30,.72,patch))
- var sand:=Color("b9b496").lerp(Color("a7aa8f"),patch*.35)
- c=c.lerp(sand,1.0-smoothstep(.35,1.3,p.y))
+ var c:=Color("6c855f").lerp(Color("8b9d74"),smoothstep(.25,.77,patch))
+ var sand:=Color("c9bd97").lerp(Color("b5b38d"),patch*.32)
+ var grove:=maxf(exp(-pow((p.x+6.0)/3.5,2.0)-pow((p.z-4.5)/5.0,2.0)),exp(-pow((p.x-7.0)/2.7,2.0)-pow((p.z+3.0)/4.0,2.0)))
+ c=c.lerp(sand,1.0-smoothstep(.40,1.5,p.y))
+ c=c.lerp(Color("617c58"),grove*.22)
  var trail:=1.0-smoothstep(.55,1.7,abs(p.x-path_x(p.z)))
  if p.z<3 and p.z> -8:c=c.lerp(Color("a1a18a"),trail*.55)
  if p.y<.0:c=c.lerp(Color("718c7c"),smoothstep(0.0,-1.6,p.y)*.6)
@@ -231,7 +232,7 @@ func make_terrain() -> void:
  st.index()
  terrain_mesh=MeshInstance3D.new();terrain_mesh.name="SculptedCove";terrain_mesh.mesh=st.commit()
  var m:=mat(Color.WHITE);m.vertex_color_use_as_albedo=true;m.vertex_color_is_srgb=true
- m.albedo_texture=surface_noise(Color("d6d7cd"),Color("ffffff"),.8)
+ m.albedo_texture=surface_noise(Color("efefdf"),Color("ffffff"),.14)
  m.uv1_triplanar=true;m.uv1_world_triplanar=true;m.uv1_scale=Vector3.ONE*.7
  terrain_mesh.material_override=m;add_child(terrain_mesh);terrain_mesh.create_trimesh_collision()
 
@@ -312,20 +313,14 @@ func encoded_texture(path:String) -> ImageTexture:
 func prepare_surface_assets() -> void:
  var normal:=encoded_texture("res://assets/polyhaven/stone-normal.png.bin")
  var rough:=encoded_texture("res://assets/polyhaven/stone-rough.jpg.bin")
- for tint in [Color("a7afa4"),Color("919f95"),Color("b2b5a6"),Color("96a59a")]:
+ for tint in [Color("b1b5a7"),Color("a1aca1"),Color("babba9"),Color("a6b1a5")]:
   var material:=mat(tint)
-  material.albedo_texture=surface_noise(Color("b7bdb1"),Color("f3f0de"),1.1)
-  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.25
+  material.albedo_texture=surface_noise(Color("e0e3d6"),Color("fffbed"),.28)
+  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.07
   material.roughness_texture=rough
   material.uv1_triplanar=true;material.uv1_world_triplanar=true;material.uv1_scale=Vector3.ONE*.58
   material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
   stone_materials.append(material)
- fern_material=mat(Color("a3b59a"))
- fern_material.albedo_texture=encoded_texture("res://assets/polyhaven/fern-albedo.png.bin")
- fern_material.normal_enabled=true;fern_material.normal_texture=encoded_texture("res://assets/polyhaven/fern-normal.jpg.bin");fern_material.normal_scale=.3
- fern_material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR;fern_material.alpha_scissor_threshold=.38
- fern_material.cull_mode=BaseMaterial3D.CULL_DISABLED;fern_material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
- for i in range(4):fern_meshes.append(load("res://assets/polyhaven/fern-%d.res"%i))
 
 func surface_noise(dark:Color,light:Color,frequency:float) -> NoiseTexture2D:
  var field:=FastNoiseLite.new();field.seed=713;field.frequency=.028*frequency;field.fractal_octaves=4
@@ -428,14 +423,12 @@ func make_ruins() -> void:
   slab.rotation=Vector3(rng.randf_range(-.25,.25),rng.randf()*TAU,rng.randf_range(-.2,.2))
 
 func make_sanctuary_details() -> void:
- # Ferns grow in clustered damp seams; the central walking line stays open.
+ # Stylized broad-leaf pockets soften broken walls without blocking the walk line.
  for center in [Vector3(-3.0,0,-4.6),Vector3(-4.9,0,-6.0),Vector3(-4.5,0,-9.5),Vector3(3.5,0,-5.1),Vector3(4.9,0,-8.4),Vector3(2.7,0,-11.6)]:
-  for i in range(7):
-   var x:float=center.x+rng.randf_range(-.7,.7);var z:float=center.z+rng.randf_range(-.55,.55)
-   var variant:=2+i%2 if i>1 else i
-   var fern:=mesh_node(fern_meshes[variant],Vector3(x,height_at(x,z)+.01,z),fern_material)
-   fern.scale=Vector3.ONE*rng.randf_range(.85,1.65)
-   fern.rotation.y=rng.randf()*TAU
+  for i in range(4):
+   var x:float=center.x+rng.randf_range(-.65,.65);var z:float=center.z+rng.randf_range(-.45,.45)
+   var variant:="a" if i%2==0 else "b"
+   place_asset("res://assets/tropical/understory-%s.glb"%variant,Vector3(x,height_at(x,z)-.01,z),Vector3.ONE*rng.randf_range(.62,1.05),rng.randf()*TAU)
  # Small stone/moss pockets ground the wall and leave larger quiet areas intact.
  for i in range(48):
   var side:float=-1 if i%2==0 else 1
@@ -447,20 +440,25 @@ func make_sanctuary_details() -> void:
   pebble.rotation.y=rng.randf()*TAU
 
 func make_nature() -> void:
- for info in [Vector3(-6.8,4.5,5.7),Vector3(-8.1,3.2,4.4),Vector3(-6.1,2.5,7.0),Vector3(-7.3,4.1,-3.0),Vector3(-8.9,3.1,-5),Vector3(7.7,3.8,-2.2),Vector3(9.3,2.8,-3.8)]:
-  var n:=place_asset("res://assets/coastal-tree.tscn",Vector3(info.x,height_at(info.x,info.z)-.08,info.z),Vector3(info.y*.95,info.y,info.y*.85),rng.randf()*TAU)
-  n.rotation.z=rng.randf_range(-.07,.07)
+ # Hand-authored leaning palms frame the cache and cove; the chart route stays open.
+ var palm_index:=0
+ for info in [Vector3(-6.8,1.05,5.7),Vector3(-8.1,.82,4.4),Vector3(-6.1,.66,7.0),Vector3(-7.3,1.0,-3.0),Vector3(-8.9,.75,-5),Vector3(7.7,.91,-2.2),Vector3(9.3,.73,-3.8)]:
+  var variant:="a" if palm_index%2==0 else "b"
+  place_asset("res://assets/tropical/palm-%s.glb"%variant,Vector3(info.x,height_at(info.x,info.z)-.04,info.z),Vector3.ONE*info.y,rng.randf()*TAU)
+  palm_index+=1
  for center in [Vector3(-5.6,0,4.5),Vector3(-6.9,0,6.2),Vector3(-7.7,0,-2.7),Vector3(6.5,0,-2.0),Vector3(7.8,0,-4),Vector3(-3.6,0,2.0)]:
-  for i in range(10):
+  for i in range(6):
    var x:float=center.x+rng.randf_range(-1.0,1.0);var z:float=center.z+rng.randf_range(-.9,.9)
    if height_at(x,z)<.5:continue
-   var fern:=mesh_node(fern_meshes[2+i%2],Vector3(x,height_at(x,z)+.01,z),fern_material)
-   fern.scale=Vector3.ONE*rng.randf_range(1.1,2.3);fern.rotation.y=rng.randf()*TAU
+   var kind:="understory-a" if i%3!=0 else "bush-a"
+   var size:=rng.randf_range(.8,1.25)
+   place_asset("res://assets/tropical/%s.glb"%kind,Vector3(x,height_at(x,z)-.03,z),Vector3(size,size*.85,size),rng.randf()*TAU)
  for center in [Vector3(-5.4,0,7.7),Vector3(-8,0,1.8),Vector3(6.2,0,-1.3),Vector3(-5.9,0,-5.5)]:
-  for i in range(6):
+  for i in range(4):
    var x:float=center.x+rng.randf_range(-.9,.9);var z:float=center.z+rng.randf_range(-.7,.7)
-   var size:=rng.randf_range(.4,.8)
-   rock(Vector3(x,height_at(x,z)+size*.16,z),Vector3(size,size*.65,size*.9),mat(Color("4a705e").lightened(i*.018)),4900+i)
+   var size:=rng.randf_range(.30,.65)
+   var variant:="a" if i%2==0 else "b"
+   place_asset("res://assets/tropical/shore-stone-%s.glb"%variant,Vector3(x,height_at(x,z)-.08,z),Vector3(size,size*.65,size),rng.randf()*TAU)
 
 func make_player() -> void:
  player=CharacterBody3D.new();player.name="Wayfarer";add_child(player)
@@ -468,19 +466,14 @@ func make_player() -> void:
  var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.22;shape.height=.95;col.shape=shape;col.position.y=.48;player.add_child(col)
  avatar=Node3D.new();player.add_child(avatar)
  avatar_body=Node3D.new();avatar_body.position.y=.6;avatar.add_child(avatar_body)
- var cloth:=mat(Color("315e72"));var skin:=mat(Color("d4b486"));var trousers:=mat(Color("405664"))
- var torso:=CapsuleMesh.new();torso.radius=.20;torso.height=.55;torso.radial_segments=12;torso.rings=4
- mesh_node(torso,Vector3.ZERO,cloth,avatar_body)
- var head:=SphereMesh.new();head.radius=.16;head.height=.32;head.radial_segments=16;head.rings=8
- mesh_node(head,Vector3(0,.4,-.035),skin,avatar_body)
- cylinder(Vector3(0,.52,0),.20,.13,mat(Color("b8925b")),avatar_body)
- cylinder(Vector3(0,.48,-.015),.28,.035,mat(Color("c9ab70")),avatar_body)
- box(Vector3(0,.03,.19),Vector3(.25,.31,.16),mat(Color("a8603d")),avatar_body)
- for side in [-1,1]:
-  var arm:=Node3D.new();arm.position=Vector3(side*.23,.13,0);avatar_body.add_child(arm);arms.append(arm)
-  cylinder(Vector3(0,-.17,0),.065,.34,cloth,arm);cylinder(Vector3(0,-.36,0),.053,.13,skin,arm)
-  var leg:=Node3D.new();leg.position=Vector3(side*.105,-.19,0);avatar_body.add_child(leg);legs.append(leg)
-  cylinder(Vector3(0,-.16,0),.075,.32,trousers,leg);box(Vector3(0,-.34,-.04),Vector3(.15,.12,.23),mat(Color("394e50")),leg)
+ var explorer:Node3D=load("res://assets/tropical/explorer.glb").instantiate()
+ explorer.position.y=-.6;avatar_body.add_child(explorer)
+ explorer_animation=explorer.find_child("AnimationPlayer",true,false) as AnimationPlayer
+ assert(explorer_animation!=null,"Explorer animation player is required")
+ for clip in ["Idle","Walk","Swim"]:
+  assert(explorer_animation.has_animation(clip),"Missing explorer clip: "+clip)
+  explorer_animation.get_animation(clip).loop_mode=Animation.LOOP_LINEAR
+ explorer_animation.play("Idle");explorer_clip=&"Idle"
  var wake_mesh:=TorusMesh.new();wake_mesh.inner_radius=.27;wake_mesh.outer_radius=.32;wake_mesh.rings=24;wake_mesh.ring_segments=4
  var wm:=mat(Color(.65,.86,.83,.45));wm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;wm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
  swim_wake=mesh_node(wake_mesh,Vector3.ZERO,wm);swim_wake.visible=false
@@ -710,14 +703,13 @@ func _physics_process(delta:float) -> void:
  last_move=move
  if move.length()>.1:avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-move.x,-move.z),1.0-exp(-delta*10))
  var afloat:=swim.is_swimming()
- avatar_body.rotation.x=lerpf(avatar_body.rotation.x,-PI*.43 if afloat else 0.0,1-exp(-delta*7))
- avatar_body.position.y=lerpf(avatar_body.position.y,.65 if afloat else .6,1-exp(-delta*7))
- avatar.position.y=sin(game_time*(4.4 if afloat else 10))* (.025 if move.length()>.1 else .006)
- for i in range(2):
-  var phase:=game_time*(4.2 if afloat else 9.0)+i*PI
-  arms[i].rotation.x=sin(phase)*(.9 if afloat else .5)*move.length()
-  arms[i].rotation.z=sin(phase)*.38+(-.4 if i==0 else .4) if afloat else 0.0
-  legs[i].rotation.x=sin(phase+PI)*(.32 if afloat else .55)*move.length()
+ avatar_body.rotation.x=lerpf(avatar_body.rotation.x,-PI*.5 if afloat else 0.0,1-exp(-delta*7))
+ avatar_body.position.y=lerpf(avatar_body.position.y,.70 if afloat else .6,1-exp(-delta*7))
+ avatar.position.y=sin(game_time*(4.4 if afloat else 10))* (.018 if move.length()>.1 else .006)
+ var desired_clip:StringName=&"Swim" if afloat else (&"Walk" if move.length()>.1 else &"Idle")
+ if desired_clip!=explorer_clip:
+  explorer_animation.play(desired_clip,.22);explorer_clip=desired_clip
+ explorer_animation.speed_scale=(.60+.40*move.length()) if afloat else (1.15 if swim.state==&"walk" else .8)
  swim_wake.visible=swim.state!=&"walk"
  swim_wake.position=Vector3(player.position.x,SEA_LEVEL+.035,player.position.z)
  swim_wake.rotation.y=avatar.rotation.y;swim_wake.scale=Vector3(1.25+move.length()*.2,1,1.5+move.length()*.5)

@@ -1,0 +1,84 @@
+{
+  "blender": "4.3.2",
+  "route": "two actual independent factory-startup native authoring runs; exported GLB structural comparison",
+  "scope": "geometry/material/transform conservation; no controlled-render or byte-identical rebuild claim",
+  "assets": [
+    {
+      "asset": "palm-a",
+      "first_sha256": "6eda69dcc9eb8a02b241029591611b28eccc43b379dd709a9a6366388c11bd42",
+      "second_sha256": "fb11d7daafed2c56bd3d973b8cec0041aa0cfed76b3a3328f796f283d293a3cb",
+      "triangles": 8524,
+      "vertices": 17070,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    },
+    {
+      "asset": "palm-b",
+      "first_sha256": "18b167ab953f323d84699ef7a14483f0b0d05ab293f841fd47a92162d55f61ca",
+      "second_sha256": "e0b9795379607da157b033c49249b22208cd01dcdbba64ef1e8cdf3ca0b97f62",
+      "triangles": 8524,
+      "vertices": 17070,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    },
+    {
+      "asset": "understory-a",
+      "first_sha256": "455305525f0f8bf2bc1c0d7864c23f01fbb48dd1ab5839e819ade540cea14141",
+      "second_sha256": "455305525f0f8bf2bc1c0d7864c23f01fbb48dd1ab5839e819ade540cea14141",
+      "triangles": 560,
+      "vertices": 1120,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    },
+    {
+      "asset": "understory-b",
+      "first_sha256": "08c917d52a3583ffd73d671619ee0398f439deebe4a39d2205f9eb68eddd624d",
+      "second_sha256": "08c917d52a3583ffd73d671619ee0398f439deebe4a39d2205f9eb68eddd624d",
+      "triangles": 560,
+      "vertices": 1120,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    },
+    {
+      "asset": "bush-a",
+      "first_sha256": "80029cdd4b83a11f7e903f13733113a62ec810c0e0569b90d907be63b796fafe",
+      "second_sha256": "80029cdd4b83a11f7e903f13733113a62ec810c0e0569b90d907be63b796fafe",
+      "triangles": 208,
+      "vertices": 125,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    },
+    {
+      "asset": "shore-stone-a",
+      "first_sha256": "1fb23d62486a84c3b5aaaf4a360052924e6c6e6a1b3b7216e439f0f50a6ff929",
+      "second_sha256": "1fb23d62486a84c3b5aaaf4a360052924e6c6e6a1b3b7216e439f0f50a6ff929",
+      "triangles": 84,
+      "vertices": 130,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    },
+    {
+      "asset": "shore-stone-b",
+      "first_sha256": "8ffb9d77bebfcd0c997b5042931ed15cac5830e63c97dec9d0b7bd1b726b519b",
+      "second_sha256": "8ffb9d77bebfcd0c997b5042931ed15cac5830e63c97dec9d0b7bd1b726b519b",
+      "triangles": 108,
+      "vertices": 84,
+      "vertex_multiset_rounding_m": 1e-06,
+      "same_material_definitions": true,
+      "same_node_transforms": true,
+      "passed": true
+    }
+  ]
+}

@@ -27,8 +27,16 @@ Rock 04 by Rob Tuytel and Fern 02 by Rico Cilliers/Rob Tuytel are official CC0 a
 
 ## Treasure and swimming iteration
 
-The compact treasure route, walk/wade/swim controller, swimming animation, cove shape, water shader and generated surface variation are original. Existing CC0 assets are reused; no new external model, texture, sound or game-code download is introduced. The Noto CJK subset was regenerated from the same installed upstream font to cover the new English/Chinese interface while retaining the renamed Sanctuary Sans family and full OFL notice.
+The initial compact treasure route, walk/wade/swim controller, primitive swimming animation, cove shape, water shader and generated surface variation are original. Its first gameplay iteration reused existing CC0 assets. The subsequent Blender art iteration adds the specifically credited assets below. The Noto CJK subset was regenerated from the same installed upstream font to cover the new English/Chinese interface while retaining the renamed Sanctuary Sans family and full OFL notice.
 
 The implementation consulted official Godot CharacterBody3D and Button documentation for floor snapping, slope behavior and multitouch limitations; no third-party implementation was copied:
 https://docs.godotengine.org/en/4.6/classes/class_characterbody3d.html
 https://docs.godotengine.org/en/4.6/classes/class_button.html
+
+## Blender tropical art iteration
+
+The original palm variants and broad-leaf understory geometry, editable Blender sources, coral explorer clothing/hat/sandals and keyed swim action retain this case's original creative rights. The explorer's head, skeleton and normalized Idle_A/Walking_A actions derive from Kay Lousberg's KayKit Adventurers 2.0 FREE (CC0). Selected Bush_3_A_Color1 and Rock_3_A_Color1/Rock_2_C_Color1 geometry derives from KayKit Forest Nature Pack 1.0 FREE (CC0), with new shared matte materials. Existing upstream content remains CC0 even when bundled in a modified asset; the original-rights statement does not revoke those rights.
+
+Official source pages: https://kaylousberg.itch.io/kaykit-forest and https://kaylousberg.itch.io/kaykit-adventurers . The two selected official static archives total 19,459,975 bytes; exact archive/source/export hashes and conversion details are in `game/assets/tropical/SOURCE.json`. Original notices are in `FOREST-LICENSE.txt` and `ADVENTURERS-LICENSE.txt` beside it. No paid source package, third-party script, addon or sound is included.
+
+Blender 4.3.2 native save/reopen evidence and reusable asset scripts are under `artwork`; these are genuine Blender operations but not Blender MCP calls. Game authoring remains actual Godot DCC-MCP. Shared acceptance tooling continues under the repository MIT license.
