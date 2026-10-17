@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
 from observers import observer_receipts
-from common import checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
+from common import TROPICAL_FILES, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
 
 
 def require_running(process, message):
@@ -96,6 +96,29 @@ def collect_composition_studies(frames, native_log):
     return studies
 
 
+def import_native_resources(godot, project, out):
+    """Import the clean copied source, never borrow an editor's generated cache."""
+    result = subprocess.run([godot, "--headless", "--path", str(project), "--editor", "--import", "--quit"],
+        env=isolated_env(out / "import-session"), capture_output=True, text=True, timeout=240)
+    output = result.stdout + result.stderr
+    (out / "native-import.log").write_text(output)
+    check_engine_log(output)
+    if result.returncode != 0:
+        raise RuntimeError("Fresh native resource import exited nonzero")
+    imports = []
+    for name in TROPICAL_FILES:
+        metadata = project / (name + ".import")
+        if not metadata.is_file():
+            raise RuntimeError("Fresh native scene import metadata is missing: " + name)
+        text = metadata.read_text()
+        if 'importer="scene"' not in text or 'type="PackedScene"' not in text:
+            raise RuntimeError("Fresh native resource is not an imported PackedScene: " + name)
+        imports.append({"source": name, "source_sha256": sha256(project / name),
+                        "import_metadata_sha256": sha256(metadata)})
+    return {"name": "official resource import of fresh native source copy", "passed": True,
+            "source_imports": imports, "scope": "import only; not rendered or physical-input acceptance"}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--native", type=Path, required=True)
@@ -173,6 +196,7 @@ def main():
         subprocess.run(["xdotool", "windowfocus", "--sync", windows[-1]], check=True, timeout=10)
 
     try:
+        report["checks"].append(import_native_resources(godot, project, out))
         for script, prefix in (("verify_swimming.gd", "TIDAL_SWIMMING_CHECK"),
                                ("verify_treasure.gd", "TIDAL_TREASURE_CHECK")):
             regression = subprocess.run([godot, "--headless", "--path", str(project), "--script", "res://" + script,
@@ -364,7 +388,7 @@ def main():
         stop_process(recorder)
         stop_process(runtime)
         engine_errors = []
-        for log_name in ("verify_swimming.gd.log", "verify_treasure.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
+        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
             path = out / log_name
             if path.exists():
                 try:

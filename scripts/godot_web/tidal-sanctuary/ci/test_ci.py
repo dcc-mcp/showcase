@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 from pathlib import Path
 from author_native import envelope
 from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, TROPICAL_FILES, TROPICAL_NOTICES, check_engine_log, copy_game, isolated_env, isolated_output
-from capture_native import collect_composition_studies, stop_input_runtime, wait_for
+from capture_native import import_native_resources, collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
 from export_web import copy_asset_notices, raw_include_filter
 
@@ -285,6 +285,31 @@ class HarnessTests(unittest.TestCase):
         expected |= {"assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json"}
         self.assertTrue(expected.issubset(GAME_FILES))
         self.assertEqual(len(GAME_FILES), len(set(GAME_FILES)))
+
+    def test_fresh_native_import_is_bounded_and_checks_every_scene(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); project = root / "game"; out = root / "out"; out.mkdir()
+            for name in TROPICAL_FILES:
+                path = project / name; path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"unit fixture, not a real model")
+                Path(str(path) + ".import").write_text('importer="scene"\ntype="PackedScene"\n')
+            result = Mock(returncode=0, stdout="Import complete", stderr="")
+            with patch("capture_native.subprocess.run", return_value=result) as run:
+                receipt = import_native_resources("godot", project, out)
+            self.assertEqual(run.call_args.args[0], ["godot", "--headless", "--path", str(project), "--editor", "--import", "--quit"])
+            self.assertEqual(run.call_args.kwargs["timeout"], 240)
+            self.assertEqual(len(receipt["source_imports"]), 8)
+            self.assertTrue(receipt["passed"])
+            self.assertEqual((out / "native-import.log").read_text(), "Import complete")
+
+    def test_fresh_native_import_refuses_error_nonzero_and_missing_metadata(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); out = root / "out"; out.mkdir()
+            for result in [Mock(returncode=1, stdout="", stderr=""),
+                           Mock(returncode=0, stdout="", stderr="ERROR: import failed"),
+                           Mock(returncode=0, stdout="Import complete", stderr="")]:
+                with self.subTest(result=result), patch("capture_native.subprocess.run", return_value=result), self.assertRaises(RuntimeError):
+                    import_native_resources("godot", root / "game", out)
 
     def test_tropical_manifest_has_exact_scene_and_notice_paths(self):
         names = {"palm-a", "palm-b", "understory-a", "understory-b", "bush-a",

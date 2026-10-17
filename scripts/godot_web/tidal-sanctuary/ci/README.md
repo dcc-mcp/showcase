@@ -75,3 +75,5 @@ This is a source-grounded configuration repair, not proof by itself. The unchang
 ### Blender tropical asset candidate
 
 The native/export copy manifest additionally owns eight standalone GLBs: two original palms, two original broad-leaf plants, three CC0 KayKit bush/stone derivatives and the KayKit-derived explorer. All three new CC0/source notices are copied byte-for-byte beside the Web export, bringing the total to seven. Actual Godot import and rendering remain required: a valid GLB or Blender preview alone is not Web acceptance. Shared input, engine-error, normal-exit and new-process save/LOAD guards remain unchanged.
+
+The fresh native capture copy now runs the pinned official headless editor import before regression or runtime launch. It checks the importer exit/log and all eight GLB PackedScene import descriptors, and retains `native-import.log`. No editor cache is copied from the authoring session. The first tropical-art CI failure is retained: native GLB loading failed before real input because the clean capture copy had not yet been imported; Web export already performed its own import.
