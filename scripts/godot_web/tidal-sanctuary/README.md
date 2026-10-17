@@ -1,33 +1,34 @@
 # Tidal Sanctuary
 
-An original small 3D exploration study for Godot 4.6.3 and WebGL 2.
+An original compact island treasure hunt for Godot 4.6.3 and WebGL 2. This remains an internal playable prototype under visual review.
 
-A blue-cloaked traveller arrives on a rising coastal sanctuary. Follow the weathered processional path, wake three tide lanterns, and return their light to an ancient ring. Cool weathered stone, olive foliage, and muted turquoise water share one restrained palette. The game is deliberately compact: this first study establishes the environment, movement and interaction before a larger puzzle is designed.
+Read the mariner's chart on the shore, search the leaning grove for a brass key, swim into the sheltered cove to recover a tide pearl from the red buoy, and bring it back to the ruined sanctuary. The route crosses dry ground, a continuous shallow-water ramp and swimmable sea; the northern sand beach is the return route. There is no breath timer or drowning penalty. Distant currents gently keep the playable area bounded.
 
 ## Play
 
-- WASD or arrow keys: move in camera space
-- E or Space: interact with a nearby lantern or the final ring
-- R: restart
-- L: English / Simplified Chinese
-- H: hide interface for inspection
-- Touch: drag the left side to move; tap the action button to interact or restart
-- EN / ZH button: change language without a keyboard
+- WASD / arrows: move in camera space, on land or in water
+- E / Space: read the chart, open the chest, recover or place the pearl
+- R: restart this treasure hunt
+- L or EN / ZH: English / Simplified Chinese
+- H: hide the interface
+- Touch: drag the left side to move or swim; tap the right action button
 
-Progress saves locally. No account, network gameplay, analytics or external assets are loaded by the game. Restart resets this game's local progress.
+The character automatically wades and swims according to actual water depth, and walks again on a shallow shore. The objective, clue, distance and movement state stay visible. Swimming has a horizontal body pose, limb strokes and a small surface wake. Treasure interactions open the land chest and light the sanctuary on completion.
+
+Progress is saved locally to a version-2 save. The earlier lantern-study save is left untouched. No account, network gameplay, analytics or external assets are loaded by the game. Restart affects only this game's current local progress.
 
 ## Build and review
 
-The isolated `ci` tools use the existing Showcase acceptance pattern: pinned official Godot, actual DCC-MCP author/save/restart/reopen, standalone native input smoke, real Xvfb capture, official single-thread Web export, and Chromium screenshots. Capture artifacts are unpublished review candidates. A scripted traversal is labeled as such and is separate from input verification.
+The isolated `ci` tools reuse Showcase's artifact-only acceptance architecture: pinned official Godot, actual typed DCC-MCP script and scene authoring, save, editor restart/reopen, standalone native input, real X11 capture, official single-thread Web export and actual Chromium interaction.
 
-The source has been run in the actual Godot 4.6.3 headless engine. Headless checks do not establish visual quality, browser performance, physical-device behavior, or sound quality. The first visual review must inspect the actual capture before expanding scope.
+Physical keyboard and emulated touch routes are separate from the explicitly scripted traversal movie. Capture artifacts are unpublished review candidates. A technical pass does not establish visual quality, fun, broad device performance or physical-phone compatibility. The latest actual frames must be inspected before any quality claim. No audio is present.
 
-No audio is present in this initial visual study. The art direction calls for restrained shoreline ambience and distinct interaction sound later, after picture and controls are accepted.
+Headless regressions exercise repeated shore transitions at several physics rates, stationary hysteresis, idle buoyancy, exploration bounds, save sanitization and the complete treasure loop. Native and Web acceptance separately exercise real user input, route continuity, completion and a new process loading its own saved progress.
 
-## Source and rights
+## Art and source
 
-The terrain, ruins, palette, shader, character, level layout and game logic are original for this study. Four compact tree/rock meshes are adapted from Kenney Nature Kit (CC0), with matte palette overrides. The sanctuary entrance additionally uses Poly Haven Rock 04 surfaces and Fern 02 meshes (CC0). No third-party music, sound or game code was copied. The existing Showcase capture architecture is reused within the same repository. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
+The sculpted cove, ruins, layout, character, procedural surface variation, water shader, interface and game logic are original. Existing Kenney Nature Kit tree/rock meshes and Poly Haven fern meshes / stone relief are used under CC0. Forest growth is clustered around the land cache; open wet sand gives the shore a readable transition. The world is reviewed from the ordinary follow camera, not a substitute fixed-camera composition.
 
-## Fourth visual pass: sanctuary entrance
+All exact third-party sources, hashes and conversion notices remain bundled. Sanctuary Sans is a renamed subset of Noto CJK under SIL OFL; the subset includes the new treasure and swimming labels. No third-party music, sound or game code was copied. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
 
-This is an internal layout prototype under visual review, not a finished premium game. The current pass narrows detail work to a weathered arch, broken return wall, uneven threshold, grouped fern growth and warmer ring light. Rock 04 and Fern 02 are official Poly Haven CC0 assets; their precise provenance and technical conversions are included. `hero-composition.png` and `hero-wide.png` are actual Godot fixed-camera composition studies captured after the scripted traversal, separate from ordinary camera and physical-input evidence. They do not claim manual gameplay. No additional gameplay or audio is introduced by this pass.
+The rejected darker experiment remains in history and is not the current visual baseline. No gallery, publishing manifest, merge or deployment is part of this Draft.

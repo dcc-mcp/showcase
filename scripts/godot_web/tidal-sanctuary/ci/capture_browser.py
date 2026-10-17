@@ -4,12 +4,14 @@ from __future__ import annotations
 import argparse
 import json
 import threading
+import tempfile
 import time
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from common import check_engine_log, isolated_output, sha256, write_json
 from playwright.sync_api import sync_playwright
+from gameplay import RouteDriver, complete, keyboard_direction, validate_restored
 from observers import observer_receipts, positive_integer, validate_language_frame, validate_touch_release
 
 
@@ -38,6 +40,22 @@ def wait_observer(page, console, prefix, start, timeout=15):
     raise TimeoutError(f"Actual game did not emit a fresh {prefix} receipt")
 
 
+BROWSER_ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"]
+
+
+def wait_ready(page, console, failures):
+    deadline = time.monotonic() + 150
+    while time.monotonic() < deadline and not any(item["text"].startswith("TIDAL_FRAME_READY ") for item in console):
+        if failures:
+            raise RuntimeError("Browser failed before frame readiness: " + json.dumps(failures))
+        if page.is_closed():
+            raise RuntimeError("Browser page closed before actual first frame")
+        page.wait_for_timeout(100)
+    if not any(item["text"].startswith("TIDAL_FRAME_READY ") for item in console):
+        raise RuntimeError("Actual exported Godot did not emit TIDAL_FRAME_READY after frame_post_draw")
+    page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--site", type=Path, required=True)
@@ -46,44 +64,95 @@ def main():
     out = isolated_output(args.output, args.site)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(args.site.resolve())))
     threading.Thread(target=server.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{server.server_port}/index.html"
     report = {"passed": False, "browser": "Chromium", "checks": [], "viewports": [],
               "limitations": ["Portrait uses Chromium device emulation, not a physical phone.",
                   "Rendered screenshots are not subjective visual acceptance.",
-                  "Desktop input is physical browser key events; scripted demo is not used.",
+                  "Input uses real browser keyboard/touch events with passive state observations; no scripted demo.",
                   "No multiplayer, deployment, accessibility, or broad device compatibility claim."],
               "pack_sha256": sha256(args.site / "index.pck")}
     try:
         with sync_playwright() as pw:
-            browser = pw.chromium.launch(headless=True, args=["--use-gl=angle", "--use-angle=swiftshader",
-                "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"])
-            report["browser_version"] = browser.version
             for width, height, mobile in ((1280, 720, False), (390, 844, True)):
                 label = "portrait-390x844" if mobile else "desktop-1280x720"
-                result = {"name": label, "width": width, "height": height,
-                          "passed": False, "rendered": False, "input": {"status": "not_run"},
-                          "language": {"status": "not_run"}}
+                result = {"name": label, "width": width, "height": height, "passed": False, "rendered": False,
+                          "input": {"status": "not_run"}, "language": {"status": "not_run"}, "restore": {"status": "not_run"}}
                 report["viewports"].append(result)
-                context = browser.new_context(viewport={"width": width, "height": height},
-                    device_scale_factor=1, is_mobile=mobile, has_touch=mobile)
-                page = context.new_page()
-                console, failures, requests = [], [], []
-                page.on("console", lambda event: console.append({"type": event.type, "text": event.text}))
-                page.on("pageerror", lambda error: failures.append(str(error)))
-                page.on("requestfailed", lambda request: failures.append(request.url + ": " + str(request.failure)))
-                page.on("request", lambda request: requests.append(request.url))
+                console, failures, requests, events, screenshots = [], [], [], [], []
+                restored_console, restored_failures = [], []
+                context = page = None
+                pressed = set()
+                touch_points = []
+                driver = None
+                profile = tempfile.TemporaryDirectory(prefix="tidal-" + label + "-profile-")
+
+                def launch():
+                    return pw.chromium.launch_persistent_context(profile.name, headless=True,
+                        args=BROWSER_ARGS, viewport={"width": width, "height": height}, device_scale_factor=1,
+                        is_mobile=mobile, has_touch=mobile)
+
+                def attach(target_page, target_console, target_failures):
+                    target_page.on("console", lambda event: target_console.append({"type": event.type, "text": event.text}))
+                    target_page.on("pageerror", lambda error: target_failures.append(str(error)))
+                    target_page.on("requestfailed", lambda request: target_failures.append(request.url + ": " + str(request.failure)))
+                    target_page.on("request", lambda request: requests.append(request.url))
+
+                def send_touch(kind, points):
+                    session.send("Input.dispatchTouchEvent", {"type": kind, "touchPoints": points})
+                    events.append({"time": time.monotonic(), "kind": kind, "touchPoints": [dict(item) for item in points]})
+
+                def move(direction):
+                    nonlocal touch_points
+                    if mobile:
+                        x, y = direction
+                        touch_points = [{"id": 0, "x": origin[0] + x * 65, "y": origin[1] + y * 65}]
+                        send_touch("touchMove", touch_points)
+                    else:
+                        wanted = keyboard_direction(direction)
+                        for key in sorted(pressed - wanted):
+                            page.keyboard.up(key)
+                            events.append({"time": time.monotonic(), "kind": "keyup", "key": key})
+                            pressed.remove(key)
+                        for key in sorted(wanted - pressed):
+                            page.keyboard.down(key)
+                            events.append({"time": time.monotonic(), "kind": "keydown", "key": key})
+                            pressed.add(key)
+
+                def interact(state):
+                    if mobile:
+                        x, y, w, h = state["action_rect"]
+                        action = {"id": 1, "x": x + w / 2, "y": y + h / 2}
+                        if not 0 <= action["x"] <= width or not 0 <= action["y"] <= height:
+                            raise RuntimeError("Actual touch action button is outside the rendered viewport")
+                        send_touch("touchStart", touch_points + [action])
+                        page.wait_for_timeout(90)
+                        send_touch("touchEnd", touch_points)
+                    else:
+                        page.keyboard.press("e", delay=80)
+                        events.append({"time": time.monotonic(), "kind": "keypress", "key": "e"})
+
+                def states():
+                    if page.is_closed() or any(item["text"].startswith("TIDAL_FINAL ") for item in console):
+                        raise RuntimeError("Game exited during actual browser-input route")
+                    if failures:
+                        raise RuntimeError("Browser errors during actual input: " + json.dumps(failures))
+                    return observer_receipts(console, "TIDAL_STATE")
+
+                def screenshot(name, state):
+                    file = out / (label + "-" + name)
+                    page.screenshot(path=str(file))
+                    screenshots.append({"name": file.name, "kind": "physical-input-route", "state": state,
+                                        "sha256": sha256(file), "bytes": file.stat().st_size})
+
                 try:
-                    response = page.goto(f"http://127.0.0.1:{server.server_port}/index.html", wait_until="domcontentloaded", timeout=60000)
+                    context = launch()
+                    page = context.pages[0]
+                    report["browser_version"] = context.browser.version if context.browser else page.evaluate("navigator.userAgent")
+                    attach(page, console, failures)
+                    response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
-                    deadline = time.monotonic() + 150
-                    while time.monotonic() < deadline and not any("TIDAL_FRAME_READY" in line["text"] for line in console):
-                        if failures:
-                            raise RuntimeError("Browser failed before frame readiness: " + json.dumps(failures))
-                        page.wait_for_timeout(100)
-                    if not any("TIDAL_FRAME_READY" in line["text"] for line in console):
-                        raise RuntimeError("Actual exported Godot did not emit TIDAL_FRAME_READY after frame_post_draw")
-                    # Observe a browser compositor turn too; no invented loading-delay heuristic.
-                    page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                    wait_ready(page, console, failures)
                     canvas = page.locator("#canvas")
                     canvas.focus()
                     bounds = canvas.bounding_box()
@@ -93,88 +162,111 @@ def main():
                         raise RuntimeError("Web shell overflows horizontally at requested viewport")
                     page.screenshot(path=str(out / (label + ".png")))
                     result.update({"canvas": bounds, "rendered": True,
-                        "ready_log": next(line["text"] for line in console if "TIDAL_FRAME_READY" in line["text"]),
+                        "ready_log": next(item["text"] for item in console if item["text"].startswith("TIDAL_FRAME_READY ")),
                         "loaded_wasm": any(url.endswith(".wasm") for url in requests),
                         "loaded_pack": any(url.endswith(".pck") for url in requests)})
                     if not result["loaded_wasm"] or not result["loaded_pack"]:
                         raise RuntimeError("Screenshot lacked actual runtime/pack requests")
                     report["checks"].append({"name": label + " actual WebGL 2 Godot scene", "passed": True})
                     if not mobile:
-                        result["input"] = {"status": "running", "route": "physical browser W/E", "timeout_seconds": 15}
-                        page.keyboard.down("w")
-                        started = time.monotonic()
-                        try:
-                            deadline = started + 15
-                            while time.monotonic() < deadline and not any("TIDAL_LANTERN 0" in line["text"] for line in console):
-                                # Distinct keydown/up events feed the real Godot _unhandled_input.
-                                page.keyboard.press("e", delay=80)
-                                page.wait_for_timeout(100)
-                        finally:
-                            page.keyboard.up("w")
-                        result["input"]["elapsed_seconds"] = round(time.monotonic() - started, 3)
-                        if not any("TIDAL_LANTERN 0" in line["text"] for line in console):
-                            result["input"]["status"] = "failed"
-                            raise RuntimeError("Browser W/E input did not activate actual lantern I after 15 seconds")
-                        page.screenshot(path=str(out / "desktop-after-w-e.png"))
-                        result["input"]["status"] = "passed"
-                        report["checks"].append({"name": "browser W/E activates actual lantern I", "passed": True})
-                        result["language"] = {"status": "running", "route": "physical browser L"}
+                        result["language"] = {"status": "running", "route": "physical browser L at fresh quest start"}
                         previous_change = last_observer_id(console, "TIDAL_LANGUAGE_FRAME", "change_id")
-                        language_boundary = len(console)
-                        canvas.focus()
+                        boundary = len(console)
                         page.keyboard.press("l", delay=80)
-                        language_receipt = wait_observer(page, console, "TIDAL_LANGUAGE_FRAME", language_boundary)
-                        result["language"]["receipt"] = language_receipt
-                        validate_language_frame(language_receipt, previous_change)
-                        page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+                        language = wait_observer(page, console, "TIDAL_LANGUAGE_FRAME", boundary)
+                        validate_language_frame(language, previous_change)
+                        result["language"].update({"status": "passed", "receipt": language})
                         page.screenshot(path=str(out / "desktop-zh.png"))
-                        result["language"]["status"] = "passed"
-                        report["checks"].append({"name": "physical L changes sampled rendered desktop UI from English to Chinese", "passed": True})
+                        # The real second keypress restores English; never edit UI/state directly.
+                        boundary = len(console)
+                        page.keyboard.press("l", delay=80)
+                        reverted = wait_observer(page, console, "TIDAL_LANGUAGE_FRAME", boundary)
+                        if reverted.get("language") != "en" or reverted.get("trigger") != "key_L":
+                            raise RuntimeError("Second actual L key did not restore English")
                     else:
-                        result["input"] = {"status": "running", "route": "actual Chromium-emulated touch drag",
-                                           "hold_seconds": 2, "receipt_timeout_seconds": 15}
+                        result["language"] = {"status": "not_requested", "reason": "Desktop independently checks the actual Chinese UI"}
+                    result["input"] = {"status": "running", "route": "uninterrupted Chromium touch drag with second-finger action taps" if mobile else "physical browser WASD/E"}
+                    if mobile:
+                        session = context.new_cdp_session(page)
+                        origin = (width * .22, height * .72)
                         previous_gesture = last_observer_id(console, "TIDAL_TOUCH_RELEASE", "gesture_id")
                         touch_boundary = len(console)
-                        session = context.new_cdp_session(page)
-                        session.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [{"id": 0, "x": 80, "y": 600}]})
-                        try:
-                            session.send("Input.dispatchTouchEvent", {"type": "touchMove", "touchPoints": [{"id": 0, "x": 80, "y": 540}]})
-                            page.wait_for_timeout(2000)
-                        finally:
-                            session.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
-                        touch_receipt = wait_observer(page, console, "TIDAL_TOUCH_RELEASE", touch_boundary)
-                        result["input"]["receipt"] = touch_receipt
-                        displacement = validate_touch_release(touch_receipt, previous_gesture, expected_touch_index=0)
-                        page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
-                        page.screenshot(path=str(out / "portrait-after-touch.png"))
-                        result["input"].update({"status": "passed", "horizontal_displacement": displacement,
-                            "limitation": "One emulated gesture; not a physical-phone compatibility test"})
-                        report["checks"].append({"name": "one portrait touch gesture moves the actual player more than 0.25 horizontally", "passed": True,
-                                                "horizontal_displacement": displacement})
+                        touch_points = [{"id": 0, "x": origin[0], "y": origin[1]}]
+                        send_touch("touchStart", touch_points)
+                    driver = RouteDriver(states, move, interact, lambda seconds: page.wait_for_timeout(seconds * 1000), screenshot)
+                    try:
+                        route = driver.run()
+                    finally:
+                        if mobile and touch_points:
+                            send_touch("touchEnd", [])
+                            touch_points = []
+                        for key in list(pressed):
+                            page.keyboard.up(key)
+                            pressed.remove(key)
+                    if mobile:
+                        receipt = wait_observer(page, console, "TIDAL_TOUCH_RELEASE", touch_boundary)
+                        distance = validate_touch_release(receipt, previous_gesture, expected_touch_index=0)
+                        result["input"]["touch_release"] = receipt
+                        result["input"]["horizontal_displacement"] = distance
+                    result["input"].update({"status": "passed", "route_receipt": route, "screenshots": screenshots})
+                    if len(screenshots) != 5:
+                        raise RuntimeError("Actual browser route did not capture its five playable milestones")
+                    report["checks"].append({"name": label + " actual input completes treasure loop and walks/wades/swims/returns to shore", "passed": True})
+
+                    # Wait for a real post-route save, then terminate Chromium entirely.
+                    # A new Chromium OS process must restore the same origin's IndexedDB.
+                    boundary = len(console)
+                    saved = wait_observer(page, console, "TIDAL_SAVE", boundary, timeout=20)
+                    if not complete(saved):
+                        raise RuntimeError("Actual Web save receipt did not contain completed treasure progress")
+                    page.wait_for_timeout(2500)
+                    check_engine_log("\n".join(item["text"] for item in console))
+                    result["restore"] = {"status": "running", "saved": saved, "fresh_browser_process": True}
+                    context.close()
+                    context = None
+                    context = launch()
+                    page = context.pages[0]
+                    attach(page, restored_console, restored_failures)
+                    response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
+                    if response is None or response.status != 200:
+                        raise RuntimeError("Fresh Chromium process could not load staged Web entry")
+                    wait_ready(page, restored_console, restored_failures)
+                    loads = observer_receipts(restored_console, "TIDAL_LOAD")
+                    if len(loads) != 1:
+                        raise RuntimeError("Fresh Chromium process must emit exactly one load receipt")
+                    validate_restored(loads[0], saved)
+                    page.screenshot(path=str(out / (label + "-restored.png")))
+                    result["restore"].update({"status": "passed", "loaded": loads[0]})
+                    report["checks"].append({"name": label + " fresh Chromium process restores completed treasure quest", "passed": True})
                     result["passed"] = True
                 except Exception as error:
                     result["blocker"] = str(error)
-                    for stage in ("input", "language"):
+                    for stage in ("input", "language", "restore"):
                         if result[stage]["status"] == "running":
                             result[stage]["status"] = "failed"
                     try:
-                        page.screenshot(path=str(out / (label + "-failure.png")))
+                        if page is not None:
+                            page.screenshot(path=str(out / (label + "-failure.png")))
                     except Exception as screenshot_error:
                         result["failure_screenshot_error"] = str(screenshot_error)
-                    # Keep going: portrait evidence does not depend on desktop input success.
+                    # Portrait evidence is independent of desktop input/language success.
                 finally:
-                    try:
-                        check_engine_log("\n".join(line["text"] for line in console))
-                    except RuntimeError as error:
-                        result["engine_error"] = str(error)
-                        result["passed"] = False
-                    if failures:
-                        result["browser_errors"] = failures
-                        result["passed"] = False
-                    write_json(out / (label + "-console.json"), {"console": console, "failures": failures})
+                    if context is not None:
+                        context.close()
+                    profile.cleanup()
+                    for name, lines, errors in (("initial", console, failures), ("restored", restored_console, restored_failures)):
+                        try:
+                            check_engine_log("\n".join(item["text"] for item in lines))
+                        except RuntimeError as error:
+                            result[name + "_engine_error"] = str(error)
+                            result["passed"] = False
+                        if errors:
+                            result[name + "_browser_errors"] = errors
+                            result["passed"] = False
+                        write_json(out / (label + "-" + name + "-console.json"), {"console": lines, "failures": errors})
+                    write_json(out / (label + "-input-route.json"), {"input_events": events,
+                        "samples": driver.samples if driver else [], "milestones": driver.milestones if driver else [], "screenshots": screenshots})
                     write_json(out / (label + "-result.json"), result)
-                    context.close()
-            browser.close()
         failed = [item["name"] for item in report["viewports"] if not item["passed"]]
         if failed:
             raise RuntimeError("Viewport acceptance failed: " + ", ".join(failed) + "; inspect independent result JSON files")

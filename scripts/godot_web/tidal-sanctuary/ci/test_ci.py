@@ -142,7 +142,7 @@ class HarnessTests(unittest.TestCase):
 
     def language_receipt(self):
         return {"schema": 1, "change_id": 1, "previous": "en", "language": "zh", "trigger": "key_L",
-                "labels": {**CHINESE_LABELS, "prompt": "海的记忆正在苏醒"}, "missing_codepoints": []}
+                "labels": {**CHINESE_LABELS, "prompt": "E · 阅读海图"}, "missing_codepoints": []}
 
     def test_touch_validation_computes_actual_horizontal_distance(self):
         self.assertAlmostEqual(validate_touch_release(self.touch_receipt()), .5)
@@ -177,7 +177,7 @@ class HarnessTests(unittest.TestCase):
     def test_language_validation_requires_actual_rendered_chinese_labels(self):
         labels = validate_language_frame(self.language_receipt())
         self.assertEqual(labels["title"], "潮 汐 圣 所")
-        self.assertEqual(labels["prompt"], "海的记忆正在苏醒")
+        self.assertEqual(labels["prompt"], "E · 阅读海图")
 
     def test_language_validation_rejects_untranslated_prompt_and_missing_glyph(self):
         receipt = self.language_receipt()

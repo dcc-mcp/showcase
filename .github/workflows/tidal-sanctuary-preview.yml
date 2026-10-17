@@ -16,7 +16,7 @@ permissions:
 jobs:
   original-3d:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
       RECIPE: scripts/godot_web/tidal-sanctuary
       LIBGL_ALWAYS_SOFTWARE: '1'
@@ -60,7 +60,7 @@ jobs:
           xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/author_native.py" \
             --source "$RECIPE/game" --godot Godot_v4.6.3-stable_linux.x86_64 \
             --output "$RUNNER_TEMP/tidal-author"
-      - name: Actual native W/E/R smoke and 18-second X11 scripted traversal
+      - name: Actual native treasure/swim route, fresh-process save and scripted sea video
         id: native
         shell: bash
         run: |
@@ -101,7 +101,7 @@ jobs:
           python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
             --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/tidal-templates/web_nothreads_release.zip" \
             --license-dir play/runtime --output "$RUNNER_TEMP/tidal-web"
-      - name: Real Chromium desktop and portrait captures
+      - name: Real Chromium keyboard/touch treasure routes and fresh-process save restoration
         if: ${{ !cancelled() && steps.export.outcome == 'success' }}
         run: python "$RECIPE/ci/capture_browser.py" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
       - name: Verify tracked source was not modified

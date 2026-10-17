@@ -61,12 +61,12 @@ def validate_touch_release(receipt, previous_gesture_id=0, expected_touch_index=
 
 CHINESE_LABELS = {
     "title": "潮 汐 圣 所",
-    "subtitle": "一段宁静旅程 · 可玩原型",
-    "objective": "点亮三座潮汐灯",
-    "footer": "方向键移动 · E 互动 · R 重新开始 · L 语言",
-    "action": "E · 点亮",
+    "subtitle": "岸边的石台上留着一张海图",
+    "objective": "寻找航海图",
+    "footer": "方向键行走或游泳 · E 互动 · R 重来 · L 语言",
+    "action": "E · 互动",
 }
-CHINESE_PROMPTS = ("", "海的记忆正在苏醒", "E · 点亮潮汐灯")
+CHINESE_PROMPTS = ("", "E · 阅读海图")
 
 
 def validate_language_frame(receipt, previous_change_id=0):

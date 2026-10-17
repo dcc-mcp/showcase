@@ -1,6 +1,8 @@
 extends Node3D
 
-const SAVE_PATH = "user://tidal-sanctuary-v1.json"
+const SAVE_PATH = "user://tidal-sanctuary-v2.json"
+const SwimController = preload("res://swim_controller.gd")
+const SEA_LEVEL := -0.15
 var rng := RandomNumberGenerator.new()
 var noise := FastNoiseLite.new()
 var terrain_mesh: MeshInstance3D
@@ -10,7 +12,7 @@ var camera: Camera3D
 var lanterns: Array[Node3D] = []
 var lantern_lights: Array[OmniLight3D] = []
 var activated: Array[bool] = [false,false,false]
-var lantern_points := [Vector3(3.8,0,6.1),Vector3(-4.7,0,0.2),Vector3(2.5,0,-6.7)]
+var lantern_points := [Vector3(1.3,0,7.8),Vector3(-3.8,0,3.4),Vector3(8.2,0,5.5)]
 var sky_env: WorldEnvironment
 var beacon: Node3D
 var beacon_ring: MeshInstance3D
@@ -59,6 +61,21 @@ var touch_gesture_id:=0
 var language_change_id:=0
 var hero_camera_locked:=false
 var stone_materials:Array[StandardMaterial3D]=[]
+var swim := SwimController.new()
+var avatar_body:Node3D
+var arms:Array[Node3D]=[]
+var legs:Array[Node3D]=[]
+var swim_wake:MeshInstance3D
+var compass:Label
+var state_clock:=0.0
+var sample_id:=0
+var hint_text:=""
+var chest_lids:Array[Node3D]=[]
+var route_points:Array[Vector3]=[]
+var route_phase:=0
+var demo_captures:Dictionary={}
+var loaded_found:=false
+var last_move:=Vector3.ZERO
 var fern_material:StandardMaterial3D
 var fern_meshes:Array[Mesh]=[]
 
@@ -101,8 +118,11 @@ func _ready() -> void:
  load_game()
  if demo:
   activated=[false,false,false]
-  player.position=Vector3(1.3,height_at(1.3,10.0)+.95,10)
+  beacon_awakened=false
+  player.position=Vector3(1.3,height_at(1.3,10.0)+.08,10)
+ route_points=[lantern_points[0],lantern_points[1],Vector3(1.5,0,6.2),lantern_points[2],Vector3(7,0,.5),Vector3(2,0,-3),beacon.position]
  update_state()
+ emit_load_receipt()
  if "--audit" in OS.get_cmdline_user_args(): audit.call_deferred()
  mark_frame_ready.call_deferred()
  print("TIDAL_READY ",JSON.stringify({"nodes":count_nodes(self),"renderer":RenderingServer.get_current_rendering_method(),"player":str(player.position),"saved":activated}))
@@ -121,7 +141,7 @@ func make_environment() -> void:
  env.sky=sky
  env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR
  env.ambient_light_color=Color("8faec5")
- env.ambient_light_energy=.28
+ env.ambient_light_energy=.34
  env.tonemap_mode=Environment.TONE_MAPPER_ACES
  env.tonemap_exposure=.95
  env.fog_enabled=true
@@ -134,7 +154,7 @@ func make_environment() -> void:
  var sun := DirectionalLight3D.new()
  sun.name="LateAfternoonSun"
  sun.rotation_degrees=Vector3(-43,-32,0)
- sun.light_color=Color("ffdab0")
+ sun.light_color=Color("ffe4c3")
  sun.light_energy=.82
  sun.shadow_enabled=true
  sun.shadow_bias=.35
@@ -151,7 +171,8 @@ func make_environment() -> void:
  var water := ShaderMaterial.new()
  water.shader=load("res://water.gdshader")
  sea.material_override=water
- sea.position.y=-.15
+ sea.position.y=SEA_LEVEL
+ sea.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
  add_child(sea)
 
 func shore_radius(a: float) -> float:
@@ -167,28 +188,25 @@ func height_at(x: float,z: float) -> float:
  var base:=1.45+3.25*north
  var shoulder:=.65*exp(-pow((x+5.0)/3.2,2.0)-pow((z+1.5)/6.5,2.0))
  var shore:=smoothstep(1.04,.83,r)
- var variation:=noise.get_noise_2d(x,z)*.30
+ var variation:=noise.get_noise_2d(x,z)*.17
  var plateau:=smoothstep(-4.5,-7.0,z)*(1.0-smoothstep(4.2,6.0,abs(x)))
- var land:=base+shoulder+variation
- land=lerpf(land,4.55,plateau)
- return -.60+shore*land
+ var land:=lerpf(base+shoulder+variation,4.55,plateau)
+ # Eroded cove: continuous sand ramp, never an invisible coastal wall.
+ var cove:=2.9*exp(-pow((x-8.0)/5.1,2.0)-pow((z-5.0)/4.5,2.0))
+ return -.60+shore*land-2.7*smoothstep(.98,1.36,r)-cove
 
 func path_x(z:float) -> float:
  return 1.7*sin(z*.4)
 
 func terrain_color(p: Vector3) -> Color:
- var r:=island_radius(p.x,p.z)
- var patch:=noise.get_noise_2d(p.x*.65+35,p.z*.65-50)*.5+.5
- var c:=Color("62795e").lerp(Color("84916d"),smoothstep(.30,.72,patch))
- var path_width:=1.10+noise.get_noise_2d(p.x*2,p.z*.8)*.18
- var path_blend:=1.0-smoothstep(path_width,path_width+.45,abs(p.x-path_x(p.z)))
- if p.z<12 and p.z> -9:c=c.lerp(Color("9b8b6d"),path_blend*.9)
- if r>.79:
-  var strata:=sin(p.y*5.0+noise.get_noise_2d(p.x*2,p.z*2)*1.2)*.5+.5
-  c=Color("596a66").lerp(Color("849083"),strata*.55)
-  if p.z>5.5:c=c.lerp(Color("afa184"),smoothstep(.78,.97,r)*.75)
- if p.y<.08:c=Color("355c59")
- if p.z< -6.5 and abs(p.x)<4.9:c=c.lerp(Color("7d8b7c"),.6)
+ var patch:=noise.get_noise_2d(p.x*.72+35,p.z*.72-50)*.5+.5
+ var c:=Color("6a8064").lerp(Color("87916e"),smoothstep(.30,.72,patch))
+ var sand:=Color("b9b496").lerp(Color("a7aa8f"),patch*.35)
+ c=c.lerp(sand,1.0-smoothstep(.35,1.3,p.y))
+ var trail:=1.0-smoothstep(.55,1.7,abs(p.x-path_x(p.z)))
+ if p.z<3 and p.z> -8:c=c.lerp(Color("a1a18a"),trail*.55)
+ if p.y<.0:c=c.lerp(Color("718c7c"),smoothstep(0.0,-1.6,p.y)*.6)
+ if p.z< -6.5 and abs(p.x)<4.9:c=c.lerp(Color("969d8b"),.32)
  return c
 
 func triangle(st: SurfaceTool,a:Vector3,b:Vector3,c:Vector3,ca:Color,cb:Color,cc:Color) -> void:
@@ -199,29 +217,27 @@ func triangle(st: SurfaceTool,a:Vector3,b:Vector3,c:Vector3,ca:Color,cb:Color,cc
  st.set_color(cb);st.add_vertex(b)
 
 func make_terrain() -> void:
- var st:=SurfaceTool.new()
- st.begin(Mesh.PRIMITIVE_TRIANGLES)
- var step:=.65
- for iz in range(56):
-  for ix in range(44):
-   var x:float=-14.3+ix*step
-   var z:float=-18.2+iz*step
-   var a:=Vector3(x,height_at(x,z),z)
-   var b:=Vector3(x+step,height_at(x+step,z),z)
-   var c:=Vector3(x,height_at(x,z+step),z+step)
-   var d:=Vector3(x+step,height_at(x+step,z+step),z+step)
-   if minf(minf(a.y,b.y),minf(c.y,d.y))<-.58: continue
-   triangle(st,a,c,b,terrain_color(a),terrain_color(c),terrain_color(b))
-   triangle(st,b,c,d,terrain_color(b),terrain_color(c),terrain_color(d))
- terrain_mesh=MeshInstance3D.new()
- terrain_mesh.name="SculptedIsland"
- terrain_mesh.mesh=st.commit()
- var m:=mat(Color.WHITE)
- m.vertex_color_use_as_albedo=true
- m.vertex_color_is_srgb=true
- terrain_mesh.material_override=m
- add_child(terrain_mesh)
- terrain_mesh.create_trimesh_collision()
+ var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
+ var step:=.48
+ for iz in range(100):
+  for ix in range(100):
+   var x:float=-24.0+ix*step;var z:float=-24.0+iz*step
+   var a:=Vector3(x,height_at(x,z),z);var b:=Vector3(x+step,height_at(x+step,z),z)
+   var c:=Vector3(x,height_at(x,z+step),z+step);var d:=Vector3(x+step,height_at(x+step,z+step),z+step)
+   terrain_triangle(st,a,b,c)
+   terrain_triangle(st,b,d,c)
+ st.index()
+ terrain_mesh=MeshInstance3D.new();terrain_mesh.name="SculptedCove";terrain_mesh.mesh=st.commit()
+ var m:=mat(Color.WHITE);m.vertex_color_use_as_albedo=true;m.vertex_color_is_srgb=true
+ m.albedo_texture=surface_noise(Color("d6d7cd"),Color("ffffff"),.8)
+ m.uv1_triplanar=true;m.uv1_world_triplanar=true;m.uv1_scale=Vector3.ONE*.7
+ terrain_mesh.material_override=m;add_child(terrain_mesh);terrain_mesh.create_trimesh_collision()
+
+func terrain_triangle(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3) -> void:
+ for p in [a,b,c]:
+  var dx:=height_at(p.x+.12,p.z)-height_at(p.x-.12,p.z)
+  var dz:=height_at(p.x,p.z+.12)-height_at(p.x,p.z-.12)
+  st.set_normal(Vector3(-dx,.24,-dz).normalized());st.set_color(terrain_color(p));st.add_vertex(p)
 
 func mesh_node(mesh: Mesh, p: Vector3, m: Material, parent: Node = self) -> MeshInstance3D:
  var n:=MeshInstance3D.new()
@@ -258,41 +274,25 @@ func rock(p:Vector3,sz:Vector3,m:Material,seed_value:int) -> MeshInstance3D:
  return n
 
 func make_shore() -> void:
- # Short, translucent swash patches, never a continuous contour around the island.
- var foam_mat:=mat(Color.WHITE)
- foam_mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
- foam_mat.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
- foam_mat.vertex_color_use_as_albedo=true
- foam_mat.cull_mode=BaseMaterial3D.CULL_DISABLED
- var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
- for patch in range(11):
-  var center:=rng.randf()*TAU
-  var span:=rng.randf_range(.06,.17)
-  for i in range(9):
-   var a:=center-span*.5+span*i/9.0
-   var b:=center-span*.5+span*(i+1)/9.0
-   var r:=1.005+rng.randf_range(-.003,.003)
-   var p:=Vector3(cos(a)*12*shore_radius(a)*r,-.025,sin(a)*16.5*shore_radius(a)*r)
-   var q:=Vector3(cos(b)*12*shore_radius(b)*r,-.025,sin(b)*16.5*shore_radius(b)*r)
-   var p2:=Vector3(p.x*1.013,p.y,p.z*1.013);var q2:=Vector3(q.x*1.013,q.y,q.z*1.013)
-   var alpha:=sin(float(i)/9.0*PI)*.20
-   var edge:=Color(.67,.80,.73,0);var mid:=Color(.67,.80,.73,alpha)
-   triangle(st,p,q,p2,edge,edge,mid);triangle(st,p2,q,q2,mid,edge,mid)
- var n:=mesh_node(st.commit(),Vector3.ZERO,foam_mat);pulse_rings.append(n)
+ # Wet sand and submerged stones give the cove its readable shore boundary.
+ for i in range(26):
+  var x:=rng.randf_range(.8,12.0);var z:=rng.randf_range(1.0,10.6)
+  var h:=height_at(x,z)
+  if h<-.55 or h>.38:continue
+  var size:=rng.randf_range(.10,.35)
+  var p:=rock(Vector3(x,h+.015,z),Vector3(size,size*.35,size*.72),stone_materials[i%4],4100+i)
+  p.rotation.y=rng.randf()*TAU
 
 func make_rocks() -> void:
- for i in range(28):
-  var a:=rng.randf()*TAU
-  var r:=rng.randf_range(.91,1.035)
-  var x:=cos(a)*12*shore_radius(a)*r
-  var z:=sin(a)*16.5*shore_radius(a)*r
-  if z>7 and abs(x)<5:continue
-  var s:=rng.randf_range(1.25,2.65)
-  var path:="res://assets/shore-rock-a.tscn" if i%3==0 else "res://assets/shore-rock-d.tscn"
-  place_asset(path,Vector3(x,height_at(x,z)-.24,z),Vector3(s,s*rng.randf_range(.70,1.1),s*rng.randf_range(.85,1.3)),rng.randf()*TAU)
- # One clustered offshore formation rather than three regular bright peaks.
- for i in range(3):
-  place_asset("res://assets/shore-rock-d.tscn",Vector3(20+i*1.4,-.7,-17-i*1.7),Vector3(5.0-i*.6,5.0-i*.7,5.2),i*.7)
+ for center in [Vector3(-9,0,6),Vector3(-10,0,-2),Vector3(-7,0,-12),Vector3(8,0,-8),Vector3(11,0,-1.6)]:
+  for i in range(4):
+   var x:float=center.x+rng.randf_range(-1.4,1.4);var z:float=center.z+rng.randf_range(-1.3,1.3)
+   var size:=rng.randf_range(1.1,2.8)
+   var path:="res://assets/shore-rock-a.tscn" if i%3==0 else "res://assets/shore-rock-d.tscn"
+   place_asset(path,Vector3(x,height_at(x,z)-.20,z),Vector3(size,size*rng.randf_range(.7,1.3),size*.9),rng.randf()*TAU)
+ for i in range(4):
+  var x:float=12.6+i*.75;var z:float=5.2-i*.65
+  place_asset("res://assets/shore-rock-d.tscn",Vector3(x,-1.35,z),Vector3(2.3-i*.22,2.5-i*.3,2.2),i*.82)
 
 func place_asset(path:String,p:Vector3,sz:Vector3,yaw:float) -> Node3D:
  var node:Node3D=load(path).instantiate()
@@ -308,28 +308,28 @@ func encoded_texture(path:String) -> ImageTexture:
  return ImageTexture.create_from_image(image)
 
 func prepare_surface_assets() -> void:
- var diffuse:=encoded_texture("res://assets/polyhaven/stone-diff.jpg.bin")
  var normal:=encoded_texture("res://assets/polyhaven/stone-normal.png.bin")
  var rough:=encoded_texture("res://assets/polyhaven/stone-rough.jpg.bin")
- for tint in [Color("c5c4ad"),Color("a7b19e"),Color("c1bba4"),Color("959f91")]:
+ for tint in [Color("a7afa4"),Color("919f95"),Color("b2b5a6"),Color("96a59a")]:
   var material:=mat(tint)
-  material.albedo_texture=diffuse
-  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.38
+  material.albedo_texture=surface_noise(Color("b7bdb1"),Color("f3f0de"),1.1)
+  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.25
   material.roughness_texture=rough
-  material.uv1_triplanar=true;material.uv1_world_triplanar=true
-  material.uv1_scale=Vector3.ONE*.66
+  material.uv1_triplanar=true;material.uv1_world_triplanar=true;material.uv1_scale=Vector3.ONE*.58
   material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
   stone_materials.append(material)
- fern_material=mat(Color("a8b394"))
+ fern_material=mat(Color("a3b59a"))
  fern_material.albedo_texture=encoded_texture("res://assets/polyhaven/fern-albedo.png.bin")
- fern_material.normal_enabled=true
- fern_material.normal_texture=encoded_texture("res://assets/polyhaven/fern-normal.jpg.bin")
- fern_material.normal_scale=.45
- fern_material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
- fern_material.alpha_scissor_threshold=.38
- fern_material.cull_mode=BaseMaterial3D.CULL_DISABLED
- fern_material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+ fern_material.normal_enabled=true;fern_material.normal_texture=encoded_texture("res://assets/polyhaven/fern-normal.jpg.bin");fern_material.normal_scale=.3
+ fern_material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR;fern_material.alpha_scissor_threshold=.38
+ fern_material.cull_mode=BaseMaterial3D.CULL_DISABLED;fern_material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
  for i in range(4):fern_meshes.append(load("res://assets/polyhaven/fern-%d.res"%i))
+
+func surface_noise(dark:Color,light:Color,frequency:float) -> NoiseTexture2D:
+ var field:=FastNoiseLite.new();field.seed=713;field.frequency=.028*frequency;field.fractal_octaves=4
+ var tex:=NoiseTexture2D.new();tex.width=256;tex.height=256;tex.seamless=true;tex.generate_mipmaps=true;tex.noise=field
+ var gradient:=Gradient.new();gradient.set_color(0,dark);gradient.set_color(1,light);tex.color_ramp=gradient
+ return tex
 
 func beveled_block(p:Vector3,sz:Vector3,m:Material,seed_value:int,wear:float=.08) -> MeshInstance3D:
  var rr:=RandomNumberGenerator.new();rr.seed=seed_value
@@ -445,55 +445,72 @@ func make_sanctuary_details() -> void:
   pebble.rotation.y=rng.randf()*TAU
 
 func make_nature() -> void:
- # Authored CC0 silhouettes: open branching trees with a few thin conifers behind.
- for t in [Vector3(-7.6,4.8,6.8),Vector3(7.7,4.0,3.0),Vector3(-8.0,4.4,-3.5)]:
-  place_asset("res://assets/coastal-tree.tscn",Vector3(t.x,height_at(t.x,t.z)-.08,t.z),Vector3(t.y*.95,t.y,t.y*.85),rng.randf()*TAU)
- for t in [Vector3(-8.8,3.8,-6.0)]:
-  place_asset("res://assets/needle-pine.tscn",Vector3(t.x,height_at(t.x,t.z)-.08,t.z),Vector3.ONE*t.y,rng.randf()*TAU)
- var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
- for i in range(230):
-  var x:=rng.randf_range(-11,11);var z:=rng.randf_range(-14,12)
-  if island_radius(x,z)>.76 or abs(x-path_x(z))<2.0 or (z< -5 and abs(x)<5.3):continue
-  if noise.get_noise_2d(x*1.4+55,z*1.4)<.06:continue
-  var y:=height_at(x,z)+.02
-  var a:=rng.randf()*TAU;var w:=rng.randf_range(.045,.09);var h:=rng.randf_range(.13,.30)
-  var base:=Vector3(x,y,z);var dir:=Vector3(cos(a),0,sin(a))
-  var c:=Color("526f50").lightened(rng.randf_range(-.07,.10))
-  triangle(st,base-dir*w,base+dir*w,base+Vector3(.10,h,0),c,c,c)
-  triangle(st,base+dir*w,base-dir*w,base+Vector3(.10,h,0),c,c,c)
- var gm:=mat(Color.WHITE);gm.vertex_color_use_as_albedo=true;gm.vertex_color_is_srgb=true;gm.cull_mode=BaseMaterial3D.CULL_DISABLED
- grass.append(mesh_node(st.commit(),Vector3.ZERO,gm))
+ for info in [Vector3(-6.8,4.5,5.7),Vector3(-8.1,3.2,4.4),Vector3(-6.1,2.5,7.0),Vector3(-7.3,4.1,-3.0),Vector3(-8.9,3.1,-5),Vector3(7.7,3.8,-2.2),Vector3(9.3,2.8,-3.8)]:
+  var n:=place_asset("res://assets/coastal-tree.tscn",Vector3(info.x,height_at(info.x,info.z)-.08,info.z),Vector3(info.y*.95,info.y,info.y*.85),rng.randf()*TAU)
+  n.rotation.z=rng.randf_range(-.07,.07)
+ for center in [Vector3(-5.6,0,4.5),Vector3(-6.9,0,6.2),Vector3(-7.7,0,-2.7),Vector3(6.5,0,-2.0),Vector3(7.8,0,-4),Vector3(-3.6,0,2.0)]:
+  for i in range(10):
+   var x:float=center.x+rng.randf_range(-1.0,1.0);var z:float=center.z+rng.randf_range(-.9,.9)
+   if height_at(x,z)<.5:continue
+   var fern:=mesh_node(fern_meshes[2+i%2],Vector3(x,height_at(x,z)+.01,z),fern_material)
+   fern.scale=Vector3.ONE*rng.randf_range(1.1,2.3);fern.rotation.y=rng.randf()*TAU
+ for center in [Vector3(-5.4,0,7.7),Vector3(-8,0,1.8),Vector3(6.2,0,-1.3),Vector3(-5.9,0,-5.5)]:
+  for i in range(6):
+   var x:float=center.x+rng.randf_range(-.9,.9);var z:float=center.z+rng.randf_range(-.7,.7)
+   var size:=rng.randf_range(.4,.8)
+   rock(Vector3(x,height_at(x,z)+size*.16,z),Vector3(size,size*.65,size*.9),mat(Color("4a705e").lightened(i*.018)),4900+i)
 
 func make_player() -> void:
  player=CharacterBody3D.new();player.name="Wayfarer";add_child(player)
- player.position=Vector3(1.3,height_at(1.3,10)+.9,10)
+ player.position=Vector3(1.3,height_at(1.3,10)+.08,10)
  var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.22;shape.height=.95;col.shape=shape;col.position.y=.48;player.add_child(col)
- avatar=Node3D.new();avatar.scale=Vector3.ONE*1.3;player.add_child(avatar)
- var coat:=mat(Color("294b5d"))
- var body:=CylinderMesh.new();body.top_radius=.14;body.bottom_radius=.26;body.height=.55;body.radial_segments=10
- mesh_node(body,Vector3(0,.5,0),coat,avatar)
- var head:=SphereMesh.new();head.radius=.14;head.height=.28;head.radial_segments=12;head.rings=6
- mesh_node(head,Vector3(0,.89,-.10),mat(Color("d1b58e")),avatar)
- var hood:=SphereMesh.new();hood.radius=.19;hood.height=.37;hood.radial_segments=12;hood.rings=6
- mesh_node(hood,Vector3(0,.94,.035),coat,avatar)
- for side in [-1,1]:cylinder(Vector3(side*.21,.57,0),.055,.30,coat,avatar)
- box(Vector3(0,.57,.17),Vector3(.21,.28,.14),mat(Color("985b43")),avatar)
- for side in [-1,1]: box(Vector3(side*.1,.14,0),Vector3(.12,.28,.14),mat(Color("4a5650")),avatar)
- camera=Camera3D.new();camera.name="FollowCamera";camera.fov=55;camera.near=.18;camera.far=190;add_child(camera)
- camera.position=player.position+Vector3(-3.4,8.5,12)
- camera.look_at(player.position+Vector3(0,1.5,-2.0))
+ avatar=Node3D.new();player.add_child(avatar)
+ avatar_body=Node3D.new();avatar_body.position.y=.6;avatar.add_child(avatar_body)
+ var cloth:=mat(Color("315e72"));var skin:=mat(Color("d4b486"));var trousers:=mat(Color("405664"))
+ var torso:=CapsuleMesh.new();torso.radius=.20;torso.height=.55;torso.radial_segments=12;torso.rings=4
+ mesh_node(torso,Vector3.ZERO,cloth,avatar_body)
+ var head:=SphereMesh.new();head.radius=.16;head.height=.32;head.radial_segments=16;head.rings=8
+ mesh_node(head,Vector3(0,.4,-.035),skin,avatar_body)
+ cylinder(Vector3(0,.52,0),.20,.13,mat(Color("b8925b")),avatar_body)
+ cylinder(Vector3(0,.48,-.015),.28,.035,mat(Color("c9ab70")),avatar_body)
+ box(Vector3(0,.03,.19),Vector3(.25,.31,.16),mat(Color("a8603d")),avatar_body)
+ for side in [-1,1]:
+  var arm:=Node3D.new();arm.position=Vector3(side*.23,.13,0);avatar_body.add_child(arm);arms.append(arm)
+  cylinder(Vector3(0,-.17,0),.065,.34,cloth,arm);cylinder(Vector3(0,-.36,0),.053,.13,skin,arm)
+  var leg:=Node3D.new();leg.position=Vector3(side*.105,-.19,0);avatar_body.add_child(leg);legs.append(leg)
+  cylinder(Vector3(0,-.16,0),.075,.32,trousers,leg);box(Vector3(0,-.34,-.04),Vector3(.15,.12,.23),mat(Color("394e50")),leg)
+ var wake_mesh:=TorusMesh.new();wake_mesh.inner_radius=.27;wake_mesh.outer_radius=.32;wake_mesh.rings=24;wake_mesh.ring_segments=4
+ var wm:=mat(Color(.65,.86,.83,.45));wm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;wm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
+ swim_wake=mesh_node(wake_mesh,Vector3.ZERO,wm);swim_wake.visible=false
+ swim.safe_spawn_position=player.position
+ camera=Camera3D.new();camera.name="FollowCamera";camera.fov=55;camera.near=.18;camera.far=150;add_child(camera)
+ camera.position=player.position+Vector3(-3.4,7.3,10)
+ camera.look_at(player.position+Vector3(0,.9,-1.4))
 
 func make_lanterns() -> void:
  for i in range(3):
-  var p:Vector3=lantern_points[i];p.y=height_at(p.x,p.z);lantern_points[i]=p
-  var root:=Node3D.new();root.position=p;add_child(root);lanterns.append(root)
-  cylinder(Vector3(0,.12,0),.57,.24,material_dark,root)
-  cylinder(Vector3(0,.54,0),.20,.65,material_dark,root)
-  cylinder(Vector3(0,.9,0),.34,.10,material_gold,root)
-  var crystal:=SphereMesh.new();crystal.radius=.17;crystal.height=.38;crystal.radial_segments=8;crystal.rings=4
-  var cmat:=mat(Color("eeb95f"),.25);cmat.emission_enabled=true;cmat.emission=Color("ffc771");cmat.emission_energy_multiplier=.5
-  var gem:=mesh_node(crystal,Vector3(0,1.2,0),cmat,root);gem.name="Gem"
-  var light:=OmniLight3D.new();light.position=Vector3(0,1.3,0);light.light_color=Color("ffc771");light.omni_range=3;light.light_energy=0;root.add_child(light);lantern_lights.append(light)
+  var p:Vector3=lantern_points[i];p.y=height_at(p.x,p.z) if i<2 else SEA_LEVEL-.12;lantern_points[i]=p
+  var root:=Node3D.new();root.position=p;root.name=["MarinersChart","GroveCache","ReefCache"][i];add_child(root);lanterns.append(root)
+  if i==0:
+   beveled_block(p+Vector3(0,.35,0),Vector3(.85,.7,.7),stone_materials[0],5100,.4)
+   box(Vector3(0,.73,0),Vector3(.64,.035,.47),mat(Color("e4d9b1")),root)
+   for j in range(3):box(Vector3(-.2+j*.18,.756,0),Vector3(.055,.007,.30-j*.055),mat(Color("817b61")),root)
+  else:
+   var wood:=mat(Color("735b42"));var band:=mat(Color("bca36d"),.55)
+   if i==2:
+    cylinder(Vector3(0,.16,0),.42,.22,mat(Color("bd7150")),root)
+    cylinder(Vector3(0,.7,0),.032,.98,band,root)
+    var flag:=box(Vector3(.20,1.12,0),Vector3(.4,.26,.025),mat(Color("d5b57c")),root);flag.rotation.z=-.10
+   else:
+    box(Vector3(0,.24,0),Vector3(.82,.45,.55),wood,root)
+    for side in [-1,1]:box(Vector3(side*.27,.25,0),Vector3(.065,.48,.58),band,root)
+   var lid:=Node3D.new();lid.position=Vector3(0,.46,.27);root.add_child(lid);chest_lids.append(lid)
+   box(Vector3(0,.025,-.27),Vector3(.86,.12,.59),wood,lid)
+   if i==2:lid.visible=false
+  var crystal:=SphereMesh.new();crystal.radius=.11;crystal.height=.22;crystal.radial_segments=12;crystal.rings=6
+  var cmat:=mat(Color("efc878"),.4);cmat.emission_enabled=true;cmat.emission=Color("e7b966");cmat.emission_energy_multiplier=.18
+  var gem:=mesh_node(crystal,Vector3(0,1.0,0),cmat,root);gem.name="Gem";gem.visible=false
+  var light:=OmniLight3D.new();light.position=Vector3(0,.85,0);light.light_color=Color("ffcb88");light.omni_range=2;light.light_energy=0;root.add_child(light);lantern_lights.append(light)
 
 func make_beacon() -> void:
  beacon=Node3D.new();beacon.position=Vector3(0,height_at(0,-11.7),-11.7);add_child(beacon)
@@ -529,61 +546,102 @@ func label_at(text_value:String,size:int,color:Color) -> Label:
 func make_ui() -> void:
  ui=CanvasLayer.new();add_child(ui)
  var root:=Control.new();root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);root.mouse_filter=Control.MOUSE_FILTER_IGNORE;ui.add_child(root)
- title_panel=ui_panel(Vector2(16,16),Vector2(304,94),Color(.025,.075,.065,.72),root)
- footer_panel=ui_panel(Vector2(20,0),Vector2(460,30),Color(.025,.075,.065,.68),root)
- title=label_at("TIDAL  SANCTUARY",16,Color("fff2d2"));title.position=Vector2(28,23);root.add_child(title)
- subtitle=label_at("A quiet voyage · playable study",12,Color("e2e2c9"));subtitle.position=Vector2(36,57);root.add_child(subtitle);subtitle.visible=false
- objective=label_at("Wake three tide lanterns",17,Color("fff4d7"));objective.position=Vector2(28,48);root.add_child(objective)
- progress=label_at("○  ○  ○",18,Color("cce5ce"));progress.position=Vector2(28,76);root.add_child(progress)
- prompt_panel=ui_panel(Vector2.ZERO,Vector2(440,36),Color(.025,.075,.065,.76),root)
- prompt=label_at("",17,Color("fff1ce"));prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;prompt.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);prompt.position=Vector2(-300,-106);prompt.size=Vector2(600,40);root.add_child(prompt)
- message=label_at("W A S D / arrows  ·  E interact  ·  R restart  ·  L language",13,Color("e2e7d2"));message.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);message.position=Vector2(34,-38);root.add_child(message)
- action_button=Button.new();var action:=action_button;action.add_theme_font_override("font",game_font);action.text="E  ·  LIGHT";action.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);action.position=Vector2(-160,-75);action.size=Vector2(130,48);
- var button_style:=StyleBoxFlat.new();button_style.bg_color=Color(.05,.16,.14,.94);button_style.border_color=Color("cfba87");button_style.set_border_width_all(1);button_style.set_corner_radius_all(8)
- action.add_theme_stylebox_override("normal",button_style);action.add_theme_color_override("font_color",Color("fff1d2"));action.add_theme_font_size_override("font_size",16)
- action.pressed.connect(on_action_pressed);root.add_child(action)
- language_button=Button.new();language_button.text="EN";language_button.add_theme_font_override("font",game_font);language_button.add_theme_font_size_override("font_size",12);language_button.add_theme_stylebox_override("normal",button_style);language_button.add_theme_color_override("font_color",Color("fff1d2"));language_button.size=Vector2(40,28);language_button.pressed.connect(change_language.bind("button"));root.add_child(language_button)
+ title_panel=ui_panel(Vector2(16,16),Vector2(350,120),Color(.035,.10,.12,.84),root)
+ footer_panel=ui_panel(Vector2(20,0),Vector2(460,30),Color(.035,.10,.12,.72),root)
+ title=label_at("TIDAL SANCTUARY",13,Color("b7d6d0"));title.position=Vector2(28,25);root.add_child(title)
+ objective=label_at("Find the mariner's chart",18,Color("f4e9cb"));objective.position=Vector2(28,49);root.add_child(objective)
+ progress=label_at("",13,Color("dfca94"));progress.position=Vector2(28,78);root.add_child(progress)
+ subtitle=label_at("",12,Color("bdd1ca"));subtitle.position=Vector2(28,102);root.add_child(subtitle)
+ compass=label_at("",13,Color("e8dcae"));compass.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;root.add_child(compass)
+ prompt_panel=ui_panel(Vector2.ZERO,Vector2(440,38),Color(.035,.10,.12,.86),root)
+ prompt=label_at("",16,Color("fff1ce"));prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;root.add_child(prompt)
+ message=label_at("",12,Color("d2e2d9"));root.add_child(message)
+ action_button=Button.new();action_button.add_theme_font_override("font",game_font);action_button.size=Vector2(132,50)
+ var style:=StyleBoxFlat.new();style.bg_color=Color(.055,.17,.19,.95);style.border_color=Color("cdb887");style.set_border_width_all(1);style.set_corner_radius_all(12)
+ action_button.add_theme_stylebox_override("normal",style);action_button.add_theme_color_override("font_color",Color("fff1d2"));action_button.add_theme_font_size_override("font_size",15);action_button.pressed.connect(on_action_pressed);root.add_child(action_button)
+ language_button=Button.new();language_button.text="EN";language_button.add_theme_font_override("font",game_font);language_button.add_theme_font_size_override("font_size",12);language_button.add_theme_stylebox_override("normal",style);language_button.add_theme_color_override("font_color",Color("fff1d2"));language_button.size=Vector2(40,28);language_button.pressed.connect(change_language.bind("button"));root.add_child(language_button)
 
 func update_state() -> void:
- var count:=0
+ completed=activated==[true,true,true]
  for i in range(3):
-  if activated[i]:count+=1
-  lantern_lights[i].light_energy=1.2 if activated[i] else .0
-  var gem:MeshInstance3D=lanterns[i].get_node("Gem")
-  var m:StandardMaterial3D=gem.material_override
-  m.emission_energy_multiplier=2.5 if activated[i] else .3
- progress.text="%s  %s  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]
- completed=count==3
- beam.visible=completed
- beacon.get_node("RingLight").light_energy=.7 if beacon_awakened else (.25 if completed else 0.0)
+  lantern_lights[i].light_energy=.35 if activated[i] else 0.0
+  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.visible=activated[i] and i>0
+ if chest_lids.size()>0:chest_lids[0].rotation.x=-1.1 if activated[1] else 0.0
+ beam.visible=beacon_awakened
+ beacon.get_node("RingLight").light_energy=.65 if beacon_awakened else (.2 if completed else 0.0)
  var ring_material:StandardMaterial3D=beacon_ring.material_override
- ring_material.emission_energy_multiplier=1.5 if beacon_awakened else (.6 if completed else .0)
- action_button.visible=true
+ ring_material.emission_energy_multiplier=.65 if beacon_awakened else (.18 if completed else 0.0)
+ var stage:=quest_stage()
+ var english:=["Find the mariner's chart","Search beneath the grove","Swim to the red reef buoy","Bring the pearl to the ruins","Treasure recovered"]
+ var chinese:=["寻找航海图","搜寻树林下的宝箱","游向红色浮标","将珍珠带回遗迹","寻宝完成"]
+ objective.text=english[stage] if language=="en" else chinese[stage]
+ title.text="TIDAL SANCTUARY" if language=="en" else "潮 汐 圣 所"
+ progress.text=("Chart  %s    Key  %s    Pearl  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]) if language=="en" else ("海图 %s   钥匙 %s   珍珠 %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"])
+ var clues:=["A weathered chart waits on the shore.","Look between the leaning trees.","A red flag marks the sheltered cove.","Leave the water by the northern beach.","The sea's story is yours. Progress saved."]
+ var zh:=["岸边的石台上留着一张海图","线索藏在倾斜的树木之间","红旗标记着海湾里的宝藏","从北侧沙滩上岸，返回遗迹","海的故事属于你，进度已保存"]
+ subtitle.text=clues[stage] if language=="en" else zh[stage]
  language_button.text="EN" if language=="en" else "ZH"
- objective.text=("The sanctuary remembers" if completed else "Wake three tide lanterns") if language=="en" else ("圣所已苏醒" if completed else "点亮三座潮汐灯")
- title.text="TIDAL  SANCTUARY" if language=="en" else "潮 汐 圣 所"
- subtitle.text="A quiet voyage · playable study" if language=="en" else "一段宁静旅程 · 可玩原型"
- message.text="W A S D / arrows  ·  E interact  ·  R restart  ·  L language" if language=="en" else "方向键移动 · E 互动 · R 重新开始 · L 语言"
- action_button.text=("R · RESTART" if beacon_awakened else ("E · RETURN" if completed else "E · LIGHT")) if language=="en" else ("R · 重新开始" if beacon_awakened else ("E · 归还" if completed else "E · 点亮"))
+ action_button.text=("RESTART" if beacon_awakened else "E · INTERACT") if language=="en" else ("重新开始" if beacon_awakened else "E · 互动")
+ update_prompt()
+
+func quest_stage() -> int:
+ if beacon_awakened:return 4
+ for i in range(3):
+  if not activated[i]:return i
+ return 3
+
+func target_point() -> Vector3:
+ return beacon.position if quest_stage()>=3 else lantern_points[quest_stage()]
+
+func flat_distance(a:Vector3,b:Vector3) -> float:
+ return Vector2(a.x-b.x,a.z-b.z).length()
+
+func update_prompt() -> void:
+ if game_time<tip_until:
+  prompt.text=hint_text;return
  if beacon_awakened:
-  objective.text="You brought the light home" if language=="en" else "你带回了光"
-  prompt.text="R · Begin another quiet voyage" if language=="en" else "R · 再启一段宁静旅程"
- elif game_time<tip_until:prompt.text="A memory returns to the sea" if language=="en" else "海的记忆正在苏醒"
- elif completed:prompt.text="Return to the ring of light" if language=="en" else "返回光之环"
+  prompt.text="Treasure recovered · saved locally" if language=="en" else "寻宝完成 · 进度已保存";return
+ var stage:=quest_stage()
+ if flat_distance(player.position,target_point())<1.55:
+  var en:=["E · Read the chart","E · Open the grove chest","E · Recover the tide pearl","E · Place the pearl"]
+  var zh:=["E · 阅读海图","E · 打开林间宝箱","E · 取回潮汐珍珠","E · 放入珍珠"]
+  prompt.text=en[stage] if language=="en" else zh[stage]
+ elif swim.is_swimming():prompt.text="Swim with the same controls · no breath limit" if language=="en" else "方向键游泳 · 可自由停留水面"
+ else:prompt.text=""
+
+func progress_data() -> Dictionary:
+ return {"quest_stage":quest_stage(),"treasures":[activated[1],activated[2]],"completed":beacon_awakened,"position":[player.position.x,player.position.y,player.position.z],"language":language}
+
+func emit_load_receipt() -> void:
+ var data:=progress_data();data["schema"]=1;data["found"]=loaded_found
+ print("TIDAL_LOAD ",JSON.stringify(data))
+
+func emit_state() -> void:
+ sample_id+=1
+ var data:=progress_data();data["schema"]=1;data["sample_id"]=sample_id;data["physics_frame"]=Engine.get_physics_frames();data["demo"]=demo
+ data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
+ var right:=camera.global_basis.x;right.y=0;right=right.normalized()
+ var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
+ data["camera_right"]=[right.x,right.z];data["camera_forward"]=[forward.x,forward.z]
+ var rect:=action_button.get_global_rect();data["action_rect"]=[rect.position.x,rect.position.y,rect.size.x,rect.size.y]
+ print("TIDAL_STATE ",JSON.stringify(data))
 
 func interact() -> void:
- for i in range(3):
-  if player.position.distance_to(lantern_points[i])<2.1 and not activated[i]:
-   activated[i]=true;update_state();save_game();tip_until=game_time+3.0
-   prompt.text="A memory returns to the sea" if language=="en" else "海的记忆正在苏醒"
-   print("TIDAL_LANTERN ",i)
-   return
- if completed and player.position.distance_to(beacon.position)<2.7:
+ if beacon_awakened:return
+ var stage:=quest_stage()
+ if flat_distance(player.position,target_point())>=1.55:return
+ if stage<3:
+  # The map reveals the grove key; the key opens the cache tied to the reef buoy.
+  activated[stage]=true
+  var en:=["Chart found · search the leaning grove","Brass key found · follow the red buoy","Tide pearl recovered · return ashore"]
+  var zh:=["找到海图 · 前往倾斜的树林","找到铜钥匙 · 寻找红色浮标","取回潮汐珍珠 · 返回岸边"]
+  hint_text=en[stage] if language=="en" else zh[stage]
+  print("TIDAL_TREASURE ",JSON.stringify({"stage":stage+1,"item":["chart","brass_key","tide_pearl"][stage],"demo":demo}))
+ else:
   beacon_awakened=true
-  update_state()
-  save_game()
-  objective.text="You brought the light home" if language=="en" else "你带回了光"
-  prompt.text="R  ·  Begin another quiet voyage" if language=="en" else "R · 再启一段宁静旅程"
+  hint_text="Treasure recovered · the sanctuary glows" if language=="en" else "寻宝完成 · 圣所重现光芒"
+  print("TIDAL_COMPLETE ",JSON.stringify({"demo":demo,"stage":4}))
+ tip_until=game_time+3.0;update_state();save_game()
 
 func _unhandled_input(event: InputEvent) -> void:
  if event is InputEventKey and event.pressed and not event.echo:
@@ -612,91 +670,91 @@ func _physics_process(delta:float) -> void:
  if player==null:return
  game_time+=delta
  var input:=Vector2.ZERO
- if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT): input.x-=1
+ if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT):input.x-=1
  if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT):input.x+=1
  if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):input.y-=1
  if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):input.y+=1
- input+=touch_move
- input=input.limit_length()
- var right:=camera.global_basis.x
- right.y=0;right=right.normalized()
- var forward:=-camera.global_basis.z
- forward.y=0;forward=forward.normalized()
+ input=(input+touch_move).limit_length()
+ var right:=camera.global_basis.x;right.y=0;right=right.normalized()
+ var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
  var move:Vector3=(right*input.x-forward*input.y).normalized()*input.length()
  if demo:
-  var target:Vector3=lantern_points[mini(demo_phase,2)] if demo_phase<3 else beacon.position
-  var flat:=Vector3(target.x-player.position.x,0,target.z-player.position.z)
-  if flat.length()>.85:move=flat.normalized()*.72
-  else:
-   move=Vector3.ZERO;demo_wait+=delta
-   if demo_wait>1.2 and demo_phase<3:interact();demo_phase+=1;demo_wait=0
-   elif demo_phase==3 and demo_wait>2:interact();demo_phase=4
-  if demo_phase>=4:move=Vector3.ZERO
- var speed:=3.3
- player.velocity.x=move_toward(player.velocity.x,move.x*speed,delta*10)
- player.velocity.z=move_toward(player.velocity.z,move.z*speed,delta*10)
- player.velocity.y-=delta*18
- var next:=player.position+Vector3(player.velocity.x,0,player.velocity.z)*delta
- if island_radius(next.x,next.z)>.86 and island_radius(next.x,next.z)>island_radius(player.position.x,player.position.z):player.velocity.x=0;player.velocity.z=0
- player.move_and_slide()
- if player.position.y<-.7:player.position=Vector3(1.3,height_at(1.3,10)+1,10)
- if move.length()>.1:
-  avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-move.x,-move.z),delta*12)
-  avatar.position.y=sin(game_time*12)*.025
- else:avatar.position.y=lerpf(avatar.position.y,0,delta*8)
+  move=Vector3.ZERO
+  if route_phase<route_points.size():
+   var target:=route_points[route_phase]
+   var flat:=Vector3(target.x-player.position.x,0,target.z-player.position.z)
+   if flat.length()>.65:move=flat.normalized()*.92;demo_wait=0.0
+   else:
+    demo_wait+=delta
+    if demo_wait>.75:
+     if route_phase in [0,1,3,6]:interact()
+     route_phase+=1;demo_wait=0.0;demo_phase=quest_stage()
+ swim.step(player,move,delta,height_at(player.position.x,player.position.z))
+ last_move=move
+ if move.length()>.1:avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-move.x,-move.z),1.0-exp(-delta*10))
+ var afloat:=swim.is_swimming()
+ avatar_body.rotation.x=lerpf(avatar_body.rotation.x,-PI*.43 if afloat else 0.0,1-exp(-delta*7))
+ avatar_body.position.y=lerpf(avatar_body.position.y,.65 if afloat else .6,1-exp(-delta*7))
+ avatar.position.y=sin(game_time*(4.4 if afloat else 10))* (.025 if move.length()>.1 else .006)
+ for i in range(2):
+  var phase:=game_time*(4.2 if afloat else 9.0)+i*PI
+  arms[i].rotation.x=sin(phase)*(.9 if afloat else .5)*move.length()
+  arms[i].rotation.z=sin(phase)*.38+(-.4 if i==0 else .4) if afloat else 0.0
+  legs[i].rotation.x=sin(phase+PI)*(.32 if afloat else .55)*move.length()
+ swim_wake.visible=swim.state!=&"walk"
+ swim_wake.position=Vector3(player.position.x,SEA_LEVEL+.035,player.position.z)
+ swim_wake.rotation.y=avatar.rotation.y;swim_wake.scale=Vector3(1.25+move.length()*.2,1,1.5+move.length()*.5)
  save_time+=delta
- if save_time>4:save_game();save_time=0
- # A high, collision-free diorama camera keeps the destination visible without orbit surprises.
- var aim:=player.position+Vector3(0,1.5,-2.0)
- var desired:=player.position+Vector3(-3.4,8.5,12)
+ if save_time>3:save_game();save_time=0
+ var aim:=player.position+Vector3(0,1.0,-1.2)
+ var desired:=player.position+Vector3(-3.4,7.3,10.0)
  var portrait:=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y<.85
- if portrait:desired=player.position+Vector3(-1.7,10.5,15)
- var ray:=PhysicsRayQueryParameters3D.create(aim,desired)
- ray.exclude=[player.get_rid()]
+ if portrait:desired=player.position+Vector3(-2.0,9.3,12.5)
+ var ray:=PhysicsRayQueryParameters3D.create(aim,desired);ray.exclude=[player.get_rid()]
  var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
  if not hit.is_empty():desired=hit.position+hit.normal*.55
- if not hero_camera_locked:
-  camera.position=camera.position.lerp(desired,1-exp(-delta*3.5))
-  camera.look_at(aim)
- if game_time>tip_until and completed:
-  if beacon_awakened:
-   objective.text="You brought the light home" if language=="en" else "你带回了光"
-   prompt.text="R · Begin another quiet voyage" if language=="en" else "R · 再启一段宁静旅程"
-  else:
-   prompt.text=("E · Return the light" if player.position.distance_to(beacon.position)<2.7 else "Return to the ring of light") if language=="en" else ("E · 归还光芒" if player.position.distance_to(beacon.position)<2.7 else "返回光之环")
- elif game_time>tip_until:
-  prompt.text=""
-  for i in range(3):
-   if not activated[i] and player.position.distance_to(lantern_points[i])<2.1:prompt.text="E  ·  Wake the tide lantern" if language=="en" else "E · 点亮潮汐灯"
+ camera.position=camera.position.lerp(desired,1-exp(-delta*4.5));camera.look_at(aim)
+ update_prompt()
+ var dist:=flat_distance(player.position,target_point())
+ var dir:=Vector3(target_point().x-player.position.x,0,target_point().z-player.position.z).normalized()
+ var side:=right.dot(dir);var front:=forward.dot(dir)
+ var arrow:="↑" if front>.45 else ("↓" if front<-.45 else ("→" if side>0 else "←"))
+ compass.text=("%s  %dm  ·  %s" % [arrow,int(dist),str(swim.state).to_upper()]) if language=="en" else ("%s  %d米  ·  %s" % [arrow,int(dist),{"walk":"行走","wade":"涉水","swim":"游泳"}[str(swim.state)]])
+ state_clock+=delta
+ if state_clock>=.2:state_clock=0;emit_state()
 
 func _process(delta:float) -> void:
  timer+=delta
  if objective:
-  var view_size:=get_viewport().get_visible_rect().size
-  var width:=view_size.x
-  title_panel.size.x=minf(304,width-32)
+  var view_size:=get_viewport().get_visible_rect().size;var width:=view_size.x;var height:=view_size.y
+  var narrow:=width<600
+  title_panel.size.x=minf(350,width-32);title_panel.size.y=120
   language_button.position=Vector2(width-60,20)
-  prompt_panel.size=Vector2(minf(440,width-32),36)
-  prompt_panel.position=Vector2((width-prompt_panel.size.x)*.5,view_size.y-106)
-  prompt_panel.visible=not prompt.text.is_empty()
-  footer_panel.position=Vector2(20,view_size.y-(31 if width<600 else 44))
-  footer_panel.size=Vector2(minf(460,width-40),30)
-  message.offset_top=-24 if width<600 else -38
-  message.offset_bottom=-2 if width<600 else -15
-  objective.add_theme_font_size_override("font_size",16 if width<600 else 17)
-  message.text=("Drag to move · Tap action" if language=="en" else "左侧拖动移动 · 轻触互动") if width<600 else ("W A S D / arrows · E interact · R restart · L language" if language=="en" else "方向键移动 · E 互动 · R 重新开始 · L 语言")
-  prompt.add_theme_font_size_override("font_size",15 if width<600 else 17)
+  title.position=Vector2(28,25);objective.position=Vector2(28,49);progress.position=Vector2(28,78);subtitle.position=Vector2(28,103)
+  objective.add_theme_font_size_override("font_size",16 if narrow else 18)
+  subtitle.add_theme_font_size_override("font_size",11 if narrow else 12)
+  compass.position=Vector2(width*.5-120,150 if narrow else 22);compass.size=Vector2(240,28)
+  prompt_panel.size=Vector2(minf(440,width-32),38);prompt_panel.position=Vector2((width-prompt_panel.size.x)*.5,height-130)
+  prompt.position=prompt_panel.position+Vector2(8,6);prompt.size=prompt_panel.size-Vector2(16,8);prompt_panel.visible=not prompt.text.is_empty()
+  prompt.add_theme_font_size_override("font_size",12 if narrow else 16)
+  action_button.position=Vector2(width-152,height-82)
+  footer_panel.position=Vector2(16,height-29);footer_panel.size=Vector2(minf(480,width-32),25)
+  message.position=Vector2(26,height-25);message.add_theme_font_size_override("font_size",10 if narrow else 12)
+  message.text=("Left drag · Move / Swim   Right button · Interact" if language=="en" else "左侧拖动行走或游泳 · 右侧按钮互动") if narrow else ("WASD / arrows · Move & swim     E · Interact     R · Restart     L · Language" if language=="en" else "方向键行走或游泳 · E 互动 · R 重来 · L 语言")
  for i in range(lanterns.size()):
-  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.position.y=1.22+sin(timer*1.7+i)*.09;gem.rotation.y=timer*.45
+  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.position.y=1.0+sin(timer*1.7+i)*.06;gem.rotation.y=timer*.45
+ if lanterns.size()>2:lanterns[2].position.y=SEA_LEVEL-.12+sin(timer*1.4)*.035
  for i in range(birds.size()):
-  var a:=timer*.11+i*1.2
-  birds[i].position=Vector3(cos(a)*16,9+sin(a*1.7+i),-6+sin(a)*12)
-  birds[i].rotation.y=-a
- for i in range(pulse_rings.size()):pulse_rings[i].position.y=sin(timer*.7+i)*.018
- if capture and timer>1.5+screenshot_index*6:
-  screenshot_index+=1
-  capture_frame.call_deferred(screenshot_index)
-  if screenshot_index>=5:capture=false
+  var a:=timer*.11+i*1.2;birds[i].position=Vector3(cos(a)*16,9+sin(a*1.7+i),-6+sin(a)*12);birds[i].rotation.y=-a
+ if capture:
+  var index:=0
+  if timer>1.0 and not demo_captures.has(1):index=1
+  elif quest_stage()>=2 and not demo_captures.has(2):index=2
+  elif swim.state==&"wade" and not demo_captures.has(3):index=3
+  elif swim.is_swimming() and not demo_captures.has(4):index=4
+  elif beacon_awakened and not demo_captures.has(5):index=5
+  if index>0:demo_captures[index]=true;capture_frame.call_deferred(index)
+ # Capture processes remain alive for the recorder; CI performs deliberate shutdown.
 
 func capture_frame(index:int) -> void:
  await RenderingServer.frame_post_draw
@@ -705,57 +763,59 @@ func capture_frame(index:int) -> void:
  if output.is_empty():output="user://"
  var path:=output.path_join("tidal-%02d.png"%index)
  print("TIDAL_CAPTURE ",path," ",image.save_png(path))
- if index>=5:
-  # Actual rendered composition studies after the scripted traversal, never input proof.
-  hero_camera_locked=true
-  ui.visible=false
-  camera.fov=49
-  camera.position=Vector3(-5.5,6.9,-1.3)
-  camera.look_at(Vector3(-.15,5.5,-9.4))
-  await RenderingServer.frame_post_draw
-  await RenderingServer.frame_post_draw
-  var hero:=get_viewport().get_texture().get_image()
-  var error:=hero.save_png(output.path_join("hero-composition.png"))
-  print("TIDAL_HERO_CAPTURE ",JSON.stringify({"file":"hero-composition.png","error":error,"kind":"fixed-camera-study"}))
-  camera.position=Vector3(5.2,7.3,-.4)
-  camera.look_at(Vector3(-.6,5.6,-8.8))
-  await RenderingServer.frame_post_draw
-  await RenderingServer.frame_post_draw
-  hero=get_viewport().get_texture().get_image()
-  error=hero.save_png(output.path_join("hero-wide.png"))
-  print("TIDAL_HERO_CAPTURE ",JSON.stringify({"file":"hero-wide.png","error":error,"kind":"fixed-camera-study"}))
-  get_tree().quit()
 
 func save_game() -> void:
  if capture or demo:return
+ var data:=progress_data();data["schema"]=2;data["activated"]=activated;data["player"]=data["position"];data["beacon_awakened"]=beacon_awakened
  var file:=FileAccess.open(SAVE_PATH,FileAccess.WRITE)
- if file:file.store_string(JSON.stringify({"schema":1,"activated":activated,"player":[player.position.x,player.position.y,player.position.z],"language":language,"beacon_awakened":beacon_awakened}))
+ if file:
+  file.store_string(JSON.stringify(data));file.flush()
+  if file.get_error()==OK:
+   var receipt:=progress_data();receipt["schema"]=1;print("TIDAL_SAVE ",JSON.stringify(receipt))
 
 func load_game() -> void:
- if not FileAccess.file_exists(SAVE_PATH):return
- var data=JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
- if not data is Dictionary or data.get("schema")!=1:return
+ if demo or not FileAccess.file_exists(SAVE_PATH):return
+ var parser:=JSON.new()
+ if parser.parse(FileAccess.get_file_as_string(SAVE_PATH))!=OK:return
+ var data=parser.data
+ if not data is Dictionary or data.get("schema")!=2:return
  var a=data.get("activated",[])
  if a is Array and a.size()==3:
-  for i in range(3):activated[i]=bool(a[i])
+  activated=[bool(a[0]),bool(a[1]) and bool(a[0]),bool(a[2]) and bool(a[1]) and bool(a[0])]
  var p=data.get("player",[])
- if p is Array and p.size()==3 and island_radius(float(p[0]),float(p[2]))<.86:
-  player.position=Vector3(float(p[0]),maxf(float(p[1]),height_at(float(p[0]),float(p[2]))+.1),float(p[2]))
+ if p is Array and p.size()==3:
+  var saved:=Vector3(float(p[0]),float(p[1]),float(p[2]))
+  var ground:=height_at(saved.x,saved.z) if saved.is_finite() else NAN
+  player.position=swim.restored_position(saved,ground,swim.safe_spawn_position)
  language="zh" if data.get("language","en")=="zh" else "en"
  beacon_awakened=bool(data.get("beacon_awakened",false)) and activated==[true,true,true]
+ loaded_found=true
 
 func reset_game() -> void:
- activated=[false,false,false];completed=false;beacon_awakened=false;player.position=Vector3(1.3,height_at(1.3,10)+.9,10);update_state();save_game()
+ activated=[false,false,false];completed=false;beacon_awakened=false;tip_until=0.0
+ player.position=swim.safe_spawn_position;player.velocity=Vector3.ZERO;swim=SwimController.new();swim.safe_spawn_position=player.position
+ update_state();save_game()
 
 func count_nodes(node:Node) -> int:
  var count:=1
  for child in node.get_children():count+=count_nodes(child)
  return count
 
+func scene_stats(node:Node,stats:Dictionary) -> void:
+ if node is MeshInstance3D and node.mesh:
+  stats["mesh_instances"]+=1
+  for surface in range(node.mesh.get_surface_count()):
+   var arrays:Array=node.mesh.surface_get_arrays(surface)
+   var indices=arrays[Mesh.ARRAY_INDEX]
+   stats["triangles"]+=indices.size()/3 if indices!=null and indices.size()>0 else arrays[Mesh.ARRAY_VERTEX].size()/3
+ for child in node.get_children():scene_stats(child,stats)
+
 func audit() -> void:
  await get_tree().process_frame
  await get_tree().physics_frame
- print("TIDAL_AUDIT ",JSON.stringify({"scene_nodes":count_nodes(self),"terrain_surfaces":terrain_mesh.mesh.get_surface_count(),"lanterns":lanterns.size(),"camera_fov":camera.fov,"camera_distance":camera.position.distance_to(player.position),"renderer":RenderingServer.get_current_rendering_method(),"save_exists":FileAccess.file_exists(SAVE_PATH),"active":activated}))
+ var stats:={"mesh_instances":0,"triangles":0};scene_stats(self,stats)
+ stats.merge({"scene_nodes":count_nodes(self),"terrain_surfaces":terrain_mesh.mesh.get_surface_count(),"lanterns":lanterns.size(),"camera_fov":camera.fov,"camera_distance":camera.position.distance_to(player.position),"renderer":RenderingServer.get_current_rendering_method(),"save_exists":FileAccess.file_exists(SAVE_PATH),"active":activated})
+ print("TIDAL_AUDIT ",JSON.stringify(stats))
  get_tree().quit()
 
 func _exit_tree() -> void:

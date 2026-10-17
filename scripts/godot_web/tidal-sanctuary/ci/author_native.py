@@ -55,7 +55,7 @@ def main():
     project.mkdir()
     shutil.copytree(Path(dcc_mcp_godot.__file__).parent / "godot_addon/addons", project / "addons")
     for name in GAME_FILES:
-        if name in ("main.gd", "start.tscn", "project.godot"):
+        if name in ("main.gd", "swim_controller.gd", "start.tscn", "project.godot"):
             continue  # These are created/configured through the typed authoring flow below.
         (project / name).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source / name, project / name)
@@ -155,6 +155,8 @@ def main():
         call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script"]})
         inventory()
         call("godot_project_management__get_project_info", {})
+        call("godot_script__create_script", {"path": "res://swim_controller.gd", "source": (source / "swim_controller.gd").read_text(), "overwrite": True})
+        call("godot_script__validate_script", {"path": "res://swim_controller.gd"})
         call("godot_script__create_script", {"path": "res://main.gd", "source": (source / "main.gd").read_text(), "overwrite": True})
         call("godot_script__validate_script", {"path": "res://main.gd"})
         call("godot_scene_management__create_scene", {"path": "res://start.tscn", "root_type": "Node3D", "root_name": "TidalSanctuary", "open": True})
