@@ -9,6 +9,7 @@ import signal
 import subprocess
 import time
 from pathlib import Path
+from exploration import run_chart_exploration
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
 from observers import finite_vector, observer_receipts
 from common import TROPICAL_FILES, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
@@ -243,7 +244,8 @@ def main():
     try:
         report["checks"].append(import_native_resources(godot, project, out))
         for script, prefix in (("verify_swimming.gd", "TIDAL_SWIMMING_CHECK"),
-                               ("verify_treasure.gd", "TIDAL_TREASURE_CHECK")):
+                               ("verify_treasure.gd", "TIDAL_TREASURE_CHECK"),
+                               ("verify_collision.gd", "TIDAL_COLLISION_CHECK")):
             regression = subprocess.run([godot, "--headless", "--path", str(project), "--script", "res://" + script,
                                          "--fixed-fps", "240"], env=isolated_env(out / (script + "-session")),
                                         capture_output=True, text=True, timeout=180)
@@ -341,6 +343,22 @@ def main():
         wait_for(recorder, recorded_first_frame, 30, "first actual X11 input-video frame")
         input_movie_first_id = max(item["sample_id"] for item in records("native-input.log", "TIDAL_STATE"))
         input_movie_started = time.monotonic()
+        exploration = {}
+        exploration_images = []
+        def exploration_screenshot(name):
+            observed = records("native-input.log", "TIDAL_STATE")[-1]
+            screenshot(name)
+            subprocess.run(["ffmpeg", "-v", "error", "-xerror", "-i", str(out / name), "-f", "null", "-"], check=True, timeout=30)
+            exploration_images.append({"name":name,"sha256":sha256(out/name),"bytes":(out/name).stat().st_size,
+                "state_before_capture_request":observed,"kind":"actual-input off-route contact; passive state is not exact framebuffer synchronization"})
+        try:
+            run_chart_exploration(lambda: records("native-input.log", "TIDAL_STATE"), move, time.sleep, exploration_screenshot, evidence=exploration)
+            if {item["name"] for item in exploration_images} != {"native-chart-blocker-east.png","native-chart-blocker-west.png"}:
+                raise RuntimeError("Missing opposing actual-input collision captures")
+        finally:
+            write_json(out / "native-off-route-exploration.json", {**exploration,"input_events":events,"captures":exploration_images,
+                "movement_release_receipts":movement_releases})
+        report["checks"].append({"name": "actual keyboard opposing chart collision and off-route encirclement", "passed": True, "receipt": exploration})
         driver = RouteDriver(lambda: records("native-input.log", "TIDAL_STATE"), move,
                              lambda state: tap("e"), time.sleep, screenshot)
         try:
@@ -434,7 +452,7 @@ def main():
         stop_process(recorder)
         stop_process(runtime)
         engine_errors = []
-        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
+        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "verify_collision.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
             path = out / log_name
             if path.exists():
                 try:

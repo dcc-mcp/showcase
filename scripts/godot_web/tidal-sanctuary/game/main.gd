@@ -3,6 +3,10 @@ extends Node3D
 const SAVE_PATH = "user://tidal-sanctuary-v2.json"
 const SwimController = preload("res://swim_controller.gd")
 const SEA_LEVEL := -0.15
+const WORLD_LAYER := 1
+const PLAYER_LAYER := 2
+const INTERACTION_RADIUS := 1.55
+const INTERACTION_HEIGHT := 1.2
 var rng := RandomNumberGenerator.new()
 var noise := FastNoiseLite.new()
 var terrain_mesh: MeshInstance3D
@@ -121,7 +125,7 @@ func _ready() -> void:
   activated=[false,false,false]
   beacon_awakened=false
   player.position=Vector3(1.3,height_at(1.3,10.0)+.08,10)
- route_points=[lantern_points[0],lantern_points[1],Vector3(1.5,0,6.2),lantern_points[2],Vector3(7,0,.5),Vector3(2,0,-3),beacon.position]
+ route_points=[lantern_points[0],lantern_points[1],Vector3(1.5,0,6.2),lantern_points[2],Vector3(7,0,.5),Vector3(2,0,-3),Vector3(0,beacon.position.y,-10.25)]
  update_state()
  emit_load_receipt()
  if "--audit" in OS.get_cmdline_user_args(): audit.call_deferred()
@@ -175,6 +179,7 @@ func make_environment() -> void:
  sea.position.y=SEA_LEVEL
  sea.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
  add_child(sea)
+ sea.set_meta("collision_intent","query-only");sea.set_meta("collision_reason","Depth controller detects water; surface never blocks swimming")
 
 func shore_radius(a: float) -> float:
  return 1.0+.075*sin(a*3.0+.6)+.055*sin(a*7.0)+.025*cos(a*11.0)
@@ -235,6 +240,9 @@ func make_terrain() -> void:
  m.albedo_texture=surface_noise(Color("efefdf"),Color("ffffff"),.14)
  m.uv1_triplanar=true;m.uv1_world_triplanar=true;m.uv1_scale=Vector3.ONE*.7
  terrain_mesh.material_override=m;add_child(terrain_mesh);terrain_mesh.create_trimesh_collision()
+ terrain_mesh.set_meta("collision_intent","solid");terrain_mesh.set_meta("collision_reason","Walkable island and seabed, matching visual triangles")
+ for child in terrain_mesh.get_children():
+  if child is StaticBody3D:child.collision_layer=WORLD_LAYER;child.collision_mask=PLAYER_LAYER
 
 func terrain_triangle(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3) -> void:
  for p in [a,b,c]:
@@ -245,6 +253,7 @@ func terrain_triangle(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3) -> void:
 func mesh_node(mesh: Mesh, p: Vector3, m: Material, parent: Node = self) -> MeshInstance3D:
  var n:=MeshInstance3D.new()
  n.mesh=mesh;n.position=p;n.material_override=m;parent.add_child(n)
+ n.set_meta("collision_intent","none");n.set_meta("collision_reason","Small decoration or nonblocking visual; solid call sites opt in explicitly")
  return n
 
 func box(p:Vector3,sz:Vector3,m:Material,parent:Node=self) -> MeshInstance3D:
@@ -292,15 +301,59 @@ func make_rocks() -> void:
    var x:float=center.x+rng.randf_range(-1.4,1.4);var z:float=center.z+rng.randf_range(-1.3,1.3)
    var size:=rng.randf_range(1.1,2.8)
    var path:="res://assets/shore-rock-a.tscn" if i%3==0 else "res://assets/shore-rock-d.tscn"
-   place_asset(path,Vector3(x,height_at(x,z)-.20,z),Vector3(size,size*rng.randf_range(.7,1.3),size*.9),rng.randf()*TAU)
+   var boulder:=place_asset(path,Vector3(x,height_at(x,z)-.20,z),Vector3(size,size*rng.randf_range(.7,1.3),size*.9),rng.randf()*TAU)
+   solid_asset(boulder,"Large shoreline rock blocks walkers and swimmers")
  for i in range(4):
   var x:float=12.6+i*.75;var z:float=5.2-i*.65
-  place_asset("res://assets/shore-rock-d.tscn",Vector3(x,-1.35,z),Vector3(2.3-i*.22,2.5-i*.3,2.2),i*.82)
+  var boulder:=place_asset("res://assets/shore-rock-d.tscn",Vector3(x,-1.35,z),Vector3(2.3-i*.22,2.5-i*.3,2.2),i*.82)
+  solid_asset(boulder,"Exposed reef rock blocks swimmers")
 
 func place_asset(path:String,p:Vector3,sz:Vector3,yaw:float) -> Node3D:
  var node:Node3D=load(path).instantiate()
  node.position=p;node.scale=sz;node.rotation.y=yaw;add_child(node)
+ mark_soft_asset(node)
  return node
+
+func solid_mesh(mesh:MeshInstance3D,reason:String,target_stage:int=-1,trunk_only:bool=false,exact_faces:bool=false) -> StaticBody3D:
+ # Bake the visible world-space basis into the shape. Nonuniform imported scales
+ # must not scale a PhysicsBody, and fronds must never become invisible walls.
+ var points:=PackedVector3Array()
+ var faces:=PackedVector3Array()
+ for surface in range(mesh.mesh.get_surface_count()):
+  var material:=mesh.mesh.surface_get_material(surface)
+  if trunk_only and (material==null or not material.resource_name.begins_with("Trunk ")):continue
+  var arrays:=mesh.mesh.surface_get_arrays(surface)
+  var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+  for vertex in vertices:points.append(mesh.global_basis*vertex)
+  var indices=arrays[Mesh.ARRAY_INDEX]
+  if indices!=null and indices.size()>0:
+   for index in indices:faces.append(mesh.global_basis*vertices[index])
+  else:
+   for vertex in vertices:faces.append(mesh.global_basis*vertex)
+ if points.size()<4:return null
+ var body:=StaticBody3D.new();body.name="Solid_"+str(mesh.get_instance_id())
+ body.collision_layer=WORLD_LAYER;body.collision_mask=PLAYER_LAYER
+ body.set_meta("collision_intent","solid");body.set_meta("collision_reason",reason)
+ body.set_meta("interaction_target",target_stage)
+ add_child(body);body.global_position=mesh.global_position
+ var collider:=CollisionShape3D.new()
+ if exact_faces:
+  var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);collider.shape=shape
+ else:
+  var shape:=ConvexPolygonShape3D.new();shape.points=points;collider.shape=shape
+ body.add_child(collider)
+ mesh.set_meta("collision_intent","solid");mesh.set_meta("collision_reason",reason)
+ mesh.set_meta("solid_body",body.get_path())
+ return body
+
+func solid_asset(node:Node,reason:String,trunk_only:bool=false) -> void:
+ if node is MeshInstance3D and node.mesh:solid_mesh(node,reason,-1,trunk_only,true)
+ for child in node.get_children():solid_asset(child,reason,trunk_only)
+
+func mark_soft_asset(node:Node) -> void:
+ node.set_meta("collision_intent","none")
+ node.set_meta("collision_reason","Soft leaves or low decorative pebble; no movement barrier")
+ for child in node.get_children():mark_soft_asset(child)
 
 func encoded_texture(path:String) -> ImageTexture:
  var image:=Image.new()
@@ -355,6 +408,54 @@ func beveled_block(p:Vector3,sz:Vector3,m:Material,seed_value:int,wear:float=.08
  for key in points:stone_face(st,points[key])
  return mesh_node(st.commit(),p,m)
 
+func terrain_surface_height(x:float,z:float) -> float:
+ # Interpolate the exact triangles used by make_terrain, not the analytic
+ # height function between its samples. Paving is a thin surface treatment.
+ var step:=.48
+ var x0:=floorf((x+24.0)/step)*step-24.0
+ var z0:=floorf((z+24.0)/step)*step-24.0
+ var u:=(x-x0)/step;var v:=(z-z0)/step
+ var a:=height_at(x0,z0);var b:=height_at(x0+step,z0)
+ var c:=height_at(x0,z0+step);var d:=height_at(x0+step,z0+step)
+ if u+v<=1.0:return a+(b-a)*u+(c-a)*v
+ return d+(c-d)*(1.0-u)+(b-d)*(1.0-v)
+
+func conform_paving(mesh:MeshInstance3D) -> void:
+ # Subdivide before projection: projecting just four corners bridges the
+ # terrain inside a broad stone. The existing terrain remains the sole support.
+ var surface:=SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+ var faces:=mesh.mesh.get_faces()
+ var center_floor:=height_at(mesh.global_position.x,mesh.global_position.z)
+ for i in range(0,faces.size(),3):
+  paving_triangle(surface,faces[i],faces[i+1],faces[i+2],mesh.global_transform,center_floor,0)
+ surface.generate_normals();mesh.mesh=surface.commit()
+ mesh.set_meta("collision_intent","none")
+ mesh.set_meta("collision_reason","Buried paving surface follows the existing solid terrain; no raised barrier")
+ mesh.set_meta("support_body",terrain_mesh.get_child(0).get_path())
+
+func paving_triangle(surface:SurfaceTool,a:Vector3,b:Vector3,c:Vector3,placement:Transform3D,center_floor:float,depth:int) -> void:
+ var ab:=Vector2(a.x-b.x,a.z-b.z).length()
+ var bc:=Vector2(b.x-c.x,b.z-c.z).length()
+ var ca:=Vector2(c.x-a.x,c.z-a.z).length()
+ if maxf(ab,maxf(bc,ca))>.24 and depth<8:
+  if ab>=bc and ab>=ca:
+   var middle:=(a+b)*.5
+   paving_triangle(surface,a,middle,c,placement,center_floor,depth+1)
+   paving_triangle(surface,middle,b,c,placement,center_floor,depth+1)
+  elif bc>=ca:
+   var middle:=(b+c)*.5
+   paving_triangle(surface,a,b,middle,placement,center_floor,depth+1)
+   paving_triangle(surface,a,middle,c,placement,center_floor,depth+1)
+  else:
+   var middle:=(c+a)*.5
+   paving_triangle(surface,a,b,middle,placement,center_floor,depth+1)
+   paving_triangle(surface,middle,b,c,placement,center_floor,depth+1)
+  return
+ for local:Vector3 in [a,b,c]:
+  var world:=placement*local
+  world.y=terrain_surface_height(world.x,world.z)+(placement.origin.y-center_floor)+local.y
+  surface.set_color(Color.WHITE);surface.add_vertex(placement.affine_inverse()*world)
+
 func stone_face(st:SurfaceTool,points:Array) -> void:
  var center:=Vector3.ZERO
  for p:Vector3 in points:center+=p
@@ -370,45 +471,52 @@ func make_ruins() -> void:
   for i in range(3):
    var z:float=group_z+rng.randf_range(-.6,.6)
    var x:=path_x(z)+rng.randf_range(-.7,.7)
-   var slab:=beveled_block(Vector3(x,height_at(x,z)+.005,z),Vector3(rng.randf_range(.58,1.05),.14,rng.randf_range(.43,.7)),stone_materials[i%4],1000+i+int(group_z*10),.32)
+   var slab:=beveled_block(Vector3(x,height_at(x,z)-.052,z),Vector3(rng.randf_range(.58,1.05),.12,rng.randf_range(.43,.7)),stone_materials[i%4],1000+i+int(group_z*10),.32)
    slab.rotation=Vector3(rng.randf_range(-.06,.06),rng.randf_range(-.6,.6),rng.randf_range(-.04,.04))
+   conform_paving(slab)
  # Broad, uneven threshold steps follow the existing walkable terrain.
  for row in range(4):
   var z:float=-4.2-row*.63
   var x:=path_x(z)*.5
   for side in [-1,1]:
    var px:float=x+side*.75+rng.randf_range(-.08,.08)
-   var slab:=beveled_block(Vector3(px,height_at(px,z)+.015,z),Vector3(1.5,.22,rng.randf_range(.60,.76)),stone_materials[row%4],1210+row*3+side,.38)
+   var slab:=beveled_block(Vector3(px,height_at(px,z)-.042,z),Vector3(1.5,.10,rng.randf_range(.60,.76)),stone_materials[row%4],1210+row*3+side,.38)
    slab.rotation.y=rng.randf_range(-.09,.09)
+   conform_paving(slab)
+   slab.set_meta("threshold_step",true)
  var h:=height_at(0,-8.0)
  for row in range(4):
   for col in range(5):
    if (row==0 and col==0) or (row==2 and col==4) or (row==3 and col==0):continue
    var x:float=-2.65+col*1.32+rng.randf_range(-.10,.10)
    var z:float=-6.5-row*1.30+rng.randf_range(-.11,.11)
-   var tile:=beveled_block(Vector3(x,h-.06+rng.randf_range(-.04,.025),z),Vector3(rng.randf_range(1.12,1.28),.22,rng.randf_range(1.11,1.3)),stone_materials[(row+col)%4],1500+row*5+col,.40)
+   var tile:=beveled_block(Vector3(x,height_at(x,z)-.102+rng.randf_range(-.003,.003),z),Vector3(rng.randf_range(1.12,1.28),.22,rng.randf_range(1.11,1.3)),stone_materials[(row+col)%4],1500+row*5+col,.40)
    tile.rotation.y=rng.randf_range(-.05,.05)
+   conform_paving(tile)
  # Four survivors, different heights and broken caps, replace the clean colonnade.
  for info in [Vector3(-3.8,1.0,-5.9),Vector3(-3.65,3.5,-9.3),Vector3(3.7,.75,-6.2),Vector3(3.8,2.55,-10.1)]:
   var base:=height_at(info.x,info.z)
   var material:=stone_materials[rng.randi_range(0,3)]
   var foot:=beveled_block(Vector3(info.x,base+.13,info.z),Vector3(1.0,.30,1.0),material,rng.randi(),.3)
   foot.rotation.y=.12
+  solid_mesh(foot,"Column footing blocks and supports the player")
   var column:=cylinder(Vector3(info.x,base+info.y*.5+.23,info.z),.37,info.y,material,self,.32)
-  column.create_trimesh_collision()
+  solid_mesh(column,"Stone column blocks the player")
   var cap:=beveled_block(Vector3(info.x,base+info.y+.23,info.z),Vector3(.82,.22,.75),material,rng.randi(),.34)
   cap.rotation=Vector3(.045,-.09,.07)
+  solid_mesh(cap,"Broken column cap is physical stone")
  # Worn arch stones: narrow dark joints and chipped edges, no smooth white facade.
  var center:=Vector3(0,h+2.68,-10.0)
  for side in [-1,1]:
   for layer in range(5):
    var n:=beveled_block(Vector3(side*1.65,h+.25+layer*.49,-10),Vector3(.66,.48,.92),stone_materials[(layer+2)%4],2000+layer*3+side,.24)
    n.rotation.y=rng.randf_range(-.035,.035)
-   n.create_trimesh_collision()
+   solid_mesh(n,"Ruin arch pier blocks the player")
  for i in range(11):
   var a:=float(i)/10.0*PI
   var n:=beveled_block(center+Vector3(cos(a)*1.65,sin(a)*1.65,0),Vector3(.62,.69,.94),stone_materials[i%4],2100+i,.20)
   n.rotation.z=a-PI/2
+  solid_mesh(n,"Overhead arch stone blocks camera and tall probes")
  # Broken return wall, tapering irregularly toward the entrance.
  for row in range(4):
   for column in range(5-row):
@@ -416,6 +524,7 @@ func make_ruins() -> void:
    var x:float=-4.25+rng.randf_range(-.045,.045)
    var wall:=beveled_block(Vector3(x,height_at(x,z)+.24+row*.43,z),Vector3(.67,.44,.87),stone_materials[(row+column)%4],2300+row*8+column,.29)
    wall.rotation.y=rng.randf_range(-.04,.04)
+   solid_mesh(wall,"Broken return wall blocks movement and interaction sight")
  for i in range(19):
   var x:=rng.randf_range(-5.1,5.2);var z:=rng.randf_range(-11.5,-4.1)
   if abs(x)<2.6:continue
@@ -442,11 +551,12 @@ func make_sanctuary_details() -> void:
 func make_nature() -> void:
  # Hand-authored leaning palms frame the cache and cove; the chart route stays open.
  var palm_index:=0
- for info in [Vector3(-6.8,1.05,5.7),Vector3(-8.1,.82,4.4),Vector3(-6.1,.66,7.0),Vector3(-7.3,1.0,-3.0),Vector3(-8.9,.75,-5),Vector3(7.7,.91,-2.2),Vector3(9.3,.73,-3.8)]:
+ for info in [Vector3(-7.4,.86,5.9),Vector3(-8.6,.76,4.2),Vector3(-7.1,.62,7.3),Vector3(-7.3,1.0,-3.0),Vector3(-8.9,.75,-5),Vector3(7.7,.91,-2.2),Vector3(9.3,.73,-3.8)]:
   var variant:="a" if palm_index%2==0 else "b"
-  place_asset("res://assets/tropical/palm-%s.glb"%variant,Vector3(info.x,height_at(info.x,info.z)-.04,info.z),Vector3.ONE*info.y,rng.randf()*TAU)
+  var palm:=place_asset("res://assets/tropical/palm-%s.glb"%variant,Vector3(info.x,height_at(info.x,info.z)-.04,info.z),Vector3.ONE*info.y,rng.randf()*TAU)
+  solid_asset(palm,"Palm trunk blocks movement; leaves remain nonblocking",true)
   palm_index+=1
- for center in [Vector3(-5.6,0,4.5),Vector3(-6.9,0,6.2),Vector3(-7.7,0,-2.7),Vector3(6.5,0,-2.0),Vector3(7.8,0,-4),Vector3(-3.6,0,2.0)]:
+ for center in [Vector3(-5.6,0,4.5),Vector3(-6.9,0,6.2),Vector3(-7.7,0,-2.7),Vector3(6.5,0,-2.0),Vector3(7.8,0,-4),Vector3(-5.4,0,1.7)]:
   for i in range(6):
    var x:float=center.x+rng.randf_range(-1.0,1.0);var z:float=center.z+rng.randf_range(-.9,.9)
    if height_at(x,z)<.5:continue
@@ -462,6 +572,7 @@ func make_nature() -> void:
 
 func make_player() -> void:
  player=CharacterBody3D.new();player.name="Wayfarer";add_child(player)
+ player.collision_layer=PLAYER_LAYER;player.collision_mask=WORLD_LAYER
  player.position=Vector3(1.3,height_at(1.3,10)+.08,10)
  var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.22;shape.height=.95;col.shape=shape;col.position.y=.48;player.add_child(col)
  avatar=Node3D.new();player.add_child(avatar)
@@ -487,7 +598,8 @@ func make_lanterns() -> void:
   var p:Vector3=lantern_points[i];p.y=height_at(p.x,p.z) if i<2 else SEA_LEVEL-.12;lantern_points[i]=p
   var root:=Node3D.new();root.position=p;root.name=["MarinersChart","GroveCache","ReefCache"][i];add_child(root);lanterns.append(root)
   if i==0:
-   beveled_block(p+Vector3(0,.35,0),Vector3(.85,.7,.7),stone_materials[0],5100,.4)
+   var pedestal:=beveled_block(p+Vector3(0,.35,0),Vector3(.85,.7,.7),stone_materials[0],5100,.4)
+   solid_mesh(pedestal,"Chart pedestal is solid; chart is query-only",0)
    box(Vector3(0,.73,0),Vector3(.64,.035,.47),mat(Color("e4d9b1")),root)
    for j in range(3):box(Vector3(-.2+j*.18,.756,0),Vector3(.055,.007,.30-j*.055),mat(Color("817b61")),root)
   else:
@@ -495,9 +607,10 @@ func make_lanterns() -> void:
    if i==2:
     cylinder(Vector3(0,.16,0),.42,.22,mat(Color("bd7150")),root)
     cylinder(Vector3(0,.7,0),.032,.98,band,root)
-    var flag:=box(Vector3(.20,1.12,0),Vector3(.4,.26,.025),mat(Color("d5b57c")),root);flag.rotation.z=-.10
+    var flag:=box(Vector3(.20,1.12,0),Vector3(.4,.26,.025),mat(Color("c95f4f")),root);flag.rotation.z=-.10
    else:
-    box(Vector3(0,.24,0),Vector3(.82,.45,.55),wood,root)
+    var chest:=box(Vector3(0,.24,0),Vector3(.82,.45,.55),wood,root)
+    solid_mesh(chest,"Grove chest body blocks movement; treasure is query-only",1)
     for side in [-1,1]:box(Vector3(side*.27,.25,0),Vector3(.065,.48,.58),band,root)
    var lid:=Node3D.new();lid.position=Vector3(0,.46,.27);root.add_child(lid);chest_lids.append(lid)
    box(Vector3(0,.025,-.27),Vector3(.86,.12,.59),wood,lid)
@@ -509,8 +622,10 @@ func make_lanterns() -> void:
 
 func make_beacon() -> void:
  beacon=Node3D.new();beacon.position=Vector3(0,height_at(0,-11.7),-11.7);add_child(beacon)
- cylinder(Vector3(0,.17,0),1.15,.34,material_stone,beacon)
- cylinder(Vector3(0,.5,0),.80,.35,material_stone,beacon)
+ var base:=cylinder(Vector3(0,.17,0),1.15,.34,material_stone,beacon)
+ solid_mesh(base,"Beacon stone base blocks movement",3)
+ var plinth:=cylinder(Vector3(0,.5,0),.80,.35,material_stone,beacon)
+ solid_mesh(plinth,"Beacon plinth is solid",3)
  var torus:=TorusMesh.new();torus.inner_radius=.60;torus.outer_radius=.76;torus.rings=24;torus.ring_segments=12
  var ring_mat:=mat(Color("b18a48"),.5);ring_mat.emission_enabled=true;ring_mat.emission=Color("ffc771");ring_mat.emission_energy_multiplier=0
  beacon_ring=mesh_node(torus,Vector3(0,1.55,0),ring_mat,beacon);beacon_ring.rotation.x=PI/2
@@ -591,16 +706,38 @@ func target_point() -> Vector3:
 func flat_distance(a:Vector3,b:Vector3) -> float:
  return Vector2(a.x-b.x,a.z-b.z).length()
 
+func interaction_status() -> Dictionary:
+ var target:=target_point()
+ var result:={"available":false,"reason":"complete","target":target,"distance":flat_distance(player.position,target)}
+ if beacon_awakened:return result
+ if result.distance>=INTERACTION_RADIUS:result.reason="too_far";return result
+ if absf(player.position.y-target.y)>INTERACTION_HEIGHT:result.reason="too_high";return result
+ var anchors:=[.65,.35,.55,1.20]
+ var ray:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,.65,0),target+Vector3(0,anchors[quest_stage()],0),WORLD_LAYER)
+ ray.exclude=[player.get_rid()]
+ var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
+ if not hit.is_empty() and hit.collider.get_meta("interaction_target",-1)!=quest_stage():
+  result.reason="occluded";return result
+ result.available=true;result.reason="ready"
+ return result
+
+func blocked_prompt(reason:String) -> String:
+ var english:={"too_far":"Move closer to interact","too_high":"Find a path to the same level","occluded":"Walk around to reach it"}
+ var chinese:={"too_far":"靠近后即可互动","too_high":"找条路靠近它","occluded":"绕到前方再试试"}
+ return str((english if language=="en" else chinese).get(reason,""))
+
 func update_prompt() -> void:
  if game_time<tip_until:
   prompt.text=hint_text;return
  if beacon_awakened:
   prompt.text="Treasure recovered" if language=="en" else "寻宝完成";return
  var stage:=quest_stage()
- if flat_distance(player.position,target_point())<1.55:
+ var reach:=interaction_status()
+ if reach.available:
   var en:=["E · Read the chart","E · Open the grove chest","E · Recover the tide pearl","E · Place the pearl"]
   var zh:=["E · 阅读海图","E · 打开林间宝箱","E · 取回潮汐珍珠","E · 放入珍珠"]
   prompt.text=en[stage] if language=="en" else zh[stage]
+ elif reach.distance<2.8:prompt.text=blocked_prompt(reach.reason)
  elif swim.is_swimming():prompt.text="Swim with the same controls · no breath limit" if language=="en" else "方向键游泳 · 可自由停留水面"
  else:prompt.text=""
 
@@ -616,6 +753,8 @@ func emit_state() -> void:
  var data:=progress_data();data["schema"]=1;data["sample_id"]=sample_id;data["physics_frame"]=Engine.get_physics_frames();data["demo"]=demo
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
  data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
+ var reach:=interaction_status()
+ data["interaction_available"]=reach.available;data["interaction_reason"]=reach.reason
  data["steering_touch_active"]=touch_active;data["steering_touch_index"]=touch_index
  var right:=camera.global_basis.x;right.y=0;right=right.normalized()
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
@@ -626,7 +765,11 @@ func emit_state() -> void:
 func interact() -> void:
  if beacon_awakened:return
  var stage:=quest_stage()
- if flat_distance(player.position,target_point())>=1.55:return
+ var reach:=interaction_status()
+ if not reach.available:
+  hint_text=blocked_prompt(reach.reason);tip_until=game_time+1.8;update_prompt()
+  print("TIDAL_INTERACTION_BLOCKED ",JSON.stringify({"stage":stage,"reason":reach.reason,"distance":reach.distance,"demo":demo}))
+  return
  if stage<3:
   # The map reveals the grove key; the key opens the cache tied to the reef buoy.
   activated[stage]=true
@@ -693,7 +836,7 @@ func _physics_process(delta:float) -> void:
   if route_phase<route_points.size():
    var target:=route_points[route_phase]
    var flat:=Vector3(target.x-player.position.x,0,target.z-player.position.z)
-   if flat.length()>.65:move=flat.normalized()*.92;demo_wait=0.0
+   if flat.length()>(.22 if route_phase==6 else .65):move=flat.normalized()*.92;demo_wait=0.0
    else:
     demo_wait+=delta
     if demo_wait>.75:
@@ -719,10 +862,14 @@ func _physics_process(delta:float) -> void:
  var desired:=player.position+Vector3(-3.4,7.3,10.0)
  var portrait:=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y<.85
  if portrait:desired=player.position+Vector3(-2.0,9.3,12.5)
- var ray:=PhysicsRayQueryParameters3D.create(aim,desired);ray.exclude=[player.get_rid()]
+ var camera_pivot:=player.position+Vector3(0,.85,0)
+ var ray:=PhysicsRayQueryParameters3D.create(camera_pivot,desired,WORLD_LAYER);ray.exclude=[player.get_rid()]
  var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
  if not hit.is_empty():desired=hit.position+hit.normal*.55
- camera.position=camera.position.lerp(desired,1-exp(-delta*4.5));camera.look_at(aim)
+ var smoothed:=camera.position.lerp(desired,1-exp(-delta*4.5))
+ ray.to=smoothed;hit=get_world_3d().direct_space_state.intersect_ray(ray)
+ camera.position=hit.position+hit.normal*.55 if not hit.is_empty() else smoothed
+ camera.look_at(aim)
  update_prompt()
  var dist:=flat_distance(player.position,target_point())
  var dir:=Vector3(target_point().x-player.position.x,0,target_point().z-player.position.z).normalized()

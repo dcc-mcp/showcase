@@ -1,0 +1,27 @@
+{
+  "source": "NotoSansCJK-Regular.ttc",
+  "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "upstream": "https://github.com/notofonts/noto-cjk",
+  "ttc_face_index": 2,
+  "source_family": "Noto Sans CJK SC Regular",
+  "output_family": "Sanctuary Sans",
+  "postscript_name": "SanctuarySans-Regular",
+  "output_sha256": "ad3f9f1c156378a683ff557f8a8708bdd9c2e7f5b3fc1a4a9d122928da77bf99",
+  "output_bytes": 159436,
+  "license": "SIL OFL 1.1; original notice in FONT-LICENSE.txt; modification notice in FONT-NOTICE.txt",
+  "tool": "fontTools 4.61.1",
+  "coverage": {
+    "unicode_count": 344,
+    "previous_unicode_count": 215,
+    "previous_coverage_preserved": true,
+    "interaction_messages_verified": [
+      "Move closer to interact",
+      "靠近后即可互动",
+      "Find a path to the same level",
+      "找条路靠近它",
+      "Walk around to reach it",
+      "绕到前方再试试"
+    ]
+  },
+  "modification": "Subset source outlines and rename all OpenType/CFF family names. Existing glyph coverage retained; expanded for Chinese interaction and planned narrative text."
+}

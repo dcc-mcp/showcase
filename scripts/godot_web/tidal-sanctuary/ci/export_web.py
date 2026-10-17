@@ -109,7 +109,8 @@ progressive_web_app/enabled=false
         shutil.copyfile(args.native / "sanctuary-font.otf", site / "sanctuary-font.otf")
         for name in ("LICENSE.txt", "COPYRIGHT.txt"):
             shutil.copyfile(args.license_dir / name, site / name)
-        shutil.copyfile(args.native / "FONT-LICENSE.txt", site / "FONT-LICENSE.txt")
+        for name in ("FONT-LICENSE.txt", "FONT-NOTICE.txt", "FONT-SOURCE.json"):
+            shutil.copyfile(args.native / name, site / name)
         copy_asset_notices(args.native, site)
         for name in ("index.html", "index.js", "index.wasm", "index.pck"):
             if not (site / name).is_file() or (site / name).stat().st_size == 0:
