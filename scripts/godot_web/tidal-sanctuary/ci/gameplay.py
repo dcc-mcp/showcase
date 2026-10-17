@@ -161,6 +161,29 @@ class RouteDriver:
         self.pending_action = None
         self.actions = []
         self.accepted_stage = 0
+        self.capture_seconds = 0.0
+
+    def capture(self, name, state):
+        started = time.monotonic()
+        self.snapshot(name, state)
+        self.capture_seconds += time.monotonic() - started
+
+    def milestone_reached(self, state, point):
+        if "stage" not in point:
+            return math.hypot(state["position"][0] - point["target"][0],
+                              state["position"][2] - point["target"][1]) <= point.get("radius", .8)
+        if state["quest_stage"] != point["stage"]:
+            return False
+        # The action's first advancing sample was already checked against the
+        # actual 1.55 m interaction range. Callback latency may leave the latest
+        # sample outside the tighter navigation radius; do not steer back or tap
+        # again after a valid, exact, physically requested interaction.
+        if self.accepted_stage != point["stage"] or not any(
+                action.get("accepted_sample_id") and action["target_stage"] == point["stage"]
+                and action["target"] == list(point["target"]) and action["waypoint"] == point["name"]
+                for action in self.actions):
+            raise ValueError("Milestone lacks its matching accepted physical action")
+        return True
 
     def request_action(self, state, point):
         """Record the physical callback request, never grant progress by itself."""
@@ -222,8 +245,11 @@ class RouteDriver:
                 # Pause actual movement for an intelligible player-camera screenshot;
                 # primary touch remains down. No camera or actor properties are set.
                 self.move((0, 0))
-                self.snapshot("tidal-03.png" if mode == "wade" else "tidal-04.png", item)
+                self.capture("tidal-03.png" if mode == "wade" else "tidal-04.png", item)
                 self.captured.add(mode)
+                # A slow screenshot can consume more than the observation
+                # watchdog. Re-read real logs, rather than inventing freshness.
+                return self.observe()
         if not self.samples:
             return None
         if time.monotonic() - self.last_observation_time > 10:
@@ -242,26 +268,37 @@ class RouteDriver:
             raise RuntimeError("Game did not produce passive route observations")
         if state["quest_stage"] != 0 or any(state["treasures"]) or state["completed"]:
             raise RuntimeError("Physical route must begin with genuinely fresh progress")
-        self.snapshot("tidal-01.png", state)
+        self.capture("tidal-01.png", state)
         try:
             for point in ROUTE:
                 expected_stage = point.get("stage", self.accepted_stage)
                 if expected_stage not in (self.accepted_stage, self.accepted_stage + 1):
                     raise ValueError("Authored route skips a required quest milestone")
                 deadline = time.monotonic() + self.timeout
+                captures_before = self.capture_seconds
                 reached = False
-                while time.monotonic() < deadline:
+                while time.monotonic() - (self.capture_seconds - captures_before) < deadline:
                     state = self.observe()
                     if state["quest_stage"] > expected_stage:
                         raise ValueError("Quest advanced beyond the exact current route milestone")
                     target = point["target"]
                     distance = math.hypot(state["position"][0] - target[0], state["position"][2] - target[1])
-                    if distance <= point.get("radius", .8):
+                    if self.milestone_reached(state, point):
+                        # Retain shared held keys through ordinary path turns.
+                        # Releasing/repressing D within one slow X11 frame lost
+                        # the held key in the earlier hosted bay-entry capture.
+                        if "stage" in point:
+                            self.move((0, 0))
+                        reached = True
+                        break
+                    if self.pending_action is not None:
+                        # One real action per milestone. Wait for its actual
+                        # acknowledgement; a missing receipt must fail, not
+                        # trigger another tap (which could reset completion).
                         self.move((0, 0))
-                        if state["quest_stage"] == expected_stage:
-                            reached = True
-                            break
-                        if state["sample_id"] > self.last_action_sample_id and time.monotonic() - self.last_action > .4:
+                    elif distance <= point.get("radius", .8):
+                        self.move((0, 0))
+                        if state["sample_id"] > self.last_action_sample_id:
                             self.request_action(state, point)
                     else:
                         self.move(direction_to(state, target))
@@ -270,14 +307,14 @@ class RouteDriver:
                     raise RuntimeError("Physical route could not reach/complete " + point["name"] + ": " + str(state))
                 self.milestones.append({"name": point["name"], "sample": state})
                 if point.get("screenshot"):
-                    self.snapshot(point["screenshot"], state)
+                    self.capture(point["screenshot"], state)
             self.move((0, 0))
             self.pause(.4)
             state = self.observe()
             if self.accepted_stage != FINAL_STAGE or self.pending_action is not None or not complete(state):
                 raise RuntimeError("Actual physical-input treasure loop was not completed")
             crossing = validate_water_crossing(self.samples)
-            self.snapshot("tidal-05.png", state)
+            self.capture("tidal-05.png", state)
             return {"passed": True, "samples": self.samples, "milestones": self.milestones,
                     "crossing": crossing, "completed_state": state, "physical_actions": self.actions,
                     "no_demo_no_state_injection": True}

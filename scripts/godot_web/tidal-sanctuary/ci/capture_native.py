@@ -9,7 +9,7 @@ import signal
 import subprocess
 import time
 from pathlib import Path
-from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state
+from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
 from observers import observer_receipts
 from common import checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
 
@@ -18,6 +18,17 @@ def require_running(process, message):
     status = process.poll()
     if status is not None:
         raise RuntimeError(f"Native runtime exited with status {status} before {message}")
+
+
+def validate_input_movie_span(video, duration, observed_wall_seconds):
+    if not (0 < observed_wall_seconds <= 600 and 0 < duration <= 601
+            and video.get("width") == 1280 and video.get("height") == 720):
+        raise RuntimeError("Physical-input video has unexpected dimensions or duration")
+    # The first captured frame predates this measured interval. Half a second
+    # permits encoder/container rounding, not a stalled early recording. The
+    # runtime is also held for a final second after the route has completed.
+    if duration < observed_wall_seconds - .5:
+        raise RuntimeError("Physical-input movie is shorter than the observed live route")
 
 
 def wait_for(process, predicate, timeout, message):
@@ -216,6 +227,7 @@ def main():
             else:
                 raise RuntimeError("Actual sea swimming plus four recorded seconds was not established within 120 seconds")
             # ffmpeg's own quit command finalizes MP4 cleanly; never kill a passing recording.
+            last_movie_id = max(item["sample_id"] for item in observed)
             recorder.stdin.write(b"q\n")
             recorder.stdin.flush()
             if recorder.wait(timeout=30) != 0:
@@ -223,7 +235,7 @@ def main():
             report["movie_stop_condition"] = {"minimum_wall_seconds": 36, "post_swim_wall_seconds": 4,
                 "maximum_wall_seconds": 120, "first_swim_wall_seconds": first_swim_at - recording_started}
         recorder = None
-        movie_states = [item for item in records("scripted-traversal.log", "TIDAL_STATE") if item["sample_id"] > first_movie_id]
+        movie_states = [item for item in records("scripted-traversal.log", "TIDAL_STATE") if first_movie_id < item["sample_id"] <= last_movie_id]
         previous = None
         for state in movie_states:
             validate_state(state, previous, expected_demo=True)
@@ -247,13 +259,57 @@ def main():
         input_env = isolated_env(out / "input-session")
         runtime = launch("native-input.log", input_env)
         focus()
+        input_movie = out / "physical-input-treasure-swim.mp4"
+        progress_file = out / "physical-input-video-progress.log"
+        with (out / "physical-input-ffmpeg.log").open("w") as log:
+            recorder = subprocess.Popen(["ffmpeg", "-hide_banner", "-y", "-f", "x11grab", "-draw_mouse", "0",
+                "-framerate", "24", "-video_size", "1280x720", "-i", os.environ["DISPLAY"] + "+0,0",
+                "-t", "600", "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "19",
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-progress", str(progress_file),
+                str(input_movie)], stdin=subprocess.PIPE, stdout=log, stderr=log)
+        def recorded_first_frame():
+            return progress_file.exists() and re.search(r"(?m)^frame=\s*[1-9][0-9]*\s*$", progress_file.read_text()) is not None
+        wait_for(recorder, recorded_first_frame, 30, "first actual X11 input-video frame")
+        input_movie_first_id = max(item["sample_id"] for item in records("native-input.log", "TIDAL_STATE"))
+        input_movie_started = time.monotonic()
         driver = RouteDriver(lambda: records("native-input.log", "TIDAL_STATE"), move,
                              lambda state: tap("e"), time.sleep, screenshot)
         try:
             route = driver.run()
         finally:
             write_json(out / "native-input-route.json", {"input_events": events, "samples": driver.samples,
-                                                        "milestones": driver.milestones, "screenshots": screenshots})
+                "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions})
+        time.sleep(1)
+        require_running(recorder, "completion of actual keyboard-route recording")
+        input_movie_states = [item for item in records("native-input.log", "TIDAL_STATE")
+                              if item["sample_id"] > input_movie_first_id]
+        input_movie_wall_seconds = time.monotonic() - input_movie_started
+        recorder.stdin.write(b"q\n")
+        recorder.stdin.flush()
+        if recorder.wait(timeout=30) != 0:
+            raise RuntimeError("Actual keyboard-route ffmpeg recording failed")
+        recorder = None
+        previous = None
+        for state in input_movie_states:
+            validate_state(state, previous, expected_demo=False)
+            previous = state
+        crossing = validate_water_crossing(input_movie_states)
+        if not input_movie_states or not complete(input_movie_states[-1]):
+            raise RuntimeError("Physical-input video interval did not include actual quest completion")
+        input_probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_streams", "-show_format",
+                                  "-of", "json", str(input_movie)], text=True))
+        input_video = next(stream for stream in input_probe["streams"] if stream["codec_type"] == "video")
+        input_duration = float(input_probe["format"]["duration"])
+        validate_input_movie_span(input_video, input_duration, input_movie_wall_seconds)
+        subprocess.run(["ffmpeg", "-v", "error", "-xerror", "-i", str(input_movie), "-f", "null", "-"],
+                       check=True, timeout=180)
+        report["physical_input_movie"] = {"name": input_movie.name, "seconds": input_duration,
+            "sha256": sha256(input_movie), "route": "actual X11/XTest WASD/E; demo=false",
+            "recording_ready_at": input_movie_started, "first_sample_boundary": input_movie_first_id,
+            "observed_route_wall_seconds": input_movie_wall_seconds,
+            "observations": input_movie_states, "crossing": crossing, "probe": input_probe,
+            "continuous_unretimed_capture": True}
+        report["checks"].append({"name": "actual keyboard-route movie includes sea treasure, swimming, shore and completion and fully decodes", "passed": True})
         report["physical_route"] = route
         report["actual_captures"] = screenshots
         if {item["name"] for item in screenshots} != {f"tidal-{index:02d}.png" for index in range(1, 6)}:

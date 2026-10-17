@@ -28,6 +28,7 @@ var game_time := 0.0
 var save_time := 0.0
 var completed := false
 var beacon_awakened := false
+var restart_available_time := 0.0
 var capture := false
 var demo := false
 var demo_phase := 0
@@ -620,6 +621,8 @@ func emit_state() -> void:
  sample_id+=1
  var data:=progress_data();data["schema"]=1;data["sample_id"]=sample_id;data["physics_frame"]=Engine.get_physics_frames();data["demo"]=demo
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
+ data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
+ data["steering_touch_active"]=touch_active;data["steering_touch_index"]=touch_index
  var right:=camera.global_basis.x;right.y=0;right=right.normalized()
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
  data["camera_right"]=[right.x,right.z];data["camera_forward"]=[forward.x,forward.z]
@@ -639,6 +642,7 @@ func interact() -> void:
   print("TIDAL_TREASURE ",JSON.stringify({"stage":stage+1,"item":["chart","brass_key","tide_pearl"][stage],"demo":demo}))
  else:
   beacon_awakened=true
+  restart_available_time=game_time+3.0
   hint_text="Treasure recovered · the sanctuary glows" if language=="en" else "寻宝完成 · 圣所重现光芒"
   print("TIDAL_COMPLETE ",JSON.stringify({"demo":demo,"stage":4}))
  tip_until=game_time+3.0;update_state();save_game()
@@ -678,6 +682,7 @@ func _notification(what:int) -> void:
 func _physics_process(delta:float) -> void:
  if player==null:return
  game_time+=delta
+ action_button.disabled=beacon_awakened and game_time<restart_available_time
  var input:=Vector2.ZERO
  if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT):input.x-=1
  if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT):input.x+=1
@@ -801,7 +806,7 @@ func load_game() -> void:
  loaded_found=true
 
 func reset_game() -> void:
- activated=[false,false,false];completed=false;beacon_awakened=false;tip_until=0.0
+ activated=[false,false,false];completed=false;beacon_awakened=false;tip_until=0.0;restart_available_time=0.0
  player.position=swim.safe_spawn_position;player.velocity=Vector3.ZERO;swim=SwimController.new();swim.safe_spawn_position=player.position
  update_state();save_game()
 
@@ -840,7 +845,8 @@ func mark_frame_ready() -> void:
  print("TIDAL_FRAME_READY ",JSON.stringify({"time":game_time,"viewport":str(get_viewport().get_visible_rect().size),"font_ascii":game_font.has_char(65)}))
 
 func on_action_pressed() -> void:
- if beacon_awakened:reset_game()
+ if beacon_awakened:
+  if game_time>=restart_available_time:reset_game()
  else:interact()
 
 func change_language(trigger:String) -> void:

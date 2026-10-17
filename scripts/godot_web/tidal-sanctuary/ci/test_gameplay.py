@@ -1,9 +1,12 @@
 """Fail-closed unit fixtures, not claims that real input or rendering has passed."""
 import copy
 import unittest
+from pathlib import Path
 from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
+from capture_browser import capture_png, secondary_touch_tap
+from capture_native import validate_input_movie_span
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
 
@@ -188,6 +191,66 @@ class GameplayObserverTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "skips a required quest milestone"):
                 driver.run()
 
+    def test_callback_drift_outside_navigation_radius_does_not_undo_valid_action(self):
+        initial = self.at_stage(0, position=[1.3, 1, 7.8])
+        samples = [initial]
+        driver = self.driver(samples)
+        driver.observe()
+        driver.request_action(initial, ROUTE[0])
+        acknowledged = self.at_stage(1, sample_id=2, physics_frame=72,
+                                     position=[1.3135, .4668, 6.8344])
+        samples.append(acknowledged)
+        driver.observe()
+        self.assertTrue(driver.milestone_reached(acknowledged, ROUTE[0]))
+        self.assertFalse(driver.milestone_reached(initial, ROUTE[0]))
+        driver.actions.clear()
+        with self.assertRaisesRegex(ValueError, "matching accepted physical action"):
+            driver.milestone_reached(acknowledged, ROUTE[0])
+
+    def test_navigation_waypoint_preserves_held_input_until_next_direction(self):
+        driver = self.driver([self.state()])
+        driver.snapshot.side_effect = [None, RuntimeError("waypoint captured")]
+        point = {"name": "through point", "target": [1.3, 10], "screenshot": "marker.png"}
+        with patch("gameplay.ROUTE", [point]), self.assertRaisesRegex(RuntimeError, "waypoint captured"):
+            driver.run()
+        # Only finally releases input; reaching a path turn must not create a
+        # zero-duration release/repress of a key shared by both directions.
+        driver.move.assert_called_once_with((0, 0))
+        driver.interact.assert_not_called()
+
+    def test_pending_action_does_not_resteer_or_double_tap(self):
+        initial = self.at_stage(0, position=[1.3, 1, 7.8])
+        samples, clock = [initial], [1.0]
+        callback = Mock(side_effect=lambda _: samples.append(
+            self.at_stage(0, sample_id=2, physics_frame=72, position=[1.3, 1, 6.84])))
+        driver = self.driver(samples, callback)
+        driver.timeout = .5
+        driver.pause = lambda seconds: clock.__setitem__(0, clock[0] + seconds)
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]):
+            with self.assertRaisesRegex(RuntimeError, "could not reach/complete"):
+                driver.run()
+        callback.assert_called_once_with(initial)
+        self.assertEqual(len(driver.actions), 1)
+        self.assertTrue(all(call.args == ((0, 0),) for call in driver.move.call_args_list))
+
+    def test_slow_snapshot_requires_fresh_real_observation_after_capture(self):
+        for advances in (True, False):
+            clock = [1.0]
+            samples = [self.state(), self.state(sample_id=2, physics_frame=72, locomotion="wade", water_depth=.2)]
+            driver = self.driver(samples)
+            def capture(*_):
+                clock[0] += 12
+                if advances:
+                    samples.append(self.state(sample_id=3, physics_frame=84, locomotion="wade", water_depth=.2))
+            driver.snapshot.side_effect = capture
+            with self.subTest(advances=advances), patch("gameplay.time.monotonic", side_effect=lambda: clock[0]):
+                if advances:
+                    self.assertEqual(driver.observe()["sample_id"], 3)
+                    self.assertEqual(driver.capture_seconds, 12)
+                else:
+                    with self.assertRaisesRegex(RuntimeError, "stopped advancing"):
+                        driver.observe()
+
     def test_fresh_process_restoration_requires_existing_matching_complete_save(self):
         expected = self.finished()
         receipt = {**expected, "found": True}
@@ -237,6 +300,44 @@ class AuthoringBoundaryTests(unittest.TestCase):
                          {"executed": True, "result": None}):
             with self.subTest(response=response), self.assertRaises(ValueError):
                 editor_idle_sample(response, expected)
+
+
+class BrowserInputTests(unittest.TestCase):
+    def test_second_finger_uses_active_set_moves_and_never_releases_primary(self):
+        primary = [{"id": 0, "x": 80, "y": 600}]
+        action = {"id": 1, "x": 304, "y": 787}
+        send, pause = Mock(), Mock()
+        secondary_touch_tap(send, primary, action, pause)
+        self.assertEqual([(call.args[0], [point["id"] for point in call.args[1]])
+                          for call in send.call_args_list], [("touchMove", [0, 1]), ("touchMove", [0])])
+        self.assertEqual(primary, [{"id": 0, "x": 80, "y": 600}])
+        pause.assert_called_once_with(.09)
+        for invalid in ([], [{"id": 1}], primary + [action]):
+            with self.assertRaises(ValueError):
+                secondary_touch_tap(send, invalid, action, pause)
+
+    def test_required_screenshot_timeout_is_finite_and_errors_are_not_masked(self):
+        page = Mock()
+        receipt = capture_png(page, Path("actual.png"))
+        page.screenshot.assert_called_once_with(path="actual.png", timeout=120000)
+        self.assertEqual(receipt["timeout_seconds"], 120)
+        self.assertFalse(receipt["diagnostic"])
+        capture_png(page, Path("diagnostic.png"), diagnostic=True)
+        page.screenshot.assert_called_with(path="diagnostic.png", timeout=30000)
+        page.screenshot.side_effect = TimeoutError("capture failed")
+        with self.assertRaisesRegex(TimeoutError, "capture failed"):
+            capture_png(page, Path("required.png"))
+
+    def test_input_movie_must_cover_observed_route_not_merely_decode(self):
+        video = {"width": 1280, "height": 720}
+        validate_input_movie_span(video, 100.25, 100)
+        with self.assertRaisesRegex(RuntimeError, "shorter than"):
+            validate_input_movie_span(video, 3, 100)
+        for duration, wall in ((0, 100), (602, 100), (100, 0), (100, float("nan")), (float("nan"), 100)):
+            with self.subTest(duration=duration, wall=wall), self.assertRaises(RuntimeError):
+                validate_input_movie_span(video, duration, wall)
+        with self.assertRaises(RuntimeError):
+            validate_input_movie_span({"width": 640, "height": 360}, 100, 100)
 
 
 if __name__ == "__main__":

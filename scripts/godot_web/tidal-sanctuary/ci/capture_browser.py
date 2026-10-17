@@ -43,6 +43,25 @@ def wait_observer(page, console, prefix, start, timeout=15):
 BROWSER_ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"]
 
 
+def secondary_touch_tap(send_touch, primary_points, action, pause):
+    if len(primary_points) != 1 or primary_points[0].get("id") != 0 or action.get("id") != 1:
+        raise ValueError("Second-finger tap requires the original held primary finger")
+    # CDP touchEnd/touchCancel must contain no points. During an active gesture,
+    # touchMove diffs the active ID set: adding 1 presses it, removing 1 releases
+    # it while retaining 0. A nonempty touchEnd incorrectly released finger 0.
+    # https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchTouchEvent
+    send_touch("touchMove", primary_points + [action])
+    pause(.09)
+    send_touch("touchMove", primary_points)
+
+
+def capture_png(page, path, diagnostic=False):
+    started = time.monotonic()
+    page.screenshot(path=str(path), timeout=30000 if diagnostic else 120000)
+    return {"name": path.name, "wall_seconds": time.monotonic() - started,
+            "timeout_seconds": 30 if diagnostic else 120, "diagnostic": diagnostic}
+
+
 def wait_ready(page, console, failures):
     deadline = time.monotonic() + 150
     while time.monotonic() < deadline and not any(item["text"].startswith("TIDAL_FRAME_READY ") for item in console):
@@ -105,8 +124,10 @@ def main():
                     nonlocal touch_points
                     if mobile:
                         x, y = direction
-                        touch_points = [{"id": 0, "x": origin[0] + x * 65, "y": origin[1] + y * 65}]
-                        send_touch("touchMove", touch_points)
+                        wanted = [{"id": 0, "x": origin[0] + x * 65, "y": origin[1] + y * 65}]
+                        if wanted != touch_points:
+                            send_touch("touchMove", wanted)
+                            touch_points = wanted
                     else:
                         wanted = keyboard_direction(direction)
                         for key in sorted(pressed - wanted):
@@ -124,9 +145,8 @@ def main():
                         action = {"id": 1, "x": x + w / 2, "y": y + h / 2}
                         if not 0 <= action["x"] <= width or not 0 <= action["y"] <= height:
                             raise RuntimeError("Actual touch action button is outside the rendered viewport")
-                        send_touch("touchStart", touch_points + [action])
-                        page.wait_for_timeout(90)
-                        send_touch("touchEnd", touch_points)
+                        secondary_touch_tap(send_touch, touch_points, action,
+                                            lambda seconds: page.wait_for_timeout(seconds * 1000))
                     else:
                         page.keyboard.press("e", delay=80)
                         events.append({"time": time.monotonic(), "kind": "keypress", "key": "e"})
@@ -136,12 +156,21 @@ def main():
                         raise RuntimeError("Game exited during actual browser-input route")
                     if failures:
                         raise RuntimeError("Browser errors during actual input: " + json.dumps(failures))
+                    if mobile and observer_receipts(console, "TIDAL_TOUCH_RELEASE", touch_boundary):
+                        raise RuntimeError("Primary steering finger was released before the continuous route finished")
                     return observer_receipts(console, "TIDAL_STATE")
+
+                def capture(name, diagnostic=False):
+                    receipt = capture_png(page, out / name, diagnostic)
+                    result.setdefault("captures", []).append(receipt)
+                    return receipt
 
                 def screenshot(name, state):
                     file = out / (label + "-" + name)
-                    page.screenshot(path=str(file))
+                    receipt = capture(file.name)
                     screenshots.append({"name": file.name, "kind": "physical-input-route", "state": state,
+                                        "state_timing": "passive sample before screenshot request",
+                                        "capture_wall_seconds": receipt["wall_seconds"],
                                         "sha256": sha256(file), "bytes": file.stat().st_size})
 
                 try:
@@ -160,7 +189,7 @@ def main():
                         raise RuntimeError("Actual Web game canvas did not fill requested viewport")
                     if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
                         raise RuntimeError("Web shell overflows horizontally at requested viewport")
-                    page.screenshot(path=str(out / (label + ".png")))
+                    capture(label + ".png")
                     result.update({"canvas": bounds, "rendered": True,
                         "ready_log": next(item["text"] for item in console if item["text"].startswith("TIDAL_FRAME_READY ")),
                         "loaded_wasm": any(url.endswith(".wasm") for url in requests),
@@ -176,7 +205,7 @@ def main():
                         language = wait_observer(page, console, "TIDAL_LANGUAGE_FRAME", boundary)
                         validate_language_frame(language, previous_change)
                         result["language"].update({"status": "passed", "receipt": language})
-                        page.screenshot(path=str(out / "desktop-zh.png"))
+                        capture("desktop-zh.png")
                         # The real second keypress restores English; never edit UI/state directly.
                         boundary = len(console)
                         page.keyboard.press("l", delay=80)
@@ -235,7 +264,7 @@ def main():
                     if len(loads) != 1:
                         raise RuntimeError("Fresh Chromium process must emit exactly one load receipt")
                     validate_restored(loads[0], saved)
-                    page.screenshot(path=str(out / (label + "-restored.png")))
+                    capture(label + "-restored.png")
                     result["restore"].update({"status": "passed", "loaded": loads[0]})
                     report["checks"].append({"name": label + " fresh Chromium process restores completed treasure quest", "passed": True})
                     result["passed"] = True
@@ -246,7 +275,7 @@ def main():
                             result[stage]["status"] = "failed"
                     try:
                         if page is not None:
-                            page.screenshot(path=str(out / (label + "-failure.png")))
+                            capture(label + "-failure.png", diagnostic=True)
                     except Exception as screenshot_error:
                         result["failure_screenshot_error"] = str(screenshot_error)
                     # Portrait evidence is independent of desktop input/language success.
@@ -265,7 +294,8 @@ def main():
                             result["passed"] = False
                         write_json(out / (label + "-" + name + "-console.json"), {"console": lines, "failures": errors})
                     write_json(out / (label + "-input-route.json"), {"input_events": events,
-                        "samples": driver.samples if driver else [], "milestones": driver.milestones if driver else [], "screenshots": screenshots})
+                        "samples": driver.samples if driver else [], "milestones": driver.milestones if driver else [],
+                        "physical_actions": driver.actions if driver else [], "screenshots": screenshots})
                     write_json(out / (label + "-result.json"), result)
         failed = [item["name"] for item in report["viewports"] if not item["passed"]]
         if failed:
