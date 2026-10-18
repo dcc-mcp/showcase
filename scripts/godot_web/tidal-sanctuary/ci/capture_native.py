@@ -245,6 +245,7 @@ def main():
         report["checks"].append(import_native_resources(godot, project, out))
         for script, prefix in (("verify_swimming.gd", "TIDAL_SWIMMING_CHECK"),
                                ("verify_treasure.gd", "TIDAL_TREASURE_CHECK"),
+                               ("verify_input.gd", "TIDAL_INPUT_CHECK"),
                                ("verify_collision.gd", "TIDAL_COLLISION_CHECK"),
                                ("verify_audio.gd", "TIDAL_AUDIO_CHECKS"),
                                ("verify_story.gd", "TIDAL_STORY_CHECK")):
@@ -479,7 +480,7 @@ def main():
         stop_process(recorder)
         stop_process(runtime)
         engine_errors = []
-        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "verify_collision.gd.log", "verify_audio.gd.log", "verify_story.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
+        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "verify_input.gd.log", "verify_collision.gd.log", "verify_audio.gd.log", "verify_story.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
             path = out / log_name
             if path.exists():
                 try:

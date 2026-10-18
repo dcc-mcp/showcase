@@ -1009,6 +1009,11 @@ func save_game(reason:String="auto") -> void:
   if saved_ok:
    var receipt:=progress_data();receipt["schema"]=1;receipt["persistent"]=OS.is_userfs_persistent();receipt["reason"]=reason;print("TIDAL_SAVE ",JSON.stringify(receipt))
 
+func save_flag(value: Variant) -> bool:
+ if value is bool:return value
+ if value is int or value is float:return is_finite(float(value)) and value != 0
+ return false
+
 func load_game() -> void:
  if demo or not FileAccess.file_exists(SAVE_PATH):return
  var parser:=JSON.new()
@@ -1017,15 +1022,16 @@ func load_game() -> void:
  if not data is Dictionary or data.get("schema")!=2:return
  var a=data.get("activated",[])
  if a is Array and a.size()==3:
-  activated=[bool(a[0]),bool(a[1]) and bool(a[0]),bool(a[2]) and bool(a[1]) and bool(a[0])]
+  var chart:=save_flag(a[0]);var key:=save_flag(a[1]) and chart;var pearl:=save_flag(a[2]) and key
+  activated=[chart,key,pearl]
  var p=data.get("player",[])
- if p is Array and p.size()==3:
+ if p is Array and p.size()==3 and p.all(func(value:Variant)->bool:return value is int or value is float):
   var saved:=Vector3(float(p[0]),float(p[1]),float(p[2]))
   var ground:=height_at(saved.x,saved.z) if saved.is_finite() else NAN
   player.position=swim.restored_position(saved,ground,swim.safe_spawn_position)
  language="zh" if data.get("language","en")=="zh" else "en"
  audio_muted=data.get("audio_muted",false)==true;tide_audio.set_muted(audio_muted,"load")
- beacon_awakened=bool(data.get("beacon_awakened",false)) and activated==[true,true,true]
+ beacon_awakened=save_flag(data.get("beacon_awakened",false)) and activated==[true,true,true]
  loaded_found=true
 
 func reset_game() -> void:

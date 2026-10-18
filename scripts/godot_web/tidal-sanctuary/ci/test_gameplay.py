@@ -549,6 +549,98 @@ class GameplayObserverTests(unittest.TestCase):
         driver.interact.assert_not_called()
         self.assertEqual(driver.actions, [])
 
+    def test_hosted_touch_stop_drift_reapproaches_before_any_action(self):
+        # Retained failed head 0e5ad284: sample 30 was moving near the chart,
+        # neutral arrived at 32, and settled sample 35 was outside real reach.
+        initial = self.state(sample_id=30, physics_frame=390,
+            position=[1.30216014, .49920744, 7.47378206],
+            movement_input=[-.00044332, -.92857087], velocity=[-.00400176, 0, -3.06396008])
+        buffered = self.state(sample_id=32, physics_frame=416,
+            position=[1.30944026, .451, 6.18772173], velocity=[-.00097713, 0, -1.85857749])
+        settled = self.state(sample_id=35, physics_frame=455,
+            position=[1.31959140, .45105976, 6.01897573])
+        samples, clock = [initial], [1.0]
+        driver = self.driver(samples)
+        def move(direction):
+            if direction != (0, 0):
+                self.assertEqual(direction, direction_to(settled, ROUTE[0]["target"]))
+                self.assertEqual(samples[-1], settled)
+                raise RuntimeError("physical reapproach requested")
+            if len(samples) == 1:
+                samples.append(buffered)
+        def pause(seconds):
+            clock[0] += seconds
+            if len(samples) == 2:
+                samples.append(settled)
+        driver.move.side_effect, driver.pause = move, pause
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                patch("gameplay.ROUTE", [ROUTE[0]]), \
+                self.assertRaisesRegex(RuntimeError, "physical reapproach requested"):
+            driver.run()
+        driver.interact.assert_not_called()
+        self.assertEqual(driver.actions, [])
+        self.assertEqual(driver.stops[0]["after_sample_id"], 32)
+        self.assertEqual(driver.stops[0]["drifted_sample_id"], 35)
+
+
+    def test_stop_drift_then_reapproach_sends_one_action_after_second_stop(self):
+        point = {**ROUTE[0], "screenshot": "checkpoint.png"}
+        initial = self.state(position=[1.3, 1, 7.47], movement_input=[0, -1], velocity=[0, 0, -3])
+        outside = self.state(sample_id=2, physics_frame=72, position=[1.3, 1, 6.02])
+        samples, clock = [initial], [1.0]
+        driver = self.driver(samples)
+        driver.snapshot.side_effect = [None, RuntimeError("accepted checkpoint captured")]
+        def move(direction):
+            if direction == (0, 0):
+                if len(samples) == 1:
+                    samples.append(outside)
+                elif len(samples) == 4:
+                    samples.append(self.state(sample_id=5, physics_frame=108, position=[1.3, 1, 7.0]))
+            else:
+                self.assertEqual(samples[-1]["sample_id"], 3)
+                driver.interact.assert_not_called()
+                samples.append(self.state(sample_id=4, physics_frame=96,
+                    position=[1.3, 1, 6.8], movement_input=[0, 1], velocity=[0, 0, 2]))
+        def pause(seconds):
+            clock[0] += seconds
+            if len(samples) in (2, 5):
+                sample = samples[-1]
+                samples.append({**sample, "sample_id": sample["sample_id"] + 1,
+                                "physics_frame": sample["physics_frame"] + 12})
+        driver.move.side_effect, driver.pause = move, pause
+        driver.interact.side_effect = lambda state: samples.append(
+            {**state, "sample_id": 7, "physics_frame": 132, "quest_stage": 1})
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), \
+                patch("gameplay.ROUTE", [point]), \
+                self.assertRaisesRegex(RuntimeError, "accepted checkpoint captured"):
+            driver.run()
+        driver.interact.assert_called_once_with(samples[5])
+        self.assertEqual(len(driver.stops), 2)
+        self.assertEqual(driver.stops[0]["drifted_sample_id"], 3)
+        self.assertEqual(driver.actions[0]["stop"]["after_sample_id"], 5)
+        self.assertEqual(driver.actions[0]["stop"]["settled_sample_id"], 6)
+        self.assertEqual(driver.actions[0]["accepted_sample_id"], 7)
+
+
+    def test_settled_action_uses_real_range_without_expanding_it(self):
+        point = {**ROUTE[0], "target": [0, 0]}
+        initial = self.state(position=[0, 1, 1.2])
+        samples = [initial]
+        driver = self.driver(samples)
+        driver.observe()
+        settled = self.settle(driver, samples, initial, point)
+        settled["velocity"] = [0, .5, 0]  # Vertical wave buoyancy does not move out of reach.
+        # The .8 m navigation aiming disk is not a restriction in the game.
+        # A neutral, stationary player at 1.2 m is still genuinely in reach.
+        for distance in (1.55, 1.550001, 2):
+            with self.subTest(distance=distance), self.assertRaisesRegex(ValueError, "outside the authored interaction range"):
+                driver.request_action({**settled, "position": [0, 1, distance]}, point)
+        driver.interact.assert_not_called()
+        driver.request_action(settled, point)
+        driver.interact.assert_called_once_with(settled)
+        self.assertEqual(driver.actions[0]["stop"]["settled_sample_id"], 2)
+
+
     def test_slow_snapshot_requires_fresh_real_observation_after_capture(self):
         for advances in (True, False):
             clock = [1.0]

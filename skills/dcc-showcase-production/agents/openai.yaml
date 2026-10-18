@@ -1,0 +1,4 @@
+interface:
+  display_name: "DCC Showcase Production"
+  short_description: "Create and review evidence-backed DCC showcases"
+  default_prompt: "Use $dcc-showcase-production to make or review a DCC-MCP showcase with reproducible native output and honest acceptance evidence."

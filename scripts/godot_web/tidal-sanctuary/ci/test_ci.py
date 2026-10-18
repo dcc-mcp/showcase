@@ -128,6 +128,12 @@ class HarnessTests(unittest.TestCase):
             for name in GAME_FILES:
                 self.assertEqual((destination / name).read_bytes(), (source / name).read_bytes())
 
+    def test_input_regression_is_copied_and_run(self):
+        self.assertIn("verify_input.gd", GAME_FILES)
+        runner = Path(__file__).with_name("capture_native.py").read_text()
+        self.assertIn('("verify_input.gd", "TIDAL_INPUT_CHECK")', runner)
+        self.assertIn('"verify_input.gd.log"', runner)
+
     def test_manifest_missing_asset_cannot_silently_pass(self):
         with tempfile.TemporaryDirectory() as root:
             source, destination = Path(root) / "source", Path(root) / "copy"
