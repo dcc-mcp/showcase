@@ -8,6 +8,7 @@ import importlib.metadata
 import json
 import math
 import subprocess
+import sys
 import threading
 import tempfile
 import time
@@ -15,10 +16,62 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from common import check_engine_log, isolated_output, sha256, write_json
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from gameplay import (BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS, BROWSER_PHYSICS_LIMIT_SECONDS,
                       RouteDriver, complete, keyboard_direction, validate_restored)
 from observers import finite_vector, observer_receipts, positive_integer, validate_language_frame, validate_touch_release
+
+
+def bounded_cdp(session, method, params=None, timeout=120):
+    """Pinned Playwright 1.63 CDP bridge with its normal driver-side deadline.
+
+    Public sync CDPSession.send omits a timeout calculator. This isolated adapter
+    supplies it to the same Channel.send path used by generated methods, so the
+    driver races the CDP response against its deadline. No signals or asyncio
+    cancellation may interrupt the sync dispatcher. Hosted smoke checks verify
+    both timeout and the subsequent passive call on every run.
+    https://github.com/microsoft/playwright-python/blob/v1.63.0/playwright/_impl/_connection.py
+    https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/chromium/crConnection.ts
+    """
+    if type(timeout) not in (int, float) or not math.isfinite(timeout) or timeout <= 0:
+        raise ValueError("CDP timeout must be a positive finite number")
+    channel = getattr(getattr(session, "_impl_obj", None), "_channel", None)
+    if not callable(getattr(session, "_sync", None)) or not callable(getattr(channel, "send", None)):
+        raise RuntimeError("Pinned Playwright CDP timeout adapter is unavailable")
+    command = "detach" if method == "detach" else "send"
+    payload = {} if method == "detach" else {"method": method, "params": params or {}}
+    return session._sync(channel.send(command, lambda _: timeout * 1000, payload))
+
+
+def detach_cdp(session):
+    original = sys.exception()
+    try:
+        bounded_cdp(session, "detach", timeout=5)
+    except Exception as cleanup:
+        if original is not None:
+            raise RuntimeError(f"{original}; CDP cleanup also failed: {cleanup}") from original
+        raise
+
+
+def passive_evaluate(page, function, *arguments):
+    """Inspect/record only; Playwright evaluate uses userGesture:true in Chromium.
+
+    https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/chromium/crExecutionContext.ts
+    No context resume, source start, game mutation or synthetic input is added.
+    """
+    expression = "(" + function + ")(" + ",".join(json.dumps(value, allow_nan=False) for value in arguments) + ")"
+    session = page.context.new_cdp_session(page)
+    try:
+        response = bounded_cdp(session, "Runtime.evaluate", {"expression": expression, "userGesture": False,
+            "awaitPromise": True, "returnByValue": True, "timeout": 120000})
+        if response.get("exceptionDetails"):
+            raise RuntimeError("Passive browser observation failed: " + json.dumps(response["exceptionDetails"]))
+        result = response.get("result", {})
+        if "value" not in result:
+            raise RuntimeError("Passive browser observation did not return a JSON value")
+        return result["value"]
+    finally:
+        detach_cdp(session)
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -317,7 +370,7 @@ def validate_recorded_pcm(pcm, sample_rate):
 
 
 def save_live_audio(page, out, label):
-    captured = page.evaluate("() => __tidalAudio.finishRecording()")
+    captured = passive_evaluate(page, "() => __tidalAudio.finishRecording()")
     encoded = captured.pop("base64")
     path = out / (label + "-live-audio.webm")
     data = base64.b64decode(encoded, validate=True)
@@ -420,9 +473,57 @@ def validate_web_exit(receipt, expected):
 
 def capture_png(page, path, diagnostic=False):
     started = time.monotonic()
-    page.screenshot(path=str(path), timeout=30000 if diagnostic else 120000)
+    timeout = 30 if diagnostic else 120
+    session = page.context.new_cdp_session(page)
+    try:
+        result = bounded_cdp(session, "Page.captureScreenshot", {"format": "png", "fromSurface": True,
+            "captureBeyondViewport": False}, timeout=timeout)
+        png = base64.b64decode(result["data"], validate=True)
+        if not png.startswith(b"\x89PNG\r\n\x1a\n"):
+            raise ValueError("Passive browser capture did not produce PNG bytes")
+        path.write_bytes(png)
+    finally:
+        detach_cdp(session)
     return {"name": path.name, "wall_seconds": time.monotonic() - started,
-            "timeout_seconds": 30 if diagnostic else 120, "diagnostic": diagnostic}
+            "timeout_seconds": timeout, "diagnostic": diagnostic, "method": "CDP Page.captureScreenshot; no evaluation preflight"}
+
+
+def verify_passive_protocol(pw, out):
+    """A fresh blank browser verifies real timeout recovery, never game state."""
+    browser = pw.chromium.launch(headless=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS)
+    try:
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto("data:text/html,<body>Passive protocol smoke fixture</body>")
+        session = context.new_cdp_session(page)
+        timed_out = False
+        try:
+            try:
+                bounded_cdp(session, "Runtime.evaluate", {"expression": "new Promise(() => {})",
+                    "awaitPromise": True, "returnByValue": True, "userGesture": False}, timeout=.1)
+            except PlaywrightTimeoutError:
+                timed_out = True
+        finally:
+            detach_cdp(session)
+        if not timed_out:
+            raise RuntimeError("CDP adapter did not enforce the real driver timeout")
+        value = passive_evaluate(page, "() => ({active:navigator.userActivation.hasBeenActive, value:7})")
+        if value != {"active": False, "value": 7}:
+            raise RuntimeError("Passive observation manufactured activation after timeout recovery")
+        capture_png(page, out / "passive-protocol-smoke.png", diagnostic=True)
+        if passive_evaluate(page, "() => navigator.userActivation.hasBeenActive") is not False:
+            raise RuntimeError("Passive screenshot manufactured user activation")
+        try:
+            passive_evaluate(page, "() => Promise.reject(new Error('expected smoke rejection'))")
+        except RuntimeError as error:
+            if "expected smoke rejection" not in str(error):
+                raise
+        else:
+            raise RuntimeError("Passive observation ignored a rejected Promise")
+        return {"passed": True, "driver_timeout_seconds": .1, "post_timeout_call": True,
+                "screenshot_preserves_no_activation": True, "rejected_promise_propagates": True}
+    finally:
+        browser.close()
 
 
 def wait_ready(page, console, failures):
@@ -435,7 +536,7 @@ def wait_ready(page, console, failures):
         page.wait_for_timeout(100)
     if not any(item["text"].startswith("TIDAL_FRAME_READY ") for item in console):
         raise RuntimeError("Actual exported Godot did not emit TIDAL_FRAME_READY after frame_post_draw")
-    page.evaluate("() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+    passive_evaluate(page, "() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
 
 
 def main():
@@ -458,7 +559,10 @@ def main():
               "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS},
               "pack_sha256": sha256(args.site / "index.pck")}
     try:
+        if report["playwright_version"] != "1.63.0":
+            raise RuntimeError("This acceptance lane requires pinned Playwright 1.63.0")
         with sync_playwright() as pw:
+            report["passive_protocol"] = verify_passive_protocol(pw, out)
             for width, height, mobile in ((1280, 720, False), (390, 844, True)):
                 label = "portrait-390x844" if mobile else "desktop-1280x720"
                 result = {"name": label, "width": width, "height": height, "passed": False, "rendered": False,
@@ -507,7 +611,7 @@ def main():
                             pressed.add(key)
 
                 def interact(state):
-                    page.evaluate("name => __tidalAudio.mark(name)", "action-" + str(state["quest_stage"]))
+                    passive_evaluate(page, "name => __tidalAudio.mark(name)", "action-" + str(state["quest_stage"]))
                     if mobile:
                         x, y, w, h = state["action_rect"]
                         action = {"id": 1, "x": x + w / 2, "y": y + h / 2}
@@ -544,7 +648,7 @@ def main():
                 try:
                     context = launch()
                     page = context.pages[0]
-                    report["browser_version"] = context.browser.version if context.browser else page.evaluate("navigator.userAgent")
+                    report["browser_version"] = context.browser.version if context.browser else passive_evaluate(page, "() => navigator.userAgent")
                     context.add_init_script(path=str(Path(__file__).with_name("audio_probe.js")))
                     command_session = context.new_cdp_session(page)
                     actual_args = command_session.send("Browser.getBrowserCommandLine")["arguments"]
@@ -557,23 +661,25 @@ def main():
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
                     wait_ready(page, console, failures)
-                    canvas = page.locator("#canvas")
-                    bounds = canvas.bounding_box()
+                    bounds = passive_evaluate(page, "() => {const box = document.querySelector('#canvas')?.getBoundingClientRect(); return box ? {width:box.width,height:box.height} : null;}")
                     if not bounds or bounds["width"] < width - 2 or bounds["height"] < height - 2:
                         raise RuntimeError("Actual Web game canvas did not fill requested viewport")
-                    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+                    if not passive_evaluate(page, "() => document.documentElement.scrollWidth <= innerWidth + 1"):
                         raise RuntimeError("Web shell overflows horizontally at requested viewport")
                     result["audio"] = {"status": "running", "scope": "fresh-profile real-input browser audio"}
-                    recording = page.evaluate("() => __tidalAudio.startRecording()")
-                    baseline_mark = page.evaluate("() => __tidalAudio.mark('no-input-baseline')")
+                    recording = passive_evaluate(page, "() => __tidalAudio.startRecording()")
+                    baseline_mark = passive_evaluate(page, "() => __tidalAudio.mark('no-input-baseline')")
                     page.wait_for_timeout(2300)
-                    baseline = page.evaluate("() => __tidalAudio.snapshot()")
+                    baseline = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["baseline"] = validate_audio_baseline(baseline, baseline_mark["wall_ms"])
                     write_json(out / (label + "-audio-baseline.json"), baseline)
                     initial_state = wait_state(page, console)
                     if initial_state.get("journey_started") is not False:
                         raise RuntimeError("Fresh journey started before its actual Begin gesture")
                     capture(label + ".png")
+                    post_capture = passive_evaluate(page, "() => __tidalAudio.snapshot()")
+                    result["audio"]["before_begin"] = validate_audio_baseline(post_capture, baseline_mark["wall_ms"])
+                    write_json(out / (label + "-audio-before-begin.json"), post_capture)
                     boundary = len(console)
                     begin_input = real_button(page, initial_state, "begin_rect", mobile, width, height)
                     events.append({"time": time.monotonic(), "kind": "begin", **begin_input})
@@ -582,9 +688,9 @@ def main():
                     wait_state(page, console, initial_state["sample_id"], lambda state: state.get("journey_started") is True)
                     result["journey"] = {"input": begin_input, "receipt": journey}
                     page.wait_for_timeout(2100)  # Actual authored 1.5-second music fade.
-                    audible_mark = page.evaluate("() => __tidalAudio.mark('after-begin')")
+                    audible_mark = passive_evaluate(page, "() => __tidalAudio.mark('after-begin')")
                     page.wait_for_timeout(1500)
-                    audible = page.evaluate("() => __tidalAudio.snapshot()")
+                    audible = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["after_begin"] = audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True)
                     # Toggle the same visible shipped button with actual input.
                     mute_state = wait_state(page, console)
@@ -595,9 +701,9 @@ def main():
                         raise ValueError("Actual mute input did not mute the live game")
                     wait_state(page, console, mute_state["sample_id"], lambda state: state.get("audio_muted") is True)
                     page.wait_for_timeout(500)  # Bounded meter/history tail; never wait indefinitely for silence.
-                    quiet_mark = page.evaluate("() => __tidalAudio.mark('muted')")
+                    quiet_mark = passive_evaluate(page, "() => __tidalAudio.mark('muted')")
                     page.wait_for_timeout(1400)
-                    quiet = page.evaluate("() => __tidalAudio.snapshot()")
+                    quiet = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["muted"] = {"input": mute_input, "receipt": muted, "tail_allowance_seconds": .5,
                         "window": audio_window(quiet, quiet_mark["wall_ms"], quiet["wall_ms"], 1.1)}
                     unmute_state = wait_state(page, console)
@@ -608,19 +714,19 @@ def main():
                         raise ValueError("Actual unmute input did not restore the live game")
                     wait_state(page, console, unmute_state["sample_id"], lambda state: state.get("audio_muted") is False)
                     page.wait_for_timeout(250)
-                    unmute_mark = page.evaluate("() => __tidalAudio.mark('unmuted')")
+                    unmute_mark = passive_evaluate(page, "() => __tidalAudio.mark('unmuted')")
                     page.wait_for_timeout(1500)
-                    unmute_snapshot = page.evaluate("() => __tidalAudio.snapshot()")
+                    unmute_snapshot = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["unmuted"] = {"input": unmute_input, "receipt": unmuted,
                         "window": audio_window(unmute_snapshot, unmute_mark["wall_ms"], unmute_snapshot["wall_ms"], 1.2, audible=True)}
                     result["audio"]["recording"] = recording
-                    canvas.focus()
+                    page.locator("#canvas").focus()
                     if not mobile:
                         blocked_state = wait_state(page, console)
                         if blocked_state.get("interaction_available") is not False or blocked_state.get("quest_stage") != 0:
                             raise ValueError("Fresh spawn cannot provide the required out-of-range interaction probe")
                         blocked_boundary = len(console)
-                        blocked_before = page.evaluate("() => __tidalAudio.snapshot()")
+                        blocked_before = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                         page.keyboard.press("e", delay=80)
                         events.append({"time": time.monotonic(), "kind": "blocked-keypress", "key": "e"})
                         blocked_receipt = wait_observer(page, console, "TIDAL_INTERACTION_BLOCKED", blocked_boundary)
@@ -629,7 +735,7 @@ def main():
                             raise ValueError("Actual blocked E lacks the in-game rejection receipt")
                         blocked_after_state = wait_state(page, console, blocked_state["sample_id"])
                         page.wait_for_timeout(1200)
-                        blocked_after = page.evaluate("() => __tidalAudio.snapshot()")
+                        blocked_after = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                         if (blocked_after_state.get("quest_stage") != 0 or
                                 any(item.get("event") == "cue" for item in observer_receipts(console, "TIDAL_AUDIO", blocked_boundary)) or
                                 len([item for item in blocked_after["starts"] if item["name"] != "music"]) !=
@@ -694,7 +800,7 @@ def main():
                     report["checks"].append({"name": label + " actual input completes treasure loop and walks/wades/swims/returns to shore", "passed": True})
 
                     # Repeated action after completion must not restart progress or emit a fifth cue.
-                    negative_before = page.evaluate("() => __tidalAudio.snapshot()")
+                    negative_before = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     negative_state = wait_state(page, console)
                     negative_receipts = len([item for item in observer_receipts(console, "TIDAL_AUDIO") if item.get("event") == "cue"])
                     if mobile:
@@ -703,7 +809,7 @@ def main():
                         page.keyboard.press("e", delay=80)
                     negative_after_state = wait_state(page, console, negative_state["sample_id"])
                     page.wait_for_timeout(1200)
-                    negative_after = page.evaluate("() => __tidalAudio.snapshot()")
+                    negative_after = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     if (not complete(negative_after_state) or
                             len([item for item in negative_before["starts"] if item["name"] != "music"]) !=
                             len([item for item in negative_after["starts"] if item["name"] != "music"]) or
@@ -715,7 +821,7 @@ def main():
                     # fast, remain idle in the actual game until the bounded 32s span.
                     loop_deadline = time.monotonic() + 40
                     while True:
-                        current_audio = page.evaluate("() => __tidalAudio.snapshot()")
+                        current_audio = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                         music_starts = [item for item in current_audio["starts"] if item["name"] == "music"]
                         cue_starts = [item for item in current_audio["starts"] if item["name"] != "music"]
                         audio_time = audio_graph(current_audio)["context_time"]
@@ -778,12 +884,15 @@ def main():
                     if len(loads) != 1:
                         raise RuntimeError("Fresh Chromium process must emit exactly one load receipt")
                     validate_restored(loads[0], saved)
-                    restored_mark = page.evaluate("() => __tidalAudio.mark('restored-no-input')")
+                    restored_mark = passive_evaluate(page, "() => __tidalAudio.mark('restored-no-input')")
                     page.wait_for_timeout(2300)
-                    restored_audio = page.evaluate("() => __tidalAudio.snapshot()")
+                    restored_audio = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["restored_before_gesture"] = validate_audio_baseline(restored_audio, restored_mark["wall_ms"])
                     write_json(out / (label + "-restored-audio-baseline.json"), restored_audio)
                     capture(label + "-restored.png")
+                    post_capture = passive_evaluate(page, "() => __tidalAudio.snapshot()")
+                    result["audio"]["restored_before_begin"] = validate_audio_baseline(post_capture, restored_mark["wall_ms"])
+                    write_json(out / (label + "-restored-audio-before-begin.json"), post_capture)
                     # A restored mute must survive Begin; only a later real unmute makes sound.
                     restored_state = wait_state(page, restored_console)
                     if restored_state.get("audio_muted") is not True or restored_state.get("journey_started") is not False:
@@ -795,9 +904,9 @@ def main():
                     wait_state(page, restored_console, restored_state["sample_id"],
                                lambda state: state.get("journey_started") is True and state.get("audio_muted") is True)
                     page.wait_for_timeout(2100)
-                    quiet_mark = page.evaluate("() => __tidalAudio.mark('restored-muted-begin')")
+                    quiet_mark = passive_evaluate(page, "() => __tidalAudio.mark('restored-muted-begin')")
                     page.wait_for_timeout(1400)
-                    quiet = page.evaluate("() => __tidalAudio.snapshot()")
+                    quiet = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["restored_muted_begin"] = {"input": restored_begin, "receipt": restored_journey,
                         "window": audio_window(quiet, quiet_mark["wall_ms"], quiet["wall_ms"], 1.1)}
                     unmute_state = wait_state(page, restored_console)
@@ -808,9 +917,9 @@ def main():
                         raise ValueError("Restored real unmute did not enable the running journey")
                     wait_state(page, restored_console, unmute_state["sample_id"], lambda state: state.get("audio_muted") is False)
                     page.wait_for_timeout(500)
-                    audible_mark = page.evaluate("() => __tidalAudio.mark('restored-unmuted')")
+                    audible_mark = passive_evaluate(page, "() => __tidalAudio.mark('restored-unmuted')")
                     page.wait_for_timeout(1500)
-                    audible = page.evaluate("() => __tidalAudio.snapshot()")
+                    audible = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["restored_unmuted"] = {"input": restored_unmute, "receipt": unmuted,
                         "window": audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True),
                         "voices": validate_muted_restore_audio(quiet, audible, observer_receipts(restored_console, "TIDAL_AUDIO"))}
@@ -830,7 +939,7 @@ def main():
                         result["failure_screenshot_error"] = str(screenshot_error)
                     try:
                         if page is not None and not page.is_closed():
-                            write_json(out / (label + "-audio-failure.json"), page.evaluate("() => __tidalAudio ? __tidalAudio.snapshot() : {missing_probe:true}"))
+                            write_json(out / (label + "-audio-failure.json"), passive_evaluate(page, "() => __tidalAudio ? __tidalAudio.snapshot() : {missing_probe:true}"))
                     except Exception as audio_error:
                         result["audio_diagnostic_error"] = str(audio_error)
                     # Portrait evidence is independent of desktop input/language success.

@@ -53,8 +53,10 @@ func _ensure_players() -> void:
 		return
 	var bus_index := AudioServer.get_bus_index(BUS_NAME)
 	if bus_index < 0:
-		AudioServer.add_bus()
-		bus_index = AudioServer.bus_count - 1
+		# Godot 4.6.3 Web add_bus(-1) can reorder Sample buses and detach Master.
+		# Growing the count appends through set_sample_bus_count without moving it.
+		bus_index = AudioServer.bus_count
+		AudioServer.bus_count = bus_index + 1
 		AudioServer.set_bus_name(bus_index, BUS_NAME)
 		AudioServer.set_bus_send(bus_index, &"Master")
 		_created_bus = true

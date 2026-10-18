@@ -1,5 +1,8 @@
 """Fail-closed unit fixtures, not claims that real input or rendering has passed."""
 import copy
+import base64
+import tempfile
+import asyncio
 import json
 import subprocess
 import unittest
@@ -7,7 +10,7 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
-from capture_browser import capture_png, completed_route_save, route_diagnostics, secondary_touch_tap, validate_web_exit
+from capture_browser import capture_png, passive_evaluate, bounded_cdp, completed_route_save, route_diagnostics, secondary_touch_tap, validate_web_exit
 from capture_native import apply_movement_keys, validate_input_movie_span, wait_for_neutral_movement
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, inside_approach,
                       inside_interaction_region, keyboard_direction,
@@ -875,15 +878,73 @@ class BrowserInputTests(unittest.TestCase):
 
     def test_required_screenshot_timeout_is_finite_and_errors_are_not_masked(self):
         page = Mock()
-        receipt = capture_png(page, Path("actual.png"))
-        page.screenshot.assert_called_once_with(path="actual.png", timeout=120000)
-        self.assertEqual(receipt["timeout_seconds"], 120)
-        self.assertFalse(receipt["diagnostic"])
-        capture_png(page, Path("diagnostic.png"), diagnostic=True)
-        page.screenshot.assert_called_with(path="diagnostic.png", timeout=30000)
-        page.screenshot.side_effect = TimeoutError("capture failed")
-        with self.assertRaisesRegex(TimeoutError, "capture failed"):
-            capture_png(page, Path("required.png"))
+        session = page.context.new_cdp_session.return_value
+        png = b"\x89PNG\r\n\x1a\nfixture"
+        with tempfile.TemporaryDirectory() as directory, patch("capture_browser.bounded_cdp") as send:
+            send.side_effect = lambda session, method, params=None, timeout=120: {"data": base64.b64encode(png).decode()} if method != "detach" else None
+            path = Path(directory) / "actual.png"
+            receipt = capture_png(page, path)
+            self.assertEqual(send.call_args_list[0].args, (session, "Page.captureScreenshot", {"format": "png", "fromSurface": True, "captureBeyondViewport": False}))
+            self.assertEqual(send.call_args_list[0].kwargs, {"timeout": 120})
+            page.screenshot.assert_not_called()
+            page.evaluate.assert_not_called()
+            self.assertEqual(path.read_bytes(), png)
+            self.assertEqual(receipt["timeout_seconds"], 120)
+            self.assertFalse(receipt["diagnostic"])
+            send.reset_mock()
+            capture_png(page, path, diagnostic=True)
+            self.assertEqual(send.call_args_list[0].kwargs, {"timeout": 30})
+            send.side_effect = [TimeoutError("capture failed"), None]
+            with self.assertRaisesRegex(TimeoutError, "capture failed"):
+                capture_png(page, path)
+            send.side_effect = [TimeoutError("capture failed"), RuntimeError("detach failed")]
+            with self.assertRaisesRegex(RuntimeError, "capture failed; CDP cleanup also failed: detach failed"):
+                capture_png(page, path)
+            send.side_effect = [{"data": base64.b64encode(b"not PNG").decode()}, None]
+            with self.assertRaisesRegex(ValueError, "PNG"):
+                capture_png(page, path)
+
+    def test_passive_evaluation_invokes_functions_without_browser_activation(self):
+        page = Mock()
+        with patch("capture_browser.bounded_cdp") as send:
+            send.side_effect = [{"result": {"type": "boolean", "value": False}}, None]
+            self.assertIs(passive_evaluate(page, "name => name", "quote\"\n"), False)
+            session, method, args = send.call_args_list[0].args
+            self.assertEqual(method, "Runtime.evaluate")
+            self.assertEqual(args["expression"], '(name => name)("quote\\\"\\n")')
+            self.assertIs(args["userGesture"], False)
+            self.assertIs(args["returnByValue"], True)
+            self.assertIs(args["awaitPromise"], True)
+            self.assertEqual(args["timeout"], 120000)
+            page.evaluate.assert_not_called()
+            for response in ({"exceptionDetails": {"text": "rejected Promise"}}, {"result": {"type": "undefined"}}, {"result": {"type": "function"}}, {"result": {"unserializableValue": "NaN"}}):
+                send.side_effect = [response, None]
+                with self.subTest(response=response), self.assertRaises(RuntimeError):
+                    passive_evaluate(page, "() => Promise.reject(new Error('rejected Promise'))")
+
+    def test_cdp_deadline_uses_driver_timeout_and_next_call_works(self):
+        class Session:
+            def __init__(self):
+                self._impl_obj = self
+                self._channel = self
+                self.calls = []
+            def _sync(self, coroutine):
+                return asyncio.run(coroutine)
+            async def send(self, command, timeout_calculator, payload):
+                self.calls.append((command, timeout_calculator({}), payload))
+                if payload.get("method") == "hung":
+                    raise TimeoutError("driver deadline")
+                return {"ok": True}
+        session = Session()
+        with self.assertRaises(TimeoutError):
+            bounded_cdp(session, "hung", timeout=.1)
+        self.assertEqual(session.calls[0], ("send", 100., {"method": "hung", "params": {}}))
+        self.assertEqual(bounded_cdp(session, "next", {"ok": True}), {"ok": True})
+        bounded_cdp(session, "detach", timeout=5)
+        self.assertEqual(session.calls[-1], ("detach", 5000, {}))
+        for timeout in (0, -1, True, float("nan"), float("inf")):
+            with self.subTest(timeout=timeout), self.assertRaises(ValueError):
+                bounded_cdp(session, "next", timeout=timeout)
 
     def test_input_movie_must_cover_observed_route_not_merely_decode(self):
         video = {"width": 1280, "height": 720}

@@ -1,6 +1,7 @@
 """Fail-closed audio acceptance fixtures; never launches a browser/renderer."""
 import array
 import copy
+from pathlib import Path
 import unittest
 from unittest.mock import Mock
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window,
@@ -49,6 +50,18 @@ def route_audio():
 
 
 class AudioAcceptanceFixtures(unittest.TestCase):
+    def test_bus_growth_and_observers_do_not_reintroduce_known_failures(self):
+        audio = Path(__file__).parent.parent / "game/tide_audio.gd"
+        source = audio.read_text()
+        self.assertIn("AudioServer.bus_count = bus_index + 1", source)
+        self.assertNotIn("AudioServer.add_bus(", source)
+        source = Path(__file__).with_name("capture_browser.py").read_text()
+        self.assertNotIn("page.evaluate(", source)
+        self.assertNotIn("page.screenshot(", source)
+        self.assertNotIn("canvas.bounding_box(", source)
+        self.assertIn('result["audio"]["before_begin"] = validate_audio_baseline', source)
+        self.assertIn('result["audio"]["restored_before_begin"] = validate_audio_baseline', source)
+
     def test_restored_muted_begin_unmutes_without_restart_or_cues(self):
         source = {"id": 1, "name": "music", "scheduled_start": 2., "rate": 1, "offset": 0}
         before = {"starts": [source]}

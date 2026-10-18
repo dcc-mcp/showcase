@@ -35,6 +35,10 @@ func run() -> void:
 	check(not state.started and state.start_count == 0, "initial logical silence")
 	check(not state.music_playing and not state.cue_playing, "no player starts on ready")
 	check(state.music_loop, "OGG loop enabled")
+	check(AudioServer.get_bus_index(&"Master") == 0, "Master remains the first bus")
+	check(AudioServer.get_bus_index(TideAudio.BUS_NAME) > 0
+		and AudioServer.get_bus_send(AudioServer.get_bus_index(TideAudio.BUS_NAME)) == &"Master",
+		"shared audio bus routes to the preserved Master")
 	check(is_equal_approx(audio.get_node("Music").stream.get_length(), 32.0),
 		"imported music duration is 32 seconds")
 	for stage in range(4):
