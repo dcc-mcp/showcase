@@ -14,17 +14,17 @@
     {
       "path": "play/parcel-switchyard/export-provenance.json",
       "bytes": 33366,
-      "sha256": "ea77e2a62696cd0ef292ab644fd3976af5577228a58a771a13e96574a64c3910"
+      "sha256": "79fa2484668280a9e0531fc25df13a74320bb4af1a2158c077f12f9e129deeae"
     },
     {
       "path": "play/parcel-switchyard/game.pck",
-      "bytes": 115284,
-      "sha256": "da7c7ce0b31fbe03f7dc64045bd4b7a8539c51c821e5556690417b1e607a5ed1"
+      "bytes": 115380,
+      "sha256": "a24afd4501eb7e79c09d0318ee0c83c1f5770a00c29ca57b171683d31ff78d50"
     },
     {
       "path": "play/parcel-switchyard/index.html",
       "bytes": 1949,
-      "sha256": "44dd636a130d1dd07f360e77c1cf408da367ec1dd5cefb18bfe9da1c56d73a2a"
+      "sha256": "021f19771fee25d645884ad960c4f28e9fd8ac55c7b2bd0f3edb6b4b337a1f24"
     },
     {
       "path": "play/parcel-switchyard/shell.css",

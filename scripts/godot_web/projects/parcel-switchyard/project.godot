@@ -13,3 +13,7 @@ pointing/emulate_touch_from_mouse=false
 [rendering]
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+[physics]
+; Parcels use arithmetic paths in _process; this self-drawn scene has no physics bodies.
+2d/physics_engine="Dummy"
+3d/physics_engine="Dummy"

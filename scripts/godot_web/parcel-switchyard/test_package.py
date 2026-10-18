@@ -15,6 +15,15 @@ class PackageTests(unittest.TestCase):
     def test_original_source_is_identical(self):
         self.assertEqual((PROJECT / 'parcel_game.gd').read_bytes(), (ROOT / 'docs/showcase/parcel-switchyard/native/parcel_game.gd').read_bytes())
 
+    def test_self_drawn_project_has_no_physics_dependency(self):
+        settings = (PROJECT / 'project.godot').read_text()
+        self.assertIn('2d/physics_engine="Dummy"', settings)
+        self.assertIn('3d/physics_engine="Dummy"', settings)
+        scene = (PROJECT / 'main.tscn').read_text()
+        self.assertEqual(re.findall(r'\[node .*?type="([^"]+)"', scene), ['Node2D'])
+        for script in ['parcel_game.gd', 'web.gd']:
+            self.assertNotRegex((PROJECT / script).read_text(), r'\b(?:PhysicsServer[23]D|(?:Rigid|Static|Character)Body[23]D|Area[23]D|CollisionShape[23]D|move_and_slide|move_and_collide)\b')
+
     def test_provenance_hashes(self):
         provenance = json.loads((PLAY / 'export-provenance.json').read_text())
         for entry in provenance['source_files'] + provenance['export_files'] + provenance['runtime_files'] + [provenance['original_native_source'], provenance['original_source_archive']]:

@@ -35,6 +35,11 @@ def serve(directory):
         server.server_close()
 
 
+def record_console_error(message, errors):
+    if message.type == 'error' or re.search(r'SCRIPT ERROR|Parse Error|(?:^|\s)ERROR:', message.text):
+        errors.append(message.text)
+
+
 def state(page):
     return page.evaluate('window.__parcelState')
 
@@ -136,7 +141,7 @@ def run_input(browser, base, output, width, height, lang, phone):
         errors, requests, console_errors, failed_requests, packs = [], [], [], [], []
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.on('request', lambda request: requests.append(request.url))
-        page.on('console', lambda message: console_errors.append(message.text) if message.type == 'error' or re.search(r'SCRIPT ERROR|Parse Error|(?:^|\s)ERROR:', message.text) else None)
+        page.on('console', lambda message: record_console_error(message, console_errors))
         page.on('requestfailed', lambda request: failed_requests.append({'url': request.url, 'failure': request.failure}))
         page.on('response', lambda response: packs.append(response) if urlparse(response.url).path.endswith('/game.pck') else None)
         page.goto(base + '/play/parcel-switchyard/?lang=' + lang)
@@ -308,7 +313,7 @@ def run_embedding(browser, base, output, width, height, lang, phone, kind):
     page = context.new_page()
     errors, console_errors, packs = [], [], []
     page.on('pageerror', lambda error: errors.append(str(error)))
-    page.on('console', lambda message: console_errors.append(message.text) if message.type == 'error' or re.search(r'SCRIPT ERROR|Parse Error|(?:^|\s)ERROR:', message.text) else None)
+    page.on('console', lambda message: record_console_error(message, console_errors))
     page.on('response', lambda response: packs.append(response) if urlparse(response.url).path.endswith('/game.pck') else None)
     try:
         prefix = '/zh' if lang == 'zh' else ''

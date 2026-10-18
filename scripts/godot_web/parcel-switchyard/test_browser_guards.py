@@ -1,5 +1,6 @@
 """Host-free regressions for passive fresh-frame and native-language gates."""
 import ast
+import re
 from pathlib import Path
 import unittest
 from unittest.mock import Mock
@@ -13,6 +14,17 @@ def helper(name, **namespace):
 
 
 class ObserverGuards(unittest.TestCase):
+    def test_observed_engine_group_leak_stays_fatal(self):
+        errors = []
+        callback = helper('record_console_error', re=re)
+        callback(Mock(type='log', text='ERROR: Pages in use exist at exit in PagedAllocator: N16WorkerThreadPool5GroupE'), errors)
+        self.assertEqual(len(errors), 1)
+        self.assertIn('WorkerThreadPool5GroupE', errors[0])
+        callback(Mock(type='log', text='Godot Engine v4.6.3'), errors)
+        self.assertEqual(len(errors), 1)
+        callback(Mock(type='error', text='Any unexpected browser error'), errors)
+        self.assertEqual(len(errors), 2)
+
     def test_capacity_burst_uses_eight_real_inputs_before_one_fresh_wait(self):
         snapshot = {'targets': {'send': [100, 100, 80, 50]}, 'layout_size': [1280, 720]}
         for touch in [False, True]:

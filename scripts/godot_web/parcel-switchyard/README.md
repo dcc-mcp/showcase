@@ -71,7 +71,7 @@ Do not report a deployed-site check unless the actual production URL was tested.
 - Original 9 rule checks rerun through inherited rules: passed
 - Adapter's 118 headless rule/layout/geometry/text-fit/glyph/synthetic-event checks:
   passed (includes one aggregate check for the original 9)
-- Python package integrity checks: 6 passed
+- Python package integrity checks: 7 passed
 - JavaScript syntax and Python byte compilation: passed
 - Local actual browser input, rendering and screenshots: blocked before browser
   startup because Chromium's process singleton socket is denied by the sandbox
@@ -94,3 +94,21 @@ the pinned original Noto collection and regenerates the selected glyphs.
 
 The original case rights are preserved; the optional Web runtime uses its
 existing complete upstream notices. No additional license grant is introduced.
+
+## Single-thread physics lifecycle
+
+The 2026-10-18 browser run of head `575ed933` reached desktop fullscreen exit,
+restart and language navigation, but correctly failed the console-error guard:
+the official engine reported an unreclaimed WorkerThreadPool Group at exit.
+The error remains fatal; no engine bytes or error filters are patched.
+
+This adapter has one self-drawn Node2D and no physics bodies, collisions,
+physics queries or navigation. Parcel movement is the original `_advance`
+arithmetic called by `_process`; its order, capacity and travel rules remain
+unchanged. Only the additive Web project now selects the official
+[Dummy 2D and 3D physics backends](https://docs.godotengine.org/en/4.6/classes/class_projectsettings.html#class-projectsettings-property-physics-2d-physics-engine).
+The original downloadable project keeps its exact original bytes.
+The pinned engine's [group completion cleanup](https://github.com/godotengine/godot/blob/4.6.3-stable/core/object/worker_thread_pool.cpp#L666-L696)
+is excluded in no-threads builds, so unused physics must not create those groups.
+This configuration repair requires a newly exported PCK and full real browser
+exit/restart acceptance; structural and headless checks alone do not prove it.
