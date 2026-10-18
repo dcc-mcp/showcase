@@ -1,0 +1,3747 @@
+{
+  "scope": "Reduced actual successful responses; not complete request traces. Private paths, UUIDs and service routing omitted.",
+  "control_route": "embedded loopback MCP with gateway disabled",
+  "gateway_stats_recorded": false,
+  "modeling": "Official scripting escape hatch; not typed-only",
+  "typed_operations": [
+    "create_object",
+    "get_scene_info",
+    "open_scene",
+    "save_scene",
+    "set_render_settings",
+    "set_current_frame",
+    "render_scene"
+  ],
+  "results": [
+    {
+      "phase": "smoke",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "smoke",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "smoke",
+      "success": true,
+      "message": "Created cube"
+    },
+    {
+      "phase": "smoke",
+      "success": true,
+      "message": "Scene info retrieved"
+    },
+    {
+      "phase": "build-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "build-session",
+      "success": true,
+      "message": "Script executed"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Opened scene"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Render settings updated"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Current frame set to 90"
+    },
+    {
+      "phase": "preview2-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "validation-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "validation-session",
+      "success": true,
+      "message": "Script executed"
+    },
+    {
+      "phase": "export-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "export-session",
+      "success": true,
+      "message": "Script executed"
+    },
+    {
+      "phase": "sanitize-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "sanitize-session",
+      "success": true,
+      "message": "Script executed"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Skill loaded"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Opened scene"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Render settings updated"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene saved to [artifact]"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 1"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 2"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 3"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 48"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 49"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 50"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 51"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 52"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 53"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 54"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 55"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 56"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 57"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 4"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 58"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 59"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 60"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 61"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 62"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 63"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 64"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 65"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 66"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 67"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 5"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 68"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 69"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 70"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 71"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 72"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 73"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 74"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 75"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 76"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 77"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 6"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 78"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 79"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 80"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 81"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 82"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 83"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 84"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 85"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 86"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 87"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 7"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 88"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 89"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 90"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 91"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 92"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 93"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 94"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 95"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 96"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 97"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 8"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 98"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 99"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 100"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 101"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 102"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 103"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 104"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 105"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 106"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 107"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 9"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 108"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 109"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 110"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 111"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 112"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 113"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 114"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 115"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 116"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 117"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 10"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 118"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 119"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 120"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 121"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 122"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 123"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 124"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 125"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 126"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 127"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 11"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 128"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 129"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 130"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 131"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 132"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 133"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 134"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 135"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 136"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 137"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 12"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 138"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 139"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 140"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 141"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 142"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 143"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 144"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 145"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 146"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 147"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 13"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 148"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 149"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 150"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 151"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 152"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 153"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 154"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 155"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 156"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 157"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 14"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 158"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 159"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 160"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 161"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 162"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 163"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 164"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 165"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 166"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 167"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 15"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 168"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 169"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 170"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 171"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 172"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 173"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 174"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 175"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 176"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 177"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 16"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 178"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 179"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 180"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 181"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 182"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 183"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 184"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 185"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 186"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 187"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 17"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 188"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 189"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 190"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 191"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 192"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 193"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 194"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 195"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 196"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 197"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 18"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 198"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 199"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 200"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 201"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 202"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 203"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 204"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 205"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 206"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 207"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 19"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 208"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 209"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 210"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 211"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 212"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 213"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 214"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 215"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 216"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 217"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 20"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 218"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 219"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 220"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 221"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 222"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 223"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 224"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 225"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 226"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 227"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 21"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 228"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 229"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 230"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 231"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 232"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 233"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 234"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 235"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 236"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 237"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 22"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 238"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 239"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 240"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 241"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 242"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 243"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 244"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 245"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 246"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 247"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 23"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 248"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 249"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 250"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 251"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 252"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 253"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 254"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 255"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 256"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 257"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 24"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 258"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 259"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 260"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 261"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 262"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 263"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 264"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 265"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 266"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 267"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 25"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 268"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 269"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 270"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 271"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 272"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 273"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 274"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 275"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 276"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 277"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 26"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 278"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 279"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 280"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 281"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 282"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 283"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 284"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 285"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 286"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 287"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 27"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 288"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 289"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 290"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 291"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 292"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 293"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 294"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 295"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 296"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 297"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 28"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 298"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 299"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 300"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 301"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 302"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 303"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 304"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 305"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 306"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 307"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 29"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 308"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 309"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 310"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 311"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 312"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 313"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 314"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 315"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 316"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 317"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 30"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 318"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 319"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 320"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 321"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 322"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 323"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 324"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 325"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 326"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 327"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 31"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 328"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 329"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 330"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 331"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 332"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 333"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 334"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 335"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 336"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 337"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 32"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 338"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 339"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 340"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 341"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 342"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 343"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 344"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 345"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 346"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 347"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 33"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 348"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 349"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 350"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 351"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 352"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 353"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 354"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 355"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 356"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 357"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 34"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 358"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 359"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 360"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 35"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 36"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 37"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 38"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 39"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 40"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 41"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 42"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 43"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 44"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 45"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 46"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Current frame set to 47"
+    },
+    {
+      "phase": "final-session",
+      "success": true,
+      "message": "Scene rendered"
+    }
+  ]
+}

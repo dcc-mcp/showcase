@@ -22,6 +22,24 @@ ORIGIN = "http://127.0.0.1:8765"
 ENTRY = "docs/showcase/trail-and-air/"
 
 
+class DeferredFilmTests(unittest.TestCase):
+    def test_native_keyboard_precedes_metadata_wait(self):
+        page, video = Mock(), Mock()
+        video.evaluate.return_value = 0
+        page.wait_for_function.side_effect = lambda *_args, **_kwargs: video.press.assert_called_once_with("Space")
+        browser_preview.start_deferred_video(page, video, "#film")
+        video.evaluate.assert_called_once_with("v => v.played.length")
+        page.wait_for_function.assert_called_once()
+
+    def test_prior_unrequested_playback_fails_closed(self):
+        page, video = Mock(), Mock()
+        video.evaluate.return_value = 1
+        with self.assertRaises(AssertionError):
+            browser_preview.start_deferred_video(page, video, "#film")
+        video.press.assert_not_called()
+        page.wait_for_function.assert_not_called()
+
+
 class MediaNavigationTests(unittest.TestCase):
     def test_case_navigation_does_not_wait_for_media_network_idle(self):
         tree = ast.parse(inspect.getsource(browser_preview.run))

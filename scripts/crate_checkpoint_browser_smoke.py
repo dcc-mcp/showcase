@@ -3,6 +3,13 @@ from functools import partial
 from http.server import ThreadingHTTPServer
 from playwright.sync_api import sync_playwright
 from localization_browser_smoke import MountHandler
+
+def start_excerpt(page, video):
+    """Use a real native-control gesture; never force an unrequested playback."""
+    assert video.evaluate('(v)=>v.played.length') == 0, 'Excerpt played before user input'
+    video.press('Space')
+    page.wait_for_function('document.querySelector("video").readyState>=2 && !document.querySelector("video").paused')
+
 parser=argparse.ArgumentParser(description='Browser acceptance of partial crate evidence, not full-film quality.')
 parser.add_argument('--site',type=pathlib.Path,required=True)
 parser.add_argument('--output',type=pathlib.Path,required=True)
@@ -25,17 +32,18 @@ try:
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
     note=page.locator('.evidence-note');assert ('partial stage evidence' if locale=='en' else '未完成阶段证据') in note.inner_text()
     note.screenshot(path=str(O/f'{layout}-{locale}-boundary.png'))
-    video=page.locator('video').first;video.scroll_into_view_if_needed();video.evaluate('(v)=>v.load()');page.wait_for_function('document.querySelector("video").readyState>=2')
-    meta=video.evaluate('(v)=>({duration:v.duration,width:v.videoWidth,height:v.videoHeight,autoplay:v.autoplay,controls:v.controls})')
-    assert abs(meta['duration']-50/24)<.001 and meta['width']==960 and meta['height']==540 and meta['controls'] and not meta['autoplay'],meta
-    video.evaluate('(v)=>v.play()');page.wait_for_function('document.querySelector("video").ended',timeout=10000)
+    video=page.locator('video').first;video.scroll_into_view_if_needed();start_excerpt(page,video)
+    meta=video.evaluate('(v)=>({duration:v.duration,width:v.videoWidth,height:v.videoHeight,autoplay:v.autoplay,controls:v.controls,loop:v.loop})')
+    assert abs(meta['duration']-50/24)<.001 and meta['width']==960 and meta['height']==540 and meta['controls'] and not meta['autoplay'] and not meta['loop'],meta
+    page.wait_for_function('document.querySelector("video").ended',timeout=10000)
     quality=video.evaluate('(v)=>{let q=v.getVideoPlaybackQuality();return {totalVideoFrames:q.totalVideoFrames,droppedVideoFrames:q.droppedVideoFrames}}')
+    assert quality['totalVideoFrames']>=50 and quality['droppedVideoFrames']==0,quality
     video.evaluate('(v)=>v.currentTime=1.1');page.wait_for_function('Math.abs(document.querySelector("video").currentTime-1.1)<0.05 && !document.querySelector("video").seeking')
     video.locator('..').screenshot(path=str(O/f'{layout}-{locale}-excerpt.png'))
     links=page.locator(f'a[href$="film-2026-10-12/replay.py"]');assert links.count()==1
     response=context.request.get(links.get_attribute('href') if links.get_attribute('href').startswith('http') else page.evaluate('(h)=>new URL(h,location.href).href',links.get_attribute('href')));assert response.status==200
     assert not errors,errors
-    report['pages'].append({'layout':layout,'locale':locale,'partial_boundary_visible':True,'no_horizontal_overflow':True,'media':meta,'played_to_end':True,'seek_pass':True,'playback_quality':quality,'replay_link_http_status':response.status})
+    report['pages'].append({'layout':layout,'locale':locale,'partial_boundary_visible':True,'no_horizontal_overflow':True,'media':meta,'real_keyboard_start':True,'played_to_end':True,'seek_pass':True,'playback_quality':quality,'replay_link_http_status':response.status})
     context.close()
   browser.close()
  report['status']='pass'

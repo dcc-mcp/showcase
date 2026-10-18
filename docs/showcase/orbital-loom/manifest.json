@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "application": "Blender",
+  "version": "4.5.14 LTS",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "sha256": "51d28778d8d9ab62fb9803ab2ab8288a1b7ef649bdd89f9cb594df74febe17c8",
+      "bytes": 1033
+    },
+    {
+      "path": "README.md",
+      "sha256": "ed8177e5a0581134444b8609e623d2ef67f72df03bcae330fd59dcb6bacb1214",
+      "bytes": 6918
+    },
+    {
+      "path": "build_scene.py",
+      "sha256": "72531de82275687889f7c41103833963c9029f3164864ab7edcfb767404fa930",
+      "bytes": 6461
+    },
+    {
+      "path": "check_framing.py",
+      "sha256": "b1613d64e16eb1dfd5742c5772a3512bc76c739677c39f80c91424a17b11284b",
+      "bytes": 1797
+    },
+    {
+      "path": "driver-probe.json",
+      "sha256": "3936c3a9a50f69e21fc6953d7818116167cf8b7572ca2587a012278cb9147219",
+      "bytes": 1359
+    },
+    {
+      "path": "export_scene.py",
+      "sha256": "1a9683d9bf8399421e2905e3d5aa42518b1ba14d0495a5ee749d0faa03700c68",
+      "bytes": 2337
+    },
+    {
+      "path": "film-contact-sheet.jpg",
+      "sha256": "a1b7ef14fb31e09124bfae916cf05847c26d3542e714429930ee9c16b0a07f67",
+      "bytes": 50946,
+      "width": 1280,
+      "height": 540,
+      "bit_depth": 8
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "1aa91ae5672978e7cd38a72f9f9452775f7be579e750a347baf4f746246098de",
+      "bytes": 73008,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8
+    },
+    {
+      "path": "mcp-summary.json",
+      "sha256": "d4c1afdfcb1a788225180b586357c10207776997caffb5937d139f03f066bf7c",
+      "bytes": 80109
+    },
+    {
+      "path": "oblique.jpg",
+      "sha256": "d20b12d50e6315316306733d2809e385d88f9393c4c0250135e9d9a2f45828de",
+      "bytes": 67263,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8
+    },
+    {
+      "path": "orbital-loom-animated.glb",
+      "sha256": "9b1b674af5438feb9e9200500294579e33c9eea2e8774c6f4027cf49ea1513c0",
+      "bytes": 2009044
+    },
+    {
+      "path": "orbital-loom-source.zip",
+      "sha256": "83be296426da44677a32d62ca4f344198afa47f6875175d8be80d4f032e58b9e",
+      "bytes": 682502
+    },
+    {
+      "path": "orbital-loom.blend",
+      "sha256": "0bf72c9fb9aabc29f31814de5ad22b4359ab2f56d4a95d584323289b8b82c078",
+      "bytes": 310711
+    },
+    {
+      "path": "orbital-loom.mp4",
+      "sha256": "dd8d13df3696772ef01c3dd14368ed90802cff72638e8ee677a233f4232af8c5",
+      "bytes": 2310667
+    },
+    {
+      "path": "quarter-turn.jpg",
+      "sha256": "2c53c945d39a09391dbcdbd0f6ca36d34a1271f84dd4a3cfe36a04600f4d62a9",
+      "bytes": 61644,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8
+    },
+    {
+      "path": "references.md",
+      "sha256": "908b7453c5305d81925eee04055d11e72bbdc5d0b0235123fe24a5737074350e",
+      "bytes": 1546
+    },
+    {
+      "path": "toolchain-findings.md",
+      "sha256": "16edb9a5cf207678479b200a8a69e61c56da58c5bbf491a0d3bace915cb2ed16",
+      "bytes": 3829
+    },
+    {
+      "path": "validate_scene.py",
+      "sha256": "2d61a353cc6c76b70c2c56d0286e1429bb0dd71e95269ec967527a87f401e3be",
+      "bytes": 2133
+    },
+    {
+      "path": "validation.json",
+      "sha256": "a68d1a767da2671858214373b0489011b7aa9b8a2d18d210b16aaa72fc97c54f",
+      "bytes": 146469
+    }
+  ]
+}
