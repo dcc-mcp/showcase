@@ -1,9 +1,13 @@
 """Host-free regressions for passive fresh-frame and native-language gates."""
 import ast
 import re
+import sys
 from pathlib import Path
 import unittest
 from unittest.mock import Mock
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from localization import LOCALES
 
 
 def helper(name, **namespace):
@@ -14,6 +18,39 @@ def helper(name, **namespace):
 
 
 class ObserverGuards(unittest.TestCase):
+    def test_generated_pages_use_the_canonical_html_locale(self):
+        check = helper('assert_generated_page_language', LOCALES=LOCALES)
+        for lang, actual in [('en', 'en'), ('zh', 'zh-CN')]:
+            with self.subTest(lang=lang):
+                page = Mock(url='http://localhost/cases/parcel-switchyard/')
+                page.locator.return_value.get_attribute.return_value = actual
+                check(page, Mock(ok=True, status=200), lang)
+
+    def test_wrong_generated_locale_and_http_failure_keep_diagnostics(self):
+        check = helper('assert_generated_page_language', LOCALES=LOCALES)
+        for actual, response in [('zh', Mock(ok=True, status=200)), ('en', Mock(ok=True, status=200)),
+                                 ('zh-CN', Mock(ok=False, status=404)), ('zh-CN', None)]:
+            with self.subTest(actual=actual, response=response):
+                page = Mock(url='http://localhost/zh/cases/parcel-switchyard/')
+                page.locator.return_value.get_attribute.return_value = actual
+                with self.assertRaises(AssertionError) as caught:
+                    check(page, response, 'zh')
+                detail = caught.exception.args[0]
+                self.assertEqual(detail['url'], page.url)
+                self.assertEqual(detail['actual_lang'], actual)
+                self.assertEqual(detail['expected_lang'], 'zh-CN')
+                self.assertEqual(detail['http_status'], response.status if response is not None else None)
+
+    def test_empty_failure_messages_still_produce_a_report_reason(self):
+        reason = helper('failure_reason')
+        for error in [AssertionError(), AssertionError(''), AssertionError('\n  \n')]:
+            self.assertEqual(reason(error), 'AssertionError')
+        self.assertEqual(reason(ValueError('')), 'ValueError')
+        self.assertEqual(reason(AssertionError('\n  actual failed gate\nprivate detail')), 'actual failed gate')
+        self.assertEqual(reason(AssertionError('x' * 700)), 'x' * 500)
+        self.assertEqual(reason(RuntimeError('socket() failed: Operation not permitted\nprivate detail')),
+                         'Chromium process singleton socket is denied by the execution sandbox.')
+
     def test_observed_engine_group_leak_stays_fatal(self):
         errors = []
         callback = helper('record_console_error', re=re)

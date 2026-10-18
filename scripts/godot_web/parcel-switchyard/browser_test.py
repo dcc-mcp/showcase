@@ -10,6 +10,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from pathlib import Path
 import threading
 import time
@@ -18,6 +19,24 @@ from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / 'scripts'))
+from localization import LOCALES
+
+
+def assert_generated_page_language(page, response, lang):
+    expected = LOCALES[lang]['lang']
+    actual = page.locator('html').get_attribute('lang')
+    detail = {'url': page.url, 'http_status': response.status if response is not None else None,
+              'expected_lang': expected, 'actual_lang': actual}
+    assert response is not None and response.ok, detail
+    assert actual == expected, detail
+
+
+def failure_reason(error):
+    message = str(error)
+    if 'socket() failed: Operation not permitted' in message:
+        return 'Chromium process singleton socket is denied by the execution sandbox.'
+    return next((line.strip()[:500] for line in message.splitlines() if line.strip()), type(error).__name__)
 
 
 @contextmanager
@@ -318,7 +337,7 @@ def run_embedding(browser, base, output, width, height, lang, phone, kind):
     try:
         prefix = '/zh' if lang == 'zh' else ''
         response = page.goto(base + prefix + '/' + kind + '/parcel-switchyard/', wait_until='domcontentloaded')
-        assert response.ok and page.locator('html').get_attribute('lang') == lang
+        assert_generated_page_language(page, response, lang)
         assert page.locator('iframe').count() == 0, 'Embedded game must await explicit start'
         start_selector = '[data-play-start]' if kind == 'cases' else '[data-game-start]'
         page.locator(start_selector).click()
@@ -439,8 +458,7 @@ def main():
         report['stage'] = phase
         report['error_type'] = type(error).__name__
         # Preserve useful failure detail without publishing machine paths/crash logs.
-        message = str(error)
-        report['reason'] = 'Chromium process singleton socket is denied by the execution sandbox.' if 'socket() failed: Operation not permitted' in message else message.splitlines()[0][:500]
+        report['reason'] = failure_reason(error)
     report['evidence_files'] = [{'path': path.relative_to(args.output).as_posix(), 'bytes': path.stat().st_size, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()} for path in sorted(args.output.rglob('*')) if path.is_file() and path.name != 'report.json']
     (args.output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
