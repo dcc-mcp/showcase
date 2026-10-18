@@ -1,0 +1,121 @@
+{
+  "checks": {
+    "keyboard_dispatch": true,
+    "mouse_route_dispatch": true,
+    "two_real_time_deliveries": true,
+    "repeated_keyboard_reset": true,
+    "mouse_auto_toggle": true,
+    "mouse_market_route": true
+  },
+  "states": [
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 1,
+      "sent": 0
+    },
+    {
+      "active": 1,
+      "auto": false,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 1,
+      "sent": 1
+    },
+    {
+      "active": 1,
+      "auto": false,
+      "delivered": 1,
+      "event": "delivery",
+      "missed": 0,
+      "selected": 1,
+      "sent": 1
+    },
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 1,
+      "event": "input",
+      "missed": 0,
+      "selected": 0,
+      "sent": 1
+    },
+    {
+      "active": 1,
+      "auto": false,
+      "delivered": 1,
+      "event": "input",
+      "missed": 0,
+      "selected": 0,
+      "sent": 2
+    },
+    {
+      "active": 1,
+      "auto": false,
+      "delivered": 2,
+      "event": "delivery",
+      "missed": 0,
+      "selected": 0,
+      "sent": 2
+    },
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 2,
+      "event": "input",
+      "missed": 0,
+      "selected": 0,
+      "sent": 2
+    },
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 1,
+      "sent": 0
+    },
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 1,
+      "sent": 0
+    },
+    {
+      "active": 0,
+      "auto": true,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 1,
+      "sent": 0
+    },
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 1,
+      "sent": 0
+    },
+    {
+      "active": 0,
+      "auto": false,
+      "delivered": 0,
+      "event": "input",
+      "missed": 0,
+      "selected": 2,
+      "sent": 0
+    }
+  ],
+  "passed": true
+}

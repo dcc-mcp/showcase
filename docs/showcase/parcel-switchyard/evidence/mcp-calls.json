@@ -1,0 +1,352 @@
+{
+  "redactions": [
+    "Private execution paths and runtime routing identities omitted.",
+    "Source payloads represented by SHA-256; final source is included.",
+    "Host error stack traces omitted; actual error message retained."
+  ],
+  "calls": [
+    {
+      "tool": "godot_script__create_script",
+      "arguments": {
+        "path": "res://parcel_game.gd",
+        "source_sha256": "b5411376f267db401931b8e80920c63d9f38c72e9a407164b90f330ef6d1fa99"
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_script__create_script",
+        "output": {
+          "success": true,
+          "message": "Godot action create_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "bytes": 14310,
+            "path": "res://parcel_game.gd",
+            "written": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-457-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_scene_management__create_scene",
+      "arguments": {
+        "path": "res://main.tscn",
+        "root_type": "Node2D",
+        "root_name": "ParcelSwitchyard",
+        "open": true
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_scene_management__create_scene",
+        "output": {
+          "success": true,
+          "message": "Godot action create_scene completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "created": true,
+            "path": "res://main.tscn",
+            "root_type": "Node2D"
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-468-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_script__attach_script",
+      "arguments": {
+        "node_path": ".",
+        "script_path": "res://parcel_game.gd"
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_script__attach_script",
+        "output": {
+          "success": true,
+          "message": "Godot action attach_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "attached": true,
+            "node_path": "ParcelSwitchyard",
+            "script_path": "res://parcel_game.gd"
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-478-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_scene_management__save_scene",
+      "arguments": {
+        "path": "res://main.tscn"
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_scene_management__save_scene",
+        "output": {
+          "success": true,
+          "message": "Godot action save_scene completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "saved": true,
+            "scene_path": "res://main.tscn"
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-488-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "application/run/main_scene",
+        "value": "res://main.tscn"
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_project_management__set_project_setting",
+        "output": {
+          "success": true,
+          "message": "Godot action set_project_setting completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "key": "application/run/main_scene",
+            "updated": true,
+            "value": "res://main.tscn"
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-498-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "display/window/size/viewport_width",
+        "value": 1280
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_project_management__set_project_setting",
+        "output": {
+          "success": true,
+          "message": "Godot action set_project_setting completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "key": "display/window/size/viewport_width",
+            "updated": true,
+            "value": 1280.0
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-508-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "display/window/size/viewport_height",
+        "value": 720
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_project_management__set_project_setting",
+        "output": {
+          "success": true,
+          "message": "Godot action set_project_setting completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "key": "display/window/size/viewport_height",
+            "updated": true,
+            "value": 720.0
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-518-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "rendering/renderer/rendering_method",
+        "value": "gl_compatibility"
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_project_management__set_project_setting",
+        "output": {
+          "success": true,
+          "message": "Godot action set_project_setting completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "key": "rendering/renderer/rendering_method",
+            "updated": true,
+            "value": "gl_compatibility"
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-528-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "tool": "godot_script__edit_script",
+      "arguments": {
+        "path": "res://parcel_game.gd",
+        "source_sha256": "5b1c8c43b0c9a19a1d420f27a3180393be226a24581c8e4dd8ae4d8bdc9849b1"
+      },
+      "exit_code": 0,
+      "response": {
+        "slug": "godot_script__edit_script",
+        "output": {
+          "success": true,
+          "message": "Godot action edit_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "bytes": 15298,
+            "path": "res://parcel_game.gd",
+            "written": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-586-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "evidence": "validate-script.json",
+      "response": {
+        "slug": "godot_script__validate_script",
+        "output": {
+          "success": true,
+          "message": "Godot action validate_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "error": "OK",
+            "path": "res://parcel_game.gd",
+            "valid": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-548-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "evidence": "preview-headless.json",
+      "response": {
+        "slug": "godot_editor__render_scene_preview",
+        "output": {
+          "success": false,
+          "message": "Error: [-32000] Scene previews require a windowed Godot host: this host runs the 'headless' display driver, which degrades rendering to dummy and cannot read back pixels. Start the editor in windowed mode with the main window hidden (DCC_MCP_GODOT_HIDE_WINDOW=1, or a private desktop on Windows) instead of --headless.",
+          "error": "BridgeRpcError",
+          "prompt": "Check the error details and try again.",
+          "context": {
+            "error_type": "BridgeRpcError"
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-653-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "evidence": "export-info.json",
+      "response": {
+        "slug": "godot_export__get_export_info",
+        "output": {
+          "success": true,
+          "message": "Godot action get_export_info completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "presets": [],
+            "project": "Parcel Switchyard",
+            "version": ""
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-673-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "arguments": {
+        "path": "res://parcel_game.gd",
+        "source_sha256": "882650bb3d810ab55715c8539864226eb737a3075b9703fceca49b5fe56fe91a"
+      },
+      "response": {
+        "slug": "godot_script__edit_script",
+        "output": {
+          "success": true,
+          "message": "Godot action edit_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "bytes": 15299,
+            "path": "res://parcel_game.gd",
+            "written": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-373-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    },
+    {
+      "arguments": {
+        "path": "res://parcel_game.gd",
+        "source_sha256": "2152b8f6bcbbe2a3cf6b71c70457953236267ea53f427ae4a608a39792c50b50"
+      },
+      "response": {
+        "slug": "godot_script__edit_script",
+        "output": {
+          "success": true,
+          "message": "Godot action edit_script completed.",
+          "error": null,
+          "prompt": null,
+          "context": {
+            "bytes": 15991,
+            "path": "res://parcel_game.gd",
+            "written": true
+          }
+        },
+        "validation_skipped": false,
+        "request_id": "dcc-mcp-cli-372-0",
+        "control_route": "gateway",
+        "gateway_stats_recorded": true
+      }
+    }
+  ]
+}

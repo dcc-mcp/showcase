@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b38601hdpkxpp"]
+
+[ext_resource type="Script" uid="uid://dr86ccl1daavj" path="res://parcel_game.gd" id="1_ig7tw"]
+
+[node name="ParcelSwitchyard" type="Node2D" unique_id=649626525]
+script = ExtResource("1_ig7tw")
