@@ -6,10 +6,22 @@ import unittest
 
 import build_site as site
 import localization as i18n
+from gallery_browser_smoke import interactive_slugs
 from test_build_site import fixture_case, make_png
 
 
 class GalleryTests(unittest.TestCase):
+    def test_browser_filter_membership_tracks_declared_playables(self):
+        cases = [{'slug': slug} for slug in ['sonic', 'prism', 'parcel', 'still']]
+        for names in [[], ['sonic', 'prism'], ['sonic', 'prism', 'parcel']]:
+            with self.subTest(names=names):
+                self.assertEqual(interactive_slugs(cases, {'demos': [{'case_slug': name} for name in names]}), sorted(names))
+
+    def test_browser_filter_rejects_duplicate_and_unselected_inventory(self):
+        for names in [['sonic', 'sonic'], ['unknown']]:
+            with self.subTest(names=names), self.assertRaises(ValueError):
+                interactive_slugs([{'slug': 'sonic'}], {'demos': [{'case_slug': name} for name in names]})
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)

@@ -1,0 +1,11 @@
+Poly Haven assets: CC0 1.0 Universal (public domain dedication).
+https://creativecommons.org/publicdomain/zero/1.0/
+Official license: https://polyhaven.com/license
+
+Rock 04 by Rob Tuytel
+https://polyhaven.com/a/rock_04
+Fern 02 by Rico Cilliers and Rob Tuytel
+https://polyhaven.com/a/fern_02
+
+Downloaded October 17, 2026. See POLYHAVEN-SOURCE.json for exact upstream files, checksums, authorship and technical conversion details.
+Poly Haven assets remain CC0; the original scene and game have separate rights.

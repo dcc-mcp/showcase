@@ -29,6 +29,7 @@ jobs:
         run: |
           python scripts/godot_web/parcel-switchyard/test_package.py
           python scripts/godot_web/parcel-switchyard/test_browser_guards.py
+          python scripts/godot_web/parcel-switchyard/test_tracked_bytes.py
           node --check play/parcel-switchyard/shell.js
           mkdir -p "$RUNNER_TEMP/parcel-reexport" "$RUNNER_TEMP/parcel-evidence/reexport"
           git archive HEAD | tar -x -C "$RUNNER_TEMP/parcel-reexport"
@@ -42,7 +43,9 @@ jobs:
         run: |
           python scripts/godot_web/verify_export.py
           python scripts/build_site.py
-          git diff --exit-code
+          # Some legacy media blobs are raw files despite an LFS attribute.
+          # Compare all actual tracked bytes/modes to HEAD without clean filters.
+          python scripts/godot_web/parcel-switchyard/check_tracked_bytes.py
       - name: Install pinned official browser testing dependencies
         run: |
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
