@@ -2,6 +2,7 @@
 import ast
 import re
 import sys
+import struct
 from pathlib import Path
 import unittest
 from unittest.mock import Mock
@@ -18,6 +19,31 @@ def helper(name, source_path=None, **namespace):
 
 
 class ObserverGuards(unittest.TestCase):
+    def test_embedded_capture_uses_fresh_draw_and_bounded_actual_canvas(self):
+        events = []
+        page, frame, canvas = Mock(), Mock(), Mock()
+        frame.locator.return_value = canvas
+        canvas.scroll_into_view_if_needed.side_effect = lambda: events.append('scroll')
+        receipt = {'draw_id': 5, 'draw_frame': 10}
+        fresh = Mock(side_effect=lambda *args: events.append('draw') or receipt)
+        canvas.bounding_box.return_value = {'x': 0, 'y': 40, 'width': 300, 'height': 550}
+        canvas.screenshot.side_effect = lambda **kwargs: events.append('canvas') or b'\x89PNG\r\n\x1a\n' + bytes(8) + struct.pack('>II', 300, 550)
+        page.screenshot.side_effect = lambda **kwargs: events.append('viewport')
+        snapshot = {'delivered': 1, 'missed': 0, 'sent': 1, 'active': 0, 'streak': 1, 'selected': 1, 'auto': False, 'paused': False}
+        capture = helper('capture_embedded_delivery', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct)
+        result = capture(page, frame, Path('/evidence'), 'case', 'zh')
+        self.assertEqual(events, ['scroll', 'draw', 'canvas', 'viewport'])
+        canvas.screenshot.assert_called_once_with(path='/evidence/case-delivered.png')
+        page.screenshot.assert_called_once_with(path='/evidence/case-delivered-context.png', full_page=False)
+        self.assertEqual(result['png_dimensions'], [300, 550])
+        self.assertEqual(result['observed_state'], snapshot)
+        fresh.assert_called_once_with(frame, 'zh')
+        for dimensions in [(300, 8192), (320, 550)]:
+            canvas.screenshot.side_effect = None
+            canvas.screenshot.return_value = b'\x89PNG\r\n\x1a\n' + bytes(8) + struct.pack('>II', *dimensions)
+            with self.subTest(dimensions=dimensions), self.assertRaises(AssertionError):
+                capture(page, frame, Path('/evidence'), 'case', 'zh')
+
     def test_page_filters_require_real_disclosure_click_before_filter_clicks(self):
         events = []
 

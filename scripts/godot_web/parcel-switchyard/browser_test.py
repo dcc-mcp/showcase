@@ -10,6 +10,7 @@ import json
 import os
 import re
 import subprocess
+import struct
 import sys
 from pathlib import Path
 import threading
@@ -149,6 +150,30 @@ def assert_phone_size(page, view=None):
     scale = box['width'] / snapshot['layout_size'][0]
     assert min(min(rect[2], rect[3]) * scale for rect in snapshot['targets'].values()) >= 44
     assert snapshot['minimum_mobile_text_units'] * scale >= 14
+
+
+def capture_embedded_delivery(page, frame, output, name, lang):
+    # Full-page captures of very tall case pages can repeat compositor tiles.
+    # Capture the real bounded canvas, plus the current viewport for context.
+    canvas = frame.locator('#canvas')
+    canvas.scroll_into_view_if_needed()
+    receipt = assert_native_language(frame, lang)
+    box = canvas.bounding_box()
+    assert box and 0 < box['width'] <= 2048 and 0 < box['height'] <= 2048, box
+    keys = ['delivered', 'missed', 'sent', 'active', 'streak', 'selected', 'auto', 'paused']
+    snapshot = state(frame)
+    before = {key: snapshot[key] for key in keys}
+    assert before['delivered'] == before['sent'] == before['streak'] == 1
+    assert before['missed'] == before['active'] == 0 and not before['auto']
+    png = canvas.screenshot(path=str(output / (name + '-delivered.png')))
+    assert png[:8] == b'\x89PNG\r\n\x1a\n'
+    width, height = struct.unpack('>II', png[16:24])
+    assert abs(width - box['width']) <= 1 and abs(height - box['height']) <= 1, (width, height, box)
+    page.screenshot(path=str(output / (name + '-delivered-context.png')), full_page=False)
+    after = state(frame)
+    assert {key: after[key] for key in keys} == before, 'Capture changed the completed game state'
+    return {'draw_receipt': receipt, 'observed_state': before, 'css_box': box, 'png_dimensions': [width, height],
+            'scope': 'Actual canvas element pixels and separate viewport context; not a full-page image.'}
 
 
 def run_input(browser, base, output, width, height, lang, phone):
@@ -367,7 +392,7 @@ def run_embedding(browser, base, output, width, height, lang, phone, kind):
         target(page, 'send', phone, frame)
         wait(frame, 'window.__parcelState.delivered===1 && window.__parcelState.active===0')
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
-        page.screenshot(path=str(output / (name + '-delivered.png')), full_page=True)
+        delivery_capture = capture_embedded_delivery(page, frame, output, name, lang)
         if kind == 'games':
             page.locator('[data-game-reset]').click()
             wait(frame, 'window.__parcelState.sent===0 && window.__parcelState.best===0')
@@ -376,11 +401,11 @@ def run_embedding(browser, base, output, width, height, lang, phone, kind):
         page.locator(exit_selector).click()
         page.wait_for_selector('iframe', state='detached')
         assert not errors and not console_errors, (errors, console_errors)
-        return {'name': name, 'status': 'passed', 'lang': lang, 'native_language_receipt': language_receipt, 'viewport': [width, height], 'served_pack_sha256': served_hash,
+        return {'name': name, 'status': 'passed', 'lang': lang, 'native_language_receipt': language_receipt, 'delivery_capture': delivery_capture, 'viewport': [width, height], 'served_pack_sha256': served_hash,
                 'checks': ['explicit launch', 'actual WASM', 'non-default route', 'misroute', 'reset', 'delivery', 'minimum phone targets/text', 'parent exit'], 'page_errors': errors, 'console_errors': console_errors}
     except Exception:
         if not page.is_closed():
-            page.screenshot(path=str(output / (name + '-failure.png')), full_page=True)
+            page.screenshot(path=str(output / (name + '-failure.png')), full_page=False)
         raise
     finally:
         context.close()

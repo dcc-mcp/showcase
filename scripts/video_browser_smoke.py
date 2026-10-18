@@ -12,26 +12,100 @@ import time
 from functools import partial
 from http.server import ThreadingHTTPServer
 import json
+import math
 from pathlib import Path
 import threading
 
 from localization_browser_smoke import MountHandler
 
 
-def assert_no_media_requests_since(requests, before):
-    unexpected = requests[before:]
+def _finite_time(value):
+    assert isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0, \
+        'Missing or invalid browser request/event time: ' + repr(value)
+    return value
+
+
+def media_request_started(event):
+    """CDP wallTime is request initiation, not Python callback delivery time.
+
+    Unlike completed ResourceTiming entries, this also observes aborted and
+    unfinished requests. No media methods, network policy or response changes.
+    """
+    request = event['request']
+    if not request['url'].split('?')[0].endswith(('.mp4', '.webm')):
+        return None
+    started_at_ms = _finite_time(event.get('wallTime')) * 1000
+    assert started_at_ms > 0, 'Missing positive request epoch'
+    return {'url': request['url'], 'request_id': event['requestId'],
+            'range': next((v for k, v in request.get('headers', {}).items() if k.lower() == 'range'), None),
+            'started_at_ms': started_at_ms}
+
+
+def media_release_observation(requests, before, snapshot):
+    """Keep pre-click activity separate, but reject any request at/after stop.
+
+    The trusted intent is captured before the product stop handler. Its native
+    emptied event confirms a paused, source-detached player. Requests between
+    these boundaries are forbidden too: stop-triggered refetches cannot hide
+    inside asynchronous media cleanup.
+    """
+    origin = _finite_time(snapshot['timeOrigin'])
+    armed = _finite_time(before['armed_at_ms'])
+    assert origin > 0 and armed >= origin, 'Invalid document/guard epoch'
+    assert origin == before['timeOrigin'], 'Document changed during media release'
+    events = snapshot['events'][before['event_count']:]
+    intents = [e for e in events if e['event'] == before['event'] and e['target'] == before['target']
+               and e['video_index'] == before['video_index'] and e['trusted'] is True]
+    assert len(intents) == 1, 'Missing or ambiguous trusted stop intent: ' + repr(intents)
+    intent = intents[0]
+    intent_at = origin + _finite_time(intent['time'])
+    assert intent_at >= armed, 'Stop intent predates its guard'
+    assert intent['state'] in {'preview', 'watching'}, 'Stop intent did not target an active player'
+    detached = [e for e in events[events.index(intent) + 1:] if e['event'] == 'emptied' and e['target'] == 'video'
+                and e['video_index'] == before['video_index'] and e['trusted'] is True
+                and e['src'] is None and e['live_sources'] == 0 and e['paused'] is True and e['state'] == 'idle']
+    assert detached, 'Missing native source-detached release receipt'
+    detached_at = origin + _finite_time(detached[0]['time'])
+    observed_at = origin + _finite_time(snapshot['time'])
+    assert armed <= intent_at <= detached_at <= observed_at, 'Invalid release event ordering'
+    assert requests, 'No CDP media initiation evidence for decoded playback'
+    phases = {'before_guard': [], 'guard_to_stop': [], 'during_release': [], 'after_release': []}
+    for request in requests:
+        started = _finite_time(request['started_at_ms'])
+        assert started > 0, 'Missing positive request epoch'
+        phase = ('before_guard' if started < armed else 'guard_to_stop' if started < intent_at
+                 else 'during_release' if started < detached_at else 'after_release')
+        phases[phase].append(request)
+    return {'guard_armed_at_ms': armed, 'trusted_stop_at_ms': intent_at,
+            'source_detached_at_ms': detached_at, 'observed_at_ms': observed_at,
+            'intent': intent, 'detached': detached[0], 'phases': phases}
+
+
+def assert_no_media_requests_after_stop(observation):
+    phases = observation['phases']
+    unexpected = phases['during_release'] + phases['after_release']
     assert not unexpected, 'Media refetched after stop: ' + repr(unexpected)
 
+
+def arm_release_guard(video, event='click'):
+    return video.evaluate("""(v, event) => ({timeOrigin: performance.timeOrigin,
+      armed_at_ms: performance.timeOrigin + performance.now(),
+      event_count: (window.__mediaDiagnosticEvents || []).length,
+      video_index: Array.from(document.querySelectorAll('video')).indexOf(v), event,
+      target: event === 'pointerleave' ? 'detail-host' : 'video-watch'})""", event)
 
 
 # Observers only: no media methods or browser policies are replaced.
 MEDIA_DIAGNOSTICS = """(() => {
   window.__mediaDiagnosticEvents = [];
-  for (const event of ['loadstart', 'emptied', 'loadedmetadata', 'loadeddata', 'suspend', 'progress', 'abort', 'error', 'play', 'playing', 'pause', 'waiting', 'pointerenter', 'pointerdown', 'click']) {
+  for (const event of ['loadstart', 'emptied', 'loadedmetadata', 'loadeddata', 'suspend', 'progress', 'abort', 'error', 'play', 'playing', 'pause', 'waiting', 'pointerenter', 'pointerleave', 'pointerdown', 'click']) {
     document.addEventListener(event, e => {
-      const v = e.target;
-      if (!(v instanceof HTMLVideoElement) || window.__mediaDiagnosticEvents.length >= 500) return;
-      window.__mediaDiagnosticEvents.push({event, time: performance.now(), src: v.getAttribute('src'), currentSrc: v.currentSrc,
+      const target = e.target instanceof HTMLVideoElement ? 'video' :
+        e.target.matches?.('.video-watch') ? 'video-watch' : e.target.matches?.('.detail-video') ? 'detail-host' : null;
+      const v = target === 'video' ? e.target : target ? e.target.closest('.detail-video')?.querySelector('video') : null;
+      if (!v || window.__mediaDiagnosticEvents.length >= 500) return;
+      window.__mediaDiagnosticEvents.push({event, target, video_index: Array.from(document.querySelectorAll('video')).indexOf(v),
+        time: performance.now(), src: v.getAttribute('src'), live_sources: v.querySelectorAll('source[src]').length, currentSrc: v.currentSrc,
         paused: v.paused, readyState: v.readyState, networkState: v.networkState, trusted: e.isTrusted,
         state: v.closest('.detail-video')?.dataset.videoState || v.closest('.case-card')?.dataset.previewState});
     }, true);
@@ -40,7 +114,7 @@ MEDIA_DIAGNOSTICS = """(() => {
 
 
 def media_snapshot(page):
-    return page.evaluate(r"""() => ({url: location.href, time: performance.now(), hidden: document.hidden,
+    return page.evaluate(r"""() => ({url: location.href, timeOrigin: performance.timeOrigin, time: performance.now(), hidden: document.hidden,
       userActivation: {active: navigator.userActivation?.isActive, sticky: navigator.userActivation?.hasBeenActive},
       videos: Array.from(document.querySelectorAll('video')).map(v => ({
         html: v.outerHTML, src: v.getAttribute('src'), currentSrc: v.currentSrc, preload: v.preload,
@@ -121,7 +195,7 @@ def run(site: Path, output: Path):
     films = {slug: items for slug, items in films.items() if items}
     output.mkdir(parents=True, exist_ok=True)
     report = {'passed': False, 'checks': [], 'screenshots': [], 'gallery_videos': len(films),
-              'detail_videos': sum(map(len, films.values())),
+              'detail_videos': sum(map(len, films.values())), 'release_observations': [],
               'scope': 'Real decoded local media; Chromium desktop and touch-viewport emulation. No subjective listening.'}
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(MountHandler, directory=str(site)))
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -157,23 +231,31 @@ def run(site: Path, output: Path):
                             route.abort()
                     context.route('**/*', guard)
                     page = context.new_page()
+                    started_requests = []
+                    network = context.new_cdp_session(page)
+                    def observe_request(event):
+                        record = media_request_started(event)
+                        if record is not None:
+                            started_requests.append(record)
+                    network.on('Network.requestWillBeSent', observe_request)
+                    network.send('Network.enable')
                     page.set_default_timeout(20000)
                     page.on('pageerror', lambda error: errors.append(str(error)))
-                    def media_requests():
-                        return [url for url in requests if url.split('?')[0].endswith(('.mp4', '.webm'))]
                     def assert_released(video, before, label):
                         # Observe beyond the stop event: a decoder reset must not
                         # silently reopen a retained SOURCE in the next event loop.
                         page.wait_for_timeout(500)
-                        unexpected = media_requests()[before:]
-                        if unexpected:
+                        observation = media_release_observation(started_requests, before, media_snapshot(page))
+                        report['release_observations'].append({'label': label, **observation})
+                        if observation['phases']['during_release'] or observation['phases']['after_release']:
                             diagnose_unexpected_media(browser, page, output, report, request_details, mobile, label)
-                        assert_no_media_requests_since(media_requests(), before)
+                        assert_no_media_requests_after_stop(observation)
                         assert video.evaluate('(v)=>v.paused && v.muted && !v.hasAttribute("src") && !v.querySelector("source[src]")')
                     for prefix, locale in [('', 'en'), ('zh/', 'zh')]:
                         stage = f'{locale}/{kind}: gallery initial'
                         requests.clear()
                         request_details.clear()
+                        started_requests.clear()
                         page.mouse.move(1, 1)
                         page.goto(base + prefix, wait_until='networkidle')
                         expect(page.locator('.case-card[data-preview-src]')).to_have_count(len(films))
@@ -204,6 +286,7 @@ def run(site: Path, output: Path):
                             stage = f'{locale}/{kind}: detail initial {slug}'
                             requests.clear()
                             request_details.clear()
+                            started_requests.clear()
                             page.mouse.move(1, 1)
                             page.goto(base + prefix + f'cases/{slug}/', wait_until='networkidle')
                             expect(page.locator('.detail-video')).to_have_count(len(items))
@@ -220,7 +303,7 @@ def run(site: Path, output: Path):
                                     video.hover()
                                     expect(host).to_have_attribute('data-video-state', 'preview')
                                     assert video.evaluate('(v)=>v.muted && v.videoWidth>0 && v.loop && v.controls')
-                                    before_stop = len(media_requests())
+                                    before_stop = arm_release_guard(video, 'pointerleave')
                                     page.mouse.move(1, 1)
                                     expect(host).to_have_attribute('data-video-state', 'idle')
                                     assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-hover-stop')
@@ -241,16 +324,16 @@ def run(site: Path, output: Path):
                                 # Native pause/seek/play remains owned by the viewer;
                                 # no hover handler is allowed to restart or clear it.
                                 video.evaluate('(v)=>{v.pause();v.currentTime=Math.min(1,v.duration/2)}')
-                                # currentTime changes immediately, before the seek's
-                                # Range request completes. Finish that native seek
-                                # before taking the stop guard's request baseline.
+                                # currentTime changes before its asynchronous seek.
+                                # Observe seek completion; any later Range is still
+                                # attributed by its actual start vs. the stop event.
                                 expect(video).to_have_js_property('seeking', False)
                                 expect(host).to_have_attribute('data-video-state', 'watching')
                                 await_time = video.evaluate('(v)=>v.currentTime')
                                 assert await_time > 0
                                 if slug == 'sonic-loom':
                                     capture(page, f'{locale}-{kind}-detail-controls.png')
-                                before_stop = len(media_requests())
+                                before_stop = arm_release_guard(video)
                                 host.locator('.video-watch').click()
                                 expect(host).to_have_attribute('data-video-state', 'idle')
                                 assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-watch-stop')
@@ -261,7 +344,7 @@ def run(site: Path, output: Path):
                                 page.keyboard.press('Space')
                                 expect(host).to_have_attribute('data-video-state', 'watching')
                                 assert video.evaluate('(v)=>!v.paused && v.controls')
-                                before_stop = len(media_requests())
+                                before_stop = arm_release_guard(video)
                                 host.locator('.video-watch').click()
                                 expect(host).to_have_attribute('data-video-state', 'idle')
                                 assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-native-stop')
@@ -276,7 +359,7 @@ def run(site: Path, output: Path):
                                     video.click(position={'x': 30, 'y': box['height'] - 25})
                                     expect(host).to_have_attribute('data-video-state', 'watching')
                                     assert video.evaluate('(v)=>!v.paused && v.controls')
-                                    before_stop = len(media_requests())
+                                    before_stop = arm_release_guard(video)
                                     host.locator('.video-watch').click()
                                     expect(host).to_have_attribute('data-video-state', 'idle')
                                     assert_released(video, before_stop, f'{locale}-{kind}-{slug}-{index}-poster-stop')
