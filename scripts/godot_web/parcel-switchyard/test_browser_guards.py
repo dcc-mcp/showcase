@@ -1,5 +1,6 @@
 """Host-free regressions for passive fresh-frame and native-language gates."""
 import ast
+import math
 import re
 import sys
 import struct
@@ -18,10 +19,48 @@ def helper(name, source_path=None, **namespace):
     return namespace[name]
 
 
+def pixel_capture():
+    return helper('capture_canvas_png', struct=struct, enclosing_pixel_rect=helper('enclosing_pixel_rect', math=math))
+
+
 class ObserverGuards(unittest.TestCase):
+    def test_pixel_bounds_include_fractional_origin_and_document_scroll(self):
+        enclose = helper('enclosing_pixel_rect', math=math)
+        box = {'x': 12, 'y': 25.5, 'width': 296, 'height': 542.65625}
+        self.assertEqual(enclose(box, {'x': 0, 'y': 334, 'dpr': 1}), {'x': 12, 'y': 359, 'width': 296, 'height': 544})
+        self.assertEqual(enclose(box, {'x': 0, 'y': 334.5, 'dpr': 1}), {'x': 12, 'y': 360, 'width': 296, 'height': 543})
+        self.assertEqual(enclose({'x': 1.0001, 'y': -100.0001, 'width': 300, 'height': 550}, {'x': 0, 'y': 1000, 'dpr': 1}),
+                         {'x': 1, 'y': 900, 'width': 300, 'height': 550})
+        for changes in [{'width': 0}, {'height': 8192}, {'x': float('nan')}, {'y': float('inf')}]:
+            with self.subTest(changes=changes), self.assertRaises(AssertionError):
+                enclose(dict(box, **changes), {'x': 0, 'y': 334, 'dpr': 1})
+        with self.assertRaises(AssertionError): enclose(box, {'x': 0, 'y': 334, 'dpr': 2})
+
+    def test_png_capture_allows_scroll_but_not_document_movement_or_wrong_pixels(self):
+        page, canvas = Mock(), Mock()
+        before = {'x': 12, 'y': 25.5, 'width': 296, 'height': 542.65625}
+        after = dict(before, y=15.5)
+        canvas.bounding_box.return_value = after
+        valid_png = b'\x89PNG\r\n\x1a\n' + bytes(8) + struct.pack('>II', 296, 544)
+        canvas.screenshot.return_value = valid_png
+        capture = pixel_capture()
+        def scrolls(): page.evaluate.side_effect = [{'x': 0, 'y': 334, 'dpr': 1}, {'x': 0, 'y': 344, 'dpr': 1}]
+        scrolls()
+        result = capture(page, canvas, Path('/evidence/canvas.png'), before)
+        self.assertEqual(result['png_dimensions'], [296, 544])
+        self.assertEqual(result['document_pixel_rect']['y'], 359)
+        for size in [(296, 543), (297, 544), (296, 8192)]:
+            scrolls();canvas.screenshot.return_value = valid_png[:16] + struct.pack('>II', *size)
+            with self.subTest(size=size), self.assertRaises(AssertionError): capture(page, canvas, Path('/evidence/canvas.png'), before)
+        canvas.screenshot.return_value = valid_png
+        for changes in [{'y': 16.5}, {'width': 296.5}]:
+            scrolls();canvas.bounding_box.return_value = dict(after, **changes)
+            with self.subTest(changes=changes), self.assertRaises(AssertionError): capture(page, canvas, Path('/evidence/canvas.png'), before)
+
     def test_embedded_capture_uses_fresh_draw_and_bounded_actual_canvas(self):
         events = []
         page, frame, canvas = Mock(), Mock(), Mock()
+        page.evaluate.return_value = {'x': 0, 'y': 0, 'dpr': 1}
         frame.locator.return_value = canvas
         canvas.scroll_into_view_if_needed.side_effect = lambda: events.append('scroll')
         receipt = {'draw_id': 5, 'draw_frame': 10}
@@ -30,7 +69,7 @@ class ObserverGuards(unittest.TestCase):
         canvas.screenshot.side_effect = lambda **kwargs: events.append('canvas') or b'\x89PNG\r\n\x1a\n' + bytes(8) + struct.pack('>II', 300, 550)
         page.screenshot.side_effect = lambda **kwargs: events.append('viewport')
         snapshot = {'delivered': 1, 'missed': 0, 'sent': 1, 'active': 0, 'streak': 1, 'selected': 1, 'auto': False, 'paused': False}
-        capture = helper('capture_embedded_delivery', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct)
+        capture = helper('capture_embedded_delivery', assert_native_language=fresh, state=Mock(return_value=snapshot), capture_canvas_png=pixel_capture())
         result = capture(page, frame, Path('/evidence'), 'case', 'zh')
         self.assertEqual(events, ['scroll', 'draw', 'canvas', 'viewport'])
         canvas.screenshot.assert_called_once_with(path='/evidence/case-delivered.png')
@@ -62,6 +101,7 @@ class ObserverGuards(unittest.TestCase):
     def test_reflow_capture_waits_for_draw_and_exposes_real_controls(self):
         events = []
         page = Mock();page.viewport_size = {'width': 320, 'height': 568}
+        page.evaluate.return_value = {'x': 0, 'y': 0, 'dpr': 1}
         locators = {name: Mock() for name in ['#canvas', '#stage', '#alternate', '#alternate-label', '#note', '#rights']}
         page.locator.side_effect = lambda selector: locators[selector]
         box = {'x': 10, 'y': 0, 'width': 300, 'height': 550}
@@ -82,7 +122,7 @@ class ObserverGuards(unittest.TestCase):
         presentation = Mock(side_effect=lambda *args: events.append('presentation') or {'first': 1, 'second': 2, 'visibility': 'visible'})
         publication = Mock(side_effect=lambda *args: events.append('publication') or snapshot)
         capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct,
-                         assert_reflow_geometry=helper('assert_reflow_geometry'), wait_presentation=presentation, wait_fresh=publication)
+                         assert_reflow_geometry=helper('assert_reflow_geometry'), wait_presentation=presentation, wait_fresh=publication, capture_canvas_png=pixel_capture())
         result = capture(page, Path('/evidence'), 'reflow', 'en', before_resize)
         self.assertEqual(events, ['canvas-scroll', 'draw', 'presentation', 'canvas', 'rights-scroll', 'publication', 'presentation', 'viewport'])
         self.assertEqual(result['observed_state'], {key: snapshot[key] for key in result['observed_state']})
@@ -90,7 +130,8 @@ class ObserverGuards(unittest.TestCase):
         self.assertTrue(result['native_draw_required'])
         fresh.assert_called_once_with(page, 'en', previous=6, require_new_draw=True)
         page.screenshot.assert_called_once_with(path='/evidence/reflow-context.png', full_page=False)
-        page.evaluate.assert_not_called()
+        self.assertEqual(page.evaluate.call_count, 2)
+        self.assertTrue(all(call.args == ('() => ({x: window.scrollX, y: window.scrollY, dpr: window.devicePixelRatio})',) for call in page.evaluate.call_args_list))
         # A scrolled-out control or changed paused game must not become evidence.
         locators['#note'].bounding_box.side_effect = None
         locators['#note'].bounding_box.return_value = {'x': 0, 'y': 356, 'width': 320, 'height': 40}
@@ -98,7 +139,7 @@ class ObserverGuards(unittest.TestCase):
         locators['#rights'].bounding_box.return_value = {'x': 0, 'y': 408, 'width': 320, 'height': 80}
         # Geometry has its own negatives above; isolate the viewport/state guards.
         capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct,
-                         assert_reflow_geometry=Mock(), wait_presentation=presentation, wait_fresh=publication)
+                         assert_reflow_geometry=Mock(), wait_presentation=presentation, wait_fresh=publication, capture_canvas_png=pixel_capture())
         locators['#alternate-label'].bounding_box.return_value['y'] = -30
         with self.assertRaises(AssertionError):
             capture(page, Path('/evidence'), 'reflow', 'en', before_resize)
@@ -108,7 +149,7 @@ class ObserverGuards(unittest.TestCase):
         fresh.assert_called_with(page, 'en', previous=7, require_new_draw=False)
         changed = dict(snapshot, active=0)
         capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(side_effect=[snapshot, snapshot, changed]), struct=struct,
-                         assert_reflow_geometry=Mock(), wait_presentation=presentation, wait_fresh=publication)
+                         assert_reflow_geometry=Mock(), wait_presentation=presentation, wait_fresh=publication, capture_canvas_png=pixel_capture())
         with self.assertRaisesRegex(AssertionError, 'changed the paused shift'):
             capture(page, Path('/evidence'), 'reflow', 'en', before_resize)
 

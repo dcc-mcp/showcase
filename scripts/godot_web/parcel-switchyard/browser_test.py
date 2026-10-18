@@ -7,6 +7,7 @@ from functools import partial
 import hashlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
+import math
 import os
 import re
 import subprocess
@@ -156,6 +157,40 @@ def assert_phone_size(page, view=None):
     assert snapshot['minimum_mobile_text_units'] * scale >= 14
 
 
+def enclosing_pixel_rect(box, scroll):
+    assert scroll['dpr'] == 1, scroll
+    assert all(math.isfinite(box[key]) for key in ['x', 'y', 'width', 'height']), box
+    assert all(math.isfinite(scroll[key]) for key in ['x', 'y']), scroll
+    assert 0 < box['width'] <= 2048 and 0 < box['height'] <= 2048, box
+    # Match pinned Playwright 1.63 screenshotElement -> enclosingIntRect:
+    # https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/helper.ts
+    left, top = box['x'] + scroll['x'], box['y'] + scroll['y']
+    x, y = math.floor(left + 0.001), math.floor(top + 0.001)
+    return {'x': x, 'y': y, 'width': math.ceil(left + box['width'] - 0.001) - x,
+            'height': math.ceil(top + box['height'] - 0.001) - y}
+
+
+def capture_canvas_png(page, canvas, path, before_box):
+    # Element screenshots may scroll automatically. Re-read main-frame geometry
+    # afterwards, including its document offset; fractional origins can add two
+    # outward edge pixels even though the CSS dimensions are unchanged.
+    observe_scroll = '() => ({x: window.scrollX, y: window.scrollY, dpr: window.devicePixelRatio})'
+    before_scroll = page.evaluate(observe_scroll)
+    before_rect = enclosing_pixel_rect(before_box, before_scroll)
+    png = canvas.screenshot(path=str(path))
+    box = canvas.bounding_box()
+    assert box and all(abs(box[key] - before_box[key]) < 0.001 for key in ['width', 'height']), (before_box, box)
+    scroll = page.evaluate(observe_scroll)
+    rect = enclosing_pixel_rect(box, scroll)
+    assert all(abs(box[key] + scroll[key] - before_box[key] - before_scroll[key]) < 0.001 for key in ['x', 'y']), (before_box, before_scroll, box, scroll)
+    assert rect == before_rect, (before_rect, rect)
+    assert png[:8] == b'\x89PNG\r\n\x1a\n'
+    dimensions = struct.unpack('>II', png[16:24])
+    assert dimensions == (rect['width'], rect['height']), (dimensions, rect, box, scroll)
+    return {'png_dimensions': list(dimensions), 'pre_capture_css_box': before_box, 'post_capture_css_box': box,
+            'pre_capture_scroll': before_scroll, 'post_capture_scroll': scroll, 'document_pixel_rect': rect}
+
+
 def capture_embedded_delivery(page, frame, output, name, lang):
     # Full-page captures of very tall case pages can repeat compositor tiles.
     # Capture the real bounded canvas, plus the current viewport for context.
@@ -169,14 +204,11 @@ def capture_embedded_delivery(page, frame, output, name, lang):
     before = {key: snapshot[key] for key in keys}
     assert before['delivered'] == before['sent'] == before['streak'] == 1
     assert before['missed'] == before['active'] == 0 and not before['auto']
-    png = canvas.screenshot(path=str(output / (name + '-delivered.png')))
-    assert png[:8] == b'\x89PNG\r\n\x1a\n'
-    width, height = struct.unpack('>II', png[16:24])
-    assert abs(width - box['width']) <= 1 and abs(height - box['height']) <= 1, (width, height, box)
+    pixels = capture_canvas_png(page, canvas, output / (name + '-delivered.png'), box)
     page.screenshot(path=str(output / (name + '-delivered-context.png')), full_page=False)
     after = state(frame)
     assert {key: after[key] for key in keys} == before, 'Capture changed the completed game state'
-    return {'draw_receipt': receipt, 'observed_state': before, 'css_box': box, 'png_dimensions': [width, height],
+    return {'draw_receipt': receipt, 'observed_state': before, 'css_box': box, 'png_dimensions': pixels['png_dimensions'], 'pixel_geometry': pixels,
             'scope': 'Actual canvas element pixels and separate viewport context; not a full-page image.'}
 
 
@@ -224,10 +256,7 @@ def capture_reflow(page, output, name, lang, before_resize):
     assert_reflow_geometry(boxes)
     box = boxes['#canvas']
     assert box['width'] <= 2048 and box['height'] <= 2048, box
-    png = canvas.screenshot(path=str(output / (name + '.png')))
-    assert png[:8] == b'\x89PNG\r\n\x1a\n'
-    dimensions = struct.unpack('>II', png[16:24])
-    assert abs(dimensions[0] - box['width']) <= 1 and abs(dimensions[1] - box['height']) <= 1, (dimensions, box)
+    pixels = capture_canvas_png(page, canvas, output / (name + '.png'), box)
     page.locator('#rights').scroll_into_view_if_needed()
     # The context contains ordinary DOM controls. Scrolling must not force the
     # unchanged paused canvas to redraw; require a fresh live state publication.
@@ -245,7 +274,7 @@ def capture_reflow(page, output, name, lang, before_resize):
     return {'draw_receipt': receipt, 'native_draw_required': layout_changed, 'previous_draw_id': previous_draw,
             'canvas_presentation': canvas_presentation, 'context_presentation': context_presentation,
             'context_publication': {key: context_state[key] for key in ['publication_id', 'process_frame']},
-            'observed_state': before, 'geometry': boxes, 'png_dimensions': list(dimensions),
+            'observed_state': before, 'geometry': boxes, 'png_dimensions': pixels['png_dimensions'], 'pixel_geometry': pixels,
             'controls_viewport_boxes': controls, 'viewport': viewport,
             'scope': 'Actual bounded canvas and real scrolled controls/rights viewport. Cross-layout resize requires a new native draw; same-layout resize observes CSS presentation of the retained paused canvas.'}
 
