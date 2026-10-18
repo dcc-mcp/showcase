@@ -1,20 +1,64 @@
 # DCC-MCP Showcase
 
-A collection of real DCC-MCP work, with reusable prompts, process images,
-software versions, evidence boundaries and downloadable source resources.
+A bilingual gallery of artwork, short films and playable demos made with
+DCC-MCP in real creative software. Explore cross-software agent workflows
+through recorded MCP evidence, reusable prompts, available native files and
+reproduction resources.
 
-GitHub Pages destination: [dcc-mcp.github.io/showcase](https://dcc-mcp.github.io/showcase/).
+[Browse the gallery](https://dcc-mcp.github.io/showcase/) ·
+[中文作品合集](https://dcc-mcp.github.io/showcase/zh/) ·
+[Brand gallery](https://dcc-mcp.github.io/showcase/brands/) ·
+[中文品牌画廊](https://dcc-mcp.github.io/showcase/zh/brands/)
+
+中英双语作品画廊，收录通过 DCC-MCP 在真实创作软件中完成的图像、短片与可交互案例。
+从作品进入跨软件制作过程，查看实际 MCP 记录、可复用提示词、已公开原生文件与复现资源。
+每个案例单独说明已验证的范围、缺失证据和使用许可。
+
+The canonical public site is **https://dcc-mcp.github.io/showcase/**.
+English pages use the root routes; Simplified Chinese pages use `zh/`.
 Deployment is produced from `main` by the repository's existing Pages workflow.
-The collection is part of [the DCC-MCP project](https://dcc-mcp.github.io/),
-with [installation and agent setup](https://dcc-mcp.github.io/zh/agents),
-[Core / Gateway / CLI](https://github.com/dcc-mcp/dcc-mcp-core), and each
-case's software adapter linked from the site. The official site's broader
-[examples](https://dcc-mcp.github.io/examples) remain distinct from the
-collection's downloadable, individually documented case records.
+Draft pull requests are previews of proposed changes and do not update the live site.
 
-The collection currently contains eight individually documented cases: a Houdini
+The collection is part of [the DCC-MCP project](https://dcc-mcp.github.io/).
+Start with [installation and agent setup](https://dcc-mcp.github.io/agents)
+([中文入门](https://dcc-mcp.github.io/zh/agents)), or explore
+[Core / Gateway / CLI](https://github.com/dcc-mcp/dcc-mcp-core).
+Each case links its software adapters. The official site's broader
+[examples](https://dcc-mcp.github.io/examples) remain a separate entry point.
+
+## Start with a work
+
+- Animation and denoising: [Brass Pendulum](docs/showcase/brass-pendulum-denoise/README.md)
+  compares a low-sample original Blender animation with actual temporal
+  denoising, preserving matched previews, a path-cleaned editable scene and
+  explicit quality limits.
+
+- Films: [Crystal Freight](https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/)
+  and [Brass Relay](https://dcc-mcp.github.io/showcase/cases/brass-relay/)
+  combine editable CAD, Blender scenes and Kdenlive timelines, with the published
+  film, source availability and evidence boundaries explained on each page.
+- Interactive works: [Sonic Loom](https://dcc-mcp.github.io/showcase/cases/sonic-loom/)
+  and [Prism Tide](https://dcc-mcp.github.io/showcase/cases/prism-tide/)
+  offer opt-in Godot Web demos alongside their recorded videos and source files.
+  Demo controls are bilingual; the native artwork and in-game labels remain English.
+- Materials and modeling: [the Houdini vessel](https://dcc-mcp.github.io/showcase/cases/houdini-procedural-study/)
+  and [weathered crate](https://dcc-mcp.github.io/showcase/cases/crate-lookdev/)
+  document the native workflow, process images and available reproduction resources.
+
+For agents, [`collection.json`](collection.json) is the structured publication
+inventory: goals, reusable prompts, software versions, actual tools, process,
+checks, resources, credits and stage-specific model attribution. Use each case's
+source records and [entry contract](docs/showcase/CONTRACT.md) to understand the
+available evidence before reproducing it. Source availability, reproduction
+checks and rights are case-specific; the gallery does not grant blanket reuse
+or model-training permission.
+
+## Collection and evidence
+
+The collection currently contains thirteen individually documented cases: Brass Pendulum, a Houdini
 vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
-Relay, Seismic Lens, Orbit Post Office and Trail & Air. Each page separates original production from later
+Relay, Seismic Lens, Orbit Post Office, Trail & Air, Rainroom, Resonance Atlas,
+Sonic Loom and Prism Tide. Each page separates original production from later
 visual/technical review. Historical exact models and reasoning effort remain
 unknown where production records did not capture them; a later review
 does not establish the attribution of earlier artwork. The existing review
@@ -38,9 +82,31 @@ official save APIs were investigated without finding a validated complete
 metadata sanitizer. PNG author metadata is removed through the adapter's
 MCP automation tool; compressed image data and decoded pixels remain identical.
 
+## Languages
+
+Every collection and brand page is available in English at the existing root
+routes and Simplified Chinese under `zh/`, matching the official website. Use
+the language links to stay on the same case or gallery. Source files, original
+artwork and evidence retain their original language and bytes. See the
+[localization contract](docs/LOCALIZATION.md) for translation and browser checks.
+
 ## Browse and reproduce
 
-The wall supports software and capability filters and a text search. Each
+The wall supports software and capability filters and a text search. The Games
+shelf is derived only from the verified `play/manifest.json` allowlist. Start game
+opens a dedicated bilingual `games/<case-slug>/` stage; an ordinary direct visit
+does not load Godot. A one-use, short-lived session intent carries an explicit
+Start click across navigation. Reset, exit, fullscreen and game-appropriate sound
+controls sit beside the stage, with more games and the original case record.
+
+Video previews start muted. A visible sound button enables sound only for the
+current preview; leaving, filtering, switching cards or hiding the page stops it
+and resets mute. `assets/preview-audio.json` records actual ffprobe audio streams
+bound to each preview's SHA-256. Missing evidence is labeled unverified rather
+than silent. Reinspect and update this evidence when changing a preview file.
+Run `python scripts/test_games.py`, `node scripts/test_preview_controls.js` and
+`python scripts/games_browser_smoke.py --site _site --output <evidence-dir>` for
+these interactions. Browser checks verify state, not subjective listening. Each
 static detail page provides the goal, prompt, process, intermediate and final
 images, tools and version records, measured checks, source links and attribution.
 Source files remain in their original repositories; web images are optimized
@@ -76,7 +142,7 @@ not substitute for browser acceptance.
 ## Brand gallery
 
 The [brand gallery](https://dcc-mcp.github.io/showcase/brands/) separately
-selects resources without changing the eight-case collection. The first core
+selects resources without changing the twelve-case collection. The first core
 release contains eight verified files. Incremental batches add Maya,
 3ds Max, Blender, Houdini, ZBrush, Photoshop, MotionBuilder, Nuke and OpenUSD
 families with 16 files each, plus three actual core currentColor SVGs:
@@ -130,6 +196,12 @@ relicense software vendors' trademarks or source artwork.
 
 ## Add a case
 
+Agents should start with the [showcase production Skill](skills/dcc-showcase-production/SKILL.md)
+for research, native production, audiovisual/interaction acceptance and honest
+evidence. Its [discovery guide](skills/dcc-showcase-production/references/discovery.md)
+explains direct use and existing agent-host installation routes.
+
+
 Follow [the entry contract](docs/showcase/CONTRACT.md). Record actual DCC-MCP
 tools and host versions, preserve intermediate and final artifacts, and state
 precisely what was measured. Mark unknown versions and missing evidence as
@@ -140,6 +212,11 @@ Retain authorship and asset licenses. Check images and text for credentials,
 private paths, internal addresses and unrelated content before selecting a
 case. New DCC work must use DCC-MCP; do not present direct host scripts or
 external software automation as an MCP run.
+
+Submitted media is stored through Git LFS, so contributors need `git-lfs`
+installed and initialized (`git lfs install`) before adding artifacts under
+`media/`. Without it, media files are committed as plain blobs and grow the
+git history permanently.
 
 ## Native projects and reproduction packages
 
@@ -206,3 +283,18 @@ release; a green check is not artistic approval. This workflow does not deploy.
 ## Orbit Post Office revision
 
 The current GIMP → Godot → Kdenlive case publishes the station/worlds artwork, separate eight-letter gameplay evidence and the seven-second first-delivery film. Current game/art/film native projects are not publicly downloadable. The unchanged v1 ZIP is explicitly the historical icon prototype. Its earlier failure records remain available; recovery checks and recorded native runs are kept separate.
+
+## Optional browser demos
+
+`play/manifest.json`, when present, is an explicit allowlist of published Web
+exports. Every file records its repository-relative `play/` path, bytes and
+SHA-256; only inventoried files are copied. Demos must refer to selected cases,
+use single-thread Godot Compatibility exports, and supply English/Chinese shell
+controls and notes. Native artwork language is recorded separately.
+
+The case page creates an iframe only after **Open interactive demo**. The demo
+shell also requires Start before downloading/running the engine. Exit removes
+the iframe, releasing that session; unsaved state is lost. A standalone link
+works without the collection's JavaScript. No manifest means no demo assets or
+player script are added to the build. Run `python scripts/test_playable.py` when
+changing this contract.

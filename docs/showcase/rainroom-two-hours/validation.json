@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "host": "Blender 4.5.14 LTS",
+    "adapter": "dcc-mcp-blender 0.2.16",
+    "core_gateway_cli": "0.20.42",
+    "render": "Cycles CPU, 6 threads, denoised",
+    "headless": true
+  },
+  "checks": [
+    {
+      "name": "Native scene close/new-directory reopen",
+      "result": "pass",
+      "observed": {
+        "before": {
+          "objects": 491,
+          "meshes": 454,
+          "curves": 32,
+          "cameras": [
+            "01_Window still life",
+            "02_Rain and tea"
+          ],
+          "materials": 64,
+          "images": [
+            {
+              "name": "Rainroom postcard original ink",
+              "packed": true,
+              "size": [
+                128,
+                128
+              ],
+              "filepath": "//textures/postcard.png"
+            }
+          ],
+          "water_beads": 330,
+          "rivulets": 26,
+          "render_engine": "CYCLES",
+          "samples": 128,
+          "resolution": [
+            1440,
+            1440
+          ],
+          "moods": [
+            {
+              "frame": 1,
+              "lamp_watts": 42.0,
+              "sky_watts": 110.0
+            },
+            {
+              "frame": 2,
+              "lamp_watts": 0.0,
+              "sky_watts": 420.0
+            }
+          ]
+        },
+        "after": {
+          "objects": 491,
+          "meshes": 454,
+          "curves": 32,
+          "cameras": [
+            "01_Window still life",
+            "02_Rain and tea"
+          ],
+          "materials": 64,
+          "images": [
+            {
+              "name": "Rainroom postcard original ink",
+              "packed": true,
+              "size": [
+                128,
+                128
+              ],
+              "filepath": "//textures/postcard.png"
+            }
+          ],
+          "water_beads": 330,
+          "rivulets": 26,
+          "render_engine": "CYCLES",
+          "samples": 128,
+          "resolution": [
+            1440,
+            1440
+          ],
+          "moods": [
+            {
+              "frame": 1,
+              "lamp_watts": 42.0,
+              "sky_watts": 110.0
+            },
+            {
+              "frame": 2,
+              "lamp_watts": 0.0,
+              "sky_watts": 420.0
+            }
+          ]
+        },
+        "exact": true,
+        "excluded_transient": "Unsaved Viewer Node scratch buffer, not an authored texture."
+      }
+    },
+    {
+      "name": "Packed postcard, no external image on disk",
+      "result": "pass",
+      "observed": {
+        "image": "Rainroom postcard original ink",
+        "packed": true,
+        "exists_on_disk": false,
+        "size": [
+          128,
+          128
+        ]
+      }
+    },
+    {
+      "name": "Compressed native actual decompression scan",
+      "result": "pass",
+      "observed": {
+        "compressed_bytes": 531992,
+        "decompressed_bytes": 12722772,
+        "native_header": "BLENDER-v405",
+        "pattern_counts": {
+          "workspace_path": 0,
+          "home_path": 0,
+          "temp_path": 0,
+          "github_token": 0,
+          "classic_token": 0,
+          "private_key": 0,
+          "job_directory": 0,
+          "job_identifier": 0
+        }
+      }
+    },
+    {
+      "name": "Completed actual render outputs",
+      "result": "pass",
+      "observed": {
+        "main_moods": [
+          {
+            "file": "night.jpg",
+            "frame": 1,
+            "samples": 128
+          },
+          {
+            "file": "morning.jpg",
+            "frame": 2,
+            "samples": 128
+          }
+        ],
+        "second_camera": {
+          "file": "detail.jpg",
+          "samples": 96
+        },
+        "resolution": [
+          1440,
+          1440
+        ]
+      }
+    },
+    {
+      "name": "Author visual review",
+      "result": "pass",
+      "observed": "Actual pixel review of all three final images. Water/glass outlines, ceramic rim and book contacts are readable; no visible fireflies. First preview softbox visibility and later coplanar-wall black corner were corrected in native source, not retouched. The wall correction also passed a separate preview review."
+    },
+    {
+      "name": "Second final-image review",
+      "result": "pass",
+      "observed": "A separate reviewer viewed night, morning and detail outputs and accepted the corrected wall continuity, distinct moods, tabletop materials and readable stylized rain/glass. This is not user sign-off."
+    }
+  ],
+  "not_claimed": [
+    "GUI interaction",
+    "User visual sign-off",
+    "Cross-DCC portability",
+    "Fluid simulation accuracy",
+    "Exact backend model identity or effort",
+    "Complete unredacted MCP trace"
+  ]
+}

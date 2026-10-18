@@ -18,6 +18,6 @@ Nothing is committed here by default. Artifacts are drafted internally and land 
 
 ## Media handling
 
-- Prefer Git LFS or an external link for anything large.
+- Artifacts under `media/` are tracked by Git LFS. Contributors need `git-lfs` installed and initialized (`git lfs install`) before adding anything here.
 - Keep GIFs loopable and small; keep stills wide enough to read but not so large that the page stalls.
 - Never commit an artifact that leaks internal paths, hosts, or credentials. A sample that is safe to publish is clean before it is published.

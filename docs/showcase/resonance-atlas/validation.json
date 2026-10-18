@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "host": "Inkscape 1.4.4",
+    "adapter": "0.1.0 source 498982a",
+    "core_gateway_cli": "0.20.42",
+    "post_production": "FFmpeg 7.1.5, Pillow 12.3.0"
+  },
+  "checks": [
+    {
+      "name": "Native software production and reopening",
+      "result": "pass",
+      "observed": "55 real gateway calls, 9 native variants; outlined text count zero."
+    },
+    {
+      "name": "Visual review",
+      "result": "pass",
+      "observed": "Three posters and final proportional-crop film pixel-reviewed."
+    },
+    {
+      "name": "PDF fonts and text",
+      "result": "pass",
+      "observed": "Embedded DejaVu Sans/Bold with Unicode mapping; text extraction matched."
+    },
+    {
+      "name": "Video decoding",
+      "result": "pass",
+      "observed": "1280x720 H.264, 24fps, 288 frames, 12 seconds; full decode passed; no audio."
+    }
+  ],
+  "not_claimed": [
+    "No measured acoustic data or simulation.",
+    "No screen recording or persistent GUI verification.",
+    "No released-adapter Linux fix claim; exact unmerged dependency disclosed."
+  ],
+  "native_artifacts": [
+    {
+      "source": "resonance-1-03.svg",
+      "native_png_size": [
+        1587,
+        2116
+      ],
+      "objects_with_id": 99,
+      "text": [
+        "RESONANCE ATLAS",
+        "A visual study of rational frequency ratios.",
+        "x = sin(2t + phase)",
+        "y = sin(3t)",
+        "31 PHASE OFFSETS",
+        "0",
+        "NORMALIZED / SCHEMATIC",
+        "1",
+        "VECTOR STUDIES / 2026",
+        "01",
+        "Phase / locked",
+        "FORM FOLLOWS FREQUENCY",
+        "RESEARCH SERIES    01 / 03"
+      ],
+      "sha256": "83cb7743a971c2396a7fc97c6ff4d8c739c28d8eb819152223dd5c545c63971d"
+    },
+    {
+      "source": "resonance-2-03.svg",
+      "native_png_size": [
+        1587,
+        2116
+      ],
+      "objects_with_id": 118,
+      "text": [
+        "RESONANCE ATLAS",
+        "Two origins. A shared field of interference.",
+        "Two equal point sources",
+        "Concentric wavefront study",
+        "48 WAVEFRONTS",
+        "0",
+        "NORMALIZED / SCHEMATIC",
+        "1",
+        "VECTOR STUDIES / 2026",
+        "02",
+        "Between / waves",
+        "FORM FOLLOWS FREQUENCY",
+        "RESEARCH SERIES    02 / 03"
+      ],
+      "sha256": "ddb5ce261c3b3aedab5b7ba1b6443773b996ef4fe41cc475afc00ca8a1fca468"
+    },
+    {
+      "source": "resonance-3-03.svg",
+      "native_png_size": [
+        1587,
+        2116
+      ],
+      "objects_with_id": 110,
+      "text": [
+        "RESONANCE ATLAS",
+        "A harmonic structure, suspended in time.",
+        "Five cycles + eleventh harmonic",
+        "A decaying envelope in depth",
+        "42 SIGNAL TRACES",
+        "0",
+        "NORMALIZED / SCHEMATIC",
+        "1",
+        "VECTOR STUDIES / 2026",
+        "03",
+        "After / sound",
+        "FORM FOLLOWS FREQUENCY",
+        "RESEARCH SERIES    03 / 03"
+      ],
+      "sha256": "eac155a4680b9c99ef01cbeb9d7bfb0db740457ad7ae36f3f8ac3c67b626a4dd"
+    }
+  ]
+}

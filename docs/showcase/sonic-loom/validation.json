@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "application": "Godot",
+    "version": "4.6.3.stable.official.7d41c59c4",
+    "adapter": "dcc-mcp-godot 0.9.6",
+    "core": "0.20.42",
+    "render": "Compatibility / OpenGL / Mesa llvmpipe on Xvfb",
+    "viewport_px": [
+      1280,
+      800
+    ],
+    "small_window_px": [
+      960,
+      600
+    ],
+    "fps": 30,
+    "frames": 390,
+    "source_commit": "e5ee3e8a904d71119e391b20c57698629c2193d0",
+    "source_pr": "https://github.com/dcc-mcp/dcc-mcp-godot/pull/76"
+  },
+  "instrument": {
+    "voices": 4,
+    "steps_per_voice": 16,
+    "cells": 64,
+    "initial_bpm": 104,
+    "tempo_range_bpm": [
+      60,
+      160
+    ],
+    "keyboard_increment_bpm": 1,
+    "button_increment_bpm": 4,
+    "meter": "4/4"
+  },
+  "checks": [
+    {
+      "name": "typed_mcp_authoring",
+      "result": "pass",
+      "observed": {
+        "calls": 19,
+        "source_sha256": "ecd55c4f64914d07a72d7fd65bfacd81e91d05a7807c3827348edbb44cc2a8d0",
+        "all_success": true
+      }
+    },
+    {
+      "name": "native_logic_tests",
+      "result": "pass",
+      "observed": {
+        "checks": [
+          {
+            "name": "step toggles on",
+            "pass": true
+          },
+          {
+            "name": "repeated step toggles off",
+            "pass": true
+          },
+          {
+            "name": "upper tempo bound",
+            "pass": true
+          },
+          {
+            "name": "lower tempo bound",
+            "pass": true
+          },
+          {
+            "name": "save and reopen edited pattern",
+            "pass": true
+          },
+          {
+            "name": "play starts first step",
+            "pass": true
+          },
+          {
+            "name": "pause preserves step",
+            "pass": true
+          },
+          {
+            "name": "reset restores defaults",
+            "pass": true
+          },
+          {
+            "name": "voice 0 has nonzero PCM",
+            "pass": true,
+            "peak": 0.848715722560883,
+            "samples": 21168
+          },
+          {
+            "name": "voice 1 has nonzero PCM",
+            "pass": true,
+            "peak": 0.520991623401642,
+            "samples": 10584
+          },
+          {
+            "name": "voice 2 has nonzero PCM",
+            "pass": true,
+            "peak": 0.236068367958069,
+            "samples": 3969
+          },
+          {
+            "name": "voice 3 has nonzero PCM",
+            "pass": true,
+            "peak": 0.370319485664368,
+            "samples": 31752
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "name": "real_keyboard_mouse_and_save_reload",
+      "result": "pass",
+      "observed": {
+        "mouse_step": true,
+        "tempo_button": true,
+        "play_pause": true,
+        "mute": true,
+        "saved_pattern_reopened": true,
+        "reset_twice": true
+      }
+    },
+    {
+      "name": "real_mixed_audio",
+      "result": "pass",
+      "observed": {
+        "sample_rate_hz": 44100,
+        "channels": 2,
+        "duration_s": 13.0,
+        "peak": 0.75927734375,
+        "rms": 0.11922150384962876,
+        "nonzero_samples": 1083782,
+        "clipped_samples": 0,
+        "source": "Godot Movie Maker real mixer output",
+        "passed": true
+      }
+    },
+    {
+      "name": "visual_review",
+      "result": "pass",
+      "observed": "Real native hero, smaller window and sampled video frames inspected; labels, controls, grid, playhead and footnotes remain legible without overlap."
+    },
+    {
+      "name": "source_archive",
+      "result": "pass",
+      "observed": {
+        "relative_paths_only": true,
+        "native_dependencies": 0,
+        "zip_integrity": true
+      }
+    }
+  ],
+  "audio": {
+    "sample_rate_hz": 44100,
+    "channels": 2,
+    "duration_s": 13.0,
+    "peak": 0.75927734375,
+    "rms": 0.11922150384962876,
+    "nonzero_samples": 1083782,
+    "clipped_samples": 0,
+    "source": "Godot Movie Maker real mixer output",
+    "passed": true
+  },
+  "subjective_listening": {
+    "status": "not_run",
+    "reason": "The review environment has no supported audio listening input. Numerical measurements do not establish subjective sound quality."
+  },
+  "iteration_history": [
+    {
+      "version": "v1",
+      "observed": "Real rapid mouse interaction failed: polling the latest pointer position could target the following button when input events were queued. Audio measurement and native render passed."
+    },
+    {
+      "version": "v3",
+      "observed": "Fixed through typed MCP edit_script to use event-local positions; also corrected evidence-field merging, then reran actual keyboard/mouse and saved-pattern checks."
+    }
+  ],
+  "not_claimed": [
+    "Subjective listening has not been performed. Use the audio player to audition on the target listening device.",
+    "Native desktop interaction was verified under Linux Xvfb; browser playable Godot export, mobile touch and hardware audio-device latency were not tested.",
+    "MCP authored and saved the source and scene. CI rendering and Movie Maker capture invoke Godot directly; they are not an MCP scene-preview return.",
+    "The small top-right animation is decorative, and THE THREAD is pattern density. Only waveform.png is measured from real audio PCM.",
+    "The movie uses a scripted demonstration of edits; separate xdotool keyboard/mouse evidence establishes actual UI input.",
+    "Pause stops sequencing; already-triggered voice tails decay naturally.",
+    "The root scene contains source-drawn artwork and runtime players; individual pads are not separate editor nodes.",
+    "Exact model identity and reasoning configuration are unknown.",
+    "The run is not stderr-warning-free: Xvfb V-Sync and Movie Maker ObjectDB-at-exit warnings are disclosed."
+  ],
+  "runtime_warnings": [
+    "The Xvfb software graphics driver cannot change V-Sync mode.",
+    "Godot Movie Maker emitted ObjectDB instances leaked at exit. The frame and audio files completed successfully; this warning has not been diagnosed as a host or application defect."
+  ]
+}

@@ -27,3 +27,24 @@ downloadable package in docs/showcase/orbit-post-office/ are excluded from the
 MIT grant above. They retain their existing rights and separately scoped
 upstream notices. See docs/showcase/orbit-post-office/LICENSES.md. This exclusion
 does not change the scope of any other case's recorded rights.
+
+Native Godot Web case exclusions
+
+The original Sonic Loom and Prism Tide game/instrument code, their Web-specific
+native adapters, visual design and synthesized audio in
+scripts/godot_web/projects/sonic-loom/ and scripts/godot_web/projects/prism-tide/,
+their exported play/sonic-loom/game.pck and play/prism-tide/game.pck packs,
+and the corresponding Sonic Loom / Prism Tide screenshots in play/evidence/,
+retain the existing rights reserved for those cases and are excluded from the
+MIT grant above. Publication of a playable export makes no additional license
+grant. See play/LICENSES.md and the original case notices. The shared Godot
+runtime and its components retain their own upstream licenses and notices in
+play/runtime/LICENSE.txt and play/runtime/COPYRIGHT.txt.
+
+Brass Pendulum case exclusion
+
+The original scene, rendered imagery, video, scene recipe, evidence and
+case-specific documentation in docs/showcase/brass-pendulum-denoise/ are
+excluded from the MIT grant above and retain their rights. Publication makes
+no additional license grant. See that case's LICENSES.md. Shared website code
+and all existing upstream licenses are unchanged.
