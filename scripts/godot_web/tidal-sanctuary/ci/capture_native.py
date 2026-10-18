@@ -10,7 +10,7 @@ import subprocess
 import time
 from pathlib import Path
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
-from observers import observer_receipts
+from observers import finite_vector, observer_receipts
 from common import checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
 
 
@@ -41,6 +41,46 @@ def wait_for(process, predicate, timeout, message):
             return
         time.sleep(.1)
     raise TimeoutError(message)
+
+
+def wait_for_neutral_movement(process, read_states, baseline, timeout=10):
+    """Observe post-keyup physics before any re-press; never consume game logs."""
+    validate_state(baseline, expected_demo=False)
+    observed = None
+
+    def neutral_after_release():
+        nonlocal observed
+        states = read_states()
+        if not states:
+            return False
+        state = states[-1]
+        validate_state(state, expected_demo=False)
+        movement = finite_vector(state.get("movement_input"), 2, "movement_input")
+        if (state["sample_id"] <= baseline["sample_id"]
+                or state["physics_frame"] <= baseline["physics_frame"]):
+            return False
+        if any(abs(value) > 1e-6 for value in movement):
+            return False
+        observed = state
+        return True
+
+    wait_for(process, neutral_after_release, timeout, "fresh neutral physics input after actual X11 key release")
+    return {"after_sample_id": baseline["sample_id"], "after_physics_frame": baseline["physics_frame"],
+            "observed": observed}
+
+
+def apply_movement_keys(direction, pressed, send_key, release_barrier):
+    wanted = keyboard_direction(direction)
+    released = pressed - wanted
+    for name in sorted(released):
+        send_key(name, False)
+    for name in sorted(wanted - pressed):
+        send_key(name, True)
+    # An X11 screenshot can finish before a slow rendered frame has processed
+    # keyup. Require an actual neutral physics sample before a subsequent press.
+    # Shared held keys at ordinary path turns keep their existing input stream.
+    if released and not wanted:
+        release_barrier()
 
 
 def stop_input_runtime(process):
@@ -115,7 +155,7 @@ def main():
               "audio": "No audio stream; this prototype currently has no audio", "checks": [],
               "limitations": ["CI software OpenGL under Xvfb, not physical hardware performance."]}
     runtime = recorder = None
-    pressed, events, screenshots = set(), [], []
+    pressed, events, screenshots, movement_releases = set(), [], [], []
 
     def launch(log_name, env, extra=()):
         log = (out / log_name).open("w")
@@ -150,12 +190,16 @@ def main():
         time.sleep(.07)
         key(name, False)
 
+    def release_barrier():
+        # Baseline is deliberately taken AFTER every physical keyup completed.
+        states = records("native-input.log", "TIDAL_STATE")
+        if not states:
+            raise RuntimeError("No actual physics baseline after X11 key release")
+        movement_releases.append(wait_for_neutral_movement(runtime,
+            lambda: records("native-input.log", "TIDAL_STATE"), states[-1]))
+
     def move(direction):
-        wanted = keyboard_direction(direction)
-        for name in sorted(pressed - wanted):
-            key(name, False)
-        for name in sorted(wanted - pressed):
-            key(name, True)
+        apply_movement_keys(direction, pressed, key, release_barrier)
 
     def screenshot(name, state=None):
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "x11grab",
@@ -279,7 +323,8 @@ def main():
             route = driver.run()
         finally:
             write_json(out / "native-input-route.json", {"input_events": events, "samples": driver.samples,
-                "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions})
+                "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions,
+                "physical_stops": driver.stops, "movement_release_receipts": movement_releases})
         time.sleep(1)
         require_running(recorder, "completion of actual keyboard-route recording")
         input_movie_states = [item for item in records("native-input.log", "TIDAL_STATE")

@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
 from capture_browser import capture_png, completed_route_save, secondary_touch_tap, validate_web_exit
-from capture_native import validate_input_movie_span
+from capture_native import apply_movement_keys, validate_input_movie_span, wait_for_neutral_movement
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
 
@@ -83,6 +83,66 @@ class GameplayObserverTests(unittest.TestCase):
                 validate_state(state, self.state())
         with self.assertRaisesRegex(ValueError, "regressed"):
             validate_state(self.state(sample_id=2, physics_frame=72), self.state(quest_stage=1))
+
+    def test_native_release_waits_for_new_neutral_physics_after_keyup(self):
+        baseline = self.state(movement_input=[0, 0])
+        fresh = self.state(sample_id=4, physics_frame=90, movement_input=[0, 0])
+        read = Mock(side_effect=[[baseline],
+            [self.state(sample_id=2, movement_input=[0, 0])],
+            [self.state(sample_id=3, physics_frame=80, movement_input=[1, 0])], [fresh]])
+        with patch("capture_native.time.sleep"):
+            receipt = wait_for_neutral_movement(Mock(poll=Mock(return_value=None)), read, baseline)
+        self.assertEqual(read.call_count, 4)
+        self.assertEqual(receipt["observed"], fresh)
+        self.assertEqual(receipt["after_physics_frame"], baseline["physics_frame"])
+        self.assertEqual(receipt["after_sample_id"], baseline["sample_id"])
+
+    def test_native_release_refuses_stale_partial_or_absent_input_until_timeout(self):
+        baseline = self.state(movement_input=[0, 0])
+        for states in [[], [baseline], [self.state(sample_id=2, movement_input=[0, 0])],
+                       [self.state(sample_id=2, physics_frame=80, movement_input=[.1, 0])]]:
+            clock = [0.0]
+            with self.subTest(states=states), patch("capture_native.time.monotonic", side_effect=lambda: clock[0]), \
+                    patch("capture_native.time.sleep", side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)), \
+                    self.assertRaisesRegex(TimeoutError, "fresh neutral"):
+                wait_for_neutral_movement(Mock(poll=Mock(return_value=None)), lambda: states, baseline, timeout=.2)
+
+    def test_native_release_rejects_invalid_input_and_wrong_route(self):
+        baseline = self.state(movement_input=[0, 0])
+        for movement in (None, [float("nan"), 0], [0, float("inf")], [True, 0], [0]):
+            fresh = self.state(sample_id=2, physics_frame=80, movement_input=movement)
+            with self.subTest(movement=movement), self.assertRaises(ValueError):
+                wait_for_neutral_movement(Mock(poll=Mock(return_value=None)), lambda: [fresh], baseline)
+        with self.assertRaisesRegex(ValueError, "wrong input route"):
+            wait_for_neutral_movement(Mock(poll=Mock(return_value=None)),
+                lambda: [self.state(sample_id=2, physics_frame=80, movement_input=[0, 0], demo=True)], baseline)
+
+    def test_native_release_requires_live_runtime_before_and_after_receipt(self):
+        baseline = self.state(movement_input=[0, 0])
+        fresh = self.state(sample_id=2, physics_frame=80, movement_input=[0, 0])
+        for polls in ([0], [None, 0]):
+            with self.subTest(polls=polls), self.assertRaisesRegex(RuntimeError, "exited"):
+                wait_for_neutral_movement(Mock(poll=Mock(side_effect=polls)), lambda: [fresh], baseline)
+
+    def test_native_release_barrier_only_follows_actual_all_keyup(self):
+        pressed, calls = {"d", "w"}, []
+        def key(name, down):
+            calls.append((name, down))
+            pressed.add(name) if down else pressed.discard(name)
+        barrier = Mock(side_effect=lambda: self.assertEqual(pressed, set()))
+        apply_movement_keys((1, 0), pressed, key, barrier)
+        self.assertEqual(calls, [("w", False)])
+        barrier.assert_not_called()
+        apply_movement_keys((1, 0), pressed, key, barrier)
+        self.assertEqual(calls, [("w", False)])
+        apply_movement_keys((0, 0), pressed, key, barrier)
+        self.assertEqual(calls, [("w", False), ("d", False)])
+        barrier.assert_called_once()
+        apply_movement_keys((0, 0), pressed, key, barrier)
+        barrier.assert_called_once()
+        apply_movement_keys((1, 0), pressed, key, barrier)
+        self.assertEqual(calls[-1], ("d", True))
+        barrier.assert_called_once()
 
     def test_real_input_direction_uses_observed_camera_axes(self):
         self.assertEqual(direction_to(self.state(), [1.3, 8]), (0, -1))
