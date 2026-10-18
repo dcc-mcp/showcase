@@ -258,6 +258,14 @@ def verify_audio_case(page, context, case: dict, site: Path, origin: str,
 
 
 
+def start_deferred_video(page, video, selector):
+    """Load a deliberately deferred film only through native keyboard intent."""
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Video played before a user gesture")
+    video.press("Space")
+    page.wait_for_function("s => { const v=document.querySelector(s); return v.readyState >= 2 && !v.paused; }", arg=selector)
+
+
 def verify_orbital_loom(page, context, case, origin, output, layout, active_context):
     """Exercise this exact film and source download on both viewport layouts."""
     from playwright.sync_api import expect
@@ -270,12 +278,12 @@ def verify_orbital_loom(page, context, case, origin, output, layout, active_cont
     expect(video).to_have_js_property("controls", True)
     expect(video).to_have_js_property("autoplay", False)
     expect(video).to_have_js_property("paused", True)
-    page.wait_for_function("s => { const v=document.querySelector(s); return v.readyState >= 2; }", arg=selector)
+    # Current site uses preload=none: first send a real keyboard play gesture.
+    start_deferred_video(page, video, selector)
     metadata = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
     if abs(metadata["duration"] - 15) > .05 or metadata["width"] != 960 or metadata["height"] != 540:
         raise AssertionError("Unexpected Orbital Loom metadata")
     progress(active_context, "orbital_loom_play_pause_seek")
-    video.press("Space")
     page.wait_for_function("s => { const v=document.querySelector(s); return !v.paused && v.currentTime >= .3; }", arg=selector)
     video.press("Space")
     expect(video).to_have_js_property("paused", True)
