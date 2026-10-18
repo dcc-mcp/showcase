@@ -144,6 +144,18 @@ class CollectionContractTests(unittest.TestCase):
                 self.case["model_attribution"] = [r for r in self.complete_attribution() if r["stage_id"] != stage]
                 self.assertTrue(any("missing required stage categories" in p for p in self.problems()))
 
+    def test_supplement_attribution_preserves_historical_unknowns(self):
+        rows = self.complete_attribution()
+        self.case["model_attribution"] = rows + [dict(
+            self.attribution(), stage_id="supplement_creation", stage="New camera film",
+            model="gpt-6-astra", reasoning_effort="ultra", record_status="configured",
+            basis="Requested and accepted task configuration; not backend attestation.",
+            scope="New film only; historical asset attribution is unchanged.")]
+        self.assertFalse(self.problems())
+        self.assertTrue(all(row["record_status"] == "unknown" for row in rows))
+        self.case["model_attribution"].append(dict(self.case["model_attribution"][-1]))
+        self.assertTrue(any("duplicate stage_id" in p for p in self.problems()))
+
     def test_invalid_and_duplicate_stage_ids_rejected(self):
         for bad in ("creation", "unrecognized", ["creation"]):
             with self.subTest(stage_id=bad):

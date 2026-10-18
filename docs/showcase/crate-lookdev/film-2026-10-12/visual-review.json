@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "movie": "crate-excerpt.mp4",
+  "delivery_status": "partial_stage_evidence",
+  "full_film_quality_gate": "not_met",
+  "decoded_frame_count": 50,
+  "decoded_unique_rgb_frames": 50,
+  "presentation_timestamps": "all 50 frames match index / 24 seconds within 2 microseconds",
+  "poster_movie_frame": 49,
+  "contact_sheet_movie_frames": [
+    1,
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "visual_inspection": {
+    "status": "partial_stage_evidence_reviewed",
+    "inspected_decoded_movie_frames": [
+      1,
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "observations": [
+      "The crate remains fully in frame through the inspected excerpt samples.",
+      "Camera angle progresses from front toward the right side; no sampled exposure or material discontinuity is visible.",
+      "Fine grain is soft at the recorded low-sample settings.",
+      "This review does not accept the unfinished six-second target or certify full-film quality."
+    ]
+  },
+  "adjacent_frame_differences": [
+    {
+      "from_frame": 1,
+      "to_frame": 2,
+      "rgb_mean_absolute_8bit_difference": 1.3227919238683128
+    },
+    {
+      "from_frame": 2,
+      "to_frame": 3,
+      "rgb_mean_absolute_8bit_difference": 1.2375900205761317
+    },
+    {
+      "from_frame": 3,
+      "to_frame": 4,
+      "rgb_mean_absolute_8bit_difference": 1.2202372685185185
+    },
+    {
+      "from_frame": 4,
+      "to_frame": 5,
+      "rgb_mean_absolute_8bit_difference": 1.2442348251028807
+    },
+    {
+      "from_frame": 5,
+      "to_frame": 6,
+      "rgb_mean_absolute_8bit_difference": 1.3041313014403293
+    },
+    {
+      "from_frame": 6,
+      "to_frame": 7,
+      "rgb_mean_absolute_8bit_difference": 1.2278928755144032
+    },
+    {
+      "from_frame": 7,
+      "to_frame": 8,
+      "rgb_mean_absolute_8bit_difference": 1.249789737654321
+    },
+    {
+      "from_frame": 8,
+      "to_frame": 9,
+      "rgb_mean_absolute_8bit_difference": 1.2673881172839505
+    },
+    {
+      "from_frame": 9,
+      "to_frame": 10,
+      "rgb_mean_absolute_8bit_difference": 1.3350649434156379
+    },
+    {
+      "from_frame": 10,
+      "to_frame": 11,
+      "rgb_mean_absolute_8bit_difference": 1.2714300411522634
+    },
+    {
+      "from_frame": 11,
+      "to_frame": 12,
+      "rgb_mean_absolute_8bit_difference": 1.2549170524691358
+    },
+    {
+      "from_frame": 12,
+      "to_frame": 13,
+      "rgb_mean_absolute_8bit_difference": 1.2505889917695474
+    },
+    {
+      "from_frame": 13,
+      "to_frame": 14,
+      "rgb_mean_absolute_8bit_difference": 1.3360056584362139
+    },
+    {
+      "from_frame": 14,
+      "to_frame": 15,
+      "rgb_mean_absolute_8bit_difference": 1.2815779320987655
+    },
+    {
+      "from_frame": 15,
+      "to_frame": 16,
+      "rgb_mean_absolute_8bit_difference": 1.2460243055555555
+    },
+    {
+      "from_frame": 16,
+      "to_frame": 17,
+      "rgb_mean_absolute_8bit_difference": 1.2678311471193415
+    },
+    {
+      "from_frame": 17,
+      "to_frame": 18,
+      "rgb_mean_absolute_8bit_difference": 1.3355844907407408
+    },
+    {
+      "from_frame": 18,
+      "to_frame": 19,
+      "rgb_mean_absolute_8bit_difference": 1.2770634002057613
+    },
+    {
+      "from_frame": 19,
+      "to_frame": 20,
+      "rgb_mean_absolute_8bit_difference": 1.269270190329218
+    },
+    {
+      "from_frame": 20,
+      "to_frame": 21,
+      "rgb_mean_absolute_8bit_difference": 1.2717888374485598
+    },
+    {
+      "from_frame": 21,
+      "to_frame": 22,
+      "rgb_mean_absolute_8bit_difference": 1.3304012345679013
+    },
+    {
+      "from_frame": 22,
+      "to_frame": 23,
+      "rgb_mean_absolute_8bit_difference": 1.269065072016461
+    },
+    {
+      "from_frame": 23,
+      "to_frame": 24,
+      "rgb_mean_absolute_8bit_difference": 1.2678858024691357
+    },
+    {
+      "from_frame": 24,
+      "to_frame": 25,
+      "rgb_mean_absolute_8bit_difference": 1.2689171810699589
+    },
+    {
+      "from_frame": 25,
+      "to_frame": 26,
+      "rgb_mean_absolute_8bit_difference": 1.3413901748971193
+    },
+    {
+      "from_frame": 26,
+      "to_frame": 27,
+      "rgb_mean_absolute_8bit_difference": 1.2741152263374487
+    },
+    {
+      "from_frame": 27,
+      "to_frame": 28,
+      "rgb_mean_absolute_8bit_difference": 1.269221322016461
+    },
+    {
+      "from_frame": 28,
+      "to_frame": 29,
+      "rgb_mean_absolute_8bit_difference": 1.2866332304526749
+    },
+    {
+      "from_frame": 29,
+      "to_frame": 30,
+      "rgb_mean_absolute_8bit_difference": 1.345130529835391
+    },
+    {
+      "from_frame": 30,
+      "to_frame": 31,
+      "rgb_mean_absolute_8bit_difference": 1.2800411522633746
+    },
+    {
+      "from_frame": 31,
+      "to_frame": 32,
+      "rgb_mean_absolute_8bit_difference": 1.268193158436214
+    },
+    {
+      "from_frame": 32,
+      "to_frame": 33,
+      "rgb_mean_absolute_8bit_difference": 1.2724607767489713
+    },
+    {
+      "from_frame": 33,
+      "to_frame": 34,
+      "rgb_mean_absolute_8bit_difference": 1.3550038580246913
+    },
+    {
+      "from_frame": 34,
+      "to_frame": 35,
+      "rgb_mean_absolute_8bit_difference": 1.273539737654321
+    },
+    {
+      "from_frame": 35,
+      "to_frame": 36,
+      "rgb_mean_absolute_8bit_difference": 1.2746122685185186
+    },
+    {
+      "from_frame": 36,
+      "to_frame": 37,
+      "rgb_mean_absolute_8bit_difference": 1.2819900977366254
+    },
+    {
+      "from_frame": 37,
+      "to_frame": 38,
+      "rgb_mean_absolute_8bit_difference": 1.353588605967078
+    },
+    {
+      "from_frame": 38,
+      "to_frame": 39,
+      "rgb_mean_absolute_8bit_difference": 1.2796611368312758
+    },
+    {
+      "from_frame": 39,
+      "to_frame": 40,
+      "rgb_mean_absolute_8bit_difference": 1.2826176697530864
+    },
+    {
+      "from_frame": 40,
+      "to_frame": 41,
+      "rgb_mean_absolute_8bit_difference": 1.2936439043209877
+    },
+    {
+      "from_frame": 41,
+      "to_frame": 42,
+      "rgb_mean_absolute_8bit_difference": 1.3456378600823045
+    },
+    {
+      "from_frame": 42,
+      "to_frame": 43,
+      "rgb_mean_absolute_8bit_difference": 1.2994611625514403
+    },
+    {
+      "from_frame": 43,
+      "to_frame": 44,
+      "rgb_mean_absolute_8bit_difference": 1.2708963477366255
+    },
+    {
+      "from_frame": 44,
+      "to_frame": 45,
+      "rgb_mean_absolute_8bit_difference": 1.2815907921810699
+    },
+    {
+      "from_frame": 45,
+      "to_frame": 46,
+      "rgb_mean_absolute_8bit_difference": 1.3434104938271605
+    },
+    {
+      "from_frame": 46,
+      "to_frame": 47,
+      "rgb_mean_absolute_8bit_difference": 1.286900720164609
+    },
+    {
+      "from_frame": 47,
+      "to_frame": 48,
+      "rgb_mean_absolute_8bit_difference": 1.2637004886831276
+    },
+    {
+      "from_frame": 48,
+      "to_frame": 49,
+      "rgb_mean_absolute_8bit_difference": 1.2834818672839505
+    },
+    {
+      "from_frame": 49,
+      "to_frame": 50,
+      "rgb_mean_absolute_8bit_difference": 1.2952012602880658
+    }
+  ],
+  "limits": "Adjacent RGB metrics and decode success do not by themselves establish perceptual motion quality. This is only the first 50 wide frames; the planned six-second sequence and close-up cut are incomplete."
+}
