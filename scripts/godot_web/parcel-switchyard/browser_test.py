@@ -126,12 +126,16 @@ def assert_localized(view, lang):
         assert text in view.locator('#' + selector).inner_text(), (selector, lang)
 
 
-def assert_native_language(view, lang):
+def assert_native_language(view, lang, previous=None, require_new_draw=True):
     snapshot = state(view)
-    previous = snapshot.get('draw_receipt', {}).get('draw_id', 0)
-    wait(view, 'window.__parcelState.draw_receipt.draw_id>%d' % previous)
+    if previous is None:
+        previous = snapshot.get('draw_receipt', {}).get('draw_id', 0)
+    if require_new_draw:
+        wait(view, 'window.__parcelState.draw_receipt.draw_id>%d' % previous)
     snapshot = state(view)
     receipt = snapshot['draw_receipt']
+    assert receipt['draw_id'] > 0
+    assert receipt['draw_id'] > previous if require_new_draw else receipt['draw_id'] >= previous
     assert snapshot['language'] == receipt['language'] == lang
     assert receipt['draw_frame'] > 0, {'gate': 'actual draw', 'draw_frame': receipt['draw_frame']}
     assert not receipt['missing_translations'], {'gate': 'translation coverage', 'missing': receipt['missing_translations']}
@@ -185,17 +189,37 @@ def assert_reflow_geometry(boxes):
         assert boxes[lower]['y'] >= boxes[upper]['y'] + boxes[upper]['height'] - 1, boxes
 
 
-def capture_reflow(page, output, name, lang):
-    # Even same-layout resizes need a new rendered frame. Full-page screenshot
+def wait_presentation(page):
+    # Passive browser paint observation, with a bounded wait. No engine command
+    # or game state is set; CSS-only resizes need no native CanvasItem redraw.
+    frames = page.evaluate('''() => new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('Browser presentation timeout')), 15000);
+      requestAnimationFrame(first => requestAnimationFrame(second => {
+        clearTimeout(timeout);
+        resolve({first, second, visibility: document.visibilityState});
+      }));
+    })''')
+    assert frames['visibility'] == 'visible' and 0 <= frames['first'] < frames['second'], frames
+    return frames
+
+
+def capture_reflow(page, output, name, lang, before_resize):
+    # Every resize needs fresh browser presentation. Full-page screenshot
     # viewport expansion can race Chromium's WebGL composition; keep the actual
     # bounded canvas and separately expose the real controls/rights viewport.
     canvas = page.locator('#canvas')
     canvas.scroll_into_view_if_needed()
-    receipt = assert_native_language(page, lang)
     keys = ['selected', 'sent', 'delivered', 'missed', 'active', 'auto', 'paused', 'elapsed']
     snapshot = state(page)
     before = {key: snapshot[key] for key in keys}
     assert before['paused'], 'Reflow capture requires the actual paused shift'
+    # A paused shift deliberately does not redraw every process frame. A layout
+    # switch must draw after the pre-resize baseline, possibly before this helper
+    # starts. A same-layout resize only scales the existing canvas through CSS.
+    layout_changed = snapshot['mobile_layout'] != before_resize['mobile_layout']
+    previous_draw = before_resize['draw_receipt']['draw_id']
+    receipt = assert_native_language(page, lang, previous=previous_draw, require_new_draw=layout_changed)
+    canvas_presentation = wait_presentation(page)
     boxes = {selector: page.locator(selector).bounding_box() for selector in ['#stage', '#canvas', '#alternate', '#note', '#rights']}
     assert_reflow_geometry(boxes)
     box = boxes['#canvas']
@@ -205,7 +229,10 @@ def capture_reflow(page, output, name, lang):
     dimensions = struct.unpack('>II', png[16:24])
     assert abs(dimensions[0] - box['width']) <= 1 and abs(dimensions[1] - box['height']) <= 1, (dimensions, box)
     page.locator('#rights').scroll_into_view_if_needed()
-    context_receipt = assert_native_language(page, lang)
+    # The context contains ordinary DOM controls. Scrolling must not force the
+    # unchanged paused canvas to redraw; require a fresh live state publication.
+    context_state = wait_fresh(page, state(page))
+    context_presentation = wait_presentation(page)
     controls = {selector: page.locator(selector).bounding_box() for selector in ['#alternate-label', '#note', '#rights']}
     viewport = page.viewport_size
     for selector, rect in controls.items():
@@ -215,9 +242,12 @@ def capture_reflow(page, output, name, lang):
     page.screenshot(path=str(output / (name + '-context.png')), full_page=False)
     after = state(page)
     assert {key: after[key] for key in keys} == before, 'Reflow capture changed the paused shift'
-    return {'draw_receipt': receipt, 'context_draw_receipt': context_receipt, 'observed_state': before, 'geometry': boxes, 'png_dimensions': list(dimensions),
+    return {'draw_receipt': receipt, 'native_draw_required': layout_changed, 'previous_draw_id': previous_draw,
+            'canvas_presentation': canvas_presentation, 'context_presentation': context_presentation,
+            'context_publication': {key: context_state[key] for key in ['publication_id', 'process_frame']},
+            'observed_state': before, 'geometry': boxes, 'png_dimensions': list(dimensions),
             'controls_viewport_boxes': controls, 'viewport': viewport,
-            'scope': 'Actual bounded canvas and real scrolled controls/rights viewport; not a full-page image.'}
+            'scope': 'Actual bounded canvas and real scrolled controls/rights viewport. Cross-layout resize requires a new native draw; same-layout resize observes CSS presentation of the retained paused canvas.'}
 
 
 def run_input(browser, base, output, width, height, lang, phone):
@@ -325,11 +355,11 @@ def run_input(browser, base, output, width, height, lang, phone):
             expected_mobile = phone or new_width < 1100
             wait(page, 'window.__parcelState.mobile_layout===' + str(expected_mobile).lower())
             after = wait_fresh(page, before)
-            assert all(after[key] == before[key] for key in ['selected', 'sent', 'delivered', 'missed', 'active', 'auto', 'paused'])
+            assert all(after[key] == before[key] for key in ['selected', 'sent', 'delivered', 'missed', 'active', 'auto', 'paused', 'elapsed'])
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             assert_phone_size(page)
             capture_name = name + '-reflow-%dx%d' % (new_width, new_height)
-            reflow_captures.append({'name': capture_name, **capture_reflow(page, output, capture_name, lang)})
+            reflow_captures.append({'name': capture_name, **capture_reflow(page, output, capture_name, lang, before)})
             before = state(page)
         reset(page, phone)
         if phone:

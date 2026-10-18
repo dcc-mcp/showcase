@@ -75,14 +75,20 @@ class ObserverGuards(unittest.TestCase):
         locators['#rights'].scroll_into_view_if_needed.side_effect = lambda: events.append('rights-scroll')
         locators['#canvas'].screenshot.side_effect = lambda **kwargs: events.append('canvas') or b'\x89PNG\r\n\x1a\n' + bytes(8) + struct.pack('>II', 300, 550)
         page.screenshot.side_effect = lambda **kwargs: events.append('viewport')
-        snapshot = {'selected': 1, 'sent': 1, 'delivered': 0, 'missed': 0, 'active': 1, 'auto': False, 'paused': True, 'elapsed': 1.5}
-        fresh = Mock(side_effect=lambda *args: events.append('draw') or {'draw_id': len(events)})
+        snapshot = {'selected': 1, 'sent': 1, 'delivered': 0, 'missed': 0, 'active': 1, 'auto': False, 'paused': True, 'elapsed': 1.5,
+                    'mobile_layout': True, 'draw_receipt': {'draw_id': 7}, 'publication_id': 10, 'process_frame': 20}
+        before_resize = dict(snapshot, mobile_layout=False, draw_receipt={'draw_id': 6})
+        fresh = Mock(side_effect=lambda *args, **kwargs: events.append('draw') or {'draw_id': 7})
+        presentation = Mock(side_effect=lambda *args: events.append('presentation') or {'first': 1, 'second': 2, 'visibility': 'visible'})
+        publication = Mock(side_effect=lambda *args: events.append('publication') or snapshot)
         capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct,
-                         assert_reflow_geometry=helper('assert_reflow_geometry'))
-        result = capture(page, Path('/evidence'), 'reflow', 'en')
-        self.assertEqual(events, ['canvas-scroll', 'draw', 'canvas', 'rights-scroll', 'draw', 'viewport'])
-        self.assertEqual(result['observed_state'], snapshot)
+                         assert_reflow_geometry=helper('assert_reflow_geometry'), wait_presentation=presentation, wait_fresh=publication)
+        result = capture(page, Path('/evidence'), 'reflow', 'en', before_resize)
+        self.assertEqual(events, ['canvas-scroll', 'draw', 'presentation', 'canvas', 'rights-scroll', 'publication', 'presentation', 'viewport'])
+        self.assertEqual(result['observed_state'], {key: snapshot[key] for key in result['observed_state']})
         self.assertEqual(result['png_dimensions'], [300, 550])
+        self.assertTrue(result['native_draw_required'])
+        fresh.assert_called_once_with(page, 'en', previous=6, require_new_draw=True)
         page.screenshot.assert_called_once_with(path='/evidence/reflow-context.png', full_page=False)
         page.evaluate.assert_not_called()
         # A scrolled-out control or changed paused game must not become evidence.
@@ -92,16 +98,34 @@ class ObserverGuards(unittest.TestCase):
         locators['#rights'].bounding_box.return_value = {'x': 0, 'y': 408, 'width': 320, 'height': 80}
         # Geometry has its own negatives above; isolate the viewport/state guards.
         capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct,
-                         assert_reflow_geometry=Mock())
+                         assert_reflow_geometry=Mock(), wait_presentation=presentation, wait_fresh=publication)
         locators['#alternate-label'].bounding_box.return_value['y'] = -30
         with self.assertRaises(AssertionError):
-            capture(page, Path('/evidence'), 'reflow', 'en')
+            capture(page, Path('/evidence'), 'reflow', 'en', before_resize)
         locators['#alternate-label'].bounding_box.return_value['y'] = 300
+        result = capture(page, Path('/evidence'), 'reflow', 'en', snapshot)
+        self.assertFalse(result['native_draw_required'])
+        fresh.assert_called_with(page, 'en', previous=7, require_new_draw=False)
         changed = dict(snapshot, active=0)
-        capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(side_effect=[snapshot, changed]), struct=struct,
-                         assert_reflow_geometry=Mock())
+        capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(side_effect=[snapshot, snapshot, changed]), struct=struct,
+                         assert_reflow_geometry=Mock(), wait_presentation=presentation, wait_fresh=publication)
         with self.assertRaisesRegex(AssertionError, 'changed the paused shift'):
-            capture(page, Path('/evidence'), 'reflow', 'en')
+            capture(page, Path('/evidence'), 'reflow', 'en', before_resize)
+
+    def test_presentation_requires_two_visible_browser_frames(self):
+        page = Mock()
+        observe = helper('wait_presentation')
+        valid = {'first': 10, 'second': 20, 'visibility': 'visible'}
+        page.evaluate.return_value = valid
+        self.assertEqual(observe(page), valid)
+        source = page.evaluate.call_args.args[0]
+        self.assertEqual(source.count('requestAnimationFrame('), 2)
+        self.assertIn('setTimeout(', source)
+        self.assertIn('15000', source)
+        self.assertNotIn('showcaseCommand', source)
+        for changed in [dict(first=20), dict(second=10), dict(visibility='hidden')]:
+            page.evaluate.return_value = dict(valid, **changed)
+            with self.subTest(changed=changed), self.assertRaises(AssertionError): observe(page)
 
     def test_every_reflow_gets_fresh_publication_and_bounded_capture(self):
         source = Path(__file__).with_name('browser_test.py').read_text()
@@ -111,6 +135,7 @@ class ObserverGuards(unittest.TestCase):
         fresh = next(i for i, statement in enumerate(statements) if 'after = wait_fresh(page, before)' in statement)
         capture = next(i for i, statement in enumerate(statements) if 'capture_reflow(' in statement)
         self.assertLess(fresh, capture)
+        self.assertIn('capture_reflow(page, output, capture_name, lang, before)', statements[capture])
         self.assertEqual(statements[-1], 'before = state(page)')
         self.assertFalse(any('screenshot(' in statement for statement in statements))
 
@@ -217,6 +242,25 @@ class ObserverGuards(unittest.TestCase):
 
     def test_success_requires_actual_new_draw_and_complete_chinese_labels(self):
         self.assertEqual(self.verify(self.receipt()),self.receipt())
+
+    def test_reflow_accepts_completed_draw_against_pre_resize_baseline(self):
+        snapshot = {'language': 'zh', 'draw_receipt': self.receipt(draw_id=5)}
+        wait = Mock()
+        check = helper('assert_native_language', state=Mock(return_value=snapshot), wait=wait)
+        self.assertEqual(check(Mock(), 'zh', previous=4), snapshot['draw_receipt'])
+        self.assertEqual(wait.call_args.args[1], 'window.__parcelState.draw_receipt.draw_id>4')
+        with self.assertRaises(AssertionError): check(Mock(), 'zh', previous=5)
+
+    def test_css_only_reflow_keeps_receipt_validation_without_impossible_draw(self):
+        snapshot = {'language': 'zh', 'draw_receipt': self.receipt(draw_id=5)}
+        wait = Mock()
+        check = helper('assert_native_language', state=Mock(return_value=snapshot), wait=wait)
+        self.assertEqual(check(Mock(), 'zh', previous=5, require_new_draw=False), snapshot['draw_receipt'])
+        wait.assert_not_called()
+        for receipt in [self.receipt(draw_id=4), self.receipt(draw_id=0), self.receipt(draw_id=5, missing_glyphs=[20013]), self.receipt(draw_id=5, language='en')]:
+            check = helper('assert_native_language', state=Mock(return_value={'language':'zh','draw_receipt':receipt}), wait=wait)
+            with self.subTest(receipt=receipt), self.assertRaises(AssertionError):
+                check(Mock(), 'zh', previous=5, require_new_draw=False)
 
     def test_wrong_language_unrendered_missing_glyph_and_english_fallback_reject(self):
         for changes in [{'language':'en'},{'draw_frame':0},{'missing_glyphs':[12345]},{'missing_translations':['NEXT PARCEL']},{'labels':['Parcel Switchyard']}]:
