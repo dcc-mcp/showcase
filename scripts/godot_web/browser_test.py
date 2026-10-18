@@ -104,11 +104,12 @@ def run(site,out,executable=None):
         width,height=state(p).get('layout_size',[1280,800])
         canvas=p.locator('#canvas');box=canvas.bounding_box()
         px=box['x']+x*box['width']/width;py=box['y']+y*box['height']/height
-        viewport=p.evaluate('innerHeight');owner=p.page if hasattr(p,'page') else p
-        frame_top=p.frame_element().bounding_box()['y'] if hasattr(p,'frame_element') else 0
-        local_y=py-frame_top
-        if local_y<60 or local_y>viewport-60:
-            p.evaluate('dy=>window.scrollBy(0,dy)',local_y-viewport/2);p.wait_for_timeout(80)
+        owner=p.page if hasattr(p,'page') else p
+        # Auto-height case embeds scroll in the outer document. Coordinate input
+        # must bring the actual target into that viewport, not scroll a clipped iframe.
+        viewport=owner.evaluate('innerHeight')
+        if py<60 or py>viewport-60:
+            owner.evaluate('dy=>window.scrollBy(0,dy)',py-viewport/2);owner.wait_for_timeout(80)
             box=canvas.bounding_box();px=box['x']+x*box['width']/width;py=box['y']+y*box['height']/height
         if touch:owner.touchscreen.tap(px,py)
         else:owner.mouse.click(px,py)

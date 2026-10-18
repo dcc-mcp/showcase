@@ -44,6 +44,8 @@ jobs:
         run: python scripts/localization_browser_smoke.py --site _site --output "${{ runner.temp }}/showcase-browser-preview/localization"
       - name: Verify Sonic Loom audio, video and source download
         run: python scripts/sonic_loom_browser_smoke.py --site _site --output "${{ runner.temp }}/showcase-browser-preview/sonic-loom"
+      - name: Verify Seismic Lens native video in both languages
+        run: python scripts/seismic_lens_browser_smoke.py --site _site --output "${{ runner.temp }}/showcase-browser-preview/seismic-lens"
       - name: Verify partial crate excerpt in both languages and viewports
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}

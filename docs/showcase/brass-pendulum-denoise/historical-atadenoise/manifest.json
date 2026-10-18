@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "blender_application": "Blender",
+  "blender_version": "4.5.13 LTS",
+  "ffmpeg_version": "7.1.5",
+  "capture_provider": "host-native render output; JPEG display derivatives",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 927,
+      "sha256": "78ebc28d4ae7dcadd631cabefe282be122870b77360f0d36e02a68bf5ded1998"
+    },
+    {
+      "path": "README.md",
+      "bytes": 10128,
+      "sha256": "ccf0a57951ad04769637d70356e496f13d6678991f2a9f6d0014ce3ca57a475d"
+    },
+    {
+      "path": "ci-verification.json",
+      "bytes": 3065,
+      "sha256": "d5449e956cb228f44a10cb7b0879c150b5987b4bde32a29fb4e7627c6f182825"
+    },
+    {
+      "path": "comparison-validation.json",
+      "bytes": 928,
+      "sha256": "f0b7e9384cb9de21aa96b5260c74455bace74439c4fc1e4a001ad68c4972e286"
+    },
+    {
+      "path": "comparison.jpg",
+      "bytes": 354400,
+      "sha256": "22e0cabdd9b76cb5f7a72aeb99d262427876b2f100913ac8ae07bc81c00e2cc2",
+      "width": 1280,
+      "height": 544,
+      "bit_depth": 8
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 164919,
+      "sha256": "8744207b6972fd3c6f0a0383f6072040a39225c122fe2614892eac9bd4b16fde",
+      "width": 640,
+      "height": 480,
+      "bit_depth": 8
+    },
+    {
+      "path": "native-inspection.json",
+      "bytes": 10078,
+      "sha256": "aeb4ca7f1ee5b0504392df78f1197fe845c86b017af6bc00a312a204b840f338"
+    },
+    {
+      "path": "pendulum-denoised.mp4",
+      "bytes": 841325,
+      "sha256": "50a237ea1af799f8aae3a54da100ceccc612b539aba13e3bf8442df411166f8b",
+      "container_kind": "MPEG-4",
+      "codec": "H.264",
+      "width": 640,
+      "height": 480,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "duration_seconds": 6.006,
+      "audio_stream_count": 0
+    },
+    {
+      "path": "pendulum-raw.mp4",
+      "bytes": 862839,
+      "sha256": "267bccb3e1eb97f3f3ffa6144ca6bed6612b41c0cb12ed7c6e0e4edd717d6003",
+      "container_kind": "MPEG-4",
+      "codec": "H.264",
+      "width": 640,
+      "height": 480,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "duration_seconds": 6.006,
+      "audio_stream_count": 0
+    },
+    {
+      "path": "pendulum-synchronized-comparison.mp4",
+      "bytes": 3364354,
+      "sha256": "7b261ad04aebd2a121935518c6d457faa499f80d6b54349645326c57cd79a00c",
+      "container_kind": "MPEG-4",
+      "codec": "H.264",
+      "width": 1280,
+      "height": 544,
+      "frames": 144,
+      "frame_rate": "24000/1001",
+      "duration_seconds": 6.006,
+      "audio_stream_count": 0
+    },
+    {
+      "path": "processing-validation.json",
+      "bytes": 7730,
+      "sha256": "e3493b0dc0eacf31d4de71cbefbf044fa1099a522287616ce5e60ad81086d7f3"
+    },
+    {
+      "path": "scene-public.blend",
+      "bytes": 1351653,
+      "sha256": "5f94f06a8f9662606559e5c8325bb9f425b1a30cc3a63496682c955240634ca2",
+      "container_kind": "Blender native",
+      "object_count": 26,
+      "external_dependencies": []
+    },
+    {
+      "path": "scene-recipe.json",
+      "bytes": 34300,
+      "sha256": "5dc8b64975816593e89c6bcc9f309a3d53705e5a19a70d9655715e64434125c5"
+    },
+    {
+      "path": "temporal-integrity-summary.json",
+      "bytes": 1297,
+      "sha256": "b83d5f1a525c981f1b0aa1380ed0f0f50da7e72cf9f6b22ca413453d167dbe06"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 12754,
+      "sha256": "681f1d2380e945f1c9b5ddb0abf0552f915aebef809bec57d2a2c5c012b6e684"
+    },
+    {
+      "path": "visual-review.json",
+      "bytes": 3482,
+      "sha256": "945eef7271bac97b000e36d8e2c30ff55f27ee1650e489173ca7f1715cb719bf"
+    }
+  ]
+}

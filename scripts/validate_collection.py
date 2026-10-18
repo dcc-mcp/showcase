@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import date, datetime
+import hashlib
 import ipaddress
 import json
 from pathlib import Path
@@ -62,6 +63,25 @@ PRIVATE_PATTERNS = (
 IPV4 = re.compile(r"(?<![\w.])(?:\d{1,3}\.){3}\d{1,3}(?!\w|\.\d)")
 PAGE_LINK = re.compile(r"\b(?:href|src|poster)\s*=\s*[\"']([^\"']+)[\"']", re.I)
 MD_LINK = re.compile(r"\]\(\s*<?([^)\s>]+)>?")
+
+# Reviewed false positives, bound to BOTH the exact public path and raw bytes.
+# Never derive these hashes from a publication manifest: changing that manifest
+# must not approve new text. Changed/moved files receive the full normal scan.
+# These suppress only the named findings, not a file or a directory's audit.
+REVIEWED_TEXT_FALSE_POSITIVES = {
+    "play/README.md": (
+        "ab2f4d99142afaa7e75245b97f4c2a964a5c630b79bb614dce57afe648828a65",
+        frozenset({"private host name"}),
+        # The one host match is generic loopback-host testing guidance.
+    ),
+    "play/runtime/godot-4.6.3.js": (
+        "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981",
+        frozenset({"private filesystem path", "private execution path"}),
+        # Unmodified official web_nothreads_release.zip loader, verified by
+        # godot_web/materialize_runtime.py. Matches are Emscripten virtual
+        # filesystem defaults and Godot's virtual browser drag/drop directory.
+    ),
+}
 
 
 def sensitive_issues(text: str, location: str) -> list[str]:
@@ -235,10 +255,16 @@ def scan_text_file(path: Path, root: Path) -> list[str]:
         return []
     location = path.relative_to(root).as_posix()
     try:
-        content = path.read_text(encoding="utf-8-sig")
+        data = path.read_bytes()
+        content = data.decode("utf-8-sig")
     except (OSError, UnicodeError):
         return [f"{location}: public text must be readable UTF-8"]
-    return sensitive_issues(content, location)
+    problems = sensitive_issues(content, location)
+    review = REVIEWED_TEXT_FALSE_POSITIVES.get(location)
+    if review is not None and hashlib.sha256(data).hexdigest() == review[0]:
+        reviewed = {f"{location}: contains {category}" for category in review[1]}
+        problems = [problem for problem in problems if problem not in reviewed]
+    return problems
 
 
 def document_link_problems(path: Path, root: Path) -> list[str]:

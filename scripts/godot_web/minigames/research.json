@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-13",
+  "concept": "Signal Garden: original rotating branch network, botanical glow and no time pressure. Not a Prism Tide mirror puzzle or Parcel courier simulation.",
+  "sources": [
+    {
+      "url": "https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html",
+      "selected": "Godot 4.6.3 Compatibility single-thread pinned runtime already cached; share engine bytes."
+    },
+    {
+      "url": "https://store.godotengine.org/asset/kenney/starter-kit-match-3/",
+      "candidate": "Kenney Starter Kit Match-3, MIT",
+      "decision": "Rejected: matching tiles is not connected-network topology; no asset downloaded."
+    },
+    {
+      "url": "https://godotengine.org/asset-library/asset?filter=template&page=0&sort=updated",
+      "query": "2D puzzle template",
+      "decision": "No selected native template fits bounded original connectivity puzzle."
+    },
+    {
+      "url": "https://github.com/dcc-mcp/dcc-mcp-core/blob/bf10706d7eaae679e6f6fac5526d37219e0826ab/crates/dcc-mcp-gateway/src/gateway/native_resources/agent_workflows.md",
+      "contract": "dcc-mcp-production-reuse/v1",
+      "method": "Read existing verified Core source checkout."
+    }
+  ],
+  "reuse": [
+    "Existing installed Godot scene/script/project typed authoring tools",
+    "Existing export template and same-origin Web runtime",
+    "Noto Sans CJK subset, SIL OFL; original procedural drawing and generated PCM"
+  ],
+  "model_record": "Requested gpt-6-astra/ultra, backend routing not independently verified.",
+  "review_entry_research": {
+    "date": "2026-10-17",
+    "scope": "Unpublished bilingual review entry and original-speed listening packet; no new artwork or public collection item",
+    "official_sources": [
+      {
+        "url": "https://docs.godotengine.org/en/4.6/tutorials/export/exporting_for_web.html",
+        "finding": "Single-thread Compatibility Web export, explicit audio gesture and browser-specific limitations remain relevant."
+      },
+      {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-agent-plugins/blob/main/plugins/dcc-mcp/skills/dcc-mcp/SKILL.md",
+        "finding": "Current official router and substantive Core production-reuse/v1 guide read; guide-shape check passed."
+      },
+      {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/releases/tag/v0.9.8",
+        "latest_release": "0.9.8",
+        "production_pin": "0.9.6",
+        "decision": "Keep the reproducible previously verified production pin; do not conflate latest release with tested host."
+      },
+      {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-core/releases/tag/v0.20.45",
+        "latest_release": "0.20.45",
+        "production_pin": "0.20.42",
+        "decision": "No runtime upgrade during this candidate review."
+      },
+      {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/tree/v0.9.6/src/dcc_mcp_godot/skills",
+        "selected": [
+          "godot-scene-management@0.1.0",
+          "godot-audio@0.1.0",
+          "godot-export@0.2.0"
+        ],
+        "decision": "Reuse existing typed native authoring/save/reopen and official export; no extra audio plugin needed to preserve original captured output."
+      }
+    ],
+    "discovery_limits": [
+      {
+        "url": "https://godotengine.org/asset-library/asset?filter=audio&category=&godot_version=4.6&cost=&sort=updated",
+        "status": "Official asset-library query was unavailable through the research browser. No external asset was acquired."
+      }
+    ],
+    "implementation_choice": "Use existing Python/FFmpeg and pinned Chromium tooling to package actual outputs. No new marketplace, installer, audio synthesis or artwork dependency.",
+    "capabilities": [
+      {
+        "host": "Godot 4.6.3",
+        "adapter": "0.9.6",
+        "core": "0.20.42",
+        "case": "Signal Garden: one game, three gardens",
+        "covered_by_candidate_workflow": [
+          "typed MCP scene/script/project authoring",
+          "save, editor restart and reopen",
+          "native input",
+          "single-thread Compatibility Web export",
+          "English/Chinese Chromium keyboard and emulated touch",
+          "full original video decode and original-speed audio extraction"
+        ],
+        "acceptance_remaining": [
+          "final visual/motion approval",
+          "subjective listening",
+          "physical-phone acceptance",
+          "Safari",
+          "Firefox",
+          "explicit publication decision"
+        ]
+      }
+    ],
+    "rights": "Existing original-source/art/audio rights and Garden Subset SIL OFL notice unchanged. No new third-party assets or license grants."
+  }
+}

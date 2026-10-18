@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "Installed production versions and actual exercised capability; no latest-release or general compatibility certification",
+  "software": [
+    {
+      "name": "Blender",
+      "version": "4.5.13 LTS",
+      "actual_use": [
+        "Original editable scene refinement",
+        "Cycles CPU96samples mixed-precision EXR with true albedo/normal guides",
+        "Native save/reopen and144frame framing check",
+        "Separate compositor OIDN and AgX display conversion"
+      ],
+      "limits": [
+        "CPU production only",
+        "No physics simulation claim",
+        "No pixel-identical rerender claim"
+      ]
+    },
+    {
+      "name": "DCC-MCP Core",
+      "version": "0.20.44",
+      "actual_use": [
+        "Real JSON-RPC MCP HTTP calls to embedded Blender host"
+      ],
+      "limits": [
+        "No cross-host conservation certification"
+      ]
+    },
+    {
+      "name": "dcc-mcp-blender",
+      "version": "0.2.20 baseline plus pinned camera/timebase source patch",
+      "source_commit": "397d2aaa8049857bb33aedd6efdc9ef4234deb62",
+      "actual_use": [
+        "Typed object transforms, modifiers, optics keyframes, render setup and native scene save/open",
+        "Native scripting bridge for tessellation, smooth flags, guide storage and resource settings not exposed by loaded typed setters"
+      ],
+      "limits": [
+        "Frozen source snapshot, not a new adapter release"
+      ]
+    },
+    {
+      "name": "dcc-media-enhance",
+      "version": "0.2.0",
+      "source_commit": "bd4aca72488ca6165816ebdf95c99df5800a192a",
+      "actual_use": [
+        "Real plan/run CLI",
+        "Blender compositor OIDN backend with Combined/Albedo/Normal mapping",
+        "Source hash preservation, full output image decode and sampled memory watchdog"
+      ],
+      "limits": [
+        "Spatial per-image denoising only",
+        "No motion compensation or temporal filter in new film",
+        "No standalone oidnDenoise used",
+        "No high-sample quality ground truth"
+      ]
+    },
+    {
+      "name": "FFmpeg",
+      "version": "7.1.5-0+deb13u1",
+      "actual_use": [
+        "Explicit sRGB-to-BT709 transfer/matrix conversion",
+        "H264 encode and complete per-frame decode with rational timestamps",
+        "Video-derived browser reference assets"
+      ],
+      "limits": [
+        "H264/YUV420 delivery is lossy",
+        "Reference atlas proves delivery-display consistency, not native linear fidelity"
+      ]
+    },
+    {
+      "name": "Kdenlive",
+      "version": "24.12.3 / MLT7.30.0",
+      "actual_use": [
+        "Imported actual short MP4 and saved native review project"
+      ],
+      "limits": [
+        "Short pilot displayed last picture did not match expected source despite advanced OSD; playback acceptance failed"
+      ]
+    },
+    {
+      "name": "Chromium",
+      "version": "153.0.8010.12",
+      "actual_use": [
+        "Actual English/Chinese desktop and touch-viewport pages: explicit normal-speed playback through ended",
+        "144 decoded frames, zero dropped/corrupt frames or seeks; 143 presented callbacks and 142 visible changes in each context",
+        "Independent delivery-reference motion-region checks at160x120; first/middle/final decoded pictures",
+        "Desktop inline final displayed picture; touch native fullscreen final displayed picture entered/exited with real controls, then Stop without refetch"
+      ],
+      "limits": [
+        "Touch is viewport emulation, not a physical device",
+        "Normal touch-inline controls partly obscure the ended image; that inline pixel mismatch is retained",
+        "No source-render fidelity, temporal-denoising or objective quality certification",
+        "Recorded results bind only the named immutable commit"
+      ],
+      "tested_head": "508004143e41e404b38b149a8baf05fd18ef7ece",
+      "evidence": "ci-verification.json"
+    }
+  ],
+  "pending_gates": [],
+  "not_claimed": [
+    "AI-generated execution imagery",
+    "OIDN as temporal denoising",
+    "Automatic merge or deployment",
+    "New topic exploration or newest-software survey"
+  ],
+  "complete144frame_technical_integrity": "pass; see validation and temporal-integrity summary",
+  "all144_static_visual_review": "Six contact sheets and source PNG spot checks; see visual-review.json. Natural-speed review remains separate.",
+  "user_acceptance": {
+    "status": "approved_current_film_for_publication",
+    "channel": "voice",
+    "confirmed_date": "2026-10-16",
+    "film_sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
+    "scope": "Subjective acceptance of this film; separate from measured display consistency and objective image-quality certification."
+  },
+  "not_exercised": [
+    "Physical devices",
+    "Safari/Firefox",
+    "Full-film native-player acceptance",
+    "High-sample ground-truth quality scoring",
+    "Production hosting"
+  ]
+}

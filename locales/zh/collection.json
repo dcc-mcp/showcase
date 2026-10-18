@@ -230,5 +230,7 @@
   "48 kHz / 24-bit PCM；12 mono 脚步 + 3 mono SFX + 2 stereo loops": "48 kHz / 24-bit PCM；12 个单声道脚步 + 3 个单声道音效 + 2 个立体声循环",
   "建立 17 个非重叠区域，禁用导入自动淡入淡出以保持循环边界；17 次原生离线渲染保留48k/24-bit与mono/stereo。": "建立 17 个非重叠区域，禁用导入自动淡入淡出以保持循环边界；17 次原生离线渲染保留 48k/24-bit 与单声道/立体声配置。",
   "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。": "PR #3；146 项无需宿主的测试，精确对应分支头提交的 CI / 仓库契约检查通过。",
-  "The original native validation covered Linux Xvfb desktop interaction. The separately added Web export has its own browser verification and does not establish physical phone testing or hardware audio-device latency.": "原始原生验证覆盖 Linux Xvfb 桌面交互。另行新增的 Web 导出具有独立的浏览器验证记录，不代表已完成实体手机测试或硬件音频设备延迟测试。"
+  "The original native validation covered Linux Xvfb desktop interaction. The separately added Web export has its own browser verification and does not establish physical phone testing or hardware audio-device latency.": "原始原生验证覆盖 Linux Xvfb 桌面交互。另行新增的 Web 导出具有独立的浏览器验证记录，不代表已完成实体手机测试或硬件音频设备延迟测试。",
+  "Blender 4.5.13 LTS · Cycles CPU · 32 samples": "Blender 4.5.13 LTS · Cycles CPU · 32 次采样",
+  "640 × 480 · 144 frames · 24000/1001 fps · 6.006 s": "640 × 480 · 144 帧 · 24000/1001 fps · 6.006 秒"
 }

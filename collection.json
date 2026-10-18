@@ -2,6 +2,334 @@
   "schema_version": 1,
   "cases": [
     {
+      "slug": "brass-pendulum-denoise",
+      "title": "Brass Pendulum · 黄铜摆锤",
+      "subtitle": "Blender · 原生动画细化与引导式空间降噪",
+      "software": [
+        "Blender",
+        "dcc-media-enhance",
+        "FFmpeg"
+      ],
+      "capabilities": [
+        "建模",
+        "材质",
+        "动画",
+        "渲染",
+        "后期处理",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/brass-pendulum-denoise/hero.jpg",
+        "alt": "新候选中的黄铜圆环、瓷质摆锤与完整深青色底座，来自实际 960 × 720 原生渲染"
+      },
+      "evidence_label": "原生 Cycles 渲染 · 真实引导通道 · 空间 OIDN",
+      "evidence_scope": "真实 DCC-MCP 编辑与保存重开；960 × 720、96 samples 的原生多层线性 EXR，经统一 dcc-media-enhance CLI 调用 Blender compositor OIDN，再通过明确 AgX 与 sRGB→BT.709 链生成展示视频。英中桌面/触控完整画面播放已在明确记录的5080041提交上通过；后续提交须另验。",
+      "summary": "黄铜圆环和瓷质摆锤经过原生几何细化，42→44 mm 镜头保留完整底座。高分辨率候选使用真实 Albedo/Normal 引导逐帧空间降噪；成片为 144 帧、24000/1001 fps、6.006 秒，无音轨。旧低采样时域案例作为独立历史实验保留。",
+      "goal": "在保留可编辑原生场景的前提下提升几何、构图与成片清晰度，并分别核验引导式降噪、色彩转换、真实帧序和自然速度完整播放。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "保留原创黄铜圆环、瓷质摆锤和深青色底座，通过真实 DCC-MCP 编辑细化原生几何、衰减摆动和 42→44 mm 镜头。保存并重开 Blender 场景，以关闭渲染内降噪的 Cycles 输出混合精度多层线性 EXR。用统一 CLI 与实际 Albedo/Normal 引导执行独立逐帧空间 OIDN，再明确执行 AgX 和 sRGB→BT.709 编码。保留原始帧与全链哈希，分别检查精确时间基准、连续帧和自然速度完整播放，公开前清理本地路径及元数据。",
+        "note": "按实际制作过程整理的可复用说明，非用户逐字原话或私有任务提示词。"
+      },
+      "environment": [
+        {
+          "label": "Blender",
+          "value": "Blender 4.5.13 LTS · Cycles CPU · 96 samples"
+        },
+        {
+          "label": "dcc-media-enhance",
+          "value": "0.2.0 · bd4aca72488ca6165816ebdf95c99df5800a192a"
+        },
+        {
+          "label": "实际降噪后端",
+          "value": "独立 Blender compositor OIDN；内嵌 OIDN 版本未独立核验"
+        },
+        {
+          "label": "EXR 精度",
+          "value": "Combined / Albedo HALF16；Normal / Depth FLOAT32"
+        },
+        {
+          "label": "FFmpeg",
+          "value": "FFmpeg 7.1.5 · 显式 sRGB→BT.709 · H.264/yuv420p · 限制范围"
+        },
+        {
+          "label": "DCC-MCP Core",
+          "value": "0.20.44"
+        },
+        {
+          "label": "适配器记录",
+          "value": "dcc-mcp-blender 0.2.20基线及397d2aaa相机/时间基准源码补丁；冻结快照，不宣称新正式版"
+        },
+        {
+          "label": "输出与时间基准",
+          "value": "960 × 720 · 144 frames · 24000/1001 fps · 6.006 s"
+        },
+        {
+          "label": "原生公开副本",
+          "value": "路径已清理并保存重开；仅声明已检查设置和144帧边界一致"
+        },
+        {
+          "label": "浏览器验收环境",
+          "value": "Chromium 153.0.8010.12 · 英中桌面及触控视口模拟"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Blender DCC-MCP",
+          "description": "真实宿主调用修改原生几何、相机和场景设置，保存并重新打开后检查。"
+        },
+        {
+          "name": "Cycles CPU",
+          "description": "96 samples、固定seed42、无自适应采样或动画随机种子、关闭渲染内降噪，输出真实多层EXR及引导通道。"
+        },
+        {
+          "name": "dcc-media-enhance 0.2.0 / Blender compositor OIDN",
+          "description": "统一原生CLI使用独立空白Blender进程，以真实Albedo/Normal引导逐帧空间降噪；没有时域算法或运动补偿。"
+        },
+        {
+          "name": "Blender AgX / FFmpeg zscale",
+          "description": "float32线性美术输出经AgX转16-bit PNG，再显式sRGB→BT.709编码；无补帧、变速或放大。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "细化几何并保留完整构图",
+          "description": "26个对象；圆环控制点96→384，圆环倒角分辨率3→6，摆杆倒角分辨率6。42→44 mm镜头的144帧投影边界检查记录最小4.73%边距。"
+        },
+        {
+          "title": "保留原生线性输入",
+          "description": "保存重开后渲染96samples混合精度多层EXR。原始文件不改写；内部路径与原始执行记录不直接公开。"
+        },
+        {
+          "title": "真实引导式空间降噪",
+          "description": "制作宿主退出后，以独立进程调用已安装的Blender compositor OIDN。逐帧使用真实Albedo/Normal通道，输出float32线性RGBA EXR。"
+        },
+        {
+          "title": "明确色彩链与独立播放验收",
+          "description": "以AgX/Look None/exposure0/gamma1输出展示PNG，显式转换sRGB→BT.709。帧序由真实EXR头、全链hash、转换回执及MP4PTS建立；不使用降噪子场景写入的PNG Frame=001作为时序证据。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/brass-pendulum-denoise/pendulum-oidn.mp4",
+          "alt": "黄铜摆锤：新的引导式空间OIDN候选动画",
+          "caption": "新候选 · 960 × 720 · 96 samples · 逐帧空间 OIDN · 6.006秒 · 无音轨"
+        },
+        {
+          "src": "docs/showcase/brass-pendulum-denoise/historical-atadenoise/pendulum-synchronized-comparison.mp4",
+          "alt": "历史实验：640 × 480、32 samples的旧raw与atadenoise同步对照",
+          "caption": "历史版本：旧几何与48→62 mm镜头；只比较当时同源raw/processed，不是新成片的raw control"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生公开副本保存重开",
+          "result": "pass",
+          "observed": "26对象，无外链和嵌入文本脚本；已核对指定渲染设置及全部144帧投影边界。未重新渲染证明像素一致。"
+        },
+        {
+          "name": "完整144帧技术链",
+          "result": "pass",
+          "observed": "完整144帧的原始EXR、空间OIDN输出、展示PNG和交付视频哈希链已核验；全片完整解码，PTS步进1001、时间基准1/24000、时长6.006秒，没有相邻完全重复帧。"
+        },
+        {
+          "name": "全片静态联系表审阅",
+          "result": "pass",
+          "observed": "全部144帧的6张联系表及原生尺寸第1、13、73、144帧已实际检查；未观察到阻断性静态缺陷，完整底座保留。金属环杆高光和少数球边像素仍有细小亮点或锯齿；不代表自然速度动态验收。"
+        },
+        {
+          "name": "真实自然速度画面验收",
+          "result": "pass",
+          "observed": "已测试提交508004143e41e404b38b149a8baf05fd18ef7ece：英中桌面/触控四端均自然1×播放到ended；144帧解码，0掉帧/损坏/seek，143次回调覆盖第2–144帧及142次可见变化，首中末实际解码画面通过同源参考核验。此为交付显示一致性验收，不认证时域降噪质量。"
+        },
+        {
+          "name": "已记录提交的浏览器完整播放",
+          "result": "pass",
+          "observed": "Chromium153.0.8010.12四端通过，详见ci-verification.json。触控在页面内播放，正常原生控件遮挡部分末图，该像素差异保留；同一末图另经真实原生按钮进入/退出全屏后核验通过，时码与解码状态不变，Stop释放且无重请求。后续文案或代码提交不自动继承结果。"
+        },
+        {
+          "name": "高采样真值与定量画质评分",
+          "result": "not_run",
+          "observed": "没有更高采样真值、PSNR/SSIM或客观感知质量认证；像素匹配只证明展示与交付参考一致。"
+        },
+        {
+          "name": "用户当前成片验收",
+          "result": "pass",
+          "observed": "当前6.006秒成片已获用户主观接受；不等于客观画质认证。浏览器展示一致性另见明确绑定已测试提交的记录。"
+        }
+      ],
+      "limitations": [
+        "本案例为原创程序化动画，不是CineRecon重建、物理摆仿真、基准测试或模型质量评分。",
+        "OIDN在此逐帧独立运行，属于空间降噪；没有时域算法或运动补偿，单帧成功不证明动态稳定。",
+        "历史atadenoise实验的几何、镜头、尺寸与采样不同；旧raw视频不能作为新成片的同源控制。",
+        "MP4为有损展示编码。浏览器参考由该最终MP4独立解码取得，只核验交付显示一致性，不是原生EXR或高采样画质真值。",
+        "公开原生副本字节不同于制作原件；只声明已检查设置与投影边界一致，未证明重新渲染像素一致。",
+        "触控为Chromium视口模拟；页面内正常原生控件可能遮挡末图，末图另通过真实全屏操作核验，不声称页面内画面无遮挡。未测试实体设备、Safari/Firefox或生产站点。",
+        "模型与推理强度没有可独立核验的已接受任务配置记录，各阶段继续Unknown。",
+        "dcc-media-enhance源码采用MIT许可；原创案例资产仍保留权利，上游Blender、OIDN和FFmpeg许可义务不变。"
+      ],
+      "resources": [
+        {
+          "label": "双语案例说明",
+          "url": "docs/showcase/brass-pendulum-denoise/README.md"
+        },
+        {
+          "label": "新候选原生工程（路径已清理）",
+          "url": "docs/showcase/brass-pendulum-denoise/scene-public.blend"
+        },
+        {
+          "label": "本次原生编辑配方",
+          "url": "docs/showcase/brass-pendulum-denoise/scene-recipe.json"
+        },
+        {
+          "label": "本次原生检查与清理范围",
+          "url": "docs/showcase/brass-pendulum-denoise/native-inspection.json"
+        },
+        {
+          "label": "本次技术验证",
+          "url": "docs/showcase/brass-pendulum-denoise/validation.json"
+        },
+        {
+          "label": "真实空间降噪与色彩链证据",
+          "url": "docs/showcase/brass-pendulum-denoise/processing-validation.json"
+        },
+        {
+          "label": "本次画面审阅与未验收项",
+          "url": "docs/showcase/brass-pendulum-denoise/visual-review.json"
+        },
+        {
+          "label": "帧序与精确时间基准",
+          "url": "docs/showcase/brass-pendulum-denoise/temporal-integrity-summary.json"
+        },
+        {
+          "label": "实际软件版本与能力边界",
+          "url": "docs/showcase/brass-pendulum-denoise/software-capability-coverage.json"
+        },
+        {
+          "label": "浏览器同源参考契约",
+          "url": "docs/showcase/brass-pendulum-denoise/playback-reference.json"
+        },
+        {
+          "label": "已测试提交的精简浏览器记录",
+          "url": "docs/showcase/brass-pendulum-denoise/ci-verification.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/brass-pendulum-denoise/manifest.json"
+        },
+        {
+          "label": "完整历史atadenoise案例与旧CI证据",
+          "url": "docs/showcase/brass-pendulum-denoise/historical-atadenoise/README.md"
+        },
+        {
+          "label": "权利与使用边界",
+          "url": "docs/showcase/brass-pendulum-denoise/LICENSES.md"
+        },
+        {
+          "label": "实际统一CLI源码（MIT）",
+          "url": "https://github.com/dcc-mcp/dcc-media-enhance/tree/bd4aca72488ca6165816ebdf95c99df5800a192a"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP Brass Pendulum showcase contributors",
+        "license": "原创场景、画面、配方与案例资料保留权利；公开展示不构成额外 MIT 授权。上游软件许可证不变。",
+        "note": "无外部图像纹理、生成式位图或配乐；所有画面源于原生 Blender 场景。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-media-enhance/tree/bd4aca72488ca6165816ebdf95c99df5800a192a",
+        "commit": "bd4aca72488ca6165816ebdf95c99df5800a192a",
+        "title": "实际使用的统一降噪CLI源码；后端版本与运行证据另行记录"
+      },
+      "verified_at": "2026-10-16",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "方案规划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "原生创作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码与配方",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考生成",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "降噪与编码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审阅",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审阅",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-14",
+          "change": "保留原创低采样动画，新增实际时域降噪、公开脱敏工程、技术证据与双语展示。"
+        },
+        {
+          "version": "v2",
+          "date": "2026-10-15",
+          "change": "补充同步降噪前后视频、dcc-media-enhance 工具归属和时间轴诊断，保留浏览器播放及连续运动验收边界。"
+        },
+        {
+          "version": "v3",
+          "date": "2026-10-16",
+          "change": "加入完整960 × 720引导式空间OIDN候选与真实144帧技术证据；静态联系表已审阅，历史atadenoise独立保留。新增完整真实画面播放门禁，当前head浏览器验收仍未完成；用户已通过语音批准当前成片发布。"
+        },
+        {
+          "version": "v4",
+          "date": "2026-10-16",
+          "change": "补充已测试提交5080041的英中桌面/触控四端自然速度完整播放、实际画面与停止释放记录；触控末图通过原生全屏按钮独立核验，页面内控件遮挡事实保留。后续提交须重新验证。"
+        }
+      ]
+    },
+    {
       "slug": "houdini-procedural-study",
       "title": "青釉环纹器皿",
       "subtitle": "Houdini · 51 点剖面到真实 Mantra 成图",
@@ -315,6 +643,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -322,6 +659,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -767,6 +1114,15 @@
           "stage_id": "review_technical"
         },
         {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
+        },
+        {
           "stage_id": "supplement_creation",
           "stage": "未完成镜头尝试 / DCC操作",
           "model": "gpt-6-astra",
@@ -790,6 +1146,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         },
         {
           "version": "未完成镜头检查点",
@@ -1102,6 +1468,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1109,6 +1484,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1438,6 +1823,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1447,9 +1841,19 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         },
         {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
           "version": "独立新增 MIDI 配乐版",
           "date": "2026-10-09",
           "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1799,6 +2203,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1808,9 +2221,19 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         },
         {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
           "version": "独立新增 MIDI 配乐版",
           "date": "2026-10-09",
           "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1861,6 +2284,14 @@
         {
           "label": "Adapter 适配器",
           "value": "ParaView 0.1.0，9b9de65d 的原生证明与 4c4939b1 文档后续内容等价；GIMP 0.4.1，metadata 基线 ea9270a8 与预览 a3b45aaa 增量分阶段绑定"
+        },
+        {
+          "label": "新增过程视频环境",
+          "value": "2026-10-12：GIMP 3.0.4 / Core 0.20.43 / GIMP adapter 0.5.0，另用未合并 PR22 的 GUI readiness 修复；原始制作环境记录不变。"
+        },
+        {
+          "label": "新增视频模型记录",
+          "value": "实际模型与推理强度均未知；请求配置为 gpt-6-astra / ultra，但未取得可审计的运行配置回执。仅记录本轮视频，不补写历史模型。"
         }
       ],
       "tools": [
@@ -1905,6 +2336,12 @@
       ],
       "results": [
         {
+          "src": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+          "poster": "docs/showcase/seismic-lens/seismic-lens-native-poster.png",
+          "alt": "八秒 GIMP 原生图层演示",
+          "caption": "2026-10-12 新增：连续录制真实 GIMP 窗口，通过 typed MCP 依次显示原母版的五组切片与等值线。8.0 秒、1178 × 814、15 fps、120 帧，有意静音。不是重新绘制，也不是地震场动画。"
+        },
+        {
           "src": "docs/showcase/seismic-lens/hero.png",
           "alt": "Seismic Lens 五面板展板",
           "caption": "1600 × 1000 原生 GIMP MCP 预览；2560 × 1600 分层母版保持可编辑，副本缩放、透明 alpha、保存重开与全图 RGBA 已实际验证"
@@ -1945,6 +2382,16 @@
           "name": "Native GIMP web preview",
           "result": "pass",
           "observed": "Fresh native02:195 records,52 successful jobs and one intended rejection. Nested active-image IDs are strictly verified against the intended source; pixels, metadata and cleanup pass. The original missing-value comparison is not credited."
+        },
+        {
+          "name": "真实软件视图与往返检查",
+          "result": "pass",
+          "observed": "2026-10-12 实际 MCP 保存副本、关闭重开、导出并原生重开 PNG。XCF 副本 SHA256 与原母版相同；30 图层、19 文字层及完整 RGBA 保持一致。"
+        },
+        {
+          "name": "连续窗口录制与解码",
+          "result": "pass",
+          "observed": "仅录制经 PID 核对的任务 GIMP 窗口；五次 typed MCP 显示操作均完成。全部 120 帧完整解码，检查首中尾与五处变化；无音轨。"
         }
       ],
       "limitations": [
@@ -1952,7 +2399,7 @@
         "当前环境未暴露 CameraClippingRange；验收覆盖实际可读属性与图像像素",
         "MCP 重开限于本会话保存的可信状态；没有放开任意外部 PVSM 导入",
         "开发增量与实际测试版本逐项记录，不冒称 PyPI 已发行能力",
-        "静态科学展板；不声称影片或跨机器像素一致",
+        "静态科学展板另附八秒真实 GIMP 图层演示；不声称重做 ParaView 计算、原始创作全过程或跨机器像素一致。",
         "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内"
       ],
       "resources": [
@@ -2003,6 +2450,18 @@
         {
           "label": "文件清单",
           "url": "docs/showcase/seismic-lens/manifest.json"
+        },
+        {
+          "label": "视频与本轮原生核验记录",
+          "url": "docs/showcase/seismic-lens/native-process-video.json"
+        },
+        {
+          "label": "视频复现与边界",
+          "url": "docs/showcase/seismic-lens/PROCESS-VIDEO.md"
+        },
+        {
+          "label": "GIMP readiness 修复 Draft PR22",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/22"
         }
       ],
       "credits": {
@@ -2079,6 +2538,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -2086,6 +2554,21 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
+        },
+        {
+          "version": "新增真实软件视频 2026-10-12",
+          "date": "2026-10-12",
+          "change": "增加八秒连续 GIMP 图层演示、单独的本轮环境和请求模型记录；原图、完整下载及历史未知模型保持不变。影片权利保留，无新增许可授权。"
         }
       ]
     },

@@ -1,0 +1,546 @@
+{
+  "schema_version": 1,
+  "status": "passed_on_recorded_immutable_head",
+  "tested_head": "508004143e41e404b38b149a8baf05fd18ef7ece",
+  "scope": "The recorded commit only; subsequent commits require their own CI results. No historical pass is transferred.",
+  "source": {
+    "gallery_workflow_run_id": 38851171681,
+    "gallery_workflow_url": "https://github.com/dcc-mcp/showcase/actions/runs/38851171681",
+    "artifact_sha256": "01e85963f84a2e194cf1bb28e42a58f9ec9dc9bdccc135e66e6956665473b974",
+    "browser_report_sha256": "d35e717692f03ea3ba289133fdad57d36efab076cf0eebe976577657f0127607",
+    "artifact_id": 12025526592,
+    "artifact_bytes": 17589097
+  },
+  "browser": "153.0.8010.12",
+  "video": {
+    "path": "pendulum-oidn.mp4",
+    "bytes": 614199,
+    "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83"
+  },
+  "references": {
+    "atlas": {
+      "path": "playback-atlas.jpg",
+      "bytes": 405788,
+      "sha256": "ffa22490c541055a6da7c0aa8297939ce09850c1f75c3e3530b0f0c4598bd19b",
+      "columns": 8,
+      "rows": 18,
+      "tile_width": 160,
+      "tile_height": 120,
+      "jpeg_encoding": "Explicit BT.601 / full range / 4:4:4, quality3; independently decoded final MP4 resized with Lanczos."
+    },
+    "keyframes": [
+      {
+        "path": "playback-frame-0001.png",
+        "frame": 1,
+        "bytes": 231342,
+        "sha256": "538540938f4ddb5bba2662d0131fccf823c7bc7c82e537526ff719a703633c27"
+      },
+      {
+        "path": "playback-frame-0073.png",
+        "frame": 73,
+        "bytes": 264878,
+        "sha256": "e0245f1970286ec5a381b40f8077aca12b2cc1b1ccfa06eca174f3491d77b17d"
+      },
+      {
+        "path": "playback-frame-0144.png",
+        "frame": 144,
+        "bytes": 262740,
+        "sha256": "0d825a65ddd44c086223c6ce42f2ca145fccb47726ae9b860a348cce28d86cd1"
+      }
+    ],
+    "contract": "playback-reference.json"
+  },
+  "tracked_source": {
+    "method": "unfiltered Git blob hashes, file modes/types, and exact HEAD/index entries",
+    "tracked_entries": 670,
+    "raw_hashes_matched": 670,
+    "index_and_raw_bytes_match_head": true
+  },
+  "comparison_resolution": [
+    160,
+    120
+  ],
+  "full_keyframe_resolution": [
+    960,
+    720
+  ],
+  "sequence_reference": "All 144 same-encoding JPEG atlas tiles; no PNG substitutions",
+  "png_reference": "Separate unprofiled PNG set with absolute and same-set nearest limits; frame73 checked when naturally observed",
+  "motion_roi": {
+    "x": 43,
+    "y": 27,
+    "width": 65,
+    "height": 52
+  },
+  "fixed_limits": {
+    "mean": 6,
+    "p95": 22,
+    "nearestSlack": 1.5,
+    "minimumCallbacks": 108,
+    "maximumFrameGap": 6,
+    "minimumChanges": 48
+  },
+  "checks": [
+    {
+      "locale": "en",
+      "viewport": "desktop",
+      "passed": true,
+      "touch_emulation": false,
+      "elapsed_ms": 6028.7,
+      "playback_rates": [
+        1
+      ],
+      "play_events": 1,
+      "ended_events": 1,
+      "seeks": 0,
+      "request_video_frame_callbacks": 143,
+      "visible_picture_changes": 142,
+      "first_callback_frame": 2,
+      "last_callback_frame": 144,
+      "maximum_callback_frame_gap": 1,
+      "decode_quality": {
+        "totalVideoFrames": 144,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      },
+      "motion_mask_pixels": 1567,
+      "maximum_observed_frame_mean_error": 5.576473090831738,
+      "maximum_observed_frame_p95_error": 17,
+      "png_keyframe_observations": [
+        {
+          "frame": 73,
+          "mean": 1.30525420123378,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 73,
+          "nearestMean": 1.30525420123378,
+          "passed": true,
+          "mediaTime": 3.003
+        },
+        {
+          "frame": 144,
+          "mean": 1.3133375877472877,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 144,
+          "nearestMean": 1.3133375877472877,
+          "passed": true,
+          "mediaTime": 5.964292
+        }
+      ],
+      "middle_png_keyframe": {
+        "frame": 73,
+        "mean": 1.30525420123378,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 73,
+        "nearestMean": 1.30525420123378,
+        "passed": true,
+        "mediaTime": 3.003,
+        "status": "pass"
+      },
+      "first_decoded_picture": {
+        "frame": 1,
+        "mean": 1.2599446926185918,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 1,
+        "nearestMean": 1.2599446926185918,
+        "passed": true
+      },
+      "final_decoded_picture": {
+        "frame": 144,
+        "mean": 1.3133375877472877,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 144,
+        "nearestMean": 1.3133375877472877,
+        "passed": true
+      },
+      "final_displayed_picture": {
+        "frame": 144,
+        "mean": 3.6632631355030845,
+        "p95": 15,
+        "maximum": 46,
+        "nearestFrame": 144,
+        "nearestMean": 3.6632631355030845,
+        "passed": true
+      },
+      "displayed_views": {
+        "mode": "inline",
+        "inline": {
+          "screenshot": "en-desktop-last-displayed.png",
+          "comparison": {
+            "frame": 144,
+            "mean": 3.6632631355030845,
+            "p95": 15,
+            "maximum": 46,
+            "nearestFrame": 144,
+            "nearestMean": 3.6632631355030845,
+            "passed": true
+          },
+          "motion_region_pixel_match": true
+        }
+      },
+      "no_media_before_intent": true,
+      "stop_releases_without_refetch": true,
+      "page_errors": []
+    },
+    {
+      "locale": "en",
+      "viewport": "touch",
+      "passed": true,
+      "touch_emulation": true,
+      "elapsed_ms": 6029.4,
+      "playback_rates": [
+        1
+      ],
+      "play_events": 1,
+      "ended_events": 1,
+      "seeks": 0,
+      "request_video_frame_callbacks": 143,
+      "visible_picture_changes": 142,
+      "first_callback_frame": 2,
+      "last_callback_frame": 144,
+      "maximum_callback_frame_gap": 1,
+      "decode_quality": {
+        "totalVideoFrames": 144,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      },
+      "motion_mask_pixels": 1567,
+      "maximum_observed_frame_mean_error": 5.576473090831738,
+      "maximum_observed_frame_p95_error": 17,
+      "png_keyframe_observations": [
+        {
+          "frame": 73,
+          "mean": 1.30525420123378,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 73,
+          "nearestMean": 1.30525420123378,
+          "passed": true,
+          "mediaTime": 3.003
+        },
+        {
+          "frame": 144,
+          "mean": 1.3133375877472877,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 144,
+          "nearestMean": 1.3133375877472877,
+          "passed": true,
+          "mediaTime": 5.964292
+        }
+      ],
+      "middle_png_keyframe": {
+        "frame": 73,
+        "mean": 1.30525420123378,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 73,
+        "nearestMean": 1.30525420123378,
+        "passed": true,
+        "mediaTime": 3.003,
+        "status": "pass"
+      },
+      "first_decoded_picture": {
+        "frame": 1,
+        "mean": 1.2599446926185918,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 1,
+        "nearestMean": 1.2599446926185918,
+        "passed": true
+      },
+      "final_decoded_picture": {
+        "frame": 144,
+        "mean": 1.3133375877472877,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 144,
+        "nearestMean": 1.3133375877472877,
+        "passed": true
+      },
+      "final_displayed_picture": {
+        "frame": 144,
+        "mean": 3.8025951925122317,
+        "p95": 16,
+        "maximum": 44,
+        "nearestFrame": 144,
+        "nearestMean": 3.8025951925122317,
+        "passed": true
+      },
+      "displayed_views": {
+        "mode": "native_fullscreen_after_natural_ended",
+        "inline": {
+          "screenshot": "en-touch-last-displayed.png",
+          "comparison": {
+            "frame": 144,
+            "mean": 12.084662837694108,
+            "p95": 41,
+            "maximum": 109,
+            "nearestFrame": 144,
+            "nearestMean": 12.084662837694108,
+            "passed": false
+          },
+          "motion_region_pixel_match": false,
+          "native_controls_retained": true
+        },
+        "fullscreen": {
+          "screenshot": "en-touch-last-displayed-fullscreen.png",
+          "comparison": {
+            "frame": 144,
+            "mean": 3.8025951925122317,
+            "p95": 16,
+            "maximum": 44,
+            "nearestFrame": 144,
+            "nearestMean": 3.8025951925122317,
+            "passed": true
+          },
+          "entry": "Trusted touch on the target video native enter-fullscreen button",
+          "exit": "Trusted touch on the target video native exit-fullscreen button",
+          "ended_time_decode_and_controls_unchanged": true,
+          "returned_inline_before_stop": true
+        }
+      },
+      "no_media_before_intent": true,
+      "stop_releases_without_refetch": true,
+      "page_errors": []
+    },
+    {
+      "locale": "zh",
+      "viewport": "desktop",
+      "passed": true,
+      "touch_emulation": false,
+      "elapsed_ms": 6032.1,
+      "playback_rates": [
+        1
+      ],
+      "play_events": 1,
+      "ended_events": 1,
+      "seeks": 0,
+      "request_video_frame_callbacks": 143,
+      "visible_picture_changes": 142,
+      "first_callback_frame": 2,
+      "last_callback_frame": 144,
+      "maximum_callback_frame_gap": 1,
+      "decode_quality": {
+        "totalVideoFrames": 144,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      },
+      "motion_mask_pixels": 1567,
+      "maximum_observed_frame_mean_error": 5.576473090831738,
+      "maximum_observed_frame_p95_error": 17,
+      "png_keyframe_observations": [
+        {
+          "frame": 73,
+          "mean": 1.30525420123378,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 73,
+          "nearestMean": 1.30525420123378,
+          "passed": true,
+          "mediaTime": 3.003
+        },
+        {
+          "frame": 144,
+          "mean": 1.3133375877472877,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 144,
+          "nearestMean": 1.3133375877472877,
+          "passed": true,
+          "mediaTime": 5.964292
+        }
+      ],
+      "middle_png_keyframe": {
+        "frame": 73,
+        "mean": 1.30525420123378,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 73,
+        "nearestMean": 1.30525420123378,
+        "passed": true,
+        "mediaTime": 3.003,
+        "status": "pass"
+      },
+      "first_decoded_picture": {
+        "frame": 1,
+        "mean": 1.2599446926185918,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 1,
+        "nearestMean": 1.2599446926185918,
+        "passed": true
+      },
+      "final_decoded_picture": {
+        "frame": 144,
+        "mean": 1.3133375877472877,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 144,
+        "nearestMean": 1.3133375877472877,
+        "passed": true
+      },
+      "final_displayed_picture": {
+        "frame": 144,
+        "mean": 3.246117847266539,
+        "p95": 14,
+        "maximum": 47,
+        "nearestFrame": 144,
+        "nearestMean": 3.246117847266539,
+        "passed": true
+      },
+      "displayed_views": {
+        "mode": "inline",
+        "inline": {
+          "screenshot": "zh-desktop-last-displayed.png",
+          "comparison": {
+            "frame": 144,
+            "mean": 3.246117847266539,
+            "p95": 14,
+            "maximum": 47,
+            "nearestFrame": 144,
+            "nearestMean": 3.246117847266539,
+            "passed": true
+          },
+          "motion_region_pixel_match": true
+        }
+      },
+      "no_media_before_intent": true,
+      "stop_releases_without_refetch": true,
+      "page_errors": []
+    },
+    {
+      "locale": "zh",
+      "viewport": "touch",
+      "passed": true,
+      "touch_emulation": true,
+      "elapsed_ms": 6029.5,
+      "playback_rates": [
+        1
+      ],
+      "play_events": 1,
+      "ended_events": 1,
+      "seeks": 0,
+      "request_video_frame_callbacks": 143,
+      "visible_picture_changes": 142,
+      "first_callback_frame": 2,
+      "last_callback_frame": 144,
+      "maximum_callback_frame_gap": 1,
+      "decode_quality": {
+        "totalVideoFrames": 144,
+        "droppedVideoFrames": 0,
+        "corruptedVideoFrames": 0
+      },
+      "motion_mask_pixels": 1567,
+      "maximum_observed_frame_mean_error": 5.576473090831738,
+      "maximum_observed_frame_p95_error": 17,
+      "png_keyframe_observations": [
+        {
+          "frame": 73,
+          "mean": 1.30525420123378,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 73,
+          "nearestMean": 1.30525420123378,
+          "passed": true,
+          "mediaTime": 3.003
+        },
+        {
+          "frame": 144,
+          "mean": 1.3133375877472877,
+          "p95": 3,
+          "maximum": 5,
+          "nearestFrame": 144,
+          "nearestMean": 1.3133375877472877,
+          "passed": true,
+          "mediaTime": 5.964292
+        }
+      ],
+      "middle_png_keyframe": {
+        "frame": 73,
+        "mean": 1.30525420123378,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 73,
+        "nearestMean": 1.30525420123378,
+        "passed": true,
+        "mediaTime": 3.003,
+        "status": "pass"
+      },
+      "first_decoded_picture": {
+        "frame": 1,
+        "mean": 1.2599446926185918,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 1,
+        "nearestMean": 1.2599446926185918,
+        "passed": true
+      },
+      "final_decoded_picture": {
+        "frame": 144,
+        "mean": 1.3133375877472877,
+        "p95": 3,
+        "maximum": 5,
+        "nearestFrame": 144,
+        "nearestMean": 1.3133375877472877,
+        "passed": true
+      },
+      "final_displayed_picture": {
+        "frame": 144,
+        "mean": 3.8025951925122317,
+        "p95": 16,
+        "maximum": 44,
+        "nearestFrame": 144,
+        "nearestMean": 3.8025951925122317,
+        "passed": true
+      },
+      "displayed_views": {
+        "mode": "native_fullscreen_after_natural_ended",
+        "inline": {
+          "screenshot": "zh-touch-last-displayed.png",
+          "comparison": {
+            "frame": 144,
+            "mean": 12.084662837694108,
+            "p95": 41,
+            "maximum": 109,
+            "nearestFrame": 144,
+            "nearestMean": 12.084662837694108,
+            "passed": false
+          },
+          "motion_region_pixel_match": false,
+          "native_controls_retained": true
+        },
+        "fullscreen": {
+          "screenshot": "zh-touch-last-displayed-fullscreen.png",
+          "comparison": {
+            "frame": 144,
+            "mean": 3.8025951925122317,
+            "p95": 16,
+            "maximum": 44,
+            "nearestFrame": 144,
+            "nearestMean": 3.8025951925122317,
+            "passed": true
+          },
+          "entry": "Trusted touch on the target video native enter-fullscreen button",
+          "exit": "Trusted touch on the target video native exit-fullscreen button",
+          "ended_time_decode_and_controls_unchanged": true,
+          "returned_inline_before_stop": true
+        }
+      },
+      "no_media_before_intent": true,
+      "stop_releases_without_refetch": true,
+      "page_errors": []
+    }
+  ],
+  "limitations": [
+    "Touch viewports are emulated, not physical devices.",
+    "Touch playback is inline; normal native controls obscure part of the ended inline picture. Its failing motion-region screenshot comparison is retained. The same ended picture is separately checked via real native fullscreen controls.",
+    "Thumbnail motion-region checks establish delivery/display consistency, not full-resolution or colorimetric fidelity.",
+    "No high-sample quality score, temporal-denoising certification, native-player acceptance or deployment is implied."
+  ],
+  "previous_case": "historical-atadenoise/ci-verification.json"
+}

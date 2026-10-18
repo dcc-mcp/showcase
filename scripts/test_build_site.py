@@ -13,6 +13,7 @@ so it runs on a bare CI runner in under a second.
 from __future__ import annotations
 
 from html.parser import HTMLParser
+import hashlib
 import json
 import os
 import struct
@@ -128,9 +129,9 @@ def integration_guards() -> None:
             with open(os.path.join(case_dir, name), "w", encoding="utf-8") as fh:
                 fh.write("{}" if name.endswith(".json") else "# A case")
         with open(os.path.join(case_dir, "manifest.json"), "w", encoding="utf-8") as fh:
-            json.dump({"files": [{"path": "cover.png"}, {"path": "audition.mp3"}]}, fh)
+            json.dump({"schema_version": 1, "files": [{"path": name, "bytes": os.path.getsize(os.path.join(case_dir, name)), "sha256": hashlib.sha256(open(os.path.join(case_dir, name), "rb").read()).hexdigest()} for name in ("cover.png", "audition.mp3", "sample.blend", "README.md", "validation.json")]}, fh)
         os.makedirs(os.path.join(tmp, "assets"))
-        for name in ("site.css", "gallery.js", "detail.js"):
+        for name in ("site.css", "gallery.js", "detail.js", "preview.js"):
             with open(os.path.join(tmp, "assets", name), "w", encoding="utf-8") as fh:
                 fh.write("/* local UI */")
         with open(os.path.join(tmp, "index.html"), "w", encoding="utf-8") as fh:
@@ -191,8 +192,9 @@ def integration_guards() -> None:
                   'rel="canonical" href="https://dcc-mcp.github.io/showcase/"' in homepage, True)
             sitemap = ET.parse(os.path.join(tmp, "_site", "sitemap.xml"))
             sitemap_urls = [item.text for item in sitemap.findall("{http://www.sitemaps.org/schemas/sitemap/0.9}url/{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-            check("sitemap includes exactly the collection and selected detail pages",
+            check("sitemap includes collection, agent index and selected detail pages",
                   sitemap_urls, ["https://dcc-mcp.github.io/showcase/",
+                                 "https://dcc-mcp.github.io/showcase/agents/",
                                  "https://dcc-mcp.github.io/showcase/cases/sample-case/"])
             for legacy in ("wwise/index.html", "wwise.html"):
                 with open(os.path.join(tmp, "_site", *legacy.split("/")), encoding="utf-8") as fh:
