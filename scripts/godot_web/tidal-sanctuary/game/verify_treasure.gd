@@ -157,6 +157,30 @@ func run() -> void:
   corrupt_results.append({"case": test.name, "stage": game.quest_stage(), "finite": game.player.position.is_finite(), "loaded": game.loaded_found})
  checks.append({"check": "corrupt_save_recovery", "cases": corrupt_results})
 
+ # JSON values are untrusted. Reject malformed flag types while retaining the
+ # valid prefix of quest progress and the original numeric/bool save behavior.
+ var flag_cases := [
+  {"name": "string_chart", "flags": ["x", true, true], "beacon": true, "stage": 0},
+  {"name": "null_chart", "flags": [null, true, true], "beacon": true, "stage": 0},
+  {"name": "object_key", "flags": [true, {}, true], "beacon": true, "stage": 1},
+  {"name": "null_key", "flags": [true, null, true], "beacon": true, "stage": 1},
+  {"name": "array_pearl", "flags": [true, true, []], "beacon": true, "stage": 2},
+  {"name": "string_pearl", "flags": [true, true, "true"], "beacon": true, "stage": 2},
+  {"name": "string_beacon", "flags": [true, true, true], "beacon": "true", "stage": 3},
+  {"name": "null_beacon", "flags": [true, true, true], "beacon": null, "stage": 3},
+  {"name": "object_beacon", "flags": [true, true, true], "beacon": {}, "stage": 3},
+  {"name": "numeric_flags", "flags": [1, -1, 0.5], "beacon": 1, "stage": 4},
+  {"name": "numeric_zero_order", "flags": [1, 0, 1], "beacon": 1, "stage": 1}
+ ]
+ var flag_results: Array[Dictionary] = []
+ for test: Dictionary in flag_cases:
+  write_raw_save(JSON.stringify({"schema": 2, "activated": test.flags, "beacon_awakened": test.beacon, "language": "zh"}))
+  await reopen()
+  check(game.loaded_found and game.language == "zh", "%s loads without interrupting language restoration" % test.name)
+  check(game.quest_stage() == test.stage, "%s preserves only valid ordered quest flags" % test.name)
+  flag_results.append({"case": test.name, "stage": game.quest_stage(), "loaded": game.loaded_found, "language": game.language})
+ checks.append({"check": "malformed_save_flags", "cases": flag_results})
+
  game.queue_free()
  await process_frame
  if had_save:write_raw_save(original_save)

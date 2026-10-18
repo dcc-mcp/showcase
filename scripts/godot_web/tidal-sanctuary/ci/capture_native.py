@@ -174,7 +174,8 @@ def main():
 
     try:
         for script, prefix in (("verify_swimming.gd", "TIDAL_SWIMMING_CHECK"),
-                               ("verify_treasure.gd", "TIDAL_TREASURE_CHECK")):
+                               ("verify_treasure.gd", "TIDAL_TREASURE_CHECK"),
+                               ("verify_input.gd", "TIDAL_INPUT_CHECK")):
             regression = subprocess.run([godot, "--headless", "--path", str(project), "--script", "res://" + script,
                                          "--fixed-fps", "240"], env=isolated_env(out / (script + "-session")),
                                         capture_output=True, text=True, timeout=180)
@@ -364,7 +365,7 @@ def main():
         stop_process(recorder)
         stop_process(runtime)
         engine_errors = []
-        for log_name in ("verify_swimming.gd.log", "verify_treasure.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
+        for log_name in ("verify_swimming.gd.log", "verify_treasure.gd.log", "verify_input.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
             path = out / log_name
             if path.exists():
                 try:
