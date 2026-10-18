@@ -161,7 +161,33 @@ def audio_window(snapshot, begin_ms, end_ms, minimum_seconds, audible=False):
 def validate_audio_baseline(snapshot, begin_ms):
     if snapshot.get("starts") or snapshot.get("gestures") or snapshot.get("user_activation", {}).get("has_been_active") is not False:
         raise ValueError("Fresh audio baseline must precede every real gesture and source start")
-    return audio_window(snapshot, begin_ms, snapshot["wall_ms"], 2.0)
+    context = audio_graph(snapshot)
+    # A never-advanced suspended clock proves no sample was rendered, even when
+    # software rendering starves the main-thread timer. This exact-zero invariant
+    # is ONLY for first load; running/muted audio retains the strict dense meter.
+    mark = next((item for item in snapshot.get("marks", []) if item.get("wall_ms") == begin_ms), None)
+    clocks = (mark or {}).get("context_times", [])
+    if (type(begin_ms) not in (int, float) or not math.isfinite(begin_ms) or begin_ms < 0
+            or type(snapshot.get("wall_ms")) not in (int, float) or not math.isfinite(snapshot["wall_ms"])
+            or snapshot["wall_ms"] - begin_ms < 2000
+            or len(clocks) != 1 or clocks[0].get("id") != context.get("id")
+            or type(clocks[0].get("time")) not in (int, float) or clocks[0]["time"] != 0
+            or context.get("state") != "suspended" or type(context.get("context_time")) not in (int, float)
+            or context["context_time"] != 0):
+        raise ValueError("Fresh audio baseline must retain the same suspended zero clock for two seconds")
+    samples = context.get("samples", [])
+    terminals = [item for item in context.get("terminals", []) if item.get("active")]
+    if (not samples or any(type(item.get("connected_ms")) not in (int, float)
+                or not math.isfinite(item["connected_ms"]) or not 0 <= item["connected_ms"] <= begin_ms for item in terminals)
+            or any(item.get("disconnected_ms") is not None for item in terminals)
+            or any(item.get("state") != "suspended" or type(item.get("context_time")) not in (int, float)
+                or item["context_time"] != 0 or any(type(item.get(key)) not in (int, float) or item[key] != 0
+                for key in ("rms", "peak", "clipped_fraction")) or type(item.get("active_music")) is not int
+                or item["active_music"] != 0 or item.get("active_cues") != [] for item in samples)):
+        raise ValueError("Fresh suspended baseline contains a running clock, signal or changed terminal")
+    return {"proof": "same never-advanced suspended AudioContext; no source or activation",
+            "wall_seconds": (snapshot["wall_ms"] - begin_ms) / 1000, "context_id": context["id"],
+            "context_time": 0, "samples": len(samples), "maximum_rms": 0, "audible": False}
 
 
 

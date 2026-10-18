@@ -11,11 +11,11 @@ from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, aud
 
 def snapshot(rms=0, state="suspended", seconds=2.5):
     return {"schema": 1, "errors": [], "wall_ms": seconds * 1000,
-            "starts": [], "gestures": [], "marks": [], "user_activation": {"has_been_active": False},
-            "contexts": [{"id": 1, "destination": 1, "state": state, "context_time": seconds,
-                          "terminals": [{"active": True, "kind": "GainNode", "key": "2:0:0", "mirror_count": 1}],
+            "starts": [], "gestures": [], "marks": [{"name": "baseline", "wall_ms": 0, "context_times": [{"id": 1, "time": 0}]}], "user_activation": {"has_been_active": False},
+            "contexts": [{"id": 1, "destination": 1, "state": state, "context_time": seconds if state == "running" else 0,
+                          "terminals": [{"active": True, "kind": "GainNode", "key": "2:0:0", "mirror_count": 1, "connected_ms": 0}],
                           "samples": [{"wall_ms": index * 100, "context_time": index / 10 if state == "running" else 0,
-                                       "state": state, "rms": rms, "peak": rms * 2, "clipped_fraction": 0, "active_music": 0}
+                                       "state": state, "rms": rms, "peak": rms * 2, "clipped_fraction": 0, "active_music": 0, "active_cues": []}
                                       for index in range(int(seconds * 10) + 1)]}]}
 
 
@@ -102,6 +102,25 @@ class AudioAcceptanceFixtures(unittest.TestCase):
             validate_audio_baseline(snapshot(seconds=1.9), 0)
         with self.assertRaises(ValueError):
             validate_audio_baseline(snapshot(.002), 0)
+
+    def test_suspended_baseline_proves_no_audio_despite_sparse_main_thread_timer(self):
+        value = snapshot(seconds=8)
+        value["contexts"][0]["samples"] = [value["contexts"][0]["samples"][0], value["contexts"][0]["samples"][-1]]
+        validate_audio_baseline(value, 0)
+        for change in ({"state": "running"}, {"context_time": .001}, {"context_time": False}):
+            bad = copy.deepcopy(value);bad["contexts"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_baseline(bad, 0)
+        for change in ({"state": "running"}, {"context_time": .001}, {"rms": .00001}, {"peak": .00001}, {"active_music": 1}):
+            bad = copy.deepcopy(value);bad["contexts"][0]["samples"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_baseline(bad, 0)
+        for change in ({"marks": []}, {"wall_ms": 1999}, {"wall_ms": float("nan")},
+                       {"marks": [{"name": "baseline", "wall_ms": 0, "context_times": [{"id": 2, "time": 0}]}]},
+                       {"marks": [{"name": "baseline", "wall_ms": 0, "context_times": [{"id": 1, "time": .001}]}]}):
+            with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_baseline({**value, **change}, 0)
+        for change in ({"connected_ms": 1}, {"disconnected_ms": 1}):
+            bad = copy.deepcopy(value);bad["contexts"][0]["terminals"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_baseline(bad, 0)
+        with self.assertRaises(ValueError): audio_window(value, 0, 8000, 2, audible=True)
 
     def test_missing_unknown_and_duplicate_taps_fail(self):
         for mutation in ({"contexts": []}, {"errors": ["unknown node"]}, {"schema": True}):
