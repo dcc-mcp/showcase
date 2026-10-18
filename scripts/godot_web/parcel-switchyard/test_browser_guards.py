@@ -44,6 +44,76 @@ class ObserverGuards(unittest.TestCase):
             with self.subTest(dimensions=dimensions), self.assertRaises(AssertionError):
                 capture(page, frame, Path('/evidence'), 'case', 'zh')
 
+    def test_reflow_geometry_rejects_stage_growth_and_control_overlap(self):
+        check = helper('assert_reflow_geometry')
+        boxes = {'#stage': {'x': 10, 'y': 0, 'width': 300, 'height': 550},
+                 '#canvas': {'x': 10, 'y': 0, 'width': 300, 'height': 550},
+                 '#alternate': {'x': 0, 'y': 562, 'width': 320, 'height': 44},
+                 '#note': {'x': 0, 'y': 618, 'width': 320, 'height': 60},
+                 '#rights': {'x': 0, 'y': 690, 'width': 320, 'height': 80}}
+        check(boxes)
+        for selector, changes in [('#stage', {'height': 700}), ('#canvas', {'width': 0}),
+                                  ('#alternate', {'y': 540}), ('#note', {'y': 580}), ('#rights', {'y': 660})]:
+            altered = {name: dict(box) for name, box in boxes.items()}
+            altered[selector].update(changes)
+            with self.subTest(selector=selector, changes=changes), self.assertRaises(AssertionError):
+                check(altered)
+
+    def test_reflow_capture_waits_for_draw_and_exposes_real_controls(self):
+        events = []
+        page = Mock();page.viewport_size = {'width': 320, 'height': 568}
+        locators = {name: Mock() for name in ['#canvas', '#stage', '#alternate', '#alternate-label', '#note', '#rights']}
+        page.locator.side_effect = lambda selector: locators[selector]
+        box = {'x': 10, 'y': 0, 'width': 300, 'height': 550}
+        locators['#canvas'].bounding_box.return_value = box
+        locators['#stage'].bounding_box.return_value = dict(box)
+        locators['#alternate'].bounding_box.return_value = {'x': 0, 'y': 562, 'width': 320, 'height': 44}
+        locators['#alternate-label'].bounding_box.return_value = {'x': 0, 'y': 300, 'width': 320, 'height': 44}
+        locators['#note'].bounding_box.side_effect = [{'x': 0, 'y': 618, 'width': 320, 'height': 60}, {'x': 0, 'y': 356, 'width': 320, 'height': 40}]
+        locators['#rights'].bounding_box.side_effect = [{'x': 0, 'y': 690, 'width': 320, 'height': 80}, {'x': 0, 'y': 408, 'width': 320, 'height': 80}]
+        locators['#canvas'].scroll_into_view_if_needed.side_effect = lambda: events.append('canvas-scroll')
+        locators['#rights'].scroll_into_view_if_needed.side_effect = lambda: events.append('rights-scroll')
+        locators['#canvas'].screenshot.side_effect = lambda **kwargs: events.append('canvas') or b'\x89PNG\r\n\x1a\n' + bytes(8) + struct.pack('>II', 300, 550)
+        page.screenshot.side_effect = lambda **kwargs: events.append('viewport')
+        snapshot = {'selected': 1, 'sent': 1, 'delivered': 0, 'missed': 0, 'active': 1, 'auto': False, 'paused': True, 'elapsed': 1.5}
+        fresh = Mock(side_effect=lambda *args: events.append('draw') or {'draw_id': len(events)})
+        capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct,
+                         assert_reflow_geometry=helper('assert_reflow_geometry'))
+        result = capture(page, Path('/evidence'), 'reflow', 'en')
+        self.assertEqual(events, ['canvas-scroll', 'draw', 'canvas', 'rights-scroll', 'draw', 'viewport'])
+        self.assertEqual(result['observed_state'], snapshot)
+        self.assertEqual(result['png_dimensions'], [300, 550])
+        page.screenshot.assert_called_once_with(path='/evidence/reflow-context.png', full_page=False)
+        page.evaluate.assert_not_called()
+        # A scrolled-out control or changed paused game must not become evidence.
+        locators['#note'].bounding_box.side_effect = None
+        locators['#note'].bounding_box.return_value = {'x': 0, 'y': 356, 'width': 320, 'height': 40}
+        locators['#rights'].bounding_box.side_effect = None
+        locators['#rights'].bounding_box.return_value = {'x': 0, 'y': 408, 'width': 320, 'height': 80}
+        # Geometry has its own negatives above; isolate the viewport/state guards.
+        capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(return_value=snapshot), struct=struct,
+                         assert_reflow_geometry=Mock())
+        locators['#alternate-label'].bounding_box.return_value['y'] = -30
+        with self.assertRaises(AssertionError):
+            capture(page, Path('/evidence'), 'reflow', 'en')
+        locators['#alternate-label'].bounding_box.return_value['y'] = 300
+        changed = dict(snapshot, active=0)
+        capture = helper('capture_reflow', assert_native_language=fresh, state=Mock(side_effect=[snapshot, changed]), struct=struct,
+                         assert_reflow_geometry=Mock())
+        with self.assertRaisesRegex(AssertionError, 'changed the paused shift'):
+            capture(page, Path('/evidence'), 'reflow', 'en')
+
+    def test_every_reflow_gets_fresh_publication_and_bounded_capture(self):
+        source = Path(__file__).with_name('browser_test.py').read_text()
+        node = next(n for n in ast.parse(source).body if isinstance(n, ast.FunctionDef) and n.name == 'run_input')
+        loop = next(n for n in ast.walk(node) if isinstance(n, ast.For) and ast.unparse(n.target) == '(new_width, new_height)')
+        statements = [ast.unparse(n) for n in loop.body]
+        fresh = next(i for i, statement in enumerate(statements) if 'after = wait_fresh(page, before)' in statement)
+        capture = next(i for i, statement in enumerate(statements) if 'capture_reflow(' in statement)
+        self.assertLess(fresh, capture)
+        self.assertEqual(statements[-1], 'before = state(page)')
+        self.assertFalse(any('screenshot(' in statement for statement in statements))
+
     def test_page_filters_require_real_disclosure_click_before_filter_clicks(self):
         events = []
 

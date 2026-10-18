@@ -176,6 +176,50 @@ def capture_embedded_delivery(page, frame, output, name, lang):
             'scope': 'Actual canvas element pixels and separate viewport context; not a full-page image.'}
 
 
+def assert_reflow_geometry(boxes):
+    for name, box in boxes.items():
+        assert box and box['width'] > 0 and box['height'] > 0, (name, box)
+    stage, canvas = boxes['#stage'], boxes['#canvas']
+    assert all(abs(stage[key] - canvas[key]) <= 1 for key in ['x', 'y', 'width', 'height']), boxes
+    for upper, lower in [('#stage', '#alternate'), ('#alternate', '#note'), ('#note', '#rights')]:
+        assert boxes[lower]['y'] >= boxes[upper]['y'] + boxes[upper]['height'] - 1, boxes
+
+
+def capture_reflow(page, output, name, lang):
+    # Even same-layout resizes need a new rendered frame. Full-page screenshot
+    # viewport expansion can race Chromium's WebGL composition; keep the actual
+    # bounded canvas and separately expose the real controls/rights viewport.
+    canvas = page.locator('#canvas')
+    canvas.scroll_into_view_if_needed()
+    receipt = assert_native_language(page, lang)
+    keys = ['selected', 'sent', 'delivered', 'missed', 'active', 'auto', 'paused', 'elapsed']
+    snapshot = state(page)
+    before = {key: snapshot[key] for key in keys}
+    assert before['paused'], 'Reflow capture requires the actual paused shift'
+    boxes = {selector: page.locator(selector).bounding_box() for selector in ['#stage', '#canvas', '#alternate', '#note', '#rights']}
+    assert_reflow_geometry(boxes)
+    box = boxes['#canvas']
+    assert box['width'] <= 2048 and box['height'] <= 2048, box
+    png = canvas.screenshot(path=str(output / (name + '.png')))
+    assert png[:8] == b'\x89PNG\r\n\x1a\n'
+    dimensions = struct.unpack('>II', png[16:24])
+    assert abs(dimensions[0] - box['width']) <= 1 and abs(dimensions[1] - box['height']) <= 1, (dimensions, box)
+    page.locator('#rights').scroll_into_view_if_needed()
+    context_receipt = assert_native_language(page, lang)
+    controls = {selector: page.locator(selector).bounding_box() for selector in ['#alternate-label', '#note', '#rights']}
+    viewport = page.viewport_size
+    for selector, rect in controls.items():
+        assert rect and rect['width'] > 0 and rect['height'] > 0, (selector, rect)
+        assert rect['x'] >= -1 and rect['y'] >= -1, (selector, rect)
+        assert rect['x'] + rect['width'] <= viewport['width'] + 1 and rect['y'] + rect['height'] <= viewport['height'] + 1, (selector, rect, viewport)
+    page.screenshot(path=str(output / (name + '-context.png')), full_page=False)
+    after = state(page)
+    assert {key: after[key] for key in keys} == before, 'Reflow capture changed the paused shift'
+    return {'draw_receipt': receipt, 'context_draw_receipt': context_receipt, 'observed_state': before, 'geometry': boxes, 'png_dimensions': list(dimensions),
+            'controls_viewport_boxes': controls, 'viewport': viewport,
+            'scope': 'Actual bounded canvas and real scrolled controls/rights viewport; not a full-page image.'}
+
+
 def run_input(browser, base, output, width, height, lang, phone):
     name = '%s-%s-%dx%d' % ('touch' if phone else 'desktop', lang, width, height)
     context = browser.new_context(viewport={'width': width, 'height': height}, is_mobile=phone, has_touch=phone,
@@ -275,15 +319,18 @@ def run_input(browser, base, output, width, height, lang, phone):
         target(page, 'pause', phone);wait(page, 'window.__parcelState.paused')
         before = state(page)
         # Reflow and orientation changes must preserve a live, paused shift.
+        reflow_captures = []
         for new_width, new_height in ([(844, 390), (width, height)] if phone else [(320, 568), (768, 1024), (2048, 1152), (width, height)]):
             page.set_viewport_size({'width': new_width, 'height': new_height})
             expected_mobile = phone or new_width < 1100
             wait(page, 'window.__parcelState.mobile_layout===' + str(expected_mobile).lower())
-            after = state(page)
+            after = wait_fresh(page, before)
             assert all(after[key] == before[key] for key in ['selected', 'sent', 'delivered', 'missed', 'active', 'auto', 'paused'])
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             assert_phone_size(page)
-            page.screenshot(path=str(output / (name + '-reflow-%dx%d.png' % (new_width, new_height))), full_page=True)
+            capture_name = name + '-reflow-%dx%d' % (new_width, new_height)
+            reflow_captures.append({'name': capture_name, **capture_reflow(page, output, capture_name, lang)})
+            before = state(page)
         reset(page, phone)
         if phone:
             # Real finger drag over the native canvas must pan without dispatching.
@@ -339,7 +386,7 @@ def run_input(browser, base, output, width, height, lang, phone):
         result = {'name': name, 'status': 'passed', 'input': 'Playwright touchscreen tap → shell tap/pan normalization → Godot canvas mouse events' if phone else 'Real browser keyboard and mouse events',
                   'viewport': [width, height], 'lang': lang, 'minimum_target_css_px': minimum_target, 'minimum_primary_text_css_px': primary_text,
                   'checks': ['deferred loading', 'actual WASM startup', 'three destinations', 'misroute', 'capacity', 'pause/resume', 'auto on/off', 'repeated reset', 'live resize/orientation', 'touch pan' if phone else 'fullscreen/exit', 'localized alternate controls', 'exit/restart', 'language Back/Forward'],
-                  'native_language_receipts': language_receipts, 'page_errors': errors, 'console_errors': console_errors, 'failed_requests': failed_requests, 'served_pack_sha256': served_pack}
+                  'reflow_captures': reflow_captures, 'native_language_receipts': language_receipts, 'page_errors': errors, 'console_errors': console_errors, 'failed_requests': failed_requests, 'served_pack_sha256': served_pack}
         return result
     except Exception:
         if not page.is_closed():
