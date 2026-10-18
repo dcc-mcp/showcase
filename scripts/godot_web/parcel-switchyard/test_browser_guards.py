@@ -10,14 +10,37 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from localization import LOCALES
 
 
-def helper(name, **namespace):
-    source=Path(__file__).with_name('browser_test.py')
+def helper(name, source_path=None, **namespace):
+    source=source_path or Path(__file__).with_name('browser_test.py')
     node=next(n for n in ast.parse(source.read_text()).body if isinstance(n,ast.FunctionDef) and n.name==name)
     exec(compile(ast.Module(body=[node],type_ignores=[]),str(source),'exec'),namespace)
     return namespace[name]
 
 
 class ObserverGuards(unittest.TestCase):
+    def test_page_filters_require_real_disclosure_click_before_filter_clicks(self):
+        events = []
+
+        class Locator:
+            def __init__(self, selector): self.selector = selector
+            def locator(self, selector): return Locator(self.selector + ' ' + selector)
+            def click(self): events.append(('click', self.selector))
+            def to_have_attribute(self, name, value): events.append(('assert', self.selector, name, value))
+
+        page = Mock()
+        page.locator.side_effect = Locator
+        source = Path(__file__).resolve().parents[2] / 'parcel_page_smoke.py'
+        helper('select_parcel_filters', source_path=source, expect=lambda locator: locator)(page)
+        self.assertEqual(events, [
+            ('click', '#filter-disclosure summary'),
+            ('assert', '#filter-disclosure', 'open', ''),
+            ('click', '[data-filter="software"] [data-value="Godot"]'),
+            ('assert', '[data-filter="software"] [data-value="Godot"]', 'aria-pressed', 'true'),
+            ('click', '[data-filter="capability"] [data-value="交互"]'),
+            ('assert', '[data-filter="capability"] [data-value="交互"]', 'aria-pressed', 'true'),
+        ])
+        page.evaluate.assert_not_called()
+
     def test_generated_pages_use_the_canonical_html_locale(self):
         check = helper('assert_generated_page_language', LOCALES=LOCALES)
         for lang, actual in [('en', 'en'), ('zh', 'zh-CN')]:

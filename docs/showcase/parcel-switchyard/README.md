@@ -69,7 +69,7 @@ The game remains silent.
 The original source ZIP, native PCK, movie, images, tool receipts and license
 remain unchanged. New Web source is ordinary Godot CLI work, not a new MCP run.
 
-The standard single-thread Godot 4.6.3 export and 116 headless regressions are
+The standard single-thread Godot 4.6.3 export and 118 headless regressions are
 recorded in the linked provenance. Its export-time browser status is deliberately
 not-tested: an export does not prove playability. The separate exact-head Parcel
 Web workflow exercises real desktop keyboard/mouse and emulated 320/390px phone

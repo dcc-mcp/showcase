@@ -52,6 +52,14 @@ class PackageTests(unittest.TestCase):
         self.assertEqual(config['emscriptenPoolSize'], 0)
         self.assertEqual((PLAY / 'game.pck').read_bytes()[:4], b'GDPC')
 
+    def test_documented_regression_count_matches_both_actual_receipts(self):
+        provenance = json.loads((PLAY / 'export-provenance.json').read_text())
+        case = ROOT / 'docs/showcase/parcel-switchyard'
+        recorded = json.loads((case / 'validation.json').read_text())['additive_web_2026_10_18']['headless_checks']
+        self.assertEqual(recorded, len(provenance['native_tests']['checks']))
+        self.assertEqual(recorded, len(provenance['exported_pack_reopened_tests']['checks']))
+        self.assertIn(str(recorded) + ' headless regressions', (case / 'README.md').read_text())
+
     def test_no_state_injection_in_acceptance(self):
         tests = (ROOT / 'scripts/godot_web/parcel-switchyard/browser_test.py').read_text()
         self.assertNotIn('showcaseCommand', tests)

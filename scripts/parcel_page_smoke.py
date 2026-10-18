@@ -11,6 +11,18 @@ import threading
 from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright, expect
 
+
+def select_parcel_filters(page):
+    # These controls live inside the gallery's initially closed native details.
+    disclosure = page.locator('#filter-disclosure')
+    disclosure.locator('summary').click()
+    expect(disclosure).to_have_attribute('open', '')
+    for group, value in [('software', 'Godot'), ('capability', '交互')]:
+        button = page.locator('[data-filter="%s"] [data-value="%s"]' % (group, value))
+        button.click()
+        expect(button).to_have_attribute('aria-pressed', 'true')
+
+
 p = argparse.ArgumentParser()
 p.add_argument('--site', type=Path, required=True)
 p.add_argument('--output', type=Path, required=True)
@@ -34,8 +46,7 @@ try:
                 page.goto(origin + '/' + prefix, wait_until='networkidle')
                 page.locator('#search').fill('Parcel Switchyard')
                 expect(page.locator('.case-card:visible')).to_have_count(1)
-                page.locator('[data-filter="software"] [data-value="Godot"]').click()
-                page.locator('[data-filter="capability"] [data-value="交互"]').click()
+                select_parcel_filters(page)
                 expect(page.locator('.case-card:visible')).to_have_count(1)
                 page.locator('.case-card:visible a').first.click()
                 expect(page.locator('h1')).to_contain_text('Parcel Switchyard')

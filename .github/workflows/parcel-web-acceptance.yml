@@ -52,14 +52,14 @@ jobs:
         run: |
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
           python -m playwright install --with-deps chromium
-      - name: Real desktop and touch gameplay, bilingual loading and generated iframe flows
-        env:
-          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: python scripts/godot_web/parcel-switchyard/browser_test.py --site _site --output "$RUNNER_TEMP/parcel-evidence/browser" --expected-head "$EXPECTED_HEAD_SHA" --require-integration
       - name: Real original film controls, source downloads and bilingual case navigation
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python scripts/parcel_page_smoke.py --site _site --output "$RUNNER_TEMP/parcel-evidence/pages"
+      - name: Real desktop and touch gameplay, bilingual loading and generated iframe flows
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/godot_web/parcel-switchyard/browser_test.py --site _site --output "$RUNNER_TEMP/parcel-evidence/browser" --expected-head "$EXPECTED_HEAD_SHA" --require-integration
       - name: Retain exact-head receipts, screenshots and actual interaction movies
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

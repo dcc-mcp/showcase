@@ -198,7 +198,7 @@
     "original_commit": "943ee722deeec46d64890370fd813498eeebb01c",
     "provenance": "../../../play/parcel-switchyard/export-provenance.json",
     "native_source_byte_identical": true,
-    "headless_checks": 116,
+    "headless_checks": 118,
     "standard_export": "passed",
     "browser_acceptance": "separate exact-head CI artifact; not inferred from this export or historical desktop checks",
     "physical_device": "not-tested",
