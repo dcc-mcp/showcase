@@ -1,0 +1,6 @@
+# Official PyPI Linux x86_64 / CPython 3.12 wheels, acquired 2026-10-18.
+dcc-mcp-core==0.20.42 --hash=sha256:0d387ee517c41ee19c0179e3bc15df35106ccfaac8c5c0f2a87eaa3490d9ecea
+dcc-mcp-godot==0.9.6 --hash=sha256:1aa17201803e800638033e2581002e5d01d00c6ac772d6b54688bf2a1cc384dc
+dcc-mcp-server==0.20.45 --hash=sha256:36a24695ebdb28db5575da94a052286e09390bad33db707d9d3e4fad386c9f48
+pillow==13.0.0 --hash=sha256:42d63be3af4f9b951b199b0a9d23365d37ab14687e6d77b74940432c8515c4ca
+websockets==17.2 --hash=sha256:6627b913b8586b1c06db9516b31dd0dfbc621de3bb9312616d92a7e44f268a5b

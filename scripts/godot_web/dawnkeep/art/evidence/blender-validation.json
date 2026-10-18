@@ -1,0 +1,124 @@
+[
+  {
+    "character": "Knight",
+    "clip": "Idle_A",
+    "action_names": [
+      "Death_A_Rig_Medium",
+      "Hit_A_Rig_Medium",
+      "Idle_A_Rig_Medium",
+      "Melee_1H_Attack_Chop_Rig_Medium",
+      "Melee_1H_Attack_Slice_Diagonal_Rig_Medium",
+      "Melee_Blocking_Rig_Medium",
+      "Running_A_Rig_Medium",
+      "Walking_A_Rig_Medium"
+    ],
+    "bones": 23,
+    "bounds": [
+      [
+        -0.795962393283844,
+        -1.4395323991775513,
+        -0.0010994247859343886
+      ],
+      [
+        0.6270946264266968,
+        0.5245862603187561,
+        2.52292537689209
+      ]
+    ],
+    "render": "Knight-Idle_A.png"
+  },
+  {
+    "character": "Knight",
+    "clip": "Melee_1H_Attack_Chop",
+    "action_names": [
+      "Death_A_Rig_Medium",
+      "Hit_A_Rig_Medium",
+      "Idle_A_Rig_Medium",
+      "Melee_1H_Attack_Chop_Rig_Medium",
+      "Melee_1H_Attack_Slice_Diagonal_Rig_Medium",
+      "Melee_Blocking_Rig_Medium",
+      "Running_A_Rig_Medium",
+      "Walking_A_Rig_Medium"
+    ],
+    "bones": 23,
+    "bounds": [
+      [
+        -0.7211180329322815,
+        -0.49244436621665955,
+        -0.004240563604980707
+      ],
+      [
+        0.7296061515808105,
+        0.8401472568511963,
+        2.543287515640259
+      ]
+    ],
+    "render": "Knight-Melee_1H_Attack_Chop.png"
+  },
+  {
+    "character": "Skeleton_Warrior",
+    "clip": "Skeletons_Walking",
+    "action_names": [
+      "Death_A_Rig_Medium",
+      "Hit_A_Rig_Medium",
+      "Idle_A_Rig_Medium",
+      "Melee_1H_Attack_Chop_Rig_Medium",
+      "Melee_1H_Attack_Slice_Diagonal_Rig_Medium",
+      "Melee_Blocking_Rig_Medium",
+      "Running_A_Rig_Medium",
+      "Skeletons_Death_Rig_Medium",
+      "Skeletons_Idle_Rig_Medium",
+      "Skeletons_Spawn_Ground_Rig_Medium",
+      "Skeletons_Walking_Rig_Medium",
+      "Walking_A_Rig_Medium"
+    ],
+    "bones": 23,
+    "bounds": [
+      [
+        -0.90601646900177,
+        -1.1855950355529785,
+        -0.0010592654580250382
+      ],
+      [
+        0.8070142269134521,
+        0.3114630877971649,
+        2.587876081466675
+      ]
+    ],
+    "render": "Skeleton_Warrior-Skeletons_Walking.png"
+  },
+  {
+    "character": "Skeleton_Mage",
+    "clip": "Ranged_Magic_Shoot",
+    "action_names": [
+      "Death_A_Rig_Medium",
+      "Hit_A_Rig_Medium",
+      "Idle_A_Rig_Medium",
+      "Melee_1H_Attack_Chop_Rig_Medium",
+      "Melee_1H_Attack_Slice_Diagonal_Rig_Medium",
+      "Melee_Blocking_Rig_Medium",
+      "Ranged_Magic_Shoot_Rig_Medium",
+      "Ranged_Magic_Spellcasting_Rig_Medium",
+      "Running_A_Rig_Medium",
+      "Skeletons_Death_Rig_Medium",
+      "Skeletons_Idle_Rig_Medium",
+      "Skeletons_Spawn_Ground_Rig_Medium",
+      "Skeletons_Walking_Rig_Medium",
+      "Walking_A_Rig_Medium"
+    ],
+    "bones": 23,
+    "bounds": [
+      [
+        -0.9158192276954651,
+        -0.9450900554656982,
+        -0.00011264561180723831
+      ],
+      [
+        0.882129967212677,
+        0.8079680800437927,
+        2.6003737449645996
+      ]
+    ],
+    "render": "Skeleton_Mage-Ranged_Magic_Shoot.png"
+  }
+]

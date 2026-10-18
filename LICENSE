@@ -63,3 +63,13 @@ including scripts/godot_web/tidal-sanctuary/ci/, which remain under MIT. The
 Kenney-derived assets retain CC0 1.0 Universal, and the subset font retains the
 SIL Open Font License; their upstream notices and rights are unchanged. This
 exclusion does not change the scope of any other case's recorded rights.
+
+Dawnkeep original game exclusion
+
+The original gameplay, game scene/script/content, interface, visual design,
+authored artwork, generated feedback sound, production recipes and resulting
+media in scripts/godot_web/dawnkeep/ are excluded from the MIT grant above and
+retain the rights recorded in scripts/godot_web/dawnkeep/LICENSES.md. Shared
+acceptance/tooling adaptations retain their existing notices. Credited upstream
+CC0 model/music assets, OFL font and Godot runtime keep their original licenses.
+This exclusion does not change any other case's rights.

@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""Real Chromium clicks/keys/emulated touch against the official exported Godot."""
+from __future__ import annotations
+import argparse
+import os
+import subprocess
+import threading
+import time
+from functools import partial
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from common import check_engine_log, isolated_output, receipts, sha256, stop_process, write_json
+from interaction import InputPlan
+from capture_native import image_stats
+from media import inspect_audio, inspect_video
+from playwright.sync_api import sync_playwright
+
+
+class QuietHandler(SimpleHTTPRequestHandler):
+    def log_message(self,*args):pass
+
+
+BROWSER_ARGS=['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-dev-shm-usage']
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--site',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--full',action='store_true');p.add_argument('--chromium',help='Optional explicit existing Chromium executable')
+    args=p.parse_args();out=isolated_output(args.output,args.site)
+    server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(args.site.resolve())))
+    threading.Thread(target=server.serve_forever,daemon=True).start();url=f'http://127.0.0.1:{server.server_port}/index.html'
+    report={'schema':1,'passed':False,'mode':'full' if args.full else 'preview','engine':'actual official Godot Web export',
+            'pck_sha256':sha256(args.site/'index.pck'),'viewports':[],
+            'limitations':['Portrait touch is Chromium device emulation, not a physical phone.','Numerical audio checks do not replace listening.','No deployed-site claim.']}
+    try:
+        with sync_playwright() as pw:
+            options={'headless':True,'args':BROWSER_ARGS,'ignore_default_args':['--mute-audio']}
+            if args.chromium:options['executable_path']=args.chromium
+            browser=pw.chromium.launch(**options);report['browser_version']=browser.version
+            try:
+                for width,height,mobile in ((1280,720,False),(390,844,True)):
+                    label='portrait' if mobile else 'desktop';directory=out/label;directory.mkdir()
+                    result={'name':label,'passed':False,'checks':[],'touch_emulation':mobile};report['viewports'].append(result)
+                    console=[];failures=[];recorder=None;page=None;context=None;video=None
+                    try:
+                        context=pw_context=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,
+                            is_mobile=mobile,has_touch=mobile,**({'record_video_dir':str(directory/'video'),'record_video_size':{'width':width,'height':height}} if args.full else {}))
+                        page=context.new_page();page.on('console',lambda msg:console.append(msg.text));page.on('pageerror',lambda error:failures.append(str(error)))
+                        def wait_line(prefix,start=0,seconds=120):
+                            deadline=time.monotonic()+seconds
+                            while time.monotonic()<deadline:
+                                if page.is_closed():raise RuntimeError('Actual browser page closed early')
+                                if failures:raise RuntimeError('Browser JavaScript error: '+str(failures))
+                                values=receipts('\n'.join(console[start:]),prefix)
+                                if values:return values[-1]
+                                page.wait_for_timeout(100)
+                            raise TimeoutError('No actual '+prefix+' receipt')
+                        page.goto(url,wait_until='domcontentloaded');wait_line('DAWNKEEP_FRAME_READY');wait_line('DAWNKEEP_STATE')
+                        def observe():
+                            if page.is_closed():raise RuntimeError('Actual browser page closed')
+                            if failures:raise RuntimeError('Browser JavaScript failure: '+str(failures))
+                            check_engine_log('\n'.join(console));values=receipts('\n'.join(console))
+                            if not values:raise ValueError('No actual runtime state')
+                            return values[-1]
+                        def click(x,y):
+                            if mobile:page.touchscreen.tap(x,y)
+                            else:page.mouse.click(x,y)
+                            result.setdefault('events',[]).append({'type':'touchscreen.tap' if mobile else 'mouse.click','x':x,'y':y})
+                        def key(name,down):
+                            (page.keyboard.down if down else page.keyboard.up)(name)
+                            result.setdefault('events',[]).append({'type':'keyboard.down' if down else 'keyboard.up','key':name})
+                        def screenshot(name):
+                            path=directory/(name+'.png');page.screenshot(path=str(path),timeout=45000)
+                            result.setdefault('screenshots',[]).append({'name':path.name,**image_stats(path),'state':observe()})
+                        pause=lambda seconds:page.wait_for_timeout(seconds*1000)
+                        plan=InputPlan(observe,click,key,pause,(width,height),screenshot,result)
+                        plan.gate(touch=mobile);write_json(directory/'browser.json',result)
+                        # Browser gesture and bus signal are read-only evidence.
+                        music=observe().get('music',{})
+                        result['music_after_real_gesture']=music
+                        if args.full:
+                            if not music.get('unlocked') or not music.get('playing') or music.get('muted'):
+                                raise RuntimeError('Music did not unlock/play after actual user gesture')
+                            recorder=subprocess.Popen(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-f','pulse','-i','default','-c:a','pcm_s16le',str(directory/'runtime-audio.wav')])
+                            plan.combat();stop_process(recorder);recorder=None
+                            result['captured_audio']=inspect_audio(directory/'runtime-audio.wav')
+                        def shell_click(selector):
+                            locator=page.locator(selector)
+                            (locator.tap if mobile else locator.click)()
+                        # Real fullscreen click must report a browser fullscreen transition.
+                        boundary=len(console);shell_click('#dawnkeep-web-fullscreen')
+                        event=wait_line('DAWNKEEP_WEB_FULLSCREEN',boundary,15)
+                        if event.get('active') is not True or event.get('trusted') is not True:raise RuntimeError('Actual fullscreen did not engage')
+                        shell_click('#dawnkeep-web-fullscreen')
+                        boundary=len(console);shell_click('#dawnkeep-web-quit');event=wait_line('DAWNKEEP_WEB_EXIT',boundary,30)
+                        if event.get('ok') is not True or event.get('code')!=0:raise RuntimeError('Official Engine.requestQuit/onExit path failed')
+                        page.screenshot(path=str(directory/'engine-exited.png'))
+                        boundary=len(console);shell_click('#dawnkeep-web-restart');wait_line('DAWNKEEP_FRAME_READY',boundary)
+                        result['lifecycle']={'fullscreen':True,'actual_engine_quit':True,'fresh_engine_restart':True}
+                        # Fail an actual required payload once; visible retry starts a fresh load.
+                        failed_once=[False]
+                        def block_pack(route):
+                            if not failed_once[0]:failed_once[0]=True;route.abort('failed')
+                            else:route.continue_()
+                        page.route('**/index.pck',block_pack)
+                        boundary=len(console);page.reload(wait_until='domcontentloaded');wait_line('DAWNKEEP_WEB_LOAD_ERROR',boundary)
+                        page.screenshot(path=str(directory/'loading-retry.png'))
+                        page.unroute('**/index.pck',block_pack);boundary=len(console)
+                        shell_click('#dawnkeep-web-retry');wait_line('DAWNKEEP_FRAME_READY',boundary)
+                        result['lifecycle']['loading_retry']=failed_once[0]
+                        check_engine_log('\n'.join(console));result['passed']=True
+                        if page.video:video=page.video
+                    except Exception as error:
+                        result['blocker']=str(error)
+                        if page and not page.is_closed():
+                            try:page.screenshot(path=str(directory/'failure.png'),timeout=15000)
+                            except Exception:pass
+                        raise
+                    finally:
+                        stop_process(recorder)
+                        if context:context.close()
+                        if video:
+                            try:result['movie']=inspect_video(video.path())
+                            except Exception as error:result['movie_error']=str(error);result['passed']=False
+                        (directory/'console.log').write_text('\n'.join(console)+'\n');write_json(directory/'browser.json',result)
+                        write_json(out/'browser.json',report)
+                report['passed']=all(item['passed'] for item in report['viewports'])
+                if not report['passed']:raise RuntimeError('One or more actual viewport checks failed')
+            finally:browser.close()
+    except Exception as error:report['blocker']=str(error);raise
+    finally:server.shutdown();write_json(out/'browser.json',report)
+
+
+if __name__=='__main__':main()

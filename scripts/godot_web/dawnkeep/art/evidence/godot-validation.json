@@ -1,0 +1,158 @@
+{
+  "failures": 0,
+  "godot_version": {
+    "build": "official",
+    "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+    "hex": 263683,
+    "major": 4,
+    "minor": 6,
+    "patch": 3,
+    "status": "stable",
+    "string": "4.6.3-stable (official)",
+    "timestamp": 0
+  },
+  "results": [
+    {
+      "animations": [
+        "Death_A",
+        "Hit_A",
+        "Idle_A",
+        "Melee_1H_Attack_Chop",
+        "Melee_1H_Attack_Slice_Diagonal",
+        "Melee_Blocking",
+        "Running_A",
+        "Walking_A"
+      ],
+      "children": 2,
+      "name": "Knight"
+    },
+    {
+      "animations": [
+        "Death_A",
+        "Hit_A",
+        "Idle_A",
+        "Melee_1H_Attack_Chop",
+        "Melee_1H_Attack_Slice_Diagonal",
+        "Melee_Blocking",
+        "Running_A",
+        "Walking_A"
+      ],
+      "children": 2,
+      "name": "Knight_Unarmed"
+    },
+    {
+      "animations": [
+        "Death_A",
+        "Hit_A",
+        "Idle_A",
+        "Melee_1H_Attack_Chop",
+        "Melee_1H_Attack_Slice_Diagonal",
+        "Melee_Blocking",
+        "Running_A",
+        "Skeletons_Death",
+        "Skeletons_Idle",
+        "Skeletons_Spawn_Ground",
+        "Skeletons_Walking",
+        "Walking_A"
+      ],
+      "children": 2,
+      "name": "Skeleton_Minion"
+    },
+    {
+      "animations": [
+        "Death_A",
+        "Hit_A",
+        "Idle_A",
+        "Melee_1H_Attack_Chop",
+        "Melee_1H_Attack_Slice_Diagonal",
+        "Melee_Blocking",
+        "Running_A",
+        "Skeletons_Death",
+        "Skeletons_Idle",
+        "Skeletons_Spawn_Ground",
+        "Skeletons_Walking",
+        "Walking_A"
+      ],
+      "children": 2,
+      "name": "Skeleton_Warrior"
+    },
+    {
+      "animations": [
+        "Death_A",
+        "Hit_A",
+        "Idle_A",
+        "Melee_1H_Attack_Chop",
+        "Melee_1H_Attack_Slice_Diagonal",
+        "Melee_Blocking",
+        "Running_A",
+        "Skeletons_Death",
+        "Skeletons_Idle",
+        "Skeletons_Spawn_Ground",
+        "Skeletons_Walking",
+        "Walking_A"
+      ],
+      "children": 2,
+      "name": "Skeleton_Rogue"
+    },
+    {
+      "animations": [
+        "Death_A",
+        "Hit_A",
+        "Idle_A",
+        "Melee_1H_Attack_Chop",
+        "Melee_1H_Attack_Slice_Diagonal",
+        "Melee_Blocking",
+        "Ranged_Magic_Shoot",
+        "Ranged_Magic_Spellcasting",
+        "Running_A",
+        "Skeletons_Death",
+        "Skeletons_Idle",
+        "Skeletons_Spawn_Ground",
+        "Skeletons_Walking",
+        "Walking_A"
+      ],
+      "children": 2,
+      "name": "Skeleton_Mage"
+    },
+    {
+      "meshes": 1,
+      "name": "Tree_1_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Tree_2_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Tree_3_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Tree_4_B_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Bush_1_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Bush_2_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Rock_1_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Rock_2_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Grass_1_A_Color1"
+    },
+    {
+      "meshes": 1,
+      "name": "Grass_2_A_Color1"
+    }
+  ]
+}
