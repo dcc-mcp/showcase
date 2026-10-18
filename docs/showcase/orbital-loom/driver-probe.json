@@ -1,0 +1,45 @@
+{
+  "scope": "Real isolated MCP regression probe on Blender4.5.14 and official adapter0.2.16/Core0.20.42; not a modification of the rendered native scene.",
+  "failure": {
+    "tool": "blender_rigging__set_driver",
+    "arguments": {
+      "object_name": "Typed Z Driver Probe",
+      "data_path": "rotation_euler.z",
+      "expression": "frame/10"
+    },
+    "success": false,
+    "error_type": "ValueError",
+    "error": "bpy_struct.driver_add(): path includes index, must be a separate argument"
+  },
+  "vector_fallback": {
+    "tool": "blender_rigging__set_driver",
+    "arguments": {
+      "object_name": "Typed Z Driver Probe",
+      "data_path": "rotation_euler",
+      "expression": "frame/10"
+    },
+    "reported_success": true,
+    "evaluated_frame": 10,
+    "rotation": [
+      1,
+      0,
+      0
+    ],
+    "created_drivers": [
+      {
+        "array_index": 0,
+        "expression": "frame/10"
+      },
+      {
+        "array_index": 1,
+        "expression": "0.0"
+      },
+      {
+        "array_index": 2,
+        "expression": "0.0"
+      }
+    ]
+  },
+  "schema_limitation": "No array_index input; description offers component-path syntax such as location.x but native driver_add requires the component index separately.",
+  "safe_production_route": "Official scripting escape hatch with driver_add(property,index), explicitly disclosed."
+}
