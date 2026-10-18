@@ -1,0 +1,12 @@
+{
+  "source": "https://github.com/notofonts/noto-cjk",
+  "local_package": "fonts-noto-cjk",
+  "original_file": "NotoSansCJK-Regular.ttc",
+  "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "collection_index": 2,
+  "original_family": "Noto Sans CJK SC",
+  "subset_family": "Parcel Interface",
+  "subset_sha256": "0f92fe721c55a9ba2cb6441d2fa30980afc4227770f0fd0a00e1fa59f29f53b2",
+  "license": "SIL Open Font License 1.1; full notices in FONT-LICENSE.txt",
+  "scope": "Latin and Simplified Chinese glyphs used by the desktop and portrait Web adapter; original native assets remain unchanged."
+}

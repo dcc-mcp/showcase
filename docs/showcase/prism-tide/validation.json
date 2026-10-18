@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "godot": "4.6.3",
+    "adapter": "0.9.6",
+    "core_cli": "0.20.42",
+    "renderer": "Compatibility OpenGL / Mesa software rendering",
+    "capture": "1280x800 / 450 frames / 30 fps / 15 seconds",
+    "source_commit": "f7b0b52aac4dc607c1b1bb0826a18243930c0f0f"
+  },
+  "checks": [
+    {
+      "name": "actual_mcp_authoring",
+      "result": "pass",
+      "observed": {
+        "successful_calls": 10,
+        "sanitized_evidence": "evidence/mcp-calls.json"
+      }
+    },
+    {
+      "name": "three_level_logic",
+      "result": "pass",
+      "observed": {
+        "checks": {
+          "level_1_reset": true,
+          "level_1_restored": true,
+          "level_1_solution": true,
+          "level_1_starts_unsolved": true,
+          "level_1_wrong_turn": true,
+          "level_2_closed_shutter": true,
+          "level_2_reset": true,
+          "level_2_restored": true,
+          "level_2_solution": true,
+          "level_2_starts_unsolved": true,
+          "level_2_wrong_turn": true,
+          "level_3_closed_shutter": true,
+          "level_3_reset": true,
+          "level_3_restored": true,
+          "level_3_solution": true,
+          "level_3_starts_unsolved": true,
+          "level_3_wrong_turn": true
+        },
+        "passed": true
+      }
+    },
+    {
+      "name": "native_resource_pack_reopen",
+      "result": "pass",
+      "observed": {
+        "checks": {
+          "level_1_reset": true,
+          "level_1_restored": true,
+          "level_1_solution": true,
+          "level_1_starts_unsolved": true,
+          "level_1_wrong_turn": true,
+          "level_2_closed_shutter": true,
+          "level_2_reset": true,
+          "level_2_restored": true,
+          "level_2_solution": true,
+          "level_2_starts_unsolved": true,
+          "level_2_wrong_turn": true,
+          "level_3_closed_shutter": true,
+          "level_3_reset": true,
+          "level_3_restored": true,
+          "level_3_solution": true,
+          "level_3_starts_unsolved": true,
+          "level_3_wrong_turn": true
+        },
+        "passed": true
+      }
+    },
+    {
+      "name": "actual_keyboard_mouse",
+      "result": "pass",
+      "observed": {
+        "level_1_real_input_win": true,
+        "level_2_real_input_win": true,
+        "level_3_real_input_win": true,
+        "keyboard_selection": true,
+        "closed_shutter_blocks": true,
+        "wrong_rotation_unsolved": true,
+        "repeated_keyboard_reset": true,
+        "repeated_mouse_reset": true,
+        "final_reset_clear": true
+      }
+    },
+    {
+      "name": "native_visual_review",
+      "result": "pass",
+      "observed": "Final hero, level-3 actual-input victory, video samples and 864x540 capture inspected. Independent review corrected reflection terminology before final recapture. No clipped controls or overlapping labels."
+    },
+    {
+      "name": "source_archive",
+      "result": "pass",
+      "observed": {
+        "members": 8,
+        "integrity": true,
+        "native_script_exact": true
+      }
+    }
+  ],
+  "not_claimed": [
+    "No web, touch or mobile gameplay acceptance.",
+    "Small-window fit does not establish phone text readability.",
+    "Resource pack requires compatible Godot; no standalone executable bundled.",
+    "Artwork is procedural GDScript drawing, not separate editable meshes.",
+    "CI native pixels are not an MCP render response.",
+    "Demo changes state programmatically; input evidence is a separate OS keyboard/mouse test.",
+    "Model and reasoning effort Unknown."
+  ]
+}

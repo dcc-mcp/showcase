@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-18",
+  "scope": "Additive responsive Web presentation of the existing Parcel Switchyard native game; no new artwork concept or external game assets.",
+  "contract": "dcc-mcp-production-reuse/v1",
+  "core_source_commit": "8f52b1844fc4eaa06036a42d8c4848faa67a6212",
+  "core_source_path": "crates/dcc-mcp-gateway/src/gateway/native_resources/agent_workflows.md",
+  "discovery": [
+    {"source": "Existing Showcase Godot Web pipeline", "query": "scripts/godot_web export, projects, shell tap/pan, runtime rights", "result": "Reuse pinned official 4.6.3 runtime and export-template checks; preserve existing native source and rules."},
+    {"source": "Godot official documentation", "url": "https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_web.html", "query": "single-thread Web export, Compatibility renderer, canvas sizing, mobile", "result": "Use standard single-thread Web export, no PWA or cross-origin-isolation workaround, explicit shell canvas size."},
+    {"source": "Godot official Asset Library", "url": "https://godotengine.org/asset-library/asset/1868", "query": "Godot Touch Input Manager Demo Godot 4.x", "candidate": "Godot Touch Input Manager Demo v2.1.2", "decision": "Not acquired. A general multi-touch manager adds an unnecessary dependency to seven existing simple tap actions; no new plugin API is needed."},
+    {"source": "Godot official Asset Store", "url": "https://store.godotengine.org/asset/withcenter/gohud/", "query": "responsive UI Godot 4 touch", "candidate": "Gohud", "decision": "Not acquired. The listing states Godot 4.7+ support; the export is pinned to 4.6.3."},
+    {"source": "DCC-MCP marketplace public lookup", "url": "https://github.com/dcc-mcp/dcc-mcp-marketplace", "result": "Lookup unavailable through research tool. No marketplace acquisition, installation or MCP production validation is claimed."}
+  ],
+  "selected": [
+    {"candidate": "Existing Parcel Switchyard native source", "version": "943ee722deeec46d64890370fd813498eeebb01c", "reason": "Preserves the case identity and all original mechanics. Additive inheritance and smaller portrait drawing bridge only the missing responsive presentation."},
+    {"candidate": "Official Godot standard Web export", "version": "4.6.3.stable.official.7d41c59c4", "reason": "Existing repository dependency and supported public export interface. Exact editor, release/debug template and runtime hashes verified by exporter.", "rights": "Existing MIT and complete third-party notices retained; original case rights are not expanded."}
+  ],
+  "boundaries": ["Direct GDScript/CLI authoring, not new typed MCP coverage", "No third-party art, audio or plugin acquired; the added Chinese interface reuses an installed official Noto Sans CJK font under OFL-1.1, with a renamed subset, full license and pinned source/subset hashes", "No old evidence relabelled as a new run", "Real browser and visual acceptance must be established separately"]
+}

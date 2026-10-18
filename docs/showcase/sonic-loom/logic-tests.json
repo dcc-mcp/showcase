@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "name": "step toggles on",
+      "pass": true
+    },
+    {
+      "name": "repeated step toggles off",
+      "pass": true
+    },
+    {
+      "name": "upper tempo bound",
+      "pass": true
+    },
+    {
+      "name": "lower tempo bound",
+      "pass": true
+    },
+    {
+      "name": "save and reopen edited pattern",
+      "pass": true
+    },
+    {
+      "name": "play starts first step",
+      "pass": true
+    },
+    {
+      "name": "pause preserves step",
+      "pass": true
+    },
+    {
+      "name": "reset restores defaults",
+      "pass": true
+    },
+    {
+      "name": "voice 0 has nonzero PCM",
+      "pass": true,
+      "peak": 0.848715722560883,
+      "samples": 21168
+    },
+    {
+      "name": "voice 1 has nonzero PCM",
+      "pass": true,
+      "peak": 0.520991623401642,
+      "samples": 10584
+    },
+    {
+      "name": "voice 2 has nonzero PCM",
+      "pass": true,
+      "peak": 0.236068367958069,
+      "samples": 3969
+    },
+    {
+      "name": "voice 3 has nonzero PCM",
+      "pass": true,
+      "peak": 0.370319485664368,
+      "samples": 31752
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,369 @@
+extends Node2D
+## Parcel Switchyard. All artwork is drawn locally; no external assets.
+const INK := Color("142e38")
+const PAPER := Color("f2eedf")
+const MUTED := Color("9aafa9")
+const CORAL := Color("f18f76")
+const TEAL := Color("70c9b2")
+const GOLD := Color("e7c868")
+const ROUTE_COLORS := [CORAL, TEAL, GOLD]
+const ROUTE_NAMES := ["HARBOR", "GARDEN", "MARKET"]
+const ORDERS := [1, 0, 2, 1, 2, 0, 0, 2, 1]
+const HUB := Vector2(467, 376)
+const ENDPOINTS := [Vector2(826, 261), Vector2(826, 376), Vector2(826, 491)]
+var font: Font = ThemeDB.fallback_font
+var selected := 1
+var sent := 0
+var delivered := 0
+var missed := 0
+var streak := 0
+var best := 0
+var elapsed := 0.0
+var auto_time := 0.0
+var auto_send := false
+var parcels: Array[Dictionary] = []
+var sparks: Array[Dictionary] = []
+var notice := "All tracks clear. Let's make a good delivery."
+var notice_time := 0.0
+var demo_mode := false
+var observe_input := false
+var capture_path := ""
+var send_rect := Rect2(961, 509, 258, 50)
+var auto_rect := Rect2(1049, 108, 183, 32)
+
+func _ready() -> void:
+	RenderingServer.set_default_clear_color(PAPER)
+	get_viewport().size_changed.connect(_fit)
+	_fit()
+	var args := OS.get_cmdline_user_args()
+	if "--test" in args:
+		get_tree().quit(0 if _run_tests() else 1)
+		return
+	observe_input = "--observe-input" in args
+	demo_mode = "--demo" in args
+	if demo_mode:
+		selected = 1
+		_dispatch()
+		parcels[0]["progress"] = 0.44
+		selected = 0
+		_dispatch()
+		parcels[1]["progress"] = 0.14
+		selected = 2
+		auto_send = true
+	for argument in args:
+		if argument.begins_with("--capture-path="):
+			capture_path = argument.trim_prefix("--capture-path=")
+		if argument.begins_with("--screenshot="):
+			_capture(argument.trim_prefix("--screenshot="))
+
+func _fit() -> void:
+	var size := get_viewport_rect().size
+	var ratio := minf(size.x / 1280.0, size.y / 720.0)
+	scale = Vector2.ONE * ratio
+	position = (size - Vector2(1280, 720) * ratio) * 0.5
+
+func _capture(path: String) -> void:
+	await RenderingServer.frame_post_draw
+	var error := get_viewport().get_texture().get_image().save_png(path)
+	print("PARCEL_SCREENSHOT ", path, " status=", error)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		match event.keycode:
+			KEY_1: selected = 0
+			KEY_2: selected = 1
+			KEY_3: selected = 2
+			KEY_SPACE: _dispatch()
+			KEY_A: auto_send = not auto_send
+			KEY_R: _reset()
+			KEY_F12:
+				if not capture_path.is_empty(): _capture(capture_path)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var cursor := get_local_mouse_position()
+		for i in range(3):
+			if Rect2(961, 287 + i * 66, 258, 56).has_point(cursor):
+				selected = i
+		if send_rect.has_point(cursor): _dispatch()
+		if auto_rect.has_point(cursor): auto_send = not auto_send
+	if observe_input and ((event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed)):
+		_report_state("input")
+	queue_redraw()
+
+func _report_state(kind: String) -> void:
+	print("PARCEL_RUNTIME_STATE " + JSON.stringify({"event": kind, "selected": selected, "auto": auto_send, "sent": sent, "delivered": delivered, "missed": missed, "active": parcels.size()}))
+
+func _process(delta: float) -> void:
+	_advance(minf(delta, 0.1))
+	queue_redraw()
+
+func _advance(delta: float) -> void:
+	elapsed += delta
+	notice_time = maxf(0.0, notice_time - delta)
+	if auto_send:
+		auto_time += delta
+		if auto_time > 1.55:
+			auto_time = 0.0
+			if demo_mode: selected = _next_target()
+			_dispatch()
+	for index in range(parcels.size() - 1, -1, -1):
+		var parcel: Dictionary = parcels[index]
+		parcel["progress"] = float(parcel["progress"]) + delta / 3.5
+		if float(parcel["progress"]) >= 1.0:
+			_deliver(int(parcel["target"]), int(parcel["route"]))
+			parcels.remove_at(index)
+	for index in range(sparks.size() - 1, -1, -1):
+		sparks[index]["life"] = float(sparks[index]["life"]) - delta
+		if float(sparks[index]["life"]) <= 0.0: sparks.remove_at(index)
+
+func _next_target() -> int:
+	return int(ORDERS[sent % ORDERS.size()])
+
+func _dispatch() -> void:
+	if parcels.size() >= 6:
+		notice = "Busy tracks. Give the next parcel a moment."
+		return
+	parcels.append({"target": _next_target(), "route": selected, "progress": 0.0, "lane": sent % 2})
+	sent += 1
+
+func _deliver(target: int, route: int) -> void:
+	var correct := target == route
+	if correct:
+		delivered += 1
+		streak += 1
+		best = maxi(best, streak)
+		notice = "Nice routing! Parcel delivered to " + ROUTE_NAMES[route].capitalize() + "."
+	else:
+		missed += 1
+		streak = 0
+		notice = "Wrong stop. Match the parcel's label to its destination."
+	notice_time = 2.0
+	sparks.append({"at": ENDPOINTS[route], "life": 0.75, "correct": correct})
+	if observe_input: _report_state("delivery")
+
+func _reset() -> void:
+	selected = 1
+	sent = 0
+	delivered = 0
+	missed = 0
+	streak = 0
+	best = 0
+	auto_time = 0.0
+	auto_send = false
+	demo_mode = false
+	parcels.clear()
+	sparks.clear()
+	notice = "Fresh shift. Pick a track, then send your first parcel."
+	notice_time = 0.0
+
+func _run_tests() -> bool:
+	var checks: Array[Dictionary] = []
+	_reset()
+	for target in [1, 0, 2]:
+		selected = target
+		_dispatch()
+		_advance(4.0)
+	checks.append({"name": "three_destinations", "pass": delivered == 3 and missed == 0 and streak == 3 and parcels.is_empty(), "delivered": delivered, "missed": missed, "streak": streak})
+	selected = 0
+	_dispatch()
+	_advance(4.0)
+	checks.append({"name": "wrong_route", "pass": missed == 1 and streak == 0, "missed": missed, "streak": streak})
+	_reset()
+	for i in range(8): _dispatch()
+	checks.append({"name": "capacity_boundary", "pass": parcels.size() == 6 and sent == 6, "active": parcels.size(), "sent": sent, "attempts": 8})
+	_reset()
+	for key in [KEY_1, KEY_2, KEY_3]:
+		var event := InputEventKey.new()
+		event.keycode = key
+		event.pressed = true
+		_unhandled_input(event)
+		checks.append({"name": "keyboard_route_" + str(int(key - KEY_1) + 1), "pass": selected == int(key - KEY_1), "selected": selected})
+	var toggle := InputEventKey.new()
+	toggle.keycode = KEY_A
+	toggle.pressed = true
+	_unhandled_input(toggle)
+	checks.append({"name": "auto_enable", "pass": auto_send})
+	_unhandled_input(toggle)
+	checks.append({"name": "auto_disable", "pass": not auto_send})
+	for i in range(3): _reset()
+	checks.append({"name": "repeated_reset", "pass": sent == 0 and delivered == 0 and missed == 0 and parcels.is_empty() and not auto_send and selected == 1 and best == 0, "sent": sent, "delivered": delivered, "missed": missed, "active": parcels.size()})
+	var passed := true
+	for check in checks:
+		if not check["pass"]: passed = false
+	print("PARCEL_TEST_REPORT " + JSON.stringify({"passed": passed, "checks": checks}))
+	return passed
+
+func _rr(rect: Rect2, color: Color, radius: int = 12, border: Color = Color.TRANSPARENT, width: int = 0) -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = color
+	style.set_corner_radius_all(radius)
+	style.border_color = border
+	style.set_border_width_all(width)
+	draw_style_box(style, rect)
+
+func _txt(at: Vector2, value: String, size: int, color: Color = INK) -> void:
+	draw_string(font, at, value, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
+
+func _line(a: Vector2, b: Vector2, color: Color, width: float = 1.0) -> void:
+	draw_line(a, b, color, width, true)
+
+func _path_point(points: PackedVector2Array, fraction: float) -> Vector2:
+	var length := 0.0
+	for i in range(points.size() - 1): length += points[i].distance_to(points[i + 1])
+	var remaining := clampf(fraction, 0.0, 1.0) * length
+	for i in range(points.size() - 1):
+		var segment := points[i].distance_to(points[i + 1])
+		if remaining <= segment: return points[i].lerp(points[i + 1], remaining / segment)
+		remaining -= segment
+	return points[points.size() - 1]
+
+func _incoming(lane: int) -> PackedVector2Array:
+	var y := 278.0 if lane == 0 else 474.0
+	return PackedVector2Array([Vector2(104, y), Vector2(274, y), Vector2(386, 376), HUB])
+
+func _outgoing(route: int) -> PackedVector2Array:
+	return PackedVector2Array([HUB, Vector2(563, 376), Vector2(681, ENDPOINTS[route].y), ENDPOINTS[route]])
+
+func _belt(points: PackedVector2Array, accent: Color, active: bool = false) -> void:
+	var shadow := PackedVector2Array()
+	for p in points: shadow.append(p + Vector2(0, 7))
+	draw_polyline(shadow, Color("102630"), 40.0, true)
+	draw_polyline(points, Color("52716f") if active else Color("405c60"), 39.0, true)
+	draw_polyline(points, Color("28454d"), 31.0, true)
+	for i in range(27):
+		var fraction := fmod(float(i) / 27.0 + elapsed * 0.027, 1.0)
+		var p := _path_point(points, fraction)
+		var tangent := (_path_point(points, minf(fraction + 0.002, 1.0)) - p).normalized()
+		var normal := Vector2(-tangent.y, tangent.x)
+		_line(p - normal * 11, p + normal * 11, Color("668080") if active else Color("476269"), 2)
+	for i in range(points.size() - 1):
+		var normal := (points[i + 1] - points[i]).normalized().orthogonal()
+		_line(points[i] + normal * 19, points[i + 1] + normal * 19, accent.darkened(0.25), 2)
+
+func _box(at: Vector2, target: int, small: bool = false) -> void:
+	var s := 0.72 if small else 1.0
+	_rr(Rect2(at + Vector2(-20, -12) * s, Vector2(43, 34) * s), Color("102830"), 5)
+	_rr(Rect2(at + Vector2(-21, -19) * s, Vector2(42, 34) * s), Color("bd9870"), 4)
+	_rr(Rect2(at + Vector2(-21, -22) * s, Vector2(42, 31) * s), Color("e1c79f"), 4)
+	draw_rect(Rect2(at + Vector2(-4, -22) * s, Vector2(8, 31) * s), Color("f3dfba"))
+	_rr(Rect2(at + Vector2(3, -14) * s, Vector2(15, 16) * s), ROUTE_COLORS[target], 2)
+	_txt(at + Vector2(6, -2) * s, str(target + 1), int(12 * s), INK)
+	_line(at + Vector2(-17, -7) * s, at + Vector2(-9, -7) * s, Color("96744f"), 2)
+	_line(at + Vector2(-17, -3) * s, at + Vector2(-11, -3) * s, Color("96744f"), 2)
+
+func _draw() -> void:
+	draw_rect(Rect2(0, 0, 1280, 720), PAPER)
+	# A restrained printed-paper texture.
+	for x in range(18, 1280, 20):
+		for y in range(18, 720, 20): draw_circle(Vector2(x, y), 0.7, Color("dedccf"))
+	_rr(Rect2(40, 36, 37, 37), INK, 11)
+	_line(Vector2(49, 62), Vector2(66, 46), TEAL, 3)
+	_line(Vector2(58, 62), Vector2(66, 54), GOLD, 3)
+	_txt(Vector2(91, 51), "SMALL WORKS / INTERACTIVE SERIES", 12)
+	_txt(Vector2(91, 70), "SHIFT 01     •     A LITTLE GAME ABOUT GETTING THERE", 11, Color("60756e"))
+	_txt(Vector2(40, 119), "Parcel Switchyard", 41)
+	_txt(Vector2(432, 116), "A good day starts with the right turn.", 17, Color("60756e"))
+	_rr(auto_rect, INK if auto_send else Color("e3e3d5"), 16)
+	draw_circle(Vector2(1066, 124), 4, TEAL if auto_send else Color("809086"))
+	_txt(Vector2(1079, 129), "AUTO " + ("ON" if auto_send else "OFF") + "   [A]", 13, PAPER if auto_send else INK)
+	# Main industrial diorama.
+	_rr(Rect2(40, 176, 879, 414), Color("d6d3c4"), 23)
+	_rr(Rect2(40, 167, 879, 414), INK, 23)
+	for x in range(65, 904, 26):
+		for y in range(191, 563, 26): draw_circle(Vector2(x, y), 1.0, Color("2d474d"))
+	_txt(Vector2(66, 203), "THE SORTING FLOOR", 12, PAPER)
+	draw_circle(Vector2(625, 198), 3, TEAL)
+	_txt(Vector2(637, 203), "LIVE SHIFT", 11, MUTED)
+	_txt(Vector2(75, 240), "INTAKE  A", 11, MUTED)
+	_txt(Vector2(75, 525), "INTAKE  B", 11, MUTED)
+	for lane in range(2): _belt(_incoming(lane), Color("80998e"), true)
+	for route in range(3): _belt(_outgoing(route), ROUTE_COLORS[route], route == selected)
+	# Supply platforms and idle parcels give the scene a miniature-workshop feel.
+	for lane in range(2):
+		var y := 278 if lane == 0 else 474
+		_rr(Rect2(65, y - 25, 51, 56), Color("102830"), 8)
+		_rr(Rect2(65, y - 30, 51, 52), Color("60756e"), 8)
+		for n in range(4): _line(Vector2(69 + n * 12, y + 16), Vector2(75 + n * 12, y + 10), GOLD.darkened(0.2), 4)
+		_box(Vector2(159 + lane * 38, y), (sent + lane + 1) % 3, true)
+		_box(Vector2(228 - lane * 55, y), (sent + lane + 2) % 3, true)
+	# Switch turntable.
+	draw_circle(HUB + Vector2(0, 6), 43, Color("0b232d"))
+	draw_circle(HUB, 43, Color("75948b"))
+	draw_circle(HUB, 36, Color("233e46"))
+	draw_arc(HUB, 30, 0, TAU, 48, Color("46656a"), 2, true)
+	var direction := (Vector2(1, (selected - 1) * 0.64)).normalized()
+	_line(HUB - direction * 25, HUB + direction * 25, ROUTE_COLORS[selected], 7)
+	draw_circle(HUB, 8, PAPER)
+	draw_circle(HUB, 3, INK)
+	_txt(Vector2(415, 443), "SWITCH 01", 11, MUTED)
+	for route in range(3): _station(route)
+	for parcel in parcels:
+		var fraction := float(parcel["progress"])
+		var point: Vector2
+		if fraction < 0.48: point = _path_point(_incoming(int(parcel["lane"])), fraction / 0.48)
+		else: point = _path_point(_outgoing(int(parcel["route"])), (fraction - 0.48) / 0.52)
+		_box(point, int(parcel["target"]))
+	for spark in sparks:
+		var amount := 1.0 - float(spark["life"]) / 0.75
+		var color: Color = TEAL if bool(spark["correct"]) else CORAL
+		color.a = 1.0 - amount
+		draw_arc(spark["at"], 18 + amount * 40, 0, TAU, 32, color, 3, true)
+	_txt(Vector2(68, 558), "TWO INTAKES", 10, MUTED)
+	_txt(Vector2(378, 558), "ONE SMALL DECISION", 10, MUTED)
+	_txt(Vector2(757, 558), "THREE PLACES", 10, MUTED)
+	_draw_controls()
+	_draw_footer()
+
+func _station(route: int) -> void:
+	var at: Vector2 = ENDPOINTS[route]
+	var color: Color = ROUTE_COLORS[route]
+	_rr(Rect2(at + Vector2(-22, -31), Vector2(76, 64)), Color("0d252e"), 9)
+	_rr(Rect2(at + Vector2(-25, -37), Vector2(76, 64)), color.darkened(0.22), 9)
+	_rr(Rect2(at + Vector2(-25, -37), Vector2(76, 20)), color, 6)
+	_rr(Rect2(at + Vector2(-14, -10), Vector2(53, 33)), Color("18353c"), 3)
+	for i in range(3): _line(at + Vector2(-10, -5 + i * 9), at + Vector2(35, -5 + i * 9), Color("365154"), 2)
+	_txt(at + Vector2(-17, -23), "0" + str(route + 1), 11, INK)
+	draw_circle(at + Vector2(38, -28), 3, PAPER)
+	_txt(at + Vector2(-24, -49), ROUTE_NAMES[route], 12, color)
+
+func _draw_controls() -> void:
+	_rr(Rect2(940, 175, 300, 414), Color("d6d3c4"), 20)
+	_rr(Rect2(940, 167, 300, 414), Color("fcf9ee"), 20)
+	_txt(Vector2(961, 202), "YOU'RE AT THE CONTROLS", 12, Color("6b7d72"))
+	_txt(Vector2(961, 239), "Next parcel", 25)
+	_box(Vector2(1193, 237), _next_target())
+	_txt(Vector2(961, 264), "Label " + str(_next_target() + 1) + "  →  " + ROUTE_NAMES[_next_target()].capitalize(), 14, Color("6b7d72"))
+	for i in range(3):
+		var y := 287 + i * 66
+		var active := i == selected
+		_rr(Rect2(961, y, 258, 56), INK if active else Color("ebece1"), 10)
+		_rr(Rect2(973, y + 12, 32, 32), ROUTE_COLORS[i], 7)
+		_txt(Vector2(984, y + 34), str(i + 1), 17)
+		_txt(Vector2(1019, y + 25), ROUTE_NAMES[i].capitalize(), 17, PAPER if active else INK)
+		_txt(Vector2(1019, y + 44), ["The waterfront", "A greener corner", "The morning market"][i], 11, MUTED if active else Color("6b7d72"))
+		if active:
+			draw_circle(Vector2(1200, y + 28), 7, ROUTE_COLORS[i])
+			draw_circle(Vector2(1200, y + 28), 3, INK)
+	_txt(Vector2(962, 498), "Set the route. Then let it roll.", 12, Color("6b7d72"))
+	_rr(send_rect, TEAL, 10)
+	_txt(Vector2(981, 541), "Send parcel", 18)
+	_rr(Rect2(1135, 523, 69, 22), Color("b3e5cf"), 5)
+	_txt(Vector2(1145, 538), "SPACE", 11)
+
+func _draw_footer() -> void:
+	_rr(Rect2(40, 606, 1200, 77), Color("e3e3d6"), 16)
+	_txt(Vector2(61, 632), "DELIVERED", 10, Color("63786e"))
+	_txt(Vector2(61, 665), "%02d" % delivered, 29)
+	_line(Vector2(179, 623), Vector2(179, 666), Color("c8cdbd"))
+	_txt(Vector2(198, 632), "MISROUTED", 10, Color("63786e"))
+	_txt(Vector2(198, 665), "%02d" % missed, 29)
+	_line(Vector2(322, 623), Vector2(322, 666), Color("c8cdbd"))
+	_txt(Vector2(341, 632), "STREAK", 10, Color("63786e"))
+	_txt(Vector2(341, 665), str(streak) + " ×", 29)
+	_line(Vector2(444, 623), Vector2(444, 666), Color("c8cdbd"))
+	draw_circle(Vector2(467, 630), 4, CORAL if missed > 0 and streak == 0 else Color("4a9a80"))
+	_txt(Vector2(480, 635), "SHIFT NOTES", 10, Color("63786e"))
+	_txt(Vector2(465, 660), notice, 13)
+	_txt(Vector2(1036, 635), "1 / 2 / 3   SELECT", 11, Color("63786e"))
+	_txt(Vector2(1036, 659), "R   FRESH SHIFT", 11, Color("63786e"))
+	_txt(Vector2(43, 704), "TAKE YOUR TIME. EVERY PARCEL HAS A PLACE.", 10, Color("708278"))
+	_txt(Vector2(1107, 704), "MADE TO PLAY  ↗", 10, Color("708278"))

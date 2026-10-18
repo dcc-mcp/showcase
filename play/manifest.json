@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "play/verification-portrait.json",
+      "bytes": 49403,
+      "sha256": "28ba3efdabff8700cd09a8f843e2fd641b4d0d47e5134c75a2e31c47ae1d8f89"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-desktop-edited.png",
+      "bytes": 226872,
+      "sha256": "2f643138d32607f1cbc7bb5fd1dfa80e02f627f18a128517b95094a6b940c1a2"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-desktop-solved.png",
+      "bytes": 217017,
+      "sha256": "dbe619d2995f6a1b90b26264f68f33fbaefdbb42ddac969817440c640133d0e2"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-portrait-canvas.png",
+      "bytes": 45607,
+      "sha256": "0c9e70909ee1e89d3c9045b0775a07228a77627986ee471c48cd8d7fac662515"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-portrait-canvas.png",
+      "bytes": 63997,
+      "sha256": "f59a9b23159e75b095b856412e231382858ee04ab9b9795e389f7c242b7b3786"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-portrait-level3.png",
+      "bytes": 70202,
+      "sha256": "147c0725cbe8366a7d0c34f45598bf3f34842b16efafd653af1b630d8c4059fb"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-en-phone-embedded-viewport.png",
+      "bytes": 57838,
+      "sha256": "02c99c519a50021cbd20630a2c1fb71c715c37c6b9a2b6b65c322482f6ba98c1"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-zh-phone-embedded-viewport.png",
+      "bytes": 60269,
+      "sha256": "a319e5bcfa0c1cd18590d3cca84ab4a49ee5ade2c7670635237a823842378801"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-en-phone-embedded-viewport.png",
+      "bytes": 70430,
+      "sha256": "3674911fedac297bb7cf15f9be47219aef7f9cb8451286085cc70825ce7c62fd"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-zh-phone-embedded-viewport.png",
+      "bytes": 89032,
+      "sha256": "29f0cc9797b035911be0e2b52b18ebb4526b1568cd41d4314a38e3f6892a0958"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-touch-board-viewport.png",
+      "bytes": 61100,
+      "sha256": "744bf02c45afb79db05baf278656d3deaf243a8e2f78b336f5b2f0f4af5ec1ea"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-touch-controls-viewport.png",
+      "bytes": 85205,
+      "sha256": "f72c98d2ee0e0c09d79bef94543cb864fadebc04237e09a725549794a2712f2b"
+    },
+    {
+      "path": "play/shell.css",
+      "bytes": 3828,
+      "sha256": "47007268191955191e6e3d791f1846fcd90dbb36c2654193ec5fcb37b389c9cc"
+    },
+    {
+      "path": "play/shell.js",
+      "bytes": 17182,
+      "sha256": "a6430d5e43921f381a733a1cff2ca93dc533a2100a46b0b5c7df2b58589df1e3"
+    },
+    {
+      "path": "play/export-provenance.json",
+      "bytes": 5822,
+      "sha256": "34cc37901ca3b76f940dc4b7c7d9b88cfb44e050bd19a6b3c36dbec7dc95dd91"
+    },
+    {
+      "path": "play/README.md",
+      "bytes": 9017,
+      "sha256": "ab2f4d99142afaa7e75245b97f4c2a964a5c630b79bb614dce57afe648828a65"
+    },
+    {
+      "path": "play/LICENSES.md",
+      "bytes": 1478,
+      "sha256": "f2298f891ffd1d9ecc5ca11a59d926c0a09baaa92608da0244b818f19c58f034"
+    },
+    {
+      "path": "play/verification.json",
+      "bytes": 17075,
+      "sha256": "e87c0ca20df55a2f20715ee8e6f657c64b84e2d5dba103b805d196a814339b7b"
+    },
+    {
+      "path": "play/evidence/sonic-loom-desktop-edited.png",
+      "bytes": 220595,
+      "sha256": "bd5805e017a11292c3419541661e03817ba9eafbecbd54ea57b3eefa71038207"
+    },
+    {
+      "path": "play/evidence/sonic-loom-touch-edited.png",
+      "bytes": 109197,
+      "sha256": "26610151c482c6f9c509f15ea304ff83ddd23c22dff1fe5b6fa6b5be75119fcd"
+    },
+    {
+      "path": "play/evidence/prism-tide-desktop-solved.png",
+      "bytes": 210565,
+      "sha256": "986e48207c6f5b0ab876a97773074a8ce114dc8322bf88a2e15024d715a07096"
+    },
+    {
+      "path": "play/evidence/prism-tide-touch-solved.png",
+      "bytes": 99134,
+      "sha256": "5b5bea20585c980a068cbf224bc67f5b071fb58f5b8f963eb771a87fc81d0f01"
+    },
+    {
+      "path": "play/evidence/loading-error.png",
+      "bytes": 65780,
+      "sha256": "6671c3629e47b6e5ee0addee63f455e33a827d87c16fc425c1414b8717cb3f83"
+    },
+    {
+      "path": "play/runtime/LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "play/runtime/COPYRIGHT.txt",
+      "bytes": 99790,
+      "sha256": "b3330849267d56ddd3d62a513817506606c2195034411fe05859f0140bff9d8a"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "play/sonic-loom/index.html",
+      "bytes": 1906,
+      "sha256": "a7f69e623cad7940a38e76c1cd66e6ca42e57ff9902fe3a26576c0a1d87a833a"
+    },
+    {
+      "path": "play/sonic-loom/game.pck",
+      "bytes": 25212,
+      "sha256": "dc87fd79473b8a253eaae8bce6785f3664a02934cb90eacf705330679f29b344"
+    },
+    {
+      "path": "play/prism-tide/index.html",
+      "bytes": 1906,
+      "sha256": "2ec70522c89cf9b31fd853d782b76c171b08b9f0763bdf0f5180c7790bbab504"
+    },
+    {
+      "path": "play/prism-tide/game.pck",
+      "bytes": 23192,
+      "sha256": "7308582b1b5757348b5ad322e6a03f3844cd51e628db0ebb9ca972d161871758"
+    },
+    {
+      "path": "play/parcel-switchyard/FONT-LICENSE.txt",
+      "bytes": 14712,
+      "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b"
+    },
+    {
+      "path": "play/parcel-switchyard/LICENSES.md",
+      "bytes": 1373,
+      "sha256": "c6737ea10236228073e3d6ef051f70411868324581f25d9b6e5d93b720d833eb"
+    },
+    {
+      "path": "play/parcel-switchyard/export-provenance.json",
+      "bytes": 32940,
+      "sha256": "6b12ee71038a2ae588d7b2ed1cad7052e992df5ec31fb3603e9415ff1946872d"
+    },
+    {
+      "path": "play/parcel-switchyard/game.pck",
+      "bytes": 114740,
+      "sha256": "626f1fccd23103a793e7ec018fd1e0463ae77934914eb82baf67a3bfd19862a0"
+    },
+    {
+      "path": "play/parcel-switchyard/index.html",
+      "bytes": 1841,
+      "sha256": "23739be2cd3404cc06bcb932681475932fb69315070557e69c8741c8fe16de33"
+    },
+    {
+      "path": "play/parcel-switchyard/shell.css",
+      "bytes": 2593,
+      "sha256": "9891eed98d384dcd99165b4bd4bcb01fdf3ac5d5cabd83b61a26b77ed4736c15"
+    },
+    {
+      "path": "play/parcel-switchyard/shell.js",
+      "bytes": 10625,
+      "sha256": "82e1a10ec9c9f41139e7e89c22550c9cbb31252c0e68525614c0a180ebfe36db"
+    }
+  ],
+  "demos": [
+    {
+      "case_slug": "sonic-loom",
+      "url": "play/sonic-loom/index.html",
+      "title": "Sonic Loom",
+      "engine": "Godot 4.6.3",
+      "renderer": "gl_compatibility",
+      "threads": false,
+      "localeSupport": [
+        "en",
+        "zh"
+      ],
+      "nativeTextLanguage": "en",
+      "controls": {
+        "en": "Tap steps to edit. On phones, select a voice, then use Mute for that voice. Space: play/pause; arrows: tempo; S/L/R: save/load/reset. Native portrait controls scroll vertically.",
+        "zh": "轻触步进编辑；手机先选择声部，再用 Mute 切换该声部静音。空格播放/暂停，上下键调速，S/L/R 保存、读取、重置。原生竖屏控件可上下滚动。"
+      },
+      "notes": {
+        "en": "Audio starts after a click or tap. Saves stay in this browser. The native instrument artwork remains in English. Web adaptation/review, 2026-10-12: requested and accepted configuration gpt-6-astra / ultra; backend routing was not independently verified. Review covers desktop/phone screenshots and 40 browser checks. No subjective listening, physical-phone, Safari or Firefox acceptance.",
+        "zh": "点击或轻触后启用声音，存档保留在当前浏览器，原生乐器画面保留英文。2026-10-12 Web 适配与复审请求并接受的配置为 gpt-6-astra / ultra；未独立核验后台路由。复审覆盖桌面与手机截图及40项浏览器检查，未作主观听评、实体手机、Safari 或 Firefox 验收。"
+      }
+    },
+    {
+      "case_slug": "prism-tide",
+      "url": "play/prism-tide/index.html",
+      "title": "Prism Tide",
+      "engine": "Godot 4.6.3",
+      "renderer": "gl_compatibility",
+      "threads": false,
+      "localeSupport": [
+        "en",
+        "zh"
+      ],
+      "nativeTextLanguage": "en",
+      "controls": {
+        "en": "On phones, tap a mirror or shutter to select it, then use Turn/Toggle below the scrolling board. Tab: select; Space/Enter: turn; R: reset; N: next after winning.",
+        "zh": "手机先轻触镜子或闸门选中，再使用滚动棋盘下方的 Turn/Toggle 操作。Tab 选择，空格或回车转动，R 重置，过关后 N 下一关。"
+      },
+      "notes": {
+        "en": "The original puzzle is silent. Explicit Save/Load stores a local checkpoint in this browser. Native puzzle artwork remains in English. Web adaptation/review, 2026-10-12: requested and accepted configuration gpt-6-astra / ultra; backend routing was not independently verified. Review covers desktop/phone screenshots and 40 browser checks. No subjective listening, physical-phone, Safari or Firefox acceptance.",
+        "zh": "原作没有音轨。保存与读取按钮用于当前浏览器的本地关卡存档，原生谜题画面保留英文。2026-10-12 Web 适配与复审请求并接受的配置为 gpt-6-astra / ultra；未独立核验后台路由。复审覆盖桌面与手机截图及40项浏览器检查，未作主观听评、实体手机、Safari 或 Firefox 验收。"
+      }
+    },
+    {
+      "case_slug": "parcel-switchyard",
+      "url": "play/parcel-switchyard/index.html",
+      "title": "Parcel Switchyard",
+      "engine": "Godot 4.6.3",
+      "renderer": "gl_compatibility",
+      "threads": false,
+      "localeSupport": [
+        "en",
+        "zh"
+      ],
+      "nativeTextLanguage": "en-zh",
+      "controls": {
+        "en": "Match the next parcel label. Tap a route and Send. Keys 1/2/3 select; Space sends; A auto; P pause; R reset. Portrait controls scroll vertically.",
+        "zh": "匹配下一件包裹标签，轻触线路再发送。1/2/3 选线，空格发送，A 自动，P 暂停，R 重置；竖屏操作区可上下滚动。"
+      },
+      "notes": {
+        "en": "The original game is silent. Exit/reload starts a fresh shift. Web game labels and browser controls support English and Simplified Chinese; the original downloadable native package is unchanged. Export records and exact-head browser acceptance are separate; an export alone is not playability proof. No physical-device, Safari/Firefox or deployment claim.",
+        "zh": "原作无音轨；退出或刷新即开始新班次，Web画面与浏览器控件支持中英文，原始原生下载包保持不变。导出记录与当前版本真实浏览器验收分开，导出成功不等于玩法通过；未声称实体设备、Safari、Firefox 或上线验证。"
+      }
+    }
+  ],
+  "budget": {
+    "raw_bytes": 40215320,
+    "gzip_equivalent_bytes": 11373926,
+    "raw_limit_bytes": 41943040,
+    "gzip_equivalent_limit_bytes": 11534336,
+    "note": "Gzip equivalent is measured locally; actual Pages Content-Encoding must be verified after an authorized deployment."
+  }
+}

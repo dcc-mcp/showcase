@@ -76,11 +76,13 @@
       cards.forEach(card => {
         const matches = (family.value === "all" || card.dataset.family === family.value) &&
           (software.value === "all" || JSON.parse(card.dataset.software).includes(software.value)) &&
-          (!query || card.dataset.search.toLocaleLowerCase().includes(query));
+          (!query || (card.dataset.search + " " + card.textContent).toLocaleLowerCase().includes(query));
         card.hidden = !matches;
         if (matches) visible += 1;
       });
-      count.textContent = visible === cards.length ? "全部 " + visible + " 个品牌条目" : "显示 " + visible + " / " + cards.length + " 个品牌条目";
+      count.textContent = document.documentElement.lang.startsWith("zh")
+        ? (visible === cards.length ? "全部 " + visible + " 个品牌条目" : "显示 " + visible + " / " + cards.length + " 个品牌条目")
+        : (visible === cards.length ? "All " + visible + " brand entries" : "Showing " + visible + " / " + cards.length + " brand entries");
       empty.hidden = visible !== 0;
       [["family", family.value], ["software", software.value], ["q", search.value.trim()]].forEach(([key, value]) => {
         if (value && value !== "all") params.set(key, value);
@@ -111,9 +113,9 @@
       const status = document.querySelector(".brand-copy-status");
       try {
         await navigator.clipboard.writeText(document.querySelector("#brand-prompt").textContent);
-        status.textContent = "提示词已复制。";
+        status.textContent = document.documentElement.lang.startsWith("zh") ? "提示词已复制。" : "Prompt copied.";
       } catch (_) {
-        status.textContent = "复制失败，请选中提示词文本复制。";
+        status.textContent = document.documentElement.lang.startsWith("zh") ? "复制失败，请选中提示词文本复制。" : "Copy failed. Select the prompt text to copy it.";
       }
     });
   }

@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import validate_collection
 
@@ -142,6 +143,18 @@ class CollectionContractTests(unittest.TestCase):
             with self.subTest(stage=stage):
                 self.case["model_attribution"] = [r for r in self.complete_attribution() if r["stage_id"] != stage]
                 self.assertTrue(any("missing required stage categories" in p for p in self.problems()))
+
+    def test_supplement_attribution_preserves_historical_unknowns(self):
+        rows = self.complete_attribution()
+        self.case["model_attribution"] = rows + [dict(
+            self.attribution(), stage_id="supplement_creation", stage="New camera film",
+            model="gpt-6-astra", reasoning_effort="ultra", record_status="configured",
+            basis="Requested and accepted task configuration; not backend attestation.",
+            scope="New film only; historical asset attribution is unchanged.")]
+        self.assertFalse(self.problems())
+        self.assertTrue(all(row["record_status"] == "unknown" for row in rows))
+        self.case["model_attribution"].append(dict(self.case["model_attribution"][-1]))
+        self.assertTrue(any("duplicate stage_id" in p for p in self.problems()))
 
     def test_invalid_and_duplicate_stage_ids_rejected(self):
         for bad in ("creation", "unrecognized", ["creation"]):
@@ -381,6 +394,111 @@ class CollectionContractTests(unittest.TestCase):
         (site / "index.html").write_text('<a href="cases/sample/">case</a>', encoding="utf-8")
         (detail / "index.html").write_text('<a href="../../#works">back</a>', encoding="utf-8")
         self.assertEqual(validate_collection.validate_site(site), [])
+
+
+class ReviewedPublicTextTests(unittest.TestCase):
+    """An immutable false-positive review must never become a scan bypass."""
+
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory(prefix="showcase-text-review-")
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        self.path = self.root / "play/runtime/reviewed.js"
+        self.path.parent.mkdir(parents=True)
+        self.data = b'FS.mkdir("/tmp"); FS.mkdir("/home/web_user");\n'
+        self.path.write_bytes(self.data)
+
+    def review(self, data=None, categories=None, path=None):
+        return patch.dict(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES, {
+            path or "play/runtime/reviewed.js": (
+                hashlib.sha256(self.data if data is None else data).hexdigest(),
+                frozenset(categories or {"private execution path", "private filesystem path"}),
+            ),
+        }, clear=True)
+
+    def test_exact_path_bytes_and_reviewed_categories_are_accepted(self):
+        self.assertEqual(len(validate_collection.scan_text_file(self.path, self.root)), 2)
+        with self.review():
+            self.assertEqual(validate_collection.validate_site(self.root), [])
+            # Metadata and other string scans never use file reviews.
+            self.assertEqual(len(validate_collection.sensitive_issues(
+                self.data.decode(), "play/runtime/reviewed.js")), 2)
+
+    def test_changed_bytes_restore_all_findings(self):
+        for data in (self.data + b"// update\n", self.data.replace(b"\n", b"\r\n"),
+                     b"\xef\xbb\xbf" + self.data):
+            with self.subTest(data=data), self.review():
+                self.path.write_bytes(data)
+                self.assertEqual(len(validate_collection.scan_text_file(self.path, self.root)), 2)
+
+    def test_identical_bytes_at_another_path_are_not_reviewed(self):
+        for rel in ("assets/reviewed.js", "play/runtime/other.js"):
+            with self.subTest(path=rel), self.review():
+                other = self.root / rel
+                other.parent.mkdir(parents=True, exist_ok=True)
+                other.write_bytes(self.data)
+                self.assertEqual(len(validate_collection.scan_text_file(other, self.root)), 2)
+
+    def test_other_categories_are_still_scanned_for_reviewed_bytes(self):
+        for text, category in (("localhost", "private host name"),
+                               ("192.168.50.8", "private network address"),
+                               ("ghp_" + "Q" * 36, "credential token"),
+                               ("password=" + "Q" * 20, "credential assignment"),
+                               ("Bearer " + "Q" * 20, "bearer credential")):
+            with self.subTest(category=category):
+                data = self.data + text.encode()
+                self.path.write_bytes(data)
+                with self.review(data=data):
+                    problems = validate_collection.scan_text_file(self.path, self.root)
+                self.assertEqual(problems, [f"play/runtime/reviewed.js: contains {category}"])
+                self.assertNotIn(text, "\n".join(problems))
+
+    def test_tampering_and_matching_public_manifest_do_not_approve_bytes(self):
+        data = self.data + ("ghp_" + "Q" * 36).encode()
+        self.path.write_bytes(data)
+        (self.root / "play/manifest.json").write_text(json.dumps({"files": [{
+            "path": "play/runtime/reviewed.js", "bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+        }]}), encoding="utf-8")
+        with self.review():
+            problems = validate_collection.validate_site(self.root)
+        self.assertEqual(len(problems), 3)
+        self.assertTrue(any("credential token" in problem for problem in problems))
+
+    def test_reviewed_documents_still_have_links_checked(self):
+        path = self.root / "play/README.md"
+        data = b"localhost [missing](absent.txt)\n"
+        path.write_bytes(data)
+        with self.review(data=data, categories={"private host name"}, path="play/README.md"):
+            self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+            self.assertTrue(any("missing" in problem for problem in
+                                validate_collection.document_link_problems(path, self.root)))
+
+    def test_unreadable_utf8_is_never_reviewed(self):
+        data = b"\xff\xfe"
+        self.path.write_bytes(data)
+        with self.review(data=data):
+            self.assertEqual(validate_collection.scan_text_file(self.path, self.root),
+                             ["play/runtime/reviewed.js: public text must be readable UTF-8"])
+
+    def test_current_review_hashes_match_the_explicit_public_inventory(self):
+        repo = Path(__file__).resolve().parents[1]
+        files = json.loads((repo / "play/manifest.json").read_text(encoding="utf-8"))["files"]
+        hashes = {item["path"]: item["sha256"] for item in files}
+        self.assertEqual(set(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES),
+                         {"play/README.md", "play/runtime/godot-4.6.3.js"})
+        for path, (digest, _) in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES.items():
+            self.assertEqual(digest, hashes[path])
+
+    def test_tracked_public_readme_matches_review_and_preserves_content(self):
+        repo = Path(__file__).resolve().parents[1]
+        path = self.root / "play/README.md"
+        data = (repo / "play/README.md").read_bytes()
+        path.write_bytes(data)
+        self.assertEqual(hashlib.sha256(data).hexdigest(),
+                         validate_collection.REVIEWED_TEXT_FALSE_POSITIVES["play/README.md"][0])
+        self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+        self.assertEqual(path.read_bytes(), data)
 
 
 if __name__ == "__main__":

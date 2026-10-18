@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "godot_application": "Godot",
+  "godot_version": "4.6.3",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 736,
+      "sha256": "e977c5add05bb0b0f20e7b87be5021439f05adf31ed1c65b1de861fadb7444d8"
+    },
+    {
+      "path": "REPRODUCE.txt",
+      "bytes": 1136,
+      "sha256": "4dedc8bba42623ccd26b6e8048b381047de9d26300b484b90bd899c341559c0e"
+    },
+    {
+      "path": "Sonic-Loom-Source.zip",
+      "bytes": 18515,
+      "sha256": "905cd916bdac5c251d2b18810e60bdf5956f1a1e62d4d83074aa2cbd7eeeedc5"
+    },
+    {
+      "path": "audio-analysis.json",
+      "bytes": 246,
+      "sha256": "fe67cebbe41640c5588d59aea0146e386861805bbb344d9a549afe9c12c85185"
+    },
+    {
+      "path": "demo.mp3",
+      "bytes": 313513,
+      "sha256": "8e4ef7c1a1869bc83faa4c4b1f78562f058f9fc643f147ba6b119d8ea578bd10"
+    },
+    {
+      "path": "demo.mp4",
+      "bytes": 750863,
+      "sha256": "bfb73a73dc55c13f88ea7c5c123cede60db7033954cf2273b9ce0a08cfb74e57"
+    },
+    {
+      "path": "demo.wav",
+      "bytes": 2293278,
+      "sha256": "74dabf735c430a10f107bc05ff012463b9ba10945a8190faf10b83b6c3ded816"
+    },
+    {
+      "path": "hero.png",
+      "bytes": 75855,
+      "sha256": "6fb6ca4d12bc7f0ab2128c2e700046ad7bee8e55ec7785d1d447177a333a95bb",
+      "width": 1280,
+      "height": 800,
+      "bit_depth": 8
+    },
+    {
+      "path": "history/loom-v1.gd",
+      "bytes": 13201,
+      "sha256": "c9bc4f2d190805b616c77be92e7b8f1ddeba80fb32c8bf84d91e2cbe17ad4e37"
+    },
+    {
+      "path": "history/loom-v2.gd",
+      "bytes": 13175,
+      "sha256": "673fb85768a676b4feed057175ad04a8065411e216c8d9237f8a0673964829cc"
+    },
+    {
+      "path": "interaction.json",
+      "bytes": 2011,
+      "sha256": "e287c844b90dac0339a734bd22dddac6e2f5d87e90021cd54eee903c2c602f29"
+    },
+    {
+      "path": "logic-tests.json",
+      "bytes": 1127,
+      "sha256": "c606390ac4d3149d4eef83e78da11f15ac92b75782c4edf57e8b0537bed44741"
+    },
+    {
+      "path": "mcp-evidence.json",
+      "bytes": 7469,
+      "sha256": "97951a6cccbdda0abe164d7b19f3253cac25433cb31092c5a6a094b83e4e8fdf"
+    },
+    {
+      "path": "native/loom.gd",
+      "bytes": 13181,
+      "sha256": "ecd55c4f64914d07a72d7fd65bfacd81e91d05a7807c3827348edbb44cc2a8d0"
+    },
+    {
+      "path": "native/loom.gd.uid",
+      "bytes": 20,
+      "sha256": "4f20edee255a2a9c91c2db57bff807f2c91c9ebfaa533d39d5adca755b3e08b1"
+    },
+    {
+      "path": "native/main.tscn",
+      "bytes": 227,
+      "sha256": "51bb97c1548f8ee826c94bf47a737610c4ff69efebfa815893c7c8d8ee3da6d7"
+    },
+    {
+      "path": "native/project.godot",
+      "bytes": 582,
+      "sha256": "7d8cf37548a0190a7c6af3ed73ac99e59560fd180b3ea015a2731eefdd7d2331"
+    },
+    {
+      "path": "small-window.png",
+      "bytes": 70237,
+      "sha256": "f28ae08e64b8b069750063c778f23031e5ad7bc9bd64801b0fa709df0b05a649",
+      "width": 960,
+      "height": 600,
+      "bit_depth": 8
+    },
+    {
+      "path": "waveform.png",
+      "bytes": 60838,
+      "sha256": "1dd74f7043de61c81afe0bf5f8f46b0d245ceedb4bc74f22e49a03927b735e69",
+      "width": 1280,
+      "height": 300,
+      "bit_depth": 8
+    }
+  ]
+}

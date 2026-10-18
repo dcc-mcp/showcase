@@ -1,0 +1,121 @@
+{
+  "original_commit": "943ee722deeec46d64890370fd813498eeebb01c",
+  "files": [
+    {
+      "path": "docs/showcase/parcel-switchyard/LICENSES.md",
+      "sha256": "086443237f8b78d5da45b990526cb1ef999d408fdaa8274186d6d1f51d8d08b3",
+      "bytes": 687
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/Parcel-Switchyard-Source.zip",
+      "sha256": "903a313b73f22e64e4d2c764c1107d2468658e2d753c7e5b8dbe3d3ace87fc8e",
+      "bytes": 9554
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/README.md",
+      "sha256": "5a691886c5d566b49a7a0948d620c116646b7c12da47e93c2edde174dee8ac01",
+      "bytes": 5260
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/demo.mp4",
+      "sha256": "b8c9ea1482bc057f23814e6d417f6a0fa2d6ca134e1806cf93274de73f672ce6",
+      "bytes": 326145
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/archive-tests.json",
+      "sha256": "65b610218639a3a29a72eebe99f3822135d1781995aea4321e7035cc286ec0be",
+      "bytes": 915
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/ci-verification.json",
+      "sha256": "754b42153155c3123713be0c64bcd544f8d56be7b513bbe84852deac8d608588",
+      "bytes": 2847
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/initial-script.gd.txt",
+      "sha256": "b5411376f267db401931b8e80920c63d9f38c72e9a407164b90f330ef6d1fa99",
+      "bytes": 14310
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/interaction-result.json",
+      "sha256": "44b7dccd0b9e3cd98674ca90cce34b8ad3d7d76959bb219c3718dea36c97912d",
+      "bytes": 2125
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/logic-tests.json",
+      "sha256": "65b610218639a3a29a72eebe99f3822135d1781995aea4321e7035cc286ec0be",
+      "bytes": 915
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/mcp-calls.json",
+      "sha256": "4a588e5a049a5c71e00d68c3041e146d0b4ed7b78d4b8ac9dd7beee1a2be8ba2",
+      "bytes": 10615
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/native-render.txt",
+      "sha256": "db8e5fb18e202530d0211a61b91323c9237885128b40012a818528308c5ac893",
+      "bytes": 957
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/evidence/video-info.json",
+      "sha256": "3c4c7036387620fbeb4fe54da365a6fbcba0ebbe88265247cb4bda2569c88dde",
+      "bytes": 2188
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/hero.png",
+      "sha256": "c90a0f36b1be223fd008067e78a112bdc50f36b580d4cc4cc82ee7f05df6a36b",
+      "bytes": 133692
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/interaction.png",
+      "sha256": "f0b4c00c32ea94bfd6d823db3ddff2d031dc926aa4e035708f84c1e8076d8d99",
+      "bytes": 137336
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/manifest.json",
+      "sha256": "c658f297b4407a52d64809db21f078760bed7555c89bd4ea2fc9bc4eb3afc5b7",
+      "bytes": 3605
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/native/export_presets.cfg",
+      "sha256": "52553020b4ebe524cfe6a15ecd53012c40247b86c1c81dafc70e10e483f4afd6",
+      "bytes": 199
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/native/main.tscn",
+      "sha256": "963b36af8d096fa47e7557cf3cb0199e946bafc5f48da7e6a6ed5fe2f7da5047",
+      "bytes": 241
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/native/parcel_game.gd",
+      "sha256": "2152b8f6bcbbe2a3cf6b71c70457953236267ea53f427ae4a608a39792c50b50",
+      "bytes": 15991
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/native/parcel_game.gd.uid",
+      "sha256": "8e7de9f6fe226d59f5a0d1de9f50210388b2220c50dde83a6c4c77aa14da9c72",
+      "bytes": 20
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/native/project.godot",
+      "sha256": "defd919015021299f76d3aaf68d54feb06c93f4dbf8b458c5a2252b58487cb7b",
+      "bytes": 520
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/parcel.pck",
+      "sha256": "926739e71f51c15b7cca8be3a1dd40c3f69f78c011e34d655aae249e1a33eae8",
+      "bytes": 16884
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/small-window.png",
+      "sha256": "86ea3fc97f226182b1c817af05415b47f7a3035b11a270c1fd7f7ef46bb7fabd",
+      "bytes": 106057
+    },
+    {
+      "path": "docs/showcase/parcel-switchyard/validation.json",
+      "sha256": "7ca979a93586877e6f99ede27fab37859c887c881a559cbd0627e26f31d11292",
+      "bytes": 5351
+    }
+  ],
+  "verification": "Every retained original artifact matched git-show bytes; no historical artifacts were edited."
+}

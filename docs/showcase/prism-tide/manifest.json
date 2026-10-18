@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "application": "Godot",
+  "version": "4.6.3",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 933,
+      "sha256": "79b1e7662b4ca046fc27b2b2c21bc77a4669db2a935f1cbf6add6f6d6640ea5c"
+    },
+    {
+      "path": "Prism-Tide-Source.zip",
+      "bytes": 6744,
+      "sha256": "3c22710cdab4b97a7f378147371042c2704303144282eae157be02e8e2ee3d8d",
+      "container_kind": "ZIP",
+      "member_count": 8
+    },
+    {
+      "path": "demo.mp4",
+      "bytes": 746901,
+      "sha256": "465a2bd25c207af38c7fea0e295b638def7a83a6211187d777b9ccd364c9b422"
+    },
+    {
+      "path": "evidence/ci-verification.json",
+      "bytes": 2494,
+      "sha256": "352324ef64869220db3c05a87803a62b025c77f4b0f58e05743059118b1dbf45"
+    },
+    {
+      "path": "evidence/initial-script.gd.txt",
+      "bytes": 9342,
+      "sha256": "994e033f07958b0c63278fd311d81f4793ef1102e878ac45c0ad0c6934921c14"
+    },
+    {
+      "path": "evidence/interaction-result.json",
+      "bytes": 5877,
+      "sha256": "92b032e42c77f1c9157cea970e54af300a04b8408b803204c822281b56a508b5"
+    },
+    {
+      "path": "evidence/mcp-calls.json",
+      "bytes": 5473,
+      "sha256": "8a548b3b7fd917b8ae4a3044c90a13226dab9b28a5ab4ab8cc3d448b265bd4f8"
+    },
+    {
+      "path": "evidence/native-render.txt",
+      "bytes": 912,
+      "sha256": "7f4597422c30d8e8f3cb215a969d46aa5156355612a007b379cb0f62b991a98c"
+    },
+    {
+      "path": "evidence/revision-script.gd.txt",
+      "bytes": 9342,
+      "sha256": "948e772f15623c537d145c48eb67c4f859c41e7e736395a1ac116ca1ecb2e777"
+    },
+    {
+      "path": "evidence/video-info.json",
+      "bytes": 2188,
+      "sha256": "134e3cc93f130d0552d42bdb1fecdcd6845cb9b8238874bcb6295075c111e717"
+    },
+    {
+      "path": "hero.png",
+      "bytes": 106268,
+      "sha256": "74a01953bc4381443a9f09a43216292d30de31dc9fa7e8706b25fd33a69817d2",
+      "width": 1280,
+      "height": 800,
+      "bit_depth": 8
+    },
+    {
+      "path": "interaction.png",
+      "bytes": 115736,
+      "sha256": "1031537c1c871990510225f2c47130b33cb946b0e61745a3d659f36e01ad4638",
+      "width": 1280,
+      "height": 800,
+      "bit_depth": 8
+    },
+    {
+      "path": "native/export_presets.cfg",
+      "bytes": 199,
+      "sha256": "52553020b4ebe524cfe6a15ecd53012c40247b86c1c81dafc70e10e483f4afd6"
+    },
+    {
+      "path": "native/main.tscn",
+      "bytes": 233,
+      "sha256": "0dc80a315ecd5b395933d43c39ca8d0783db586a77ce393e896db36ec535a704"
+    },
+    {
+      "path": "native/prism_tide.gd",
+      "bytes": 9342,
+      "sha256": "948e772f15623c537d145c48eb67c4f859c41e7e736395a1ac116ca1ecb2e777"
+    },
+    {
+      "path": "native/prism_tide.gd.uid",
+      "bytes": 20,
+      "sha256": "6dce192f1dca44e4267f13c44d9d99dbe5add945eda3278be61ee65a75563e6b"
+    },
+    {
+      "path": "native/project.godot",
+      "bytes": 548,
+      "sha256": "abf3146a2143529d0dd165dfdd6184243cb83f87bdfc2d5bb3ed4feba497f481"
+    },
+    {
+      "path": "prism-tide.pck",
+      "bytes": 11524,
+      "sha256": "75749639bbead1193a5466f4d2db12b89e2eb287e5ce9dcbd559586e5b818b3c"
+    },
+    {
+      "path": "small-window.png",
+      "bytes": 78027,
+      "sha256": "e3b628efe758c8f8357ca30149e5e872c54db55d8dbfbad8113a8788efc40fd3",
+      "width": 864,
+      "height": 540,
+      "bit_depth": 8
+    }
+  ]
+}

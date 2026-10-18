@@ -1,0 +1,380 @@
+{
+  "passed": true,
+  "checks": {
+    "level_1_real_input_win": true,
+    "level_2_real_input_win": true,
+    "level_3_real_input_win": true,
+    "keyboard_selection": true,
+    "closed_shutter_blocks": true,
+    "wrong_rotation_unsolved": true,
+    "repeated_keyboard_reset": true,
+    "repeated_mouse_reset": true,
+    "final_reset_clear": true
+  },
+  "states": [
+    {
+      "action": "load",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        true,
+        false,
+        false
+      ],
+      "moves": 1,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "load",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "load",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        true,
+        false,
+        false
+      ],
+      "moves": 1,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "select",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        true,
+        false,
+        false
+      ],
+      "moves": 1,
+      "selected": 1,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [],
+      "level": 1,
+      "mirrors": [
+        true,
+        true,
+        false
+      ],
+      "moves": 2,
+      "selected": 1,
+      "won": true
+    },
+    {
+      "action": "load",
+      "gates": [
+        false
+      ],
+      "level": 2,
+      "mirrors": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        false
+      ],
+      "level": 2,
+      "mirrors": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "moves": 1,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        false
+      ],
+      "level": 2,
+      "mirrors": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 2,
+      "selected": 1,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        true
+      ],
+      "level": 2,
+      "mirrors": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 3,
+      "selected": 4,
+      "won": true
+    },
+    {
+      "action": "load",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "moves": 1,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "moves": 2,
+      "selected": 1,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "moves": 3,
+      "selected": 2,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 4,
+      "selected": 3,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        true,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 5,
+      "selected": 6,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        true,
+        true
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 6,
+      "selected": 7,
+      "won": true
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        true,
+        true
+      ],
+      "level": 3,
+      "mirrors": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 7,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "rotate",
+      "gates": [
+        true,
+        true
+      ],
+      "level": 3,
+      "mirrors": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "moves": 8,
+      "selected": 0,
+      "won": true
+    },
+    {
+      "action": "load",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    },
+    {
+      "action": "load",
+      "gates": [
+        false,
+        false
+      ],
+      "level": 3,
+      "mirrors": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "moves": 0,
+      "selected": 0,
+      "won": false
+    }
+  ]
+}

@@ -193,5 +193,16 @@
       1280,
       720
     ]
+  },
+  "additive_web_2026_10_18": {
+    "original_commit": "943ee722deeec46d64890370fd813498eeebb01c",
+    "provenance": "../../../play/parcel-switchyard/export-provenance.json",
+    "native_source_byte_identical": true,
+    "headless_checks": 116,
+    "standard_export": "passed",
+    "browser_acceptance": "separate exact-head CI artifact; not inferred from this export or historical desktop checks",
+    "physical_device": "not-tested",
+    "new_mcp_authoring": false,
+    "exported_pack_reopening": "passed with Chinese enabled, glyph coverage and rule checks"
   }
 }

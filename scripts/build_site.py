@@ -228,7 +228,7 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
                     alt, url, AUDIO_TYPES[extension], url, esc(os.path.basename(rel)), extension[1:].upper())
     if os.path.splitext(rel)[1].lower() in (".mp4", ".webm"):
         poster = (' poster="%s"' % esc(resource_url(media["poster"], prefix))) if media.get("poster") else ""
-        return '<video controls playsinline preload="metadata"%s aria-label="%s"><source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>' % (poster, alt, url, url)
+        return '<video controls playsinline preload="none" data-hover-preview data-preview-audio="%s"%s aria-label="%s"><source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>' % (esc(media.get("preview_audio", "unknown")), poster, alt, url, url)
     load = ' loading="eager" fetchpriority="high"' if eager else ' loading="lazy"'
     return '<img src="%s" alt="%s"%s%s decoding="async">' % (url, alt, dimensions(root, rel), load)
 
@@ -236,6 +236,8 @@ def figure(media: dict, root: str, prefix: str) -> str:
     visual = media_markup(media, root, prefix)
     if os.path.splitext(media["src"])[1].lower() not in {".mp4", ".webm", *AUDIO_TYPES}:
         visual = '<a href="%s" aria-label="%s">%s</a>' % (esc(prefix + media["src"]), esc("查看原尺寸：" + media["alt"]), visual)
+    if os.path.splitext(media["src"])[1].lower() in {".mp4", ".webm"}:
+        visual = '<div class="detail-video">' + visual + '</div>'
     caption = media.get("caption", media["alt"])
     return '<figure class="artifact">%s<figcaption>%s</figcaption></figure>' % (visual, esc(caption))
 
@@ -244,22 +246,50 @@ def filters(values: list[str]) -> str:
                    (esc(value), "true" if value == "all" else "false", "全部" if value == "all" else esc(value))
                    for value in ["all"] + values)
 
-def cards_markup(cases: list[dict], root: str) -> str:
+GALLERY_PRIORITY = ("crystal-freight-native-film", "rainroom-two-hours", "sonic-loom", "houdini-procedural-study", "brass-relay", "resonance-atlas")
+
+def media_kinds(case, playable=False):
+    """Only advertise existing media, never infer a playable from host name."""
+    suffixes = {os.path.splitext(item["src"])[1].lower() for item in case["results"]}
+    kinds = []
+    if suffixes & {".mp4", ".webm"}:
+        kinds.append("video")
+    if playable:
+        kinds.append("interactive")
+    if suffixes & set(AUDIO_TYPES):
+        kinds.append("audio")
+    return kinds or ["image"]
+
+def preview_media(case):
+    return next((item for item in case["results"] if os.path.splitext(item["src"])[1].lower() in (".mp4", ".webm")), None)
+
+def cards_markup(cases: list[dict], root: str, demos=None) -> str:
+    import preview_audio
+    audio_tracks = preview_audio.read(root)
+    demos = demos or {}
+    ranked = {slug: index for index, slug in enumerate(GALLERY_PRIORITY)}
+    ordered = sorted(enumerate(cases), key=lambda item: (ranked.get(item[1]["slug"], len(ranked)), item[0]))
     cards = []
-    for index, case in enumerate(cases):
+    labels = {"video": "影像", "interactive": "交互", "audio": "音频", "image": "静帧"}
+    for index, (_, case) in enumerate(ordered):
         href = "cases/%s/" % case["slug"]
+        kinds = media_kinds(case, case["slug"] in demos)
+        preview = preview_media(case)
+        attrs = (' data-preview-src="%s" data-preview-kind="video" data-loading-label="正在加载预览…" data-playing-label="静音预览中" data-error-label="预览暂不可用，请进入作品观看。"' % esc(resource_url(preview["src"]))) if preview else ""
+        preview_html = ('<video class="card-preview" muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video><progress class="preview-progress" max="1" value="0" aria-hidden="true"></progress>') if preview else ""
+        button = ('<button class="preview-toggle" type="button" data-play-label="静音预览" data-stop-label="停止预览" aria-label="静音预览" aria-pressed="false" hidden><span class="preview-toggle-label">静音预览</span></button><span class="preview-status" aria-live="polite"></span><span class="preview-hint" aria-hidden="true">悬停即预览</span>') if preview else ""
+        if preview:
+            attrs += ' data-preview-audio="%s"' % audio_tracks.get(preview['src'], 'unknown')
+            button += '<button class="preview-sound" type="button" aria-pressed="false" hidden>开启声音</button><span class="preview-audio-note" hidden></span>'
+        cover = resolve_public(root, case["cover"]["src"])
+        dims = png_size(cover) if cover.lower().endswith('.png') else jpeg_size(cover)
+        fit = ' contain' if dims and (dims[0] / dims[1] < .9 or dims[0] / dims[1] > 2) else ''
         software = esc(json.dumps(case["software"], ensure_ascii=False))
         capabilities = esc(json.dumps(case["capabilities"], ensure_ascii=False))
         search = esc(" ".join([case["title"], case["subtitle"], case["summary"]] + case["software"] + case["capabilities"]))
-        tags = "".join("<span>%s</span>" % esc(tag) for tag in case["capabilities"])
-        cards.append("""<article class="case-card" data-software="%s" data-capabilities="%s" data-search="%s">
-<a class="card-visual" href="%s" aria-label="%s">%s</a>
-<div class="card-meta"><span>%s</span><span class="evidence-label">%s</span></div>
-<h3 class="card-title"><a href="%s">%s</a></h3><p class="card-summary">%s</p>
-<div class="card-bottom"><div class="capability-list">%s</div><a class="card-link" href="%s">查看过程 <span aria-hidden="true">↗</span></a></div></article>""" %
-            (software, capabilities, search, href, esc("查看案例：" + case["title"]), media_markup(case["cover"], root, eager=index == 0),
-             esc(" / ".join(case["software"])), esc(case["evidence_label"]), href, esc(case["title"]),
-             esc(case["summary"]), tags, href))
+        kind = ' / '.join(labels[value] for value in kinds)
+        cards.append('<article class="case-card" data-case="%s" data-software="%s" data-capabilities="%s" data-media="%s" data-search="%s"%s><div class="card-media"><a class="card-visual%s" href="%s" aria-label="%s">%s%s<span class="card-kind">%s</span></a>%s</div><h3 class="card-title"><a href="%s">%s</a></h3><div class="card-meta"><span class="card-software" title="%s">%s</span></div><p class="card-evidence">%s</p><p class="sr-only card-summary">%s</p></article>' % (
+            esc(case['slug']), software, capabilities, esc(json.dumps(kinds)), search, attrs, fit, href, esc('查看案例：' + case['title']), media_markup(case['cover'], root, eager=index < 3), preview_html, esc(kind), button, href, esc(case['title']), esc(' / '.join(case['software'])), esc(' / '.join(case['software'])), esc(case['evidence_label']), esc(case['summary'])))
     return "\n".join(cards)
 
 # Verified public endpoints. Keep the project-site slash: the organization site
@@ -358,7 +388,7 @@ def case_metadata(case: dict) -> dict:
     }
 
 def sitemap_text(cases: list[dict], brand_slugs: list[str] | None = None) -> str:
-    urls = [SITE_URL] + [public_url("cases/%s/" % case["slug"]) for case in cases]
+    urls = [SITE_URL, public_url("agents/")] + [public_url("cases/%s/" % case["slug"]) for case in cases]
     if brand_slugs:
         urls += [public_url("brands/")] + [public_url("brands/%s/" % slug) for slug in brand_slugs]
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -428,8 +458,18 @@ def model_attribution_section(case: dict) -> str:
             '<p>制作、后期与审阅分别归属。未知表示没有足够记录，不代表由当前模型制作。</p>'
             '<dl class="environment">%s</dl><h3>版本记录</h3><ul>%s</ul></section>' % (rows, history))
 
-def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
+def detail_page(case: dict, root: str, next_case: dict | None = None, demo=None) -> str:
     prefix = "../../"
+    import preview_audio
+    audio_tracks = preview_audio.read(root) if preview_media(case) else {}
+
+    def detail_figure(item):
+        # Presentation-only defaults never alter the publication inventory.
+        if os.path.splitext(item["src"])[1].lower() in {".mp4", ".webm"}:
+            item = dict(item, poster=item.get("poster", case["cover"]["src"]),
+                        preview_audio=audio_tracks.get(item["src"], "unknown"))
+        return figure(item, root, prefix)
+
     nav_sections = [("goal", "创作目标"), ("prompt", "提示词"), ("environment", "软件与工具"),
                     ("process", "分步过程"), ("results", "成果"), ("evidence", "验证与边界"), ("downloads", "工程文件"), ("resources", "资源与许可")]
     models = model_attribution_section(case)
@@ -444,7 +484,7 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
     tools = "".join("<li><code>%s</code><p>%s</p></li>" % (esc(item["name"]), esc(item["description"])) for item in case["tools"])
     steps = []
     for item in case["steps"]:
-        visual = figure(item["image"], root, prefix) if item.get("image") else ""
+        visual = detail_figure(item["image"]) if item.get("image") else ""
         steps.append('<li class="process-step"><div class="step-heading"><h3>%s</h3></div><p>%s</p>%s</li>' %
                      (esc(item["title"]), esc(item["description"]), visual))
     checks = []
@@ -459,6 +499,17 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
     limitations = "".join("<li>%s</li>" % esc(value) for value in case["limitations"])
     prompt_label = "原始提示词" if case["prompt"]["kind"] == "original" else "可复用提示词模板"
     next_link = ('<a href="../%s/">下一个案例：%s <span aria-hidden="true">→</span></a>' % (next_case["slug"], esc(next_case["title"]))) if next_case else ""
+    actions = []
+    if preview_media(case):
+        actions.append('<a href="#results">观看真实视频</a>')
+    elif any(os.path.splitext(item['src'])[1].lower() in AUDIO_TYPES for item in case['results']):
+        actions.append('<a href="#results">在线试听</a>')
+    if demo:
+        actions.append('<a href="#play">打开试玩</a>')
+    if downloads:
+        actions.append('<a href="#downloads">查看工程文件</a>')
+    actions.append('<a href="#resources">查看来源与许可</a>')
+    action_bar = '<nav class="detail-actions" aria-label="作品操作">' + ''.join(actions) + '</nav>'
     title = esc(case["title"])
     head = seo_tags(case["title"] + " · " + case["subtitle"] + " | DCC-MCP Showcase",
                     case["summary"][:220], "cases/%s/" % case["slug"], case["cover"], root, case_metadata(case))
@@ -467,10 +518,11 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
 %s<meta name="theme-color" content="#101311">
 <link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/detail.js" defer></script></head>
 <body><a class="skip-link" href="#goal">跳到案例内容</a>
-<header class="site-header wrap"><a class="brand" href="../../" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a><nav aria-label="主导航"><a href="../../#works">作品合集</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://dcc-mcp.github.io/zh/agents">开始使用 ↗</a></nav></header>
+<header class="site-header wrap"><a class="brand" href="../../" aria-label="DCC-MCP Showcase 首页"><strong>DCC-MCP</strong><span>Showcase</span></a><nav aria-label="主导航"><a href="../../#works">作品合集</a><a href="../../agents/">Agent / Data</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://dcc-mcp.github.io/zh/agents">开始使用 ↗</a></nav></header>
 <main class="wrap"><a class="detail-back" href="../../#works"><span aria-hidden="true">←</span> 返回作品合集</a>
-<div class="detail-heading"><div class="detail-meta">%s</div><h1>%s</h1><p class="subtitle">%s</p></div>
-<figure class="detail-cover">%s<figcaption>%s</figcaption></figure>
+<div class="detail-heading"><h1>%s</h1><p class="subtitle">%s</p></div>
+%s<figure class="detail-cover">%s<figcaption>%s</figcaption></figure>
+<div class="detail-meta">%s</div>
 <aside class="evidence-note" aria-label="证据范围"><strong>%s</strong><p>%s</p></aside>
 <div class="detail-layout"><nav class="detail-nav" aria-label="案例目录">%s</nav><div class="detail-content">
 <section class="detail-section" id="goal"><h2>创作目标</h2><p>%s</p><p>%s</p></section>
@@ -484,11 +536,11 @@ def detail_page(case: dict, root: str, next_case: dict | None = None) -> str:
 <section class="detail-section" id="resources"><h2>资源与许可</h2><ul class="resource-links">%s</ul><p class="source-line">来源：<a class="text-link" href="%s">来源与代码</a><br>来源提交：<code>%s</code></p><div class="credit-block"><strong>作者</strong>：%s<br><strong>许可范围</strong>：%s<br>%s</div></section>
 </div></div><div class="detail-footer"><a href="../../#works">← 返回作品合集</a>%s</div></main>
 <footer class="site-footer wrap"><p>DCC-MCP Showcase</p><nav aria-label="页脚导航"><a href="https://dcc-mcp.github.io/">DCC-MCP 官网 ↗</a><a href="https://github.com/dcc-mcp/dcc-mcp-core">核心项目 ↗</a><a href="https://github.com/dcc-mcp/showcase">合集源码 ↗</a></nav></footer></body></html>
-""" % (head, metadata, title, esc(case["subtitle"]),
-       media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]),
+""" % (head, title, esc(case["subtitle"]), action_bar,
+       media_markup(case["cover"], root, prefix, eager=True), esc(case["cover"]["alt"]), metadata,
        esc(case["evidence_label"]), esc(case["evidence_scope"]), nav, esc(case["goal"]), esc(case["summary"]),
        models, prompt_label, esc(case["prompt"]["text"]), esc(case["prompt"]["note"]), environment, tools, related_projects(case),
-       "".join(steps), "".join(figure(item, root, prefix) for item in case["results"]), "".join(checks),
+       "".join(steps), "".join(detail_figure(item) for item in case["results"]), "".join(checks),
        limitations, esc(case["verified_at"]), downloads, resources, esc(resource_url(case["source"]["url"])),
        esc(case["source"]["commit"]), esc(case["credits"]["author"]), esc(case["credits"]["license"]),
        esc(case["credits"]["note"]), next_link)
@@ -518,7 +570,7 @@ def output_path(root: str, out_dir: str) -> str:
         raise ValueError("output directory must stay inside repository")
     return out_abs
 
-def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[str], list[str], list[str]]:
+def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool = True) -> tuple[list[str], list[str], list[str]]:
     """Return published paths, problems, and notes; validate before deleting."""
     published: list[str] = []
     notes: list[str] = []
@@ -549,6 +601,10 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
             brand_portal = '<aside class="evidence-note"><strong>品牌画廊开发预览</strong><p>等待修正版资产与验证记录；占位内容仅用于本地开发。</p></aside>' + brand_portal
         with open(collection_path, encoding="utf-8-sig") as fh:
             cases = json.load(fh)["cases"]
+        import playable
+        import asset_versions
+        playable_demos, playable_assets = playable.read_and_validate(root, cases)
+        import games
         with open(resolve_public(root, "index.html"), encoding="utf-8-sig") as fh:
             template = fh.read()
         software = sorted({value for case in cases for value in case["software"]})
@@ -556,7 +612,9 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
         substitutions = {"CASE_COUNT": str(len(cases)), "SOFTWARE_COUNT": str(len(software)),
                          "SOFTWARE_FILTERS": filters(software), "CAPABILITY_FILTERS": filters(capabilities),
                          "BRAND_NAV": brand_nav, "BRAND_PORTAL": brand_portal,
-                          "CASE_CARDS": cards_markup(cases, root),
+                          "CASE_CARDS": cards_markup(cases, root, playable_demos),
+                         "GAMES_SHELF": games.shelf(cases, playable_demos, root),
+                         "GAMES_ASSETS": '<link rel="stylesheet" href="assets/games.css"><script src="assets/games.js" defer></script>' if playable_demos else "",
                          "SEO_HEAD": seo_tags(
                              "DCC-MCP Showcase · 真实 DCC 作品与可复用流程",
                              "DCC-MCP 官方作品合集：真实 DCC 软件中的建模、程序化材质与跨软件创作，附提示词、步骤、工程资源及验证证据。",
@@ -569,11 +627,21 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
                  "sitemap.xml": sitemap_text(cases, [item["slug"] for item in brand_catalog.get("items", [])] if brands_visible and not brand_preview else None),
                  "robots.txt": "User-agent: *\nAllow: /showcase/\nSitemap: " + public_url("sitemap.xml") + "\n"}
         pages.update(brand_pages)
+        pages.update(games.pages(cases, playable_demos, root))
+        import agent_pages
+        agent_html, agent_data = agent_pages.generate(root, cases, playable_demos)
+        pages.update(agent_html)
+        pages.update(agent_data)
         if brand_preview:
             pages["robots.txt"] = "User-agent: *\nDisallow: /\n"
             pages["index.html"] = pages["index.html"].replace("index, follow, max-image-preview:large", "noindex, nofollow")
         pages.update(compatibility_pages())
-        assets = {"assets/site.css", "assets/gallery.js", "assets/detail.js"}
+        assets = {"assets/site.css", "assets/gallery.js", "assets/detail.js", "assets/preview.js"}
+        if os.path.isfile(os.path.join(root, 'assets/preview-audio.json')):
+            assets.add('assets/preview-audio.json')
+        assets.update(playable_assets)
+        if playable_demos:
+            assets.update({"assets/playable.js", "assets/games.css", "assets/games.js"})
         if brands_visible:
             assets.update({"assets/brand.css", "assets/brand.js"})
             assets.update(brand_assets)
@@ -581,12 +649,21 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
             if not SLUG.fullmatch(case["slug"]):
                 raise ValueError("invalid case slug")
             pages["cases/%s/index.html" % case["slug"]] = detail_page(
-                case, root, cases[(index + 1) % len(cases)] if len(cases) > 1 else None)
+                case, root, cases[(index + 1) % len(cases)] if len(cases) > 1 else None, playable_demos.get(case["slug"]))
             if brands_visible:
                 case_path = "cases/%s/index.html" % case["slug"]
                 pages[case_path] = pages[case_path].replace('<a href="https://dcc-mcp.github.io/">DCC-MCP 官网', '<a href="../../brands/">品牌画廊</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网')
                 if brand_preview:
                     pages[case_path] = pages[case_path].replace("index, follow, max-image-preview:large", "noindex, nofollow")
+            if case["slug"] in playable_demos:
+                case_path = "cases/%s/index.html" % case["slug"]
+                pages[case_path] = pages[case_path].replace(
+                    '<section class="detail-section" id="results">',
+                    playable.section(playable_demos[case["slug"]]).replace('data-playable', 'data-playable data-play-revision="' + asset_versions.game_revision(root, playable_demos[case['slug']]['url']) + '"', 1) + '<section class="detail-section" id="results">')
+                pages[case_path] = pages[case_path].replace(
+                    '<a href="#results">成果</a>', '<a href="#play">交互体验</a><a href="#results">成果</a>')
+                pages[case_path] = pages[case_path].replace(
+                    '</head>', '<script src="../../assets/playable.js" defer></script></head>')
             base = "docs/showcase/%s" % case["slug"]
             for required in ("README.md", "manifest.json", "validation.json"):
                 assets.add(base + "/" + required)
@@ -603,6 +680,11 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
                 resource_url(item["url"])
                 if not urlsplit(item["url"]).scheme:
                     assets.add(safe_rel(item["url"]))
+        import localization
+        if localize:
+            pages = localization.localize_pages(root, pages, playable_demos, brand_catalog if brands_visible else None)
+        if localize:
+            assets.add("assets/locale.js")
         # Every file is selected explicitly, rather than discovered by crawling.
         sources = {rel: resolve_public(root, rel) for rel in sorted(assets)}
         problems = []
@@ -626,7 +708,10 @@ def build(root: str, out_dir: str, brand_preview: bool = False) -> tuple[list[st
         if os.path.isdir(out_abs):
             shutil.rmtree(out_abs)
         os.makedirs(out_abs)
+        import asset_versions
         for rel, text in pages.items():
+            if rel.endswith(".html"):
+                text = asset_versions.version_html(text, rel, sources)
             dst = os.path.join(out_abs, *rel.split("/"))
             os.makedirs(os.path.dirname(dst), exist_ok=True)
             with open(dst, "w", encoding="utf-8", newline="\n") as fh:

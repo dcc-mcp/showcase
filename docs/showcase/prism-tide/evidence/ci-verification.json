@@ -1,0 +1,68 @@
+{
+  "source_commit": "f7b0b52aac4dc607c1b1bb0826a18243930c0f0f",
+  "native_source_hashes": {
+    "export_presets.cfg": "52553020b4ebe524cfe6a15ecd53012c40247b86c1c81dafc70e10e483f4afd6",
+    "project.godot": "abf3146a2143529d0dd165dfdd6184243cb83f87bdfc2d5bb3ed4feba497f481",
+    "prism_tide.gd": "948e772f15623c537d145c48eb67c4f859c41e7e736395a1ac116ca1ecb2e777",
+    "prism_tide.gd.uid": "6dce192f1dca44e4267f13c44d9d99dbe5add945eda3278be61ee65a75563e6b",
+    "main.tscn": "0dc80a315ecd5b395933d43c39ca8d0783db586a77ce393e896db36ec535a704"
+  },
+  "capture_provider": "Godot native CI/Xvfb, not MCP render return",
+  "artifact_sha256": "4239cab8fea404784999187affba9a70978db18da0d86d9a085b8fac3922688d",
+  "logic": {
+    "checks": {
+      "level_1_reset": true,
+      "level_1_restored": true,
+      "level_1_solution": true,
+      "level_1_starts_unsolved": true,
+      "level_1_wrong_turn": true,
+      "level_2_closed_shutter": true,
+      "level_2_reset": true,
+      "level_2_restored": true,
+      "level_2_solution": true,
+      "level_2_starts_unsolved": true,
+      "level_2_wrong_turn": true,
+      "level_3_closed_shutter": true,
+      "level_3_reset": true,
+      "level_3_restored": true,
+      "level_3_solution": true,
+      "level_3_starts_unsolved": true,
+      "level_3_wrong_turn": true
+    },
+    "passed": true
+  },
+  "resource_pack_reopen": {
+    "checks": {
+      "level_1_reset": true,
+      "level_1_restored": true,
+      "level_1_solution": true,
+      "level_1_starts_unsolved": true,
+      "level_1_wrong_turn": true,
+      "level_2_closed_shutter": true,
+      "level_2_reset": true,
+      "level_2_restored": true,
+      "level_2_solution": true,
+      "level_2_starts_unsolved": true,
+      "level_2_wrong_turn": true,
+      "level_3_closed_shutter": true,
+      "level_3_reset": true,
+      "level_3_restored": true,
+      "level_3_solution": true,
+      "level_3_starts_unsolved": true,
+      "level_3_wrong_turn": true
+    },
+    "passed": true
+  },
+  "actual_input_checks": {
+    "level_1_real_input_win": true,
+    "level_2_real_input_win": true,
+    "level_3_real_input_win": true,
+    "keyboard_selection": true,
+    "closed_shutter_blocks": true,
+    "wrong_rotation_unsolved": true,
+    "repeated_keyboard_reset": true,
+    "repeated_mouse_reset": true,
+    "final_reset_clear": true
+  },
+  "note": "Public evidence strips runner paths, job IDs, request/session metadata and local install receipts. Raw fixture source is linked by immutable commit."
+}

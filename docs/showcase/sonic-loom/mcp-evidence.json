@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "scope": "Actual typed MCP authoring calls; request identifiers and internal editor paths omitted. Source replacement is bound by SHA-256. Runtime capture is a separate native CI operation.",
+  "calls": [
+    {
+      "tool": "create_script",
+      "arguments": {
+        "path": "res://loom.gd",
+        "source_sha256": "c9bc4f2d190805b616c77be92e7b8f1ddeba80fb32c8bf84d91e2cbe17ad4e37",
+        "source_file": "history/loom-v1.gd"
+      },
+      "success": true,
+      "context": {
+        "bytes": 13201,
+        "path": "res://loom.gd",
+        "written": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://loom.gd"
+      },
+      "success": true,
+      "context": {
+        "error": "OK",
+        "path": "res://loom.gd",
+        "valid": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "create_scene",
+      "arguments": {
+        "path": "res://main.tscn",
+        "root_type": "Node2D",
+        "root_name": "SonicLoom",
+        "open": true
+      },
+      "success": true,
+      "context": {
+        "created": true,
+        "path": "res://main.tscn",
+        "root_type": "Node2D"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "attach_script",
+      "arguments": {
+        "node_path": ".",
+        "script_path": "res://loom.gd"
+      },
+      "success": true,
+      "context": {
+        "attached": true,
+        "node_path": "SonicLoom",
+        "script_path": "res://loom.gd"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "save_scene",
+      "arguments": {
+        "path": "res://main.tscn"
+      },
+      "success": true,
+      "context": {
+        "saved": true,
+        "scene_path": "res://main.tscn"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "application/run/main_scene",
+        "value": "res://main.tscn"
+      },
+      "success": true,
+      "context": {
+        "key": "application/run/main_scene",
+        "updated": true,
+        "value": "res://main.tscn"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "display/window/size/viewport_width",
+        "value": 1280
+      },
+      "success": true,
+      "context": {
+        "key": "display/window/size/viewport_width",
+        "updated": true,
+        "value": 1280.0
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "display/window/size/viewport_height",
+        "value": 800
+      },
+      "success": true,
+      "context": {
+        "key": "display/window/size/viewport_height",
+        "updated": true,
+        "value": 800.0
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "display/window/stretch/mode",
+        "value": "canvas_items"
+      },
+      "success": true,
+      "context": {
+        "key": "display/window/stretch/mode",
+        "updated": true,
+        "value": "canvas_items"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "rendering/renderer/rendering_method",
+        "value": "gl_compatibility"
+      },
+      "success": true,
+      "context": {
+        "key": "rendering/renderer/rendering_method",
+        "updated": true,
+        "value": "gl_compatibility"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "audio/driver/mix_rate",
+        "value": 44100
+      },
+      "success": true,
+      "context": {
+        "key": "audio/driver/mix_rate",
+        "updated": true,
+        "value": 44100.0
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "get_audio_bus_layout",
+      "arguments": {},
+      "success": true,
+      "context": {
+        "buses": [
+          {
+            "effects": [],
+            "index": 0,
+            "mute": false,
+            "name": "Master",
+            "solo": false,
+            "volume_db": 0.0
+          }
+        ]
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "get_scene_tree",
+      "arguments": {},
+      "success": true,
+      "context": {
+        "root": {
+          "children": [],
+          "groups": [],
+          "name": "SonicLoom",
+          "path": "SonicLoom",
+          "script": "res://loom.gd",
+          "type": "Node2D"
+        },
+        "scene_path": "res://main.tscn",
+        "source": "edited"
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "edit_script",
+      "arguments": {
+        "path": "res://loom.gd",
+        "source_sha256": "673fb85768a676b4feed057175ad04a8065411e216c8d9237f8a0673964829cc",
+        "source_file": "history/loom-v2.gd"
+      },
+      "success": true,
+      "context": {
+        "bytes": 13175,
+        "path": "res://loom.gd",
+        "written": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://loom.gd"
+      },
+      "success": true,
+      "context": {
+        "error": "OK",
+        "path": "res://loom.gd",
+        "valid": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "edit_script",
+      "arguments": {
+        "path": "res://loom.gd",
+        "source_sha256": "673fb85768a676b4feed057175ad04a8065411e216c8d9237f8a0673964829cc",
+        "source_file": "history/loom-v2.gd"
+      },
+      "success": true,
+      "context": {
+        "bytes": 13175,
+        "path": "res://loom.gd",
+        "written": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://loom.gd"
+      },
+      "success": true,
+      "context": {
+        "error": "OK",
+        "path": "res://loom.gd",
+        "valid": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "edit_script",
+      "arguments": {
+        "path": "res://loom.gd",
+        "source_sha256": "ecd55c4f64914d07a72d7fd65bfacd81e91d05a7807c3827348edbb44cc2a8d0",
+        "source_file": "native/loom.gd"
+      },
+      "success": true,
+      "context": {
+        "bytes": 13181,
+        "path": "res://loom.gd",
+        "written": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://loom.gd"
+      },
+      "success": true,
+      "context": {
+        "error": "OK",
+        "path": "res://loom.gd",
+        "valid": true
+      },
+      "control_route": "gateway",
+      "gateway_stats_recorded": true
+    }
+  ]
+}

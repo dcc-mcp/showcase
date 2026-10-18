@@ -6,7 +6,7 @@ An original Godot game with two incoming lanes, three destinations and a six-par
 
 [Source ZIP](Parcel-Switchyard-Source.zip) · [PCK](parcel.pck) · [Hero](hero.png) · [Film](demo.mp4) · [Small window](small-window.png) · [Interaction](interaction.png) · [Project](native/project.godot) · [Scene](native/main.tscn) · [Script](native/parcel_game.gd) · [UID](native/parcel_game.gd.uid) · [Preset](native/export_presets.cfg) · [MCP evidence](evidence/mcp-calls.json) · [Initial script](evidence/initial-script.gd.txt) · [Logic](evidence/logic-tests.json) · [Archive replay](evidence/archive-tests.json) · [Input](evidence/interaction-result.json) · [CI binding](evidence/ci-verification.json) · [Render](evidence/native-render.txt) · [Video metadata](evidence/video-info.json) · [Rights](LICENSES.md) · [Validation](validation.json) · [Manifest](manifest.json)
 
-## What the evidence establishes
+## Original native evidence, 2026-10-11
 
 | Stage | Result | Evidence boundary |
 | --- | --- | --- |
@@ -52,4 +52,31 @@ To reproduce authoring, install the official Godot adapter into a separate copy.
 
 The deepest creation verification is a real tool return through the gateway. Native rendering is separately established by the CI runner; the local headless limitation remains a recorded failure. A warning that the CI display cannot change V-Sync is retained in the render record. The initial portable copy lacked the script UID sidecar and resolved via the valid text path; the sidecar was restored before final CI, which has no missing-UID warning.
 
-No Web export, standalone executable, touch controls or mobile gameplay is claimed. The PCK requires a compatible Godot executable. Artwork is procedural GDScript, not individually modeled scene nodes. No private project assets, third-party artwork, software binary or font binary are bundled. Publication does not apply the site-code MIT license to this case. See LICENSES.md.
+The original 2026-10-11 package claimed no Web export, standalone executable, touch controls or mobile gameplay. Its PCK requires a compatible Godot executable. Artwork is procedural GDScript, not individually modeled scene nodes. That historical native package contains no private project assets, third-party artwork, software binary or font binary. Publication does not apply the site-code MIT license to this case. See LICENSES.md.
+
+## Additive Web adaptation, 2026-10-18
+
+[Browser build](../../../play/parcel-switchyard/index.html) · [Export provenance](../../../play/parcel-switchyard/export-provenance.json) · [Web rights and runtime notices](../../../play/parcel-switchyard/LICENSES.md)
+
+Reproduction and acceptance scripts are versioned in the repository under
+`scripts/godot_web/parcel-switchyard/`.
+
+The Web adapter inherits the original source byte-for-byte. It adds a 720×1320
+portrait presentation, explicit route/send/pause/auto/reset controls, and a
+bilingual HTML shell. All Web game labels and feedback also support English
+and Simplified Chinese; the original downloadable native source stays unchanged.
+The game remains silent.
+The original source ZIP, native PCK, movie, images, tool receipts and license
+remain unchanged. New Web source is ordinary Godot CLI work, not a new MCP run.
+
+The standard single-thread Godot 4.6.3 export and 116 headless regressions are
+recorded in the linked provenance. Its export-time browser status is deliberately
+not-tested: an export does not prove playability. The separate exact-head Parcel
+Web workflow exercises real desktop keyboard/mouse and emulated 320/390px phone
+touch input in both shell languages, plus generated case/game iframes. It retains
+actual screenshots, full interaction recordings and input assertions for review.
+Neither headless checks nor the old desktop screenshots establish phone usability.
+No physical-device, Safari/Firefox, subjective visual or deployed-site acceptance
+is implied by these export records. Exit/reload starts a fresh shift; no persistent
+save is implemented. The shared upstream runtime and its font/license notices
+are separately identified in the Web rights notice.
