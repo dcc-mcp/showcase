@@ -13,6 +13,26 @@ def helper(name, **namespace):
 
 
 class ObserverGuards(unittest.TestCase):
+    def test_capacity_burst_uses_eight_real_inputs_before_one_fresh_wait(self):
+        snapshot = {'targets': {'send': [100, 100, 80, 50]}, 'layout_size': [1280, 720]}
+        for touch in [False, True]:
+            page = Mock();page.viewport_size = {'height': 900}
+            page.locator.return_value.bounding_box.return_value = {'x': 0, 'y': 0, 'width': 1280, 'height': 720}
+            events = []
+            page.touchscreen.tap.side_effect = lambda *args: events.append(('tap', args))
+            page.mouse.click.side_effect = lambda *args: events.append(('click', args))
+            fresh = Mock(side_effect=lambda *args: events.append(('fresh', args)))
+            helper('target', state=Mock(return_value=snapshot), wait_fresh=fresh)(page, 'send', touch, repetitions=8)
+            self.assertEqual([event[0] for event in events], [('tap' if touch else 'click')] * 8 + ['fresh'])
+            self.assertTrue(all(event[1] == (140, 125) for event in events[:8]))
+            fresh.assert_called_once_with(page, snapshot)
+            page.evaluate.assert_not_called()
+
+    def test_failed_wait_reports_the_actual_condition(self):
+        page = Mock();page.wait_for_function.side_effect = TimeoutError()
+        with self.assertRaisesRegex(AssertionError, 'sent===6.*TimeoutError'):
+            helper('wait', state=Mock())(page, 'window.__parcelState.sent===6')
+
     def test_fresh_gate_requires_new_publication_and_elapsed_process_frames(self):
         wait=Mock();view=Mock()
         helper('wait_fresh',wait=wait)(view,{'publication_id':7,'process_frame':20},frames=6)

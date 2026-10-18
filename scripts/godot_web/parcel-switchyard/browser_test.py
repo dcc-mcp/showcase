@@ -40,7 +40,10 @@ def state(page):
 
 
 def wait(page, expression):
-    page.wait_for_function('window.__parcelState && (' + expression + ')', timeout=15000)
+    try:
+        page.wait_for_function('window.__parcelState && (' + expression + ')', timeout=15000)
+    except Exception as error:
+        raise AssertionError('Browser state wait failed: ' + expression + ' (' + type(error).__name__ + ')') from error
     return state(page)
 
 
@@ -48,7 +51,7 @@ def wait_fresh(view, before, frames=2):
     return wait(view, 'window.__parcelState.publication_id>%d && window.__parcelState.process_frame>=%d' % (before['publication_id'], before['process_frame'] + frames))
 
 
-def target(page, command, touch=False, view=None):
+def target(page, command, touch=False, view=None, repetitions=1):
     view = view or page
     snapshot = state(view)
     x, y, width, height = snapshot['targets'][command]
@@ -63,10 +66,11 @@ def target(page, command, touch=False, view=None):
         box = view.locator('#canvas').bounding_box()
         cx = box['x'] + (x + width / 2) * box['width'] / logical_width
         cy = box['y'] + (y + height / 2) * box['height'] / logical_height
-    if touch:
-        page.touchscreen.tap(cx, cy)
-    else:
-        page.mouse.click(cx, cy)
+    for _ in range(repetitions):
+        if touch:
+            page.touchscreen.tap(cx, cy)
+        else:
+            page.mouse.click(cx, cy)
     wait_fresh(view, snapshot)
 
 
@@ -193,8 +197,9 @@ def run_input(browser, base, output, width, height, lang, phone):
             assert_fresh(page)
         # Busy route capacity, repeated actions, frozen motion and safe reset.
         reset(page, phone)
-        for _ in range(8):
-            target(page, 'send', phone)
+        # A real rapid burst fills the queue. Waiting for two rendered frames
+        # after every click can let earlier parcels finish on software rendering.
+        target(page, 'send', phone, repetitions=8)
         wait(page, 'window.__parcelState.sent===6 && window.__parcelState.active===6')
         # Capacity and pause are separate scenarios: a full queue would hide a
         # broken pause-dispatch guard. Keep exactly one correctly routed parcel.
