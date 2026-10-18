@@ -34,6 +34,8 @@ licensed Godot runtime and its complete third-party notices in `play/runtime/`.
 
 The Web adapter localizes inherited desktop drawing and the new phone controls
 into English and Simplified Chinese. Chinese rendering uses the renamed OFL
-Parcel Interface subset; complete notices and provenance are included.
+Parcel Interface subset; complete notices and provenance are included. The same
+subset is an explicit fallback for missing English symbols such as arrows,
+while the original Latin face and its metrics are preserved.
 The export explicitly includes its translation table and font notices, and the
-exported PCK is reopened with Chinese enabled for all 116 headless regressions.
+exported PCK is reopened with Chinese enabled for all 118 headless regressions.

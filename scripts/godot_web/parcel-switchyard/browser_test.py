@@ -104,9 +104,11 @@ def assert_native_language(view, lang):
     snapshot = state(view)
     receipt = snapshot['draw_receipt']
     assert snapshot['language'] == receipt['language'] == lang
-    assert receipt['draw_frame'] > 0 and not receipt['missing_translations'] and not receipt['missing_glyphs'], receipt
+    assert receipt['draw_frame'] > 0, {'gate': 'actual draw', 'draw_frame': receipt['draw_frame']}
+    assert not receipt['missing_translations'], {'gate': 'translation coverage', 'missing': receipt['missing_translations']}
+    assert not receipt['missing_glyphs'], {'gate': 'font coverage', 'missing_codepoints': receipt['missing_glyphs']}
     required = ['包裹转辙场', '下一件包裹', '港口', '花园', '市场'] if lang == 'zh' else ['Parcel Switchyard', 'Harbor', 'Garden', 'Market']
-    assert all(label in receipt['labels'] for label in required), receipt
+    assert all(label in receipt['labels'] for label in required), {'gate': 'required labels', 'missing': [label for label in required if label not in receipt['labels']]}
     return receipt
 
 
@@ -279,6 +281,7 @@ def run_input(browser, base, output, width, height, lang, phone):
     except Exception:
         if not page.is_closed():
             page.screenshot(path=str(output / (name + '-failure.png')), full_page=True)
+            (output / (name + '-failure-state.json')).write_text(json.dumps(state(page), ensure_ascii=False, indent=2) + '\n')
         raise
     finally:
         context.close()

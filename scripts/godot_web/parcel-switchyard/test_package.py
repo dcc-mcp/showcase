@@ -24,7 +24,10 @@ class PackageTests(unittest.TestCase):
                 self.assertEqual(path.stat().st_size, entry['bytes'])
         self.assertTrue(provenance['native_tests']['passed'])
         self.assertTrue(provenance['exported_pack_reopened_tests']['passed'])
-        self.assertGreaterEqual(len(provenance['exported_pack_reopened_tests']['checks']), 116)
+        self.assertGreaterEqual(len(provenance['exported_pack_reopened_tests']['checks']), 118)
+        checks = {item['name']: item for item in provenance['exported_pack_reopened_tests']['checks']}
+        self.assertTrue(checks['english_full_catalog_glyph_coverage']['pass'])
+        self.assertTrue(checks['english_original_latin_metrics_retained']['pass'])
         self.assertEqual(provenance['browser_acceptance']['status'], 'not-tested')
         self.assertFalse(provenance['threads'])
         self.assertFalse(provenance['pwa'])

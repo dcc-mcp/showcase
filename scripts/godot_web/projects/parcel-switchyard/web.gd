@@ -22,6 +22,11 @@ var touch_id := -1
 var touch_moved := false
 
 func _ready() -> void:
+	# Keep the original Latin face, but do not depend on OS fallback glyphs on Web.
+	var english_font := FontVariation.new()
+	english_font.base_font = font
+	english_font.fallbacks = [chinese_font]
+	font = english_font
 	language = "zh" if "--lang=zh" in OS.get_cmdline_user_args() else "en"
 	mobile_layout = "--mobile-layout" in OS.get_cmdline_user_args()
 	super._ready()
@@ -248,6 +253,13 @@ func _phone_outgoing(route: int) -> PackedVector2Array:
 
 func _web_tests() -> bool:
 	var checks: Array[Dictionary] = []
+	var english_missing: Array[int] = []
+	for key: String in chinese:
+		for i in range(key.length()):
+			var cp := key.unicode_at(i)
+			if cp > 32 and not font.has_char(cp) and cp not in english_missing: english_missing.append(cp)
+	checks.append({"name": "english_full_catalog_glyph_coverage", "pass": english_missing.is_empty(), "missing": english_missing})
+	checks.append({"name": "english_original_latin_metrics_retained", "pass": font.get_string_size("Parcel Switchyard", HORIZONTAL_ALIGNMENT_LEFT, -1, 41) == ThemeDB.fallback_font.get_string_size("Parcel Switchyard", HORIZONTAL_ALIGNMENT_LEFT, -1, 41)})
 	for key: String in chinese:
 		var value: String = chinese[key]
 		var missing: Array[int] = []

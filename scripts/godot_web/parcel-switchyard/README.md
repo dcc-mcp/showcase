@@ -69,9 +69,9 @@ Do not report a deployed-site check unless the actual production URL was tested.
 
 - Pinned editor/template/runtime identity and standard Web export: passed
 - Original 9 rule checks rerun through inherited rules: passed
-- Adapter's 116 headless rule/layout/geometry/text-fit/glyph/synthetic-event checks:
+- Adapter's 118 headless rule/layout/geometry/text-fit/glyph/synthetic-event checks:
   passed (includes one aggregate check for the original 9)
-- Python package integrity checks: 5 passed
+- Python package integrity checks: 6 passed
 - JavaScript syntax and Python byte compilation: passed
 - Local actual browser input, rendering and screenshots: blocked before browser
   startup because Chromium's process singleton socket is denied by the sandbox

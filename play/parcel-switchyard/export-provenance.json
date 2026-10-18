@@ -38,8 +38,8 @@
     },
     {
       "path": "scripts/godot_web/projects/parcel-switchyard/README.md",
-      "sha256": "6171dc4276d9cf63eb622dc6bf0377bf5d21cd3a28ff20ecb81f24c08f1fcc18",
-      "bytes": 2458
+      "sha256": "1b010626df1bb1c1c97706ba1a81273c3bdd5a7606252a45e3dea68bdc561e72",
+      "bytes": 2603
     },
     {
       "path": "scripts/godot_web/projects/parcel-switchyard/export_presets.cfg",
@@ -83,8 +83,8 @@
     },
     {
       "path": "scripts/godot_web/projects/parcel-switchyard/web.gd",
-      "sha256": "9972a17f0a7b927e2f7802f63845b5105a6585911ccf1b967c986201ccc3b91b",
-      "bytes": 14734
+      "sha256": "342f8f68864617ca884e116200625882fde935f28c8f8b6e119f375b9a3a11d2",
+      "bytes": 15556
     },
     {
       "path": "scripts/godot_web/projects/parcel-switchyard/web.gd.uid",
@@ -117,12 +117,12 @@
   "export_files": [
     {
       "path": "play/parcel-switchyard/game.pck",
-      "sha256": "626f1fccd23103a793e7ec018fd1e0463ae77934914eb82baf67a3bfd19862a0",
-      "bytes": 114740
+      "sha256": "da7c7ce0b31fbe03f7dc64045bd4b7a8539c51c821e5556690417b1e607a5ed1",
+      "bytes": 115284
     },
     {
       "path": "play/parcel-switchyard/index.html",
-      "sha256": "23739be2cd3404cc06bcb932681475932fb69315070557e69c8741c8fe16de33",
+      "sha256": "3bfabab9e03154d3c5447997bfb396a3723413a84504162e41fa4dcda17d0f66",
       "bytes": 1841
     },
     {
@@ -138,6 +138,15 @@
   ],
   "native_tests": {
     "checks": [
+      {
+        "missing": [],
+        "name": "english_full_catalog_glyph_coverage",
+        "pass": true
+      },
+      {
+        "name": "english_original_latin_metrics_retained",
+        "pass": true
+      },
       {
         "missing": [],
         "name": "chinese_glyph_coverage_SMALL WORKS / INTERACTIVE SERIES",
@@ -603,19 +612,19 @@
         "pass": true
       },
       {
-        "name": "layout_preserves_state_93",
-        "pass": true
-      },
-      {
-        "name": "layout_preserves_state_94",
-        "pass": true
-      },
-      {
         "name": "layout_preserves_state_95",
         "pass": true
       },
       {
         "name": "layout_preserves_state_96",
+        "pass": true
+      },
+      {
+        "name": "layout_preserves_state_97",
+        "pass": true
+      },
+      {
+        "name": "layout_preserves_state_98",
         "pass": true
       },
       {
@@ -675,19 +684,19 @@
       {
         "available_units": 648,
         "measured_units": 560.0,
-        "name": "phone_instruction_fits_109",
+        "name": "phone_instruction_fits_111",
         "pass": true
       },
       {
         "available_units": 648,
         "measured_units": 616.0,
-        "name": "phone_instruction_fits_110",
+        "name": "phone_instruction_fits_112",
         "pass": true
       },
       {
         "available_units": 648,
         "measured_units": 576.0,
-        "name": "phone_instruction_fits_111",
+        "name": "phone_instruction_fits_113",
         "pass": true
       },
       {
@@ -714,6 +723,15 @@
     "checks": [
       {
         "missing": [],
+        "name": "english_full_catalog_glyph_coverage",
+        "pass": true
+      },
+      {
+        "name": "english_original_latin_metrics_retained",
+        "pass": true
+      },
+      {
+        "missing": [],
         "name": "chinese_glyph_coverage_SMALL WORKS / INTERACTIVE SERIES",
         "pass": true
       },
@@ -1177,19 +1195,19 @@
         "pass": true
       },
       {
-        "name": "layout_preserves_state_93",
-        "pass": true
-      },
-      {
-        "name": "layout_preserves_state_94",
-        "pass": true
-      },
-      {
         "name": "layout_preserves_state_95",
         "pass": true
       },
       {
         "name": "layout_preserves_state_96",
+        "pass": true
+      },
+      {
+        "name": "layout_preserves_state_97",
+        "pass": true
+      },
+      {
+        "name": "layout_preserves_state_98",
         "pass": true
       },
       {
@@ -1249,19 +1267,19 @@
       {
         "available_units": 648,
         "measured_units": 560.0,
-        "name": "phone_instruction_fits_109",
+        "name": "phone_instruction_fits_111",
         "pass": true
       },
       {
         "available_units": 648,
         "measured_units": 616.0,
-        "name": "phone_instruction_fits_110",
+        "name": "phone_instruction_fits_112",
         "pass": true
       },
       {
         "available_units": 648,
         "measured_units": 576.0,
-        "name": "phone_instruction_fits_111",
+        "name": "phone_instruction_fits_113",
         "pass": true
       },
       {
