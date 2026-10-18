@@ -70,6 +70,8 @@ var swim_wake:MeshInstance3D
 var compass:Label
 var state_clock:=0.0
 var sample_id:=0
+var presentation_pending:=false
+var presentation_id:=0
 var hint_text:=""
 var chest_lids:Array[Node3D]=[]
 var route_points:Array[Vector3]=[]
@@ -618,8 +620,7 @@ func emit_load_receipt() -> void:
  var data:=progress_data();data["schema"]=1;data["found"]=loaded_found
  print("TIDAL_LOAD ",JSON.stringify(data))
 
-func emit_state() -> void:
- sample_id+=1
+func observed_state() -> Dictionary:
  var data:=progress_data();data["schema"]=1;data["sample_id"]=sample_id;data["physics_frame"]=Engine.get_physics_frames();data["demo"]=demo
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
  data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
@@ -628,7 +629,28 @@ func emit_state() -> void:
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
  data["camera_right"]=[right.x,right.z];data["camera_forward"]=[forward.x,forward.z]
  var rect:=action_button.get_global_rect();data["action_rect"]=[rect.position.x,rect.position.y,rect.size.x,rect.size.y]
- print("TIDAL_STATE ",JSON.stringify(data))
+ return data
+
+func emit_state() -> void:
+ sample_id+=1
+ print("TIDAL_STATE ",JSON.stringify(observed_state()))
+ if not presentation_pending and DisplayServer.get_name()!="headless" and not OS.has_feature("web"):
+  emit_presented_state()
+
+func emit_presented_state() -> void:
+ # Passive native capture receipt. Observe two real draws, then bind the state
+ # and labels sampled before the second draw to its completed frame. No input,
+ # quest progress, camera, timing, or render output is changed by this observer.
+ presentation_pending=true
+ await RenderingServer.frame_post_draw
+ var first_draw_frame:=Engine.get_frames_drawn()
+ await RenderingServer.frame_pre_draw
+ var data:=observed_state()
+ var labels:={"objective":objective.text,"compass":compass.text,"progress":progress.text}
+ await RenderingServer.frame_post_draw
+ presentation_id+=1
+ print("TIDAL_PRESENTED ",JSON.stringify({"schema":1,"presentation_id":presentation_id,"first_draw_frame":first_draw_frame,"draw_frame":Engine.get_frames_drawn(),"post_draw_count":2,"state":data,"labels":labels}))
+ presentation_pending=false
 
 func interact() -> void:
  if beacon_awakened:return

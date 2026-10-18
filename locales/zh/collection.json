@@ -232,5 +232,19 @@
   "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。": "PR #3；146 项无需宿主的测试，精确对应分支头提交的 CI / 仓库契约检查通过。",
   "The original native validation covered Linux Xvfb desktop interaction. The separately added Web export has its own browser verification and does not establish physical phone testing or hardware audio-device latency.": "原始原生验证覆盖 Linux Xvfb 桌面交互。另行新增的 Web 导出具有独立的浏览器验证记录，不代表已完成实体手机测试或硬件音频设备延迟测试。",
   "Blender 4.5.13 LTS · Cycles CPU · 32 samples": "Blender 4.5.13 LTS · Cycles CPU · 32 次采样",
-  "640 × 480 · 144 frames · 24000/1001 fps · 6.006 s": "640 × 480 · 144 帧 · 24000/1001 fps · 6.006 秒"
+  "640 × 480 · 144 frames · 24000/1001 fps · 6.006 s": "640 × 480 · 144 帧 · 24000/1001 fps · 6.006 秒",
+  "Adapter / Core / CLI": "适配器 / Core / CLI",
+  "Animated GLB": "动画 GLB",
+  "MCP evidence": "MCP 证据",
+  "Native source package with licenses": "含许可说明的原生源文件包",
+  "No new license grant for this original case, including artwork, native assets, media and reproduction scripts; rights reserved. Existing site-code MIT license remains separate.": "本原创案例不授予任何新增许可，包括作品、原生资产、媒体和复现脚本；保留所有权利。现有站点代码的 MIT 许可与本案例分开适用。",
+  "Original native procedural creation, continuous film, clearance checks, native roundtrip and baked animation export.": "原创原生程序化制作、连续影片、净距检查、原生往返验证及烘焙动画导出。",
+  "References and plugins": "参考资料与插件",
+  "Reproduce": "复现",
+  "This Orbital Loom production/review stage.": "Orbital Loom 的本项制作或复核阶段。",
+  "Toolchain findings": "工具链检查发现",
+  "Typed driver regression": "Typed 驱动回归检查",
+  "Video": "视频",
+  "Review integration 2026-10-18": "复核整合 2026-10-18",
+  "Clarified the historical tool scope, added bilingual presentation and the report artifact layout, and tightened the export assertion to the three expected animated-object identities. Native scene, GLB, images, film and original production measurements are unchanged. The source package now includes the revised guard and a package-specific README.": "澄清历史工具范围，补充双语呈现及报告的成品链接布局，并将导出断言收紧为三个预期动画对象的身份。原生场景、GLB、图片、影片及原制作测量均未改变。源码包现包含修订后的断言与专用包内说明。"
 }

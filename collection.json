@@ -4126,6 +4126,285 @@
           "change": "真实MCP制作；实际键鼠三关通关；修正反射术语并重新出图，包含小窗口、原生ZIP与PCK重开证据。"
         }
       ]
+    },
+    {
+      "slug": "orbital-loom",
+      "title": "Orbital Loom · 轨道织机",
+      "subtitle": "Blender · 三重万向环与连续原生动画",
+      "software": [
+        "Blender"
+      ],
+      "capabilities": [
+        "建模",
+        "材质",
+        "灯光",
+        "动画",
+        "渲染",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/orbital-loom/hero.jpg",
+        "alt": "墨绿底座上的黄铜三重轨道动雕塑，完整底座与真实接触阴影"
+      },
+      "evidence_label": "本轮实际运行 · 官方 DCC-MCP",
+      "evidence_scope": "本次制作通过官方 Blender 适配器的 embedded MCP 完成真实场景创建、保存重开与连续逐帧渲染。定制造型使用官方 scripting escape hatch；帧切换、渲染配置、场景打开/保存及 render_scene 调用使用 typed 工具。gateway 明确禁用，不声称 gateway CLI 或 GUI 验收。",
+      "summary": "三重驱动环绕白瓷核心反向转动，露出轴承与连接轴；连续相机运动展示黄铜、墨绿搪瓷与刻度底座。",
+      "goal": "验证嵌套父子变换、表达式驱动、相机约束、机械净距、真实连续影片、原生便携与动画导出。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "查询当前公开动雕塑与官方免费技能，原创设计一件桌面轨道动雕塑。使用真实 Blender DCC-MCP，保留可编辑几何、材质、三重旋转driver、相机Track To与连续动画。先低清审帧修正轴向和裁切，再真实逐帧CPU渲染。检查全时段运动范围、环与立柱BVH碰撞、原生保存重开、烘焙GLB重导及影片时长和连续帧。公开原生工程、影片与复现代码，诚实区分scripting和typed覆盖，不以静帧幻灯片冒充动作。",
+        "note": "可复用说明，非用户逐字原话。"
+      },
+      "environment": [
+        {
+          "label": "Host",
+          "value": "Blender 4.5.14 LTS · CPU Cycles"
+        },
+        {
+          "label": "Adapter / Core / CLI",
+          "value": "0.2.16 / 0.20.42 / 0.20.42；gateway_port=0"
+        },
+        {
+          "label": "Video",
+          "value": "960 × 540 · 24 fps · 360 independent frames · 15 seconds · 16 samples"
+        }
+      ],
+      "tools": [
+        {
+          "name": "blender_scripting__execute_script_file",
+          "description": "原创几何与驱动组装、BVH检查、动画导出及脱敏；这是明确的scripting fallback。"
+        },
+        {
+          "name": "blender_scene__open_scene / save_scene",
+          "description": "真实原生保存重开。"
+        },
+        {
+          "name": "blender_animation__set_current_frame / blender_render__render_scene",
+          "description": "逐帧切换并执行真实Cycles渲染，每帧独立写盘。"
+        },
+        {
+          "name": "blender_render__set_render_settings",
+          "description": "配置真实输出规格并读回。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "设计与官方工具检查",
+          "description": "查阅当代轨道动雕塑与官方Extra Mesh Objects。用原生几何保持最少依赖，没有复制参考素材。"
+        },
+        {
+          "title": "真实预览修订",
+          "description": "修正父子变换更新、左右轴连接和底座裁切，外移立柱保证运动净距。"
+        },
+        {
+          "title": "全时段几何检查",
+          "description": "求值所有帧的轨道极值，每隔5帧检查环之间及环与立柱BVH交叉；保留数值证据。"
+        },
+        {
+          "title": "连续影片与原生回环",
+          "description": "原生与GLB均重新打开检查，影片由连续独立渲染帧编码，未插帧或复制静图。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/orbital-loom/orbital-loom.mp4",
+          "alt": "Orbital Loom真实连续动画",
+          "caption": "15秒 · 960×540 · 24fps · 360独立Cycles帧 · 静音"
+        },
+        {
+          "src": "docs/showcase/orbital-loom/hero.jpg",
+          "alt": "轨道展开的正面产品视图",
+          "caption": "正式动画第1帧的网页JPEG副本"
+        },
+        {
+          "src": "docs/showcase/orbital-loom/quarter-turn.jpg",
+          "alt": "外环转为水平的动态姿态",
+          "caption": "正式动画第90帧"
+        },
+        {
+          "src": "docs/showcase/orbital-loom/film-contact-sheet.jpg",
+          "alt": "真实成片解码关键帧联系表",
+          "caption": "成片均匀抽取12帧用于视觉QA"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Typed driver通道",
+          "result": "fail",
+          "observed": "rotation_euler.z返回ValueError；无索引vector回退仅配置X且额外创建Y/Z零driver。实际制作明确用scripting指定索引。"
+        },
+        {
+          "name": "原生与驱动",
+          "result": "pass",
+          "observed": "122 objects，3个有效driver、Track To约束；脱敏压缩native重开且无外部贴图。"
+        },
+        {
+          "name": "机械净距",
+          "result": "pass",
+          "observed": "Blender场景单位：轨道到底座最小垂直净距0.382，轨道到立柱最小水平净距0.063；采样BVH无交叉。"
+        },
+        {
+          "name": "动画GLB",
+          "result": "pass",
+          "observed": "重导115对象、3个烘焙动画对象，抽样矩阵确实变化。"
+        },
+        {
+          "name": "真实视频",
+          "result": "pass",
+          "observed": "ffprobe与全片解码通过；360独立源帧、24fps、15秒。"
+        },
+        {
+          "name": "浏览器播放 / GUI",
+          "result": "not_run",
+          "observed": "云浏览器明确拒绝file URL；未换路绕过，未声称GUI验收。"
+        }
+      ],
+      "limitations": [
+        "本案例驱动的typed driver修复为独立Draft PR #298；本轮成片没有升级或使用修复版。",
+        "不是制造级工程认证；刻意轴承连接不作为碰撞。",
+        "嵌入MCP通过；shared gateway/CLI call未通过，具体兼容性记录随附。",
+        "GLB不含摄影棚、相机和原生文字；不声称跨渲染器材质一致。",
+        "公开响应为最小脱敏子集，非完整原始trace。",
+        "确切backend model与reasoning effort无独立核验，均unknown。"
+      ],
+      "resources": [
+        {
+          "label": "Native source package with licenses",
+          "url": "docs/showcase/orbital-loom/orbital-loom-source.zip"
+        },
+        {
+          "label": "Native Blender scene",
+          "url": "docs/showcase/orbital-loom/orbital-loom.blend"
+        },
+        {
+          "label": "Animated GLB",
+          "url": "docs/showcase/orbital-loom/orbital-loom-animated.glb"
+        },
+        {
+          "label": "Video",
+          "url": "docs/showcase/orbital-loom/orbital-loom.mp4"
+        },
+        {
+          "label": "Reproduce",
+          "url": "docs/showcase/orbital-loom/build_scene.py"
+        },
+        {
+          "label": "Validation",
+          "url": "docs/showcase/orbital-loom/validation.json"
+        },
+        {
+          "label": "MCP evidence",
+          "url": "docs/showcase/orbital-loom/mcp-summary.json"
+        },
+        {
+          "label": "References and plugins",
+          "url": "docs/showcase/orbital-loom/references.md"
+        },
+        {
+          "label": "Toolchain findings",
+          "url": "docs/showcase/orbital-loom/toolchain-findings.md"
+        },
+        {
+          "label": "Typed driver regression",
+          "url": "docs/showcase/orbital-loom/driver-probe.json"
+        },
+        {
+          "label": "Guide",
+          "url": "docs/showcase/orbital-loom/README.md"
+        },
+        {
+          "label": "Licenses",
+          "url": "docs/showcase/orbital-loom/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "No new license grant for this original case, including artwork, native assets, media and reproduction scripts; rights reserved. Existing site-code MIT license remains separate.",
+        "note": "原创几何、材质与动画，无外部模型、贴图、音乐或字体。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/f831dc8a4a87d70eff0b1ca7eafca87058f20bd7",
+        "commit": "f831dc8a4a87d70eff0b1ca7eafca87058f20bd7",
+        "title": "Inspected official adapter source reference; installed wheel version is recorded separately, not a binary identity claim."
+      },
+      "verified_at": "2026-10-11",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "Planning",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "creation",
+          "stage": "Native creation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "code",
+          "stage": "Reproduction scripts",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "reference",
+          "stage": "Official documentation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "JPEG derivatives",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "Actual image review",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "Native and tool checks",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-11",
+          "change": "Original native procedural creation, continuous film, clearance checks, native roundtrip and baked animation export."
+        },
+        {
+          "version": "Review integration 2026-10-18",
+          "date": "2026-10-18",
+          "change": "Clarified the historical tool scope, added bilingual presentation and the report artifact layout, and tightened the export assertion to the three expected animated-object identities. Native scene, GLB, images, film and original production measurements are unchanged. The source package now includes the revised guard and a package-specific README."
+        }
+      ]
     }
   ]
 }
