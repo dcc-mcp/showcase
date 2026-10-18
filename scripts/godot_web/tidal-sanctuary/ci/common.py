@@ -31,6 +31,17 @@ TROPICAL_NOTICES = ("assets/tropical/FOREST-LICENSE.txt", "assets/tropical/ADVEN
                     "assets/tropical/SOURCE.json")
 GAME_FILES += TROPICAL_FILES + TROPICAL_NOTICES
 ASSET_NOTICE_FILES += TROPICAL_NOTICES
+STORY_FILES = ("tide_interface.gd", "tide_audio.gd", "verify_audio.gd", "verify_story.gd",
+               "assets/story/story.en-zh.json", "assets/story/chart.svg", "assets/story/key.svg",
+               "assets/story/pearl.svg", "assets/story/beacon.svg", "assets/story/check.svg",
+               "assets/story/audio-on.svg", "assets/story/audio-off.svg",
+               "assets/audio/tidekeeper-loop.ogg", "assets/audio/chart_read.wav",
+               "assets/audio/key_pickup.wav", "assets/audio/pearl_pickup.wav", "assets/audio/beacon_resolve.wav")
+STORY_NOTICES = ("assets/audio/SOURCE.json", "assets/audio/NOTICE.txt", "assets/story/SOURCE.json", "assets/story/NOTICE.txt")
+GAME_FILES += STORY_FILES + STORY_NOTICES
+ASSET_NOTICE_FILES += STORY_NOTICES
+RAW_STORY_FILES = ("assets/story/story.en-zh.json",)
+
 # Only these manifest-owned static image buffers are copied/exported as raw bytes.
 RAW_IMAGE_FILES = tuple(name for name in GAME_FILES if name.endswith(".bin"))
 

@@ -2,8 +2,12 @@
 """Capture each real Web viewport independently; then aggregate strict acceptance."""
 from __future__ import annotations
 import argparse
+import array
+import base64
+import importlib.metadata
 import json
 import math
+import subprocess
 import threading
 import tempfile
 import time
@@ -48,7 +52,277 @@ def wait_observer(page, console, prefix, start, timeout=15, allow_runtime_exit=F
     raise TimeoutError(f"Actual game did not emit a fresh {prefix} receipt")
 
 
+# Playwright 1.63 adds this headless default; remove ONLY that one switch.
+# https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/chromium/chromium.ts#L349-L355
+IGNORED_DEFAULT_ARGS = ["--mute-audio"]
 BROWSER_ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"]
+
+
+
+AUDIO_CUES = (("chart_read", .72), ("key_pickup", 1.05), ("pearl_pickup", 1.65), ("beacon_resolve", 4.8))
+QUIET_RMS = 1e-5
+AUDIBLE_RMS = 1e-4
+
+
+def validate_journey(receipt, trigger):
+    if (type(receipt.get("schema")) is not int or receipt["schema"] != 1 or receipt.get("started") is not True
+            or receipt.get("demo") is not False or receipt.get("trigger") != trigger):
+        raise ValueError("Journey did not start through the expected actual input")
+
+
+def audio_graph(snapshot):
+    if type(snapshot.get("schema")) is not int or snapshot["schema"] != 1 or snapshot.get("errors") != [] or len(snapshot.get("contexts", [])) != 1:
+        raise ValueError("Audio graph observation is missing, unknown or failed")
+    context = snapshot["contexts"][0]
+    terminals = [item for item in context.get("terminals", []) if item.get("active")]
+    if (not terminals or not any(item.get("kind") == "GainNode" for item in terminals)
+            or any(item.get("mirror_count") != 1 for item in terminals)
+            or len({item.get("key") for item in terminals}) != len(terminals)):
+        raise ValueError("Audio capture requires deduplicated genuine terminal edges including the Sample post-mute gain")
+    return context
+
+
+def audio_window(snapshot, begin_ms, end_ms, minimum_seconds, audible=False):
+    context = audio_graph(snapshot)
+    samples = [item for item in context.get("samples", []) if begin_ms <= item.get("wall_ms", -1) <= end_ms]
+    if (len(samples) < 5 or samples[-1]["wall_ms"] - samples[0]["wall_ms"] < minimum_seconds * 1000
+            or max((right["wall_ms"] - left["wall_ms"] for left, right in zip(samples, samples[1:])), default=0) > 1000):
+        raise ValueError("Audio window lacks sustained fresh meter evidence")
+    for item in samples:
+        if any(type(item.get(key)) not in (int, float) or not math.isfinite(item[key]) for key in ("rms", "peak", "context_time")):
+            raise ValueError("Audio meter contains invalid numbers")
+        if type(item.get("active_music")) is not int or item["active_music"] > 1 or item.get("clipped_fraction", 1) > .001 or item["peak"] > 1.01:
+            raise ValueError("Observed audio has overlapping music voices or sustained clipping")
+    rms = [item["rms"] for item in samples]
+    if audible:
+        if (any(item.get("state") != "running" for item in samples)
+                or samples[-1]["context_time"] - samples[0]["context_time"] < minimum_seconds * .9
+                or sum(value >= AUDIBLE_RMS for value in rms) < len(rms) * .8):
+            raise ValueError("Real running browser audio was silent or stalled")
+    elif max(rms) > QUIET_RMS:
+        raise ValueError("Expected quiet browser audio window contains signal")
+    return {"first_ms": samples[0]["wall_ms"], "last_ms": samples[-1]["wall_ms"], "samples": len(samples),
+            "maximum_rms": max(rms), "mean_rms": sum(rms) / len(rms), "audible": audible}
+
+
+def validate_audio_baseline(snapshot, begin_ms):
+    if snapshot.get("starts") or snapshot.get("gestures") or snapshot.get("user_activation", {}).get("has_been_active") is not False:
+        raise ValueError("Fresh audio baseline must precede every real gesture and source start")
+    return audio_window(snapshot, begin_ms, snapshot["wall_ms"], 2.0)
+
+
+
+def source_end(source, fallback):
+    values = [source.get(key) for key in ("planned_end", "stopped_context_time", "ended_context_time")]
+    if any(type(value) not in (int, float) or not math.isfinite(value) for value in values if value is not None):
+        raise ValueError("Audio source lifetime contains invalid clock values")
+    return min([value for value in values if value is not None] or [fallback])
+
+
+def clock_samples(context, begin, end):
+    for item in context.get("samples", []):
+        if any(type(item.get(key)) not in (int, float) or not math.isfinite(item[key]) or item[key] < 0
+               for key in ("context_time", "rms", "peak")):
+            raise ValueError("Audio-clock meter contains invalid or negative values")
+    samples = [item for item in context.get("samples", []) if begin <= item.get("context_time", -1) <= end]
+    # snapshot() may meter twice in one rendering quantum. Keep one observation
+    # per clock value; duplicates cannot manufacture evidence or sample density.
+    unique = {}
+    for item in samples:
+        unique[item["context_time"]] = item
+    return sorted(unique.values(), key=lambda item: item["context_time"])
+
+
+def validate_loop_boundary(snapshot, music, receipts):
+    context = audio_graph(snapshot)
+    first = music[0]
+    if abs(first["duration"] - 32) >= .005 or abs(first["offset"]) > .0001 or first["rate"] != 1:
+        raise ValueError("Music did not begin at the authored 32-second loop origin")
+    boundary = first["scheduled_start"] + 32
+    unmute = next((item for item in snapshot.get("marks", []) if item.get("name") == "unmuted"), None)
+    unmute_clock = next((item.get("time") for item in (unmute or {}).get("context_times", []) if item.get("id") == context["id"]), math.inf)
+    if unmute_clock > boundary - 1.1 or [item.get("muted") for item in receipts if item.get("event") == "mute"] != [True, False]:
+        raise ValueError("First loop boundary lacks an established unmuted interval")
+    if first.get("looping") is True:
+        continuation = first
+    else:
+        continuation = next((item for item in music[1:] if
+            abs(item["scheduled_start"] - boundary) <= .1 and abs(item["offset"]) <= .0001 and item["rate"] == 1), None)
+    if (source_end(first, context["context_time"]) < boundary - .006 or continuation is None
+            or source_end(continuation, context["context_time"]) < boundary + 1):
+        raise ValueError("Music source does not genuinely continue across its first loop boundary")
+    samples = clock_samples(context, boundary - 1.15, boundary + 1.15)
+    if (len(samples) < 16 or samples[0]["context_time"] > boundary - 1 or samples[-1]["context_time"] < boundary + 1
+            or sum(item["context_time"] < boundary for item in samples) < 8
+            or sum(item["context_time"] >= boundary for item in samples) < 8
+            or any(right["context_time"] - left["context_time"] > .25 for left, right in zip(samples, samples[1:]))):
+        raise ValueError("Loop seam lacks two seconds of dense audio-clock meter coverage")
+    if any(item.get("state") != "running" or not math.isfinite(item.get("rms", math.nan))
+           or item["rms"] < AUDIBLE_RMS or item.get("active_music") != 1 for item in samples):
+        raise ValueError("Loop seam contains silence, a stopped clock, or duplicate/missing music")
+    return {"boundary_context_time": boundary, "continuing_source_id": continuation["id"],
+            "first_context_time": samples[0]["context_time"], "last_context_time": samples[-1]["context_time"],
+            "meter_samples": len(samples), "minimum_rms": min(item["rms"] for item in samples)}
+
+
+def validate_cue_lifetime(source, context):
+    begin, duration = source["scheduled_start"], source["duration"]
+    end = begin + duration
+    if (abs(source["offset"]) > .0001 or source["rate"] != 1 or source.get("looping") is not False
+            or type(source.get("planned_end")) not in (int, float) or abs(source["planned_end"] - end) > .006
+            or source_end(source, context["context_time"]) < end - .03 or context["context_time"] < end):
+        raise ValueError("Cue did not play from its origin through its authored lifetime")
+    samples = clock_samples(context, begin, end)
+    if (len(samples) < 3 or samples[0]["context_time"] > begin + .2 or samples[-1]["context_time"] < end - .2
+            or any(right["context_time"] - left["context_time"] > .25 for left, right in zip(samples, samples[1:]))):
+        raise ValueError("Cue lacks dense observed source lifetime coverage")
+    # The probe lists a cue only while its real source is live and a CURRENT
+    # nonzero-gain graph path reaches the genuine destination. Background music
+    # cannot substitute for a stopped, detached or muted cue's lifetime evidence.
+    active = [item for item in samples if source["id"] in item.get("active_cues", [])]
+    if (any(source["id"] not in item.get("active_cues", []) for item in samples if item["context_time"] < end - .006)
+            or not active or active[0]["context_time"] > begin + .2
+            or active[-1]["context_time"] < end - .2
+            or any(item.get("state") != "running" or item.get("rms", 0) < AUDIBLE_RMS for item in active)):
+        raise ValueError("Cue source is missing, muted or detached during its authored lifetime")
+    return {"first_active_context_time": active[0]["context_time"], "last_active_context_time": active[-1]["context_time"],
+            "active_meter_samples": len(active), "authored_end_context_time": end}
+
+def validate_audio_sources(snapshot, receipts, actions):
+    context = audio_graph(snapshot)
+    starts = snapshot.get("starts", [])
+    music = [item for item in starts if item.get("name") == "music"]
+    cues = [item for item in starts if item.get("name") != "music"]
+    if not music or len(cues) != 4 or len(starts) != len(music) + 4:
+        raise ValueError("Real source starts did not contain the loop and exactly four cues")
+    first_gesture = min((item["wall_ms"] for item in snapshot.get("gestures", []) if item.get("trusted")), default=math.inf)
+    for item in starts:
+        for key in ("wall_ms", "duration", "pcm_peak", "scheduled_start", "context_time", "rate", "offset"):
+            if type(item.get(key)) not in (int, float) or not math.isfinite(item[key]):
+                raise ValueError("Audio source contains invalid numeric evidence")
+        if (item.get("wall_ms", -1) < first_gesture or not item.get("path_at_start") or item["path_at_start"][-1] != context["destination"]
+                or not item.get("nonzero_gain_path_at_start") or item["nonzero_gain_path_at_start"][-1] != context["destination"]
+                or not item.get("pcm_fingerprint") or item.get("pcm_peak", 0) < AUDIBLE_RMS):
+            raise ValueError("Audio source lacks a gesture, nonzero PCM or genuine destination path")
+    if len({item["pcm_fingerprint"] for item in music}) != 1:
+        raise ValueError("Music loop recreation changed its observed PCM fingerprint")
+    # Godot Sample loops legitimately recreate sources. Reject overlapping voices,
+    # rather than requiring a single source object over the entire traversal.
+    intervals = []
+    for item in music:
+        end = min([value for value in (item.get("planned_end"), item.get("stopped_context_time"), item.get("ended_context_time")) if value is not None] or [context["context_time"]])
+        intervals.append((item["scheduled_start"], end))
+    intervals.sort()
+    if any(right[0] < left[1] - .006 for left, right in zip(intervals, intervals[1:])):
+        raise ValueError("Music sources overlap beyond two audio rendering quanta")
+    loop_boundary = validate_loop_boundary(snapshot, music, receipts)
+    if context["context_time"] - music[0]["scheduled_start"] < 32:
+        raise ValueError("Live route did not cover one complete 32-second music loop")
+    if any(item.get("active_music", 0) > 1 for item in context["samples"]):
+        raise ValueError("Observed duplicate music voices")
+    cue_receipts = [item for item in receipts if item.get("event") == "cue"]
+    start_receipts = [item for item in receipts if item.get("event") == "start"]
+    if (len(start_receipts) != 1 or type(start_receipts[0].get("start_count")) is not int or start_receipts[0]["start_count"] != 1
+            or start_receipts[0].get("started") is not True or len(cue_receipts) != 4 or len(actions) != 4):
+        raise ValueError("Audio receipts lack one real start and four physical-route cues")
+    if any(type(item.get("schema")) is not int or item["schema"] != 1 for item in receipts):
+        raise ValueError("Invalid audio receipt schema")
+    fingerprints = set()
+    pairs = []
+    marks = {item["name"]: item["wall_ms"] for item in snapshot.get("marks", [])}
+    for stage, ((name, duration), source, receipt, action) in enumerate(zip(AUDIO_CUES, cues, cue_receipts, actions)):
+        if type(receipt.get("duration")) not in (int, float) or not math.isfinite(receipt["duration"]):
+            raise ValueError("Cue receipt duration is not finite")
+        if (source.get("name") != name or abs(source.get("duration", -1) - duration) >= .005
+                or receipt.get("name") != name or type(receipt.get("stage")) is not int or receipt["stage"] != stage
+                or type(receipt.get("count")) is not int or receipt["count"] != 1
+                or abs(receipt.get("duration", -1) - duration) >= .005 or receipt.get("started") is not True
+                or receipt.get("muted") is not False or action.get("from_stage") != stage
+                or action.get("target_stage") != stage + 1 or not action.get("accepted_sample_id")
+                or not marks.get("action-" + str(stage), math.inf) <= source["wall_ms"] < marks.get("action-" + str(stage + 1), math.inf)):
+            raise ValueError("Cue PCM/source start does not match its exact physical action and stage receipt")
+        lifetime = validate_cue_lifetime(source, context)
+        fingerprints.add(source["pcm_fingerprint"])
+        pairs.append({"stage": stage, "name": name, "source_id": source["id"], "pcm_fingerprint": source["pcm_fingerprint"],
+                      "source_start_ms": source["wall_ms"], "physical_action": action, "receipt": receipt, "lifetime": lifetime})
+    if len(fingerprints) != 4:
+        raise ValueError("Cue fingerprints are not distinct")
+    return {"music_source_count": len(music), "music_fingerprint": music[0]["pcm_fingerprint"],
+            "music_observed_context_seconds": context["context_time"] - music[0]["scheduled_start"],
+            "first_loop_boundary": loop_boundary, "cue_pairs": pairs}
+
+
+def real_button(page, state, field, mobile, width, height):
+    x, y, w, h = finite_vector(state.get(field), 4, field)
+    if w <= 0 or h <= 0 or not (0 <= x < x + w <= width and 0 <= y < y + h <= height):
+        raise ValueError("Actual " + field + " is outside the rendered viewport")
+    if mobile:
+        page.touchscreen.tap(x + w / 2, y + h / 2)
+    else:
+        page.mouse.click(x + w / 2, y + h / 2)
+    return {"field": field, "kind": "touchscreen.tap" if mobile else "mouse.click", "x": x + w / 2, "y": y + h / 2}
+
+
+def wait_state(page, console, after_sample=0, predicate=lambda state: True, timeout=20):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        samples = observer_receipts(console, "TIDAL_STATE")
+        if samples and samples[-1].get("sample_id", 0) > after_sample and predicate(samples[-1]):
+            return samples[-1]
+        page.wait_for_timeout(100)
+    raise TimeoutError("No fresh actual state for the requested input boundary")
+
+
+
+def validate_recorded_pcm(pcm, sample_rate):
+    # Analyze only decoded live MediaRecorder bytes, never generate or mux audio.
+    if not pcm or any(not math.isfinite(value) for value in pcm):
+        raise ValueError("Recorded audio PCM is empty or invalid")
+    size = sample_rate // 10
+    rms = [math.sqrt(sum(value * value for value in pcm[offset:offset + size]) / size)
+           for offset in range(0, len(pcm) - size + 1, size)]
+    quiet_run = audible_run = longest_quiet = longest_audible = 0
+    for value in rms:
+        quiet_run = quiet_run + 1 if value <= QUIET_RMS else 0
+        audible_run = audible_run + 1 if value >= AUDIBLE_RMS else 0
+        longest_quiet, longest_audible = max(longest_quiet, quiet_run), max(longest_audible, audible_run)
+    if longest_quiet < 10 or sum(value >= AUDIBLE_RMS for value in rms) < 320:
+        raise ValueError("Actual recorded bytes lack one-second mute or 32 seconds of nonzero signal")
+    return {"sample_rate": sample_rate, "seconds": len(pcm) / sample_rate, "maximum_rms": max(rms),
+            "longest_quiet_seconds": longest_quiet / 10, "longest_audible_seconds": longest_audible / 10,
+            "nonzero_seconds": sum(value >= AUDIBLE_RMS for value in rms) / 10,
+            "source": "ffmpeg decoding of the original live browser WebM; mono meter analysis only"}
+
+
+def save_live_audio(page, out, label):
+    captured = page.evaluate("() => __tidalAudio.finishRecording()")
+    encoded = captured.pop("base64")
+    path = out / (label + "-live-audio.webm")
+    data = base64.b64decode(encoded, validate=True)
+    if len(data) != captured["bytes"] or len(data) < 1024:
+        raise ValueError("Live browser audio byte transfer was incomplete")
+    path.write_bytes(data)
+    probe = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-show_packets",
+        "-show_entries", "stream=codec_type,codec_name,sample_rate,channels:format=duration:packet=pts_time,duration_time", "-of", "json", str(path)], text=True, timeout=30))
+    streams = probe.get("streams", [])
+    packets = probe.pop("packets", [])
+    if not packets:
+        raise ValueError("Recorded live WebM contains no decoded audio packets")
+    timestamps = [(float(item["pts_time"]), float(item.get("duration_time", 0))) for item in packets]
+    packet_seconds = max(pts + duration for pts, duration in timestamps) - min(pts for pts, duration in timestamps)
+    probe["audio_packet_span_seconds"] = packet_seconds
+    probe["audio_packet_count"] = len(packets)
+    if (len(streams) != 1 or streams[0].get("codec_type") != "audio" or streams[0].get("codec_name") != "opus"
+            or not math.isfinite(packet_seconds) or packet_seconds < 32):
+        raise ValueError("Recorded live browser WebM lacks a complete 32-second Opus audio stream")
+    decoded = subprocess.check_output(["ffmpeg", "-v", "error", "-xerror", "-i", str(path), "-vn", "-ac", "1",
+        "-ar", "8000", "-f", "f32le", "pipe:1"], timeout=180)
+    pcm = array.array("f")
+    pcm.frombytes(decoded)
+    decoded_signal = validate_recorded_pcm(pcm, 8000)
+    captured.update({"file": path.name, "sha256": sha256(path), "media_probe": probe, "decoded_signal": decoded_signal,
+        "claim": "browser-rendered live graph recording; no physical speaker or subjective listening claim"})
+    return captured
 
 
 def secondary_touch_tap(send_touch, primary_points, action, pause):
@@ -152,14 +426,18 @@ def main():
               "limitations": ["Portrait uses Chromium device emulation, not a physical phone.",
                   "Rendered screenshots are not subjective visual acceptance.",
                   "Input uses real browser keyboard/touch events with passive state observations; no scripted demo.",
-                  "No multiplayer, deployment, accessibility, or broad device compatibility claim."],
+                  "No multiplayer, deployment, accessibility, or broad device compatibility claim.",
+                  "Audio is browser-rendered capture, not physical speaker output or subjective audition.",
+                  "Background-tab and OS focus lifecycle remain unverified; Playwright default background throttling flags are retained."],
+              "playwright_version": importlib.metadata.version("playwright"),
+              "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS},
               "pack_sha256": sha256(args.site / "index.pck")}
     try:
         with sync_playwright() as pw:
             for width, height, mobile in ((1280, 720, False), (390, 844, True)):
                 label = "portrait-390x844" if mobile else "desktop-1280x720"
                 result = {"name": label, "width": width, "height": height, "passed": False, "rendered": False,
-                          "input": {"status": "not_run"}, "language": {"status": "not_run"}, "restore": {"status": "not_run"}}
+                          "audio": {"status": "not_run"}, "input": {"status": "not_run"}, "language": {"status": "not_run"}, "restore": {"status": "not_run"}}
                 report["viewports"].append(result)
                 console, failures, requests, events, screenshots = [], [], [], [], []
                 restored_console, restored_failures = [], []
@@ -171,7 +449,7 @@ def main():
 
                 def launch():
                     return pw.chromium.launch_persistent_context(profile.name, headless=True,
-                        args=BROWSER_ARGS, viewport={"width": width, "height": height}, device_scale_factor=1,
+                        args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, viewport={"width": width, "height": height}, device_scale_factor=1,
                         is_mobile=mobile, has_touch=mobile)
 
                 def attach(target_page, target_console, target_failures):
@@ -204,6 +482,7 @@ def main():
                             pressed.add(key)
 
                 def interact(state):
+                    page.evaluate("name => __tidalAudio.mark(name)", "action-" + str(state["quest_stage"]))
                     if mobile:
                         x, y, w, h = state["action_rect"]
                         action = {"id": 1, "x": x + w / 2, "y": y + h / 2}
@@ -241,19 +520,98 @@ def main():
                     context = launch()
                     page = context.pages[0]
                     report["browser_version"] = context.browser.version if context.browser else page.evaluate("navigator.userAgent")
+                    context.add_init_script(path=str(Path(__file__).with_name("audio_probe.js")))
+                    command_session = context.new_cdp_session(page)
+                    actual_args = command_session.send("Browser.getBrowserCommandLine")["arguments"]
+                    result["browser_arguments"] = actual_args
+                    if "--mute-audio" in actual_args or any("autoplay-policy" in arg for arg in actual_args):
+                        raise RuntimeError("Audio lane contains a mute or autoplay-policy override")
+                    command_session.detach()
                     attach(page, console, failures)
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
                     wait_ready(page, console, failures)
                     canvas = page.locator("#canvas")
-                    canvas.focus()
                     bounds = canvas.bounding_box()
                     if not bounds or bounds["width"] < width - 2 or bounds["height"] < height - 2:
                         raise RuntimeError("Actual Web game canvas did not fill requested viewport")
                     if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
                         raise RuntimeError("Web shell overflows horizontally at requested viewport")
+                    result["audio"] = {"status": "running", "scope": "fresh-profile real-input browser audio"}
+                    recording = page.evaluate("() => __tidalAudio.startRecording()")
+                    baseline_mark = page.evaluate("() => __tidalAudio.mark('no-input-baseline')")
+                    page.wait_for_timeout(2300)
+                    baseline = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["baseline"] = validate_audio_baseline(baseline, baseline_mark["wall_ms"])
+                    write_json(out / (label + "-audio-baseline.json"), baseline)
+                    initial_state = wait_state(page, console)
+                    if initial_state.get("journey_started") is not False:
+                        raise RuntimeError("Fresh journey started before its actual Begin gesture")
                     capture(label + ".png")
+                    boundary = len(console)
+                    begin_input = real_button(page, initial_state, "begin_rect", mobile, width, height)
+                    events.append({"time": time.monotonic(), "kind": "begin", **begin_input})
+                    journey = wait_observer(page, console, "TIDAL_JOURNEY", boundary)
+                    validate_journey(journey, "touch_begin" if mobile else "begin_button")
+                    wait_state(page, console, initial_state["sample_id"], lambda state: state.get("journey_started") is True)
+                    result["journey"] = {"input": begin_input, "receipt": journey}
+                    page.wait_for_timeout(2100)  # Actual authored 1.5-second music fade.
+                    audible_mark = page.evaluate("() => __tidalAudio.mark('after-begin')")
+                    page.wait_for_timeout(1500)
+                    audible = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["after_begin"] = audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True)
+                    # Toggle the same visible shipped button with actual input.
+                    mute_state = wait_state(page, console)
+                    boundary = len(console)
+                    mute_input = real_button(page, mute_state, "audio_rect", mobile, width, height)
+                    muted = wait_observer(page, console, "TIDAL_AUDIO", boundary)
+                    if muted.get("event") != "mute" or muted.get("muted") is not True or muted.get("started") is not True:
+                        raise ValueError("Actual mute input did not mute the live game")
+                    wait_state(page, console, mute_state["sample_id"], lambda state: state.get("audio_muted") is True)
+                    page.wait_for_timeout(500)  # Bounded meter/history tail; never wait indefinitely for silence.
+                    quiet_mark = page.evaluate("() => __tidalAudio.mark('muted')")
+                    page.wait_for_timeout(1400)
+                    quiet = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["muted"] = {"input": mute_input, "receipt": muted, "tail_allowance_seconds": .5,
+                        "window": audio_window(quiet, quiet_mark["wall_ms"], quiet["wall_ms"], 1.1)}
+                    unmute_state = wait_state(page, console)
+                    boundary = len(console)
+                    unmute_input = real_button(page, unmute_state, "audio_rect", mobile, width, height)
+                    unmuted = wait_observer(page, console, "TIDAL_AUDIO", boundary)
+                    if unmuted.get("event") != "mute" or unmuted.get("muted") is not False or unmuted.get("started") is not True:
+                        raise ValueError("Actual unmute input did not restore the live game")
+                    wait_state(page, console, unmute_state["sample_id"], lambda state: state.get("audio_muted") is False)
+                    page.wait_for_timeout(250)
+                    unmute_mark = page.evaluate("() => __tidalAudio.mark('unmuted')")
+                    page.wait_for_timeout(1500)
+                    unmute_snapshot = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["unmuted"] = {"input": unmute_input, "receipt": unmuted,
+                        "window": audio_window(unmute_snapshot, unmute_mark["wall_ms"], unmute_snapshot["wall_ms"], 1.2, audible=True)}
+                    result["audio"]["recording"] = recording
+                    canvas.focus()
+                    if not mobile:
+                        blocked_state = wait_state(page, console)
+                        if blocked_state.get("interaction_available") is not False or blocked_state.get("quest_stage") != 0:
+                            raise ValueError("Fresh spawn cannot provide the required out-of-range interaction probe")
+                        blocked_boundary = len(console)
+                        blocked_before = page.evaluate("() => __tidalAudio.snapshot()")
+                        page.keyboard.press("e", delay=80)
+                        events.append({"time": time.monotonic(), "kind": "blocked-keypress", "key": "e"})
+                        blocked_receipt = wait_observer(page, console, "TIDAL_INTERACTION_BLOCKED", blocked_boundary)
+                        if (blocked_receipt.get("stage") != 0 or blocked_receipt.get("demo") is not False
+                                or blocked_receipt.get("reason") in (None, "ready")):
+                            raise ValueError("Actual blocked E lacks the in-game rejection receipt")
+                        blocked_after_state = wait_state(page, console, blocked_state["sample_id"])
+                        page.wait_for_timeout(1200)
+                        blocked_after = page.evaluate("() => __tidalAudio.snapshot()")
+                        if (blocked_after_state.get("quest_stage") != 0 or
+                                any(item.get("event") == "cue" for item in observer_receipts(console, "TIDAL_AUDIO", blocked_boundary)) or
+                                len([item for item in blocked_after["starts"] if item["name"] != "music"]) !=
+                                len([item for item in blocked_before["starts"] if item["name"] != "music"])):
+                            raise ValueError("Blocked actual E advanced progress or started a cue")
+                        result["audio"]["blocked_action"] = {"trigger": "key_E", "receipt": blocked_receipt, "before": blocked_state,
+                            "after": blocked_after_state, "passed": True}
                     result.update({"canvas": bounds, "rendered": True,
                         "ready_log": next(item["text"] for item in console if item["text"].startswith("TIDAL_FRAME_READY ")),
                         "loaded_wasm": any(url.endswith(".wasm") for url in requests),
@@ -310,6 +668,45 @@ def main():
                         raise RuntimeError("Actual browser route did not capture its five playable milestones")
                     report["checks"].append({"name": label + " actual input completes treasure loop and walks/wades/swims/returns to shore", "passed": True})
 
+                    # Repeated action after completion must not restart progress or emit a fifth cue.
+                    negative_before = page.evaluate("() => __tidalAudio.snapshot()")
+                    negative_state = wait_state(page, console)
+                    negative_receipts = len([item for item in observer_receipts(console, "TIDAL_AUDIO") if item.get("event") == "cue"])
+                    if mobile:
+                        real_button(page, negative_state, "action_rect", True, width, height)
+                    else:
+                        page.keyboard.press("e", delay=80)
+                    negative_after_state = wait_state(page, console, negative_state["sample_id"])
+                    page.wait_for_timeout(1200)
+                    negative_after = page.evaluate("() => __tidalAudio.snapshot()")
+                    if (not complete(negative_after_state) or
+                            len([item for item in negative_before["starts"] if item["name"] != "music"]) !=
+                            len([item for item in negative_after["starts"] if item["name"] != "music"]) or
+                            negative_receipts != len([item for item in observer_receipts(console, "TIDAL_AUDIO") if item.get("event") == "cue"])):
+                        raise ValueError("Repeated completed action changed progress or played an extra cue")
+                    result["audio"]["repeated_action"] = {"trigger": "touch" if mobile else "key_E", "before": negative_state,
+                        "after": negative_after_state, "cue_count": negative_receipts, "passed": True}
+                    # The real route normally lasts far more than a loop. If unusually
+                    # fast, remain idle in the actual game until the bounded 32s span.
+                    loop_deadline = time.monotonic() + 40
+                    while True:
+                        current_audio = page.evaluate("() => __tidalAudio.snapshot()")
+                        music_starts = [item for item in current_audio["starts"] if item["name"] == "music"]
+                        cue_starts = [item for item in current_audio["starts"] if item["name"] != "music"]
+                        audio_time = audio_graph(current_audio)["context_time"]
+                        cue_end = max((item["scheduled_start"] + item["duration"] for item in cue_starts), default=math.inf)
+                        if music_starts and audio_time - music_starts[0]["scheduled_start"] >= 33 and len(cue_starts) == 4 and audio_time >= cue_end + .15:
+                            break
+                        if time.monotonic() >= loop_deadline:
+                            raise TimeoutError("Real audio clock did not cover a complete loop and the ending cue tail")
+                        page.wait_for_timeout(200)
+                    captured_audio = save_live_audio(page, out, label)
+                    audio_snapshot = captured_audio.pop("snapshot")
+                    result["audio"]["sources"] = validate_audio_sources(audio_snapshot, observer_receipts(console, "TIDAL_AUDIO"), driver.actions)
+                    result["audio"].update({"status": "passed", "capture": captured_audio})
+                    write_json(out / (label + "-audio-observations.json"), audio_snapshot)
+                    report["checks"].append({"name": label + " real gesture, live post-mute audio, four cues and loop", "passed": True})
+
                     # Completion saves immediately. Screenshots can take longer than
                     # the auto-save interval; retain that real receipt, not a new
                     # wall-clock window unrelated to the game's simulation time.
@@ -337,6 +734,7 @@ def main():
                     context = None
                     context = launch()
                     page = context.pages[0]
+                    context.add_init_script(path=str(Path(__file__).with_name("audio_probe.js")))
                     attach(page, restored_console, restored_failures)
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
@@ -346,13 +744,18 @@ def main():
                     if len(loads) != 1:
                         raise RuntimeError("Fresh Chromium process must emit exactly one load receipt")
                     validate_restored(loads[0], saved)
+                    restored_mark = page.evaluate("() => __tidalAudio.mark('restored-no-input')")
+                    page.wait_for_timeout(2300)
+                    restored_audio = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["restored_before_gesture"] = validate_audio_baseline(restored_audio, restored_mark["wall_ms"])
+                    write_json(out / (label + "-restored-audio-baseline.json"), restored_audio)
                     capture(label + "-restored.png")
                     result["restore"].update({"status": "passed", "loaded": loads[0]})
                     report["checks"].append({"name": label + " fresh Chromium process restores completed treasure quest", "passed": True})
                     result["passed"] = True
                 except Exception as error:
                     result["blocker"] = str(error)
-                    for stage in ("input", "language", "restore"):
+                    for stage in ("audio", "input", "language", "restore"):
                         if result[stage]["status"] == "running":
                             result[stage]["status"] = "failed"
                     try:
@@ -360,6 +763,11 @@ def main():
                             capture(label + "-failure.png", diagnostic=True)
                     except Exception as screenshot_error:
                         result["failure_screenshot_error"] = str(screenshot_error)
+                    try:
+                        if page is not None and not page.is_closed():
+                            write_json(out / (label + "-audio-failure.json"), page.evaluate("() => __tidalAudio ? __tidalAudio.snapshot() : {missing_probe:true}"))
+                    except Exception as audio_error:
+                        result["audio_diagnostic_error"] = str(audio_error)
                     # Portrait evidence is independent of desktop input/language success.
                 finally:
                     if context is not None:

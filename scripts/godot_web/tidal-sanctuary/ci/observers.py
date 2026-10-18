@@ -61,10 +61,10 @@ def validate_touch_release(receipt, previous_gesture_id=0, expected_touch_index=
 
 CHINESE_LABELS = {
     "title": "潮 汐 圣 所",
-    "subtitle": "岸边的石台上留着一张海图",
-    "objective": "寻找航海图",
-    "footer": "方向键行走或游泳 · E 互动 · R 重来 · L 语言",
-    "action": "E · 互动",
+    "subtitle": "海图就在岸边的石台上。",
+    "objective": "阅读岸边的海图",
+    "footer": "方向键行走或游泳 · E 互动 · J 手记 · M 声音",
+    "action": "阅读海图",
 }
 # Language acceptance runs at the untouched fresh spawn, outside chart reach.
 CHINESE_PROMPTS = ("靠近后即可互动",)

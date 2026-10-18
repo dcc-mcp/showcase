@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "story_id": "tidekeepers_promise",
+  "title": {
+    "en": "The Tidekeeper’s Promise",
+    "zh": "守潮人的约定"
+  },
+  "tagline": {
+    "en": "A light for every journey home.",
+    "zh": "为每一次归航留一盏灯。"
+  },
+  "opening": {
+    "title": {
+      "en": "The reef light has gone dark",
+      "zh": "礁岸的灯熄灭了"
+    },
+    "body": {
+      "en": "Last night’s storm silenced the island beacon. A tidekeeper’s note waits on the shore. Find it, and bring the light home.",
+      "zh": "昨夜风暴过后，海岛的航灯不再亮起。守潮人在岸边留了一张字条。找到它，让归航的灯重新亮起。"
+    },
+    "button": {
+      "en": "Begin the journey",
+      "zh": "踏上旅途"
+    }
+  },
+  "stages": [
+    {
+      "index": 0,
+      "id": "chart",
+      "icon": "chart",
+      "objective": {
+        "en": "Read the shore chart",
+        "zh": "阅读岸边的海图"
+      },
+      "clue": {
+        "en": "Look for the chart on the stone stand.",
+        "zh": "海图就在岸边的石台上。"
+      },
+      "action": {
+        "en": "Read chart",
+        "zh": "阅读海图"
+      },
+      "receipt": {
+        "en": "Chart read · the grove holds the key",
+        "zh": "已阅读海图 · 钥匙藏在林间"
+      },
+      "story_title": {
+        "en": "The tidekeeper’s note",
+        "zh": "守潮人的字条"
+      },
+      "story_body": {
+        "en": "“Before the storm, I locked the beacon pearl in the reef cache. The brass key is in my grove chest. Please bring the light home.”",
+        "zh": "“风暴来临前，我把航灯的珍珠锁进了礁旁的宝箱。铜钥匙在林间的箱子里。请替我把光带回来。”"
+      },
+      "cue": "chart_read"
+    },
+    {
+      "index": 1,
+      "id": "brass_key",
+      "icon": "key",
+      "objective": {
+        "en": "Find the grove key",
+        "zh": "寻找林间的铜钥匙"
+      },
+      "clue": {
+        "en": "Search between the leaning palms.",
+        "zh": "寻找倾斜棕榈树之间的宝箱。"
+      },
+      "action": {
+        "en": "Open chest",
+        "zh": "打开宝箱"
+      },
+      "receipt": {
+        "en": "Brass key collected",
+        "zh": "已拾取铜钥匙"
+      },
+      "story_title": {
+        "en": "A mark on the key",
+        "zh": "钥匙上的记号"
+      },
+      "story_body": {
+        "en": "A small red buoy is etched into the brass. The pearl is waiting in the sheltered cove.",
+        "zh": "铜钥匙上刻着一枚小小的红色浮标。珍珠就藏在平静的海湾里。"
+      },
+      "cue": "key_pickup"
+    },
+    {
+      "index": 2,
+      "id": "tide_pearl",
+      "icon": "pearl",
+      "objective": {
+        "en": "Unlock the reef cache",
+        "zh": "打开礁旁的宝箱"
+      },
+      "clue": {
+        "en": "Swim toward the red buoy.",
+        "zh": "游向海湾里的红色浮标。"
+      },
+      "action": {
+        "en": "Unlock · take pearl",
+        "zh": "开锁并取回珍珠"
+      },
+      "receipt": {
+        "en": "Key used · tide pearl recovered",
+        "zh": "已使用钥匙 · 取回潮汐珍珠"
+      },
+      "story_title": {
+        "en": "A light worth returning",
+        "zh": "值得归还的光"
+      },
+      "story_body": {
+        "en": "The pearl glows softly in your hands. Its place is in the ruined beacon. Return by the sandy shore.",
+        "zh": "珍珠在掌心泛起微光。它属于遗迹中的航灯。沿沙滩上岸，把它带回去。"
+      },
+      "cue": "pearl_pickup"
+    },
+    {
+      "index": 3,
+      "id": "beacon",
+      "icon": "beacon",
+      "objective": {
+        "en": "Relight the island beacon",
+        "zh": "重新点亮海岛航灯"
+      },
+      "clue": {
+        "en": "Bring the pearl to the ruined sanctuary.",
+        "zh": "把珍珠放回遗迹中的石座。"
+      },
+      "action": {
+        "en": "Return pearl",
+        "zh": "归还珍珠"
+      },
+      "receipt": {
+        "en": "The beacon shines again",
+        "zh": "航灯重新亮起"
+      },
+      "story_title": {
+        "en": "The promise is kept",
+        "zh": "约定已兑现"
+      },
+      "story_body": {
+        "en": "The pearl is home, and the reef has a light again. Somewhere beyond the cove, a boat can find its way home.",
+        "zh": "珍珠回到了原处，礁岸重新有了光。在海湾之外，总有一艘船能循着这束光归航。"
+      },
+      "cue": "beacon_resolve"
+    }
+  ],
+  "ending": {
+    "objective": {
+      "en": "The promise is kept",
+      "zh": "守潮人的约定已兑现"
+    },
+    "clue": {
+      "en": "Stay a while. The island is yours to explore.",
+      "zh": "再停留一会儿，继续探索这座岛吧。"
+    },
+    "primary": {
+      "en": "Keep exploring",
+      "zh": "继续探索"
+    },
+    "secondary": {
+      "en": "Start again",
+      "zh": "重新开始"
+    }
+  },
+  "ui": {
+    "journal": {
+      "en": "Tidekeeper’s journal",
+      "zh": "守潮手记"
+    },
+    "continue": {
+      "en": "Continue",
+      "zh": "继续"
+    },
+    "next_objective": {
+      "en": "Next",
+      "zh": "下一步"
+    },
+    "out_of_range": {
+      "en": "Move closer to interact",
+      "zh": "靠近后即可互动"
+    },
+    "blocked": {
+      "en": "Walk around to reach it",
+      "zh": "绕到前方再试试"
+    },
+    "already_read": {
+      "en": "Chart already read",
+      "zh": "已阅读这张海图"
+    },
+    "already_open": {
+      "en": "This chest is empty",
+      "zh": "这个宝箱已经打开了"
+    },
+    "missing_key": {
+      "en": "A brass lock. Find the grove key first.",
+      "zh": "铜锁还锁着。先去林间寻找钥匙。"
+    },
+    "missing_pearl": {
+      "en": "The stone holds a pearl-shaped hollow.",
+      "zh": "石座上有一个珍珠形状的凹槽。"
+    },
+    "swim_hint": {
+      "en": "Swim with the same controls · no breath limit",
+      "zh": "使用相同方向键游泳 · 没有呼吸时限"
+    },
+    "audio_off": {
+      "en": "Sound off",
+      "zh": "声音已关闭"
+    },
+    "audio_on": {
+      "en": "Sound on",
+      "zh": "声音已开启"
+    },
+    "audio_start": {
+      "en": "Sound begins when you play",
+      "zh": "开始操作后播放声音"
+    },
+    "music": {
+      "en": "Music",
+      "zh": "音乐"
+    },
+    "effects": {
+      "en": "Sound effects",
+      "zh": "音效"
+    },
+    "motion": {
+      "en": "Reduce motion",
+      "zh": "减弱动态效果"
+    },
+    "distance_unit": {
+      "en": "m",
+      "zh": "米"
+    },
+    "key_used": {
+      "en": "Key used",
+      "zh": "钥匙已使用"
+    },
+    "pearl_returned": {
+      "en": "Pearl returned",
+      "zh": "珍珠已归还"
+    },
+    "restart_prompt": {
+      "en": "Start a new journey? This clears this journey’s progress.",
+      "zh": "开始新的旅途？这会清除本次旅途的进度。"
+    },
+    "cancel": {
+      "en": "Cancel",
+      "zh": "取消"
+    },
+    "too_high": {
+      "en": "Find a path to the same level",
+      "zh": "找条路靠近它"
+    },
+    "already_collected": {
+      "en": "Already collected",
+      "zh": "已经拾取"
+    },
+    "ready": {
+      "en": "Ready",
+      "zh": "可以互动"
+    }
+  }
+}

@@ -2,6 +2,8 @@ extends Node3D
 
 const SAVE_PATH = "user://tidal-sanctuary-v2.json"
 const SwimController = preload("res://swim_controller.gd")
+const TideInterface = preload("res://tide_interface.gd")
+const TideAudio = preload("res://tide_audio.gd")
 const SEA_LEVEL := -0.15
 const WORLD_LAYER := 1
 const PLAYER_LAYER := 2
@@ -81,6 +83,12 @@ var route_phase:=0
 var demo_captures:Dictionary={}
 var loaded_found:=false
 var last_move:=Vector3.ZERO
+var story:Dictionary={}
+var interface:CanvasLayer
+var tide_audio:Node
+var journey_started:=false
+var audio_muted:=false
+var restart_pending:=false
 
 
 func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
@@ -90,6 +98,9 @@ func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  return m
 
 func _ready() -> void:
+ var story_data=JSON.parse_string(FileAccess.get_file_as_string("res://assets/story/story.en-zh.json"))
+ assert(story_data is Dictionary and story_data.get("schema")==1,"Story source failed to load")
+ story=story_data
  if OS.has_feature("web"):
   game_font=load("res://sanctuary-font.otf")
  else:
@@ -118,6 +129,7 @@ func _ready() -> void:
  make_lanterns()
  make_beacon()
  make_birds()
+ tide_audio=TideAudio.new();add_child(tide_audio)
  make_ui()
  if OS.has_feature("web"):get_tree().auto_accept_quit=false
  load_game()
@@ -126,7 +138,9 @@ func _ready() -> void:
   beacon_awakened=false
   player.position=Vector3(1.3,height_at(1.3,10.0)+.08,10)
  route_points=[lantern_points[0],lantern_points[1],Vector3(1.5,0,6.2),lantern_points[2],Vector3(7,0,.5),Vector3(2,0,-3),Vector3(0,beacon.position.y,-10.25)]
+ journey_started=demo
  update_state()
+ if not demo:show_opening()
  emit_load_receipt()
  if "--audit" in OS.get_cmdline_user_args(): audit.call_deferred()
  mark_frame_ready.call_deferred()
@@ -653,45 +667,82 @@ func ui_panel(p:Vector2,sz:Vector2,color:Color,parent:Node) -> Panel:
 func label_at(text_value:String,size:int,color:Color) -> Label:
  var l:=Label.new();l.text=text_value;l.add_theme_font_size_override("font_size",size);l.add_theme_font_override("font",game_font);l.add_theme_color_override("font_color",color);l.add_theme_color_override("font_shadow_color",Color(0,0,0,.4));l.add_theme_constant_override("shadow_offset_x",1);l.add_theme_constant_override("shadow_offset_y",2);return l
 
+func tr_text(value:Dictionary) -> String:
+ return str(value.get(language,value.get("en","")))
+
 func make_ui() -> void:
- ui=CanvasLayer.new();add_child(ui)
- var root:=Control.new();root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);root.mouse_filter=Control.MOUSE_FILTER_IGNORE;ui.add_child(root)
- title_panel=ui_panel(Vector2(16,16),Vector2(350,120),Color(.035,.10,.12,.84),root)
- footer_panel=ui_panel(Vector2(20,0),Vector2(460,30),Color(.035,.10,.12,.72),root)
- title=label_at("TIDAL SANCTUARY",13,Color("b7d6d0"));title.position=Vector2(28,25);root.add_child(title)
- objective=label_at("Find the mariner's chart",18,Color("f4e9cb"));objective.position=Vector2(28,49);root.add_child(objective)
- progress=label_at("",13,Color("dfca94"));progress.position=Vector2(28,78);root.add_child(progress)
- subtitle=label_at("",12,Color("bdd1ca"));subtitle.position=Vector2(28,102);root.add_child(subtitle)
- compass=label_at("",13,Color("e8dcae"));compass.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;root.add_child(compass)
- prompt_panel=ui_panel(Vector2.ZERO,Vector2(440,38),Color(.035,.10,.12,.86),root)
- prompt=label_at("",16,Color("fff1ce"));prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;root.add_child(prompt)
- message=label_at("",12,Color("d2e2d9"));root.add_child(message)
- action_button=Button.new();action_button.add_theme_font_override("font",game_font);action_button.size=Vector2(132,50)
- var style:=StyleBoxFlat.new();style.bg_color=Color(.055,.17,.19,.95);style.border_color=Color("cdb887");style.set_border_width_all(1);style.set_corner_radius_all(12)
- action_button.add_theme_stylebox_override("normal",style);action_button.add_theme_color_override("font_color",Color("fff1d2"));action_button.add_theme_font_size_override("font_size",15);action_button.pressed.connect(on_action_pressed);root.add_child(action_button)
- language_button=Button.new();language_button.text="EN";language_button.add_theme_font_override("font",game_font);language_button.add_theme_font_size_override("font_size",12);language_button.add_theme_stylebox_override("normal",style);language_button.add_theme_color_override("font_color",Color("fff1d2"));language_button.size=Vector2(40,28);language_button.pressed.connect(change_language.bind("button"));root.add_child(language_button)
+ interface=TideInterface.new();add_child(interface);interface.setup(game_font);ui=interface
+ title=interface.title;objective=interface.objective;progress=interface.progress;subtitle=interface.subtitle
+ compass=interface.compass;prompt=interface.prompt;message=interface.message
+ action_button=interface.action_button;language_button=interface.language_button
+ title_panel=interface.title_panel;footer_panel=interface.footer_panel;prompt_panel=interface.prompt_panel
+ interface.action_requested.connect(on_action_pressed)
+ interface.language_requested.connect(change_language.bind("button"))
+ interface.audio_requested.connect(toggle_audio.bind("button"))
+ interface.journal_requested.connect(show_journal)
+ interface.card_primary_requested.connect(card_primary)
+ interface.card_secondary_requested.connect(card_secondary)
+
+func show_opening() -> void:
+ var opening:Dictionary=story.opening
+ var heading:=tr_text(story.title) if loaded_found else tr_text(opening.title)
+ var body:=tr_text(story.ending.clue) if quest_stage()==4 else tr_text(opening.body)
+ body+="\n\n"+("WASD / arrows · Move and swim\nE · Interact     J · Journal     M · Sound" if language=="en" else "方向键行走或游泳\nE 互动 · J 手记 · M 声音")
+ interface.show_card("opening",heading,body,tr_text(story.ui.continue) if loaded_found else tr_text(opening.button))
+
+func begin_journey(trigger:String) -> void:
+ if journey_started:return
+ journey_started=true;interface.hide_card()
+ tide_audio.start_from_gesture(trigger)
+ print("TIDAL_JOURNEY ",JSON.stringify({"schema":1,"started":true,"trigger":trigger,"demo":demo,"stage":quest_stage()}))
+ update_state()
+
+func show_journal() -> void:
+ if not journey_started:return
+ var body:=tr_text(story.opening.body)
+ for i in range(mini(quest_stage(),4)):
+  var entry:Dictionary=story.stages[i]
+  body+="\n\n"+tr_text(entry.story_title)+"\n"+tr_text(entry.story_body)
+ interface.show_card("journal",tr_text(story.ui.journal),body,tr_text(story.ui.continue),tr_text(story.ending.secondary))
+ touch_move=Vector2.ZERO
+
+func request_restart() -> void:
+ if not journey_started:return
+ restart_pending=true
+ interface.show_card("restart",tr_text(story.ending.secondary),tr_text(story.ui.restart_prompt),tr_text(story.ending.secondary),tr_text(story.ui.cancel))
+ print("TIDAL_RESTART_REQUEST ",JSON.stringify({"schema":1,"pending":true,"demo":demo}))
+
+func card_primary() -> void:
+ if interface.card_mode=="opening":begin_journey("begin_button")
+ elif interface.card_mode=="restart":
+  restart_pending=false;interface.hide_card();reset_game()
+ else:interface.hide_card()
+
+func card_secondary() -> void:
+ if interface.card_mode=="journal":request_restart();return
+ restart_pending=false;interface.hide_card()
+
+func toggle_audio(trigger:String) -> void:
+ audio_muted=not audio_muted;tide_audio.set_muted(audio_muted,trigger)
+ interface.set_status(quest_stage(),language,audio_muted);save_game()
 
 func update_state() -> void:
  completed=activated==[true,true,true]
  for i in range(3):
   lantern_lights[i].light_energy=.35 if activated[i] else 0.0
-  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.visible=activated[i] and i>0
- if chest_lids.size()>0:chest_lids[0].rotation.x=-1.1 if activated[1] else 0.0
+  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.visible=not activated[i] and i>0
+ for i in range(chest_lids.size()):chest_lids[i].rotation.x=-1.1 if activated[i+1] else 0.0
  beam.visible=beacon_awakened
  beacon.get_node("RingLight").light_energy=.65 if beacon_awakened else (.2 if completed else 0.0)
  var ring_material:StandardMaterial3D=beacon_ring.material_override
  ring_material.emission_energy_multiplier=.65 if beacon_awakened else (.18 if completed else 0.0)
  var stage:=quest_stage()
- var english:=["Find the mariner's chart","Search beneath the grove","Swim to the red reef buoy","Bring the pearl to the ruins","Treasure recovered"]
- var chinese:=["寻找航海图","搜寻树林下的宝箱","游向红色浮标","将珍珠带回遗迹","寻宝完成"]
- objective.text=english[stage] if language=="en" else chinese[stage]
+ var entry:Dictionary=story.stages[stage] if stage<4 else story.ending
+ objective.text=tr_text(entry.objective)
  title.text="TIDAL SANCTUARY" if language=="en" else "潮 汐 圣 所"
- progress.text=("Chart  %s    Key  %s    Pearl  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]) if language=="en" else ("海图 %s   钥匙 %s   珍珠 %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"])
- var clues:=["A weathered chart waits on the shore.","Look between the leaning trees.","A red flag marks the sheltered cove.","Leave the water by the northern beach.","The sea's story is yours."]
- var zh:=["岸边的石台上留着一张海图","线索藏在倾斜的树木之间","红旗标记着海湾里的宝藏","从北侧沙滩上岸，返回遗迹","海的故事属于你"]
- subtitle.text=clues[stage] if language=="en" else zh[stage]
- language_button.text="EN" if language=="en" else "ZH"
- action_button.text=("RESTART" if beacon_awakened else "E · INTERACT") if language=="en" else ("重新开始" if beacon_awakened else "E · 互动")
+ progress.text="%d / 4"%stage
+ subtitle.text=tr_text(entry.clue)
+ interface.set_status(stage,language,audio_muted)
  update_prompt()
 
 func quest_stage() -> int:
@@ -707,42 +758,54 @@ func flat_distance(a:Vector3,b:Vector3) -> float:
  return Vector2(a.x-b.x,a.z-b.z).length()
 
 func interaction_status() -> Dictionary:
- var target:=target_point()
- var result:={"available":false,"reason":"complete","target":target,"distance":flat_distance(player.position,target)}
- if beacon_awakened:return result
- if result.distance>=INTERACTION_RADIUS:result.reason="too_far";return result
+ var stage:=quest_stage()
+ var focus:=mini(stage,3)
+ var points:Array[Vector3]=[lantern_points[0],lantern_points[1],lantern_points[2],beacon.position]
+ var nearest:=2.8
+ for i in range(4):
+  var distance:=flat_distance(player.position,points[i])
+  if distance<nearest:focus=i;nearest=distance
+ var target:Vector3=points[focus]
+ var result:={"available":false,"reason":"too_far","target":target,"target_index":focus,"distance":flat_distance(player.position,target)}
+ if result.distance>=INTERACTION_RADIUS:return result
  if absf(player.position.y-target.y)>INTERACTION_HEIGHT:result.reason="too_high";return result
  var anchors:=[.65,.35,.55,1.20]
- var ray:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,.65,0),target+Vector3(0,anchors[quest_stage()],0),WORLD_LAYER)
+ var ray:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,.65,0),target+Vector3(0,anchors[focus],0),WORLD_LAYER)
  ray.exclude=[player.get_rid()]
  var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
- if not hit.is_empty() and hit.collider.get_meta("interaction_target",-1)!=quest_stage():
+ if not hit.is_empty() and hit.collider.get_meta("interaction_target",-1)!=focus:
   result.reason="occluded";return result
+ if focus<stage:
+  result.reason="already_read" if focus==0 else ("complete" if focus==3 else "already_open")
+  return result
+ if focus>stage:
+  result.reason="missing_key" if focus==2 else ("missing_pearl" if focus==3 else "read_chart_first")
+  return result
+ if not journey_started or not interface.card_mode.is_empty():result.reason="reading";return result
  result.available=true;result.reason="ready"
  return result
 
 func blocked_prompt(reason:String) -> String:
- var english:={"too_far":"Move closer to interact","too_high":"Find a path to the same level","occluded":"Walk around to reach it"}
- var chinese:={"too_far":"靠近后即可互动","too_high":"找条路靠近它","occluded":"绕到前方再试试"}
- return str((english if language=="en" else chinese).get(reason,""))
+ var keys:={"too_far":"out_of_range","too_high":"too_high","occluded":"blocked","already_read":"already_read","already_open":"already_open","missing_key":"missing_key","missing_pearl":"missing_pearl"}
+ if reason=="complete":return tr_text(story.ending.objective)
+ if reason=="read_chart_first":return tr_text(story.stages[0].clue)
+ return tr_text(story.ui[keys[reason]]) if keys.has(reason) else ""
 
 func update_prompt() -> void:
+ var reach:=interaction_status()
+ var stage:=quest_stage()
+ action_button.disabled=not reach.available and not beacon_awakened
+ var verb:=tr_text(story.stages[stage].action) if stage<4 else tr_text(story.ending.primary)
+ action_button.text=verb
  if game_time<tip_until:
   prompt.text=hint_text;return
- if beacon_awakened:
-  prompt.text="Treasure recovered" if language=="en" else "寻宝完成";return
- var stage:=quest_stage()
- var reach:=interaction_status()
- if reach.available:
-  var en:=["E · Read the chart","E · Open the grove chest","E · Recover the tide pearl","E · Place the pearl"]
-  var zh:=["E · 阅读海图","E · 打开林间宝箱","E · 取回潮汐珍珠","E · 放入珍珠"]
-  prompt.text=en[stage] if language=="en" else zh[stage]
- elif reach.distance<2.8:prompt.text=blocked_prompt(reach.reason)
- elif swim.is_swimming():prompt.text="Swim with the same controls · no breath limit" if language=="en" else "方向键游泳 · 可自由停留水面"
+ if reach.distance<2.8:
+  prompt.text=("E · "+verb) if reach.available else blocked_prompt(reach.reason)
+ elif swim.is_swimming():prompt.text=tr_text(story.ui.swim_hint)
  else:prompt.text=""
 
 func progress_data() -> Dictionary:
- return {"quest_stage":quest_stage(),"treasures":[activated[1],activated[2]],"completed":beacon_awakened,"position":[player.position.x,player.position.y,player.position.z],"language":language}
+ return {"quest_stage":quest_stage(),"treasures":[activated[1],activated[2]],"completed":beacon_awakened,"position":[player.position.x,player.position.y,player.position.z],"language":language,"audio_muted":audio_muted}
 
 func emit_load_receipt() -> void:
  var data:=progress_data();data["schema"]=1;data["found"]=loaded_found
@@ -754,7 +817,11 @@ func emit_state() -> void:
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
  data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
  var reach:=interaction_status()
- data["interaction_available"]=reach.available;data["interaction_reason"]=reach.reason
+ data["interaction_available"]=reach.available;data["interaction_reason"]=reach.reason;data["interaction_target"]=reach.target_index
+ data["journey_started"]=journey_started;data["audio_muted"]=audio_muted
+ for field in ["begin_rect","audio_rect","journal_rect"]:
+  var control:Control=interface.card_primary if field=="begin_rect" else (interface.audio_button if field=="audio_rect" else interface.journal_button)
+  var bounds:=control.get_global_rect();data[field]=[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y]
  data["steering_touch_active"]=touch_active;data["steering_touch_index"]=touch_index
  var right:=camera.global_basis.x;right.y=0;right=right.normalized()
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
@@ -763,6 +830,7 @@ func emit_state() -> void:
  print("TIDAL_STATE ",JSON.stringify(data))
 
 func interact() -> void:
+ if not journey_started or not interface.card_mode.is_empty():return
  if beacon_awakened:return
  var stage:=quest_stage()
  var reach:=interaction_status()
@@ -773,29 +841,48 @@ func interact() -> void:
  if stage<3:
   # The map reveals the grove key; the key opens the cache tied to the reef buoy.
   activated[stage]=true
-  var en:=["Chart found · search the leaning grove","Brass key found · follow the red buoy","Tide pearl recovered · return ashore"]
-  var zh:=["找到海图 · 前往倾斜的树林","找到铜钥匙 · 寻找红色浮标","取回潮汐珍珠 · 返回岸边"]
-  hint_text=en[stage] if language=="en" else zh[stage]
+  hint_text=tr_text(story.stages[stage].receipt)
   print("TIDAL_TREASURE ",JSON.stringify({"stage":stage+1,"item":["chart","brass_key","tide_pearl"][stage],"demo":demo}))
  else:
   beacon_awakened=true
   restart_available_time=game_time+3.0
-  hint_text="Treasure recovered · the sanctuary glows" if language=="en" else "寻宝完成 · 圣所重现光芒"
+  hint_text=tr_text(story.stages[3].receipt)
   print("TIDAL_COMPLETE ",JSON.stringify({"demo":demo,"stage":4}))
+ tide_audio.play_stage_cue(stage)
  tip_until=game_time+3.0;update_state();save_game()
 
 func _unhandled_input(event: InputEvent) -> void:
  if event is InputEventKey and event.pressed and not event.echo:
   if event.keycode==KEY_E or event.keycode==KEY_SPACE:interact()
-  if event.keycode==KEY_R:reset_game()
+  if event.keycode==KEY_R:request_restart()
+  if event.keycode==KEY_J:show_journal()
+  if event.keycode==KEY_M:toggle_audio("key_M")
   if event.keycode==KEY_L:change_language("key_L")
   if event.keycode==KEY_H:ui_visible=not ui_visible;ui.visible=ui_visible
- if event is InputEventScreenTouch and event.pressed and not touch_active:
+ if event is InputEventScreenTouch and event.pressed and journey_started and interface.card_mode.is_empty() and not touch_active:
   if event.position.x<get_viewport().get_visible_rect().size.x*.65:
    touch_active=true;touch_origin=event.position;touch_index=event.index
    touch_start_position=player.position;touch_start_frame=Engine.get_physics_frames();touch_drag_events=0;touch_gesture_id+=1
 
 func _input(event:InputEvent) -> void:
+ if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
+  touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
+  print("TIDAL_TOUCH_RELEASE ",JSON.stringify({"schema":1,"gesture_id":touch_gesture_id,"touch_index":event.index,"before":[touch_start_position.x,touch_start_position.y,touch_start_position.z],"after":[player.position.x,player.position.y,player.position.z],"physics_frames_elapsed":Engine.get_physics_frames()-touch_start_frame,"drag_events":touch_drag_events,"canceled":event.canceled,"demo":demo,"active_after":touch_active,"move_after":[touch_move.x,touch_move.y]}))
+
+  return
+ if not journey_started:
+  if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_KP_ENTER,KEY_E,KEY_SPACE]:
+   begin_journey("key_enter" if event.keycode in [KEY_ENTER,KEY_KP_ENTER] else "key_begin")
+   get_viewport().set_input_as_handled();return
+  if event is InputEventScreenTouch and event.pressed and interface.card_primary.get_global_rect().has_point(event.position):
+   begin_journey("touch_begin");get_viewport().set_input_as_handled();return
+  return
+ if not interface.card_mode.is_empty():
+  if event is InputEventKey and event.pressed and not event.echo:
+   if event.keycode in [KEY_ENTER,KEY_KP_ENTER]:card_primary();get_viewport().set_input_as_handled();return
+   if event.keycode in [KEY_ESCAPE,KEY_J] or (event.keycode in [KEY_E,KEY_SPACE] and not restart_pending):
+    restart_pending=false;interface.hide_card();get_viewport().set_input_as_handled();return
+  return
  # Button uses primary-pointer mouse emulation; a second finger must remain a
  # real touch action while finger one continues steering the swimmer.
  if event is InputEventScreenTouch and event.pressed and touch_active and event.index!=touch_index:
@@ -803,12 +890,13 @@ func _input(event:InputEvent) -> void:
    var before:=quest_stage();on_action_pressed()
    print("TIDAL_ACTION_TOUCH ",JSON.stringify({"schema":1,"touch_index":event.index,"steering_index":touch_index,"before":before,"after":quest_stage(),"demo":demo}))
    get_viewport().set_input_as_handled();return
+  if interface.audio_button.get_global_rect().has_point(event.position):
+   toggle_audio("touch_button");get_viewport().set_input_as_handled();return
+  if interface.journal_button.get_global_rect().has_point(event.position):
+   show_journal();get_viewport().set_input_as_handled();return
   if language_button.get_global_rect().has_point(event.position):
    change_language("touch_button");get_viewport().set_input_as_handled();return
- if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
-  touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
-  print("TIDAL_TOUCH_RELEASE ",JSON.stringify({"schema":1,"gesture_id":touch_gesture_id,"touch_index":event.index,"before":[touch_start_position.x,touch_start_position.y,touch_start_position.z],"after":[player.position.x,player.position.y,player.position.z],"physics_frames_elapsed":Engine.get_physics_frames()-touch_start_frame,"drag_events":touch_drag_events,"canceled":event.canceled,"demo":demo,"active_after":touch_active,"move_after":[touch_move.x,touch_move.y]}))
- elif event is InputEventScreenDrag and touch_active and event.index==touch_index:
+ if event is InputEventScreenDrag and touch_active and event.index==touch_index:
   touch_move=(event.position-touch_origin).limit_length(70)/70
   touch_drag_events+=1
 
@@ -817,17 +905,19 @@ func _notification(what:int) -> void:
   save_game("exit");get_tree().quit();return
  if what==NOTIFICATION_APPLICATION_FOCUS_OUT:
   touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
+  if is_instance_valid(tide_audio):tide_audio.set_focus_active(false)
+ if what==NOTIFICATION_APPLICATION_FOCUS_IN and is_instance_valid(tide_audio):tide_audio.set_focus_active(true)
 
 func _physics_process(delta:float) -> void:
  if player==null:return
  game_time+=delta
- action_button.disabled=beacon_awakened and game_time<restart_available_time
  var input:=Vector2.ZERO
  if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT):input.x-=1
  if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT):input.x+=1
  if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):input.y-=1
  if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):input.y+=1
  input=(input+touch_move).limit_length()
+ if not journey_started or not interface.card_mode.is_empty():input=Vector2.ZERO
  var right:=camera.global_basis.x;right.y=0;right=right.normalized()
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
  var move:Vector3=(right*input.x-forward*input.y).normalized()*input.length()
@@ -882,21 +972,9 @@ func _physics_process(delta:float) -> void:
 func _process(delta:float) -> void:
  timer+=delta
  if objective:
-  var view_size:=get_viewport().get_visible_rect().size;var width:=view_size.x;var height:=view_size.y
-  var narrow:=width<600
-  title_panel.size.x=minf(350,width-32);title_panel.size.y=120
-  language_button.position=Vector2(width-60,20)
-  title.position=Vector2(28,25);objective.position=Vector2(28,49);progress.position=Vector2(28,78);subtitle.position=Vector2(28,103)
-  objective.add_theme_font_size_override("font_size",16 if narrow else 18)
-  subtitle.add_theme_font_size_override("font_size",11 if narrow else 12)
-  compass.position=Vector2(width*.5-120,150 if narrow else 22);compass.size=Vector2(240,28)
-  prompt_panel.size=Vector2(minf(440,width-32),38);prompt_panel.position=Vector2((width-prompt_panel.size.x)*.5,height-130)
-  prompt.position=prompt_panel.position+Vector2(8,6);prompt.size=prompt_panel.size-Vector2(16,8);prompt_panel.visible=not prompt.text.is_empty()
-  prompt.add_theme_font_size_override("font_size",12 if narrow else 16)
-  action_button.position=Vector2(width-152,height-82)
-  footer_panel.position=Vector2(16,height-29);footer_panel.size=Vector2(minf(480,width-32),25)
-  message.position=Vector2(26,height-25);message.add_theme_font_size_override("font_size",10 if narrow else 12)
-  message.text=("Left drag · Move / Swim   Right button · Interact" if language=="en" else "左侧拖动行走或游泳 · 右侧按钮互动") if narrow else ("WASD / arrows · Move & swim     E · Interact     R · Restart     L · Language" if language=="en" else "方向键行走或游泳 · E 互动 · R 重来 · L 语言")
+  interface.layout()
+  var narrow:=get_viewport().get_visible_rect().size.x<600
+  message.text=("Left drag · Move / swim" if language=="en" else "左侧拖动 · 行走或游泳") if narrow else ("WASD · Move / swim     E · Act     J · Journal     M · Sound" if language=="en" else "方向键行走或游泳 · E 互动 · J 手记 · M 声音")
  for i in range(lanterns.size()):
   var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.position.y=1.0+sin(timer*1.7+i)*.06;gem.rotation.y=timer*.45
  if lanterns.size()>2:lanterns[2].position.y=SEA_LEVEL-.12+sin(timer*1.4)*.035
@@ -946,10 +1024,12 @@ func load_game() -> void:
   var ground:=height_at(saved.x,saved.z) if saved.is_finite() else NAN
   player.position=swim.restored_position(saved,ground,swim.safe_spawn_position)
  language="zh" if data.get("language","en")=="zh" else "en"
+ audio_muted=data.get("audio_muted",false)==true;tide_audio.set_muted(audio_muted,"load")
  beacon_awakened=bool(data.get("beacon_awakened",false)) and activated==[true,true,true]
  loaded_found=true
 
 func reset_game() -> void:
+ restart_pending=false;interface.hide_card();tide_audio.reset_cues()
  activated=[false,false,false];completed=false;beacon_awakened=false;tip_until=0.0;restart_available_time=0.0
  player.position=swim.safe_spawn_position;player.velocity=Vector3.ZERO;swim=SwimController.new();swim.safe_spawn_position=player.position
  update_state();save_game()
@@ -989,13 +1069,15 @@ func mark_frame_ready() -> void:
  print("TIDAL_FRAME_READY ",JSON.stringify({"time":game_time,"viewport":str(get_viewport().get_visible_rect().size),"font_ascii":game_font.has_char(65)}))
 
 func on_action_pressed() -> void:
- if beacon_awakened:
-  if game_time>=restart_available_time:reset_game()
+ if beacon_awakened:interface.hide_card()
  else:interact()
 
 func change_language(trigger:String) -> void:
  var previous:=language
- language="zh" if language=="en" else "en";update_state();save_game()
+ language="zh" if language=="en" else "en";hint_text="";tip_until=0.0;update_state();save_game()
+ if interface.card_mode=="opening":show_opening()
+ elif interface.card_mode=="journal":show_journal()
+ elif interface.card_mode=="restart":request_restart()
  language_change_id+=1
  capture_language_frame.call_deferred(previous,language_change_id,trigger)
 

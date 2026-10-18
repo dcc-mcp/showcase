@@ -286,7 +286,7 @@ class HarnessTests(unittest.TestCase):
             "assets/polyhaven/stone-rough.jpg.bin",
         }
         self.assertEqual(set(RAW_IMAGE_FILES), expected_buffers)
-        self.assertEqual(set(raw_include_filter().split(",")), {"*.otf", *expected_buffers})
+        self.assertEqual(set(raw_include_filter().split(",")), {"*.otf", "assets/story/story.en-zh.json", *expected_buffers})
         self.assertNotIn("*.bin", raw_include_filter())
         expected = expected_buffers | {f"assets/polyhaven/fern-{index}.res" for index in range(4)}
         expected |= {"assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json"}

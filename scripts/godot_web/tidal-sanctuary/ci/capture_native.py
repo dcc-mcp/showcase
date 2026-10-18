@@ -177,7 +177,7 @@ def main():
               "movie_route": "continuous ffmpeg x11grab of the actual native Godot window",
               "movie_label": "Scripted traversal (--demo); not physical-input or completion proof",
               "screenshot_label": "Five actual X11 captures of the uninterrupted physical-input treasure route",
-              "audio": "No audio stream; this prototype currently has no audio", "checks": [],
+              "audio": "Native capture explicitly uses Dummy audio and silent video; real browser audio is validated separately", "checks": [],
               "limitations": ["CI software OpenGL under Xvfb, not physical hardware performance."]}
     runtime = recorder = None
     pressed, events, screenshots, movement_releases = set(), [], [], []
@@ -245,7 +245,9 @@ def main():
         report["checks"].append(import_native_resources(godot, project, out))
         for script, prefix in (("verify_swimming.gd", "TIDAL_SWIMMING_CHECK"),
                                ("verify_treasure.gd", "TIDAL_TREASURE_CHECK"),
-                               ("verify_collision.gd", "TIDAL_COLLISION_CHECK")):
+                               ("verify_collision.gd", "TIDAL_COLLISION_CHECK"),
+                               ("verify_audio.gd", "TIDAL_AUDIO_CHECKS"),
+                               ("verify_story.gd", "TIDAL_STORY_CHECK")):
             regression = subprocess.run([godot, "--headless", "--path", str(project), "--script", "res://" + script,
                                          "--fixed-fps", "240"], env=isolated_env(out / (script + "-session")),
                                         capture_output=True, text=True, timeout=180)
@@ -256,7 +258,8 @@ def main():
             if regression.returncode != 0 or len(receipts) != 1:
                 raise RuntimeError("Actual headless regression failed: " + script)
             receipt = receipts[0]
-            if type(receipt.get("schema")) is not int or receipt["schema"] != 1 or receipt.get("passed") is not True or receipt.get("failures") != [] or not receipt.get("checks"):
+            passed = receipt.get("status") == "passed" if script == "verify_audio.gd" else receipt.get("passed") is True
+            if type(receipt.get("schema")) is not int or receipt["schema"] != 1 or not passed or receipt.get("failures") != [] or not receipt.get("checks"):
                 raise RuntimeError("Actual headless regression receipt is incomplete: " + script)
             report["checks"].append({"name": script + " actual headless regression (not physical-input proof)", "passed": True, "receipt": receipt})
         audit = subprocess.run([godot, "--headless", "--path", str(project), "--", "--audit"],
@@ -343,6 +346,14 @@ def main():
         wait_for(recorder, recorded_first_frame, 30, "first actual X11 input-video frame")
         input_movie_first_id = max(item["sample_id"] for item in records("native-input.log", "TIDAL_STATE"))
         input_movie_started = time.monotonic()
+        journey_count = len(records("native-input.log", "TIDAL_JOURNEY"))
+        tap("Return")
+        wait_for(runtime, lambda: len(records("native-input.log", "TIDAL_JOURNEY")) > journey_count, 20,
+                 "actual Enter starts the journey before physical exploration")
+        journeys = records("native-input.log", "TIDAL_JOURNEY")[journey_count:]
+        if len(journeys) != 1 or any(journeys[0].get(key) != value for key, value in {"schema": 1, "started": True, "trigger": "key_enter", "demo": False, "stage": 0}.items()):
+            raise ValueError("Native journey did not start exactly once through real Enter")
+        report["journey"] = journeys[0]
         exploration = {}
         exploration_images = []
         def exploration_screenshot(name):
@@ -428,10 +439,26 @@ def main():
         screenshot("native-restored.png")
         report["restored"] = loads[0]
         report["checks"].append({"name": "fresh native process restores completed quest and saved position", "passed": True})
+        reopened_journey_count = len(records("native-reopened.log", "TIDAL_JOURNEY"))
+        tap("Return")
+        wait_for(runtime, lambda: len(records("native-reopened.log", "TIDAL_JOURNEY")) > reopened_journey_count,
+                 20, "real Enter resumes the restored Continue screen")
+        resumed = records("native-reopened.log", "TIDAL_JOURNEY")[reopened_journey_count:]
+        if len(resumed) != 1 or any(resumed[0].get(key) != value for key, value in {"schema": 1, "started": True, "trigger": "key_enter", "demo": False, "stage": 4}.items()):
+            raise ValueError("Restored native journey lacks actual Enter receipt")
+        request_count = len(records("native-reopened.log", "TIDAL_RESTART_REQUEST"))
         tap("r")
+        wait_for(runtime, lambda: len(records("native-reopened.log", "TIDAL_RESTART_REQUEST")) > request_count,
+                 20, "real R opens restart confirmation")
+        reset_requests = records("native-reopened.log", "TIDAL_RESTART_REQUEST")[request_count:]
+        if (len(reset_requests) != 1 or reset_requests[0].get("schema") != 1
+                or reset_requests[0].get("pending") is not True or reset_requests[0].get("demo") is not False
+                or not complete(read_saved())):
+            raise ValueError("Restart request reset progress before actual confirmation")
+        tap("Return")
         wait_for(runtime, lambda: read_saved().get("quest_stage") == 0 and read_saved().get("treasures") == [False, False]
                  and read_saved().get("completed") is False, 15, "actual cleared treasure save after physical R")
-        report["checks"].append({"name": "physical R resets actual treasure progress after restoration", "passed": True})
+        report["checks"].append({"name": "physical R then Enter confirms reset of actual treasure progress after restoration", "passed": True})
         stop_input_runtime(runtime)
         runtime = None
         check_engine_log((out / "native-reopened.log").read_text())
@@ -452,7 +479,7 @@ def main():
         stop_process(recorder)
         stop_process(runtime)
         engine_errors = []
-        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "verify_collision.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
+        for log_name in ("native-import.log", "verify_swimming.gd.log", "verify_treasure.gd.log", "verify_collision.gd.log", "verify_audio.gd.log", "verify_story.gd.log", "audit.log", "scripted-traversal.log", "native-input.log", "native-reopened.log"):
             path = out / log_name
             if path.exists():
                 try:

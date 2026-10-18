@@ -31,7 +31,7 @@ def envelope(response):
 
 # Regression fixtures depend on the authored scripts and never belong in the
 # editor's initial scan. They enter only the stopped, finished native package.
-DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd")
+DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd", "verify_audio.gd", "verify_story.gd")
 EDITOR_PROBE_PATH = "res://tidal_ci_editor_probe.gd"
 EDITOR_PROBE_SOURCE = """@tool
 extends RefCounted
@@ -48,7 +48,7 @@ func inspect(arguments: Dictionary) -> Dictionary:
 
 
 def initial_copy_files():
-    excluded = {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}
+    excluded = {"main.gd", "swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}
     return tuple(name for name in GAME_FILES if name not in excluded)
 
 
@@ -234,8 +234,15 @@ def main():
         call("godot_script__create_script", {"path": "res://swim_controller.gd", "source": (source / "swim_controller.gd").read_text(), "overwrite": True})
         wait_editor_idle("after swim script creation", {"res://swim_controller.gd": "GDScript"})
         call("godot_script__validate_script", {"path": "res://swim_controller.gd"})
+        scripts = {"res://swim_controller.gd": "GDScript"}
+        for dependency in ("tide_audio.gd", "tide_interface.gd"):
+            path = "res://" + dependency
+            call("godot_script__create_script", {"path": path, "source": (source / dependency).read_text(), "overwrite": True})
+            scripts[path] = "GDScript"
+            wait_editor_idle("after " + dependency + " creation", scripts)
+            call("godot_script__validate_script", {"path": path})
         call("godot_script__create_script", {"path": "res://main.gd", "source": (source / "main.gd").read_text(), "overwrite": True})
-        scripts = {"res://swim_controller.gd": "GDScript", "res://main.gd": "GDScript"}
+        scripts["res://main.gd"] = "GDScript"
         wait_editor_idle("after main script creation", scripts)
         call("godot_script__validate_script", {"path": "res://main.gd"})
         wait_editor_idle("before scene creation", scripts)

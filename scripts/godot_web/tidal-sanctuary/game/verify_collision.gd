@@ -341,6 +341,7 @@ func test_interactions() -> void:
 func run() -> void:
  game = load("res://start.tscn").instantiate()
  root.add_child(game)
+ game.begin_journey("fixture")
  game.set_physics_process(false)
  game.set_process(false)
  game.capture = true
@@ -358,5 +359,10 @@ func run() -> void:
  await test_beacon_approach()
  await test_interactions()
  mover.active = false
+ game.queue_free()
+ await process_frame
+ # Fixed-fps fixtures advance simulated timers faster than the audio mixing thread.
+ OS.delay_msec(200)
+ await process_frame
  print("TIDAL_COLLISION_CHECK ", JSON.stringify({"schema":1, "engine":Engine.get_version_info().string, "passed":failures.is_empty(), "failures":failures, "checks":checks, "evidence_scope":"actual imported triangle/ray queries and controller physics; explicit fixture positions/stages and direct interaction calls; no rendered, physical-keyboard, browser, or manual-play proof"}))
  quit(0 if failures.is_empty() else 1)

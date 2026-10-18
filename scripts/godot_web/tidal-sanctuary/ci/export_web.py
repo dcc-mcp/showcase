@@ -7,13 +7,13 @@ import re
 import shutil
 import subprocess
 from pathlib import Path
-from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
+from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, RAW_STORY_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
 
 
 def raw_include_filter():
     # Godot imports ordinary resources normally. Static image byte buffers are
     # retained by exact manifest path, never a blanket binary-file inclusion.
-    return ",".join(("*.otf", *RAW_IMAGE_FILES))
+    return ",".join(("*.otf", *RAW_IMAGE_FILES, *RAW_STORY_FILES))
 
 
 def copy_asset_notices(native, site):
@@ -119,8 +119,9 @@ progressive_web_app/enabled=false
             "Tidal Sanctuary: unpublished original 3D playable prototype\n\n"
             "Keep this folder together. Run: python -m http.server 8000\n"
             "Open http://localhost:8000/ in a WebGL 2-capable browser.\n\n"
-            "WASD / arrows: walk, wade and swim. E: interact. R: restart. L: language. H: hide UI.\n"
-            "Touch: drag on the left to move; tap the action button to interact.\n"
+            "Choose Begin / Continue before playing or enabling music.\n"
+            "WASD / arrows: move/swim. E: interact. J: journal. M: sound. R: request restart. L: language.\n"
+            "Touch: drag left to move; tap action to interact. Journal includes confirmed restart.\n"
             "Read the beach map, recover the inland and sea treasures, then return to the ring.\n\n"
             "Web: use Save & return and wait for Saved before leaving. Immediate tab close can interrupt storage.\n"
             "This is CI staging, not a public deployment.\n"

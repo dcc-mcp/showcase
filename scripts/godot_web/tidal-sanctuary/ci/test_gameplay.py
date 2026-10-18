@@ -774,10 +774,10 @@ class AuthoringBoundaryTests(unittest.TestCase):
 
     def test_initial_editor_scan_excludes_uncreated_dependencies_and_regression_fixtures(self):
         initial = set(initial_copy_files())
-        self.assertFalse(initial & {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES})
-        self.assertEqual(set(DEFERRED_TEST_FILES), {"verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd"})
+        self.assertFalse(initial & {"main.gd", "swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES})
+        self.assertEqual(set(DEFERRED_TEST_FILES), {"verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd", "verify_audio.gd", "verify_story.gd"})
         self.assertTrue(set(DEFERRED_TEST_FILES).issubset(GAME_FILES))
-        self.assertEqual(initial | {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}, set(GAME_FILES))
+        self.assertEqual(initial | {"main.gd", "swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}, set(GAME_FILES))
         self.assertNotIn(EDITOR_PROBE_PATH.removeprefix("res://"), GAME_FILES)
 
     def test_editor_idle_requires_not_scanning_and_exact_filesystem_types(self):
