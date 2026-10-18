@@ -255,8 +255,17 @@ def run_input(browser, base, output, width, height, lang, phone):
             session.detach()
         else:
             page.locator('#fullscreen').click()
-            page.wait_for_function('document.fullscreenElement !== null')
+            page.wait_for_function('document.fullscreenElement === document.getElementById("stage")')
             page.keyboard.press('Escape')
+            page.wait_for_function('document.fullscreenElement === null')
+            # The visible in-fullscreen control must independently work too.
+            page.locator('#fullscreen').click()
+            page.wait_for_function('document.fullscreenElement === document.getElementById("stage")')
+            leave = page.locator('#leave-fullscreen')
+            assert leave.is_visible() and leave.inner_text() == ('退出全屏' if lang == 'zh' else 'Exit fullscreen')
+            assert leave.bounding_box()['height'] >= 44
+            page.screenshot(path=str(output / (name + '-fullscreen.png')), full_page=True)
+            leave.click()
             page.wait_for_function('document.fullscreenElement === null')
         reset(page, phone)
         page.screenshot(path=str(output / (name + '-reset.png')), full_page=True)

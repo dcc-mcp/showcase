@@ -8,7 +8,8 @@ permissions:
 jobs:
   parcel-web:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    # Twenty real browser flows on hosted software WebGL; each state wait stays bounded.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -31,6 +32,7 @@ jobs:
           python scripts/godot_web/parcel-switchyard/test_browser_guards.py
           python scripts/godot_web/parcel-switchyard/test_tracked_bytes.py
           node --check play/parcel-switchyard/shell.js
+          node scripts/godot_web/parcel-switchyard/test_fullscreen.js
           mkdir -p "$RUNNER_TEMP/parcel-reexport" "$RUNNER_TEMP/parcel-evidence/reexport"
           git archive HEAD | tar -x -C "$RUNNER_TEMP/parcel-reexport"
           cp -a play/runtime/. "$RUNNER_TEMP/parcel-reexport/play/runtime/"

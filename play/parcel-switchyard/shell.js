@@ -6,7 +6,7 @@
   const lang = query.get('lang') === 'zh' ? 'zh' : 'en';
   const embedded = query.get('embed') === '1' && parent !== window;
   const t = lang === 'zh' ? {
-    start:'开始游戏', retry:'重试', cancel:'取消加载', exit:'退出游戏', full:'全屏',
+    start:'开始游戏', retry:'重试', cancel:'取消加载', exit:'退出游戏', full:'全屏', leaveFull:'退出全屏',
     instructions:'匹配下一件包裹的号码与目的地，选择线路后发送。键盘 1/2/3 选线，空格发送，A 自动，P 暂停，R 重置。手机可直接轻触画面按钮，上下滑动可滚动。',
     ready:'点击开始后才加载共享 Godot 引擎（解压后约 36 MiB）。', loading:'正在加载 Godot…', running:'游戏已启动。可轻触画面操作。', error:'无法加载游戏。请检查网络和 WebGL 2 支持后重试。',
     note:'游戏无音轨、账号或网络存档。离开或刷新即开始新班次。游戏画面与浏览器控件均支持中英文。',
@@ -15,7 +15,7 @@
     route0:'1 码头', route1:'2 花园', route2:'3 市场', send:'发送包裹', auto:'自动 开 / 关', pause:'暂停 / 继续', reset:'重置班次',
     next:'下一件', delivered:'送达', missed:'错投', paused:'已暂停', active:'运输中'
   } : {
-    start:'Start game', retry:'Retry', cancel:'Cancel loading', exit:'Exit game', full:'Fullscreen',
+    start:'Start game', retry:'Retry', cancel:'Cancel loading', exit:'Exit game', full:'Fullscreen', leaveFull:'Exit fullscreen',
     instructions:'Match the next parcel’s number and destination. Choose a route, then send. Keys: 1/2/3 route, Space send, A auto, P pause, R reset. On phones, tap the game buttons; swipe vertically to scroll.',
     ready:'Start downloads the shared Godot engine (about 36 MiB uncompressed).', loading:'Loading Godot…', running:'Running. Click or tap the game to play.', error:'Could not load. Check your connection and WebGL 2 support, then retry.',
     note:'This game is silent. No account or online saves. Leaving or reloading starts a fresh shift. The game and browser controls support English and Chinese.',
@@ -26,7 +26,7 @@
   };
   document.documentElement.lang = lang;
   document.body.dataset.embed = String(embedded);
-  for (const [id,key] of [['start','start'],['cancel','cancel'],['exit','exit'],['fullscreen','full'],['instructions','instructions'],['note','note'],['rights','rights'],['alternate-label','alternate'],['case-link','case'],['notices','notices']]) $(id).textContent = t[key];
+  for (const [id,key] of [['start','start'],['cancel','cancel'],['exit','exit'],['fullscreen','full'],['leave-fullscreen','leaveFull'],['instructions','instructions'],['note','note'],['rights','rights'],['alternate-label','alternate'],['case-link','case'],['notices','notices']]) $(id).textContent = t[key];
   $('case-link').href = `../../${lang==='zh'?'zh/':''}cases/parcel-switchyard/`;
   $('language').textContent = lang === 'zh' ? 'English' : '中文';
   $('language').onclick = () => { const url = new URL(location.href); url.searchParams.set('lang',lang==='zh'?'en':'zh'); location.href=url; };
@@ -112,7 +112,23 @@
     } catch(error){fail(error);}
   }
   $('start').onclick=start;$('cancel').onclick=()=>location.reload();$('exit').onclick=()=>{command('stop');if(engine)engine.requestQuit();else location.reload();};
+  function leaveFullscreen() {
+    if(document.fullscreenElement===$('stage')) document.exitFullscreen?.().catch(()=>{});
+  }
   $('fullscreen').onclick=()=>{$('stage').requestFullscreen?.().catch(()=>{});};
+  $('leave-fullscreen').onclick=leaveFullscreen;
+  document.addEventListener('fullscreenchange',()=>{
+    const full=document.fullscreenElement===$('stage');
+    $('fullscreen-tools').hidden=!full;
+    $('fullscreen').setAttribute('aria-expanded',String(full));
+    if(!full && running) $('fullscreen').focus({preventScroll:true});
+  });
+  // Keep a real keyboard exit even when the canvas consumes the browser's key.
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape' && document.fullscreenElement===$('stage')) {
+      event.preventDefault();leaveFullscreen();
+    }
+  },true);
   window.addEventListener('message',event=>{if(event.origin!==location.origin||event.source!==parent||!event.data)return;if(event.data.type==='showcase:start')start();else if(event.data.type==='showcase:reset')command('reset');else if(event.data.type==='showcase:pause')command('stop');});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)command('stop');});window.addEventListener('pagehide',()=>command('stop'));
   notify({type:'showcase:ready'});

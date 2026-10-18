@@ -2,3 +2,6 @@
 
 /* Embedded game stages supply their own title, controls and rights text. */
 body[data-embed=true],body[data-embed=true] main{height:100dvh;overflow:hidden}body[data-embed=true] main{padding:0;max-width:none;display:flex;flex-direction:column}body[data-embed=true] header,body[data-embed=true] #instructions,body[data-embed=true] main>.toolbar,body[data-embed=true] #note,body[data-embed=true] #rights,body[data-embed=true][data-state=running] #status{display:none}body[data-embed=true] #stage{flex:1;width:100%;min-height:0;max-width:none;aspect-ratio:auto;display:flex;align-items:center;justify-content:center;border-radius:0}body[data-embed=true] #alternate{flex:none;margin:0;max-height:45dvh;overflow:auto}body[data-embed=true] #alternate>summary{height:44px;padding:9px 10px;font-size:13px}
+
+/* Fullscreen controls stay inside the fullscreen element and above the game. */
+#stage:fullscreen{flex-direction:column;justify-content:flex-start}#fullscreen-tools{width:100%;min-height:60px;padding:8px;display:flex;justify-content:flex-end;flex-shrink:0;background:#142e38;position:sticky;top:0;z-index:1}#stage:fullscreen #canvas{width:min(100vw,calc(177.7778dvh - 106.6667px));margin:auto 0}body[data-layout=mobile] #stage:fullscreen #canvas{width:min(100vw,720px)}

@@ -179,7 +179,7 @@
     {
       "path": "play/parcel-switchyard/export-provenance.json",
       "bytes": 33366,
-      "sha256": "ef30891dd16a639b1d9d7b7f77f82d2ad1410d01cb4095df2424d951aabd4c12"
+      "sha256": "ea77e2a62696cd0ef292ab644fd3976af5577228a58a771a13e96574a64c3910"
     },
     {
       "path": "play/parcel-switchyard/game.pck",
@@ -188,18 +188,18 @@
     },
     {
       "path": "play/parcel-switchyard/index.html",
-      "bytes": 1841,
-      "sha256": "3bfabab9e03154d3c5447997bfb396a3723413a84504162e41fa4dcda17d0f66"
+      "bytes": 1949,
+      "sha256": "44dd636a130d1dd07f360e77c1cf408da367ec1dd5cefb18bfe9da1c56d73a2a"
     },
     {
       "path": "play/parcel-switchyard/shell.css",
-      "bytes": 2593,
-      "sha256": "9891eed98d384dcd99165b4bd4bcb01fdf3ac5d5cabd83b61a26b77ed4736c15"
+      "bytes": 3065,
+      "sha256": "0cd235b7903837db7f1874302e984486450d290f2cf3239bbb8af053523d4464"
     },
     {
       "path": "play/parcel-switchyard/shell.js",
-      "bytes": 10625,
-      "sha256": "82e1a10ec9c9f41139e7e89c22550c9cbb31252c0e68525614c0a180ebfe36db"
+      "bytes": 11443,
+      "sha256": "374dca046c33a7a7ab091ca213fcb257ddb02af8b1b7c9b1e4b1eff7008e7300"
     }
   ],
   "demos": [
@@ -268,8 +268,8 @@
     }
   ],
   "budget": {
-    "raw_bytes": 40215320,
-    "gzip_equivalent_bytes": 11373926,
+    "raw_bytes": 40229418,
+    "gzip_equivalent_bytes": 11379316,
     "raw_limit_bytes": 41943040,
     "gzip_equivalent_limit_bytes": 11534336,
     "note": "Gzip equivalent is measured locally; actual Pages Content-Encoding must be verified after an authorized deployment."
