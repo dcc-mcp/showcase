@@ -55,7 +55,7 @@ def wait_observer(page, console, prefix, start, timeout=15, allow_runtime_exit=F
 # Playwright 1.63 adds this headless default; remove ONLY that one switch.
 # https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/chromium/chromium.ts#L349-L355
 IGNORED_DEFAULT_ARGS = ["--mute-audio"]
-BROWSER_ARGS = ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"]
+BROWSER_ARGS = ["--enable-automation", "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"]
 
 
 
@@ -110,6 +110,28 @@ def validate_audio_baseline(snapshot, begin_ms):
         raise ValueError("Fresh audio baseline must precede every real gesture and source start")
     return audio_window(snapshot, begin_ms, snapshot["wall_ms"], 2.0)
 
+
+
+def validate_muted_restore_audio(before, after, receipts):
+    """Unmute the same real muted-Begin voice without replaying quest cues."""
+    starts = [item for item in receipts if item.get("event") == "start"]
+    if (len(starts) != 1 or type(starts[0].get("start_count")) is not int
+            or starts[0]["start_count"] != 1 or starts[0].get("started") is not True
+            or starts[0].get("muted") is not True
+            or any(item.get("event") == "cue" for item in receipts)):
+        raise ValueError("Restored muted Begin must start once without replaying story cues")
+    prior, current = before.get("starts", []), after.get("starts", [])
+    if not prior or len(current) < len(prior) or [item.get("id") for item in current[:len(prior)]] != [item.get("id") for item in prior]:
+        raise ValueError("Unmute lost the original muted-Begin source history")
+    first = current[0].get("scheduled_start")
+    if type(first) not in (int, float) or not math.isfinite(first):
+        raise ValueError("Restored music lacks a valid initial audio clock")
+    for index, source in enumerate(current):
+        clock = source.get("scheduled_start")
+        if (source.get("name") != "music" or type(clock) not in (int, float) or not math.isfinite(clock)
+                or abs(clock - first - 32 * index) > .02 or source.get("rate") != 1 or source.get("offset") != 0):
+            raise ValueError("Unmute replayed a cue or restarted the authored music loop")
+    return {"logical_starts": 1, "source_count": len(current), "replayed_cues": 0}
 
 
 def source_end(source, fallback):
@@ -388,6 +410,9 @@ def validate_web_exit(receipt, expected):
     before = finite_vector(expected.get("position"), 3, "completed route position")
     after = finite_vector(saved.get("position"), 3, "final saved position")
     if (saved.get("language") != expected.get("language") or
+            type(expected.get("audio_muted")) is not bool or
+            type(saved.get("audio_muted")) is not bool or
+            saved["audio_muted"] is not expected["audio_muted"] or
             math.hypot(before[0] - after[0], before[2] - after[2]) > .35):
         raise ValueError("Final save differs from the completed route")
     return saved
@@ -711,6 +736,15 @@ def main():
                     # the auto-save interval; retain that real receipt, not a new
                     # wall-clock window unrelated to the game's simulation time.
                     saved = wait_completed_route_save(page, console, route_console_boundary, route["completed_state"])
+                    # Persist the actual muted preference, then test it in the new OS process.
+                    mute_state = wait_state(page, console)
+                    boundary = len(console)
+                    saved_mute_input = real_button(page, mute_state, "audio_rect", mobile, width, height)
+                    saved_mute = wait_observer(page, console, "TIDAL_AUDIO", boundary)
+                    if saved_mute.get("event") != "mute" or saved_mute.get("muted") is not True:
+                        raise ValueError("Pre-exit real input did not set the saved mute preference")
+                    exit_expected = wait_state(page, console, mute_state["sample_id"], lambda state: state.get("audio_muted") is True)
+                    result["audio"]["saved_mute"] = {"input": saved_mute_input, "receipt": saved_mute}
                     # Exercise the shipped Save & return control through actual input.
                     # Godot's public normal-exit API awaits final FS synchronization.
                     # This does not certify abrupt tab-close persistence.
@@ -722,7 +756,7 @@ def main():
                         exit_button.click()
                     exited = wait_observer(page, console, "TIDAL_WEB_EXIT", boundary,
                                            timeout=120, allow_runtime_exit=True)
-                    saved = validate_web_exit(exited, saved)
+                    saved = validate_web_exit(exited, exit_expected)
                     if page.locator("#tidal-exit-panel").get_attribute("data-saved") != "true":
                         raise RuntimeError("Actual Save & return UI did not confirm completion")
                     capture(label + "-saved-return.png")
@@ -750,6 +784,37 @@ def main():
                     result["audio"]["restored_before_gesture"] = validate_audio_baseline(restored_audio, restored_mark["wall_ms"])
                     write_json(out / (label + "-restored-audio-baseline.json"), restored_audio)
                     capture(label + "-restored.png")
+                    # A restored mute must survive Begin; only a later real unmute makes sound.
+                    restored_state = wait_state(page, restored_console)
+                    if restored_state.get("audio_muted") is not True or restored_state.get("journey_started") is not False:
+                        raise ValueError("Fresh process lost mute or began before a real gesture")
+                    boundary = len(restored_console)
+                    restored_begin = real_button(page, restored_state, "begin_rect", mobile, width, height)
+                    restored_journey = wait_observer(page, restored_console, "TIDAL_JOURNEY", boundary)
+                    validate_journey(restored_journey, "touch_begin" if mobile else "begin_button")
+                    wait_state(page, restored_console, restored_state["sample_id"],
+                               lambda state: state.get("journey_started") is True and state.get("audio_muted") is True)
+                    page.wait_for_timeout(2100)
+                    quiet_mark = page.evaluate("() => __tidalAudio.mark('restored-muted-begin')")
+                    page.wait_for_timeout(1400)
+                    quiet = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["restored_muted_begin"] = {"input": restored_begin, "receipt": restored_journey,
+                        "window": audio_window(quiet, quiet_mark["wall_ms"], quiet["wall_ms"], 1.1)}
+                    unmute_state = wait_state(page, restored_console)
+                    boundary = len(restored_console)
+                    restored_unmute = real_button(page, unmute_state, "audio_rect", mobile, width, height)
+                    unmuted = wait_observer(page, restored_console, "TIDAL_AUDIO", boundary)
+                    if unmuted.get("event") != "mute" or unmuted.get("muted") is not False or unmuted.get("started") is not True:
+                        raise ValueError("Restored real unmute did not enable the running journey")
+                    wait_state(page, restored_console, unmute_state["sample_id"], lambda state: state.get("audio_muted") is False)
+                    page.wait_for_timeout(500)
+                    audible_mark = page.evaluate("() => __tidalAudio.mark('restored-unmuted')")
+                    page.wait_for_timeout(1500)
+                    audible = page.evaluate("() => __tidalAudio.snapshot()")
+                    result["audio"]["restored_unmuted"] = {"input": restored_unmute, "receipt": unmuted,
+                        "window": audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True),
+                        "voices": validate_muted_restore_audio(quiet, audible, observer_receipts(restored_console, "TIDAL_AUDIO"))}
+                    write_json(out / (label + "-restored-audio-after-input.json"), audible)
                     result["restore"].update({"status": "passed", "loaded": loads[0]})
                     report["checks"].append({"name": label + " fresh Chromium process restores completed treasure quest", "passed": True})
                     result["passed"] = True

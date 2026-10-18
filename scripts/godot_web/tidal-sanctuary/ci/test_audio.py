@@ -5,7 +5,7 @@ import unittest
 from unittest.mock import Mock
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window,
                              real_button, validate_audio_baseline, validate_audio_sources,
-                             validate_journey, validate_recorded_pcm)
+                             validate_journey, validate_recorded_pcm, validate_muted_restore_audio)
 
 
 def snapshot(rms=0, state="suspended", seconds=2.5):
@@ -49,8 +49,28 @@ def route_audio():
 
 
 class AudioAcceptanceFixtures(unittest.TestCase):
+    def test_restored_muted_begin_unmutes_without_restart_or_cues(self):
+        source = {"id": 1, "name": "music", "scheduled_start": 2., "rate": 1, "offset": 0}
+        before = {"starts": [source]}
+        after = {"starts": [source, {**source, "id": 2, "scheduled_start": 34.}]}
+        receipts = [{"event": "start", "start_count": 1, "started": True, "muted": True}]
+        validate_muted_restore_audio(before, before, receipts)
+        validate_muted_restore_audio(before, after, receipts)
+        for bad in ([], receipts * 2, [{**receipts[0], "muted": False}],
+                    [{**receipts[0], "start_count": True}], receipts + [{"event": "cue"}]):
+            with self.subTest(receipts=bad), self.assertRaises(ValueError):
+                validate_muted_restore_audio(before, after, bad)
+        for change in ({"scheduled_start": 5.}, {"scheduled_start": float("nan")},
+                       {"name": "chart_read"}, {"rate": 2}, {"offset": 1}):
+            bad = {"starts": [source, {**after["starts"][1], **change}]}
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                validate_muted_restore_audio(before, bad, receipts)
+        with self.assertRaises(ValueError):
+            validate_muted_restore_audio(before, {"starts": [{**source, "id": 3}]}, receipts)
+
     def test_only_mute_default_removed(self):
         self.assertEqual(IGNORED_DEFAULT_ARGS, ["--mute-audio"])
+        self.assertEqual(BROWSER_ARGS.count("--enable-automation"), 1)
         self.assertFalse(any("autoplay" in item or "audio" in item for item in BROWSER_ARGS))
 
     def test_real_begin_receipt_requires_exact_trigger_and_not_demo(self):

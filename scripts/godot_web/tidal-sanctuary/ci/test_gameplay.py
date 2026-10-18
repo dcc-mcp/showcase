@@ -20,7 +20,7 @@ class GameplayObserverTests(unittest.TestCase):
                   "position": [1.3, 1, 10], "locomotion": "walk", "water_depth": 0.0,
                   "camera_right": [1, 0], "camera_forward": [0, -1],
                   "action_rect": [1100, 620, 100, 40], "quest_stage": 0,
-                  "treasures": [False, False], "completed": False, "language": "en",
+                  "treasures": [False, False], "completed": False, "language": "en", "audio_muted": False,
                   "movement_input": [0, 0], "velocity": [0, 0, 0],
                   "interaction_available": True, "interaction_reason": "available"}
         result.update(changes)
@@ -579,6 +579,21 @@ class GameplayObserverTests(unittest.TestCase):
             validate_restored(receipt, missing)
 
 
+    def test_restore_requires_exact_boolean_saved_audio_preference(self):
+        for muted in (True, False):
+            expected = self.finished(audio_muted=muted)
+            receipt = {**expected, "found": True}
+            self.assertEqual(validate_restored(receipt, expected), receipt)
+            for invalid in (not muted, None, 0, 1, "false"):
+                with self.subTest(muted=muted, invalid=invalid), self.assertRaises(ValueError):
+                    validate_restored({**receipt, "audio_muted": invalid}, expected)
+            for target in ("receipt", "expected"):
+                broken_receipt, broken_expected = dict(receipt), dict(expected)
+                del (broken_receipt if target == "receipt" else broken_expected)["audio_muted"]
+                with self.subTest(missing=target), self.assertRaises(ValueError):
+                    validate_restored(broken_receipt, broken_expected)
+
+
 class WaypointBudgetTests(unittest.TestCase):
     state = GameplayObserverTests.state
 
@@ -839,7 +854,7 @@ class BrowserInputTests(unittest.TestCase):
 
     def test_real_save_return_requires_final_persistent_save_and_clean_exit(self):
         saved = {"schema": 1, "quest_stage": 4, "treasures": [True, True],
-                 "completed": True, "position": [0, 4, -12], "language": "en", "persistent": True, "reason": "exit"}
+                 "completed": True, "position": [0, 4, -12], "language": "en", "audio_muted": True, "persistent": True, "reason": "exit"}
         receipt = {"schema": 1, "code": 0, "requested": True, "trusted": True,
                    "ok": True, "save_after_request": True, "saved": saved}
         self.assertEqual(validate_web_exit(receipt, saved), saved)
@@ -847,6 +862,8 @@ class BrowserInputTests(unittest.TestCase):
                         {"requested": False}, {"save_after_request": False}, {"saved": None},
                         {"saved": {**saved, "persistent": False}},
                         {"saved": {**saved, "reason": "auto"}},
+                        {"saved": {**saved, "audio_muted": False}},
+                        {"saved": {**saved, "audio_muted": 1}},
                         {"saved": {**saved, "quest_stage": 3}},
                         {"saved": {**saved, "position": [10, 4, 0]}}):
             with self.subTest(changes=changes), self.assertRaises(ValueError):

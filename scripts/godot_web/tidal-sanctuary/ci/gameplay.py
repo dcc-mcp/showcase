@@ -104,7 +104,10 @@ def validate_restored(receipt, expected):
     if type(receipt.get("schema")) is not int or receipt["schema"] != 1 or receipt.get("found") is not True:
         raise ValueError("Fresh process did not read an actual existing save")
     validate_progress(receipt)
-    for field in ("quest_stage", "treasures", "completed", "language"):
+    for value in (receipt, expected):
+        if type(value.get("audio_muted")) is not bool:
+            raise ValueError("Fresh-process save lacks boolean audio_muted preference")
+    for field in ("quest_stage", "treasures", "completed", "language", "audio_muted"):
         if field not in expected or receipt.get(field) != expected[field]:
             raise ValueError("Fresh-process save restoration mismatch: " + field)
     before = finite_vector(expected.get("position"), 3, "saved position")
