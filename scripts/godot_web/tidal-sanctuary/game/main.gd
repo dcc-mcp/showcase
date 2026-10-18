@@ -808,7 +808,7 @@ func load_game() -> void:
   var chart:=save_flag(a[0]);var key:=save_flag(a[1]) and chart;var pearl:=save_flag(a[2]) and key
   activated=[chart,key,pearl]
  var p=data.get("player",[])
- if p is Array and p.size()==3:
+ if p is Array and p.size()==3 and p.all(func(value:Variant)->bool:return value is int or value is float):
   var saved:=Vector3(float(p[0]),float(p[1]),float(p[2]))
   var ground:=height_at(saved.x,saved.z) if saved.is_finite() else NAN
   player.position=swim.restored_position(saved,ground,swim.safe_spawn_position)

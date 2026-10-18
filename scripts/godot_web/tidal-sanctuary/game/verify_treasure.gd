@@ -8,7 +8,7 @@ var game: Node3D
 var failures: Array[String] = []
 var checks: Array[Dictionary] = []
 var had_save := false
-var original_save := ""
+var original_save := PackedByteArray()
 
 func _initialize() -> void:
  run.call_deferred()
@@ -52,8 +52,23 @@ func read_save() -> Dictionary:
 func run() -> void:
  had_save = FileAccess.file_exists(SAVE_PATH)
  if had_save:
-  original_save = FileAccess.get_file_as_string(SAVE_PATH)
+  var reader := FileAccess.open(SAVE_PATH, FileAccess.READ)
+  if reader == null:
+   push_error("Cannot read existing save; treasure check did not start")
+   quit(1)
+   return
+  var byte_count := reader.get_length()
+  original_save = reader.get_buffer(byte_count)
+  var read_ok := reader.get_error() == OK and original_save.size() == byte_count
+  reader.close()
+  if not read_ok:
+   push_error("Cannot capture all original save bytes; treasure check did not start")
+   quit(1)
+   return
  clear_save()
+ if FileAccess.file_exists(SAVE_PATH):
+  quit(1)
+  return
  await reopen()
  check(not game.demo and not game.capture, "save tests run in normal game mode")
  check(game.quest_stage() == 0 and not game.loaded_found, "fresh game starts at chart")
@@ -144,6 +159,11 @@ func run() -> void:
   {"name": "truncated_json", "raw": '{"schema":2,"player":['},
   {"name": "nan_json", "raw": '{"schema":2,"activated":[false,false,false],"player":[NaN,0,0]}'},
   {"name": "overflow_number", "raw": '{"schema":2,"activated":[false,false,false],"player":[1e999,0,0]}'},
+  {"name": "null_coordinate", "raw": '{"schema":2,"player":[null,0,0]}'},
+  {"name": "object_coordinate", "raw": '{"schema":2,"player":[0,{},0]}'},
+  {"name": "array_coordinate", "raw": '{"schema":2,"player":[0,0,[]]}'},
+  {"name": "string_coordinate", "raw": '{"schema":2,"player":["1.3",0,0]}'},
+  {"name": "bool_coordinate", "raw": '{"schema":2,"player":[true,0,0]}'},
   {"name": "out_of_world", "raw": '{"schema":2,"activated":[false,false,false],"player":[500,-99,500]}'},
   {"name": "invalid_order", "raw": '{"schema":2,"activated":[false,true,true],"player":[1.3,0.8,10],"beacon_awakened":true}'}
  ]
@@ -154,6 +174,8 @@ func run() -> void:
   check(game.player.position.is_finite() and game.player.velocity.is_finite(), "%s save never produces NaN/Inf transform" % test.name)
   check(Vector2(game.player.position.x, game.player.position.z).length() <= game.swim.ocean_radius, "%s save remains in safe world" % test.name)
   check(game.quest_stage() == 0 and not game.beacon_awakened, "%s save cannot bypass quest order" % test.name)
+  if test.name.ends_with("_coordinate"):
+   check(game.loaded_found and game.player.position.distance_to(safe_spawn) < 0.001, "%s invalid coordinate preserves safe spawn" % test.name)
   corrupt_results.append({"case": test.name, "stage": game.quest_stage(), "finite": game.player.position.is_finite(), "loaded": game.loaded_found})
  checks.append({"check": "corrupt_save_recovery", "cases": corrupt_results})
 
@@ -183,7 +205,12 @@ func run() -> void:
 
  game.queue_free()
  await process_frame
- if had_save:write_raw_save(original_save)
+ if had_save:
+  var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+  check(file != null, "original save can be restored")
+  if file:
+   file.store_buffer(original_save);file.flush();file.close()
+  check(FileAccess.get_file_as_bytes(SAVE_PATH) == original_save, "original save bytes are unchanged")
  else:clear_save()
  print("TIDAL_TREASURE_CHECK ", JSON.stringify({"schema": 1, "engine": Engine.get_version_info().string, "route": "actual main scene save/reopen integration; direct interact calls and fixture positions, not rendered/physical input proof", "passed": failures.is_empty(), "failures": failures, "checks": checks}))
  quit(0 if failures.is_empty() else 1)
