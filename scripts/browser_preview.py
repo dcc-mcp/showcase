@@ -327,17 +327,17 @@ def verify_scored_video(page, context, case, origin, output, layout, active_cont
     expect(video).to_have_js_property("controls", True)
     expect(video).to_have_js_property("autoplay", False)
     expect(video).to_have_js_property("paused", True)
-    video.evaluate("v => v.load()")
+    # preload=none is intentional: native keyboard intent loads the film.
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Scored video played before a user gesture")
+    progress(active_context, "scored_film_keyboard_play_pause")
+    video.press("Space")
     page.wait_for_function("slug => document.querySelector('#results video:has(source[src$=\"' + slug + '-scored.mp4\"])').readyState >= 1", arg=slug, timeout=15000)
     qa_path = "docs/showcase/" + slug + "/soundtrack-media-qa.json"
     qa = json.loads(fetch_public_file(context.request, origin, qa_path))
     actual = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
     if abs(actual["duration"] - qa["video_seconds"]) > .06 or actual["width"] != qa["video_width"] or actual["height"] != qa["video_height"]:
         raise AssertionError("Scored media dimensions or duration do not match verified picture")
-    if video.evaluate("v => v.played.length"):
-        raise AssertionError("Scored video played before a user gesture")
-    progress(active_context, "scored_film_keyboard_play_pause")
-    video.press("Space")
     page.wait_for_function("slug => { const v = document.querySelector('#results video:has(source[src$=\"' + slug + '-scored.mp4\"])'); return !v.paused && v.currentTime >= .2; }", arg=slug, timeout=15000)
     video.press("Space")
     expect(video).to_have_js_property("paused", True)
@@ -347,6 +347,43 @@ def verify_scored_video(page, context, case, origin, output, layout, active_cont
     if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
         raise AssertionError("Scored video page horizontal overflow")
     name = layout + "-" + slug + "-scored-film.png"
+    video.locator("..").screenshot(path=str(output/name), animations="disabled")
+    return {"layout":layout,"case_slug":slug,"duration_seconds":actual["duration"],"width":actual["width"],"height":actual["height"],"keyboard_play_and_pause":True,"autoplay":False,"served_sha256":qa["scored_sha256"],"screenshot":name,"sha256":hashlib.sha256((output/name).read_bytes()).hexdigest()}
+
+def verify_resonance_video(page, context, case, origin, output, layout, active_context):
+    """Exercise the original silent Resonance assembly film without replacing original-film checks."""
+    from playwright.sync_api import expect
+    slug = case["slug"]
+    progress(active_context, "resonance_film_metadata")
+    page.get_by_role("link", name="成果", exact=True).click()
+    video = page.locator('#results video:has(source[src$="' + slug + '.mp4"])')
+    expect(video).to_have_count(1)
+    video.scroll_into_view_if_needed()
+    expect(video).to_be_visible()
+    expect(video).to_have_js_property("controls", True)
+    expect(video).to_have_js_property("autoplay", False)
+    expect(video).to_have_js_property("paused", True)
+    # preload=none is intentional: native keyboard intent loads the film.
+    if video.evaluate("v => v.played.length"):
+        raise AssertionError("Resonance video played before a user gesture")
+    progress(active_context, "resonance_film_keyboard_play_pause")
+    video.press("Space")
+    page.wait_for_function("slug => document.querySelector('#results video:has(source[src$=\"' + slug + '.mp4\"])').readyState >= 1", arg=slug, timeout=15000)
+    manifest = json.loads(fetch_public_file(context.request, origin, "docs/showcase/" + slug + "/manifest.json"))
+    item = next(row for row in manifest["files"] if row["path"] == slug + ".mp4")
+    qa = {"video_seconds":12, "video_width":1280, "video_height":720, "scored_sha256":item["sha256"]}
+    actual = video.evaluate("v => ({duration:v.duration,width:v.videoWidth,height:v.videoHeight})")
+    if abs(actual["duration"] - qa["video_seconds"]) > .06 or actual["width"] != qa["video_width"] or actual["height"] != qa["video_height"]:
+        raise AssertionError("Resonance media dimensions or duration do not match verified picture")
+    page.wait_for_function("slug => { const v = document.querySelector('#results video:has(source[src$=\"' + slug + '.mp4\"])'); return !v.paused && v.currentTime >= .2; }", arg=slug, timeout=15000)
+    video.press("Space")
+    expect(video).to_have_js_property("paused", True)
+    data = fetch_public_file(context.request, origin, "docs/showcase/" + slug + "/" + slug + ".mp4")
+    if hashlib.sha256(data).hexdigest() != qa["scored_sha256"]:
+        raise AssertionError("Served Resonance movie differs from verified file")
+    if not page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"):
+        raise AssertionError("Resonance video page horizontal overflow")
+    name = layout + "-" + slug + "-film.png"
     video.locator("..").screenshot(path=str(output/name), animations="disabled")
     return {"layout":layout,"case_slug":slug,"duration_seconds":actual["duration"],"width":actual["width"],"height":actual["height"],"keyboard_play_and_pause":True,"autoplay":False,"served_sha256":qa["scored_sha256"],"screenshot":name,"sha256":hashlib.sha256((output/name).read_bytes()).hexdigest()}
 
@@ -448,6 +485,11 @@ def run(site: Path, output: Path, expected_head: str) -> int:
     output.mkdir(parents=True, exist_ok=False)
     collection = json.loads(Path("collection.json").read_text(encoding="utf-8"))
     cases = collection["cases"]
+    # Retain original-language evidence assertions alongside bilingual coverage.
+    locale_base = "/zh/" if (site / "zh/index.html").is_file() else "/"
+    import localization
+    source_copy = localization.catalog(str(Path.cwd()), locale="zh") if locale_base == "/zh/" else {}
+    display_text = lambda value: source_copy.get(value, value)
     report = {"source_head": head, "source_tree": git_value("rev-parse", "HEAD^{tree}"),
               "playwright": version("playwright"), "status": "running", "pages": [], "galleries": [], "films": [], "audio": []}
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(site)))
@@ -481,7 +523,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                     try:
                         active_context = {"stage": "gallery_search_reset", "layout": layout}
                         progress(active_context)
-                        page.goto(origin + "/", wait_until="networkidle")
+                        page.goto(origin + locale_base, wait_until="networkidle")
                         page.evaluate("document.fonts.ready")
                         expect(page.locator(".case-card:visible")).to_have_count(len(cases))
                         page.locator("#search").fill(cases[0]["title"])
@@ -516,7 +558,7 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             active_context = {"stage": "models_navigation", "layout": layout,
                                               "case_slug": case["slug"]}
                             progress(active_context)
-                            path = "/cases/%s/" % case["slug"]
+                            path = locale_base + "cases/%s/" % case["slug"]
                             # Media preload/range requests need not become network-idle.
                             # Fonts, page content and media readiness are awaited below.
                             page.goto(origin + path, wait_until="domcontentloaded")
@@ -530,12 +572,12 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                             progress(active_context, "model_fields")
                             for index, row in enumerate(case["model_attribution"]):
                                 stage = section.locator("dt").nth(index)
-                                expect(stage).to_have_text(row["stage"])
+                                expect(stage).to_have_text(display_text(row["stage"]))
                                 expect(stage).to_be_visible()
                                 cell = section.locator("dd").nth(index)
-                                expect(cell.locator("strong").nth(0)).to_have_text(row["model"])
+                                expect(cell.locator("strong").nth(0)).to_have_text(display_text(row["model"]))
                                 expect(cell.locator("strong").nth(0)).to_be_visible()
-                                expect(cell.locator("strong").nth(1)).to_have_text(row["reasoning_effort"])
+                                expect(cell.locator("strong").nth(1)).to_have_text(display_text(row["reasoning_effort"]))
                                 expect(cell.locator("strong").nth(1)).to_be_visible()
                             no_overflow = page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
                             if not no_overflow:
@@ -555,13 +597,18 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                 expect(video).to_have_count(1)
                                 expect(video).to_be_visible()
                                 expect(video).to_have_js_property("controls", True)
+                                video.scroll_into_view_if_needed()
+                                expect(video).to_have_js_property("autoplay", False)
+                                expect(video).to_have_js_property("paused", True)
+                                if video.evaluate("v => v.played.length"):
+                                    raise AssertionError("Orbit video played before a user gesture")
+                                progress(active_context, "orbit_film_keyboard_play")
+                                video.press("Space")
                                 progress(active_context, "orbit_film_metadata")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video:has(source[src$=\"first-delivery-720p.mp4\"])'); return v.readyState >= 1 && v.videoWidth === 1280 && v.videoHeight === 720; }")
                                 duration = video.evaluate("v => v.duration")
                                 if abs(duration - 7.018) > 0.05:
                                     raise AssertionError("Unexpected Orbit film duration")
-                                progress(active_context, "orbit_film_keyboard_play")
-                                video.press("Space")
                                 page.wait_for_function("() => { const v = document.querySelector('#results video:has(source[src$=\"first-delivery-720p.mp4\"])'); return !v.paused && v.currentTime >= 0.2; }")
                                 progress(active_context, "orbit_film_keyboard_pause")
                                 video.press("Space")
@@ -577,6 +624,8 @@ def run(site: Path, output: Path, expected_head: str) -> int:
                                 report["films"].append(verify_scored_video(page, context, case, origin, output, layout, active_context))
                             if case["slug"] == "orbital-loom":
                                 report["films"].append(verify_orbital_loom(page, context, case, origin, output, layout, active_context))
+                            if case["slug"] == "resonance-atlas":
+                                report["films"].append(verify_resonance_video(page, context, case, origin, output, layout, active_context))
                             if case["slug"] == "trail-and-air":
                                 report["audio"].append(verify_audio_case(
                                     page, context, case, site, origin, output, layout, active_context))

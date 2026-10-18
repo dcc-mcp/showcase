@@ -2,6 +2,334 @@
   "schema_version": 1,
   "cases": [
     {
+      "slug": "brass-pendulum-denoise",
+      "title": "Brass Pendulum · 黄铜摆锤",
+      "subtitle": "Blender · 原生动画细化与引导式空间降噪",
+      "software": [
+        "Blender",
+        "dcc-media-enhance",
+        "FFmpeg"
+      ],
+      "capabilities": [
+        "建模",
+        "材质",
+        "动画",
+        "渲染",
+        "后期处理",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/brass-pendulum-denoise/hero.jpg",
+        "alt": "新候选中的黄铜圆环、瓷质摆锤与完整深青色底座，来自实际 960 × 720 原生渲染"
+      },
+      "evidence_label": "原生 Cycles 渲染 · 真实引导通道 · 空间 OIDN",
+      "evidence_scope": "真实 DCC-MCP 编辑与保存重开；960 × 720、96 samples 的原生多层线性 EXR，经统一 dcc-media-enhance CLI 调用 Blender compositor OIDN，再通过明确 AgX 与 sRGB→BT.709 链生成展示视频。英中桌面/触控完整画面播放已在明确记录的5080041提交上通过；后续提交须另验。",
+      "summary": "黄铜圆环和瓷质摆锤经过原生几何细化，42→44 mm 镜头保留完整底座。高分辨率候选使用真实 Albedo/Normal 引导逐帧空间降噪；成片为 144 帧、24000/1001 fps、6.006 秒，无音轨。旧低采样时域案例作为独立历史实验保留。",
+      "goal": "在保留可编辑原生场景的前提下提升几何、构图与成片清晰度，并分别核验引导式降噪、色彩转换、真实帧序和自然速度完整播放。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "保留原创黄铜圆环、瓷质摆锤和深青色底座，通过真实 DCC-MCP 编辑细化原生几何、衰减摆动和 42→44 mm 镜头。保存并重开 Blender 场景，以关闭渲染内降噪的 Cycles 输出混合精度多层线性 EXR。用统一 CLI 与实际 Albedo/Normal 引导执行独立逐帧空间 OIDN，再明确执行 AgX 和 sRGB→BT.709 编码。保留原始帧与全链哈希，分别检查精确时间基准、连续帧和自然速度完整播放，公开前清理本地路径及元数据。",
+        "note": "按实际制作过程整理的可复用说明，非用户逐字原话或私有任务提示词。"
+      },
+      "environment": [
+        {
+          "label": "Blender",
+          "value": "Blender 4.5.13 LTS · Cycles CPU · 96 samples"
+        },
+        {
+          "label": "dcc-media-enhance",
+          "value": "0.2.0 · bd4aca72488ca6165816ebdf95c99df5800a192a"
+        },
+        {
+          "label": "实际降噪后端",
+          "value": "独立 Blender compositor OIDN；内嵌 OIDN 版本未独立核验"
+        },
+        {
+          "label": "EXR 精度",
+          "value": "Combined / Albedo HALF16；Normal / Depth FLOAT32"
+        },
+        {
+          "label": "FFmpeg",
+          "value": "FFmpeg 7.1.5 · 显式 sRGB→BT.709 · H.264/yuv420p · 限制范围"
+        },
+        {
+          "label": "DCC-MCP Core",
+          "value": "0.20.44"
+        },
+        {
+          "label": "适配器记录",
+          "value": "dcc-mcp-blender 0.2.20基线及397d2aaa相机/时间基准源码补丁；冻结快照，不宣称新正式版"
+        },
+        {
+          "label": "输出与时间基准",
+          "value": "960 × 720 · 144 frames · 24000/1001 fps · 6.006 s"
+        },
+        {
+          "label": "原生公开副本",
+          "value": "路径已清理并保存重开；仅声明已检查设置和144帧边界一致"
+        },
+        {
+          "label": "浏览器验收环境",
+          "value": "Chromium 153.0.8010.12 · 英中桌面及触控视口模拟"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Blender DCC-MCP",
+          "description": "真实宿主调用修改原生几何、相机和场景设置，保存并重新打开后检查。"
+        },
+        {
+          "name": "Cycles CPU",
+          "description": "96 samples、固定seed42、无自适应采样或动画随机种子、关闭渲染内降噪，输出真实多层EXR及引导通道。"
+        },
+        {
+          "name": "dcc-media-enhance 0.2.0 / Blender compositor OIDN",
+          "description": "统一原生CLI使用独立空白Blender进程，以真实Albedo/Normal引导逐帧空间降噪；没有时域算法或运动补偿。"
+        },
+        {
+          "name": "Blender AgX / FFmpeg zscale",
+          "description": "float32线性美术输出经AgX转16-bit PNG，再显式sRGB→BT.709编码；无补帧、变速或放大。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "细化几何并保留完整构图",
+          "description": "26个对象；圆环控制点96→384，圆环倒角分辨率3→6，摆杆倒角分辨率6。42→44 mm镜头的144帧投影边界检查记录最小4.73%边距。"
+        },
+        {
+          "title": "保留原生线性输入",
+          "description": "保存重开后渲染96samples混合精度多层EXR。原始文件不改写；内部路径与原始执行记录不直接公开。"
+        },
+        {
+          "title": "真实引导式空间降噪",
+          "description": "制作宿主退出后，以独立进程调用已安装的Blender compositor OIDN。逐帧使用真实Albedo/Normal通道，输出float32线性RGBA EXR。"
+        },
+        {
+          "title": "明确色彩链与独立播放验收",
+          "description": "以AgX/Look None/exposure0/gamma1输出展示PNG，显式转换sRGB→BT.709。帧序由真实EXR头、全链hash、转换回执及MP4PTS建立；不使用降噪子场景写入的PNG Frame=001作为时序证据。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/brass-pendulum-denoise/pendulum-oidn.mp4",
+          "alt": "黄铜摆锤：新的引导式空间OIDN候选动画",
+          "caption": "新候选 · 960 × 720 · 96 samples · 逐帧空间 OIDN · 6.006秒 · 无音轨"
+        },
+        {
+          "src": "docs/showcase/brass-pendulum-denoise/historical-atadenoise/pendulum-synchronized-comparison.mp4",
+          "alt": "历史实验：640 × 480、32 samples的旧raw与atadenoise同步对照",
+          "caption": "历史版本：旧几何与48→62 mm镜头；只比较当时同源raw/processed，不是新成片的raw control"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生公开副本保存重开",
+          "result": "pass",
+          "observed": "26对象，无外链和嵌入文本脚本；已核对指定渲染设置及全部144帧投影边界。未重新渲染证明像素一致。"
+        },
+        {
+          "name": "完整144帧技术链",
+          "result": "pass",
+          "observed": "完整144帧的原始EXR、空间OIDN输出、展示PNG和交付视频哈希链已核验；全片完整解码，PTS步进1001、时间基准1/24000、时长6.006秒，没有相邻完全重复帧。"
+        },
+        {
+          "name": "全片静态联系表审阅",
+          "result": "pass",
+          "observed": "全部144帧的6张联系表及原生尺寸第1、13、73、144帧已实际检查；未观察到阻断性静态缺陷，完整底座保留。金属环杆高光和少数球边像素仍有细小亮点或锯齿；不代表自然速度动态验收。"
+        },
+        {
+          "name": "真实自然速度画面验收",
+          "result": "pass",
+          "observed": "已测试提交508004143e41e404b38b149a8baf05fd18ef7ece：英中桌面/触控四端均自然1×播放到ended；144帧解码，0掉帧/损坏/seek，143次回调覆盖第2–144帧及142次可见变化，首中末实际解码画面通过同源参考核验。此为交付显示一致性验收，不认证时域降噪质量。"
+        },
+        {
+          "name": "已记录提交的浏览器完整播放",
+          "result": "pass",
+          "observed": "Chromium153.0.8010.12四端通过，详见ci-verification.json。触控在页面内播放，正常原生控件遮挡部分末图，该像素差异保留；同一末图另经真实原生按钮进入/退出全屏后核验通过，时码与解码状态不变，Stop释放且无重请求。后续文案或代码提交不自动继承结果。"
+        },
+        {
+          "name": "高采样真值与定量画质评分",
+          "result": "not_run",
+          "observed": "没有更高采样真值、PSNR/SSIM或客观感知质量认证；像素匹配只证明展示与交付参考一致。"
+        },
+        {
+          "name": "用户当前成片验收",
+          "result": "pass",
+          "observed": "当前6.006秒成片已获用户主观接受；不等于客观画质认证。浏览器展示一致性另见明确绑定已测试提交的记录。"
+        }
+      ],
+      "limitations": [
+        "本案例为原创程序化动画，不是CineRecon重建、物理摆仿真、基准测试或模型质量评分。",
+        "OIDN在此逐帧独立运行，属于空间降噪；没有时域算法或运动补偿，单帧成功不证明动态稳定。",
+        "历史atadenoise实验的几何、镜头、尺寸与采样不同；旧raw视频不能作为新成片的同源控制。",
+        "MP4为有损展示编码。浏览器参考由该最终MP4独立解码取得，只核验交付显示一致性，不是原生EXR或高采样画质真值。",
+        "公开原生副本字节不同于制作原件；只声明已检查设置与投影边界一致，未证明重新渲染像素一致。",
+        "触控为Chromium视口模拟；页面内正常原生控件可能遮挡末图，末图另通过真实全屏操作核验，不声称页面内画面无遮挡。未测试实体设备、Safari/Firefox或生产站点。",
+        "模型与推理强度没有可独立核验的已接受任务配置记录，各阶段继续Unknown。",
+        "dcc-media-enhance源码采用MIT许可；原创案例资产仍保留权利，上游Blender、OIDN和FFmpeg许可义务不变。"
+      ],
+      "resources": [
+        {
+          "label": "双语案例说明",
+          "url": "docs/showcase/brass-pendulum-denoise/README.md"
+        },
+        {
+          "label": "新候选原生工程（路径已清理）",
+          "url": "docs/showcase/brass-pendulum-denoise/scene-public.blend"
+        },
+        {
+          "label": "本次原生编辑配方",
+          "url": "docs/showcase/brass-pendulum-denoise/scene-recipe.json"
+        },
+        {
+          "label": "本次原生检查与清理范围",
+          "url": "docs/showcase/brass-pendulum-denoise/native-inspection.json"
+        },
+        {
+          "label": "本次技术验证",
+          "url": "docs/showcase/brass-pendulum-denoise/validation.json"
+        },
+        {
+          "label": "真实空间降噪与色彩链证据",
+          "url": "docs/showcase/brass-pendulum-denoise/processing-validation.json"
+        },
+        {
+          "label": "本次画面审阅与未验收项",
+          "url": "docs/showcase/brass-pendulum-denoise/visual-review.json"
+        },
+        {
+          "label": "帧序与精确时间基准",
+          "url": "docs/showcase/brass-pendulum-denoise/temporal-integrity-summary.json"
+        },
+        {
+          "label": "实际软件版本与能力边界",
+          "url": "docs/showcase/brass-pendulum-denoise/software-capability-coverage.json"
+        },
+        {
+          "label": "浏览器同源参考契约",
+          "url": "docs/showcase/brass-pendulum-denoise/playback-reference.json"
+        },
+        {
+          "label": "已测试提交的精简浏览器记录",
+          "url": "docs/showcase/brass-pendulum-denoise/ci-verification.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/brass-pendulum-denoise/manifest.json"
+        },
+        {
+          "label": "完整历史atadenoise案例与旧CI证据",
+          "url": "docs/showcase/brass-pendulum-denoise/historical-atadenoise/README.md"
+        },
+        {
+          "label": "权利与使用边界",
+          "url": "docs/showcase/brass-pendulum-denoise/LICENSES.md"
+        },
+        {
+          "label": "实际统一CLI源码（MIT）",
+          "url": "https://github.com/dcc-mcp/dcc-media-enhance/tree/bd4aca72488ca6165816ebdf95c99df5800a192a"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP Brass Pendulum showcase contributors",
+        "license": "原创场景、画面、配方与案例资料保留权利；公开展示不构成额外 MIT 授权。上游软件许可证不变。",
+        "note": "无外部图像纹理、生成式位图或配乐；所有画面源于原生 Blender 场景。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-media-enhance/tree/bd4aca72488ca6165816ebdf95c99df5800a192a",
+        "commit": "bd4aca72488ca6165816ebdf95c99df5800a192a",
+        "title": "实际使用的统一降噪CLI源码；后端版本与运行证据另行记录"
+      },
+      "verified_at": "2026-10-16",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "方案规划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "原生创作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码与配方",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考生成",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "降噪与编码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审阅",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审阅",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的已接受任务配置记录。",
+          "scope": "仅对应此阶段，不从其他阶段推断模型或推理强度。"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-14",
+          "change": "保留原创低采样动画，新增实际时域降噪、公开脱敏工程、技术证据与双语展示。"
+        },
+        {
+          "version": "v2",
+          "date": "2026-10-15",
+          "change": "补充同步降噪前后视频、dcc-media-enhance 工具归属和时间轴诊断，保留浏览器播放及连续运动验收边界。"
+        },
+        {
+          "version": "v3",
+          "date": "2026-10-16",
+          "change": "加入完整960 × 720引导式空间OIDN候选与真实144帧技术证据；静态联系表已审阅，历史atadenoise独立保留。新增完整真实画面播放门禁，当前head浏览器验收仍未完成；用户已通过语音批准当前成片发布。"
+        },
+        {
+          "version": "v4",
+          "date": "2026-10-16",
+          "change": "补充已测试提交5080041的英中桌面/触控四端自然速度完整播放、实际画面与停止释放记录；触控末图通过原生全屏按钮独立核验，页面内控件遮挡事实保留。后续提交须重新验证。"
+        }
+      ]
+    },
+    {
       "slug": "houdini-procedural-study",
       "title": "青釉环纹器皿",
       "subtitle": "Houdini · 51 点剖面到真实 Mantra 成图",
@@ -315,6 +643,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -322,6 +659,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -647,6 +994,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -654,6 +1010,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -961,6 +1327,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -968,6 +1343,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1297,6 +1682,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1306,9 +1700,19 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         },
         {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
           "version": "独立新增 MIDI 配乐版",
           "date": "2026-10-09",
           "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1658,6 +2062,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1667,9 +2080,19 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         },
         {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
           "version": "独立新增 MIDI 配乐版",
           "date": "2026-10-09",
           "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1720,6 +2143,14 @@
         {
           "label": "Adapter 适配器",
           "value": "ParaView 0.1.0，9b9de65d 的原生证明与 4c4939b1 文档后续内容等价；GIMP 0.4.1，metadata 基线 ea9270a8 与预览 a3b45aaa 增量分阶段绑定"
+        },
+        {
+          "label": "新增过程视频环境",
+          "value": "2026-10-12：GIMP 3.0.4 / Core 0.20.43 / GIMP adapter 0.5.0，另用未合并 PR22 的 GUI readiness 修复；原始制作环境记录不变。"
+        },
+        {
+          "label": "新增视频模型记录",
+          "value": "实际模型与推理强度均未知；请求配置为 gpt-6-astra / ultra，但未取得可审计的运行配置回执。仅记录本轮视频，不补写历史模型。"
         }
       ],
       "tools": [
@@ -1764,6 +2195,12 @@
       ],
       "results": [
         {
+          "src": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+          "poster": "docs/showcase/seismic-lens/seismic-lens-native-poster.png",
+          "alt": "八秒 GIMP 原生图层演示",
+          "caption": "2026-10-12 新增：连续录制真实 GIMP 窗口，通过 typed MCP 依次显示原母版的五组切片与等值线。8.0 秒、1178 × 814、15 fps、120 帧，有意静音。不是重新绘制，也不是地震场动画。"
+        },
+        {
           "src": "docs/showcase/seismic-lens/hero.png",
           "alt": "Seismic Lens 五面板展板",
           "caption": "1600 × 1000 原生 GIMP MCP 预览；2560 × 1600 分层母版保持可编辑，副本缩放、透明 alpha、保存重开与全图 RGBA 已实际验证"
@@ -1804,6 +2241,16 @@
           "name": "Native GIMP web preview",
           "result": "pass",
           "observed": "Fresh native02:195 records,52 successful jobs and one intended rejection. Nested active-image IDs are strictly verified against the intended source; pixels, metadata and cleanup pass. The original missing-value comparison is not credited."
+        },
+        {
+          "name": "真实软件视图与往返检查",
+          "result": "pass",
+          "observed": "2026-10-12 实际 MCP 保存副本、关闭重开、导出并原生重开 PNG。XCF 副本 SHA256 与原母版相同；30 图层、19 文字层及完整 RGBA 保持一致。"
+        },
+        {
+          "name": "连续窗口录制与解码",
+          "result": "pass",
+          "observed": "仅录制经 PID 核对的任务 GIMP 窗口；五次 typed MCP 显示操作均完成。全部 120 帧完整解码，检查首中尾与五处变化；无音轨。"
         }
       ],
       "limitations": [
@@ -1811,7 +2258,7 @@
         "当前环境未暴露 CameraClippingRange；验收覆盖实际可读属性与图像像素",
         "MCP 重开限于本会话保存的可信状态；没有放开任意外部 PVSM 导入",
         "开发增量与实际测试版本逐项记录，不冒称 PyPI 已发行能力",
-        "静态科学展板；不声称影片或跨机器像素一致",
+        "静态科学展板另附八秒真实 GIMP 图层演示；不声称重做 ParaView 计算、原始创作全过程或跨机器像素一致。",
         "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内"
       ],
       "resources": [
@@ -1862,6 +2309,18 @@
         {
           "label": "文件清单",
           "url": "docs/showcase/seismic-lens/manifest.json"
+        },
+        {
+          "label": "视频与本轮原生核验记录",
+          "url": "docs/showcase/seismic-lens/native-process-video.json"
+        },
+        {
+          "label": "视频复现与边界",
+          "url": "docs/showcase/seismic-lens/PROCESS-VIDEO.md"
+        },
+        {
+          "label": "GIMP readiness 修复 Draft PR22",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/22"
         }
       ],
       "credits": {
@@ -1938,6 +2397,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1945,6 +2413,21 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
+        },
+        {
+          "version": "新增真实软件视频 2026-10-12",
+          "date": "2026-10-12",
+          "change": "增加八秒连续 GIMP 图层演示、单独的本轮环境和请求模型记录；原图、完整下载及历史未知模型保持不变。影片权利保留，无新增许可授权。"
         }
       ]
     },
@@ -2813,6 +3296,838 @@
       ]
     },
     {
+      "slug": "resonance-atlas",
+      "title": "Resonance Atlas · 共振图谱",
+      "subtitle": "Inkscape · 三联矢量海报与真实图层组装短片",
+      "software": [
+        "Inkscape",
+        "FFmpeg"
+      ],
+      "capabilities": [
+        "矢量设计",
+        "排版",
+        "动画",
+        "导出",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/resonance-atlas/hero.jpg",
+        "alt": "深蓝、米白与紫色的三联声学矢量海报"
+      },
+      "evidence_label": "本轮实际运行 · Native Inkscape + DCC-MCP",
+      "evidence_scope": "55次真实gateway调用，9组原生SVG/PNG/PDF与文字转路径重开。制作依赖尚未合并的Linux适配修复精确commit；非纯脚本SVG。影片是原生PNG的组装剪辑，不是录屏。",
+      "summary": "31组相位轨迹、48道双源波前与42条谐波线，统一网格与编辑式排版。附12秒静音组装影片。",
+      "goal": "以原创矢量作品验证真实Inkscape图层创建、曲线、字体、PDF、文字转路径及保存重开，并用真实产物展示制作层次。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过真实Inkscape DCC-MCP制作三张原创声学示意海报。使用图层、曲线和编辑式排版，原生保存并重开，输出SVG、PNG、PDF和outlined SVG。根据实际PNG制作约12秒组装影片，明确非录屏。先低清审阅再输出正式片，不以AI图伪造软件操作。",
+        "note": "复用说明，非用户逐字原话。"
+      },
+      "environment": [
+        {
+          "label": "Host",
+          "value": "Inkscape 1.4.4 / Ubuntu 24.04 / CI-owned Xvfb"
+        },
+        {
+          "label": "Adapter",
+          "value": "0.1.0 source 498982a; unmerged PR #3 dependency"
+        },
+        {
+          "label": "Core / CLI / Gateway",
+          "value": "0.20.42"
+        },
+        {
+          "label": "Output",
+          "value": "1587×2116 PNG; native SVG/PDF; 1280×720 / 24fps / 12s silent video"
+        },
+        {
+          "label": "Post-production",
+          "value": "FFmpeg 7.1.5 / Pillow 12.3.0"
+        }
+      ],
+      "tools": [
+        {
+          "name": "inkscape_vector__document_build",
+          "description": "9组typed plans通过软件原生inkex效果创建矢量。"
+        },
+        {
+          "name": "inkscape_vector__document_inspect",
+          "description": "原生重开查询，包含转路径后text=0。"
+        },
+        {
+          "name": "inkscape_vector__document_export",
+          "description": "原生PNG、PDF与outlined SVG导出。"
+        },
+        {
+          "name": "Pillow / FFmpeg",
+          "description": "对真实PNG做保比例细节取景与三阶段组装；非Inkscape原生动画。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "原生方案",
+          "description": "三主题共9组typed plans，经真实gateway而非外部XML写入器创建。"
+        },
+        {
+          "title": "保存与复核",
+          "description": "每组原生重开，输出PNG/PDF，转路径后再次重开；DejaVu字体嵌入检查通过。"
+        },
+        {
+          "title": "真实影像组装",
+          "description": "低清审阅后加入大幅细节近景，纠正取景比例，保留完整海报与最终三联展。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/resonance-atlas/resonance-atlas.mp4",
+          "alt": "12秒真实矢量图层组装影片",
+          "caption": "1280×720，24fps，12秒；静音；原生PNG组装影片，非录屏。"
+        },
+        {
+          "src": "docs/showcase/resonance-atlas/poster-1.jpg",
+          "alt": "Phase / locked",
+          "caption": "Inkscape原生PNG的JPEG展示衍生图 · 1587×2116；完整无损PNG另附"
+        },
+        {
+          "src": "docs/showcase/resonance-atlas/poster-2.jpg",
+          "alt": "Between / waves",
+          "caption": "Inkscape原生PNG的JPEG展示衍生图 · 1587×2116；完整无损PNG另附"
+        },
+        {
+          "src": "docs/showcase/resonance-atlas/poster-3.jpg",
+          "alt": "After / sound",
+          "caption": "Inkscape原生PNG的JPEG展示衍生图 · 1587×2116；完整无损PNG另附"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生创建/保存重开",
+          "result": "pass",
+          "observed": "55次真实gateway调用；9组原生创建、导出与重开通过。"
+        },
+        {
+          "name": "字体与轮廓",
+          "result": "pass",
+          "observed": "DejaVu Sans/Bold嵌入PDF；outlined SVG不含text元素；PDF提取文本核对。"
+        },
+        {
+          "name": "像素与影片",
+          "result": "pass",
+          "observed": "三张海报逐图审阅；288帧影片完整decode。"
+        },
+        {
+          "name": "GUI / 用户最终验收",
+          "result": "not_run",
+          "observed": "未声称GUI交互录屏或用户最终验收。"
+        }
+      ],
+      "limitations": [
+        "声学曲线为数学示意，不是实测数据或压力场模拟。",
+        "影片有意静音，不含音轨；PNG合成，非原生Inkscape动画或软件录屏。",
+        "依赖未合并Linux原生修复commit，不代表正式release已支持。",
+        "公开证据为脱敏摘要，非完整原始trace。"
+      ],
+      "resources": [
+        {
+          "label": "Guide",
+          "url": "docs/showcase/resonance-atlas/README.md"
+        },
+        {
+          "label": "Typed plan generator",
+          "url": "docs/showcase/resonance-atlas/generate_plans.py"
+        },
+        {
+          "label": "Assembly script",
+          "url": "docs/showcase/resonance-atlas/compose_video.py"
+        },
+        {
+          "label": "Native MCP evidence",
+          "url": "docs/showcase/resonance-atlas/mcp-summary.json"
+        },
+        {
+          "label": "Validation",
+          "url": "docs/showcase/resonance-atlas/validation.json"
+        },
+        {
+          "label": "Licenses",
+          "url": "docs/showcase/resonance-atlas/LICENSES.md"
+        },
+        {
+          "label": "Poster 1 SVG",
+          "url": "docs/showcase/resonance-atlas/poster-1.svg"
+        },
+        {
+          "label": "Poster 1 PDF",
+          "url": "docs/showcase/resonance-atlas/poster-1.pdf"
+        },
+        {
+          "label": "Poster 2 SVG",
+          "url": "docs/showcase/resonance-atlas/poster-2.svg"
+        },
+        {
+          "label": "Poster 2 PDF",
+          "url": "docs/showcase/resonance-atlas/poster-2.pdf"
+        },
+        {
+          "label": "Poster 3 SVG",
+          "url": "docs/showcase/resonance-atlas/poster-3.svg"
+        },
+        {
+          "label": "Poster 3 PDF",
+          "url": "docs/showcase/resonance-atlas/poster-3.pdf"
+        },
+        {
+          "label": "Video validation",
+          "url": "docs/showcase/resonance-atlas/video-validation.json"
+        },
+        {
+          "label": "Original lossless PNG exports",
+          "url": "docs/showcase/resonance-atlas/native-png-exports.zip"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP Resonance Atlas showcase contributors",
+        "license": "Original artwork, video and new scripts: rights reserved; no additional MIT grant. Existing repository and third-party licenses unchanged.",
+        "note": "无第三方图像、AI生成位图或音轨。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-inkscape/tree/498982ae7d4eedefeff31811c251795f5ff93be6",
+        "commit": "498982ae7d4eedefeff31811c251795f5ff93be6",
+        "title": "Exact native adapter used in CI; unmerged PR #3 dependency."
+      },
+      "verified_at": "2026-10-11",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "planning",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "creation",
+          "stage": "creation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "code",
+          "stage": "code",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "reference",
+          "stage": "reference",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "post_production",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "review_visual",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "review_technical",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This production stage."
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-11",
+          "change": "Original native vector creation and assembly film; proportional detail crop verified."
+        }
+      ]
+    },
+    {
+      "slug": "sonic-loom",
+      "title": "Sonic Loom · 可听的节奏织机",
+      "subtitle": "Godot · 四种原创音色，十六步交互音序器",
+      "software": [
+        "Godot"
+      ],
+      "capabilities": [
+        "音频",
+        "交互",
+        "程序化合成",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/sonic-loom/hero.png",
+        "alt": "真实 Godot 窗口中的 Sonic Loom 音序器，深色面板、四色声部、十六步按钮和播放位置"
+      },
+      "evidence_label": "真实 Godot / MCP 创作 · 有声视频与在线试听",
+      "evidence_scope": "本轮通过真实 typed MCP 创建、编译、挂载和保存 GDScript / 场景；原生 Godot CI 另行完成像素录制、真实混音音轨与键鼠输入。四声部、64 个步进开关与本地保存重载通过；录音不是后配音乐。主观听测环境不可用，明确保留未完成听评，不把非静音检测冒称听觉验收。",
+      "summary": "轻触四色步进，让 Earth、Dust、Air 与 Glass 织出 A minor 节奏。支持播放暂停、变速、声部静音、保存、重载和重置；可下载独立原生工程。",
+      "goal": "制作一件真正可操作、能听到声音的原创 Godot 乐器，并用真实宿主录音与输入测试约束展示，而非只做静态控件图。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "在独立空白 Godot 工程中，先加载并描述 Godot script、scene-management、project-management 与 audio MCP 技能，再通过 typed create_script / edit_script 制作原创四色十六步音序器。音色采用确定性数学合成，不使用第三方采样。把脚本挂载至 Node2D 主场景，保存并读回结构。实现播放暂停、速度、步进编辑、声部静音、重置和本地保存重载。窗口化真实 Godot 录制保留原生混音声音；另用实际键鼠操作检查 UI。每次更改都重跑原生测试，确认像素后再整理脱敏案例。提供原生源码、WAV/MP3、含声视频、测量波形、许可证及哈希，不将无 clipping 等同主观听测。",
+        "note": "依实际制作路径整理的复用说明，不是用户原话。"
+      },
+      "environment": [
+        {
+          "label": "宿主 / 渲染",
+          "value": "Godot 4.6.3 · Compatibility / Mesa llvmpipe · Xvfb 窗口化"
+        },
+        {
+          "label": "适配器 / Core",
+          "value": "dcc-mcp-godot 0.9.6 · Core / CLI / Gateway 0.20.42"
+        },
+        {
+          "label": "成图 / 录音",
+          "value": "1280 × 800 · 30 fps · 13 秒 · 44.1 kHz 双声道 PCM"
+        }
+      ],
+      "tools": [
+        {
+          "name": "godot_script create_script / edit_script / validate_script",
+          "description": "实际通过 gateway 写入并编译音序器源代码；键鼠测试发现的问题也经 MCP 修订。"
+        },
+        {
+          "name": "create_scene / attach_script / save_scene / get_scene_tree",
+          "description": "原生 Node2D 主场景挂载、保存并读回结构。"
+        },
+        {
+          "name": "set_project_setting / get_audio_bus_layout",
+          "description": "设置主场景、画布尺寸、渲染与混音采样率，读取实际 Master 总线。"
+        },
+        {
+          "name": "Godot Movie Maker / native input test",
+          "description": "独立 CI 中真实窗口录制像素和混音；xdotool 实际键鼠事件，不宣称是 MCP render return。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "写出自己的声音",
+          "description": "踢鼓、噪声军鼓、闭镲与 A minor 钟音全部在 Godot 运行时合成，没有录音或第三方采样。"
+        },
+        {
+          "title": "把节奏变成可操作的物件",
+          "description": "四色、形状、播放下划线与密度线条构成层级；鼠标及快捷键均控制实际序列。"
+        },
+        {
+          "title": "让真实输入揭露问题",
+          "description": "首次键鼠测试暴露队列点击坐标问题，修订为事件坐标；随后校正事件日志字段冲突，再次跑完整原生测试。"
+        },
+        {
+          "title": "保留听得到的证据",
+          "description": "电影音轨直接来自 Godot 混音，WAV/MP3来自同一录音。只有下面的实际 PCM 波形是测量图，界面顶部动效不是频谱。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/sonic-loom/demo.mp4",
+          "alt": "Sonic Loom 原生有声运行视频",
+          "caption": "13 秒真实 Godot Movie Maker 录制，包含原生声音；演示编辑、变速、暂停与继续。视频中的动作是脚本演示，真实键鼠另有验证。"
+        },
+        {
+          "src": "docs/showcase/sonic-loom/demo.mp3",
+          "alt": "Sonic Loom 原生混音在线试听",
+          "caption": "点击播放试听：来自同一段原生录音，无自动播放。主观听评未完成；数值验证通过不代表已听测。"
+        },
+        {
+          "src": "docs/showcase/sonic-loom/waveform.png",
+          "alt": "真实 Godot 混音 PCM 波形",
+          "caption": "从无损 WAV 实际采样绘制。44.1 kHz 双声道、13 秒；零 clipped samples。"
+        },
+        {
+          "src": "docs/showcase/sonic-loom/small-window.png",
+          "alt": "960 × 600 小窗口原生运行截图",
+          "caption": "较小窗口的真实保存重开画面，展示控件布局仍完整；不是手机触摸验证。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "typed_mcp_authoring",
+          "result": "pass",
+          "observed": "{\"calls\": 19, \"source_sha256\": \"ecd55c4f64914d07a72d7fd65bfacd81e91d05a7807c3827348edbb44cc2a8d0\", \"all_success\": true}"
+        },
+        {
+          "name": "native_logic_tests",
+          "result": "pass",
+          "observed": "{\"checks\": [{\"name\": \"step toggles on\", \"pass\": true}, {\"name\": \"repeated step toggles off\", \"pass\": true}, {\"name\": \"upper tempo bound\", \"pass\": true}, {\"name\": \"lower tempo bound\", \"pass\": true}, {\"name\": \"save and reopen edited pattern\", \"pass\": true}, {\"name\": \"play starts first step\", \"pass\": true}, {\"name\": \"pause preserves step\", \"pass\": true}, {\"name\": \"reset restores defaults\", \"pass\": true}, {\"name\": \"voice 0 has nonzero PCM\", \"pass\": true, \"peak\": 0.848715722560883, \"samples\": 21168}, {\"name\": \"voice 1 has nonzero PCM\", \"pass\": true, \"peak\": 0.520991623401642, \"samples\": 10584}, {\"name\": \"voice 2 has nonzero PCM\", \"pass\": true, \"peak\": 0.236068367958069, \"samples\": 3969}, {\"name\": \"voice 3 has nonzero PCM\", \"pass\": true, \"peak\": 0.370319485664368, \"samples\": 31752}], \"passed\": true}"
+        },
+        {
+          "name": "real_keyboard_mouse_and_save_reload",
+          "result": "pass",
+          "observed": "{\"mouse_step\": true, \"tempo_button\": true, \"play_pause\": true, \"mute\": true, \"saved_pattern_reopened\": true, \"reset_twice\": true}"
+        },
+        {
+          "name": "real_mixed_audio",
+          "result": "pass",
+          "observed": "{\"sample_rate_hz\": 44100, \"channels\": 2, \"duration_s\": 13.0, \"peak\": 0.75927734375, \"rms\": 0.11922150384962876, \"nonzero_samples\": 1083782, \"clipped_samples\": 0, \"source\": \"Godot Movie Maker real mixer output\", \"passed\": true}"
+        },
+        {
+          "name": "visual_review",
+          "result": "pass",
+          "observed": "\"Real native hero, smaller window and sampled video frames inspected; labels, controls, grid, playhead and footnotes remain legible without overlap.\""
+        },
+        {
+          "name": "source_archive",
+          "result": "pass",
+          "observed": "{\"relative_paths_only\": true, \"native_dependencies\": 0, \"zip_integrity\": true}"
+        },
+        {
+          "name": "主观听评",
+          "result": "not_run",
+          "observed": "当前环境无可用听觉输入；请通过播放器试听，技术 PCM 检测不代替听评。"
+        },
+        {
+          "name": "web_playable_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification.json\",\"run_id\":38199186635,\"tested_commit\":\"e43fc55a0c0b04f65fb5d026f7fcff0419437815\",\"combined_checks\":27,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
+        },
+        {
+          "name": "web_portrait_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification-portrait.json\",\"run_id\":38202157612,\"tested_commit\":\"e8d3fc3f33ba61fca006116ba08c3a865c4a7405\",\"combined_checks\":40,\"viewport_css\":[390,844],\"output_channels\":2,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
+        }
+      ],
+      "limitations": [
+        "Subjective listening has not been performed. Use the audio player to audition on the target listening device.",
+        "The original native validation covered Linux Xvfb desktop interaction. The separately added Web export has its own browser verification and does not establish physical phone testing or hardware audio-device latency.",
+        "MCP authored and saved the source and scene. CI rendering and Movie Maker capture invoke Godot directly; they are not an MCP scene-preview return.",
+        "The small top-right animation is decorative, and THE THREAD is pattern density. Only waveform.png is measured from real audio PCM.",
+        "The movie uses a scripted demonstration of edits; separate xdotool keyboard/mouse evidence establishes actual UI input.",
+        "Pause stops sequencing; already-triggered voice tails decay naturally.",
+        "The root scene contains source-drawn artwork and runtime players; individual pads are not separate editor nodes.",
+        "Exact model identity and reasoning configuration are unknown.",
+        "The run is not stderr-warning-free: Xvfb V-Sync and Movie Maker ObjectDB-at-exit warnings are disclosed."
+      ],
+      "resources": [
+        {
+          "label": "原生可编辑工程",
+          "url": "docs/showcase/sonic-loom/Sonic-Loom-Source.zip"
+        },
+        {
+          "label": "无损原生录音",
+          "url": "docs/showcase/sonic-loom/demo.wav"
+        },
+        {
+          "label": "含声演示视频",
+          "url": "docs/showcase/sonic-loom/demo.mp4"
+        },
+        {
+          "label": "在线试听 MP3",
+          "url": "docs/showcase/sonic-loom/demo.mp3"
+        },
+        {
+          "label": "原生 MCP 调用证据",
+          "url": "docs/showcase/sonic-loom/mcp-evidence.json"
+        },
+        {
+          "label": "实际键鼠事件",
+          "url": "docs/showcase/sonic-loom/interaction.json"
+        },
+        {
+          "label": "复现方法",
+          "url": "docs/showcase/sonic-loom/REPRODUCE.txt"
+        },
+        {
+          "label": "技术证据与边界",
+          "url": "docs/showcase/sonic-loom/validation.json"
+        },
+        {
+          "label": "逐文件 SHA-256",
+          "url": "docs/showcase/sonic-loom/manifest.json"
+        },
+        {
+          "label": "许可证",
+          "url": "docs/showcase/sonic-loom/LICENSES.md"
+        },
+        {
+          "label": "Web 试玩验收",
+          "url": "play/verification-portrait.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "Original source and test code, visual design, native assets and media: rights reserved; no new MIT, Creative Commons or other license grant. Existing site-code MIT and third-party licenses remain separate.",
+        "note": "不含第三方采样、软件二进制、账号资料或私有素材。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/tree/e5ee3e8a904d71119e391b20c57698629c2193d0",
+        "commit": "e5ee3e8a904d71119e391b20c57698629c2193d0",
+        "title": "真实 Godot 音频与键鼠验证的工具仓库 Draft PR"
+      },
+      "verified_at": "2026-10-11T15:00:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "原创四声部音序器与布局"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "原生制作",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "MCP 创建和保存 Godot 工程"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "可交互步进编辑、音色、状态持久化和测试"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "未使用图像生成或外部音频参考"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体后期",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "原生录制的转码和测量波形"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "真实主图、小窗与视频抽帧"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得可核验的阶段模型与强度配置记录，不以自述或文件推断。",
+          "scope": "原生逻辑、键鼠、保存重开、音频测量"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生音序器",
+          "date": "2026-10-11",
+          "change": "通过真实 MCP 制作、真实 Godot 含声录制，修复快速队列点击及日志字段问题，保存并重开原生工程；主观听评明确未完成。"
+        }
+      ]
+    },
+    {
+      "slug": "prism-tide",
+      "title": "Prism Tide · 棱镜潮汐",
+      "subtitle": "Godot · 三关镜面光路解谜",
+      "software": [
+        "Godot"
+      ],
+      "capabilities": [
+        "交互",
+        "游戏原型",
+        "程序化绘制",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/prism-tide/hero.png",
+        "alt": "深海色光学仪台中，薄荷绿光束经黄铜反射镜到达接收器，左侧显示CONNECTED"
+      },
+      "evidence_label": "真实 MCP 制作 · 三关实际键鼠通关",
+      "evidence_scope": "十次真实 Gateway 制作调用创建、挂载、保存和设置原生工程，并修正反射术语。图像和15秒视频来自另行运行的官方Godot 4.6.3原生CI/Xvfb；演示状态变化与独立OS键鼠输入证据分开记录。没有将直接原生渲染冒称MCP渲染返回。",
+      "summary": "一座安静的深海光学仪台。转动黄铜镜片、打开挡板，让薄荷绿信号回到接收器。三关从简单折线路径逐步扩展到六次反射与两道闸门。",
+      "goal": "制作可保存、重开和实际操作的原创桌面解谜游戏，以真实MCP制作记录、三关正反路径测试和原生画面形成完整证据。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过真实Godot MCP创建原创三关镜面光路解谜。使用深海仪台视觉、黄铜镜面和清晰的发射/接收装置。支持点击镜面旋转和挡板开关，也支持键盘选择、旋转、重置与胜利后下一关。各关初始不可解通，提供确定性光路、错误镜向与关闭挡板测试、实际键鼠通关、保存重开、原生截图和短片。无外部美术资产；图形环境不可用时使用标准CI/Xvfb，不伪造像素。",
+        "note": "面向复现的制作说明，不是用户私聊逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "宿主",
+          "value": "Godot 4.6.3 · Linux x86_64"
+        },
+        {
+          "label": "Adapter / Core",
+          "value": "dcc-mcp-godot 0.9.6 · Core / CLI 0.20.42"
+        },
+        {
+          "label": "原生渲染",
+          "value": "Ubuntu Xvfb · Compatibility OpenGL · Mesa software rendering"
+        },
+        {
+          "label": "媒体",
+          "value": "1280 × 800 · 15秒 · H.264 · 30 fps · 无音轨"
+        }
+      ],
+      "tools": [
+        {
+          "name": "godot_script__create_script / edit_script / attach_script",
+          "description": "实际Gateway写入原创游戏、挂载到场景；视觉审查后通过MCP修正REFLECTION术语。"
+        },
+        {
+          "name": "godot_scene_management__create_scene / save_scene",
+          "description": "创建并保存可重开的Node2D原生场景。"
+        },
+        {
+          "name": "godot_project_management__set_project_setting",
+          "description": "设置主场景、窗口尺寸、伸缩和Compatibility渲染器。"
+        },
+        {
+          "name": "Godot native / xdotool / FFmpeg",
+          "description": "单独的官方原生运行、OS输入测试、Movie Maker捕获和媒体编码；不是MCP返回。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先确认每一道光路",
+          "description": "三关全部从未连通状态开始，17项断言涵盖标准解、错误镜向、还原、重置和闭闸阻断。"
+        },
+        {
+          "title": "通过真实MCP持久化",
+          "description": "脚本、场景、挂载、保存和设置完成后独立重开。可移植原生副本移除编辑器及适配器安装元数据，玩法脚本字节保持一致。"
+        },
+        {
+          "title": "实际输入而非演示状态",
+          "description": "独立X11键盘与鼠标完成三关、Tab选择、错误路径、挡板阻断、重复键盘与鼠标重置。",
+          "image": {
+            "src": "docs/showcase/prism-tide/interaction.png",
+            "alt": "实际鼠标打开两道挡板并完成第三关后的原生画面"
+          }
+        },
+        {
+          "title": "审查像素与小窗口",
+          "description": "审查最终静帧、15秒影片采样与864×540小窗口。首次独立审查纠正了把反射称为折射的标题；最终媒体重新捕获。",
+          "image": {
+            "src": "docs/showcase/prism-tide/small-window.png",
+            "alt": "864×540原生小窗口，完整光学仪台布局仍可见"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/prism-tide/demo.mp4",
+          "alt": "Prism Tide三关原生光路演示",
+          "caption": "15秒Godot Movie Maker原生输出，H.264编码，无音轨。脚本驱动演示与独立键鼠测试明确区分。"
+        },
+        {
+          "src": "docs/showcase/prism-tide/hero.png",
+          "alt": "第一关双转向连接成功",
+          "caption": "最终Godot viewport原生捕获，无后期绘制或截图重构。"
+        },
+        {
+          "src": "docs/showcase/prism-tide/interaction.png",
+          "alt": "第三关六次反射与两道开启的挡板",
+          "caption": "独立真实鼠标输入后的通关状态；六次调整连通接收器。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实MCP制作",
+          "result": "pass",
+          "observed": "10次成功制作调用；源脚本、原生场景、挂载、保存、设置及文案修订均有脱敏请求响应。"
+        },
+        {
+          "name": "三关正反路径",
+          "result": "pass",
+          "observed": "17项确定性断言全部通过；原生项目与PCK分别启动重跑。"
+        },
+        {
+          "name": "真实键鼠输入",
+          "result": "pass",
+          "observed": "9项OS输入检查通过：3关通关、键盘选择、错误镜向、闭闸阻断、两种重复重置及最终归零。"
+        },
+        {
+          "name": "原生视觉审查",
+          "result": "pass",
+          "observed": "最终hero、通关帧、影片采样及864×540小窗口已实看；修正反射术语，无重叠裁切。"
+        },
+        {
+          "name": "web_playable_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification.json\",\"run_id\":38199186635,\"tested_commit\":\"e43fc55a0c0b04f65fb5d026f7fcff0419437815\",\"combined_checks\":27,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
+        },
+        {
+          "name": "web_portrait_acceptance",
+          "result": "pass",
+          "observed": "{\"report\":\"play/verification-portrait.json\",\"run_id\":38202157612,\"tested_commit\":\"e8d3fc3f33ba61fca006116ba08c3a865c4a7405\",\"combined_checks\":40,\"viewport_css\":[390,844],\"output_channels\":2,\"physical_phone_tested\":false,\"production_headers_tested\":false}"
+        }
+      ],
+      "limitations": [
+        "桌面1280×800为设计目标；864×540仅验证布局拟合，不表示触屏或手机可读性已验收。",
+        "原始交付仅提供原生工程与PCK；后续新增的Web版本及其浏览器验收独立列出，原生历史记录不代表Web验收。",
+        "光路是确定性的正交格点模型，并非物理光线追踪。",
+        "美术由GDScript绘制；镜面和挡板可编辑数据，但不是独立场景网格。",
+        "本机headless只用于制作与逻辑验证；像素来自另一原生CI运行。无音轨。"
+      ],
+      "resources": [
+        {
+          "label": "原生工程ZIP",
+          "url": "docs/showcase/prism-tide/Prism-Tide-Source.zip"
+        },
+        {
+          "label": "Godot资源包",
+          "url": "docs/showcase/prism-tide/prism-tide.pck"
+        },
+        {
+          "label": "制作与复现说明",
+          "url": "docs/showcase/prism-tide/README.md"
+        },
+        {
+          "label": "真实MCP调用",
+          "url": "docs/showcase/prism-tide/evidence/mcp-calls.json"
+        },
+        {
+          "label": "原生CI与源文件绑定",
+          "url": "docs/showcase/prism-tide/evidence/ci-verification.json"
+        },
+        {
+          "label": "实际键鼠结果",
+          "url": "docs/showcase/prism-tide/evidence/interaction-result.json"
+        },
+        {
+          "label": "机器可读验证",
+          "url": "docs/showcase/prism-tide/validation.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/prism-tide/manifest.json"
+        },
+        {
+          "label": "许可与来源",
+          "url": "docs/showcase/prism-tide/LICENSES.md"
+        },
+        {
+          "label": "Web 试玩验收",
+          "url": "play/verification-portrait.json"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "Original source and test code, visual design, native assets and media: rights reserved; no new MIT, Creative Commons or other license grant. Existing site-code MIT and third-party licenses remain separate.",
+        "note": "全部原创程序化图形，无第三方素材。软件、插件和字体文件未随工程分发。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/tree/f7b0b52aac4dc607c1b1bb0826a18243930c0f0f/tests/fixtures/prism-tide",
+        "commit": "f7b0b52aac4dc607c1b1bb0826a18243930c0f0f",
+        "title": "已验证原生fixture源文件"
+      },
+      "verified_at": "2026-10-11T16:15:20Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "策划阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "制作阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "代码阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "参考阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "媒体处理阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "视觉审查阶段；原创程序化解谜与原生验收"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得独立核验的模型与推理配置记录，不从输出推断。",
+          "scope": "技术审查阶段；原创程序化解谜与原生验收"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生光路解谜",
+          "date": "2026-10-11",
+          "change": "真实MCP制作；实际键鼠三关通关；修正反射术语并重新出图，包含小窗口、原生ZIP与PCK重开证据。"
+        }
+      ]
+    },
+    {
       "slug": "orbital-loom",
       "title": "Orbital Loom · 轨道织机",
       "subtitle": "Blender · 三重万向环与连续原生动画",
@@ -2832,7 +4147,7 @@
         "alt": "墨绿底座上的黄铜三重轨道动雕塑，完整底座与真实接触阴影"
       },
       "evidence_label": "本轮实际运行 · 官方 DCC-MCP",
-      "evidence_scope": "本轮官方 Blender 适配器 embedded MCP 实际创建、保存重开与连续逐帧渲染。定制造型通过官方 scripting escape hatch；typed 帧切换、渲染配置、保存重开与 render_scene。gateway 明确禁用，不声称 gateway CLI 或 GUI 验收。",
+      "evidence_scope": "本次制作通过官方 Blender 适配器的 embedded MCP 完成真实场景创建、保存重开与连续逐帧渲染。定制造型使用官方 scripting escape hatch；帧切换、渲染配置、场景打开/保存及 render_scene 调用使用 typed 工具。gateway 明确禁用，不声称 gateway CLI 或 GUI 验收。",
       "summary": "三重驱动环绕白瓷核心反向转动，露出轴承与连接轴；连续相机运动展示黄铜、墨绿搪瓷与刻度底座。",
       "goal": "验证嵌套父子变换、表达式驱动、相机约束、机械净距、真实连续影片、原生便携与动画导出。",
       "prompt": {
@@ -3083,6 +4398,11 @@
           "version": "v1",
           "date": "2026-10-11",
           "change": "Original native procedural creation, continuous film, clearance checks, native roundtrip and baked animation export."
+        },
+        {
+          "version": "Review integration 2026-10-18",
+          "date": "2026-10-18",
+          "change": "Clarified the historical tool scope, added bilingual presentation and the report artifact layout, and tightened the export assertion to the three expected animated-object identities. Native scene, GLB, images, film and original production measurements are unchanged. The source package now includes the revised guard and a package-specific README."
         }
       ]
     }

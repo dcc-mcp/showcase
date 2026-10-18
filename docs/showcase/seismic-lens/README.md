@@ -13,3 +13,11 @@ The preview capability is now public in [GIMP PR #15](https://github.com/dcc-mcp
 The data is synthetic and its units are illustrative. It is not a seismic solver, measurement or geological model. See [methods and limits](METHODS.md), [actual capability coverage](capability-coverage.json) and [rights and provenance](LICENSES.md).
 
 The preview reproduction helper includes the corrected nested active-image check and guarded cleanup finalizer. A fresh native02 run validates actual integer IDs; the first helper’s missing-value comparison is not credited. The accepted preview media is preserved because every chunk except generated tIME, and all RGBA pixels, match the corrected run.
+
+## Actual GIMP process video, 2026-10-12
+
+[Watch the eight-second native-window recording](seismic-lens-native-layers.mp4) · [Native-window poster](seismic-lens-native-poster.png) · [New measured evidence](native-process-video.json) · [Reproduction and limits](PROCESS-VIDEO.md).
+
+The real GIMP window shows typed MCP revealing five existing groups in the original plate. The saved XCF copy is byte-identical to the original, and native save/reopen/export plus PNG reopen preserve full RGBA. The clip is 1178×814, 15 fps, 120 frames, intentionally silent. It supplements the unchanged original source download; it is not a replay of the original ParaView production. The new capture uses the separately identified, unmerged GIMP readiness fix in PR22.
+
+Actual model and effort for this addition remain Unknown; requested gpt-6-astra / ultra is recorded separately without a confirmed runtime receipt. Historical attribution and asset rights are unchanged.

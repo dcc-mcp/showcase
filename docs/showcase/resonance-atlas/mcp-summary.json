@@ -1,0 +1,93 @@
+{
+  "host": "Inkscape 1.4.4 (1:1.4.4+202605061436+dcaf3e7d9e)",
+  "adapter_version": "0.1.0 source",
+  "adapter_commit": "498982ae7d4eedefeff31811c251795f5ff93be6",
+  "core_cli_gateway": "0.20.42",
+  "native_gateway_calls": 55,
+  "ci_run": "https://github.com/dcc-mcp/dcc-mcp-inkscape/actions/runs/38173127868",
+  "ci_head": "c9bc66e79e6266c6caad098c9d7c62396e74890c",
+  "outputs": [
+    {
+      "plan": "resonance-1-01.json",
+      "planned_objects": 43,
+      "native_svg_sha256": "5ae625d291e77e405a664279bbd06a1194fbe363f355ca5bf3d94a89dbb675c5",
+      "producer": "Inkscape",
+      "reopened_text_count": 1,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-1-02.json",
+      "planned_objects": 75,
+      "native_svg_sha256": "c6077b9a04eb19da352eb04d0aa94fed23d2121e919abbb08b4c677724817df7",
+      "producer": "Inkscape",
+      "reopened_text_count": 1,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-1-03.json",
+      "planned_objects": 95,
+      "native_svg_sha256": "83cb7743a971c2396a7fc97c6ff4d8c739c28d8eb819152223dd5c545c63971d",
+      "producer": "Inkscape",
+      "reopened_text_count": 13,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-2-01.json",
+      "planned_objects": 43,
+      "native_svg_sha256": "4b9d6d7f7afd917679c47d7372214ed0d9392c9ee9d074d7b0b40e0ff65c9541",
+      "producer": "Inkscape",
+      "reopened_text_count": 1,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-2-02.json",
+      "planned_objects": 94,
+      "native_svg_sha256": "292371baa66e73c7b2b95df62497ee1de0ca2c7e4182abcab163cdfc97e28129",
+      "producer": "Inkscape",
+      "reopened_text_count": 1,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-2-03.json",
+      "planned_objects": 114,
+      "native_svg_sha256": "ddb5ce261c3b3aedab5b7ba1b6443773b996ef4fe41cc475afc00ca8a1fca468",
+      "producer": "Inkscape",
+      "reopened_text_count": 13,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-3-01.json",
+      "planned_objects": 43,
+      "native_svg_sha256": "850fd53b8667da673e535791e95645441db072d81d1a18f5e4e68a8389dcf945",
+      "producer": "Inkscape",
+      "reopened_text_count": 1,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-3-02.json",
+      "planned_objects": 86,
+      "native_svg_sha256": "0653569ce21e6707b683f14d233295b273a0d9ee764fbf0301a3690d0dc22b22",
+      "producer": "Inkscape",
+      "reopened_text_count": 1,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    },
+    {
+      "plan": "resonance-3-03.json",
+      "planned_objects": 106,
+      "native_svg_sha256": "eac155a4680b9c99ef01cbeb9d7bfb0db740457ad7ae36f3f8ac3c67b626a4dd",
+      "producer": "Inkscape",
+      "reopened_text_count": 13,
+      "outlined_text_count": 0,
+      "native_returncode": 0
+    }
+  ],
+  "boundary": "Sanitized summary, not full raw trace. Assembly video is not a screen recording. No audio track."
+}

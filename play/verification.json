@@ -1,0 +1,722 @@
+{
+  "schema_version": 1,
+  "scope": "Independent Web-export browser acceptance. This does not replace historical native authorship or artwork records.",
+  "tested_commit": "e43fc55a0c0b04f65fb5d026f7fcff0419437815",
+  "workflow_url": "https://github.com/dcc-mcp/showcase/actions/runs/38199186635",
+  "artifact": {
+    "id": 11724573825,
+    "sha256": "29a2eb72f9e079dfa7ec96233022ea5ca7deb78b3f804374c802cbf596b6cdec",
+    "expires_at": "2026-10-26T03:20:28Z",
+    "contents": "Unmodified screenshots, desktop and touch-emulation interaction videos, and browser-verification.json."
+  },
+  "tested_files": [
+    {
+      "path": "play/shell.css",
+      "bytes": 1811,
+      "sha256": "00dd68c74bc969b43d1cb43b7374aea11d444217085256dfe8e7292b22c8af5f"
+    },
+    {
+      "path": "play/shell.js",
+      "bytes": 10156,
+      "sha256": "d23876dbef9d173d3c0f5acafa1c6c31a4240689288f2e3aede7e884af397cee"
+    },
+    {
+      "path": "play/export-provenance.json",
+      "bytes": 5822,
+      "sha256": "e6ef15c7ebf7a3cb68ac7e8085989f4dce12286ccd38f8468710f65ba62d83ef"
+    },
+    {
+      "path": "play/README.md",
+      "bytes": 4525,
+      "sha256": "a371ffc5e72eba49005fa10c0290745c29213490d07548eae0ec4a1cea6c8ae5"
+    },
+    {
+      "path": "play/LICENSES.md",
+      "bytes": 1478,
+      "sha256": "f2298f891ffd1d9ecc5ca11a59d926c0a09baaa92608da0244b818f19c58f034"
+    },
+    {
+      "path": "play/runtime/LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "play/runtime/COPYRIGHT.txt",
+      "bytes": 99790,
+      "sha256": "b3330849267d56ddd3d62a513817506606c2195034411fe05859f0140bff9d8a"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "play/sonic-loom/index.html",
+      "bytes": 1707,
+      "sha256": "9e7b758a6ac3cfbdd43a6d31067d7427d1e4ec5b3d978adcf2fb9838333abb58"
+    },
+    {
+      "path": "play/sonic-loom/game.pck",
+      "bytes": 18076,
+      "sha256": "0867ae2fc6a80dc6b32105641f8f82fcbbf04a81c9e13e62fdc24c449b52a4e6"
+    },
+    {
+      "path": "play/prism-tide/index.html",
+      "bytes": 1707,
+      "sha256": "305b08d10e8dbb7f2035fc01ce5ee45ce639f41d5fd91b575204697eedb56ee7"
+    },
+    {
+      "path": "play/prism-tide/game.pck",
+      "bytes": 15080,
+      "sha256": "01615397cd85bcd3e70d1d1d49537870cd60bdeb7693c82f67981285efebbc9b"
+    }
+  ],
+  "report": {
+    "checks": [
+      {
+        "name": "local_wasm_and_pck_mime",
+        "pass": true
+      },
+      {
+        "name": "sonic-loom/desktop/real_wasm_start",
+        "pass": true,
+        "seconds": 1.588,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "sonic-loom/desktop/toolbar_audio_unlock",
+        "pass": true,
+        "peak": 0.5806756019592285
+      },
+      {
+        "name": "sonic-loom/desktop/native_canvas_input",
+        "pass": true,
+        "cell_before": 0,
+        "cell_after": 1
+      },
+      {
+        "name": "sonic-loom/desktop/real_web_audio_nonzero",
+        "pass": true,
+        "peak": 0.5806756019592285,
+        "samples": 65536,
+        "contexts": [
+          "running"
+        ]
+      },
+      {
+        "name": "sonic-loom/desktop/reset_and_load",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "SAVED PATTERN RESTORED",
+          "step": -1
+        }
+      },
+      {
+        "name": "sonic-loom/desktop/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "READY TO WEAVE",
+          "step": -1
+        }
+      },
+      {
+        "name": "prism-tide/desktop/real_wasm_start",
+        "pass": true,
+        "seconds": 1.168,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "prism-tide/desktop/native_input_solved_level",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [],
+          "level": 1,
+          "mirrors": [
+            true,
+            true,
+            false
+          ],
+          "moves": 2,
+          "persistent": true,
+          "selected": 1,
+          "status": "ready",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/desktop/reset_and_load",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "level": 2,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "moves": 3,
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/desktop/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "level": 2,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "moves": 3,
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "sonic-loom/touch/real_wasm_start",
+        "pass": true,
+        "seconds": 1.355,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "sonic-loom/touch/toolbar_audio_unlock",
+        "pass": true,
+        "peak": 0.7544132471084595
+      },
+      {
+        "name": "sonic-loom/touch/native_canvas_input",
+        "pass": true,
+        "cell_before": 0,
+        "cell_after": 1
+      },
+      {
+        "name": "sonic-loom/touch/real_web_audio_nonzero",
+        "pass": true,
+        "peak": 0.7544132471084595,
+        "samples": 75776,
+        "contexts": [
+          "running"
+        ]
+      },
+      {
+        "name": "sonic-loom/touch/reset_and_load",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "SAVED PATTERN RESTORED",
+          "step": -1
+        }
+      },
+      {
+        "name": "sonic-loom/touch/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "READY TO WEAVE",
+          "step": -1
+        }
+      },
+      {
+        "name": "prism-tide/touch/real_wasm_start",
+        "pass": true,
+        "seconds": 0.553,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "prism-tide/touch/native_input_solved_level",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [],
+          "level": 1,
+          "mirrors": [
+            true,
+            true,
+            false
+          ],
+          "moves": 2,
+          "persistent": true,
+          "selected": 1,
+          "status": "ready",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/touch/reset_and_load",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "level": 2,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "moves": 3,
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/touch/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "level": 2,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "moves": 3,
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "iframe_keyboard_focus_unload_reopen_video_retained",
+        "pass": true
+      },
+      {
+        "name": "cancel_pending_load",
+        "pass": true
+      },
+      {
+        "name": "network_failure_visible_retry",
+        "pass": true
+      },
+      {
+        "name": "network_failure_recovery_restart",
+        "pass": true
+      },
+      {
+        "name": "sonic-loom/denied_storage_reports_failure",
+        "pass": true
+      },
+      {
+        "name": "prism-tide/denied_storage_reports_failure",
+        "pass": true
+      }
+    ],
+    "console_diagnostics": [
+      {
+        "type": "warning",
+        "text": "[.WebGL-0x36400c74400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+      },
+      {
+        "type": "warning",
+        "text": "[.WebGL-0x36400c74400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+      },
+      {
+        "type": "error",
+        "text": "ERROR: Pages in use exist at exit in PagedAllocator: N16WorkerThreadPool5GroupE"
+      },
+      {
+        "type": "error",
+        "text": "   at: ~PagedAllocator (./core/templates/paged_allocator.h:169)"
+      }
+    ],
+    "limitations": [
+      "Subjective listening and physical audio-device latency are not tested.",
+      "Mobile checks use Chromium touch emulation, not physical iOS/Android hardware.",
+      "GitHub Pages response headers and caching need a separate check after authorized deployment.",
+      "Firefox and Safari are not covered by this run."
+    ],
+    "started_at": "2026-10-12T03:18:29Z",
+    "browser": "153.0.8010.12",
+    "passed": true
+  },
+  "screenshots": [
+    "play/evidence/sonic-loom-desktop-edited.png",
+    "play/evidence/sonic-loom-touch-edited.png",
+    "play/evidence/prism-tide-desktop-solved.png",
+    "play/evidence/prism-tide-touch-solved.png",
+    "play/evidence/loading-error.png"
+  ],
+  "visual_review": {
+    "desktop": "Sonic pattern state and Prism connected beam are visible in actual browser captures. This is functional presentation review, not an independent artistic quality rating.",
+    "mobile": "The original 1280x800 artwork scales down at 390px; small in-canvas text is not comfortably readable. The translated 44px-minimum external controls remain available. Physical phone and redesigned responsive native artwork are not validated.",
+    "error": "A failed WASM request presents a visible Retry action instead of a blank success."
+  },
+  "performance_scope": "Startup timings are local CI software-renderer measurements, not internet download or physical phone performance. Production Content-Encoding is unverified.",
+  "model_attribution": "No independently verifiable exact model or reasoning configuration was obtained for historical creation. Web adaptation and CI do not establish it.",
+  "status": "historical_functional_baseline",
+  "mobile_portrait_acceptance": "pending_new_layout_review"
+}

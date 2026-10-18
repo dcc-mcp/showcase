@@ -1,0 +1,131 @@
+{
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "editor_sha256": "f64d4ed19fc9df9440321653fcc80df8c6e365ba7b6de0a29e2cfa9fa71bfeb3",
+  "editor_archive_sha256": "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3",
+  "editor_archive_url": "https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip",
+  "template_sha256": "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9",
+  "official_release": "https://godotengine.org/download/archive/4.6.3-stable/",
+  "threads": false,
+  "pwa": false,
+  "renderer": "gl_compatibility",
+  "projects": [
+    {
+      "case": "sonic-loom",
+      "source_archive": "docs/showcase/sonic-loom/Sonic-Loom-Source.zip",
+      "source_archive_sha256": "905cd916bdac5c251d2b18810e60bdf5956f1a1e62d4d83074aa2cbd7eeeedc5",
+      "project_files": [
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/.gitignore",
+          "sha256": "531d0d253cec1addb97b2cb2d144b6589ff934513eb9c9b8cf882cb49e4c0c32"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/LICENSES.md",
+          "sha256": "e977c5add05bb0b0f20e7b87be5021439f05adf31ed1c65b1de861fadb7444d8"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/REPRODUCE.txt",
+          "sha256": "ac1eb9300bf346e7441159c3d11ad8a81089919dfd7d1fe1618787e9ae8bbb3e"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/export_presets.cfg",
+          "sha256": "5402a819d74b74c037ea201b7b780682e39c6aeae6ecb611ed9e7583d2abc21b"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/history/loom-v1.gd",
+          "sha256": "c9bc4f2d190805b616c77be92e7b8f1ddeba80fb32c8bf84d91e2cbe17ad4e37"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/history/loom-v1.gd.uid",
+          "sha256": "3223c73ede283ec6801e9e43371d17c636285b6935e3a67f22bdcfce7bcc1173"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/history/loom-v2.gd",
+          "sha256": "673fb85768a676b4feed057175ad04a8065411e216c8d9237f8a0673964829cc"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/history/loom-v2.gd.uid",
+          "sha256": "223439d2ad223f82f08239132cf5aba6f7a44053d87c1aadacd02dde01d65308"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/loom.gd",
+          "sha256": "ecd55c4f64914d07a72d7fd65bfacd81e91d05a7807c3827348edbb44cc2a8d0"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/loom.gd.uid",
+          "sha256": "4f20edee255a2a9c91c2db57bff807f2c91c9ebfaa533d39d5adca755b3e08b1"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/main.tscn",
+          "sha256": "473584ebe33481001abaf38022c76be2512e725afedb499655332ccaf05f5110"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/mcp-evidence.json",
+          "sha256": "97951a6cccbdda0abe164d7b19f3253cac25433cb31092c5a6a094b83e4e8fdf"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/project.godot",
+          "sha256": "be008ffcd97d88d883379dcbcca5069cf6ea5d9f35f32ead04951161ed901329"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/web.gd",
+          "sha256": "bc006635412dfa520e55997a9d17dcb4091b63aabb0dc2045433f0c89cddea3b"
+        },
+        {
+          "path": "scripts/godot_web/projects/sonic-loom/web.gd.uid",
+          "sha256": "8a3fd89cfb51bf0588b1cd1a4ab872d4c1b482cdad6f8af790ba5bafb2f59c88"
+        }
+      ]
+    },
+    {
+      "case": "prism-tide",
+      "source_archive": "docs/showcase/prism-tide/Prism-Tide-Source.zip",
+      "source_archive_sha256": "3c22710cdab4b97a7f378147371042c2704303144282eae157be02e8e2ee3d8d",
+      "project_files": [
+        {
+          "path": "scripts/godot_web/projects/prism-tide/.gitignore",
+          "sha256": "531d0d253cec1addb97b2cb2d144b6589ff934513eb9c9b8cf882cb49e4c0c32"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/LICENSE",
+          "sha256": "79b1e7662b4ca046fc27b2b2c21bc77a4669db2a935f1cbf6add6f6d6640ea5c"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/LICENSES.md",
+          "sha256": "79b1e7662b4ca046fc27b2b2c21bc77a4669db2a935f1cbf6add6f6d6640ea5c"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/REPRODUCE.txt",
+          "sha256": "327c4fbcd7dff43f4f060df708715181108d403f90ada02ee86b58653aba2897"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/export_presets.cfg",
+          "sha256": "5402a819d74b74c037ea201b7b780682e39c6aeae6ecb611ed9e7583d2abc21b"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/main.tscn",
+          "sha256": "473584ebe33481001abaf38022c76be2512e725afedb499655332ccaf05f5110"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/prism_tide.gd",
+          "sha256": "7e0c098332717f3ba9512144028493cda50a4cf9bb9686b0f3472150a614f82e"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/prism_tide.gd.uid",
+          "sha256": "6dce192f1dca44e4267f13c44d9d99dbe5add945eda3278be61ee65a75563e6b"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/project.godot",
+          "sha256": "493de8e0d47f7b357a249eb024dc05999b8dc6da58876705a04fe0b586b6e350"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/web.gd",
+          "sha256": "705f57c5bd285134e47b7375b83742a5e942cb38ed33991a85a7aa4c70da4181"
+        },
+        {
+          "path": "scripts/godot_web/projects/prism-tide/web.gd.uid",
+          "sha256": "1e054f8f8e03c11a1d000cb12ad39bfd585ecf1ee94e10096dbd9ad688fbcda6"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+Open project.godot with Godot 4.6.3. Import first. Click mirrors or shutters; Tab selects; Space/Enter operates; R resets; N advances after connection.
+Tests: godot --headless --path . -- --test
+Original procedural graphics. No addon required to play.

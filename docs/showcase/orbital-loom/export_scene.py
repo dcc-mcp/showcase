@@ -26,5 +26,11 @@ for frame in (1,90,180,270,360):
  pose_samples[str(frame)]={o.name:[round(v,6) for row in o.matrix_world for v in row] for o in anim}
 r['reimport_pose_samples']=pose_samples
 r['reimport_animation_changes']=pose_samples['1']!=pose_samples['90']
-assert size>100000 and len(anim)>=3 and r['reimport_animation_changes'],r
+expected_names = set(names)
+observed_names = {o.name for o in anim}
+assert len(anim) == len(expected_names) and observed_names == expected_names, {
+    "expected_animated_objects": sorted(expected_names),
+    "observed_animated_objects": sorted(observed_names),
+}
+assert size > 100000 and r["reimport_animation_changes"], r
 open(P+'/export-validation.json','w').write(json.dumps(r,indent=2));print(json.dumps(r))

@@ -1,0 +1,11 @@
+{
+  "sample_rate_hz": 44100,
+  "channels": 2,
+  "duration_s": 13.0,
+  "peak": 0.75927734375,
+  "rms": 0.11922150384962876,
+  "nonzero_samples": 1083782,
+  "clipped_samples": 0,
+  "source": "Godot Movie Maker real mixer output",
+  "passed": true
+}

@@ -11,8 +11,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "88bb9285d43753832a4eac08453ab60c215c7f89e31e4b064ad148217f878f85",
-      "bytes": 4380
+      "sha256": "ed8177e5a0581134444b8609e623d2ef67f72df03bcae330fd59dcb6bacb1214",
+      "bytes": 6918
     },
     {
       "path": "build_scene.py",
@@ -31,8 +31,8 @@
     },
     {
       "path": "export_scene.py",
-      "sha256": "ce1e6a341ed4aa51fb39b62834b0ee03c465277b187af30da75555bdce05793b",
-      "bytes": 2087
+      "sha256": "1a9683d9bf8399421e2905e3d5aa42518b1ba14d0495a5ee749d0faa03700c68",
+      "bytes": 2337
     },
     {
       "path": "film-contact-sheet.jpg",
@@ -70,8 +70,8 @@
     },
     {
       "path": "orbital-loom-source.zip",
-      "sha256": "2e2a63cbf2131e780635e49d16f267274e24374443cebf3fe0da345b5fbe4781",
-      "bytes": 679747
+      "sha256": "83be296426da44677a32d62ca4f344198afa47f6875175d8be80d4f032e58b9e",
+      "bytes": 682502
     },
     {
       "path": "orbital-loom.blend",

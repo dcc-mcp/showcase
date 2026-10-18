@@ -1,0 +1,2013 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Native Godot Web portrait, bilingual iframe and per-output-channel audio acceptance; original authorship and artistic quality are not inferred.",
+  "tested_commit": "e8d3fc3f33ba61fca006116ba08c3a865c4a7405",
+  "workflow_url": "https://github.com/dcc-mcp/showcase/actions/runs/38202157612",
+  "artifact": {
+    "id": 11725849097,
+    "sha256": "ddd04570cb688a7b8be00781db6ba4e96381484886d3741d48636def235acd1b",
+    "size_bytes": 26213706,
+    "expires_at": "2026-10-26T04:09:03Z",
+    "contents": "Unmodified screenshots, desktop and phone-touch interaction videos, and browser-verification.json."
+  },
+  "recorded_at": "2026-10-12T04:13:37.334425+00:00",
+  "historical_baseline": "play/verification.json",
+  "tested_files": [
+    {
+      "path": "play/shell.css",
+      "bytes": 2207,
+      "sha256": "33f61fdf134ee983e16ca004b1b206a8a8d5381edcf6ead352a54a9e18e43176"
+    },
+    {
+      "path": "play/shell.js",
+      "bytes": 13271,
+      "sha256": "7acbf44684d3ef9436b96654953af8dcf50c56b70bc26680b2d5c2eb0b275563"
+    },
+    {
+      "path": "play/export-provenance.json",
+      "bytes": 5822,
+      "sha256": "cfb734431931330914719dbdabbb550de87623ad85386e01d34bdcad6285c4b5"
+    },
+    {
+      "path": "play/README.md",
+      "bytes": 7197,
+      "sha256": "ec3159e510fbcc4c1412472cdeb1bcde4bcaa062ad805b90e1f681ab2b974022"
+    },
+    {
+      "path": "play/LICENSES.md",
+      "bytes": 1478,
+      "sha256": "f2298f891ffd1d9ecc5ca11a59d926c0a09baaa92608da0244b818f19c58f034"
+    },
+    {
+      "path": "play/verification.json",
+      "bytes": 17075,
+      "sha256": "e87c0ca20df55a2f20715ee8e6f657c64b84e2d5dba103b805d196a814339b7b"
+    },
+    {
+      "path": "play/evidence/sonic-loom-desktop-edited.png",
+      "bytes": 220595,
+      "sha256": "bd5805e017a11292c3419541661e03817ba9eafbecbd54ea57b3eefa71038207"
+    },
+    {
+      "path": "play/evidence/sonic-loom-touch-edited.png",
+      "bytes": 109197,
+      "sha256": "26610151c482c6f9c509f15ea304ff83ddd23c22dff1fe5b6fa6b5be75119fcd"
+    },
+    {
+      "path": "play/evidence/prism-tide-desktop-solved.png",
+      "bytes": 210565,
+      "sha256": "986e48207c6f5b0ab876a97773074a8ce114dc8322bf88a2e15024d715a07096"
+    },
+    {
+      "path": "play/evidence/prism-tide-touch-solved.png",
+      "bytes": 99134,
+      "sha256": "5b5bea20585c980a068cbf224bc67f5b071fb58f5b8f963eb771a87fc81d0f01"
+    },
+    {
+      "path": "play/evidence/loading-error.png",
+      "bytes": 65780,
+      "sha256": "6671c3629e47b6e5ee0addee63f455e33a827d87c16fc425c1414b8717cb3f83"
+    },
+    {
+      "path": "play/runtime/LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "play/runtime/COPYRIGHT.txt",
+      "bytes": 99790,
+      "sha256": "b3330849267d56ddd3d62a513817506606c2195034411fe05859f0140bff9d8a"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "play/sonic-loom/index.html",
+      "bytes": 1788,
+      "sha256": "6155f5ddbd0786d2617f4fdb797a6abbe0caf23e6bb3a2a1c83ba07e71478411"
+    },
+    {
+      "path": "play/sonic-loom/game.pck",
+      "bytes": 24444,
+      "sha256": "16f77dcdb2b10f0093c608646eb0556ad1ffe0a2fb535b084437c92dc6295f8b"
+    },
+    {
+      "path": "play/prism-tide/index.html",
+      "bytes": 1788,
+      "sha256": "cfeeea1c933c9859ab99b1a54db58392d4a4d79f80b3f1dbdf2f6f09003d6675"
+    },
+    {
+      "path": "play/prism-tide/game.pck",
+      "bytes": 22280,
+      "sha256": "3a8e96bdcb694815f4f10988c34580de2c6f546c4526b797f9c84e8dd8c831c1"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "play/evidence/portrait-sonic-loom-desktop-edited.png",
+      "bytes": 226872,
+      "sha256": "2f643138d32607f1cbc7bb5fd1dfa80e02f627f18a128517b95094a6b940c1a2"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-desktop-solved.png",
+      "bytes": 217017,
+      "sha256": "dbe619d2995f6a1b90b26264f68f33fbaefdbb42ddac969817440c640133d0e2"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-portrait-canvas.png",
+      "bytes": 45607,
+      "sha256": "0c9e70909ee1e89d3c9045b0775a07228a77627986ee471c48cd8d7fac662515"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-portrait-canvas.png",
+      "bytes": 63997,
+      "sha256": "f59a9b23159e75b095b856412e231382858ee04ab9b9795e389f7c242b7b3786"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-portrait-level3.png",
+      "bytes": 70202,
+      "sha256": "147c0725cbe8366a7d0c34f45598bf3f34842b16efafd653af1b630d8c4059fb"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-en-phone-embedded-viewport.png",
+      "bytes": 57838,
+      "sha256": "02c99c519a50021cbd20630a2c1fb71c715c37c6b9a2b6b65c322482f6ba98c1"
+    },
+    {
+      "path": "play/evidence/portrait-sonic-loom-zh-phone-embedded-viewport.png",
+      "bytes": 60269,
+      "sha256": "a319e5bcfa0c1cd18590d3cca84ab4a49ee5ade2c7670635237a823842378801"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-en-phone-embedded-viewport.png",
+      "bytes": 70430,
+      "sha256": "3674911fedac297bb7cf15f9be47219aef7f9cb8451286085cc70825ce7c62fd"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-zh-phone-embedded-viewport.png",
+      "bytes": 89032,
+      "sha256": "29f0cc9797b035911be0e2b52b18ebb4526b1568cd41d4314a38e3f6892a0958"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-touch-board-viewport.png",
+      "bytes": 61100,
+      "sha256": "744bf02c45afb79db05baf278656d3deaf243a8e2f78b336f5b2f0f4af5ec1ea"
+    },
+    {
+      "path": "play/evidence/portrait-prism-tide-touch-controls-viewport.png",
+      "bytes": 85205,
+      "sha256": "f72c98d2ee0e0c09d79bef94543cb864fadebc04237e09a725549794a2712f2b"
+    }
+  ],
+  "browser_run": {
+    "checks": [
+      {
+        "name": "local_wasm_and_pck_mime",
+        "pass": true
+      },
+      {
+        "name": "sonic-loom/desktop/real_wasm_start",
+        "pass": true,
+        "seconds": 1.572,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "sonic-loom/desktop/user_gesture_audio_unlock",
+        "pass": true,
+        "peak": 0.2057872861623764
+      },
+      {
+        "name": "sonic-loom/desktop/native_canvas_input",
+        "pass": true,
+        "cell_before": 0,
+        "cell_after": 1
+      },
+      {
+        "name": "sonic-loom/desktop/real_web_audio_nonzero",
+        "pass": true,
+        "peak": 0.23757240176200867,
+        "samples": 122880,
+        "contexts": [
+          "running"
+        ],
+        "channel_count": 2,
+        "channel_peaks": [
+          0.23757240176200867,
+          0.23757240176200867
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.23757240176200867,
+              0.23757240176200867
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/desktop/reset_and_load",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "layout_size": [
+            1280,
+            800
+          ],
+          "master_gain_db": -6,
+          "minimum_text_size": 10,
+          "mobile_lane": 0,
+          "mobile_layout": false,
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "native_targets": {},
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "SAVED PATTERN RESTORED",
+          "step": -1,
+          "viewport_size": [
+            1280,
+            800
+          ]
+        }
+      },
+      {
+        "name": "sonic-loom/desktop/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "layout_size": [
+            1280,
+            800
+          ],
+          "master_gain_db": -6,
+          "minimum_text_size": 10,
+          "mobile_lane": 0,
+          "mobile_layout": false,
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "native_targets": {},
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "READY TO WEAVE",
+          "step": -1,
+          "viewport_size": [
+            1280,
+            800
+          ]
+        }
+      },
+      {
+        "name": "sonic-loom/final_output_headroom/solo_voice_0",
+        "pass": true,
+        "peak": 0.2391931265592575,
+        "over_range_samples": 0,
+        "nonzero_samples": 57334,
+        "sampled_values": 77824,
+        "channel_count": 2,
+        "channel_peaks": [
+          0.2391931265592575,
+          0.2391931265592575
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.2391931265592575,
+              0.2391931265592575
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/final_output_headroom/solo_voice_1",
+        "pass": true,
+        "peak": 0.07617297768592834,
+        "over_range_samples": 0,
+        "nonzero_samples": 53221,
+        "sampled_values": 77824,
+        "channel_count": 2,
+        "channel_peaks": [
+          0.07617297768592834,
+          0.07617297768592834
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.07617297768592834,
+              0.07617297768592834
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/final_output_headroom/solo_voice_2",
+        "pass": true,
+        "peak": 0.012540672905743122,
+        "over_range_samples": 0,
+        "nonzero_samples": 59166,
+        "sampled_values": 77824,
+        "channel_count": 2,
+        "channel_peaks": [
+          0.012540672905743122,
+          0.012540672905743122
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.012540672905743122,
+              0.012540672905743122
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/final_output_headroom/solo_voice_3",
+        "pass": true,
+        "peak": 0.1452954262495041,
+        "over_range_samples": 0,
+        "nonzero_samples": 57338,
+        "sampled_values": 77824,
+        "channel_count": 2,
+        "channel_peaks": [
+          0.1452954262495041,
+          0.1452954262495041
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.1452954262495041,
+              0.1452954262495041
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/final_output_headroom/all_64_steps_160_bpm",
+        "pass": true,
+        "peak": 0.3366537094116211,
+        "over_range_samples": 0,
+        "nonzero_samples": 114680,
+        "sampled_values": 135168,
+        "channel_count": 2,
+        "channel_peaks": [
+          0.3366537094116211,
+          0.3366537094116211
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.3366537094116211,
+              0.3366537094116211
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/final_output_headroom/all_64_steps_60_bpm",
+        "pass": true,
+        "peak": 0.3116007447242737,
+        "over_range_samples": 0,
+        "nonzero_samples": 200678,
+        "sampled_values": 225280,
+        "channel_count": 2,
+        "channel_peaks": [
+          0.3116007447242737,
+          0.3116007447242737
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.3116007447242737,
+              0.3116007447242737
+            ]
+          }
+        ]
+      },
+      {
+        "name": "prism-tide/desktop/real_wasm_start",
+        "pass": true,
+        "seconds": 1.241,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "prism-tide/desktop/native_input_solved_level",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [],
+          "layout_height": 800,
+          "layout_size": [
+            1280,
+            800
+          ],
+          "layout_width": 1280,
+          "level": 1,
+          "minimum_text_size": 10,
+          "mirrors": [
+            true,
+            true,
+            false
+          ],
+          "mobile_layout": false,
+          "moves": 2,
+          "persistent": true,
+          "selected": 1,
+          "status": "ready",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/desktop/reset_and_load",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "layout_height": 800,
+          "layout_size": [
+            1280,
+            800
+          ],
+          "layout_width": 1280,
+          "level": 2,
+          "minimum_text_size": 10,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "mobile_layout": false,
+          "moves": 3,
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/desktop/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "layout_height": 800,
+          "layout_size": [
+            1280,
+            800
+          ],
+          "layout_width": 1280,
+          "level": 2,
+          "minimum_text_size": 10,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "mobile_layout": false,
+          "moves": 3,
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "sonic-loom/touch/real_wasm_start",
+        "pass": true,
+        "seconds": 1.338,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "sonic-loom/touch/portrait_readability_targets_and_pan",
+        "pass": true,
+        "minimum_text_css": 16.44,
+        "minimum_target_css": 45.22,
+        "layout_size": [
+          720,
+          1320
+        ]
+      },
+      {
+        "name": "sonic-loom/touch/user_gesture_audio_unlock",
+        "pass": true,
+        "peak": 0.21601258218288422
+      },
+      {
+        "name": "sonic-loom/touch/native_canvas_input",
+        "pass": true,
+        "cell_before": 0,
+        "cell_after": 1
+      },
+      {
+        "name": "sonic-loom/touch/real_web_audio_nonzero",
+        "pass": true,
+        "peak": 0.2818542420864105,
+        "samples": 229376,
+        "contexts": [
+          "running"
+        ],
+        "channel_count": 2,
+        "channel_peaks": [
+          0.2818542420864105,
+          0.2818542420864105
+        ],
+        "meters": [
+          {
+            "channelCount": 2,
+            "sampleRate": 44100,
+            "channelCountMode": "explicit",
+            "channelInterpretation": "speakers",
+            "mainPathGain": 1,
+            "channelPeaks": [
+              0.2818542420864105,
+              0.2818542420864105
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sonic-loom/touch/reset_and_load",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "layout_size": [
+            720,
+            1320
+          ],
+          "master_gain_db": -6,
+          "minimum_text_size": 32,
+          "mobile_lane": 2,
+          "mobile_layout": true,
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "native_targets": {
+            "cell:2:0": [
+              32,
+              616,
+              144,
+              106
+            ],
+            "cell:2:1": [
+              200,
+              616,
+              144,
+              106
+            ],
+            "cell:2:10": [
+              368,
+              868,
+              144,
+              106
+            ],
+            "cell:2:11": [
+              536,
+              868,
+              144,
+              106
+            ],
+            "cell:2:12": [
+              32,
+              994,
+              144,
+              106
+            ],
+            "cell:2:13": [
+              200,
+              994,
+              144,
+              106
+            ],
+            "cell:2:14": [
+              368,
+              994,
+              144,
+              106
+            ],
+            "cell:2:15": [
+              536,
+              994,
+              144,
+              106
+            ],
+            "cell:2:2": [
+              368,
+              616,
+              144,
+              106
+            ],
+            "cell:2:3": [
+              536,
+              616,
+              144,
+              106
+            ],
+            "cell:2:4": [
+              32,
+              742,
+              144,
+              106
+            ],
+            "cell:2:5": [
+              200,
+              742,
+              144,
+              106
+            ],
+            "cell:2:6": [
+              368,
+              742,
+              144,
+              106
+            ],
+            "cell:2:7": [
+              536,
+              742,
+              144,
+              106
+            ],
+            "cell:2:8": [
+              32,
+              868,
+              144,
+              106
+            ],
+            "cell:2:9": [
+              200,
+              868,
+              144,
+              106
+            ],
+            "faster": [
+              592,
+              158,
+              96,
+              96
+            ],
+            "load": [
+              256,
+              1144,
+              208,
+              96
+            ],
+            "mute": [
+              478,
+              488,
+              210,
+              88
+            ],
+            "reset": [
+              32,
+              1144,
+              208,
+              96
+            ],
+            "save": [
+              480,
+              1144,
+              208,
+              96
+            ],
+            "slower": [
+              344,
+              158,
+              96,
+              96
+            ],
+            "toggle": [
+              32,
+              158,
+              284,
+              96
+            ],
+            "voice:0": [
+              32,
+              286,
+              316,
+              88
+            ],
+            "voice:1": [
+              372,
+              286,
+              316,
+              88
+            ],
+            "voice:2": [
+              32,
+              386,
+              316,
+              88
+            ],
+            "voice:3": [
+              372,
+              386,
+              316,
+              88
+            ]
+          },
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "SAVED PATTERN RESTORED",
+          "step": -1,
+          "viewport_size": [
+            720,
+            1320
+          ]
+        }
+      },
+      {
+        "name": "sonic-loom/touch/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "bpm": 108,
+          "case": "sonic-loom",
+          "layout_size": [
+            720,
+            1320
+          ],
+          "master_gain_db": -6,
+          "minimum_text_size": 32,
+          "mobile_lane": 0,
+          "mobile_layout": true,
+          "muted": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "native_targets": {
+            "cell:0:0": [
+              32,
+              616,
+              144,
+              106
+            ],
+            "cell:0:1": [
+              200,
+              616,
+              144,
+              106
+            ],
+            "cell:0:10": [
+              368,
+              868,
+              144,
+              106
+            ],
+            "cell:0:11": [
+              536,
+              868,
+              144,
+              106
+            ],
+            "cell:0:12": [
+              32,
+              994,
+              144,
+              106
+            ],
+            "cell:0:13": [
+              200,
+              994,
+              144,
+              106
+            ],
+            "cell:0:14": [
+              368,
+              994,
+              144,
+              106
+            ],
+            "cell:0:15": [
+              536,
+              994,
+              144,
+              106
+            ],
+            "cell:0:2": [
+              368,
+              616,
+              144,
+              106
+            ],
+            "cell:0:3": [
+              536,
+              616,
+              144,
+              106
+            ],
+            "cell:0:4": [
+              32,
+              742,
+              144,
+              106
+            ],
+            "cell:0:5": [
+              200,
+              742,
+              144,
+              106
+            ],
+            "cell:0:6": [
+              368,
+              742,
+              144,
+              106
+            ],
+            "cell:0:7": [
+              536,
+              742,
+              144,
+              106
+            ],
+            "cell:0:8": [
+              32,
+              868,
+              144,
+              106
+            ],
+            "cell:0:9": [
+              200,
+              868,
+              144,
+              106
+            ],
+            "faster": [
+              592,
+              158,
+              96,
+              96
+            ],
+            "load": [
+              256,
+              1144,
+              208,
+              96
+            ],
+            "mute": [
+              478,
+              488,
+              210,
+              88
+            ],
+            "reset": [
+              32,
+              1144,
+              208,
+              96
+            ],
+            "save": [
+              480,
+              1144,
+              208,
+              96
+            ],
+            "slower": [
+              344,
+              158,
+              96,
+              96
+            ],
+            "toggle": [
+              32,
+              158,
+              284,
+              96
+            ],
+            "voice:0": [
+              32,
+              286,
+              316,
+              88
+            ],
+            "voice:1": [
+              372,
+              286,
+              316,
+              88
+            ],
+            "voice:2": [
+              32,
+              386,
+              316,
+              88
+            ],
+            "voice:3": [
+              372,
+              386,
+              316,
+              88
+            ]
+          },
+          "pattern": [
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "persistent": true,
+          "playing": false,
+          "status": "READY TO WEAVE",
+          "step": -1,
+          "viewport_size": [
+            720,
+            1320
+          ]
+        }
+      },
+      {
+        "name": "prism-tide/touch/real_wasm_start",
+        "pass": true,
+        "seconds": 0.552,
+        "cross_origin_isolated": false
+      },
+      {
+        "name": "prism-tide/touch/portrait_readability_targets_and_pan",
+        "pass": true,
+        "minimum_text_css": 16.44,
+        "minimum_target_css": 45.22,
+        "layout_size": [
+          720,
+          1760
+        ]
+      },
+      {
+        "name": "prism-tide/touch/native_input_solved_level",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [],
+          "layout_height": 1760,
+          "layout_size": [
+            720,
+            1760
+          ],
+          "layout_width": 720,
+          "level": 1,
+          "minimum_text_size": 32,
+          "mirrors": [
+            true,
+            true,
+            false
+          ],
+          "mobile_layout": true,
+          "moves": 2,
+          "native_targets": {
+            "next": {
+              "center_x": 532,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1640
+            },
+            "objects": [
+              {
+                "center_x": 412,
+                "center_y": 1016,
+                "height": 88,
+                "index": 0,
+                "kind": "mirror",
+                "width": 88,
+                "x": 368,
+                "y": 972
+              },
+              {
+                "center_x": 204,
+                "center_y": 1016,
+                "height": 88,
+                "index": 1,
+                "kind": "mirror",
+                "width": 88,
+                "x": 160,
+                "y": 972
+              },
+              {
+                "center_x": 204,
+                "center_y": 600,
+                "height": 88,
+                "index": 2,
+                "kind": "mirror",
+                "width": 88,
+                "x": 160,
+                "y": 556
+              }
+            ],
+            "reset": {
+              "center_x": 188,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1640
+            },
+            "select": {
+              "center_x": 188,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1520
+            },
+            "turn": {
+              "center_x": 532,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1520
+            }
+          },
+          "persistent": true,
+          "selected": 1,
+          "status": "ready",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/touch/reset_and_load",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "layout_height": 1760,
+          "layout_size": [
+            720,
+            1760
+          ],
+          "layout_width": 720,
+          "level": 2,
+          "minimum_text_size": 32,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "mobile_layout": true,
+          "moves": 3,
+          "native_targets": {
+            "next": {
+              "center_x": 532,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1640
+            },
+            "objects": [
+              {
+                "center_x": 516,
+                "center_y": 1120,
+                "height": 88,
+                "index": 0,
+                "kind": "mirror",
+                "width": 88,
+                "x": 472,
+                "y": 1076
+              },
+              {
+                "center_x": 204,
+                "center_y": 1120,
+                "height": 88,
+                "index": 1,
+                "kind": "mirror",
+                "width": 88,
+                "x": 160,
+                "y": 1076
+              },
+              {
+                "center_x": 204,
+                "center_y": 704,
+                "height": 88,
+                "index": 2,
+                "kind": "mirror",
+                "width": 88,
+                "x": 160,
+                "y": 660
+              },
+              {
+                "center_x": 516,
+                "center_y": 704,
+                "height": 88,
+                "index": 3,
+                "kind": "mirror",
+                "width": 88,
+                "x": 472,
+                "y": 660
+              },
+              {
+                "center_x": 204,
+                "center_y": 912,
+                "height": 88,
+                "index": 4,
+                "kind": "gate",
+                "width": 88,
+                "x": 160,
+                "y": 868
+              }
+            ],
+            "reset": {
+              "center_x": 188,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1640
+            },
+            "select": {
+              "center_x": 188,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1520
+            },
+            "turn": {
+              "center_x": 532,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1520
+            }
+          },
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/touch/save_survives_exit_and_restart",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true
+          ],
+          "layout_height": 1760,
+          "layout_size": [
+            720,
+            1760
+          ],
+          "layout_width": 720,
+          "level": 2,
+          "minimum_text_size": 32,
+          "mirrors": [
+            true,
+            true,
+            false,
+            false
+          ],
+          "mobile_layout": true,
+          "moves": 3,
+          "native_targets": {
+            "next": {
+              "center_x": 532,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1640
+            },
+            "objects": [
+              {
+                "center_x": 516,
+                "center_y": 1120,
+                "height": 88,
+                "index": 0,
+                "kind": "mirror",
+                "width": 88,
+                "x": 472,
+                "y": 1076
+              },
+              {
+                "center_x": 204,
+                "center_y": 1120,
+                "height": 88,
+                "index": 1,
+                "kind": "mirror",
+                "width": 88,
+                "x": 160,
+                "y": 1076
+              },
+              {
+                "center_x": 204,
+                "center_y": 704,
+                "height": 88,
+                "index": 2,
+                "kind": "mirror",
+                "width": 88,
+                "x": 160,
+                "y": 660
+              },
+              {
+                "center_x": 516,
+                "center_y": 704,
+                "height": 88,
+                "index": 3,
+                "kind": "mirror",
+                "width": 88,
+                "x": 472,
+                "y": 660
+              },
+              {
+                "center_x": 204,
+                "center_y": 912,
+                "height": 88,
+                "index": 4,
+                "kind": "gate",
+                "width": 88,
+                "x": 160,
+                "y": 868
+              }
+            ],
+            "reset": {
+              "center_x": 188,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1640
+            },
+            "select": {
+              "center_x": 188,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1520
+            },
+            "turn": {
+              "center_x": 532,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1520
+            }
+          },
+          "persistent": true,
+          "selected": 0,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "prism-tide/touch/all_three_rotated_native_levels",
+        "pass": true,
+        "state": {
+          "case": "prism-tide",
+          "gates": [
+            true,
+            true
+          ],
+          "layout_height": 1760,
+          "layout_size": [
+            720,
+            1760
+          ],
+          "layout_width": 720,
+          "level": 3,
+          "minimum_text_size": 32,
+          "mirrors": [
+            true,
+            true,
+            true,
+            true,
+            false,
+            false
+          ],
+          "mobile_layout": true,
+          "moves": 6,
+          "native_targets": {
+            "next": {
+              "center_x": 532,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1640
+            },
+            "objects": [
+              {
+                "center_x": 620,
+                "center_y": 1224,
+                "height": 88,
+                "index": 0,
+                "kind": "mirror",
+                "width": 88,
+                "x": 576,
+                "y": 1180
+              },
+              {
+                "center_x": 308,
+                "center_y": 1224,
+                "height": 88,
+                "index": 1,
+                "kind": "mirror",
+                "width": 88,
+                "x": 264,
+                "y": 1180
+              },
+              {
+                "center_x": 308,
+                "center_y": 808,
+                "height": 88,
+                "index": 2,
+                "kind": "mirror",
+                "width": 88,
+                "x": 264,
+                "y": 764
+              },
+              {
+                "center_x": 100,
+                "center_y": 808,
+                "height": 88,
+                "index": 3,
+                "kind": "mirror",
+                "width": 88,
+                "x": 56,
+                "y": 764
+              },
+              {
+                "center_x": 100,
+                "center_y": 496,
+                "height": 88,
+                "index": 4,
+                "kind": "mirror",
+                "width": 88,
+                "x": 56,
+                "y": 452
+              },
+              {
+                "center_x": 620,
+                "center_y": 496,
+                "height": 88,
+                "index": 5,
+                "kind": "mirror",
+                "width": 88,
+                "x": 576,
+                "y": 452
+              },
+              {
+                "center_x": 308,
+                "center_y": 1016,
+                "height": 88,
+                "index": 6,
+                "kind": "gate",
+                "width": 88,
+                "x": 264,
+                "y": 972
+              },
+              {
+                "center_x": 412,
+                "center_y": 496,
+                "height": 88,
+                "index": 7,
+                "kind": "gate",
+                "width": 88,
+                "x": 368,
+                "y": 452
+              }
+            ],
+            "reset": {
+              "center_x": 188,
+              "center_y": 1690,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1640
+            },
+            "select": {
+              "center_x": 188,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 32,
+              "y": 1520
+            },
+            "turn": {
+              "center_x": 532,
+              "center_y": 1570,
+              "height": 100,
+              "width": 312,
+              "x": 376,
+              "y": 1520
+            }
+          },
+          "persistent": true,
+          "selected": 7,
+          "status": "loaded",
+          "won": true
+        }
+      },
+      {
+        "name": "iframe_keyboard_focus_unload_reopen_video_retained",
+        "pass": true
+      },
+      {
+        "name": "sonic-loom/en/phone_iframe_native_input_and_readability",
+        "pass": true,
+        "canvas_css_width": 368,
+        "minimum_text_css": 16.36
+      },
+      {
+        "name": "prism-tide/en/phone_iframe_native_input_and_readability",
+        "pass": true,
+        "canvas_css_width": 368,
+        "minimum_text_css": 16.36
+      },
+      {
+        "name": "sonic-loom/zh/phone_iframe_native_input_and_readability",
+        "pass": true,
+        "canvas_css_width": 368,
+        "minimum_text_css": 16.36
+      },
+      {
+        "name": "prism-tide/zh/phone_iframe_native_input_and_readability",
+        "pass": true,
+        "canvas_css_width": 368,
+        "minimum_text_css": 16.36
+      },
+      {
+        "name": "cancel_pending_load",
+        "pass": true
+      },
+      {
+        "name": "network_failure_visible_retry",
+        "pass": true
+      },
+      {
+        "name": "network_failure_recovery_restart",
+        "pass": true
+      },
+      {
+        "name": "sonic-loom/denied_storage_reports_failure",
+        "pass": true
+      },
+      {
+        "name": "prism-tide/denied_storage_reports_failure",
+        "pass": true
+      }
+    ],
+    "console_diagnostics": [
+      {
+        "type": "warning",
+        "text": "[.WebGL-0x318c01349a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+      },
+      {
+        "type": "warning",
+        "text": "[.WebGL-0x318c01349a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+      },
+      {
+        "type": "error",
+        "text": "ERROR: Pages in use exist at exit in PagedAllocator: N16WorkerThreadPool5GroupE"
+      },
+      {
+        "type": "error",
+        "text": "   at: ~PagedAllocator (./core/templates/paged_allocator.h:169)"
+      }
+    ],
+    "limitations": [
+      "Subjective listening and physical audio-device latency are not tested.",
+      "Mobile checks use Chromium touch emulation, not physical iOS/Android hardware.",
+      "GitHub Pages response headers and caching need a separate check after authorized deployment.",
+      "Firefox and Safari are not covered by this run."
+    ],
+    "started_at": "2026-10-12T04:03:18Z",
+    "browser": "153.0.8010.12",
+    "passed": true
+  },
+  "native_pcm_bound": {
+    "checks": [
+      {
+        "db": -6.0,
+        "name": "Web Master gain",
+        "pass": true
+      },
+      {
+        "name": "gain-only Master bus",
+        "pass": true
+      },
+      {
+        "name": "voice 0 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.477253026283102,
+        "gain_db": -5.0,
+        "max_polyphony": 1,
+        "name": "voice 0 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.848689230018006
+      },
+      {
+        "name": "voice 1 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.292969413200001,
+        "gain_db": -5.0,
+        "max_polyphony": 1,
+        "name": "voice 1 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.520981475264748
+      },
+      {
+        "name": "voice 2 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.132746670441217,
+        "gain_db": -5.0,
+        "max_polyphony": 1,
+        "name": "voice 2 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.236060670796838
+      },
+      {
+        "name": "voice 3 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.14742370090323,
+        "gain_db": -8.0,
+        "max_polyphony": 1,
+        "name": "voice 3 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.37031159398175
+      },
+      {
+        "name": "voice 4 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.148116230238279,
+        "gain_db": -8.0,
+        "max_polyphony": 1,
+        "name": "voice 4 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.372051149021882
+      },
+      {
+        "name": "voice 5 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.148893807035527,
+        "gain_db": -8.0,
+        "max_polyphony": 1,
+        "name": "voice 5 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.374004333628346
+      },
+      {
+        "name": "voice 6 is mono one-shot PCM",
+        "pass": true
+      },
+      {
+        "dry_peak_bound": 0.14936764289635,
+        "gain_db": -8.0,
+        "max_polyphony": 1,
+        "name": "voice 6 bounded at original level",
+        "pass": true,
+        "pcm_peak": 0.375194555497909
+      },
+      {
+        "dry_peak_bound": 1.49677049099771,
+        "name": "all seven voices retain at least 20 percent peak margin",
+        "output_peak_bound": 0.750162261758074,
+        "pass": true,
+        "peak_budget": 0.8
+      }
+    ],
+    "passed": true,
+    "verification": "native per-channel PCM triangle bound; not a browser measurement"
+  },
+  "visual_review": {
+    "reviewed_commits": [
+      "6c03d7623186d582333ea3d17186a7cfa3f739cb",
+      "4fbdc392ab78a6b4155e0eece619428546273637"
+    ],
+    "phone_viewport_css": [
+      390,
+      844
+    ],
+    "native_portrait_readability": "pass",
+    "all_three_prism_levels": "pass",
+    "english_and_chinese_iframe_readability": "pass",
+    "code_diff_to_tested_commit": "Only PCM regression math, audio metering and instructions changed; native drawing and iframe proportions are unchanged.",
+    "artistic_quality_rating": null
+  },
+  "boundaries": {
+    "physical_phone": "not_run",
+    "firefox_safari": "not_run",
+    "subjective_listening": "not_run",
+    "hardware_latency_true_peak": "not_run",
+    "production_pages_mime_compression": "not_run",
+    "prism_audio": "original_silent",
+    "phone_layout": "vertically_scrolling",
+    "native_artwork_language": "en",
+    "historical_model_identity": "unknown"
+  },
+  "audio_measurement_correction": {
+    "historical_mono_analyser_peak": 1.01969,
+    "historical_downmix_gain_for_identical_left_right": 1.4142135623730951,
+    "historical_value_proves_stereo_clipping": false,
+    "current_measurement": "unity destination-layout tap, separate mono analyser for each output channel",
+    "master_gain_db": -6,
+    "native_per_channel_bound": 0.750162261758074,
+    "periodic_window_samples": 2048,
+    "continuous_browser_coverage_verified": false,
+    "scope": "Nonzero and no over-range in sampled windows; timer stalls can leave gaps. The independent conservative PCM bound is the all-alignment headroom evidence."
+  },
+  "web_round_provenance": {
+    "date": "2026-10-12",
+    "requested_configuration": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "ultra"
+    },
+    "accepted_configuration": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "ultra"
+    },
+    "backend_routing_independently_verified": false,
+    "scope": [
+      "sonic-loom",
+      "prism-tide",
+      "desktop_screenshots",
+      "phone_screenshots",
+      "40_real_browser_checks"
+    ],
+    "historical_creation_model": "unknown",
+    "subjective_listening": false,
+    "physical_phone": false,
+    "safari": false,
+    "firefox": false
+  }
+}

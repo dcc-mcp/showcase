@@ -3,6 +3,7 @@
 
 Synthetic rectangle assets are temporary test fixtures, never logo deliverables.
 """
+import hashlib
 import json
 from pathlib import Path
 import unittest
@@ -25,11 +26,11 @@ class BrandBuildGuards(unittest.TestCase):
         (folder / "cover.png").write_bytes(make_png(120, 80))
         (folder / "README.md").write_text("# Fixture", encoding="utf-8")
         (folder / "validation.json").write_text("{}", encoding="utf-8")
-        (folder / "manifest.json").write_text(json.dumps({"files": [{"path": "cover.png"}]}), encoding="utf-8")
+        (folder / "manifest.json").write_text(json.dumps({"schema_version": 1, "files": [{"path": name, "bytes": (folder / name).stat().st_size, "sha256": hashlib.sha256((folder / name).read_bytes()).hexdigest()} for name in ("cover.png", "README.md", "validation.json")]}), encoding="utf-8")
         (self.root / "collection.json").write_text(json.dumps({"schema_version": 1, "cases": [case]}), encoding="utf-8")
         ui = self.root / "assets"
         ui.mkdir()
-        for name in ("site.css", "gallery.js", "detail.js", "brand.css", "brand.js"):
+        for name in ("site.css", "gallery.js", "detail.js", "preview.js", "brand.css", "brand.js"):
             (ui / name).write_text("/* Fixture UI */", encoding="utf-8")
         (self.root / "index.html").write_text('<html><head>{{SEO_HEAD}}</head>{{BRAND_NAV}}{{BRAND_PORTAL}}{{CASE_CARDS}}</html>', encoding="utf-8")
         (self.root / "unselected-secret.txt").write_text("never selected", encoding="utf-8")
@@ -43,7 +44,7 @@ class BrandBuildGuards(unittest.TestCase):
     def build(self, out="_site", preview=False):
         # The independent collection validator has its own contract tests.
         with patch("validate_collection.validate", return_value=[]):
-            return build_site.build(str(self.root), out, brand_preview=preview)
+            return build_site.build(str(self.root), out, brand_preview=preview, localize=False)
 
     def page(self, rel, out="_site"):
         return (self.root / out / rel).read_text(encoding="utf-8")

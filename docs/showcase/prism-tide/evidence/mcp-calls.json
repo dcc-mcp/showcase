@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "note": "Actual Gateway responses with environment/session/request metadata removed. Node attachment target normalized to scene root. No fabricated render call. Source arguments externalized to adjacent text files without text changes.",
+  "calls": [
+    {
+      "tool": "godot_script__create_script",
+      "arguments": {
+        "path": "res://prism_tide.gd",
+        "source_externalized": {
+          "file": "initial-script.gd.txt",
+          "sha256": "994e033f07958b0c63278fd311d81f4793ef1102e878ac45c0ad0c6934921c14",
+          "note": "This field represents the original source argument, externalized without text changes."
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action create_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "bytes": 9342,
+          "path": "res://prism_tide.gd",
+          "written": true
+        }
+      }
+    },
+    {
+      "tool": "godot_scene_management__create_scene",
+      "arguments": {
+        "path": "res://main.tscn",
+        "root_type": "Node2D",
+        "root_name": "PrismTide",
+        "open": true
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action create_scene completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "created": true,
+          "path": "res://main.tscn",
+          "root_type": "Node2D"
+        }
+      }
+    },
+    {
+      "tool": "godot_script__attach_script",
+      "arguments": {
+        "node_path": ".",
+        "script_path": "res://prism_tide.gd"
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action attach_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "attached": true,
+          "node_path": ".",
+          "script_path": "res://prism_tide.gd"
+        }
+      }
+    },
+    {
+      "tool": "godot_scene_management__save_scene",
+      "arguments": {
+        "path": "res://main.tscn"
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action save_scene completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "saved": true,
+          "scene_path": "res://main.tscn"
+        }
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "application/run/main_scene",
+        "value": "res://main.tscn"
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action set_project_setting completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "key": "application/run/main_scene",
+          "updated": true,
+          "value": "res://main.tscn"
+        }
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "display/window/size/viewport_width",
+        "value": 1280
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action set_project_setting completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "key": "display/window/size/viewport_width",
+          "updated": true,
+          "value": 1280.0
+        }
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "display/window/size/viewport_height",
+        "value": 800
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action set_project_setting completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "key": "display/window/size/viewport_height",
+          "updated": true,
+          "value": 800.0
+        }
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "display/window/stretch/mode",
+        "value": "canvas_items"
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action set_project_setting completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "key": "display/window/stretch/mode",
+          "updated": true,
+          "value": "canvas_items"
+        }
+      }
+    },
+    {
+      "tool": "godot_project_management__set_project_setting",
+      "arguments": {
+        "key": "rendering/renderer/rendering_method",
+        "value": "gl_compatibility"
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action set_project_setting completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "key": "rendering/renderer/rendering_method",
+          "updated": true,
+          "value": "gl_compatibility"
+        }
+      }
+    },
+    {
+      "tool": "godot_script__edit_script",
+      "arguments": {
+        "path": "res://prism_tide.gd",
+        "source_externalized": {
+          "file": "revision-script.gd.txt",
+          "sha256": "948e772f15623c537d145c48eb67c4f859c41e7e736395a1ac116ca1ecb2e777",
+          "note": "This field represents the original source argument, externalized without text changes."
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Godot action edit_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "bytes": 9342,
+          "path": "res://prism_tide.gd",
+          "written": true
+        }
+      }
+    }
+  ]
+}
