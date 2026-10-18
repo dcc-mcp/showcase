@@ -367,7 +367,8 @@ def main():
                         write_json(out / (label + "-" + name + "-console.json"), {"console": lines, "failures": errors})
                     write_json(out / (label + "-input-route.json"), {"input_events": events,
                         "samples": driver.samples if driver else [], "milestones": driver.milestones if driver else [],
-                        "physical_actions": driver.actions if driver else [], "screenshots": screenshots})
+                        "physical_actions": driver.actions if driver else [],
+                        "physical_stops": driver.stops if driver else [], "screenshots": screenshots})
                     write_json(out / (label + "-result.json"), result)
         failed = [item["name"] for item in report["viewports"] if not item["passed"]]
         if failed:

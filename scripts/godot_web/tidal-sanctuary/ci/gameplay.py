@@ -18,6 +18,7 @@ ROUTE = [
 FINAL_STAGE = 4
 STATE_PREFIX = "TIDAL_STATE"
 INTERACTION_RADIUS = 1.55
+SETTLED_HORIZONTAL_SPEED = .08
 
 
 def validate_state(state, previous=None, expected_demo=False):
@@ -46,6 +47,8 @@ def validate_state(state, previous=None, expected_demo=False):
     rect = finite_vector(state.get("action_rect"), 4, "action_rect")
     if rect[2] <= 0 or rect[3] <= 0:
         raise ValueError("Actual action button must have a nonempty rectangle")
+    finite_vector(state.get("movement_input"), 2, "movement_input")
+    finite_vector(state.get("velocity"), 3, "velocity")
     validate_progress(state)
     if previous is not None:
         if sample <= previous["sample_id"] or frame <= previous["physics_frame"]:
@@ -115,6 +118,10 @@ def keyboard_direction(direction):
     return {key for amount, key in ((x, "d"), (-x, "a"), (y, "s"), (-y, "w")) if amount > .36}
 
 
+def horizontal_distance(state, target):
+    return math.hypot(state["position"][0] - target[0], state["position"][2] - target[1])
+
+
 def mode_sequence(samples):
     result = []
     for sample in samples:
@@ -162,6 +169,8 @@ class RouteDriver:
         self.actions = []
         self.accepted_stage = 0
         self.capture_seconds = 0.0
+        self.stop_boundary = None
+        self.stops = []
 
     def capture(self, name, state):
         started = time.monotonic()
@@ -185,21 +194,60 @@ class RouteDriver:
             raise ValueError("Milestone lacks its matching accepted physical action")
         return True
 
+    def stop_for_action(self, state, point):
+        if self.pending_action is not None:
+            raise ValueError("Cannot begin another stop while a physical action is pending")
+        self.move((0, 0))
+        callback_returned_at = time.monotonic()
+        # CDP/X11 delivery can take longer than a simulation second. Discard the
+        # pre-stop position as an action basis, then establish a read-only sample
+        # boundary after the real stop callback has returned. Even an already
+        # neutral sample in that queue is not the required subsequent physics.
+        baseline = self.observe()
+        boundary = {"waypoint": point["name"], "target": list(point["target"]),
+                    "requested_after_sample_id": state["sample_id"],
+                    "after_sample_id": baseline["sample_id"],
+                    "after_physics_frame": baseline["physics_frame"],
+                    "callback_returned_at": callback_returned_at}
+        self.stop_boundary = boundary
+        self.stops.append(boundary)
+        return baseline
+
+    def settled_after_stop(self, state, point):
+        boundary = self.stop_boundary
+        if boundary is None or (boundary["waypoint"], boundary["target"]) != (
+                point["name"], list(point["target"])):
+            return False
+        movement = finite_vector(state.get("movement_input"), 2, "movement_input")
+        velocity = finite_vector(state.get("velocity"), 3, "velocity")
+        return (state["sample_id"] > boundary["after_sample_id"]
+                and state["physics_frame"] > boundary["after_physics_frame"]
+                and all(abs(value) <= 1e-6 for value in movement)
+                and math.hypot(velocity[0], velocity[2]) <= SETTLED_HORIZONTAL_SPEED)
+
     def request_action(self, state, point):
         """Record the physical callback request, never grant progress by itself."""
         validate_progress(state)
         target_stage = point.get("stage")
         if target_stage != self.accepted_stage + 1 or state["quest_stage"] != self.accepted_stage:
             raise ValueError("Physical action does not match the next exact quest milestone")
-        distance = math.hypot(state["position"][0] - point["target"][0], state["position"][2] - point["target"][1])
-        if distance > point.get("radius", .8):
-            raise ValueError("Physical action was requested away from its authored waypoint")
+        if self.pending_action is not None:
+            raise ValueError("A physical action is already pending for this milestone")
+        if horizontal_distance(state, point["target"]) >= INTERACTION_RADIUS:
+            raise ValueError("Physical action was requested outside the authored interaction range")
+        if not self.settled_after_stop(state, point):
+            raise ValueError("Physical action requires fresh neutral and settled physics after the stop callback")
+        self.stop_boundary["settled_sample_id"] = state["sample_id"]
+        self.stop_boundary["settled_physics_frame"] = state["physics_frame"]
         action = {"from_stage": self.accepted_stage, "target_stage": target_stage,
                   "after_sample_id": state["sample_id"], "after_physics_frame": state["physics_frame"],
                   "target": list(point["target"]), "position": list(state["position"]),
-                  "waypoint": point["name"], "requested_at": time.monotonic(), "callback_returned": False}
+                  "waypoint": point["name"], "requested_at": time.monotonic(), "callback_returned": False,
+                  "stop": dict(self.stop_boundary), "movement_input": list(state["movement_input"]),
+                  "velocity": list(state["velocity"])}
         self.actions.append(action)
         self.pending_action = action
+        self.stop_boundary = None
         self.interact(state)
         action["callback_returned"] = True
         self.last_action = time.monotonic()
@@ -296,10 +344,19 @@ class RouteDriver:
                         # acknowledgement; a missing receipt must fail, not
                         # trigger another tap (which could reset completion).
                         self.move((0, 0))
-                    elif distance <= point.get("radius", .8):
-                        self.move((0, 0))
+                    elif self.stop_boundary is not None:
+                        if self.settled_after_stop(state, point):
+                            if distance >= INTERACTION_RADIUS:
+                                # A delayed stop can drift outside actual reach.
+                                # Re-approach before sending the sole action.
+                                self.stop_boundary["drifted_sample_id"] = state["sample_id"]
+                                self.stop_boundary = None
+                                self.move(direction_to(state, target))
+                            else:
+                                self.request_action(state, point)
+                    elif "stage" in point and distance < INTERACTION_RADIUS:
                         if state["sample_id"] > self.last_action_sample_id:
-                            self.request_action(state, point)
+                            self.stop_for_action(state, point)
                     else:
                         self.move(direction_to(state, target))
                     self.pause(.1)
@@ -317,6 +374,6 @@ class RouteDriver:
             self.capture("tidal-05.png", state)
             return {"passed": True, "samples": self.samples, "milestones": self.milestones,
                     "crossing": crossing, "completed_state": state, "physical_actions": self.actions,
-                    "no_demo_no_state_injection": True}
+                    "physical_stops": self.stops, "no_demo_no_state_injection": True}
         finally:
             self.move((0, 0))
