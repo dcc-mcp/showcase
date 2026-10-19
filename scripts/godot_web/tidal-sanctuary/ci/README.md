@@ -8,7 +8,15 @@ The workflow has read-only repository permissions, no saved checkout credentials
 
 Head `3ff0eb1` [run 39089394037](https://github.com/dcc-mcp/showcase/actions/runs/39089394037) passed native authoring/input/save but failed both Web viewports immediately after real Begin. Audible samples exist, but the main-thread meter has multi-second gaps and cannot satisfy sustained-output evidence. The retained desktop failure snapshot additionally shows the first 32-second music source ending at audio clock 32.182857 and its replacement starting at 33.750204, a real 1.567-second source gap. The failure snapshot was collected after a diagnostic screenshot and is not relabeled as the earlier rejected window.
 
-The candidate now uses the runner's explicitly verified `/opt/google/chrome/chrome`, with the Chromium sandbox enabled, no forced graphics backend, and both Playwright's mute and unsafe-SwiftShader defaults excluded. Missing browser/WebGL capability fails; it never falls back to unsafe rendering. Runtime, source/PCM identity, strict meter density, cue/loop seam, actual-input and fresh-process restoration gates are unchanged. This configuration change is not a rendered performance or audio-success claim; exact-head hosted evidence must establish the result.
+The candidate now uses the runner's explicitly verified `/opt/google/chrome/chrome`, with the Chromium sandbox enabled, no forced graphics backend, and both Playwright's mute and unsafe-SwiftShader defaults excluded. Missing browser/WebGL capability fails; the harness never opts into unsafe rendering. Chrome may select its own software fallback; the actual context renderer is retained as diagnostic metadata. Runtime, source/PCM identity, strict meter density, cue/loop seam, actual-input and fresh-process restoration gates are unchanged. This configuration change is not a rendered performance or audio-success claim; exact-head hosted evidence must establish the result.
+
+### Exact-rendering optimization candidate
+
+The safe-browser head `ad1865e`, [run 39271590853](https://github.com/dcc-mcp/showcase/actions/runs/39271590853), passed the stronger native rendered-state/input/save checks but still failed fresh after-Begin audio-meter evidence in both Web sizes. Changing browser selection alone did not repair the stalls. That failed run and its real frames remain retained.
+
+The next water candidate reuses the lattice hashes shared by the five existing finite-difference samples. It preserves the same scene, topology, two ripple octaves, original sample-coordinate and interpolation order, displacement and normals; the vertex stage computes 18 sine hashes instead of 40. Deterministic arithmetic fixtures are not a GPU-speed or rendered-equivalence claim. No audio, input, physics, resolution or quality threshold is relaxed. Passive `render_diagnostics` values retain actual draw-frame counters and monotonic microseconds; they are informational and never replace the acceptance gates.
+
+The actual restored native image exposed full-width English curly apostrophes in the shared CJK font. English story punctuation now uses compact ASCII quotes/apostrophes; Chinese punctuation and the font remain unchanged. New rendered images are still required.
 
 ## Evidence, kept distinct
 

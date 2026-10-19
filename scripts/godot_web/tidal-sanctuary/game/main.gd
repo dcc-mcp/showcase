@@ -818,6 +818,9 @@ func emit_load_receipt() -> void:
 
 func observed_state() -> Dictionary:
  var data:=progress_data();data["schema"]=1;data["sample_id"]=sample_id;data["physics_frame"]=Engine.get_physics_frames();data["demo"]=demo
+ # Informational only: physics frames are not rendered FPS. These passive
+ # counters let failed runs distinguish wall-time/render stalls from simulation.
+ data["render_diagnostics"]={"draw_frame":Engine.get_frames_drawn(),"monotonic_usec":Time.get_ticks_usec()}
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
  data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
  var reach:=interaction_status()

@@ -715,6 +715,17 @@ def main():
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
                     wait_ready(page, console, failures)
+                    # Read the game's existing context after its actual first draw.
+                    # This identity is diagnostic, never an alternate pass condition.
+                    result["graphics"] = passive_evaluate(page, """() => {
+                        const gl = document.querySelector('#canvas').getContext('webgl2');
+                        if (!gl) return {available:false};
+                        const debug = gl.getExtension('WEBGL_debug_renderer_info');
+                        return {available:true, version:gl.getParameter(gl.VERSION),
+                            vendor:gl.getParameter(gl.VENDOR), renderer:gl.getParameter(gl.RENDERER),
+                            unmasked_vendor:debug ? gl.getParameter(debug.UNMASKED_VENDOR_WEBGL) : null,
+                            unmasked_renderer:debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : null};
+                    }""")
                     bounds = passive_evaluate(page, "() => {const box = document.querySelector('#canvas')?.getBoundingClientRect(); return box ? {width:box.width,height:box.height} : null;}")
                     if not bounds or bounds["width"] < width - 2 or bounds["height"] < height - 2:
                         raise RuntimeError("Actual Web game canvas did not fill requested viewport")
