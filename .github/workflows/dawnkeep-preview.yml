@@ -53,11 +53,11 @@ jobs:
         run: |
           python -m unittest discover -s "$RECIPE/ci" -p 'test_*.py' -v
           node "$RECIPE/ci/test_web_shell.js"
-      - name: Actual typed MCP create, validate, save, restart and reopen
+      - name: Actual headless typed MCP create, validate, save, restart and reopen
         id: author
         run: |
           set -euo pipefail
-          xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/author_native.py" \
+          python "$RECIPE/ci/author_native.py" --headless \
             --source "$RECIPE/game" --godot Godot_v4.6.3-stable_linux.x86_64 --output "$RUNNER_TEMP/dawnkeep-author"
       - name: Exact-source mechanics, bilingual layout and runtime integration
         run: |

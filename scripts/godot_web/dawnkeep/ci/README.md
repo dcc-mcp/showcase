@@ -18,8 +18,8 @@ starts unless workflow dispatch `full_acceptance` is explicitly enabled.
    The 0.9.6 adapter and 0.20.42 Core pins intentionally match the previously
    exercised typed API; a newer package existing is not compatibility proof.
 2. Use official Godot 4.6.3 with the executable hash in `common.py`.
-3. Author a new isolated candidate:
-   `xvfb-run -a python ci/author_native.py --source game --output /tmp/dawnkeep-author --godot godot`
+3. Author a new isolated candidate through the actual headless editor:
+   `python ci/author_native.py --headless --source game --output /tmp/dawnkeep-author --godot godot`
 4. Capture the fast real native gate:
    `xvfb-run -a -s '-screen 0 1280x720x24' python ci/capture_native.py --native /tmp/dawnkeep-author/native --output /tmp/dawnkeep-preview --godot godot`
 5. Inspect the actual native images before requesting longer capture.
@@ -28,8 +28,11 @@ starts unless workflow dispatch `full_acceptance` is explicitly enabled.
 7. Use `ci/capture_browser.py --site .../site --output ...` against the exported
    bytes. The harness serves loopback HTTP itself. It never swaps in a web clone.
 
-For an environment without a display, `author_native.py --headless` is genuine
-MCP editor authoring/save/reopen, but proves no visible render or native input.
+CI uses `author_native.py --headless` for genuine typed MCP editor authoring,
+validation, save and restart/reopen. This avoids graphical editor thumbnail
+reimports overlapping script-creation scans; it proves no visible render or
+native input. Engine-error checks remain strict, and the separate rendered X11
+native image/input gate remains mandatory before Web export and browser tests.
 `diagnose_runtime.py` executes a bounded actual headless engine probe and
 records currently installed tools. Missing daemons do not establish missing
 capability. Sandbox/access denials must be reported, not worked around.

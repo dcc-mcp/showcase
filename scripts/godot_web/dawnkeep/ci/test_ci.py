@@ -1,7 +1,10 @@
 import ast
 import copy
+import re
+import shlex
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from common import REQUIRED_FILES, copy_game, isolated_output, receipts, source_inventory, verify_inventory
 from interaction import control_center, validate_state
@@ -80,6 +83,39 @@ class ObserverTests(unittest.TestCase):
         self.assertTrue(editor_idle_sample(value,{'res://main.gd':'GDScript'})[1])
         value['context']['executed']=False
         with self.assertRaises(ValueError):editor_idle_sample(value,{})
+
+    def test_headless_authoring_keeps_mandatory_rendered_native_gate(self):
+        workflow=Path(__file__).resolve().parents[4]/'.github/workflows/dawnkeep-preview.yml'
+        steps=re.split(r'(?=^      - name: )',workflow.read_text(),flags=re.M)
+        def step(step_id):
+            matches=[block for block in steps if re.search(r'^        id: '+step_id+r'$',block,re.M)]
+            self.assertEqual(len(matches),1,'Expected exactly one workflow stage: '+step_id)
+            return matches[0]
+        author=step('author');native=step('native_gate')
+        self.assertRegex(author,r'- name: [^\n]*headless')
+        author_command=shlex.split(author.split('run: |',1)[1].replace('\\\n',' '))
+        script=next(i for i,value in enumerate(author_command) if value.endswith('/ci/author_native.py'))
+        self.assertIn('--headless',author_command[script+1:])
+        native_command=shlex.split(native.split('run: |',1)[1].replace('\\\n',' '))
+        self.assertIn('xvfb-run',native_command)
+        self.assertTrue(any(value.endswith('/ci/capture_native.py') for value in native_command))
+        self.assertNotIn('--headless',native_command)
+        for block in (author,native):
+            self.assertNotRegex(block,re.compile(r'^        (if|continue-on-error):',re.M))
+            self.assertIn('set -euo pipefail',block)
+
+    def test_workflow_mode_guard_rejects_missing_or_optional_evidence(self):
+        workflow=Path(__file__).resolve().parents[4]/'.github/workflows/dawnkeep-preview.yml'
+        text=workflow.read_text()
+        mutations=[text.replace('author_native.py" --headless','author_native.py"'),
+                   text.replace('xvfb-run','env'),
+                   text.replace('/ci/capture_native.py','/ci/verify_headless.py'),
+                   text.replace('id: native_gate','id: native_gate\n        if: false'),
+                   text.replace('id: author','id: author\n        continue-on-error: true')]
+        for index,mutated in enumerate(mutations):
+            with self.subTest(mutation=index),patch.object(Path,'read_text',return_value=mutated):
+                with self.assertRaises(AssertionError):
+                    self.test_headless_authoring_keeps_mandatory_rendered_native_gate()
 
     def test_browser_launch_preserves_security_defaults(self):
         tree=ast.parse((Path(__file__).parent/'capture_browser.py').read_text())
