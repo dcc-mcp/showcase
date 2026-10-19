@@ -23,6 +23,9 @@ class QuietHandler(SimpleHTTPRequestHandler):
 # Keep browser security defaults. Missing WebGL2 is a capability blocker,
 # never a reason to opt into an unsafe fallback renderer.
 BROWSER_ARGS=['--disable-dev-shm-usage']
+# The pinned Playwright version injects this unsafe renderer opt-in by default.
+# Exclude it explicitly, even when it is absent from our own args.
+BROWSER_IGNORED_DEFAULT_ARGS=['--mute-audio','--enable-unsafe-swiftshader']
 
 
 def main():
@@ -34,11 +37,12 @@ def main():
     threading.Thread(target=server.serve_forever,daemon=True).start();url=f'http://127.0.0.1:{server.server_port}/index.html'
     report={'schema':1,'passed':False,'mode':'full' if args.full else 'preview','engine':'actual official Godot Web export',
             'pck_sha256':sha256(args.site/'index.pck'),'viewports':[],
-            'browser_launch':{'args':BROWSER_ARGS,'chromium_sandbox':True},
+            'browser_launch':{'args':BROWSER_ARGS,'chromium_sandbox':True,
+                              'ignore_default_args':BROWSER_IGNORED_DEFAULT_ARGS},
             'limitations':['Portrait touch is Chromium device emulation, not a physical phone.','Numerical audio checks do not replace listening.','No deployed-site claim.']}
     try:
         with sync_playwright() as pw:
-            options={'headless':True,'args':BROWSER_ARGS,'chromium_sandbox':True,'ignore_default_args':['--mute-audio']}
+            options={'headless':True,'args':BROWSER_ARGS,'chromium_sandbox':True,'ignore_default_args':BROWSER_IGNORED_DEFAULT_ARGS}
             if args.chromium:options['executable_path']=args.chromium
             browser=pw.chromium.launch(**options);report['browser_version']=browser.version
             try:

@@ -71,3 +71,16 @@ Run `python ci/verify_headless.py --source game --output /tmp/dawnkeep-headless`
 for isolated mechanics, six-viewport bilingual layout, main-scene integration
 and public-command balance fixtures. This explicitly separate synthetic stage
 preserves logs and exact source hashes; it does not replace real input.
+
+### Browser security capability boundary
+
+Chromium's sandbox stays enabled. The pinned Playwright defaults inject
+`--enable-unsafe-swiftshader`; the harness explicitly excludes that default,
+not just omits it from its own launch arguments. The exclusion is regression
+checked and recorded in `browser.json`.
+
+The hosted Ubuntu 24.04 run on `9a086ff` stopped at browser launch with
+`No usable sandbox`. MCP, headless, rendered native input and official Web
+export had passed. Do not disable the sandbox, change AppArmor/user-namespace
+policy or mark browser gameplay accepted to make the job green. A supported
+sandbox-capable runner must be established before that browser stage can pass.

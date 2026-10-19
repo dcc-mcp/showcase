@@ -166,9 +166,13 @@ class ObserverTests(unittest.TestCase):
         assignments={node.targets[0].id:node.value for node in ast.walk(tree)
                      if isinstance(node,ast.Assign) and len(node.targets)==1 and isinstance(node.targets[0],ast.Name)}
         self.assertEqual(ast.literal_eval(assignments['BROWSER_ARGS']),['--disable-dev-shm-usage'])
+        self.assertEqual(ast.literal_eval(assignments['BROWSER_IGNORED_DEFAULT_ARGS']),
+                         ['--mute-audio','--enable-unsafe-swiftshader'])
         options=assignments['options'];self.assertIsInstance(options,ast.Dict)
         values={key.value:value for key,value in zip(options.keys,options.values) if isinstance(key,ast.Constant)}
         self.assertTrue(ast.literal_eval(values['chromium_sandbox']))
+        self.assertIsInstance(values['ignore_default_args'],ast.Name)
+        self.assertEqual(values['ignore_default_args'].id,'BROWSER_IGNORED_DEFAULT_ARGS')
 
     def test_official_shell_patch_requires_all_markers(self):
         html='<script src="index.js"></script>\nconst GODOT_CONFIG = {"extensionLibs":[]};\nconst engine = new Engine(GODOT_CONFIG);\nfunction displayFailureNotice(err) {}'
