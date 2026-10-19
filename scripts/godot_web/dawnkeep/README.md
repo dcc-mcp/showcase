@@ -41,6 +41,12 @@ for the existing DCC-MCP capabilities and their limits.
 
 ## Current status and acceptance boundaries
 
+The current repair candidate selects Godot's supported built-in Jolt 3D backend
+to avoid the single-thread Group path while retaining real collisions. See the
+[backend repair and regression scope](research/physics-backend-20261019.md).
+The historical results below remain tied to their stated commits; the new
+candidate needs fresh strict native/Web evidence before those results advance.
+
 This is an unpublished Draft candidate. The native-UI regression suite covers
 73 mechanics assertions, 28,051 settled UI assertions across eight sizes
 (320×568 through 2560×1080), EN/ZH, ten screen modes, clipped scrolling,

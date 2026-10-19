@@ -78,13 +78,18 @@ the browser receipt. This policy is scoped to Dawnkeep's harness.
 
 ### Pinned engine teardown isolation
 
-`diagnose_web_groups.py` is a separate three-project engine diagnostic, not a
+`diagnose_web_groups.py` is a separate five-project engine diagnostic, not a
 gameplay test and not a waiver for the strict game engine-log check. It exports
 an empty Dummy-physics baseline, one explicit awaited WorkerThreadPool group,
-and an empty GodotPhysics3D world with the same hash-pinned single-thread Web
-template. Actual sandboxed Chrome clicks the official Engine.requestQuit path.
-Every console error is retained. `diagnosis_confirmed` means the expected defect
-was isolated; it never means a defective case had a clean exit.
+the historical empty Node3D control, and two active capsule/box worlds using
+GodotPhysics3D and built-in Jolt, with the same hash-pinned single-thread Web
+template. The active cases must demonstrate physical blocking and a real ray
+hit before actual sandboxed Chrome clicks the official Engine.requestQuit path.
+Every console error is retained. Only the explicit Group and GodotPhysics3D
+repro cases expect the known allocator error. Jolt and both empty controls must
+exit without errors. `diagnosis_confirmed` means the full comparison matched;
+it never means a defective case had a clean exit. The real game still rejects
+every engine error independently.
 
 The [official 4.6.3 tag source](https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/core/object/worker_thread_pool.cpp#L653-L758)
 places Group cleanup inside `THREADS_ENABLED`, while
@@ -93,6 +98,12 @@ without that guard. This is a source-level explanation to compare against the
 actual diagnostic, not proof of binary/source identity: the linked official tag
 resolves to `35e80b3a8822a9df9be390814b62f44c0a9c69e8`, whereas the hash-pinned
 distributed binary reports `7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3`.
+The initial empty Node3D test did not create collision bodies and exited cleanly;
+expecting that case to reproduce the defect was a diagnostic error. It remains
+as a negative control rather than being silently removed. Active-body cases
+now test actual simulation and queries. Built-in Jolt is a supported backend,
+not Dummy physics or a collision bypass. See the
+[backend repair record](../research/physics-backend-20261019.md).
 Do not claim that an additional game shutdown delay fixes engine allocations,
 disable collisions, suppress engine errors or weaken browser security to make
 this gate pass.

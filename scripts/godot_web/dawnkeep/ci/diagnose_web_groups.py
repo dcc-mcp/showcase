@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Isolate the pinned single-thread Web Group leak; not game acceptance."""
+"""Compare supported physics backends and preserve the known Group defect repro."""
 from __future__ import annotations
 import argparse
 import json
@@ -13,15 +13,17 @@ from capture_browser import BROWSER_ARGS, BROWSER_IGNORED_DEFAULT_ARGS, QuietHan
 from common import WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, isolated_env, isolated_output, sha256, write_json
 
 GROUP_ERROR = 'ERROR: Pages in use exist at exit in PagedAllocator: N16WorkerThreadPool5GroupE'
-CASES = ('baseline', 'explicit-group', 'physics-world')
+CASES = ('baseline', 'explicit-group', 'empty-world', 'godot-world', 'jolt-world')
+PHYSICS_CASES = ('godot-world', 'jolt-world')
 
 
 def write_project(root, case):
     if case not in CASES:
         raise ValueError('Unknown isolation case: ' + case)
     root.mkdir(parents=True)
-    physics = 'GodotPhysics3D' if case == 'physics-world' else 'Dummy'
-    node = 'Node3D' if case == 'physics-world' else 'Node'
+    physics = ('Jolt Physics' if case == 'jolt-world' else 'GodotPhysics3D'
+               if case in ('empty-world', 'godot-world') else 'Dummy')
+    node = 'Node3D' if case in ('empty-world', *PHYSICS_CASES) else 'Node'
     (root / 'project.godot').write_text('''config_version=5
 [application]
 config/name="Single-thread Group isolation"
@@ -45,14 +47,46 @@ script = ExtResource("1")
 \tWorkerThreadPool.wait_for_group_task_completion(id)
 \tprint("GROUP_REPRO_COMPLETED")
 ''' if case == 'explicit-group' else ''
+    bodies = '''\tvar wall := StaticBody3D.new()
+\tvar wall_shape := CollisionShape3D.new()
+\tvar box := BoxShape3D.new()
+\tbox.size = Vector3(1,3,3)
+\twall_shape.shape = box
+\twall.add_child(wall_shape)
+\tadd_child(wall)
+\thero = CharacterBody3D.new()
+\thero.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
+\thero.position = Vector3(-3,0,0)
+\thero.collision_layer = 2
+\thero.collision_mask = 1
+\tvar hero_shape := CollisionShape3D.new()
+\tvar capsule := CapsuleShape3D.new()
+\tcapsule.radius = 0.35
+\tcapsule.height = 1.5
+\thero_shape.shape = capsule
+\thero.add_child(hero_shape)
+\tadd_child(hero)
+''' if case in PHYSICS_CASES else ''
+    physics_check = '''\tvar hit := get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-3,0,0),Vector3(3,0,0),1))
+\tvar blocked: bool = hero.position.x > -1.2 and hero.position.x < -0.7
+\tprint("GROUP_REPRO_PHYSICS ", JSON.stringify({"blocked":blocked,"ray_hit":not hit.is_empty(),"backend":ProjectSettings.get_setting("physics/3d/physics_engine")}))
+''' if case in PHYSICS_CASES else ''
+    movement = '''
+func _physics_process(_delta: float) -> void:
+\tif is_instance_valid(hero):
+\t\thero.velocity = Vector3(2,0,0)
+\t\thero.move_and_slide()
+''' if case in PHYSICS_CASES else ''
     (root / 'main.gd').write_text('extends ' + node + '''
+var hero: CharacterBody3D
 func _ready() -> void:
-''' + group + '''\tfor _frame in range(10):
+''' + group + bodies + '\tfor _frame in range(' + ('120' if case in PHYSICS_CASES else '10') + '''):
 \t\tawait get_tree().physics_frame
+''' + physics_check + '''
 \tprint("GROUP_REPRO_READY ", JSON.stringify(Engine.get_version_info()))
 func _noop(_index: int) -> void:
 \tpass
-''')
+''' + movement)
 
 
 def patch_diagnostic_shell(page):
@@ -76,14 +110,20 @@ def classify(case, console, page_errors):
     ready = any(line.startswith('GROUP_REPRO_READY ') for line in console)
     ended = 'GROUP_REPRO_EXIT 0' in console
     group_completed = 'GROUP_REPRO_COMPLETED' in console
-    expected = [] if case == 'baseline' else [GROUP_ERROR]
+    expected = [GROUP_ERROR] if case in ('explicit-group', 'godot-world') else []
+    physics = [json.loads(line.removeprefix('GROUP_REPRO_PHYSICS ')) for line in console
+               if line.startswith('GROUP_REPRO_PHYSICS ')]
+    physics_passed = (len(physics) == 1 and physics[0].get('blocked') is True
+                      and physics[0].get('ray_hit') is True
+                      and physics[0].get('backend') == ('Jolt Physics' if case == 'jolt-world' else 'GodotPhysics3D')) if case in PHYSICS_CASES else True
     # A diagnostic match is not a clean-exit pass: preserve both explicitly.
     match = (ready and ended and not page_errors and errors == expected
-             and (case != 'explicit-group' or group_completed))
+             and (case != 'explicit-group' or group_completed) and physics_passed)
     return {'case': case, 'diagnostic_expectation_matched': match,
             'ready': ready, 'actual_engine_exit_code_zero': ended,
             'explicit_group_completed': group_completed, 'engine_errors': errors,
             'clean_engine_exit': ready and ended and not errors and not page_errors,
+            'physics_collision_checks_passed': physics_passed, 'physics': physics,
             'javascript_errors': page_errors}
 
 
@@ -97,7 +137,8 @@ def main():
     args = parser.parse_args()
     out = isolated_output(args.output)
     report = {'schema': 1, 'purpose': 'Engine defect isolation; not game acceptance',
-              'diagnosis_confirmed': False, 'template_sha256': sha256(args.template), 'cases': []}
+              'diagnosis_confirmed': False, 'template_sha256': sha256(args.template), 'cases': [],
+              'scope': 'Known-bug cases retain expected errors; candidate Jolt must collide and quit cleanly. Actual game has its own strict error gate.'}
     server = None
     try:
         if report['template_sha256'] != WEB_TEMPLATE_SHA256:
@@ -175,7 +216,7 @@ custom_template/release=''' + json.dumps(str(args.template.resolve())) + '\n')
                         write_json(out / 'diagnosis.json', report)
             finally:
                 browser.close()
-        report['diagnosis_confirmed'] = len(report['cases']) == 3 and all(
+        report['diagnosis_confirmed'] = len(report['cases']) == len(CASES) and all(
             item['diagnostic_expectation_matched'] for item in report['cases'])
         if not report['diagnosis_confirmed']:
             raise RuntimeError('Observed isolation outcomes differ; inspect unsuppressed logs')

@@ -212,6 +212,44 @@ func _run() -> void:
 		await physics_frame
 	game.set_physics_process(false)
 	check(game.hero.position.distance_to(Vector3(-9,0,-4))<0.5,"click movement steers around a solid tower")
+	game.select_pad(0)
+	check(game.sell_tower(),"tower sale succeeds before collision removal check")
+	await physics_frame
+	await physics_frame
+	game.hero.position = Vector3(-13,0,-4)
+	game.set_move_input(Vector2.RIGHT)
+	game.set_physics_process(true)
+	for i in range(45):
+		await physics_frame
+	game.set_move_input(Vector2.ZERO)
+	game.set_physics_process(false)
+	check(game.hero.position.x > -10.0,"sold tower no longer blocks the hero")
+	var wall := StaticBody3D.new()
+	wall.position = Vector3(5,1,0)
+	var wall_collision := CollisionShape3D.new()
+	var wall_shape := BoxShape3D.new()
+	wall_shape.size = Vector3(1,2,6)
+	wall_collision.shape = wall_shape
+	wall.add_child(wall_collision)
+	world.add_child(wall)
+	await physics_frame
+	game.hero.position = Vector3(2,0,0)
+	game.set_move_input(Vector2.RIGHT)
+	game.set_physics_process(true)
+	for i in range(60):
+		await physics_frame
+	game.set_physics_process(false)
+	check(game.hero.position.x > 3.5 and game.hero.position.x < 4.2,"box scenery blocks the capsule without penetration")
+	game.set_move_input(Vector2(1,1).normalized())
+	game.set_physics_process(true)
+	for i in range(20):
+		await physics_frame
+	game.set_move_input(Vector2.ZERO)
+	game.set_physics_process(false)
+	check(game.hero.position.x < 4.2 and game.hero.position.z > 1.0,"diagonal movement slides along box scenery")
+	check(is_zero_approx(game.hero.position.y),"floating hero remains on the gameplay plane")
+	wall.queue_free()
+	await physics_frame
 	game.hero.position = Gameplay.PADS[1]
 	game.select_pad(1)
 	var saved_gold: int = game.gold

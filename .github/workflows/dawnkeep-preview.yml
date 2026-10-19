@@ -123,7 +123,7 @@ jobs:
           extra=()
           if [ "$FULL_ACCEPTANCE" = 'true' ]; then extra+=(--full); fi
           python "$RECIPE/ci/capture_browser.py" --chromium "$CHROME" --site "$RUNNER_TEMP/dawnkeep-web/site" --output "$RUNNER_TEMP/dawnkeep-browser" "${extra[@]}"
-      - name: Isolate pinned single-thread Group teardown defect without game code
+      - name: Compare active physics backends and retain the known Group defect repro
         if: ${{ !cancelled() && steps.export.outcome == 'success' }}
         run: |
           set -euo pipefail
