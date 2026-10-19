@@ -55,8 +55,10 @@ review. Listen to final sound and review composition, motion, Chinese glyphs,
 mobile legibility, battle readability and input feel separately.
 
 Web lifecycle coverage uses actual controls: fullscreen, `Engine.requestQuit`
-and actual onExit, fresh engine restart, then a deliberately failed required
-PCK request followed by visible Retry. Engine gameplay is observed through
+and actual onExit, fresh engine restart, then a required-PCK download outage held through the loader's internal retries
+until the actual failure UI appears. The route is restored before clicking the
+visible Retry control. A one-request interruption is insufficient because the
+official loader can recover it without showing an error. Engine gameplay is observed through
 console output only. Portrait results are emulated touch, not physical-device
 compatibility. Source/download bytes, deployed pages, privacy, rights and
 final victory/balance remain separate acceptance stages.

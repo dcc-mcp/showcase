@@ -28,6 +28,15 @@ BROWSER_ARGS=['--disable-dev-shm-usage']
 BROWSER_IGNORED_DEFAULT_ARGS=['--mute-audio','--enable-unsafe-swiftshader']
 
 
+class RequiredPayloadOutage:
+    """Keep a required download unavailable until the test explicitly removes it."""
+    def __init__(self):self.attempts=0
+
+    def __call__(self,route):
+        route.abort('failed')
+        self.attempts+=1
+
+
 def browser_executable(value):
     """Validate an explicitly selected installed browser, with no fallback."""
     path=Path(value).resolve(strict=True)
@@ -123,17 +132,17 @@ def main():
                         page.screenshot(path=str(directory/'engine-exited.png'))
                         boundary=len(console);shell_click('#dawnkeep-web-restart');wait_line('DAWNKEEP_FRAME_READY',boundary)
                         result['lifecycle']={'fullscreen':True,'actual_engine_quit':True,'fresh_engine_restart':True}
-                        # Fail an actual required payload once; visible retry starts a fresh load.
-                        failed_once=[False]
-                        def block_pack(route):
-                            if not failed_once[0]:failed_once[0]=True;route.abort('failed')
-                            else:route.continue_()
-                        page.route('**/index.pck',block_pack)
+                        # Godot retries transient downloads internally. Hold the required
+                        # payload unavailable until its actual failure UI appears.
+                        outage=RequiredPayloadOutage()
+                        page.route('**/index.pck',outage)
                         boundary=len(console);page.reload(wait_until='domcontentloaded');wait_line('DAWNKEEP_WEB_LOAD_ERROR',boundary)
                         page.screenshot(path=str(directory/'loading-retry.png'))
-                        page.unroute('**/index.pck',block_pack);boundary=len(console)
+                        if outage.attempts<1:raise RuntimeError('Required PCK outage was not exercised')
+                        result['loading_outage']={'aborted_pck_requests':outage.attempts}
+                        page.unroute('**/index.pck',outage);boundary=len(console)
                         shell_click('#dawnkeep-web-retry');wait_line('DAWNKEEP_FRAME_READY',boundary)
-                        result['lifecycle']['loading_retry']=failed_once[0]
+                        result['lifecycle']['loading_retry']=True
                         check_engine_log('\n'.join(console));result['passed']=True
                         if page.video:video=page.video
                     except Exception as error:
@@ -141,7 +150,8 @@ def main():
                         if page and not page.is_closed():
                             try:page.screenshot(path=str(directory/'failure.png'),timeout=15000)
                             except Exception:pass
-                        raise
+                        # Preserve the failed viewport and inspect the other independent
+                        # context too. The aggregate below still fails the entire job.
                     finally:
                         stop_process(recorder)
                         if context:context.close()

@@ -5,14 +5,14 @@ import shlex
 import subprocess
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 from pathlib import Path
 from common import REQUIRED_FILES, copy_game, isolated_output, receipts, source_inventory, verify_inventory
 from interaction import control_center, validate_state
 from author_native import editor_idle_sample, initial_copy_files
 from export_web import patch_shell
 from capture_native import mouse_location, pointer_click
-from capture_browser import browser_executable
+from capture_browser import RequiredPayloadOutage, browser_executable
 
 
 class InventoryTests(unittest.TestCase):
@@ -102,6 +102,29 @@ class NativePointerTests(unittest.TestCase):
 
 
 class BrowserSelectionTests(unittest.TestCase):
+    def test_failed_viewport_is_preserved_and_fails_the_aggregate(self):
+        tree=ast.parse((Path(__file__).parent/'capture_browser.py').read_text())
+        loops=[node for node in ast.walk(tree) if isinstance(node,ast.For) and isinstance(node.target,ast.Tuple)]
+        self.assertEqual(len(loops),1)
+        viewport_handlers=[h for node in ast.walk(loops[0]) if isinstance(node,ast.Try) for h in node.handlers if isinstance(h.name,str) and h.name=='error']
+        outer=viewport_handlers[0]
+        self.assertTrue(any(isinstance(n,ast.Assign) and any(isinstance(t,ast.Subscript) and isinstance(t.slice,ast.Constant) and t.slice.value=='blocker' for t in n.targets) for n in outer.body))
+        self.assertFalse(any(isinstance(n,ast.Raise) for n in ast.walk(outer)))
+        aggregates=[node for node in ast.walk(tree) if isinstance(node,ast.If) and ast.unparse(node.test)=="not report['passed']"]
+        self.assertEqual(len(aggregates),1);self.assertIsInstance(aggregates[0].body[0],ast.Raise)
+
+    def test_required_payload_stays_unavailable_across_loader_retries(self):
+        outage=RequiredPayloadOutage();routes=[Mock() for _ in range(5)]
+        for index,route in enumerate(routes,1):
+            outage(route)
+            route.abort.assert_called_once_with('failed');route.continue_.assert_not_called()
+            self.assertEqual(outage.attempts,index)
+
+    def test_payload_abort_failure_is_not_counted_or_ignored(self):
+        outage=RequiredPayloadOutage();route=Mock();route.abort.side_effect=RuntimeError('route closed')
+        with self.assertRaises(RuntimeError):outage(route)
+        self.assertEqual(outage.attempts,0);route.continue_.assert_not_called()
+
     def test_explicit_browser_records_canonical_path_and_actual_version(self):
         with tempfile.TemporaryDirectory() as tmp:
             browser=Path(tmp)/'chrome';browser.write_text('fixture');browser.chmod(0o700)
