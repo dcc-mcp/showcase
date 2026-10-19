@@ -1,0 +1,70 @@
+name: Parcel Web and mobile acceptance
+on:
+  pull_request:
+    paths: ['play/**', 'scripts/godot_web/**', 'scripts/parcel_page_smoke.py', 'docs/showcase/parcel-switchyard/**', 'collection.json', 'locales/**', 'assets/playable.js', 'assets/games.js', '.github/workflows/parcel-web-acceptance.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  parcel-web:
+    runs-on: ubuntu-latest
+    # Twenty real browser flows on hosted software WebGL; each state wait stays bounded.
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Acquire pinned official editor, templates and shared runtime
+        run: |
+          curl --fail --location --retry 2 -o "$RUNNER_TEMP/godot.zip" https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip
+          echo "a035258da32b77f966a5376f9fa29c30a6adde826a85ba918e1605bd1fc9823eba7d85f1dd5e748956bd2ba72827c0025ffa11bb82aec91128c407a2e723c99c  $RUNNER_TEMP/godot.zip" | sha512sum -c -
+          unzip -q "$RUNNER_TEMP/godot.zip" -d "$RUNNER_TEMP/godot"
+          echo "$RUNNER_TEMP/godot" >> "$GITHUB_PATH"
+          python scripts/godot_web/fetch_templates.py --output "$RUNNER_TEMP/parcel-templates"
+          python scripts/godot_web/materialize_runtime.py
+      - name: Verify tracked package and independently re-export isolated copy
+        run: |
+          python scripts/godot_web/parcel-switchyard/test_package.py
+          python scripts/godot_web/parcel-switchyard/test_browser_guards.py
+          python scripts/godot_web/parcel-switchyard/test_tracked_bytes.py
+          node --check play/parcel-switchyard/shell.js
+          node scripts/godot_web/parcel-switchyard/test_fullscreen.js
+          mkdir -p "$RUNNER_TEMP/parcel-reexport" "$RUNNER_TEMP/parcel-evidence/reexport"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/parcel-reexport"
+          cp -a play/runtime/. "$RUNNER_TEMP/parcel-reexport/play/runtime/"
+          cd "$RUNNER_TEMP/parcel-reexport"
+          python scripts/godot_web/parcel-switchyard/export.py --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/parcel-templates/web_nothreads_release.zip" > "$RUNNER_TEMP/parcel-evidence/reexport/export.log"
+          python scripts/godot_web/parcel-switchyard/test_package.py
+          cp play/parcel-switchyard/export-provenance.json "$RUNNER_TEMP/parcel-evidence/reexport/"
+          cp play/parcel-switchyard/game.pck "$RUNNER_TEMP/parcel-evidence/reexport/"
+      - name: Build the untouched tracked browser candidate
+        run: |
+          python scripts/godot_web/verify_export.py
+          python scripts/build_site.py
+          # Some legacy media blobs are raw files despite an LFS attribute.
+          # Compare all actual tracked bytes/modes to HEAD without clean filters.
+          python scripts/godot_web/parcel-switchyard/check_tracked_bytes.py
+      - name: Install pinned official browser testing dependencies
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
+          python -m playwright install --with-deps chromium
+      - name: Real original film controls, source downloads and bilingual case navigation
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/parcel_page_smoke.py --site _site --output "$RUNNER_TEMP/parcel-evidence/pages"
+      - name: Real desktop and touch gameplay, bilingual loading and generated iframe flows
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/godot_web/parcel-switchyard/browser_test.py --site _site --output "$RUNNER_TEMP/parcel-evidence/browser" --expected-head "$EXPECTED_HEAD_SHA" --require-integration
+      - name: Retain exact-head receipts, screenshots and actual interaction movies
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: parcel-web-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/parcel-evidence
+          if-no-files-found: error
+          retention-days: 14

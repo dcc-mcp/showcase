@@ -1,3 +1,14 @@
+## 2026-10-12: Partial camera checkpoint / 未完成镜头检查点
+
+[Actual 50-frame excerpt / 50帧真实阶段片段](film-2026-10-12/crate-excerpt.mp4) · [Bilingual evidence and recipe / 中英证据与重放](film-2026-10-12/README.md)
+
+Partial stage evidence only: 960×540, 24 fps, 2.083 seconds. The planned six-second film is incomplete. 55 native wide frames are retained; repeated host exits ended rendering retries. This is not final-quality approval and does not replace the historical artwork. The original ZIP remains the historical project.
+
+仅阶段证据：960×540、24fps、约2.083秒。原计划六秒影片未完成，55个原生全景帧保留，多次宿主退出后已结束渲染重试。未达到本轮最终品质验收，不替换历史作品；原ZIP仍是历史工程。
+
+The records below describe the 2026-10-01 curation; references to “this pass” below concern that historical curation.
+以下保留2026-10-01归档；下文“本轮”指该历史归档。
+
 # 风化木箱：从 Designer 材质图到 Blender lookdev
 
 ![Blender Cycles 渲染的橄榄绿风化长木箱，带金属包角、锁扣和断裂压条](hero.jpg)

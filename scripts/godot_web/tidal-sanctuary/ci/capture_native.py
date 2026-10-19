@@ -11,8 +11,16 @@ import time
 from pathlib import Path
 from exploration import run_chart_exploration
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
-from observers import finite_vector, observer_receipts
+from observers import finite_vector, observer_receipts, positive_integer
 from common import TROPICAL_FILES, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
+
+
+def story_objectives():
+    # Match the shipped, manifest-owned story rather than the superseded study
+    # copy. Expected labels are never learned from runtime receipts.
+    story = json.loads((Path(__file__).parent.parent / "game/assets/story/story.en-zh.json").read_text())
+    return {language: [entry["objective"][language] for entry in [*story["stages"], story["ending"]]]
+            for language in ("en", "zh")}
 
 
 def require_running(process, message):
@@ -44,7 +52,6 @@ def wait_for(process, predicate, timeout, message):
     raise TimeoutError(message)
 
 
-
 def wait_for_neutral_movement(process, read_states, baseline, timeout=10):
     """Observe post-keyup physics before any re-press; never consume game logs."""
     validate_state(baseline, expected_demo=False)
@@ -69,6 +76,51 @@ def wait_for_neutral_movement(process, read_states, baseline, timeout=10):
     wait_for(process, neutral_after_release, timeout, "fresh neutral physics input after actual X11 key release")
     return {"after_sample_id": baseline["sample_id"], "after_physics_frame": baseline["physics_frame"],
             "observed": observed}
+
+
+def wait_for_presented_state(process, read_receipts, baseline, timeout=15):
+    """Wait for a new real post-draw receipt matching the requested milestone."""
+    validate_state(baseline, expected_demo=False)
+    existing = read_receipts()
+    after_id = positive_integer(existing[-1].get("presentation_id"), "presentation_id") if existing else 0
+    objective_labels = story_objectives()
+    observed = None
+
+    def presented_after_boundary():
+        nonlocal observed
+        receipts = read_receipts()
+        if not receipts:
+            return False
+        receipt = receipts[-1]
+        render_id = positive_integer(receipt.get("presentation_id"), "presentation_id")
+        if type(receipt.get("schema")) is not int or receipt["schema"] != 1:
+            raise ValueError("Unsupported native presentation receipt")
+        first = positive_integer(receipt.get("first_draw_frame"), "first_draw_frame")
+        last = positive_integer(receipt.get("draw_frame"), "draw_frame")
+        if type(receipt.get("post_draw_count")) is not int or receipt["post_draw_count"] != 2 or last <= first:
+            raise ValueError("Native presentation lacks two completed render frames")
+        state = receipt.get("state")
+        if not isinstance(state, dict):
+            raise ValueError("Native presentation lacks its pre-draw state")
+        validate_state(state, expected_demo=False)
+        if (render_id <= after_id or state["sample_id"] < baseline["sample_id"]
+                or state["physics_frame"] < baseline["physics_frame"]):
+            return False
+        if any(state[key] != baseline[key] for key in ("quest_stage", "treasures", "completed", "locomotion", "language")):
+            return False
+        objectives = objective_labels[state["language"]]
+        mode = state["locomotion"].upper() if state["language"] == "en" else {"walk": "行走", "wade": "涉水", "swim": "游泳"}[state["locomotion"]]
+        labels = receipt.get("labels", {})
+        if (not isinstance(labels, dict) or labels.get("objective") != objectives[state["quest_stage"]]
+                or labels.get("progress") != "%d / 4" % state["quest_stage"]
+                or "·" not in str(labels.get("compass", ""))
+                or str(labels["compass"]).rsplit("·", 1)[-1].strip() != mode):
+            raise ValueError("Native pre-draw labels do not match the presented milestone")
+        observed = receipt
+        return True
+
+    wait_for(process, presented_after_boundary, timeout, "fresh matching frame_post_draw receipt before X11 capture")
+    return {"after_presentation_id": after_id, "receipt": observed}
 
 
 def apply_movement_keys(direction, pressed, send_key, release_barrier):
@@ -226,13 +278,21 @@ def main():
     def move(direction):
         apply_movement_keys(direction, pressed, key, release_barrier)
 
-    def screenshot(name, state=None):
+    def screenshot(name, state=None, log_name="native-input.log", kind="physical-input-route"):
+        presentation = None
+        if state is not None:
+            presentation = wait_for_presented_state(runtime,
+                lambda: records(log_name, "TIDAL_PRESENTED"), state)
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "x11grab",
             "-video_size", "1280x720", "-i", os.environ["DISPLAY"] + "+0,0", "-frames:v", "1",
             str(out / name)], check=True, timeout=30)
         if state is not None:
-            screenshots.append({"name": name, "kind": "physical-input-route", "state": state,
-                                "bytes": (out / name).stat().st_size, "sha256": sha256(out / name)})
+            evidence = {"name": name, "kind": kind, "requested_state": state,
+                        "state": presentation["receipt"]["state"], "presentation": presentation,
+                        "bytes": (out / name).stat().st_size, "sha256": sha256(out / name)}
+            if kind == "physical-input-route":
+                screenshots.append(evidence)
+            return evidence
 
     def focus():
         windows = subprocess.check_output(["xdotool", "search", "--sync", "--onlyvisible", "--pid", str(runtime.pid)],
@@ -359,10 +419,9 @@ def main():
         exploration_images = []
         def exploration_screenshot(name):
             observed = records("native-input.log", "TIDAL_STATE")[-1]
-            screenshot(name)
+            capture = screenshot(name, observed, kind="physical-input-off-route")
             subprocess.run(["ffmpeg", "-v", "error", "-xerror", "-i", str(out / name), "-f", "null", "-"], check=True, timeout=30)
-            exploration_images.append({"name":name,"sha256":sha256(out/name),"bytes":(out/name).stat().st_size,
-                "state_before_capture_request":observed,"kind":"actual-input off-route contact; passive state is not exact framebuffer synchronization"})
+            exploration_images.append(capture)
         try:
             run_chart_exploration(lambda: records("native-input.log", "TIDAL_STATE"), move, time.sleep, exploration_screenshot, evidence=exploration)
             if {item["name"] for item in exploration_images} != {"native-chart-blocker-first.png","native-chart-blocker-opposed.png"}:
@@ -378,7 +437,7 @@ def main():
         finally:
             write_json(out / "native-input-route.json", {"input_events": events, "samples": driver.samples,
                 "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions,
-                "movement_release_receipts": movement_releases})
+                "physical_stops": driver.stops, "movement_release_receipts": movement_releases})
         time.sleep(1)
         require_running(recorder, "completion of actual keyboard-route recording")
         input_movie_states = [item for item in records("native-input.log", "TIDAL_STATE")
@@ -437,7 +496,11 @@ def main():
         if len(loads) != 1:
             raise RuntimeError("Fresh native process must emit exactly one load receipt")
         validate_restored(loads[0], saved)
-        screenshot("native-restored.png")
+        restored_states = records("native-reopened.log", "TIDAL_STATE")
+        if not restored_states:
+            raise RuntimeError("Fresh native process has no actual physics state to render")
+        report["restored_capture"] = screenshot("native-restored.png", restored_states[-1],
+            "native-reopened.log", "fresh-process-restoration")
         report["restored"] = loads[0]
         report["checks"].append({"name": "fresh native process restores completed quest and saved position", "passed": True})
         reopened_journey_count = len(records("native-reopened.log", "TIDAL_JOURNEY"))

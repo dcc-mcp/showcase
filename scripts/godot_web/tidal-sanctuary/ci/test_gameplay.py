@@ -11,7 +11,7 @@ from unittest.mock import Mock, patch
 from common import GAME_FILES
 from author_native import DEFERRED_TEST_FILES, EDITOR_PROBE_PATH, editor_idle_sample, initial_copy_files
 from capture_browser import capture_png, passive_evaluate, bounded_cdp, completed_route_save, route_diagnostics, secondary_touch_tap, validate_web_exit
-from capture_native import apply_movement_keys, validate_input_movie_span, wait_for_neutral_movement
+from capture_native import apply_movement_keys, validate_input_movie_span, wait_for_neutral_movement, wait_for_presented_state, story_objectives
 from gameplay import (ROUTE, RouteDriver, complete, direction_to, inside_approach,
                       inside_interaction_region, keyboard_direction,
                       validate_progress, validate_restored, validate_state, validate_water_crossing)
@@ -153,6 +153,82 @@ class GameplayObserverTests(unittest.TestCase):
         apply_movement_keys((1, 0), pressed, key, barrier)
         self.assertEqual(calls[-1], ("d", True))
         barrier.assert_called_once()
+
+    def presentation(self, state=None, **changes):
+        state = state or self.state()
+        receipt = {"schema": 1, "presentation_id": 2, "first_draw_frame": 50,
+                   "draw_frame": 51, "post_draw_count": 2, "state": state,
+                   "labels": {"objective": story_objectives()[state["language"]][state["quest_stage"]],
+                              "progress": "%d / 4" % state["quest_stage"],
+                              "compass": "↑  1m  ·  " + (state["locomotion"].upper() if state["language"] == "en"
+                                  else {"walk": "行走", "wade": "涉水", "swim": "游泳"}[state["locomotion"]])}}
+        receipt.update(changes)
+        return receipt
+
+    def test_native_screenshot_waits_for_new_matching_post_draw_not_physics_alone(self):
+        baseline = self.finished(sample_id=4, physics_frame=100)
+        old = self.presentation(self.state(), presentation_id=1)
+        wrong_stage = self.presentation(self.state(sample_id=4, physics_frame=100))
+        fresh = self.presentation(baseline, presentation_id=3)
+        read = Mock(side_effect=[[old], [old], [wrong_stage], [fresh]])
+        with patch("capture_native.time.sleep"):
+            evidence = wait_for_presented_state(Mock(poll=Mock(return_value=None)), read, baseline)
+        self.assertEqual(read.call_count, 4)
+        self.assertEqual(evidence, {"after_presentation_id": 1, "receipt": fresh})
+
+    def test_native_screenshot_refuses_absent_stale_physics_wrong_mode_or_stage(self):
+        baseline = self.state(sample_id=4, physics_frame=100)
+        for candidate in [None, self.presentation(baseline, presentation_id=1),
+                          self.presentation(self.state(sample_id=3, physics_frame=100)),
+                          self.presentation(self.state(sample_id=4, physics_frame=99)),
+                          self.presentation(self.state(sample_id=4, physics_frame=100, locomotion="wade")),
+                          self.presentation(self.finished(sample_id=4, physics_frame=100))]:
+            old = self.presentation(baseline, presentation_id=1)
+            read = Mock(side_effect=lambda: [candidate] if candidate else [])
+            clock = [0.0]
+            # The initial read defines the boundary; every later receipt stays
+            # stale, missing, or mismatched. None may manufacture a screenshot.
+            sequence = iter([[old]])
+            def receipts():
+                return next(sequence, read())
+            with self.subTest(candidate=candidate), patch("capture_native.time.monotonic", side_effect=lambda: clock[0]), \
+                    patch("capture_native.time.sleep", side_effect=lambda seconds: clock.__setitem__(0, clock[0] + seconds)), \
+                    self.assertRaisesRegex(TimeoutError, "frame_post_draw"):
+                wait_for_presented_state(Mock(poll=Mock(return_value=None)), receipts, baseline, timeout=.2)
+
+    def test_native_screenshot_rejects_forged_frame_shape_and_wrong_labels(self):
+        for patch_fields in [{"schema": True}, {"presentation_id": True}, {"post_draw_count": True},
+                             {"post_draw_count": 1}, {"draw_frame": 50}, {"first_draw_frame": -1},
+                             {"state": None}, {"state": self.state(demo=True)},
+                             {"labels": {"objective": "Treasure recovered", "compass": "↑  1m  ·  WALK"}},
+                             {"labels": {"objective": "Find the mariner's chart", "compass": "↑  1m  ·  SWIM"}}]:
+            receipt = self.presentation()
+            receipt.update(patch_fields)
+            read = Mock(side_effect=[[], [receipt]])
+            with self.subTest(fields=patch_fields), self.assertRaises(ValueError):
+                wait_for_presented_state(Mock(poll=Mock(return_value=None)), read, self.state())
+
+    def test_native_screenshot_checks_both_story_languages_and_progress(self):
+        self.assertEqual(story_objectives()["en"][0], "Read the shore chart")
+        self.assertEqual(story_objectives()["en"][4], "The promise is kept")
+        for language in ("en", "zh"):
+            for stage in range(5):
+                state = self.at_stage(stage, language=language)
+                receipt = self.presentation(state)
+                read = Mock(side_effect=[[], [receipt]])
+                self.assertEqual(wait_for_presented_state(Mock(poll=Mock(return_value=None)), read, state)["receipt"], receipt)
+                for key, bad in (("objective", "Find the mariner's chart"),
+                                 ("progress", "%d / 4" % ((stage + 1) % 5)), ("progress", None),
+                                 ("compass", "↑ 1m · SWIM"), ("compass", "↑ 1米 · 游泳")):
+                    bad_receipt = {**receipt, "labels": {**receipt["labels"], key: bad}}
+                    with self.subTest(language=language, key=key, bad=bad), self.assertRaises(ValueError):
+                        wait_for_presented_state(Mock(poll=Mock(return_value=None)), Mock(side_effect=[[], [bad_receipt]]), state)
+
+    def test_native_screenshot_requires_runtime_liveness_around_draw_receipt(self):
+        for polls in ([0], [None, 0]):
+            read = Mock(side_effect=[[], [self.presentation()]])
+            with self.subTest(polls=polls), self.assertRaisesRegex(RuntimeError, "exited"):
+                wait_for_presented_state(Mock(poll=Mock(side_effect=polls)), read, self.state())
 
     def test_real_input_direction_uses_observed_camera_axes(self):
         self.assertEqual(direction_to(self.state(), [1.3, 8]), (0, -1))

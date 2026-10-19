@@ -1,0 +1,63 @@
+{
+  "proposal_only": true,
+  "append_files": [
+    {
+      "path": "play/parcel-switchyard/FONT-LICENSE.txt",
+      "bytes": 14712,
+      "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b"
+    },
+    {
+      "path": "play/parcel-switchyard/LICENSES.md",
+      "bytes": 1373,
+      "sha256": "c6737ea10236228073e3d6ef051f70411868324581f25d9b6e5d93b720d833eb"
+    },
+    {
+      "path": "play/parcel-switchyard/export-provenance.json",
+      "bytes": 33366,
+      "sha256": "79fa2484668280a9e0531fc25df13a74320bb4af1a2158c077f12f9e129deeae"
+    },
+    {
+      "path": "play/parcel-switchyard/game.pck",
+      "bytes": 115380,
+      "sha256": "a24afd4501eb7e79c09d0318ee0c83c1f5770a00c29ca57b171683d31ff78d50"
+    },
+    {
+      "path": "play/parcel-switchyard/index.html",
+      "bytes": 1949,
+      "sha256": "021f19771fee25d645884ad960c4f28e9fd8ac55c7b2bd0f3edb6b4b337a1f24"
+    },
+    {
+      "path": "play/parcel-switchyard/shell.css",
+      "bytes": 3065,
+      "sha256": "0cd235b7903837db7f1874302e984486450d290f2cf3239bbb8af053523d4464"
+    },
+    {
+      "path": "play/parcel-switchyard/shell.js",
+      "bytes": 11443,
+      "sha256": "374dca046c33a7a7ab091ca213fcb257ddb02af8b1b7c9b1e4b1eff7008e7300"
+    }
+  ],
+  "append_demo": {
+    "case_slug": "parcel-switchyard",
+    "url": "play/parcel-switchyard/index.html",
+    "title": "Parcel Switchyard",
+    "engine": "Godot 4.6.3",
+    "renderer": "gl_compatibility",
+    "threads": false,
+    "localeSupport": [
+      "en",
+      "zh"
+    ],
+    "nativeTextLanguage": "en-zh",
+    "controls": {
+      "en": "Match the next parcel label. Tap a route and Send. Keys 1/2/3 select; Space sends; A auto; P pause; R reset. Portrait controls scroll vertically.",
+      "zh": "匹配下一件包裹标签，轻触线路再发送。1/2/3 选线，空格发送，A 自动，P 暂停，R 重置；竖屏操作区可上下滚动。"
+    },
+    "notes": {
+      "en": "The original game is silent. Exit/reload starts a fresh shift. Web game labels and browser controls support English and Simplified Chinese; the original downloadable native package is unchanged. Export records and exact-head browser acceptance are separate; an export alone is not playability proof. No physical-device, Safari/Firefox or deployment claim.",
+      "zh": "原作无音轨；退出或刷新即开始新班次，Web画面与浏览器控件支持中英文，原始原生下载包保持不变。导出记录与当前版本真实浏览器验收分开，导出成功不等于玩法通过；未声称实体设备、Safari、Firefox 或上线验证。"
+    }
+  },
+  "reuse_existing_runtime": "play/runtime/godot-4.6.3.*",
+  "requires_real_browser_and_visual_review": true
+}

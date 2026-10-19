@@ -643,6 +643,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -650,6 +659,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -672,14 +691,14 @@
         "src": "docs/showcase/crate-lookdev/hero.jpg",
         "alt": "Blender Cycles 渲染的橄榄绿风化长木箱，带金属包角、锁扣和断裂压条"
       },
-      "evidence_label": "公开案例 · 本轮未复现",
-      "evidence_scope": "整合 2026-09-10 发布的真实作品与源仓库测量记录。源报告声明 Blender 建模通过 DCC-MCP 完成；本轮仅下载、核对哈希、优化网页图和审阅公开证据，没有重新运行 Designer、Blender 或 DCC 工具。公开包未提供完整 tools/call 轨迹，不能据此声称本轮全程 MCP 复现。",
+      "evidence_label": "历史成果 · 新镜头仅为未完成阶段证据",
+      "evidence_scope": "2026-10-12 新镜头尝试未达到本轮目标：真实重开固定哈希历史源，保存重开两份新相机工程，完成55个全景帧；仅交付前50帧、约2.083秒真实片段。原计划六秒144帧未完成，多次宿主 -9 退出后已停止重试，原因未确定。片段技术解码通过不等于高品质整片验收。原模型、Designer图、历史成果与原始制作未知归属保留，不以本次镜头记录补造历史证据。",
       "summary": "把木纹、掉漆、铁锈与划痕分成可编辑材质图，再把厚度、断裂、纤维和接触阴影落实到一个可重开的木箱场景。178 个箱体网格、两套 Designer 图和 13 张打包贴图组成最终 lookdev。",
       "goal": "从已有参考建立一只约 2.2 m 长的风化木箱，保留宽木板、薄压条、金属包角和曲线锁扣。用程序化材质控制旧漆和锈蚀，以真实几何构造断裂轮廓，并让导出的 PBR 贴图在 Blender 中保持正确色彩空间与物理纹理密度。",
       "prompt": {
         "kind": "reusable",
         "text": "通过 DCC-MCP，在 Substance 3D Designer 与 Blender 中制作一只约 2.2 m 长的风化木箱。使用宽木板、30 mm 压条、包角铆钉与弯曲锁扣；橄榄绿油漆自然剥落，铁锈与划痕分别控制金属和粗糙度。压条应有多层断裂与附着的渐尖木纤维，前下板有渐尖凹痕。木材输出 2048×2048、钢材输出 1024×1024 PBR 贴图，保留可编辑 SBS/SBSAR；使用 sRGB 颜色贴图和 Non-Color 数据贴图。木纹细节保持约 0.45 m 一次的物理密度。让四个支脚与地面真实接触，使用 Cycles 输出主图、断裂与凹痕细节、UV 检查图和完整节点图。重新打开保存的场景与材质，核对贴图打包字节、网格数、包围盒和文件哈希。记录实际 MCP 工具调用；遇到不可用能力明确报告，不绕用直接软件脚本。",
-        "note": "原始对话提示词没有公开。此文本根据公开 README 与 validation 改写，用于下一次复现；本轮未执行，也不是原始提示词。参考图原由 Codex 图像生成产生，属于历史输入，不是 DCC 成品。"
+        "note": "以下提示词保留2026-10-01归档中的原资产制作改写，不是逐字对话。2026-10-12只尝试新增镜头，未重做完整建模或材质流程，且六秒影片未完成。实际相机recipe与阶段证据另见资源。"
       },
       "environment": [
         {
@@ -701,6 +720,26 @@
         {
           "label": "适配器 / Core",
           "value": "未公开记录（unrecorded）"
+        },
+        {
+          "label": "本次实测宿主",
+          "value": "Blender 4.5.14 LTS · Cycles CPU"
+        },
+        {
+          "label": "本次MCP",
+          "value": "dcc-mcp-blender 0.2.16 · Core 0.20.42"
+        },
+        {
+          "label": "实际阶段片段",
+          "value": "960×540 · 24 fps · 50原生帧 · 约2.083秒 · 静音"
+        },
+        {
+          "label": "制作状态",
+          "value": "未完成：55/144帧检查点；六秒目标未达成"
+        },
+        {
+          "label": "渲染设置",
+          "value": "12样本 · OpenImageDenoise · 两个渲染线程"
         }
       ],
       "tools": [
@@ -715,6 +754,18 @@
         {
           "name": "DCC-CUA 1.8.2",
           "description": "源 manifest 记录节点图截图来源。截图展示 37 个木材与 35 个钢材作者节点，不展开 Adobe 库内部图。"
+        },
+        {
+          "name": "parent_object / set_keyframe / save_scene / open_scene / render_scene",
+          "description": "本次真实调用新增相机动画并保存重开；55帧落盘。父子关系验证误差与宿主退出均保留证据，未宣称完成缺失帧。"
+        },
+        {
+          "name": "export_gltf / import_file",
+          "description": "真实GLB仅几何导出与空场景重导入，核对179网格及两处包围盒，不宣称材质等价。"
+        },
+        {
+          "name": "execute_python",
+          "description": "明确记录的MCP fallback：设置typed工具缺失的资源选项，并在重放验收时读取相机矩阵和详细渲染状态。"
         }
       ],
       "steps": [
@@ -765,9 +816,28 @@
             "src": "docs/showcase/crate-lookdev/hero.jpg",
             "alt": "最终 Cycles 主图"
           }
+        },
+        {
+          "title": "未完成检查点：真实相机制作与重放",
+          "description": "从固定哈希源创建全景与近景动画，真实保存重开并验收recipe。资源中保留55帧检查点和多次宿主退出记录；这里只展示前50帧阶段片段，不作为本轮完成片。",
+          "image": {
+            "src": "docs/showcase/crate-lookdev/film-2026-10-12/poster.jpg",
+            "alt": "真实阶段片段第49帧"
+          }
         }
       ],
       "results": [
+        {
+          "src": "docs/showcase/crate-lookdev/film-2026-10-12/crate-excerpt.mp4",
+          "poster": "docs/showcase/crate-lookdev/film-2026-10-12/poster.jpg",
+          "alt": "未完成镜头尝试：50帧真实阶段片段",
+          "caption": "阶段证据，未达本轮目标：960×540、24fps、50个真实原生帧、约2.083秒、静音。六秒144帧影片未完成，不作为高品质最终验收。"
+        },
+        {
+          "src": "docs/showcase/crate-lookdev/film-2026-10-12/contact-sheet.jpg",
+          "alt": "部分片段解码后的第1、10、20、30、40、50帧",
+          "caption": "从实际交付MP4解码的阶段检查帧；只覆盖短片段，不代表整片验收，也不是软件界面截图。"
+        },
         {
           "src": "docs/showcase/crate-lookdev/hero.jpg",
           "alt": "风化木箱最终 Cycles 主图",
@@ -801,7 +871,7 @@
       ],
       "checks": [
         {
-          "name": "源图一致性（本轮）",
+          "name": "源图一致性（2026-10-01归档）",
           "result": "pass",
           "observed": "9 张下载原图的 SHA-256 与原 manifest 一致；网页副本单独记录哈希。"
         },
@@ -821,24 +891,51 @@
           "observed": "四支脚 gap=0.0 m；箱体包围盒约 2.252 × 1.527 × 1.138 m。"
         },
         {
-          "name": "完整 MCP 调用轨迹",
+          "name": "原始资产制作MCP轨迹",
           "result": "fail",
           "observed": "公开包未包含完整 tools/call 日志、参数或 adapter/core 版本；本轮没有补造记录。"
         },
         {
-          "name": "工程源码包静态审核（本轮）",
+          "name": "源码包静态审核（2026-10-01归档）",
           "result": "pass",
           "observed": "本轮归档已完整解压并核对 37 个成员的字节数与哈希；原件未改，离线路径/凭据审核无发现。ZIP 151.4 MiB，完整 SHA-256 见 downloads.json。Blender / Designer 本轮未重开、重算或重新渲染。"
+        },
+        {
+          "name": "本轮六秒完成片目标",
+          "result": "fail",
+          "observed": "未完成。计划144帧，仅完成55个全景帧；宿主反复退出后停止渲染。"
+        },
+        {
+          "name": "整片高品质最终验收",
+          "result": "not_run",
+          "observed": "未达到验收条件；2.083秒阶段片段不能代替完整影片。"
+        },
+        {
+          "name": "新工程保存重开与recipe",
+          "result": "pass",
+          "observed": "两份工程实际重开：187对象、179网格、7材质。公开recipe实跑后，相机采样矩阵与生产工程差值均0，渲染参数一致。"
+        },
+        {
+          "name": "仅几何GLB导出重导入",
+          "result": "pass",
+          "observed": "179网格导出并导入空场景，两处木板包围盒差值为0；无导出材质或动画。"
+        },
+        {
+          "name": "部分片段完整解码",
+          "result": "pass",
+          "observed": "50帧完整解码、960×540、24fps、2.083333秒，无音轨；55个本地原生帧均有不同RGB哈希。"
         }
       ],
       "limitations": [
-        "本轮没有在 DCC 中复现；所有软件测量取自公开历史记录，网页图哈希核对才是本轮实际执行。",
+        "本次只交付50帧阶段片段，不标作高品质最终成片。源工程和55帧检查点保留；退出原因未确定，未以降画质、插帧或重复静帧凑足时长。",
+        "2026-10-01归档未在DCC中复现。2026-10-12实际重开并尝试相机动画，未重做原始建模、Designer图或SBS计算；影片目标仍未完成。",
         "原始提示词、完整 MCP 工具调用日志与 adapter/core 版本未公开。",
         "历史参考图由 Codex 图像生成产生；它是参考输入，不是通过 DCC-MCP 制作的成品。",
         "尺寸、风化与损伤是艺术估计；边缘磨损取自 Designer 板材分布，不是曲率烘焙。",
         "这是密集 lookdev 场景：平铺/重叠 UV，不是游戏可用拓扑或唯一烘焙图集。",
         "源记录只声明可重开和重算，不声明重算 PNG 字节完全一致。",
-        "源仓库整体声明 MIT；作品、生成参考图与材质没有另列许可。Adobe 内置库资源仅通过 sbs:// 引用，不在本站分发。"
+        "源仓库整体声明 MIT；作品、生成参考图与材质没有另列许可。Adobe 内置库资源仅通过 sbs:// 引用，不在本站分发。",
+        "公开片段使用原第1–50帧；额外检查点51–55采用OIDN两线程。同帧校准最大通道差2/255，非逐像素一致，未证明峰值内存下降。旧ZIP仍是历史源，新镜头由固定输入和recipe重建。"
       ],
       "resources": [
         {
@@ -900,6 +997,46 @@
         {
           "label": "源许可",
           "url": "docs/showcase/crate-lookdev/LICENSE.source.txt"
+        },
+        {
+          "label": "未完成镜头尝试：中英说明",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/README.md"
+        },
+        {
+          "label": "实际MCP重放客户端",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/replay.py"
+        },
+        {
+          "label": "带显式partial选项的编码器",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/compose.py"
+        },
+        {
+          "label": "50帧片段完整解码与哈希",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/crate-excerpt.verification.json"
+        },
+        {
+          "label": "55帧本地检查点与未完成状态",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/checkpoint.json"
+        },
+        {
+          "label": "保存重开、recipe和GLB验收",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/native-verification.json"
+        },
+        {
+          "label": "最小MCP操作摘要（非完整日志）",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/mcp-operation-summary.json"
+        },
+        {
+          "label": "阶段片段逐帧与视觉检查",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/visual-review.json"
+        },
+        {
+          "label": "本次模型配置",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/model-configuration.json"
+        },
+        {
+          "label": "真实缺陷与宿主中断记录",
+          "url": "docs/showcase/crate-lookdev/film-2026-10-12/adapter-feedback.md"
         }
       ],
       "credits": {
@@ -911,7 +1048,7 @@
         "url": "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer/blob/38623dd51721a958b8dc5d2e8957e991908333ac/docs/showcase/crate-lookdev/README.md",
         "commit": "38623dd51721a958b8dc5d2e8957e991908333ac"
       },
-      "verified_at": "2026-10-01",
+      "verified_at": "2026-10-12",
       "model_attribution": [
         {
           "stage": "策划与艺术方向",
@@ -975,6 +1112,33 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
+        },
+        {
+          "stage_id": "supplement_creation",
+          "stage": "未完成镜头尝试 / DCC操作",
+          "model": "gpt-6-astra",
+          "reasoning_effort": "ultra",
+          "record_status": "configured",
+          "basis": "2026-10-12任务requested/accepted配置均为gpt-6-astra / ultra；不是独立后端身份鉴证。",
+          "scope": "仅本次新相机、真实保存重开、导出与已完成帧，不覆盖原资产制作或未完成目标。"
+        },
+        {
+          "stage_id": "supplement_post_production",
+          "stage": "阶段片段编码与记录",
+          "model": "gpt-6-astra",
+          "reasoning_effort": "ultra",
+          "record_status": "configured",
+          "basis": "2026-10-12任务requested/accepted配置均为gpt-6-astra / ultra；不是独立后端身份鉴证。",
+          "scope": "仅50帧部分交付、55帧检查点、解码和复用文档，不代表整片最终验收。"
         }
       ],
       "revision_notes": [
@@ -982,6 +1146,21 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
+        },
+        {
+          "version": "未完成镜头检查点",
+          "date": "2026-10-12",
+          "change": "新增2.083秒真实阶段片段、55帧检查点、实跑recipe与故障证据。六秒目标未达成，不替换历史作品、不补填历史归属。"
         }
       ]
     },
@@ -1289,6 +1468,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1296,6 +1484,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1625,6 +1823,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1634,9 +1841,19 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         },
         {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
           "version": "独立新增 MIDI 配乐版",
           "date": "2026-10-09",
           "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -1986,6 +2203,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -1995,9 +2221,19 @@
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
         },
         {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
           "version": "独立新增 MIDI 配乐版",
           "date": "2026-10-09",
           "change": "真实 REAPER MIDI/ReaSynth 配乐及效果音按本片时间制作；原静音版和所有画面/原工程许可保持不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         }
       ]
     },
@@ -2302,6 +2538,15 @@
           "basis": "已有审阅报告自述模型与强度，但尚未核验当时被接受的配置回执；两字段保留未知。",
           "scope": "2026-10-07 检查公开页面、下载文件、哈希、归档和原生文件结构；未重新运行 DCC 或验收交互编辑。",
           "stage_id": "review_technical"
+        },
+        {
+          "stage_id": "review",
+          "stage": "本次归属与站点发布复核",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "原任务记录自报配置为 gpt-6-astra / ultra，但原始接受配置回执未导出，当前无法核验；因此模型与推理强度保持未知。自报历史仅作为待核验线索，不是后端身份鉴证，也不追认原始制作或此前艺术审查。",
+          "scope": "2026-10-07 对 PR #17 最终版本复核归属字段、校验代码和桌面/手机页面截图；最终 head bfa80ead316eb182863ffb5d6f48b71f1c87c766。未重新运行 DCC、制作原始资产或重做艺术品质验收。"
         }
       ],
       "revision_notes": [
@@ -2309,6 +2554,16 @@
           "version": "文档修订 2026-10-07",
           "date": "2026-10-07",
           "change": "补录分阶段模型名、推理强度与独立复核范围。历史未知保持未知；图像、影片和原生工程字节未改变，不计为新案例。"
+        },
+        {
+          "version": "发布复核归属补录",
+          "date": "2026-10-07",
+          "change": "补充本次归属与站点发布复核的配置模型和推理强度，并说明原始配置回执未导出；原制作及较早审查记录不据此改写，作品字节不变。"
+        },
+        {
+          "version": "发布复核归属证据状态更正",
+          "date": "2026-10-11",
+          "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
         },
         {
           "version": "新增真实软件视频 2026-10-12",
@@ -4010,6 +4265,546 @@
           "version": "v1 原生光路解谜",
           "date": "2026-10-11",
           "change": "真实MCP制作；实际键鼠三关通关；修正反射术语并重新出图，包含小窗口、原生ZIP与PCK重开证据。"
+        }
+      ]
+    },
+    {
+      "slug": "orbital-loom",
+      "title": "Orbital Loom · 轨道织机",
+      "subtitle": "Blender · 三重万向环与连续原生动画",
+      "software": [
+        "Blender"
+      ],
+      "capabilities": [
+        "建模",
+        "材质",
+        "灯光",
+        "动画",
+        "渲染",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/orbital-loom/hero.jpg",
+        "alt": "墨绿底座上的黄铜三重轨道动雕塑，完整底座与真实接触阴影"
+      },
+      "evidence_label": "本轮实际运行 · 官方 DCC-MCP",
+      "evidence_scope": "本次制作通过官方 Blender 适配器的 embedded MCP 完成真实场景创建、保存重开与连续逐帧渲染。定制造型使用官方 scripting escape hatch；帧切换、渲染配置、场景打开/保存及 render_scene 调用使用 typed 工具。gateway 明确禁用，不声称 gateway CLI 或 GUI 验收。",
+      "summary": "三重驱动环绕白瓷核心反向转动，露出轴承与连接轴；连续相机运动展示黄铜、墨绿搪瓷与刻度底座。",
+      "goal": "验证嵌套父子变换、表达式驱动、相机约束、机械净距、真实连续影片、原生便携与动画导出。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "查询当前公开动雕塑与官方免费技能，原创设计一件桌面轨道动雕塑。使用真实 Blender DCC-MCP，保留可编辑几何、材质、三重旋转driver、相机Track To与连续动画。先低清审帧修正轴向和裁切，再真实逐帧CPU渲染。检查全时段运动范围、环与立柱BVH碰撞、原生保存重开、烘焙GLB重导及影片时长和连续帧。公开原生工程、影片与复现代码，诚实区分scripting和typed覆盖，不以静帧幻灯片冒充动作。",
+        "note": "可复用说明，非用户逐字原话。"
+      },
+      "environment": [
+        {
+          "label": "Host",
+          "value": "Blender 4.5.14 LTS · CPU Cycles"
+        },
+        {
+          "label": "Adapter / Core / CLI",
+          "value": "0.2.16 / 0.20.42 / 0.20.42；gateway_port=0"
+        },
+        {
+          "label": "Video",
+          "value": "960 × 540 · 24 fps · 360 independent frames · 15 seconds · 16 samples"
+        }
+      ],
+      "tools": [
+        {
+          "name": "blender_scripting__execute_script_file",
+          "description": "原创几何与驱动组装、BVH检查、动画导出及脱敏；这是明确的scripting fallback。"
+        },
+        {
+          "name": "blender_scene__open_scene / save_scene",
+          "description": "真实原生保存重开。"
+        },
+        {
+          "name": "blender_animation__set_current_frame / blender_render__render_scene",
+          "description": "逐帧切换并执行真实Cycles渲染，每帧独立写盘。"
+        },
+        {
+          "name": "blender_render__set_render_settings",
+          "description": "配置真实输出规格并读回。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "设计与官方工具检查",
+          "description": "查阅当代轨道动雕塑与官方Extra Mesh Objects。用原生几何保持最少依赖，没有复制参考素材。"
+        },
+        {
+          "title": "真实预览修订",
+          "description": "修正父子变换更新、左右轴连接和底座裁切，外移立柱保证运动净距。"
+        },
+        {
+          "title": "全时段几何检查",
+          "description": "求值所有帧的轨道极值，每隔5帧检查环之间及环与立柱BVH交叉；保留数值证据。"
+        },
+        {
+          "title": "连续影片与原生回环",
+          "description": "原生与GLB均重新打开检查，影片由连续独立渲染帧编码，未插帧或复制静图。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/orbital-loom/orbital-loom.mp4",
+          "alt": "Orbital Loom真实连续动画",
+          "caption": "15秒 · 960×540 · 24fps · 360独立Cycles帧 · 静音"
+        },
+        {
+          "src": "docs/showcase/orbital-loom/hero.jpg",
+          "alt": "轨道展开的正面产品视图",
+          "caption": "正式动画第1帧的网页JPEG副本"
+        },
+        {
+          "src": "docs/showcase/orbital-loom/quarter-turn.jpg",
+          "alt": "外环转为水平的动态姿态",
+          "caption": "正式动画第90帧"
+        },
+        {
+          "src": "docs/showcase/orbital-loom/film-contact-sheet.jpg",
+          "alt": "真实成片解码关键帧联系表",
+          "caption": "成片均匀抽取12帧用于视觉QA"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Typed driver通道",
+          "result": "fail",
+          "observed": "rotation_euler.z返回ValueError；无索引vector回退仅配置X且额外创建Y/Z零driver。实际制作明确用scripting指定索引。"
+        },
+        {
+          "name": "原生与驱动",
+          "result": "pass",
+          "observed": "122 objects，3个有效driver、Track To约束；脱敏压缩native重开且无外部贴图。"
+        },
+        {
+          "name": "机械净距",
+          "result": "pass",
+          "observed": "Blender场景单位：轨道到底座最小垂直净距0.382，轨道到立柱最小水平净距0.063；采样BVH无交叉。"
+        },
+        {
+          "name": "动画GLB",
+          "result": "pass",
+          "observed": "重导115对象、3个烘焙动画对象，抽样矩阵确实变化。"
+        },
+        {
+          "name": "真实视频",
+          "result": "pass",
+          "observed": "ffprobe与全片解码通过；360独立源帧、24fps、15秒。"
+        },
+        {
+          "name": "浏览器播放 / GUI",
+          "result": "not_run",
+          "observed": "云浏览器明确拒绝file URL；未换路绕过，未声称GUI验收。"
+        }
+      ],
+      "limitations": [
+        "本案例驱动的typed driver修复为独立Draft PR #298；本轮成片没有升级或使用修复版。",
+        "不是制造级工程认证；刻意轴承连接不作为碰撞。",
+        "嵌入MCP通过；shared gateway/CLI call未通过，具体兼容性记录随附。",
+        "GLB不含摄影棚、相机和原生文字；不声称跨渲染器材质一致。",
+        "公开响应为最小脱敏子集，非完整原始trace。",
+        "确切backend model与reasoning effort无独立核验，均unknown。"
+      ],
+      "resources": [
+        {
+          "label": "Native source package with licenses",
+          "url": "docs/showcase/orbital-loom/orbital-loom-source.zip"
+        },
+        {
+          "label": "Native Blender scene",
+          "url": "docs/showcase/orbital-loom/orbital-loom.blend"
+        },
+        {
+          "label": "Animated GLB",
+          "url": "docs/showcase/orbital-loom/orbital-loom-animated.glb"
+        },
+        {
+          "label": "Video",
+          "url": "docs/showcase/orbital-loom/orbital-loom.mp4"
+        },
+        {
+          "label": "Reproduce",
+          "url": "docs/showcase/orbital-loom/build_scene.py"
+        },
+        {
+          "label": "Validation",
+          "url": "docs/showcase/orbital-loom/validation.json"
+        },
+        {
+          "label": "MCP evidence",
+          "url": "docs/showcase/orbital-loom/mcp-summary.json"
+        },
+        {
+          "label": "References and plugins",
+          "url": "docs/showcase/orbital-loom/references.md"
+        },
+        {
+          "label": "Toolchain findings",
+          "url": "docs/showcase/orbital-loom/toolchain-findings.md"
+        },
+        {
+          "label": "Typed driver regression",
+          "url": "docs/showcase/orbital-loom/driver-probe.json"
+        },
+        {
+          "label": "Guide",
+          "url": "docs/showcase/orbital-loom/README.md"
+        },
+        {
+          "label": "Licenses",
+          "url": "docs/showcase/orbital-loom/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "No new license grant for this original case, including artwork, native assets, media and reproduction scripts; rights reserved. Existing site-code MIT license remains separate.",
+        "note": "原创几何、材质与动画，无外部模型、贴图、音乐或字体。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/f831dc8a4a87d70eff0b1ca7eafca87058f20bd7",
+        "commit": "f831dc8a4a87d70eff0b1ca7eafca87058f20bd7",
+        "title": "Inspected official adapter source reference; installed wheel version is recorded separately, not a binary identity claim."
+      },
+      "verified_at": "2026-10-11",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "Planning",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "creation",
+          "stage": "Native creation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "code",
+          "stage": "Reproduction scripts",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "reference",
+          "stage": "Official documentation",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "JPEG derivatives",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "Actual image review",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "Native and tool checks",
+          "model": "unknown",
+          "reasoning_effort": "unknown",
+          "record_status": "unknown",
+          "basis": "No independently checked backend configuration receipt.",
+          "scope": "This Orbital Loom production/review stage."
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1",
+          "date": "2026-10-11",
+          "change": "Original native procedural creation, continuous film, clearance checks, native roundtrip and baked animation export."
+        },
+        {
+          "version": "Review integration 2026-10-18",
+          "date": "2026-10-18",
+          "change": "Clarified the historical tool scope, added bilingual presentation and the report artifact layout, and tightened the export assertion to the three expected animated-object identities. Native scene, GLB, images, film and original production measurements are unchanged. The source package now includes the revised guard and a package-specific README."
+        }
+      ]
+    },
+    {
+      "slug": "parcel-switchyard",
+      "title": "Parcel Switchyard · 包裹转辙场",
+      "subtitle": "Godot · 双进料轨道与三站点互动分拣",
+      "software": [
+        "Godot"
+      ],
+      "capabilities": [
+        "交互",
+        "游戏原型",
+        "程序化绘制",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/parcel-switchyard/hero.png",
+        "alt": "Godot实际运行画面：奶油色操作面板、深蓝分拣场、三色目的地与包裹输送轨道"
+      },
+      "evidence_label": "真实 typed MCP 制作 · 原生像素与输入验证",
+      "evidence_scope": "原生脚本、场景、挂载与项目设置由实际 typed Gateway 调用完成。云端本机 headless 可制作及逻辑验证，但不能渲染；真实画面与视频来自固定官方 Godot 的 CI/Xvfb 原生运行。包含实际键鼠输入、保存重开、PCK 导出重跑。没有把 CI 媒体生成描述为 MCP 渲染返回。",
+      "summary": "一个克制、温暖的微型包裹分拣游戏：从两条进料带发送包裹，在港口、花园和市场之间选对路线。保留可编辑工程、实际调用证据、短片与资源包。",
+      "goal": "验证 Godot typed MCP 能否把原创可互动构想变成可保存、重开、测试与打包的原生工程，并严格区分制作证据、渲染环境和真实输入验收。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "在干净的 Godot 工程里制作原创包裹分拣小游戏。用两条进料轨道、一个转辙器和三个带文字标签的目的地建立清晰玩法。提供键盘与鼠标操作、正确与错误计数、自动发送和重置。采用原创程序化图形，不引入私有项目或外部素材。先发现、加载、描述真实 typed DCC-MCP 工具，再创建脚本、场景、挂载并保存。保留请求响应、原生工程、编译与逻辑测试、实际画面、键鼠验收和打包重跑证据；如 headless 渲染拒绝应如实记录。",
+        "note": "根据本次实际工作整理的复现说明，不是用户私聊逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "宿主",
+          "value": "Godot 4.6.3 · Linux x86_64"
+        },
+        {
+          "label": "适配器 / Core / CLI",
+          "value": "dcc-mcp-godot 0.9.6 · Core / CLI 0.20.42"
+        },
+        {
+          "label": "真实渲染",
+          "value": "CI/Xvfb · Compatibility OpenGL · Mesa llvmpipe"
+        },
+        {
+          "label": "媒体",
+          "value": "1280 × 720 · 8 秒 · H.264 · 30 fps"
+        }
+      ],
+      "tools": [
+        {
+          "name": "godot_script__create_script / edit_script / attach_script",
+          "description": "通过真实 gateway 写入原创 GDScript、修订并挂到原生场景。"
+        },
+        {
+          "name": "godot_scene_management__create_scene / save_scene",
+          "description": "创建 Node2D 原生场景并持久保存。"
+        },
+        {
+          "name": "godot_project_management__set_project_setting",
+          "description": "设置主场景、窗口尺寸与渲染模式。"
+        },
+        {
+          "name": "godot_script__validate_script",
+          "description": "实际宿主编译检查；最终逻辑另由原生运行重新验证。"
+        },
+        {
+          "name": "godot_editor__render_scene_preview",
+          "description": "在本机 headless 环境真实拒绝，不把失败包成成功。后续像素由正常图形 CI 运行取得。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先让分拣规则可检查",
+          "description": "确定性测试涵盖三个站点、错分反馈、满载边界、键盘路线、自动开关与重复重置。"
+        },
+        {
+          "title": "真实调用创建原生工程",
+          "description": "脚本、场景、挂载、保存和项目设置均保留 typed gateway 请求响应。可移植副本移除适配器安装信息，不冒充再次 MCP 制作。"
+        },
+        {
+          "title": "审查真实像素再修订",
+          "description": "首轮发现港口标签与状态文字靠得太近，经 MCP 修正后重新捕获。保留固定尺寸和小窗口画面，区分布局拟合与手机可用性。",
+          "image": {
+            "src": "docs/showcase/parcel-switchyard/small-window.png",
+            "alt": "真实960×540 Godot小窗口画面；完整布局可见，小字仍以桌面为目标"
+          }
+        },
+        {
+          "title": "真正操作并重新打包",
+          "description": "真实X11键盘和鼠标路线完成两次配送、重复重置、自动开关与第三路线选择；PCK资源包重新启动后通过逻辑检查。",
+          "image": {
+            "src": "docs/showcase/parcel-switchyard/interaction.png",
+            "alt": "实际键盘与鼠标操作后的Godot画面，配送计数为二"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/parcel-switchyard/demo.mp4",
+          "alt": "Parcel Switchyard原生8秒演示",
+          "caption": "Godot Movie Maker实际输出，随后转为H.264。无配音、无音轨；自动演示展示轨道、包裹和计数变化。"
+        },
+        {
+          "src": "docs/showcase/parcel-switchyard/hero.png",
+          "alt": "最终原生分拣场静帧",
+          "caption": "未修图的Godot viewport捕获；状态文字与港口标签已分离。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实 MCP 制作",
+          "result": "pass",
+          "observed": "11条成功typed制作调用，含源脚本、挂载、保存、设置及视觉修订；保留真实返回。"
+        },
+        {
+          "name": "原生逻辑与实际输入",
+          "result": "pass",
+          "observed": "9项确定性逻辑检查；真实键鼠路径完成两次配送、重复重置与自动开关。"
+        },
+        {
+          "name": "原生重开与导出",
+          "result": "pass",
+          "observed": "Godot编辑器重新导入、原生运行、PCK导出及资源包再运行通过。"
+        },
+        {
+          "name": "本机 headless 渲染",
+          "result": "fail",
+          "observed": "dummy renderer 无像素回读，官方 typed 预览按设计拒绝；CI图形运行另行验证。"
+        },
+        {
+          "name": "视觉与小窗口",
+          "result": "pass",
+          "observed": "审查实际最终静帧、交互帧、小窗口与视频采样帧；修复首轮标签重叠。小窗口检查只证明布局完整。"
+        }
+      ],
+      "limitations": [
+        "2026-10-11 原始原生版本面向桌面1280×720；旧960×540截图不代表手机或触屏验收。",
+        "2026-10-11 原始交付未含Web；2026-10-18新增独立Web适配，验收记录与原生证据分开。原始PCK仍需兼容Godot。",
+        "美术由可编辑GDScript程序化绘制，并非逐物件可编辑的场景网格。",
+        "本机headless制作与CI原生渲染是不同验证阶段；没有伪造MCP渲染成功。"
+      ],
+      "resources": [
+        {
+          "label": "原生工程 ZIP",
+          "url": "docs/showcase/parcel-switchyard/Parcel-Switchyard-Source.zip"
+        },
+        {
+          "label": "Godot资源包 PCK",
+          "url": "docs/showcase/parcel-switchyard/parcel.pck"
+        },
+        {
+          "label": "制作与复现说明",
+          "url": "docs/showcase/parcel-switchyard/README.md"
+        },
+        {
+          "label": "实际MCP请求与响应",
+          "url": "docs/showcase/parcel-switchyard/evidence/mcp-calls.json"
+        },
+        {
+          "label": "CI与源文件绑定证据",
+          "url": "docs/showcase/parcel-switchyard/evidence/ci-verification.json"
+        },
+        {
+          "label": "机器可读验证",
+          "url": "docs/showcase/parcel-switchyard/validation.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/parcel-switchyard/manifest.json"
+        },
+        {
+          "label": "许可边界",
+          "url": "docs/showcase/parcel-switchyard/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "本案例素材与工程不随站点MIT重新许可；没有新增CC0或版权授权。详见LICENSES.md。",
+        "note": "原创程序化画面；无私有项目、第三方素材包或外部图像。Godot与适配器不打包分发。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/showcase/tree/c80c3df08e45e14270e0432477599c90b07887d4/docs/showcase/parcel-switchyard/native",
+        "commit": "c80c3df08e45e14270e0432477599c90b07887d4",
+        "title": "实际CI验证的原生源文件版本"
+      },
+      "verified_at": "2026-10-11T14:23:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "原创分拣玩法与界面规划"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "原生制作",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "实际typed MCP写入和场景保存"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "玩法、绘制、测试与输入观测"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考输入",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "无外部参考图生成，原创程序化构图"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "Godot原生帧与FFmpeg H.264编码"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "实际图像与视频采样审查；含独立视觉复核"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "未知",
+          "reasoning_effort": "未知",
+          "record_status": "unknown",
+          "basis": "未取得经独立核验的模型和推理配置记录，不从结果反推。",
+          "scope": "源文件哈希、真实调用和测试结果审查"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 原生互动作品",
+          "date": "2026-10-11",
+          "change": "由真实typed MCP创建；修复像素审查发现的标签重叠，补齐真实键鼠、原生短片和资源包重开验证。"
+        },
+        {
+          "version": "v2 增量 Web 与竖屏适配",
+          "date": "2026-10-18",
+          "change": "保留原始规则、素材与历史记录；新增标准Web导出、双语外壳及竖屏控件。来源和无界面测试通过；真实浏览器、触控与视觉验收另由当前版本CI记录，不从旧桌面截图推定。"
         }
       ]
     }

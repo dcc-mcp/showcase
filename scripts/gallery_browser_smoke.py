@@ -15,6 +15,15 @@ from browser_preview import safe_error_text
 from localization_browser_smoke import MountHandler
 
 
+def interactive_slugs(cases, manifest):
+    """Expected filter membership comes from the approved inventory, not the DOM."""
+    selected = {case['slug'] for case in cases}
+    slugs = [demo['case_slug'] for demo in manifest['demos']]
+    if len(slugs) != len(set(slugs)) or not set(slugs) <= selected:
+        raise ValueError('Playable inventory has duplicate or unselected cases')
+    return sorted(slugs)
+
+
 def run(site: Path, output: Path, expected_head: str):
     from playwright.sync_api import sync_playwright, expect
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
@@ -29,6 +38,7 @@ def run(site: Path, output: Path, expected_head: str):
     base = origin + '/showcase/'
     source_cases = json.loads(Path('collection.json').read_text(encoding='utf-8'))['cases']
     case_count = len(source_cases)
+    expected_interactive = interactive_slugs(source_cases, json.loads(Path('play/manifest.json').read_text(encoding='utf-8')))
     errors, requests = [], []
     page = None
     stage = 'launch'
@@ -106,10 +116,12 @@ def run(site: Path, output: Path, expected_head: str):
                 page.locator('#empty-reset').click()
                 expect(page.locator('.case-card:visible')).to_have_count(case_count)
                 page.locator('[data-filter="media"] [data-value="interactive"]').click()
-                expect(page.locator('.case-card:visible')).to_have_count(2)
+                expect(page.locator('.case-card:visible')).to_have_count(len(expected_interactive))
+                assert page.locator('.case-card:visible').evaluate_all('(cards)=>cards.map(c=>c.dataset.case).sort()') == expected_interactive
                 opposite = 'zh' if locale == 'en' else 'en'
                 page.locator('[data-locale-link="' + opposite + '"]').click()
-                expect(page.locator('.case-card:visible')).to_have_count(2)
+                expect(page.locator('.case-card:visible')).to_have_count(len(expected_interactive))
+                assert page.locator('.case-card:visible').evaluate_all('(cards)=>cards.map(c=>c.dataset.case).sort()') == expected_interactive
                 assert 'media=interactive' in page.url
                 checked(locale + ': keyboard start, filter cleanup, empty/reset, locale query preservation')
                 requests.clear()

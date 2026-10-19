@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "godot_application": "Godot",
+  "godot_version": "4.6.3",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 687,
+      "sha256": "086443237f8b78d5da45b990526cb1ef999d408fdaa8274186d6d1f51d8d08b3"
+    },
+    {
+      "path": "Parcel-Switchyard-Source.zip",
+      "bytes": 9554,
+      "sha256": "903a313b73f22e64e4d2c764c1107d2468658e2d753c7e5b8dbe3d3ace87fc8e",
+      "container_kind": "ZIP",
+      "member_count": 8
+    },
+    {
+      "path": "demo.mp4",
+      "bytes": 326145,
+      "sha256": "b8c9ea1482bc057f23814e6d417f6a0fa2d6ca134e1806cf93274de73f672ce6"
+    },
+    {
+      "path": "evidence/ci-verification.json",
+      "bytes": 2847,
+      "sha256": "754b42153155c3123713be0c64bcd544f8d56be7b513bbe84852deac8d608588"
+    },
+    {
+      "path": "evidence/initial-script.gd.txt",
+      "bytes": 14310,
+      "sha256": "b5411376f267db401931b8e80920c63d9f38c72e9a407164b90f330ef6d1fa99"
+    },
+    {
+      "path": "evidence/interaction-result.json",
+      "bytes": 2125,
+      "sha256": "44b7dccd0b9e3cd98674ca90cce34b8ad3d7d76959bb219c3718dea36c97912d"
+    },
+    {
+      "path": "evidence/logic-tests.json",
+      "bytes": 915,
+      "sha256": "65b610218639a3a29a72eebe99f3822135d1781995aea4321e7035cc286ec0be"
+    },
+    {
+      "path": "evidence/mcp-calls.json",
+      "bytes": 10615,
+      "sha256": "4a588e5a049a5c71e00d68c3041e146d0b4ed7b78d4b8ac9dd7beee1a2be8ba2"
+    },
+    {
+      "path": "evidence/native-render.txt",
+      "bytes": 957,
+      "sha256": "db8e5fb18e202530d0211a61b91323c9237885128b40012a818528308c5ac893"
+    },
+    {
+      "path": "evidence/video-info.json",
+      "bytes": 2188,
+      "sha256": "3c4c7036387620fbeb4fe54da365a6fbcba0ebbe88265247cb4bda2569c88dde"
+    },
+    {
+      "path": "hero.png",
+      "bytes": 133692,
+      "sha256": "c90a0f36b1be223fd008067e78a112bdc50f36b580d4cc4cc82ee7f05df6a36b",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "interaction.png",
+      "bytes": 137336,
+      "sha256": "f0b4c00c32ea94bfd6d823db3ddff2d031dc926aa4e035708f84c1e8076d8d99",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "native/export_presets.cfg",
+      "bytes": 199,
+      "sha256": "52553020b4ebe524cfe6a15ecd53012c40247b86c1c81dafc70e10e483f4afd6"
+    },
+    {
+      "path": "native/main.tscn",
+      "bytes": 241,
+      "sha256": "963b36af8d096fa47e7557cf3cb0199e946bafc5f48da7e6a6ed5fe2f7da5047"
+    },
+    {
+      "path": "native/parcel_game.gd",
+      "bytes": 15991,
+      "sha256": "2152b8f6bcbbe2a3cf6b71c70457953236267ea53f427ae4a608a39792c50b50"
+    },
+    {
+      "path": "native/parcel_game.gd.uid",
+      "bytes": 20,
+      "sha256": "8e7de9f6fe226d59f5a0d1de9f50210388b2220c50dde83a6c4c77aa14da9c72"
+    },
+    {
+      "path": "native/project.godot",
+      "bytes": 520,
+      "sha256": "defd919015021299f76d3aaf68d54feb06c93f4dbf8b458c5a2252b58487cb7b"
+    },
+    {
+      "path": "parcel.pck",
+      "bytes": 16884,
+      "sha256": "926739e71f51c15b7cca8be3a1dd40c3f69f78c011e34d655aae249e1a33eae8",
+      "container_kind": "Godot PCK",
+      "scene_count": 1,
+      "external_dependencies": []
+    },
+    {
+      "path": "small-window.png",
+      "bytes": 106057,
+      "sha256": "86ea3fc97f226182b1c817af05415b47f7a3035b11a270c1fd7f7ef46bb7fabd",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8
+    },
+    {
+      "path": "evidence/archive-tests.json",
+      "bytes": 915,
+      "sha256": "65b610218639a3a29a72eebe99f3822135d1781995aea4321e7035cc286ec0be"
+    }
+  ]
+}

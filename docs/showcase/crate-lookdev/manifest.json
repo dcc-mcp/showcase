@@ -121,10 +121,107 @@
       "sha256": "33e7efad99cced56b908f225ba754951742cb121ef8713afaf2c3513374b3c27",
       "bytes": 1758,
       "role": "Native engineering package identity, checksums, license and offline audit scope"
+    },
+    {
+      "path": "film-2026-10-12/README.md",
+      "bytes": 9440,
+      "sha256": "8ff1a14eaa2f4071cf4a7ad3832155808ec00e638a2b91d1ab8a0d020ebfb9b4",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/adapter-feedback.md",
+      "bytes": 4810,
+      "sha256": "09531285e56655c9d0647479e80a49bf141dd03bc812380ca7f76fbd5e245129",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/checkpoint.json",
+      "bytes": 18259,
+      "sha256": "078c87db16ece20987a48ba347b0a91f5e91506ee84e5b8e541372b67c656c15",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/compose.py",
+      "bytes": 4454,
+      "sha256": "aea9fe4ed5138a124905e3fd81698b884d77555a20925800465adb7431e663f6",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/contact-sheet.jpg",
+      "bytes": 85889,
+      "sha256": "1f96bda5e83b02c87a21d9acdca4a77a723807a0a5935e68a5044ebae78e2020",
+      "role": "Partial camera checkpoint; not a completed six-second film",
+      "width": 1440,
+      "height": 540
+    },
+    {
+      "path": "film-2026-10-12/crate-excerpt.mp4",
+      "bytes": 298928,
+      "sha256": "2fc0e824143678e13d2c9a32da42ce5d5cba69fb077f5e5ad33a6240e539606a",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/crate-excerpt.verification.json",
+      "bytes": 13186,
+      "sha256": "fb58674070249ebb0806f16f525d285cd21fd5d3095f668621672f03e3895b04",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/mcp-operation-summary.json",
+      "bytes": 9167,
+      "sha256": "648f165409e09375f4510b6139f7247472dab48c64b73908e78ed768bac1e506",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/model-configuration.json",
+      "bytes": 606,
+      "sha256": "1007558d2b0983f8954462c423fd69e89e4b56192c240ca6819190c2b11494ea",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/native-verification.json",
+      "bytes": 9120,
+      "sha256": "fb0842bdcf2cdde0ae827b19d39fc053720c7657d8714ccbb1ee080a46978e3f",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/poster.jpg",
+      "bytes": 51547,
+      "sha256": "34b51cd5f8ef3a2bb033e1517aeab178a8db14d907d76a84436578cd4615256b",
+      "role": "Partial camera checkpoint; not a completed six-second film",
+      "width": 960,
+      "height": 540
+    },
+    {
+      "path": "film-2026-10-12/references.json",
+      "bytes": 2080,
+      "sha256": "deadc155f631877a4adc92f6e9f1917c9268ebdf578fca449073480339f9ff21",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/replay.py",
+      "bytes": 10149,
+      "sha256": "d65f880a23631747c2631951924e8a30e10b3ab6cfd10f0de064dbef48608082",
+      "role": "Partial camera checkpoint; not a completed six-second film"
+    },
+    {
+      "path": "film-2026-10-12/visual-review.json",
+      "bytes": 7154,
+      "sha256": "531993fe0dbea9a76237e5114864301e678181986673296e2a0237cab3d8509d",
+      "role": "Partial camera checkpoint; not a completed six-second film"
     }
   ],
   "blender_application": "Blender",
   "blender_version": "5.2.0 LTS",
   "designer_application": "Substance 3D Designer",
-  "designer_version": "16.0.0"
+  "designer_version": "16.0.0",
+  "historical_header_scope": "Original header fields describe only the 2026-10-01 historical curation; the partial camera attempt has separate measured evidence.",
+  "supplements": [
+    {
+      "date": "2026-10-12",
+      "status": "partial_target_unmet",
+      "path": "film-2026-10-12/README.md",
+      "historical_artwork_bytes_changed": false
+    }
+  ]
 }
