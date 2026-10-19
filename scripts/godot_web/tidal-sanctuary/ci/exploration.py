@@ -73,6 +73,38 @@ def validate_chart_contact(samples, opposite_to=None, required=True):
     return None
 
 
+def chart_ray_geometry(state, direction):
+    """Aim the held keyboard ray at the authored bevel, not the box center.
+
+    The chart has .425/.35 m horizontal half-extents, a nominal .14 m bevel
+    and a .22 m player capsule. The capsule offset is parallel to the ray, so
+    only the bevel support point changes cross-track staging. These are
+    controller targets; all actual contact evidence is still independently
+    checked by validate_chart_contact.
+    """
+    validate_state(state, expected_demo=False)
+    direction = finite_vector(list(direction), 2, "chart physical key direction")
+    if any(axis not in (-1, 0, 1) for axis in direction) or not any(direction):
+        raise ValueError("Chart approach needs one nonzero eight-way key combination")
+    right, forward = state["camera_right"], state["camera_forward"]
+    world = [right[i]*direction[0]-forward[i]*direction[1] for i in range(2)]
+    length = math.hypot(*world)
+    if length <= 1e-9:
+        raise ValueError("Chart approach needs nonzero physical keys")
+    radial = [-axis/length for axis in world]
+    support = [math.copysign(half, axis) if abs(axis) > 1e-9 else 0.
+               for half, axis in zip((.425, .35), radial)]
+    cut_axis = 0 if abs(radial[0]) < abs(radial[1]) else 1
+    if support[cut_axis]:
+        support[cut_axis] -= math.copysign(.14, support[cut_axis])
+    cross = support[0]*radial[1]-support[1]*radial[0]
+    return {"direction": list(direction), "keys": sorted(keyboard_direction(direction)),
+            "outward": radial, "cross_track": cross,
+            "bevel_aim": [1.3+support[0], 7.8+support[1]],
+            "target": [1.3+radial[0]*1.8+radial[1]*cross,
+                       7.8+radial[1]*1.8-radial[0]*cross]}
+
+
 def chart_approach_ray(state, outward):
     """Choose an actual eight-way key ray using the observed camera basis."""
     validate_state(state, expected_demo=False)
@@ -81,16 +113,9 @@ def chart_approach_ray(state, outward):
     if length <= 1e-9:
         raise ValueError("Chart approach needs a nonzero outward direction")
     requested = [axis / length for axis in outward]
-    right, forward = state["camera_right"], state["camera_forward"]
-    candidates = []
-    for x, y in ((-1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1), (-1, 1), (1, -1)):
-        world = [right[i] * x - forward[i] * y for i in range(2)]
-        world_length = math.hypot(*world)
-        radial = [-axis / world_length for axis in world]
-        candidates.append((sum(a*b for a, b in zip(radial, requested)), (x, y), radial))
-    _, direction, radial = max(candidates, key=lambda candidate: candidate[0])
-    return {"direction": list(direction), "keys": sorted(keyboard_direction(direction)),
-            "outward": radial, "target": [1.3 + radial[0]*1.8, 7.8 + radial[1]*1.8]}
+    candidates = [chart_ray_geometry(state, direction)
+                  for direction in ((-1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1), (-1, 1), (1, -1))]
+    return max(candidates, key=lambda ray: sum(a*b for a, b in zip(ray["outward"], requested)))
 
 
 def settle_chart_movement(observe, move, pause, deadline=None):
@@ -114,9 +139,9 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
                             ray=None, braking=None, evidence=None):
     """Brake real keyboard motion before overshoot; accept only a fresh stop.
 
-    Final contact staging needs alignment across the held ray, not an exact
-    longitudinal point. Its controller-only band stays well outside contact;
-    validate_chart_contact remains the sole collision/contact acceptance gate.
+    Final contact staging needs alignment across the bevel-targeted held ray,
+    not an exact longitudinal point. Its controller-only band stays well outside
+    contact; validate_chart_contact remains the sole contact acceptance gate.
     """
     braking = {"seconds": .12} if braking is None else braking
     evidence = {} if evidence is None else evidence
@@ -127,17 +152,21 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
         radial = [position[0]-1.3, position[1]-7.8]
         outward = ray["outward"]
         return (sum(a*b for a, b in zip(radial, outward)),
-                radial[0]*outward[1]-radial[1]*outward[0])
+                radial[0]*outward[1]-radial[1]*outward[0]-ray["cross_track"])
 
     def arrived(position):
         if ray is None:
             return math.dist(position, target) < radius
         along, across = coordinates(position)
-        return 1.2 <= along <= 2.4 and abs(across) <= .20
+        return 1.2 <= along <= 2.4 and abs(across) <= .08
 
     try:
         while time.monotonic() < deadline:
             state = observe()
+            if ray is not None:
+                # The follow camera keeps moving after keyboard release. Keep
+                # the same physical keys but stage against their current ray.
+                ray.update(chart_ray_geometry(state, ray["direction"]))
             position = [state["position"][0], state["position"][2]]
             velocity = [state["velocity"][0], state["velocity"][2]]
             speed = math.hypot(*velocity)
@@ -154,6 +183,8 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
                 stopped = settle_chart_movement(observe, move, pause, deadline)
                 decision["settled"] = stopped
                 actual = [stopped["position"][0], stopped["position"][2]]
+                if ray is not None:
+                    ray.update(chart_ray_geometry(stopped, ray["direction"]))
                 if speed > .08:
                     # Learn actual key-release latency plus physical deceleration,
                     # rather than assume wall-clock FPS equals simulated physics.
@@ -167,9 +198,15 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
             if ray is not None:
                 # Correct cross-track error with a realizable perpendicular key
                 # direction, leaving harmless along-ray drift room to settle.
-                along, _ = coordinates(position)
+                along, across = coordinates(position)
+                if abs(across) < .50:
+                    # Near the line, a 45-degree correction has a smaller
+                    # lateral keyboard quantum than a full perpendicular step.
+                    along += abs(across) * (1 if along < 1.8 else -1)
                 along = min(2.2, max(1.4, along))
-                steering_target = [1.3+ray["outward"][0]*along, 7.8+ray["outward"][1]*along]
+                outward, cross = ray["outward"], ray["cross_track"]
+                steering_target = [1.3+outward[0]*along+outward[1]*cross,
+                                   7.8+outward[1]*along-outward[0]*cross]
             move(direction_to(state, steering_target))
             pause(.05)
         raise TimeoutError("Off-route physical waypoint not reached: "+str(target))
