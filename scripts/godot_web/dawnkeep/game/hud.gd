@@ -22,7 +22,7 @@ const WORDS = {
  "touch_controls":["Tap the ground to move. Use the direction pad and skill buttons. Tap a gold platform to build.", "点击地面移动，也可使用方向键与技能按钮。点击金色基座建造防御塔。"],
  "next_wave":["CALL NEXT WAVE", "迎战下一波"], "in_wave":["DEFEND THE DAWNHEART", "守住曙光之心"],
  "prepare":["Prepare your defense", "整备防线"], "equipment":["EQUIPMENT", "装备"], "towers":["DEFENSES", "防御"],
- "pause":["PAUSE", "暂停"], "resume":["RESUME", "继续"], "restart":["RESTART", "重开"],
+ "pause":["PAUSE", "暂停"], "resume":["RESUME", "继续"], "restart":["RESET", "重开"],
  "reset_question":["Start a new defense? Your current run will be lost.", "重新开始守护？本局进度将被重置。"],
  "confirm":["START AGAIN", "重新开始"], "cancel":["CANCEL", "取消"],
  "paused":["THE PASS WAITS", "隘口静候"], "paused_tip":["Take a breath. Your defense is paused.", "稍作休息。战斗已暂停。"],
@@ -490,10 +490,10 @@ func _refresh() -> void:
   if not unlocked: suffix=text("locked")
   var skill_name:String=text(key)
   if portrait:skill_name=(["斩击","振奋","星落"][i] if language=="zh" else ["CUT" if size.x<360 else "CLEAVE","RALLY","NOVA"][i])
-  elif language=="en" and i==1:skill_name="RALLYING\nLIGHT"
+  elif language=="en":skill_name=["DAWN\nCLEAVE","RALLYING\nLIGHT","STARFALL"][i]
   if portrait and not unlocked:suffix="Lv3"
   controls["skill_"+str(i+1)].text = key.to_upper()+"\n"+skill_name+"\n"+suffix
-  controls["skill_"+str(i+1)].add_theme_font_size_override("font_size",12 if portrait else 14)
+  controls["skill_"+str(i+1)].add_theme_font_size_override("font_size",(11 if size.x<360 else 12) if portrait else 14)
   controls["skill_"+str(i+1)].disabled = not unlocked or cd>0 or bool(hero.get("dead",false)) or intro
   controls["skill_"+str(i+1)].tooltip_text = text(key+"_tip")
  labels.shop_title.text = text("equipment" if shop=="equipment" else "towers")

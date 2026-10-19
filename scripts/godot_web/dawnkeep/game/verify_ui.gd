@@ -25,6 +25,11 @@ func run():
     for key in ui.controls:
      var c:Dictionary=ui.controls[key]
      check(c.x>=0 and c.y>=0 and c.x+c.w<=dims.x+1 and c.y+c.h<=dims.y+1,"Control outside viewport "+str(dims)+lang+mode+key+str(c))
+     var button:Button=hud.controls[key]
+     var font:Font=button.get_theme_font("font")
+     var font_size:int=button.get_theme_font_size("font_size")
+     for line:String in button.text.split("\n"):
+      check(font.get_string_size(line,HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x<=c.w-10,"Clipped button text "+str(dims)+lang+mode+key+":"+line)
     var keys:Array=ui.controls.keys()
     for i in range(keys.size()):
      for j in range(i+1,keys.size()):
