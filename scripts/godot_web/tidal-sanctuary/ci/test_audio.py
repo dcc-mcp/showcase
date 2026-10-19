@@ -85,9 +85,9 @@ class AudioAcceptanceFixtures(unittest.TestCase):
 
     def test_safe_browser_defaults_and_real_audio_are_required(self):
         self.assertEqual(IGNORED_DEFAULT_ARGS, ["--mute-audio", "--enable-unsafe-swiftshader"])
-        self.assertEqual(BROWSER_ARGS, ["--disable-dev-shm-usage"])
+        self.assertEqual(BROWSER_ARGS, ["--disable-dev-shm-usage", "--enable-automation"])
         self.assertFalse(any("autoplay" in item or "audio" in item for item in BROWSER_ARGS))
-        validate_browser_arguments(["chrome", "--enable-automation", *BROWSER_ARGS])
+        validate_browser_arguments(["chrome", *BROWSER_ARGS])
         for option in ("--mute-audio", "--no-sandbox", "--disable-setuid-sandbox", "--disable-web-security",
                        "--enable-unsafe-swiftshader", "--ignore-certificate-errors", "--autoplay-policy=no-user-gesture-required"):
             with self.subTest(option=option), self.assertRaises(RuntimeError):

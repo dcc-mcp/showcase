@@ -110,7 +110,9 @@ def wait_observer(page, console, prefix, start, timeout=15, allow_runtime_exit=F
 # Preserve browser security defaults and its supported renderer selection.
 # Playwright injects both mute and an unsafe renderer opt-in by default.
 IGNORED_DEFAULT_ARGS = ["--mute-audio", "--enable-unsafe-swiftshader"]
-BROWSER_ARGS = ["--disable-dev-shm-usage"]
+# Chrome requires this diagnostic flag for Browser.getBrowserCommandLine.
+# Supply it explicitly: persistent contexts do not necessarily inherit it.
+BROWSER_ARGS = ["--disable-dev-shm-usage", "--enable-automation"]
 
 
 def browser_executable(value):
