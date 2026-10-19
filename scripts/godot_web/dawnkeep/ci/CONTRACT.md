@@ -75,3 +75,24 @@ unsafe SwiftShader or disable Web security. Missing WebGL2, sandbox support or
 a graphics driver remains a recorded capability blocker. A successful export or
 headless fixture is not browser acceptance. The launch flags are included in
 the browser receipt. This policy is scoped to Dawnkeep's harness.
+
+### Pinned engine teardown isolation
+
+`diagnose_web_groups.py` is a separate three-project engine diagnostic, not a
+gameplay test and not a waiver for the strict game engine-log check. It exports
+an empty Dummy-physics baseline, one explicit awaited WorkerThreadPool group,
+and an empty GodotPhysics3D world with the same hash-pinned single-thread Web
+template. Actual sandboxed Chrome clicks the official Engine.requestQuit path.
+Every console error is retained. `diagnosis_confirmed` means the expected defect
+was isolated; it never means a defective case had a clean exit.
+
+The [official 4.6.3 tag source](https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/core/object/worker_thread_pool.cpp#L653-L758)
+places Group cleanup inside `THREADS_ENABLED`, while
+[GodotPhysics3D submits groups](https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/modules/godot_physics_3d/godot_step_3d.cpp#L344-L368)
+without that guard. This is a source-level explanation to compare against the
+actual diagnostic, not proof of binary/source identity: the linked official tag
+resolves to `35e80b3a8822a9df9be390814b62f44c0a9c69e8`, whereas the hash-pinned
+distributed binary reports `7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3`.
+Do not claim that an additional game shutdown delay fixes engine allocations,
+disable collisions, suppress engine errors or weaken browser security to make
+this gate pass.

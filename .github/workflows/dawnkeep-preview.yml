@@ -123,6 +123,17 @@ jobs:
           extra=()
           if [ "$FULL_ACCEPTANCE" = 'true' ]; then extra+=(--full); fi
           python "$RECIPE/ci/capture_browser.py" --chromium "$CHROME" --site "$RUNNER_TEMP/dawnkeep-web/site" --output "$RUNNER_TEMP/dawnkeep-browser" "${extra[@]}"
+      - name: Isolate pinned single-thread Group teardown defect without game code
+        if: ${{ !cancelled() && steps.export.outcome == 'success' }}
+        run: |
+          set -euo pipefail
+          CHROME=/opt/google/chrome/chrome
+          test -f "$CHROME" && test -x "$CHROME"
+          test "$(readlink -f "$CHROME")" = "$CHROME"
+          python "$RECIPE/ci/diagnose_web_groups.py" --chromium "$CHROME" \
+            --godot Godot_v4.6.3-stable_linux.x86_64 \
+            --template "$RUNNER_TEMP/dawnkeep-templates/web_nothreads_release.zip" \
+            --output "$RUNNER_TEMP/dawnkeep-group-diagnostic"
       - name: Verify tracked recipe remains unchanged
         if: ${{ !cancelled() }}
         run: git diff --exit-code -- "$RECIPE" .github/workflows/dawnkeep-preview.yml
@@ -154,3 +165,9 @@ jobs:
             ${{ runner.temp }}/dawnkeep-web/site
             ${{ runner.temp }}/dawnkeep-browser
             ${{ runner.temp }}/dawnkeep-templates/provenance.json
+            ${{ runner.temp }}/dawnkeep-group-diagnostic/diagnosis.json
+            ${{ runner.temp }}/dawnkeep-group-diagnostic/*/*.log
+            ${{ runner.temp }}/dawnkeep-group-diagnostic/*/*.png
+            ${{ runner.temp }}/dawnkeep-group-diagnostic/*/project/project.godot
+            ${{ runner.temp }}/dawnkeep-group-diagnostic/*/project/start.tscn
+            ${{ runner.temp }}/dawnkeep-group-diagnostic/*/project/main.gd
