@@ -29,7 +29,7 @@ def envelope(response):
 
 
 
-DEFERRED_TEST_FILES = ("verify_gameplay.gd",)
+DEFERRED_TEST_FILES = ("verify_gameplay.gd", "verify_shutdown.gd")
 EDITOR_PROBE_PATH = "res://dawnkeep_ci_editor_probe.gd"
 EDITOR_PROBE_SOURCE = """@tool
 extends RefCounted

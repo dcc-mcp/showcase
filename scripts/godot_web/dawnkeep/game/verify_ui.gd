@@ -150,7 +150,23 @@ func verify_focus_restoration(hud:Control) -> void:
  hud._activate("close_shop",null)
  await settle_layout(hud,"focus fixture cleanup")
 
+func verify_bundled_glyphs() -> void:
+ # System fallback can hide an incomplete subset on desktop but not in Web.
+ var font:FontFile=load("res://ui/dawnkeep-sans.otf").duplicate()
+ font.allow_system_fallback=false
+ var supported:String=font.get_supported_chars()
+ var required:Dictionary={}
+ var hud_script=load("res://hud.gd")
+ for translations:Array in hud_script.WORDS.values():
+  for value:String in translations:
+   for character:String in value:
+    if not character.strip_edges().is_empty():required[character]=true
+ for character:String in "▲▼◀▶♪×0123456789":required[character]=true
+ for character:String in required:
+  check(supported.contains(character),"Bundled font missing UI glyph U+%04X: %s"%[character.unicode_at(0),character])
+
 func run():
+ verify_bundled_glyphs()
  var hud=load("res://hud.gd").new()
  root.add_child(hud)
  await process_frame

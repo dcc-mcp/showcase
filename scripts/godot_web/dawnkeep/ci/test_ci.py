@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import Mock, patch
 from pathlib import Path
 from common import REQUIRED_FILES, copy_game, isolated_output, receipts, source_inventory, verify_inventory
-from interaction import control_center, validate_state
+from interaction import InputPlan, control_center, validate_state
 from author_native import editor_idle_sample, initial_copy_files
 from export_web import patch_shell
 from capture_native import mouse_location, pointer_click
@@ -55,7 +55,7 @@ class InventoryTests(unittest.TestCase):
             with self.assertRaises(ValueError):isolated_output(source)
 
     def test_mcp_scripts_are_not_precopied(self):
-        names=REQUIRED_FILES+('verify_gameplay.gd','assets/athena.glb','audio/theme.ogg')
+        names=REQUIRED_FILES+('verify_gameplay.gd','verify_shutdown.gd','assets/athena.glb','audio/theme.ogg')
         self.assertEqual(initial_copy_files(names),('assets/athena.glb','audio/theme.ogg'))
 
 
@@ -163,6 +163,23 @@ class BrowserSelectionTests(unittest.TestCase):
 
 
 class ObserverTests(unittest.TestCase):
+    def test_portrait_movement_projects_actual_empty_terrain(self):
+        state=self.sample()
+        state['ui']['pads']=[{'id':0,'x':120.666175842285,'y':290.921966552734},
+                             {'id':1,'x':355.128479003906,'y':306.757080078125},
+                             {'id':3,'x':37.3017997741699,'y':487.277801513672}]
+        state['pads']=[{'id':0,'position':{'x':-11,'z':-4}},
+                       {'id':1,'position':{'x':-5,'z':-7}},
+                       {'id':3,'position':{'x':-8,'z':5}}]
+        click=Mock();plan=InputPlan(lambda:state,click,Mock(),Mock(),(390,844),Mock(),{})
+        self.assertTrue(plan.world_click(-8,2));click.assert_called_once()
+        x,y=click.call_args.args
+        self.assertGreater(x,5);self.assertLess(x,385);self.assertGreater(y,120);self.assertLess(y,594)
+        self.assertGreater(((x-240.502471923828)**2+(y-414.436065673828)**2)**.5,40,
+                           'Movement must not hit the support pad selected by the old fixed screen fraction')
+        self.assertFalse(plan.world_click(1000,1000));self.assertEqual(click.call_count,1)
+
+
     def sample(self):
         return {'schema':1,'sample_id':1,'physics_frame':2,'language':'en','paused':False,'hero':{'position':[1,0,2]},
                 'ui':{'controls':{'pause':{'x':10,'y':20,'w':80,'h':40,'enabled':True}}}}

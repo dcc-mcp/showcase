@@ -107,6 +107,7 @@ def main():
                             result.setdefault('screenshots',[]).append({'name':path.name,**image_stats(path),'state':observe()})
                         pause=lambda seconds:page.wait_for_timeout(seconds*1000)
                         plan=InputPlan(observe,click,key,pause,(width,height),screenshot,result)
+                        screenshot('intro-zh')
                         plan.gate(touch=mobile);write_json(directory/'browser.json',result)
                         # Browser gesture and bus signal are read-only evidence.
                         music=observe().get('music',{})

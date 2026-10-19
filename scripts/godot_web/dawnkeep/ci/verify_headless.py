@@ -28,6 +28,8 @@ def main():
         ('runtime', 'verify_runtime.gd', 'DAWNKEEP_RUNTIME_CHECKS'),
     ):
         jobs.append((name, ['--script', script], prefix))
+    for mode in ('active', 'paused', 'locked'):
+        jobs.append(('shutdown-' + mode, ['--script', 'verify_shutdown.gd', '--', '--shutdown-' + mode], 'DAWNKEEP_SHUTDOWN_CHECKS'))
     for controller in ('active', 'afk'):
         jobs.append(('balance-' + controller, ['--script', 'verify_gameplay.gd', '--', '--balance-' + controller], 'DAWNKEEP_BALANCE'))
     try:

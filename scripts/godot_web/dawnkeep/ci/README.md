@@ -70,8 +70,9 @@ Run `python -m unittest discover -s ci -p 'test_*.py' -v` and
 inventory/lifecycle boundaries; they are not runtime gameplay evidence.
 
 Run `python ci/verify_headless.py --source game --output /tmp/dawnkeep-headless`
-for isolated mechanics, six-viewport bilingual layout, main-scene integration
-and public-command balance fixtures. This explicitly separate synthetic stage
+for isolated mechanics, eight-viewport bilingual layout, bundled-font glyph
+coverage without system fallback, main-scene integration, separate active/paused/
+locked-audio shutdown processes and public-command balance fixtures. This explicitly separate synthetic stage
 preserves logs and exact source hashes; it does not replace real input.
 
 ### Browser security capability boundary
@@ -101,3 +102,21 @@ References: [Chromium's Ubuntu sandbox documentation](https://chromium.googlesou
 and the [official Ubuntu 24.04 runner inventory](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md).
 Browser launch, WebGL2 capability and actual gameplay acceptance remain separate
 checks; selecting a supported executable alone proves none of them.
+
+### Release-quality regressions found by actual Web review
+
+The native font fallback hid four missing Chinese characters in the new focus
+instructions. The shipped renamed Noto subset now includes them, and the actual
+Godot UI fixture checks all 391 required UI characters on a test-only FontFile
+copy with system fallback disabled. Browser capture includes the intro screen.
+
+Normal desktop/Web close requests now stop audio, release stream references and
+wait for AudioServer's playback weak references to clear before exiting. Three
+separate fixed-fps process fixtures cover active, paused and locked audio plus
+repeated close requests. A retained-playback mutation verified that the two-second
+bound remains fatal; no shutdown diagnostic is ignored. Headless process results
+are separate from actual rendered/browser close acceptance.
+
+Portrait movement uses observed world projection to known empty terrain. The
+old fixed screen fraction could select a build platform instead; that was not a
+valid movement test. The same actual touch route and movement assertion remain.

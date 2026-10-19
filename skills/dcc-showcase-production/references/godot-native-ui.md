@@ -91,6 +91,14 @@ other controls. Read resolved `get_theme_*` values in an authorized native check
 when inheritance is in doubt; a list of item names cannot settle it.
 [Theme API](https://docs.godotengine.org/en/4.6/classes/class_theme.html)
 
+For a bundled or subset font, check every localized UI character against that
+font's supported characters with system fallback disabled on a test-only copy.
+Desktop-installed fonts can hide a missing glyph that appears as a box in Web.
+Regenerate the licensed subset after text changes, preserve its source/hash
+receipt, and inspect the actual exported intro/help text as well as HUD labels.
+[Font character coverage](https://docs.godotengine.org/en/stable/classes/class_font.html#class-font-method-get-supported-chars),
+[FontFile system fallback](https://docs.godotengine.org/en/stable/classes/class_fontfile.html#class-fontfile-property-allow-system-fallback)
+
 Preview the actual screen as well as the default Theme preview. Reload a scene
 preview after editing its source, then review it again in the running game.
 Record screenshots of interactive states, not only a pristine menu with no focus.

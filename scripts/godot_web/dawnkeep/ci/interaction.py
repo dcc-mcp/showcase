@@ -67,9 +67,10 @@ class InputPlan:
             state = self.wait(lambda s:not s['paused'],'resume before input gate',state['sample_id'])
         before = state['hero']['position']
         if touch:
-            # Touch goes to terrain through Chromium's touch route. The target is
-            # above the bottom HUD and outside the central Athena core.
-            self.click(self.viewport[0]*.68,self.viewport[1]*.46)
+            # Project known empty terrain using current observed camera geometry.
+            # A fixed screen fraction can select a support pad in portrait.
+            if not self.world_click(-8,2):
+                raise RuntimeError('Actual movement terrain is outside the visible viewport')
             self.pause(1.3)
         else:
             self.key('d',True)

@@ -1,5 +1,6 @@
 extends Node3D
 ## Native Godot scene/input/audio adapter. Diagnostics are strictly read-only.
+signal shutdown_finished(success: bool)
 const Gameplay = preload("res://gameplay.gd")
 const Visuals = preload("res://visuals.gd")
 const HUD = preload("res://hud.gd")
@@ -31,9 +32,11 @@ var _last_selected := -2
 var _last_occupied := false
 var _last_boss_present := false
 var _marker: Node3D
+var _quitting := false
 
 func _ready() -> void:
  name="Dawnkeep"
+ get_tree().auto_accept_quit=false
  _configure_inputs()
  _configure_lighting()
  game=Gameplay.new()
@@ -62,6 +65,40 @@ func _ready() -> void:
   RenderingServer.frame_post_draw.connect(_on_frame_post_draw,CONNECT_ONE_SHOT)
  else:
   print("DAWNKEEP_HEADLESS_READY {\"schema\":1,\"rendered\":false}")
+
+func _notification(what:int) -> void:
+ if what==NOTIFICATION_WM_CLOSE_REQUEST and is_inside_tree():_quit_cleanly()
+
+func _quit_cleanly() -> void:
+ if _quitting:return
+ _quitting=true
+ # Simulation intentionally runs in PROCESS_MODE_ALWAYS during normal play.
+ if is_instance_valid(game):game.process_mode=Node.PROCESS_MODE_DISABLED
+ process_mode=Node.PROCESS_MODE_DISABLED
+ # AudioServer releases stopped playback references on its next mixer updates,
+ # not synchronously in stop() or when the player leaves the scene tree.
+ var pending:Array[WeakRef]=[]
+ var players:Array[AudioStreamPlayer]=sound_players.duplicate()
+ if is_instance_valid(calm):players.append(calm)
+ if is_instance_valid(battle):players.append(battle)
+ for player in players:
+  if player.has_stream_playback():pending.append(weakref(player.get_stream_playback()))
+  player.stop()
+  player.stream=null
+ sound_bank.clear()
+ var started:=Time.get_ticks_msec()
+ var remaining:=pending.size()
+ while Time.get_ticks_msec()-started<2000:
+  remaining=0
+  for playback in pending:
+   if playback.get_ref()!=null:remaining+=1
+  if remaining==0:break
+  await get_tree().process_frame
+ var success:=remaining==0
+ if not success:push_error("Dawnkeep audio shutdown timed out with %d retained playbacks"%remaining)
+ print("DAWNKEEP_SHUTDOWN "+JSON.stringify({"passed":success,"playbacks":pending.size(),"remaining":remaining,"elapsed_ms":Time.get_ticks_msec()-started}))
+ shutdown_finished.emit(success)
+ get_tree().quit(0 if success else 1)
 
 func _configure_inputs() -> void:
  var bindings := {"move_left":[KEY_A,KEY_LEFT],"move_right":[KEY_D,KEY_RIGHT],"move_up":[KEY_W,KEY_UP],"move_down":[KEY_S,KEY_DOWN]}
