@@ -18,25 +18,53 @@ Warcraft or League of Legends characters, models, audio or maps.
   another build. Pause, speed, sound, restart and EN/ZH controls are included.
 - Portrait uses a closer tracking camera and touch movement/skill controls.
 
-## Current status
+## Native interface
 
-This is an unpublished Draft candidate. Local actual Godot parsing, 73
-headless gameplay checks, 5,674 EN/ZH interface checks across six viewport sizes,
-and 10 main-scene integration checks pass. Automated balance controllers establish a
-possible full victory and a losing unattended run; these are not real-input
-acceptance or a subjective gameplay-quality verdict.
+The HUD uses Godot `PanelContainer`, `HBoxContainer`, `VBoxContainer`,
+`GridContainer`, `MarginContainer`, `CenterContainer` and `ScrollContainer`.
+Anchors/free placement bound screen regions only; nested Containers own labels,
+bars and buttons. A shared Theme supplies panel and semantic button styles.
 
-The genuine DCC-MCP author/save/restart/reopen route is implemented with pinned
-official adapter/Core dependencies. The actual game source must pass that route
-and the early native image/input gate on the exact candidate commit. Desktop
-and emulated-touch Web checks, full recordings, video decoding, sound review,
-full real-input victory/failure and final independent visual review remain
-separate required stages. A running engine or an exported archive does not
-establish those stages. Physical-phone testing is not claimed.
+- Desktop, stacked portrait and compact landscape reflow independently.
+- Shop/help content scrolls on short displays; fixed action rows stay reachable.
+- Tab/Shift-Tab and arrows navigate the active UI. Enter/Space activate it.
+  Escape closes the current overlay, then returns keyboard focus to the
+  battlefield, then pauses. Global L/M still change language/sound.
+- Keyboard focus is trapped to active modal/shop controls, repaired when a
+  purchase disables its button, and restored to a valid initiating control.
+  GUI arrow navigation cannot also move the hero.
+- The observer reports clipped, effectively visible bounds and actual focus;
+  direct signal emission is never labelled a pointer test.
 
-The first PR workflow deliberately produces a short actual native-rendered
-image gate before long recordings. This is a candidate CI artifact, not a
-publication to the Showcase gallery or Pages deployment.
+See the canonical [native UI workflow](../../../../skills/dcc-showcase-production/references/godot-native-ui.md)
+for the existing DCC-MCP capabilities and their limits.
+
+## Current status and acceptance boundaries
+
+This is an unpublished Draft candidate. The native-UI regression suite covers
+73 mechanics assertions, 27,660 settled UI assertions across eight sizes
+(320×568 through 2560×1080), EN/ZH, ten screen modes, clipped scrolling,
+health/respawn labels and focus. The main-scene suite covers 78 integration
+assertions, including 142 synthetic events dispatched through Godot's GUI.
+Synthetic inputs and automated victory/AFK balance runs are not OS-input,
+rendered-pixel, sound or subjective gameplay-quality acceptance.
+
+A prior actual native campaign on commit `523953fb` reached eight-wave victory,
+then a natural unattended defeat and clean restarts, with a full recording.
+That recording predates this native-UI refactor and does not prove its new
+layout/input behavior. Refresh exact-source DCC-MCP author/save/restart/reopen,
+headless tests, native rendered views and real-input checks for each candidate.
+The pinned official Web export is a separate stage.
+
+Web gameplay remains unaccepted: the available cloud Chromium 154.0.8037.57
+reported missing WebGL2. Browser security/GPU flags were not changed. Physical
+phone/multitouch testing and subjective music listening remain unverified.
+Objective PCM, clipping, mute and file-decode checks do not replace listening.
+Do not promote a successful export/archive to browser or mobile acceptance.
+
+The PR workflow deliberately produces a short actual native-rendered image gate
+before long recordings. A CI artifact or Draft PR is not a Showcase gallery or
+Pages deployment. See `ci/CONTRACT.md` for the evidence boundaries.
 
 ## Source and reproduction
 

@@ -24,6 +24,10 @@ bound to the exact delivered media hash, not an earlier encode.
 
 ## Godot and other interactive work
 
+For native Godot menus/HUDs, use the [Native UI acceptance workflow](godot-native-ui.md#validate-the-settled-runtime-layout)
+for effective visibility, common-coordinate rectangles, deferred Container
+sorting, focus, and responsive evidence. An editor property dump is insufficient.
+
 A scripted demonstration is not real input acceptance. In the actual engine,
 exercise real keyboard/mouse and relevant touch input: main action, invalid
 moves, undo/reset/restart, repeated actions, save/reload and resizing. Observe

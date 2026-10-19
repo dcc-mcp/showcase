@@ -18,7 +18,9 @@ followed by JSON, with these fields (the full gameplay snapshot can add more):
   Peak is measured on a dedicated actual audio bus, rather than inferred from
   player.playing. Runtime must not report sound when the stream is silent.
 - `ui: {controls: {KEY: {x: number,y: number,w: number,h: number,enabled: bool}}}`
-  Coordinates are viewport pixels for actual currently visible controls.
+  Coordinates are viewport pixels for effectively visible controls, intersected
+  with clipping ancestors. Fully clipped rows are omitted; partially clipped
+  rows expose only their reachable rectangle.
   Keys: `language`, `mute`, `pause`, `restart`, `start_wave`, `skill_1`,
   `skill_2`, `skill_3`, `equipment`, `build`, `upgrade`, `sell`.
   Optional `start` is clicked if present in an initial menu. Optional `resume`
@@ -28,10 +30,19 @@ followed by JSON, with these fields (the full gameplay snapshot can add more):
   world bounds are x [-17,17] and z [-11,11]. Tests click this visible map;
   observation never invokes the underlying move command.
 - Optional `ui.pads`: array of `{id, x,y}` projected clickable support pads.
-- Optional `ui.labels`: actual current rendered text, used for localization QA.
+- Optional `ui.labels`: declared text on at least partially visible controls,
+  used for localization QA. This is not proof that every glyph is visible.
+- `ui.focus_owner`: current focused control key, or an empty string.
+- `ui.keyboard_navigation`: whether arrows/activation belong to native UI.
+  Container geometry is observed after sorting; test reports separately record
+  bounded consecutive-frame stability before asserting layout.
 
-Keyboard contract: WASD/arrows move the hero; L switches EN/ZH; M toggles
-music; Escape pauses/resumes; Q/E/R are hero abilities; Space starts a wave.
+Keyboard contract: with battlefield focus, WASD/arrows move the hero and
+Q/E/R are hero abilities; Space starts a wave. Tab/Shift-Tab and arrows navigate
+native UI; Enter/Space activate its focused button before gameplay receives the
+event. Escape closes the top modal/shop, then leaves nonmodal UI navigation,
+then pauses/resumes. L switches EN/ZH and M toggles sound globally. Polled
+movement is explicitly gated during UI navigation and open modals.
 Restart uses the visible restart control and confirm_restart button; optional
 Backspace may open the same confirmation.
 Only the visible buttons are essential for core acceptance; movement requires

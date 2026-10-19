@@ -8,6 +8,8 @@ It composes with the existing `dcc-mcp` live-host Skill and Core workflow.
 - Site work: [README build/check instructions](README.md#build-and-check) and
   [localization](docs/LOCALIZATION.md).
 - Coverage: `coverage.md` is a dated ledger, not live installation evidence.
+- Godot native UI: [layout, Theme and interaction workflow](skills/dcc-showcase-production/references/godot-native-ui.md),
+  including installed-tool limits and settled runtime layout evidence.
 
 Use one canonical Skill; do not add vendor-specific instruction copies. Preserve
 historical evidence/unknown attribution. Creation/review authority does not grant

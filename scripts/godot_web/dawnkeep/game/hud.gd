@@ -1,5 +1,5 @@
 extends Control
-## Original responsive interface. Every displayed gameplay label is localized.
+## Native responsive UI: anchored regions, Container-owned content, one shared Theme.
 signal command(action: String, value: Variant)
 signal move_pressed(direction: Vector2)
 
@@ -18,7 +18,7 @@ const WORDS = {
  "goal":["Stand against the Hollow Court. Protect the Dawnheart through eight waves and defeat the Crownless King.", "抵御空壳王庭的侵袭。守住曙光之心，撑过八波敌潮，击败无冕之王。"],
  "short_goal":["Protect the Dawnheart through eight waves. Defeat the Crownless King.", "守住曙光之心，撑过八波敌潮，击败无冕之王。"],
  "intro_tip":["Move to intercept enemies. Your hero attacks nearby foes automatically. Spend gold on equipment, then place supporting towers.", "主动迎击敌人，英雄会自动攻击近处目标。用金币强化装备，再建造防御塔协助守护。"],
- "controls":["WASD / arrows: move   ·   Click ground: move   ·   Q E R: skills   ·   Space: next wave", "WASD / 方向键移动 · 点击地面移动 · Q E R 技能 · 空格开始下一波"],
+ "controls":["WASD / arrows: move   ·   Click ground: move   ·   Q E R: skills   ·   Space: next wave\nTab: navigate UI · Esc: return / pause", "WASD / 方向键移动 · 点击地面移动 · Q E R 技能 · 空格开始下一波\nTab 切换界面焦点 · Esc 返回战场 / 暂停"],
  "touch_controls":["Tap the ground to move. Use the direction pad and skill buttons. Tap a gold platform to build.", "点击地面移动，也可使用方向键与技能按钮。点击金色基座建造防御塔。"],
  "next_wave":["CALL NEXT WAVE", "迎战下一波"], "in_wave":["DEFEND THE DAWNHEART", "守住曙光之心"],
  "prepare":["Prepare your defense", "整备防线"], "equipment":["EQUIPMENT", "装备"], "towers":["DEFENSES", "防御"],
@@ -97,6 +97,14 @@ var minimap_rect := Rect2()
 var _finger_directions: Dictionary = {}
 var hero_health_bar: ProgressBar
 var boss_health_bar: ProgressBar
+var groups: Dictionary = {}
+var _keyboard_navigation := false
+var _focus_scope := ""
+var _restore_focus: Control
+var _stacked := false
+var _compact := false
+var _shop_content := ""
+
 
 func text(key: String) -> String:
  var value: Variant = WORDS.get(key, [key.replace("_", " ").to_upper(), key])
@@ -109,6 +117,26 @@ func _ready() -> void:
  if ResourceLoader.exists("res://ui/dawnkeep-sans.otf"):
   theme_new.default_font = load("res://ui/dawnkeep-sans.otf")
  theme_new.default_font_size = 17
+ theme_new.set_constant("separation","BoxContainer",8)
+ theme_new.set_constant("h_separation","GridContainer",2)
+ theme_new.set_constant("v_separation","GridContainer",2)
+ theme_new.set_stylebox("panel","PanelContainer",_style(Color(.035,.08,.10,.94)))
+ theme_new.set_type_variation("DawnInline","PanelContainer")
+ var inline_style:=StyleBoxEmpty.new()
+ theme_new.set_stylebox("panel","DawnInline",inline_style)
+ for variation in ["Button","DawnPrimary","DawnCleave","DawnRally","DawnStarfall"]:
+  if variation!="Button":theme_new.set_type_variation(variation,"Button")
+  var accent:Color={"Button":GOLD,"DawnPrimary":TEAL,"DawnCleave":Color("efd37a"),"DawnRally":Color("69d9a0"),"DawnStarfall":Color("8faaff")}[variation]
+  theme_new.set_font_size("font_size",variation,15)
+  theme_new.set_color("font_color",variation,CREAM)
+  theme_new.set_color("font_hover_color",variation,Color.WHITE)
+  theme_new.set_color("font_disabled_color",variation,MUTED.darkened(.3))
+  var styles={"normal":_style(Color(.055,.12,.145,.97),accent,7),"hover":_style(Color(.11,.23,.25,.98),accent.lightened(.2),7),"pressed":_style(Color(.16,.28,.26,.98),accent,7),"disabled":_style(Color(.035,.065,.08,.85),MUTED.darkened(.6),7),"focus":_style(Color(0,0,0,0),Color.WHITE,7)}
+  for item:String in styles:
+   var style:StyleBoxFlat=styles[item]
+   style.content_margin_left=5;style.content_margin_right=5
+   style.content_margin_top=3;style.content_margin_bottom=3
+   theme_new.set_stylebox(item,variation,style)
  theme = theme_new
  _build()
  get_viewport().size_changed.connect(_layout)
@@ -126,9 +154,9 @@ func _style(bg: Color, border: Color = GOLD, radius: int = 8) -> StyleBoxFlat:
  s.content_margin_bottom = 8
  return s
 
-func _panel(key: String, color: Color = Color(.035,.08,.10,.94)) -> Panel:
- var p := Panel.new()
- p.add_theme_stylebox_override("panel", _style(color))
+func _panel(key: String, _color: Color = Color(.035,.08,.10,.94)) -> PanelContainer:
+ var p := PanelContainer.new()
+ p.name=key
  p.mouse_filter = Control.MOUSE_FILTER_STOP
  add_child(p)
  panels[key] = p
@@ -136,9 +164,11 @@ func _panel(key: String, color: Color = Color(.035,.08,.10,.94)) -> Panel:
 
 func _label(key: String, size_px: int = 18, color: Color = CREAM) -> Label:
  var l := Label.new()
+ l.name=key
  l.add_theme_font_size_override("font_size", size_px)
  l.add_theme_color_override("font_color", color)
  l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+ l.size_flags_horizontal=Control.SIZE_EXPAND_FILL
  l.text = text(key)
  add_child(l)
  labels[key] = l
@@ -146,28 +176,154 @@ func _label(key: String, size_px: int = 18, color: Color = CREAM) -> Label:
 
 func _button(key: String, action: String, value: Variant = null, color: Color = GOLD) -> Button:
  var b := Button.new()
+ b.name=key
  b.text = text(key)
- b.add_theme_font_size_override("font_size", 15)
- b.add_theme_color_override("font_color", CREAM)
- b.add_theme_color_override("font_hover_color", Color.WHITE)
- b.add_theme_color_override("font_disabled_color", MUTED.darkened(.3))
- b.add_theme_stylebox_override("normal", _style(Color(.055,.12,.145,.97), color, 7))
- b.add_theme_stylebox_override("hover", _style(Color(.11,.23,.25,.98), color.lightened(.2), 7))
- b.add_theme_stylebox_override("pressed", _style(Color(.16,.28,.26,.98), color, 7))
- b.add_theme_stylebox_override("disabled", _style(Color(.035,.065,.08,.85), MUTED.darkened(.6), 7))
- b.add_theme_stylebox_override("focus", _style(Color(0,0,0,0), Color.WHITE, 7))
- for style_name in ["normal","hover","pressed","disabled","focus"]:
-  var button_style:=b.get_theme_stylebox(style_name) as StyleBoxFlat
-  button_style.content_margin_left=5
-  button_style.content_margin_right=5
-  button_style.content_margin_top=3
-  button_style.content_margin_bottom=3
+ b.theme_type_variation="DawnPrimary" if color==TEAL else "Button"
+ if key.begins_with("skill_"):b.theme_type_variation=["DawnCleave","DawnRally","DawnStarfall"][int(key.right(1))-1]
  b.clip_text=true
+ b.custom_minimum_size.y=44
+ b.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ b.size_flags_vertical=Control.SIZE_EXPAND_FILL
  b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
  b.pressed.connect(func(): _activate(action, value))
  add_child(b)
  controls[key] = b
  return b
+
+func _box(key:String,parent:Node,vertical:bool=true,separation:int=8) -> BoxContainer:
+ var box:BoxContainer=VBoxContainer.new() if vertical else HBoxContainer.new()
+ box.name=key
+ box.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ box.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ box.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ box.add_theme_constant_override("separation",separation)
+ parent.add_child(box)
+ groups[key]=box
+ return box
+
+func _pack(node:Control,parent:Node) -> void:
+ if node.get_parent()!=parent:
+  node.reparent(parent,false)
+  node.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+
+func _scroll(key:String,parent:Node) -> VBoxContainer:
+ var scroll:=ScrollContainer.new()
+ scroll.name=key
+ scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED
+ scroll.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ scroll.follow_focus=true
+ parent.add_child(scroll)
+ groups[key]=scroll
+ return _box(key+"_content",scroll,true,10)
+
+func _native_groups() -> void:
+ # The only manually bounded Controls are screen regions. Containers own all
+ # labels, progress bars, and buttons, including after responsive reparenting.
+ var header:=_box("header_row",panels.header,false,12)
+ var brand:=_box("brand",header,true,0)
+ brand.size_flags_horizontal=Control.SIZE_FILL
+ brand.custom_minimum_size.x=224
+ _pack(labels.title,brand);_pack(labels.chapter,brand)
+ _pack(labels.stats,header)
+ labels.stats.vertical_alignment=VERTICAL_ALIGNMENT_CENTER
+ var toolbar:=_box("toolbar",header,false,6)
+ toolbar.size_flags_horizontal=Control.SIZE_FILL
+ for key in ["language","mute","pause","restart","help"]:
+  _pack(controls[key],toolbar)
+  controls[key].size_flags_horizontal=Control.SIZE_FILL
+  controls[key].custom_minimum_size=Vector2(64 if key in ["pause","restart"] else 44,44)
+ var bottom:=Control.new()
+ bottom.name="BottomRegion";bottom.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ add_child(bottom);groups.bottom=bottom
+ var wide:=_box("bottom_wide",bottom,false,10)
+ var stacked:=_box("bottom_stacked",bottom,true,6)
+ wide.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ stacked.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ var hero:=_box("hero_content",panels.hero_panel,true,5)
+ for key in ["hero","hero_stats","hero_health"]:_pack(labels[key],hero)
+ labels.hero.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ labels.hero_stats.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ _pack(hero_health_bar,hero);hero_health_bar.custom_minimum_size.y=4
+ var skills:=_box("skills_row",panels.skills_panel,false,8)
+ var pad:=GridContainer.new()
+ pad.name="DirectionPad";pad.columns=3;pad.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ pad.size_flags_horizontal=Control.SIZE_FILL
+ pad.size_flags_vertical=Control.SIZE_SHRINK_CENTER
+ skills.add_child(pad);groups.dpad=pad
+ for key in ["","move_up","","move_left","move_down","move_right"]:
+  if key=="":
+   var spacer:=Control.new();spacer.mouse_filter=Control.MOUSE_FILTER_IGNORE
+   spacer.custom_minimum_size=Vector2(40,40);pad.add_child(spacer)
+  else:
+   _pack(controls[key],pad);controls[key].custom_minimum_size=Vector2(40,40)
+ var skill_buttons:=_box("skill_buttons",skills,false,6)
+ for key in ["skill_1","skill_2","skill_3"]:_pack(controls[key],skill_buttons)
+ var actions_wide:=_box("actions_wide",bottom,true,6)
+ var actions_stacked:=_box("actions_stacked",bottom,false,6)
+ actions_wide.custom_minimum_size.x=120
+ for key in ["equipment","build"]:_pack(controls[key],actions_wide)
+ var wave_vertical:=_box("wave_vertical",panels.wave_panel,true,4)
+ var wave_horizontal:=_box("wave_horizontal",panels.wave_panel,false,8)
+ var wave_text:=_box("wave_text",wave_vertical,true,2)
+ _pack(labels.wave_status,wave_text);_pack(labels.wave_preview,wave_text)
+ labels.wave_status.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ labels.wave_preview.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ var wave_actions:=_box("wave_actions",wave_vertical,false,8)
+ _pack(controls.start_wave,wave_actions);_pack(controls.speed,wave_actions)
+ controls.speed.size_flags_horizontal=Control.SIZE_FILL
+ controls.speed.custom_minimum_size.x=44
+ var shop_box:=_box("shop_content",panels.shop_panel,true,8)
+ var shop_header:=_box("shop_header",shop_box,false,8)
+ shop_header.size_flags_vertical=Control.SIZE_FILL
+ _pack(labels.shop_title,shop_header);_pack(controls.close,shop_header)
+ controls.close.size_flags_horizontal=Control.SIZE_FILL
+ controls.close.custom_minimum_size.x=64
+ _pack(labels.shop_tip,shop_box)
+ var shop_items:=_scroll("shop_scroll",shop_box)
+ for key in ["item_blade","item_plate","item_focus","item_boots","item_potion","tower_sunbow","tower_ember","tower_frost","tower_storm"]:
+  _pack(controls[key],shop_items);controls[key].custom_minimum_size.y=54
+  controls[key].size_flags_vertical=Control.SIZE_FILL
+ _pack(labels.selected_info,shop_items)
+ for key in ["upgrade","upgrade_b","sell"]:
+  _pack(controls[key],shop_items);controls[key].custom_minimum_size.y=54
+  controls[key].size_flags_vertical=Control.SIZE_FILL
+ var boss:=_box("boss_content",panels.boss_panel,true,4)
+ _pack(labels.boss_status,boss);_pack(boss_health_bar,boss)
+ labels.boss_status.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+ labels.boss_status.add_theme_font_size_override("font_size",13)
+ boss_health_bar.custom_minimum_size.y=4
+ _pack(labels.toast_label,panels.toast)
+ labels.toast_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+ labels.toast_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ var overlay:=Control.new()
+ overlay.name="ModalInputLayer"
+ overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ overlay.mouse_filter=Control.MOUSE_FILTER_STOP
+ add_child(overlay);groups.modal_layer=overlay
+ var shade:=ColorRect.new()
+ shade.color=Color(0.01,.025,.035,.56);shade.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ overlay.add_child(shade);shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ var margin:=MarginContainer.new()
+ overlay.add_child(margin);margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+ margin.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ for side in ["left","right","bottom"]:margin.add_theme_constant_override("margin_"+side,12)
+ margin.add_theme_constant_override("margin_top",84)
+ var center:=CenterContainer.new()
+ center.mouse_filter=Control.MOUSE_FILTER_IGNORE;margin.add_child(center)
+ _pack(panels.modal,center)
+ var modal:=_box("modal_content",panels.modal,true,10)
+ for key in ["modal_title","modal_subtitle"]:_pack(labels[key],modal)
+ labels.modal_title.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ var prose:=_scroll("modal_scroll",modal)
+ for key in ["modal_body","modal_tip"]:_pack(labels[key],prose)
+ var modal_actions:=_box("modal_actions",modal,false,12)
+ modal_actions.size_flags_vertical=Control.SIZE_FILL
+ for key in ["start","resume","confirm_restart","cancel"]:
+  _pack(controls[key],modal_actions);controls[key].custom_minimum_size.y=48
+ _pack(labels.modal_footer,modal)
+ labels.modal_footer.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+ panels.header.move_to_front()
 
 func _build() -> void:
  for k in ["header", "hero_panel", "skills_panel", "wave_panel", "shop_panel", "modal", "toast", "boss_panel"]: _panel(k)
@@ -222,8 +378,10 @@ func _build() -> void:
  labels.modal_footer.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
  hero_health_bar=_health_bar(panels.hero_panel,TEAL)
  boss_health_bar=_health_bar(panels.boss_panel,Color("e5748c"))
+ _native_groups()
+ for panel:Control in panels.values():panel.minimum_size_changed.connect(_fit_regions.call_deferred)
 
-func _health_bar(parent:Panel,color:Color) -> ProgressBar:
+func _health_bar(parent:Control,color:Color) -> ProgressBar:
  var bar:=ProgressBar.new()
  bar.show_percentage=false
  bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
@@ -261,6 +419,10 @@ func action_allowed(action: String) -> bool:
 
 func _activate(action: String, value: Variant) -> void:
  if not action_allowed(action):return
+ # Preserve the caller before scope changes hide it or remove its focus mode.
+ if _focus_scope=="" and _keyboard_navigation:
+  var focused:=get_viewport().gui_get_focus_owner()
+  if focused!=null:_restore_focus=focused
  if action == "shop":
   shop = "" if shop == str(value) else str(value)
  elif action == "close_shop": shop = ""
@@ -272,6 +434,7 @@ func _activate(action: String, value: Variant) -> void:
  elif action == "resume": command.emit("pause",null)
  elif action != "none": command.emit(action,value)
  _layout()
+ if not _keyboard_navigation:_release_pointer_focus.call_deferred()
 
 func set_language(value: String) -> void:
  language = value
@@ -281,6 +444,7 @@ func set_language(value: String) -> void:
 func set_state(value: Dictionary) -> void:
  state = value
  _refresh()
+ if not groups.is_empty():_sync_focus()
 
 func open_build() -> void:
  shop = "build"
@@ -302,146 +466,233 @@ func _process(delta: float) -> void:
  queue_redraw()
 
 func _place(node: Control, r: Rect2, visible_now: bool = true) -> void:
+ # For top-level regions only. Never use this on a Container-managed child.
  node.position = r.position
  node.size = r.size
  node.visible = visible_now
 
+func is_modal_open() -> bool:
+ return intro or confirming or help_open or bool(state.get("paused",false)) or str(state.get("mode","")) in ["victory","defeat","won","lost"]
+
+func keyboard_navigation_active() -> bool:
+ return _keyboard_navigation
+
+func leave_keyboard_navigation() -> void:
+ _keyboard_navigation=false
+ _restore_focus=null
+ _release_pointer_focus()
+
+func _input(event:InputEvent) -> void:
+ if event is InputEventKey and event.pressed and event.keycode==KEY_TAB:
+  _keyboard_navigation=true
+  if get_viewport().gui_get_focus_owner()==null:
+   _focus_first.call_deferred(event.shift_pressed)
+   get_viewport().set_input_as_handled()
+ elif event is InputEventMouseButton and event.pressed:
+  _keyboard_navigation=false
+  if not is_modal_open():_release_pointer_focus.call_deferred()
+
+func _release_pointer_focus() -> void:
+ if _keyboard_navigation or is_modal_open():return
+ var focused:=get_viewport().gui_get_focus_owner()
+ if focused!=null:focused.release_focus()
+
+func _focus_first(reverse:bool=false) -> void:
+ var eligible:=_focus_candidates()
+ if not eligible.is_empty():eligible[-1 if reverse else 0].grab_focus()
+
+func _focus_candidates() -> Array[Control]:
+ var result:Array[Control]=[]
+ # Stable semantic order, independent of reparenting or dictionary insertion.
+ var order:Array=["start","resume","restart","confirm_restart","cancel"] if is_modal_open() else (["close","item_blade","item_plate","item_focus","item_boots","item_potion","tower_sunbow","tower_ember","tower_frost","tower_storm","upgrade","upgrade_b","sell"] if shop!="" else ["equipment","build","skill_1","skill_2","skill_3","start_wave","speed","pause","restart","help"])
+ order.append_array(["language","mute"])
+ for key:String in order:
+  var button:Button=controls[key]
+  if button.is_visible_in_tree() and not button.disabled:result.append(button)
+ return result
+
+func _sync_focus() -> void:
+ var eligible:=_focus_candidates()
+ for button:Button in controls.values():
+  button.focus_mode=Control.FOCUS_ALL if button in eligible else Control.FOCUS_NONE
+ for i in range(eligible.size()):
+  var button:Control=eligible[i]
+  var previous:=button.get_path_to(eligible[posmod(i-1,eligible.size())])
+  var next:=button.get_path_to(eligible[(i+1)%eligible.size()])
+  button.focus_previous=previous;button.focus_next=next
+  button.focus_neighbor_left=previous;button.focus_neighbor_top=previous
+  button.focus_neighbor_right=next;button.focus_neighbor_bottom=next
+ var scope:String=("confirm" if confirming else "help" if help_open else "intro" if intro else str(state.get("mode",""))+"_modal") if is_modal_open() else shop
+ if scope!=_focus_scope:
+  groups.modal_scroll.scroll_vertical=0
+  if _focus_scope=="" and _keyboard_navigation:
+   var current_focus:=get_viewport().gui_get_focus_owner()
+   if current_focus!=null:_restore_focus=current_focus
+  var was_modal:bool=_focus_scope!=""
+  _focus_scope=scope
+  if is_modal_open():
+   _keyboard_navigation=true
+   _focus_first.call_deferred()
+  elif _keyboard_navigation and shop!="":_focus_first.call_deferred()
+  elif _keyboard_navigation and was_modal and is_instance_valid(_restore_focus) and _restore_focus.is_visible_in_tree() and _restore_focus.focus_mode!=Control.FOCUS_NONE:_restore_focus.grab_focus.call_deferred()
+  elif scope=="":
+   _keyboard_navigation=false
+   _release_pointer_focus.call_deferred()
+  elif not _keyboard_navigation:_release_pointer_focus.call_deferred()
+  if scope=="":_restore_focus=null
+ elif _keyboard_navigation:
+  var focused:=get_viewport().gui_get_focus_owner()
+  if focused==null or focused not in eligible:_focus_first.call_deferred()
+
 func _layout() -> void:
  _layout_size = size
- if size.x <= 0: return
+ if size.x <= 0 or groups.is_empty(): return
  portrait = size.x < 1080 or size.x / maxf(size.y,1) < 1.18
- var w := size.x
- var h := size.y
- var pad := 10.0 if portrait else 20.0
- _place(panels.header, Rect2(pad,pad,w-pad*2,60 if portrait else 68))
- _place(labels.title,Rect2(pad+14,pad+5,210,31),not portrait)
- _place(labels.chapter,Rect2(pad+15,pad+39,230,18),not portrait)
- _place(labels.stats,Rect2(pad+12 if portrait else 292,pad+12,w-168 if portrait else w-720,35))
- var tools_x := w-pad-(104 if portrait else 370)
- for i in range(2 if portrait else 5):
-  var key: String = ["language","mute","pause","restart","help"][i]
-  _place(controls[key],Rect2(tools_x+i*(48 if portrait else 74),pad+10,44 if portrait else 70,40))
- for key in ["pause","restart","help"]: controls[key].visible = not portrait
- var bottom := h-(222 if portrait else 156)
- if portrait:
-  _place(panels.hero_panel,Rect2(pad,bottom,w-pad*2,52))
-  _place(labels.hero,Rect2(pad+12,bottom+5,w-20,20))
-  _place(labels.hero_stats,Rect2(pad+12,bottom+26,w-20,20))
-  labels.hero_health.visible = false
-  _place(panels.skills_panel,Rect2(pad,bottom+58,w-pad*2,104))
-  for i in range(3): _place(controls["skill_"+str(i+1)],Rect2(pad+150+i*((w-pad*2-160)/3),bottom+66,maxf(44,(w-pad*2-172)/3),88))
-  for item in [["up",44,0],["left",0,44],["down",44,44],["right",88,44]]:
-   _place(controls["move_"+str(item[0])],Rect2(pad+8+item[1],bottom+66+item[2],44,44))
-  _place(controls.equipment,Rect2(pad,bottom+168,(w-pad*2-12)/3,44))
-  _place(controls.build,Rect2(pad+(w-pad*2)/3,bottom+168,(w-pad*2-12)/3,44))
-  _place(controls.pause,Rect2(pad+(w-pad*2)*2/3,bottom+168,(w-pad*2-12)/3,44))
-  _place(panels.wave_panel,Rect2(pad,78,w-pad*2,50))
-  _place(labels.wave_status,Rect2(pad+10,83,w-170,22))
-  _place(labels.wave_preview,Rect2(pad+10,105,w-170,18))
-  _place(controls.start_wave,Rect2(w-pad-138,83,128,40))
-  controls.speed.visible = false
+ _compact=portrait and size.x>=720 and size.y<520
+ _stacked=portrait and not _compact
+ var w:=size.x;var h:=size.y
+ var pad:=10.0 if portrait else 20.0
+ var bottom_height:=222.0 if _stacked else (108.0 if _compact else 136.0)
+ var bottom:Control=groups.bottom
+ bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+ bottom.offset_left=pad;bottom.offset_right=-pad
+ bottom.offset_top=-bottom_height-pad;bottom.offset_bottom=-pad
+ groups.bottom_wide.visible=not _stacked
+ groups.bottom_stacked.visible=_stacked
+ var flow:Container=groups.bottom_stacked if _stacked else groups.bottom_wide
+ _pack(panels.hero_panel,flow);_pack(panels.skills_panel,flow)
+ var actions:Container=groups.actions_stacked if _stacked else groups.actions_wide
+ _pack(actions,flow)
+ groups.actions_stacked.visible=_stacked;groups.actions_wide.visible=not _stacked
+ flow.move_child(panels.hero_panel,0);flow.move_child(panels.skills_panel,1);flow.move_child(actions,2)
+ for key in ["equipment","build"]:_pack(controls[key],actions)
+ _pack(controls.pause,actions if _stacked else groups.toolbar)
+ _pack(controls.restart,groups.toolbar)
+ controls.restart.size_flags_horizontal=Control.SIZE_FILL
+ controls.restart.custom_minimum_size=Vector2(64,44)
+ var toolbar_index:=0
+ for key in ["language","mute","pause","restart","help"]:
+  if controls[key].get_parent()==groups.toolbar:
+   groups.toolbar.move_child(controls[key],toolbar_index);toolbar_index+=1
+ for key:String in controls:controls[key].visible=true
+ panels.hero_panel.visible=true;panels.skills_panel.visible=true
+ panels.hero_panel.custom_minimum_size=Vector2(0 if _stacked else (220 if portrait else 250),0)
+ panels.skills_panel.custom_minimum_size=Vector2(0 if _stacked else (320 if portrait else 314),96 if _stacked else 0)
+ panels.hero_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ panels.skills_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+ panels.skills_panel.size_flags_stretch_ratio=1.5 if portrait else 1.0
+ panels.hero_panel.size_flags_vertical=Control.SIZE_FILL if _stacked else Control.SIZE_EXPAND_FILL
+ panels.skills_panel.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ actions.custom_minimum_size.y=44 if _stacked else 0
+ actions.size_flags_vertical=Control.SIZE_FILL if _stacked else Control.SIZE_EXPAND_FILL
+ labels.hero_health.visible=not _stacked
+ groups.hero_content.add_theme_constant_override("separation",2 if _stacked else 5)
+ groups.dpad.visible=portrait
+ for key in ["move_up","move_down","move_left","move_right"]:controls[key].visible=portrait
+ _place(panels.header,Rect2(pad,pad,w-pad*2,76 if _compact else (60 if portrait else 68)))
+ groups.brand.visible=not portrait
+ controls.restart.visible=not portrait;controls.help.visible=not portrait
+ controls.pause.size_flags_horizontal=Control.SIZE_EXPAND_FILL if portrait else Control.SIZE_FILL
+ controls.pause.custom_minimum_size.x=0 if _stacked else 64
+ labels.stats.size_flags_horizontal=Control.SIZE_FILL if _compact else Control.SIZE_EXPAND_FILL
+ groups.wave_vertical.visible=not portrait;groups.wave_horizontal.visible=portrait
+ _pack(groups.wave_text,groups.wave_horizontal if portrait else groups.wave_vertical)
+ _pack(groups.wave_actions,groups.wave_horizontal if portrait else groups.wave_vertical)
+ panels.wave_panel.theme_type_variation="DawnInline" if _compact else ""
+ if _compact:
+  _pack(panels.wave_panel,groups.header_row)
+  groups.header_row.move_child(panels.wave_panel,2)
+  panels.wave_panel.custom_minimum_size=Vector2(310,0)
+  panels.wave_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  groups.wave_actions.size_flags_horizontal=Control.SIZE_FILL
+  controls.start_wave.custom_minimum_size.x=128
+ elif portrait:
+  _pack(panels.wave_panel,self)
+  panels.wave_panel.custom_minimum_size=Vector2.ZERO
+  _place(panels.wave_panel,Rect2(pad,78,w-pad*2,56))
+  groups.wave_actions.size_flags_horizontal=Control.SIZE_FILL
+  controls.start_wave.custom_minimum_size.x=128
  else:
-  _place(panels.hero_panel,Rect2(pad,bottom,276,136))
-  _place(labels.hero,Rect2(pad+16,bottom+11,254,25))
-  _place(labels.hero_stats,Rect2(pad+16,bottom+42,254,24))
-  _place(labels.hero_health,Rect2(pad+16,bottom+74,254,22))
-  _place(panels.skills_panel,Rect2(310,bottom,338,136))
-  for i in range(3): _place(controls["skill_"+str(i+1)],Rect2(320+i*108,bottom+11,98,114))
-  _place(panels.wave_panel,Rect2(w-322,bottom,302,136))
-  _place(labels.wave_status,Rect2(w-307,bottom+9,240,24))
-  _place(labels.wave_preview,Rect2(w-307,bottom+35,260,22))
-  _place(controls.start_wave,Rect2(w-307,bottom+68,216,52))
-  _place(controls.speed,Rect2(w-81,bottom+68,46,52))
-  _place(controls.equipment,Rect2(662,bottom+11,w-998,54))
-  _place(controls.build,Rect2(662,bottom+73,w-998,52))
-  for key in ["move_up","move_down","move_left","move_right"]: controls[key].visible = false
- var sw := minf(390,w-20)
- var sx := (w-sw)*.5 if portrait else w-sw-20
- var sy := clampf(maxf(136,bottom-(374 if portrait else 370)-12),10,maxf(10,h-376))
- _place(panels.shop_panel,Rect2(sx,sy,sw,366),shop != "")
- _place(labels.shop_title,Rect2(sx+16,sy+12,sw-90,30),shop != "")
- _place(controls.close,Rect2(sx+sw-70,sy+10,58,36),shop != "")
- _place(labels.shop_tip,Rect2(sx+16,sy+49,sw-32,40),shop != "")
- for i in range(5):
-  var key: String = ["blade","plate","focus","boots","potion"][i]
-  _place(controls["item_"+key],Rect2(sx+14,sy+96+i*50,sw-28,44),shop == "equipment")
- var selected: Dictionary = state.get("selected_tower",{}) if state.get("selected_tower") is Dictionary else {}
- var has_tower := not selected.is_empty()
- for i in range(4):
-  var key: String = ["sunbow","ember","frost","storm"][i]
-  _place(controls["tower_"+key],Rect2(sx+14,sy+96+i*62,sw-28,54),shop == "build" and not has_tower)
- _place(labels.selected_info,Rect2(sx+16,sy+96,sw-32,90),shop == "build" and has_tower)
- _place(controls.upgrade,Rect2(sx+14,sy+190,sw-28,50),shop == "build" and has_tower)
- _place(controls.upgrade_b,Rect2(sx+14,sy+246,sw-28,50),shop == "build" and has_tower)
- _place(controls.sell,Rect2(sx+14,sy+304,sw-28,46),shop == "build" and has_tower)
+  _pack(panels.wave_panel,flow)
+  panels.wave_panel.custom_minimum_size=Vector2(270,0)
+  panels.wave_panel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  groups.wave_actions.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+  controls.start_wave.custom_minimum_size.x=0
+ panels.wave_panel.visible=true
+ controls.speed.visible=not portrait
+ labels.wave_preview.visible=not portrait
+ labels.wave_status.add_theme_font_size_override("font_size",12 if portrait else 14)
+ var sw:=minf(410,w-20)
+ var sh:=minf(430,h-96)
+ var sy:=maxf(80,minf(h-bottom_height-pad-sh-12,h-sh-12))
+ _place(panels.shop_panel,Rect2((w-sw)*.5 if portrait else w-sw-pad,sy,sw,sh),shop!="")
+ var selected:Dictionary=state.get("selected_tower",{}) if state.get("selected_tower") is Dictionary else {}
+ var has_tower:=not selected.is_empty()
+ var content_key:String=shop+":"+str(selected.get("kind",""))+":"+str(selected.get("level",0))+":"+str(selected.get("branch",""))
+ if content_key!=_shop_content:groups.shop_scroll.scroll_vertical=0;_shop_content=content_key
+ for key in ["blade","plate","focus","boots","potion"]:controls["item_"+key].visible=shop=="equipment"
+ for key in ["sunbow","ember","frost","storm"]:controls["tower_"+key].visible=shop=="build" and not has_tower
+ labels.selected_info.visible=shop=="build" and has_tower
+ for key in ["upgrade","upgrade_b","sell"]:controls[key].visible=shop=="build" and has_tower
  var has_boss:bool=not state.get("boss",{}).is_empty()
- minimap_rect=Rect2(12,184 if has_boss else 136,112,82) if portrait else Rect2(20,102,148,104)
+ minimap_rect=Rect2(12,(146 if has_boss else 98) if _compact else (190 if has_boss else 142),112,82) if portrait else Rect2(20,102,148,104)
  var bw:=minf(440,w-28)
- _place(panels.boss_panel,Rect2((w-bw)/2,136 if portrait else 98,bw,42),has_boss)
- _place(labels.boss_status,Rect2((w-bw)/2+12,140 if portrait else 102,bw-24,24),has_boss)
- var tw := minf(500,w-40)
- _place(panels.toast,Rect2((w-tw)/2,140,tw,44),toast_time>0 and not intro)
- _place(labels.toast_label,Rect2((w-tw)/2+10,147,tw-20,30),panels.toast.visible)
- labels.toast_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
- var mode: String = str(state.get("mode","build"))
- var ended := mode in ["victory","defeat","won","lost"]
- var paused: bool = bool(state.get("paused",false))
- var modal := intro or paused or confirming or ended or help_open
- var mw := minf(700,w-24)
- var mh := minf(464,h-32)
- var mx := (w-mw)*.5
- var my := (h-mh)*.5
- _place(panels.modal,Rect2(mx,my,mw,mh),modal)
- _place(labels.modal_title,Rect2(mx+20,my+25,mw-40,62),modal)
+ _place(panels.boss_panel,Rect2((w-bw)/2,140 if _stacked else 98,bw,44),has_boss)
+ var tw:=minf(500,w-40)
+ _place(panels.toast,Rect2((w-tw)/2,190 if has_boss and portrait else 140,tw,44),toast_time>0 and not intro)
+ var mode:String=str(state.get("mode","build"))
+ var ended:=mode in ["victory","defeat","won","lost"]
+ var paused:bool=bool(state.get("paused",false))
+ var modal:=is_modal_open()
+ groups.modal_layer.visible=modal
+ panels.modal.visible=modal
+ panels.modal.custom_minimum_size=Vector2(minf(700,w-24),minf(424 if portrait else 464,h-96))
+ panels.modal.size=panels.modal.custom_minimum_size
  labels.modal_title.add_theme_font_size_override("font_size",22 if w<400 else (30 if portrait else 38))
- _place(labels.modal_subtitle,Rect2(mx+20,my+87,mw-40,24),modal)
- _place(labels.modal_body,Rect2(mx+30,my+(112 if mh<420 else 125),mw-60,64 if mh<420 else (112 if portrait else 92)),modal)
- _place(labels.modal_tip,Rect2(mx+30,my+(180 if mh<420 else 238),mw-60,60 if mh<420 else 100),modal)
- _place(labels.modal_footer,Rect2(mx+20,my+mh-36,mw-40,20),modal)
- var button_y := my+mh-96
- _place(controls.start,Rect2(mx+30,button_y,mw-60,48),intro)
- _place(controls.resume,Rect2(mx+30,button_y,(mw-72)/2,48),paused and not intro and not confirming and not help_open and not ended)
- if paused and not intro and not confirming and not help_open and not ended:
-  _place(controls.restart,Rect2(mx+42+(mw-72)/2,button_y,(mw-72)/2,48))
- _place(controls.confirm_restart,Rect2(mx+30,button_y,(mw-72)/2,48),confirming or ended)
- _place(controls.cancel,Rect2(mx+42+(mw-72)/2,button_y,(mw-72)/2,48),confirming or help_open)
- if ended: _place(controls.confirm_restart,Rect2(mx+30,button_y,mw-60,48))
- if help_open: _place(controls.cancel,Rect2(mx+30,button_y,mw-60,48))
- # Modal children are always the final visual/input layer, independent of creation order.
+ for key in ["start","resume","confirm_restart","cancel"]:controls[key].visible=false
+ if intro:
+  bottom.visible=false;panels.wave_panel.visible=false;panels.boss_panel.visible=false;panels.toast.visible=false
+ elif shop=="" or not portrait:bottom.visible=true
  if modal:
-  # The actual controls and the observer must describe the same input layer.
   var allowed:Array=["language","mute"]
   if confirming:allowed.append_array(["confirm_restart","cancel"])
   elif help_open:allowed.append("cancel")
   elif intro:allowed.append("start")
   elif ended:allowed.append("confirm_restart")
-  else:allowed.append_array(["resume","restart"])
-  for key:String in controls:
-   if key not in allowed:controls[key].visible=false
+  else:
+   allowed.append_array(["resume","restart"])
+   _pack(controls.restart,groups.modal_actions)
+   controls.restart.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+   controls.restart.custom_minimum_size.y=48
+  for key:String in controls:controls[key].visible=key in allowed
   clear_touch_movement()
-  panels.modal.move_to_front()
-  for key in ["modal_title","modal_subtitle","modal_body","modal_tip","modal_footer"]: labels[key].move_to_front()
-  for key in ["start","resume","restart","confirm_restart","cancel"]: controls[key].move_to_front()
+  groups.modal_layer.move_to_front();panels.header.move_to_front()
  elif portrait and shop!="":
-  # Small screens show one interactive layer rather than overlapping the shop
-  # with the movement pad and skill buttons behind its bottom rows.
-  for key in ["hero_panel","skills_panel"]:panels[key].visible=false
-  for key in ["hero","hero_stats","hero_health"]:labels[key].visible=false
-  for key in ["skill_1","skill_2","skill_3","move_up","move_down","move_left","move_right","equipment","build","pause"]:controls[key].visible=false
+  bottom.visible=false
+  panels.wave_panel.visible=false
   panels.shop_panel.move_to_front()
-  for key in ["shop_title","shop_tip","selected_info"]:labels[key].move_to_front()
-  for key:String in controls:
-   if key=="close" or key.begins_with("item_") or key.begins_with("tower_") or key in ["upgrade","upgrade_b","sell"]:controls[key].move_to_front()
-   elif controls[key].visible and controls[key].get_rect().intersects(panels.shop_panel.get_rect()):controls[key].visible=false
   clear_touch_movement()
- if is_instance_valid(hero_health_bar):
-  hero_health_bar.position=Vector2(12,panels.hero_panel.size.y-9)
-  hero_health_bar.size=Vector2(panels.hero_panel.size.x-24,4)
- if is_instance_valid(boss_health_bar):
-  boss_health_bar.position=Vector2(12,32)
-  boss_health_bar.size=Vector2(panels.boss_panel.size.x-24,4)
+ else:bottom.visible=true
  _refresh()
+ _sync_focus()
+ _fit_regions.call_deferred()
  queue_redraw()
+
+func _fit_regions() -> void:
+ # Child minimum sizes propagate after sorting. Refit only free screen regions;
+ # Container children retain exclusive native layout ownership.
+ if groups.is_empty() or size.x<=0:return
+ var w:=size.x;var h:=size.y;var pad:=10.0 if portrait else 20.0
+ _place(panels.header,Rect2(pad,pad,w-pad*2,76 if _compact else (60 if portrait else 68)))
+ if _stacked:_place(panels.wave_panel,Rect2(pad,78,w-pad*2,60),panels.wave_panel.visible)
+ var sw:=minf(410,w-20);var sh:=minf(430,h-96)
+ var bottom_height:=222.0 if _stacked else (108.0 if _compact else 136.0)
+ var sy:=maxf(80,minf(h-bottom_height-pad-sh-12,h-sh-12))
+ _place(panels.shop_panel,Rect2((w-sw)*.5 if portrait else w-sw-pad,sy,sw,sh),shop!="")
+ var bw:=minf(440,w-28)
+ _place(panels.boss_panel,Rect2((w-bw)/2,140 if _stacked else 98,bw,44),panels.boss_panel.visible)
+ var tw:=minf(500,w-40)
+ _place(panels.toast,Rect2((w-tw)/2,190 if not state.get("boss",{}).is_empty() and portrait else 140,tw,44),panels.toast.visible)
 
 func _refresh() -> void:
  if labels.is_empty(): return
@@ -450,7 +701,7 @@ func _refresh() -> void:
  var wave: int = int(state.get("wave",0))
  var gold: int = int(state.get("gold",420))
  var core: int = int(state.get("core_hp",20))
- labels.stats.text = ("%s %d   ·   %s %d   ·   %s %d/8" % [text("core"),core,text("gold"),gold,text("wave"),wave]) if not portrait else ("%s %d  |  %d G  |  %d/8" % [text("core"),core,gold,wave])
+ labels.stats.text = ("%s %d   ·   %s %d   ·   %s %d/8" % [text("core"),core,text("gold"),gold,text("wave"),wave]) if not portrait else ("%s %d\n%d G  ·  %s %d/8" % [text("core"),core,gold,text("wave"),wave])
  labels.stats.add_theme_font_size_override("font_size",13 if portrait else 17)
  var hero: Dictionary = state.get("hero",{})
  var mode: String = str(state.get("mode","build"))
@@ -555,27 +806,37 @@ func _refresh() -> void:
  labels.modal_tip.text=(text("touch_controls") if portrait else text("controls")+"\n\n"+text("intro_tip")) if intro or help_open else text("intro_tip")
  labels.modal_footer.text=text("saved_tip")
 
+func _visible_rect(control:Control) -> Rect2:
+ var rect:=control.get_global_rect()
+ var ancestor:=control.get_parent()
+ while ancestor is Control:
+  if ancestor.clip_contents:rect=rect.intersection(ancestor.get_global_rect())
+  ancestor=ancestor.get_parent()
+ return rect
+
 func ui_snapshot() -> Dictionary:
  var result: Dictionary = {}
  var modal := intro or confirming or help_open or bool(state.get("paused",false)) or str(state.get("mode","")) in ["victory","defeat","won","lost"]
  for key: String in controls:
   var button: Button = controls[key]
-  if not button.visible: continue
-  var r := button.get_global_rect()
+  if not button.is_visible_in_tree(): continue
+  var r := _visible_rect(button)
+  if not r.has_area():continue
   result[key]={"x":r.position.x,"y":r.position.y,"w":r.size.x,"h":r.size.y,"enabled":not button.disabled}
  var rendered: Array[String]=[]
  for l: Label in labels.values():
-  if l.visible: rendered.append(l.text)
+  if l.is_visible_in_tree() and _visible_rect(l).has_area(): rendered.append(l.text)
  for b: Button in controls.values():
-  if b.visible: rendered.append(b.text)
- return {"controls":result,"labels":rendered,"portrait":portrait,"intro":intro,"shop":shop,"minimap":{"x":minimap_rect.position.x,"y":minimap_rect.position.y,"w":minimap_rect.size.x,"h":minimap_rect.size.y}}
+  if b.is_visible_in_tree() and _visible_rect(b).has_area(): rendered.append(b.text)
+ var focused:=get_viewport().gui_get_focus_owner()
+ return {"focus_owner":str(focused.name) if focused!=null else "","keyboard_navigation":_keyboard_navigation,"controls":result,"labels":rendered,"portrait":portrait,"intro":intro,"shop":shop,"minimap":{"x":minimap_rect.position.x,"y":minimap_rect.position.y,"w":minimap_rect.size.x,"h":minimap_rect.size.y}}
 
 func blocks_world(point: Vector2) -> bool:
  if intro or confirming or help_open or bool(state.get("paused",false)) or str(state.get("mode","")) in ["victory","defeat","won","lost"]: return true
- for p: Panel in panels.values():
-  if p.visible and p.get_global_rect().has_point(point): return true
+ for p: Control in panels.values():
+  if p.is_visible_in_tree() and p.get_global_rect().has_point(point): return true
  for b: Button in controls.values():
-  if b.visible and b.get_global_rect().has_point(point): return true
+  if b.is_visible_in_tree() and _visible_rect(b).has_point(point): return true
  return false
 
 func minimap_world(point:Vector2) -> Vector3:

@@ -126,8 +126,12 @@ func _resize() -> void:
 
 func _physics_process(_delta:float) -> void:
  if not is_instance_valid(game) or not is_instance_valid(hud):return
- var input:=Input.get_vector("move_left","move_right","move_up","move_down")+touch_move
- if hud.intro or hud.confirming or hud.help_open:input=Vector2.ZERO
+ # Input polling ignores GUI event consumption. Keyboard focus must explicitly
+ # suspend movement so arrows navigate native controls without moving Elyra.
+ var input:=touch_move
+ if not hud.keyboard_navigation_active():
+  input+=Input.get_vector("move_left","move_right","move_up","move_down")
+ if hud.is_modal_open():input=Vector2.ZERO
  # Screen-relative input follows the fixed camera basis; physics remains world-space.
  var right:=camera.global_basis.x
  var forward:=camera.global_basis.z
@@ -157,24 +161,34 @@ func _process(delta:float) -> void:
   _report_state()
 
 func _input(event:InputEvent) -> void:
+ # Only global controls precede GUI dispatch. In particular, Space belongs to
+ # a focused native Button before it can become the next-wave world shortcut.
  if event is InputEventKey and event.pressed and not event.echo:
-  var code:int=event.physical_keycode
-  if code not in [KEY_L,KEY_M,KEY_ESCAPE,KEY_BACKSPACE,KEY_Q,KEY_E,KEY_R,KEY_SPACE]:return
+  var code:int=event.physical_keycode if event.physical_keycode!=0 else event.keycode
+  if code not in [KEY_L,KEY_M,KEY_ESCAPE]:return
   if hud.intro and code not in [KEY_L,KEY_M]:return
   if code==KEY_L:_command("language",null)
   elif code==KEY_M:_command("mute",null)
   elif code==KEY_ESCAPE:
    if hud.confirming or hud.help_open: hud._activate("cancel",null)
    elif hud.shop!="":hud.shop="";hud._layout()
+   elif not hud.is_modal_open() and hud.keyboard_navigation_active():hud.leave_keyboard_navigation()
    elif not hud.intro:_command("pause",null)
-  elif code==KEY_BACKSPACE and not hud.intro and not hud.confirming and not hud.help_open:hud._activate("restart",null)
-  elif not hud.intro and not hud.confirming and not hud.help_open:
-   if code==KEY_Q:_command("skill","q")
-   elif code==KEY_E:_command("skill","e")
-   elif code==KEY_R:_command("skill","r")
-   elif code==KEY_SPACE:_command("start_wave",null)
   get_viewport().set_input_as_handled()
-  return
+
+func _unhandled_key_input(event:InputEvent) -> void:
+ if not event is InputEventKey or not event.pressed or event.echo:return
+ if event.ctrl_pressed or event.alt_pressed or event.meta_pressed:return
+ if hud.is_modal_open() or hud.keyboard_navigation_active():return
+ var code:int=event.physical_keycode if event.physical_keycode!=0 else event.keycode
+ match code:
+  KEY_BACKSPACE:hud._activate("restart",null)
+  KEY_Q:_command("skill","q")
+  KEY_E:_command("skill","e")
+  KEY_R:_command("skill","r")
+  KEY_SPACE:_command("start_wave",null)
+  _:return
+ get_viewport().set_input_as_handled()
 
 func _unhandled_input(event:InputEvent) -> void:
  if event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT]:
