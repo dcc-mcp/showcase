@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import time
@@ -10,6 +11,34 @@ from pathlib import Path
 from common import checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, receipts, sha256, stop_process, write_json
 from interaction import InputPlan
 from media import inspect_audio, inspect_video
+
+
+def mouse_location(text):
+    """Parse xdotool's shell-shaped readback as data, never shell code."""
+    fields={}
+    for line in text.splitlines():
+        if not line:continue
+        key,separator,value=line.partition('=')
+        if separator!='=' or key not in ('X','Y','SCREEN','WINDOW') or key in fields or not re.fullmatch(r'-?[0-9]+',value):
+            raise ValueError('Malformed xdotool mouse-location readback: '+repr(line))
+        fields[key]=int(value)
+    if not {'X','Y'}<=fields.keys():raise ValueError('xdotool mouse-location readback lacks integer X/Y')
+    return fields['X'],fields['Y']
+
+
+def pointer_click(x,y):
+    # --sync waits for motion, not verified arrival, and stalled in CI on the
+    # second click at the same target. Read back actual X11 coordinates instead.
+    target=(round(x),round(y));deadline=time.monotonic()+10
+    def run(arguments,**options):
+        remaining=deadline-time.monotonic()
+        if remaining<=0:raise TimeoutError('X11 pointer click exceeded its 10-second budget')
+        return subprocess.run(['xdotool',*arguments],check=True,timeout=remaining,**options)
+    run(['mousemove',str(target[0]),str(target[1])])
+    observed=mouse_location(run(['getmouselocation','--shell'],capture_output=True,text=True).stdout)
+    if observed!=target:raise RuntimeError(f'X11 pointer did not reach requested target: {observed} != {target}')
+    run(['click','1'])
+    return observed
 
 
 def image_stats(path):
@@ -67,8 +96,8 @@ def main():
             if not values:raise ValueError('No read-only runtime state')
             return values[-1]
         def click(x,y):
-            live();subprocess.run(['xdotool','mousemove','--sync',str(round(x)),str(round(y)),'click','1'],check=True,timeout=10)
-            report.setdefault('events',[]).append({'type':'XTest click','x':x,'y':y})
+            live();actual=pointer_click(x,y)
+            report.setdefault('events',[]).append({'type':'XTest click','x':x,'y':y,'pointer_readback':list(actual)})
         def key(name,down):
             subprocess.run(['xdotool','keydown' if down else 'keyup',name],check=True,timeout=10)
             (pressed.add if down else pressed.discard)(name)

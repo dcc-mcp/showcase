@@ -2,6 +2,7 @@ import ast
 import copy
 import re
 import shlex
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -10,6 +11,7 @@ from common import REQUIRED_FILES, copy_game, isolated_output, receipts, source_
 from interaction import control_center, validate_state
 from author_native import editor_idle_sample, initial_copy_files
 from export_web import patch_shell
+from capture_native import mouse_location, pointer_click
 
 
 class InventoryTests(unittest.TestCase):
@@ -54,6 +56,48 @@ class InventoryTests(unittest.TestCase):
     def test_mcp_scripts_are_not_precopied(self):
         names=REQUIRED_FILES+('verify_gameplay.gd','assets/athena.glb','audio/theme.ogg')
         self.assertEqual(initial_copy_files(names),('assets/athena.glb','audio/theme.ogg'))
+
+
+class NativePointerTests(unittest.TestCase):
+    def test_location_readback_is_integer_data(self):
+        self.assertEqual(mouse_location('X=1036\nY=54\nSCREEN=0\nWINDOW=123\n'),(1036,54))
+        self.assertEqual(mouse_location('Y=-2\nX=0\n'),(0,-2))
+
+    def test_malformed_readback_is_rejected(self):
+        for value in ('','X=1\n','Y=2\n','X=1\nX=1\nY=2','X=1.0\nY=2',
+                      'X=$(touch sentinel)\nY=2','X=1;echo bad\nY=2','X=1\nY=2\nEXTRA=3'):
+            with self.subTest(value=value),self.assertRaises(ValueError):mouse_location(value)
+
+    def test_repeated_identical_target_uses_readback_without_motion_wait(self):
+        def result(command,**options):
+            self.assertTrue(options['check']);self.assertGreater(options['timeout'],0)
+            self.assertLessEqual(options['timeout'],10);self.assertNotIn('shell',options)
+            return subprocess.CompletedProcess(command,0,stdout='X=1036\nY=54\nSCREEN=0\nWINDOW=123\n')
+        with patch('capture_native.subprocess.run',side_effect=result) as run:
+            for _ in range(2):self.assertEqual(pointer_click(1036,54),(1036,54))
+        expected=[['xdotool','mousemove','1036','54'],['xdotool','getmouselocation','--shell'],['xdotool','click','1']]*2
+        self.assertEqual([call.args[0] for call in run.call_args_list],expected)
+
+    def test_bad_readback_prevents_click(self):
+        for output,error in [('X=1035\nY=54\n',RuntimeError),('X=1036\nY=no\n',ValueError)]:
+            with self.subTest(output=output),patch('capture_native.subprocess.run',return_value=subprocess.CompletedProcess([],0,stdout=output)) as run:
+                with self.assertRaises(error):pointer_click(1036,54)
+                self.assertEqual(run.call_count,2)
+                self.assertFalse(any(call.args[0][1]=='click' for call in run.call_args_list))
+
+    def test_command_failure_or_timeout_is_not_ignored(self):
+        success=subprocess.CompletedProcess([],0,stdout='X=1036\nY=54\n')
+        for failure in (subprocess.TimeoutExpired(['xdotool'],10),subprocess.CalledProcessError(1,['xdotool'])):
+            for step in range(3):
+                with self.subTest(error=type(failure).__name__,step=step),patch('capture_native.subprocess.run',side_effect=[success]*step+[failure]) as run:
+                    with self.assertRaises(type(failure)):pointer_click(1036,54)
+                    self.assertEqual(run.call_count,step+1)
+
+    def test_click_keeps_one_ten_second_budget(self):
+        with patch('capture_native.time.monotonic',side_effect=[100,100,104,110.1]),patch('capture_native.subprocess.run',return_value=subprocess.CompletedProcess([],0,stdout='X=1036\nY=54\n')) as run:
+            with self.assertRaises(TimeoutError):pointer_click(1036,54)
+            self.assertEqual(run.call_count,2)
+            self.assertEqual([call.kwargs['timeout'] for call in run.call_args_list],[10,6])
 
 
 class ObserverTests(unittest.TestCase):
