@@ -4,6 +4,7 @@ var failures:Array=[]
 var checks:=0
 var layout_settle_max_frames:=0
 var synthetic_input_events:=0
+var pointer_hold_max_frames:=0
 func _initialize():call_deferred("run")
 func check(ok:bool,message:String):
  checks+=1
@@ -46,19 +47,76 @@ func tap_key(code:int,shift:bool=false,control:bool=false) -> void:
  key_event(code,false,shift,control)
  await settle_ui()
 
-func click_control(button:Control) -> void:
+func click_control(button:Control,hold_frames:int=3) -> void:
  var point:=button.get_global_rect().get_center()
+ var visible_rect:=root.get_visible_rect().intersection(button.get_global_rect())
+ var ancestor:Node=button.get_parent()
+ while ancestor!=null:
+  if ancestor is Control and ancestor.clip_contents:visible_rect=visible_rect.intersection(ancestor.get_global_rect())
+  ancestor=ancestor.get_parent()
+ check(button.is_visible_in_tree() and visible_rect.has_point(point),"Pointer target center is visible inside viewport and clip ancestors: "+str(button.name))
+ var activations:Array[int]=[0]
+ var record_activation:=func():activations[0]+=1
+ if button is BaseButton:button.pressed.connect(record_activation)
  var motion:=InputEventMouseMotion.new()
  motion.position=point;motion.global_position=point
  root.push_input(motion,true)
  synthetic_input_events+=1
+ if button is BaseButton:check(button.is_hovered(),"Synthetic pointer motion reaches native button: "+str(button.name))
  for pressed:bool in [true,false]:
   var event:=InputEventMouseButton.new()
   event.position=point;event.global_position=point
   event.button_index=MOUSE_BUTTON_LEFT;event.pressed=pressed
   root.push_input(event,true)
   synthetic_input_events+=1
-  await process_frame
+  if pressed:
+   # One process_frame can resume before deferred focus cleanup. Cross several
+   # idle frames so a real held click cannot be masked by an immediate pair.
+   for frame in range(hold_frames):await process_frame
+   pointer_hold_max_frames=maxi(pointer_hold_max_frames,hold_frames)
+   if button is BaseButton and not button.disabled:
+    check(button.is_pressed(),"Native button retains held pointer press across idle frames: "+str(button.name))
+    if button.action_mode==BaseButton.ACTION_MODE_BUTTON_RELEASE:
+     check(activations[0]==0,"Native release-mode button does not activate before pointer release: "+str(button.name))
+  else:await process_frame
+ await settle_ui()
+ if button is BaseButton:
+  check(activations[0]==1,"Native pointer click emits exactly one activation: "+str(button.name))
+  button.pressed.disconnect(record_activation)
+
+func verify_pointer_holds(main:Node) -> void:
+ var original_size:Vector2i=root.size
+ main._command("restart",null)
+ main.hud.shop="";main.hud.intro=false;main.hud.confirming=false;main.hud.help_open=false
+ main.hud.leave_keyboard_navigation()
+ root.size=Vector2i(842,388)
+ main._resize()
+ await settle_ui()
+ check(main.hud.portrait and main.hud.controls.equipment.is_visible_in_tree(),"Held-pointer fixture uses observed compact native viewport")
+ await click_control(main.hud.controls.equipment,18)
+ check(main.hud.shop=="equipment" and main.game.gold==420,"Held Equipment pointer click opens shop exactly once without a purchase")
+ if main.hud.shop=="equipment":
+  var boots:Button=main.hud.controls.item_boots
+  main.hud.groups.shop_scroll.ensure_control_visible(boots)
+  await settle_ui()
+  for purchase in range(2):
+   var before:Dictionary=main.game.snapshot()
+   var cost:int=0
+   for item:Dictionary in before.shop:
+    if item.key=="boots":cost=int(item.cost)
+   await click_control(boots,18)
+   var after:Dictionary=main.game.snapshot()
+   check(after.hero.equipment.boots==before.hero.equipment.boots+1 and after.gold==before.gold-cost,"Held Boots pointer click purchases exactly once: "+str(purchase))
+   check(main.hud.shop=="equipment" and main.game.wave==0,"Held shop purchase preserves panel and does not trigger world action")
+  check(not main.hud.keyboard_navigation_active() and root.gui_get_focus_owner()==null,"Completed pointer purchase releases incidental keyboard focus")
+  await click_control(main.hud.controls.close,18)
+  check(main.hud.shop=="","Held Close pointer click closes shop")
+ var was_muted:bool=main.muted
+ await click_control(main.hud.controls.mute,18)
+ check(main.muted!=was_muted,"Held ordinary pointer button activates on release")
+ check(not main.hud.keyboard_navigation_active() and root.gui_get_focus_owner()==null,"Held ordinary pointer button does not trap gameplay keyboard focus")
+ root.size=original_size
+ main._resize()
  await settle_ui()
 
 func focus_is_one_of(hud:Control,keys:Array) -> bool:
@@ -200,6 +258,9 @@ func verify_keyboard_navigation(main:Node) -> void:
  first=null;second=null
 
 func run():
+ # SceneTree --script starts headless with a 64x64 root, independently of the
+ # project window defaults. Pointer hit testing must use the intended viewport.
+ root.size=Vector2i(1280,800)
  var main=load("res://main.gd").new()
  root.add_child(main)
  await process_frame
@@ -243,7 +304,8 @@ func run():
  main.hud._activate("restart",null);main.hud._activate("confirm_restart",null)
  check(not main._modal_open and not main.game.paused and main.game.wave==0,"Confirmed restart clears modal lifecycle")
  await verify_keyboard_navigation(main)
- print("DAWNKEEP_RUNTIME_CHECKS "+JSON.stringify({"passed":failures.is_empty(),"checks":checks,"failures":failures,"layout_settle_max_frames":layout_settle_max_frames,"synthetic_input_events":synthetic_input_events,"scope":"Headless main/HUD/VFX integration and synthetic native GUI dispatch/focus fixtures; not OS real-input acceptance"}))
+ await verify_pointer_holds(main)
+ print("DAWNKEEP_RUNTIME_CHECKS "+JSON.stringify({"passed":failures.is_empty(),"checks":checks,"failures":failures,"layout_settle_max_frames":layout_settle_max_frames,"synthetic_input_events":synthetic_input_events,"pointer_hold_max_frames":pointer_hold_max_frames,"scope":"Headless main/HUD/VFX integration and synthetic native GUI dispatch/focus fixtures including held pointer clicks; not OS real-input acceptance"}))
  main.queue_free()
  main=null
  warning.clear()

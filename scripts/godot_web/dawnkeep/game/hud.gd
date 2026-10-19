@@ -99,6 +99,7 @@ var hero_health_bar: ProgressBar
 var boss_health_bar: ProgressBar
 var groups: Dictionary = {}
 var _keyboard_navigation := false
+var _pointer_button_held := false
 var _focus_scope := ""
 var _restore_focus: Control
 var _stacked := false
@@ -488,12 +489,15 @@ func _input(event:InputEvent) -> void:
   if get_viewport().gui_get_focus_owner()==null:
    _focus_first.call_deferred(event.shift_pressed)
    get_viewport().set_input_as_handled()
- elif event is InputEventMouseButton and event.pressed:
-  _keyboard_navigation=false
-  if not is_modal_open():_release_pointer_focus.call_deferred()
+ elif event is InputEventMouseButton:
+  if event.button_index==MOUSE_BUTTON_LEFT:_pointer_button_held=event.pressed
+  if event.pressed:_keyboard_navigation=false
+  # BaseButton cancels an in-flight press when focus exits. Clear keyboard
+  # ownership now, but let GUI mouse-up finish before releasing pointer focus.
+  if not _pointer_button_held and not is_modal_open():_release_pointer_focus.call_deferred()
 
 func _release_pointer_focus() -> void:
- if _keyboard_navigation or is_modal_open():return
+ if _pointer_button_held or _keyboard_navigation or is_modal_open():return
  var focused:=get_viewport().gui_get_focus_owner()
  if focused!=null:focused.release_focus()
 

@@ -124,6 +124,8 @@ func verify_focus_restoration(hud:Control) -> void:
  var pointer:=InputEventMouseButton.new()
  pointer.button_index=MOUSE_BUTTON_LEFT;pointer.pressed=true
  hud._input(pointer)
+ pointer.pressed=false
+ hud._input(pointer)
  await settle_layout(hud,"focus fixture reset")
  var tab:=InputEventKey.new()
  tab.keycode=KEY_TAB;tab.physical_keycode=KEY_TAB;tab.pressed=true

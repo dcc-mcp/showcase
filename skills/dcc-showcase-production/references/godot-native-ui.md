@@ -111,6 +111,12 @@ and activation on the intended target. Test keyboard-only operation independentl
 State-changing shortcuts and direct `pressed` emissions can exercise logic, but
 cannot prove focus order, hit rectangles, event propagation or touch usability.
 
+Acceptance must include press → intervening idle/process frames → release,
+not only same-frame synthetic input pairs. Verify that focus changes during a
+held click do not cancel the intended activation. For touch-direction controls,
+hold across frames, observe sustained movement, then release and verify movement
+stops without a stuck input. Record the input route and frame separation.
+
 ## Validate the settled runtime layout
 
 1. **Record the state and coordinate system.** Include scene/UI state, engine and
