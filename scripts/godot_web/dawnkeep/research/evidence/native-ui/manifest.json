@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "runtime_commit": "81c109db079d3815c547943c7924d24349d6d386",
+  "scope": "Two synthetic-state native renders; one actual native keyboard focus screenshot. Not Web acceptance.",
+  "files": [
+    {
+      "path": "compact-focus-81c109d.jpg",
+      "sha256": "927cc136ba9b7d741befce70e52e69222532f90b4d42f24a00f9e55c96e37daa",
+      "bytes": 55476
+    },
+    {
+      "path": "desktop-equipment-81c109d.png",
+      "sha256": "72693fd401128f5011bf5c8ac762ae19f082a5f5b106fda70145e3a7041452d0",
+      "bytes": 378737
+    },
+    {
+      "path": "portrait-zh-81c109d.png",
+      "sha256": "27b2c27029101f44fa7da0e34ac2a03a40423c7003e8ff7dbd484f8159b941dc",
+      "bytes": 179109
+    }
+  ]
+}

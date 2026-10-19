@@ -36,7 +36,7 @@ bars and buttons. A shared Theme supplies panel and semantic button styles.
 - The observer reports clipped, effectively visible bounds and actual focus;
   direct signal emission is never labelled a pointer test.
 
-See the canonical [native UI workflow](../../../../skills/dcc-showcase-production/references/godot-native-ui.md)
+See the canonical [native UI workflow](../../../skills/dcc-showcase-production/references/godot-native-ui.md)
 for the existing DCC-MCP capabilities and their limits.
 
 ## Current status and acceptance boundaries
@@ -44,17 +44,25 @@ for the existing DCC-MCP capabilities and their limits.
 This is an unpublished Draft candidate. The native-UI regression suite covers
 73 mechanics assertions, 27,660 settled UI assertions across eight sizes
 (320×568 through 2560×1080), EN/ZH, ten screen modes, clipped scrolling,
-health/respawn labels and focus. The main-scene suite covers 78 integration
-assertions, including 142 synthetic events dispatched through Godot's GUI.
+health/respawn labels and focus. The main-scene suite covers 133 integration
+assertions, including 157 synthetic events dispatched through Godot's GUI and
+pointer holds up to 18 process frames.
 Synthetic inputs and automated victory/AFK balance runs are not OS-input,
 rendered-pixel, sound or subjective gameplay-quality acceptance.
+
+The [2026-10-19 native UI acceptance record](research/native-ui-acceptance-20261019.md)
+binds these results to runtime commit `81c109d`: real DCC-MCP creation/save/reopen,
+official Web export, 16 reviewed native-rendered views, 300 ms held native
+purchases/mute, keyboard cancel and EN/ZH switching, plus compact-landscape
+scrolling, held D-pad release and focus-driven purchase. It retains the remaining
+shutdown, browser, listening and physical-touch qualifications.
 
 A prior actual native campaign on commit `523953fb` reached eight-wave victory,
 then a natural unattended defeat and clean restarts, with a full recording.
 That recording predates this native-UI refactor and does not prove its new
-layout/input behavior. Refresh exact-source DCC-MCP author/save/restart/reopen,
-headless tests, native rendered views and real-input checks for each candidate.
-The pinned official Web export is a separate stage.
+layout/input behavior. The new run covers native UI and early combat, not a
+repeat of that full campaign. Refresh the exact-source checks for future
+runtime changes; the pinned official Web export remains a separate stage.
 
 Web gameplay remains unaccepted: the available cloud Chromium 154.0.8037.57
 reported missing WebGL2. Browser security/GPU flags were not changed. Physical
