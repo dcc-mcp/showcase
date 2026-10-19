@@ -105,11 +105,12 @@ func _scatter_forest() -> void:
 	var rng = RandomNumberGenerator.new()
 	rng.seed = 18026
 	for i in range(trees.size()):
-		var file = ["Tree_1_A_Color1.gltf","Tree_2_A_Color1.gltf","Tree_3_A_Color1.gltf"][i%3]
-		var tree = _instantiate(KAYKIT+"forest/"+file,self)
+		var path = KAYKIT+"forest/Tree_4_B_Color1.gltf" if i%3==1 else ORIGINAL+"watchwood_tree.glb"
+		var tree = _instantiate(path,self)
 		if not tree: continue
 		tree.position = trees[i]
-		var s = rng.randf_range(.75,1.05)
+		var s = rng.randf_range(.56,.70) if i%3==1 else rng.randf_range(.80,1.0)
+		if i%3==1:_forest_palette(tree)
 		tree.scale = Vector3.ONE*s
 		tree.rotation.y = rng.randf_range(0,TAU)
 		# Only trunks block. Never generate broad canopy colliders.
@@ -117,10 +118,11 @@ func _scatter_forest() -> void:
 	var clusters = [Vector3(-14,0,-9),Vector3(-9.4,0,-9.1),Vector3(-5.2,0,-9.6),Vector3(3,0,-10),Vector3(8.8,0,-8.6),Vector3(12.6,0,-6.3),Vector3(15.3,0,-1),Vector3(15.4,0,7.7),Vector3(12.8,0,9.4),Vector3(7,0,9.5),Vector3(1.4,0,9.5),Vector3(-5,0,9.3),Vector3(-10,0,10.1),Vector3(-14.2,0,10),Vector3(-15.2,0,2.4),Vector3(-12.3,0,-.6),Vector3(3,0,3.8),Vector3(1.5,0,-6.7)]
 	for i in range(clusters.size()):
 		var p: Vector3 = clusters[i]
-		var shrub = _instantiate(KAYKIT+"forest/"+["Bush_1_A_Color1.gltf","Bush_2_A_Color1.gltf"][i%2],self)
+		var shrub = _instantiate(ORIGINAL+"moonfern.glb" if i%2==0 else KAYKIT+"forest/Bush_1_A_Color1.gltf",self)
 		if shrub:
 			shrub.position = p
-			shrub.scale = Vector3.ONE*rng.randf_range(2.1,3.0)
+			shrub.scale = Vector3.ONE*(rng.randf_range(1.1,1.7) if i%2==0 else rng.randf_range(2.1,3.0))
+			if i%2==1:_forest_palette(shrub)
 			shrub.rotation.y = rng.randf_range(0,TAU)
 		for k in range(2):
 			var grass = _instantiate(KAYKIT+"forest/Grass_1_A_Color1.gltf",self)
@@ -293,8 +295,15 @@ func select_pad(index: int, radius: float) -> void:
 		selected_ring.position = PADS[index]+Vector3(0,.11,0)
 
 func projectile(from: Vector3, to: Vector3, kind: String) -> void:
-	var color: Color = PALETTE.get(kind,Color("ffe2a1"))
-	if kind == "storm":
+	var color: Color = PALETTE.get("storm" if kind=="chain" else kind,Color("ffe2a1"))
+	if kind == "hero":
+		var direction = (to-from).normalized()
+		var slash = _arc(1.25,atan2(direction.x,direction.z),Color("ffdfa0"),.17)
+		slash.position = from
+		add_child(slash)
+		effects.append({"node":slash,"remaining":.21,"life":.21,"type":"fade"})
+		return
+	if kind in ["storm","chain"]:
 		# Branching three-segment electricity; instantaneous hit, brief afterimage.
 		var last = from
 		for i in range(1,5):
@@ -322,14 +331,14 @@ func effect(kind: String, pos: Vector3, radius: float) -> void:
 	if kind in ["cleave","hit","build","upgrade"]: c = Color("ffe0a0")
 	elif kind in ["starfall_warning","boss_warning"]:
 		c = Color(1,.42,.23,.75)
-		lifetime = .8
+		lifetime = 1.0 if kind=="boss_warning" else .8
 	elif kind in ["starfall","boss_slam"]:
 		c = Color("ffa767")
 		lifetime = .65
 	elif kind in ["level_up","respawn","rally"]:
 		c = Color("a2fff2")
 		lifetime = 1.0
-	var ring = _ring(maxf(radius,.2),c,.035)
+	var ring = _arc(radius,hero_model.rotation.y if hero_model else 0,c,.16) if kind=="cleave" else _ring(maxf(radius,.2),c,.035)
 	ring.position = pos+Vector3(0,.16,0)
 	add_child(ring)
 	effects.append({"node":ring,"remaining":lifetime,"life":lifetime,"type":"warning" if kind.ends_with("warning") else "ring"})
@@ -346,6 +355,9 @@ func effect(kind: String, pos: Vector3, radius: float) -> void:
 		effects.append({"node":ray,"remaining":.25,"life":.25,"type":"fade"})
 
 func _process(delta: float) -> void:
+	# Telegraphs and impacts share the simulation clock, including pause and 2x.
+	if is_instance_valid(gameplay):
+		delta = 0.0 if gameplay.paused else delta*float(gameplay.speed)
 	clock_time += delta
 	hero_action_time = maxf(0.0,hero_action_time-delta)
 	if crystal:
@@ -369,7 +381,7 @@ func _process(delta: float) -> void:
 				if t>.65:node.position.y -= delta*1.5
 		if node is MeshInstance3D and d.type != "projectile":
 			var material = node.material_override as StandardMaterial3D
-			if material: material.albedo_color.a = (1.0-t)*.85
+			if material: material.albedo_color.a = maxf(.35,(1.0-t)*.85) if d.type=="warning" else (1.0-t)*.85
 
 func _find_named(node: Node, needle: String) -> Node3D:
 	if needle in str(node.name) and node is Node3D:return node
@@ -504,3 +516,31 @@ func _hero_livery(node: Node) -> void:
 				tinted.albedo_color = Color(.62,.8,1.0)
 				node.set_surface_override_material(i,tinted)
 	for child in node.get_children():_hero_livery(child)
+
+func _forest_palette(node: Node) -> void:
+	if node is MeshInstance3D:
+		for i in range(node.mesh.get_surface_count()):
+			var original: Material = node.mesh.surface_get_material(i)
+			if original is StandardMaterial3D:
+				var tinted = original.duplicate() as StandardMaterial3D
+				tinted.albedo_color = Color(.55,.8,.75)
+				node.set_surface_override_material(i,tinted)
+	for child in node.get_children():_forest_palette(child)
+
+func _arc(radius: float, heading: float, color: Color, width: float) -> MeshInstance3D:
+	var mesh = ImmediateMesh.new()
+	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(20):
+		var a = heading-1.15+float(i)*2.3/20
+		var b = heading-1.15+float(i+1)*2.3/20
+		var va = Vector3(sin(a),0,cos(a))
+		var vb = Vector3(sin(b),0,cos(b))
+		for vertex in [va*(radius-width),va*(radius+width),vb*(radius+width),va*(radius-width),vb*(radius+width),vb*(radius-width)]:
+			mesh.surface_add_vertex(vertex)
+	mesh.surface_end()
+	var node = MeshInstance3D.new()
+	node.mesh = mesh
+	var material = _material(color,true)
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	node.material_override = material
+	return node

@@ -9,6 +9,7 @@ var world: Node3D
 var balance_mode: String = ""
 var balance_ticks: int = 0
 var balance_events: Array = []
+var observed_events: Array = []
 
 class VisualProbe:
 	extends Node
@@ -37,6 +38,23 @@ func check(condition: bool,label: String) -> void:
 func reset_game() -> void:
 	game.restart()
 	game.set_physics_process(false)
+	observed_events.clear()
+
+func _record_event(key: String, data: Dictionary) -> void:
+	observed_events.append({"key":key,"data":data.duplicate(true)})
+
+func _cleared_wave_events() -> Array[int]:
+	var result: Array[int] = []
+	for event: Dictionary in observed_events:
+		if event["key"] == "wave_cleared":
+			result.append(int(event["data"]["wave"]))
+	return result
+
+func _shop_available(item: String) -> bool:
+	for entry: Dictionary in game.snapshot()["shop"]:
+		if entry["key"] == item:
+			return bool(entry["available"])
+	return false
 
 func _run() -> void:
 	world = Node3D.new()
@@ -47,6 +65,7 @@ func _run() -> void:
 	root.add_child(game)
 	game.setup(world,probe,null)
 	game.set_physics_process(false)
+	game.game_event.connect(_record_event)
 	check(game.gold==420 and game.nexus_hp==20 and game.hero_hp==240.0,"initial economy and health")
 	check(game.hero is CharacterBody3D and game.hero.collision_mask==1,"real colliding hero body")
 	check(Gameplay.LANES.size()==2 and Gameplay.PADS.size()==12,"two lanes and twelve fixed pads")
@@ -69,9 +88,11 @@ func _run() -> void:
 	check(game.buy_item("blade") and game.hero_damage==44.0 and game.gold==310,"blade adds 12 damage")
 	check(game.buy_item("plate") and game.hero_max_hp==305.0,"plate adds max health")
 	check(game.buy_item("focus"),"focus purchase succeeds")
+	check(not _shop_available("potion"),"full health disables potion in shop snapshot")
 	check(not game.buy_item("potion"),"full health potion rejected without charge")
 	game.hero_hp = 30.0
 	game.gold = 45
+	check(_shop_available("potion"),"injured hero can buy an affordable potion")
 	check(game.buy_item("potion") and game.hero_hp==180.0 and game.gold==0,"potion heals 150 for 45 gold")
 	reset_game()
 	var enemy_id: int = game._spawn_enemy("scout",0,1)
@@ -102,6 +123,40 @@ func _run() -> void:
 	var previous_gold: int = game.gold
 	check(game.snapshot()["early_call"],"early call unlocks at four surviving enemies")
 	check(game.start_wave() and game.wave==2 and game.enemies.size()==4 and game.gold==previous_gold+30,"early call grants 30 while survivors remain")
+	check(_cleared_wave_events().is_empty(),"early call does not announce an unfinished previous wave as cleared")
+	game._check_wave_complete()
+	check(game.gold==previous_gold+30 and _cleared_wave_events().is_empty(),"survivors and queued enemies prevent both completion rewards")
+	game._update_spawns(100.0)
+	for id in game.enemies.keys():
+		if int(game.enemies[id]["spawn_wave"]) == 2:
+			game._damage_enemy(id,10000.0,"holy")
+	var before_reward: int = game.gold
+	game._check_wave_complete()
+	check(game.gold==before_reward+50 and _cleared_wave_events()==[2],"overlapped wave two earns its own completion reward before wave one")
+	check(game.phase=="wave" and game.enemies.size()==4,"older wave survivors keep combat active after newer wave clears")
+	before_reward = game.gold
+	game._check_wave_complete()
+	check(game.gold==before_reward and _cleared_wave_events()==[2],"rechecking cleared overlapping wave cannot duplicate its reward")
+	for id in game.enemies.keys():
+		game._damage_enemy(id,10000.0,"holy")
+	before_reward = game.gold
+	game._check_wave_complete()
+	check(game.gold==before_reward+45 and _cleared_wave_events()==[2,1],"last wave-one survivors award wave-one completion exactly once")
+	check(game.phase=="build" and game._pending_wave_rewards.is_empty(),"all overlapped waves cleared returns to build with no pending rewards")
+	before_reward = game.gold
+	game._check_wave_complete()
+	check(game.gold==before_reward and _cleared_wave_events()==[2,1],"build-phase completion recheck cannot pay again")
+	game.start_wave()
+	check(not game._pending_wave_rewards.is_empty(),"a newly started wave has a pending completion reward")
+	reset_game()
+	check(game._pending_wave_rewards.is_empty(),"restart clears pending rewards from the previous run")
+	game.start_wave()
+	game._update_spawns(100.0)
+	for id in game.enemies.keys():
+		game._damage_enemy(id,10000.0,"holy")
+	before_reward = game.gold
+	game._check_wave_complete()
+	check(game.gold==before_reward+45 and _cleared_wave_events()==[1],"new run receives only its fresh wave-one reward after restart")
 	reset_game()
 	game._damage_hero(10000.0)
 	check(game.hero_respawn==8.0 and game.hero_hp==0 and game.gold==390,"death costs gold and starts respawn")

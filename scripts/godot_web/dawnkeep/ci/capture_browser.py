@@ -83,7 +83,9 @@ def main():
                             if not music.get('unlocked') or not music.get('playing') or music.get('muted'):
                                 raise RuntimeError('Music did not unlock/play after actual user gesture')
                             recorder=subprocess.Popen(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-f','pulse','-i','default','-c:a','pcm_s16le',str(directory/'runtime-audio.wav')])
-                            plan.combat();stop_process(recorder);recorder=None
+                            if mobile:plan.combat()
+                            else:plan.full_desktop()
+                            stop_process(recorder);recorder=None
                             result['captured_audio']=inspect_audio(directory/'runtime-audio.wav')
                         def shell_click(selector):
                             locator=page.locator(selector)

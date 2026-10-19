@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       full_acceptance:
-        description: 'Run longer combat and actual audiovisual recording after the fast native image/input gate'
+        description: 'After the native gate: full eight-wave victory, natural defeat/restart, and actual audiovisual recording'
         type: boolean
         default: false
 concurrency:
@@ -18,7 +18,7 @@ permissions:
 jobs:
   native-and-web:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 60
     env:
       RECIPE: scripts/godot_web/dawnkeep
       LIBGL_ALWAYS_SOFTWARE: '1'
@@ -59,6 +59,10 @@ jobs:
           set -euo pipefail
           xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/author_native.py" \
             --source "$RECIPE/game" --godot Godot_v4.6.3-stable_linux.x86_64 --output "$RUNNER_TEMP/dawnkeep-author"
+      - name: Exact-source mechanics, bilingual layout and runtime integration
+        run: |
+          python "$RECIPE/ci/verify_headless.py" --source "$RUNNER_TEMP/dawnkeep-author/native" \
+            --godot Godot_v4.6.3-stable_linux.x86_64 --output "$RUNNER_TEMP/dawnkeep-headless"
       - name: Fast actual native input and image gate
         id: native_gate
         run: |
@@ -129,6 +133,8 @@ jobs:
             ${{ runner.temp }}/dawnkeep-author/mcp-*.json
             ${{ runner.temp }}/dawnkeep-author/editor.log
             ${{ runner.temp }}/dawnkeep-author/native
+            ${{ runner.temp }}/dawnkeep-headless/*.json
+            ${{ runner.temp }}/dawnkeep-headless/*.log
             ${{ runner.temp }}/dawnkeep-native-preview/*.json
             ${{ runner.temp }}/dawnkeep-native-preview/*.log
             ${{ runner.temp }}/dawnkeep-native-preview/*.png

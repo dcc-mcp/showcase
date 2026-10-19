@@ -24,6 +24,9 @@ followed by JSON, with these fields (the full gameplay snapshot can add more):
   Optional `start` is clicked if present in an initial menu. Optional `resume`
   returns from a pause menu. Optional `confirm_restart` is used only if shown.
   Missing/hidden controls are omitted. Disabled controls are still described.
+- `ui.minimap: {x,y,w,h}` describes the public, clickable minimap. Its linear
+  world bounds are x [-17,17] and z [-11,11]. Tests click this visible map;
+  observation never invokes the underlying move command.
 - Optional `ui.pads`: array of `{id, x,y}` projected clickable support pads.
 - Optional `ui.labels`: actual current rendered text, used for localization QA.
 
@@ -47,7 +50,9 @@ PCK network request then pressing the visible Retry button.
 
 Preview runs are short real rendered screenshot/input gates, not completion,
 full audiovisual, full gameplay-balance, physical-phone, or deployed-site
-acceptance. Full runs add observed wave combat, skills/equipment/repeated and
+acceptance. Full desktop runs require all eight waves, actual victory, a fresh natural AFK
+defeat, and restart after both terminal states. Portrait remains a scoped
+two-wave run. Full runs add skills/equipment/repeated and
 invalid input, pause/resume/restart, desktop+portrait and EN+ZH, audio bus energy,
 Web loading/retry/quit/restart/fullscreen, actual recordings and decode checks.
 Listening to the final delivered soundtrack is a separate required review.

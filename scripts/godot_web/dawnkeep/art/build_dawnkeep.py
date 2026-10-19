@@ -5,6 +5,7 @@ coordinates are converted by pos(), so road routes match the simulation.
 """
 import bpy, math, random, os, sys, json, hashlib
 from mathutils import Vector
+from mathutils.geometry import tessellate_polygon
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
 OUT=HERE.parent/'game/assets/original'
@@ -18,7 +19,7 @@ def mat(name,hex,metal=0,emit=0):
     p=m.node_tree.nodes.get('Principled BSDF');p.inputs['Base Color'].default_value=(*c,1);p.inputs['Roughness'].default_value=.84;p.inputs['Metallic'].default_value=metal
     if emit: p.inputs['Emission Color'].default_value=(*c,1);p.inputs['Emission Strength'].default_value=emit
     M[name]=m;return m
-for name,c in [('grass','214d47'),('grass_sun','2d6251'),('grass_dark','193e3e'),('moss','547b55'),('cliff','223642'),('cliff_light','355460'),('cliff_dark','142630'),('cliff_edge','537572'),('sand','9c9871'),('sand_light','bbb588'),('sand_dark','737c63'),('stone','b3c1b5'),('stone_light','d6d9bd'),('stone_dark','718d8b'),('gold','e1ab50'),('gold_dark','9b6537'),('wood','694c3d'),('blue','294c6a'),('red','ba5435'),('ivory','f1e3ae')]:mat(name,c)
+for name,c in [('grass','214d47'),('grass_sun','2d6251'),('grass_dark','193e3e'),('moss','547b55'),('cliff','223642'),('cliff_light','355460'),('cliff_dark','142630'),('cliff_edge','537572'),('sand','8e8b68'),('sand_light','aaa57d'),('sand_dark','77785c'),('stone','b3c1b5'),('stone_light','d6d9bd'),('stone_dark','718d8b'),('gold','e1ab50'),('gold_dark','9b6537'),('wood','694c3d'),('blue','294c6a'),('red','ba5435'),('ivory','f1e3ae')]:mat(name,c)
 mat('crystal','66ece0',.1,.65);mat('rune','a6fff1',0,1.4);mat('ember','ffab47',0,1.1);mat('amethyst','bd99ed',0,.5)
 def pos(x,z,y=0):return (x,-z,y)
 def mesh(name,verts,faces,materials,indices=None):
@@ -88,32 +89,58 @@ f.append(tuple(range(5*n,6*n)));inds.append(2)
 mesh('Floating_cliff_strata',v,f,['cliff','cliff_light','cliff_dark','cliff_edge'],inds)
 # Flat playable turf triangles with restrained color variation, slightly lower than road.
 v=[pos(0,0,-.015)]+[pos(x,z,-.015) for x,z in outline]
-mesh('Continuous_traversable_meadow',v,[(0,i+1,(i+1)%n+1) for i in range(n)],['grass','grass_sun','grass_dark'],[0,0,1,1,1,0,0,0,0,0,0,0,0,2,2,2])
+mesh('Continuous_traversable_meadow',v,[(0,(i+1)%n+1,i+1) for i in range(n)],['grass','grass_sun','grass_dark'],[0,0,1,1,1,0,0,0,0,0,0,0,0,2,2,2])
 lanes=[[(-15,-7),(-8,-7),(-8,2),(-2,2),(-2,-5),(7,-5),(7,5),(13,5)],[(-15,8),(-11,8),(-11,2),(-2,2)]]
 # One non-overlapping tessellated road bed. Each quad is unique, including junctions.
 segments=[(a,b) for lane in lanes for a,b in zip(lane,lane[1:])]
 def distance_segment(x,z,a,b):
     dx=b[0]-a[0];dz=b[1]-a[1];t=max(0,min(1,((x-a[0])*dx+(z-a[1])*dz)/(dx*dx+dz*dz)))
     return math.hypot(x-a[0]-dx*t,z-a[1]-dz*t)
-v=[];f=[];ind=[]
+# Trace the union boundary, soften corners, and add controlled erosion.
+occupied=set()
 for xi in range(-34,31):
  for zi in range(-18,20):
-    x=xi*.5+.25;z=zi*.5+.25;d=min(distance_segment(x,z,a,b) for a,b in segments)
-    if d>1.10:continue
-    j=len(v);v.extend([pos(x-.25,z-.25,.013),pos(x+.25,z-.25,.013),pos(x+.25,z+.25,.013),pos(x-.25,z+.25,.013)])
-    f.append((j,j+1,j+2,j+3));ind.append(1 if d>.9 else 0)
-mesh('Connected_sandstone_road',v,f,['sand_dark','grass_dark'],ind)
-# Sparse worn inset slabs, irregular spacing. Never duplicate crossing geometry.
+  if min(distance_segment(xi*.5+.25,zi*.5+.25,a,b) for a,b in segments)<1.12:occupied.add((xi,zi))
+edges={}
+for x,z in sorted(occupied):
+ if (x,z-1) not in occupied:edges[(x,z)]=(x+1,z)
+ if (x+1,z) not in occupied:edges[(x+1,z)]=(x+1,z+1)
+ if (x,z+1) not in occupied:edges[(x+1,z+1)]=(x,z+1)
+ if (x-1,z) not in occupied:edges[(x,z+1)]=(x,z)
+start_edge=sorted(edges)[0];q=start_edge;poly=[]
+while not poly or q!=start_edge:
+ poly.append(Vector((q[0]*.5,q[1]*.5)));q=edges[q]
+simple=[]
+for i,p in enumerate(poly):
+ a=p-poly[i-1];b=poly[(i+1)%len(poly)]-p
+ if abs(a.x*b.y-a.y*b.x)>.0001:simple.append(p)
+poly=simple
+for _ in range(2):
+ poly=[v for i,p in enumerate(poly) for v in [p*.75+poly[(i+1)%len(poly)]*.25,p*.25+poly[(i+1)%len(poly)]*.75]]
+rough=[]
+for i,p in enumerate(poly):
+ nxt=poly[(i+1)%len(poly)];steps=max(1,int((nxt-p).length/.65))
+ for j in range(steps):
+  v=p.lerp(nxt,j/steps);v+=Vector((random.uniform(-.10,.10),random.uniform(-.10,.10)));rough.append(Vector((v.x,-v.y,.018)))
+flat=list(reversed(rough));tri=tessellate_polygon([flat]);verts=[tuple(flat[p] if isinstance(p,int) else p) for t in tri for p in t]
+mesh('Worn_earth_path',verts,[tuple(range(i,i+3)) for i in range(0,len(verts),3)],['sand_dark'])
+# Individually drawn chipped polygon slabs, sparse rather than identical pavers.
 seen=[]
 for a,b in segments:
-    dx=b[0]-a[0];dz=b[1]-a[1];length=math.hypot(dx,dz);steps=int(length/1.5)+1
-    for j in range(steps+1):
-      t=j/steps;x=a[0]+dx*t;z=a[1]+dz*t
-      if any(math.hypot(x-q[0],z-q[1])<1.1 for q in seen):continue
-      seen.append((x,z));theta=math.atan2(dz,dx)
-      off=random.uniform(-.22,.22);x-=math.sin(theta)*off;z+=math.cos(theta)*off
-      o=ringmesh('Worn_road_slab',pos(x,z,.03),[(0,.58,.76,0),(.035,.52,.70,0)],6,['sand_light' if random.random()<.26 else 'sand','sand_dark'],0)
-      o.rotation_euler.z=-theta+random.uniform(-.14,.14)
+ dx=b[0]-a[0];dz=b[1]-a[1];length=math.hypot(dx,dz);steps=int(length/1.65)+1
+ for j in range(steps+1):
+  t=j/steps;x=a[0]+dx*t;z=a[1]+dz*t
+  if any(math.hypot(x-q[0],z-q[1])<1.25 for q in seen):continue
+  seen.append((x,z));theta=math.atan2(dz,dx);off=random.uniform(-.26,.26)
+  x-=math.sin(theta)*off;z+=math.cos(theta)*off
+  # Split two of the slabs into independently shaped worn fragments.
+  count=2 if random.random()<.25 else 1
+  for piece in range(count):
+   length=random.uniform(.35,.7)/count;width=random.uniform(.4,.64);cx=x+(piece-.5)*.44 if count==2 else x
+   poly2=[(-length,-width*.55),(-length*.65,-width),(length*.5,-width*.86),(length,-width*.36),(length*.85,width*.65),(.1,width),(-length*.9,width*.7)]
+   vs=[pos(cx+u,z+v,.025) for u,v in poly2]+[pos(cx+u*.97,z+v*.97,.065) for u,v in poly2]
+   n=len(poly2);faces=[tuple(range(n,2*n))[::-1]]+[(k,(k+1)%n,(k+1)%n+n,k+n) for k in range(n)]
+   mesh('Chipped_sandstone_slab',vs,faces,['sand_light' if random.random()<.3 else 'sand','sand_dark'],[0]+[1]*n)
 # Edge inscriptions and root fragments outside playable roads.
 for x,z,s in [(-13,-10,1),(-5,-10,1.2),(11,-9,1),(15,-2,.8),(15,9,1),(-7,10,.8),(-16,2,.7)]:
     ringmesh('Lichen_stone',pos(x,z,-.03),[(0,s,.7*s,0),(.25,.9*s,.6*s,.15),(.52,.5*s,.4*s,.3)],6,['cliff_light','cliff_edge','moss'])
@@ -187,6 +214,55 @@ beam('Standard_crossbar',(-.65,0,2.75),(.65,0,2.75),.045,.045,'gold')
 blade('Azure_swallowtail',(0,0,1.25),[(-.6,1.5),(.6,1.5),(.57,0),(0,.28),(-.57,0)],.04,['blue','gold_dark'])
 blade('Dawn_sigil',(0,-.035,1.8),[(0,0),(.28,.42),(0,.78),(-.28,.42)],.015,['gold'])
 save_group('standard',start)
+# === Watchwood: original leaning/branching canopy, asymmetric leaf silhouettes ===
+for name,c in [('bark','654936'),('bark_light','8b6443'),('leaf_shadow','173e36'),('leaf_mid','28624a'),('leaf_lit','4b8257'),('leaf_tip','76a064')]:mat(name,c)
+def branch(name,points,radii):
+ v=[];n=7
+ for j,p in enumerate(points):
+  for i in range(n):
+   a=i*math.tau/n;v.append((p[0]+math.cos(a)*radii[j],p[1]+math.sin(a)*radii[j],p[2]))
+ f=[]
+ for j in range(len(points)-1):
+  for i in range(n):f.append((j*n+i,j*n+(i+1)%n,(j+1)*n+(i+1)%n,(j+1)*n+i))
+ return mesh(name,v,f,['bark','bark_light'],[int(i%7 in [1,2]) for i in range(len(f))])
+def canopy(center,rx,ry,height,seed):
+ rng=random.Random(seed);n=13;v=[];levels=[(-height*.32,.45),(-height*.05,1),(height*.27,.92),(height*.5,.5)]
+ for j,(h,sc) in enumerate(levels):
+  for i in range(n):
+   a=i*math.tau/n;r=sc*(1+.13*math.sin(a*3+seed)+.1*math.cos(a*5-seed))
+   v.append((center[0]+rx*r*math.cos(a),center[1]+ry*r*math.sin(a),center[2]+h+.1*math.sin(a*3+j)))
+ v.append((center[0]-.18,center[1]+.12,center[2]+height*.63));f=[];idx=[]
+ f.append(tuple(range(n-1,-1,-1)));idx.append(0)
+ for j in range(3):
+  for i in range(n):f.append((j*n+i,j*n+(i+1)%n,(j+1)*n+(i+1)%n,(j+1)*n+i));idx.append(0 if j==0 else (1 if j==1 else 2))
+ for i in range(n):f.append((3*n+i,3*n+(i+1)%n,4*n));idx.append(2 if i%3 else 3)
+ return mesh('Hand_shaped_leaf_canopy',v,f,['leaf_shadow','leaf_mid','leaf_lit','leaf_tip'],idx)
+start=set(bpy.context.scene.objects)
+branch('Crooked_watchwood_trunk',[(0,0,0),(.08,.03,.9),(-.12,.05,1.8),(.18,.03,2.6),(.12,.12,3.5)],[.36,.29,.24,.15,.03])
+for i,(cx,cy,cz,rx,ry,h) in enumerate([(-.95,.08,2.5,1.12,.86,.9),(.86,.3,2.8,1.0,.85,.88),(-.5,.65,3.3,1.25,1.05,.8),(.38,-.43,3.7,1.38,1.0,.95),(.3,.2,4.25,.96,.87,.72),(-1.4,-.3,2.95,.74,.75,.6)]):
+ branch('Ascending_branch',[(0,0,1.0+cz*.25),(cx*.52,cy*.52,cz-.6),(cx,cy,cz+.1)],[.14,.085,.02]);canopy((cx,cy,cz),rx,ry,h,180+i)
+for i in range(5):
+ a=i*math.tau/5;branch('Surface_root',[(math.cos(a)*.68,math.sin(a)*.68,.02),(math.cos(a)*.32,math.sin(a)*.32,.18),(0,0,.4)],[.07,.12,.15])
+bpy.ops.object.select_all(action='DESELECT')
+for o in bpy.context.scene.objects:
+ if o not in start:o.select_set(True)
+bpy.context.view_layer.objects.active=[o for o in bpy.context.scene.objects if o not in start][0];bpy.ops.object.join()
+original_tree=save_group('watchwood_tree',start)
+start=set(bpy.context.scene.objects)
+for i in range(9):
+ a=i*2.399;le=.5+(i%3)*.21;width=.12;v=[]
+ for j in range(5):
+  t=j/4;r=t*le;h=math.sin(t*math.pi*.8)*le*.6
+  for side in [-1,1]:v.append((math.cos(a)*r-math.sin(a)*width*side*math.sin(t*math.pi),math.sin(a)*r+math.cos(a)*width*side*math.sin(t*math.pi),h))
+ mesh('Fern_frond',v,[(j*2,j*2+1,j*2+3,j*2+2) for j in range(4)],['leaf_mid','leaf_lit'],[0,1,1,1])
+bpy.ops.object.select_all(action='DESELECT')
+for o in bpy.context.scene.objects:
+ if o not in start:o.select_set(True)
+bpy.context.view_layer.objects.active=[o for o in bpy.context.scene.objects if o not in start][0];bpy.ops.object.join()
+original_fern=save_group('moonfern',start)
+# Keep the editable source art presentation arranged, without runtime transforms baked in.
+for o in original_tree.objects:o.location+=Vector(pos(-15,-9,0))
+for o in original_fern.objects:o.location+=Vector(pos(-14,5,0))
 # Native showcase layout (runtime assets remain origin-centred).
 for c in [shrine]:
  for o in c.objects:o.location+=Vector(pos(13,5,0))

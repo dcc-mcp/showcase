@@ -20,8 +20,9 @@ Warcraft or League of Legends characters, models, audio or maps.
 
 ## Current status
 
-This is an unpublished Draft candidate. Local actual Godot parsing and 60
-headless gameplay checks pass. Automated balance controllers establish a
+This is an unpublished Draft candidate. Local actual Godot parsing, 73
+headless gameplay checks, 4,594 EN/ZH interface checks across six viewport sizes,
+and 10 main-scene integration checks pass. Automated balance controllers establish a
 possible full victory and a losing unattended run; these are not real-input
 acceptance or a subjective gameplay-quality verdict.
 

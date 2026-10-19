@@ -16,6 +16,7 @@ const WORDS = {
  "hero":["ELYRA · DAWNWARDEN", "艾莉拉 · 曙光守护者"], "level":["LV", "等级"],
  "start":["ENTER THE PASS", "进入隘口"],
  "goal":["Stand against the Hollow Court. Protect the Dawnheart through eight waves and defeat the Crownless King.", "抵御空壳王庭的侵袭。守住曙光之心，撑过八波敌潮，击败无冕之王。"],
+ "short_goal":["Protect the Dawnheart through eight waves. Defeat the Crownless King.", "守住曙光之心，撑过八波敌潮，击败无冕之王。"],
  "intro_tip":["Move to intercept enemies. Your hero attacks nearby foes automatically. Spend gold on equipment, then place supporting towers.", "主动迎击敌人，英雄会自动攻击近处目标。用金币强化装备，再建造防御塔协助守护。"],
  "controls":["WASD / arrows: move   ·   Click ground: move   ·   Q E R: skills   ·   Space: next wave", "WASD / 方向键移动 · 点击地面移动 · Q E R 技能 · 空格开始下一波"],
  "touch_controls":["Tap the ground to move. Use the direction pad and skill buttons. Tap a gold platform to build.", "点击地面移动，也可使用方向键与技能按钮。点击金色基座建造防御塔。"],
@@ -42,7 +43,7 @@ const WORDS = {
  "branch_a":["PATH I", "分支一"], "branch_b":["PATH II", "分支二"],
  "speed":["SPEED", "速度"], "help":["HOW TO PLAY", "玩法说明"],
  "boss":["THE CROWNLESS KING", "无冕之王"], "enemies":["ENEMIES", "敌人"],
- "saved_tip":["This is one complete, replayable defense. No account is required.", "一场完整可重玩的守护战，无需账号。"],
+ "saved_tip":["EIGHT WAVES · NO ACCOUNT NEEDED", "八波敌潮 · 无需账号"],
  "music_on":["SOUND ON", "声音开"], "music_off":["SOUND OFF", "声音关"],
  "reward":["REWARD", "奖励"], "selected":["SELECTED DEFENSE", "已选防御塔"],
  "dawn":["Dawn is coming. Hold the line.", "晨光将至，坚守防线。"],
@@ -59,7 +60,24 @@ const WORDS = {
  "pierce":["ARMORPIERCER", "穿甲弩"], "volley":["TRIPLE VOLLEY", "三重齐射"],
  "inferno":["BURNING GROUND", "灼热大地"], "siege":["SIEGE CANNON", "攻城重炮"],
  "deepfreeze":["DEEP FREEZE", "极寒禁锢"], "shatter":["SHATTER CRYSTAL", "碎晶爆裂"],
- "conduit":["CHAIN CONDUIT", "连锁导流"], "tempest":["TEMPEST HEART", "风暴之心"]
+ "conduit":["CHAIN CONDUIT", "连锁导流"], "tempest":["TEMPEST HEART", "风暴之心"],
+ "owned":["OWNED", "已购"], "chosen":["CHOSEN", "已选"], "other_path":["OTHER PATH", "另一分支"],
+ "health_full":["Your hero is already at full health", "英雄生命已满"],
+ "item_maxed":["This equipment is fully upgraded", "这件装备已满级"],
+ "invalid_purchase":["Wait for your hero to return before buying", "请等待英雄重返战场后购买"],
+ "wave_not_ready":["Defeat more enemies before calling a wave", "击败更多敌人后才能迎战下一波"],
+ "cannot_start_wave":["A new wave cannot begin right now", "当前无法开始下一波"],
+ "skill_unavailable":["Your hero cannot cast right now", "英雄当前无法施放技能"],
+ "skill_cooling":["This skill is still recovering", "技能仍在冷却"],
+ "skill_locked":["Starfall unlocks at level three", "星落在三级解锁"],
+ "pierce_tip":["28 damage, longer range, pierces armor", "28点伤害，更远射程，穿透护甲"],
+ "volley_tip":["Faster attacks hit up to three targets", "更快攻击，最多命中三个目标"],
+ "inferno_tip":["Burns enemies and leaves damaging ground", "灼烧敌人，并留下持续伤害区域"],
+ "siege_tip":["66 damage, wider blast, longer range", "66点伤害，更广爆炸，更远射程"],
+ "deepfreeze_tip":["Stronger slow; every fourth hit stuns", "更强减速，每第四次攻击造成眩晕"],
+ "shatter_tip":["Faster fire; targets take 25% more damage", "更快攻击，目标受到的伤害提高25%"],
+ "conduit_tip":["Lightning chains through five enemies", "闪电在五个敌人之间弹射"],
+ "tempest_tip":["Faster lightning briefly stuns chain targets", "更快闪电，短暂眩晕连锁目标"]
 }
 var language := "zh"
 var state: Dictionary = {}
@@ -77,6 +95,8 @@ var muted := false
 var _layout_size := Vector2.ZERO
 var minimap_rect := Rect2()
 var _finger_directions: Dictionary = {}
+var hero_health_bar: ProgressBar
+var boss_health_bar: ProgressBar
 
 func text(key: String) -> String:
  var value: Variant = WORDS.get(key, [key.replace("_", " ").to_upper(), key])
@@ -136,6 +156,13 @@ func _button(key: String, action: String, value: Variant = null, color: Color = 
  b.add_theme_stylebox_override("pressed", _style(Color(.16,.28,.26,.98), color, 7))
  b.add_theme_stylebox_override("disabled", _style(Color(.035,.065,.08,.85), MUTED.darkened(.6), 7))
  b.add_theme_stylebox_override("focus", _style(Color(0,0,0,0), Color.WHITE, 7))
+ for style_name in ["normal","hover","pressed","disabled","focus"]:
+  var button_style:=b.get_theme_stylebox(style_name) as StyleBoxFlat
+  button_style.content_margin_left=5
+  button_style.content_margin_right=5
+  button_style.content_margin_top=3
+  button_style.content_margin_bottom=3
+ b.clip_text=true
  b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
  b.pressed.connect(func(): _activate(action, value))
  add_child(b)
@@ -193,15 +220,47 @@ func _build() -> void:
  labels.modal_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
  labels.modal_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
  labels.modal_footer.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+ hero_health_bar=_health_bar(panels.hero_panel,TEAL)
+ boss_health_bar=_health_bar(panels.boss_panel,Color("e5748c"))
+
+func _health_bar(parent:Panel,color:Color) -> ProgressBar:
+ var bar:=ProgressBar.new()
+ bar.show_percentage=false
+ bar.mouse_filter=Control.MOUSE_FILTER_IGNORE
+ var background:=StyleBoxFlat.new()
+ background.bg_color=Color(.1,.2,.2)
+ var fill:=StyleBoxFlat.new()
+ fill.bg_color=color
+ bar.add_theme_stylebox_override("background",background)
+ bar.add_theme_stylebox_override("fill",fill)
+ parent.add_child(bar)
+ return bar
 
 func _set_direction(key: String, direction: Vector2, pressed: bool) -> void:
+ if not action_allowed("none") or (portrait and shop!=""):
+  clear_touch_movement()
+  return
  if pressed: _finger_directions[key] = direction
  else: _finger_directions.erase(key)
  var total := Vector2.ZERO
  for value: Vector2 in _finger_directions.values(): total += value
  move_pressed.emit(total.limit_length())
 
+func clear_touch_movement() -> void:
+ _finger_directions.clear()
+ move_pressed.emit(Vector2.ZERO)
+
+func action_allowed(action: String) -> bool:
+ if action in ["language","mute"]:return true
+ if confirming:return action in ["confirm_restart","cancel"]
+ if help_open:return action=="cancel"
+ if intro:return action=="start"
+ if str(state.get("mode","")) in ["victory","defeat","won","lost"]:return action=="confirm_restart"
+ if bool(state.get("paused",false)):return action in ["resume","restart"]
+ return true
+
 func _activate(action: String, value: Variant) -> void:
+ if not action_allowed(action):return
  if action == "shop":
   shop = "" if shop == str(value) else str(value)
  elif action == "close_shop": shop = ""
@@ -257,11 +316,11 @@ func _layout() -> void:
  _place(panels.header, Rect2(pad,pad,w-pad*2,60 if portrait else 68))
  _place(labels.title,Rect2(pad+14,pad+5,210,31),not portrait)
  _place(labels.chapter,Rect2(pad+15,pad+39,230,18),not portrait)
- _place(labels.stats,Rect2(pad+12 if portrait else 292,pad+12,w-168 if portrait else w-625,35))
- var tools_x := w-pad-(104 if portrait else 310)
+ _place(labels.stats,Rect2(pad+12 if portrait else 292,pad+12,w-168 if portrait else w-720,35))
+ var tools_x := w-pad-(104 if portrait else 370)
  for i in range(2 if portrait else 5):
   var key: String = ["language","mute","pause","restart","help"][i]
-  _place(controls[key],Rect2(tools_x+i*(48 if portrait else 60),pad+10,44 if portrait else 56,40))
+  _place(controls[key],Rect2(tools_x+i*(48 if portrait else 74),pad+10,44 if portrait else 70,40))
  for key in ["pause","restart","help"]: controls[key].visible = not portrait
  var bottom := h-(222 if portrait else 156)
  if portrait:
@@ -298,7 +357,7 @@ func _layout() -> void:
   for key in ["move_up","move_down","move_left","move_right"]: controls[key].visible = false
  var sw := minf(390,w-20)
  var sx := (w-sw)*.5 if portrait else w-sw-20
- var sy := maxf(136,bottom-(374 if portrait else 370)-12)
+ var sy := clampf(maxf(136,bottom-(374 if portrait else 370)-12),10,maxf(10,h-376))
  _place(panels.shop_panel,Rect2(sx,sy,sw,366),shop != "")
  _place(labels.shop_title,Rect2(sx+16,sy+12,sw-90,30),shop != "")
  _place(controls.close,Rect2(sx+sw-70,sy+10,58,36),shop != "")
@@ -334,10 +393,10 @@ func _layout() -> void:
  var my := (h-mh)*.5
  _place(panels.modal,Rect2(mx,my,mw,mh),modal)
  _place(labels.modal_title,Rect2(mx+20,my+25,mw-40,62),modal)
- labels.modal_title.add_theme_font_size_override("font_size",30 if portrait else 38)
+ labels.modal_title.add_theme_font_size_override("font_size",22 if w<400 else (30 if portrait else 38))
  _place(labels.modal_subtitle,Rect2(mx+20,my+87,mw-40,24),modal)
- _place(labels.modal_body,Rect2(mx+30,my+125,mw-60,112 if portrait else 92),modal)
- _place(labels.modal_tip,Rect2(mx+30,my+238,mw-60,100),modal)
+ _place(labels.modal_body,Rect2(mx+30,my+(112 if mh<420 else 125),mw-60,64 if mh<420 else (112 if portrait else 92)),modal)
+ _place(labels.modal_tip,Rect2(mx+30,my+(180 if mh<420 else 238),mw-60,60 if mh<420 else 100),modal)
  _place(labels.modal_footer,Rect2(mx+20,my+mh-36,mw-40,20),modal)
  var button_y := my+mh-96
  _place(controls.start,Rect2(mx+30,button_y,mw-60,48),intro)
@@ -350,9 +409,37 @@ func _layout() -> void:
  if help_open: _place(controls.cancel,Rect2(mx+30,button_y,mw-60,48))
  # Modal children are always the final visual/input layer, independent of creation order.
  if modal:
+  # The actual controls and the observer must describe the same input layer.
+  var allowed:Array=["language","mute"]
+  if confirming:allowed.append_array(["confirm_restart","cancel"])
+  elif help_open:allowed.append("cancel")
+  elif intro:allowed.append("start")
+  elif ended:allowed.append("confirm_restart")
+  else:allowed.append_array(["resume","restart"])
+  for key:String in controls:
+   if key not in allowed:controls[key].visible=false
+  clear_touch_movement()
   panels.modal.move_to_front()
   for key in ["modal_title","modal_subtitle","modal_body","modal_tip","modal_footer"]: labels[key].move_to_front()
   for key in ["start","resume","restart","confirm_restart","cancel"]: controls[key].move_to_front()
+ elif portrait and shop!="":
+  # Small screens show one interactive layer rather than overlapping the shop
+  # with the movement pad and skill buttons behind its bottom rows.
+  for key in ["hero_panel","skills_panel"]:panels[key].visible=false
+  for key in ["hero","hero_stats","hero_health"]:labels[key].visible=false
+  for key in ["skill_1","skill_2","skill_3","move_up","move_down","move_left","move_right","equipment","build","pause"]:controls[key].visible=false
+  panels.shop_panel.move_to_front()
+  for key in ["shop_title","shop_tip","selected_info"]:labels[key].move_to_front()
+  for key:String in controls:
+   if key=="close" or key.begins_with("item_") or key.begins_with("tower_") or key in ["upgrade","upgrade_b","sell"]:controls[key].move_to_front()
+   elif controls[key].visible and controls[key].get_rect().intersects(panels.shop_panel.get_rect()):controls[key].visible=false
+  clear_touch_movement()
+ if is_instance_valid(hero_health_bar):
+  hero_health_bar.position=Vector2(12,panels.hero_panel.size.y-9)
+  hero_health_bar.size=Vector2(panels.hero_panel.size.x-24,4)
+ if is_instance_valid(boss_health_bar):
+  boss_health_bar.position=Vector2(12,32)
+  boss_health_bar.size=Vector2(panels.boss_panel.size.x-24,4)
  _refresh()
  queue_redraw()
 
@@ -366,6 +453,7 @@ func _refresh() -> void:
  labels.stats.text = ("%s %d   ·   %s %d   ·   %s %d/8" % [text("core"),core,text("gold"),gold,text("wave"),wave]) if not portrait else ("%s %d  |  %d G  |  %d/8" % [text("core"),core,gold,wave])
  labels.stats.add_theme_font_size_override("font_size",13 if portrait else 17)
  var hero: Dictionary = state.get("hero",{})
+ if is_instance_valid(hero_health_bar):hero_health_bar.value=100.0*float(hero.get("hp",240))/maxf(1,float(hero.get("max_hp",240)))
  labels.hero.text = text("hero")+((" · "+text("respawn")+" %.1fs"%float(hero.get("respawn",0))) if hero.get("dead",false) else "")
  labels.hero_stats.text = "%s %d    %s %d    XP %d / %d" % [text("level"),hero.get("level",1),text("damage"),hero.get("damage",32),hero.get("xp",0),hero.get("xp_next",70)]
  labels.hero_stats.add_theme_font_size_override("font_size",12 if portrait else 14)
@@ -374,6 +462,7 @@ func _refresh() -> void:
  var active := mode in ["wave","combat","playing"]
  labels.wave_status.text = text("in_wave") if active else text("prepare")
  var boss:Dictionary=state.get("boss",{})
+ if is_instance_valid(boss_health_bar):boss_health_bar.value=100.0*float(boss.get("hp",0))/maxf(1,float(boss.get("max_hp",1)))
  labels.boss_status.text=text("boss")+"  %d / %d"%[boss.get("hp",0),boss.get("max_hp",1)]
  labels.wave_preview.text = "%s: %d" % [text("enemies"),state.get("enemies",[]).size()] if active else text("dawn")
  controls.start_wave.text = text("next_wave")+" +30" if state.get("early_call",false) else (text("in_wave") if active else text("next_wave"))
@@ -400,7 +489,8 @@ func _refresh() -> void:
   var suffix := text("ready") if cd<=0 else "%.1fs"%cd
   if not unlocked: suffix=text("locked")
   var skill_name:String=text(key)
-  if portrait:skill_name=(["斩击","振奋","星落"][i] if language=="zh" else ["CLEAVE","RALLY","NOVA"][i])
+  if portrait:skill_name=(["斩击","振奋","星落"][i] if language=="zh" else ["CUT" if size.x<360 else "CLEAVE","RALLY","NOVA"][i])
+  elif language=="en" and i==1:skill_name="RALLYING\nLIGHT"
   if portrait and not unlocked:suffix="Lv3"
   controls["skill_"+str(i+1)].text = key.to_upper()+"\n"+skill_name+"\n"+suffix
   controls["skill_"+str(i+1)].add_theme_font_size_override("font_size",12 if portrait else 14)
@@ -415,7 +505,10 @@ func _refresh() -> void:
   for entry: Dictionary in inventory:
    if str(entry.get("key",entry.get("id",""))) == key: item=entry
   var cost: int = int(item.get("cost",fallback_costs[key]))
-  controls["item_"+key].text = "%s   ·   %d G\n%s" % [text(key),cost,text(key+"_tip")]
+  var owned:int=int(item.get("count",0))
+  var maximum:int=int(item.get("max_count",99 if key=="potion" else 3))
+  var rank:String="%s %d"%[text("owned"),owned] if key=="potion" else "%d/%d"%[owned,maximum]
+  controls["item_"+key].text = "%s · %d G · %s\n%s" % [text(key),cost,rank,text(key+"_tip")]
   controls["item_"+key].add_theme_font_size_override("font_size",13)
   controls["item_"+key].disabled = gold<cost or (item.has("available") and not item.available)
  var costs := {"sunbow":80,"ember":115,"frost":100,"storm":145}
@@ -426,12 +519,19 @@ func _refresh() -> void:
  var selected: Dictionary = state.get("selected_tower",{}) if state.get("selected_tower") is Dictionary else {}
  if not selected.is_empty():
   labels.selected_info.text = "%s  ·  %s %d\n%s" % [text(str(selected.get("kind","sunbow"))),text("level"),selected.get("level",1),text(str(selected.get("kind","sunbow"))+"_tip")]
+  var branch:String=str(selected.get("branch",""))
+  if branch!="":labels.selected_info.text+="\n"+text(branch)+" · "+text(branch+"_tip")
  var upgrades:Array=selected.get("upgrades",[])
  for i in range(2):
   var b:Button=controls.upgrade if i==0 else controls.upgrade_b
   if upgrades.size()>i:
    var option:Dictionary=upgrades[i]
-   b.text=text(str(option.get("key","branch_a")))+" · %d G"%int(option.get("cost",0))
+   var branch_key:String=str(option.get("key","branch_a"))
+   var chosen:String=str(selected.get("branch",""))
+   var suffix:String=(text("chosen") if chosen==branch_key else text("other_path")) if chosen!="" else "%d G"%int(option.get("cost",0))
+   b.text=text(branch_key)+" · "+suffix+"\n"+text(branch_key+"_tip")
+   b.add_theme_font_size_override("font_size",12)
+   b.tooltip_text=text(branch_key+"_tip")
    b.disabled=not bool(option.get("available",false))
   else:
    b.text=text("maxed")
@@ -449,6 +549,7 @@ func _refresh() -> void:
  if confirming: labels.modal_title.text=text("restart")
  labels.modal_subtitle.text=text("subtitle")
  labels.modal_body.text=text("goal" if intro or help_open else ("reset_question" if confirming else ("victory_tip" if won else "defeat_tip") if ended else "paused_tip"))
+ if size.y<450 and (intro or help_open):labels.modal_body.text=text("short_goal")
  labels.modal_tip.text=(text("touch_controls") if portrait else text("controls")+"\n\n"+text("intro_tip")) if intro or help_open else text("intro_tip")
  labels.modal_footer.text=text("saved_tip")
 
@@ -458,7 +559,6 @@ func ui_snapshot() -> Dictionary:
  for key: String in controls:
   var button: Button = controls[key]
   if not button.visible: continue
-  if modal and key not in ["start","resume","restart","confirm_restart","cancel","language","mute"]: continue
   var r := button.get_global_rect()
   result[key]={"x":r.position.x,"y":r.position.y,"w":r.size.x,"h":r.size.y,"enabled":not button.disabled}
  var rendered: Array[String]=[]
@@ -469,7 +569,7 @@ func ui_snapshot() -> Dictionary:
  return {"controls":result,"labels":rendered,"portrait":portrait,"intro":intro,"shop":shop,"minimap":{"x":minimap_rect.position.x,"y":minimap_rect.position.y,"w":minimap_rect.size.x,"h":minimap_rect.size.y}}
 
 func blocks_world(point: Vector2) -> bool:
- if intro or confirming or help_open or bool(state.get("paused",false)): return true
+ if intro or confirming or help_open or bool(state.get("paused",false)) or str(state.get("mode","")) in ["victory","defeat","won","lost"]: return true
  for p: Panel in panels.values():
   if p.visible and p.get_global_rect().has_point(point): return true
  for b: Button in controls.values():
@@ -498,20 +598,6 @@ func _draw() -> void:
   for enemy:Dictionary in state.get("enemies",[]):draw_circle(_map_point(enemy.position),2,Color("e98880"))
   draw_circle(_map_point([13,0,5]),3.5,TEAL)
   draw_circle(_map_point(state.get("hero",{}).get("position",{"x":-6,"z":0})),3.6,Color("ffd98d"))
- var hero: Dictionary=state.get("hero",{})
- var p: Panel=panels.hero_panel
- var hp := float(hero.get("hp",240))/maxf(1,float(hero.get("max_hp",240)))
- var bar := Rect2(p.position.x+12,p.position.y+p.size.y-8,p.size.x-24,3)
- draw_rect(bar,Color(.1,.2,.2))
- bar.size.x *= hp
- draw_rect(bar,TEAL)
- var boss:Dictionary=state.get("boss",{})
- if not boss.is_empty() and panels.boss_panel.visible:
-  var r:Rect2=panels.boss_panel.get_rect()
-  var health_bar:=Rect2(r.position.x+12,r.position.y+32,r.size.x-24,4)
-  draw_rect(health_bar,Color(.22,.08,.12))
-  health_bar.size.x*=float(boss.get("hp",0))/maxf(1,float(boss.get("max_hp",1)))
-  draw_rect(health_bar,Color("e5748c"))
  # Original compass emblem anchors the HUD without a third-party image.
  if not portrait:
   var center := Vector2(40,44)

@@ -38,9 +38,11 @@ capability. Sandbox/access denials must be reported, not worked around.
 
 `--full` adds actual screen/browser movie capture, measured nonzero runtime
 audio through a task-only PulseAudio sink, equipment purchase, support-tower
-build/upgrade/repeated-invalid upgrade/sell/rebuild, two-wave combat and hero
-level-three ultimate use, then restart. This remains a bounded two-wave route;
-it is not proof of eight-wave victory or balance across every strategy.
+build/upgrade/repeated-invalid upgrade/sell/rebuild, hero level-three ultimate use,
+and full eight-wave desktop victory including the boss. A restarted unattended
+run must naturally lose the core, and terminal restart must restore the initial
+state. Portrait includes the shorter touch route. These are observed real-input
+routes, not proof of balance across every strategy.
 
 The native movie is continuous ffmpeg X11 capture. Browser videos use the
 actual Chromium page recording and audio is captured separately from the
@@ -61,3 +63,8 @@ final victory/balance remain separate acceptance stages.
 Run `python -m unittest discover -s ci -p 'test_*.py' -v` and
 `node ci/test_web_shell.js`. They validate harness behavior and fail-closed
 inventory/lifecycle boundaries; they are not runtime gameplay evidence.
+
+Run `python ci/verify_headless.py --source game --output /tmp/dawnkeep-headless`
+for isolated mechanics, six-viewport bilingual layout, main-scene integration
+and public-command balance fixtures. This explicitly separate synthetic stage
+preserves logs and exact source hashes; it does not replace real input.

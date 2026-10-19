@@ -26,8 +26,10 @@ var _snapshot: Dictionary = {}
 var _music_battle := false
 var _last_phase := ""
 var _modal_was_paused := false
+var _modal_open := false
 var _last_selected := -2
 var _last_occupied := false
+var _last_boss_present := false
 var _marker: Node3D
 
 func _ready() -> void:
@@ -154,22 +156,27 @@ func _process(delta:float) -> void:
   report_timer=0
   _report_state()
 
-func _unhandled_input(event:InputEvent) -> void:
+func _input(event:InputEvent) -> void:
  if event is InputEventKey and event.pressed and not event.echo:
   var code:int=event.physical_keycode
+  if code not in [KEY_L,KEY_M,KEY_ESCAPE,KEY_BACKSPACE,KEY_Q,KEY_E,KEY_R,KEY_SPACE]:return
+  if hud.intro and code not in [KEY_L,KEY_M]:return
   if code==KEY_L:_command("language",null)
   elif code==KEY_M:_command("mute",null)
   elif code==KEY_ESCAPE:
-   if hud.shop!="":hud.shop="";hud._layout()
-   elif hud.confirming or hud.help_open: hud._activate("cancel",null)
+   if hud.confirming or hud.help_open: hud._activate("cancel",null)
+   elif hud.shop!="":hud.shop="";hud._layout()
    elif not hud.intro:_command("pause",null)
-  elif code==KEY_BACKSPACE and not hud.confirming and not hud.help_open:hud._activate("restart",null)
+  elif code==KEY_BACKSPACE and not hud.intro and not hud.confirming and not hud.help_open:hud._activate("restart",null)
   elif not hud.intro and not hud.confirming and not hud.help_open:
    if code==KEY_Q:_command("skill","q")
    elif code==KEY_E:_command("skill","e")
    elif code==KEY_R:_command("skill","r")
    elif code==KEY_SPACE:_command("start_wave",null)
+  get_viewport().set_input_as_handled()
   return
+
+func _unhandled_input(event:InputEvent) -> void:
  if event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT]:
   if hud.blocks_world(event.position):return
   _unlock_audio()
@@ -206,9 +213,13 @@ func _command(action:String,value:Variant) -> void:
  match action:
   "unlock":pass
   "modal_open":
+   if _modal_open:return
+   _modal_open=true
    _modal_was_paused=bool(game.paused)
    if not _modal_was_paused:game.toggle_pause();_pause_music(true)
   "modal_close":
+   if not _modal_open:return
+   _modal_open=false
    if not _modal_was_paused and game.paused:game.toggle_pause();_pause_music(false)
   "language":
    language="en" if language=="zh" else "zh"
@@ -219,11 +230,13 @@ func _command(action:String,value:Variant) -> void:
    hud.muted=muted
    hud._refresh()
   "pause":
+   if hud.intro or hud.confirming or hud.help_open:return
    game.toggle_pause()
    _pause_music(bool(game.paused))
    hud._layout()
   "speed":game.set_speed(2 if game.speed==1 else 1)
   "restart":
+   _modal_open=false
    game.restart()
    _pause_music(false)
    touch_move=Vector2.ZERO
@@ -250,8 +263,10 @@ func _on_state(value:Dictionary) -> void:
  _music_battle=str(value.get("phase","build"))=="wave"
  var occupied:=bool(selected.get("occupied",false))
  var selection:=int(value.get("selected_pad",-1))
- if _last_selected!=selection or _last_occupied!=occupied or _last_phase!=str(value.get("phase","")):
+ var boss_present:bool=not value.get("boss",{}).is_empty()
+ if _last_selected!=selection or _last_occupied!=occupied or _last_phase!=str(value.get("phase","")) or _last_boss_present!=boss_present:
   _last_selected=selection;_last_occupied=occupied;_last_phase=str(value.get("phase",""))
+  _last_boss_present=boss_present
   hud._layout()
 
 func _on_game_event(key:String,data:Dictionary) -> void:

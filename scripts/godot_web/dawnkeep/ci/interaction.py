@@ -197,3 +197,145 @@ class InputPlan:
         if 'confirm_restart' in state['ui']['controls']:self.tap('confirm_restart')
         self.wait(lambda s:s.get('wave',0)==0 and len(s.get('enemies',[]))==0 and len(s.get('towers',[]))==0,'actual restart reset',old['sample_id'])
         self.screenshot('restart')
+
+    def minimap_click(self, x, z):
+        """A real click on the game's public minimap, using passive UI geometry."""
+        state=self.current();rect=state['ui'].get('minimap')
+        if not isinstance(rect,dict):raise ValueError('Visible minimap geometry is missing')
+        if any(type(rect.get(k)) not in (int,float) or not math.isfinite(rect[k]) for k in ('x','y','w','h')):
+            raise ValueError('Invalid actual minimap geometry')
+        # These are the public map's documented world bounds, not a game command.
+        sx=rect['x']+(max(-17,min(17,x))+17)/34*rect['w']
+        sy=rect['y']+(max(-11,min(11,z))+11)/22*rect['h']
+        if not (0<sx<self.viewport[0] and 0<sy<self.viewport[1]):raise ValueError('Minimap click is outside viewport')
+        self.click(sx,sy)
+
+    def restart_game(self, label):
+        old=self.current();controls=old['ui']['controls']
+        if 'confirm_restart' not in controls:
+            if 'restart' not in controls:
+                self.tap('pause');self.wait(lambda s:s['paused'] and 'restart' in s['ui']['controls'],label+' restart available',old['sample_id'])
+            before=self.tap('restart')
+            self.wait(lambda s:'confirm_restart' in s['ui']['controls'],label+' confirmation visible',before['sample_id'])
+        before=self.tap('confirm_restart')
+        state=self.wait(lambda s:s.get('wave')==0 and s.get('core_hp')==20 and s.get('gold')==420 and
+                        len(s.get('enemies',[]))==0 and len(s.get('towers',[]))==0 and
+                        s['hero'].get('level')==1 and all(v==0 for v in s['hero'].get('equipment',{}).values()) and not s['paused'],
+                        label+' fresh game reset',before['sample_id'])
+        return state
+
+    def buy_equipment(self, items):
+        state=self.current()
+        if state['hero'].get('dead'):return False
+        before=self.tap('equipment')
+        self.wait(lambda s:s['ui'].get('shop')=='equipment','actual equipment panel opened',before['sample_id'])
+        purchased=[]
+        for item in items:
+            state=self.current();control=state['ui']['controls'].get('item_'+item,{})
+            if not control.get('enabled'):continue
+            if item=='potion' and state['hero']['hp']>=state['hero']['max_hp']:continue
+            old_count=state['hero']['equipment'].get(item,0);self.tap('item_'+item)
+            self.wait(lambda s:s['hero']['equipment'].get(item,0)>old_count,'actual equipment '+item+' purchased',state['sample_id'])
+            purchased.append(item)
+        state=self.current();self.tap('close')
+        self.wait(lambda s:s['ui'].get('shop')=='','actual equipment panel closed',state['sample_id'])
+        return bool(purchased)
+
+    def enable_double_speed(self):
+        state=self.current()
+        if state.get('speed')==2:return
+        if 'speed' not in state['ui']['controls']:raise ValueError('Desktop full route requires visible public speed control')
+        self.tap('speed');self.wait(lambda s:s.get('speed')==2,'actual public 2x speed button',state['sample_id'])
+
+    def cast_observed(self, skill):
+        key={'q':'skill_1','e':'skill_2','r':'skill_3'}[skill]
+        state=self.current()
+        if not state['ui']['controls'].get(key,{}).get('enabled'):return False
+        self.tap(key)
+        self.wait(lambda s:float(s.get('skills',{}).get(skill,{}).get('cooldown',0))>0,
+                  'actual '+skill.upper()+' ability activation',state['sample_id'])
+        return True
+
+    def full_desktop(self, max_wall_seconds=1200):
+        """Eight-wave victory and natural defeat through only public real inputs."""
+        self.prepare_combat() # Equipment, tower branch, invalid repeat, sale, rebuild.
+        self.restart_game('after economy controls')
+        self.buy_equipment(['blade','plate','focus','boots'])
+        self.enable_double_speed()
+        start=time.monotonic();deadline=start+max_wall_seconds;last_move=0;last_shop=0
+        last_wave=-1;cast_skills=set();boss_observed=False;milestones=[]
+        gear_costs={'blade':110,'plate':95,'focus':120,'boots':85}
+        while time.monotonic()<deadline:
+            state=self.current();hero=state['hero']
+            if state['phase']=='defeat':raise RuntimeError('Actual full defense route lost: '+str({'wave':state['wave'],'kills':state['kills'],'deaths':state['deaths']}))
+            if state['phase']=='victory':
+                if state['wave']!=8 or state['core_hp']<=0 or not boss_observed:
+                    raise RuntimeError('Victory observer lacks actual eight-wave boss/core evidence')
+                self.screenshot('eight-wave-victory')
+                self.report['full_victory']={'state':state,'wall_seconds':time.monotonic()-start,
+                    'observed_at_monotonic':time.monotonic(),'milestones':milestones,'boss_observed':True,'cast_skills':sorted(cast_skills),
+                    'input_route':'Public minimap, equipment, ability, speed and next-wave controls; no state injection'}
+                break
+            if state['wave']!=last_wave:
+                last_wave=state['wave'];milestones.append({'wave':last_wave,'state':state,'wall_seconds':time.monotonic()-start})
+                if last_wave in (1,4,8):self.screenshot('wave-'+str(last_wave))
+            if state.get('boss') and not boss_observed:
+                boss_observed=True;self.screenshot('uncrowned-king')
+            if hero.get('dead'):
+                self.pause(.2);continue
+            # Buy in the same bounded order as the independently checked public-
+            # command balance strategy, but here every purchase is a real UI click.
+            if time.monotonic()-last_shop>1:
+                wanted=next((item for item in ('blade','plate','blade','focus','plate','focus','boots')
+                             if hero['equipment'].get(item,0)<(2 if item=='boots' else 3)),None)
+                if hero['hp']<hero['max_hp']*.3 and state['gold']>=45:
+                    self.buy_equipment(['potion']);last_shop=time.monotonic();continue
+                if wanted and state['gold']>=gear_costs[wanted]:
+                    self.buy_equipment([wanted]);last_shop=time.monotonic();continue
+            if state['phase']=='build':
+                before=self.tap('start_wave');self.wait(lambda s:s['wave']>before['wave'],'actual next wave '+str(before['wave']+1),before['sample_id'])
+                self.pause(.1);continue
+            here=hero['position'];enemies=state.get('enemies',[])
+            near=[e for e in enemies if math.dist(here,e['position'])<4.9]
+            boss_near=any(e['kind']=='boss' for e in near)
+            if hero['hp']<hero['max_hp']*.7 and self.cast_observed('e'):cast_skills.add('e')
+            if (len(near)>=2 or boss_near) and self.cast_observed('q'):cast_skills.add('q')
+            if (len(near)>=4 or boss_near) and self.cast_observed('r'):cast_skills.add('r')
+            if time.monotonic()-last_move>.25:
+                state=self.current();here=state['hero']['position'];enemies=state.get('enemies',[])
+                if enemies:
+                    target=max(enemies,key=lambda e:float(e.get('progress',0))-math.dist(here,e['position'])*.12)
+                    pos=target['position'];distance=math.dist(here,pos)
+                    if distance>2.2:
+                        # Stop in melee range rather than click into the enemy.
+                        ratio=max(0,(distance-2.0)/distance)
+                        self.minimap_click(here[0]+(pos[0]-here[0])*ratio,here[2]+(pos[2]-here[2])*ratio)
+                    else:self.minimap_click(here[0],here[2])
+                else:self.minimap_click(here[0],here[2])
+                last_move=time.monotonic()
+            self.pause(.12)
+        else:raise TimeoutError('Actual eight-wave route did not reach a terminal victory within the diagnostic window')
+        if cast_skills!={'q','e','r'}:raise RuntimeError('Victory route did not establish all three actual ability activations')
+        self.restart_game('after actual victory')
+        self.screenshot('victory-restart')
+        self.enable_double_speed()
+        start=time.monotonic();deadline=start+600;damage_seen=False;waves=[];last_wave=-1
+        # Natural loss route: no movement, purchases, towers, skills or damage
+        # manipulation. Only the real next-wave control and observation.
+        while time.monotonic()<deadline:
+            state=self.current()
+            if state['wave']!=last_wave:last_wave=state['wave'];waves.append({'wave':last_wave,'hp':state['core_hp']})
+            if state['core_hp']<20 and not damage_seen:
+                damage_seen=True;self.screenshot('natural-core-damage')
+            if state['phase']=='defeat':
+                if not damage_seen or state['core_hp']>0:raise RuntimeError('Defeat lacks natural core-damage evidence')
+                self.screenshot('natural-defeat')
+                self.report['natural_defeat']={'state':state,'wall_seconds':time.monotonic()-start,'waves':waves,'input_route':'AFK except public next-wave and 2x controls'}
+                break
+            if state['phase']=='victory':raise RuntimeError('AFK route unexpectedly won; no natural defeat established')
+            if state['phase']=='build':
+                before=self.tap('start_wave');self.wait(lambda s:s['wave']>before['wave'],'AFK actual next wave '+str(before['wave']+1),before['sample_id'])
+            self.pause(.25)
+        else:raise TimeoutError('Natural AFK defeat did not occur within the diagnostic window')
+        self.restart_game('after natural defeat');self.screenshot('defeat-restart')
+        self.report['full_gameplay_passed']=True

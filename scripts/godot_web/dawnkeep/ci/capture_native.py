@@ -84,7 +84,7 @@ def main():
             # This is an actual continuous screen recording, not a game demo.
             recorder=subprocess.Popen(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-f','x11grab','-framerate','20','-video_size','1280x720','-i',os.environ['DISPLAY'],
                                        '-f','pulse','-i','default','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p','-c:a','aac',str(out/'native-input.mp4')])
-            plan.combat();stop_process(recorder);recorder=None
+            plan.full_desktop();stop_process(recorder);recorder=None
             subprocess.run(['ffmpeg','-v','error','-threads','1','-i',str(out/'native-input.mp4'),'-f','null','-'],check=True,timeout=90)
             report['movie']=inspect_video(out/'native-input.mp4')
             subprocess.run(['ffmpeg','-nostdin','-v','error','-i',str(out/'native-input.mp4'),'-vn','-c:a','pcm_s16le',str(out/'runtime-audio.wav')],check=True,timeout=90)

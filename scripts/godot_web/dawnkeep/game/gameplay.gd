@@ -86,6 +86,7 @@ var _last_action: String = "ready"
 var _boss_id: int = -1
 var _ready_for_play: bool = false
 var _early_calls: int = 0
+var _pending_wave_rewards: Dictionary = {}
 var _ground_zones: Array = []
 var _pending_blasts: Array = []
 
@@ -157,6 +158,7 @@ func restart() -> void:
 	_next_enemy_id = 1
 	_boss_id = -1
 	_early_calls = 0
+	_pending_wave_rewards.clear()
 	_call_available = false
 	_last_action = "ready"
 	hero.position = Vector3(-6,0,0)
@@ -295,6 +297,8 @@ func start_wave() -> bool:
 		gold += 30
 		_early_calls += 1
 	wave += 1
+	if wave < WAVES.size():
+		_pending_wave_rewards[wave] = 40+wave*5
 	phase = "wave"
 	_call_available = false
 	var entries: Array = WAVES[wave-1]
@@ -708,9 +712,9 @@ func _damage_enemy(id: int,damage: float,kind: String) -> void:
 		_gain_xp(int(enemy["xp"]))
 		_visual("remove_enemy", [id,true])
 		_visual("effect", ["enemy_death",enemy["position"],0.6 if enemy["kind"]!="boss" else 3.0])
+		enemies.erase(id)
 		if enemy["kind"]=="boss":
 			_event("boss_defeated",{})
-		enemies.erase(id)
 
 func _gain_xp(amount: int) -> void:
 	hero_xp += amount
@@ -758,17 +762,28 @@ func _check_wave_complete() -> void:
 	if phase != "wave":
 		return
 	_call_available = spawn_queue.is_empty() and enemies.size()<=4 and not enemies.is_empty() and wave<WAVES.size()
-	if spawn_queue.is_empty() and enemies.is_empty():
-		if wave >= WAVES.size():
-			_end_game(true)
-		else:
-			phase = "build"
-			_call_available = false
-			var bonus: int = 40+wave*5
-			gold += bonus
-			if hero_respawn <= 0.0:
-				hero_hp = minf(hero_max_hp,hero_hp+hero_max_hp*0.25)
-			_event("wave_cleared", {"wave":wave,"gold":bonus})
+	var all_clear: bool = spawn_queue.is_empty() and enemies.is_empty()
+	if all_clear and wave < WAVES.size():
+		phase = "build"
+		_call_available = false
+	# Early calls overlap waves; completion belongs to each enemy's spawn wave,
+	# not the newest wave number. Queued enemies still prevent its clear reward.
+	var outstanding_waves: Dictionary = {}
+	for entry: Dictionary in spawn_queue:
+		outstanding_waves[int(entry["wave"])] = true
+	for enemy: Dictionary in enemies.values():
+		outstanding_waves[int(enemy["spawn_wave"])] = true
+	for completed_wave in _pending_wave_rewards.keys():
+		if outstanding_waves.has(completed_wave):
+			continue
+		var bonus: int = int(_pending_wave_rewards[completed_wave])
+		_pending_wave_rewards.erase(completed_wave)
+		gold += bonus
+		if hero_respawn <= 0.0:
+			hero_hp = minf(hero_max_hp,hero_hp+hero_max_hp*0.25)
+		_event("wave_cleared", {"wave":completed_wave,"gold":bonus})
+	if all_clear and wave >= WAVES.size():
+		_end_game(true)
 
 func _end_game(victory: bool) -> void:
 	if phase in ["victory","defeat"]:
@@ -816,7 +831,7 @@ func snapshot() -> Dictionary:
 	var shop: Array = []
 	for key in SHOP_DATA.keys():
 		var data: Dictionary = SHOP_DATA[key]
-		shop.append({"key":key,"cost":data["cost"],"count":equipment[key],"max_count":data["max_count"],"available":gold>=int(data["cost"]) and int(equipment[key])<int(data["max_count"]) and hero_respawn<=0.0})
+		shop.append({"key":key,"cost":data["cost"],"count":equipment[key],"max_count":data["max_count"],"available":gold>=int(data["cost"]) and int(equipment[key])<int(data["max_count"]) and hero_respawn<=0.0 and (key!="potion" or hero_hp<hero_max_hp)})
 	var build_options: Array = []
 	for key in TOWER_DATA.keys():
 		var data: Dictionary = TOWER_DATA[key]
