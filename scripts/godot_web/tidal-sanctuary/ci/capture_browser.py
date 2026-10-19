@@ -154,7 +154,7 @@ def audio_graph(snapshot):
     if (not terminals or not any(item.get("kind") == "GainNode" for item in terminals)
             or any(item.get("mirror_count") != 1 for item in terminals)
             or len({item.get("key") for item in terminals}) != len(terminals)):
-        raise ValueError("Audio capture requires deduplicated genuine terminal edges including the Sample post-mute gain")
+        raise ValueError("Audio capture requires deduplicated genuine terminal edges including the post-mute gain")
     return context
 
 
@@ -273,6 +273,10 @@ def validate_loop_boundary(snapshot, music, receipts):
     if unmute_clock > boundary - 1.1 or [item.get("muted") for item in receipts if item.get("event") == "mute"] != [True, False]:
         raise ValueError("First loop boundary lacks an established unmuted interval")
     if first.get("looping") is True:
+        if (first.get("detune") != 0 or first.get("loop_start") != 0 or first.get("loop_end") != 32
+                or first.get("requested_duration") is not None or first.get("mutations") != []
+                or first.get("parameter_automation") != []):
+            raise ValueError("Native music loop must retain the unchanged full authored buffer and pitch")
         continuation = first
     else:
         continuation = next((item for item in music[1:] if
@@ -508,7 +512,7 @@ def wait_completed_route_save(page, console, start, expected, timeout=90):
 def validate_web_exit(receipt, expected):
     if (type(receipt.get("schema")) is not int or receipt["schema"] != 1 or
             type(receipt.get("code")) is not int or receipt["code"] != 0 or
-            any(receipt.get(key) is not True for key in ("requested", "trusted", "ok", "save_after_request"))):
+            any(receipt.get(key) is not True for key in ("requested", "trusted", "ok", "save_after_request", "audio_closed"))):
         raise ValueError("Save/return lacks a successful real-input final-sync exit")
     saved = receipt.get("saved")
     if (not isinstance(saved, dict) or type(saved.get("schema")) is not int or saved["schema"] != 1 or
@@ -523,6 +527,56 @@ def validate_web_exit(receipt, expected):
             math.hypot(before[0] - after[0], before[2] - after[2]) > .35):
         raise ValueError("Final save differs from the completed route")
     return saved
+
+
+def validate_audio_closed(before, after):
+    """Observe real context/source closure separately from the engine receipt."""
+    prior = audio_graph(before)
+    contexts = after.get("contexts", [])
+    if (after.get("errors") != [] or len(contexts) != 1 or contexts[0].get("id") != prior.get("id")
+            or contexts[0].get("state") != "closed"
+            or any(item.get("active") for item in contexts[0].get("terminals", []))):
+        raise ValueError("Normal exit did not close the same sole real audio graph")
+    if [item.get("id") for item in before.get("starts", [])] != [item.get("id") for item in after.get("starts", [])]:
+        raise ValueError("Exit created or replaced an audio source")
+    samples = contexts[0].get("samples", [])
+    if not samples or samples[-1].get("active_music") != 0 or samples[-1].get("active_cues") != []:
+        raise ValueError("Closed graph retains a connected live voice")
+    return {"context_id": prior["id"], "state": "closed", "connected_voices": 0}
+
+
+def validate_focus_suspension(before, suspended, returned, begin_ms, end_ms):
+    """Fresh actual meters and a frozen clock, not focus intent receipts alone."""
+    original, away, restored = audio_graph(before), audio_graph(suspended), audio_graph(returned)
+    if original["id"] != away["id"] or original["id"] != restored["id"]:
+        raise ValueError("Focus transition replaced the original audio context")
+    ids = [item.get("id") for item in before.get("starts", [])]
+    if any([item.get("id") for item in value.get("starts", [])] != ids for value in (suspended, returned)):
+        raise ValueError("Focus transition restarted a source or replayed a cue")
+    samples = [item for item in away["samples"] if begin_ms <= item.get("wall_ms", -1) <= end_ms]
+    # Web Audio explicitly freezes AnalyserNode data during suspension. Keep
+    # those real samples unchanged: old nonzero PCM is not current output.
+    # https://www.w3.org/TR/webaudio-1.1/#dom-audiocontext-suspend
+    if (len(samples) < 5 or samples[-1]["wall_ms"] - samples[0]["wall_ms"] < 1100
+            or any(b["wall_ms"] - a["wall_ms"] > 1000 for a, b in zip(samples, samples[1:]))):
+        raise ValueError("Focus suspension lacks sustained fresh wall-time observations")
+    clocks = [item.get("context_time") for item in samples]
+    gains = {item["source"] for item in away["terminals"] if item.get("active") and item.get("kind") == "GainNode"}
+    for item in samples:
+        raw_gains = item.get("terminal_gain_values", [])
+        if (not gains or {value.get("source") for value in raw_gains} != gains
+                or len(raw_gains) != len(gains)
+                or any(type(value.get("value")) not in (int, float) or value["value"] != 0 for value in raw_gains)
+                or item.get("active_music") != 1 or item.get("active_cues") != []
+                or any(type(item.get(key)) not in (int, float) or not math.isfinite(item[key]) for key in ("rms", "peak", "context_time"))):
+            raise ValueError("Suspended focus lacks its original voice and genuinely muted terminal")
+    if any(item.get("state") != "suspended" for item in samples) or max(clocks) - min(clocks) > .006:
+        raise ValueError("Background audio clock was not genuinely suspended")
+    if restored.get("state") != "running" or restored.get("context_time", 0) <= max(clocks):
+        raise ValueError("Returning focus did not resume the same audio clock")
+    return {"context_id": original["id"], "same_source_ids": ids, "fresh_samples": len(samples),
+            "suspended_clock": clocks[0], "terminal_gain": 0,
+            "analyser_scope": "frozen pre-suspend PCM retained; silence follows the stopped rendering clock and muted genuine terminal"}
 
 
 def capture_png(page, path, diagnostic=False):
@@ -609,7 +663,7 @@ def main():
                   "Input uses real browser keyboard/touch events with passive state observations; no scripted demo.",
                   "No multiplayer, deployment, accessibility, or broad device compatibility claim.",
                   "Audio is browser-rendered capture, not physical speaker output or subjective audition.",
-                  "Background-tab and OS focus lifecycle remain unverified; Playwright default background throttling flags are retained."],
+                  "Browser tab focus is exercised with real target activation; OS/application focus and physical-device behavior remain unverified."],
               "playwright_version": importlib.metadata.version("playwright"),
               "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS,
                                  "chromium_sandbox": True, "requested_executable": args.chromium},
@@ -737,6 +791,10 @@ def main():
                     if not passive_evaluate(page, "() => document.documentElement.scrollWidth <= innerWidth + 1"):
                         raise RuntimeError("Web shell overflows horizontally at requested viewport")
                     result["audio"] = {"status": "running", "scope": "fresh-profile real-input browser audio"}
+                    ready_audio = wait_state(page, console, predicate=lambda state: state.get("audio_ready") is True)
+                    if ready_audio.get("audio_driver") != "Dummy":
+                        raise ValueError("Official Web export did not select its declared Dummy audio driver")
+                    result["audio"]["backend"] = observer_receipts(console, "TIDAL_AUDIO_BACKEND")
                     recording = passive_evaluate(page, "() => __tidalAudio.startRecording()")
                     baseline_mark = passive_evaluate(page, "() => __tidalAudio.mark('no-input-baseline')")
                     page.wait_for_timeout(2300)
@@ -902,10 +960,34 @@ def main():
                         if time.monotonic() >= loop_deadline:
                             raise TimeoutError("Real audio clock did not cover a complete loop and the ending cue tail")
                         page.wait_for_timeout(200)
-                    captured_audio = save_live_audio(page, out, label)
-                    audio_snapshot = captured_audio.pop("snapshot")
+                    audio_snapshot = passive_evaluate(page, "() => __tidalAudio.snapshot()")
                     result["audio"]["sources"] = validate_audio_sources(audio_snapshot, observer_receipts(console, "TIDAL_AUDIO"), driver.actions)
-                    result["audio"].update({"status": "passed", "capture": captured_audio})
+                    # Keep recording through actual tab focus and normal exit.
+                    focus_before = passive_evaluate(page, "() => __tidalAudio.snapshot()")
+                    focus_console_boundary = len(console)
+                    other_tab = context.new_page()
+                    other_tab.goto("about:blank")
+                    other_tab.bring_to_front()
+                    page.wait_for_timeout(800)
+                    focus_mark = passive_evaluate(page, "() => __tidalAudio.mark('focus-away')")
+                    page.wait_for_timeout(1400)
+                    focus_away = passive_evaluate(page, "() => __tidalAudio.snapshot()")
+                    page.bring_to_front()
+                    page.wait_for_timeout(500)
+                    resume_mark = passive_evaluate(page, "() => __tidalAudio.mark('focus-returned')")
+                    page.wait_for_timeout(1500)
+                    focus_returned = passive_evaluate(page, "() => __tidalAudio.snapshot()")
+                    other_tab.close()
+                    focus_events = [item for item in observer_receipts(console, "TIDAL_AUDIO", focus_console_boundary)
+                                    if item.get("event") == "focus"]
+                    if [item.get("active") for item in focus_events] != [False, True]:
+                        raise ValueError("Actual browser tab activation did not deliver focus loss and return")
+                    result["audio"]["focus"] = validate_focus_suspension(focus_before, focus_away,
+                        focus_returned, focus_mark["wall_ms"], focus_away["wall_ms"])
+                    result["audio"]["focus"]["resumed_window"] = audio_window(focus_returned,
+                        resume_mark["wall_ms"], focus_returned["wall_ms"], 1.2, audible=True)
+                    write_json(out / (label + "-audio-focus.json"), {"before": focus_before,
+                        "away": focus_away, "returned": focus_returned, "receipts": focus_events})
                     write_json(out / (label + "-audio-observations.json"), audio_snapshot)
                     report["checks"].append({"name": label + " real gesture, live post-mute audio, four cues and loop", "passed": True})
 
@@ -936,6 +1018,11 @@ def main():
                     saved = validate_web_exit(exited, exit_expected)
                     if page.locator("#tidal-exit-panel").get_attribute("data-saved") != "true":
                         raise RuntimeError("Actual Save & return UI did not confirm completion")
+                    captured_audio = save_live_audio(page, out, label)
+                    closed_audio = captured_audio.pop("snapshot")
+                    result["audio"]["closed"] = validate_audio_closed(audio_snapshot, closed_audio)
+                    write_json(out / (label + "-audio-after-exit.json"), closed_audio)
+                    result["audio"].update({"status": "passed", "capture": captured_audio})
                     capture(label + "-saved-return.png")
                     result["save_return"] = {"status": "passed", "trigger": "touch" if mobile else "mouse", "receipt": exited}
                     # A new Chromium OS process must restore the untouched IndexedDB.
@@ -955,6 +1042,8 @@ def main():
                     if len(loads) != 1:
                         raise RuntimeError("Fresh Chromium process must emit exactly one load receipt")
                     validate_restored(loads[0], saved)
+                    wait_state(page, restored_console, predicate=lambda state: state.get("audio_ready") is True
+                               and state.get("audio_driver") == "Dummy")
                     restored_mark = passive_evaluate(page, "() => __tidalAudio.mark('restored-no-input')")
                     page.wait_for_timeout(2300)
                     restored_audio = passive_evaluate(page, "() => __tidalAudio.snapshot()")

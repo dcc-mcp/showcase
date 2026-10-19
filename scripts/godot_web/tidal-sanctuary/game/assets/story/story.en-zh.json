@@ -267,6 +267,26 @@
     "controls_touch": {
       "en": "Left drag · Move and swim\nRight button · Interact\nTop icons · Journal / Sound",
       "zh": "左侧拖动 · 行走或游泳\n右侧按钮 · 互动\n手记 / 声音 · 点按图标"
+    },
+    "audio_loading": {
+      "en": "Preparing audio...",
+      "zh": "声音读取中..."
+    },
+    "audio_starting": {
+      "en": "Starting audio...",
+      "zh": "声音开启中..."
+    },
+    "audio_retry": {
+      "en": "Retry audio",
+      "zh": "重试声音"
+    },
+    "audio_error": {
+      "en": "Audio could not start. Select Retry audio, then Begin again.",
+      "zh": "声音没有开启。请重试，再踏上旅途。"
+    },
+    "audio_recovery": {
+      "en": "Sound is unavailable. Select Retry audio to resume this journey's sound.",
+      "zh": "声音没有开启。请重试声音，继续旅途。"
     }
   }
 }

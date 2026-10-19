@@ -18,6 +18,14 @@ The next water candidate reuses the lattice hashes shared by the five existing f
 
 The actual restored native image exposed full-width English curly apostrophes in the shared CJK font. English story punctuation now uses compact ASCII quotes/apostrophes; Chinese punctuation and the font remain unchanged. New rendered images are still required.
 
+### Owned Web audio candidate
+
+Head `a08ccc3`, [run 39280668738](https://github.com/dcc-mcp/showcase/actions/runs/39280668738), still failed both Web fresh-meter checks and the native chart-contact probe. These failures remain the baseline; fixture or export success does not replace actual-input acceptance.
+
+The Web-only candidate selects Godot's registered Dummy driver with a positive mix rate and uses the public JavaScriptBridge to own one browser AudioContext for all five unchanged original assets. Desktop audio retains its Godot players, buses and fade. The browser music source loops natively over the full 32-second buffer; its fade runs on the audio clock. Initialization decodes silently, Begin is the only initial activation, mute preserves the source, and focus suspends/resumes that same context. Initialization/resume have bounded retryable failures, shown in native Godot cards. The export copies only manifest-owned original audio/helper files and records their hashes and licenses.
+
+The observer now counts every constructed context, including unused ones, and rejects source-loop/pitch changes or automation. Existing running, mute, cue, seam, PCM and real-input thresholds remain. Added tab-focus acceptance requires fresh observations of the same suspended clock, source IDs and zero genuine terminal gain, then actual resumed PCM. Suspended AnalyserNode data is retained unchanged because the Web Audio specification freezes that buffer; it is not relabeled as fresh silence. Save & return additionally awaits real context closure, and the live recording continues through focus and normal exit. Browser qualification of this candidate is still required. No lower-resolution or reduced-quality CI mode is enabled.
+
 ## Evidence, kept distinct
 
 - `authoring.json`, `mcp-raw.json`, `mcp-tool-schemas.json`: actual discovered typed MCP calls and responses. Both gameplay scripts are created and validated through the typed script API. Godot creates the Node3D root, attaches the main script and saves the scene. A different editor process reopens the saved scene, reads its tree and verifies its unchanged hash. This does not claim every generated mesh was individually authored through a tool.

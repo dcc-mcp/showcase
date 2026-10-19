@@ -3,6 +3,10 @@ config_version=5
 config/name="Tidal Sanctuary"
 run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+[audio]
+; Web owns one browser-native graph via JavaScriptBridge. Desktop retains Godot audio.
+driver/driver.web="Dummy"
+driver/mix_rate.web=44100
 [display]
 window/size/viewport_width=1280
 window/size/viewport_height=720

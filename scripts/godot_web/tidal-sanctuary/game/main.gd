@@ -88,6 +88,8 @@ var last_move:=Vector3.ZERO
 var story:Dictionary={}
 var interface:CanvasLayer
 var tide_audio:Node
+var pending_begin_trigger := ""
+var opening_audio_status := ""
 var journey_started:=false
 var audio_muted:=false
 var restart_pending:=false
@@ -693,14 +695,47 @@ func show_opening() -> void:
  var heading:=tr_text(story.title) if loaded_found else tr_text(opening.title)
  var body:=tr_text(story.ending.clue) if quest_stage()==4 else tr_text(opening.body)
  body+="\n\n"+control_help(DisplayServer.is_touchscreen_available())
- interface.show_card("opening",heading,body,tr_text(story.ui.continue) if loaded_found else tr_text(opening.button))
+ var primary:=tr_text(story.ui.continue) if loaded_found else tr_text(opening.button)
+ var disabled:=false
+ if OS.has_feature("web"):
+  var audio_state:Dictionary=tide_audio.get_state()
+  opening_audio_status=str(audio_state.get("status","loading"))+":"+str(audio_state.get("start_pending",false))
+  if audio_state.get("status")=="error":
+   body+="\n\n"+tr_text(story.ui.audio_error)
+   primary=tr_text(story.ui.audio_retry)
+  elif audio_state.get("start_pending",false):
+   primary=tr_text(story.ui.audio_starting);disabled=true
+  elif not audio_state.get("ready",false):
+   primary=tr_text(story.ui.audio_loading);disabled=true
+ interface.show_card("opening",heading,body,primary)
+ interface.card_primary.disabled=disabled
 
 func begin_journey(trigger:String) -> void:
  if journey_started:return
+ if OS.has_feature("web"):
+  var audio_state:Dictionary=tide_audio.get_state()
+  if audio_state.get("status")=="error":
+   pending_begin_trigger="";tide_audio.retry_web_audio();show_opening();return
+  if not audio_state.get("ready",false) or audio_state.get("start_pending",false):return
+ pending_begin_trigger=trigger
+ if not tide_audio.start_from_gesture(trigger):
+  pending_begin_trigger=""
+  if OS.has_feature("web"):show_opening()
+  return
+ # The Web resume promise must succeed before movement/story is enabled.
+ # Native playback starts synchronously through the unchanged Godot backend.
+ if tide_audio.get_state().started:confirm_journey_begin()
+
+func confirm_journey_begin() -> void:
+ if journey_started or pending_begin_trigger.is_empty():return
  journey_started=true;interface.hide_card()
- tide_audio.start_from_gesture(trigger)
- print("TIDAL_JOURNEY ",JSON.stringify({"schema":1,"started":true,"trigger":trigger,"demo":demo,"stage":quest_stage()}))
+ print("TIDAL_JOURNEY ",JSON.stringify({"schema":1,"started":true,"trigger":pending_begin_trigger,"demo":demo,"stage":quest_stage()}))
+ pending_begin_trigger=""
  update_state()
+
+func show_audio_recovery() -> void:
+ restart_pending=false;touch_move=Vector2.ZERO
+ interface.show_card("audio_retry",tr_text(story.ui.audio_retry),tr_text(story.ui.audio_recovery),tr_text(story.ui.audio_retry))
 
 func show_journal() -> void:
  if not journey_started:return
@@ -719,6 +754,7 @@ func request_restart() -> void:
 
 func card_primary() -> void:
  if interface.card_mode=="opening":begin_journey("begin_button")
+ elif interface.card_mode=="audio_retry":tide_audio.resume_from_gesture("audio_retry_button")
  elif interface.card_mode=="restart":
   restart_pending=false;interface.hide_card();reset_game()
  else:interface.hide_card()
@@ -826,6 +862,11 @@ func observed_state() -> Dictionary:
  var reach:=interaction_status()
  data["interaction_available"]=reach.available;data["interaction_reason"]=reach.reason;data["interaction_target"]=reach.target_index
  data["journey_started"]=journey_started;data["audio_muted"]=audio_muted
+ if OS.has_feature("web"):
+  var audio_state:Dictionary=tide_audio.get_state()
+  data["audio_ready"]=audio_state.get("ready",false)
+  data["audio_status"]=audio_state.get("status","loading")
+  data["audio_driver"]=AudioServer.get_driver_name()
  for field in ["begin_rect","audio_rect","journal_rect"]:
   var control:Control=interface.card_primary if field=="begin_rect" else (interface.audio_button if field=="audio_rect" else interface.journal_button)
   var bounds:=control.get_global_rect();data[field]=[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y]
@@ -999,6 +1040,21 @@ func _physics_process(delta:float) -> void:
 
 func _process(delta:float) -> void:
  timer+=delta
+ if OS.has_feature("web") and not journey_started and is_instance_valid(tide_audio):
+  var audio_state:Dictionary=tide_audio.get_state()
+  if audio_state.get("started",false):confirm_journey_begin()
+  elif is_instance_valid(interface) and interface.card_mode=="opening":
+   var status:=str(audio_state.get("status","loading"))+":"+str(audio_state.get("start_pending",false))
+   if status!=opening_audio_status:show_opening()
+ elif OS.has_feature("web") and journey_started and is_instance_valid(tide_audio):
+  var audio_state:Dictionary=tide_audio.get_state()
+  if audio_state.get("status")=="error" and interface.card_mode!="audio_retry":show_audio_recovery()
+  if interface.card_mode=="audio_retry":
+   if audio_state.get("status")=="ready" and audio_state.get("context_state")=="running" and not audio_state.get("start_pending",false):
+    interface.hide_card()
+   else:
+    interface.card_primary.disabled=bool(audio_state.get("start_pending",false))
+    interface.card_primary.text=tr_text(story.ui.audio_starting if interface.card_primary.disabled else story.ui.audio_retry)
  if objective:
   interface.layout()
   var narrow:=get_viewport().get_visible_rect().size.x<600
@@ -1112,6 +1168,7 @@ func change_language(trigger:String) -> void:
  if interface.card_mode=="opening":show_opening()
  elif interface.card_mode=="journal":show_journal()
  elif interface.card_mode=="restart":request_restart()
+ elif interface.card_mode=="audio_retry":show_audio_recovery()
  language_change_id+=1
  capture_language_frame.call_deferred(previous,language_change_id,trigger)
 

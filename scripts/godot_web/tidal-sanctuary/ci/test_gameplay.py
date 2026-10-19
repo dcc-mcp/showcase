@@ -1027,9 +1027,9 @@ class BrowserInputTests(unittest.TestCase):
         saved = {"schema": 1, "quest_stage": 4, "treasures": [True, True],
                  "completed": True, "position": [0, 4, -12], "language": "en", "audio_muted": True, "persistent": True, "reason": "exit"}
         receipt = {"schema": 1, "code": 0, "requested": True, "trusted": True,
-                   "ok": True, "save_after_request": True, "saved": saved}
+                   "ok": True, "save_after_request": True, "saved": saved, "audio_closed": True}
         self.assertEqual(validate_web_exit(receipt, saved), saved)
-        for changes in ({"code": True}, {"code": 1}, {"ok": False}, {"trusted": False},
+        for changes in ({"code": True}, {"code": 1}, {"ok": False}, {"audio_closed": False}, {"audio_closed": None}, {"trusted": False},
                         {"requested": False}, {"save_after_request": False}, {"saved": None},
                         {"saved": {**saved, "persistent": False}},
                         {"saved": {**saved, "reason": "auto"}},

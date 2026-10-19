@@ -134,6 +134,9 @@ func _mark_layout_dirty() -> void:
 
 func show_card(mode: String, heading: String, body: String, primary: String, secondary := "") -> void:
  _mark_layout_dirty()
+ # Opening may temporarily disable Begin while Web audio is preparing.
+ # Every later journal/restart card owns a fresh enabled action state.
+ card_primary.disabled=false;card_secondary.disabled=false
  card_mode=mode;card_title.text=heading;card_body.text=body;card_body.scroll_to_line(0)
  card_primary.text=primary;card_secondary.text=secondary;card_secondary.visible=not secondary.is_empty()
  shade.show();card.show();card_primary.grab_focus();layout()

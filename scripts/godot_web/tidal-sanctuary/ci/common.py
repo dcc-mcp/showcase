@@ -31,7 +31,7 @@ TROPICAL_NOTICES = ("assets/tropical/FOREST-LICENSE.txt", "assets/tropical/ADVEN
                     "assets/tropical/SOURCE.json")
 GAME_FILES += TROPICAL_FILES + TROPICAL_NOTICES
 ASSET_NOTICE_FILES += TROPICAL_NOTICES
-STORY_FILES = ("tide_interface.gd", "tide_audio.gd", "verify_audio.gd", "verify_story.gd",
+STORY_FILES = ("tide_interface.gd", "tide_audio.gd", "web_audio.js", "verify_audio.gd", "verify_story.gd",
                "assets/story/story.en-zh.json", "assets/story/chart.svg", "assets/story/key.svg",
                "assets/story/pearl.svg", "assets/story/beacon.svg", "assets/story/check.svg",
                "assets/story/audio-on.svg", "assets/story/audio-off.svg",

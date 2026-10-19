@@ -32,6 +32,10 @@ func run() -> void:
 	audio.receipt_emitted.connect(capture)
 	root.add_child(audio)
 	var state: Dictionary = audio.get_state()
+	check(state.backend == "native" and state.ready and state.status == "ready"
+		and state.error == "" and not state.start_pending, "desktop retains immediate native backend readiness")
+	check(not audio.retry_web_audio(), "desktop cannot initialize the Web backend")
+	check(not audio.resume_from_gesture("fixture_retry"), "desktop cannot use Web recovery before Begin")
 	check(not state.started and state.start_count == 0, "initial logical silence")
 	check(not state.music_playing and not state.cue_playing, "no player starts on ready")
 	check(state.music_loop, "OGG loop enabled")
@@ -58,6 +62,7 @@ func run() -> void:
 		"muted Begin creates one logical loop")
 	check(state.bus_muted, "muted Begin leaves bus silent")
 	check(not audio.start_from_gesture("fixture_duplicate"), "second Begin is ignored")
+	check(not audio.resume_from_gesture("fixture_retry"), "desktop cannot use Web recovery after Begin")
 	check(not audio.set_muted(false, "fixture_unmute"), "unmute returns persisted false")
 	state = audio.get_state()
 	check(not state.bus_muted and state.start_count == 1 and state.music_playing,

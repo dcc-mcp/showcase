@@ -11,6 +11,7 @@
   if (host.__tidalAudio) throw new Error('Audio probe installed twice');
   const errors = [], contexts = [], nodes = [], edges = [], starts = [], gestures = [], marks = [];
   const nodeIds = new WeakMap(), contextIds = new WeakMap();
+  const observedSources = new WeakMap(), sourceParameters = new WeakMap(), parameterAutomation = new WeakMap();
   const now = () => host.performance.now();
   const originalConnect = host.AudioNode.prototype.connect;
   const originalDisconnect = host.AudioNode.prototype.disconnect;
@@ -19,6 +20,69 @@
   const allowedTerminals = new Set(['GainNode', 'AudioWorkletNode', 'ScriptProcessorNode']);
   const expected = { music: 32, chart_read: .72, key_pickup: 1.05, pearl_pickup: 1.65, beacon_resolve: 4.8 };
   const fail = error => errors.push(String(error && error.message || error));
+  function sourceMetadata(source) {
+    return { looping: source.loop, rate: source.playbackRate.value, detune: source.detune.value,
+      loop_start: source.loopStart, loop_end: source.loopEnd };
+  }
+  function auditSource(source, reason) {
+    const observed = observedSources.get(source);
+    if (!observed) return;
+    const current = sourceMetadata(source);
+    for (const field of Object.keys(current)) {
+      if (current[field] === observed.last[field]) continue;
+      observed.item.mutations.push({ field, previous: observed.last[field], value: current[field], reason,
+        wall_ms: now(), context_time: source.context.currentTime });
+      fail('Post-start source metadata changed: ' + observed.item.id + '/' + field);
+    }
+    observed.last = current;
+  }
+  function recordParameterAutomation(parameter, method) {
+    const history = parameterAutomation.get(parameter) || [];
+    history.push({ method, wall_ms: now() });
+    parameterAutomation.set(parameter, history);
+    const binding = sourceParameters.get(parameter);
+    if (binding) {
+      binding.item.parameter_automation.push({ field: binding.field, method, wall_ms: now() });
+      fail('Uncertifiable source parameter automation: ' + binding.item.id + '/' + binding.field + '/' + method);
+      auditSource(binding.source, binding.field + '.' + method);
+    }
+  }
+  function observeSetter(prototype, property, inspect) {
+    try {
+      const descriptor = Object.getOwnPropertyDescriptor(prototype, property);
+      if (!descriptor || typeof descriptor.set !== 'function') throw new Error('Unobservable audio setter: ' + property);
+      Object.defineProperty(prototype, property, { ...descriptor, set(value) {
+        const result = Reflect.apply(descriptor.set, this, [value]);
+        try { inspect(this); } catch (error) { fail(error); }
+        return result;
+      } });
+    } catch (error) { fail(error); }
+  }
+  for (const property of ['loop', 'loopStart', 'loopEnd']) {
+    observeSetter(host.AudioBufferSourceNode.prototype, property, source => auditSource(source, property + ' setter'));
+  }
+  if (!host.AudioParam) fail('AudioParam observation unavailable');
+  else {
+    observeSetter(host.AudioParam.prototype, 'value', parameter => {
+      const binding = sourceParameters.get(parameter);
+      if (binding) auditSource(binding.source, binding.field + '.value setter');
+    });
+    // Future rate/detune automation cannot be certified from current .value.
+    // Observe native calls unchanged and reject such source automation, even
+    // when scheduled before start. Gain fades/muting are not source parameters.
+    for (const method of ['setValueAtTime', 'linearRampToValueAtTime', 'exponentialRampToValueAtTime',
+      'setTargetAtTime', 'setValueCurveAtTime']) {
+      try {
+        const descriptor = Object.getOwnPropertyDescriptor(host.AudioParam.prototype, method);
+        if (!descriptor || typeof descriptor.value !== 'function') throw new Error('Unobservable AudioParam method: ' + method);
+        Object.defineProperty(host.AudioParam.prototype, method, { ...descriptor, value: function (...args) {
+          const result = Reflect.apply(descriptor.value, this, args);
+          try { recordParameterAutomation(this, method); } catch (error) { fail(error); }
+          return result;
+        } });
+      } catch (error) { fail(error); }
+    }
+  }
   function nodeId(node) {
     if (!nodeIds.has(node)) {
       nodeIds.set(node, nodes.length + 1);
@@ -26,17 +90,55 @@
     }
     return nodeIds.get(node);
   }
-  function contextFor(ctx) {
+  function registerContext(ctx) {
     if (!contextIds.has(ctx)) {
       const id = contexts.length + 1;
       contextIds.set(ctx, id);
       const entry = { id, ctx, destination: nodeId(ctx.destination), terminals: [], samples: [],
-        stream: ctx.createMediaStreamDestination(), analyser: ctx.createAnalyser(), recorder: null, chunks: [] };
-      entry.analyser.fftSize = 2048;
-      entry.data = new Float32Array(entry.analyser.fftSize);
+        stream: null, analyser: null, recorder: null, chunks: [] };
       contexts.push(entry);
     }
     return contexts[contextIds.get(ctx) - 1];
+  }
+  function contextFor(ctx) {
+    const entry = registerContext(ctx);
+    // Unused contexts count too, but observation creates no nodes until the
+    // application actually connects its output or starts a real source.
+    if (!entry.analyser) {
+      entry.stream = ctx.createMediaStreamDestination();
+      entry.analyser = ctx.createAnalyser();
+      entry.analyser.fftSize = 2048;
+      entry.data = new Float32Array(entry.analyser.fftSize);
+    }
+    return entry;
+  }
+  const observedConstructors = new WeakMap();
+  for (const name of ['AudioContext', 'webkitAudioContext']) {
+    const Constructor = host[name];
+    if (typeof Constructor !== 'function') continue;
+    try {
+      if (!observedConstructors.has(Constructor)) {
+        observedConstructors.set(Constructor, new Proxy(Constructor, {
+          construct(target, args, newTarget) {
+            // Keep native construction, options, subclassing and exceptions.
+            // Never call resume/start or create a substitute AudioContext.
+            const ctx = Reflect.construct(target, args, newTarget);
+            try { registerContext(ctx); } catch (error) { fail(error); }
+            return ctx;
+          }
+        }));
+      }
+      const observed = observedConstructors.get(Constructor);
+      if (!Reflect.set(host, name, observed) || host[name] !== observed) {
+        throw new Error('Cannot observe public AudioContext constructor: ' + name);
+      }
+      // Preserve the usual ctx.constructor === window.AudioContext identity,
+      // and observe construction through that public alias as well.
+      if (Constructor.prototype.constructor === Constructor &&
+          (!Reflect.set(Constructor.prototype, 'constructor', observed) || Constructor.prototype.constructor !== observed)) {
+        throw new Error('Cannot observe AudioContext prototype constructor: ' + name);
+      }
+    } catch (error) { fail(error); }
   }
   function terminalKey(source, output, input) { return `${nodeId(source)}:${output}:${input}`; }
   function connectedPath(sourceId, destinationId, requireNonzeroGains = false) {
@@ -56,6 +158,12 @@
     const result = Reflect.apply(originalConnect, this, args); // Preserve the actual edge and API return.
     try {
       const [destination, output = 0, input = 0] = args;
+      if (host.AudioParam && destination instanceof host.AudioParam) {
+        // Audio-rate modulation need not appear in AudioParam.value. Record
+        // it before/after source start; only rate/detune uses fail acceptance.
+        recordParameterAutomation(destination, 'audio_input');
+        return result;
+      }
       if (!destination || !destination.context) return result; // AudioParam is not a graph node.
       const from = nodeId(this), to = nodeId(destination);
       if (!edges.some(edge => edge.active && edge.from === from && edge.to === to && edge.output === output && edge.input === input)) {
@@ -126,10 +234,20 @@
       const item = { id: nodeId(this), context: entry.id, name, duration: buffer.duration,
         frames: buffer.length, sample_rate: buffer.sampleRate, channels: buffer.numberOfChannels,
         wall_ms: now(), context_time: this.context.currentTime, scheduled_start: startTime, offset, rate,
-        looping: this.loop, planned_end: this.loop ? null : startTime + Math.min(args[2] === undefined ? Infinity : args[2], buffer.duration - offset) / rate,
+        ...sourceMetadata(this), requested_duration: args[2] === undefined ? null : args[2],
+        mutations: [], parameter_automation: [],
+        planned_end: this.loop ? null : startTime + Math.min(args[2] === undefined ? Infinity : args[2], buffer.duration - offset) / rate,
         path_at_start: connectedPath(nodeId(this), entry.destination),
         nonzero_gain_path_at_start: connectedPath(nodeId(this), entry.destination, true), ...fingerprint(buffer) };
       starts.push(item);
+      observedSources.set(this, { item, last: sourceMetadata(this) });
+      for (const [field, parameter] of [['rate', this.playbackRate], ['detune', this.detune]]) {
+        sourceParameters.set(parameter, { source: this, item, field });
+        for (const event of parameterAutomation.get(parameter) || []) {
+          item.parameter_automation.push({ field, ...event });
+          fail('Uncertifiable source parameter automation: ' + item.id + '/' + field + '/' + event.method);
+        }
+      }
       this.addEventListener('ended', () => { item.ended_context_time = this.context.currentTime; item.ended_wall_ms = now(); });
     } catch (error) { fail(error); }
     return result;
@@ -145,12 +263,23 @@
     voiceEnd(item) > entry.ctx.currentTime && !!connectedPath(item.id, entry.destination);
   function sample() {
     for (const entry of contexts) {
+      if (!entry.analyser) continue; // No invented meter evidence for an unused context.
       try {
+        const source_metadata = starts.filter(item => item.context === entry.id).map(item => {
+          const source = nodes[item.id - 1].node;
+          auditSource(source, 'meter sample');
+          return { id: item.id, ...sourceMetadata(source) };
+        });
+        // Raw values of the genuine active destination gains. A suspended
+        // analyser retains its last PCM window; never manufacture silent PCM
+        // from context state or these gain values.
+        const terminal_gain_values = entry.terminals.filter(item => item.active && item.kind === 'GainNode')
+          .map(item => ({ source: item.source, value: nodes[item.source - 1].node.gain.value }));
         entry.analyser.getFloatTimeDomainData(entry.data);
         let square = 0, peak = 0, clipped = 0;
         for (const value of entry.data) { square += value * value; peak = Math.max(peak, Math.abs(value)); if (Math.abs(value) >= .999) clipped++; }
         entry.samples.push({ wall_ms: now(), context_time: entry.ctx.currentTime, state: entry.ctx.state,
-          rms: Math.sqrt(square / entry.data.length), peak, clipped_fraction: clipped / entry.data.length,
+          rms: Math.sqrt(square / entry.data.length), peak, clipped_fraction: clipped / entry.data.length, source_metadata, terminal_gain_values,
           active_music: starts.filter(item => item.name === 'music' && alive(item, entry)).length,
           active_cues: starts.filter(item => item.name !== 'music' && alive(item, entry) &&
             connectedPath(item.id, entry.destination, true)).map(item => item.id) });
@@ -166,7 +295,9 @@
     sample();
     return { schema: 1, errors: [...errors], wall_ms: now(), gestures: [...gestures], marks: [...marks],
       user_activation: { active: host.navigator.userActivation.isActive, has_been_active: host.navigator.userActivation.hasBeenActive },
-      nodes: nodes.map(({ id, kind }) => ({ id, kind })), edges: edges.map(edge => ({ ...edge })), starts: starts.map(item => ({ ...item })),
+      nodes: nodes.map(({ id, kind }) => ({ id, kind })), edges: edges.map(edge => ({ ...edge })),
+      starts: starts.map(item => ({ ...item, mutations: item.mutations.map(value => ({ ...value })),
+        parameter_automation: item.parameter_automation.map(value => ({ ...value })) })),
       contexts: contexts.map(entry => ({ id: entry.id, state: entry.ctx.state, context_time: entry.ctx.currentTime,
         sample_rate: entry.ctx.sampleRate, destination: entry.destination, terminals: entry.terminals.map(item => ({ ...item })), samples: [...entry.samples] })) };
   }

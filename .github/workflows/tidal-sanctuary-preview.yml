@@ -52,7 +52,7 @@ jobs:
         run: |
           python -m unittest discover -s "$RECIPE/ci" -p 'test_*.py' -v
           python scripts/godot_web/test_materialize_runtime.py
-          node --test "$RECIPE/ci/test_web_exit.js" "$RECIPE/ci/test_audio_probe.js"
+          node --test "$RECIPE/ci/test_web_exit.js" "$RECIPE/ci/test_audio_probe.js" "$RECIPE/ci/test_web_audio.js"
       - name: Actual typed MCP create, save, restart and reopen
         id: author
         shell: bash

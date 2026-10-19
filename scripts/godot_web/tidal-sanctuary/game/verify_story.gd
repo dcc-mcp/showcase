@@ -119,6 +119,12 @@ func run() -> void:
  game.begin_journey("fixture")
  check(game.journey_started and game.interface.card_mode.is_empty(),"explicit Begin opens player control")
  check(game.tide_audio.get_state().start_count==1,"one logical music start")
+ game.interface.card_primary.disabled=true # Model a delayed Web Begin's shared button state.
+ game.show_journal()
+ check(not game.interface.card_primary.disabled,"journal re-enables the shared action after delayed Begin")
+ game.request_restart()
+ check(not game.interface.card_primary.disabled,"restart confirmation has its own enabled action")
+ game.card_secondary()
  game.begin_journey("fixture_repeat")
  check(game.tide_audio.get_state().start_count==1,"repeated Begin does not restart music")
  await place(2)

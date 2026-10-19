@@ -9,14 +9,14 @@ import tempfile
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window,
                              real_button, validate_audio_baseline, validate_audio_sources,
                              validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
-                             browser_executable, validate_browser_arguments)
+                             browser_executable, validate_browser_arguments, validate_audio_closed, validate_focus_suspension)
 
 
 def snapshot(rms=0, state="suspended", seconds=2.5):
     return {"schema": 1, "errors": [], "wall_ms": seconds * 1000,
             "starts": [], "gestures": [], "marks": [{"name": "baseline", "wall_ms": 0, "context_times": [{"id": 1, "time": 0}]}], "user_activation": {"has_been_active": False},
             "contexts": [{"id": 1, "destination": 1, "state": state, "context_time": seconds if state == "running" else 0,
-                          "terminals": [{"active": True, "kind": "GainNode", "key": "2:0:0", "mirror_count": 1, "connected_ms": 0}],
+                          "terminals": [{"active": True, "kind": "GainNode", "source": 2, "key": "2:0:0", "mirror_count": 1, "connected_ms": 0}],
                           "samples": [{"wall_ms": index * 100, "context_time": index / 10 if state == "running" else 0,
                                        "state": state, "rms": rms, "peak": rms * 2, "clipped_fraction": 0, "active_music": 0, "active_cues": []}
                                       for index in range(int(seconds * 10) + 1)]}]}
@@ -53,6 +53,63 @@ def route_audio():
 
 
 class AudioAcceptanceFixtures(unittest.TestCase):
+    def test_owned_context_close_requires_no_live_edges_or_new_sources(self):
+        before = snapshot(.01, "running")
+        before["starts"] = [{"id": 3}]
+        after = copy.deepcopy(before)
+        context = after["contexts"][0]
+        context["state"] = "closed"
+        context["terminals"][0]["active"] = False
+        validate_audio_closed(before, after)
+        for change in ("open", "edge", "voice", "source", "extra-context", "probe-error"):
+            bad = copy.deepcopy(after)
+            if change == "open": bad["contexts"][0]["state"] = "running"
+            if change == "edge": bad["contexts"][0]["terminals"][0]["active"] = True
+            if change == "voice": bad["contexts"][0]["samples"][-1]["active_music"] = 1
+            if change == "source": bad["starts"].append({"id": 4})
+            if change == "extra-context": bad["contexts"].append({"id": 2, "state": "closed"})
+            if change == "probe-error": bad["errors"] = ["unknown graph"]
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                validate_audio_closed(before, bad)
+
+    def test_focus_requires_real_silence_frozen_clock_and_same_voices(self):
+        before = snapshot(.01, "running")
+        before["starts"] = [{"id": 3}]
+        away = snapshot(0, "suspended")
+        away["starts"] = [{"id": 3}]
+        away["contexts"][0]["context_time"] = 2.5
+        for item in away["contexts"][0]["samples"]:
+            item.update(context_time=2.5, rms=.02, peak=.04, active_music=1,
+                        terminal_gain_values=[{"source": 2, "value": 0}])
+        returned = snapshot(.01, "running", 4)
+        returned["starts"] = [{"id": 3}]
+        validate_focus_suspension(before, away, returned, 0, 2500)
+        for change in ("unmuted-terminal", "missing-terminal", "advancing", "running", "sparse", "restart", "replacement", "not-resumed"):
+            bad, back = copy.deepcopy(away), copy.deepcopy(returned)
+            if change == "unmuted-terminal": bad["contexts"][0]["samples"][5]["terminal_gain_values"][0]["value"] = .1
+            if change == "missing-terminal": bad["contexts"][0]["samples"][5]["terminal_gain_values"] = []
+            if change == "advancing": bad["contexts"][0]["samples"][5]["context_time"] += .1
+            if change == "running": bad["contexts"][0]["samples"][5]["state"] = "running"
+            if change == "sparse": bad["contexts"][0]["samples"] = bad["contexts"][0]["samples"][:2]
+            if change == "restart": back["starts"].append({"id": 4})
+            if change == "replacement": back["contexts"][0]["id"] = 2
+            if change == "not-resumed": back["contexts"][0]["state"] = "suspended"
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                validate_focus_suspension(before, bad, back, 0, 2500)
+
+    def test_native_loop_cannot_change_bounds_pitch_or_automation(self):
+        value, receipts, actions = route_audio()
+        value["starts"] = [item for item in value["starts"] if item["name"] != "music" or item["id"] == 3]
+        source = value["starts"][0]
+        source.update(looping=True, planned_end=None, detune=0, loop_start=0, loop_end=32,
+                      requested_duration=None, mutations=[], parameter_automation=[])
+        validate_audio_sources(value, receipts, actions)
+        for change in ({"loop_start": 1}, {"loop_end": 31}, {"detune": 1}, {"requested_duration": 32},
+                       {"mutations": [{}]}, {"parameter_automation": [{}]}):
+            bad = copy.deepcopy(value);bad["starts"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                validate_audio_sources(bad, receipts, actions)
+
     def test_rejected_window_preserves_its_exact_observation_before_diagnostics(self):
         value = snapshot(.02, "running")
         value["contexts"][0]["samples"] = value["contexts"][0]["samples"][:2]
@@ -245,7 +302,7 @@ class AudioAcceptanceFixtures(unittest.TestCase):
     def test_true_native_loop_still_requires_audible_boundary(self):
         value, receipts, actions = route_audio()
         value["starts"] = [item for item in value["starts"] if item["name"] != "music" or item["id"] == 3]
-        value["starts"][0].update({"looping": True, "planned_end": None})
+        value["starts"][0].update({"looping": True, "planned_end": None, "detune": 0, "loop_start": 0, "loop_end": 32, "requested_duration": None, "mutations": [], "parameter_automation": []})
         result = validate_audio_sources(value, receipts, actions)
         self.assertEqual(result["first_loop_boundary"]["continuing_source_id"], 3)
         value["starts"][0]["stopped_context_time"] = 32.3

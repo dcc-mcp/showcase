@@ -3,13 +3,13 @@ const assert = require('node:assert/strict');
 const {attach} = require('./web_exit.js');
 const originalLog = console.log, originalError = console.error;
 console.log = () => {}; console.error = () => {};
-function fixture() {
+function fixture(audio = null) {
   const config = {}, events = [], ui = {
     ready: x => events.push(['ready', x]), label: x => events.push(['label', x]),
     show: (text, ok) => events.push(['show', text, ok]), click: fn => {ui.press = fn;}
   };
   let quit = 0;
-  const state = attach(config, () => {quit++;}, ui);
+  const state = attach(config, () => {quit++;}, ui, audio);
   return {config, ui, events, state, quits: () => quit};
 }
 function save(f, persistent = true, reason = 'exit') {
@@ -47,3 +47,25 @@ try {
   } finally { global.setTimeout = oldTimer; global.clearTimeout = oldClear; }
 } finally { console.log = originalLog; console.error = originalError; }
 console.log('Web save/return public-callback guards passed (no browser or storage simulation claim).');
+
+const test = require('node:test');
+test('actual exit callback awaits owned context shutdown before Saved', async () => {
+  let resolve;
+  const audio = {close: () => new Promise(done => {resolve = done;}),
+    getState: () => JSON.stringify({context_state:'closed', music_playing:false, cue_playing:false})};
+  const f = fixture(audio); f.ui.press({isTrusted:true}); save(f);
+  const completed = f.config.onExit(0);
+  assert.equal(f.state.isFinished(),false);
+  resolve(true); await completed;
+  assert.equal(f.state.isFinished(),true);
+});
+test('context shutdown rejection or live voice cannot claim Saved', async () => {
+  for (const audio of [
+    {close: async () => {throw Error('close failed');}, getState: () => '{}'},
+    {close: async () => false, getState: () => '{}'},
+    {close: async () => true, getState: () => JSON.stringify({context_state:'running', music_playing:true, cue_playing:false})}
+  ]) {
+    const f=fixture(audio);f.ui.press({isTrusted:true});save(f);await f.config.onExit(0);
+    assert.equal(f.state.isFinished(),false);
+  }
+});

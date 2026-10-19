@@ -23,6 +23,23 @@ def copy_asset_notices(native, site):
         shutil.copyfile(native / name, destination)
 
 
+WEB_AUDIO_FILES = ("assets/audio/tidekeeper-loop.ogg", "assets/audio/chart_read.wav",
+                   "assets/audio/key_pickup.wav", "assets/audio/pearl_pickup.wav",
+                   "assets/audio/beacon_resolve.wav")
+
+
+def copy_web_audio(native, site):
+    """Publish only exact manifest-owned original audio bytes, never substitutes."""
+    for name in ("web_audio.js", *WEB_AUDIO_FILES):
+        if name not in GAME_FILES:
+            raise ValueError("Browser audio is outside the source manifest: " + name)
+        destination = site / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(native / name, destination)
+        if sha256(destination) != sha256(native / name):
+            raise ValueError("Browser audio changed while copying: " + name)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--native", type=Path, required=True)
@@ -96,12 +113,15 @@ progressive_web_app/enabled=false
         config["ensureCrossOriginIsolationHeaders"] = False
         config["emscriptenPoolSize"] = 0
         config["godotPoolSize"] = 0
+        # Public engine CLI selection, Web export only. The owned browser graph
+        # handles ALL five sounds; no silent second Godot AudioContext is allowed.
+        config["args"] = [*config.get("args", []), "--audio-driver", "Dummy"]
         page = page[:match.start(1)] + json.dumps(config) + page[match.end(1):]
         marker = "const engine = new Engine(GODOT_CONFIG);"
         if page.count(marker) != 1:
             raise RuntimeError("Official shell engine marker changed")
         page = page.replace(marker, "const tidalExit = window.TidalSaveExit.attach(GODOT_CONFIG, () => engine.requestQuit());\n" + marker)
-        page = page.replace('<script src="index.js"></script>', '<script src="index.js"></script>\n<script src="save-exit.js"></script>')
+        page = page.replace('<script src="index.js"></script>', '<script src="index.js"></script>\n<script src="web_audio.js"></script>\n<script src="save-exit.js"></script>')
         if 'src="save-exit.js"' not in page:
             raise RuntimeError("Official shell script marker changed")
         (site / "index.html").write_text(page)
@@ -112,6 +132,7 @@ progressive_web_app/enabled=false
         for name in ("FONT-LICENSE.txt", "FONT-NOTICE.txt", "FONT-SOURCE.json"):
             shutil.copyfile(args.native / name, site / name)
         copy_asset_notices(args.native, site)
+        copy_web_audio(args.native, site)
         for name in ("index.html", "index.js", "index.wasm", "index.pck"):
             if not (site / name).is_file() or (site / name).stat().st_size == 0:
                 raise RuntimeError(f"Expected official Web export file is missing: {name}")
@@ -127,6 +148,8 @@ progressive_web_app/enabled=false
             "This is CI staging, not a public deployment.\n"
             "The native movie is an explicitly scripted traversal of the real game.\n"
             "Browser portrait evidence is emulation, not a physical-phone test.\n"
+            "Web audio: one browser-native looping graph via Godot JavaScriptBridge; desktop uses Godot audio.\n"
+            "If audio preparation fails, use the native Retry audio action before Begin.\n"
             "Godot runtime notices: LICENSE.txt and COPYRIGHT.txt.\n"
             "Subset font: SIL Open Font License, see FONT-LICENSE.txt.\n"
             "Kenney models: CC0, see assets/KENNEY-LICENSE.txt and assets/SOURCE.json.\n"

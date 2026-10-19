@@ -11,7 +11,7 @@ from author_native import envelope
 from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, TROPICAL_FILES, TROPICAL_NOTICES, check_engine_log, copy_game, isolated_env, isolated_output
 from capture_native import import_native_resources, collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
-from export_web import copy_asset_notices, raw_include_filter
+from export_web import copy_asset_notices, raw_include_filter, copy_web_audio, WEB_AUDIO_FILES
 
 
 class HarnessTests(unittest.TestCase):
@@ -353,6 +353,20 @@ class HarnessTests(unittest.TestCase):
                 if filename == "explorer.glb":
                     self.assertEqual({clip["name"] for clip in content["animations"]}, {"Idle", "Walk", "Swim"})
                     self.assertEqual(len(content["skins"][0]["joints"]), 23)
+
+    def test_export_copies_original_web_audio_and_public_helper_byte_for_byte(self):
+        native = Path(__file__).parent.parent / "game"
+        with tempfile.TemporaryDirectory() as temporary:
+            site = Path(temporary)
+            copy_web_audio(native, site)
+            self.assertEqual({p.relative_to(site).as_posix() for p in site.rglob("*") if p.is_file()},
+                             {"web_audio.js", *WEB_AUDIO_FILES})
+            for name in ("web_audio.js", *WEB_AUDIO_FILES):
+                self.assertEqual((site / name).read_bytes(), (native / name).read_bytes())
+        project = (native / "project.godot").read_text()
+        self.assertIn('driver/driver.web="Dummy"', project)
+        self.assertIn('driver/mix_rate.web=44100', project)
+        self.assertNotIn('driver/driver="Dummy"', project)
 
     def test_export_preserves_all_asset_notices_byte_for_byte(self):
         with tempfile.TemporaryDirectory() as root:
