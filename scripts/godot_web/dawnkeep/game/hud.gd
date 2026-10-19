@@ -13,7 +13,7 @@ const WORDS = {
  "subtitle":["OATH OF THE LAST LIGHT", "守住最后一道光"],
  "chapter":["I  /  THE EMERALD PASS", "第一章  /  翡翠隘口"],
  "core":["DAWNHEART", "曙光之心"], "gold":["GOLD", "金币"], "wave":["WAVE", "波次"],
- "hero":["ELYRA · DAWNWARDEN", "艾莉拉 · 曙光守护者"], "level":["LV", "等级"],
+ "hero":["ELYRA · DAWNWARDEN", "艾莉拉 · 曙光守护者"], "hero_name":["ELYRA", "艾莉拉"], "fallen":["FALLEN", "已陨落"], "level":["LV", "等级"],
  "start":["ENTER THE PASS", "进入隘口"],
  "goal":["Stand against the Hollow Court. Protect the Dawnheart through eight waves and defeat the Crownless King.", "抵御空壳王庭的侵袭。守住曙光之心，撑过八波敌潮，击败无冕之王。"],
  "short_goal":["Protect the Dawnheart through eight waves. Defeat the Crownless King.", "守住曙光之心，撑过八波敌潮，击败无冕之王。"],
@@ -453,12 +453,14 @@ func _refresh() -> void:
  labels.stats.text = ("%s %d   ·   %s %d   ·   %s %d/8" % [text("core"),core,text("gold"),gold,text("wave"),wave]) if not portrait else ("%s %d  |  %d G  |  %d/8" % [text("core"),core,gold,wave])
  labels.stats.add_theme_font_size_override("font_size",13 if portrait else 17)
  var hero: Dictionary = state.get("hero",{})
+ var mode: String = str(state.get("mode","build"))
  if is_instance_valid(hero_health_bar):hero_health_bar.value=100.0*float(hero.get("hp",240))/maxf(1,float(hero.get("max_hp",240)))
- labels.hero.text = text("hero")+((" · "+text("respawn")+" %.1fs"%float(hero.get("respawn",0))) if hero.get("dead",false) else "")
+ labels.hero.text = text("hero")
+ if hero.get("dead",false):
+  labels.hero.text = "%s · %s" % [text("hero_name"),text("fallen")] if mode in ["victory","defeat","won","lost"] else "%s · %s %.1fs" % [text("hero_name"),text("respawn"),float(hero.get("respawn",0))]
  labels.hero_stats.text = "%s %d    %s %d    XP %d / %d" % [text("level"),hero.get("level",1),text("damage"),hero.get("damage",32),hero.get("xp",0),hero.get("xp_next",70)]
  labels.hero_stats.add_theme_font_size_override("font_size",12 if portrait else 14)
  labels.hero_health.text = "%s  %d / %d" % [text("health"),hero.get("hp",240),hero.get("max_hp",240)]
- var mode: String = str(state.get("mode","build"))
  var active := mode in ["wave","combat","playing"]
  labels.wave_status.text = text("in_wave") if active else text("prepare")
  var boss:Dictionary=state.get("boss",{})
