@@ -35,6 +35,8 @@ var font: Font
 var ui_language := "en"
 var current_stage := 0
 var muted := false
+var _layout_viewport := Vector2(-1,-1)
+var _layout_dirty := true
 
 func panel_style(color: Color, border := false) -> StyleBoxFlat:
  var style := StyleBoxFlat.new()
@@ -120,19 +122,29 @@ func setup(game_font: Font) -> void:
  column.add_child(card_body)
  card_primary=button("");card_primary.pressed.connect(func():card_primary_requested.emit());column.add_child(card_primary)
  card_secondary=button("");card_secondary.pressed.connect(func():card_secondary_requested.emit());column.add_child(card_secondary)
+ # Text and Container minimum sizes can settle after their setters return.
+ # Reapply the fixed geometry then, including at an unchanged viewport size.
+ for control in root.get_children():
+  if control is Control:control.minimum_size_changed.connect(_mark_layout_dirty)
  hide_card()
  layout()
 
+func _mark_layout_dirty() -> void:
+ _layout_dirty=true
+
 func show_card(mode: String, heading: String, body: String, primary: String, secondary := "") -> void:
+ _mark_layout_dirty()
  card_mode=mode;card_title.text=heading;card_body.text=body;card_body.scroll_to_line(0)
  card_primary.text=primary;card_secondary.text=secondary;card_secondary.visible=not secondary.is_empty()
  shade.show();card.show();card_primary.grab_focus();layout()
 
 func hide_card() -> void:
+ _mark_layout_dirty()
  card_mode="";shade.hide();card.hide()
  if get_viewport():get_viewport().gui_release_focus()
 
 func set_status(stage: int, language: String, audio_muted: bool) -> void:
+ _mark_layout_dirty()
  current_stage=stage;ui_language=language;muted=audio_muted
  language_button.text="EN" if language=="en" else "ZH"
  audio_button.icon=load("res://assets/story/audio-%s.svg"%["off" if muted else "on"])
@@ -145,7 +157,11 @@ func set_status(stage: int, language: String, audio_muted: bool) -> void:
 
 func layout() -> void:
  if root==null:return
+ # Prompt text changes with real proximity even when geometry is cached.
+ prompt_panel.visible=not prompt.text.is_empty()
  var viewport:=get_viewport().get_visible_rect().size
+ if not _layout_dirty and viewport==_layout_viewport:return
+ _layout_dirty=false;_layout_viewport=viewport
  var narrow:=viewport.x<600
  var panel_width:=minf(390,viewport.x-32)
  title_panel.position=Vector2(16,16);title_panel.size=Vector2(panel_width,190 if narrow else 174)
@@ -168,10 +184,12 @@ func layout() -> void:
  prompt_panel.position=Vector2((viewport.x-prompt_width)*.5,viewport.y-(228 if compact else 170))
  prompt_panel.size=Vector2(prompt_width,64)
  prompt.position=prompt_panel.position+Vector2(14,8);prompt.size=prompt_panel.size-Vector2(28,16)
- prompt_panel.visible=not prompt.text.is_empty()
  footer_panel.position=Vector2(16,viewport.y-30);footer_panel.size=Vector2(minf(570,viewport.x-32),26)
  message.position=Vector2(26,viewport.y-27);message.size=footer_panel.size-Vector2(20,0)
- message.add_theme_font_size_override("font_size",16 if narrow else 14)
+ var message_font_size:=16 if narrow else 14
+ # Godot emits theme-change notifications even for an identical override.
+ if message.get_theme_font_size("font_size")!=message_font_size:
+  message.add_theme_font_size_override("font_size",message_font_size)
  var card_width:=minf(550,viewport.x-32)
  var card_height:=minf(470,viewport.y-140)
  card.position=Vector2((viewport.x-card_width)*.5,(viewport.y-92-card_height)*.5)

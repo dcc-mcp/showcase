@@ -36,6 +36,63 @@ func all_text(value:Variant) -> String:
   for child in value:result+=all_text(child)
  return result
 
+func check_layout_cache() -> void:
+ var interface:CanvasLayer=game.interface
+ root.size=Vector2i(1280,720)
+ for i in range(4):
+  await process_frame;interface.layout()
+ var theme_changes:=[0]
+ interface.message.theme_changed.connect(func():theme_changes[0]+=1)
+ var original_action:Rect2=interface.action_button.get_global_rect()
+ for i in range(8):
+  interface.layout();await process_frame
+ check(theme_changes[0]==0,"unchanged layout does not invalidate the message theme each frame")
+ check(not interface._layout_dirty,"unchanged layout settles into the cached geometry path")
+ check(interface.action_button.get_global_rect()==original_action,"cached layout preserves action geometry")
+ interface.prompt.text="";interface.layout()
+ check(not interface.prompt_panel.visible,"cached geometry still hides an empty proximity prompt")
+ interface.prompt.text="Read the shore chart";interface.layout()
+ check(interface.prompt_panel.visible,"cached geometry still reveals a new proximity prompt")
+ interface.prompt.text="";interface.layout()
+ check(not interface.prompt_panel.visible,"cached geometry hides the prompt again without resize")
+ for size in [Vector2i(320,568),Vector2i(390,844),Vector2i(1280,720)]:
+  root.size=size;await process_frame;interface.layout()
+  var expected_font:=16 if size.x<600 else 14
+  check(interface.message.get_theme_font_size("font_size")==expected_font,"resize updates the responsive message font")
+  check(interface.action_button.position==Vector2(size.x-216,size.y-(150 if size.x<384 else 92)),"resize invalidates cached action geometry immediately")
+  for lang in ["en","zh"]:
+   game.language=lang;game.update_state()
+   interface.show_card("journal",game.tr_text(game.story.title),game.tr_text(game.story.opening.body),game.tr_text(game.story.ui.continue),game.tr_text(game.story.ending.secondary))
+   for i in range(4):
+    await process_frame;interface.layout()
+   check(interface.language_button.text==("EN" if lang=="en" else "ZH"),"same-viewport status change updates language")
+   check(interface.card_secondary.visible,"same-viewport story change reveals secondary control")
+   var expanded:Rect2=interface.card.get_global_rect()
+   check(expanded.end.x<=size.x+.1 and expanded.end.y<=size.y+.1,"localized card reflow stays inside the unchanged viewport")
+   interface.show_card("opening",game.tr_text(game.story.title),"Short body" if lang=="en" else "简短内容",game.tr_text(game.story.ui.continue))
+   for i in range(4):
+    await process_frame;interface.layout()
+   check(not interface.card_secondary.visible,"same-viewport story change removes secondary control")
+   check(interface.card_body.text==("Short body" if lang=="en" else "简短内容"),"same-viewport card content is refreshed")
+   interface.hide_card();interface.layout()
+   check(not interface.card.visible and not interface.shade.visible,"cached layout preserves card hide and shade removal")
+ # A deferred minimum-size change must invalidate geometry even without a
+ # status/card/viewport setter. Removing it must restore the authored size.
+ interface.title.custom_minimum_size=Vector2(380,24)
+ await process_frame;await process_frame
+ check(interface._layout_dirty,"deferred text minimum-size change marks layout dirty")
+ interface.layout()
+ check(interface.title.size.x>=380,"dirty layout respects a new minimum size")
+ interface.title.custom_minimum_size=Vector2.ZERO
+ for i in range(4):
+  await process_frame;interface.layout()
+ check(interface.title.size.x==362,"minimum-size shrink restores authored title width without resize")
+ var stable_changes:int=theme_changes[0]
+ for i in range(8):
+  interface.layout();await process_frame
+ check(theme_changes[0]==stable_changes,"settled content reflow returns to a theme-stable cached layout")
+ check(not interface._layout_dirty,"content minimum-size reflow settles back into the cached geometry path")
+
 func run() -> void:
  had_save=FileAccess.file_exists(SAVE_PATH)
  if had_save:original_save=FileAccess.get_file_as_string(SAVE_PATH)
@@ -106,6 +163,7 @@ func run() -> void:
  game.request_restart();check(game.restart_pending and game.quest_stage()==2,"restart request is non-destructive")
  game.card_secondary();check(not game.restart_pending and game.quest_stage()==2,"restart cancellation preserves progress")
  game.request_restart();game.card_primary();check(game.quest_stage()==0,"explicit confirmation resets progress")
+ await check_layout_cache()
  var font_text:=all_text(game.story)
  var missing:Array[int]=[]
  for index in range(font_text.length()):
