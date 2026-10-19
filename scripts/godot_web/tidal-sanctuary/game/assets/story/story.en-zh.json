@@ -259,6 +259,14 @@
     "ready": {
       "en": "Ready",
       "zh": "可以互动"
+    },
+    "controls_keyboard": {
+      "en": "WASD / arrows · Move and swim\nE · Interact     J · Journal     M · Sound",
+      "zh": "方向键行走或游泳\nE 互动 · J 手记 · M 声音"
+    },
+    "controls_touch": {
+      "en": "Left drag · Move and swim\nRight button · Interact\nTop icons · Journal / Sound",
+      "zh": "左侧拖动 · 行走或游泳\n右侧按钮 · 互动\n手记 / 声音 · 点按图标"
     }
   }
 }

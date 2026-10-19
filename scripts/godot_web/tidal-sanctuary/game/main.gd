@@ -685,11 +685,14 @@ func make_ui() -> void:
  interface.card_primary_requested.connect(card_primary)
  interface.card_secondary_requested.connect(card_secondary)
 
+func control_help(touch_available:bool) -> String:
+ return tr_text(story.ui.controls_touch if touch_available else story.ui.controls_keyboard)
+
 func show_opening() -> void:
  var opening:Dictionary=story.opening
  var heading:=tr_text(story.title) if loaded_found else tr_text(opening.title)
  var body:=tr_text(story.ending.clue) if quest_stage()==4 else tr_text(opening.body)
- body+="\n\n"+("WASD / arrows · Move and swim\nE · Interact     J · Journal     M · Sound" if language=="en" else "方向键行走或游泳\nE 互动 · J 手记 · M 声音")
+ body+="\n\n"+control_help(DisplayServer.is_touchscreen_available())
  interface.show_card("opening",heading,body,tr_text(story.ui.continue) if loaded_found else tr_text(opening.button))
 
 func begin_journey(trigger:String) -> void:

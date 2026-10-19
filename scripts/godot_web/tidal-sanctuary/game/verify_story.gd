@@ -47,6 +47,13 @@ func run() -> void:
  await place(0)
  game.interact();check(game.quest_stage()==0,"opening blocks world interaction")
  game.show_opening()
+ check(game.interface.card_body.text.ends_with(game.control_help(DisplayServer.is_touchscreen_available())),"opening instructions match the actual input capability")
+ for lang in ["en","zh"]:
+  game.language=lang
+  check(game.control_help(true)==str(game.story.ui.controls_touch[lang]),"touch controls are localized")
+  check(game.control_help(false)==str(game.story.ui.controls_keyboard[lang]),"keyboard controls are localized")
+  check(game.control_help(true)!=game.control_help(false),"touch help never substitutes keyboard-only instructions")
+ game.language="en"
  game.begin_journey("fixture")
  check(game.journey_started and game.interface.card_mode.is_empty(),"explicit Begin opens player control")
  check(game.tide_audio.get_state().start_count==1,"one logical music start")
