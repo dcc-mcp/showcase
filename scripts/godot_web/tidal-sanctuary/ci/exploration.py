@@ -2,7 +2,7 @@
 from __future__ import annotations
 import math
 import time
-from gameplay import direction_to, validate_state
+from gameplay import direction_to, keyboard_direction, validate_state
 from observers import finite_vector
 
 
@@ -73,6 +73,93 @@ def validate_chart_contact(samples, opposite_to=None, required=True):
     return None
 
 
+def chart_approach_ray(state, outward):
+    """Choose an actual eight-way key ray using the observed camera basis."""
+    validate_state(state, expected_demo=False)
+    outward = finite_vector(outward, 2, "requested chart approach")
+    length = math.hypot(*outward)
+    if length <= 1e-9:
+        raise ValueError("Chart approach needs a nonzero outward direction")
+    requested = [axis / length for axis in outward]
+    right, forward = state["camera_right"], state["camera_forward"]
+    candidates = []
+    for x, y in ((-1, -1), (1, 1), (-1, 0), (1, 0), (0, -1), (0, 1), (-1, 1), (1, -1)):
+        world = [right[i] * x - forward[i] * y for i in range(2)]
+        world_length = math.hypot(*world)
+        radial = [-axis / world_length for axis in world]
+        candidates.append((sum(a*b for a, b in zip(radial, requested)), (x, y), radial))
+    _, direction, radial = max(candidates, key=lambda candidate: candidate[0])
+    return {"direction": list(direction), "keys": sorted(keyboard_direction(direction)),
+            "outward": radial, "target": [1.3 + radial[0]*1.8, 7.8 + radial[1]*1.8]}
+
+
+def hold_chart_contact(read_states, move, pause, ray, opposite_to=None, timeout=35, evidence=None):
+    """Hold one physical key combination; never chase the center along a bevel."""
+    evidence = {} if evidence is None else evidence
+    initial = read_states()[-1]
+    validate_state(initial, expected_demo=False)
+    boundary = initial["sample_id"]
+    deadline = time.monotonic() + timeout
+    evidence.update({"ray": ray, "after_sample_id": boundary, "observations": []})
+    try:
+        move(tuple(ray["direction"]))
+        while time.monotonic() < deadline:
+            states = read_states()
+            selected = [state for state in states if state["sample_id"] > boundary]
+            evidence["observations"] = selected
+            if selected:
+                validate_state(selected[0], initial, expected_demo=False)
+            # Validate malformed, penetrating or injected observations even when
+            # a contact is still pending. The original contact gates are unchanged.
+            receipt = validate_chart_contact(selected, opposite_to, required=False)
+            if time.monotonic() >= deadline:
+                break
+            contact = []
+            stopped_once = False
+            for state in selected:
+                x, _, z = state["position"]
+                radial = [x-1.3, z-7.8]
+                distance = math.hypot(*radial)
+                if distance > .9:
+                    contact = []
+                    stopped_once = False
+                    continue
+                radial = [axis/distance for axis in radial]
+                if (sum(a*b for a, b in zip(radial, ray["outward"])) < .8
+                        or (opposite_to is not None and sum(a*b for a, b in zip(radial, opposite_to)) > -.8)):
+                    evidence["result"] = "held contact left the intended opposite sector"
+                    return None
+                inward = -sum(a*b for a, b in zip(state["movement_input"], radial))
+                if inward <= .5 or (contact and state["physics_frame"]-contact[-1]["physics_frame"] > 30):
+                    contact = []
+                    stopped_once = False
+                if inward > .5:
+                    # Do not mistake the approach prefix for a failed stable
+                    # stop. Only an observed stop followed by renewed sliding
+                    # ends an attempt early; acceptance still uses the original
+                    # complete contact validator above.
+                    stopped_once |= math.hypot(state["velocity"][0], state["velocity"][2]) <= .08
+                    if stopped_once:
+                        contact.append(state)
+            if contact and contact[-1]["physics_frame"]-contact[0]["physics_frame"] >= 60:
+                cutoff = contact[-1]["physics_frame"]-60
+                start = max(i for i, state in enumerate(contact) if state["physics_frame"] <= cutoff)
+                trailing = contact[start:]
+                if max(math.dist(a["position"], b["position"]) for a in trailing for b in trailing) > .20:
+                    evidence["result"] = "held contact slid instead of stopping"
+                    return None
+            if receipt is not None:
+                evidence["result"] = "accepted held contact"
+                receipt["observations"] = selected
+                receipt["held_ray"] = ray
+                return receipt
+            pause(.05)
+        evidence["result"] = "contact timeout"
+        return None
+    finally:
+        move((0, 0))
+
+
 def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, evidence=None):
     """Walk around geometrically opposing contacts; no interact calls."""
     samples, receipts, path = [], [], []
@@ -124,31 +211,25 @@ def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, eviden
             move(direction_to(state,target));pause(.05)
         raise TimeoutError("Off-route physical waypoint not reached: "+str(target))
 
-    def push(opposite_to=None):
-        boundary=observe()["sample_id"];deadline=time.monotonic()+timeout
-        while time.monotonic()<deadline:
-            state=observe()
-            selected=[s for s in samples if s["sample_id"]>boundary]
-            receipt=validate_chart_contact(selected,opposite_to,required=False)
-            if receipt is not None:
-                # Freeze the reference from actual inward contact, before release.
-                receipt["observations"]=selected
-                receipt["settled_after_release"]=settle()
-                return receipt
-            if opposite_to is not None and validate_chart_contact(selected,required=False) is not None:
-                evidence.setdefault("opposing_attempts",[]).append({"result":"stable but outside opposite sector","observations":selected})
-                settle();return None
-            move(direction_to(state,[1.3,7.8]));pause(.05)
-        evidence.setdefault("opposing_attempts",[]).append({"result":"contact timeout","opposite_to":opposite_to})
-        settle()
+    def push(ray, opposite_to=None):
+        def current_samples():
+            observe()
+            return samples
+        attempt = {}
+        receipt = hold_chart_contact(current_samples, move, pause, ray, opposite_to, timeout, attempt)
+        settled = settle()
+        if receipt is not None:
+            receipt["settled_after_release"] = settled
+            return receipt
+        evidence.setdefault("opposing_attempts", []).append(attempt)
         if opposite_to is None:
-            raise TimeoutError("Actual first chart collision contact never stabilized")
+            raise TimeoutError("Actual first chart collision contact never stabilized: " + attempt["result"])
         return None
 
     def radial_angle(state):
         return math.atan2(state["position"][2]-7.8,state["position"][0]-1.3)
 
-    def orbit_to(target_angle):
+    def orbit_to(target_angle, final_radius=.45):
         # Move out first, then around the pedestal in <=45-degree chords. Never
         # ask the player to cross the solid center to obtain the opposite probe.
         angle=radial_angle(observe())
@@ -158,17 +239,25 @@ def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, eviden
         steps=math.ceil(abs(delta)/(math.pi/4))
         for i in range(1,steps+1):
             a=angle+delta*i/steps
-            navigate([1.3+math.cos(a)*1.8,7.8+math.sin(a)*1.8],.45)
+            navigate([1.3+math.cos(a)*1.8,7.8+math.sin(a)*1.8],final_radius if i==steps else .45)
+        if steps==0:
+            navigate([1.3+math.cos(target_angle)*1.8,7.8+math.sin(target_angle)*1.8],final_radius)
 
     try:
-        for target in ([2.8,9.2],[2.8,7.8]):navigate(target)
-        first=push();first["name"]="first";receipts.append(first)
+        navigate([2.8,9.2])
+        # Approach the southeast corner along a realizable keyboard diagonal,
+        # rather than chase the center from the east and slide around its bevel.
+        first_ray=chart_approach_ray(observe(),[1,1])
+        navigate(first_ray["target"],.25)
+        first=push(first_ray);first["name"]="first";receipts.append(first)
         snapshot("native-chart-blocker-first.png")
         reference=list(first["radial_reference"])
         opposite_angle=math.atan2(reference[1],reference[0])+math.pi
         for adjustment in (0,math.radians(20),math.radians(-20)):
-            orbit_to(opposite_angle+adjustment)
-            second=push(reference)
+            angle=opposite_angle+adjustment
+            ray=chart_approach_ray(observe(),[math.cos(angle),math.sin(angle)])
+            orbit_to(math.atan2(ray["outward"][1],ray["outward"][0]),.25)
+            second=push(ray,reference)
             if second is not None:
                 second["name"]="opposed";receipts.append(second)
                 snapshot("native-chart-blocker-opposed.png")

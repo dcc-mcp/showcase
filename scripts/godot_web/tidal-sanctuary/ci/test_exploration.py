@@ -1,7 +1,8 @@
 """Negative fixtures for off-route observers, not real-input acceptance."""
 import math
 import unittest
-from exploration import validate_chart_contact, run_chart_exploration
+from unittest.mock import Mock, patch
+from exploration import chart_approach_ray, hold_chart_contact, validate_chart_contact, run_chart_exploration
 
 
 def sample(index, angle=0):
@@ -15,6 +16,101 @@ def sample(index, angle=0):
 
 
 class ExplorationTests(unittest.TestCase):
+    def run_held_probe(self, observations, ray, opposite_to=None, baseline_angle=None):
+        angle = math.atan2(ray["outward"][1], ray["outward"][0]) if baseline_angle is None else baseline_angle
+        initial = sample(0, angle)
+        initial["position"] = [1.3+math.cos(angle)*1.8, .53, 7.8+math.sin(angle)*1.8]
+        initial["movement_input"] = [0, 0]
+        history = [initial]
+        queued = iter(observations)
+        first = True
+        clock = [0.]
+        def read():
+            nonlocal first
+            if first:
+                first = False
+            else:
+                following = next(queued, None)
+                if following is not None:
+                    history.append(following)
+            return list(history)
+        def pause(seconds):
+            clock[0] += seconds
+        moves, evidence = [], {}
+        with patch("exploration.time.monotonic", side_effect=lambda: clock[0]):
+            result = hold_chart_contact(read, moves.append, pause, ray, opposite_to, timeout=1, evidence=evidence)
+        return result, moves, evidence
+
+    def test_camera_axes_select_real_diagonal_and_opposite_keys(self):
+        state = sample(0)
+        angle = .295
+        state["camera_right"] = [math.cos(angle), math.sin(angle)]
+        state["camera_forward"] = [math.sin(angle), -math.cos(angle)]
+        first = chart_approach_ray(state, [1, 1])
+        self.assertEqual(first["keys"], ["a", "w"])
+        self.assertEqual(first["direction"], [-1, -1])
+        self.assertAlmostEqual(first["outward"][0], (math.cos(angle)-math.sin(angle))/math.sqrt(2))
+        self.assertAlmostEqual(first["outward"][1], (math.sin(angle)+math.cos(angle))/math.sqrt(2))
+        opposite = chart_approach_ray(state, [-axis for axis in first["outward"]])
+        self.assertEqual(opposite["keys"], ["d", "s"])
+        self.assertAlmostEqual(sum(a*b for a,b in zip(first["outward"], opposite["outward"])), -1)
+        self.assertAlmostEqual(math.hypot(first["target"][0]-1.3, first["target"][1]-7.8), 1.8)
+        with self.assertRaises(ValueError):
+            chart_approach_ray(state, [0, 0])
+
+    def test_held_probe_keeps_one_diagonal_press_across_camera_changes(self):
+        ray = chart_approach_ray(sample(0), [1, 1])
+        observations = [sample(i, math.pi/4) for i in range(1, 5)]
+        for i, state in enumerate(observations):
+            angle = .03*(i % 2)
+            state["camera_right"] = [math.cos(angle), math.sin(angle)]
+            state["camera_forward"] = [math.sin(angle), -math.cos(angle)]
+            state["movement_input"] = [(math.sin(angle)-math.cos(angle))/math.sqrt(2),
+                                        -(math.sin(angle)+math.cos(angle))/math.sqrt(2)]
+        receipt, moves, evidence = self.run_held_probe(observations, ray)
+        self.assertEqual(moves, [(-1, -1), (0, 0)])
+        self.assertEqual(receipt["contact_physics_frames"], 60)
+        self.assertEqual(receipt["contact_samples"], 4)
+        self.assertEqual(receipt["held_ray"], ray)
+        self.assertEqual(evidence["result"], "accepted held contact")
+
+    def test_held_probe_rejects_same_side_and_leaving_opposed_sector(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        for angles in ([math.pi]*4, [0, 0, math.pi]):
+            observations = [sample(i, angle) for i, angle in enumerate(angles, 1)]
+            receipt, moves, evidence = self.run_held_probe(observations, ray, [-1, 0])
+            self.assertIsNone(receipt)
+            self.assertEqual(moves, [(-1, 0), (0, 0)])
+            self.assertIn("sector", evidence["result"])
+            self.assertLess(len(evidence["observations"]), 4)
+
+    def test_held_probe_rejects_sliding_in_sector_without_extending_contact_budget(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        observations = [sample(i, angle) for i, angle in enumerate((-.2, -.07, .07, .2), 1)]
+        receipt, moves, evidence = self.run_held_probe(observations, ray, [-1, 0])
+        self.assertIsNone(receipt)
+        self.assertEqual(moves, [(-1, 0), (0, 0)])
+        self.assertEqual(evidence["result"], "held contact slid instead of stopping")
+        self.assertEqual(evidence["observations"][-1]["physics_frame"]-evidence["observations"][0]["physics_frame"], 60)
+
+    def test_held_probe_never_accepts_short_stale_or_missing_contact(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        for observations in ([], [sample(i) for i in range(1, 4)]):
+            receipt, moves, evidence = self.run_held_probe(observations, ray, [-1, 0])
+            self.assertIsNone(receipt)
+            self.assertEqual(moves, [(-1, 0), (0, 0)])
+            self.assertEqual(evidence["result"], "contact timeout")
+
+    def test_held_probe_releases_keys_on_invalid_physics(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        initial = sample(0)
+        initial["position"] = [3.1, .53, 7.8]
+        invalid = {**sample(1), "position": [1.3, .53, 7.8]}
+        moves = []
+        with self.assertRaisesRegex(ValueError, "penetrated"):
+            hold_chart_contact(Mock(side_effect=[[initial], [initial, invalid]]), moves.append, Mock(), ray)
+        self.assertEqual(moves, [(-1, 0), (0, 0)])
+
     def test_both_sustained_contacts_at_oblique_angles(self):
         first=validate_chart_contact([sample(i,2.25) for i in range(7)])
         second=validate_chart_contact([sample(i,2.25+math.pi) for i in range(7)],first['radial_reference'])
