@@ -1,6 +1,7 @@
 """Fail-closed audio acceptance fixtures; never launches a browser/renderer."""
 import array
 import copy
+import json
 from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
@@ -52,6 +53,18 @@ def route_audio():
 
 
 class AudioAcceptanceFixtures(unittest.TestCase):
+    def test_rejected_window_preserves_its_exact_observation_before_diagnostics(self):
+        value = snapshot(.02, "running")
+        value["contexts"][0]["samples"] = value["contexts"][0]["samples"][:2]
+        original = copy.deepcopy(value)
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "rejected-window.json"
+            with self.assertRaisesRegex(ValueError, "sustained fresh meter"):
+                audio_window(value, 0, 2500, 1.2, audible=True, evidence_path=path)
+            self.assertEqual(json.loads(path.read_text()), {"begin_ms": 0, "end_ms": 2500,
+                "minimum_seconds": 1.2, "audible": True, "snapshot": original})
+        self.assertEqual(value, original)
+
     def test_bus_growth_and_observers_do_not_reintroduce_known_failures(self):
         audio = Path(__file__).parent.parent / "game/tide_audio.gd"
         source = audio.read_text()

@@ -158,7 +158,12 @@ def audio_graph(snapshot):
     return context
 
 
-def audio_window(snapshot, begin_ms, end_ms, minimum_seconds, audible=False):
+def audio_window(snapshot, begin_ms, end_ms, minimum_seconds, audible=False, evidence_path=None):
+    if evidence_path is not None:
+        # Preserve this exact observed window before validation can reject it.
+        # A later failure screenshot/snapshot has a different timing boundary.
+        write_json(evidence_path, {"begin_ms": begin_ms, "end_ms": end_ms,
+            "minimum_seconds": minimum_seconds, "audible": audible, "snapshot": snapshot})
     context = audio_graph(snapshot)
     samples = [item for item in context.get("samples", []) if begin_ms <= item.get("wall_ms", -1) <= end_ms]
     if (len(samples) < 5 or samples[-1]["wall_ms"] - samples[0]["wall_ms"] < minimum_seconds * 1000
@@ -756,7 +761,8 @@ def main():
                     audible_mark = passive_evaluate(page, "() => __tidalAudio.mark('after-begin')")
                     page.wait_for_timeout(1500)
                     audible = passive_evaluate(page, "() => __tidalAudio.snapshot()")
-                    result["audio"]["after_begin"] = audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True)
+                    result["audio"]["after_begin"] = audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True,
+                        evidence_path=out / (label + "-audio-after-begin-window.json"))
                     # Toggle the same visible shipped button with actual input.
                     mute_state = wait_state(page, console)
                     boundary = len(console)
