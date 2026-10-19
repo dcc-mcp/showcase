@@ -67,3 +67,11 @@ two-wave run. Full runs add skills/equipment/repeated and
 invalid input, pause/resume/restart, desktop+portrait and EN+ZH, audio bus energy,
 Web loading/retry/quit/restart/fullscreen, actual recordings and decode checks.
 Listening to the final delivered soundtrack is a separate required review.
+
+### Browser capability and security
+
+The Dawnkeep browser harness keeps Chromium's sandbox enabled and does not force
+unsafe SwiftShader or disable Web security. Missing WebGL2, sandbox support or
+a graphics driver remains a recorded capability blocker. A successful export or
+headless fixture is not browser acceptance. The launch flags are included in
+the browser receipt. This policy is scoped to Dawnkeep's harness.
