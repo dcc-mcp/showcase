@@ -137,7 +137,7 @@ func set_status(stage: int, language: String, audio_muted: bool) -> void:
  language_button.text="EN" if language=="en" else "ZH"
  audio_button.icon=load("res://assets/story/audio-%s.svg"%["off" if muted else "on"])
  audio_button.tooltip_text=("Sound off" if muted else "Sound on") if language=="en" else ("声音已关闭" if muted else "声音已开启")
- journal_button.tooltip_text="Tidekeeper’s journal" if language=="en" else "守潮手记"
+ journal_button.tooltip_text="Tidekeeper's journal" if language=="en" else "守潮手记"
  for i in range(4):
   milestone_icons[i].modulate=Color.WHITE if stage>i else Color(.55,.68,.65,.8)
   milestone_checks[i].text="●" if stage>i else "○"

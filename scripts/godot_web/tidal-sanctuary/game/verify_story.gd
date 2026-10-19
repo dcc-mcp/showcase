@@ -54,6 +54,11 @@ func run() -> void:
   check(game.control_help(false)==str(game.story.ui.controls_keyboard[lang]),"keyboard controls are localized")
   check(game.control_help(true)!=game.control_help(false),"touch help never substitutes keyboard-only instructions")
  game.language="en"
+ # The shared CJK font renders curly English apostrophes at full width.
+ # Keep the shipped English title compact without changing Chinese punctuation.
+ check(str(game.story.title.en)=="The Tidekeeper's Promise","English title uses compact Latin punctuation")
+ game.interface.set_status(0,"en",false)
+ check(game.interface.journal_button.tooltip_text=="Tidekeeper's journal","English journal tooltip uses compact Latin punctuation")
  game.begin_journey("fixture")
  check(game.journey_started and game.interface.card_mode.is_empty(),"explicit Begin opens player control")
  check(game.tide_audio.get_state().start_count==1,"one logical music start")

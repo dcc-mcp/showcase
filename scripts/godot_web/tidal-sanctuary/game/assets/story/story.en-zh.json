@@ -2,7 +2,7 @@
   "schema": 1,
   "story_id": "tidekeepers_promise",
   "title": {
-    "en": "The Tidekeeper’s Promise",
+    "en": "The Tidekeeper's Promise",
     "zh": "守潮人的约定"
   },
   "tagline": {
@@ -15,7 +15,7 @@
       "zh": "礁岸的灯熄灭了"
     },
     "body": {
-      "en": "Last night’s storm silenced the island beacon. A tidekeeper’s note waits on the shore. Find it, and bring the light home.",
+      "en": "Last night's storm silenced the island beacon. A tidekeeper's note waits on the shore. Find it, and bring the light home.",
       "zh": "昨夜风暴过后，海岛的航灯不再亮起。守潮人在岸边留了一张字条。找到它，让归航的灯重新亮起。"
     },
     "button": {
@@ -45,11 +45,11 @@
         "zh": "已阅读海图 · 钥匙藏在林间"
       },
       "story_title": {
-        "en": "The tidekeeper’s note",
+        "en": "The tidekeeper's note",
         "zh": "守潮人的字条"
       },
       "story_body": {
-        "en": "“Before the storm, I locked the beacon pearl in the reef cache. The brass key is in my grove chest. Please bring the light home.”",
+        "en": "\"Before the storm, I locked the beacon pearl in the reef cache. The brass key is in my grove chest. Please bring the light home.\"",
         "zh": "“风暴来临前，我把航灯的珍珠锁进了礁旁的宝箱。铜钥匙在林间的箱子里。请替我把光带回来。”"
       },
       "cue": "chart_read"
@@ -165,7 +165,7 @@
   },
   "ui": {
     "journal": {
-      "en": "Tidekeeper’s journal",
+      "en": "Tidekeeper's journal",
       "zh": "守潮手记"
     },
     "continue": {
@@ -241,7 +241,7 @@
       "zh": "珍珠已归还"
     },
     "restart_prompt": {
-      "en": "Start a new journey? This clears this journey’s progress.",
+      "en": "Start a new journey? This clears this journey's progress.",
       "zh": "开始新的旅途？这会清除本次旅途的进度。"
     },
     "cancel": {

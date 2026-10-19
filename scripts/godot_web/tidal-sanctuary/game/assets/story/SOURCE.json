@@ -1,14 +1,14 @@
 {
   "schema": 1,
-  "title": "The Tidekeeper’s Promise",
+  "title": "The Tidekeeper's Promise",
   "origin": "Original bilingual story and SVG icon artwork created for Tidal Sanctuary",
   "tools": "Original writing and SVG authoring; native Inkscape open/export validation",
   "rights": "Original creative content retains the Tidal Sanctuary case rights; font is separately OFL",
   "files": [
     {
       "path": "story.en-zh.json",
-      "bytes": 7706,
-      "sha256": "7e8da31854c98d2e8de78b6cb0f6430d049bd0d0b9aa54f5a02751ab2f83115d"
+      "bytes": 7692,
+      "sha256": "8cb9b8851d02327b8d033c3f656115e74fc6ffa42e3eeb21b07f127387a1d1a2"
     },
     {
       "path": "chart.svg",
