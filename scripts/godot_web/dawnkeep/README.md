@@ -59,6 +59,19 @@ interruptions without activation credit, still fails active missed clicks, and
 installs that official recording dependency. Fresh full acceptance is required;
 no complete current-head campaign or listening pass is claimed here.
 
+[Full native acceptance on 58dc9d7](https://github.com/dcc-mcp/showcase/actions/runs/39273195375)
+subsequently passed actual eight-wave victory, natural defeat and both restarts,
+with 275.5 seconds of continuous video and captured non-silent stereo PCM.
+That run's Web portion remains failed: the wrapper toolbar covered a native
+shop Close button; its scripted route also tried construction under the hero
+and accidentally selected a pad while pursuing enemies in portrait.
+The wrapper now allocates a separate 44-CSS-pixel strip using documented
+[canvasResizePolicy 0](https://docs.godotengine.org/en/4.6/tutorials/platform/web/html5_shell_classref.html#canvasResizePolicy),
+with resized canvas dimensions and real DOM-to-engine coordinate mapping.
+Short Web checks now open and close both native shops before full combat.
+The actual-input route avoids building under the hero and uses public minimap
+movement in combat. These Web changes require fresh exported/browser evidence.
+
 ### Historical acceptance, bound to its recorded commits
 
 This is an unpublished Draft candidate. The native-UI regression suite covers

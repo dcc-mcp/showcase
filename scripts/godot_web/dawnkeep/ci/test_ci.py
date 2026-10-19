@@ -8,11 +8,11 @@ import unittest
 from unittest.mock import Mock, patch
 from pathlib import Path
 from common import REQUIRED_FILES, copy_game, isolated_output, receipts, source_inventory, verify_inventory
-from interaction import InputPlan, control_center, validate_state
+from interaction import InputPlan, control_center, validate_state, support_pad
 from author_native import editor_idle_sample, initial_copy_files
 from export_web import patch_shell
 from capture_native import mouse_location, pointer_click
-from capture_browser import RequiredPayloadOutage, browser_executable
+from capture_browser import RequiredPayloadOutage, browser_executable, canvas_point
 
 
 class InventoryTests(unittest.TestCase):
@@ -102,9 +102,20 @@ class NativePointerTests(unittest.TestCase):
 
 
 class BrowserSelectionTests(unittest.TestCase):
+    def test_canvas_mapping_respects_reserved_toolbar_and_scaling(self):
+        geometry={'x':0,'y':44,'width':390,'height':800,'pixel_width':390,'pixel_height':800}
+        self.assertEqual(canvas_point(geometry,195,200),(195,244))
+        geometry.update(pixel_width=780,pixel_height=1600)
+        self.assertEqual(canvas_point(geometry,390,400),(195,244))
+        for x,y in [(-1,0),(780,0),(0,1600)]:
+            with self.assertRaises(ValueError):canvas_point(geometry,x,y)
+        geometry['height']=float('nan')
+        with self.assertRaises(ValueError):canvas_point(geometry,0,0)
+
     def test_failed_viewport_is_preserved_and_fails_the_aggregate(self):
         tree=ast.parse((Path(__file__).parent/'capture_browser.py').read_text())
-        loops=[node for node in ast.walk(tree) if isinstance(node,ast.For) and isinstance(node.target,ast.Tuple)]
+        loops=[node for node in ast.walk(tree) if isinstance(node,ast.For) and isinstance(node.target,ast.Tuple)
+               and [getattr(item,'id',None) for item in node.target.elts]==['width','height','mobile']]
         self.assertEqual(len(loops),1)
         viewport_handlers=[h for node in ast.walk(loops[0]) if isinstance(node,ast.Try) for h in node.handlers if isinstance(h.name,str) and h.name=='error']
         outer=viewport_handlers[0]
@@ -207,6 +218,15 @@ class AbilityObservationTests(unittest.TestCase):
 
 
 class ObserverTests(unittest.TestCase):
+    def test_support_pad_keeps_hero_construction_exclusion(self):
+        state=self.sample();state['hero']['position']=[-5,0,-1]
+        state['pads']=[{'id':2,'position':{'x':-5,'y':0,'z':-1}}, {'id':0,'position':[-11,0,-4]}]
+        state['ui']['pads']=[{'id':2,'x':570,'y':300},{'id':0,'x':490,'y':225}]
+        self.assertEqual(support_pad(state,(1280,720))['id'],0)
+        state['hero']['position']=[5,0,5]
+        self.assertEqual(support_pad(state,(1280,720))['id'],2)
+        with self.assertRaises(RuntimeError):support_pad(state,(100,100))
+
     def test_portrait_movement_projects_actual_empty_terrain(self):
         state=self.sample()
         state['ui']['pads']=[{'id':0,'x':120.666175842285,'y':290.921966552734},
@@ -301,6 +321,7 @@ class ObserverTests(unittest.TestCase):
         html='<script src="index.js"></script>\nconst GODOT_CONFIG = {"extensionLibs":[]};\nconst engine = new Engine(GODOT_CONFIG);\nfunction displayFailureNotice(err) {}'
         patched,config=patch_shell(html)
         self.assertIn('dawnkeepShell.failed(err)',patched);self.assertFalse(config['ensureCrossOriginIsolationHeaders'])
+        self.assertEqual(config['canvasResizePolicy'],0)
         with self.assertRaises(RuntimeError):patch_shell(html.replace('function displayFailureNotice','function otherName'))
 
 

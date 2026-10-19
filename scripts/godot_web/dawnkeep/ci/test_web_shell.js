@@ -1,6 +1,22 @@
 'use strict';
 const assert=require('node:assert/strict');
-const {attach}=require('./web_shell.js');
+const {attach,browserUI}=require('./web_shell.js');
+// DOM-free geometry regression. Actual pixels/hit routing are tested in Chrome.
+{
+  let box={width:1280,height:676},writes=0,resize;
+  const raw={width:1,height:1,getBoundingClientRect:()=>box};
+  const canvas=new Proxy(raw,{set:(target,key,value)=>{if(key==='width'||key==='height')writes++;target[key]=value;return true;}});
+  const styles=[];
+  const element=()=>({append(){},setAttribute(){},addEventListener(){}});
+  global.document={head:{append:s=>styles.push(s.textContent)},body:element(),
+    createElement:element,getElementById:id=>{assert.equal(id,'canvas');return canvas;}};
+  global.ResizeObserver=class {constructor(callback){resize=callback;}observe(value){assert.equal(value,canvas);}};
+  browserUI();assert.equal(canvas.width,1280);assert.equal(canvas.height,676);
+  assert.match(styles[0],/top:44px/);assert.match(styles[0],/height:44px/);assert.doesNotMatch(styles[0],/top:132px/);
+  resize();assert.equal(writes,2,'Unchanged frames must not resize/reset WebGL');
+  box={width:390,height:800};resize();assert.equal(canvas.width,390);assert.equal(canvas.height,800);assert.equal(writes,4);
+  delete global.document;delete global.ResizeObserver;
+}
 (async()=>{
   const config={},handlers={},calls=[];
   const ui={labels:w=>calls.push(['labels',w]),ready:()=>calls.push(['ready']),closing:t=>calls.push(['closing',t]),

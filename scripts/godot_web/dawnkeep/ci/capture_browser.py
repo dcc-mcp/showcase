@@ -2,6 +2,7 @@
 """Real Chromium clicks/keys/emulated touch against the official exported Godot."""
 from __future__ import annotations
 import argparse
+import math
 import os
 import re
 import subprocess
@@ -26,6 +27,17 @@ BROWSER_ARGS=['--disable-dev-shm-usage']
 # The pinned Playwright version injects this unsafe renderer opt-in by default.
 # Exclude it explicitly, even when it is absent from our own args.
 BROWSER_IGNORED_DEFAULT_ARGS=['--mute-audio','--enable-unsafe-swiftshader']
+
+
+def canvas_point(geometry,x,y):
+    """Map engine canvas pixels to real browser CSS coordinates, not window pixels."""
+    values=[geometry.get(k) for k in ('x','y','width','height','pixel_width','pixel_height')]
+    if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):
+        raise ValueError('Missing finite actual canvas geometry')
+    left,top,width,height,pixels_w,pixels_h=values
+    if min(width,height,pixels_w,pixels_h)<=0 or not(0<=x<pixels_w and 0<=y<pixels_h):
+        raise ValueError('Input is outside the actual engine canvas')
+    return left+x*width/pixels_w,top+y*height/pixels_h
 
 
 class RequiredPayloadOutage:
@@ -95,10 +107,23 @@ def main():
                             check_engine_log('\n'.join(console));values=receipts('\n'.join(console))
                             if not values:raise ValueError('No actual runtime state')
                             return values[-1]
+                        def canvas_geometry():
+                            geometry=page.locator('#canvas').evaluate('''canvas => {
+                                const r=canvas.getBoundingClientRect(),t=document.querySelector('#dawnkeep-web-tools').getBoundingClientRect();
+                                return {x:r.x,y:r.y,width:r.width,height:r.height,pixel_width:canvas.width,pixel_height:canvas.height,
+                                        toolbar_bottom:t.bottom,window_width:innerWidth,window_height:innerHeight};
+                            }''')
+                            if geometry['toolbar_bottom']>geometry['y']+.5 or geometry['y']+geometry['height']>geometry['window_height']+.5:
+                                raise RuntimeError('Web toolbar overlaps the engine canvas or canvas is clipped')
+                            return geometry
+                        initial_canvas=canvas_geometry();result['canvas_geometry']=initial_canvas
                         def click(x,y):
-                            if mobile:page.touchscreen.tap(x,y)
-                            else:page.mouse.click(x,y)
-                            result.setdefault('events',[]).append({'type':'touchscreen.tap' if mobile else 'mouse.click','x':x,'y':y})
+                            css_x,css_y=canvas_point(canvas_geometry(),x,y)
+                            if not page.evaluate('p => document.elementFromPoint(p.x,p.y) === document.querySelector("#canvas")',{'x':css_x,'y':css_y}):
+                                raise RuntimeError('Actual game pointer target is occluded by the Web wrapper')
+                            if mobile:page.touchscreen.tap(css_x,css_y)
+                            else:page.mouse.click(css_x,css_y)
+                            result.setdefault('events',[]).append({'type':'touchscreen.tap' if mobile else 'mouse.click','x':css_x,'y':css_y,'engine_x':x,'engine_y':y})
                         def key(name,down):
                             (page.keyboard.down if down else page.keyboard.up)(name)
                             result.setdefault('events',[]).append({'type':'keyboard.down' if down else 'keyboard.up','key':name})
@@ -106,9 +131,17 @@ def main():
                             path=directory/(name+'.png');page.screenshot(path=str(path),timeout=45000)
                             result.setdefault('screenshots',[]).append({'name':path.name,**image_stats(path),'state':observe()})
                         pause=lambda seconds:page.wait_for_timeout(seconds*1000)
-                        plan=InputPlan(observe,click,key,pause,(width,height),screenshot,result)
+                        plan=InputPlan(observe,click,key,pause,(initial_canvas['pixel_width'],initial_canvas['pixel_height']),screenshot,result)
                         screenshot('intro-zh')
                         plan.gate(touch=mobile);write_json(directory/'browser.json',result)
+                        # The wrapper must not cover either native Close button.
+                        # Exercise these before any expensive combat recording.
+                        for button,shop in (('equipment','equipment'),('build','build')):
+                            before=plan.tap(button)
+                            plan.wait(lambda s:s['ui'].get('shop')==shop,'actual '+shop+' panel opened',before['sample_id'])
+                            screenshot(shop+'-panel')
+                            before=plan.tap('close')
+                            plan.wait(lambda s:s['ui'].get('shop')=='','actual '+shop+' panel closed',before['sample_id'])
                         # Browser gesture and bus signal are read-only evidence.
                         music=observe().get('music',{})
                         result['music_after_real_gesture']=music

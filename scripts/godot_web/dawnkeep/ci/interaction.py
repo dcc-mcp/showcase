@@ -32,6 +32,19 @@ def control_center(state, key, viewport, require_enabled=True):
     return x+w/2, y+h/2
 
 
+def support_pad(state,viewport):
+    positions={p['id']:p['position'] for p in state.get('pads',[])}
+    candidates=[]
+    for pad in state['ui'].get('pads',[]):
+        if not(20<pad['x']<viewport[0]-20 and 130<pad['y']<viewport[1]-(260 if viewport[0]<500 else 155)):continue
+        position=positions[pad['id']]
+        point=[position['x'],position.get('y',0),position['z']] if isinstance(position,dict) else position
+        # The actual game rejects construction under the hero. Keep that rule.
+        if math.dist(point,state['hero']['position'])>2:candidates.append(pad)
+    if not candidates:raise RuntimeError('No visible support pad clear of the hero')
+    return next((p for p in candidates if p['id']==2),candidates[0])
+
+
 class InputPlan:
     def __init__(self, observe, click, key, pause, viewport, screenshot, report):
         self.observe, self.click, self.key, self.pause = observe, click, key, pause
@@ -129,14 +142,12 @@ class InputPlan:
         state=self.wait(lambda s:s['ui'].get('shop')=='equipment','equipment shop opened',state['sample_id'])
         before=state['hero']['equipment']['blade'];gold=state['gold'];self.tap('item_blade')
         state=self.wait(lambda s:s['hero']['equipment']['blade']==before+1 and s['gold']<gold,'actual equipment purchased',state['sample_id'])
-        self.screenshot('equipment');self.tap('close')
-        self.pause(.4);state=self.current()
-        candidates=[p for p in state['ui'].get('pads',[]) if 20<p['x']<self.viewport[0]-20 and 130<p['y']<self.viewport[1]-(260 if self.viewport[0]<500 else 155)]
-        if not candidates:raise RuntimeError('No visible support pad in the current real viewport')
-        pad=next((p for p in candidates if p['id']==2),candidates[0]);self.click(pad['x'],pad['y'])
+        self.screenshot('equipment');before=self.tap('close')
+        state=self.wait(lambda s:s['ui'].get('shop')=='','equipment shop actually closed',before['sample_id'])
+        pad=support_pad(state,self.viewport);self.click(pad['x'],pad['y'])
         state=self.wait(lambda s:s.get('selected_pad')==pad['id'] and 'tower_sunbow' in s['ui']['controls'],'support pad selected',state['sample_id'])
         self.tap('tower_sunbow')
-        state=self.wait(lambda s:any(t['id']==pad['id'] for t in s.get('towers',[])),'actual support tower built',state['sample_id'])
+        state=self.wait(lambda s:any(t['id']==pad['id'] and t['kind']=='sunbow' for t in s.get('towers',[])),'actual support tower built',state['sample_id'])
         self.tap('upgrade')
         state=self.wait(lambda s:any(t['id']==pad['id'] and t['level']==2 for t in s.get('towers',[])),'actual support tower branch upgraded',state['sample_id'])
         # Repeated unavailable upgrade is a real click; gold/level must not change.
@@ -150,8 +161,9 @@ class InputPlan:
         self.tap('sell')
         state=self.wait(lambda s:not any(t['id']==pad['id'] for t in s['towers']) and s['gold']>previous_gold,'actual tower sold with refund',repeated['sample_id'])
         self.tap('tower_sunbow')
-        state=self.wait(lambda s:any(t['id']==pad['id'] for t in s['towers']),'support tower rebuilt after selling',state['sample_id'])
-        self.tap('close');self.pause(.4);self.world_click(-8,2);self.pause(1.5)
+        state=self.wait(lambda s:any(t['id']==pad['id'] and t['kind']=='sunbow' for t in s['towers']),'support tower rebuilt after selling',state['sample_id'])
+        before=self.tap('close');self.wait(lambda s:s['ui'].get('shop')=='','tower panel actually closed',before['sample_id'])
+        self.minimap_click(-8,2);self.pause(1.5)
         self.screenshot('prepared-defense')
 
     def combat(self, seconds=180):
@@ -175,14 +187,17 @@ class InputPlan:
             for index,skill in enumerate(('q','e','r'),1):
                 control=state['ui']['controls'].get('skill_'+str(index),{})
                 if control.get('enabled') and state.get('enemies'):
-                    self.tap('skill_'+str(index));casts.add(skill);self.pause(.15)
+                    if self.cast_observed(skill):casts.add(skill)
+                    self.pause(.15)
             if time.monotonic()-last_move>2.5 and not state['hero'].get('dead'):
                 # Intercept enemies with actual terrain clicks. Screen projection
                 # is derived only from observed current orthographic pad points.
                 enemies=state.get('enemies',[])
                 if enemies:
                     target=max(enemies,key=lambda e:e.get('progress',0));pos=target['position']
-                    self.world_click(pos[0],pos[2])
+                    # Public minimap movement cannot accidentally select a build
+                    # pad under an enemy or click through the resulting shop.
+                    self.minimap_click(pos[0],pos[2])
                 last_move=time.monotonic()
             if state['hero'].get('level',1)>=3 and 'r' in casts and state.get('wave',0)>=2:
                 self.report['combat_observed']={'before':initial,'after':state,'cast_skills':sorted(casts),'scope':'Two-wave hero progression, not eight-wave victory proof'}

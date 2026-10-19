@@ -14,6 +14,8 @@ def patch_shell(page):
     match=re.search(r'const GODOT_CONFIG = (\{.*?\});',page)
     if not match:raise RuntimeError('Official Godot Web configuration marker changed')
     config=json.loads(match[1]);config['ensureCrossOriginIsolationHeaders']=False;config['emscriptenPoolSize']=0;config['godotPoolSize']=0
+    # Documented policy 0 lets the shell size the canvas below its own toolbar.
+    config['canvasResizePolicy']=0
     if config.get('extensionLibs'):raise RuntimeError('Unexpected Web extension libraries')
     page=page[:match.start(1)]+json.dumps(config)+page[match.end(1):]
     marker='const engine = new Engine(GODOT_CONFIG);'
