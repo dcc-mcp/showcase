@@ -236,7 +236,8 @@ class InputPlan:
         before=self.tap('confirm_restart')
         state=self.wait(lambda s:s.get('wave')==0 and s.get('core_hp')==20 and s.get('gold')==420 and
                         len(s.get('enemies',[]))==0 and len(s.get('towers',[]))==0 and
-                        s['hero'].get('level')==1 and all(v==0 for v in s['hero'].get('equipment',{}).values()) and not s['paused'],
+                        s['hero'].get('level')==1 and all(v==0 for v in s['hero'].get('equipment',{}).values()) and not s['paused'] and
+                        not any(t in s['ui'].get('labels',[]) for t in ('THE LIGHT ENDURES','THE DAWNHEART FALLS','曙光永存','曙光之心已陨落')),
                         label+' fresh game reset',before['sample_id'])
         return state
 

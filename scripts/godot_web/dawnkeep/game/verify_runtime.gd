@@ -239,9 +239,12 @@ func verify_keyboard_navigation(main:Node) -> void:
  check(not main.hud.confirming and not main.game.paused and main.game.wave==1,"Focused Cancel receives Space without starting a wave")
  await click_control(main.hud.controls.mute)
  await tap_key(KEY_BACKSPACE)
+ main.hud.announce("defeat")
+ check(main.hud.toast_time>0.0,"Restart regression begins with a pending old-run notification")
  main.hud.controls.confirm_restart.grab_focus()
  await tap_key(KEY_ENTER)
  check(not main.hud.confirming and not main.game.paused and main.game.wave==0 and main.game.gold==420,"Native Enter confirms restart and clears gameplay state")
+ check(main.hud.toast_time==0.0 and main.hud.toast_text=="" and not main.hud.panels.toast.visible,"Native restart clears the previous run's defeat notification")
 
  await click_control(main.hud.controls.mute)
  await tap_key(KEY_Q,false,true)

@@ -288,6 +288,7 @@ func _command(action:String,value:Variant) -> void:
   "speed":game.set_speed(2 if game.speed==1 else 1)
   "restart":
    _modal_open=false
+   hud.clear_announcement()
    game.restart()
    _pause_music(false)
    touch_move=Vector2.ZERO

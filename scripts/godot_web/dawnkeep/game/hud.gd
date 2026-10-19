@@ -458,6 +458,13 @@ func announce(key: String, _data: Dictionary = {}) -> void:
   labels.toast_label.text = toast_text
   _layout()
 
+func clear_announcement() -> void:
+ toast_text=""
+ toast_time=0.0
+ labels.toast_label.text=""
+ labels.toast_label.hide()
+ panels.toast.hide()
+
 func _process(delta: float) -> void:
  if toast_time > 0:
   toast_time = maxf(0,toast_time-delta)
