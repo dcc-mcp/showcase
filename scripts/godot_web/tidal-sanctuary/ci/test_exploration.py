@@ -2,7 +2,9 @@
 import math
 import unittest
 from unittest.mock import Mock, patch
-from exploration import chart_approach_ray, hold_chart_contact, validate_chart_contact, run_chart_exploration
+from exploration import (chart_approach_ray, hold_chart_contact, navigate_chart_waypoint,
+                         validate_chart_contact, run_chart_exploration)
+from gameplay import keyboard_direction
 
 
 def sample(index, angle=0):
@@ -16,6 +18,149 @@ def sample(index, angle=0):
 
 
 class ExplorationTests(unittest.TestCase):
+    def run_waypoint(self, observations, ray=None, target=None, timeout=1):
+        clock, cursor, moves, evidence = [0.], [0], [], {}
+        braking = {"seconds": .12}
+        def observe():
+            return observations[cursor[0]]
+        def pause(seconds):
+            clock[0] += seconds
+            cursor[0] = min(cursor[0]+1, len(observations)-1)
+        with patch("exploration.time.monotonic", side_effect=lambda: clock[0]):
+            try:
+                result = navigate_chart_waypoint(observe, moves.append, pause,
+                    target or ray["target"], timeout=timeout, ray=ray, braking=braking, evidence=evidence)
+            except TimeoutError as error:
+                result = error
+        return result, moves, evidence, clock[0], braking
+
+    def trace_state(self, index, position, velocity, movement=(0, 0)):
+        state = sample(index)
+        state.update({"position": [position[0], .53, position[1]],
+                      "velocity": [velocity[0], 0, velocity[1]], "movement_input": list(movement),
+                      "camera_right": [.953733861446381, .300652146339417],
+                      "camera_forward": [.300652146339417, -.953733861446381]})
+        return state
+
+    def test_trace_alignment_brakes_before_small_disk_and_steers_across_ray(self):
+        # Positions/velocities 8 and 9 from native64355b4. The neutral tail is
+        # synthetic physical coasting, not a claimed successful native replay.
+        initial = self.trace_state(8, [2.844210386, 9.208654404], [.053894073, -.026708052])
+        approaching = self.trace_state(9, [2.463, 9.409], [-2.565, 1.385], [-.876, .482])
+        stopped = self.trace_state(10, [2.07825, 9.61675], [0, 0])
+        ray = chart_approach_ray(initial, [1, 1])
+        result, moves, evidence, elapsed, braking = self.run_waypoint([initial, approaching, stopped], ray)
+        self.assertIs(result, stopped)
+        self.assertEqual(keyboard_direction(moves[0]), {"a", "s"})
+        self.assertEqual(moves[1:], [(0, 0), (0, 0)])
+        self.assertIs(evidence["brakes"][0]["observed"], approaching)
+        self.assertGreater(math.dist([approaching["position"][0], approaching["position"][2]], ray["target"]), .25)
+        self.assertAlmostEqual(braking["seconds"], .15)
+        self.assertLess(elapsed, 1)
+
+    def test_trace_coast_accepts_aligned_fresh_stop_outside_longitudinal_disk(self):
+        # Actual positions/velocities 36-38: the old .25 m disk rejected the
+        # settled point even though it remains aligned with the same inward ray.
+        moving = self.trace_state(36, [2.143, 9.569], [-1.385, -2.119], [-.476, -.880])
+        neutral_moving = self.trace_state(37, [1.944, 9.232], [-.331, -.557])
+        stopped = self.trace_state(38, [1.919, 9.185], [-.038, -.064])
+        ray = chart_approach_ray(moving, [1, 1])
+        result, moves, evidence, _, _ = self.run_waypoint([moving, neutral_moving, stopped], ray)
+        self.assertIs(result, stopped)
+        self.assertGreater(math.dist([1.919, 9.185], ray["target"]), .25)
+        self.assertEqual(moves, [(0, 0), (0, 0)])
+        self.assertIs(evidence["brakes"][0]["settled"], stopped)
+
+    def test_waypoint_rejects_stale_neutral_and_idle_but_moving_stops(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        for observations in ([self.trace_state(1, ray["target"], [0, 0])],
+                [self.trace_state(i, ray["target"], [.2, 0]) for i in range(1, 20)]):
+            with self.subTest(observations=len(observations)):
+                result, moves, evidence, elapsed, _ = self.run_waypoint(observations, ray, timeout=.2)
+                self.assertIsInstance(result, TimeoutError)
+                self.assertNotIn("actual", evidence)
+                self.assertLessEqual(elapsed, .25)  # No extra ten-second settle budget.
+                self.assertTrue(all(move == (0, 0) for move in moves))
+
+    def test_waypoint_settle_boundary_remains_after_actual_release_barrier(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        before = self.trace_state(1, ray["target"], [.3, 0], [-1, 0])
+        release_receipt = self.trace_state(2, ray["target"], [0, 0])
+        latest, clock = [before], [0.]
+        def move(_):
+            latest[0] = release_receipt
+        def pause(seconds):
+            clock[0] += seconds
+        with patch("exploration.time.monotonic", side_effect=lambda: clock[0]), self.assertRaises(TimeoutError):
+            navigate_chart_waypoint(lambda: latest[0], move, pause, ray["target"], ray=ray, timeout=.2)
+        # A newer settled sample after the keyup barrier is still required;
+        # its own receipt cannot stand in for that later observation.
+        self.assertLessEqual(clock[0], .25)
+
+    def test_waypoint_rejects_wrong_ray_cross_track_and_outside_staging_band(self):
+        ray = chart_approach_ray(sample(0), [1, 0])
+        for position in ([-.5, 7.8], [3.1, 8.01], [2.4, 7.8], [3.8, 7.8]):
+            observations = [self.trace_state(i, position, [0, 0]) for i in range(1, 20)]
+            with self.subTest(position=position):
+                result, moves, evidence, elapsed, _ = self.run_waypoint(observations, ray, timeout=.2)
+                self.assertIsInstance(result, TimeoutError)
+                self.assertNotIn("actual", evidence)
+                self.assertTrue(any(move != (0, 0) for move in moves))
+                self.assertLessEqual(elapsed, .25)
+
+    def test_regular_waypoint_keeps_arrival_disk_and_checks_released_drift(self):
+        target = [2.8, 9.2]
+        moving = self.trace_state(1, [2.48, 9.39], [2.94, -1.46], [.897, -.441])
+        drifted = self.trace_state(2, [3.3, 9.2], [0, 0])
+        result, moves, evidence, _, _ = self.run_waypoint([moving, drifted], target=target, timeout=.2)
+        self.assertIsInstance(result, TimeoutError)
+        self.assertEqual(moves[0], (0, 0))
+        self.assertNotIn("actual", evidence)
+
+    def test_synthetic_low_fps_keyboard_and_coast_controller_stays_within_budget(self):
+        # A controller fixture only: 13 physics ticks per .625 wall seconds,
+        # delayed eight-way keys, and the production walk damping equation.
+        # This does not simulate the collider or establish real native input.
+        state = self.trace_state(8, [2.844210386, 9.208654404], [0, 0])
+        ray = chart_approach_ray(state, [1, 1])
+        clock, physics, next_tick = [0.], [0], [.625/13]
+        position, velocity, active = [2.844210386, 9.208654404], [0., 0.], [0., 0.]
+        command, pending, moves = [set()], [], []
+        right, forward = state["camera_right"], state["camera_forward"]
+        def move(direction):
+            wanted = keyboard_direction(direction)
+            if wanted != command[0]:
+                command[0] = wanted
+                x = int("d" in wanted)-int("a" in wanted)
+                y = int("s" in wanted)-int("w" in wanted)
+                world = [right[i]*x-forward[i]*y for i in range(2)]
+                length = math.hypot(*world)
+                pending.append((physics[0]+4, [v/length for v in world] if length else [0., 0.]))
+                moves.append(wanted)
+        def pause(seconds):
+            nonlocal state
+            until = clock[0]+seconds
+            while next_tick[0] <= until:
+                physics[0] += 1
+                while pending and pending[0][0] <= physics[0]:
+                    active[:] = pending.pop(0)[1]
+                for i in range(2):
+                    velocity[i] += (active[i]*3.3-velocity[i])*(1-math.exp(-10/60))
+                    position[i] += velocity[i]/60
+                if physics[0] % 13 == 0:
+                    state = self.trace_state(8+physics[0]//13, position, velocity, active)
+                next_tick[0] += .625/13
+            clock[0] = until
+        with patch("exploration.time.monotonic", side_effect=lambda: clock[0]):
+            result = navigate_chart_waypoint(lambda: state, move, pause, ray["target"], ray=ray)
+        radial = [result["position"][0]-1.3, result["position"][2]-7.8]
+        self.assertLessEqual(abs(radial[0]*ray["outward"][1]-radial[1]*ray["outward"][0]), .20)
+        self.assertLessEqual(math.hypot(result["velocity"][0], result["velocity"][2]), .08)
+        self.assertEqual(result["movement_input"], [0, 0])
+        self.assertEqual(moves[0], {"a", "s"})
+        self.assertEqual(moves[-1], set())
+        self.assertLess(clock[0], 35)
+
     def run_held_probe(self, observations, ray, opposite_to=None, baseline_angle=None):
         angle = math.atan2(ray["outward"][1], ray["outward"][0]) if baseline_angle is None else baseline_angle
         initial = sample(0, angle)
@@ -188,7 +333,7 @@ class ExplorationTests(unittest.TestCase):
         initial=sample(0);initial["position"]=[1.3,.53,7.8]
         with self.assertRaisesRegex(ValueError,"navigation penetrated"):
             run_chart_exploration(lambda:[initial],moves.append,lambda _:None,images.append,evidence=evidence)
-        self.assertEqual(moves,[(0,0)])  # Only the finally release, no steering.
+        self.assertEqual(moves,[(0,0),(0,0)])  # Controller and route finally releases, no steering.
         self.assertEqual(images,[])
         self.assertFalse(evidence["passed"])
 

@@ -93,6 +93,90 @@ def chart_approach_ray(state, outward):
             "outward": radial, "target": [1.3 + radial[0]*1.8, 7.8 + radial[1]*1.8]}
 
 
+def settle_chart_movement(observe, move, pause, deadline=None):
+    move((0, 0))
+    # Keep the boundary after the actual keyup/neutral adapter barrier.
+    boundary = observe()
+    limit = time.monotonic()+10
+    if deadline is not None:
+        limit = min(limit, deadline)
+    while time.monotonic() < limit:
+        state = observe()
+        if (state["sample_id"] > boundary["sample_id"] and state["physics_frame"] > boundary["physics_frame"]
+                and math.hypot(*state["movement_input"]) <= .01
+                and math.hypot(state["velocity"][0], state["velocity"][2]) <= .08):
+            return state
+        pause(.05)
+    raise TimeoutError("Off-route stop did not produce newer neutral settled physics")
+
+
+def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35,
+                            ray=None, braking=None, evidence=None):
+    """Brake real keyboard motion before overshoot; accept only a fresh stop.
+
+    Final contact staging needs alignment across the held ray, not an exact
+    longitudinal point. Its controller-only band stays well outside contact;
+    validate_chart_contact remains the sole collision/contact acceptance gate.
+    """
+    braking = {"seconds": .12} if braking is None else braking
+    evidence = {} if evidence is None else evidence
+    evidence.update({"target": target, "ray": ray, "brakes": []})
+    deadline = time.monotonic()+timeout
+
+    def coordinates(position):
+        radial = [position[0]-1.3, position[1]-7.8]
+        outward = ray["outward"]
+        return (sum(a*b for a, b in zip(radial, outward)),
+                radial[0]*outward[1]-radial[1]*outward[0])
+
+    def arrived(position):
+        if ray is None:
+            return math.dist(position, target) < radius
+        along, across = coordinates(position)
+        return 1.2 <= along <= 2.4 and abs(across) <= .20
+
+    try:
+        while time.monotonic() < deadline:
+            state = observe()
+            position = [state["position"][0], state["position"][2]]
+            velocity = [state["velocity"][0], state["velocity"][2]]
+            speed = math.hypot(*velocity)
+            predicted = [p+v*braking["seconds"] for p, v in zip(position, velocity)]
+            crosses_ray = False
+            if ray is not None:
+                along, across = coordinates(position)
+                stop_along, stop_across = coordinates(predicted)
+                crosses_ray = 1.2 <= stop_along <= 2.4 and across*stop_across < 0
+            if arrived(position) or (speed > .08 and (arrived(predicted) or crosses_ray)):
+                decision = {"observed": state, "predicted_stop": predicted,
+                            "coast_seconds": braking["seconds"]}
+                evidence["brakes"].append(decision)
+                stopped = settle_chart_movement(observe, move, pause, deadline)
+                decision["settled"] = stopped
+                actual = [stopped["position"][0], stopped["position"][2]]
+                if speed > .08:
+                    # Learn actual key-release latency plus physical deceleration,
+                    # rather than assume wall-clock FPS equals simulated physics.
+                    coast = sum((a-p)*v for a, p, v in zip(actual, position, velocity))/(speed*speed)
+                    braking["seconds"] = min(.25, max(.09, coast))
+                if arrived(actual):
+                    evidence["actual"] = stopped
+                    return stopped
+                continue
+            steering_target = target
+            if ray is not None:
+                # Correct cross-track error with a realizable perpendicular key
+                # direction, leaving harmless along-ray drift room to settle.
+                along, _ = coordinates(position)
+                along = min(2.2, max(1.4, along))
+                steering_target = [1.3+ray["outward"][0]*along, 7.8+ray["outward"][1]*along]
+            move(direction_to(state, steering_target))
+            pause(.05)
+        raise TimeoutError("Off-route physical waypoint not reached: "+str(target))
+    finally:
+        move((0, 0))
+
+
 def hold_chart_contact(read_states, move, pause, ray, opposite_to=None, timeout=35, evidence=None):
     """Hold one physical key combination; never chase the center along a bevel."""
     evidence = {} if evidence is None else evidence
@@ -185,31 +269,14 @@ def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, eviden
         return samples[-1]
 
     def settle():
-        move((0,0))
-        boundary=observe()
-        deadline=time.monotonic()+10
-        while time.monotonic()<deadline:
-            state=observe()
-            if (state["sample_id"]>boundary["sample_id"] and state["physics_frame"]>boundary["physics_frame"]
-                and math.hypot(*state["movement_input"])<=.01
-                and math.hypot(state["velocity"][0],state["velocity"][2])<=.08):
-                return state
-            pause(.05)
-        raise TimeoutError("Off-route stop did not produce newer neutral settled physics")
+        return settle_chart_movement(observe, move, pause)
 
-    def navigate(target,radius=.45):
-        deadline=time.monotonic()+timeout
-        while time.monotonic()<deadline:
-            state=observe()
-            if math.hypot(state["position"][0]-target[0],state["position"][2]-target[1]) < radius:
-                state=settle()
-                if math.hypot(state["position"][0]-target[0],state["position"][2]-target[1]) < radius:
-                    path.append({"target":target,"actual":state});return
-                # Real release latency may drift beyond the arrival disk. Continue
-                # physically approaching inside the same bounded waypoint budget.
-                continue
-            move(direction_to(state,target));pause(.05)
-        raise TimeoutError("Off-route physical waypoint not reached: "+str(target))
+    braking = {"seconds": .12}
+    def navigate(target,radius=.45,ray=None):
+        attempt = {}
+        evidence.setdefault("waypoint_attempts", []).append(attempt)
+        state = navigate_chart_waypoint(observe, move, pause, target, radius, timeout, ray, braking, attempt)
+        path.append({"target":target,"actual":state})
 
     def push(ray, opposite_to=None):
         def current_samples():
@@ -229,7 +296,7 @@ def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, eviden
     def radial_angle(state):
         return math.atan2(state["position"][2]-7.8,state["position"][0]-1.3)
 
-    def orbit_to(target_angle, final_radius=.45):
+    def orbit_to(target_angle, final_ray=None):
         # Move out first, then around the pedestal in <=45-degree chords. Never
         # ask the player to cross the solid center to obtain the opposite probe.
         angle=radial_angle(observe())
@@ -239,16 +306,16 @@ def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, eviden
         steps=math.ceil(abs(delta)/(math.pi/4))
         for i in range(1,steps+1):
             a=angle+delta*i/steps
-            navigate([1.3+math.cos(a)*1.8,7.8+math.sin(a)*1.8],final_radius if i==steps else .45)
+            navigate([1.3+math.cos(a)*1.8,7.8+math.sin(a)*1.8],ray=final_ray if i==steps else None)
         if steps==0:
-            navigate([1.3+math.cos(target_angle)*1.8,7.8+math.sin(target_angle)*1.8],final_radius)
+            navigate([1.3+math.cos(target_angle)*1.8,7.8+math.sin(target_angle)*1.8],ray=final_ray)
 
     try:
         navigate([2.8,9.2])
         # Approach the southeast corner along a realizable keyboard diagonal,
         # rather than chase the center from the east and slide around its bevel.
         first_ray=chart_approach_ray(observe(),[1,1])
-        navigate(first_ray["target"],.25)
+        navigate(first_ray["target"],ray=first_ray)
         first=push(first_ray);first["name"]="first";receipts.append(first)
         snapshot("native-chart-blocker-first.png")
         reference=list(first["radial_reference"])
@@ -256,7 +323,7 @@ def run_chart_exploration(read_states, move, pause, snapshot, timeout=35, eviden
         for adjustment in (0,math.radians(20),math.radians(-20)):
             angle=opposite_angle+adjustment
             ray=chart_approach_ray(observe(),[math.cos(angle),math.sin(angle)])
-            orbit_to(math.atan2(ray["outward"][1],ray["outward"][0]),.25)
+            orbit_to(math.atan2(ray["outward"][1],ray["outward"][0]),ray)
             second=push(ray,reference)
             if second is not None:
                 second["name"]="opposed";receipts.append(second)
