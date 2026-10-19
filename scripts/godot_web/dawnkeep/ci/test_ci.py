@@ -157,9 +157,53 @@ class BrowserSelectionTests(unittest.TestCase):
         self.assertIn('test "$(readlink -f "$CHROME")" = "$CHROME"',text)
         self.assertIn('"$CHROME" --version',text)
         self.assertIn('capture_browser.py" --chromium "$CHROME"',text)
+        self.assertIn('python -m playwright install ffmpeg',text)
         self.assertNotIn('--no-sandbox',text)
         self.assertNotIn('sysctl',text)
         self.assertNotIn('aa-disable',text)
+
+
+
+class AbilityObservationTests(unittest.TestCase):
+    def state(self, sample=1, phase='wave', cooldown=0.0, dead=False):
+        return {'schema':1,'sample_id':sample,'physics_frame':sample+1,'language':'en','paused':False,
+                'phase':phase,'hero':{'position':[0,0,0],'dead':dead},'skills':{'e':{'cooldown':cooldown}},
+                'ui':{'controls':{'skill_2':{'x':10,'y':20,'w':80,'h':40,'enabled':True}}}}
+
+    def plan(self, states):
+        observe=Mock(side_effect=states);click=Mock();report={}
+        return InputPlan(observe,click,Mock(),Mock(),(1280,720),Mock(),report),click,report
+
+    def test_fresh_cooldown_is_required_for_activation_credit(self):
+        plan,click,report=self.plan([self.state(),self.state(2,cooldown=12)])
+        self.assertTrue(plan.cast_observed('e'));click.assert_called_once_with(50,40)
+        self.assertTrue(report['skill_attempts'][0]['activated'])
+        self.assertIn('actual E ability activation',[x['name'] for x in report['checks']])
+
+    def test_terminal_or_death_between_click_and_receipt_is_not_a_cast(self):
+        for phase,dead in [('victory',False),('defeat',False),('wave',True)]:
+            with self.subTest(phase=phase,dead=dead):
+                plan,click,report=self.plan([self.state(),self.state(2,phase=phase,dead=dead)])
+                self.assertFalse(plan.cast_observed('e'));click.assert_called_once()
+                self.assertFalse(report['skill_attempts'][0]['activated'])
+                self.assertNotIn('actual E ability activation',[x['name'] for x in report['checks']])
+
+    def test_active_missed_click_and_stale_cooldown_still_timeout(self):
+        for sample,cooldown in [(2,0),(1,12)]:
+            with self.subTest(sample=sample,cooldown=cooldown):
+                plan,click,report=self.plan([self.state(),self.state(sample,cooldown=cooldown)])
+                with patch('interaction.time.monotonic',side_effect=[0,0,13]):
+                    with self.assertRaises(TimeoutError):plan.cast_observed('e')
+                click.assert_called_once();self.assertNotIn('skill_attempts',report)
+
+    def test_unavailable_button_does_not_get_an_attempt_or_credit(self):
+        state=self.state();state['ui']['controls']={}
+        plan,click,report=self.plan([state])
+        self.assertFalse(plan.cast_observed('e'));click.assert_not_called();self.assertEqual(report,{})
+
+    def test_victory_still_requires_every_observed_ability(self):
+        source=(Path(__file__).parent/'interaction.py').read_text()
+        self.assertIn("if cast_skills!={'q','e','r'}:raise RuntimeError",source)
 
 
 class ObserverTests(unittest.TestCase):

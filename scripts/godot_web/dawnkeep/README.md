@@ -41,11 +41,25 @@ for the existing DCC-MCP capabilities and their limits.
 
 ## Current status and acceptance boundaries
 
-The current repair candidate selects Godot's supported built-in Jolt 3D backend
-to avoid the single-thread Group path while retaining real collisions. See the
-[backend repair and regression scope](research/physics-backend-20261019.md).
-The historical results below remain tied to their stated commits; the new
-candidate needs fresh strict native/Web evidence before those results advance.
+The supported built-in Jolt 3D backend retains real collisions and resolves the
+observed single-thread Web shutdown error. [Exact runtime f423e0f short CI](https://github.com/dcc-mcp/showcase/actions/runs/39268987948)
+passed genuine typed MCP author/save/reopen, native input, desktop/portrait Web
+input and clean quit/restart, required-download failure/Retry, and the active
+physics-backend comparison. Its 78 mechanics assertions include tower removal,
+wall blocking/sliding and ground-plane regressions. Four native and 14 Web
+frames were reviewed without blocking clipping or missing glyphs.
+See the [backend repair and regression scope](research/physics-backend-20261019.md).
+
+The [first full run](https://github.com/dcc-mcp/showcase/actions/runs/39270462130)
+reached native wave-eight victory, but the input observer attempted E as the
+victory modal appeared and incorrectly waited for a combat cooldown. It did not
+complete defeat/restart acceptance. Full browser recording also lacked
+Playwright's revision-specific encoder. The harness now records terminal/death
+interruptions without activation credit, still fails active missed clicks, and
+installs that official recording dependency. Fresh full acceptance is required;
+no complete current-head campaign or listening pass is claimed here.
+
+### Historical acceptance, bound to its recorded commits
 
 This is an unpublished Draft candidate. The native-UI regression suite covers
 73 mechanics assertions, 28,051 settled UI assertions across eight sizes

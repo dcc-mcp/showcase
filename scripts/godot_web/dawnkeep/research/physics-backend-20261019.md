@@ -44,3 +44,15 @@ not selected merely to change versions.
 The isolated one-setting candidate passed the existing complete headless suite
 before adoption. New regressions and actual Web/backend comparison are required
 on the committed candidate; this record alone does not claim they passed.
+
+## Actual candidate result
+
+[Run 39268987948](https://github.com/dcc-mcp/showcase/actions/runs/39268987948)
+on runtime `f423e0f0b41133f6a4d7d3b0e5619850e75122e4` passed the unchanged strict
+actual-game desktop and portrait Web gates, including clean quit. The active
+GodotPhysics3D world passed collision/ray checks and reproduced the Group error;
+the same active Jolt world passed those checks and exited cleanly. Dummy and
+empty Node3D controls were clean; the explicit awaited Group retained the
+expected error. This dynamically establishes the backend difference in the
+actual single-thread template. It does not claim the underlying Group defect
+has been fixed or that full-campaign/audio review follows from short input.

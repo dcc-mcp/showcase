@@ -252,10 +252,19 @@ class InputPlan:
         key={'q':'skill_1','e':'skill_2','r':'skill_3'}[skill]
         state=self.current()
         if not state['ui']['controls'].get(key,{}).get('enabled'):return False
-        self.tap(key)
-        self.wait(lambda s:float(s.get('skills',{}).get(skill,{}).get('cooldown',0))>0,
-                  'actual '+skill.upper()+' ability activation',state['sample_id'])
-        return True
+        self.click(*control_center(state,key,self.viewport))
+        # The last enemy can die between observation and the physical click.
+        # A terminal/death transition interrupts the attempt; it must never be
+        # credited as a successful cast or hide a missed click in active combat.
+        after=self.wait(lambda s:float(s.get('skills',{}).get(skill,{}).get('cooldown',0))>0 or
+                        s.get('phase') in ('victory','defeat') or s['hero'].get('dead') is True,
+                        'actual '+skill.upper()+' ability attempt resolved',state['sample_id'])
+        activated=float(after.get('skills',{}).get(skill,{}).get('cooldown',0))>0
+        self.report.setdefault('skill_attempts',[]).append({'skill':skill,'activated':activated,
+            'before':state,'after':after,'outcome':'cooldown observed' if activated else 'interrupted by terminal/death transition'})
+        if activated:
+            self.report.setdefault('checks',[]).append({'name':'actual '+skill.upper()+' ability activation','state':after})
+        return activated
 
     def full_desktop(self, max_wall_seconds=1200):
         """Eight-wave victory and natural defeat through only public real inputs."""
@@ -302,6 +311,8 @@ class InputPlan:
             if hero['hp']<hero['max_hp']*.7 and self.cast_observed('e'):cast_skills.add('e')
             if (len(near)>=2 or boss_near) and self.cast_observed('q'):cast_skills.add('q')
             if (len(near)>=4 or boss_near) and self.cast_observed('r'):cast_skills.add('r')
+            # Do not target the battlefield through a newly opened result modal.
+            if self.current()['phase'] in ('victory','defeat'):continue
             if time.monotonic()-last_move>.25:
                 state=self.current();here=state['hero']['position'];enemies=state.get('enemies',[])
                 if enemies:
