@@ -12,6 +12,7 @@ from interaction import control_center, validate_state
 from author_native import editor_idle_sample, initial_copy_files
 from export_web import patch_shell
 from capture_native import mouse_location, pointer_click
+from capture_browser import browser_executable
 
 
 class InventoryTests(unittest.TestCase):
@@ -98,6 +99,44 @@ class NativePointerTests(unittest.TestCase):
             with self.assertRaises(TimeoutError):pointer_click(1036,54)
             self.assertEqual(run.call_count,2)
             self.assertEqual([call.kwargs['timeout'] for call in run.call_args_list],[10,6])
+
+
+class BrowserSelectionTests(unittest.TestCase):
+    def test_explicit_browser_records_canonical_path_and_actual_version(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Path(tmp)/'chrome';browser.write_text('fixture');browser.chmod(0o700)
+            with patch('capture_browser.subprocess.run',return_value=subprocess.CompletedProcess([],0,stdout='Google Chrome 155.0.8059.39\n')) as run:
+                self.assertEqual(browser_executable(browser),{'executable_path':str(browser.resolve()),'executable_version':'Google Chrome 155.0.8059.39'})
+                run.assert_called_once_with([str(browser.resolve()),'--version'],check=True,capture_output=True,text=True,timeout=10)
+
+    def test_missing_or_nonexecutable_browser_fails_without_fallback(self):
+        with tempfile.TemporaryDirectory() as tmp,patch('capture_browser.subprocess.run') as run:
+            with self.assertRaises(FileNotFoundError):browser_executable(Path(tmp)/'missing')
+            with self.assertRaises(ValueError):browser_executable(tmp)
+            browser=Path(tmp)/'chrome';browser.write_text('fixture')
+            with self.assertRaises(ValueError):browser_executable(browser)
+            run.assert_not_called()
+
+    def test_browser_version_failure_is_not_ignored(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Path(tmp)/'chrome';browser.write_text('fixture');browser.chmod(0o700)
+            for error in (subprocess.TimeoutExpired([],10),subprocess.CalledProcessError(1,[])):
+                with self.subTest(error=type(error).__name__),patch('capture_browser.subprocess.run',side_effect=error) as run:
+                    with self.assertRaises(type(error)):browser_executable(browser)
+                    self.assertEqual(run.call_count,1)
+            with patch('capture_browser.subprocess.run',return_value=subprocess.CompletedProcess([],0,stdout='unknown browser')):
+                with self.assertRaises(ValueError):browser_executable(browser)
+
+    def test_workflow_strictly_selects_preinstalled_stable_chrome(self):
+        text=(Path(__file__).resolve().parents[4]/'.github/workflows/dawnkeep-preview.yml').read_text()
+        self.assertIn('CHROME=/opt/google/chrome/chrome',text)
+        self.assertIn('test -f "$CHROME" && test -x "$CHROME"',text)
+        self.assertIn('test "$(readlink -f "$CHROME")" = "$CHROME"',text)
+        self.assertIn('"$CHROME" --version',text)
+        self.assertIn('capture_browser.py" --chromium "$CHROME"',text)
+        self.assertNotIn('--no-sandbox',text)
+        self.assertNotIn('sysctl',text)
+        self.assertNotIn('aa-disable',text)
 
 
 class ObserverTests(unittest.TestCase):

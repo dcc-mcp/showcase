@@ -83,4 +83,19 @@ The hosted Ubuntu 24.04 run on `9a086ff` stopped at browser launch with
 `No usable sandbox`. MCP, headless, rendered native input and official Web
 export had passed. Do not disable the sandbox, change AppArmor/user-namespace
 policy or mark browser gameplay accepted to make the job green. A supported
-sandbox-capable runner must be established before that browser stage can pass.
+sandbox-capable browser must be established before that browser stage can pass.
+
+The Dawnkeep workflow now explicitly selects the Ubuntu runner's preinstalled
+stable Google Chrome at `/opt/google/chrome/chrome`, the standard path covered
+by Ubuntu's shipped Chrome sandbox profile. It requires that exact canonical,
+executable file and prints its installed version. The harness also validates and
+records the resolved path and actual `--version` output before launch. Missing
+or invalid Chrome fails without falling back to bundled Chromium. This does not
+change AppArmor, user namespaces, sandbox policy or browser security flags.
+Unlike the hash-pinned Playwright package, the runner's installed Chrome version
+can change; every result must therefore retain its actual version receipt.
+
+References: [Chromium's Ubuntu sandbox documentation](https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md)
+and the [official Ubuntu 24.04 runner inventory](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md).
+Browser launch, WebGL2 capability and actual gameplay acceptance remain separate
+checks; selecting a supported executable alone proves none of them.

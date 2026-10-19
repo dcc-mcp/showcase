@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import os
+import re
 import subprocess
 import threading
 import time
@@ -13,7 +14,6 @@ from common import check_engine_log, isolated_output, receipts, sha256, stop_pro
 from interaction import InputPlan
 from capture_native import image_stats
 from media import inspect_audio, inspect_video
-from playwright.sync_api import sync_playwright
 
 
 class QuietHandler(SimpleHTTPRequestHandler):
@@ -28,7 +28,20 @@ BROWSER_ARGS=['--disable-dev-shm-usage']
 BROWSER_IGNORED_DEFAULT_ARGS=['--mute-audio','--enable-unsafe-swiftshader']
 
 
+def browser_executable(value):
+    """Validate an explicitly selected installed browser, with no fallback."""
+    path=Path(value).resolve(strict=True)
+    if not path.is_file() or not os.access(path,os.X_OK):
+        raise ValueError('Explicit browser is not an executable file: '+str(path))
+    result=subprocess.run([str(path),'--version'],check=True,capture_output=True,text=True,timeout=10)
+    version=result.stdout.strip()
+    if not re.fullmatch(r'(?:Google Chrome(?: for Testing)?|Chromium) [0-9]+(?:\.[0-9]+){3}(?: .*)?',version):
+        raise ValueError('Unrecognized explicit browser version: '+version)
+    return {'executable_path':str(path),'executable_version':version}
+
+
 def main():
+    from playwright.sync_api import sync_playwright
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--site',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--full',action='store_true');p.add_argument('--chromium',help='Optional explicit existing Chromium executable')
@@ -38,12 +51,15 @@ def main():
     report={'schema':1,'passed':False,'mode':'full' if args.full else 'preview','engine':'actual official Godot Web export',
             'pck_sha256':sha256(args.site/'index.pck'),'viewports':[],
             'browser_launch':{'args':BROWSER_ARGS,'chromium_sandbox':True,
-                              'ignore_default_args':BROWSER_IGNORED_DEFAULT_ARGS},
+                              'ignore_default_args':BROWSER_IGNORED_DEFAULT_ARGS,
+                              'requested_executable':args.chromium},
             'limitations':['Portrait touch is Chromium device emulation, not a physical phone.','Numerical audio checks do not replace listening.','No deployed-site claim.']}
     try:
+        selected=browser_executable(args.chromium) if args.chromium else None
+        if selected:report['browser_launch'].update(selected)
         with sync_playwright() as pw:
             options={'headless':True,'args':BROWSER_ARGS,'chromium_sandbox':True,'ignore_default_args':BROWSER_IGNORED_DEFAULT_ARGS}
-            if args.chromium:options['executable_path']=args.chromium
+            if selected:options['executable_path']=selected['executable_path']
             browser=pw.chromium.launch(**options);report['browser_version']=browser.version
             try:
                 for width,height,mobile in ((1280,720,False),(390,844,True)):

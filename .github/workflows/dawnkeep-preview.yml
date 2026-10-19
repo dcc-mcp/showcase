@@ -39,12 +39,12 @@ jobs:
           set -euo pipefail
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends xvfb xauth xdotool ffmpeg libgl1-mesa-dri mesa-vulkan-drivers fonts-dejavu-core fonts-noto-cjk pulseaudio pulseaudio-utils
-      - name: Install hash-pinned official typed adapter and Chromium
+      - name: Install hash-pinned official typed adapter and browser dependencies
         run: |
           set -euo pipefail
           python -m pip install --require-hashes --only-binary=:all: -r "$RECIPE/ci/requirements-dcc.lock"
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
-          python -m playwright install --with-deps chromium
+          python -m playwright install-deps chromium
           curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip -o "$RUNNER_TEMP/dawnkeep-godot.zip"
           echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/dawnkeep-godot.zip" | sha256sum -c -
           unzip -q "$RUNNER_TEMP/dawnkeep-godot.zip" -d "$RUNNER_TEMP/dawnkeep-godot"
@@ -110,13 +110,19 @@ jobs:
           python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/dawnkeep-author/native" \
             --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/dawnkeep-templates/web_nothreads_release.zip" \
             --license-dir play/runtime --output "$RUNNER_TEMP/dawnkeep-web"
-      - name: Actual Chromium desktop and portrait EN/ZH input and lifecycle
+      - name: Actual sandboxed stable Chrome desktop and portrait EN/ZH input and lifecycle
         if: ${{ !cancelled() && steps.export.outcome == 'success' }}
         run: |
           set -euo pipefail
+          # Ubuntu ships a sandbox profile for this standard stable Chrome path.
+          # Require the preinstalled runner browser; never fall back to a different binary.
+          CHROME=/opt/google/chrome/chrome
+          test -f "$CHROME" && test -x "$CHROME"
+          test "$(readlink -f "$CHROME")" = "$CHROME"
+          "$CHROME" --version
           extra=()
           if [ "$FULL_ACCEPTANCE" = 'true' ]; then extra+=(--full); fi
-          python "$RECIPE/ci/capture_browser.py" --site "$RUNNER_TEMP/dawnkeep-web/site" --output "$RUNNER_TEMP/dawnkeep-browser" "${extra[@]}"
+          python "$RECIPE/ci/capture_browser.py" --chromium "$CHROME" --site "$RUNNER_TEMP/dawnkeep-web/site" --output "$RUNNER_TEMP/dawnkeep-browser" "${extra[@]}"
       - name: Verify tracked recipe remains unchanged
         if: ${{ !cancelled() }}
         run: git diff --exit-code -- "$RECIPE" .github/workflows/dawnkeep-preview.yml
