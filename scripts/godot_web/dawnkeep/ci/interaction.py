@@ -206,12 +206,9 @@ class InputPlan:
         else:raise TimeoutError('Two-wave hero/ultimate progression was not established with actual inputs')
         if casts!={'q','e','r'}:raise RuntimeError('All three abilities were not used through real controls')
         self.screenshot('combat-progress')
-        old=self.current()
-        if 'restart' not in old['ui']['controls']:
-            self.tap('pause');self.pause(.3)
-        self.tap('restart');self.pause(.3);state=self.current()
-        if 'confirm_restart' in state['ui']['controls']:self.tap('confirm_restart')
-        self.wait(lambda s:s.get('wave',0)==0 and len(s.get('enemies',[]))==0 and len(s.get('towers',[]))==0,'actual restart reset',old['sample_id'])
+        # Await fresh pause/confirmation/reset receipts, not a fixed wall delay
+        # that can expire before a slow software Web renderer handles the tap.
+        self.restart_game('after portrait combat')
         self.screenshot('restart')
 
     def minimap_click(self, x, z):
@@ -282,7 +279,7 @@ class InputPlan:
             self.report.setdefault('checks',[]).append({'name':'actual '+skill.upper()+' ability activation','state':after})
         return activated
 
-    def full_desktop(self, max_wall_seconds=1200):
+    def full_desktop(self, max_wall_seconds=1200, max_afk_wall_seconds=600):
         """Eight-wave victory and natural defeat through only public real inputs."""
         self.prepare_combat() # Equipment, tower branch, invalid repeat, sale, rebuild.
         self.restart_game('after economy controls')
@@ -347,7 +344,8 @@ class InputPlan:
         self.restart_game('after actual victory')
         self.screenshot('victory-restart')
         self.enable_double_speed()
-        start=time.monotonic();deadline=start+600;damage_seen=False;waves=[];last_wave=-1
+        start=time.monotonic();deadline=start+max_afk_wall_seconds;damage_seen=False;waves=[];last_wave=-1
+        self.report['afk_wall_budget_seconds']=max_afk_wall_seconds
         # Natural loss route: no movement, purchases, towers, skills or damage
         # manipulation. Only the real next-wave control and observation.
         while time.monotonic()<deadline:

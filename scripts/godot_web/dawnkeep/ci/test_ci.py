@@ -1,5 +1,6 @@
 import ast
 import copy
+import json
 import re
 import shlex
 import subprocess
@@ -7,11 +8,11 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 from pathlib import Path
-from common import REQUIRED_FILES, copy_game, isolated_output, receipts, source_inventory, verify_inventory
+from common import REQUIRED_FILES, check_engine_log, copy_game, isolated_output, receipts, source_inventory, verify_inventory
 from interaction import InputPlan, control_center, validate_state, support_pad
 from author_native import editor_idle_sample, initial_copy_files
 from export_web import patch_shell
-from capture_native import mouse_location, pointer_click
+from capture_native import complete_log_text, mouse_location, pointer_click
 from capture_browser import RequiredPayloadOutage, browser_executable, canvas_point
 
 
@@ -60,6 +61,32 @@ class InventoryTests(unittest.TestCase):
 
 
 class NativePointerTests(unittest.TestCase):
+    def test_live_log_waits_for_complete_utf8_json_line(self):
+        first=b'DAWNKEEP_STATE {"sample_id":1}\n'
+        record=('DAWNKEEP_STATE '+json.dumps({'sample_id':2,'text':'曙光'*2000},ensure_ascii=False)+'\n').encode()
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'native.log'
+            for split in (1,40,4096,len(record)-1):
+                path.write_bytes(first+record[:split])
+                self.assertEqual(receipts(complete_log_text(path)),[{'sample_id':1}])
+            path.write_bytes(first+record)
+            self.assertEqual(receipts(complete_log_text(path))[-1],{'sample_id':2,'text':'曙光'*2000})
+
+    def test_completed_bad_log_records_and_errors_are_not_suppressed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'native.log'
+            path.write_bytes(b'DAWNKEEP_STATE {"broken":\n')
+            with self.assertRaises(json.JSONDecodeError):receipts(complete_log_text(path))
+            path.write_bytes(b'DAWNKEEP_STATE {"broken":"\xff"}\n')
+            with self.assertRaises(UnicodeDecodeError):complete_log_text(path)
+            path.write_text('ERROR: actual engine error\n')
+            with self.assertRaises(RuntimeError):check_engine_log(complete_log_text(path))
+
+    def test_no_complete_log_line_is_not_a_receipt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'native.log';path.write_bytes(b'DAWNKEEP_STATE {"sample_id":1}')
+            self.assertEqual(complete_log_text(path),'')
+
     def test_location_readback_is_integer_data(self):
         self.assertEqual(mouse_location('X=1036\nY=54\nSCREEN=0\nWINDOW=123\n'),(1036,54))
         self.assertEqual(mouse_location('Y=-2\nX=0\n'),(0,-2))
@@ -218,6 +245,39 @@ class AbilityObservationTests(unittest.TestCase):
 
 
 class ObserverTests(unittest.TestCase):
+    def test_restart_waits_for_fresh_pause_confirmation_and_reset(self):
+        def state(sample,controls,paused=False):
+            value=self.sample();value.update(sample_id=sample,physics_frame=sample+1,paused=paused,
+                wave=2,core_hp=20,gold=100,enemies=[],towers=[])
+            value['ui']['controls']={key:{'x':x,'y':20,'w':80,'h':40,'enabled':True} for key,x in controls.items()}
+            value['ui']['labels']=[]
+            return value
+        old=state(1,{'pause':10});paused=state(2,{'restart':110},True)
+        confirm=state(3,{'confirm_restart':210},True);reset=state(4,{'pause':10})
+        reset.update(wave=0,gold=420);reset['hero'].update(level=1,equipment={'blade':0})
+        observe=Mock(side_effect=[old,old,old,paused,paused,paused,confirm,confirm,confirm,reset])
+        click=Mock();pause=Mock();report={}
+        plan=InputPlan(observe,click,Mock(),pause,(390,800),Mock(),report)
+        self.assertEqual(plan.restart_game('portrait'),reset)
+        self.assertEqual([c.args for c in click.call_args_list],[(50,40),(150,40),(250,40)])
+        self.assertEqual([c.args for c in pause.call_args_list],[(.1,),(.1,),(.1,)])
+        self.assertEqual([c['state']['sample_id'] for c in report['checks']],[2,3,4])
+
+    def test_portrait_restart_reuses_strict_state_based_path(self):
+        tree=ast.parse((Path(__file__).parent/'interaction.py').read_text())
+        combat=next(n for n in ast.walk(tree) if isinstance(n,ast.FunctionDef) and n.name=='combat')
+        calls=[n for n in ast.walk(combat) if isinstance(n,ast.Call)]
+        self.assertTrue(any(ast.unparse(n.func)=='self.restart_game' for n in calls))
+        self.assertFalse(any(ast.unparse(n.func)=='self.tap' and n.args and isinstance(n.args[0],ast.Constant) and n.args[0].value=='restart' for n in calls))
+
+    def test_slow_web_afk_budget_remains_bounded_and_native_default_unchanged(self):
+        import inspect
+        self.assertEqual(inspect.signature(InputPlan.full_desktop).parameters['max_afk_wall_seconds'].default,600)
+        tree=ast.parse((Path(__file__).parent/'capture_browser.py').read_text())
+        calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and ast.unparse(n.func)=='plan.full_desktop']
+        self.assertEqual(len(calls),1)
+        self.assertEqual([(k.arg,ast.literal_eval(k.value)) for k in calls[0].keywords],[('max_afk_wall_seconds',900)])
+
     def test_support_pad_keeps_hero_construction_exclusion(self):
         state=self.sample();state['hero']['position']=[-5,0,-1]
         state['pads']=[{'id':2,'position':{'x':-5,'y':0,'z':-1}}, {'id':0,'position':[-11,0,-4]}]

@@ -150,7 +150,11 @@ def main():
                                 raise RuntimeError('Music did not unlock/play after actual user gesture')
                             recorder=subprocess.Popen(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-f','pulse','-i','default','-c:a','pcm_s16le',str(directory/'runtime-audio.wav')])
                             if mobile:plan.combat()
-                            else:plan.full_desktop()
+                            # Software Web rendering measured ~0.41 simulated
+                            # seconds/wall second during AFK capture. Retain the
+                            # same natural-defeat/restart assertions with a
+                            # bounded 900s capture budget (native remains 600s).
+                            else:plan.full_desktop(max_afk_wall_seconds=900)
                             stop_process(recorder);recorder=None
                             result['captured_audio']=inspect_audio(directory/'runtime-audio.wav')
                         def shell_click(selector):

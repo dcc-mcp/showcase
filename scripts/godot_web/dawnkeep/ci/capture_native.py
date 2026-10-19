@@ -50,6 +50,18 @@ def image_stats(path):
         return {'width':image.width,'height':image.height,'stddev':stat.stddev,'sha256':sha256(path)}
 
 
+def complete_log_text(path):
+    """Read only newline-terminated bytes from a concurrently appended log.
+
+    Godot can write a large UTF-8 JSON observation in several chunks. The
+    incomplete tail is not a record yet; completed malformed records still fail
+    the unchanged strict decoder. The original file is never altered.
+    """
+    data=Path(path).read_bytes()
+    boundary=data.rfind(b'\n')
+    return data[:boundary+1].decode('utf-8') if boundary>=0 else ''
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--native',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
@@ -82,7 +94,7 @@ def main():
                                  env=env,stdout=log,stderr=log)
         def live():
             if process.poll() is not None: raise RuntimeError('Actual Godot process exited early: '+str(process.returncode))
-            text=log_path.read_text();check_engine_log(text);return text
+            text=complete_log_text(log_path);check_engine_log(text);return text
         deadline=time.monotonic()+100
         while 'DAWNKEEP_FRAME_READY ' not in live():
             if time.monotonic()>deadline:raise TimeoutError('No actual frame_post_draw readiness')
