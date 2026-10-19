@@ -3,10 +3,12 @@ import array
 import copy
 from pathlib import Path
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
+import tempfile
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window,
                              real_button, validate_audio_baseline, validate_audio_sources,
-                             validate_journey, validate_recorded_pcm, validate_muted_restore_audio)
+                             validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
+                             browser_executable, validate_browser_arguments)
 
 
 def snapshot(rms=0, state="suspended", seconds=2.5):
@@ -81,10 +83,33 @@ class AudioAcceptanceFixtures(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_muted_restore_audio(before, {"starts": [{**source, "id": 3}]}, receipts)
 
-    def test_only_mute_default_removed(self):
-        self.assertEqual(IGNORED_DEFAULT_ARGS, ["--mute-audio"])
-        self.assertEqual(BROWSER_ARGS.count("--enable-automation"), 1)
+    def test_safe_browser_defaults_and_real_audio_are_required(self):
+        self.assertEqual(IGNORED_DEFAULT_ARGS, ["--mute-audio", "--enable-unsafe-swiftshader"])
+        self.assertEqual(BROWSER_ARGS, ["--disable-dev-shm-usage"])
         self.assertFalse(any("autoplay" in item or "audio" in item for item in BROWSER_ARGS))
+        validate_browser_arguments(["chrome", "--enable-automation", *BROWSER_ARGS])
+        for option in ("--mute-audio", "--no-sandbox", "--disable-setuid-sandbox", "--disable-web-security",
+                       "--enable-unsafe-swiftshader", "--ignore-certificate-errors", "--autoplay-policy=no-user-gesture-required"):
+            with self.subTest(option=option), self.assertRaises(RuntimeError):
+                validate_browser_arguments(["chrome", option])
+        source = Path(__file__).with_name("capture_browser.py").read_text()
+        self.assertIn('"chromium_sandbox": True', source)
+        self.assertIn('verify_passive_protocol(pw, out, launch_options)', source)
+
+    def test_explicit_browser_is_verified_without_fallback(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "chrome"
+            with self.assertRaises(FileNotFoundError):
+                browser_executable(path)
+            path.write_text("fixture")
+            with self.assertRaises(ValueError):
+                browser_executable(path)
+            path.chmod(0o700)
+            with patch("capture_browser.subprocess.run", return_value=Mock(stdout="Google Chrome 155.0.8059.39\n")):
+                self.assertEqual(browser_executable(path), {"executable_path": str(path), "executable_version": "Google Chrome 155.0.8059.39"})
+            with patch("capture_browser.subprocess.run", return_value=Mock(stdout="unknown browser\n")):
+                with self.assertRaises(ValueError):
+                    browser_executable(path)
 
     def test_real_begin_receipt_requires_exact_trigger_and_not_demo(self):
         receipt = {"schema": 1, "started": True, "trigger": "touch_begin", "demo": False}

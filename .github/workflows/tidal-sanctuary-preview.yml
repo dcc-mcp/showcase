@@ -37,13 +37,13 @@ jobs:
           sudo apt-get install --yes --no-install-recommends xvfb xauth xdotool ffmpeg libgl1-mesa-dri mesa-vulkan-drivers fonts-dejavu-core
           ffmpeg -version
           ffprobe -version
-      - name: Pin official Godot, typed adapter and Chromium
+      - name: Pin official Godot, typed adapter and browser driver
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install 'dcc-mcp-godot==0.9.6' 'dcc-mcp-core==0.20.42'
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
-          python -m playwright install --with-deps chromium
+          python -m playwright install-deps chromium
           curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip -o "$RUNNER_TEMP/tidal-godot.zip"
           echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/tidal-godot.zip" | sha256sum -c -
           unzip -q "$RUNNER_TEMP/tidal-godot.zip" -d "$RUNNER_TEMP/tidal-godot"
@@ -102,9 +102,17 @@ jobs:
           python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
             --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/tidal-templates/web_nothreads_release.zip" \
             --license-dir play/runtime --output "$RUNNER_TEMP/tidal-web"
-      - name: Real Chromium keyboard/touch treasure routes and fresh-process save restoration
+      - name: Real sandboxed Chrome keyboard/touch treasure routes and fresh-process save restoration
         if: ${{ !cancelled() && steps.export.outcome == 'success' }}
-        run: python "$RECIPE/ci/capture_browser.py" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
+        run: |
+          set -euo pipefail
+          # The runner's standard Chrome has an OS sandbox profile. Require it
+          # rather than opting into an unsafe software renderer or fallback.
+          CHROME=/opt/google/chrome/chrome
+          test -f "$CHROME" && test -x "$CHROME"
+          test "$(readlink -f "$CHROME")" = "$CHROME"
+          "$CHROME" --version
+          python "$RECIPE/ci/capture_browser.py" --chromium "$CHROME" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
       - name: Verify tracked source was not modified
         if: ${{ !cancelled() }}
         run: git diff --exit-code -- "$RECIPE" .github/workflows/tidal-sanctuary-preview.yml

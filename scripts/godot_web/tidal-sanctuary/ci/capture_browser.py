@@ -7,6 +7,8 @@ import base64
 import importlib.metadata
 import json
 import math
+import os
+import re
 import subprocess
 import sys
 import threading
@@ -105,10 +107,29 @@ def wait_observer(page, console, prefix, start, timeout=15, allow_runtime_exit=F
     raise TimeoutError(f"Actual game did not emit a fresh {prefix} receipt")
 
 
-# Playwright 1.63 adds this headless default; remove ONLY that one switch.
-# https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/chromium/chromium.ts#L349-L355
-IGNORED_DEFAULT_ARGS = ["--mute-audio"]
-BROWSER_ARGS = ["--enable-automation", "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-dev-shm-usage"]
+# Preserve browser security defaults and its supported renderer selection.
+# Playwright injects both mute and an unsafe renderer opt-in by default.
+IGNORED_DEFAULT_ARGS = ["--mute-audio", "--enable-unsafe-swiftshader"]
+BROWSER_ARGS = ["--disable-dev-shm-usage"]
+
+
+def browser_executable(value):
+    """Select one installed browser explicitly; never silently substitute it."""
+    path = Path(value).resolve(strict=True)
+    if not path.is_file() or not os.access(path, os.X_OK):
+        raise ValueError("Explicit browser is not an executable file: " + str(path))
+    result = subprocess.run([str(path), "--version"], check=True, capture_output=True, text=True, timeout=10)
+    version = result.stdout.strip()
+    if not re.fullmatch(r"(?:Google Chrome(?: for Testing)?|Chromium) [0-9]+(?:\.[0-9]+){3}(?: .*)?", version):
+        raise ValueError("Unrecognized explicit browser version: " + version)
+    return {"executable_path": str(path), "executable_version": version}
+
+
+def validate_browser_arguments(arguments):
+    forbidden = ("--mute-audio", "--no-sandbox", "--disable-setuid-sandbox", "--disable-web-security",
+                 "--enable-unsafe-swiftshader", "--ignore-certificate-errors")
+    if any(arg.split("=", 1)[0] in forbidden or "autoplay-policy" in arg for arg in arguments):
+        raise RuntimeError("Acceptance browser contains an audio or security override")
 
 
 
@@ -514,9 +535,9 @@ def capture_png(page, path, diagnostic=False):
             "timeout_seconds": timeout, "diagnostic": diagnostic, "method": "CDP Page.captureScreenshot; no evaluation preflight"}
 
 
-def verify_passive_protocol(pw, out):
+def verify_passive_protocol(pw, out, launch_options):
     """A fresh blank browser verifies real timeout recovery, never game state."""
-    browser = pw.chromium.launch(headless=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS)
+    browser = pw.chromium.launch(**launch_options)
     try:
         context = browser.new_context()
         page = context.new_page()
@@ -569,6 +590,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--site", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--chromium", required=True, help="Explicit installed Chrome/Chromium executable; no fallback")
     args = parser.parse_args()
     out = isolated_output(args.output, args.site)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(args.site.resolve())))
@@ -582,13 +604,18 @@ def main():
                   "Audio is browser-rendered capture, not physical speaker output or subjective audition.",
                   "Background-tab and OS focus lifecycle remain unverified; Playwright default background throttling flags are retained."],
               "playwright_version": importlib.metadata.version("playwright"),
-              "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS},
+              "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS,
+                                 "chromium_sandbox": True, "requested_executable": args.chromium},
               "pack_sha256": sha256(args.site / "index.pck")}
     try:
         if report["playwright_version"] != "1.63.0":
             raise RuntimeError("This acceptance lane requires pinned Playwright 1.63.0")
+        selected = browser_executable(args.chromium)
+        report["browser_launch"].update(selected)
+        launch_options = {"headless": True, "args": BROWSER_ARGS, "ignore_default_args": IGNORED_DEFAULT_ARGS,
+                          "chromium_sandbox": True, "executable_path": selected["executable_path"]}
         with sync_playwright() as pw:
-            report["passive_protocol"] = verify_passive_protocol(pw, out)
+            report["passive_protocol"] = verify_passive_protocol(pw, out, launch_options)
             for width, height, mobile in ((1280, 720, False), (390, 844, True)):
                 label = "portrait-390x844" if mobile else "desktop-1280x720"
                 result = {"name": label, "width": width, "height": height, "passed": False, "rendered": False,
@@ -603,8 +630,8 @@ def main():
                 profile = tempfile.TemporaryDirectory(prefix="tidal-" + label + "-profile-")
 
                 def launch():
-                    return pw.chromium.launch_persistent_context(profile.name, headless=True,
-                        args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, viewport={"width": width, "height": height}, device_scale_factor=1,
+                    return pw.chromium.launch_persistent_context(profile.name, **launch_options,
+                        viewport={"width": width, "height": height}, device_scale_factor=1,
                         is_mobile=mobile, has_touch=mobile)
 
                 def attach(target_page, target_console, target_failures):
@@ -679,8 +706,7 @@ def main():
                     command_session = context.new_cdp_session(page)
                     actual_args = command_session.send("Browser.getBrowserCommandLine")["arguments"]
                     result["browser_arguments"] = actual_args
-                    if "--mute-audio" in actual_args or any("autoplay-policy" in arg for arg in actual_args):
-                        raise RuntimeError("Audio lane contains a mute or autoplay-policy override")
+                    validate_browser_arguments(actual_args)
                     command_session.detach()
                     attach(page, console, failures)
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)

@@ -4,6 +4,12 @@ Install this directory as `scripts/godot_web/tidal-sanctuary/ci/` and the author
 
 The workflow has read-only repository permissions, no saved checkout credentials, no deploy step, and no upload except the explicit Actions artifact. Every generated project, save, browser profile, editor session, export and capture goes into a new directory under `RUNNER_TEMP`. The original checkout is never opened in Godot. The final tracked-file diff checks for mutation. Native rendering is run only in the approved hosted Xvfb job; local unit tests do not establish rendered acceptance.
 
+### Retained browser failure and safe-renderer candidate (2026-10-19)
+
+Head `3ff0eb1` [run 39089394037](https://github.com/dcc-mcp/showcase/actions/runs/39089394037) passed native authoring/input/save but failed both Web viewports immediately after real Begin. Audible samples exist, but the main-thread meter has multi-second gaps and cannot satisfy sustained-output evidence. The retained desktop failure snapshot additionally shows the first 32-second music source ending at audio clock 32.182857 and its replacement starting at 33.750204, a real 1.567-second source gap. The failure snapshot was collected after a diagnostic screenshot and is not relabeled as the earlier rejected window.
+
+The candidate now uses the runner's explicitly verified `/opt/google/chrome/chrome`, with the Chromium sandbox enabled, no forced graphics backend, and both Playwright's mute and unsafe-SwiftShader defaults excluded. Missing browser/WebGL capability fails; it never falls back to unsafe rendering. Runtime, source/PCM identity, strict meter density, cue/loop seam, actual-input and fresh-process restoration gates are unchanged. This configuration change is not a rendered performance or audio-success claim; exact-head hosted evidence must establish the result.
+
 ## Evidence, kept distinct
 
 - `authoring.json`, `mcp-raw.json`, `mcp-tool-schemas.json`: actual discovered typed MCP calls and responses. Both gameplay scripts are created and validated through the typed script API. Godot creates the Node3D root, attaches the main script and saves the scene. A different editor process reopens the saved scene, reads its tree and verifies its unchanged hash. This does not claim every generated mesh was individually authored through a tool.
