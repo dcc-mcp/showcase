@@ -63,7 +63,7 @@ def main():
     def call(name, slug, payload):
         request = evidence / (name + "-request.json")
         request.write_text(json.dumps(payload, indent=2))
-        result = run_cli(name, "call", slug, "--json-file", str(request))
+        result = run_cli(name, "call", slug, "--json-file", str(request), "--timeout-secs", "150")
         if result.get("control_route") != "gateway" or result.get("gateway_stats_recorded") is not True:
             raise RuntimeError("Call did not preserve the required gateway route")
         if result.get("output", {}).get("success") is not True:

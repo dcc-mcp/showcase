@@ -214,4 +214,13 @@ func build_preview(arguments: Dictionary) -> Dictionary:
    skeleton.force_update_all_bone_transforms()
    readback.append(_bones(skeleton))
  actual.free()
- return {"saved": output, "mesh_count": expected_mesh_count, "nested_scene_instances": 0, "models": records, "reopened_bones": readback, "camera": "SameCamera", "render_pending": true}
+ var witness_path := output.trim_suffix(".tscn") + "-pose-witness.json"
+ if FileAccess.file_exists(witness_path):
+  return {"error": "Expected fresh pose witness"}
+ var witness := FileAccess.open(witness_path, FileAccess.WRITE)
+ if witness == null:
+  return {"error": "Cannot save full pose witness"}
+ witness.store_string(JSON.stringify({"saved": output, "mesh_count": expected_mesh_count, "nested_scene_instances": 0, "models": records, "reopened_bones": readback, "camera": "SameCamera", "render_pending": true}))
+ witness.close()
+ # Keep the complete native values, without exceeding the official bridge frame budget.
+ return {"saved": output, "witness": witness_path, "witness_sha256": FileAccess.get_sha256(witness_path)}

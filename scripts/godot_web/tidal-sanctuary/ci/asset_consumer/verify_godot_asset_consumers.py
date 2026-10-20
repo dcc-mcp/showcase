@@ -14,7 +14,7 @@ INPUT_SHA256={'../common.py': 'cb0dadf8545123c8475401ef4c9dfc220530c397e1f5ae259
 for path,digest in INPUT_SHA256.items():assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,path
 sys.path.insert(0,str(CI));from common import checked_godot,isolated_env,stop_process,check_engine_log
 from author_native import envelope,EDITOR_PROBE_SOURCE,editor_idle_sample
-SCRIPT_SHA='bd0a59d03b66936cf5d63d4b6eca5068acb2454c546c89c142d435328ea9e19d'
+SCRIPT_SHA='d971acd7a472b623241b0a7c516121dadb1482bebd9a1422df47ecd73807282c'
 assert hashlib.sha256((ROOT/'godot_asset_consumer.gd').read_bytes()).hexdigest()==SCRIPT_SHA
 for pkg,version in [('dcc-mcp-godot','0.9.6'),('dcc-mcp-core','0.20.42')]:assert importlib.metadata.version(pkg)==version
 mem=int(next(x.split()[1] for x in Path('/proc/meminfo').read_text().splitlines() if x.startswith('MemAvailable:')))/1024
@@ -143,7 +143,12 @@ try:
         label=name+('-'+clip.lower() if clip else '')+('-game-wrapper' if game_swim else '');scene=f'res://previews/{label}.tscn';output=f'res://previews/{label}.png'
         args={'output':scene,'paths':[f'res://assets/old/{name}.glb',f'res://assets/new/{name}.glb'],'spacing':spacing,'size':size,'height':center}
         if clip:args.update(clip=clip,time=.25,game_swim=game_swim)
-        built=execute('build_preview',args);assert built['saved']==scene
+        saved=execute('build_preview',args);assert saved['saved']==scene
+        expected_witness=scene.removesuffix('.tscn')+'-pose-witness.json'
+        assert saved['witness']==expected_witness
+        witness_bytes=(project/expected_witness.removeprefix('res://')).read_bytes()
+        assert hashlib.sha256(witness_bytes).hexdigest()==saved['witness_sha256']
+        built=json.loads(witness_bytes);assert built['saved']==scene
         assert built['nested_scene_instances']==0 and built['mesh_count']>0
         if clip:
             assert built['mesh_count']==73  # 2 x 36 imported meshes plus the fixture ground.
