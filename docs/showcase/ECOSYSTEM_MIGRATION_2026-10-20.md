@@ -1,9 +1,50 @@
 # Ecosystem production migration audit — 2026-10-20
 
-Baseline: [main 7f4389e](https://github.com/dcc-mcp/showcase/commit/7f4389e83430a43f53dbb4bd068f4e8fab72e51c).
+Original audit baseline: [main 7f4389e](https://github.com/dcc-mcp/showcase/commit/7f4389e83430a43f53dbb4bd068f4e8fab72e51c).
 This is a source/evidence audit, not a new production run or a declaration that
 all historical work lacked MCP. The new structural gate currently blocks all
 16 selected cases. No old record is rewritten and no live page is removed.
+
+## Revalidated after main integration (2026-10-20)
+
+Current integrated main: [1b6219e](https://github.com/dcc-mcp/showcase/commit/1b6219eed3dbf421e5b06c3d425d669277ed1529).
+PR [#48](https://github.com/dcc-mcp/showcase/pull/48) merged the separately
+reconstructed nine Dawnkeep assets; PR [#47](https://github.com/dcc-mcp/showcase/pull/47)
+merged the gated model-preview/benchmark pilot. Neither changed the selected
+historical runtime assets or supplied a complete case production graph. The
+model-preview allowlist remains empty and activation still requires the case gate.
+A fresh local run after integration returns the same **16 blocked cases** in
+[ecosystem-gate-baseline.json](ecosystem-gate-baseline.json), not a stale inference
+from the original PR run. No new renderer run is needed merely to confirm this.
+
+Dawnkeep's completed nine-asset construction must not be repeated merely for
+paperwork, nor used to certify its unchanged runtime. Follow the merged
+[stage migration checklist](../../scripts/godot_web/dawnkeep/art/ecosystem-rebuild/MIGRATION.md)
+for the remaining scoped work.
+The published ledger is a sanitized summary, not raw-call authentication.
+Remaining work includes animation/equipment assembly, asset integration,
+preview rendering, auxiliary transformations and Godot export, followed by
+native/Web and delivered-page acceptance. Exact stage source/output hashes and
+independent raw-call review are needed before recording whole-case completion.
+
+### Smallest next steps, not sixteen blind re-renders
+
+1. For every selected case below, recover existing genuine requests/results,
+   component version/commit evidence and output hashes first. Inventory every
+   selected production artifact and upstream transformation; do not fabricate a
+   passing graph from README claims or subsequent inspection calls.
+2. For genuine historical stages with complete evidence, prepare a hash-bound
+   graph and independent review without reproducing unchanged art. Missing
+   evidence remains blocked until recovered or separately re-produced.
+3. For confirmed native-only stages (Dawnkeep integration/derivatives,
+   resonance-atlas composition/encoding, and any other route confirmed by review),
+   reproduce only those stages through discovered official ecosystem capabilities,
+   then regenerate downstream artifacts whose inputs changed. A wrapper around a
+   bare host command is not a provenance repair.
+4. Keep each case's final graph, exact selected inventory, raw evidence and
+   review in its public manifest. Run the whole-collection gate, never a changed-case
+   subset. Only all-case evidence completeness plus independent authenticity review
+   and successful applicable CI can make this PR ready for ordinary merging.
 
 ## Why the previous gate allowed this
 
@@ -60,5 +101,5 @@ Two archive entries outside selected collection also exist: `blender-mcp-gimbal-
 
 Both the structural gate and actual-call review are required. Passing a
 self-authored JSON structure cannot authenticate its claims. The initial gate
-failure is not to be bypassed for green CI; this Draft must not deploy until
+failure is not to be bypassed for green CI; this PR must not deploy until
 migration and publication authorization are complete.

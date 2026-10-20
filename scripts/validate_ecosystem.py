@@ -24,6 +24,24 @@ REPORT_EXTENSIONS = {'.md', '.txt', '.log', '.json'}
 HEX = re.compile(r'[0-9a-f]{64}\Z')
 SOURCE = re.compile(r'https://github\.com/dcc-mcp/[A-Za-z0-9_.-]+/(?:tree|commit)/[0-9a-f]{40}(?:/[^?#]*)?\Z')
 
+# Explicit official package ownership, not a trusted-name-prefix heuristic.
+# Verified against the organization's pyproject at this immutable revision.
+OFFICIAL_PYPI = {
+    'dcc-mcp-blender': 'https://github.com/dcc-mcp/dcc-mcp-blender/blob/1ba474f314ea2c5c35eeadc70bcd59d15775ea83/pyproject.toml',
+}
+PYPI_RELEASE = re.compile(r'https://pypi\.org/project/([a-z0-9-]+)/([0-9][A-Za-z0-9.!+_-]*)/\Z')
+
+
+def pinned_component(component):
+    if not isinstance(component, dict) or not component.get('version'):
+        return False
+    source = str(component.get('source', ''))
+    if SOURCE.fullmatch(source):
+        return True
+    release = PYPI_RELEASE.fullmatch(source)
+    return bool(release and release[1] in OFFICIAL_PYPI and
+                release[2] == component['version'])
+
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -129,7 +147,7 @@ def validate_case(root, case):
             need(stage.get('phase') in PHASES, label + ': unknown phase')
             need(stage.get('route') in ROUTES, label + ': non-ecosystem or unknown production route')
             component = stage.get('component', {})
-            need(isinstance(component, dict) and bool(component.get('version')) and bool(SOURCE.fullmatch(str(component.get('source', '')))), label + ': requires pinned official ecosystem component')
+            need(pinned_component(component), label + ': requires pinned official ecosystem component')
             need(stage.get('status') == 'succeeded', label + ': stage did not succeed')
             # These are preserved raw bytes, not a summary or invented transcript.
             for field in ('request', 'response', 'artifact_measurement'):

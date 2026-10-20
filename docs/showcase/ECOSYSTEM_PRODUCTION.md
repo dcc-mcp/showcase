@@ -15,6 +15,14 @@ retain the official component identity and actual invocation with output lineage
 Read-only checks and playback are distinct from production. Original upstream
 assets require source/rights records; adapting them requires an ecosystem stage.
 
+## The rule in plain terms
+
+Use the ecosystem to make the work, and retain enough actual invocation and
+artifact evidence to verify that fact. The record below indexes that evidence;
+it is not a substitute for production. Existing genuine evidence may be reused.
+Do not rerender a conforming work just to fill in a different report template.
+Only phases actually performed need stages; unused phases have a short reason.
+
 ## Required per-case record
 
 Place `ecosystem-production.json` in the case directory and include it and its
@@ -32,7 +40,16 @@ Required fields:
   Inapplicability is reviewed and cannot conceal a performed native-only stage.
 - `stages`: nonempty list with unique `id`, `phase`, `status: succeeded`, `route`
   (`mcp`, `ecosystem-cli`, `ecosystem-skill`), and `component` (`version`, official
-  `https://github.com/dcc-mcp/<repo>/commit/<40-hex>` or pinned tree `source`).
+  `https://github.com/dcc-mcp/<repo>/commit/<40-hex>` or pinned tree `source`), or a version-specific official PyPI release URL.
+  For registry URLs, the version must exactly match and the package must appear
+  in the validator's reviewed `OFFICIAL_PYPI` ownership map. A `dcc-mcp` name
+  prefix alone is never trusted. The initial verified entry is
+  [dcc-mcp-blender 0.2.22](https://pypi.org/project/dcc-mcp-blender/0.2.22/),
+  tied to the official organization's immutable pyproject source in that map.
+  Add other registry packages only after verifying their official ownership.
+  The earlier Git-commit-only rule was unnecessarily restrictive for real
+  released-package installations. The release pin does not replace actual
+  invocation/output verification or prove what was installed.
 - Each stage has `request`, `response`, `artifact_measurement`, `inputs`,
   `outputs`: file references use repository-relative `path` and lowercase
   `sha256`. Request/response files preserve actual sanitized invocation/result

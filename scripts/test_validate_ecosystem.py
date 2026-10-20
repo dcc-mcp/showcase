@@ -70,6 +70,18 @@ class GateTests(unittest.TestCase):
     def test_unpinned_or_unofficial_component_blocks(self):
         for source in ('https://github.com/dcc-mcp/foo/tree/main', 'https://github.com/other/foo/commit/' + 'a'*40):
             self.record['stages'][0]['component']['source'] = source; self.refresh(); self.assertTrue(gate.validate(self.root))
+    def test_official_pypi_release_is_a_valid_pin(self):
+        # Published official release identity; the call/output fixture remains synthetic.
+        self.record['stages'][0]['component'] = {'version': '0.2.22', 'source': 'https://pypi.org/project/dcc-mcp-blender/0.2.22/'}
+        self.refresh(); self.assertEqual(gate.validate(self.root), [])
+    def test_pypi_spoof_unpinned_and_version_mismatch_block(self):
+        for source in ('https://pypi.org/project/dcc-mcp-impostor/0.2.22/',
+                       'https://pypi.org/project/dcc-mcp-blender/0.2.21/',
+                       'https://pypi.org/project/dcc-mcp-blender/',
+                       'https://pypi.org.evil.test/project/dcc-mcp-blender/0.2.22/',
+                       'https://pypi.org/project/dcc-mcp-blender/0.2.22/?override=1'):
+            self.record['stages'][0]['component'] = {'version': '0.2.22', 'source': source}
+            self.refresh(); self.assertTrue(gate.validate(self.root), source)
     def test_missing_raw_response_blocks(self):
         del self.record['stages'][0]['response']; self.refresh(); self.assertTrue(gate.validate(self.root))
     def test_path_escape_blocks(self):
