@@ -1,0 +1,32 @@
+{
+  "output_file": "native/audio-on.svg",
+  "plan": {
+    "canvas": {
+      "width": 64,
+      "height": 64,
+      "view_box": "0 0 64 64"
+    },
+    "nodes": [
+      {
+        "type": "path",
+        "id": "audio-on-1",
+        "fill": "#102B31",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M10 25h11l12-11v36L21 39H10Z"
+      },
+      {
+        "type": "path",
+        "id": "audio-on-2",
+        "fill": "none",
+        "stroke": "#77D3C5",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M41 23q8 9 0 18M48 16q15 16 0 32"
+      }
+    ]
+  }
+}
