@@ -740,15 +740,67 @@ class GameplayObserverTests(unittest.TestCase):
             def capture(*_):
                 clock[0] += 12
                 if advances:
-                    samples.append(self.state(sample_id=3, physics_frame=84, locomotion="wade", water_depth=.2))
+                    samples.append(self.state(sample_id=5, physics_frame=108, locomotion="wade", water_depth=.2))
+            def settle(_):
+                if samples[-1]["sample_id"] < 4:
+                    number=samples[-1]["sample_id"]+1
+                    samples.append(self.state(sample_id=number,physics_frame=48+number*12,locomotion="wade",water_depth=.2))
+            driver.pause.side_effect=settle
             driver.snapshot.side_effect = capture
             with self.subTest(advances=advances), patch("gameplay.time.monotonic", side_effect=lambda: clock[0]):
                 if advances:
-                    self.assertEqual(driver.observe()["sample_id"], 3)
+                    self.assertEqual(driver.observe()["sample_id"], 5)
                     self.assertEqual(driver.capture_seconds, 12)
                 else:
                     with self.assertRaisesRegex(RuntimeError, "stopped advancing"):
                         driver.observe()
+
+    def test_historical_wade_is_drained_before_capture_decision(self):
+        samples=[self.state(),self.state(sample_id=2,physics_frame=72,locomotion="wade",water_depth=.2),
+                 self.state(sample_id=3,physics_frame=84)]
+        driver=self.driver(samples)
+        self.assertEqual(driver.observe()["sample_id"],3)
+        self.assertEqual(len(driver.samples),3)
+        driver.snapshot.assert_not_called()
+        self.assertFalse(driver.captured)
+
+    def test_snapshot_uses_actual_settled_mode_not_pre_release_wade(self):
+        samples=[self.state(locomotion="wade",water_depth=.2)]
+        driver=self.driver(samples)
+        driver.move.side_effect=lambda _:samples.append(self.state(sample_id=2,physics_frame=72))
+        def advance(_):
+            n=samples[-1]["sample_id"]+1
+            samples.append(self.state(sample_id=n,physics_frame=48+n*12))
+        driver.pause.side_effect=advance
+        self.assertEqual(driver.observe()["locomotion"],"walk")
+        self.assertEqual(driver.snapshot_stops[0]["settled"]["sample_id"],4)
+        driver.snapshot.assert_not_called()
+        self.assertFalse(driver.captured)
+
+    def test_snapshot_stop_requires_fresh_neutral_stable_samples(self):
+        samples=[self.state(locomotion="wade",water_depth=.2)]
+        driver=self.driver(samples)
+        with self.assertRaisesRegex(TimeoutError,"two fresh neutral"):
+            driver.observe()
+        driver.snapshot.assert_not_called()
+        self.assertFalse(driver.captured)
+
+    def test_precision_detour_reuses_real_navigation_with_original_budget(self):
+        clock=[0.0];samples=[self.state()];driver=self.driver(samples)
+        point={"name":"detour","target":[2.6,6.4],"radius":.2,"precision":True}
+        def navigate(observe,*args,**kwargs):
+            self.assertEqual(kwargs["radius"],.2)
+            self.assertEqual(kwargs["timeout"],75)
+            self.assertIsNone(kwargs["ray"])
+            clock[0]=75
+            samples.append(self.state(sample_id=2,physics_frame=72))
+            observe()  # Every helper observation is subject to the original route budget.
+        with patch("gameplay.time.monotonic",side_effect=lambda:clock[0]), \
+             patch("gameplay.ROUTE",[point]),patch("exploration.navigate_chart_waypoint",side_effect=navigate), \
+             self.assertRaisesRegex(RuntimeError,"budget expired"):
+            driver.run()
+        self.assertEqual(driver.budgets[0]["expired_budgets"],["active_wall"])
+        driver.interact.assert_not_called()
 
     def test_fresh_process_restoration_requires_existing_matching_complete_save(self):
         expected = self.finished()
@@ -903,8 +955,13 @@ class WaypointBudgetTests(unittest.TestCase):
         def screenshot(name, _):
             if name == "tidal-03.png":
                 clock[0] += 241
-                samples.append(self.state(sample_id=3, physics_frame=84, locomotion="wade", water_depth=.2))
+                samples.append(self.state(sample_id=5, physics_frame=108, locomotion="wade", water_depth=.2))
         driver.move.side_effect, driver.snapshot.side_effect = move, screenshot
+        def settle(_):
+            if 2 <= samples[-1]["sample_id"] < 4:
+                number=samples[-1]["sample_id"]+1
+                samples.append(self.state(sample_id=number,physics_frame=48+number*12,locomotion="wade",water_depth=.2))
+        driver.pause.side_effect=settle
         with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
                 self.assertRaisesRegex(TimeoutError, "absolute_wall"):
             driver.run()

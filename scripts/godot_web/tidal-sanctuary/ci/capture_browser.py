@@ -89,7 +89,8 @@ class QuietHandler(SimpleHTTPRequestHandler):
 def route_diagnostics(driver):
     return {"budget_policy": driver.budget_policy, "waypoint_budgets": driver.budgets,
             "current_waypoint": driver.current_waypoint, "physical_stops": driver.stops,
-            "current_stop": driver.stop_boundary, "physical_actions": driver.actions}
+            "current_stop": driver.stop_boundary, "physical_actions": driver.actions,
+            "precision_navigation": driver.precision_navigation, "snapshot_stops": driver.snapshot_stops}
 
 
 def last_observer_id(console, prefix, field):

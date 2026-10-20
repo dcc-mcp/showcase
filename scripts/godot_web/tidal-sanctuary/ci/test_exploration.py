@@ -322,6 +322,35 @@ class ControllerTests(unittest.TestCase):
                                             self.trace_state(2,[3.3,9.2],[0,0])],target=target,timeout=.2)
         self.assertIsInstance(result,TimeoutError);self.assertNotIn("actual",evidence)
 
+    def test_no_ray_precision_keeps_exact_radius_and_fresh_neutral_contract(self):
+        target=[2.6,6.4]
+        for kind in ("stale", "moving", "drift"):
+            clock,cursor,moves,evidence=[0.],[0],[],{}
+            first=self.trace_state(1,target,[0,0])
+            later=self.trace_state(2,target,[0,0])
+            if kind == "stale":later=first
+            if kind == "moving":later["movement_input"]=[1,0]
+            if kind == "drift":later["position"][0]+=.21
+            observations=[first,later]
+            def pause(seconds):
+                clock[0]+=seconds;cursor[0]=1
+            with self.subTest(kind=kind), patch("exploration.time.monotonic",side_effect=lambda:clock[0]):
+                with self.assertRaises(TimeoutError):
+                    navigate_chart_waypoint(lambda:observations[cursor[0]],moves.append,pause,
+                        target,radius=.2,timeout=.2,ray=None,evidence=evidence)
+            self.assertNotIn("actual",evidence)
+            self.assertEqual(moves[-1],(0,0))
+            self.assertLessEqual(clock[0],.25)
+        clock,cursor,moves,evidence=[0.],[0],[],{}
+        observations=[self.trace_state(1,target,[0,0]),self.trace_state(2,target,[0,0])]
+        def pause(seconds):
+            clock[0]+=seconds;cursor[0]=1
+        with patch("exploration.time.monotonic",side_effect=lambda:clock[0]):
+            actual=navigate_chart_waypoint(lambda:observations[cursor[0]],moves.append,pause,
+                target,radius=.2,timeout=.2,ray=None,evidence=evidence)
+        self.assertIs(actual,observations[1])
+        self.assertIs(evidence["actual"],actual)
+
     def test_synthetic_low_fps_keyboard_and_coast_controller_stays_within_budget(self):
         # A controller fixture only: 13 physics ticks per .625 wall seconds,
         # delayed eight-way keys, and the production walk damping equation.

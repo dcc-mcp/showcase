@@ -9,8 +9,8 @@ from observers import finite_vector, positive_integer
 ROUTE = [
     {"name": "read the beach map", "target": [1.3, 7.8], "stage": 1},
     # Keep real input outside the legitimate map plinth plus player capsule.
-    {"name": "step east clear of the map plinth", "target": [2.6, 8.7], "radius": .2},
-    {"name": "walk around the east side of the map plinth", "target": [2.6, 6.4], "radius": .2},
+    {"name": "step east clear of the map plinth", "target": [2.6, 8.7], "radius": .2, "precision": True},
+    {"name": "walk around the east side of the map plinth", "target": [2.6, 6.4], "radius": .2, "precision": True},
     {"name": "open the inland cache", "target": [-3.8, 3.4], "stage": 2, "screenshot": "tidal-02.png"},
     {"name": "enter the sheltered bay", "target": [1.5, 6.2]},
     {"name": "recover the sea treasure", "target": [8.2, 5.5], "stage": 3},
@@ -212,6 +212,8 @@ class RouteDriver:
         self.budgets = []
         self.active_budget = None
         self.current_waypoint = None
+        self.precision_navigation = []
+        self.snapshot_stops = []
 
     @property
     def budget_policy(self):
@@ -380,7 +382,8 @@ class RouteDriver:
         self.accepted_stage = state["quest_stage"]
         self.pending_action = None
 
-    def observe(self):
+    def drain_states(self):
+        """Validate every actual sample, but choose only the latest for decisions."""
         fresh = self.read_states()
         previous = self.samples[-1] if self.samples else None
         for item in fresh:
@@ -391,21 +394,58 @@ class RouteDriver:
             self.samples.append(item)
             self.last_observation_time = time.monotonic()
             previous = item
-            mode = item["locomotion"]
-            if mode in ("wade", "swim") and mode not in self.captured:
-                # Pause actual movement for an intelligible player-camera screenshot;
-                # primary touch remains down. No camera or actor properties are set.
-                self.move((0, 0))
-                self.capture("tidal-03.png" if mode == "wade" else "tidal-04.png", item)
-                self.captured.add(mode)
-                # A slow screenshot can consume more than the observation
-                # watchdog. Re-read real logs, rather than inventing freshness.
-                return self.observe()
         if not self.samples:
             return None
         if time.monotonic() - self.last_observation_time > 10:
             raise RuntimeError("Actual gameplay observations stopped advancing")
         return self.samples[-1]
+
+    def settled_snapshot_state(self, trigger):
+        self.move((0, 0))
+        boundary = self.drain_states()  # After the actual input release callback returned.
+        receipt = {"trigger": trigger, "after_release": boundary}
+        self.snapshot_stops.append(receipt)
+        deadline = time.monotonic() + 10
+        previous = None
+        keys = ("quest_stage", "treasures", "completed", "locomotion", "language")
+        for _ in range(200):
+            state = self.drain_states()
+            if self.active_budget is not None:
+                self.check_waypoint_budget(state)
+            if time.monotonic() >= deadline:
+                break
+            fresh = (state["sample_id"] > boundary["sample_id"] and
+                     state["physics_frame"] > boundary["physics_frame"])
+            neutral = (math.hypot(*state["movement_input"]) <= .01 and
+                       math.hypot(state["velocity"][0], state["velocity"][2]) <= SETTLED_HORIZONTAL_SPEED)
+            if fresh and neutral:
+                if (previous is not None and state["sample_id"] > previous["sample_id"]
+                        and state["physics_frame"] > previous["physics_frame"]
+                        and all(state[key] == previous[key] for key in keys)):
+                    receipt["settled"] = state
+                    return state
+                if previous is None or state["sample_id"] > previous["sample_id"]:
+                    previous = state
+            elif fresh:
+                previous = None
+            self.pause(.05)
+        receipt["error"] = "No two fresh neutral stable-mode physics observations"
+        raise TimeoutError(receipt["error"])
+
+    def observe(self):
+        state = self.drain_states()
+        if state is None:
+            return None
+        mode = state["locomotion"]
+        if mode in ("wade", "swim") and mode not in self.captured:
+            settled = self.settled_snapshot_state(state)
+            current_mode = settled["locomotion"]
+            if current_mode in ("wade", "swim") and current_mode not in self.captured:
+                self.capture("tidal-03.png" if current_mode == "wade" else "tidal-04.png", settled)
+                self.captured.add(current_mode)  # Only after the capture adapter succeeds; native/browser evidence differs.
+                return self.observe()
+            return settled  # Transient historical wade is not a successful screenshot claim.
+        return state
 
     def run(self):
         if not ROUTE:
@@ -432,6 +472,25 @@ class RouteDriver:
                     # physics budget; neither deadline is renewed after this.
                     state = self.observe()
                 self.begin_waypoint_budget(point, state)
+                if point.get("precision"):
+                    from exploration import navigate_chart_waypoint
+                    evidence = {"waypoint": point["name"]}
+                    self.precision_navigation.append(evidence)
+                    def bounded_observe():
+                        actual = self.observe()
+                        self.check_waypoint_budget(actual)
+                        return actual
+                    wall_limit = self.timeout if self.physics_timeout is None else self.absolute_wall_timeout
+                    remaining = wall_limit - (time.monotonic() - self.active_budget["started_at"])
+                    if remaining <= 0:
+                        self.check_waypoint_budget(state)
+                        raise TimeoutError("No remaining precision-navigation wall budget")
+                    state = navigate_chart_waypoint(bounded_observe, self.move, self.pause,
+                        point["target"], radius=point["radius"], timeout=remaining,
+                        ray=None, evidence=evidence)
+                    self.check_waypoint_budget(state)
+                    if not inside_approach(state, point):
+                        raise RuntimeError("Precision navigation did not reach the original radius")
                 while True:
                     self.check_waypoint_budget(state)
                     state = self.observe()
@@ -490,8 +549,8 @@ class RouteDriver:
             self.capture("tidal-05.png", state)
             return {"passed": True, "samples": self.samples, "milestones": self.milestones,
                     "crossing": crossing, "completed_state": state, "physical_actions": self.actions,
-                    "physical_stops": self.stops,
-                    "budget_policy": self.budget_policy, "waypoint_budgets": self.budgets,
+                    "physical_stops": self.stops, "precision_navigation": self.precision_navigation,
+                    "snapshot_stops": self.snapshot_stops, "budget_policy": self.budget_policy, "waypoint_budgets": self.budgets,
                     "no_demo_no_state_injection": True}
         except Exception as error:
             if self.active_budget is not None:

@@ -441,6 +441,8 @@ def main():
         finally:
             write_json(out / "native-input-route.json", {"input_events": events, "samples": driver.samples,
                 "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions,
+                "precision_navigation":driver.precision_navigation,"snapshot_stops":driver.snapshot_stops,
+                "waypoint_budgets":driver.budgets,
                 "physical_stops": driver.stops, "movement_release_receipts": movement_releases})
         time.sleep(1)
         require_running(recorder, "completion of actual keyboard-route recording")
