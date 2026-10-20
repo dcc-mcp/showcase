@@ -7,11 +7,79 @@ import unittest
 import signal
 from unittest.mock import Mock, patch
 from pathlib import Path
-from author_native import envelope
+from author_native import envelope, script_authoring_plan, script_request_size, SCRIPT_REQUEST_BUDGET
 from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, TROPICAL_FILES, TROPICAL_NOTICES, check_engine_log, copy_game, isolated_env, isolated_output
 from capture_native import import_native_resources, collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
 from export_web import copy_asset_notices, raw_include_filter, copy_web_audio, WEB_AUDIO_FILES, prepare_audio_before_game
+
+
+class BoundedScriptAuthoringTests(unittest.TestCase):
+    @staticmethod
+    def restore(plan):
+        assert plan[0][0] == "create_script"
+        source = plan[0][1]["source"]
+        for action, arguments in plan[1:]:
+            assert action == "edit_script"
+            assert arguments["replace_all"] is False
+            assert source.count(arguments["search"]) == 1
+            source = source.replace(arguments["search"], arguments["replace"], 1)
+        return source
+
+    def test_small_source_uses_one_typed_create(self):
+        source = "extends Node\nfunc sample() -> void:\n pass\n"
+        plan = script_authoring_plan("res://sample.gd", source)
+        self.assertEqual(len(plan), 1)
+        self.assertEqual(self.restore(plan), source)
+
+    def test_current_main_is_bounded_and_restores_exact_utf8_bytes(self):
+        source = (Path(__file__).resolve().parent.parent / "game/main.gd").read_text()
+        self.assertGreater(script_request_size("create_script", {"path":"res://main.gd", "source":source, "overwrite":True}), 65535)
+        plan = script_authoring_plan("res://main.gd", source)
+        self.assertGreater(len(plan), 1)
+        for action, arguments in plan:
+            self.assertLessEqual(script_request_size(action, arguments), SCRIPT_REQUEST_BUDGET)
+        self.assertEqual(self.restore(plan).encode(), source.encode())
+
+    def test_encoded_budget_counts_unicode_quotes_and_backslashes(self):
+        source = 'extends Node\n'
+        for index in range(12):
+            source += f'func sample_{index}() -> void:\n var label = ' + json.dumps('海岛路径\\"' * 200, ensure_ascii=False) + '\n\n'
+        self.assertLess(len(source.encode()), SCRIPT_REQUEST_BUDGET)
+        plan = script_authoring_plan("res://sample.gd", source)
+        self.assertGreater(len(plan), 1)
+        for action, arguments in plan:
+            self.assertLessEqual(script_request_size(action, arguments), SCRIPT_REQUEST_BUDGET)
+        self.assertEqual(self.restore(plan), source)
+
+    def test_oversized_individual_function_fails_before_mutation(self):
+        source = 'extends Node\nfunc huge() -> void:\n #' + 'x' * 65536 + '\n'
+        with self.assertRaisesRegex(ValueError, "complete void function"):
+            script_authoring_plan("res://sample.gd", source)
+
+    def test_no_safe_void_body_fails_before_mutation(self):
+        source = 'extends Node\nconst VALUE = "' + 'x' * 65536 + '"\n'
+        with self.assertRaisesRegex(ValueError, "cannot be authored"):
+            script_authoring_plan("res://sample.gd", source)
+
+    def test_intervening_global_or_annotation_is_not_silently_removed(self):
+        for declaration in ('var sentinel: int = 42', '@warning_ignore("unused_variable")', 'static func other() -> void:'):
+            source = 'extends Node\nfunc huge() -> void:\n #' + 'x' * 40000 + '\n' + declaration + '\nfunc second() -> void:\n #' + 'y' * 20000 + '\n'
+            with self.subTest(declaration=declaration), self.assertRaisesRegex(ValueError, "unsupported top-level"):
+                script_authoring_plan("res://sample.gd", source)
+
+    def test_multiline_string_is_refused_in_staged_subset(self):
+        source = 'extends Node\nfunc huge() -> void:\n var text = """' + 'x' * 40000 + '"""\nfunc second() -> void:\n #' + 'y' * 20000 + '\n'
+        with self.assertRaisesRegex(ValueError, "multiline syntax"):
+            script_authoring_plan("res://sample.gd", source)
+
+    def test_invalid_paths_and_empty_sources_fail_closed(self):
+        for path in ('main.gd', 'res://../main.gd', 'res://main.txt', None):
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                script_authoring_plan(path, "extends Node")
+        for source in ('', ' \n', None):
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                script_authoring_plan("res://main.gd", source)
 
 
 class HarnessTests(unittest.TestCase):

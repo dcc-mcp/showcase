@@ -30,7 +30,7 @@ The observer now counts every constructed context, including unused ones, and re
 
 ## Evidence, kept distinct
 
-- `authoring.json`, `mcp-raw.json`, `mcp-tool-schemas.json`: actual discovered typed MCP calls and responses. Both gameplay scripts are created and validated through the typed script API. Godot creates the Node3D root, attaches the main script and saves the scene. A different editor process reopens the saved scene, reads its tree and verifies its unchanged hash. This does not claim every generated mesh was individually authored through a tool.
+- `authoring.json`, `mcp-raw.json`, `mcp-tool-schemas.json`: actual discovered typed MCP calls and responses. All four gameplay scripts are created and validated through the typed script API. Godot creates the Node3D root, attaches the main script and saves the scene. A different editor process reopens the saved scene, reads its tree and verifies its unchanged hash. This does not claim every generated mesh was individually authored through a tool.
 - `native-validation.json`: actual headless swim/treasure regressions and scene audit, full physical X11/XTest WASD/E treasure route, five rendered milestone images, actual version-2 save-file readback, new Godot-process save restoration and physical R reset. There are no game-property writes, position teleports, synthesized saves or demo flags in the physical-input process.
 - `native-input-route.json`: emitted OS input events, every passive actual physics sample and reached route milestone, including failures. Camera-relative steering reads positions and camera basis from logs; it never sets them.
 - `tidal-01.png` through `tidal-05.png`: real X11 screenshots while physically playing the route: fresh beach, inland treasure, first wading, first swimming, and treasure returned to the ring. They use the normal player-follow camera. No hero-camera shortcut is accepted. Each PNG is fully decoded and hashed.
@@ -69,7 +69,7 @@ Unit fixtures in `test_ci.py` and `test_gameplay.py` validate isolation and fail
 - `dcc-mcp-godot==0.9.6`, `dcc-mcp-core==0.20.42`
 - Browser wheels use the existing hash-pinned `requirements/browser-preview.lock`; the official template fetcher verifies member hashes.
 
-The source manifest explicitly includes `main.gd`, `swim_controller.gd`, `water.gdshader`, three headless regression scripts, scene/project configuration, font, four self-contained Kenney-derived scenes, four Poly Haven fern mesh resources, five exact static image-byte paths and all asset notices. Nested paths are copied into isolated authoring/runtime/export projects. Every declared source file except the deliberately MCP-created root scene retains its source SHA-256 check. Both `.gd` files are created and validated through typed MCP. Export retains only the five declared `.bin` buffers, without a binary wildcard, and copies all seven model/texture notices byte-for-byte.
+The source manifest explicitly includes `main.gd`, `swim_controller.gd`, `water.gdshader`, three headless regression scripts, scene/project configuration, font, four self-contained Kenney-derived scenes, four Poly Haven fern mesh resources, five exact static image-byte paths and all asset notices. Nested paths are copied into isolated authoring/runtime/export projects. Every declared source file except the deliberately MCP-created root scene retains its source SHA-256 check. All four gameplay scripts are created and validated through typed MCP. Export retains only the five declared `.bin` buffers, without a binary wildcard, and copies all seven model/texture notices byte-for-byte.
 
 The bounded 1 MiB range downloader and tests are reused unchanged from independently reviewed Showcase draft #42, commit `858e8e04c56811c9cff379249699911ba568af24`. Official archive/member pins and fail-closed range checks remain. Native capture precedes Web template retrieval, and the early native artifact preserves useful real previews and input diagnostics even if a later stage fails.
 
@@ -115,3 +115,32 @@ Before the native quest recording route, `exploration.py` physically walks aroun
 The passive 32-step motion buffer records values immediately around the unchanged production `move_and_slide`. Native chart-area state receipts use a four-physics-step cadence to avoid stale observations across software-render bursts; Web observation and gameplay are unchanged. The same validator must accept real headless solid fixtures at the lane center and both staging-band edges, and reject identical approaches with the collider removed plus idle wall-adjacent controls. Those fixture spawns are explicitly separate from the actual X11 keyboard route. The 35-second approach and three-opposite-attempt limits remain.
 
 After contact checks the player returns by an outside route and continues the complete treasure/swim loop without resetting or injecting position/progress. Two ordinary-camera contact images and `native-off-route-exploration.json` retain the evidence, including source and validator hashes. New exact-head artifacts are required for this contract; earlier receipts cannot qualify retroactively. This bounded automated exploration is not comprehensive human playtesting. All engine-error, shutdown and new-process restoration checks remain strict.
+
+
+## Pinned typed-script bridge capacity
+
+Head `d136c6b` [run 39353662052](https://github.com/dcc-mcp/showcase/actions/runs/39353662052)
+failed during typed `create_script` before gameplay. The pinned Godot addon 0.9.6
+keeps `WebSocketPeer`'s 65,535-byte inbound buffer. The pinned Core 0.20.42 bridge
+request grew from 64,503 encoded bytes at `4ed1a1f` to 68,916 bytes at `d136c6b`;
+source length alone (62,241 versus 66,532 UTF-8 bytes) understates the JSON cost.
+The editor log had no engine crash or parse error; the bridge disconnected on
+that oversized request. Godot 4.6.3 sets wslay's maximum received message length
+to this buffer size ([engine implementation](https://github.com/godotengine/godot/blob/4.6.3-stable/modules/websocket/wsl_peer.cpp#L379-L389)).
+This is a concrete adapter transport limitation, not a gameplay failure. A local
+isolated Godot 4.6.3 WebSocket reproduction received 65,535 bytes successfully;
+65,536 and 68,916 bytes closed with code 1009 (`Message too big`). All nine
+bounded intermediate scripts also passed actual headless engine parsing.
+These local checks do not substitute for hosted typed-MCP acceptance.
+
+`author_native.py` now preflights the complete typed-authoring plan before that
+script is mutated. It caps conservative JSON-encoded requests at 48 KiB, stages
+only supported complete `void` function bodies as `pass`, and restores each
+through the official exact-search `edit_script` action. Unsupported syntax,
+ambiguous replacements, or an individual edit exceeding the budget aborts the
+candidate. Every write retains the actual scan-idle boundary and path-only typed
+validation. Final on-disk byte hashes and fresh-editor save/reopen checks remain
+mandatory. Failure never packages a partial scaffold. No addon limit is changed,
+no full script is read back over the similarly bounded response channel, and
+no direct filesystem script-authoring fallback is used. Actual MCP acceptance
+must come from a new exact-head run, not the prior failed artifact.
