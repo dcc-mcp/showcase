@@ -491,6 +491,50 @@ class Session:
         expect(card).to_be_visible()
         self.result['checks'].append({'name': 'search/filter/empty/reset/back/forward', 'passed': True})
 
+    def reveal_native_point(self, geometry, x, y, label):
+        """Scroll the parent using a real wheel over a verified parent surface.
+
+        In portrait the running iframe can cover (1,1), so wheeling there is
+        delivered to Godot and consumed. Never target a fixed browser corner.
+        """
+        viewport = self.page.viewport_size
+        for attempt in range(3):
+            geo = geometry()
+            px, py = canvas_point(geo, x, y)
+            if 8 <= py <= viewport['height'] - 8:
+                return geo, px, py
+            surface = self.page.evaluate('''() => {
+                const ys=[innerHeight-16,16,innerHeight/2];
+                for(let y=32;y<innerHeight-16;y+=32) ys.push(y);
+                for(const y of ys) for(const x of [innerWidth/2,8,innerWidth-8]) {
+                    const node=document.elementFromPoint(x,y);
+                    if(!node || node.closest('iframe,video,audio,canvas,input,textarea,select,[contenteditable=true]')) continue;
+                    let nested=false;
+                    for(let p=node;p && p!==document.body && p!==document.documentElement;p=p.parentElement) {
+                        if(/auto|scroll/.test(getComputedStyle(p).overflowY) && p.scrollHeight>p.clientHeight+1) {nested=true;break;}
+                    }
+                    if(!nested) return {x,y,tag:node.tagName,scrollY};
+                }
+                return null;
+            }''')
+            require(surface is not None, 'No unobscured parent-page surface for physical scrolling')
+            delta = py - viewport['height'] / 2
+            self.page.mouse.move(surface['x'], surface['y'])
+            self.page.mouse.wheel(0, delta)
+            self.wait(lambda: abs(geometry()['y'] - geo['y']) > .5,
+                      'Physical wheel did not scroll the parent page', 5)
+            self.page.wait_for_timeout(200)
+            after = geometry()
+            self.result['events'].append({'type': 'mouse.wheel', 'stage': label,
+                'target': 'observed non-embedded parent surface', 'surface': surface,
+                'delta_y': delta, 'canvas_before': geo, 'canvas_after': after,
+                'attempt': attempt + 1})
+        geo = geometry()
+        px, py = canvas_point(geo, x, y)
+        require(8 <= py <= viewport['height'] - 8,
+                'Native control remains outside viewport after physical parent scrolling')
+        return geo, px, py
+
     def native_plan(self, frame, boundary, label):
         self.progress(label + '-engine', 'waiting-for-rendered-frame')
         self.line('DAWNKEEP_FRAME_READY', boundary)
@@ -515,15 +559,8 @@ class Session:
             return {**box, **local}
 
         def click(x, y):
-            geo = geometry()
-            px, py = canvas_point(geo, x, y)
+            geo, px, py = self.reveal_native_point(geometry, x, y, label)
             viewport = self.page.viewport_size
-            if not 8 <= py <= viewport['height'] - 8:
-                self.page.mouse.move(1, 1)
-                self.page.mouse.wheel(0, py - viewport['height'] / 2)
-                self.page.wait_for_timeout(200)
-                geo = geometry()
-                px, py = canvas_point(geo, x, y)
             require(0 <= px < viewport['width'] and 0 <= py < viewport['height'], 'Actual native input is outside browser viewport')
             local = {'x': geo['left'] + x * geo['width'] / geo['pixel_width'],
                      'y': geo['top'] + y * geo['height'] / geo['pixel_height']}
@@ -650,6 +687,31 @@ class Session:
         self.click('[data-game-exit]')
         self.result['checks'].append({'name': 'actual gallery Start gesture opened native game', 'passed': True})
 
+    def case_viewport_fit(self, frame):
+        observed = self.page.evaluate('''() => {
+            const section=document.querySelector('[data-playable]');
+            const rect=n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};
+            return {width:innerWidth,height:innerHeight,open:section.dataset.playOpen,
+                actions:rect(section.querySelector('.playable-actions')),
+                exit:rect(section.querySelector('[data-play-exit]')),
+                frame:rect(section.querySelector('iframe'))};
+        }''')
+        require(observed['open'] == 'true', 'Dawnkeep case did not enable viewport-fit controls')
+        for key in ('actions', 'exit', 'frame'):
+            rect = observed[key]
+            require(rect['x'] >= -1 and rect['y'] >= -1
+                    and rect['right'] <= observed['width'] + 1 and rect['bottom'] <= observed['height'] + 1,
+                    'Case ' + key + ' is not wholly reachable in the actual viewport: ' + json.dumps(observed))
+        require(observed['exit']['height'] >= 44 and observed['exit']['width'] >= 44,
+                'Case Exit lacks a 44px touch target')
+        require(observed['actions']['bottom'] <= observed['frame']['y'] + 1,
+                'Case toolbar overlaps the native iframe')
+        box = frame.locator('#canvas').bounding_box()
+        require(box is not None and box['y'] >= observed['actions']['bottom']
+                and box['y'] + box['height'] <= observed['height'] + 1,
+                'Case native canvas is clipped outside its reachable toolbar')
+        self.result['checks'].append({'name': 'case viewport-fit native canvas and 44px Exit', 'observed': observed})
+
     def case_page(self):
         from playwright.sync_api import expect
         boundary = len(self.requests)
@@ -715,13 +777,27 @@ class Session:
         self.click('[data-play-start]')
         frame = self.embedded_frame('[data-play-frame] iframe')
         plan = self.native_plan(frame, boundary, 'case-embed')
+        self.case_viewport_fit(frame)
+        input_boundary = len(self.result['events'])
         state = plan.current()
         require('start' in state['ui']['controls'], 'Case embed did not expose native start')
         plan.tap('start')
         plan.wait(lambda s: 'start' not in s['ui']['controls'], 'case embed native start', state['sample_id'])
         before = plan.tap('language')
         plan.wait(lambda s: s['language'] != before['language'], 'case embed native language', before['sample_id'])
+        self.case_viewport_fit(frame)
+        require(not any(event['type'] == 'mouse.wheel' for event in self.result['events'][input_boundary:]),
+                'Viewport-fit case input unexpectedly required an outside scrolling escape')
         self.shot('case-native', plan.current())
+        boundary = len(self.console)
+        self.click('#dawnkeep-web-fullscreen', frame)
+        fullscreen = self.line('DAWNKEEP_WEB_FULLSCREEN', boundary, 15)
+        require(fullscreen.get('active') is True and fullscreen.get('trusted') is True,
+                'Case native fullscreen did not engage through a real control')
+        self.click('#dawnkeep-web-fullscreen', frame)
+        self.wait(lambda: self.page.evaluate('!document.fullscreenElement'), 'Case native fullscreen did not exit', 15)
+        self.case_viewport_fit(frame)
+        self.result['checks'].append({'name': 'case reachable native fullscreen and exit', 'passed': True})
         self.click('[data-play-exit]')
         expect(self.page.locator('[data-play-frame] iframe')).to_have_count(0)
         self.layout('case after embed')

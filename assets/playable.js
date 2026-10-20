@@ -9,6 +9,15 @@
     const holder = section.querySelector("[data-play-frame]");
     const status = section.querySelector("[data-play-status]");
     const standalone = section.querySelector("[data-play-link]");
+    const actions = section.querySelector(".playable-actions");
+    const viewportFit = section.dataset.playCase === "dawnkeep-defense";
+    let stopFit = null;
+    const fitFrame = frame => {
+      const viewport = Math.min(window.innerHeight, window.visualViewport?.height || window.innerHeight);
+      frame.style.height = Math.max(160, Math.floor(viewport - actions.getBoundingClientRect().height - 24)) + "px";
+      frame.style.maxHeight = "none";
+      frame.style.minHeight = "0";
+    };
     const destination = new URL(start.dataset.playUrl, window.location.href);
     if (destination.origin !== window.location.origin) return;
     destination.searchParams.set("lang", zh ? "zh" : "en");
@@ -17,6 +26,7 @@
     window.addEventListener('message', event => {
       const frame=holder.querySelector('iframe');
       if(!frame || event.source!==frame.contentWindow || event.origin!==destination.origin || event.data?.type!=='showcase:resize')return;
+      if(viewportFit){fitFrame(frame);return;}
       const height=event.data.height;
       if(Number.isInteger(height) && height>=160 && height<=10000){const border=frame.offsetHeight-frame.clientHeight;frame.style.height=Math.ceil(height+border)+'px';frame.style.maxHeight='none';}
     });
@@ -32,9 +42,27 @@
       start.hidden = true;
       exit.hidden = false;
       status.textContent = labels.opened;
-      frame.focus();
+      if (viewportFit) {
+        section.dataset.playOpen = "true";
+        const fit = () => fitFrame(frame);
+        fit();
+        window.addEventListener("resize", fit);
+        window.visualViewport?.addEventListener("resize", fit);
+        const observer = window.ResizeObserver ? new window.ResizeObserver(fit) : null;
+        observer?.observe(actions);
+        stopFit = () => {
+          window.removeEventListener("resize", fit);
+          window.visualViewport?.removeEventListener("resize", fit);
+          observer?.disconnect();
+        };
+        actions.scrollIntoView({block: "start", behavior: "instant"});
+        frame.focus({preventScroll: true});
+      } else frame.focus();
     });
     exit.addEventListener("click", () => {
+      stopFit?.();
+      stopFit = null;
+      delete section.dataset.playOpen;
       holder.replaceChildren();
       exit.hidden = true;
       start.hidden = false;

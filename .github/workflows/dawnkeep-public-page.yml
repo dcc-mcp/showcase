@@ -12,6 +12,7 @@ on:
       - 'scripts/test_media_ranges.py'
       - 'scripts/games.py'
       - 'scripts/playable.py'
+      - 'scripts/test_playable_runtime.js'
       - 'scripts/asset_versions.py'
       - 'scripts/localization.py'
       - 'scripts/godot_web/dawnkeep/ci/**'
@@ -78,6 +79,7 @@ jobs:
         run: |
           python -m unittest discover -s "$RECIPE" -p 'test_public_page.py' -v
           python scripts/test_media_ranges.py
+          node scripts/test_playable_runtime.js
       - name: Verify completed Pages deployment for the requested source
         if: github.event_name == 'workflow_dispatch'
         env:

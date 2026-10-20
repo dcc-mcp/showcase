@@ -333,6 +333,48 @@ class NativeMediaAndProgressTests(unittest.TestCase):
         session.context.close.assert_called_once()
 
 
+class ParentScrollTests(unittest.TestCase):
+    def make_session(self):
+        session = object.__new__(gate.Session)
+        session.page = Mock()
+        session.page.viewport_size = {'width': 390, 'height': 844}
+        session.result = {'events': []}
+        session.wait = lambda predicate, label, seconds: self.assertTrue(predicate(), label)
+        return session
+
+    def test_visible_target_does_not_scroll(self):
+        session = self.make_session()
+        geo = {'x': 1, 'y': 100, 'width': 388, 'height': 671, 'pixel_width': 388, 'pixel_height': 671}
+        observed, px, py = session.reveal_native_point(lambda: geo, 294, 40, 'case')
+        self.assertEqual((px, py), (295, 140))
+        session.page.mouse.wheel.assert_not_called()
+
+    def test_offscreen_header_uses_observed_parent_surface_not_iframe_corner(self):
+        session = self.make_session()
+        before = {'x': 1, 'y': -101.1875, 'width': 388, 'height': 671, 'pixel_width': 388, 'pixel_height': 671}
+        after = {**before, 'y': 382}
+        session.page.evaluate.return_value = {'x': 195, 'y': 640, 'tag': 'SECTION', 'scrollY': 1500}
+        states = iter((before, after, after, after))
+        observed, px, py = session.reveal_native_point(lambda: next(states), 294, 40, 'case')
+        session.page.mouse.move.assert_called_once_with(195, 640)
+        session.page.mouse.wheel.assert_called_once_with(0, -483.1875)
+        self.assertEqual((px, py), (295, 422))
+        self.assertEqual(session.result['events'][0]['canvas_after'], after)
+        script = session.page.evaluate.call_args.args[0]
+        self.assertIn('document.elementFromPoint', script)
+        self.assertIn('iframe,video,audio,canvas', script)
+        self.assertNotIn('scrollTo', script)
+        self.assertNotIn('scrollBy', script)
+
+    def test_no_parent_surface_fails_before_pointer_input(self):
+        session = self.make_session()
+        geo = {'x': 1, 'y': -101, 'width': 388, 'height': 671, 'pixel_width': 388, 'pixel_height': 671}
+        session.page.evaluate.return_value = None
+        with self.assertRaisesRegex(RuntimeError, 'No unobscured parent'):
+            session.reveal_native_point(lambda: geo, 294, 40, 'case')
+        session.page.mouse.wheel.assert_not_called()
+
+
 class BrowserPolicyTests(unittest.TestCase):
     def test_launch_keeps_browser_security_and_no_fallback_binary(self):
         self.assertEqual(gate.BROWSER_ARGS, ['--disable-dev-shm-usage'])
@@ -392,6 +434,20 @@ class BrowserPolicyTests(unittest.TestCase):
         self.assertIn("'DAWNKEEP_WEB_LOAD_ERROR'", source)
         self.assertIn("'load_error_receipts': load_error_logs", source)
         self.assertIn('self.healthy()', source)
+
+    def test_case_ux_requires_whole_canvas_reachable_exit_and_no_scroll_escape(self):
+        source = Path(gate.__file__).read_text()
+        tree = ast.parse(source)
+        method = next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == 'case_page')
+        case = ast.unparse(method)
+        self.assertGreaterEqual(case.count('self.case_viewport_fit(frame)'), 3)
+        self.assertIn("event['type'] == 'mouse.wheel'", case)
+        self.assertIn("self.click('#dawnkeep-web-fullscreen', frame)", case)
+        self.assertIn("self.click('[data-play-exit]')", case)
+        layout = next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == 'case_viewport_fit')
+        self.assertIn("observed['exit']['height'] >= 44", ast.unparse(layout))
+        workflow = (gate.ROOT / '.github/workflows/dawnkeep-public-page.yml').read_text()
+        self.assertIn('node scripts/test_playable_runtime.js', workflow)
 
     def test_workflow_has_separate_exact_head_build_and_live_without_rebuild(self):
         workflow = (gate.ROOT / '.github/workflows/dawnkeep-public-page.yml').read_text()
