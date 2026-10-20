@@ -233,7 +233,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends xvfb libgl1-mesa-dri fonts-dejavu-core
+          sudo apt-get install --yes --no-install-recommends xvfb libgl1-mesa-dri mesa-vulkan-drivers fonts-dejavu-core
           python -m pip install 'dcc-mcp-godot==0.9.6' 'dcc-mcp-core==0.20.42' 'numpy==2.3.5' 'Pillow==13.0.0'
           curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip -o "$RUNNER_TEMP/tidal-consumer-godot.zip"
           echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/tidal-consumer-godot.zip" | sha256sum -c -

@@ -76,6 +76,18 @@ def finite(value):
         for v in value.values():finite(v)
     elif isinstance(value,list):
         for v in value:finite(v)
+def wait_import_idle(boundary,types):
+    deadline=time.monotonic()+90;previous=None
+    while True:
+        sample,idle=editor_idle_sample(call('execute_editor_script',{'path':'res://scan_probe.gd','method':'inspect','arguments':{'paths':list(types)},'budget_ms':50,'chunked':False}),types)
+        if idle and previous is not None and sample['process_frame']>=previous['process_frame']+2:
+            (OUT/(boundary+'-import-idle.json')).write_text(json.dumps({'expected_types':types,'samples':[previous,sample]},indent=2))
+            return
+        if not idle:previous=None
+        elif previous is None:previous=sample
+        assert editor.poll() is None and time.monotonic()<deadline,'Import scan timeout: '+boundary
+        time.sleep(.3)
+
 try:
     # Exact owned virtual display allocation, no global display or existing window mutation.
     readfd,writefd=os.pipe()
@@ -92,14 +104,11 @@ try:
     while not get_bridge().is_connected():
         assert editor.poll() is None and time.monotonic()<deadline,'Editor bridge not ready';time.sleep(.25)
     inventory();call('load_skill',{'skill_names':['godot-script','godot-editor']});inventory()
+    initial_types={'res://scan_probe.gd':'GDScript',**{f'res://assets/{v}/{n}.glb':'PackedScene' for v in ['old','new'] for n in names}}
+    wait_import_idle('before-create-script',initial_types)
     call('create_script',{'path':'res://asset_consumer.gd','source':(ROOT/'godot_asset_consumer.gd').read_text(),'overwrite':False})
     types={'res://asset_consumer.gd':'GDScript',**{f'res://assets/{v}/{n}.glb':'PackedScene' for v in ['old','new'] for n in names}}
-    deadline=time.monotonic()+90;previous=None
-    while True:
-        sample,idle=editor_idle_sample(call('execute_editor_script',{'path':'res://scan_probe.gd','method':'inspect','arguments':{'paths':list(types)},'budget_ms':50,'chunked':False}),types)
-        if idle and previous is not None and sample['process_frame']>previous:break
-        previous=sample['process_frame'] if idle else None
-        assert editor.poll() is None and time.monotonic()<deadline,'Import scan timeout';time.sleep(.3)
+    wait_import_idle('after-create-script',types)
     samples=[];bounds={}
     for variant in ['old','new']:
         for clip in ['Idle','Walk','Swim']:
