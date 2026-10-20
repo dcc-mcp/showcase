@@ -51,7 +51,7 @@ def local(root, value):
     if not isinstance(value, str) or not value or '\\' in value or ':' in value or any(ord(c) < 32 for c in value):
         raise ValueError('invalid repository path')
     p = Path(value)
-    if p.is_absolute() or any(x in ('.', '..') or x.startswith('.') for x in value.split('/')):
+    if p.is_absolute() or any(x in ('', '.', '..') or x.startswith('.') for x in value.split('/')):
         raise ValueError('unsafe repository path')
     target = (root / p).resolve()
     if not target.is_relative_to(root.resolve()) or not target.is_file():

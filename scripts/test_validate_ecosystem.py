@@ -44,6 +44,18 @@ class GateTests(unittest.TestCase):
         workflow = (Path(__file__).resolve().parents[1]/'.github/workflows/pages.yml').read_text()
         self.assertLess(workflow.index('python scripts/validate_ecosystem.py'), workflow.index('actions/upload-pages-artifact'))
         self.assertNotIn('continue-on-error', workflow)
+    def test_pages_materializes_pinned_runtime_before_provenance(self):
+        workflow = (Path(__file__).resolve().parents[1]/'.github/workflows/pages.yml').read_text()
+        self.assertLess(workflow.index('python scripts/godot_web/materialize_runtime.py'), workflow.index('python scripts/validate_ecosystem.py'))
+        self.assertLess(workflow.index('python scripts/validate_ecosystem.py'), workflow.index('python scripts/build_site.py'))
+    def test_repeated_slash_rejected_as_same_file_alias(self):
+        alias = {**self.output, 'path': self.output['path'].replace('/fixture/', '//fixture/')}
+        with self.assertRaises(ValueError): gate.ref(self.root, alias)
+    def test_alias_cannot_hide_self_input_as_external_source(self):
+        alias = {**self.output, 'path': self.output['path'].replace('/fixture/', '//fixture/')}
+        self.record['external_sources'] = [{**alias, 'origin': 'synthetic adversarial alias', 'license': 'synthetic'}]
+        self.record['stages'][0]['inputs'] = [alias]
+        self.refresh(); self.assertTrue(gate.validate(self.root))
     def test_missing_record_blocks_legacy_too(self):
         (self.base/'ecosystem-production.json').unlink(); self.assertTrue(gate.validate(self.root))
     def test_each_native_route_blocks(self):
