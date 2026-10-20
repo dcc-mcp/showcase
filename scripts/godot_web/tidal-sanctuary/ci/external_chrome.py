@@ -1,4 +1,4 @@
-"""Task-owned headed Chrome with Playwright's supported no-default-overrides attach.
+"""Task-owned standard Chrome with Playwright's supported no-default-overrides attach.
 
 Never attach to an existing user profile or create an overridden new context.
 The caller verifies the official executable and supplies an outer process deadline.
@@ -142,15 +142,18 @@ class OwnedChromeProfile:
 
 
 @contextmanager
-def external_chrome(pw, executable_path, *, report, timeout=5, profile=None):
+def external_chrome(pw, executable_path, *, report, timeout=5, profile=None, headed=True):
     """Yield (browser, default_context); report startup and owned-process cleanup.
 
-    Headed only. No sandbox-disabling switches, focus override, visibility override,
+    Headed by default; headed=False adds only the standard --headless mode.
+    No sandbox-disabling switches, focus override, visibility override,
     private Playwright API, existing profile, or new browser context is used.
     Caller must not close the default context before taking all required evidence.
     """
     deadline = _budget(timeout)
-    if not os.environ.get("DISPLAY"):
+    if type(headed) is not bool:
+        raise ValueError("Chrome headed mode must be explicit boolean")
+    if headed and not os.environ.get("DISPLAY"):
         raise RuntimeError("Task-owned headed Chrome requires the provisioned Xvfb DISPLAY")
     executable = Path(executable_path).resolve(strict=True)
     if not executable.is_file() or not os.access(executable, os.X_OK):
@@ -165,7 +168,10 @@ def external_chrome(pw, executable_path, *, report, timeout=5, profile=None):
                      "--no-first-run", "--no-default-browser-check", "--enable-automation",
                      "--disable-dev-shm-usage", "--disable-background-timer-throttling",
                      "--window-size=1288,805", "about:blank"]
-        report.update({"method": "task-owned headed Chrome; public connect_over_cdp(no_defaults=True)",
+        if not headed:
+            arguments.insert(1, "--headless")
+        report.update({"method": "task-owned standard Chrome; public connect_over_cdp(no_defaults=True)",
+                       "headed": headed, "mode": "headed" if headed else "standard-headless",
                        "arguments": arguments, "default_context_only": True, "connected": False})
         try:
             # File-backed output avoids a full pipe blocking Chrome; retained in

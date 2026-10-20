@@ -27,6 +27,33 @@ class ExternalChromeTests(unittest.TestCase):
                 with self.assertRaises(RuntimeError):
                     _read_endpoint(path)
 
+    def test_standard_headless_needs_no_display_and_adds_only_mode_flag(self):
+        browser = SimpleNamespace(contexts=[object()])
+        pw = SimpleNamespace(chromium=SimpleNamespace(connect_over_cdp=Mock(return_value=browser)))
+        report = {}
+        with patch.dict(os.environ, {}, clear=True), patch('external_chrome.subprocess.Popen', side_effect=self.fake_process):
+            with external_chrome(pw, '/bin/true', report=report, headed=False):
+                pass
+        self.assertEqual(self.arguments.count('--headless'), 1)
+        self.assertEqual(report['mode'], 'standard-headless')
+        self.assertFalse(report['headed'])
+        for forbidden in ('--use-gl', '--use-angle', '--enable-gpu', '--disable-gpu',
+                          '--ignore-gpu-blocklist', '--enable-unsafe-swiftshader', '--ozone-platform',
+                          '--no-sandbox', '--disable-web-security'):
+            self.assertFalse(any(arg.split('=')[0] == forbidden for arg in self.arguments))
+        allowed = {'--headless', '--user-data-dir', '--remote-debugging-address', '--remote-debugging-port',
+                   '--no-first-run', '--no-default-browser-check', '--enable-automation',
+                   '--disable-dev-shm-usage', '--disable-background-timer-throttling', '--window-size'}
+        self.assertEqual({arg.split('=')[0] for arg in self.arguments if arg.startswith('--')}, allowed)
+
+    def test_headed_mode_requires_explicit_boolean_before_spawn(self):
+        for value in (None, 0, 1, 'false'):
+            with patch('external_chrome.subprocess.Popen') as spawn:
+                with self.assertRaises(ValueError):
+                    with external_chrome(None, '/bin/true', report={}, headed=value):
+                        pass
+                spawn.assert_not_called()
+
     def test_no_display_fails_before_spawn(self):
         with patch.dict(os.environ, {}, clear=True), patch('external_chrome.subprocess.Popen') as spawn:
             with self.assertRaises(RuntimeError):
@@ -58,6 +85,9 @@ class ExternalChromeTests(unittest.TestCase):
                 self.assertTrue(self.profile.exists())
         self.assertFalse(self.profile.exists())
         self.assertFalse(self.spawn_kwargs['start_new_session'])
+        self.assertNotIn('--headless', self.arguments)
+        self.assertEqual(report['mode'], 'headed')
+        self.assertTrue(report['headed'])
         self.assertTrue(connect.call_args.kwargs['no_defaults'])
         self.assertGreater(connect.call_args.kwargs['timeout'], 0)
         self.assertIn('--remote-debugging-address=127.0.0.1', self.arguments)

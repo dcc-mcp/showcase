@@ -13,6 +13,13 @@ on:
         description: 'Only probe external Chrome no-defaults audio; NOT full game acceptance'
         type: boolean
         default: false
+      probe_mode:
+        description: 'Explicit isolated browser mode; never changes full acceptance'
+        type: choice
+        options:
+          - headed
+          - standard-headless
+        default: headed
 concurrency:
   group: tidal-sanctuary-${{ github.event.pull_request.number || github.ref }}-${{ inputs.smoke_only || false }}
   cancel-in-progress: true
@@ -179,11 +186,18 @@ jobs:
           python -m playwright install-deps chromium
           command -v xvfb-run
           command -v xauth
-      - name: Probe genuine hidden-tab audio with no default overrides
+      - name: Probe genuine hidden-tab audio and WebGL2 with no default overrides
         timeout-minutes: 1
+        env:
+          PROBE_MODE: ${{ inputs.probe_mode }}
         run: |
           set -euo pipefail
-          xvfb-run -a -s '-screen 0 1600x1200x24 -nolisten tcp' python "$RECIPE/ci/check_audio_observer_browser.py" --headed --no-defaults \
+          case "$PROBE_MODE" in
+            headed) mode_flags=(--headed) ;;
+            standard-headless) mode_flags=(--standard-headless) ;;
+            *) echo "Unsupported explicit probe mode" >&2; exit 1 ;;
+          esac
+          xvfb-run -a -s '-screen 0 1600x1200x24 -nolisten tcp' python "$RECIPE/ci/check_audio_observer_browser.py" "${mode_flags[@]}" --no-defaults --require-webgl2 \
             --chromium /opt/google/chrome/chrome --source "$RECIPE/game" \
             --output "$RUNNER_TEMP/tidal-audio-observer"
       - name: Preserve partial audio-only evidence

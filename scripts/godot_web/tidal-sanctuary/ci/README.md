@@ -308,3 +308,23 @@ unfocused desktop sample-density limitation is not erased by hidden-tab evidence
 
 The preceding audio-only smoke also requests normal `Browser.close` and verifies
 exit 0 within its unchanged 30-second total budget, before the costly full route.
+
+
+### Isolated standard-headless graphics probe, pending validation
+
+Full `ede1a39` run `39371085138` passed the original-audio smoke including
+normal Chrome exit, typed authoring, native gameplay and export. Both Web viewports
+then failed before the first game frame: headed X11 Chrome reported WebGL2
+blocklisted. No Web gameplay, hidden-game lifecycle or fresh-process restoration
+passed on that head. This is distinct from the passed isolated audio fixture.
+
+A separate manual `smoke_only=true, probe_mode=standard-headless` probe adds only
+standard Chrome `--headless` to the same public no-defaults owned-profile path.
+Chrome itself selects its documented default headless graphics configuration;
+the harness does not set ANGLE/GPU overrides, ignore blocklists, disable sandbox
+or enable unsafe SwiftShader. A tiny actual WebGL2 clear/readback must return the
+requested pixel before any audio input. Trusted same-window hidden/visible and
+focus transitions, actual PCM, suspended clock/gains/sources, normal close and
+27/30-second budgets remain required. This mode is explicit, never a fallback.
+The ordinary full workflow remains unchanged until this isolated route is proven.
+Neither a one-pixel result nor headless software rendering proves device/GPU FPS.

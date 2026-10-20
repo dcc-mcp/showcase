@@ -54,6 +54,26 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
                 with self.assertRaises((ValueError, FileNotFoundError)):
                     smoke.fixture_resources(source)
 
+    def test_optional_graphics_fixture_is_real_webgl2_not_audio_activation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            source=self.source(Path(temporary))
+            resources,_=smoke.fixture_resources(source, graphics_probe=True)
+            html=resources["/"][0].decode()
+            self.assertIn("getContext('webgl2')",html)
+            self.assertIn("gl.readPixels(0,0,1,1",html)
+            self.assertNotIn("AudioContext",html)
+            self.assertNotIn("resume(",html)
+            self.assertEqual(html.count("<button "),4)
+
+    def test_webgl2_probe_requires_actual_valid_pixel_and_context(self):
+        good={"available":True,"version":"WebGL 2.0 fixture","pixel":[51,102,153,255],"error":0,"context_lost":False}
+        self.assertEqual(smoke.validate_graphics_probe(good),good)
+        for bad in ({}, {**good,"available":False}, {**good,"pixel":[0,0,0,0]},
+                {**good,"version":"WebGL 1.0"}, {**good,"error":1280}, {**good,"context_lost":True},
+                {**good,"pixel":[True,102,153,255]}):
+            with self.subTest(bad=bad),self.assertRaises(ValueError):
+                smoke.validate_graphics_probe(bad)
+
     def test_report_write_is_complete_and_does_not_leave_a_partial_receipt(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary)
@@ -104,9 +124,11 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
             with patch.object(smoke.subprocess, "Popen", return_value=process) as launch, \
                     patch.object(smoke.os, "killpg") as kill, contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(smoke.supervise(Path("/chrome"), Path("/source"), output,
-                    headed=True, no_defaults=True), 0)
+                    standard_headless=True, no_defaults=True, require_webgl2=True), 0)
             self.assertIn("--no-defaults", launch.call_args.args[0])
-            self.assertIn("--headed", launch.call_args.args[0])
+            self.assertIn("--standard-headless", launch.call_args.args[0])
+            self.assertIn("--require-webgl2", launch.call_args.args[0])
+            self.assertNotIn("--headed", launch.call_args.args[0])
             kill.assert_called_once_with(1234, signal.SIGKILL)
 
     def test_failed_owned_descendant_cleanup_cannot_qualify_probe(self):
@@ -354,8 +376,9 @@ class RealTargetFocusFixtures(unittest.TestCase):
     def test_smoke_preserves_ceiling_and_uses_real_target_with_strict_audio_proofs(self):
         source = Path(smoke.__file__).read_text()
         self.assertEqual(smoke.MAX_SECONDS,30); self.assertEqual(smoke.WORK_SECONDS,27)
-        self.assertIn('focus.switch_to(other, False, require_hidden_lifecycle=headed)',source)
-        self.assertIn('focus.switch_to(page, True, require_hidden_lifecycle=headed)',source)
+        self.assertIn('hidden_required = headed or standard_headless',source)
+        self.assertIn('focus.switch_to(other, False, require_hidden_lifecycle=hidden_required)',source)
+        self.assertIn('focus.switch_to(page, True, require_hidden_lifecycle=hidden_required)',source)
         self.assertIn('validate_focus_suspension(focus_before, away, returned',source)
         self.assertIn('resume_mark["wall_ms"], returned["wall_ms"], 1.2, True',source)
         self.assertNotIn('dispatchEvent(',source)

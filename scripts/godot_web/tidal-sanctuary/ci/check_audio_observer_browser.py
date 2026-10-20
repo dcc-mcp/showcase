@@ -30,7 +30,7 @@ AUDIO_FILES = {
 SCOPE = ("Real sandboxed Chrome, original Web audio backend/assets, real browser mouse events and actual "
          "same-context AudioWorklet PCM. Audio-only observer smoke; no Godot gameplay, FPS, full-loop, "
          "physical-speaker or subjective listening acceptance. Browser target window focus only; "
-         "hidden-tab visibility only when explicit headed mode passes; OS/application focus is not established.")
+         "hidden-tab visibility only when the explicit headed or standard-headless probe passes; OS/application focus is not established.")
 
 
 def file_hash(path):
@@ -47,7 +47,7 @@ def save_report(output, report):
     temporary.replace(output / "receipt.json")
 
 
-def fixture_resources(source):
+def fixture_resources(source, graphics_probe=False):
     """Serve only the unchanged backend and five explicitly owned audio files."""
     source = source.resolve(strict=True)
     paths = {"/web_audio.js": source / "web_audio.js"}
@@ -64,16 +64,39 @@ def fixture_resources(source):
         resources[url] = (data, content_type)
         hashes[url.lstrip("/")] = {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
     assets = {name: "/assets/audio/" + filename for name, filename in AUDIO_FILES.items()}
+    graphics_script = """<script>
+    window.__tidalGraphics = (() => {
+      const canvas = document.createElement('canvas'); canvas.width=canvas.height=1;
+      const gl=canvas.getContext('webgl2'); if (!gl) return {available:false};
+      gl.clearColor(.2,.4,.6,1); gl.clear(gl.COLOR_BUFFER_BIT);
+      const pixel=new Uint8Array(4); gl.readPixels(0,0,1,1,gl.RGBA,gl.UNSIGNED_BYTE,pixel);
+      const debug=gl.getExtension('WEBGL_debug_renderer_info');
+      return {available:true,version:gl.getParameter(gl.VERSION),renderer:gl.getParameter(gl.RENDERER),
+        unmasked_renderer:debug?gl.getParameter(debug.UNMASKED_RENDERER_WEBGL):null,
+        pixel:Array.from(pixel),error:gl.getError(),context_lost:gl.isContextLost()};
+    })();</script>""" if graphics_probe else ""
     html = ("<!doctype html><html><head><meta charset='utf-8'><title>Audio observer smoke</title></head><body>"
             "<button id='begin' onclick=\"TidalWebAudio.start('observer_fixture_button')\">Begin</button>"
             "<button id='mute' onclick='TidalWebAudio.setMuted(true)'>Mute</button>"
             "<button id='unmute' onclick='TidalWebAudio.setMuted(false)'>Unmute</button>"
             "<button id='cue' onclick='TidalWebAudio.playCue(0)'>Chart cue</button>"
             "<script src='/web_audio.js'></script><script>window.prepared=TidalWebAudio.initialize("
-            + json.dumps(assets) + ");</script></body></html>").encode()
+            + json.dumps(assets) + ");</script>" + graphics_script + "</body></html>").encode()
     resources["/"] = (html, "text/html; charset=utf-8")
     hashes["fixture.html"] = {"sha256": hashlib.sha256(html).hexdigest(), "bytes": len(html)}
     return resources, hashes
+
+
+def validate_graphics_probe(value):
+    if not isinstance(value, dict) or value.get("available") is not True:
+        raise ValueError("Actual browser WebGL2 is unavailable; no GPU fallback or blocklist override")
+    pixel=value.get("pixel")
+    if (value.get("context_lost") is not False or value.get("error") != 0
+            or not isinstance(value.get("version"), str) or not value["version"].startswith("WebGL 2.0")
+            or not isinstance(pixel, list) or len(pixel) != 4
+            or any(type(v) is not int or abs(v-e)>1 for v,e in zip(pixel,[51,102,153,255]))):
+        raise ValueError("Actual WebGL2 clear/readback did not produce the requested pixel")
+    return value
 
 
 def handler_for(resources):
@@ -97,7 +120,7 @@ def handler_for(resources):
     return Handler
 
 
-def worker(chromium, source, output, headed=False, no_defaults=False):
+def worker(chromium, source, output, headed=False, no_defaults=False, standard_headless=False, require_webgl2=False):
     # Imports and browser work run inside the supervising process's 27-second
     # budget. A stuck CDP/native call cannot extend the total 30-second ceiling.
     report = {"schema": 1, "scope": SCOPE, "passed": False, "status": "running", "stage": "imports", "checks": []}
@@ -140,13 +163,16 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
             page.locator(selector).click(timeout=3000)
             report.setdefault("mouse_inputs", []).append({"selector": selector, "method": "Playwright browser mouse click"})
 
-        if no_defaults and not headed:
-            raise ValueError("No-defaults probe requires explicit headed mode")
+        if standard_headless and (headed or not no_defaults):
+            raise ValueError("Standard-headless probe requires no-defaults and excludes headed mode")
+        if no_defaults and not (headed or standard_headless):
+            raise ValueError("No-defaults probe requires an explicit browser mode")
+        hidden_required = headed or standard_headless
         report["playwright_version"] = importlib.metadata.version("playwright")
         if report["playwright_version"] != "1.63.0":
             raise RuntimeError("Audio smoke requires pinned Playwright 1.63.0")
         stage("verify-original-source-and-browser")
-        resources, report["original_source"] = fixture_resources(source)
+        resources, report["original_source"] = fixture_resources(source, graphics_probe=require_webgl2)
         report["browser"] = browser_executable(chromium)
         if not report["browser"]["executable_version"].startswith("Google Chrome"):
             raise ValueError("Hosted smoke requires the explicitly selected standard Google Chrome")
@@ -169,7 +195,7 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
                 report["external_chrome"] = {}
                 owned_profile = owned.enter_context(OwnedChromeProfile())
                 browser, context = owned.enter_context(external_chrome(pw,
-                    report["browser"]["executable_path"], report=report["external_chrome"], profile=owned_profile, timeout=5))
+                    report["browser"]["executable_path"], report=report["external_chrome"], profile=owned_profile, timeout=5, headed=headed))
             else:
                 browser = pw.chromium.launch(headless=not headed, executable_path=report["browser"]["executable_path"],
                     chromium_sandbox=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, timeout=5000)
@@ -177,13 +203,13 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
             report["browser"]["runtime_version"] = browser.version
             context.add_init_script(script=audio_probe_init_script())
             page = context.new_page()
-            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=headed, defaults_disabled=no_defaults)
+            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=hidden_required, defaults_disabled=no_defaults)
             report["focus_targets"] = focus.report
             page.set_default_timeout(3000)
             # Prepare the companion before loading/starting the game, so its
             # creation cannot add an extra focus cycle during measured audio.
             other = context.new_page()
-            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate, require_hidden=headed, defaults_disabled=no_defaults)
+            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate, require_hidden=hidden_required, defaults_disabled=no_defaults)
             other.goto("about:blank", timeout=3000)
             bounded_cdp(focus.session, "Page.bringToFront", {}, timeout=3)
             session = context.new_cdp_session(page)
@@ -210,9 +236,13 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
                     raise RuntimeError("Original audio fixture did not return HTTP 200")
                 other_focus.settle_after_navigation()
                 focus.settle_after_navigation()
-                if headed:
+                if hidden_required:
                     focus.verify_same_window_tabs(other_focus)
                 wait_focus_state(page, passive_evaluate, True)
+                if require_webgl2:
+                    report["graphics_probe"] = passive_evaluate(page, "() => window.__tidalGraphics")
+                    validate_graphics_probe(report["graphics_probe"])
+                    report["checks"].append({"name":"actual WebGL2 one-pixel clear/readback", "result":report["graphics_probe"]})
                 ready = passive_evaluate(page, "async () => { if (!await prepared) throw Error(TidalWebAudio.getState()); return __tidalAudio.ready(); }")
                 if len(ready.get("streams", [])) != 3 or sorted(item.get("role") for item in ready["streams"]) != ["bus", "bus", "mix"]:
                     raise ValueError("Original graph did not pre-arm exactly one mix and two bus observers")
@@ -276,7 +306,7 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
                 stage("real-target-focus-suspend-and-resume")
                 focus_before = snapshot("focus-before")
                 wait_focus_state(page, passive_evaluate, True)
-                focus.switch_to(other, False, require_hidden_lifecycle=headed)
+                focus.switch_to(other, False, require_hidden_lifecycle=hidden_required)
                 focus_deadline = time.monotonic() + 3
                 while inspect_state().get("context_state") != "suspended":
                     if time.monotonic() >= focus_deadline:
@@ -285,7 +315,7 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
                 away_mark = passive_evaluate(page, "() => __tidalAudio.mark('smoke-focus-away')")
                 page.wait_for_timeout(1400)
                 away = snapshot("focus-away")
-                focus.switch_to(page, True, require_hidden_lifecycle=headed)
+                focus.switch_to(page, True, require_hidden_lifecycle=hidden_required)
                 focus_deadline = time.monotonic() + 3
                 while inspect_state().get("context_state") != "running":
                     if time.monotonic() >= focus_deadline:
@@ -333,7 +363,7 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
     return 0 if report["passed"] else 1
 
 
-def supervise(chromium, source, output, headed=False, no_defaults=False):
+def supervise(chromium, source, output, headed=False, no_defaults=False, standard_headless=False, require_webgl2=False):
     """A separate process group bounds even an unresponsive browser/driver."""
     started = time.monotonic()
     report = {"schema": 1, "scope": SCOPE, "passed": False, "status": "starting", "checks": [], "maximum_seconds": MAX_SECONDS}
@@ -344,6 +374,10 @@ def supervise(chromium, source, output, headed=False, no_defaults=False):
         command.append("--headed")
     if no_defaults:
         command.append("--no-defaults")
+    if standard_headless:
+        command.append("--standard-headless")
+    if require_webgl2:
+        command.append("--require-webgl2")
     timed_out, launch_error, cleanup_error, code = False, None, None, None
     process = None
     with (output / "worker.log").open("wb") as log:
@@ -406,12 +440,14 @@ def main():
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--headed", action="store_true", help="Use explicitly provisioned Xvfb and genuine hidden same-window tabs; no fallback")
     parser.add_argument("--no-defaults", action="store_true", help="Isolated task-owned Chrome default-context probe; not full game acceptance")
+    parser.add_argument("--standard-headless", action="store_true", help="Explicit standard Chrome headless no-defaults probe; no GPU overrides")
+    parser.add_argument("--require-webgl2", action="store_true", help="Require actual one-pixel WebGL2 clear/readback before audio input")
     parser.add_argument("--observer-worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.observer_worker:
-        return worker(args.chromium, args.source, args.output, headed=args.headed, no_defaults=args.no_defaults)
+        return worker(args.chromium, args.source, args.output, headed=args.headed, no_defaults=args.no_defaults, standard_headless=args.standard_headless, require_webgl2=args.require_webgl2)
     output = isolated_output(args.output, args.source)
-    return supervise(args.chromium, args.source, output, headed=args.headed, no_defaults=args.no_defaults)
+    return supervise(args.chromium, args.source, output, headed=args.headed, no_defaults=args.no_defaults, standard_headless=args.standard_headless, require_webgl2=args.require_webgl2)
 
 
 if __name__ == "__main__":
