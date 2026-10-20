@@ -19,8 +19,8 @@ OFFICIAL = 'https://dcc-mcp.github.io'
 LOCALES = {'en': {'lang': 'en', 'label': 'English', 'og': 'en_US', 'prefix': ''},
            'zh': {'lang': 'zh-CN', 'label': '简体中文', 'og': 'zh_CN', 'prefix': 'zh/'}}
 CJK = re.compile('[\u3400-\u9fff]')
-TEXT_ATTRS = {'alt', 'aria-label', 'title', 'placeholder', 'data-dark-alt', 'data-light-alt', 'data-play-label', 'data-stop-label', 'data-error-label', 'data-loading-label', 'data-playing-label'}
-URL_ATTRS = {'href', 'src', 'poster', 'data-dark-src', 'data-light-src', 'data-play-url', 'data-preview-src', 'data-game-url'}
+TEXT_ATTRS = {'data-model-alt', 'alt', 'aria-label', 'title', 'placeholder', 'data-dark-alt', 'data-light-alt', 'data-play-label', 'data-stop-label', 'data-error-label', 'data-loading-label', 'data-playing-label'}
+URL_ATTRS = {'data-model-src', 'href', 'src', 'poster', 'data-dark-src', 'data-light-src', 'data-play-url', 'data-preview-src', 'data-game-url'}
 
 
 def normalize_locale(value):

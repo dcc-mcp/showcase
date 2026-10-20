@@ -1,0 +1,11 @@
+{
+  "name": "@google/model-viewer",
+  "version": "4.4.0",
+  "source": "https://registry.npmjs.org/@google/model-viewer/-/model-viewer-4.4.0.tgz",
+  "source_repository": "https://github.com/google/model-viewer",
+  "license": "Apache-2.0; bundled license notices retained in dist",
+  "sha256": "18b2e711035aa4705ee281530a55dc2338ff05eed3d70ae16d54105282a75ed5",
+  "bytes": 1069272,
+  "modified": false,
+  "runtime_downloads": "None required for approved self-contained GLBs; compression extensions rejected"
+}
