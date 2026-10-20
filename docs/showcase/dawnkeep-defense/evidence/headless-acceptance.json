@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "ci_run": "https://github.com/dcc-mcp/showcase/actions/runs/39285690349",
+  "source_receipt": {
+    "file": "dawnkeep-headless/headless.json",
+    "sha256": "4858f4676d9b3a2d07483a0e33d2b9c5f0a13bb670770f0c73e47a6592ea31f0",
+    "bytes": 36740
+  },
+  "passed": true,
+  "scope": "Headless fixtures and synthetic public-command balance; not real-input, visual, audio or difficulty acceptance",
+  "runs": {
+    "import": {
+      "passed": true,
+      "checks": null
+    },
+    "gameplay": {
+      "passed": true,
+      "checks": 78,
+      "results": [
+        {
+          "name": "initial economy and health",
+          "passed": true
+        },
+        {
+          "name": "real colliding hero body",
+          "passed": true
+        },
+        {
+          "name": "two lanes and twelve fixed pads",
+          "passed": true
+        },
+        {
+          "name": "build requires pad selection",
+          "passed": true
+        },
+        {
+          "name": "sunbow build costs 80",
+          "passed": true
+        },
+        {
+          "name": "occupied pad rejects duplicate build",
+          "passed": true
+        },
+        {
+          "name": "split branch upgrade costs 110",
+          "passed": true
+        },
+        {
+          "name": "branch commitment cannot change",
+          "passed": true
+        },
+        {
+          "name": "selling returns floor 70 percent",
+          "passed": true
+        },
+        {
+          "name": "selling removes simulation tower",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade sunbow/pierce",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats pierce",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade sunbow/volley",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats volley",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade ember/inferno",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats inferno",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade ember/siege",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats siege",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade frost/deepfreeze",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats deepfreeze",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade frost/shatter",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats shatter",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade storm/conduit",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats conduit",
+          "passed": true
+        },
+        {
+          "name": "build and upgrade storm/tempest",
+          "passed": true
+        },
+        {
+          "name": "valid branch stats tempest",
+          "passed": true
+        },
+        {
+          "name": "blade adds 12 damage",
+          "passed": true
+        },
+        {
+          "name": "plate adds max health",
+          "passed": true
+        },
+        {
+          "name": "focus purchase succeeds",
+          "passed": true
+        },
+        {
+          "name": "full health disables potion in shop snapshot",
+          "passed": true
+        },
+        {
+          "name": "full health potion rejected without charge",
+          "passed": true
+        },
+        {
+          "name": "injured hero can buy an affordable potion",
+          "passed": true
+        },
+        {
+          "name": "potion heals 150 for 45 gold",
+          "passed": true
+        },
+        {
+          "name": "Q deals damage and awards kill bounty",
+          "passed": true
+        },
+        {
+          "name": "skill cooldown prevents spam",
+          "passed": true
+        },
+        {
+          "name": "ultimate requires level three",
+          "passed": true
+        },
+        {
+          "name": "experience levels hero and improves attack",
+          "passed": true
+        },
+        {
+          "name": "ultimate schedules three impacts",
+          "passed": true
+        },
+        {
+          "name": "scheduled impacts resolve",
+          "passed": true
+        },
+        {
+          "name": "rally heals and grants finite buff",
+          "passed": true
+        },
+        {
+          "name": "snapshot is deep detached and read only",
+          "passed": true
+        },
+        {
+          "name": "snapshot is JSON serializable",
+          "passed": true
+        },
+        {
+          "name": "first wave queues eleven enemies",
+          "passed": true
+        },
+        {
+          "name": "cannot call wave while spawning",
+          "passed": true
+        },
+        {
+          "name": "finite spawn queue drains deterministically",
+          "passed": true
+        },
+        {
+          "name": "early call unlocks at four surviving enemies",
+          "passed": true
+        },
+        {
+          "name": "early call grants 30 while survivors remain",
+          "passed": true
+        },
+        {
+          "name": "early call does not announce an unfinished previous wave as cleared",
+          "passed": true
+        },
+        {
+          "name": "survivors and queued enemies prevent both completion rewards",
+          "passed": true
+        },
+        {
+          "name": "overlapped wave two earns its own completion reward before wave one",
+          "passed": true
+        },
+        {
+          "name": "older wave survivors keep combat active after newer wave clears",
+          "passed": true
+        },
+        {
+          "name": "rechecking cleared overlapping wave cannot duplicate its reward",
+          "passed": true
+        },
+        {
+          "name": "last wave-one survivors award wave-one completion exactly once",
+          "passed": true
+        },
+        {
+          "name": "all overlapped waves cleared returns to build with no pending rewards",
+          "passed": true
+        },
+        {
+          "name": "build-phase completion recheck cannot pay again",
+          "passed": true
+        },
+        {
+          "name": "a newly started wave has a pending completion reward",
+          "passed": true
+        },
+        {
+          "name": "restart clears pending rewards from the previous run",
+          "passed": true
+        },
+        {
+          "name": "new run receives only its fresh wave-one reward after restart",
+          "passed": true
+        },
+        {
+          "name": "death costs gold and starts respawn",
+          "passed": true
+        },
+        {
+          "name": "dead hero cannot cast or buy",
+          "passed": true
+        },
+        {
+          "name": "hero respawns near core with full health",
+          "passed": true
+        },
+        {
+          "name": "boss enrages below half health",
+          "passed": true
+        },
+        {
+          "name": "boss telegraphs delayed area attack",
+          "passed": true
+        },
+        {
+          "name": "boss reaching core is genuine defeat",
+          "passed": true
+        },
+        {
+          "name": "all final wave enemies cleared gives victory",
+          "passed": true
+        },
+        {
+          "name": "restart clears terminal state",
+          "passed": true
+        },
+        {
+          "name": "pause freezes simulation and commands",
+          "passed": true
+        },
+        {
+          "name": "two times speed is explicit",
+          "passed": true
+        },
+        {
+          "name": "speed clamps to supported values",
+          "passed": true
+        },
+        {
+          "name": "hero is physically blocked by tower cylinder",
+          "passed": true
+        },
+        {
+          "name": "click movement steers around a solid tower",
+          "passed": true
+        },
+        {
+          "name": "tower sale succeeds before collision removal check",
+          "passed": true
+        },
+        {
+          "name": "sold tower no longer blocks the hero",
+          "passed": true
+        },
+        {
+          "name": "box scenery blocks the capsule without penetration",
+          "passed": true
+        },
+        {
+          "name": "diagonal movement slides along box scenery",
+          "passed": true
+        },
+        {
+          "name": "floating hero remains on the gameplay plane",
+          "passed": true
+        },
+        {
+          "name": "building cannot trap hero inside tower",
+          "passed": true
+        },
+        {
+          "name": "visual adapter receives gameplay events",
+          "passed": true
+        }
+      ],
+      "failures": [],
+      "scope": "headless simulation and physical collision fixture; not real-input acceptance"
+    },
+    "ui": {
+      "passed": true,
+      "checks": 28051,
+      "failures": [],
+      "scope": "Synthetic settled native hierarchy/layout, clipping, font widths and focus snapshots; eight viewports, EN/ZH, ten screen modes plus dynamic hero titles; not real-input or visual acceptance"
+    },
+    "runtime": {
+      "passed": true,
+      "checks": 135,
+      "failures": [],
+      "scope": "Headless main/HUD/VFX integration and synthetic native GUI dispatch/focus fixtures including held pointer clicks; not OS real-input acceptance"
+    },
+    "shutdown-active": {
+      "passed": true,
+      "checks": 20,
+      "failures": [],
+      "scope": "Actual headless process exit through production close notification; not OS-input or Web acceptance"
+    },
+    "shutdown-paused": {
+      "passed": true,
+      "checks": 20,
+      "failures": [],
+      "scope": "Actual headless process exit through production close notification; not OS-input or Web acceptance"
+    },
+    "shutdown-locked": {
+      "passed": true,
+      "checks": 16,
+      "failures": [],
+      "scope": "Actual headless process exit through production close notification; not OS-input or Web acceptance"
+    },
+    "balance-active": {
+      "passed": true,
+      "checks": null,
+      "scope": "automated public-command simulation; not real-input acceptance"
+    },
+    "balance-afk": {
+      "passed": true,
+      "checks": null,
+      "scope": "automated public-command simulation; not real-input acceptance"
+    }
+  }
+}

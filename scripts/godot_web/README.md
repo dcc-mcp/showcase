@@ -35,7 +35,7 @@ The cloud command sandbox used for preparation blocks Chromium's Unix process so
 
 The explicit play/manifest.json controls every published path, byte count and hash. No directory crawl. The build validates selected case ownership, same-origin paths, approved extensions, single-thread renderer and bilingual shell metadata. The gallery defers iframe creation; the iframe defers runtime loading until Start. Closing removes the iframe, releasing the runtime and audio graph.
 
-No SharedArrayBuffer, PWA or service worker. No simulated security headers. Expected MIME types are application/wasm and application/octet-stream. GitHub Pages gzip behavior must be checked after an authorized deployment, not inferred from a local estimate. Resource budget: 40 MiB raw / 11 MiB gzip equivalent for all playable files together, under 32 KiB per native PCK, one shared engine. Test loading timings are localhost software-renderer measurements and are not phone performance claims.
+No SharedArrayBuffer, PWA or service worker. No simulated security headers. Expected MIME types are application/wasm and application/octet-stream. GitHub Pages gzip behavior must be checked after an authorized deployment, not inferred from a local estimate. The original shared runtime and legacy demos retain their 40 MiB raw / 11 MiB gzip envelope, with under 32 KiB per original Sonic/Prism PCK. Dawnkeep separately adds at most 6 MiB raw / 5 MiB gzip for its 3D assets and music while reusing the same engine; scripts/godot_web/resource_budget.py enforces both envelopes independently. Measured totals are in play/manifest.json. Test loading timings are localhost software-renderer measurements and are not phone performance claims.
 
 ## Diagnostic boundary
 
@@ -77,3 +77,7 @@ state preservation and the older case-page embed. This is not physical-device,
 OS browser-zoom, Safari or Firefox acceptance. The official Engine `preloadFile`
 and `start` methods fetch a hash-versioned PCK into its stable virtual filename;
 shell assets and generated page JS/CSS also use content-bound cache versions.
+
+## Dawnkeep publication
+
+The Dawnkeep promotion uses its exact passed full-run pack, not a fresh unverified export. See dawnkeep/promote.py and play/dawnkeep-defense/export-provenance.json. The existing write_manifest.py regenerates the historical Sonic/Prism inventory only; do not use it to replace the multi-case manifest. Dawnkeep promotion preserves all other inventoried cases and adds its explicitly bounded file list. The dedicated public-page workflow verifies embedded integration locally, then can verify the actual authorized Pages origin after deployment.

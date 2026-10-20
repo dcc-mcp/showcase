@@ -41,86 +41,30 @@ for the existing DCC-MCP capabilities and their limits.
 
 ## Current status and acceptance boundaries
 
-The supported built-in Jolt 3D backend retains real collisions and resolves the
-observed single-thread Web shutdown error. [Exact runtime f423e0f short CI](https://github.com/dcc-mcp/showcase/actions/runs/39268987948)
-passed genuine typed MCP author/save/reopen, native input, desktop/portrait Web
-input and clean quit/restart, required-download failure/Retry, and the active
-physics-backend comparison. Its 78 mechanics assertions include tower removal,
-wall blocking/sliding and ground-plane regressions. Four native and 14 Web
-frames were reviewed without blocking clipping or missing glyphs.
-See the [backend repair and regression scope](research/physics-backend-20261019.md).
+The source at `957c1d3928d4d7382535a5b50ae2990aa4cf5854` passed the
+[full native and Web campaign](https://github.com/dcc-mcp/showcase/actions/runs/39285690349)
+on 2026-10-19. Native and desktop Web actual input completed eight-wave victory,
+a natural AFK defeat and both restarts. Portrait emulated touch completed two
+waves, Q/E/R use and pause/confirmation/reset. Headless assertions:78 mechanics,
+28,051 UI,135 runtime integration and56 shutdown. Strict actual-game Web error
+gates passed, including official engine quit/reopen and required-download Retry.
 
-The [first full run](https://github.com/dcc-mcp/showcase/actions/runs/39270462130)
-reached native wave-eight victory, but the input observer attempted E as the
-victory modal appeared and incorrectly waited for a combat cooldown. It did not
-complete defeat/restart acceptance. Full browser recording also lacked
-Playwright's revision-specific encoder. The harness now records terminal/death
-interruptions without activation credit, still fails active missed clicks, and
-installs that official recording dependency. Fresh full acceptance is required;
-no complete current-head campaign or listening pass is claimed here.
+The supported built-in Jolt backend retains actual collisions and ray queries.
+The separate same-template negative controls still reproduce the Group diagnostic
+with active GodotPhysics3D or an explicit awaited worker Group. See the
+[backend repair and regression scope](research/physics-backend-20261019.md).
 
-[Full native acceptance on 58dc9d7](https://github.com/dcc-mcp/showcase/actions/runs/39273195375)
-subsequently passed actual eight-wave victory, natural defeat and both restarts,
-with 275.5 seconds of continuous video and captured non-silent stereo PCM.
-That run's Web portion remains failed: the wrapper toolbar covered a native
-shop Close button; its scripted route also tried construction under the hero
-and accidentally selected a pad while pursuing enemies in portrait.
-The wrapper now allocates a separate 44-CSS-pixel strip using documented
-[canvasResizePolicy 0](https://docs.godotengine.org/en/4.6/tutorials/platform/web/html5_shell_classref.html#canvasResizePolicy),
-with resized canvas dimensions and real DOM-to-engine coordinate mapping.
-Short Web checks now open and close both native shops before full combat.
-The actual-input route avoids building under the hero and uses public minimap
-movement in combat. These Web changes require fresh exported/browser evidence.
+The public promotion preserves that verified PCK and all native gameplay bytes,
+reuses the existing hash-identical official runtime and adds only a same-origin
+page-readiness/reset bridge. See the [public case](../../../docs/showcase/dawnkeep-defense/README.md)
+for dated evidence, assets, exact hashes and limitations. The publication gate
+checks the integrated bilingual page and real embedded input separately; a
+successful local build does not establish the live site's deployment.
 
-### Historical acceptance, bound to its recorded commits
-
-This is an unpublished Draft candidate. The native-UI regression suite covers
-73 mechanics assertions, 28,051 settled UI assertions across eight sizes
-(320×568 through 2560×1080), EN/ZH, ten screen modes, clipped scrolling,
-health/respawn labels and focus. The main-scene suite covers 133 integration
-assertions, including 157 synthetic events dispatched through Godot's GUI and
-pointer holds up to 18 process frames. The 56 shutdown assertions exercise
-active, paused and locked-audio states, repeated close requests and actual
-AudioStreamPlayback release. Font checks cover all 391 required UI characters
-with system font fallback disabled.
-Synthetic inputs and automated victory/AFK balance runs are not OS-input,
-rendered-pixel, sound or subjective gameplay-quality acceptance.
-
-The [2026-10-19 native UI acceptance record](research/native-ui-acceptance-20261019.md)
-binds these results to runtime commit `81c109d`: real DCC-MCP creation/save/reopen,
-official Web export, 16 reviewed native-rendered views, 300 ms held native
-purchases/mute, keyboard cancel and EN/ZH switching, plus compact-landscape
-scrolling, held D-pad release and focus-driven purchase. It retains the remaining
-shutdown, browser, listening and physical-touch qualifications.
-
-A prior actual native campaign on commit `523953fb` reached eight-wave victory,
-then a natural unattended defeat and clean restarts, with a full recording.
-That recording predates this native-UI refactor and does not prove its new
-layout/input behavior. The new run covers native UI and early combat, not a
-repeat of that full campaign. Refresh the exact-source checks for future
-runtime changes; the pinned official Web export remains a separate stage.
-
-On runtime commit `48e0d3b`, [hosted run 39223393872](https://github.com/dcc-mcp/showcase/actions/runs/39223393872)
-passed real typed MCP creation/save/reopen, native input, headless checks and
-official Web export. Sandboxed runner Chrome 155.0.8059.39 exercised real desktop
-and emulated portrait Start/movement, EN/ZH, pause, mute, fullscreen, engine
-quit/restart and required-download failure/Retry. Four formerly missing Chinese
-glyphs are now bundled, and actual quit releases all tracked audio playbacks
-without the previous ObjectDB/resource errors.
-
-The strict Web job still fails on an engine-level WorkerThreadPool Group
-allocator error at exit. A separate minimal diagnostic isolates this with the
-same template; it cannot waive the game failure. Native rendered tests terminate
-the host, so they do not establish manual OS-window-close acceptance. The local
-cloud Chromium 154.0.8037.57 still lacks WebGL2; supported hosted Chrome is a
-different recorded test environment. Browser security/GPU flags were not changed.
-Physical phone/multitouch testing and subjective music listening remain unverified.
-Objective PCM, clipping, mute and file-decode checks do not replace listening.
-Do not promote a successful export/archive to browser or mobile acceptance.
-
-The PR workflow deliberately produces a short actual native-rendered image gate
-before long recordings. A CI artifact or Draft PR is not a Showcase gallery or
-Pages deployment. See `ci/CONTRACT.md` for the evidence boundaries.
+Historical failures remain linked in the public evidence. Physical-phone and
+multitouch testing, subjective listening, manual native OS-window-close and
+physical-GPU performance remain unverified. Native software-renderer capture
+framerate is not a claim about a physical device.
 
 ## Source and reproduction
 
@@ -130,7 +74,7 @@ The original Blender asset recipe and editable scene are in `art/`.
 
 - `gameplay-contract.md`: mechanics, API and exact headless test commands/results
 - `research/production-reuse.md`: dated gameplay/art/music sources and selection
-- `ART-LICENSES.md`: selected model licenses, original art recipe and hashes
+- `game/notices/ART-LICENSES.md`: selected model licenses, original art recipe and hashes
 - `game/audio/SOURCE.json`: audio source/derivative hashes and author notices
 - `ci/CONTRACT.md`: read-only observer and real-input acceptance boundaries
 - `.github/workflows/dawnkeep-preview.yml`: isolated exact-head acceptance
@@ -146,6 +90,10 @@ Original gameplay, design, interface, artwork, recipes and scene: copyright
 2026 dcc-mcp contributors, all rights reserved. The credited third-party KayKit
 and music assets retain their CC0 rights. The renamed Noto-derived font retains
 SIL OFL 1.1. Godot/runtime and shared tooling retain their own notices.
-See `LICENSES.md` and the asset-local notices. No purchase or new account is
+See `game/notices/LICENSES.md` and the asset-local notices. No purchase or new account is
 required to reproduce the source. A source download grants no additional
 license to original artwork.
+
+## Promote the verified candidate
+
+Run `python scripts/godot_web/dawnkeep/promote.py --candidate <extracted-full-run-candidate>` from the Showcase root. It requires the successful native and Web receipts, exact frozen pack hash, all exported file hashes, and matching frozen/current source files. It copies no duplicate engine and adds no browser security setting. The public HTML uses a hash-named pack and content-versioned publication bridge. Run the public-page gate before merge and again against the authorized deployed origin.

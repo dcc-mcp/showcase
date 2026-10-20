@@ -1,0 +1,1238 @@
+{
+  "schema_version": 1,
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "ci_run": "https://github.com/dcc-mcp/showcase/actions/runs/39285690349",
+  "source_receipts": [
+    {
+      "file": "dawnkeep-author/mcp-raw.json",
+      "sha256": "8261bf5ff657d335c42ec0441ee1225e7472dcc30cbccac485e5959a91e0bd26",
+      "bytes": 458967
+    },
+    {
+      "file": "dawnkeep-author/authoring.json",
+      "sha256": "a6655305c68292bada783a0dffa3040dbcf6cacb18ed3d1ceb25f895abe17c51",
+      "bytes": 39622
+    }
+  ],
+  "publication_transform": "Selected actual tools/call exchanges; transport IDs, generic catalog/load metadata and private runtime paths omitted; script payloads represented by their exact hashes. Host result values are preserved. This is a sanitized subset, not a verbatim full transcript.",
+  "godot": "4.6.3.stable.official.7d41c59c4",
+  "adapter": "0.9.6",
+  "core": "0.20.42",
+  "server": "0.20.45",
+  "headless_editor": true,
+  "scene_created_saved_reopened": true,
+  "total_recorded_typed_calls": 37,
+  "published_call_count": 36,
+  "calls": [
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 59,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 76,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "get_project_info",
+      "arguments": {},
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action get_project_info completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "autoloads": [
+            {
+              "name": "DccMcpRuntimePeer",
+              "path": "*res://addons/dcc_mcp_godot/runtime_peer.gd"
+            }
+          ],
+          "current_scene": "",
+          "engine_version": "4.6.3-stable (official)",
+          "main_scene": "",
+          "name": "Dawnkeep — Oath of the Last Light",
+          "project_path": "[redacted runtime path]",
+          "viewport": {
+            "height": 800,
+            "width": 1280
+          }
+        }
+      }
+    },
+    {
+      "tool": "create_script",
+      "arguments": {
+        "path": "res://gameplay.gd",
+        "source": {
+          "sha256": "ce08d740821c403a908cc64ddafa1e5f3b6eb537a1afb0d4ac275006440a91b4",
+          "bytes": 34977,
+          "publication_note": "Original source bytes are in the native project archive; only their hash replaces the source text here."
+        },
+        "overwrite": true
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action create_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "bytes": 34977,
+          "path": "res://gameplay.gd",
+          "written": true
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 83,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 100,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://gameplay.gd"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action validate_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "error": "OK",
+          "path": "res://gameplay.gd",
+          "valid": true
+        }
+      }
+    },
+    {
+      "tool": "create_script",
+      "arguments": {
+        "path": "res://visuals.gd",
+        "source": {
+          "sha256": "89d2a1529f8280c02efa882a09bd29bd6de19f91062c78cac6421ef86264a179",
+          "bytes": 22632,
+          "publication_note": "Original source bytes are in the native project archive; only their hash replaces the source text here."
+        },
+        "overwrite": true
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action create_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "bytes": 22632,
+          "path": "res://visuals.gd",
+          "written": true
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 108,
+            "scanning": true,
+            "schema": 1,
+            "types": {}
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 1,
+          "executed": true,
+          "result": {
+            "process_frame": 125,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 142,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://visuals.gd"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action validate_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "error": "OK",
+          "path": "res://visuals.gd",
+          "valid": true
+        }
+      }
+    },
+    {
+      "tool": "create_script",
+      "arguments": {
+        "path": "res://hud.gd",
+        "source": {
+          "sha256": "f9e7f12aebb393fcf2dd9981db5389805756f602f2e81413d24c07d2de6b27cd",
+          "bytes": 48774,
+          "publication_note": "Original source bytes are in the native project archive; only their hash replaces the source text here."
+        },
+        "overwrite": true
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action create_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "bytes": 48774,
+          "path": "res://hud.gd",
+          "written": true
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 153,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 170,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://hud.gd"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action validate_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "error": "OK",
+          "path": "res://hud.gd",
+          "valid": true
+        }
+      }
+    },
+    {
+      "tool": "create_script",
+      "arguments": {
+        "path": "res://main.gd",
+        "source": {
+          "sha256": "3b19482ae5edab578fe75160772111650c212fd78fcfcb97463e064467bb74a7",
+          "bytes": 17079,
+          "publication_note": "Original source bytes are in the native project archive; only their hash replaces the source text here."
+        },
+        "overwrite": true
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action create_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "bytes": 17079,
+          "path": "res://main.gd",
+          "written": true
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 182,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 201,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "validate_script",
+      "arguments": {
+        "path": "res://main.gd"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action validate_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "error": "OK",
+          "path": "res://main.gd",
+          "valid": true
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 211,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 228,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "create_scene",
+      "arguments": {
+        "path": "res://start.tscn",
+        "root_type": "Node3D",
+        "root_name": "Dawnkeep",
+        "open": true
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action create_scene completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "created": true,
+          "path": "res://start.tscn",
+          "root_type": "Node3D"
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 236,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 254,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "attach_script",
+      "arguments": {
+        "node_path": ".",
+        "script_path": "res://main.gd"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action attach_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "attached": true,
+          "node_path": "[redacted runtime path]",
+          "script_path": "res://main.gd"
+        }
+      }
+    },
+    {
+      "tool": "save_scene",
+      "arguments": {
+        "path": "res://start.tscn"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action save_scene completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "saved": true,
+          "scene_path": "res://start.tscn"
+        }
+      }
+    },
+    {
+      "tool": "set_project_setting",
+      "arguments": {
+        "key": "application[redacted runtime path]",
+        "value": "res://start.tscn"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action set_project_setting completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "key": "application[redacted runtime path]",
+          "updated": true,
+          "value": "res://start.tscn"
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 270,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 288,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 139,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 1,
+          "executed": true,
+          "result": {
+            "process_frame": 158,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "open_scene",
+      "arguments": {
+        "path": "res://start.tscn"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action open_scene completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "opened": true,
+          "path": "res://start.tscn"
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 166,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "execute_editor_script",
+      "arguments": {
+        "path": "res://dawnkeep_ci_editor_probe.gd",
+        "method": "inspect",
+        "arguments": {
+          "paths": [
+            "res://dawnkeep_ci_editor_probe.gd",
+            "res://gameplay.gd",
+            "res://visuals.gd",
+            "res://hud.gd",
+            "res://main.gd",
+            "res://start.tscn"
+          ]
+        },
+        "budget_ms": 50,
+        "chunked": false
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action execute_editor_script completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "budget_exceeded": false,
+          "budget_ms": 50,
+          "chunked": false,
+          "elapsed_ms": 0,
+          "executed": true,
+          "result": {
+            "process_frame": 184,
+            "scanning": false,
+            "schema": 1,
+            "types": {
+              "res://dawnkeep_ci_editor_probe.gd": "GDScript",
+              "res://gameplay.gd": "GDScript",
+              "res://hud.gd": "GDScript",
+              "res://main.gd": "GDScript",
+              "res://start.tscn": "PackedScene",
+              "res://visuals.gd": "GDScript"
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "get_scene_tree",
+      "arguments": {
+        "path": "res://start.tscn"
+      },
+      "isError": false,
+      "host_return": {
+        "success": true,
+        "message": "Godot action get_scene_tree completed.",
+        "error": null,
+        "prompt": null,
+        "context": {
+          "root": {
+            "children": [],
+            "groups": [
+              "_vp_input55549365367",
+              "_vp_unhandled_input55549365367",
+              "_vp_unhandled_key_input55549365367"
+            ],
+            "name": "Dawnkeep",
+            "path": "[redacted runtime path]",
+            "script": "res://main.gd",
+            "type": "Node3D"
+          },
+          "scene_path": "res://start.tscn",
+          "source": "edited"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 1280,
+      "height": 720,
+      "avg_frame_rate": "20/1",
+      "nb_frames": "1160"
+    },
+    {
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "48000",
+      "channels": 2,
+      "avg_frame_rate": "0/0",
+      "nb_frames": "2720"
+    }
+  ],
+  "format": {
+    "duration": "58.000000",
+    "size": "2610871"
+  },
+  "schema_version": 1,
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "source": "dawnkeep-native-full/native-input.mp4",
+  "source_sha256": "aecb7f63e2c50ccd9700ec94d353acd90715eb0f79f1185d756faa9ffa40fc6b",
+  "source_duration_s": 366.4,
+  "public_file": "gameplay.mp4",
+  "public_sha256": "2d8101c73a87a8fd7e1aef4257f071d4b9835a6fc36b48cd127a489fc6302b18",
+  "cuts_seconds": [
+    [
+      0,
+      5
+    ],
+    [
+      27,
+      35
+    ],
+    [
+      70,
+      78
+    ],
+    [
+      145,
+      168
+    ],
+    [
+      352,
+      366
+    ]
+  ],
+  "edit": "Concatenate exact native screen-and-audio intervals, convert to 20 fps H.264/AAC, preserve 1280\u00d7720, strip metadata. No additional editorial speedup, synthesized frames, soundtrack replacement or visual retouch. Public in-game 2x speed is visible.",
+  "encoding": {
+    "threads_max": 2,
+    "filter_threads": 1,
+    "filter_complex_threads": 1,
+    "video_crf": 25,
+    "video_maxrate": "1200k",
+    "video_bufsize": "2400k",
+    "audio_bitrate": "96k"
+  },
+  "full_decode_passed": true,
+  "subjective_listening": "not-tested"
+}

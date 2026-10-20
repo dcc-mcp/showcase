@@ -1,0 +1,12 @@
+{
+  "source": "https://github.com/notofonts/noto-cjk",
+  "source_filename": "NotoSansCJK-Regular.ttc",
+  "source_sha256": "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
+  "collection_font_index": 2,
+  "family": "Dawnkeep Sans",
+  "license": "SIL OFL 1.1",
+  "output": "dawnkeep-sans.otf",
+  "sha256": "e3d7facdd92929429041d2d818b2506aba76b9b19d4bbb68d87344aadeb6f6a3",
+  "bytes": 146992,
+  "text_codepoint_count": 414
+}
