@@ -23,7 +23,7 @@ def generate(asset, sha256, license_path, out):
         raise ValueError('pilot asset hash mismatch')
     license_text = Path(license_path).read_text()
     out.mkdir(exist_ok=True)
-    for rel in ('assets/model-preview.js', 'assets/model-preview.css',
+    for rel in ('assets/site.css', 'assets/model-preview.js', 'assets/model-preview.css',
                 'assets/vendor/model-viewer/model-viewer.min.js', 'assets/vendor/model-viewer/LICENSE'):
         target = out / rel; target.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(root / rel, target)
     (out / 'asset.glb').write_bytes(content)
@@ -31,7 +31,7 @@ def generate(asset, sha256, license_path, out):
     entry = {'src': 'asset.glb', 'alt': 'Development-only model preview', 'bytes': len(content), 'license_path': 'LICENSE.txt'}
     section = model_previews.section(entry).replace('../../', '')
     for lang in ('en', 'zh'):
-        markup = '<!doctype html><html lang="' + lang + '"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex,nofollow"><title>Local viewer pilot</title><link rel="stylesheet" href="assets/model-preview.css"><script src="assets/model-preview.js" defer></script><body><main><h1>Development-only viewer pilot</h1><p>Not a published showcase or accepted benchmark. Viewer testing does not establish full case ecosystem acceptance.</p>' + section + '</main></body></html>'
+        markup = '<!doctype html><html lang="' + lang + '"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex,nofollow"><title>Local viewer pilot</title><link rel="stylesheet" href="assets/site.css"><link rel="stylesheet" href="assets/model-preview.css"><script src="assets/model-preview.js" defer></script><body><main class="wrap"><h1>Development-only viewer pilot</h1><p>Not a published showcase or accepted benchmark. Viewer testing does not establish full case ecosystem acceptance.</p>' + section + '</main></body></html>'
         if lang == 'en':
             import json
             translations = json.loads((root / 'locales/en/ui.json').read_text())

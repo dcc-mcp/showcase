@@ -59,6 +59,9 @@ def run(site, output, executable=None):
                     assert viewer.evaluate('(v) => v.constructor.modelCacheSize') == 0
                     assert not viewer.evaluate('(v) => v.autoplay || v.autoRotate')
                     assert not any(not url.startswith(base) for url in requests), requests
+                    # Capture the reset view, not the deliberately zoomed gesture state.
+                    page.locator('[data-model-action="reset"]').click()
+                    page.wait_for_function('(r) => Math.abs(document.querySelector("model-viewer").getCameraOrbit().radius - r) < 0.001', arg=radius)
                     page.screenshot(path=str(output / (lang + ('-mobile' if mobile else '-desktop') + '.png')), full_page=True)
                     page.locator('[data-model-stop]').click(); assert page.locator('model-viewer').count() == 0
                     assert start.is_enabled(); start.click()
