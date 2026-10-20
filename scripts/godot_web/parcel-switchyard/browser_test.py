@@ -85,10 +85,12 @@ def target(page, command, touch=False, view=None, repetitions=1):
     box = view.locator('#canvas').bounding_box()
     cx = box['x'] + (x + width / 2) * box['width'] / logical_width
     cy = box['y'] + (y + height / 2) * box['height'] / logical_height
-    # Scroll presentation only. This never changes engine state or dispatches input.
+    # Scroll presentation only. The parent site has CSS smooth scrolling, so
+    # request an instant move before measuring coordinates for real input.
+    # This never changes engine state or dispatches synthetic game input.
     screen_height = page.viewport_size['height']
     if cy < 60 or cy > screen_height - 60:
-        page.evaluate('(delta) => window.scrollBy(0, delta)', cy - screen_height / 2)
+        page.evaluate('(delta) => window.scrollBy({top: delta, behavior: "instant"})', cy - screen_height / 2)
         box = view.locator('#canvas').bounding_box()
         cx = box['x'] + (x + width / 2) * box['width'] / logical_width
         cy = box['y'] + (y + height / 2) * box['height'] / logical_height

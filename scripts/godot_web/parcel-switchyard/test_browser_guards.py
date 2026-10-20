@@ -262,6 +262,26 @@ class ObserverGuards(unittest.TestCase):
             fresh.assert_called_once_with(page, snapshot)
             page.evaluate.assert_not_called()
 
+    def test_scrolled_target_uses_instant_presentation_and_remeasures(self):
+        snapshot = {'targets': {'send': [100, 600, 800, 80]}, 'layout_size': [1000, 720]}
+        for touch in [False, True]:
+            with self.subTest(touch=touch):
+                page = Mock();page.viewport_size = {'height': 900}
+                page.locator.return_value.bounding_box.side_effect = [
+                    {'x': 40, 'y': 1200, 'width': 1000, 'height': 720},
+                    {'x': 40, 'y': -190, 'width': 1000, 'height': 720}]
+                events = []
+                page.evaluate.side_effect = lambda *args: events.append(('scroll', args))
+                page.touchscreen.tap.side_effect = lambda *args: events.append(('tap', args))
+                page.mouse.click.side_effect = lambda *args: events.append(('click', args))
+                fresh = Mock(side_effect=lambda *args: events.append(('fresh', args)))
+                helper('target', state=Mock(return_value=snapshot), wait_fresh=fresh)(page, 'send', touch)
+                self.assertEqual(events[0], ('scroll', ('(delta) => window.scrollBy({top: delta, behavior: "instant"})', 1390)))
+                self.assertEqual(events[1], ('tap' if touch else 'click', (540, 450)))
+                self.assertEqual(events[2][0], 'fresh')
+                self.assertEqual(page.locator.return_value.bounding_box.call_count, 2)
+                fresh.assert_called_once_with(page, snapshot)
+
     def test_failed_wait_reports_the_actual_condition(self):
         page = Mock();page.wait_for_function.side_effect = TimeoutError()
         with self.assertRaisesRegex(AssertionError, 'sent===6.*TimeoutError'):
