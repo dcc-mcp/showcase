@@ -1,0 +1,84 @@
+tools:
+- name: create_session
+  description: Import reviewed local stems into an empty native REAPER project, apply
+    mix gains, markers and save.
+  source_file: scripts/create_session.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties:
+      manifest_path:
+        type: string
+      project_path:
+        type: string
+    required:
+    - manifest_path
+    - project_path
+    additionalProperties: false
+  read_only: false
+  destructive: false
+  idempotent: false
+- name: save_project
+  description: Save the current native REAPER session.
+  source_file: scripts/save_project.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties:
+      project_path:
+        type: string
+    required:
+    - project_path
+    additionalProperties: false
+  read_only: false
+  destructive: false
+  idempotent: false
+- name: open_project
+  description: Reopen a native RPP only when the current session is clean.
+  source_file: scripts/open_project.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties:
+      project_path:
+        type: string
+    required:
+    - project_path
+    additionalProperties: false
+  read_only: false
+  destructive: false
+  idempotent: false
+- name: audit_session
+  description: Measure the live host, tracks, media dependencies, tempo and project
+    state.
+  source_file: scripts/audit_session.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties: {}
+    required: []
+    additionalProperties: false
+  read_only: true
+  destructive: false
+  idempotent: true
+- name: render_master
+  description: Render a stereo 48 kHz WAV using REAPER native offline renderer; refuse
+    overwrite.
+  source_file: scripts/render_master.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties:
+      output_path:
+        type: string
+    required:
+    - output_path
+    additionalProperties: false
+  read_only: false
+  destructive: false
+  idempotent: false

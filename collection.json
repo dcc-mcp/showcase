@@ -2934,7 +2934,8 @@
       "title": "Trail & Air · 原创步行音频素材",
       "subtitle": "REAPER · 17 个可复用脚步、环境循环与交互音效",
       "software": [
-        "REAPER"
+        "REAPER",
+        "Blender"
       ],
       "capabilities": [
         "音频",
@@ -2945,10 +2946,10 @@
       ],
       "cover": {
         "src": "docs/showcase/trail-and-air/hero.jpg",
-        "alt": "根据实际导出音频绘制的脚步、环境与音乐波形图；不是软件或游戏截图"
+        "alt": "原生 Blender 制作并渲染的三组代表性实测音频波形；各图独立归一化，不是软件截图"
       },
       "evidence_label": "本轮原生音频验证 · 可在线试听",
-      "evidence_scope": "本轮通过 typed DCC-MCP 生成原创确定性声源，再由实际 REAPER 导入、建立原生音频图谱、逐资源渲染、保存与重开。17 个导出与声源 PCM 逐样本一致。封面为测量波形，在线试听是实际导出的片段组合，不冒充 GUI 截图、游戏场景或现场录音。使用者已确认制作方向并授权公开；没有记录主观听评，不把数值检测当作听觉验收。",
+      "evidence_scope": "17个原创声源保留原真实REAPER/DCC-MCP生成、原生导出与重开证据，下载PCM和格式/帧数逐项复核不变。2026-10-20经官方Blender MCP重做波形展示、VSE试听编辑、隔离WAV导出与原生MP3转码；当前页面只引用新JPEG/MP3。完整解码与逐段数值检测通过，未进行主观听审，不声称游戏内验证。",
       "summary": "两组各六种单声道脚步、20 秒风与叶片环境循环、19.2 秒轻音乐循环，以及三个克制的交互提示。保留无损 WAV、原生项目与可复用合成/导出技能。",
       "goal": "建立可供步行和探索原型使用的原创通用音频素材库，并用真正的 REAPER / Gateway / CLI 验证资源生成、原生导出、循环长度与工程可移植性。",
       "prompt": {
@@ -2972,6 +2973,10 @@
         {
           "label": "音频规格",
           "value": "48 kHz / 24-bit PCM；12 mono 脚步 + 3 mono SFX + 2 stereo loops"
+        },
+        {
+          "label": "展示与试听修复",
+          "value": "Blender4.5.13 · official dcc-mcp-blender0.2.22 + hash-pinned isolated audio candidate; exact versions and failures retained in ecosystem graph"
         }
       ],
       "tools": [
@@ -3003,14 +3008,18 @@
         },
         {
           "title": "保存、重开与脱敏",
-          "description": "保存原生项目，重开后验证全部媒体。将交付项目调整为相对 Audio 路径，再次通过真实宿主重开。"
+          "description": "保留原生项目真实重开记录；交付RPP的相对Audio依赖与5轨17片段的源/位置/长度/增益等逐项对照。交付WAV的元数据整理不改变PCM，ZIP逐成员实字节校验；不新增声称交付版本再次原生重开。"
+        },
+        {
+          "title": "原生制作试听与波形展示",
+          "description": "复用原17源，在官方Blender MCP内建立VSE试听及mesh/FONT波形图；隔离导出保留原始WAV并严格检查重复尾块，原生MP3转码后独立全解码验收。"
         }
       ],
       "results": [
         {
           "src": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3",
           "alt": "Trail & Air 28.6 秒音频试听",
-          "caption": "点击播放：石面脚步、草地脚步、8秒环境、8秒音乐与三个交互音效。由真实 REAPER 导出组合；试听循环片段有短淡入淡出，下载的无损循环未改变。播放器不会自动播放。"
+          "caption": "点击播放：28.6秒原17源试听。通过官方Blender MCP/VSE编辑及原生音频转码生成；8秒环境与8秒音乐片段含短淡入淡出，下载无损循环未改变。已完整数值核验，未主观听审；不会自动播放。"
         }
       ],
       "checks": [
@@ -3027,7 +3036,7 @@
         {
           "name": "交付与脱敏",
           "result": "pass",
-          "observed": "四个 ZIP 均小于 6 MB，完整性与逐文件哈希通过；原生项目使用相对 Audio 路径，已重开；无私人场景、画面、路径、软件二进制或账号数据。"
+          "observed": "四ZIP共59成员逐字节校验；17 WAV的PCM/规格/帧数对应真实导出，RPP相对依赖与原5轨17片段状态对照；未声称新增交付版原生重开。"
         },
         {
           "name": "适配器修复",
@@ -3035,9 +3044,9 @@
           "observed": "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。"
         },
         {
-          "name": "实际试听",
-          "result": "not_run",
-          "observed": "当前运行环境不支持音频输入，等待使用者听觉验收；没有以无 clipping 替代听觉评审。"
+          "name": "试听技术验收",
+          "result": "pass",
+          "observed": "原生MP3全解码、有限codec-delay内容对应与17段/非零首256检测通过；没有实际听觉入口，主观听审未进行。"
         },
         {
           "name": "发布授权",
@@ -3111,7 +3120,7 @@
         "commit": "867ce6837c916aa7ca89a5cb14deae9869f09d00",
         "title": "实际验证的 REAPER 适配器修复 commit；附加制作技能在本案例源码包"
       },
-      "verified_at": "2026-10-09T15:43:00Z",
+      "verified_at": "2026-10-20T16:16:00Z",
       "model_attribution": [
         {
           "stage_id": "planning",
@@ -3173,6 +3182,11 @@
           "version": "v1 原生音频素材",
           "date": "2026-10-09",
           "change": "完成真实原生导出、循环/样本验证、便携下载与用户授权；提供点击播放的在线试听，游戏内集成结果不在本案例声称范围内。"
+        },
+        {
+          "version": "v2 真实生态展示与试听",
+          "date": "2026-10-20",
+          "change": "保留原17声源与下载内容，替换原生制作的JPEG和MP3；增加实际调用/产物/ZIP成员关联，主观听审仍未进行。"
         }
       ]
     },

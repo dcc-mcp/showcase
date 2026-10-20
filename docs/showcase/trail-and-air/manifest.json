@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "README.md",
-      "bytes": 4260,
-      "sha256": "fc0251b2bfca0b3c6fa81524590c5c5776a6f2eb3f708e405ca2159672414f82"
+      "bytes": 5481,
+      "sha256": "8fa655ac349ffd2b7282f8956323b665cc815746a92699c4f1b4856058b18fbd"
     },
     {
       "path": "Trail-and-Air-Ambience.zip",
@@ -29,7 +29,7 @@
     {
       "path": "Trail-and-Air-audition.mp3",
       "bytes": 687788,
-      "sha256": "2a3ea68fcab4143928dca3fcc14b72bc428861c5ccddc14badcdc75f58f7a4af"
+      "sha256": "154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3"
     },
     {
       "path": "audio-manifest.json",
@@ -42,9 +42,164 @@
       "sha256": "8a2148ebee47a35d6a1bb9b92328d24dfddf75ebbcdd0d8785e2f10b0d6238de"
     },
     {
+      "path": "ecosystem-evidence/build_audio_scene.py.source.json",
+      "bytes": 4496,
+      "sha256": "2b6dab59e57e3aded28977b2b1b9ed27ad64a9b01a90e4b44206916b104d8439"
+    },
+    {
+      "path": "ecosystem-evidence/build_hero_scene_v2.py.source.json",
+      "bytes": 6125,
+      "sha256": "79c671a3c4dc66a31684b1d12370fc8127f99d6aca515970fa0d46aa1d2e31d3"
+    },
+    {
+      "path": "ecosystem-evidence/hero-history-inventory.json",
+      "bytes": 3210,
+      "sha256": "94163703695f0f8b24a0d30ab272ebee560960c4fd7118c6a4dfafdd1aa8e7c5"
+    },
+    {
+      "path": "ecosystem-evidence/hero-requests.json",
+      "bytes": 4194,
+      "sha256": "ab60f3cb30c9b847fea2f25cc7e66a575833852e7d7ab0a511ae15b47344625f"
+    },
+    {
+      "path": "ecosystem-evidence/hero-responses.json",
+      "bytes": 21295,
+      "sha256": "5c4a5ef5c8ba09929d49a7c7d43b7b36a402a353180404187e3c1b001033887d"
+    },
+    {
+      "path": "ecosystem-evidence/historical-README.md.txt",
+      "bytes": 4260,
+      "sha256": "fc0251b2bfca0b3c6fa81524590c5c5776a6f2eb3f708e405ca2159672414f82"
+    },
+    {
+      "path": "ecosystem-evidence/historical-validation.json.txt",
+      "bytes": 1640,
+      "sha256": "06693474ce2396fed55b7592e4575b9980643c41b3782ccd0e814771c27a7e86"
+    },
+    {
+      "path": "ecosystem-evidence/jpeg-acceptance.json",
+      "bytes": 278,
+      "sha256": "9516cb44d63f3699fb20b9f5964a3f59d27d20c569f533aea37c2d40c29a2eca"
+    },
+    {
+      "path": "ecosystem-evidence/jpeg-call.json",
+      "bytes": 4007,
+      "sha256": "b6cbaa2568be37d424a7950f7fa47775600d4ab21bc29a79498c91e4d7c69988"
+    },
+    {
+      "path": "ecosystem-evidence/jpeg-native-readback.json",
+      "bytes": 539,
+      "sha256": "9c8d5cf82e911daa74e58010bc4dfd3008b4ae146edebb83183f2704d39c1da4"
+    },
+    {
+      "path": "ecosystem-evidence/jpeg-source-freeze.json",
+      "bytes": 184,
+      "sha256": "f639527d39179905cda999fcfa81fb6b93b97f152e399a08f67a604930241433"
+    },
+    {
+      "path": "ecosystem-evidence/montage-native-edit.json",
+      "bytes": 4251,
+      "sha256": "d2340aaac9dc94efed0ca298e26452e8328bb840512d24594233b9d6ec9c4d95"
+    },
+    {
+      "path": "ecosystem-evidence/montage-requests.json",
+      "bytes": 16925,
+      "sha256": "cb1eeae8d3fa93f83e6c44b4a6d77c75899999046ae39768d5cc565ffcca9b79"
+    },
+    {
+      "path": "ecosystem-evidence/montage-responses.json",
+      "bytes": 33370,
+      "sha256": "04f85ba6074071514341cc966e372a243cd8babe5784149ad8179c800e35fb54"
+    },
+    {
+      "path": "ecosystem-evidence/mp3-call.json",
+      "bytes": 3989,
+      "sha256": "155296354bbf5982860eed7371d04d919674e74b4967261c2284c64c394dbdc1"
+    },
+    {
+      "path": "ecosystem-evidence/mp3-host-cleanup.json",
+      "bytes": 63,
+      "sha256": "052501fa643ac21d641abfde09c43b2888727fcceb95fb593c588716133f3572"
+    },
+    {
+      "path": "ecosystem-evidence/mp3-native-readback.json",
+      "bytes": 701,
+      "sha256": "6084f36dafe06546fe2a9c481220f2e2c23b9808ed84082e02dbf0193cc89846"
+    },
+    {
+      "path": "ecosystem-evidence/mp3-reference-comparison.json",
+      "bytes": 6086,
+      "sha256": "2d68d930d799f52440bc579aee356ae4c3789866e3374a3851e03f46a73280e6"
+    },
+    {
+      "path": "ecosystem-evidence/native-jpeg-encoding-measurement.json",
+      "bytes": 701,
+      "sha256": "8e4bf435410511bb6129d8e94b8504093db9fdc20cbf3a5ed15ce2301e09cd18"
+    },
+    {
+      "path": "ecosystem-evidence/native-mp3-encode-measurement.json",
+      "bytes": 721,
+      "sha256": "eb56d03e53e969f5dc6e7f755dfcb3c72a92a65980fca89b424e7fa957dd3cfb"
+    },
+    {
+      "path": "ecosystem-evidence/native-vse-montage-measurement.json",
+      "bytes": 798,
+      "sha256": "38c1b8791a5b0a93ce81c9cf15628c0c34e7cb33078b2a42218b2ed188b48765"
+    },
+    {
+      "path": "ecosystem-evidence/native-waveform-hero-measurement.json",
+      "bytes": 695,
+      "sha256": "3fada7bf22c7a7f0f2a3a32c2aeaba874a6130005b4636820055aefced32621f"
+    },
+    {
+      "path": "ecosystem-evidence/original-audio-content-lineage.json",
+      "bytes": 26916,
+      "sha256": "d04a62efaa68d7a9e412fdce4179ae1734f6c99c9ee953ebd95291800492edaa"
+    },
+    {
+      "path": "ecosystem-evidence/original-reaper-assets-measurement.json",
+      "bytes": 5108,
+      "sha256": "0c6198ce1a13bf2e1ea45a85e8213d87dca01b36ff9776d12c516dc8b408cab4"
+    },
+    {
+      "path": "ecosystem-evidence/prior-native-failures.json",
+      "bytes": 14208,
+      "sha256": "e56eca16ba47fb04676a25ebf36c5a2f40f0536c765885e58a5145cc957432c8"
+    },
+    {
+      "path": "ecosystem-evidence/project-delivery-equivalence.json",
+      "bytes": 6743,
+      "sha256": "3bf42fe259196d3a6ea0b601ebb9645814546b2a97440801330d63db95f7b2df"
+    },
+    {
+      "path": "ecosystem-evidence/wav-acceptance.json",
+      "bytes": 10380,
+      "sha256": "afebea1c65a2ede19629bd6dd8a116b96999b72dc5cc0e7f6e3e8005dc8c6405"
+    },
+    {
+      "path": "ecosystem-evidence/wav-host-cleanup.json",
+      "bytes": 63,
+      "sha256": "052501fa643ac21d641abfde09c43b2888727fcceb95fb593c588716133f3572"
+    },
+    {
+      "path": "ecosystem-evidence/wav-reference-comparison.json",
+      "bytes": 5725,
+      "sha256": "2dcce3fc0e458e9062367c610869c5126d938c189b2a71e833984664715d705e"
+    },
+    {
+      "path": "ecosystem-evidence/zip-byte-identity.json",
+      "bytes": 195,
+      "sha256": "4a082b85968bdeaff96d8eaefb7b25ababfb496ee684348bb3e9679029c0846d"
+    },
+    {
+      "path": "ecosystem-production.json",
+      "bytes": 55880,
+      "sha256": "6ff6298cb74238dd1c469c195fc9fa73a6c490334645a5bcef1be14384a7b694"
+    },
+    {
       "path": "hero.jpg",
-      "bytes": 127919,
-      "sha256": "bdbc1f204eec90fa68002a8b51658e8e75f1a186afce4de19434b0f07c695fef",
+      "bytes": 93870,
+      "sha256": "c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598",
       "width": 1440,
       "height": 960
     },
@@ -60,8 +215,13 @@
     },
     {
       "path": "validation.json",
-      "bytes": 1640,
-      "sha256": "06693474ce2396fed55b7592e4575b9980643c41b3782ccd0e814771c27a7e86"
+      "bytes": 3065,
+      "sha256": "7f3a00ab3e57cd61e0c31c350cd7e90f787f859b6bb5e16e6d97e69847528c47"
+    },
+    {
+      "path": "ecosystem-evidence/independent-review.json",
+      "bytes": 1238,
+      "sha256": "9c81b22350725bff5c4b5ec1df3a37ab27e2adfd96318b2e10a3a3188db88e44"
     }
   ]
 }

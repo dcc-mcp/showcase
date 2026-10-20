@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "NATIVE_AUDIO_VALIDATED_PUBLICATION_AUTHORIZED",
+  "status": "ECOSYSTEM_CONTENT_AND_INDEPENDENT_REVIEW_VERIFIED",
   "environment": {
     "host": "REAPER 7.82 Linux x86_64",
     "core": "0.20.41",
@@ -23,18 +23,37 @@
     {
       "name": "交付与脱敏",
       "result": "pass",
-      "observed": "四个 ZIP 均小于 6 MB，完整性与逐文件哈希通过；原生项目使用相对 Audio 路径，已重开；无私人场景、画面、路径、软件二进制或账号数据。"
+      "observed": "四ZIP共59成员逐字节校验；17 WAV的PCM/规格/帧数对应真实导出，RPP相对依赖与原5轨17片段状态对照；未声称新增交付版原生重开。"
     },
     {
       "name": "适配器修复",
       "result": "pass",
       "observed": "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。"
+    },
+    {
+      "name": "试听技术验收",
+      "result": "pass",
+      "observed": "原生MP3全解码、有限codec-delay内容对应与17段/非零首256检测通过；没有实际听觉入口，主观听审未进行。"
+    },
+    {
+      "name": "发布授权",
+      "result": "pass",
+      "observed": "使用者确认音频方向并明确授权发布通用素材案例；没有授权公开任何私人游戏场景。"
     }
   ],
   "not_claimed": [
     "Subjective listening review is pending.",
     "No game-engine integration, scene footage or native GUI screenshots are claimed.",
-    "Built-in adapter remains read-only; mutation/render uses included added skills."
+    "Built-in adapter remains read-only; mutation/render uses included added skills.",
+    "No new native reopen of the relative-path delivered RPP is claimed.",
+    "Original legacy JPEG/MP3 creation routes are not relabeled as ecosystem; current selected presentation files were replaced by separately dated real production.",
+    "No new native reopen of the relative-path delivered RPP is claimed.",
+    "Original legacy JPEG/MP3 creation routes are not relabeled as ecosystem; current selected presentation files were replaced by separately dated real production.",
+    "No new native reopen of the relative-path delivered RPP is claimed.",
+    "Original legacy JPEG/MP3 creation routes are not relabeled as ecosystem; current selected presentation files were replaced by separately dated real production.",
+    "No new native reopen of the relative-path delivered RPP is claimed.",
+    "Original legacy JPEG/MP3 creation routes are not relabeled as ecosystem; current selected presentation files were replaced by separately dated real production."
   ],
-  "publication_approval": "User explicitly approved direction and publication on2026-10-09; this is not a claim of recorded subjective listening."
+  "publication_approval": "User explicitly approved direction and publication on2026-10-09; this is not a claim of recorded subjective listening.",
+  "current_revision": "2026-10-20"
 }

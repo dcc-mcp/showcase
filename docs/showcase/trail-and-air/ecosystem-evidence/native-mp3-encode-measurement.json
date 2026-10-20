@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "155296354bbf5982860eed7371d04d919674e74b4967261c2284c64c394dbdc1",
+  "response_sha256": "155296354bbf5982860eed7371d04d919674e74b4967261c2284c64c394dbdc1",
+  "outputs": [
+    {
+      "path": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3",
+      "sha256": "154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3"
+    }
+  ],
+  "measurement_role": "Current independent observation of retained production content, not a fabricated native response",
+  "scope": "Native aud.Sound.write in owned official MCP host; full native and independent decode, fixed finite codec delay and all17/nonzero-first256 thresholds passed; subjective listening not performed"
+}

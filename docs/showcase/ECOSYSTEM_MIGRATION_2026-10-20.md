@@ -2,8 +2,8 @@
 
 Original audit baseline: [main 7f4389e](https://github.com/dcc-mcp/showcase/commit/7f4389e83430a43f53dbb4bd068f4e8fab72e51c).
 This is a source/evidence audit, not a new production run or a declaration that
-all historical work lacked MCP. The new structural gate currently blocks all
-16 selected cases. No old record is rewritten and no live page is removed.
+all historical work lacked MCP. The original structural baseline blocked all 16 selected cases. The current
+result after the Trail migration is one verified case and 15 still blocked. No old record is rewritten and no live page is removed.
 
 ## Revalidated after main integration (2026-10-20)
 
@@ -13,7 +13,7 @@ reconstructed nine Dawnkeep assets; PR [#47](https://github.com/dcc-mcp/showcase
 merged the gated model-preview/benchmark pilot. Neither changed the selected
 historical runtime assets or supplied a complete case production graph. The
 model-preview allowlist remains empty and activation still requires the case gate.
-A fresh local run after integration returns the same **16 blocked cases** in
+The earlier local run immediately after integration returned **16 blocked cases** in
 [ecosystem-gate-baseline.json](ecosystem-gate-baseline.json), not a stale inference
 from the original PR run. No new renderer run is needed merely to confirm this.
 
@@ -56,7 +56,7 @@ Blender production. Honest disclosure was necessary but insufficient.
 
 ## Full selected-case triage
 
-All 16 selected cases lack the new mandatory ecosystem production graph, so all are publication-blocked by the proposed gate. This is not a claim that all lacked historical MCP. The machine-readable baseline is [ecosystem-gate-baseline.json](ecosystem-gate-baseline.json).
+At the original baseline all 16 selected cases lacked the mandatory ecosystem production graph. Trail has since completed the real migration below; the other 15 remain publication-blocked. This is not a claim that all lacked historical MCP. The machine-readable baseline is [ecosystem-gate-baseline.json](ecosystem-gate-baseline.json).
 
 | Case | Existing scoped evidence / remaining review |
 |---|---|
@@ -68,7 +68,7 @@ All 16 selected cases lack the new mandatory ecosystem production graph, so all 
 | brass-relay | Actual FreeCAD/Blender/Kdenlive MCP excerpts and later REAPER score; FFmpeg mux/derivatives need route review. |
 | seismic-lens | ParaView/GIMP raw evidence exists; recent GIMP review is not a replay of original ParaView creation. Bind exact pinned builds and derivatives. |
 | orbit-post-office | GIMP/Godot/Kdenlive case evidence and later REAPER score; verify original route and final FFmpeg mux lineage independently. |
-| trail-and-air | Typed gateway workflow and raw MCP excerpts exist; audit per-asset outputs and public derivatives. |
+| trail-and-air | Complete: original 17 REAPER sources reused and independently matched; new MCP hero/JPEG and native VSE/WAV/MP3 stages, exact four-ZIP delivery, graph-bound independent review. |
 | rainroom-two-hours | Sanitized selected MCP results, not complete raw trace. Verify all rendering/post-production stage scope. |
 | resonance-atlas | Native Inkscape CLI/Gateway evidence exists; README explicitly describes Pillow composition and FFmpeg encoding. Those production routes need audit/remediation, not Inkscape attribution. |
 | sonic-loom | Typed Godot script/scene evidence exists; direct runtime verification is distinct from production. Audit export/media derivation. |
@@ -103,3 +103,22 @@ Both the structural gate and actual-call review are required. Passing a
 self-authored JSON structure cannot authenticate its claims. The initial gate
 failure is not to be bypassed for green CI; this PR must not deploy until
 migration and publication authorization are complete.
+
+## First completed case: Trail & Air
+
+The original 17 audio sources were not recreated. Their actual REAPER calls,
+PCM hashes, formats and frame counts were independently verified. New official
+Blender MCP stages produced the waveform hero, display-preserving JPEG, VSE
+audition, isolated WAV and native MP3. Four unchanged ZIPs have all 59 members
+verified byte-for-byte. Packaging is not falsely labeled as another DCC call.
+
+The [case graph](trail-and-air/ecosystem-production.json) and
+[independent review](trail-and-air/ecosystem-evidence/independent-review.json)
+pass the actual case validator. Subjective listening was not performed. The
+delivered relative-path RPP is semantically checked against the real earlier
+reopen, not claimed to have a new native reopen. The later candidate source
+archive commit is not mislabeled as the originally executed version.
+
+The [current full gate result](ecosystem-gate-current.json) remains blocked for
+the other 15 cases. The public collection contract passes, but the full site
+build intentionally refuses publication. No existing deployed site is removed.

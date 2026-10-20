@@ -1,0 +1,134 @@
+{
+  "status": "native-edit-readback-passed",
+  "input_manifest_sha256": "cd8f74f5f1502deb410ffd23fa1d57f690c8efd610cccce43150bac70eeee38b",
+  "script_sha256": "23659fd60c61719c7dd2554503710df2fe064d942e782e5be64fe150c4ed01e0",
+  "fps": 100,
+  "duration_seconds": 28.6,
+  "strips": [
+    {
+      "name": "footstep_stone_01",
+      "start_frame": 1,
+      "duration_frames": 29,
+      "fade_frames": 0,
+      "source_sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+    },
+    {
+      "name": "footstep_stone_02",
+      "start_frame": 63,
+      "duration_frames": 34,
+      "fade_frames": 0,
+      "source_sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+    },
+    {
+      "name": "footstep_stone_03",
+      "start_frame": 131,
+      "duration_frames": 31,
+      "fade_frames": 0,
+      "source_sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+    },
+    {
+      "name": "footstep_stone_04",
+      "start_frame": 195,
+      "duration_frames": 37,
+      "fade_frames": 0,
+      "source_sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+    },
+    {
+      "name": "footstep_stone_05",
+      "start_frame": 265,
+      "duration_frames": 33,
+      "fade_frames": 0,
+      "source_sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+    },
+    {
+      "name": "footstep_stone_06",
+      "start_frame": 332,
+      "duration_frames": 41,
+      "fade_frames": 0,
+      "source_sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+    },
+    {
+      "name": "footstep_grass_01",
+      "start_frame": 406,
+      "duration_frames": 28,
+      "fade_frames": 0,
+      "source_sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+    },
+    {
+      "name": "footstep_grass_02",
+      "start_frame": 467,
+      "duration_frames": 35,
+      "fade_frames": 0,
+      "source_sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+    },
+    {
+      "name": "footstep_grass_03",
+      "start_frame": 536,
+      "duration_frames": 32,
+      "fade_frames": 0,
+      "source_sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+    },
+    {
+      "name": "footstep_grass_04",
+      "start_frame": 601,
+      "duration_frames": 38,
+      "fade_frames": 0,
+      "source_sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+    },
+    {
+      "name": "footstep_grass_05",
+      "start_frame": 672,
+      "duration_frames": 30,
+      "fade_frames": 0,
+      "source_sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+    },
+    {
+      "name": "footstep_grass_06",
+      "start_frame": 736,
+      "duration_frames": 42,
+      "fade_frames": 0,
+      "source_sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+    },
+    {
+      "name": "environment_soft_wind_foliage_loop",
+      "start_frame": 811,
+      "duration_frames": 800,
+      "fade_frames": 5,
+      "source_sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+    },
+    {
+      "name": "music_sparse_tonal_loop",
+      "start_frame": 1644,
+      "duration_frames": 800,
+      "fade_frames": 5,
+      "source_sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+    },
+    {
+      "name": "interaction_confirm",
+      "start_frame": 2478,
+      "duration_frames": 55,
+      "fade_frames": 0,
+      "source_sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+    },
+    {
+      "name": "interaction_discovery",
+      "start_frame": 2566,
+      "duration_frames": 165,
+      "fade_frames": 0,
+      "source_sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+    },
+    {
+      "name": "interaction_soft_impact",
+      "start_frame": 2764,
+      "duration_frames": 62,
+      "fade_frames": 0,
+      "source_sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+    }
+  ],
+  "new_fade_scope": "New explicitly recorded 50ms linear fades on the two loop excerpts; original undocumented fade length is not reconstructed.",
+  "not_claimed": [
+    "encoding",
+    "native reopen",
+    "subjective listening"
+  ]
+}

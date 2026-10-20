@@ -1,0 +1,92 @@
+{
+  "status": "succeeded",
+  "request_sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05",
+  "response_sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05",
+  "outputs": [
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+      "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+      "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+      "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+      "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+      "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+      "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+      "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+      "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+      "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+      "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+      "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+      "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+      "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+      "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+      "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+      "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+      "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+    },
+    {
+      "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Trail-and-Air.rpp",
+      "sha256": "40b6428f213bc9b12895a75509ec04e567b17ec5b9749ea17dc7d814893ad952"
+    }
+  ],
+  "measurement_role": "Current independent observation of retained production content, not a fabricated native response",
+  "output_identity": {
+    "wav": "Delivered RIFF fmt/data: exact actual render PCM hashes, format/rate/channels/24-bit/frame counts checked. Original BWF-containing file hashes are different and retained in evidence. No content resynthesis.",
+    "rpp": "Retained native project delivered with relative media paths: parsed 5 tracks/17 items, GUID/name/gain/pan/mute/source/position/length/rate/offset/fades and absent track FX checked against actual reopen response. No claim original entire file byte hash or a new delivery-version native reopen."
+  },
+  "content_measurement": {
+    "path": "docs/showcase/trail-and-air/ecosystem-evidence/original-audio-content-lineage.json",
+    "sha256": "d04a62efaa68d7a9e412fdce4179ae1734f6c99c9ee953ebd95291800492edaa"
+  },
+  "project_measurement": {
+    "path": "docs/showcase/trail-and-air/ecosystem-evidence/project-delivery-equivalence.json",
+    "sha256": "3bf42fe259196d3a6ea0b601ebb9645814546b2a97440801330d63db95f7b2df"
+  }
+}

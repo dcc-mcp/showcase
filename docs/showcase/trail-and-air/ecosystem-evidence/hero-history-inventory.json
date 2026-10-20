@@ -1,0 +1,85 @@
+{
+  "status": "hero-stage-created-reopened-rendered-and-visually-approved",
+  "whole_case_compliant": false,
+  "audio_audition_accepted": false,
+  "image": {
+    "sha256": "ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1",
+    "size": [
+      1440,
+      960
+    ]
+  },
+  "native_scene": {
+    "sha256": "f4b90fbb5d4ae8fe9c6c8bcf1b1d7218ff2ab5dfed0cdf7de353ae246ff3abc1",
+    "public": false
+  },
+  "actual_script_sha256": "2c46bf8cc681d14a39090c826a4c462eecdb2909d2baa9fb98e6e935aee703b9",
+  "runner_sha256": "f1b9b6d7cdc1cf8660537a812150e213b0f37f6649741c84d030b5c88d62e49e",
+  "rpc_evidence": [
+    {
+      "id": 7740,
+      "request_sha256": "508675c531a115f8b70eba1dc11a11592a6a60fe1f0f10074c7bd64248dcd8f1",
+      "response_sha256": "5ba0ff2ffcba7322ce65a60666499fcdd0c0c50969b23420687dfc48114cbb13"
+    },
+    {
+      "id": 7741,
+      "request_sha256": "32653a0ad3171a79c6b64b2da66ef9ffb5c958cad192610c0c2cba7e63723c99",
+      "response_sha256": "bd0dd91e7b9f5e73c1f7996441360f8cae9ecc4b084a465cd66464e15edd86fb"
+    },
+    {
+      "id": 7742,
+      "request_sha256": "22b83db48e7dc36ec6d610ccbd799d5984649fbb14972474c7b0db3e680a4101",
+      "response_sha256": "ef77e47f0b75178ea3cc818400e1938b23c158de7c4f28cc73f0e42f42dbcf90"
+    },
+    {
+      "id": 7743,
+      "request_sha256": "2d438f6fc6e6d4f277a146029f914ab0e215e7c6dafa609c3bc603c18b12c9bc",
+      "response_sha256": "16f979735a2ece189dc762cde87243d933b955a0c2cb479a0a323219352d920c"
+    },
+    {
+      "id": 7744,
+      "request_sha256": "14c3735db79b7e8957f050d21323ca315e9987272b701378c471f563a7154ab8",
+      "response_sha256": "044995c7299abb58268ca82afc33c28922be3cb4b8eee278a76fd630e240ff5a"
+    },
+    {
+      "id": 7745,
+      "request_sha256": "fa546d3498839fb35ac7a791ee9e6062b02f03901f767e78bc44426c563d197d",
+      "response_sha256": "aa6aa0f5eb6774607e899e200984c9d30f5fc400a395dd134124cae1f0b41969"
+    },
+    {
+      "id": 7750,
+      "request_sha256": "c855dee15b46fcdd2603f61ac3545bd71b76b8f37acb2ed7989058f6ae13264a",
+      "response_sha256": "3406eed546864ce523c8385b4ee8dbd2beffa396713f28001c955d35b954ae84"
+    },
+    {
+      "id": 7751,
+      "request_sha256": "6f7e57bc4af04fc2e7a9c21e0ac35d5a1f00c4c14903db7dc13e298f26c8168c",
+      "response_sha256": "e8af1ee1e4c3ba4579458fe61e956067860b34c22e7e66a169c3f6112d948d80"
+    },
+    {
+      "id": 7752,
+      "request_sha256": "e696b73d46e6ded86444b35f941858b4bf188181d870a1e46b47b6088fef262f",
+      "response_sha256": "109c457c1692a7f498d9413c889d01ed151b1219574ce0ff924aa7d716f6e274"
+    }
+  ],
+  "sources": [
+    {
+      "name": "footstep_stone_01",
+      "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+    },
+    {
+      "name": "environment_soft_wind_foliage_loop",
+      "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+    },
+    {
+      "name": "music_sparse_tonal_loop",
+      "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+    }
+  ],
+  "visual_review": {
+    "reviewer": "independent parent review",
+    "outcome": "passed",
+    "boundary": "hero image only, no audio/case acceptance"
+  },
+  "delivery_png_conversion": "none; exact native output bytes"
+}

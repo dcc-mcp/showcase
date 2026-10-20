@@ -487,11 +487,27 @@ class ReviewedPublicTextTests(unittest.TestCase):
         hashes = {item["path"]: item["sha256"] for item in files}
         vendor = json.loads((repo / "assets/vendor/model-viewer/VENDOR.json").read_text())
         hashes["assets/vendor/model-viewer/model-viewer.min.js"] = vendor["sha256"]
+        trail = "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py"
+        hashes[trail] = hashlib.sha256((repo / trail).read_bytes()).hexdigest()
         self.assertEqual(set(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES),
                          {"assets/vendor/model-viewer/model-viewer.min.js", "play/README.md", "play/runtime/godot-4.6.3.js",
-                          "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt"})
+                          "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt", trail})
         for path, (digest, _) in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES.items():
             self.assertEqual(digest, hashes[path])
+
+    def test_trail_negative_path_fixture_review_is_exact(self):
+        repo = Path(__file__).resolve().parents[1]
+        rel = "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py"
+        data = (repo / rel).read_bytes()
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+        path.write_bytes(data + b"\n# changed\n")
+        self.assertTrue(validate_collection.scan_text_file(path, self.root))
+        moved = path.with_name("copied_test.py")
+        moved.write_bytes(data)
+        self.assertTrue(validate_collection.scan_text_file(moved, self.root))
 
     def test_unmodified_font_notices_are_reviewed_but_edits_and_moves_are_not(self):
         repo = Path(__file__).resolve().parents[1]

@@ -1,0 +1,13 @@
+{
+  "full_decode": true,
+  "mean_abs_rgb_error": 0.916084587191358,
+  "threshold": 6,
+  "source_size": [
+    1440,
+    960
+  ],
+  "output_sha256": "c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598",
+  "bytes": 93870,
+  "budget_bytes": 409600,
+  "passed": true
+}

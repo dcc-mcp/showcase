@@ -60,11 +60,23 @@ Required fields:
   original failed runs. It is a separate artifact measurement, not a fake tool
   response. Referenced production inputs have an upstream stage producer or
   appear in `external_sources` with exact bytes, `origin`, and `license`.
-- Every selected media/native/archive output must have a producer, including
+- Every selected media/native output must have a producer, including
   derivatives and selected playable assets. Intermediate sources used by later
-  stages must also be retained and bound. Archives additionally require review
-  of their member-level production lineage; a ZIP operation cannot launder
-  non-ecosystem artwork.
+  stages must also be retained and bound. Byte-preserving ZIP delivery uses `delivery_packages` below; a ZIP operation cannot launder non-ecosystem artwork.
+- `delivery_packages` records ordinary byte-preserving ZIP packaging, not a
+  fabricated ecosystem production call. Each archive has an exact path/hash and
+  complete `members` list: safe unique member path, retained source path/hash,
+  and `kind: production` or `support`. Every production member must already have
+  a verified stage/upstream source. Support is limited to UTF-8 reproducibility
+  code/configuration/documentation with an explicit reviewed reason; inclusion
+  does not claim execution. Known binary formats and leading SVG/RPP documents
+  cannot escape by renaming to text. Unknown textual semantics still require
+  independent review, not a suffix-based authenticity claim. The validator reads
+  all member bytes, checks sizes/hashes, and rejects extra/missing/duplicate,
+  encrypted or symlink members. The entire mapping is bound into review.
+  WAV metadata-only delivery identity must separately verify format, sample rate,
+  channels, bit depth, frame count and exact PCM against actual native responses;
+  never substitute a new transcode or claim old and new container hashes match.
 - Non-production administrative files need explicit `reports` references with
   a concrete `reason`; only md/txt/log/json formats are eligible and classification
   is included in independent review. JSON/TXT files are not implicitly exempt: a
@@ -81,7 +93,7 @@ Required fields:
   bound to the review graph. A URL cannot be both reference and download.
 - `review`: `status: verified`, `evidence` reference to a distinct review JSON.
   Its `production_graph_sha256` is SHA-256 of canonical JSON of schema,
-  case_slug, phases, stages, external_sources, downloads, reports, external_links and selected_outputs (sorted keys,
+  case_slug, phases, stages, external_sources, downloads, reports, external_links, delivery_packages and selected_outputs (sorted keys,
   compact JSON). selected_outputs is the sorted list of actual selected path/
   SHA-256 pairs excluding the referenced evidence records themselves.
   It includes reviewer/date, `raw_calls_verified: true`, and

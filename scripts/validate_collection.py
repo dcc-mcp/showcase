@@ -69,6 +69,12 @@ MD_LINK = re.compile(r"\]\(\s*<?([^)\s>]+)>?")
 # must not approve new text. Changed/moved files receive the full normal scan.
 # These suppress only the named findings, not a file or a directory's audit.
 REVIEWED_TEXT_FALSE_POSITIVES = {
+    "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py": (
+        "8a2d00a3e475b3bf70b078ec44e1e2171f4826e580fe0866a467165691f778e1",
+        frozenset({"private filesystem path", "private execution path"}),
+        # Exact retained package test: /tmp/escape.wav and C:\escape.wav are
+        # invalid-target rejection fixtures, not production machine paths.
+    ),
     "assets/vendor/model-viewer/model-viewer.min.js": (
         "18b2e711035aa4705ee281530a55dc2338ff05eed3d70ae16d54105282a75ed5",
         frozenset({"private filesystem path", "private execution path"}),

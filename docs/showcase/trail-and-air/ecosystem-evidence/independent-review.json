@@ -1,0 +1,21 @@
+{
+  "production_graph_sha256": "df2502d2098da73f5fcdde28c7a668cf6ff0d82fc1f1fcbb97f567005b34e905",
+  "raw_calls_verified": true,
+  "all_production_steps_covered": true,
+  "reviewer": "Independent parent reviewer; actual source/call/content checks and visual review",
+  "reviewed_at": "2026-10-20T16:36:00Z",
+  "scope": [
+    "17 original PCM hashes and formats/frames independently recomputed against real REAPER calls",
+    "4 ZIPs / 59 exact byte-identical members verified",
+    "5 stages actual calls and all measured output hashes verified",
+    "Native hero inspected; additional native JPEG conversion inspected and color/size checked",
+    "Actual isolated WAV and native MP3 numerical quality verified"
+  ],
+  "limitations": [
+    "Subjective listening not performed.",
+    "No new native reopen of the delivered relative-path RPP claimed; original native reopen plus explicitly bounded semantic delivery comparison.",
+    "Original BWF whole-file hashes differ from delivered WAV; PCM/format/frame identity verified.",
+    "Candidate archive commit is a later immutable source location, not a claim it was installed at execution time.",
+    "Review applies only to this exact production graph and selected output hashes."
+  ]
+}

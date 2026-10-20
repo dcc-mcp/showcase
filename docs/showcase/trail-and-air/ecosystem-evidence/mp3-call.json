@@ -1,0 +1,23 @@
+{
+  "scope": "Actual retained records with machine path prefixes redacted; original hashes preserved",
+  "records": [
+    {
+      "original_receipt_sha256": "58b6dc86402abc9cdaacc744f0b0fee4bacb0f218294ad337dea34fd37325ccd",
+      "record": {
+        "request": {
+          "jsonrpc": "2.0",
+          "method": "tools/call",
+          "id": 8,
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/trail-native-mp3-validation/encode_mp3_in_host.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":8,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/trail-native-mp3-validation/encode_mp3_in_host.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/trail-native-mp3-validation/encode_mp3_in_host.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"route\u005c\u005c\u005c\": \u005c\u005c\u005c\"Official MCP execute_script_file / native aud.Sound.write, dedicated owned host\u005c\u005c\u005c\", \u005c\u005c\u005c\"source_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"a30e991b3153953cdd0f92348ec55a8c4a8f5c4cda558a10587d55417c31cc8d\u005c\u005c\u005c\", \u005c\u005c\u005c\"output_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3\u005c\u005c\u005c\", \u005c\u005c\u005c\"output_bytes\u005c\u005c\u005c\": 687788, \u005c\u005c\u005c\"native_decoded_frames\u005c\u005c\u005c\": 1372800, \u005c\u005c\u005c\"source_frames\u005c\u005c\u005c\": 1372800, \u005c\u005c\u005c\"sample_rate\u005c\u005c\u005c\": 48000, \u005c\u005c\u005c\"channels\u005c\u005c\u005c\": 2, \u005c\u005c\u005c\"native_full_decode\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"peak\u005c\u005c\u005c\": 0.2194916307926178, \u005c\u005c\u005c\"bitrate\u005c\u005c\u005c\": 192000, \u005c\u005c\u005c\"buffersize\u005c\u005c\u005c\": 1152, \u005c\u005c\u005c\"script_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"24a8aef09872ebd75eca8e29b6a820b5470cf030454d1ea01d5e344fb30bc76b\u005c\u005c\u005c\", \u005c\u005c\u005c\"subjective_listening\u005c\u005c\u005c\": \u005c\u005c\u005c\"not performed\u005c\u005c\u005c\", \u005c\u005c\u005c\"content_acceptance\u005c\u005c\u005c\": \u005c\u005c\u005c\"pending independent decoded comparison\u005c\u005c\u005c\"}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/trail-native-mp3-validation/encode_mp3_in_host.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/trail-native-mp3-validation/encode_mp3_in_host.py\",\"stdout\":\"{\u005c\"route\u005c\": \u005c\"Official MCP execute_script_file / native aud.Sound.write, dedicated owned host\u005c\", \u005c\"source_sha256\u005c\": \u005c\"a30e991b3153953cdd0f92348ec55a8c4a8f5c4cda558a10587d55417c31cc8d\u005c\", \u005c\"output_sha256\u005c\": \u005c\"154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3\u005c\", \u005c\"output_bytes\u005c\": 687788, \u005c\"native_decoded_frames\u005c\": 1372800, \u005c\"source_frames\u005c\": 1372800, \u005c\"sample_rate\u005c\": 48000, \u005c\"channels\u005c\": 2, \u005c\"native_full_decode\u005c\": true, \u005c\"peak\u005c\": 0.2194916307926178, \u005c\"bitrate\u005c\": 192000, \u005c\"buffersize\u005c\": 1152, \u005c\"script_sha256\u005c\": \u005c\"24a8aef09872ebd75eca8e29b6a820b5470cf030454d1ea01d5e344fb30bc76b\u005c\", \u005c\"subjective_listening\u005c\": \u005c\"not performed\u005c\", \u005c\"content_acceptance\u005c\": \u005c\"pending independent decoded comparison\u005c\"}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    }
+  ]
+}

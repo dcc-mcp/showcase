@@ -1,0 +1,179 @@
+{
+  "scope": "Actual retained records with machine path prefixes redacted; original hashes preserved",
+  "records": [
+    {
+      "original_receipt_sha256": "5ba0ff2ffcba7322ce65a60666499fcdd0c0c50969b23420687dfc48114cbb13",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7740,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__new_scene",
+            "arguments": {}
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7740,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"New scene created\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Check the result with list_objects or use related actions to continue.\u005c\",\u005c\"context\u005c\":{}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"New scene created\",\"error\":null,\"prompt\":\"Check the result with list_objects or use related actions to continue.\",\"context\":{}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "bd0dd91e7b9f5e73c1f7996441360f8cae9ecc4b084a465cd66464e15edd86fb",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7741,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/trail-ecosystem-recovery/build_hero_scene_v2.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7741,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/trail-ecosystem-recovery/build_hero_scene_v2.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/build_hero_scene_v2.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"status\u005c\u005c\u005c\": \u005c\u005c\u005c\"native-infographic-built-not-rendered\u005c\u005c\u005c\", \u005c\u005c\u005c\"script_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"2c46bf8cc681d14a39090c826a4c462eecdb2909d2baa9fb98e6e935aee703b9\u005c\u005c\u005c\", \u005c\u005c\u005c\"sources\u005c\u005c\u005c\": [{\u005c\u005c\u005c\"name\u005c\u005c\u005c\": \u005c\u005c\u005c\"footstep_stone_01\u005c\u005c\u005c\", \u005c\u005c\u005c\"sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900\u005c\u005c\u005c\"}, {\u005c\u005c\u005c\"name\u005c\u005c\u005c\": \u005c\u005c\u005c\"environment_soft_wind_foliage_loop\u005c\u005c\u005c\", \u005c\u005c\u005c\"sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e\u005c\u005c\u005c\"}, {\u005c\u005c\u005c\"name\u005c\u005c\u005c\": \u005c\u005c\u005c\"music_sparse_tonal_loop\u005c\u005c\u005c\", \u005c\u005c\u005c\"sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d\u005c\u005c\u005c\"}], \u005c\u005c\u005c\"waveform_bins\u005c\u005c\u005c\": 600, \u005c\u005c\u005c\"normalization\u005c\u005c\u005c\": \u005c\u005c\u005c\"Each waveform panel normalized independently for display; not relative loudness\u005c\u005c\u005c\", \u005c\u005c\u005c\"size\u005c\u005c\u005c\": [1440, 960], \u005c\u005c\u005c\"engine\u005c\u005c\u005c\": \u005c\u005c\u005c\"CYCLES\u005c\u005c\u005c\", \u005c\u005c\u005c\"samples\u005c\u005c\u005c\": 16, \u005c\u005c\u005c\"denoising\u005c\u005c\u005c\": false, \u005c\u005c\u005c\"camera_dof\u005c\u005c\u005c\": false, \u005c\u005c\u005c\"mesh_count\u005c\u005c\u005c\": 7, \u005c\u005c\u005c\"text_count\u005c\u005c\u005c\": 13, \u005c\u005c\u005c\"old_jpeg_used\u005c\u005c\u005c\": false}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/trail-ecosystem-recovery/build_hero_scene_v2.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/build_hero_scene_v2.py\",\"stdout\":\"{\u005c\"status\u005c\": \u005c\"native-infographic-built-not-rendered\u005c\", \u005c\"script_sha256\u005c\": \u005c\"2c46bf8cc681d14a39090c826a4c462eecdb2909d2baa9fb98e6e935aee703b9\u005c\", \u005c\"sources\u005c\": [{\u005c\"name\u005c\": \u005c\"footstep_stone_01\u005c\", \u005c\"sha256\u005c\": \u005c\"f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900\u005c\"}, {\u005c\"name\u005c\": \u005c\"environment_soft_wind_foliage_loop\u005c\", \u005c\"sha256\u005c\": \u005c\"a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e\u005c\"}, {\u005c\"name\u005c\": \u005c\"music_sparse_tonal_loop\u005c\", \u005c\"sha256\u005c\": \u005c\"66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d\u005c\"}], \u005c\"waveform_bins\u005c\": 600, \u005c\"normalization\u005c\": \u005c\"Each waveform panel normalized independently for display; not relative loudness\u005c\", \u005c\"size\u005c\": [1440, 960], \u005c\"engine\u005c\": \u005c\"CYCLES\u005c\", \u005c\"samples\u005c\": 16, \u005c\"denoising\u005c\": false, \u005c\"camera_dof\u005c\": false, \u005c\"mesh_count\u005c\": 7, \u005c\"text_count\u005c\": 13, \u005c\"old_jpeg_used\u005c\": false}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "ef77e47f0b75178ea3cc818400e1938b23c158de7c4f28cc73f0e42f42dbcf90",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7742,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__save_scene",
+            "arguments": {
+              "filepath": "NATIVE_OUTPUT/hero/hero-native-v2.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7742,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Scene saved to NATIVE_OUTPUT/hero/hero-native-v2.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene saved successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"NATIVE_OUTPUT/hero/hero-native-v2.blend\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Scene saved to NATIVE_OUTPUT/hero/hero-native-v2.blend\",\"error\":null,\"prompt\":\"Scene saved successfully.\",\"context\":{\"filepath\":\"NATIVE_OUTPUT/hero/hero-native-v2.blend\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "16f979735a2ece189dc762cde87243d933b955a0c2cb479a0a323219352d920c",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7743,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__new_scene",
+            "arguments": {}
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7743,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"New scene created\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Check the result with list_objects or use related actions to continue.\u005c\",\u005c\"context\u005c\":{}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"New scene created\",\"error\":null,\"prompt\":\"Check the result with list_objects or use related actions to continue.\",\"context\":{}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "044995c7299abb58268ca82afc33c28922be3cb4b8eee278a76fd630e240ff5a",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7744,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__open_scene",
+            "arguments": {
+              "filepath": "NATIVE_OUTPUT/hero/hero-native-v2.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7744,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Opened scene: NATIVE_OUTPUT/hero/hero-native-v2.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene opened. Use list_objects to see the scene contents.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"NATIVE_OUTPUT/hero/hero-native-v2.blend\u005c\",\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Opened scene: NATIVE_OUTPUT/hero/hero-native-v2.blend\",\"error\":null,\"prompt\":\"Scene opened. Use list_objects to see the scene contents.\",\"context\":{\"filepath\":\"NATIVE_OUTPUT/hero/hero-native-v2.blend\",\"scene_name\":\"Scene\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "aa6aa0f5eb6774607e899e200984c9d30f5fc400a395dd134124cae1f0b41969",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7745,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_python",
+            "arguments": {
+              "code": "import bpy\ns=bpy.context.scene\nassert s.render.resolution_percentage==100 and (s.render.resolution_x,s.render.resolution_y)==(1440,960)\nassert s.render.engine=='CYCLES' and s.cycles.samples==16 and not s.cycles.use_denoising\nassert not s.camera.data.dof.use_dof\nassert 'ORIGINAL AUDIO ASSET PACK' in bpy.data.objects['Identity'].data.body\nprint('Actual full-resolution infographic saved and reopened')"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7745,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed successfully\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed. Check stdout for output.\u005c\",\u005c\"context\u005c\":{\u005c\"stdout\u005c\":\u005c\"Actual full-resolution infographic saved and reopened\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\",\u005c\"result\u005c\":null}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed successfully\",\"error\":null,\"prompt\":\"Script completed. Check stdout for output.\",\"context\":{\"stdout\":\"Actual full-resolution infographic saved and reopened\u005cn\",\"stderr\":\"\",\"result\":null}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "3406eed546864ce523c8385b4ee8dbd2beffa396713f28001c955d35b954ae84",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7750,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__start_render_job",
+            "arguments": {
+              "output_pattern": "NATIVE_OUTPUT/hero/final/frame_####",
+              "start_frame": 1,
+              "end_frame": 1,
+              "resume_missing": false,
+              "save_before_render": true,
+              "output_format": "PNG",
+              "factory_startup": true,
+              "device": "CPU"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7750,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Background render job submitted (PNG)\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use get_render_job to monitor progress and cancel_render_job to stop the owned worker.\u005c\",\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":142,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"PNG\u005c\",\u005c\"stdout_path\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Background render job submitted (PNG)\",\"error\":null,\"prompt\":\"Use get_render_job to monitor progress and cancel_render_job to stop the owned worker.\",\"context\":{\"job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"status\":\"running\",\"pid\":142,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"NATIVE_OUTPUT/hero/final/frame_####\",\"output_format\":\"PNG\",\"stdout_path\":\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.out.log\",\"stderr_path\":\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"adapter_job\":{\"job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false,\"_meta\":{\"dcc.next_tools\":{\"on_success\":[\"blender_render__get_render_job\"]}}}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "e8af1ee1e4c3ba4579458fe61e956067860b34c22e7e66a169c3f6112d948d80",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7751,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "51dfdac7d6d9423299d8617ed8972682"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7751,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":142,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"PNG\u005c\",\u005c\"stdout_path\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"status\":\"running\",\"pid\":142,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"NATIVE_OUTPUT/hero/final/frame_####\",\"output_format\":\"PNG\",\"stdout_path\":\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.out.log\",\"stderr_path\":\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"adapter_job\":{\"job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "109c457c1692a7f498d9413c889d01ed151b1219574ce0ff924aa7d716f6e274",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:43441/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7752,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "51dfdac7d6d9423299d8617ed8972682"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7752,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"status\u005c\":\u005c\"completed\u005c\",\u005c\"pid\u005c\":142,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":1,\u005c\"progress\u005c\":1.0,\u005c\"missing_frame_sample\u005c\":[],\u005c\"output_pattern\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"PNG\u005c\",\u005c\"stdout_path\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"51dfdac7d6d9423299d8617ed8972682\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"completed\u005c\",\u005c\"terminal\u005c\":true,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":1.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"status\":\"completed\",\"pid\":142,\"expected_frame_count\":1,\"written_frame_count\":1,\"progress\":1.0,\"missing_frame_sample\":[],\"output_pattern\":\"NATIVE_OUTPUT/hero/final/frame_####\",\"output_format\":\"PNG\",\"stdout_path\":\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.out.log\",\"stderr_path\":\"NATIVE_OUTPUT/hero/final/.dcc-mcp-render-51dfdac7d6d9423299d8617ed8972682.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"adapter_job\":{\"job_id\":\"51dfdac7d6d9423299d8617ed8972682\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"completed\",\"terminal\":true,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":1.0}},\"isError\":false}}"
+      }
+    }
+  ]
+}
