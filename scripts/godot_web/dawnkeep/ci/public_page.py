@@ -14,6 +14,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import stat
 import subprocess
 import threading
 import time
@@ -88,19 +89,84 @@ def installed_chrome():
     return selected
 
 
+def verify_tracked_bytes(repo):
+    """Match raw HEAD blobs and file modes, without Git clean/smudge filters.
+
+    Legacy media blobs in this repository inherit filter=lfs despite being
+    committed as ordinary binary blobs. A runner with LFS installed therefore
+    reports synthetic pointer conversions in a normal worktree diff. Never
+    waive those paths: hash every raw tracked byte against its actual HEAD blob.
+    """
+    repo = Path(repo).resolve()
+    tree = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-r', '-z', '--full-tree', 'HEAD'])
+    mismatches = []
+    count = 0
+    for record in tree.split(b'\0'):
+        if not record:
+            continue
+        metadata, raw_name = record.split(b'\t', 1)
+        mode, kind, expected = metadata.decode('ascii').split()
+        name = os.fsdecode(raw_name)
+        path = repo / name
+        count += 1
+        if kind != 'blob' or mode not in ('100644', '100755', '120000'):
+            mismatches.append(name + ': unsupported tracked object/mode')
+            continue
+        if any(parent.is_symlink() for parent in path.parents if parent != repo and repo in parent.parents):
+            mismatches.append(name + ': symlink ancestor')
+            continue
+        try:
+            before = path.lstat()
+            digest = hashlib.sha1()
+            if mode == '120000':
+                if not stat.S_ISLNK(before.st_mode):
+                    raise ValueError('expected tracked symlink')
+                data = os.fsencode(os.readlink(path))
+                digest.update(b'blob ' + str(len(data)).encode() + b'\0' + data)
+            else:
+                if not stat.S_ISREG(before.st_mode):
+                    raise ValueError('expected regular tracked file')
+                executable = bool(before.st_mode & stat.S_IXUSR)
+                if executable != (mode == '100755'):
+                    raise ValueError('tracked executable mode differs')
+                digest.update(b'blob ' + str(before.st_size).encode() + b'\0')
+                with path.open('rb') as stream:
+                    for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                        digest.update(chunk)
+            after = path.lstat()
+            if (before.st_ino, before.st_size, before.st_mtime_ns, before.st_mode) != (after.st_ino, after.st_size, after.st_mtime_ns, after.st_mode):
+                raise ValueError('tracked file changed while hashing')
+            if digest.hexdigest() != expected:
+                raise ValueError('raw tracked bytes differ from HEAD blob')
+        except (OSError, ValueError) as error:
+            mismatches.append(name + ': ' + str(error))
+    require(count > 0, 'Expected source tree has no tracked blobs')
+    require(not mismatches, 'Tracked source differs from exact HEAD: ' + '; '.join(mismatches))
+    return {'method': 'Raw Git blob hash and executable/symlink mode comparison; no clean/smudge filters',
+            'tracked_blobs_checked': count, 'tree_listing_sha256': hashlib.sha256(tree).hexdigest()}
+
+
 def source_receipt(repo, expected):
     if not re.fullmatch('[a-f0-9]{40}', expected or ''):
         raise ValueError('Expected source head must be a full lowercase Git SHA')
     head = subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip()
     if head != expected:
         raise ValueError('Checkout does not match the expected source head')
-    subprocess.run(['git', '-C', str(repo), 'diff', '--exit-code', 'HEAD', '--'], check=True,
-                   capture_output=True, text=True)
+    # Index changes remain fatal. Unlike a worktree diff, this compares stored
+    # objects and does not run a clean filter over the checked-out media.
+    try:
+        subprocess.run(['git', '-C', str(repo), 'diff', '--cached', '--name-status',
+                        '--no-ext-diff', '--no-textconv', '--exit-code', 'HEAD', '--'],
+                       check=True, capture_output=True, text=True)
+    except subprocess.CalledProcessError as error:
+        raise RuntimeError('Tracked index differs from expected HEAD: ' +
+                           (error.stdout or error.stderr or str(error)).strip()) from error
+    tracked = verify_tracked_bytes(repo)
     files = [Path(__file__), Path(__file__).with_name('interaction.py'),
              Path(__file__).with_name('capture_browser.py'), Path(__file__).with_name('common.py'),
              Path(__file__).with_name('media.py')]
     return {'expected_head_sha': expected, 'checkout_head_sha': head,
-            'tracked_checkout_clean': True,
+            'tracked_checkout_matches_head_bytes_and_modes': True, 'tracked_source': tracked,
             'acceptance_scripts': [{'name': f.name, 'sha256': sha256(f)} for f in files]}
 
 

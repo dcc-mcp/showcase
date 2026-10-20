@@ -2,6 +2,10 @@
 import ast
 import hashlib
 import json
+import os
+import shlex
+import stat
+import sys
 from pathlib import Path
 import subprocess
 import tempfile
@@ -81,12 +85,13 @@ class SourceBindingTests(unittest.TestCase):
     def test_dirty_tracked_checkout_is_rejected(self):
         with patch.object(gate.subprocess, 'check_output', return_value='a' * 40 + '\n'), \
                 patch.object(gate.subprocess, 'run', side_effect=subprocess.CalledProcessError(1, ['git'])):
-            with self.assertRaises(subprocess.CalledProcessError):
+            with self.assertRaisesRegex(RuntimeError, 'Tracked index differs'):
                 gate.source_receipt(Path('.'), 'a' * 40)
 
     def test_receipt_binds_exact_scripts_and_expected_head(self):
         with patch.object(gate.subprocess, 'check_output', return_value='a' * 40 + '\n'), \
-                patch.object(gate.subprocess, 'run'):
+                patch.object(gate.subprocess, 'run'), \
+                patch.object(gate, 'verify_tracked_bytes', return_value={'tracked_blobs_checked': 3}):
             result = gate.source_receipt(Path('.'), 'a' * 40)
         self.assertEqual(result['expected_head_sha'], result['checkout_head_sha'])
         self.assertIn('public_page.py', {row['name'] for row in result['acceptance_scripts']})
@@ -108,6 +113,70 @@ class SourceBindingTests(unittest.TestCase):
             (root / 'play/manifest.json').write_text(json.dumps(play))
             with self.assertRaisesRegex(RuntimeError, 'source ZIP'):
                 gate.artifact_inventory(root)
+
+
+class RawTrackedSourceTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        subprocess.run(['git', 'init', '-q', str(self.root)], check=True)
+        (self.root / '.gitattributes').write_text('*.bin filter=fixture\n')
+        (self.root / 'image.bin').write_bytes(b'actual committed image bytes\x00\xff')
+        self.git('add', '.gitattributes', 'image.bin')
+        self.git('-c', 'user.name=Acceptance fixture', '-c', 'user.email=fixture@example.invalid',
+                 'commit', '-qm', 'Raw fixture')
+        self.head = self.git('rev-parse', 'HEAD').stdout.strip()
+
+    def git(self, *arguments, check=True):
+        return subprocess.run(['git', '-C', str(self.root), *arguments],
+                              check=check, capture_output=True, text=True)
+
+    def filtered_diff(self):
+        # Simulate the exact clean-filter mismatch without changing any Git
+        # config or disabling filters. The fixture command applies to one diff.
+        command = (shlex.quote(sys.executable) + ' -c ' + shlex.quote(
+            'import sys; sys.stdin.buffer.read(); sys.stdout.buffer.write(b"synthetic pointer\\n")'))
+        path = self.root / 'image.bin'
+        info = path.stat()
+        os.utime(path, ns=(info.st_atime_ns, info.st_mtime_ns + 10_000_000_000))
+        return self.git('-c', 'filter.fixture.clean=' + command,
+                        'diff', '--exit-code', 'HEAD', '--', check=False)
+
+    def test_raw_committed_media_passes_even_when_clean_filter_reports_pointer_diff(self):
+        filtered = self.filtered_diff()
+        self.assertEqual(filtered.returncode, 1)
+        self.assertIn('image.bin', filtered.stdout)
+        result = gate.source_receipt(self.root, self.head)
+        self.assertTrue(result['tracked_checkout_matches_head_bytes_and_modes'])
+        self.assertEqual(result['tracked_source']['tracked_blobs_checked'], 2)
+
+    def test_actual_byte_mutation_remains_fatal_under_that_same_filter(self):
+        (self.root / 'image.bin').write_bytes(b'actually changed bytes')
+        self.assertEqual(self.filtered_diff().returncode, 1)
+        with self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
+            gate.source_receipt(self.root, self.head)
+
+    def test_executable_mode_mutation_is_fatal(self):
+        path = self.root / 'image.bin'
+        path.chmod(path.stat().st_mode | stat.S_IXUSR)
+        with self.assertRaisesRegex(RuntimeError, 'image.bin: tracked executable mode differs'):
+            gate.verify_tracked_bytes(self.root)
+
+    def test_missing_tracked_file_is_fatal_with_named_diagnostic(self):
+        (self.root / 'image.bin').unlink()
+        with self.assertRaisesRegex(RuntimeError, 'Tracked source differs.*image.bin'):
+            gate.verify_tracked_bytes(self.root)
+
+    def test_staged_changes_remain_fatal_even_when_worktree_bytes_match_head(self):
+        path = self.root / 'image.bin'
+        original = path.read_bytes()
+        path.write_bytes(b'changed staged blob')
+        self.git('add', 'image.bin')
+        path.write_bytes(original)
+        gate.verify_tracked_bytes(self.root)
+        with self.assertRaisesRegex(RuntimeError, 'Tracked index differs.*image.bin'):
+            gate.source_receipt(self.root, self.head)
 
 
 class BrowserPolicyTests(unittest.TestCase):
