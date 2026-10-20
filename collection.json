@@ -332,9 +332,10 @@
     {
       "slug": "houdini-procedural-study",
       "title": "青釉环纹器皿",
-      "subtitle": "Houdini · 51 点剖面到真实 Mantra 成图",
+      "subtitle": "Houdini 程序建模与 Mantra 成图 · Blender 跨 DCC 灯光练习",
       "software": [
-        "Houdini"
+        "Houdini",
+        "Blender"
       ],
       "capabilities": [
         "建模",
@@ -348,7 +349,7 @@
         "alt": "Houdini Mantra 渲染的青釉环纹器皿，具有空心口沿、柔和反射和地面接触阴影"
       },
       "evidence_label": "本轮实际运行 · DCC-MCP 创作",
-      "evidence_scope": "2026-10-01 在独立空场景中实际运行：造型、釉面、灯光、相机、保存、四轮单帧 Mantra 渲染、工程重开及 OBJ 导出/同 Houdini 回导入均通过 typed DCC-MCP。Gateway checkpoint 89/89 successful。公开响应日志明确脱敏；早期请求未单独保存，复用 recipe 不是完整原始请求轨迹。原生 HIP 受私人元数据阻塞，仅本地保留；公开 OBJ、像素一致的公开 PNG、复用输入和证据。 最终 gateway session 93/93 successful。原 PNG 自动 Artist 元数据保留私有；公开 -public PNG 通过已发现的 MCP 自动化工具仅移除该文本 chunk，CRC、IDAT 及 decoded RGBA 哈希均保持一致。资产制作和渲染为专用 typed 工具，PNG 元数据整理明确使用 MCP 自动化 fallback。",
+      "evidence_scope": "2026-10-01 在独立空场景中实际运行：造型、釉面、灯光、相机、保存、四轮单帧 Mantra 渲染、工程重开及 OBJ 导出/同 Houdini 回导入均通过 typed DCC-MCP。Gateway checkpoint 89/89 successful。公开响应日志明确脱敏；早期请求未单独保存，复用 recipe 不是完整原始请求轨迹。原生 HIP 受私人元数据阻塞，仅本地保留；公开 OBJ、像素一致的公开 PNG、复用输入和证据。 最终 gateway session 93/93 successful。原 PNG 自动 Artist 元数据保留私有；公开 -public PNG 通过已发现的 MCP 自动化工具仅移除该文本 chunk，CRC、IDAT 及 decoded RGBA 哈希均保持一致。资产制作和渲染为专用 typed 工具，PNG 元数据整理明确使用 MCP 自动化 fallback。 2026-10-20 新增：原字节一致 OBJ 通过 Blender MCP 导入，验证115,776点/115,200四边形及变换后坐标；新建灯光练习，1200×1500 Cycles64真实AOV，经官方 dcc-media-enhance 独立OIDN和原生AgX显示转换。第三图不是原Mantra中间状态重放。三张网页JPEG均经正式MCP图像编码。",
       "summary": "51 点剖面定义环纹、肩部、口沿、内壁与底厚。144 段车削和两级细分形成 115,200 面的可编辑器皿；青釉、三块软箱与暖灰地面完成真实产品式主图。",
       "goal": "通过 DCC-MCP 制作一个有真实厚度和开口的程序化陶瓷器皿，保留剖面控制链，验证地面接触、釉面、真实渲染和保存重开，并公开可复用输入与几何。",
       "prompt": {
@@ -376,6 +377,10 @@
         {
           "label": "工程范围",
           "value": "本地 HIP 重开通过；公开 OBJ + 像素一致 PNG + recipe"
+        },
+        {
+          "label": "新增跨DCC灯光",
+          "value": "Blender4.5.13 / dcc-mcp-blender0.2.22 / dcc-media-enhance0.2.0；1200×1500 Cycles64，独立OIDN，AgX Medium High Contrast"
         }
       ],
       "tools": [
@@ -402,6 +407,10 @@
         {
           "name": "run_python_file（PNG 元数据整理）",
           "description": "专用 typed 净化能力缺口经 scoped search 记录；通过正式 MCP 自动化执行公开参数化 PNG cleaner，仅移除 Artist 文本，保留所有 IDAT 与 RGBA 像素。"
+        },
+        {
+          "name": "Blender MCP + official dcc-media-enhance CLI",
+          "description": "真实OBJ导入、typed场景/保存/重开/渲染作业与受审属性脚本，真实AOV独立降噪及原生显示/JPEG编码；不修改原Mantra图。"
         }
       ],
       "steps": [
@@ -422,11 +431,11 @@
           }
         },
         {
-          "title": "调整灯光与留白",
-          "description": "降低主光和轮廓光，提高粗糙度，并改为 90 mm 镜头；中间图的黑色天空说明后续背板需求。",
+          "title": "新增跨 DCC 灯光练习",
+          "description": "2026-10-20 将同一真实 Houdini OBJ 通过 Blender MCP 导入并核几何，重新建立灯光、釉面和摄影棚；Cycles64真实AOV经官方独立OIDN与AgX显示转换。不是旧Mantra中间图的重放。",
           "image": {
             "src": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
-            "alt": "调整曝光和构图后的实际中间渲染，顶部仍有黑色天空"
+            "alt": "同一Houdini器皿在Blender中的新增灯光练习，完整留边与青釉环纹"
           }
         },
         {
@@ -452,6 +461,11 @@
           "src": "docs/showcase/houdini-procedural-study/preview.jpg",
           "alt": "本轮首次 Mantra 预览",
           "caption": "真实 960×1200 中间图；工具分辨率 applied 字段与实际尺寸存在已记录差异"
+        },
+        {
+          "src": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
+          "alt": "同一Houdini器皿在Blender中的新增灯光练习，完整留边与青釉环纹",
+          "caption": "新增 Blender 灯光练习 · 同一 Houdini OBJ · Cycles64 / 独立OIDN / AgX Medium High Contrast"
         }
       ],
       "checks": [
@@ -513,7 +527,7 @@
       ],
       "limitations": [
         "HIP 因私人原生元数据暂不公开，完整净化能力仍待补；可编辑 typed 输入与 CLI 重放入口已提供。",
-        "OBJ 不保留程序化 SOP 链、完整着色器与灯光；本轮未在其他 DCC 回导入 OBJ 验证。",
+        "OBJ不保留SOP链、原着色器与原灯光；2026-10-20 Blender导入已核点数、四边形计数、坐标和包围盒，但不声称原着色器保真或跨渲染器benchmark。",
         "本轮未验证 GUI 交互、其他 Houdini 版本、Karma、动画或封闭流形。",
         "本轮生产未使用后续分辨率修复 PR；最终真实像素尺寸通过 typed 相机设置与文件解析保证。",
         "早期仅保存响应；recipe 按实际输入整理，并在第二个空宿主通过无渲染重放；未重复完整带渲染流程。",
@@ -521,8 +535,8 @@
       ],
       "resources": [
         {
-          "label": "资源 ZIP：实际 OBJ / 像素一致的公开 PNG / 复用输入与证据",
-          "url": "https://github.com/dcc-mcp/showcase/releases/download/2026-10-01-houdini-procedural-study/houdini-procedural-study-assets.zip"
+          "label": "新版资源ZIP：同一OBJ / 三张成图 / AOV与实际证据",
+          "url": "docs/showcase/houdini-procedural-study/houdini-ecosystem-assets-2026-10-20.zip"
         },
         {
           "label": "typed 复用步骤",
@@ -669,6 +683,11 @@
           "version": "发布复核归属证据状态更正",
           "date": "2026-10-11",
           "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
+        },
+        {
+          "version": "跨DCC灯光与生态发布修订",
+          "date": "2026-10-20",
+          "change": "保留原Mantra主图和预览及旧Release历史，第三图明确替换为新增Blender灯光练习；真实MCP重编码三张网页图，新版包与当前引用一致。"
         }
       ]
     },

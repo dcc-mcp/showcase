@@ -1,0 +1,302 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "a099f76a1a44ad9c27189a0c8704c9e0a49968da102f1ef7b4030daff6d4754c",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7851,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "4ff1c39ab5367eac429d319a4509be64d6274fe73686e23db3066a6bd5f91f80",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7852,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__set_render_settings",
+          "arguments": {
+            "engine": "CYCLES",
+            "resolution_x": 1200,
+            "resolution_y": 1500,
+            "resolution_percentage": 100,
+            "fps": 24,
+            "samples": 64,
+            "file_format": "OPEN_EXR_MULTILAYER"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "f62f507df1739540aa8e58689b1678c5498ea9c2eb706677c1466656d980ed75",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7853,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__set_render_denoise",
+          "arguments": {
+            "enabled": false,
+            "denoiser": "OPENIMAGEDENOISE",
+            "use_gpu": false
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "5e79804371da006f24d6b4104551a2f86e78e788d048bd3818430fbb211b4f31",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7854,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__set_view_layer_passes",
+          "arguments": {
+            "enable": [
+              "denoising"
+            ],
+            "view_layer_name": "ViewLayer"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "fc59f53b35626c932794641884d3da0b698b8d93f8f754847d884a5fdbeced1c",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7855,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-final/prepare_final.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "458fe868bb7401923020099adec4146ba191b7ee0c2749395274080ec70341e1",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7856,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-final/verify_final.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "3c5b568a1dd628ca46885d3400b0ad576a8af847a70b5810fa37d243439203ed",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7857,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__save_scene",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c378f9b34991cba38cd3cc0c77047cdf678f79b279b38169397777ee7364a69c",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7858,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "56d844b39737f2e56ce144a85e5d8df270557ee7a659c5446b5ff1e68231aca0",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7859,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "a684e859647fa417d3a2425dd32ff41ed99839bc09fce1b89ff1a3f8fb9bb98e",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7860,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-final/verify_final.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c52852ca9ed678f7cf34185986d5d14028ffe4d57693d0d56729259bab01eadc",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7861,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__start_render_job",
+          "arguments": {
+            "output_pattern": "EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####",
+            "start_frame": 1,
+            "end_frame": 1,
+            "step": 1,
+            "resume_missing": false,
+            "device": "CPU",
+            "save_before_render": false,
+            "output_format": "OPEN_EXR_MULTILAYER",
+            "factory_startup": true
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c2a43ca5e0bc8013d25bdfe073f29cbb5e291e869f53c2cccf781473cca54ba6",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7862,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "ea3cc7791450c2e5e22fdefd75f74a7a85e2cbc2da0a05ea196107e1df11ace1",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7863,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "16ca27f651e26aaf740e16f561fd9730ac311608ac52e0493ec9b01638166323",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7864,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "286eab583a1ccf6d63040ecf80d97b716232889582f41ab92658aa8d88a01e64",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7865,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "84ac02ed1fa5e3b7fb8cdc95c91c32b4d78195a46f6b4243f7d01cdeb9808a82",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7866,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "ba60dff7fe7e13a0d676eaa7eded4359119e19fd72feac6c67fec08dcd2a9546",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7867,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c17cb0e68921dec22cf247b11c0dca7add7dc08f8a83cb87b59fc28fd732109f",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7868,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "abf811520401e8c0e6ce2e64c8ca72139371f04499909f42ee10a9d0cf9f028f",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7869,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "125397559b07ee897da93d783ec285e6b863af77c7e3c8785d0289edcb17f568",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7870,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+          }
+        }
+      }
+    }
+  ]
+}

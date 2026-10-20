@@ -1,0 +1,49 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "07664c44de7f0e1d39fe408d9c7f4f0a8037eda548e9a73cfea39471157e5b8e",
+      "record": {
+        "status": "independent_review_pending",
+        "rows": [
+          {
+            "start_evidence": "68-start-preview-render",
+            "start_request_recorded": false,
+            "terminal_evidence": "70-preview-render-detailed",
+            "terminal_request_recorded": true,
+            "job_id": "24916c2cbb3844ffb647e990a6de2681",
+            "native_output_path": "CASE_DIR/preview.png",
+            "native_output_sha256_measured_by_later_actual_call124": "4619bf66e510cb0b5c16d2a5d3521ad41fc4157fc6ebf54ab968520561711646",
+            "public_png_sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be",
+            "idat_unchanged": true,
+            "decoded_rgba_sha256": "f35deb5fabb4bfa0cca3456fcb8eb5c85df87a3a16cc435c21d5cf7c8890423d",
+            "dimensions": [
+              960,
+              1200
+            ],
+            "boundary": "Render completion names the output and verifies presence, not a same-call cryptographic digest. Later actual MCP124 reads that named PNG and records source/public hashes and pixel identity; do not claim absent original request or a signed temporal attestation."
+          },
+          {
+            "start_evidence": "106-start-final-tone-render",
+            "start_request_recorded": true,
+            "terminal_evidence": "107-final-completed",
+            "terminal_request_recorded": true,
+            "job_id": "31b24bea0da34036b204df115a114e32",
+            "native_output_path": "CASE_DIR/hero.png",
+            "native_output_sha256_measured_by_later_actual_call124": "557bdd4d16b56e6ae21cb025971ed2b8340d4efae6571c41d482158b0ad47e2b",
+            "public_png_sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9",
+            "idat_unchanged": true,
+            "decoded_rgba_sha256": "d246e0da4f5d1cf3c561b2718fc8820e7c2c561f44c4e68fd0887e6596303f61",
+            "dimensions": [
+              1200,
+              1500
+            ],
+            "boundary": "Render completion names the output and verifies presence, not a same-call cryptographic digest. Later actual MCP124 reads that named PNG and records source/public hashes and pixel identity; do not claim absent original request or a signed temporal attestation."
+          }
+        ],
+        "calls_sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0",
+        "publication_sha256": "a1715f1e72f0d6034c39cbf344bf8142b805f6d5bfd342f09c76bcfb60a1a797"
+      }
+    }
+  ]
+}

@@ -4,7 +4,6 @@
   "authenticity_attested": false,
   "errors": [
     "brass-pendulum-denoise: missing or escaping repository file: docs/showcase/brass-pendulum-denoise/ecosystem-production.json",
-    "houdini-procedural-study: missing or escaping repository file: docs/showcase/houdini-procedural-study/ecosystem-production.json",
     "crate-lookdev: missing or escaping repository file: docs/showcase/crate-lookdev/ecosystem-production.json",
     "painted-wood: missing or escaping repository file: docs/showcase/painted-wood/ecosystem-production.json",
     "crystal-freight-native-film: missing or escaping repository file: docs/showcase/crystal-freight-native-film/ecosystem-production.json",

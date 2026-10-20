@@ -3,7 +3,7 @@
 Original audit baseline: [main 7f4389e](https://github.com/dcc-mcp/showcase/commit/7f4389e83430a43f53dbb4bd068f4e8fab72e51c).
 This is a source/evidence audit, not a new production run or a declaration that
 all historical work lacked MCP. The original structural baseline blocked all 16 selected cases. The current
-result after the Trail migration is one verified case and 15 still blocked. No old record is rewritten and no live page is removed.
+result after the Trail and Houdini migrations is two verified cases and 14 still blocked. No old record is rewritten and no live page is removed.
 
 ## Revalidated after main integration (2026-10-20)
 
@@ -56,12 +56,12 @@ Blender production. Honest disclosure was necessary but insufficient.
 
 ## Full selected-case triage
 
-At the original baseline all 16 selected cases lacked the mandatory ecosystem production graph. Trail has since completed the real migration below; the other 15 remain publication-blocked. This is not a claim that all lacked historical MCP. The machine-readable baseline is [ecosystem-gate-baseline.json](ecosystem-gate-baseline.json).
+At the original baseline all 16 selected cases lacked the mandatory ecosystem production graph. Trail and Houdini have since completed the real migrations below; the other 14 remain publication-blocked. This is not a claim that all lacked historical MCP. The machine-readable baseline is [ecosystem-gate-baseline.json](ecosystem-gate-baseline.json).
 
 | Case | Existing scoped evidence / remaining review |
 |---|---|
 | brass-pendulum-denoise | Genuine MCP edits and official dcc-media-enhance documented. Native display transform and FFmpeg delivery route require whole-stage provenance review. |
-| houdini-procedural-study | `calls.json`, recipe and replay evidence support typed modeling/render. Shell JPEG derivative production must be accounted for separately. |
+| houdini-procedural-study | Complete reviewed graph: original real Mantra calls/PNG lineage, exact OBJ replay, three real MCP JPEG conversions and explicitly new Blender cross-DCC lighting/AOV/official independent OIDN. Original missing request68 and later measurement timing boundaries remain explicit. |
 | crate-lookdev | Historical source report claims MCP, but complete original calls and adapter/core versions not public. Later film MCP summary is separate, not retroactive proof. |
 | painted-wood | Historical Designer MCP claim, incomplete original calls/version evidence; webpage derivatives and generated reference are separately scoped. |
 | crystal-freight-native-film | Actual OpenSCAD/Blender/Kdenlive MCP excerpts and separate REAPER score evidence. Verify every original and added derivative/mux/export stage. |
@@ -120,5 +120,13 @@ reopen, not claimed to have a new native reopen. The later candidate source
 archive commit is not mislabeled as the originally executed version.
 
 The [current full gate result](ecosystem-gate-current.json) remains blocked for
-the other 15 cases. The public collection contract passes, but the full site
+the other 14 cases. The public collection contract passes, but the full site
 build intentionally refuses publication. No existing deployed site is removed.
+
+## Houdini migration completed without rewriting original Mantra history
+
+The original hero/preview retain their actual Houdini production and later MCP PNG publication records. All current JPEG encodings were newly executed through the official Blender MCP. The missing original intermediate PNG was not reconstructed from its old JPEG: the third image is explicitly a new Blender lighting exercise using the byte-identical Houdini OBJ. It is not a same-renderer benchmark.
+
+Seven actual stages, native save/reopen, true AOV render, pinned official independent OIDN, AgX display conversion and three JPEG encodings are linked in the [reviewed production graph](houdini-procedural-study/ecosystem-production.json). Native EXR input/output hashes remain distinct from the metadata-only public representation; mature OpenEXR full decoding verifies all11 channels byte-identical. The new62-member ZIP matches retained sources exactly, while the old Release remains unchanged. The actual delivery regression tests reject substituting a public representation hash for the native input actually consumed by OIDN.
+
+The independent review is scoped to these exact bytes and recorded limitations. There is no signed temporal attestation, and the missing original request68 is not invented. The current collection gate passes Trail and Houdini and still blocks14 other selected cases. No existing live page is deleted, no unknown route becomes an asserted bypass, and no historical case is exempted.

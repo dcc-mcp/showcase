@@ -4,3 +4,7 @@
 *.txt text eol=lf
 *.py text eol=lf
 *.ps1 text eol=lf
+
+# Preserve actual exported geometry bytes; do not normalize native OBJ whitespace.
+*.obj binary
+*.exr binary

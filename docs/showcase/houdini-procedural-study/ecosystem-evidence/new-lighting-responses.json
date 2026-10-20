@@ -1,0 +1,402 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "981ed47b59af47bcdc5c87acf67e88413ca39d9b0aeabef2c4c846d403216340",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7851,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__open_scene",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7851,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Opened scene: EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene opened. Use list_objects to see the scene contents.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\u005c\",\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Opened scene: EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\",\"error\":null,\"prompt\":\"Scene opened. Use list_objects to see the scene contents.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\",\"scene_name\":\"Scene\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "4fa93bfd8ccc5f342f1d9e2328f7f98e7f41e32ee0669875743c9a2c9b3e2feb",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7852,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__set_render_settings",
+            "arguments": {
+              "engine": "CYCLES",
+              "resolution_x": 1200,
+              "resolution_y": 1500,
+              "resolution_percentage": 100,
+              "fps": 24,
+              "samples": 64,
+              "file_format": "OPEN_EXR_MULTILAYER"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7852,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render settings updated\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Settings applied. Use render_scene to render.\u005c\",\u005c\"context\u005c\":{\u005c\"engine\u005c\":\u005c\"CYCLES\u005c\",\u005c\"resolution_x\u005c\":1200,\u005c\"resolution_y\u005c\":1500,\u005c\"resolution_percentage\u005c\":100,\u005c\"fps\u005c\":24,\u005c\"fps_base\u005c\":1.0,\u005c\"effective_fps\u005c\":24.0,\u005c\"output_path\u005c\":\u005c\"TEMP_ROOT/\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render settings updated\",\"error\":null,\"prompt\":\"Settings applied. Use render_scene to render.\",\"context\":{\"engine\":\"CYCLES\",\"resolution_x\":1200,\"resolution_y\":1500,\"resolution_percentage\":100,\"fps\":24,\"fps_base\":1.0,\"effective_fps\":24.0,\"output_path\":\"TEMP_ROOT/\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "8e3224d61420813d08dcf04bb19aab43a7b78a75758e045822fa2e023358eed5",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7853,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__set_render_denoise",
+            "arguments": {
+              "enabled": false,
+              "denoiser": "OPENIMAGEDENOISE",
+              "use_gpu": false
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7853,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Updated denoise settings for Scene\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Cycles-only; EEVEE ignores these settings. Use get_render_status to review.\u005c\",\u005c\"context\u005c\":{\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\",\u005c\"engine\u005c\":\u005c\"CYCLES\u005c\",\u005c\"applied\u005c\":{\u005c\"use_denoising\u005c\":false,\u005c\"denoiser\u005c\":\u005c\"OPENIMAGEDENOISE\u005c\",\u005c\"denoising_use_gpu\u005c\":false},\u005c\"use_denoising\u005c\":false,\u005c\"denoiser\u005c\":\u005c\"OPENIMAGEDENOISE\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Updated denoise settings for Scene\",\"error\":null,\"prompt\":\"Cycles-only; EEVEE ignores these settings. Use get_render_status to review.\",\"context\":{\"scene_name\":\"Scene\",\"engine\":\"CYCLES\",\"applied\":{\"use_denoising\":false,\"denoiser\":\"OPENIMAGEDENOISE\",\"denoising_use_gpu\":false},\"use_denoising\":false,\"denoiser\":\"OPENIMAGEDENOISE\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "0a1e705666d85fe478faca660787f6e042dd5de2c6de651552a5cf43d37a6198",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7854,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__set_view_layer_passes",
+            "arguments": {
+              "enable": [
+                "denoising"
+              ],
+              "view_layer_name": "ViewLayer"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7854,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Updated 1 pass(es) on ViewLayer\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use get_view_layer_passes to verify, then set_render_output for a multi-layer EXR.\u005c\",\u005c\"context\u005c\":{\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\",\u005c\"view_layer_name\u005c\":\u005c\"ViewLayer\u005c\",\u005c\"changes\u005c\":[{\u005c\"pass\u005c\":\u005c\"denoising\u005c\",\u005c\"enabled\u005c\":true}],\u005c\"enabled_passes\u005c\":[\u005c\"combined\u005c\",\u005c\"denoising\u005c\"]}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Updated 1 pass(es) on ViewLayer\",\"error\":null,\"prompt\":\"Use get_view_layer_passes to verify, then set_render_output for a multi-layer EXR.\",\"context\":{\"scene_name\":\"Scene\",\"view_layer_name\":\"ViewLayer\",\"changes\":[{\"pass\":\"denoising\",\"enabled\":true}],\"enabled_passes\":[\"combined\",\"denoising\"]}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "a588fcb7e506a73f7cd4f8a85d09a205592ded9c19fa59d4049a9a4d6a0180e9",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7855,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-final/prepare_final.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7855,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-final/prepare_final.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/prepare_final.py\u005c\",\u005c\"stdout\u005c\":\u005c\"\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-final/prepare_final.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-final/prepare_final.py\",\"stdout\":\"\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "70fd32c7c47fa8eccc296bf03cacd6024bf878f63709e68d6ee8323a70d86be4",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7856,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-final/verify_final.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7856,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-final/verify_final.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/verify_final.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"saved_reopened\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"counts\u005c\u005c\u005c\": [115776, 115200], \u005c\u005c\u005c\"positions_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\u005c\u005c\", \u005c\u005c\u005c\"scope\u005c\u005c\u005c\": \u005c\u005c\u005c\"new cross-DCC lighting final only\u005c\u005c\u005c\", \u005c\u005c\u005c\"render\u005c\u005c\u005c\": [1200, 1500, 64]}\u005c\u005cn{\u005c\u005c\u005c\"floor_camera_frustum_covered\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"true_denoising_passes\u005c\u005c\u005c\": true}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-final/verify_final.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-final/verify_final.py\",\"stdout\":\"{\u005c\"saved_reopened\u005c\": true, \u005c\"counts\u005c\": [115776, 115200], \u005c\"positions_sha256\u005c\": \u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\", \u005c\"scope\u005c\": \u005c\"new cross-DCC lighting final only\u005c\", \u005c\"render\u005c\": [1200, 1500, 64]}\u005cn{\u005c\"floor_camera_frustum_covered\u005c\": true, \u005c\"true_denoising_passes\u005c\": true}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "0dc46ddcb1a7257865248ede8def43b8121b7990cfb288da8ba2d78079d80ae1",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7857,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__save_scene",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7857,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Scene saved to EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene saved successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Scene saved to EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\",\"error\":null,\"prompt\":\"Scene saved successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "a1f646faf2d4fc3672781020fc6325c31565c8217432141405b883621078a956",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7858,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__new_scene",
+            "arguments": {}
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7858,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"New scene created\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Check the result with list_objects or use related actions to continue.\u005c\",\u005c\"context\u005c\":{}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"New scene created\",\"error\":null,\"prompt\":\"Check the result with list_objects or use related actions to continue.\",\"context\":{}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "4989991349b561d276f6ffda1019cde68fe5dc3bbb6a5d6f34da100b71c81c32",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7859,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__open_scene",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7859,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Opened scene: EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene opened. Use list_objects to see the scene contents.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\u005c\",\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Opened scene: EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\",\"error\":null,\"prompt\":\"Scene opened. Use list_objects to see the scene contents.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/cross-dcc-lighting-final.blend\",\"scene_name\":\"Scene\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "e5c77f395f14e6c453baa9e38da2a1523ac711afb6e18e1fd72c4b7a84ae5ce6",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7860,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-final/verify_final.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7860,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-final/verify_final.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/verify_final.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"saved_reopened\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"counts\u005c\u005c\u005c\": [115776, 115200], \u005c\u005c\u005c\"positions_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\u005c\u005c\", \u005c\u005c\u005c\"scope\u005c\u005c\u005c\": \u005c\u005c\u005c\"new cross-DCC lighting final only\u005c\u005c\u005c\", \u005c\u005c\u005c\"render\u005c\u005c\u005c\": [1200, 1500, 64]}\u005c\u005cn{\u005c\u005c\u005c\"floor_camera_frustum_covered\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"true_denoising_passes\u005c\u005c\u005c\": true}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-final/verify_final.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-final/verify_final.py\",\"stdout\":\"{\u005c\"saved_reopened\u005c\": true, \u005c\"counts\u005c\": [115776, 115200], \u005c\"positions_sha256\u005c\": \u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\", \u005c\"scope\u005c\": \u005c\"new cross-DCC lighting final only\u005c\", \u005c\"render\u005c\": [1200, 1500, 64]}\u005cn{\u005c\"floor_camera_frustum_covered\u005c\": true, \u005c\"true_denoising_passes\u005c\": true}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "49c5e04c1b14b9c7160709ddb401f912cfb89b4d8ee1b681084cb83ebeaacd43",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7861,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__start_render_job",
+            "arguments": {
+              "output_pattern": "EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####",
+              "start_frame": 1,
+              "end_frame": 1,
+              "step": 1,
+              "resume_missing": false,
+              "device": "CPU",
+              "save_before_render": false,
+              "output_format": "OPEN_EXR_MULTILAYER",
+              "factory_startup": true
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7861,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Background render job submitted (OPEN_EXR_MULTILAYER)\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use get_render_job to monitor progress and cancel_render_job to stop the owned worker.\u005c\",\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Background render job submitted (OPEN_EXR_MULTILAYER)\",\"error\":null,\"prompt\":\"Use get_render_job to monitor progress and cancel_render_job to stop the owned worker.\",\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false,\"_meta\":{\"dcc.next_tools\":{\"on_success\":[\"blender_render__get_render_job\"]}}}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "00e5d268abef4afa1323ff3d5f62abafe3497e065112336fe3873bdb51c75bc8",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7862,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7862,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "6c3faf809ff65b15327fcfbbbf8a046e716194210b40717db381235dcc295676",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7863,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7863,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "ee8ea2caccba6d0a015b5189aae6ae84239c588b4cf576918166949b8061f704",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7864,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7864,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "3feed49b518add08e6db48d45e8f45481e8f1badd167cc4bb7324b51d3b01e91",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7865,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7865,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "9717897220785d346bab6645fe404408dd3e4a018feb64d7ae7d593d5d753000",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7866,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7866,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "5d57d0cf1b1148a8168881d96dcccd79828e5058b36aae50fd0fe768d29effb4",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7867,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7867,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "fa1329519c552ef852db1ba1c9e8ac2870986b3dac49d0086f4ee5c57ef52c7b",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7868,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7868,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "6090c108e56cadc738257b2df7ac933a6748fb08f80cf6de942dd0b113eea6e4",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7869,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7869,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"running\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "32b4b3eb0af52660144f26f03fd4f56e72f96a05920ce2a0b3578e994c9d6611",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:36959/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7870,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "b6f1cacb9a0342c193898eb4a32581b3"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7870,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"status\u005c\":\u005c\"completed\u005c\",\u005c\"pid\u005c\":84,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":1,\u005c\"progress\u005c\":1.0,\u005c\"missing_frame_sample\u005c\":[],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"OPEN_EXR_MULTILAYER\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"b6f1cacb9a0342c193898eb4a32581b3\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"completed\u005c\",\u005c\"terminal\u005c\":true,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":1.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"status\":\"completed\",\"pid\":84,\"expected_frame_count\":1,\"written_frame_count\":1,\"progress\":1.0,\"missing_frame_sample\":[],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_####\",\"output_format\":\"OPEN_EXR_MULTILAYER\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/.dcc-mcp-render-b6f1cacb9a0342c193898eb4a32581b3.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"adapter_job\":{\"job_id\":\"b6f1cacb9a0342c193898eb4a32581b3\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"completed\",\"terminal\":true,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":1.0}},\"isError\":false}}"
+      }
+    }
+  ]
+}

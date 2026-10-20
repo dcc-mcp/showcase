@@ -1,0 +1,40 @@
+{
+  "status": "succeeded",
+  "request_sha256": "661467c05c4bde918a2bdc516b6f083d3a8dd1779c65b336618ca20d38203ff0",
+  "response_sha256": "7d003f44d9d42937489325912e3ff3a04752d875ed7c77a5cf00a92b02fa7eb2",
+  "outputs": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-denoised.exr",
+      "sha256": "2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e"
+    }
+  ],
+  "measurement_role": "Current observed bytes linked to retained actual calls; not a fabricated native response",
+  "scope": "Official version-pinned dcc-media-enhance CLI consumed the private original EXR SHA4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801, NOT the later public metadata-only representation listed as the verifiable input artifact. Exact decoded channel identity is independently measured. Its blender-oidn mature decoder consumes real Combined/Albedo/Normal;2048MiB sampled budget,2threads,original unchanged,exit0 with owned backend cleanup. Not a hard memory limit.",
+  "execution_inputs": [
+    {
+      "logical_name": "frame_0001.exr",
+      "sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+      "public_representation": {
+        "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+        "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+      },
+      "relationship": {
+        "native_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+        "public_artifact": {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+          "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+        },
+        "transformation": "metadata-only File attribute same-length replacement",
+        "pixel_identity": "all 11 complete decoded channel arrays byte-identical",
+        "metadata_evidence": {
+          "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+          "sha256": "2e52c46c53ab295f1718a53e94fd8fc36c4ccf5b800e0ff28e2c003ce569a620"
+        },
+        "decoded_equality_evidence": {
+          "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+          "sha256": "c14c29fd5b5717846f90082e3d8fd5ee343cc1a11b1cab18a20a28c04ec18463"
+        }
+      }
+    }
+  ]
+}

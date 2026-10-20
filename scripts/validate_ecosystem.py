@@ -125,7 +125,7 @@ def delivery_packages(root, packages, produced, source_paths):
     if not isinstance(packages, list):
         raise ValueError('delivery_packages must be an array')
     outputs = set()
-    support_suffixes = {'.md', '.txt', '.json', '.yaml', '.yml', '.py'}
+    support_suffixes = {'.md', '.txt', '.json', '.yaml', '.yml', '.py', '.ps1'}
     for package in packages:
         archive = ref(root, package.get('archive'))
         if archive in outputs or archive in produced or archive in source_paths:

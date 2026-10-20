@@ -1,0 +1,34 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "3d388e392dfbf1d5882d9a590537e6c64405d6449d615b9e2f6419e22c2e4af9",
+      "record": {
+        "files": [
+          {
+            "source_sha256": "50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5",
+            "output_sha256": "879615d15da1c2e6f34bdf80c31027df2aa49c3c56a39cbf83bc03401ebb6eee",
+            "dimensions": [
+              1200,
+              1500
+            ],
+            "bytes": 62108
+          }
+        ],
+        "input_manifest_sha256": "7c889fd8f0f276b08db2919f707436785bf237c51b6e37a7dd741ee8799f26d2",
+        "script_sha256": "6c48b6535cc8953f33b0eedd90e83bbc710cac88766327c58419b3f348c869a5",
+        "settings": {
+          "display": "sRGB",
+          "view": "Standard",
+          "look": "None",
+          "exposure": 0,
+          "gamma": 1,
+          "jpeg_quality": 82,
+          "channels": "RGB",
+          "alpha_mode": "NONE"
+        },
+        "geometry_render": false
+      }
+    }
+  ]
+}

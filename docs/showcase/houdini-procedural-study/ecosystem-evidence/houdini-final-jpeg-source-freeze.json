@@ -1,0 +1,13 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "16e46c81a512ffe9b09ebe07f539b32d3a135e1690ac96aa65c3aebf4d3f6f5c",
+      "record": {
+        "inputs.json": "7c889fd8f0f276b08db2919f707436785bf237c51b6e37a7dd741ee8799f26d2",
+        "run_encoding.py": "e207ce4f2bed1e456a0ea30d89150ce220c7a7caeb3ba66d119d8ca8b705645c",
+        "encode_jpegs_in_host.py": "6c48b6535cc8953f33b0eedd90e83bbc710cac88766327c58419b3f348c869a5"
+      }
+    }
+  ]
+}

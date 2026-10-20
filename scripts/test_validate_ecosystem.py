@@ -195,6 +195,17 @@ class DeliveryTests(unittest.TestCase):
         package=self.package(members,[('README.md',(self.root/'README.md').read_bytes())])
         self.assertEqual(gate.delivery_packages(self.root,package,{},set()),{'delivery.zip'})
 
+    def test_powershell_reproduction_is_support_not_production(self):
+        data=b"param([string]$InstanceId)\n# Reproduction source, not executed by this test.\n"
+        path=self.root/'replay.ps1';path.write_bytes(data)
+        source={'path':'replay.ps1','sha256':gate.digest(path)}
+        members=[{'member':'replay.ps1','source':source,'kind':'support','reason':'Reviewed textual reproduction source only, no execution claim'}]
+        self.assertEqual(gate.delivery_packages(self.root,self.package(members,[('replay.ps1',data)]),{},set()),{'delivery.zip'})
+        for data in (b'\x89PNG\r\n', b'<svg xmlns="http://www.w3.org/2000/svg"/>', b'bad\xff'):
+            path.write_bytes(data);source['sha256']=gate.digest(path)
+            with self.subTest(data=data),self.assertRaises(ValueError):
+                gate.delivery_packages(self.root,self.package(members,[('replay.ps1',data)]),{},set())
+
     def test_binary_and_svg_cannot_be_renamed_to_text_support(self):
         for data in (b'\x89PNG\r\n\x1a\n',b'RIFF1234WAVE',b'glTF1234',b'\xff\xfe\xff',b'<?xml version="1.0"?><!-- x --><svg xmlns="urn:test"/>',b'<REAPER_PROJECT 1>', b'<svg/>'):
             (self.root/'fake.txt').write_bytes(data)

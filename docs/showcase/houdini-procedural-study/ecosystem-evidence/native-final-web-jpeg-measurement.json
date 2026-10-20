@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0",
+  "response_sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0",
+  "outputs": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
+      "sha256": "879615d15da1c2e6f34bdf80c31027df2aa49c3c56a39cbf83bc03401ebb6eee"
+    }
+  ],
+  "measurement_role": "Current observed bytes linked to retained actual calls; not a fabricated native response",
+  "scope": "Standard/None/sRGB/exposure0/gamma1 JPEG82 encoding of already display-transformed PNG; no double AgX, source unchanged,full independent decode and measured error/budget."
+}
