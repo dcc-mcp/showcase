@@ -11,6 +11,7 @@ from functools import partial
 import hashlib
 from http.server import ThreadingHTTPServer
 import json
+import math
 import os
 from pathlib import Path, PurePosixPath
 import re
@@ -39,6 +40,34 @@ ROOT = Path(__file__).resolve().parents[4]
 def require(condition, message):
     if not condition:
         raise RuntimeError(message)
+
+
+def progress_event(stage, status, **details):
+    row = {'utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+           'stage': stage, 'status': status, **details}
+    print('DAWNKEEP_PUBLIC_PROGRESS ' + json.dumps(row, ensure_ascii=False), flush=True)
+    return row
+
+
+def native_media_point(box, control):
+    """CSS coordinates for the reviewed stable-Chrome native control strip.
+
+    Run 39351546034's actual desktop and 390px portrait failure captures show
+    the native timeline centered 22 CSS px above the video bottom, and the
+    play/pause control 24 px from its left and 50 px above its bottom. Read the
+    current rendered video rectangle each time; never write media state.
+    """
+    values = [box.get(key) for key in ('x', 'y', 'width', 'height')]
+    if any(type(value) not in (int, float) or not math.isfinite(value) for value in values):
+        raise ValueError('Native media controls require finite actual video geometry')
+    x, y, width, height = values
+    if width < 200 or height < 100:
+        raise ValueError('Actual video is too small for the reviewed native controls')
+    if control == 'timeline':
+        return x + width / 2, y + height - 22
+    if control == 'play-pause':
+        return x + 24, y + height - 50
+    raise ValueError('Unknown native media control')
 
 
 def deployed_base(value):
@@ -222,6 +251,7 @@ class Session:
     def __init__(self, browser, base, output, locale, mobile, inventory):
         self.base, self.output, self.locale, self.mobile = base, output, locale, mobile
         self.inventory = inventory
+        self.started_at = time.monotonic()
         self.console, self.errors, self.requests, self.responses, self.network_failures = [], [], [], [], []
         self.result = {'locale': locale, 'touch_emulation': mobile, 'passed': False, 'checks': [], 'events': []}
         self.context = browser.new_context(viewport={'width': 390 if mobile else 1440,
@@ -240,6 +270,39 @@ class Session:
         self.page.set_default_timeout(30000)
         self.page.set_default_navigation_timeout(120000)
         output.mkdir()
+
+    def progress(self, stage, status, **details):
+        row = progress_event(stage, status, locale=self.locale,
+                             viewport='portrait' if self.mobile else 'desktop',
+                             elapsed_seconds=round(time.monotonic() - self.started_at, 2), **details)
+        self.result.setdefault('progress', []).append(row)
+
+    def media_control(self, video, control):
+        video.scroll_into_view_if_needed()
+        box = video.bounding_box()
+        require(box is not None, 'Actual video control geometry is missing')
+        x, y = native_media_point(box, control)
+        viewport = self.page.viewport_size
+        require(0 <= x < viewport['width'] and 0 <= y < viewport['height'],
+                'Native media gesture is outside the browser viewport')
+        require(video.evaluate('v=>v.controls'), 'Native video controls are not enabled')
+        require(self.page.evaluate('p=>document.elementFromPoint(p.x,p.y)===document.querySelector("video")',
+                                   {'x': x, 'y': y}), 'Native video control is occluded')
+        if not self.mobile:
+            self.page.mouse.move(x, y)
+            self.page.wait_for_timeout(150)
+        (self.page.touchscreen.tap if self.mobile else self.page.mouse.click)(x, y)
+        event = {'type': 'touchscreen.tap' if self.mobile else 'mouse.click',
+                 'target': 'Chrome native video ' + control, 'x': x, 'y': y, 'video_geometry': box}
+        self.result['events'].append(event)
+        return event
+
+    def media_state(self, video):
+        return video.evaluate('''v => ({time:v.currentTime,duration:v.duration,paused:v.paused,
+            seeking:v.seeking,readyState:v.readyState,controls:v.controls,
+            seekable:Array.from({length:v.seekable.length},(_,i)=>[v.seekable.start(i),v.seekable.end(i)]),
+            totalVideoFrames:v.getVideoPlaybackQuality().totalVideoFrames,
+            error:v.error ? {code:v.error.code,message:v.error.message} : null})''')
 
     def guard_origin(self, route):
         url = route.request.url
@@ -376,8 +439,10 @@ class Session:
         self.result['checks'].append({'name': 'search/filter/empty/reset/back/forward', 'passed': True})
 
     def native_plan(self, frame, boundary, label):
+        self.progress(label + '-engine', 'waiting-for-rendered-frame')
         self.line('DAWNKEEP_FRAME_READY', boundary)
         self.line('DAWNKEEP_STATE', boundary)
+        self.progress(label + '-engine', 'rendered-native-state-observed')
         canvas = frame.locator('#canvas')
 
         def observe():
@@ -453,10 +518,12 @@ class Session:
         expect(self.page.locator('[data-game-stage]')).to_have_attribute('data-state', 'running', timeout=120000)
         expect(self.page.locator('[data-game-sound]')).to_be_hidden()
         plan.gate(touch=self.mobile)
+        self.progress('native-input-gate', 'passed')
         before = plan.tap('start_wave')
         plan.wait(lambda state: state.get('wave', 0) > before['wave'], 'native next-wave through visible UI', before['sample_id'])
         plan.restart_game('native restart after actual wave start')
         self.shot('native-reset', plan.current())
+        self.progress('native-wave-and-reset', 'passed')
         # The outer reset must really navigate the engine document, not merely
         # reset a shell label or send an ignored game command.
         boundary = len(self.console)
@@ -487,6 +554,7 @@ class Session:
         self.layout('game after lifecycle')
         self.result['checks'].append({'name': 'outer fullscreen/exit/reopen', 'passed': True})
         if self.locale == 'en' and not self.mobile:
+            self.progress('required-pck-outage', 'started')
             outage = RequiredPayloadOutage()
             pattern = '**/' + PCK_NAME + '*'
             self.page.route(pattern, outage)
@@ -513,6 +581,7 @@ class Session:
             self.native_plan(frame, boundary, 'outer-load-retry')
             expect(self.page.locator('[data-game-stage]')).to_have_attribute('data-state', 'running')
             self.click('[data-game-exit]')
+            self.progress('required-pck-outage', 'passed', aborted_requests=outage.attempts)
             self.result['checks'].append({'name': 'actual PCK outage, outer error and visible retry',
                                           'aborted_requests': outage.attempts, 'load_error_receipts': load_error_logs,
                                           'parent_error_observed': True, 'failed_iframe_removed': True,
@@ -543,23 +612,37 @@ class Session:
         frames = self.decoded_frames(video)
         self.keyboard_press('Space')
         self.wait(lambda: video.evaluate('v=>v.paused'), 'Native video pause failed')
-        before = video.evaluate('v=>v.currentTime')
+        before = self.media_state(video)
         self.page.wait_for_timeout(300)
-        require(abs(video.evaluate('v=>v.currentTime') - before) < .1, 'Paused video continues advancing')
-        self.keyboard_press('ArrowRight')
-        self.wait(lambda: video.evaluate('v=>v.currentTime') > before + 1, 'Native keyboard seek did not advance')
-        seeked = video.evaluate('v=>v.currentTime')
-        self.keyboard_press('Space')
+        require(abs(self.media_state(video)['time'] - before['time']) < .1, 'Paused video continues advancing')
+        require(math.isfinite(before['duration']) and before['duration'] > before['time'] + 3,
+                'Native film has no finite forward-seek interval')
+        self.shot('case-film-before-seek')
+        self.progress('native-film-seek', 'started', before=before)
+        gesture = self.media_control(video, 'timeline')
+        self.wait(lambda: self.media_state(video)['time'] > before['time'] + 1,
+                  'Physical native timeline seek did not advance')
+        self.wait(lambda: video.evaluate('v=>!v.seeking && v.readyState>=2 && v.paused'),
+                  'Native timeline seek did not settle while paused')
+        after = self.media_state(video)
+        require(after['time'] < after['duration'] - 1, 'Native timeline seek landed at the end instead of the middle')
+        self.shot('case-film-after-seek')
+        self.progress('native-film-seek', 'passed', before=before, after=after, gesture=gesture)
+        self.media_control(video, 'play-pause')
         self.wait(lambda: video.evaluate('v=>!v.paused'), 'Native video resume failed')
         resumed = self.decoded_frames(video)
-        self.keyboard_press('Space')
+        require(resumed['first'] >= after['time'] - .1 and resumed['last'] > after['time'],
+                'Resumed decoded frames did not advance from the actual seek position')
+        self.media_control(video, 'play-pause')
         self.wait(lambda: video.evaluate('v=>v.paused'), 'Native film final pause failed')
         self.shot('case-film')
         media_url = video.evaluate('v=>v.currentSrc')
         require(any(urlsplit(media_url).path == urlsplit(urljoin(self.base, f)).path for f in self.inventory['films']),
                 'Page film is not the accepted inventoried media')
         self.result['checks'].append({'name': 'native film play/pause/seek/resume', 'url': media_url,
-                                      'frames': frames, 'resumed_frames': resumed, 'seeked_seconds': seeked})
+                                      'frames': frames, 'resumed_frames': resumed, 'seeked_seconds': after['time'],
+                                      'seek_before': before, 'seek_after': after, 'seek_gesture': gesture})
+        self.progress('native-film-playback', 'passed')
         name = Path(self.inventory['source_zip']).name
         download_link = self.page.locator(f'a[download="{name}"]').first
         expect(download_link).to_have_count(1)
@@ -570,6 +653,7 @@ class Session:
         data = Path(download.path()).read_bytes()
         observed = verify_bytes(data, self.inventory['assets'][self.inventory['source_zip']], name)
         self.result['checks'].append({'name': 'actual native ZIP download', **observed})
+        self.progress('native-zip-download', 'passed', **observed)
         boundary = len(self.console)
         self.click('[data-play-start]')
         frame = self.embedded_frame('[data-play-frame] iframe')
@@ -614,15 +698,22 @@ class Session:
         self.healthy()
 
     def run(self):
+        self.progress('viewport', 'started')
+        stage = 'setup'
         try:
-            self.gallery()
-            self.game_page()
-            self.case_page()
-            self.standalone_page()
+            # Exercise media before the more expensive engine lifecycle route.
+            # All four stages remain mandatory for every locale/viewport.
+            for stage, action in (('gallery', self.gallery), ('case-media-and-embed', self.case_page),
+                                  ('game-lifecycle', self.game_page), ('standalone', self.standalone_page)):
+                self.progress(stage, 'started')
+                action()
+                self.progress(stage, 'passed')
             self.healthy()
             self.result['passed'] = True
+            self.progress('viewport', 'passed')
         except Exception as error:
             self.result['blocker'] = str(error)
+            self.progress(stage, 'failed', blocker=str(error))
             try:
                 self.shot('failure')
             except Exception:
@@ -674,7 +765,9 @@ def main():
         with sync_playwright() as pw:
             request = pw.request.new_context()
             try:
+                progress_event('public-artifacts', 'started', count=len(inventory['assets']))
                 fetch_artifacts(request, base, inventory, out, report)
+                progress_event('public-artifacts', 'passed', count=len(inventory['assets']))
             finally:
                 request.dispose()
             browser = pw.chromium.launch(headless=True, executable_path=selected['executable_path'],

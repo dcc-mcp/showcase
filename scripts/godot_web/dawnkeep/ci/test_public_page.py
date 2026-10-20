@@ -179,6 +179,71 @@ class RawTrackedSourceTests(unittest.TestCase):
             gate.source_receipt(self.root, self.head)
 
 
+class NativeMediaAndProgressTests(unittest.TestCase):
+    def test_native_timeline_and_play_controls_match_reviewed_capture_geometry(self):
+        desktop = {'x': 316, 'y': 285, 'width': 960, 'height': 540}
+        portrait = {'x': 20, 'y': 338, 'width': 350, 'height': 197}
+        self.assertEqual(gate.native_media_point(desktop, 'timeline'), (796, 803))
+        self.assertEqual(gate.native_media_point(portrait, 'timeline'), (195, 513))
+        self.assertEqual(gate.native_media_point(desktop, 'play-pause'), (340, 775))
+        self.assertEqual(gate.native_media_point(portrait, 'play-pause'), (44, 485))
+
+    def test_invalid_native_video_geometry_fails_before_input(self):
+        box = {'x': 0, 'y': 0, 'width': 350, 'height': 197}
+        for invalid in ({**box, 'x': float('nan')}, {**box, 'height': 40},
+                        {**box, 'width': 190}, {**box, 'width': '350'}):
+            with self.assertRaises(ValueError):
+                gate.native_media_point(invalid, 'timeline')
+        with self.assertRaises(ValueError):
+            gate.native_media_point(box, 'unknown')
+
+    def test_seek_is_physical_and_preserves_paused_advance_and_resumed_frame_assertions(self):
+        tree = ast.parse(Path(gate.__file__).read_text())
+        method = next(n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == 'case_page')
+        source = ast.unparse(method)
+        self.assertIn("self.media_control(video, 'timeline')", source)
+        self.assertIn("['time'] > before['time'] + 1", source)
+        self.assertIn('!v.seeking && v.readyState>=2 && v.paused', source)
+        self.assertIn("resumed['last'] > after['time']", source)
+        self.assertIn("'seek_before': before", source)
+        self.assertIn("'seek_after': after", source)
+        self.assertIn("self.shot('case-film-before-seek')", source)
+        self.assertIn("self.shot('case-film-after-seek')", source)
+        self.assertNotIn('ArrowRight', source)
+        self.assertNotIn('currentTime =', source)
+
+    def test_progress_is_flushed_and_viewport_identified(self):
+        with patch('builtins.print') as output:
+            result = gate.progress_event('case-media', 'started', locale='zh', viewport='portrait')
+        self.assertTrue(output.call_args.kwargs['flush'])
+        self.assertIn('DAWNKEEP_PUBLIC_PROGRESS ', output.call_args.args[0])
+        self.assertEqual(result['locale'], 'zh')
+        self.assertEqual(result['viewport'], 'portrait')
+        self.assertIn('utc', result)
+
+    def test_reordering_keeps_every_stage_required_and_runs_media_before_heavy_game(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            session = gate.Session.__new__(gate.Session)
+            session.result = {'passed': False}
+            session.output = Path(tmp)
+            session.context = Mock()
+            session.progress = Mock()
+            session.healthy = Mock()
+            session.console, session.requests, session.responses = [], [], []
+            session.network_failures, session.errors = [], []
+            order = []
+            session.gallery = lambda: order.append('gallery')
+            session.case_page = lambda: order.append('case')
+            session.game_page = lambda: order.append('game')
+            session.standalone_page = lambda: order.append('standalone')
+            result = session.run()
+        self.assertEqual(order, ['gallery', 'case', 'game', 'standalone'])
+        self.assertTrue(result['passed'])
+        self.assertEqual(session.progress.call_args_list[0].args, ('viewport', 'started'))
+        self.assertEqual(session.progress.call_args_list[-1].args, ('viewport', 'passed'))
+        session.context.close.assert_called_once()
+
+
 class BrowserPolicyTests(unittest.TestCase):
     def test_launch_keeps_browser_security_and_no_fallback_binary(self):
         self.assertEqual(gate.BROWSER_ARGS, ['--disable-dev-shm-usage'])
@@ -218,7 +283,9 @@ class BrowserPolicyTests(unittest.TestCase):
         self.assertIn('with frame.expect_navigation(', source)
         self.assertIn("self.line('DAWNKEEP_WEB_EXIT'", source)
         self.assertIn('requestVideoFrameCallback', source)
-        self.assertIn("self.keyboard_press('ArrowRight')", source)
+        self.assertIn("self.media_control(video, 'timeline')", source)
+        self.assertIn("self.media_control(video, 'play-pause')", source)
+        self.assertNotIn("self.keyboard_press('ArrowRight')", source)
         self.assertIn('self.page.expect_download()', source)
         self.assertNotIn('plan.full_desktop(', source)
         self.assertNotIn('plan.combat(', source)
