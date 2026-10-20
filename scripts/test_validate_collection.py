@@ -486,9 +486,29 @@ class ReviewedPublicTextTests(unittest.TestCase):
         files = json.loads((repo / "play/manifest.json").read_text(encoding="utf-8"))["files"]
         hashes = {item["path"]: item["sha256"] for item in files}
         self.assertEqual(set(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES),
-                         {"play/README.md", "play/runtime/godot-4.6.3.js"})
+                         {"play/README.md", "play/runtime/godot-4.6.3.js",
+                          "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt"})
         for path, (digest, _) in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES.items():
             self.assertEqual(digest, hashes[path])
+
+    def test_unmodified_font_notices_are_reviewed_but_edits_and_moves_are_not(self):
+        repo = Path(__file__).resolve().parents[1]
+        for rel in ('play/dawnkeep-defense/ui/FONT-LICENSE.txt', 'play/parcel-switchyard/FONT-LICENSE.txt'):
+            data = (repo / rel).read_bytes()
+            path = self.root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+            self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+            self.assertEqual(path.read_bytes(), data)  # Legal text is never rewritten.
+            path.write_bytes(data + b'\nchanged\n')
+            self.assertTrue(validate_collection.scan_text_file(path, self.root))
+            path.write_bytes(data + b'\n/home/private-user/secret\n')
+            issues = validate_collection.scan_text_file(path, self.root)
+            self.assertTrue(any('private filesystem path' in issue for issue in issues))
+            moved = self.root / 'assets/FONT-LICENSE.txt'
+            moved.parent.mkdir(exist_ok=True)
+            moved.write_bytes(data)
+            self.assertTrue(validate_collection.scan_text_file(moved, self.root))
 
     def test_tracked_public_readme_matches_review_and_preserves_content(self):
         repo = Path(__file__).resolve().parents[1]
