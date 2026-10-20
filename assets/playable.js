@@ -14,7 +14,10 @@
     let stopFit = null;
     const fitFrame = frame => {
       const viewport = Math.min(window.innerHeight, window.visualViewport?.height || window.innerHeight);
-      frame.style.height = Math.max(160, Math.floor(viewport - actions.getBoundingClientRect().height - 24)) + "px";
+      // scrollIntoView honors the site's root scroll-padding-top. Reserve that
+      // inset as well as the toolbar so the bottom native controls stay visible.
+      const inset = Math.max(0, parseFloat(window.getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
+      frame.style.height = Math.max(160, Math.floor(viewport - inset - actions.getBoundingClientRect().height - 24)) + "px";
       frame.style.maxHeight = "none";
       frame.style.minHeight = "0";
     };

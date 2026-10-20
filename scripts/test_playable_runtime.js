@@ -26,7 +26,7 @@ function fixture(caseSlug='dawnkeep-defense') {
   const section=node({dataset:{playCase:caseSlug,playRevision:'verified'},querySelector:s=>map[s]});
   const observers=[];
   const visualViewport=node({height:844});
-  const window=node({innerHeight:844,visualViewport,location:{href:'https://example.com/cases/test/',origin:'https://example.com'},
+  const window=node({innerHeight:844,visualViewport,getComputedStyle:()=>({scrollPaddingTop:'28px'}),location:{href:'https://example.com/cases/test/',origin:'https://example.com'},
     ResizeObserver:class {constructor(fn){this.fn=fn;observers.push(this);}observe(n){this.node=n;}disconnect(){this.disconnected=true;}}});
   const document={documentElement:{lang:'en'},querySelectorAll:()=>[section],createElement:tag=>node({tag,contentWindow:{},offsetHeight:760,clientHeight:758})};
   vm.runInNewContext(source,{window,document,URL,Math,Number});
@@ -35,25 +35,29 @@ function fixture(caseSlug='dawnkeep-defense') {
 let passed=0;function test(name,fn){fn();passed++;console.log('PASS '+name);}
 test('Dawnkeep opens a viewport-fit frame with an aligned persistent toolbar',()=>{
   const f=fixture();f.start.emit('click');const frame=f.holder.children[0];
-  assert.equal(frame.style.height,'760px');assert.equal(frame.style.minHeight,'0');assert.equal(frame.style.maxHeight,'none');
+  assert.equal(frame.style.height,'732px');assert.equal(frame.style.minHeight,'0');assert.equal(frame.style.maxHeight,'none');
   assert.equal(f.section.dataset.playOpen,'true');assert.equal(f.exit.hidden,false);assert.equal(f.start.hidden,true);
   assert.equal(f.actions.scrolled.block,'start');assert.equal(frame.focused.preventScroll,true);
   assert.equal(f.window.count('resize'),1);assert.equal(f.observers.length,1);
 });
 test('visual viewport and toolbar changes refit without expanding beyond the screen',()=>{
   const f=fixture();f.start.emit('click');f.window.visualViewport.height=700;f.window.visualViewport.emit('resize');
-  assert.equal(f.holder.children[0].style.height,'616px');f.actions.height=112;f.observers[0].fn();
-  assert.equal(f.holder.children[0].style.height,'564px');
+  assert.equal(f.holder.children[0].style.height,'588px');f.actions.height=112;f.observers[0].fn();
+  assert.equal(f.holder.children[0].style.height,'536px');
+});
+test('root scroll padding is reserved rather than clipping bottom controls',()=>{
+  const f=fixture();f.start.emit('click');f.window.getComputedStyle=()=>({scrollPaddingTop:'48px'});f.window.emit('resize');
+  assert.equal(f.holder.children[0].style.height,'712px');
 });
 test('same-origin game resize cannot grow Dawnkeep beyond its bounded frame',()=>{
   const f=fixture();f.start.emit('click');const frame=f.holder.children[0];
   f.window.emit('message',{source:frame.contentWindow,origin:'https://example.com',data:{type:'showcase:resize',height:10000}});
-  assert.equal(frame.style.height,'760px');
+  assert.equal(frame.style.height,'732px');
 });
 test('foreign resize messages still do nothing',()=>{
   const f=fixture();f.start.emit('click');const frame=f.holder.children[0];f.window.visualViewport.height=600;
   f.window.emit('message',{source:frame.contentWindow,origin:'https://evil.example',data:{type:'showcase:resize',height:9999}});
-  assert.equal(frame.style.height,'760px');
+  assert.equal(frame.style.height,'732px');
 });
 test('exit removes observers and frame, and reopen creates only one listener',()=>{
   const f=fixture();f.start.emit('click');f.start.emit('click');assert.equal(f.holder.children.length,1);f.exit.emit('click');
