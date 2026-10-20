@@ -52,6 +52,21 @@ def envelope(result):
     return result
 
 
+def validate_script_result(method, result):
+    required={
+        'inspect':{'engine','pid','live','playing','movie_enabled','movie_file','fps','project_sha256'},
+        'snapshot':{'movie_enabled','settings','project_sha256'},
+        'configure':{'configured','before','expected_args','configured_frame'},
+        'restore':{'restoration_requested','cached_readback_pending','project_sha256'},
+        'pack_sources':{'packed'},
+    }
+    assert isinstance(result,dict) and required[method] <= result.keys(), (method,result)
+    flag={'configure':'configured','restore':'restoration_requested','pack_sources':'packed'}.get(method)
+    if flag:
+        assert result[flag] is True, (method,result)
+    return result
+
+
 def group_census(pgid):
     # Zombies cannot produce output; the owned leader still requires Popen.wait.
     rows, errors = [], []
@@ -345,7 +360,7 @@ def main():
             'arguments':arguments or {},'budget_ms':50,'chunked':False})
         assert value.get('executed') is True and isinstance(value.get('result'), dict), value
         assert value.get('budget_exceeded') is False, value
-        return value['result']
+        return validate_script_result(method,value['result'])
 
     def wait_inspect(predicate, timeout=20):
         deadline = time.monotonic()+timeout

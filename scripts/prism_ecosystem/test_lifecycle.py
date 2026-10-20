@@ -11,6 +11,16 @@ spec=importlib.util.spec_from_file_location('prism_candidate',Path(__file__).wit
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 
 class LifecycleTests(unittest.TestCase):
+    def test_empty_native_result_is_not_success(self):
+        for method in ('inspect','snapshot','configure','restore','pack_sources'):
+            with self.assertRaises(AssertionError): module.validate_script_result(method,{})
+
+    def test_configuration_requires_explicit_success(self):
+        row={'configured':False,'before':{},'expected_args':'x','configured_frame':1}
+        with self.assertRaises(AssertionError): module.validate_script_result('configure',row)
+        row['configured']=True
+        self.assertEqual(module.validate_script_result('configure',row),row)
+
     def test_actual_self_identity(self):
         row=module.process_identity(os.getpid())
         self.assertEqual(row['status'],'live')

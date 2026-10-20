@@ -52,6 +52,16 @@ func snapshot(_arguments: Dictionary) -> Dictionary:
   old.settings[key] = {"present":ProjectSettings.has_setting(key), "value":ProjectSettings.get_setting(key)}
  return old
 
+# JSON transports integral values as FLOAT in Godot. Normalize only the known
+# integer setting, reject fractional/non-numeric input, then retain full equality.
+func normalized_before(value: Dictionary) -> Dictionary:
+ var old = value.duplicate(true)
+ var fps = old.settings[KEYS[1]].value
+ assert(typeof(fps) == TYPE_INT or typeof(fps) == TYPE_FLOAT, "FPS snapshot must be numeric")
+ assert(fps >= 1 and fps <= 300 and fps == int(fps), "FPS snapshot must be exact integral")
+ old.settings[KEYS[1]].value = int(fps)
+ return old
+
 func configure(arguments: Dictionary) -> Dictionary:
  assert(not EditorInterface.is_playing_scene(), "Existing runtime is not owned")
  var live = controls()
@@ -65,7 +75,7 @@ func configure(arguments: Dictionary) -> Dictionary:
  assert(directory != null, "Cannot inspect output directory")
  directory.include_hidden = true
  assert(directory.get_files().is_empty() and directory.get_directories().is_empty(), "Output must be fresh")
- var old = arguments.before
+ var old = normalized_before(arguments.before)
  assert(old == snapshot({}), "Caller must persist fresh snapshot before any mutation")
  var run_args = "--quit-after %d -- --demo" % frames
  ProjectSettings.set_setting(KEYS[0], output)
@@ -73,12 +83,12 @@ func configure(arguments: Dictionary) -> Dictionary:
  ProjectSettings.set_setting(KEYS[2], run_args)
  EditorInterface.set_movie_maker_enabled(true)
  assert(FileAccess.get_sha256("res://project.godot") == old.project_sha256)
- return {"before":old, "expected_args":run_args, "configured_frame":Engine.get_process_frames(),
+ return {"configured":true, "before":old, "expected_args":run_args, "configured_frame":Engine.get_process_frames(),
   "note":"Caller must wait a later editor tick and inspect actual cached args before typed play_scene."}
 
 func restore(arguments: Dictionary) -> Dictionary:
  assert(not EditorInterface.is_playing_scene(), "Never restore settings while runtime is active")
- var old = arguments.before
+ var old = normalized_before(arguments.before)
  for key in KEYS:
   assert(old.settings.has(key))
   ProjectSettings.set_setting(key, old.settings[key].value if old.settings[key].present else null)
