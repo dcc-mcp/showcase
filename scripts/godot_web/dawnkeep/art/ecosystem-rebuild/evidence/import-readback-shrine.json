@@ -1,0 +1,151 @@
+{
+  "group": "shrine",
+  "passed": true,
+  "scope": "actual native GLB reimport; world-space geometry and material-presence check",
+  "objects": [
+    {
+      "name": "Shrine_dais",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 168,
+      "materials": 2
+    },
+    {
+      "name": "Shrine_upper_step",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 120,
+      "materials": 2
+    },
+    {
+      "name": "Shrine_inlay",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 388,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.002",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.003",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.004",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.005",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.006",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Compass_inlay.007",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Shrine_embracing_rib",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 54,
+      "materials": 2
+    },
+    {
+      "name": "Rib_gilded_foot",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Shrine_embracing_rib.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 54,
+      "materials": 2
+    },
+    {
+      "name": "Rib_gilded_foot.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Shrine_embracing_rib.002",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 54,
+      "materials": 2
+    },
+    {
+      "name": "Rib_gilded_foot.002",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Shrine_embracing_rib.003",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 54,
+      "materials": 2
+    },
+    {
+      "name": "Rib_gilded_foot.003",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Crystal_socket",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 80,
+      "materials": 2
+    },
+    {
+      "name": "Heart_main_crystal",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 84,
+      "materials": 2
+    },
+    {
+      "name": "Heart_orbit_shard",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 70,
+      "materials": 2
+    },
+    {
+      "name": "Heart_orbit_shard.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 70,
+      "materials": 2
+    },
+    {
+      "name": "Heart_orbit_shard.002",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 70,
+      "materials": 2
+    }
+  ]
+}
