@@ -64,7 +64,8 @@ def read_and_validate(root, cases):
         assets.update({path, license_path})
     if records:
         assets.update({'assets/model-preview.js', 'assets/model-preview.css',
-                       'assets/vendor/model-viewer/model-viewer.min.js', 'assets/vendor/model-viewer/LICENSE'})
+                       'assets/vendor/model-viewer/model-viewer.min.js', 'assets/vendor/model-viewer/LICENSE',
+                       'assets/vendor/model-viewer/VENDOR.json'})
     return records, assets
 
 def section(entry):
