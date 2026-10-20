@@ -18,11 +18,33 @@ class MovementRunner extends Node:
  var direction := Vector3.ZERO
  var ticks := 0
  var positions: Array[Vector3] = []
+ var capture_chart := false
+ var chart_face := 1
+ var chart_run := 0
+ var chart_max_run := 0
+ var chart_states: Array[Dictionary] = []
+ var chart_steps: Array[Dictionary] = []
+ var chart_last_state: Dictionary = {}
  func _physics_process(delta: float) -> void:
   if not active:return
   scene.swim.step(scene.player, direction, delta, scene.height_at(scene.player.position.x, scene.player.position.z))
   ticks += 1
   positions.append(scene.player.position)
+  if capture_chart:
+   var snapshot: Dictionary = scene.swim.chart_motion_snapshot()
+   var step: Dictionary = snapshot.frames[-1]
+   chart_steps.append(step)
+   var contact := false
+   for hit in step.collisions:
+    if hit.interaction_target == 0 and hit.intent == "solid" and chart_face * float(hit.normal[2]) > 0.999:
+     contact = true
+   var blocked: bool = contact and -chart_face * float(step.movement_input[1]) > 0.5 and -chart_face * float(step.requested_velocity[2]) > 0.1 and absf(float(step.velocity[2])) <= 0.08
+   chart_run = chart_run + 1 if blocked else 0
+   chart_max_run = maxi(chart_max_run, chart_run)
+   scene.last_move = direction
+   scene.sample_id += 1
+   chart_last_state = scene.observed_state()
+   if chart_steps.size() % 13 == 0:chart_states.append(chart_last_state)
 
 func _initialize() -> void:
  run.call_deferred()
@@ -144,6 +166,69 @@ func test_solids() -> void:
  await blocked_crossing("grove_chest", chest, 0.41, 1.4)
  await blocked_crossing("beacon_base", beacon, 1.15, 2.0)
  await blocked_crossing("west_return_wall", wall, 0.335, 1.4)
+
+func test_chart_normal_contacts() -> void:
+ # These are explicit spawn/direct-controller fixtures, never OS-input proof.
+ # Removing the real authored collider repeats exactly the same approach and
+ # must destroy contact evidence and permit crossing its former face plane.
+ var chart_body: CollisionObject3D
+ for body in bodies:
+  if body.get_meta("interaction_target", -1) == 0 and body.get_meta("collision_intent", "") == "solid":
+   chart_body = body
+   break
+ check(chart_body != null, "chart normal fixture locates the actual authored collider")
+ if chart_body == null:return
+ var original_layer := chart_body.collision_layer
+ for face in [1, -1]:
+  for mode in ["solid", "collider_removed", "idle"]:
+   for lane_offset in ([0.0] if mode == "idle" else [-0.06, 0.0, 0.06]):
+    chart_body.collision_layer = 0 if mode == "collider_removed" else original_layer
+    await physics_frame
+    var direction := Vector3(0.2905 * face, 0, -0.9569 * face).normalized()
+    var contact_x: float = 1.3 - 0.11 * face + float(lane_offset) / 0.9569
+    var start_x: float = contact_x - direction.x * (0.63 / absf(direction.z))
+    var start_z: float = 7.8 + 1.2 * face
+    if mode == "idle":
+     start_x = contact_x
+     start_z = 7.8 + 0.571 * face
+    await spawn_ground(start_x, start_z)
+    game.swim.observe_chart_motion = true
+    mover.chart_states.clear()
+    mover.chart_steps.clear()
+    mover.chart_run = 0
+    mover.chart_max_run = 0
+    mover.chart_face = face
+    mover.capture_chart = true
+    mover.direction = Vector3.ZERO if mode == "idle" else direction
+    var beginning := mover.ticks
+    while mover.ticks - beginning < 65 and mover.chart_run < 14:await physics_frame
+    mover.active = false
+    mover.capture_chart = false
+    if not mover.chart_last_state.is_empty() and (mover.chart_states.is_empty() or mover.chart_states[-1].physics_frame != mover.chart_last_state.physics_frame):
+     mover.chart_states.append(mover.chart_last_state)
+    var minimum_side := 100.0
+    var chart_hits := 0
+    for step in mover.chart_steps:
+     minimum_side = minf(minimum_side, face * (float(step.after[2]) - 7.8))
+     for hit in step.collisions:
+      if hit.interaction_target == 0 and hit.intent == "solid":chart_hits += 1
+    var label: String = "chart_%s_face_%d_offset_%.2f" % [mode, face, lane_offset]
+    if mode == "solid":
+     check(mover.chart_max_run >= 12, label + ": actual contacts block normal velocity for twelve steps while sliding")
+     check(minimum_side >= 0.565, label + ": capsule remains outside the flat face")
+    elif mode == "collider_removed":
+     check(chart_hits == 0, label + ": removed collider supplies no false contact")
+     check(minimum_side < 0.35, label + ": same input crosses the absent collider face")
+    else:
+     check(mover.chart_max_run == 0, label + ": stationary input cannot pass contact gate")
+    checks.append({"check":"actual_controller_chart_normal_contact", "case":label, "mode":mode,
+     "expected_valid":mode == "solid", "face":face, "lane_offset":lane_offset, "after_physics_frame":int(mover.chart_steps[0].physics_frame) - 1,
+     "minimum_side":minimum_side, "chart_hit_count":chart_hits, "maximum_contact_run":mover.chart_max_run,
+     "samples":mover.chart_states.duplicate(true), "evidence_scope":"fixture spawn and direct production controller; real KinematicCollision3D receipts; not physical keyboard proof"})
+    chart_body.collision_layer = original_layer
+ game.swim.observe_chart_motion = false
+ chart_body.collision_layer = original_layer
+ await physics_frame
 
 func first_mesh(node: Node) -> MeshInstance3D:
  for mesh in meshes:
@@ -353,6 +438,7 @@ func run() -> void:
  await physics_frame
  await physics_frame
  await test_solids()
+ await test_chart_normal_contacts()
  test_imported_solids()
  test_other_paving()
  await test_steps()

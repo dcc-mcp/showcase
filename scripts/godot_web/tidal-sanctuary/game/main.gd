@@ -90,6 +90,13 @@ var interface:CanvasLayer
 var tide_audio:Node
 var pending_begin_trigger := ""
 var opening_audio_status := ""
+var modal_touch_index := -1
+var modal_touch_mode := ""
+var modal_touch_action := ""
+var modal_mouse_owned := false
+var web_touch_cancel_callback:JavaScriptObject
+var web_document:JavaScriptObject
+var web_window:JavaScriptObject
 var journey_started:=false
 var audio_muted:=false
 var restart_pending:=false
@@ -135,7 +142,16 @@ func _ready() -> void:
  make_birds()
  tide_audio=TideAudio.new();add_child(tide_audio)
  make_ui()
- if OS.has_feature("web"):get_tree().auto_accept_quit=false
+ if OS.has_feature("web"):
+  get_tree().auto_accept_quit=false
+  # Godot 4.6.3 maps DOM touchcancel to an ordinary touch release. Observe
+  # cancellation first through the public bridge; never turn it into Begin.
+  web_document=JavaScriptBridge.get_interface("document")
+  web_touch_cancel_callback=JavaScriptBridge.create_callback(_web_touch_canceled)
+  web_document.addEventListener("touchcancel",web_touch_cancel_callback,true)
+  web_document.addEventListener("visibilitychange",web_touch_cancel_callback,true)
+  web_window=JavaScriptBridge.get_interface("window")
+  web_window.addEventListener("blur",web_touch_cancel_callback,true)
  load_game()
  if demo:
   activated=[false,false,false]
@@ -686,6 +702,7 @@ func make_ui() -> void:
  interface.journal_requested.connect(show_journal)
  interface.card_primary_requested.connect(card_primary)
  interface.card_secondary_requested.connect(card_secondary)
+ interface.card_changed.connect(_disarm_modal_touch)
 
 func control_help(touch_available:bool) -> String:
  return tr_text(story.ui.controls_touch if touch_available else story.ui.controls_keyboard)
@@ -859,6 +876,7 @@ func observed_state() -> Dictionary:
  data["render_diagnostics"]={"draw_frame":Engine.get_frames_drawn(),"monotonic_usec":Time.get_ticks_usec()}
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
  data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
+ if swim.observe_chart_motion:data["chart_motion"]=swim.chart_motion_snapshot()
  var reach:=interaction_status()
  data["interaction_available"]=reach.available;data["interaction_reason"]=reach.reason;data["interaction_target"]=reach.target_index
  data["journey_started"]=journey_started;data["audio_muted"]=audio_muted
@@ -866,6 +884,8 @@ func observed_state() -> Dictionary:
   var audio_state:Dictionary=tide_audio.get_state()
   data["audio_ready"]=audio_state.get("ready",false)
   data["audio_status"]=audio_state.get("status","loading")
+  data["audio_error"]=audio_state.get("error","")
+  data["audio_start_pending"]=audio_state.get("start_pending",false)
   data["audio_driver"]=AudioServer.get_driver_name()
  for field in ["begin_rect","audio_rect","journal_rect"]:
   var control:Control=interface.card_primary if field=="begin_rect" else (interface.audio_button if field=="audio_rect" else interface.journal_button)
@@ -933,18 +953,59 @@ func _unhandled_input(event: InputEvent) -> void:
    touch_active=true;touch_origin=event.position;touch_index=event.index
    touch_start_position=player.position;touch_start_frame=Engine.get_physics_frames();touch_drag_events=0;touch_gesture_id+=1
 
+func _disarm_modal_touch() -> void:
+ modal_touch_index=-1;modal_touch_mode="";modal_touch_action=""
+
+func _web_touch_canceled(_arguments:Array) -> void:
+ _disarm_modal_touch()
+
+func _modal_touch_valid() -> bool:
+ return modal_touch_index>=0 and is_instance_valid(interface) and interface.card_mode==modal_touch_mode and interface.card_primary.is_visible_in_tree() and not interface.card_primary.disabled and interface.card_primary.text==modal_touch_action
+
+func _handle_modal_touch(event:InputEvent) -> bool:
+ if modal_touch_index>=0 and not _modal_touch_valid():_disarm_modal_touch()
+ var owns_modal:bool=interface.card_mode in ["opening","audio_retry"]
+ # Godot dispatches touch-emulated mouse events BEFORE the original touch.
+ # Own only presses inside this primary action, through their release even if
+ # the card changes. Body gestures remain native RichTextLabel scrolling.
+ if event is InputEventMouseButton and event.device==InputEvent.DEVICE_ID_EMULATION:
+  if event.pressed:
+   modal_mouse_owned=owns_modal and interface.card_primary.is_visible_in_tree() and interface.card_primary.get_global_rect().has_point(event.position)
+   return modal_mouse_owned
+  var owned:=modal_mouse_owned
+  modal_mouse_owned=false
+  return owned
+ if not owns_modal:return false
+ if event is InputEventScreenDrag and event.index==modal_touch_index:
+  if not interface.card_primary.get_global_rect().has_point(event.position):_disarm_modal_touch()
+  return true
+ if not event is InputEventScreenTouch:return false
+ if event.pressed:
+  if not interface.card_primary.is_visible_in_tree() or not interface.card_primary.get_global_rect().has_point(event.position):return false
+  if modal_touch_index<0 and not event.canceled and not interface.card_primary.disabled:
+   modal_touch_index=event.index;modal_touch_mode=interface.card_mode;modal_touch_action=interface.card_primary.text
+  return true
+ if event.index!=modal_touch_index:return false
+ var activate:bool=not event.canceled and _modal_touch_valid() and interface.card_primary.get_global_rect().has_point(event.position)
+ var mode:=modal_touch_mode
+ _disarm_modal_touch()
+ # A touch grants browser transient activation on release, not on press.
+ if activate:
+  if mode=="opening":begin_journey("touch_begin")
+  else:tide_audio.resume_from_gesture("touch_audio_retry")
+ return true
+
 func _input(event:InputEvent) -> void:
  if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
   touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
   print("TIDAL_TOUCH_RELEASE ",JSON.stringify({"schema":1,"gesture_id":touch_gesture_id,"touch_index":event.index,"before":[touch_start_position.x,touch_start_position.y,touch_start_position.z],"after":[player.position.x,player.position.y,player.position.z],"physics_frames_elapsed":Engine.get_physics_frames()-touch_start_frame,"drag_events":touch_drag_events,"canceled":event.canceled,"demo":demo,"active_after":touch_active,"move_after":[touch_move.x,touch_move.y]}))
 
   return
+ if _handle_modal_touch(event):get_viewport().set_input_as_handled();return
  if not journey_started:
   if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_KP_ENTER,KEY_E,KEY_SPACE]:
    begin_journey("key_enter" if event.keycode in [KEY_ENTER,KEY_KP_ENTER] else "key_begin")
    get_viewport().set_input_as_handled();return
-  if event is InputEventScreenTouch and event.pressed and interface.card_primary.get_global_rect().has_point(event.position):
-   begin_journey("touch_begin");get_viewport().set_input_as_handled();return
   return
  if not interface.card_mode.is_empty():
   if event is InputEventKey and event.pressed and not event.echo:
@@ -973,6 +1034,7 @@ func _notification(what:int) -> void:
  if what==NOTIFICATION_WM_CLOSE_REQUEST and OS.has_feature("web"):
   save_game("exit");get_tree().quit();return
  if what==NOTIFICATION_APPLICATION_FOCUS_OUT:
+  _disarm_modal_touch()
   touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
   if is_instance_valid(tide_audio):tide_audio.set_focus_active(false)
  if what==NOTIFICATION_APPLICATION_FOCUS_IN and is_instance_valid(tide_audio):tide_audio.set_focus_active(true)
@@ -1001,6 +1063,7 @@ func _physics_process(delta:float) -> void:
     if demo_wait>.75:
      if route_phase in [0,1,3,6]:interact()
      route_phase+=1;demo_wait=0.0;demo_phase=quest_stage()
+ swim.observe_chart_motion=not OS.has_feature("web") and not demo
  swim.step(player,move,delta,height_at(player.position.x,player.position.z))
  last_move=move
  if move.length()>.1:avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-move.x,-move.z),1.0-exp(-delta*10))
@@ -1036,10 +1099,17 @@ func _physics_process(delta:float) -> void:
  var arrow:="↑" if front>.45 else ("↓" if front<-.45 else ("→" if side>0 else "←"))
  compass.text=("%s  %dm  ·  %s" % [arrow,int(dist),str(swim.state).to_upper()]) if language=="en" else ("%s  %d米  ·  %s" % [arrow,int(dist),{"walk":"行走","wade":"涉水","swim":"游泳"}[str(swim.state)]])
  state_clock+=delta
- if state_clock>=.2:state_clock=0;emit_state()
+ # Native collision evidence must not alias a 13-step log cadence against an
+ # eight-step software-render burst. These are passive real-physics snapshots;
+ # input, simulation, rendering and Web observation are unchanged.
+ var chart_observation:bool=swim.observe_chart_motion and quest_stage()==0 and flat_distance(player.position,lantern_points[0])<3.0
+ if chart_observation:
+  if Engine.get_physics_frames()%4==0:state_clock=0;emit_state()
+ elif state_clock>=.2:state_clock=0;emit_state()
 
 func _process(delta:float) -> void:
  timer+=delta
+ if modal_touch_index>=0 and not _modal_touch_valid():_disarm_modal_touch()
  if OS.has_feature("web") and not journey_started and is_instance_valid(tide_audio):
   var audio_state:Dictionary=tide_audio.get_state()
   if audio_state.get("started",false):confirm_journey_begin()
@@ -1147,6 +1217,12 @@ func audit() -> void:
  get_tree().quit()
 
 func _exit_tree() -> void:
+ if web_document!=null and web_touch_cancel_callback!=null:
+  web_document.removeEventListener("touchcancel",web_touch_cancel_callback,true)
+  web_document.removeEventListener("visibilitychange",web_touch_cancel_callback,true)
+ if web_window!=null and web_touch_cancel_callback!=null:
+  web_window.removeEventListener("blur",web_touch_cancel_callback,true)
+ web_touch_cancel_callback=null;web_document=null;web_window=null
  if is_instance_valid(player):print("TIDAL_FINAL ",JSON.stringify({"time":game_time,"position":str(player.position),"activated":activated,"demo_phase":demo_phase,"velocity":str(player.velocity),"floor":player.is_on_floor(),"wall":player.is_on_wall(),"ceiling":player.is_on_ceiling(),"height_expected":height_at(player.position.x,player.position.z),"collisions":player.get_slide_collision_count()}))
  if is_instance_valid(player):
   for i in range(player.get_slide_collision_count()):print("TIDAL_COLLISION ",player.get_slide_collision(i).get_normal()," ",player.get_slide_collision(i).get_collider().get_parent().name," ",player.get_slide_collision(i).get_position())

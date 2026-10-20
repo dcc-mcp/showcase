@@ -6,7 +6,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
 import tempfile
-from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window,
+from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window, audio_prepared,
                              real_button, validate_audio_baseline, validate_audio_sources,
                              validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
                              browser_executable, validate_browser_arguments, validate_audio_closed, validate_focus_suspension)
@@ -53,6 +53,12 @@ def route_audio():
 
 
 class AudioAcceptanceFixtures(unittest.TestCase):
+    def test_preparation_error_preserves_actual_reason_instead_of_opaque_timeout(self):
+        self.assertFalse(audio_prepared({"audio_ready": False, "audio_status": "loading"}))
+        self.assertTrue(audio_prepared({"audio_ready": True, "audio_status": "ready"}))
+        with self.assertRaisesRegex(RuntimeError, "Audio initialization timed out"):
+            audio_prepared({"audio_ready": False, "audio_status": "error", "audio_error": "Audio initialization timed out"})
+
     def test_owned_context_close_requires_no_live_edges_or_new_sources(self):
         before = snapshot(.01, "running")
         before["starts"] = [{"id": 3}]

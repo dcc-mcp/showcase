@@ -28,8 +28,16 @@ function fixture({visible = true, focused = true} = {}) {
     resumeBlocked: false, startFailure: false, closeFailure: false, constructorFailure: false};
   let context;
   class Param {
-    constructor() { this.value = 1; this.events = []; }
-    setValueAtTime(value, at) { this.value = value; this.events.push(['set', value, at]); }
+    constructor() { this.intrinsic = 1; this.events = []; }
+    get value() { return this.intrinsic; }
+    set value(value) { this.intrinsic = value; this.setValueAtTime(value, context.currentTime); }
+    // Scheduling alone does not synchronously update the intrinsic getter.
+    setValueAtTime(value, at) { this.events.push(['set', value, at]); }
+    renderStepEvents() {
+      // Bounded master-gain fixture, not an audio renderer or ramp simulation.
+      assert(this.events.every(event => event[0] === 'set'));
+      for (const event of this.events) if (event[2] <= context.currentTime) this.intrinsic = event[1];
+    }
     cancelScheduledValues(at) { this.events.push(['cancel', at]); }
     exponentialRampToValueAtTime(value, at) { this.events.push(['exponential', value, at]); }
   }
@@ -205,7 +213,8 @@ test('four original cues are guarded, replace a single voice, and end by audio t
     assert(f.audio.playCue(index)); assert(!f.audio.playCue(index));
     const source = f.calls.starts.at(-1).source;
     assert.equal(source.buffer.original.url, Object.values(URLS)[index + 1]);
-    assert.equal(source.loop, false); assert.equal(source.edges[0].gain.value, Math.pow(10, -3 / 20));
+    assert.equal(source.loop, false);
+    assert.deepEqual(source.edges[0].gain.events, [['set', Math.pow(10, -3 / 20), 0]]);
     if (index) { assert(previous.stopped); assert(previous.disconnected); previous.onended(); assert(f.state().cue_playing); }
   }
   assert.deepEqual(f.state().cue_counts, [1, 1, 1, 1]);
@@ -448,4 +457,35 @@ test('close removes all production DOM listeners and subsequent focus events can
   await f.events.window('focus'); await f.events.visibility('hidden'); await f.events.visibility('visible');
   assert.equal(f.calls.resume, resumes); assert.equal(f.state().focus_active, focus);
   assert.equal(f.state().context_state, 'closed'); assert.equal(f.calls.starts.length, 1);
+});
+
+test('focus mute is intrinsic before suspension can prevent the next render quantum', async () => {
+  const f = fixture(); await f.audio.initialize(URLS); await f.begin();
+  const source = f.calls.starts[0].source, master = source.edges[0].edges[0];
+  const fade = source.edges[0].gain.events.slice();
+  const before = f.context().currentTime;
+  await f.audio.setFocusActive(false);
+  assert.equal(f.context().state, 'suspended');
+  assert.equal(f.context().currentTime, before);
+  assert.equal(master.gain.value, 0, 'no render quantum was simulated before checking the real setter contract');
+  f.audio.setMuted(true); await f.audio.setFocusActive(true);
+  assert.equal(master.gain.value, 0);
+  f.audio.setMuted(false); f.audio.setMuted(true); f.audio.setMuted(false);
+  assert.equal(master.gain.value, 1);
+  master.gain.renderStepEvents();
+  assert.equal(master.gain.value, 1, 'the last same-time event also wins when rendering resumes');
+  assert.deepEqual(source.edges[0].gain.events, fade);
+  assert.equal(f.calls.starts.length, 1); assert.equal(f.calls.starts[0].source, source);
+  assert.equal(f.state().start_count, 1);
+});
+
+test('hidden initialization and same-time visibility changes preserve the terminal mute', async () => {
+  const f = fixture({visible: false, focused: false}); await f.audio.initialize(URLS);
+  const master = f.calls.nodes.find(node => node.edges.includes(f.context().destination));
+  assert.equal(master.gain.value, 0);
+  f.audio.setMuted(true); await f.events.window('focus'); await f.events.visibility('visible');
+  assert.equal(master.gain.value, 0);
+  f.audio.setMuted(false); await f.events.visibility('hidden');
+  assert.equal(master.gain.value, 0); master.gain.renderStepEvents(); assert.equal(master.gain.value, 0);
+  assert.equal(f.calls.resume, 0); assert.equal(f.calls.starts.length, 0);
 });

@@ -406,6 +406,12 @@ def wait_state(page, console, after_sample=0, predicate=lambda state: True, time
     raise TimeoutError("No fresh actual state for the requested input boundary")
 
 
+def audio_prepared(state):
+    if state.get("audio_status") == "error":
+        raise RuntimeError("Actual Web audio preparation failed: " + str(state.get("audio_error", "unreported error")))
+    return state.get("audio_ready") is True
+
+
 
 def validate_recorded_pcm(pcm, sample_rate):
     # Analyze only decoded live MediaRecorder bytes, never generate or mux audio.
@@ -791,7 +797,7 @@ def main():
                     if not passive_evaluate(page, "() => document.documentElement.scrollWidth <= innerWidth + 1"):
                         raise RuntimeError("Web shell overflows horizontally at requested viewport")
                     result["audio"] = {"status": "running", "scope": "fresh-profile real-input browser audio"}
-                    ready_audio = wait_state(page, console, predicate=lambda state: state.get("audio_ready") is True)
+                    ready_audio = wait_state(page, console, predicate=audio_prepared)
                     if ready_audio.get("audio_driver") != "Dummy":
                         raise ValueError("Official Web export did not select its declared Dummy audio driver")
                     result["audio"]["backend"] = observer_receipts(console, "TIDAL_AUDIO_BACKEND")

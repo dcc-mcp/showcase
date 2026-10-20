@@ -129,7 +129,11 @@ func _ensure_web() -> void:
 		else:
 			_web.setMuted(_muted)
 			_web.setFocusActive(_native_focus_active)
-			_web.initialize(JSON.stringify(WEB_ASSET_URLS))
+			# The official Web shell silently predecodes before starting the heavy
+			# 3D scene. Preserve its explicit failure for the native Retry action.
+			var initial = JSON.parse_string(str(_web.getState()))
+			if initial is Dictionary and initial.get("status") == "idle":
+				_web.initialize(JSON.stringify(WEB_ASSET_URLS))
 			_sync_web_state()
 	# Backend/configuration receipt only, never evidence of audible output.
 	print("TIDAL_AUDIO_BACKEND ", JSON.stringify({"schema": 1,

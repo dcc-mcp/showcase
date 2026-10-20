@@ -9,7 +9,7 @@ import signal
 import subprocess
 import time
 from pathlib import Path
-from exploration import run_chart_exploration
+from exploration import run_chart_exploration, validate_chart_physics_controls
 from gameplay import RouteDriver, complete, keyboard_direction, validate_restored, validate_state, validate_water_crossing
 from observers import finite_vector, observer_receipts, positive_integer
 from common import TROPICAL_FILES, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, stop_process, write_json
@@ -322,6 +322,9 @@ def main():
             passed = receipt.get("status") == "passed" if script == "verify_audio.gd" else receipt.get("passed") is True
             if type(receipt.get("schema")) is not int or receipt["schema"] != 1 or not passed or receipt.get("failures") != [] or not receipt.get("checks"):
                 raise RuntimeError("Actual headless regression receipt is incomplete: " + script)
+            if script == "verify_collision.gd":
+                receipt["chart_contract_controls"] = validate_chart_physics_controls(receipt,
+                    {name:sha256(project / name) for name in ("main.gd", "swim_controller.gd")})
             report["checks"].append({"name": script + " actual headless regression (not physical-input proof)", "passed": True, "receipt": receipt})
         audit = subprocess.run([godot, "--headless", "--path", str(project), "--", "--audit"],
             env=isolated_env(out / "audit-session"), capture_output=True, text=True, timeout=90)
@@ -415,7 +418,7 @@ def main():
         if len(journeys) != 1 or any(journeys[0].get(key) != value for key, value in {"schema": 1, "started": True, "trigger": "key_enter", "demo": False, "stage": 0}.items()):
             raise ValueError("Native journey did not start exactly once through real Enter")
         report["journey"] = journeys[0]
-        exploration = {}
+        exploration = {"validator_sha256":sha256(Path(__file__).with_name("exploration.py"))}
         exploration_images = []
         def exploration_screenshot(name):
             observed = records("native-input.log", "TIDAL_STATE")[-1]
@@ -423,7 +426,8 @@ def main():
             subprocess.run(["ffmpeg", "-v", "error", "-xerror", "-i", str(out / name), "-f", "null", "-"], check=True, timeout=30)
             exploration_images.append(capture)
         try:
-            run_chart_exploration(lambda: records("native-input.log", "TIDAL_STATE"), move, time.sleep, exploration_screenshot, evidence=exploration)
+            run_chart_exploration(lambda: records("native-input.log", "TIDAL_STATE"), move, time.sleep, exploration_screenshot, evidence=exploration,
+                expected_sources={name:sha256(project / name) for name in ("main.gd", "swim_controller.gd")})
             if {item["name"] for item in exploration_images} != {"native-chart-blocker-first.png","native-chart-blocker-opposed.png"}:
                 raise RuntimeError("Missing opposing actual-input collision captures")
         finally:

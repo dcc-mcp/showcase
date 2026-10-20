@@ -93,6 +93,94 @@ func check_layout_cache() -> void:
  check(theme_changes[0]==stable_changes,"settled content reflow returns to a theme-stable cached layout")
  check(not interface._layout_dirty,"content minimum-size reflow settles back into the cached geometry path")
 
+func modal_touch(index:int,pressed:bool,position:Vector2,canceled:=false) -> InputEventScreenTouch:
+ var event:=InputEventScreenTouch.new()
+ event.index=index;event.pressed=pressed;event.position=position;event.canceled=canceled
+ return event
+
+func check_modal_touch() -> void:
+ # Dispatch fixtures validate cancellation/dedup logic. They are not browser
+ # activation evidence; actual portrait CI must still tap the rendered button.
+ game.show_opening();game.interface.layout()
+ var inside:Vector2=game.interface.card_primary.get_global_rect().get_center()
+ var outside:=Vector2(-20,-20)
+ var emulated:=InputEventMouseButton.new()
+ emulated.device=InputEvent.DEVICE_ID_EMULATION;emulated.button_index=MOUSE_BUTTON_LEFT;emulated.position=inside
+ for pressed in [true,false]:
+  emulated.pressed=pressed
+  check(game._handle_modal_touch(emulated),"opening consumes both emulated mouse edges before native GUI")
+ check(not game.journey_started,"emulated mouse cannot independently activate Begin")
+ var body_point:Vector2=game.interface.card_body.get_global_rect().get_center()
+ emulated.position=body_point
+ for pressed in [true,false]:
+  emulated.pressed=pressed
+  check(not game._handle_modal_touch(emulated),"body scroll keeps native emulated mouse handling")
+ check(not game._handle_modal_touch(modal_touch(4,true,body_point)),"body touch press remains available to native scrolling")
+ check(not game._handle_modal_touch(modal_touch(4,false,body_point)),"body touch release remains available to native scrolling")
+ emulated.position=inside;emulated.pressed=true
+ check(game._handle_modal_touch(emulated),"primary emulated press establishes its own release ownership")
+ game.interface.hide_card()
+ emulated.pressed=false
+ check(game._handle_modal_touch(emulated),"card replacement cannot leak an owned emulated release to another action")
+ game.show_opening()
+ var physical:=InputEventMouseButton.new()
+ physical.button_index=MOUSE_BUTTON_LEFT;physical.position=inside;physical.pressed=true
+ check(not game._handle_modal_touch(physical),"physical mouse retains native Button handling")
+ game._input(modal_touch(1,true,inside))
+ check(not game.journey_started and not game.tide_audio.get_state().started,"touch press arms but never starts journey or music")
+ game._input(modal_touch(2,true,inside));game._input(modal_touch(2,false,inside))
+ check(game.modal_touch_index==1 and not game.journey_started,"another finger cannot steal or release the armed action")
+ game._input(modal_touch(1,false,inside,true))
+ check(game.modal_touch_index==-1 and not game.journey_started,"native canceled release cannot Begin")
+ game._input(modal_touch(1,true,inside))
+ game._web_touch_canceled([]);game._input(modal_touch(1,false,inside))
+ check(not game.journey_started,"DOM cancellation disarms before Godot's ordinary release mapping")
+ game._input(modal_touch(1,true,inside))
+ var drag:=InputEventScreenDrag.new();drag.index=1;drag.position=outside
+ game._input(drag);drag.position=inside;game._input(drag)
+ game._input(modal_touch(1,false,inside))
+ check(not game.journey_started,"dragging outside permanently cancels this tap even after re-entry")
+ game._input(modal_touch(1,true,inside));game._input(modal_touch(1,false,outside))
+ check(not game.journey_started,"release outside the armed button cannot Begin")
+ game.interface.card_primary.disabled=true
+ game._input(modal_touch(1,true,inside));game.interface.card_primary.disabled=false
+ game._input(modal_touch(1,false,inside))
+ check(not game.journey_started,"pressing disabled Preparing never arms a later-ready Begin")
+ game._input(modal_touch(1,true,inside));game.interface.card_primary.disabled=true
+ game._input(modal_touch(1,false,inside));game.interface.card_primary.disabled=false
+ check(not game.journey_started,"disabling an armed action cancels its release")
+ game._input(modal_touch(1,true,inside));game._notification(Node.NOTIFICATION_APPLICATION_FOCUS_OUT)
+ game._notification(Node.NOTIFICATION_APPLICATION_FOCUS_IN);game._input(modal_touch(1,false,inside))
+ check(not game.journey_started,"focus loss cancels an armed action")
+ game._input(modal_touch(1,true,inside));game.interface.hide_card();game.show_opening()
+ game._input(modal_touch(1,false,inside))
+ check(not game.journey_started,"a replaced card cannot inherit an earlier armed finger")
+ game._input(modal_touch(1,true,inside));game.interface.card_primary.text="Different action"
+ game._input(modal_touch(1,false,inside));game.show_opening()
+ check(not game.journey_started,"a changed action label cannot inherit an armed finger")
+ game._input(modal_touch(1,false,inside))
+ check(not game.journey_started,"unarmed release cannot Begin")
+ game._input(modal_touch(1,true,inside));game._input(modal_touch(1,false,inside))
+ check(game.journey_started and game.tide_audio.get_state().start_count==1,"one valid touch release starts exactly once")
+ game._input(modal_touch(1,false,inside))
+ check(game.tide_audio.get_state().start_count==1,"duplicate release cannot restart music")
+ game.touch_active=true;game.touch_index=7;game.touch_move=Vector2(.5,0)
+ game.show_audio_recovery();game.interface.layout()
+ game._input(modal_touch(7,false,inside))
+ check(not game.touch_active and game.touch_index==-1,"recovery modal cannot swallow the prior steering finger release")
+ inside=game.interface.card_primary.get_global_rect().get_center()
+ emulated.position=inside;emulated.pressed=true
+ check(game._handle_modal_touch(emulated),"audio Retry also suppresses touch-emulated mouse duplication")
+ emulated.pressed=false;check(game._handle_modal_touch(emulated),"audio Retry owns the matching emulated release")
+ game._input(modal_touch(3,true,inside));game._web_touch_canceled([])
+ game._input(modal_touch(3,false,inside))
+ check(game.modal_touch_index==-1 and game.tide_audio.get_state().start_count==1,"audio Retry cancellation preserves the existing music start count")
+ game.interface.hide_card()
+ var steering:=Vector2(20,400)
+ game._unhandled_input(modal_touch(8,true,steering))
+ check(game.touch_active and game.touch_index==8,"new steering can start after recovery released the previous owner")
+ game._input(modal_touch(8,false,steering))
+
 func run() -> void:
  had_save=FileAccess.file_exists(SAVE_PATH)
  if had_save:original_save=FileAccess.get_file_as_string(SAVE_PATH)
@@ -116,6 +204,7 @@ func run() -> void:
  check(str(game.story.title.en)=="The Tidekeeper's Promise","English title uses compact Latin punctuation")
  game.interface.set_status(0,"en",false)
  check(game.interface.journal_button.tooltip_text=="Tidekeeper's journal","English journal tooltip uses compact Latin punctuation")
+ check_modal_touch()
  game.begin_journey("fixture")
  check(game.journey_started and game.interface.card_mode.is_empty(),"explicit Begin opens player control")
  check(game.tide_audio.get_state().start_count==1,"one logical music start")

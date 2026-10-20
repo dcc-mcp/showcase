@@ -11,7 +11,7 @@ from author_native import envelope
 from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, TROPICAL_FILES, TROPICAL_NOTICES, check_engine_log, copy_game, isolated_env, isolated_output
 from capture_native import import_native_resources, collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
-from export_web import copy_asset_notices, raw_include_filter, copy_web_audio, WEB_AUDIO_FILES
+from export_web import copy_asset_notices, raw_include_filter, copy_web_audio, WEB_AUDIO_FILES, prepare_audio_before_game
 
 
 class HarnessTests(unittest.TestCase):
@@ -367,6 +367,21 @@ class HarnessTests(unittest.TestCase):
         self.assertIn('driver/driver.web="Dummy"', project)
         self.assertIn('driver/mix_rate.web=44100', project)
         self.assertNotIn('driver/driver="Dummy"', project)
+
+    def test_official_boot_predecodes_before_engine_start_without_audio_activation(self):
+        shell = "(function () {\nengine.startGame({onProgress: report}).then(done, failed);\n}());"
+        patched = prepare_audio_before_game(shell)
+        self.assertIn("(async function () {", patched)
+        self.assertLess(patched.index("await window.TidalWebAudio.initialize("), patched.index("engine.startGame({"))
+        self.assertIn("engine.startGame({onProgress: report}).then(done, failed);", patched)
+        self.assertNotIn(".resume(", patched)
+        self.assertNotIn("TidalWebAudio.start(", patched)
+        for name in WEB_AUDIO_FILES:
+            self.assertIn(name, patched)
+        for changed in (shell.replace("(function () {", "(() => {"), shell + shell,
+                        shell.replace("engine.startGame({", "engine.start({")):
+            with self.assertRaisesRegex(RuntimeError, "boot scope changed"):
+                prepare_audio_before_game(changed)
 
     def test_export_preserves_all_asset_notices_byte_for_byte(self):
         with tempfile.TemporaryDirectory() as root:

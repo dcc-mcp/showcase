@@ -6,6 +6,7 @@ signal audio_requested
 signal journal_requested
 signal card_primary_requested
 signal card_secondary_requested
+signal card_changed
 
 var root: Control
 var title_panel: Panel
@@ -133,6 +134,7 @@ func _mark_layout_dirty() -> void:
  _layout_dirty=true
 
 func show_card(mode: String, heading: String, body: String, primary: String, secondary := "") -> void:
+ card_changed.emit()
  _mark_layout_dirty()
  # Opening may temporarily disable Begin while Web audio is preparing.
  # Every later journal/restart card owns a fresh enabled action state.
@@ -142,6 +144,7 @@ func show_card(mode: String, heading: String, body: String, primary: String, sec
  shade.show();card.show();card_primary.grab_focus();layout()
 
 func hide_card() -> void:
+ card_changed.emit()
  _mark_layout_dirty()
  card_mode="";shade.hide();card.hide()
  if get_viewport():get_viewport().gui_release_focus()

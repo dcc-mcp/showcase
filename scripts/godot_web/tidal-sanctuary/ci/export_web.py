@@ -28,6 +28,22 @@ WEB_AUDIO_FILES = ("assets/audio/tidekeeper-loop.ogg", "assets/audio/chart_read.
                    "assets/audio/beacon_resolve.wav")
 
 
+def prepare_audio_before_game(page):
+    """Use the pinned shell's existing boot flow, before its first 3D frame.
+
+    The bounded preload never resumes the context or creates a source. On a
+    loading error the native opening still owns Retry; no automatic retry or
+    false playing state is introduced by the shell.
+    """
+    scope = "(function () {"
+    start = "engine.startGame({"
+    if page.count(scope) != 1 or page.count(start) != 1:
+        raise RuntimeError("Official shell boot scope changed")
+    urls = dict(zip(("music", "chart_read", "key_pickup", "pearl_pickup", "beacon_resolve"), WEB_AUDIO_FILES))
+    page = page.replace(scope, "(async function () {")
+    return page.replace(start, "await window.TidalWebAudio.initialize(" + json.dumps(urls) + ");\n\t\t" + start)
+
+
 def copy_web_audio(native, site):
     """Publish only exact manifest-owned original audio bytes, never substitutes."""
     for name in ("web_audio.js", *WEB_AUDIO_FILES):
@@ -124,6 +140,7 @@ progressive_web_app/enabled=false
         page = page.replace('<script src="index.js"></script>', '<script src="index.js"></script>\n<script src="web_audio.js"></script>\n<script src="save-exit.js"></script>')
         if 'src="save-exit.js"' not in page:
             raise RuntimeError("Official shell script marker changed")
+        page = prepare_audio_before_game(page)
         (site / "index.html").write_text(page)
         shutil.copyfile(Path(__file__).with_name("web_exit.js"), site / "save-exit.js")
         shutil.copyfile(args.native / "sanctuary-font.otf", site / "sanctuary-font.otf")

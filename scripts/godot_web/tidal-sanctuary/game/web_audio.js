@@ -43,7 +43,10 @@
       return !!buffers && !!context && !disposed && context.state !== 'closed';
     }
     function applyMute() {
-      if (master && !disposed) master.gain.setValueAtTime(muted || !focusActive ? 0 : 1, context.currentTime);
+      // The value setter updates the intrinsic value immediately and schedules
+      // the same current-time event. Suspension can precede the next quantum;
+      // a queued-only event would leave the paused parameter at its old value.
+      if (master && !disposed) master.gain.value = muted || !focusActive ? 0 : 1;
     }
     function stopSource(source) {
       if (!source) return;
