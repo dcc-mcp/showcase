@@ -16,6 +16,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 
 from common import isolated_output
+from focus_lifecycle import RealTargetFocus, wait_focus_state
 
 MAX_SECONDS = 30
 WORK_SECONDS = 27
@@ -104,7 +105,7 @@ def worker(chromium, source, output):
         from playwright.sync_api import sync_playwright
         from capture_browser import (audio_probe_init_script, capture_audio_snapshot, passive_evaluate,
             audio_window, validate_audio_baseline, browser_executable, validate_browser_arguments,
-            bounded_cdp, BROWSER_ARGS, IGNORED_DEFAULT_ARGS)
+            bounded_cdp, validate_focus_suspension, BROWSER_ARGS, IGNORED_DEFAULT_ARGS)
         from audio_source_contract import validate_cue_pcm
         from audio_thread import meter_stream
 
@@ -143,7 +144,7 @@ def worker(chromium, source, output):
         ci = Path(__file__).resolve().parent
         report["observer_source_sha256"] = {name: file_hash(ci / name) for name in (
             "check_audio_observer_browser.py", "audio_probe.js", "audio_meter_worklet.js",
-            "audio_thread.py", "audio_source_contract.py", "capture_browser.py")}
+            "audio_thread.py", "audio_source_contract.py", "capture_browser.py", "focus_lifecycle.py")}
         server = ThreadingHTTPServer(("127.0.0.1", 0), handler_for(resources))
         threading.Thread(target=server.serve_forever, kwargs={"poll_interval": .05}, daemon=True).start()
         with sync_playwright() as pw:
@@ -154,7 +155,15 @@ def worker(chromium, source, output):
             context = browser.new_context()
             context.add_init_script(script=audio_probe_init_script())
             page = context.new_page()
+            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate)
+            report["focus_targets"] = focus.report
             page.set_default_timeout(3000)
+            # Prepare the companion before loading/starting the game, so its
+            # creation cannot add an extra focus cycle during measured audio.
+            other = context.new_page()
+            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate)
+            other.goto("about:blank", timeout=3000)
+            bounded_cdp(focus.session, "Page.bringToFront", {}, timeout=3)
             session = context.new_cdp_session(page)
             try:
                 actual_args = bounded_cdp(session, "Browser.getBrowserCommandLine", timeout=3)["arguments"]
@@ -237,6 +246,32 @@ def worker(chromium, source, output):
                     meter_stream(cue["contexts"][0], stream["source"])
                 if len([item for item in cue["gestures"] if item["type"] == "pointerdown" and item["trusted"] is True]) != 4:
                     raise ValueError("Fixture inputs lack four genuine trusted pointer-down events")
+                stage("real-target-focus-suspend-and-resume")
+                focus_before = snapshot("focus-before")
+                wait_focus_state(page, passive_evaluate, True)
+                focus.switch_to(other, False)
+                focus_deadline = time.monotonic() + 3
+                while inspect_state().get("context_state") != "suspended":
+                    if time.monotonic() >= focus_deadline:
+                        raise TimeoutError("Actual background target did not suspend audio")
+                    page.wait_for_timeout(50)
+                away_mark = passive_evaluate(page, "() => __tidalAudio.mark('smoke-focus-away')")
+                page.wait_for_timeout(1400)
+                away = snapshot("focus-away")
+                focus.switch_to(page, True)
+                focus_deadline = time.monotonic() + 3
+                while inspect_state().get("context_state") != "running":
+                    if time.monotonic() >= focus_deadline:
+                        raise TimeoutError("Actual foreground target did not resume audio")
+                    page.wait_for_timeout(50)
+                resume_mark = passive_evaluate(page, "() => __tidalAudio.mark('smoke-focus-returned')")
+                page.wait_for_timeout(1600)
+                returned = snapshot("focus-returned")
+                report["checks"].append({"name":"real target focus suspension and same-context resume",
+                    "result":validate_focus_suspension(focus_before, away, returned,
+                        away_mark["wall_ms"], away["wall_ms"]),
+                    "resumed_pcm":audio_window(returned, resume_mark["wall_ms"], returned["wall_ms"], 1.2, True)})
+                other.close()
                 if failures:
                     raise RuntimeError("Browser errors: " + " | ".join(failures))
                 report["status"] = "passed"

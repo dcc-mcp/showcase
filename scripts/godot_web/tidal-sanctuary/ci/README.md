@@ -198,3 +198,29 @@ establish animation/input responsiveness, rendered frame rate, hardware GPU or
 physical-device performance, or subjective listening quality. Software rendering
 remains a known performance concern and cannot be relabeled playable on the
 strength of an audio result.
+
+### First-loop and real target-focus ordering (2026-10-20)
+
+The `58e23f6` hosted run completed both actual keyboard/touch treasure routes,
+but did not qualify the complete Web lifecycle. On desktop, slow rendering put
+the intentional mute across the first music loop; on portrait, Playwright's
+forced-focus emulation prevented real tab focus loss. These are failed receipts,
+not a completed Web acceptance claim.
+
+The harness now observes and validates the original first loop seam before its
+intentional mute/unmute probe. The seam remains the first decoded-buffer boundary,
+with the same source, observed gain history, dense music-bus and post-master PCM,
+continuity and clipping gates. It cannot substitute a later seam. The exact early
+snapshot is retained before validation, and its wait has a bounded audio-clock
+observation deadline.
+
+Before navigation, each test page disables Playwright's default forced-focus
+emulation once through a retained CDP session. Real browser target activation then
+must produce trusted window and visibility events plus matching passive DOM
+focus/visibility observations. No synthetic event, JavaScript focus call or
+repeated emulation toggle qualifies. The companion tab is created before Begin,
+so its automatic activation cannot add a mid-route audio focus transition. The
+original same-context suspended clock, zero terminal gain, source identity and
+resumed PCM gates remain. A lightweight hosted smoke tests this lifecycle before
+the costly Godot run; neither fixtures nor that smoke replace actual gameplay,
+normal exit and fresh-process save restoration. New exact-head evidence is required.

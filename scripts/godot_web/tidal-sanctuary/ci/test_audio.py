@@ -42,6 +42,7 @@ def route_audio():
                        source("music", 32, 64.2, 64200, "music", 5)]
     receipts = [{"schema": 1, "event": "start", "start_count": 1, "started": True, "muted": False},
                 {"schema": 1, "event": "mute", "muted": True}, {"schema": 1, "event": "mute", "muted": False}]
+    value["marks"].append({"name": "after-begin", "wall_ms": 3000, "context_times": [{"id": 1, "time": 3}]})
     value["marks"].append({"name": "unmuted", "wall_ms": 6000, "context_times": [{"id": 1, "time": 6}]})
     actions = []
     for stage, (name, duration) in enumerate(AUDIO_CUES):
@@ -369,6 +370,34 @@ class AudioAcceptanceFixtures(unittest.TestCase):
             if change == "early-stop": value["starts"][0]["stopped_context_time"] = 10
             if change == "muted": receipts.append({"schema": 1, "event": "mute", "muted": True})
             with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_sources(value, receipts, actions)
+
+    def test_first_seam_is_proved_before_late_mute_cycle_without_using_later_seam(self):
+        value, receipts, actions = route_audio()
+        # Slow actual input can put unmute after the first seam. The first seam
+        # is independently required to be genuinely audible before any mute.
+        next(item for item in value["marks"] if item["name"] == "unmuted")["context_times"][0]["time"] = 45
+        result = validate_audio_sources(value, receipts, actions)
+        self.assertEqual(result["first_loop_boundary"]["boundary_context_time"], 32.2)
+        from test_audio_source_contract import gain_event
+        gain_event(value, 2, "setValueAtTime", [0, 30], 0, 30)
+        gain_event(value, 2, "setValueAtTime", [1, 45], 1, 45)
+        with self.assertRaises(ValueError):
+            validate_audio_sources(value, receipts, actions)
+
+    def test_first_seam_missing_late_or_nonfinite_begin_mark_cannot_pass(self):
+        for clock in (None, float("nan"), True, -1, 32):
+            value, receipts, actions = route_audio()
+            mark = next(item for item in value["marks"] if item["name"] == "after-begin")
+            mark["context_times"][0]["time"] = clock
+            with self.subTest(clock=clock), self.assertRaises(ValueError):
+                validate_audio_sources(value, receipts, actions)
+
+    def test_harness_checks_original_seam_before_first_mute_input(self):
+        source = Path(__file__).with_name("capture_browser.py").read_text()
+        before_mute = source.index('result["audio"]["first_loop_before_mute"]')
+        mute = source.index('mute_input = real_button(page, mute_state')
+        self.assertLess(before_mute, mute)
+        self.assertIn('label + "-audio-first-loop.json"', source[:before_mute])
 
     def test_cue_near_end_offset_early_stop_and_missing_pcm_lifetime_fail(self):
         for change in ("offset", "stop", "ended", "planned-short", "silent-bus", "muted-middle", "sparse", "missing-end", "nan-rms", "negative-peak", "nan-frame"):

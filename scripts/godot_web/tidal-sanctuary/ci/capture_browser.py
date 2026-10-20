@@ -19,6 +19,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from audio_thread import marked_pcm_window, meter_stream, pcm_interval, pcm_signal
 from audio_source_contract import validate_source_bus, validate_cue_pcm
+from focus_lifecycle import RealTargetFocus, wait_focus_state
 from common import check_engine_log, isolated_output, sha256, write_json
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from gameplay import (BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS, BROWSER_PHYSICS_LIMIT_SECONDS,
@@ -57,7 +58,7 @@ def detach_cdp(session):
         raise
 
 
-def passive_evaluate(page, function, *arguments):
+def passive_evaluate(page, function, *arguments, timeout=120):
     """Inspect/record only; Playwright evaluate uses userGesture:true in Chromium.
 
     https://github.com/microsoft/playwright/blob/v1.63.0/packages/playwright-core/src/server/chromium/crExecutionContext.ts
@@ -67,7 +68,7 @@ def passive_evaluate(page, function, *arguments):
     session = page.context.new_cdp_session(page)
     try:
         response = bounded_cdp(session, "Runtime.evaluate", {"expression": expression, "userGesture": False,
-            "awaitPromise": True, "returnByValue": True, "timeout": 120000})
+            "awaitPromise": True, "returnByValue": True, "timeout": timeout * 1000}, timeout=timeout)
         if response.get("exceptionDetails"):
             raise RuntimeError("Passive browser observation failed: " + json.dumps(response["exceptionDetails"]))
         result = response.get("result", {})
@@ -156,7 +157,7 @@ def audio_probe_init_script():
             + ", writable:false, configurable:false});\n" + Path(__file__).with_name("audio_probe.js").read_text())
 
 
-def capture_audio_snapshot(page):
+def capture_audio_snapshot(page, timeout=120):
     return passive_evaluate(page, """async () => {
         const cutoff = __tidalAudio.mark('pcm-cutoff');
         const before = __tidalAudio.snapshot();
@@ -166,7 +167,7 @@ def capture_audio_snapshot(page):
         result.pcm_cutoff = cutoff;
         result.pcm_barriers = barriers;
         return result;
-    }""")
+    }""", timeout=timeout)
 
 
 def audio_graph(snapshot):
@@ -269,10 +270,11 @@ def validate_loop_boundary(snapshot, music, receipts):
     # Native WebAudio clamps loopEnd to the real decoded buffer duration.
     # The original Ogg decodes to 1,411,199 frames, one frame short of 32 s.
     boundary = first["scheduled_start"] + (min(first["duration"], first.get("loop_end", 32)) if first.get("looping") is True else 32)
-    unmute = next((item for item in snapshot.get("marks", []) if item.get("name") == "unmuted"), None)
-    unmute_clock = next((item.get("time") for item in (unmute or {}).get("context_times", []) if item.get("id") == context["id"]), math.inf)
-    if unmute_clock > boundary - 1.1 or [item.get("muted") for item in receipts if item.get("event") == "mute"] != [True, False]:
-        raise ValueError("First loop boundary lacks an established unmuted interval")
+    audible = next((item for item in snapshot.get("marks", []) if item.get("name") == "after-begin"), None)
+    audible_clock = next((item.get("time") for item in (audible or {}).get("context_times", []) if item.get("id") == context["id"]), None)
+    if (type(audible_clock) not in (int, float) or not math.isfinite(audible_clock)
+            or not first["scheduled_start"] <= audible_clock <= boundary - 1.15):
+        raise ValueError("First loop boundary lacks an established audible Begin interval")
     if first.get("looping") is True:
         if (first.get("detune") != 0 or first.get("loop_start") != 0 or first.get("loop_end") != 32
                 or first.get("requested_duration") is not None or first.get("mutations") != []
@@ -337,6 +339,8 @@ def validate_audio_sources(snapshot, receipts, actions):
     intervals.sort()
     if any(right[0] < left[1] - .006 for left, right in zip(intervals, intervals[1:])):
         raise ValueError("Music sources overlap beyond two audio rendering quanta")
+    if [item.get("muted") for item in receipts if item.get("event") == "mute"] != [True, False]:
+        raise ValueError("Actual route must contain exactly one mute and unmute")
     loop_boundary = validate_loop_boundary(snapshot, music, receipts)
     if context["context_time"] - music[0]["scheduled_start"] < 32:
         raise ValueError("Live route did not cover one complete 32-second music loop")
@@ -686,6 +690,8 @@ def main():
                 pressed = set()
                 touch_points = []
                 driver = None
+                focus_probe = None
+                focus_companion = None
                 profile = tempfile.TemporaryDirectory(prefix="tidal-" + label + "-profile-")
 
                 def launch():
@@ -760,6 +766,14 @@ def main():
                 try:
                     context = launch()
                     page = context.pages[0]
+                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate)
+                    # Create the companion BEFORE the real journey and all audio
+                    # baselines. Its automatic activation must not introduce an
+                    # unrequested mid-route focus/suspend transition.
+                    other_tab = context.new_page()
+                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate)
+                    other_tab.goto("about:blank")
+                    bounded_cdp(focus_probe.session, "Page.bringToFront", {}, timeout=3)
                     report["browser_version"] = context.browser.version if context.browser else passive_evaluate(page, "() => navigator.userAgent")
                     context.add_init_script(script=audio_probe_init_script())
                     command_session = context.new_cdp_session(page)
@@ -771,6 +785,7 @@ def main():
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
+                    wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, console, failures)
                     # Read the game's existing context after its actual first draw.
                     # This identity is diagnostic, never an alternate pass condition.
@@ -820,6 +835,29 @@ def main():
                     audible = capture_audio_snapshot(page)
                     result["audio"]["after_begin"] = audio_window(audible, audible_mark["wall_ms"], audible["wall_ms"], 1.2, audible=True,
                         evidence_path=out / (label + "-audio-after-begin-window.json"))
+                    # Observe the FIRST authored seam before deliberately muting.
+                    # On slow software rendering, input and passive observations can
+                    # consume more than one loop. Never substitute a later seam or
+                    # expect an intentionally muted first seam to be audible.
+                    first_loop_deadline = time.monotonic() + 45
+                    while True:
+                        remaining = first_loop_deadline - time.monotonic()
+                        if remaining <= 0:
+                            raise TimeoutError("Actual audio clock did not reach its first loop seam")
+                        first_loop_audio = capture_audio_snapshot(page, timeout=remaining)
+                        if time.monotonic() >= first_loop_deadline:
+                            raise TimeoutError("First loop observation exceeded its bounded deadline")
+                        first_music = [item for item in first_loop_audio["starts"] if item["name"] == "music"]
+                        first_clock = audio_graph(first_loop_audio)["context_time"]
+                        if first_music and first_clock >= first_music[0]["scheduled_start"] + 33.2:
+                            break
+                        if time.monotonic() >= first_loop_deadline:
+                            raise TimeoutError("Actual audio clock did not reach its first loop seam")
+                        page.wait_for_timeout(200)
+                    # Retain the actual evidence even if its strict validation fails.
+                    write_json(out / (label + "-audio-first-loop.json"), first_loop_audio)
+                    result["audio"]["first_loop_before_mute"] = validate_loop_boundary(
+                        first_loop_audio, first_music, observer_receipts(console, "TIDAL_AUDIO"))
                     # Toggle the same visible shipped button with actual input.
                     mute_state = wait_state(page, console)
                     boundary = len(console)
@@ -962,21 +1000,21 @@ def main():
                     audio_snapshot = capture_audio_snapshot(page)
                     result["audio"]["sources"] = validate_audio_sources(audio_snapshot, observer_receipts(console, "TIDAL_AUDIO"), driver.actions)
                     # Keep recording through actual tab focus and normal exit.
+                    wait_focus_state(page, passive_evaluate, True, timeout=15)
                     focus_before = capture_audio_snapshot(page)
                     focus_console_boundary = len(console)
-                    other_tab = context.new_page()
-                    other_tab.goto("about:blank")
-                    other_tab.bring_to_front()
+                    focus_probe.switch_to(other_tab, False, timeout=15)
                     page.wait_for_timeout(800)
                     focus_mark = passive_evaluate(page, "() => __tidalAudio.mark('focus-away')")
                     page.wait_for_timeout(1400)
                     focus_away = capture_audio_snapshot(page)
-                    page.bring_to_front()
+                    focus_probe.switch_to(page, True, timeout=15)
                     page.wait_for_timeout(500)
                     resume_mark = passive_evaluate(page, "() => __tidalAudio.mark('focus-returned')")
                     page.wait_for_timeout(1500)
                     focus_returned = capture_audio_snapshot(page)
                     other_tab.close()
+                    result["audio"]["focus_target_activation"] = focus_probe.report
                     focus_events = [item for item in observer_receipts(console, "TIDAL_AUDIO", focus_console_boundary)
                                     if item.get("event") == "focus"]
                     if [item.get("active") for item in focus_events] != [False, True]:
@@ -1031,11 +1069,14 @@ def main():
                     context = None
                     context = launch()
                     page = context.pages[0]
+                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate)
+                    bounded_cdp(restored_focus.session, "Page.bringToFront", {}, timeout=3)
                     context.add_init_script(script=audio_probe_init_script())
                     attach(page, restored_console, restored_failures)
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
                         raise RuntimeError("Fresh Chromium process could not load staged Web entry")
+                    wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, restored_console, restored_failures)
                     loads = observer_receipts(restored_console, "TIDAL_LOAD")
                     if len(loads) != 1:
@@ -1104,6 +1145,9 @@ def main():
                         result["audio_diagnostic_error"] = str(audio_error)
                     # Portrait evidence is independent of desktop input/language success.
                 finally:
+                    if focus_probe is not None:
+                        result["focus_target_activation"] = focus_probe.report
+                        write_json(out / (label + "-focus-target.json"), focus_probe.report)
                     if context is not None:
                         context.close()
                     profile.cleanup()

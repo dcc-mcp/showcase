@@ -128,5 +128,88 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
             self.assertIn("total 30-second", report["deadline_error"])
 
 
+
+
+class RealTargetFocusFixtures(unittest.TestCase):
+    def snapshot(self, active, records=None):
+        return {'focused':active,'visible':active,'overflow':False,'records':records or []}
+
+    def events(self, active, trusted=True):
+        return [{'type':'focus' if active else 'blur','trusted':trusted,'visible':active},
+                {'type':'visibilitychange','trusted':trusted,'visible':active}]
+
+    def test_only_real_target_events_and_matching_dom_state_qualify(self):
+        from focus_lifecycle import validate_focus_transition
+        for active in (False, True):
+            before = self.snapshot(not active)
+            after = self.snapshot(active, self.events(active))
+            self.assertEqual(validate_focus_transition(before, after, active)['active'], active)
+            for failure in ('synthetic','wrong_state','missing_window','missing_visibility','overflow','lost_history'):
+                import copy
+                broken = copy.deepcopy(after); old = copy.deepcopy(before)
+                if failure == 'synthetic': broken['records'][0]['trusted'] = False
+                if failure == 'wrong_state': broken['focused'] = not active
+                if failure == 'missing_window': broken['records'] = broken['records'][1:]
+                if failure == 'missing_visibility': broken['records'] = broken['records'][:1]
+                if failure == 'overflow': broken['overflow'] = True
+                if failure == 'lost_history': old['records'] = [{'type':'previous'}]
+                with self.subTest(active=active, failure=failure), self.assertRaises(ValueError):
+                    validate_focus_transition(old, broken, active)
+
+    def test_prepare_removes_override_once_and_retains_session_without_event_dispatch(self):
+        from focus_lifecycle import prepare_real_focus, FOCUS_INIT
+        page = Mock(); call = Mock()
+        session = prepare_real_focus(page, call)
+        self.assertIs(session, page.context.new_cdp_session.return_value)
+        call.assert_called_once_with(session,'Emulation.setFocusEmulationEnabled',{'enabled':False},timeout=3)
+        page.add_init_script.assert_called_once_with(script=FOCUS_INIT)
+        session.detach.assert_not_called()
+        self.assertNotIn('dispatchEvent', FOCUS_INIT)
+        self.assertNotIn('.focus()', FOCUS_INIT)
+        self.assertIn('event.isTrusted', FOCUS_INIT)
+
+    def test_wait_rejects_overflow_and_times_out_without_faking_state(self):
+        from focus_lifecycle import wait_focus_state
+        page = Mock(); passive = Mock(return_value=self.snapshot(True))
+        self.assertEqual(wait_focus_state(page, passive, True)['focused'], True)
+        passive.return_value['overflow'] = True
+        with self.assertRaises(ValueError): wait_focus_state(page, passive, True)
+        passive.return_value = self.snapshot(False)
+        with patch('focus_lifecycle.time.monotonic', side_effect=[0,4]), self.assertRaises(TimeoutError):
+            wait_focus_state(page, passive, True, timeout=3)
+        page.bring_to_front.assert_not_called()
+
+    def test_late_success_is_rejected_and_remaining_budget_reaches_passive_call(self):
+        from focus_lifecycle import wait_focus_state
+        page = Mock(); passive = Mock(return_value=self.snapshot(True))
+        with patch('focus_lifecycle.time.monotonic',side_effect=[0,1,4]), self.assertRaises(TimeoutError):
+            wait_focus_state(page,passive,True,timeout=3)
+        self.assertEqual(passive.call_args.kwargs['timeout'],2)
+
+    def test_switch_invokes_only_real_browser_activation_and_retains_failure_diagnostic(self):
+        from focus_lifecycle import RealTargetFocus
+        page = Mock(); bounded = Mock(); passive = Mock()
+        probe = RealTargetFocus(page,bounded,passive); other = Mock()
+        passive.side_effect = [self.snapshot(True),self.snapshot(False,self.events(False))]
+        probe.switch_to(other,False)
+        self.assertEqual(bounded.call_args.args[1], 'Page.bringToFront')
+        other.bring_to_front.assert_not_called()
+        self.assertTrue(probe.report['transitions'][0]['passed'])
+        passive.side_effect = [self.snapshot(False),self.snapshot(True,self.events(True,False))]
+        with patch('focus_lifecycle.time.monotonic',side_effect=[0,0,0,0,0,0,4]),self.assertRaises(TimeoutError):
+            probe.switch_to(page,True)
+        self.assertFalse(probe.report['transitions'][1]['passed'])
+        self.assertIn('after',probe.report['transitions'][1])
+
+    def test_smoke_preserves_ceiling_and_uses_real_target_with_strict_audio_proofs(self):
+        source = Path(smoke.__file__).read_text()
+        self.assertEqual(smoke.MAX_SECONDS,30); self.assertEqual(smoke.WORK_SECONDS,27)
+        self.assertIn('focus.switch_to(other, False)',source)
+        self.assertIn('focus.switch_to(page, True)',source)
+        self.assertIn('validate_focus_suspension(focus_before, away, returned',source)
+        self.assertIn('resume_mark["wall_ms"], returned["wall_ms"], 1.2, True',source)
+        self.assertNotIn('dispatchEvent(',source)
+
+
 if __name__ == "__main__":
     unittest.main()
