@@ -93,6 +93,37 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
                 self.assertEqual(code,0)
                 self.assertEqual('--headed' in launch.call_args.args[0],headed)
 
+    def test_no_defaults_probe_propagates_and_reaps_its_owned_group(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            process = Mock(pid=1234)
+            def finish(**kwargs):
+                smoke.save_report(output, {"passed": True, "status": "passed"})
+                return 0
+            process.wait.side_effect = finish
+            with patch.object(smoke.subprocess, "Popen", return_value=process) as launch, \
+                    patch.object(smoke.os, "killpg") as kill, contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(smoke.supervise(Path("/chrome"), Path("/source"), output,
+                    headed=True, no_defaults=True), 0)
+            self.assertIn("--no-defaults", launch.call_args.args[0])
+            self.assertIn("--headed", launch.call_args.args[0])
+            kill.assert_called_once_with(1234, signal.SIGKILL)
+
+    def test_failed_owned_descendant_cleanup_cannot_qualify_probe(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            process = Mock(pid=1234)
+            def finish(**kwargs):
+                smoke.save_report(output, {"passed": True, "status": "passed"})
+                return 0
+            process.wait.side_effect = finish
+            with patch.object(smoke.subprocess, "Popen", return_value=process), \
+                    patch.object(smoke.os, "killpg", side_effect=OSError("cleanup failed")), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(smoke.supervise(Path("/chrome"), Path("/source"), output,
+                    headed=True, no_defaults=True), 1)
+            self.assertFalse(json.loads((output / "receipt.json").read_text())["passed"])
+
     def test_worker_validation_failure_retains_exact_stage_and_reason(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary); process = Mock(pid=1234)

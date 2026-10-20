@@ -259,3 +259,27 @@ The lightweight actual-browser smoke must pass before the expensive game route.
 A new exact-head hosted result is required; adding this lane is not itself a pass.
 Hidden-tab acceptance does not qualify the separate visible-unfocused desktop
 condition, physical devices, OS focus, subjective listening or GPU performance.
+
+
+### Isolated no-defaults audio probe (2026-10-20)
+
+The headed `25658dd` run `39369705455` proved genuine same-window targets and
+trusted blur, but remained visible. The smoke failed after 17 seconds and did
+not run the expensive game. Chromium's browser-process
+[`EmulationHandler::SetFocusEmulationEnabled`](https://github.com/chromium/chromium/blob/main/content/browser/devtools/protocol/emulation_handler.cc)
+owns a per-session visible capturer. Disabling focus from another CDP session
+does not release Playwright's original session's capturer. Window focus and
+browser visibility therefore differed even under Xvfb; no hidden-tab pass exists.
+
+A manual `workflow_dispatch` with `smoke_only=true` selects a separately named
+**Audio-only no-defaults probe (NOT full acceptance)** job and skips `original-3d`.
+It cannot qualify native/gameplay/persistence acceptance. Ordinary PR runs keep
+the full original job unchanged. The probe uses a fresh task-owned Chrome profile,
+the official verified executable and public pinned Playwright 1.63
+`connect_over_cdp(no_defaults=True)`, using only its existing default context.
+It does not patch Playwright or set visibility, focus, audio or lifecycle state.
+The browser's original sandbox stays enabled; the debug endpoint is loopback-only,
+ephemeral and owned by this bounded worker. Chrome inherits the supervised process
+group, so the unchanged 27-second work/30-second total limit also reaps Chrome.
+All genuine hidden/visible, focus, clock, source, gain and PCM checks remain.
+The full game is not moved to this route until the actual isolated probe passes.

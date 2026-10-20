@@ -1,10 +1,11 @@
-"""Real browser target focus, with Playwright's forced-focus override removed.
+"""Real browser target focus with passive, trusted lifecycle evidence.
 
 Never dispatches DOM events or changes focus state through page JavaScript.
-The retained CDP session disables emulation once AFTER final navigation, before
-input or measurement. Navigation can restore Playwright's original-session
-true override; every later navigation invalidates this proof and fails closed.
-Transitions only use real target activation plus passive observations.
+Supported no_defaults attachment makes no focus-emulation calls. Legacy launch
+mode disables the renderer focus override once AFTER final navigation; it does
+not release another CDP session's browser visibility capturer and must not be
+assumed to establish hidden-tab coverage. Any later navigation invalidates the
+measured document identity. Transitions use real target activation only.
 """
 from __future__ import annotations
 import time
@@ -90,9 +91,12 @@ def wait_focus_state(page, passive_evaluate, active, timeout=3):
 
 
 class RealTargetFocus:
-    def __init__(self, page, bounded_cdp, passive_evaluate, require_hidden=False):
+    def __init__(self, page, bounded_cdp, passive_evaluate, require_hidden=False, defaults_disabled=False):
         if type(require_hidden) is not bool:
             raise ValueError('Hidden lifecycle selection must be explicit boolean')
+        if type(defaults_disabled) is not bool:
+            raise ValueError('Default override selection must be explicit boolean')
+        self.defaults_disabled = defaults_disabled
         self.require_hidden = require_hidden
         self._companion = None
         self.page = page
@@ -102,7 +106,9 @@ class RealTargetFocus:
         # Keep this session alive through all navigation and target switches.
         # Detaching a session early may discard its emulation settings.
         self.session = prepare_real_focus(page, bounded_cdp)
-        self.report = {'method':'real Page.bringToFront after one-time forced-focus removal',
+        self.report = {'method':('real Page.bringToFront with public no_defaults attach' if defaults_disabled
+                                  else 'real Page.bringToFront after one-time forced-focus removal'),
+                       'defaults_disabled':defaults_disabled,
                        'scope':('headed same-window hidden/visible lifecycle required; OS focus not established'
                            if require_hidden else 'browser target window focus; hidden-tab and OS focus not established'),
                        'emulation_disabled_after_navigation':False, 'transitions':[]}
@@ -139,14 +145,16 @@ class RealTargetFocus:
         self.report['setup'] = {'document_url':identity[0],'time_origin':identity[1],'before':before}
         # The original Playwright session may restore true at navigation. This
         # removal therefore happens only after the final committed document.
-        self._bounded(self.session,'Emulation.setFocusEmulationEnabled',{'enabled':False},timeout=remaining())
+        if not self.defaults_disabled:
+            self._bounded(self.session,'Emulation.setFocusEmulationEnabled',{'enabled':False},timeout=remaining())
         after = self._read(timeout=remaining())
         remaining()
         self.report['setup']['after'] = after
         if self._identity(after) != identity:
             raise ValueError('Document navigated during focus-emulation removal')
         self._navigation = identity
-        self.report['emulation_disabled_after_navigation'] = True
+        self.report['emulation_disabled_after_navigation'] = not self.defaults_disabled
+        self.report['post_navigation_identity_verified'] = True
         return after
 
     def snapshot(self, timeout=3):

@@ -2,6 +2,9 @@
 """Bounded hosted Chrome audio-observer smoke, not gameplay/FPS acceptance."""
 from __future__ import annotations
 import argparse
+import contextlib
+import importlib.metadata
+import inspect
 import gzip
 import hashlib
 import json
@@ -94,7 +97,7 @@ def handler_for(resources):
     return Handler
 
 
-def worker(chromium, source, output, headed=False):
+def worker(chromium, source, output, headed=False, no_defaults=False):
     # Imports and browser work run inside the supervising process's 27-second
     # budget. A stuck CDP/native call cannot extend the total 30-second ceiling.
     report = {"schema": 1, "scope": SCOPE, "passed": False, "status": "running", "stage": "imports", "checks": []}
@@ -107,6 +110,7 @@ def worker(chromium, source, output, headed=False):
         from capture_browser import (audio_probe_init_script, capture_audio_snapshot, passive_evaluate,
             audio_window, validate_audio_baseline, browser_executable, validate_browser_arguments,
             bounded_cdp, validate_focus_suspension, BROWSER_ARGS, IGNORED_DEFAULT_ARGS)
+        from external_chrome import external_chrome
         from audio_source_contract import validate_cue_pcm
         from audio_thread import meter_stream
 
@@ -136,6 +140,11 @@ def worker(chromium, source, output, headed=False):
             page.locator(selector).click(timeout=3000)
             report.setdefault("mouse_inputs", []).append({"selector": selector, "method": "Playwright browser mouse click"})
 
+        if no_defaults and not headed:
+            raise ValueError("No-defaults probe requires explicit headed mode")
+        report["playwright_version"] = importlib.metadata.version("playwright")
+        if report["playwright_version"] != "1.63.0":
+            raise RuntimeError("Audio smoke requires pinned Playwright 1.63.0")
         stage("verify-original-source-and-browser")
         resources, report["original_source"] = fixture_resources(source)
         report["browser"] = browser_executable(chromium)
@@ -145,27 +154,35 @@ def worker(chromium, source, output, headed=False):
         ci = Path(__file__).resolve().parent
         report["observer_source_sha256"] = {name: file_hash(ci / name) for name in (
             "check_audio_observer_browser.py", "audio_probe.js", "audio_meter_worklet.js",
-            "audio_thread.py", "audio_source_contract.py", "capture_browser.py", "focus_lifecycle.py")}
+            "audio_thread.py", "audio_source_contract.py", "capture_browser.py", "focus_lifecycle.py", "external_chrome.py")}
         server = ThreadingHTTPServer(("127.0.0.1", 0), handler_for(resources))
         threading.Thread(target=server.serve_forever, kwargs={"poll_interval": .05}, daemon=True).start()
-        with sync_playwright() as pw:
+        with sync_playwright() as pw, contextlib.ExitStack() as owned:
             stage("launch-sandboxed-chrome")
             if headed and not os.environ.get("DISPLAY"):
                 raise RuntimeError("Headed focus acceptance requires the explicitly provisioned Xvfb DISPLAY")
             report["browser"]["headed"] = headed
-            browser = pw.chromium.launch(headless=not headed, executable_path=report["browser"]["executable_path"],
-                chromium_sandbox=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, timeout=5000)
+            report["browser"]["no_defaults"] = no_defaults
+            if no_defaults:
+                if "no_defaults" not in inspect.signature(pw.chromium.connect_over_cdp).parameters:
+                    raise RuntimeError("Public Playwright no_defaults attach is unavailable")
+                report["external_chrome"] = {}
+                browser, context = owned.enter_context(external_chrome(pw,
+                    report["browser"]["executable_path"], report=report["external_chrome"], timeout=5))
+            else:
+                browser = pw.chromium.launch(headless=not headed, executable_path=report["browser"]["executable_path"],
+                    chromium_sandbox=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, timeout=5000)
+                context = browser.new_context()
             report["browser"]["runtime_version"] = browser.version
-            context = browser.new_context()
             context.add_init_script(script=audio_probe_init_script())
             page = context.new_page()
-            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=headed)
+            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=headed, defaults_disabled=no_defaults)
             report["focus_targets"] = focus.report
             page.set_default_timeout(3000)
             # Prepare the companion before loading/starting the game, so its
             # creation cannot add an extra focus cycle during measured audio.
             other = context.new_page()
-            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate, require_hidden=headed)
+            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate, require_hidden=headed, defaults_disabled=no_defaults)
             other.goto("about:blank", timeout=3000)
             bounded_cdp(focus.session, "Page.bringToFront", {}, timeout=3)
             session = context.new_cdp_session(page)
@@ -297,7 +314,8 @@ def worker(chromium, source, output, headed=False):
                     report["diagnostic_error"] = repr(diagnostic)
                 raise
             finally:
-                browser.close()
+                if not no_defaults:
+                    browser.close()
                 browser = None
     except Exception as error:
         report.update(passed=False, status="failed", error=repr(error))
@@ -311,7 +329,7 @@ def worker(chromium, source, output, headed=False):
     return 0 if report["passed"] else 1
 
 
-def supervise(chromium, source, output, headed=False):
+def supervise(chromium, source, output, headed=False, no_defaults=False):
     """A separate process group bounds even an unresponsive browser/driver."""
     started = time.monotonic()
     report = {"schema": 1, "scope": SCOPE, "passed": False, "status": "starting", "checks": [], "maximum_seconds": MAX_SECONDS}
@@ -320,7 +338,10 @@ def supervise(chromium, source, output, headed=False):
                "--source", str(source), "--output", str(output)]
     if headed:
         command.append("--headed")
+    if no_defaults:
+        command.append("--no-defaults")
     timed_out, launch_error, cleanup_error, code = False, None, None, None
+    process = None
     with (output / "worker.log").open("wb") as log:
         try:
             process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
@@ -340,6 +361,16 @@ def supervise(chromium, source, output, headed=False):
                     cleanup_error = repr(error)
         except Exception as error:
             launch_error = repr(error)
+        finally:
+            # External Chrome inherits this dedicated worker group. Reap any
+            # descendants even after a clean worker exit; never kill other jobs.
+            if no_defaults and process is not None and not timed_out:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                except OSError as error:
+                    cleanup_error = repr(error)
     try:
         report = json.loads((output / "receipt.json").read_text())
     except (OSError, ValueError) as error:
@@ -354,7 +385,7 @@ def supervise(chromium, source, output, headed=False):
     if launch_error:
         report["launcher_error"] = launch_error
     if cleanup_error:
-        report["cleanup_error"] = cleanup_error
+        report.update(passed=False, status="failed", cleanup_error=cleanup_error)
     report["total_elapsed_seconds"] = time.monotonic() - started
     report["maximum_seconds"] = MAX_SECONDS
     if report["total_elapsed_seconds"] > MAX_SECONDS:
@@ -370,12 +401,13 @@ def main():
     parser.add_argument("--source", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--headed", action="store_true", help="Use explicitly provisioned Xvfb and genuine hidden same-window tabs; no fallback")
+    parser.add_argument("--no-defaults", action="store_true", help="Isolated task-owned Chrome default-context probe; not full game acceptance")
     parser.add_argument("--observer-worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.observer_worker:
-        return worker(args.chromium, args.source, args.output, headed=args.headed)
+        return worker(args.chromium, args.source, args.output, headed=args.headed, no_defaults=args.no_defaults)
     output = isolated_output(args.output, args.source)
-    return supervise(args.chromium, args.source, output, headed=args.headed)
+    return supervise(args.chromium, args.source, output, headed=args.headed, no_defaults=args.no_defaults)
 
 
 if __name__ == "__main__":
