@@ -142,6 +142,8 @@ def main():
         for name in ("capabilities", "document_build", "document_inspect", "document_export"):
             run_cli(name + "-schema", "describe", slugs[name])
         capabilities = call("capabilities", slugs["capabilities"], {})
+        assert capabilities["version"].startswith("Inkscape 1.4.4 "), capabilities["version"]
+        assert capabilities["executable"] == "/usr/bin/inkscape"
         outputs = []
         frozen=json.loads((args.plans/"inputs.json").read_text())
         assert len(frozen)==7
