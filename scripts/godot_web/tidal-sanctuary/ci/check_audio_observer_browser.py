@@ -186,6 +186,9 @@ def worker(chromium, source, output):
                 response = page.goto(f"http://127.0.0.1:{server.server_port}/", wait_until="domcontentloaded", timeout=5000)
                 if response is None or response.status != 200:
                     raise RuntimeError("Original audio fixture did not return HTTP 200")
+                other_focus.settle_after_navigation()
+                focus.settle_after_navigation()
+                wait_focus_state(page, passive_evaluate, True)
                 ready = passive_evaluate(page, "async () => { if (!await prepared) throw Error(TidalWebAudio.getState()); return __tidalAudio.ready(); }")
                 if len(ready.get("streams", [])) != 3 or sorted(item.get("role") for item in ready["streams"]) != ["bus", "bus", "mix"]:
                     raise ValueError("Original graph did not pre-arm exactly one mix and two bus observers")

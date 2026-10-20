@@ -132,7 +132,7 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
 
 class RealTargetFocusFixtures(unittest.TestCase):
     def snapshot(self, active, records=None):
-        return {'focused':active,'visible':active,'overflow':False,'records':records or []}
+        return {'focused':active,'visible':active,'overflow':False,'records':records or [],'document_url':'http://127.0.0.1/fixture','time_origin':1000}
 
     def events(self, active, trusted=True):
         return [{'type':'focus' if active else 'blur','trusted':trusted,'visible':active},
@@ -161,7 +161,7 @@ class RealTargetFocusFixtures(unittest.TestCase):
         page = Mock(); call = Mock()
         session = prepare_real_focus(page, call)
         self.assertIs(session, page.context.new_cdp_session.return_value)
-        call.assert_called_once_with(session,'Emulation.setFocusEmulationEnabled',{'enabled':False},timeout=3)
+        call.assert_not_called()
         page.add_init_script.assert_called_once_with(script=FOCUS_INIT)
         session.detach.assert_not_called()
         self.assertNotIn('dispatchEvent', FOCUS_INIT)
@@ -190,6 +190,8 @@ class RealTargetFocusFixtures(unittest.TestCase):
         from focus_lifecycle import RealTargetFocus
         page = Mock(); bounded = Mock(); passive = Mock()
         probe = RealTargetFocus(page,bounded,passive); other = Mock()
+        passive.return_value = self.snapshot(True)
+        probe.settle_after_navigation()
         passive.side_effect = [self.snapshot(True),self.snapshot(False,self.events(False))]
         probe.switch_to(other,False)
         self.assertEqual(bounded.call_args.args[1], 'Page.bringToFront')
@@ -200,6 +202,33 @@ class RealTargetFocusFixtures(unittest.TestCase):
             probe.switch_to(page,True)
         self.assertFalse(probe.report['transitions'][1]['passed'])
         self.assertIn('after',probe.report['transitions'][1])
+
+    def test_settle_occurs_once_after_navigation_and_never_during_switch(self):
+        from focus_lifecycle import RealTargetFocus
+        page=Mock(); bounded=Mock(); passive=Mock(return_value=self.snapshot(True))
+        probe=RealTargetFocus(page,bounded,passive)
+        bounded.assert_not_called()
+        with self.assertRaises(ValueError): probe.switch_to(Mock(),False)
+        bounded.assert_not_called()
+        probe.settle_after_navigation()
+        self.assertEqual(bounded.call_args.args[1:3],('Emulation.setFocusEmulationEnabled',{'enabled':False}))
+        self.assertTrue(probe.report['emulation_disabled_after_navigation'])
+        with self.assertRaises(ValueError): probe.settle_after_navigation()
+        self.assertEqual(bounded.call_count,1)
+        for field,value in (('time_origin',1001),('document_url','http://127.0.0.1/other')):
+            state=self.snapshot(True);state[field]=value;passive.return_value=state
+            with self.assertRaises(ValueError): probe.switch_to(Mock(),False)
+            self.assertEqual(bounded.call_count,1)
+
+    def test_navigation_during_settle_fails_and_cannot_retry_toggle(self):
+        from focus_lifecycle import RealTargetFocus
+        old=self.snapshot(True);new=self.snapshot(True);new['time_origin']=2000
+        page=Mock();bounded=Mock();passive=Mock(side_effect=[old,new])
+        probe=RealTargetFocus(page,bounded,passive)
+        with self.assertRaises(ValueError):probe.settle_after_navigation()
+        with self.assertRaises(ValueError):probe.settle_after_navigation()
+        self.assertEqual(bounded.call_count,1)
+        self.assertFalse(probe.report['emulation_disabled_after_navigation'])
 
     def test_smoke_preserves_ceiling_and_uses_real_target_with_strict_audio_proofs(self):
         source = Path(smoke.__file__).read_text()

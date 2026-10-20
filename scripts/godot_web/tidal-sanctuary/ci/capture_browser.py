@@ -773,6 +773,7 @@ def main():
                     other_tab = context.new_page()
                     focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate)
                     other_tab.goto("about:blank")
+                    focus_companion.settle_after_navigation(timeout=15)
                     bounded_cdp(focus_probe.session, "Page.bringToFront", {}, timeout=3)
                     report["browser_version"] = context.browser.version if context.browser else passive_evaluate(page, "() => navigator.userAgent")
                     context.add_init_script(script=audio_probe_init_script())
@@ -785,6 +786,7 @@ def main():
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
+                    focus_probe.settle_after_navigation(timeout=15)
                     wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, console, failures)
                     # Read the game's existing context after its actual first draw.
@@ -1076,6 +1078,7 @@ def main():
                     response = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                     if response is None or response.status != 200:
                         raise RuntimeError("Fresh Chromium process could not load staged Web entry")
+                    restored_focus.settle_after_navigation(timeout=15)
                     wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, restored_console, restored_failures)
                     loads = observer_receipts(restored_console, "TIDAL_LOAD")

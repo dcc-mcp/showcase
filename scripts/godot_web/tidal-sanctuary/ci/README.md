@@ -214,8 +214,11 @@ continuity and clipping gates. It cannot substitute a later seam. The exact earl
 snapshot is retained before validation, and its wait has a bounded audio-clock
 observation deadline.
 
-Before navigation, each test page disables Playwright's default forced-focus
-emulation once through a retained CDP session. Real browser target activation then
+After final navigation and before Begin or the audio baseline, each test page
+disables Playwright's default forced-focus emulation once through a retained CDP
+session. Navigation can restore the original Playwright session's override; a
+pre-navigation disable alone did not pass the `32a26cf` hosted smoke. The helper
+rejects re-arming or navigation after this settled boundary. Real browser target activation then
 must produce trusted window and visibility events plus matching passive DOM
 focus/visibility observations. No synthetic event, JavaScript focus call or
 repeated emulation toggle qualifies. The companion tab is created before Begin,
