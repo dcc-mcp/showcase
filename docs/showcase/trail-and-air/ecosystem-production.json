@@ -600,7 +600,7 @@
     {
       "archive": {
         "path": "docs/showcase/trail-and-air/Trail-and-Air-Source.zip",
-        "sha256": "4b9dddad33c5e97f2269f1cdea5b5417853ca64cf0e72bf02fa93704a830ac10"
+        "sha256": "d1efd0e37a1ae6815f60cec45595a0b9042afe5cb2c1f6dd24dcbda297592eab"
       },
       "members": [
         {
@@ -633,7 +633,7 @@
           "member": "Trail-and-Air-UE-Audio/Audio/manifest.json",
           "source": {
             "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/manifest.json",
-            "sha256": "0c562baf4d649e2f0897eee499f30aa76ff22403d1f153eea4f4419075540127"
+            "sha256": "06c2ce3795289b55b8c49515a58daaff31c323a26f415169a6c910e402ccccf6"
           },
           "kind": "support",
           "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
@@ -898,7 +898,7 @@
     },
     {
       "path": "docs/showcase/trail-and-air/ecosystem-evidence/project-delivery-equivalence.json",
-      "sha256": "3bf42fe259196d3a6ea0b601ebb9645814546b2a97440801330d63db95f7b2df",
+      "sha256": "202cb2d79c3ccc6a65796a3ae2e09e3dae19c2f63c589c64d812d100dda47e9d",
       "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
     },
     {
@@ -1018,12 +1018,12 @@
     },
     {
       "path": "docs/showcase/trail-and-air/audio-manifest.json",
-      "sha256": "0c562baf4d649e2f0897eee499f30aa76ff22403d1f153eea4f4419075540127",
+      "sha256": "06c2ce3795289b55b8c49515a58daaff31c323a26f415169a6c910e402ccccf6",
       "reason": "Retained asset specifications, download inventory or source signal measurements; no audio data transformation."
     },
     {
       "path": "docs/showcase/trail-and-air/downloads.json",
-      "sha256": "8a2148ebee47a35d6a1bb9b92328d24dfddf75ebbcdd0d8785e2f10b0d6238de",
+      "sha256": "d12062286cfd582407a4ed857b66087f6e4eef7db1a3fcbd72cf4d6e538d43bc",
       "reason": "Retained asset specifications, download inventory or source signal measurements; no audio data transformation."
     },
     {
@@ -1040,6 +1040,11 @@
       "path": "docs/showcase/trail-and-air/ecosystem-evidence/historical-README.md.txt",
       "sha256": "fc0251b2bfca0b3c6fa81524590c5c5776a6f2eb3f708e405ca2159672414f82",
       "reason": "Exact historical presentation text retained; later corrections are explicit, not retroactive production evidence."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/delivery-metadata-repair.json",
+      "sha256": "d7bc48de4ad0876f7f19b607aeb73145c5d5db7b0930e3e48ca9c93bf598b4d7",
+      "reason": "Metadata-only delivery alias correction; original native hashes preserved separately."
     }
   ],
   "external_links": [
@@ -1063,7 +1068,7 @@
     "status": "verified",
     "evidence": {
       "path": "docs/showcase/trail-and-air/ecosystem-evidence/independent-review.json",
-      "sha256": "9c81b22350725bff5c4b5ec1df3a37ab27e2adfd96318b2e10a3a3188db88e44"
+      "sha256": "332cdc543c100fa714c8165f4b8a26e4708c319f51fcef62c827945a8ef46c0a"
     }
   }
 }

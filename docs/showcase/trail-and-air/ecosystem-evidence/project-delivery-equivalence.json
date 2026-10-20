@@ -324,5 +324,5 @@
       ]
     }
   ],
-  "audio_content_identity": "See recovered-lineage.json: all 17 actual rendered PCM hashes match."
+  "audio_content_identity": "See original-audio-content-lineage.json: all 17 actual rendered PCM hashes match."
 }

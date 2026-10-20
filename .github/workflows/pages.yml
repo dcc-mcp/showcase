@@ -29,6 +29,9 @@ jobs:
       - name: Test full-collection ecosystem production gate
         run: python scripts/test_validate_ecosystem.py
 
+      - name: Validate actual Trail delivery ZIP semantics
+        run: python scripts/test_trail_delivery.py
+
       - name: Materialize pinned official Godot Web runtime
         run: python scripts/godot_web/materialize_runtime.py
 

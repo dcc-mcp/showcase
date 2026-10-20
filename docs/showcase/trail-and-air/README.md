@@ -44,7 +44,7 @@ The same real REAPER/DCC-MCP pipeline now produces individually timed music for 
 
 ## 2026-10-20 展示与试听更新
 
-原 17 个原创声源和四个下载 ZIP 保持不变。新增的 [hero.jpg](hero.jpg) 是正式 Blender MCP 内根据真实 PCM 创建的 mesh/FONT 信息图，经保存、清空、重开与 Cycles 原生渲染；只展示三个代表波形，每组独立归一化。原始 PNG 保留为生产中间文件，页面 JPEG 经正式 MCP 保色编码；旧 JPEG 留在版本历史。
+原 17 个原创声源及三个音频下载 ZIP 保持不变。Source ZIP 仅修正 Audio/manifest.json 的 tracks 别名，使其与交付 assets 的 SHA/格式信息一致；原 BWF SHA 单独保留为 native_file_sha256，其余成员字节不变。新增的 [hero.jpg](hero.jpg) 是正式 Blender MCP 内根据真实 PCM 创建的 mesh/FONT 信息图，经保存、清空、重开与 Cycles 原生渲染；只展示三个代表波形，每组独立归一化。原始 PNG 保留为生产中间文件，页面 JPEG 经正式 MCP 保色编码；旧 JPEG 留在版本历史。
 
 当前 MP3 来自正式 MCP 内的 17 源 VSE 编辑、受管隔离原生 WAV 导出，以及独立官方宿主的 aud 原生转码。原生 WAV 的重复末块仅在长度与原始 PCM 字节精确匹配时显式去重，原文件保留，没有任意剪尾或改变17源。无损母版1372800帧/48k/stereo，参考NRMSE约1.18e-6；MP3完整解码、内容相关性、各段与非零首256瞬态检查通过。没有主观听审。
 

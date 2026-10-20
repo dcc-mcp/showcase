@@ -1,0 +1,12 @@
+{
+  "scope": "Delivery metadata correction only; no audio production or signal modification",
+  "prior_archive_sha256": "4b9dddad33c5e97f2269f1cdea5b5417853ca64cf0e72bf02fa93704a830ac10",
+  "archive_sha256": "d1efd0e37a1ae6815f60cec45595a0b9042afe5cb2c1f6dd24dcbda297592eab",
+  "changed_members": [
+    "Trail-and-Air-UE-Audio/Audio/manifest.json"
+  ],
+  "all_other_member_bytes_unchanged": true,
+  "tracks_alias_equals_assets": true,
+  "original_BWF_hash_field": "native_file_sha256",
+  "audio_files_changed": 0
+}
