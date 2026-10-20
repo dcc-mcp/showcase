@@ -5,7 +5,7 @@ spec=importlib.util.spec_from_file_location('dawnkeep_promote',PATH);promote=imp
 class Promotion(unittest.TestCase):
     def page(self):
         config={'ensureCrossOriginIsolationHeaders':False,'emscriptenPoolSize':0,'godotPoolSize':0,'executable':'index','fileSizes':{'index.wasm':37700666,'index.pck':5325512}}
-        return '<script src="index.js"></script>\nconst GODOT_CONFIG = '+json.dumps(config)+';\nconst dawnkeepShell = window.DawnkeepShell.attach(GODOT_CONFIG,()=>engine.requestQuit());\n dawnkeepShell.failed(err);'
+        return '<script src="index.js"></script>\n<script src="dawnkeep-shell.js"></script>\nconst GODOT_CONFIG = '+json.dumps(config)+';\nconst dawnkeepShell = window.DawnkeepShell.attach(GODOT_CONFIG,()=>engine.requestQuit());\n dawnkeepShell.failed(err);'
     def test_only_explicit_shared_engine_and_hash_named_pack(self):
         text,config=promote.public_html(self.page())
         self.assertEqual(config['mainPack'],'dawnkeep-649ccf7ed6a7.pck')
@@ -13,6 +13,7 @@ class Promotion(unittest.TestCase):
         self.assertEqual(config['fileSizes']['../runtime/godot-4.6.3.wasm'],37700666)
         self.assertIn('DawnkeepPublication.attach(GODOT_CONFIG)',text)
         self.assertIn('dawnkeepPublication.failed()',text)
+        self.assertIn('dawnkeep-shell.js?v=',text)
         self.assertNotIn('src="index.js"',text)
     def test_changed_official_shell_is_rejected(self):
         with self.assertRaisesRegex(ValueError,'marker changed'):promote.public_html(self.page().replace(' dawnkeepShell.failed(err);',''))

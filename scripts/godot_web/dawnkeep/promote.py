@@ -23,8 +23,10 @@ def public_html(text,pack_sha=PCK):
     config['showcasePackSha256']=pack_sha
     text=text[:match.start(1)]+json.dumps(config)+text[match.end(1):]
     bridge_sha=sha((Path(__file__).parent/'ci/publication_shell.js').read_bytes())[:12]
+    shell_sha=sha((Path(__file__).parent/'ci/web_shell.js').read_bytes())[:12]
     replacements={
       '<script src="index.js"></script>':'<script src="../runtime/godot-4.6.3.js"></script>\n<script src="publication-shell.js?v='+bridge_sha+'"></script>',
+      '<script src="dawnkeep-shell.js"></script>':'<script src="dawnkeep-shell.js?v='+shell_sha+'"></script>',
       'const dawnkeepShell = window.DawnkeepShell.attach':'const dawnkeepPublication = window.DawnkeepPublication.attach(GODOT_CONFIG);\nconst dawnkeepShell = window.DawnkeepShell.attach',
       ' dawnkeepShell.failed(err);':' dawnkeepPublication.failed();\n dawnkeepShell.failed(err);',
     }
@@ -65,10 +67,11 @@ def main():
             target=ROOT/shared
             if not target.exists():target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(site/name,target)
             if sha(target.read_bytes())!=record['sha256']:raise ValueError('Local engine differs')
-        elif name not in ('index.html','README.txt'):
+        elif name not in ('index.html','README.txt','dawnkeep-shell.js'):
             put(PACK if name=='index.pck' else name,(site/name).read_bytes())
     page,config=public_html((site/'index.html').read_text());put('index.html',page.encode())
     put('publication-shell.js',(Path(__file__).parent/'ci/publication_shell.js').read_bytes())
+    put('dawnkeep-shell.js',(Path(__file__).parent/'ci/web_shell.js').read_bytes())
     put('README.txt',('Dawnkeep / 曙光守誓\nOfficial Godot 4.6.3 single-thread Web export. Requires WebGL 2.\n'+
         'WASD/arrows move; Q/E/R skills; Space next wave; L language; M music; Escape pause.\n'+
         'The initial native screen is Chinese. Use EN or L for English. Native Reset starts a fresh run; outer Reset reloads the engine.\n'+
@@ -78,7 +81,7 @@ def main():
     provenance={'schema_version':1,'source_commit':HEAD,'full_acceptance_run':RUN,'engine':'Godot 4.6.3','threads':False,'renderer':'gl_compatibility','native_pck_sha256':PCK,'pack_name':PACK,
         'source_export_html_sha256':export['files']['index.html']['sha256'],'source_shell_sha256':export['files']['dawnkeep-shell.js']['sha256'],
         'template_sha256':export['template_sha256'],'game_source_manifest':json.loads((candidate/'dawnkeep-author/source-manifest.json').read_text()),
-        'promotion':['PCK and native gameplay bytes unchanged from passed full acceptance.','Official runtime files reused byte for byte from existing same-origin shared engine.','Official HTML references relocated to shared engine and immutable hash-named PCK.','Small same-origin parent-page readiness/error/reset bridge added; reset reloads the real engine rather than injecting state.','Native EN/ZH controls retained; initial native language remains Chinese.'],
+        'promotion':['PCK and native gameplay bytes unchanged from passed full acceptance.','Official runtime files reused byte for byte from existing same-origin shared engine.','Official HTML references relocated to shared engine and immutable hash-named PCK.','Small same-origin parent-page readiness/error/reset bridge added; reset reloads the real engine rather than injecting state.','Lifecycle shell now initializes pre-engine loading/retry labels from the page lang query, falling back to document language then English. Real native language receipts remain authoritative once running.','Native EN/ZH controls retained; initial native language remains Chinese.'],
         'native_controls':'L or EN/中文 switches language; native music button or M controls sound.','not_claimed':['Physical-phone/multitouch acceptance','Subjective music listening','Physical-GPU performance','Manual native OS-window-close acceptance'],
         'published_files':[{ 'path':str(x.relative_to(dest)),'bytes':x.stat().st_size,'sha256':sha(x.read_bytes())} for x in sorted(public)]}
     put('export-provenance.json',(json.dumps(provenance,ensure_ascii=False,indent=2)+'\n').encode())

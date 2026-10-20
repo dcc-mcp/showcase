@@ -405,6 +405,7 @@
     "Official runtime files reused byte for byte from existing same-origin shared engine.",
     "Official HTML references relocated to shared engine and immutable hash-named PCK.",
     "Small same-origin parent-page readiness/error/reset bridge added; reset reloads the real engine rather than injecting state.",
+    "Lifecycle shell now initializes pre-engine loading/retry labels from the page lang query, falling back to document language then English. Real native language receipts remain authoritative once running.",
     "Native EN/ZH controls retained; initial native language remains Chinese."
   ],
   "native_controls": "L or EN/中文 switches language; native music button or M controls sound.",
@@ -452,8 +453,8 @@
     },
     {
       "path": "dawnkeep-shell.js",
-      "bytes": 6039,
-      "sha256": "a661f205d7827c9a4fb0f13873f7f38dd7372db79b78e861206905681b24761b"
+      "bytes": 6581,
+      "sha256": "741bc1b4daeae035eada6c026769c4cc9fbdf9c44906a11d6844dda1b037b752"
     },
     {
       "path": "index.apple-touch-icon.png",
@@ -462,8 +463,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 6018,
-      "sha256": "8008ee36a78c77e5d240c0d6968eef0a7c8ca6ee0043f9e8679d6baae96801f0"
+      "bytes": 6033,
+      "sha256": "34689522b6c4210450d2ea85ea54afe2031a10f6bde4727ffb0ad13c21b903e1"
     },
     {
       "path": "index.icon.png",

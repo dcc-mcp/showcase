@@ -238,13 +238,13 @@
     },
     {
       "path": "play/dawnkeep-defense/dawnkeep-shell.js",
-      "bytes": 6039,
-      "sha256": "a661f205d7827c9a4fb0f13873f7f38dd7372db79b78e861206905681b24761b"
+      "bytes": 6581,
+      "sha256": "741bc1b4daeae035eada6c026769c4cc9fbdf9c44906a11d6844dda1b037b752"
     },
     {
       "path": "play/dawnkeep-defense/export-provenance.json",
-      "bytes": 18564,
-      "sha256": "bba6eb7f39be9997adfff3cbbd276b9a1068d75f6f575609a43b3bfa4d76c1be"
+      "bytes": 18774,
+      "sha256": "66378e87b8c7edd636f751ca7c63ed2b567bb3b466400d1a85383a2d7da6c6c7"
     },
     {
       "path": "play/dawnkeep-defense/index.apple-touch-icon.png",
@@ -253,8 +253,8 @@
     },
     {
       "path": "play/dawnkeep-defense/index.html",
-      "bytes": 6018,
-      "sha256": "8008ee36a78c77e5d240c0d6968eef0a7c8ca6ee0043f9e8679d6baae96801f0"
+      "bytes": 6033,
+      "sha256": "34689522b6c4210450d2ea85ea54afe2031a10f6bde4727ffb0ad13c21b903e1"
     },
     {
       "path": "play/dawnkeep-defense/index.icon.png",
@@ -399,8 +399,8 @@
     }
   ],
   "budget": {
-    "raw_bytes": 45754825,
-    "gzip_equivalent_bytes": 16563066,
+    "raw_bytes": 45755592,
+    "gzip_equivalent_bytes": 16563432,
     "raw_limit_bytes": 48234496,
     "gzip_equivalent_limit_bytes": 16777216,
     "groups": {
@@ -409,8 +409,8 @@
         "gzip_equivalent_bytes": 11374891
       },
       "dawnkeep-defense": {
-        "raw_bytes": 5537041,
-        "gzip_equivalent_bytes": 5188175
+        "raw_bytes": 5537808,
+        "gzip_equivalent_bytes": 5188541
       }
     },
     "measurement_scope": "Manifest-listed assets, excluding this manifest document. The verification ceiling additionally includes the manifest.",

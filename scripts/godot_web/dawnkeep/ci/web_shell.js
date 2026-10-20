@@ -2,8 +2,15 @@
 (function (root) {
   'use strict';
   const emit = (name, value) => console.log('DAWNKEEP_WEB_' + name + ' ' + JSON.stringify(value));
+  function initialLanguage(search, documentLanguage) {
+    const requested = new URLSearchParams(search).get('lang');
+    if (requested === 'en' || requested === 'zh') return requested;
+    return /^zh(?:-|$)/i.test(documentLanguage || '') ? 'zh' : 'en';
+  }
   function attach(config, requestQuit, ui) {
-    let language = 'en', ready = false, quitting = false;
+    // Before the engine emits its language, load/retry UI follows the page.
+    // Once running, the existing native language control remains authoritative.
+    let language = ui.language === 'zh' ? 'zh' : 'en', ready = false, quitting = false;
     const words = () => language === 'zh' ? {
       quit:'退出游戏',restart:'重新打开',fullscreen:'全屏',retry:'重新载入',loading:'正在载入曙光堡…',
       exiting:'正在退出…',exited:'游戏已退出',error:'载入失败。请重试。'
@@ -69,6 +76,7 @@
     const quit=make('quit',tools),fullscreen=make('fullscreen',tools),restart=make('restart',panel),retry=make('retry',panel);
     document.body.append(tools,panel);
     return {
+      language:initialLanguage(location.search,document.documentElement.lang),
       labels:w=>{quit.textContent=w.quit;fullscreen.textContent=w.fullscreen;restart.textContent=w.restart;retry.textContent=w.retry;},
       ready:()=>{tools.hidden=false;panel.hidden=true;},
       closing:text=>{tools.hidden=true;panel.hidden=false;message.textContent=text;restart.hidden=true;retry.hidden=true;},
@@ -81,5 +89,5 @@
     };
   }
   root.DawnkeepShell={attach:(config,requestQuit)=>attach(config,requestQuit,browserUI())};
-  if(typeof module!=='undefined')module.exports={attach,browserUI};
+  if(typeof module!=='undefined')module.exports={attach,browserUI,initialLanguage};
 }(typeof window==='undefined'?globalThis:window));

@@ -80,6 +80,8 @@ jobs:
           python -m unittest discover -s "$RECIPE" -p 'test_public_page.py' -v
           python scripts/test_media_ranges.py
           node scripts/test_playable_runtime.js
+          node "$RECIPE/test_web_shell.js"
+          node "$RECIPE/test_publication_shell.js"
       - name: Verify completed Pages deployment for the requested source
         if: github.event_name == 'workflow_dispatch'
         env:

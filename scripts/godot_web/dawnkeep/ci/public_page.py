@@ -587,6 +587,18 @@ class Session:
         self.wait(lambda: loaded_frame() is not None, 'Missing same-origin engine frame')
         return loaded_frame()
 
+    def shell_language(self, frame, language, label):
+        from playwright.sync_api import expect
+        expected = ({'quit': '退出游戏', 'fullscreen': '全屏', 'restart': '重新打开', 'retry': '重新载入'}
+                    if language == 'zh' else
+                    {'quit': 'Quit game', 'fullscreen': 'Fullscreen', 'restart': 'Open again', 'retry': 'Retry loading'})
+        observed = {}
+        for name, text in expected.items():
+            control = frame.locator('#dawnkeep-web-' + name)
+            expect(control).to_have_text(text)
+            observed[name] = control.text_content()
+        self.result['checks'].append({'name': label + ' shell language', 'language': language, 'observed': observed})
+
     def game_page(self):
         from playwright.sync_api import expect
         boundary = len(self.requests)
@@ -601,6 +613,7 @@ class Session:
         self.click('[data-game-start]')
         frame = self.embedded_frame('[data-game-frame] iframe')
         plan = self.native_plan(frame, boundary, 'game')
+        self.shell_language(frame, plan.current()['language'], 'game intro')
         require(any(urlsplit(url).path.endswith('/' + PCK_NAME) for url in self.requests),
                 'Actual browser did not request the frozen public PCK')
         require(any(urlsplit(url).path.endswith('/runtime/godot-4.6.3.wasm') for url in self.requests),
@@ -608,6 +621,7 @@ class Session:
         expect(self.page.locator('[data-game-stage]')).to_have_attribute('data-state', 'running', timeout=120000)
         expect(self.page.locator('[data-game-sound]')).to_be_hidden()
         plan.gate(touch=self.mobile)
+        self.shell_language(frame, plan.current()['language'], 'game after native language input')
         self.progress('native-input-gate', 'passed')
         before = plan.tap('start_wave')
         plan.wait(lambda state: state.get('wave', 0) > before['wave'], 'native next-wave through visible UI', before['sample_id'])
@@ -781,10 +795,12 @@ class Session:
         input_boundary = len(self.result['events'])
         state = plan.current()
         require('start' in state['ui']['controls'], 'Case embed did not expose native start')
+        self.shell_language(frame, state['language'], 'case intro')
         plan.tap('start')
         plan.wait(lambda s: 'start' not in s['ui']['controls'], 'case embed native start', state['sample_id'])
         before = plan.tap('language')
-        plan.wait(lambda s: s['language'] != before['language'], 'case embed native language', before['sample_id'])
+        switched = plan.wait(lambda s: s['language'] != before['language'], 'case embed native language', before['sample_id'])
+        self.shell_language(frame, switched['language'], 'case switched native language')
         self.case_viewport_fit(frame)
         require(not any(event['type'] == 'mouse.wheel' for event in self.result['events'][input_boundary:]),
                 'Viewport-fit case input unexpectedly required an outside scrolling escape')
@@ -794,6 +810,7 @@ class Session:
         fullscreen = self.line('DAWNKEEP_WEB_FULLSCREEN', boundary, 15)
         require(fullscreen.get('active') is True and fullscreen.get('trusted') is True,
                 'Case native fullscreen did not engage through a real control')
+        self.shell_language(frame, plan.current()['language'], 'case fullscreen')
         self.click('#dawnkeep-web-fullscreen', frame)
         self.wait(lambda: self.page.evaluate('!document.fullscreenElement'), 'Case native fullscreen did not exit', 15)
         self.case_viewport_fit(frame)
@@ -804,13 +821,32 @@ class Session:
         self.result['checks'].append({'name': 'case embedded native start/language/exit', 'passed': True})
 
     def standalone_page(self):
+        from playwright.sync_api import expect
+        # A real required-asset outage exercises the pre-engine locale fallback.
+        # No synthetic engine state, DOM labels or media state are assigned.
+        outage = RequiredPayloadOutage()
+        pattern = '**/' + PCK_NAME + '*'
+        self.page.route(pattern, outage)
         boundary = len(self.console)
-        response = self.page.goto(urljoin(self.base, PLAY_ROOT + 'index.html?lang=' + self.locale),
-                                  wait_until='domcontentloaded')
-        require(response and response.status == 200, 'Standalone shell did not load')
+        try:
+            response = self.page.goto(urljoin(self.base, PLAY_ROOT + 'index.html?lang=' + self.locale),
+                                      wait_until='domcontentloaded')
+            require(response and response.status == 200, 'Standalone shell did not load')
+            self.line('DAWNKEEP_WEB_LOAD_ERROR', boundary)
+            require(outage.attempts > 0 and not receipts('\n'.join(self.console[boundary:])),
+                    'Pre-engine language fallback did not precede native state')
+            self.shell_language(self.page.main_frame, self.locale, 'pre-engine page locale fallback')
+            expect(self.page.locator('#dawnkeep-web-panel [role="status"]')).to_have_text(
+                '载入失败。请重试。' if self.locale == 'zh' else 'Loading failed. Please retry.')
+            self.shot('standalone-localized-load-error')
+        finally:
+            self.page.unroute(pattern, outage)
+        boundary = len(self.console)
+        self.click('#dawnkeep-web-retry')
         plan = self.native_plan(self.page.main_frame, boundary, 'standalone')
         state = plan.current()
         require(state['language'] == 'zh' and 'start' in state['ui']['controls'], 'Frozen native intro default changed')
+        self.shell_language(self.page.main_frame, state['language'], 'standalone actual retry native intro')
         self.shot('standalone-intro', state)
         boundary = len(self.console)
         self.click('#dawnkeep-web-fullscreen')
@@ -822,11 +858,14 @@ class Session:
         self.click('#dawnkeep-web-quit')
         event = self.line('DAWNKEEP_WEB_EXIT', boundary, 30)
         require(event.get('ok') is True and event.get('code') == 0, 'Actual Engine.requestQuit/onExit failed')
+        self.shell_language(self.page.main_frame, state['language'], 'standalone closed')
+        expect(self.page.locator('#dawnkeep-web-panel [role="status"]')).to_have_text('游戏已退出')
         self.shot('standalone-engine-exited')
         boundary = len(self.console)
         self.click('#dawnkeep-web-restart')
         state = self.native_plan(self.page.main_frame, boundary, 'standalone-reopen').current()
         require('start' in state['ui']['controls'], 'Standalone reopen did not create native intro')
+        self.shell_language(self.page.main_frame, state['language'], 'standalone reopened')
         self.result['checks'].append({'name': 'standalone fullscreen/official engine quit/reopen', 'passed': True})
         self.healthy()
 
