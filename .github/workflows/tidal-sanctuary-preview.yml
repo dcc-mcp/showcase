@@ -363,10 +363,15 @@ jobs:
         run: |
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
           python -m playwright install-deps chromium
+      - name: Recover exact original official Chrome without system installation
+        timeout-minutes: 3
+        run: |
+          python "$RECIPE/ci/prepare_exact_chrome.py" --output "$RUNNER_TEMP/tidal-exact-chrome"
       - name: Exact-build real source lifecycle diagnosis
         timeout-minutes: 3
         run: |
-          python "$RECIPE/ci/diagnose_audio_lifecycle.py" --chromium /opt/google/chrome/chrome --source "$RECIPE/game" --output "$RUNNER_TEMP/tidal-audio-lifecycle"
+          chromium=$(cat "$RUNNER_TEMP/tidal-exact-chrome/browser-path.txt")
+          python "$RECIPE/ci/diagnose_audio_lifecycle.py" --chromium "$chromium" --source "$RECIPE/game" --output "$RUNNER_TEMP/tidal-audio-lifecycle"
       - name: Preserve bounded diagnostic evidence including failure
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -374,4 +379,7 @@ jobs:
           name: tidal-audio-lifecycle-${{ github.sha }}
           retention-days: 14
           if-no-files-found: error
-          path: ${{ runner.temp }}/tidal-audio-lifecycle
+          path: |
+            ${{ runner.temp }}/tidal-audio-lifecycle
+            ${{ runner.temp }}/tidal-exact-chrome/receipt.json
+            ${{ runner.temp }}/tidal-exact-chrome/dpkg.log
