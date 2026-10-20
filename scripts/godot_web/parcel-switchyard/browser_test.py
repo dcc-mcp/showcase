@@ -77,6 +77,35 @@ def wait_fresh(view, before, frames=2):
     return wait(view, 'window.__parcelState.publication_id>%d && window.__parcelState.process_frame>=%d' % (before['publication_id'], before['process_frame'] + frames))
 
 
+def install_input_trace(context):
+    # Observation only: no preventDefault, event dispatch, command bridge or engine writes.
+    context.add_init_script("""(() => {
+      window.__parcelInputTrace = [];
+      document.addEventListener('DOMContentLoaded', () => {
+        const record = event => {
+          if (event.target?.id !== 'canvas') return;
+          const canvas = event.target, box = canvas.getBoundingClientRect();
+          const point = event.changedTouches?.[0] || event.touches?.[0] || event;
+          const state = window.__parcelState;
+          const entry = {type: event.type, trusted: event.isTrusted, time: performance.now(),
+            client: [point.clientX, point.clientY], page: [point.pageX, point.pageY],
+            box: {x:box.x,y:box.y,width:box.width,height:box.height},
+            buffer: [canvas.width,canvas.height], scroll: [scrollX,scrollY],
+            viewport: {width:innerWidth,height:innerHeight,scale:visualViewport?.scale},
+            state: state ? {publication_id:state.publication_id,process_frame:state.process_frame,
+              layout_size:state.layout_size,targets:state.targets,selected:state.selected,
+              sent:state.sent,active:state.active,auto:state.auto,paused:state.paused} : null};
+          if (state) entry.logical = [(point.clientX-box.x)*state.layout_size[0]/box.width,
+                                      (point.clientY-box.y)*state.layout_size[1]/box.height];
+          window.__parcelInputTrace.push(entry);
+          if (window.__parcelInputTrace.length>128) window.__parcelInputTrace.shift();
+        };
+        for (const type of ['pointerdown','pointerup','touchstart','touchend','mousedown','mouseup'])
+          document.addEventListener(type, record, {capture:true,passive:true});
+      }, {once:true});
+    })();""")
+
+
 def target(page, command, touch=False, view=None, repetitions=1):
     view = view or page
     snapshot = state(view)
@@ -94,6 +123,13 @@ def target(page, command, touch=False, view=None, repetitions=1):
         box = view.locator('#canvas').bounding_box()
         cx = box['x'] + (x + width / 2) * box['width'] / logical_width
         cy = box['y'] + (y + height / 2) * box['height'] / logical_height
+    if getattr(page, '_parcel_input_trace', False) is True:
+        view.evaluate("""entry => {
+          window.__parcelInputTrace.push(entry);
+          if (window.__parcelInputTrace.length>128) window.__parcelInputTrace.shift();
+        }""", {'type':'intent','command':command,'top_page_point':[cx,cy],
+                 'top_page_canvas':box,'touch':touch,'repetitions':repetitions,
+                 'layout_size':snapshot['layout_size'],'target':snapshot['targets'][command]})
     for _ in range(repetitions):
         if touch:
             page.touchscreen.tap(cx, cy)
@@ -462,7 +498,10 @@ def run_embedding(browser, base, output, width, height, lang, phone, kind):
     name = 'embedded-%s-%s-%dx%d' % (kind, lang, width, height)
     context = browser.new_context(viewport={'width': width, 'height': height}, is_mobile=phone, has_touch=phone,
                                   device_scale_factor=1, record_video_dir=str(output / 'videos'), record_video_size={'width': width, 'height': height})
+    install_input_trace(context)
     page = context.new_page()
+    page._parcel_input_trace = True
+    frame = None
     errors, console_errors, packs = [], [], []
     page.on('pageerror', lambda error: errors.append(str(error)))
     page.on('console', lambda message: record_console_error(message, console_errors))
@@ -505,13 +544,22 @@ def run_embedding(browser, base, output, width, height, lang, phone, kind):
             page.locator('[data-game-reset]').click()
             wait(frame, 'window.__parcelState.sent===0 && window.__parcelState.best===0')
             assert_fresh(frame)
+        input_trace = frame.evaluate('window.__parcelInputTrace || []')
         exit_selector = '[data-play-exit]' if kind == 'cases' else '[data-game-exit]'
         page.locator(exit_selector).click()
         page.wait_for_selector('iframe', state='detached')
         assert not errors and not console_errors, (errors, console_errors)
         return {'name': name, 'status': 'passed', 'lang': lang, 'native_language_receipt': language_receipt, 'delivery_capture': delivery_capture, 'viewport': [width, height], 'served_pack_sha256': served_hash,
+                'input_trace': input_trace,
                 'checks': ['explicit launch', 'actual WASM', 'non-default route', 'misroute', 'reset', 'delivery', 'minimum phone targets/text', 'parent exit'], 'page_errors': errors, 'console_errors': console_errors}
     except Exception:
+        try:
+            diagnostics = {'name':name,'input_trace':frame.evaluate('window.__parcelInputTrace || []') if frame else [],
+                           'native_state':state(frame) if frame else None,
+                           'parent':page.evaluate('({scroll:[scrollX,scrollY],viewport:[innerWidth,innerHeight]})')}
+            (output / (name + '-input-diagnostics.json')).write_text(json.dumps(diagnostics,ensure_ascii=False,indent=2)+'\n')
+        except Exception as diagnostic_error:
+            (output / (name + '-diagnostic-error.txt')).write_text(type(diagnostic_error).__name__+'\n')
         if not page.is_closed():
             page.screenshot(path=str(output / (name + '-failure.png')), full_page=False)
         raise

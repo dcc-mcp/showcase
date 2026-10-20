@@ -282,6 +282,24 @@ class ObserverGuards(unittest.TestCase):
                 self.assertEqual(page.locator.return_value.bounding_box.call_count, 2)
                 fresh.assert_called_once_with(page, snapshot)
 
+    def test_input_trace_is_bounded_passive_observation(self):
+        context=Mock()
+        helper('install_input_trace')(context)
+        script=context.add_init_script.call_args.args[0]
+        self.assertIn('capture:true,passive:true',script)
+        self.assertIn('length>128',script)
+        self.assertIn('event.isTrusted',script)
+        self.assertIn('getBoundingClientRect()',script)
+        for forbidden in ['dispatchEvent(', 'preventDefault(', 'showcaseCommand(', '__parcelState=']:
+            self.assertNotIn(forbidden,script)
+
+    def test_embedding_trace_is_captured_before_frame_exit(self):
+        source=Path(__file__).with_name('browser_test.py').read_text()
+        node=next(n for n in ast.parse(source).body if isinstance(n,ast.FunctionDef) and n.name=='run_embedding')
+        embedding=ast.get_source_segment(source,node)
+        self.assertLess(embedding.index("input_trace = frame.evaluate("),embedding.index("page.locator(exit_selector).click()"))
+        self.assertIn("'input_trace': input_trace,",embedding)
+
     def test_failed_wait_reports_the_actual_condition(self):
         page = Mock();page.wait_for_function.side_effect = TimeoutError()
         with self.assertRaisesRegex(AssertionError, 'sent===6.*TimeoutError'):
