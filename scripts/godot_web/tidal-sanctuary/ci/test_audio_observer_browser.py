@@ -62,13 +62,13 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
             self.assertEqual(json.loads((output / "receipt.json").read_text()), value)
             self.assertFalse((output / ".receipt.json.tmp").exists())
 
-    def supervised(self, output, process, result=None):
+    def supervised(self, output, process, result=None, headed=False):
         def finish(*args, **kwargs):
             smoke.save_report(output, result or {"passed": True, "status": "passed", "scope": smoke.SCOPE})
             return 0 if result is None or result["passed"] else 1
         process.wait.side_effect = finish
         with patch.object(smoke.subprocess, "Popen", return_value=process) as launch, contextlib.redirect_stdout(io.StringIO()):
-            code = smoke.supervise(Path("/verified/chrome"), Path("/selected/source"), output)
+            code = smoke.supervise(Path("/verified/chrome"), Path("/selected/source"), output, headed=headed)
         return code, launch
 
     def test_success_requires_real_worker_success_and_preserves_explicit_inputs(self):
@@ -85,6 +85,13 @@ class AudioObserverSmokeFixtures(unittest.TestCase):
             self.assertTrue(report["passed"])
             self.assertEqual(report["maximum_seconds"], 30)
             self.assertIn("no Godot gameplay", report["scope"])
+
+    def test_explicit_headed_flag_survives_supervision_without_default_fallback(self):
+        for headed in (False,True):
+            with self.subTest(headed=headed), tempfile.TemporaryDirectory() as temporary:
+                code,launch=self.supervised(Path(temporary),Mock(pid=1234),headed=headed)
+                self.assertEqual(code,0)
+                self.assertEqual('--headed' in launch.call_args.args[0],headed)
 
     def test_worker_validation_failure_retains_exact_stage_and_reason(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -265,14 +272,65 @@ class RealTargetFocusFixtures(unittest.TestCase):
         self.assertEqual(bounded.call_count,1)
         self.assertFalse(probe.report['emulation_disabled_after_navigation'])
 
+    def test_headed_hidden_lifecycle_adds_real_visibility_without_erasing_visible_blur(self):
+        from focus_lifecycle import validate_focus_transition
+        for active in (False,True):
+            before=self.snapshot(not active);after=self.snapshot(active,self.events(active))
+            result=validate_focus_transition(before,after,active,require_hidden_lifecycle=True)
+            self.assertIn('hidden/visible',result['scope'])
+            after['records']=after['records'][:1]
+            with self.assertRaises(ValueError):validate_focus_transition(before,after,active,True)
+        after=self.snapshot(False,[{'type':'blur','trusted':True,'visible':True}]);after['visible']=True
+        self.assertFalse(validate_focus_transition(self.snapshot(True),after,False)['focused'])
+        with self.assertRaises(ValueError):validate_focus_transition(self.snapshot(True),after,False,True)
+
+    def test_genuine_same_window_tabs_required_and_no_window_mutation_used(self):
+        from focus_lifecycle import RealTargetFocus
+        for other_id in (7,8):
+            page=Mock();other=Mock();bounded=Mock();passive=Mock(return_value=self.snapshot(True))
+            probe=RealTargetFocus(page,bounded,passive);companion=RealTargetFocus(other,bounded,passive)
+            probe.settle_after_navigation();companion.settle_after_navigation();bounded.reset_mock()
+            bounded.side_effect=[{'targetInfo':{'targetId':'game','url':'http://127.0.0.1/fixture'}},{'windowId':7,'bounds':{'windowState':'normal'}},
+                {'targetInfo':{'targetId':'other','url':'http://127.0.0.1/fixture'}},{'windowId':other_id,'bounds':{'windowState':'normal'}}]
+            reads_before=passive.call_count
+            if other_id==7:self.assertTrue(probe.verify_same_window_tabs(companion)['passed'])
+            else:
+                with self.assertRaises(ValueError):probe.verify_same_window_tabs(companion)
+            self.assertEqual(passive.call_count,reads_before)
+            self.assertEqual([x.args[1] for x in bounded.call_args_list],
+                ['Target.getTargetInfo','Browser.getWindowForTarget','Target.getTargetInfo','Browser.getWindowForTarget'])
+        probe=RealTargetFocus(Mock(),Mock(),Mock())
+        with self.assertRaises(ValueError):probe.switch_to(Mock(),False,require_hidden_lifecycle=True)
+
+    def test_constructor_hidden_gate_cannot_be_downgraded_or_target_replaced(self):
+        from focus_lifecycle import RealTargetFocus
+        page=Mock();other=Mock();bounded=Mock();passive=Mock(return_value=self.snapshot(True))
+        probe=RealTargetFocus(page,bounded,passive,require_hidden=True)
+        companion=RealTargetFocus(other,bounded,passive,require_hidden=True)
+        probe.settle_after_navigation();companion.settle_after_navigation()
+        with self.assertRaises(ValueError):probe.switch_to(other,False,require_hidden_lifecycle=False)
+        bounded.side_effect=[{'targetInfo':{'targetId':'game','url':'http://127.0.0.1/fixture'}},{'windowId':7,'bounds':{}},
+            {'targetInfo':{'targetId':'other','url':'http://127.0.0.1/fixture'}},{'windowId':7,'bounds':{}}]
+        probe.verify_same_window_tabs(companion);bounded.reset_mock();bounded.side_effect=None
+        with self.assertRaises(ValueError):probe.switch_to(Mock(),False)
+        bounded.assert_not_called()
+        passive.side_effect=[self.snapshot(True),self.snapshot(False,self.events(False))]
+        with patch.object(probe,'verify_same_window_tabs',return_value={'passed':True}) as verify:
+            probe.switch_to(other,False,require_hidden_lifecycle=False)
+            verify.assert_called_once()
+        self.assertTrue(probe.report['transitions'][-1]['require_hidden_lifecycle'])
+
     def test_smoke_preserves_ceiling_and_uses_real_target_with_strict_audio_proofs(self):
         source = Path(smoke.__file__).read_text()
         self.assertEqual(smoke.MAX_SECONDS,30); self.assertEqual(smoke.WORK_SECONDS,27)
-        self.assertIn('focus.switch_to(other, False)',source)
-        self.assertIn('focus.switch_to(page, True)',source)
+        self.assertIn('focus.switch_to(other, False, require_hidden_lifecycle=headed)',source)
+        self.assertIn('focus.switch_to(page, True, require_hidden_lifecycle=headed)',source)
         self.assertIn('validate_focus_suspension(focus_before, away, returned',source)
         self.assertIn('resume_mark["wall_ms"], returned["wall_ms"], 1.2, True',source)
         self.assertNotIn('dispatchEvent(',source)
+        self.assertIn('pw.chromium.launch(headless=not headed',source)
+        self.assertIn('focus.verify_same_window_tabs(other_focus)',source)
+        self.assertIn('if headed and not os.environ.get("DISPLAY")',source)
 
 
 if __name__ == "__main__":

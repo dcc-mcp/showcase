@@ -27,7 +27,7 @@ AUDIO_FILES = {
 SCOPE = ("Real sandboxed Chrome, original Web audio backend/assets, real browser mouse events and actual "
          "same-context AudioWorklet PCM. Audio-only observer smoke; no Godot gameplay, FPS, full-loop, "
          "physical-speaker or subjective listening acceptance. Browser target window focus only; "
-         "hidden-tab visibility and OS/application focus are not established.")
+         "hidden-tab visibility only when explicit headed mode passes; OS/application focus is not established.")
 
 
 def file_hash(path):
@@ -94,7 +94,7 @@ def handler_for(resources):
     return Handler
 
 
-def worker(chromium, source, output):
+def worker(chromium, source, output, headed=False):
     # Imports and browser work run inside the supervising process's 27-second
     # budget. A stuck CDP/native call cannot extend the total 30-second ceiling.
     report = {"schema": 1, "scope": SCOPE, "passed": False, "status": "running", "stage": "imports", "checks": []}
@@ -150,19 +150,22 @@ def worker(chromium, source, output):
         threading.Thread(target=server.serve_forever, kwargs={"poll_interval": .05}, daemon=True).start()
         with sync_playwright() as pw:
             stage("launch-sandboxed-chrome")
-            browser = pw.chromium.launch(headless=True, executable_path=report["browser"]["executable_path"],
+            if headed and not os.environ.get("DISPLAY"):
+                raise RuntimeError("Headed focus acceptance requires the explicitly provisioned Xvfb DISPLAY")
+            report["browser"]["headed"] = headed
+            browser = pw.chromium.launch(headless=not headed, executable_path=report["browser"]["executable_path"],
                 chromium_sandbox=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, timeout=5000)
             report["browser"]["runtime_version"] = browser.version
             context = browser.new_context()
             context.add_init_script(script=audio_probe_init_script())
             page = context.new_page()
-            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate)
+            focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=headed)
             report["focus_targets"] = focus.report
             page.set_default_timeout(3000)
             # Prepare the companion before loading/starting the game, so its
             # creation cannot add an extra focus cycle during measured audio.
             other = context.new_page()
-            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate)
+            other_focus = RealTargetFocus(other, bounded_cdp, passive_evaluate, require_hidden=headed)
             other.goto("about:blank", timeout=3000)
             bounded_cdp(focus.session, "Page.bringToFront", {}, timeout=3)
             session = context.new_cdp_session(page)
@@ -189,6 +192,8 @@ def worker(chromium, source, output):
                     raise RuntimeError("Original audio fixture did not return HTTP 200")
                 other_focus.settle_after_navigation()
                 focus.settle_after_navigation()
+                if headed:
+                    focus.verify_same_window_tabs(other_focus)
                 wait_focus_state(page, passive_evaluate, True)
                 ready = passive_evaluate(page, "async () => { if (!await prepared) throw Error(TidalWebAudio.getState()); return __tidalAudio.ready(); }")
                 if len(ready.get("streams", [])) != 3 or sorted(item.get("role") for item in ready["streams"]) != ["bus", "bus", "mix"]:
@@ -253,7 +258,7 @@ def worker(chromium, source, output):
                 stage("real-target-focus-suspend-and-resume")
                 focus_before = snapshot("focus-before")
                 wait_focus_state(page, passive_evaluate, True)
-                focus.switch_to(other, False)
+                focus.switch_to(other, False, require_hidden_lifecycle=headed)
                 focus_deadline = time.monotonic() + 3
                 while inspect_state().get("context_state") != "suspended":
                     if time.monotonic() >= focus_deadline:
@@ -262,7 +267,7 @@ def worker(chromium, source, output):
                 away_mark = passive_evaluate(page, "() => __tidalAudio.mark('smoke-focus-away')")
                 page.wait_for_timeout(1400)
                 away = snapshot("focus-away")
-                focus.switch_to(page, True)
+                focus.switch_to(page, True, require_hidden_lifecycle=headed)
                 focus_deadline = time.monotonic() + 3
                 while inspect_state().get("context_state") != "running":
                     if time.monotonic() >= focus_deadline:
@@ -306,13 +311,15 @@ def worker(chromium, source, output):
     return 0 if report["passed"] else 1
 
 
-def supervise(chromium, source, output):
+def supervise(chromium, source, output, headed=False):
     """A separate process group bounds even an unresponsive browser/driver."""
     started = time.monotonic()
     report = {"schema": 1, "scope": SCOPE, "passed": False, "status": "starting", "checks": [], "maximum_seconds": MAX_SECONDS}
     save_report(output, report)
     command = [sys.executable, str(Path(__file__).resolve()), "--observer-worker", "--chromium", str(chromium),
                "--source", str(source), "--output", str(output)]
+    if headed:
+        command.append("--headed")
     timed_out, launch_error, cleanup_error, code = False, None, None, None
     with (output / "worker.log").open("wb") as log:
         try:
@@ -362,12 +369,13 @@ def main():
     parser.add_argument("--chromium", required=True, type=Path)
     parser.add_argument("--source", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--headed", action="store_true", help="Use explicitly provisioned Xvfb and genuine hidden same-window tabs; no fallback")
     parser.add_argument("--observer-worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.observer_worker:
-        return worker(args.chromium, args.source, args.output)
+        return worker(args.chromium, args.source, args.output, headed=args.headed)
     output = isolated_output(args.output, args.source)
-    return supervise(args.chromium, args.source, output)
+    return supervise(args.chromium, args.source, output, headed=args.headed)
 
 
 if __name__ == "__main__":

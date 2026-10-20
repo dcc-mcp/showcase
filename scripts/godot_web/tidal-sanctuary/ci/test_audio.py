@@ -145,6 +145,34 @@ class AudioAcceptanceFixtures(unittest.TestCase):
             with self.subTest(change=change), self.assertRaises(ValueError):
                 validate_focus_suspension(before, bad, back, 0, 2500)
 
+    def test_visible_desktop_sparse_suspension_remains_rejected(self):
+        # Actual 00ec229 hosted desktop timestamps. A frozen clock at these
+        # sparse endpoints is not a substitute for sustained fresh evidence.
+        before = snapshot(.01, "running")
+        away = snapshot(0, "suspended")
+        returned = snapshot(.01, "running", 540)
+        for value in (before, away, returned):
+            value["starts"] = [{"id": 3}]
+        template = away["contexts"][0]["samples"][0]
+        away["contexts"][0]["samples"] = [dict(template, wall_ms=wall,
+            context_time=536.5202721088435, active_music=1,
+            terminal_gain_values=[{"source": 2, "value": 0}])
+            for wall in (605184., 608555., 611872.8, 611873.3, 611927.4, 614406.4)]
+        with self.assertRaisesRegex(ValueError, "sustained fresh wall-time"):
+            validate_focus_suspension(before, away, returned, 608555.7, 611873.2)
+        # Even retaining every sparse endpoint cannot waive the maximum gap.
+        with self.assertRaisesRegex(ValueError, "sustained fresh wall-time"):
+            validate_focus_suspension(before, away, returned, 605000, 615000)
+
+    def test_headed_lane_and_failure_focus_snapshots_are_explicit(self):
+        source = Path(__file__).with_name("capture_browser.py").read_text()
+        self.assertIn('parser.add_argument("--headed", action="store_true"', source)
+        self.assertIn('launch_options = {"headless": not args.headed', source)
+        self.assertEqual(source.count('require_hidden=args.headed'), 3)
+        evidence = source.index('write_json(out / (label + "-audio-focus.json")')
+        validation = source.index('result["audio"]["focus"] = validate_focus_suspension')
+        self.assertLess(evidence, validation)
+
     def test_native_loop_cannot_change_bounds_pitch_or_automation(self):
         value, receipts, actions = route_audio()
         value["starts"] = [item for item in value["starts"] if item["name"] != "music" or item["id"] == 3]

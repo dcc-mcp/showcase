@@ -651,6 +651,7 @@ def main():
     parser.add_argument("--site", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--chromium", required=True, help="Explicit installed Chrome/Chromium executable; no fallback")
+    parser.add_argument("--headed", action="store_true", help="Real visible Chrome tabs; requires an X11 display, no headless fallback")
     args = parser.parse_args()
     out = isolated_output(args.output, args.site)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(args.site.resolve())))
@@ -663,19 +664,19 @@ def main():
                   "No multiplayer, deployment, accessibility, or broad device compatibility claim.",
                   "Audio is browser-rendered capture, not physical speaker output or subjective audition.",
                   "Audio-thread continuity is independent of game frame rate; it does not establish responsive or playable rendering.",
-                  "Browser target focus is exercised with real target activation; hidden-tab visibility, OS/application focus and physical-device behavior remain unverified."],
+                  "Headed mode requires actual hidden-tab transitions; headless mode covers target focus only. Visible-unfocused desktop density remains runtime-limited in run39365593281; OS/application focus and physical-device behavior remain unverified."],
               "playwright_version": importlib.metadata.version("playwright"),
               "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS,
-                                 "chromium_sandbox": True, "requested_executable": args.chromium},
+                                 "chromium_sandbox": True, "headless": not args.headed, "requested_executable": args.chromium},
               "pack_sha256": sha256(args.site / "index.pck"),
               "observer_sha256": {name:sha256(Path(__file__).with_name(name)) for name in
-                  ("audio_probe.js", "audio_meter_worklet.js", "audio_thread.py", "audio_source_contract.py", "capture_browser.py")}}
+                  ("audio_probe.js", "audio_meter_worklet.js", "audio_thread.py", "audio_source_contract.py", "capture_browser.py", "focus_lifecycle.py")}}
     try:
         if report["playwright_version"] != "1.63.0":
             raise RuntimeError("This acceptance lane requires pinned Playwright 1.63.0")
         selected = browser_executable(args.chromium)
         report["browser_launch"].update(selected)
-        launch_options = {"headless": True, "args": BROWSER_ARGS, "ignore_default_args": IGNORED_DEFAULT_ARGS,
+        launch_options = {"headless": not args.headed, "args": BROWSER_ARGS, "ignore_default_args": IGNORED_DEFAULT_ARGS,
                           "chromium_sandbox": True, "executable_path": selected["executable_path"]}
         with sync_playwright() as pw:
             report["passive_protocol"] = verify_passive_protocol(pw, out, launch_options)
@@ -766,12 +767,12 @@ def main():
                 try:
                     context = launch()
                     page = context.pages[0]
-                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate)
+                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed)
                     # Create the companion BEFORE the real journey and all audio
                     # baselines. Its automatic activation must not introduce an
                     # unrequested mid-route focus/suspend transition.
                     other_tab = context.new_page()
-                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate)
+                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate, require_hidden=args.headed)
                     other_tab.goto("about:blank")
                     focus_companion.settle_after_navigation(timeout=15)
                     bounded_cdp(focus_probe.session, "Page.bringToFront", {}, timeout=3)
@@ -787,6 +788,8 @@ def main():
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
                     focus_probe.settle_after_navigation(timeout=15)
+                    if args.headed:
+                        focus_probe.verify_same_window_tabs(focus_companion, timeout=15)
                     wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, console, failures)
                     # Read the game's existing context after its actual first draw.
@@ -1019,14 +1022,14 @@ def main():
                     result["audio"]["focus_target_activation"] = focus_probe.report
                     focus_events = [item for item in observer_receipts(console, "TIDAL_AUDIO", focus_console_boundary)
                                     if item.get("event") == "focus"]
+                    write_json(out / (label + "-audio-focus.json"), {"before": focus_before,
+                        "away": focus_away, "returned": focus_returned, "receipts": focus_events})
                     if [item.get("active") for item in focus_events] != [False, True]:
                         raise ValueError("Actual browser tab activation did not deliver focus loss and return")
                     result["audio"]["focus"] = validate_focus_suspension(focus_before, focus_away,
                         focus_returned, focus_mark["wall_ms"], focus_away["wall_ms"])
                     result["audio"]["focus"]["resumed_window"] = audio_window(focus_returned,
                         resume_mark["wall_ms"], focus_returned["wall_ms"], 1.2, audible=True)
-                    write_json(out / (label + "-audio-focus.json"), {"before": focus_before,
-                        "away": focus_away, "returned": focus_returned, "receipts": focus_events})
                     write_json(out / (label + "-audio-observations.json"), audio_snapshot)
                     report["checks"].append({"name": label + " real gesture, live post-mute audio, four cues and loop", "passed": True})
 
@@ -1071,7 +1074,7 @@ def main():
                     context = None
                     context = launch()
                     page = context.pages[0]
-                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate)
+                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed)
                     bounded_cdp(restored_focus.session, "Page.bringToFront", {}, timeout=3)
                     context.add_init_script(script=audio_probe_init_script())
                     attach(page, restored_console, restored_failures)

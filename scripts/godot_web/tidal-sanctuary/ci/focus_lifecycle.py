@@ -27,7 +27,7 @@ FOCUS_INIT = r"""(() => {
 })()"""
 
 
-def validate_focus_transition(before, after, active):
+def validate_focus_transition(before, after, active, require_hidden_lifecycle=False):
     if type(active) is not bool:
         raise ValueError('Focus expectation must be boolean')
     if before.get('overflow') is not False or after.get('overflow') is not False:
@@ -52,8 +52,13 @@ def validate_focus_transition(before, after, active):
         raise ValueError('Observed visibility changes disagree with the actual final visibility')
     if any(item.get('trusted') is not True for item in events):
         raise ValueError('Synthetic focus events cannot qualify real target activation')
+    if require_hidden_lifecycle:
+        if (after['visible'] is not active or not visibility
+                or not any(item.get('visible') is active for item in visibility)):
+            raise ValueError('Headed tab lifecycle lacks real hidden/visible transition')
     return {'active':active, 'events':events, 'focused':after['focused'], 'visible':after['visible'],
-            'scope':'browser target window focus; hidden-tab and OS focus not established'}
+            'scope':('headed same-window tab hidden/visible transition; OS focus not established'
+                if require_hidden_lifecycle else 'browser target window focus; hidden-tab and OS focus not established')}
 
 
 def prepare_real_focus(page, bounded_cdp):
@@ -85,7 +90,11 @@ def wait_focus_state(page, passive_evaluate, active, timeout=3):
 
 
 class RealTargetFocus:
-    def __init__(self, page, bounded_cdp, passive_evaluate):
+    def __init__(self, page, bounded_cdp, passive_evaluate, require_hidden=False):
+        if type(require_hidden) is not bool:
+            raise ValueError('Hidden lifecycle selection must be explicit boolean')
+        self.require_hidden = require_hidden
+        self._companion = None
         self.page = page
         self._passive = passive_evaluate
         self._bounded = bounded_cdp
@@ -94,7 +103,8 @@ class RealTargetFocus:
         # Detaching a session early may discard its emulation settings.
         self.session = prepare_real_focus(page, bounded_cdp)
         self.report = {'method':'real Page.bringToFront after one-time forced-focus removal',
-                       'scope':'browser target window focus; hidden-tab and OS focus not established',
+                       'scope':('headed same-window hidden/visible lifecycle required; OS focus not established'
+                           if require_hidden else 'browser target window focus; hidden-tab and OS focus not established'),
                        'emulation_disabled_after_navigation':False, 'transitions':[]}
         self._settle_attempted = False
         self._navigation = None
@@ -147,9 +157,53 @@ class RealTargetFocus:
             raise ValueError('Navigation invalidated post-navigation focus setup')
         return value
 
-    def switch_to(self, target, active, timeout=3):
+    def verify_same_window_tabs(self, companion, timeout=3):
+        """Read genuine Chrome target/window IDs; do not create or emulate windows."""
+        if not isinstance(companion,RealTargetFocus) or companion.page is self.page:
+            raise ValueError('Same-window proof requires a distinct prepared companion')
+        if type(timeout) not in (int,float) or not 0 < timeout <= 30:
+            raise ValueError('Invalid bounded window inspection timeout')
+        deadline=time.monotonic()+timeout
+        def remaining():
+            value=deadline-time.monotonic()
+            if value<=0:raise TimeoutError('Genuine window inspection exceeded deadline')
+            return value
+        entries=[]
+        for probe in (self,companion):
+            # Window/target metadata is browser-process evidence. The caller
+            # validates the measured document identity before every switch;
+            # do not queue another renderer DOM round-trip here.
+            if probe._navigation is None:
+                raise ValueError('Window proof requires both pages to have settled after navigation')
+            target=self._bounded(probe.session,'Target.getTargetInfo',{},timeout=remaining()).get('targetInfo',{})
+            target_id=target.get('targetId')
+            if not isinstance(target_id,str) or not target_id:
+                raise ValueError('Chrome did not identify the exact page target')
+            if target.get('url') != probe._navigation[0]:
+                raise ValueError('Browser target URL changed after final focus setup')
+            window=self._bounded(probe.session,'Browser.getWindowForTarget',{'targetId':target_id},timeout=remaining())
+            remaining()
+            if type(window.get('windowId')) is not int or not isinstance(window.get('bounds'),dict):
+                raise ValueError('Chrome did not return genuine browser window metadata')
+            entries.append({'target_id':target_id,'url':target['url'],'window_id':window['windowId'],'bounds':window['bounds']})
+        self.report['same_window_tabs']={'targets':entries,'passed':False}
+        self.report.setdefault('window_history',[]).append(self.report['same_window_tabs'])
+        if entries[0]['target_id']==entries[1]['target_id'] or entries[0]['window_id']!=entries[1]['window_id']:
+            raise ValueError('Browser targets are not distinct tabs in the same genuine window')
+        self.report['same_window_tabs']['passed']=True
+        self._companion=companion
+        return self.report['same_window_tabs']
+
+    def switch_to(self, target, active, timeout=3, require_hidden_lifecycle=False):
+        if type(require_hidden_lifecycle) is not bool:
+            raise ValueError('Hidden lifecycle selection must be boolean')
+        require_hidden_lifecycle = self.require_hidden or require_hidden_lifecycle
         if type(active) is not bool or type(timeout) not in (int, float) or not 0 < timeout <= 30:
             raise ValueError('Invalid bounded focus transition')
+        if require_hidden_lifecycle and not self.report.get('same_window_tabs',{}).get('passed'):
+            raise ValueError('Hidden-tab lifecycle requires genuine same-window proof first')
+        if require_hidden_lifecycle and target is not (self.page if active else self._companion.page):
+            raise ValueError('Target activation must use the exact verified window tabs')
         deadline = time.monotonic() + timeout
         def remaining():
             value = deadline - time.monotonic()
@@ -158,7 +212,10 @@ class RealTargetFocus:
             return value
         before = self.snapshot(timeout=remaining())
         remaining()  # A late passive reply cannot be accepted.
-        entry = {'active':active, 'before':before, 'passed':False}
+        if require_hidden_lifecycle:
+            self.verify_same_window_tabs(self._companion,timeout=remaining())
+        entry = {'active':active, 'before':before, 'passed':False,
+                 'require_hidden_lifecycle':require_hidden_lifecycle}
         self.report['transitions'].append(entry)
         try:
             session = self.session if target is self.page else self._target_sessions.get(id(target))
@@ -172,7 +229,7 @@ class RealTargetFocus:
                 entry['after'] = after
                 remaining()
                 try:
-                    entry['proof'] = validate_focus_transition(before, after, active)
+                    entry['proof'] = validate_focus_transition(before, after, active, require_hidden_lifecycle=require_hidden_lifecycle)
                     entry['passed'] = True
                     return after
                 except ValueError as error:

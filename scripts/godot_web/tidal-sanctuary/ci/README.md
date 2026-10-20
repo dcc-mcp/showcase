@@ -237,3 +237,25 @@ window. Requiring hidden state for that target-focus transition conflated two
 different browser properties. Target-focus acceptance preserves the original
 real blur/focus plus audio suspension/resume requirements; hidden-tab and OS
 application focus behavior remain unverified.
+
+
+### Separate genuine hidden-tab lane (2026-10-20)
+
+Exact-head `00ec229` run `39365593281` passed the full portrait touch, audio,
+focus and fresh-process save restoration route. Desktop completed its keyboard
+quest and original first-loop PCM gate, and delivered genuine blur/focus, but
+failed the unchanged suspension observation density gate: the visible software
+renderer blocked the main-thread sampler for roughly 3.3 seconds. A suspended
+clock observed at sparse endpoints is not continuous proof. This desktop
+visible-unfocused result remains runtime-limited, not passed.
+
+The separate hosted lane uses `--headed` Chrome under Xvfb, a supported
+[Playwright Linux headed CI configuration](https://playwright.dev/python/docs/ci).
+It requires real same-window tab activation and trusted hidden/visible transitions,
+not a synthetic visibility event, forced lifecycle freeze or reduced viewport.
+The original audio graph, clock, gain, source identity, fresh observation density,
+PCM, loop, input and persistence gates are unchanged. Product source is unchanged.
+The lightweight actual-browser smoke must pass before the expensive game route.
+A new exact-head hosted result is required; adding this lane is not itself a pass.
+Hidden-tab acceptance does not qualify the separate visible-unfocused desktop
+condition, physical devices, OS focus, subjective listening or GPU performance.
