@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "purpose": "Correct author and committer identity on 27 owner-created commits. Content trees and historical evidence remain unchanged. AI production provenance is not altered.",
+  "base_commit": "37468b7a6f51448eba54ab205f0965f3d49ad61c",
+  "original_head": "f5f02f92952145cd62af575f741a1af1b97fc143",
+  "corrected_head": "af359d90aa97aabfaac79e8d866f682f5975e4e9",
+  "identity": {
+    "name": "Hal",
+    "email": "13111745+loonghao@users.noreply.github.com"
+  },
+  "commits": [
+    {
+      "original_commit": "678fe8f345780585ce9fc2f570b3ba598201bea3",
+      "corrected_commit": "e8636db0f6cb03e7e4986a4c10c7d707f00dca1d",
+      "tree": "c410ff5581f76dbd7d0c3225d69da46884cbc119"
+    },
+    {
+      "original_commit": "b0caa42e164c58f625cec3cd39b988b9cb0902a7",
+      "corrected_commit": "088f51a5430bebb1008e449a65df2ccdaac4eca7",
+      "tree": "9fd587b36816515068c890a9f5e167ee3804a0cf"
+    },
+    {
+      "original_commit": "523953fb771ed5d9850a599c1e471d1d1fc0f0fc",
+      "corrected_commit": "a31ecac3197329daf5568b9aed0287e70be0f802",
+      "tree": "44e91ca923d488f5c31aaf637c2a46733c0c97cb"
+    },
+    {
+      "original_commit": "7bfb2eeca70b2e6fa00c7727b03cf220deb89611",
+      "corrected_commit": "c4eac47a3e1521b42c00c3a009e0cbafbaaf1b22",
+      "tree": "58d07be6f5f9db06d64e95028ea15b5361f3e326"
+    },
+    {
+      "original_commit": "27e3d17d87d7e09e98fa065e18bcaabe78397e79",
+      "corrected_commit": "888d7885a446716e530e20444ffbed75147d0ee7",
+      "tree": "0a1b0bdba83252c4e8cff51c38d09c7dcd8a4371"
+    },
+    {
+      "original_commit": "58ba40756c0407c4c0d6f2db8a01018291020ed6",
+      "corrected_commit": "a270fd95eac5129ac8cb6f3d5ddc9bea57f41851",
+      "tree": "0be159b3ed6e4ee292b86591b248b3144a10da0d"
+    },
+    {
+      "original_commit": "81c109db079d3815c547943c7924d24349d6d386",
+      "corrected_commit": "f0de4b236ed184431c165ea18d6b212f788b3bce",
+      "tree": "61dfb7ceb481cd174972df1a18e5de5a9ce2ca33"
+    },
+    {
+      "original_commit": "4b14b63630dbc90a16bb625ce31e427f9b8f3c69",
+      "corrected_commit": "8454c492e7a4773d7c3e94c71662e791448fc581",
+      "tree": "45c10bbe2c83da74431b541d1587aa10ead8f335"
+    },
+    {
+      "original_commit": "1ca775194e6b15e7d8b4a95dcd9a2f711f0092e1",
+      "corrected_commit": "883ac19d7c1e5c93879b47e66097a88c89e9760c",
+      "tree": "141163165271c101da590cdda13057bbc2a6591a"
+    },
+    {
+      "original_commit": "9a086ff8efaaeabcc502d93b79a8dedf352dbfec",
+      "corrected_commit": "dcfe905774c493f381236b4cf1bc138be5399278",
+      "tree": "ca3db36de06c503a2a5b4823ec38db2ea534ec87"
+    },
+    {
+      "original_commit": "cd10625a38c3ebcb235cf108ce699ed33932a7a1",
+      "corrected_commit": "385c14fc4f943e43191c54b687180750a6e18e5d",
+      "tree": "f9f8a8f30551a8f32d23491ce131abf4622b1ccb"
+    },
+    {
+      "original_commit": "a433c4564b1da0f0adce120e42ab7734056729d8",
+      "corrected_commit": "c70096037b8b08e63382692023472bf19a7c9589",
+      "tree": "963d4838bb1f1a691b08bd2d7e2516e048661a87"
+    },
+    {
+      "original_commit": "fe970c6e20b98167aa6aef8bfead00ed80d64163",
+      "corrected_commit": "cf13dead9990da228e703de70cdffd6a1a409428",
+      "tree": "50a92a21c1f49bd7003faea84d7c9bee26145fdb"
+    },
+    {
+      "original_commit": "48e0d3b3ceaa3049de8f2e956904f1a460e05f7b",
+      "corrected_commit": "39035039b8920a7648eb1a7aa64d53c9c4d612e5",
+      "tree": "f8a71a7541ba2f16610f09138331405c2c1de277"
+    },
+    {
+      "original_commit": "7be0530ed603cc04d7b55e967fc892437366b055",
+      "corrected_commit": "4701514182514959052d69d00f983a1f4de6361e",
+      "tree": "f360104d31362ebe31bf70ead90faf8e94e77b7d"
+    },
+    {
+      "original_commit": "f423e0f0b41133f6a4d7d3b0e5619850e75122e4",
+      "corrected_commit": "5f8978b873a3b812598a52c6f081eaef6a136fe4",
+      "tree": "bedcc5b86671ad312075c7111c5beb15361b6838"
+    },
+    {
+      "original_commit": "58dc9d759334f6f88598a38dcc79a8f91955e1d9",
+      "corrected_commit": "c0d93013b4126799f92cdaa1179f75fac088f5dd",
+      "tree": "cd59453bc6821763fdedeac5c49bfeb7b751afe4"
+    },
+    {
+      "original_commit": "0bf15fe00d035c80b71efead7da1a80e96c5f022",
+      "corrected_commit": "d6957ca7fe1026eb697270232d3ada05874e8ed4",
+      "tree": "e04449cbdb558e9a08c81d0ec9783b2a032572dd"
+    },
+    {
+      "original_commit": "e9e32b9fe66804ace3eaad53a56a3e36376edb7c",
+      "corrected_commit": "96e85bd2dcae426f4bc07dec5a8fc935f4341976",
+      "tree": "5efc8dcb62afe40ae3fdb6ad979a2ca557431388"
+    },
+    {
+      "original_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+      "corrected_commit": "a2f4ae00d01ecee900597756758a6253ff0bc53e",
+      "tree": "9c639cee32e72b8a1fe902ff4d8401dfa547446e"
+    },
+    {
+      "original_commit": "b8f8bed4c980acb5cae16e7d9a305b09e567e78a",
+      "corrected_commit": "7c76f3ef01a784ee87f31363ccc075996461f91b",
+      "tree": "ea1ec60a33177df9109bba95c873b1fb3db90865"
+    },
+    {
+      "original_commit": "5c2902070a9e8f9a3ce9afedee617ff044d0f13f",
+      "corrected_commit": "0f3512b0456876a07e8d93dc560779d946948fda",
+      "tree": "a0e341995158056cdcd4368734aa31f16c93f167"
+    },
+    {
+      "original_commit": "bb364232e66e4bde12c6d90730be9334fc092d88",
+      "corrected_commit": "f76ee9d554a8fbe1a2dba61796800ac5945314ab",
+      "tree": "54d48b6fe8b73576e09c878631d18076b256930c"
+    },
+    {
+      "original_commit": "11f98e34d8f1f4f125dfc3c2846a9328f2883945",
+      "corrected_commit": "79940cf2019cf83d802263dbbec23c9c06da6f58",
+      "tree": "c70b3969237bddaf55e9dc4dc9557c959ea528cb"
+    },
+    {
+      "original_commit": "8cfed7a75b7683dea6fab24a27a0fdf4ac45db13",
+      "corrected_commit": "82c6fab6cf55ceb367b80cf30ab4d0c77da78c56",
+      "tree": "2dba0bfbaf55e95794ece6c6b52bb51acdda93b8"
+    },
+    {
+      "original_commit": "3734d0af5e83b30b03d17a3e5f97236426a5c5e1",
+      "corrected_commit": "0186084e47057a9725306369cd8432cda351b9ac",
+      "tree": "f17af5c9079c539e31513c012a09b99a261f56b6"
+    },
+    {
+      "original_commit": "f5f02f92952145cd62af575f741a1af1b97fc143",
+      "corrected_commit": "af359d90aa97aabfaac79e8d866f682f5975e4e9",
+      "tree": "f5ab7b3a59ec7888680a60e13dc16f956f490e41"
+    }
+  ]
+}

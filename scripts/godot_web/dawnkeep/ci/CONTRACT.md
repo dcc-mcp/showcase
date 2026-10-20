@@ -1,0 +1,109 @@
+# Dawnkeep acceptance observation contract
+
+This is read-only observation from actual Godot runtime output, never an input
+bridge. Tests send X11/XTest keyboard/mouse, Chromium keyboard/mouse, or
+Chromium emulated touch. They must not call gameplay methods, inject state,
+set variables, change browser storage, or invoke a scripted demonstration.
+
+Main prints `DAWNKEEP_FRAME_READY {"schema":1}` only after a real
+`RenderingServer.frame_post_draw`. At 4 Hz main prints `DAWNKEEP_STATE `
+followed by JSON, with these fields (the full gameplay snapshot can add more):
+
+- `schema: 1`, monotonically increasing positive `sample_id` and `physics_frame`
+- `language: "en" | "zh"`; `paused: bool`; `phase`: actual gameplay phase
+- `wave: int`, `gold: number`, `core_hp: number`
+- `hero: {position: [x,y,z], level: int, xp: number}`
+- `towers: array`; `enemies: array`
+- `music: {unlocked: bool, muted: bool, playing: bool, peak_db: number}`
+  Peak is measured on a dedicated actual audio bus, rather than inferred from
+  player.playing. Runtime must not report sound when the stream is silent.
+- `ui: {controls: {KEY: {x: number,y: number,w: number,h: number,enabled: bool}}}`
+  Coordinates are viewport pixels for effectively visible controls, intersected
+  with clipping ancestors. Fully clipped rows are omitted; partially clipped
+  rows expose only their reachable rectangle.
+  Keys: `language`, `mute`, `pause`, `restart`, `start_wave`, `skill_1`,
+  `skill_2`, `skill_3`, `equipment`, `build`, `upgrade`, `sell`.
+  Optional `start` is clicked if present in an initial menu. Optional `resume`
+  returns from a pause menu. Optional `confirm_restart` is used only if shown.
+  Missing/hidden controls are omitted. Disabled controls are still described.
+- `ui.minimap: {x,y,w,h}` describes the public, clickable minimap. Its linear
+  world bounds are x [-17,17] and z [-11,11]. Tests click this visible map;
+  observation never invokes the underlying move command.
+- Optional `ui.pads`: array of `{id, x,y}` projected clickable support pads.
+- Optional `ui.labels`: declared text on at least partially visible controls,
+  used for localization QA. This is not proof that every glyph is visible.
+- `ui.focus_owner`: current focused control key, or an empty string.
+- `ui.keyboard_navigation`: whether arrows/activation belong to native UI.
+  Container geometry is observed after sorting; test reports separately record
+  bounded consecutive-frame stability before asserting layout.
+
+Keyboard contract: with battlefield focus, WASD/arrows move the hero and
+Q/E/R are hero abilities; Space starts a wave. Tab/Shift-Tab and arrows navigate
+native UI; Enter/Space activate its focused button before gameplay receives the
+event. Escape closes the top modal/shop, then leaves nonmodal UI navigation,
+then pauses/resumes. L switches EN/ZH and M toggles sound globally. Polled
+movement is explicitly gated during UI navigation and open modals.
+Restart uses the visible restart control and confirm_restart button; optional
+Backspace may open the same confirmation.
+Only the visible buttons are essential for core acceptance; movement requires
+actual keys on desktop and actual terrain taps or a visible touch move control
+on the emulated touch route. Native tests never claim physical-touch coverage.
+
+The Web shell is layered around the official Godot export, not a replacement
+engine/game. It provides `#dawnkeep-web-quit`, `#dawnkeep-web-restart`,
+`#dawnkeep-web-fullscreen`, and `#dawnkeep-web-retry`. It reports lifecycle JSON
+with `DAWNKEEP_WEB_...` prefixes. A trusted quit calls the official
+`Engine.requestQuit()` and the actual onExit callback; restart creates a fresh
+engine process via page reload. Loading retry is tested by failing an actual
+PCK network request then pressing the visible Retry button.
+
+## Evidence boundaries
+
+Preview runs are short real rendered screenshot/input gates, not completion,
+full audiovisual, full gameplay-balance, physical-phone, or deployed-site
+acceptance. Full desktop runs require all eight waves, actual victory, a fresh natural AFK
+defeat, and restart after both terminal states. Portrait remains a scoped
+two-wave run. Full runs add skills/equipment/repeated and
+invalid input, pause/resume/restart, desktop+portrait and EN+ZH, audio bus energy,
+Web loading/retry/quit/restart/fullscreen, actual recordings and decode checks.
+Listening to the final delivered soundtrack is a separate required review.
+
+### Browser capability and security
+
+The Dawnkeep browser harness keeps Chromium's sandbox enabled and does not force
+unsafe SwiftShader or disable Web security. Missing WebGL2, sandbox support or
+a graphics driver remains a recorded capability blocker. A successful export or
+headless fixture is not browser acceptance. The launch flags are included in
+the browser receipt. This policy is scoped to Dawnkeep's harness.
+
+### Pinned engine teardown isolation
+
+`diagnose_web_groups.py` is a separate five-project engine diagnostic, not a
+gameplay test and not a waiver for the strict game engine-log check. It exports
+an empty Dummy-physics baseline, one explicit awaited WorkerThreadPool group,
+the historical empty Node3D control, and two active capsule/box worlds using
+GodotPhysics3D and built-in Jolt, with the same hash-pinned single-thread Web
+template. The active cases must demonstrate physical blocking and a real ray
+hit before actual sandboxed Chrome clicks the official Engine.requestQuit path.
+Every console error is retained. Only the explicit Group and GodotPhysics3D
+repro cases expect the known allocator error. Jolt and both empty controls must
+exit without errors. `diagnosis_confirmed` means the full comparison matched;
+it never means a defective case had a clean exit. The real game still rejects
+every engine error independently.
+
+The [official 4.6.3 tag source](https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/core/object/worker_thread_pool.cpp#L653-L758)
+places Group cleanup inside `THREADS_ENABLED`, while
+[GodotPhysics3D submits groups](https://github.com/godotengine/godot/blob/35e80b3a8822a9df9be390814b62f44c0a9c69e8/modules/godot_physics_3d/godot_step_3d.cpp#L344-L368)
+without that guard. This is a source-level explanation to compare against the
+actual diagnostic, not proof of binary/source identity: the linked official tag
+resolves to `35e80b3a8822a9df9be390814b62f44c0a9c69e8`, whereas the hash-pinned
+distributed binary reports `7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3`.
+The initial empty Node3D test did not create collision bodies and exited cleanly;
+expecting that case to reproduce the defect was a diagnostic error. It remains
+as a negative control rather than being silently removed. Active-body cases
+now test actual simulation and queries. Built-in Jolt is a supported backend,
+not Dummy physics or a collision bypass. See the
+[backend repair record](../research/physics-backend-20261019.md).
+Do not claim that an additional game shutdown delay fixes engine allocations,
+disable collisions, suppress engine errors or weaken browser security to make
+this gate pass.

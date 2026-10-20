@@ -77,21 +77,62 @@ def wait_fresh(view, before, frames=2):
     return wait(view, 'window.__parcelState.publication_id>%d && window.__parcelState.process_frame>=%d' % (before['publication_id'], before['process_frame'] + frames))
 
 
+def settle_input_geometry(view):
+    # Observe presentation across frames, including ancestor movement. A native
+    # fresh frame does not guarantee that parent focus/scroll/layout has settled.
+    view.locator('#canvas').evaluate("""canvas => new Promise((resolve, reject) => {
+      let anchor = null, stable = 0, done = false;
+      const finish = error => {
+        done = true;
+        clearTimeout(watchdog);
+        if (error) reject(error); else resolve();
+      };
+      const watchdog = setTimeout(() => finish(new Error('Input geometry did not settle')), 5000);
+      const sample = () => {
+        if (done) return;
+        const values = [];
+        let element = canvas, win = canvas.ownerDocument.defaultView;
+        while (element) {
+          const box = element.getBoundingClientRect();
+          values.push(box.x, box.y, box.width, box.height, win.scrollX, win.scrollY);
+          element = win.frameElement;
+          if (element) win = element.ownerDocument.defaultView;
+        }
+        if (!values.every(Number.isFinite) || values[2] <= 0 || values[3] <= 0)
+          return finish(new Error('Invalid input geometry'));
+        if (anchor && values.length === anchor.length &&
+            values.every((value, index) => Math.abs(value - anchor[index]) <= 0.25)) stable += 1;
+        else { anchor = values; stable = 0; }
+        if (stable >= 3) return finish();
+        requestAnimationFrame(sample);
+      };
+      requestAnimationFrame(sample);
+    })""")
+
+
 def target(page, command, touch=False, view=None, repetitions=1):
     view = view or page
+    # Cancel a focus-initiated smooth scroll even when the target is already
+    # inside the viewport. Never alter product scrolling CSS or game state.
+    page.evaluate('() => window.scrollTo({left: scrollX, top: scrollY, behavior: "instant"})')
+    settle_input_geometry(view)
     snapshot = state(view)
     x, y, width, height = snapshot['targets'][command]
     logical_width, logical_height = snapshot['layout_size']
     box = view.locator('#canvas').bounding_box()
     cx = box['x'] + (x + width / 2) * box['width'] / logical_width
     cy = box['y'] + (y + height / 2) * box['height'] / logical_height
-    # Scroll presentation only. This never changes engine state or dispatches input.
     screen_height = page.viewport_size['height']
     if cy < 60 or cy > screen_height - 60:
-        page.evaluate('(delta) => window.scrollBy(0, delta)', cy - screen_height / 2)
+        page.evaluate('(delta) => window.scrollBy({top: delta, behavior: "instant"})', cy - screen_height / 2)
+        settle_input_geometry(view)
+        snapshot = state(view)
+        x, y, width, height = snapshot['targets'][command]
+        logical_width, logical_height = snapshot['layout_size']
         box = view.locator('#canvas').bounding_box()
         cx = box['x'] + (x + width / 2) * box['width'] / logical_width
         cy = box['y'] + (y + height / 2) * box['height'] / logical_height
+    assert 0 < cy < screen_height, 'Settled input target is outside the viewport'
     for _ in range(repetitions):
         if touch:
             page.touchscreen.tap(cx, cy)

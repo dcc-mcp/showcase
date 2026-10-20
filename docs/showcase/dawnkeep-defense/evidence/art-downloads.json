@@ -1,0 +1,70 @@
+[
+  {
+    "pack": "forest",
+    "source": "https://kaylousberg.itch.io/kaykit-forest",
+    "tier": "Free",
+    "upload_id": "13520330",
+    "downloaded_utc": "2026-10-18T09:39:45.483728+00:00",
+    "zip": "forest-free.zip",
+    "bytes": 6435630,
+    "sha256": "2ee83e63bb7695f2d884ec27ddf6fce020789a452e7d5c5b0bbdfc4f6ea1fc8c",
+    "extract": "forest-free",
+    "license_files": [
+      "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/License.txt"
+    ],
+    "license": "CC0-1.0, verified in bundled License.txt (personal, educational and commercial use; attribution optional)",
+    "download_route": "Official no-thanks/free-download flow, no payment or account",
+    "version": "1.0"
+  },
+  {
+    "pack": "adventurers",
+    "source": "https://kaylousberg.itch.io/kaykit-adventurers",
+    "tier": "Free 2.0",
+    "upload_id": "15363167",
+    "downloaded_utc": "2026-10-18T09:39:45.544475+00:00",
+    "zip": "adventurers-free2.0.zip",
+    "bytes": 13024345,
+    "sha256": "abe48f4763fba0896bab486ee9e6d08ca6b5b3884b9601f235c8847ae94dc479",
+    "extract": "adventurers-free2.0",
+    "license_files": [
+      "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/License.txt"
+    ],
+    "license": "CC0-1.0, verified in bundled License.txt (personal, educational and commercial use; attribution optional)",
+    "download_route": "Official no-thanks/free-download flow, no payment or account",
+    "version": "2.0"
+  },
+  {
+    "pack": "skeletons",
+    "source": "https://kaylousberg.itch.io/kaykit-skeletons",
+    "tier": "Free 1.1",
+    "upload_id": "15363145",
+    "downloaded_utc": "2026-10-18T09:39:45.503789+00:00",
+    "zip": "skeletons-free1.1.zip",
+    "bytes": 8177445,
+    "sha256": "21fbad59ee6cc1d7bed12d0e425acab8ebe564b8620bbc1d017aedb29dd8a3d2",
+    "extract": "skeletons-free1.1",
+    "license_files": [
+      "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/License.txt"
+    ],
+    "license": "CC0-1.0, verified in bundled License.txt (personal, educational and commercial use; attribution optional)",
+    "download_route": "Official no-thanks/free-download flow, no payment or account",
+    "version": "1.1"
+  },
+  {
+    "pack": "character-animations",
+    "source": "https://kaylousberg.itch.io/kaykit-character-animations",
+    "tier": "Free 1.1",
+    "upload_id": "15799903",
+    "downloaded_utc": "2026-10-18T09:39:45.593402+00:00",
+    "zip": "character-animations-free1.1.zip",
+    "bytes": 14858957,
+    "sha256": "65882f31f905ad2e953819648a59287cdeab8f623908d5ef701971d3758be20f",
+    "extract": "character-animations-free1.1",
+    "license_files": [
+      "character-animations-free1.1/KayKit_Character_Animations_1.1/License.txt"
+    ],
+    "license": "CC0-1.0, verified in bundled License.txt (personal, educational and commercial use; attribution optional)",
+    "download_route": "Official no-thanks/free-download flow, no payment or account",
+    "version": "1.1"
+  }
+]

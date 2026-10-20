@@ -256,11 +256,37 @@ class ObserverGuards(unittest.TestCase):
             page.touchscreen.tap.side_effect = lambda *args: events.append(('tap', args))
             page.mouse.click.side_effect = lambda *args: events.append(('click', args))
             fresh = Mock(side_effect=lambda *args: events.append(('fresh', args)))
-            helper('target', state=Mock(return_value=snapshot), wait_fresh=fresh)(page, 'send', touch, repetitions=8)
+            settle = Mock()
+            helper('target', state=Mock(return_value=snapshot), wait_fresh=fresh, settle_input_geometry=settle)(page, 'send', touch, repetitions=8)
             self.assertEqual([event[0] for event in events], [('tap' if touch else 'click')] * 8 + ['fresh'])
             self.assertTrue(all(event[1] == (140, 125) for event in events[:8]))
             fresh.assert_called_once_with(page, snapshot)
-            page.evaluate.assert_not_called()
+            settle.assert_called_once_with(page)
+            page.evaluate.assert_called_once_with('() => window.scrollTo({left: scrollX, top: scrollY, behavior: "instant"})')
+
+    def test_scrolled_target_uses_instant_presentation_and_remeasures(self):
+        snapshot = {'targets': {'send': [100, 600, 800, 80]}, 'layout_size': [1000, 720]}
+        for touch in [False, True]:
+            with self.subTest(touch=touch):
+                page = Mock();page.viewport_size = {'height': 900}
+                page.locator.return_value.bounding_box.side_effect = [
+                    {'x': 40, 'y': 1200, 'width': 1000, 'height': 720},
+                    {'x': 40, 'y': -190, 'width': 1000, 'height': 720}]
+                events = []
+                page.evaluate.side_effect = lambda *args: events.append(('scroll', args))
+                page.touchscreen.tap.side_effect = lambda *args: events.append(('tap', args))
+                page.mouse.click.side_effect = lambda *args: events.append(('click', args))
+                fresh = Mock(side_effect=lambda *args: events.append(('fresh', args)))
+                settle = Mock(side_effect=lambda *args: events.append(('settle', args)))
+                helper('target', state=Mock(return_value=snapshot), wait_fresh=fresh, settle_input_geometry=settle)(page, 'send', touch)
+                self.assertEqual(events[0], ('scroll', ('() => window.scrollTo({left: scrollX, top: scrollY, behavior: "instant"})',)))
+                self.assertEqual(events[1][0], 'settle')
+                self.assertEqual(events[2], ('scroll', ('(delta) => window.scrollBy({top: delta, behavior: "instant"})', 1390)))
+                self.assertEqual(events[3][0], 'settle')
+                self.assertEqual(events[4], ('tap' if touch else 'click', (540, 450)))
+                self.assertEqual(events[5][0], 'fresh')
+                self.assertEqual(page.locator.return_value.bounding_box.call_count, 2)
+                fresh.assert_called_once_with(page, snapshot)
 
     def test_failed_wait_reports_the_actual_condition(self):
         page = Mock();page.wait_for_function.side_effect = TimeoutError()
@@ -306,6 +332,107 @@ class ObserverGuards(unittest.TestCase):
     def test_wrong_language_unrendered_missing_glyph_and_english_fallback_reject(self):
         for changes in [{'language':'en'},{'draw_frame':0},{'missing_glyphs':[12345]},{'missing_translations':['NEXT PARCEL']},{'labels':['Parcel Switchyard']}]:
             with self.subTest(changes=changes),self.assertRaises(AssertionError):self.verify(self.receipt(**changes))
+
+    def _run_geometry_script(self, mode):
+        import json
+        import subprocess
+        view = Mock()
+        helper('settle_input_geometry')(view)
+        view.locator.assert_called_once_with('#canvas')
+        script = view.locator.return_value.evaluate.call_args.args[0]
+        runner = r'''
+const fs = require('fs'), vm = require('vm');
+const {script, mode} = JSON.parse(fs.readFileSync(0, 'utf8'));
+(async () => {
+  let now = 0, frames = 0, serial = 0, outcome = null;
+  const tasks = new Map();
+  const schedule = (fn, delay, frame = false) => {
+    const id = ++serial; tasks.set(id, {fn, due: now + delay, frame}); return id;
+  };
+  const parent = {scrollX:0, frameElement:null};
+  Object.defineProperty(parent, 'scrollY', {get: () => mode === 'parent-scroll' ? Math.min(frames, 5) * 12 : 0});
+  const child = {scrollX:0, scrollY:0};
+  const frameElement = {
+    ownerDocument:{defaultView:parent},
+    getBoundingClientRect:() => ({x:10, y:mode === 'ancestor-moves' ? Math.min(frames, 5) * 20 : 20, width:300, height:600})
+  };
+  child.frameElement = frameElement;
+  const canvas = {
+    ownerDocument:{defaultView:child},
+    getBoundingClientRect:() => ({
+      x:0, y:mode === 'continuous' ? frames * 2 : mode === 'slow-drift' ? frames * 0.2 : 0,
+      width:mode === 'zero-canvas' ? 0 : mode === 'nonfinite-canvas' ? NaN : 296, height:542
+    })
+  };
+  const sandbox = {
+    performance:{now:() => now},
+    requestAnimationFrame:fn => mode === 'stopped-raf' ? ++serial : schedule(fn, 16, true),
+    cancelAnimationFrame:id => tasks.delete(id),
+    setTimeout:(fn, delay) => schedule(fn, delay),
+    clearTimeout:id => tasks.delete(id)
+  };
+  vm.runInNewContext('(' + script + ')', sandbox)(canvas).then(
+    () => {outcome = {status:'resolved'};},
+    error => {outcome = {status:'rejected', message:String(error.message)};}
+  );
+  for (let step = 0; step < 1000 && !outcome; step++) {
+    await Promise.resolve();
+    if (outcome) break;
+    if (!tasks.size) break;
+    const [id, task] = [...tasks].sort((a,b) => a[1].due-b[1].due || a[0]-b[0])[0];
+    tasks.delete(id); now = task.due;
+    if (task.frame) frames++;
+    task.fn(now);
+  }
+  await Promise.resolve();
+  process.stdout.write(JSON.stringify({...outcome, status:outcome?.status || 'pending', now, frames}));
+})().catch(error => {console.error(error); process.exitCode = 1;});
+'''
+        result = subprocess.run(['node', '-e', runner], input=json.dumps({'script':script, 'mode':mode}),
+                                text=True, capture_output=True, timeout=10, check=True)
+        return json.loads(result.stdout)
+
+    def test_geometry_constant_resolves_after_frame_observations(self):
+        result = self._run_geometry_script('constant')
+        self.assertEqual(result['status'], 'resolved', result)
+        self.assertGreaterEqual(result['frames'], 3)
+        self.assertLess(result['now'], 5000)
+
+    def test_geometry_ancestor_motion_and_parent_scroll_reset_stability(self):
+        for mode in ['ancestor-moves', 'parent-scroll']:
+            with self.subTest(mode=mode):
+                result = self._run_geometry_script(mode)
+                self.assertEqual(result['status'], 'resolved', result)
+                self.assertGreaterEqual(result['frames'], 7, result)
+                self.assertLess(result['now'], 5000)
+
+    def test_geometry_cumulative_subpixel_drift_cannot_pass(self):
+        result = self._run_geometry_script('slow-drift')
+        self.assertEqual(result['status'], 'rejected', result)
+        self.assertIn('did not settle', result['message'])
+        self.assertGreaterEqual(result['now'], 5000)
+        self.assertLessEqual(result['now'], 5020)
+
+    def test_geometry_continuous_motion_times_out(self):
+        result = self._run_geometry_script('continuous')
+        self.assertEqual(result['status'], 'rejected', result)
+        self.assertIn('did not settle', result['message'])
+        self.assertGreaterEqual(result['now'], 5000)
+        self.assertLessEqual(result['now'], 5020)
+
+    def test_geometry_watchdog_rejects_when_animation_frames_stop(self):
+        result = self._run_geometry_script('stopped-raf')
+        self.assertEqual(result['status'], 'rejected', result)
+        self.assertIn('did not settle', result['message'])
+        self.assertEqual(result['frames'], 0)
+        self.assertEqual(result['now'], 5000)
+
+    def test_geometry_invalid_canvas_is_rejected(self):
+        for mode in ['zero-canvas', 'nonfinite-canvas']:
+            with self.subTest(mode=mode):
+                result = self._run_geometry_script(mode)
+                self.assertEqual(result['status'], 'rejected', result)
+                self.assertIn('Invalid input geometry', result['message'])
 
 
 if __name__=='__main__':unittest.main()

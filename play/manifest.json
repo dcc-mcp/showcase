@@ -200,6 +200,116 @@
       "path": "play/parcel-switchyard/shell.js",
       "bytes": 11443,
       "sha256": "374dca046c33a7a7ab091ca213fcb257ddb02af8b1b7c9b1e4b1eff7008e7300"
+    },
+    {
+      "path": "play/dawnkeep-defense/COPYRIGHT.txt",
+      "bytes": 99790,
+      "sha256": "b3330849267d56ddd3d62a513817506606c2195034411fe05859f0140bff9d8a"
+    },
+    {
+      "path": "play/dawnkeep-defense/LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "play/dawnkeep-defense/README.txt",
+      "bytes": 656,
+      "sha256": "9b1be1ecace6724a75ef0b21110f5eeabba6c428b415ca9658b535c4b74bbbce"
+    },
+    {
+      "path": "play/dawnkeep-defense/assets/kaykit/SOURCE.json",
+      "bytes": 20168,
+      "sha256": "e4baa69701fb5efc15c90d1dfb58117dec35290e9b709132f91bbebd45f3dc55"
+    },
+    {
+      "path": "play/dawnkeep-defense/audio/AUDIO-LICENSE.txt",
+      "bytes": 613,
+      "sha256": "c084e9e03edcbf247da49b57ff2e7e93c736eb1ec43fa969be67f000aad55d29"
+    },
+    {
+      "path": "play/dawnkeep-defense/audio/SOURCE.json",
+      "bytes": 1974,
+      "sha256": "6b31207373ad1c19432fd22049327951bdfa6f6cc62b0357c1f7dddd1f435a6e"
+    },
+    {
+      "path": "play/dawnkeep-defense/dawnkeep-649ccf7ed6a7.pck",
+      "bytes": 5315168,
+      "sha256": "649ccf7ed6a762fb00315c07fe6253d35a626fe907f0cb23a238537bb0c3b29b"
+    },
+    {
+      "path": "play/dawnkeep-defense/dawnkeep-shell.js",
+      "bytes": 6581,
+      "sha256": "741bc1b4daeae035eada6c026769c4cc9fbdf9c44906a11d6844dda1b037b752"
+    },
+    {
+      "path": "play/dawnkeep-defense/export-provenance.json",
+      "bytes": 18774,
+      "sha256": "66378e87b8c7edd636f751ca7c63ed2b567bb3b466400d1a85383a2d7da6c6c7"
+    },
+    {
+      "path": "play/dawnkeep-defense/index.apple-touch-icon.png",
+      "bytes": 11952,
+      "sha256": "9b374ecbc8558f480421e646f38aaa8a69d5b1d65ff7b48d0735da214c46773a"
+    },
+    {
+      "path": "play/dawnkeep-defense/index.html",
+      "bytes": 6033,
+      "sha256": "34689522b6c4210450d2ea85ea54afe2031a10f6bde4727ffb0ad13c21b903e1"
+    },
+    {
+      "path": "play/dawnkeep-defense/index.icon.png",
+      "bytes": 5702,
+      "sha256": "08808dd5397e9a502cb3624944151f87a9705b5b66b5c365c5ca4c6ab51525f5"
+    },
+    {
+      "path": "play/dawnkeep-defense/index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "play/dawnkeep-defense/notices/ART-LICENSES.md",
+      "bytes": 3225,
+      "sha256": "50f6919960f960a3df8599637821cc59aceebeb90cf67d9c8014cf563ce1e766"
+    },
+    {
+      "path": "play/dawnkeep-defense/notices/KAYKIT-LICENSE-adventurers-free2.0.txt",
+      "bytes": 1554,
+      "sha256": "d4adc31660d1db22eb60eba648e01db41577548f6fa1a3576cb4a6283dae0a58"
+    },
+    {
+      "path": "play/dawnkeep-defense/notices/KAYKIT-LICENSE-character-animations-free1.1.txt",
+      "bytes": 1548,
+      "sha256": "373b159044d1a886ed15f57ca5a7673ba14e2623c460283452705f2056912ed9"
+    },
+    {
+      "path": "play/dawnkeep-defense/notices/KAYKIT-LICENSE-forest-free.txt",
+      "bytes": 1469,
+      "sha256": "987811fa42c7548ad487324531813b0210ee6d1ebd410089e881820630e3be54"
+    },
+    {
+      "path": "play/dawnkeep-defense/notices/KAYKIT-LICENSE-skeletons-free1.1.txt",
+      "bytes": 1552,
+      "sha256": "327a1aac6e6ff1259d82d0024cdaf088bcef302f8d7a116b5142538ac2b5cf8d"
+    },
+    {
+      "path": "play/dawnkeep-defense/notices/LICENSES.md",
+      "bytes": 1661,
+      "sha256": "82befe4199145dcb343e6d4a5d548e1e9e34a7d99604896fa39d9a37068872d6"
+    },
+    {
+      "path": "play/dawnkeep-defense/publication-shell.js",
+      "bytes": 1643,
+      "sha256": "8074df2f75d21e4bfc9ea408241f583ca71e6b61a1dc0cc69d30bf2a0a201c3c"
+    },
+    {
+      "path": "play/dawnkeep-defense/ui/FONT-LICENSE.txt",
+      "bytes": 14712,
+      "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b"
+    },
+    {
+      "path": "play/dawnkeep-defense/ui/FONT-SOURCE.json",
+      "bytes": 441,
+      "sha256": "ddc9ae802379b089c6b5c44c7749f01a00e76bbff908b5f980c3ab7f34ee12be"
     }
   ],
   "demos": [
@@ -265,13 +375,45 @@
         "en": "The original game is silent. Exit/reload starts a fresh shift. Web game labels and browser controls support English and Simplified Chinese; the original downloadable native package is unchanged. Export records and exact-head browser acceptance are separate; an export alone is not playability proof. No physical-device, Safari/Firefox or deployment claim.",
         "zh": "原作无音轨；退出或刷新即开始新班次，Web画面与浏览器控件支持中英文，原始原生下载包保持不变。导出记录与当前版本真实浏览器验收分开，导出成功不等于玩法通过；未声称实体设备、Safari、Firefox 或上线验证。"
       }
+    },
+    {
+      "case_slug": "dawnkeep-defense",
+      "url": "play/dawnkeep-defense/index.html",
+      "title": "Dawnkeep / 曙光守誓",
+      "engine": "Godot 4.6.3",
+      "renderer": "gl_compatibility",
+      "threads": false,
+      "localeSupport": [
+        "en",
+        "zh"
+      ],
+      "nativeTextLanguage": "en-zh",
+      "controls": {
+        "en": "WASD/arrows move, Q/E/R skills, Space next wave, Escape pause. Use the native equipment and defense buttons. The initial screen is Chinese: press L or EN for English. On phones use the visible touch controls.",
+        "zh": "WASD/方向键移动，Q/E/R 技能，空格迎战，Esc 暂停；点击原生装备与防御按钮。L 或 EN/中文切换语言，手机使用画面中的触控按钮。"
+      },
+      "notes": {
+        "en": "Eight-wave hero defense. Click/tap the game to unlock audio; M or the native music button mutes it. No saved progress. Outer Reset reloads the real engine. Native and Web victory/defeat/reset passed on the recorded source; physical phones, subjective listening and physical-GPU performance remain unverified.",
+        "zh": "八波英雄守卫战。点击/轻触游戏后启用声音，M 或原生音乐按钮静音。没有存档，外层重开将重新加载真实引擎。记录版本的原生与 Web 胜败及重开通过；实体手机、主观听评和真实显卡性能仍未验证。"
+      }
     }
   ],
   "budget": {
-    "raw_bytes": 40229514,
-    "gzip_equivalent_bytes": 11379349,
-    "raw_limit_bytes": 41943040,
-    "gzip_equivalent_limit_bytes": 11534336,
-    "note": "Gzip equivalent is measured locally; actual Pages Content-Encoding must be verified after an authorized deployment."
+    "raw_bytes": 45755592,
+    "gzip_equivalent_bytes": 16563432,
+    "raw_limit_bytes": 48234496,
+    "gzip_equivalent_limit_bytes": 16777216,
+    "groups": {
+      "legacy": {
+        "raw_bytes": 40217784,
+        "gzip_equivalent_bytes": 11374891
+      },
+      "dawnkeep-defense": {
+        "raw_bytes": 5537808,
+        "gzip_equivalent_bytes": 5188541
+      }
+    },
+    "measurement_scope": "Manifest-listed assets, excluding this manifest document. The verification ceiling additionally includes the manifest.",
+    "note": "Original shared-runtime/demo envelope remains 40 MiB raw/11 MiB gzip. Dawnkeep adds a separate 6 MiB raw/5 MiB gzip allowance; actual Pages encoding is checked after deployment."
   }
 }

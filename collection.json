@@ -4807,6 +4807,269 @@
           "change": "保留原始规则、素材与历史记录；新增标准Web导出、双语外壳及竖屏控件。来源和无界面测试通过；真实浏览器、触控与视觉验收另由当前版本CI记录，不从旧桌面截图推定。"
         }
       ]
+    },
+    {
+      "slug": "dawnkeep-defense",
+      "title": "Dawnkeep · 曙光守誓",
+      "subtitle": "Godot · 八波英雄守卫战与原生 Web 试玩",
+      "software": [
+        "Godot",
+        "Blender"
+      ],
+      "capabilities": [
+        "交互",
+        "游戏原型",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/dawnkeep-defense/hero.jpg",
+        "alt": "Dawnkeep 原生实机：浮空林地、双路石径、曙光圣坛与英雄辅助防御塔"
+      },
+      "evidence_label": "真实 typed MCP 制作 · 原生与 Web 八波通关",
+      "evidence_scope": "冻结版本 957c1d3：Godot typed MCP 创建、保存并重开原生场景；X11 实际键鼠与桌面 Chrome 分别完成八波胜利、自然第五波失败及重新开始。竖屏为模拟触控，不是实体手机。原始网格由 Blender 原生 Python 制作，不冒称 Blender MCP；公开影片来自实际原生录屏。",
+      "summary": "扮演曙光守护者艾莉拉，在浮空林地守住曙光之心。走位拦截敌人，升级装备，使用 Q/E/R 技能与辅助防御塔，迎战八波进攻和无冕之王。提供中英文原生界面、浏览器试玩和可编辑 Godot 工程。",
+      "goal": "把原创英雄防守玩法做成可操作、可复现的原生游戏，并用固定源码、真实输入、自然胜败、资源哈希和明确许可边界支撑公开试玩。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "制作原创英雄守卫游戏：一名可移动英雄保护核心，靠近敌人自动攻击，通过战斗获得金币与经验，购买装备、释放主动技能并建设辅助防御塔。提供八波进攻、首领、胜败与重开、中英文界面和响应式操作。通过真实 Godot typed MCP 创建并保存原生场景；原创环境使用 Blender 原生制作，第三方模型、音乐与字体保留来源和许可。用实际键鼠与浏览器触控模拟验收，不用注入胜利状态替代游玩。",
+        "note": "这是依据作品整理的可复现说明，不是用户私聊逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "游戏宿主",
+          "value": "Godot 4.6.3 · Linux x86_64 · Jolt · gl_compatibility"
+        },
+        {
+          "label": "Adapter / Core",
+          "value": "dcc-mcp-godot 0.9.6 · Core 0.20.42 · Server 0.20.45"
+        },
+        {
+          "label": "美术与实机环境",
+          "value": "Blender 4.3.2 原生 Python；Xvfb / Mesa；Chrome 155.0.8059.39"
+        },
+        {
+          "label": "公开实机短片",
+          "value": "1280 × 720 · 58 秒 · H.264 / AAC · 20 fps"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Godot typed MCP",
+          "description": "真实宿主完成脚本创建与验证、场景创建、挂载、保存、主场景设置、编辑器重启和重开；公开脱敏请求及宿主返回。"
+        },
+        {
+          "name": "Blender native Python / glTF",
+          "description": "原创浮空台地、圣坛与防御塔经原生 Blender 制作和 GLB 导出；保留原生重开及空场景重建记录。此阶段没有 Blender MCP 制作声明。"
+        },
+        {
+          "name": "X11 / XTest / Playwright",
+          "description": "通过实际操作系统输入及浏览器鼠标、键盘和模拟触控控制真正的 Godot；观测桥只读，不写入胜败状态。"
+        },
+        {
+          "name": "FFmpeg / ffprobe",
+          "description": "从连续原生录屏剪出短片，保留源哈希、精确时间切点和完整解码结果；音频数值验证不等于主观试听。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "先建立英雄防守循环",
+          "description": "英雄装备、升级与 Q/E/R 主动技能是主要战力；四类辅助塔各有两条升级分支，双路来敌最终汇向曙光之心。"
+        },
+        {
+          "title": "把制作与渲染证据分开",
+          "description": "Godot 场景持久化来自真实 typed MCP；Blender 美术使用原生脚本；截图和影片来自图形环境中的实际游戏。模型和推理强度没有经核验的配置记录，保持未知。"
+        },
+        {
+          "title": "实际完成胜利与自然失败",
+          "description": "原生八波胜利：核心 20、击杀 159、英雄死亡 0；桌面 Web：核心 8、击杀 149、死亡 0。两端另行自然战败于第五波，并通过实际按钮重新开始。",
+          "image": {
+            "src": "docs/showcase/dawnkeep-defense/victory.jpg",
+            "alt": "实际原生八波胜利与 START AGAIN 按钮"
+          }
+        },
+        {
+          "title": "明确竖屏触控的范围",
+          "description": "390 × 844 Chrome 模拟触控完成两波战斗、Q/E/R、商店与重置；UI 随竖屏重排，摄像机采用更近的跟随构图。没有实体手机或多点触控验收。",
+          "image": {
+            "src": "docs/showcase/dawnkeep-defense/portrait.jpg",
+            "alt": "390 × 844 浏览器竖屏模拟触控战斗，含方向键与技能按钮"
+          }
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/dawnkeep-defense/gameplay.mp4",
+          "alt": "Dawnkeep 58 秒实际原生玩法短片",
+          "caption": "实际原生录屏的五段剪辑：装备、战斗、首领、胜利、自然失败及重开。仅作时间剪辑和编码，未额外加速；画面可见游戏内 2x。保留原生游戏音轨，未做主观试听验收。"
+        },
+        {
+          "src": "docs/showcase/dawnkeep-defense/boss.jpg",
+          "alt": "实际原生首领战：无冕之王与英雄",
+          "caption": "1280 × 720 实机截图，仅 JPEG 压缩；没有生成式修图。"
+        },
+        {
+          "src": "docs/showcase/dawnkeep-defense/defeat.jpg",
+          "alt": "第五波自然失败，核心归零并出现重开按钮",
+          "caption": "保留失败画面与成功画面同等证据；自然失败后的实际重开恢复初始状态。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Godot 原生创建、保存与重开",
+          "result": "pass",
+          "observed": "37 次记录的 typed 调用；公开 36 次脱敏宿主交互，省略技能加载元数据；四个脚本、场景与主场景设置持久化。"
+        },
+        {
+          "name": "固定源码全程实机验收",
+          "result": "pass",
+          "observed": "957c1d3 原生 132 项、桌面 Web 128 项记录检查；均八波通关、第五波自然战败并实际重开。"
+        },
+        {
+          "name": "独立逻辑、布局与关闭检查",
+          "result": "pass",
+          "observed": "headless 机制 78、布局 28051、集成 135、关闭 56 项断言；这些合成测试不替代实际输入或画面验收。"
+        },
+        {
+          "name": "Web 生命周期与模拟触控",
+          "result": "pass",
+          "observed": "竖屏 39 项记录检查；两波与全部 Q/E/R、重置、全屏、真实引擎退出/重启以及下载失败后的 Retry。严格错误检查下 Jolt 退出干净。"
+        },
+        {
+          "name": "原生工程与公开媒体",
+          "result": "pass",
+          "observed": "原生 ZIP 4822730 字节、79 项，完整性与哈希已检查；58 秒 H.264 完整解码通过，全部截图仅做 JPEG 压缩。"
+        }
+      ],
+      "limitations": [
+        "主观音乐试听、实体手机、多点触控、物理 GPU 性能及原生操作系统关闭窗口均未验收。",
+        "自动化实际输入验证了记录的策略和胜败路径，不等于所有流派、所有浏览器或所有设备的游戏平衡与兼容性保证。",
+        "短片有明确时间剪辑，不能冒称完整连续通关录像；录音数值和完整解码不能代替试听。",
+        "浏览器试玩是实际 Godot 单线程 Compatibility 导出；初始游戏界面为中文，按 L 或点击 EN 切换英文，不随页面语言自动切换。",
+        "原生 ZIP 需要 Godot 4.6.3，包含可编辑工程而非独立可执行程序；下载和试玩不新增原创作品的许可。",
+        "完整游戏 CI 与公开页面部署是不同阶段；这里的 957c1d3 记录不单独证明上线后的网络、页面或播放行为。"
+      ],
+      "resources": [
+        {
+          "label": "Dawnkeep 可编辑原生工程 ZIP",
+          "url": "docs/showcase/dawnkeep-defense/Dawnkeep-native-957c1d3.zip"
+        },
+        {
+          "label": "Dawnkeep 制作与复现报告",
+          "url": "docs/showcase/dawnkeep-defense/README.md"
+        },
+        {
+          "label": "固定版本真实输入记录",
+          "url": "docs/showcase/dawnkeep-defense/evidence/input-acceptance.json"
+        },
+        {
+          "label": "Godot 脱敏 typed MCP 返回",
+          "url": "docs/showcase/dawnkeep-defense/evidence/mcp-public.json"
+        },
+        {
+          "label": "原生 ZIP 逐文件哈希",
+          "url": "docs/showcase/dawnkeep-defense/evidence/native-package.json"
+        },
+        {
+          "label": "短片源哈希与时间切点",
+          "url": "docs/showcase/dawnkeep-defense/evidence/video-edit.json"
+        },
+        {
+          "label": "Dawnkeep 机器可读验证",
+          "url": "docs/showcase/dawnkeep-defense/validation.json"
+        },
+        {
+          "label": "Dawnkeep 公开文件清单",
+          "url": "docs/showcase/dawnkeep-defense/manifest.json"
+        },
+        {
+          "label": "Dawnkeep 许可与第三方署名",
+          "url": "docs/showcase/dawnkeep-defense/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创玩法、界面、美术、源码与媒体保留所有权利；KayKit 与两首署名音乐保留 CC0 1.0，Noto 派生字体保留 SIL OFL 1.1，Godot 保留 MIT 与第三方通知。",
+        "note": "Kay Lousberg：Forest、Adventurers、Skeletons、Character Animations 免费版。Emma_MA：Determined Pursuit；pauliuw：The Field Of Dreams。未分发 Warcraft 或 League of Legends 素材。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/showcase/tree/957c1d3928d4d7382535a5b50ae2990aa4cf5854/scripts/godot_web/dawnkeep",
+        "commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+        "title": "固定验收版本的原生工程与制作配方"
+      },
+      "verified_at": "2026-10-19T17:29:00Z",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "原创英雄防守玩法、关卡与证据范围"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "Godot 场景持久化与 Blender 原生美术制作"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "GDScript 玩法、原生 UI、浏览器壳与验收代码"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "官方免费素材、音乐、字体和类型参考选择"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "实际原生录屏剪辑与截图压缩"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "真实截图与影片采样；不含主观试听"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有经过独立核验的模型与推理配置记录；不从文件名、结果或后续审查推断。",
+          "scope": "来源哈希、真实输入、原生重开与公开契约检查"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 八波英雄守卫战",
+          "date": "2026-10-20",
+          "change": "发布冻结 957c1d3 的双语案例、可编辑原生 ZIP、实机短片与脱敏验收记录；不改动已验收玩法。"
+        }
+      ]
     }
   ]
 }

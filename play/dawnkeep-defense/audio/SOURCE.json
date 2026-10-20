@@ -1,0 +1,53 @@
+{
+  "checked": "2026-10-18",
+  "tracks": [
+    {
+      "title": "Determined Pursuit",
+      "author": "Emma_MA",
+      "source_page": "https://opengameart.org/content/determined-pursuit-epic-orchestra-loop",
+      "download_url": "https://opengameart.org/sites/default/files/determined_pursuit_loop.wav",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": {
+        "sha256": "e4f3be098b50213b56a60aefe60fffae79cd9f7c9008088f93c187ef1bbc856b",
+        "bytes": 19052830,
+        "duration_seconds": 108.0,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "file": "determined-pursuit.ogg",
+      "derivative": {
+        "sha256": "fe968cd8bd0cb49b86fce0bd4a318490b1db6b54e13c4a9cd3f6ab307c28daa2",
+        "bytes": 1520845,
+        "duration_seconds": 108.0,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "transform": "FFmpeg libvorbis q3, 44100 Hz stereo, metadata removed. No musical edits."
+    },
+    {
+      "title": "The Field Of Dreams",
+      "author": "pauliuw",
+      "source_page": "https://opengameart.org/content/the-field-of-dreams",
+      "download_url": "https://opengameart.org/sites/default/files/the_field_of_dreams.mp3",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": {
+        "sha256": "103a7032a49be7e8399c5cb771f7759eac9ac1a0d2bf227f41fff42ad8d78194",
+        "bytes": 3385581,
+        "duration_seconds": 84.636725,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "file": "field-of-dreams.ogg",
+      "derivative": {
+        "sha256": "438e56482edc68ee6d86913fac2c14e5574afd71514771e8ff25d0f0053ab956",
+        "bytes": 1150360,
+        "duration_seconds": 84.636735,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "transform": "FFmpeg libvorbis q3, 44100 Hz stereo, metadata removed. No musical edits."
+    }
+  ]
+}

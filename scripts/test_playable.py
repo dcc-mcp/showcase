@@ -35,6 +35,7 @@ class PlayableGuards(unittest.TestCase):
         self.assertNotIn('<iframe', markup)
         self.assertNotIn('autoplay', markup)
         self.assertIn('data-play-url="../../play/sample/index.html"', markup)
+        self.assertIn('data-play-case="sample"', markup)
 
     def test_native_text_declarations_preserve_english_and_allow_bilingual(self):
         for language in ('en', 'en-zh'):

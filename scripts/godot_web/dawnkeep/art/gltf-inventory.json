@@ -1,0 +1,4858 @@
+[
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+    "size_bytes": 828240,
+    "animations": [
+      {
+        "name": "Death_A",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Death_A_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Death_B",
+        "duration_s": 2.63333,
+        "channels": 69
+      },
+      {
+        "name": "Death_B_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Hit_A",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Hit_B",
+        "duration_s": 0.86667,
+        "channels": 69
+      },
+      {
+        "name": "Idle_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Idle_B",
+        "duration_s": 2.13333,
+        "channels": 69
+      },
+      {
+        "name": "Interact",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "PickUp",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "Spawn_Air",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "Spawn_Ground",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Throw",
+        "duration_s": 1.36667,
+        "channels": 56
+      },
+      {
+        "name": "Use_Item",
+        "duration_s": 1.6,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+    "size_bytes": 689624,
+    "animations": [
+      {
+        "name": "Jump_Full_Long",
+        "duration_s": 2.33333,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Full_Short",
+        "duration_s": 1.16667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Idle",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Land",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Start",
+        "duration_s": 0.6,
+        "channels": 69
+      },
+      {
+        "name": "Running_A",
+        "duration_s": 0.8,
+        "channels": 68
+      },
+      {
+        "name": "Running_B",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Walking_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Walking_B",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Walking_C",
+        "duration_s": 1.6,
+        "channels": 65
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/arrow_bow.gltf",
+    "size_bytes": 3055,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "arrow_bow.bin"
+    ],
+    "images": [
+      "ranger_texture.png"
+    ],
+    "nodes": [
+      "arrow_bow"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/arrow_bow_bundle.gltf",
+    "size_bytes": 3084,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "arrow_bow_bundle.bin"
+    ],
+    "images": [
+      "ranger_texture.png"
+    ],
+    "nodes": [
+      "arrow_bow_bundle"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/arrow_crossbow.gltf",
+    "size_bytes": 3071,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "arrow_crossbow.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "arrow_crossbow"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/arrow_crossbow_bundle.gltf",
+    "size_bytes": 3097,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "arrow_crossbow_bundle.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "arrow_crossbow_bundle"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/axe_1handed.gltf",
+    "size_bytes": 3080,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "axe_1handed.bin"
+    ],
+    "images": [
+      "barbarian_texture.png"
+    ],
+    "nodes": [
+      "axe_1handed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/axe_2handed.gltf",
+    "size_bytes": 3078,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "axe_2handed.bin"
+    ],
+    "images": [
+      "barbarian_texture.png"
+    ],
+    "nodes": [
+      "axe_2handed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/bow.gltf",
+    "size_bytes": 3048,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "bow.bin"
+    ],
+    "images": [
+      "ranger_texture.png"
+    ],
+    "nodes": [
+      "bow"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/bow_withString.gltf",
+    "size_bytes": 4326,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "bow_withString.bin"
+    ],
+    "images": [
+      "ranger_texture.png"
+    ],
+    "nodes": [
+      "bow_withString"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/crossbow_1handed.gltf",
+    "size_bytes": 3083,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "crossbow_1handed.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "crossbow_1handed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/crossbow_2handed.gltf",
+    "size_bytes": 3083,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "crossbow_2handed.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "crossbow_2handed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/dagger.gltf",
+    "size_bytes": 3051,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "dagger.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "dagger"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/mug_empty.gltf",
+    "size_bytes": 3075,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "mug_empty.bin"
+    ],
+    "images": [
+      "barbarian_texture.png"
+    ],
+    "nodes": [
+      "mug_empty"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/mug_full.gltf",
+    "size_bytes": 3072,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "mug_full.bin"
+    ],
+    "images": [
+      "barbarian_texture.png"
+    ],
+    "nodes": [
+      "mug_full"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/quiver.gltf",
+    "size_bytes": 3053,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "quiver.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "quiver"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_badge.gltf",
+    "size_bytes": 3072,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_badge.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_badge"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_badge_color.gltf",
+    "size_bytes": 3090,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_badge_color.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_badge_color"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_round.gltf",
+    "size_bytes": 3075,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_round.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_round"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_round_barbarian.gltf",
+    "size_bytes": 3114,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_round_barbarian.bin"
+    ],
+    "images": [
+      "barbarian_texture.png"
+    ],
+    "nodes": [
+      "shield_round_barbarian"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_round_color.gltf",
+    "size_bytes": 3093,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_round_color.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_round_color"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_spikes.gltf",
+    "size_bytes": 3076,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_spikes.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_spikes"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_spikes_color.gltf",
+    "size_bytes": 3094,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_spikes_color.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_spikes_color"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_square.gltf",
+    "size_bytes": 3074,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_square.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_square"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_square_color.gltf",
+    "size_bytes": 3092,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "shield_square_color.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "shield_square_color"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/smokebomb.gltf",
+    "size_bytes": 3062,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "smokebomb.bin"
+    ],
+    "images": [
+      "rogue_texture.png"
+    ],
+    "nodes": [
+      "smokebomb"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/spellbook_closed.gltf",
+    "size_bytes": 3081,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "spellbook_closed.bin"
+    ],
+    "images": [
+      "mage_texture.png"
+    ],
+    "nodes": [
+      "spellbook_closed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/spellbook_open.gltf",
+    "size_bytes": 3072,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "spellbook_open.bin"
+    ],
+    "images": [
+      "mage_texture.png"
+    ],
+    "nodes": [
+      "spellbook_open"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/staff.gltf",
+    "size_bytes": 3046,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "staff.bin"
+    ],
+    "images": [
+      "mage_texture.png"
+    ],
+    "nodes": [
+      "staff"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_1handed.gltf",
+    "size_bytes": 3075,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "sword_1handed.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "sword_1handed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_2handed.gltf",
+    "size_bytes": 3076,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "sword_2handed.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "sword_2handed"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_2handed_color.gltf",
+    "size_bytes": 3094,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "sword_2handed_color.bin"
+    ],
+    "images": [
+      "knight_texture.png"
+    ],
+    "nodes": [
+      "sword_2handed_color"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/wand.gltf",
+    "size_bytes": 3042,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "wand.bin"
+    ],
+    "images": [
+      "mage_texture.png"
+    ],
+    "nodes": [
+      "wand"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Barbarian.glb",
+    "size_bytes": 386648,
+    "animations": [],
+    "meshes": 7,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Barbarian_ArmLeft",
+      "Barbarian_ArmRight",
+      "Barbarian_BearHat",
+      "Barbarian_Body",
+      "Barbarian_Head",
+      "Barbarian_LegLeft",
+      "Barbarian_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Knight.glb",
+    "size_bytes": 341688,
+    "animations": [],
+    "meshes": 9,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Knight_ArmLeft",
+      "Knight_ArmRight",
+      "Knight_Body",
+      "Knight_Cape",
+      "Knight_Head",
+      "Knight_Helmet",
+      "Knight_HelmetVisor",
+      "Knight_LegLeft",
+      "Knight_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Mage.glb",
+    "size_bytes": 352472,
+    "animations": [],
+    "meshes": 8,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mage_ArmLeft",
+      "Mage_ArmRight",
+      "Mage_Body",
+      "Mage_Cape",
+      "Mage_Hat",
+      "Mage_Head",
+      "Mage_LegLeft",
+      "Mage_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Ranger.glb",
+    "size_bytes": 484712,
+    "animations": [],
+    "meshes": 8,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "Ranger_ArmLeft",
+      "Ranger_ArmRight",
+      "Ranger_Body",
+      "Ranger_Cape",
+      "Ranger_Head",
+      "Ranger_LegLeft",
+      "Ranger_LegRight",
+      "Ranger_Quiver",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Rogue.glb",
+    "size_bytes": 409188,
+    "animations": [],
+    "meshes": 7,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "Rogue_ArmLeft",
+      "Rogue_ArmRight",
+      "Rogue_Body",
+      "Rogue_Cape",
+      "Rogue_Head",
+      "Rogue_LegLeft",
+      "Rogue_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Rogue_Hooded.glb",
+    "size_bytes": 381432,
+    "animations": [],
+    "meshes": 8,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "RogueHooded_ArmLeft",
+      "RogueHooded_ArmRight",
+      "RogueHooded_Body",
+      "RogueHooded_Cape",
+      "RogueHooded_Head",
+      "RogueHooded_LegLeft",
+      "RogueHooded_LegRight",
+      "RogueHooded_Mask",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Large/Rig_Large_CombatMelee.glb",
+    "size_bytes": 1025388,
+    "animations": [
+      {
+        "name": "Melee_1H_Slash",
+        "duration_s": 1.56667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_1H_Stab",
+        "duration_s": 1.4,
+        "channels": 69
+      },
+      {
+        "name": "Melee_2H_Attack",
+        "duration_s": 1.33333,
+        "channels": 69
+      },
+      {
+        "name": "Melee_2H_Idle",
+        "duration_s": 1.56667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_2H_Slam",
+        "duration_s": 2.83333,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Block",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Block_Attack",
+        "duration_s": 1.03333,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Block_Hit",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Blocking",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Dualwield_Slash",
+        "duration_s": 1.03333,
+        "channels": 57
+      },
+      {
+        "name": "Melee_Dualwield_SlashCombo",
+        "duration_s": 1.6,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Unarmed_Idle",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Unarmed_Kick",
+        "duration_s": 1.7,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Unarmed_Punch",
+        "duration_s": 1.23333,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Unarmed_Smash",
+        "duration_s": 3.46667,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 46
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Large/Rig_Large_General.glb",
+    "size_bytes": 700336,
+    "animations": [
+      {
+        "name": "Death_A",
+        "duration_s": 1.66667,
+        "channels": 56
+      },
+      {
+        "name": "Death_A_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Hit_A",
+        "duration_s": 0.7,
+        "channels": 52
+      },
+      {
+        "name": "Idle_A",
+        "duration_s": 1.96667,
+        "channels": 52
+      },
+      {
+        "name": "Idle_B",
+        "duration_s": 6,
+        "channels": 52
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "head",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Large/Rig_Large_MovementAdvanced.glb",
+    "size_bytes": 601624,
+    "animations": [
+      {
+        "name": "Dodge_Backwards",
+        "duration_s": 0.33333,
+        "channels": 52
+      },
+      {
+        "name": "Dodge_Forward",
+        "duration_s": 0.33333,
+        "channels": 52
+      },
+      {
+        "name": "Dodge_Left",
+        "duration_s": 0.33333,
+        "channels": 69
+      },
+      {
+        "name": "Dodge_Right",
+        "duration_s": 0.33333,
+        "channels": 52
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 46
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "head",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Large/Rig_Large_MovementBasic.glb",
+    "size_bytes": 584676,
+    "animations": [
+      {
+        "name": "Running_A",
+        "duration_s": 1.06667,
+        "channels": 47
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 46
+      },
+      {
+        "name": "Walking_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Large/Rig_Large_Simulation.glb",
+    "size_bytes": 589952,
+    "animations": [
+      {
+        "name": "Flexing",
+        "duration_s": 4.3,
+        "channels": 54
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 46
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Large/Rig_Large_Special.glb",
+    "size_bytes": 575264,
+    "animations": [
+      {
+        "name": "EXPERIMENTAL_Large_Transform",
+        "duration_s": 1.66667,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+    "size_bytes": 999416,
+    "animations": [
+      {
+        "name": "Melee_1H_Attack_Chop",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_1H_Attack_Jump_Chop",
+        "duration_s": 1.33333,
+        "channels": 69
+      },
+      {
+        "name": "Melee_1H_Attack_Slice_Diagonal",
+        "duration_s": 1,
+        "channels": 69
+      },
+      {
+        "name": "Melee_1H_Attack_Slice_Horizontal",
+        "duration_s": 1.36667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_1H_Attack_Stab",
+        "duration_s": 1.6,
+        "channels": 69
+      },
+      {
+        "name": "Melee_2H_Attack_Chop",
+        "duration_s": 1.63333,
+        "channels": 55
+      },
+      {
+        "name": "Melee_2H_Attack_Slice",
+        "duration_s": 1.1,
+        "channels": 52
+      },
+      {
+        "name": "Melee_2H_Attack_Spin",
+        "duration_s": 2.4,
+        "channels": 55
+      },
+      {
+        "name": "Melee_2H_Attack_Spinning",
+        "duration_s": 0.66667,
+        "channels": 51
+      },
+      {
+        "name": "Melee_2H_Attack_Stab",
+        "duration_s": 1.6,
+        "channels": 53
+      },
+      {
+        "name": "Melee_2H_Idle",
+        "duration_s": 1.06667,
+        "channels": 53
+      },
+      {
+        "name": "Melee_Block",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Block_Attack",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Block_Hit",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Blocking",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Dualwield_Attack_Chop",
+        "duration_s": 1.26667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Dualwield_Attack_Slice",
+        "duration_s": 1.16667,
+        "channels": 52
+      },
+      {
+        "name": "Melee_Dualwield_Attack_Stab",
+        "duration_s": 1.6,
+        "channels": 54
+      },
+      {
+        "name": "Melee_Unarmed_Attack_Kick",
+        "duration_s": 0.93333,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Unarmed_Attack_Punch_A",
+        "duration_s": 1.16667,
+        "channels": 69
+      },
+      {
+        "name": "Melee_Unarmed_Idle",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatRanged.glb",
+    "size_bytes": 1014852,
+    "animations": [
+      {
+        "name": "Ranged_1H_Aiming",
+        "duration_s": 1.06667,
+        "channels": 67
+      },
+      {
+        "name": "Ranged_1H_Reload",
+        "duration_s": 1.16667,
+        "channels": 68
+      },
+      {
+        "name": "Ranged_1H_Shoot",
+        "duration_s": 1.06667,
+        "channels": 67
+      },
+      {
+        "name": "Ranged_1H_Shooting",
+        "duration_s": 1.6,
+        "channels": 56
+      },
+      {
+        "name": "Ranged_2H_Aiming",
+        "duration_s": 1.6,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_2H_Reload",
+        "duration_s": 1.6,
+        "channels": 60
+      },
+      {
+        "name": "Ranged_2H_Shoot",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_2H_Shooting",
+        "duration_s": 1.06667,
+        "channels": 61
+      },
+      {
+        "name": "Ranged_Bow_Aiming_Idle",
+        "duration_s": 1.83333,
+        "channels": 53
+      },
+      {
+        "name": "Ranged_Bow_Draw",
+        "duration_s": 1.33333,
+        "channels": 68
+      },
+      {
+        "name": "Ranged_Bow_Draw_Up",
+        "duration_s": 1.33333,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Bow_Idle",
+        "duration_s": 1.56667,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Bow_Release",
+        "duration_s": 1.33333,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Bow_Release_Up",
+        "duration_s": 1.36667,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Magic_Raise",
+        "duration_s": 2.1,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Magic_Shoot",
+        "duration_s": 0.93333,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Magic_Spellcasting",
+        "duration_s": 0.66667,
+        "channels": 53
+      },
+      {
+        "name": "Ranged_Magic_Spellcasting_Long",
+        "duration_s": 2.53333,
+        "channels": 69
+      },
+      {
+        "name": "Ranged_Magic_Summon",
+        "duration_s": 4.3,
+        "channels": 53
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+    "size_bytes": 828240,
+    "animations": [
+      {
+        "name": "Death_A",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Death_A_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Death_B",
+        "duration_s": 2.63333,
+        "channels": 69
+      },
+      {
+        "name": "Death_B_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Hit_A",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Hit_B",
+        "duration_s": 0.86667,
+        "channels": 69
+      },
+      {
+        "name": "Idle_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Idle_B",
+        "duration_s": 2.13333,
+        "channels": 69
+      },
+      {
+        "name": "Interact",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "PickUp",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "Spawn_Air",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "Spawn_Ground",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Throw",
+        "duration_s": 1.36667,
+        "channels": 56
+      },
+      {
+        "name": "Use_Item",
+        "duration_s": 1.6,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementAdvanced.glb",
+    "size_bytes": 719628,
+    "animations": [
+      {
+        "name": "Crawling",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Crouching",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Dodge_Backward",
+        "duration_s": 0.4,
+        "channels": 69
+      },
+      {
+        "name": "Dodge_Forward",
+        "duration_s": 0.4,
+        "channels": 69
+      },
+      {
+        "name": "Dodge_Left",
+        "duration_s": 0.4,
+        "channels": 69
+      },
+      {
+        "name": "Dodge_Right",
+        "duration_s": 0.4,
+        "channels": 69
+      },
+      {
+        "name": "Running_HoldingBow",
+        "duration_s": 0.8,
+        "channels": 63
+      },
+      {
+        "name": "Running_HoldingRifle",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Running_Strafe_Left",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Running_Strafe_Right",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Sneaking",
+        "duration_s": 2.13333,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Walking_Backwards",
+        "duration_s": 1.06667,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+    "size_bytes": 689624,
+    "animations": [
+      {
+        "name": "Jump_Full_Long",
+        "duration_s": 2.33333,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Full_Short",
+        "duration_s": 1.16667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Idle",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Land",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Start",
+        "duration_s": 0.6,
+        "channels": 69
+      },
+      {
+        "name": "Running_A",
+        "duration_s": 0.8,
+        "channels": 68
+      },
+      {
+        "name": "Running_B",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Walking_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Walking_B",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Walking_C",
+        "duration_s": 1.6,
+        "channels": 65
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Simulation.glb",
+    "size_bytes": 855904,
+    "animations": [
+      {
+        "name": "Cheering",
+        "duration_s": 1.66667,
+        "channels": 69
+      },
+      {
+        "name": "Lie_Down",
+        "duration_s": 3,
+        "channels": 69
+      },
+      {
+        "name": "Lie_Idle",
+        "duration_s": 2.66667,
+        "channels": 56
+      },
+      {
+        "name": "Lie_StandUp",
+        "duration_s": 2.33333,
+        "channels": 69
+      },
+      {
+        "name": "Push_Ups",
+        "duration_s": 1.03333,
+        "channels": 69
+      },
+      {
+        "name": "Sit_Chair_Down",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Sit_Chair_Idle",
+        "duration_s": 3.6,
+        "channels": 50
+      },
+      {
+        "name": "Sit_Chair_StandUp",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Sit_Floor_Down",
+        "duration_s": 1,
+        "channels": 69
+      },
+      {
+        "name": "Sit_Floor_Idle",
+        "duration_s": 4,
+        "channels": 51
+      },
+      {
+        "name": "Sit_Floor_StandUp",
+        "duration_s": 1.13333,
+        "channels": 52
+      },
+      {
+        "name": "Sit_Ups",
+        "duration_s": 1.73333,
+        "channels": 67
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Waving",
+        "duration_s": 2.13333,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+    "size_bytes": 924308,
+    "animations": [
+      {
+        "name": "EXPERIMENTAL_Medium_Transform",
+        "duration_s": 1,
+        "channels": 69
+      },
+      {
+        "name": "Skeletons_Awaken_Floor",
+        "duration_s": 2.3,
+        "channels": 59
+      },
+      {
+        "name": "Skeletons_Awaken_Floor_Long",
+        "duration_s": 3.83333,
+        "channels": 60
+      },
+      {
+        "name": "Skeletons_Awaken_Standing",
+        "duration_s": 1,
+        "channels": 57
+      },
+      {
+        "name": "Skeletons_Death",
+        "duration_s": 2,
+        "channels": 55
+      },
+      {
+        "name": "Skeletons_Death_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Skeletons_Death_Resurrect",
+        "duration_s": 2.7,
+        "channels": 56
+      },
+      {
+        "name": "Skeletons_Idle",
+        "duration_s": 4.26667,
+        "channels": 51
+      },
+      {
+        "name": "Skeletons_Inactive_Floor_Pose",
+        "duration_s": 0,
+        "channels": 50
+      },
+      {
+        "name": "Skeletons_Inactive_Standing_Pose",
+        "duration_s": 0,
+        "channels": 56
+      },
+      {
+        "name": "Skeletons_Spawn_Ground",
+        "duration_s": 3.56667,
+        "channels": 69
+      },
+      {
+        "name": "Skeletons_Taunt",
+        "duration_s": 1.03333,
+        "channels": 69
+      },
+      {
+        "name": "Skeletons_Taunt_Longer",
+        "duration_s": 3,
+        "channels": 69
+      },
+      {
+        "name": "Skeletons_Walking",
+        "duration_s": 1.6,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Tools.glb",
+    "size_bytes": 1461204,
+    "animations": [
+      {
+        "name": "Chop",
+        "duration_s": 4.33333,
+        "channels": 69
+      },
+      {
+        "name": "Chopping",
+        "duration_s": 1.33333,
+        "channels": 51
+      },
+      {
+        "name": "Dig",
+        "duration_s": 4.66667,
+        "channels": 69
+      },
+      {
+        "name": "Digging",
+        "duration_s": 1.4,
+        "channels": 50
+      },
+      {
+        "name": "Fishing_Bite",
+        "duration_s": 2.23333,
+        "channels": 69
+      },
+      {
+        "name": "Fishing_Cast",
+        "duration_s": 1.93333,
+        "channels": 69
+      },
+      {
+        "name": "Fishing_Catch",
+        "duration_s": 3.23333,
+        "channels": 69
+      },
+      {
+        "name": "Fishing_Idle",
+        "duration_s": 2.33333,
+        "channels": 67
+      },
+      {
+        "name": "Fishing_Reeling",
+        "duration_s": 1.6,
+        "channels": 69
+      },
+      {
+        "name": "Fishing_Struggling",
+        "duration_s": 3.43333,
+        "channels": 69
+      },
+      {
+        "name": "Fishing_Tug",
+        "duration_s": 1.9,
+        "channels": 68
+      },
+      {
+        "name": "Hammer",
+        "duration_s": 4.33333,
+        "channels": 69
+      },
+      {
+        "name": "Hammering",
+        "duration_s": 2.66667,
+        "channels": 51
+      },
+      {
+        "name": "Holding_A",
+        "duration_s": 1,
+        "channels": 67
+      },
+      {
+        "name": "Holding_B",
+        "duration_s": 1,
+        "channels": 67
+      },
+      {
+        "name": "Holding_C",
+        "duration_s": 1,
+        "channels": 67
+      },
+      {
+        "name": "Lockpick",
+        "duration_s": 3,
+        "channels": 69
+      },
+      {
+        "name": "Lockpicking",
+        "duration_s": 2.33333,
+        "channels": 51
+      },
+      {
+        "name": "Pickaxe",
+        "duration_s": 6.03333,
+        "channels": 69
+      },
+      {
+        "name": "Pickaxing",
+        "duration_s": 3.73333,
+        "channels": 51
+      },
+      {
+        "name": "Saw",
+        "duration_s": 2.4,
+        "channels": 69
+      },
+      {
+        "name": "Sawing",
+        "duration_s": 0.66667,
+        "channels": 50
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Work_A",
+        "duration_s": 2.53333,
+        "channels": 69
+      },
+      {
+        "name": "Work_B",
+        "duration_s": 3.1,
+        "channels": 69
+      },
+      {
+        "name": "Work_C",
+        "duration_s": 3.66667,
+        "channels": 69
+      },
+      {
+        "name": "Working_A",
+        "duration_s": 1.5,
+        "channels": 50
+      },
+      {
+        "name": "Working_B",
+        "duration_s": 2.53333,
+        "channels": 59
+      },
+      {
+        "name": "Working_C",
+        "duration_s": 2,
+        "channels": 52
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Mannequin Character/characters/Mannequin_Large.glb",
+    "size_bytes": 541784,
+    "animations": [],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "MannequinLarge_ArmLeft",
+      "MannequinLarge_ArmRight",
+      "MannequinLarge_Body",
+      "MannequinLarge_Head",
+      "MannequinLarge_LegLeft",
+      "MannequinLarge_LegRight",
+      "Rig_Large"
+    ]
+  },
+  {
+    "path": "character-animations-free1.1/KayKit_Character_Animations_1.1/Mannequin Character/characters/Mannequin_Medium.glb",
+    "size_bytes": 420044,
+    "animations": [],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "head",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Mannequin_Medium_ArmLeft",
+      "Mannequin_Medium_ArmRight",
+      "Mannequin_Medium_Body",
+      "Mannequin_Medium_Head",
+      "Mannequin_Medium_LegLeft",
+      "Mannequin_Medium_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_A_Color1.gltf",
+    "size_bytes": 3054,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_B_Color1.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_C_Color1.gltf",
+    "size_bytes": 3056,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_D_Color1.gltf",
+    "size_bytes": 3058,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_E_Color1.gltf",
+    "size_bytes": 3063,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_F_Color1.gltf",
+    "size_bytes": 3062,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_F_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_F_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_G_Color1.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_1_G_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_1_G_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_A_Color1.gltf",
+    "size_bytes": 3050,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_2_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_2_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_B_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_2_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_2_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_C_Color1.gltf",
+    "size_bytes": 3053,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_2_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_2_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_D_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_2_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_2_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_E_Color1.gltf",
+    "size_bytes": 3064,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_2_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_2_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_F_Color1.gltf",
+    "size_bytes": 3040,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_2_F_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_2_F_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_3_A_Color1.gltf",
+    "size_bytes": 3059,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_3_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_3_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_3_B_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_3_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_3_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_3_C_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_3_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_3_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_4_A_Color1.gltf",
+    "size_bytes": 3049,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_4_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_4_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_4_B_Color1.gltf",
+    "size_bytes": 3054,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_4_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_4_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_4_C_Color1.gltf",
+    "size_bytes": 3052,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_4_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_4_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_4_D_Color1.gltf",
+    "size_bytes": 3053,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_4_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_4_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_4_E_Color1.gltf",
+    "size_bytes": 3058,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_4_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_4_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_4_F_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Bush_4_F_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Bush_4_F_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_A_Color1.gltf",
+    "size_bytes": 3058,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_A_Singlesided_Color1.gltf",
+    "size_bytes": 3088,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_A_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_A_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_B_Color1.gltf",
+    "size_bytes": 3064,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_B_Singlesided_Color1.gltf",
+    "size_bytes": 3095,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_B_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_B_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_C_Color1.gltf",
+    "size_bytes": 3067,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_C_Singlesided_Color1.gltf",
+    "size_bytes": 3099,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_C_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_C_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_D_Color1.gltf",
+    "size_bytes": 3066,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_D_Singlesided_Color1.gltf",
+    "size_bytes": 3099,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_D_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_1_D_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_Mesh.gltf",
+    "size_bytes": 2327,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_Mesh.bin"
+    ],
+    "images": [],
+    "nodes": [
+      "Grass_1_Mesh"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_SingleSided_Mesh.gltf",
+    "size_bytes": 2357,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_1_SingleSided_Mesh.bin"
+    ],
+    "images": [],
+    "nodes": [
+      "Grass_1_SingleSided_Mesh"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_A_Color1.gltf",
+    "size_bytes": 3056,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_A_Singlesided_Color1.gltf",
+    "size_bytes": 3088,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_A_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_A_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_B_Color1.gltf",
+    "size_bytes": 3064,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_B_Singlesided_Color1.gltf",
+    "size_bytes": 3092,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_B_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_B_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_C_Color1.gltf",
+    "size_bytes": 3066,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_C_Singlesided_Color1.gltf",
+    "size_bytes": 3101,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_C_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_C_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_D_Color1.gltf",
+    "size_bytes": 3066,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_D_Singlesided_Color1.gltf",
+    "size_bytes": 3097,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_D_Singlesided_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Grass_2_D_Singlesided_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_Mesh.gltf",
+    "size_bytes": 2325,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_Mesh.bin"
+    ],
+    "images": [],
+    "nodes": [
+      "Grass_2_Mesh"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_SingleSided_Mesh.gltf",
+    "size_bytes": 2357,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Grass_2_SingleSided_Mesh.bin"
+    ],
+    "images": [],
+    "nodes": [
+      "Grass_2_SingleSided_Mesh"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_A_Color1.gltf",
+    "size_bytes": 3032,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_B_Color1.gltf",
+    "size_bytes": 3035,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_C_Color1.gltf",
+    "size_bytes": 3032,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_D_Color1.gltf",
+    "size_bytes": 3039,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_E_Color1.gltf",
+    "size_bytes": 3007,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_F_Color1.gltf",
+    "size_bytes": 3008,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_F_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_F_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_G_Color1.gltf",
+    "size_bytes": 3038,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_G_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_G_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_H_Color1.gltf",
+    "size_bytes": 3039,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_H_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_H_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_I_Color1.gltf",
+    "size_bytes": 3038,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_I_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_I_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_J_Color1.gltf",
+    "size_bytes": 3046,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_J_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_J_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_K_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_K_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_K_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_L_Color1.gltf",
+    "size_bytes": 3044,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_L_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_L_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_M_Color1.gltf",
+    "size_bytes": 3044,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_M_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_M_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_N_Color1.gltf",
+    "size_bytes": 3042,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_N_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_N_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_O_Color1.gltf",
+    "size_bytes": 3037,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_O_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_O_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_P_Color1.gltf",
+    "size_bytes": 3042,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_P_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_P_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_Q_Color1.gltf",
+    "size_bytes": 3067,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_1_Q_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_1_Q_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_A_Color1.gltf",
+    "size_bytes": 3052,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_B_Color1.gltf",
+    "size_bytes": 3053,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_C_Color1.gltf",
+    "size_bytes": 3054,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_D_Color1.gltf",
+    "size_bytes": 3055,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_E_Color1.gltf",
+    "size_bytes": 3062,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_F_Color1.gltf",
+    "size_bytes": 3059,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_F_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_F_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_G_Color1.gltf",
+    "size_bytes": 3062,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_G_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_G_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_H_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_2_H_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_2_H_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_A_Color1.gltf",
+    "size_bytes": 3056,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_B_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_C_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_D_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_E_Color1.gltf",
+    "size_bytes": 3055,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_F_Color1.gltf",
+    "size_bytes": 3056,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_F_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_F_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_G_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_G_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_G_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_H_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_H_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_H_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_I_Color1.gltf",
+    "size_bytes": 3054,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_I_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_I_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_J_Color1.gltf",
+    "size_bytes": 3055,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_J_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_J_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_K_Color1.gltf",
+    "size_bytes": 3056,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_K_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_K_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_L_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_L_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_L_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_M_Color1.gltf",
+    "size_bytes": 3054,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_M_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_M_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_N_Color1.gltf",
+    "size_bytes": 3059,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_N_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_N_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_O_Color1.gltf",
+    "size_bytes": 3058,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_O_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_O_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_P_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_P_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_P_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_Q_Color1.gltf",
+    "size_bytes": 3058,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_Q_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_Q_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_3_R_Color1.gltf",
+    "size_bytes": 3055,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Rock_3_R_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Rock_3_R_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_1_A_Color1.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_1_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_1_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_1_B_Color1.gltf",
+    "size_bytes": 3058,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_1_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_1_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_1_C_Color1.gltf",
+    "size_bytes": 3064,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_1_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_1_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_A_Color1.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_2_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_2_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_B_Color1.gltf",
+    "size_bytes": 3059,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_2_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_2_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_C_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_2_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_2_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_D_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_2_D_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_2_D_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_E_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_2_E_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_2_E_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_3_A_Color1.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_3_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_3_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_3_B_Color1.gltf",
+    "size_bytes": 3060,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_3_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_3_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_3_C_Color1.gltf",
+    "size_bytes": 3066,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_3_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_3_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_4_A_Color1.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_4_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_4_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_4_B_Color1.gltf",
+    "size_bytes": 3059,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_4_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_4_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_4_C_Color1.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_4_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_4_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_Bare_1_A_Color1.gltf",
+    "size_bytes": 3075,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_Bare_1_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_Bare_1_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_Bare_1_B_Color1.gltf",
+    "size_bytes": 3074,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_Bare_1_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_Bare_1_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_Bare_1_C_Color1.gltf",
+    "size_bytes": 3079,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_Bare_1_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_Bare_1_C_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_Bare_2_A_Color1.gltf",
+    "size_bytes": 3077,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_Bare_2_A_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_Bare_2_A_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_Bare_2_B_Color1.gltf",
+    "size_bytes": 3077,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_Bare_2_B_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_Bare_2_B_Color1"
+    ]
+  },
+  {
+    "path": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_Bare_2_C_Color1.gltf",
+    "size_bytes": 3076,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Tree_Bare_2_C_Color1.bin"
+    ],
+    "images": [
+      "forest_texture.png"
+    ],
+    "nodes": [
+      "Tree_Bare_2_C_Color1"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+    "size_bytes": 828240,
+    "animations": [
+      {
+        "name": "Death_A",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "Death_A_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Death_B",
+        "duration_s": 2.63333,
+        "channels": 69
+      },
+      {
+        "name": "Death_B_Pose",
+        "duration_s": 0,
+        "channels": 47
+      },
+      {
+        "name": "Hit_A",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Hit_B",
+        "duration_s": 0.86667,
+        "channels": 69
+      },
+      {
+        "name": "Idle_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Idle_B",
+        "duration_s": 2.13333,
+        "channels": 69
+      },
+      {
+        "name": "Interact",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "PickUp",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "Spawn_Air",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "Spawn_Ground",
+        "duration_s": 1.3,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Throw",
+        "duration_s": 1.36667,
+        "channels": 56
+      },
+      {
+        "name": "Use_Item",
+        "duration_s": 1.6,
+        "channels": 69
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+    "size_bytes": 689624,
+    "animations": [
+      {
+        "name": "Jump_Full_Long",
+        "duration_s": 2.33333,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Full_Short",
+        "duration_s": 1.16667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Idle",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Land",
+        "duration_s": 0.66667,
+        "channels": 69
+      },
+      {
+        "name": "Jump_Start",
+        "duration_s": 0.6,
+        "channels": 69
+      },
+      {
+        "name": "Running_A",
+        "duration_s": 0.8,
+        "channels": 68
+      },
+      {
+        "name": "Running_B",
+        "duration_s": 0.8,
+        "channels": 69
+      },
+      {
+        "name": "T-Pose",
+        "duration_s": 0,
+        "channels": 69
+      },
+      {
+        "name": "Walking_A",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Walking_B",
+        "duration_s": 1.06667,
+        "channels": 69
+      },
+      {
+        "name": "Walking_C",
+        "duration_s": 1.6,
+        "channels": 65
+      }
+    ],
+    "meshes": 6,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Mannequin_ArmLeft",
+      "Mannequin_ArmRight",
+      "Mannequin_Body",
+      "Mannequin_Head",
+      "Mannequin_LegLeft",
+      "Mannequin_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Arrow.gltf",
+    "size_bytes": 3043,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Arrow.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Arrow"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Arrow_Broken.gltf",
+    "size_bytes": 3061,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Arrow_Broken.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Arrow_Broken"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Arrow_Broken_Half.gltf",
+    "size_bytes": 3069,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Arrow_Broken_Half.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Arrow_Broken_Half"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Arrow_Half.gltf",
+    "size_bytes": 3051,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Arrow_Half.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Arrow_Half"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Axe.gltf",
+    "size_bytes": 3045,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Axe.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Axe"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Blade.gltf",
+    "size_bytes": 3047,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Blade.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Blade"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Crossbow.gltf",
+    "size_bytes": 3052,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Crossbow.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Crossbow"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Quiver.gltf",
+    "size_bytes": 3051,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Quiver.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Quiver"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Shield_Large_A.gltf",
+    "size_bytes": 3071,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Shield_Large_A.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Shield_Large_A"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Shield_Large_B.gltf",
+    "size_bytes": 3068,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Shield_Large_B.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Shield_Large_B"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Shield_Small_A.gltf",
+    "size_bytes": 3069,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Shield_Small_A.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Shield_Small_A"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Shield_Small_B.gltf",
+    "size_bytes": 3069,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Shield_Small_B.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Shield_Small_B"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/assets/gltf/Skeleton_Staff.gltf",
+    "size_bytes": 3057,
+    "animations": [],
+    "meshes": 1,
+    "skins": 0,
+    "buffers": [
+      "Skeleton_Staff.bin"
+    ],
+    "images": [
+      "skeleton_texture.png"
+    ],
+    "nodes": [
+      "Skeleton_Staff"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Mage.glb",
+    "size_bytes": 265676,
+    "animations": [],
+    "meshes": 9,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "Skeleton_Mage_Hat",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Skeleton_Mage_ArmLeft",
+      "Skeleton_Mage_ArmRight",
+      "Skeleton_Mage_Body",
+      "Skeleton_Mage_Eyes",
+      "Skeleton_Mage_Jaw",
+      "Skeleton_Mage_LegLeft",
+      "Skeleton_Mage_LegRight",
+      "Skeleton_Mage_Skull",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Minion.glb",
+    "size_bytes": 318520,
+    "animations": [],
+    "meshes": 9,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "head",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "chest",
+      "spine",
+      "hips",
+      "root",
+      "Skeleton_Minion_ArmLeft",
+      "Skeleton_Minion_ArmRight",
+      "Skeleton_Minion_Body",
+      "Skeleton_Minion_Cloak",
+      "Skeleton_Minion_Eyes",
+      "Skeleton_Minion_Head",
+      "Skeleton_Minion_Jaw",
+      "Skeleton_Minion_LegLeft",
+      "Skeleton_Minion_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Rogue.glb",
+    "size_bytes": 331180,
+    "animations": [],
+    "meshes": 10,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "Skeleton_Rogue_Hood",
+      "head",
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "Skeleton_Rogue_Cape",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "hips",
+      "root",
+      "Skeleton_Rogue_ArmLeft",
+      "Skeleton_Rogue_ArmRight",
+      "Skeleton_Rogue_Body",
+      "Skeleton_Rogue_Eyes",
+      "Skeleton_Rogue_Head",
+      "Skeleton_Rogue_Jaw",
+      "Skeleton_Rogue_LegLeft",
+      "Skeleton_Rogue_LegRight",
+      "Rig_Medium"
+    ]
+  },
+  {
+    "path": "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Warrior.glb",
+    "size_bytes": 367484,
+    "animations": [],
+    "meshes": 10,
+    "skins": 1,
+    "buffers": [
+      "<embedded>"
+    ],
+    "images": [
+      "<embedded>"
+    ],
+    "nodes": [
+      "handslot.r",
+      "hand.r",
+      "wrist.r",
+      "lowerarm.r",
+      "upperarm.r",
+      "handslot.l",
+      "hand.l",
+      "wrist.l",
+      "lowerarm.l",
+      "upperarm.l",
+      "Skeleton_Warrior_Helmet",
+      "head",
+      "chest",
+      "spine",
+      "toes.l",
+      "foot.l",
+      "lowerleg.l",
+      "upperleg.l",
+      "toes.r",
+      "foot.r",
+      "lowerleg.r",
+      "upperleg.r",
+      "hips",
+      "root",
+      "Skeleton_Warrior_ArmLeft",
+      "Skeleton_Warrior_ArmRight",
+      "Skeleton_Warrior_Body",
+      "Skeleton_Warrior_Cloak",
+      "Skeleton_Warrior_Eyes",
+      "Skeleton_Warrior_Head",
+      "Skeleton_Warrior_Jaw",
+      "Skeleton_Warrior_LegLeft",
+      "Skeleton_Warrior_LegRight",
+      "Rig_Medium"
+    ]
+  }
+]
