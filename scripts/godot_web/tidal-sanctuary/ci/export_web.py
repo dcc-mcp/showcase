@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 from pathlib import Path
+from mcp_export import export_through_mcp, inspect_clean_pck
 from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, RAW_STORY_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
 
 
@@ -87,7 +88,7 @@ platform="Web"
 runnable=true
 export_filter="all_resources"
 include_filter="__RAW_INCLUDE_FILTER__"
-exclude_filter=""
+exclude_filter="addons/*,tidal_export_*,web-output/*"
 export_path=""
 script_export_mode=2
 
@@ -108,15 +109,14 @@ progressive_web_app/enabled=false
               "raw_image_files": list(RAW_IMAGE_FILES), "include_filter": raw_include_filter(),
               "native_sha256": {name: sha256(args.native / name) for name in GAME_FILES}}
     try:
-        for name, extra in (("import", ["--editor", "--import", "--quit"]),
-                            ("export", ["--export-release", "Web", str(site / "index.html")])):
-            process = subprocess.run([godot, "--headless", "--path", str(project), *extra],
-                                      env=env, capture_output=True, text=True, timeout=240)
-            output = process.stdout + process.stderr
-            (out / (name + ".log")).write_text(output)
-            check_engine_log(output)
-            if process.returncode != 0 or "ERROR:" in output:
-                raise RuntimeError(f"Official Godot {name} failed; inspect {name}.log")
+        native_hashes = {name: sha256(args.native / name) for name in GAME_FILES}
+        exported = export_through_mcp(godot, project, out, env, native_hashes)
+        report["ecosystem_export"] = json.loads((out / "export-mcp.json").read_text())
+        report["pack_inspection"] = inspect_clean_pck(exported / "index.pck")
+        for item in exported.iterdir():
+            if not item.is_file():
+                raise RuntimeError("Unexpected directory in owned Web export")
+            shutil.copyfile(item, site / item.name)
         page = (site / "index.html").read_text()
         match = re.search(r'const GODOT_CONFIG = (\{.*?\});', page)
         if not match:

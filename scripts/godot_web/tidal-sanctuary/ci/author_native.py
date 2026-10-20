@@ -120,7 +120,7 @@ def script_authoring_plan(path, source):
 
 
 def initial_copy_files():
-    excluded = {"main.gd", "swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}
+    excluded = {"main.gd", "swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "start.tscn", "project.godot", "water.gdshader", *DEFERRED_TEST_FILES}
     return tuple(name for name in GAME_FILES if name not in excluded)
 
 
@@ -317,10 +317,24 @@ def main():
         editor = launch()
         ready()
         inventory()
-        call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script", "godot-editor"]})
+        call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script", "godot-editor", "godot-shader"]})
         inventory()
         wait_editor_idle("initial dependency-free project", {})
         call("godot_project_management__get_project_info", {})
+        shader_source = (source / "water.gdshader").read_text()
+        shader_arguments = {"path":"res://water.gdshader", "shader_type":"spatial", "source":shader_source}
+        if script_request_size("create_shader", shader_arguments) > SCRIPT_REQUEST_BUDGET:
+            raise RuntimeError("Shader exceeds the established typed request budget")
+        written = call("godot_shader__create_shader", shader_arguments)
+        written = written.get("context", written)
+        if written.get("written") is not True:
+            raise RuntimeError("Official shader creation did not write the resource")
+        wait_editor_idle("after typed shader creation", {"res://water.gdshader":"Shader"})
+        shader_readback = call("godot_shader__read_shader", {"path":"res://water.gdshader"})
+        shader_readback = shader_readback.get("context", shader_readback)
+        if shader_readback.get("content") != shader_source or sha256(project / "water.gdshader") != sha256(source / "water.gdshader"):
+            raise RuntimeError("Actual shader saved text differs from source")
+        report["shader_transfer"] = {"route":"official create_shader/read_shader", "path":"res://water.gdshader", "sha256":sha256(project / "water.gdshader")}
         scripts = {}
         for dependency in ("swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "main.gd"):
             author_script(dependency, scripts)

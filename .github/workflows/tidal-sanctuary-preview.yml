@@ -129,7 +129,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
+          xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
             --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/tidal-templates/web_nothreads_release.zip" \
             --license-dir play/runtime --output "$RUNNER_TEMP/tidal-web"
       - name: Real sandboxed Chrome keyboard/touch treasure routes and fresh-process save restoration
@@ -294,7 +294,7 @@ jobs:
           controller_python="$(command -v python)"
           PATH="/usr/bin:$PATH" xvfb-run -a -s '-screen 0 1024x768x24 -nolisten tcp' "$controller_python" "$RECIPE/ci/story_vectors/verify_story_vectors.py" \
             --plans "$RECIPE/ci/story_vectors/plans" \
-            --baseline "$RECIPE/game/assets/story" \
+            --baseline "$RECIPE/ci/story_vectors/baseline-assets" \
             --output "$RUNNER_TEMP/tidal-story-vectors"
       - name: Preserve native candidate files and raw production evidence
         if: ${{ !cancelled() }}
