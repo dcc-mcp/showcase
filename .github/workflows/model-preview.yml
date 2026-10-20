@@ -15,7 +15,11 @@ permissions:
   contents: read
 jobs:
   viewer:
-    name: Isolated viewer controls (not production acceptance)
+    name: Viewer controls (${{ matrix.asset }}, not production acceptance)
+    strategy:
+      fail-fast: false
+      matrix:
+        asset: [software-fixture, mcp-rebuilt-ember]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -30,14 +34,27 @@ jobs:
       - run: |
           python -m pip install --require-hashes --only-binary=:all: -r requirements/browser-preview.lock
       - run: google-chrome --version
+      - name: Prepare pinned MCP-rebuilt original asset (all rights reserved)
+        if: matrix.asset == 'mcp-rebuilt-ember'
+        run: |
+          mkdir -p "$RUNNER_TEMP/viewer-input"
+          curl --fail --location --proto '=https' --tlsv1.2 'https://raw.githubusercontent.com/dcc-mcp/showcase/0523c285ddc66d14a5ff370be704a853c7695141/scripts/godot_web/dawnkeep/art/ecosystem-rebuild/assets/tower_ember.glb' -o "$RUNNER_TEMP/viewer-input/asset.glb"
+          curl --fail --location --proto '=https' --tlsv1.2 'https://raw.githubusercontent.com/dcc-mcp/showcase/0523c285ddc66d14a5ff370be704a853c7695141/scripts/godot_web/dawnkeep/LICENSES.md' -o "$RUNNER_TEMP/viewer-input/LICENSES.md"
+          python scripts/model_preview_pilot.py --asset "$RUNNER_TEMP/viewer-input/asset.glb" --sha256 3f6c60b807ff91d7c842caf1d10b898e02ecfeb0b111e6571574f3bd88a05b37 --license "$RUNNER_TEMP/viewer-input/LICENSES.md"
+      - name: Test controls on the pinned MCP-rebuilt asset, not whole-case acceptance
+        if: matrix.asset == 'mcp-rebuilt-ember'
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python scripts/model_preview_browser_smoke.py --output "${{ runner.temp }}/viewer-qa"
       - name: Test controls on a synthetic software fixture, never production evidence
+        if: matrix.asset == 'software-fixture'
         env:
           EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python scripts/model_preview_browser_smoke.py --test-fixture --output "${{ runner.temp }}/viewer-qa"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: ${{ !cancelled() }}
         with:
-          name: model-viewer-controls-${{ github.sha }}
+          name: model-viewer-${{ matrix.asset }}-${{ github.event.pull_request.head.sha || github.sha }}
           path: ${{ runner.temp }}/viewer-qa
           if-no-files-found: warn
           retention-days: 7
