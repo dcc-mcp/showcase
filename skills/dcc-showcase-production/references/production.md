@@ -25,7 +25,9 @@ brief. For each credible candidate record identity, version, source/checksum,
 fit, maintenance, public API coverage, host compatibility, cost and rejection or
 selection reason. A generic web search cannot stand in for the official store.
 Unknown compatibility/rights remain unresolved; don't invent an install success.
-If no option fits, explain the gap and use the smallest authorized native bridge.
+If no option fits, record the capability gap and stop the affected production stage.
+Deduplicate an issue or Draft PR for the owning ecosystem component; do not
+substitute a bare host CLI, direct host API, or one-off native script.
 
 Check license terms separately for software, trial/free tier, generated output,
 fonts, sound, textures, models and source redistribution. Record authoritative
@@ -42,7 +44,10 @@ this use, platform and current terms. Ask before new payment or legal acceptance
 - Discover actual tools through `dcc-mcp`, follow search/describe/load/call, and
   validate real returned values and host effects. Retain sanitized request and
   response evidence. `success: true` with an embedded backend failure is a failure.
-  A direct script fallback must be explicit and cannot prove typed MCP coverage.
+  A disclosed direct script fallback is still noncompliant production, not a
+  narrower accepted claim. Official DCC-MCP CLI and Skills execution are valid
+  ecosystem routes when the actual component, call, and resulting artifact are
+  proven; wrapping an unrelated host command or relabeling old output is not.
 - Record the recipe, parameters, seeds, dependencies, color management, units,
   export settings and source SHA-256. Preserve native editable files and useful
   intermediate views. Reopening and a blank-scene recipe rebuild are separate
@@ -76,3 +81,10 @@ coverage. Track software/skill, supported platform, license/access, actual MCP
 run, reopen/export, video, interaction and review status independently. Legacy
 cases without video remain “missing video”; don't silently delete or promote
 them. A later review is a revision of the same slug, not a new case count.
+
+Every production stage, including asset adaptation, rendering, export and media
+post-production, must remain in the ecosystem. Read-only inspection can use
+ordinary utilities but cannot manufacture new production artifacts. Run the
+[full-collection gate](../../../docs/showcase/ECOSYSTEM_PRODUCTION.md) before
+publication. Missing historical evidence blocks later publication, without
+rewriting history or automatically deleting an existing live site.

@@ -7,6 +7,13 @@ running anything**.
 This contract is what separates a sample that can be quoted externally from a
 picture nobody can verify.
 
+## Mandatory ecosystem production gate
+
+All selected cases must satisfy [ecosystem production provenance](ECOSYSTEM_PRODUCTION.md)
+before any subsequent site build or publication. This applies to historical as
+well as new cases. Honest disclosure of a native-only step does not waive this
+requirement. Missing evidence means blocked, not proof that MCP never ran.
+
 ## Layout
 
 Before production in any DCC, follow the shared [production reuse gate](https://github.com/dcc-mcp/dcc-mcp-core/blob/main/crates/dcc-mcp-gateway/src/gateway/native_resources/agent_workflows.md#production-reuse-gate).

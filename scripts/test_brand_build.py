@@ -42,8 +42,9 @@ class BrandBuildGuards(unittest.TestCase):
         (self.root / "brand-gallery.json").write_text(json.dumps(self.catalog), encoding="utf-8")
 
     def build(self, out="_site", preview=False):
-        # The independent collection validator has its own contract tests.
-        with patch("validate_collection.validate", return_value=[]):
+        # These synthetic layout fixtures do not claim production acceptance.
+        # Independent collection/ecosystem validators have dedicated tests.
+        with patch("validate_collection.validate", return_value=[]), patch("validate_ecosystem.validate", return_value=[]):
             return build_site.build(str(self.root), out, brand_preview=preview, localize=False)
 
     def page(self, rel, out="_site"):

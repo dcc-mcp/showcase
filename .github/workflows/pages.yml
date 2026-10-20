@@ -26,6 +26,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Test full-collection ecosystem production gate
+        run: python scripts/test_validate_ecosystem.py
+
+      - name: Require ecosystem provenance for every selected case
+        run: python scripts/validate_ecosystem.py
+
       - name: Materialize pinned official Godot Web runtime
         run: python scripts/godot_web/materialize_runtime.py
 

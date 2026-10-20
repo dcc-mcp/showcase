@@ -583,6 +583,10 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         problems = validate_collection.validate(collection_path, root=root)
         if problems:
             return [], problems, []
+        import validate_ecosystem
+        problems = validate_ecosystem.validate(root)
+        if problems:
+            return [], problems, []
         import validate_brand_gallery
         brand_catalog, brand_assets, problems = validate_brand_gallery.read_and_validate(root)
         if problems:
