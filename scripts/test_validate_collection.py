@@ -489,11 +489,30 @@ class ReviewedPublicTextTests(unittest.TestCase):
         hashes["assets/vendor/model-viewer/model-viewer.min.js"] = vendor["sha256"]
         trail = "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py"
         hashes[trail] = hashlib.sha256((repo / trail).read_bytes()).hexdigest()
+        seismic = {'docs/showcase/seismic-lens/retained/gimp/reproduce/reproduce_gimp.py', 'docs/showcase/seismic-lens/retained/paraview/reproduce/reproduce_paraview.py', 'docs/showcase/seismic-lens/retained/gimp/evidence/qualified-master-baseline.json', 'docs/showcase/seismic-lens/retained/preview/inputs/qualified-master-baseline.json', 'docs/showcase/seismic-lens/retained/preview/reproduce/lifecycle.py', 'docs/showcase/seismic-lens/retained/preview/reproduce/verify_preview.py', 'docs/showcase/seismic-lens/retained/gimp/reproduce/lifecycle.py', 'docs/showcase/seismic-lens/retained/gimp/notices/DejaVu-font-notice.txt', 'docs/showcase/seismic-lens/retained/preview/reproduce/xcf_metadata_readback.py', 'docs/showcase/seismic-lens/retained/gimp/reproduce/xcf_metadata_readback.py', 'docs/showcase/seismic-lens/retained/gimp/reproduce/verify_copied_xcf.py'}
+        for rel in seismic:
+            hashes[rel] = hashlib.sha256((repo / rel).read_bytes()).hexdigest()
         self.assertEqual(set(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES),
                          {"assets/vendor/model-viewer/model-viewer.min.js", "play/README.md", "play/runtime/godot-4.6.3.js",
-                          "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt", trail})
+                          "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt", trail} | seismic)
         for path, (digest, _) in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES.items():
             self.assertEqual(digest, hashes[path])
+
+    def test_seismic_source_matches_are_exact_bytes_and_paths_only(self):
+        repo = Path(__file__).resolve().parents[1]
+        for rel in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES:
+            if not rel.startswith("docs/showcase/seismic-lens/retained/"):
+                continue
+            data = (repo / rel).read_bytes()
+            path = self.root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+            self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+            path.write_bytes(data + b"\n# changed\n")
+            self.assertTrue(validate_collection.scan_text_file(path, self.root))
+            copied = path.with_name("unreviewed_" + path.name)
+            copied.write_bytes(data)
+            self.assertTrue(validate_collection.scan_text_file(copied, self.root))
 
     def test_trail_negative_path_fixture_review_is_exact(self):
         repo = Path(__file__).resolve().parents[1]

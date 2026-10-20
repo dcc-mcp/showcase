@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "741731946e3105c1e3982f44d65f45dfc557901450781c75d4765df32b74504a",
+  "response_sha256": "741731946e3105c1e3982f44d65f45dfc557901450781c75d4765df32b74504a",
+  "outputs": [
+    {
+      "path": "docs/showcase/seismic-lens/native-observation-poster.png",
+      "sha256": "4bc82d1edc518083af46dca7822673483ac17535e58c44d92855be762b8663c1"
+    }
+  ],
+  "scope": "Official Blender MCP native VSE extraction of observed video frame119 (scene120), unchanged1178x814 and Standard/sRGB. Full independent decode MAE0.6050764841087422<3. Temporaryscene cleaned; failed earlier black-frame attempt retained, not credited.",
+  "executed_source_sha256": "f23e3556cf4217d716c6f13a7371e82f4e8ddcefb937353028d743785aaf15b5"
+}

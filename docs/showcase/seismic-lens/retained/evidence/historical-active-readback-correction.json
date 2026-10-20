@@ -1,0 +1,105 @@
+{
+  "schema": "d015-active-image-readback-correction-v1",
+  "at_utc": "2026-10-04T07:33:00Z",
+  "status": "POST_RUN_EXPLICIT_NESTED_RESPONSE_AUDIT_PASS_HELPER_CORRECTION_PENDING",
+  "scope": "Existing actual native responses, not a new native run. The original generic helper could compare None values because it did not descend into context.image. Its comparison is not credited as valid evidence. Explicit parsing now verifies the six recorded positive integer IDs and paired state.",
+  "trace_sha256": "73c67e73963d63d0d8e9ffa19ad5f074965ef484e90c926e5a5c7acc8e5c8ca9",
+  "pairs": [
+    {
+      "before": {
+        "request_line": 56,
+        "terminal_line": 58,
+        "response_entry_sha256": "3ca091fac21c7ef86dc1c5048ff1aa20c4f5b9f667cbc83eb7d7fdcee168c89e",
+        "image_id": 1,
+        "dimensions": [
+          2560,
+          1600
+        ],
+        "dirty": false,
+        "selected_layer_ids": [
+          4
+        ]
+      },
+      "after": {
+        "request_line": 79,
+        "terminal_line": 81,
+        "response_entry_sha256": "2fc2b8c956a6e1e514dbfe87f400e39652124363857954684803555a2ae57276",
+        "image_id": 1,
+        "dimensions": [
+          2560,
+          1600
+        ],
+        "dirty": false,
+        "selected_layer_ids": [
+          4
+        ]
+      },
+      "explicit_nested_integer_and_state_equal": true
+    },
+    {
+      "before": {
+        "request_line": 140,
+        "terminal_line": 142,
+        "response_entry_sha256": "b3819968e60ab7f1cbc3beea93df9a5a09f0e62f07925aba532cbf557a9bbbde",
+        "image_id": 8,
+        "dimensions": [
+          7,
+          13
+        ],
+        "dirty": true,
+        "selected_layer_ids": [
+          309
+        ]
+      },
+      "after": {
+        "request_line": 153,
+        "terminal_line": 155,
+        "response_entry_sha256": "95414d89a529d225c5e6de3c2ae7c296d24c259c001dcaed5f90d50711b1d0ea",
+        "image_id": 8,
+        "dimensions": [
+          7,
+          13
+        ],
+        "dirty": true,
+        "selected_layer_ids": [
+          309
+        ]
+      },
+      "explicit_nested_integer_and_state_equal": true
+    },
+    {
+      "before": {
+        "request_line": 162,
+        "terminal_line": 164,
+        "response_entry_sha256": "3bbb49a1746aea44fb26aeaa57b3d7bdad11f62fcf8e60b0f2590ee37fb5e58b",
+        "image_id": 8,
+        "dimensions": [
+          7,
+          13
+        ],
+        "dirty": true,
+        "selected_layer_ids": [
+          309
+        ]
+      },
+      "after": {
+        "request_line": 175,
+        "terminal_line": 177,
+        "response_entry_sha256": "1037480e124af9c148c966dd5cfd99764dbe1f384cd7bcaa9d72011f05863db6",
+        "image_id": 8,
+        "dimensions": [
+          7,
+          13
+        ],
+        "dirty": true,
+        "selected_layer_ids": [
+          309
+        ]
+      },
+      "explicit_nested_integer_and_state_equal": true
+    }
+  ],
+  "source_or_artifact_changed": false,
+  "adapter_runtime_fix_required_for_this_finding": false,
+  "public_reproduction_helper_needs_corrected_check": true
+}

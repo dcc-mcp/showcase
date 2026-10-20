@@ -1,0 +1,50 @@
+{
+  "source_identity": {
+    "repository": "https://github.com/dcc-mcp/dcc-mcp-paraview",
+    "pull_request": "https://github.com/dcc-mcp/dcc-mcp-paraview/pull/4",
+    "pr_head": "7380637bb06f75d997379673a63f6eede6714686",
+    "merge_and_current_main_at_fetch": "4c4939b1a6ee6785d86f74461ea97ff2a34815a9",
+    "current_tree": "75f8aa79611f97bdbee4c6337f713dbb7e6c7049",
+    "prior_native_source_commit": "9b9de65d64f77356eaad4709535c79c49a852eb4",
+    "prior_native_source_tree": "48e2e134ab458cafda7ec1ebfed2277bce2fba25"
+  },
+  "build": {
+    "python": "3.12.14",
+    "hatchling": "1.32.4",
+    "SOURCE_DATE_EPOCH": 1791093173,
+    "PYTHONHASHSEED": "0",
+    "wheel_filename": "dcc_mcp_paraview-0.1.0-py3-none-any.whl",
+    "wheel_bytes": 41124,
+    "wheel_sha256": "167b1c73796746853c348a03e4918a96eed4a24b7328587217bad0a45b516077",
+    "two_current_builds_byte_identical": true
+  },
+  "checks": {
+    "full_source_inventory": "85 files each;84 unchanged;one external documentation line differs",
+    "all_24_source_wheel_and_existing_native_install_package_files_match": true,
+    "all_29_wheel_entry_contents_match_native_wheel": true,
+    "old_epoch_build_reproduces_native_wheel_exactly": true,
+    "recipe_ast_equal_except_three_identity_constants": true,
+    "recipe_compiles": true,
+    "current_host_free_suite_rerun": false,
+    "current_native_suite_rerun": false
+  },
+  "recorded_prior_public_source_checks": {
+    "source_passed": 196,
+    "wheel_passed": 196,
+    "native_graphical_deselected_each": 18,
+    "source_commit": "9b9de65d64f77356eaad4709535c79c49a852eb4",
+    "wheel_sha256": "65471d7e0c34cb5c3da21127e323becf6a585b9f4f6be4777927dfb0cb89db90",
+    "prior_build_receipt_sha256": "0dd931cbe95d2789cff339f984033319f806c402bee23a8a6db5610aab4478a9"
+  },
+  "recorded_native_proof": {
+    "filename": "PUBLIC_NATIVE_PROOF.json",
+    "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526",
+    "trace_records": 210,
+    "adapter_operations": 52,
+    "preserved_verbatim": true
+  },
+  "qualification": "The current commit and wheel were verified by file comparison and deterministic build only. Existing native evidence remains attached to its original executed identities.",
+  "fresh_wheel_installed": false,
+  "native_launched": false,
+  "published": false
+}

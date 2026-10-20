@@ -1,0 +1,29 @@
+{
+  "status": "succeeded",
+  "request_sha256": "24be665f65bd1b9c1d9d0a3e86697c15963c3f8d974b84e9f2ee8d4720550a4e",
+  "response_sha256": "24be665f65bd1b9c1d9d0a3e86697c15963c3f8d974b84e9f2ee8d4720550a4e",
+  "outputs": [
+    {
+      "path": "docs/showcase/seismic-lens/new-coarse/coarse-lens.vti",
+      "sha256": "3e0b08a942420534ff6afa4d0008a445e86d899b3d232c954232ea3449592854"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/new-coarse-section-y.png",
+      "sha256": "f51d94a8102344b3c15b8e369a67cbd25e6913dd1bbd03bd7f22c6ebc336f99c"
+    }
+  ],
+  "scope": "New 41x33x25 typed field and SectionY image on official Kitware ParaView5.13.2 Python3.10, hosted run39486599975. Same analytic formula and historical SectionY camera/LUT; not a replay of the old coarse PNG.",
+  "actual_run": "https://github.com/dcc-mcp/dcc-mcp-paraview/actions/runs/39486599975",
+  "executed_fixture_commit": "aa375b3bb05f19ef3fa1b857f80ef04bb1860b0c",
+  "evidence_selectors": {
+    "create_terminal": 79,
+    "slice_terminal": 110,
+    "render_terminal": 245,
+    "save_terminal": 260,
+    "reopen_terminal": 296
+  },
+  "native_state_qualification_only": {
+    "sha256": "88fa1675b0b3790972142691af1c76196f784510776fcf3ef3fc76138b7c5f76",
+    "scope": "Actually saved/reopened; original CI artifact contains hosted absolute paths and is not presented as a relocated portable state in this download."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "status": "PASS_BYTE_IDENTICAL_ISOLATED_WHEEL_REBUILD",
+  "source_snapshot_files": 67,
+  "source_snapshot_manifest_sha256": "65f97518d6657bff0878244384bf75d4a4940ac258fd4bef11b2d3de5cb3dfeb",
+  "original_wheel_sha256": "80833767f5ff1fe754bff0de67143f053f60bb5443153c21c96d678265560853",
+  "rebuilt_wheel_sha256": "80833767f5ff1fe754bff0de67143f053f60bb5443153c21c96d678265560853",
+  "wheel_bytes": 91033,
+  "wheel_archive_members": 46,
+  "changed_members": [],
+  "source_date_epoch": 1580601600,
+  "build_backend_result": {
+    "wheel": "dcc_mcp_gimp-0.4.1-py3-none-any.whl",
+    "backend": "hatchling",
+    "backend_version": "1.32.4",
+    "network_audit_hook": "all socket events rejected"
+  },
+  "build_environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "build_distributions": {
+      "hatchling": "1.32.4",
+      "packaging": "26.3",
+      "pathspec": "1.1.1",
+      "pluggy": "1.6.0",
+      "tomlkit": "0.15.1",
+      "trove-classifiers": "2026.9.21.13"
+    },
+    "copied_source_files": 67,
+    "network_used": false,
+    "frozen_runtime_modified": false
+  },
+  "source_git_checkout_required": false,
+  "network_used": false,
+  "native_launched": false,
+  "originals_modified": false,
+  "projection_schema": "d015-selected-wheel-rebuild-v1",
+  "raw_rebuild_receipt_sha256": "3c76585476838bed30dd5378413bc6d424412a8891b633f854c88ae0477f9b08",
+  "raw_build_environment_inventory_sha256": "8116fbf90acfe6ef2b82dc43d4d5aff0c502f8d2976e67e2a348661c3ca43798",
+  "raw_evidence_included": false,
+  "zlib_build_version": "1.3.2",
+  "zlib_runtime_version": "1.3.2",
+  "isolation_readback": {
+    "wheel": "dcc_mcp_gimp-0.4.1-py3-none-any.whl",
+    "all_six_build_distributions_inside_fresh_environment": true,
+    "inherited_python_path_and_home_absent": true,
+    "cache_writes_disabled": true,
+    "network_audit_hook": "all socket events rejected",
+    "build_distributions": {
+      "hatchling": "1.32.4",
+      "packaging": "26.3",
+      "pathspec": "1.1.1",
+      "pluggy": "1.6.0",
+      "tomlkit": "0.15.1",
+      "trove-classifiers": "2026.9.21.13"
+    }
+  },
+  "raw_isolation_readback_sha256": "f9784cf339f79e67d5cbf8ec0ebead04616a04aae2852b1734153669b132b288",
+  "second_isolation_checked_build_sha256": "80833767f5ff1fe754bff0de67143f053f60bb5443153c21c96d678265560853"
+}

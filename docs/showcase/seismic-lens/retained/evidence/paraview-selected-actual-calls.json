@@ -1,0 +1,854 @@
+{
+  "schema": "d015-selected-actual-paraview-current-public-calls-v1",
+  "scope": "Selected actual MCP requests and matched terminal outcomes from the current-public-source 210-record native reproduction only. This is not the separate historical149/212/213-record runs.",
+  "source_commit": "9b9de65d64f77356eaad4709535c79c49a852eb4",
+  "source_tree": "48e2e134ab458cafda7ec1ebfed2277bce2fba25",
+  "wheel_sha256": "65471d7e0c34cb5c3da21127e323becf6a585b9f4f6be4777927dfb0cb89db90",
+  "raw_trace_sha256": "b2225397ea8f12ca5f2db84c0505f3ea5f637a62137af2e75b701b63b182b11d",
+  "full_trace_records": 210,
+  "selected_adapter_operations": 52,
+  "normalization": [
+    "Task-controlled absolute argument paths become $TASK_FILES plus verified relative suffix.",
+    "Framework discovery/polling detail, endpoint/job/process identifiers and raw response payloads are omitted.",
+    "Entry digests use canonical JSON: sorted keys, compact separators and Unicode UTF8; full raw trace digest is separately retained."
+  ],
+  "calls": [
+    {
+      "trace_index_one_based": 7,
+      "tool": "inspect_pipeline",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "68f13df00bc749d2748efdcb3fa186822baa012afd4fa89520e252581b6251a3",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 8,
+      "tool": "open_dataset",
+      "arguments_with_documented_normalization": {
+        "name": "SyntheticLens",
+        "path": "data/synthetic-lens.vti"
+      },
+      "original_entry_canonical_json_sha256": "f220b3f69f8b8e5865080b8166c41c6ed8b4637dd37790ef0bf25b1bb515a938",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 11,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 12,
+      "tool": "slice_plane",
+      "arguments_with_documented_normalization": {
+        "name": "SectionX",
+        "input_name": "SyntheticLens",
+        "origin": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ]
+      },
+      "original_entry_canonical_json_sha256": "49d96a11ea18f27566ecb22ab7eacd94bf3e8bf90d72d0bdd9408a5aabb40513",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 14,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 15,
+      "tool": "slice_plane",
+      "arguments_with_documented_normalization": {
+        "name": "SectionY",
+        "input_name": "SyntheticLens",
+        "origin": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "original_entry_canonical_json_sha256": "e01ca504a8f8f7bd2df34b729f56ba0ea9e8e4111bc975f54d3b825f379cab0a",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 17,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 18,
+      "tool": "slice_plane",
+      "arguments_with_documented_normalization": {
+        "name": "SectionZ",
+        "input_name": "SyntheticLens",
+        "origin": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "original_entry_canonical_json_sha256": "f8d977cc1725a3add9af1086a4902e7a30ff0232ed152e325f29badc5818f339",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 20,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 21,
+      "tool": "contour",
+      "arguments_with_documented_normalization": {
+        "name": "Delay80",
+        "input_name": "SectionY",
+        "scalar": "SyntheticDelay_ms",
+        "values": [
+          80
+        ]
+      },
+      "original_entry_canonical_json_sha256": "93551dda53b6436ca8c8c7228e07c4a541cdef3761f6e39db52911f9344f9b70",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 23,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 24,
+      "tool": "contour",
+      "arguments_with_documented_normalization": {
+        "name": "Delay150",
+        "input_name": "SectionY",
+        "scalar": "SyntheticDelay_ms",
+        "values": [
+          150
+        ]
+      },
+      "original_entry_canonical_json_sha256": "608d3ce66259ba5cb40006aec701cdb1be93672aa103627319786240b37f8e5c",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 26,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 27,
+      "tool": "render_preview",
+      "arguments_with_documented_normalization": {
+        "name": "SectionX",
+        "path": "panel-x.png",
+        "width": 720,
+        "height": 480,
+        "camera_position": [
+          -5.8,
+          -0.1,
+          1.2
+        ],
+        "camera_target": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "camera_view_up": [
+          0,
+          0,
+          -1
+        ],
+        "camera_parallel_scale": 1.65,
+        "background": [
+          0.043137254901960784,
+          0.06274509803921569,
+          0.09019607843137255
+        ],
+        "show_scalar_bar": true,
+        "show_orientation_axes": false,
+        "ambient": 1,
+        "diffuse": 0,
+        "specular": 0,
+        "scalar": "SyntheticTime_s",
+        "color_range": [
+          0.599999977,
+          1.724
+        ],
+        "preset": "Viridis (matplotlib)",
+        "scalar_bar_title": "Time (s)",
+        "scalar_bar_position": [
+          0.85,
+          0.16
+        ],
+        "scalar_bar_length": 0.6,
+        "scalar_bar_thickness": 12,
+        "scalar_bar_title_font_size": 16,
+        "scalar_bar_label_font_size": 14
+      },
+      "original_entry_canonical_json_sha256": "979add4a2cc906474a19487401e7f8ddf93259bf88b906e9e2a79aa8b3911cdd",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 34,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 35,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "1103ed1fc76daa2c63f03dddfb9afca3fb567ce77ae6ce6ad7e090ee319a8e0c",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 36,
+      "tool": "save_state",
+      "arguments_with_documented_normalization": {
+        "path": "panel-x.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "fe7d36a51e320419f9e48a8efe82e0fb30aaa8c5a8a773d532f583ade82dca3a",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 41,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 42,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "panel-x.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "00cb008f83b899c241046b8b52a9d8af28919f253a8eca8cbca2598ec7fc59d0",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 49,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 50,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "1103ed1fc76daa2c63f03dddfb9afca3fb567ce77ae6ce6ad7e090ee319a8e0c",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 51,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "panel-x-reopened.png"
+      },
+      "original_entry_canonical_json_sha256": "5bbba8e071029aa541a634433f0ce331343769440b673c3f2aa6ea97c6d372b0",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 54,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 55,
+      "tool": "render_preview",
+      "arguments_with_documented_normalization": {
+        "name": "SectionY",
+        "path": "panel-y.png",
+        "width": 720,
+        "height": 480,
+        "camera_position": [
+          0.2,
+          5.9,
+          1.2
+        ],
+        "camera_target": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "camera_view_up": [
+          0,
+          0,
+          -1
+        ],
+        "camera_parallel_scale": 1.8,
+        "background": [
+          0.043137254901960784,
+          0.06274509803921569,
+          0.09019607843137255
+        ],
+        "show_scalar_bar": true,
+        "show_orientation_axes": false,
+        "ambient": 1,
+        "diffuse": 0,
+        "specular": 0,
+        "scalar": "SyntheticTime_s",
+        "color_range": [
+          0.599999977,
+          1.724
+        ],
+        "preset": "Viridis (matplotlib)",
+        "scalar_bar_title": "Time (s)",
+        "scalar_bar_position": [
+          0.85,
+          0.16
+        ],
+        "scalar_bar_length": 0.6,
+        "scalar_bar_thickness": 12,
+        "scalar_bar_title_font_size": 16,
+        "scalar_bar_label_font_size": 14
+      },
+      "original_entry_canonical_json_sha256": "01c7843244108f65bcb5a53459465fe72beab68b5ceba1a49d0db64074915c63",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 58,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 59,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "1a9dde37b0dc5a7c249c9af751ba9d72cd89be4125d0d5a21d29fd0195c9deb7",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 60,
+      "tool": "save_state",
+      "arguments_with_documented_normalization": {
+        "path": "panel-y.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "7c1bc8dbd23f9858b6cc0c471c7ee41b0d6327423a0c36dc486169bf4b6aa979",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 65,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 66,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "panel-y.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "9987760857a47a25beb413905e790bb8e4fa2bde4d76be08b40ff939bc5fd004",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 74,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 75,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "1a9dde37b0dc5a7c249c9af751ba9d72cd89be4125d0d5a21d29fd0195c9deb7",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 76,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "panel-y-reopened.png"
+      },
+      "original_entry_canonical_json_sha256": "ef0d705c26c047a3e0978ff62d7d605ccdcf266557eeb7aa7118666e4ef8b02b",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 78,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 79,
+      "tool": "render_preview",
+      "arguments_with_documented_normalization": {
+        "name": "SectionZ",
+        "path": "panel-z.png",
+        "width": 720,
+        "height": 480,
+        "camera_position": [
+          0.2,
+          -0.1,
+          7.2
+        ],
+        "camera_target": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "camera_view_up": [
+          0,
+          1,
+          0
+        ],
+        "camera_parallel_scale": 2.0,
+        "background": [
+          0.043137254901960784,
+          0.06274509803921569,
+          0.09019607843137255
+        ],
+        "show_scalar_bar": true,
+        "show_orientation_axes": false,
+        "ambient": 1,
+        "diffuse": 0,
+        "specular": 0,
+        "scalar": "SyntheticTime_s",
+        "color_range": [
+          0.599999977,
+          1.724
+        ],
+        "preset": "Viridis (matplotlib)",
+        "scalar_bar_title": "Time (s)",
+        "scalar_bar_position": [
+          0.85,
+          0.16
+        ],
+        "scalar_bar_length": 0.6,
+        "scalar_bar_thickness": 12,
+        "scalar_bar_title_font_size": 16,
+        "scalar_bar_label_font_size": 14
+      },
+      "original_entry_canonical_json_sha256": "3b441f8fbbc749b1d7d8e1b37e3f56ad245116df30e548be729cd2baf66fe405",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 82,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 83,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "92c77278f0b8a1a2c3b8adb3ba5d43c144f2d0f3862678fe7c8dc57c57b2ee1d",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 84,
+      "tool": "save_state",
+      "arguments_with_documented_normalization": {
+        "path": "panel-z.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "f72def52da7f59a893ed40db15f8cecc269bef62241419ed545431a712f06f95",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 88,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 89,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "panel-z.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "9bbf636f5f7a643d1c728bc87e4d92b73c45ae83ddf95b95454f1e2db9ce175a",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 97,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 98,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "92c77278f0b8a1a2c3b8adb3ba5d43c144f2d0f3862678fe7c8dc57c57b2ee1d",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 99,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "panel-z-reopened.png"
+      },
+      "original_entry_canonical_json_sha256": "cf4982c036543ed4e03293278d3d4039a9bf37387d38eb2ecf8a3a00e309b24c",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 101,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 102,
+      "tool": "render_preview",
+      "arguments_with_documented_normalization": {
+        "name": "Delay80",
+        "path": "isoline-80.png",
+        "width": 1060,
+        "height": 340,
+        "camera_position": [
+          0.2,
+          5.9,
+          1.2
+        ],
+        "camera_target": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "camera_view_up": [
+          0,
+          0,
+          -1
+        ],
+        "camera_parallel_scale": 0.5,
+        "background": [
+          0.043137254901960784,
+          0.06274509803921569,
+          0.09019607843137255
+        ],
+        "show_scalar_bar": false,
+        "show_orientation_axes": false,
+        "ambient": 1,
+        "diffuse": 0,
+        "specular": 0,
+        "solid_color": [
+          0.23137254901960785,
+          0.7686274509803922,
+          0.8588235294117647
+        ],
+        "line_width": 2.5
+      },
+      "original_entry_canonical_json_sha256": "ed4b251188465d79fa4bb26d0361c403d77431807435c69c2932e2ba51aff4da",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 105,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 106,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "3b42279fbea567338403085c44d110736e07733c479a99529e9f0b2bde8c4e1d",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 107,
+      "tool": "save_state",
+      "arguments_with_documented_normalization": {
+        "path": "isoline-80.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "ee003a302f2164608a6828feb88e2b2d1fb01676b29f706a360d4794980e4d47",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 111,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 112,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "isoline-80.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "746880f636d776d19714260b0058ba67fee8d4edc98426c0d234731d2ed50aee",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 121,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 122,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "3b42279fbea567338403085c44d110736e07733c479a99529e9f0b2bde8c4e1d",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 123,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "isoline-80-reopened.png"
+      },
+      "original_entry_canonical_json_sha256": "4c99aba8eb7a63245fdd4a3a6cc1c89cf194f3355c49ab12efb0897bd412ef6b",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 125,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 126,
+      "tool": "render_preview",
+      "arguments_with_documented_normalization": {
+        "name": "Delay150",
+        "path": "isoline-150.png",
+        "width": 1060,
+        "height": 340,
+        "camera_position": [
+          0.2,
+          5.9,
+          1.2
+        ],
+        "camera_target": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "camera_view_up": [
+          0,
+          0,
+          -1
+        ],
+        "camera_parallel_scale": 0.5,
+        "background": [
+          0.043137254901960784,
+          0.06274509803921569,
+          0.09019607843137255
+        ],
+        "show_scalar_bar": false,
+        "show_orientation_axes": false,
+        "ambient": 1,
+        "diffuse": 0,
+        "specular": 0,
+        "solid_color": [
+          0.9098039215686274,
+          0.7098039215686275,
+          0.26666666666666666
+        ],
+        "line_width": 2.5
+      },
+      "original_entry_canonical_json_sha256": "a71e81b085a9b2df1e670fdce7b6fc536ccf84878c7d64081bd7def6aff06ec7",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 129,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 130,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "84c7fc7fac78a3e1142bdd5f3afff0c4eefd6b45b724f2504814b33e9ba9c773",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 131,
+      "tool": "save_state",
+      "arguments_with_documented_normalization": {
+        "path": "isoline-150.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "ea0783768a7471d6f6a40ec5220671a93b3aa231ee28d642896e676f4b0134c2",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 135,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 136,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "isoline-150.pvsm",
+        "data_directory": "data"
+      },
+      "original_entry_canonical_json_sha256": "4dca5bc79802ceb470b2a3951ab5050f4e349c0ada48e69c5a74db3ca3fe9003",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 145,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 146,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "84c7fc7fac78a3e1142bdd5f3afff0c4eefd6b45b724f2504814b33e9ba9c773",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 147,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "isoline-150-reopened.png"
+      },
+      "original_entry_canonical_json_sha256": "7ca3039342744da7aff92f2465d4a3ef74f45de8b0a62dc53bccad42cb4c5129",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 149,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 150,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/panel-x.pvsm",
+        "data_directory": "relocated-native/data"
+      },
+      "original_entry_canonical_json_sha256": "9b6f94054a4997183b73f387c79c13fa74e2f020b8c4bd0859403785addd562c",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 157,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 158,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "1103ed1fc76daa2c63f03dddfb9afca3fb567ce77ae6ce6ad7e090ee319a8e0c",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 159,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/panel-x-relocated.png"
+      },
+      "original_entry_canonical_json_sha256": "b8a20b3c68eb7283886b9b42484b7ee652f43006ff00f69c3b7e9a6ed848ad29",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 161,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 162,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/panel-y.pvsm",
+        "data_directory": "relocated-native/data"
+      },
+      "original_entry_canonical_json_sha256": "37138f154a17af81590ef850c7c7eb0d68f283578ba35353d7f3628b05e75dce",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 168,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 169,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "1a9dde37b0dc5a7c249c9af751ba9d72cd89be4125d0d5a21d29fd0195c9deb7",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 170,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/panel-y-relocated.png"
+      },
+      "original_entry_canonical_json_sha256": "5301f12dc19f35dd5ed5f5ebd1598fceb0267e884c64a2f2e912f1e507236543",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 172,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 173,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/panel-z.pvsm",
+        "data_directory": "relocated-native/data"
+      },
+      "original_entry_canonical_json_sha256": "017ed43b25514d7fecc05f3a951135b41f7500583dac5d7809fa0577b52d62a8",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 180,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 181,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "92c77278f0b8a1a2c3b8adb3ba5d43c144f2d0f3862678fe7c8dc57c57b2ee1d",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 182,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/panel-z-relocated.png"
+      },
+      "original_entry_canonical_json_sha256": "9c1289417b2d90174d4b984231c7dc27e4385a1ec4a685a857d8ded17c143368",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 184,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 185,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/isoline-80.pvsm",
+        "data_directory": "relocated-native/data"
+      },
+      "original_entry_canonical_json_sha256": "ebd469abf4c818122f384f8f1d9ed50373b6f7e7846b2c4e80958003c44c1b82",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 193,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 194,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "3b42279fbea567338403085c44d110736e07733c479a99529e9f0b2bde8c4e1d",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 195,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/isoline-80-relocated.png"
+      },
+      "original_entry_canonical_json_sha256": "9b4b2ac49bdc0bde04c665da2d38653f4b60d348215c411424bd3aad79a15b4d",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 197,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 198,
+      "tool": "reopen_state",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/isoline-150.pvsm",
+        "data_directory": "relocated-native/data"
+      },
+      "original_entry_canonical_json_sha256": "3c5f63ffc3da9a88428632c0679247b35b2001e340266b0d6c6d4ecba5687b24",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 206,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    },
+    {
+      "trace_index_one_based": 207,
+      "tool": "inspect_presentation",
+      "arguments_with_documented_normalization": {},
+      "original_entry_canonical_json_sha256": "84c7fc7fac78a3e1142bdd5f3afff0c4eefd6b45b724f2504814b33e9ba9c773",
+      "initial_isError": false,
+      "terminal_status": "synchronous_success",
+      "result_success": true
+    },
+    {
+      "trace_index_one_based": 208,
+      "tool": "capture_current_view",
+      "arguments_with_documented_normalization": {
+        "path": "relocated-native/isoline-150-relocated.png"
+      },
+      "original_entry_canonical_json_sha256": "245780e58fbf1c06f859c14bec2f89fd365587f46b5dae269a688f88b2eb0434",
+      "initial_isError": false,
+      "terminal_trace_index_one_based": 210,
+      "terminal_status": "completed",
+      "terminal_result_success": true
+    }
+  ]
+}

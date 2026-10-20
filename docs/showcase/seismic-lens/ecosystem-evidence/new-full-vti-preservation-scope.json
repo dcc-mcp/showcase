@@ -1,0 +1,42 @@
+{
+  "representation": "actual recorded values with only declared task-root path substitution; not reconstructed calls",
+  "original_file_sha256": "feb6642741d6e2dbe751da4661315ed212478e26ce44ea570c12dfb1767607c5",
+  "normalization": "task-root, qualification-root, hosted-temp, candidate-checkout, hosted-toolchain, system-bin, system-lib, temporary-root, agent-home and owned-loopback placeholders; raw hashes remain hashes of original bytes",
+  "records": {
+    "copied_exact": [
+      {
+        "path": "events.jsonl",
+        "sha256": "29dbba205270d4c7b48c06329bf51d353ec2531c5647a137a52d09e68eb151d6",
+        "bytes": 391023
+      },
+      {
+        "path": "summary.json",
+        "sha256": "38703fc9cbb3c47f639d8c878d163e28eee0c17e5a15dc7317783b69298dc6d3",
+        "bytes": 1747
+      },
+      {
+        "path": "workspace/analytic.vti",
+        "sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d",
+        "bytes": 13302837
+      },
+      {
+        "path": "workspace/volume.vti",
+        "sha256": "1200e5b9584674645fe66473e1883b2ee2708801de09015e2be2b7c09b80e669",
+        "bytes": 4159
+      },
+      {
+        "path": "workspace/small.pvsm",
+        "sha256": "33226a49e5b9aa0c4d963cd596e8626c336855f331f24a23a3d61ee74cbb720e",
+        "bytes": 12706
+      }
+    ],
+    "registry_scope": {
+      "instance_id": null,
+      "instance_id_at_start_also_null": true,
+      "registry_json_files_after_stop": [],
+      "limitation": "Registry was not assigned a public instance ID in this direct-loopback embedded runtime; do not describe a registration removal as observed. Process group/listener/dispatcher closure is independently recorded."
+    },
+    "full_job": "b8fb0144-a2e4-45f8-9062-bcda99f4a842",
+    "original_input_relation": "New actual MCP execution on 2026-10-20 reconstructs bytes identical to historical input; not proof of original generation route or a backdated call."
+  }
+}

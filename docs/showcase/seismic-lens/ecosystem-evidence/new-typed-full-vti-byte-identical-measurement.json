@@ -1,0 +1,20 @@
+{
+  "status": "succeeded",
+  "request_sha256": "18bd6175068076237dcc2020e6c3c71c8f55a7f4265225e1edb2899f5404b83f",
+  "response_sha256": "18bd6175068076237dcc2020e6c3c71c8f55a7f4265225e1edb2899f5404b83f",
+  "outputs": [
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/data/synthetic-lens.vti",
+      "sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d"
+    }
+  ],
+  "scope": "New actual 2026-10-20 typed generation at all 510705 points. Exact bytes equal retained historical input. This does NOT authenticate the unknown historical input-generation route.",
+  "actual_job_id": "b8fb0144-a2e4-45f8-9062-bcda99f4a842",
+  "evidence_selectors": {
+    "initial_sequence": 115,
+    "terminal_sequence": 423,
+    "all_value_sequence": 424,
+    "artifact_sequence": 425
+  },
+  "temporal_boundary": "New execution precedes the current reproducible data graph, not the historical panel production in wall time."
+}

@@ -1,0 +1,11 @@
+{
+  "representation": "actual recorded values with only declared task-root path substitution; not reconstructed calls",
+  "original_file_sha256": "57334bdde7226ba38c4fe822d72cb2a63dd00926f29fdd49119f9480e179dd2a",
+  "normalization": "task-root, qualification-root, hosted-temp, candidate-checkout, hosted-toolchain, system-bin, system-lib, temporary-root, agent-home and owned-loopback placeholders; raw hashes remain hashes of original bytes",
+  "records": {
+    "inputs.json": "5476a026878fa630c63a55d321001320ecb88ae2d62c1b2594eeac5542423f5a",
+    "extract_in_host.py": "f23e3556cf4217d716c6f13a7371e82f4e8ddcefb937353028d743785aaf15b5",
+    "run_extraction.py": "efb0179769eca4971e4e0e7ed15e465f6e2449c8ed9204f46fb3b58473396c4f",
+    "../../chengdu-historical-nine-ecosystem/ensure_broker_tools.py": "da1efba71a4c1239b642fb04651599b96c3bc696c1474c394b39db0929bc6d7d"
+  }
+}

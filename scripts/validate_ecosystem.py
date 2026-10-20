@@ -125,7 +125,7 @@ def delivery_packages(root, packages, produced, source_paths):
     if not isinstance(packages, list):
         raise ValueError('delivery_packages must be an array')
     outputs = set()
-    support_suffixes = {'.md', '.txt', '.json', '.yaml', '.yml', '.py', '.ps1'}
+    support_suffixes = {'.md', '.txt', '.json', '.yaml', '.yml', '.py', '.ps1', '.patch'}
     for package in packages:
         archive = ref(root, package.get('archive'))
         if archive in outputs or archive in produced or archive in source_paths:
@@ -193,6 +193,104 @@ def delivery_packages(root, packages, produced, source_paths):
                     raise ValueError('ZIP member bytes differ from retained source')
         outputs.add(archive)
     return outputs
+
+
+def native_download_paths(root, case, all_cases=None):
+    """Original production members may retain resolution, but never as page media."""
+    root = Path(root)
+    path = root / 'docs/showcase' / case['slug'] / 'ecosystem-production.json'
+    if not path.exists():
+        return set()
+    record = json.loads(path.read_text())
+    produced = {ref(root, output) for stage in record.get('stages', [])
+                for output in stage.get('outputs', [])}
+    sources = {ref(root, item) for item in record.get('external_sources', [])}
+    packages = record.get('delivery_packages', [])
+    delivery_packages(root, packages, produced, sources)
+    candidates = {ref(root, item['source']) for package in packages
+                  for item in package['members'] if item.get('kind') == 'production'}
+    displayed = set()
+    selected_cases = all_cases if all_cases is not None else [case]
+    downloads = list(record.get('downloads', []))
+    for selected in selected_cases:
+        if not isinstance(selected, dict) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', str(selected.get('slug', ''))):
+            continue
+        other = root / 'docs/showcase' / selected['slug'] / 'ecosystem-production.json'
+        if other.exists() and other != path:
+            downloads.extend(json.loads(other.read_text()).get('downloads', []))
+
+    def media(value):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                if key in ('src', 'poster', 'image') and isinstance(child, str):
+                    displayed.add(child)
+                    for download in downloads:
+                        if download.get('url') == child:
+                            displayed.add(ref(root, download['local']))
+                else:
+                    media(child)
+        elif isinstance(value, list):
+            for child in value:
+                media(child)
+
+    for selected in selected_cases:
+        if isinstance(selected, dict):
+            media([selected.get('cover', {})] + selected.get('results', []) + selected.get('steps', []))
+    return {p for p in candidates - displayed if Path(p).suffix.lower() == '.png'}
+
+
+def verification_captures(root, captures, produced, source_paths):
+    """Hash-bound observation records, never a route for creating/editing artwork.
+
+    Structure alone cannot authenticate continuous capture. The independently
+    reviewed capture evidence remains mandatory and is bound to the graph.
+    """
+    if not isinstance(captures, list):
+        raise ValueError('verification_captures must be an array')
+    outputs, evidence, dependencies = set(), set(), {}
+    for capture in captures:
+        artifact = ref(root, capture.get('artifact'))
+        if artifact in outputs or artifact in produced or artifact in source_paths:
+            raise ValueError('capture has duplicate or conflicting production classification')
+        if Path(artifact).suffix.lower() not in {'.mp4', '.webm', '.mkv'}:
+            raise ValueError('verification capture must be a native-window video, not an artwork or poster')
+        if capture.get('kind') != 'continuous-native-window-observation' or not capture.get('route'):
+            raise ValueError('capture needs an explicit native-window observation route')
+        limits = capture.get('constraints', {})
+        expected = {'task_owned_window': True, 'continuous': True, 'cuts': False,
+                    'retiming': False, 'compositing': False, 'synthetic_ui': False}
+        if limits != expected:
+            raise ValueError('edited/composited/synthetic media is production, not verification capture')
+        sources = capture.get('source_artifacts', [])
+        if not isinstance(sources, list) or not sources:
+            raise ValueError('capture must identify the actual native artwork being inspected')
+        for source in sources:
+            if ref(root, source) not in produced and source['path'] not in source_paths:
+                raise ValueError('capture source lacks real production or upstream provenance')
+        for field in ('native_actions_evidence', 'capture_evidence', 'decode_evidence'):
+            path = ref(root, capture.get(field))
+            if Path(path).suffix.lower() not in REPORT_EXTENSIONS:
+                raise ValueError('capture evidence must be a report, not a production asset')
+            evidence.add(path)
+        measurement = json.loads(local(root, capture['decode_evidence']['path']).read_text())
+        if (measurement.get('artifact') != capture['artifact'] or
+                measurement.get('full_decode') is not True or
+                not isinstance(measurement.get('decoded_frames'), int) or
+                isinstance(measurement.get('decoded_frames'), bool) or
+                measurement['decoded_frames'] <= 0):
+            raise ValueError('capture requires exact artifact-bound full decode measurements')
+        outputs.add(artifact)
+        dependencies[artifact] = [source['path'] for source in sources]
+    return outputs, evidence, dependencies
+
+
+def review_graph_fields(record):
+    graph = {key: record.get(key) for key in ('schema', 'case_slug', 'phases', 'stages',
+        'external_sources', 'downloads', 'reports', 'external_links', 'delivery_packages')}
+    # Preserve already reviewed graph hashes when this new classification is absent.
+    if 'verification_captures' in record:
+        graph['verification_captures'] = record['verification_captures']
+    return graph
 
 
 def validate_case(root, case):
@@ -272,10 +370,16 @@ def validate_case(root, case):
                 source_paths.add(p)
             except (ValueError, OSError) as exc: errors.append('external_sources: ' + str(exc))
         packaged = delivery_packages(root, record.get('delivery_packages', []), produced, source_paths)
+        captures, capture_evidence, capture_dependencies = verification_captures(root, record.get('verification_captures', []), produced, source_paths)
+        required_evidence.update(capture_evidence)
         for stage_index, value in inputs:
             try:
                 p = ref(root, value)
-                need(p in produced or p in source_paths, 'input lacks producer or external-source provenance: ' + p)
+                need(p in produced or p in source_paths or p in captures, 'input lacks producer or external-source provenance: ' + p)
+                if p in captures:
+                    for dependency in capture_dependencies[p]:
+                        if dependency in producer_index:
+                            need(producer_index[dependency] < stage_index, 'capture source must precede consuming production stage (cycle/forward reference): ' + dependency)
                 if p in producer_index:
                     need(producer_index[p] < stage_index, 'input must precede consuming stage (cycle/forward reference): ' + p)
             except (ValueError, OSError) as exc: errors.append('inputs: ' + str(exc))
@@ -298,14 +402,16 @@ def validate_case(root, case):
                 review_path = ref(root, review.get('evidence'))
                 required_evidence.add(review_path)
                 receipt = json.loads(local(root, review_path).read_text())
-                graph = {key: record.get(key) for key in ('schema', 'case_slug', 'phases', 'stages', 'external_sources', 'downloads', 'reports', 'external_links', 'delivery_packages')}
+                graph = review_graph_fields(record)
                 graph['selected_outputs'] = [{'path': p, 'sha256': digest(local(root, p))} for p in sorted(required - required_evidence - report_paths)]
                 need(receipt.get('production_graph_sha256') == canonical_hash(graph), 'review is stale for this production graph')
                 need(receipt.get('raw_calls_verified') is True and receipt.get('all_production_steps_covered') is True,
                      'review has not verified calls and whole production scope')
+                if captures:
+                    need(receipt.get('verification_captures_verified') is True, 'continuous native-window observation needs independent capture review')
                 need(bool(receipt.get('reviewer')) and bool(receipt.get('reviewed_at')), 'review identity/date missing')
             except (ValueError, OSError, TypeError, AttributeError) as exc: errors.append('review.evidence: ' + str(exc))
-        for path in sorted(required - required_evidence - report_paths - produced.keys() - source_paths - packaged):
+        for path in sorted(required - required_evidence - report_paths - produced.keys() - source_paths - packaged - captures):
             errors.append('selected output lacks ecosystem producer: ' + path)
         manifest_path = 'docs/showcase/' + case['slug'] + '/manifest.json'
         manifest = json.loads(local(root, manifest_path).read_text())

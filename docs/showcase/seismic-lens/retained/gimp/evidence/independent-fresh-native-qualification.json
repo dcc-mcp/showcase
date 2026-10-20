@@ -1,0 +1,123 @@
+{
+  "schema": "gimp-fresh-native-reproduction-selection-v1",
+  "status": "PASS_FRESH_PUBLIC_RECIPE_AND_COPIED_XCF_REFERENCE_REPRODUCTION",
+  "scope": "Two fresh native GIMP cases for one synthetic 2560x1600 editable composition",
+  "tested_software": {
+    "GIMP": "3.0.4",
+    "Core_server_CLI": "0.20.41",
+    "adapter": "0.4.1 candidate",
+    "MCP_SDK": "1.30.0",
+    "httpx": "0.28.1"
+  },
+  "identity": {
+    "candidate_commit": "5602aa523d58a2c685966a06c90b71279a0bcfab",
+    "candidate_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+    "plugin_sha256": "927d2d262f4aafccac23dec3b4f37d5d68900434eefdce374fb4b759de10444c",
+    "wheel_sha256": "80833767f5ff1fe754bff0de67143f053f60bb5443153c21c96d678265560853",
+    "public_recipe_sha256": "696d60c54b212af6d29e93308985693bcfd94107b236fcacd6a99d0ddf7c6267",
+    "copied_xcf_helper_sha256": "331e00b97e2d5d55ae18ebf9ffd6253b88a06b56a8e3b85d596ac25ca0b5a6e7",
+    "tested_package_manifest_sha256": "b2ad55faf41b12be8658c160ad3d8d5a005d397ab956a08b1dad71eaafba60d0",
+    "plan_sha256": "b8676a720f902831f26b627c21e73a7103e2094d44d5242c71d62e2c54006b72"
+  },
+  "transport": {
+    "both_fresh_runs": "Ordinary environment-aware HTTPX transport",
+    "AsyncClient_trust_env_default": true,
+    "explicit_trust_env_override": false,
+    "verification_basis": "Reviewed frozen helper source, installed HTTPX 0.28.1 signature, bound native run receipts",
+    "proxy_routing_or_hardware_attestation_claimed": false
+  },
+  "public_recipe_case": {
+    "planned_operations_completed": 45,
+    "trace_records": 202,
+    "editable_text_layers": 19,
+    "panel_groups": 5,
+    "total_layer_nodes": 30,
+    "all_five_panel_RGBA_checks_passed": true,
+    "saved_and_reopened_parasite_byte_checks_passed": true,
+    "canonical_tree_preserved": true,
+    "full_save_reopen_RGBA_preserved": true,
+    "normal_owned_cleanup": {
+      "method": "Owned SIGTERM with bounded observation",
+      "passed": true,
+      "host_returncode": 1,
+      "plugin_terminal_status": "zombie counted as exited",
+      "listeners_closed": true,
+      "server_stopped": true,
+      "force_kill_used": false
+    }
+  },
+  "copied_xcf_case": {
+    "trace_records": 42,
+    "copied_native_XCF_bytes_equal": true,
+    "canonical_tree_equal_reference": true,
+    "complete_load_time_metadata_equal_reference": true,
+    "all_RGBA_equal_reference": true,
+    "matched_text_parasites": 19,
+    "declared_original_locations_held_aside": 2,
+    "original_source_files_restored_with_exact_hashes": 6,
+    "global_absence_of_other_copies_claimed": false,
+    "normal_owned_cleanup": {
+      "method": "Owned SIGTERM with bounded observation",
+      "passed": true,
+      "host_returncode": 1,
+      "plugin_terminal_status": "zombie counted as exited",
+      "listeners_closed": true,
+      "server_stopped": true,
+      "force_kill_used": false
+    }
+  },
+  "independent_reference_comparison": {
+    "method": "Independent Pillow RGBA decoding, exact XCF byte comparison, saved-XCF parasite parsing and actual native metadata readback",
+    "dimensions": [
+      2560,
+      1600
+    ],
+    "RGBA_sha256": "463c1e2a47d4188e124039f1f2b9909386b659c89d5193f1b35ab11ebae47ba5",
+    "native_XCF_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+    "public_recipe_XCF_byte_equal_reference": true,
+    "copied_XCF_byte_equal_reference": true,
+    "exact_saved_text_parasites": 19,
+    "high_bit_Unicode_text_parasites": 3,
+    "complete_reopened_native_metadata_equal_reference": true,
+    "public_recipe_master_reopened_and_copied_exports_RGBA_equal_reference": true,
+    "PNG_file_byte_equality_claimed": false,
+    "PNG_file_hashes": {
+      "packaged_reference": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594",
+      "public_recipe_master": "92762fd6ba1587573b3859cb1ddd719133c5774b5489ab61d824e9c218b27760",
+      "public_recipe_reopened": "d18a0d3a73ae9e5e31af500d4e26495eb9aa5f015cf8dab356af6ac2b85cf8e2",
+      "copied_xcf_export": "3b6d6fcc577e3226c34ca0a22606f6241801dde33287b600693acd1f6d134376"
+    }
+  },
+  "metadata_privacy_scope": {
+    "summary": "Returned metadata category scans detect 19 font-hash fields; the other checked categories have zero matches",
+    "raw_metadata_included": false,
+    "raw_logs_or_process_identifiers_included": false,
+    "universal_or_binary_privacy_inferred_from_category_counts": false
+  },
+  "evidence_integrity": {
+    "public_recipe": {
+      "qualification.json": "85ab9b8bb5372d4232ab6d884b04973fd78c22efb84ac635ee998e54f6316187",
+      "mcp-trace.jsonl": "8698ef9c54ba153a1bc516661bbe3b3a79a5edbe2be101a8539f5572059701e9",
+      "cleanup.json": "dbe710ba0934e27a0f265d7989edcb6d20891a970e2c7c26caeae1fab756b8f0",
+      "native-parasite-byte-checks.json": "bed6b1e51e439dee6d2f147c8c2cf5136f3a04df61912ce5722ef35bd8272f73"
+    },
+    "copied_xcf": {
+      "qualification.json": "f7a1cb666f1ebcd3534429ddf6c6b3b9cb8d12328cd5a375339daf8e25769c94",
+      "mcp-trace.jsonl": "4c333064c3c601c90bab05b55f99d431056309685da9ee9d3951ff88407fcef5",
+      "cleanup.json": "72a6eaed00bf501869f7ae8eab4dbcabd327afcbf53a2faf4aca8002e3e29093",
+      "native-parasite-byte-checks.json": "ae4297cf9fe686006d4cb6b65b50edac5ccef7f6cc83db89b697d4f943a7816c"
+    },
+    "originals_restoration_receipt_sha256": "292c4eaf611b226dfe5a50b170ad38fa0c171b46a1b6d3ede6a4c24e4d3f9aaf",
+    "independent_reference_comparison_sha256": "e36ba639756241ebfb7110fe4be5df43dc2468b9614935d881a93ac16c448a0e"
+  },
+  "limits": {
+    "native_cases": 2,
+    "qualification_basis": "These two fresh environment-aware-transport runs",
+    "trusted_isolated_environment_assumed": true,
+    "all_GIMP_capabilities_qualified": false,
+    "skipped_tests_qualified": false,
+    "arbitrary_non_UTF8_native_payloads_qualified": false,
+    "physical_model_validation_claimed": false,
+    "visual_or_artwork_publication_acceptance_inferred": false
+  }
+}

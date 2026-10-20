@@ -2262,7 +2262,8 @@
       "subtitle": "ParaView → GIMP · 从数值切片到可编辑科学展板",
       "software": [
         "ParaView",
-        "GIMP"
+        "GIMP",
+        "Blender"
       ],
       "capabilities": [
         "科学可视化",
@@ -2311,6 +2312,10 @@
         {
           "label": "新增视频模型记录",
           "value": "实际模型与推理强度均未知；请求配置为 gpt-6-astra / ultra，但未取得可审计的运行配置回执。仅记录本轮视频，不补写历史模型。"
+        },
+        {
+          "label": "2026-10-20 有界补充制作",
+          "value": "ParaView 5.13.2 / Core 0.20.41；typed ImageData candidate source 9100157，实际 wheel f11071f0 绑定。完整网格新生成与历史字节相同；新低采样图在 hosted Python 3.10 验收。Blender 4.5.13 / adapter 0.2.22 仅抽取观察视频海报，不作科学图渲染。"
         }
       ],
       "tools": [
@@ -2342,11 +2347,11 @@
       "steps": [
         {
           "title": "从同一个解析函数出发",
-          "description": "Python 只生成确定性的输入数据；后续切面、等值线和原生视图全部通过 DCC MCP 完成。公式与示意单位直接保留在展板中。"
+          "description": "2026-10-20 通过有界 typed ParaView MCP 新生成完整解析场，510,705 点双字段与历史 VTI 字节完全相同；这是新执行，不追认原生成脚本的未知路由。原五图与 GIMP 展板复用已核实真实调用。"
         },
         {
           "title": "保持数值尺度可比较",
-          "description": "三张切面使用同一色域；两条等值线使用同一相机比例。输入网格从粗采样细化，保留实际早期图供比较。"
+          "description": "三张原切面使用同一色域，两条原等值线使用同一相机比例。另附新制作的 41×33×25 低采样纵切对照，不冒称旧粗网格图重放。"
         },
         {
           "title": "把版式保留为原生图层",
@@ -2356,7 +2361,7 @@
       "results": [
         {
           "src": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
-          "poster": "docs/showcase/seismic-lens/seismic-lens-native-poster.png",
+          "poster": "docs/showcase/seismic-lens/native-observation-poster.png",
           "alt": "八秒 GIMP 原生图层演示",
           "caption": "2026-10-12 新增：连续录制真实 GIMP 窗口，通过 typed MCP 依次显示原母版的五组切片与等值线。8.0 秒、1178 × 814、15 fps、120 帧，有意静音。不是重新绘制，也不是地震场动画。"
         },
@@ -2371,9 +2376,9 @@
           "caption": "原生 ParaView 输入图，720×480；与2560×1600 XCF 母版中的导入面板像素一致。网站1600×1000总览经过原生缩放。"
         },
         {
-          "src": "docs/showcase/seismic-lens/earlier-coarse-section-y.png",
-          "alt": "早期粗网格纵向切片",
-          "caption": "实际较早 ParaView 输出，保留原始像素；不是完整展板的同构图比较"
+          "src": "docs/showcase/seismic-lens/new-coarse-section-y.png",
+          "alt": "新制作的低采样纵向切片对照",
+          "caption": "2026-10-20 新 typed ParaView MCP 制作：41×33×25 解析场、SectionY 与 Viridis 色标，720×480。33,825 点双字段完整数值核验；不是历史粗网格 PNG 重放。"
         }
       ],
       "checks": [
@@ -2418,8 +2423,9 @@
         "当前环境未暴露 CameraClippingRange；验收覆盖实际可读属性与图像像素",
         "MCP 重开限于本会话保存的可信状态；没有放开任意外部 PVSM 导入",
         "开发增量与实际测试版本逐项记录，不冒称 PyPI 已发行能力",
-        "静态科学展板另附八秒真实 GIMP 图层演示；不声称重做 ParaView 计算、原始创作全过程或跨机器像素一致。",
-        "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内"
+        "八秒真实 GIMP 图层演示只记录独立验收观察，不是原始创作全过程或新 ParaView 计算；新增 typed 数据/低采样图另行记录，不声称跨机器像素一致。",
+        "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内",
+        "历史输入生成脚本的执行路由未知；新 typed 全网格与历史输入字节一致不构成历史执行证明。新低采样 PVSM 含 hosted 路径，仅保留在资格 artifact，不声称其可直接迁移；下载提供 VTI 与精确 typed 配方。"
       ],
       "resources": [
         {
@@ -2427,8 +2433,8 @@
           "url": "docs/showcase/seismic-lens/README.md"
         },
         {
-          "label": "完整可编辑工程与复现包 · 5.96 MB",
-          "url": "docs/showcase/seismic-lens/editable-source.zip"
+          "label": "可编辑工程、真实证据与新低采样对照 · 6.72 MB",
+          "url": "docs/showcase/seismic-lens/seismic-lens-ecosystem-2026-10-20.zip"
         },
         {
           "label": "ParaView 实际调用节选",
@@ -2588,6 +2594,11 @@
           "version": "新增真实软件视频 2026-10-12",
           "date": "2026-10-12",
           "change": "增加八秒连续 GIMP 图层演示、单独的本轮环境和请求模型记录；原图、完整下载及历史未知模型保持不变。影片权利保留，无新增许可授权。"
+        },
+        {
+          "version": "真实生态输入与低采样对照",
+          "date": "2026-10-20",
+          "change": "补充新 typed 全网格 byte-identical 生产、新 41×33×25 切片与官方 Blender MCP 海报抽帧。原五图、GIMP 工程和连续观察视频不变；历史未核 coarse 保留在不可变历史，不随新包冒认来源。"
         }
       ]
     },

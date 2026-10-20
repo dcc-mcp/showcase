@@ -1,0 +1,69 @@
+{
+  "schema": "d015-verified-public-gimp-source-v1",
+  "status": "PASS_PUBLIC_SOURCE_FULL_TREE_RUNTIME_AND_WHEEL_EQUIVALENCE",
+  "repository_url": "https://github.com/dcc-mcp/dcc-mcp-gimp",
+  "pull_request_url": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/14",
+  "public_pr_head": "e24f1a8e3fa4b418b7fa27e7a33dee45ccca5cde",
+  "public_merge_commit": "ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "public_merge_url": "https://github.com/dcc-mcp/dcc-mcp-gimp/commit/ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "public_source_url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "public_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+  "historical_qualified_commit": "5602aa523d58a2c685966a06c90b71279a0bcfab",
+  "historical_qualified_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+  "all_three_commit_trees_equal": true,
+  "diff_from_qualified_candidate": {
+    "runtime_files": [],
+    "test_files": [],
+    "documentation_and_other_files": [],
+    "complete_tree_diff_empty": true
+  },
+  "PR_change_from_public_base": {
+    "base_commit": "e0a981442c8b1ed43b5f82a997f314f37aecf123",
+    "runtime_files": [
+      "bridge/gimp-plugin/dcc_mcp_gimp.py"
+    ],
+    "test_files": [
+      "tests/test_metadata_parasites.py"
+    ],
+    "documentation_and_other_files": [],
+    "git_stat": "bridge/gimp-plugin/dcc_mcp_gimp.py |  9 +++-\n tests/test_metadata_parasites.py   | 85 ++++++++++++++++++++++++++++++++++++++\n 2 files changed, 93 insertions(+), 1 deletion(-)"
+  },
+  "verified_source_files": 67,
+  "verified_source_manifest_sha256": "65f97518d6657bff0878244384bf75d4a4940ac258fd4bef11b2d3de5cb3dfeb",
+  "verified_source_wheel_installed_adapter_files": 41,
+  "plugin_sha256": "927d2d262f4aafccac23dec3b4f37d5d68900434eefdce374fb4b759de10444c",
+  "rebuilt_wheel_sha256": "80833767f5ff1fe754bff0de67143f053f60bb5443153c21c96d678265560853",
+  "rebuilt_wheel_bytes": 91033,
+  "qualified_wheel_byte_identical": true,
+  "wheel_build_environment": {
+    "wheel": "dcc_mcp_gimp-0.4.1-py3-none-any.whl",
+    "all_six_build_distributions_inside_fresh_environment": true,
+    "inherited_python_path_and_home_absent": true,
+    "cache_writes_disabled": true,
+    "network_audit_hook": "all socket events rejected",
+    "build_distributions": {
+      "hatchling": "1.32.4",
+      "packaging": "26.3",
+      "pathspec": "1.1.1",
+      "pluggy": "1.6.0",
+      "tomlkit": "0.15.1",
+      "trove-classifiers": "2026.9.21.13"
+    }
+  },
+  "source_date_epoch": 1580601600,
+  "network_during_build": false,
+  "raw_public_pr_readback_sha256": "23dfedff6824f5a71ef32c074a2dc88e2405433318395b3f59b60addcfca7ab0",
+  "raw_public_merge_readback_sha256": "7a81e5e216cc70b41d33c8296ecfa9044611cb06fa9f7e3e6ac5b62cc967089a",
+  "publisher_reported_wheel_sha256": "0c851dda96e69a6e35803c39093a121b371332f447e276f5a22b745283e3b85b",
+  "publisher_wheel_scope": "The PR reports a separately packaged wheel with different archive bytes. This reproduction recipe requires its documented deterministic build with the qualified 80833767... wheel hash; the publisher wheel is not silently admitted.",
+  "native_acceptance_basis": {
+    "public_full_recipe_events": 202,
+    "copied_xcf_events": 42,
+    "tested_v1_manifest_sha256": "b2ad55faf41b12be8658c160ad3d8d5a005d397ab956a08b1dad71eaafba60d0",
+    "helper_and_recipe_code_unchanged": true,
+    "changed_executable_bytes_qualified": false,
+    "new_v3_native_run_claimed": false
+  },
+  "frozen_v1_v2_modified": false,
+  "raw_paths_PIDs_or_private_logs_included": false
+}
