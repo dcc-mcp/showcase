@@ -55,6 +55,19 @@ def validate_response(body, witness_bytes, plan):
     for row in witness['assets']:
         if row.get('import_error') != 0 or not row.get('source_graph') or not row.get('baseline_graph'):
             raise ValueError('Native import or graph inspection incomplete')
+        for graph_key in ('source_graph', 'baseline_graph'):
+            meshes = [node for node in row[graph_key] if node.get('surfaces')]
+            if not meshes:
+                raise ValueError('Graph lacks actual mesh surface inspection')
+            for node in meshes:
+                if node.get('class') not in {'ImporterMeshInstance3D', 'MeshInstance3D'}:
+                    raise ValueError('Unexpected inspected mesh class')
+                for surface in node['surfaces']:
+                    channels = surface.get('channels', [])
+                    if (type(surface.get('vertex_count')) is not int or surface['vertex_count'] <= 0
+                            or len(channels) != 13 or [c.get('channel') for c in channels] != list(range(13))
+                            or any(not re.fullmatch('[0-9a-f]{64}', c.get('stored_variant_sha256', '')) for c in channels)):
+                        raise ValueError('Incomplete mesh array witness')
         actual.add((row['source'], row['baseline'], row['source_sha256'], row['baseline_sha256']))
     if len(actual) != 4 or actual != expected:
         raise ValueError('Witness sources differ from fixed production inputs')

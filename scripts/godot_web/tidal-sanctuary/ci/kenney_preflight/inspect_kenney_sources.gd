@@ -33,9 +33,18 @@ func inspect_node(node: Node, path: String, parent_transform: Transform3D, rows:
   row["transform"] = matrix(node.transform)
   world = parent_transform * node.transform
   row["computed_world_transform"] = matrix(world)
- if node is MeshInstance3D:
-  var mesh := node.mesh as ArrayMesh
-  assert(mesh != null and mesh.get_surface_count() <= 16)
+ if node is MeshInstance3D or node is ImporterMeshInstance3D:
+  var mesh: ArrayMesh
+  if node is ImporterMeshInstance3D:
+   assert(node.mesh != null)
+   # Official cached ArrayMesh representation of this detached importer resource.
+   # No node replacement, asset save, mesh edit, or source-file mutation.
+   mesh = node.mesh.get_mesh()
+   row["mesh_representation"] = "ImporterMesh.get_mesh ArrayMesh"
+  else:
+   mesh = node.mesh as ArrayMesh
+   row["mesh_representation"] = "stored ArrayMesh"
+  assert(mesh != null and mesh.get_surface_count() > 0 and mesh.get_surface_count() <= 16)
   var surfaces: Array = []
   for index in range(mesh.get_surface_count()):
    var arrays := mesh.surface_get_arrays(index)
@@ -50,9 +59,9 @@ func inspect_node(node: Node, path: String, parent_transform: Transform3D, rows:
                     "vertex_count":arrays[Mesh.ARRAY_VERTEX].size(),
                     "index_count":arrays[Mesh.ARRAY_INDEX].size() if arrays[Mesh.ARRAY_INDEX] != null else 0,
                     "channels":channels,"source_material":material_info(mesh.surface_get_material(index)),
-                    "effective_material":material_info(node.get_active_material(index))})
+                    "effective_material":material_info(node.get_active_material(index) if node is MeshInstance3D else mesh.surface_get_material(index))})
   row["surfaces"] = surfaces
-  row["material_override"] = material_info(node.material_override)
+  row["material_override"] = material_info(node.material_override) if node is MeshInstance3D else {"applicable":false}
  rows.append(row)
  for child in node.get_children():
   inspect_node(child,path+"/"+str(child.name),world,rows)

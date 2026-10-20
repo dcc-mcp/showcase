@@ -2,12 +2,21 @@ import copy,hashlib,json,unittest
 from preflight_contract import audit_baseline,validate_response
 
 class PreflightTests(unittest.TestCase):
+ def mesh(self):
+  return {'class':'MeshInstance3D','surfaces':[{'vertex_count':3,'channels':[{'channel':i,'stored_variant_sha256':'a'*64} for i in range(13)]}]}
+ def test_missing_source_mesh_witness_rejected(self):
+  for mode in ['absent','channels']:
+   plan,witness,data,body=self.fixture()
+   if mode=='absent':witness['assets'][0]['source_graph']=[{'class':'ImporterMeshInstance3D'}]
+   else:witness['assets'][0]['source_graph'][0]['surfaces'][0]['channels']=[]
+   data=json.dumps(witness).encode();body['context']['result'].update(witness_bytes=len(data),witness_sha256=hashlib.sha256(data).hexdigest())
+   with self.assertRaises(ValueError):validate_response(body,data,plan)
  def fixture(self):
   plan={'assets':[{'source_file':str(i)+'.glb','output':str(i)+'.tscn','source_sha256':str(i)*64,'baseline_sha256':'f'*64} for i in range(4)]}
   witness={'schema':1,'nodes':24,'vertices':100,'engine':{'major':4,'minor':6,'patch':3},
            'scene_before':{'edited_scene_root':None,'open_scenes':[]},'scene_after':{'edited_scene_root':None,'open_scenes':[]},
            'assets':[{'source':a['source_file'],'baseline':a['output'],'source_sha256':a['source_sha256'],
-                      'baseline_sha256':a['baseline_sha256'],'import_error':0,'source_graph':[{}],'baseline_graph':[{}]} for a in plan['assets']]}
+                      'baseline_sha256':a['baseline_sha256'],'import_error':0,'source_graph':[self.mesh()],'baseline_graph':[self.mesh()]} for a in plan['assets']]}
   data=json.dumps(witness).encode();body={'context':{'executed':True,'result':{'schema':1,'inspected':4,'converted':False,'saved_native_asset':False,'witness_path':'res://kenney-preflight/preflight-witness.json','witness_bytes':len(data),'witness_sha256':hashlib.sha256(data).hexdigest()}}}
   return plan,witness,data,body
  def test_exact_bounded_native_result(self):
