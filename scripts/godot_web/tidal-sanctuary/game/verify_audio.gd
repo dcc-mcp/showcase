@@ -26,7 +26,61 @@ func event_count(event: String) -> int:
 			count += 1
 	return count
 
+# Pure state fixtures exercise the actual Web history consumer on a detached
+# node. They are not real focus events or audible/browser acceptance evidence.
+func history_record(sequence: int, active: bool) -> Dictionary:
+	return {"sequence": sequence, "active": active, "observed_ms": float(sequence * 10),
+		"reason": "window_focus" if active else "window_blur", "native_focus_active": true,
+		"window_focused": active, "document_visible": true}
+
+func history_state(records: Array, latest: int, dropped: int = 0) -> Dictionary:
+	# Match the production JSON bridge, including JSON numeric decoding.
+	return JSON.parse_string(JSON.stringify({"focus_history": records, "focus_sequence": latest,
+		"focus_history_dropped_through": dropped, "focus_history_overflow": dropped > 0}))
+
+func check_web_focus_history() -> void:
+	var bridge = TideAudio.new()
+	var delivered: Array[Dictionary] = []
+	bridge.receipt_emitted.connect(func(receipt: Dictionary):
+		delivered.append(receipt.duplicate(true))
+		if receipt.event == "focus":
+			bridge._sync_web_focus_history())
+	bridge._web_state = history_state([], 0)
+	bridge._sync_web_focus_history()
+	check(delivered.is_empty(), "Web history does not invent baseline focus")
+	bridge._web_state = history_state([history_record(1, false), history_record(2, true)], 2)
+	bridge._sync_web_focus_history()
+	check(delivered.size() == 2 and not delivered[0].active and delivered[1].active,
+		"Web history preserves out/in between polls without duplicate reentrant receipts")
+	check(bridge._focus_active and not delivered[0].focus_active and delivered[1].focus_active,
+		"historical receipts never replay global focus or audio actions")
+	check(delivered[0].observed_ms == 10.0 and delivered[1].transition_sequence == 2,
+		"Web history receipts retain observed time and sequence")
+	bridge._sync_web_focus_history()
+	check(delivered.size() == 2, "repeated Web history poll emits nothing twice")
+	bridge._web_state = history_state([history_record(3, false)], 3, 2)
+	bridge._sync_web_focus_history()
+	check(delivered.size() == 3 and bridge._web_focus_sequence == 3,
+		"already consumed history may age out without an unread gap")
+	bridge.free()
+	for invalid in [history_state([history_record(2, true)], 2, 1),
+		history_state([history_record(1, false), history_record(3, true)], 3),
+		history_state([history_record(1, false)], 2)]:
+		var broken = TideAudio.new()
+		var errors: Array[Dictionary] = []
+		broken.receipt_emitted.connect(func(receipt: Dictionary): errors.append(receipt.duplicate(true)))
+		broken._web_state = invalid
+		broken._sync_web_focus_history()
+		check(errors.size() == 1 and errors[0].event == "error" and broken._web_focus_sequence == 0,
+			"unread overflow/gap/incomplete history fails before any focus receipt")
+		broken._web_state = history_state([history_record(1, false), history_record(2, true)], 2)
+		broken._sync_web_focus_history()
+		check(errors.size() == 1 and broken._web_state.status == "error",
+			"history failure remains sticky and cannot later qualify focus acceptance")
+		broken.free()
+
 func run() -> void:
+	check_web_focus_history()
 	var audio = TideAudio.new()
 	audio.name = "AudioMaster"
 	audio.receipt_emitted.connect(capture)

@@ -264,6 +264,19 @@ def source_end(source, fallback):
     return min([value for value in values if value is not None] or [fallback])
 
 
+def first_loop_cutoff_ready(snapshot, music):
+    """Wait for the frozen PCM window, never its later delivery-time clock."""
+    context = audio_graph(snapshot)
+    clocks = [item.get("time") for item in snapshot.get("pcm_cutoff", {}).get("context_times", [])
+              if item.get("id") == context["id"]]
+    if (len(clocks) != 1 or type(clocks[0]) not in (int, float) or not math.isfinite(clocks[0])
+            or clocks[0] < 0 or clocks[0] > context["context_time"]):
+        raise ValueError("First loop wait lacks a genuine frozen PCM cutoff")
+    # Keep the original first-boundary + 1.2 s observation margin. The full
+    # unchanged validator still checks exact decoded seam, sources and PCM.
+    return bool(music) and clocks[0] >= music[0]["scheduled_start"] + 33.2
+
+
 def validate_loop_boundary(snapshot, music, receipts):
     context = audio_graph(snapshot)
     first = music[0]
@@ -927,8 +940,7 @@ def main():
                         if time.monotonic() >= first_loop_deadline:
                             raise TimeoutError("First loop observation exceeded its bounded deadline")
                         first_music = [item for item in first_loop_audio["starts"] if item["name"] == "music"]
-                        first_clock = audio_graph(first_loop_audio)["context_time"]
-                        if first_music and first_clock >= first_music[0]["scheduled_start"] + 33.2:
+                        if first_loop_cutoff_ready(first_loop_audio, first_music):
                             break
                         if time.monotonic() >= first_loop_deadline:
                             raise TimeoutError("Actual audio clock did not reach its first loop seam")

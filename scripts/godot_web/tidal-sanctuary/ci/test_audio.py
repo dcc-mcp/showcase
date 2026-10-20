@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 import tempfile
 from test_audio_thread import meter_fixture, timed_fixture
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window, audio_prepared,
-                             real_button, configure_native_viewport, verify_native_viewport, validate_audio_baseline, validate_audio_sources,
+                             first_loop_cutoff_ready, real_button, configure_native_viewport, verify_native_viewport, validate_audio_baseline, validate_audio_sources,
                              validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
                              browser_executable, validate_browser_arguments, validate_audio_closed, validate_focus_suspension)
 
@@ -422,6 +422,21 @@ class AudioAcceptanceFixtures(unittest.TestCase):
             mark["context_times"][0]["time"] = clock
             with self.subTest(clock=clock), self.assertRaises(ValueError):
                 validate_audio_sources(value, receipts, actions)
+
+    def test_first_loop_wait_uses_frozen_cutoff_not_late_delivery_clock(self):
+        value = snapshot(.01,"running",36.591746031746034)
+        music = [{"scheduled_start":2.4700226757369617}]
+        value["pcm_cutoff"]={"context_times":[{"id":1,"time":31.71265306122449}]}
+        self.assertFalse(first_loop_cutoff_ready(value,music))
+        value["pcm_cutoff"]["context_times"][0]["time"]=35.8
+        self.assertTrue(first_loop_cutoff_ready(value,music))
+        for clock in (None, True, float("nan"), -1, 40):
+            value["pcm_cutoff"]["context_times"][0]["time"]=clock
+            with self.subTest(clock=clock),self.assertRaises(ValueError):
+                first_loop_cutoff_ready(value,music)
+        source=Path(__file__).with_name("capture_browser.py").read_text()
+        self.assertIn('first_loop_deadline = time.monotonic() + 45',source)
+        self.assertIn('if first_loop_cutoff_ready(first_loop_audio, first_music):',source)
 
     def test_harness_checks_original_seam_before_first_mute_input(self):
         source = Path(__file__).with_name("capture_browser.py").read_text()

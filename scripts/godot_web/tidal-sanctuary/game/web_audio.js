@@ -6,6 +6,7 @@
   'use strict';
   const NAMES = ['music', 'chart_read', 'key_pickup', 'pearl_pickup', 'beacon_resolve'];
   const DURATIONS = [32, .72, 1.05, 1.65, 4.8];
+  const FOCUS_HISTORY_LIMIT = 64;
   const gainForDB = db => Math.pow(10, db / 20);
 
   function createWebAudio(host) {
@@ -22,6 +23,8 @@
     let disposed = false, generation = 0, abort = null;
     let focusWork = Promise.resolve(), focusRevision = 0;
     let initAttempt = null, startAttempt = null;
+    const focusHistory = [];
+    let focusSequence = 0, focusDroppedThrough = 0;
 
     function deadline(operation, milliseconds, message, expire = () => {}) {
       let timer;
@@ -253,28 +256,34 @@
     }
     function setFocusActive(value) {
       nativeFocus = !!value;
-      return updateFocus();
+      return updateFocus('native_focus');
     }
-    function updateFocus() {
+    function updateFocus(reason) {
       const effective = nativeFocus && windowFocused && documentVisible;
       if (focusActive === effective) return focusWork;
       focusActive = effective;
+      // Retain observed changes even while a hidden tab stops Godot frames.
+      // This is transition evidence, not proof that async suspension completed.
+      focusHistory.push(Object.freeze({sequence: ++focusSequence, active: effective,
+        observed_ms: host.performance ? host.performance.now() : null, reason,
+        native_focus_active: nativeFocus, window_focused: windowFocused, document_visible: documentVisible}));
+      if (focusHistory.length > FOCUS_HISTORY_LIMIT) focusDroppedThrough = focusHistory.shift().sequence;
       applyMute();
       return reconcileFocus();
     }
     function onWindowFocus() {
       windowFocused = true;
       documentVisible = !document || document.visibilityState === 'visible';
-      updateFocus();
+      updateFocus('window_focus');
     }
     function onWindowBlur() {
       windowFocused = false;
-      updateFocus();
+      updateFocus('window_blur');
     }
     function onVisibilityChange() {
       documentVisible = document.visibilityState === 'visible';
       if (typeof document.hasFocus === 'function') windowFocused = document.hasFocus();
-      updateFocus();
+      updateFocus('visibility_change');
     }
     // Canvas focus notifications alone do not cover switching tabs or windows.
     // These are ordinary production DOM listeners, never dispatched by the game.
@@ -314,6 +323,8 @@
       const cueAlive = !!cue && context.currentTime < cueEnd && !disposed;
       return JSON.stringify({backend: 'web_audio', status, ready: ready(), error,
         started, start_pending: startPending, start_count: startCount, trigger,
+        focus_sequence: focusSequence, focus_history: focusHistory.map(item => ({...item})),
+        focus_history_dropped_through: focusDroppedThrough, focus_history_overflow: focusDroppedThrough > 0,
         muted, focus_active: focusActive, cue_counts: cueCounts.slice(),
         native_focus_active: nativeFocus, window_focused: windowFocused, document_visible: documentVisible,
         music_playing: !!music && running, cue_playing: cueAlive && running,

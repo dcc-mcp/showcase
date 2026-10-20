@@ -38,6 +38,8 @@ var _cue_counts: Array[int] = [0, 0, 0, 0]
 var _web: JavaScriptObject
 var _web_setup_attempted := false
 var _web_trigger := ""
+var _web_focus_sequence := 0
+var _web_focus_history_error := ""
 var _web_state: Dictionary = {
 	"backend": "web_audio", "status": "idle", "ready": false, "error": "",
 	"started": false, "start_pending": false, "start_count": 0,
@@ -162,14 +164,72 @@ func _sync_web_state() -> void:
 		_web_state.error = "Invalid Web audio bridge state"
 		return
 	_web_state = decoded
-	var effective_focus := bool(_web_state.get("focus_active", false))
-	if _focus_active != effective_focus:
-		_focus_active = effective_focus
-		_emit_receipt("focus", {"trigger": "focus_in" if effective_focus else "focus_out", "active": effective_focus})
+	_focus_active = bool(_web_state.get("focus_active", false))
+	_sync_web_focus_history()
 	if bool(_web_state.get("started", false)) and not _started:
 		_started = true
 		_start_count = int(_web_state.start_count)
 		_emit_receipt("start", {"trigger": str(_web_state.get("trigger", _web_trigger)), "start_count": _start_count})
+
+## Consume only recorded effective transitions, never infer intermediate states.
+## Hidden browser tabs can pause _process for an entire focus-out/in cycle.
+func _sync_web_focus_history() -> void:
+	if not _web_focus_history_error.is_empty():
+		_web_state.status = "error"
+		_web_state.error = _web_focus_history_error
+		return
+	var history: Variant = _web_state.get("focus_history")
+	var latest: Variant = _web_state.get("focus_sequence")
+	var dropped: Variant = _web_state.get("focus_history_dropped_through")
+	var overflow: Variant = _web_state.get("focus_history_overflow")
+	if not history is Array or not _valid_focus_sequence(latest) or not _valid_focus_sequence(dropped):
+		_fail_web_focus_history("Invalid Web focus transition history")
+		return
+	if not overflow is bool or overflow != (int(dropped) > 0):
+		_fail_web_focus_history("Invalid Web focus history overflow marker")
+		return
+	if int(latest) < _web_focus_sequence or int(dropped) > _web_focus_sequence or int(dropped) > int(latest) or history.size() > 64:
+		_fail_web_focus_history("Web focus transition history overflow or sequence gap")
+		return
+	var pending: Array[Dictionary] = []
+	var expected := int(dropped) + 1
+	var previous_ms := -1.0
+	for item in history:
+		if not item is Dictionary or not _valid_focus_sequence(item.get("sequence")):
+			_fail_web_focus_history("Invalid Web focus transition record")
+			return
+		var observed: Variant = item.get("observed_ms")
+		if int(item.sequence) != expected or not item.get("active") is bool or not (observed is float or observed is int):
+			_fail_web_focus_history("Invalid Web focus transition order or values")
+			return
+		if not is_finite(float(observed)) or float(observed) < previous_ms or float(observed) < 0:
+			_fail_web_focus_history("Invalid Web focus transition timestamp")
+			return
+		previous_ms = float(observed)
+		expected += 1
+		if int(item.sequence) > _web_focus_sequence:
+			pending.append(item)
+	if expected - 1 != int(latest):
+		_fail_web_focus_history("Web focus transition history is incomplete")
+		return
+	# Advance before emitting signals so a reentrant state read cannot duplicate.
+	_web_focus_sequence = int(latest)
+	for item in pending:
+		_emit_receipt("focus", {"trigger": "focus_in" if item.active else "focus_out", "active": item.active,
+			"transition_sequence": item.sequence, "observed_ms": item.observed_ms,
+			"transition_source": "web_audio_effective_focus", "transition_reason": item.get("reason", ""),
+			"native_focus_active": item.get("native_focus_active"), "window_focused": item.get("window_focused"),
+			"document_visible": item.get("document_visible"),
+			"observation_scope": "recorded effective focus transition; delivered on Godot polling"}, bool(item.active))
+
+func _valid_focus_sequence(value: Variant) -> bool:
+	return (value is int or value is float) and is_finite(float(value)) and float(value) >= 0 and float(value) <= 9007199254740991.0 and float(value) == floor(float(value))
+
+func _fail_web_focus_history(message: String) -> void:
+	_web_focus_history_error = message
+	_web_state.status = "error"
+	_web_state.error = message
+	_emit_receipt("error", {"trigger": "focus_history", "error": message})
 
 ## Call directly from a real Begin click, key, or touch; never from load/demo.
 ## A muted Begin is still the sole logical start. Unmute does not restart it.
@@ -310,14 +370,15 @@ func get_state() -> Dictionary:
 		"music_loop": (_music.stream as AudioStreamOggVorbis).loop,
 	}
 
-func _emit_receipt(event: String, details: Dictionary) -> void:
+func _emit_receipt(event: String, details: Dictionary, observed_focus: Variant = null) -> void:
+	var receipt_focus := _focus_active if observed_focus == null else bool(observed_focus)
 	var receipt := {
 		"schema": 1,
 		"event": event,
 		"started": _started,
 		"muted": _muted,
-		"focus_active": _focus_active,
-		"voice_intent": "paused" if not _focus_active else (
+		"focus_active": receipt_focus,
+		"voice_intent": "paused" if not receipt_focus else (
 			"muted" if _muted else ("music" if _started else "silent")),
 	}
 	receipt.merge(details)

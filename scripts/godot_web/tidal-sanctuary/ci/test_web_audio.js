@@ -88,7 +88,7 @@ function fixture({visible = true, focused = true} = {}) {
       this.state = 'closed';
     }
   }
-  const host = {AudioContext: Context, AbortController,
+  const host = {AudioContext: Context, AbortController, performance: {now: () => wall},
     document,
     addEventListener: (name, callback) => add(windowListeners, name, callback),
     removeEventListener: (name, callback) => remove(windowListeners, name, callback),
@@ -488,4 +488,69 @@ test('hidden initialization and same-time visibility changes preserve the termin
   f.audio.setMuted(false); await f.events.visibility('hidden');
   assert.equal(master.gain.value, 0); master.gain.renderStepEvents(); assert.equal(master.gain.value, 0);
   assert.equal(f.calls.resume, 0); assert.equal(f.calls.starts.length, 0);
+});
+
+test('focus history retains a complete out/in cycle between Godot polls without inventing baseline', async () => {
+  const f = fixture();
+  assert.deepEqual(f.state().focus_history, []);
+  assert.equal(f.state().focus_sequence, 0);
+  await f.audio.initialize(URLS); await f.begin();
+  await f.elapse(10); await f.events.window('blur');
+  await f.events.visibility('hidden'); // Same effective false, not a second event.
+  await f.elapse(20); await f.events.visibility('visible');
+  await f.events.window('focus');
+  const state = f.state();
+  assert.deepEqual(state.focus_history.map(x => [x.sequence, x.active, x.observed_ms]),
+    [[1, false, 10], [2, true, 30]]);
+  assert.deepEqual(state.focus_history.map(x => x.reason), ['window_blur', 'window_focus']);
+  assert.equal(state.focus_history[0].window_focused, false);
+  assert.equal(state.focus_sequence, 2);
+  assert.equal(state.focus_active, true);
+  assert.equal(f.calls.starts.length, 1);
+  assert.equal(f.context().state, 'running');
+});
+
+test('focus history repeated reads are stable and exported values cannot mutate retained evidence', async () => {
+  const f = fixture();
+  await f.events.window('blur'); await f.events.window('focus');
+  const original = f.state();
+  const read = f.state();
+  read.focus_history[0].active = true; read.focus_history.push({sequence: 999});
+  assert.deepEqual(f.state(), original);
+  assert.deepEqual(f.state().focus_history.map(x => x.sequence), [1, 2]);
+  // A consumer cursor has no new IDs on repeated reads. Production GDScript
+  // validates the sequence then advances its cursor before emitting signals.
+  const cursor = original.focus_sequence;
+  assert.deepEqual(f.state().focus_history.filter(x => x.sequence > cursor), []);
+});
+
+test('focus history is bounded and explicitly identifies lost oldest transitions', async () => {
+  const f = fixture();
+  for (let i = 0; i < 66; i++) await f.audio.setFocusActive(i % 2 === 1);
+  const state = f.state();
+  assert.equal(state.focus_history.length, 64);
+  assert.equal(state.focus_history_overflow, true);
+  assert.equal(state.focus_history_dropped_through, 2);
+  assert.equal(state.focus_sequence, 66);
+  assert.equal(state.focus_history[0].sequence, 3);
+  assert.equal(state.focus_history.at(-1).sequence, 66);
+  // An unread consumer at zero must reject the gap. A consumer already at 2
+  // can consume all remaining records without pretending any loss occurred.
+  assert(state.focus_history_dropped_through > 0);
+  assert.equal(state.focus_history_dropped_through > 2, false);
+});
+
+test('focus history records only effective changes and respects native and DOM intent', async () => {
+  const f = fixture({visible: false, focused: false});
+  assert.deepEqual(f.state().focus_history, []);
+  await f.audio.setFocusActive(false);
+  await f.events.window('blur'); await f.events.visibility('hidden');
+  await f.events.visibility('visible'); await f.events.window('focus');
+  assert.deepEqual(f.state().focus_history, []); // Native false still dominates.
+  await f.audio.setFocusActive(true);
+  await f.audio.setFocusActive(true);
+  const state = f.state();
+  assert.deepEqual(state.focus_history.map(x => [x.sequence, x.active, x.reason]), [[1, true, 'native_focus']]);
+  assert.equal(state.focus_history_overflow, false);
+  assert.equal(f.calls.construct, 0); // Observation adds no audio side effect.
 });
