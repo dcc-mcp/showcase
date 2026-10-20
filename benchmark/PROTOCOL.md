@@ -63,3 +63,15 @@ The current GLBs are Orbital Loom's historical artifact and Dawnkeep's original
 and third-party game assets. Historical native-only exports are not eligible by
 renaming them. Dawnkeep MCP rebuild acceptance is separate ongoing work. This
 change neither rerenders nor modifies assets, production claims or licenses.
+
+## Isolated genuine-asset browser check
+
+The viewer CI separately reads the original MCP-rebuilt Ember tower from
+[Draft PR #48](https://github.com/dcc-mcp/showcase/pull/48), pinned to commit
+`0523c285ddc66d14a5ff370be704a853c7695141` and GLB SHA-256
+`3f6c60b807ff91d7c842caf1d10b898e02ecfeb0b111e6571574f3bd88a05b37`.
+Its original Dawnkeep all-rights-reserved notice is retained. The asset is not
+copied into this PR or the production site. CI tests its browser representation
+only, separately from the synthetic control fixture. Neither test accepts the
+whole case, renders new DCC artwork, validates benchmark scoring, or opens the
+production allowlist. Package stage evidence remains in that separate PR.
