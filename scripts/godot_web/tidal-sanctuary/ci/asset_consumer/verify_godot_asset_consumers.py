@@ -140,6 +140,9 @@ try:
     for name,clip,game_swim in [('explorer','Idle',False),('explorer','Walk',False),('explorer','Swim',False),('explorer','Swim',True),*[(n,None,False) for n in names[1:]]]:
         a=bounds['old/'+name];b=bounds['new/'+name];height=max(a['size'][1],b['size'][1]);width=max(a['size'][0],b['size'][0]);spacing=width*.65
         size=max(height*1.4,(width+2*spacing)/ (640/360)*1.25);center=min(a['position'][1],b['position'][1])+height*.5
+        if clip:
+            # Fixed generous comparison framing; rest mesh AABBs are not skinned bounds.
+            spacing=0.7;size=2.0;center=0.6
         label=name+('-'+clip.lower() if clip else '')+('-game-wrapper' if game_swim else '');scene=f'res://previews/{label}.tscn';output=f'res://previews/{label}.png'
         args={'output':scene,'paths':[f'res://assets/old/{name}.glb',f'res://assets/new/{name}.glb'],'spacing':spacing,'size':size,'height':center}
         if clip:args.update(clip=clip,time=.25,game_swim=game_swim)
