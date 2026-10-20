@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "repo": "dcc-mcp/showcase",
+  "run_id": 39515704533,
+  "head_sha": "7de0ffd794a7deefb4cca66ebb62041708a6584b",
+  "artifact_name": "tidal-kenney-conversion-7de0ffd794a7deefb4cca66ebb62041708a6584b-39515704533-1",
+  "artifact_subdirectory": "_temp/kenney-conversion-39515704533-1",
+  "original_freeze_sha256": "a61e81604974a9f21fd0c176df81ddfcf1fcd73198fba4dfb2b7a711eb430c65",
+  "files": {
+    "conversion-result.json": {
+      "sha256": "b7256e925daf829b4ff2af283b480e2e0812c19d9b258c278a11413dbd16be6b",
+      "bytes": 1243
+    },
+    "convert-launch.json": {
+      "sha256": "467eaf8f5d34f70a310163e02cfcb423f971531526af36bdbba8b76cd74b1946",
+      "bytes": 784
+    },
+    "convert-wait.json": {
+      "sha256": "ea93c7d10e9d1fc6749260b4a621731fb2bd8f0d2e1dccfc08ba2624db2f8374",
+      "bytes": 880
+    },
+    "convert/result.json": {
+      "sha256": "df4ce75f396452b029d9978230bf07c65aa8bc46aad355ff8e0e39ee68cbac1b",
+      "bytes": 582
+    },
+    "convert/inputs.json": {
+      "sha256": "dabfdcf25b20c84d199096733287368ae5932e31ef7a1d2ec344bc30d2da589a",
+      "bytes": 968
+    },
+    "convert/editor.log": {
+      "sha256": "03cac66c65e6109123d0375c7c9dc85940fe853f0956396f34090badf27471d6",
+      "bytes": 375
+    },
+    "convert/xvfb.log": {
+      "sha256": "b987a262609a3720f450ab6815ed90b2069dd47b7b012959ca19c325aebf5d55",
+      "bytes": 2348
+    },
+    "convert/rpc-015.request.json": {
+      "sha256": "8e40cdf2be0f5d2f222c3cf8882205bf11eb7345b035a67c65556e2a53a8b5f8",
+      "bytes": 7265
+    },
+    "convert/rpc-018.request.json": {
+      "sha256": "4d6089411cf1b03415d9f9cf5bfcec33e8ea7d32e91cf81158aee930a2bb6558",
+      "bytes": 13064
+    },
+    "convert/rpc-021.request.json": {
+      "sha256": "651cf47814f5abb654ac314903cfb75585228c8f032c7df8b589fed334e397dd",
+      "bytes": 386
+    },
+    "convert/rpc-021.response": {
+      "sha256": "3de3b0fe14898981d5f327f380e861cfa590ad64b6cf6ca4c1f6723831f2b619",
+      "bytes": 1089
+    },
+    "convert/rpc-021.json": {
+      "sha256": "b75ae37104920eb91283f8658162389e2abc35e5ca9254559193a8050c3a5456",
+      "bytes": 549
+    },
+    "convert/project/kenney-preflight/conversion-witness.json": {
+      "sha256": "38fbc9494c0f60601dbbd03353760d74cb4c998d888f65e9e7d6fbcb6618babf",
+      "bytes": 413742
+    },
+    "convert/project/kenney-preflight/candidates/shore-rock-a.tscn": {
+      "sha256": "723dbb958fa6d4b63ebb89abe6d6224ff24904da23cc9ea321c26b82f0cc8477",
+      "bytes": 5945
+    },
+    "convert/project/kenney-preflight/shore-rock-a.tscn.save-result.json": {
+      "sha256": "8edd4ffb9b47d474569d057cf0d61527940fef44fb644200471779a8429815ce",
+      "bytes": 231884
+    },
+    "convert/project/kenney-preflight/candidates/shore-rock-d.tscn": {
+      "sha256": "4923d4e4c232006b04551b0c9319d1841c4dc220e161fdd24fdc140246239bb0",
+      "bytes": 6726
+    },
+    "convert/project/kenney-preflight/shore-rock-d.tscn.save-result.json": {
+      "sha256": "7d20eeaa59c17b89a9fcc51bb772a0d418de146114ebc0bbd79c5ff63905ef1d",
+      "bytes": 234048
+    },
+    "convert/project/kenney-preflight/candidates/coastal-tree.tscn": {
+      "sha256": "e3c8629b4c4e4991633bb846f70f05cd0c49edaab4482df4f655913f8057df4b",
+      "bytes": 12419
+    },
+    "convert/project/kenney-preflight/coastal-tree.tscn.save-result.json": {
+      "sha256": "23ca43f14c1df841f7ec4c5f38c5218cc2bc22ea9c0752ecce53ca1e9e99ae5f",
+      "bytes": 232004
+    },
+    "convert/project/kenney-preflight/candidates/needle-pine.tscn": {
+      "sha256": "614664be897c49e0b80eab6cfcfbe956626d7617f9fd6e9b104a617604b6aae1",
+      "bytes": 9436
+    },
+    "convert/project/kenney-preflight/needle-pine.tscn.save-result.json": {
+      "sha256": "b35fffa64b250b86b570dcb209edc893b7f4d469abe091b06997099ae5170978",
+      "bytes": 232061
+    }
+  }
+}

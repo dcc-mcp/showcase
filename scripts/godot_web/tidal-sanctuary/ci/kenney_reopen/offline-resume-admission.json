@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "origin_run": 39515704533,
+  "origin_head": "7de0ffd794a7deefb4cca66ebb62041708a6584b",
+  "original_run_still_failed": true,
+  "original_witness_sha256": "38fbc9494c0f60601dbbd03353760d74cb4c998d888f65e9e7d6fbcb6618babf",
+  "candidate_sha256": {
+    "shore-rock-a.tscn": "723dbb958fa6d4b63ebb89abe6d6224ff24904da23cc9ea321c26b82f0cc8477",
+    "shore-rock-d.tscn": "4923d4e4c232006b04551b0c9319d1841c4dc220e161fdd24fdc140246239bb0",
+    "coastal-tree.tscn": "e3c8629b4c4e4991633bb846f70f05cd0c49edaab4482df4f655913f8057df4b",
+    "needle-pine.tscn": "614664be897c49e0b80eab6cfcfbe956626d7617f9fd6e9b104a617604b6aae1"
+  },
+  "admission": "existing four native saves validated; independent reopen only; no conversion replay"
+}

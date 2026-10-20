@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "status": "offline plan, no new native conversion executed",
+  "source": "https://kenney.nl/assets/nature-kit",
+  "archive": "https://kenney.nl/media/pages/assets/nature-kit/37ac38a37b-1677698939/kenney_nature-kit.zip",
+  "archive_sha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+  "license": "CC0 1.0 Universal; see KENNEY-LICENSE.txt",
+  "original_conversion_route": "unknown; subsequent asset copying/import is not production evidence",
+  "assets": [
+    {
+      "output": "shore-rock-a.tscn",
+      "source_file": "rock_largeA.glb",
+      "source_sha256": "6dd15390fd96501dcd1454765a17ba61dbbd8d47705dfe5149c8dd92b353ce25",
+      "source_bytes": 7552,
+      "baseline_sha256": "bbf17b260ab2fe337dd23fcd82f1c5672477f963a738c81866d0eb56a9b30195",
+      "baseline_bytes": 5920,
+      "wrapper_transform": [
+        0.984774,
+        0.0,
+        0.0,
+        0.0,
+        0.984774,
+        0.0,
+        0.0,
+        0.0,
+        0.984774,
+        0.0,
+        0.0492387,
+        0.0
+      ],
+      "expected_source_mesh_transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.05,
+        0.0
+      ],
+      "surface_overrides": [
+        {
+          "name": "Matte_dirt",
+          "albedo_rgba": [
+            0.38039216,
+            0.4509804,
+            0.43137255,
+            1.0
+          ],
+          "metallic": 0.0
+        },
+        {
+          "name": "Matte_grass",
+          "albedo_rgba": [
+            0.49803922,
+            0.5411765,
+            0.49019608,
+            1.0
+          ],
+          "metallic": 0.0
+        }
+      ]
+    },
+    {
+      "output": "shore-rock-d.tscn",
+      "source_file": "rock_largeD.glb",
+      "source_sha256": "e4fefd8d8d7deab42be61bd222bcd088330012f0025789146b81f25a46095ffd",
+      "source_bytes": 7992,
+      "baseline_sha256": "9d023e4508e48d886f042b8f5bedd4d2f1c4f5cbaa5b1e41c858df088b034a30",
+      "baseline_bytes": 6699,
+      "wrapper_transform": [
+        0.93564904,
+        0.0,
+        0.0,
+        0.0,
+        0.93564904,
+        0.0,
+        0.0,
+        0.0,
+        0.93564904,
+        0.0,
+        0.046782453,
+        0.0
+      ],
+      "expected_source_mesh_transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.05,
+        0.0
+      ],
+      "surface_overrides": [
+        {
+          "name": "Matte_dirt",
+          "albedo_rgba": [
+            0.38039216,
+            0.4509804,
+            0.43137255,
+            1.0
+          ],
+          "metallic": 0.0
+        },
+        {
+          "name": "Matte_grass",
+          "albedo_rgba": [
+            0.49803922,
+            0.5411765,
+            0.49019608,
+            1.0
+          ],
+          "metallic": 0.0
+        },
+        {
+          "name": "Matte__defaultmat",
+          "albedo_rgba": [
+            0.38039216,
+            0.4509804,
+            0.43137255,
+            1.0
+          ],
+          "metallic": 0.0
+        }
+      ]
+    },
+    {
+      "output": "coastal-tree.tscn",
+      "source_file": "tree_thin.glb",
+      "source_sha256": "f0f1f6861fe0446963d3be216cc628324f538bb0841bc9a8e14140313f64e2f3",
+      "source_bytes": 17200,
+      "baseline_sha256": "1fe20957567e89b855a987fa223d199ef9e35e74eed71314c00e17aa0e7fe88e",
+      "baseline_bytes": 12392,
+      "wrapper_transform": [
+        0.6710068,
+        0.0,
+        0.0,
+        0.0,
+        0.6710068,
+        0.0,
+        0.0,
+        0.0,
+        0.6710068,
+        -0.055538245,
+        0.03355034,
+        -0.03810473
+      ],
+      "expected_source_mesh_transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.05,
+        0.0
+      ],
+      "surface_overrides": [
+        {
+          "name": "Matte_leafsgreen",
+          "albedo_rgba": [
+            0.20392157,
+            0.35686275,
+            0.27058825,
+            1.0
+          ],
+          "metallic": 0.0
+        },
+        {
+          "name": "Matte_woodbark",
+          "albedo_rgba": [
+            0.38431373,
+            0.34901962,
+            0.27058825,
+            1.0
+          ],
+          "metallic": 0.0
+        }
+      ]
+    },
+    {
+      "output": "needle-pine.tscn",
+      "source_file": "tree_pineTallB_detailed.glb",
+      "source_sha256": "a26b4434e1592ec1a83f364a54688bb34c48d9521bfccbe63f0cc37b381c4696",
+      "source_bytes": 12632,
+      "baseline_sha256": "6fefd7a5758216e810df4cdd7b213a54528cdf6c4bf5894dc2394c581c2a5401",
+      "baseline_bytes": 9411,
+      "wrapper_transform": [
+        0.5169011,
+        0.0,
+        0.0,
+        0.0,
+        0.5169011,
+        0.0,
+        0.0,
+        0.0,
+        0.5169011,
+        -0.0072144005,
+        0.025845055,
+        -0.0010655922
+      ],
+      "expected_source_mesh_transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -0.05,
+        0.0
+      ],
+      "surface_overrides": [
+        {
+          "name": "Matte_leafsdark",
+          "albedo_rgba": [
+            0.20392157,
+            0.35686275,
+            0.27058825,
+            1.0
+          ],
+          "metallic": 0.0
+        },
+        {
+          "name": "Matte_woodbarkdark",
+          "albedo_rgba": [
+            0.38431373,
+            0.34901962,
+            0.27058825,
+            1.0
+          ],
+          "metallic": 0.0
+        }
+      ]
+    }
+  ]
+}

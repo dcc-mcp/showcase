@@ -1,0 +1,28 @@
+--- tidal-kenney-ecosystem/conversion_contract.py	2026-10-20 16:22:28.585198621 -0700
++++ tidal-kenney-resume/conversion_contract.py	2026-10-20 16:36:30.141013560 -0700
+@@ -16,9 +16,14 @@
+     if not 0 < len(data) <= MAX_FILE or digest(data) != expected_sha256:
+         raise ValueError('Candidate size or SHA mismatch')
+     text = data.decode('utf-8')
+-    if any(token in text for token in ('ExtResource', '[ext_resource', 'res://', 'user://', 'uid://', 'instance=', 'instance =')):
++    header,separator,body=text.partition('\n')
++    if not separator or not re.fullmatch(r'\[gd_scene (?:load_steps=\d+ )?format=4(?: uid="uid://[a-z0-9]{1,20}")?\]',header):
++        raise ValueError('Unsupported scene header')
++    # A scene-header UID identifies this saved scene. It is not an external
++    # resource reference. No URI is permitted anywhere in the body.
++    if any(token in body for token in ('ExtResource', '[ext_resource', 'res://', 'user://', 'uid://', 'instance=', 'instance =')):
+         raise ValueError('Candidate external path or instance')
+-    if re.search(r'"(?:[A-Za-z][A-Za-z0-9+.-]*://|/|[A-Za-z]:[\\/])', text):
++    if re.search(r'"(?:[A-Za-z][A-Za-z0-9+.-]*://|/|[A-Za-z]:[\\/])', body):
+         raise ValueError('Candidate external absolute path')
+     if re.search(r'^\s*(?:script|metadata/[^=]+)\s*=', text, re.M):
+         raise ValueError('Candidate script or unexpected metadata')
+@@ -28,7 +33,7 @@
+             if line != line.lstrip():
+                 raise ValueError('Noncanonical section')
+             sections.append(line)
+-    if not sections or not re.fullmatch(r'\[gd_scene (?:load_steps=\d+ )?format=4\]', sections[0]):
++    if not sections or not re.fullmatch(r'\[gd_scene (?:load_steps=\d+ )?format=4(?: uid="uid://[a-z0-9]{1,20}")?\]', sections[0]):
+         raise ValueError('Missing scene header')
+     kinds = []
+     ids = []

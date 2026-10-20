@@ -1,0 +1,41 @@
+test_assertion_failure_is_not_success (test_conversion.Contracts.test_assertion_failure_is_not_success) ... ok
+test_cancellation_at_process_acquisition (test_conversion.Contracts.test_cancellation_at_process_acquisition) ... ok
+test_candidate (test_conversion.Contracts.test_candidate) ... ok
+test_candidate_rejects_unsafe (test_conversion.Contracts.test_candidate_rejects_unsafe) ... ok
+test_closed_log_failure (test_conversion.Contracts.test_closed_log_failure) ... ok
+test_conversion (test_conversion.Contracts.test_conversion) ... ok
+test_conversion_mutations (test_conversion.Contracts.test_conversion_mutations) ... ok
+test_coordinator_cancellation_waits (test_conversion.Contracts.test_coordinator_cancellation_waits) ... ok
+test_coordinator_lifecycle (test_conversion.Contracts.test_coordinator_lifecycle) ... ok
+test_independent_reopen (test_conversion.Contracts.test_independent_reopen) ... ok
+test_lifecycle_and_routes_static (test_conversion.Contracts.test_lifecycle_and_routes_static) ... ok
+test_material_table_budget_and_integrity (test_conversion.Contracts.test_material_table_budget_and_integrity) ... ok
+test_native_acquisition_defers_cancellation (test_conversion.Contracts.test_native_acquisition_defers_cancellation) ... ok
+test_owned_exit_codes (test_conversion.Contracts.test_owned_exit_codes) ... ok
+test_sha_and_size (test_conversion.Contracts.test_sha_and_size) ... ok
+test_transform_only_tolerance (test_conversion.Contracts.test_transform_only_tolerance) ... ok
+test_before_native_audit_and_failure_retention (test_caller.Caller.test_before_native_audit_and_failure_retention) ... ok
+test_errors_empty_truncated (test_caller.Caller.test_errors_empty_truncated) ... ok
+test_exclusive_durable_request (test_caller.Caller.test_exclusive_durable_request) ... ok
+test_frozen_inputs (test_caller.Caller.test_frozen_inputs) ... ok
+test_http_error_raw_body (test_caller.Caller.test_http_error_raw_body) ... ok
+test_json_and_sse (test_caller.Caller.test_json_and_sse) ... ok
+test_no_native_at_import (test_caller.Caller.test_no_native_at_import) ... ok
+test_assertion_empty_result_is_failure (test_preflight_contract.PreflightTests.test_assertion_empty_result_is_failure) ... ok
+test_baseline_preinstantiate_rejects_scripts_external_and_other_classes (test_preflight_contract.PreflightTests.test_baseline_preinstantiate_rejects_scripts_external_and_other_classes) ... ok
+test_current_scene_or_fixed_source_mismatch_fails (test_preflight_contract.PreflightTests.test_current_scene_or_fixed_source_mismatch_fails) ... ok
+test_exact_bounded_native_result (test_preflight_contract.PreflightTests.test_exact_bounded_native_result) ... ok
+test_missing_source_mesh_witness_rejected (test_preflight_contract.PreflightTests.test_missing_source_mesh_witness_rejected) ... ok
+test_wrong_result_fields_or_tampered_bytes_fail (test_preflight_contract.PreflightTests.test_wrong_result_fields_or_tampered_bytes_fail) ... ok
+test_ambiguous_missing_unsafe_size_and_byte_mismatch (test_source_contract.SourceTests.test_ambiguous_missing_unsafe_size_and_byte_mismatch) ... ok
+test_duplicate_planned_output_fails (test_source_contract.SourceTests.test_duplicate_planned_output_fails) ... ok
+test_exact_unique_member_not_filesystem_extraction (test_source_contract.SourceTests.test_exact_unique_member_not_filesystem_extraction) ... ok
+test_wrong_archive_digest (test_source_contract.SourceTests.test_wrong_archive_digest) ... ok
+test_exact_saved_candidate_fixtures (test_resume.Resume.test_exact_saved_candidate_fixtures) ... ok
+test_remaining_only_entrypoint (test_resume.Resume.test_remaining_only_entrypoint) ... ok
+test_uid_is_only_allowed_in_exact_header (test_resume.Resume.test_uid_is_only_allowed_in_exact_header) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 0.141s
+
+OK

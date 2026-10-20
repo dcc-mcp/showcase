@@ -1,0 +1,69 @@
+--- tidal-kenney-ecosystem/run_conversion_session.py	2026-10-20 16:26:38.765351612 -0700
++++ tidal-kenney-resume/run_conversion_session.py	2026-10-20 16:38:01.642740322 -0700
+@@ -3,6 +3,7 @@
+ from preflight_contract import audit_baseline
+ from source_contract import read_sources
+ from conversion_contract import audit_candidate, validate
++from resume_evidence import prepare_inputs as prepare_resume_inputs, load_evidence
+ 
+ ROOT = pathlib.Path(__file__).resolve().parent
+ 
+@@ -112,9 +113,15 @@
+     freeze=json.loads((ROOT/'conversion-freeze.json').read_text())
+     for name,digest in freeze['files'].items():
+         if sha((ROOT/name).read_bytes()) != digest: raise ValueError('Frozen conversion input changed: '+name)
+-    plan, plan_bytes, sources, baselines, pins = prepare(args)
+-    prior=None; candidate_files={}
+-    if args.phase == 'reopen':
++    prior=None; candidate_files={}; resume_receipt=None
++    if args.resume_artifact is not None:
++        if args.phase != 'reopen' or args.previous is not None:
++            raise ValueError('Fixed artifact continuation is reopen-only')
++        plan,plan_bytes,sources,baselines,pins=prepare_resume_inputs(args)
++        prior,candidate_files,resume_receipt=load_evidence(args.resume_artifact,plan)
++    else:
++        plan, plan_bytes, sources, baselines, pins = prepare(args)
++    if args.phase == 'reopen' and args.resume_artifact is None:
+         if args.previous is None: raise ValueError('Prior successful stopped session required')
+         previous_result=json.loads((args.previous/'result.json').read_text())
+         if previous_result.get('passed') is not True or previous_result.get('cleanup_errors') != [] or previous_result.get('editor_exit_code') is None or previous_result.get('xvfb_exit_code') is None:
+@@ -149,11 +156,12 @@
+     (base/'plan.json').write_bytes(plan_bytes)
+     for directory in ['source','baseline']: (base/directory).mkdir()
+     for item in plan['assets']:
+-        (base/'source'/item['source_file']).write_bytes(sources[item['output']]['bytes'])
++        if item['output'] in sources:(base/'source'/item['source_file']).write_bytes(sources[item['output']]['bytes'])
+         (base/'baseline'/item['output']).write_bytes(baselines[item['output']])
+     if args.phase == 'reopen':
+         (base/'candidates').mkdir()
+         for name,data in candidate_files.items(): (base/'candidates'/name).write_bytes(data)
++    if resume_receipt is not None:durable_new(out/'resume-admission.json',json.dumps(resume_receipt,indent=2).encode())
+     (out/'inputs.json').write_text(json.dumps({'pins':pins,'plan_sha256':sha(plan_bytes),'source_archive_sha256':plan['archive_sha256'],'runner_sha256':sha(pathlib.Path(__file__).read_bytes()),'mem_available_mib':mem,'adapter':'0.9.6','core':'0.20.42'},indent=2))
+     server=editor=xvfb=None; schemas={}; sequence=0; report={'passed':False,'converted':False,'saved_native_asset':False,'scope':'candidate '+args.phase,'phase':args.phase,'caller_pid':os.getpid()}
+     log=(out/'editor.log').open('w');xlog=(out/'xvfb.log').open('w')
+@@ -236,7 +244,7 @@
+         inventory();call('load_skill',{'skill_names':['godot-script','godot-editor']});inventory()
+         types={'res://scan_probe.gd':'GDScript'}
+         for item in plan['assets']:
+-            types['res://kenney-preflight/source/'+item['source_file']]='PackedScene'
++            if item['output'] in sources:types['res://kenney-preflight/source/'+item['source_file']]='PackedScene'
+             types['res://kenney-preflight/baseline/'+item['output']]='PackedScene'
+         if args.phase == 'reopen':
+             for name in candidate_files: types['res://kenney-preflight/candidates/'+name]='PackedScene'
+@@ -280,11 +288,14 @@
+ 
+ def main():
+     p=argparse.ArgumentParser(description=__doc__)
+-    for name in ['output','ci','archive','baseline']:p.add_argument('--'+name,type=pathlib.Path,required=True)
++    for name in ['output','ci','baseline']:p.add_argument('--'+name,type=pathlib.Path,required=True)
++    p.add_argument('--archive',type=pathlib.Path)
++    p.add_argument('--resume-artifact',type=pathlib.Path)
+     p.add_argument('--phase',choices=['convert','reopen'],required=True)
+     p.add_argument('--previous',type=pathlib.Path)
+     p.add_argument('--godot',required=True);p.add_argument('--xvfb',default='Xvfb')
+     args=p.parse_args()
+-    for name in ['output','ci','archive','baseline']:setattr(args,name,getattr(args,name).resolve())
++    for name in ['output','ci','archive','baseline','resume_artifact']:
++        if getattr(args,name) is not None:setattr(args,name,getattr(args,name).resolve())
+     run(args)
+ if __name__=='__main__':main()
