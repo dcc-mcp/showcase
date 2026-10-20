@@ -110,7 +110,7 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
         from capture_browser import (audio_probe_init_script, capture_audio_snapshot, passive_evaluate,
             audio_window, validate_audio_baseline, browser_executable, validate_browser_arguments,
             bounded_cdp, validate_focus_suspension, BROWSER_ARGS, IGNORED_DEFAULT_ARGS)
-        from external_chrome import external_chrome
+        from external_chrome import OwnedChromeProfile, external_chrome
         from audio_source_contract import validate_cue_pcm
         from audio_thread import meter_stream
 
@@ -167,8 +167,9 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
                 if "no_defaults" not in inspect.signature(pw.chromium.connect_over_cdp).parameters:
                     raise RuntimeError("Public Playwright no_defaults attach is unavailable")
                 report["external_chrome"] = {}
+                owned_profile = owned.enter_context(OwnedChromeProfile())
                 browser, context = owned.enter_context(external_chrome(pw,
-                    report["browser"]["executable_path"], report=report["external_chrome"], timeout=5))
+                    report["browser"]["executable_path"], report=report["external_chrome"], profile=owned_profile, timeout=5))
             else:
                 browser = pw.chromium.launch(headless=not headed, executable_path=report["browser"]["executable_path"],
                     chromium_sandbox=True, args=BROWSER_ARGS, ignore_default_args=IGNORED_DEFAULT_ARGS, timeout=5000)
@@ -300,6 +301,9 @@ def worker(chromium, source, output, headed=False, no_defaults=False):
                 other.close()
                 if failures:
                     raise RuntimeError("Browser errors: " + " | ".join(failures))
+                if no_defaults:
+                    stage("normal-owned-browser-close")
+                    report["normal_browser_close"] = owned_profile.close_normally(bounded_cdp, timeout=3)
                 report["status"] = "passed"
                 report["passed"] = True
                 stage("complete")

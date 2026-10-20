@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import array
 import base64
+import contextlib
 import importlib.metadata
 import json
 import math
@@ -20,6 +21,7 @@ from pathlib import Path
 from audio_thread import marked_pcm_window, meter_stream, pcm_interval, pcm_signal
 from audio_source_contract import validate_source_bus, validate_cue_pcm
 from focus_lifecycle import RealTargetFocus, wait_focus_state
+from external_chrome import OwnedChromeProfile, external_chrome
 from common import check_engine_log, isolated_output, sha256, write_json
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from gameplay import (BROWSER_ABSOLUTE_WALL_LIMIT_SECONDS, BROWSER_PHYSICS_LIMIT_SECONDS,
@@ -378,15 +380,49 @@ def validate_audio_sources(snapshot, receipts, actions):
             "first_loop_boundary": loop_boundary, "cue_pairs": pairs}
 
 
-def real_button(page, state, field, mobile, width, height):
+def real_button(page, state, field, mobile, width, height, native_touch=False):
     x, y, w, h = finite_vector(state.get(field), 4, field)
     if w <= 0 or h <= 0 or not (0 <= x < x + w <= width and 0 <= y < y + h <= height):
         raise ValueError("Actual " + field + " is outside the rendered viewport")
-    if mobile:
+    if mobile and native_touch:
+        session = page.context.new_cdp_session(page)
+        try:
+            try:
+                bounded_cdp(session, "Input.dispatchTouchEvent", {"type": "touchStart",
+                    "touchPoints": [{"id": 0, "x": x + w / 2, "y": y + h / 2}]}, timeout=15)
+            finally:
+                bounded_cdp(session, "Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []}, timeout=15)
+        finally:
+            detach_cdp(session)
+    elif mobile:
         page.touchscreen.tap(x + w / 2, y + h / 2)
     else:
         page.mouse.click(x + w / 2, y + h / 2)
-    return {"field": field, "kind": "touchscreen.tap" if mobile else "mouse.click", "x": x + w / 2, "y": y + h / 2}
+    return {"field": field, "kind": ("CDP native touch" if native_touch else "touchscreen.tap") if mobile else "mouse.click", "x": x + w / 2, "y": y + h / 2}
+
+
+def configure_native_viewport(page, width, height, mobile):
+    """Retained protocol session configures browser emulation, never game state."""
+    if type(width) is not int or type(height) is not int or width <= 0 or height <= 0 or type(mobile) is not bool:
+        raise ValueError("Invalid explicit browser viewport")
+    session = page.context.new_cdp_session(page)
+    try:
+        bounded_cdp(session, "Emulation.setDeviceMetricsOverride", {"width": width, "height": height,
+            "deviceScaleFactor": 1, "mobile": mobile, "screenWidth": width, "screenHeight": height}, timeout=15)
+        bounded_cdp(session, "Emulation.setTouchEmulationEnabled", {"enabled": mobile,
+            "maxTouchPoints": 5 if mobile else 1}, timeout=15)
+    except Exception:
+        detach_cdp(session)
+        raise
+    return session
+
+
+def verify_native_viewport(page, width, height, mobile):
+    value = passive_evaluate(page, "() => ({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,touch_points:navigator.maxTouchPoints})")
+    if (value.get("width") != width or value.get("height") != height or value.get("dpr") != 1
+            or value.get("touch_points") != (5 if mobile else 0)):
+        raise ValueError("Actual browser viewport/DPR/touch capability differs from requested route: " + repr(value))
+    return value
 
 
 def wait_state(page, console, after_sample=0, predicate=lambda state: True, timeout=20):
@@ -652,7 +688,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--chromium", required=True, help="Explicit installed Chrome/Chromium executable; no fallback")
     parser.add_argument("--headed", action="store_true", help="Real visible Chrome tabs; requires an X11 display, no headless fallback")
+    parser.add_argument("--no-defaults", action="store_true", help="Official default-context attach; requires headed Chrome, no fallback")
     args = parser.parse_args()
+    if args.no_defaults and not args.headed:
+        parser.error("--no-defaults requires --headed")
     out = isolated_output(args.output, args.site)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(args.site.resolve())))
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -667,10 +706,11 @@ def main():
                   "Headed mode requires actual hidden-tab transitions; headless mode covers target focus only. Visible-unfocused desktop density remains runtime-limited in run39365593281; OS/application focus and physical-device behavior remain unverified."],
               "playwright_version": importlib.metadata.version("playwright"),
               "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS,
-                                 "chromium_sandbox": True, "headless": not args.headed, "requested_executable": args.chromium},
+                                 "chromium_sandbox": True, "headless": not args.headed, "no_defaults": args.no_defaults, "requested_executable": args.chromium,
+                                 "args_scope": "Playwright passive protocol preflight and legacy route; no-defaults actual arguments are in each viewport browser_processes receipt"},
               "pack_sha256": sha256(args.site / "index.pck"),
               "observer_sha256": {name:sha256(Path(__file__).with_name(name)) for name in
-                  ("audio_probe.js", "audio_meter_worklet.js", "audio_thread.py", "audio_source_contract.py", "capture_browser.py", "focus_lifecycle.py")}}
+                  ("audio_probe.js", "audio_meter_worklet.js", "audio_thread.py", "audio_source_contract.py", "capture_browser.py", "focus_lifecycle.py", "external_chrome.py")}}
     try:
         if report["playwright_version"] != "1.63.0":
             raise RuntimeError("This acceptance lane requires pinned Playwright 1.63.0")
@@ -693,12 +733,38 @@ def main():
                 driver = None
                 focus_probe = None
                 focus_companion = None
-                profile = tempfile.TemporaryDirectory(prefix="tidal-" + label + "-profile-")
+                profile_owner = contextlib.ExitStack()
+                profile = profile_owner.enter_context(OwnedChromeProfile()) if args.no_defaults else tempfile.TemporaryDirectory(prefix="tidal-" + label + "-profile-")
+                external_manager = None
+                viewport_session = None
+                result["browser_processes"] = []
 
                 def launch():
+                    nonlocal external_manager
+                    if args.no_defaults:
+                        process_report = {}
+                        result["browser_processes"].append(process_report)
+                        external_manager = external_chrome(pw, selected["executable_path"], report=process_report,
+                            profile=profile, timeout=15)
+                        _, default_context = external_manager.__enter__()
+                        if len(default_context.pages) != 1 or default_context.pages[0].url != "about:blank":
+                            raise RuntimeError("Fresh owned Chrome did not start with exactly its requested blank page")
+                        return default_context
                     return pw.chromium.launch_persistent_context(profile.name, **launch_options,
                         viewport={"width": width, "height": height}, device_scale_factor=1,
                         is_mobile=mobile, has_touch=mobile)
+
+                def close_current(normal=False):
+                    nonlocal external_manager
+                    if external_manager is not None:
+                        try:
+                            if normal:
+                                profile.close_normally(bounded_cdp, timeout=15)
+                        finally:
+                            external_manager.__exit__(None, None, None)
+                            external_manager = None
+                    elif context is not None:
+                        context.close()
 
                 def attach(target_page, target_console, target_failures):
                     target_page.on("console", lambda event: target_console.append({"type": event.type, "text": event.text}))
@@ -767,12 +833,14 @@ def main():
                 try:
                     context = launch()
                     page = context.pages[0]
-                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed)
+                    if args.no_defaults:
+                        viewport_session = configure_native_viewport(page, width, height, mobile)
+                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed, defaults_disabled=args.no_defaults)
                     # Create the companion BEFORE the real journey and all audio
                     # baselines. Its automatic activation must not introduce an
                     # unrequested mid-route focus/suspend transition.
                     other_tab = context.new_page()
-                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate, require_hidden=args.headed)
+                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate, require_hidden=args.headed, defaults_disabled=args.no_defaults)
                     other_tab.goto("about:blank")
                     focus_companion.settle_after_navigation(timeout=15)
                     bounded_cdp(focus_probe.session, "Page.bringToFront", {}, timeout=3)
@@ -792,6 +860,8 @@ def main():
                         focus_probe.verify_same_window_tabs(focus_companion, timeout=15)
                     wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, console, failures)
+                    if args.no_defaults:
+                        result["viewport"] = verify_native_viewport(page, width, height, mobile)
                     # Read the game's existing context after its actual first draw.
                     # This identity is diagnostic, never an alternate pass condition.
                     result["graphics"] = passive_evaluate(page, """() => {
@@ -828,7 +898,7 @@ def main():
                     result["audio"]["before_begin"] = validate_audio_baseline(post_capture, baseline_mark["wall_ms"])
                     write_json(out / (label + "-audio-before-begin.json"), post_capture)
                     boundary = len(console)
-                    begin_input = real_button(page, initial_state, "begin_rect", mobile, width, height)
+                    begin_input = real_button(page, initial_state, "begin_rect", mobile, width, height, native_touch=args.no_defaults)
                     events.append({"time": time.monotonic(), "kind": "begin", **begin_input})
                     journey = wait_observer(page, console, "TIDAL_JOURNEY", boundary)
                     validate_journey(journey, "touch_begin" if mobile else "begin_button")
@@ -866,7 +936,7 @@ def main():
                     # Toggle the same visible shipped button with actual input.
                     mute_state = wait_state(page, console)
                     boundary = len(console)
-                    mute_input = real_button(page, mute_state, "audio_rect", mobile, width, height)
+                    mute_input = real_button(page, mute_state, "audio_rect", mobile, width, height, native_touch=args.no_defaults)
                     muted = wait_observer(page, console, "TIDAL_AUDIO", boundary)
                     if muted.get("event") != "mute" or muted.get("muted") is not True or muted.get("started") is not True:
                         raise ValueError("Actual mute input did not mute the live game")
@@ -879,7 +949,7 @@ def main():
                         "window": audio_window(quiet, quiet_mark["wall_ms"], quiet["wall_ms"], 1.1)}
                     unmute_state = wait_state(page, console)
                     boundary = len(console)
-                    unmute_input = real_button(page, unmute_state, "audio_rect", mobile, width, height)
+                    unmute_input = real_button(page, unmute_state, "audio_rect", mobile, width, height, native_touch=args.no_defaults)
                     unmuted = wait_observer(page, console, "TIDAL_AUDIO", boundary)
                     if unmuted.get("event") != "mute" or unmuted.get("muted") is not False or unmuted.get("started") is not True:
                         raise ValueError("Actual unmute input did not restore the live game")
@@ -975,7 +1045,7 @@ def main():
                     negative_state = wait_state(page, console)
                     negative_receipts = len([item for item in observer_receipts(console, "TIDAL_AUDIO") if item.get("event") == "cue"])
                     if mobile:
-                        real_button(page, negative_state, "action_rect", True, width, height)
+                        real_button(page, negative_state, "action_rect", True, width, height, native_touch=args.no_defaults)
                     else:
                         page.keyboard.press("e", delay=80)
                     negative_after_state = wait_state(page, console, negative_state["sample_id"])
@@ -1040,7 +1110,7 @@ def main():
                     # Persist the actual muted preference, then test it in the new OS process.
                     mute_state = wait_state(page, console)
                     boundary = len(console)
-                    saved_mute_input = real_button(page, mute_state, "audio_rect", mobile, width, height)
+                    saved_mute_input = real_button(page, mute_state, "audio_rect", mobile, width, height, native_touch=args.no_defaults)
                     saved_mute = wait_observer(page, console, "TIDAL_AUDIO", boundary)
                     if saved_mute.get("event") != "mute" or saved_mute.get("muted") is not True:
                         raise ValueError("Pre-exit real input did not set the saved mute preference")
@@ -1070,11 +1140,13 @@ def main():
                     # A new Chromium OS process must restore the untouched IndexedDB.
                     check_engine_log("\n".join(item["text"] for item in console))
                     result["restore"] = {"status": "running", "saved": saved, "fresh_browser_process": True, "shutdown": "actual Save & return control; official normal exit"}
-                    context.close()
+                    close_current(normal=args.no_defaults)
                     context = None
                     context = launch()
                     page = context.pages[0]
-                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed)
+                    if args.no_defaults:
+                        viewport_session = configure_native_viewport(page, width, height, mobile)
+                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed, defaults_disabled=args.no_defaults)
                     bounded_cdp(restored_focus.session, "Page.bringToFront", {}, timeout=3)
                     context.add_init_script(script=audio_probe_init_script())
                     attach(page, restored_console, restored_failures)
@@ -1084,6 +1156,8 @@ def main():
                     restored_focus.settle_after_navigation(timeout=15)
                     wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, restored_console, restored_failures)
+                    if args.no_defaults:
+                        result["restored_viewport"] = verify_native_viewport(page, width, height, mobile)
                     loads = observer_receipts(restored_console, "TIDAL_LOAD")
                     if len(loads) != 1:
                         raise RuntimeError("Fresh Chromium process must emit exactly one load receipt")
@@ -1105,7 +1179,7 @@ def main():
                     if restored_state.get("audio_muted") is not True or restored_state.get("journey_started") is not False:
                         raise ValueError("Fresh process lost mute or began before a real gesture")
                     boundary = len(restored_console)
-                    restored_begin = real_button(page, restored_state, "begin_rect", mobile, width, height)
+                    restored_begin = real_button(page, restored_state, "begin_rect", mobile, width, height, native_touch=args.no_defaults)
                     restored_journey = wait_observer(page, restored_console, "TIDAL_JOURNEY", boundary)
                     validate_journey(restored_journey, "touch_begin" if mobile else "begin_button")
                     wait_state(page, restored_console, restored_state["sample_id"],
@@ -1118,7 +1192,7 @@ def main():
                         "window": audio_window(quiet, quiet_mark["wall_ms"], quiet["wall_ms"], 1.1)}
                     unmute_state = wait_state(page, restored_console)
                     boundary = len(restored_console)
-                    restored_unmute = real_button(page, unmute_state, "audio_rect", mobile, width, height)
+                    restored_unmute = real_button(page, unmute_state, "audio_rect", mobile, width, height, native_touch=args.no_defaults)
                     unmuted = wait_observer(page, restored_console, "TIDAL_AUDIO", boundary)
                     if unmuted.get("event") != "mute" or unmuted.get("muted") is not False or unmuted.get("started") is not True:
                         raise ValueError("Restored real unmute did not enable the running journey")
@@ -1154,9 +1228,19 @@ def main():
                     if focus_probe is not None:
                         result["focus_target_activation"] = focus_probe.report
                         write_json(out / (label + "-focus-target.json"), focus_probe.report)
-                    if context is not None:
-                        context.close()
-                    profile.cleanup()
+                    try:
+                        close_current()
+                    except Exception as cleanup_error:
+                        result["browser_cleanup_error"] = repr(cleanup_error)
+                        result["passed"] = False
+                    try:
+                        if args.no_defaults:
+                            profile_owner.close()
+                        else:
+                            profile.cleanup()
+                    except Exception as cleanup_error:
+                        result["profile_cleanup_error"] = repr(cleanup_error)
+                        result["passed"] = False
                     for name, lines, errors in (("initial", console, failures), ("restored", restored_console, restored_failures)):
                         try:
                             check_engine_log("\n".join(item["text"] for item in lines))

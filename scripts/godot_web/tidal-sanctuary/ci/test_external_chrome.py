@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
-from external_chrome import external_chrome, _budget, _read_endpoint, _stop_owned_process
+from external_chrome import external_chrome, OwnedChromeProfile, _budget, _read_endpoint, _stop_owned_process
 import subprocess
 
 
@@ -74,6 +74,91 @@ class ExternalChromeTests(unittest.TestCase):
                     pass
         self.process.terminate.assert_called_once()
         self.assertFalse(self.profile.exists())
+
+    def test_profile_reopens_only_after_protocol_close_and_actual_exit(self):
+        browser = Mock(contexts=[object()])
+        pw = SimpleNamespace(chromium=SimpleNamespace(connect_over_cdp=Mock(return_value=browser)))
+        reports = []
+        processes = []
+        paths = []
+        def spawn(arguments, **kwargs):
+            path = Path(next(a.split('=', 1)[1] for a in arguments if a.startswith('--user-data-dir=')))
+            self.assertFalse((path / 'DevToolsActivePort').exists())
+            process = self.fake_process(arguments, **kwargs)
+            process.pid = 1234 + len(processes)
+            process.returncode = None
+            def wait(**kwargs):
+                process.poll.return_value = process.returncode = 0
+                return 0
+            process.wait.side_effect = wait
+            processes.append(process); paths.append(path)
+            return process
+        bounded = Mock()
+        with patch.dict(os.environ, {'DISPLAY': ':99'}), patch('external_chrome.subprocess.Popen', side_effect=spawn):
+            with OwnedChromeProfile() as owned:
+                for index in range(2):
+                    report = {}; reports.append(report)
+                    with external_chrome(pw, '/bin/true', report=report, profile=owned):
+                        owned.close_normally(bounded)
+                        with self.assertRaises(ValueError):
+                            owned.close_normally(bounded)
+                    self.assertTrue(Path(owned.name).exists())
+        self.assertEqual(paths[0], paths[1])
+        self.assertFalse(paths[0].exists())
+        self.assertNotEqual(reports[0]['owned_pid'], reports[1]['owned_pid'])
+        for report, process in zip(reports, processes):
+            self.assertTrue(report['normal_close_completed'])
+            self.assertFalse(report['fallback_cleanup_required'])
+            process.terminate.assert_not_called()
+        self.assertEqual(bounded.call_count, 2)
+        self.assertTrue(all(call.args[1] == 'Browser.close' for call in bounded.call_args_list))
+
+    def test_fallback_cleanup_cannot_authorize_profile_reuse(self):
+        pw = SimpleNamespace(chromium=SimpleNamespace(connect_over_cdp=Mock(return_value=SimpleNamespace(contexts=[object()]))))
+        with patch.dict(os.environ, {'DISPLAY': ':99'}), patch('external_chrome.subprocess.Popen', side_effect=self.fake_process):
+            with OwnedChromeProfile() as owned:
+                report = {}
+                with external_chrome(pw, '/bin/true', report=report, profile=owned):
+                    pass
+                self.assertFalse(report['normal_close_completed'])
+                self.assertTrue(report['fallback_cleanup_required'])
+                with self.assertRaises(ValueError):
+                    with external_chrome(pw, '/bin/true', report={}, profile=owned):
+                        pass
+
+    def test_close_error_or_bad_exit_never_counts_as_normal(self):
+        for failure in ('protocol', 'nonzero', 'timeout', 'already_exited'):
+            with self.subTest(failure=failure):
+                browser = Mock(contexts=[object()])
+                pw = SimpleNamespace(chromium=SimpleNamespace(connect_over_cdp=Mock(return_value=browser)))
+                bounded = Mock(side_effect=RuntimeError('protocol failed') if failure == 'protocol' else None)
+                with patch.dict(os.environ, {'DISPLAY': ':99'}), patch('external_chrome.subprocess.Popen', side_effect=self.fake_process):
+                    with OwnedChromeProfile() as owned:
+                        report = {}
+                        with external_chrome(pw, '/bin/true', report=report, profile=owned):
+                            if failure == 'nonzero':
+                                def exit_bad(**kwargs):
+                                    self.process.poll.return_value = self.process.returncode = 9
+                                self.process.wait.side_effect = exit_bad
+                            elif failure == 'timeout':
+                                self.process.wait.side_effect = [subprocess.TimeoutExpired('chrome', 15), 0]
+                            elif failure == 'already_exited':
+                                self.process.poll.return_value = 0
+                            with self.assertRaises((RuntimeError, subprocess.TimeoutExpired)):
+                                owned.close_normally(bounded)
+                            self.assertFalse(report['normal_close_completed'])
+                            # Restore a terminal process for bounded fake cleanup.
+                            self.process.poll.return_value = 0
+                        with self.assertRaises(ValueError):
+                            with external_chrome(pw, '/bin/true', report={}, profile=owned):
+                                pass
+
+    def test_arbitrary_profile_path_is_rejected(self):
+        with patch.dict(os.environ, {'DISPLAY': ':99'}), patch('external_chrome.subprocess.Popen') as spawn:
+            with self.assertRaises(ValueError):
+                with external_chrome(None, '/bin/true', report={}, profile='/tmp/existing'):
+                    pass
+            spawn.assert_not_called()
 
     def test_no_defaults_focus_setup_never_overrides_emulation(self):
         from focus_lifecycle import RealTargetFocus

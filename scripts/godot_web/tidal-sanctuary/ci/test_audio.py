@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 import tempfile
 from test_audio_thread import meter_fixture, timed_fixture
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window, audio_prepared,
-                             real_button, validate_audio_baseline, validate_audio_sources,
+                             real_button, configure_native_viewport, verify_native_viewport, validate_audio_baseline, validate_audio_sources,
                              validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
                              browser_executable, validate_browser_arguments, validate_audio_closed, validate_focus_suspension)
 
@@ -473,6 +473,32 @@ class AudioAcceptanceFixtures(unittest.TestCase):
         page.touchscreen.tap.assert_called_once_with(70, 50)
         page.evaluate.assert_not_called()
         with self.assertRaises(ValueError): real_button(page, {"begin_rect": [-1, 0, 20, 20]}, "begin_rect", True, 400, 800)
+
+    def test_no_defaults_buttons_use_real_native_touch_protocol(self):
+        page = Mock()
+        with patch("capture_browser.bounded_cdp") as call, patch("capture_browser.detach_cdp") as detach:
+            receipt = real_button(page, {"begin_rect": [20,30,100,40]}, "begin_rect", True, 400,800,native_touch=True)
+        self.assertEqual(receipt["kind"], "CDP native touch")
+        self.assertEqual([x.args[1] for x in call.call_args_list], ["Input.dispatchTouchEvent"]*2)
+        self.assertEqual(call.call_args_list[0].args[2], {"type":"touchStart","touchPoints":[{"id":0,"x":70,"y":50}]})
+        self.assertEqual(call.call_args_list[1].args[2], {"type":"touchEnd","touchPoints":[]})
+        page.touchscreen.tap.assert_not_called()
+        page.evaluate.assert_not_called()
+        detach.assert_called_once()
+
+    def test_native_viewport_keeps_exact_dimensions_dpr_and_touch(self):
+        for width,height,mobile in ((1280,720,False),(390,844,True)):
+            page = Mock()
+            with patch("capture_browser.bounded_cdp") as call:
+                configure_native_viewport(page,width,height,mobile)
+            metrics = call.call_args_list[0].args[2]
+            self.assertEqual((metrics["width"],metrics["height"],metrics["deviceScaleFactor"],metrics["mobile"]), (width,height,1,mobile))
+            good={"width":width,"height":height,"dpr":1,"touch_points":5 if mobile else 0}
+            with patch("capture_browser.passive_evaluate",return_value=good):
+                self.assertEqual(verify_native_viewport(page,width,height,mobile),good)
+            for key in good:
+                with self.subTest(mobile=mobile,key=key), patch("capture_browser.passive_evaluate",return_value={**good,key:-1}), self.assertRaises(ValueError):
+                    verify_native_viewport(page,width,height,mobile)
 
     def test_recorded_bytes_must_have_mute_and_nonzero_signal(self):
         valid = array.array("f", [0] * 100 + [.01] * 3300)

@@ -283,3 +283,28 @@ ephemeral and owned by this bounded worker. Chrome inherits the supervised proce
 group, so the unchanged 27-second work/30-second total limit also reaps Chrome.
 All genuine hidden/visible, focus, clock, source, gain and PCM checks remain.
 The full game is not moved to this route until the actual isolated probe passes.
+
+
+### Supported attach integration, pending full exact-head acceptance
+
+The isolated probe at `4737f7e`, run `39370470017`, passed in 16.317 seconds.
+Actual trusted blur was followed by hidden visibility; visible visibility was
+followed by trusted focus on return. The unchanged audio guard retained 16 fresh
+suspended observations of one context and the same sources, terminal gain zero,
+and 15 actual resumed PCM windows. Chrome cleanup reported exit 0. This proves
+the small original-audio fixture, not Godot gameplay or save restoration.
+
+The full lane now explicitly requests the same public no-defaults/default-context
+route. Each viewport uses its own new task-owned profile; the fresh-process save
+check reuses exactly that profile only after actual `Browser.close` and exit 0,
+and requires a distinct process ID. Forced termination cannot qualify reopening.
+Desktop remains 1280x720, portrait remains 390x844, DPR remains 1. Browser protocol
+metrics and touch emulation are recorded and passively verified after initial and
+restored navigation. Buttons use genuine `Input.dispatchTouchEvent` on portrait,
+matching the existing native touch-input route, not dispatched DOM events.
+All original loop, PCM, source identity, gain, normal game exit and persistence
+gates remain. New full hosted evidence is still required. The older visible but
+unfocused desktop sample-density limitation is not erased by hidden-tab evidence.
+
+The preceding audio-only smoke also requests normal `Browser.close` and verifies
+exit 0 within its unchanged 30-second total budget, before the costly full route.
