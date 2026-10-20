@@ -1,13 +1,14 @@
 {
-  "production_graph_sha256": "9680d2e77b5b87522af14239d388e196deff462ffa8cd218764e8981363ef30b",
+  "production_graph_sha256": "ebf232af8a5a8ee30c1cf036abda852b064d26c380b210b1d9c2e8a7fa3249c1",
   "raw_calls_verified": true,
   "all_production_steps_covered": true,
   "reviewer": "Independent parent reviewer; actual source/call/content checks and visual review",
-  "reviewed_at": "2026-10-20T17:10:35Z",
+  "reviewed_at": "2026-10-20T17:19:20Z",
   "scope": [
     "17 original PCM hashes and formats/frames independently recomputed against real REAPER calls",
     "4 ZIPs / 59 members verified against current retained files; Source ZIP metadata-only alias correction independently compared to prior archive, all other member bytes unchanged",
     "5 stages actual calls and all measured output hashes verified",
+    "Historical lineage explicitly remains a prior snapshot; current delivery graph archive/member hashes independently checked",
     "Actual packaged pure render_assets._validate and 17 WAV hash/PCM/format/frame checks independently rerun; stale native BWF alias negative test rejects",
     "Native hero inspected; additional native JPEG conversion inspected and color/size checked",
     "Actual isolated WAV and native MP3 numerical quality verified"

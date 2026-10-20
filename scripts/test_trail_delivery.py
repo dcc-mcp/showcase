@@ -79,6 +79,17 @@ class TrailDeliveryTests(unittest.TestCase):
         self.assertEqual(len(list(BASE.glob('*.zip'))), 4)
         self.assertEqual(json.loads((BASE / 'audio-manifest.json').read_text()), self.metadata)
         self.assertEqual(len(self.metadata['assets']), 17)
+        graph = json.loads((BASE / 'ecosystem-production.json').read_text())
+        repo = BASE.parents[2]
+        for package in graph['delivery_packages']:
+            archive = repo / package['archive']['path']
+            self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), package['archive']['sha256'])
+            with zipfile.ZipFile(archive) as z:
+                self.assertCountEqual(z.namelist(), [m['member'] for m in package['members']])
+                for member in package['members']:
+                    payload = z.read(member['member'])
+                    self.assertEqual(payload, (repo / member['source']['path']).read_bytes())
+                    self.assertEqual(hashlib.sha256(payload).hexdigest(), member['source']['sha256'])
         validate_delivery(self.metadata, self.members)
         self.assertEqual(len(package_validator(self.members)(atlas_for(self.metadata), self.metadata)), 17)
         master = {a['id']: a for a in self.metadata['assets']}

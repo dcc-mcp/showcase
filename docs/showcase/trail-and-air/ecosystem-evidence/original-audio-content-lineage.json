@@ -620,5 +620,11 @@
     "Recover or recreate the hero image through ecosystem; do not relabel the historical JPEG.",
     "Open relative-path RPP and save/reopen through real REAPER tools with all 17 dependencies; compare original arrangement.",
     "Bind actual outputs and archive members after scoped remediation, then independently review whole case."
-  ]
+  ],
+  "historical_snapshot": {
+    "publication_baseline_commit": "351de0d5920fed2d3e0e38f49ecad1883de2dc89",
+    "scope": "Historical recovery measurement, not the current delivery inventory. Original member hashes and then-unverified next steps are intentionally preserved.",
+    "current_delivery_record": "delivery-metadata-repair.json",
+    "current_delivery_graph": "../ecosystem-production.json"
+  }
 }

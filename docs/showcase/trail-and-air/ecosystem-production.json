@@ -953,7 +953,7 @@
     },
     {
       "path": "docs/showcase/trail-and-air/ecosystem-evidence/original-audio-content-lineage.json",
-      "sha256": "d04a62efaa68d7a9e412fdce4179ae1734f6c99c9ee953ebd95291800492edaa",
+      "sha256": "6da4903625c1c9e254ca20983db1d91bb2d70abe333fe718592f4c8bbaa951e3",
       "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
     },
     {
@@ -1068,7 +1068,7 @@
     "status": "verified",
     "evidence": {
       "path": "docs/showcase/trail-and-air/ecosystem-evidence/independent-review.json",
-      "sha256": "332cdc543c100fa714c8165f4b8a26e4708c319f51fcef62c827945a8ef46c0a"
+      "sha256": "ed0304e88a9b287f1bd5462f1a2b74e1f926441f3b1f3fefc779feee910ea8a0"
     }
   }
 }

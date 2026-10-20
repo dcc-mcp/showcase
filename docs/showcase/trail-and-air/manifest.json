@@ -153,8 +153,8 @@
     },
     {
       "path": "ecosystem-evidence/original-audio-content-lineage.json",
-      "bytes": 26916,
-      "sha256": "d04a62efaa68d7a9e412fdce4179ae1734f6c99c9ee953ebd95291800492edaa"
+      "bytes": 27320,
+      "sha256": "6da4903625c1c9e254ca20983db1d91bb2d70abe333fe718592f4c8bbaa951e3"
     },
     {
       "path": "ecosystem-evidence/original-reaper-assets-measurement.json",
@@ -194,7 +194,7 @@
     {
       "path": "ecosystem-production.json",
       "bytes": 56175,
-      "sha256": "b386d8c7048bff995a3b5ae7f229cc375f79ca72983e1f5215d8681827e66df5"
+      "sha256": "2a21405e6db79fafeef06e7791616ca3b49538b2c89a6dcc5a942b17e156813a"
     },
     {
       "path": "hero.jpg",
@@ -225,8 +225,8 @@
     },
     {
       "path": "ecosystem-evidence/independent-review.json",
-      "bytes": 1523,
-      "sha256": "332cdc543c100fa714c8165f4b8a26e4708c319f51fcef62c827945a8ef46c0a"
+      "bytes": 1653,
+      "sha256": "ed0304e88a9b287f1bd5462f1a2b74e1f926441f3b1f3fefc779feee910ea8a0"
     }
   ]
 }
