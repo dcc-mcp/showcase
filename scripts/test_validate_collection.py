@@ -485,8 +485,10 @@ class ReviewedPublicTextTests(unittest.TestCase):
         repo = Path(__file__).resolve().parents[1]
         files = json.loads((repo / "play/manifest.json").read_text(encoding="utf-8"))["files"]
         hashes = {item["path"]: item["sha256"] for item in files}
+        vendor = json.loads((repo / "assets/vendor/model-viewer/VENDOR.json").read_text())
+        hashes["assets/vendor/model-viewer/model-viewer.min.js"] = vendor["sha256"]
         self.assertEqual(set(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES),
-                         {"play/README.md", "play/runtime/godot-4.6.3.js",
+                         {"assets/vendor/model-viewer/model-viewer.min.js", "play/README.md", "play/runtime/godot-4.6.3.js",
                           "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt"})
         for path, (digest, _) in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES.items():
             self.assertEqual(digest, hashes[path])
@@ -509,6 +511,21 @@ class ReviewedPublicTextTests(unittest.TestCase):
             moved.parent.mkdir(exist_ok=True)
             moved.write_bytes(data)
             self.assertTrue(validate_collection.scan_text_file(moved, self.root))
+
+    def test_exact_vendor_bundle_review_and_modified_bundle_rejection(self):
+        repo = Path(__file__).resolve().parents[1]
+        rel = 'assets/vendor/model-viewer/model-viewer.min.js'
+        data = (repo / rel).read_bytes()
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+        self.assertEqual(path.read_bytes(), data)
+        path.write_bytes(data + b'\n// edited\n')
+        self.assertEqual(len(validate_collection.scan_text_file(path, self.root)), 2)
+        moved = self.root / 'assets/other-model-viewer.js'
+        moved.write_bytes(data)
+        self.assertEqual(len(validate_collection.scan_text_file(moved, self.root)), 2)
 
     def test_tracked_public_readme_matches_review_and_preserves_content(self):
         repo = Path(__file__).resolve().parents[1]
