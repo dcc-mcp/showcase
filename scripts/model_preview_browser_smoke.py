@@ -73,9 +73,18 @@ def run(site, output, executable=None):
             page.locator('[data-model-start]').click()
             page.wait_for_function('document.querySelector("[role=status]").textContent.includes("unavailable")')
             assert page.locator('model-viewer').count() == 0 and page.locator('[data-model-start]').is_enabled()
+            results.append({'failed_asset_fallback': True})
+            context.close()
+            # Hold the module response in a fresh context: immediate error recovery
+            # can hide Close before a test can click it and is not an in-flight load.
+            context = browser.new_context(); page = context.new_page(); held = []
+            page.route('**/model-viewer.min.js', lambda route: held.append(route))
+            page.goto(base + '/en.html')
             page.locator('[data-model-start]').click(); page.locator('[data-model-stop]').click()
-            page.wait_for_timeout(300); assert page.locator('model-viewer').count() == 0
-            results.append({'failed_asset_fallback': True, 'close_during_load': True})
+            for route in held: route.continue_()
+            page.wait_for_timeout(500); assert page.locator('model-viewer').count() == 0
+            assert page.locator('[data-model-start]').is_enabled()
+            results.append({'close_during_module_load': True})
             browser.close()
     finally:
         server.shutdown()
