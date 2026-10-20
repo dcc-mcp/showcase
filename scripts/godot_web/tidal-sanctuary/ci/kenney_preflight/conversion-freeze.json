@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "status": "frozen for offline review; native execution not performed or authorized by this manifest",
+  "preflight_run": 39511410314,
+  "preflight_head": "69224922dc21404879af5b4593739ac7b55e7a20",
+  "tests": "33 offline unit tests passed; Python compilation passed; includes process acquisition cancellation, owned exit codes, 18 distinct 150-property material maps, shutdown-log and cancellation cases; no native test",
+  "files": {
+    "CONVERSION-PLAN.md": "182b598662277bc93440e6bc4754760fb265a5b8c57ae0cd173a45937c5d5dac",
+    "plan.json": "dc1983dea61fde7d18cdcf0c33f0bec7c4166cc2306303afa1719dce2c7ff8c8",
+    "caller-pins.json": "538a2e3b7cd69cc226e70f51db228ccc13d51344c4adc8c50951a77fd87d7a48",
+    "run_preflight.py": "18c9b1296a352f0290aee817c1167fc6aaac4063a2eecab84dc59f75180b2298",
+    "source_contract.py": "5475d148c3f291be68bf1fdca5dd648a3a5625b534cfd4862731c40807257092",
+    "preflight_contract.py": "f592cbca01f4742326d3d26f0ad18a8787134f0b28c5af51ca22b956efc22759",
+    "inspect_kenney_sources.gd": "22d173ded24a3d04d5686f774d1450d8b3b4fa8c2c49fd0aa153597fee41944c",
+    "convert_kenney_candidates.gd": "1e8f425d5fa86422837291d4001620f90cf0d315aa84e90877f902063bbb6e4d",
+    "conversion_contract.py": "703bd78e6987a0d675ac7f5c5ad4d9324d4c36bdc67f7df3e544b02bab0e247c",
+    "run_conversion.py": "b68d16ac83076d193b2cba7e759f8c6cffe697b573f51bcdef912a8aa5cfdd6b",
+    "run_conversion_session.py": "df140d1b7f56d52802a8bc2894df8568b1b937b914551d84e3a1518729ca0270",
+    "test_conversion.py": "0409e4489642d39128459c840dafb5b25f38cd9c3dd372f0effa249790c6931a",
+    "test_caller.py": "13686f038ecc629f30b740f8ba1c756100b68afb83fce29a55b69cb0d83b1cfb",
+    "test_preflight_contract.py": "45356d1d750c8947c9905ac7c628f41b3f1b44ebd36990e7422c8540916adf32",
+    "test_source_contract.py": "2db260911f84af3d75cf81a83972094bb01ab4da23ad30bb83a9b83fb17504a6",
+    "conversion-tests.log": "40e2491a91d05c1f72f28267059143ee2736629bb234a8fdc9766c713efa48c6",
+    "tscn_grammar.py": "79097fe03740068e3e9c6035c5ac2a6ab05feeb839cd7689da35a84d0e5566c7"
+  }
+}
