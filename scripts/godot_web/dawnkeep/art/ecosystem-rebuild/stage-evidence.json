@@ -1,0 +1,225 @@
+{
+  "schema": "dawnkeep-asset-repair-evidence/v1",
+  "recorded_at": "2026-10-20T07:58:38Z",
+  "scope": "isolated nine original assets; not a whole-case production-evidence record or publication approval",
+  "environment": {
+    "host": "Blender 4.5.13",
+    "adapter": "dcc-mcp-blender 0.2.22",
+    "core": "dcc-mcp-core 0.20.46"
+  },
+  "source_recipe": {
+    "path": "../build_dawnkeep.py",
+    "sha256": "3769bfe07a1d8b44a5ac796632a4e360a95a6b1e3b95c320f6e8ee5f49298dd4"
+  },
+  "rights": {
+    "original_work": "Copyright 2026 dcc-mcp contributors, all rights reserved",
+    "notice": "../../LICENSES.md",
+    "third_party_assets_in_this_package": false
+  },
+  "assets": [
+    {
+      "path": "assets/moonfern.glb",
+      "sha256": "a90fb2c233fb6108efbde7aa4f3bfcc34e5a614f232eefbc2647f12400ecbe0b",
+      "bytes": 5756
+    },
+    {
+      "path": "assets/shrine.glb",
+      "sha256": "b700eaed1ed25c5a2756249488b681499adcac6aabb30e20f90f3937518c0a27",
+      "bytes": 66336
+    },
+    {
+      "path": "assets/standard.glb",
+      "sha256": "b7397d2b558c7d5ce650e0a7f8261cc817834fd8c3e106e9f84b3dd1a4b10970",
+      "bytes": 6748
+    },
+    {
+      "path": "assets/tower_ember.glb",
+      "sha256": "3f6c60b807ff91d7c842caf1d10b898e02ecfeb0b111e6571574f3bd88a05b37",
+      "bytes": 29260
+    },
+    {
+      "path": "assets/tower_frost.glb",
+      "sha256": "bb25f5f66e8a81faf8cd816bb8838046b7443618a74e919e2d24b01c72404349",
+      "bytes": 32724
+    },
+    {
+      "path": "assets/tower_storm.glb",
+      "sha256": "429aac9062d73e857ea9f2116888121268e08cfeaa0c0ce77802f980518fdcce",
+      "bytes": 30708
+    },
+    {
+      "path": "assets/tower_sunbow.glb",
+      "sha256": "dbb7c252132eed270ee9b948242b199e820e5ddf9c78f1d68a6760e27fc6b17e",
+      "bytes": 21628
+    },
+    {
+      "path": "assets/watchwood_tree.glb",
+      "sha256": "0d1ffe138c56d96eee042c21b7ab49eb379cd5db6d68d8eec62d3841613af541",
+      "bytes": 58312
+    },
+    {
+      "path": "assets/world.glb",
+      "sha256": "02aeab9641c9d07362de7253518be7d8e1f3ac9195522fd0c97335003e566a11",
+      "bytes": 116424
+    }
+  ],
+  "stages": [
+    {
+      "id": "numerical_recipe",
+      "status": "passed",
+      "route": "official in-host script; mathutils and in-memory data only",
+      "scope": "9 groups / 64 meshes / 3674 vertices / 2655 faces / 30 materials",
+      "evidence": [
+        {
+          "path": "recipes/recipe-data.json",
+          "sha256": "7e26853dd601e62a9462d77e4a13960fc6322d92365f5b6ccba5a5d2fa302391"
+        }
+      ]
+    },
+    {
+      "id": "native_mesh_material_export",
+      "status": "passed",
+      "route": "typed tools plus explicitly bounded official script for polygon material indices",
+      "scope": "341 construction calls; 9 exported GLBs and saved native scene",
+      "evidence": [
+        {
+          "path": "evidence/construction-call-ledger.json",
+          "sha256": "0508ff218bd11c125ccd33800ab625618d12bd28f5e39826b502dfce58e9a35c"
+        }
+      ]
+    },
+    {
+      "id": "independent_native_reopen",
+      "status": "passed",
+      "route": "typed new/open then read-only official script by independent reviewer",
+      "scope": "fresh scene in same official host; geometry/topology/material assignment/transforms/bounds",
+      "evidence": [
+        {
+          "path": "evidence/rebuilt-native-readback.json",
+          "sha256": "3bde732a9cf4fc0acc0c39867595035788715a445510e1f3d9b4c7e7c74413a5"
+        }
+      ]
+    },
+    {
+      "id": "actual_glb_reimport",
+      "status": "passed",
+      "route": "9 typed empty-scene imports and read-only official script",
+      "scope": "object names, world-space point sets, material presence only",
+      "evidence": [
+        {
+          "path": "evidence/import-readback-moonfern.json",
+          "sha256": "069ad423f20548407a3028dfa15c4047a286dc74a5f29559cc21d7771522114c"
+        },
+        {
+          "path": "evidence/import-readback-shrine.json",
+          "sha256": "590d4bed5b25bc342110dc427b8edc53f13b732ffd446719b89a6f40839c410a"
+        },
+        {
+          "path": "evidence/import-readback-standard.json",
+          "sha256": "88384d76dc2ca20084ad1a7f23b8345dd0faf72e4bd08ecfed3c42b59eb0bc23"
+        },
+        {
+          "path": "evidence/import-readback-tower_ember.json",
+          "sha256": "f519abd18d4585b13a6f5be50b2289cca4263f9eb646957824ecb51b18cd4426"
+        },
+        {
+          "path": "evidence/import-readback-tower_frost.json",
+          "sha256": "65fdce0b16d8d3676a28667c8ed3e8bbc1f9278a10fe3f5865956476d3e22946"
+        },
+        {
+          "path": "evidence/import-readback-tower_storm.json",
+          "sha256": "dc5642a8376201e5755c1be4b164d313df395510dba34ffbab0799a6dd95bce6"
+        },
+        {
+          "path": "evidence/import-readback-tower_sunbow.json",
+          "sha256": "5cbba46760e7384877b875c27e1dc12194aaa1e48765e9cecf25d7fc18006567"
+        },
+        {
+          "path": "evidence/import-readback-watchwood_tree.json",
+          "sha256": "c93d466226129237842fd5cbeee64e6f0928e51f08a58b92a1454b4b22f1c5ae"
+        },
+        {
+          "path": "evidence/import-readback-world.json",
+          "sha256": "3c8df3ca4ce20de8f73385b94b4ab6dce5d38a746fcf46e8f75f8ee0e5249eb2"
+        }
+      ]
+    },
+    {
+      "id": "export_geometry_material_comparison",
+      "status": "passed",
+      "route": "offline independent readback; not production",
+      "scope": "output point positions versus recipe; material values versus historical GLBs",
+      "evidence": [
+        {
+          "path": "evidence/rebuilt-glb-geometry-comparison.json",
+          "sha256": "6ca4b442784d73803ec24e0ef1d44fb469c6f0f0adfa074d48ef9942cee19e27"
+        },
+        {
+          "path": "evidence/rebuilt-glb-material-comparison.json",
+          "sha256": "cf168889d492469060b1daaebf6c1ff051fe4c32fabb2c2360223e2f5eb1620e"
+        }
+      ]
+    },
+    {
+      "id": "visual_render_review",
+      "status": "not-tested",
+      "scope": "Not established by this nine-asset repair; existing historical acceptance is unchanged",
+      "evidence": []
+    },
+    {
+      "id": "runtime_integration",
+      "status": "not-tested",
+      "scope": "Not established by this nine-asset repair; existing historical acceptance is unchanged",
+      "evidence": []
+    },
+    {
+      "id": "browser_interaction",
+      "status": "not-tested",
+      "scope": "Not established by this nine-asset repair; existing historical acceptance is unchanged",
+      "evidence": []
+    },
+    {
+      "id": "whole_case_ecosystem_graph",
+      "status": "not-tested",
+      "scope": "Not established by this nine-asset repair; existing historical acceptance is unchanged",
+      "evidence": []
+    }
+  ],
+  "native_scene": {
+    "included": false,
+    "sha256": "4cb8a6d61d38c74d58173a6520b86445d5098a79043fd954fbecc9b9f89ad2c2",
+    "reason": "Retained original native output embeds machine-specific paths; omitted from public package pending safe native delivery"
+  },
+  "scripts": {
+    "actual_executed_sha256": {
+      "calculate_recipe_data.py": "da85251365f8fae4b7d33e7518dc9bf791be742564dbcd73bc2184dcf5849b41",
+      "set_recipe_face_indices.py": "298f8368d3e7a0640bafc753aa7cf0a2282132cab31a5ea72082844ebd8617ab",
+      "rebuild_typed_assets.py": "5d1b8f959163a9dc22dc96106fe6724327111c2ae895a89cb12e51bae10fc81f"
+    },
+    "portable_copies": [
+      {
+        "path": "recipes/build_tool_plan.py",
+        "sha256": "f7ef013f75eda258f937d9288002978a8801e28804710d2c7ac0c2f1f175fd4e"
+      },
+      {
+        "path": "recipes/calculate_recipe_data.py",
+        "sha256": "6e09652f200a1cfa4823cbd7d30504cff669fb068ea2accb39ed2128e2b8527b"
+      },
+      {
+        "path": "recipes/set_recipe_face_indices.py",
+        "sha256": "8bfde1b226a7b223b78076bd7181e6d1fa171ac9cdba38688c209caa34ec0ea5"
+      },
+      {
+        "path": "recipes/verify_imported_group.py",
+        "sha256": "128b28d83aaae839d52a7c3092637a79207431fc2d200d0c03f2e364e5e72967"
+      },
+      {
+        "path": "recipes/verify_rebuilt_scene.py",
+        "sha256": "69e4cba6f108e2fb479911e26200f686a27ab3117070baaa0befbb38edcb2ca2"
+      }
+    ],
+    "portable_replay": "not-tested; parameterized path adaptation and emitted plan have not been replayed in a connected host"
+  },
+  "capability_gap": "https://github.com/dcc-mcp/dcc-mcp-blender/issues/316",
+  "model_attribution": "Unchanged; no new model identity claimed"
+}

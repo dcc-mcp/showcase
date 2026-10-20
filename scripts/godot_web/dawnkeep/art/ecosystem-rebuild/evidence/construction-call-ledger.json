@@ -1,0 +1,1726 @@
+{
+  "scope": "Public-safe ordered summary of the actual nine-asset construction calls, not raw private RPC transcripts or independent backend attestation",
+  "actual_call_count": 341,
+  "tool_counts": {
+    "blender_data_geometry__create_mesh_from_data": 64,
+    "blender_interchange__export_gltf": 9,
+    "blender_material_library__set_material_attribute": 30,
+    "blender_materials__assign_material": 126,
+    "blender_materials__create_material": 30,
+    "blender_objects__move_object": 63,
+    "blender_scene__get_scene_info": 2,
+    "blender_scene__new_scene": 1,
+    "blender_scene__save_scene": 1,
+    "blender_scripting__execute_script_file": 1,
+    "blender_shader_nodes__set_principled_inputs": 4,
+    "blender_validation__validate_export_readiness": 9,
+    "blender_validation__validate_materials": 1
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "tool": "blender_scene__new_scene",
+      "success": true
+    },
+    {
+      "sequence": 2,
+      "tool": "blender_scene__get_scene_info",
+      "success": true
+    },
+    {
+      "sequence": 3,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 4,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 5,
+      "tool": "blender_shader_nodes__set_principled_inputs",
+      "success": true
+    },
+    {
+      "sequence": 6,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 7,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 8,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 9,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 10,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 11,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 12,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 13,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 14,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 15,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 16,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 17,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 18,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 19,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 20,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 21,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 22,
+      "tool": "blender_shader_nodes__set_principled_inputs",
+      "success": true
+    },
+    {
+      "sequence": 23,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 24,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 25,
+      "tool": "blender_shader_nodes__set_principled_inputs",
+      "success": true
+    },
+    {
+      "sequence": 26,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 27,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 28,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 29,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 30,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 31,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 32,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 33,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 34,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 35,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 36,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 37,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 38,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 39,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 40,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 41,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 42,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 43,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 44,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 45,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 46,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 47,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 48,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 49,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 50,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 51,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 52,
+      "tool": "blender_shader_nodes__set_principled_inputs",
+      "success": true
+    },
+    {
+      "sequence": 53,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 54,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 55,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 56,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 57,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 58,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 59,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 60,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 61,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 62,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 63,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 64,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 65,
+      "tool": "blender_materials__create_material",
+      "success": true
+    },
+    {
+      "sequence": 66,
+      "tool": "blender_material_library__set_material_attribute",
+      "success": true
+    },
+    {
+      "sequence": 67,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 68,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 69,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 70,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 71,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 72,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 73,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 74,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 75,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 76,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 77,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 78,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 79,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 80,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 81,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 82,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 83,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 84,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 85,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 86,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 87,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 88,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 89,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 90,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 91,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 92,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 93,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 94,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 95,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 96,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 97,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 98,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 99,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 100,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 101,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 102,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 103,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 104,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 105,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 106,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 107,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 108,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 109,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 110,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 111,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 112,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 113,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 114,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 115,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 116,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 117,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 118,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 119,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 120,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 121,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 122,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 123,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 124,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 125,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 126,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 127,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 128,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 129,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 130,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 131,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 132,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 133,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 134,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 135,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 136,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 137,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 138,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 139,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 140,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 141,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 142,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 143,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 144,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 145,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 146,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 147,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 148,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 149,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 150,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 151,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 152,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 153,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 154,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 155,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 156,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 157,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 158,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 159,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 160,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 161,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 162,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 163,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 164,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 165,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 166,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 167,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 168,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 169,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 170,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 171,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 172,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 173,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 174,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 175,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 176,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 177,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 178,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 179,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 180,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 181,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 182,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 183,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 184,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 185,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 186,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 187,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 188,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 189,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 190,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 191,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 192,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 193,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 194,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 195,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 196,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 197,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 198,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 199,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 200,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 201,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 202,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 203,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 204,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 205,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 206,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 207,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 208,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 209,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 210,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 211,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 212,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 213,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 214,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 215,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 216,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 217,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 218,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 219,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 220,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 221,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 222,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 223,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 224,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 225,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 226,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 227,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 228,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 229,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 230,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 231,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 232,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 233,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 234,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 235,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 236,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 237,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 238,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 239,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 240,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 241,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 242,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 243,
+      "tool": "blender_data_geometry__create_mesh_from_data",
+      "success": true
+    },
+    {
+      "sequence": 244,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 245,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 246,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 247,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 248,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 249,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 250,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 251,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 252,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 253,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 254,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 255,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 256,
+      "tool": "blender_materials__assign_material",
+      "success": true
+    },
+    {
+      "sequence": 257,
+      "tool": "blender_scripting__execute_script_file",
+      "success": true
+    },
+    {
+      "sequence": 258,
+      "tool": "blender_validation__validate_materials",
+      "success": true
+    },
+    {
+      "sequence": 259,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 260,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 261,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 262,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 263,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 264,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 265,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 266,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 267,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 268,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 269,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 270,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 271,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 272,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 273,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 274,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 275,
+      "tool": "blender_validation__validate_export_readiness",
+      "success": true
+    },
+    {
+      "sequence": 276,
+      "tool": "blender_interchange__export_gltf",
+      "success": true
+    },
+    {
+      "sequence": 277,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 278,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 279,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 280,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 281,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 282,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 283,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 284,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 285,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 286,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 287,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 288,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 289,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 290,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 291,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 292,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 293,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 294,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 295,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 296,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 297,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 298,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 299,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 300,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 301,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 302,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 303,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 304,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 305,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 306,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 307,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 308,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 309,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 310,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 311,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 312,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 313,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 314,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 315,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 316,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 317,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 318,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 319,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 320,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 321,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 322,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 323,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 324,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 325,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 326,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 327,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 328,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 329,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 330,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 331,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 332,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 333,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 334,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 335,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 336,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 337,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 338,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 339,
+      "tool": "blender_objects__move_object",
+      "success": true
+    },
+    {
+      "sequence": 340,
+      "tool": "blender_scene__save_scene",
+      "success": true
+    },
+    {
+      "sequence": 341,
+      "tool": "blender_scene__get_scene_info",
+      "success": true
+    }
+  ]
+}

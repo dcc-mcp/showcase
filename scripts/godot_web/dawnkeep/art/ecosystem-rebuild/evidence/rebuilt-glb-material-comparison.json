@@ -1,0 +1,47 @@
+{
+  "moonfern.glb": {
+    "material_count": 2,
+    "differences": [],
+    "passed": true
+  },
+  "shrine.glb": {
+    "material_count": 7,
+    "differences": [],
+    "passed": true
+  },
+  "standard.glb": {
+    "material_count": 3,
+    "differences": [],
+    "passed": true
+  },
+  "tower_ember.glb": {
+    "material_count": 7,
+    "differences": [],
+    "passed": true
+  },
+  "tower_frost.glb": {
+    "material_count": 7,
+    "differences": [],
+    "passed": true
+  },
+  "tower_storm.glb": {
+    "material_count": 7,
+    "differences": [],
+    "passed": true
+  },
+  "tower_sunbow.glb": {
+    "material_count": 7,
+    "differences": [],
+    "passed": true
+  },
+  "watchwood_tree.glb": {
+    "material_count": 6,
+    "differences": [],
+    "passed": true
+  },
+  "world.glb": {
+    "material_count": 13,
+    "differences": [],
+    "passed": true
+  }
+}

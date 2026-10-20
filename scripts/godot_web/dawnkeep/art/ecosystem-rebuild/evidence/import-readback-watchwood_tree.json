@@ -1,0 +1,13 @@
+{
+  "group": "watchwood_tree",
+  "passed": true,
+  "scope": "actual native GLB reimport; world-space geometry and material-presence check",
+  "objects": [
+    {
+      "name": "Crooked_watchwood_trunk",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 1976,
+      "materials": 6
+    }
+  ]
+}
