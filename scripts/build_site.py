@@ -601,6 +601,9 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
             brand_portal = '<aside class="evidence-note"><strong>品牌画廊开发预览</strong><p>等待修正版资产与验证记录；占位内容仅用于本地开发。</p></aside>' + brand_portal
         with open(collection_path, encoding="utf-8-sig") as fh:
             cases = json.load(fh)["cases"]
+        import model_previews
+        import benchmark_records
+        model_records, model_assets = model_previews.read_and_validate(root, cases)
         import playable
         import asset_versions
         playable_demos, playable_assets = playable.read_and_validate(root, cases)
@@ -632,6 +635,7 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         agent_html, agent_data = agent_pages.generate(root, cases, playable_demos)
         pages.update(agent_html)
         pages.update(agent_data)
+        pages.update(benchmark_records.generate(root, cases))
         if brand_preview:
             pages["robots.txt"] = "User-agent: *\nDisallow: /\n"
             pages["index.html"] = pages["index.html"].replace("index, follow, max-image-preview:large", "noindex, nofollow")
@@ -640,6 +644,8 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         if os.path.isfile(os.path.join(root, 'assets/preview-audio.json')):
             assets.add('assets/preview-audio.json')
         assets.update(playable_assets)
+        assets.update(model_assets)
+        assets.update({"assets/model-preview.css", "benchmark/run.schema.json", "benchmark/PROTOCOL.md"})
         if playable_demos:
             assets.update({"assets/playable.js", "assets/games.css", "assets/games.js"})
         if brands_visible:
@@ -650,6 +656,15 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
                 raise ValueError("invalid case slug")
             pages["cases/%s/index.html" % case["slug"]] = detail_page(
                 case, root, cases[(index + 1) % len(cases)] if len(cases) > 1 else None, playable_demos.get(case["slug"]))
+            case_path = "cases/%s/index.html" % case["slug"]
+            preview = model_records.get(case["slug"])
+            extra = benchmark_records.section(bool(preview))
+            if preview:
+                extra = model_previews.section(preview) + extra
+                pages[case_path] = pages[case_path].replace('</head>', '<script src="../../assets/model-preview.js" defer></script></head>')
+            pages[case_path] = pages[case_path].replace('</head>', '<link rel="stylesheet" href="../../assets/model-preview.css"></head>')
+            pages[case_path] = pages[case_path].replace('<section class="detail-section" id="results">', extra + '<section class="detail-section" id="results">')
+            pages[case_path] = pages[case_path].replace('<a href="#results">成果</a>', '<a href="#benchmark">模型与评测记录</a><a href="#results">成果</a>')
             if brands_visible:
                 case_path = "cases/%s/index.html" % case["slug"]
                 pages[case_path] = pages[case_path].replace('<a href="https://dcc-mcp.github.io/">DCC-MCP 官网', '<a href="../../brands/">品牌画廊</a><a href="https://dcc-mcp.github.io/">DCC-MCP 官网')
