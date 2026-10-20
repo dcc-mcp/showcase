@@ -1,0 +1,55 @@
+{
+  "group": "tower_frost",
+  "passed": true,
+  "scope": "actual native GLB reimport; world-space geometry and material-presence check",
+  "objects": [
+    {
+      "name": "frost_foundation",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 80,
+      "materials": 2
+    },
+    {
+      "name": "frost_shaft",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 112,
+      "materials": 2
+    },
+    {
+      "name": "frost_gold_collar",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 48,
+      "materials": 2
+    },
+    {
+      "name": "Frost_petal",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Frost_petal.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Frost_petal.002",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 30,
+      "materials": 2
+    },
+    {
+      "name": "Frost_heart",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 84,
+      "materials": 2
+    },
+    {
+      "name": "Frost_halo",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 388,
+      "materials": 1
+    }
+  ]
+}

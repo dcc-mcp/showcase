@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 import build_site
-from test_build_site import fixture_case, make_png
+from test_build_site import fixture_case, make_png, benchmark_fixture
 import test_validate_brand_gallery as brand_fixture
 
 
@@ -32,6 +32,7 @@ class BrandBuildGuards(unittest.TestCase):
         ui.mkdir()
         for name in ("site.css", "gallery.js", "detail.js", "preview.js", "brand.css", "brand.js"):
             (ui / name).write_text("/* Fixture UI */", encoding="utf-8")
+        benchmark_fixture(self.root)
         (self.root / "index.html").write_text('<html><head>{{SEO_HEAD}}</head>{{BRAND_NAV}}{{BRAND_PORTAL}}{{CASE_CARDS}}</html>', encoding="utf-8")
         (self.root / "unselected-secret.txt").write_text("never selected", encoding="utf-8")
 

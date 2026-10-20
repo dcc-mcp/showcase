@@ -69,6 +69,25 @@ MD_LINK = re.compile(r"\]\(\s*<?([^)\s>]+)>?")
 # must not approve new text. Changed/moved files receive the full normal scan.
 # These suppress only the named findings, not a file or a directory's audit.
 REVIEWED_TEXT_FALSE_POSITIVES = {
+    "assets/vendor/model-viewer/model-viewer.min.js": (
+        "18b2e711035aa4705ee281530a55dc2338ff05eed3d70ae16d54105282a75ed5",
+        frozenset({"private filesystem path", "private execution path"}),
+        # Unmodified @google/model-viewer 4.4.0 npm distribution. The matches
+        # are JavaScript RegExp escapes and comment-close followed by var,
+        # not machine paths. License and VENDOR.json preserve provenance.
+    ),
+    'play/dawnkeep-defense/ui/FONT-LICENSE.txt': (
+        "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b",
+        frozenset({"private execution path"}),
+        # Unmodified Debian noto-cjk copyright notice: the sole match is
+        # its standard GPL-3 document location, not a private machine path.
+    ),
+    'play/parcel-switchyard/FONT-LICENSE.txt': (
+        "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b",
+        frozenset({"private execution path"}),
+        # Unmodified Debian noto-cjk copyright notice: the sole match is
+        # its standard GPL-3 document location, not a private machine path.
+    ),
     "play/README.md": (
         "ab2f4d99142afaa7e75245b97f4c2a964a5c630b79bb614dce57afe648828a65",
         frozenset({"private host name"}),

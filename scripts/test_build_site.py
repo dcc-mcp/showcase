@@ -110,6 +110,16 @@ def fixture_case() -> dict:
     }
 
 
+def benchmark_fixture(root):
+    """Site-only fixture; no synthetic production or benchmark run evidence."""
+    import shutil
+    from pathlib import Path
+    source = Path(__file__).resolve().parents[1]
+    dest = Path(root)
+    shutil.copytree(source / 'benchmark', dest / 'benchmark')
+    shutil.copyfile(source / 'assets/model-preview.css', dest / 'assets/model-preview.css')
+
+
 def integration_guards() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         case_dir = os.path.join(tmp, "docs", "showcase", "sample-case")
@@ -143,6 +153,7 @@ def integration_guards() -> None:
                 json.dump({"schema_version": 1, "cases": [case]}, fh)
 
         save()
+        benchmark_fixture(tmp)
         with open(os.path.join(tmp, "private.txt"), "w", encoding="utf-8") as fh:
             fh.write("not selected")
         # Evidence contracts are tested by test_validate_collection.py. This

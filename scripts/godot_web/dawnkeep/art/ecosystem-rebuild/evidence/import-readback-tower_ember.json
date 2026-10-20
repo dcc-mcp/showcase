@@ -1,0 +1,61 @@
+{
+  "group": "tower_ember",
+  "passed": true,
+  "scope": "actual native GLB reimport; world-space geometry and material-presence check",
+  "objects": [
+    {
+      "name": "ember_foundation",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 80,
+      "materials": 2
+    },
+    {
+      "name": "ember_shaft",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 112,
+      "materials": 2
+    },
+    {
+      "name": "ember_gold_collar",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 48,
+      "materials": 2
+    },
+    {
+      "name": "Ember_bowl",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 220,
+      "materials": 3
+    },
+    {
+      "name": "Ember_fire",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 50,
+      "materials": 2
+    },
+    {
+      "name": "Ember_fin",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 2
+    },
+    {
+      "name": "Ember_fin.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 2
+    },
+    {
+      "name": "Ember_fin.002",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 2
+    },
+    {
+      "name": "Ember_fin.003",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 2
+    }
+  ]
+}
