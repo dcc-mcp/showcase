@@ -123,13 +123,36 @@ jobs:
             if [ "$attempt" -lt 3 ]; then sleep 3; fi
           done
           exit 1
-      - name: Official single-thread Web export
-        id: export
+      - name: Check out explicit tested export adapter candidate (not a release)
+        if: ${{ !cancelled() && steps.author.outcome == 'success' && steps.templates.outcome == 'success' }}
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: dcc-mcp/dcc-mcp-godot
+          ref: 0c99ee85be38c4fce5e8a385c902d00a72207a29
+          path: _export-adapter-candidate
+          persist-credentials: false
+      - name: Build hash-verified candidate in export-only environment
+        id: export_adapter
         if: ${{ !cancelled() && steps.author.outcome == 'success' && steps.templates.outcome == 'success' }}
         shell: bash
         run: |
           set -euo pipefail
-          xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' python "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
+          test "$(git -C _export-adapter-candidate rev-parse HEAD)" = 0c99ee85be38c4fce5e8a385c902d00a72207a29
+          python -m venv "$RUNNER_TEMP/tidal-export-venv"
+          PY="$RUNNER_TEMP/tidal-export-venv/bin/python"
+          "$PY" -m pip install build 'hatchling==1.32.0'
+          "$PY" -m build --wheel --no-isolation --outdir "$RUNNER_TEMP/tidal-export-wheel" _export-adapter-candidate
+          echo "b356c09bea87c8b3987e55e5ecee14a7fe706e04ac7bfb11c3c13a7137a30c33  $RUNNER_TEMP/tidal-export-wheel/dcc_mcp_godot-0.9.9-py3-none-any.whl" | sha256sum -c -
+          "$PY" -m pip install "$RUNNER_TEMP/tidal-export-wheel/dcc_mcp_godot-0.9.9-py3-none-any.whl" 'dcc-mcp-core==0.20.46'
+          printf '%s\n' '{"commit":"0c99ee85be38c4fce5e8a385c902d00a72207a29","wheel_sha256":"b356c09bea87c8b3987e55e5ecee14a7fe706e04ac7bfb11c3c13a7137a30c33","core":"0.20.46"}' > "$RUNNER_TEMP/tidal-export-candidate.json"
+      - name: Official single-thread Web export
+        id: export
+        if: ${{ !cancelled() && steps.author.outcome == 'success' && steps.templates.outcome == 'success' && steps.export_adapter.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export TIDAL_EXPORT_CANDIDATE_RECEIPT="$RUNNER_TEMP/tidal-export-candidate.json"
+          xvfb-run -a -s '-screen 0 1280x720x24 -nolisten tcp' "$RUNNER_TEMP/tidal-export-venv/bin/python" "$RECIPE/ci/export_web.py" --native "$RUNNER_TEMP/tidal-author/native" \
             --godot Godot_v4.6.3-stable_linux.x86_64 --template "$RUNNER_TEMP/tidal-templates/web_nothreads_release.zip" \
             --license-dir play/runtime --output "$RUNNER_TEMP/tidal-web"
       - name: Real sandboxed Chrome keyboard/touch treasure routes and fresh-process save restoration
@@ -147,10 +170,11 @@ jobs:
         if: ${{ !cancelled() }}
         run: git diff --exit-code -- "$RECIPE" .github/workflows/tidal-sanctuary-preview.yml
       - name: Preserve unpublished source, receipts and actual runtime media
-        if: ${{ !cancelled() }}
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: tidal-sanctuary-candidate-${{ github.event.pull_request.head.sha || github.sha }}
+          include-hidden-files: true
           retention-days: 14
           if-no-files-found: error
           path: |
@@ -165,7 +189,11 @@ jobs:
             ${{ runner.temp }}/tidal-native/*.png
             ${{ runner.temp }}/tidal-native/*.mp4
             ${{ runner.temp }}/tidal-native/scripted-traversal-frames
-            ${{ runner.temp }}/tidal-web/export.json
+            ${{ runner.temp }}/tidal-export-candidate.json
+            ${{ runner.temp }}/tidal-web/*.json
+            ${{ runner.temp }}/tidal-web/export-configuration
+            ${{ runner.temp }}/tidal-web/session/registry/godot-export-jobs
+            ${{ runner.temp }}/tidal-web/export-project/web-output
             ${{ runner.temp }}/tidal-web/*.log
             ${{ runner.temp }}/tidal-web/site
             ${{ runner.temp }}/tidal-browser

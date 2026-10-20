@@ -8,6 +8,9 @@ from observers import finite_vector, positive_integer
 # point through the same controller as a player. No game-state setter is exposed.
 ROUTE = [
     {"name": "read the beach map", "target": [1.3, 7.8], "stage": 1},
+    # Keep real input outside the legitimate map plinth plus player capsule.
+    {"name": "step east clear of the map plinth", "target": [2.6, 8.7], "radius": .2},
+    {"name": "walk around the east side of the map plinth", "target": [2.6, 6.4], "radius": .2},
     {"name": "open the inland cache", "target": [-3.8, 3.4], "stage": 2, "screenshot": "tidal-02.png"},
     {"name": "enter the sheltered bay", "target": [1.5, 6.2]},
     {"name": "recover the sea treasure", "target": [8.2, 5.5], "stage": 3},

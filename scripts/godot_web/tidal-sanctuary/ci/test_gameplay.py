@@ -56,7 +56,7 @@ class GameplayObserverTests(unittest.TestCase):
     def test_route_and_source_files_are_explicit(self):
         self.assertEqual([point.get("stage") for point in ROUTE if point.get("stage")], [1, 2, 3, 4])
         self.assertTrue({"swim_controller.gd", "verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd"}.issubset(GAME_FILES))
-        self.assertEqual(ROUTE[3]["target"], [8.2, 5.5])
+        self.assertEqual(next(p for p in ROUTE if p["name"] == "recover the sea treasure")["target"], [8.2, 5.5])
         self.assertEqual(ROUTE[-1]["target"], [0, -11.7])
         self.assertEqual(ROUTE[-1]["approach"], [0, -10.25])
         self.assertEqual(ROUTE[-1]["radius"], .25)
@@ -85,6 +85,21 @@ class GameplayObserverTests(unittest.TestCase):
             del value[field]
             with self.subTest(missing=field), self.assertRaises(ValueError):
                 validate_state(value)
+
+    def test_chart_plinth_detour_retains_physical_milestones(self):
+        self.assertEqual([p['stage'] for p in ROUTE if 'stage' in p], [1, 2, 3, 4])
+        east, north = ROUTE[1:3]
+        self.assertEqual(east['target'], [2.6, 8.7])
+        self.assertEqual(north['target'], [2.6, 6.4])
+        self.assertEqual(east['radius'], .2)
+        self.assertEqual(north['radius'], .2)
+        # Authored plinth .85 x .7 at (1.3,7.8), plus actual player radius .22.
+        max_x, min_z, max_z = 1.3 + .85 / 2 + .22, 7.8 - .7 / 2 - .22, 7.8 + .7 / 2 + .22
+        self.assertGreater(8.4619, max_z)  # actual previous failed-run map interaction stop
+        self.assertGreater(east['target'][1] - east['radius'], max_z)
+        self.assertGreater(min(east['target'][0], north['target'][0]) - .2, max_x)
+        self.assertLess(north['target'][1] + north['radius'], min_z)
+        self.assertEqual(ROUTE[3]['name'], 'open the inland cache')
 
     def test_stale_frames_teleport_and_regression_are_rejected(self):
         for state in (self.state(), self.state(sample_id=2),

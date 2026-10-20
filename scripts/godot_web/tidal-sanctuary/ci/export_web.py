@@ -114,6 +114,9 @@ progressive_web_app/enabled=false
         report["ecosystem_export"] = json.loads((out / "export-mcp.json").read_text())
         report["pack_inspection"] = inspect_clean_pck(exported / "index.pck")
         for item in exported.iterdir():
+            if item.name == ".gdignore":
+                assert item.read_bytes() == b""
+                continue  # Explicit manager control file, not a public product.
             if not item.is_file():
                 raise RuntimeError("Unexpected directory in owned Web export")
             shutil.copyfile(item, site / item.name)
