@@ -3,6 +3,12 @@ from pathlib import Path
 PATH=Path(__file__).resolve().parents[1]/'promote.py'
 spec=importlib.util.spec_from_file_location('dawnkeep_promote',PATH);promote=importlib.util.module_from_spec(spec);spec.loader.exec_module(promote)
 class Promotion(unittest.TestCase):
+    def test_identity_mapping_preserves_historical_source(self):
+        mapping=json.loads((PATH.parent/'research/commit-identity-map-20261020.json').read_text())
+        pairs={row['original_commit']:row['corrected_commit'] for row in mapping['commits']}
+        self.assertEqual(len(pairs),27)
+        self.assertEqual(pairs[promote.HEAD],promote.REACHABLE_HEAD)
+        self.assertNotEqual(promote.HEAD,promote.REACHABLE_HEAD)
     def page(self):
         config={'ensureCrossOriginIsolationHeaders':False,'emscriptenPoolSize':0,'godotPoolSize':0,'executable':'index','fileSizes':{'index.wasm':37700666,'index.pck':5325512}}
         return '<script src="index.js"></script>\n<script src="dawnkeep-shell.js"></script>\nconst GODOT_CONFIG = '+json.dumps(config)+';\nconst dawnkeepShell = window.DawnkeepShell.attach(GODOT_CONFIG,()=>engine.requestQuit());\n dawnkeepShell.failed(err);'

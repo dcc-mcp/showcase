@@ -97,3 +97,16 @@ license to original artwork.
 ## Promote the verified candidate
 
 Run `python scripts/godot_web/dawnkeep/promote.py --candidate <extracted-full-run-candidate>` from the Showcase root. It requires the successful native and Web receipts, exact frozen pack hash, all exported file hashes, and matching frozen/current source files. It copies no duplicate engine and adds no browser security setting. The public HTML uses a hash-named pack and content-versioned publication bridge. Run the public-page gate before merge and again against the authorized deployed origin.
+
+## Commit identity correction / 提交身份修正
+
+The 27 owner-created commits were corrected to Hal / loonghao on 2026-10-20.
+Every original and replacement content tree is identical; see
+[the commit mapping](research/commit-identity-map-20261020.json).
+The historical full-acceptance revision `957c1d3` maps to `a2f4ae00d01ecee900597756758a6253ff0bc53e`.
+Historical CI records, asset hashes, model provenance, and third-party credits are unchanged.
+This mapping does not claim that historical tests ran again on the replacement SHA.
+
+2026-10-20 已将本分支 27 个自有提交的作者与提交者修正为 Hal / loonghao。
+对应内容树完全相同，历史 CI 记录、资产哈希、模型来源和第三方署名保持原样；
+不将历史验收冒充为新 SHA 上重新执行的验收。

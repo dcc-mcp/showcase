@@ -5,7 +5,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT/'scripts/godot_web'))
 from resource_budget import ADDITIONAL,LEGACY_RAW,LEGACY_GZIP,measure,validate
+# Historical acceptance remains bound to the original CI commit.
 HEAD='957c1d3928d4d7382535a5b50ae2990aa4cf5854'
+# Identity-only replacement has the exact same tree and is reachable in this branch.
+REACHABLE_HEAD='a2f4ae00d01ecee900597756758a6253ff0bc53e'
 RUN='https://github.com/dcc-mcp/showcase/actions/runs/39285690349'
 PCK='649ccf7ed6a762fb00315c07fe6253d35a626fe907f0cb23a238537bb0c3b29b'
 SLUG='dawnkeep-defense'
@@ -43,7 +46,7 @@ def main():
     source_manifest=json.loads((candidate/'dawnkeep-author/source-manifest.json').read_text())
     for record in source_manifest['files']:
         path='scripts/godot_web/dawnkeep/game/'+record['path']
-        for revision in (HEAD,'HEAD'):
+        for revision in (REACHABLE_HEAD,'HEAD'):
             data=subprocess.check_output(['git','show',revision+':'+path],cwd=ROOT)
             if sha(data)!=record['sha256'] or len(data)!=record['bytes']:
                 raise ValueError('Frozen/current game source differs: '+path)
