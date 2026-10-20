@@ -14,7 +14,7 @@ INPUT_SHA256={'../common.py': 'cb0dadf8545123c8475401ef4c9dfc220530c397e1f5ae259
 for path,digest in INPUT_SHA256.items():assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,path
 sys.path.insert(0,str(CI));from common import checked_godot,isolated_env,stop_process,check_engine_log
 from author_native import envelope,EDITOR_PROBE_SOURCE,editor_idle_sample
-SCRIPT_SHA='7332cc697188a15b18d4de0c790ac9e11dd825607b2719c74b04a77ae76005d2'
+SCRIPT_SHA='bd0a59d03b66936cf5d63d4b6eca5068acb2454c546c89c142d435328ea9e19d'
 assert hashlib.sha256((ROOT/'godot_asset_consumer.gd').read_bytes()).hexdigest()==SCRIPT_SHA
 for pkg,version in [('dcc-mcp-godot','0.9.6'),('dcc-mcp-core','0.20.42')]:assert importlib.metadata.version(pkg)==version
 mem=int(next(x.split()[1] for x in Path('/proc/meminfo').read_text().splitlines() if x.startswith('MemAvailable:')))/1024
@@ -144,7 +144,9 @@ try:
         args={'output':scene,'paths':[f'res://assets/old/{name}.glb',f'res://assets/new/{name}.glb'],'spacing':spacing,'size':size,'height':center}
         if clip:args.update(clip=clip,time=.25,game_swim=game_swim)
         built=execute('build_preview',args);assert built['saved']==scene
+        assert built['nested_scene_instances']==0 and built['mesh_count']>0
         if clip:
+            assert built['mesh_count']==73  # 2 x 36 imported meshes plus the fixture ground.
             assert len(built['models'])==len(built['reopened_bones'])==2
             for original,reopened in zip(built['models'],built['reopened_bones']):
                 assert len(original['bones'])==len(reopened)==23

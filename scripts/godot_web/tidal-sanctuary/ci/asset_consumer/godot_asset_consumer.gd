@@ -18,6 +18,8 @@ func _find(node: Node, type_name: String) -> Node:
 
 func _own(node: Node, root: Node) -> void:
  for child in node.get_children():
+  # This preview serializes a full frozen copy, not inherited GLB overrides.
+  child.scene_file_path = ""
   child.owner = root
   _own(child, root)
 
@@ -177,8 +179,17 @@ func build_preview(arguments: Dictionary) -> Dictionary:
  camera.look_at(Vector3(0, height, 0), Vector3.UP)
  camera.current = true
  _own(root, root)
+ var expected_meshes: Array = []
+ _meshes(root, expected_meshes)
+ var expected_mesh_count := expected_meshes.size()
  var saved := PackedScene.new()
  var pack_error := saved.pack(root)
+ if pack_error == OK:
+  var state := saved.get_state()
+  for index in range(state.get_node_count()):
+   if state.get_node_instance(index) != null:
+    root.free()
+    return {"error": "Frozen preview unexpectedly retains a scene instance"}
  var save_error := ResourceSaver.save(saved, output) if pack_error == OK else pack_error
  root.free()
  if save_error != OK:
@@ -188,6 +199,11 @@ func build_preview(arguments: Dictionary) -> Dictionary:
   return {"error": "Saved preview cannot reopen"}
  var actual := reopened.instantiate() as Node3D
  EditorInterface.get_base_control().get_tree().root.add_child(actual)
+ var actual_meshes: Array = []
+ _meshes(actual, actual_meshes)
+ if actual_meshes.size() != expected_mesh_count:
+  actual.free()
+  return {"error": "Saved preview mesh count changed"}
  var readback: Array = []
  if arguments.has("clip"):
   for label in ["Old", "New"]:
@@ -198,4 +214,4 @@ func build_preview(arguments: Dictionary) -> Dictionary:
    skeleton.force_update_all_bone_transforms()
    readback.append(_bones(skeleton))
  actual.free()
- return {"saved": output, "models": records, "reopened_bones": readback, "camera": "SameCamera", "render_pending": true}
+ return {"saved": output, "mesh_count": expected_mesh_count, "nested_scene_instances": 0, "models": records, "reopened_bones": readback, "camera": "SameCamera", "render_pending": true}
