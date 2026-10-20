@@ -9,6 +9,10 @@ on:
       - '.github/workflows/tidal-sanctuary-preview.yml'
   workflow_dispatch:
     inputs:
+      consumer_only:
+        description: 'Only actual Godot candidate asset sampling/previews; NOT full game acceptance'
+        type: boolean
+        default: false
       smoke_only:
         description: 'Only probe external Chrome no-defaults audio; NOT full game acceptance'
         type: boolean
@@ -21,13 +25,13 @@ on:
           - standard-headless
         default: headed
 concurrency:
-  group: tidal-sanctuary-${{ github.event.pull_request.number || github.ref }}-${{ inputs.smoke_only || false }}
+  group: tidal-sanctuary-${{ github.event.pull_request.number || github.ref }}-${{ inputs.smoke_only || false }}-${{ inputs.consumer_only || false }}
   cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   original-3d:
-    if: ${{ !inputs.smoke_only }}
+    if: ${{ !inputs.smoke_only && !inputs.consumer_only }}
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     env:
@@ -165,7 +169,7 @@ jobs:
 
   audio-only-no-defaults:
     name: Audio-only no-defaults probe (NOT full acceptance)
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.smoke_only }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.smoke_only && !inputs.consumer_only }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
@@ -208,3 +212,44 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: ${{ runner.temp }}/tidal-audio-observer
+
+  candidate-asset-consumer:
+    name: Candidate asset consumer (NOT full game acceptance)
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.consumer_only }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      RECIPE: scripts/godot_web/tidal-sanctuary
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Prepare same official Godot and typed adapter with local Xvfb
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends xvfb libgl1-mesa-dri fonts-dejavu-core
+          python -m pip install 'dcc-mcp-godot==0.9.6' 'dcc-mcp-core==0.20.42' 'numpy==2.3.5' 'Pillow==13.0.0'
+          curl --fail --location --retry 3 https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip -o "$RUNNER_TEMP/tidal-consumer-godot.zip"
+          echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  $RUNNER_TEMP/tidal-consumer-godot.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/tidal-consumer-godot.zip" -d "$RUNNER_TEMP/tidal-consumer-godot"
+      - name: Actual MCP import, 30 animation samples, native save/reopen and eight previews
+        run: |
+          set -euo pipefail
+          python "$RECIPE/ci/asset_consumer/verify_godot_asset_consumers.py"             --output "$RUNNER_TEMP/tidal-asset-consumer"             --godot "$RUNNER_TEMP/tidal-consumer-godot/Godot_v4.6.3-stable_linux.x86_64"             --xvfb Xvfb
+      - name: Preserve actual partial or complete consumer evidence
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: tidal-asset-consumer-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/tidal-asset-consumer/*.json
+            ${{ runner.temp }}/tidal-asset-consumer/*.log
+            ${{ runner.temp }}/tidal-asset-consumer/project/previews
