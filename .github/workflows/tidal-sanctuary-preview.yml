@@ -72,7 +72,7 @@ jobs:
         timeout-minutes: 1
         run: |
           set -euo pipefail
-          xvfb-run -a -s '-screen 0 1600x1200x24 -nolisten tcp' python "$RECIPE/ci/check_audio_observer_browser.py" --headed --no-defaults \
+          xvfb-run -a -s '-screen 0 1600x1200x24 -nolisten tcp' python "$RECIPE/ci/check_audio_observer_browser.py" --standard-headless --no-defaults --require-webgl2 \
             --chromium /opt/google/chrome/chrome --source "$RECIPE/game" \
             --output "$RUNNER_TEMP/tidal-audio-observer"
       - name: Actual typed MCP create, save, restart and reopen
@@ -134,7 +134,7 @@ jobs:
           test -f "$CHROME" && test -x "$CHROME"
           test "$(readlink -f "$CHROME")" = "$CHROME"
           "$CHROME" --version
-          xvfb-run -a -s '-screen 0 1600x1200x24 -nolisten tcp' python "$RECIPE/ci/capture_browser.py" --headed --no-defaults --chromium "$CHROME" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
+          xvfb-run -a -s '-screen 0 1600x1200x24 -nolisten tcp' python "$RECIPE/ci/capture_browser.py" --standard-headless --no-defaults --chromium "$CHROME" --site "$RUNNER_TEMP/tidal-web/site" --output "$RUNNER_TEMP/tidal-browser"
       - name: Verify tracked source was not modified
         if: ${{ !cancelled() }}
         run: git diff --exit-code -- "$RECIPE" .github/workflows/tidal-sanctuary-preview.yml

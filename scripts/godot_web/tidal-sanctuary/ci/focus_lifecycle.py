@@ -56,9 +56,9 @@ def validate_focus_transition(before, after, active, require_hidden_lifecycle=Fa
     if require_hidden_lifecycle:
         if (after['visible'] is not active or not visibility
                 or not any(item.get('visible') is active for item in visibility)):
-            raise ValueError('Headed tab lifecycle lacks real hidden/visible transition')
+            raise ValueError('Real tab lifecycle lacks real hidden/visible transition')
     return {'active':active, 'events':events, 'focused':after['focused'], 'visible':after['visible'],
-            'scope':('headed same-window tab hidden/visible transition; OS focus not established'
+            'scope':('real same-window tab hidden/visible transition; OS focus not established'
                 if require_hidden_lifecycle else 'browser target window focus; hidden-tab and OS focus not established')}
 
 
@@ -109,7 +109,7 @@ class RealTargetFocus:
         self.report = {'method':('real Page.bringToFront with public no_defaults attach' if defaults_disabled
                                   else 'real Page.bringToFront after one-time forced-focus removal'),
                        'defaults_disabled':defaults_disabled,
-                       'scope':('headed same-window hidden/visible lifecycle required; OS focus not established'
+                       'scope':('real same-window hidden/visible lifecycle required; OS focus not established'
                            if require_hidden else 'browser target window focus; hidden-tab and OS focus not established'),
                        'emulation_disabled_after_navigation':False, 'transitions':[]}
         self._settle_attempted = False

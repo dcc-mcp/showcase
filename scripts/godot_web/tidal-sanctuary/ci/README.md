@@ -328,3 +328,21 @@ focus transitions, actual PCM, suspended clock/gains/sources, normal close and
 27/30-second budgets remain required. This mode is explicit, never a fallback.
 The ordinary full workflow remains unchanged until this isolated route is proven.
 Neither a one-pixel result nor headless software rendering proves device/GPU FPS.
+
+
+### Standard-headless probe passed; full-route integration pending
+
+Exact `141d117` manual run `39375185846` passed the isolated standard-headless
+probe in 17.716 seconds. Actual WebGL2 returned the requested pixel
+`[51,102,153,255]` with error 0 and a live context; Chrome reported its default
+ANGLE SwiftShader renderer. Trusted blur/hidden and visible/focus transitions,
+16 fresh suspended observations, resumed PCM and normal Chrome exit 0 passed.
+This is not full Godot or persistence acceptance and does not establish device FPS.
+
+The normal full workflow now selects that exact explicit `--standard-headless
+--no-defaults` route, with the WebGL2/audio/normal-close smoke first. Only Chrome's
+standard `--headless` switch selects its graphics path; no GPU, ANGLE, blocklist,
+unsafe SwiftShader or sandbox override is added. Genuine hidden-tab events remain
+mandatory, as do all original actual input, loop, PCM, source, gain, exact viewport
+and same-profile fresh-process persistence checks. New exact-head full gameplay
+results are required. Visible-unfocused low-FPS desktop evidence remains separate.

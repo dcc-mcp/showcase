@@ -688,10 +688,14 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--chromium", required=True, help="Explicit installed Chrome/Chromium executable; no fallback")
     parser.add_argument("--headed", action="store_true", help="Real visible Chrome tabs; requires an X11 display, no headless fallback")
-    parser.add_argument("--no-defaults", action="store_true", help="Official default-context attach; requires headed Chrome, no fallback")
+    parser.add_argument("--no-defaults", action="store_true", help="Official default-context attach; requires explicit browser mode, no fallback")
+    parser.add_argument("--standard-headless", action="store_true", help="Standard Chrome headless with no-defaults; no GPU overrides")
     args = parser.parse_args()
-    if args.no_defaults and not args.headed:
-        parser.error("--no-defaults requires --headed")
+    if args.standard_headless and (args.headed or not args.no_defaults):
+        parser.error("--standard-headless requires --no-defaults and excludes --headed")
+    if args.no_defaults and not (args.headed or args.standard_headless):
+        parser.error("--no-defaults requires an explicit browser mode")
+    hidden_required = args.headed or args.standard_headless
     out = isolated_output(args.output, args.site)
     server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(args.site.resolve())))
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -703,7 +707,7 @@ def main():
                   "No multiplayer, deployment, accessibility, or broad device compatibility claim.",
                   "Audio is browser-rendered capture, not physical speaker output or subjective audition.",
                   "Audio-thread continuity is independent of game frame rate; it does not establish responsive or playable rendering.",
-                  "Headed mode requires actual hidden-tab transitions; headless mode covers target focus only. Visible-unfocused desktop density remains runtime-limited in run39365593281; OS/application focus and physical-device behavior remain unverified."],
+                  "Explicit headed and standard-headless no-defaults modes require actual hidden-tab transitions; legacy headless covers target focus only. Visible-unfocused desktop density remains runtime-limited in run39365593281; OS/application focus and physical-device behavior remain unverified."],
               "playwright_version": importlib.metadata.version("playwright"),
               "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS,
                                  "chromium_sandbox": True, "headless": not args.headed, "no_defaults": args.no_defaults, "requested_executable": args.chromium,
@@ -745,7 +749,7 @@ def main():
                         process_report = {}
                         result["browser_processes"].append(process_report)
                         external_manager = external_chrome(pw, selected["executable_path"], report=process_report,
-                            profile=profile, timeout=15)
+                            profile=profile, timeout=15, headed=args.headed)
                         _, default_context = external_manager.__enter__()
                         if len(default_context.pages) != 1 or default_context.pages[0].url != "about:blank":
                             raise RuntimeError("Fresh owned Chrome did not start with exactly its requested blank page")
@@ -835,12 +839,12 @@ def main():
                     page = context.pages[0]
                     if args.no_defaults:
                         viewport_session = configure_native_viewport(page, width, height, mobile)
-                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed, defaults_disabled=args.no_defaults)
+                    focus_probe = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=hidden_required, defaults_disabled=args.no_defaults)
                     # Create the companion BEFORE the real journey and all audio
                     # baselines. Its automatic activation must not introduce an
                     # unrequested mid-route focus/suspend transition.
                     other_tab = context.new_page()
-                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate, require_hidden=args.headed, defaults_disabled=args.no_defaults)
+                    focus_companion = RealTargetFocus(other_tab, bounded_cdp, passive_evaluate, require_hidden=hidden_required, defaults_disabled=args.no_defaults)
                     other_tab.goto("about:blank")
                     focus_companion.settle_after_navigation(timeout=15)
                     bounded_cdp(focus_probe.session, "Page.bringToFront", {}, timeout=3)
@@ -856,7 +860,7 @@ def main():
                     if response is None or response.status != 200:
                         raise RuntimeError("Staged Web entry did not return HTTP 200")
                     focus_probe.settle_after_navigation(timeout=15)
-                    if args.headed:
+                    if hidden_required:
                         focus_probe.verify_same_window_tabs(focus_companion, timeout=15)
                     wait_focus_state(page, passive_evaluate, True, timeout=15)
                     wait_ready(page, console, failures)
@@ -1146,7 +1150,7 @@ def main():
                     page = context.pages[0]
                     if args.no_defaults:
                         viewport_session = configure_native_viewport(page, width, height, mobile)
-                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=args.headed, defaults_disabled=args.no_defaults)
+                    restored_focus = RealTargetFocus(page, bounded_cdp, passive_evaluate, require_hidden=hidden_required, defaults_disabled=args.no_defaults)
                     bounded_cdp(restored_focus.session, "Page.bringToFront", {}, timeout=3)
                     context.add_init_script(script=audio_probe_init_script())
                     attach(page, restored_console, restored_failures)
