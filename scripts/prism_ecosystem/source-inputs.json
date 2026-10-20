@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "Exact existing native source; no production rerun claimed",
+  "source_case": "prism-tide",
+  "showcase_commit": "6f747f4f564a8f4907e07258c586ef212cafc9b0",
+  "files": {
+    "export_presets.cfg": {
+      "bytes": 199,
+      "sha256": "52553020b4ebe524cfe6a15ecd53012c40247b86c1c81dafc70e10e483f4afd6"
+    },
+    "main.tscn": {
+      "bytes": 233,
+      "sha256": "0dc80a315ecd5b395933d43c39ca8d0783db586a77ce393e896db36ec535a704"
+    },
+    "prism_tide.gd": {
+      "bytes": 9342,
+      "sha256": "948e772f15623c537d145c48eb67c4f859c41e7e736395a1ac116ca1ecb2e777"
+    },
+    "prism_tide.gd.uid": {
+      "bytes": 20,
+      "sha256": "6dce192f1dca44e4267f13c44d9d99dbe5add945eda3278be61ee65a75563e6b"
+    },
+    "project.godot": {
+      "bytes": 548,
+      "sha256": "abf3146a2143529d0dd165dfdd6184243cb83f87bdfc2d5bb3ed4feba497f481"
+    }
+  }
+}
