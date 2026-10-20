@@ -424,14 +424,19 @@ class RouteDriver:
         boundary = self.drain_states()  # After the actual input release callback returned.
         receipt = {"trigger": trigger, "after_release": boundary}
         self.snapshot_stops.append(receipt)
-        deadline = time.monotonic() + 10
+        # Active route budgets include release, settling and capture work. The
+        # 10s silence guard remains in drain_states; it is not a total settling
+        # deadline when fresh slow-renderer physics samples keep arriving.
+        deadline = None if self.active_budget is not None else time.monotonic() + 10
         previous = None
+        attempts = 0
         keys = ("quest_stage", "treasures", "completed", "locomotion", "language")
-        for _ in range(200):
+        while self.active_budget is not None or attempts < 200:
+            attempts += 1
             state = self.drain_states()
             if self.active_budget is not None:
                 self.check_waypoint_budget(state)
-            if time.monotonic() >= deadline:
+            if deadline is not None and time.monotonic() >= deadline:
                 break
             fresh = (state["sample_id"] > boundary["sample_id"] and
                      state["physics_frame"] > boundary["physics_frame"])
@@ -504,6 +509,8 @@ class RouteDriver:
                     if state["quest_stage"] > expected_stage:
                         raise ValueError("Quest advanced beyond the exact current route milestone")
                     approach = point.get("approach", point["target"])
+                    if self.chart_corridor is not None and self.chart_corridor.escaping:
+                        approach = self.chart_corridor.receipt["entry_escape"]["target"]
                     if self.milestone_reached(state, point):
                         if "corridor_region" in point:
                             self.chart_corridor.arrive(point["corridor_region"], state)

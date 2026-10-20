@@ -792,6 +792,38 @@ class GameplayObserverTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"inflated chart"):
             driver.drain_states()
 
+    def test_slow_fresh_snapshot_settling_uses_remaining_route_budget(self):
+        clock=[0.0];samples=[self.state(locomotion="swim",water_depth=1.2)]
+        driver=self.driver(samples)
+        def advance(_):
+            clock[0]+=3
+            number=samples[-1]['sample_id']+1
+            speed=(1.,.303,.092,.028,.008)[min(number-2,4)]
+            samples.append(self.state(sample_id=number,physics_frame=48+number*13,
+                                      locomotion="swim",water_depth=1.2,velocity=[speed,0.,0.]))
+        driver.pause.side_effect=advance
+        with patch('gameplay.time.monotonic',side_effect=lambda:clock[0]):
+            driver.begin_waypoint_budget(ROUTE[5],samples[0])
+            settled=driver.settled_snapshot_state(samples[0])
+        self.assertGreater(clock[0],10)
+        self.assertEqual(settled['sample_id'],6)
+        self.assertLess(settled['velocity'][0],.08)
+        self.assertEqual(driver.budgets[0]['active_wall_limit_seconds'],75)
+    def test_snapshot_settling_does_not_renew_total_route_budget(self):
+        clock=[0.0];samples=[self.state(locomotion="swim",water_depth=1.2)]
+        driver=self.driver(samples)
+        def advance(_):
+            clock[0]+=3
+            n=samples[-1]['sample_id']+1
+            samples.append(self.state(sample_id=n,physics_frame=48+n*13,
+                                      locomotion="swim",water_depth=1.2,velocity=[1.,0.,0.]))
+        driver.pause.side_effect=advance
+        with patch('gameplay.time.monotonic',side_effect=lambda:clock[0]):
+            driver.begin_waypoint_budget(ROUTE[5],samples[0]);clock[0]=72
+            with self.assertRaisesRegex(RuntimeError,'budget expired'):
+                driver.settled_snapshot_state(samples[0])
+        driver.snapshot.assert_not_called()
+
     def test_corridor_replays_from_exact_accepted_map_sample(self):
         entry=self.at_stage(1,sample_id=3,physics_frame=84,position=[1.3,1,9])
         later=self.at_stage(1,sample_id=4,physics_frame=96,position=[2.4,1,9])
@@ -851,6 +883,47 @@ class WaypointBudgetTests(unittest.TestCase):
     def driver(self, samples, **options):
         return RouteDriver(lambda: samples, Mock(), Mock(), Mock(), Mock(),
                            **{"physics_timeout": 15, "absolute_wall_timeout": 240, **options})
+
+    def test_browser_snapshot_settling_preserves_physics_deadline(self):
+        self.check_snapshot_budget_expiry('physics')
+
+    def test_browser_snapshot_settling_preserves_absolute_wall_deadline(self):
+        self.check_snapshot_budget_expiry('absolute_wall')
+
+    def check_snapshot_budget_expiry(self, kind):
+        # Same paired options as the actual browser RouteDriver, not native defaults.
+        clock=[0.0];initial=self.state(locomotion='swim',water_depth=1.2)
+        samples=[initial];driver=self.driver(samples)
+        def advance(_):
+            clock[0]=1 if kind=='physics' else 240
+            samples.append(self.state(sample_id=2,physics_frame=960 if kind=='physics' else 73,
+                                      locomotion='swim',water_depth=1.2,velocity=[1.,0.,0.]))
+        driver.pause.side_effect=advance
+        with patch('gameplay.time.monotonic',side_effect=lambda:clock[0]):
+            budget=driver.begin_waypoint_budget(ROUTE[5],initial)
+            with self.assertRaisesRegex(TimeoutError,kind):driver.settled_snapshot_state(initial)
+        self.assertEqual((budget['physics_frame_deadline'],budget['absolute_wall_deadline']),(960,240))
+        self.assertEqual(budget['expired_budgets'],[kind])
+        driver.snapshot.assert_not_called()
+        self.assertNotIn('settled',driver.snapshot_stops[-1])
+
+    def test_entry_escape_consumes_existing_southeast_budget_without_renewal(self):
+        clock=[0.0];entry=self.state(quest_stage=1,position=[1.3065,.5488,8.37065])
+        driver=self.driver([entry]);driver.samples=[entry];driver.map_entry=entry;driver.accepted_stage=1
+        with patch('gameplay.time.monotonic',side_effect=lambda:clock[0]):
+            budget=driver.begin_waypoint_budget(ROUTE[1],entry)
+            clock[0]=239
+            driver.begin_chart_corridor()
+            clear={**entry,'sample_id':2,'physics_frame':73,'position':[1.3065,.5488,8.6]}
+            driver.chart_corridor.observe(clear)
+            driver.check_waypoint_budget(clear)
+            self.assertFalse(driver.chart_corridor.escaping)
+            self.assertIs(driver.active_budget,budget)
+            self.assertEqual(len(driver.budgets),1)
+            clock[0]=240
+            with self.assertRaisesRegex(TimeoutError,'absolute_wall'):driver.check_waypoint_budget(clear)
+        self.assertEqual(budget['waypoint'],ROUTE[1]['name'])
+        self.assertEqual((budget['physics_frame_deadline'],budget['absolute_wall_deadline']),(960,240))
 
     def test_profiles_are_finite_paired_and_bounded(self):
         for bad in (0, -1, True, float("nan"), float("inf"), "15"):
