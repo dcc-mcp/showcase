@@ -59,3 +59,9 @@
 ## 作者与许可
 
 本轮由 DCC-MCP showcase 任务通过 typed DCC-MCP 生成，未使用外部模型、图片或纹理。案例文档、模型及渲染按本仓库 MIT 许可提供；SideFX 软件和内置着色器不作为独立库重新分发。`LICENSE.txt` 保留许可全文。
+
+## 2026-10-20 网页编码修复（阶段完成，整例仍待迁移）
+
+当前 hero.jpg 与 preview.jpg 已由原公开 PNG 经正式 Blender MCP 的原生图像编码重新输出，未重渲、未使用旧 JPEG 作为输入。明确使用 Standard/sRGB 保色并仅保留 RGB，不另加背景；原 PNG 字节未改，完整解码后的平均 RGB 误差均小于 1/255。详见[真实阶段回执](ecosystem-repair-2026-10-20.json)。上文普通 shell 编码和 derivatives.json 保留原历史记录，不倒改其来源。
+
+lighting-study.jpg 的原始 PNG 尚未恢复，仍是待修复制作环节。旧 Release ZIP 中的 documentation JPEG 也仍为历史版本，不能因当前两图修复而声称下载包或整个案例通过生态门禁。原 49 次真实重放和原始 Mantra/OBJ 证据继续复用，不为格式要求盲目重做所有建模或渲染。

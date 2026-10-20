@@ -1,0 +1,8 @@
+{
+  "original_receipt_sha256": "a13f4178fca20a727244557fe46849ca1f82653ad7f778a38a0ecf280a32b532",
+  "record": {
+    "inputs.json": "3941cc9c872015c7790e9806b3a70abef180b1ea2cf3ad5d1e99d1ba8aca3b72",
+    "encode_jpegs_in_host.py": "523cf418dd2dd8fd1b6948f9d89eea18fa1e7f174f9e4a4e532b8966f67419db",
+    "run_encoding.py": "deb50a6d72639126bf771e8683d05eb3494bd3032a496bcaece1f787fb4df3c9"
+  }
+}

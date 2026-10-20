@@ -23,8 +23,8 @@
     },
     {
       "path": "hero.jpg",
-      "sha256": "ab77fb216e715cdeb44313054de3e2d5ac039755f8c82e21f61a2777011ef623",
-      "bytes": 52728,
+      "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b",
+      "bytes": 54138,
       "width": 1200,
       "height": 1500,
       "bit_depth": 8
@@ -49,8 +49,8 @@
     },
     {
       "path": "preview.jpg",
-      "sha256": "e396bf7044a8feada7ee59ce76e80c6719d37b34847599e9f55657d8db0fb6d8",
-      "bytes": 45736,
+      "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c",
+      "bytes": 43862,
       "width": 960,
       "height": 1200,
       "bit_depth": 8
@@ -67,8 +67,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "426bca242dce77cbc4d70bcbb10e905387913d70cafd8932476a87f34d98670c",
-      "bytes": 7904
+      "sha256": "4e556f86d63c948304bac8421a6717fcf6bc22f78ad5b27e15b54cc314e7190b",
+      "bytes": 8779
     },
     {
       "path": "recipe.json",
@@ -99,6 +99,46 @@
       "path": "downloads.json",
       "bytes": 2345,
       "sha256": "2fbf62b4438e1fcf6aa093c2c56be301e5d413675be96a3d07420b376d6e8668"
+    },
+    {
+      "path": "ecosystem-repair-2026-10-20.json",
+      "bytes": 4291,
+      "sha256": "477a37eedad04e082fc6292b815809ecc77e3fa0ab83deeaae2e50efcdf0d670"
+    },
+    {
+      "path": "ecosystem-repair-evidence/acceptance.json",
+      "bytes": 1009,
+      "sha256": "42cc6dfd7f54b87be18a4e4b77a5485627b3ce4db021f07a718fc264372b25d4"
+    },
+    {
+      "path": "ecosystem-repair-evidence/encode-source.json",
+      "bytes": 2280,
+      "sha256": "84d0cd0d3fb8b3be73f125a363541dc13e04c6dfd8cb5254ae6febe0aecac0ba"
+    },
+    {
+      "path": "ecosystem-repair-evidence/measurement.json",
+      "bytes": 660,
+      "sha256": "e76b17d9e7a56a8fbef0f962d9d3e8ec9166016ddd84fccd299fb1182d0060ff"
+    },
+    {
+      "path": "ecosystem-repair-evidence/native-readback.json",
+      "bytes": 1153,
+      "sha256": "ad2f96eff293816fb1db79041b62979b385d7992287bbe341caf2530689eb538"
+    },
+    {
+      "path": "ecosystem-repair-evidence/request.json",
+      "bytes": 379,
+      "sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39"
+    },
+    {
+      "path": "ecosystem-repair-evidence/response.json",
+      "bytes": 1405,
+      "sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3"
+    },
+    {
+      "path": "ecosystem-repair-evidence/source-freeze.json",
+      "bytes": 395,
+      "sha256": "fc595b626519c0298e3df164cb666ee86fe9f6c8c213a3a86953e68f870aa5c9"
     }
   ]
 }

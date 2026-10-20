@@ -1,0 +1,28 @@
+{
+  "original_receipt_sha256": "3892a5260db7764763ae2d86a14455fb5707f91b2ea0a3de4d6475711344acfa",
+  "record": {
+    "full_decode": true,
+    "files": [
+      {
+        "source_sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be",
+        "source_unchanged": true,
+        "output_sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c",
+        "bytes": 43862,
+        "mean_abs_rgb_error": 0.7456105324074075,
+        "threshold": 6,
+        "passed": true
+      },
+      {
+        "source_sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9",
+        "source_unchanged": true,
+        "output_sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b",
+        "bytes": 54138,
+        "mean_abs_rgb_error": 0.63584,
+        "threshold": 6,
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "scope": "Two existing display RGB encodings; source alpha discarded, no color grading, no new geometry rendering"
+  }
+}
