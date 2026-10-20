@@ -3,14 +3,15 @@ from __future__ import annotations
 import math
 import time
 from observers import finite_vector, positive_integer
+from corridor import ChartCorridor, REGIONS, inside_region, xz
 
 # The authored public route is intentionally explicit. CI must physically reach each
 # point through the same controller as a player. No game-state setter is exposed.
 ROUTE = [
     {"name": "read the beach map", "target": [1.3, 7.8], "stage": 1},
     # Keep real input outside the legitimate map plinth plus player capsule.
-    {"name": "step east clear of the map plinth", "target": [2.6, 8.7], "radius": .2, "precision": True},
-    {"name": "walk around the east side of the map plinth", "target": [2.6, 6.4], "radius": .2, "precision": True},
+    {"name": "step east clear of the map plinth", "target": [2.6, 8.7], "corridor_region": "southeast"},
+    {"name": "walk around the east side of the map plinth", "target": [2.6, 6.4], "corridor_region": "northeast"},
     {"name": "open the inland cache", "target": [-3.8, 3.4], "stage": 2, "screenshot": "tidal-02.png"},
     {"name": "enter the sheltered bay", "target": [1.5, 6.2]},
     {"name": "recover the sea treasure", "target": [8.2, 5.5], "stage": 3},
@@ -142,6 +143,8 @@ def horizontal_distance(state, target):
 
 
 def inside_approach(state, point):
+    if "corridor_region" in point:
+        return inside_region(xz(state), REGIONS[point["corridor_region"]])
     return horizontal_distance(state, point.get("approach", point["target"])) <= point.get("radius", .8)
 
 
@@ -189,7 +192,7 @@ def validate_water_crossing(samples):
 class RouteDriver:
     """Callbacks must send physical OS/browser input. Observations are passive logs."""
     def __init__(self, read_states, move, interact, pause, snapshot, timeout=75,
-                 physics_timeout=None, absolute_wall_timeout=None):
+                 physics_timeout=None, absolute_wall_timeout=None, chart_sources=None):
         self.read_states, self.move, self.interact = read_states, move, interact
         self.pause, self.snapshot = pause, snapshot
         self.timeout = finite_seconds(timeout, "Legacy waypoint timeout")
@@ -212,7 +215,10 @@ class RouteDriver:
         self.budgets = []
         self.active_budget = None
         self.current_waypoint = None
-        self.precision_navigation = []
+        self.chart_sources = chart_sources
+        self.chart_corridor = None
+        self.map_entry = None
+        self.corridor_receipt = None
         self.snapshot_stops = []
 
     @property
@@ -380,7 +386,18 @@ class RouteDriver:
         action["accepted_sample_id"] = state["sample_id"]
         action["accepted_physics_frame"] = state["physics_frame"]
         self.accepted_stage = state["quest_stage"]
+        if self.accepted_stage == 1:
+            self.map_entry = state
         self.pending_action = None
+
+    def begin_chart_corridor(self):
+        if self.map_entry is None:
+            raise ValueError("Chart bypass has no accepted map interaction sample")
+        self.chart_corridor = ChartCorridor(self.map_entry, self.chart_sources)
+        self.corridor_receipt = self.chart_corridor.receipt
+        for observed in self.samples:
+            if observed["sample_id"] > self.map_entry["sample_id"]:
+                self.chart_corridor.observe(observed)
 
     def drain_states(self):
         """Validate every actual sample, but choose only the latest for decisions."""
@@ -391,6 +408,8 @@ class RouteDriver:
                 continue
             validate_state(item, previous)
             self.accept_progress(item, previous)
+            if self.chart_corridor is not None:
+                self.chart_corridor.observe(item)
             self.samples.append(item)
             self.last_observation_time = time.monotonic()
             previous = item
@@ -472,25 +491,11 @@ class RouteDriver:
                     # physics budget; neither deadline is renewed after this.
                     state = self.observe()
                 self.begin_waypoint_budget(point, state)
-                if point.get("precision"):
-                    from exploration import navigate_chart_waypoint
-                    evidence = {"waypoint": point["name"]}
-                    self.precision_navigation.append(evidence)
-                    def bounded_observe():
-                        actual = self.observe()
-                        self.check_waypoint_budget(actual)
-                        return actual
-                    wall_limit = self.timeout if self.physics_timeout is None else self.absolute_wall_timeout
-                    remaining = wall_limit - (time.monotonic() - self.active_budget["started_at"])
-                    if remaining <= 0:
-                        self.check_waypoint_budget(state)
-                        raise TimeoutError("No remaining precision-navigation wall budget")
-                    state = navigate_chart_waypoint(bounded_observe, self.move, self.pause,
-                        point["target"], radius=point["radius"], timeout=remaining,
-                        ray=None, evidence=evidence)
-                    self.check_waypoint_budget(state)
-                    if not inside_approach(state, point):
-                        raise RuntimeError("Precision navigation did not reach the original radius")
+                if point.get("corridor_region") == "southeast":
+                    self.begin_chart_corridor()
+                elif point.get("corridor_region") == "northeast":
+                    if self.chart_corridor is None or len(self.chart_corridor.arrivals) != 1:
+                        raise ValueError("Northeast bypass requires actual southeast arrival")
                 while True:
                     self.check_waypoint_budget(state)
                     state = self.observe()
@@ -500,6 +505,8 @@ class RouteDriver:
                         raise ValueError("Quest advanced beyond the exact current route milestone")
                     approach = point.get("approach", point["target"])
                     if self.milestone_reached(state, point):
+                        if "corridor_region" in point:
+                            self.chart_corridor.arrive(point["corridor_region"], state)
                         # Retain shared held keys through ordinary path turns.
                         # Releasing/repressing D within one slow X11 frame lost
                         # the held key in the earlier hosted bay-entry capture.
@@ -549,7 +556,7 @@ class RouteDriver:
             self.capture("tidal-05.png", state)
             return {"passed": True, "samples": self.samples, "milestones": self.milestones,
                     "crossing": crossing, "completed_state": state, "physical_actions": self.actions,
-                    "physical_stops": self.stops, "precision_navigation": self.precision_navigation,
+                    "physical_stops": self.stops, "chart_corridor": self.corridor_receipt,
                     "snapshot_stops": self.snapshot_stops, "budget_policy": self.budget_policy, "waypoint_budgets": self.budgets,
                     "no_demo_no_state_injection": True}
         except Exception as error:

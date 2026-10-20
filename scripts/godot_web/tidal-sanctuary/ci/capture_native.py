@@ -435,13 +435,14 @@ def main():
                 "movement_release_receipts":movement_releases})
         report["checks"].append({"name": "actual keyboard opposing chart collision and off-route encirclement", "passed": True, "receipt": exploration})
         driver = RouteDriver(lambda: records("native-input.log", "TIDAL_STATE"), move,
-                             lambda state: tap("e"), time.sleep, screenshot)
+                             lambda state: tap("e"), time.sleep, screenshot,
+                             chart_sources={name:sha256(project / name) for name in ("main.gd", "swim_controller.gd")})
         try:
             route = driver.run()
         finally:
             write_json(out / "native-input-route.json", {"input_events": events, "samples": driver.samples,
                 "milestones": driver.milestones, "screenshots": screenshots, "physical_actions": driver.actions,
-                "precision_navigation":driver.precision_navigation,"snapshot_stops":driver.snapshot_stops,
+                "chart_corridor":driver.corridor_receipt,"snapshot_stops":driver.snapshot_stops,
                 "waypoint_budgets":driver.budgets,
                 "physical_stops": driver.stops, "movement_release_receipts": movement_releases})
         time.sleep(1)

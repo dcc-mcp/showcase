@@ -91,14 +91,10 @@ class GameplayObserverTests(unittest.TestCase):
         east, north = ROUTE[1:3]
         self.assertEqual(east['target'], [2.6, 8.7])
         self.assertEqual(north['target'], [2.6, 6.4])
-        self.assertEqual(east['radius'], .2)
-        self.assertEqual(north['radius'], .2)
-        # Authored plinth .85 x .7 at (1.3,7.8), plus actual player radius .22.
-        max_x, min_z, max_z = 1.3 + .85 / 2 + .22, 7.8 - .7 / 2 - .22, 7.8 + .7 / 2 + .22
-        self.assertGreater(8.4619, max_z)  # actual previous failed-run map interaction stop
-        self.assertGreater(east['target'][1] - east['radius'], max_z)
-        self.assertGreater(min(east['target'][0], north['target'][0]) - .2, max_x)
-        self.assertLess(north['target'][1] + north['radius'], min_z)
+        self.assertEqual(east['corridor_region'], 'southeast')
+        self.assertEqual(north['corridor_region'], 'northeast')
+        self.assertNotIn('radius', east)
+        self.assertNotIn('radius', north)
         self.assertEqual(ROUTE[3]['name'], 'open the inland cache')
 
     def test_stale_frames_teleport_and_regression_are_rejected(self):
@@ -306,6 +302,7 @@ class GameplayObserverTests(unittest.TestCase):
         samples.append(self.at_stage(1, sample_id=3, physics_frame=84, position=[1.3, 1, 7.8]))
         driver.observe()
         self.assertEqual(driver.accepted_stage, 1)
+        self.assertIs(driver.map_entry, samples[-1])
         self.assertIsNone(driver.pending_action)
         self.assertEqual(driver.actions[0]["accepted_sample_id"], 3)
         # The same action cannot authorize a second, unrequested stage transition.
@@ -785,20 +782,36 @@ class GameplayObserverTests(unittest.TestCase):
         driver.snapshot.assert_not_called()
         self.assertFalse(driver.captured)
 
-    def test_precision_detour_reuses_real_navigation_with_original_budget(self):
+    def test_driver_drains_every_new_sample_through_corridor_guard(self):
+        from corridor import ChartCorridor
+        first=self.at_stage(1,position=[1.3,1,9])
+        samples=[first];driver=self.driver(samples)
+        driver.samples=[first];driver.accepted_stage=1
+        driver.chart_corridor=ChartCorridor(first)
+        samples.append(self.at_stage(1,sample_id=2,physics_frame=120,position=[1.3,1,7.8]))
+        with self.assertRaisesRegex(ValueError,"inflated chart"):
+            driver.drain_states()
+
+    def test_corridor_replays_from_exact_accepted_map_sample(self):
+        entry=self.at_stage(1,sample_id=3,physics_frame=84,position=[1.3,1,9])
+        later=self.at_stage(1,sample_id=4,physics_frame=96,position=[2.4,1,9])
+        driver=self.driver([]);driver.map_entry=entry;driver.samples=[entry,later]
+        driver.begin_chart_corridor()
+        self.assertEqual(driver.corridor_receipt['entry']['sample_id'],3)
+        self.assertEqual(driver.corridor_receipt['samples'],1)
+        self.assertIs(driver.chart_corridor.last,later)
+        bad={**later,'position':[1.3,1,7.8]}
+        driver.samples=[entry,bad,later]
+        with self.assertRaisesRegex(ValueError,'inflated chart'):driver.begin_chart_corridor()
+
+    def test_corridor_detour_keeps_original_budget(self):
         clock=[0.0];samples=[self.state()];driver=self.driver(samples)
-        point={"name":"detour","target":[2.6,6.4],"radius":.2,"precision":True}
-        def navigate(observe,*args,**kwargs):
-            self.assertEqual(kwargs["radius"],.2)
-            self.assertEqual(kwargs["timeout"],75)
-            self.assertIsNone(kwargs["ray"])
+        point=ROUTE[1]
+        with patch("gameplay.time.monotonic",side_effect=lambda:clock[0]):
+            driver.begin_waypoint_budget(point,samples[0])
             clock[0]=75
-            samples.append(self.state(sample_id=2,physics_frame=72))
-            observe()  # Every helper observation is subject to the original route budget.
-        with patch("gameplay.time.monotonic",side_effect=lambda:clock[0]), \
-             patch("gameplay.ROUTE",[point]),patch("exploration.navigate_chart_waypoint",side_effect=navigate), \
-             self.assertRaisesRegex(RuntimeError,"budget expired"):
-            driver.run()
+            with self.assertRaisesRegex(RuntimeError,"budget expired"):
+                driver.check_waypoint_budget(self.state(sample_id=2,physics_frame=72))
         self.assertEqual(driver.budgets[0]["expired_budgets"],["active_wall"])
         driver.interact.assert_not_called()
 
