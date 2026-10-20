@@ -33,7 +33,8 @@
       timer = setTimeout(() => { if (token === generation) fail(); }, 30000);
       try {
         modulePromise ||= import(moduleURL).catch(error => { modulePromise = null; throw error; });
-        await modulePromise;
+        const module = await modulePromise;
+        module.ModelViewerElement.modelCacheSize = 0; // Do not retain disconnected model assets.
         if (token !== generation) return;
         viewer = document.createElement('model-viewer');
         viewer.setAttribute('camera-controls', '');

@@ -51,6 +51,12 @@ def run(site, output, executable=None):
                         for event, dx in [('touchStart', 0), ('touchMove', 70), ('touchEnd', 70)]:
                             cdp.send('Input.dispatchTouchEvent', {'type': event, 'touchPoints': [] if event == 'touchEnd' else [{'x': x + dx, 'y': y}]})
                         page.wait_for_function('Math.abs(document.querySelector("model-viewer").getCameraOrbit().theta) > 0.01')
+                        radius = viewer.evaluate('(v) => v.getCameraOrbit().radius')
+                        for event, spread in [('touchStart', 25), ('touchMove', 65), ('touchEnd', 65)]:
+                            cdp.send('Input.dispatchTouchEvent', {'type': event, 'touchPoints': [] if event == 'touchEnd' else [{'x': x - spread, 'y': y}, {'x': x + spread, 'y': y}]})
+                        page.wait_for_function('(r) => Math.abs(document.querySelector("model-viewer").getCameraOrbit().radius - r) > 0.001', arg=radius)
+
+                    assert viewer.evaluate('(v) => v.constructor.modelCacheSize') == 0
                     assert not viewer.evaluate('(v) => v.autoplay || v.autoRotate')
                     assert not any(not url.startswith(base) for url in requests), requests
                     page.screenshot(path=str(output / (lang + ('-mobile' if mobile else '-desktop') + '.png')), full_page=True)
@@ -59,7 +65,7 @@ def run(site, output, executable=None):
                     page.wait_for_function("document.querySelector('model-viewer')?.loaded === true")
                     page.locator('[data-model-stop]').click()
                     assert not errors, errors
-                    results.append({'locale': lang, 'mobile': mobile, 'lazy_load': True, 'keyboard_orbit': True, 'zoom_reset': True, 'touch_orbit': mobile, 'close_reopen': True, 'external_requests': False})
+                    results.append({'locale': lang, 'mobile': mobile, 'lazy_load': True, 'keyboard_orbit': True, 'zoom_reset': True, 'touch_orbit': mobile, 'touch_pinch': mobile, 'disconnected_model_cache': 0, 'close_reopen': True, 'external_requests': False})
                     context.close()
             # Failed asset and Close during activation must not resurrect a viewer.
             context = browser.new_context(); page = context.new_page(); page.goto(base + '/en.html')
