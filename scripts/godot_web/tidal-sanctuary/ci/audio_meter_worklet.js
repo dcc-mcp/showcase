@@ -33,11 +33,11 @@
         this.fail('Invalid audio-thread meter configuration');
       }
     }
-    fail(reason, overflow = false) {
+    fail(reason, overflow = false, diagnostic = null) {
       if (!this.failed) {
         this.failed = true;
         this.port.postMessage({ type: 'error', schema: 1, tap_id: this.tap, sample_rate: rate,
-          error: reason, overflow, sequence: this.sequence, processed_end_frame: this.expectedFrame });
+          error: reason, overflow, sequence: this.sequence, processed_end_frame: this.expectedFrame, diagnostic });
       }
       return false;
     }
@@ -100,7 +100,18 @@
         return this.fail('Invalid audio-thread render quantum');
       }
       const frames = output[0].length;
-      if (this.expectedFrame !== null && frame !== this.expectedFrame) return this.fail('Discontinuous audio-thread render frames');
+      if (this.expectedFrame !== null && frame !== this.expectedFrame) {
+        // Failure-only telemetry. Never accept, fill, restart, or relabel a gap.
+        return this.fail('Discontinuous audio-thread render frames', false, {
+          expected_frame: this.expectedFrame, actual_frame: frame,
+          delta_frames: frame - this.expectedFrame, quantum_frames: frames,
+          input_channels: Array.isArray(inputs) && Array.isArray(inputs[0]) ? inputs[0].length : null,
+          previous_had_input: this.hadInput, segment: this.segment,
+          partial_frames: this.window ? this.window.frames : 0,
+          pending_no_input_start: this.gap ? this.gap.start_frame : null,
+          pending_no_input_end: this.gap ? this.gap.end_frame : null
+        });
+      }
       if (!Array.isArray(inputs) || inputs.length !== 1 || !Array.isArray(inputs[0])) return this.fail('Missing audio-thread input');
       const channels = inputs[0];
       if (channels.length > 32) return this.fail('Too many audio-thread channels');

@@ -612,3 +612,32 @@ test('bounded gain history overflow is retained and fails closed', () => {
   assert.equal(snapshot.gain_events.length, 4096); assert.equal(snapshot.history_overflow, true);
   assert(snapshot.errors.some(message => /history overflow/.test(message)));
 });
+
+test('worklet failure frame telemetry survives late main-thread delivery and snapshot copying', async () => {
+  const f = fixture(), master = f.ctx.createGain(); master.connect(f.ctx.destination); await f.probe.ready();
+  const node = f.ctx.nodes.find(item => item instanceof f.AudioWorkletNode), tap = f.probe.snapshot().contexts[0].audio_thread;
+  f.advance(12345); f.ctx.state = 'running';
+  node.deliver({ type: 'error', schema: 1, tap_id: tap.tap_id, sample_rate: tap.sample_rate,
+    error: 'Discontinuous audio-thread render frames', overflow: false, sequence: 7,
+    processed_end_frame: 512, diagnostic: { expected_frame: 512, actual_frame: 640,
+      delta_frames: 128, quantum_frames: 128, input_channels: 0, previous_had_input: false,
+      segment: 2, partial_frames: 0, pending_no_input_start: 256, pending_no_input_end: 512 } });
+  const thread = f.probe.snapshot().contexts[0].audio_thread;
+  assert.equal(thread.status, 'failed'); assert.equal(thread.failure_receipt.delivery_ms, 12345);
+  assert.equal(thread.failure_receipt.delivery_context_state, 'running');
+  assert.equal(thread.failure_receipt.processed_end_frame, 512);
+  assert.equal(thread.failure_receipt.diagnostic.actual_frame, 640);
+  thread.failure_receipt.diagnostic.actual_frame = 999;
+  assert.equal(f.probe.snapshot().contexts[0].audio_thread.failure_receipt.diagnostic.actual_frame, 640);
+  await assert.rejects(f.probe.ready(), /not ready/); await assert.rejects(f.probe.flush(), /not ready/);
+  assert.deepEqual(f.probe.snapshot().contexts[0].audio_thread.windows, []);
+  assert.deepEqual(f.counters(), { originalStarts: 0, resumes: 0 });
+});
+
+test('health is bounded read-only metadata and cannot clear failure or resume the graph', async () => {
+  const f=fixture(), master=f.ctx.createGain();master.connect(f.ctx.destination);await f.probe.ready();
+  const h=f.probe.health();assert.equal(h.contexts.length,1);assert.equal(h.contexts[0].state,'suspended');
+  assert.equal(h.contexts[0].meters.length,1);assert.equal(h.contexts[0].samples,undefined);
+  h.contexts[0].meters[0].status='failed';assert.equal(f.probe.health().contexts[0].meters[0].status,'ready');
+  assert.deepEqual(f.counters(),{originalStarts:0,resumes:0});
+});

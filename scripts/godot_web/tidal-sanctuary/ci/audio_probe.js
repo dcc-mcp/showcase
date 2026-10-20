@@ -175,7 +175,21 @@
       if (!message || message.schema !== 1 || message.tap_id !== meter.tap_id || message.sample_rate !== entry.ctx.sampleRate) {
         throw new Error('Unknown audio-thread receipt');
       }
-      if (message.type === 'error') { meterFailure(meter, message.error, message.overflow === true); return; }
+      if (message.type === 'error') {
+        // Preserve the first actual failure before permanently rejecting this tap.
+        // Delivery time/context is explicitly not the worklet processing time.
+        meter.failure_receipt = { tap_id: meter.tap_id, source: meter.source, role: meter.role,
+          error: String(message.error), sequence: message.sequence,
+          processed_end_frame: message.processed_end_frame,
+          diagnostic: message.diagnostic ? Object.fromEntries([
+            'expected_frame', 'actual_frame', 'delta_frames', 'quantum_frames', 'input_channels',
+            'previous_had_input', 'segment', 'partial_frames', 'pending_no_input_start', 'pending_no_input_end'
+          ].map(key => [key, message.diagnostic[key]])) : null,
+          delivery_ms: now(), delivery_context_time: entry.ctx.currentTime,
+          delivery_context_state: entry.ctx.state,
+          last_graph_event_sequence: graphEvents.length, last_gain_event_sequence: gainEvents.length };
+        meterFailure(meter, message.error, message.overflow === true); return;
+      }
       if (message.type === 'barrier') {
         const pending = meter.pending.get(message.id);
         if (!pending || message.sequence !== meter.sequence ||
@@ -236,7 +250,7 @@
     const meter = { schema: 1, tap_id: source === null ? 'mix:' + entry.id : 'node:' + source,
       source, role: source === null ? 'mix' : 'bus', status: 'loading', sample_rate: entry.ctx.sampleRate,
       window_frames: Math.round(entry.ctx.sampleRate / 10), max_windows: 12000, max_pending_messages: 256,
-      overflow: false, errors: [], windows: [], gaps: [], sequence: 0, last_end_frame: null,
+      overflow: false, errors: [], failure_receipt: null, windows: [], gaps: [], sequence: 0, last_end_frame: null,
       last_barrier: null, pending: new Map(), barrierId: 0, graph: null, node: null };
     entry.meters.push(meter);
     try {
@@ -316,7 +330,9 @@
       sequence: meter.sequence, received_windows: meter.windows.length, received_gaps: meter.gaps.length,
       ready_wall_ms: meter.ready_wall_ms, ready_context_time: meter.ready_context_time,
       graph: meter.graph ? copy(meter.graph) : null, windows: meter.windows.map(copy), gaps: meter.gaps.map(copy),
-      last_barrier: meter.last_barrier ? { ...meter.last_barrier } : null };
+      last_barrier: meter.last_barrier ? { ...meter.last_barrier } : null,
+      failure_receipt: meter.failure_receipt ? { ...meter.failure_receipt,
+        diagnostic: meter.failure_receipt.diagnostic ? { ...meter.failure_receipt.diagnostic } : null } : null };
   }
   async function ready() {
     if (contexts.length !== 1 || !contexts[0].analyser) throw new Error('No unambiguous observed live output graph');
@@ -584,6 +600,11 @@
   }
   host.__tidalAudio = Object.freeze({
     snapshot, ready, flush,
+    // Read-only bounded liveness diagnostics; never substitutes for PCM evidence.
+    health: () => ({ errors: [...errors], history_overflow: historyOverflow,
+      contexts: contexts.map(entry => ({ id: entry.id, state: entry.ctx.state,
+        context_time: entry.ctx.currentTime, meters: entry.meters.map(meter => ({
+          tap_id: meter.tap_id, status: meter.status, overflow: meter.overflow })) })) }),
     mark(name) { const item = { name, wall_ms: now(), context_times: contexts.map(entry => ({ id: entry.id, time: entry.ctx.currentTime })) }; marks.push(item); return item; },
     startRecording() {
       if (errors.length || contexts.length !== 1 || !contexts[0].terminals.some(item => item.active)) throw new Error('No unambiguous observed live output graph');

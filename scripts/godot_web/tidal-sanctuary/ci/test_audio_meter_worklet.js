@@ -147,3 +147,19 @@ test('invalid acknowledgements cannot conceal dropped or duplicate receipt seque
     assert.match(f.messages.at(-1).error, /acknowledgement/); assert.equal(f.processor.failed, true);
   }
 });
+
+test('forward and backward discontinuities preserve failure-only quantum telemetry without filling PCM', () => {
+  for (const actual of [128, 0]) {
+    const f = fixture(); f.block([pcm([.1, .2, .3, .4])]); f.ack(); f.jump(actual);
+    assert.equal(f.block([], 128), false);
+    const error = f.messages.at(-1);
+    assert.equal(error.processed_end_frame, 4);
+    assert.deepEqual(error.diagnostic, { expected_frame: 4, actual_frame: actual,
+      delta_frames: actual - 4, quantum_frames: 128, input_channels: 0,
+      previous_had_input: true, segment: 1, partial_frames: 0,
+      pending_no_input_start: null, pending_no_input_end: null });
+    assert.equal(f.records().length, 1);
+    assert.equal(f.block([new Float32Array(128)]), false);
+    assert.equal(f.records().length, 1, 'failed tap cannot resume or invent missing samples');
+  }
+});
