@@ -8,6 +8,8 @@ on:
       - 'play/**'
       - 'assets/**'
       - 'scripts/build_site.py'
+      - 'scripts/browser_preview.py'
+      - 'scripts/test_media_ranges.py'
       - 'scripts/games.py'
       - 'scripts/playable.py'
       - 'scripts/asset_versions.py'
@@ -34,12 +36,20 @@ concurrency:
   cancel-in-progress: true
 jobs:
   public-page:
+    name: Public page (${{ matrix.locale }}, ${{ matrix.viewport }})
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        locale: [en, zh]
+        viewport: [desktop, portrait]
     env:
       RECIPE: scripts/godot_web/dawnkeep/ci
       PYTHONDONTWRITEBYTECODE: '1'
       EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha || inputs.source_sha }}
+      ACCEPTANCE_LOCALE: ${{ matrix.locale }}
+      ACCEPTANCE_VIEWPORT: ${{ matrix.viewport }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -65,7 +75,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends ffmpeg
       - name: Validate public-page acceptance guards
-        run: python -m unittest discover -s "$RECIPE" -p 'test_public_page.py' -v
+        run: |
+          python -m unittest discover -s "$RECIPE" -p 'test_public_page.py' -v
+          python scripts/test_media_ranges.py
       - name: Verify completed Pages deployment for the requested source
         if: github.event_name == 'workflow_dispatch'
         env:
@@ -101,6 +113,7 @@ jobs:
         run: |
           python "$RECIPE/public_page.py" --repo "$GITHUB_WORKSPACE" \
             --site "$RUNNER_TEMP/dawnkeep-public-source/_site" \
+            --locale "$ACCEPTANCE_LOCALE" --viewport "$ACCEPTANCE_VIEWPORT" \
             --output "$RUNNER_TEMP/dawnkeep-public-result"
       - name: Accept the actual deployed pages without rebuilding or re-exporting
         if: github.event_name == 'workflow_dispatch'
@@ -108,12 +121,14 @@ jobs:
           PUBLIC_BASE_URL: ${{ inputs.base_url }}
         run: |
           python "$RECIPE/public_page.py" --repo "$GITHUB_WORKSPACE" \
-            --base-url "$PUBLIC_BASE_URL" --output "$RUNNER_TEMP/dawnkeep-public-result"
+            --base-url "$PUBLIC_BASE_URL" \
+            --locale "$ACCEPTANCE_LOCALE" --viewport "$ACCEPTANCE_VIEWPORT" \
+            --output "$RUNNER_TEMP/dawnkeep-public-result"
       - name: Preserve source-bound publication evidence
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: dawnkeep-public-${{ github.event.pull_request.head.sha || inputs.source_sha }}
+          name: dawnkeep-public-${{ github.event.pull_request.head.sha || inputs.source_sha }}-${{ matrix.locale }}-${{ matrix.viewport }}
           retention-days: 14
           if-no-files-found: error
           path: |

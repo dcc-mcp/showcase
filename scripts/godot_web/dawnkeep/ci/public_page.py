@@ -17,12 +17,13 @@ from pathlib import Path, PurePosixPath
 import re
 import stat
 import subprocess
+import sys
 import threading
 import time
 from urllib.parse import unquote, urljoin, urlsplit
 
 from capture_browser import (BROWSER_ARGS, BROWSER_IGNORED_DEFAULT_ARGS,
-                             QuietHandler, RequiredPayloadOutage, browser_executable, canvas_point)
+                             RequiredPayloadOutage, browser_executable, canvas_point)
 from common import check_engine_log, isolated_output, receipts, sha256, write_json
 from interaction import InputPlan
 from media import inspect_video
@@ -35,11 +36,23 @@ PCK_SHA256 = '649ccf7ed6a762fb00315c07fe6253d35a626fe907f0cb23a238537bb0c3b29b'
 CASE_ROOT = f'docs/showcase/{SLUG}/'
 PLAY_ROOT = f'play/{SLUG}/'
 ROOT = Path(__file__).resolve().parents[4]
+# Reuse the site's existing, independently tested HTTP Range implementation.
+# The exported-runtime preview handler intentionally has no media range logic.
+sys.path.append(str(ROOT / 'scripts'))
+from browser_preview import QuietHandler as RangeHTTPHandler
 
 
 def require(condition, message):
     if not condition:
         raise RuntimeError(message)
+
+
+def selected_pairs(locale='all', viewport='all'):
+    if locale not in ('all', 'en', 'zh') or viewport not in ('all', 'desktop', 'portrait'):
+        raise ValueError('Unsupported publication locale/viewport selector')
+    return [(language, layout == 'portrait') for language in ('en', 'zh')
+            for layout in ('desktop', 'portrait')
+            if locale in ('all', language) and viewport in ('all', layout)]
 
 
 def progress_event(stage, status, **details):
@@ -193,7 +206,7 @@ def source_receipt(repo, expected):
     tracked = verify_tracked_bytes(repo)
     files = [Path(__file__), Path(__file__).with_name('interaction.py'),
              Path(__file__).with_name('capture_browser.py'), Path(__file__).with_name('common.py'),
-             Path(__file__).with_name('media.py')]
+             Path(__file__).with_name('media.py'), ROOT / 'scripts/browser_preview.py']
     return {'expected_head_sha': expected, 'checkout_head_sha': head,
             'tracked_checkout_matches_head_bytes_and_modes': True, 'tracked_source': tracked,
             'acceptance_scripts': [{'name': f.name, 'sha256': sha256(f)} for f in files]}
@@ -225,6 +238,45 @@ def artifact_inventory(repo):
     return {'assets': assets, 'source_zip': zips[0], 'films': films, 'pck': expected_pck}
 
 
+def verify_media_range(request, base, name, data):
+    """Require an actual bounded partial response from local AND deployed hosts."""
+    require(len(data) >= 2048, 'Delivered film is too small for a meaningful range probe')
+    start = len(data) // 2
+    end = min(start + 1023, len(data) - 1)
+    response = request.get(urljoin(base, name),
+                           headers={'Range': f'bytes={start}-{end}', 'Accept-Encoding': 'identity'},
+                           timeout=30000, max_redirects=0)
+    result = {'url': response.url, 'status': response.status,
+              'requested_range': f'bytes={start}-{end}',
+              'content_range': response.headers.get('content-range'),
+              'content_length': response.headers.get('content-length'),
+              'accept_ranges': response.headers.get('accept-ranges')}
+    try:
+        require(response.status == 206 and in_site(response.url, base),
+                'Native media requires a same-origin HTTP 206 Range response: ' + json.dumps(result))
+        require(result['content_range'] == f'bytes {start}-{end}/{len(data)}'
+                and result['content_length'] == str(end - start + 1),
+                'Media Range headers do not match the requested interval: ' + json.dumps(result))
+        partial_data = response.body()
+        require(partial_data == data[start:end + 1],
+                'Media Range bytes differ from the verified complete film: ' + name)
+        result.update({'bytes': len(partial_data), 'sha256': hashlib.sha256(partial_data).hexdigest(),
+                       'matches_verified_film_slice': True})
+        return result
+    finally:
+        response.dispose()
+
+
+def midpoint_seekable(state):
+    duration = state.get('duration')
+    if type(duration) not in (int, float) or not math.isfinite(duration) or duration <= 0:
+        return False
+    target = duration / 2
+    return any(isinstance(span, list) and len(span) == 2
+               and all(type(value) in (int, float) and math.isfinite(value) for value in span)
+               and span[0] <= target <= span[1] for span in state.get('seekable', []))
+
+
 def fetch_artifacts(request, base, inventory, output, report):
     """Check actual public bytes against the exact checkout, without rebuilding live."""
     result = {}
@@ -238,6 +290,7 @@ def fetch_artifacts(request, base, inventory, output, report):
         result[name].update({'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)})
         verify_bytes(data, expected, name)
         if name in inventory['films']:
+            result[name]['http_range'] = verify_media_range(request, base, name, data)
             path = output / Path(name).name
             path.write_bytes(data)
             result[name]['decode'] = inspect_video(path)
@@ -612,7 +665,11 @@ class Session:
         frames = self.decoded_frames(video)
         self.keyboard_press('Space')
         self.wait(lambda: video.evaluate('v=>v.paused'), 'Native video pause failed')
+        self.progress('native-film-seekability', 'waiting', state=self.media_state(video))
+        self.wait(lambda: midpoint_seekable(self.media_state(video)),
+                  'Browser did not expose a native seekable range covering the film midpoint')
         before = self.media_state(video)
+        self.progress('native-film-seekability', 'passed', state=before)
         self.page.wait_for_timeout(300)
         require(abs(self.media_state(video)['time'] - before['time']) < .1, 'Paused video continues advancing')
         require(math.isfinite(before['duration']) and before['duration'] > before['time'] + 3,
@@ -736,17 +793,25 @@ def main():
     parser.add_argument('--repo', type=Path, default=ROOT)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--expected-head', default=os.environ.get('EXPECTED_HEAD_SHA'))
+    parser.add_argument('--locale', choices=('all', 'en', 'zh'), default='all')
+    parser.add_argument('--viewport', choices=('all', 'desktop', 'portrait'), default='all')
     args = parser.parse_args()
+    pairs = selected_pairs(args.locale, args.viewport)
     out = isolated_output(args.output, args.site)
     report = {'schema': 1, 'passed': False, 'expected_head_sha': args.expected_head,
               'mode': 'deployed' if args.base_url else 'isolated-build',
+              'selection': {'locale': args.locale, 'viewport': args.viewport,
+                            'required_pairs': [{'locale': locale, 'viewport': 'portrait' if mobile else 'desktop'}
+                                               for locale, mobile in pairs],
+                            'complete_four_pair_matrix': len(pairs) == 4},
               'viewports': [], 'browser_launch': {'args': BROWSER_ARGS, 'chromium_sandbox': True,
                                                 'ignore_default_args': BROWSER_IGNORED_DEFAULT_ARGS},
               'scope': 'Promotion, public media and bounded shell/embedded integration of frozen verified runtime',
               'limitations': ['No new eight-wave campaign or gameplay-balance claim.',
                              'Portrait is Chromium emulated touch, not a physical phone.',
                              'Video decode and presented-frame checks do not establish soundtrack listening or subjective quality.',
-                             'Expected source SHA is bound to checked public bytes; global deployment identity needs the Pages run receipt.']}
+                             'Expected source SHA is bound to checked public bytes; global deployment identity needs the Pages run receipt.',
+                             'This result covers only selection.required_pairs; publication needs all four workflow matrix jobs.']}
     server = None
     try:
         report['source'] = source_receipt(args.repo, args.expected_head)
@@ -755,7 +820,7 @@ def main():
         inventory = artifact_inventory(args.repo)
         if args.site:
             require(args.site.is_dir() and (args.site / 'index.html').is_file(), 'Isolated built site is missing')
-            server = ThreadingHTTPServer(('127.0.0.1', 0), partial(QuietHandler, directory=str(args.site.resolve())))
+            server = ThreadingHTTPServer(('127.0.0.1', 0), partial(RangeHTTPHandler, directory=str(args.site.resolve())))
             threading.Thread(target=server.serve_forever, daemon=True).start()
             base = f'http://127.0.0.1:{server.server_port}/'
             report['limitations'].append('Isolated-build acceptance does not prove deployed-site behavior.')
@@ -775,15 +840,14 @@ def main():
                                          ignore_default_args=BROWSER_IGNORED_DEFAULT_ARGS)
             report['browser_version'] = browser.version
             try:
-                for locale in ('en', 'zh'):
-                    for mobile in (False, True):
-                        name = locale + ('-portrait' if mobile else '-desktop')
-                        result = Session(browser, base, out / name, locale, mobile, inventory).run()
-                        report['viewports'].append(result)
-                        write_json(out / 'public-page.json', report)
+                for locale, mobile in pairs:
+                    name = locale + ('-portrait' if mobile else '-desktop')
+                    result = Session(browser, base, out / name, locale, mobile, inventory).run()
+                    report['viewports'].append(result)
+                    write_json(out / 'public-page.json', report)
             finally:
                 browser.close()
-        report['passed'] = len(report['viewports']) == 4 and all(r['passed'] for r in report['viewports'])
+        report['passed'] = len(report['viewports']) == len(pairs) and all(r['passed'] for r in report['viewports'])
         require(report['passed'], 'At least one public locale/viewport acceptance failed')
     except Exception as error:
         report['blocker'] = str(error)

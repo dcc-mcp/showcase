@@ -179,6 +179,95 @@ class RawTrackedSourceTests(unittest.TestCase):
             gate.source_receipt(self.root, self.head)
 
 
+class PublicMatrixTests(unittest.TestCase):
+    def test_default_and_four_single_pair_selections_cover_identical_required_matrix(self):
+        expected = [('en', False), ('en', True), ('zh', False), ('zh', True)]
+        self.assertEqual(gate.selected_pairs(), expected)
+        actual = []
+        for locale in ('en', 'zh'):
+            for viewport in ('desktop', 'portrait'):
+                selected = gate.selected_pairs(locale, viewport)
+                self.assertEqual(len(selected), 1)
+                actual.extend(selected)
+        self.assertEqual(actual, expected)
+        with self.assertRaises(ValueError):
+            gate.selected_pairs('fr', 'portrait')
+
+    def test_workflow_runs_all_four_without_skipping_failures_and_separate_artifacts(self):
+        workflow = (gate.ROOT / '.github/workflows/dawnkeep-public-page.yml').read_text()
+        for required in ('runs-on: ubuntu-24.04', 'timeout-minutes: 20', 'fail-fast: false',
+                         'locale: [en, zh]', 'viewport: [desktop, portrait]'):
+            self.assertIn(required, workflow)
+        self.assertEqual(workflow.count('--locale "$ACCEPTANCE_LOCALE" --viewport "$ACCEPTANCE_VIEWPORT"'), 2)
+        self.assertIn('-${{ matrix.locale }}-${{ matrix.viewport }}', workflow)
+        self.assertNotIn('continue-on-error', workflow)
+        source = Path(gate.__file__).read_text()
+        self.assertIn("'complete_four_pair_matrix': len(pairs) == 4", source)
+        self.assertIn("len(report['viewports']) == len(pairs)", source)
+        self.assertIn('publication needs all four workflow matrix jobs', source)
+
+
+class PublicMediaRangeTests(unittest.TestCase):
+    def test_server_reuses_real_range_handler_and_its_partial_response(self):
+        import browser_preview
+        import test_media_ranges
+        self.assertIs(gate.RangeHTTPHandler, browser_preview.QuietHandler)
+        source = Path(gate.__file__).read_text()
+        self.assertIn('partial(RangeHTTPHandler, directory=', source)
+        # Initialize MIME lookup before the shared helper mocks open().
+        import mimetypes
+        mimetypes.init()
+        checker = test_media_ranges.RangeResponseTests()
+        status, headers, body, _ = checker.respond('bytes=2-5')
+        self.assertEqual((status, headers['Content-Range'], body), (206, 'bytes 2-5/10', b'2345'))
+
+    def response(self, status=206, content_range='bytes 2048-3071/4096', body=None):
+        response = Mock(status=status, url=gate.OFFICIAL_BASE + 'film.mp4')
+        response.headers = {'content-range': content_range, 'content-length': '1024', 'accept-ranges': 'bytes'}
+        response.body.return_value = bytes(range(256)) * 4 if body is None else body
+        request = Mock()
+        request.get.return_value = response
+        return request, response
+
+    def test_local_and_live_media_require_actual_exact_partial_bytes(self):
+        data = bytes(range(256)) * 16
+        for base in (gate.OFFICIAL_BASE, 'http://127.0.0.1:1234/'):
+            request, response = self.response()
+            response.url = base + 'film.mp4'
+            result = gate.verify_media_range(request, base, 'film.mp4', data)
+            self.assertEqual(result['status'], 206)
+            self.assertTrue(result['matches_verified_film_slice'])
+            self.assertEqual(request.get.call_args.kwargs['headers']['Range'], 'bytes=2048-3071')
+            self.assertEqual(request.get.call_args.kwargs['max_redirects'], 0)
+            response.dispose.assert_called_once()
+
+    def test_ignored_ranges_bad_headers_and_wrong_partial_bytes_are_fatal(self):
+        for parameters in ({'status': 200}, {'content_range': 'bytes 0-1023/4096'}, {'body': b'x' * 1024}):
+            request, response = self.response(**parameters)
+            with self.assertRaises(RuntimeError):
+                gate.verify_media_range(request, gate.OFFICIAL_BASE, 'film.mp4', bytes(range(256)) * 16)
+            response.dispose.assert_called_once()
+
+    def test_browser_must_expose_nonempty_seekable_range_covering_click_target(self):
+        self.assertTrue(gate.midpoint_seekable({'duration': 58, 'seekable': [[0, 58]]}))
+        for state in ({'duration': 58, 'seekable': [[0, 0]]},
+                      {'duration': 58, 'seekable': [[0, 4]]},
+                      {'duration': float('nan'), 'seekable': [[0, 58]]},
+                      {'duration': 58, 'seekable': [[0, '58']]}):
+            self.assertFalse(gate.midpoint_seekable(state))
+        source = Path(gate.__file__).read_text()
+        self.assertIn('self.wait(lambda: midpoint_seekable(self.media_state(video))', source)
+        self.assertIn("result[name]['http_range'] = verify_media_range(request, base, name, data)", source)
+
+    def test_shared_server_hash_and_workflow_guards_are_bound(self):
+        source = Path(gate.__file__).read_text()
+        self.assertIn("ROOT / 'scripts/browser_preview.py'", source)
+        workflow = (gate.ROOT / '.github/workflows/dawnkeep-public-page.yml').read_text()
+        self.assertIn("- 'scripts/browser_preview.py'", workflow)
+        self.assertIn("- 'scripts/test_media_ranges.py'", workflow)
+        self.assertIn('python scripts/test_media_ranges.py', workflow)
+
+
 class NativeMediaAndProgressTests(unittest.TestCase):
     def test_native_timeline_and_play_controls_match_reviewed_capture_geometry(self):
         desktop = {'x': 316, 'y': 285, 'width': 960, 'height': 540}
