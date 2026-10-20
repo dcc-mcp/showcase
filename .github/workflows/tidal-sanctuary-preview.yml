@@ -52,7 +52,14 @@ jobs:
         run: |
           python -m unittest discover -s "$RECIPE/ci" -p 'test_*.py' -v
           python scripts/godot_web/test_materialize_runtime.py
-          node --test "$RECIPE/ci/test_web_exit.js" "$RECIPE/ci/test_audio_probe.js" "$RECIPE/ci/test_web_audio.js"
+          node --test "$RECIPE/ci/test_web_exit.js" "$RECIPE/ci/test_audio_probe.js" "$RECIPE/ci/test_web_audio.js" "$RECIPE/ci/test_audio_meter_worklet.js"
+      - name: Actual sandboxed browser audio observer smoke
+        timeout-minutes: 1
+        run: |
+          set -euo pipefail
+          python "$RECIPE/ci/check_audio_observer_browser.py" \
+            --chromium /opt/google/chrome/chrome --source "$RECIPE/game" \
+            --output "$RUNNER_TEMP/tidal-audio-observer"
       - name: Actual typed MCP create, save, restart and reopen
         id: author
         shell: bash
@@ -124,6 +131,7 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: |
+            ${{ runner.temp }}/tidal-audio-observer
             ${{ runner.temp }}/tidal-author/authoring.json
             ${{ runner.temp }}/tidal-author/mcp-raw.json
             ${{ runner.temp }}/tidal-author/mcp-tool-schemas.json

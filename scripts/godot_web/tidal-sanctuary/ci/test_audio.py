@@ -6,6 +6,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
 import tempfile
+from test_audio_thread import meter_fixture, timed_fixture
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window, audio_prepared,
                              real_button, validate_audio_baseline, validate_audio_sources,
                              validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
@@ -13,13 +14,19 @@ from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, aud
 
 
 def snapshot(rms=0, state="suspended", seconds=2.5):
-    return {"schema": 1, "errors": [], "wall_ms": seconds * 1000,
+    result = {"schema": 1, "errors": [], "wall_ms": seconds * 1000,
             "starts": [], "gestures": [], "marks": [{"name": "baseline", "wall_ms": 0, "context_times": [{"id": 1, "time": 0}]}], "user_activation": {"has_been_active": False},
             "contexts": [{"id": 1, "destination": 1, "state": state, "context_time": seconds if state == "running" else 0,
                           "terminals": [{"active": True, "kind": "GainNode", "source": 2, "key": "2:0:0", "mirror_count": 1, "connected_ms": 0}],
                           "samples": [{"wall_ms": index * 100, "context_time": index / 10 if state == "running" else 0,
                                        "state": state, "rms": rms, "peak": rms * 2, "clipped_fraction": 0, "active_music": 0, "active_cues": []}
                                       for index in range(int(seconds * 10) + 1)]}]}
+    context = result["contexts"][0]
+    context["sample_rate"] = 8000
+    context["audio_thread"] = meter_fixture(seconds if state == "running" else 0, rms)
+    timing = timed_fixture(seconds)
+    result.update({key:value for key,value in timing.items() if key.startswith("pcm_")})
+    return result
 
 
 def route_audio():
@@ -49,7 +56,41 @@ def route_audio():
         sample["active_music"] = 1 if sample["context_time"] >= .2 else 0
         sample["active_cues"] = [item["id"] for item in value["starts"] if item["name"] != "music"
             and item["scheduled_start"] <= sample["context_time"] < item["planned_end"]]
+    refresh_route_graph(value)
     return value, receipts, actions
+
+
+def refresh_route_graph(value):
+    from test_audio_source_contract import graph_event, gain_event
+    context = value["contexts"][0]
+    seconds = context["context_time"]
+    value.update(history_overflow=False, graph_events=[], gain_events=[], edges=[])
+    value["nodes"] = [{"id":1,"kind":"AudioDestinationNode"},
+                      *[{"id":node,"kind":"GainNode"} for node in (2,100,101)],
+                      *[{"id":item["id"],"kind":"AudioBufferSourceNode"} for item in value["starts"]]]
+    for bus in (100,101):graph_event(value,"connect",bus,2,0)
+    graph_event(value,"connect",2,1,0)
+    for gain in (2,100,101):gain_event(value,gain,"initial",[],1,0)
+    for meter in (context["audio_thread"],):meter.update(ready_context_time=0,ready_wall_ms=0)
+    buses=[]
+    for bus in (100,101):
+        meter=meter_fixture(seconds,.01,source=bus);meter.update(ready_context_time=0,ready_wall_ms=0);buses.append(meter)
+    context["audio_thread"]["streams"]=buses
+    for item in value["starts"]:
+        bus=100 if item["name"]=="music" else 101
+        item.update(path_at_start=[item["id"],bus,2,1],nonzero_gain_path_at_start=[item["id"],bus,2,1])
+        for key,default in {"detune":0,"mutations":[],"parameter_automation":[],"requested_duration":None}.items():item.setdefault(key,default)
+        item["meter_taps"]=[{"tap_id":"mix:1","source":None,"role":"mix"},
+                            {"tap_id":"node:"+str(bus),"source":bus,"role":"bus"}]
+        graph_event(value,"connect",item["id"],bus,item["scheduled_start"])
+        if item.get("planned_end") is not None and item["planned_end"] <= seconds:
+            graph_event(value,"disconnect",item["id"],bus,item["planned_end"])
+
+
+def silence_pcm_window(item):
+    for key in ("square_sum", "rms", "peak", "clipped_samples", "clipped_fraction"):item[key]=0
+    for key in ("channel_square_sum", "channel_rms", "channel_peak", "channel_clipped_samples"):
+        item[key]=[0]*item["channels"]
 
 
 class AudioAcceptanceFixtures(unittest.TestCase):
@@ -109,6 +150,7 @@ class AudioAcceptanceFixtures(unittest.TestCase):
         source = value["starts"][0]
         source.update(looping=True, planned_end=None, detune=0, loop_start=0, loop_end=32,
                       requested_duration=None, mutations=[], parameter_automation=[])
+        refresh_route_graph(value)
         validate_audio_sources(value, receipts, actions)
         for change in ({"loop_start": 1}, {"loop_end": 31}, {"detune": 1}, {"requested_duration": 32},
                        {"mutations": [{}]}, {"parameter_automation": [{}]}):
@@ -118,11 +160,11 @@ class AudioAcceptanceFixtures(unittest.TestCase):
 
     def test_rejected_window_preserves_its_exact_observation_before_diagnostics(self):
         value = snapshot(.02, "running")
-        value["contexts"][0]["samples"] = value["contexts"][0]["samples"][:2]
+        value["contexts"][0]["audio_thread"]["windows"] = value["contexts"][0]["audio_thread"]["windows"][:2]
         original = copy.deepcopy(value)
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "rejected-window.json"
-            with self.assertRaisesRegex(ValueError, "sustained fresh meter"):
+            with self.assertRaisesRegex(ValueError, "sustained contiguous real PCM"):
                 audio_window(value, 0, 2500, 1.2, audible=True, evidence_path=path)
             self.assertEqual(json.loads(path.read_text()), {"begin_ms": 0, "end_ms": 2500,
                 "minimum_seconds": 1.2, "audible": True, "snapshot": original})
@@ -241,19 +283,19 @@ class AudioAcceptanceFixtures(unittest.TestCase):
         for value in (snapshot(0, "running"), snapshot(.01, "suspended")):
             with self.assertRaises(ValueError): audio_window(value, 0, 2500, 2, audible=True)
         stalled = snapshot(.01, "running")
-        for item in stalled["contexts"][0]["samples"]: item["context_time"] = 0
+        stalled["contexts"][0]["context_time"] = 0
         with self.assertRaises(ValueError): audio_window(stalled, 0, 2500, 2, audible=True)
 
     def test_quiet_window_rejects_mute_that_does_not_mute(self):
-        audio_window(snapshot(), 0, 2500, 1)
+        audio_window(snapshot(0, "running"), 0, 2500, 1)
         with self.assertRaises(ValueError): audio_window(snapshot(.001, "running"), 0, 2500, 1)
 
     def test_missing_meter_span_stale_gaps_and_invalid_rms_fail(self):
         for change in ("missing", "gap", "nan", "duplicate-voice", "clip"):
             value = snapshot(.01, "running")
             samples = value["contexts"][0]["samples"]
-            if change == "missing": samples.clear()
-            if change == "gap": del samples[4:20]
+            if change == "missing": value["contexts"][0]["audio_thread"]["windows"].clear()
+            if change == "gap": del value["contexts"][0]["audio_thread"]["windows"][4:20]
             if change == "nan": samples[0]["rms"] = float("nan")
             if change == "duplicate-voice": samples[0]["active_music"] = 2
             if change == "clip": samples[0]["clipped_fraction"] = .1
@@ -309,6 +351,7 @@ class AudioAcceptanceFixtures(unittest.TestCase):
         value, receipts, actions = route_audio()
         value["starts"] = [item for item in value["starts"] if item["name"] != "music" or item["id"] == 3]
         value["starts"][0].update({"looping": True, "planned_end": None, "detune": 0, "loop_start": 0, "loop_end": 32, "requested_duration": None, "mutations": [], "parameter_automation": []})
+        refresh_route_graph(value)
         result = validate_audio_sources(value, receipts, actions)
         self.assertEqual(result["first_loop_boundary"]["continuing_source_id"], 3)
         value["starts"][0]["stopped_context_time"] = 32.3
@@ -317,36 +360,53 @@ class AudioAcceptanceFixtures(unittest.TestCase):
     def test_loop_boundary_silent_gapped_sparse_or_muted_evidence_fails(self):
         for change in ("silent", "gap", "sparse", "early-stop", "muted"):
             value, receipts, actions = route_audio()
-            samples = value["contexts"][0]["samples"]
+            samples = value["contexts"][0]["audio_thread"]["streams"][0]["windows"]
             if change == "silent":
                 for item in samples:
-                    if 32 <= item["context_time"] <= 32.4: item["rms"] = 0
-            if change == "gap": samples[:] = [item for item in samples if not 32 <= item["context_time"] <= 32.5]
+                    if 32 <= item["start_frame"] / 8000 <= 32.4: silence_pcm_window(item)
+            if change == "gap": samples[:] = [item for item in samples if not 32 <= item["start_frame"] / 8000 <= 32.5]
             if change == "sparse": samples[:] = samples[::4]
             if change == "early-stop": value["starts"][0]["stopped_context_time"] = 10
             if change == "muted": receipts.append({"schema": 1, "event": "mute", "muted": True})
             with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_sources(value, receipts, actions)
 
-    def test_cue_near_end_offset_early_stop_and_missing_active_lifetime_fail(self):
-        for change in ("offset", "stop", "ended", "planned-short", "missing-active", "muted-middle", "sparse", "missing-end", "nan-rms", "negative-peak", "nan-clock"):
+    def test_cue_near_end_offset_early_stop_and_missing_pcm_lifetime_fail(self):
+        for change in ("offset", "stop", "ended", "planned-short", "silent-bus", "muted-middle", "sparse", "missing-end", "nan-rms", "negative-peak", "nan-frame"):
             value, receipts, actions = route_audio()
             cue = next(item for item in value["starts"] if item["name"] == "chart_read")
-            samples = value["contexts"][0]["samples"]
+            samples = value["contexts"][0]["audio_thread"]["streams"][1]["windows"]
             if change == "offset": cue["offset"] = cue["duration"] - .001
             if change == "stop": cue["stopped_context_time"] = cue["scheduled_start"] + .001
             if change == "ended": cue["ended_context_time"] = cue["scheduled_start"] + .001
             if change == "planned-short": cue["planned_end"] = cue["scheduled_start"] + .1
-            if change == "missing-active":
-                for item in samples: item["active_cues"] = []
+            if change == "silent-bus":
+                for item in samples:silence_pcm_window(item)
             if change == "muted-middle":
                 for item in samples:
-                    if abs(item["context_time"] - 10.3) < .01: item["active_cues"] = []
-            if change == "sparse": samples[:] = [item for item in samples if not 10.2 <= item["context_time"] <= 10.5]
-            if change == "missing-end": samples[:] = [item for item in samples if not 10.4 <= item["context_time"] <= 10.8]
+                    if abs(item["start_frame"] / 8000 - 10.3) < .01:silence_pcm_window(item)
+            if change == "sparse": samples[:] = [item for item in samples if not 10.2 <= item["start_frame"] / 8000 <= 10.5]
+            if change == "missing-end": samples[:] = [item for item in samples if not 10.4 <= item["start_frame"] / 8000 <= 10.8]
             if change == "nan-rms": samples[101]["rms"] = float("nan")
             if change == "negative-peak": samples[101]["peak"] = -.1
-            if change == "nan-clock": samples[101]["context_time"] = float("nan")
+            if change == "nan-frame": samples[101]["start_frame"] = float("nan")
             with self.subTest(change=change), self.assertRaises(ValueError): validate_audio_sources(value, receipts, actions)
+
+    def test_native_seam_uses_real_effective_buffer_end_without_padding(self):
+        value, receipts, actions = route_audio()
+        value["starts"] = [item for item in value["starts"] if item["name"] != "music" or item["id"] == 3]
+        music=value["starts"][0]
+        music.update(looping=True,planned_end=None,detune=0,loop_start=0,loop_end=32,
+                     duration=1411199/44100,requested_duration=None,mutations=[],parameter_automation=[])
+        refresh_route_graph(value)
+        result=validate_audio_sources(value,receipts,actions)
+        self.assertEqual(result["first_loop_boundary"]["boundary_context_time"],.2+1411199/44100)
+
+    def test_audio_thread_proof_does_not_backfill_sparse_main_thread_metadata(self):
+        value, receipts, actions = route_audio()
+        context=value["contexts"][0];context["samples"]=[context["samples"][0],context["samples"][-1]]
+        result=validate_audio_sources(value,receipts,actions)
+        self.assertEqual(len(result["cue_pairs"]),4)
+        self.assertEqual(len(context["samples"]),2)
 
     def test_actual_input_uses_mouse_or_touch_only_at_observed_rect(self):
         page = Mock()

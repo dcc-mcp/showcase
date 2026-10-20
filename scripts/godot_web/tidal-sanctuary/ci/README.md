@@ -144,3 +144,57 @@ mandatory. Failure never packages a partial scaffold. No addon limit is changed,
 no full script is read back over the similarly bounded response channel, and
 no direct filesystem script-authoring fallback is used. Actual MCP acceptance
 must come from a new exact-head run, not the prior failed artifact.
+
+## Audio-thread observation candidate (2026-10-20)
+
+Head `ff747ae`, [run 39354896538](https://github.com/dcc-mcp/showcase/actions/runs/39354896538),
+passed bounded typed MCP authoring, actual native opposite-face keyboard contact,
+the complete treasure/swim route, fresh-process save restoration, and official
+Web export. Both actual Web viewports reached silent initialization and real
+Begin, then failed sustained fresh audio-meter evidence. Their exact rejected
+windows contain only two or three main-thread analyser observations; those sparse
+samples do not establish continuous sound. This failed baseline stays retained.
+
+The candidate observer uses a test-only public
+[AudioWorkletProcessor](https://www.w3.org/TR/webaudio/#AudioWorkletProcessor)
+to measure the browser's actual rendered PCM on the audio thread. It observes
+one post-master mix tap and the two real upstream gain buses, pre-armed before
+Begin. Original speaker edges, sources, assets, native loop and context lifecycle
+are unchanged. Observer output is always zero into the existing capture stream;
+it cannot generate audible replacement samples or resume a context. The shipped
+game does not include this observer.
+
+Each complete 100 ms record retains actual sample-frame bounds, channel sample
+counts, per-channel square sums/RMS/peaks and clipping counts. Partial records
+remain intact for integrity checks; only fully contained complete records count
+toward required coverage. Missing input is an explicit gap, never assumed zero.
+Missing, duplicated, reordered, discontinuous or malformed records fail closed,
+as do bounded queue/storage overflow and processor errors. A snapshot freezes
+its real context-clock cutoff before draining queued messages. Independent wall
+time and the audio-thread drain watermark must establish elapsed coverage;
+message delivery time is never relabeled as capture time.
+
+Audibility and quiet thresholds remain `1e-4` and `1e-5` RMS respectively.
+Running windows require contiguous real frames for their full minimum duration.
+Cue and first-loop-seam checks require audible PCM on both the original source
+bus and post-master mix, so background music cannot conceal a silent cue.
+Source identity, trusted input, original durations, loop bounds, pitch, no music
+overlap, actual topology and historical gain events remain independent checks.
+A cue-time mute, rewire, competing source or unsupported automation fails even
+if a later snapshot looks normal. The decoded Ogg's actual one-frame-short
+buffer duration defines its native loop boundary without adding a sample.
+
+A short hosted audio-only browser fixture checks the observer against the real
+backend and unchanged assets before costly engine work. It is not Godot input,
+rendering, loop-seam, focus or save acceptance. Full exact-head native and both
+Web routes still must pass. The separate focus-suspension guard still requires
+fresh main-thread observations of a frozen context and zero real terminal gain;
+a suspended processor produces no fresh PCM. Live recording, closure and
+fresh-process restoration checks remain in force.
+
+Unit fixtures explicitly use fabricated inputs only to test rejection logic;
+they never become runtime evidence. Passing audio-thread continuity does not
+establish animation/input responsiveness, rendered frame rate, hardware GPU or
+physical-device performance, or subjective listening quality. Software rendering
+remains a known performance concern and cannot be relabeled playable on the
+strength of an audio result.

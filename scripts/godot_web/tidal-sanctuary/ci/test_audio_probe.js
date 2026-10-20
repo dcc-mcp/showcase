@@ -5,7 +5,7 @@ const test = require('node:test');
 const install = require('./audio_probe.js');
 function fixture(options = {}) {
   let wall = 0, originalStarts = 0, resumes = 0;
-  const events = {}, timers = [], constructorOptions = [];
+  const events = {}, timers = [], constructorOptions = [], moduleUrls = [], revokedUrls = [];
   class AudioNode {
     constructor(context) { this.context = context; this.out = []; }
     connect(destination, output = 0, input = 0) {
@@ -29,6 +29,8 @@ function fixture(options = {}) {
     exponentialRampToValueAtTime(value, time) { this.calls.push(['exponentialRampToValueAtTime', value, time]); return this; }
     setTargetAtTime(value, time, constant) { this.calls.push(['setTargetAtTime', value, time, constant]); return this; }
     setValueCurveAtTime(values, time, duration) { this.calls.push(['setValueCurveAtTime', values, time, duration]); return this; }
+    cancelScheduledValues(time) { this.calls.push(['cancelScheduledValues', time]); return this; }
+    cancelAndHoldAtTime(time) { this.calls.push(['cancelAndHoldAtTime', time]); return this; }
   }
   class GainNode extends AudioNode { constructor(context) { super(context); this.gain = new AudioParam(1); } }
   class MediaStreamAudioDestinationNode extends AudioNode { constructor(context) { super(context); this.stream = { getAudioTracks: () => [{}] }; } }
@@ -58,16 +60,31 @@ function fixture(options = {}) {
     stop() { this.stopped = true; }
   }
   class UnknownNode extends AudioNode {}
+  class AudioWorkletNode extends AudioNode {
+    constructor(context, name, options) {
+      super(context); context.nodes.push(this); this.processorName = name; this.options = options;
+      this.port = { sent: [], onmessage: null, postMessage(message) { this.sent.push(message); } };
+    }
+    deliver(message) { this.port.onmessage({ data: message }); }
+  }
   class Context {
     constructor(options) {
       if (options && options.fixtureError) throw options.fixtureError;
       constructorOptions.push(options);
       this.currentTime = 0; this.sampleRate = options && options.sampleRate || 48000;
       this.state = 'suspended'; this.nodes = []; this.destination = new AudioDestinationNode(this);
+      this.audioWorklet = { addModule(url) {
+        moduleUrls.push(url);
+        if (options && options.moduleError) return Promise.reject(options.moduleError);
+        // Synchronously settled deterministic module fixture. No renderer and
+        // no fabricated PCM. Deferred installation is tested separately below.
+        return { then(callback) { callback(); return Promise.resolve(); } };
+      } };
     }
     create(Type) { const node = new Type(this); this.nodes.push(node); return node; }
     createMediaStreamDestination() { return this.create(MediaStreamAudioDestinationNode); }
     createAnalyser() { return this.create(AnalyserNode); }
+    createGain() { return this.create(GainNode); }
     resume() { resumes++; this.state = 'running'; }
   }
   class MediaRecorder {
@@ -76,9 +93,12 @@ function fixture(options = {}) {
     addEventListener() {}
     start() { this.state = 'recording'; }
   }
-  const host = { AudioContext: Context, AudioNode, AudioParam, AudioBufferSourceNode, MediaRecorder,
+  const host = { AudioContext: Context, AudioNode, AudioParam, AudioBufferSourceNode, GainNode, AudioWorkletNode, MediaRecorder,
+    __tidalAudioWorkletSource: '// Deterministic module-loading fixture; no audio execution', Blob,
+    URL: { createObjectURL: () => 'blob:audio-meter-fixture/' + (moduleUrls.length + 1), revokeObjectURL: url => revokedUrls.push(url) },
     performance: { now: () => wall }, navigator: { userActivation: { isActive: false, hasBeenActive: false } },
     setInterval: callback => { timers.push(callback); return timers.length; }, clearInterval() {},
+    setTimeout, clearTimeout,
     addEventListener: (name, callback) => { events[name] = callback; } };
   if (options.alias) host.webkitAudioContext = Context;
   if (options.prefixedOnly) { host.webkitAudioContext = Context; delete host.AudioContext; }
@@ -93,7 +113,8 @@ function fixture(options = {}) {
   }
   function advance(ms) { wall += ms; if (ctx.state === 'running') ctx.currentTime += ms / 1000; for (const timer of timers) timer(); }
   return { probe, host, ctx, source, advance, events, AudioNode, GainNode, UnknownNode,
-    Context, originalResume, constructorOptions, counters: () => ({ originalStarts, resumes }) };
+    Context, originalResume, constructorOptions, moduleUrls, revokedUrls, AudioWorkletNode,
+    counters: () => ({ originalStarts, resumes }) };
 }
 
 test('construction alone is counted without creating nodes, meter evidence or activation', () => {
@@ -434,4 +455,160 @@ test('public gain-parameter input retains its API return and does not alter sour
   assert.equal(modulator.connect(master.gain), undefined);
   assert.deepEqual(f.probe.snapshot().errors, []);
   assert.deepEqual(f.probe.snapshot().starts[0].parameter_automation, []);
+});
+
+// These module/port fixtures only exercise observer plumbing. Actual PCM
+// arithmetic and processing-clock continuity have independent processor tests.
+test('ready pre-arms mix and both graph-discovered buses without sources or resume', async () => {
+  const f = fixture(), master = f.ctx.createGain(), firstBus = f.ctx.createGain(), secondBus = f.ctx.createGain();
+  firstBus.connect(master); secondBus.connect(master); master.connect(f.ctx.destination);
+  const ready = await f.probe.ready(), snapshot = f.probe.snapshot(), thread = snapshot.contexts[0].audio_thread;
+  assert.equal(f.moduleUrls.length, 1); assert.deepEqual(f.revokedUrls, f.moduleUrls);
+  assert.equal(ready.streams.length, 3); assert.equal(thread.streams.length, 3);
+  assert.equal(thread.role, 'mix'); assert.equal(thread.source, null);
+  assert.deepEqual(thread.streams.map(item => item.role), ['mix', 'bus', 'bus']);
+  assert(thread.streams.every(item => item.status === 'ready' && item.graph.output === 'zero-only'));
+  assert(thread.streams.every(item => item.windows.length === 0 && item.gaps.length === 0));
+  assert(thread.streams.every(item => item.graph.destination === snapshot.contexts[0].destination));
+  assert.equal(master.out.length, 3, 'original speaker, original analyser tap, original stream tap');
+  assert.equal(firstBus.out.length, 2, 'original master edge plus genuine bus observer');
+  assert.equal(secondBus.out.length, 2);
+  const observers = f.ctx.nodes.filter(node => node instanceof f.AudioWorkletNode);
+  assert(observers.every(node => node.out.length === 1 && node.out[0].destination.stream));
+  assert(observers.every(node => node.options.numberOfInputs === 1 && node.options.numberOfOutputs === 1));
+  assert.deepEqual(f.counters(), { originalStarts: 0, resumes: 0 });
+  assert.deepEqual(snapshot.errors, []);
+});
+test('gain creation captures initial and scheduled values before the first original graph connection', () => {
+  const f = fixture(), node = f.ctx.createGain();
+  node.gain.setValueAtTime(.7, 0); node.gain.value = .4;
+  node.gain.cancelScheduledValues(1); node.gain.cancelAndHoldAtTime(2);
+  let events = f.probe.snapshot().gain_events;
+  assert.deepEqual(events.map(item => item.method), ['initial', 'setValueAtTime', 'value', 'cancelScheduledValues', 'cancelAndHoldAtTime']);
+  assert.deepEqual(events.map(item => item.args), [[], [.7, 0], [.4], [1], [2]]);
+  assert(events.every(item => item.context === 1 && item.context_time === 0));
+  assert.equal(events[0].value, 1); assert.equal(f.probe.snapshot().graph_events.length, 0);
+  const direct = new f.host.GainNode(f.ctx);
+  assert.equal(direct.constructor, f.host.GainNode);
+  direct.gain.setValueAtTime(.2, 0);
+  events = f.probe.snapshot().gain_events;
+  assert.equal(events.at(-2).method, 'initial'); assert.equal(events.at(-1).method, 'setValueAtTime');
+  assert.notEqual(events.at(-1).node, events[0].node);
+});
+test('source taps are selected from the actual connected path and preserve original graph events', async () => {
+  const f = fixture(), master = f.ctx.createGain(), firstBus = f.ctx.createGain(), secondBus = f.ctx.createGain();
+  firstBus.connect(master); secondBus.connect(master); master.connect(f.ctx.destination); await f.probe.ready();
+  f.ctx.state = 'running'; const source = f.source(.72); source.connect(secondBus); source.start();
+  const snapshot = f.probe.snapshot(), start = snapshot.starts[0];
+  assert.deepEqual(start.meter_taps.map(item => item.role), ['mix', 'bus']);
+  assert.equal(start.meter_taps[1].source, start.path_at_start[1]);
+  assert.equal(snapshot.graph_events.length, 4, 'observer-only edges never enter original-source graph history');
+  assert(snapshot.graph_events.every(item => item.event === 'connect' && item.context_time === 0));
+  source.disconnect();
+  assert.equal(f.probe.snapshot().graph_events.at(-1).event, 'disconnect');
+  assert.deepEqual(f.counters(), { originalStarts: 1, resumes: 0 });
+});
+test('bus disconnect detaches only its observer tap and reconnect restores one tap', async () => {
+  const f = fixture(), master = f.ctx.createGain(), bus = f.ctx.createGain();
+  bus.connect(master); master.connect(f.ctx.destination); await f.probe.ready();
+  bus.disconnect(master); assert.equal(bus.out.length, 0);
+  assert.equal(f.probe.snapshot().contexts[0].audio_thread.streams[1].graph.input_active, false);
+  bus.connect(master); bus.connect(master);
+  assert.equal(bus.out.length, 2); assert.equal(f.probe.snapshot().contexts[0].audio_thread.streams.length, 2);
+  bus.disconnect(); assert.equal(bus.out.length, 0);
+  assert.deepEqual(f.probe.snapshot().errors, []);
+});
+test('async module loading is explicit, does not activate audio, and is required before recording', async () => {
+  const f = fixture(); let resolveModule;
+  f.ctx.audioWorklet.addModule = url => { f.moduleUrls.push(url); return new Promise(resolve => { resolveModule = resolve; }); };
+  const master = f.ctx.createGain(); master.connect(f.ctx.destination);
+  assert.equal(f.probe.snapshot().contexts[0].audio_thread.status, 'loading');
+  assert.throws(() => f.probe.startRecording(), /meters are not ready/);
+  let settled = false; const ready = f.probe.ready().then(() => { settled = true; });
+  await Promise.resolve(); assert.equal(settled, false);
+  assert.deepEqual(f.counters(), { originalStarts: 0, resumes: 0 });
+  resolveModule(); await ready;
+  assert.equal(f.probe.snapshot().contexts[0].audio_thread.status, 'ready');
+  assert.deepEqual(f.revokedUrls, f.moduleUrls);
+});
+test('missing worklet source and failed addModule preserve exact failures and never substitute a meter', async () => {
+  for (const failure of ['missing-source', 'module-rejected']) {
+    const f = fixture();
+    if (failure === 'missing-source') delete f.host.__tidalAudioWorkletSource;
+    else f.ctx.audioWorklet.addModule = url => { f.moduleUrls.push(url); return Promise.reject(new Error('Fixture module rejected')); };
+    f.ctx.createGain().connect(f.ctx.destination);
+    await assert.rejects(f.probe.ready(), /meters are not ready/);
+    const thread = f.probe.snapshot().contexts[0].audio_thread;
+    assert.equal(thread.status, 'failed'); assert.deepEqual(thread.streams, []); assert.deepEqual(thread.windows, []);
+    assert.match(f.probe.snapshot().errors[0], /source\/API unavailable|Fixture module rejected/);
+    assert.throws(() => f.probe.startRecording(), /No unambiguous/);
+    assert.deepEqual(f.counters(), { originalStarts: 0, resumes: 0 });
+  }
+});
+test('real source started before readiness remains a failure even if module later loads', async () => {
+  const f = fixture(); let resolveModule;
+  f.ctx.audioWorklet.addModule = () => new Promise(resolve => { resolveModule = resolve; });
+  const master = f.ctx.createGain(); master.connect(f.ctx.destination);
+  const source = f.source(); source.connect(master); source.start();
+  assert.match(f.probe.snapshot().errors[0], /source started before audio-thread meters/);
+  resolveModule(); await assert.rejects(f.probe.ready(), /not ready/);
+  assert.equal(f.probe.snapshot().starts.length, 1, 'actual native start is still retained');
+});
+function actualFixtureReceipt(tap, start = 0) {
+  const create = require('./audio_meter_worklet.js'), emitted = [];
+  class Base { constructor() { this.port = { postMessage: value => emitted.push(value) }; } }
+  const Processor = create(Base, () => start, tap.sample_rate), processor = new Processor({ processorOptions: {
+    tapId: tap.tap_id, windowFrames: tap.window_frames } });
+  processor.process([[new Float32Array(tap.window_frames).fill(.125), new Float32Array(tap.window_frames).fill(.25)]],
+    [[new Float32Array(tap.window_frames)]]);
+  return emitted[0];
+}
+test('received PCM keeps processing frames separate from late delivery and current source metadata', async () => {
+  const f = fixture(), master = f.ctx.createGain(); master.connect(f.ctx.destination); await f.probe.ready();
+  const tap = f.probe.snapshot().contexts[0].audio_thread, node = f.ctx.nodes.find(item => item instanceof f.AudioWorkletNode);
+  f.advance(12345); node.deliver(actualFixtureReceipt(tap));
+  const receipt = f.probe.snapshot().contexts[0].audio_thread.windows[0];
+  assert.equal(receipt.delivery_ms, 12345); assert.equal(receipt.start_frame, 0); assert.equal(receipt.end_frame, 4800);
+  assert.equal(receipt.active_cues, undefined); assert.equal(receipt.active_music, undefined);
+  assert.equal(receipt.source_metadata, undefined); assert.equal(receipt.terminal_gain_values, undefined); assert.equal(receipt.wall_ms, undefined);
+  assert.equal(receipt.samples, 9600); assert.equal(node.port.sent[0].type, 'ack');
+  assert.equal(f.probe.snapshot().contexts[0].state, 'suspended', 'late delivered receipt is not relabeled as current PCM');
+  const before = f.probe.snapshot().contexts[0].audio_thread.windows;
+  f.advance(60000); assert.deepEqual(f.probe.snapshot().contexts[0].audio_thread.windows, before);
+  assert.deepEqual(f.counters(), { originalStarts: 0, resumes: 0 });
+});
+test('flush awaits an actual worklet barrier and never resumes a suspended context', async () => {
+  const f = fixture(), master = f.ctx.createGain(); master.connect(f.ctx.destination); await f.probe.ready();
+  await assert.rejects(f.probe.flush(), /already-running/);
+  f.ctx.state = 'running';
+  const node = f.ctx.nodes.find(item => item instanceof f.AudioWorkletNode), tap = f.probe.snapshot().contexts[0].audio_thread;
+  node.deliver(actualFixtureReceipt(tap));
+  const flushed = f.probe.flush(); await Promise.resolve(); await Promise.resolve(); await Promise.resolve();
+  const request = node.port.sent.find(item => item.type === 'barrier'); assert(request);
+  node.deliver({ type: 'barrier', schema: 1, tap_id: tap.tap_id, sample_rate: tap.sample_rate,
+    id: request.id, sequence: 1, processed_end_frame: 4928, partial_frames: 128 });
+  const receipts = await flushed;
+  assert.equal(receipts[0].context, 1); assert.equal(receipts[0].processed_end_frame, 4928); assert.equal(receipts[0].partial_frames, 128);
+  assert.equal(f.probe.snapshot().contexts[0].audio_thread.windows.length, 1);
+  assert.deepEqual(f.counters(), { originalStarts: 0, resumes: 0 });
+});
+test('dropped and duplicate worklet receipts or processor errors permanently fail recording', async () => {
+  for (const failure of ['dropped', 'duplicate', 'processor']) {
+    const f = fixture(), master = f.ctx.createGain(); master.connect(f.ctx.destination); await f.probe.ready();
+    const node = f.ctx.nodes.find(item => item instanceof f.AudioWorkletNode), tap = f.probe.snapshot().contexts[0].audio_thread;
+    if (failure === 'processor') node.listeners.processorerror();
+    else {
+      const receipt = actualFixtureReceipt(tap); node.deliver(receipt);
+      node.deliver(failure === 'duplicate' ? receipt : { ...actualFixtureReceipt(tap, 9600), sequence: 3 });
+    }
+    assert.equal(f.probe.snapshot().contexts[0].audio_thread.status, 'failed');
+    assert.throws(() => f.probe.startRecording(), /No unambiguous/);
+  }
+});
+test('bounded gain history overflow is retained and fails closed', () => {
+  const f = fixture(), gain = f.ctx.createGain();
+  for (let index = 0; index < 4100; index++) gain.gain.value = index / 5000;
+  const snapshot = f.probe.snapshot();
+  assert.equal(snapshot.gain_events.length, 4096); assert.equal(snapshot.history_overflow, true);
+  assert(snapshot.errors.some(message => /history overflow/.test(message)));
 });
