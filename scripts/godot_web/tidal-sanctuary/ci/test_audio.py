@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 import tempfile
 from test_audio_thread import meter_fixture, timed_fixture
 from capture_browser import (AUDIO_CUES, BROWSER_ARGS, IGNORED_DEFAULT_ARGS, audio_graph, audio_window, audio_prepared,
-                             first_loop_cutoff_ready, real_button, configure_native_viewport, verify_native_viewport, validate_audio_baseline, validate_audio_sources,
+                             first_loop_cutoff_ready, real_button, native_save_return_touch, configure_native_viewport, verify_native_viewport, validate_audio_baseline, validate_audio_sources,
                              validate_journey, validate_recorded_pcm, validate_muted_restore_audio,
                              browser_executable, validate_browser_arguments, validate_audio_closed, validate_focus_suspension)
 
@@ -503,6 +503,32 @@ class AudioAcceptanceFixtures(unittest.TestCase):
         page.touchscreen.tap.assert_not_called()
         page.evaluate.assert_not_called()
         detach.assert_called_once()
+
+    def test_save_return_uses_observed_shipped_control_and_native_touch(self):
+        page = Mock()
+        with patch("capture_browser.passive_evaluate", return_value=[20,30,100,40]) as observe, \
+                patch("capture_browser.bounded_cdp") as call, patch("capture_browser.detach_cdp"):
+            receipt = native_save_return_touch(page,390,844)
+        self.assertEqual(receipt["kind"], "CDP native touch")
+        self.assertEqual(receipt["field"], "save_return_rect")
+        self.assertEqual(call.call_args_list[0].args[2], {"type":"touchStart","touchPoints":[{"id":0,"x":70,"y":50}]})
+        self.assertEqual(call.call_args_list[1].args[2], {"type":"touchEnd","touchPoints":[]})
+        script = observe.call_args.args[1]
+        self.assertIn("querySelectorAll('#tidal-save-return')",script)
+        self.assertIn("document.elementFromPoint",script)
+        self.assertNotIn(".click(",script)
+        self.assertNotIn("dispatchEvent",script)
+        page.locator.assert_not_called()
+        page.touchscreen.tap.assert_not_called()
+        source=Path(__file__).with_name("capture_browser.py").read_text()
+        self.assertIn("if mobile and args.no_defaults:\n                        exit_input = native_save_return_touch(page, width, height)",source)
+
+    def test_save_return_missing_obscured_or_invalid_rect_never_sends_input(self):
+        for rect in (None, [], [0,0,0,40], [-1,0,20,20], [380,0,20,20]):
+            with self.subTest(rect=rect), patch("capture_browser.passive_evaluate",return_value=rect), \
+                    patch("capture_browser.bounded_cdp") as call, self.assertRaises(ValueError):
+                native_save_return_touch(Mock(),390,844)
+            call.assert_not_called()
 
     def test_native_viewport_keeps_exact_dimensions_dpr_and_touch(self):
         for width,height,mobile in ((1280,720,False),(390,844,True)):

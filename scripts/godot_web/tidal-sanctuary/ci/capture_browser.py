@@ -414,6 +414,23 @@ def real_button(page, state, field, mobile, width, height, native_touch=False):
     return {"field": field, "kind": ("CDP native touch" if native_touch else "touchscreen.tap") if mobile else "mouse.click", "x": x + w / 2, "y": y + h / 2}
 
 
+def native_save_return_touch(page, width, height):
+    """Read the shipped control's hit target, then use the existing real touch path."""
+    rect = passive_evaluate(page, """() => {
+      const matches = document.querySelectorAll('#tidal-save-return');
+      if (matches.length !== 1) return null;
+      const button = matches[0], style = getComputedStyle(button);
+      if (!button.isConnected || button.disabled || style.visibility !== 'visible' ||
+          style.display === 'none' || Number(style.opacity) === 0) return null;
+      const r = button.getBoundingClientRect();
+      const hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+      if (!hit || !(hit === button || button.contains(hit))) return null;
+      return [r.x, r.y, r.width, r.height];
+    }""")
+    return real_button(page, {"save_return_rect": rect}, "save_return_rect", True,
+                       width, height, native_touch=True)
+
+
 def configure_native_viewport(page, width, height, mobile):
     """Retained protocol session configures browser emulation, never game state."""
     if type(width) is not int or type(height) is not int or width <= 0 or height <= 0 or type(mobile) is not bool:
@@ -1137,7 +1154,10 @@ def main():
                     # This does not certify abrupt tab-close persistence.
                     boundary = len(console)
                     exit_button = page.locator("#tidal-save-return")
-                    if mobile:
+                    exit_input = {"kind": "touchscreen.tap" if mobile else "mouse.click"}
+                    if mobile and args.no_defaults:
+                        exit_input = native_save_return_touch(page, width, height)
+                    elif mobile:
                         exit_button.tap()
                     else:
                         exit_button.click()
@@ -1152,7 +1172,7 @@ def main():
                     write_json(out / (label + "-audio-after-exit.json"), closed_audio)
                     result["audio"].update({"status": "passed", "capture": captured_audio})
                     capture(label + "-saved-return.png")
-                    result["save_return"] = {"status": "passed", "trigger": "touch" if mobile else "mouse", "receipt": exited}
+                    result["save_return"] = {"status": "passed", "trigger": "touch" if mobile else "mouse", "input": exit_input, "receipt": exited}
                     # A new Chromium OS process must restore the untouched IndexedDB.
                     check_engine_log("\n".join(item["text"] for item in console))
                     result["restore"] = {"status": "running", "saved": saved, "fresh_browser_process": True, "shutdown": "actual Save & return control; official normal exit"}
