@@ -663,7 +663,7 @@ def main():
                   "No multiplayer, deployment, accessibility, or broad device compatibility claim.",
                   "Audio is browser-rendered capture, not physical speaker output or subjective audition.",
                   "Audio-thread continuity is independent of game frame rate; it does not establish responsive or playable rendering.",
-                  "Browser tab focus is exercised with real target activation; OS/application focus and physical-device behavior remain unverified."],
+                  "Browser target focus is exercised with real target activation; hidden-tab visibility, OS/application focus and physical-device behavior remain unverified."],
               "playwright_version": importlib.metadata.version("playwright"),
               "browser_launch": {"args": BROWSER_ARGS, "ignored_default_args": IGNORED_DEFAULT_ARGS,
                                  "chromium_sandbox": True, "requested_executable": args.chromium},

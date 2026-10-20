@@ -219,11 +219,21 @@ disables Playwright's default forced-focus emulation once through a retained CDP
 session. Navigation can restore the original Playwright session's override; a
 pre-navigation disable alone did not pass the `32a26cf` hosted smoke. The helper
 rejects re-arming or navigation after this settled boundary. Real browser target activation then
-must produce trusted window and visibility events plus matching passive DOM
-focus/visibility observations. No synthetic event, JavaScript focus call or
+must produce trusted window blur/focus events plus matching passive DOM focus.
+Visibility is separately recorded: two browser windows can both remain visible
+while only one is focused. A foreground return must be visible, but a genuine
+blur is not relabeled as hidden-tab coverage. Any actual visibility-change
+events must be trusted and consistent with their observed state. No synthetic event, JavaScript focus call or
 repeated emulation toggle qualifies. The companion tab is created before Begin,
 so its automatic activation cannot add a mid-route audio focus transition. The
 original same-context suspended clock, zero terminal gain, source identity and
 resumed PCM gates remain. A lightweight hosted smoke tests this lifecycle before
 the costly Godot run; neither fixtures nor that smoke replace actual gameplay,
 normal exit and fresh-process save restoration. New exact-head evidence is required.
+
+The `efed55b` second hosted attempt observed a genuine trusted blur and
+`document.hasFocus() == false`, while the page remained visible in its headless
+window. Requiring hidden state for that target-focus transition conflated two
+different browser properties. Target-focus acceptance preserves the original
+real blur/focus plus audio suspension/resume requirements; hidden-tab and OS
+application focus behavior remain unverified.

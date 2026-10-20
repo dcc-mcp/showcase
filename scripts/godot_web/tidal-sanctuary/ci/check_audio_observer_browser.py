@@ -26,7 +26,8 @@ AUDIO_FILES = {
 }
 SCOPE = ("Real sandboxed Chrome, original Web audio backend/assets, real browser mouse events and actual "
          "same-context AudioWorklet PCM. Audio-only observer smoke; no Godot gameplay, FPS, full-loop, "
-         "physical-speaker or subjective listening acceptance.")
+         "physical-speaker or subjective listening acceptance. Browser target window focus only; "
+         "hidden-tab visibility and OS/application focus are not established.")
 
 
 def file_hash(path):

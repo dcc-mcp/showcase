@@ -35,18 +35,25 @@ def validate_focus_transition(before, after, active):
     prior, current = before.get('records'), after.get('records')
     if not isinstance(prior, list) or not isinstance(current, list) or current[:len(prior)] != prior:
         raise ValueError('Focus event history was lost or replaced')
-    if after.get('focused') is not active or after.get('visible') is not active:
-        raise ValueError('Actual target activation has not changed DOM focus and visibility')
+    if (before.get('focused') is not (not active) or type(before.get('visible')) is not bool
+            or after.get('focused') is not active or type(after.get('visible')) is not bool
+            or (active and after['visible'] is not True)):
+        raise ValueError('Actual target activation has not changed DOM focus, or foreground is hidden')
     events = current[len(prior):]
     expected = 'focus' if active else 'blur'
     if not any(item.get('type') == expected and item.get('trusted') is True for item in events):
         raise ValueError('Target transition lacks its real trusted window event')
-    if not any(item.get('type') == 'visibilitychange' and item.get('trusted') is True
-               and item.get('visible') is active for item in events):
-        raise ValueError('Target transition lacks its real trusted visibility event')
+    # Target activation can switch window focus while both targets remain
+    # visible. Do not equate a real blur with hidden-tab visibility. If the
+    # browser does emit visibility changes, preserve and reconcile them.
+    visibility = [item for item in events if item.get('type') == 'visibilitychange']
+    if (any(type(item.get('visible')) is not bool for item in visibility)
+            or (visibility and visibility[-1]['visible'] is not after['visible'])):
+        raise ValueError('Observed visibility changes disagree with the actual final visibility')
     if any(item.get('trusted') is not True for item in events):
         raise ValueError('Synthetic focus events cannot qualify real target activation')
-    return {'active':active, 'events':events, 'focused':after['focused'], 'visible':after['visible']}
+    return {'active':active, 'events':events, 'focused':after['focused'], 'visible':after['visible'],
+            'scope':'browser target window focus; hidden-tab and OS focus not established'}
 
 
 def prepare_real_focus(page, bounded_cdp):
@@ -69,7 +76,8 @@ def wait_focus_state(page, passive_evaluate, active, timeout=3):
             raise TimeoutError('Late DOM focus observation exceeded its bounded wait')
         if not isinstance(value, dict) or value.get('overflow') is not False:
             raise ValueError('Missing or overflowed passive focus evidence')
-        if value.get('focused') is active and value.get('visible') is active:
+        if (value.get('focused') is active and type(value.get('visible')) is bool
+                and (not active or value['visible'] is True)):
             return value
         if time.monotonic() >= deadline:
             raise TimeoutError('Actual DOM focus/visibility state did not match target activation: ' + repr(value))
@@ -86,6 +94,7 @@ class RealTargetFocus:
         # Detaching a session early may discard its emulation settings.
         self.session = prepare_real_focus(page, bounded_cdp)
         self.report = {'method':'real Page.bringToFront after one-time forced-focus removal',
+                       'scope':'browser target window focus; hidden-tab and OS focus not established',
                        'emulation_disabled_after_navigation':False, 'transitions':[]}
         self._settle_attempted = False
         self._navigation = None

@@ -144,17 +144,52 @@ class RealTargetFocusFixtures(unittest.TestCase):
             before = self.snapshot(not active)
             after = self.snapshot(active, self.events(active))
             self.assertEqual(validate_focus_transition(before, after, active)['active'], active)
-            for failure in ('synthetic','wrong_state','missing_window','missing_visibility','overflow','lost_history'):
+            for failure in ('synthetic','wrong_state','missing_window','mismatched_visibility','overflow','lost_history'):
                 import copy
                 broken = copy.deepcopy(after); old = copy.deepcopy(before)
                 if failure == 'synthetic': broken['records'][0]['trusted'] = False
                 if failure == 'wrong_state': broken['focused'] = not active
                 if failure == 'missing_window': broken['records'] = broken['records'][1:]
-                if failure == 'missing_visibility': broken['records'] = broken['records'][:1]
+                if failure == 'mismatched_visibility': broken['records'][-1]['visible'] = not active
                 if failure == 'overflow': broken['overflow'] = True
                 if failure == 'lost_history': old['records'] = [{'type':'previous'}]
                 with self.subTest(active=active, failure=failure), self.assertRaises(ValueError):
                     validate_focus_transition(old, broken, active)
+
+    def test_real_visible_window_blur_qualifies_without_claiming_hidden_tab(self):
+        from focus_lifecycle import validate_focus_transition,wait_focus_state
+        before=self.snapshot(True)
+        after=self.snapshot(False,[{'type':'blur','trusted':True,'visible':True}])
+        after['visible']=True
+        result=validate_focus_transition(before,after,False)
+        self.assertTrue(result['visible']);self.assertFalse(result['focused'])
+        self.assertIn('hidden-tab and OS focus not established',result['scope'])
+        self.assertIs(wait_focus_state(Mock(),Mock(return_value=after),False),after)
+        restored=self.snapshot(True,after['records']+[{'type':'focus','trusted':True,'visible':True}])
+        self.assertTrue(validate_focus_transition(after,restored,True)['focused'])
+        for field,value in (('focused',False),('visible',False),('visible',1),('visible',None)):
+            broken=dict(restored);broken[field]=value
+            with self.subTest(field=field,value=value),self.assertRaises(ValueError):
+                validate_focus_transition(after,broken,True)
+
+    def test_optional_visibility_events_must_reconcile_with_actual_snapshot(self):
+        from focus_lifecycle import validate_focus_transition
+        before=self.snapshot(True)
+        for visible in (False,True):
+            after=self.snapshot(False,self.events(False));after['visible']=visible
+            after['records'][-1]['visible']=visible
+            self.assertEqual(validate_focus_transition(before,after,False)['visible'],visible)
+            for invalid in (not visible,None,1):
+                after['records'][-1]['visible']=invalid
+                with self.subTest(visible=visible,invalid=invalid),self.assertRaises(ValueError):
+                    validate_focus_transition(before,after,False)
+
+    def test_invalid_setup_budget_never_consumes_or_executes_emulation_attempt(self):
+        from focus_lifecycle import RealTargetFocus
+        for value in (0,-1,31,float('nan'),float('inf'),True,'3',None):
+            bounded=Mock();probe=RealTargetFocus(Mock(),bounded,Mock(return_value=self.snapshot(True)))
+            with self.subTest(value=value),self.assertRaises(ValueError):probe.settle_after_navigation(timeout=value)
+            self.assertFalse(probe._settle_attempted);bounded.assert_not_called()
 
     def test_prepare_removes_override_once_and_retains_session_without_event_dispatch(self):
         from focus_lifecycle import prepare_real_focus, FOCUS_INIT
