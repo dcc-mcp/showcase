@@ -220,5 +220,151 @@
     "Independent rebuild from a blank scene.",
     "New Blender execution or rendering during this review.",
     "Historical model or reasoning-effort identity."
-  ]
+  ],
+  "original_source_measurement_addendum": {
+    "evidence_origin": "later native readback of unchanged original source; not a rerender or a retrospective production receipt",
+    "recorded_at": "2026-10-22",
+    "host": "Blender 4.5.13 LTS",
+    "source": {
+      "sha256": "7e5e918320ba5c88c8ec79097b883cd99c47055d756586897e9b8fc44ba1c965",
+      "bytes": 818687
+    },
+    "tool": "blender_scripting__execute_script_file",
+    "original_request": {
+      "sha256": "18b76117a98d928b12e3096232ace29d3fb14479884234035bbabc1e82400514",
+      "bytes": 223
+    },
+    "original_response": {
+      "sha256": "920d017a672abb44cc909c147d7224a567c55bf8e55a600faaf2914320fcb336",
+      "bytes": 480910
+    },
+    "parsed_readback": {
+      "sha256": "b0823da6276219a7a3270903b8c634d96f5a496e3e268aa92ee936f32b058e62",
+      "bytes": 313077
+    },
+    "read_only_method": {
+      "sha256": "40c4bb161de809effcd40391dc7035bff3e94e082af16c160c301a5d90ca951d",
+      "bytes": 6019
+    },
+    "method": "The qualified host reopened the unchanged original scene. A read-only official MCP script enumerated bpy.data objects, unique mesh datablocks, material/world/compositor/light node trees and all image datablocks before any diagnostic modification. Published values are allowlisted numerical fields; raw paths, routing and unrelated properties remain excluded.",
+    "frame": 1,
+    "meters_per_blender_unit": 1.0,
+    "counts": {
+      "objects": 17,
+      "materials": 6,
+      "mesh_objects": 10,
+      "unique_mesh_datablocks": 10,
+      "vertices": 3312,
+      "edges": 6016,
+      "faces": 2720,
+      "image_datablocks": 0,
+      "top_level_nodes": 18
+    },
+    "count_scope": "Stored, unevaluated mesh data, deduplicated by datablock name; excludes curve tessellation and rendered triangle counts. Node total counts top-level material, world, compositor and light trees, not recursive node-group expansion. The image list enumerates all bpy.data.images, despite its original field name.",
+    "node_breakdown": {
+      "material_nodes": {
+        "BW_BackdropMat": 2,
+        "BW_FlagBlack": 2,
+        "BW_FrostedCyan": 2,
+        "BW_GasketMat": 2,
+        "BW_Label": 2,
+        "BW_Silver": 6
+      },
+      "world_nodes": 2,
+      "compositor_nodes": 0,
+      "light_nodes": 0
+    },
+    "geometry": {
+      "BW_BlankLabel": {
+        "dimensions_m": [
+          0.03809148445725441,
+          0.01363354455679655,
+          0.03999999910593033
+        ]
+      },
+      "BW_Body": {
+        "dimensions_m": [
+          0.03999999910593033,
+          0.03999999910593033,
+          0.10499999672174454
+        ]
+      },
+      "BW_Collar": {
+        "dimensions_m": [
+          0.02800000086426735,
+          0.02800000086426735,
+          0.013999998569488525
+        ]
+      },
+      "BW_ConcealedThread": {
+        "dimensions_m": [
+          0.023996591567993164,
+          0.023991771042346954,
+          0.0045297518372535706
+        ]
+      },
+      "BW_Gasket": {
+        "dimensions_m": [
+          0.02500000037252903,
+          0.02500000037252903,
+          0.001999996602535248
+        ]
+      },
+      "BW_LeftFlag": {
+        "dimensions_m": [
+          0.0,
+          0.1599999964237213,
+          0.25999999046325684
+        ]
+      },
+      "BW_Neck": {
+        "dimensions_m": [
+          0.02280000038444996,
+          0.02280000038444996,
+          0.015999995172023773
+        ]
+      },
+      "BW_Nozzle": {
+        "dimensions_m": [
+          0.005600001197308302,
+          0.0292154960334301,
+          0.016513720154762268
+        ]
+      },
+      "BW_PumpTop": {
+        "dimensions_m": [
+          0.019999999552965164,
+          0.019999999552965164,
+          0.012000009417533875
+        ]
+      },
+      "BW_RightFlag": {
+        "dimensions_m": [
+          0.0,
+          0.1599999964237213,
+          0.25999999046325684
+        ]
+      },
+      "BW_SeamlessBackdrop": {
+        "dimensions_m": [
+          1.5,
+          1.0,
+          0.6509999632835388
+        ]
+      },
+      "BW_Stem": {
+        "dimensions_m": [
+          0.00800000037997961,
+          0.00800000037997961,
+          0.01199999451637268
+        ]
+      }
+    },
+    "bounding_boxes": {
+      "status": "not-recorded",
+      "bbox_min_m": null,
+      "bbox_max_m": null,
+      "reason": "This readback retained dimensions and geometry fingerprints, not bounding-box corners or vertex coordinates. Dimensions and texture-space fields are not substituted for final world-space bounds."
+    }
+  }
 }
