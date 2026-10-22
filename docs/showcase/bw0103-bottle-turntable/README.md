@@ -1,5 +1,9 @@
 # A real six-second bottle turntable, pending visual acceptance
 
+<video controls preload="metadata" src="turntable.mp4" aria-label="Original BW0103 bottle turntable, pending visual acceptance">
+  <a href="turntable.mp4">Download the original turntable</a>
+</video>
+
 [Watch the original turntable](turntable.mp4) · [简体中文](README.zh.md)
 
 **Submitted for review. Not yet accepted for the gallery.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
@@ -11,6 +15,8 @@
 The BlenderWorld BW0103 text prompt was used as the brief; the work was created entirely through our DCC-MCP ecosystem. Numerical geometry, procedural materials, camera, lights and rotation were authored through official typed Blender MCP tools and bounded official MCP scripting. Cycles rendered the frame sequence; native Blender VSE encoded the film and decoded it again. Historical native source reopen/readback is retained. The film is intentionally silent.
 
 This submission preserves the original video bytes. The current review rehashed 126 retained request/response pairs and decoded the film without opening Blender or rerendering. The public excerpts omit private routing and paths; they are not a complete production graph or an independent reproduction.
+
+A later qualified native readback of the unchanged original source records 10 unique meshes, 3,312 vertices, 2,720 faces, zero image datablocks and 18 top-level nodes. These are stored mesh counts, not curve tessellation or rendered triangles. Per-object dimensions are in validation.json; final world-space bounding-box endpoints were not recorded and remain an explicit gap.
 
 ## Review and reproduction boundary
 

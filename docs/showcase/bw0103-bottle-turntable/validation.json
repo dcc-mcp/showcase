@@ -10,7 +10,7 @@
     "native_render": "Cycles CPU",
     "native_render_samples": 64,
     "native_video_encoding": "Blender VSE through official MCP scripting",
-    "review": "Read-only byte, metadata and decode checks; no host launched"
+    "review": "Original media reviewed read-only; the measurement addendum reuses a separately recorded qualified native readback of the unchanged original source. This packaging revision launched no host."
   },
   "media": {
     "path": "turntable.mp4",
@@ -29,7 +29,14 @@
     "historical_scene_objects": 17,
     "historical_scene_materials": 6,
     "retained_source_frames": 180,
-    "retained_request_response_pairs_checked": 126
+    "retained_request_response_pairs_checked": 126,
+    "original_source_mesh_objects": 10,
+    "original_source_mesh_datablocks": 10,
+    "original_source_mesh_vertices": 3312,
+    "original_source_mesh_edges": 6016,
+    "original_source_mesh_faces": 2720,
+    "original_source_image_datablocks": 0,
+    "original_source_top_level_nodes": 18
   },
   "checks": [
     {
@@ -67,7 +74,8 @@
     "independent_blank_scene_rebuild": "not-tested",
     "bilingual_site_and_browser_playback": "not-tested",
     "gallery_publication": "blocked",
-    "repository_review": "ready_for_review"
+    "repository_review": "ready_for_review",
+    "final_world_bounding_boxes": "not-tested"
   },
   "rights_review": {
     "case_id": "bw_0103",
@@ -98,7 +106,8 @@
     "Published gallery, all-locale site or browser-playback acceptance.",
     "An official benchmark score, blind evaluation or comparison with another model.",
     "Mechanical 24/410 manufacturing certification.",
-    "Verified historical model or reasoning-effort attribution."
+    "Verified historical model or reasoning-effort attribution.",
+    "Final world-space bounding-box endpoints; these were not retained in the qualified readback."
   ],
   "model_attribution": [
     {
@@ -156,6 +165,104 @@
     "production": "Created entirely through the DCC-MCP ecosystem: native authoring, rendering and video encoding used official MCP tools and bounded official MCP scripting.",
     "brief_zh": "参考 BlenderWorld BW0103 提示词。",
     "production_zh": "全部通过我们的 DCC-MCP 生态制作：原生创作、渲染与视频编码使用官方 MCP 工具和受限的官方 MCP 脚本。",
-    "revision_scope": "Documentation and pull-request review status only; no new DCC execution, asset replacement or acceptance claim."
-  }
+    "revision_scope": "Documentation, PR review status and sanitized retained measurements only; no asset replacement or new acceptance claim."
+  },
+  "geometry": {
+    "evidence": "provenance.json#original_source_measurement_addendum",
+    "frame": 1,
+    "meters_per_blender_unit": 1.0,
+    "objects": {
+      "BW_BlankLabel": {
+        "dimensions_m": [
+          0.03809148445725441,
+          0.01363354455679655,
+          0.03999999910593033
+        ]
+      },
+      "BW_Body": {
+        "dimensions_m": [
+          0.03999999910593033,
+          0.03999999910593033,
+          0.10499999672174454
+        ]
+      },
+      "BW_Collar": {
+        "dimensions_m": [
+          0.02800000086426735,
+          0.02800000086426735,
+          0.013999998569488525
+        ]
+      },
+      "BW_ConcealedThread": {
+        "dimensions_m": [
+          0.023996591567993164,
+          0.023991771042346954,
+          0.0045297518372535706
+        ]
+      },
+      "BW_Gasket": {
+        "dimensions_m": [
+          0.02500000037252903,
+          0.02500000037252903,
+          0.001999996602535248
+        ]
+      },
+      "BW_LeftFlag": {
+        "dimensions_m": [
+          0.0,
+          0.1599999964237213,
+          0.25999999046325684
+        ]
+      },
+      "BW_Neck": {
+        "dimensions_m": [
+          0.02280000038444996,
+          0.02280000038444996,
+          0.015999995172023773
+        ]
+      },
+      "BW_Nozzle": {
+        "dimensions_m": [
+          0.005600001197308302,
+          0.0292154960334301,
+          0.016513720154762268
+        ]
+      },
+      "BW_PumpTop": {
+        "dimensions_m": [
+          0.019999999552965164,
+          0.019999999552965164,
+          0.012000009417533875
+        ]
+      },
+      "BW_RightFlag": {
+        "dimensions_m": [
+          0.0,
+          0.1599999964237213,
+          0.25999999046325684
+        ]
+      },
+      "BW_SeamlessBackdrop": {
+        "dimensions_m": [
+          1.5,
+          1.0,
+          0.6509999632835388
+        ]
+      },
+      "BW_Stem": {
+        "dimensions_m": [
+          0.00800000037997961,
+          0.00800000037997961,
+          0.01199999451637268
+        ]
+      }
+    },
+    "bounding_boxes": {
+      "status": "not-recorded",
+      "bbox_min_m": null,
+      "bbox_max_m": null,
+      "reason": "This readback retained dimensions and geometry fingerprints, not bounding-box corners or vertex coordinates. Dimensions and texture-space fields are not substituted for final world-space bounds."
+    }
+  },
+  "measurement_scope": "Counts and dimensions of the unchanged original native source were read through official MCP on 2026-10-22 before diagnostic changes. Mesh totals exclude curve tessellation; node totals cover top-level trees. Original creation and this later readback remain separate."
 }
