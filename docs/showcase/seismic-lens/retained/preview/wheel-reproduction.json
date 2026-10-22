@@ -1,0 +1,49 @@
+{
+  "base_commit": "ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "base_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+  "source_tree": "4e855af540036b3ab5ee041be5402f3bc0f98dc7",
+  "source_file_hashes_checked": 69,
+  "patch_sha256": "1cb3a823569685762d937fc10bb5b7f7142b1b4d874eeca3245feed4060e8ae9",
+  "source_date_epoch": "1580601600",
+  "native_qualified_helper_files_modified": false,
+  "native_qualified_input_or_binding_modified": false,
+  "schema": "gimp-preview-reproducible-wheel-v1",
+  "status": "PASS_FRESH_EXACT_BASE_PATCH_WHEEL_REPRODUCTION",
+  "python_version": "3.12.14",
+  "python_implementation": "CPython",
+  "platform_family": "linux",
+  "architecture": "x86_64",
+  "zlib_version": "1.3.2",
+  "zlib_runtime_version": "1.3.2",
+  "build_dependencies": {
+    "build": "1.6.1",
+    "hatchling": "1.32.4",
+    "packaging": "26.3",
+    "pathspec": "1.1.1",
+    "pluggy": "1.6.0",
+    "pyproject-hooks": "1.3.3",
+    "tomlkit": "0.15.1",
+    "trove-classifiers": "2026.9.21.13"
+  },
+  "SOURCE_DATE_EPOCH": 1580601600,
+  "qualified_original_epoch_environment": "unset; Hatchling verified default was 1580601600",
+  "command": "SOURCE_DATE_EPOCH=1580601600 python -m build --no-isolation --outdir dist source",
+  "build_route": "Fresh isolated venv; public base archive plus exact preview-only.patch; sdist then wheel from that sdist",
+  "wheel_filename": "dcc_mcp_gimp-0.4.1-py3-none-any.whl",
+  "wheel_bytes": 97073,
+  "wheel_sha256": "adb43849349ca54944bd9280a8497d90bca77e6726733c3fca5991164fe1a1ad",
+  "byte_for_byte_equal_to_native_qualified_wheel": true,
+  "wheel_entry_timestamps": [
+    [
+      2020,
+      2,
+      2,
+      0,
+      0,
+      0
+    ]
+  ],
+  "requirements_sha256": "239cf4b02af9e4fd209939cb8475d7ccbdbeb020c43347703031589489f52619",
+  "digest_relaxed": false,
+  "native_qualified_bytes_changed": false
+}

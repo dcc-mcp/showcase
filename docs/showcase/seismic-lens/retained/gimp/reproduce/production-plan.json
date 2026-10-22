@@ -1,0 +1,966 @@
+{
+  "version": "D015-production-gimp-v2-parasite-readback",
+  "status": "PROPOSED_FULL_D015_COMPOSITION_NOT_NATIVE_EXECUTED",
+  "canvas": [
+    2560,
+    1600
+  ],
+  "background_rgba": [
+    11,
+    16,
+    23,
+    255
+  ],
+  "panels": [
+    {
+      "name": "SectionX",
+      "plane": {
+        "origin": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "normal": [
+          1,
+          0,
+          0
+        ]
+      },
+      "canvas_origin": [
+        120,
+        250
+      ],
+      "render_size": [
+        720,
+        480
+      ],
+      "label": "X = 0.2 km | Y / Z",
+      "filename": "panel-x.png",
+      "group_name": "01 SectionX",
+      "render_layer_name": "Native SectionX",
+      "label_name": "SectionX plane/value label",
+      "axis_name": "SectionX domain label",
+      "label_origin": [
+        120,
+        210
+      ],
+      "axis_origin": [
+        120,
+        756
+      ],
+      "axis_text": "Y {y_min} to {y_max} km | Z {z_min} to {z_max} km (down)"
+    },
+    {
+      "name": "SectionY",
+      "plane": {
+        "origin": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "normal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "canvas_origin": [
+        920,
+        250
+      ],
+      "render_size": [
+        720,
+        480
+      ],
+      "label": "Y = -0.1 km | X / Z",
+      "filename": "panel-y.png",
+      "group_name": "02 SectionY",
+      "render_layer_name": "Native SectionY",
+      "label_name": "SectionY plane/value label",
+      "axis_name": "SectionY domain label",
+      "label_origin": [
+        920,
+        210
+      ],
+      "axis_origin": [
+        920,
+        756
+      ],
+      "axis_text": "X {x_min} to {x_max} km | Z {z_min} to {z_max} km (down)"
+    },
+    {
+      "name": "SectionZ",
+      "plane": {
+        "origin": [
+          0.2,
+          -0.1,
+          1.2
+        ],
+        "normal": [
+          0,
+          0,
+          1
+        ]
+      },
+      "canvas_origin": [
+        1720,
+        250
+      ],
+      "render_size": [
+        720,
+        480
+      ],
+      "label": "Z = 1.2 km | X / Y",
+      "filename": "panel-z.png",
+      "group_name": "03 SectionZ",
+      "render_layer_name": "Native SectionZ",
+      "label_name": "SectionZ plane/value label",
+      "axis_name": "SectionZ domain label",
+      "label_origin": [
+        1720,
+        210
+      ],
+      "axis_origin": [
+        1720,
+        756
+      ],
+      "axis_text": "X {x_min} to {x_max} km | Y {y_min} to {y_max} km"
+    },
+    {
+      "name": "Delay80",
+      "input": "SectionY",
+      "scalar": "SyntheticDelay_ms",
+      "isovalue": 80,
+      "geometry": "isoline on section, not volumeisosurface",
+      "canvas_origin": [
+        120,
+        930
+      ],
+      "render_size": [
+        1060,
+        340
+      ],
+      "label": "80 ms | outer lens",
+      "filename": "isoline-80.png",
+      "group_name": "04 Delay80",
+      "render_layer_name": "Native Delay80",
+      "label_name": "Delay80 plane/value label",
+      "axis_name": "Delay80 domain label",
+      "label_origin": [
+        120,
+        872
+      ],
+      "axis_origin": [
+        120,
+        1292
+      ],
+      "axis_text": "Section domain: X {x_min} to {x_max} km | Z {z_min} to {z_max} km | Y = -0.1 km"
+    },
+    {
+      "name": "Delay150",
+      "input": "SectionY",
+      "scalar": "SyntheticDelay_ms",
+      "isovalue": 150,
+      "geometry": "isoline on section, not volumeisosurface",
+      "canvas_origin": [
+        1380,
+        930
+      ],
+      "render_size": [
+        1060,
+        340
+      ],
+      "label": "150 ms | inner core",
+      "filename": "isoline-150.png",
+      "group_name": "05 Delay150",
+      "render_layer_name": "Native Delay150",
+      "label_name": "Delay150 plane/value label",
+      "axis_name": "Delay150 domain label",
+      "label_origin": [
+        1380,
+        872
+      ],
+      "axis_origin": [
+        1380,
+        1292
+      ],
+      "axis_text": "Section domain: X {x_min} to {x_max} km | Z {z_min} to {z_max} km | Y = -0.1 km"
+    }
+  ],
+  "root_texts": [
+    {
+      "name": "Title",
+      "text": "SEISMIC LENS",
+      "size": 72,
+      "x": 120,
+      "y": 70,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Synthetic subtitle",
+      "text": "SYNTHETIC ANALYTIC FIELD",
+      "size": 26,
+      "x": 120,
+      "y": 156,
+      "color": [
+        102,
+        188,
+        201,
+        255
+      ]
+    },
+    {
+      "name": "Shared native section scale",
+      "text": "SHARED TIME SCALE   {native_time_min} to {native_time_max} s",
+      "size": 22,
+      "x": 120,
+      "y": 806,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Analytic formula q",
+      "text": "{formula_q}",
+      "size": 24,
+      "x": 120,
+      "y": 1350,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Analytic formula delay",
+      "text": "{formula_delay}  [illustrative ms]",
+      "size": 24,
+      "x": 120,
+      "y": 1386,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Analytic formula time",
+      "text": "{formula_time}  [illustrative s]",
+      "size": 24,
+      "x": 120,
+      "y": 1422,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Synthetic scientific disclaimer",
+      "text": "Synthetic analytic scalar field. No measured seismic data. No PDE or physics validation.",
+      "size": 22,
+      "x": 120,
+      "y": 1460,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Illustrative coordinate units",
+      "text": "Coordinates: {spatial_units}. Scalar units: {time_units}.",
+      "size": 22,
+      "x": 120,
+      "y": 1500,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    },
+    {
+      "name": "Sampled grid and model limits",
+      "text": "Sampled grid: {grid_x} x {grid_y} x {grid_z} points. Analytic model only; no solver or geological inference.",
+      "size": 22,
+      "x": 120,
+      "y": 1536,
+      "color": [
+        237,
+        239,
+        235,
+        255
+      ]
+    }
+  ],
+  "ordered_operations": [
+    {
+      "logical_tool": "get_status",
+      "arguments": {}
+    },
+    {
+      "logical_tool": "list_fonts",
+      "arguments": {
+        "query": "DejaVu Sans",
+        "limit": 32
+      }
+    },
+    {
+      "logical_tool": "create_image",
+      "arguments": {
+        "width": 2560,
+        "height": 1600,
+        "name": "Seismic Lens - synthetic analytic field",
+        "background_color": [
+          11,
+          16,
+          23,
+          255
+        ]
+      },
+      "bind_from_actual_result": {
+        "image_id": "$IMAGE"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Title",
+        "text": "SEISMIC LENS",
+        "size": 72,
+        "x": 120,
+        "y": 70,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Synthetic subtitle",
+        "text": "SYNTHETIC ANALYTIC FIELD",
+        "size": 26,
+        "x": 120,
+        "y": 156,
+        "color": [
+          102,
+          188,
+          201,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Shared native section scale",
+        "text": "SHARED TIME SCALE   {native_time_min} to {native_time_max} s",
+        "size": 22,
+        "x": 120,
+        "y": 806,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Analytic formula q",
+        "text": "{formula_q}",
+        "size": 24,
+        "x": 120,
+        "y": 1350,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Analytic formula delay",
+        "text": "{formula_delay}  [illustrative ms]",
+        "size": 24,
+        "x": 120,
+        "y": 1386,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Analytic formula time",
+        "text": "{formula_time}  [illustrative s]",
+        "size": 24,
+        "x": 120,
+        "y": 1422,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Synthetic scientific disclaimer",
+        "text": "Synthetic analytic scalar field. No measured seismic data. No PDE or physics validation.",
+        "size": 22,
+        "x": 120,
+        "y": 1460,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Illustrative coordinate units",
+        "text": "Coordinates: {spatial_units}. Scalar units: {time_units}.",
+        "size": 22,
+        "x": 120,
+        "y": 1500,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "Sampled grid and model limits",
+        "text": "Sampled grid: {grid_x} x {grid_y} x {grid_z} points. Analytic model only; no solver or geological inference.",
+        "size": 22,
+        "x": 120,
+        "y": 1536,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ],
+        "font": "DejaVu Sans Book"
+      }
+    },
+    {
+      "logical_tool": "create_group",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "01 SectionX",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$GROUP_SectionX"
+      }
+    },
+    {
+      "logical_tool": "import_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "panel-x.png",
+        "name": "Native SectionX",
+        "parent_id": "$GROUP_SectionX",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$LAYER_SectionX"
+      }
+    },
+    {
+      "logical_tool": "place_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "layer_id": "$LAYER_SectionX",
+        "parent_id": "$GROUP_SectionX",
+        "position": 0,
+        "x": 120,
+        "y": 250
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_SectionX",
+        "text": "X = 0.2 km | Y / Z",
+        "name": "SectionX plane/value label",
+        "font": "DejaVu Sans Book",
+        "size": 24,
+        "x": 120,
+        "y": 210,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_SectionX",
+        "text": "Y {y_min} to {y_max} km | Z {z_min} to {z_max} km (down)",
+        "name": "SectionX domain label",
+        "font": "DejaVu Sans Book",
+        "size": 22,
+        "x": 120,
+        "y": 756,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_group",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "02 SectionY",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$GROUP_SectionY"
+      }
+    },
+    {
+      "logical_tool": "import_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "panel-y.png",
+        "name": "Native SectionY",
+        "parent_id": "$GROUP_SectionY",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$LAYER_SectionY"
+      }
+    },
+    {
+      "logical_tool": "place_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "layer_id": "$LAYER_SectionY",
+        "parent_id": "$GROUP_SectionY",
+        "position": 0,
+        "x": 920,
+        "y": 250
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_SectionY",
+        "text": "Y = -0.1 km | X / Z",
+        "name": "SectionY plane/value label",
+        "font": "DejaVu Sans Book",
+        "size": 24,
+        "x": 920,
+        "y": 210,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_SectionY",
+        "text": "X {x_min} to {x_max} km | Z {z_min} to {z_max} km (down)",
+        "name": "SectionY domain label",
+        "font": "DejaVu Sans Book",
+        "size": 22,
+        "x": 920,
+        "y": 756,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_group",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "03 SectionZ",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$GROUP_SectionZ"
+      }
+    },
+    {
+      "logical_tool": "import_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "panel-z.png",
+        "name": "Native SectionZ",
+        "parent_id": "$GROUP_SectionZ",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$LAYER_SectionZ"
+      }
+    },
+    {
+      "logical_tool": "place_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "layer_id": "$LAYER_SectionZ",
+        "parent_id": "$GROUP_SectionZ",
+        "position": 0,
+        "x": 1720,
+        "y": 250
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_SectionZ",
+        "text": "Z = 1.2 km | X / Y",
+        "name": "SectionZ plane/value label",
+        "font": "DejaVu Sans Book",
+        "size": 24,
+        "x": 1720,
+        "y": 210,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_SectionZ",
+        "text": "X {x_min} to {x_max} km | Y {y_min} to {y_max} km",
+        "name": "SectionZ domain label",
+        "font": "DejaVu Sans Book",
+        "size": 22,
+        "x": 1720,
+        "y": 756,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_group",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "04 Delay80",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$GROUP_Delay80"
+      }
+    },
+    {
+      "logical_tool": "import_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "isoline-80.png",
+        "name": "Native Delay80",
+        "parent_id": "$GROUP_Delay80",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$LAYER_Delay80"
+      }
+    },
+    {
+      "logical_tool": "place_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "layer_id": "$LAYER_Delay80",
+        "parent_id": "$GROUP_Delay80",
+        "position": 0,
+        "x": 120,
+        "y": 930
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_Delay80",
+        "text": "80 ms | outer lens",
+        "name": "Delay80 plane/value label",
+        "font": "DejaVu Sans Book",
+        "size": 24,
+        "x": 120,
+        "y": 872,
+        "color": [
+          59,
+          196,
+          219,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_Delay80",
+        "text": "Section domain: X {x_min} to {x_max} km | Z {z_min} to {z_max} km | Y = -0.1 km",
+        "name": "Delay80 domain label",
+        "font": "DejaVu Sans Book",
+        "size": 22,
+        "x": 120,
+        "y": 1292,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_group",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "name": "05 Delay150",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$GROUP_Delay150"
+      }
+    },
+    {
+      "logical_tool": "import_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "isoline-150.png",
+        "name": "Native Delay150",
+        "parent_id": "$GROUP_Delay150",
+        "position": 0
+      },
+      "bind_from_actual_result": {
+        "layer_id": "$LAYER_Delay150"
+      }
+    },
+    {
+      "logical_tool": "place_layer",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "layer_id": "$LAYER_Delay150",
+        "parent_id": "$GROUP_Delay150",
+        "position": 0,
+        "x": 1380,
+        "y": 930
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_Delay150",
+        "text": "150 ms | inner core",
+        "name": "Delay150 plane/value label",
+        "font": "DejaVu Sans Book",
+        "size": 24,
+        "x": 1380,
+        "y": 872,
+        "color": [
+          235,
+          191,
+          91,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "create_text",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "parent_id": "$GROUP_Delay150",
+        "text": "Section domain: X {x_min} to {x_max} km | Z {z_min} to {z_max} km | Y = -0.1 km",
+        "name": "Delay150 domain label",
+        "font": "DejaVu Sans Book",
+        "size": 22,
+        "x": 1380,
+        "y": 1292,
+        "color": [
+          237,
+          239,
+          235,
+          255
+        ]
+      }
+    },
+    {
+      "logical_tool": "inspect_image",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "include_metadata": true
+      }
+    },
+    {
+      "logical_tool": "save_image",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "seismic-lens-master.xcf",
+        "overwrite": false
+      }
+    },
+    {
+      "logical_tool": "export_image",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "path": "seismic-lens-master.png",
+        "overwrite": false
+      }
+    },
+    {
+      "logical_tool": "open_image",
+      "arguments": {
+        "path": "seismic-lens-master.xcf"
+      },
+      "bind_from_actual_result": {
+        "image_id": "$REOPENED"
+      }
+    },
+    {
+      "logical_tool": "inspect_image",
+      "arguments": {
+        "image_id": "$REOPENED",
+        "include_metadata": true
+      }
+    },
+    {
+      "logical_tool": "export_image",
+      "arguments": {
+        "image_id": "$REOPENED",
+        "path": "seismic-lens-master-reopened.png",
+        "overwrite": false
+      }
+    },
+    {
+      "logical_tool": "close_image",
+      "arguments": {
+        "image_id": "$REOPENED",
+        "discard_changes": false
+      }
+    },
+    {
+      "logical_tool": "close_image",
+      "arguments": {
+        "image_id": "$IMAGE",
+        "discard_changes": false
+      }
+    }
+  ],
+  "expected": {
+    "planned_operations": 45,
+    "groups": 5,
+    "imported_panels": 5,
+    "editable_text_layers": 19,
+    "total_layer_nodes": 30,
+    "baseline_native_verification_extras": 11,
+    "conditional_checkpoint_save_calls_maximum": 2,
+    "conditional_postsave_inspections_maximum": 2
+  },
+  "input_manifest_status_required": "PASS_NATIVE_FIVE_PANEL_AUTHORING",
+  "input_manifest_contract": {
+    "source_vti_sha256": "Exact specified synthetic VTI digest",
+    "shared_native_time_range_s": "Two finite strictly increasing native extrema",
+    "panels": "Five exact names/path/SHA256/dimensions; files relative to manifest folder"
+  },
+  "budget": {
+    "serial_hosts": 1,
+    "cpu_affinity": 2,
+    "stopping_bytes": 268435456,
+    "minimum_free_bytes": 1073741824,
+    "not_filesystem_quota": true
+  },
+  "verification": {
+    "native_rgba_all_imports_exact": true,
+    "editable_native_text_no_canvas_clipping": true,
+    "text_must_not_overlap_any_panel_rectangle": true,
+    "text_rectangles_must_not_overlap_each_other": true,
+    "XCF_reopen_canonical_tree_equality": true,
+    "PNG_reopen_decoded_RGBA_equality": true,
+    "PNG_byte_equality_claimed": false,
+    "metadata_equality_claimed": false,
+    "dirty_owned_image_new_XCF_checkpoint_before_close": true,
+    "discard_changes": false
+  },
+  "rights": "Original synthetic data/design; no new artwork license granted; fonts require existing exact license inventory before public release",
+  "source_layout_sha256": "38444d6c3a2250a9a7b4e4824ac05083fc69e173d0ab55b62bf64f344fe1f352",
+  "input_identity_policy": "Bind explicit manifest VTI hash, dimensions, formulas, units, native range and five panel hashes; no frozen grid or old-data identity",
+  "full_D015_acceptance": false
+}

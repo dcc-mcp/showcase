@@ -1,0 +1,1052 @@
+{
+  "schema": "d015-gimp-qualified-load-v1",
+  "source_inspection_sha256": "91b10f4ee74b1555669b750d0e407757988065658ad12441bfc7f039633ebea0",
+  "source_qualification_sha256": "7c74333e949c4acb88f622a18b9c3d7bd1d89d8e094403c52a002c524f86741d",
+  "source_scope": "Selected canonical tree plus complete native metadata from the qualified reopened master",
+  "raw_trace_included": false,
+  "canonical_image": {
+    "width": 2560,
+    "height": 1600,
+    "base_type": "rgb",
+    "precision": "u8-non-linear",
+    "color_profile": "GIMP built-in sRGB",
+    "typed_color_encoding": "sRGB IEC 61966-2-1 / straight alpha",
+    "layers": [
+      {
+        "depth": 0,
+        "name": "05 Delay150",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": true,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 3,
+        "mode": "normal",
+        "width": 1060,
+        "height": 447,
+        "offsets": [
+          1380,
+          872
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 1,
+        "name": "Delay150 domain label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Section domain: X -2 to 2 km | Z 0 to 2.4 km | Y = -0.1 km",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 638,
+        "height": 27,
+        "offsets": [
+          1380,
+          1292
+        ],
+        "parent_name": "05 Delay150"
+      },
+      {
+        "depth": 1,
+        "name": "Delay150 plane/value label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "150 ms | inner core",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.830769956111908,
+          0.5209954977035522,
+          0.10461651533842087,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 235,
+        "height": 29,
+        "offsets": [
+          1380,
+          872
+        ],
+        "parent_name": "05 Delay150"
+      },
+      {
+        "depth": 1,
+        "name": "Native Delay150",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 0,
+        "mode": "normal",
+        "width": 1060,
+        "height": 340,
+        "offsets": [
+          1380,
+          930
+        ],
+        "parent_name": "05 Delay150"
+      },
+      {
+        "depth": 0,
+        "name": "04 Delay80",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": true,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 3,
+        "mode": "normal",
+        "width": 1060,
+        "height": 447,
+        "offsets": [
+          120,
+          872
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 1,
+        "name": "Delay80 domain label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Section domain: X -2 to 2 km | Z 0 to 2.4 km | Y = -0.1 km",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 638,
+        "height": 27,
+        "offsets": [
+          120,
+          1292
+        ],
+        "parent_name": "04 Delay80"
+      },
+      {
+        "depth": 1,
+        "name": "Delay80 plane/value label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "80 ms | outer lens",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.04373505711555481,
+          0.5520113706588745,
+          0.708375871181488,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 220,
+        "height": 29,
+        "offsets": [
+          120,
+          872
+        ],
+        "parent_name": "04 Delay80"
+      },
+      {
+        "depth": 1,
+        "name": "Native Delay80",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 0,
+        "mode": "normal",
+        "width": 1060,
+        "height": 340,
+        "offsets": [
+          120,
+          930
+        ],
+        "parent_name": "04 Delay80"
+      },
+      {
+        "depth": 0,
+        "name": "03 SectionZ",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": true,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 3,
+        "mode": "normal",
+        "width": 720,
+        "height": 573,
+        "offsets": [
+          1720,
+          210
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 1,
+        "name": "SectionZ domain label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "X -2 to 2 km | Y -1.6 to 1.6 km",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 331,
+        "height": 27,
+        "offsets": [
+          1720,
+          756
+        ],
+        "parent_name": "03 SectionZ"
+      },
+      {
+        "depth": 1,
+        "name": "SectionZ plane/value label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Z = 1.2 km | X / Y",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 214,
+        "height": 29,
+        "offsets": [
+          1720,
+          210
+        ],
+        "parent_name": "03 SectionZ"
+      },
+      {
+        "depth": 1,
+        "name": "Native SectionZ",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 0,
+        "mode": "normal",
+        "width": 720,
+        "height": 480,
+        "offsets": [
+          1720,
+          250
+        ],
+        "parent_name": "03 SectionZ"
+      },
+      {
+        "depth": 0,
+        "name": "02 SectionY",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": true,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 3,
+        "mode": "normal",
+        "width": 720,
+        "height": 573,
+        "offsets": [
+          920,
+          210
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 1,
+        "name": "SectionY domain label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "X -2 to 2 km | Z 0 to 2.4 km (down)",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 388,
+        "height": 27,
+        "offsets": [
+          920,
+          756
+        ],
+        "parent_name": "02 SectionY"
+      },
+      {
+        "depth": 1,
+        "name": "SectionY plane/value label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Y = -0.1 km | X / Z",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 224,
+        "height": 29,
+        "offsets": [
+          920,
+          210
+        ],
+        "parent_name": "02 SectionY"
+      },
+      {
+        "depth": 1,
+        "name": "Native SectionY",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 0,
+        "mode": "normal",
+        "width": 720,
+        "height": 480,
+        "offsets": [
+          920,
+          250
+        ],
+        "parent_name": "02 SectionY"
+      },
+      {
+        "depth": 0,
+        "name": "01 SectionX",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": true,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 3,
+        "mode": "normal",
+        "width": 720,
+        "height": 573,
+        "offsets": [
+          120,
+          210
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 1,
+        "name": "SectionX domain label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Y -1.6 to 1.6 km | Z 0 to 2.4 km (down)",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 429,
+        "height": 27,
+        "offsets": [
+          120,
+          756
+        ],
+        "parent_name": "01 SectionX"
+      },
+      {
+        "depth": 1,
+        "name": "SectionX plane/value label",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "X = 0.2 km | Y / Z",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 214,
+        "height": 29,
+        "offsets": [
+          120,
+          210
+        ],
+        "parent_name": "01 SectionX"
+      },
+      {
+        "depth": 1,
+        "name": "Native SectionX",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 0,
+        "mode": "normal",
+        "width": 720,
+        "height": 480,
+        "offsets": [
+          120,
+          250
+        ],
+        "parent_name": "01 SectionX"
+      },
+      {
+        "depth": 0,
+        "name": "Sampled grid and model limits",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Sampled grid: 81 x 65 x 97 points. Analytic model only; no solver or geological inference.",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 982,
+        "height": 27,
+        "offsets": [
+          120,
+          1536
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Illustrative coordinate units",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Coordinates: illustrative km; z positive downward. Scalar units: illustrative seconds and milliseconds.",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 1105,
+        "height": 27,
+        "offsets": [
+          120,
+          1500
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Synthetic scientific disclaimer",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Synthetic analytic scalar field. No measured seismic data. No PDE or physics validation.",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 960,
+        "height": 27,
+        "offsets": [
+          120,
+          1460
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Analytic formula time",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "t = 0.6 + 0.4z + 0.025(x²+y²) − Δt/1000  [illustrative s]",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 672,
+        "height": 29,
+        "offsets": [
+          120,
+          1422
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Analytic formula delay",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "Δt = 220 exp(−q)  [illustrative ms]",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 416,
+        "height": 29,
+        "offsets": [
+          120,
+          1386
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Analytic formula q",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "q = ((x−0.2)/0.9)² + ((y+0.1)/0.65)² + ((z−1.2)/0.30)²",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 644,
+        "height": 29,
+        "offsets": [
+          120,
+          1350
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Shared native section scale",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "SHARED TIME SCALE   0.600 to 1.724 s",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 429,
+        "height": 27,
+        "offsets": [
+          120,
+          806
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Synthetic subtitle",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "SYNTHETIC ANALYTIC FIELD",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.13286836445331573,
+          0.5028866529464722,
+          0.5840786695480347,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 359,
+        "height": 32,
+        "offsets": [
+          120,
+          156
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Title",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": true,
+        "text": "SEISMIC LENS",
+        "text_font": "DejaVu Sans Book",
+        "text_color_linear_rgba": [
+          0.8468734622001648,
+          0.8631573915481567,
+          0.830769956111908,
+          1.0
+        ],
+        "child_count": 0,
+        "mode": "normal",
+        "width": 499,
+        "height": 84,
+        "offsets": [
+          120,
+          70
+        ],
+        "parent_name": null
+      },
+      {
+        "depth": 0,
+        "name": "Seismic Lens - synthetic analytic field",
+        "visible": true,
+        "locked": false,
+        "opacity": 100.0,
+        "is_group": false,
+        "is_text": false,
+        "text": null,
+        "text_font": null,
+        "text_color_linear_rgba": null,
+        "child_count": 0,
+        "mode": "normal",
+        "width": 2560,
+        "height": 1600,
+        "offsets": [
+          0,
+          0
+        ],
+        "parent_name": null
+      }
+    ]
+  },
+  "metadata": {
+    "image_parasites": [],
+    "layer_parasites": [
+      {
+        "name": "05 Delay150",
+        "parasites": []
+      },
+      {
+        "name": "Delay150 domain label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 906,
+            "sha256": "458990673bc6017152de5e2a9afabc1706920d7e33ab0e74dca29ffb9fcd3fb4",
+            "text": "(text \"Section domain: X -2 to 2 km | Z 0 to 2.4 km | Y = -0.1 km\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Delay150 plane/value label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 872,
+            "sha256": "f286e156487b2a76fe9f91b58278127a055c3d9786c57301dd75fdcced665934",
+            "text": "(text \"150 ms | inner core\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\354\\353k\\77\\300\\277\\77\\77\\267\\266\\266\\76\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Native Delay150",
+        "parasites": []
+      },
+      {
+        "name": "04 Delay80",
+        "parasites": []
+      },
+      {
+        "name": "Delay80 domain label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 906,
+            "sha256": "458990673bc6017152de5e2a9afabc1706920d7e33ab0e74dca29ffb9fcd3fb4",
+            "text": "(text \"Section domain: X -2 to 2 km | Z 0 to 2.4 km | Y = -0.1 km\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Delay80 plane/value label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 869,
+            "sha256": "527df8ffa09384f48cf2e57196e375c30b251f7c3aa70fae84addaabe3db80b2",
+            "text": "(text \"80 ms | outer lens\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\355\\354l\\76\\305\\304D\\77\\334\\333\\133\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Native Delay80",
+        "parasites": []
+      },
+      {
+        "name": "03 SectionZ",
+        "parasites": []
+      },
+      {
+        "name": "SectionZ domain label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 879,
+            "sha256": "443870b47187e3bfd3ee3437ecf6e8e837567f040132d2567155379b6eb47ef9",
+            "text": "(text \"X -2 to 2 km | Y -1.6 to 1.6 km\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "SectionZ plane/value label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 866,
+            "sha256": "5ee8e8e055fa2c0d46c5817c5fd66f2fd231247835a1f293c370f48c17067c33",
+            "text": "(text \"Z = 1.2 km | X / Y\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Native SectionZ",
+        "parasites": []
+      },
+      {
+        "name": "02 SectionY",
+        "parasites": []
+      },
+      {
+        "name": "SectionY domain label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 883,
+            "sha256": "4d9c88d843f74287374461f84b401eba9a68d222e169f7e7493b6c88385a7449",
+            "text": "(text \"X -2 to 2 km | Z 0 to 2.4 km (down)\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "SectionY plane/value label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 867,
+            "sha256": "023c2befedf2817096a12880f393932b58fa1b51e1923ae8e74c4fcde2ac4850",
+            "text": "(text \"Y = -0.1 km | X / Z\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Native SectionY",
+        "parasites": []
+      },
+      {
+        "name": "01 SectionX",
+        "parasites": []
+      },
+      {
+        "name": "SectionX domain label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 887,
+            "sha256": "317d53721985caad75624c859afab1d97fa2b200b6597ef0fb812c839ad73aae",
+            "text": "(text \"Y -1.6 to 1.6 km | Z 0 to 2.4 km (down)\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "SectionX plane/value label",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 866,
+            "sha256": "d1e22efd8dc2b588c6ab7c73b246d4a6b7924994fe6b73826b19ae02622a38cd",
+            "text": "(text \"X = 0.2 km | Y / Z\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Native SectionX",
+        "parasites": []
+      },
+      {
+        "name": "Sampled grid and model limits",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 938,
+            "sha256": "76723eae486decbaa0b9f2144c262a9225698779b521c104cee8fc8a7267baf0",
+            "text": "(text \"Sampled grid: 81 x 65 x 97 points. Analytic model only; no solver or geological inference.\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Illustrative coordinate units",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 951,
+            "sha256": "a0e1772978f8de5f5eb174994dbe64293d85b7f56e45d856b21c4b66a329df9a",
+            "text": "(text \"Coordinates: illustrative km; z positive downward. Scalar units: illustrative seconds and milliseconds.\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Synthetic scientific disclaimer",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 936,
+            "sha256": "ae8ee46c29c3573ad78e990576b84b27685f2361f0809b9bb9772fead8132e84",
+            "text": "(text \"Synthetic analytic scalar field. No measured seismic data. No PDE or physics validation.\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Analytic formula time",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 910,
+            "sha256": "1b89e7815d56259ad9cfa60c4a93fd3dc5938ce03b4a86a48265d93235a94747",
+            "text": "(text \"t = 0.6 + 0.4z + 0.025(x²+y²) − Δt/1000  [illustrative s]\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Analytic formula delay",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 886,
+            "sha256": "0def81b11f9871d85a91fd5b817b18e5b0625f8c6eeeaf956dab489e554a8e09",
+            "text": "(text \"Δt = 220 exp(−q)  [illustrative ms]\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Analytic formula q",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 909,
+            "sha256": "9af495e7d47c915433916bd3719bfa2d3ffdb32aa2bcfda867d6f9233bcf1d2a",
+            "text": "(text \"q = ((x−0.2)/0.9)² + ((y+0.1)/0.65)² + ((z−1.2)/0.30)²\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 24)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Shared native section scale",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 884,
+            "sha256": "b6b42e59d9e98f638d91ec0c295f5c72979da7ee0ddfacb458ffc3c9b62f3834",
+            "text": "(text \"SHARED TIME SCALE   0.600 to 1.724 s\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 22)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Synthetic subtitle",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 877,
+            "sha256": "0d24ea2149f23dd33b72c6307113fbc0218af4e19d6523e96dc5fe1b59e5ec6c",
+            "text": "(text \"SYNTHETIC ANALYTIC FIELD\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 26)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\315\\314\\314\\76\\275\\274\\74\\77\\312\\311I\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Title",
+        "parasites": [
+          {
+            "name": "gimp-text-layer",
+            "flags": 1,
+            "bytes": 860,
+            "sha256": "71091fd2ceaf7f906f40a696e4d0dba5ab23bc5874353f573fde83033338324b",
+            "text": "(text \"SEISMIC LENS\")\n(font \"GimpFont\"\n    (fonthash \"57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e\")\n    (fullname \"DejaVu Sans\")\n    (family \"DejaVu Sans\")\n    (style \"Book\")\n    (psname \"DejaVuSans\")\n    (index 0)\n    (weight 80)\n    (slant 0)\n    (width 100)\n    (fontversion 155320))\n(font-size 72)\n(font-size-unit pixels)\n(antialias yes)\n(language \"C\")\n(base-direction ltr)\n(color\n    (color \"R'G'B'A float\" 16 \"\\356\\355m\\77\\360\\357o\\77\\354\\353k\\77\\0\\0\\200\\77\" 0))\n(justify left)\n(box-mode dynamic)\n(box-unit pixels)\n(outline-custom-style solid-color)\n(outline-foreground\n    (color \"R'G'B'A float\" 16 \"s\\200\\0\\77s\\200\\0\\77s\\200\\0\\77\\0\\0\\200\\77\" 0))\n(outline-pattern NULL)\n(outline-cap-style butt)\n(outline-join-style miter)\n(outline-miter-limit 10)\n(outline-antialias yes)\n(outline-dash-offset 0)\n(outline-dash-info 0)\n(hinting yes)\n\u0000",
+            "truncated": false
+          }
+        ]
+      },
+      {
+        "name": "Seismic Lens - synthetic analytic field",
+        "parasites": []
+      }
+    ],
+    "metadata_xml": "<?xml version='1.0' encoding='UTF-8'?>\n<metadata>\n  <tag name=\"Exif.Image.BitsPerSample\">8 8 8</tag>\n  <tag name=\"Exif.Image.ImageLength\">1600</tag>\n  <tag name=\"Exif.Image.ImageWidth\">2560</tag>\n  <tag name=\"Exif.Image.ResolutionUnit\">2</tag>\n  <tag name=\"Exif.Image.XResolution\">300/1</tag>\n  <tag name=\"Exif.Image.YResolution\">300/1</tag>\n  <tag name=\"Exif.Photo.ColorSpace\">1</tag>\n</metadata>\n",
+    "metadata_xml_truncated": false
+  },
+  "xcf": {
+    "path": "seismic-lens-master.xcf",
+    "bytes": 1081905,
+    "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+  },
+  "png": {
+    "path": "seismic-lens-master.png",
+    "bytes": 221753,
+    "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+  },
+  "rgba_sha256": "463c1e2a47d4188e124039f1f2b9909386b659c89d5193f1b35ab11ebae47ba5",
+  "native_metadata_not_a_binary_privacy_audit": true
+}

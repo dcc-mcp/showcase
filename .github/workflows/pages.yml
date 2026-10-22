@@ -26,8 +26,19 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Test full-collection ecosystem production gate
+        run: python scripts/test_validate_ecosystem.py
+
+      - name: Validate actual Trail delivery ZIP semantics
+        run: |
+          python scripts/test_trail_delivery.py
+          python scripts/test_houdini_delivery.py
+
       - name: Materialize pinned official Godot Web runtime
         run: python scripts/godot_web/materialize_runtime.py
+
+      - name: Require ecosystem provenance for every selected case
+        run: python scripts/validate_ecosystem.py
 
       - name: Validate showcase entries
         run: python scripts/validate_entry.py docs/showcase

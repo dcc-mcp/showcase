@@ -1,0 +1,207 @@
+{
+  "passed": true,
+  "source_frames": 1372800,
+  "decoded_frames": 1372800,
+  "sample_rate": 48000,
+  "channels": 2,
+  "full_decode": true,
+  "peak": 0.2194916307926178,
+  "clipped_samples": 0,
+  "codec_delay_samples": 0,
+  "delay_limit": 2304,
+  "comparison_samples": 1372800,
+  "overall": {
+    "correlation": 0.9999932047459875,
+    "energy_ratio": 0.940217076310184,
+    "nrmse": 0.030568401296011367
+  },
+  "segments": [
+    {
+      "asset": "footstep_stone_01",
+      "correlation": 0.9999980018025086,
+      "energy_ratio": 0.9399262009299828,
+      "nrmse": 0.030565534231687064,
+      "first256": {
+        "correlation": 0.9999999155863956,
+        "energy_ratio": 0.9404797295884607,
+        "nrmse": 0.030219367505538684
+      }
+    },
+    {
+      "asset": "footstep_stone_02",
+      "correlation": 0.9999984153096748,
+      "energy_ratio": 0.9398932068963558,
+      "nrmse": 0.03056940281613207,
+      "first256": {
+        "correlation": 0.9999998761724489,
+        "energy_ratio": 0.9404532754592947,
+        "nrmse": 0.03023426977262354
+      }
+    },
+    {
+      "asset": "footstep_stone_03",
+      "correlation": 0.9999974273769919,
+      "energy_ratio": 0.9406158032256245,
+      "nrmse": 0.030229155679728077,
+      "first256": {
+        "correlation": 0.9999999699213048,
+        "energy_ratio": 0.9406136354812304,
+        "nrmse": 0.030148589429252595
+      }
+    },
+    {
+      "asset": "footstep_stone_04",
+      "correlation": 0.9999984107980429,
+      "energy_ratio": 0.9400477747520112,
+      "nrmse": 0.030489968391943477,
+      "first256": {
+        "correlation": 0.9999996338987674,
+        "energy_ratio": 0.9402121182905275,
+        "nrmse": 0.030366335476838154
+      }
+    },
+    {
+      "asset": "footstep_stone_05",
+      "correlation": 0.9999983783035886,
+      "energy_ratio": 0.9405069449465384,
+      "nrmse": 0.030254654239777086,
+      "first256": {
+        "correlation": 0.9999999565808269,
+        "energy_ratio": 0.9407031478068035,
+        "nrmse": 0.03010287448561038
+      }
+    },
+    {
+      "asset": "footstep_stone_06",
+      "correlation": 0.9999988272641707,
+      "energy_ratio": 0.9403645035812934,
+      "nrmse": 0.030313607105989626,
+      "first256": {
+        "correlation": 0.9999999440796618,
+        "energy_ratio": 0.9405285088178641,
+        "nrmse": 0.03019330541891117
+      }
+    },
+    {
+      "asset": "footstep_grass_01",
+      "correlation": 0.9999996849656327,
+      "energy_ratio": 0.9402716392248801,
+      "nrmse": 0.030334023656341646,
+      "first256": {
+        "correlation": 0.9999999732103199,
+        "energy_ratio": 0.9402761767378673,
+        "nrmse": 0.030322468414983803
+      }
+    },
+    {
+      "asset": "footstep_grass_02",
+      "correlation": 0.999999639663913,
+      "energy_ratio": 0.9403176569963251,
+      "nrmse": 0.03031175292963061,
+      "first256": {
+        "correlation": 0.9999999555993185,
+        "energy_ratio": 0.9403114890272313,
+        "nrmse": 0.030304824392373732
+      }
+    },
+    {
+      "asset": "footstep_grass_03",
+      "correlation": 0.9999997269208731,
+      "energy_ratio": 0.9403961656069918,
+      "nrmse": 0.030268493384766247,
+      "first256": {
+        "correlation": 0.999999975010191,
+        "energy_ratio": 0.9405481893562101,
+        "nrmse": 0.030182165635131677
+      }
+    },
+    {
+      "asset": "footstep_grass_04",
+      "correlation": 0.9999996531701058,
+      "energy_ratio": 0.9402302980385863,
+      "nrmse": 0.030356349247742533,
+      "first256": {
+        "correlation": 0.9999999749669518,
+        "energy_ratio": 0.9405366063130711,
+        "nrmse": 0.030188138636153068
+      }
+    },
+    {
+      "asset": "footstep_grass_05",
+      "correlation": 0.9999996758967583,
+      "energy_ratio": 0.9402142377503631,
+      "nrmse": 0.030363901864834637,
+      "first256": {
+        "correlation": 0.9999999571094639,
+        "energy_ratio": 0.9404248307542821,
+        "nrmse": 0.030246338715670004
+      }
+    },
+    {
+      "asset": "footstep_grass_06",
+      "correlation": 0.9999996601718256,
+      "energy_ratio": 0.9402557891076697,
+      "nrmse": 0.03034298612955408,
+      "first256": {
+        "correlation": 0.9999999844287267,
+        "energy_ratio": 0.9404836211022606,
+        "nrmse": 0.03021515182769919
+      }
+    },
+    {
+      "asset": "environment_soft_wind_foliage_loop",
+      "correlation": 0.9999625829269636,
+      "energy_ratio": 0.9398343982786109,
+      "nrmse": 0.031714601914182385
+    },
+    {
+      "asset": "music_sparse_tonal_loop",
+      "correlation": 0.9999998903631453,
+      "energy_ratio": 0.9402659418858922,
+      "nrmse": 0.030330394490513415
+    },
+    {
+      "asset": "interaction_confirm",
+      "correlation": 0.9999999619489617,
+      "energy_ratio": 0.9405571561113033,
+      "nrmse": 0.030177962619011796,
+      "first256": {
+        "correlation": 0.999999686237289,
+        "energy_ratio": 0.9394477400517137,
+        "nrmse": 0.03075876536814738
+      }
+    },
+    {
+      "asset": "interaction_discovery",
+      "correlation": 0.9999999361407099,
+      "energy_ratio": 0.9403666782876625,
+      "nrmse": 0.03027699244908084,
+      "first256": {
+        "correlation": 0.9999996132839485,
+        "energy_ratio": 0.9397845740200037,
+        "nrmse": 0.03058739123361473
+      }
+    },
+    {
+      "asset": "interaction_soft_impact",
+      "correlation": 0.999999842289333,
+      "energy_ratio": 0.9402734648368678,
+      "nrmse": 0.030328052943651915,
+      "first256": {
+        "correlation": 0.9999999894502775,
+        "energy_ratio": 0.9405276887506013,
+        "nrmse": 0.030192270874045246
+      }
+    }
+  ],
+  "output_sha256": "154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3",
+  "no_resampling_or_gain_fit": true,
+  "segment_and_nonzero_first256_thresholds": {
+    "correlation_min": 0.95,
+    "energy_ratio_min": 0.8,
+    "energy_ratio_max": 1.2,
+    "nrmse_max": 0.35
+  },
+  "subjective_listening": "not performed",
+  "loop_boundary_scope": "Montage contains two 8-second excerpts, not the complete loop sources; no complete-loop seam quality inferred."
+}

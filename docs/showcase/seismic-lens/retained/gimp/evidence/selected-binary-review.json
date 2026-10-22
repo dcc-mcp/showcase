@@ -1,0 +1,98 @@
+{
+  "schema": "d015-gimp-selected-binary-review-v1",
+  "status": "RECORDED_BINARY_REVIEW_WITH_STRUCTURAL_RESOLUTION",
+  "sources": {
+    "binary-privacy-audit-01.json": "6893ff711f4be7b7cf0e32c183c21202a1cf398ea35fec904514175cb0347dfb",
+    "binary-privacy-audit-01-resolution.json": "6cf5249f931d24ba46e04494043d8685d697af060befd7d34823a7974cc2decb",
+    "png-metadata-review-01.json": "5b6fa25fb7575a4d397f5c6ec1ee4dac887c9fbcc77e377f9cd4c46b4aff1069"
+  },
+  "files": [
+    {
+      "path": "native/gimp/seismic-lens-master.png",
+      "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594",
+      "bytes": 221753,
+      "raw_findings": [],
+      "resolution": "NO_PATTERN_FINDINGS"
+    },
+    {
+      "path": "native/gimp/seismic-lens-master.xcf",
+      "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+      "bytes": 1081905,
+      "raw_findings": [],
+      "resolution": "NO_PATTERN_FINDINGS"
+    },
+    {
+      "path": "inputs/isoline-150.png",
+      "sha256": "157d01a9b833c073c6475cf7db477515d2054dcf30ff2f5f0a007dfd3e7e5e46",
+      "bytes": 5470,
+      "raw_findings": [],
+      "resolution": "NO_PATTERN_FINDINGS"
+    },
+    {
+      "path": "inputs/isoline-80.png",
+      "sha256": "b57e5df7f9261eb108d071c99f863faf2cde30bbf74a51ae2c4e5c329c2dfd72",
+      "bytes": 6988,
+      "raw_findings": [],
+      "resolution": "NO_PATTERN_FINDINGS"
+    },
+    {
+      "path": "inputs/panel-x.png",
+      "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9",
+      "bytes": 41538,
+      "raw_findings": [
+        {
+          "stream": "raw",
+          "category": "private_path",
+          "count": 1
+        }
+      ],
+      "resolution": "RESOLVED_COMPRESSED_PIXEL_COINCIDENCE"
+    },
+    {
+      "path": "inputs/panel-y.png",
+      "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3",
+      "bytes": 44640,
+      "raw_findings": [],
+      "resolution": "NO_PATTERN_FINDINGS"
+    },
+    {
+      "path": "inputs/panel-z.png",
+      "sha256": "04da32bf7d10ff2dfd9d1f4cb25c363e98622f4fb036dc9efff6fea450969b1c",
+      "bytes": 41689,
+      "raw_findings": [],
+      "resolution": "NO_PATTERN_FINDINGS"
+    }
+  ],
+  "resolved_pixel_coincidence": {
+    "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9",
+    "status": "RESOLVED_COMPRESSED_PIXEL_COINCIDENCE",
+    "findings": [
+      {
+        "offset": 26124,
+        "match_bytes": 3,
+        "chunk_type": "IDAT",
+        "within_compressed_pixel_payload": true,
+        "contiguous_printable_run_bytes": 4,
+        "no_surrounding_path_string": true
+      }
+    ],
+    "metadata_chunks_have_no_private_path_matches": true,
+    "interpretation": "A three-byte drive-prefix-shaped coincidence occurs only inside compressed pixel bytes, without a surrounding path string. PNG structure and full stream prove it is image data, not a metadata path. No bytes or scanner rule were changed.",
+    "source_unchanged": true
+  },
+  "native_png_metadata": {
+    "status": "PNG_METADATA_STRUCTURE_REVIEWED",
+    "master_png_sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594",
+    "EXIF_scope": "IFD0 empty; IFD1 contains only9 thumbnail layout/compression/offset tags, no GPS/author/contact/source filename/document ID tags",
+    "thumbnail_dimensions": [
+      256,
+      160
+    ],
+    "thumbnail_sha256": "19b9bf4d0684fd26e2f426e7dab2d79fec5cecd3d8e16286fea6ba50a060c196",
+    "native_generated_tIME_chunk_present": true,
+    "timestamp_scope": "Generated artifact modification time, not imported user/device metadata. Retained unchanged; GIMP PNG byte equality is not claimed.",
+    "native_XCF_metadata_scope": "Four native inspections report19 public font-hash fields only; no detected private field categories. This differs from the PNG tIME chunk."
+  },
+  "raw_receipts_included": false,
+  "limits": "Pattern audit is bounded evidence, not a mathematical guarantee of absence. Public package scripts/manifests/history remain separate audit gates."
+}

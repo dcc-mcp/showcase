@@ -69,6 +69,67 @@ MD_LINK = re.compile(r"\]\(\s*<?([^)\s>]+)>?")
 # must not approve new text. Changed/moved files receive the full normal scan.
 # These suppress only the named findings, not a file or a directory's audit.
 REVIEWED_TEXT_FALSE_POSITIVES = {
+    'docs/showcase/seismic-lens/retained/gimp/evidence/qualified-master-baseline.json': (
+        '0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce',
+        frozenset({'private filesystem path'}),
+        # All 268 raw JSON matches lie within 38 serialized GIMP RGBA-float color values in 19 text parasites. Each color decodes to exactly 16 bytes / four finite floats in [0,1]. Recursive scanning of decoded JSON has zero findings; these are escaped octal color bytes, not UNC paths.
+    ),
+    'docs/showcase/seismic-lens/retained/gimp/notices/DejaVu-font-notice.txt': (
+        '693235cc6b005a7f64aee581edb069fd334b3981884ec60b04b09b73d69d097a',
+        frozenset({'private execution path'}),
+        # The single match is the standard Debian package documentation location /usr/share/doc/fonts-dejavu-core/AUTHORS in the preserved license notice; no user-specific path.
+    ),
+    'docs/showcase/seismic-lens/retained/gimp/reproduce/lifecycle.py': (
+        'a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7',
+        frozenset({'private network address'}),
+        # Only two literal 127.0.0.1 addresses used for ephemeral-port allocation and loopback-port shutdown checks; no machine-specific or external endpoint.
+    ),
+    'docs/showcase/seismic-lens/retained/gimp/reproduce/reproduce_gimp.py': (
+        '696d60c54b212af6d29e93308985693bcfd94107b236fcacd6a99d0ddf7c6267',
+        frozenset({'private network address', 'private host name', 'private execution path'}),
+        # Five /usr matches are a standard interpreter shebang, PATH and fixed GIMP binary path. One localhost and six 127.0.0.1 matches constrain owned local MCP/bridge setup and verify listeners; no private machine identity or credential.
+    ),
+    'docs/showcase/seismic-lens/retained/gimp/reproduce/verify_copied_xcf.py': (
+        '331e00b97e2d5d55ae18ebf9ffd6253b88a06b56a8e3b85d596ac25ca0b5a6e7',
+        frozenset({'private network address', 'private host name', 'private execution path'}),
+        # Five /usr matches are a standard interpreter shebang, PATH and fixed GIMP binary path. One localhost and six 127.0.0.1 matches constrain owned local MCP/bridge setup and verify listeners; no private machine identity or credential.
+    ),
+    'docs/showcase/seismic-lens/retained/gimp/reproduce/xcf_metadata_readback.py': (
+        'e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4',
+        frozenset({'private execution path', 'private filesystem path'}),
+        # All three matches are on line 144 in the filesystem_path_like_values detection regex. /workspace, /tmp and the regex alternative /home/| are detection syntax, not observed private paths.
+    ),
+    'docs/showcase/seismic-lens/retained/paraview/reproduce/reproduce_paraview.py': (
+        '293db4cc47a4e0455cdde2a42dc1e59492079cf30c5493c358c6e1982b3926ef',
+        frozenset({'private network address'}),
+        # The only match is a 127.0.0.1 equality assertion requiring the launched MCP URL to be loopback, not disclosure of a private host address.
+    ),
+    'docs/showcase/seismic-lens/retained/preview/inputs/qualified-master-baseline.json': (
+        '0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce',
+        frozenset({'private filesystem path'}),
+        # Exact duplicate baseline. All 268 raw JSON matches are inside 38 serialized 16-byte RGBA-float colors in 19 text parasites; parsed JSON recursively scans clean. Not UNC paths.
+    ),
+    'docs/showcase/seismic-lens/retained/preview/reproduce/lifecycle.py': (
+        'a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7',
+        frozenset({'private network address'}),
+        # Exact duplicate lifecycle helper; only loopback port allocation and shutdown checking literals.
+    ),
+    'docs/showcase/seismic-lens/retained/preview/reproduce/verify_preview.py': (
+        '211c5cda4b41df33d83c0687a85b47360fa0b18fcc8ea3ea9670054ca78c0e31',
+        frozenset({'private network address', 'private host name', 'private execution path'}),
+        # Five /usr matches are a standard interpreter shebang, PATH and fixed GIMP binary path. One localhost and six 127.0.0.1 matches constrain owned local MCP/bridge setup and verify listeners; no private machine identity or credential.
+    ),
+    'docs/showcase/seismic-lens/retained/preview/reproduce/xcf_metadata_readback.py': (
+        'e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4',
+        frozenset({'private execution path', 'private filesystem path'}),
+        # Exact duplicate metadata scanner; all matches are line-144 path-detection regex syntax, not a real path.
+    ),
+    "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py": (
+        "8a2d00a3e475b3bf70b078ec44e1e2171f4826e580fe0866a467165691f778e1",
+        frozenset({"private filesystem path", "private execution path"}),
+        # Exact retained package test: /tmp/escape.wav and C:\escape.wav are
+        # invalid-target rejection fixtures, not production machine paths.
+    ),
     "assets/vendor/model-viewer/model-viewer.min.js": (
         "18b2e711035aa4705ee281530a55dc2338ff05eed3d70ae16d54105282a75ed5",
         frozenset({"private filesystem path", "private execution path"}),
@@ -225,7 +286,7 @@ def object_rows(case: dict, field: str, fields: tuple[str, ...], location: str,
 
 
 def selected_manifest(entry: Path, location: str, root: Path,
-                      problems: list[str]) -> set[Path]:
+                      problems: list[str], case=None, all_cases=None) -> set[Path]:
     """Check safety before invoking the existing artifact/hash validator."""
     manifest = read_json(entry / "manifest.json", f"{location}.manifest", problems)
     if not isinstance(manifest, dict) or not isinstance(manifest.get("files"), list) or not manifest["files"]:
@@ -257,7 +318,12 @@ def selected_manifest(entry: Path, location: str, root: Path,
             safe = False
     if safe:
         try:
-            for problem in validate_entry.validate(str(entry)):
+            import validate_ecosystem
+            native_downloads = (validate_ecosystem.native_download_paths(root, case, all_cases)
+                                if case else set())
+            relative_downloads = {str((root / p).relative_to(entry)) for p in native_downloads
+                                  if (root / p).is_relative_to(entry)}
+            for problem in validate_entry.validate(str(entry), native_downloads=relative_downloads):
                 # The legacy checker includes artifact paths in diagnostics.
                 # Do not echo an unsafe value if a malicious fixture adds one.
                 if sensitive_issues(problem, location):
@@ -365,7 +431,7 @@ def validate(collection_path: str | Path, root: str | Path | None = None) -> lis
             if not entry.is_relative_to(root) or not entry.is_dir():
                 problems.append(f"{where}: selected case directory is missing or unsafe")
             else:
-                inventoried.update(selected_manifest(entry, where, root, problems))
+                inventoried.update(selected_manifest(entry, where, root, problems, case, cases))
                 # Only this case can be deployed by the curated collection.
                 for path in entry.rglob("*"):
                     if path.is_file():

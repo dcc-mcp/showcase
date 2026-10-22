@@ -1,0 +1,959 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "4701b3b065cf417d84acc121b72d0677d46093c57834894a399d51531941960b",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7801,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "fc2c6c595349e7e31fdb7fd3b9c13b3d361e14e7a2030aad078cfb3af9e1a728",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7801,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__new_scene",
+            "arguments": {}
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7801,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"New scene created\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Check the result with list_objects or use related actions to continue.\u005c\",\u005c\"context\u005c\":{}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"New scene created\",\"error\":null,\"prompt\":\"Check the result with list_objects or use related actions to continue.\",\"context\":{}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "5e6febe96e0650b22e8f253a9b6b6a3d27485fe4050c40dc09dc38301027071c",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7802,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_interchange__import_file",
+          "arguments": {
+            "path": "EVIDENCE_ROOT/houdini-ecosystem-recovery/ceramic.obj",
+            "format": "obj",
+            "collection_name": "HoudiniSource",
+            "options": {
+              "forward_axis": "NEGATIVE_Z",
+              "up_axis": "Y"
+            }
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "bd4b54795f542b497c7e1fe63ff02813ae6498ac8c7f5e0d96fd753b4f797e28",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7802,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_interchange__import_file",
+            "arguments": {
+              "path": "EVIDENCE_ROOT/houdini-ecosystem-recovery/ceramic.obj",
+              "format": "obj",
+              "collection_name": "HoudiniSource",
+              "options": {
+                "forward_axis": "NEGATIVE_Z",
+                "up_axis": "Y"
+              }
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7802,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Imported OBJ: EVIDENCE_ROOT/houdini-ecosystem-recovery/ceramic.obj\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use scene or object tools to inspect imported objects.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-ecosystem-recovery/ceramic.obj\u005c\",\u005c\"format\u005c\":\u005c\"obj\u005c\",\u005c\"collection_name\u005c\":\u005c\"HoudiniSource\u005c\",\u005c\"imported_object_names\u005c\":[\u005c\"ceramic\u005c\"],\u005c\"imported_count\u005c\":1,\u005c\"warnings\u005c\":[],\u005c\"normalized_options\u005c\":{\u005c\"forward_axis\u005c\":\u005c\"NEGATIVE_Z\u005c\",\u005c\"up_axis\u005c\":\u005c\"Y\u005c\"}}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Imported OBJ: EVIDENCE_ROOT/houdini-ecosystem-recovery/ceramic.obj\",\"error\":null,\"prompt\":\"Use scene or object tools to inspect imported objects.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-ecosystem-recovery/ceramic.obj\",\"format\":\"obj\",\"collection_name\":\"HoudiniSource\",\"imported_object_names\":[\"ceramic\"],\"imported_count\":1,\"warnings\":[],\"normalized_options\":{\"forward_axis\":\"NEGATIVE_Z\",\"up_axis\":\"Y\"}}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "98add464dba673bd8c0a6888a37e97ea8da7cf2816bb612c11fa53e76fcd7857",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7803,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/verify_import.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "418a0b62789e3c04ddccb83d63c4bd172f5d4092fd302f73ff079c281bff5330",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7803,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/verify_import.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7803,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-lighting/verify_import.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/verify_import.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"source_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9\u005c\u005c\u005c\", \u005c\u005c\u005c\"positions_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\u005c\u005c\", \u005c\u005c\u005c\"point_count\u005c\u005c\u005c\": 115776, \u005c\u005c\u005c\"quad_count\u005c\u005c\u005c\": 115200, \u005c\u005c\u005c\"bidirectional_max_point_error\u005c\u005c\u005c\": [1.7881393432617188e-07, 1.7881393432617188e-07], \u005c\u005c\u005c\"bounds_min\u005c\u005c\u005c\": [-1.0318803787231445, -1.031880259513855, -1.0377874559708289e-08], \u005c\u005c\u005c\"bounds_max\u005c\u005c\u005c\": [1.031880497932434, 1.031880497932434, 2.2490625381469727], \u005c\u005c\u005c\"scope\u005c\u005c\u005c\": \u005c\u005c\u005c\"Native imported count, quad arity, world bounds and bidirectional point agreement; not an independent topology equivalence proof\u005c\u005c\u005c\", \u005c\u005c\u005c\"object\u005c\u005c\u005c\": \u005c\u005c\u005c\"HoudiniCeramic\u005c\u005c\u005c\"}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-lighting/verify_import.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-lighting/verify_import.py\",\"stdout\":\"{\u005c\"source_sha256\u005c\": \u005c\"74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9\u005c\", \u005c\"positions_sha256\u005c\": \u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\", \u005c\"point_count\u005c\": 115776, \u005c\"quad_count\u005c\": 115200, \u005c\"bidirectional_max_point_error\u005c\": [1.7881393432617188e-07, 1.7881393432617188e-07], \u005c\"bounds_min\u005c\": [-1.0318803787231445, -1.031880259513855, -1.0377874559708289e-08], \u005c\"bounds_max\u005c\": [1.031880497932434, 1.031880497932434, 2.2490625381469727], \u005c\"scope\u005c\": \u005c\"Native imported count, quad arity, world bounds and bidirectional point agreement; not an independent topology equivalence proof\u005c\", \u005c\"object\u005c\": \u005c\"HoudiniCeramic\u005c\"}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "8657d415db3632514ab578cb4d264f623d7858f595b03eec255aeb3470b19d6f",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7804,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_data_geometry__create_mesh_from_data",
+          "arguments": {
+            "name": "StudioFloor",
+            "vertices": [
+              [
+                -8,
+                -8,
+                0
+              ],
+              [
+                8,
+                -8,
+                0
+              ],
+              [
+                8,
+                8,
+                0
+              ],
+              [
+                -8,
+                8,
+                0
+              ]
+            ],
+            "faces": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ]
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "52566a3a81d3907f10ea0af8d41bbb2a2c70c81dab1ff2b2e07840a806c5e775",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7804,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_data_geometry__create_mesh_from_data",
+            "arguments": {
+              "name": "StudioFloor",
+              "vertices": [
+                [
+                  -8,
+                  -8,
+                  0
+                ],
+                [
+                  8,
+                  -8,
+                  0
+                ],
+                [
+                  8,
+                  8,
+                  0
+                ],
+                [
+                  -8,
+                  8,
+                  0
+                ]
+              ],
+              "faces": [
+                [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              ]
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7804,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Native mesh created and read back\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"object_name\u005c\":\u005c\"StudioFloor\u005c\",\u005c\"vertex_count\u005c\":4,\u005c\"edge_count\u005c\":4,\u005c\"face_count\u005c\":1,\u005c\"position_float32_sha256\u005c\":\u005c\"fde767e78e0468f5aee04aec651151eee6288fc1e035b024b12dbbf2c0dfe451\u005c\",\u005c\"topology_sha256\u005c\":\u005c\"24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70\u005c\",\u005c\"dimensions_local\u005c\":[16.0,16.0,0.0],\u005c\"selection_preserved\u005c\":true,\u005c\"not_claimed\u005c\":[\u005c\"manifoldness\u005c\",\u005c\"engineering validity\u005c\",\u005c\"UVs\u005c\",\u005c\"material assignment\u005c\"]}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Native mesh created and read back\",\"error\":null,\"prompt\":null,\"context\":{\"object_name\":\"StudioFloor\",\"vertex_count\":4,\"edge_count\":4,\"face_count\":1,\"position_float32_sha256\":\"fde767e78e0468f5aee04aec651151eee6288fc1e035b024b12dbbf2c0dfe451\",\"topology_sha256\":\"24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70\",\"dimensions_local\":[16.0,16.0,0.0],\"selection_preserved\":true,\"not_claimed\":[\"manifoldness\",\"engineering validity\",\"UVs\",\"material assignment\"]}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "f6c90b6263877236d5a4f979892b5f11b57107031926cd125f99f69b650811e7",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7805,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_materials__create_material",
+          "arguments": {
+            "name": "BlenderTealGlaze",
+            "color": [
+              0.035,
+              0.23,
+              0.19,
+              1
+            ],
+            "roughness": 0.26,
+            "metallic": 0
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "d55933251494e806a955b1b7973f9081ea1812463c302d6fcfa87a801b8f1c41",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7805,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_materials__create_material",
+            "arguments": {
+              "name": "BlenderTealGlaze",
+              "color": [
+                0.035,
+                0.23,
+                0.19,
+                1
+              ],
+              "roughness": 0.26,
+              "metallic": 0
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7805,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Created material: BlenderTealGlaze\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use assign_material to assign this material to an object.\u005c\",\u005c\"context\u005c\":{\u005c\"material_name\u005c\":\u005c\"BlenderTealGlaze\u005c\",\u005c\"use_nodes\u005c\":true}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Created material: BlenderTealGlaze\",\"error\":null,\"prompt\":\"Use assign_material to assign this material to an object.\",\"context\":{\"material_name\":\"BlenderTealGlaze\",\"use_nodes\":true}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "c72402fd3060c7067b88b07ca8aa7db0b402b69233e4d941e2a0faac79d23b75",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7806,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_materials__assign_material",
+          "arguments": {
+            "object_name": "HoudiniCeramic",
+            "material_name": "BlenderTealGlaze",
+            "slot_index": 0
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "fc700ddeec6faace20e8dc0d029073d79aea84d9c546f3588bace007de0ace4b",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7806,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_materials__assign_material",
+            "arguments": {
+              "object_name": "HoudiniCeramic",
+              "material_name": "BlenderTealGlaze",
+              "slot_index": 0
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7806,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Assigned BlenderTealGlaze to HoudiniCeramic\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use material inspection tools to verify shader connections.\u005c\",\u005c\"context\u005c\":{\u005c\"parameters\u005c\":{\u005c\"material_name\u005c\":\u005c\"BlenderTealGlaze\u005c\",\u005c\"object_name\u005c\":\u005c\"HoudiniCeramic\u005c\",\u005c\"slot_index\u005c\":0},\u005c\"readback\u005c\":{\u005c\"material_name\u005c\":\u005c\"BlenderTealGlaze\u005c\",\u005c\"object_name\u005c\":\u005c\"HoudiniCeramic\u005c\",\u005c\"slot_index\u005c\":0,\u005c\"verified\u005c\":true}}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Assigned BlenderTealGlaze to HoudiniCeramic\",\"error\":null,\"prompt\":\"Use material inspection tools to verify shader connections.\",\"context\":{\"parameters\":{\"material_name\":\"BlenderTealGlaze\",\"object_name\":\"HoudiniCeramic\",\"slot_index\":0},\"readback\":{\"material_name\":\"BlenderTealGlaze\",\"object_name\":\"HoudiniCeramic\",\"slot_index\":0,\"verified\":true}}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "7650c7da18b1ab1f6faeeea82b264f81ef3248425184fd9e55b2b40a98bd7bf9",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7807,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_materials__create_material",
+          "arguments": {
+            "name": "WarmStudioFloor",
+            "color": [
+              0.26,
+              0.22,
+              0.18,
+              1
+            ],
+            "roughness": 0.65,
+            "metallic": 0
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "9985c989617c4a1d862afc9165b25e19d41f3705ac30e43104443b966fef804e",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7807,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_materials__create_material",
+            "arguments": {
+              "name": "WarmStudioFloor",
+              "color": [
+                0.26,
+                0.22,
+                0.18,
+                1
+              ],
+              "roughness": 0.65,
+              "metallic": 0
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7807,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Created material: WarmStudioFloor\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use assign_material to assign this material to an object.\u005c\",\u005c\"context\u005c\":{\u005c\"material_name\u005c\":\u005c\"WarmStudioFloor\u005c\",\u005c\"use_nodes\u005c\":true}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Created material: WarmStudioFloor\",\"error\":null,\"prompt\":\"Use assign_material to assign this material to an object.\",\"context\":{\"material_name\":\"WarmStudioFloor\",\"use_nodes\":true}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "427fa7e2c93b1a582418871b70ae0618cf87ef5e6cd4392d39b0b5f0755fcb0d",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7808,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_materials__assign_material",
+          "arguments": {
+            "object_name": "StudioFloor",
+            "material_name": "WarmStudioFloor",
+            "slot_index": 0
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "f9f056207e729b99589bda92e83232faff57d6c850fde4dd8e7ea4580d21cfc6",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7808,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_materials__assign_material",
+            "arguments": {
+              "object_name": "StudioFloor",
+              "material_name": "WarmStudioFloor",
+              "slot_index": 0
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7808,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Assigned WarmStudioFloor to StudioFloor\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use material inspection tools to verify shader connections.\u005c\",\u005c\"context\u005c\":{\u005c\"parameters\u005c\":{\u005c\"material_name\u005c\":\u005c\"WarmStudioFloor\u005c\",\u005c\"object_name\u005c\":\u005c\"StudioFloor\u005c\",\u005c\"slot_index\u005c\":0},\u005c\"readback\u005c\":{\u005c\"material_name\u005c\":\u005c\"WarmStudioFloor\u005c\",\u005c\"object_name\u005c\":\u005c\"StudioFloor\u005c\",\u005c\"slot_index\u005c\":0,\u005c\"verified\u005c\":true}}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Assigned WarmStudioFloor to StudioFloor\",\"error\":null,\"prompt\":\"Use material inspection tools to verify shader connections.\",\"context\":{\"parameters\":{\"material_name\":\"WarmStudioFloor\",\"object_name\":\"StudioFloor\",\"slot_index\":0},\"readback\":{\"material_name\":\"WarmStudioFloor\",\"object_name\":\"StudioFloor\",\"slot_index\":0,\"verified\":true}}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "01cce4e89dee05fd6b91ba5dced87dd9310587cd48b6a3bfe6fea90673ed0c5e",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7809,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_camera__create_camera",
+          "arguments": {
+            "name": "StudyCamera",
+            "location": [
+              3.4,
+              -5.1,
+              3.4
+            ],
+            "lens": 85,
+            "set_as_active": true
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "52425dc149d52d280ecb0a0a985f9a6063bbe8103aae316eec8ed8dc95785dc8",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7809,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_camera__create_camera",
+            "arguments": {
+              "name": "StudyCamera",
+              "location": [
+                3.4,
+                -5.1,
+                3.4
+              ],
+              "lens": 85,
+              "set_as_active": true
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7809,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Created camera: StudyCamera\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Camera created. Use set_active_camera to make it the render camera.\u005c\",\u005c\"context\u005c\":{\u005c\"object_name\u005c\":\u005c\"StudyCamera\u005c\",\u005c\"lens\u005c\":85,\u005c\"location\u005c\":[3.4,-5.1,3.4],\u005c\"is_active\u005c\":true}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Created camera: StudyCamera\",\"error\":null,\"prompt\":\"Camera created. Use set_active_camera to make it the render camera.\",\"context\":{\"object_name\":\"StudyCamera\",\"lens\":85,\"location\":[3.4,-5.1,3.4],\"is_active\":true}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "150a6c43aebb392825e6f1315dd28161616041fbca9dae477714eabb7a70236f",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7810,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_lighting__create_light",
+          "arguments": {
+            "name": "KeySoftbox",
+            "light_type": "AREA",
+            "location": [
+              -3,
+              -4,
+              5.7
+            ],
+            "energy": 700,
+            "color": [
+              1,
+              0.9,
+              0.78
+            ]
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c1be2092c312a4984b51f7567301f6c0520034ba954d918873d6eeac792cc706",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7810,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_lighting__create_light",
+            "arguments": {
+              "name": "KeySoftbox",
+              "light_type": "AREA",
+              "location": [
+                -3,
+                -4,
+                5.7
+              ],
+              "energy": 700,
+              "color": [
+                1,
+                0.9,
+                0.78
+              ]
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7810,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Created AREA light: KeySoftbox\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Light created. Use set_light_properties to adjust intensity or color.\u005c\",\u005c\"context\u005c\":{\u005c\"object_name\u005c\":\u005c\"KeySoftbox\u005c\",\u005c\"light_type\u005c\":\u005c\"AREA\u005c\",\u005c\"energy\u005c\":700,\u005c\"location\u005c\":[-3,-4,5.7]}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Created AREA light: KeySoftbox\",\"error\":null,\"prompt\":\"Light created. Use set_light_properties to adjust intensity or color.\",\"context\":{\"object_name\":\"KeySoftbox\",\"light_type\":\"AREA\",\"energy\":700,\"location\":[-3,-4,5.7]}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "016f381da023e5be8de2002a4cc5a3acc395f9482129f093667c56c620348a70",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7811,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_lighting__create_light",
+          "arguments": {
+            "name": "FillSoftbox",
+            "light_type": "AREA",
+            "location": [
+              4,
+              -1,
+              3
+            ],
+            "energy": 220,
+            "color": [
+              0.72,
+              0.85,
+              1
+            ]
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c5b9f53ca604ee0fda37f9dc51e0cd2a251667aa0e8e7a9e3248766d60390cc8",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7811,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_lighting__create_light",
+            "arguments": {
+              "name": "FillSoftbox",
+              "light_type": "AREA",
+              "location": [
+                4,
+                -1,
+                3
+              ],
+              "energy": 220,
+              "color": [
+                0.72,
+                0.85,
+                1
+              ]
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7811,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Created AREA light: FillSoftbox\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Light created. Use set_light_properties to adjust intensity or color.\u005c\",\u005c\"context\u005c\":{\u005c\"object_name\u005c\":\u005c\"FillSoftbox\u005c\",\u005c\"light_type\u005c\":\u005c\"AREA\u005c\",\u005c\"energy\u005c\":220,\u005c\"location\u005c\":[4,-1,3]}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Created AREA light: FillSoftbox\",\"error\":null,\"prompt\":\"Light created. Use set_light_properties to adjust intensity or color.\",\"context\":{\"object_name\":\"FillSoftbox\",\"light_type\":\"AREA\",\"energy\":220,\"location\":[4,-1,3]}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "c2b6be2a4e15ef40cb523151259c1031a924f2a8b66921e7fe005249cbb1d7d3",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7812,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_lighting__create_light",
+          "arguments": {
+            "name": "RimSoftbox",
+            "light_type": "AREA",
+            "location": [
+              1.5,
+              3,
+              4.5
+            ],
+            "energy": 500,
+            "color": [
+              1,
+              0.95,
+              0.86
+            ]
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "65ba8a9b833c61f5f0994bb3e36bd2534bcbb4a287c2dc265256166649313210",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7812,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_lighting__create_light",
+            "arguments": {
+              "name": "RimSoftbox",
+              "light_type": "AREA",
+              "location": [
+                1.5,
+                3,
+                4.5
+              ],
+              "energy": 500,
+              "color": [
+                1,
+                0.95,
+                0.86
+              ]
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7812,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Created AREA light: RimSoftbox\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Light created. Use set_light_properties to adjust intensity or color.\u005c\",\u005c\"context\u005c\":{\u005c\"object_name\u005c\":\u005c\"RimSoftbox\u005c\",\u005c\"light_type\u005c\":\u005c\"AREA\u005c\",\u005c\"energy\u005c\":500,\u005c\"location\u005c\":[1.5,3,4.5]}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Created AREA light: RimSoftbox\",\"error\":null,\"prompt\":\"Light created. Use set_light_properties to adjust intensity or color.\",\"context\":{\"object_name\":\"RimSoftbox\",\"light_type\":\"AREA\",\"energy\":500,\"location\":[1.5,3,4.5]}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "ed4d06dd5a76503eed82627ae8a0bdb5a34da87f536d2cca2343aeb41a548a37",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7813,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_lighting__set_world_background",
+          "arguments": {
+            "color": [
+              0.03,
+              0.035,
+              0.04
+            ],
+            "strength": 0.25
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "d1c63acee68d6e605c2c62fabfb2691403360e0181b34c4db0e0a5e60f6ad099",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7813,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_lighting__set_world_background",
+            "arguments": {
+              "color": [
+                0.03,
+                0.035,
+                0.04
+              ],
+              "strength": 0.25
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7813,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"World background updated\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"World background updated. Render the scene to review environment lighting.\u005c\",\u005c\"context\u005c\":{\u005c\"color\u005c\":[0.03,0.035,0.04,1.0],\u005c\"strength\u005c\":0.25}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"World background updated\",\"error\":null,\"prompt\":\"World background updated. Render the scene to review environment lighting.\",\"context\":{\"color\":[0.03,0.035,0.04,1.0],\"strength\":0.25}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "ab9b9898caef529a0787821ecbbabe975388ddc6b33da0a7e8bb0c10abf39b87",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7814,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__set_render_settings",
+          "arguments": {
+            "engine": "CYCLES",
+            "resolution_x": 480,
+            "resolution_y": 600,
+            "resolution_percentage": 100,
+            "fps": 24,
+            "samples": 16,
+            "file_format": "PNG"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "4a448c603a2421ce9c061175e5299815a399bf313d392aa4ca6368c08a7aaa9d",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7814,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__set_render_settings",
+            "arguments": {
+              "engine": "CYCLES",
+              "resolution_x": 480,
+              "resolution_y": 600,
+              "resolution_percentage": 100,
+              "fps": 24,
+              "samples": 16,
+              "file_format": "PNG"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7814,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render settings updated\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Settings applied. Use render_scene to render.\u005c\",\u005c\"context\u005c\":{\u005c\"engine\u005c\":\u005c\"CYCLES\u005c\",\u005c\"resolution_x\u005c\":480,\u005c\"resolution_y\u005c\":600,\u005c\"resolution_percentage\u005c\":100,\u005c\"fps\u005c\":24,\u005c\"fps_base\u005c\":1.0,\u005c\"effective_fps\u005c\":24.0,\u005c\"output_path\u005c\":\u005c\"TEMP_ROOT/\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render settings updated\",\"error\":null,\"prompt\":\"Settings applied. Use render_scene to render.\",\"context\":{\"engine\":\"CYCLES\",\"resolution_x\":480,\"resolution_y\":600,\"resolution_percentage\":100,\"fps\":24,\"fps_base\":1.0,\"effective_fps\":24.0,\"output_path\":\"TEMP_ROOT/\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "5e4f7dd268aaf469684ebf68bb2d80fb48a1b211d53c9052f40ab67ebc5de33c",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7815,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__set_render_denoise",
+          "arguments": {
+            "enabled": false
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "d279bed45914e91cf2cab51c8110892436340f2451e93a78c2d2da22cb071d80",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7815,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__set_render_denoise",
+            "arguments": {
+              "enabled": false
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7815,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Updated denoise settings for Scene\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Cycles-only; EEVEE ignores these settings. Use get_render_status to review.\u005c\",\u005c\"context\u005c\":{\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\",\u005c\"engine\u005c\":\u005c\"CYCLES\u005c\",\u005c\"applied\u005c\":{\u005c\"use_denoising\u005c\":false},\u005c\"use_denoising\u005c\":false,\u005c\"denoiser\u005c\":\u005c\"OPENIMAGEDENOISE\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Updated denoise settings for Scene\",\"error\":null,\"prompt\":\"Cycles-only; EEVEE ignores these settings. Use get_render_status to review.\",\"context\":{\"scene_name\":\"Scene\",\"engine\":\"CYCLES\",\"applied\":{\"use_denoising\":false},\"use_denoising\":false,\"denoiser\":\"OPENIMAGEDENOISE\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "ff919b156549f6426dd6b905f2c8a02e777c417f2f0e12ffa2ff351e546e5500",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7816,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/place_lighting.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "48ab4e65a31b532464a37782537dfe2cdc31cefff9ca7273cc5dc9ec01ea93e5",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7816,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/place_lighting.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7816,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-lighting/place_lighting.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/place_lighting.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"scope\u005c\u005c\u005c\": \u005c\u005c\u005c\"New Houdini-modeled / Blender-lit exercise, NOT the original Houdini intermediate lighting state or a same-renderer benchmark\u005c\u005c\u005c\", \u005c\u005c\u005c\"script_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"fa9402de73fd30c9f7d407d97c4eb501fb74540b511ccaf37b2a3868bdfc237c\u005c\u005c\u005c\", \u005c\u005c\u005c\"camera\u005c\u005c\u005c\": {\u005c\u005c\u005c\"location\u005c\u005c\u005c\": [5.815151691436768, -8.722724914550781, 5.069295883178711], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [1.2046854496002197, -4.0432418302316364e-08, 0.5880027413368225], \u005c\u005c\u005c\"lens\u005c\u005c\u005c\": 85.0, \u005c\u005c\u005c\"dof\u005c\u005c\u005c\": false}, \u005c\u005c\u005c\"objects\u005c\u005c\u005c\": {\u005c\u005c\u005c\"HoudiniCeramic\u005c\u005c\u005c\": {\u005c\u005c\u005c\"type\u005c\u005c\u005c\": \u005c\u005c\u005c\"MESH\u005c\u005c\u005c\", \u005c\u005c\u005c\"location\u005c\u005c\u005c\": [0.0, 0.0, 0.0], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [1.570796251296997, -0.0, 0.0]}, \u005c\u005c\u005c\"StudioFloor\u005c\u005c\u005c\": {\u005c\u005c\u005c\"type\u005c\u005c\u005c\": \u005c\u005c\u005c\"MESH\u005c\u005c\u005c\", \u005c\u005c\u005c\"location\u005c\u005c\u005c\": [0.0, 0.0, 0.0], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [0.0, 0.0, 0.0]}, \u005c\u005c\u005c\"StudyCamera\u005c\u005c\u005c\": {\u005c\u005c\u005c\"type\u005c\u005c\u005c\": \u005c\u005c\u005c\"CAMERA\u005c\u005c\u005c\", \u005c\u005c\u005c\"location\u005c\u005c\u005c\": [5.815151691436768, -8.722724914550781, 5.069295883178711], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [1.2046854496002197, -4.0432418302316364e-08, 0.5880027413368225]}, \u005c\u005c\u005c\"KeySoftbox\u005c\u005c\u005c\": {\u005c\u005c\u005c\"type\u005c\u005c\u005c\": \u005c\u005c\u005c\"LIGHT\u005c\u005c\u005c\", \u005c\u005c\u005c\"location\u005c\u005c\u005c\": [-3.0, -4.0, 5.699999809265137], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [0.8270407915115356, -3.346394450431944e-08, -0.6435011029243469]}, \u005c\u005c\u005c\"FillSoftbox\u005c\u005c\u005c\": {\u005c\u005c\u005c\"type\u005c\u005c\u005c\": \u005c\u005c\u005c\"LIGHT\u005c\u005c\u005c\", \u005c\u005c\u005c\"location\u005c\u005c\u005c\": [4.0, -1.0, 3.0], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [1.119162917137146, 7.67908545640239e-08, 1.3258177042007446]}, \u005c\u005c\u005c\"RimSoftbox\u005c\u005c\u005c\": {\u005c\u005c\u005c\"type\u005c\u005c\u005c\": \u005c\u005c\u005c\"LIGHT\u005c\u005c\u005c\", \u005c\u005c\u005c\"location\u005c\u005c\u005c\": [1.5, 3.0, 4.5], \u005c\u005c\u005c\"rotation\u005c\u005c\u005c\": [0.8410688638687134, -2.6345803760818853e-08, 2.677945137023926]}}, \u005c\u005c\u005c\"framing\u005c\u005c\u005c\": {\u005c\u005c\u005c\"margin\u005c\u005c\u005c\": 0.08, \u005c\u005c\u005c\"attempts\u005c\u005c\u005c\": 12, \u005c\u005c\u005c\"min_xy\u005c\u005c\u005c\": [0.09896364063024521, 0.15673580765724182], \u005c\u005c\u005c\"max_xy\u005c\u005c\u005c\": [0.8816664814949036, 0.8175280690193176], \u005c\u005c\u005c\"all_depth_positive\u005c\u005c\u005c\": true}, \u005c\u005c\u005c\"geometry_counts\u005c\u005c\u005c\": [115776, 115200], \u005c\u005c\u005c\"view_transform\u005c\u005c\u005c\": \u005c\u005c\u005c\"AgX\u005c\u005c\u005c\", \u005c\u005c\u005c\"look\u005c\u005c\u005c\": \u005c\u005c\u005c\"AgX - Medium High Contrast\u005c\u005c\u005c\"}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-lighting/place_lighting.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-lighting/place_lighting.py\",\"stdout\":\"{\u005c\"scope\u005c\": \u005c\"New Houdini-modeled / Blender-lit exercise, NOT the original Houdini intermediate lighting state or a same-renderer benchmark\u005c\", \u005c\"script_sha256\u005c\": \u005c\"fa9402de73fd30c9f7d407d97c4eb501fb74540b511ccaf37b2a3868bdfc237c\u005c\", \u005c\"camera\u005c\": {\u005c\"location\u005c\": [5.815151691436768, -8.722724914550781, 5.069295883178711], \u005c\"rotation\u005c\": [1.2046854496002197, -4.0432418302316364e-08, 0.5880027413368225], \u005c\"lens\u005c\": 85.0, \u005c\"dof\u005c\": false}, \u005c\"objects\u005c\": {\u005c\"HoudiniCeramic\u005c\": {\u005c\"type\u005c\": \u005c\"MESH\u005c\", \u005c\"location\u005c\": [0.0, 0.0, 0.0], \u005c\"rotation\u005c\": [1.570796251296997, -0.0, 0.0]}, \u005c\"StudioFloor\u005c\": {\u005c\"type\u005c\": \u005c\"MESH\u005c\", \u005c\"location\u005c\": [0.0, 0.0, 0.0], \u005c\"rotation\u005c\": [0.0, 0.0, 0.0]}, \u005c\"StudyCamera\u005c\": {\u005c\"type\u005c\": \u005c\"CAMERA\u005c\", \u005c\"location\u005c\": [5.815151691436768, -8.722724914550781, 5.069295883178711], \u005c\"rotation\u005c\": [1.2046854496002197, -4.0432418302316364e-08, 0.5880027413368225]}, \u005c\"KeySoftbox\u005c\": {\u005c\"type\u005c\": \u005c\"LIGHT\u005c\", \u005c\"location\u005c\": [-3.0, -4.0, 5.699999809265137], \u005c\"rotation\u005c\": [0.8270407915115356, -3.346394450431944e-08, -0.6435011029243469]}, \u005c\"FillSoftbox\u005c\": {\u005c\"type\u005c\": \u005c\"LIGHT\u005c\", \u005c\"location\u005c\": [4.0, -1.0, 3.0], \u005c\"rotation\u005c\": [1.119162917137146, 7.67908545640239e-08, 1.3258177042007446]}, \u005c\"RimSoftbox\u005c\": {\u005c\"type\u005c\": \u005c\"LIGHT\u005c\", \u005c\"location\u005c\": [1.5, 3.0, 4.5], \u005c\"rotation\u005c\": [0.8410688638687134, -2.6345803760818853e-08, 2.677945137023926]}}, \u005c\"framing\u005c\": {\u005c\"margin\u005c\": 0.08, \u005c\"attempts\u005c\": 12, \u005c\"min_xy\u005c\": [0.09896364063024521, 0.15673580765724182], \u005c\"max_xy\u005c\": [0.8816664814949036, 0.8175280690193176], \u005c\"all_depth_positive\u005c\": true}, \u005c\"geometry_counts\u005c\": [115776, 115200], \u005c\"view_transform\u005c\": \u005c\"AgX\u005c\", \u005c\"look\u005c\": \u005c\"AgX - Medium High Contrast\u005c\"}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "ec421b36607cc5c4a90a510414600043d6e158f99757ea6d541038a5502ffaa2",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7817,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__save_scene",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "f3cc6cea3cbaa153118df353e56b6d4e91426388c1337a7d66bc384b81f1452a",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7817,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__save_scene",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7817,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Scene saved to EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene saved successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Scene saved to EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\",\"error\":null,\"prompt\":\"Scene saved successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "fc5f1949ca0c256ac8a5c627eb6b1796071dfa60040eb4392daa66008f2ec5ac",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7818,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "807ac790082a9f36047319c1746cba518c698b0a7ce959ff49c70c3c9a8eb18b",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7818,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__new_scene",
+            "arguments": {}
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7818,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"New scene created\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Check the result with list_objects or use related actions to continue.\u005c\",\u005c\"context\u005c\":{}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"New scene created\",\"error\":null,\"prompt\":\"Check the result with list_objects or use related actions to continue.\",\"context\":{}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "8f5e65ffbfc526d7abf9c711782c316748298e0b24787a2b3b49b0882032f21d",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7819,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "bf3f0f0c6290558fda418723ba07d3c92e287e12263587e99a3dc810f59bb02c",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7819,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scene__open_scene",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7819,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Opened scene: EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Scene opened. Use list_objects to see the scene contents.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\u005c\",\u005c\"scene_name\u005c\":\u005c\"Scene\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Opened scene: EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\",\"error\":null,\"prompt\":\"Scene opened. Use list_objects to see the scene contents.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/cross-dcc-lighting.blend\",\"scene_name\":\"Scene\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "c2d5def72e4519afd85d7e5b9ffd2046fccd7a22579afe45ba40100ecb4fd3ac",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7820,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/verify_reopened.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c15b66211ed10b465a19570678c2605cf752e3d03394606c725801d0e577b71f",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7820,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-lighting/verify_reopened.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7820,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-lighting/verify_reopened.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/verify_reopened.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"saved_reopened\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"counts\u005c\u005c\u005c\": [115776, 115200], \u005c\u005c\u005c\"positions_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\u005c\u005c\", \u005c\u005c\u005c\"scope\u005c\u005c\u005c\": \u005c\u005c\u005c\"new cross-DCC lighting pilot only\u005c\u005c\u005c\", \u005c\u005c\u005c\"render\u005c\u005c\u005c\": [480, 600, 16]}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-lighting/verify_reopened.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-lighting/verify_reopened.py\",\"stdout\":\"{\u005c\"saved_reopened\u005c\": true, \u005c\"counts\u005c\": [115776, 115200], \u005c\"positions_sha256\u005c\": \u005c\"ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf\u005c\", \u005c\"scope\u005c\": \u005c\"new cross-DCC lighting pilot only\u005c\", \u005c\"render\u005c\": [480, 600, 16]}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "368b4503053910b80d7ef19ec64fd2123a47fd5f6153ddf9433e9b26103fbda3",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7821,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__start_render_job",
+          "arguments": {
+            "output_pattern": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/frame_####",
+            "start_frame": 1,
+            "end_frame": 1,
+            "step": 1,
+            "resume_missing": false,
+            "device": "CPU",
+            "save_before_render": false,
+            "output_format": "PNG",
+            "factory_startup": true
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "053201a38a12d0e7db5003e461143d53533bf72409c11dfe432593030b02663d",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7821,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__start_render_job",
+            "arguments": {
+              "output_pattern": "EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/frame_####",
+              "start_frame": 1,
+              "end_frame": 1,
+              "step": 1,
+              "resume_missing": false,
+              "device": "CPU",
+              "save_before_render": false,
+              "output_format": "PNG",
+              "factory_startup": true
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7821,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Background render job submitted (PNG)\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Use get_render_job to monitor progress and cancel_render_job to stop the owned worker.\u005c\",\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"7cf8ce94ece9402a867b24160953e373\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":59,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":0,\u005c\"progress\u005c\":0.0,\u005c\"missing_frame_sample\u005c\":[1],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"PNG\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"7cf8ce94ece9402a867b24160953e373\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"7cf8ce94ece9402a867b24160953e373\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":0.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Background render job submitted (PNG)\",\"error\":null,\"prompt\":\"Use get_render_job to monitor progress and cancel_render_job to stop the owned worker.\",\"context\":{\"job_id\":\"7cf8ce94ece9402a867b24160953e373\",\"status\":\"running\",\"pid\":59,\"expected_frame_count\":1,\"written_frame_count\":0,\"progress\":0.0,\"missing_frame_sample\":[1],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/frame_####\",\"output_format\":\"PNG\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"7cf8ce94ece9402a867b24160953e373\",\"adapter_job\":{\"job_id\":\"7cf8ce94ece9402a867b24160953e373\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":0.0}},\"isError\":false,\"_meta\":{\"dcc.next_tools\":{\"on_success\":[\"blender_render__get_render_job\"]}}}}"
+      }
+    },
+    {
+      "original_receipt_sha256": "c951670a3034ea2ab1aa18c350dc1dbfb01ed12e43bdb70e229a8030f08efa4f",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7822,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "7cf8ce94ece9402a867b24160953e373"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "f390cb2149dfd67c8bee87d6bddad4db0c33a84edd26d8977680ca93dcf4730c",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:41947/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7822,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_render__get_render_job",
+            "arguments": {
+              "job_id": "7cf8ce94ece9402a867b24160953e373"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7822,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Render job status\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"7cf8ce94ece9402a867b24160953e373\u005c\",\u005c\"status\u005c\":\u005c\"completed\u005c\",\u005c\"pid\u005c\":59,\u005c\"expected_frame_count\u005c\":1,\u005c\"written_frame_count\u005c\":1,\u005c\"progress\u005c\":1.0,\u005c\"missing_frame_sample\u005c\":[],\u005c\"output_pattern\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/frame_####\u005c\",\u005c\"output_format\u005c\":\u005c\"PNG\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.out.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.err.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"7cf8ce94ece9402a867b24160953e373\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"7cf8ce94ece9402a867b24160953e373\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"completed\u005c\",\u005c\"terminal\u005c\":true,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false},\u005c\"progress\u005c\":1.0}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Render job status\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"7cf8ce94ece9402a867b24160953e373\",\"status\":\"completed\",\"pid\":59,\"expected_frame_count\":1,\"written_frame_count\":1,\"progress\":1.0,\"missing_frame_sample\":[],\"output_pattern\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/frame_####\",\"output_format\":\"PNG\",\"stdout_path\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.out.log\",\"stderr_path\":\"EVIDENCE_ROOT/houdini-blender-lighting/artifacts/pilot/.dcc-mcp-render-7cf8ce94ece9402a867b24160953e373.err.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"7cf8ce94ece9402a867b24160953e373\",\"adapter_job\":{\"job_id\":\"7cf8ce94ece9402a867b24160953e373\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"completed\",\"terminal\":true,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false},\"progress\":1.0}},\"isError\":false}}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1074 @@
+{
+  "schema": "dcc-showcase-ecosystem/v1",
+  "case_slug": "trail-and-air",
+  "phases": {
+    "authoring": {
+      "status": "performed"
+    },
+    "rendering": {
+      "status": "performed"
+    },
+    "export": {
+      "status": "performed"
+    },
+    "post-production": {
+      "status": "performed"
+    }
+  },
+  "stages": [
+    {
+      "id": "original-reaper-assets",
+      "phase": "authoring",
+      "status": "succeeded",
+      "route": "mcp",
+      "component": {
+        "version": "0.1.0+867ce6837c916aa7ca89a5cb14deae9869f09d00",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-reaper/commit/867ce6837c916aa7ca89a5cb14deae9869f09d00"
+      },
+      "request": {
+        "path": "docs/showcase/trail-and-air/mcp-evidence.public.json",
+        "sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05"
+      },
+      "response": {
+        "path": "docs/showcase/trail-and-air/mcp-evidence.public.json",
+        "sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/original-reaper-assets-measurement.json",
+        "sha256": "0c6198ce1a13bf2e1ea45a85e8213d87dca01b36ff9776d12c516dc8b408cab4"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+          "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+          "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+          "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+          "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+          "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+          "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+          "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+          "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+          "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+          "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+          "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+          "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+          "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+          "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+          "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+          "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+          "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Trail-and-Air.rpp",
+          "sha256": "40b6428f213bc9b12895a75509ec04e567b17ec5b9749ea17dc7d814893ad952"
+        }
+      ]
+    },
+    {
+      "id": "native-waveform-hero",
+      "phase": "rendering",
+      "status": "succeeded",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "request": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/hero-requests.json",
+        "sha256": "ab60f3cb30c9b847fea2f25cc7e66a575833852e7d7ab0a511ae15b47344625f"
+      },
+      "response": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/hero-responses.json",
+        "sha256": "5c4a5ef5c8ba09929d49a7c7d43b7b36a402a353180404187e3c1b001033887d"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-waveform-hero-measurement.json",
+        "sha256": "3fada7bf22c7a7f0f2a3a32c2aeaba874a6130005b4636820055aefced32621f"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+          "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+          "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+          "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/trail-and-air/production-intermediates/hero-native.png",
+          "sha256": "ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1"
+        }
+      ]
+    },
+    {
+      "id": "native-vse-montage",
+      "phase": "post-production",
+      "status": "succeeded",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22+candidate-wheel-fe494618",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-blender/tree/c942fbca2d7876cfb65bc58a5eff2940b8181f90/docs/evidence/audio-isolation-2026-10-20/tested-overlay",
+        "source_role": "Post-execution archive location of exact tested overlay, NOT a claim this archive commit was installed",
+        "installed_base": "dcc-mcp-blender 0.2.22",
+        "installed_wheel_sha256": "fe494618af00e04925d7d99782a8c03224cc0aaeb7196a6d6c4143a1a4ee379d"
+      },
+      "request": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/montage-requests.json",
+        "sha256": "cb1eeae8d3fa93f83e6c44b4a6d77c75899999046ae39768d5cc565ffcca9b79"
+      },
+      "response": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/montage-responses.json",
+        "sha256": "04f85ba6074071514341cc966e372a243cd8babe5784149ad8179c800e35fb54"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-vse-montage-measurement.json",
+        "sha256": "38c1b8791a5b0a93ce81c9cf15628c0c34e7cb33078b2a42218b2ed188b48765"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+          "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+          "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+          "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+          "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+          "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+          "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+          "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+          "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+          "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+          "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+          "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+          "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+          "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+          "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+          "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+          "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+        },
+        {
+          "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+          "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/trail-and-air/production-intermediates/Trail-and-Air-audition-master.wav",
+          "sha256": "a30e991b3153953cdd0f92348ec55a8c4a8f5c4cda558a10587d55417c31cc8d"
+        }
+      ]
+    },
+    {
+      "id": "native-mp3-encode",
+      "phase": "export",
+      "status": "succeeded",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22+candidate-wheel-c4369a84",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-blender/commit/eae896ea254881c98ba8a3fe5a2e53af572be8e4",
+        "installed_wheel_sha256": "c4369a84fe0b9488fea5c33e26fa20f3a26c0e20000a0bab9c2423e7c12ae475"
+      },
+      "request": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/mp3-call.json",
+        "sha256": "155296354bbf5982860eed7371d04d919674e74b4967261c2284c64c394dbdc1"
+      },
+      "response": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/mp3-call.json",
+        "sha256": "155296354bbf5982860eed7371d04d919674e74b4967261c2284c64c394dbdc1"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-mp3-encode-measurement.json",
+        "sha256": "eb56d03e53e969f5dc6e7f755dfcb3c72a92a65980fca89b424e7fa957dd3cfb"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/trail-and-air/production-intermediates/Trail-and-Air-audition-master.wav",
+          "sha256": "a30e991b3153953cdd0f92348ec55a8c4a8f5c4cda558a10587d55417c31cc8d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3",
+          "sha256": "154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3"
+        }
+      ]
+    },
+    {
+      "id": "native-jpeg-encoding",
+      "phase": "export",
+      "status": "succeeded",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "request": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/jpeg-call.json",
+        "sha256": "b6cbaa2568be37d424a7950f7fa47775600d4ab21bc29a79498c91e4d7c69988"
+      },
+      "response": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/jpeg-call.json",
+        "sha256": "b6cbaa2568be37d424a7950f7fa47775600d4ab21bc29a79498c91e4d7c69988"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-jpeg-encoding-measurement.json",
+        "sha256": "8e4bf435410511bb6129d8e94b8504093db9fdc20cbf3a5ed15ce2301e09cd18"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/trail-and-air/production-intermediates/hero-native.png",
+          "sha256": "ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/trail-and-air/hero.jpg",
+          "sha256": "c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598"
+        }
+      ]
+    }
+  ],
+  "external_sources": [],
+  "downloads": [],
+  "delivery_packages": [
+    {
+      "archive": {
+        "path": "docs/showcase/trail-and-air/Trail-and-Air-Ambience.zip",
+        "sha256": "60560da452928ac8b8e51eca8b5e745d92595643f705524e878928fec383b097"
+      },
+      "members": [
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+            "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/manifest-ambience.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/manifest-ambience.json",
+            "sha256": "74b5e87183f7ede4d604f8e6c68a3009934bc9346b10420d50bb0b6d970385f5"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-code.txt",
+            "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+            "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/README-Ambience.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/README-Ambience.txt",
+            "sha256": "ce3a0d190f0951e8639ce9a3a742ae35c9a6015a0185654056e79cee9baaecef"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        }
+      ]
+    },
+    {
+      "archive": {
+        "path": "docs/showcase/trail-and-air/Trail-and-Air-Music.zip",
+        "sha256": "7338eadfc1205e47300d8896f2222bd3e1ea6e584c50c5679f63cab0d040f99a"
+      },
+      "members": [
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+            "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/manifest-music.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/manifest-music.json",
+            "sha256": "7248808341fd84987e0680a1e61d6ac32a4a4e77a6e4f917b4bc99de86a65369"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-code.txt",
+            "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+            "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/README-Music.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/README-Music.txt",
+            "sha256": "eb29ee1cc9422978a434ba48c0b6b359fcba8ea96dae1e692feba512bb4f310e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        }
+      ]
+    },
+    {
+      "archive": {
+        "path": "docs/showcase/trail-and-air/Trail-and-Air-OneShots.zip",
+        "sha256": "b1332611266cf20e47eb423401491415a39e9b77c0774fe1edd17ea9edc7988e"
+      },
+      "members": [
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+            "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+            "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+            "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+            "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+            "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+            "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+            "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+            "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+            "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+            "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+            "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+            "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+            "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+            "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+            "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/manifest-oneshots.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/manifest-oneshots.json",
+            "sha256": "f532f6fd487f02cc7260ec5afa9d4f30262aff7e29ab6503e7136e9389256101"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-code.txt",
+            "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+            "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/README-OneShots.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/README-OneShots.txt",
+            "sha256": "7bdd310c1ea31c2de67cf3c0b6c24066be43ca13a45c1f10901dd72028a35b6b"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        }
+      ]
+    },
+    {
+      "archive": {
+        "path": "docs/showcase/trail-and-air/Trail-and-Air-Source.zip",
+        "sha256": "d1efd0e37a1ae6815f60cec45595a0b9042afe5cb2c1f6dd24dcbda297592eab"
+      },
+      "members": [
+        {
+          "member": "Trail-and-Air-UE-Audio/Trail-and-Air.rpp",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Trail-and-Air.rpp",
+            "sha256": "40b6428f213bc9b12895a75509ec04e567b17ec5b9749ea17dc7d814893ad952"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-code.txt",
+            "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+            "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Audio/manifest.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Audio/manifest.json",
+            "sha256": "06c2ce3795289b55b8c49515a58daaff31c323a26f415169a6c910e402ccccf6"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/audition-timeline.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/audition-timeline.json",
+            "sha256": "0c0fe93fbfbf8047ee062d5ced273dc7ed806c1d7d3d5e31dbaededca9f9162d"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/README.md",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/README.md",
+            "sha256": "96f9e06765d9f1bcd6d8c598ea279c1fffd53f4437226134fc77248e50005b7c"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/tools.yaml",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/tools.yaml",
+            "sha256": "40bacaefacebd3036cb8fcb4e52447710497786b2c3d649eb85137b5b3ce5647"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/SKILL.md",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/SKILL.md",
+            "sha256": "3c6ebe3c056b5b77f8064015c45fc12a810e4318954ec3ec90c2fe1b5881a604"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/tools.yaml",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-game-audio/tools.yaml",
+            "sha256": "710975daaaf7d0410f11cdeb330bb79192c282df42d29f57aa52f72efaf57730"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/LICENSE",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-game-audio/LICENSE",
+            "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/SKILL.md",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-game-audio/SKILL.md",
+            "sha256": "a1baafa5c706c837f7cd2ffc484548780474fc478addad0a889b3ce461408a76"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py",
+            "sha256": "8a2d00a3e475b3bf70b078ec44e1e2171f4826e580fe0866a467165691f778e1"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/tests/test_stem_session.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/tests/test_stem_session.py",
+            "sha256": "58b563d5743cc5484b7ef119d112c25f1b4ff20718fe0907718b6ce1d86cbd8b"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/render_master.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/render_master.py",
+            "sha256": "0f016403e229d91a38c978c4b7f1bfcfd5da99b4d66fef28c24023fbc1175491"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/audit_session.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/audit_session.py",
+            "sha256": "77731b442f928359476b208d2205bdbcd6344f3f570e148b7ce7f7ac531f0c6a"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/common.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/common.py",
+            "sha256": "2bb9dfbb7d6d0b1c858b10dbe383a1fe9be2cfe29a35c61f45cc9d990208394e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/create_session.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/create_session.py",
+            "sha256": "2bedcf438e069b11f2fa954eb3d7538900ff7d84d3ef4c879d3309e1e53b1575"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/open_project.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/open_project.py",
+            "sha256": "e32fc2dcac5f161012f1d7451d946dc5d9666335ef04b29d27da05fb2d0d7cab"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/save_project.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/save_project.py",
+            "sha256": "4b677ef2938885265900d64eafe193b965c0d1cbfc32e5917af59b5c84255ecf"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/render_assets.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/render_assets.py",
+            "sha256": "8a33fe8df4fd9961cbddb723ffc079516cf8f43f70da9881f74588a10de8f92d"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/generate_pack.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/generate_pack.py",
+            "sha256": "34b5ff203700759647d49fc02a048a99a279bb38321943a488765d2081961574"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/synthesis.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/synthesis.py",
+            "sha256": "4d0baefae6376bfabe41a95d19e5efbe553b4dafba74725b31cbcabf89086571"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Validation/source-signal-checks.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Validation/source-signal-checks.json",
+            "sha256": "a32a55a5683c370c5d82865bdc19ca28f289e5f34d2a8b6722bf6abaf1482129"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Validation/native-render-validation.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Validation/native-render-validation.json",
+            "sha256": "46d71b76ee7d0e6d11331a2b4b77557074c015750839ea3ddd69745b695d3ea0"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Validation/mcp-evidence.public.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Validation/mcp-evidence.public.json",
+            "sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Validation/native-signal-checks.json",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Validation/native-signal-checks.json",
+            "sha256": "5df31c800e9149b7b4add4dc7daab2dd33296325544654e0d5b5d20d85e7ec5c"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Source/LICENSE",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Source/LICENSE",
+            "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Source/game_audio_pack.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Source/game_audio_pack.py",
+            "sha256": "4d0baefae6376bfabe41a95d19e5efbe553b4dafba74725b31cbcabf89086571"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Source/AUDIO-LICENSE.txt",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Source/AUDIO-LICENSE.txt",
+            "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        },
+        {
+          "member": "Trail-and-Air-UE-Audio/Source/validate_pack.py",
+          "source": {
+            "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Source/validate_pack.py",
+            "sha256": "26238a5a0b86aec14f7c3552d6c04158f33ec8394ef1d1c6b2aa5e8cccee816b"
+          },
+          "kind": "support",
+          "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
+        }
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/jpeg-source-freeze.json",
+      "sha256": "f639527d39179905cda999fcfa81fb6b93b97f152e399a08f67a604930241433",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/original-reaper-assets-measurement.json",
+      "sha256": "0c6198ce1a13bf2e1ea45a85e8213d87dca01b36ff9776d12c516dc8b408cab4",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/mp3-call.json",
+      "sha256": "155296354bbf5982860eed7371d04d919674e74b4967261c2284c64c394dbdc1",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/wav-acceptance.json",
+      "sha256": "afebea1c65a2ede19629bd6dd8a116b96999b72dc5cc0e7f6e3e8005dc8c6405",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/project-delivery-equivalence.json",
+      "sha256": "202cb2d79c3ccc6a65796a3ae2e09e3dae19c2f63c589c64d812d100dda47e9d",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/build_audio_scene.py.source.json",
+      "sha256": "2b6dab59e57e3aded28977b2b1b9ed27ad64a9b01a90e4b44206916b104d8439",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/prior-native-failures.json",
+      "sha256": "e56eca16ba47fb04676a25ebf36c5a2f40f0536c765885e58a5145cc957432c8",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/jpeg-call.json",
+      "sha256": "b6cbaa2568be37d424a7950f7fa47775600d4ab21bc29a79498c91e4d7c69988",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/hero-history-inventory.json",
+      "sha256": "94163703695f0f8b24a0d30ab272ebee560960c4fd7118c6a4dfafdd1aa8e7c5",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-vse-montage-measurement.json",
+      "sha256": "38c1b8791a5b0a93ce81c9cf15628c0c34e7cb33078b2a42218b2ed188b48765",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/zip-byte-identity.json",
+      "sha256": "4a082b85968bdeaff96d8eaefb7b25ababfb496ee684348bb3e9679029c0846d",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/montage-responses.json",
+      "sha256": "04f85ba6074071514341cc966e372a243cd8babe5784149ad8179c800e35fb54",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-mp3-encode-measurement.json",
+      "sha256": "eb56d03e53e969f5dc6e7f755dfcb3c72a92a65980fca89b424e7fa957dd3cfb",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/mp3-host-cleanup.json",
+      "sha256": "052501fa643ac21d641abfde09c43b2888727fcceb95fb593c588716133f3572",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/build_hero_scene_v2.py.source.json",
+      "sha256": "79c671a3c4dc66a31684b1d12370fc8127f99d6aca515970fa0d46aa1d2e31d3",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/original-audio-content-lineage.json",
+      "sha256": "6da4903625c1c9e254ca20983db1d91bb2d70abe333fe718592f4c8bbaa951e3",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/jpeg-acceptance.json",
+      "sha256": "9516cb44d63f3699fb20b9f5964a3f59d27d20c569f533aea37c2d40c29a2eca",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-waveform-hero-measurement.json",
+      "sha256": "3fada7bf22c7a7f0f2a3a32c2aeaba874a6130005b4636820055aefced32621f",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/native-jpeg-encoding-measurement.json",
+      "sha256": "8e4bf435410511bb6129d8e94b8504093db9fdc20cbf3a5ed15ce2301e09cd18",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/mp3-reference-comparison.json",
+      "sha256": "2d68d930d799f52440bc579aee356ae4c3789866e3374a3851e03f46a73280e6",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/hero-responses.json",
+      "sha256": "5c4a5ef5c8ba09929d49a7c7d43b7b36a402a353180404187e3c1b001033887d",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/hero-requests.json",
+      "sha256": "ab60f3cb30c9b847fea2f25cc7e66a575833852e7d7ab0a511ae15b47344625f",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/montage-requests.json",
+      "sha256": "cb1eeae8d3fa93f83e6c44b4a6d77c75899999046ae39768d5cc565ffcca9b79",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/wav-reference-comparison.json",
+      "sha256": "2dcce3fc0e458e9062367c610869c5126d938c189b2a71e833984664715d705e",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/wav-host-cleanup.json",
+      "sha256": "052501fa643ac21d641abfde09c43b2888727fcceb95fb593c588716133f3572",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/mp3-native-readback.json",
+      "sha256": "6084f36dafe06546fe2a9c481220f2e2c23b9808ed84082e02dbf0193cc89846",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/jpeg-native-readback.json",
+      "sha256": "9c8d5cf82e911daa74e58010bc4dfd3008b4ae146edebb83183f2704d39c1da4",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/montage-native-edit.json",
+      "sha256": "d2340aaac9dc94efed0ca298e26452e8328bb840512d24594233b9d6ec9c4d95",
+      "reason": "Actual call, technical measurement, preserved failure or clearly labeled review-source record; not a new DCC asset."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/audio-manifest.json",
+      "sha256": "06c2ce3795289b55b8c49515a58daaff31c323a26f415169a6c910e402ccccf6",
+      "reason": "Retained asset specifications, download inventory or source signal measurements; no audio data transformation."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/downloads.json",
+      "sha256": "d12062286cfd582407a4ed857b66087f6e4eef7db1a3fcbd72cf4d6e538d43bc",
+      "reason": "Retained asset specifications, download inventory or source signal measurements; no audio data transformation."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/native-signal-checks.json",
+      "sha256": "5df31c800e9149b7b4add4dc7daab2dd33296325544654e0d5b5d20d85e7ec5c",
+      "reason": "Retained asset specifications, download inventory or source signal measurements; no audio data transformation."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/historical-validation.json.txt",
+      "sha256": "06693474ce2396fed55b7592e4575b9980643c41b3782ccd0e814771c27a7e86",
+      "reason": "Exact historical presentation text retained; later corrections are explicit, not retroactive production evidence."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/historical-README.md.txt",
+      "sha256": "fc0251b2bfca0b3c6fa81524590c5c5776a6f2eb3f708e405ca2159672414f82",
+      "reason": "Exact historical presentation text retained; later corrections are explicit, not retroactive production evidence."
+    },
+    {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/delivery-metadata-repair.json",
+      "sha256": "d7bc48de4ad0876f7f19b607aeb73145c5d5db7b0930e3e48ca9c93bf598b4d7",
+      "reason": "Metadata-only delivery alias correction; original native hashes preserved separately."
+    }
+  ],
+  "external_links": [
+    {
+      "url": "https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/",
+      "kind": "reference",
+      "reason": "Related published case reference, not a media download."
+    },
+    {
+      "url": "https://dcc-mcp.github.io/showcase/cases/brass-relay/",
+      "kind": "reference",
+      "reason": "Related published case reference, not a media download."
+    },
+    {
+      "url": "https://dcc-mcp.github.io/showcase/cases/orbit-post-office/",
+      "kind": "reference",
+      "reason": "Related published case reference, not a media download."
+    }
+  ],
+  "review": {
+    "status": "verified",
+    "evidence": {
+      "path": "docs/showcase/trail-and-air/ecosystem-evidence/independent-review.json",
+      "sha256": "ed0304e88a9b287f1bd5462f1a2b74e1f926441f3b1f3fefc779feee910ea8a0"
+    }
+  }
+}

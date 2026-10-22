@@ -1,0 +1,16 @@
+{
+  "schema": "d015-public-source-provenance-v2",
+  "status": "VERIFIED_PUBLIC_MERGED_SOURCE_EXACT_CONTENT_EQUIVALENT",
+  "repository_url": "https://github.com/dcc-mcp/dcc-mcp-gimp",
+  "public_pull_request_url": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/14",
+  "public_source_commit": "ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "public_pr_head": "e24f1a8e3fa4b418b7fa27e7a33dee45ccca5cde",
+  "public_source_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+  "public_source_url": "https://github.com/dcc-mcp/dcc-mcp-gimp/tree/ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "historical_local_qualification_commit": "5602aa523d58a2c685966a06c90b71279a0bcfab",
+  "historical_local_qualification_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+  "historical_commit_is_not_a_public_checkout_instruction": true,
+  "validation_contract": "Exact 67 source-file hashes, 41 source/wheel/installed module bytes and the deterministic qualified wheel SHA. The unchanged recipe records its original qualification commit label; its source checks compare content, not the supplied checkout HEAD.",
+  "public_source_equivalence_receipt_sha256": "a8d4ddc56b58821fd9182d4fee0172ce0d1e1028f40b5ea86910eac3567fb50d",
+  "qualified_wheel_sha256": "80833767f5ff1fe754bff0de67143f053f60bb5443153c21c96d678265560853"
+}

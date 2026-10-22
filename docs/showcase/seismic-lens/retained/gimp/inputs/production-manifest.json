@@ -1,0 +1,88 @@
+{
+  "status": "PASS_NATIVE_FIVE_PANEL_AUTHORING",
+  "source_vti_sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d",
+  "grid_dimensions": [
+    81,
+    65,
+    97
+  ],
+  "spacing": [
+    0.05,
+    0.05,
+    0.025
+  ],
+  "origin": [
+    -2,
+    -1.6,
+    0
+  ],
+  "shared_native_time_range_s": [
+    0.599999977,
+    1.724
+  ],
+  "delay_levels_ms": [
+    80,
+    150
+  ],
+  "projection_schema": "d015-pv-selected-receipt-v1",
+  "source_receipt_sha256": "8e06d530344e2c79428e915066a9ffd597d3e34f52dc68f3fb31d1925c46f04e",
+  "raw_trace_included": false,
+  "raw_receipt_included": false,
+  "panels": [
+    {
+      "name": "SectionX",
+      "path": "panel-x.png",
+      "bytes": 41538,
+      "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9",
+      "dimensions": [
+        720,
+        480
+      ],
+      "RGBA_sha256": "9ab2da38df39330be7a8820074edf04cf643a91a2f78461821061e2cdfa89cf1"
+    },
+    {
+      "name": "SectionY",
+      "path": "panel-y.png",
+      "bytes": 44640,
+      "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3",
+      "dimensions": [
+        720,
+        480
+      ],
+      "RGBA_sha256": "d60e74b0c5e390b125e8dc486a9003e7bf3d7571f7c33842e05574bd347397fe"
+    },
+    {
+      "name": "SectionZ",
+      "path": "panel-z.png",
+      "bytes": 41689,
+      "sha256": "04da32bf7d10ff2dfd9d1f4cb25c363e98622f4fb036dc9efff6fea450969b1c",
+      "dimensions": [
+        720,
+        480
+      ],
+      "RGBA_sha256": "0109fa428aa601c54912b8af2be7af3f6d90f72c98dbfe86d71b6feb556e2e2d"
+    },
+    {
+      "name": "Delay80",
+      "path": "isoline-80.png",
+      "bytes": 6988,
+      "sha256": "b57e5df7f9261eb108d071c99f863faf2cde30bbf74a51ae2c4e5c329c2dfd72",
+      "dimensions": [
+        1060,
+        340
+      ],
+      "RGBA_sha256": "f5b42936686ff979aa160cdb9ef22998dafe2ac3426d809d0873439680df931f"
+    },
+    {
+      "name": "Delay150",
+      "path": "isoline-150.png",
+      "bytes": 5470,
+      "sha256": "157d01a9b833c073c6475cf7db477515d2054dcf30ff2f5f0a007dfd3e7e5e46",
+      "dimensions": [
+        1060,
+        340
+      ],
+      "RGBA_sha256": "63b3a80701db8d598bdb3da588c1316636a3983d3351e4a8f94d717f184d675d"
+    }
+  ]
+}

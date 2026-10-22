@@ -1,0 +1,35 @@
+{
+  "status": "PASS_NATIVE_COPIED_XCF_PORTABILITY",
+  "schema": "d015-copied-xcf-proof-v1",
+  "copied_xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+  "canonical_tree_equal": true,
+  "complete_load_time_metadata_equal": true,
+  "all_2560x1600_rgba_equal": true,
+  "rgba_sha256": "463c1e2a47d4188e124039f1f2b9909386b659c89d5193f1b35ab11ebae47ba5",
+  "native_text_parasites": 19,
+  "original_absence_assertion_count": 2,
+  "originals_held_aside_claimed": true,
+  "original_paths_renamed_by_runner": false,
+  "native_MCP_events": 42,
+  "PNG_byte_equality_claimed": false,
+  "full_D015_acceptance": false,
+  "projection_schema": "d015-selected-copied-xcf-proof-v1",
+  "raw_qualification_sha256": "f7a1cb666f1ebcd3534429ddf6c6b3b9cb8d12328cd5a375339daf8e25769c94",
+  "raw_trace_sha256": "4c333064c3c601c90bab05b55f99d431056309685da9ee9d3951ff88407fcef5",
+  "raw_hold_execution_sha256": "292c4eaf611b226dfe5a50b170ad38fa0c171b46a1b6d3ede6a4c24e4d3f9aaf",
+  "raw_evidence_included": false,
+  "qualified_package_manifest_sha256": "b2ad55faf41b12be8658c160ad3d8d5a005d397ab956a08b1dad71eaafba60d0",
+  "verified_helper_sha256": "331e00b97e2d5d55ae18ebf9ffd6253b88a06b56a8e3b85d596ac25ca0b5a6e7",
+  "cleanup": {
+    "normal_owned_shutdown_pass": true,
+    "force_kill_used": false,
+    "listeners_closed": true,
+    "owned_plugin_exited": true
+  },
+  "restoration": {
+    "status": "PASS_COPIED_NATIVE_AND_ORIGINALS_RESTORED",
+    "source_file_count": 6,
+    "declared_originals_absent_during_proof": true,
+    "all_original_hashes_restored": true
+  }
+}

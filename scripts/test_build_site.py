@@ -158,7 +158,7 @@ def integration_guards() -> None:
             fh.write("not selected")
         # Evidence contracts are tested by test_validate_collection.py. This
         # fixture isolates the publishing, HTML and deletion safety contracts.
-        with patch("validate_collection.validate", return_value=[]):
+        with patch("validate_collection.validate", return_value=[]), patch("validate_ecosystem.validate", return_value=[]):
             published, problems, _ = build_site.build(tmp, "_site", localize=False)
             check("complete fixture builds", problems, [])
             check("static detail is generated", "cases/sample-case/index.html" in published, True)

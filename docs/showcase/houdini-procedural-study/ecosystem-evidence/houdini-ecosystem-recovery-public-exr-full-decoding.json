@@ -1,0 +1,279 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "968cc1dfc22a73f8f3e6d6c58fa0cb76ce785396113e6fd0d6158bba14b40fb5",
+      "record": {
+        "passed": true,
+        "reader": "official PyPI OpenEXR",
+        "version": "3.5.2",
+        "wheel_sha256": "1e954229bf194ad29db627998fee270e865121ae082bdc1b901be2d9f2e196cd",
+        "scope": "Both complete files decoded by mature OpenEXR reader, all channels finite and decoded array bytes identical. No render or denoise performed. Container bytes differ only in approved File metadata range.",
+        "results": [
+          {
+            "file_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+            "width": 1200,
+            "height": 1500,
+            "channels": [
+              {
+                "name": "ViewLayer.Combined.A",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "ffbe85a9d70fd94dd1d9fe5d84f3a743681c2e9797e67c2769dc34f6d567f5d9"
+              },
+              {
+                "name": "ViewLayer.Combined.B",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "31861499b80dfdaa483d6d4366c87102d5a163b543b6e42e43720f956005b860"
+              },
+              {
+                "name": "ViewLayer.Combined.G",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "ab4397f2a1671dfd84adb99b8dd715f326a0ed2b29001ab8c5d7dfb01415e862"
+              },
+              {
+                "name": "ViewLayer.Combined.R",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "8a908a4f3171f523a0595c16f499d06897a53dea98374707fd01f3851f0dd039"
+              },
+              {
+                "name": "ViewLayer.Denoising Albedo.B",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "87010dfface8fa6574e962b7ff88dd498f2479c62536cfe2d78361600df56c35"
+              },
+              {
+                "name": "ViewLayer.Denoising Albedo.G",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "d69c54cd10403be8899ed3f0f746bda1192e773c825233cce434822064946f86"
+              },
+              {
+                "name": "ViewLayer.Denoising Albedo.R",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "c4b1e3ac4acd38281e3c5d7aeff4b88d91b527df802fcf9858c8ce7b93c91d13"
+              },
+              {
+                "name": "ViewLayer.Denoising Depth.Z",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "aa3abf54b04a641b14657d36638757d3912990dd55e5066fdacbf4f06a37ff9e"
+              },
+              {
+                "name": "ViewLayer.Denoising Normal.X",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "d26b3f1bbe9c619181ad25cccabbaa8616b63b9bace734f74e266e80464ac059"
+              },
+              {
+                "name": "ViewLayer.Denoising Normal.Y",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "2a308fe2b8963aade2f44b6daeaa020e2f81f67b8e6fa1346138c020ba6ba05d"
+              },
+              {
+                "name": "ViewLayer.Denoising Normal.Z",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "a7528e8e538db7636118017033cb0ef4c42e0ffa0e740bbcff91f9973903a104"
+              }
+            ],
+            "header_keys": [
+              "BlenderMultiChannel",
+              "Camera",
+              "Date",
+              "File",
+              "Frame",
+              "RenderTime",
+              "Scene",
+              "Time",
+              "channels",
+              "compression",
+              "cycles.ViewLayer.render_time",
+              "cycles.ViewLayer.samples",
+              "cycles.ViewLayer.synchronization_time",
+              "cycles.ViewLayer.total_time",
+              "dataWindow",
+              "displayWindow",
+              "lineOrder",
+              "pixelAspectRatio",
+              "screenWindowCenter",
+              "screenWindowWidth",
+              "type",
+              "xDensity"
+            ],
+            "file_attribute": "private original value verified by metadata receipt"
+          },
+          {
+            "file_sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac",
+            "width": 1200,
+            "height": 1500,
+            "channels": [
+              {
+                "name": "ViewLayer.Combined.A",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "ffbe85a9d70fd94dd1d9fe5d84f3a743681c2e9797e67c2769dc34f6d567f5d9"
+              },
+              {
+                "name": "ViewLayer.Combined.B",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "31861499b80dfdaa483d6d4366c87102d5a163b543b6e42e43720f956005b860"
+              },
+              {
+                "name": "ViewLayer.Combined.G",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "ab4397f2a1671dfd84adb99b8dd715f326a0ed2b29001ab8c5d7dfb01415e862"
+              },
+              {
+                "name": "ViewLayer.Combined.R",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "8a908a4f3171f523a0595c16f499d06897a53dea98374707fd01f3851f0dd039"
+              },
+              {
+                "name": "ViewLayer.Denoising Albedo.B",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "87010dfface8fa6574e962b7ff88dd498f2479c62536cfe2d78361600df56c35"
+              },
+              {
+                "name": "ViewLayer.Denoising Albedo.G",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "d69c54cd10403be8899ed3f0f746bda1192e773c825233cce434822064946f86"
+              },
+              {
+                "name": "ViewLayer.Denoising Albedo.R",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "c4b1e3ac4acd38281e3c5d7aeff4b88d91b527df802fcf9858c8ce7b93c91d13"
+              },
+              {
+                "name": "ViewLayer.Denoising Depth.Z",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "aa3abf54b04a641b14657d36638757d3912990dd55e5066fdacbf4f06a37ff9e"
+              },
+              {
+                "name": "ViewLayer.Denoising Normal.X",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "d26b3f1bbe9c619181ad25cccabbaa8616b63b9bace734f74e266e80464ac059"
+              },
+              {
+                "name": "ViewLayer.Denoising Normal.Y",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "2a308fe2b8963aade2f44b6daeaa020e2f81f67b8e6fa1346138c020ba6ba05d"
+              },
+              {
+                "name": "ViewLayer.Denoising Normal.Z",
+                "shape": [
+                  1500,
+                  1200
+                ],
+                "dtype": "float32",
+                "decoded_pixel_sha256": "a7528e8e538db7636118017033cb0ef4c42e0ffa0e740bbcff91f9973903a104"
+              }
+            ],
+            "header_keys": [
+              "BlenderMultiChannel",
+              "Camera",
+              "Date",
+              "File",
+              "Frame",
+              "RenderTime",
+              "Scene",
+              "Time",
+              "channels",
+              "compression",
+              "cycles.ViewLayer.render_time",
+              "cycles.ViewLayer.samples",
+              "cycles.ViewLayer.synchronization_time",
+              "cycles.ViewLayer.total_time",
+              "dataWindow",
+              "displayWindow",
+              "lineOrder",
+              "pixelAspectRatio",
+              "screenWindowCenter",
+              "screenWindowWidth",
+              "type",
+              "xDensity"
+            ],
+            "file_attribute": "cross-dcc-lighting-final.blend                                                                "
+          }
+        ]
+      }
+    }
+  ]
+}

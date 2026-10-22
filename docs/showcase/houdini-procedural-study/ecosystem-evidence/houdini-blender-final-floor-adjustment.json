@@ -1,0 +1,13 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "29d9910e79cd0284433b696e372d4e95b891fd877c25110c3b76e3bf267a1c1c",
+      "record": {
+        "scope": "support floor only expanded from 16m to 200m; no source model or lighting/camera change",
+        "model_positions_sha256": "ef4df1f48463cfdec160a6cabcaae6bd8620ac4e2c49ffee4a15b816a3bc56cf",
+        "script_sha256": "67e0e9e595269f7a158d1a387e2ef098b1fcf0dc86913aabfe3f8124279088c4"
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "status": "succeeded",
+  "request_sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319",
+  "response_sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319",
+  "outputs": [
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-x.png",
+      "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-y.png",
+      "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-z.png",
+      "sha256": "04da32bf7d10ff2dfd9d1f4cb25c363e98622f4fb036dc9efff6fea450969b1c"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-80.png",
+      "sha256": "b57e5df7f9261eb108d071c99f863faf2cde30bbf74a51ae2c4e5c329c2dfd72"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-150.png",
+      "sha256": "157d01a9b833c073c6475cf7db477515d2054dcf30ff2f5f0a007dfd3e7e5e46"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-x.pvsm",
+      "sha256": "d500bbcc485fdbbac8204fc215fa14f2e654d25e80c583470092b0157c5e96e5"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-y.pvsm",
+      "sha256": "69bd828c0944f9e29b874f613f217cbe8bd3519712cde7e6b938553f640f8e02"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-z.pvsm",
+      "sha256": "1d62b78d8242934ed8b3f596cd79d891998b7c9ad26b6b8aa33c9ece6ec534ef"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/isoline-80.pvsm",
+      "sha256": "3dd9f1f10e1f76e15475971a22b1b6e8e95e3cd6cd02a7e522aa279d035cfbf7"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/isoline-150.pvsm",
+      "sha256": "faad34b9b608f50a05ac88f27abe16dc41af2bdb37ffa716c12def4d06a3b90b"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/section-y.png",
+      "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3"
+    }
+  ],
+  "evidence_selectors": {
+    "trace_indices": [
+      8,
+      12,
+      15,
+      18,
+      21,
+      24,
+      27,
+      55,
+      79,
+      102,
+      126,
+      36,
+      60,
+      84,
+      107,
+      131
+    ]
+  },
+  "scope": "Original actual 210-record run, 52 selected operations; native slice/contour construction, rendering and state delivery. Existing bytes retained, no re-render.",
+  "measurement_kind": "Current byte verification and original actual-call projection binding; not a new native execution",
+  "normalization_boundary": "Original public projections omit private raw payloads. No missing request or response has been reconstructed."
+}

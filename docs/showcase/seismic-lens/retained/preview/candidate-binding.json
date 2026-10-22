@@ -1,0 +1,621 @@
+{
+  "schema": "gimp-preview-candidate-binding-v1",
+  "base_commit": "ea9270a82bd0821993f0c611d9cad2d36e06405d",
+  "base_tree": "abfd40f62533cf652d767c00781605725c0ce98b",
+  "candidate_commit": "a3b45aaa237aef954247c8571fb0762afe5cface",
+  "candidate_tree": "4e855af540036b3ab5ee041be5402f3bc0f98dc7",
+  "native_validation": "NOT_EXECUTED",
+  "wheel": {
+    "path": "dist/dcc_mcp_gimp-0.4.1-py3-none-any.whl",
+    "bytes": 97073,
+    "sha256": "adb43849349ca54944bd9280a8497d90bca77e6726733c3fca5991164fe1a1ad"
+  },
+  "installed_files": [
+    {
+      "path": "__init__.py",
+      "bytes": 402,
+      "sha256": "988673f428eb8e1313d0a5545fa5df7f17741ab28edc8983d5e23d144a8ee208"
+    },
+    {
+      "path": "__main__.py",
+      "bytes": 104,
+      "sha256": "cdadb5e60fefaf910e10a88086aa88ff27e171df359776e5ac7a1ef9623f765b"
+    },
+    {
+      "path": "__version__.py",
+      "bytes": 50,
+      "sha256": "ad32cddf16108e208caa83b20234ea7c8bd7f251911b180eaa19fc33370ef00a"
+    },
+    {
+      "path": "bridge.py",
+      "bytes": 5398,
+      "sha256": "227447512c298670155eda32507dffad7e19e9cd30f53fb6b83c5cfc1b6b2fb6"
+    },
+    {
+      "path": "gimp_plugin/dcc_mcp_gimp.py",
+      "bytes": 100175,
+      "sha256": "8bcec953df8fa072ec26c24a0576803634d234d638a0f18f9a57ca6b8ae51065"
+    },
+    {
+      "path": "install.py",
+      "bytes": 12483,
+      "sha256": "c125238721c203cb0a2900ced93cf8570335ce5de5392b459cb7ebc71e5aaf7f"
+    },
+    {
+      "path": "install_contract.py",
+      "bytes": 1273,
+      "sha256": "84761984727dfe05ef42a1340f3bc8d843b142e2b49d251945655f339e5a4ce1"
+    },
+    {
+      "path": "install_files.py",
+      "bytes": 202842,
+      "sha256": "51dfcea3401d4ca6fdb517bde4b447a44e01765a6d91a84d8cc75f1132c2b668"
+    },
+    {
+      "path": "install_host.py",
+      "bytes": 35699,
+      "sha256": "1ab2de99b442a004a1e30ed8f21b344f036f83e6a624381f58cc472524cbf8ca"
+    },
+    {
+      "path": "install_lifecycle.py",
+      "bytes": 22206,
+      "sha256": "a2890d487a155d95cd409c82301cb15ad3df484cf84125a46c52ae9c79cc4113"
+    },
+    {
+      "path": "schemas/__init__.py",
+      "bytes": 71,
+      "sha256": "9f925aa8558d98b203ad7a9ee5316df85b71b06d76a7ccf3f1715b3f7e365e3e"
+    },
+    {
+      "path": "schemas/adapter-install-sop-v1.schema.json",
+      "bytes": 4261,
+      "sha256": "3ca25788439917b4d4c0617230a762f9797756b5b54f45c8c4149f975b90f904"
+    },
+    {
+      "path": "server.py",
+      "bytes": 2114,
+      "sha256": "135d23bf89f6863a9da0cd8791326dcabf18a30a1f2f678e53f0b755a7406634"
+    },
+    {
+      "path": "skill_tools.py",
+      "bytes": 797,
+      "sha256": "0147e2821cde1c2be709be4588de621740e4389d82a210bbc54777c063b2f5df"
+    },
+    {
+      "path": "skills/gimp-session/SKILL.md",
+      "bytes": 3243,
+      "sha256": "9a1e6352650ba46765018c44743d8a60c860fdad7f7182edcf46e69bb8870e80"
+    },
+    {
+      "path": "skills/gimp-session/metadata/depends.md",
+      "bytes": 18,
+      "sha256": "ccaf5e8bd3d07df990bec29a544f4d56d1e35e40c69edca3c455d8795ebeb2bd"
+    },
+    {
+      "path": "skills/gimp-session/scripts/close_image.py",
+      "bytes": 199,
+      "sha256": "2634f233cf6a5a1fcf6e48621f99460e3ab23d128ecfe5dee5d84a5ed8a3ab75"
+    },
+    {
+      "path": "skills/gimp-session/scripts/create_group.py",
+      "bytes": 267,
+      "sha256": "fc1c410588c51fa2bfc04f9c3668be4989e35c91d0c13e8f465ede3dd0ee64f0"
+    },
+    {
+      "path": "skills/gimp-session/scripts/create_image.py",
+      "bytes": 201,
+      "sha256": "bd6b2eadaa873b63fe5253e54ddc0ae8ee6a362a8dcb781db8a36bfc99379fd5"
+    },
+    {
+      "path": "skills/gimp-session/scripts/create_layer.py",
+      "bytes": 201,
+      "sha256": "00efc3cf5b3d0253eb0cec0bc79c071f5da13564aa5b73c91a0a2f99e7bfcf7d"
+    },
+    {
+      "path": "skills/gimp-session/scripts/create_text.py",
+      "bytes": 261,
+      "sha256": "e98e0f51719e27cfe92fb3cabaa155c45d43d655a1413758cfce7740c82ab981"
+    },
+    {
+      "path": "skills/gimp-session/scripts/delete_layer.py",
+      "bytes": 201,
+      "sha256": "bc75575f017df0b68f4d04268a82fd068c500ae0966f591c152d01ea5c5a97b7"
+    },
+    {
+      "path": "skills/gimp-session/scripts/export_image.py",
+      "bytes": 202,
+      "sha256": "8266ba83fb0d20f566275fde1fe67c7f5d831500ea44fdfdb94a34f05053b35d"
+    },
+    {
+      "path": "skills/gimp-session/scripts/export_layer.py",
+      "bytes": 238,
+      "sha256": "7807792d72cc7bb6bdff03249d8af325b785f5b8bcb22662b0d678a64eaebe76"
+    },
+    {
+      "path": "skills/gimp-session/scripts/export_preview.py",
+      "bytes": 246,
+      "sha256": "e209558797e18424bf80d29f7a57ce12fc6b252b2adde128ef00aaac7aef4c52"
+    },
+    {
+      "path": "skills/gimp-session/scripts/fill_layer.py",
+      "bytes": 198,
+      "sha256": "17e844c43adcd3f84c86a0c68fbdc56570b7625fe40b3f2341e42a3a9bdaae0c"
+    },
+    {
+      "path": "skills/gimp-session/scripts/flatten_image.py",
+      "bytes": 204,
+      "sha256": "98bd20a414dd6a3b984af6a68a5e34f5e720fe2ddc19e8d56cfec5b780a2f73a"
+    },
+    {
+      "path": "skills/gimp-session/scripts/get_active_image.py",
+      "bytes": 223,
+      "sha256": "59437163515f78f51701b0c75c45637f3700c5d4ced8e37e76572ad7f49fde19"
+    },
+    {
+      "path": "skills/gimp-session/scripts/get_status.py",
+      "bytes": 201,
+      "sha256": "ffba36d3898dd591c0ffa88f7d0072f952da680d2ea158ffb3cff1b822b5bf75"
+    },
+    {
+      "path": "skills/gimp-session/scripts/import_layer.py",
+      "bytes": 249,
+      "sha256": "9f1f617bde5f33df419736080d465405cb8cca5791d2a68e3bed468398406401"
+    },
+    {
+      "path": "skills/gimp-session/scripts/inspect_image.py",
+      "bytes": 204,
+      "sha256": "91bf9e521f0ce46c37f6015b5028bb6cf36d983fcaba3d2df77bfb85c44109ea"
+    },
+    {
+      "path": "skills/gimp-session/scripts/list_fonts.py",
+      "bytes": 210,
+      "sha256": "857bb6ea827d5bd6911d5df262fccb05f967f9f7e1230a4bbb59289befbaa255"
+    },
+    {
+      "path": "skills/gimp-session/scripts/list_images.py",
+      "bytes": 210,
+      "sha256": "b10f2c5194df035f29b4067c203282f3c872286aee718b4dade49af6ab83b227"
+    },
+    {
+      "path": "skills/gimp-session/scripts/list_layers.py",
+      "bytes": 210,
+      "sha256": "33863e7e7519b596533b8a27dcbd52a16fc2af1df67b2f915808721e5069422a"
+    },
+    {
+      "path": "skills/gimp-session/scripts/open_image.py",
+      "bytes": 198,
+      "sha256": "a499864ad057f74a34bd2eb5475a95f6ae8be78d419fa7cf93c1c7cfbc58562c"
+    },
+    {
+      "path": "skills/gimp-session/scripts/paint_shape.py",
+      "bytes": 282,
+      "sha256": "022f180ee337123a868deb2c058d4ac9f3d39a3423cc66e019a3cea07e7fde67"
+    },
+    {
+      "path": "skills/gimp-session/scripts/place_layer.py",
+      "bytes": 247,
+      "sha256": "f6e6fcd72cfeb0d3a03df142ab969586ac01334b767bbd89dba6a1d8e6c55307"
+    },
+    {
+      "path": "skills/gimp-session/scripts/save_image.py",
+      "bytes": 197,
+      "sha256": "f5db9e6c83e5e30b73dba2dff994b4df05b2b0885cc45b2426d628ddb291e244"
+    },
+    {
+      "path": "skills/gimp-session/scripts/set_active_layer.py",
+      "bytes": 212,
+      "sha256": "938e17500299672e02334f6650885c0ce5a24d0b23f896aa1e6a66db7ecff5a7"
+    },
+    {
+      "path": "skills/gimp-session/scripts/set_layer_mode.py",
+      "bytes": 251,
+      "sha256": "e2dece1dd8c1a8ab636081b438975a147414add069881c16ad180073b301a242"
+    },
+    {
+      "path": "skills/gimp-session/scripts/set_layer_properties.py",
+      "bytes": 220,
+      "sha256": "f6189e23ffbbab71395a449e76fbd888a6b45cae101aaa02610167d8a6d4763b"
+    },
+    {
+      "path": "skills/gimp-session/tools.yaml",
+      "bytes": 20072,
+      "sha256": "abcce3f406667f50499780ec1233ad109cd8dae0e5cb776c5d9aaecb66959292"
+    }
+  ],
+  "source_files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 51,
+      "sha256": "b2aa630f2c8b86b9a1beb429050defe24c53e1f5c70609363deff2096f001d50"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 2243,
+      "sha256": "13593e835496947d6fe9b9a7186a854fdc86f55480e52148847e4ae865f6e747"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "bytes": 1237,
+      "sha256": "7c85428ab4fd295b355c3e246062c4168040d238077342be542f5ba3b8d3c24e"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 66,
+      "sha256": "a08bd5097a3be303d00558f1ca43674e41d2acda367d0909e9feb1232ebb2f17"
+    },
+    {
+      "path": ".release-please-manifest.json",
+      "bytes": 14,
+      "sha256": "c7875a4823cdf2a6d70892526b0178d4598435e02d253083b9711b4a77c2a3da"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 2344,
+      "sha256": "1ef9475664fe17de0bdc8139ac37f4d038558aec52dfb57c52e00066ca6f1e87"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1065,
+      "sha256": "93ba6635fa61cab17d5bfe130f02f74d30ae283011773ac21e68594f8c953228"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8316,
+      "sha256": "0a892fe18c97c9d065d1f4ee1a51ce83f7303dae697dad68241f3feb56401794"
+    },
+    {
+      "path": "bridge/gimp-plugin/dcc_mcp_gimp.py",
+      "bytes": 100175,
+      "sha256": "8bcec953df8fa072ec26c24a0576803634d234d638a0f18f9a57ca6b8ae51065"
+    },
+    {
+      "path": "docs/assets/dcc-mcp-gimp-dark.svg",
+      "bytes": 205477,
+      "sha256": "801c5257cd9433aa18a8a02e092e20c162deb117c8a71bbf8b5308c7c5172f3d"
+    },
+    {
+      "path": "docs/assets/dcc-mcp-gimp.svg",
+      "bytes": 217717,
+      "sha256": "683150ae66390a46bbc1635e41d08acb4b2a5915197f7b22d4e512c701f120bd"
+    },
+    {
+      "path": "docs/images/gimp-showcase.webp",
+      "bytes": 81944,
+      "sha256": "aeab35aae88c3fb2df7fe4af71313917bbc009933d387efae2e4804a488c31a9"
+    },
+    {
+      "path": "docs/images/sources/gimp-showcase-source.png",
+      "bytes": 1516455,
+      "sha256": "f01d5a3262e7794e31eb36e068b336f31aed6b6152651da66b1ca4a4cb669488"
+    },
+    {
+      "path": "docs/native-poster-workflow.md",
+      "bytes": 7265,
+      "sha256": "3d522e2a9e7c96b1f60c7f41d9bd64482e33bf4c5b0aa87ffcbcad17ffb87e7d"
+    },
+    {
+      "path": "install.md",
+      "bytes": 9041,
+      "sha256": "4065dd32c9449ec3cc5fb173eea830e4d6ae0a987442d62a12d23b1bc281233f"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1731,
+      "sha256": "97f1f75735bce4b2141b0c3a04de33568ead56231dc82af8ca285e65ec1b9467"
+    },
+    {
+      "path": "release-please-config.json",
+      "bytes": 424,
+      "sha256": "f244799804124be28beb3fcaa4638bed090009f46e621c3fb9cf7f630a9d1ef8"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/__init__.py",
+      "bytes": 402,
+      "sha256": "988673f428eb8e1313d0a5545fa5df7f17741ab28edc8983d5e23d144a8ee208"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/__main__.py",
+      "bytes": 104,
+      "sha256": "cdadb5e60fefaf910e10a88086aa88ff27e171df359776e5ac7a1ef9623f765b"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/__version__.py",
+      "bytes": 50,
+      "sha256": "ad32cddf16108e208caa83b20234ea7c8bd7f251911b180eaa19fc33370ef00a"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/bridge.py",
+      "bytes": 5398,
+      "sha256": "227447512c298670155eda32507dffad7e19e9cd30f53fb6b83c5cfc1b6b2fb6"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/install.py",
+      "bytes": 12483,
+      "sha256": "c125238721c203cb0a2900ced93cf8570335ce5de5392b459cb7ebc71e5aaf7f"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/install_contract.py",
+      "bytes": 1273,
+      "sha256": "84761984727dfe05ef42a1340f3bc8d843b142e2b49d251945655f339e5a4ce1"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/install_files.py",
+      "bytes": 202842,
+      "sha256": "51dfcea3401d4ca6fdb517bde4b447a44e01765a6d91a84d8cc75f1132c2b668"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/install_host.py",
+      "bytes": 35699,
+      "sha256": "1ab2de99b442a004a1e30ed8f21b344f036f83e6a624381f58cc472524cbf8ca"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/install_lifecycle.py",
+      "bytes": 22206,
+      "sha256": "a2890d487a155d95cd409c82301cb15ad3df484cf84125a46c52ae9c79cc4113"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/schemas/__init__.py",
+      "bytes": 71,
+      "sha256": "9f925aa8558d98b203ad7a9ee5316df85b71b06d76a7ccf3f1715b3f7e365e3e"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/schemas/adapter-install-sop-v1.schema.json",
+      "bytes": 4261,
+      "sha256": "3ca25788439917b4d4c0617230a762f9797756b5b54f45c8c4149f975b90f904"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/server.py",
+      "bytes": 2114,
+      "sha256": "135d23bf89f6863a9da0cd8791326dcabf18a30a1f2f678e53f0b755a7406634"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skill_tools.py",
+      "bytes": 797,
+      "sha256": "0147e2821cde1c2be709be4588de621740e4389d82a210bbc54777c063b2f5df"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/SKILL.md",
+      "bytes": 3243,
+      "sha256": "9a1e6352650ba46765018c44743d8a60c860fdad7f7182edcf46e69bb8870e80"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/metadata/depends.md",
+      "bytes": 18,
+      "sha256": "ccaf5e8bd3d07df990bec29a544f4d56d1e35e40c69edca3c455d8795ebeb2bd"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/close_image.py",
+      "bytes": 199,
+      "sha256": "2634f233cf6a5a1fcf6e48621f99460e3ab23d128ecfe5dee5d84a5ed8a3ab75"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/create_group.py",
+      "bytes": 267,
+      "sha256": "fc1c410588c51fa2bfc04f9c3668be4989e35c91d0c13e8f465ede3dd0ee64f0"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/create_image.py",
+      "bytes": 201,
+      "sha256": "bd6b2eadaa873b63fe5253e54ddc0ae8ee6a362a8dcb781db8a36bfc99379fd5"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/create_layer.py",
+      "bytes": 201,
+      "sha256": "00efc3cf5b3d0253eb0cec0bc79c071f5da13564aa5b73c91a0a2f99e7bfcf7d"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/create_text.py",
+      "bytes": 261,
+      "sha256": "e98e0f51719e27cfe92fb3cabaa155c45d43d655a1413758cfce7740c82ab981"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/delete_layer.py",
+      "bytes": 201,
+      "sha256": "bc75575f017df0b68f4d04268a82fd068c500ae0966f591c152d01ea5c5a97b7"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/export_image.py",
+      "bytes": 202,
+      "sha256": "8266ba83fb0d20f566275fde1fe67c7f5d831500ea44fdfdb94a34f05053b35d"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/export_layer.py",
+      "bytes": 238,
+      "sha256": "7807792d72cc7bb6bdff03249d8af325b785f5b8bcb22662b0d678a64eaebe76"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/export_preview.py",
+      "bytes": 246,
+      "sha256": "e209558797e18424bf80d29f7a57ce12fc6b252b2adde128ef00aaac7aef4c52"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/fill_layer.py",
+      "bytes": 198,
+      "sha256": "17e844c43adcd3f84c86a0c68fbdc56570b7625fe40b3f2341e42a3a9bdaae0c"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/flatten_image.py",
+      "bytes": 204,
+      "sha256": "98bd20a414dd6a3b984af6a68a5e34f5e720fe2ddc19e8d56cfec5b780a2f73a"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/get_active_image.py",
+      "bytes": 223,
+      "sha256": "59437163515f78f51701b0c75c45637f3700c5d4ced8e37e76572ad7f49fde19"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/get_status.py",
+      "bytes": 201,
+      "sha256": "ffba36d3898dd591c0ffa88f7d0072f952da680d2ea158ffb3cff1b822b5bf75"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/import_layer.py",
+      "bytes": 249,
+      "sha256": "9f1f617bde5f33df419736080d465405cb8cca5791d2a68e3bed468398406401"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/inspect_image.py",
+      "bytes": 204,
+      "sha256": "91bf9e521f0ce46c37f6015b5028bb6cf36d983fcaba3d2df77bfb85c44109ea"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/list_fonts.py",
+      "bytes": 210,
+      "sha256": "857bb6ea827d5bd6911d5df262fccb05f967f9f7e1230a4bbb59289befbaa255"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/list_images.py",
+      "bytes": 210,
+      "sha256": "b10f2c5194df035f29b4067c203282f3c872286aee718b4dade49af6ab83b227"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/list_layers.py",
+      "bytes": 210,
+      "sha256": "33863e7e7519b596533b8a27dcbd52a16fc2af1df67b2f915808721e5069422a"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/open_image.py",
+      "bytes": 198,
+      "sha256": "a499864ad057f74a34bd2eb5475a95f6ae8be78d419fa7cf93c1c7cfbc58562c"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/paint_shape.py",
+      "bytes": 282,
+      "sha256": "022f180ee337123a868deb2c058d4ac9f3d39a3423cc66e019a3cea07e7fde67"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/place_layer.py",
+      "bytes": 247,
+      "sha256": "f6e6fcd72cfeb0d3a03df142ab969586ac01334b767bbd89dba6a1d8e6c55307"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/save_image.py",
+      "bytes": 197,
+      "sha256": "f5db9e6c83e5e30b73dba2dff994b4df05b2b0885cc45b2426d628ddb291e244"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/set_active_layer.py",
+      "bytes": 212,
+      "sha256": "938e17500299672e02334f6650885c0ce5a24d0b23f896aa1e6a66db7ecff5a7"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/set_layer_mode.py",
+      "bytes": 251,
+      "sha256": "e2dece1dd8c1a8ab636081b438975a147414add069881c16ad180073b301a242"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/scripts/set_layer_properties.py",
+      "bytes": 220,
+      "sha256": "f6189e23ffbbab71395a449e76fbd888a6b45cae101aaa02610167d8a6d4763b"
+    },
+    {
+      "path": "src/dcc_mcp_gimp/skills/gimp-session/tools.yaml",
+      "bytes": 20072,
+      "sha256": "abcce3f406667f50499780ec1233ad109cd8dae0e5cb776c5d9aaecb66959292"
+    },
+    {
+      "path": "tests/live_gimp_smoke.py",
+      "bytes": 9669,
+      "sha256": "b8394735cb9ee8189560de7a00c9c9a49f03434efa264d5c5a890c5e07eae56a"
+    },
+    {
+      "path": "tests/test_bridge.py",
+      "bytes": 3253,
+      "sha256": "56cdce9917ab78fefffb0fd589056e7c422593d8ec07668a15b5d76591ee76d0"
+    },
+    {
+      "path": "tests/test_install.py",
+      "bytes": 130185,
+      "sha256": "c33f9928317d87d4d0d8233d586976573cc59bf431b07c7aa78e07c26f98ea26"
+    },
+    {
+      "path": "tests/test_install_docs.py",
+      "bytes": 2113,
+      "sha256": "694ce194711d2392619aae9a8b08d4930dfb771012740698238dfb52f6449a4b"
+    },
+    {
+      "path": "tests/test_metadata_parasites.py",
+      "bytes": 3780,
+      "sha256": "5bf06bc8dcd04835f997c386fa10f903199df73999c7773d6f9d9ac2defea81c"
+    },
+    {
+      "path": "tests/test_plugin_contract.py",
+      "bytes": 2004,
+      "sha256": "a1fb85ab7ed66a39150f9e55a5f780bfb805db41d2568f8aaa999f2f2f714b9a"
+    },
+    {
+      "path": "tests/test_plugin_runtime.py",
+      "bytes": 18779,
+      "sha256": "7078ac6c61c94d92a54d8b7c74d62cfdd4a28643738446c9802f29e798252fce"
+    },
+    {
+      "path": "tests/test_preview_export.py",
+      "bytes": 23164,
+      "sha256": "e8a66ccfa52a3e6740b4d24e2dde20a966f632701eed81e2d4fb2b35052284c9"
+    },
+    {
+      "path": "tests/test_release_please.py",
+      "bytes": 1139,
+      "sha256": "5d01b7f9802ef912db6d79666257ee51ebe96b64015be1f5bc3b2aa0d5a45988"
+    },
+    {
+      "path": "tests/test_typed_poster.py",
+      "bytes": 25344,
+      "sha256": "78734a699c46bcb49322d762621fcc056b5a4b31bebe52c184fef7b435c5b919"
+    },
+    {
+      "path": "tools/lint_skills.py",
+      "bytes": 371,
+      "sha256": "cd7e662f1f646f0217cf705c85fc70f8c4976c5702c0e80f9b4daa935e1b4a22"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "inputs/qualified-master-baseline.json",
+      "bytes": 45475,
+      "sha256": "0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce"
+    },
+    {
+      "path": "inputs/seismic-lens-master.png",
+      "bytes": 221753,
+      "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+    },
+    {
+      "path": "inputs/seismic-lens-master.xcf",
+      "bytes": 1081905,
+      "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+    }
+  ],
+  "recipe_files": [
+    {
+      "path": "reproduce/binding.py",
+      "bytes": 7273,
+      "sha256": "6dac1016b21aa76deff057dae17b4d7d849be0e4887070139ddbfe20798700d6"
+    },
+    {
+      "path": "reproduce/lifecycle.py",
+      "bytes": 11929,
+      "sha256": "a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7"
+    },
+    {
+      "path": "reproduce/png_readback.py",
+      "bytes": 5054,
+      "sha256": "d0ce731086116734a6548dade45868b735157f2e0a8ac9ddcf47c804587751d7"
+    },
+    {
+      "path": "reproduce/seal_candidate.py",
+      "bytes": 2659,
+      "sha256": "cc788fecc81d99a86940311c0e07b10e4d5171f3b3ef104a9ea2481f50bb9e71"
+    },
+    {
+      "path": "reproduce/verify_preview.py",
+      "bytes": 35873,
+      "sha256": "211c5cda4b41df33d83c0687a85b47360fa0b18fcc8ea3ea9670054ca78c0e31"
+    },
+    {
+      "path": "reproduce/xcf_metadata_readback.py",
+      "bytes": 8120,
+      "sha256": "e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4"
+    }
+  ]
+}

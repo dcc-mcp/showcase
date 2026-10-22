@@ -1,0 +1,17 @@
+{
+  "registry_url": "https://pypi.org/pypi/Pillow/13.0.0/json",
+  "version": "13.0.0",
+  "wheel": {
+    "filename": "pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "url": "https://files.pythonhosted.org/packages/e6/99/fdf65cc539e266ab93546c261bdf98411fe165c6e4e13f9dbf597097192b/pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "digests": {
+      "blake2b_256": "e699fdf65cc539e266ab93546c261bdf98411fe165c6e4e13f9dbf597097192b",
+      "md5": "9daf79c9e49491bade8d0b61a0616fac",
+      "sha256": "42d63be3af4f9b951b199b0a9d23365d37ab14687e6d77b74940432c8515c4ca"
+    },
+    "size": 7144542,
+    "requires_python": ">=3.11"
+  },
+  "local_Pillow_version": "12.3.0",
+  "note": "Registry availability verification only, not installed or executed here."
+}

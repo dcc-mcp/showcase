@@ -1,0 +1,17 @@
+{
+  "status": "succeeded",
+  "request_sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0",
+  "response_sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0",
+  "outputs": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/production-intermediates/hero-public.png",
+      "sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9"
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/production-intermediates/preview-public.png",
+      "sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be"
+    }
+  ],
+  "measurement_role": "Current observed bytes linked to retained actual calls; not a fabricated native response",
+  "scope": "Actual original 68/70 preview and 106/107 final render job/path terminal records, followed by actual MCP124 metadata-only publication with source/public/IDAT/RGBA hashes. 68 launch request was not retained; response and later actual poll were. Terminal has no same-call digest; 124 is later measurement. No signed temporal attestation or private HIP publication is claimed. Later OBJ replay is NOT falsely labeled input to these older renders."
+}

@@ -1,0 +1,31 @@
+{
+  "status": "succeeded",
+  "request_sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8",
+  "response_sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8",
+  "outputs": [
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.xcf",
+      "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.png",
+      "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/inputs/seismic-lens-master.xcf",
+      "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/inputs/seismic-lens-master.png",
+      "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+    }
+  ],
+  "evidence_selectors": {
+    "phase": "master-authoring",
+    "save_trace": 153,
+    "export_trace": 159
+  },
+  "scope": "Original actual full authoring and independently qualified save/reopen of 30 layers and 19 text layers. Not new production.",
+  "measurement_kind": "Current byte verification and original actual-call projection binding; not a new native execution",
+  "normalization_boundary": "Original public projections omit private raw payloads. No missing request or response has been reconstructed."
+}

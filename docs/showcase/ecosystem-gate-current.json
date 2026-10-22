@@ -1,0 +1,20 @@
+{
+  "schema": "dcc-showcase-ecosystem/v1",
+  "status": "blocked",
+  "authenticity_attested": false,
+  "errors": [
+    "brass-pendulum-denoise: missing or escaping repository file: docs/showcase/brass-pendulum-denoise/ecosystem-production.json",
+    "crate-lookdev: missing or escaping repository file: docs/showcase/crate-lookdev/ecosystem-production.json",
+    "painted-wood: missing or escaping repository file: docs/showcase/painted-wood/ecosystem-production.json",
+    "crystal-freight-native-film: missing or escaping repository file: docs/showcase/crystal-freight-native-film/ecosystem-production.json",
+    "brass-relay: missing or escaping repository file: docs/showcase/brass-relay/ecosystem-production.json",
+    "orbit-post-office: missing or escaping repository file: docs/showcase/orbit-post-office/ecosystem-production.json",
+    "rainroom-two-hours: missing or escaping repository file: docs/showcase/rainroom-two-hours/ecosystem-production.json",
+    "resonance-atlas: missing or escaping repository file: docs/showcase/resonance-atlas/ecosystem-production.json",
+    "sonic-loom: missing or escaping repository file: docs/showcase/sonic-loom/ecosystem-production.json",
+    "prism-tide: missing or escaping repository file: docs/showcase/prism-tide/ecosystem-production.json",
+    "orbital-loom: missing or escaping repository file: docs/showcase/orbital-loom/ecosystem-production.json",
+    "parcel-switchyard: missing or escaping repository file: docs/showcase/parcel-switchyard/ecosystem-production.json",
+    "dawnkeep-defense: missing or escaping repository file: docs/showcase/dawnkeep-defense/ecosystem-production.json"
+  ]
+}

@@ -1,6 +1,6 @@
 # Seismic Lens: real GIMP layer demonstration
 
-[Video](seismic-lens-native-layers.mp4) · [Poster](seismic-lens-native-poster.png) · [Measurements](native-process-video.json) · [Complete original source](editable-source.zip) · [Rights](LICENSES.md)
+[Video](seismic-lens-native-layers.mp4) · [Poster](native-observation-poster.png) · [Measurements](native-process-video.json) · [Complete original source](https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip) · [Rights](LICENSES.md)
 
 ## What was actually recorded
 
@@ -33,3 +33,7 @@ Only Linux GIMP 3.0.4 was exercised natively. No new ParaView production run, cr
 Actual model and reasoning effort for this new capture/review are Unknown. `gpt-6-astra` / `ultra` was the requested configuration; no auditable accepted runtime receipt was available. The original historical attribution is unchanged. New media remains rights reserved under [LICENSES.md](LICENSES.md); no additional MIT/CC0 or font/application redistribution grant is made.
 
 Before recording, the official GIMP artist-workflow articles and plugin/API guidance listed in the measured evidence were checked. The 2026 articles archive 2017 interviews, not a newly observed 2026 trend. No external artwork, music or footage was reused.
+
+## Current poster, 2026-10-20
+
+The current poster is frame 119 of the unchanged capture, extracted through official Blender MCP. The initial black-frame attempt is not credited; the corrected native scene-context extraction passed full decode and independent pixel comparison. The source recording and historical measurements above are unchanged.

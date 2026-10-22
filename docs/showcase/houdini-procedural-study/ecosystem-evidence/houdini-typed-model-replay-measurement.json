@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc",
+  "response_sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc",
+  "outputs": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/production-intermediates/ceramic.obj",
+      "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9"
+    }
+  ],
+  "measurement_role": "Current observed bytes linked to retained actual calls; not a fabricated native response",
+  "scope": "49 actual typed calls in a fresh host, 47 non-render recipe steps; OBJ byte-identical to original. This is a later replay, not reconstructed original requests."
+}

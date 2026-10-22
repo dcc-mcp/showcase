@@ -1,0 +1,17 @@
+{
+  "route": "Official MCP execute_script_file / native aud.Sound.write, dedicated owned host",
+  "source_sha256": "a30e991b3153953cdd0f92348ec55a8c4a8f5c4cda558a10587d55417c31cc8d",
+  "output_sha256": "154044848bef9732c04b0abeae85fafbbba2c56e079d99fd6a298616e1ee9fe3",
+  "output_bytes": 687788,
+  "native_decoded_frames": 1372800,
+  "source_frames": 1372800,
+  "sample_rate": 48000,
+  "channels": 2,
+  "native_full_decode": true,
+  "peak": 0.2194916307926178,
+  "bitrate": 192000,
+  "buffersize": 1152,
+  "script_sha256": "24a8aef09872ebd75eca8e29b6a820b5470cf030454d1ea01d5e344fb30bc76b",
+  "subjective_listening": "not performed",
+  "content_acceptance": "pending independent decoded comparison"
+}

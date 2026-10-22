@@ -1,0 +1,19 @@
+{
+  "original_receipt_sha256": "9249e42472adbbfc940fa2d49b3352035c2c08eb547fc49f35607a86cca09700",
+  "record": {
+    "url": "http://REDACTED_LOOPBACK:33883/mcp",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 7770,
+      "method": "tools/call",
+      "params": {
+        "name": "blender_scripting__execute_script_file",
+        "arguments": {
+          "filepath": "EVIDENCE_ROOT/houdini-ecosystem-recovery/encode_jpegs_in_host.py"
+        }
+      }
+    },
+    "status": 200,
+    "body": "{\"jsonrpc\":\"2.0\",\"id\":7770,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-ecosystem-recovery/encode_jpegs_in_host.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-ecosystem-recovery/encode_jpegs_in_host.py\u005c\",\u005c\"stdout\u005c\":\u005c\"\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-ecosystem-recovery/encode_jpegs_in_host.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-ecosystem-recovery/encode_jpegs_in_host.py\",\"stdout\":\"\",\"stderr\":\"\"}},\"isError\":false}}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "PASS_NATIVE_FULL_D015_GIMP_COMPOSITION",
+  "scope": "2560x1600 five-panel synthetic analytic exhibition plate; publication/visual/privacy review remain separate",
+  "planned_gimp_operations_completed": 45,
+  "editable_text_layers": 19,
+  "independent_panel_groups": 5,
+  "exact_native_font": "DejaVu Sans Book",
+  "real_mcp_events": 206,
+  "checks": {
+    "all_five_imported_native_rgba_exact": true,
+    "native_saved_parasite_bytes_equal": true,
+    "native_xcf_structure_equal": true,
+    "native_reopened_parasite_bytes_equal": true,
+    "full_plate_rgba_equal_after_xcf_reopen": true,
+    "master_rgba_sha256": "463c1e2a47d4188e124039f1f2b9909386b659c89d5193f1b35ab11ebae47ba5"
+  },
+  "xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+  "metadata_unchanged_claimed": false,
+  "PNG_byte_equality_claimed": false,
+  "schema": "d015-gimp-selected-qualification-v1",
+  "source_qualification_sha256": "7c74333e949c4acb88f622a18b9c3d7bd1d89d8e094403c52a002c524f86741d",
+  "source_trace_sha256": "52ab268083ca3a12b347207bdc10faa301aa1c477d54231a8f99ade60a491565",
+  "raw_trace_included": false,
+  "raw_qualification_included": false,
+  "original_full_D015_acceptance": false,
+  "cleanup_normal_owned_shutdown_pass": true,
+  "binary_privacy_audit": "SEPARATE_RECORDED_REVIEW_SEE_selected-binary-review.json",
+  "packaged_copied_path_proof": "PASS_42_MCP_EVENTS_WITH_ORIGINALS_HELD_AND_SIX_HASHES_RESTORED",
+  "public_full_authoring": "PASS_45_OPERATIONS_202_MCP_EVENTS_XCF_BYTE_IDENTICAL",
+  "evidence_role": "HISTORICAL_REFERENCE_206_EVENT_CASE_NOT_CURRENT_ACCEPTANCE_BASIS",
+  "current_acceptance_basis": "Fresh 202-event full authoring and 42-event copied-XCF cases using default environment-aware transport; see independent-fresh-native-qualification.json"
+}

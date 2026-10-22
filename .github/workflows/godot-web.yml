@@ -3,10 +3,16 @@ on:
   pull_request:
     paths: ['play/**', 'scripts/godot_web/**', 'scripts/playable.py', 'assets/playable.js', '.github/workflows/godot-web.yml']
   workflow_dispatch:
+    inputs:
+      prism_native_repair:
+        description: 'Only real Prism native Movie Maker/PCK qualification; NOT site acceptance'
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   godot-web:
+    if: ${{ !inputs.prism_native_repair }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -38,3 +44,60 @@ jobs:
           path: ${{ runner.temp }}/godot-web-evidence
           if-no-files-found: warn
           retention-days: 14
+
+  prism-native-repair:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.prism_native_repair }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: dcc-mcp/dcc-mcp-godot
+          ref: 0c99ee85be38c4fce5e8a385c902d00a72207a29
+          path: _prism-godot-candidate
+          persist-credentials: false
+      - name: Check bounded lifecycle contracts (not native proof)
+        run: python scripts/prism_ecosystem/test_lifecycle.py
+      - name: Prepare fixed official runtime and explicit candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y xvfb libgl1-mesa-dri libxkbcommon0 libfontconfig1
+          python -m venv "$RUNNER_TEMP/prism-env"
+          PY="$RUNNER_TEMP/prism-env/bin/python"
+          "$PY" -m pip install --no-cache-dir build 'hatchling==1.32.0'
+          test "$(git -C _prism-godot-candidate rev-parse HEAD)" = 0c99ee85be38c4fce5e8a385c902d00a72207a29
+          "$PY" -m build --wheel --no-isolation --outdir "$RUNNER_TEMP/prism-wheel" _prism-godot-candidate
+          echo 'b356c09bea87c8b3987e55e5ecee14a7fe706e04ac7bfb11c3c13a7137a30c33  '"$RUNNER_TEMP/prism-wheel/dcc_mcp_godot-0.9.9-py3-none-any.whl" | sha256sum -c -
+          "$PY" -m pip install --no-cache-dir "$RUNNER_TEMP/prism-wheel/dcc_mcp_godot-0.9.9-py3-none-any.whl" 'dcc-mcp-core==0.20.46'
+          "$PY" -m pip install --no-cache-dir --only-binary=:all: --require-hashes -r scripts/prism_ecosystem/pillow.lock
+          "$PY" -m pip freeze > "$RUNNER_TEMP/prism-installed.txt"
+          curl --fail --location --max-time 180 https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip -o "$RUNNER_TEMP/prism-godot.zip"
+          echo 'd0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  '"$RUNNER_TEMP/prism-godot.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/prism-godot.zip" -d "$RUNNER_TEMP/prism-godot"
+      - name: Actual ecosystem capture and native source pack (not publication)
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          xvfb-run -a -s '-screen 0 1600x1000x24 -nolisten tcp' "$RUNNER_TEMP/prism-env/bin/python" scripts/prism_ecosystem/run_godot_repair.py             --source docs/showcase/prism-tide/native --output "$RUNNER_TEMP/prism-repair"             --godot "$RUNNER_TEMP/prism-godot/Godot_v4.6.3-stable_linux.x86_64"             --candidate-wheel "$RUNNER_TEMP/prism-wheel/dcc_mcp_godot-0.9.9-py3-none-any.whl"             --candidate-commit 0c99ee85be38c4fce5e8a385c902d00a72207a29 --full-capture
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ always() }}
+        with:
+          name: prism-native-repair-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/prism-repair/*.json
+            ${{ runner.temp }}/prism-repair/*.log
+            ${{ runner.temp }}/prism-repair/*.pck
+            ${{ runner.temp }}/prism-repair/frames-3/
+            ${{ runner.temp }}/prism-repair/frames-450/
+            ${{ runner.temp }}/prism-installed.txt
+          retention-days: 14
+          if-no-files-found: warn

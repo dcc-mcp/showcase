@@ -846,9 +846,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "22c0b7fabfb616863ee2ebc83b1d1ce3fc0ed715ff11617f3ef64b0eddbb292f",
+      "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900",
       "source_sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900",
-      "native_pcm_sha256": "7232e9d3fdec287d403bc895983f9931549d7e1a1ef62f7f2b1a7e2835432b94"
+      "native_pcm_sha256": "7232e9d3fdec287d403bc895983f9931549d7e1a1ef62f7f2b1a7e2835432b94",
+      "native_file_sha256": "22c0b7fabfb616863ee2ebc83b1d1ce3fc0ed715ff11617f3ef64b0eddbb292f",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_stone_02",
@@ -889,9 +891,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "f66059d3809753cbaf6a689c86632fea22014234480d21c4b390fdecd47326d8",
+      "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb",
       "source_sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb",
-      "native_pcm_sha256": "3351e51ee348a55673c68a4647867f53acff17383be36a41b72da4d419a89a01"
+      "native_pcm_sha256": "3351e51ee348a55673c68a4647867f53acff17383be36a41b72da4d419a89a01",
+      "native_file_sha256": "f66059d3809753cbaf6a689c86632fea22014234480d21c4b390fdecd47326d8",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_stone_03",
@@ -932,9 +936,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "d3e2a66c641035a8e9ac780d65bc34c77090e452d004358db9fb2741b7886fb1",
+      "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a",
       "source_sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a",
-      "native_pcm_sha256": "81a757efec1355a4311a46d6c08ef2ef3b2187f303044bb2811c43fa3becd2ad"
+      "native_pcm_sha256": "81a757efec1355a4311a46d6c08ef2ef3b2187f303044bb2811c43fa3becd2ad",
+      "native_file_sha256": "d3e2a66c641035a8e9ac780d65bc34c77090e452d004358db9fb2741b7886fb1",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_stone_04",
@@ -975,9 +981,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "b5024321f40c32fff163352f1a07c7df7c6007289afbd446520615a03c1591a7",
+      "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4",
       "source_sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4",
-      "native_pcm_sha256": "25b502a14337dbfc48fb64c36a79da129e76bb21532a3b809e0ec16baf9babbb"
+      "native_pcm_sha256": "25b502a14337dbfc48fb64c36a79da129e76bb21532a3b809e0ec16baf9babbb",
+      "native_file_sha256": "b5024321f40c32fff163352f1a07c7df7c6007289afbd446520615a03c1591a7",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_stone_05",
@@ -1018,9 +1026,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "65badef2e45ea16f15617de500ba97a8eb79292663b7cdfdd0f3cdcc877adf17",
+      "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05",
       "source_sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05",
-      "native_pcm_sha256": "3913a3325255447578d64117c718a71999379e2db08492a301f29d6115cee3d3"
+      "native_pcm_sha256": "3913a3325255447578d64117c718a71999379e2db08492a301f29d6115cee3d3",
+      "native_file_sha256": "65badef2e45ea16f15617de500ba97a8eb79292663b7cdfdd0f3cdcc877adf17",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_stone_06",
@@ -1061,9 +1071,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "85028648fe1da243cda22b904f91b6f9be5b647f42fa08143746a3f8590fadb6",
+      "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab",
       "source_sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab",
-      "native_pcm_sha256": "15382e698b9d00c3dc5068926bc5795a315f4b5c387a3959aa2e6a7320f998c1"
+      "native_pcm_sha256": "15382e698b9d00c3dc5068926bc5795a315f4b5c387a3959aa2e6a7320f998c1",
+      "native_file_sha256": "85028648fe1da243cda22b904f91b6f9be5b647f42fa08143746a3f8590fadb6",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_grass_01",
@@ -1104,9 +1116,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "b59732e0f2e5d8631c74870ea77a337ec58a17cba4a276238c323fdf4be4b4c8",
+      "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf",
       "source_sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf",
-      "native_pcm_sha256": "b2bfb78bcf41487395b2083fb52755130f1bfca40a2461780c61edf9ae53510b"
+      "native_pcm_sha256": "b2bfb78bcf41487395b2083fb52755130f1bfca40a2461780c61edf9ae53510b",
+      "native_file_sha256": "b59732e0f2e5d8631c74870ea77a337ec58a17cba4a276238c323fdf4be4b4c8",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_grass_02",
@@ -1147,9 +1161,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "d23f15d0490230f98eec841d1a42a12b639d8cf38731a398ede7941287397f9a",
+      "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8",
       "source_sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8",
-      "native_pcm_sha256": "0335f8f2a0a2bdd8c3bdbfa84d38bd9a07203e6349328bbd31506756a5524054"
+      "native_pcm_sha256": "0335f8f2a0a2bdd8c3bdbfa84d38bd9a07203e6349328bbd31506756a5524054",
+      "native_file_sha256": "d23f15d0490230f98eec841d1a42a12b639d8cf38731a398ede7941287397f9a",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_grass_03",
@@ -1190,9 +1206,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "f63a7a6714d0792df593d2ece8b8a5b48ca110e53be0969369595c6834a23832",
+      "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732",
       "source_sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732",
-      "native_pcm_sha256": "eae0b6567cad02e050ba3571fb3f4357e3b00981934358788062dd765057472c"
+      "native_pcm_sha256": "eae0b6567cad02e050ba3571fb3f4357e3b00981934358788062dd765057472c",
+      "native_file_sha256": "f63a7a6714d0792df593d2ece8b8a5b48ca110e53be0969369595c6834a23832",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_grass_04",
@@ -1233,9 +1251,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "9e9f454b0bfff5af1ae07a987c631c70688cd0911188b3a600d048c175b0d459",
+      "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41",
       "source_sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41",
-      "native_pcm_sha256": "82a943d6f0faa26a7ab659d3ea6126da68879194b3cc18a9a2f62a0c2c5cc515"
+      "native_pcm_sha256": "82a943d6f0faa26a7ab659d3ea6126da68879194b3cc18a9a2f62a0c2c5cc515",
+      "native_file_sha256": "9e9f454b0bfff5af1ae07a987c631c70688cd0911188b3a600d048c175b0d459",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_grass_05",
@@ -1276,9 +1296,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "6f090d67e7d607892f9e1fb2420c96f9e7d025c995eca22e4d5bd03d244ee41b",
+      "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed",
       "source_sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed",
-      "native_pcm_sha256": "b243627c1e14fc1afa02f6c0c65c1aa3ec2b6bab2b7fbc23df44fe99a8c3c5db"
+      "native_pcm_sha256": "b243627c1e14fc1afa02f6c0c65c1aa3ec2b6bab2b7fbc23df44fe99a8c3c5db",
+      "native_file_sha256": "6f090d67e7d607892f9e1fb2420c96f9e7d025c995eca22e4d5bd03d244ee41b",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "footstep_grass_06",
@@ -1319,9 +1341,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "58bbdb939965d798493185982e0778310deb45faba8d26345d8d5eda028e0109",
+      "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41",
       "source_sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41",
-      "native_pcm_sha256": "1020d1f052a32a65e49dd4d6fd3077ed7c5de28bb131a84d8b5cdc7bdf276a8e"
+      "native_pcm_sha256": "1020d1f052a32a65e49dd4d6fd3077ed7c5de28bb131a84d8b5cdc7bdf276a8e",
+      "native_file_sha256": "58bbdb939965d798493185982e0778310deb45faba8d26345d8d5eda028e0109",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "environment_soft_wind_foliage_loop",
@@ -1375,9 +1399,11 @@
           "method": "Circular synthesis and circular event/tail wrapping; normal adjacent-sample continuity, not repeated endpoint samples"
         }
       },
-      "sha256": "ea23cfb9bb733d3746fa3da94785debd2e12736b91085ce7cf5aa5132e539fa1",
+      "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e",
       "source_sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e",
-      "native_pcm_sha256": "7b7d5b3f5ca473b0e83d895e25334094f01b52b8db4386da94a881b79bad37b3"
+      "native_pcm_sha256": "7b7d5b3f5ca473b0e83d895e25334094f01b52b8db4386da94a881b79bad37b3",
+      "native_file_sha256": "ea23cfb9bb733d3746fa3da94785debd2e12736b91085ce7cf5aa5132e539fa1",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "music_sparse_tonal_loop",
@@ -1431,7 +1457,7 @@
           "method": "Circular synthesis and circular event/tail wrapping; normal adjacent-sample continuity, not repeated endpoint samples"
         }
       },
-      "sha256": "1e9199d93d519f20c7209b585a7d860c3d8bd65642f625d13d47f0c14b727e65",
+      "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d",
       "bpm": 100,
       "bars": 8,
       "time_signature": [
@@ -1439,7 +1465,9 @@
         4
       ],
       "source_sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d",
-      "native_pcm_sha256": "59a1c81153b856890cadb57dc1d2e0afbc4f59fbc1a44cfc93a342d3191ad327"
+      "native_pcm_sha256": "59a1c81153b856890cadb57dc1d2e0afbc4f59fbc1a44cfc93a342d3191ad327",
+      "native_file_sha256": "1e9199d93d519f20c7209b585a7d860c3d8bd65642f625d13d47f0c14b727e65",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "interaction_confirm",
@@ -1480,9 +1508,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "768ae8734be59ae4607b258b32da4cee3ec3f8cd0f57a6492e949a5d2473147d",
+      "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0",
       "source_sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0",
-      "native_pcm_sha256": "56b0d4e71dd80e01d0f92f40da50d23857c34a1b39b513eee9e64a8ed12377e7"
+      "native_pcm_sha256": "56b0d4e71dd80e01d0f92f40da50d23857c34a1b39b513eee9e64a8ed12377e7",
+      "native_file_sha256": "768ae8734be59ae4607b258b32da4cee3ec3f8cd0f57a6492e949a5d2473147d",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "interaction_discovery",
@@ -1523,9 +1553,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "ad10b8cc857c6401b9229f498bc700566ee18f985f21b03c7dce1d30c9c22b27",
+      "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268",
       "source_sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268",
-      "native_pcm_sha256": "85c1efad2f943ec92ba87269d28b6ef2e422ce08d373f75f5c417c7f2a8d0201"
+      "native_pcm_sha256": "85c1efad2f943ec92ba87269d28b6ef2e422ce08d373f75f5c417c7f2a8d0201",
+      "native_file_sha256": "ad10b8cc857c6401b9229f498bc700566ee18f985f21b03c7dce1d30c9c22b27",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     },
     {
       "id": "interaction_soft_impact",
@@ -1566,9 +1598,11 @@
         "clipped_samples": 0,
         "zero_boundary_frames": true
       },
-      "sha256": "534e1305bd7a393b43c6518541114f7794fe877893d6b7d5f5968740ffb7732f",
+      "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2",
       "source_sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2",
-      "native_pcm_sha256": "6bb970cc1b7e15ff6ab987e4c97cd5e38b9757db48d581eb67277bde4a6c665a"
+      "native_pcm_sha256": "6bb970cc1b7e15ff6ab987e4c97cd5e38b9757db48d581eb67277bde4a6c665a",
+      "native_file_sha256": "534e1305bd7a393b43c6518541114f7794fe877893d6b7d5f5968740ffb7732f",
+      "metadata_cleanup": "BWF/encoder metadata removed; PCM bytes preserved"
     }
   ],
   "integration_notes": [

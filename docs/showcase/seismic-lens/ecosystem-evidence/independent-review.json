@@ -1,0 +1,27 @@
+{
+  "production_graph_sha256": "bd80a3e87dca5defc6ef64ee2237dcb6538750641b77cd2afca285ade391583f",
+  "raw_calls_verified": true,
+  "all_production_steps_covered": true,
+  "verification_captures_verified": true,
+  "reviewer": "Independent parent reviewer plus independent actual caller, package and retained-text reviewers",
+  "reviewed_at": "2026-10-20T20:12:22Z",
+  "scope": [
+    "Original normalized ParaView five-panel/state and GIMP composition/preview actual request-response records checked against native/media outputs; original five panels and master retained unchanged.",
+    "New exact Core0.20.41 bounded typed full-field generation independently matched all510705 points/two Float64 fields and the full historical VTI bytes; later execution is explicitly distinct from historical input generation.",
+    "Hosted run39486599975 independently verified84 request-response groups, six actual jobs including intended resource rejection, both33825-value fields, camera/LUT, PNG, save/reopen, native3.10 runtime and owned cleanup.",
+    "New low-sampling720 image visually inspected; actual native Blender MCP final-frame poster independently decoded/compared and visually inspected; failed black-frame attempt not credited.",
+    "Unchanged continuous120-frame task-owned GIMP observation capture and five real typed visibility operations reviewed as independent observation, not new DCC artwork.",
+    "All243 pre-review graph path/SHA references independently matched; new98-member ZIP individually compared to sources. Original77 members and root/GIMP33/ParaView-reproduction closed inventories preserved exactly.",
+    "All11 exact retained-text privacy exceptions independently inspected at584 matches; only standard installation/license paths, loopback constraints, detection regex and serialized RGBA color bytes. No directory exemption.",
+    "Original2560 native PNGs retain exact bytes as verified production download members, never displayed as page media; cross-case media exclusions tested. Historical old coarse/archive/poster moved outside publication tree without byte changes."
+  ],
+  "limitations": [
+    "Historical analytic-input generator execution route remains unknown. The new byte-identical typed generation does not authenticate its historical execution route or pretend the original five renders were rerun.",
+    "Original actual execution excerpts are retained normalized public records, not a claim all private raw events or signed timestamps were recovered.",
+    "New coarse is a new lower-sampling comparison, not replay of the old unverified coarse PNG; old bytes remain in archive and immutable history outside current publication.",
+    "New coarse PVSM actually saved/reopened but contains hosted paths; qualification artifact only, not claimed portable in current download.",
+    "Native local full-field qualification used distro Python3.13; hosted coarse used official Kitware Python3.10. Candidate source/wheel identities and later fixture/documentation commits remain distinct.",
+    "Old poster black-frame attempt failed independent pixel comparison and remains uncredited; corrected extraction consumes the original observation video unchanged.",
+    "This is synthetic illustrative data, not seismic measurement, a PDE solver, or geological inference. Review is bound only to this graph and selected output hashes."
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "records": {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 7911,
+      "method": "tools/call",
+      "params": {
+        "name": "blender_scripting__execute_script_file",
+        "arguments": {
+          "filepath": "<task-root>/seismic-ecosystem-recovery/poster-v2/extract_in_host.py"
+        }
+      }
+    },
+    "response": {
+      "url": "http://<owned-loopback>:35083/mcp",
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 7911,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "<task-root>/seismic-ecosystem-recovery/poster-v2/extract_in_host.py"
+          }
+        }
+      },
+      "status": 200,
+      "body": "{\"jsonrpc\":\"2.0\",\"id\":7911,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: <task-root>/seismic-ecosystem-recovery/poster-v2/extract_in_host.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"<task-root>/seismic-ecosystem-recovery/poster-v2/extract_in_host.py\u005c\",\u005c\"stdout\u005c\":\u005c\"\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: <task-root>/seismic-ecosystem-recovery/poster-v2/extract_in_host.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"<task-root>/seismic-ecosystem-recovery/poster-v2/extract_in_host.py\",\"stdout\":\"\",\"stderr\":\"\"}},\"isError\":false}}"
+    },
+    "native_readback": {
+      "source_sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+      "output_sha256": "4bc82d1edc518083af46dca7822673483ac17535e58c44d92855be762b8663c1",
+      "source_frame_zero_based": 119,
+      "scene_frame": 120,
+      "original_scene_frame_unchanged": true,
+      "dimensions": [
+        1178,
+        814
+      ],
+      "color": "display sRGB / Standard / None / exposure0 / gamma1",
+      "scope": "Single poster of unchanged native-window observation, not new ParaView artwork or original authoring replay",
+      "source_unchanged": true,
+      "host_version": "4.5.13 LTS",
+      "memory_before": {
+        "VmHWM_KiB": 645796,
+        "VmRSS_KiB": 603532
+      },
+      "memory_after_encoding": {
+        "VmHWM_KiB": 646308,
+        "VmRSS_KiB": 646308
+      },
+      "memory_scope": "Before/after RSS only; VmHWM is historical process high-water mark, not measured extraction peak"
+    },
+    "acceptance": {
+      "source_sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+      "source_unchanged": true,
+      "output_sha256": "4bc82d1edc518083af46dca7822673483ac17535e58c44d92855be762b8663c1",
+      "full_decode": true,
+      "dimensions": [
+        1178,
+        814
+      ],
+      "reference_frame_zero_based": 119,
+      "reference_rgb_sha256": "cf08d2c6b0e8382dd6fbb72a834e3f170d95959b48f2fc61152defeb25aaf4a9",
+      "mae_rgb_255": 0.6050764841087422,
+      "threshold": 3,
+      "bytes": 296550,
+      "budget": 409600,
+      "passed": true,
+      "visual_review": "pending"
+    }
+  },
+  "original_sha256": {
+    "request": "02198e03bf08a2ebd047486b0807230d3927acb57ed5e136780e067ef0f9271f",
+    "response": "ddec30216305d1d5e9daa7424b41705fff5064afe3958da535971f0ce2cecc7a",
+    "native_readback": "2012da4c58b5a0b204c4eb8e6ebbc2cad901b837938fbfc37da2914547bffc86",
+    "acceptance": "130cff4c42f342120ef1b9f95c44fa09f5f888ba3b513525ad29c3e2e35c6f68"
+  },
+  "normalization": "Only task-root paths substituted; no missing arguments/results reconstructed."
+}

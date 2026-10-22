@@ -1,0 +1,40 @@
+tools:
+- name: generate_pack
+  description: Synthesize original generic audio and build/save a native REAPER asset
+    atlas in an empty project.
+  source_file: scripts/generate_pack.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties:
+      output_dir:
+        type: string
+      seed:
+        type: integer
+        minimum: 0
+        maximum: 2147483647
+        default: 73
+    required:
+    - output_dir
+    additionalProperties: false
+  read_only: false
+  destructive: false
+  idempotent: false
+- name: render_assets
+  description: Render each original audio atlas region through native REAPER, preserving
+    channels and exact sample length.
+  source_file: scripts/render_assets.py
+  execution: sync
+  affinity: any
+  input_schema:
+    type: object
+    properties:
+      project_dir:
+        type: string
+    required:
+    - project_dir
+    additionalProperties: false
+  read_only: false
+  destructive: false
+  idempotent: false

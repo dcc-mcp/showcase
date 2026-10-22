@@ -1,0 +1,13 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "5d12bfba5c4daa4ac5da7ac2f9e4d92f82a37ed9846c53932921f0253b8cc2e4",
+      "record": {
+        "sha256": "2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e",
+        "manifest_success": true,
+        "source_unchanged": true
+      }
+    }
+  ]
+}

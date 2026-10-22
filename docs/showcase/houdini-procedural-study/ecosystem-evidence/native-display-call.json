@@ -1,0 +1,38 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "46fe9a77a494d7479a0de389a30206f333e7aa311d9a35bbc46c76290c80bfe7",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7881,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-blender-final/display_final_host.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "642046ad1c9b5ca2f2ddf5cf6d846178ae83a01497ac03834c9d272743d43c68",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:39091/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7881,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-blender-final/display_final_host.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7881,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-blender-final/display_final_host.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-blender-final/display_final_host.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"full_exr_beauty_decode\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"finite\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"opaque\u005c\u005c\u005c\": true, \u005c\u005c\u005c\"size\u005c\u005c\u005c\": [1200, 1500], \u005c\u005c\u005c\"exr_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e\u005c\u005c\u005c\", \u005c\u005c\u005c\"display_png_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5\u005c\u005c\u005c\", \u005c\u005c\u005c\"view_transform\u005c\u005c\u005c\": \u005c\u005c\u005c\"AgX\u005c\u005c\u005c\", \u005c\u005c\u005c\"look\u005c\u005c\u005c\": \u005c\u005c\u005c\"AgX - Medium High Contrast\u005c\u005c\u005c\", \u005c\u005c\u005c\"exposure\u005c\u005c\u005c\": 0.0, \u005c\u005c\u005c\"gamma\u005c\u005c\u005c\": 1.0, \u005c\u005c\u005c\"route\u005c\u005c\u005c\": \u005c\u005c\u005c\"official MCP host image.save_render; no geometry render\u005c\u005c\u005c\"}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-blender-final/display_final_host.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-blender-final/display_final_host.py\",\"stdout\":\"{\u005c\"full_exr_beauty_decode\u005c\": true, \u005c\"finite\u005c\": true, \u005c\"opaque\u005c\": true, \u005c\"size\u005c\": [1200, 1500], \u005c\"exr_sha256\u005c\": \u005c\"2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e\u005c\", \u005c\"display_png_sha256\u005c\": \u005c\"50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5\u005c\", \u005c\"view_transform\u005c\": \u005c\"AgX\u005c\", \u005c\"look\u005c\": \u005c\"AgX - Medium High Contrast\u005c\", \u005c\"exposure\u005c\": 0.0, \u005c\"gamma\u005c\": 1.0, \u005c\"route\u005c\": \u005c\"official MCP host image.save_render; no geometry render\u005c\"}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    }
+  ]
+}

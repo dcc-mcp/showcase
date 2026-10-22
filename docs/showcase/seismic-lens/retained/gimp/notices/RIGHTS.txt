@@ -1,0 +1,5 @@
+Seismic Lens is an original synthetic analytic illustration and design. All applicable artwork and data rights are reserved. No new MIT, CC0, Creative Commons, or other artwork/data license is granted by this package.
+
+The separately obtained dcc-mcp-gimp software retains its existing upstream license. This media package contains no adapter source tree or wheel and grants no new software or artwork license. DejaVu font terms are recorded separately; no font binary is distributed.
+
+No measured seismic data, PDE solution, travel-time solver, or physical validation is claimed.

@@ -1,0 +1,328 @@
+{
+  "kind": "offline delivery equivalence only",
+  "rpp_sha256": "40b6428f213bc9b12895a75509ec04e567b17ec5b9749ea17dc7d814893ad952",
+  "tracks": 5,
+  "items": [
+    {
+      "file": "Audio/footstep_stone_01.wav",
+      "position": 0.0,
+      "length": 0.29
+    },
+    {
+      "file": "Audio/footstep_stone_02.wav",
+      "position": 0.79,
+      "length": 0.34
+    },
+    {
+      "file": "Audio/footstep_stone_03.wav",
+      "position": 1.63,
+      "length": 0.31
+    },
+    {
+      "file": "Audio/footstep_stone_04.wav",
+      "position": 2.44,
+      "length": 0.37
+    },
+    {
+      "file": "Audio/footstep_stone_05.wav",
+      "position": 3.31,
+      "length": 0.33
+    },
+    {
+      "file": "Audio/footstep_stone_06.wav",
+      "position": 4.14,
+      "length": 0.41
+    },
+    {
+      "file": "Audio/footstep_grass_01.wav",
+      "position": 5.05,
+      "length": 0.28
+    },
+    {
+      "file": "Audio/footstep_grass_02.wav",
+      "position": 5.83,
+      "length": 0.35
+    },
+    {
+      "file": "Audio/footstep_grass_03.wav",
+      "position": 6.68,
+      "length": 0.32
+    },
+    {
+      "file": "Audio/footstep_grass_04.wav",
+      "position": 7.5,
+      "length": 0.38
+    },
+    {
+      "file": "Audio/footstep_grass_05.wav",
+      "position": 8.38,
+      "length": 0.3
+    },
+    {
+      "file": "Audio/footstep_grass_06.wav",
+      "position": 9.18,
+      "length": 0.42
+    },
+    {
+      "file": "Audio/environment_soft_wind_foliage_loop.wav",
+      "position": 10.1,
+      "length": 20.0
+    },
+    {
+      "file": "Audio/music_sparse_tonal_loop.wav",
+      "position": 30.6,
+      "length": 19.2
+    },
+    {
+      "file": "Audio/interaction_confirm.wav",
+      "position": 50.3,
+      "length": 0.55
+    },
+    {
+      "file": "Audio/interaction_discovery.wav",
+      "position": 51.35,
+      "length": 1.65
+    },
+    {
+      "file": "Audio/interaction_soft_impact.wav",
+      "position": 53.5,
+      "length": 0.62
+    }
+  ],
+  "preserved_fields": [
+    "track GUID/name/gain/pan/mute",
+    "item source basename/position/length",
+    "unity gain/rate, zero source offset/fades/mute",
+    "no track FX chain"
+  ],
+  "dependency_change": "media absolute paths replaced by relative Audio paths; each basename preserved",
+  "not_claimed": [
+    "Full original RPP byte equivalence (original bytes unavailable)",
+    "New native reopen",
+    "Original metadata cleanup invocation"
+  ],
+  "delivered_wav_chunks": [
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 5760000
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 41760
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 48960
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 44640
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 53280
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 47520
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 59040
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 40320
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 50400
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 46080
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 54720
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 43200
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 60480
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 79200
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 237600
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 89280
+        }
+      ]
+    },
+    {
+      "file": "Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+      "chunks": [
+        {
+          "tag": "fmt ",
+          "bytes": 16
+        },
+        {
+          "tag": "data",
+          "bytes": 5529600
+        }
+      ]
+    }
+  ],
+  "audio_content_identity": "See original-audio-content-lineage.json: all 17 actual rendered PCM hashes match."
+}

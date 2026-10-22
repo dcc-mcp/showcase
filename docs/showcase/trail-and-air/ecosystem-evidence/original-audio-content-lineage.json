@@ -1,0 +1,630 @@
+{
+  "kind": "read-only historical lineage recovery, not new production",
+  "status": "partially-recovered-not-case-complete",
+  "case": "trail-and-air",
+  "evidence": {
+    "path": "docs/showcase/trail-and-air/mcp-evidence.public.json",
+    "sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05",
+    "call_count": 7
+  },
+  "native_render_audio": [
+    {
+      "archive": "Trail-and-Air-Ambience.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+      "bytes": 5760044,
+      "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e",
+      "pcm_sha256": "7b7d5b3f5ca473b0e83d895e25334094f01b52b8db4386da94a881b79bad37b3",
+      "frames": 960000,
+      "channels": 2,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "ea23cfb9bb733d3746fa3da94785debd2e12736b91085ce7cf5aa5132e539fa1",
+      "original_render_pcm_sha256": "7b7d5b3f5ca473b0e83d895e25334094f01b52b8db4386da94a881b79bad37b3",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-Music.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+      "bytes": 5529644,
+      "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d",
+      "pcm_sha256": "59a1c81153b856890cadb57dc1d2e0afbc4f59fbc1a44cfc93a342d3191ad327",
+      "frames": 921600,
+      "channels": 2,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "1e9199d93d519f20c7209b585a7d860c3d8bd65642f625d13d47f0c14b727e65",
+      "original_render_pcm_sha256": "59a1c81153b856890cadb57dc1d2e0afbc4f59fbc1a44cfc93a342d3191ad327",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+      "bytes": 41804,
+      "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900",
+      "pcm_sha256": "7232e9d3fdec287d403bc895983f9931549d7e1a1ef62f7f2b1a7e2835432b94",
+      "frames": 13920,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "22c0b7fabfb616863ee2ebc83b1d1ce3fc0ed715ff11617f3ef64b0eddbb292f",
+      "original_render_pcm_sha256": "7232e9d3fdec287d403bc895983f9931549d7e1a1ef62f7f2b1a7e2835432b94",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+      "bytes": 49004,
+      "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb",
+      "pcm_sha256": "3351e51ee348a55673c68a4647867f53acff17383be36a41b72da4d419a89a01",
+      "frames": 16320,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "f66059d3809753cbaf6a689c86632fea22014234480d21c4b390fdecd47326d8",
+      "original_render_pcm_sha256": "3351e51ee348a55673c68a4647867f53acff17383be36a41b72da4d419a89a01",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+      "bytes": 44684,
+      "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a",
+      "pcm_sha256": "81a757efec1355a4311a46d6c08ef2ef3b2187f303044bb2811c43fa3becd2ad",
+      "frames": 14880,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "d3e2a66c641035a8e9ac780d65bc34c77090e452d004358db9fb2741b7886fb1",
+      "original_render_pcm_sha256": "81a757efec1355a4311a46d6c08ef2ef3b2187f303044bb2811c43fa3becd2ad",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+      "bytes": 53324,
+      "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4",
+      "pcm_sha256": "25b502a14337dbfc48fb64c36a79da129e76bb21532a3b809e0ec16baf9babbb",
+      "frames": 17760,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "b5024321f40c32fff163352f1a07c7df7c6007289afbd446520615a03c1591a7",
+      "original_render_pcm_sha256": "25b502a14337dbfc48fb64c36a79da129e76bb21532a3b809e0ec16baf9babbb",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+      "bytes": 47564,
+      "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05",
+      "pcm_sha256": "3913a3325255447578d64117c718a71999379e2db08492a301f29d6115cee3d3",
+      "frames": 15840,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "65badef2e45ea16f15617de500ba97a8eb79292663b7cdfdd0f3cdcc877adf17",
+      "original_render_pcm_sha256": "3913a3325255447578d64117c718a71999379e2db08492a301f29d6115cee3d3",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+      "bytes": 59084,
+      "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab",
+      "pcm_sha256": "15382e698b9d00c3dc5068926bc5795a315f4b5c387a3959aa2e6a7320f998c1",
+      "frames": 19680,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "85028648fe1da243cda22b904f91b6f9be5b647f42fa08143746a3f8590fadb6",
+      "original_render_pcm_sha256": "15382e698b9d00c3dc5068926bc5795a315f4b5c387a3959aa2e6a7320f998c1",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+      "bytes": 40364,
+      "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf",
+      "pcm_sha256": "b2bfb78bcf41487395b2083fb52755130f1bfca40a2461780c61edf9ae53510b",
+      "frames": 13440,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "b59732e0f2e5d8631c74870ea77a337ec58a17cba4a276238c323fdf4be4b4c8",
+      "original_render_pcm_sha256": "b2bfb78bcf41487395b2083fb52755130f1bfca40a2461780c61edf9ae53510b",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+      "bytes": 50444,
+      "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8",
+      "pcm_sha256": "0335f8f2a0a2bdd8c3bdbfa84d38bd9a07203e6349328bbd31506756a5524054",
+      "frames": 16800,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "d23f15d0490230f98eec841d1a42a12b639d8cf38731a398ede7941287397f9a",
+      "original_render_pcm_sha256": "0335f8f2a0a2bdd8c3bdbfa84d38bd9a07203e6349328bbd31506756a5524054",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+      "bytes": 46124,
+      "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732",
+      "pcm_sha256": "eae0b6567cad02e050ba3571fb3f4357e3b00981934358788062dd765057472c",
+      "frames": 15360,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "f63a7a6714d0792df593d2ece8b8a5b48ca110e53be0969369595c6834a23832",
+      "original_render_pcm_sha256": "eae0b6567cad02e050ba3571fb3f4357e3b00981934358788062dd765057472c",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+      "bytes": 54764,
+      "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41",
+      "pcm_sha256": "82a943d6f0faa26a7ab659d3ea6126da68879194b3cc18a9a2f62a0c2c5cc515",
+      "frames": 18240,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "9e9f454b0bfff5af1ae07a987c631c70688cd0911188b3a600d048c175b0d459",
+      "original_render_pcm_sha256": "82a943d6f0faa26a7ab659d3ea6126da68879194b3cc18a9a2f62a0c2c5cc515",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+      "bytes": 43244,
+      "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed",
+      "pcm_sha256": "b243627c1e14fc1afa02f6c0c65c1aa3ec2b6bab2b7fbc23df44fe99a8c3c5db",
+      "frames": 14400,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "6f090d67e7d607892f9e1fb2420c96f9e7d025c995eca22e4d5bd03d244ee41b",
+      "original_render_pcm_sha256": "b243627c1e14fc1afa02f6c0c65c1aa3ec2b6bab2b7fbc23df44fe99a8c3c5db",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+      "bytes": 60524,
+      "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41",
+      "pcm_sha256": "1020d1f052a32a65e49dd4d6fd3077ed7c5de28bb131a84d8b5cdc7bdf276a8e",
+      "frames": 20160,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "58bbdb939965d798493185982e0778310deb45faba8d26345d8d5eda028e0109",
+      "original_render_pcm_sha256": "1020d1f052a32a65e49dd4d6fd3077ed7c5de28bb131a84d8b5cdc7bdf276a8e",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+      "bytes": 79244,
+      "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0",
+      "pcm_sha256": "56b0d4e71dd80e01d0f92f40da50d23857c34a1b39b513eee9e64a8ed12377e7",
+      "frames": 26400,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "768ae8734be59ae4607b258b32da4cee3ec3f8cd0f57a6492e949a5d2473147d",
+      "original_render_pcm_sha256": "56b0d4e71dd80e01d0f92f40da50d23857c34a1b39b513eee9e64a8ed12377e7",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+      "bytes": 237644,
+      "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268",
+      "pcm_sha256": "85c1efad2f943ec92ba87269d28b6ef2e422ce08d373f75f5c417c7f2a8d0201",
+      "frames": 79200,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "ad10b8cc857c6401b9229f498bc700566ee18f985f21b03c7dce1d30c9c22b27",
+      "original_render_pcm_sha256": "85c1efad2f943ec92ba87269d28b6ef2e422ce08d373f75f5c417c7f2a8d0201",
+      "original_file_bytes_match": false
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+      "bytes": 89324,
+      "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2",
+      "pcm_sha256": "6bb970cc1b7e15ff6ab987e4c97cd5e38b9757db48d581eb67277bde4a6c665a",
+      "frames": 29760,
+      "channels": 1,
+      "sample_width": 3,
+      "sample_rate": 48000,
+      "original_render_file_sha256": "534e1305bd7a393b43c6518541114f7794fe877893d6b7d5f5968740ffb7732f",
+      "original_render_pcm_sha256": "6bb970cc1b7e15ff6ab987e4c97cd5e38b9757db48d581eb67277bde4a6c665a",
+      "original_file_bytes_match": false
+    }
+  ],
+  "archive_member_inventory": [
+    {
+      "archive": "Trail-and-Air-Ambience.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/environment_soft_wind_foliage_loop.wav",
+      "bytes": 5760044,
+      "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+    },
+    {
+      "archive": "Trail-and-Air-Ambience.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/manifest-ambience.json",
+      "bytes": 3505,
+      "sha256": "74b5e87183f7ede4d604f8e6c68a3009934bc9346b10420d50bb0b6d970385f5"
+    },
+    {
+      "archive": "Trail-and-Air-Ambience.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+      "bytes": 1081,
+      "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+    },
+    {
+      "archive": "Trail-and-Air-Ambience.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+      "bytes": 609,
+      "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+    },
+    {
+      "archive": "Trail-and-Air-Ambience.zip",
+      "member": "Trail-and-Air-UE-Audio/README-Ambience.txt",
+      "bytes": 437,
+      "sha256": "ce3a0d190f0951e8639ce9a3a742ae35c9a6015a0185654056e79cee9baaecef"
+    },
+    {
+      "archive": "Trail-and-Air-Music.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/music_sparse_tonal_loop.wav",
+      "bytes": 5529644,
+      "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+    },
+    {
+      "archive": "Trail-and-Air-Music.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/manifest-music.json",
+      "bytes": 3531,
+      "sha256": "7248808341fd84987e0680a1e61d6ac32a4a4e77a6e4f917b4bc99de86a65369"
+    },
+    {
+      "archive": "Trail-and-Air-Music.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+      "bytes": 1081,
+      "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+    },
+    {
+      "archive": "Trail-and-Air-Music.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+      "bytes": 609,
+      "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+    },
+    {
+      "archive": "Trail-and-Air-Music.zip",
+      "member": "Trail-and-Air-UE-Audio/README-Music.txt",
+      "bytes": 434,
+      "sha256": "eb29ee1cc9422978a434ba48c0b6b359fcba8ea96dae1e692feba512bb4f310e"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_01.wav",
+      "bytes": 41804,
+      "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_02.wav",
+      "bytes": 49004,
+      "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_03.wav",
+      "bytes": 44684,
+      "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_04.wav",
+      "bytes": 53324,
+      "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_05.wav",
+      "bytes": 47564,
+      "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_stone_06.wav",
+      "bytes": 59084,
+      "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_01.wav",
+      "bytes": 40364,
+      "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_02.wav",
+      "bytes": 50444,
+      "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_03.wav",
+      "bytes": 46124,
+      "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_04.wav",
+      "bytes": 54764,
+      "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_05.wav",
+      "bytes": 43244,
+      "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/footstep_grass_06.wav",
+      "bytes": 60524,
+      "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/interaction_confirm.wav",
+      "bytes": 79244,
+      "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/interaction_discovery.wav",
+      "bytes": 237644,
+      "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/interaction_soft_impact.wav",
+      "bytes": 89324,
+      "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/manifest-oneshots.json",
+      "bytes": 25476,
+      "sha256": "f532f6fd487f02cc7260ec5afa9d4f30262aff7e29ab6503e7136e9389256101"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+      "bytes": 1081,
+      "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+      "bytes": 609,
+      "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+    },
+    {
+      "archive": "Trail-and-Air-OneShots.zip",
+      "member": "Trail-and-Air-UE-Audio/README-OneShots.txt",
+      "bytes": 437,
+      "sha256": "7bdd310c1ea31c2de67cf3c0b6c24066be43ca13a45c1f10901dd72028a35b6b"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Trail-and-Air.rpp",
+      "bytes": 16053,
+      "sha256": "40b6428f213bc9b12895a75509ec04e567b17ec5b9749ea17dc7d814893ad952"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-code.txt",
+      "bytes": 1081,
+      "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/LICENSE-audio.txt",
+      "bytes": 609,
+      "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Audio/manifest.json",
+      "bytes": 55696,
+      "sha256": "0c562baf4d649e2f0897eee499f30aa76ff22403d1f153eea4f4419075540127"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/audition-timeline.json",
+      "bytes": 1998,
+      "sha256": "0c0fe93fbfbf8047ee062d5ced273dc7ed806c1d7d3d5e31dbaededca9f9162d"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/README.md",
+      "bytes": 4824,
+      "sha256": "96f9e06765d9f1bcd6d8c598ea279c1fffd53f4437226134fc77248e50005b7c"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/tools.yaml",
+      "bytes": 2010,
+      "sha256": "40bacaefacebd3036cb8fcb4e52447710497786b2c3d649eb85137b5b3ce5647"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/SKILL.md",
+      "bytes": 1192,
+      "sha256": "3c6ebe3c056b5b77f8064015c45fc12a810e4318954ec3ec90c2fe1b5881a604"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/tools.yaml",
+      "bytes": 968,
+      "sha256": "710975daaaf7d0410f11cdeb330bb79192c282df42d29f57aa52f72efaf57730"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/LICENSE",
+      "bytes": 1081,
+      "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/SKILL.md",
+      "bytes": 1323,
+      "sha256": "a1baafa5c706c837f7cd2ffc484548780474fc478addad0a889b3ce461408a76"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/tests/test_game_audio.py",
+      "bytes": 16876,
+      "sha256": "8a2d00a3e475b3bf70b078ec44e1e2171f4826e580fe0866a467165691f778e1"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/tests/test_stem_session.py",
+      "bytes": 12590,
+      "sha256": "58b563d5743cc5484b7ef119d112c25f1b4ff20718fe0907718b6ce1d86cbd8b"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/render_master.py",
+      "bytes": 2152,
+      "sha256": "0f016403e229d91a38c978c4b7f1bfcfd5da99b4d66fef28c24023fbc1175491"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/audit_session.py",
+      "bytes": 176,
+      "sha256": "77731b442f928359476b208d2205bdbcd6344f3f570e148b7ce7f7ac531f0c6a"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/common.py",
+      "bytes": 1855,
+      "sha256": "2bb9dfbb7d6d0b1c858b10dbe383a1fe9be2cfe29a35c61f45cc9d990208394e"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/create_session.py",
+      "bytes": 3945,
+      "sha256": "2bedcf438e069b11f2fa954eb3d7538900ff7d84d3ef4c879d3309e1e53b1575"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/open_project.py",
+      "bytes": 576,
+      "sha256": "e32fc2dcac5f161012f1d7451d946dc5d9666335ef04b29d27da05fb2d0d7cab"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/save_project.py",
+      "bytes": 988,
+      "sha256": "4b677ef2938885265900d64eafe193b965c0d1cbfc32e5917af59b5c84255ecf"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/render_assets.py",
+      "bytes": 10080,
+      "sha256": "8a33fe8df4fd9961cbddb723ffc079516cf8f43f70da9881f74588a10de8f92d"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/generate_pack.py",
+      "bytes": 2889,
+      "sha256": "34b5ff203700759647d49fc02a048a99a279bb38321943a488765d2081961574"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Skills/reaper-game-audio/scripts/synthesis.py",
+      "bytes": 13235,
+      "sha256": "4d0baefae6376bfabe41a95d19e5efbe553b4dafba74725b31cbcabf89086571"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Validation/source-signal-checks.json",
+      "bytes": 9159,
+      "sha256": "a32a55a5683c370c5d82865bdc19ca28f289e5f34d2a8b6722bf6abaf1482129"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Validation/native-render-validation.json",
+      "bytes": 5441,
+      "sha256": "46d71b76ee7d0e6d11331a2b4b77557074c015750839ea3ddd69745b695d3ea0"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Validation/mcp-evidence.public.json",
+      "bytes": 27339,
+      "sha256": "5e039eb0f946c867dfd2cacaa65d7181df1b7a938ae7f11bcf70ebcb3d0d1c05"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Validation/native-signal-checks.json",
+      "bytes": 6939,
+      "sha256": "5df31c800e9149b7b4add4dc7daab2dd33296325544654e0d5b5d20d85e7ec5c"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Source/LICENSE",
+      "bytes": 1081,
+      "sha256": "8a17d5e9e0ac753dbe2707fd348869dc513d33a49b2dc50befbae38ea116289e"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Source/game_audio_pack.py",
+      "bytes": 13235,
+      "sha256": "4d0baefae6376bfabe41a95d19e5efbe553b4dafba74725b31cbcabf89086571"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Source/AUDIO-LICENSE.txt",
+      "bytes": 609,
+      "sha256": "c6749ab7d11c803b9db96c54a240ddd88817aa5635828fc7bd554a163d4eab1f"
+    },
+    {
+      "archive": "Trail-and-Air-Source.zip",
+      "member": "Trail-and-Air-UE-Audio/Source/validate_pack.py",
+      "bytes": 4193,
+      "sha256": "26238a5a0b86aec14f7c3552d6c04158f33ec8394ef1d1c6b2aa5e8cccee816b"
+    }
+  ],
+  "published_manifest_hashes_valid": true,
+  "all_17_pcm_match_actual_render_responses": true,
+  "original_wav_files_match": 0,
+  "not_verified": [
+    "WAV metadata removal ecosystem route",
+    "audition montage/fades/MP3 ecosystem route",
+    "hero image production route",
+    "final relative-path RPP rewrite/save/reopen receipt",
+    "archive assembly lineage beyond measured member bytes"
+  ],
+  "next_steps": [
+    "Recover original derivative and delivery logs before reproducing anything.",
+    "If absent, use measured PCM-identical published WAVs as recovered audio content, recreate metadata-clean deliverables through official ecosystem tooling without resynthesizing the 17 sounds.",
+    "Recreate the 28.6s montage/fades/encoding via real official REAPER ecosystem calls, or recover their original calls.",
+    "Recover or recreate the hero image through ecosystem; do not relabel the historical JPEG.",
+    "Open relative-path RPP and save/reopen through real REAPER tools with all 17 dependencies; compare original arrangement.",
+    "Bind actual outputs and archive members after scoped remediation, then independently review whole case."
+  ],
+  "historical_snapshot": {
+    "publication_baseline_commit": "351de0d5920fed2d3e0e38f49ecad1883de2dc89",
+    "scope": "Historical recovery measurement, not the current delivery inventory. Original member hashes and then-unverified next steps are intentionally preserved.",
+    "current_delivery_record": "delivery-metadata-repair.json",
+    "current_delivery_graph": "../ecosystem-production.json"
+  }
+}

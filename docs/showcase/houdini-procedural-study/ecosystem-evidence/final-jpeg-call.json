@@ -1,0 +1,38 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "37b655e03b7181a2e7ad647a4bdd9e882b1e1b15a8bee54cfa634b8f876ea15a",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7882,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/houdini-final-jpeg/encode_jpegs_in_host.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "6a0c43a4aed27afb3bca81c2e8f3661b3b525fe0da2d9637209253faf20b4e76",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:39091/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7882,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/houdini-final-jpeg/encode_jpegs_in_host.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7882,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/houdini-final-jpeg/encode_jpegs_in_host.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/houdini-final-jpeg/encode_jpegs_in_host.py\u005c\",\u005c\"stdout\u005c\":\u005c\"\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/houdini-final-jpeg/encode_jpegs_in_host.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/houdini-final-jpeg/encode_jpegs_in_host.py\",\"stdout\":\"\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    }
+  ]
+}

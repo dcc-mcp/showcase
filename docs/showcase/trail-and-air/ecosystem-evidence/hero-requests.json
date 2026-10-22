@@ -1,0 +1,134 @@
+{
+  "scope": "Actual retained records with machine path prefixes redacted; original hashes preserved",
+  "records": [
+    {
+      "original_receipt_sha256": "508675c531a115f8b70eba1dc11a11592a6a60fe1f0f10074c7bd64248dcd8f1",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7740,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "32653a0ad3171a79c6b64b2da66ef9ffb5c958cad192610c0c2cba7e63723c99",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7741,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/trail-ecosystem-recovery/build_hero_scene_v2.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "22b83db48e7dc36ec6d610ccbd799d5984649fbb14972474c7b0db3e680a4101",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7742,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__save_scene",
+          "arguments": {
+            "filepath": "NATIVE_OUTPUT/hero/hero-native-v2.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "2d438f6fc6e6d4f277a146029f914ab0e215e7c6dafa609c3bc603c18b12c9bc",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7743,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "14c3735db79b7e8957f050d21323ca315e9987272b701378c471f563a7154ab8",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7744,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "NATIVE_OUTPUT/hero/hero-native-v2.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "fa546d3498839fb35ac7a791ee9e6062b02f03901f767e78bc44426c563d197d",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7745,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_python",
+          "arguments": {
+            "code": "import bpy\ns=bpy.context.scene\nassert s.render.resolution_percentage==100 and (s.render.resolution_x,s.render.resolution_y)==(1440,960)\nassert s.render.engine=='CYCLES' and s.cycles.samples==16 and not s.cycles.use_denoising\nassert not s.camera.data.dof.use_dof\nassert 'ORIGINAL AUDIO ASSET PACK' in bpy.data.objects['Identity'].data.body\nprint('Actual full-resolution infographic saved and reopened')"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "c855dee15b46fcdd2603f61ac3545bd71b76b8f37acb2ed7989058f6ae13264a",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7750,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__start_render_job",
+          "arguments": {
+            "output_pattern": "NATIVE_OUTPUT/hero/final/frame_####",
+            "start_frame": 1,
+            "end_frame": 1,
+            "resume_missing": false,
+            "save_before_render": true,
+            "output_format": "PNG",
+            "factory_startup": true,
+            "device": "CPU"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "6f7e57bc4af04fc2e7a9c21e0ac35d5a1f00c4c14903db7dc13e298f26c8168c",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7751,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "51dfdac7d6d9423299d8617ed8972682"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "e696b73d46e6ded86444b35f941858b4bf188181d870a1e46b47b6088fef262f",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7752,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_render__get_render_job",
+          "arguments": {
+            "job_id": "51dfdac7d6d9423299d8617ed8972682"
+          }
+        }
+      }
+    }
+  ]
+}

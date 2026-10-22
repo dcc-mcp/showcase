@@ -1,0 +1,167 @@
+{
+  "scope": "Actual retained records with machine path prefixes redacted; original hashes preserved",
+  "records": [
+    {
+      "original_receipt_sha256": "6c38034854252252ea35df5925b685c31e9158a9a0b0054c7f5eae74fec1cefa",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7600,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "3875f1ed5f6b5ad517f3e7b3da9cd96daaa4f12e8f990be4d3d032aedd80e7c2",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7607,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/trail-ecosystem-recovery/build_audio_scene.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "21335839a33b8340e4656eca3eb8b966e1f420eb0c8e3937b9465d37b8a0147b",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7602,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__save_scene",
+          "arguments": {
+            "filepath": "NATIVE_OUTPUT/audio-native.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "f60ff4bd1d6efa02007c449d597ccfaeec0fe251a5473cbc75e0ff12669cc731",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7603,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__new_scene",
+          "arguments": {}
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "d2331ca9687d52e987030924b5067349383b895417440d197e4f09ba5de6e636",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7604,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scene__open_scene",
+          "arguments": {
+            "filepath": "NATIVE_OUTPUT/audio-native.blend"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "2a945ec1c9d1c44153a21a70808ff36e3277524239c28dd55d65a26cb53b85c7",
+      "record": {
+        "request": {
+          "jsonrpc": "2.0",
+          "method": "tools/call",
+          "id": 11,
+          "params": {
+            "name": "blender_audio__start_audio_export_job",
+            "arguments": {
+              "job_directory": "EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail",
+              "scene_sha256": "e3b9c95a63adae16a1eea485116d39fac4f1c6cd8e414c87db1bd27758bff7fb",
+              "scene_path": "NATIVE_OUTPUT/audio-native.blend",
+              "use_saved_snapshot": true,
+              "input_files": [
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/environment_soft_wind_foliage_loop.wav",
+                  "sha256": "a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/music_sparse_tonal_loop.wav",
+                  "sha256": "66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_01.wav",
+                  "sha256": "f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_02.wav",
+                  "sha256": "4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_03.wav",
+                  "sha256": "17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_04.wav",
+                  "sha256": "ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_05.wav",
+                  "sha256": "710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_06.wav",
+                  "sha256": "78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_01.wav",
+                  "sha256": "784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_02.wav",
+                  "sha256": "08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_03.wav",
+                  "sha256": "e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_04.wav",
+                  "sha256": "08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_05.wav",
+                  "sha256": "ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_06.wav",
+                  "sha256": "f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_confirm.wav",
+                  "sha256": "27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_discovery.wav",
+                  "sha256": "f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268"
+                },
+                {
+                  "path": "EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_soft_impact.wav",
+                  "sha256": "c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2"
+                }
+              ],
+              "start_frame": 1,
+              "end_frame": 2860,
+              "accuracy": 480,
+              "correct_duplicate_final_pcm_block": true,
+              "timeout_seconds": 60
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":11,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Owned audio export submitted; no automatic retries\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":null,\u005c\"context\u005c\":{\u005c\"job_id\u005c\":\u005c\"6d371716ec5547b09cdfcf4d1fdcee81\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"pid\u005c\":95,\u005c\"job_directory\u005c\":\u005c\"EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail\u005c\",\u005c\"scene_sha256\u005c\":\u005c\"e3b9c95a63adae16a1eea485116d39fac4f1c6cd8e414c87db1bd27758bff7fb\u005c\",\u005c\"correct_duplicate_final_pcm_block\u005c\":true,\u005c\"source_snapshot\u005c\":{\u005c\"path\u005c\":\u005c\"NATIVE_OUTPUT/audio-native.blend\u005c\",\u005c\"sha256\u005c\":\u005c\"e3b9c95a63adae16a1eea485116d39fac4f1c6cd8e414c87db1bd27758bff7fb\u005c\",\u005c\"input_files\u005c\":[{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/environment_soft_wind_foliage_loop.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_01.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_02.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_03.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_04.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_05.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_06.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_01.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_02.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_03.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_04.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_05.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_06.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_confirm.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_discovery.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_soft_impact.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2\u005c\"},{\u005c\"path\u005c\":\u005c\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/music_sparse_tonal_loop.wav\u005c\",\u005c\"sha256\u005c\":\u005c\"66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d\u005c\"}]},\u005c\"warning\u005c\":\u005c\"Only the explicitly authorized saved snapshot is exported; live edits are neither saved nor exported.\u005c\",\u005c\"request_sha256\u005c\":\u005c\"ac78281c5ff9fee1a669d261f6daf07d09e846fcf72c9468859e737b4f2175bf\u005c\",\u005c\"stdout_path\u005c\":\u005c\"EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail/stdout.log\u005c\",\u005c\"stderr_path\u005c\":\u005c\"EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail/stderr.log\u005c\"},\u005c\"job_id_owner\u005c\":\u005c\"adapter\u005c\",\u005c\"adapter_job_id\u005c\":\u005c\"6d371716ec5547b09cdfcf4d1fdcee81\u005c\",\u005c\"adapter_job\u005c\":{\u005c\"job_id\u005c\":\u005c\"6d371716ec5547b09cdfcf4d1fdcee81\u005c\",\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"identity_source\u005c\":\u005c\"result.context.job_id\u005c\",\u005c\"status\u005c\":\u005c\"running\u005c\",\u005c\"terminal\u005c\":false,\u005c\"poll_contract\u005c\":{\u005c\"registered\u005c\":false,\u005c\"reason\u005c\":\u005c\"safe_poll_tool_not_declared\u005c\"},\u005c\"cancellation\u005c\":{\u005c\"owner\u005c\":\u005c\"adapter\u005c\",\u005c\"inherits_core_cancellation\u005c\":false}}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Owned audio export submitted; no automatic retries\",\"error\":null,\"prompt\":null,\"context\":{\"job_id\":\"6d371716ec5547b09cdfcf4d1fdcee81\",\"status\":\"running\",\"pid\":95,\"job_directory\":\"EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail\",\"scene_sha256\":\"e3b9c95a63adae16a1eea485116d39fac4f1c6cd8e414c87db1bd27758bff7fb\",\"correct_duplicate_final_pcm_block\":true,\"source_snapshot\":{\"path\":\"NATIVE_OUTPUT/audio-native.blend\",\"sha256\":\"e3b9c95a63adae16a1eea485116d39fac4f1c6cd8e414c87db1bd27758bff7fb\",\"input_files\":[{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/environment_soft_wind_foliage_loop.wav\",\"sha256\":\"a78c039c4db0333c34cd22f9612e8da842d54b118fb2dda85122aa510edbf88e\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_01.wav\",\"sha256\":\"784735d020ac3f5e739248b4dab993ed5351e8314a8fe09722b9804b347aeeaf\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_02.wav\",\"sha256\":\"08a74863ace19a4a08bac1d0cbd2338acc73a6314ee310848365455ea31261f8\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_03.wav\",\"sha256\":\"e973615a01e4a118ce698d1dd32d3939a78dd3d2ee7824f2cccbe3422faeb732\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_04.wav\",\"sha256\":\"08027c0eed344c3cd3a1d15b8eb297cdf59d99051340929e95208aedc13a4d41\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_05.wav\",\"sha256\":\"ada774c04375ebf964fe5e4272e1213c8c479b7151435475a6a148e9a5e34eed\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_grass_06.wav\",\"sha256\":\"f89024970fff3fd9d72e66eced25e411707e6168ad5b0645818ca15f293a0f41\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_01.wav\",\"sha256\":\"f8154541b24bb5b0198b633cef56d69d24f12f3de2a43e44f5ed1f0ab9831900\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_02.wav\",\"sha256\":\"4092331895b201d54112fd846d61b70313692b9a2d019ddf43bb9a567d0da7bb\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_03.wav\",\"sha256\":\"17b758283b895034db9488578e62f8976922817d13cda8816e46c12cf5cb833a\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_04.wav\",\"sha256\":\"ebcbe86132e241c1d4897f54a2d1ddb93c6420d7c69d4f498f18b65534f08dd4\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_05.wav\",\"sha256\":\"710310b2843e065930798623c6ac9be191f7e937192a113e580aab283b24ec05\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/footstep_stone_06.wav\",\"sha256\":\"78a7eb1568b1f6218cbb1fb6d753ac6d0428dc058246f9bde206afe73c16b5ab\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_confirm.wav\",\"sha256\":\"27aff9b4eb46e6cb935fd345afb72b54db76f18196f0d8ac055a0daa09d6b2d0\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_discovery.wav\",\"sha256\":\"f7132dce1460c100e741e54f35d3e01727fb2de4cfdbb8c09c7d1141f8aec268\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/interaction_soft_impact.wav\",\"sha256\":\"c43a9c0b47f4622b341687a8aa9e88e0e48a3252da692137fdbb88db0d7d9ab2\"},{\"path\":\"EVIDENCE_ROOT/trail-ecosystem-recovery/inputs/music_sparse_tonal_loop.wav\",\"sha256\":\"66c531f0e9bcca7bfdc9b272a202d081a53e45eb8fe4422a6aa88ab6d4f1de0d\"}]},\"warning\":\"Only the explicitly authorized saved snapshot is exported; live edits are neither saved nor exported.\",\"request_sha256\":\"ac78281c5ff9fee1a669d261f6daf07d09e846fcf72c9468859e737b4f2175bf\",\"stdout_path\":\"EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail/stdout.log\",\"stderr_path\":\"EVIDENCE_ROOT/audio-isolation-corrected-validation-v2/artifacts/trail/stderr.log\"},\"job_id_owner\":\"adapter\",\"adapter_job_id\":\"6d371716ec5547b09cdfcf4d1fdcee81\",\"adapter_job\":{\"job_id\":\"6d371716ec5547b09cdfcf4d1fdcee81\",\"owner\":\"adapter\",\"identity_source\":\"result.context.job_id\",\"status\":\"running\",\"terminal\":false,\"poll_contract\":{\"registered\":false,\"reason\":\"safe_poll_tool_not_declared\"},\"cancellation\":{\"owner\":\"adapter\",\"inherits_core_cancellation\":false}}},\"isError\":false}}"
+      }
+    }
+  ]
+}

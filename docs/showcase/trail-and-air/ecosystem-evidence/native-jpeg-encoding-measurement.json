@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "b6cbaa2568be37d424a7950f7fa47775600d4ab21bc29a79498c91e4d7c69988",
+  "response_sha256": "b6cbaa2568be37d424a7950f7fa47775600d4ab21bc29a79498c91e4d7c69988",
+  "outputs": [
+    {
+      "path": "docs/showcase/trail-and-air/hero.jpg",
+      "sha256": "c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598"
+    }
+  ],
+  "measurement_role": "Current independent observation of retained production content, not a fabricated native response",
+  "scope": "Native image.save_render encoding of existing display PNG, Standard/None/sRGB/exposure0/gamma1. No geometry render; full independent decode and color error .9161/255; original PNG unchanged."
+}

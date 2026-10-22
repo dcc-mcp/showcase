@@ -1,0 +1,13 @@
+{
+  "representation": "actual recorded values with only declared task-root path substitution; not reconstructed calls",
+  "original_file_sha256": "5476a026878fa630c63a55d321001320ecb88ae2d62c1b2594eeac5542423f5a",
+  "normalization": "task-root, qualification-root, hosted-temp, candidate-checkout, hosted-toolchain, system-bin, system-lib, temporary-root, agent-home and owned-loopback placeholders; raw hashes remain hashes of original bytes",
+  "records": {
+    "source": "<task-root>/ecosystem-audit/repo/docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+    "source_sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+    "source_frame_zero_based": 119,
+    "width": 1178,
+    "height": 814,
+    "fps": 15
+  }
+}

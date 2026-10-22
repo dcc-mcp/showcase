@@ -2,9 +2,13 @@
 
 Three sections of one original analytic field, two equal-scale isolines, and a layered science exhibition plate. ParaView authors the numerical views through real typed MCP calls; GIMP composes five independent groups and nineteen editable text layers, then exports the website image from a temporary native copy.
 
-[Download the complete editable source and reproduction package](editable-source.zip). The 5,965,838-byte archive contains five ParaView states with their VTI data, the 2560×1600 GIMP master XCF/reference PNG, the 1600×1000 website preview, pinned source/wheel instructions, exact adapter preview patch, qualified helpers, including the corrected preview verifier, actual call excerpts and selected validation receipts. No large companion download is required.
+[Download the current editable source and ecosystem evidence package](seismic-lens-ecosystem-2026-10-20.zip). It preserves the original 77 files byte for byte under `qualified-source/`, including the five portable ParaView states and layered GIMP master. New typed data, low-sampling comparison, observation poster and execution evidence are separate. See [current delivery scope](ecosystem-evidence/PACKAGE.md) and the hash-bound [production graph](ecosystem-production.json).
 
-Archive SHA256: `6e6aaf6197ccc0c7ad245bb6f4a7e8fbbb16255b4de99a17b24019f521d0b439`. Its 77 regular members pass CRC, manifest hashes and an actual extraction/restore probe. Native files are unchanged copies of the previously reopened/relocated qualified files.
+The original input-generator execution route is unknown. On 2026-10-20, the bounded typed ParaView capability newly generated all 510,705 points and independently reproduced the entire historical VTI bytes. This is a new production event, not retroactive authentication of the historical script. The original five views and GIMP composition retain their actual historical execution records and were not remade.
+
+The new 41×33×25 low-sampling comparison is a new native output, not the old coarse PNG replay. Its 33,825 points and both Float64 fields were independently checked, then SectionY was rendered and saved/reopened in [the actual hosted qualification](https://github.com/dcc-mcp/dcc-mcp-paraview/actions/runs/39486599975). The new PVSM has hosted absolute paths and is retained only in that artifact; the current package provides its VTI and exact typed parameters instead of claiming a portable state.
+
+The [immutable original package](https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip), SHA256 `6e6aaf6197ccc0c7ad245bb6f4a7e8fbbb16255b4de99a17b24019f521d0b439`, and [earlier coarse image](https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/earlier-coarse-section-y.png) remain historical records, not newly attributed production.
 
 ParaView capability changes are public in [PR #2](https://github.com/dcc-mcp/dcc-mcp-paraview/pull/2), [PR #3](https://github.com/dcc-mcp/dcc-mcp-paraview/pull/3) and the documentation followup [PR #4](https://github.com/dcc-mcp/dcc-mcp-paraview/pull/4). GIMP's metadata fix is public in [PR #14](https://github.com/dcc-mcp/dcc-mcp-gimp/pull/14). The separate GIMP preview increment is supplied as an exact-base source patch in the package; its historical qualification commit is not presented as a fetchable public commit or a released package.
 
@@ -16,8 +20,10 @@ The preview reproduction helper includes the corrected nested active-image check
 
 ## Actual GIMP process video, 2026-10-12
 
-[Watch the eight-second native-window recording](seismic-lens-native-layers.mp4) · [Native-window poster](seismic-lens-native-poster.png) · [New measured evidence](native-process-video.json) · [Reproduction and limits](PROCESS-VIDEO.md).
+[Watch the eight-second native-window recording](seismic-lens-native-layers.mp4) · [Native-window poster](native-observation-poster.png) · [New measured evidence](native-process-video.json) · [Reproduction and limits](PROCESS-VIDEO.md).
 
-The real GIMP window shows typed MCP revealing five existing groups in the original plate. The saved XCF copy is byte-identical to the original, and native save/reopen/export plus PNG reopen preserve full RGBA. The clip is 1178×814, 15 fps, 120 frames, intentionally silent. It supplements the unchanged original source download; it is not a replay of the original ParaView production. The new capture uses the separately identified, unmerged GIMP readiness fix in PR22.
+The real GIMP window shows typed MCP revealing five existing groups in the original plate. The saved XCF copy is byte-identical to the original, and native save/reopen/export plus PNG reopen preserve full RGBA. The clip is 1178×814, 15 fps, 120 frames, intentionally silent. It supplements the original qualified sources retained unchanged in the current download; it is not a replay of the original ParaView production. The new capture uses the separately identified, unmerged GIMP readiness fix in PR22.
 
 Actual model and effort for this addition remain Unknown; requested gpt-6-astra / ultra is recorded separately without a confirmed runtime receipt. Historical attribution and asset rights are unchanged.
+
+The current poster is a newly extracted final observation frame via official Blender MCP, with unchanged video source and independent pixel comparison. It is not evidence of new scientific rendering.
