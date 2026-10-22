@@ -3,7 +3,19 @@
 Original audit baseline: [main 7f4389e](https://github.com/dcc-mcp/showcase/commit/7f4389e83430a43f53dbb4bd068f4e8fab72e51c).
 This is a source/evidence audit, not a new production run or a declaration that
 all historical work lacked MCP. The original structural baseline blocked all 16 selected cases. The current
-result after the Trail and Houdini migrations is two verified cases and 14 still blocked. No old record is rewritten and no live page is removed.
+structural result after the Trail, Houdini and Seismic Lens migrations is three
+evidence-complete cases and 13 still blocked. No old record is rewritten and no
+live page is removed.
+
+## Current branch revalidation (2026-10-22)
+
+A read-only run of `python3 -B scripts/validate_ecosystem.py --repo .` against
+[head cc6d13b](https://github.com/dcc-mcp/showcase/commit/cc6d13b15bdcdced770ad3bc01dcc3213bbc1a42)
+checked all 16 selected cases. Trail & Air, Houdini and Seismic Lens return no
+case-gate errors; the other 13 still lack mandatory production graphs. The
+[current full gate result](ecosystem-gate-current.json) remains `blocked`.
+This is current structural evidence validation, not new native production,
+visual/audio acceptance, an authenticity attestation or permission to publish.
 
 ## Revalidated after main integration (2026-10-20)
 
@@ -109,8 +121,10 @@ migration and publication authorization are complete.
 The original 17 audio sources were not recreated. Their actual REAPER calls,
 PCM hashes, formats and frame counts were independently verified. New official
 Blender MCP stages produced the waveform hero, display-preserving JPEG, VSE
-audition, isolated WAV and native MP3. Four unchanged ZIPs have all 59 members
-verified byte-for-byte. Packaging is not falsely labeled as another DCC call.
+audition, isolated WAV and native MP3. Three audio ZIPs are unchanged. The Source
+ZIP has one metadata-only correction to Audio/manifest.json; all other member
+bytes are unchanged. All 59 members across the four ZIPs were verified
+byte-for-byte. Packaging is not falsely labeled as another DCC call.
 
 The [case graph](trail-and-air/ecosystem-production.json) and
 [independent review](trail-and-air/ecosystem-evidence/independent-review.json)
@@ -119,9 +133,10 @@ delivered relative-path RPP is semantically checked against the real earlier
 reopen, not claimed to have a new native reopen. The later candidate source
 archive commit is not mislabeled as the originally executed version.
 
-The [current full gate result](ecosystem-gate-current.json) remains blocked for
-the other 14 cases. The public collection contract passes, but the full site
-build intentionally refuses publication. No existing deployed site is removed.
+The Trail & Air/Houdini checkpoint left 14 other cases blocked. The
+[current full gate result](ecosystem-gate-current.json), revalidated above after
+Seismic Lens migration, still blocks 13 cases. The full site build intentionally
+refuses publication. No existing deployed site is removed.
 
 ## Houdini migration completed without rewriting original Mantra history
 
@@ -129,4 +144,4 @@ The original hero/preview retain their actual Houdini production and later MCP P
 
 Seven actual stages, native save/reopen, true AOV render, pinned official independent OIDN, AgX display conversion and three JPEG encodings are linked in the [reviewed production graph](houdini-procedural-study/ecosystem-production.json). Native EXR input/output hashes remain distinct from the metadata-only public representation; mature OpenEXR full decoding verifies all11 channels byte-identical. The new62-member ZIP matches retained sources exactly, while the old Release remains unchanged. The actual delivery regression tests reject substituting a public representation hash for the native input actually consumed by OIDN.
 
-The independent review is scoped to these exact bytes and recorded limitations. There is no signed temporal attestation, and the missing original request68 is not invented. The current collection gate passes Trail and Houdini and still blocks14 other selected cases. No existing live page is deleted, no unknown route becomes an asserted bypass, and no historical case is exempted.
+The independent review is scoped to these exact bytes and recorded limitations. There is no signed temporal attestation, and the missing original request68 is not invented. At this historical checkpoint, the collection gate passed Trail and Houdini and blocked 14 other selected cases; the current branch result is recorded above. No existing live page is deleted, no unknown route becomes an asserted bypass, and no historical case is exempted.
