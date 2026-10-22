@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-22",
+  "status": "draft_review_only",
+  "selected_for_gallery": false,
+  "environment": {
+    "historical_host": "Blender 4.5.13 LTS",
+    "historical_adapter": "dcc-mcp-blender 0.2.22",
+    "historical_core": "0.20.46",
+    "native_render": "Cycles CPU",
+    "native_render_samples": 64,
+    "native_video_encoding": "Blender VSE through official MCP scripting",
+    "review": "Read-only byte, metadata and decode checks; no host launched"
+  },
+  "media": {
+    "path": "turntable.mp4",
+    "sha256": "70b3062f308d8de2ef83417b56de9e3b91b70c19be6cba61d0e76a0cbdaa1a33",
+    "bytes": 584419,
+    "codec": "H.264",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "duration_seconds": 6,
+    "decoded_frames": 180,
+    "unique_decoded_frames": 180,
+    "audio_streams": 0
+  },
+  "counts": {
+    "historical_scene_objects": 17,
+    "historical_scene_materials": 6,
+    "retained_source_frames": 180,
+    "retained_request_response_pairs_checked": 126
+  },
+  "checks": [
+    {
+      "name": "Unchanged film and full decode",
+      "result": "pass",
+      "observed": "The original SHA-256 matches; all 180 frames decode at 1080 square, 30 fps and 6 seconds. Intentionally silent."
+    },
+    {
+      "name": "Historical MCP record identities",
+      "result": "pass",
+      "observed": "All 126 request/response pairs match their retained original SHA-256 values. Excerpts and limitations are in provenance.json."
+    },
+    {
+      "name": "Publication-quality visual review",
+      "result": "fail",
+      "expected": "Clean manufactured-looking pump, stem and collar reflections.",
+      "observed": "The silver components retain conspicuous dented or melted-looking reflections; visual acceptance remains failed. The blank label is intentional.",
+      "frames_reviewed": [
+        1,
+        61,
+        121,
+        180
+      ]
+    },
+    {
+      "name": "Gallery selection",
+      "result": "pass",
+      "observed": "This slug is absent from collection.json. No site, locale catalog or accepted-case selection is added."
+    }
+  ],
+  "acceptance": {
+    "visual": "failed",
+    "complete_public_production_graph": "not-tested",
+    "sanitized_native_public_copy": "blocked",
+    "independent_blank_scene_rebuild": "not-tested",
+    "bilingual_site_and_browser_playback": "not-tested",
+    "gallery_publication": "blocked",
+    "repository_draft_review": "submitted_for_review"
+  },
+  "rights_review": {
+    "case_id": "bw_0103",
+    "verified_at": "2026-10-22",
+    "source_url": "https://blenderworld.github.io/#case=bw_0103",
+    "source_record_url": "https://github.com/BlenderWorld/BlenderWorld.github.io/blob/main/data/site-data.js",
+    "source_blob_sha": "f17ba5434f8cc62ee3bffe6e01b31134920ed83c",
+    "source_sha256": "5f9e24cb0c4f88596f4ebebe7c3e7c047025a8ffa5e39d1b5c416cfd126ab031",
+    "modality": "text",
+    "reference_media_count": 0,
+    "attachments_count": 0,
+    "scope": "Original numerical geometry and procedural materials, with no external model, image, texture, HDRI, font, logo or audio imported in the retained construction records. No third-party task text or media is redistributed. No dataset MIT grant is inferred."
+  },
+  "privacy_review": {
+    "text": "All selected text was reviewed. Original routing, native paths, job/process IDs, Library IDs and unrelated records are omitted.",
+    "media": "Container/stream metadata reviewed; no private path or identifying comment found. Frames 1, 61, 121 and 180 were visually inspected: product-only renders with no UI or personal information. No claim of exhaustive manual inspection of every frame.",
+    "excluded": [
+      "Original .blend files",
+      "Raw MCP transcripts",
+      "Source PNGs and decoded verification PNGs",
+      "External brief, references, model outputs and scores"
+    ]
+  },
+  "not_claimed": [
+    "Visual acceptance or a ready-to-merge case.",
+    "Complete public provenance or independent reproduction.",
+    "A sanitized downloadable native scene or new native run.",
+    "Published gallery, all-locale site or browser-playback acceptance.",
+    "An official benchmark score, blind evaluation or comparison with another model.",
+    "Mechanical 24/410 manufacturing certification.",
+    "Verified historical model or reasoning-effort attribution."
+  ],
+  "model_attribution": [
+    {
+      "stage_id": "planning",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "creation",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "code",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "reference",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "post_production",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "review_visual",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "review_technical",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    }
+  ]
+}
