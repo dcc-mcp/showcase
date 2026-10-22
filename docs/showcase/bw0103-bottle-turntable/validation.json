@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "recorded_at": "2026-10-22",
-  "status": "draft_review_only",
+  "status": "submitted_for_review",
   "selected_for_gallery": false,
   "environment": {
     "historical_host": "Blender 4.5.13 LTS",
@@ -67,7 +67,7 @@
     "independent_blank_scene_rebuild": "not-tested",
     "bilingual_site_and_browser_playback": "not-tested",
     "gallery_publication": "blocked",
-    "repository_draft_review": "submitted_for_review"
+    "repository_review": "ready_for_review"
   },
   "rights_review": {
     "case_id": "bw_0103",
@@ -150,5 +150,12 @@
       "record_status": "unknown",
       "basis": "No verified accepted model configuration record is available for this stage."
     }
-  ]
+  ],
+  "production_context": {
+    "brief": "Based on the BlenderWorld BW0103 text prompt.",
+    "production": "Created entirely through the DCC-MCP ecosystem: native authoring, rendering and video encoding used official MCP tools and bounded official MCP scripting.",
+    "brief_zh": "参考 BlenderWorld BW0103 提示词。",
+    "production_zh": "全部通过我们的 DCC-MCP 生态制作：原生创作、渲染与视频编码使用官方 MCP 工具和受限的官方 MCP 脚本。",
+    "revision_scope": "Documentation and pull-request review status only; no new DCC execution, asset replacement or acceptance claim."
+  }
 }

@@ -2,13 +2,13 @@
 
 [Watch the original turntable](turntable.mp4) · [简体中文](README.zh.md)
 
-**Draft review only. Not accepted for the gallery.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
+**Submitted for review. Not yet accepted for the gallery.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
 
 [Film](turntable.mp4) · [Measurements and review](validation.json) · [Historical MCP excerpts](provenance.json) · [Inventory](manifest.json) · [Rights](LICENSES.md)
 
 ## What was actually produced
 
-Numerical geometry, procedural materials, camera, lights and rotation were authored through official typed Blender MCP tools and bounded official MCP scripting. Cycles rendered the frame sequence; native Blender VSE encoded the film and decoded it again. Historical native source reopen/readback is retained. The film is intentionally silent.
+The BlenderWorld BW0103 text prompt was used as the brief; the work was created entirely through our DCC-MCP ecosystem. Numerical geometry, procedural materials, camera, lights and rotation were authored through official typed Blender MCP tools and bounded official MCP scripting. Cycles rendered the frame sequence; native Blender VSE encoded the film and decoded it again. Historical native source reopen/readback is retained. The film is intentionally silent.
 
 This submission preserves the original video bytes. The current review rehashed 126 retained request/response pairs and decoded the film without opening Blender or rerendering. The public excerpts omit private routing and paths; they are not a complete production graph or an independent reproduction.
 
@@ -22,7 +22,7 @@ Before gallery acceptance: repair the silver shading in a controlled native comp
 
 The cited BlenderWorld task is text-only, with no reference media or attachments. The video contains original numerical geometry and procedural materials, not third-party task media. The brief, benchmark rubrics, other model outputs and scores are not included. See LICENSES.md for the preserved rights scope.
 
-The case is deliberately absent from collection.json. The existing site builder publishes only explicitly selected files; adding this review directory does not add an accepted gallery page. No gallery gate, source requirement, merge or deployment is waived.
+The case is deliberately absent from collection.json. The existing site builder publishes only explicitly selected files; this review submission does not add an accepted gallery page. Making the pull request ready for review does not mean the artwork has passed acceptance. No gallery gate, source requirement, merge or deployment is waived.
 
 ## Boundaries
 
