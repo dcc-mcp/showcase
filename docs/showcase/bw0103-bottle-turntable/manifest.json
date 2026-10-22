@@ -1,6 +1,5 @@
 {
   "schema_version": 1,
-  "draft_status": "pending visual acceptance; excluded from gallery",
   "reference": "https://blenderworld.github.io/#case=bw_0103",
   "blender_application": "Blender",
   "blender_version": "4.5.13 LTS",
@@ -8,18 +7,18 @@
   "files": [
     {
       "path": "LICENSES.md",
-      "sha256": "67080e232298718ca7341e7ecfe5bbca2d46570373d88bd220344c9dac015738",
+      "sha256": "977c626e6615c1c81e7a1a096eeba9f20bb0b112075cff57939282716d5784f6",
       "bytes": 2397
     },
     {
       "path": "README.md",
-      "sha256": "56897a7aac37024bca896f03728f26ee3302bf0022db9bf05c6f57ff83ce665a",
-      "bytes": 2902
+      "sha256": "f1c101bf7ce28aa77a13d790b8ede2e945ffb34e52be6953d7265af5eb9a0003",
+      "bytes": 3113
     },
     {
       "path": "README.zh.md",
-      "sha256": "e2a85dcd6f752e229d7d765d878087f87a7a0d2ca56a4891fe0e08d85773bc03",
-      "bytes": 2527
+      "sha256": "ee73a5863df70f08ae3cbddeddb23abcc331f5fcf33fe1fb08e911b1f87decff",
+      "bytes": 2678
     },
     {
       "path": "provenance.json",
@@ -40,8 +39,9 @@
     },
     {
       "path": "validation.json",
-      "sha256": "4b8c769ce16141be41d774d3de9e867b5b26d2daed03952a0c088f797f779e6d",
-      "bytes": 6011
+      "sha256": "55e5bc6b0e767ef3bb7a3126ff3cbb55c11628b22fb57b10c303a7d133b0c45b",
+      "bytes": 6629
     }
-  ]
+  ],
+  "review_status": "submitted for review; pending visual acceptance; excluded from gallery"
 }
