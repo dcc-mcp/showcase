@@ -1,0 +1,65 @@
+{
+  "output_file": "native/pearl.svg",
+  "plan": {
+    "canvas": {
+      "width": 64,
+      "height": 64,
+      "view_box": "0 0 64 64"
+    },
+    "nodes": [
+      {
+        "type": "circle",
+        "id": "pearl-1",
+        "fill": "#224D52",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "cx": 32.0,
+        "cy": 31.0,
+        "r": 18.0
+      },
+      {
+        "type": "path",
+        "id": "pearl-2",
+        "fill": "none",
+        "stroke": "#FFF1CE",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M22 22q4-6 11-5"
+      },
+      {
+        "type": "path",
+        "id": "pearl-3",
+        "fill": "none",
+        "stroke": "#77D3C5",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M19 38q10 12 24 0"
+      },
+      {
+        "type": "path",
+        "id": "pearl-4",
+        "fill": "#D9BD7B",
+        "stroke": "none",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "m48 9 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"
+      },
+      {
+        "type": "path",
+        "id": "pearl-5",
+        "fill": "none",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M16 55h32",
+        "opacity": 0.45
+      }
+    ]
+  }
+}

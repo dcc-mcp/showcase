@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64px"
+   height="64px"
+   viewBox="0.0 0.0 64.0 64.0"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="beacon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <path
+     id="beacon-1"
+     d="M14 55h36M20 49h24M24 49l3-23h10l3 23"
+     style="stroke-linecap:round;stroke-width:3.0;stroke-linejoin:round;fill:#102B31;stroke:#D9BD7B" />
+  <path
+     id="beacon-2"
+     d="m32 13 8 8-8 8-8-8Z"
+     style="stroke-linecap:round;stroke-width:3.0;stroke-linejoin:round;fill:#D9BD7B;stroke:#D9BD7B" />
+  <path
+     id="beacon-3"
+     d="M32 4v4M14 11l5 5M50 11l-5 5M9 26h8M47 26h8"
+     style="stroke-linecap:round;stroke-width:3.0;stroke-linejoin:round;fill:none;stroke:#77D3C5" />
+</svg>

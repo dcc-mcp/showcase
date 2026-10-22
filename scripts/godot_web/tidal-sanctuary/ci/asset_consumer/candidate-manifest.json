@@ -1,0 +1,42 @@
+{
+  "status": "consumer-validation-candidates-not-game-integration",
+  "assets": [
+    {
+      "file": "explorer.glb",
+      "sha256": "055acf10abbfd9e8c57c4144c4bbdb2fae9676d0bb0b09a18342a77c142b17a8",
+      "bytes": 608396,
+      "external_uri_dependencies": []
+    },
+    {
+      "file": "palm-a.glb",
+      "sha256": "a3624b45b4a54a1887421147e3087a7abcfb2a564a5d0e158e13a91b88521916",
+      "bytes": 604304,
+      "external_uri_dependencies": []
+    },
+    {
+      "file": "palm-b.glb",
+      "sha256": "07dfcff46724f50bed2e130a0d4aaa1fef8d82850ffbe461bc80d6a6a1c8c27c",
+      "bytes": 604300,
+      "external_uri_dependencies": []
+    },
+    {
+      "file": "understory-a.glb",
+      "sha256": "65241bd4f33a5feb5426adce71fcf87fb94cc39ce41262fc0ef2d8369b0694dc",
+      "bytes": 32128,
+      "external_uri_dependencies": []
+    },
+    {
+      "file": "understory-b.glb",
+      "sha256": "f45c204d837bee5a0ad8b3cd6b885f43defb7fb558d7472c82ea4442b149622a",
+      "bytes": 32124,
+      "external_uri_dependencies": []
+    }
+  ],
+  "source": "Actual official Blender MCP rebuild/export. Exact production receipts retained privately; complete public production graph pending.",
+  "rights": "Existing Tidal CC0 Adventurers/Forest source licenses apply; notice files retained in ../../game/assets/tropical.",
+  "limitations": [
+    "No native .blend is included.",
+    "Not full-game, visual, browser, physical-GPU or whole-case acceptance.",
+    "Old/new interpolation and Blender reimport normal distinctions remain documented; this fixture measures actual Godot consumption."
+  ]
+}

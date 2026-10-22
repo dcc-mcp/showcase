@@ -1,0 +1,10 @@
+Sanctuary Sans Regular — story/UI subset
+
+Modified from Noto Sans CJK SC Regular, TTC face index 2 (zero-based).
+© 2014-2021 Adobe (http://www.adobe.com/).
+Noto is a trademark of Google Inc. Source authorship is retained as attribution only.
+This modified font uses the family Sanctuary Sans and PostScript name SanctuarySans-Regular.
+Names in the OpenType name table and CFF top/subfont dictionaries have been updated.
+Glyph outlines were not redrawn; the source was subset and metadata renamed.
+Font software remains under SIL Open Font License 1.1.
+See FONT-LICENSE.txt for the original copyright/license text and FONT-SOURCE.json for provenance.
