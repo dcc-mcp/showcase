@@ -1,0 +1,1176 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "additional_paid_cases": 21,
+  "additional_cost_credits": 14.5,
+  "budget_cap_credits": 15,
+  "case_receipts": [
+    {
+      "case": "R1",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "highpoly_high_pbr.glb",
+          "size_bytes": 19401668,
+          "sha256": "ea17bdcefe4f76b496b6501ed74bd7692032d076f8db4de39d0f92dfee12e210",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 559968,
+            "accessor_vertices": 310495,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  1024,
+                  1024
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  1024,
+                  1024
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  1024,
+                  1024
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 10040,
+          "sha256": "20a687ee98ca213dff9ede9f719072451b98fdf03ef59d7bb8eb5a494c8a1d30",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "R2",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base.stl",
+          "size_bytes": 200084,
+          "sha256": "30000fac6ed1d7cbdc8d05f85b9111f24377ac45a5b819130b3f65f475229b01",
+          "structure": {
+            "format": "binary STL",
+            "triangles": 4000,
+            "expected_bytes": 200084
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 1612,
+          "sha256": "fc86c52665fed895cfc00b44557c8bcd6f62abc7745d58b0a7a3760decc7b8b9",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "R3",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_shaded.usdz",
+          "size_bytes": 3068267,
+          "sha256": "7fe22eb6d4d8893d92fa1ae2d376c6d498826ffc882ddf47f17312a45c8aa2a6",
+          "structure": {
+            "format": "USDZ ZIP",
+            "members": 3,
+            "usd_members": 1,
+            "image_members": 1,
+            "crc_valid": true
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 1982,
+          "sha256": "675e3c7e3948fecfd0621dbaaed7987b7036ce43249af70daf39d4e749b8c693",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "R4",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.fbx",
+          "size_bytes": 12998524,
+          "sha256": "5bd197fdb8d8ffe73d94482355d0f0a38b94e5d3c6f4dd8188c27358fedfa5d9",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "base_basic_shaded.fbx",
+          "size_bytes": 6048524,
+          "sha256": "aba0b7c52b6b125cbae8f0f3467f4ed429d83a0869ec7d40bb1159cda3762b3c",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "base.fbx",
+          "size_bytes": 2607388,
+          "sha256": "bd24fadf9660d78e98e72abbcc74524223620860e8dc2cf23b825dfb9a370395",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "texture_diffuse.png",
+          "size_bytes": 3275649,
+          "sha256": "bc09cad0a5459ace9686dcf15cb6b7e72c4f0e2987743d146057fa35622bc267",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_metallic.png",
+          "size_bytes": 1128243,
+          "sha256": "7212aa02ca8a30d6cba40e94b392eb82bfc38eb2abe452a419c958cc542c7fbf",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "L"
+          }
+        },
+        {
+          "name": "texture_normal.png",
+          "size_bytes": 4219776,
+          "sha256": "0be917f9a1c174f167bdfb32effe3655788b3a0696cbd772f56db40b4562bee0",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_pbr.png",
+          "size_bytes": 3557416,
+          "sha256": "c5a8655f1f8dcde15798f051629283141c93254ae867b8d708733a8fe01704b1",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_roughness.png",
+          "size_bytes": 1761070,
+          "sha256": "4b0152f664d729b7fff4388820d9758e38c99fd0d9c62df38e4e7ec7628cd528",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "L"
+          }
+        },
+        {
+          "name": "shaded.png",
+          "size_bytes": 3437984,
+          "sha256": "1c2b311ee3651117808c497a6fda0ac90a97012aff3dc24aed5114a75f3cb980",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 5084,
+          "sha256": "ede9a4daa24f27f3ba87e8e277786dd2ff121b288a4b3bf88141f3cf555b088e",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "render.jpg",
+          "size_bytes": 13246,
+          "sha256": "73823daded23131bc7b1ffd7492ab99a905b9c9e7e3068ae5119648d5346f1e9",
+          "structure": {
+            "format": "JPEG",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "R5",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 7509940,
+          "sha256": "57b7aeb0c4ef31fe6f24d1f3653122b0aa1bf8938e3742f40d1bfc0beff81a88",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 35198,
+            "accessor_vertices": 19081,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "base_basic_shaded.glb",
+          "size_bytes": 3759236,
+          "sha256": "353bfde7cbbf895543b26b996ba8399d7e1026c925a90e414feed725ba55ab40",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 35198,
+            "accessor_vertices": 19081,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "shaded",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "base_basic_hybrid.glb",
+          "size_bytes": 7509932,
+          "sha256": "6df1ef552993c19059176319875988f16aa85d7ad2c5ba0190ab7c4a39e1f340",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 35198,
+            "accessor_vertices": 19081,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "shaded",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 4174,
+          "sha256": "dc9256b816a4ff240a945e10a0525315403418a98cf4ca9fc2ce825d3874b0c8",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "R6",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 716516,
+          "sha256": "c5917a12e700000516cf9f8d8a4cbb33d93fdf435600061bafdb4d8774152209",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 4788,
+            "accessor_vertices": 3372,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "diffuse",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "JPEG"
+              },
+              {
+                "name": "orm",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "JPEG"
+              },
+              {
+                "name": "normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "JPEG"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "R7",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 742316,
+          "sha256": "75dbe5e459c375d1c0257754d0a0251f8885a0cccf6174d8c7beac7a0aeab1c3",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 4912,
+            "accessor_vertices": 3386,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "diffuse",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "JPEG"
+              },
+              {
+                "name": "orm",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "JPEG"
+              },
+              {
+                "name": "normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "JPEG"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "R8",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 15836304,
+          "sha256": "85077f322be243ee726d7b85409073ecbff16f23f7062276e7d5e3dcf7bab12c",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 16528,
+            "accessor_vertices": 9361,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "base_basic_shaded.glb",
+          "size_bytes": 10967312,
+          "sha256": "a44ea4f930aaa4978949bffa91bc0fed3edea6a8422f74059807bb436bce4eae",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 16528,
+            "accessor_vertices": 9361,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "shaded",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "base_basic_hybrid.glb",
+          "size_bytes": 16899988,
+          "sha256": "e1273d31371e3dfa98c8e778db1b50bb0e32d825a3e808e3ec23ae1a7dd49296",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 16528,
+            "accessor_vertices": 9361,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "shaded",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 6430,
+          "sha256": "f594552cfa9acb634501c8aefc70f0eadf3014dfa0ec093aadcdee9e98eff7cc",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "render.jpg",
+          "size_bytes": 12203,
+          "sha256": "9bf12ed625e483daccb5430e22d2b585ba8909f57170bde18969a96578620646",
+          "structure": {
+            "format": "JPEG",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "R9",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 6923580,
+          "sha256": "27635273d20da5786f607de3f8684f3cb7bf58aacb6b34201978eb028e2ab673",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 5000,
+            "accessor_vertices": 4691,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 2924,
+          "sha256": "fb4a281a58d2b47a5653951dcc0bf0c4ee92b06bb4376e9c4f2abe32b2651f12",
+          "structure": {
+            "format": "WEBP",
+            "width": 400,
+            "height": 400,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "model_export_raw.glb",
+          "size_bytes": 5609256,
+          "sha256": "7b5d9ae5329ef1643eb7eead8521f1b74ef147192899f384cc9f63e09a7dfe81",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 2,
+            "triangles": 5124470,
+            "accessor_vertices": 2562237,
+            "material_count": 0,
+            "images": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "A1",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "model.usdz",
+          "size_bytes": 232410,
+          "sha256": "dd3625d94432486687d7057a6e10e5eceb9a139e6c00f36949f4191537b63978",
+          "structure": {
+            "format": "USDZ ZIP",
+            "members": 1,
+            "usd_members": 1,
+            "image_members": 0,
+            "crc_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "case": "A2",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "model.glb",
+          "size_bytes": 60416,
+          "sha256": "98e1372c04da51e2d7241d7b3d2d06769271e56c888dd8d44b57be70afd28f92",
+          "structure": {
+            "mesh_count": 17,
+            "node_count": 18,
+            "triangles": 2488,
+            "accessor_vertices": 1540,
+            "material_count": 4,
+            "images": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "A3",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "model.stl",
+          "size_bytes": 33284,
+          "sha256": "727369c281d172390e1e68620f34588fa4a1a72a197674d742177146aaa036e0",
+          "structure": {
+            "format": "binary STL",
+            "triangles": 664,
+            "expected_bytes": 33284
+          }
+        }
+      ]
+    },
+    {
+      "case": "B1",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base.glb",
+          "size_bytes": 183064,
+          "sha256": "0446d1edc2daea1362ba61e8dcf55adf090f23129f17e29e1aab9ab3587d3028",
+          "structure": {
+            "mesh_count": 6,
+            "node_count": 7,
+            "triangles": 5000,
+            "accessor_vertices": 4583,
+            "material_count": 6,
+            "images": []
+          }
+        }
+      ]
+    },
+    {
+      "case": "B2",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_high_pbr.glb",
+          "size_bytes": 25792228,
+          "sha256": "c655fafa0314ebdd42954012bccfddd715dd614f8278ff3712ea498085a02409",
+          "structure": {
+            "mesh_count": 2,
+            "node_count": 3,
+            "triangles": 9062,
+            "accessor_vertices": 5046,
+            "material_count": 2,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "T1",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base.obj",
+          "size_bytes": 465279,
+          "sha256": "8a61fae522b0a73160777f0be0497ff3bfb2d66bceabb2e3a83f9528b9ea7580",
+          "structure": {
+            "format": "OBJ",
+            "vertices": 3372,
+            "faces": 4788
+          }
+        },
+        {
+          "name": "texture_diffuse.png",
+          "size_bytes": 6120004,
+          "sha256": "53886ea2cd12bf3e29ad17187ef17f4b360410e6779d087c6f0d6b1e4a76dd29",
+          "structure": {
+            "format": "PNG",
+            "width": 4096,
+            "height": 4096,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_metallic.png",
+          "size_bytes": 1103166,
+          "sha256": "cfeafc40a11bb37e9f2bbea132b71f46270859032795b7500f1f9893526fec9c",
+          "structure": {
+            "format": "PNG",
+            "width": 4096,
+            "height": 4096,
+            "mode": "L"
+          }
+        },
+        {
+          "name": "texture_normal.png",
+          "size_bytes": 5175293,
+          "sha256": "269013f4ab2ed27d1050bf400f83d1f5a3f31aa8f11e7eb85600f77580fc788e",
+          "structure": {
+            "format": "PNG",
+            "width": 4096,
+            "height": 4096,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_pbr.png",
+          "size_bytes": 3583184,
+          "sha256": "a2b2a9fe0207c226f8cbb4c98df99c0cfeb6b02f906b11b74376461c75423080",
+          "structure": {
+            "format": "PNG",
+            "width": 4096,
+            "height": 4096,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_roughness.png",
+          "size_bytes": 1664308,
+          "sha256": "32166b7ff3a9d61f4605de5f4b0245f5a7979d64e08b962f62e5feae25e4bf44",
+          "structure": {
+            "format": "PNG",
+            "width": 4096,
+            "height": 4096,
+            "mode": "L"
+          }
+        },
+        {
+          "name": "shaded.png",
+          "size_bytes": 6120004,
+          "sha256": "53886ea2cd12bf3e29ad17187ef17f4b360410e6779d087c6f0d6b1e4a76dd29",
+          "structure": {
+            "format": "PNG",
+            "width": 4096,
+            "height": 4096,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "T2",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.fbx",
+          "size_bytes": 6136236,
+          "sha256": "88190c348445887fbe67996975670f97d4a5c52d5fa7056105d2cb2733020a58",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "base_basic_shaded.fbx",
+          "size_bytes": 2710348,
+          "sha256": "d0c9593f5300af088bd4888a6b58c7fdac8a370a6bca940f5a8e6d161e6eb556",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "base_basic_hybrid.fbx",
+          "size_bytes": 6637788,
+          "sha256": "f37b60b6c4e7fdf1885e39451c6fcf2f0c759c83cf318dcf50b6a7fea6932e09",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "base.fbx",
+          "size_bytes": 186588,
+          "sha256": "a13d7de10647cb974e00a0bedc82af560e845d45d2bbd7abde59f346a9425e13",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        },
+        {
+          "name": "texture_diffuse.png",
+          "size_bytes": 2019044,
+          "sha256": "a304e204e237dfd5853546a0b1b3f14c0000252dbcab7341b2b56d7ae7f86b5e",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_metallic.png",
+          "size_bytes": 848336,
+          "sha256": "fb5ac9463121fa16fcbfcdb4b7248d43402574237992e56833a1ec540735c1ce",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "L"
+          }
+        },
+        {
+          "name": "texture_normal.png",
+          "size_bytes": 2141558,
+          "sha256": "76892aa1236d07a840afc64fd96b588792b776415acdf28eb8684e8c46856a51",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_pbr.png",
+          "size_bytes": 2175533,
+          "sha256": "cddcfb7cf851208d695bec77ea596c0a1dd4b95dcae8f6c9c1a7b8355decd3d0",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        },
+        {
+          "name": "texture_roughness.png",
+          "size_bytes": 934307,
+          "sha256": "9baa83ca6c79f7b799f786af5c0bb2ad02398f9ea139bd7e5b1ea66959ca1334",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "L"
+          }
+        },
+        {
+          "name": "shaded.png",
+          "size_bytes": 2520605,
+          "sha256": "dc05fa5aac1114649dce07b0fa3b17f7fb89965fefa43e4b6abb9a3eda95a6a2",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "T3",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_high_pbr.usdz",
+          "size_bytes": 22636232,
+          "sha256": "e3260f3e68a9a0033608126030dae7a8024d88a08600dc638230033e6909c221",
+          "structure": {
+            "format": "USDZ ZIP",
+            "members": 6,
+            "usd_members": 1,
+            "image_members": 4,
+            "crc_valid": true
+          }
+        }
+      ]
+    },
+    {
+      "case": "T4",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_high_pbr.glb",
+          "size_bytes": 121254336,
+          "sha256": "df691288d245bfc69d3da119e420551e8371fd72127567962919d5584aabb4fa",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 4788,
+            "accessor_vertices": 3378,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  12288,
+                  12288
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "O1",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "model.fbx",
+          "size_bytes": 58620,
+          "sha256": "f1108bca83203cbda681192cc02f8961f97c6ab2cc1861fb22aa3e93ecdc9b46",
+          "structure": {
+            "format": "binary FBX",
+            "version": 7400
+          }
+        }
+      ]
+    },
+    {
+      "case": "O2",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base.stl",
+          "size_bytes": 239484,
+          "sha256": "18948c61b7c81f7f4d8615f039974c73ab66f2b0f697a498409e4ed8ab692fa0",
+          "structure": {
+            "format": "binary STL",
+            "triangles": 4788,
+            "expected_bytes": 239484
+          }
+        },
+        {
+          "name": "shaded.png",
+          "size_bytes": 2468576,
+          "sha256": "c4d1309fc6c85ff20352ad158001bdce45d4afb56f3081547c1aa1049b6ac55c",
+          "structure": {
+            "format": "PNG",
+            "width": 2048,
+            "height": 2048,
+            "mode": "RGB"
+          }
+        }
+      ]
+    },
+    {
+      "case": "O3",
+      "submission_accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 6440640,
+          "sha256": "d3e34d059512ccd3038094ccb9c53e4be43495505998fe59b016a14e4666e839",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 4788,
+            "accessor_vertices": 3378,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "texture_normal",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_diffuse",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              },
+              {
+                "name": "texture_metallic-texture_roughness",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        },
+        {
+          "name": "base_basic_shaded.glb",
+          "size_bytes": 2675604,
+          "sha256": "0667b1837aee2da13fd4145975fca2c32240185c154753109edae59ee2f7d672",
+          "structure": {
+            "mesh_count": 1,
+            "node_count": 1,
+            "triangles": 4788,
+            "accessor_vertices": 3378,
+            "material_count": 1,
+            "images": [
+              {
+                "name": "shaded",
+                "size": [
+                  2048,
+                  2048
+                ],
+                "format": "PNG"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    "Container checks and image dimensions are not native import or visual material acceptance.",
+    "Paid submissions used the direct Python runtime acceptance harness; independent read-only operations used MCP HTTP tools/call.",
+    "No provider identities, account balances, credentials, signed links or local paths are included."
+  ],
+  "historical_scope": {
+    "status": "PRE_HERO_API_EVIDENCE_ONLY",
+    "paid_cases": 21,
+    "credits_spent": 14.5,
+    "then_budget_cap_credits": 15,
+    "hero_extension_included": false,
+    "final_round": {
+      "paid_cases": 23,
+      "credits_spent": 15.5,
+      "budget_cap_credits": 15.5,
+      "ledger": "diagnosis/budget-ledger.public.json",
+      "hero_acquisition": "diagnosis/hero-acquisition.public.json"
+    },
+    "boundary": "Historical21 direct-Python paid submissions; the separate two hero generations used actual MCP HTTP tools/call. No all-combinations claim."
+  }
+}

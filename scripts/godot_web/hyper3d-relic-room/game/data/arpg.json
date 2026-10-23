@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "player": {"max_health": 40, "max_mana": 20, "mana_regen": 2.0},
+  "zones": {
+    "town": {"safe": true, "bounds_xz": [-15, 15, -14, 16], "spawn": [0, -0.05, 11], "return_point": [0, 0, 10], "exit_point": [0, 0, -14]},
+    "wilderness": {"safe": false, "bounds_xz": [-12, 12, -42, -20], "entry_point": [0, 0, -22], "exit_point": [0, 0, -20]}
+  },
+  "skills": {
+    "melee": {"damage": 10, "range": 2.2, "windup": 0.18, "contact": 0.18, "recovery": 0.27, "cooldown": 0.55, "mana_cost": 0, "uses_attack_bonus": true},
+    "arc_bolt": {"damage": 24, "range": 8.5, "windup": 0.32, "contact": 0.32, "recovery": 0.33, "cooldown": 0.9, "mana_cost": 6, "uses_attack_bonus": false}
+  },
+  "items": {
+    "arc_focus": {"slot": "focus", "max_mana_bonus": 10, "attack_bonus": 0, "unlocks_skill": "arc_bolt"},
+    "bronze_edge": {"slot": "weapon", "max_mana_bonus": 0, "attack_bonus": 5, "unlocks_skill": ""}
+  },
+  "enemy_variants": {
+    "scout": {"max_health": 30, "damage": 5, "speed": 2.0, "aggro_range": 9.0, "attack_range": 1.7, "windup": 0.38, "contact": 0.38, "recovery": 0.27, "cooldown": 1.25, "xp": 10, "drop_item": "arc_focus", "asset_key": "guardian_character", "display_height": 2.0},
+    "sentinel": {"max_health": 54, "damage": 8, "speed": 1.8, "aggro_range": 10.0, "attack_range": 2.0, "windup": 0.38, "contact": 0.38, "recovery": 0.27, "cooldown": 1.65, "xp": 15, "drop_item": "bronze_edge", "asset_key": "guardian_character", "display_height": 2.7}
+  },
+  "encounters": [
+    {"id": "scout_1", "variant": "scout", "zone": "wilderness", "position": [-4, 0, -26]},
+    {"id": "sentinel_1", "variant": "sentinel", "zone": "wilderness", "position": [4, 0, -35]}
+  ],
+  "chests": {
+    "town_chest": {"zone": "town", "position": [-5.5, 0, -5.1], "range": 2.0, "drop_item": "bronze_edge"}
+  },
+  "progression": {"level2_xp": 20, "level2_health_bonus": 10, "level2_attack_bonus": 2},
+  "interaction": {"pickup_range": 2.0, "turn_in_range": 2.3},
+  "goal": {"enemy_ids": ["scout_1", "sentinel_1"], "equipped_items": ["arc_focus", "bronze_edge"], "return_zone": "town"}
+}

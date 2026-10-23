@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "status": "CURRENT_NATIVE_GUI_FOLLOWUP_NOT_RUN_BLOCKED",
+  "scope": "Current save/title-fix build launched at untouched title. Window metadata and one partially redacted observation do not establish game input or affected save-menu acceptance.",
+  "current_build": {
+    "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+    "native_zip_sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+    "native_zip_bytes": 44273997,
+    "native_archive_files": 72,
+    "fresh_extracted_runtime_files_matching_freeze": 41,
+    "fresh_import": "PASS_RECORDED",
+    "engine": "Godot4.6.3 stable official"
+  },
+  "branch_current_ui_status": {
+    "normal_gui_launch": "STARTED_WITH_NATIVE_FIRST_FRAME_MARKER",
+    "logged_game_state": "title",
+    "initial_foreground": false,
+    "qa_requested": false,
+    "qa_enabled_in_logged_state": false,
+    "save_and_return_to_title": "NOT_RUN_BLOCKED",
+    "title_continue": "NOT_RUN_BLOCKED",
+    "failed_save_visible_feedback": "NOT_RUN_BLOCKED",
+    "new_course_or_reopen": "NOT_RUN"
+  },
+  "project_route": {
+    "provider": "dcc-cua",
+    "runtime_version": "1.13.0",
+    "exact_owned_native_binding_and_birth_consistent": true
+  },
+  "operations": {
+    "window_metadata_reads": 1,
+    "fixed_frame_changes": 1,
+    "frame_change_automatic_input": false,
+    "frame_change_activated_window": false,
+    "pixel_observations": 1,
+    "physical_game_input_actions": 0,
+    "write_failure_fixture_created": false,
+    "scope": "Window metadata/frame operations are separate from game pointer/key input."
+  },
+  "capture_limit": {
+    "mode": "redacted_desktop_crop",
+    "reason": "root_overlap",
+    "captured_pixels": [
+      1286,
+      795
+    ],
+    "partially_redacted": true,
+    "whole_desktop_capture": false,
+    "unobscured_gameplay_pixels": "NOT_ESTABLISHED",
+    "public_image_included": false,
+    "further_game_input": "NOT_ATTEMPTED"
+  },
+  "accepted_profile": {
+    "reused_prior_real_course_profile": true,
+    "injected_state": false,
+    "recorded_primary_bytes_unchanged": true,
+    "primary_sha256": "88c632fd15dc905cfdb24c3ced622094f42c42bee852ed2e053150beadc13355",
+    "current_save_restore_or_persistence_acceptance": "NOT_RUN; process remained at title"
+  },
+  "cleanup": {
+    "explicit_native_ack": "PASS",
+    "active_after_ack": false,
+    "pending": false,
+    "issues": 0,
+    "owner_report": "After ACK, root terminated only its own untouched-title process and task-owned bridge.",
+    "independent_process_query_by_receipt_audit": "NOT_PERFORMED"
+  },
+  "historical_evidence": {
+    "prior_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+    "native_course_and_fresh_process_reopen": {
+      "receipt": "os-acceptance.public.json",
+      "scope": "Valid historical actual OS course/reopen; not relabeled as this changed build."
+    },
+    "web_smoke": {
+      "receipt": "web-acceptance.public.json",
+      "scope": "Historical earlier PCK input smoke; not the current export."
+    }
+  },
+  "current_web": {
+    "pck_sha256": "bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea",
+    "export": "PASS",
+    "actual_new_browser_session": "NOT_RUN",
+    "current_web_input_or_failure_claim": "NONE"
+  },
+  "evidence_hashes": [
+    {
+      "role": "launch",
+      "sha256": "a4e9526e6d370d39fbd874650af89657475366cd6f57d3349b3689fba4387cbc",
+      "bytes": 414
+    },
+    {
+      "role": "accepted_primary_before",
+      "sha256": "88c632fd15dc905cfdb24c3ced622094f42c42bee852ed2e053150beadc13355",
+      "bytes": 505
+    },
+    {
+      "role": "unchanged_primary",
+      "sha256": "4cb687a019a3324cbbd6dd452d464f73fa5509d985e0ec6fec37f1df81b1bc31",
+      "bytes": 196
+    },
+    {
+      "role": "window_metadata",
+      "sha256": "79a25ab50fada605585666026da3df7293225d63e58776f5ed863b0b2f434fc2",
+      "bytes": 2756
+    },
+    {
+      "role": "fixed_frame",
+      "sha256": "df1c75a8cd94cd978bafed3a3627fe781226cc87b11ca403fabd399fdca7f88e",
+      "bytes": 6174
+    },
+    {
+      "role": "redacted_capture_response",
+      "sha256": "d023b620502dd5c76853e5286a5a69ea96d60ccba21a65f290efcb790028e635",
+      "bytes": 298633
+    },
+    {
+      "role": "private_redacted_capture_png",
+      "sha256": "71bb3ea8523d4fdae241c41c5491c222e2632c71b0039a16e3ad1bc801132213",
+      "bytes": 211714
+    },
+    {
+      "role": "cleanup_ack",
+      "sha256": "56e52bcc097f5728d23889594e573352d9b8895f465ae95d8304c765958e86b1",
+      "bytes": 2390
+    },
+    {
+      "role": "native_stdout",
+      "sha256": "705350fbeed6b1a0a99759a5375fe37179a06e07da0d4453558ddb6ad2edb86e",
+      "bytes": 22780
+    },
+    {
+      "role": "native_engine_log",
+      "sha256": "5e14b9c6284bb6af8fe7ad7e1b48234e66996955c58637acad9d2efa1c2160d4",
+      "bytes": 22773
+    },
+    {
+      "role": "current_freeze",
+      "sha256": "64a9ed8163a439d428449cc448c0012f65305732fa9a2aa2539f73c3fb34f70c",
+      "bytes": 12261
+    },
+    {
+      "role": "current_native_package",
+      "sha256": "69c929efa8ba83c9ddb1829eddde85745466692b0d355931e437564bb0a7085f",
+      "bytes": 13130
+    },
+    {
+      "role": "fresh_import_log",
+      "sha256": "35f727c7cd68f9a7b546c33193c0843f0bc2f30fc51a1f9bfaad389e6d8ba4e3",
+      "bytes": 11094
+    },
+    {
+      "role": "current_web_export",
+      "sha256": "acdced2dd0cf198a60d0e61d7138a593e987bb2a500aa358ae20029bae38f7c2",
+      "bytes": 11577
+    }
+  ],
+  "audit_scope": {
+    "new_ui_actions": 0,
+    "new_api_calls": 0,
+    "source_or_runtime_edits": 0,
+    "private_obscured_png_published": false
+  }
+}

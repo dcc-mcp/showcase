@@ -1,0 +1,149 @@
+{
+  "additional_credits": 15.5,
+  "hard_cap_credits": 15.5,
+  "reserved_credits": 15.5,
+  "cases": [
+    {
+      "case": "R2",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R3",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R5",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R6",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R7",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "B1",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "B2",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "T1",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R1",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R4",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R8",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "R9",
+      "amount_credits": 1,
+      "billing_rows": 1,
+      "reserved_credits": 1
+    },
+    {
+      "case": "A1",
+      "amount_credits": 1,
+      "billing_rows": 1,
+      "reserved_credits": 1
+    },
+    {
+      "case": "A2",
+      "amount_credits": 2,
+      "billing_rows": 1,
+      "reserved_credits": 2
+    },
+    {
+      "case": "A3",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "T2",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "T3",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "T4",
+      "amount_credits": 2,
+      "billing_rows": 1,
+      "reserved_credits": 2.5
+    },
+    {
+      "case": "O1",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "O2",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "O3",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "Hero-courier",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    },
+    {
+      "case": "Hero-guardian",
+      "amount_credits": 0.5,
+      "billing_rows": 1,
+      "reserved_credits": 0.5
+    }
+  ],
+  "original_api_experiment_credits": 14.5,
+  "approved_hero_extension_credits": 1,
+  "verified_balance_delta_for_extension": 1,
+  "authority": "User approved cap extension to15.5 for two original concepts; all23 task rows matched, no automatic paid retry."
+}

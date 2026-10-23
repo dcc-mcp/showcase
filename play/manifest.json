@@ -310,6 +310,56 @@
       "path": "play/dawnkeep-defense/ui/FONT-SOURCE.json",
       "bytes": 441,
       "sha256": "ddc9ae802379b089c6b5c44c7749f01a00e76bbff908b5f980c3ab7f34ee12be"
+    },
+    {
+      "path": "play/hyper3d-relic-room/index.html",
+      "bytes": 5754,
+      "sha256": "68942a19e67fa74b7ffe0be47f984b94e8baeaa723adad7ac5861009a6d4b85a"
+    },
+    {
+      "path": "play/hyper3d-relic-room/relic-bc6af9db60ea.pck",
+      "bytes": 41192572,
+      "sha256": "bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea"
+    },
+    {
+      "path": "play/hyper3d-relic-room/relic-shell.js",
+      "bytes": 7218,
+      "sha256": "713ba9658db488027e258f9e155ebc5f2c14ff8c70829d6e26d7a81870391ab9"
+    },
+    {
+      "path": "play/hyper3d-relic-room/publication-shell.js",
+      "bytes": 1600,
+      "sha256": "28ec429e991e9d0500840ec78b96979e65b744c2d139345332c421bb306ca5e8"
+    },
+    {
+      "path": "play/hyper3d-relic-room/ui/FONT-LICENSE.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "path": "play/hyper3d-relic-room/ui/FONT-SOURCE.json",
+      "bytes": 509,
+      "sha256": "aeccfeed92c46d1f3de3e0cf5ecf4f2a107d00a05f799927944e0f388b0afee1"
+    },
+    {
+      "path": "play/hyper3d-relic-room/notices/KENNEY-MIT.txt",
+      "bytes": 1062,
+      "sha256": "f755bf8f21002f8d5baedaf75564141d363971f3f7bc8c4062956b0b15a6f04f"
+    },
+    {
+      "path": "play/hyper3d-relic-room/notices/ASSET-RIGHTS.md",
+      "bytes": 2606,
+      "sha256": "f840867af70be2478aeecef5787d258c38faa48ec04706cccea4f5466940df38"
+    },
+    {
+      "path": "play/hyper3d-relic-room/README.txt",
+      "bytes": 1306,
+      "sha256": "35e353ececf6d1647acc50b82e6254ada20222c7da971327df6e76c9dd7d3985"
+    },
+    {
+      "path": "play/hyper3d-relic-room/export-provenance.json",
+      "bytes": 11046,
+      "sha256": "41da2478ab0b5956574a8702e0ddc951c025a9831878257d51b480b29faa024a"
     }
   ],
   "demos": [
@@ -396,13 +446,34 @@
         "en": "Eight-wave hero defense. Click/tap the game to unlock audio; M or the native music button mutes it. No saved progress. Outer Reset reloads the real engine. Native and Web victory/defeat/reset passed on the recorded source; physical phones, subjective listening and physical-GPU performance remain unverified.",
         "zh": "八波英雄守卫战。点击/轻触游戏后启用声音，M 或原生音乐按钮静音。没有存档，外层重开将重新加载真实引擎。记录版本的原生与 Web 胜败及重开通过；实体手机、主观听评和真实显卡性能仍未验证。"
       }
+    },
+    {
+      "case_slug": "hyper3d-relic-room",
+      "url": "play/hyper3d-relic-room/index.html",
+      "title": "Relic Courier / 遗迹信使",
+      "engine": "Godot 4.6.3",
+      "renderer": "gl_compatibility",
+      "threads": false,
+      "localeSupport": [
+        "en",
+        "zh"
+      ],
+      "nativeTextLanguage": "en-zh",
+      "controls": {
+        "en": "WASD/arrows move, Space dash, F/left click melee, Q unlocked Arc, E interact, I bag, Escape pause. Fight in the grove, recover/equip loot and return to town. Native EN/ZH changes language; Touch enables directional controls.",
+        "zh": "WASD/方向键移动，空格冲刺，F/鼠标左键近战，Q 使用已解锁奥术，E 交互，I 背包，Esc 暂停。进入林地战斗，收取并装备战利品后返回城镇。原生 EN/中文切换语言，触控按钮启用方向操作。"
+      },
+      "notes": {
+        "en": "Current ba6b22f5 save correction passed 57 engine/filesystem checks, separate read 5 and native integration 25. Latest clean native import passed; partial window occlusion blocked before any game input or IO-fault fixture. This PCK has no actual browser run. Historical ec13 native course/reopen, 15-action Web smoke on PCK22f and film decode/sampled pixels remain separate exact-byte evidence. Full Web course/lifecycle and natural-speed playback/listening are unverified. Landscape 960 × 600 and above; portrait/physical phones are untested. Reset reloads the engine.",
+        "zh": "当前 ba6b22f5 存档修复通过 57 项引擎/文件系统、独立重读 5 项与场景集成 25 项检查。最新干净原生导入通过，但窗口局部遮挡在游戏输入和 IO 故障夹具前阻塞；此 PCK 尚未实际运行浏览器。历史 ec13 原生路线/重开、PCK22f 上 15 次 Web 冒烟与影片解码/抽样画面分别保留精确版本证据。完整 Web 玩法/生命周期、正常速度播放和听评未验。仅支持 960 × 600 及以上横屏，竖屏/实体手机未测；外层重开加载引擎。"
+      }
     }
   ],
   "budget": {
-    "raw_bytes": 45755592,
-    "gzip_equivalent_bytes": 16563432,
-    "raw_limit_bytes": 48234496,
-    "gzip_equivalent_limit_bytes": 16777216,
+    "raw_bytes": 86983566,
+    "gzip_equivalent_bytes": 57415383,
+    "raw_limit_bytes": 90177536,
+    "gzip_equivalent_limit_bytes": 58720256,
     "groups": {
       "legacy": {
         "raw_bytes": 40217784,
@@ -411,9 +482,12 @@
       "dawnkeep-defense": {
         "raw_bytes": 5537808,
         "gzip_equivalent_bytes": 5188541
+      },
+      "hyper3d-relic-room": {
+        "raw_bytes": 41227974,
+        "gzip_equivalent_bytes": 40851951
       }
     },
-    "measurement_scope": "Manifest-listed assets, excluding this manifest document. The verification ceiling additionally includes the manifest.",
-    "note": "Original shared-runtime/demo envelope remains 40 MiB raw/11 MiB gzip. Dawnkeep adds a separate 6 MiB raw/5 MiB gzip allowance; actual Pages encoding is checked after deployment."
+    "measurement_scope": "Manifest-listed assets excluding this self-describing document; browser transfer encoding is untested."
   }
 }
