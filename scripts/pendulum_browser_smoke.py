@@ -24,6 +24,7 @@ import zlib
 
 from browser_preview import safe_error_text
 from localization_browser_smoke import MountHandler
+from tracked_file_bytes import MAX_LFS_POINTER_BYTES, matches_lfs_content
 
 ENTRY = 'docs/showcase/brass-pendulum-denoise/'
 PNG_COLOR_CHUNKS = {b'cICP', b'gAMA', b'cHRM', b'sRGB', b'iCCP'}
@@ -162,11 +163,12 @@ def validate_unprofiled_png(data: bytes):
 
 
 def tracked_bytes_receipt(repo: Path) -> dict:
-    """Bind all tracked bytes to HEAD without Git clean/smudge filters.
+    """Bind tracked raw blobs or hydrated LFS content to HEAD without filters.
 
     Old media blobs can be ordinary binary Git objects despite their LFS
     attributes. A clean filter then reports them dirty even when checkout bytes
-    match HEAD. Do not whitelist those paths or trust a filtered status result.
+    match HEAD. Ordinary blobs must match raw bytes; hydrated LFS files must
+    match the committed pointer size and SHA-256. Never whitelist media paths.
     """
     repo = repo.resolve()
 
@@ -201,6 +203,7 @@ def tracked_bytes_receipt(repo: Path) -> dict:
         if index.get(path) != expected_index.get(path):
             changes.append({'path': os.fsdecode(path), 'reason': 'index differs from HEAD'})
     checked = 0
+    hydrated = 0
     for name, (mode, kind, expected_digest) in expected.items():
         path = repo / os.fsdecode(name)
         reason = None
@@ -222,11 +225,22 @@ def tracked_bytes_receipt(repo: Path) -> dict:
                 if bool(info.st_mode & 0o111) != (mode == b'100755'):
                     raise ValueError('tracked executable mode differs')
                 digest = hashlib.new(algorithm, b'blob ' + str(info.st_size).encode() + b'\0')
+                content_digest = hashlib.sha256()
+                content_size = 0
                 with path.open('rb') as source:
                     for chunk in iter(lambda: source.read(1024 * 1024), b''):
                         digest.update(chunk)
+                        content_digest.update(chunk)
+                        content_size += len(chunk)
             if digest.hexdigest().encode() != expected_digest:
-                raise ValueError('raw Git blob hash differs from HEAD')
+                pointer = b''
+                if mode in (b'100644', b'100755') and int(git(
+                        'cat-file', '-s', expected_digest.decode('ascii'))) <= MAX_LFS_POINTER_BYTES:
+                    pointer = git('cat-file', 'blob', expected_digest.decode('ascii'))
+                if not pointer or not matches_lfs_content(
+                        pointer, content_size, content_digest.hexdigest()):
+                    raise ValueError('raw Git blob hash differs from HEAD')
+                hydrated += 1
             checked += 1
         except (OSError, ValueError) as error:
             reason = str(error) if isinstance(error, ValueError) else type(error).__name__
@@ -234,8 +248,9 @@ def tracked_bytes_receipt(repo: Path) -> dict:
             changes.append({'path': os.fsdecode(name), 'reason': reason})
     if git('rev-parse', 'HEAD').decode().strip() != head or index_entries() != index:
         changes.append({'path': '', 'reason': 'HEAD or index changed during verification'})
-    return {'passed': not changes, 'head_sha': head, 'method': 'unfiltered Git blob hashes, file modes/types, and exact HEAD/index entries',
-        'tracked_entries': len(expected), 'raw_hashes_matched': checked,
+    return {'passed': not changes, 'head_sha': head, 'method': 'unfiltered Git blobs or exact LFS pointer content, file modes/types, and exact HEAD/index entries',
+        'tracked_entries': len(expected), 'raw_hashes_matched': checked - hydrated,
+        'lfs_objects_matched': hydrated,
         'git_status_porcelain': status.stdout.decode('utf-8', errors='replace'),
         'git_status_stderr': status.stderr.decode('utf-8', errors='replace'), 'changes': changes}
 

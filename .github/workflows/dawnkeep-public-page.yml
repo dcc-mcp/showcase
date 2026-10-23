@@ -10,6 +10,7 @@ on:
       - 'scripts/build_site.py'
       - 'scripts/browser_preview.py'
       - 'scripts/test_media_ranges.py'
+      - 'scripts/tracked_file_bytes.py'
       - 'scripts/games.py'
       - 'scripts/playable.py'
       - 'scripts/test_playable_runtime.js'
