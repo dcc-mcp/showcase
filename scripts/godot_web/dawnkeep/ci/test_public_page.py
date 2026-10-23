@@ -121,7 +121,7 @@ class RawTrackedSourceTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         subprocess.run(['git', 'init', '-q', str(self.root)], check=True)
-        (self.root / '.gitattributes').write_text('*.bin filter=fixture\n')
+        (self.root / '.gitattributes').write_bytes(b'*.bin filter=fixture\n')
         (self.root / 'image.bin').write_bytes(b'actual committed image bytes\x00\xff')
         self.git('add', '.gitattributes', 'image.bin')
         self.git('-c', 'user.name=Acceptance fixture', '-c', 'user.email=fixture@example.invalid',
@@ -157,6 +157,59 @@ class RawTrackedSourceTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
             gate.source_receipt(self.root, self.head)
 
+    def commit_pointer(self, payload, pointer=None):
+        if pointer is None:
+            pointer = ('version https://git-lfs.github.com/spec/v1\noid sha256:' +
+                hashlib.sha256(payload).hexdigest() + '\nsize ' + str(len(payload)) + '\n').encode()
+        (self.root / 'image.bin').write_bytes(pointer)
+        self.git('add', 'image.bin')
+        self.git('-c', 'user.name=Acceptance fixture', '-c', 'user.email=fixture@example.invalid',
+                 'commit', '-qm', 'LFS pointer fixture')
+        self.head = self.git('rev-parse', 'HEAD').stdout.strip()
+        (self.root / 'image.bin').write_bytes(payload)
+        return pointer
+
+    def test_hydrated_lfs_and_unhydrated_pointer_both_match(self):
+        pointer = self.commit_pointer(b'actual hydrated media\x00\xff')
+        with patch.object(Path, 'read_bytes', side_effect=AssertionError('Unbounded payload read')):
+            self.assertEqual(gate.verify_tracked_bytes(self.root)['tracked_blobs_checked'], 2)
+        (self.root / 'image.bin').write_bytes(pointer)
+        self.assertEqual(gate.verify_tracked_bytes(self.root)['tracked_blobs_checked'], 2)
+
+    def test_hydrated_lfs_requires_exact_size_and_hash(self):
+        payload = b'actual hydrated media'
+        self.commit_pointer(payload)
+        for wrong in (b'x' * len(payload), payload + b'x', b''):
+            with self.subTest(payload=wrong), patch.object(Path, 'read_bytes',
+                    side_effect=AssertionError('Unbounded payload read')), self.assertRaisesRegex(RuntimeError,
+                    'image.bin: raw tracked bytes differ'):
+                (self.root / 'image.bin').write_bytes(wrong)
+                gate.verify_tracked_bytes(self.root)
+
+    def test_malformed_committed_pointer_cannot_authorize_payload(self):
+        self.commit_pointer(b'actual hydrated media',
+            b'version https://git-lfs.github.com/spec/v1\noid sha256:INVALID\nsize 21\n')
+        with patch.object(Path, 'read_bytes', side_effect=AssertionError('Unbounded payload read')), \
+                self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
+            gate.verify_tracked_bytes(self.root)
+
+    def test_large_committed_blob_is_not_loaded_as_pointer(self):
+        self.commit_pointer(b'changed bytes', b'ordinary committed media' * 20)
+        with patch.object(gate.subprocess, 'check_output',
+                          wraps=subprocess.check_output) as git, \
+                self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
+            gate.verify_tracked_bytes(self.root)
+        self.assertFalse(any('cat-file' in call.args[0] and 'blob' in call.args[0]
+                             for call in git.call_args_list))
+
+    def test_hydrated_lfs_does_not_hide_index_changes(self):
+        self.commit_pointer(b'actual hydrated media')
+        (self.root / 'extra.txt').write_text('staged addition')
+        self.git('add', 'extra.txt')
+        with self.assertRaisesRegex(RuntimeError, 'Tracked index differs'):
+            gate.source_receipt(self.root, self.head)
+
+    @unittest.skipUnless(os.name == 'posix', 'POSIX executable modes')
     def test_executable_mode_mutation_is_fatal(self):
         path = self.root / 'image.bin'
         path.chmod(path.stat().st_mode | stat.S_IXUSR)
