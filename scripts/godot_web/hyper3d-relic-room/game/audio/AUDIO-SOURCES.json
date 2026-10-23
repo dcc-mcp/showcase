@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "pack": "RPG Audio 1.0",
+  "author": "Kenney Vleugels (Kenney.nl)",
+  "source": "https://kenney.nl/assets/rpg-audio",
+  "archive_url": "https://kenney.nl/media/pages/assets/rpg-audio/8e99002d76-1677590336/kenney_rpg-audio.zip",
+  "archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license_file": "../notices/KENNEY-RPG-AUDIO.txt",
+  "license_sha256": "5735dfd72cb64cbbceda4ebc00c380c41ca680edb82ff153aa7c9ab97614c539",
+  "modifications": "None",
+  "files": [
+    {
+      "file": "creak1.ogg",
+      "source_member": "Audio/creak1.ogg",
+      "role": "chest lid",
+      "bytes": 15761,
+      "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e"
+    },
+    {
+      "file": "chop.ogg",
+      "source_member": "Audio/chop.ogg",
+      "role": "confirmed hit",
+      "bytes": 9370,
+      "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486"
+    },
+    {
+      "file": "handleCoins.ogg",
+      "source_member": "Audio/handleCoins.ogg",
+      "role": "loot pickup",
+      "bytes": 25394,
+      "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+    },
+    {
+      "file": "metalLatch.ogg",
+      "source_member": "Audio/metalLatch.ogg",
+      "role": "equip",
+      "bytes": 10208,
+      "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+    },
+    {
+      "file": "footstep00.ogg",
+      "source_member": "Audio/footstep00.ogg",
+      "role": "grounded step",
+      "bytes": 9475,
+      "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+    },
+    {
+      "file": "knifeSlice.ogg",
+      "source_member": "Audio/knifeSlice.ogg",
+      "role": "melee swing",
+      "bytes": 15532,
+      "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+    }
+  ],
+  "acceptance": "Source, license and hashes verified; runtime mix and listening remain separate gates."
+}

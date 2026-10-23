@@ -13,3 +13,17 @@ media/**/*.exr filter=lfs diff=lfs merge=lfs -text
 media/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
 media/**/*.webp filter=lfs diff=lfs merge=lfs -text
 media/**/*.webm filter=lfs diff=lfs merge=lfs -text
+
+# Relic Courier's large, hash-pinned payloads are materialized before site checks.
+docs/showcase/hyper3d-relic-room/showcase.mp4 filter=lfs diff=lfs merge=lfs -text
+docs/showcase/hyper3d-relic-room/RelicCourier-native.zip filter=lfs diff=lfs merge=lfs -text
+play/hyper3d-relic-room/relic-bc6af9db60ea.pck filter=lfs diff=lfs merge=lfs -text
+scripts/godot_web/hyper3d-relic-room/game/assets/courier-character.glb filter=lfs diff=lfs merge=lfs -text
+scripts/godot_web/hyper3d-relic-room/game/assets/guardian-character.glb filter=lfs diff=lfs merge=lfs -text
+
+# Keep pinned export/source CRLF and original notice bytes without rewriting their receipts.
+play/hyper3d-relic-room/** whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/godot_web/hyper3d-relic-room/** whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+play/hyper3d-relic-room/index.html whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+scripts/godot_web/hyper3d-relic-room/game/notices/KENNEY-RPG-AUDIO.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/godot_web/hyper3d-relic-room/game/notices/kenney-player-original.gd.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

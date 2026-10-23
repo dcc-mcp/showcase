@@ -82,4 +82,8 @@ def materialize():
             if len(data)!=entry['bytes'] or hashlib.sha256(data).hexdigest()!=entry['sha256']:raise ValueError('Runtime byte mismatch: '+name)
             dest=ROOT/path;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
     print('Materialized four SHA-256-verified Godot runtime files for same-origin Pages hosting.')
-if __name__=='__main__':materialize()
+if __name__=='__main__':
+    materialize()
+    # The same pinned-data preparation also works in exact-head git archives.
+    import runpy
+    runpy.run_path(str(ROOT/'scripts/godot_web/hyper3d-relic-room/materialize_assets.py'), run_name='__main__')
