@@ -1,0 +1,216 @@
+{
+  "arch": {
+    "path": "res://assets/arch.glb",
+    "height": 3.5
+  },
+  "column": {
+    "path": "res://assets/column.glb",
+    "height": 2.4
+  },
+  "gate": {
+    "path": "res://assets/gate.glb",
+    "height": 2.7
+  },
+  "crystal": {
+    "path": "res://assets/crystal.glb",
+    "height": 0.7
+  },
+  "pedestal": {
+    "path": "res://assets/pedestal.glb",
+    "height": 1.0
+  },
+  "portal": {
+    "path": "res://assets/portal.glb",
+    "height": 3.0
+  },
+  "guardian": {
+    "path": "res://assets/guardian.glb",
+    "height": 2.3
+  },
+  "chest": {
+    "path": "res://assets/chest.glb",
+    "height": 0.9
+  },
+  "stairs": {
+    "path": "res://assets/stairs.glb",
+    "height": 0.8
+  },
+  "shrine": {
+    "path": "res://assets/shrine.glb",
+    "height": 2.8
+  },
+  "courier_character": {
+    "path": "res://assets/courier-character.glb",
+    "height": 1.65,
+    "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2",
+    "source_glb_sha256": "4831d672f8ae37be04f0525ae1dfd8ffe6198039c53d375ab9b8bc05a2ee559c",
+    "source_concept": {
+      "name": "courier-input-white.png",
+      "sha256": "5db48d1b6db3d15bcedca1c8d6623a52bbfa5baa04db0b79dbfd34cf05e678fa",
+      "origin": "approved original ImageGen single-view concept"
+    },
+    "provider_route": {
+      "provider": "Hyper3D",
+      "api": "POST /api/v2/rodin",
+      "submission_transport": "actual MCP HTTP tools/call create_rodin_task",
+      "core_version": "0.20.46",
+      "skill_version": "0.1.2",
+      "parameters": {
+        "tier": "Gen-2.5-High",
+        "mesh_mode": "Raw",
+        "quality_override": 30000,
+        "material": "PBR",
+        "texture_mode": "high",
+        "geometry_file_format": "glb",
+        "TAPose": true,
+        "is_symmetric": "balanced",
+        "preview_render": true,
+        "use_original_alpha": false,
+        "seed": 313
+      }
+    },
+    "authored_rig": {
+      "dcc": "Blender 5.2.0 LTS",
+      "adapter_version": "0.2.4",
+      "bone_count": 17,
+      "weighted_deform_bones": 16,
+      "weights": "Native heat on temporary welded proxy; exact-position transfer, top4 normalized",
+      "clips_seconds": {
+        "Idle": 2.0,
+        "Walk": 1.0,
+        "Dash": 0.25,
+        "Attack": 0.45,
+        "Cast": 0.65
+      },
+      "root_motion": false,
+      "forward_axis": "-Z",
+      "up_axis": "+Y",
+      "rest_height_m": 1.65,
+      "authorship": "Blender-authored rig and clips; Hyper3D generated mesh/UV/PBR only",
+      "event_seconds": {
+        "Attack": 0.18,
+        "Cast": 0.32
+      },
+      "nonloop_clips": [
+        "Attack",
+        "Cast"
+      ],
+      "animation_preservation": "Original Idle/Walk/Dash descriptors and animation accessor bytes unchanged"
+    },
+    "material_preservation": "All three embedded source PNG payloads and PBR channel bindings unchanged; source UV values preserved",
+    "validation": "Original three-clip instrumented Godot motion passed; new ARPG GLB payload preservation, native static poses and isolated Godot4.6.3 import/articulation/nonloop stop passed; full ARPG gameplay/OS/Web pending"
+  },
+  "guardian_character": {
+    "path": "res://assets/guardian-character.glb",
+    "height": 3.1,
+    "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60",
+    "source_glb_sha256": "a6b0bd4ffa9dce137026cce0e80cbe536158641145c7a093729c795f996f87cd",
+    "source_concept": {
+      "name": "guardian-concept-01.png",
+      "sha256": "be40db89eaabefa678ae734763d0084670b8811396233c630e219586bca320ce",
+      "origin": "approved original ImageGen single-view concept"
+    },
+    "provider_route": {
+      "provider": "Hyper3D",
+      "api": "POST /api/v2/rodin",
+      "submission_transport": "actual MCP HTTP tools/call create_rodin_task",
+      "core_version": "0.20.46",
+      "skill_version": "0.1.2",
+      "parameters": {
+        "tier": "Gen-2.5-High",
+        "mesh_mode": "Raw",
+        "quality_override": 30000,
+        "material": "PBR",
+        "texture_mode": "high",
+        "geometry_file_format": "glb",
+        "TAPose": true,
+        "is_symmetric": "balanced",
+        "preview_render": true,
+        "use_original_alpha": false,
+        "seed": 317
+      }
+    },
+    "authored_rig": {
+      "dcc": "Blender 5.2.0 LTS",
+      "adapter_version": "0.2.4",
+      "bone_count": 17,
+      "weighted_deform_bones": 16,
+      "weights": "Native heat on temporary welded proxy; exact-position transfer, top4 normalized",
+      "clips_seconds": {
+        "Idle": 2.0,
+        "Walk": 1.0,
+        "Dash": 0.25,
+        "Attack": 0.65
+      },
+      "root_motion": false,
+      "forward_axis": "-Z",
+      "up_axis": "+Y",
+      "rest_height_m": 1.65,
+      "authorship": "Blender-authored rig and clips; Hyper3D generated mesh/UV/PBR only",
+      "event_seconds": {
+        "Attack": 0.38
+      },
+      "nonloop_clips": [
+        "Attack"
+      ],
+      "animation_preservation": "Original Idle/Walk/Dash descriptors and animation accessor bytes unchanged"
+    },
+    "material_preservation": "All three embedded source PNG payloads and PBR channel bindings unchanged; source UV values preserved",
+    "validation": "Original three-clip instrumented Godot motion passed; new ARPG GLB payload preservation, native static poses and isolated Godot4.6.3 import/articulation/nonloop stop passed; full ARPG gameplay/OS/Web pending"
+  },
+  "chest_interactive": {
+    "path": "res://assets/chest-interactive.glb",
+    "height": 1.35,
+    "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5",
+    "source_glb_sha256": "060fbec0f44be2b69736e502f2d8f8b37d2d1f86648a1ce5f833c361869d261e",
+    "source_parent": {
+      "path": "res://assets/chest.glb",
+      "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+      "processing": "Existing V2 parent retains original provider images reduced to1024 and original channel links"
+    },
+    "provider_route": {
+      "provider": "Hyper3D",
+      "api": "POST /api/v2/rodin_texture_only",
+      "historical_case": "2026-10-23 first-round-texture",
+      "file": "retextured-chest.glb"
+    },
+    "authored_interaction": {
+      "dcc": "Blender5.2.0 LTS",
+      "root_node": "ChestInteractive",
+      "base_node": "Base",
+      "hinge": {
+        "node": "Lid",
+        "children": [
+          "LidExterior",
+          "LidInterior"
+        ],
+        "pivot_xyz": [
+          0,
+          1.221228003501892,
+          -0.800000011920929
+        ],
+        "axis": "X",
+        "closed_degrees": 0,
+        "open_degrees": -100,
+        "front_axis": "+Z"
+      },
+      "source_closed_height_m": 1.8765920400619507,
+      "exterior": "Actual generated lid/base surface partition at observed seam; original vertices/UVs retained, cut-edge UV/normals interpolated",
+      "interior": "Authored wood lining5quads andlid underside1quad; separate authored material",
+      "triangles": 5338,
+      "authorship": "Hyper3D exterior mesh/UV/PBR; Blender-authored partition, hinge and interior"
+    },
+    "material_preservation": "All three embedded V2 parent PNG payloads and exterior PBR channel bindings unchanged",
+    "validation": "Closed source comparison and actual native open pose reviewed; GLB UV/image checks and isolated Godot4.6.3 Lid rotation/Basefixed/close-restoration probe passed; gameplay/OS/Web pending"
+  },
+  "bronze_edge": {
+    "path": "res://assets/reused/bronze-edge.glb",
+    "height": 0.65,
+    "origin": "KayKit Adventurers CC0 independent sword mesh; see assets/reused/SOURCE.json"
+  },
+  "grove_tree": {
+    "path": "res://assets/reused/grove-tree.glb",
+    "height": 5.2,
+    "origin": "KayKit Forest CC0; see assets/reused/SOURCE.json"
+  }
+}

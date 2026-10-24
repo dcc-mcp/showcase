@@ -1,0 +1,1255 @@
+{
+  "schema_version": 2,
+  "revision": "v2-material-and-shrine-detail-candidate",
+  "source": "Existing authorized Hyper3D output originals; no additional API submissions",
+  "total_glb_bytes": 16279380,
+  "unique_assets": 10,
+  "unique_triangles": 103699,
+  "hero_texture_max_side_pixels": 1024,
+  "background_texture_max_side_pixels": 512,
+  "original_source_hashes_unchanged": true,
+  "v1_bytes_preserved_and_hash_verified": true,
+  "normalization": "No size/pivot/orientation normalization baked beyond native format conversion; per-instance display heights remain the game scene owner's responsibility.",
+  "native_runtime": {
+    "application": "Blender",
+    "version": "5.2.0 LTS",
+    "adapter": "0.2.4",
+    "core": "0.20.41"
+  },
+  "authored_material_separation": "Column stone maps are original Blender Noise/Bump material bakes, not Hyper3D-provided detail. All other selected images retain provider provenance.",
+  "bounded_script_gaps": [
+    "Explicit referenced-image resize/pack properties",
+    "Data-image Non-Color property and packing after typed assignment",
+    "Smart UV angle_limit30degrees absent from typed unwrap schema; typed default had7 overlap pairs",
+    "Triangle readback"
+  ],
+  "typed_api_issue_observed": "Installed merge_vertices tool selects unavailable merge_by_distance operator in Blender5.2. TypedWELD modifier/apply used instead. No adapter source was modified.",
+  "preview_status": "needs_refinement; the native near view establishes portable textures, final lighting/material treatment and text contrast remain under revision",
+  "web_budget_scope": "GLBs only. Higher-detail shrine raises the10-asset total above the earlier15MB target; finalPCK/runtime budget must be remeasured after characters and scene acceptance.",
+  "assets": [
+    {
+      "asset": "shrine",
+      "path": "assets/shrine.glb",
+      "source": {
+        "case": "R1-shrine",
+        "filename": "highpoly_high_pbr.glb",
+        "format": "GLB",
+        "size_bytes": 19401668,
+        "sha256": "ea17bdcefe4f76b496b6501ed74bd7692032d076f8db4de39d0f92dfee12e210",
+        "mesh_count": 1,
+        "native_vertices": 310495,
+        "triangles": 559968
+      },
+      "v1": {
+        "size_bytes": 1188940,
+        "sha256": "a44a3b3c9386bdecf6454d4e208e37de331fb0aa84c0867d8e330527fb9f2047",
+        "triangles": 5000,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 4550948,
+        "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7",
+        "triangles": 60000,
+        "accessor_vertices": 45148,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.029",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.029",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.029",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": true,
+      "material_provenance": "Original provider1024 images and UV/PBR channel links retained; decoded texture pixels match the immutable source.",
+      "geometry_processing": {
+        "target_triangles": 60000,
+        "same_procedure_as_v1": false,
+        "operation": "Native DECIMATE from the immutable559968-triangle source; exact exported GLB reimported and rendered.",
+        "reason": "The prior5000-triangle candidate had visible triangular roof/gem/base artifacts at close range.",
+        "prior_v2_triangles": 5000,
+        "source_triangles": 559968,
+        "retained_source_fraction": 0.10714897994171095
+      },
+      "native_exact_v2_reimport": "PASS",
+      "prior_v2": {
+        "size_bytes": 2973192,
+        "sha256": "85535901cbd027917dc51ff75b88588f5b2fbc81e2dc9a90f8af6d54512692af",
+        "triangles": 5000,
+        "accessor_vertices": 6156,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.014",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.014",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.014",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "native_close_review": {
+        "scope": "Same-camera1280x720 near frame; previously observed roof/gem/base artifacts removed. Single near angle does not establish all-angle or final-game visual acceptance.",
+        "status": "PASS for the identified near-angle regression in Blender and fresh native Godot; root reviewed the source/prior/repaired comparison. Other views and final-game acceptance remain separate.",
+        "image_sha256": "b5f11586c99377b4b37060d4fae67aee43df6ec27e87b51823daff004b8a8628",
+        "decoded_image_pixels": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "mode": "RGB",
+            "decoded_pixels_sha256": "6e45a320a8f5b6dcba902423a000c4c31d61a8f3c6268d80f3a9415a2e9b5819"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "mode": "RGB",
+            "decoded_pixels_sha256": "1257d2c17679777dba092b11b3efb11208bf40128818f94611df249f8b9a005c"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "mode": "RGB",
+            "decoded_pixels_sha256": "f6e5013a92da000843a703088d55b1fd30353cc15ebd15320a5bf7e6806d1739"
+          }
+        ],
+        "godot_runtime_glb_sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7",
+        "godot_close_image_sha256": "7a054d0bd08b49820c4d4afc4942cb46656ec4f41d0429943cf920ee5b137126"
+      }
+    },
+    {
+      "asset": "stairs",
+      "path": "assets/stairs.glb",
+      "source": {
+        "case": "R4-stairs",
+        "filename": "base_basic_pbr.fbx",
+        "format": "FBX",
+        "size_bytes": 12998524,
+        "sha256": "5bd197fdb8d8ffe73d94482355d0f0a38b94e5d3c6f4dd8188c27358fedfa5d9",
+        "mesh_count": 1,
+        "native_vertices": 47696,
+        "triangles": 95388
+      },
+      "v1": {
+        "size_bytes": 1081016,
+        "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556",
+        "triangles": 5000,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 1081016,
+        "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556",
+        "triangles": 5000,
+        "accessor_vertices": 3789,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.002",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.002",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.002",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": false,
+      "material_provenance": "Source materials preserved",
+      "geometry_processing": {
+        "unchanged_from_v1": true
+      },
+      "native_exact_v2_reimport": "V1unchanged; prior native import evidence retained"
+    },
+    {
+      "asset": "column",
+      "path": "assets/column.glb",
+      "source": {
+        "case": "R2-column",
+        "filename": "base.stl",
+        "format": "STL",
+        "size_bytes": 200084,
+        "sha256": "30000fac6ed1d7cbdc8d05f85b9111f24377ac45a5b819130b3f65f475229b01",
+        "mesh_count": 1,
+        "native_vertices": 2002,
+        "triangles": 4000
+      },
+      "v1": {
+        "size_bytes": 310064,
+        "sha256": "1d32df69aa994d8194d2667cedc19395ee4f38ba631b94fb60b1458b50d712d9",
+        "triangles": 4000,
+        "image_sizes_pixels": []
+      },
+      "v2": {
+        "size_bytes": 1308584,
+        "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9",
+        "triangles": 4000,
+        "accessor_vertices": 11867,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "base_002_normal",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "base_002_emit",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "base_002_roughness",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "V2_Column_AuthoredStone_Baked",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "base_002_emit",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "V2_Column_AuthoredStone_Baked",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "base_002_roughness",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "V2_Column_AuthoredStone_Baked",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "base_002_normal",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": true,
+      "material_provenance": "Original authored Blender stone baked to UV albedo, roughness and normal bitmaps; not provider texture detail.",
+      "geometry_processing": {
+        "typed_weld_threshold_native_units": 1e-05,
+        "triangles_unchanged": true,
+        "uv_maps_before": 0,
+        "uv_maps_after": 1,
+        "uv_islands": 461,
+        "uv_audit": "PASS: finite, nondegenerate, unit tile, no positive-area overlaps",
+        "smart_uv_angle_degrees": 30,
+        "packing_margin": 0.012,
+        "bake_resolution_pixels": 512,
+        "bake_margin_pixels": 8
+      },
+      "native_exact_v2_reimport": "PASS"
+    },
+    {
+      "asset": "arch",
+      "path": "assets/arch.glb",
+      "source": {
+        "case": "R3-arch",
+        "filename": "base_basic_shaded.usdz",
+        "format": "USDZ",
+        "size_bytes": 3068267,
+        "sha256": "7fe22eb6d4d8893d92fa1ae2d376c6d498826ffc882ddf47f17312a45c8aa2a6",
+        "mesh_count": 1,
+        "native_vertices": 8534,
+        "triangles": 17064
+      },
+      "v1": {
+        "size_bytes": 309912,
+        "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b",
+        "triangles": 5000,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 309912,
+        "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b",
+        "triangles": 5000,
+        "accessor_vertices": 3503,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "shaded",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": []
+      },
+      "changed_from_v1": false,
+      "material_provenance": "Source materials preserved; selected Shaded USDZ output, not a PBR source variant",
+      "geometry_processing": {
+        "unchanged_from_v1": true
+      },
+      "native_exact_v2_reimport": "V1unchanged; prior native import evidence retained"
+    },
+    {
+      "asset": "crystal",
+      "path": "assets/crystal.glb",
+      "source": {
+        "case": "R6-crystal",
+        "filename": "base_basic_pbr.glb",
+        "format": "GLB",
+        "size_bytes": 716516,
+        "sha256": "c5917a12e700000516cf9f8d8a4cbb33d93fdf435600061bafdb4d8774152209",
+        "mesh_count": 1,
+        "native_vertices": 3372,
+        "triangles": 4788
+      },
+      "v1": {
+        "size_bytes": 692044,
+        "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf",
+        "triangles": 4788,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 692044,
+        "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf",
+        "triangles": 4788,
+        "accessor_vertices": 3374,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "normal",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "diffuse",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "orm",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "Material_0",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "diffuse",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "Material_0",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "orm",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "Material_0",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "normal",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": false,
+      "material_provenance": "Source materials preserved",
+      "geometry_processing": {
+        "unchanged_from_v1": true
+      },
+      "native_exact_v2_reimport": "V1unchanged; prior native import evidence retained"
+    },
+    {
+      "asset": "gate",
+      "path": "assets/gate.glb",
+      "source": {
+        "case": "R5-gate",
+        "filename": "base_basic_pbr.glb",
+        "format": "GLB",
+        "size_bytes": 7509940,
+        "sha256": "57b7aeb0c4ef31fe6f24d1f3653122b0aa1bf8938e3742f40d1bfc0beff81a88",
+        "mesh_count": 1,
+        "native_vertices": 19081,
+        "triangles": 35198
+      },
+      "v1": {
+        "size_bytes": 765352,
+        "sha256": "76c540dda3b4cc2153d888344ed1fc17ccbd889085ad407f07ee0251d80f1f44",
+        "triangles": 5000,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 2213668,
+        "sha256": "06d83425c4e3880eb2759cad754d52942e417851ab0d4fe7a8faa436fd7dd958",
+        "triangles": 5000,
+        "accessor_vertices": 3967,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.020",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.020",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.020",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": true,
+      "material_provenance": "Original provider images restored and reduced to1024; source material channel links preserved.",
+      "geometry_processing": {
+        "target_triangles": 5000,
+        "same_procedure_as_v1": true
+      },
+      "native_exact_v2_reimport": "PASS"
+    },
+    {
+      "asset": "guardian",
+      "path": "assets/guardian.glb",
+      "source": {
+        "case": "R9-guardian",
+        "filename": "base_basic_pbr.glb",
+        "format": "GLB",
+        "size_bytes": 6923580,
+        "sha256": "27635273d20da5786f607de3f8684f3cb7bf58aacb6b34201978eb028e2ab673",
+        "mesh_count": 1,
+        "native_vertices": 4691,
+        "triangles": 5000
+      },
+      "v1": {
+        "size_bytes": 705016,
+        "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1",
+        "triangles": 5000,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 705016,
+        "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1",
+        "triangles": 5000,
+        "accessor_vertices": 4703,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.008",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.008",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.008",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": false,
+      "material_provenance": "Source materials preserved",
+      "geometry_processing": {
+        "unchanged_from_v1": true
+      },
+      "native_exact_v2_reimport": "V1unchanged; prior native import evidence retained"
+    },
+    {
+      "asset": "pedestal",
+      "path": "assets/pedestal.glb",
+      "source": {
+        "case": "R7-pedestal",
+        "filename": "base_basic_pbr.glb",
+        "format": "GLB",
+        "size_bytes": 742316,
+        "sha256": "75dbe5e459c375d1c0257754d0a0251f8885a0cccf6174d8c7beac7a0aeab1c3",
+        "mesh_count": 1,
+        "native_vertices": 3386,
+        "triangles": 4912
+      },
+      "v1": {
+        "size_bytes": 680392,
+        "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84",
+        "triangles": 4912,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 680392,
+        "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84",
+        "triangles": 4912,
+        "accessor_vertices": 3400,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "normal",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "diffuse",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "orm",
+            "size": [
+              512,
+              512
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "Material_0.002",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "diffuse",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "Material_0.002",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "orm",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "Material_0.002",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "normal",
+            "size_pixels": [
+              512,
+              512
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": false,
+      "material_provenance": "Source materials preserved",
+      "geometry_processing": {
+        "unchanged_from_v1": true
+      },
+      "native_exact_v2_reimport": "V1unchanged; prior native import evidence retained"
+    },
+    {
+      "asset": "portal",
+      "path": "assets/portal.glb",
+      "source": {
+        "case": "R8-portal",
+        "filename": "base_basic_pbr.glb",
+        "format": "GLB",
+        "size_bytes": 15836304,
+        "sha256": "85077f322be243ee726d7b85409073ecbff16f23f7062276e7d5e3dcf7bab12c",
+        "mesh_count": 1,
+        "native_vertices": 9361,
+        "triangles": 16528
+      },
+      "v1": {
+        "size_bytes": 773920,
+        "sha256": "28c3ae68a180a89b200c550e3897b3b9290f19d070e57081b4999554910d2bcb",
+        "triangles": 4999,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 2592960,
+        "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2",
+        "triangles": 4999,
+        "accessor_vertices": 3459,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.016",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.016",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.016",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": true,
+      "material_provenance": "Original provider images restored and reduced to1024; source material channel links preserved.",
+      "geometry_processing": {
+        "target_triangles": 5000,
+        "same_procedure_as_v1": true
+      },
+      "native_exact_v2_reimport": "PASS"
+    },
+    {
+      "asset": "chest",
+      "path": "assets/chest.glb",
+      "source": {
+        "case": "first-round-texture",
+        "filename": "retextured-chest.glb",
+        "format": "GLB",
+        "size_bytes": 6260184,
+        "sha256": "060fbec0f44be2b69736e502f2d8f8b37d2d1f86648a1ce5f833c361869d261e",
+        "mesh_count": 1,
+        "native_vertices": 6785,
+        "triangles": 5000
+      },
+      "v1": {
+        "size_bytes": 777484,
+        "sha256": "884f8a959654f72c69b309ae68271ff46337bce9f18923e1a8e0e6334681c5b5",
+        "triangles": 5000,
+        "image_sizes_pixels": [
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ],
+          [
+            512,
+            512
+          ]
+        ]
+      },
+      "v2": {
+        "size_bytes": 2144840,
+        "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+        "triangles": 5000,
+        "accessor_vertices": 6786,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.018",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.018",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.018",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "changed_from_v1": true,
+      "material_provenance": "Original provider images restored and reduced to1024; source material channel links preserved.",
+      "geometry_processing": {
+        "target_triangles": 5000,
+        "same_procedure_as_v1": true
+      },
+      "native_exact_v2_reimport": "PASS"
+    }
+  ],
+  "native_preview_evidence": {
+    "source": "Actual native Godot4.6.3 GPU framebuffer",
+    "review_verdict": "needs_refinement",
+    "samples": [
+      {
+        "name": "arrival-wide-01.png",
+        "bytes": 467914,
+        "sha256": "84fb9fd40a02fd2b517c51dddc1482b1382608c4729a2edde57aecde7fc32a4a",
+        "source": "actual native Godot 4.6.3 GPU framebuffer"
+      },
+      {
+        "name": "hero-close-01.png",
+        "bytes": 790485,
+        "sha256": "7e0320addbd227504bace1bf5f1e67d5eebe2914ae5354c88c239f533bb57fdf",
+        "source": "actual native Godot 4.6.3 GPU framebuffer"
+      }
+    ],
+    "asset_observations": [
+      "Restored portalmetal/source textures and shrine detail are visible in nativeGodot",
+      "Authored baked stone grain on the right foreground column is visible in nativeGodot",
+      "Pale portalbase, arches and guardian still need controlled native lighting/material treatment"
+    ],
+    "not_claimed": [
+      "Final visualacceptance",
+      "V2winningOSinputcourse",
+      "V2Webinput",
+      "NativeZIP/PCK/publiccase refresh"
+    ]
+  }
+}

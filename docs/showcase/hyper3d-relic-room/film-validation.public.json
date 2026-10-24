@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "scope": "Scripted native Godot GPU course with editorial title, source/authorship card and final-frame hold. Separate from real OS/Web input acceptance.",
+  "artifact": {
+    "file": "showcase.mp4",
+    "bytes": 20157741,
+    "sha256": "134579f9e7995f038764b7a27989e6bd073eb62ec2b8d8b75054ceeba1059634",
+    "width": 1280,
+    "height": 720,
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "fps": "30/1",
+    "frames": 1771,
+    "duration_seconds": 59.03333333333333,
+    "audio_codec": "aac",
+    "audio_sample_rate_hz": 48000,
+    "audio_channels": 2,
+    "faststart": true
+  },
+  "staging": {
+    "byte_identical_to_review02": true,
+    "destination_sha256_verified": true,
+    "destination_full_decode": "PASS",
+    "destination_decode_errors": 0
+  },
+  "source_course": {
+    "file_basename": "continuous-02.avi",
+    "sha256": "621b99bef0f42d2456e0b9a0da78a31cb3115c669d7c8b34837e1d6c64f59a5b",
+    "bytes": 140377294,
+    "source_hash_reverified_at_staging": true,
+    "source_frames": 1351,
+    "duration_seconds": 45.03333333333333,
+    "retained_frames": 1351,
+    "cuts": 0,
+    "retimed": false,
+    "source_unchanged": true,
+    "full_frame_preserved_without_crop": true,
+    "presentation_size_pixels": [
+      1152,
+      648
+    ],
+    "presentation_note": "Uniformly fit into the1280x720 editorial canvas with a separate bottom caption strip; pixels are resampled and lossily encoded.",
+    "adopted_transcode_sha256": "94750fb99732148e08c67141e8974426bc4b77103373b7b027619e34df9aec9e",
+    "runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19"
+  },
+  "timeline": [
+    {
+      "scene": "title",
+      "frames": 90,
+      "seconds": 3
+    },
+    {
+      "scene": "source_and_authorship",
+      "frames": 180,
+      "seconds": 6
+    },
+    {
+      "scene": "complete_native_scripted_course",
+      "frames": 1351,
+      "seconds": 45.03333333333333
+    },
+    {
+      "scene": "final_source_frame_editorial_hold",
+      "frames": 150,
+      "seconds": 5,
+      "source_frame_index": 1350,
+      "editorial_not_additional_gameplay": true
+    }
+  ],
+  "hyperframes_check": {
+    "source_report_basename": "check-03.json",
+    "source_report_sha256": "7bd367e59384da015406fd71bd0fa68ce45b55b5d5a6a0513bcf52b8a1ef4dac",
+    "version": "0.8.189",
+    "ok": true,
+    "browser_skipped": false,
+    "lint_findings": 0,
+    "runtime_findings": 0,
+    "layout_findings": 0,
+    "contrast_passed": 19,
+    "contrast_checked": 19,
+    "craft_findings": 0,
+    "craft_samples": 474
+  },
+  "review02": {
+    "source_report_basename": "film-review-02.public.json",
+    "source_report_sha256": "2161c6d8ba275474d95a8f3b43025e7a5adf1a712a7ad5c01ae0958b62d030a8",
+    "full_decode_errors": 0,
+    "course_frame_comparison": {
+      "method": "Full course output region vs same-index bicubic-scaled source, decoded SSIM; lossy encodings/resampling differ",
+      "compared_frames": 1351,
+      "mean_ssim": 0.9864378978534419,
+      "minimum_ssim": 0.975314,
+      "lowest_frame_indices": [
+        [
+          1165,
+          0.975314
+        ],
+        [
+          1185,
+          0.976603
+        ],
+        [
+          1161,
+          0.976729
+        ],
+        [
+          1181,
+          0.976784
+        ],
+        [
+          1169,
+          0.976799
+        ],
+        [
+          1157,
+          0.976825
+        ],
+        [
+          1149,
+          0.976915
+        ],
+        [
+          1145,
+          0.976967
+        ]
+      ],
+      "source_frames": 1351,
+      "output_course_region": [
+        64,
+        0,
+        1152,
+        648
+      ]
+    },
+    "audio_decoded_pcm_samples_per_channel": 2834432,
+    "audio_statistics": {
+      "scalar_samples": 5668864,
+      "nonzero_samples": 2454342,
+      "digital_zero_samples": 3214522,
+      "full_scale_rail_samples": 0,
+      "peak_dbfs": -8.12080288826705,
+      "rms_dbfs": -33.58078294332517
+    },
+    "course_audio_correlation_at_9_seconds": 0.9983200318214737,
+    "silent_editorial_cards_and_ending_hold_intentional": true
+  },
+  "pixel_review": {
+    "receipt": "film-pixel-review.public.json",
+    "sha256": "5697c16d0ee18b2f49014a4856556a858bcb2643636f65a7900d59ba884a12e5",
+    "root_review": "PASS; first, course-middle and last frames inspected",
+    "natural_speed_playback": "NOT_RUN",
+    "subjective_listening": "NOT_RUN"
+  },
+  "natural_speed_playback": "NOT_RUN",
+  "subjective_listening": "NOT_RUN",
+  "new_generation_calls": false,
+  "publication": "NOT_CLAIMED",
+  "final_pixel_review": {
+    "receipt": "film-pixel-review.public.json",
+    "sha256": "5697c16d0ee18b2f49014a4856556a858bcb2643636f65a7900d59ba884a12e5",
+    "root_review": "PASS; first, course-middle and last frames inspected",
+    "natural_speed_playback": "NOT_RUN",
+    "subjective_listening": "NOT_RUN"
+  },
+  "later_revision": {
+    "receipt": "save-recovery.public.json",
+    "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+    "scope": "Later save/restart correction; published footage was not rerendered and does not prove these changed failure paths."
+  }
+}

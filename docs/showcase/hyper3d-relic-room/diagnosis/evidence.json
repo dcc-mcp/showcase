@@ -1,0 +1,2154 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "status": "HISTORICAL_STATIC_SOURCE_DERIVATIVE_DIAGNOSIS",
+  "scope": "Historical source, previous derivative and static native import diagnosis at diagnosis time. Current ARPG adventure acceptance is not covered here; later os-acceptance.public.json and web-acceptance.public.json separately record native OS course/reopen and Web input smoke gates.",
+  "environment": {
+    "blender": {
+      "application": "Blender",
+      "version": "5.2.0 LTS",
+      "adapter": "0.2.4",
+      "core": "0.20.41",
+      "renderer": "EEVEE",
+      "samples": 32
+    },
+    "godot": {
+      "application": "Godot",
+      "version": "4.6.3-stable (official)",
+      "renderer": "gl_compatibility",
+      "device": "NVIDIA GeForce RTX 5080"
+    }
+  },
+  "image_previews": [
+    {
+      "path": "diagnosis/chest-source.jpg",
+      "origin": "Blender immutable provider original",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "555ea1bfea3374227b709c45b5baae0fd1c84a08d4017fae916c7462529192bd",
+      "native_png_bytes": 898847,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "8267a53f4c30ad3a256a3fed379530af11abbe1e306e205b9c43a3e841206321",
+      "metadata_stripped_png_sha256": "1dc2b2ba51fd416adfac2bb4df9416b39f4a60427d479a2d7d16288152e2cccf",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "7da2aa373b2decf5392a3842a769f5e22afe2dc4e20f4a9a6a9126a44fc5704b",
+      "public_jpeg_sha256": "7531ab51b184b935ff10ef0426ba73fc343b673e162e4acf2a37aa5a059a07cb",
+      "public_jpeg_bytes": 51278,
+      "public_decoded_rgb_sha256": "c7f628eb40dba4841a5d320087d0ea98a5b93cb8ff577d46006b3faa8dad1713",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/chest-previous-v2.jpg",
+      "origin": "Blender exact prior V2 derivative",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "12ebfc542dd72770c5377e34e58766cdc48a8e351630ac96218fd505911275b5",
+      "native_png_bytes": 887919,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "dea443083b24f201a3e5d3c2bb2e05368e4a66c47ff0742bbb43e033070d5baa",
+      "metadata_stripped_png_sha256": "1138afbfee42c0c6c565e5b98a7e2b4468949a788a22a8477be10a63c3c8b85c",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "ed02344a6cfa17b84ec5c0ae84200411def5167661542e5474db0d182d481e51",
+      "public_jpeg_sha256": "482a2088153c38bf656f51d04e8f1ce3d28977e5cd0fba6147ce68751b2019f8",
+      "public_jpeg_bytes": 50081,
+      "public_decoded_rgb_sha256": "b67401864debe85c5cb39f2aeb37535e00ddd8564c0bfa2a9cf5242345216ebd",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/portal-source.jpg",
+      "origin": "Blender immutable provider original",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "7814c0f106f1693f169a15a4a27f089f22a5eb7ecfd26859ceeb29ac56e31487",
+      "native_png_bytes": 633683,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "09b4d5a45b47857e555e051b6d79204fdc92cdd7f046904514405699b5331691",
+      "metadata_stripped_png_sha256": "e28375cb3622612f37ce267c1348b837e4c0ad8d4841ce800750c6bcce50b6fd",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "36733ec46c21d77db67b39cfc474ebdf26776e087bf4551256af5fb5489f002b",
+      "public_jpeg_sha256": "4652ae9f2866118d8963e956599ce006e95a271d47d30856de6ab52570a2a998",
+      "public_jpeg_bytes": 41969,
+      "public_decoded_rgb_sha256": "b9dec176e12da728ce8e3710da01cc3861dc8bc3630855cc9660c62b00a6256b",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/portal-previous-v2.jpg",
+      "origin": "Blender exact prior V2 derivative",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "fb829cbf37eadfeb150eb2f00cc489f9c434c3b254c1cde897880869066fd648",
+      "native_png_bytes": 615573,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "ae9fac1b4d38d724d917c27545ff01969f3d4b073da9011c64f7d4c4dbbda14a",
+      "metadata_stripped_png_sha256": "810a907d3a7ff506c2ede20953daf2c9900bd6243c186b32d73d781e0375a67e",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "1f095ea8625d40b8850d952bffb7faba4096687b6f06a34b0c39aa598292e558",
+      "public_jpeg_sha256": "1c89310dd094a98716b29458d1b0be8c1a353c481ed53fed578e330fd2b1f73f",
+      "public_jpeg_bytes": 40727,
+      "public_decoded_rgb_sha256": "87855e40c9a4bc7a3c6ba12a0896eb6c444081a65f04aa489fa58262d0124d9d",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/shrine-source.jpg",
+      "origin": "Blender immutable provider original",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "7b932bc1b2f4b69eb41ffebcee1d3d9b1d739020152299858be5c8d963cd9742",
+      "native_png_bytes": 709304,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "3d6656935ea55b4ef0f7e3e67d113e5f5b1a82f9969b07a372090e8f79ceac49",
+      "metadata_stripped_png_sha256": "54dc38af8a69d0426d2db19773181958d3def8429383130e5b65eb4a7d41f5c1",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "b444b9fe59ecd4cfd3c275c9da659a8510eab193e2bcc4e9ba98c923acfe45fe",
+      "public_jpeg_sha256": "1e87ee50ef5d4810124e8729c0283ac740dd0124f579dc1cbe46d88cbb201aba",
+      "public_jpeg_bytes": 55201,
+      "public_decoded_rgb_sha256": "5d5bb92d4c916c0be67ff0e0480ecb9223f573ea0ae57b5fa7e0ef1991454add",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/shrine-previous-v2-5k.jpg",
+      "origin": "Blender exact rejected V2 derivative",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "1879a1150636c6e8d2149a3afbed06abcf2fbc94586f27f52c7d8543470f608f",
+      "native_png_bytes": 722607,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "6ae58fc379c1fd39c14be489e009a7eeb8128794f11f54c45b60a6e75ff2dcc6",
+      "metadata_stripped_png_sha256": "3677d1ce4e166c2a71590e799543035fa040ac7758db1ec31e6cb804d6bd67fc",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "e01188e4a8b179c413fb0663c35549a33df753076a9f89bec8b6c86b64adecec",
+      "public_jpeg_sha256": "81ebea489ab457e9e9f19555d11bd26026890b6f72723d4938f06f9e90df8bf7",
+      "public_jpeg_bytes": 59208,
+      "public_decoded_rgb_sha256": "ac1a22d02f6d58499304e1041f099574b08a8e57f9ecafc046fc0d790f800408",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/shrine-repaired-60k.jpg",
+      "origin": "Blender exact repaired derivative",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "b5f11586c99377b4b37060d4fae67aee43df6ec27e87b51823daff004b8a8628",
+      "native_png_bytes": 707130,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "31e67309eb46588c5ddf96deeb27e35c9aa1aead340f7779a60736788d918a3c",
+      "metadata_stripped_png_sha256": "d5e0794d3f12fbaf73680af96a9d1d52d880db8c68354722918dfeb190970548",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "e18d94bf3fc1c95e2a0787e95f9ebfd28ae7a7331e3b70de5165de6b1f66b638",
+      "public_jpeg_sha256": "d5c8ade06723dd602f9eb47efcd7043f4ee65f53a3059098b9712d366d74b8f8",
+      "public_jpeg_bytes": 55007,
+      "public_decoded_rgb_sha256": "1e6ff230f633006523fc00cdd93bf50bc5e71eccd2db925ddb023c784d911fd7",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/shrine-repaired-godot.jpg",
+      "origin": "Godot fresh native GPU import of repaired derivative",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "7a054d0bd08b49820c4d4afc4942cb46656ec4f41d0429943cf920ee5b137126",
+      "native_png_bytes": 857509,
+      "native_decoded_mode": "RGB",
+      "native_decoded_pixel_sha256": "cbf71eb3b31f8800c8772b7b85ad0ecf85850a9066c727c5c241a6b9ce9c3cde",
+      "metadata_stripped_png_sha256": "7a054d0bd08b49820c4d4afc4942cb46656ec4f41d0429943cf920ee5b137126",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [],
+      "encoder_input_rgb_sha256": "cbf71eb3b31f8800c8772b7b85ad0ecf85850a9066c727c5c241a6b9ce9c3cde",
+      "public_jpeg_sha256": "309243c760e7f9f7e54b4ae809bad0a24e4186054d55c0ec15bb0a05824cee6c",
+      "public_jpeg_bytes": 120507,
+      "public_decoded_rgb_sha256": "768205347fc32d10d83531a9fdd1982ed7398cd4b3f65db209c5c0bddb808748",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/courier-previous-runtime.jpg",
+      "origin": "Godot actual previous runtime; diagnostic capture, no OS-input claim",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "21660a9e4abaa56d17287c28f369d871da3ccd63e502a8fe74943c787e317aed",
+      "native_png_bytes": 944272,
+      "native_decoded_mode": "RGB",
+      "native_decoded_pixel_sha256": "cd4e625301d902610ecf35dcd7e043e9cba4d541d9c1b1f086aa570658141541",
+      "metadata_stripped_png_sha256": "21660a9e4abaa56d17287c28f369d871da3ccd63e502a8fe74943c787e317aed",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [],
+      "encoder_input_rgb_sha256": "cd4e625301d902610ecf35dcd7e043e9cba4d541d9c1b1f086aa570658141541",
+      "public_jpeg_sha256": "afa30e2ca7bd63c7b7e351d70d533903116a7018e54b36be094ba5612e7f6829",
+      "public_jpeg_bytes": 138297,
+      "public_decoded_rgb_sha256": "a35faeac6979643c1aa04e8dce3ba15c2f02a8868775f7f60de2d3dd0127efdb",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/guardian-previous-generated.jpg",
+      "origin": "Blender isolated old generated block guardian",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "5f4b44ba218dd75d18ccfc697abb894fbb0bc26b98528d0fcbc978b7a3bf72bb",
+      "native_png_bytes": 436552,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "3447c7bc2aea879edb919b24f6c8af0ce7175987625ead2ac99001e222ba1036",
+      "metadata_stripped_png_sha256": "2006b2956214bd9a34a8ee26623a0547ff75b2f6784685ec30b4cbda61c81f93",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "f28f73efadb183ad473b88e7b110f9bfcd501b3db253618b3250c3006fc4d6b6",
+      "public_jpeg_sha256": "176b700712c847a30e51b3eb714bfc7b404cf581bb49c84a1d02f0e8c5fb0718",
+      "public_jpeg_bytes": 20113,
+      "public_decoded_rgb_sha256": "1291ae95cd23411cc25fbfb4fae7ee7f251413101dba7c519ff8a957dc1a8d23",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/courier-new-static.jpg",
+      "origin": "Blender new original, static and skinless",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "b4d7118c681885f4e780b194b75fc7d50195eccc77e0e8317ef5a333eb6bbdc9",
+      "native_png_bytes": 464843,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "41232552f60d4b12d8559f2d1e85be9ebac72d1d3df1b58269c48cf22ab62dee",
+      "metadata_stripped_png_sha256": "c32aa445ca048c8ed5311c33da864a47aca4814c1ec793af5df0c51c7e0b8a52",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "b10a3366811ed7c5b72fddb935212eb18b6cdaf3d85bf5f2ad23f122fa234ee9",
+      "public_jpeg_sha256": "613e313ceb32926f7d52d919e65db0eef733b641aa5525b911a47c0c3915bc0b",
+      "public_jpeg_bytes": 34737,
+      "public_decoded_rgb_sha256": "42190952fc3bf6b226ea83c0a04c7d55b3249917d5e5bdd6adb01ef868d0e410",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    },
+    {
+      "path": "diagnosis/guardian-new-static.jpg",
+      "origin": "Blender new original, static and skinless",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "native_png_sha256": "902253439989fac87712754c49f59fc37d66ae4fb8b00151d60d354430a6b61c",
+      "native_png_bytes": 604248,
+      "native_decoded_mode": "RGBA",
+      "native_decoded_pixel_sha256": "b45e8e0bc852f51a1221c2b72b3800990b10bcf63804b80e053261b7e1768661",
+      "metadata_stripped_png_sha256": "b31f4f63f1d62a4d242fa64c193c443cebc2abcc76210e6e599e329698c7e85b",
+      "metadata_stripped_png_pixels_match_native": true,
+      "removed_metadata_chunks": [
+        "eXIf",
+        "tEXt"
+      ],
+      "encoder_input_rgb_sha256": "a0d26290d7aefa27920f93adaa3cbc35cdb8f94f060c0bc458a317a8a14e4e46",
+      "public_jpeg_sha256": "888db7121d07255540b741a54a73d4488af0189c66d25ceebb708869fd2685ef",
+      "public_jpeg_bytes": 53130,
+      "public_decoded_rgb_sha256": "abdc426077525fd5f9f42525020f07c817cb5fd95e417dedd8e6ca46733a6a49",
+      "encoding": {
+        "format": "JPEG",
+        "quality": 82,
+        "subsampling": "4:2:0",
+        "optimize": true,
+        "resize": false,
+        "crop": false,
+        "retouch": false,
+        "compositing": false,
+        "alpha": "discarded; no new background",
+        "metadata": "excluded"
+      },
+      "lossy_pixels_identical_to_native": false
+    }
+  ],
+  "assets": [
+    {
+      "asset": "chest",
+      "immutable_original": {
+        "size_bytes": 6260184,
+        "sha256": "060fbec0f44be2b69736e502f2d8f8b37d2d1f86648a1ce5f833c361869d261e",
+        "triangles": 5000,
+        "accessor_vertices": 6785,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "previous_v2": {
+        "size_bytes": 2144840,
+        "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+        "triangles": 5000,
+        "accessor_vertices": 6786,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model.018",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "source_uv_map_counts": [
+        1
+      ],
+      "previous_v2_uv_map_counts": [
+        1
+      ],
+      "previous_v2_reduction_fraction": 0.0,
+      "native_color_spaces": [
+        {
+          "before": [
+            2048,
+            2048
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "sRGB"
+        },
+        {
+          "before": [
+            2048,
+            2048
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "Non-Color"
+        },
+        {
+          "before": [
+            2048,
+            2048
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "Non-Color"
+        }
+      ],
+      "native_pbr_links": [
+        {
+          "material": "model.018",
+          "channel": "base_color",
+          "image_index": 1,
+          "image_name": "texture_diffuse",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "sRGB RGB"
+        },
+        {
+          "material": "model.018",
+          "channel": "metallic_roughness",
+          "image_index": 2,
+          "image_name": "texture_metallic-texture_roughness",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "linear G=roughness/B=metallic"
+        },
+        {
+          "material": "model.018",
+          "channel": "normal",
+          "image_index": 0,
+          "image_name": "texture_normal",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "linear tangent-space RGB"
+        }
+      ],
+      "repaired_current": null,
+      "controlled_native_comparison": {
+        "camera_lens_mm": 58,
+        "camera_location_native_units": [
+          2.13696511205083,
+          -5.32318950732663,
+          1.2983151904833012
+        ],
+        "camera_rotation_degrees": [
+          77.21272018854818,
+          0,
+          21.80140948635181
+        ],
+        "target_center_native_units": [
+          0.00765150785446167,
+          9.450316429138184e-05,
+          -0.0029320120811462402
+        ],
+        "original_dimensions_native_units": [
+          1.9212850332260132,
+          1.9124390482902527,
+          1.8765920400619507
+        ],
+        "renderer": "EEVEE",
+        "samples": 32,
+        "resolution_pixels": [
+          1280,
+          720
+        ],
+        "isolation": "Each native render verified only the intended imported render mesh set visible; reference lights retained.",
+        "framing_scope": "Same close camera for original and derivative of each asset; close framing is not an all-angle silhouette check."
+      },
+      "native_godot": {
+        "engine": "4.6.3-stable (official)",
+        "renderer": "gl_compatibility",
+        "device": "NVIDIA GeForce RTX 5080",
+        "target": "chest",
+        "source_glb_sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+        "authored_scene_tint_applied_to_this_target": false,
+        "meshes": [
+          {
+            "class": "MeshInstance3D",
+            "mesh_resource_path": "chest.glb::ArrayMesh_woinv",
+            "path": "RelicCourier/Hyper3DGeneratedAssets/Chest/chest/model_018",
+            "surfaces": [
+              {
+                "geometry_arrays_sha256": "b71941af5dcbd83c48519cc9ece826b212ff1048e9b5d831abe06b0a2b4c4b89",
+                "index": 0,
+                "material": {
+                  "albedo_color": "ffffffff",
+                  "class": "StandardMaterial3D",
+                  "emission_enabled": false,
+                  "metallic": 1.0,
+                  "metallic_channel": 2,
+                  "normal_enabled": true,
+                  "normal_scale": 1.0,
+                  "resource_path": "chest.glb::StandardMaterial3D_ikpfb",
+                  "roughness": 1.0,
+                  "roughness_channel": 1,
+                  "texture_filter": 3,
+                  "textures": {
+                    "albedo_texture": {
+                      "decoded_rgba8_sha256": "60faa10cd9e3f7f7eafe84086a3293b94cccd8beb820401d8eb934916e3515b2",
+                      "height": 1024,
+                      "resource_path": "chest_texture_diffuse.png",
+                      "width": 1024
+                    },
+                    "metallic_texture": {
+                      "decoded_rgba8_sha256": "19e43972fb6bc3764bb6705df182f86d05d239aad858f1b1d0917cdd304364a1",
+                      "height": 1024,
+                      "resource_path": "chest_texture_metallic-texture_roughness.png",
+                      "width": 1024
+                    },
+                    "normal_texture": {
+                      "decoded_rgba8_sha256": "229b07036db95c225827fd8f4ad2b76499bfc9e4259ab125c7460fbd6fac4729",
+                      "height": 1024,
+                      "resource_path": "chest_texture_normal.png",
+                      "width": 1024
+                    },
+                    "roughness_texture": {
+                      "decoded_rgba8_sha256": "19e43972fb6bc3764bb6705df182f86d05d239aad858f1b1d0917cdd304364a1",
+                      "height": 1024,
+                      "resource_path": "chest_texture_metallic-texture_roughness.png",
+                      "width": 1024
+                    }
+                  },
+                  "uv1_triplanar": false
+                }
+              }
+            ],
+            "visible_in_tree": true
+          }
+        ],
+        "scope": "Actual native GPU material-close sample and readback; UI and authored courier hidden only in external diagnostic helper; no gameplay or OS-input claim"
+      },
+      "submitted_parameters": {
+        "route": "Texture",
+        "input": "Local OBJ plus a provider-generated reference render from an original task-authored prompt",
+        "requested_format": "GLB",
+        "measured_images": "Three2048-square PBR images; resolution parameters are not inferred from image dimensions."
+      }
+    },
+    {
+      "asset": "shrine",
+      "immutable_original": {
+        "size_bytes": 19401668,
+        "sha256": "ea17bdcefe4f76b496b6501ed74bd7692032d076f8db4de39d0f92dfee12e210",
+        "triangles": 559968,
+        "accessor_vertices": 310495,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "previous_v2": {
+        "size_bytes": 2973192,
+        "sha256": "85535901cbd027917dc51ff75b88588f5b2fbc81e2dc9a90f8af6d54512692af",
+        "triangles": 5000,
+        "accessor_vertices": 6156,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model.014",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "source_uv_map_counts": [
+        1
+      ],
+      "previous_v2_uv_map_counts": [
+        1
+      ],
+      "previous_v2_reduction_fraction": 0.9910709183381907,
+      "native_color_spaces": [
+        {
+          "before": [
+            1024,
+            1024
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "sRGB"
+        },
+        {
+          "before": [
+            1024,
+            1024
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "Non-Color"
+        },
+        {
+          "before": [
+            1024,
+            1024
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "Non-Color"
+        }
+      ],
+      "native_pbr_links": [
+        {
+          "material": "model.029",
+          "channel": "base_color",
+          "image_index": 1,
+          "image_name": "texture_diffuse",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "sRGB RGB"
+        },
+        {
+          "material": "model.029",
+          "channel": "metallic_roughness",
+          "image_index": 2,
+          "image_name": "texture_metallic-texture_roughness",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "linear G=roughness/B=metallic"
+        },
+        {
+          "material": "model.029",
+          "channel": "normal",
+          "image_index": 0,
+          "image_name": "texture_normal",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "linear tangent-space RGB"
+        }
+      ],
+      "repaired_current": {
+        "size_bytes": 4550948,
+        "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7",
+        "triangles": 60000,
+        "accessor_vertices": 45148,
+        "mesh_count": 1,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "uv_sets": [
+          "TEXCOORD_0"
+        ],
+        "pbr_channel_links": [
+          {
+            "material": "model.029",
+            "channel": "base_color",
+            "image_index": 1,
+            "image_name": "texture_diffuse",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "sRGB RGB"
+          },
+          {
+            "material": "model.029",
+            "channel": "metallic_roughness",
+            "image_index": 2,
+            "image_name": "texture_metallic-texture_roughness",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear G=roughness/B=metallic"
+          },
+          {
+            "material": "model.029",
+            "channel": "normal",
+            "image_index": 0,
+            "image_name": "texture_normal",
+            "size_pixels": [
+              1024,
+              1024
+            ],
+            "texcoord_set": 0,
+            "interpretation": "linear tangent-space RGB"
+          }
+        ]
+      },
+      "controlled_native_comparison": {
+        "camera_lens_mm": 58,
+        "camera_location_native_units": [
+          2.1565059415761243,
+          -5.392371786699596,
+          1.3175057913136687
+        ],
+        "camera_rotation_degrees": [
+          77.21272018854818,
+          0,
+          21.80140948635181
+        ],
+        "target_center_native_units": [
+          -0.0003369152545928955,
+          -0.0002646446228027344,
+          -0.0005648434162139893
+        ],
+        "original_dimensions_native_units": [
+          1.2479518055915833,
+          1.1098246574401855,
+          1.9008539319038391
+        ],
+        "renderer": "EEVEE",
+        "samples": 32,
+        "resolution_pixels": [
+          1280,
+          720
+        ],
+        "isolation": "Each native render verified only the intended imported render mesh set visible; reference lights retained.",
+        "framing_scope": "Same close camera for original and derivative of each asset; close framing is not an all-angle silhouette check."
+      },
+      "repaired_texture_pixels": [
+        {
+          "name": "texture_normal",
+          "size": [
+            1024,
+            1024
+          ],
+          "mode": "RGB",
+          "decoded_pixels_sha256": "6e45a320a8f5b6dcba902423a000c4c31d61a8f3c6268d80f3a9415a2e9b5819"
+        },
+        {
+          "name": "texture_diffuse",
+          "size": [
+            1024,
+            1024
+          ],
+          "mode": "RGB",
+          "decoded_pixels_sha256": "1257d2c17679777dba092b11b3efb11208bf40128818f94611df249f8b9a005c"
+        },
+        {
+          "name": "texture_metallic-texture_roughness",
+          "size": [
+            1024,
+            1024
+          ],
+          "mode": "RGB",
+          "decoded_pixels_sha256": "f6e5013a92da000843a703088d55b1fd30353cc15ebd15320a5bf7e6806d1739"
+        }
+      ],
+      "repaired_native_uv": {
+        "polygon_count": 60000,
+        "loop_count": 180000,
+        "uv_coordinate_count": 180000,
+        "island_count": 1590,
+        "has_uvs": true,
+        "object_name": "model.030",
+        "mesh_name": "model.030",
+        "uv_map_count": 1,
+        "active_uv_map": "UVMap",
+        "uv_maps": [
+          {
+            "name": "UVMap",
+            "index": 0,
+            "active": true,
+            "coordinate_count": 180000
+          }
+        ]
+      },
+      "native_godot": {
+        "engine": "4.6.3-stable (official)",
+        "renderer": "gl_compatibility",
+        "device": "NVIDIA GeForce RTX 5080",
+        "target": "shrine",
+        "source_glb_sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7",
+        "authored_scene_tint_applied_to_this_target": false,
+        "meshes": [
+          {
+            "class": "MeshInstance3D",
+            "mesh_resource_path": "shrine.glb::ArrayMesh_y5bn1",
+            "path": "RelicCourier/Hyper3DGeneratedAssets/Shrine/shrine/model_029",
+            "surfaces": [
+              {
+                "geometry_arrays_sha256": "c60c1e69b39b32c64547e746250156ef706e3279d9608419105f75fdbefdf405",
+                "index": 0,
+                "material": {
+                  "albedo_color": "ffffffff",
+                  "class": "StandardMaterial3D",
+                  "emission_enabled": false,
+                  "metallic": 1.0,
+                  "metallic_channel": 2,
+                  "normal_enabled": true,
+                  "normal_scale": 1.0,
+                  "resource_path": "shrine.glb::StandardMaterial3D_dqq86",
+                  "roughness": 1.0,
+                  "roughness_channel": 1,
+                  "texture_filter": 3,
+                  "textures": {
+                    "albedo_texture": {
+                      "decoded_rgba8_sha256": "71df0cc389ca0c023e4cdc4aa49eca0ebc18cfc12646de748cf7139d36ec29d0",
+                      "height": 1024,
+                      "resource_path": "shrine_texture_diffuse.png",
+                      "width": 1024
+                    },
+                    "metallic_texture": {
+                      "decoded_rgba8_sha256": "308c081046dae0a65857c24b4ce8f7eefe96a7afcce5a4a26cb70a0a9ee49392",
+                      "height": 1024,
+                      "resource_path": "shrine_texture_metallic-texture_roughness.png",
+                      "width": 1024
+                    },
+                    "normal_texture": {
+                      "decoded_rgba8_sha256": "620c223ea0ae97af6bf155edc3214533841c706cdbd8a51c1c40c1110c11b18d",
+                      "height": 1024,
+                      "resource_path": "shrine_texture_normal.png",
+                      "width": 1024
+                    },
+                    "roughness_texture": {
+                      "decoded_rgba8_sha256": "308c081046dae0a65857c24b4ce8f7eefe96a7afcce5a4a26cb70a0a9ee49392",
+                      "height": 1024,
+                      "resource_path": "shrine_texture_metallic-texture_roughness.png",
+                      "width": 1024
+                    }
+                  },
+                  "uv1_triplanar": false
+                }
+              }
+            ],
+            "visible_in_tree": true
+          }
+        ],
+        "scope": "Actual native GPU material-close sample and readback; UI and authored courier hidden only in external diagnostic helper; no gameplay or OS-input claim"
+      },
+      "submitted_parameters": {
+        "route": "Rodin",
+        "tier": "Sketch",
+        "input": "Original text description",
+        "mesh_mode": "Quad",
+        "quality_override": 1000,
+        "material": "PBR",
+        "addons": [
+          "HighPack"
+        ],
+        "seed": 41,
+        "selected_variant": "highpoly_high_pbr.glb",
+        "measured_result_note": "559968 glTF triangles; accepted request does not establish requested budget or native quad topology."
+      }
+    },
+    {
+      "asset": "portal",
+      "immutable_original": {
+        "size_bytes": 15836304,
+        "sha256": "85077f322be243ee726d7b85409073ecbff16f23f7062276e7d5e3dcf7bab12c",
+        "triangles": 16528,
+        "accessor_vertices": 9361,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              4096,
+              4096
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "previous_v2": {
+        "size_bytes": 2592960,
+        "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2",
+        "triangles": 4999,
+        "accessor_vertices": 3459,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              1024,
+              1024
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model.016",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "source_uv_map_counts": [
+        1
+      ],
+      "previous_v2_uv_map_counts": [
+        1
+      ],
+      "previous_v2_reduction_fraction": 0.6975435624394966,
+      "native_color_spaces": [
+        {
+          "before": [
+            4096,
+            4096
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "sRGB"
+        },
+        {
+          "before": [
+            2048,
+            2048
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "Non-Color"
+        },
+        {
+          "before": [
+            2048,
+            2048
+          ],
+          "after": [
+            1024,
+            1024
+          ],
+          "colorspace": "Non-Color"
+        }
+      ],
+      "native_pbr_links": [
+        {
+          "material": "model.016",
+          "channel": "base_color",
+          "image_index": 1,
+          "image_name": "texture_diffuse",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "sRGB RGB"
+        },
+        {
+          "material": "model.016",
+          "channel": "metallic_roughness",
+          "image_index": 2,
+          "image_name": "texture_metallic-texture_roughness",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "linear G=roughness/B=metallic"
+        },
+        {
+          "material": "model.016",
+          "channel": "normal",
+          "image_index": 0,
+          "image_name": "texture_normal",
+          "size_pixels": [
+            1024,
+            1024
+          ],
+          "texcoord_set": 0,
+          "interpretation": "linear tangent-space RGB"
+        }
+      ],
+      "repaired_current": null,
+      "controlled_native_comparison": {
+        "camera_lens_mm": 58,
+        "camera_location_native_units": [
+          2.1132086277178845,
+          -5.282108843369266,
+          1.2894265655118622
+        ],
+        "camera_rotation_degrees": [
+          77.21272018854818,
+          0,
+          21.80140948635181
+        ],
+        "target_center_native_units": [
+          0.0005305111408233643,
+          -0.000413551926612854,
+          -0.001654505729675293
+        ],
+        "original_dimensions_native_units": [
+          1.8968250155448914,
+          0.6245389878749847,
+          1.8619309663772583
+        ],
+        "renderer": "EEVEE",
+        "samples": 32,
+        "resolution_pixels": [
+          1280,
+          720
+        ],
+        "isolation": "Each native render verified only the intended imported render mesh set visible; reference lights retained.",
+        "framing_scope": "Same close camera for original and derivative of each asset; close framing is not an all-angle silhouette check."
+      },
+      "native_godot": {
+        "engine": "4.6.3-stable (official)",
+        "renderer": "gl_compatibility",
+        "device": "NVIDIA GeForce RTX 5080",
+        "target": "portal",
+        "source_glb_sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2",
+        "authored_scene_tint_applied_to_this_target": false,
+        "meshes": [
+          {
+            "class": "MeshInstance3D",
+            "mesh_resource_path": "portal.glb::ArrayMesh_x55tf",
+            "path": "RelicCourier/Hyper3DGeneratedAssets/Portal/portal/model_016",
+            "surfaces": [
+              {
+                "geometry_arrays_sha256": "e925ed2a54d3423a20e476e9913b901610fb28bc32af95e6305c0d9bc7141d6d",
+                "index": 0,
+                "material": {
+                  "albedo_color": "ffffffff",
+                  "class": "StandardMaterial3D",
+                  "emission_enabled": false,
+                  "metallic": 1.0,
+                  "metallic_channel": 2,
+                  "normal_enabled": true,
+                  "normal_scale": 1.0,
+                  "resource_path": "portal.glb::StandardMaterial3D_1uyhs",
+                  "roughness": 1.0,
+                  "roughness_channel": 1,
+                  "texture_filter": 3,
+                  "textures": {
+                    "albedo_texture": {
+                      "decoded_rgba8_sha256": "6d8aeb8ca6deda8098fe5c7c7d286c44d89119c49f6b3db0024e356a74a0b30b",
+                      "height": 1024,
+                      "resource_path": "portal_texture_diffuse.png",
+                      "width": 1024
+                    },
+                    "metallic_texture": {
+                      "decoded_rgba8_sha256": "a9b6d952ef5dfcbb67e565fb7eda06a754d89391f7f9806be99cb39e7ff46a27",
+                      "height": 1024,
+                      "resource_path": "portal_texture_metallic-texture_roughness.png",
+                      "width": 1024
+                    },
+                    "normal_texture": {
+                      "decoded_rgba8_sha256": "1974a59c44a6f2ed808612ddd2040fc9585be7974f2c6a2a4b7287c1cf1cabdd",
+                      "height": 1024,
+                      "resource_path": "portal_texture_normal.png",
+                      "width": 1024
+                    },
+                    "roughness_texture": {
+                      "decoded_rgba8_sha256": "a9b6d952ef5dfcbb67e565fb7eda06a754d89391f7f9806be99cb39e7ff46a27",
+                      "height": 1024,
+                      "resource_path": "portal_texture_metallic-texture_roughness.png",
+                      "width": 1024
+                    }
+                  },
+                  "uv1_triplanar": false
+                }
+              }
+            ],
+            "visible_in_tree": true
+          }
+        ],
+        "scope": "Actual native GPU material-close sample and readback; UI and authored courier hidden only in external diagnostic helper; no gameplay or OS-input claim"
+      },
+      "submitted_parameters": {
+        "route": "Rodin",
+        "tier": "Gen-2.5-High",
+        "input": "One original native blockout image",
+        "mesh_mode": "Quad",
+        "quality_override": 8000,
+        "material": "Hybrid",
+        "texture_mode": "high",
+        "uhd_texture": true,
+        "preview_render": true,
+        "is_symmetric": "asymmetric",
+        "seed": 47,
+        "selected_variant": "base_basic_pbr.glb"
+      }
+    }
+  ],
+  "old_characters": {
+    "A2-agentic-pro": {
+      "sha256": "98e1372c04da51e2d7241d7b3d2d06769271e56c888dd8d44b57be70afd28f92",
+      "size_bytes": 60416,
+      "mesh_count": 17,
+      "triangles": 2488,
+      "material_count": 4,
+      "images": []
+    },
+    "R9-final": {
+      "sha256": "27635273d20da5786f607de3f8684f3cb7bf58aacb6b34201978eb028e2ab673",
+      "size_bytes": 6923580,
+      "mesh_count": 1,
+      "triangles": 5000,
+      "material_count": 1,
+      "images": [
+        {
+          "name": "texture_normal",
+          "size": [
+            2048,
+            2048
+          ],
+          "format": "PNG"
+        },
+        {
+          "name": "texture_diffuse",
+          "size": [
+            2048,
+            2048
+          ],
+          "format": "PNG"
+        },
+        {
+          "name": "texture_metallic-texture_roughness",
+          "size": [
+            2048,
+            2048
+          ],
+          "format": "PNG"
+        }
+      ]
+    },
+    "R9-raw": {
+      "sha256": "7b5d9ae5329ef1643eb7eead8521f1b74ef147192899f384cc9f63e09a7dfe81",
+      "size_bytes": 5609256,
+      "mesh_count": 1,
+      "triangles": 5124470,
+      "material_count": 0,
+      "images": []
+    }
+  },
+  "previous_runtime": {
+    "engine": "4.6.3-stable (official)",
+    "rendering_method": "gl_compatibility",
+    "courier": [
+      {
+        "path": "RelicCourier/Courier/CourierModel/@MeshInstance3D@213",
+        "node_class": "MeshInstance3D",
+        "mesh_class": "CylinderMesh",
+        "mesh_resource_path": "",
+        "surfaces": [
+          {
+            "geometry_arrays_sha256": "ccb0562df014bcdbdcb3f1b84533ed581dddcbad8064378d05ea03f1221d6449",
+            "index": 0,
+            "material": {
+              "albedo_color": "d7b56eff",
+              "class": "StandardMaterial3D",
+              "emission_enabled": false,
+              "metallic": 0.0,
+              "metallic_texture_channel": 0,
+              "normal_enabled": false,
+              "normal_scale": 1.0,
+              "resource_path": "",
+              "roughness": 0.800000011920929,
+              "roughness_texture_channel": 0,
+              "texture_filter": 3,
+              "textures": {},
+              "uv1_triplanar": false
+            },
+            "surface_override": false,
+            "triangles": 84
+          }
+        ],
+        "visible": true,
+        "visible_in_tree": true
+      },
+      {
+        "path": "RelicCourier/Courier/CourierModel/@MeshInstance3D@214",
+        "node_class": "MeshInstance3D",
+        "mesh_class": "SphereMesh",
+        "mesh_resource_path": "",
+        "surfaces": [
+          {
+            "geometry_arrays_sha256": "964b02e0a2dc53f0973e34a3d16b5144267ae905933a26d5bcd89d6c1bb0b751",
+            "index": 0,
+            "material": {
+              "albedo_color": "133c47ff",
+              "class": "StandardMaterial3D",
+              "emission_enabled": false,
+              "metallic": 0.300000011920929,
+              "metallic_texture_channel": 0,
+              "normal_enabled": false,
+              "normal_scale": 1.0,
+              "resource_path": "",
+              "roughness": 0.800000011920929,
+              "roughness_texture_channel": 0,
+              "texture_filter": 3,
+              "textures": {},
+              "uv1_triplanar": false
+            },
+            "surface_override": false,
+            "triangles": 4224
+          }
+        ],
+        "visible": true,
+        "visible_in_tree": true
+      },
+      {
+        "path": "RelicCourier/Courier/CourierModel/@MeshInstance3D@215",
+        "node_class": "MeshInstance3D",
+        "mesh_class": "BoxMesh",
+        "mesh_resource_path": "",
+        "surfaces": [
+          {
+            "geometry_arrays_sha256": "8f519fff595eb0abd92960025bd59a13abc335584b28be15ff4d5cb7707a5b5b",
+            "index": 0,
+            "material": {
+              "albedo_color": "63ddceff",
+              "class": "StandardMaterial3D",
+              "emission_enabled": true,
+              "metallic": 0.300000011920929,
+              "metallic_texture_channel": 0,
+              "normal_enabled": false,
+              "normal_scale": 1.0,
+              "resource_path": "",
+              "roughness": 0.800000011920929,
+              "roughness_texture_channel": 0,
+              "texture_filter": 3,
+              "textures": {},
+              "uv1_triplanar": false
+            },
+            "surface_override": false,
+            "triangles": 12
+          }
+        ],
+        "visible": true,
+        "visible_in_tree": true
+      }
+    ],
+    "guardian": [
+      {
+        "path": "RelicCourier/Hyper3DGeneratedAssets/Guardian/guardian/model_008",
+        "node_class": "MeshInstance3D",
+        "mesh_class": "ArrayMesh",
+        "mesh_resource_path": "guardian.glb::ArrayMesh_ulyw7",
+        "surfaces": [
+          {
+            "geometry_arrays_sha256": "371b52e505a0b3ac44c0d899d070833c6886cf1e67b7aa5cb96d391e7e2fc76b",
+            "index": 0,
+            "material": {
+              "albedo_color": "8c988eff",
+              "class": "StandardMaterial3D",
+              "emission_enabled": false,
+              "metallic": 0.0500000007450581,
+              "metallic_texture_channel": 2,
+              "normal_enabled": true,
+              "normal_scale": 1.0,
+              "resource_path": "",
+              "roughness": 1.0,
+              "roughness_texture_channel": 1,
+              "texture_filter": 3,
+              "textures": {
+                "albedo_texture": {
+                  "class": "CompressedTexture2D",
+                  "decoded_image_format": 4,
+                  "decoded_image_sha256": "f88012fedfed17c2208d0cfddf5654151e529876da1f3f0686b980cfc270d7be",
+                  "height": 512,
+                  "resource_path": "guardian_texture_diffuse.png",
+                  "width": 512
+                },
+                "metallic_texture": {
+                  "class": "CompressedTexture2D",
+                  "decoded_image_format": 4,
+                  "decoded_image_sha256": "6c8afe9ed9ba424c6917185e6f4c6e2add9314309348fd4987661e5ee4fddcfe",
+                  "height": 512,
+                  "resource_path": "guardian_texture_metallic-texture_roughness.png",
+                  "width": 512
+                },
+                "normal_texture": {
+                  "class": "CompressedTexture2D",
+                  "decoded_image_format": 4,
+                  "decoded_image_sha256": "37d85013769af09e000efb3436b8f10dd903d5210a34347680eb22476bb6b92b",
+                  "height": 512,
+                  "resource_path": "guardian_texture_normal.png",
+                  "width": 512
+                },
+                "roughness_texture": {
+                  "class": "CompressedTexture2D",
+                  "decoded_image_format": 4,
+                  "decoded_image_sha256": "6c8afe9ed9ba424c6917185e6f4c6e2add9314309348fd4987661e5ee4fddcfe",
+                  "height": 512,
+                  "resource_path": "guardian_texture_metallic-texture_roughness.png",
+                  "width": 512
+                }
+              },
+              "uv1_triplanar": false
+            },
+            "surface_override": true,
+            "triangles": 5000
+          }
+        ],
+        "visible": true,
+        "visible_in_tree": true
+      }
+    ],
+    "guardian_glb_sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1",
+    "courier_collision_shapes": [
+      {
+        "path": "RelicCourier/Courier/@CollisionShape3D@212",
+        "node_class": "CollisionShape3D",
+        "shape_class": "CapsuleShape3D",
+        "is_render_mesh": false,
+        "debug_drawing_enabled": false
+      }
+    ],
+    "collision_debug_drawing": false,
+    "interpretation": {
+      "collision_shapes": "Physics shapes are active, but are not render meshes. Collision debug drawing is disabled.",
+      "courier": "Visible original Godot primitive cloak, head and backpack. No Hyper3D-generated protagonist is bound.",
+      "guardian": "Visible imported Hyper3D guardian.glb, with authored scene-only ash-teal roughness/tint adaptation."
+    },
+    "scope": "Readback from the same native GPU runtime that encoded the accompanying gameplay frame; no OS-input claim"
+  },
+  "new_characters": [
+    {
+      "character": "courier",
+      "immutable_original": {
+        "sha256": "4831d672f8ae37be04f0525ae1dfd8ffe6198039c53d375ab9b8bc05a2ee559c",
+        "size_bytes": 11134316,
+        "mesh_count": 1,
+        "node_count": 1,
+        "triangles": 30000,
+        "accessor_vertices": 36243,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "approved_single_reference": {
+        "filename": "courier-input-white.png",
+        "sha256": "5db48d1b6db3d15bcedca1c8d6623a52bbfa5baa04db0b79dbfd34cf05e678fa"
+      },
+      "native_uv": {
+        "polygon_count": 30000,
+        "loop_count": 90000,
+        "uv_coordinate_count": 90000,
+        "island_count": 5133,
+        "has_uvs": true,
+        "object_name": "model.031",
+        "mesh_name": "model.031",
+        "uv_map_count": 1,
+        "active_uv_map": "UVMap",
+        "uv_maps": [
+          {
+            "name": "UVMap",
+            "index": 0,
+            "active": true,
+            "coordinate_count": 90000
+          }
+        ]
+      },
+      "native_material_links": [
+        {
+          "material": "model.031",
+          "links": {
+            "node_tree_ref": {
+              "kind": "shader",
+              "material_name": "model.031"
+            },
+            "links": [
+              {
+                "id": "Principled BSDF:BSDF->Material Output:Surface",
+                "from_node": "Principled BSDF",
+                "from_socket": "BSDF",
+                "from_socket_identifier": "BSDF",
+                "to_node": "Material Output",
+                "to_socket": "Surface",
+                "to_socket_identifier": "Surface"
+              },
+              {
+                "id": "Image Texture:Color->Principled BSDF:Base Color",
+                "from_node": "Image Texture",
+                "from_socket": "Color",
+                "from_socket_identifier": "Color",
+                "to_node": "Principled BSDF",
+                "to_socket": "Base Color",
+                "to_socket_identifier": "Base Color"
+              },
+              {
+                "id": "Separate Color:Blue->Principled BSDF:Metallic",
+                "from_node": "Separate Color",
+                "from_socket": "Blue",
+                "from_socket_identifier": "Blue",
+                "to_node": "Principled BSDF",
+                "to_socket": "Metallic",
+                "to_socket_identifier": "Metallic"
+              },
+              {
+                "id": "Separate Color:Green->Principled BSDF:Roughness",
+                "from_node": "Separate Color",
+                "from_socket": "Green",
+                "from_socket_identifier": "Green",
+                "to_node": "Principled BSDF",
+                "to_socket": "Roughness",
+                "to_socket_identifier": "Roughness"
+              },
+              {
+                "id": "Image Texture.001:Color->Separate Color:Color",
+                "from_node": "Image Texture.001",
+                "from_socket": "Color",
+                "from_socket_identifier": "Color",
+                "to_node": "Separate Color",
+                "to_socket": "Color",
+                "to_socket_identifier": "Color"
+              },
+              {
+                "id": "Normal Map:Normal->Principled BSDF:Normal",
+                "from_node": "Normal Map",
+                "from_socket": "Normal",
+                "from_socket_identifier": "Normal",
+                "to_node": "Principled BSDF",
+                "to_socket": "Normal",
+                "to_socket_identifier": "Normal"
+              },
+              {
+                "id": "Image Texture.002:Color->Normal Map:Color",
+                "from_node": "Image Texture.002",
+                "from_socket": "Color",
+                "from_socket_identifier": "Color",
+                "to_node": "Normal Map",
+                "to_socket": "Color",
+                "to_socket_identifier": "Color"
+              }
+            ],
+            "count": 7
+          }
+        }
+      ],
+      "native_images": [
+        {
+          "node": "Image Texture",
+          "image": "texture_diffuse.028",
+          "size": [
+            2048,
+            2048
+          ],
+          "colorspace": "sRGB",
+          "packed": true
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "texture_metallic-texture_roughness.028",
+          "size": [
+            2048,
+            2048
+          ],
+          "colorspace": "Non-Color",
+          "packed": true
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "texture_normal.028",
+          "size": [
+            2048,
+            2048
+          ],
+          "colorspace": "Non-Color",
+          "packed": true
+        }
+      ],
+      "native_dimensions_source_units_xyz": [
+        0.9484943151473999,
+        0.48753318190574646,
+        1.8990387916564941
+      ],
+      "source_skins": 0,
+      "source_animations": 0,
+      "visual_review": {
+        "status": "PASS as a static rig candidate in three native views; animation/deformation acceptance pending",
+        "anatomy": "Detailed hooded humanoid with face/hair, layered cloth/brass armor, boots and hip satchel; relaxed A-pose, arms and legs visibly separated.",
+        "front_axis": "Blender -Y / GLB +Z; native Z-up import observed.",
+        "scale": "Normalized source units; source physical scale is unspecified. Scene owner must choose display height.",
+        "known_limits": [
+          "No provider skin or animation. Authored rig and clips remain separate work.",
+          "Three rest-pose views do not prove joint deformation, exact finger topology or all-angle quality.",
+          "Bulky armor/hood/hip accessories require conservative skin weights."
+        ]
+      }
+    },
+    {
+      "character": "guardian",
+      "immutable_original": {
+        "sha256": "a6b0bd4ffa9dce137026cce0e80cbe536158641145c7a093729c795f996f87cd",
+        "size_bytes": 16458320,
+        "mesh_count": 1,
+        "node_count": 1,
+        "triangles": 30000,
+        "accessor_vertices": 46041,
+        "material_count": 1,
+        "images": [
+          {
+            "name": "texture_normal",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_diffuse",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          },
+          {
+            "name": "texture_metallic-texture_roughness",
+            "size": [
+              2048,
+              2048
+            ],
+            "format": "PNG"
+          }
+        ],
+        "materials": [
+          {
+            "doubleSided": true,
+            "name": "model",
+            "normalTexture": {
+              "index": 0
+            },
+            "pbrMetallicRoughness": {
+              "baseColorTexture": {
+                "index": 1
+              },
+              "metallicRoughnessTexture": {
+                "index": 2
+              }
+            }
+          }
+        ]
+      },
+      "approved_single_reference": {
+        "filename": "guardian-concept-01.png",
+        "sha256": "be40db89eaabefa678ae734763d0084670b8811396233c630e219586bca320ce"
+      },
+      "native_uv": {
+        "polygon_count": 30000,
+        "loop_count": 90000,
+        "uv_coordinate_count": 90000,
+        "island_count": 8816,
+        "has_uvs": true,
+        "object_name": "model.032",
+        "mesh_name": "model.032",
+        "uv_map_count": 1,
+        "active_uv_map": "UVMap",
+        "uv_maps": [
+          {
+            "name": "UVMap",
+            "index": 0,
+            "active": true,
+            "coordinate_count": 90000
+          }
+        ]
+      },
+      "native_material_links": [
+        {
+          "material": "model.032",
+          "links": {
+            "node_tree_ref": {
+              "kind": "shader",
+              "material_name": "model.032"
+            },
+            "links": [
+              {
+                "id": "Principled BSDF:BSDF->Material Output:Surface",
+                "from_node": "Principled BSDF",
+                "from_socket": "BSDF",
+                "from_socket_identifier": "BSDF",
+                "to_node": "Material Output",
+                "to_socket": "Surface",
+                "to_socket_identifier": "Surface"
+              },
+              {
+                "id": "Image Texture:Color->Principled BSDF:Base Color",
+                "from_node": "Image Texture",
+                "from_socket": "Color",
+                "from_socket_identifier": "Color",
+                "to_node": "Principled BSDF",
+                "to_socket": "Base Color",
+                "to_socket_identifier": "Base Color"
+              },
+              {
+                "id": "Separate Color:Blue->Principled BSDF:Metallic",
+                "from_node": "Separate Color",
+                "from_socket": "Blue",
+                "from_socket_identifier": "Blue",
+                "to_node": "Principled BSDF",
+                "to_socket": "Metallic",
+                "to_socket_identifier": "Metallic"
+              },
+              {
+                "id": "Separate Color:Green->Principled BSDF:Roughness",
+                "from_node": "Separate Color",
+                "from_socket": "Green",
+                "from_socket_identifier": "Green",
+                "to_node": "Principled BSDF",
+                "to_socket": "Roughness",
+                "to_socket_identifier": "Roughness"
+              },
+              {
+                "id": "Image Texture.001:Color->Separate Color:Color",
+                "from_node": "Image Texture.001",
+                "from_socket": "Color",
+                "from_socket_identifier": "Color",
+                "to_node": "Separate Color",
+                "to_socket": "Color",
+                "to_socket_identifier": "Color"
+              },
+              {
+                "id": "Normal Map:Normal->Principled BSDF:Normal",
+                "from_node": "Normal Map",
+                "from_socket": "Normal",
+                "from_socket_identifier": "Normal",
+                "to_node": "Principled BSDF",
+                "to_socket": "Normal",
+                "to_socket_identifier": "Normal"
+              },
+              {
+                "id": "Image Texture.002:Color->Normal Map:Color",
+                "from_node": "Image Texture.002",
+                "from_socket": "Color",
+                "from_socket_identifier": "Color",
+                "to_node": "Normal Map",
+                "to_socket": "Color",
+                "to_socket_identifier": "Color"
+              }
+            ],
+            "count": 7
+          }
+        }
+      ],
+      "native_images": [
+        {
+          "node": "Image Texture",
+          "image": "texture_diffuse.029",
+          "size": [
+            2048,
+            2048
+          ],
+          "colorspace": "sRGB",
+          "packed": true
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "texture_metallic-texture_roughness.029",
+          "size": [
+            2048,
+            2048
+          ],
+          "colorspace": "Non-Color",
+          "packed": true
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "texture_normal.029",
+          "size": [
+            2048,
+            2048
+          ],
+          "colorspace": "Non-Color",
+          "packed": true
+        }
+      ],
+      "native_dimensions_source_units_xyz": [
+        1.296877145767212,
+        0.542055070400238,
+        1.8968634605407715
+      ],
+      "source_skins": 0,
+      "source_animations": 0,
+      "visual_review": {
+        "status": "PASS as a static rig candidate in three native views; animation/deformation acceptance pending",
+        "anatomy": "Detailed mechanical humanoid with layered stone/brass armor, joint forms, separated limbs and claw-like hands; relaxed A-pose.",
+        "front_axis": "Blender -Y / GLB +Z; native Z-up import observed.",
+        "scale": "Normalized source units; source physical scale is unspecified. Scene owner must choose display height.",
+        "known_limits": [
+          "No provider skin or animation. Authored rig and clips remain separate work.",
+          "Three rest-pose views do not prove joint deformation, exact finger topology or all-angle quality.",
+          "Bulky armor/hood/hip accessories require conservative skin weights."
+        ]
+      }
+    }
+  ],
+  "concept_provenance": {
+    "generator": "Built-in ImageGen; model and effort Unknown",
+    "type": "User-approved original single-view concepts",
+    "courier_cleanup": "Framing/background edit followed by final white-background cleanup preserving the design; use_original_alpha=false.",
+    "guardian_input": "Single white-background view; no multiview consistency claim.",
+    "concept_images_are_gameplay_evidence": false
+  },
+  "round_budget": {
+    "accepted_paid_cases": 23,
+    "additional_credits": 15.5,
+    "cap_credits": 15.5,
+    "hero_extension_credits": 1,
+    "verified_extension_delta_credits": 1,
+    "billing_rows_matched": 23,
+    "no_automatic_paid_retry": true,
+    "prior_round_credits_excluded": 2.5
+  },
+  "checks": [
+    {
+      "name": "Previous visible courier had generated mesh provenance",
+      "result": "fail",
+      "expected": "Generated protagonist bound as visible body",
+      "observed": "Authored CylinderMesh84tri, SphereMesh4224tri and BoxMesh12tri; no provider resource or texture."
+    },
+    {
+      "name": "Collision shapes explain visible courier placeholder",
+      "result": "fail",
+      "expected": "Visible body could be an enabled collider visualization",
+      "observed": "CapsuleShape3D is a separate non-render physics node; debug drawing disabled."
+    },
+    {
+      "name": "Old generated guardian is a suitable detailed-character replacement",
+      "result": "fail",
+      "observed": "R9 and A2 reproduce the original block T-pose reference; high triangle count does not add a new design."
+    },
+    {
+      "name": "Chest source and previous derivative near comparison",
+      "result": "pass",
+      "observed": "5000tri preserved; native PBR links/UV retained;2048→1024 maps. Straps, padlock and panel detail remain clear."
+    },
+    {
+      "name": "Portal simplicity caused chiefly by lost maps",
+      "result": "fail",
+      "observed": "Original is already a simple glossy ring/pale pedestal. Derivative adds pedestal faceting; all PBR links remain."
+    },
+    {
+      "name": "Previous5000-triangle shrine close quality",
+      "result": "fail",
+      "observed": "Triangular artifacts on roof, gem and base, reproduced in Blender and native Godot."
+    },
+    {
+      "name": "Repaired60000-triangle shrine near comparison",
+      "result": "pass",
+      "observed": "Specific artifacts resolved in same-camera Blender and fresh native Godot.1024 texture decoded pixels match immutable source."
+    },
+    {
+      "name": "New courier and guardian static native import",
+      "result": "pass",
+      "observed": "Each30000tri,1mesh,1material,1UV map,3×2048 PBR images; front/quarter/rear native views reviewed."
+    }
+  ],
+  "proposal": "New generated courier, mechanical guardian and source-faithful chest are proposed focal roles, with the repaired shrine as a landmark. This is not final adventure acceptance.",
+  "not_claimed": [
+    "Final rig/deformation, animated Godot integration or gameplay acceptance for the new characters.",
+    "Provider automatic rigging or animation: both originals have zero skins and zero clips.",
+    "Multiview consistency, exact finger topology or all-angle quality.",
+    "Physical source units, requested quad topology, requested quality-override fidelity or a validated LOD ladder.",
+    "Lossy JPEG pixels identical to native PNG pixels.",
+    "V1 media or the previous69-second win as proof of revised scene quality.",
+    "Any new export, source ZIP, Web performance, publication, merge or deployment gate."
+  ],
+  "review_attribution": {
+    "technical_review_model": "Unknown",
+    "technical_review_effort": "Unknown",
+    "visual_review_model": "Unknown",
+    "visual_review_effort": "Unknown",
+    "basis": "Model configuration identity was not independently verified."
+  },
+  "privacy_redaction": {
+    "native_resource_paths_projected_to_leaf": 23,
+    "private_absolute_paths_found": 0,
+    "rule": "Retain leaf filenames and subresource names. Original23 fields were public res://assets paths; no private filesystem paths were found.",
+    "measurements_topology_material_values_and_hashes": "UNCHANGED",
+    "original_preserved_privately": true
+  },
+  "godot_scene_path_normalization": {
+    "count": 8,
+    "value_type": "Godot scene-tree NodePath",
+    "rule": "Removed only the leading engine scene-tree root prefix; paths now begin with RelicCourier. These were not filesystem paths or filesystem privacy removals.",
+    "measurements_resource_names_material_values_and_hashes": "UNCHANGED"
+  }
+}
