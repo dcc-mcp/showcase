@@ -105,6 +105,14 @@ func run() -> void:
 	var previous_library: AnimationLibrary = game.courier.animations.get_animation_library("")
 	game.courier.bind_animation_player(game.courier.animations)
 	if not check(game.courier.animations.has_animation("Run") and game.courier.animations.get_animation_library("") != previous_library, "Rebinding uses an isolated animation library without duplicate Run registration"): return
+	game._set_state("title")
+	var oversized := PackedByteArray()
+	oversized.resize(65537)
+	var rejected := FileAccess.open(game.save_path, FileAccess.WRITE)
+	rejected.store_buffer(oversized)
+	rejected.close()
+	game._on_action("new_expedition")
+	if not check(game.expedition.state == "title" and FileAccess.get_file_as_bytes(game.save_path) == oversized and game.ui.modal_box.get_node("ScreenDescription").text == game.ui.t("save_failed"), "Unverifiable archive blocks reset, preserves bytes and explains failure"): return
 	game.queue_free()
 	await process_frame
 	await process_frame
