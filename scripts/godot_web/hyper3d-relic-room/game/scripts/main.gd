@@ -440,11 +440,11 @@ func _arc_unlocked(stats: Dictionary) -> bool:
 	var skills = stats.get("unlocked_skills", stats.get("skills", []))
 	return skills.has("arc_bolt")
 
-func _near_drop() -> String:
+func _near_drop(radius: float = 2.0) -> String:
 	var stats: Dictionary = expedition.snapshot()
 	for id in stats.get("drops", {}):
 		var drop: Dictionary = stats.drops[id]
-		if not drop.get("picked", false) and drop_points.has(id) and _distance(drop_points[id]) <= 2.0: return id
+		if not drop.get("picked", false) and drop_points.has(id) and _distance(drop_points[id]) <= radius: return id
 	return ""
 
 func _near_prompt() -> String:
@@ -455,6 +455,7 @@ func _near_prompt() -> String:
 		return "chest_opened" if _chest_opened() else "open_chest"
 	if _distance(HOME) < 2.3 and expedition.quest_complete: return "expedition_complete"
 	if _distance(HOME) < 2.3: return "turn_in" if expedition.snapshot().get("goal_ready", false) else "town_hint"
+	if _near_drop(3.0) != "": return "out_of_range"
 	return ""
 
 func _interact() -> void:
@@ -482,6 +483,9 @@ func _interact() -> void:
 		var outcome: Dictionary = expedition.turn_in(_distance(HOME))
 		if outcome.ok: _save_progress()
 		else: _toast("town_hint")
+		return
+	# A nearby visible drop may be just outside reach; never silently imply E worked.
+	if _near_drop(3.0) != "": _toast("out_of_range")
 
 func _chest_opened() -> bool:
 	return "town_chest" in expedition.snapshot().get("opened_chests", [])
