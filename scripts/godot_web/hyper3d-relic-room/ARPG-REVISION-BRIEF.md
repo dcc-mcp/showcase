@@ -74,3 +74,28 @@ Existing GUI/input and recording restrictions remain. Real keyboard/mouse,
 rendered motion/grip/VFX visibility, listening and natural-speed audio video
 are NOT_RUN. Native headless tests and a scripted route do not clear player
 quality or balance acceptance. Preserve the failed course and candidate.
+
+## Engine decision and first measurable slice
+
+Choose Godot 4.6.3 for Relic Courier. Its existing project, source/save contracts,
+verified matching Windows release template, pinned Web templates and actual
+headless/runtime/export receipts are usable now. Unity WebGL modules/license and
+Unreal installation/license are not established here; Unreal streaming is not
+an interchangeable free static-Web export. Permission to consider engines is
+not evidence that missing modules are installed. Preserve the current work;
+reconsider only on a measured Godot blocker or a proved higher-quality migration.
+
+First functional slice: separate Walk/Run, animated hand-held weapon, cast
+windup/contact/impact with matching sound events, consistent equipment state,
+loot/save/new-game preservation and the original town-combat-return route.
+Next ARPG slice: actual projectile travel/impact, encounter groups, readable
+upgrades and a coherent fantasy HUD. Current beam and two solo encounters are
+not described as completed group/projectile combat. A Mota project decision is
+outside this game's owner scope.
+
+Gates: exact engine/template/source/artifact hashes; import/script and contact
+contracts; continuous scripted controller route; fresh portable-package launch;
+then authorized real input, rendered weapon/gait/VFX, complete sound review and
+natural-speed audio demo. Keep failed and not-run gates separate. Do not start
+shared applications, install unknown addons, retry denied input/recording, pay,
+publish or deploy to make a gate look complete.
