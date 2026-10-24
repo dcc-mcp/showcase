@@ -1,14 +1,44 @@
 {
-  "arch": {"path": "res://assets/arch.glb", "height": 3.5},
-  "column": {"path": "res://assets/column.glb", "height": 2.4},
-  "gate": {"path": "res://assets/gate.glb", "height": 2.7},
-  "crystal": {"path": "res://assets/crystal.glb", "height": 0.7},
-  "pedestal": {"path": "res://assets/pedestal.glb", "height": 1.0},
-  "portal": {"path": "res://assets/portal.glb", "height": 3.0},
-  "guardian": {"path": "res://assets/guardian.glb", "height": 2.3},
-  "chest": {"path": "res://assets/chest.glb", "height": 0.9},
-  "stairs": {"path": "res://assets/stairs.glb", "height": 0.8},
-  "shrine": {"path": "res://assets/shrine.glb", "height": 2.8},
+  "arch": {
+    "path": "res://assets/arch.glb",
+    "height": 3.5
+  },
+  "column": {
+    "path": "res://assets/column.glb",
+    "height": 2.4
+  },
+  "gate": {
+    "path": "res://assets/gate.glb",
+    "height": 2.7
+  },
+  "crystal": {
+    "path": "res://assets/crystal.glb",
+    "height": 0.7
+  },
+  "pedestal": {
+    "path": "res://assets/pedestal.glb",
+    "height": 1.0
+  },
+  "portal": {
+    "path": "res://assets/portal.glb",
+    "height": 3.0
+  },
+  "guardian": {
+    "path": "res://assets/guardian.glb",
+    "height": 2.3
+  },
+  "chest": {
+    "path": "res://assets/chest.glb",
+    "height": 0.9
+  },
+  "stairs": {
+    "path": "res://assets/stairs.glb",
+    "height": 0.8
+  },
+  "shrine": {
+    "path": "res://assets/shrine.glb",
+    "height": 2.8
+  },
   "courier_character": {
     "path": "res://assets/courier-character.glb",
     "height": 1.65,
@@ -172,5 +202,15 @@
     },
     "material_preservation": "All three embedded V2 parent PNG payloads and exterior PBR channel bindings unchanged",
     "validation": "Closed source comparison and actual native open pose reviewed; GLB UV/image checks and isolated Godot4.6.3 Lid rotation/Basefixed/close-restoration probe passed; gameplay/OS/Web pending"
+  },
+  "bronze_edge": {
+    "path": "res://assets/reused/bronze-edge.glb",
+    "height": 0.65,
+    "origin": "KayKit Adventurers CC0 independent sword mesh; see assets/reused/SOURCE.json"
+  },
+  "grove_tree": {
+    "path": "res://assets/reused/grove-tree.glb",
+    "height": 5.2,
+    "origin": "KayKit Forest CC0; see assets/reused/SOURCE.json"
   }
 }

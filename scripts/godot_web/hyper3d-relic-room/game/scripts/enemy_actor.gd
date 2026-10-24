@@ -22,6 +22,7 @@ func setup(id: String, definition: Dictionary, point: Vector3, body: Node3D, pla
 	global_position = point + Vector3(0, -0.05, 0)
 	visual = body
 	animations = player
+	if animations: animations.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
 	var collider := CollisionShape3D.new()
 	var shape := CapsuleShape3D.new()
 	shape.radius = 0.45
@@ -65,6 +66,9 @@ func tick_actor(delta: float, player_position: Vector3, enabled: bool, can_attac
 	if dead or not enabled:
 		velocity = Vector3.ZERO
 		return false
+	if animations:
+		animations.advance(delta)
+		animations.advance(0.0)
 	var offset := player_position - global_position
 	offset.y = 0.0
 	var distance := offset.length()
@@ -105,7 +109,12 @@ func tick_actor(delta: float, player_position: Vector3, enabled: bool, can_attac
 			velocity.z = 0.0
 			_play("Idle")
 	velocity.y = -1.0 if is_on_floor() else velocity.y - 20.0 * delta
+	var before := global_position
 	move_and_slide()
+	if motion_clip == "Walk" and animations:
+		var speed := Vector2(global_position.x - before.x, global_position.z - before.z).length() / delta
+		if speed < 0.1: _play("Idle")
+		else: animations.speed_scale = clampf(speed / (WALK_NOMINAL_SPEED * float(spec.display_height) / 1.65), 0.2, 1.6)
 	return contact
 
 func _face(direction: Vector3) -> void:

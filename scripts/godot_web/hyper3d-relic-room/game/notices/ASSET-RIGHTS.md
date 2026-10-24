@@ -39,3 +39,14 @@ The six unmodified sound effects in `audio/` come from Kenney's RPG Audio 1.0
 under CC0 1.0 Universal. `audio/AUDIO-SOURCES.json` records the pack source,
 original member names and hashes; `KENNEY-RPG-AUDIO.txt` retains its license.
 No third-party franchise assets, music or paid reference art are bundled.
+
+## Reused equipment and vegetation
+
+The separate sword and grove tree are KayKit assets by Kay Lousberg, licensed
+CC0-1.0, reused from the existing licensed Showcase cache. They are not original
+Hyper3D output or evidence that a generated mesh was automatically split.
+`assets/reused/SOURCE.json` records input/output hashes and the byte-preserving
+selection/repacking steps; the two original license texts are retained here.
+The character skins and original animations remain unchanged in their GLBs.
+The independent Run resource is adapted at runtime from the authored Walk keys
+with a distinct duration and arm/torso poses; it is not a provider animation.

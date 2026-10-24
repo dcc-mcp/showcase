@@ -27,3 +27,6 @@ scripts/godot_web/hyper3d-relic-room/** whitespace=blank-at-eol,blank-at-eof,spa
 play/hyper3d-relic-room/index.html whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 scripts/godot_web/hyper3d-relic-room/game/notices/KENNEY-RPG-AUDIO.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/godot_web/hyper3d-relic-room/game/notices/kenney-player-original.gd.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Preserve the verbatim CC0 creator license bytes.
+scripts/godot_web/hyper3d-relic-room/game/notices/KAYKIT-*.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

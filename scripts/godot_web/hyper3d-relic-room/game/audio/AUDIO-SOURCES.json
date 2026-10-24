@@ -9,7 +9,7 @@
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
   "license_file": "../notices/KENNEY-RPG-AUDIO.txt",
   "license_sha256": "5735dfd72cb64cbbceda4ebc00c380c41ca680edb82ff153aa7c9ab97614c539",
-  "modifications": "None",
+  "modifications": "Existing originals retained. footstep-contact.ogg derived from footstep00.ogg: 0.16s trim and 0.05s tail fade; ffmpeg libvorbis q4. Short contact avoids overlapping footfall tails during Run.",
   "files": [
     {
       "file": "creak1.ogg",
@@ -52,6 +52,13 @@
       "role": "melee swing",
       "bytes": 15532,
       "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+    },
+    {
+      "file": "footstep-contact.ogg",
+      "source_member": "Audio/footstep00.ogg",
+      "role": "animation foot contact, edited CC0 derivative",
+      "bytes": 7157,
+      "sha256": "6631ffb09767fe34e14783e69c9de70e7ab026dbb1cf3534cb92af298e05759b"
     }
   ],
   "acceptance": "Source, license and hashes verified; runtime mix and listening remain separate gates."

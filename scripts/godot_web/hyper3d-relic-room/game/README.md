@@ -15,7 +15,8 @@ stacking the item or bonus.
 
 | Input | Action |
 | --- | --- |
-| WASD / arrows | Move |
+| WASD / arrows | Walk |
+| Shift + movement | Run (independent Run animation) |
 | Space | Dash |
 | F / left click | Melee |
 | Q | Arc, after equipping the focus |
@@ -124,3 +125,22 @@ real-input follow-up belongs in the case report and is not inferred from the
 baseline OS/Web/film results. The clean source archive and exported PCK have
 separate receipts. Historical V1 wins and scripted exhibit footage do not
 establish the current loop.
+
+## Functional playtest revision
+
+The separate right-hand sword is visible from the start as a practice blade.
+Recovering/equipping the bronze edge applies the persistent attack upgrade.
+The town supports harmless Q rehearsal with a windup ring and beam; combat Arc
+still requires the recovered focus. In the grove, focus equipment unlocks the
+real mana-costing skill. Read the skill button's range, cost and failure reason.
+Attack sound and contact now follow the imported animation clock. Footfalls
+follow Walk/Run contact phases, not an independent velocity timer.
+New expedition requires the title confirmation and preserves previous save
+bytes in separate before-new archives.
+
+This source revision is a functional candidate. The corrected direction is a Godot single-player ARPG with readable skills,
+projectiles, enemy groups, equipment and loot growth. Visual direction remains
+pending review; see ../ARPG-REVISION-BRIEF.md.
+Real OS input, rendered gait/grip/VFX visibility, listening and natural-speed
+audio video remain unverified; headless checks do not clear the failed player
+quality gate.

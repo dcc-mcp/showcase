@@ -25,7 +25,7 @@ func _settle(point: Vector3) -> void:
 	for frame in range(12): await _step(1.0 / Engine.physics_ticks_per_second)
 
 func run() -> void:
-	for action in ["move_left", "move_right", "move_forward", "move_back", "dash"]:
+	for action in ["move_left", "move_right", "move_forward", "move_back", "dash", "run"]:
 		if not InputMap.has_action(action): InputMap.add_action(action)
 	var floor := StaticBody3D.new()
 	var floor_collider := CollisionShape3D.new()
@@ -70,10 +70,10 @@ func run() -> void:
 	actor.touch_axis = Vector2.ONE
 	var before := actor.position
 	for frame in range(30): await _step(1.0 / Engine.physics_ticks_per_second)
-	if not expect(actor.position.distance_to(before) > 0.9 and actor.position.distance_to(before) < 1.25,
-			"the existing Walk clip uses the agreed 2.2m/s fast-walk pace"):
+	if not expect(actor.position.distance_to(before) > 0.6 and actor.position.distance_to(before) < 0.85,
+			"Walk keeps a natural pace while Run has its own faster state"):
 		return
-	if not expect(actor.grounded_motion_distance > 0.9 and absf(actor.locomotion_speed - Courier.SPEED) < 0.05,
+	if not expect(actor.grounded_motion_distance > 0.6 and absf(actor.locomotion_speed - Courier.SPEED) < 0.05,
 			"grounded gait uses actual post-slide displacement"):
 		return
 	var distance: float = actor.grounded_motion_distance

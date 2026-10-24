@@ -36,7 +36,7 @@ func run() -> void:
 	Input.action_press("move_right")
 	var before_walk: Vector3 = game.courier.position
 	for frame in range(30): await physics_frame
-	if not expect(game.courier.motion_clip == "Walk" and game.courier.position.distance_to(before_walk) > 1.0 and bone_poses(skeleton) != idle_pose, "Walk must accompany actual native movement and joint motion"):
+	if not expect(game.courier.motion_clip == "Walk" and game.courier.position.distance_to(before_walk) > 0.6 and bone_poses(skeleton) != idle_pose, "Walk must accompany actual native movement and joint motion"):
 		return
 	game.courier.invulnerable = 1.0
 	game.courier.model.visible = false
