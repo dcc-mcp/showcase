@@ -571,13 +571,15 @@ func _on_action(action: String) -> void:
 		"new_expedition":
 			if expedition.state != "title" or not _characters_ready(): return
 			if not _archive_save_for_reset():
-				_toast("save_failed")
+				ui.show_state("title", _ui_stats())
+				ui.modal_box.get_node("ScreenDescription").text = ui.t("save_failed")
 				return
 			var previous: Dictionary = expedition.to_save()
 			expedition.start()
 			if not _save_progress():
 				expedition.restore_save(previous)
 				_set_state("title")
+				ui.modal_box.get_node("ScreenDescription").text = ui.t("save_failed")
 				return
 			_reset_world()
 			_set_state("playing")
@@ -704,8 +706,11 @@ func _archive_save_for_reset() -> bool:
 		if not FileAccess.file_exists(path): continue
 		var source := FileAccess.open(path, FileAccess.READ)
 		if not source or source.get_length() > 65536: return false
-		var bytes := source.get_buffer(source.get_length())
+		var expected := source.get_length()
+		var bytes := source.get_buffer(expected)
+		var read_error := source.get_error()
 		source.close()
+		if bytes.size() != expected or read_error != OK: return false
 		var archive: String = path + ".before-new-" + str(Time.get_unix_time_from_system()) + "-" + str(Time.get_ticks_usec())
 		if FileAccess.file_exists(archive): return false
 		var file := FileAccess.open(archive, FileAccess.WRITE)
