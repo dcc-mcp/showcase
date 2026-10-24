@@ -5,8 +5,8 @@
   "family": "Relic Sans",
   "license": "SIL OFL 1.1",
   "output": "relic-sans.otf",
-  "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54",
-  "bytes": 111548,
-  "required_codepoints": 333,
+  "sha256": "05ca2cddde7df322d54595590741f6c45877be06d9e19ce9384e34d078303775",
+  "bytes": 117136,
+  "required_codepoints": 347,
   "missing_codepoints": []
 }

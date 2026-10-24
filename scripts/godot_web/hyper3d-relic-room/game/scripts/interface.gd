@@ -4,14 +4,14 @@ signal touch_changed(axis: Vector2)
 
 const COPY := {
  "en": {
- "sfx_on":"SFX ON", "sfx_off":"SFX OFF", "brand":"RELIC / COURIER", "tag":"THE SUNKEN ARCHIVE", "title":"Beyond the
+ "practice_blade":"PRACTICE BLADE", "held_weapon":"IN HAND", "practice":"Training only in town; equip the focus for combat Arc.", "skill_practice":"PRACTICE", "sfx_on":"SFX ON", "sfx_off":"SFX OFF", "brand":"RELIC / COURIER", "tag":"THE SUNKEN ARCHIVE", "title":"Beyond the
 archive gate.",
  "intro":"Search the grove for a lost arc focus. Read the wardens' windup, recover their spoils, and return prepared. The old chest may hold an edge.",
  "continue_complete":"EXPLORE WITH YOUR GEAR", "expedition_complete":"Expedition complete. Your gear and discoveries are saved.", "start":"CONTINUE EXPEDITION", "resume":"CONTINUE", "retry":"RETURN TO SAFETY", "menu":"SAVE & RETURN TO TITLE",
  "paused":"Take a breath.", "pause_copy":"The world is paused. Your progress is kept when you recover loot or equip gear.",
  "won":"A way forward.", "win_copy":"The grove is clear. Your focus and blade are ready for the next expedition.",
  "lost":"Return with what you learned.", "lose_copy":"Your recovered gear is safe. Continue in town and read the next attack before it lands.",
- "controls":"WASD / arrows MOVE · SPACE DASH · F / click ATTACK
+ "controls":"WASD / arrows WALK · SHIFT RUN · SPACE DASH · F / click ATTACK
 Q ARC · E INTERACT · I BAG · ESC PAUSE",
  "objective":"Pass the rear gate. Recover the focus, equip your finds, then return.", "return":"The expedition is ready. Return to the turquoise beacon and press E.",
  "health":"HEALTH", "mana":"MANA", "level":"LEVEL", "ready":"DASH READY", "dash":"DASH", "interact":"USE", "melee":"ATTACK", "skill":"ARC", "bag":"BAG", "close_bag":"CLOSE BAG",
@@ -27,14 +27,14 @@ Q ARC · E INTERACT · I BAG · ESC PAUSE",
  "new_expedition":"NEW EXPEDITION", "new_title":"Leave the old path?", "new_copy":"A new expedition starts without gear and restores the wardens. Your current expedition changes only after confirmation.", "new_confirm":"START NEW EXPEDITION", "cancel":"KEEP CURRENT EXPEDITION"
  },
  "zh": {
- "sfx_on":"音效开", "sfx_off":"音效关", "brand":"遗迹 / 信使", "tag":"沉没档案馆", "title":"穿过档案馆，
+ "practice_blade":"练习剑", "held_weapon":"当前持握", "practice":"庭院可练习奥术，林地实战需装备核心。", "skill_practice":"练习", "sfx_on":"音效开", "sfx_off":"音效关", "brand":"遗迹 / 信使", "tag":"沉没档案馆", "title":"穿过档案馆，
 踏入荒野。",
  "intro":"去林地寻找失落的奥术核心。看清守卫蓄势，收取战利品，整装后返回。古老宝箱里也许藏着一柄利刃。",
  "continue_complete":"携带装备，自由探索", "expedition_complete":"探险已完成，装备与发现均已保存。", "start":"继续探险", "resume":"继续", "retry":"返回安全地带", "menu":"保存并返回标题",
  "paused":"歇一口气。", "pause_copy":"世界已暂停。收取战利品或装备后会保存进度。",
  "won":"前路已经打开。", "win_copy":"林地恢复平静。核心与利刃已备好，等待下一次远行。",
  "lost":"带着经验，再次出发。", "lose_copy":"已经收取的装备仍然安全。回到城镇，看清下一次攻击再行动。",
- "controls":"WASD / 方向键 移动 · 空格 冲刺 · F / 点击 攻击
+ "controls":"WASD / 方向键 走路 · SHIFT 跑步 · 空格 冲刺 · F / 点击 攻击
 Q 奥术 · E 交互 · I 背包 · ESC 暂停",
  "objective":"穿过后方大门，回收核心，装备所得，再返回信标。", "return":"探险目标已完成。回到青绿色信标并按 E。",
  "health":"生命", "mana":"法力", "level":"等级", "ready":"冲刺就绪", "dash":"冲刺", "interact":"交互", "melee":"攻击", "skill":"奥术", "bag":"背包", "close_bag":"关闭背包",
@@ -51,6 +51,7 @@ Q 奥术 · E 交互 · I 背包 · ESC 暂停",
  }
 }
 const SKILL_REASON_COPY := {
+ "practice": "skill_practice",
 	"skill_locked": "skill_focus", "no_mana": "skill_mana", "safe_town": "skill_safe",
 	"whiff": "skill_target", "out_of_range": "skill_range", "blocked": "skill_blocked",
 	"assets_pending": "skill_pending", "busy": "skill_action", "windup": "skill_action",
@@ -323,7 +324,7 @@ func _show_new_confirmation() -> void:
 func _refresh_header() -> void:
 	brand.text = t("brand")
 	mood_button.text = t(mood)
-	language_button.text = "中文" if locale == "en" else "ENGLISH"
+	language_button.text = "中文" if locale == "en" else "EN"
 	touch_button.text = t("touch")
 	pause_button.text = t("pause")
 	bag_button.text = t("bag")
@@ -343,7 +344,7 @@ func show_state(next_state: String, stats := {}) -> void:
 	touch_controls.visible = touch_visible and state == "playing"
 	footer.visible = state in ["playing", "exhibit"]
 	touch_clearance.visible = touch_visible and state == "playing"
-	skill_bar.visible = state == "playing" and not touch_visible
+	skill_bar.visible = state == "playing" and not touch_visible and not bag_visible
 	_refresh_skills(stats)
 	if not modal.visible:
 		if state == "exhibit":
@@ -393,6 +394,7 @@ func _clear_modal() -> void:
 func show_bag(stats: Dictionary) -> void:
 	latest_stats = stats
 	bag_visible = true
+	skill_bar.visible = false
 	modal.visible = true
 	footer.visible = false
 	touch_controls.visible = false
@@ -404,6 +406,7 @@ func show_bag(stats: Dictionary) -> void:
 	description.custom_minimum_size.x = 490
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	modal_box.add_child(description)
+	modal_box.add_child(_label(t("held_weapon") + " · " + t("bronze_edge" if stats.get("equipment", {}).get("weapon", "") == "bronze_edge" else "practice_blade"), 16, Color("9ce8c8")))
 	for id in ["arc_focus", "bronze_edge"]:
 		var slot := "focus" if id == "arc_focus" else "weapon"
 		var equipped: bool = stats.get("equipment", {}).get(slot, "") == id
@@ -411,6 +414,7 @@ func show_bag(stats: Dictionary) -> void:
 		modal_box.add_child(_label(t(id) + " · " + t("focus_copy" if id == "arc_focus" else "blade_copy"), 16))
 		var button := _button(t("equipped") if equipped else t("equip" if owned else "not_found"), "equip:" + id, "Equip" + id.capitalize().replace(" ", ""))
 		button.disabled = equipped or not owned
+		if equipped: button.add_theme_color_override("font_disabled_color", Color("9ce8c8"))
 		modal_box.add_child(button)
 	modal_box.add_child(_label(t("saved"), 12, Color("a6b7b9")))
 	var close := _button(t("close_bag"), "bag", "CloseBag")

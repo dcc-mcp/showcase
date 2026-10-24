@@ -228,26 +228,13 @@ func _build_wilderness(game: Node3D, stone: Material, dark: Material, moss: Mate
 		for index in range(6):
 			var z := -22.5 - index * 3.7
 			var x: float = side * (9.0 + sin(index * 2.1) * 1.2)
-			var trunk := CylinderMesh.new()
-			trunk.top_radius = 0.2
-			trunk.bottom_radius = 0.38
-			trunk.height = 3.0 + fmod(index * 1.3, 1.8)
-			trunk.radial_segments = 7
-			var bark: MeshInstance3D = game._mesh(trunk, dark, Vector3(x, trunk.height * 0.5, z))
-			game._register_occluder(bark, "grove_tree")
-			game._proxy(Vector3(x, 1.2, z), Vector3(0.55, 2.4, 0.55))
-			for tier in range(3):
-				var crown := CylinderMesh.new()
-				crown.top_radius = 0.08
-				crown.bottom_radius = 1.65 - tier * 0.35
-				crown.height = 2.5 - tier * 0.25
-				crown.radial_segments = 9
-				var foliage: MeshInstance3D = game._mesh(crown, game._material(Color("3b5b4c").lightened(tier * 0.045)), Vector3(x, trunk.height + 0.2 + tier * 1.0, z))
-				foliage.name = "OriginalGroveCanopy"
-				game._register_occluder(foliage, "grove_tree")
+			var tree: Node3D = game._asset("grove_tree", Vector3(x, 0, z), 4.5 + fmod(index * 0.43, 1.7), 3.2)
+			tree.rotation.y = index * 1.31
+			game._register_occluder(tree, "grove_tree")
+			game._proxy(Vector3(x, 1.2, z), Vector3(0.5, 2.4, 0.5))
 	game._box("GroveRearBoundary", Vector3(24, 1.0, 0.6), Vector3(0, 0.5, -42.7), dark, true)
 	for index in range(13):
 		var flag := BoxMesh.new()
 		flag.size = Vector3(1.3, 0.008, 1.1)
 		game._mesh(flag, paving, Vector3(sin(index * 1.1) * 1.1, 0.004, -20.5 - index * 1.65))
-	# Original native trees/terrain are environment art, never provider assets.
+	# Trees are reused KayKit CC0 assets; terrain is authored here.

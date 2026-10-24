@@ -4,7 +4,6 @@ const Courier = preload("res://scripts/courier.gd")
 const EnemyActor = preload("res://scripts/enemy_actor.gd")
 const Interface = preload("res://scripts/interface.gd")
 const ArchiveStage = preload("res://scripts/archive_stage.gd")
-const FootstepCadence = preload("res://scripts/footstep_cadence.gd")
 const HOME := Vector3(0, 0, 10.0)
 const CHEST := Vector3(-5.5, 0, -5.1)
 const SPAWN := Vector3(0, -0.05, 11.0)
@@ -32,6 +31,9 @@ var drop_visuals := {}
 var drop_points := {}
 var focus_socket: BoneAttachment3D
 var focus_visual: Node3D
+var weapon_socket: BoneAttachment3D
+var weapon_visual: Node3D
+var cast_ring: MeshInstance3D
 var chest_visual: Node3D
 var chest_lid: Node3D
 var chest_rest := Vector3.ZERO
@@ -44,7 +46,6 @@ var vfx_remaining := 0.0
 var audio_voices: Array[AudioStreamPlayer] = []
 var audio_cursor := 0
 var sfx_enabled := true
-var footstep_cadence = FootstepCadence.new()
 var mood := "warm"
 var visual_time := 0.0
 var exhibit_angle := 0.0
@@ -97,7 +98,7 @@ func _report_first_frame() -> void:
 
 func _install_input() -> void:
 	var keys := {"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT], "move_forward": [KEY_W, KEY_UP],
-		"move_back": [KEY_S, KEY_DOWN], "dash": [KEY_SPACE], "interact": [KEY_E], "pause": [KEY_ESCAPE],
+		"move_back": [KEY_S, KEY_DOWN], "run": [KEY_SHIFT], "dash": [KEY_SPACE], "interact": [KEY_E], "pause": [KEY_ESCAPE],
 		"melee": [KEY_F], "skill": [KEY_Q], "inventory": [KEY_I]}
 	for action in keys:
 		if not InputMap.has_action(action): InputMap.add_action(action)
@@ -202,19 +203,28 @@ func _build_focus_socket(character: Node3D) -> void:
 	var skeleton: Skeleton3D = skeletons[0]
 	for index in range(skeleton.get_bone_count()):
 		var label := skeleton.get_bone_name(index).to_lower()
-		if "hand" in label and ("right" in label or label.ends_with(".r") or label.ends_with("_r")):
-			focus_socket = BoneAttachment3D.new()
-			focus_socket.name = "EquippedArcFocusSocket"
-			skeleton.add_child(focus_socket)
-			focus_socket.bone_idx = index
-			focus_visual = _asset("crystal", Vector3(0, 0.02, 0), 0.22, 0.3, focus_socket)
+		if label not in ["hand.r", "hand.l"]: continue
+		var socket := BoneAttachment3D.new()
+		socket.name = "WeaponSocket" if label == "hand.r" else "FocusSocket"
+		skeleton.add_child(socket)
+		socket.bone_name = skeleton.get_bone_name(index)
+		if label == "hand.r":
+			weapon_socket = socket
+			weapon_visual = _asset("bronze_edge", Vector3(0, 0.055, 0), 0.65, 0.25, socket)
+			weapon_visual.name = "EquippedBronzeEdge"
+			weapon_visual.visible = true
+		else:
+			focus_socket = socket
+			focus_visual = _asset("crystal", Vector3(0, 0.055, 0), 0.22, 0.3, socket)
 			focus_visual.visible = false
-			return
 
 func _build_effects() -> void:
 	vfx = _mesh(BoxMesh.new(), _material(Color("70e7df"), 0.0, true), Vector3.ZERO)
 	vfx.name = "AuthoredArcBeam"
 	vfx.visible = false
+	cast_ring = _ring(Vector3.ZERO, 0.7, Color("70e7df"))
+	cast_ring.name = "CastWindupRing"
+	cast_ring.visible = false
 	for index in range(4):
 		var voice := AudioStreamPlayer.new()
 		voice.name = "CourierFootsteps" if index == 0 else "LicensedSfxVoice%d" % index
@@ -225,7 +235,7 @@ func _build_effects() -> void:
 
 func _sound(name: String) -> void:
 	if not sfx_enabled: return
-	var path := "res://audio/" + name + ".ogg"
+	var path := "res://audio/" + ("footstep-contact" if name == "footstep00" else name) + ".ogg"
 	if ResourceLoader.exists(path) and not audio_voices.is_empty():
 		var footstep := name == "footstep00"
 		var voice := audio_voices[0] if footstep else audio_voices[1 + audio_cursor]
@@ -235,12 +245,6 @@ func _sound(name: String) -> void:
 		if stream is AudioStreamOggVorbis: stream.loop = false
 		voice.stream = stream
 		voice.play()
-
-func _update_footsteps(delta: float) -> void:
-	var walking: bool = _world_active() and courier.is_on_floor() and courier.locomotion_speed > 0.15 \
-		and courier.dash_remaining <= 0.0 and courier.action_clip == ""
-	if footstep_cadence.advance(courier.grounded_motion_distance, delta, walking):
-		_sound("footstep00")
 
 func _world_active() -> bool:
 	return expedition != null and expedition.state == "playing" and not bag_open
@@ -270,7 +274,6 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("interact"): _interact()
 		if Input.is_action_just_pressed("melee"): _request_attack("melee")
 		if Input.is_action_just_pressed("skill"): _request_attack("arc_bolt")
-	_update_footsteps(delta)
 	if Input.is_action_just_pressed("inventory") and expedition.state == "playing": _on_action("bag")
 	if Input.is_action_just_pressed("pause"): _on_action("pause")
 	if expedition.state != last_reported_state: _set_state(expedition.state)
@@ -286,7 +289,7 @@ func _process(delta: float) -> void:
 		exhibit_angle += delta * 0.035
 		camera.position = Vector3(cos(exhibit_angle) * 30.0, 17.0, sin(exhibit_angle) * 30.0 + 2.0)
 		camera.look_at(Vector3(0, 2.5, -1.0))
-	var stats: Dictionary = expedition.snapshot()
+	var stats: Dictionary = _ui_stats()
 	var target := _nearest_enemy(10.0)
 	if target != "": stats["target"] = stats.enemies[target]
 	ui.update_game(stats, courier.cooldown, _near_prompt(), _danger())
@@ -300,17 +303,15 @@ func _update_zone() -> void:
 func _request_attack(skill: String) -> void:
 	if not _world_active() or not pending_action.is_empty() or chest_opening: return
 	var stats: Dictionary = expedition.snapshot()
-	if expedition.zone != "wilderness":
-		_toast("safe_town")
-		return
-	if skill == "arc_bolt" and not _arc_unlocked(stats):
+	var training: bool = expedition.zone == "town"
+	if skill == "arc_bolt" and not training and not _arc_unlocked(stats):
 		_toast("skill_locked")
 		return
 	var definition: Dictionary = config.skills[skill]
 	if float(stats.get("cooldowns", {}).get(skill, 0.0)) > 0.0:
 		_toast("cooldown")
 		return
-	if float(stats.get("mana", 0.0)) < float(definition.mana_cost):
+	if not training and float(stats.get("mana", 0.0)) < float(definition.mana_cost):
 		_toast("no_mana")
 		return
 	var target := _nearest_enemy(float(definition.range) + 1.5)
@@ -319,23 +320,33 @@ func _request_attack(skill: String) -> void:
 	if not courier.animations or not courier.animations.has_animation(clip):
 		_toast("assets_pending")
 		return
-	pending_action = {"skill": skill, "target": target, "elapsed": 0.0, "contact": float(definition.contact),
+	pending_action = {"skill": skill, "target": target, "point": point, "training": training,
+		"elapsed": 0.0, "contact": float(definition.contact), "swing_sent": false,
 		"duration": float(definition.windup) + float(definition.recovery), "sent": false}
 	courier.set_action(clip, point)
-	_sound("knifeSlice")
+	cast_ring.global_position = courier.global_position + Vector3(0, 0.08, 0)
+	cast_ring.visible = skill == "arc_bolt"
 
 func _update_player_action(delta: float) -> void:
 	if pending_action.is_empty(): return
-	pending_action.elapsed += delta
+	pending_action.elapsed = courier.animations.current_animation_position if courier.animations.is_playing() else pending_action.duration
+	if pending_action.elapsed >= maxf(0.0, float(pending_action.contact) - 0.05) and not pending_action.swing_sent:
+		pending_action.swing_sent = true
+		_sound("knifeSlice")
 	if pending_action.elapsed >= pending_action.contact and not pending_action.sent:
 		pending_action.sent = true
+		cast_ring.visible = false
+		if pending_action.skill == "arc_bolt": _show_arc(pending_action.point)
 		var id: String = pending_action.target
-		if enemies.has(id) and not enemies[id].dead:
+		if pending_action.training:
+			_toast("practice")
+		elif enemies.has(id) and not enemies[id].dead:
 			var target: Vector3 = enemies[id].global_position
 			if _line_clear(courier.global_position, target, [courier.get_rid(), enemies[id].get_rid()]):
 				var outcome: Dictionary = expedition.request_player_attack(pending_action.skill, id, _flat_distance(courier.global_position, target))
 				if outcome.ok:
 					_sound("chop")
+					_hit_particles(target + Vector3.UP)
 					if pending_action.skill == "arc_bolt": _show_arc(target)
 				else: _toast(String(outcome.reason))
 			else: _toast("blocked")
@@ -344,9 +355,56 @@ func _update_player_action(delta: float) -> void:
 		pending_action.clear()
 		courier.set_action("")
 
+func _hit_particles(point: Vector3) -> void:
+	var particles := CPUParticles3D.new()
+	particles.name = "SkillImpactParticles"
+	particles.amount = 18
+	particles.lifetime = 0.35
+	particles.one_shot = true
+	particles.explosiveness = 1.0
+	particles.direction = Vector3.UP
+	particles.spread = 120.0
+	particles.initial_velocity_min = 1.0
+	particles.initial_velocity_max = 2.0
+	particles.gravity = Vector3(0, -3, 0)
+	var spark := SphereMesh.new()
+	spark.radius = 0.04
+	spark.height = 0.08
+	spark.radial_segments = 6
+	spark.rings = 3
+	spark.material = _material(Color("b0fff0"), 0.0, true)
+	particles.mesh = spark
+	particles.add_to_group("ExpeditionEffects")
+	add_child(particles)
+	particles.global_position = point
+	particles.finished.connect(particles.queue_free)
+	particles.emitting = true
+
+func _ui_stats() -> Dictionary:
+	var stats: Dictionary = expedition.snapshot()
+	stats["skill_context"] = {}
+	for skill in config.skills:
+		var spec: Dictionary = config.skills[skill]
+		var reason := ""
+		var target := _nearest_enemy(float(spec.range))
+		if not pending_action.is_empty() or chest_opening: reason = "action_busy"
+		elif expedition.zone == "town": reason = "practice"
+		elif skill == "arc_bolt" and not _arc_unlocked(stats): reason = "skill_locked"
+		elif float(stats.cooldowns.get(skill, 0.0)) > 0.0: reason = "cooldown"
+		elif stats.mana < float(spec.mana_cost): reason = "no_mana"
+		elif target == "": reason = "out_of_range"
+		elif not _line_clear(courier.global_position, enemies[target].global_position, [courier.get_rid(), enemies[target].get_rid()]): reason = "blocked"
+		stats.skill_context[skill] = {"reason": reason, "range": spec.range,
+			"cooldown": stats.cooldowns.get(skill, 0.0), "mana_cost": spec.mana_cost}
+	return stats
+
 func _show_arc(target: Vector3) -> void:
 	var origin := focus_socket.global_position if focus_socket else courier.global_position + Vector3(0, 1.15, 0)
 	var finish := target + Vector3(0, 1.1, 0)
+	var ray := PhysicsRayQueryParameters3D.create(origin, finish, 1)
+	var obstruction := get_world_3d().direct_space_state.intersect_ray(ray)
+	if not obstruction.is_empty(): finish = obstruction.position
+	if origin.distance_to(finish) < 0.01: return
 	(vfx.mesh as BoxMesh).size = Vector3(0.065, 0.065, origin.distance_to(finish))
 	vfx.position = (origin + finish) * 0.5
 	vfx.look_at(finish)
@@ -448,7 +506,7 @@ func _update_chest(delta: float) -> void:
 					_toast(String(outcome.reason))
 	chest_lid.rotation = chest_rest + Vector3(-deg_to_rad(100.0) * (1.0 if _chest_opened() else smoothstep(0.0, 1.0, chest_progress)), 0, 0)
 
-func _chest_particles() -> void:
+func _chest_particles(point: Vector3 = CHEST) -> void:
 	var particles := CPUParticles3D.new()
 	particles.name = "AuthoredChestDust"
 	particles.one_shot = true
@@ -466,7 +524,7 @@ func _chest_particles() -> void:
 	particles.mesh.height = 0.05
 	add_child(particles)
 	particles.add_to_group("ExpeditionEffects")
-	particles.global_position = CHEST + Vector3(0, 0.9, 0)
+	particles.global_position = point + Vector3(0, 0.9, 0)
 	particles.finished.connect(particles.queue_free)
 	particles.emitting = true
 
@@ -492,10 +550,13 @@ func _consume_events() -> void:
 		point = drop_points.get(id, point)
 		drop_points[id] = point
 		if not drop_visuals.has(id):
-			drop_visuals[id] = _asset("crystal", point, 0.35, 0.5)
+			drop_visuals[id] = _asset("bronze_edge" if drop.item_id == "bronze_edge" else "crystal", point, 0.55, 0.5)
 		drop_visuals[id].position = drop_points[id]
 		drop_visuals[id].visible = not drop.get("picked", false)
 	if focus_visual: focus_visual.visible = stats.get("equipment", {}).get("focus", "") == "arc_focus"
+	if weapon_visual:
+		weapon_visual.visible = true
+		weapon_visual.set_meta("equipped_item", "bronze_edge" if stats.get("equipment", {}).get("weapon", "") == "bronze_edge" else "practice_blade")
 
 func _on_action(action: String) -> void:
 	if action.begins_with("equip:"):
@@ -507,6 +568,19 @@ func _on_action(action: String) -> void:
 			ui.show_bag(expedition.snapshot())
 		return
 	match action:
+		"new_expedition":
+			if expedition.state != "title" or not _characters_ready(): return
+			if not _archive_save_for_reset():
+				_toast("save_failed")
+				return
+			var previous: Dictionary = expedition.to_save()
+			expedition.start()
+			if not _save_progress():
+				expedition.restore_save(previous)
+				_set_state("title")
+				return
+			_reset_world()
+			_set_state("playing")
 		"start":
 			if not _characters_ready(): return
 			AudioServer.set_bus_mute(0, not sfx_enabled)
@@ -541,7 +615,6 @@ func _on_action(action: String) -> void:
 			_set_state("title")
 		"language":
 			ui.change_locale()
-			ui.show_bag(expedition.snapshot()) if bag_open else ui.show_state(expedition.state, expedition.snapshot())
 		"mood": _set_mood("moon" if mood == "warm" else "warm")
 		"touch":
 			ui.touch_visible = not ui.touch_visible
@@ -573,7 +646,14 @@ func _set_state(state: String) -> void:
 		courier.set_action("")
 	if state != "playing": bag_open = false
 	_sync_controls()
-	ui.show_state(state, expedition.snapshot())
+	var stats: Dictionary = _ui_stats()
+	if state == "title":
+		for path in [save_path, save_path + ".bak"]:
+			var saved: Dictionary = _read_verified_save(path)
+			if saved.ok:
+				stats["quest_complete"] = saved.value.quest_complete
+				break
+	ui.show_state(state, stats)
 	if state == "title": _apply_exhibit_view("arrival-wide")
 	print("RELIC_STATE ", JSON.stringify(qa_snapshot()))
 
@@ -591,8 +671,9 @@ func _sync_controls() -> void:
 		if not _world_active(): voice.stop()
 		voice.stream_paused = false
 	if not _world_active():
-		footstep_cadence.reset(courier.grounded_motion_distance)
 		if not audio_voices.is_empty(): audio_voices[0].stop()
+	if cast_ring:
+		cast_ring.visible = _world_active() and not pending_action.is_empty() and pending_action.skill == "arc_bolt" and not pending_action.sent
 	courier.touch_axis = Vector2.ZERO
 	ui.clear_touch()
 
@@ -617,6 +698,24 @@ func _read_verified_save(path: String) -> Dictionary:
 	var probe = Expedition.new(config)
 	var validation: Dictionary = probe.restore_save(value)
 	return {"ok": validation.ok, "exists": true, "value": value}
+
+func _archive_save_for_reset() -> bool:
+	for path in [save_path, save_path + ".bak"]:
+		if not FileAccess.file_exists(path): continue
+		var source := FileAccess.open(path, FileAccess.READ)
+		if not source or source.get_length() > 65536: return false
+		var bytes := source.get_buffer(source.get_length())
+		source.close()
+		var archive: String = path + ".before-new-" + str(Time.get_unix_time_from_system()) + "-" + str(Time.get_ticks_usec())
+		if FileAccess.file_exists(archive): return false
+		var file := FileAccess.open(archive, FileAccess.WRITE)
+		if not file: return false
+		file.store_buffer(bytes)
+		file.flush()
+		var error := file.get_error()
+		file.close()
+		if error != OK or FileAccess.get_file_as_bytes(archive) != bytes: return false
+	return true
 
 func _save_progress() -> bool:
 	var temp := save_path + ".tmp"
@@ -698,6 +797,8 @@ func _build_player() -> void:
 	courier.model = body
 	var character := _asset("courier_character", Vector3.ZERO, 1.65, 2.0, body)
 	courier.bind_animation_player(_character_animation(character, "courier_character"))
+	courier.footstep_contact.connect(func():
+		if _world_active(): _sound("footstep00"))
 	courier.collision_layer = 4
 	courier.collision_mask = 1 | 2
 	courier.reset_at(SPAWN)

@@ -10,15 +10,20 @@ func frames(count: int) -> void:
 func steer(direction: Vector2) -> void:
 	game.courier.touch_axis = Vector2(direction.x-direction.y,direction.x+direction.y).normalized() if direction.length_squared()>0.001 else Vector2.ZERO
 func walk_to(target: Vector2) -> bool:
+	Input.action_press("run")
 	for index in range(1000):
 		var here := Vector2(game.courier.position.x,game.courier.position.z)
 		if here.distance_to(target)<0.20:
 			steer(Vector2.ZERO)
+			Input.action_release("run")
 			route.append({"target":[target.x,target.y],"actual":[here.x,here.y],"floor":game.courier.is_on_floor()})
 			return true
 		steer((target-here).normalized())
 		await physics_frame
-		if game.expedition.state != "playing": return false
+		if game.expedition.state != "playing":
+			Input.action_release("run")
+			return false
+	Input.action_release("run")
 	push_error("Course waypoint blocked: "+str(target)+" from "+str(game.courier.position))
 	return false
 func interact() -> void:
