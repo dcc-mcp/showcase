@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "godot_application": "Godot standard editor CLI",
+  "godot_version": "4.7.2.stable.official.ed1daf0bf",
+  "capture_provider": "none; concept generated, native pixels unobserved",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 72,
+      "sha256": "308a40fa1d89ae5ea4390b4c9b46a0108b09f171f07898f25d451fa0c69c4e9f"
+    },
+    {
+      "path": "concept-prompt.txt",
+      "bytes": 1903,
+      "sha256": "2f4ed8e23fd3b36d38a85cfc2b335b9c620b56722863e5ed71107f6b0cb20ca7"
+    },
+    {
+      "path": "concept.jpg",
+      "bytes": 328444,
+      "sha256": "fb4b56c94f608a8f2652ecc4abb68f8fe0dc7e4c8e8252e82a81e99dad059fb6",
+      "width": 1536,
+      "height": 1024,
+      "bit_depth": 8,
+      "role": "AI-generated concept, not gameplay capture"
+    },
+    {
+      "path": "export-provenance.json",
+      "bytes": 13398,
+      "sha256": "0df14bc5f849e4c33042cb5c255425588072e5a6931b687561c552c71198fe32"
+    },
+    {
+      "path": "layout-checks.json",
+      "bytes": 6984,
+      "sha256": "84da117e7bd4e15c7ccc0a0a674bca1ceb787fca1486983883c95707689c0e56"
+    },
+    {
+      "path": "model-attribution.json",
+      "bytes": 2440,
+      "sha256": "45f45fc0ed5193022cef0af4d4d8701603675b4c8189e38366ae8fdb668200c4"
+    },
+    {
+      "path": "repository-checks.json",
+      "bytes": 1505,
+      "sha256": "9f47c66fc19c68c2763260115d1d51e1a1afc6db7c777166d4c481ebbeb26f2e"
+    },
+    {
+      "path": "review-status.json",
+      "bytes": 655,
+      "sha256": "da452b139d32a57233a338a863714db4acfc8e1923386d6dbdbf55116407d964"
+    },
+    {
+      "path": "rules-checks.json",
+      "bytes": 11099,
+      "sha256": "78068f32e792de519f0317440314dff50a8ea8bf5fef2c10fb07eb60f187f7e8"
+    },
+    {
+      "path": "simulation-10000.json",
+      "bytes": 133378,
+      "sha256": "3cecc5605a9e2bb8c108d214e307c8c101705979c41e00eba250ff605803c57e"
+    },
+    {
+      "path": "technical-review.json",
+      "bytes": 1112,
+      "sha256": "97ce81238c8c8f6a5fd29a349e5f516c1bd05ddde0d0b7c3a16a1ce56638f05c"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "stage_id": "planning",
+    "stage": "planning",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  },
+  {
+    "stage_id": "creation",
+    "stage": "creation",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  },
+  {
+    "stage_id": "code",
+    "stage": "code",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  },
+  {
+    "stage_id": "reference",
+    "stage": "reference",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  },
+  {
+    "stage_id": "post_production",
+    "stage": "post production",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  },
+  {
+    "stage_id": "review_technical",
+    "stage": "review technical",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  },
+  {
+    "stage_id": "review_visual",
+    "stage": "review visual",
+    "model": "Unknown",
+    "reasoning_effort": "Unknown",
+    "record_status": "unknown",
+    "basis": "No accepted public-safe configuration receipt retained for identity attribution.",
+    "scope": "Current candidate; no model identity inferred from self-description."
+  }
+]

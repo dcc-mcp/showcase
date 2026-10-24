@@ -1,0 +1,17 @@
+{
+  "scope": "New isolated checkout; original projects and gallery selection unchanged",
+  "checks": [
+    {"command": "python scripts/test_validate_collection.py", "exit_code": 0, "tests": 58},
+    {"command": "python scripts/validate_collection.py", "exit_code": 0, "observed": "PASS public collection contract"},
+    {"command": "python scripts/test_localization.py", "exit_code": 0, "tests": 18},
+    {"command": "python scripts/test_playable.py", "exit_code": 0, "tests": 6},
+    {"command": "python scripts/test_build_site.py", "exit_code": 0, "observed": "all build guards verified"},
+    {"command": "python scripts/validate_entry.py docs/showcase/stairkeep", "exit_code": 0, "observed": "PASS stairkeep"},
+    {"command": "python scripts/build_site.py --out _site-stairkeep-review", "exit_code": 0, "files": 712, "size_mib_displayed": 147.2, "observed": "OK all selected cases, references and media satisfy the publication contract"}
+  ],
+  "preparation": [
+    "Windows checkout initially converted existing text line endings and invalidated byte manifests. Committed bytes were restored only in this isolated checkout; existing source changes were not introduced or committed.",
+    "The existing four official 4.6.3 shared runtime files were materialized and SHA-256 verified into ignored local cache for the repository build. They are not used by Stairkeep's separate 4.7.2 candidate."
+  ],
+  "not_claimed": ["Browser preview", "Native rendered pixels or actual human input", "Deployment"]
+}

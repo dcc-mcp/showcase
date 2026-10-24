@@ -1,0 +1,5825 @@
+{
+  "combat_preview_actual_comparisons": 69968,
+  "completed_runs": 10000,
+  "decisions": 284253,
+  "elapsed_ms": 112120,
+  "engine": "4.7.2-stable (official)",
+  "examples": {
+    "attack/won": {
+      "dead_end_analysis": {},
+      "events": [
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 0,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 1,
+          "target": "f1_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f1_moss"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 7,
+          "target": "f1_door_stairs"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 6,
+          "target": "f2_coin_cache"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/edge"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f2_key_start"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 7,
+          "target": "f1_cinder"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f1_key_spare"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 9,
+          "target": "f1_door_armory"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 3,
+          "target": "f1_atk"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 2,
+          "target": "f1_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 14,
+          "target": "f2_shop/ward"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f2_goblin"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f2_door_vault"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 16,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 3,
+          "target": "f2_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 40,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 16,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 2,
+          "target": "f2_vault_gold"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 65,
+            "hp": 233,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 40,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 9,
+          "target": "f2_stone_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 2,
+            "gold": 65,
+            "hp": 233,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 65,
+            "hp": 233,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 4,
+          "target": "f3_key_choice"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 2,
+            "gold": 85,
+            "hp": 177,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 2,
+            "gold": 65,
+            "hp": 233,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f3_hall_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 2,
+            "gold": 85,
+            "hp": 177,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 2,
+            "gold": 85,
+            "hp": 177,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 8,
+          "target": "f3_door_supply"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 17,
+            "floor": 2,
+            "gold": 85,
+            "hp": 177,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 2,
+            "gold": 85,
+            "hp": 177,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 3,
+          "target": "f3_supply_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 17,
+            "floor": 2,
+            "gold": 85,
+            "hp": 237,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 17,
+            "floor": 2,
+            "gold": 85,
+            "hp": 177,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f3_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 17,
+            "floor": 1,
+            "gold": 107,
+            "hp": 182,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 17,
+            "floor": 2,
+            "gold": 85,
+            "hp": 237,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 18,
+          "target": "f2_skeleton"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 22,
+            "def": 17,
+            "floor": 1,
+            "gold": 107,
+            "hp": 262,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 17,
+            "floor": 1,
+            "gold": 107,
+            "hp": 182,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f2_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 23,
+            "def": 17,
+            "floor": 1,
+            "gold": 107,
+            "hp": 262,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 22,
+            "def": 17,
+            "floor": 1,
+            "gold": 107,
+            "hp": 262,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 3,
+          "target": "f2_key_spare"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 24,
+            "def": 17,
+            "floor": 2,
+            "gold": 107,
+            "hp": 262,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 23,
+            "def": 17,
+            "floor": 1,
+            "gold": 107,
+            "hp": 262,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 17,
+          "target": "f3_door_heart"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 24,
+            "def": 17,
+            "floor": 1,
+            "gold": 92,
+            "hp": 382,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 24,
+            "def": 17,
+            "floor": 2,
+            "gold": 107,
+            "hp": 262,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 23,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 25,
+            "def": 17,
+            "floor": 2,
+            "gold": 142,
+            "hp": 211,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": true
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 24,
+            "def": 17,
+            "floor": 1,
+            "gold": 92,
+            "hp": 382,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 25,
+          "target": "f3_warden"
+        }
+      ],
+      "outcome": "won",
+      "policy": "attack",
+      "run_index": 1,
+      "seed": 20365754,
+      "sequence": [
+        "f1_key_start",
+        "f1_moss",
+        "f1_door_stairs",
+        "f2_coin_cache",
+        "f2_shop/edge",
+        "f2_key_start",
+        "f1_cinder",
+        "f1_key_spare",
+        "f1_door_armory",
+        "f1_atk",
+        "f1_potion",
+        "f2_shop/ward",
+        "f2_goblin",
+        "f2_door_vault",
+        "f2_def",
+        "f2_vault_gold",
+        "f2_stone_guard",
+        "f3_key_choice",
+        "f3_hall_guard",
+        "f3_door_supply",
+        "f3_supply_def",
+        "f3_potion",
+        "f2_skeleton",
+        "f2_potion",
+        "f2_key_spare",
+        "f3_door_heart",
+        "f2_shop/flask",
+        "f3_warden"
+      ],
+      "state": {
+        "atk": 33,
+        "cleared": [
+          "f1_key_start",
+          "f1_moss",
+          "f1_door_stairs",
+          "f2_coin_cache",
+          "f2_key_start",
+          "f1_cinder",
+          "f1_key_spare",
+          "f1_door_armory",
+          "f1_atk",
+          "f1_potion",
+          "f2_goblin",
+          "f2_door_vault",
+          "f2_def",
+          "f2_vault_gold",
+          "f2_stone_guard",
+          "f3_key_choice",
+          "f3_hall_guard",
+          "f3_door_supply",
+          "f3_supply_def",
+          "f3_potion",
+          "f2_skeleton",
+          "f2_potion",
+          "f2_key_spare",
+          "f3_door_heart",
+          "f3_warden"
+        ],
+        "def": 17,
+        "floor": 2,
+        "gold": 142,
+        "hp": 211,
+        "keys": {
+          "blue": 0,
+          "yellow": 0
+        },
+        "pos": [
+          7,
+          1
+        ],
+        "purchases": {
+          "f2_shop/edge": 1,
+          "f2_shop/flask": 1,
+          "f2_shop/ward": 1
+        },
+        "won": true
+      }
+    },
+    "cautious/won": {
+      "dead_end_analysis": {},
+      "events": [
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 0,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 1,
+          "target": "f1_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f1_moss"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 7,
+          "target": "f1_door_stairs"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 6,
+          "target": "f2_coin_cache"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f2_key_start"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/edge"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 7,
+          "target": "f1_cinder"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f1_key_spare"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 10,
+          "target": "f2_shop/ward"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 10,
+          "target": "f1_door_armory"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 9,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 3,
+          "target": "f1_atk"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 9,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 2,
+          "target": "f1_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 14,
+          "target": "f2_goblin"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f2_door_vault"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 16,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 3,
+          "target": "f2_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 40,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 16,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 2,
+          "target": "f2_vault_gold"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 25,
+            "hp": 393,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 40,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 10,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 50,
+            "hp": 353,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 25,
+            "hp": 393,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 10,
+          "target": "f2_stone_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 2,
+            "gold": 50,
+            "hp": 353,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 50,
+            "hp": 353,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 4,
+          "target": "f3_key_choice"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 1,
+            "gold": 35,
+            "hp": 473,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 2,
+            "gold": 50,
+            "hp": 353,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 15,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 417,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 1,
+            "gold": 35,
+            "hp": 473,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 15,
+          "target": "f3_hall_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 417,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 417,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 8,
+          "target": "f3_door_supply"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 477,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 417,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 2,
+          "target": "f3_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 17,
+            "floor": 2,
+            "gold": 55,
+            "hp": 477,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 477,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 3,
+          "target": "f3_supply_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 17,
+            "floor": 1,
+            "gold": 77,
+            "hp": 422,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 17,
+            "floor": 2,
+            "gold": 55,
+            "hp": 477,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 19,
+          "target": "f2_skeleton"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 22,
+            "def": 17,
+            "floor": 1,
+            "gold": 77,
+            "hp": 422,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 17,
+            "floor": 1,
+            "gold": 77,
+            "hp": 422,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f2_key_spare"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 23,
+            "def": 17,
+            "floor": 1,
+            "gold": 77,
+            "hp": 502,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 22,
+            "def": 17,
+            "floor": 1,
+            "gold": 77,
+            "hp": 422,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f2_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 24,
+            "def": 17,
+            "floor": 2,
+            "gold": 77,
+            "hp": 502,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 23,
+            "def": 17,
+            "floor": 1,
+            "gold": 77,
+            "hp": 502,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 18,
+          "target": "f3_door_heart"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 25,
+            "def": 17,
+            "floor": 2,
+            "gold": 127,
+            "hp": 331,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": true
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 24,
+            "def": 17,
+            "floor": 2,
+            "gold": 77,
+            "hp": 502,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f3_warden"
+        }
+      ],
+      "outcome": "won",
+      "policy": "cautious",
+      "run_index": 3,
+      "seed": 20575212,
+      "sequence": [
+        "f1_key_start",
+        "f1_moss",
+        "f1_door_stairs",
+        "f2_coin_cache",
+        "f2_key_start",
+        "f2_shop/edge",
+        "f1_cinder",
+        "f1_key_spare",
+        "f2_shop/ward",
+        "f1_door_armory",
+        "f1_atk",
+        "f1_potion",
+        "f2_goblin",
+        "f2_door_vault",
+        "f2_def",
+        "f2_vault_gold",
+        "f2_shop/flask",
+        "f2_stone_guard",
+        "f3_key_choice",
+        "f2_shop/flask",
+        "f3_hall_guard",
+        "f3_door_supply",
+        "f3_potion",
+        "f3_supply_def",
+        "f2_skeleton",
+        "f2_key_spare",
+        "f2_potion",
+        "f3_door_heart",
+        "f3_warden"
+      ],
+      "state": {
+        "atk": 33,
+        "cleared": [
+          "f1_key_start",
+          "f1_moss",
+          "f1_door_stairs",
+          "f2_coin_cache",
+          "f2_key_start",
+          "f1_cinder",
+          "f1_key_spare",
+          "f1_door_armory",
+          "f1_atk",
+          "f1_potion",
+          "f2_goblin",
+          "f2_door_vault",
+          "f2_def",
+          "f2_vault_gold",
+          "f2_stone_guard",
+          "f3_key_choice",
+          "f3_hall_guard",
+          "f3_door_supply",
+          "f3_potion",
+          "f3_supply_def",
+          "f2_skeleton",
+          "f2_key_spare",
+          "f2_potion",
+          "f3_door_heart",
+          "f3_warden"
+        ],
+        "def": 17,
+        "floor": 2,
+        "gold": 127,
+        "hp": 331,
+        "keys": {
+          "blue": 0,
+          "yellow": 0
+        },
+        "pos": [
+          7,
+          1
+        ],
+        "purchases": {
+          "f2_shop/edge": 1,
+          "f2_shop/flask": 2,
+          "f2_shop/ward": 1
+        },
+        "won": true
+      }
+    },
+    "defense/won": {
+      "dead_end_analysis": {},
+      "events": [
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 0,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 1,
+          "target": "f1_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f1_moss"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f1_door_armory"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 315,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f1_potion"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 315,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 315,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 2,
+          "target": "f1_atk"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 315,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 10,
+          "target": "f1_cinder"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f1_key_spare"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 5,
+          "target": "f1_door_stairs"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 1,
+            "gold": 40,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 6,
+          "target": "f2_coin_cache"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 9,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 1,
+            "gold": 40,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/ward"
+        },
+        {
+          "after": {
+            "atk": 27,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 9,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f2_key_start"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 27,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/edge"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f2_goblin"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f2_door_vault"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 16,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 3,
+          "target": "f2_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 40,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 16,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 2,
+          "target": "f2_vault_gold"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 62,
+            "hp": 213,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 40,
+            "hp": 273,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 10,
+          "target": "f2_skeleton"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 1,
+            "gold": 62,
+            "hp": 293,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 62,
+            "hp": 213,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f2_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 1,
+            "gold": 62,
+            "hp": 293,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 1,
+            "gold": 62,
+            "hp": 293,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 3,
+          "target": "f2_key_spare"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 1,
+            "gold": 47,
+            "hp": 413,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 1,
+            "gold": 62,
+            "hp": 293,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 14,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 1,
+            "gold": 72,
+            "hp": 373,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 1,
+            "gold": 47,
+            "hp": 413,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 10,
+          "target": "f2_stone_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 2,
+            "gold": 72,
+            "hp": 373,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 1,
+            "gold": 72,
+            "hp": 373,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 4,
+          "target": "f3_key_choice"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 1,
+            "gold": 57,
+            "hp": 493,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 2,
+            "gold": 72,
+            "hp": 373,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 15,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 1,
+            "gold": 57,
+            "hp": 493,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 15,
+          "target": "f3_hall_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f3_door_blade"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 22,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 3,
+          "target": "f3_atk"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 23,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 22,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 2,
+          "target": "f3_blade_gold"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 24,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 437,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 23,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 437,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 9,
+          "target": "f3_door_heart"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 25,
+            "def": 16,
+            "floor": 2,
+            "gold": 147,
+            "hp": 297,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": true
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 24,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 437,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f3_warden"
+        }
+      ],
+      "outcome": "won",
+      "policy": "defense",
+      "run_index": 2,
+      "seed": 20470483,
+      "sequence": [
+        "f1_key_start",
+        "f1_moss",
+        "f1_door_armory",
+        "f1_potion",
+        "f1_atk",
+        "f1_cinder",
+        "f1_key_spare",
+        "f1_door_stairs",
+        "f2_coin_cache",
+        "f2_shop/ward",
+        "f2_key_start",
+        "f2_shop/edge",
+        "f2_goblin",
+        "f2_door_vault",
+        "f2_def",
+        "f2_vault_gold",
+        "f2_skeleton",
+        "f2_potion",
+        "f2_key_spare",
+        "f2_shop/flask",
+        "f2_stone_guard",
+        "f3_key_choice",
+        "f2_shop/flask",
+        "f3_hall_guard",
+        "f3_door_blade",
+        "f3_atk",
+        "f3_blade_gold",
+        "f3_door_heart",
+        "f3_warden"
+      ],
+      "state": {
+        "atk": 38,
+        "cleared": [
+          "f1_key_start",
+          "f1_moss",
+          "f1_door_armory",
+          "f1_potion",
+          "f1_atk",
+          "f1_cinder",
+          "f1_key_spare",
+          "f1_door_stairs",
+          "f2_coin_cache",
+          "f2_key_start",
+          "f2_goblin",
+          "f2_door_vault",
+          "f2_def",
+          "f2_vault_gold",
+          "f2_skeleton",
+          "f2_potion",
+          "f2_key_spare",
+          "f2_stone_guard",
+          "f3_key_choice",
+          "f3_hall_guard",
+          "f3_door_blade",
+          "f3_atk",
+          "f3_blade_gold",
+          "f3_door_heart",
+          "f3_warden"
+        ],
+        "def": 16,
+        "floor": 2,
+        "gold": 147,
+        "hp": 297,
+        "keys": {
+          "blue": 0,
+          "yellow": 0
+        },
+        "pos": [
+          7,
+          1
+        ],
+        "purchases": {
+          "f2_shop/edge": 1,
+          "f2_shop/flask": 2,
+          "f2_shop/ward": 1
+        },
+        "won": true
+      }
+    },
+    "randomized/dead_end": {
+      "dead_end_analysis": {
+        "classification": "No legal resource-changing action exists after complete empty/shop/stair navigation BFS in this state.",
+        "reachable_navigation_nodes": 96,
+        "scope": "This particular state under the delivered move/use_stairs/buy rules, excluding reset or editing a save.",
+        "uncollected_objects": [
+          {
+            "floor_index": 2,
+            "id": "f3_door_supply",
+            "keys_owned": 0,
+            "kind": "door"
+          },
+          {
+            "floor_index": 2,
+            "id": "f3_potion",
+            "kind": "potion"
+          },
+          {
+            "floor_index": 2,
+            "id": "f3_supply_def",
+            "kind": "def"
+          },
+          {
+            "combat": {
+              "damage": -1,
+              "hit": 0,
+              "reason": "Attack cannot penetrate armor.",
+              "rounds": 0,
+              "win": false
+            },
+            "floor_index": 2,
+            "id": "f3_sealed_sentinel",
+            "kind": "enemy"
+          },
+          {
+            "combat": {
+              "damage": 140,
+              "hit": 20,
+              "reason": "Not enough HP; find another route or upgrade.",
+              "retaliation": 20,
+              "rounds": 8,
+              "win": false
+            },
+            "floor_index": 2,
+            "id": "f3_warden",
+            "kind": "enemy"
+          }
+        ]
+      },
+      "events": [
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 0,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 1,
+          "target": "f1_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f1_moss"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 7,
+          "target": "f1_door_stairs"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 195,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 5,
+          "target": "f2_goblin"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 48,
+            "hp": 195,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 195,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 3,
+          "target": "f2_coin_cache"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 33,
+            "hp": 315,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 48,
+            "hp": 195,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 1,
+            "gold": 55,
+            "hp": 115,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 33,
+            "hp": 315,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 11,
+          "target": "f2_skeleton"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 67,
+            "hp": 85,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 1,
+            "gold": 55,
+            "hp": 115,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 16,
+          "target": "f1_cinder"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 1,
+            "gold": 67,
+            "hp": 85,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 67,
+            "hp": 85,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 18,
+          "target": "f2_key_spare"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 1,
+            "gold": 67,
+            "hp": 85,
+            "keys": {
+              "blue": 2,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 1,
+            "gold": 67,
+            "hp": 85,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 13,
+          "target": "f2_key_start"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 1,
+            "gold": 47,
+            "hp": 85,
+            "keys": {
+              "blue": 2,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 1,
+            "gold": 67,
+            "hp": 85,
+            "keys": {
+              "blue": 2,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/edge"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 1,
+            "gold": 47,
+            "hp": 85,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 1,
+            "gold": 47,
+            "hp": 85,
+            "keys": {
+              "blue": 2,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 6,
+          "target": "f2_door_vault"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 1,
+            "gold": 32,
+            "hp": 205,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 1,
+            "gold": 47,
+            "hp": 85,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 7,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 11,
+            "def": 8,
+            "floor": 1,
+            "gold": 32,
+            "hp": 285,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 1,
+            "gold": 32,
+            "hp": 205,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 14,
+          "target": "f2_potion"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 12,
+            "def": 8,
+            "floor": 1,
+            "gold": 57,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 11,
+            "def": 8,
+            "floor": 1,
+            "gold": 32,
+            "hp": 285,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 6,
+          "target": "f2_stone_guard"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 13,
+            "def": 8,
+            "floor": 1,
+            "gold": 77,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 12,
+            "def": 8,
+            "floor": 1,
+            "gold": 57,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 9,
+          "target": "f2_vault_gold"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 13,
+            "def": 12,
+            "floor": 1,
+            "gold": 57,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 13,
+            "def": 8,
+            "floor": 1,
+            "gold": 77,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 10,
+          "target": "f2_shop/ward"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 57,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 13,
+            "def": 12,
+            "floor": 1,
+            "gold": 57,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 9,
+          "target": "f2_def"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 57,
+            "hp": 109,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 14,
+          "target": "f3_hall_guard"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 22,
+          "target": "f1_key_spare"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 9,
+          "target": "f1_door_armory"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f1_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 2,
+          "target": "f1_atk"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 0,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 25,
+          "target": "f3_key_choice"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 10,
+          "target": "f3_door_heart"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 22,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 6,
+          "target": "f3_door_blade"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 23,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 22,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 3,
+          "target": "f3_atk"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 24,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 23,
+            "def": 16,
+            "floor": 2,
+            "gold": 77,
+            "hp": 99,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 2,
+          "target": "f3_blade_gold"
+        }
+      ],
+      "outcome": "dead_end",
+      "policy": "randomized",
+      "run_index": 104,
+      "seed": 31152841,
+      "sequence": [
+        "f1_key_start",
+        "f1_moss",
+        "f1_door_stairs",
+        "f2_goblin",
+        "f2_coin_cache",
+        "f2_shop/flask",
+        "f2_skeleton",
+        "f1_cinder",
+        "f2_key_spare",
+        "f2_key_start",
+        "f2_shop/edge",
+        "f2_door_vault",
+        "f2_shop/flask",
+        "f2_potion",
+        "f2_stone_guard",
+        "f2_vault_gold",
+        "f2_shop/ward",
+        "f2_def",
+        "f3_hall_guard",
+        "f1_key_spare",
+        "f1_door_armory",
+        "f1_potion",
+        "f1_atk",
+        "f3_key_choice",
+        "f3_door_heart",
+        "f3_door_blade",
+        "f3_atk",
+        "f3_blade_gold"
+      ],
+      "state": {
+        "atk": 38,
+        "cleared": [
+          "f1_key_start",
+          "f1_moss",
+          "f1_door_stairs",
+          "f2_goblin",
+          "f2_coin_cache",
+          "f2_skeleton",
+          "f1_cinder",
+          "f2_key_spare",
+          "f2_key_start",
+          "f2_door_vault",
+          "f2_potion",
+          "f2_stone_guard",
+          "f2_vault_gold",
+          "f2_def",
+          "f3_hall_guard",
+          "f1_key_spare",
+          "f1_door_armory",
+          "f1_potion",
+          "f1_atk",
+          "f3_key_choice",
+          "f3_door_heart",
+          "f3_door_blade",
+          "f3_atk",
+          "f3_blade_gold"
+        ],
+        "def": 16,
+        "floor": 2,
+        "gold": 97,
+        "hp": 99,
+        "keys": {
+          "blue": 0,
+          "yellow": 0
+        },
+        "pos": [
+          3,
+          1
+        ],
+        "purchases": {
+          "f2_shop/edge": 1,
+          "f2_shop/flask": 2,
+          "f2_shop/ward": 1
+        },
+        "won": false
+      }
+    },
+    "randomized/won": {
+      "dead_end_analysis": {},
+      "events": [
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 0,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 1,
+          "target": "f1_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f1_moss"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 7,
+          "target": "f1_door_stairs"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 6,
+          "target": "f2_coin_cache"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/edge"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 9,
+          "target": "f1_cinder"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 10,
+          "target": "f2_shop/ward"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 11,
+          "target": "f1_key_spare"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 9,
+          "target": "f1_door_armory"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 10,
+          "target": "f2_key_start"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 9,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 12,
+            "floor": 1,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 13,
+          "target": "f1_atk"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 9,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 2,
+          "target": "f1_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 12,
+            "floor": 0,
+            "gold": 0,
+            "hp": 295,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 14,
+          "target": "f2_goblin"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 45,
+            "hp": 213,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 12,
+            "floor": 1,
+            "gold": 20,
+            "hp": 273,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 7,
+          "target": "f2_stone_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 12,
+            "floor": 1,
+            "gold": 45,
+            "hp": 213,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 5,
+          "target": "f3_hall_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 7,
+          "target": "f3_door_heart"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 10,
+          "target": "f3_key_choice"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 11,
+          "target": "f3_door_supply"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 201,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 141,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 2,
+          "target": "f3_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 12,
+            "floor": 1,
+            "gold": 50,
+            "hp": 321,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 12,
+            "floor": 2,
+            "gold": 65,
+            "hp": 201,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 26,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 13,
+            "floor": 2,
+            "gold": 50,
+            "hp": 321,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 12,
+            "floor": 1,
+            "gold": 50,
+            "hp": 321,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 26,
+          "target": "f3_supply_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 13,
+            "floor": 1,
+            "gold": 72,
+            "hp": 246,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 13,
+            "floor": 2,
+            "gold": 50,
+            "hp": 321,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 19,
+          "target": "f2_skeleton"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 13,
+            "floor": 1,
+            "gold": 72,
+            "hp": 246,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 13,
+            "floor": 1,
+            "gold": 72,
+            "hp": 246,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f2_key_spare"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 21,
+            "def": 13,
+            "floor": 2,
+            "gold": 122,
+            "hp": 39,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": true
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 20,
+            "def": 13,
+            "floor": 1,
+            "gold": 72,
+            "hp": 246,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 20,
+          "target": "f3_warden"
+        }
+      ],
+      "outcome": "won",
+      "policy": "randomized",
+      "run_index": 4,
+      "seed": 20679941,
+      "sequence": [
+        "f1_key_start",
+        "f1_moss",
+        "f1_door_stairs",
+        "f2_coin_cache",
+        "f2_shop/edge",
+        "f1_cinder",
+        "f2_shop/ward",
+        "f1_key_spare",
+        "f1_door_armory",
+        "f2_key_start",
+        "f1_atk",
+        "f1_potion",
+        "f2_goblin",
+        "f2_stone_guard",
+        "f3_hall_guard",
+        "f3_door_heart",
+        "f3_key_choice",
+        "f3_door_supply",
+        "f3_potion",
+        "f2_shop/flask",
+        "f3_supply_def",
+        "f2_skeleton",
+        "f2_key_spare",
+        "f3_warden"
+      ],
+      "state": {
+        "atk": 33,
+        "cleared": [
+          "f1_key_start",
+          "f1_moss",
+          "f1_door_stairs",
+          "f2_coin_cache",
+          "f1_cinder",
+          "f1_key_spare",
+          "f1_door_armory",
+          "f2_key_start",
+          "f1_atk",
+          "f1_potion",
+          "f2_goblin",
+          "f2_stone_guard",
+          "f3_hall_guard",
+          "f3_door_heart",
+          "f3_key_choice",
+          "f3_door_supply",
+          "f3_potion",
+          "f3_supply_def",
+          "f2_skeleton",
+          "f2_key_spare",
+          "f3_warden"
+        ],
+        "def": 13,
+        "floor": 2,
+        "gold": 122,
+        "hp": 39,
+        "keys": {
+          "blue": 1,
+          "yellow": 0
+        },
+        "pos": [
+          7,
+          1
+        ],
+        "purchases": {
+          "f2_shop/edge": 1,
+          "f2_shop/flask": 1,
+          "f2_shop/ward": 1
+        },
+        "won": true
+      }
+    },
+    "resource/won": {
+      "dead_end_analysis": {},
+      "events": [
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 0,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 1,
+          "target": "f1_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 1,
+            "def": 8,
+            "floor": 0,
+            "gold": 0,
+            "hp": 260,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f1_moss"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 2,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 7,
+          "target": "f1_door_stairs"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 3,
+            "def": 8,
+            "floor": 0,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 4,
+          "target": "f2_key_start"
+        },
+        {
+          "after": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 4,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 2,
+          "target": "f2_coin_cache"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 24,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 28,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/edge"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 5,
+            "def": 8,
+            "floor": 1,
+            "gold": 8,
+            "hp": 255,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 9,
+          "target": "f1_cinder"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 6,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 2,
+          "target": "f1_key_spare"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 1,
+            "gold": 5,
+            "hp": 355,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 0,
+            "gold": 20,
+            "hp": 235,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 10,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 0,
+            "gold": 5,
+            "hp": 355,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 7,
+            "def": 8,
+            "floor": 1,
+            "gold": 5,
+            "hp": 355,
+            "keys": {
+              "blue": 1,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 10,
+          "target": "f1_door_armory"
+        },
+        {
+          "after": {
+            "atk": 30,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 0,
+            "gold": 5,
+            "hp": 415,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 8,
+            "def": 8,
+            "floor": 0,
+            "gold": 5,
+            "hp": 355,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f1_potion"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 0,
+            "gold": 5,
+            "hp": 415,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 30,
+            "cleared_count": 9,
+            "def": 8,
+            "floor": 0,
+            "gold": 5,
+            "hp": 415,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 2,
+          "target": "f1_atk"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 8,
+            "floor": 1,
+            "gold": 25,
+            "hp": 385,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 10,
+            "def": 8,
+            "floor": 0,
+            "gold": 5,
+            "hp": 415,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 14,
+          "target": "f2_goblin"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 8,
+            "floor": 1,
+            "gold": 25,
+            "hp": 385,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 11,
+            "def": 8,
+            "floor": 1,
+            "gold": 25,
+            "hp": 385,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f2_door_vault"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 8,
+            "floor": 1,
+            "gold": 45,
+            "hp": 385,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 12,
+            "def": 8,
+            "floor": 1,
+            "gold": 25,
+            "hp": 385,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 3,
+          "target": "f2_vault_gold"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 12,
+            "floor": 1,
+            "gold": 45,
+            "hp": 385,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 13,
+            "def": 8,
+            "floor": 1,
+            "gold": 45,
+            "hp": 385,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "def",
+          "navigation_steps": 2,
+          "target": "f2_def"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 12,
+            "floor": 1,
+            "gold": 30,
+            "hp": 505,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 12,
+            "floor": 1,
+            "gold": 45,
+            "hp": 385,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 10,
+          "target": "f2_shop/flask"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 10,
+            "hp": 505,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 12,
+            "floor": 1,
+            "gold": 30,
+            "hp": 505,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "buy",
+          "navigation_steps": 1,
+          "target": "f2_shop/ward"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 35,
+            "hp": 465,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 14,
+            "def": 16,
+            "floor": 1,
+            "gold": 10,
+            "hp": 505,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 10,
+          "target": "f2_stone_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 2,
+            "gold": 35,
+            "hp": 465,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 15,
+            "def": 16,
+            "floor": 1,
+            "gold": 35,
+            "hp": 465,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 4,
+          "target": "f3_key_choice"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 16,
+            "def": 16,
+            "floor": 2,
+            "gold": 35,
+            "hp": 465,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f3_hall_guard"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 17,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 1
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 3,
+          "target": "f3_door_blade"
+        },
+        {
+          "after": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 2,
+            "gold": 75,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 18,
+            "def": 16,
+            "floor": 2,
+            "gold": 55,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "gold",
+          "navigation_steps": 3,
+          "target": "f3_blade_gold"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 20,
+            "def": 16,
+            "floor": 2,
+            "gold": 75,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 33,
+            "cleared_count": 19,
+            "def": 16,
+            "floor": 2,
+            "gold": 75,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "atk",
+          "navigation_steps": 2,
+          "target": "f3_atk"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 21,
+            "def": 16,
+            "floor": 1,
+            "gold": 97,
+            "hp": 373,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 20,
+            "def": 16,
+            "floor": 2,
+            "gold": 75,
+            "hp": 409,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 14,
+          "target": "f2_skeleton"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 22,
+            "def": 16,
+            "floor": 1,
+            "gold": 97,
+            "hp": 453,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 21,
+            "def": 16,
+            "floor": 1,
+            "gold": 97,
+            "hp": 373,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "potion",
+          "navigation_steps": 3,
+          "target": "f2_potion"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 23,
+            "def": 16,
+            "floor": 1,
+            "gold": 97,
+            "hp": 453,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 22,
+            "def": 16,
+            "floor": 1,
+            "gold": 97,
+            "hp": 453,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "key",
+          "navigation_steps": 3,
+          "target": "f2_key_spare"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 24,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 453,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 23,
+            "def": 16,
+            "floor": 1,
+            "gold": 97,
+            "hp": 453,
+            "keys": {
+              "blue": 1,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "door",
+          "navigation_steps": 17,
+          "target": "f3_door_heart"
+        },
+        {
+          "after": {
+            "atk": 38,
+            "cleared_count": 25,
+            "def": 16,
+            "floor": 2,
+            "gold": 147,
+            "hp": 313,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": true
+          },
+          "before": {
+            "atk": 38,
+            "cleared_count": 24,
+            "def": 16,
+            "floor": 2,
+            "gold": 97,
+            "hp": 453,
+            "keys": {
+              "blue": 0,
+              "yellow": 0
+            },
+            "won": false
+          },
+          "kind": "enemy",
+          "navigation_steps": 3,
+          "target": "f3_warden"
+        }
+      ],
+      "outcome": "won",
+      "policy": "resource",
+      "run_index": 0,
+      "seed": 20261025,
+      "sequence": [
+        "f1_key_start",
+        "f1_moss",
+        "f1_door_stairs",
+        "f2_key_start",
+        "f2_coin_cache",
+        "f2_shop/edge",
+        "f1_cinder",
+        "f1_key_spare",
+        "f2_shop/flask",
+        "f1_door_armory",
+        "f1_potion",
+        "f1_atk",
+        "f2_goblin",
+        "f2_door_vault",
+        "f2_vault_gold",
+        "f2_def",
+        "f2_shop/flask",
+        "f2_shop/ward",
+        "f2_stone_guard",
+        "f3_key_choice",
+        "f3_hall_guard",
+        "f3_door_blade",
+        "f3_blade_gold",
+        "f3_atk",
+        "f2_skeleton",
+        "f2_potion",
+        "f2_key_spare",
+        "f3_door_heart",
+        "f3_warden"
+      ],
+      "state": {
+        "atk": 38,
+        "cleared": [
+          "f1_key_start",
+          "f1_moss",
+          "f1_door_stairs",
+          "f2_key_start",
+          "f2_coin_cache",
+          "f1_cinder",
+          "f1_key_spare",
+          "f1_door_armory",
+          "f1_potion",
+          "f1_atk",
+          "f2_goblin",
+          "f2_door_vault",
+          "f2_vault_gold",
+          "f2_def",
+          "f2_stone_guard",
+          "f3_key_choice",
+          "f3_hall_guard",
+          "f3_door_blade",
+          "f3_blade_gold",
+          "f3_atk",
+          "f2_skeleton",
+          "f2_potion",
+          "f2_key_spare",
+          "f3_door_heart",
+          "f3_warden"
+        ],
+        "def": 16,
+        "floor": 2,
+        "gold": 147,
+        "hp": 313,
+        "keys": {
+          "blue": 0,
+          "yellow": 0
+        },
+        "pos": [
+          7,
+          1
+        ],
+        "purchases": {
+          "f2_shop/edge": 1,
+          "f2_shop/flask": 2,
+          "f2_shop/ward": 1
+        },
+        "won": true
+      }
+    }
+  },
+  "harness": "frontier-v1",
+  "invariant_errors": [],
+  "master_seed": 20261025,
+  "not_claimed": [
+    "A high simulation win rate proves neither all reachable states solvable nor all policies safe.",
+    "No exhaustive search of every resource state or complete universal no-softlock proof.",
+    "No browser/native input, rendering, subjective difficulty, physical device or hours-of-play validation.",
+    "The harness does not implement the later 21-floor content, death/respawn, or mirrored-map variants."
+  ],
+  "policies": {
+    "attack": {
+      "dead_end": 0,
+      "error": 0,
+      "gold_max": 182,
+      "gold_min": 100,
+      "hp_max": 331,
+      "hp_min": 2,
+      "limit": 0,
+      "runs": 2000,
+      "won": 2000
+    },
+    "cautious": {
+      "dead_end": 0,
+      "error": 0,
+      "gold_max": 147,
+      "gold_min": 127,
+      "hp_max": 331,
+      "hp_min": 274,
+      "limit": 0,
+      "runs": 2000,
+      "won": 2000
+    },
+    "defense": {
+      "dead_end": 0,
+      "error": 0,
+      "gold_max": 147,
+      "gold_min": 127,
+      "hp_max": 333,
+      "hp_min": 276,
+      "limit": 0,
+      "runs": 2000,
+      "won": 2000
+    },
+    "randomized": {
+      "dead_end": 20,
+      "error": 0,
+      "gold_max": 167,
+      "gold_min": 77,
+      "hp_max": 318,
+      "hp_min": 1,
+      "limit": 0,
+      "runs": 2000,
+      "won": 1980
+    },
+    "resource": {
+      "dead_end": 0,
+      "error": 0,
+      "gold_max": 147,
+      "gold_min": 127,
+      "hp_max": 331,
+      "hp_min": 269,
+      "limit": 0,
+      "runs": 2000,
+      "won": 2000
+    }
+  },
+  "policy_assignment": "POLICIES[run_index % 5]",
+  "real_core_navigation_moves": 1590020,
+  "requested_runs": 10000,
+  "rule_source_sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495",
+  "run_seed_formula": "master_seed + run_index * 104729",
+  "schema_version": 1,
+  "source_data_sha256": "1b1f66cd7191b5fa5a8cdab6ecc5caae34533c1adf9d8148eed93fa0ad182787",
+  "unique_decision_sequences": 7970,
+  "unique_terminal_states": 1408,
+  "verification_scope": "Headless production StairRules actions. Fixed monster positions, no injected outcome, no copied battle formula. Reachability search includes every cleared/shop tile and stair transfer, and exposes every currently legal uncollected object and affordable in-stock purchase."
+}
