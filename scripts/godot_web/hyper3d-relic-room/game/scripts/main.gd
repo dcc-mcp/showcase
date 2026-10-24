@@ -4,6 +4,7 @@ const Courier = preload("res://scripts/courier.gd")
 const EnemyActor = preload("res://scripts/enemy_actor.gd")
 const Interface = preload("res://scripts/interface.gd")
 const ArchiveStage = preload("res://scripts/archive_stage.gd")
+const FootstepCadence = preload("res://scripts/footstep_cadence.gd")
 const HOME := Vector3(0, 0, 10.0)
 const CHEST := Vector3(-5.5, 0, -5.1)
 const SPAWN := Vector3(0, -0.05, 11.0)
@@ -43,7 +44,7 @@ var vfx_remaining := 0.0
 var audio_voices: Array[AudioStreamPlayer] = []
 var audio_cursor := 0
 var sfx_enabled := true
-var step_time := 0.0
+var footstep_cadence = FootstepCadence.new()
 var mood := "warm"
 var visual_time := 0.0
 var exhibit_angle := 0.0
@@ -216,8 +217,9 @@ func _build_effects() -> void:
 	vfx.visible = false
 	for index in range(4):
 		var voice := AudioStreamPlayer.new()
-		voice.name = "LicensedSfxVoice%d" % index
-		voice.volume_db = -10.0
+		voice.name = "CourierFootsteps" if index == 0 else "LicensedSfxVoice%d" % index
+		voice.volume_db = -23.0 if index == 0 else -16.0
+		voice.max_polyphony = 1
 		add_child(voice)
 		audio_voices.append(voice)
 
@@ -225,10 +227,20 @@ func _sound(name: String) -> void:
 	if not sfx_enabled: return
 	var path := "res://audio/" + name + ".ogg"
 	if ResourceLoader.exists(path) and not audio_voices.is_empty():
-		var voice := audio_voices[audio_cursor]
-		audio_cursor = (audio_cursor + 1) % audio_voices.size()
-		voice.stream = load(path)
+		var footstep := name == "footstep00"
+		var voice := audio_voices[0] if footstep else audio_voices[1 + audio_cursor]
+		if footstep and voice.playing: return
+		if not footstep: audio_cursor = (audio_cursor + 1) % (audio_voices.size() - 1)
+		var stream = load(path).duplicate()
+		if stream is AudioStreamOggVorbis: stream.loop = false
+		voice.stream = stream
 		voice.play()
+
+func _update_footsteps(delta: float) -> void:
+	var walking: bool = _world_active() and courier.is_on_floor() and courier.locomotion_speed > 0.15 \
+		and courier.dash_remaining <= 0.0 and courier.action_clip == ""
+	if footstep_cadence.advance(courier.grounded_motion_distance, delta, walking):
+		_sound("footstep00")
 
 func _world_active() -> bool:
 	return expedition != null and expedition.state == "playing" and not bag_open
@@ -258,10 +270,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("interact"): _interact()
 		if Input.is_action_just_pressed("melee"): _request_attack("melee")
 		if Input.is_action_just_pressed("skill"): _request_attack("arc_bolt")
-		step_time -= delta
-		if courier.is_on_floor() and Vector2(courier.velocity.x, courier.velocity.z).length() > 0.5 and step_time <= 0.0:
-			_sound("footstep00")
-			step_time = 0.32
+	_update_footsteps(delta)
 	if Input.is_action_just_pressed("inventory") and expedition.state == "playing": _on_action("bag")
 	if Input.is_action_just_pressed("pause"): _on_action("pause")
 	if expedition.state != last_reported_state: _set_state(expedition.state)
@@ -577,7 +586,13 @@ func _sync_controls() -> void:
 		if actor.animations: actor.animations.active = _world_active()
 	for effect in get_tree().get_nodes_in_group("ExpeditionEffects"):
 		effect.speed_scale = 1.0 if _world_active() else 0.0
-	for voice in audio_voices: voice.stream_paused = not _world_active()
+	for voice in audio_voices:
+		# One-shots must not queue silently in menus and burst on resume.
+		if not _world_active(): voice.stop()
+		voice.stream_paused = false
+	if not _world_active():
+		footstep_cadence.reset(courier.grounded_motion_distance)
+		if not audio_voices.is_empty(): audio_voices[0].stop()
 	courier.touch_axis = Vector2.ZERO
 	ui.clear_touch()
 

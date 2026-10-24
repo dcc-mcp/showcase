@@ -1,5 +1,6 @@
 extends RefCounted
 # Original modular architecture; the generated kit remains separately named.
+const WATER_SHADER = preload("res://assets/shaders/archive_water.gdshader")
 
 func build(game: Node3D) -> void:
 	var stone := weathered(Color("68685f"), 42)
@@ -7,9 +8,7 @@ func build(game: Node3D) -> void:
 	var dark := weathered(Color("323e42"), 93)
 	var brass = game._material(Color("9a8050"), 0.65)
 	var moss := weathered(Color("3d5146"), 153)
-	var water = game._material(Color("173b45"), 0.25)
-	water.roughness = 0.28
-	game._box("SunkenWater", Vector3(160, 0.2, 160), Vector3(0, -3.5, 0), water)
+	_water(game)
 	# Connected collision floors: bridge -> court -> wings -> raised rear archive.
 	game._box("CourtyardFloor", Vector3(18, 0.65, 16), Vector3(0, -0.325, 0), stone, true)
 	game._box("ArrivalBridge", Vector3(4.8, 0.75, 8), Vector3(0, -0.375, 12), paving, true)
@@ -29,18 +28,18 @@ func build(game: Node3D) -> void:
 		for z in [-6.5, -1.0, 4.6]:
 			game._box("WingPier", Vector3(1.1, 1.8, 1.1), Vector3(side * 14.6, 0.9, z), dark)
 		for z in [-5.8, -0.4, 5.0]:
-			game._box("MossSeam", Vector3(0.25, 0.035, 4.7), Vector3(side * 7.85, 0.025, z), moss)
+			game._box("MossSeam", Vector3(0.25, 0.006, 4.7), Vector3(side * 7.85, 0.003, z), moss)
 	# Long limestone bands and sparse broken flags replace the v1 checkerboard.
 	for x in [-6.5, 0.0, 6.5]:
-		game._box("LongWalkBand", Vector3(1.1, 0.055, 13.8), Vector3(x, 0.035, 0), paving)
+		game._box("LongWalkBand", Vector3(1.1, 0.008, 13.8), Vector3(x, 0.004, 0), paving)
 	for z in [-5.0, 4.8]:
-		game._box("CourtCrossBand", Vector3(17.3, 0.055, 1.1), Vector3(0, 0.038, z), paving)
+		game._box("CourtCrossBand", Vector3(17.3, 0.008, 1.1), Vector3(0, 0.004, z), paving)
 	for index in range(15):
 		var x := -6.5 + fmod(index * 3.71, 13.0)
 		var z := -5.8 + fmod(index * 2.83, 11.6)
 		var flag := BoxMesh.new()
-		flag.size = Vector3(1.0 + fmod(index * 0.37, 0.65), 0.055, 0.55)
-		var instance = game._mesh(flag, paving, Vector3(x, 0.065, z))
+		flag.size = Vector3(1.0 + fmod(index * 0.37, 0.65), 0.008, 0.55)
+		var instance = game._mesh(flag, paving, Vector3(x, 0.004, z))
 		instance.rotation.y = (index % 3 - 1) * 0.09
 	# Rear facade: a tall asymmetric silhouette with a deep central doorway.
 	for side in [-1, 1]:
@@ -80,22 +79,14 @@ func build(game: Node3D) -> void:
 	game._proxy(Vector3(6.0, 1.2, -1.5), Vector3(1.9, 2.4, 1.9))
 	# The controller binds the actual hinged derivative and its Lid node.
 	game.build_interactive_chest()
-	var stairs: Node3D = game._asset("stairs", Vector3(-11.6, 0, -6.05), 1.6, 2.5)
+	var stairs: Node3D = game._asset("stairs", Vector3(-11.6, 0, -5.975), 1.6, 2.5)
 	stairs.rotation.y = PI
 	var measured: Dictionary = game.loaded_assets.get("stairs", {})
 	if measured.has("source_bounds"):
 		stairs.scale = Vector3(2.6 / (float(measured.source_bounds.x) * float(measured.scale)), 0.7 / 1.6, 3.1 / (float(measured.source_bounds.z) * float(measured.scale)))
 		# Authored placement adapts the kit stairs to the actual .7m veranda rise.
-		var stair_ramp := StaticBody3D.new()
-		stair_ramp.name = "WestStairTraversalProxy"
-		stair_ramp.position = Vector3(-11.6, 0.225, -6.05)
-		stair_ramp.rotation.x = atan(0.7 / 3.1)
-		var collider := CollisionShape3D.new()
-		var shape := BoxShape3D.new()
-		shape.size = Vector3(2.6, 0.25, 3.1)
-		collider.shape = shape
-		stair_ramp.add_child(collider)
-		game.add_child(stair_ramp)
+		_traversal_ramp(game, "WestStairTraversalProxy", 2.6,
+			Vector3(-11.6, 0, -4.425), Vector3(-11.6, 0.7, -7.525), paving, false)
 		game._box("WestStairLandingTread", Vector3(2.6, 0.16, 0.55), Vector3(-11.6, 0.62, -7.8), paving, true)
 	# Broken native masonry gives foreground parallax and close surface detail.
 	for index in range(18):
@@ -118,6 +109,7 @@ func weathered(color: Color, seed: int) -> StandardMaterial3D:
 	texture.width = 256
 	texture.height = 256
 	texture.noise = noise
+	texture.seamless = true
 	var ramp := Gradient.new()
 	ramp.set_color(0, Color(0.55, 0.58, 0.55))
 	ramp.set_color(1, Color(0.95, 0.94, 0.90))
@@ -126,6 +118,16 @@ func weathered(color: Color, seed: int) -> StandardMaterial3D:
 	material.albedo_color = color
 	material.albedo_texture = texture
 	material.roughness = 0.92
+	var normal := NoiseTexture2D.new()
+	normal.width = 256
+	normal.height = 256
+	normal.noise = noise
+	normal.seamless = true
+	normal.as_normal_map = true
+	normal.bump_strength = 1.6
+	material.normal_enabled = true
+	material.normal_texture = normal
+	material.normal_scale = 0.28
 	material.uv1_triplanar = true
 	material.uv1_world_triplanar = true
 	material.uv1_scale = Vector3.ONE * 0.45
@@ -158,43 +160,67 @@ func _cliff_mesh(height: float, seed: int) -> ArrayMesh:
 	surface.generate_normals()
 	return surface.commit()
 
+func _water(game: Node3D) -> MeshInstance3D:
+	var mesh := PlaneMesh.new()
+	mesh.size = Vector2(160, 160)
+	mesh.subdivide_width = 64
+	mesh.subdivide_depth = 64
+	var water := MeshInstance3D.new()
+	water.name = "SunkenWater"
+	water.mesh = mesh
+	water.position.y = -3.4
+	water.extra_cull_margin = 0.12
+	var material := ShaderMaterial.new()
+	material.shader = WATER_SHADER
+	water.material_override = material
+	game.add_child(water)
+	return water
+
 func _ramp(game: Node3D, material: Material) -> void:
+	_traversal_ramp(game, "ArchiveAccessRamp", 4.0,
+		Vector3(0, 0, -5.9), Vector3(0, 0.7, -9.0), material)
+
+func _traversal_ramp(game: Node3D, node_name: String, width: float, low: Vector3, high: Vector3, material: Material, visible := true) -> StaticBody3D:
+	assert(width > 0.0 and is_equal_approx(low.x, high.x) and not is_equal_approx(low.z, high.z))
+	var min_z := minf(low.z, high.z)
+	var max_z := maxf(low.z, high.z)
+	var min_z_height := low.y if low.z < high.z else high.y
+	var max_z_height := high.y if low.z < high.z else low.y
+	var center_z := (min_z + max_z) * 0.5
+	var half_run := (max_z - min_z) * 0.5
+	var half_width := width * 0.5
+	var bottom := minf(low.y, high.y) - 0.3
 	var body := StaticBody3D.new()
-	body.name = "ArchiveAccessRamp"
-	body.position = Vector3(0, 0.225, -7.65)
-	body.rotation.x = atan(0.7 / 3.1)
-	var mesh := BoxMesh.new()
-	mesh.size = Vector3(4.0, 0.25, 3.1)
-	var visible := MeshInstance3D.new()
-	visible.mesh = mesh
-	visible.material_override = material
-	body.add_child(visible)
+	body.name = node_name
+	body.position = Vector3(low.x, 0, center_z)
 	var collider := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = mesh.size
+	var shape := ConvexPolygonShape3D.new()
+	# Exact floor joins avoid the vertical lip introduced by rotating a thin box.
+	shape.points = PackedVector3Array([
+		Vector3(-half_width, bottom, -half_run), Vector3(half_width, bottom, -half_run),
+		Vector3(half_width, bottom, half_run), Vector3(-half_width, bottom, half_run),
+		Vector3(-half_width, min_z_height, -half_run), Vector3(half_width, min_z_height, -half_run),
+		Vector3(half_width, max_z_height, half_run), Vector3(-half_width, max_z_height, half_run)])
 	collider.shape = shape
 	body.add_child(collider)
+	if visible:
+		var surface := MeshInstance3D.new()
+		surface.name = "TraversalSurface"
+		var mesh := PlaneMesh.new()
+		mesh.size = Vector2(width, low.distance_to(high))
+		surface.mesh = mesh
+		surface.material_override = material
+		surface.position.y = (low.y + high.y) * 0.5
+		surface.rotation.x = -atan((max_z_height - min_z_height) / (max_z - min_z))
+		body.add_child(surface)
 	game.add_child(body)
+	return body
 
 func _build_wilderness(game: Node3D, stone: Material, dark: Material, moss: Material, paving: Material) -> void:
 	game._box("GateTrail", Vector3(6.0, 0.55, 8.0), Vector3(0, -0.275, -18), moss, true)
 	# Down-ramp shares the archive landing edge and trail; no vertical .7m step.
-	var ramp := StaticBody3D.new()
-	ramp.name = "RearTrailRamp"
-	ramp.position = Vector3(0, 0.225, -15.8)
-	ramp.rotation.x = -atan(0.7 / 4.0)
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(4.8, 0.25, 4.1)
-	var collider := CollisionShape3D.new()
-	collider.shape = shape
-	ramp.add_child(collider)
-	var mesh := BoxMesh.new()
-	mesh.size = shape.size
-	var visual := MeshInstance3D.new()
-	visual.mesh = mesh
-	visual.material_override = paving
-	ramp.add_child(visual)
-	game.add_child(ramp)
+	_traversal_ramp(game, "RearTrailRamp", 4.8,
+		Vector3(0, 0, -18), Vector3(0, 0.7, -14), paving)
 	game._box("WildGroveFloor", Vector3(24, 0.7, 23), Vector3(0, -0.35, -31.5), moss, true)
 	for side in [-1, 1]:
 		game._box("TrailCoping", Vector3(0.45, 0.55, 6.5), Vector3(side * 2.9, 0.275, -18.5), stone, true)
@@ -222,6 +248,6 @@ func _build_wilderness(game: Node3D, stone: Material, dark: Material, moss: Mate
 	game._box("GroveRearBoundary", Vector3(24, 1.0, 0.6), Vector3(0, 0.5, -42.7), dark, true)
 	for index in range(13):
 		var flag := BoxMesh.new()
-		flag.size = Vector3(1.3, 0.045, 1.1)
-		game._mesh(flag, paving, Vector3(sin(index * 1.1) * 1.1, 0.025, -20.5 - index * 1.65))
+		flag.size = Vector3(1.3, 0.008, 1.1)
+		game._mesh(flag, paving, Vector3(sin(index * 1.1) * 1.1, 0.004, -20.5 - index * 1.65))
 	# Original native trees/terrain are environment art, never provider assets.
