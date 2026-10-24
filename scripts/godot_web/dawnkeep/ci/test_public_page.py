@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 import subprocess
 import tempfile
+import textwrap
 import unittest
 from unittest.mock import Mock, patch
 
@@ -258,6 +259,60 @@ class PublicMatrixTests(unittest.TestCase):
         self.assertIn("'complete_four_pair_matrix': len(pairs) == 4", source)
         self.assertIn("len(report['viewports']) == len(pairs)", source)
         self.assertIn('publication needs all four workflow matrix jobs', source)
+
+
+class AptMirrorWorkflowTests(unittest.TestCase):
+    def setUp(self):
+        self.workflow = (gate.ROOT / '.github/workflows/dawnkeep-public-page.yml').read_text()
+        step = self.workflow.split("- name: Prefer the runner's HTTPS Ubuntu archive mirror\n", 1)[1]
+        block = step.split("sudo python3 - <<'PY'\n", 1)[1].split('\n          PY', 1)[0]
+        self.script = compile(textwrap.dedent(block), '<workflow Ubuntu mirror step>', 'exec')
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.mirrors = Path(self.temp.name) / 'apt-mirrors.txt'
+        self.azure = b'http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n'
+        self.archive = b'https://archive.ubuntu.com/ubuntu/\tpriority:2\n'
+        self.security = b'https://security.ubuntu.com/ubuntu/\tpriority:3\n'
+
+    def run_mirror_step(self):
+        def exact_path(value):
+            self.assertEqual(value, '/etc/apt/apt-mirrors.txt')
+            return self.mirrors
+
+        with patch('pathlib.Path', side_effect=exact_path) as target:
+            exec(self.script, {})
+        target.assert_called_once_with('/etc/apt/apt-mirrors.txt')
+
+    def test_only_existing_archive_and_azure_priorities_change(self):
+        extra = b'# retained comment\r\nhttps://mirror.example.invalid/\tpriority:4\n'
+        self.mirrors.write_bytes(self.azure + self.archive + self.security + extra)
+        self.run_mirror_step()
+        self.assertEqual(self.mirrors.read_bytes(),
+                         self.azure.replace(b'priority:1', b'priority:2') +
+                         self.archive.replace(b'priority:2', b'priority:1') + self.security + extra)
+
+    def test_unexpected_mirror_entries_fail_before_any_write(self):
+        valid = self.azure + self.archive + self.security
+        swapped = (self.azure.replace(b'priority:1', b'priority:2') +
+                   self.archive.replace(b'priority:2', b'priority:1') + self.security)
+        for data in (b'', valid.replace(self.azure, b''), valid.replace(self.archive, b''),
+                     valid + self.azure, valid + self.archive,
+                     valid.replace(self.azure, b'# ' + self.azure),
+                     valid.replace(b'archive.ubuntu.com/ubuntu/', b'archive.ubuntu.com/ubuntu-evil/'),
+                     valid.replace(b'\tpriority:1\n', b' priority:1\n'),
+                     valid.replace(b'\n', b'\r\n'), swapped):
+            with self.subTest(data=data):
+                self.mirrors.write_bytes(data)
+                with self.assertRaisesRegex(SystemExit, 'Unexpected runner Ubuntu mirror priorities'), \
+                        patch.object(Path, 'write_bytes', side_effect=AssertionError('Unexpected mirror write')):
+                    self.run_mirror_step()
+                self.assertEqual(self.mirrors.read_bytes(), data)
+
+    def test_mirror_step_precedes_both_dependency_installs(self):
+        position = self.workflow.index("- name: Prefer the runner's HTTPS Ubuntu archive mirror")
+        for command in ('python -m playwright install-deps chromium',
+                        'sudo apt-get install --yes --no-install-recommends ffmpeg'):
+            self.assertLess(position, self.workflow.index(command))
 
 
 class PublicMediaRangeTests(unittest.TestCase):
