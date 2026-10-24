@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "scope": "Prepared inputs, unexecuted native builders and source receipts; no final/native outputs",
+  "files": [
+    {
+      "path": "scripts/nuke_desert_relay/.gitattributes",
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "bytes": 8
+    },
+    {
+      "path": "scripts/nuke_desert_relay/.gitignore",
+      "sha256": "7bf51175d2243f4c524488de2cd3ca03d9ee41a8f3b3ac296d2568b5204bc2e5",
+      "bytes": 135
+    },
+    {
+      "path": "scripts/nuke_desert_relay/analyze_motion.py",
+      "sha256": "35fb044afdc02515f96f12fc70439efe80a22412a7a67ed7b22a9168e2e998d2",
+      "bytes": 3246
+    },
+    {
+      "path": "scripts/nuke_desert_relay/asset-reuse.json",
+      "sha256": "a7dd182886a281e6dd89cb734aca1c128affe04994e628ec002d6592f37f13cd",
+      "bytes": 4511
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/ai-distant-ruins.png",
+      "sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a",
+      "bytes": 1427751,
+      "width": 1672,
+      "height": 941,
+      "bit_depth": 8
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/ai-sky.png",
+      "sha256": "c5bf94e5e189972a704965c8f88d431a12d074cee913e5bfe616167899c46a12",
+      "bytes": 1576092,
+      "width": 1672,
+      "height": 941,
+      "bit_depth": 8
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/bronze-edge.glb",
+      "sha256": "764336cee935dcb7bef4bdcf3b56ef23b5955a5699828c61c02fb39ce8001945",
+      "bytes": 535416
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/KAYKIT-adventurers-free2.0.txt",
+      "sha256": "d4adc31660d1db22eb60eba648e01db41577548f6fa1a3576cb4a6283dae0a58",
+      "bytes": 1554
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/plate-8s.mp4",
+      "sha256": "9c7da38e347d1a9be02d3f16654f85685aaffb9bfb5db3ef8463910d6bbf746f",
+      "bytes": 2169184
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/plate-first.jpg",
+      "sha256": "dc83a0cfc0c3de3c512aa4ec458a0648ac565df5bb817236deb5835f6806fa06",
+      "bytes": 117723
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/plate-last.jpg",
+      "sha256": "706fcb842ab5f9566d83e6c9cac2eff9e27c591800fb562b7b7cdecd73b2cb52",
+      "bytes": 123486
+    },
+    {
+      "path": "scripts/nuke_desert_relay/assets/plate-middle.jpg",
+      "sha256": "958a9fcc985cb1c65803afba74ec16291a4c8c27206c6862446ba91584880394",
+      "bytes": 124575
+    },
+    {
+      "path": "scripts/nuke_desert_relay/build-config.json",
+      "sha256": "a9c45314336afe875edae19ea67b18bef84828c42c413f8f1ea40dc9fe825b47",
+      "bytes": 3745
+    },
+    {
+      "path": "scripts/nuke_desert_relay/build_nuke.py",
+      "sha256": "d2075cb4d533779f204eeaddf8a886d62b9538221f4e9c84a548a7a09533c73a",
+      "bytes": 23842
+    },
+    {
+      "path": "scripts/nuke_desert_relay/build_prop_scene.py",
+      "sha256": "9bab3e3dbb38b50c3101c4877d57bffc6aeba6dada77fa4e134f24a337836360",
+      "bytes": 15553
+    },
+    {
+      "path": "scripts/nuke_desert_relay/generation-ruins.json",
+      "sha256": "67e2ddf6e33b9bede405727190fe415ed4d091660e3befac9eadcce45af99607",
+      "bytes": 6697
+    },
+    {
+      "path": "scripts/nuke_desert_relay/generation-sky.json",
+      "sha256": "669abd4d83fa3beb7f6439ea034cdf5f35435f89b9487c49b961d81827e297d7",
+      "bytes": 2779
+    },
+    {
+      "path": "scripts/nuke_desert_relay/LICENSES.md",
+      "sha256": "fa1adbf6aa90471142a3619a88825cb7f991cb252911e0116434d5535bc45442",
+      "bytes": 8868
+    },
+    {
+      "path": "scripts/nuke_desert_relay/motion-analysis.json",
+      "sha256": "6f34a7a423a28a66559f9a3933a238a372f0abcafe9ec19b5dd65aea0d486d12",
+      "bytes": 62967
+    },
+    {
+      "path": "scripts/nuke_desert_relay/plate-analysis.json",
+      "sha256": "dce28d2af6a0e52622118d22ea08b9cc926ba4b03be7bfd313eafc169048a665",
+      "bytes": 7246
+    },
+    {
+      "path": "scripts/nuke_desert_relay/plate-candidates.json",
+      "sha256": "82814028f1571d353efe47eeb3c98440dda7c58e1b002291343b2ae92103ed3f",
+      "bytes": 12005
+    },
+    {
+      "path": "scripts/nuke_desert_relay/preflight-status.json",
+      "sha256": "f2e3767df3e2ecff4e6439529334709bfe867b99554bfc70ff9498e6d66543ba",
+      "bytes": 2044
+    },
+    {
+      "path": "scripts/nuke_desert_relay/preparation-checks.json",
+      "sha256": "0dfc19efb710a8508e0d42561ffe2ef0e6259f666346f93f2975334f84c5fe1d",
+      "bytes": 3209
+    },
+    {
+      "path": "scripts/nuke_desert_relay/prepare_plate.py",
+      "sha256": "fd06e7f39c159e326d361db0062c7674aa6ce5b7256ec1a3021addbeb919a119",
+      "bytes": 3407
+    },
+    {
+      "path": "scripts/nuke_desert_relay/README.md",
+      "sha256": "adf8b4768e037ee9ada2abbd7dbad015725906f23cede1c130df7c377bd5bed0",
+      "bytes": 2334
+    },
+    {
+      "path": "scripts/nuke_desert_relay/TEMPLATE-NOTES.md",
+      "sha256": "24575eac98e82442d4972e91776739a365be4ee6ca7133d25e0ab247c644cee1",
+      "bytes": 10240
+    }
+  ]
+}

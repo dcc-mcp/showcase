@@ -1,0 +1,78 @@
+{
+  "nuke_preflight": {
+    "exit_code": 2,
+    "result": {
+      "status": "blocked",
+      "blockers": [
+        "inputs.ruins: file not available",
+        "Observed raw ruin color fringe requires a separately verified edge cleanup",
+        "ruins_edge_cleanup.cleaned_input: file not available",
+        "ruins_edge_cleanup.evidence: file not available",
+        "No readable hash-bound ruin edge-cleanup review",
+        "Color interpretation and premultiplication must be checked in the owned host",
+        "sky Roto must be calibrated and checked across frames 1..240",
+        "masks.sky.curves_script: file not available",
+        "holdout Roto must be calibrated and checked across frames 1..240",
+        "masks.holdout.curves_script: file not available",
+        "Motion strategy is not verified",
+        "motion.evidence: file not available",
+        "Lockoff requires measured residual <= 0.5 px",
+        "CG must be verified scene-linear premultiplied beauty and white-neutral shadow",
+        "cg.beauty: file not available",
+        "cg.shadow: file not available",
+        "sky placement has not been reviewed",
+        "ruins placement has not been reviewed",
+        "prop placement has not been reviewed"
+      ],
+      "host_executed": false,
+      "render_executed": false,
+      "trusted_runtime_binding_required": true,
+      "host_grant_checked": false,
+      "static_3d_insert": true
+    }
+  },
+  "nuke_unbound_build": {
+    "exit_code": 2,
+    "result": "usage: build_nuke.py [-h] [--config CONFIG] [--preflight | --build]\nbuild_nuke.py: error: Plain --build is disabled; the official call must inject trusted runtime/owner/grant/PID/HWND bindings"
+  },
+  "python_syntax": {
+    "result": "pass",
+    "files": 4,
+    "scope": "AST parse; no nuke/bpy import, host/window observation or calls"
+  },
+  "new_public_text_privacy_scan": {
+    "result": "pass",
+    "hits": []
+  },
+  "entry_validator": {
+    "result": "pass",
+    "command": "python scripts/validate_entry.py docs/showcase/nuke-desert-relay",
+    "scope": "Structural artifact hashes only; not native or visual acceptance"
+  },
+  "collection_validator": {
+    "result": "pass",
+    "command": "python scripts/validate_collection.py",
+    "scope": "Unchanged selected collection; new case not selected"
+  },
+  "localization_tests": {
+    "result": "pass",
+    "test_count": 18,
+    "command": "python scripts/test_localization.py",
+    "scope": "Existing localization tests; new case not selected, no draft browser review"
+  },
+  "site_build_guards": {
+    "result": "pass",
+    "command": "python scripts/test_build_site.py",
+    "scope": "Existing build guard tests, not a completed site build"
+  },
+  "full_local_site_build": {
+    "result": "blocked",
+    "exit_code": 1,
+    "reason": "Existing play/runtime/godot-4.6.3.js referenced but missing in the clean clone; no new runtime download or installation attempted"
+  },
+  "production_checker": {
+    "exit_code": 2,
+    "reason": "case not found in collection",
+    "interpretation": "Expected because this draft is deliberately unselected; no selected-case acceptance claim"
+  }
+}

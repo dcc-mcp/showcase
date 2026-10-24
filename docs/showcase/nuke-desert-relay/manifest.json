@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "reference": "https://www.nps.gov/media/video/view.htm?id=582F570D-B9C7-8138-0C0BDC270BD0D080",
+  "capture_provider": "ffmpeg extraction from actual NPS video; no host capture",
+  "verification_level": "preproduction only; no in-host/gateway/real-tool-return claim",
+  "files": [
+    {
+      "path": "plate-first.jpg",
+      "sha256": "dc83a0cfc0c3de3c512aa4ec458a0648ac565df5bb817236deb5835f6806fa06",
+      "bytes": 117723,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "production-evidence.json",
+      "sha256": "f37997fbe9bed8bd359ed333f5188bc8d9a5f7122d11fa0ade3a639101bd4f89",
+      "bytes": 9097
+    },
+    {
+      "path": "publication-plan.json",
+      "sha256": "be59c6ac70e816c67432f50f32e307c0ca6ed87e1dcd9fa21b2e29bca24a402b",
+      "bytes": 2035
+    },
+    {
+      "path": "README.zh.md",
+      "sha256": "a267b5f92569c268659e54d5c0da5b4ae603ece693a10e22113a6c60603448d6",
+      "bytes": 3087
+    },
+    {
+      "path": "RECIPE.md",
+      "sha256": "8071e7a3f4402f3fbba8c26d70e6fe453dfd14a4d7fcf1cb22293ff66fbeaf7a",
+      "bytes": 7117
+    },
+    {
+      "path": "source-inventory.json",
+      "sha256": "7c81fd35ddb63c3f4ecc84f2cf86b8698cb22d2fa520d3e84f09ea29d1bd5748",
+      "bytes": 5111
+    }
+  ]
+}

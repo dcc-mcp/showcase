@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "frame": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "first": 1,
+    "last": 240
+  },
+  "inputs": {
+    "plate": {
+      "path": "assets/plate-8s.mp4",
+      "sha256": "9c7da38e347d1a9be02d3f16654f85685aaffb9bfb5db3ef8463910d6bbf746f"
+    },
+    "sky": {
+      "path": "assets/ai-sky.png",
+      "sha256": "c5bf94e5e189972a704965c8f88d431a12d074cee913e5bfe616167899c46a12"
+    },
+    "ruins": {
+      "path": "assets/ai-distant-ruins-clean.png",
+      "sha256": null
+    }
+  },
+  "plate_check": {
+    "verified": true,
+    "sha256": "9c7da38e347d1a9be02d3f16654f85685aaffb9bfb5db3ef8463910d6bbf746f",
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": 240
+  },
+  "colorspaces": {
+    "plate": "rec709",
+    "sky": "sRGB",
+    "ruins": "sRGB",
+    "cg": "linear",
+    "output": "rec709"
+  },
+  "color_pipeline_verified": false,
+  "ruins_edge_cleanup_verified": false,
+  "masks": {
+    "sky": {
+      "verified": false,
+      "first": 1,
+      "last": 240,
+      "coordinate_system": "nuke-bottom-left",
+      "curves_script": {
+        "path": "calibration/sky.curves",
+        "sha256": null
+      }
+    },
+    "holdout": {
+      "verified": false,
+      "first": 1,
+      "last": 240,
+      "coordinate_system": "nuke-bottom-left",
+      "curves_script": {
+        "path": "calibration/holdout.curves",
+        "sha256": null
+      }
+    }
+  },
+  "motion": {
+    "mode": "lockoff",
+    "verified": false,
+    "max_residual_px": null,
+    "evidence": {
+      "path": "calibration/native-motion.json",
+      "sha256": null
+    },
+    "note": "Offline motion-analysis.json is auxiliary, not native verification; measured maximum drift exceeds the draft 0.5px lockoff threshold."
+  },
+  "cg": {
+    "mode": "still",
+    "beauty": {
+      "path": "renders/prop-beauty.0001.exr",
+      "sha256": null
+    },
+    "shadow": {
+      "path": "renders/contact-shadow.0001.exr",
+      "sha256": null
+    },
+    "linear_verified": false,
+    "alpha_verified": false,
+    "premultiplied": true,
+    "shadow_white_is_unshadowed": true
+  },
+  "placement": {
+    "sky": {
+      "verified": false,
+      "translate": [
+        0,
+        0
+      ],
+      "scale": 1,
+      "rotate": 0,
+      "center": [
+        640,
+        360
+      ]
+    },
+    "ruins": {
+      "verified": false,
+      "translate": [
+        0,
+        0
+      ],
+      "scale": 1,
+      "rotate": 0,
+      "center": [
+        640,
+        360
+      ]
+    },
+    "prop": {
+      "verified": false,
+      "translate": [
+        0,
+        0
+      ],
+      "scale": 1,
+      "rotate": 0,
+      "center": [
+        640,
+        360
+      ]
+    }
+  },
+  "grade": {
+    "multiply": [
+      1,
+      1,
+      1
+    ],
+    "prop_gain_amplitude": 0.015
+  },
+  "native_output": "nuke-desert-relay-v001.nk",
+  "host_grant": {
+    "state": "pending",
+    "grant_id": null,
+    "owner_id": null,
+    "runtime_session_id": null,
+    "process_id": null,
+    "window_handle": null,
+    "nuke_version": "16.1v2",
+    "starts_at_utc": null,
+    "ends_at_utc": null,
+    "allowed_actions": []
+  },
+  "ruins_edge_cleanup": {
+    "verified": false,
+    "raw_input": {
+      "path": "assets/ai-distant-ruins.png",
+      "sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a"
+    },
+    "cleaned_input": {
+      "path": "assets/ai-distant-ruins-clean.png",
+      "sha256": null
+    },
+    "method": "Not performed; raw generated colored edge defect remains open",
+    "evidence": {
+      "path": "calibration/ruins-edge-review.json",
+      "sha256": null
+    }
+  }
+}
