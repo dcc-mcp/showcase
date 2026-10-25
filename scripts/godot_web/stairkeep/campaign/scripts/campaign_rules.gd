@@ -486,7 +486,9 @@ func _restore_candidate(canonical: Dictionary, saved: Dictionary, validate_check
 		if saved["checkpoints"].size() > 7:
 			return _error("invalid_checkpoint", "Only one full entry checkpoint per chapter is allowed.")
 		for checkpoint: Variant in saved["checkpoints"]:
-			if not (checkpoint is Dictionary) or checkpoint_ids.has(checkpoint.get("checkpoint_id", "")) or not checkpoint.get("checkpoints", []).is_empty():
+			if not (checkpoint is Dictionary) or not (checkpoint.get("checkpoints") is Array):
+				return _error("invalid_checkpoint", "Checkpoint history must be an Array.")
+			if checkpoint_ids.has(checkpoint.get("checkpoint_id", "")) or not checkpoint["checkpoints"].is_empty():
 				return _error("invalid_checkpoint", "Checkpoint ID is duplicated or contains recursive history.")
 			var candidate = get_script().new()
 			var checked: Dictionary = candidate._restore_candidate(canonical, checkpoint, false)

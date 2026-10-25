@@ -1,0 +1,189 @@
+{
+  "scope": "Static file, source conservation, cmap and source ZIP checks only",
+  "baseline_files_unchanged": 65,
+  "changed_baseline_files": [
+    "fifty/view/preview.gd"
+  ],
+  "rule_economy_save_identity_files": [
+    {
+      "path": "scripts/rules.gd",
+      "sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495"
+    },
+    {
+      "path": "fifty/scripts/runtime.gd",
+      "sha256": "1d3ab254eedf81e6a591d57c89110641c29171407e0b51f3441664145ba61463"
+    },
+    {
+      "path": "fifty/scripts/content.gd",
+      "sha256": "947c56a0f0fbfd68d071cb02f6a26695747de891c5fa7925fe46867c8d6d7dbd"
+    },
+    {
+      "path": "fifty/scripts/save.gd",
+      "sha256": "4e08ddffc85edf89a3207a85080d2b4ec5abc4b97514c845e64047a1b3ed440b"
+    },
+    {
+      "path": "fifty/scripts/d4.gd",
+      "sha256": "be66aa8198f777d72778b1fd2dde9b75798419254139a4f44956f133983220b2"
+    },
+    {
+      "path": "fifty/data/content.json",
+      "sha256": "3703b2cbc43d2297d42d335ad85ebac3f464d9f6c68d536d75a990e9bdd75fd5"
+    },
+    {
+      "path": "fifty/data/design-budget.json",
+      "sha256": "8efb30513c1bfe300499c099625670faa97f871b1f9d161e7870ea418ac4cf1e"
+    },
+    {
+      "path": "fifty/data/manifest.json",
+      "sha256": "32857fe177db828ff4314d504f5c1cabd54eb7bb5390668210754c636ab7fd1c"
+    },
+    {
+      "path": "project.godot",
+      "sha256": "b61ff860450e9a1eef0c95402f397dad89ff5f436cec0644759223d291c0d7cf"
+    }
+  ],
+  "literal_resource_references_checked": 207,
+  "required_codepoints": 671,
+  "required_cjk_codepoints": 552,
+  "missing_glyphs": 0,
+  "utf8_decode_errors": 0,
+  "replacement_characters": 0,
+  "source_zip": {
+    "bytes": 13163761,
+    "sha256": "a308e09df740d73db7646f3b5bc382f552810086ca9b8bbcef841ac20103d82a",
+    "crc_passed": true,
+    "every_member_hash_verified": true,
+    "name": "firstchapter-experience-prepared-04/firstchapter-source.zip (SOURCE only)"
+  },
+  "preserved_source_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
+  "preserved_web_zip_sha256": "dd4ad602c1dda4cd534092cc172992f204d201fb4e2b44df909f61755513dc7f",
+  "new_native_parse_import": "blocked-historical-CreateProcess-denial-not-retried",
+  "new_web_export": "not-run",
+  "new_pck_wasm_execution": "not-run",
+  "browser_visual_input_audio": "not-tested",
+  "fixed_url_updated": false,
+  "godot_launched": false,
+  "server_touched": false,
+  "full_acceptance": false,
+  "revision": "focus-04",
+  "overlay_files": 205,
+  "overlay_manifest_sha256": "1bee62e7b3c4e6cb291c32787f5d009d4114a8a10240638921345aaf469d177f",
+  "keyboard_source_implemented": true,
+  "keyboard_actual_input_accepted": false,
+  "async_focus_fix": {
+    "same_valid_initiating_BaseButton_only": true,
+    "new_ItemList_or_Tab_focus_retained": true,
+    "background_route_cells_cannot_capture_browsing_focus_as_initiator": true,
+    "real_GUI_executed": false
+  },
+  "keyboard_reference_and_static_tests": {
+    "scope": "Independent Python policy/reference tests and static source-wiring guards; no GDScript execution",
+    "checks": [
+      {
+        "label": "reference-policy",
+        "exit_code": 0,
+        "test_count": 41,
+        "passed": true,
+        "stdout_sha256": "c6ae02f0b28948d1d899fe15d43e58d424e3cecc79aa4bd4c42681c1dd72574e",
+        "stderr_sha256": "e537bc9e2fbd467bee101226d9665ac39a4f20643bf1ef203e2dbd923adacf4d"
+      },
+      {
+        "label": "static-wiring",
+        "exit_code": 0,
+        "test_count": 14,
+        "passed": true,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "d53ab9a173c2a739262f834d11cc0846320ed623b614368a9363ac41dfea75d5"
+      }
+    ],
+    "receipt_sha256": "92470c473bb9de6608f8fd54d106ea421a76dccdc29e1c3b3945a6877d3e3a99",
+    "bound_files": [
+      {
+        "path": "overlay/fifty/view/keyboard_controller.gd",
+        "bytes": 9192,
+        "sha256": "938e03d9e1a2c21a93de95dfd87cbb9426b83f17ac8a427bbedef5427f3e4c78"
+      },
+      {
+        "path": "overlay/fifty/view/preview.gd",
+        "bytes": 64332,
+        "sha256": "d6cacce9eb565e670af579ca17c96d7678895ec76ce3a7b4d3f81c0275bbfef8"
+      },
+      {
+        "path": "overlay/fifty/view/screen_input.gd",
+        "bytes": 3872,
+        "sha256": "2528bd43687502ca7cae90e9f715ed6cb62bc557d89aa6ec150e75c2a0750e9b"
+      },
+      {
+        "path": "tests/keyboard_reference.py",
+        "bytes": 15578,
+        "sha256": "b9e5eb744da01f725502f6be6af928e1a1d0e6847672532b95b70c5154ef595c"
+      },
+      {
+        "path": "tests/keyboard_traces.json",
+        "bytes": 16842,
+        "sha256": "48187bbe9886efc5ab635a0b1c4915f34666277577b1e868dd96e0cfd50870c5"
+      },
+      {
+        "path": "tests/test_keyboard_wiring.py",
+        "bytes": 6309,
+        "sha256": "8c8475b99f641097adcd7ebf5c41d3d89b26be02273968e2a4c046de958df492"
+      }
+    ],
+    "named_traces": 34,
+    "expanded_traces": 39,
+    "events": 272,
+    "production_GDScript_executed": false,
+    "OS_input_events_executed": false
+  },
+  "reference_corrections": {
+    "old_reference_sha256": "132025bee276a3f277e251b3077475e3f2c0a47aa6251b7092249210660d9d32",
+    "old_goldens_sha256": "881cf20ae91a0a186456b43db4ab184645134dca12a3f57d9d701919dd50b7fd",
+    "issues": [
+      "Blocked should emit once and stop until new accepted input",
+      "Rank all geometry before intersecting best directions with walkability",
+      "A blocked result retains diagnostic grid but no active held latch"
+    ],
+    "old_bytes_and_red_green_logs_preserved": true,
+    "production_modified_to_fit_wrong_goldens": false
+  },
+  "native_probes": [
+    {
+      "path": "tests/screen_input_probe.gd",
+      "sha256": "dfcf5332a81cd5bf5b952433fd9090c990597e8311e402cd022d7bd50c295dd3",
+      "planned_cases": 432,
+      "executed_cases": 0,
+      "scope": "Actual TileMap geometry unit probe, not UI pixels"
+    },
+    {
+      "path": "tests/keyboard_controller_probe.gd",
+      "sha256": "1871f3216398e916654c9d449979de3c7b22fa4571a872ffa5e4f0c0c5365581",
+      "planned_expanded_traces": 39,
+      "planned_events": 272,
+      "executed_traces": 0,
+      "scope": "Actual production controller unit probe, not OS input or real-time feel"
+    }
+  ],
+  "source_review_bindings": {
+    "experience_assets.gd": "22c6d5d6e450ff6962d7de50374ee61690cf0637edf91465ab489553529c10a5",
+    "experience_audio.gd": "f5652ca3e440b97fb884dd8be3b0a52fbbfc1b489cfa92e475227eeb3b85d018",
+    "experience_world.gd": "aa1bb58d59052f11033aa31b8855d73d090bb726e520bb6e76494b9a4c2b3cd0",
+    "keyboard_controller.gd": "938e03d9e1a2c21a93de95dfd87cbb9426b83f17ac8a427bbedef5427f3e4c78",
+    "preview.gd": "d6cacce9eb565e670af579ca17c96d7678895ec76ce3a7b4d3f81c0275bbfef8",
+    "screen_input.gd": "2528bd43687502ca7cae90e9f715ed6cb62bc557d89aa6ec150e75c2a0750e9b"
+  },
+  "native_gate": {
+    "status": "denied-before-process-creation",
+    "error": "PermissionError [WinError 5] Access is denied",
+    "action": "Original installed Godot console headless editor import",
+    "retry_attempted": false,
+    "alternate_program_route_or_identity_used": false
+  },
+  "release_gate": {
+    "direct_replace_same_18764_authorized_when_real_candidate_ready": true,
+    "user_reconfirmation_required": false,
+    "server_owner_only": true,
+    "actual_build_and_real_input_review_required": true,
+    "old_package_save_rollback_required": true,
+    "current_deploy_ready": false
+  }
+}

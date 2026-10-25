@@ -1,12 +1,14 @@
-# 首章体验03：有界键盘续步，尚未导出或发布
+# 首章体验04：保留动作期间新取得的GUI焦点，尚未导出或发布
 
 这轮只修改已交付 1–10 层的显示和输入反馈。原版首章 ZIP、已交付体验01源码包保留；21–30 层工作继续暂停。当前 `http://127.0.0.1:18764/` 仍是原试玩包，不能把本目录当作已经更新的网页。
 
-原稿定位、投影根因、代表F1差异见 [INPUT-AND-F1-REVIEW.md](INPUT-AND-F1-REVIEW.md)。本轮键盘规则与真实验收序列见 [KEYBOARD-03.md](KEYBOARD-03.md)，当前检查见 [validation-keyboard-03.json](validation-keyboard-03.json)。[validation-input-f1-02.json](validation-input-f1-02.json) 与 [validation.json](validation.json) 分别保留体验02／01历史检查。
+原稿定位、投影根因、代表F1差异见 [INPUT-AND-F1-REVIEW.md](INPUT-AND-F1-REVIEW.md)。键盘规则见 [KEYBOARD-03.md](KEYBOARD-03.md)，本轮异步焦点修正及真实验收序列见 [FOCUS-04.md](FOCUS-04.md)，当前检查见 [validation-focus-04.json](validation-focus-04.json)。[validation-keyboard-03.json](validation-keyboard-03.json)、[validation-input-f1-02.json](validation-input-f1-02.json) 与 [validation.json](validation.json) 保留体验03／02／01历史检查。
 
 体验03实际替换体验02的延迟物理键回读：真实按键进入单意图控制器，持键有界续步，转角保留最新一步，锁定方向后不逐格弹歧义。Esc／GUI和窗口失焦／手动交互清空后续移动。门、战斗和道具先预览，再用新的确认操作执行。70ms只收集初始组合，首次续步240ms、后续180ms，忙碌不补发。同一帧至多一步，规则调用与行动经济不变。实际键盘手感仍未验证。
 
 体验02的F1连续矮墙、门廊、1.6倍近看／整层总览保留；门和楼梯朝向按运行时邻格计算，恢复淡出重建，转角保留Run帧相位。
+
+体验04修正每次动画结束无条件清GUI焦点的问题。仅发起动作的同一有效按钮可以自动归还；路径期间新取得的图鉴／Tab焦点保留，后续路径格也不会把它误当发起按钮。生产控制器本体及玩法规则没有变化。
 
 来源基线是 `../review/firstchapter-source.zip`，SHA256 `544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42`。参考图仍为仓库 `docs/showcase/stairkeep/concept.jpg`，它是概念图，不是本候选的运行截图。
 
@@ -36,7 +38,11 @@ python -B fifty/tools/prepare_firstchapter_export.py prepare --project <新的�
 
 ## 已做检查与验收缺口
 
-体验03实际源码ZIP为13,163,694B，SHA256 `b39cf8288a0e55d73a8273aa6320517a04c86a38a239ce9fe63ee30fdde37110`。205个overlay文件、65个基线文件守恒及207处静态资源引用通过。字体覆盖671码点／552汉字，缺字、UTF-8错误及U+FFFD均为零。41项独立Python参考／策略测试、13项静态接线检查通过；生产GDScript控制器探针和432项真实TileMap几何探针只已准备，均未执行。这不能证明引擎解析、键盘手感、导出字体加载或没有裁切。
+本轮实际源码ZIP、静态接线和字体覆盖结果以 `validation-focus-04.json` 为准；生产GDScript控制器探针和432项真实TileMap几何探针仍只已准备，均未执行。这不能证明引擎解析、键盘手感、导出字体加载或没有裁切。
+
+体验04源码ZIP为13,163,761B，SHA256 `a308e09df740d73db7646f3b5bc382f552810086ca9b8bbcef841ac20103d82a`。205项overlay、65个保留基线文件、207处静态资源引用通过；字体覆盖671码点／552汉字且缺字为零。41项Python参考和14项静态接线检查通过，均不计为生产GDScript或真实窗口通过。
+
+冻结体验03源码ZIP仍为13,163,694B，SHA256 `b39cf8288a0e55d73a8273aa6320517a04c86a38a239ce9fe63ee30fdde37110`。其205个overlay文件、65个基线文件守恒、207处静态资源引用、671码点／552汉字覆盖、41项Python参考与13项静态接线结果只归属于该版本。
 
 冻结体验02 source ZIP仍为13,159,715B，SHA256 `283d4e97cf3e1bb1a434ee3506640a070bd2bcc9e01fca62286f7daa1cef4b99`，保留为修复前证据。
 

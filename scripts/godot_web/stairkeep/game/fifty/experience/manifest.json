@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "keyboard-03",
+  "revision": "focus-04",
   "status": "source-only-engine-blocked",
   "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
   "overlay": [
@@ -942,7 +942,7 @@
     {
       "path": "assets/experience/fonts/cmap-report.json",
       "bytes": 7408,
-      "sha256": "2bccc19bb73359fa5f1d346d043e937c71fc748a4e94d085e515f69ac9b78727"
+      "sha256": "5a858a8eb662bafb7e19e60beb7e6264c387fb57ad551c22bdea02b846766d11"
     },
     {
       "path": "assets/experience/fonts/FONT-LICENSE.txt",
@@ -1021,8 +1021,8 @@
     },
     {
       "path": "fifty/view/preview.gd",
-      "bytes": 64094,
-      "sha256": "44fb09e7ab33957b44469c5c134cf23bd0eac628a75005fcc6bc3c76bc0f6024"
+      "bytes": 64332,
+      "sha256": "d6cacce9eb565e670af579ca17c96d7678895ec76ce3a7b4d3f81c0275bbfef8"
     },
     {
       "path": "fifty/view/screen_input.gd",

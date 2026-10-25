@@ -19,7 +19,7 @@ const SLOT := "first-chapter"
 const CLASSIC := "classic_restart"
 const PRACTICE := "practice_checkpoint"
 const UI_FONT_PATH := "res://assets/experience/fonts/cjk-ui.otf"
-const EXPERIENCE_REVISION := "keyboard-03"
+const EXPERIENCE_REVISION := "focus-04"
 const AREAS := ["归潮门厅", "绳桥库", "回声索室", "双庭水闸", "盐封档案", "绕潮盘道", "守灯人廊", "三径蓄池", "四翼校准室", "无火信台"]
 const STAT_NAMES := {"hp":"生命", "potion":"生命", "atk":"攻击", "def":"防御", "gold":"金币", "yellow":"黄钥匙", "blue":"蓝钥匙"}
 
@@ -176,7 +176,7 @@ func _build_ui() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(brand)
 	brand.add_child(_label("阶 塔", 27, GOLD))
-	brand.add_child(_label("潮痕信号 · 第一章 · 体验03", 12, MUTED))
+	brand.add_child(_label("潮痕信号 · 第一章 · 体验04", 12, MUTED))
 	var actions := HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 7)
 	heading.add_child(actions)
@@ -517,7 +517,7 @@ func _do_begin(mode: String, seed: int) -> void:
 	_sync_control_lock()
 	_set_actions_enabled(true)
 	_refresh()
-	_message("体验03 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
+	_message("体验04 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
 
 
 func _snapshot() -> Dictionary:
@@ -1006,6 +1006,9 @@ func _buy(choice: String) -> void:
 func _commit(command: Callable, target: Array = [], offer: Dictionary = {}) -> Dictionary:
 	# The authority executes exactly once. Animation never replays a rule action.
 	if _busy or not started: return {}
+	var initiating_focus: Control = get_viewport().gui_get_focus_owner()
+	if not (initiating_focus is BaseButton):
+		initiating_focus = null
 	if not _keyboard_dispatch_active: _cancel_keyboard("manual_command")
 	world.set_direction_candidates([])
 	_busy = true
@@ -1030,7 +1033,8 @@ func _commit(command: Callable, target: Array = [], offer: Dictionary = {}) -> D
 	_busy = false
 	_sync_control_lock()
 	_refresh()
-	if modal_kind == "": get_viewport().gui_release_focus()
+	if modal_kind == "" and is_instance_valid(initiating_focus) and get_viewport().gui_get_focus_owner() == initiating_focus:
+		get_viewport().gui_release_focus()
 	var feedback: String = _result_text(result,before,previous_item)
 	if bool(result.get("ok",false)) and str(result.get("action","")) == "purchase":
 		var key: String = str(previous_item.get("id",""))+"/"+str(offer.get("id",""))

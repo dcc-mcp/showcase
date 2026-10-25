@@ -197,6 +197,14 @@ func _test_snapshots_and_native_storage() -> void:
 	bad["campaign_seed"] = "%08x" % Variants.next32(str(good["root_seed"]).hex_to_int())
 	bad["sequence_state"] = bad["campaign_seed"]
 	_check("sequence cannot advance without confirmed loss history", not clone.restore_snapshot(bad))
+	_check("nested-history negative fixture has an entry checkpoint", not good["checkpoints"].is_empty())
+	if not good["checkpoints"].is_empty():
+		for malformed: Dictionary in [{"label": "integer", "value": 1}, {"label": "null", "value": null}, {"label": "dictionary", "value": {}}]:
+			bad = good.duplicate(true)
+			bad["checkpoints"][0]["checkpoints"] = malformed["value"]
+			var before_rejection: String = Variants.canonical_json(clone.campaign_snapshot())
+			var rejected: bool = not clone.restore_snapshot(bad)
+			_check("nested checkpoint %s history is rejected without mutation" % malformed["label"], rejected and Variants.canonical_json(clone.campaign_snapshot()) == before_rejection)
 	var path: String = "user://campaign-lifecycle-v2-test.json"
 	_check("native Save v2 writes atomically", game.save_v2(path)["ok"])
 	var first_bytes: String = FileAccess.get_file_as_string(path)

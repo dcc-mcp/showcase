@@ -97,6 +97,11 @@ the frozen combat function; resource-exhaustion states are checked with a new
 complete navigation BFS. A v1 file, invalid JSON or any mismatching binding is
 rejected without modifying either active state or the input file.
 
+These laboratory checks validate legal ranges and bindings, not the provenance
+of every earned resource. Ordinary actions are not fully replayed during load;
+a manually edited in-range resource value can pass these checks. This boundary
+does not describe the separate first-chapter Fifty replay-based save loader.
+
 Native writes serialize a complete snapshot into a same-directory `.pending`
 file, flush and read it back, then commit with `DirAccess.rename_absolute`.
 There is no delete-old-slot fallback. A failed pending write or rename reports

@@ -87,6 +87,18 @@ class KeyboardWiring(unittest.TestCase):
         for name in ('_open_modal', '_close_modal', '_load_slot', '_save_slot', '_use_stairs', '_buy'):
             self.assertIn('_cancel_keyboard(', body(name), name)
 
+    def test_async_action_preserves_new_gui_focus(self):
+        value = body('_commit')
+        capture = 'var initiating_focus: Control = get_viewport().gui_get_focus_owner()'
+        self.assertIn(capture, value)
+        self.assertLess(value.index(capture), value.index('command.call()'))
+        self.assertLess(value.index(capture), value.index('await world.present_transition'))
+        self.assertRegex(value, r'if not \(initiating_focus is BaseButton\):\s+initiating_focus = null')
+        self.assertLess(value.index('if not (initiating_focus is BaseButton)'), value.index('command.call()'))
+        self.assertEqual(value.count('gui_release_focus()'), 1)
+        self.assertRegex(value, r'if modal_kind == "" and is_instance_valid\(initiating_focus\) and get_viewport\(\)\.gui_get_focus_owner\(\) == initiating_focus:\n\s+get_viewport\(\)\.gui_release_focus\(\)')
+        self.assertNotIn('if modal_kind == "": get_viewport().gui_release_focus()', value)
+
     def test_no_engine_or_rule_access_in_pure_controller(self):
         code = '\n'.join(line.split('#', 1)[0] for line in CONTROLLER.splitlines())
         for singleton in ('Input', 'Time', 'Runtime'):
