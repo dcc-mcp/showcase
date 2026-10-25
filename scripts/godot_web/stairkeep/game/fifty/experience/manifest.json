@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "input-f1-02",
+  "revision": "keyboard-03",
   "status": "source-only-engine-blocked",
   "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
   "overlay": [
@@ -941,8 +941,8 @@
     },
     {
       "path": "assets/experience/fonts/cmap-report.json",
-      "bytes": 7248,
-      "sha256": "d672191e8165ebb49ce02577263aa244571f64c17cfed2586fb8dda9007e692e"
+      "bytes": 7408,
+      "sha256": "2bccc19bb73359fa5f1d346d043e937c71fc748a4e94d085e515f69ac9b78727"
     },
     {
       "path": "assets/experience/fonts/FONT-LICENSE.txt",
@@ -1015,9 +1015,14 @@
       "sha256": "eae7a14fceda7b66f90db4b1ba912f29327eb9f18d2204bb8c657a990b619f4f"
     },
     {
+      "path": "fifty/view/keyboard_controller.gd",
+      "bytes": 9192,
+      "sha256": "938e03d9e1a2c21a93de95dfd87cbb9426b83f17ac8a427bbedef5427f3e4c78"
+    },
+    {
       "path": "fifty/view/preview.gd",
-      "bytes": 59779,
-      "sha256": "7b56f9a0482c8398c44800c0a4ed8a9b77a0ea7cbffaa6745a06db79085b3669"
+      "bytes": 64094,
+      "sha256": "44fb09e7ab33957b44469c5c134cf23bd0eac628a75005fcc6bc3c76bc0f6024"
     },
     {
       "path": "fifty/view/screen_input.gd",
@@ -1030,5 +1035,5 @@
   "browser_accepted": false,
   "served_url_updated": false,
   "font_report_post_assembly_refresh_pending": false,
-  "native_probe": "tests/screen_input_probe.gd; not-run"
+  "native_probe": "tests/screen_input_probe.gd and tests/keyboard_controller_probe.gd; not-run"
 }

@@ -7,6 +7,7 @@ const Saves = preload("res://fifty/scripts/save.gd")
 const World = preload("res://fifty/view/experience_world.gd")
 const ExperienceAudio = preload("res://fifty/view/experience_audio.gd")
 const ScreenInput = preload("res://fifty/view/screen_input.gd")
+const Keyboard = preload("res://fifty/view/keyboard_controller.gd")
 const Icon = preload("res://scripts/ui_icon.gd")
 const INK := Color("101f2c")
 const GOLD := Color("e8c48a")
@@ -18,7 +19,7 @@ const SLOT := "first-chapter"
 const CLASSIC := "classic_restart"
 const PRACTICE := "practice_checkpoint"
 const UI_FONT_PATH := "res://assets/experience/fonts/cjk-ui.otf"
-const EXPERIENCE_REVISION := "input-f1-02"
+const EXPERIENCE_REVISION := "keyboard-03"
 const AREAS := ["归潮门厅", "绳桥库", "回声索室", "双庭水闸", "盐封档案", "绕潮盘道", "守灯人廊", "三径蓄池", "四翼校准室", "无火信台"]
 const STAT_NAMES := {"hp":"生命", "potion":"生命", "atk":"攻击", "def":"防御", "gold":"金币", "yellow":"黄钥匙", "blue":"蓝钥匙"}
 
@@ -66,7 +67,12 @@ var view_button: Button
 var _overview := false
 var _cancel_route := false
 var _pause_when_idle := false
-var _direction_serial := 0
+var _keyboard = Keyboard.new()
+var _keyboard_driver_busy := false
+var _keyboard_dispatch_active := false
+var _keyboard_context_suspended := true
+var _keyboard_last_dispatch_frame := -1
+var _confirm_after_frame := -1
 
 
 func _ready() -> void:
@@ -77,6 +83,8 @@ func _ready() -> void:
 	world.cell_hovered.connect(_hovered)
 	_setup_audio()
 	_build_ui()
+	get_viewport().gui_focus_changed.connect(_keyboard_focus_gained)
+	get_window().focus_exited.connect(func(): _cancel_keyboard("window_focus"))
 	var loaded: Dictionary = rules.load_content()
 	content_ready = bool(loaded.get("ok", false))
 	if content_ready:
@@ -117,7 +125,7 @@ func _button(parent: Node, caption: String, callback: Callable) -> Button:
 	button.custom_minimum_size.y = 44
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.pressed.connect(func():
-		_direction_serial += 1
+		_cancel_keyboard("ui_action")
 		_unlock_audio()
 		if not _input_locked(): callback.call()
 	)
@@ -168,7 +176,7 @@ func _build_ui() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(brand)
 	brand.add_child(_label("阶 塔", 27, GOLD))
-	brand.add_child(_label("潮痕信号 · 第一章 · 体验02", 12, MUTED))
+	brand.add_child(_label("潮痕信号 · 第一章 · 体验03", 12, MUTED))
 	var actions := HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 7)
 	heading.add_child(actions)
@@ -276,7 +284,7 @@ func _build_ui() -> void:
 	toast = _label("先选择模式，再进入首章。", 16, CREAM, true)
 	toast.custom_minimum_size.y = 37
 	screen.add_child(toast)
-	screen.add_child(_label("点地面前往 · 物件再点一次或 E 确认 · 方向键按画面选路，双键选斜向 · Esc 停步/暂停", 13, MUTED,true))
+	screen.add_child(_label("点地面走整路 · 方向键按住续步，双键选斜向 · 物件 E 确认 · Esc 停步/暂停", 13, MUTED,true))
 	overlay = Control.new()
 	overlay.name = "Modal"
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -359,15 +367,24 @@ func _toggle_sound() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.pressed: _unlock_audio()
+		if event.pressed:
+			_cancel_keyboard("pointer")
+			_unlock_audio()
 	elif event is InputEventScreenTouch:
-		if event.pressed: _unlock_audio()
+		if event.pressed:
+			_cancel_keyboard("touch")
+			_unlock_audio()
 	elif event is InputEventKey:
 		if event.pressed and not event.echo: _unlock_audio()
+		if not _keyboard_context_allowed():
+			_cancel_keyboard("ui_context")
+		elif not event.pressed and _direction_bit(event.physical_keycode) != 0:
+			# Observe release before GUI processing, but never consume its event.
+			_keyboard.sync_physical(_physical_direction_mask(),Time.get_ticks_msec())
 
 
 func _open_modal(kind: String, title: String, copy: String) -> void:
-	_direction_serial += 1
+	_cancel_keyboard("modal")
 	modal_kind = kind
 	world.set_process_unhandled_input(false)
 	overlay.show()
@@ -383,6 +400,7 @@ func _open_modal(kind: String, title: String, copy: String) -> void:
 
 
 func _close_modal() -> void:
+	_cancel_keyboard("modal_close")
 	modal_kind = ""
 	overlay.hide()
 	world.set_process_unhandled_input(started and not _input_locked())
@@ -499,7 +517,7 @@ func _do_begin(mode: String, seed: int) -> void:
 	_sync_control_lock()
 	_set_actions_enabled(true)
 	_refresh()
-	_message("体验02 · 已进入 F1。先找制图人；点击空地前往，物件再点一次或 E 确认，找到楼梯后可前往 F2。")
+	_message("体验03 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
 
 
 func _snapshot() -> Dictionary:
@@ -738,10 +756,12 @@ func _refresh_journal(snap: Dictionary) -> void:
 func _cell_clicked(cell: Array) -> void:
 	if not started or modal_kind != "" or _input_locked():
 		return
-	_direction_serial += 1
+	_cancel_keyboard("map_click")
+	get_viewport().gui_release_focus()
 	var confirm_again: bool = selected == cell and not rules.object_at(cell).is_empty()
 	world.set_direction_candidates([])
 	selected = cell.duplicate()
+	if not confirm_again and not rules.object_at(cell).is_empty(): _confirm_after_frame = Engine.get_process_frames()
 	world.set_hover(selected)
 	_inspect(selected)
 	tabs.current_tab = 0
@@ -787,7 +807,10 @@ func _safe_path(target: Array) -> Array:
 
 
 func _approach() -> void:
+	_cancel_keyboard("point_route")
 	if not started or modal_kind != "" or selected.size() != 2 or _input_locked():
+		return
+	if not rules.object_at(selected).is_empty() and Engine.get_process_frames() <= _confirm_after_frame:
 		return
 	if _cell_distance(selected,rules.state.get("pos",[])) == 0:
 		if rules.object_at(selected).get("kind","") == "stairs":
@@ -816,6 +839,7 @@ func _approach() -> void:
 
 
 func _step(dx: int, dy: int) -> void:
+	if not _keyboard_dispatch_active: _cancel_keyboard("manual_step")
 	if started and modal_kind == "" and not _input_locked():
 		selected = []
 		world.set_hover([])
@@ -823,6 +847,7 @@ func _step(dx: int, dy: int) -> void:
 		var target: Array = [int(pos[0])+dx,int(pos[1])+dy]
 		world.set_direction_candidates([])
 		if not rules.object_at(target).is_empty():
+			_confirm_after_frame = Engine.get_process_frames()
 			selected = target
 			world.set_hover(selected)
 			_inspect(selected)
@@ -833,6 +858,7 @@ func _step(dx: int, dy: int) -> void:
 
 
 func _screen_step(intent: Vector2) -> void:
+	_cancel_keyboard("direction_button")
 	if not started or modal_kind != "" or _input_locked(): return
 	var resolved: Dictionary = ScreenInput.resolve(intent,world.projected_step_options())
 	world.set_direction_candidates([])
@@ -850,24 +876,84 @@ func _screen_step(intent: Vector2) -> void:
 		_message("该方向被墙挡住；请选另一格，不会自动改走别的方向。")
 
 
-func _held_screen_intent() -> Vector2:
-	var horizontal: int = int(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT))-int(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
-	var vertical: int = int(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN))-int(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
-	return Vector2(horizontal,vertical)
+func _direction_bit(key: int) -> int:
+	match key:
+		KEY_W,KEY_UP: return Keyboard.UP
+		KEY_S,KEY_DOWN: return Keyboard.DOWN
+		KEY_A,KEY_LEFT: return Keyboard.LEFT
+		KEY_D,KEY_RIGHT: return Keyboard.RIGHT
+	return 0
 
 
-func _queue_screen_step() -> void:
-	_direction_serial += 1
-	var serial: int = _direction_serial
-	var initial: Vector2 = _held_screen_intent()
-	# One short collection window lets a real two-key chord form before moving.
-	await get_tree().create_timer(0.07).timeout
-	if serial != _direction_serial or not started or modal_kind != "" or _input_locked(): return
-	var held: Vector2 = _held_screen_intent()
-	await _screen_step(initial if held == Vector2.ZERO else held)
+func _physical_direction_mask() -> int:
+	var mask := 0
+	if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP): mask |= Keyboard.UP
+	if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN): mask |= Keyboard.DOWN
+	if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT): mask |= Keyboard.LEFT
+	if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT): mask |= Keyboard.RIGHT
+	return mask
+
+
+func _keyboard_context_allowed() -> bool:
+	return started and modal_kind == "" and is_inside_tree() and get_window().has_focus() and get_viewport().gui_get_focus_owner() == null
+
+
+func _cancel_keyboard(reason: String) -> void:
+	_keyboard.cancel(reason,_physical_direction_mask())
+	if is_instance_valid(world): world.set_direction_candidates([])
+
+
+func _keyboard_focus_gained(_control: Control) -> void:
+	_cancel_keyboard("gui_focus")
+	_keyboard_context_suspended = true
+
+
+func _process(_delta: float) -> void:
+	_keyboard.sync_physical(_physical_direction_mask(),Time.get_ticks_msec())
+	if not _keyboard_context_allowed():
+		if not _keyboard_context_suspended: _cancel_keyboard("context")
+		_keyboard_context_suspended = true
+		return
+	_keyboard_context_suspended = false
+	_pump_keyboard()
+
+
+func _pump_keyboard() -> void:
+	if _keyboard_driver_busy or not _keyboard_context_allowed(): return
+	if Engine.get_process_frames() == _keyboard_last_dispatch_frame: return
+	var result: Dictionary = _keyboard.poll(Time.get_ticks_msec(),_input_locked(),world.projected_step_options())
+	match str(result.get("status","idle")):
+		"step":
+			_keyboard_last_dispatch_frame = Engine.get_process_frames()
+			var delta: Array = result["delta"]
+			var pos: Array = rules.state.get("pos",[])
+			var target: Array = [int(pos[0])+int(delta[0]),int(pos[1])+int(delta[1])]
+			if target != result.get("cell",[]):
+				_cancel_keyboard("stale_target")
+				return
+			if not rules.object_at(target).is_empty():
+				_cancel_keyboard("object_preview")
+				await _step(int(delta[0]),int(delta[1]))
+				return
+			_keyboard_driver_busy = true
+			_keyboard_dispatch_active = true
+			await _step(int(delta[0]),int(delta[1]))
+			# A cancellation epoch never skips completion of the in-flight cell.
+			_keyboard_dispatch_active = false
+			_keyboard_driver_busy = false
+		"choose":
+			selected = []
+			world.set_hover([])
+			_inspect([])
+			world.set_direction_candidates(result["cells"])
+			_message("方向分叉：再按一个方向键选斜向；选定后按住可沿该方向续步。")
+		"blocked":
+			world.set_direction_candidates([])
+			_message("前方有墙，已停止续步；不会自动转向另一条路。")
 
 
 func _confirm_target() -> void:
+	_cancel_keyboard("explicit_confirm")
 	if not started or modal_kind != "" or _input_locked(): return
 	if selected.size() == 2 and not rules.object_at(selected).is_empty():
 		if not approach_button.disabled: await _approach()
@@ -890,12 +976,14 @@ func _apply_pending_pause() -> void:
 
 
 func _use_stairs() -> void:
+	_cancel_keyboard("stairs")
 	if started and modal_kind == "" and not _input_locked():
 		selected = []
 		await _commit(Callable(rules,"use_stairs"),rules.state.get("pos",[]))
 
 
 func _buy(choice: String) -> void:
+	_cancel_keyboard("purchase")
 	if not started or modal_kind != "" or _input_locked(): return
 	var item: Dictionary = _transaction_shop()
 	if item.is_empty():
@@ -918,6 +1006,7 @@ func _buy(choice: String) -> void:
 func _commit(command: Callable, target: Array = [], offer: Dictionary = {}) -> Dictionary:
 	# The authority executes exactly once. Animation never replays a rule action.
 	if _busy or not started: return {}
+	if not _keyboard_dispatch_active: _cancel_keyboard("manual_command")
 	world.set_direction_candidates([])
 	_busy = true
 	_sync_control_lock()
@@ -926,6 +1015,8 @@ func _commit(command: Callable, target: Array = [], offer: Dictionary = {}) -> D
 	var result: Dictionary = command.call()
 	await world.present_transition(before,result,previous_item)
 	var after: Dictionary = rules.state.duplicate(true)
+	if not bool(result.get("ok",false)) or str(result.get("action","")) != "move" or before.get("floor",-1) != after.get("floor",-1):
+		_cancel_keyboard("world_transition")
 	_last_delta = _state_delta(before,after)
 	if str(result.get("action","")) == "stairs":
 		selected = []
@@ -1074,6 +1165,7 @@ func _message(text: String) -> void:
 
 
 func _save_slot() -> void:
+	_cancel_keyboard("save")
 	if _input_locked(): return
 	if started:
 		_busy = true
@@ -1085,6 +1177,7 @@ func _save_slot() -> void:
 
 
 func _load_slot() -> void:
+	_cancel_keyboard("load")
 	if _input_locked(): return
 	var intended_mode: String = active_mode if started else selected_mode
 	if intended_mode == CLASSIC and _classic_failed():
@@ -1269,7 +1362,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.pressed or event.echo:
 		return
 	if event.physical_keycode == KEY_ESCAPE and started:
-		_direction_serial += 1
+		_cancel_keyboard("escape")
 		if _input_locked():
 			_cancel_route = true
 			_pause_when_idle = true
@@ -1280,19 +1373,33 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_close_modal()
 		get_viewport().set_input_as_handled()
 		return
-	if _input_locked():
-		get_viewport().set_input_as_handled()
-		return
 	if not started or modal_kind != "":
 		return
-	match event.physical_keycode:
-		KEY_W,KEY_UP,KEY_A,KEY_LEFT,KEY_S,KEY_DOWN,KEY_D,KEY_RIGHT:
-			_queue_screen_step()
-		KEY_E,KEY_SPACE,KEY_ENTER:
-			_direction_serial += 1
+	var bit: int = _direction_bit(event.physical_keycode)
+	if bit != 0:
+		if not _keyboard_context_allowed():
+			_cancel_keyboard("ui_focus")
+			return
+		if _input_locked() and not _keyboard_driver_busy and not _route_running:
+			_cancel_keyboard("busy_interaction")
+		else:
+			var now: int = Time.get_ticks_msec()
+			_keyboard.sync_physical(_physical_direction_mask(),now)
+			_keyboard.press(bit,now)
+			if _input_locked() and int(_keyboard.debug_state().get("pending_count",0)) > 0:
+				_message("已记住下一个方向；只保留一步，Esc 可取消。")
+			if _route_running: _cancel_route = true
+			_pump_keyboard()
+		get_viewport().set_input_as_handled()
+	elif event.physical_keycode in [KEY_E,KEY_SPACE,KEY_ENTER]:
+		_cancel_keyboard("confirm_edge")
+		if not _keyboard_context_allowed(): return
+		if not _input_locked():
 			_confirm_target()
-	get_viewport().set_input_as_handled()
+		else:
+			_message("移动中不接受确认；请停步后重新按键。")
+		get_viewport().set_input_as_handled()
 
 
 func view_status() -> Dictionary:
-	return {"presentation_revision":EXPERIENCE_REVISION,"started":started,"selected_mode":selected_mode,"active_mode":active_mode,"mode_required":true,"start_disabled":start_button.disabled if is_instance_valid(start_button) else true,"content_ready":content_ready,"authored_floors":10,"target_floors":50,"unmade_floors":[11,50],"modal":modal_kind,"visual_review":"not-tested","real_input":"not-tested"}
+	return {"presentation_revision":EXPERIENCE_REVISION,"keyboard_controller":_keyboard.debug_state(),"started":started,"selected_mode":selected_mode,"active_mode":active_mode,"mode_required":true,"start_disabled":start_button.disabled if is_instance_valid(start_button) else true,"content_ready":content_ready,"authored_floors":10,"target_floors":50,"unmade_floors":[11,50],"modal":modal_kind,"visual_review":"not-tested","real_input":"not-tested"}
