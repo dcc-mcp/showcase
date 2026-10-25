@@ -1,6 +1,8 @@
 # Deferred Nuke graph build / 延后宿主构建
 
-This is an unexecuted builder for **Nuke 16.1v2**, using standard nodes. It is
+This is an unexecuted builder with an explicit **Nuke 16.1v2 or 17.0v3** target,
+using standard nodes. Both targets remain planned and unvalidated; adding the
+17.0v3 target does not establish a Nuke 17 host run or pixel acceptance. It is
 not a `.nk` deliverable, licensed-host test, rendered film, tracking solution,
 or typed MCP success. No NukeX, CameraTracker, plugin, install, or network call
 is requested. The graph builder never renders.
@@ -34,10 +36,13 @@ old receipt, or invent/replay a tool slug from this document. The plain CLI
 
 The private local config's `host_grant` must have `state: "granted"`, `grant_id`,
 `owner_id`, `runtime_session_id`, integer `process_id` and `window_handle`, exact
-`nuke_version: "16.1v2"`, explicit `starts_at_utc` and `ends_at_utc` ISO timestamps,
+`nuke_version` equal to the config's explicit allowlisted `target_nuke_version`,
+explicit `starts_at_utc` and `ends_at_utc` ISO timestamps,
 and `allowed_actions` containing `build_graph` and `save_native`. Keep that file
 outside committed/public inventories; never put actual identities in a template.
-The grant and externally injected bindings must match exactly. The executing PID,
+The grant and externally injected bindings must match exactly. Missing/unknown
+targets, target/grant mismatches and observed-version/grant mismatches are rejected;
+no version-prefix matching or automatic fallback is allowed. The executing PID,
 Nuke version, current UTC interval and live native HWND's owning PID are checked
 before Root/node mutation and checked again before saving. A config change stops
 the save. A config is not permission: the official wrapper must obtain fresh,
@@ -60,6 +65,7 @@ native files are never overwritten; choose a versioned basename.
 ```json
 {
   "schema_version": 1,
+  "target_nuke_version": "17.0v3",
   "frame": {"width": 1280, "height": 720, "fps": 30, "first": 1, "last": 240},
   "inputs": {
     "plate": {"path": "assets/plate-8s.mp4", "sha256": "fill-with-observed-hash"},
@@ -82,7 +88,7 @@ native files are never overwritten; choose a versioned basename.
     "holdout": {"verified": false, "first": 1, "last": 240, "coordinate_system": "nuke-bottom-left", "curves_script": {"path": "calibration/holdout.curves", "sha256": "fill-after-native-Roto-export"}}
   },
   "motion": {"mode": "lockoff", "verified": false, "max_residual_px": null, "evidence": {"path": "calibration/motion.json", "sha256": "fill-after-measurement"}},
-  "cg": {"mode": "still", "beauty": {"path": "renders/prop-beauty.0001.exr", "sha256": "fill-after-render"}, "shadow": {"path": "renders/contact-shadow.0001.exr", "sha256": "fill-after-render"}, "linear_verified": false, "alpha_verified": false, "premultiplied": true, "shadow_white_is_unshadowed": true},
+  "cg": {"mode": "still", "beauty": {"path": "renders/prop-beauty.0001.exr", "sha256": "fill-after-render"}, "shadow": {"path": "renders/contact-shadow.0001.exr", "sha256": "fill-after-render"}, "linear_verified": false, "alpha_verified": false, "premultiplied": true, "shadow_white_is_unshadowed": true, "shadow_alpha_association": "premultiplied-factor", "shadow_alpha_association_verified": false},
   "placement": {
     "sky": {"verified": false, "translate": [0, 0], "scale": 1, "rotate": 0, "center": [640, 360]},
     "ruins": {"verified": false, "translate": [0, 0], "scale": 1, "rotate": 0, "center": [640, 360]},
@@ -142,6 +148,26 @@ the white-neutral RGB contact-shadow pass; overs the premultiplied CG beauty;
 restores original plate pixels through the foreground holdout; and applies a
 documented final RGB grade. The holdout preserves genuine foreground occlusion.
 
+The contact-shadow input must be a verified coverage-premultiplied factor:
+`A_rgb=a*f`, where `a` is coverage and `f=1` is unshadowed. The builder transforms
+that pass, then overs it onto a root-format opaque white RGBA Constant to produce
+`F_rgb=A_rgb+(1-a)`. The resulting factor is bounded to the white B input's full
+format. Contact-shadow multiply writes RGB only, preserving the incoming plate
+composite's alpha. This prevents transparent black outside a transformed pass
+from multiplying the plate to black, and preserves partial-coverage edges.
+`shadow_alpha_association_verified` remains false until the actual exported pass
+and Nuke readback establish this convention; this is not a claim that an untested
+Blender shadow-catcher output already meets it.
+
+The independent counterexample uses an allowed 0.5 placement scale: the pass
+occupies `[320,180,960,540]` in the 1280×720 frame. At `(100,100)`, default
+Transform black-outside yields zero RGBA; a direct multiply destroys the original
+pixel. White backing makes the factor one there. This is documented node algebra,
+not a rendered Nuke comparison. The official [Transform reference](https://learn.foundry.com/nuke/content/reference_guide/transform_nodes/transform.html)
+and [Merge reference](https://learn.foundry.com/nuke/content/reference_guide/merge_nodes/merge.html)
+define the boundary and merge operations used in that check. The MatchMove center
+was already explicit; this change does not claim a diagnosed coordinate failure.
+
 Named standard-node Write branches are prepared for linear EXR, Rec.709 PNG,
 1280×360 before/after and 1280×720 six-stage breakdown. The breakdown input order
 is plate, sky, ruin, contact shadow, prop, final. Render them only after inspecting
@@ -157,5 +183,5 @@ agreement. Source/export reopen and blank-graph rebuilding are separate checks.
 
 Compatibility boundary: the official Nuke 16.1 Python documentation URLs checked
 on 2026-10-24 were inaccessible through the available web reader. APIs and exact
-knob enums therefore remain untested assumptions until the granted in-host run;
+knob enums for both candidate versions remain untested assumptions until the granted in-host run;
 a syntax/preflight check does not certify them.

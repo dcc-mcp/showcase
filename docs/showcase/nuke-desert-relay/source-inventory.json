@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "Prepared inputs, unexecuted native builders and source receipts; no final/native outputs",
+  "scope": "Current deferred builders and prepared inputs, with separately scoped initial historical source receipts and current offline revision evidence; no final/native outputs",
   "files": [
     {
       "path": "scripts/nuke_desert_relay/.gitattributes",
@@ -70,18 +70,23 @@
     },
     {
       "path": "scripts/nuke_desert_relay/build-config.json",
-      "sha256": "a9c45314336afe875edae19ea67b18bef84828c42c413f8f1ea40dc9fe825b47",
-      "bytes": 3745
+      "sha256": "65f6c1c71548fd6ec59b12a08a49f8e352a73e88796baa705840eac25f2962c7",
+      "bytes": 3887
     },
     {
       "path": "scripts/nuke_desert_relay/build_nuke.py",
-      "sha256": "d2075cb4d533779f204eeaddf8a886d62b9538221f4e9c84a548a7a09533c73a",
-      "bytes": 23842
+      "sha256": "76e6757ac17445bc3c71a2add73e051a85d187a56a54da75431dcb802e2bd5d5",
+      "bytes": 25460
     },
     {
       "path": "scripts/nuke_desert_relay/build_prop_scene.py",
       "sha256": "9bab3e3dbb38b50c3101c4877d57bffc6aeba6dada77fa4e134f24a337836360",
       "bytes": 15553
+    },
+    {
+      "path": "scripts/nuke_desert_relay/edge-repair-attempt.json",
+      "sha256": "ff48abe26b2ff284df9db2b940e1231f82a37bab4986f2ef627e5f1119acc86e",
+      "bytes": 1689
     },
     {
       "path": "scripts/nuke_desert_relay/generation-ruins.json",
@@ -102,6 +107,11 @@
       "path": "scripts/nuke_desert_relay/motion-analysis.json",
       "sha256": "6f34a7a423a28a66559f9a3933a238a372f0abcafe9ec19b5dd65aea0d486d12",
       "bytes": 62967
+    },
+    {
+      "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+      "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8",
+      "bytes": 7188
     },
     {
       "path": "scripts/nuke_desert_relay/plate-analysis.json",
@@ -130,13 +140,13 @@
     },
     {
       "path": "scripts/nuke_desert_relay/README.md",
-      "sha256": "adf8b4768e037ee9ada2abbd7dbad015725906f23cede1c130df7c377bd5bed0",
-      "bytes": 2334
+      "sha256": "fb2dce29517757a51b650a77e7fca23534a353b12683f71f40263b0fe45b250a",
+      "bytes": 3019
     },
     {
       "path": "scripts/nuke_desert_relay/TEMPLATE-NOTES.md",
-      "sha256": "24575eac98e82442d4972e91776739a365be4ee6ca7133d25e0ab247c644cee1",
-      "bytes": 10240
+      "sha256": "b78063d9b79a27928af44d60652c4daf31f1f10e3638d73a4c2ab275c7d002c4",
+      "bytes": 12267
     }
   ]
 }

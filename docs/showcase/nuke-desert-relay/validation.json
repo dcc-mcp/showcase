@@ -164,6 +164,37 @@
         "collection_selected": false,
         "official_site_writes": 0
       }
+    },
+    {
+      "name": "offline-shadow-factor-algebra",
+      "result": "pass",
+      "observed": {
+        "evidence": {
+          "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+          "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8"
+        },
+        "scenarios": 5,
+        "scope": "Independent scalar formula and bounding-box counterexample; no native pixels"
+      }
+    },
+    {
+      "name": "explicit-version-target-value-guards",
+      "result": "pass",
+      "observed": {
+        "matching": 2,
+        "rejected": 9,
+        "scope": "Pure values only; not host compatibility or authorization"
+      }
+    },
+    {
+      "name": "image-tool-edge-edit-output",
+      "result": "fail",
+      "expected": "Corrected RGBA layer returned",
+      "observed": {
+        "error": "AbsolutePathBuf deserialized without a base path at line 1 column 894",
+        "new_output": false,
+        "raw_layer_preserved": true
+      }
     }
   ],
   "not_claimed": [
@@ -175,5 +206,24 @@
     "Real-time or interactive output, continuous 3D motion or a solved moving camera",
     "Website selection, merge, release or deployment",
     "Verified backend image model, seed, remaining quota or exact account service agreement"
-  ]
+  ],
+  "offline_revision": {
+    "recorded_at": "2026-10-25T11:30:03.924104+00:00",
+    "baseline_commit": "100309882f5123854bcfbd9bf2f36273590b71ec",
+    "shadow_algebra_scenarios": 5,
+    "matching_version_fixtures": 2,
+    "rejected_version_fixtures": 9,
+    "planned_targets": [
+      "16.1v2",
+      "17.0v3"
+    ],
+    "selected_target": "17.0v3",
+    "target_status": "planned-unvalidated",
+    "new_native_calls": 0,
+    "edge_edit_requests_this_revision": 1,
+    "new_images_returned": 0,
+    "initial_image_tool_requests": 4,
+    "cumulative_image_tool_requests": 5,
+    "existing_source_images_changed": false
+  }
 }

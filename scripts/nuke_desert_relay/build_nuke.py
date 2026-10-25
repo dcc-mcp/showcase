@@ -1,4 +1,4 @@
-"""Offline preflight and deferred Nuke 16.1v2 graph construction.
+"""Offline preflight and deferred graph construction for explicit Nuke targets.
 
 Preflight uses only the standard library. Build is for an explicitly granted,
 empty, task-owned Nuke host through its discovered official scripting tool.
@@ -14,6 +14,10 @@ import math
 import os
 from pathlib import Path
 import sys
+
+
+PLANNED_NUKE_TARGETS = ("16.1v2", "17.0v3")
+_VERSION_NOT_OBSERVED = object()
 
 
 def digest(path):
@@ -53,7 +57,7 @@ def validate_runtime_bindings(binding):
         raise RuntimeError("The granted process is not the executing process")
 
 
-def validate_host_grant(cfg, binding, actual_version=None):
+def validate_host_grant(cfg, binding, actual_version=_VERSION_NOT_OBSERVED):
     """Check a private grant against trusted caller bindings; perform no mutation.
 
     The official runtime must validate current coordinator authorization before
@@ -72,9 +76,12 @@ def validate_host_grant(cfg, binding, actual_version=None):
     for grant_key, binding_key in identities.items():
         if grant.get(grant_key) != binding[binding_key]:
             raise RuntimeError("Private grant does not match trusted " + grant_key)
-    if grant.get("nuke_version") != "16.1v2":
-        raise RuntimeError("Private grant must name exact Nuke 16.1v2")
-    if actual_version is not None and actual_version != grant["nuke_version"]:
+    target_version = cfg.get("target_nuke_version")
+    if target_version not in PLANNED_NUKE_TARGETS:
+        raise RuntimeError("An explicit allowlisted target_nuke_version is required")
+    if grant.get("nuke_version") != target_version:
+        raise RuntimeError("Private grant Nuke version does not match the explicit target")
+    if actual_version is not _VERSION_NOT_OBSERVED and actual_version != grant["nuke_version"]:
         raise RuntimeError("Executing Nuke version does not match the private grant")
     moments = []
     for key in ("starts_at_utc", "ends_at_utc"):
@@ -145,6 +152,8 @@ def preflight(config_path):
             errors.append(name + ": missing or mismatched SHA-256")
 
     require(cfg.get("schema_version") == 1, "schema_version must be 1")
+    require(cfg.get("target_nuke_version") in PLANNED_NUKE_TARGETS,
+            "Explicit target_nuke_version must be 16.1v2 or 17.0v3; neither is native-validated")
     frame = cfg.get("frame", {})
     require(frame == {"width": 1280, "height": 720, "fps": 30, "first": 1, "last": 240},
             "Frame contract must be 1280x720, 30 fps, frames 1..240")
@@ -216,6 +225,9 @@ def preflight(config_path):
     require(cg.get("linear_verified") is True and cg.get("alpha_verified") is True and
             cg.get("premultiplied") is True and cg.get("shadow_white_is_unshadowed") is True,
             "CG must be verified scene-linear premultiplied beauty and white-neutral shadow")
+    require(cg.get("shadow_alpha_association") == "premultiplied-factor" and
+            cg.get("shadow_alpha_association_verified") is True,
+            "Shadow factor must be natively verified as RGB=a*f with coverage alpha a")
     for name in ("beauty", "shadow"):
         media = cg.get(name, {})
         if cg.get("mode") == "still":
@@ -258,6 +270,8 @@ def preflight(config_path):
     return cfg, {"status": "blocked" if errors else "ready-for-owned-host-build",
                  "blockers": errors, "host_executed": False, "render_executed": False,
                  "trusted_runtime_binding_required": True, "host_grant_checked": False,
+                 "target_nuke_version": cfg.get("target_nuke_version"),
+                 "target_version_status": "planned-unvalidated",
                  "static_3d_insert": cg.get("mode") == "still"}
 
 
@@ -379,7 +393,18 @@ def build(config_path, *, runtime_session_id=None, expected_owner_id=None,
         cg_mode = cfg["cg"]["mode"]
         shadow = pose(read("CG_ContactShadow_Linear", cfg["cg"]["shadow"], colors["cg"], cg_mode),
                       "CG_ShadowPlacement", "prop")
-        shadow_comp = merge("COMP_ContactShadow", "multiply", ruins_comp, shadow)
+        # A transformed factor has black/transparent pixels outside its footprint.
+        # Over onto full-format opaque white restores the multiply identity there:
+        # F_rgb = A_rgb + (1-A_alpha), given verified premultiplied A_rgb=a*f.
+        shadow_white = nuke.nodes.Constant(name="CG_ShadowNeutralWhite")
+        shadow_white["format"].setValue(root["format"].value())
+        shadow_white["channels"].setValue("rgba")
+        shadow_white["color"].setValue([1, 1, 1, 1])
+        shadow_factor = merge("CG_ShadowFactorFullFrame", "over", shadow_white, shadow)
+        enum(shadow_factor, "bbox", "B")
+        shadow_comp = merge("COMP_ContactShadow", "multiply", ruins_comp, shadow_factor)
+        shadow_comp["output"].setValue("rgb")  # B alpha passes through unchanged.
+        enum(shadow_comp, "bbox", "B")
         prop = pose(read("CG_PropBeauty_Linear", cfg["cg"]["beauty"], colors["cg"], cg_mode),
                     "CG_PropPlacement", "prop")
         glint = nuke.nodes.Grade(name="CG_SubtleGainAnimation", inputs=[prop], channels="rgb")

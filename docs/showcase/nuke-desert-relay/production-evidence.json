@@ -1,7 +1,7 @@
 {
   "schema": "dcc-showcase-production/v1",
   "case_slug": "nuke-desert-relay",
-  "recorded_at": "2026-10-24T22:55:00.541906+00:00",
+  "recorded_at": "2026-10-25T11:30:03.924104+00:00",
   "environment": [
     {
       "role": "host",
@@ -24,12 +24,12 @@
   ],
   "recipe": {
     "path": "docs/showcase/nuke-desert-relay/RECIPE.md",
-    "sha256": "8071e7a3f4402f3fbba8c26d70e6fe453dfd14a4d7fcf1cb22293ff66fbeaf7a"
+    "sha256": "25108a21a7039e41f909e1b456c612b273d9e98ba24281d0729b909c7241d809"
   },
   "sources": [
     {
       "path": "docs/showcase/nuke-desert-relay/source-inventory.json",
-      "sha256": "7c81fd35ddb63c3f4ecc84f2cf86b8698cb22d2fa520d3e84f09ea29d1bd5748"
+      "sha256": "8ed90c19716665b984b3401bf25045c9a305867988437abdba2335fa65801287"
     }
   ],
   "checks": {
@@ -50,7 +50,7 @@
           "sha256": "be59c6ac70e816c67432f50f32e307c0ca6ed87e1dcd9fa21b2e29bca24a402b"
         }
       ],
-      "evidence_origin": "current-run",
+      "evidence_origin": "historical",
       "scope": "Preproduction research only"
     },
     "reuse_discovery": {
@@ -153,11 +153,11 @@
     },
     "privacy": {
       "status": "passed",
-      "summary": "New public files scanned for private paths, credentials and task/session literals; private grants and host routing omitted",
+      "summary": "Current public case text scanned for private paths, credentials and task/session literals; no native files exist to sanitize",
       "evidence": [
         {
           "path": "docs/showcase/nuke-desert-relay/source-inventory.json",
-          "sha256": "7c81fd35ddb63c3f4ecc84f2cf86b8698cb22d2fa520d3e84f09ea29d1bd5748"
+          "sha256": "8ed90c19716665b984b3401bf25045c9a305867988437abdba2335fa65801287"
         }
       ],
       "evidence_origin": "current-run",
@@ -169,6 +169,42 @@
       "evidence": [],
       "evidence_origin": "not-run",
       "scope": "Draft prose only, website localization acceptance remains pending"
+    },
+    "offline_node_math": {
+      "status": "passed",
+      "summary": "Independent shadow factor algebra covers outside, unshadowed, shadowed, soft-edge and non-unit background alpha cases",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+          "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Scalar equations and planned node graph only, not rendered Nuke pixels"
+    },
+    "deferred_target_guard": {
+      "status": "passed",
+      "summary": "Explicit target/grant/observed-version value checks preserve exact matching and refusal",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+          "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Pure-value fixtures; both Nuke targets remain native-unvalidated"
+    },
+    "source_edge_repair": {
+      "status": "blocked",
+      "summary": "Built-in edit failed Windows source-path deserialization before output; no repaired layer exists",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/edge-repair-attempt.json",
+          "sha256": "ff48abe26b2ff284df9db2b940e1231f82a37bab4986f2ef627e5f1119acc86e"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "One source-image edit request, no CLI/API fallback or native operation"
     }
   },
   "interactive": false,
@@ -198,7 +234,9 @@
       "built-in raster sky generation",
       "built-in raster architecture generation",
       "existing CC0 model provenance audit",
-      "deferred native graph and scene recipes"
+      "deferred native graph and scene recipes",
+      "offline shadow-factor node algebra correction",
+      "explicit deferred host-version target guards"
     ],
     "reproduction_budget": {
       "estimated_seconds": null,
@@ -231,5 +269,7 @@
       "status": "not-granted",
       "evidence": []
     }
-  }
+  },
+  "initial_preproduction_recorded_at": "2026-10-24T22:55:00.541906+00:00",
+  "revision_scope": "Offline shadow graph and exact version-target guard correction plus one failed source-image edit; no native execution or permission clearance"
 }

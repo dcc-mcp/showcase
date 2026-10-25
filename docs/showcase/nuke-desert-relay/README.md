@@ -27,6 +27,26 @@ returned image bytes but no backend model identity or remaining quota. Codex
 orchestrated the tool; it is not described as the image model. No new Hyper3D
 generation, account change, paid request or third-party installation occurred.
 
+## Offline correction, 2026-10-25
+
+The deferred graph now backs the transformed shadow factor with full-format
+opaque white before multiplying RGB, preserving the background alpha. The old
+graph could multiply transparent black outside a scaled pass into the plate.
+The counterexample and corrected node algebra are recorded in
+[offline revision checks](../../../scripts/nuke_desert_relay/offline-revision-checks.json).
+These are numerical checks of the planned graph, not observed Nuke pixels.
+
+The config now explicitly selects `17.0v3` as a **planned, unvalidated** target;
+`16.1v2` remains an explicit legacy candidate. The selected target, fresh grant
+and actual host version must match exactly. All permission, mask, color, edge
+and render-pass gates remain in place.
+
+One conservative edit of the existing ruin was attempted through the built-in
+image tool, but its Windows reference path failed deserialization before output.
+[The failed edit request](../../../scripts/nuke_desert_relay/edge-repair-attempt.json)
+is retained. No repaired image was produced; the raw colored-edge defect stays
+open. The original source images and their hashes are unchanged.
+
 ## Reproduction and pending native work
 
 Follow [RECIPE.md](RECIPE.md) only after the resource coordinator assigns fresh

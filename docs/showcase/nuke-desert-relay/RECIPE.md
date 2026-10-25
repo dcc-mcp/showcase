@@ -20,8 +20,10 @@ This is an original proposed composition, not an existing successful render.
 
 ## Before native production / 原生制作前
 
-1. Obtain a new, task-owned Nuke 16.1v2 session and a valid entitlement covering
-   this promotional/public output. Standard Nuke is sufficient for the proposed
+1. Obtain a new, task-owned Nuke session matching the explicit target and a valid
+   entitlement covering this promotional/public output. The current config targets
+   17.0v3 as an unvalidated candidate, with 16.1v2 retained as a legacy candidate;
+   neither is an in-host acceptance result for this case. Standard Nuke is sufficient for the proposed
    Read/Roto/Transform/Grade/Merge workflow; NukeX-only camera solving is not
    required by this plan. This is a requirement, not a measured license claim.
 2. Obtain a separate, task-owned Blender session. Check actual version and
@@ -33,7 +35,7 @@ This is an original proposed composition, not an existing successful render.
 4. Preserve sanitized request/response values and actual file hashes. An
    execution return containing a backend failure remains a failure.
 
-执行前需独占且有效许可的 Nuke 16.1v2、新的独占 Blender 会话，并验证版本、
+执行前需独占且有效许可、版本与显式目标一致的 Nuke、新的独占 Blender 会话，并验证版本、
 动态工具 schema 与真实实例身份。不使用旧回归实例、不安装或修改共享 runtime。
 当前只核过 Core 官方源契约，尚无部署 gateway 的生产能力证明。
 
@@ -86,8 +88,12 @@ An animated 3D object requires a genuinely rendered sequence and new checks.
 - Inspect the raw RGBA ruins against light/dark backgrounds, Unpremult before
   color work, correct the red/yellow edge contamination, then premultiply again.
   Record the actual cleanup parameters and view before/after pixels.
-- Place the CG sword and its contact-shadow factor in matched screen space;
-  multiply the ground shadow, merge beauty, then restore plate holdouts across
+- Place the CG sword and its contact-shadow factor in matched screen space.
+  Verify the factor's premultiplied coverage convention in the actual pass.
+  After placement, over that pass onto full-format opaque scene-linear white,
+  then multiply RGB only while preserving background alpha. Transparent pixels
+  outside a transformed pass must remain neutral, not turn the plate black.
+  Merge beauty, then restore plate holdouts across
   the burial/contact edge. Check the alpha convention and unshadowed white.
 - Match local exposure, color, blur and grain with restrained controls. Keep
   artificial atmospheric drift separate from real plate movement. Keying is

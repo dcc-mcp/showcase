@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "target_nuke_version": "17.0v3",
   "frame": {
     "width": 1280,
     "height": 720,
@@ -83,7 +84,9 @@
     "linear_verified": false,
     "alpha_verified": false,
     "premultiplied": true,
-    "shadow_white_is_unshadowed": true
+    "shadow_white_is_unshadowed": true,
+    "shadow_alpha_association": "premultiplied-factor",
+    "shadow_alpha_association_verified": false
   },
   "placement": {
     "sky": {
@@ -142,7 +145,7 @@
     "runtime_session_id": null,
     "process_id": null,
     "window_handle": null,
-    "nuke_version": "16.1v2",
+    "nuke_version": "17.0v3",
     "starts_at_utc": null,
     "ends_at_utc": null,
     "allowed_actions": []
