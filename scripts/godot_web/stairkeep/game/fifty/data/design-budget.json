@@ -1,0 +1,786 @@
+{
+  "scope": "Lightweight build-time static checks and planning only; no engine run.",
+  "authored_floor_count": 10,
+  "target_floor_count": 50,
+  "not_authored_floor_count": 40,
+  "unique_object_count": 138,
+  "object_counts": {
+    "atk": 20,
+    "def": 10,
+    "door": 21,
+    "enemy": 21,
+    "event": 3,
+    "gold": 10,
+    "key": 10,
+    "npc": 2,
+    "potion": 20,
+    "shop": 3,
+    "stairs": 18
+  },
+  "loose_resource_upper_envelope": {
+    "atk": 75,
+    "def": 40,
+    "gold": 598,
+    "hp": 1140,
+    "key:blue": 1,
+    "key:yellow": 10
+  },
+  "upper_envelope_note": "Conservative independent maxima, not a jointly attainable character: 10 yellow keys cannot open all 20 yellow branch doors; shop affordability and stock still apply.",
+  "all_stairs_bidirectional": true,
+  "campaign_victory_present": false,
+  "witnesses": [
+    {
+      "name": "blade",
+      "events": 106,
+      "final": {
+        "hp": 77,
+        "atk": 57,
+        "def": 19,
+        "gold": 418,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        },
+        "won": false
+      },
+      "minimum_hp": 77,
+      "ordinary_combats": 20,
+      "planned_walk_steps": 524,
+      "engine_tested": false
+    },
+    {
+      "name": "bulwark",
+      "events": 103,
+      "final": {
+        "hp": 183,
+        "atk": 45,
+        "def": 28,
+        "gold": 333,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        },
+        "won": false
+      },
+      "minimum_hp": 175,
+      "ordinary_combats": 20,
+      "planned_walk_steps": 604,
+      "engine_tested": false
+    }
+  ],
+  "topology_checks": [
+    {
+      "id": 1,
+      "name": "双环门厅",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 49,
+      "independent_cycles": 2,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "N": [
+          11,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "梳齿钟廊",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 60,
+      "independent_cycles": 2,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "M": [
+          1,
+          7
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "水镜八庭",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 56,
+      "independent_cycles": 2,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "q": [
+          3,
+          11
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "绞盘双桥",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 68,
+      "independent_cycles": 5,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "三渠档库",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 61,
+      "independent_cycles": 4,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "B": [
+          1,
+          9
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "M": [
+          11,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "z": [
+          1,
+          13
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D",
+        "B"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "回环机井",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 77,
+      "independent_cycles": 4,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "错庭风站",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 61,
+      "independent_cycles": 4,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "N": [
+          13,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "三径引线",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 69,
+      "independent_cycles": 2,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "M": [
+          1,
+          8
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "四翼机杼",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 69,
+      "independent_cycles": 12,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "马蹄信台",
+      "width": 15,
+      "height": 15,
+      "walkable_cells": 78,
+      "independent_cycles": 3,
+      "markers": {
+        "a": [
+          1,
+          1
+        ],
+        "$": [
+          3,
+          1
+        ],
+        "U": [
+          7,
+          1
+        ],
+        "d": [
+          11,
+          1
+        ],
+        "p": [
+          13,
+          1
+        ],
+        "G": [
+          7,
+          2
+        ],
+        "A": [
+          3,
+          4
+        ],
+        "D": [
+          11,
+          4
+        ],
+        "K": [
+          7,
+          7
+        ],
+        "i": [
+          7,
+          9
+        ],
+        "h": [
+          7,
+          11
+        ],
+        "V": [
+          6,
+          13
+        ],
+        "S": [
+          7,
+          13
+        ]
+      },
+      "all_cells_connected": true,
+      "gate_cut_checks": [
+        "G",
+        "A",
+        "D"
+      ]
+    }
+  ]
+}
