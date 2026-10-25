@@ -19,12 +19,22 @@ var _ui_font: Font
 var _hint := ""
 var _last_cleared: Array = []
 var _hint_label: Label
+var _clipper: Control
+var _overview_mode := false
+var _view_stamp := ""
+var _last_fit_rect := Rect2()
+var _camera_target := Vector2.ZERO
+var _camera_tween: Tween
+var _direction_layer: Node2D
+var _direction_cells: Array = []
 
 
 func configure(rules: Object) -> void:
 	_map_stamp = ""
 	_last_cleared.clear()
 	_route_cells.clear()
+	_direction_cells.clear()
+	_view_stamp = ""
 	super.configure(rules)
 
 
@@ -50,13 +60,21 @@ func refresh() -> void:
 			_map_stamp = "" # Full restore can close gates on an already visited floor.
 			break
 	if _board == null or stamp != _map_stamp:
+		_view_stamp = ""
+		if is_instance_valid(_camera_tween): _camera_tween.kill()
+		_route_cells.clear()
+		_direction_cells.clear()
 		_motion_serial += 1
 		_nodes.clear()
 		_wall_nodes.clear()
 		_route_layer = null
+		_direction_layer = null
 		_map_stamp = stamp
 		super.refresh()
-		_floor.modulate = Color("fff6df")
+		_ensure_clipper()
+		_board.reparent(_clipper,true)
+		if int(_rules.state.get("floor",0)) == 0:
+			_floor.modulate = Color("f6dfb4")
 		# One warm, level floor language; bumps are not a walkability code.
 		var rows: Array = _rules.floor_data().get("grid", [])
 		for y: int in range(rows.size()):
@@ -67,6 +85,9 @@ func refresh() -> void:
 		_route_layer.name = "WalkRouteFeedback"
 		_route_layer.z_index = -1
 		_board.add_child(_route_layer)
+		_direction_layer = Node2D.new()
+		_direction_layer.z_index = -1
+		_board.add_child(_direction_layer)
 	else:
 		_sync_objects()
 		if not _animating and is_instance_valid(_hero_node):
@@ -76,6 +97,7 @@ func refresh() -> void:
 		if item.get("kind","") == "door" and _rules.state["cleared"].has(str(item["id"])):
 			_show_open_door(item)
 	set_route_preview(_route_cells)
+	set_direction_candidates(_direction_cells)
 	_update_occlusion()
 	_update_badge_visibility()
 	_last_cleared = _rules.state["cleared"].duplicate()
@@ -103,17 +125,20 @@ func _add_wall(cell: Array) -> void:
 	wall.position = _center(cell)
 	wall.name = "SolidWall"
 	_actors.add_child(wall)
-	var top := -21.0
-	_polygon(PackedVector2Array([Vector2(-107,top),Vector2(0,53+top),Vector2(0,54),Vector2(-107,0)]),Color("3b5260"),wall)
-	_polygon(PackedVector2Array([Vector2(0,53+top),Vector2(107,top),Vector2(107,0),Vector2(0,54)]),Color("293d4b"),wall)
-	_polygon(_diamond(107,53),Color("536774"),wall,Vector2(0,top))
+	# Full tile caps join adjacent masonry; front faces only border real paths.
+	var top := -26.0
+	if _rules.walkable([int(cell[0]),int(cell[1])+1]):
+		_polygon(PackedVector2Array([Vector2(-128,top),Vector2(0,64+top),Vector2(0,64),Vector2(-128,0)]),Color("3b5260"),wall)
+	if _rules.walkable([int(cell[0])+1,int(cell[1])]):
+		_polygon(PackedVector2Array([Vector2(0,64+top),Vector2(128,top),Vector2(128,0),Vector2(0,64)]),Color("293d4b"),wall)
+	_polygon(_diamond(128,64),Color("536774"),wall,Vector2(0,top))
 	var back_edge: bool = (_rules.walkable([int(cell[0])+1,int(cell[1])]) or _rules.walkable([int(cell[0]),int(cell[1])+1])) and not (_rules.walkable([int(cell[0])-1,int(cell[1])]) or _rules.walkable([int(cell[0]),int(cell[1])-1]))
 	var clear_of_targets := true
 	for item: Dictionary in _rules.floor_data().get("objects",[]):
 		var at: Array = item["pos"]
 		if absi(int(at[0])-int(cell[0])) + absi(int(at[1])-int(cell[1])) <= 1:
 			clear_of_targets = false
-	if back_edge and clear_of_targets and (int(cell[0])*3+int(cell[1])) % 11 == 0:
+	if int(_rules.state.get("floor",0)) != 0 and back_edge and clear_of_targets and (int(cell[0])*3+int(cell[1])) % 11 == 0:
 		var column := _sprite("stoneColumn_N.png",Vector2(-128,-448))
 		column.modulate = Color("91a6ad")
 		wall.add_child(column)
@@ -152,10 +177,38 @@ func _add_object(item: Dictionary) -> void:
 	node.set_meta("cell",item["pos"].duplicate())
 	var kind: String = str(item.get("kind",""))
 	if kind == "stairs":
+		var ascent: String = _stairs_ascent_direction(item)
+		for child: Node in node.get_children():
+			if child is Sprite2D and (child as Sprite2D).texture != _halo_texture:
+				(child as Sprite2D).texture = Assets.get_stairs_ascent_texture(ascent)
+				(child as Sprite2D).offset = Assets.get_stairs_sprite_offset(Assets.get_stairs_source_direction_for_ascent(ascent))
+				break
 		for label: Node in node.find_children("*","Label",true,false):
 			label.queue_free()
 		_symbol_badge(node,("上楼" if item.get("direction","up") == "up" else "下楼") + "  %d层" % int(item["target"]["floor"]),CYAN,-180)
+		if int(_rules.state.get("floor",0)) == 0 and item.get("direction","") == "up":
+			var portal_direction: String = _door_direction(item)
+			var portal := Sprite2D.new()
+			portal.texture = Assets.get_open_door_texture(portal_direction)
+			portal.centered = false
+			portal.offset = Assets.get_door_sprite_offset(portal_direction)
+			portal.modulate = Color("7bcac8")
+			node.add_child(portal)
+			node.move_child(portal,0)
 	elif kind == "door":
+		for child: Node in node.get_children():
+			if child is Sprite2D:
+				node.remove_child(child)
+				child.queue_free()
+				break
+		var direction: String = _door_direction(item)
+		var gate := Sprite2D.new()
+		gate.texture = Assets.get_closed_door_texture(direction)
+		gate.centered = false
+		gate.offset = Assets.get_door_sprite_offset(direction)
+		gate.modulate = Color("88c9db") if item.get("type","yellow") == "blue" else Color("e7c18a")
+		node.add_child(gate)
+		node.move_child(gate,0)
 		_symbol_badge(node,"蓝门" if item.get("type","yellow") == "blue" else "黄门",CYAN if item.get("type","yellow") == "blue" else GOLD,-180)
 	elif kind == "shop":
 		for label: Node in node.find_children("*","Label",true,false):
@@ -229,13 +282,33 @@ func _show_open_door(item: Dictionary) -> void:
 	node.position = _center(item["pos"])
 	node.set_meta("opened",true)
 	var door := Sprite2D.new()
-	door.texture = Assets.get_open_door_texture("N")
+	var direction: String = _door_direction(item)
+	door.texture = Assets.get_open_door_texture(direction)
 	door.centered = false
-	door.offset = Vector2(-80,-448)
-	door.modulate = Color("9dbec3")
+	door.offset = Assets.get_door_sprite_offset(direction)
+	door.modulate = Color("88aebd") if item.get("type","yellow") == "blue" else Color("c9b58f")
 	node.add_child(door)
 	_actors.add_child(node)
 	_nodes[id] = node
+
+
+func _door_direction(item: Dictionary) -> String:
+	var at: Array = item["pos"]
+	var along_x: int = int(_rules.walkable([int(at[0])-1,int(at[1])]))+int(_rules.walkable([int(at[0])+1,int(at[1])]))
+	var along_y: int = int(_rules.walkable([int(at[0]),int(at[1])-1]))+int(_rules.walkable([int(at[0]),int(at[1])+1]))
+	return "E" if along_x > along_y else "N"
+
+
+func _stairs_ascent_direction(item: Dictionary) -> String:
+	var at: Array = item["pos"]
+	for adjacent: Vector2i in [Vector2i.UP,Vector2i.LEFT,Vector2i.DOWN,Vector2i.RIGHT]:
+		if not _rules.walkable([int(at[0])+adjacent.x,int(at[1])+adjacent.y]): continue
+		var ascent: Vector2i = -adjacent if item.get("direction","up") == "up" else adjacent
+		if ascent.x > 0: return "E"
+		if ascent.x < 0: return "W"
+		if ascent.y > 0: return "S"
+		return "N"
+	return "N"
 
 
 func _animate_open_door(item: Dictionary) -> void:
@@ -262,10 +335,58 @@ func set_route_preview(path: Array) -> void:
 	if not is_instance_valid(_route_layer):
 		return
 	for child: Node in _route_layer.get_children():
+		_route_layer.remove_child(child)
 		child.queue_free()
 	for cell: Array in _route_cells:
 		if cell.size() == 2 and _rules.walkable(cell):
 			_polygon(_diamond(24,12),Color(CYAN,0.65),_route_layer,_center(cell))
+	set_direction_candidates(_direction_cells)
+
+
+func projected_step_options() -> Array:
+	var options: Array = []
+	if _floor == null: return options
+	var origin: Array = _rules.state.get("pos",[])
+	if origin.size() != 2: return options
+	var start: Vector2 = projected_cell_center(origin)
+	for delta: Vector2i in [Vector2i.LEFT,Vector2i.UP,Vector2i.DOWN,Vector2i.RIGHT]:
+		var cell: Array = [int(origin[0])+delta.x,int(origin[1])+delta.y]
+		options.append({"cell":cell,"delta":[delta.x,delta.y],"screen":projected_cell_center(cell)-start,"walkable":_rules.walkable(cell)})
+	return options
+
+
+func set_direction_candidates(cells: Array) -> void:
+	_direction_cells = cells.duplicate(true)
+	if not is_instance_valid(_direction_layer): return
+	for child: Node in _direction_layer.get_children():
+		_direction_layer.remove_child(child)
+		child.queue_free()
+	var visible_cells: Array = cells.duplicate(true)
+	var choosing: bool = not cells.is_empty()
+	if not choosing and _route_cells.is_empty():
+		for option: Dictionary in projected_step_options():
+			if bool(option["walkable"]): visible_cells.append(option["cell"])
+	for cell: Array in visible_cells:
+		var rim: PackedVector2Array = _diamond(94 if choosing else 52,45 if choosing else 25)
+		rim.append(rim[0])
+		var line: Line2D = _line(rim,CYAN if choosing else Color(GOLD,0.55),7 if choosing else 4,_direction_layer)
+		line.position = _center(cell)
+
+
+func _ensure_clipper() -> void:
+	if is_instance_valid(_clipper): return
+	_clipper = Control.new()
+	_clipper.name = "MapOnlyClip"
+	_clipper.clip_contents = true
+	_clipper.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(_clipper)
+
+
+func set_overview(enabled: bool) -> void:
+	if is_instance_valid(_camera_tween): _camera_tween.kill()
+	_overview_mode = enabled
+	_view_stamp = ""
+	fit_rect(_rect)
 
 
 func set_action_hint(text: String) -> void:
@@ -287,16 +408,72 @@ func set_action_hint(text: String) -> void:
 
 
 func fit_rect(rect: Rect2) -> void:
+	_ensure_clipper()
+	var previous_origin: Vector2 = _board.global_position if is_instance_valid(_board) else Vector2.ZERO
+	if _animating and _view_stamp == _map_stamp:
+		# A rule can already be on the next floor while the old board fades.
+		# Keep that board's transform until its replacement is built.
+		_rect = rect
+		_clipper.position = rect.position
+		_clipper.size = rect.size
+		if is_instance_valid(_board): _board.global_position = previous_origin
+		return
+	var same_view: bool = _view_stamp == _map_stamp and _last_fit_rect == rect
+	_clipper.position = rect.position
+	_clipper.size = rect.size
 	super.fit_rect(rect)
+	if is_instance_valid(_board):
+		if _board.get_parent() == _clipper:
+			_board.position -= rect.position
+		if not _overview_mode:
+			var factor: float = _board.scale.x*1.6
+			_board.scale = Vector2.ONE*factor
+			var origin: Vector2 = previous_origin if same_view else rect.get_center()-_center(_rules.state["pos"])*factor
+			var hero_screen: Vector2 = origin+_center(_rules.state["pos"])*factor
+			var safe := Rect2(rect.position+rect.size*0.25,rect.size*0.50)
+			origin += Vector2(clampf(hero_screen.x,safe.position.x,safe.end.x)-hero_screen.x,clampf(hero_screen.y,safe.position.y,safe.end.y)-hero_screen.y)
+			var bounds: Rect2 = _scene_bounds()
+			for axis: int in range(2):
+				var low: float = rect.end[axis]-bounds.end[axis]*factor
+				var high: float = rect.position[axis]-bounds.position[axis]*factor
+				origin[axis] = clampf(origin[axis],low,high) if low <= high else rect.get_center()[axis]-bounds.get_center()[axis]*factor
+			if not same_view:
+				if is_instance_valid(_camera_tween): _camera_tween.kill()
+				_board.global_position = origin
+				_camera_target = origin
+			elif not _camera_target.is_equal_approx(origin):
+				if is_instance_valid(_camera_tween): _camera_tween.kill()
+				_camera_target = origin
+				_board.global_position = previous_origin
+				_camera_tween = _board.create_tween()
+				_camera_tween.tween_property(_board,"global_position",origin,0.18).set_trans(Tween.TRANS_SINE)
+			else:
+				_board.global_position = previous_origin
+		_view_stamp = _map_stamp
+		_last_fit_rect = rect
 	if is_instance_valid(_actors):
 		for raw: Node in _actors.find_children("*","Label",true,false):
 			var label: Label = raw as Label
+			label.add_theme_font_size_override("font_size",clampi(int(ceil(13.0/maxf(_board.scale.x,0.01))),28,100))
 			var point_size: int = label.get_theme_font_size("font_size")
 			var width: float = _font().get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,point_size).x+18.0
 			label.size.x = maxf(180.0,width)
 			label.position.x = -label.size.x*0.5
 	if is_instance_valid(_hint_label):
 		set_action_hint(_hint)
+
+
+func _scene_bounds() -> Rect2:
+	var bounds := Rect2()
+	var first := true
+	var rows: Array = _rules.floor_data().get("grid",[])
+	for y: int in range(rows.size()):
+		for x: int in range(str(rows[y]).length()):
+			if _rules.walkable([x,y]) or _near_path([x,y]):
+				var tile := Rect2(_center([x,y])+Vector2(-140,-320),Vector2(280,500))
+				bounds = tile if first else bounds.merge(tile)
+				first = false
+	return bounds
 
 
 func _facing_for(delta: Array) -> int:
@@ -313,7 +490,12 @@ func _pose(action: String) -> void:
 		_hero_body.stop()
 		_hero_body.play(wanted)
 	elif _hero_body.animation != wanted:
+		var continuing_stride: bool = action == "run" and str(_hero_body.animation).begins_with("run_")
+		var prior_frame: int = _hero_body.frame
+		var prior_progress: float = _hero_body.frame_progress
 		_hero_body.play(wanted)
+		if continuing_stride:
+			_hero_body.set_frame_and_progress(mini(prior_frame,_hero_body.sprite_frames.get_frame_count(wanted)-1),prior_progress)
 	_hero_body.speed_scale = 1.8 if action == "pickup" else 1.0
 
 
@@ -343,10 +525,19 @@ func present_transition(before: Dictionary,result: Dictionary,previous_item: Dic
 	_motion_serial += 1
 	var serial: int = _motion_serial
 	var after: Dictionary = _rules.state
-	if int(before.get("floor",-1)) != int(after.get("floor",-1)):
+	if int(before.get("floor",-1)) != int(after.get("floor",-1)) or str(result.get("action","")) in ["checkpoint_restored","started","restarted"]:
+		if previous_item.get("kind","") == "stairs" and before.get("pos",[]) != previous_item.get("pos",[]):
+			var entry: Array = previous_item["pos"]
+			var departure: Array = before["pos"]
+			_facing = _facing_for([int(entry[0])-int(departure[0]),int(entry[1])-int(departure[1])])
+			_pose("run")
+			var approach := create_tween()
+			approach.tween_property(_hero_node,"position",_center(entry),0.18).set_trans(Tween.TRANS_LINEAR)
+			await approach.finished
 		var out := create_tween()
 		out.tween_property(_board,"modulate:a",0.20,0.10)
 		await out.finished
+		_map_stamp = ""
 		refresh()
 		_board.modulate.a = 0.20
 		var fade := create_tween()
@@ -412,7 +603,7 @@ func present_transition(before: Dictionary,result: Dictionary,previous_item: Dic
 	refresh()
 	_animating = false
 	# A following route step starts before this short idle delay, preserving run phase.
-	get_tree().create_timer(0.06).timeout.connect(func():
+	get_tree().create_timer(0.10).timeout.connect(func():
 		if serial == _motion_serial and not _animating:
 			_pose("idle")
 	)
@@ -443,7 +634,7 @@ func _update_occlusion() -> void:
 
 
 func cell_at(screenpos: Vector2) -> Array:
-	if _floor == null:
+	if _floor == null or not _rect.has_point(screenpos):
 		return []
 	var picked: Array = []
 	var depth := -INF

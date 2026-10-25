@@ -2,3 +2,4 @@
 overlay/** -text
 overlay/assets/experience/characters/License.txt whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 overlay/assets/experience/doors/License.txt whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+overlay/assets/experience/stairs/License.txt whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

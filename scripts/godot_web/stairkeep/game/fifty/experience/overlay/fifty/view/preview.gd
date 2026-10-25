@@ -6,6 +6,7 @@ const Runtime = preload("res://fifty/scripts/runtime.gd")
 const Saves = preload("res://fifty/scripts/save.gd")
 const World = preload("res://fifty/view/experience_world.gd")
 const ExperienceAudio = preload("res://fifty/view/experience_audio.gd")
+const ScreenInput = preload("res://fifty/view/screen_input.gd")
 const Icon = preload("res://scripts/ui_icon.gd")
 const INK := Color("101f2c")
 const GOLD := Color("e8c48a")
@@ -17,6 +18,7 @@ const SLOT := "first-chapter"
 const CLASSIC := "classic_restart"
 const PRACTICE := "practice_checkpoint"
 const UI_FONT_PATH := "res://assets/experience/fonts/cjk-ui.otf"
+const EXPERIENCE_REVISION := "input-f1-02"
 const AREAS := ["归潮门厅", "绳桥库", "回声索室", "双庭水闸", "盐封档案", "绕潮盘道", "守灯人廊", "三径蓄池", "四翼校准室", "无火信台"]
 const STAT_NAMES := {"hp":"生命", "potion":"生命", "atk":"攻击", "def":"防御", "gold":"金币", "yellow":"黄钥匙", "blue":"蓝钥匙"}
 
@@ -60,6 +62,11 @@ var _last_delta: Dictionary = {}
 var _audio: Node
 var _muted := false
 var sound_button: Button
+var view_button: Button
+var _overview := false
+var _cancel_route := false
+var _pause_when_idle := false
+var _direction_serial := 0
 
 
 func _ready() -> void:
@@ -110,6 +117,7 @@ func _button(parent: Node, caption: String, callback: Callable) -> Button:
 	button.custom_minimum_size.y = 44
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	button.pressed.connect(func():
+		_direction_serial += 1
 		_unlock_audio()
 		if not _input_locked(): callback.call()
 	)
@@ -160,7 +168,7 @@ func _build_ui() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(brand)
 	brand.add_child(_label("阶 塔", 27, GOLD))
-	brand.add_child(_label("潮痕信号 · 第一章 · 暂定名，可更改", 12, MUTED))
+	brand.add_child(_label("潮痕信号 · 第一章 · 体验02", 12, MUTED))
 	var actions := HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 7)
 	heading.add_child(actions)
@@ -215,9 +223,10 @@ func _build_ui() -> void:
 	var compass := HBoxContainer.new()
 	compass.add_theme_constant_override("separation", 8)
 	world_column.add_child(compass)
-	for entry: Array in [["↖ A",-1,0],["↗ W",0,-1],["↙ S",0,1],["↘ D",1,0]]:
-		_button(compass, str(entry[0]), _step.bind(int(entry[1]), int(entry[2])))
-	_button(compass, "上下楼 E", _use_stairs)
+	for entry: Array in [["↖",-1,-1],["↗",1,-1],["↙",-1,1],["↘",1,1]]:
+		_button(compass, str(entry[0]), _screen_step.bind(Vector2(entry[1],entry[2])))
+	_button(compass, "互动 E / 空格", _confirm_target)
+	view_button = _button(compass,"总览",_toggle_overview)
 	var side := PanelContainer.new()
 	side.name = "FieldNotebook"
 	side.custom_minimum_size.x = 350
@@ -267,7 +276,7 @@ func _build_ui() -> void:
 	toast = _label("先选择模式，再进入首章。", 16, CREAM, true)
 	toast.custom_minimum_size.y = 37
 	screen.add_child(toast)
-	screen.add_child(_label("点空地前往 · 点物件查看后操作 · W/↑↗  A/←↖  S/↓↙  D/→↘ · 楼梯上按 E · Esc 暂停", 13, MUTED))
+	screen.add_child(_label("点地面前往 · 物件再点一次或 E 确认 · 方向键按画面选路，双键选斜向 · Esc 停步/暂停", 13, MUTED,true))
 	overlay = Control.new()
 	overlay.name = "Modal"
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -358,6 +367,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _open_modal(kind: String, title: String, copy: String) -> void:
+	_direction_serial += 1
 	modal_kind = kind
 	world.set_process_unhandled_input(false)
 	overlay.show()
@@ -489,7 +499,7 @@ func _do_begin(mode: String, seed: int) -> void:
 	_sync_control_lock()
 	_set_actions_enabled(true)
 	_refresh()
-	_message("已进入 F1。先找制图人；点击空地逐格前往，点物件查看，找到楼梯后可前往 F2。")
+	_message("体验02 · 已进入 F1。先找制图人；点击空地前往，物件再点一次或 E 确认，找到楼梯后可前往 F2。")
 
 
 func _snapshot() -> Dictionary:
@@ -728,6 +738,9 @@ func _refresh_journal(snap: Dictionary) -> void:
 func _cell_clicked(cell: Array) -> void:
 	if not started or modal_kind != "" or _input_locked():
 		return
+	_direction_serial += 1
+	var confirm_again: bool = selected == cell and not rules.object_at(cell).is_empty()
+	world.set_direction_candidates([])
 	selected = cell.duplicate()
 	world.set_hover(selected)
 	_inspect(selected)
@@ -735,11 +748,17 @@ func _cell_clicked(cell: Array) -> void:
 	if not rules.walkable(cell): return
 	if rules.object_at(cell).is_empty() and rules.walkable(cell):
 		await _approach()
+	elif confirm_again and not approach_button.disabled:
+		await _approach()
 
 
 func _hovered(cell: Array) -> void:
-	if started and modal_kind == "" and selected.is_empty() and not _input_locked():
+	if not started or modal_kind != "" or _input_locked(): return
+	if selected.is_empty():
 		_inspect(cell)
+	else:
+		# Keep the visible highlight bound to the action card's explicit target.
+		world.set_hover(selected)
 
 
 func _safe_path(target: Array) -> Array:
@@ -779,8 +798,10 @@ func _approach() -> void:
 		_message("没有畅通路线。请先处理途中障碍，或移动到物件旁边。")
 		return
 	_route_running = true
+	_cancel_route = false
 	_sync_control_lock()
 	for index: int in range(path.size()):
+		if _cancel_route: break
 		var cell: Array = path[index]
 		world.set_route_preview(path.slice(index))
 		var result: Dictionary = await _commit(Callable(rules,"interact").bind(cell),cell)
@@ -791,6 +812,7 @@ func _approach() -> void:
 	world.set_route_preview([])
 	_sync_control_lock()
 	if modal_kind == "": _inspect(selected)
+	_apply_pending_pause()
 
 
 func _step(dx: int, dy: int) -> void:
@@ -799,7 +821,72 @@ func _step(dx: int, dy: int) -> void:
 		world.set_hover([])
 		var pos: Array = rules.state.get("pos",[])
 		var target: Array = [int(pos[0])+dx,int(pos[1])+dy]
+		world.set_direction_candidates([])
+		if not rules.object_at(target).is_empty():
+			selected = target
+			world.set_hover(selected)
+			_inspect(selected)
+			tabs.current_tab = 0
+			_message("已选中%s。查看代价后，按 E / 空格或再点一次确认。" % inspect_title.text)
+			return
 		await _commit(Callable(rules,"move").bind(dx,dy),target)
+
+
+func _screen_step(intent: Vector2) -> void:
+	if not started or modal_kind != "" or _input_locked(): return
+	var resolved: Dictionary = ScreenInput.resolve(intent,world.projected_step_options())
+	world.set_direction_candidates([])
+	if resolved.get("status","") == "step":
+		var delta: Array = resolved["delta"]
+		await _step(int(delta[0]),int(delta[1]))
+	elif resolved.get("status","") == "choose":
+		selected = []
+		world.set_hover([])
+		_inspect([])
+		world.set_direction_candidates(resolved["cells"])
+		_message("这个画面方向有两个邻格。请点其中一个，或同时按两个方向键选斜向；不会替你转弯。")
+		world.set_action_hint("选择亮框中的邻格 · 例如 ↑+← 对应画面左上")
+	elif resolved.get("status","") == "blocked":
+		_message("该方向被墙挡住；请选另一格，不会自动改走别的方向。")
+
+
+func _held_screen_intent() -> Vector2:
+	var horizontal: int = int(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT))-int(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
+	var vertical: int = int(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN))-int(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP))
+	return Vector2(horizontal,vertical)
+
+
+func _queue_screen_step() -> void:
+	_direction_serial += 1
+	var serial: int = _direction_serial
+	var initial: Vector2 = _held_screen_intent()
+	# One short collection window lets a real two-key chord form before moving.
+	await get_tree().create_timer(0.07).timeout
+	if serial != _direction_serial or not started or modal_kind != "" or _input_locked(): return
+	var held: Vector2 = _held_screen_intent()
+	await _screen_step(initial if held == Vector2.ZERO else held)
+
+
+func _confirm_target() -> void:
+	if not started or modal_kind != "" or _input_locked(): return
+	if selected.size() == 2 and not rules.object_at(selected).is_empty():
+		if not approach_button.disabled: await _approach()
+	elif rules.object_at(rules.state.get("pos",[])).get("kind","") == "stairs":
+		await _use_stairs()
+	else:
+		_message("先点击物件查看代价；点击空地可直接走过去。")
+
+
+func _toggle_overview() -> void:
+	_overview = not _overview
+	view_button.text = "近看" if _overview else "总览"
+	world.set_overview(_overview)
+
+
+func _apply_pending_pause() -> void:
+	if not _pause_when_idle or _input_locked(): return
+	_pause_when_idle = false
+	if modal_kind == "" and not rules.is_failed(): _pause()
 
 
 func _use_stairs() -> void:
@@ -831,6 +918,7 @@ func _buy(choice: String) -> void:
 func _commit(command: Callable, target: Array = [], offer: Dictionary = {}) -> Dictionary:
 	# The authority executes exactly once. Animation never replays a rule action.
 	if _busy or not started: return {}
+	world.set_direction_candidates([])
 	_busy = true
 	_sync_control_lock()
 	var before: Dictionary = rules.state.duplicate(true)
@@ -865,6 +953,7 @@ func _commit(command: Callable, target: Array = [], offer: Dictionary = {}) -> D
 	if bool(result.get("ok",false)) and str(result.get("action","")) == "event" and not bool(_snapshot().get("slice_complete",false)) and modal_kind == "":
 		_open_modal("dialogue","塔中留言",str(result.get("message","")))
 		_button(overlay_box,"返回塔内",_close_modal).call_deferred("grab_focus")
+	_apply_pending_pause()
 	return result
 
 
@@ -1179,26 +1268,31 @@ func _end_run() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.pressed or event.echo:
 		return
-	if _input_locked():
-		get_viewport().set_input_as_handled()
-		return
 	if event.physical_keycode == KEY_ESCAPE and started:
-		if modal_kind == "":
+		_direction_serial += 1
+		if _input_locked():
+			_cancel_route = true
+			_pause_when_idle = true
+			_message("当前格完成后停步并暂停，不再执行后续路径。")
+		elif modal_kind == "":
 			_pause()
 		elif not bool(_snapshot().get("failed",false)):
 			_close_modal()
 		get_viewport().set_input_as_handled()
 		return
+	if _input_locked():
+		get_viewport().set_input_as_handled()
+		return
 	if not started or modal_kind != "":
 		return
 	match event.physical_keycode:
-		KEY_W,KEY_UP: _step(0,-1)
-		KEY_A,KEY_LEFT: _step(-1,0)
-		KEY_S,KEY_DOWN: _step(0,1)
-		KEY_D,KEY_RIGHT: _step(1,0)
-		KEY_E: _use_stairs()
+		KEY_W,KEY_UP,KEY_A,KEY_LEFT,KEY_S,KEY_DOWN,KEY_D,KEY_RIGHT:
+			_queue_screen_step()
+		KEY_E,KEY_SPACE,KEY_ENTER:
+			_direction_serial += 1
+			_confirm_target()
 	get_viewport().set_input_as_handled()
 
 
 func view_status() -> Dictionary:
-	return {"started":started,"selected_mode":selected_mode,"active_mode":active_mode,"mode_required":true,"start_disabled":start_button.disabled if is_instance_valid(start_button) else true,"content_ready":content_ready,"authored_floors":10,"target_floors":50,"unmade_floors":[11,50],"modal":modal_kind,"visual_review":"not-tested","real_input":"not-tested"}
+	return {"presentation_revision":EXPERIENCE_REVISION,"started":started,"selected_mode":selected_mode,"active_mode":active_mode,"mode_required":true,"start_disabled":start_button.disabled if is_instance_valid(start_button) else true,"content_ready":content_ready,"authored_floors":10,"target_floors":50,"unmade_floors":[11,50],"modal":modal_kind,"visual_review":"not-tested","real_input":"not-tested"}

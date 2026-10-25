@@ -1,0 +1,137 @@
+{
+  "schema": "stairkeep-experience-stairs-source/v1",
+  "source_url": "https://kenney.nl/assets/isometric-miniature-dungeon",
+  "source_archive": "research/kenney_isometric-miniature-dungeon.zip",
+  "source_archive_sha256": "187a0888451317fe47caac5f26e984bb79c5ddce9b8630926f0f5d9c0247d343",
+  "license": "CC0-1.0",
+  "license_file": "License.txt",
+  "license_sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc",
+  "candidate_overlay_only": true,
+  "image_editing": false,
+  "engine_executed": false,
+  "files": [
+    {
+      "path": "stairs_N.png",
+      "source_member": "Isometric/stairs_N.png",
+      "sha256": "4085feccb370df75658b40f1ef0c4e8ae2678404e89cf218473fd67944178ea3",
+      "bytes": 25470,
+      "modification": "unmodified byte copy",
+      "source_rotation": "N",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        353,
+        256,
+        512
+      ],
+      "last_opaque_row": 511
+    },
+    {
+      "path": "stairs_E.png",
+      "source_member": "Isometric/stairs_E.png",
+      "sha256": "a9802aa39e86e8344329f502d2d1cb35a6224544b4fc3363caf7fe604c7d8c20",
+      "bytes": 31339,
+      "modification": "unmodified byte copy",
+      "source_rotation": "E",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        305,
+        256,
+        512
+      ],
+      "last_opaque_row": 511
+    },
+    {
+      "path": "stairs_S.png",
+      "source_member": "Isometric/stairs_S.png",
+      "sha256": "5dab9cb00b70c296f6bdfacff98d8791c497be83acba2dfdda2d3f341d954608",
+      "bytes": 30759,
+      "modification": "unmodified byte copy",
+      "source_rotation": "S",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        305,
+        256,
+        512
+      ],
+      "last_opaque_row": 511
+    },
+    {
+      "path": "stairs_W.png",
+      "source_member": "Isometric/stairs_W.png",
+      "sha256": "6d316de50487c0ada0c680dbf14fcc11899cc697d0f3a00c5e713cee1deef068",
+      "bytes": 25205,
+      "modification": "unmodified byte copy",
+      "source_rotation": "W",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        353,
+        256,
+        512
+      ],
+      "last_opaque_row": 511
+    }
+  ],
+  "validation": {
+    "all_4_archive_members_byte_equal": true,
+    "all_4_copies_byte_equal": true,
+    "all_transparent_256x512": true,
+    "bbox_convention": "x0,y0,x1,y1; right/bottom exclusive",
+    "all_last_opaque_rows_equal": 511
+  },
+  "anchor_recommendation": {
+    "status": "static_candidate_not_engine_or_pixel_accepted",
+    "centered_false_offset": [
+      -128,
+      -448
+    ],
+    "centered_true_offset": [
+      0,
+      -192
+    ],
+    "last_opaque_row_after_offset": 63,
+    "basis": "Preserve full 256x512 canvases. All source rotations share alpha horizontal extent 0..256 and last opaque row 511. This candidate places the bottom at the same raster row as the door masonry. Different upper silhouettes are intentional and must not be recentered."
+  },
+  "direction_semantics": {
+    "raw_texture_API": "get_stairs_texture(direction) selects the literal stairs_{direction}.png file.",
+    "ascent_API": "get_stairs_ascent_texture(ascent_direction) uses character compass N=screen NE,E=SE,S=SW,W=NW.",
+    "raw_source_to_uphill_screen": {
+      "N": "SW",
+      "E": "NW",
+      "S": "NE",
+      "W": "SE"
+    },
+    "ascent_compass_to_raw_source": {
+      "N": "S",
+      "E": "W",
+      "S": "N",
+      "W": "E"
+    },
+    "basis": "Two independent read-only inspections of the original PNG tread/risers and high landings. Height changes also shift high-end pixels upward; this is not a comparison of image y alone.",
+    "engine_or_portal_alignment_accepted": false
+  },
+  "facade": {
+    "path": "res://fifty/view/experience_assets.gd",
+    "sha256": "22c6d5d6e450ff6962d7de50374ee61690cf0637edf91465ab489553529c10a5",
+    "engine_parse_tested": false
+  }
+}

@@ -1,5 +1,6 @@
 {
   "schema": 1,
+  "revision": "input-f1-02",
   "status": "source-only-engine-blocked",
   "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
   "overlay": [
@@ -876,7 +877,7 @@
     {
       "path": "assets/experience/characters/SOURCE.json",
       "bytes": 127391,
-      "sha256": "be26d089bd9702989e148dc651d3075c75a1bbf47c492aa2c97ee68ec62132ce"
+      "sha256": "2f9824e0517364e67b0c50f0984678f2479f8925b7e18a952853f745561e55ab"
     },
     {
       "path": "assets/experience/doors/License.txt",
@@ -885,8 +886,28 @@
     },
     {
       "path": "assets/experience/doors/SOURCE.json",
-      "bytes": 3402,
-      "sha256": "dd95377bfe7630ad638daa8c552bdc2180f2054c04cff56cde3f7084d4767297"
+      "bytes": 7342,
+      "sha256": "8fd6a32c92670ef7d9021156560dc5c6064fba61d3b3e9a6011aa394fcd36015"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorClosed_E.png",
+      "bytes": 23893,
+      "sha256": "fd9e2572c0b04a0e5b8999f3bdd9790e884f858eade390f57fa4b151639e3a03"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorClosed_N.png",
+      "bytes": 23209,
+      "sha256": "144a3d117e9aa11782965bca1bb28654e5c5395964f649b760ebbce109a05412"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorClosed_S.png",
+      "bytes": 23569,
+      "sha256": "1fe3adff24ee6efeb2d1665f44e1882d1635cc13a1b32d33dc19cea7faa33849"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorClosed_W.png",
+      "bytes": 23636,
+      "sha256": "fc331713ad189bfb4f50e72fc04bf4abacda476513ad0ae5e54c1be5fa4df5cc"
     },
     {
       "path": "assets/experience/doors/stoneWallDoorOpen_E.png",
@@ -920,8 +941,8 @@
     },
     {
       "path": "assets/experience/fonts/cmap-report.json",
-      "bytes": 7074,
-      "sha256": "cd2333d444516c67482861f00009050cd2bdb4d263101f0b1245e6d67ea43425"
+      "bytes": 7248,
+      "sha256": "d672191e8165ebb49ce02577263aa244571f64c17cfed2586fb8dda9007e692e"
     },
     {
       "path": "assets/experience/fonts/FONT-LICENSE.txt",
@@ -944,9 +965,39 @@
       "sha256": "e05527c5f10226a74d110a99ec9b1a71f6fc9b21d800fecfbd1cc6baf7374c11"
     },
     {
+      "path": "assets/experience/stairs/License.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "assets/experience/stairs/SOURCE.json",
+      "bytes": 4245,
+      "sha256": "93e39342d2a03c2fba7a68dfc8d7cd94f7c0bc29ba624deec7ebafe95d014cc2"
+    },
+    {
+      "path": "assets/experience/stairs/stairs_E.png",
+      "bytes": 31339,
+      "sha256": "a9802aa39e86e8344329f502d2d1cb35a6224544b4fc3363caf7fe604c7d8c20"
+    },
+    {
+      "path": "assets/experience/stairs/stairs_N.png",
+      "bytes": 25470,
+      "sha256": "4085feccb370df75658b40f1ef0c4e8ae2678404e89cf218473fd67944178ea3"
+    },
+    {
+      "path": "assets/experience/stairs/stairs_S.png",
+      "bytes": 30759,
+      "sha256": "5dab9cb00b70c296f6bdfacff98d8791c497be83acba2dfdda2d3f341d954608"
+    },
+    {
+      "path": "assets/experience/stairs/stairs_W.png",
+      "bytes": 25205,
+      "sha256": "6d316de50487c0ada0c680dbf14fcc11899cc697d0f3a00c5e713cee1deef068"
+    },
+    {
       "path": "fifty/view/experience_assets.gd",
-      "bytes": 2665,
-      "sha256": "0018edd150294508df7ba5dc69bc5d018cd7765b29573d72b0c799bf22fe0904"
+      "bytes": 6197,
+      "sha256": "22c6d5d6e450ff6962d7de50374ee61690cf0637edf91465ab489553529c10a5"
     },
     {
       "path": "fifty/view/experience_audio.gd",
@@ -955,8 +1006,8 @@
     },
     {
       "path": "fifty/view/experience_world.gd",
-      "bytes": 19391,
-      "sha256": "453e55e04cf1290c129ea176ff1f73512d54538413acc8d19693ad17a69c9670"
+      "bytes": 27922,
+      "sha256": "aa1bb58d59052f11033aa31b8855d73d090bb726e520bb6e76494b9a4c2b3cd0"
     },
     {
       "path": "fifty/view/hero_frames.tres",
@@ -965,12 +1016,19 @@
     },
     {
       "path": "fifty/view/preview.gd",
-      "bytes": 55888,
-      "sha256": "851394aa4e98a1f4f4f5507f2305049ed94e2d184ba7233a57e56a3127df3a0b"
+      "bytes": 59779,
+      "sha256": "7b56f9a0482c8398c44800c0a4ed8a9b77a0ea7cbffaa6745a06db79085b3669"
+    },
+    {
+      "path": "fifty/view/screen_input.gd",
+      "bytes": 3872,
+      "sha256": "2528bd43687502ca7cae90e9f715ed6cb62bc557d89aa6ec150e75c2a0750e9b"
     }
   ],
   "rules_economy_save_data_modified": false,
   "engine_executed": false,
   "browser_accepted": false,
-  "served_url_updated": false
+  "served_url_updated": false,
+  "font_report_post_assembly_refresh_pending": false,
+  "native_probe": "tests/screen_input_probe.gd; not-run"
 }

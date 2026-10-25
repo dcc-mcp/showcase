@@ -5704,7 +5704,7 @@
   },
   "facade": {
     "path": "res://fifty/view/experience_assets.gd",
-    "sha256": "0018edd150294508df7ba5dc69bc5d018cd7765b29573d72b0c799bf22fe0904",
+    "sha256": "22c6d5d6e450ff6962d7de50374ee61690cf0637edf91465ab489553529c10a5",
     "engine_parse_tested": false
   }
 }
