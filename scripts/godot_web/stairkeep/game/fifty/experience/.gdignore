@@ -1,0 +1,2 @@
+# This is a source overlay, not an additional scene/import root.
+# prepare.py copies the selected files into a new first-chapter project.
