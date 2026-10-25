@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "checked": "2026-10-25T09:40:12.084288+00:00",
+  "house_source": "scripts/godot_web/dawnkeep/game/audio/SOURCE.json",
+  "tracks_audited": [
+    {
+      "title": "Determined Pursuit",
+      "author": "Emma_MA",
+      "source_page": "https://opengameart.org/content/determined-pursuit-epic-orchestra-loop",
+      "download_url": "https://opengameart.org/sites/default/files/determined_pursuit_loop.wav",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": {
+        "sha256": "e4f3be098b50213b56a60aefe60fffae79cd9f7c9008088f93c187ef1bbc856b",
+        "bytes": 19052830,
+        "duration_seconds": 108.0,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "file": "determined-pursuit.ogg",
+      "derivative": {
+        "sha256": "fe968cd8bd0cb49b86fce0bd4a318490b1db6b54e13c4a9cd3f6ab307c28daa2",
+        "bytes": 1520845,
+        "duration_seconds": 108.0,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "transform": "FFmpeg libvorbis q3, 44100 Hz stereo, metadata removed. No musical edits.",
+      "house_sha256_verified": true,
+      "included_in_this_candidate": false
+    },
+    {
+      "title": "The Field Of Dreams",
+      "author": "pauliuw",
+      "source_page": "https://opengameart.org/content/the-field-of-dreams",
+      "download_url": "https://opengameart.org/sites/default/files/the_field_of_dreams.mp3",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": {
+        "sha256": "103a7032a49be7e8399c5cb771f7759eac9ac1a0d2bf227f41fff42ad8d78194",
+        "bytes": 3385581,
+        "duration_seconds": 84.636725,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "file": "field-of-dreams.ogg",
+      "derivative": {
+        "sha256": "438e56482edc68ee6d86913fac2c14e5574afd71514771e8ff25d0f0053ab956",
+        "bytes": 1150360,
+        "duration_seconds": 84.636735,
+        "sample_rate_hz": 44100,
+        "channels": 2
+      },
+      "transform": "FFmpeg libvorbis q3, 44100 Hz stereo, metadata removed. No musical edits.",
+      "house_sha256_verified": true,
+      "included_in_this_candidate": true
+    }
+  ],
+  "selected_track": "The Field Of Dreams",
+  "selection_reason": "Calm fantasy/RPG background; quiet planning remains foreground. Exact existing84.64-second recording loops with8dB trim below user mix. Loop seam and subjective mix are not accepted until listening.",
+  "source_pages_checked_with_web": {
+    "The Field Of Dreams": "2026-10-25 author pauliuw, licenseCC0 observed on original page",
+    "Determined Pursuit": "2026-10-25 author Emma_MA, licenseCC0 and explicit public-domain dedication observed on original page"
+  },
+  "feedback": {
+    "script": "res://fifty/view/experience_audio.gd",
+    "script_sha256": "f5652ca3e440b97fb884dd8be3b0a52fbbfc1b489cfa92e475227eeb3b85d018",
+    "origin": "New chapter synthesis recipes using existing native AudioStreamPlayer pattern, not copied Dawnkeep rights-reserved implementation/results",
+    "cue_types": [
+      "pickup",
+      "door",
+      "purchase",
+      "stairs",
+      "blocked",
+      "combat"
+    ],
+    "format": "22050Hz mono signed16-bit PCM created in memory;0.16–0.34second bounded cues"
+  },
+  "mix": {
+    "default_linear_volume": 0.2,
+    "music_trim_db": -8.0,
+    "effects_trim_db": -2.0,
+    "muted_default": false,
+    "autoplay": false,
+    "music_starts_only_after": "unlock_from_gesture called by owning presenter real input/button handler",
+    "web_unlock_claim": "not-tested; boolean unlocked only records application request, not proof AudioContext resumed"
+  },
+  "validation": {
+    "source_license_audit": "passed",
+    "local_ogg_hash_matches_house": "passed",
+    "GDScript_import_or_execution": "not-tested by this worker; no Godot start permitted",
+    "browser_first_gesture_unlock": "not-tested",
+    "subjective_listening_and_loop": "not-tested",
+    "mute_and_volume_real_input": "not-tested"
+  },
+  "software_installs": 0,
+  "new_recording_downloads": 0,
+  "host_starts": 0
+}

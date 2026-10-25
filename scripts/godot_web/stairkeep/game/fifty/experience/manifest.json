@@ -1,0 +1,976 @@
+{
+  "schema": 1,
+  "status": "source-only-engine-blocked",
+  "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
+  "overlay": [
+    {
+      "path": "assets/experience/audio/AUDIO-LICENSE.txt",
+      "bytes": 925,
+      "sha256": "e27288d8df14f07be1407046d340f605f16c165d2ed8c6deec785798f9ca243b"
+    },
+    {
+      "path": "assets/experience/audio/field-of-dreams.ogg",
+      "bytes": 1150360,
+      "sha256": "438e56482edc68ee6d86913fac2c14e5574afd71514771e8ff25d0f0053ab956"
+    },
+    {
+      "path": "assets/experience/audio/HOUSE-AUDIO-LICENSE.txt",
+      "bytes": 613,
+      "sha256": "c084e9e03edcbf247da49b57ff2e7e93c736eb1ec43fa969be67f000aad55d29"
+    },
+    {
+      "path": "assets/experience/audio/README.md",
+      "bytes": 1934,
+      "sha256": "00759bcd55fd4358b3d27712ef422767f8d075796a3f931bbc87af9d60ca0f4e"
+    },
+    {
+      "path": "assets/experience/audio/SOURCE.json",
+      "bytes": 4223,
+      "sha256": "ad46f756704d85a4d94b08d3b95bbae0b61915fb2a07e1c2ba517004f8a39829"
+    },
+    {
+      "path": "assets/experience/characters/License.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Idle0.png",
+      "bytes": 4903,
+      "sha256": "d3b1fe7f2b34ee3077b3f853fbf36cfdcbb40324368f54f2673f35bf341b1059"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup0.png",
+      "bytes": 4848,
+      "sha256": "721047f33633d0ac40f8f3452a7471aa21e04a03807c99fa7c0dfd36ac4d3a35"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup1.png",
+      "bytes": 4263,
+      "sha256": "495809d325990e42b3a940fbfd8d7d21f8642a366a38f8ee630001b7dc0d85c3"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup2.png",
+      "bytes": 3797,
+      "sha256": "db40548745271490961bc5c1ba64f9bc6ec6f26ffdf2777f03a82fc33ff53856"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup3.png",
+      "bytes": 3736,
+      "sha256": "bb86903a1170af4a4d5a62832a568fbc50e861e9b1d6e1b0be14a57e6c10006b"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup4.png",
+      "bytes": 3689,
+      "sha256": "7c03a3448631bb6fdf5c6ad2780d0802f24256a1314a204ee0b245881753c02a"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup5.png",
+      "bytes": 3942,
+      "sha256": "57c2ccb5cd8ba560ec4b8044bef2688c3f017328cdaab894f5d9c41b7ccd0f2d"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup6.png",
+      "bytes": 4497,
+      "sha256": "ccc6e685208941b0e113e35e61879c5f4cb867322179d1cc2b5759cd032103bb"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup7.png",
+      "bytes": 4534,
+      "sha256": "85b40a87c3d263484a2cc20ee5cbcd7ae9e72f6bf0f3f159e0aff7feb123c713"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup8.png",
+      "bytes": 4603,
+      "sha256": "44205d5acc65ec897b51b88d1d48fb9cdb1c73c2005e3df45d79a8a324614148"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Pickup9.png",
+      "bytes": 4781,
+      "sha256": "c364a1cd74f9dcebc0943d0272dbe053d8a4a2f9e069408eff2a14c381632847"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run0.png",
+      "bytes": 4415,
+      "sha256": "49cc0488334fa4c26f23c6366a2fa567da868b2d30c3e849a16589cf13a3664d"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run1.png",
+      "bytes": 4503,
+      "sha256": "21ec4481864d0855cfdf9f2d6dc74de66a6f0c907da2fa67b3a9284d0a8b6dfc"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run2.png",
+      "bytes": 4632,
+      "sha256": "177d9ff5ab42a184ec00c069b5a1793dc62384b3a7e5ab7ce00dac9bd309cb47"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run3.png",
+      "bytes": 4427,
+      "sha256": "024f3e1b6c5ef50621de36ecd2463e4d5925a18fb2cae5daf8d38bc2cc711bce"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run4.png",
+      "bytes": 4554,
+      "sha256": "20b5ceeecda493f5b9eb483b7789c575aedd3690efe715ecfcd45f5517fc78ee"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run5.png",
+      "bytes": 4703,
+      "sha256": "3d5f1fc176fcfd4ff7f43e4e19a12502ee40f185f2fed09eede885a3c4da3b37"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run6.png",
+      "bytes": 4581,
+      "sha256": "aaa3709e326db22cfd00f5017ae6a4efc7f1f843d6339fce34146933be794cae"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run7.png",
+      "bytes": 4953,
+      "sha256": "a47f54236f82589b8f57529d5a021c6f86dbc0fc03cfa79b38e6bfbfcb094102"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run8.png",
+      "bytes": 4743,
+      "sha256": "5c82915ace2c4e359f2153ec123e82b1ee8b504633fa62bd9d86eaf7e0f3bde4"
+    },
+    {
+      "path": "assets/experience/characters/Male_0_Run9.png",
+      "bytes": 4419,
+      "sha256": "48156b9bae2cf25b8c9204c1b618e8f972181635e4fc053216320ab21eded27d"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Idle0.png",
+      "bytes": 3723,
+      "sha256": "2c7c5aca151cb8734b1849b8ed667ffe9261db5504c5c60d36151e7900365405"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup0.png",
+      "bytes": 3742,
+      "sha256": "e380f5bdd1cfe47b752fec9054a95d5c119d5a98961ff66b80544c43e7feb6d0"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup1.png",
+      "bytes": 4273,
+      "sha256": "3b8324c0139900646f0d4a620a428163fe9a69a6356ee9a489a643e6050ac03f"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup2.png",
+      "bytes": 3980,
+      "sha256": "439a0433f29ff924895ad3682382d2a0ed9d09e7b9405966334c16c509bcc6b5"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup3.png",
+      "bytes": 4054,
+      "sha256": "4f1376d85193d1bc791aa2dfb706ecd181ab042c82f8006138b8798fff174dca"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup4.png",
+      "bytes": 3919,
+      "sha256": "615bb001b07fd457bcff2318a57b263f21142f1163a565e6a7a107d0f79d0a68"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup5.png",
+      "bytes": 4566,
+      "sha256": "588c231e47be01ba7d9a787a5591da75d3dd66ff85cfc0c7f8c66dcfc37e7414"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup6.png",
+      "bytes": 4372,
+      "sha256": "c21c01dbfd6bf2762c58aeae042bab94f16541f7c712a3be17596ca0ba0940fd"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup7.png",
+      "bytes": 4379,
+      "sha256": "d956f747064c59b8707db6e09b6d99c873e3a977e363cffc2b39431c483515a4"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup8.png",
+      "bytes": 4201,
+      "sha256": "721c271d1cb2447cf754218b74e14991c15db23c366fa7a052b28b4d604ad644"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Pickup9.png",
+      "bytes": 3875,
+      "sha256": "587b0bacc6f0d9a0341041a4857af28738e3ef1679cc0a640ce6cd47d795cddb"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run0.png",
+      "bytes": 4277,
+      "sha256": "becc9cb405c12824f7f6e3aa5be6204fc0280e8c9534c801a714527d3810871e"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run1.png",
+      "bytes": 4504,
+      "sha256": "ff3568313c4667db9a574525159822642cc7cbc83898aef1738e8c8d5f4d213d"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run2.png",
+      "bytes": 4627,
+      "sha256": "3734eb142509a8a5970af31354cba64a06c019920fe54d2728bde2ccee2bd1b4"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run3.png",
+      "bytes": 4459,
+      "sha256": "d207bd0d0cdafee37403614aa45fc54a96e31762a4066a05ac7df046bd03dd83"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run4.png",
+      "bytes": 4109,
+      "sha256": "c27858aa73fda9df8a39abcac4b3b811d9ab083e0482c7180de9221f1863e61a"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run5.png",
+      "bytes": 4430,
+      "sha256": "5ad09260d9b830337c22e59eccf167d9ffdac02ce9ec9e2389fc696b5b82fa8e"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run6.png",
+      "bytes": 4702,
+      "sha256": "881872b50f02ceb55b7b6edd5f86c97eb22c1dc4d6e3b6aa23d5493af020c9b1"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run7.png",
+      "bytes": 4782,
+      "sha256": "f84fdfc24219b72e00349e997d19f4ff22a448c87df564c4a447d1bf09d33c2b"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run8.png",
+      "bytes": 4715,
+      "sha256": "4dab54eef4da3a937df5c7e98ad188f2d06d4afe5275991198097d16d69ba16e"
+    },
+    {
+      "path": "assets/experience/characters/Male_1_Run9.png",
+      "bytes": 4315,
+      "sha256": "02e1ac50880288c6584293fc23157ddb9f8a42a17a70d1ec896d9fabb24a8baa"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Idle0.png",
+      "bytes": 5028,
+      "sha256": "f9e8c2b48e43a07e22992bede320d6adab0bf0bf8cd1f63e9a2343b5f2089a99"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup0.png",
+      "bytes": 4997,
+      "sha256": "63f762ed099645443e130467412d10fbf7831fbcbaf7d4cba3e23f6276e60ea9"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup1.png",
+      "bytes": 4645,
+      "sha256": "e0654137b6860dc7f8feb7bae4747c24389047cdcfc7a330a4fbcc4e4fca4b12"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup2.png",
+      "bytes": 4046,
+      "sha256": "f8686af7c0d7c7976a2ee7c3ea519dcc739cd7658016128a7d102493b352d671"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup3.png",
+      "bytes": 4007,
+      "sha256": "1e1d4596dc84a3f2d0b431f81de0849959283cea9a576a632097585b36ad7577"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup4.png",
+      "bytes": 4154,
+      "sha256": "af36ab3f407fee03d49ece877d6643a5b1a10454944d2e5d2f1db5e8b8882a4f"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup5.png",
+      "bytes": 4486,
+      "sha256": "4147a7d93b9ad3b2c93cc58e31b7621a6351c2e3ecb023baa8e9b124da6de4f2"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup6.png",
+      "bytes": 4768,
+      "sha256": "1c230e0bad15bf334f6a6222607182c3e9985c32331e654528fb1862f3c6517d"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup7.png",
+      "bytes": 4815,
+      "sha256": "3ba993f4c7ed64ecb00680c6a90c55c4a385e341dd23a6e399b25fc425fe5115"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup8.png",
+      "bytes": 4858,
+      "sha256": "01b44ce3870ba02e1a1c737f62e308fd034ee23b32ef98d17c28fad8ad21b03b"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Pickup9.png",
+      "bytes": 4984,
+      "sha256": "3baebba4d31f84247d56fd23f10345560908f167e1d7a6dca8cb0693c3e8239a"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run0.png",
+      "bytes": 4270,
+      "sha256": "c8dff0691f89e3a7c76cde91c7147c785ad282ecac29558919742268e9776bce"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run1.png",
+      "bytes": 4317,
+      "sha256": "8011bf0798714e68493fcbd2dc7fb4bf0c079eee01ec9be41f05388081c4d3f2"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run2.png",
+      "bytes": 4453,
+      "sha256": "aca3c5dfa2d737607a518a45f828bb623fc099501d6da4c875fa6db6899b3876"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run3.png",
+      "bytes": 4382,
+      "sha256": "a35a9ff2dd253f43bb7f54f5fb7790057b192a5ce46bd8ecc5d86786c210f0d7"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run4.png",
+      "bytes": 3967,
+      "sha256": "9f41814eca3b89df23e78881ded85310dc3aaf791c58eceebc4fd777b4296351"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run5.png",
+      "bytes": 3896,
+      "sha256": "d2d8e309351e312d09f2a4460ed96b3d5d4c84e6bb508692140d63af5678d01e"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run6.png",
+      "bytes": 4056,
+      "sha256": "09a810daa42103fac5a7d27d311c3adfdf407f10dd3b407bd7d12ea465b82948"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run7.png",
+      "bytes": 4328,
+      "sha256": "2f7d29f8e6b691934db39c38611e9cacde2877a3e4efa3174e46fc3bdff517fa"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run8.png",
+      "bytes": 4335,
+      "sha256": "331eeb6bac485317beff817c574af197692bad0d447bc681e232c9ff2d3436f1"
+    },
+    {
+      "path": "assets/experience/characters/Male_2_Run9.png",
+      "bytes": 4263,
+      "sha256": "3461eca284afc5f680101d676b852c8827c3aaa22debe3c254c44ef826c620e0"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Idle0.png",
+      "bytes": 5297,
+      "sha256": "4261fe14d0c4db50032b89e65c3bb128e8dd16b14cc6ebe979d3858805b7045e"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup0.png",
+      "bytes": 5263,
+      "sha256": "2f7e73ea0cee00b1d6ed95422b155aedd1ea2a8bfa64592495eb746fd9374e03"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup1.png",
+      "bytes": 4518,
+      "sha256": "1e28b0b350aec57dccf1053bcabd02052639a98e0a7cca1f4596963f1ed37ffc"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup2.png",
+      "bytes": 4091,
+      "sha256": "367de1de28e53d33aafe3d0d28c14daf97600b115240ae0ca75030705f26227b"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup3.png",
+      "bytes": 3841,
+      "sha256": "d5d4c09a9b2ca1be829d9743a91168df508bb92691e253319a4ec9ee81fffd11"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup4.png",
+      "bytes": 3886,
+      "sha256": "20cfbd7095d629181538534b97203491ad59012e48000ba80732ee6c76ec34d2"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup5.png",
+      "bytes": 4168,
+      "sha256": "4bed5a09a0a45982f48d47b772bf756a6cfff02bc849129f057a056188ee936b"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup6.png",
+      "bytes": 4587,
+      "sha256": "22d40b76223b40f9f805103073148d601e18c8e42b3f6d1110de41e3a21c50ba"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup7.png",
+      "bytes": 4737,
+      "sha256": "a7a2695a1fd0fd96aa5d036c948432f7f56f91d352d365425c07565ae009e467"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup8.png",
+      "bytes": 5110,
+      "sha256": "38847926bdee22b7f446e0410a299e959f9980f9940dde9a979e5f739650672b"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Pickup9.png",
+      "bytes": 5337,
+      "sha256": "cd32cd83a5a2f475af222515bbb53cd47602165881bbc9df7dcdcd02cbcf4c60"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run0.png",
+      "bytes": 4031,
+      "sha256": "5b9150828213b8b9320b939bac9e3a5ac15b6086ab8fec7192fbf9181a51955a"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run1.png",
+      "bytes": 3723,
+      "sha256": "ba7a472772b2070993dbc3ef333bfcd9360f9fb5245fe2140ad2ff37e147247b"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run2.png",
+      "bytes": 3747,
+      "sha256": "b7c3e7ebfa246c3e904033225974245e4d62dd1d477ac27aaf4bbc46b726935e"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run3.png",
+      "bytes": 4097,
+      "sha256": "31f23e5be8bd5252d8595973e2fb46a45079251e6c8174634cc8ee75d3b86d0c"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run4.png",
+      "bytes": 4213,
+      "sha256": "632c85e48f79b16ed18b6546622da21a3e6fce64792722348e19e292424ae22e"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run5.png",
+      "bytes": 4035,
+      "sha256": "d51581c6ca34e754fb3c26dc54acb51fc4a5e04766f38bd3f82534bdb59ff977"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run6.png",
+      "bytes": 3791,
+      "sha256": "88ab9d6e5e7504207e925bfeabee680b59d9775090f8e33d7e3a27828493df71"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run7.png",
+      "bytes": 3865,
+      "sha256": "d3ea02f88567a33666f20e6a55b022bcfb3f1918b2f967ce9f81484e4cc2a1cd"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run8.png",
+      "bytes": 4335,
+      "sha256": "c20d91024617a29bf737ea0e447ef9d754d8e451fb9a8d80d8181586d8bf2e2c"
+    },
+    {
+      "path": "assets/experience/characters/Male_3_Run9.png",
+      "bytes": 4281,
+      "sha256": "01999d9da3846d882633d3a776f8bde5daf02ddded096669a2e403a080a46555"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Idle0.png",
+      "bytes": 4840,
+      "sha256": "72ac8926aea34ff15f61302f427b52244460aa16b7c0b86bb4af72fd207f5a63"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup0.png",
+      "bytes": 4905,
+      "sha256": "14b9a69d4524ad9fc1dbaa2f8fcf1fcf6301cc5e11f4803c8decf26129e0edaa"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup1.png",
+      "bytes": 4031,
+      "sha256": "789777f2b379dbe2ca8e2858ee846d182c18ad0abeb6ead67b2b65e9aa141711"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup2.png",
+      "bytes": 4277,
+      "sha256": "c46c87d6b24e4eb68b2ed95b0b445456db893a40561b27a9a9e59d6ada2b7933"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup3.png",
+      "bytes": 4111,
+      "sha256": "9d02f229d4c82177aa2687c1b712917c2be9c6c8539dcc3ee8f9c5bfd88ee2c7"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup4.png",
+      "bytes": 4096,
+      "sha256": "cdd9f2d4db8a4a6563e6234146c146c49351d983b8701de218f002848d68de96"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup5.png",
+      "bytes": 4135,
+      "sha256": "712ebd653a2a5e56471de59beaa493d0aaa1d8705203decf4ff11f799deb0fae"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup6.png",
+      "bytes": 4301,
+      "sha256": "7a75b20cbd6231cb0640193c898d66ecaa807979c8a7ba937780b34fed9a60e8"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup7.png",
+      "bytes": 4355,
+      "sha256": "e8c42ac638de2a38ce2d3443981271eec757cf5ebd855d1b43e802f17020d686"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup8.png",
+      "bytes": 4448,
+      "sha256": "ce4439646656089b2fd3d5165056323f2f391350f8aac797e068443811436352"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Pickup9.png",
+      "bytes": 4836,
+      "sha256": "0286330e0d24cc076eecbee1e9ad26f9c1ca47ba69136ff19b2d8183791e7aea"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run0.png",
+      "bytes": 3904,
+      "sha256": "4b94e10c15765680f17bb2402bfdecfe256f4a5c4326dd49e67471c885f1c963"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run1.png",
+      "bytes": 4054,
+      "sha256": "eb08fcb871efdbcb7f7eea3bce7a48181bd8f170525e10e463b962104db22032"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run2.png",
+      "bytes": 4195,
+      "sha256": "95319b848e3908796978feaa1b30909aa812fd996557a72865c786f07fba891f"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run3.png",
+      "bytes": 4288,
+      "sha256": "23e74527eabd3bcac38f57603739f37b42a84d3df4f80d7e53ce09b87529390f"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run4.png",
+      "bytes": 4142,
+      "sha256": "28afaf759c536a7749c5e4d01cc365a250223f4eb91ce5a9dea0ca1bf4261858"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run5.png",
+      "bytes": 4017,
+      "sha256": "fa48d44ff1ee932318b091345e9686268a4d534b179a48ba834980081e479b26"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run6.png",
+      "bytes": 4246,
+      "sha256": "080e11b9a76f06a3c1286ad040da0f604e588671a3d88072e0df900cd80a5053"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run7.png",
+      "bytes": 4316,
+      "sha256": "dd279906673c845f63b83fd74e84b7149f1e8cb3e1b6aef9a0291ccadf518777"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run8.png",
+      "bytes": 4236,
+      "sha256": "a9debde6d251f3c958f425e2dd52e72c2cba3d21dbfc04108a84642fe024089f"
+    },
+    {
+      "path": "assets/experience/characters/Male_4_Run9.png",
+      "bytes": 3877,
+      "sha256": "320cbfd2ea4f479f98773186eedd95774d6ba25f2989b3946be67e691d4515a1"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Idle0.png",
+      "bytes": 3718,
+      "sha256": "388becc68960c402bf47da547428631933c70f96dead591d4618035bd7087a5b"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup0.png",
+      "bytes": 3833,
+      "sha256": "6da19f60cabccf3c9239c9f26c9d073c0073eb16d20cf31a53fbf90f0a8d69d5"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup1.png",
+      "bytes": 4596,
+      "sha256": "6c159c4b64fd332ff2c5b9f43d1a6b13e7a4c9bcc867ecbcd502e45e018716ad"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup2.png",
+      "bytes": 4473,
+      "sha256": "70226a146c13320558b414605863d5837898966f49924b44bf870234df730831"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup3.png",
+      "bytes": 4327,
+      "sha256": "6c56cbb117b6e58bc94bc4a4a68866e47ffd1b8ed557a6c6690d6e4b65f01f1d"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup4.png",
+      "bytes": 4364,
+      "sha256": "1383ab825f6c95c426a880e83c75c329e3b0982bca56e5132f6bf97d3a8c6f54"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup5.png",
+      "bytes": 4869,
+      "sha256": "7d2b0b98a63f0fcd97f83a185f786466abd6200304c3d1304bdc65b5fffe3816"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup6.png",
+      "bytes": 4652,
+      "sha256": "61140d79ec03b102b5dbec449bbe93ca31b50c1118d89530e39ffa98da3833d5"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup7.png",
+      "bytes": 4300,
+      "sha256": "9c67f4a81d930835dfc57aaa22211bc192009972fae52ad176250fed49d7a243"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup8.png",
+      "bytes": 4021,
+      "sha256": "d514e4388fa2f4f0a10970ae697b00a51c8e720d83a191166d28a8f5c095a16e"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Pickup9.png",
+      "bytes": 3820,
+      "sha256": "6551572f07ab6294433f2940824a77497e377420c8c1efefb3b607997cd1f780"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run0.png",
+      "bytes": 4403,
+      "sha256": "cd8e37826b32e66516d9b92cc89ca3ed6b68f16cb334c99f10937522c5e311de"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run1.png",
+      "bytes": 4764,
+      "sha256": "1e3a11d49ac514e4bb579e58d75b3c365c7dc4c7d132c7da0890981826ce1b27"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run2.png",
+      "bytes": 4923,
+      "sha256": "0cad99d12ffae4d52b33fae0902b8dacafef2679a1d9ead244a8d15a8f5348fc"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run3.png",
+      "bytes": 4936,
+      "sha256": "aaf420c364f4c4e93b53f8b274906c6317d9e3b990492d935b98d3d23bf6e26a"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run4.png",
+      "bytes": 4369,
+      "sha256": "ca5b7cd8944b73c6623c35f4f64b917f59896827c095ca87e28abd2903d58100"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run5.png",
+      "bytes": 4220,
+      "sha256": "fc3be5818c3b39915d9ca4c0c05edf05c932fabb66816e824eaabd9ccd55e6d2"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run6.png",
+      "bytes": 4505,
+      "sha256": "2bdbfb9a865872de76771f42766648102d7b1f52aa605ea0ccb0aba3faa6df94"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run7.png",
+      "bytes": 4548,
+      "sha256": "2d7b996dd19d129cfea9dfd2e41eed9e2e27a649cda2a434754fb0af96e59ef3"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run8.png",
+      "bytes": 4378,
+      "sha256": "6cbca8d3ea0eabde6f450418232513c1c5f9d82d908519df94f4a779907f6220"
+    },
+    {
+      "path": "assets/experience/characters/Male_5_Run9.png",
+      "bytes": 4215,
+      "sha256": "c7e796175975487c6d072973af9d399821a0b347a21cb388d69226a84c0f7af2"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Idle0.png",
+      "bytes": 4892,
+      "sha256": "6aac081f940a76f16773e0b88d34cb315a12230d6c7243e51b36c38450e0ceaf"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup0.png",
+      "bytes": 4964,
+      "sha256": "82a57d2aed2f63f25998ea07875a5a01ee0bb787f1c1227023bea69c312b879d"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup1.png",
+      "bytes": 5105,
+      "sha256": "174e4cca4b6e929c179c304b1591f52101801be4ba216b6c1f7c399fc58228c8"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup2.png",
+      "bytes": 4398,
+      "sha256": "47a4327f0efa3e85dc3636f9132854e0c4b6f63643822e8c169a96bf7366ec71"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup3.png",
+      "bytes": 4318,
+      "sha256": "93d62b5c72672e5c9f8a5640805888341a5947587a2fd353ae032d66ddc1ea96"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup4.png",
+      "bytes": 4430,
+      "sha256": "8f4d1e3effe173c6530861d437d7a41d3972fc6d0cd78fd0101e668849965198"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup5.png",
+      "bytes": 4909,
+      "sha256": "c295fe831d647eb52a12db7c1c72eeb07c81ef2052f1607e650e162e6b0b591d"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup6.png",
+      "bytes": 5339,
+      "sha256": "9dedea6fc3453fe9ab709422fc22bba719258847b1eebb0917d039317cf52445"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup7.png",
+      "bytes": 4991,
+      "sha256": "84cacad5df479ceb9e27c248b7f1947c402b8f4167b281ed10c7ca1b5c9de1c1"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup8.png",
+      "bytes": 4930,
+      "sha256": "556629a3aa72f9050ab5fb2ef5166461c9f3ce09447a50666f6748a395df8bcf"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Pickup9.png",
+      "bytes": 4837,
+      "sha256": "e524d19363a595e2a3350396a7d2fd85c2a4e9aa230efbd515781dad8395b5bd"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run0.png",
+      "bytes": 4682,
+      "sha256": "0960be2db7f3015c7a154ef653988e6bb38c4595da3bda0eaf8977ed1a29f572"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run1.png",
+      "bytes": 4644,
+      "sha256": "86b2977c869ef531e307911a48e2e238a45ce38f0a8f0aac4c370db915cbe18a"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run2.png",
+      "bytes": 4860,
+      "sha256": "b3573c0ee8cbaf433d50fc12f627f330bfba04daa60654b655bb4714907107f0"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run3.png",
+      "bytes": 4763,
+      "sha256": "6d8c564ca207944b16e2126de50a4e87a2279ead5d3e9dfd4c7b2329df7ad230"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run4.png",
+      "bytes": 4563,
+      "sha256": "09e3960d4d6438fc4f21b308bd1c1403079e980bb40c37106d40948fd5b4895c"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run5.png",
+      "bytes": 4343,
+      "sha256": "fef021e9f0526fe49593f215247bac1b2a723d44c69e0bcc8cbaa684e1fa9d6b"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run6.png",
+      "bytes": 4555,
+      "sha256": "2100e9ade5b5d4ddd3df35a143f8575e921454c583cc5ec1b3b564c13108afb3"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run7.png",
+      "bytes": 4558,
+      "sha256": "aeca6bf9d9780fd63549b5781d8e1c206be1c0da1efb988bfcb5e53608bb4e8e"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run8.png",
+      "bytes": 4436,
+      "sha256": "bffb1548e2cf8f8b48b7ed0b4059da6f43f8cc7fdaa863a46d017edf68163c5c"
+    },
+    {
+      "path": "assets/experience/characters/Male_6_Run9.png",
+      "bytes": 4661,
+      "sha256": "700ca036dba2f473d43761e541972e230fa9bfdd51d6991ec74ace2ea775e4d5"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Idle0.png",
+      "bytes": 5037,
+      "sha256": "226d7c3f8485c04b80d4f405e2fe17d7c1d9a9f62e4f77b021222927ddda0a61"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup0.png",
+      "bytes": 5261,
+      "sha256": "7425cb24d91c4fadf0b8bedd845ed9e74c19de6a822e3015bb0091a18a95d330"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup1.png",
+      "bytes": 4970,
+      "sha256": "f1f73a42d250fe6c84b0ed86c31902569834eeb100a3716ec7c02f00f15fafd5"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup2.png",
+      "bytes": 3903,
+      "sha256": "7bc5ec38a75284ad117690e88bdec2856ff24bb8a1f0e66457b43808b2fda569"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup3.png",
+      "bytes": 3974,
+      "sha256": "4fec3791ed233e40b9a3a5620dd23a0abbcc876874b40c96d73de7fc9181a473"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup4.png",
+      "bytes": 4028,
+      "sha256": "bdaf9d663338e793ecc8303c078a5f6bd6f111efcae23fc8100eed87fd6e7444"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup5.png",
+      "bytes": 4634,
+      "sha256": "4be22f0cfb78775de66a6f49128272e31787846cf96cb06f2909ac32ba67452e"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup6.png",
+      "bytes": 5011,
+      "sha256": "c66e16f2609f82fa6b36f97150f0ca3954fc7a32ded0d819d760d024bd130e3e"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup7.png",
+      "bytes": 5089,
+      "sha256": "1304bea5ec7710efa7a3c8d861fdfc1b6a16d32835a2dd6ad360d14a8399c27c"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup8.png",
+      "bytes": 5117,
+      "sha256": "843bdc0f36de16a5b36bcb6e24f0549ce063124021aac8fb6dfe138c871e7a30"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Pickup9.png",
+      "bytes": 5100,
+      "sha256": "e844e0db118cdafc677d9000720d41ba129b1d11b34bb814fd830c356f77b6a5"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run0.png",
+      "bytes": 4538,
+      "sha256": "e91860ac39843e785fafa62f5b1df0a808ec3d4b34e08ab7210614d723738698"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run1.png",
+      "bytes": 4469,
+      "sha256": "6bed119e5de32880751737b9520920e485e260d76de7f810cffbf5d15ae2d567"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run2.png",
+      "bytes": 4355,
+      "sha256": "eb6d697d0ebd6857c24ce1735bf3e7d48f5c38622d31a0204ea8e8ce1425b0df"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run3.png",
+      "bytes": 4367,
+      "sha256": "997d3c07347e7eaaa845259c1a4836ff7cad79f4721c4dc9ffddc544caadd37c"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run4.png",
+      "bytes": 4422,
+      "sha256": "ca7a093caf7a674f9e15710e621f389fa5011243cb3e97ae43cef7225fcac563"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run5.png",
+      "bytes": 4602,
+      "sha256": "7c6306a293b0b9074ff543ffb59b33eff055f1d77591bb9e761d0e0e9d74fb6f"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run6.png",
+      "bytes": 4498,
+      "sha256": "d9e4076248bb0fd83bfb8bf233d0cec69d39a26916305883ee70e45a31884941"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run7.png",
+      "bytes": 4396,
+      "sha256": "ffb323b4e2de457f4a96f041ec92353eeba348e21f1496f964a9963b628daf1e"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run8.png",
+      "bytes": 4424,
+      "sha256": "65a149ca304bd36b7e2326e3ea20f5916377e4d96ebd05e911699a7bce8842bb"
+    },
+    {
+      "path": "assets/experience/characters/Male_7_Run9.png",
+      "bytes": 4435,
+      "sha256": "a04b377948813ed589e0a56d104fe8eef5caa00d56674183fee430b6cec3a4b2"
+    },
+    {
+      "path": "assets/experience/characters/SOURCE.json",
+      "bytes": 127391,
+      "sha256": "be26d089bd9702989e148dc651d3075c75a1bbf47c492aa2c97ee68ec62132ce"
+    },
+    {
+      "path": "assets/experience/doors/License.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "assets/experience/doors/SOURCE.json",
+      "bytes": 3402,
+      "sha256": "dd95377bfe7630ad638daa8c552bdc2180f2054c04cff56cde3f7084d4767297"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorOpen_E.png",
+      "bytes": 23472,
+      "sha256": "36d95e2408538b6c0ee34b5c15e76af83fc7724a0200c74b1b490db94b37b95f"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorOpen_N.png",
+      "bytes": 23758,
+      "sha256": "96e12c80c437fdc65a514539840466fc04cc2308b592909082865b3b4b16c17e"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorOpen_S.png",
+      "bytes": 24820,
+      "sha256": "dad2342a91f0b9d0427345be74b6d171aa77f4041bba773585d710cb211d61c5"
+    },
+    {
+      "path": "assets/experience/doors/stoneWallDoorOpen_W.png",
+      "bytes": 23653,
+      "sha256": "59b40f9276536d276e9eeb54c426af502bd62a9ca700739504ff4c79cdf4306f"
+    },
+    {
+      "path": "assets/experience/fonts/audit_font.py",
+      "bytes": 4618,
+      "sha256": "ceacd549403b246099725336fbe7c9089db7df2c35e3273c99c5e707ce6f206a"
+    },
+    {
+      "path": "assets/experience/fonts/cjk-ui.otf",
+      "bytes": 8482020,
+      "sha256": "a2b93e6c2db05d6bbbf6f27d413ec73269735b7b679019c8a5aa9670ff0ffbf2"
+    },
+    {
+      "path": "assets/experience/fonts/cmap-report.json",
+      "bytes": 7074,
+      "sha256": "cd2333d444516c67482861f00009050cd2bdb4d263101f0b1245e6d67ea43425"
+    },
+    {
+      "path": "assets/experience/fonts/FONT-LICENSE.txt",
+      "bytes": 4280,
+      "sha256": "9db5ed9c25b005c48cc624e465048d07cd9da9b25cb85593c2a0f4059ec3d6ce"
+    },
+    {
+      "path": "assets/experience/fonts/HOUSE-FONT-LICENSE-REFERENCE.txt",
+      "bytes": 14712,
+      "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b"
+    },
+    {
+      "path": "assets/experience/fonts/README.md",
+      "bytes": 2059,
+      "sha256": "4bf69f59d7c66f1a617e055cb452fa98e42b82d4da6cc67c02d9c7acac48dc5e"
+    },
+    {
+      "path": "assets/experience/fonts/SOURCE.json",
+      "bytes": 2244,
+      "sha256": "e05527c5f10226a74d110a99ec9b1a71f6fc9b21d800fecfbd1cc6baf7374c11"
+    },
+    {
+      "path": "fifty/view/experience_assets.gd",
+      "bytes": 2665,
+      "sha256": "0018edd150294508df7ba5dc69bc5d018cd7765b29573d72b0c799bf22fe0904"
+    },
+    {
+      "path": "fifty/view/experience_audio.gd",
+      "bytes": 4411,
+      "sha256": "f5652ca3e440b97fb884dd8be3b0a52fbbfc1b489cfa92e475227eeb3b85d018"
+    },
+    {
+      "path": "fifty/view/experience_world.gd",
+      "bytes": 19391,
+      "sha256": "453e55e04cf1290c129ea176ff1f73512d54538413acc8d19693ad17a69c9670"
+    },
+    {
+      "path": "fifty/view/hero_frames.tres",
+      "bytes": 28581,
+      "sha256": "eae7a14fceda7b66f90db4b1ba912f29327eb9f18d2204bb8c657a990b619f4f"
+    },
+    {
+      "path": "fifty/view/preview.gd",
+      "bytes": 55888,
+      "sha256": "851394aa4e98a1f4f4f5507f2305049ed94e2d184ba7233a57e56a3127df3a0b"
+    }
+  ],
+  "rules_economy_save_data_modified": false,
+  "engine_executed": false,
+  "browser_accepted": false,
+  "served_url_updated": false
+}

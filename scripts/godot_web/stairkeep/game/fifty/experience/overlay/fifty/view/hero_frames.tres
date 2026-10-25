@@ -1,0 +1,318 @@
+[gd_resource type="SpriteFrames" load_steps=169 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Idle0.png" id="tex_000"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run0.png" id="tex_001"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run1.png" id="tex_002"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run2.png" id="tex_003"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run3.png" id="tex_004"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run4.png" id="tex_005"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run5.png" id="tex_006"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run6.png" id="tex_007"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run7.png" id="tex_008"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run8.png" id="tex_009"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Run9.png" id="tex_010"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup0.png" id="tex_011"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup1.png" id="tex_012"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup2.png" id="tex_013"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup3.png" id="tex_014"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup4.png" id="tex_015"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup5.png" id="tex_016"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup6.png" id="tex_017"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup7.png" id="tex_018"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup8.png" id="tex_019"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_0_Pickup9.png" id="tex_020"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Idle0.png" id="tex_021"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run0.png" id="tex_022"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run1.png" id="tex_023"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run2.png" id="tex_024"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run3.png" id="tex_025"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run4.png" id="tex_026"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run5.png" id="tex_027"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run6.png" id="tex_028"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run7.png" id="tex_029"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run8.png" id="tex_030"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Run9.png" id="tex_031"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup0.png" id="tex_032"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup1.png" id="tex_033"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup2.png" id="tex_034"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup3.png" id="tex_035"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup4.png" id="tex_036"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup5.png" id="tex_037"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup6.png" id="tex_038"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup7.png" id="tex_039"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup8.png" id="tex_040"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_1_Pickup9.png" id="tex_041"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Idle0.png" id="tex_042"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run0.png" id="tex_043"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run1.png" id="tex_044"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run2.png" id="tex_045"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run3.png" id="tex_046"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run4.png" id="tex_047"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run5.png" id="tex_048"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run6.png" id="tex_049"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run7.png" id="tex_050"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run8.png" id="tex_051"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Run9.png" id="tex_052"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup0.png" id="tex_053"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup1.png" id="tex_054"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup2.png" id="tex_055"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup3.png" id="tex_056"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup4.png" id="tex_057"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup5.png" id="tex_058"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup6.png" id="tex_059"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup7.png" id="tex_060"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup8.png" id="tex_061"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_2_Pickup9.png" id="tex_062"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Idle0.png" id="tex_063"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run0.png" id="tex_064"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run1.png" id="tex_065"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run2.png" id="tex_066"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run3.png" id="tex_067"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run4.png" id="tex_068"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run5.png" id="tex_069"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run6.png" id="tex_070"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run7.png" id="tex_071"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run8.png" id="tex_072"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Run9.png" id="tex_073"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup0.png" id="tex_074"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup1.png" id="tex_075"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup2.png" id="tex_076"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup3.png" id="tex_077"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup4.png" id="tex_078"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup5.png" id="tex_079"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup6.png" id="tex_080"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup7.png" id="tex_081"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup8.png" id="tex_082"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_3_Pickup9.png" id="tex_083"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Idle0.png" id="tex_084"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run0.png" id="tex_085"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run1.png" id="tex_086"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run2.png" id="tex_087"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run3.png" id="tex_088"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run4.png" id="tex_089"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run5.png" id="tex_090"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run6.png" id="tex_091"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run7.png" id="tex_092"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run8.png" id="tex_093"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Run9.png" id="tex_094"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup0.png" id="tex_095"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup1.png" id="tex_096"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup2.png" id="tex_097"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup3.png" id="tex_098"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup4.png" id="tex_099"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup5.png" id="tex_100"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup6.png" id="tex_101"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup7.png" id="tex_102"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup8.png" id="tex_103"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_4_Pickup9.png" id="tex_104"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Idle0.png" id="tex_105"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run0.png" id="tex_106"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run1.png" id="tex_107"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run2.png" id="tex_108"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run3.png" id="tex_109"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run4.png" id="tex_110"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run5.png" id="tex_111"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run6.png" id="tex_112"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run7.png" id="tex_113"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run8.png" id="tex_114"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Run9.png" id="tex_115"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup0.png" id="tex_116"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup1.png" id="tex_117"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup2.png" id="tex_118"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup3.png" id="tex_119"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup4.png" id="tex_120"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup5.png" id="tex_121"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup6.png" id="tex_122"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup7.png" id="tex_123"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup8.png" id="tex_124"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_5_Pickup9.png" id="tex_125"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Idle0.png" id="tex_126"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run0.png" id="tex_127"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run1.png" id="tex_128"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run2.png" id="tex_129"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run3.png" id="tex_130"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run4.png" id="tex_131"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run5.png" id="tex_132"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run6.png" id="tex_133"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run7.png" id="tex_134"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run8.png" id="tex_135"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Run9.png" id="tex_136"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup0.png" id="tex_137"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup1.png" id="tex_138"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup2.png" id="tex_139"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup3.png" id="tex_140"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup4.png" id="tex_141"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup5.png" id="tex_142"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup6.png" id="tex_143"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup7.png" id="tex_144"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup8.png" id="tex_145"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_6_Pickup9.png" id="tex_146"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Idle0.png" id="tex_147"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run0.png" id="tex_148"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run1.png" id="tex_149"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run2.png" id="tex_150"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run3.png" id="tex_151"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run4.png" id="tex_152"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run5.png" id="tex_153"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run6.png" id="tex_154"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run7.png" id="tex_155"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run8.png" id="tex_156"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Run9.png" id="tex_157"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup0.png" id="tex_158"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup1.png" id="tex_159"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup2.png" id="tex_160"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup3.png" id="tex_161"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup4.png" id="tex_162"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup5.png" id="tex_163"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup6.png" id="tex_164"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup7.png" id="tex_165"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup8.png" id="tex_166"]
+[ext_resource type="Texture2D" path="res://assets/experience/characters/Male_7_Pickup9.png" id="tex_167"]
+
+[resource]
+animations = [
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_000")}],
+"loop": false,
+"name": &"idle_0",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_001")}, {"duration": 1.0, "texture": ExtResource("tex_002")}, {"duration": 1.0, "texture": ExtResource("tex_003")}, {"duration": 1.0, "texture": ExtResource("tex_004")}, {"duration": 1.0, "texture": ExtResource("tex_005")}, {"duration": 1.0, "texture": ExtResource("tex_006")}, {"duration": 1.0, "texture": ExtResource("tex_007")}, {"duration": 1.0, "texture": ExtResource("tex_008")}, {"duration": 1.0, "texture": ExtResource("tex_009")}, {"duration": 1.0, "texture": ExtResource("tex_010")}],
+"loop": true,
+"name": &"run_0",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_011")}, {"duration": 1.0, "texture": ExtResource("tex_012")}, {"duration": 1.0, "texture": ExtResource("tex_013")}, {"duration": 1.0, "texture": ExtResource("tex_014")}, {"duration": 1.0, "texture": ExtResource("tex_015")}, {"duration": 1.0, "texture": ExtResource("tex_016")}, {"duration": 1.0, "texture": ExtResource("tex_017")}, {"duration": 1.0, "texture": ExtResource("tex_018")}, {"duration": 1.0, "texture": ExtResource("tex_019")}, {"duration": 1.0, "texture": ExtResource("tex_020")}],
+"loop": false,
+"name": &"pickup_0",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_021")}],
+"loop": false,
+"name": &"idle_1",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_022")}, {"duration": 1.0, "texture": ExtResource("tex_023")}, {"duration": 1.0, "texture": ExtResource("tex_024")}, {"duration": 1.0, "texture": ExtResource("tex_025")}, {"duration": 1.0, "texture": ExtResource("tex_026")}, {"duration": 1.0, "texture": ExtResource("tex_027")}, {"duration": 1.0, "texture": ExtResource("tex_028")}, {"duration": 1.0, "texture": ExtResource("tex_029")}, {"duration": 1.0, "texture": ExtResource("tex_030")}, {"duration": 1.0, "texture": ExtResource("tex_031")}],
+"loop": true,
+"name": &"run_1",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_032")}, {"duration": 1.0, "texture": ExtResource("tex_033")}, {"duration": 1.0, "texture": ExtResource("tex_034")}, {"duration": 1.0, "texture": ExtResource("tex_035")}, {"duration": 1.0, "texture": ExtResource("tex_036")}, {"duration": 1.0, "texture": ExtResource("tex_037")}, {"duration": 1.0, "texture": ExtResource("tex_038")}, {"duration": 1.0, "texture": ExtResource("tex_039")}, {"duration": 1.0, "texture": ExtResource("tex_040")}, {"duration": 1.0, "texture": ExtResource("tex_041")}],
+"loop": false,
+"name": &"pickup_1",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_042")}],
+"loop": false,
+"name": &"idle_2",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_043")}, {"duration": 1.0, "texture": ExtResource("tex_044")}, {"duration": 1.0, "texture": ExtResource("tex_045")}, {"duration": 1.0, "texture": ExtResource("tex_046")}, {"duration": 1.0, "texture": ExtResource("tex_047")}, {"duration": 1.0, "texture": ExtResource("tex_048")}, {"duration": 1.0, "texture": ExtResource("tex_049")}, {"duration": 1.0, "texture": ExtResource("tex_050")}, {"duration": 1.0, "texture": ExtResource("tex_051")}, {"duration": 1.0, "texture": ExtResource("tex_052")}],
+"loop": true,
+"name": &"run_2",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_053")}, {"duration": 1.0, "texture": ExtResource("tex_054")}, {"duration": 1.0, "texture": ExtResource("tex_055")}, {"duration": 1.0, "texture": ExtResource("tex_056")}, {"duration": 1.0, "texture": ExtResource("tex_057")}, {"duration": 1.0, "texture": ExtResource("tex_058")}, {"duration": 1.0, "texture": ExtResource("tex_059")}, {"duration": 1.0, "texture": ExtResource("tex_060")}, {"duration": 1.0, "texture": ExtResource("tex_061")}, {"duration": 1.0, "texture": ExtResource("tex_062")}],
+"loop": false,
+"name": &"pickup_2",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_063")}],
+"loop": false,
+"name": &"idle_3",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_064")}, {"duration": 1.0, "texture": ExtResource("tex_065")}, {"duration": 1.0, "texture": ExtResource("tex_066")}, {"duration": 1.0, "texture": ExtResource("tex_067")}, {"duration": 1.0, "texture": ExtResource("tex_068")}, {"duration": 1.0, "texture": ExtResource("tex_069")}, {"duration": 1.0, "texture": ExtResource("tex_070")}, {"duration": 1.0, "texture": ExtResource("tex_071")}, {"duration": 1.0, "texture": ExtResource("tex_072")}, {"duration": 1.0, "texture": ExtResource("tex_073")}],
+"loop": true,
+"name": &"run_3",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_074")}, {"duration": 1.0, "texture": ExtResource("tex_075")}, {"duration": 1.0, "texture": ExtResource("tex_076")}, {"duration": 1.0, "texture": ExtResource("tex_077")}, {"duration": 1.0, "texture": ExtResource("tex_078")}, {"duration": 1.0, "texture": ExtResource("tex_079")}, {"duration": 1.0, "texture": ExtResource("tex_080")}, {"duration": 1.0, "texture": ExtResource("tex_081")}, {"duration": 1.0, "texture": ExtResource("tex_082")}, {"duration": 1.0, "texture": ExtResource("tex_083")}],
+"loop": false,
+"name": &"pickup_3",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_084")}],
+"loop": false,
+"name": &"idle_4",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_085")}, {"duration": 1.0, "texture": ExtResource("tex_086")}, {"duration": 1.0, "texture": ExtResource("tex_087")}, {"duration": 1.0, "texture": ExtResource("tex_088")}, {"duration": 1.0, "texture": ExtResource("tex_089")}, {"duration": 1.0, "texture": ExtResource("tex_090")}, {"duration": 1.0, "texture": ExtResource("tex_091")}, {"duration": 1.0, "texture": ExtResource("tex_092")}, {"duration": 1.0, "texture": ExtResource("tex_093")}, {"duration": 1.0, "texture": ExtResource("tex_094")}],
+"loop": true,
+"name": &"run_4",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_095")}, {"duration": 1.0, "texture": ExtResource("tex_096")}, {"duration": 1.0, "texture": ExtResource("tex_097")}, {"duration": 1.0, "texture": ExtResource("tex_098")}, {"duration": 1.0, "texture": ExtResource("tex_099")}, {"duration": 1.0, "texture": ExtResource("tex_100")}, {"duration": 1.0, "texture": ExtResource("tex_101")}, {"duration": 1.0, "texture": ExtResource("tex_102")}, {"duration": 1.0, "texture": ExtResource("tex_103")}, {"duration": 1.0, "texture": ExtResource("tex_104")}],
+"loop": false,
+"name": &"pickup_4",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_105")}],
+"loop": false,
+"name": &"idle_5",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_106")}, {"duration": 1.0, "texture": ExtResource("tex_107")}, {"duration": 1.0, "texture": ExtResource("tex_108")}, {"duration": 1.0, "texture": ExtResource("tex_109")}, {"duration": 1.0, "texture": ExtResource("tex_110")}, {"duration": 1.0, "texture": ExtResource("tex_111")}, {"duration": 1.0, "texture": ExtResource("tex_112")}, {"duration": 1.0, "texture": ExtResource("tex_113")}, {"duration": 1.0, "texture": ExtResource("tex_114")}, {"duration": 1.0, "texture": ExtResource("tex_115")}],
+"loop": true,
+"name": &"run_5",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_116")}, {"duration": 1.0, "texture": ExtResource("tex_117")}, {"duration": 1.0, "texture": ExtResource("tex_118")}, {"duration": 1.0, "texture": ExtResource("tex_119")}, {"duration": 1.0, "texture": ExtResource("tex_120")}, {"duration": 1.0, "texture": ExtResource("tex_121")}, {"duration": 1.0, "texture": ExtResource("tex_122")}, {"duration": 1.0, "texture": ExtResource("tex_123")}, {"duration": 1.0, "texture": ExtResource("tex_124")}, {"duration": 1.0, "texture": ExtResource("tex_125")}],
+"loop": false,
+"name": &"pickup_5",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_126")}],
+"loop": false,
+"name": &"idle_6",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_127")}, {"duration": 1.0, "texture": ExtResource("tex_128")}, {"duration": 1.0, "texture": ExtResource("tex_129")}, {"duration": 1.0, "texture": ExtResource("tex_130")}, {"duration": 1.0, "texture": ExtResource("tex_131")}, {"duration": 1.0, "texture": ExtResource("tex_132")}, {"duration": 1.0, "texture": ExtResource("tex_133")}, {"duration": 1.0, "texture": ExtResource("tex_134")}, {"duration": 1.0, "texture": ExtResource("tex_135")}, {"duration": 1.0, "texture": ExtResource("tex_136")}],
+"loop": true,
+"name": &"run_6",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_137")}, {"duration": 1.0, "texture": ExtResource("tex_138")}, {"duration": 1.0, "texture": ExtResource("tex_139")}, {"duration": 1.0, "texture": ExtResource("tex_140")}, {"duration": 1.0, "texture": ExtResource("tex_141")}, {"duration": 1.0, "texture": ExtResource("tex_142")}, {"duration": 1.0, "texture": ExtResource("tex_143")}, {"duration": 1.0, "texture": ExtResource("tex_144")}, {"duration": 1.0, "texture": ExtResource("tex_145")}, {"duration": 1.0, "texture": ExtResource("tex_146")}],
+"loop": false,
+"name": &"pickup_6",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_147")}],
+"loop": false,
+"name": &"idle_7",
+"speed": 1.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_148")}, {"duration": 1.0, "texture": ExtResource("tex_149")}, {"duration": 1.0, "texture": ExtResource("tex_150")}, {"duration": 1.0, "texture": ExtResource("tex_151")}, {"duration": 1.0, "texture": ExtResource("tex_152")}, {"duration": 1.0, "texture": ExtResource("tex_153")}, {"duration": 1.0, "texture": ExtResource("tex_154")}, {"duration": 1.0, "texture": ExtResource("tex_155")}, {"duration": 1.0, "texture": ExtResource("tex_156")}, {"duration": 1.0, "texture": ExtResource("tex_157")}],
+"loop": true,
+"name": &"run_7",
+"speed": 12.0
+},
+{
+"frames": [{"duration": 1.0, "texture": ExtResource("tex_158")}, {"duration": 1.0, "texture": ExtResource("tex_159")}, {"duration": 1.0, "texture": ExtResource("tex_160")}, {"duration": 1.0, "texture": ExtResource("tex_161")}, {"duration": 1.0, "texture": ExtResource("tex_162")}, {"duration": 1.0, "texture": ExtResource("tex_163")}, {"duration": 1.0, "texture": ExtResource("tex_164")}, {"duration": 1.0, "texture": ExtResource("tex_165")}, {"duration": 1.0, "texture": ExtResource("tex_166")}, {"duration": 1.0, "texture": ExtResource("tex_167")}],
+"loop": false,
+"name": &"pickup_7",
+"speed": 12.0
+}
+]

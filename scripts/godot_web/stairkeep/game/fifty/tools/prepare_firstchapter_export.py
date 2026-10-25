@@ -57,7 +57,7 @@ def selected_files(project):
     for name in required:
         need((project / name).is_file(), "Missing current project dependency: " + name)
     paths = {project / name for name in required}
-    for prefix in ("assets/kenney", "vendor/godot-isometric", "fifty/scripts", "fifty/view"):
+    for prefix in ("assets/kenney", "assets/experience", "vendor/godot-isometric", "fifty/scripts", "fifty/view"):
         for p in (project / prefix).rglob("*"):
             if p.is_file() and not EXCLUDED.intersection(p.relative_to(project).parts):
                 need(not p.is_symlink(), "Source symlinks are outside this bounded copy")
@@ -131,6 +131,12 @@ def prepare(args):
         (templates / "COPYRIGHT.txt", "GODOT-ENGINE-COPYRIGHT.txt", "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/COPYRIGHT.txt", "Godot bundled third-party notices"),
         (project / "assets/kenney/License.txt", "KENNEY-CC0.txt", "https://kenney.nl/assets/isometric-miniature-dungeon", "CC0-1.0"),
         (project / "vendor/godot-isometric/LICENSE.md", "GODOT-DEMO-MIT.txt", "https://github.com/godotengine/godot-demo-projects/tree/6ad6167e0577fe3622c18546138f456b107ce93c/2d/isometric", "MIT")]
+    experience_licenses = [
+        ("assets/experience/fonts/FONT-LICENSE.txt", "EXPERIENCE-FONT-OFL.txt", "https://github.com/notofonts/noto-cjk", "OFL-1.1"),
+        ("assets/experience/audio/AUDIO-LICENSE.txt", "EXPERIENCE-MUSIC-CC0.txt", "https://opengameart.org/content/the-field-of-dreams", "CC0-1.0")]
+    for relative, name, url, license_id in experience_licenses:
+        if (project / relative).is_file():
+            origins.append((project / relative, name, url, license_id))
     license_rows = []
     for source, name, url, license_id in origins:
         shutil.copyfile(source, notices / name)
@@ -140,6 +146,9 @@ def prepare(args):
         "preserved_sources": ["assets/kenney/SOURCE.json", "assets/kenney/SOURCE.md", "vendor/godot-isometric/SOURCE.json", "fifty/reuse_manifest.json"],
         "script_export_mode": 0, "official_text_mode_source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/editor/export/editor_export_preset.h",
         "whole_archive_proof": "Inherited earlier verified receipt; selected extracted members freshly hashed here, not a new whole-archive measurement."}
+    for relative in ("assets/experience/fonts/SOURCE.json", "assets/experience/audio/SOURCE.json", "assets/experience/characters/SOURCE.json", "assets/experience/doors/SOURCE.json"):
+        if (stage / relative).is_file():
+            source_notice["preserved_sources"].append(relative)
     dump(notices / "SOURCE.json", source_notice)
     critical = [record(p, stage) for p in sorted(stage.rglob("*")) if p.is_file() and (p.suffix == ".gd" or p.relative_to(stage).as_posix() == "fifty/data/content.json")]
     readable = critical + [record(p, stage) for p in sorted(stage.rglob("*")) if p.is_file() and p.suffix in (".txt", ".md", ".json") and p.relative_to(stage).as_posix() not in {r["path"] for r in critical}]
@@ -158,7 +167,11 @@ def prepare(args):
     with zipfile.ZipFile(archive) as z:
         for name, data in portable_files.items(): need(z.read(name) == data, "Source ZIP readback differs")
     need(before == [record(p, project) for p in paths], "Original sources changed while copying")
-    protected = [project / "export_presets.cfg", project / "main.tscn", *[p.resolve() for p in args.protected_file]]
+    protected = [project / "project.godot", project / "export_presets.cfg", *[p.resolve() for p in args.protected_file]]
+    # The portable first-chapter source has only its actual preview main scene.
+    # Preserve the historical root main too when preparing from the full game.
+    if (project / "main.tscn").is_file():
+        protected.append(project / "main.tscn")
     dump(out / "private/inputs.json", {"original_project": str(project), "templates": str(templates), "protected": [{"path": str(p), "sha256": sha(p)} for p in protected]})
     manifest = {"schema_version": 1, "stage": "prepared-not-exported", "engine_expected": VERSION, "app_name": APP_NAME, "main_scene": MAIN_SCENE, "renderer": "gl_compatibility", "language": "GDScript", "script_export_mode": 0, "threads": False, "extensions": False, "pwa": False, "service_worker": False,
         "sources_before": before, "original_sources_unchanged": True, "staged_project_sha256": sha(stage / "project.godot"), "staged_project_overrides": ["config/name", "config/description", "run/main_scene", "export_presets.cfg"],

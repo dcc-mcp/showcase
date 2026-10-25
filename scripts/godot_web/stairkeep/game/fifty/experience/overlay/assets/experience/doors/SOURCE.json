@@ -1,0 +1,139 @@
+{
+  "schema": "stairkeep-experience-asset-source/v1",
+  "source_url": "https://kenney.nl/assets/isometric-miniature-dungeon",
+  "source_archive": "research/kenney_isometric-miniature-dungeon.zip",
+  "source_archive_sha256": "187a0888451317fe47caac5f26e984bb79c5ddce9b8630926f0f5d9c0247d343",
+  "license": "CC0-1.0",
+  "license_file": "License.txt",
+  "license_sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc",
+  "image_editing": false,
+  "engine_executed": false,
+  "candidate_only": true,
+  "files": [
+    {
+      "path": "stoneWallDoorOpen_N.png",
+      "source_member": "Isometric/stoneWallDoorOpen_N.png",
+      "sha256": "96e12c80c437fdc65a514539840466fc04cc2308b592909082865b3b4b16c17e",
+      "bytes": 23758,
+      "modification": "unmodified byte copy",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        275,
+        174,
+        512
+      ],
+      "last_opaque_row": 511,
+      "bottom_16px_alpha_bbox_exclusive": [
+        96,
+        496,
+        160,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "N"
+    },
+    {
+      "path": "stoneWallDoorOpen_E.png",
+      "source_member": "Isometric/stoneWallDoorOpen_E.png",
+      "sha256": "36d95e2408538b6c0ee34b5c15e76af83fc7724a0200c74b1b490db94b37b95f",
+      "bytes": 23472,
+      "modification": "unmodified byte copy",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        227,
+        161,
+        471
+      ],
+      "last_opaque_row": 470,
+      "bottom_16px_alpha_bbox_exclusive": [
+        14,
+        455,
+        90,
+        471
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "E"
+    },
+    {
+      "path": "stoneWallDoorOpen_S.png",
+      "source_member": "Isometric/stoneWallDoorOpen_S.png",
+      "sha256": "dad2342a91f0b9d0427345be74b6d171aa77f4041bba773585d710cb211d61c5",
+      "bytes": 24820,
+      "modification": "unmodified byte copy",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        82,
+        227,
+        256,
+        464
+      ],
+      "last_opaque_row": 463,
+      "bottom_16px_alpha_bbox_exclusive": [
+        192,
+        448,
+        256,
+        464
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "S"
+    },
+    {
+      "path": "stoneWallDoorOpen_W.png",
+      "source_member": "Isometric/stoneWallDoorOpen_W.png",
+      "sha256": "59b40f9276536d276e9eeb54c426af502bd62a9ca700739504ff4c79cdf4306f",
+      "bytes": 23653,
+      "modification": "unmodified byte copy",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        95,
+        275,
+        256,
+        512
+      ],
+      "last_opaque_row": 511,
+      "bottom_16px_alpha_bbox_exclusive": [
+        96,
+        496,
+        160,
+        512
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "W"
+    }
+  ],
+  "validation": {
+    "all_4_archive_members_byte_equal": true,
+    "all_4_copies_byte_equal": true,
+    "all_transparent_256x512": true
+  }
+}

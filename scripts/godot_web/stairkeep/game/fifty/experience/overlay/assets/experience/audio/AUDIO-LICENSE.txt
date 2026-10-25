@@ -1,0 +1,18 @@
+Stairkeep first chapter experience audio
+
+Music: The Field Of Dreams by pauliuw.
+License: CC0 1.0 Universal.
+Source: https://opengameart.org/content/the-field-of-dreams
+CC0: https://creativecommons.org/publicdomain/zero/1.0/
+
+This recording retains its public-domain dedication independently of the game.
+Voluntary credit and exact original/derivative hashes are preserved in SOURCE.json.
+The existing Vorbis derivative is copied byte-for-byte; no musical edits.
+
+The Field Of Dreams is the only bundled recording. Determined Pursuit was
+audited but not copied: its intense battle character does not fit quiet planning.
+
+Short feedback cues are new deterministic synthesis authored in
+fifty/view/experience_audio.gd for this chapter. No Dawnkeep original
+sound generator or its generated recordings are copied. New code follows
+this Stairkeep candidate's existing case rights; no new blanket license grant.

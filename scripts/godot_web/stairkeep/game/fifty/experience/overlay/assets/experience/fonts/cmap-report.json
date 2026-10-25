@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "checked_at": "2026-10-25T10:12:01.469358+00:00",
+  "scope": "Static UTF-8 and FontTools cmap coverage; source text is a superset of visible content",
+  "font": "res://assets/experience/fonts/cjk-ui.otf",
+  "font_sha256": "a2b93e6c2db05d6bbbf6f27d413ec73269735b7b679019c8a5aa9670ff0ffbf2",
+  "font_bytes": 8482020,
+  "family": "Noto Sans SC",
+  "fonttools_version": "4.63.0",
+  "cmap_count": 30892,
+  "required_codepoints": 659,
+  "required_cjk_codepoints": 539,
+  "required_cjk_text": "一七三上下不与世两个中临为主久之也习买了事于互五井交亮人仅仍从他付代以件价任份会伤伴位低体何余作你使侧保信修值停像儿先兑入全八共关其具典兼内再写决准击刀刃分切列则创删别到制刷刻前剩功加动助励勿包化匙匣匹十升半卫即厅原去双发取变叠口句另只叫可台右号合同名后向启员命和品哪售商器四回围固图在地均坏垂塔墙增壁声处备复外够太失头奖好始子存它守安完定实室害容对寻封将少尘尚局层属岚巡工左差己已币布带帮干平并库应店度座庭廊开式引弥归当录往径得御必态性怪恢戏成我或战房所扇手才打扣执找把护报抵拜择括拾持挂按挑挡损换探接摊撤操攀支收改攻放效敌数整文斗断新方旁无旧早时明是晶暂暖暗更替有朝未本机束条来杼枚架查柱标校样核格案档桥梯梳楚楼槛模次歇正此步残每比水求汇池没治沿法测浏消深清渠游湿源溯满潮火灯点焰熄片版物状独环现理生用甲畅界留疗痕登白的盐盖盘目相看着短石砖破确碍磨离种积移程空穿突立站章第等签算索级线练组终经结绕绘给绞继续绳缺罄置翼者耗股背胜能脚自至致色苔若范药获落蓄蓝蜡血行补袋被装要覆规览角触言计认记许访证该说请读调谈败货购资走足距路踪蹄转载较输边达过返还这进远退适选透逐途通造道那邻部配采里重量金鉴钟钥钮钱铁铜销错键镜门闭问间闸阅队防阶阻际限除隔障需青静非面音页项预领额风首马验高黄齿",
+  "ascii_32_126_covered": true,
+  "missing_count": 0,
+  "missing": [],
+  "source_utf8_decode_errors": [],
+  "source_replacement_character_files": [],
+  "source_cjk_samples": [
+    {
+      "path": "fifty/data/content.json",
+      "sample": "阶塔潮痕信塔临时名可改目标层现仅原创制作层层未制作这枚缺角正好接上我的旧图蓝钥匙归你第五层的盐封档案门后留着入塔"
+    },
+    {
+      "path": "fifty/data/design-budget.json",
+      "sample": "双环门厅梳齿钟廊水镜八庭绞盘双桥三渠档库回环机井错庭风站三径引线四翼机杼马蹄信台"
+    },
+    {
+      "path": "fifty/view/experience_world.gd",
+      "sample": "上楼下楼层蓝门黄门商店钥匙生命攻击防御金币交谈线索后续未开放损血无法战胜损血无法战胜门已开启钥匙生命无损战斗生命"
+    },
+    {
+      "path": "fifty/view/preview.gd",
+      "sample": "归潮门厅绳桥库回声索室双庭水闸盐封档案绕潮盘道守灯人廊三径蓄池四翼校准室无火信台生命生命攻击防御金币黄钥匙蓝钥匙"
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/kenney/SOURCE.json",
+      "sha256": "9a9db3298bc1cbe9ea8f49f61aac68023e02e4b863460d18c7bc1770f3fd58fc"
+    },
+    {
+      "path": "fifty/data/content.json",
+      "sha256": "3703b2cbc43d2297d42d335ad85ebac3f464d9f6c68d536d75a990e9bdd75fd5"
+    },
+    {
+      "path": "fifty/data/design-budget.json",
+      "sha256": "8efb30513c1bfe300499c099625670faa97f871b1f9d161e7870ea418ac4cf1e"
+    },
+    {
+      "path": "fifty/data/manifest.json",
+      "sha256": "32857fe177db828ff4314d504f5c1cabd54eb7bb5390668210754c636ab7fd1c"
+    },
+    {
+      "path": "fifty/reuse_manifest.json",
+      "sha256": "fe582f0ea341f785926fd1b97f680c19676fe58c425846bbc57895dad0dee07e"
+    },
+    {
+      "path": "fifty/scripts/content.gd",
+      "sha256": "947c56a0f0fbfd68d071cb02f6a26695747de891c5fa7925fe46867c8d6d7dbd"
+    },
+    {
+      "path": "fifty/scripts/d4.gd",
+      "sha256": "be66aa8198f777d72778b1fd2dde9b75798419254139a4f44956f133983220b2"
+    },
+    {
+      "path": "fifty/scripts/runtime.gd",
+      "sha256": "1d3ab254eedf81e6a591d57c89110641c29171407e0b51f3441664145ba61463"
+    },
+    {
+      "path": "fifty/scripts/save.gd",
+      "sha256": "4e08ddffc85edf89a3207a85080d2b4ec5abc4b97514c845e64047a1b3ed440b"
+    },
+    {
+      "path": "fifty/view/experience_assets.gd",
+      "sha256": "0018edd150294508df7ba5dc69bc5d018cd7765b29573d72b0c799bf22fe0904"
+    },
+    {
+      "path": "fifty/view/experience_audio.gd",
+      "sha256": "f5652ca3e440b97fb884dd8be3b0a52fbbfc1b489cfa92e475227eeb3b85d018"
+    },
+    {
+      "path": "fifty/view/experience_world.gd",
+      "sha256": "453e55e04cf1290c129ea176ff1f73512d54538413acc8d19693ad17a69c9670"
+    },
+    {
+      "path": "fifty/view/preview.gd",
+      "sha256": "851394aa4e98a1f4f4f5507f2305049ed94e2d184ba7233a57e56a3127df3a0b"
+    },
+    {
+      "path": "fifty/view/preview.tscn",
+      "sha256": "59352a2be4f57d3f09ac66621f6305e978e93057dbc05bbc3fe3e12ae5f55e24"
+    },
+    {
+      "path": "fifty/view/world.gd",
+      "sha256": "ee72fd6ed696c40c322c0ed4ea4737f56beddbc117f88fe7237be1210abc44b4"
+    },
+    {
+      "path": "notices/SOURCE.json",
+      "sha256": "b829a8776c2712d992cb130ced6c0f5a9299c23653cc7bf0dc09d9a9f8fc03ca"
+    },
+    {
+      "path": "project.godot",
+      "sha256": "b61ff860450e9a1eef0c95402f397dad89ff5f436cec0644759223d291c0d7cf"
+    },
+    {
+      "path": "scripts/rules.gd",
+      "sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495"
+    },
+    {
+      "path": "scripts/ui_icon.gd",
+      "sha256": "5b4ff2c85661d27d820abaa5923f92ea93716b8a0a540afeb7dff5f307f60ef8"
+    },
+    {
+      "path": "scripts/world.gd",
+      "sha256": "f1860bed91688cc5f81eedfa2fb14a153d1917473415acd9c21558b9320876c2"
+    }
+  ],
+  "status": "passed",
+  "diagnosis": {
+    "malformed_utf8": "none detected",
+    "unicode_replacement_character": "none detected",
+    "earlier_candidate_font_binding": "Theme set only default_font_size; no bundled CJK default_font before this experience revision",
+    "existing_house_subsets_initial_missing": {
+      "Dawnkeep Sans": 209,
+      "Parcel Interface": 255,
+      "Sanctuary Sans": 260
+    },
+    "initial_required_codepoints": 408,
+    "initial_required_cjk_codepoints": 300,
+    "interpretation": "Source Chinese decodes, existing narrow subsets are insufficient, and explicit bundled font binding is required. This does not prove every observed issue came from glyph coverage rather than loading or clipping."
+  },
+  "not_tested": [
+    "Godot font import/loading",
+    "actual rendered Chinese",
+    "long dialogue clipping",
+    "Web export glyph rendering",
+    "browser input"
+  ],
+  "software_installs": 0,
+  "host_starts": 0
+}
