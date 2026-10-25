@@ -1,12 +1,13 @@
 class_name FiftyRuntime
 extends RefCounted
-## Independent authored 1-10 runtime inside the existing game project.
+## Explicit authored-content profiles inside the existing game project.
 ## Ordinary combat delegates to the frozen authority; this file has no formula.
 
 const BaseRules = preload("res://scripts/rules.gd")
 const Geometry = preload("res://fifty/scripts/d4.gd")
 const Content = preload("res://fifty/scripts/content.gd")
 const CONTENT_PATH: String = "res://fifty/data/content.json"
+const CHAPTER2_CONTENT_PATH: String = "res://fifty/data/chapter2-content.json"
 const SNAPSHOT_SCHEMA: String = "stairkeep-fifty-state/v1"
 const VARIANT_SPEC: String = "fifty/xorshift32-d4-v1"
 const MODES: Array[String] = ["classic_restart", "practice_checkpoint"]
@@ -16,6 +17,7 @@ const RULE_FILES: Array[String] = ["res://scripts/rules.gd", "res://fifty/script
 
 var _core = BaseRules.new("")
 var _canonical: Dictionary = {}
+var _content_sha_cache: String = ""
 var _data: Dictionary = {}
 var _mode: String = "unselected"
 var _seed: String = ""
@@ -66,6 +68,7 @@ func set_content(content: Dictionary) -> Dictionary:
 		return rejected
 	_canonical = content.duplicate(true)
 	Geometry.freeze_tree(_canonical)
+	_content_sha_cache = ""
 	last_error = ""
 	return _result(true, "content_loaded", "Choose a mode explicitly before starting.")
 
@@ -118,7 +121,8 @@ func _begin(mode: String, seed: String, root_seed: String, attempt: int, previou
 	_checkpoints = []
 	_capture_entry()
 	last_error = ""
-	return _result(true, "started", "The authored ten-floor slice is ready; forty higher floors are not made.")
+	var info: Dictionary = profile_info()
+	return _result(true, "started", "The authored %d-floor slice is ready; %d higher floors are not made." % [int(info["authored_count"]), int(info["target_count"]) - int(info["authored_count"])])
 
 
 func _base_adapter(full_data: Dictionary) -> Dictionary:
@@ -133,7 +137,28 @@ func _base_adapter(full_data: Dictionary) -> Dictionary:
 
 
 func runtime_identity() -> Dictionary:
-	return {"content_id": Content.CONTENT_ID, "content_sha256": Geometry.content_hash(_canonical), "rules_sha256": rules_fingerprint(), "variant_spec": VARIANT_SPEC, "snapshot_schema": SNAPSHOT_SCHEMA}
+	return {"content_id": str(_canonical.get("content_id", "")), "content_sha256": _canonical_content_sha(), "rules_sha256": rules_fingerprint(), "variant_spec": VARIANT_SPEC, "snapshot_schema": SNAPSHOT_SCHEMA}
+
+
+func _canonical_content_sha() -> String:
+	# Only successful content replacement invalidates this immutable tree.
+	# State, checkpoints and run seeds do not change canonical content.
+	if _content_sha_cache.is_empty():
+		_content_sha_cache = Geometry.content_hash(_canonical)
+	return _content_sha_cache
+
+
+func profile_info() -> Dictionary:
+	if _canonical.is_empty(): return {}
+	var profile: Dictionary = Content.profile_definition(str(_canonical["content_id"]))
+	if profile.is_empty(): return {}
+	var authored_count: int = int(profile["authored_count"])
+	var target_count: int = int(profile["target_count"])
+	var authored: Array = []
+	var unmade: Array = []
+	for id: int in range(1, authored_count + 1): authored.append(id)
+	for id: int in range(authored_count + 1, target_count + 1): unmade.append(id)
+	return {"content_id": str(_canonical["content_id"]), "authored_count": authored_count, "target_count": target_count, "authored_floors": authored, "not_authored_floors": unmade, "checkpoint_floors": Content.checkpoint_floors(_canonical), "slice_goal_object_id": str(_canonical["completion"]["slice_goal_object_id"])}
 
 
 static func rules_fingerprint() -> String:
@@ -231,7 +256,8 @@ func _interact(cell: Array, action: Dictionary) -> Dictionary:
 	var old_pos: Array = _core.state["pos"].duplicate()
 	var item: Dictionary = object_at(cell)
 	if item.get("kind") == "boundary":
-		return _error("not_authored", "Floors 11-50 are not authored; this boundary cannot be crossed.")
+		var info: Dictionary = profile_info()
+		return _error("not_authored", "Floors %d-%d are not authored; this boundary cannot be crossed." % [int(info["authored_count"]) + 1, int(info["target_count"])])
 	var result: Dictionary
 	if item.get("kind") in ["npc", "event"]:
 		var options: Array = available_events(cell)
@@ -446,6 +472,7 @@ func _valid_confirmation(loss_id: String) -> bool:
 
 func _capture_entry() -> void:
 	var floor_id: int = int(floor_data()["id"])
+	if not Content.checkpoint_floors(_canonical).has(floor_id): return
 	var id: String = "entry_%02d" % floor_id
 	for checkpoint: Dictionary in _checkpoints:
 		if checkpoint["id"] == id: return
@@ -508,6 +535,7 @@ func _verify_snapshot(candidate: Dictionary) -> Dictionary:
 		return {"ok": false, "status": "invalid_history", "message": "This protocol derives consumed losses from the complete journal, not a supplied historical origin."}
 	var rebuilt = get_script().new()
 	rebuilt._canonical = _canonical
+	rebuilt._content_sha_cache = ""
 	var begun: Dictionary = rebuilt._begin(_mode, candidate["root_seed"], candidate["root_seed"], 0, "", [])
 	if not bool(begun.get("ok", false)):
 		return {"ok": false, "status": "invalid_variant", "message": "Snapshot variant could not be independently regenerated."}
@@ -561,6 +589,7 @@ func clone_for_search() -> RefCounted:
 
 func _adopt(source: RefCounted) -> void:
 	_canonical = source._canonical
+	_content_sha_cache = source._content_sha_cache
 	_data = source._data
 	_core = BaseRules.new("")
 	_core.data = source._core.data

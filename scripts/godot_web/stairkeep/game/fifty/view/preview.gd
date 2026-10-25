@@ -17,6 +17,10 @@ const CLASSIC := "classic_restart"
 const PRACTICE := "practice_checkpoint"
 const AREAS := ["RETURNING TIDE HALL", "ROPE BRIDGE STORE", "ECHO RIGGING ROOM", "TWIN COURT SLUICE", "SALT SEALED ARCHIVE", "TIDAL SPIRAL", "LIGHTKEEPER'S GALLERY", "THREE PATH RESERVOIR", "FOUR WING CALIBRATION", "UNLIT SIGNAL PLATFORM"]
 
+@export_file("*.json") var content_path: String = Runtime.CONTENT_PATH
+@export var slot_id: String = SLOT
+@export var profile_label: String = "First chapter"
+
 var rules = Runtime.new()
 var world
 var ui: Control
@@ -51,6 +55,7 @@ var content_ready := false
 var modal_kind := ""
 var _last_slice_notice := false
 var _enemy_ids: Array[String] = []
+var _profile: Dictionary = {}
 
 
 func _ready() -> void:
@@ -59,15 +64,61 @@ func _ready() -> void:
 	add_child(world)
 	world.cell_clicked.connect(_cell_clicked)
 	world.cell_hovered.connect(_hovered)
-	_build_ui()
-	var loaded: Dictionary = rules.load_content()
+	var loaded: Dictionary = rules.load_content(content_path)
 	content_ready = bool(loaded.get("ok", false))
+	_profile = rules.profile_info() if content_ready else {}
+	_build_ui()
 	if content_ready:
 		_show_modes()
 	else:
-		_open_modal("unavailable", "The chapter could not open.", "The current tower is unchanged. This preview needs its first chapter content before play.")
+		_open_modal("unavailable", "The chapter could not open.", "The current tower is unchanged. This preview needs its selected chapter content before play.")
 	get_viewport().size_changed.connect(_schedule_fit)
 	_schedule_fit()
+
+
+func _authored_count() -> int:
+	return int(_profile.get("authored_count",0))
+
+
+func _authored_range() -> String:
+	var floors: Array = _profile.get("authored_floors",[])
+	if floors.is_empty():
+		return "Chapter content unavailable"
+	return "Floors %d–%d" % [int(floors[0]),int(floors[-1])]
+
+
+func _unmade_range() -> String:
+	var floors: Array = _profile.get("not_authored_floors",[])
+	if floors.is_empty():
+		return "No higher floors are available in this preview"
+	return "Floors %d–%d are not yet built" % [int(floors[0]),int(floors[-1])]
+
+
+func _scope_text(snap: Dictionary = {}) -> String:
+	var count_text: String = "%d / %d floors available" % [_authored_count(),int(_profile.get("target_count",0))]
+	if bool(snap.get("slice_complete",false)):
+		return "Chapter / slice complete  •  " + count_text + "  •  " + _unmade_range()
+	if _authored_count() > 10 and bool(snap.get("flags",{}).get("relay_lit",false)):
+		return "Chapter 1 milestone: first signal lit  •  " + count_text + "  •  " + _unmade_range()
+	return count_text + "  •  " + _unmade_range()
+
+
+func _floor_name(index: int) -> String:
+	var floors: Array = rules.data.get("floors",[])
+	if index < 0 or index >= floors.size():
+		return "Unknown floor"
+	var floor_data: Dictionary = floors[index]
+	if not str(floor_data.get("name_en","")).is_empty():
+		return str(floor_data["name_en"])
+	if index < AREAS.size():
+		return AREAS[index]
+	return str(floor_data.get("name","Floor %d" % (index+1)))
+
+
+func _event_copy(event_id: String, fallback: String) -> String:
+	var event: Dictionary = rules.data.get("events",{}).get(event_id,{})
+	var translated: String = str(event.get("text_en",""))
+	return translated if not translated.is_empty() else fallback
 
 
 func _style(background: Color, border: Color = Color("314653")) -> StyleBoxFlat:
@@ -144,7 +195,7 @@ func _build_ui() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(brand)
 	brand.add_child(_label("S T A I R K E E P", 27, GOLD))
-	brand.add_child(_label("TIDE-MARK SIGNAL  /  FIRST CHAPTER", 12, MUTED))
+	brand.add_child(_label("TIDE-MARK SIGNAL  /  " + profile_label.to_upper(), 12, MUTED))
 	var actions := HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 7)
 	heading.add_child(actions)
@@ -182,7 +233,7 @@ func _build_ui() -> void:
 	world_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	world_column.custom_minimum_size.x = 500
 	body.add_child(world_column)
-	floor_label = _label("FIRST CHAPTER  /  FLOORS 1–10 AVAILABLE", 16, GOLD)
+	floor_label = _label(profile_label.to_upper() + "  /  " + _authored_range().to_upper(), 16, GOLD)
 	world_column.add_child(floor_label)
 	world_host = Control.new()
 	world_host.name = "WorldViewport"
@@ -191,7 +242,7 @@ func _build_ui() -> void:
 	world_host.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	world_column.add_child(world_host)
 	world_host.resized.connect(_schedule_fit)
-	availability_label = _label("50 floors planned  •  Floors 11–50 are not yet built", 14, MUTED)
+	availability_label = _label(_scope_text(), 14, MUTED, true)
 	world_column.add_child(availability_label)
 	var compass := HBoxContainer.new()
 	compass.add_theme_constant_override("separation", 8)
@@ -318,7 +369,7 @@ func _show_modes() -> void:
 	if not content_ready:
 		return
 	selected_mode = ""
-	_open_modal("mode", "Choose how you want to climb.", "First chapter: floors 1–10. Fifty floors are planned; 11–50 are not yet built.\nChoose a mode yourself. Your saved slots stay separate.")
+	_open_modal("mode", "Choose how you want to climb.", "%s: %s.\n%s.\nChoose a mode yourself. Your saved slots stay separate." % [profile_label,_authored_range().to_lower(),_scope_text()])
 	overlay_box.add_child(_label("Classic's restart rule applies to the current open session. An existing manual save may still resume after closing and reopening.",14,MUTED,true))
 	var group := ButtonGroup.new()
 	group.allow_unpress = false
@@ -335,7 +386,7 @@ func _show_modes() -> void:
 	seed_input.custom_minimum_size.y = 40
 	seed_input.text_changed.connect(func(_text: String): _refresh_mode_buttons())
 	overlay_box.add_child(seed_input)
-	start_button = _button(overlay_box, "Enter first chapter", _begin)
+	start_button = _button(overlay_box, "Enter " + profile_label.to_lower(), _begin)
 	start_button.name = "StartChapter"
 	start_button.disabled = true
 	mode_load_button = _button(overlay_box, "Load selected mode's saved slot", _load_slot)
@@ -365,11 +416,11 @@ func _seed_value() -> int:
 func _refresh_mode_buttons() -> void:
 	var valid: bool = selected_mode in [CLASSIC, PRACTICE] and _seed_value() >= 1
 	start_button.disabled = not valid or (started and selected_mode == active_mode)
-	start_button.tooltip_text = "Use Restart / return to recover within the current mode." if started and selected_mode == active_mode else "Enter this mode's first chapter."
+	start_button.tooltip_text = "Use Restart / return to recover within the current mode." if started and selected_mode == active_mode else "Enter this mode's " + profile_label.to_lower() + "."
 	mode_load_button.disabled = not valid or (started and selected_mode != active_mode)
 	if selected_mode == CLASSIC and _classic_failed():
 		mode_load_button.disabled = true
-	mode_load_button.tooltip_text = "Start the selected mode first to load its own slot." if started and selected_mode != active_mode else "Load this mode's first-chapter save."
+	mode_load_button.tooltip_text = "Start the selected mode first to load its own slot." if started and selected_mode != active_mode else "Load this mode's " + profile_label.to_lower() + " save."
 	if selected_mode == CLASSIC and _classic_failed():
 		mode_load_button.tooltip_text = "This Classic run has ended. Restart it with a new tower seed."
 
@@ -393,7 +444,7 @@ func _do_begin(mode: String, seed: int) -> void:
 	# new-tower action constructs a replacement, leaving the old object untouched
 	# if content validation or mode selection fails.
 	var candidate = Runtime.new()
-	var loaded: Dictionary = candidate.load_content()
+	var loaded: Dictionary = candidate.load_content(content_path)
 	if not bool(loaded.get("ok",false)):
 		_message("The chapter could not open. Your current tower is unchanged.")
 		return
@@ -402,6 +453,7 @@ func _do_begin(mode: String, seed: int) -> void:
 		_message(str(result.get("message", "The chapter could not start.")))
 		return
 	rules = candidate
+	_profile = rules.profile_info()
 	active_mode = mode
 	selected_mode = mode
 	selected_seed = seed
@@ -437,9 +489,9 @@ func _refresh() -> void:
 	for key: String in ["yellow", "blue"]:
 		stats[key].text = "%s  %d" % ["Y KEY" if key == "yellow" else "B KEY", int(state.get("keys", {}).get(key, 0))]
 	var floor_index: int = int(state.get("floor", 0))
-	floor_label.text = "%02d / 10    %s" % [floor_index + 1, AREAS[clampi(floor_index, 0, 9)]]
-	mode_label.text = "%s  •  First chapter preview  •  Working title, may change" % ("CLASSIC · full restart" if active_mode == CLASSIC else "PRACTICE · chapter return")
-	availability_label.text = "Chapter / slice complete  •  Floors 11–50 are not yet built" if bool(snap.get("slice_complete",false)) else "10 floors available of 50 planned  •  Floors 11–50 are not yet built"
+	floor_label.text = "%02d / %02d    %s" % [floor_index + 1,_authored_count(),_floor_name(floor_index)]
+	mode_label.text = "%s  •  %s preview  •  Working title, may change" % ["CLASSIC · full restart" if active_mode == CLASSIC else "PRACTICE · chapter return",profile_label]
+	availability_label.text = _scope_text(snap)
 	world.refresh()
 	header_actions.load.disabled = _classic_failed()
 	_inspect(selected)
@@ -453,7 +505,7 @@ func _refresh() -> void:
 			_show_recovery()
 	elif bool(snap.get("slice_complete", false)) and not _last_slice_notice:
 		_last_slice_notice = true
-		_open_modal("slice", "The first signal is lit.", "Chapter / slice complete. You can still return to earlier floors and save this tower.\nFloors 11–50 are not yet built. This is not the end of the planned tower.")
+		_open_modal("slice", "The first signal is lit." if _authored_count() <= 10 else "The return beacon is lit.", "Chapter / slice complete. You can still return to earlier floors and save this tower.\n%s. This is not the end of the planned tower." % _unmade_range())
 		_button(overlay_box, "Return to the chapter", _close_modal).call_deferred("grab_focus")
 		_button(overlay_box, "Save this tower", _save_slot)
 
@@ -496,21 +548,21 @@ func _inspect(cell: Array) -> void:
 			inspect_copy.text = "Travel between the available chapter floors. Your gates, encounters and supplies keep their state. Press E while standing here."
 		"boundary":
 			inspect_title.text = "Higher floors are not yet built"
-			inspect_copy.text = "This chapter ends on floor 10. Floors 11–50 are planned and cannot be entered in this preview. You can revisit and save the available chapter."
+			inspect_copy.text = "%s. They cannot be entered in this preview. You can revisit and save the available chapter." % _unmade_range()
 			approach_button.disabled = true
 		"npc":
-			inspect_title.text = "The mapmaker" if int(rules.state.floor) == 0 else "The lightkeeper"
+			inspect_title.text = str(item.get("name_en",{"f01_mapper":"The mapmaker","f07_keeper":"The lightkeeper"}.get(str(item.get("id","")),"A tower traveler")))
 			inspect_copy.text = "Talk from the neighboring tile. A clue found higher in the tower may be worth bringing back."
 			var npc_events: Array = info.get("available_events",[])
 			if not npc_events.is_empty():
-				inspect_copy.text = str(npc_events[0].get("text",inspect_copy.text))
+				inspect_copy.text = _event_copy(str(npc_events[0].get("id","")),str(npc_events[0].get("text",inspect_copy.text)))
 			_show_event_effects(npc_events)
 		"event":
-			inspect_title.text = "A chapter clue" if int(rules.state.floor) < 9 else "The unlit signal"
+			inspect_title.text = str(item.get("name_en","The unlit signal" if str(item.get("id","")) == str(_profile.get("slice_goal_object_id","")) else "A chapter clue"))
 			inspect_copy.text = "Approach to read or use this place. Its requirements and one-time rewards belong to this tower's progress."
 			var place_events: Array = info.get("available_events",[])
 			if not place_events.is_empty():
-				inspect_copy.text = str(place_events[0].get("text",inspect_copy.text))
+				inspect_copy.text = _event_copy(str(place_events[0].get("id","")),str(place_events[0].get("text",inspect_copy.text)))
 			_show_event_effects(place_events)
 		"shop":
 			inspect_title.text = "The tide-road trader"
@@ -599,18 +651,25 @@ func _refresh_journal(snap: Dictionary) -> void:
 	_clear_children(journal_box)
 	journal_box.add_child(_label("Clues & return visits", 20, GOLD, true))
 	var flags: Dictionary = snap.get("flags",{})
-	var copper_status: String = "Completed" if bool(flags.get("copper_redeemed",false)) else ("Return to F1" if bool(flags.get("copper_found",false)) else "Find the tag on F3")
-	var keeper_status: String = "Completed" if bool(flags.get("keeper_supplied",false)) else ("Visit the lightkeeper on F7" if bool(flags.get("archive_read",false)) else "Read the sealed archive on F5")
-	journal_box.add_child(_label("F3 → F1 · %s\nF5 → F7 · %s" % [copper_status,keeper_status], 16, CREAM, true))
+	var entries: Array = rules.data.get("journal_entries",[])
+	if entries.is_empty():
+		var copper_status: String = "Completed" if bool(flags.get("copper_redeemed",false)) else ("Return to F1" if bool(flags.get("copper_found",false)) else "Find the tag on F3")
+		var keeper_status: String = "Completed" if bool(flags.get("keeper_supplied",false)) else ("Visit the lightkeeper on F7" if bool(flags.get("archive_read",false)) else "Read the sealed archive on F5")
+		journal_box.add_child(_label("F3 → F1 · %s\nF5 → F7 · %s" % [copper_status,keeper_status], 16, CREAM, true))
+	else:
+		for entry: Dictionary in entries:
+			var recorded: bool = bool(flags.get(str(entry.get("status_flag","")),false))
+			var copy: String = str(entry.get("text_en",entry.get("text","A chapter clue")))
+			journal_box.add_child(_label("%s F%d · %s" % ["✓" if recorded else "○",int(entry.get("floor",0)),copy],15,CYAN if recorded else CREAM,true))
 	var events: Array = snap.get("completed_events", [])
 	journal_box.add_child(_label("%d chapter moments recorded" % events.size(), 14, CYAN, true))
 	var registry: Dictionary = rules.data.get("events", {})
 	for event_id: String in events:
 		var entry: Dictionary = registry.get(event_id, {})
-		var text: String = str(entry.get("text", "A chapter clue or exchange has been recorded."))
+		var text: String = _event_copy(event_id,str(entry.get("text", "A chapter clue or exchange has been recorded.")))
 		journal_box.add_child(_label("✓ F%d · %s" % [int(entry.get("floor",0)),text], 15, MUTED, true))
 	var boundary := Button.new()
-	boundary.text = "Floors 11–50 · not yet built"
+	boundary.text = _unmade_range()
 	boundary.disabled = true
 	boundary.custom_minimum_size.y = 44
 	journal_box.add_child(boundary)
@@ -694,7 +753,7 @@ func _apply(result: Dictionary) -> void:
 	_message(str(result.get("message", "The tower remembers your choice.")))
 	_refresh()
 	if bool(result.get("ok",false)) and str(result.get("action","")) == "event" and not bool(_snapshot().get("slice_complete",false)):
-		_open_modal("dialogue","A message in the tower",str(result.get("message","")))
+		_open_modal("dialogue","A message in the tower",_event_copy(str(result.get("selected_event_id","")),str(result.get("message",""))))
 		_button(overlay_box,"Return to the tower",_close_modal).call_deferred("grab_focus")
 
 
@@ -707,9 +766,9 @@ func _message(text: String) -> void:
 
 func _save_slot() -> void:
 	if started:
-		var result: Dictionary = Saves.write_slot(rules, SLOT)
+		var result: Dictionary = Saves.write_slot(rules, slot_id)
 		if bool(result.get("ok",false)):
-			_message("Tower saved in this mode's first-chapter slot.")
+			_message("Tower saved in this mode's " + profile_label.to_lower() + " slot.")
 		elif result.get("status","") == "blocked_web_persistence_unvalidated":
 			_message("Saving in this browser has not been verified. This tower has not been saved.")
 		else:
@@ -728,7 +787,7 @@ func _load_slot() -> void:
 	if intended_mode not in [CLASSIC,PRACTICE]:
 		return
 	if started:
-		_confirm("Load the saved tower?", "Your current unsaved progress will be replaced by this mode's saved first-chapter tower. Other mode slots stay separate.", _do_load_slot.bind(intended_mode))
+		_confirm("Load the saved tower?", "Your current unsaved progress will be replaced by this mode's saved %s tower. Other mode slots stay separate." % profile_label.to_lower(), _do_load_slot.bind(intended_mode))
 	else:
 		_do_load_slot(intended_mode)
 
@@ -739,7 +798,7 @@ func _do_load_slot(intended_mode: String) -> void:
 		_message("Loading this Classic mode is unavailable after the run ends in the current session.")
 		return
 	var candidate = Runtime.new()
-	var loaded: Dictionary = candidate.load_content()
+	var loaded: Dictionary = candidate.load_content(content_path)
 	if not bool(loaded.get("ok",false)):
 		_message("The chapter could not open. Your current tower is unchanged.")
 		return
@@ -747,9 +806,10 @@ func _do_load_slot(intended_mode: String) -> void:
 	if not bool(chosen.get("ok",false)):
 		_message(str(chosen.get("message","The selected mode could not open.")))
 		return
-	var result: Dictionary = Saves.load_slot(candidate, SLOT)
+	var result: Dictionary = Saves.load_slot(candidate, slot_id)
 	if bool(result.get("ok",false)):
 		rules = candidate
+		_profile = rules.profile_info()
 		active_mode = intended_mode
 		selected_mode = intended_mode
 		var accepted_snapshot: Dictionary = rules.export_snapshot()
@@ -907,4 +967,5 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func view_status() -> Dictionary:
-	return {"started":started,"selected_mode":selected_mode,"active_mode":active_mode,"mode_required":true,"start_disabled":start_button.disabled if is_instance_valid(start_button) else true,"content_ready":content_ready,"authored_floors":10,"target_floors":50,"unmade_floors":[11,50],"modal":modal_kind,"visual_review":"not-tested","real_input":"not-tested"}
+	var unmade: Array = _profile.get("not_authored_floors",[])
+	return {"started":started,"selected_mode":selected_mode,"active_mode":active_mode,"mode_required":true,"start_disabled":start_button.disabled if is_instance_valid(start_button) else true,"content_ready":content_ready,"content_path":content_path,"profile_label":profile_label,"profile_content_id":str(_profile.get("content_id","")),"slot_id":slot_id,"authored_floors":_authored_count(),"target_floors":int(_profile.get("target_count",0)),"unmade_floors":[int(unmade[0]),int(unmade[-1])] if not unmade.is_empty() else [],"modal":modal_kind,"visual_review":"not-tested","real_input":"not-tested"}

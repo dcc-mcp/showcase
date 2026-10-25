@@ -1,12 +1,13 @@
 class_name FiftySave
 extends RefCounted
-## Independent native slots for the fifty-floor runtime. No legacy migration.
+## Independent chapter/mode native slots. The frozen v1 namespace is never read.
 ## Checksums detect corruption; they are not an authenticity or anti-cheat key.
 
 const FORMAT_ID: String = "stairkeep-fifty-save"
 const SAVE_VERSION: int = 1
 const STATE_SCHEMA: String = "stairkeep-fifty-state/v1"
-const SLOT_ROOT: String = "user://stairkeep-fifty-save-v1/slots"
+const SLOT_ROOT: String = "user://stairkeep-fifty-chapters-save-v1"
+const PROFILE_DIRS: Dictionary = {"stairkeep-fifty-slice/v1": "chapter1", "stairkeep-fifty-chapter2/v1": "chapter2"}
 const MAX_BYTES: int = 8388608
 const MAX_JSON_DEPTH: int = 64
 const MAX_EXACT_INTEGER: int = 9007199254740991
@@ -17,10 +18,10 @@ const REQUIRED_METHODS: Array[String] = ["export_snapshot", "validate_snapshot",
 const RESERVED_SLOTS: Array[String] = ["con", "prn", "aux", "nul", "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9", "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9"]
 
 
-static func slot_path(slot_id: String, mode: String) -> String:
-	if not _valid_slot(slot_id) or not MODES.has(mode):
+static func slot_path(slot_id: String, mode: String, content_id: String = "stairkeep-fifty-slice/v1") -> String:
+	if not _valid_slot(slot_id) or not MODES.has(mode) or not PROFILE_DIRS.has(content_id):
 		return ""
-	return SLOT_ROOT + "/" + mode + "/" + slot_id + ".json"
+	return SLOT_ROOT + "/" + str(PROFILE_DIRS[content_id]) + "/slots/" + mode + "/" + slot_id + ".json"
 
 
 static func encode_slot(runtime: Object, slot_id: String) -> Dictionary:
@@ -65,7 +66,8 @@ static func write_slot(runtime: Object, slot_id: String) -> Dictionary:
 	if OS.has_feature("web"):
 		return _web_block()
 	var mode: String = encoded["mode"]
-	var path: String = slot_path(slot_id, mode)
+	var content_id: String = encoded["payload"]["runtime_identity"]["content_id"]
+	var path: String = slot_path(slot_id, mode, content_id)
 	# A corrupt, unknown or future slot is not an overwrite target. It remains
 	# available for inspection; choose another explicit slot instead.
 	if FileAccess.file_exists(path):
@@ -104,7 +106,7 @@ static func load_slot(runtime: Object, slot_id: String) -> Dictionary:
 		return context
 	if OS.has_feature("web"):
 		return _web_block()
-	var read: Dictionary = _read_candidate(runtime, slot_id, slot_path(slot_id, context["mode"]))
+	var read: Dictionary = _read_candidate(runtime, slot_id, slot_path(slot_id, context["mode"], context["identity"]["content_id"]))
 	if not read.get("ok", false):
 		return read
 	# All parsing, identities, checksums and runtime references passed first.
@@ -139,6 +141,8 @@ static func _runtime_context(runtime: Object) -> Dictionary:
 		return _fail("runtime_identity_mismatch", "The runtime identity schema is not supported by this save version.")
 	if not (identity["content_id"] is String) or str(identity["content_id"]).is_empty() or not _digest(identity["content_sha256"]) or not _digest(identity["rules_sha256"]):
 		return _fail("runtime_identity_mismatch", "The runtime content and rules fingerprints must be explicit.")
+	if not PROFILE_DIRS.has(identity["content_id"]):
+		return _fail("unsupported_content_profile", "This content identity has no supported chapter save namespace.")
 	return {"ok": true, "snapshot": normalized_snapshot["value"], "identity": identity, "mode": mode}
 
 

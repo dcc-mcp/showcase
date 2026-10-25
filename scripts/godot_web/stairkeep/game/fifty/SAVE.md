@@ -1,9 +1,11 @@
 # Fifty runtime save contract
 
 This module belongs to the existing `game/project.godot` project. It uses
-`res://fifty/scripts/save.gd` and does not read, migrate or overwrite the original
-three-floor or 21-floor slots. The current content is a new 1–10 slice toward a
-50-floor target; a floor-10 slice completion is not a completed 50-floor campaign.
+`res://fifty/scripts/save.gd`. The current source supports two explicit content
+profiles toward a 50-floor target: the original authored 1–10 chapter and the
+new authored 1–20 chapter. It does not read, migrate or overwrite the original
+three-floor, 21-floor or frozen first-chapter save directories. Neither profile
+claims a completed 50-floor campaign.
 
 ## Explicit mode and slot
 
@@ -11,16 +13,41 @@ three-floor or 21-floor slots. The current content is a new 1–10 slice toward 
 `{ok, status, message, ...}`. Both require an already selected
 `classic_restart` or `practice_checkpoint` mode. New runtime content starts with
 `mode = "unselected"`; storage never picks a default. A load cannot silently
-switch the selected mode. A valid saved run with a different seed in the same
-mode can be restored.
+switch the selected mode or content profile. A valid saved run with a different
+seed in the same selected mode and matching content/rules identity can be restored.
 
-`slot_path(slot_id, mode)` maps to
-`user://stairkeep-fifty-save-v1/slots/<mode>/<slot_id>.json`. The slot ID is an
+`slot_path(slot_id, mode, content_id = "stairkeep-fifty-slice/v1")` maps only
+these fixed content IDs to fixed directory names:
+
+| Content identity | Directory |
+| --- | --- |
+| `stairkeep-fifty-slice/v1` | `chapter1` |
+| `stairkeep-fifty-chapter2/v1` | `chapter2` |
+
+The new path is
+`user://stairkeep-fifty-chapters-save-v1/<chapter>/slots/<mode>/<slot_id>.json`.
+The two-argument call remains supported and selects the **new** `chapter1`
+namespace. Write/load explicitly use `runtime_identity.content_id`; they never
+paste a caller-supplied content ID into a path. Unknown profiles are refused
+with `unsupported_content_profile` before any slot I/O; `slot_path` returns an
+empty string for an unknown profile.
+
+The frozen v1 application continues to use its original
+`user://stairkeep-fifty-save-v1/slots/<mode>/<slot_id>.json` namespace and original
+rules hash. This new source never opens, enumerates, migrates, rewrites or cleans
+that directory, including when running the original v1 content profile. The
+new source has changed rules fingerprints, so snapshots from the frozen app
+are explicitly refused by identity validation even if their bytes are supplied
+to the pure decoder. Continue those saves with the frozen v1 app; there is no
+silent migration or fallback lookup.
+
+The slot ID is an
 explicit lowercase ASCII identifier of 1–32 characters, beginning with a letter
 or digit and otherwise allowing letters, digits, `_` and `-`. Windows reserved
 device names are refused. There is no default slot, arbitrary-path storage API,
 slot enumeration or user-file cleanup operation. The two modes have separate
-physical directories.
+physical directories within each chapter, and the chapters are physically
+separate even when mode and slot names are identical.
 
 `encode_slot(runtime, slot_id)` returns the serialized `text` and complete
 `payload` without writing. `decode_slot(runtime, slot_id, text)` returns a
@@ -35,10 +62,13 @@ not claimed.
 The envelope has exactly `format_id`, `save_version`, `slot_id`, `mode`,
 `runtime_identity`, `snapshot`, `snapshot_sha256` and `payload_sha256`.
 `format_id` is `stairkeep-fifty-save`, version is `1`, and the state schema is
-`stairkeep-fifty-state/v1`. Unknown or future envelope fields/versions are
-refused. Static runtime identity has exactly `content_id`, `content_sha256`,
+`stairkeep-fifty-state/v1`. The envelope and snapshot structures are unchanged;
+profile separation uses the existing `content_id`, so this change does not bump
+`save_version`. Unknown or future envelope fields/versions are still refused.
+Static runtime identity has exactly `content_id`, `content_sha256`,
 `rules_sha256`, `variant_spec` and `snapshot_schema`; it does not bind loading to
-the currently active seed.
+the currently active seed. Bytes from the other chapter are refused by content
+identity even if mode, slot and both recomputed checksums are otherwise valid.
 
 The runtime owns `export_snapshot`, read-only `validate_snapshot`, atomic
 `import_snapshot` and `runtime_identity`. Save passes the entire exported
@@ -47,22 +77,32 @@ reapply pickups, recompute the saved run, merge inventories, or perform its own
 restart/checkpoint recovery. Seed/root seed/sequence state, D4 transforms and
 layout identity, cleared IDs, keys, shop state, NPC flags, completed events,
 cross-floor references, checkpoints, failures, history and actions remain in the
-runtime snapshot, including `origin_consumed_loss_ids` as an audit origin.
+runtime snapshot. The retained `origin_consumed_loss_ids` field must be empty:
+consumed failures are derived from the full session action history rather than
+accepted as a supplied historical origin.
 Candidate-specific content/variant references and every checkpoint are the
 runtime validator's authority. Its contract is an isolated deterministic replay
-of the accepted action history from the bound seed, mode and variant origin,
+of the accepted action history from the root seed, selected mode and attempt 0,
 followed by exact full-snapshot comparison and resource conservation. Checking
 only Base state types or recalculated outer checksums is insufficient.
 
 Classic restart must explicitly create a new seed and reset the complete run in
-the runtime. Practice recovery must restore its complete recorded source world
+the runtime. A failed live Classic attempt still refuses slot imports until its
+explicit new-seed restart; chapter routing does not bypass that runtime gate.
+Practice recovery must restore its complete recorded source world
 and preserve the runtime's declared audit/history transaction semantics. Saving
 either result captures that complete result, rather than implementing another
-recovery path. Whole-campaign completion remains false in the 1–10 slice.
+recovery path. In the original profile, the existing per-floor entry checkpoints
+and floor-10 slice endpoint remain its content behavior. The new chapter-2
+profile captures practice checkpoints only at floors **1, 5, 11 and 15**;
+floor 10's `relay_lit` is a milestone, and floor 20 is its authored-slice
+completion. These are runtime/content rules, not alternate save behavior.
+Whole-campaign completion remains false. Stat types and the authoritative
+combat calculation are unchanged.
 
 ## Validate before commit
 
-Load reads only the explicit mode/slot, bounds it to 8 MiB, parses one object,
+Load reads only the explicit chapter/mode/slot, bounds it to 8 MiB, parses one object,
 rejects missing/unknown fields, checks format/version/slot/mode/static identity,
 and checks both canonical SHA-256 fields. It then asks the runtime to validate
 the full detached candidate before its single `import_snapshot` call. The
@@ -89,7 +129,9 @@ by a local checksum. Re-signed invalid states still have to fail runtime validat
 
 The unified `fifty/tests` owner supplies actual native QA; this document is not a
 test receipt. Required cases include explicit unselected/invalid mode and slot
-refusals; separate mode paths; same-mode/different-seed roundtrip; full checkpoint,
+refusals; separate chapter/mode paths; same-profile/same-mode/different-seed
+roundtrip; cross-profile byte rejection and unknown-profile refusal; proof that
+new code performs no I/O in the frozen v1 directory; full checkpoint,
 resource, NPC, cross-floor, failure and history retention; old three/21 format,
 foreign slot/content/rules/variant/schema and future-reference rejection;
 truncation/empty/oversize/invalid JSON; snapshot/envelope checksum tampering;

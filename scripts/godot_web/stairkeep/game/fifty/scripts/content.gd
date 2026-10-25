@@ -1,8 +1,13 @@
 class_name FiftyContent
 extends RefCounted
-## The authored 1-10 slice is a separate content identity, not fifty empty floors.
+## Explicit authored-content profiles; neither profile creates placeholder floors.
 
 const CONTENT_ID: String = "stairkeep-fifty-slice/v1"
+const CHAPTER2_CONTENT_ID: String = "stairkeep-fifty-chapter2/v1"
+const PROFILE_DEFINITIONS: Dictionary = {
+	"stairkeep-fifty-slice/v1": {"authored_count": 10, "target_count": 50, "checkpoint_floors": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "checkpoint_manifest_required": false},
+	"stairkeep-fifty-chapter2/v1": {"authored_count": 20, "target_count": 50, "checkpoint_floors": [1, 5, 11, 15], "checkpoint_manifest_required": true},
+}
 const KINDS: Array[String] = ["key", "door", "enemy", "potion", "atk", "def", "gold", "shop", "stairs", "npc", "event", "boundary"]
 const STATS: Array[String] = ["hp", "atk", "def", "gold"]
 const PICKUPS: Array[String] = ["key", "door", "enemy", "potion", "atk", "def", "gold"]
@@ -11,19 +16,28 @@ const DIRECTIONS: Array[String] = ["north", "east", "south", "west"]
 
 static func validate(content: Dictionary) -> Dictionary:
 	var errors: Array[String] = []
-	if content.get("schema_version") != 1 or content.get("content_id") != CONTENT_ID:
+	var profile: Dictionary = profile_definition(str(content.get("content_id", "")))
+	if content.get("schema_version") != 1 or profile.is_empty():
 		return {"ok": false, "errors": ["Unsupported fifty-slice content identity/schema."]}
 	if not (content.get("manifest") is Dictionary) or not (content.get("floors") is Array):
 		return {"ok": false, "errors": ["Manifest and authored floors are required."]}
 	var manifest: Dictionary = content["manifest"]
+	var authored_count: int = int(profile["authored_count"])
+	var target_count: int = int(profile["target_count"])
 	var authored: Array = []
 	var unmade: Array = []
-	for id: int in range(1, 11): authored.append(id)
-	for id: int in range(11, 51): unmade.append(id)
-	if manifest.get("target_floors") != 50 or not _numbers_equal(manifest.get("authored_floors"), authored) or not _numbers_equal(manifest.get("not_authored_floors"), unmade):
-		errors.append("Manifest must distinguish ten authored floors from forty not-authored floors.")
-	if content["floors"].size() != 10:
-		errors.append("This slice requires exactly ten authored floors, not placeholders.")
+	for id: int in range(1, authored_count + 1): authored.append(id)
+	for id: int in range(authored_count + 1, target_count + 1): unmade.append(id)
+	if manifest.get("schema_version") != 1 or manifest.get("content_id") != content["content_id"]:
+		errors.append("Manifest must bind the selected content profile and schema.")
+	if manifest.get("target_floors") != target_count or not _numbers_equal(manifest.get("authored_floors"), authored) or not _numbers_equal(manifest.get("not_authored_floors"), unmade):
+		errors.append("Manifest must distinguish %d authored floors from %d not-authored floors." % [authored_count, target_count - authored_count])
+	if bool(profile["checkpoint_manifest_required"]) and not manifest.has("checkpoint_floors"):
+		errors.append("This content profile requires an explicit checkpoint manifest.")
+	if manifest.has("checkpoint_floors") and not _numbers_equal(manifest["checkpoint_floors"], profile["checkpoint_floors"]):
+		errors.append("Checkpoint floors must match the selected profile's ordered whitelist.")
+	if content["floors"].size() != authored_count:
+		errors.append("This profile requires exactly %d authored floors, not placeholders." % authored_count)
 	for field: String in ["initial_player", "enemies", "shops", "flags", "events", "completion"]:
 		if not (content.get(field) is Dictionary):
 			errors.append("Missing dictionary: " + field)
@@ -47,6 +61,8 @@ static func validate(content: Dictionary) -> Dictionary:
 		if not (enemy_id is String) or not (value is Dictionary):
 			errors.append("Invalid enemy catalog entry.")
 			continue
+		if value.has("name_en") and not (value["name_en"] is String):
+			errors.append("Enemy name_en must be non-spatial text.")
 		for stat: String in ["hp", "atk", "def", "gold"]:
 			if not whole(value.get(stat)) or int(value[stat]) < (1 if stat == "hp" else 0):
 				errors.append("Invalid enemy stat: " + str(enemy_id) + "/" + stat)
@@ -57,6 +73,8 @@ static func validate(content: Dictionary) -> Dictionary:
 		if not (shop_id is String) or not (shop is Dictionary) or not (shop.get("offers") is Array):
 			errors.append("Invalid shop catalog entry.")
 			continue
+		if shop.has("name_en") and not (shop["name_en"] is String):
+			errors.append("Shop name_en must be non-spatial text.")
 		var offer_ids: Dictionary = {}
 		for offer: Variant in shop["offers"]:
 			if not (offer is Dictionary) or not (offer.get("id") is String) or offer_ids.has(offer.get("id")):
@@ -76,8 +94,10 @@ static func validate(content: Dictionary) -> Dictionary:
 			errors.append("Floor must be a dictionary.")
 			continue
 		var floor: Dictionary = floor_value
+		if floor.has("name_en") and not (floor["name_en"] is String):
+			errors.append("Floor name_en must be non-spatial text.")
 		if not whole(floor.get("id")) or int(floor["id"]) != index + 1:
-			errors.append("Authored floor IDs must be contiguous 1-10 in order.")
+			errors.append("Authored floor IDs must be contiguous 1-%d in order." % authored_count)
 			continue
 		floor_ids[str(int(floor["id"]))] = floor
 		if not (floor.get("grid") is Array) or floor["grid"].is_empty() or floor["grid"].size() > 64 or not (floor.get("objects") is Array):
@@ -105,8 +125,10 @@ static func validate(content: Dictionary) -> Dictionary:
 				errors.append("Object must be a dictionary.")
 				continue
 			var item: Dictionary = item_value
-			if not _only(item, ["id", "kind", "pos", "type", "amount", "target", "direction", "victory", "event_ids", "facing", "direction_vector", "slice_goal", "hidden_until_flag", "name", "description", "label", "palette", "bestiary_note", "message"]):
+			if not _only(item, ["id", "kind", "pos", "type", "amount", "target", "direction", "victory", "event_ids", "facing", "direction_vector", "slice_goal", "hidden_until_flag", "name", "name_en", "description", "label", "palette", "bestiary_note", "message"]):
 				errors.append("Unknown object fields require an explicit geometry/rule adapter.")
+			if item.has("name_en") and not (item["name_en"] is String):
+				errors.append("Object name_en must be non-spatial text.")
 			if not (item.get("id") is String) or str(item["id"]).is_empty() or objects.has(item["id"]):
 				errors.append("Object stable IDs must be globally unique.")
 				continue
@@ -172,9 +194,36 @@ static func validate(content: Dictionary) -> Dictionary:
 	var goal_id: Variant = content["completion"].get("slice_goal_object_id")
 	if not (goal_id is String) or not objects.has(goal_id) or not bool(objects[goal_id]["item"].get("slice_goal", false)):
 		errors.append("The slice requires an explicit authored slice_goal object.")
+	elif int(objects[goal_id]["floor"]) != authored_count:
+		errors.append("The slice goal must belong to this profile's final authored floor.")
+	for id: String in objects:
+		if bool(objects[id]["item"].get("slice_goal", false)) and id != goal_id:
+			errors.append("Only the declared final slice goal may carry slice_goal; earlier chapter milestones use flags.")
+	if content["completion"].get("campaign_victory_authored") != false:
+		errors.append("A partial authored profile must not claim whole-campaign victory.")
+	_validate_journal(content, floor_ids, errors)
 	if errors.is_empty():
 		_validate_bounds(content, errors)
 	return {"ok": errors.is_empty(), "errors": errors}
+
+
+static func profile_definition(content_id: String) -> Dictionary:
+	if not PROFILE_DEFINITIONS.has(content_id): return {}
+	return PROFILE_DEFINITIONS[content_id].duplicate(true)
+
+
+static func checkpoint_floors(content: Dictionary) -> Array:
+	var profile: Dictionary = profile_definition(str(content.get("content_id", "")))
+	if profile.is_empty(): return []
+	var manifest: Variant = content.get("manifest")
+	if not (manifest is Dictionary): return []
+	var declared: Variant = manifest.get("checkpoint_floors", profile["checkpoint_floors"])
+	if not (declared is Array): return []
+	var result: Array = []
+	for value: Variant in declared:
+		if not whole(value): return []
+		result.append(int(value))
+	return result
 
 
 static func _validate_event(id: Variant, value: Variant, content: Dictionary, floors: Dictionary, objects: Dictionary, errors: Array[String]) -> void:
@@ -182,8 +231,10 @@ static func _validate_event(id: Variant, value: Variant, content: Dictionary, fl
 		errors.append("Events require stable IDs and dictionaries.")
 		return
 	var event: Dictionary = value
-	if not _only(event, ["floor", "trigger", "conditions", "effects", "once", "text"]):
+	if not _only(event, ["floor", "trigger", "conditions", "effects", "once", "text", "text_en"]):
 		errors.append("Unknown event fields require an explicit adapter.")
+	if event.has("text_en") and not (event["text_en"] is String):
+		errors.append("Event text_en must be non-spatial text.")
 	if not whole(event.get("floor")) or not floors.has(str(int(event["floor"]))) or not (event.get("trigger") is Dictionary) or not (event.get("conditions") is Array) or not (event.get("effects") is Array) or event.get("once") != true or not (event.get("text") is String):
 		errors.append("Event has unsupported schema: " + str(id))
 		return
@@ -234,6 +285,29 @@ static func _validate_event(id: Variant, value: Variant, content: Dictionary, fl
 				if not objects.has(effect.get("object_id", "")) or not PICKUPS.has(objects[effect["object_id"]]["item"]["kind"]): errors.append("Invalid object unlock effect.")
 			_:
 				errors.append("Unsupported event effect.")
+
+
+static func _validate_journal(content: Dictionary, floors: Dictionary, errors: Array[String]) -> void:
+	if not content.has("journal_entries"): return
+	var entries: Variant = content["journal_entries"]
+	if not (entries is Array):
+		errors.append("Journal entries must be a read-only metadata array.")
+		return
+	var ids: Dictionary = {}
+	for value: Variant in entries:
+		if not (value is Dictionary) or not _only(value, ["id", "floor", "text", "text_en", "status_flag"]):
+			errors.append("Journal entries support only explicit non-spatial metadata.")
+			continue
+		if not (value.get("id") is String) or str(value["id"]).is_empty() or ids.has(value["id"]):
+			errors.append("Journal metadata IDs must be unique nonempty strings.")
+		else:
+			ids[value["id"]] = true
+		if not whole(value.get("floor")) or not floors.has(str(int(value["floor"]))):
+			errors.append("Journal metadata must reference an authored floor.")
+		if not (value.get("text") is String) or not (value.get("text_en") is String):
+			errors.append("Journal metadata requires original and English text.")
+		if not content["flags"].has(value.get("status_flag", "")):
+			errors.append("Journal metadata must reference a declared status flag.")
 
 
 static func _validate_bounds(content: Dictionary, errors: Array[String]) -> void:

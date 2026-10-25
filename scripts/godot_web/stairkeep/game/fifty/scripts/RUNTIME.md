@@ -1,9 +1,35 @@
 # Fifty slice authority
 
-This module runs ten original authored floors inside the existing Godot project.
-The manifest records floors 11-50 as not authored. F10 sets slice_complete;
-core_state.won and campaign_complete stay false, and revisits remain available.
-The default project scene and the original three-/21-floor sources are unchanged.
+This module supports two explicitly selected authored-content profiles inside
+the existing Godot project. The default content path remains
+res://fifty/data/content.json, content_id stairkeep-fifty-slice/v1: ten authored
+floors, F10 slice completion and floors 11-50 not authored. That unchanged data
+keeps its original every-floor entry-checkpoint policy.
+
+The opt-in path res://fifty/data/chapter2-content.json selects
+stairkeep-fifty-chapter2/v1: twenty authored floors, with floors 21-50 not
+authored and explicit checkpoint_floors [1, 5, 11, 15]. F10's relay_lit flag is a
+chapter-one milestone; only the declared F20 goal marks slice_complete.
+core_state.won and campaign_complete remain false for either partial profile,
+and revisits remain available. Neither profile creates empty higher floors.
+The default original project scene, three-/21-floor sources, v1 content file,
+existing Source/Web archives and captured evidence remain unchanged.
+
+Load a content path explicitly before choose_mode. profile_info() returns copied
+content_id, authored_count, target_count, authored_floors, not_authored_floors,
+checkpoint_floors and slice_goal_object_id metadata. The runtime identity uses
+the validated canonical content_id/content hash, not a fixed default profile.
+Checkpoint capture happens after the real entry action and eligible enter
+events, only at the selected profile's whitelisted floors. Restoration keeps
+the existing complete-world and future-checkpoint-prefix semantics.
+
+The updated rule sources produce a new rules fingerprint. An unchanged old
+snapshot is refused, not silently migrated. Current source code uses the new
+profile-separated save root user://stairkeep-fifty-chapters-save-v1 for BOTH
+chapter1 and chapter2, never the old user://stairkeep-fifty-save-v1 directory.
+The frozen v1 application/archive retains its original code, rules fingerprint
+and old save namespace; use that version to resume its old saves. See SAVE.md
+for the exact slot mapping. The envelope and snapshot structures did not change.
 
 FiftyRuntime loads content, then requires an explicit choose_mode(mode, seed).
 There is no selected default mode and calling choose_mode again cannot reset

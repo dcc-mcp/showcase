@@ -12,7 +12,7 @@ const FLOOR_TINTS := [
 func refresh() -> void:
 	super.refresh()
 	if _floor != null and _rules != null and not _rules.state.is_empty():
-		var floor_index: int = clampi(int(_rules.state.get("floor", 0)), 0, 9)
+		var floor_index: int = maxi(int(_rules.state.get("floor", 0)),0) % FLOOR_TINTS.size()
 		_floor.modulate = FLOOR_TINTS[floor_index]
 
 
@@ -68,7 +68,7 @@ func fit_rect(rect: Rect2) -> void:
 	super.fit_rect(rect)
 	if _board == null or _actors == null:
 		return
-	# A 15x15 first-chapter board uses a smaller projection than the old slice.
+	# A larger authored board uses a smaller projection than the old slice.
 	# Keep its native text badges readable in screen space; pixel review pending.
 	var point_size: int = clampi(int(ceil(13.0 / maxf(_board.scale.x, 0.01))), 39, 100)
 	for node: Node in _actors.find_children("*", "Label", true, false):
