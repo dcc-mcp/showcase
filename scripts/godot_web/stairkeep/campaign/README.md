@@ -152,6 +152,14 @@ incomplete frontiers and changed sources fail verification. See
 [search evidence](SEARCH-EVIDENCE.md), [variant replay](VARIANT-REPLAY.md) and
 [bijection certificates](VARIANT-BIJECTION-CERTIFICATE.md).
 
+`tools/classify_campaign_failure_modes.py --help` reproduces the stage
+classification from a new original, hash-bound measurement/replay set, using
+recorded authoritative previews rather than another combat formula. Its
+recorded source SHA-256 is
+`22cc92db2fcf99145150630f4d873bade1ca86d06dc98831353b9ce956d544d6`.
+The public privacy derivative has separate path/hash mappings; it is not
+presented as the byte-identical private input of that original analysis.
+
 ## Review artifacts and boundaries
 
 [Complete evidence ZIP](evidence/campaign-evidence.zip) ·
