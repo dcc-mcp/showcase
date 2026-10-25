@@ -66,6 +66,25 @@ The old three-floor simulation's 20 resource-exhaustion counterexamples are
 retained separately. Their policy seeds do not generate maps. Each was replayed
 to its original dead end and also has a real winning initial-state witness.
 
+## Completed paired recovery follow-up
+
+The production target is now **50 floors**. This 21-floor laboratory and its
+10,000-run baseline remain historical regression fixtures; they are not the
+final content target. The [transition proposal](FIFTY-FLOOR-TRANSITION.md)
+records the module and reversible-grid work still needed. It does not claim
+50 authored floors, copied original maps/dialogue or integrated D4 variants.
+
+The [follow-up](RECOVERY-RESULTS.md) individually replays all **1,336 early**
+and **26 late** original failures. All early bad purchases are blocked by
+default without changing the complete state; explicit risk acceptance still
+reproduces the original losses. Every case separately restores its complete
+initial checkpoint and actually wins through a selected blade route. All 26
+late cases additionally have an actual chapter-checkpoint winning suffix
+(F19 × 10, F16 × 13, F13 × 3). The original baseline and difficulty remain
+unchanged. This does not prove every strategy wins, that a blocked prestate
+was winnable, or that the tested checkpoint is the latest possible winning
+checkpoint. No warning/recovery interface has been accepted.
+
 ## A verified mitigation, with its scope
 
 The first shop permits an irreversible mistake: buying ward or flask before

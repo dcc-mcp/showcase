@@ -1,0 +1,19 @@
+{
+  "suite": "stairkeep-proposed-d4-geometry/v1",
+  "passed": true,
+  "tests_run": 16,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_ms": 1300.581,
+  "helper_sha256": "7b0c23aae35497dbe9988bb850513b1cf8b7a9a7600b68f4dba33ecc8d75070a",
+  "test_sha256": "9c21d81ae8ca1479e7daf9d4ae61be2e33ecd61c9f48ca0a85b64047772079c9",
+  "fixture_sha256": "b11c41ed50566f0fcfc7c50f59641c987d29b249435ff08487ab17fd580550d1",
+  "expected_fixture_sha256": "b11c41ed50566f0fcfc7c50f59641c987d29b249435ff08487ab17fd580550d1",
+  "python": "3.12.10",
+  "test_output": "test_bijection_inverse_all_cells_non_square (__main__.GeometryProperties.test_bijection_inverse_all_cells_non_square) ... ok\ntest_closure_and_associativity (__main__.GeometryProperties.test_closure_and_associativity) ... ok\ntest_direction_condition_and_reflection_handedness (__main__.GeometryProperties.test_direction_condition_and_reflection_handedness) ... ok\ntest_distances_and_adjacency_graph (__main__.GeometryProperties.test_distances_and_adjacency_graph) ... ok\ntest_known_clockwise_and_reflection_coordinates (__main__.GeometryProperties.test_known_clockwise_and_reflection_coordinates) ... ok\ntest_actual_symmetry_dedup_and_previous_equivalence_exclusion (__main__.LayoutProperties.test_actual_symmetry_dedup_and_previous_equivalence_exclusion) ... ok\ntest_frozen_actual_layout_choices_are_distinct (__main__.LayoutProperties.test_frozen_actual_layout_choices_are_distinct) ... ok\ntest_frozen_all_cells_objects_topology_and_graph (__main__.LayoutProperties.test_frozen_all_cells_objects_topology_and_graph) ... ok\ntest_frozen_fixture_counts (__main__.LayoutProperties.test_frozen_fixture_counts) ... ok\ntest_frozen_roundtrip_all_eight_and_budget_identity (__main__.LayoutProperties.test_frozen_roundtrip_all_eight_and_budget_identity) ... ok\ntest_identical_monster_aliases_and_names_are_not_novel_encounters (__main__.LayoutProperties.test_identical_monster_aliases_and_names_are_not_novel_encounters) ... ok\ntest_independent_floor_transforms_and_bidirectional_stair_ids (__main__.LayoutProperties.test_independent_floor_transforms_and_bidirectional_stair_ids) ... ok\ntest_invalid_geometry_and_unregistered_semantics_rejected (__main__.LayoutProperties.test_invalid_geometry_and_unregistered_semantics_rejected) ... ok\ntest_no_input_or_result_aliasing_and_fixed_floor_transform (__main__.LayoutProperties.test_no_input_or_result_aliasing_and_fixed_floor_transform) ... ok\ntest_npc_hidden_events_conditions_and_restore_ids (__main__.LayoutProperties.test_npc_hidden_events_conditions_and_restore_ids) ... ok\ntest_safe_start_candidate_order_alias_and_safety (__main__.LayoutProperties.test_safe_start_candidate_order_alias_and_safety) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 1.300s\n\nOK\n",
+  "scope": "Python stdlib geometry/reference/static-budget properties on frozen 21-floor data and synthetic proposed NPC/event schema.",
+  "engine_integration_tested": false,
+  "fifty_floor_content_generated": false,
+  "fifty_floor_balance_tested": false,
+  "save_or_respawn_policy_changed": false
+}
