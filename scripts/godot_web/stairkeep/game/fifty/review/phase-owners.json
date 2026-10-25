@@ -1,0 +1,146 @@
+{
+  "scope": "Whitelist summaries only; raw owner paths/PIDs remain private.",
+  "owners": [
+    {
+      "phase": "version",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.032,
+      "stdout_sha256": "bf8803022b574250bb04dea65053a46b7c58570725316c1f7fe2aa6735706498",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recipe_sha256": "ae528f5f3f89f6201d5a92787ab85355b46fd943d59aecdb746e99c5a90fafb3",
+      "editor_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "sources_and_protected_after_passed": true,
+      "actual_below_normal_verified": true,
+      "actual_process_times_verified": true,
+      "source_raw_owner_sha256": "e40e4e9523630192e88b6715fd522a77b5acec9225eba800bf42cadec782305e",
+      "initial_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.0
+      },
+      "final_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.796875
+      }
+    },
+    {
+      "phase": "import",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.016,
+      "stdout_sha256": "8a78ddce458a9c583e54fb7e89587f2924dbad05c3f0c8d59372e1994ede373d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recipe_sha256": "ae528f5f3f89f6201d5a92787ab85355b46fd943d59aecdb746e99c5a90fafb3",
+      "editor_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "sources_and_protected_after_passed": true,
+      "actual_below_normal_verified": true,
+      "actual_process_times_verified": true,
+      "source_raw_owner_sha256": "b26dae5254e8331c4318310c448ac50f0785e46a44127d0a2f44f2d39e91ffce",
+      "initial_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.0
+      },
+      "final_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.046875
+      }
+    },
+    {
+      "phase": "export",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.157,
+      "stdout_sha256": "a780af24b700cb94f2c297b9db27f98d9df0dfea5b5ed6a5e58db29169d45f80",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "recipe_sha256": "ae528f5f3f89f6201d5a92787ab85355b46fd943d59aecdb746e99c5a90fafb3",
+      "editor_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "sources_and_protected_after_passed": true,
+      "actual_below_normal_verified": true,
+      "actual_process_times_verified": true,
+      "source_raw_owner_sha256": "c96f844c6cb66ee9c617309749d817964671a61b1fbb0bdadbd235a5c917bd8b",
+      "initial_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.0
+      },
+      "final_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.0625
+      }
+    },
+    {
+      "phase": "native",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.219,
+      "stdout_sha256": "6371c6dc591b971d4b40da6f796a272f9b32a34db6b3f6931ecde4e8c538a5a2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "script_sha256": "77d0b277b2ff004db7c93cc1a6aa98d7602b9497352ee07a46c2dd88d9fb552a",
+      "recipe_sha256": "ae528f5f3f89f6201d5a92787ab85355b46fd943d59aecdb746e99c5a90fafb3",
+      "wrapper_sha256": "15557bdde19182414e4b54cf285dd30725de406c1505251ff6ca2a295ca99a2b",
+      "manifest_sha256": "7b559a8d4d4fae7927c0a02e0a407181a885c9ccecc5ff638a28d7c38e5610d3",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "report_sha256": "06fcce054f5ac6f17d923459dc0e80af7963995bf06398af8bc8f6cd8491d05d",
+      "sources_unchanged": true,
+      "below_normal_verified": true,
+      "process_times_verified": true,
+      "accepted": true,
+      "source_raw_owner_sha256": "ad6afcaec8d727d7f55128e123c9f6fc510b2ad44df7bb0a82817d030652d931",
+      "initial_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.015625
+      },
+      "final_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.640625
+      }
+    },
+    {
+      "phase": "pck",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.015,
+      "stdout_sha256": "58b2afe225d34c98d12a182a22513d1d349d60a9fa2593f47e4033c0f9cded07",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "script_sha256": "77d0b277b2ff004db7c93cc1a6aa98d7602b9497352ee07a46c2dd88d9fb552a",
+      "recipe_sha256": "ae528f5f3f89f6201d5a92787ab85355b46fd943d59aecdb746e99c5a90fafb3",
+      "wrapper_sha256": "15557bdde19182414e4b54cf285dd30725de406c1505251ff6ca2a295ca99a2b",
+      "manifest_sha256": "7b559a8d4d4fae7927c0a02e0a407181a885c9ccecc5ff638a28d7c38e5610d3",
+      "engine_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+      "report_sha256": "eca81b21c6725fc9c04a9862a6e0db62a8de2ac31584baa33beee3ebfbbe1a7b",
+      "immutable_launch_sha256": "6a00f2c55e52cbde2b2930a0d1092bb8ea9da2845f2edb84917cbb6e5103aa9e",
+      "sources_unchanged": true,
+      "below_normal_verified": true,
+      "process_times_verified": true,
+      "accepted": true,
+      "source_raw_owner_sha256": "6e6bbd67fad29941c19edf8d8518ed33d1ac6750f68b1e0ba2a2b5b35e8524a3",
+      "initial_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.0
+      },
+      "final_resources": {
+        "actual_priority_class": 16384,
+        "actual_below_normal": true,
+        "process_times_available": true,
+        "cpu_seconds": 0.609375
+      }
+    }
+  ]
+}

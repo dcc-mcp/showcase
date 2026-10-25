@@ -1,0 +1,3 @@
+{
+  "scope": "02 incorrectly required zero pool hints; 03 relied on filtered OS argv; 04 compared native integer metadata with JSON floats by typed dictionary equality. Original sources/reds remain separate from the accepted current run. No old run is relabelled and no game counterexample is added."
+}

@@ -1,0 +1,46 @@
+{
+	"app_name": "Stairkeep · First Chapter Preview",
+	"browser_http_acceptance": "not-tested",
+	"check_count": 4,
+	"checks": [
+		{
+			"name": "original_engine_headless_probe_only",
+			"passed": true
+		},
+		{
+			"name": "expected_original_472_engine_version",
+			"passed": true
+		},
+		{
+			"name": "expected_text_single_thread_manifest",
+			"passed": true
+		},
+		{
+			"name": "actual_main_pack_without_source_project_path",
+			"passed": false
+		}
+	],
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"engine_binary_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+	"errors": [
+		"actual_main_pack_without_source_project_path"
+	],
+	"main_scene": "res://fifty/view/preview.tscn",
+	"native_visual_input": "not-tested",
+	"passed": false,
+	"phase": "pck",
+	"renderer": "gl_compatibility",
+	"schema_version": 1,
+	"suite": "firstchapter_native_pck_source_identity/v1",
+	"web_persistence": "not-tested"
+}

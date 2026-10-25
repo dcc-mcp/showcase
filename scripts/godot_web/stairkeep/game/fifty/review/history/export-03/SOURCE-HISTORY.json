@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "scope": "Original measured export-03 source archive; PCK probe e5e failed its filtered-OS-argv guard before packed-content checks. Failure is preserved, not a passing probe or game counterexample. Godot consumes --main-pack/--path before OS.set_cmdline.",
+  "source_archive": {
+    "bytes": 3556417,
+    "sha256": "134e865b66d010b0c6d9122366dd38780072082e0edfc3f97d6a9a4b1f25c714",
+    "preserved_as": "firstchapter-source.original.zip"
+  },
+  "sources": [
+    {
+      "member": "recipe/prepare_firstchapter_export.py",
+      "raw_sha256": "39d5761fa219e9f058d8d428211a136ca30808dc11dd93a448af9ae8b656fd9a",
+      "raw_bytes": 28490,
+      "preserved_as": "prepare_firstchapter_export.py.txt.gz",
+      "gzip_sha256": "1a317056bc721571fd987323fd12222f38599e0f85e7b1d0d7676ec4db0c8bb6"
+    },
+    {
+      "member": "recipe/probe_firstchapter_pck.gd",
+      "raw_sha256": "e5e9cb1913bf99003461a9104bb2644bb9a0094aa752b438f6df71489d425979",
+      "raw_bytes": 8493,
+      "preserved_as": "probe_firstchapter_pck.gd.txt.gz",
+      "gzip_sha256": "928650c5f9a9d02f69d2205a8d7a0fc1e3d5fe9e49fa16aeeaab1cb413f9ae22"
+    }
+  ],
+  "source_reconstructed": false,
+  "new_native_run": false,
+  "original_archive_unchanged": true,
+  "official_cause": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/main/main.cpp"
+}

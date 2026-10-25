@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "scope": "Historical export-02 original source preservation before correcting an overly strict HTML pool-hint postcondition. Root reported real version/import/export exit0; no new native run is performed by this preservation.",
+  "original_source_archive": {
+    "file": "firstchapter-source.original.zip",
+    "bytes": 3554720,
+    "sha256": "77973f4b5db9ca961ecd9bf57c5676c182b0c10ee2291845e91c4a40dbd685d5"
+  },
+  "source_files": [
+    {
+      "archive_member": "recipe/prepare_firstchapter_export.py",
+      "raw_bytes": 22707,
+      "raw_sha256": "3148592e3683a21f748311d117e0648c16fdf8e92d43cb4b2f11e732816bc6a8",
+      "preserved_as": "prepare_firstchapter_export.py.txt.gz",
+      "gzip_sha256": "7d3a44f677c63331dfa261c90256f6d22c30dc2fa7c664eca385c3fdf7ea99a9",
+      "source_origin": "historical source bytes from the actual root-owned export-02 source archive",
+      "new_native_execution_claimed": false
+    },
+    {
+      "archive_member": "recipe/probe_firstchapter_pck.gd",
+      "raw_bytes": 8493,
+      "raw_sha256": "e5e9cb1913bf99003461a9104bb2644bb9a0094aa752b438f6df71489d425979",
+      "preserved_as": "probe_firstchapter_pck.gd.txt.gz",
+      "gzip_sha256": "928650c5f9a9d02f69d2205a8d7a0fc1e3d5fe9e49fa16aeeaab1cb413f9ae22",
+      "source_origin": "historical source bytes from the actual root-owned export-02 source archive",
+      "new_native_execution_claimed": false
+    }
+  ],
+  "source_reconstructed": false,
+  "original_archive_unchanged": true,
+  "bare_historical_gd_added": false
+}

@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "scope": "Same-project first-chapter source copy; no new download/install or complete-template claim.",
+  "template": {
+    "observed_at": "2026-10-24T22:34:01.451742+00:00",
+    "version": "4.7.2",
+    "official_release": "https://godotengine.org/download/archive/4.7.2-stable/",
+    "url": "https://godot-releases.nbg1.your-objectstorage.com/4.7.2-stable/Godot_v4.7.2-stable_export_templates.tpz",
+    "checksums_url": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable/SHA512-SUMS.txt",
+    "archive_bytes": 1281349702,
+    "archive_sha512": "ca4d71c4d7b81dfc15d1a98baa07534aa95b03fdda78a0075b06672e1648d2e5f40980c9adc28d23e1b92e732ee7bf3461997aa804af74ec2fcd7a93ccb84079",
+    "whole_archive_verified": true,
+    "files": [
+      {
+        "name": "web_nothreads_release.zip",
+        "bytes": 10245903,
+        "sha256": "d3ee2f08cef0cf3cf6678a6355a92a8db48ccdd35cbd2e8bfd5f0e8a0b4032a0",
+        "crc32": 2036152553
+      },
+      {
+        "name": "web_nothreads_debug.zip",
+        "bytes": 10232720,
+        "sha256": "08962aefef811b603541d7951ac67ef00413aad2d978855183c28adee98f626a",
+        "crc32": 2521048025
+      },
+      {
+        "name": "version.txt",
+        "bytes": 13,
+        "sha256": "38885c88f75abbc797a1db7559719800279a00cfb9fa8b2e2868a7f6f84bad2e",
+        "crc32": 1150721213
+      }
+    ],
+    "licenses": [
+      {
+        "name": "LICENSE.txt",
+        "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/LICENSE.txt",
+        "bytes": 1149,
+        "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+      },
+      {
+        "name": "COPYRIGHT.txt",
+        "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/COPYRIGHT.txt",
+        "bytes": 100108,
+        "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d"
+      }
+    ],
+    "executed_downloaded_code": false
+  },
+  "licenses": [
+    {
+      "path": "notices/STAIRKEEP-MIT.txt",
+      "sha256": "c27b28fc3654651d64bbcbd066289ea9a30de460b973c1988597d58edc3b147a",
+      "bytes": 4448,
+      "source": "https://github.com/dcc-mcp/showcase/blob/main/LICENSE",
+      "license": "MIT"
+    },
+    {
+      "path": "notices/GODOT-ENGINE-LICENSE.txt",
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+      "bytes": 1149,
+      "source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/LICENSE.txt",
+      "license": "MIT"
+    },
+    {
+      "path": "notices/GODOT-ENGINE-COPYRIGHT.txt",
+      "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d",
+      "bytes": 100108,
+      "source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/COPYRIGHT.txt",
+      "license": "Godot bundled third-party notices"
+    },
+    {
+      "path": "notices/KENNEY-CC0.txt",
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc",
+      "bytes": 613,
+      "source": "https://kenney.nl/assets/isometric-miniature-dungeon",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "notices/GODOT-DEMO-MIT.txt",
+      "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c",
+      "bytes": 1134,
+      "source": "https://github.com/godotengine/godot-demo-projects/tree/6ad6167e0577fe3622c18546138f456b107ce93c/2d/isometric",
+      "license": "MIT"
+    }
+  ],
+  "reused_project_sources": [
+    {
+      "path": "assets/kenney/barrel_N.png",
+      "bytes": 5797,
+      "sha256": "7a4852bce0a67bde638c7e25ae5f35698f60f98af23f6feccb42ab0a7bb3424b"
+    },
+    {
+      "path": "assets/kenney/barrel_N.png.import",
+      "bytes": 942,
+      "sha256": "61e557437cde387d58410c31550c313caa96b5aaf6ab0dae09067746daa0e4f4"
+    },
+    {
+      "path": "assets/kenney/License.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "assets/kenney/SOURCE.json",
+      "bytes": 2760,
+      "sha256": "9a9db3298bc1cbe9ea8f49f61aac68023e02e4b863460d18c7bc1770f3fd58fc"
+    },
+    {
+      "path": "assets/kenney/SOURCE.md",
+      "bytes": 326,
+      "sha256": "f967f7ee89be69a392d157c5aa2399c522b6d0f8e9cc1a7df0f1a458a4162cc1"
+    },
+    {
+      "path": "assets/kenney/stairs_N.png",
+      "bytes": 25470,
+      "sha256": "4085feccb370df75658b40f1ef0c4e8ae2678404e89cf218473fd67944178ea3"
+    },
+    {
+      "path": "assets/kenney/stairs_N.png.import",
+      "bytes": 941,
+      "sha256": "6d6221fd3a81d4095955ee7affa831d0c1fbbfc99f127a2edda96632cef26d3c"
+    },
+    {
+      "path": "assets/kenney/stone_N.png",
+      "bytes": 21500,
+      "sha256": "0ac4c1481dcdfccbd571c854b23e9a47d8be5941ae236aa60ea85ba09856c75c"
+    },
+    {
+      "path": "assets/kenney/stone_N.png.import",
+      "bytes": 939,
+      "sha256": "3aff173615a02f0466ebd05da4d2dc012a000fddafdfa865261a31cb0020c7f2"
+    },
+    {
+      "path": "assets/kenney/stoneColumn_N.png",
+      "bytes": 9204,
+      "sha256": "2007a1e676c76737162c34aab713c8ebc0c7dd148c95949b8b0f6eda784c2a6d"
+    },
+    {
+      "path": "assets/kenney/stoneColumn_N.png.import",
+      "bytes": 956,
+      "sha256": "d27948d1fe9850036d5ccc5d3cfdfe20ecf365fd80d19713941b44c7586c1fa8"
+    },
+    {
+      "path": "assets/kenney/stoneTile_N.png",
+      "bytes": 21149,
+      "sha256": "b2fbc7dfcd755fc6e91df07ac0ce9bb4acc695a8d27e995d677e7c5019f3bfcd"
+    },
+    {
+      "path": "assets/kenney/stoneTile_N.png.import",
+      "bytes": 950,
+      "sha256": "f7763f06190aaf3597412c59eb087948927f9fefea71da93bf869ea82f250fdd"
+    },
+    {
+      "path": "assets/kenney/stoneUneven_N.png",
+      "bytes": 21302,
+      "sha256": "07cd05a717e45082002305896b8ac296f812ae6e38bcb59ce6a3de9539668aa8"
+    },
+    {
+      "path": "assets/kenney/stoneUneven_N.png.import",
+      "bytes": 957,
+      "sha256": "1db6f0675931c6636e42d59f35a51d6a96fdcf256179c88f8cc692794fc4891f"
+    },
+    {
+      "path": "assets/kenney/stoneWallDoorClosed_N.png",
+      "bytes": 23209,
+      "sha256": "144a3d117e9aa11782965bca1bb28654e5c5395964f649b760ebbce109a05412"
+    },
+    {
+      "path": "assets/kenney/stoneWallDoorClosed_N.png.import",
+      "bytes": 980,
+      "sha256": "2187fcd539883ddbad528ebdf743aaace4dd0761cd966845ed1be0f6949b7c94"
+    },
+    {
+      "path": "assets/kenney/tableRoundItemsChairs_N.png",
+      "bytes": 8731,
+      "sha256": "5931a78448e50f7438cd6d304a17d1e25cf95acb4757ff47406100a140eff028"
+    },
+    {
+      "path": "assets/kenney/tableRoundItemsChairs_N.png.import",
+      "bytes": 987,
+      "sha256": "34bb59db3e9ca837182cf95bc784efd74d883881ae6ee75f8c2f8c93c58bc56d"
+    },
+    {
+      "path": "assets/kenney/wanderer.png",
+      "bytes": 4903,
+      "sha256": "d3b1fe7f2b34ee3077b3f853fbf36cfdcbb40324368f54f2673f35bf341b1059"
+    },
+    {
+      "path": "assets/kenney/wanderer.png.import",
+      "bytes": 942,
+      "sha256": "c25c339b1abc25cd1e824e07fe459b530b17897bbb1647bbf31a4bcc21d38860"
+    },
+    {
+      "path": "assets/kenney/woodenCrates_N.png",
+      "bytes": 6427,
+      "sha256": "7a289f71c98a6c55f339dd856a633e1336168775870d36bbbaf5257c6680c492"
+    },
+    {
+      "path": "assets/kenney/woodenCrates_N.png.import",
+      "bytes": 960,
+      "sha256": "7bedfc896897a9b4615a3ff74d7392d450599f072092d6ea6adc72ed2899effc"
+    },
+    {
+      "path": "scripts/rules.gd",
+      "bytes": 15632,
+      "sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495"
+    },
+    {
+      "path": "scripts/rules.gd.uid",
+      "bytes": 20,
+      "sha256": "1449c56ebba8898edd5f2c5a4904c7bcf30a9cb5a13145dce1bec09107bf62f6"
+    },
+    {
+      "path": "scripts/ui_icon.gd",
+      "bytes": 1240,
+      "sha256": "5b4ff2c85661d27d820abaa5923f92ea93716b8a0a540afeb7dff5f307f60ef8"
+    },
+    {
+      "path": "scripts/world.gd",
+      "bytes": 15783,
+      "sha256": "f1860bed91688cc5f81eedfa2fb14a153d1917473415acd9c21558b9320876c2"
+    },
+    {
+      "path": "scripts/world.gd.uid",
+      "bytes": 20,
+      "sha256": "fe40056e7cb13ded3c2e2197d20b4d5816c847a32a45f3ae37515b7e1e5feb7c"
+    },
+    {
+      "path": "vendor/godot-isometric/ADAPTATION.md",
+      "bytes": 841,
+      "sha256": "dbdffa5b0bd00e6e1ae9a78d02250248cc69f4b268ec6d85273f4ac2fc78f054"
+    },
+    {
+      "path": "vendor/godot-isometric/LICENSE.md",
+      "bytes": 1134,
+      "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.gd",
+      "bytes": 1391,
+      "sha256": "c634c7f6e7f293625414ff329bb4756aa008c3e712d298ab62db9e42cd5ec521"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.gd.uid",
+      "bytes": 20,
+      "sha256": "23051510459064308d0b822d47b445dcf4cb9e7cccffa7bd8b6bc7fc189c221d"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.png",
+      "bytes": 3032343,
+      "sha256": "c820bb4ee88295e71fc9b186b7c77f33fb1dd53a8aca3ceeece8adf84097fc91"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.png.import",
+      "bytes": 951,
+      "sha256": "a5f3ff664fdc6c79ec0603d3de86c8aa468d6a7b06cb3d99172c83dce0fb9c72"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.tscn",
+      "bytes": 45211,
+      "sha256": "47e1d2d3d8cac9eacfa29727dd16a9c2a5d86fbce89bf2d33e4b7b556efc7c2f"
+    },
+    {
+      "path": "vendor/godot-isometric/SOURCE.json",
+      "bytes": 1858,
+      "sha256": "bdb3ec7d03772fd257f4bb7605b96ddb7f8c39e018e5abdfee52bccbe7b398ff"
+    },
+    {
+      "path": "vendor/godot-isometric/tileset/isotiles.png",
+      "bytes": 227977,
+      "sha256": "c8e987cca2c6eb9928ecfe089dfe5e977f8fc1a4ccb07878db8c601ccbee9ed4"
+    },
+    {
+      "path": "vendor/godot-isometric/tileset/isotiles.png.import",
+      "bytes": 959,
+      "sha256": "883f0ab91f59d63af356c37575fb4c6005407a0737296d07f870184786d76f9b"
+    },
+    {
+      "path": "vendor/godot-isometric/tileset/tileset.tres",
+      "bytes": 6230,
+      "sha256": "fb8e68c61257b4c65e3ecae4f2f05c4ba43737d5c4540145106255e4f3c49d99"
+    }
+  ],
+  "preserved_sources": [
+    "assets/kenney/SOURCE.json",
+    "assets/kenney/SOURCE.md",
+    "vendor/godot-isometric/SOURCE.json",
+    "fifty/reuse_manifest.json"
+  ],
+  "script_export_mode": 0,
+  "official_text_mode_source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/editor/export/editor_export_preset.h",
+  "whole_archive_proof": "Inherited earlier verified receipt; selected extracted members freshly hashed here, not a new whole-archive measurement."
+}

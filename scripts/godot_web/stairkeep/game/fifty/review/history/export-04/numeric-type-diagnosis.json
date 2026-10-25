@@ -1,0 +1,10 @@
+{
+  "scope": "Types actually observed in the accepted current probe; this does not retroactively add measurements to export-04.",
+  "current_probe": "../../pck-probe.json",
+  "observed": {
+    "actual_major_typeof": 2,
+    "comparison": "Geometry.canonical_json normalizes JSON integral numbers; binary SHA remains exact",
+    "reference_major_typeof": 3
+  },
+  "historical_failure": "Typed engine Dictionary equality; binary engine SHA stayed exact."
+}
