@@ -57,8 +57,10 @@ def cache_and_measure(hou, output_dir, output_root, end_frame=2,
                 report["status"] = "stopped"
                 break
             hou.setFrame(frame)
-            dopnet.cook(force=True)
+            # Preserve DOP caches while time advances.
+            dopnet.cook(force=False)
             simulation = dopnet.simulation()
+            assert abs(simulation.time() - (frame - 1) / 24) < 1e-6, "Native simulation time does not match the requested frame"
             water = simulation.findObject("boat_water")
             assert water is not None
             fluid_geo = water.geometry()

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "record_kind": "Derived production brief and artifact plan; targets are not measurements",
+  "status": "working_tree_unselected_not_accepted",
+  "active_candidate": "intact_Rodin_native_wood_fracture_FLIP_water_blast",
+  "source": {
+    "archive": "source-intact.zip",
+    "manifest": "source-intact-manifest.json",
+    "role": "unchanged intact Rodin source",
+    "triangle_count": 500000,
+    "count_basis": "parsed source OBJ; no new native-fracture output count"
+  },
+  "historical_comparison": {
+    "archive": "source-model.zip",
+    "manifest": "model-manifest.json",
+    "named_parts": 17,
+    "triangle_count": 150000,
+    "scope": "Bang assembled-source comparison and earlier global-load-release diagnostic; no final natural-physics acceptance",
+    "replay_directory": "replay/",
+    "replay_scope": "Earlier comparison recipe; not the new native wood-fracture reproduction",
+    "production_status": "Stopped as an unaccepted comparison; retained source/replay checks keep only their original scopes"
+  },
+  "planned_native_chain": [
+    "Measure and preserve intact source; explicitly record any native solid/volume preprocessing",
+    "Use installed Houdini native RBD Material Fracture wood mode; measure pieces, grain direction, cut surfaces and retained UVs after execution",
+    "Author actual constraints and measurable spatial failure response",
+    "Run Bullet with the localized under-hull FLIP blast, actual fluid feedback and measured spatial constraint failures; retain per-piece mass/density and collision representations",
+    "Cache impact and post-impact motion; measure free-floating debris with local waterline and solid-boundary clearance",
+    "After primary physics passes, optionally solve foam/spray/bubbles from cached liquid fields in a separate whitewater pass that does not change primary piece physics"
+  ],
+  "runtime_plan": {
+    "constraint_fix": "c89e52559f9e26867cc12d7676f7c482d63c100b",
+    "material_fix": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "combined_runtime_status": "planned; source PR CI and earlier native stages remain independently scoped"
+  },
+  "unmeasured_native_fields": [
+    "actual wood-fracture piece/point/face counts",
+    "constraint types/counts/strengths and spatial distribution",
+    "grain direction and fracture sizes",
+    "fracture interior surface and UV policy",
+    "mass/density/volume distribution",
+    "collision-proxy topology and fit",
+    "fluid loading/coupling and break-event timeline",
+    "complete cache range and original fps",
+    "post-impact waterline/settling interval",
+    "new native save/reopen, export/reopen and independent rebuild"
+  ],
+  "required_artifacts": [
+    {
+      "id": "intact_source",
+      "planned_output": "Native intact-model inspection plus source archive and counts",
+      "purpose": "Confirm the recognizable full hull and source correspondence",
+      "status": "source package checked; new native artifact pending"
+    },
+    {
+      "id": "wood_fracture_closeup",
+      "planned_output": "Native close-up and piece/UV/interior measurements",
+      "purpose": "Show wood-grain fracture detail and realistic scale variations",
+      "status": "not-tested"
+    },
+    {
+      "id": "constraints_and_loads",
+      "planned_output": "Native constraint network plus actual force/load visualization with units, legend, frame and sampled values",
+      "purpose": "Make spatial load transfer and localized failures inspectable; distinguish measured loads from illustrative color",
+      "status": "not-tested"
+    },
+    {
+      "id": "collision_guides",
+      "planned_output": "Native visible/proxy overlay or guides with measured proxy fit and volume caveats",
+      "purpose": "Expose collision approximations affecting impact and buoyancy",
+      "status": "not-tested"
+    },
+    {
+      "id": "mass_data",
+      "planned_output": "Sanitized per-piece mass/density/volume table with methods and units",
+      "purpose": "Bind motion and buoyancy to actual native values",
+      "status": "not-tested"
+    },
+    {
+      "id": "impact_evidence",
+      "planned_output": "Actual consecutive native impact frames, an elevated view and close diagnostic view",
+      "purpose": "Frame the upward/outward under-hull water plume and actual local wood break front together; keep the hull readable through the blast",
+      "status": "not-tested"
+    },
+    {
+      "id": "post_impact_flotation",
+      "planned_output": "Actual post-impact native frames and waterline/motion/clearance metrics across a contiguous interval",
+      "purpose": "Distinguish free-floating debris from floor/wall support or a submerged sinking core",
+      "status": "not-tested"
+    }
+  ],
+  "camera_plan": {
+    "record_kind": "art direction target, not executed native settings",
+    "view": "Elevated three-quarter framing that contains both the localized water-blast plume and the hull break front",
+    "occlusion": "Use the actual peak plume/debris bounds to frame the shot; avoid a foreground wall or liquid curtain concealing the critical wood failure region",
+    "detail": "Use actual close-up diagnostics for constraint failure and timber debris; label any hidden-water guide view",
+    "whole_scene": "Retain enough water context and free space around the hull to assess physical motion"
+  },
+  "media_plan": {
+    "timing": "Target consecutive native frames on a24fps solver timeline; actual frame count, cache fps and duration remain to be verified",
+    "color_pipeline": "color-pipeline-summary.json",
+    "format": "Native linear Rec.709 EXR; sRGB stills; explicit BT.709 limited-range YUV420 H.264",
+    "tone_mapping": "none currently adopted",
+    "denoise": "none currently adopted",
+    "final_review": "Native pixels, normal-speed motion, silence/audio intent and exact-bound DCC-CUA playback are separate pending stages",
+    "whitewater": "Deferred secondary foam/spray/bubbles from actual cached surface/vel fields, container and collisions after the primary pass; no primary-physics acceptance inferred"
+  },
+  "publication": {
+    "selected": false,
+    "commit_or_upload_this_revision": "Source/plan progress only; no final selection or success publication",
+    "existing_draft_pr": "https://github.com/dcc-mcp/showcase/pull/56",
+    "selection_condition": "Root accepts new native artifacts, physics evidence and final media before selection; no old film promoted"
+  },
+  "rights": "SOURCE-INTACT.md",
+  "not_claimed": [
+    "New native wood-fracture geometry counts or successful solve",
+    "Natural local breakage or stable flotation from the earlier Bang diagnostic",
+    "Completed new film, original timing verification, full-sequence replay or browser playback",
+    "Combined adapter runtime acceptance from independent PR CI"
+  ],
+  "primary_effect": {
+    "record_kind": "current user-directed target, not a measured result",
+    "event": "Localized under-hull FLIP water blast directed upward and outward",
+    "source_shape_intent": "Radial/spiky liquid plume from a shaped initial liquid source and actual velocity field; no copied user screenshot",
+    "physical_goal": "Actual FLIP feedback loads native wood constraints; detached debris then falls, interacts with water and may float",
+    "final_hero": "Water-blast plume and native wood break front together; the prior dam-wave is not the current hero"
+  },
+  "reference_metadata": "production-references.json"
+}

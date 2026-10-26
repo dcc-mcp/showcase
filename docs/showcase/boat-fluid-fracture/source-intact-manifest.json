@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "record_kind": "Source packaging measurements; new native fracture is not yet accepted",
+  "source_role": "Intact Rodin input for planned native Houdini wood fracture",
+  "historical_comparison": "source-model.zip and model-manifest.json retain the separate Bang 17-part comparison unchanged",
+  "generation": {
+    "reference": "boat-reference.jpg",
+    "reference_prompt": "imagegen-prompt.json",
+    "image_generator": "built-in",
+    "image_generator_model": "Unknown",
+    "rodin_parameters": {
+      "tier": "Gen-2.5-Medium",
+      "geometry_file_format": "obj",
+      "material": "PBR",
+      "mesh_mode": "Raw",
+      "seed": 4172,
+      "prompt": "One intact wooden workboat hull with thick timber planks, open interior, two bench seats and visible internal ribs. Match the image silhouette and construction. Single complete boat, no water or ground, no mast, sails, ropes, people, engine or cargo. Clean watertight hull, preserve hollow open interior, retain full bow and stern. Realistic aged brown timber, PBR textures."
+    }
+  },
+  "geometry": {
+    "object_count": 1,
+    "object_names": [
+      "model"
+    ],
+    "vertex_position_count": 249960,
+    "uv_coordinate_count": 262894,
+    "normal_count": 390147,
+    "triangle_count": 500000,
+    "triangle_corner_count": 1500000,
+    "all_face_corners_reference_uv": true,
+    "all_face_corners_reference_normals": true,
+    "all_indices_in_range": true,
+    "all_numeric_coordinates_finite": true,
+    "bounds_min_source_units": [
+      -0.396417,
+      -0.263425,
+      -0.949114
+    ],
+    "bounds_max_source_units": [
+      0.39741,
+      0.248862,
+      0.948689
+    ],
+    "source_physical_units": "unspecified",
+    "measurement_method": "Parsed delivered OBJ text; not a new native fracture or destination-import acceptance",
+    "watertightness_verified": false
+  },
+  "original_obj": {
+    "sha256": "0b4757cd60e5912c9f6a756f418f409d6dc6529dbaf00283b03c6ef21942ee02",
+    "bytes": 53887797
+  },
+  "portable_obj": {
+    "path": "boat.obj",
+    "sha256": "c728f8aa93f934c8339fe9f47543eea99103ac0d5a098f30ffe595a905a783fc",
+    "bytes": 53887825,
+    "modification": "Only prepended relative mtllib/usemtl directives; full original OBJ payload unchanged"
+  },
+  "archive": {
+    "path": "source-intact.zip",
+    "sha256": "0a8583b3f25cfcf40d1b1df5f91369310bb1a35f6a5b010de1f87946dc3caef3",
+    "bytes": 25372781,
+    "members": [
+      {
+        "path": "SOURCE.md",
+        "bytes": 2858,
+        "sha256": "d51dd7ee17d9c2cd4ee35a483bcc222c39c7ca2b6f89da2b3e84b9e7592dccb8"
+      },
+      {
+        "path": "boat.mtl",
+        "bytes": 57,
+        "sha256": "f3be93bd466371eccfcdbaef577292d4f5c0fd8fea9ac7d5439a3ca48032bcc7"
+      },
+      {
+        "path": "boat.obj",
+        "bytes": 53887825,
+        "sha256": "c728f8aa93f934c8339fe9f47543eea99103ac0d5a098f30ffe595a905a783fc"
+      },
+      {
+        "path": "material.json",
+        "bytes": 534,
+        "sha256": "077a68c20fc2e8238524bf3fbe67d83afa13ec17719d848a7f32b8b94eb22424"
+      },
+      {
+        "path": "textures/texture_diffuse.png",
+        "bytes": 4363574,
+        "sha256": "0ce0dca362a9e00a3126d79243969906e3dfafd7d8a4c1039647b909925f68df"
+      },
+      {
+        "path": "textures/texture_metallic.png",
+        "bytes": 766438,
+        "sha256": "8007a87478d6e561595744a4a8200bcd0b3949442748d549dad2ea2b56c0be12"
+      },
+      {
+        "path": "textures/texture_normal.png",
+        "bytes": 3729987,
+        "sha256": "e0ea695d86d0b9ffec558c31b2e60a0535d71269520eb95f2d2ea9c492f437b1"
+      },
+      {
+        "path": "textures/texture_pbr.png",
+        "bytes": 2220569,
+        "sha256": "bdfdb364b577a44dc638c1dea36172e980dbb90aef58aae71475604df884ff8d"
+      },
+      {
+        "path": "textures/texture_roughness.png",
+        "bytes": 976382,
+        "sha256": "d3808fa78708c894a47f07608189396c5fb8390711daf85c5adc0fa476e8886d"
+      }
+    ]
+  },
+  "textures": [
+    {
+      "path": "textures/texture_diffuse.png",
+      "sha256": "0ce0dca362a9e00a3126d79243969906e3dfafd7d8a4c1039647b909925f68df",
+      "bytes": 4363574,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8,
+      "source_bytes_preserved": true
+    },
+    {
+      "path": "textures/texture_metallic.png",
+      "sha256": "8007a87478d6e561595744a4a8200bcd0b3949442748d549dad2ea2b56c0be12",
+      "bytes": 766438,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8,
+      "source_bytes_preserved": true
+    },
+    {
+      "path": "textures/texture_normal.png",
+      "sha256": "e0ea695d86d0b9ffec558c31b2e60a0535d71269520eb95f2d2ea9c492f437b1",
+      "bytes": 3729987,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8,
+      "source_bytes_preserved": true
+    },
+    {
+      "path": "textures/texture_pbr.png",
+      "sha256": "bdfdb364b577a44dc638c1dea36172e980dbb90aef58aae71475604df884ff8d",
+      "bytes": 2220569,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8,
+      "source_bytes_preserved": true
+    },
+    {
+      "path": "textures/texture_roughness.png",
+      "sha256": "d3808fa78708c894a47f07608189396c5fb8390711daf85c5adc0fa476e8886d",
+      "bytes": 976382,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8,
+      "source_bytes_preserved": true
+    }
+  ],
+  "archive_checks": {
+    "crc_test": "passed",
+    "duplicate_members": false,
+    "relative_safe_member_paths": true,
+    "regular_files_only": true,
+    "original_obj_payload_exact": true,
+    "original_five_texture_payloads_exact": true,
+    "relative_material_links_resolve_within_archive": true
+  },
+  "provider_sources": [
+    {
+      "url": "https://hyper3d.ai/legal/terms",
+      "checked_on": "2026-10-26"
+    },
+    {
+      "url": "https://hyper3d.ai/legal/copyright-license",
+      "checked_on": "2026-10-26"
+    },
+    {
+      "url": "https://docs.hyper3d.ai/en/api-specification/rodin-gen2-5",
+      "checked_on": "2026-10-26"
+    }
+  ],
+  "rights_status": "Provider terms and applicable account entitlement govern use. Links do not establish independent legal clearance. No additional artwork redistribution, training or evaluation-data grant; repository MIT software license is not assigned to these assets.",
+  "not_claimed": [
+    "Native wood-fracture geometry counts or constraints",
+    "New destination import, native save/reopen or blank-scene rebuild",
+    "Watertightness or engineering hull certification",
+    "Completed fluid-induced fracture or fragment flotation",
+    "Complete PBR binding or rendered material parity",
+    "Independent rights clearance or additional artwork license"
+  ]
+}

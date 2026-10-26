@@ -1,6 +1,6 @@
-# Split boat source and generation record
+# Historical split-boat comparison source and generation record
 
-Recorded 2026-10-26. This package contains the actual Hyper3D Bang split model used for the assembled Houdini preview. It is source geometry for a production draft; it contains no completed destruction simulation.
+Recorded 2026-10-26. The active intact-source native-fracture plan uses [source-intact.zip](source-intact.zip) and [SOURCE-INTACT.md](SOURCE-INTACT.md); this split package remains a comparison. This package contains the actual Hyper3D Bang split model used for the assembled Houdini preview. It is source geometry for a production draft; it contains no completed destruction simulation.
 
 ## Actual generation sequence
 

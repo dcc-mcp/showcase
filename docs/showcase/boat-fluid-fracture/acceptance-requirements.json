@@ -6,6 +6,12 @@
   "record_kind": "Acceptance requirements; unmeasured targets are not results",
   "requirements": [
     {
+      "id": "intact_source_native_acceptance",
+      "status": "not-tested",
+      "needed": "Delivered intact archive import/save/reopen/export/reopen; actual native wood-fracture piece counts, cut/UV policy, grain, constraints, mass data and collision guides",
+      "packaging_evidence": "source-intact-manifest.json"
+    },
+    {
       "id": "source_geometry",
       "status": "passed",
       "scope": "Portable split-source import, HIP save/reopen and Bgeo geometry export/reimport",
@@ -20,7 +26,7 @@
     {
       "id": "fluid_driven_breakage",
       "status": "not-tested",
-      "needed": "Terminal consecutive-frame metrics with part identities, measured hydrodynamic loads, threshold crossings, release events and a comparable no-impact-loading control"
+      "needed": "Actual localized under-hull FLIP water-blast feedback, native wood spatial constraints, sampled per-piece loading and local break events, plus a comparable no-blast control; old Bang global-load release is comparison only"
     },
     {
       "id": "fragment_flotation",
@@ -48,7 +54,7 @@
     {
       "id": "continuous_final_media",
       "status": "not-tested",
-      "needed": "Actual consecutive native frame sequence, final MP4/poster, hashes, codec/dimensions/fps/frame count/duration, full decode and source timing provenance"
+      "needed": "Actual consecutive native water-blast frames on the verified solver timeline, target24fps, final MP4/poster, exact hashes/codec/timing and full decode; no old dam-wave or progress pilot promoted"
     },
     {
       "id": "pixel_motion_audio_review",
@@ -74,7 +80,7 @@
     {
       "id": "full_sequence_rebuild",
       "status": "not-tested",
-      "needed": "Full 96-frame independent solve and declared terminal fracture/flotation equivalence; the passing two-frame check does not cover this"
+      "needed": "Independent complete solve of the declared new native-fracture timeline with source/constraint/cache/fracture/flotation comparisons; earlier two-frame Bang check does not cover this"
     },
     {
       "id": "first_frame_rebuild_render",
@@ -88,5 +94,7 @@
       "scope": "Same-setup four-frame feedback-disabled control only; all 17 parts attached and zero nonzero loading/release",
       "evidence": "feedback-control-summary.json"
     }
-  ]
+  ],
+  "active_candidate": "intact_Rodin_native_wood_fracture_FLIP_water_blast",
+  "historical_scope": "Existing passed source/rebuild/render/control entries apply to the Bang17 comparison only"
 }

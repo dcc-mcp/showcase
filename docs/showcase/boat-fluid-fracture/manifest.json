@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "recorded_on": "2026-10-26",
-  "status": "unselected_production_draft_in_progress",
+  "status": "unselected_intact_native_wood_water_blast_pilot_pending",
   "houdini_application": "Houdini Commercial",
   "houdini_version": "22.0.368",
   "reference": "imagegen-prompt.json",
@@ -9,8 +9,8 @@
   "files": [
     {
       "path": "acceptance-requirements.json",
-      "sha256": "7ea1fc5bdf49084794d50feae8ba4f15127a068b2ed03736caded1c2b22a19e2",
-      "bytes": 4341
+      "sha256": "10c1f1201892d879284e61e829d950d984b9eedcf5f0f2e64c5b623ceed07ae0",
+      "bytes": 5022
     },
     {
       "path": "boat-reference.jpg",
@@ -27,8 +27,13 @@
     },
     {
       "path": "collection-case.draft.json",
-      "sha256": "37d14e705f4b6db02e3a3a0edefb3be9a8ed60ad2faa961ba6822c2084beff1b",
-      "bytes": 12770
+      "sha256": "9e2d184ca2ad262836ccc1901dc035472ac447a5f5943137c0a7e9212fbab237",
+      "bytes": 17836
+    },
+    {
+      "path": "color-pipeline-summary.json",
+      "sha256": "66b114aebdb09ceebaa2f6760711155d1a607800879666c46e0a22687ed54a5c",
+      "bytes": 1013
     },
     {
       "path": "feedback-control-summary.json",
@@ -42,16 +47,35 @@
     },
     {
       "path": "initial-water-state.jpg",
-      "sha256": "9155d6c3ec0be01eec50c59501a412da6c1d5cc3ed526f58a964527992fc417d",
-      "bytes": 43946,
+      "sha256": "7b9a6de7f0aac598e71a953bec80f86e9be873e07e77080ba4795a4f72e5ad7b",
+      "bytes": 47601,
       "width": 960,
       "height": 540,
-      "bit_depth": 8
+      "bit_depth": 8,
+      "derivation": {
+        "source_native_exr": "boat.0001.exr",
+        "source_exr_sha256": "3d723f36659e2294e10f569adf801b85d750cafc8348e77542b1be820e96fc24",
+        "source_exr_bytes": 989554,
+        "source_oiio_color_space": "lin_rec709",
+        "source_resolution_px": [
+          960,
+          540
+        ],
+        "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+        "output_rgb_format": "RGB24",
+        "jpeg_quality": 82,
+        "jpeg_encoder": "Pillow 12.3.0",
+        "jpeg_subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "retouched": false,
+        "exif_preserved": false
+      }
     },
     {
       "path": "localization-en.draft.json",
-      "sha256": "89c966d8423d595afb3db5178c849d69ba1a6b84214798ffa5f3756ec52baea0",
-      "bytes": 15376
+      "sha256": "1cd09d83df45a14b244897c773c9d73239963ac76986bc6329a3920445e0c902",
+      "bytes": 28705
     },
     {
       "path": "material-repair-summary.json",
@@ -64,6 +88,43 @@
       "bytes": 7786
     },
     {
+      "path": "natural-fracture-brief.json",
+      "sha256": "0708565175302c1dbdf4467584d326ac78a1a970fa74b3c7ea1cdcd52b9efaf2",
+      "bytes": 7609
+    },
+    {
+      "path": "parts-exploded.jpg",
+      "sha256": "38b6d7aeb7249d95ed44b85a0ebf5d259073b6a8eaeb6daaa43aa4868f06842c",
+      "bytes": 21605,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "source_native_exr": "parts-exploded-close.exr",
+        "source_exr_sha256": "aef7881ea95b68559866c58b7bede1cde9c3360c508971f329cba40025077cf6",
+        "source_exr_bytes": 282751,
+        "source_oiio_color_space": "lin_rec709",
+        "source_resolution_px": [
+          960,
+          540
+        ],
+        "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+        "output_rgb_format": "RGB24",
+        "jpeg_quality": 82,
+        "jpeg_encoder": "Pillow 12.3.0",
+        "jpeg_subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "retouched": false,
+        "exif_preserved": false
+      }
+    },
+    {
+      "path": "parts-preview.json",
+      "sha256": "4e175bb0d54bc87dce2395e95632e79598b0936876eb85afadcfd8651f1e3406",
+      "bytes": 1849
+    },
+    {
       "path": "portable-acceptance-summary.json",
       "sha256": "b7fccf042c35dc1db5448051776b0e47c07306157af12755488f254058e3777a",
       "bytes": 8007
@@ -72,6 +133,11 @@
       "path": "probe-summary.json",
       "sha256": "f86f01618695768e50b50991af761c4632d247e94a5c97de85929ce6359bec01",
       "bytes": 30326
+    },
+    {
+      "path": "production-references.json",
+      "sha256": "cf8f6cb7beb703b4acab46c455d863c217a979b6ec3515ef7fb3adef108f82d2",
+      "bytes": 4232
     },
     {
       "path": "rebuild-summary.json",
@@ -155,13 +221,13 @@
     },
     {
       "path": "replay/scripts/cache_and_measure.py",
-      "sha256": "c5644e4e5d7af0a329433eb71278061c044c96233e658a6c359303e03b6699d1",
-      "bytes": 8497
+      "sha256": "1c92a47e8f4202e0aa16b5f006e3f0fb065aac01fb34cf3ac636f93a562b3c37",
+      "bytes": 8684
     },
     {
       "path": "replay/scripts/check_flotation.py",
-      "sha256": "5118d788f7962476d70059bf276011cc418765c0e32799f5b6a0a3fcf3533f51",
-      "bytes": 12759
+      "sha256": "0518c6f42f3f9b0de6f4a224d5c515384aead070bfaa2db1cff3d9d488ff1b4a",
+      "bytes": 14604
     },
     {
       "path": "replay/scripts/finish_scene.py",
@@ -190,13 +256,32 @@
     },
     {
       "path": "replay/USAGE.md",
-      "sha256": "f98cac23cbb1b3cd82ddedc04f0b90141c953585656868bbba69f8b2b06d42b1",
-      "bytes": 8285
+      "sha256": "082a289a857abed79b902b89e9ef31d47fb35d696e37e92d4f137e3adef1d5d7",
+      "bytes": 8536
     },
     {
       "path": "reproduction-brief.md",
-      "sha256": "666ce09fff5645b4ded8c8ce8d95ffffb4d064cafedc7887f64c965175841799",
-      "bytes": 4593
+      "sha256": "d2291099354f0b2105f61fbadab179594f3d71c2e9c5473ec5468f47d76f2376",
+      "bytes": 3948
+    },
+    {
+      "path": "source-intact-manifest.json",
+      "sha256": "27e56e7642b5115ffb113de6323428971cd675b7cf7567809c84d724453e0be3",
+      "bytes": 6837
+    },
+    {
+      "path": "SOURCE-INTACT.md",
+      "sha256": "cf9a64b2dd45ec6c271d370f3f8ed9dbdd956fee1a74eb498aab1a725fd3b418",
+      "bytes": 2877
+    },
+    {
+      "path": "source-intact.zip",
+      "sha256": "0a8583b3f25cfcf40d1b1df5f91369310bb1a35f6a5b010de1f87946dc3caef3",
+      "bytes": 25372781,
+      "container_kind": "ZIP",
+      "member_count": 9,
+      "triangle_count": 500000,
+      "source_manifest": "source-intact-manifest.json"
     },
     {
       "path": "source-model.zip",
@@ -209,16 +294,35 @@
     },
     {
       "path": "SOURCE.md",
-      "sha256": "10e299cc632a62f95384182bcb342a03c66c588980cf20b10cd9ce7b8a64b269",
-      "bytes": 4438
+      "sha256": "9bc4c3b4126c0917b37657254459fee37c9e1863bf898359b32dd872a5f1b681",
+      "bytes": 4660
     },
     {
       "path": "split-assembled.jpg",
-      "sha256": "ac7306ca0f2850cbdcd5a218a56874c28a966e8fe59e7a13397b105d9781d527",
-      "bytes": 22723,
+      "sha256": "3e7c3c19df7ea968b03a12866e0e094a4333a4be01833ed52ca526a1da0c3068",
+      "bytes": 21637,
       "width": 1280,
       "height": 720,
-      "bit_depth": 8
+      "bit_depth": 8,
+      "derivation": {
+        "source_native_exr": "split-assembled.exr",
+        "source_exr_sha256": "0a99275de5782dd848ef70606b240148980fb0e4bf17cda31f5372373de3a28e",
+        "source_exr_bytes": 280771,
+        "source_oiio_color_space": "lin_rec709",
+        "source_resolution_px": [
+          1280,
+          720
+        ],
+        "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+        "output_rgb_format": "RGB24",
+        "jpeg_quality": 82,
+        "jpeg_encoder": "Pillow 12.3.0",
+        "jpeg_subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "retouched": false,
+        "exif_preserved": false
+      }
     }
   ],
   "inventory_scope": "Current public artifacts and parameterized replay; final simulation cache and movie are not included. Rehash after any further replay or media change."

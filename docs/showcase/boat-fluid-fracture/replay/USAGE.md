@@ -112,10 +112,13 @@ that reused an already advanced DOP state.
 
 After a sufficiently long finished run, optional `13-check-flotation.json`
 samples the last 12 cached frames against local water-surface rays for each
-recorded fluid-released part. It reports missing samples, submerged/airborne
-pieces and continuing vertical motion. Its declared 0.2 m waterline tolerance
-and speed limits are VFX observations; it never turns a short/failed window into
-a pass.
+initially glued part observed physically detaching. It reports direct fluid-rule
+and native glue-dynamics release origins separately, plus missing samples,
+submerged/airborne pieces and continuing vertical motion. Both visible and
+proxy bounds require at least 0.2 m clearance from the solid floor and walls;
+otherwise it reports possible boundary contact. The water rays, 0.2 m waterline
+tolerance, speed limits and observation window remain VFX tests; a short or
+failed window cannot pass.
 
 ## Render cached geometry explicitly
 

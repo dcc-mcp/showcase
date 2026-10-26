@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "record_kind": "Public reference metadata and documentation review; not video playback or production acceptance",
+  "asset_reuse": "Concept and API references only; no tutorial media, project files or private user screenshots copied",
+  "sources": [
+    {
+      "id": "user_water_explosion_reference",
+      "author": "DanCortesVfx",
+      "title": "Create Water Explosions in Houdini | FLIP Simulation Tutorial",
+      "url": "https://www.youtube.com/watch?v=w3yHqQQ1ODQ",
+      "review_scope": "Author/title and indexed description only; direct video fetch throttled and no playback or listening review",
+      "learned": "The indexed description separates a primary FLIP pass from foam, spray and bubbles.",
+      "application": "Use a localized under-hull liquid blast as the primary event; evaluate whitewater detail after the primary native pass."
+    },
+    {
+      "id": "similar_underwater_blast_reference",
+      "author": "Diyz3n H20",
+      "title": "Underwater blast reference; exact published title not independently retrieved",
+      "url": "https://www.youtube.com/watch?v=o2E8LtnitvY",
+      "review_scope": "Production research supplied author and indexed chapter metadata; current direct fetch unavailable; no playback or listening review",
+      "reported_chapters": [
+        {
+          "time": "3:08",
+          "topic": "velocity import",
+          "basis": "Reported chapter metadata, paraphrased; not independently played"
+        },
+        {
+          "time": "6:25",
+          "topic": "explosion look",
+          "basis": "Reported chapter metadata, paraphrased; not independently played"
+        }
+      ],
+      "application": "Reference for initial velocity shaping and readable liquid-plume silhouette, not a copied setup or accepted result."
+    },
+    {
+      "id": "large_scale_fluids_overview",
+      "author": "CGCircuit; hosted on SideFX Learning",
+      "title": "Large Scale Fluids",
+      "url": "https://www.sidefx.com/tutorials/houdini-essentials-large-scale-fluids/",
+      "review_scope": "Public overview and chapter listing read; Houdini18 course, payment-required full course not acquired or watched",
+      "learned": "The overview treats FLIP, collision volumes, caching, whitewater and meshing as separate production steps.",
+      "application": "Retain collision and cache evidence, then add secondary detail from the accepted liquid cache."
+    },
+    {
+      "id": "native_wood_fracture_documentation",
+      "author": "SideFX",
+      "title": "RBD Material Fracture",
+      "url": "https://www.sidefx.com/docs/houdini/nodes/sop/rbdmaterialfracture.html",
+      "review_scope": "Current Houdini22 documentation read; not a native execution result",
+      "learned": "Native wood mode exposes grain, cuts, detail and constraints, with diagnostic displays.",
+      "application": "Use actual native wood fracture and measured constraint geometry; do not substitute Bang17 part release."
+    },
+    {
+      "id": "whitewater_source_documentation",
+      "author": "SideFX",
+      "title": "Whitewater Source 3.0",
+      "url": "https://www.sidefx.com/docs/houdini/nodes/sop/whitewatersource.html",
+      "review_scope": "Current Houdini22 documentation read; not a sourced or cached result",
+      "learned": "The source derives emission from liquid surface/velocity fields; curvature, acceleration and vorticity provide emission criteria.",
+      "application": "A deferred, separate post-cache detail pass must use actual liquid fields and retain its own settings/counts."
+    },
+    {
+      "id": "whitewater_solver_documentation",
+      "author": "SideFX",
+      "title": "Whitewater Solver SOP",
+      "url": "https://www.sidefx.com/docs/houdini/nodes/sop/whitewatersolver.html",
+      "review_scope": "Current Houdini22 documentation read; not a completed whitewater simulation",
+      "learned": "The SOP consumes emission and liquid fields, container and collision data to simulate secondary particles.",
+      "application": "Add foam/spray/bubbles only after a primary native pass and keep boat physics acceptance separate."
+    }
+  ]
+}

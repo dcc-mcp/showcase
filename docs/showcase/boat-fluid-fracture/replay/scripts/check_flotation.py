@@ -44,6 +44,19 @@ def visible_part_bounds(geometry):
     return {name: bounds_from_positions(points.values()) for name, points in groups.items()}
 
 
+def physical_release_events(frames):
+    initially_glued = {body["name"] for body in frames[0]["pieces"] if body["glueobject"]}
+    events = {}
+    for frame in frames:
+        for body in frame["pieces"]:
+            name = body["name"]
+            if name in initially_glued and name not in events and not body["glueobject"]:
+                marked = body.get("hydrodynamic_load", {}).get("released") == 1
+                events[name] = {"first_release_frame": frame["frame"],
+                                "release_origin": "fluid_load_rule" if marked else "native_glue_dynamics"}
+    return initially_glued, events
+
+
 def classify(samples, expected_count, tolerance=0.2):
     if len(samples) < expected_count:
         return "insufficient_window"
@@ -80,11 +93,8 @@ def check_flotation(hou, output_dir, water_surface_path, water_cache_path, piece
     assert metrics["status"] in ("cached", "stopped"), "Analyze a finished or explicitly stopped run"
     frames = metrics["frames"]
     assert frames and all(frames[i]["frame"] + 1 == frames[i + 1]["frame"] for i in range(len(frames) - 1))
-    release_frames = {}
-    for frame in frames:
-        for body in frame["pieces"]:
-            if body.get("hydrodynamic_load", {}).get("released") == 1:
-                release_frames.setdefault(body["name"], frame["frame"])
+    initially_glued, release_events = physical_release_events(frames)
+    release_frames = {name: event["first_release_frame"] for name, event in release_events.items()}
     water_surface = hou.node(water_surface_path)
     water_cache = hou.node(water_cache_path)
     piece_cache = hou.node(piece_cache_path)
@@ -96,6 +106,10 @@ def check_flotation(hou, output_dir, water_surface_path, water_cache_path, piece
     samples = {name: [] for name in release_frames}
     report = {"scope": "coarse_vfx_proxy_observed_window", "flotation_verified": False,
               "piece_bounds_source": "cached_visible_mesh", "vertical_speed_source": "native_position_velocity",
+              "release_detection": "initial native glue attachment became empty",
+              "initially_glued_piece_count": len(initially_glued),
+              "direct_fluid_rule_release_count": sum(event["release_origin"] == "fluid_load_rule" for event in release_events.values()),
+              "native_glue_dynamics_release_count": sum(event["release_origin"] == "native_glue_dynamics" for event in release_events.values()),
               "minimum_solid_boundary_clearance_m": BOUNDARY_CLEARANCE_M,
               "container_inner_planes_m": CONTAINER_INNER_PLANES_M, "ceiling": "open",
               "boundary_geometry_basis": "recipes/02-sources-and-proxy.json: box inner wall faces and floor top",
@@ -170,6 +184,7 @@ def check_flotation(hou, output_dir, water_surface_path, water_cache_path, piece
         verdict = classify(rows, window_frames)
         speeds = [row["vertical_speed"] for row in rows if "vertical_speed" in row]
         report["pieces"][name] = {"verdict": verdict, "first_release_frame": release_frames[name],
+            "release_origin": release_events[name]["release_origin"],
             "max_abs_vertical_speed": max((abs(speed) for speed in speeds), default=None),
             "mean_vertical_speed": statistics.mean(speeds) if speeds else None, "samples": rows}
     passing = sum(piece["verdict"] == "floating_observed" for piece in report["pieces"].values())
@@ -185,6 +200,16 @@ def check_flotation(hou, output_dir, water_surface_path, water_cache_path, piece
 if "hou" in globals():
     result = check_flotation(hou, **context)
 elif __name__ == "__main__":
+    initial, events = physical_release_events([
+        {"frame": 1, "pieces": [{"name": "native", "glueobject": "root"},
+                                 {"name": "direct", "glueobject": "root"},
+                                 {"name": "never_glued", "glueobject": ""}]},
+        {"frame": 2, "pieces": [{"name": "native", "glueobject": ""},
+                                 {"name": "direct", "glueobject": "", "hydrodynamic_load": {"released": 1}},
+                                 {"name": "never_glued", "glueobject": ""}]}])
+    assert initial == {"native", "direct"} and set(events) == initial
+    assert events["native"] == {"first_release_frame": 2, "release_origin": "native_glue_dynamics"}
+    assert events["direct"]["release_origin"] == "fluid_load_rule"
     assert bounds_from_positions(((4, 5, 6), (7, 8, 9))) == {
         "min": [4, 5, 6], "max": [7, 8, 9], "center": [5.5, 6.5, 7.5]}
     assert bounds_from_positions(((-5, -4, -3), (-2, -1, -0.5))) == {
@@ -201,4 +226,4 @@ elif __name__ == "__main__":
     wall_supported = boundary_clearance((3.6, -0.1, -0.2), (4.0, 0.2, 0.2))
     assert classify([dict(row, boundary_clearance_m=grounded) for _ in range(12)], 12) == "boundary_contact_possible"
     assert classify([dict(row, boundary_clearance_m=wall_supported) for _ in range(12)], 12) == "boundary_contact_possible"
-    print("PASS: visible bounds and floating/submerged/ejected/moving/short-window/grounded/wall-supported math; no host")
+    print("PASS: physical release origins, visible bounds and flotation/boundary classifier math; no host")

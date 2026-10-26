@@ -1,0 +1,24 @@
+{
+  "source_exr_color_metadata": {
+    "oiio:ColorSpace": "lin_rec709"
+  },
+  "source_exr_sha256": "743df4f35dca141405558cc3d3a33845483a874f009dd928a6f9edff4c4cac0c",
+  "ffmpeg_version": "8.1.1-full_build-www.gyan.dev",
+  "still_filter": "format=gbrpf32le,zscale=pin=bt709:tin=linear:min=gbr:rin=full:p=bt709:t=iec61966-2-1:m=gbr:r=full,format=rgb24",
+  "video_filter": "format=gbrpf32le,zscale=pin=bt709:tin=linear:min=gbr:rin=full:p=bt709:t=bt709:m=bt709:r=limited,format=yuv420p",
+  "video_explicit_tags": {
+    "transfer": "bt709",
+    "matrix": "bt709",
+    "primaries": "bt709",
+    "range": "tv"
+  },
+  "background": "RGB black from native render; no alpha channel in H.264",
+  "tone_mapping": "none; SDR highlight clipping",
+  "denoise": "none adopted",
+  "pilot_video": "17-frame encode fully decoded; ffprobe tags match declared video pipeline",
+  "not_claimed": [
+    "Filmic or ACES grade",
+    "Temporal denoising",
+    "Final-sequence media acceptance from this pilot"
+  ]
+}
