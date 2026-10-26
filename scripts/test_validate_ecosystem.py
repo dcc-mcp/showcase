@@ -84,9 +84,18 @@ class GateTests(unittest.TestCase):
     def test_build_gate_preserves_existing_output(self):
         (self.base/'ecosystem-production.json').unlink()
         output = self.root/'_site'; output.mkdir(); (output/'keep.txt').write_text('keep')
-        with patch('validate_collection.validate', return_value=[]):
+        with patch('validate_collection.validate', return_value=[]), patch('publication_intent.validate', return_value=([], [])):
             published, errors, _ = build_site.build(str(self.root), '_site')
         self.assertEqual(published, []); self.assertTrue(errors)
+        self.assertTrue(any('ecosystem-production.json' in error for error in errors))
+        self.assertEqual((output/'keep.txt').read_text(), 'keep')
+    def test_publication_decision_blocks_before_ecosystem_and_output_replacement(self):
+        output = self.root/'_site'; output.mkdir(); (output/'keep.txt').write_text('keep')
+        problems = ['publication intent: fixture needs an explicit decision']
+        with patch('validate_collection.validate', return_value=[]), patch('publication_intent.validate', return_value=(problems, [])), patch('validate_ecosystem.validate', return_value=[]) as ecosystem:
+            published, errors, _ = build_site.build(str(self.root), '_site')
+        self.assertEqual(published, []); self.assertEqual(errors, problems)
+        ecosystem.assert_not_called()
         self.assertEqual((output/'keep.txt').read_text(), 'keep')
     def test_pages_gate_runs_before_upload(self):
         workflow = (Path(__file__).resolve().parents[1]/'.github/workflows/pages.yml').read_text()

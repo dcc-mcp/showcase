@@ -60,14 +60,14 @@
 
 首轮 `set_render_settings` 回报分辨率 640×800，但实际输出仍为相机设置的 960×1200。本轮最终通过 typed 相机参数显式设置 1200×1500，并核对真实 PNG 尺寸；不把工具的 applied 字段单独作为成图证据。专属 loopback gateway 用于避开机器上并发运行时的版本接管，未改动其他宿主。
 
-本例验证保存、重开、计数、渲染落盘、相对输出路径及同一 Houdini 的 OBJ 回导入；未在其他 DCC 重导入 OBJ 验证，也未验证 GUI 交互、其他 Houdini 版本、Karma、动画或封闭流形认证。程序化控制链保存在本地 HIP，公开几何采用 OBJ。
+原始 Houdini 阶段验证保存、重开、计数、渲染落盘、相对输出路径及同一 Houdini 的 OBJ 回导入；当时尚未在其他 DCC 重导入 OBJ。后续生态迁移已通过 Blender MCP 实际导入公开 OBJ 并制作上文的灯光研究。GUI 交互、其他 Houdini 版本、Karma、动画和封闭流形认证仍未验证。程序化控制链保存在本地 HIP，公开几何采用 OBJ。
 
 ## 作者与许可
 
 本轮由 DCC-MCP showcase 任务通过 typed DCC-MCP 生成，未使用外部模型、图片或纹理。案例文档、模型及渲染按本仓库 MIT 许可提供；SideFX 软件和内置着色器不作为独立库重新分发。`LICENSE.txt` 保留许可全文。
 
-## 2026-10-20 网页编码修复（阶段完成，整例仍待迁移）
+## 2026-10-20 网页编码修复的历史阶段
 
-当前 hero.jpg 与 preview.jpg 已由原公开 PNG 经正式 Blender MCP 的原生图像编码重新输出，未重渲、未使用旧 JPEG 作为输入。明确使用 Standard/sRGB 保色并仅保留 RGB，不另加背景；原 PNG 字节未改，完整解码后的平均 RGB 误差均小于 1/255。详见[真实阶段回执](ecosystem-repair-2026-10-20.json)。上文普通 shell 编码和 derivatives.json 保留原历史记录，不倒改其来源。
+该阶段先将 hero.jpg 与 preview.jpg 由原公开 PNG 经正式 Blender MCP 的原生图像编码重新输出，未重渲、未使用旧 JPEG 作为输入。明确使用 Standard/sRGB 保色并仅保留 RGB，不另加背景；原 PNG 字节未改，完整解码后的平均 RGB 误差均小于 1/255。详见[真实阶段回执](ecosystem-repair-2026-10-20.json)。上文普通 shell 编码和 derivatives.json 保留原历史记录，不倒改其来源。
 
-lighting-study.jpg 的原始 PNG 尚未恢复，仍是待修复制作环节。旧 Release ZIP 中的 documentation JPEG 也仍为历史版本，不能因当前两图修复而声称下载包或整个案例通过生态门禁。原 49 次真实重放和原始 Mantra/OBJ 证据继续复用，不为格式要求盲目重做所有建模或渲染。
+当时 lighting-study.jpg 的原始 PNG 尚未恢复，因此两图修复并未完成整个案例迁移。后续已实际制作新的灯光研究、经 Blender MCP 输出三张网页 JPEG，并提供上文所列的当前下载包；相应来源与字节清单见 ecosystem-production.json。旧 Release ZIP 仍是历史版本。原 49 次真实重放和原始 Mantra/OBJ 证据继续保留；这些案例级记录不代表整个画廊已经通过严格生态门禁。

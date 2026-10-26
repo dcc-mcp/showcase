@@ -343,7 +343,7 @@
     },
     {
       "path": "docs/showcase/houdini-procedural-study/README.md",
-      "sha256": "e85219255eb9ced7d538ab2f9f2c5e29ab2af84da2b802880e8e584e0e21cb57",
+      "sha256": "ba79504e03e723bc325592dc3415ad7a83bfea0a350f8194694e1f391de2dbc2",
       "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
     },
     {
@@ -358,7 +358,7 @@
     },
     {
       "path": "docs/showcase/houdini-procedural-study/downloads.json",
-      "sha256": "42b94522eabccb4782f49ad3c619ba4e6f3645d950b77b782db6e45a42e690d1",
+      "sha256": "691302ddd238929567c129e376b241ce31edf6e132be0fc361538b6d6673d35e",
       "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
     },
     {
@@ -623,7 +623,7 @@
     {
       "archive": {
         "path": "docs/showcase/houdini-procedural-study/houdini-ecosystem-assets-2026-10-20.zip",
-        "sha256": "5bd2cefb43707bdeb6788a7803f9ca8671d2bc244bbb7c84040d09d92880ce1a"
+        "sha256": "89e3461e9b9618dd72b5b52bc874464b65235a54230d2b68d9bd6fb22d61e04b"
       },
       "members": [
         {
@@ -639,7 +639,7 @@
           "member": "README.md",
           "source": {
             "path": "docs/showcase/houdini-procedural-study/README.md",
-            "sha256": "e85219255eb9ced7d538ab2f9f2c5e29ab2af84da2b802880e8e584e0e21cb57"
+            "sha256": "ba79504e03e723bc325592dc3415ad7a83bfea0a350f8194694e1f391de2dbc2"
           },
           "kind": "support",
           "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
@@ -1181,10 +1181,11 @@
     }
   ],
   "review": {
-    "status": "verified",
+    "status": "stale",
     "evidence": {
       "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/independent-review.json",
       "sha256": "bb91616125412990e4c2eaf987fc28466976a6cf0af993e023f71ce2977f3947"
-    }
+    },
+    "reason": "Historical independent review predates the 2026-10-27 support-source/package repair; current graph review is pending. Native outputs and native acceptance receipts are unchanged; no new native execution or acceptance is claimed."
   }
 }

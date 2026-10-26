@@ -46,6 +46,11 @@ jobs:
       - name: Verify collection publication guards
         run: python scripts/test_validate_collection.py
 
+      - name: Verify explicit showcase publication decisions
+        run: |
+          python scripts/test_publication_intent.py
+          python scripts/publication_intent.py
+
       - name: Validate selected collection and provenance
         run: python scripts/validate_collection.py
 

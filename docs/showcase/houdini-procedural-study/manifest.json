@@ -13,8 +13,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "e85219255eb9ced7d538ab2f9f2c5e29ab2af84da2b802880e8e584e0e21cb57",
-      "bytes": 9945
+      "sha256": "ba79504e03e723bc325592dc3415ad7a83bfea0a350f8194694e1f391de2dbc2",
+      "bytes": 10163
     },
     {
       "path": "calls.json",
@@ -28,7 +28,7 @@
     },
     {
       "path": "downloads.json",
-      "sha256": "42b94522eabccb4782f49ad3c619ba4e6f3645d950b77b782db6e45a42e690d1",
+      "sha256": "691302ddd238929567c129e376b241ce31edf6e132be0fc361538b6d6673d35e",
       "bytes": 3031
     },
     {
@@ -203,8 +203,8 @@
     },
     {
       "path": "ecosystem-production.json",
-      "sha256": "064558bdd2471ff5364188ffbbc7925452176d8c92de1c832ea24ff0882afdb8",
-      "bytes": 65396
+      "sha256": "d0ce9f005843b642b9aab262d8bcb2ab568890982f72ad7f91010400f2684478",
+      "bytes": 65639
     },
     {
       "path": "ecosystem-repair-2026-10-20.json",
@@ -261,8 +261,8 @@
     },
     {
       "path": "houdini-ecosystem-assets-2026-10-20.zip",
-      "sha256": "5bd2cefb43707bdeb6788a7803f9ca8671d2bc244bbb7c84040d09d92880ce1a",
-      "bytes": 9229292
+      "sha256": "89e3461e9b9618dd72b5b52bc874464b65235a54230d2b68d9bd6fb22d61e04b",
+      "bytes": 9229359
     },
     {
       "path": "lighting-study.jpg",

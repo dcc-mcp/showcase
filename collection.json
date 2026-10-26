@@ -2,6 +2,501 @@
   "schema_version": 1,
   "cases": [
     {
+      "slug": "max-mechanical-iris-denoise",
+      "title": "Mechanical Iris · 机械光圈",
+      "subtitle": "3ds Max · 原生可编辑结构与引导式降噪对照",
+      "software": [
+        "3ds Max",
+        "Blender",
+        "dcc-media-enhance",
+        "Noice",
+        "dcc-cua"
+      ],
+      "capabilities": [
+        "建模",
+        "动画",
+        "渲染",
+        "后期处理",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/max-mechanical-iris-denoise/hero.jpg",
+        "alt": "真实 Arnold 渲染中的青绿色机械光圈与金色紧固件"
+      },
+      "evidence_label": "有限验证 · 原生结构、真实通道与两张 Max 界面",
+      "evidence_scope": "84 个对象的原生保存重开与 FBX 重导入、同源 OIDN/Noice 对照及 8 帧短段。两张 DCC-CUA 实际界面图包含一次后台 UIA 页签操作；完整影片、线框、安装与 MCP 通信尚未验收。",
+      "summary": "12 片叶片、12 个轴帽和 48 个独立紧固件组成 440 × 440 × 34 mm 机械光圈。展示原生主图、真实 Max 界面及 RAW／Skill OIDN／Noice 对照；短段不替代完整动画。",
+      "goal": "保留可编辑原生结构，以留存的真实引导通道比较降噪，并分别说明 SDK、界面和通信验证范围。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "制作原创机械光圈，保存并重开原生工程，检查 FBX 重导入和采样动画矩阵。保留真实线性 EXR 与引导通道，通过正式 Core Skill 调用 OIDN，并独立运行 Noice 对照。用 DCC-CUA 拍摄真实界面，分别记录已验证结果与未完成项。",
+        "note": "按实际过程整理的可复用说明，非用户逐字原话；改写配方未重新从空场景执行。"
+      },
+      "environment": [
+        {
+          "label": "3ds Max",
+          "value": "3ds Max 2024.2.14 / Python 3.10.14"
+        },
+        {
+          "label": "适配器源码候选",
+          "value": "dcc-mcp-3dsmax 0.2.18 源码候选 / e1b724483193dd6476d117cb7ecf15ccaab91422"
+        },
+        {
+          "label": "Core / Server 运行组件",
+          "value": "dcc-mcp-core 0.20.45 / dcc-mcp-server 0.20.45"
+        },
+        {
+          "label": "dcc-media-enhance",
+          "value": "0.2.0 源码候选 / f7073694ea2abef5c5b94f36e1442be076c9bb75"
+        },
+        {
+          "label": "Blender",
+          "value": "Blender 5.1.1 compositor OIDN；内嵌 OIDN 版本未独立记录，保持未知"
+        },
+        {
+          "label": "Noice",
+          "value": "MAXtoA Arnold Noice 7.2.4.1"
+        },
+        {
+          "label": "dcc-cua",
+          "value": "1.12.2"
+        },
+        {
+          "label": "实际相机与媒体",
+          "value": "45° FOV；1920 × 1440 AA3 主图；960 × 720 帧 48–55；24 fps"
+        }
+      ],
+      "tools": [
+        {
+          "name": "3ds Max DCC-MCP",
+          "description": "原生适配器处理器制作结构并检查保存重开、FBX 与采样矩阵；不据此宣称 MCP 通信或正常安装验收。"
+        },
+        {
+          "name": "dcc-media-enhance Core Skill / OIDN",
+          "description": "正式 Python Core Skill 进程内入口使用实际 beauty、normal、albedo；这是编排与真实后端验证，不是新降噪算法。"
+        },
+        {
+          "name": "Autodesk Noice",
+          "description": "单独执行的原生降噪参考，与 OIDN 使用同源输入和展示转换。"
+        },
+        {
+          "name": "dcc-cua",
+          "description": "绑定本任务原生窗口，实际捕获场景与一次后台 UIA Modify 页签操作后的状态。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "原生结构与重开",
+          "description": "84 对象、48 个独立紧固件；保存重开和 FBX 重导入在五个采样帧的最大矩阵偏差为 0。"
+        },
+        {
+          "title": "真实通道与算法对照",
+          "description": "beauty、normal、albedo 实际像素透传与原 EXR 在 1e-6 阈值内相符。保留原始输入，OIDN 与 Noice 分别执行。"
+        },
+        {
+          "title": "有限界面操作证据",
+          "description": "后台 WGC 截图和 UIA 页签操作通过；未选中对象，不宣称修改器参数、线框或时间轴操作已验收。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/max-mechanical-iris-denoise/comparison-24fps.mp4",
+          "poster": "docs/showcase/max-mechanical-iris-denoise/hero.jpg",
+          "alt": "RAW、Skill OIDN 与 Noice 的八帧对照短片",
+          "caption": "帧 48–55，24 fps，仅 1/3 秒，有意静音；完整解码不等于自然速度实际播放验收。"
+        },
+        {
+          "src": "docs/showcase/max-mechanical-iris-denoise/max-native-scene.jpg",
+          "alt": "真实 Max 相机视口、Scene Explorer 与命令面板",
+          "caption": "DCC-CUA 真实目标窗口截图；仅裁剪顶部私有路径工具栏与底部状态条并缩放编码，无涂改或合成。"
+        },
+        {
+          "src": "docs/showcase/max-mechanical-iris-denoise/max-native-modify-tab.jpg",
+          "alt": "后台 UIA 操作后的原生 Modify 页签",
+          "caption": "实际后台页签操作后截图；当前无对象选中，因此不证明修改器堆栈参数。"
+        },
+        {
+          "src": "docs/showcase/max-mechanical-iris-denoise/higher-sample-comparison.jpg",
+          "alt": "AA3 与较高采样 AA6 的同帧对照",
+          "caption": "AA6 是较高采样观察而非真值；不以此建立通用算法质量排名。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原生结构与传递",
+          "result": "pass",
+          "observed": "84 对象原生重开和 FBX 在 1/24/72/96/144 帧的采样矩阵偏差为 0。"
+        },
+        {
+          "name": "真实引导与完成记录",
+          "result": "pass",
+          "observed": "beauty、normal、albedo 像素比较在 1e-6 内，正式 Skill 完成记录与原输入哈希留存。"
+        },
+        {
+          "name": "实际 Max 界面",
+          "result": "pass",
+          "observed": "两张真实截图及一次后台 UIA 页签操作通过；更早的前台激活拒绝单独保留。"
+        },
+        {
+          "name": "完整影片与换向审阅",
+          "result": "not_run",
+          "observed": "仅完成八帧短段，完整 144 帧制作按用户安排延后。"
+        },
+        {
+          "name": "安装、通信与线框",
+          "result": "not_run",
+          "observed": "正常 MZP 安装、MCP 通信、线框与修改器参数界面未被本例证明。"
+        }
+      ],
+      "limitations": [
+        "这是公开的有限验证案例；不宣称完整影片、换向时序、实际自然速度播放或机械碰撞合格。",
+        "复用的第 48 帧与 49–55 帧采样模式不同，接缝不能独立归因于降噪闪烁。",
+        "原工程与 FBX 私有留存，公开脱敏副本和独立空场景重建未完成；相机实际为 45° FOV。",
+        "适配器与媒体工具为明确源码候选，不把源码 CI、界面截图或进程内 Skill 当作正式发布、安装和通信验收。"
+      ],
+      "resources": [
+        {
+          "label": "制作与复现报告",
+          "url": "docs/showcase/max-mechanical-iris-denoise/README.md"
+        },
+        {
+          "label": "改写的复现意图配方",
+          "url": "docs/showcase/max-mechanical-iris-denoise/recipe.json"
+        },
+        {
+          "label": "测量与验证边界",
+          "url": "docs/showcase/max-mechanical-iris-denoise/validation.json"
+        },
+        {
+          "label": "真实界面来源记录",
+          "url": "docs/showcase/max-mechanical-iris-denoise/ui-verification.json"
+        },
+        {
+          "label": "视频编码与解码记录",
+          "url": "docs/showcase/max-mechanical-iris-denoise/video-verification.json"
+        },
+        {
+          "label": "文件与哈希清单",
+          "url": "docs/showcase/max-mechanical-iris-denoise/manifest.json"
+        },
+        {
+          "label": "权利说明",
+          "url": "docs/showcase/max-mechanical-iris-denoise/RIGHTS.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创几何与媒体保留现有权利；Autodesk、Blender 与 OIDN 各自许可不变。",
+        "note": "无外部模型、图片纹理、音乐或 AI 位图；真实宿主输出与界面截图分别标明。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-3dsmax/tree/e1b724483193dd6476d117cb7ecf15ccaab91422",
+        "commit": "e1b724483193dd6476d117cb7ecf15ccaab91422",
+        "title": "测量所用 Max 适配器源码候选"
+      },
+      "verified_at": "2026-10-26",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "原生结构、降噪对照与有限界面审阅；非模型身份鉴证。"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "有限证据公开",
+          "date": "2026-10-26",
+          "change": "加入可见案例目录，完整影片与换向审阅按用户安排延后、保持未测，并保留安装、通信、线框缺口；公开不等于所有阶段验收。"
+        }
+      ]
+    },
+    {
+      "slug": "bw0103-bottle-turntable",
+      "title": "BW0103 · 泵瓶转台制作研究",
+      "subtitle": "Blender · 真实原片，银色组件视觉评审失败",
+      "software": [
+        "Blender"
+      ],
+      "capabilities": [
+        "建模",
+        "材质",
+        "动画",
+        "渲染",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/bw0103-bottle-turntable/hero.jpg",
+        "alt": "原片中的浅青色泵瓶，银色泵头、泵杆和项圈仍有凹陷反光"
+      },
+      "evidence_label": "制作研究 · 技术留存通过，视觉评审失败",
+      "evidence_scope": "原始六秒影片与 126 对历史 MCP 请求响应哈希留存；完整解码和原生读回分别记录。银色泵头、泵杆与项圈有明显凹陷或融化般反光，视觉验收保持失败。",
+      "summary": "通过 DCC-MCP 制作的 1080 × 1080、30 fps、180 帧静音转台。以原片展示真实制作能力与仍未修复的金属着色问题；空白标签是有意设计。",
+      "goal": "公开真实原片、历史制作记录和失败原因，支持复核与后续修正，不将技术成功包装成视觉合格。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "通过官方 Blender DCC-MCP 工具和有范围的脚本制作原创数值几何、程序化材质、相机、灯光与转台。原生渲染并编码影片，保留工程、制作记录与哈希。独立检查金属反光、完整解码、来源和复现缺口。",
+        "note": "按留存制作过程整理的可复用说明，非外部任务逐字转载；完整公开配方尚缺。"
+      },
+      "environment": [
+        {
+          "label": "Blender",
+          "value": "Blender 4.5.13 LTS / Cycles CPU / 64 samples"
+        },
+        {
+          "label": "历史适配器",
+          "value": "dcc-mcp-blender 0.2.22"
+        },
+        {
+          "label": "DCC-MCP Core",
+          "value": "dcc-mcp-core 0.20.46"
+        },
+        {
+          "label": "原生编码",
+          "value": "Blender 4.5.13 LTS VSE；H.264；1080 × 1080；30 fps；6 秒"
+        },
+        {
+          "label": "历史与当前打包",
+          "value": "2026-10-20 制作，2026-10-22 留存核查；本次目录打包无宿主启动或重渲染"
+        },
+        {
+          "label": "历史 Server 组件",
+          "value": "dcc-mcp-server 版本未知：留存历史记录未记录此版本"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Blender DCC-MCP",
+          "description": "官方类型化工具与受限官方脚本制作几何、材质、相机、灯光和旋转；公开摘录为历史记录。"
+        },
+        {
+          "name": "Cycles / Blender VSE",
+          "description": "原生渲染、视频编码与解码；本轮保留原始视频，不生成替代作品。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "保留实际制作记录",
+          "description": "126 对历史请求响应与原始哈希一致；公开摘录去除私有路由和路径，尚不构成完整制作图。"
+        },
+        {
+          "title": "读回工程并验证原片",
+          "description": "后续原生读回记录 10 个网格、3,312 顶点和 2,720 面；原片 180 帧完整解码。"
+        },
+        {
+          "title": "明确保留视觉失败",
+          "description": "银色泵头、泵杆和项圈仍有明显凹陷或融化般反光；未修复、未重新验收。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/bw0103-bottle-turntable/turntable.mp4",
+          "poster": "docs/showcase/bw0103-bottle-turntable/hero.jpg",
+          "alt": "BW0103 原始六秒转台，视觉评审失败仍可见",
+          "caption": "1080 × 1080、30 fps、180 帧、6 秒，有意静音。原始 SHA-256 为 70b3062f…daa1a33；泵头、泵杆和项圈反光缺陷未修复。"
+        },
+        {
+          "src": "docs/showcase/bw0103-bottle-turntable/hero.jpg",
+          "alt": "原始视频第 61 帧的完整画面",
+          "caption": "从原片提取第 61 帧并 JPEG 编码，无裁剪、涂改或重绘；不是新的渲染或合格视觉证明。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "原片不变与完整解码",
+          "result": "pass",
+          "observed": "原始视频哈希保持 70b3062f308d8de2ef83417b56de9e3b91b70c19be6cba61d0e76a0cbdaa1a33；180 帧完整解码。"
+        },
+        {
+          "name": "历史记录身份",
+          "result": "pass",
+          "observed": "2026-10-22 核查的 126 对请求响应原始哈希全部相符；不是本轮新执行。"
+        },
+        {
+          "name": "产品视觉质量",
+          "result": "fail",
+          "observed": "银色泵头、泵杆与项圈有明显凹陷或融化般反光，未取得独立视觉批准。"
+        },
+        {
+          "name": "公开工程与独立复现",
+          "result": "not_run",
+          "observed": "完整公开制作图、脱敏原生副本、世界包围盒端点及独立空场景重建未完成。"
+        },
+        {
+          "name": "网页实际播放",
+          "result": "not_run",
+          "observed": "原片解码不替代中英文页面上的实际自然速度播放验收。"
+        }
+      ],
+      "limitations": [
+        "本例作为真实制作研究公开，视觉评审失败仍然有效，公开可见不等于作品质量通过。",
+        "原始 .blend 私有保留，未分发；完整公开配方、脱敏副本与独立重建尚未完成。",
+        "不宣称官方基准分数、其他模型对比、历史模型身份或机械 24/410 制造认证。"
+      ],
+      "resources": [
+        {
+          "label": "制作研究与边界",
+          "url": "docs/showcase/bw0103-bottle-turntable/README.md"
+        },
+        {
+          "label": "历史 MCP 制作摘录",
+          "url": "docs/showcase/bw0103-bottle-turntable/provenance.json"
+        },
+        {
+          "label": "测量与失败记录",
+          "url": "docs/showcase/bw0103-bottle-turntable/validation.json"
+        },
+        {
+          "label": "原片与公开文件哈希",
+          "url": "docs/showcase/bw0103-bottle-turntable/manifest.json"
+        },
+        {
+          "label": "权利与外部引用范围",
+          "url": "docs/showcase/bw0103-bottle-turntable/LICENSES.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "原创数值几何与程序化材质的既有权利保留；本次公开不新增许可授权。",
+        "note": "外部 BW0103 为纯文本任务，无参考媒体或附件；只引用来源，不分发任务全文、评分或其他模型输出。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/showcase/tree/993ec80ee37a9924ab3ca39061e920f9e5fbaa3c/docs/showcase/bw0103-bottle-turntable",
+        "commit": "993ec80ee37a9924ab3ca39061e920f9e5fbaa3c",
+        "title": "保留原片与历史摘录的来源版本"
+      },
+      "verified_at": "2026-10-22",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未留存可独立核验的历史模型与推理配置记录；保持未知。",
+          "scope": "历史瓶子制作、原片与后续有限审阅；不从作品反推模型。"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "失败案例公开",
+          "date": "2026-10-26",
+          "change": "加入可见案例目录，保留原片哈希和金属视觉失败；封面仅从原片第 61 帧提取。"
+        }
+      ]
+    },
+    {
       "slug": "brass-pendulum-denoise",
       "title": "Brass Pendulum · 黄铜摆锤",
       "subtitle": "Blender · 原生动画细化与引导式空间降噪",
@@ -5112,6 +5607,391 @@
           "version": "v1 八波英雄守卫战",
           "date": "2026-10-20",
           "change": "发布冻结 957c1d3 的双语案例、可编辑原生 ZIP、实机短片与脱敏验收记录；不改动已验收玩法。"
+        }
+      ]
+    },
+    {
+      "slug": "hyper3d-relic-room",
+      "title": "Relic Courier · 遗迹信使",
+      "subtitle": "Hyper3D → Godot · 城镇、战斗、装备与返回",
+      "software": [
+        "Hyper3D",
+        "Godot",
+        "Blender"
+      ],
+      "capabilities": [
+        "交互",
+        "游戏原型",
+        "原生工程",
+        "验证"
+      ],
+      "cover": {
+        "src": "docs/showcase/hyper3d-relic-room/hero.jpg",
+        "alt": "信使在原生 Godot 中打开生成宝箱；使用真实交互的脚本录制画面"
+      },
+      "evidence_label": "存档修复通过 · 最新界面验收阻塞",
+      "evidence_scope": "23 次付费案例共 15.5 credits；前 21 次经 Python runtime，后两名角色经实际 MCP tools/call。当前 ba6b 存档修复通过 57 项引擎/实际文件系统、独立重读 5 项与场景集成 25 项检查。最新干净原生导入通过，但局部遮挡在任何游戏输入和 IO 故障夹具前阻塞；新 PCK 未实际运行浏览器。历史 ec13 的 94.295 m 原生路线/重开、PCK22f 的 15 次 Web 冒烟、59.033333 秒影片解码/抽样分别保留，不替代当前验收。",
+      "summary": "从安全档案馆庭院进入林地，与斥候和卫士交战，收取掉落、装备核心与利刃，解锁奥术后返回。真实铰链宝箱提供一次性战利品；最新存档失败保护已做引擎与实际文件系统回归，历史完整路线和最新界面验收分别记录。",
+      "goal": "在同一原生 Godot 工程中把可追溯 Hyper3D 角色与道具接入短篇 ARPG；公开源与派生、材质和作者绑定边界，并分别验证规则、物理、实际输入与持久化。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "以青绿、风化砂岩与黄铜构建沉没档案馆：安全庭院连接林地，生成信使与机械守卫作为主角和敌人。制作近战、预警、冲刺、掉落、背包装备、奥术技能和返回目标；让生成宝箱真实开盖，只发放一次战利品，并保存装备与进度。保留原始模型/PBR 与作者绑定、动画、内衬、建筑、物理和特效的区别。使用现有付费输出，不新增生成；最终实际游玩、存档重开和 Web 分别验收。",
+        "note": "按实际作品整理的复现说明，不是私有对话或凭据。"
+      },
+      "environment": [
+        {
+          "label": "游戏宿主",
+          "value": "Godot 4.6.3 · Windows · Jolt · gl_compatibility"
+        },
+        {
+          "label": "作者配置 Adapter / Core",
+          "value": "dcc-mcp-godot 0.9.10 · Core 0.20.46；独立游戏不加载作者桥接"
+        },
+        {
+          "label": "模型来源",
+          "value": "Hyper3D / Rodin API · 提供方版本未知；源与派生分别记录"
+        },
+        {
+          "label": "资产派生",
+          "value": "Blender 5.2.0 LTS · 网格/PBR 派生、作者绑定、动作与宝箱内衬"
+        },
+        {
+          "label": "支持范围",
+          "value": "横屏；960 × 600 及以上；原生中英文；CC0 音效听评待完成"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Hyper3D / Rodin API",
+          "description": "宿主无关 Skill 提供八个工具、七个 HTTP endpoint；生成、状态与下载可追溯，无自动付费重试，不等同于网站所有功能。"
+        },
+        {
+          "name": "Blender typed MCP",
+          "description": "原生导入、网格检查与派生、绑定/动作和铰链宝箱；缺失专用能力时使用有范围的宿主脚本，并与生成输出区分。"
+        },
+        {
+          "name": "Godot typed MCP",
+          "description": "项目设置、导入、场景打开与运行独立记录；GDScript 文件创作与原生引擎测试不冒称真实键鼠输入。"
+        },
+        {
+          "name": "dcc-cua",
+          "description": "项目自有原生窗口观察与实际键鼠输入；历史 ec13 完整路线/重开通过。最新修复版本仅观察标题，局部遮挡在游戏输入前阻塞并明确清理，不把旧证据或脚本影片归给新版本。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "保留生成源与付费边界",
+          "description": "原始模型与游戏派生分别保留哈希；23 个接受案例与 15.5 credits 台账匹配。后续 ARPG 制作复用既有输出，不再新增付费生成。"
+        },
+        {
+          "title": "把 PBR、绑定与宝箱改造分开",
+          "description": "生成角色提供静态网格与 PBR；Blender 另作骨架、权重与信使五个/守卫四个动作。真实 Lid 铰链保留宝箱外观并加入内衬；神龛保留较高几何细节修复过度减面。"
+        },
+        {
+          "title": "在原生物理中连接城镇与林地",
+          "description": "控制器与敌人使用 CharacterBody3D；伤害仅在可见动作接触点按当前距离、视线、冷却和法力请求。显示网格与简化碰撞代理分离。"
+        },
+        {
+          "title": "一次性战利品与可验证存档",
+          "description": "严格校验宝箱、击杀、拾取、装备与目标；有限读取、验证临时写入和备份恢复处理损坏或中断。失败返回标题保持当前内存进度，胜利探索/失败重试不回读旧档；57 项实际文件系统回归、独立重读 5 项与集成 25 项通过，最新实际界面因遮挡未输入。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/hyper3d-relic-room/showcase.mp4",
+          "poster": "docs/showcase/hyper3d-relic-room/hero.jpg",
+          "alt": "遗迹信使原生完整循环的有声编辑影片",
+          "caption": "历史 ec13 冻结：59.033333 秒编辑影片保留全部 1351 帧原生脚本路线，无剪切或变速，字幕位于画面外；解码与抽样画面通过，正常速度播放和主观听评未测。脚本驱动性质不替代实际 OS 输入。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/native-chest-open.jpg",
+          "alt": "实际原生窗口中的已开宝箱与信使",
+          "caption": "历史 ec13 冻结：实际 DCC-CUA 键鼠路线中的宝箱交互；原始窗口尺寸，仅作声明的 JPEG 压缩。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/native-zh.jpg",
+          "alt": "实际原生窗口的中文界面",
+          "caption": "历史 ec13 冻结：原生中文界面使用随工程打包的许可字体；不依赖系统字体回退。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/native-win.jpg",
+          "alt": "实际键鼠完整路线后的胜利界面",
+          "caption": "历史 ec13 冻结：开箱、装备、两名敌人、近战与奥术后返回获胜；路线行进 94.295 m，无 QA 或位置写入。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/native-reopened.jpg",
+          "alt": "新正常进程恢复后的城镇与装备",
+          "caption": "历史 ec13 冻结：新进程回读 save_loaded，唯一装备、已开宝箱、敌人与完成目标保持，角色安全回到城镇。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/diagnosis/guardian-new-static.jpg",
+          "alt": "新生成机械守卫的原生 Blender 静态检查",
+          "caption": "保留的静态诊断图，早于作者绑定；不是角色动画或最终 ARPG 玩法验收。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/diagnosis/chest-source.jpg",
+          "alt": "生成宝箱原始外观的原生近景",
+          "caption": "源模型/PBR 比较图。工程另作真实铰链与内衬；一次性掉落、装备和新进程恢复由历史 ec13 OS 路线验证，最新存档修复另有引擎/文件系统凭据。"
+        },
+        {
+          "src": "docs/showcase/hyper3d-relic-room/diagnosis/shrine-repaired-godot.jpg",
+          "alt": "修复后的神龛在原生 Godot 中的实际近景",
+          "caption": "高细节派生修复了已识别的屋顶、宝石与底座三角破面；这是特定近角度回归检查，不代表完整冒险画面通过。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "真实 API 获取与付费台账",
+          "result": "pass",
+          "observed": "23 个接受案例共 15.5 credits；前 21 个经直接 Python runtime，后两个经实际 MCP tools/call。八个工具、七个 endpoint 不覆盖网站所有功能。"
+        },
+        {
+          "name": "纯玩法与存档数据契约",
+          "result": "pass",
+          "observed": "未改动的纯规则核心在官方 Godot 4.6.3 中通过 120 项确定性检查；不涉及场景输入或存档文件 IO 验收。"
+        },
+        {
+          "name": "当前存档失败保护与场景集成",
+          "result": "pass",
+          "observed": "ba6b 版本仅 main.gd 改动，其余 40 个运行文件不变。真实隔离临时路径写失败、暂停/胜利探索/失败重试、中英错误提示、旧档不变、唯一奖励与正常继续共 57 项通过；独立读档 5 项、场景集成 25 项、界面/字体/触控及解析也通过。均为引擎/实际文件系统检查，无新 OS 输入声明。"
+        },
+        {
+          "name": "历史连续控制器物理路线",
+          "result": "pass",
+          "observed": "ec13 历史冻结连续通过相连地面、坡道和完整往返，正常出生后无位置写入；这不是最新修复版本的全程重新验收。"
+        },
+        {
+          "name": "历史实际原生输入与新进程恢复",
+          "result": "pass",
+          "observed": "ec13 实际键鼠行进 94.295 m，开箱装备、近战与两次成功奥术、击败两敌后返回；新正常进程恢复唯一装备、宝箱、敌人与目标。旧版精确凭据保留，不归给 ba6b。"
+        },
+        {
+          "name": "最新实际原生界面跟进",
+          "result": "not_run",
+          "observed": "当前源码 ZIP 干净提取与新导入通过；首次标题观察局部遮挡且非前台，游戏输入为零，无 IO 故障夹具，明确停止并清理自有未操作窗口。最新菜单/继续/失败提示画面仍阻塞。"
+        },
+        {
+          "name": "当前 Web 导出与预算",
+          "result": "pass",
+          "observed": "新 PCK 为 41,192,572 bytes；10 个 Web 文件共 41,227,974 raw / 40,851,951 gzip-equivalent bytes，低于各自 40 MiB 上限。精确资源与共享运行时检查通过；新包未实际运行浏览器。"
+        },
+        {
+          "name": "历史 Web 冒烟",
+          "result": "pass",
+          "observed": "PCK22f 的高 DPI 冒烟通过继续、桥面/庭院移动、暂停、音效关开和中英切换共 15 次实际操作；不接受新 PCK。"
+        },
+        {
+          "name": "完整 Web 玩法与生命周期",
+          "result": "not_run",
+          "observed": "历史冒烟后因另一窗口重叠在后续输入前阻塞；当前新包未跑实际浏览器。完整战斗、掉落、存档重开、退出、全屏与重启均不从导出或旧冒烟推断。"
+        },
+        {
+          "name": "历史影片解码与抽样审查",
+          "result": "pass",
+          "observed": "ec13 脚本原生路线的 59.033333 秒影片共 1771 帧、1280 × 720、20,157,741 bytes；解码零错误，首中尾抽样通过。全部 1351 帧路线及引擎音轨保留，不作为当前修复或 OS 输入证明。"
+        },
+        {
+          "name": "正常速度播放与主观听评",
+          "result": "not_run",
+          "observed": "解码、音轨信号及历史原生/Web 音效开关检查不等同于正常速度播放或主观听感，两项均未测。"
+        }
+      ],
+      "limitations": [
+        "当前修复仅通过限定引擎/实际文件系统与导出检查；最新原生界面在输入前受遮挡阻塞，新 Web 包未实际运行。历史 ec13 原生路线/重开、PCK22f 冒烟及影片分别保留，不替代当前验收。",
+        "OS 玩法录像的叠加层排除探针失败，连续影片另用脚本驱动的原生 Godot GPU/音轨录制。实际离开宝箱取消尝试在角色离开范围前已开盖，故未获接受；引擎取消检查另行通过，物理用户中断未测。",
+        "未声称覆盖 Hyper3D 网站所有功能、每个 API 参数组合、语义效果或种子复现；生成接受不等于模型视觉合格。",
+        "旧版占位主角、限时回收胜利和脚本漫游影片仅保留为历史比较，不证明当前 ARPG。",
+        "实体触控、手柄、竖屏、全设备性能、所有角度蒙皮变形与独立空场景重建未验收。",
+        "生成模型不承诺独创性、专有权或源单位；场景尺度、作者绑定与简化碰撞不等于提供方物理语义。",
+        "Hyper3D 输出适用服务条款，不按 MIT 或 CC0 模型再授权；工程下载不授予额外模型权利。"
+      ],
+      "resources": [
+        {
+          "label": "当前制作与复现报告",
+          "url": "docs/showcase/hyper3d-relic-room/README.md"
+        },
+        {
+          "label": "当前原生工程下载",
+          "url": "docs/showcase/hyper3d-relic-room/RelicCourier-native.zip"
+        },
+        {
+          "label": "原生工程打包与冻结哈希",
+          "url": "docs/showcase/hyper3d-relic-room/native-package.public.json"
+        },
+        {
+          "label": "当前精确 Web 导出",
+          "url": "docs/showcase/hyper3d-relic-room/current-export.public.json"
+        },
+        {
+          "label": "当前原生界面跟进与阻塞",
+          "url": "docs/showcase/hyper3d-relic-room/current-native-followup.public.json"
+        },
+        {
+          "label": "当前存档失败恢复凭据",
+          "url": "docs/showcase/hyper3d-relic-room/save-recovery.public.json"
+        },
+        {
+          "label": "历史 Web 导出与资源测量",
+          "url": "docs/showcase/hyper3d-relic-room/package-export.public.json"
+        },
+        {
+          "label": "历史 ec13 实际 OS 输入与新进程恢复",
+          "url": "docs/showcase/hyper3d-relic-room/os-acceptance.public.json"
+        },
+        {
+          "label": "历史 ec13 影片验收范围",
+          "url": "docs/showcase/hyper3d-relic-room/film-validation.public.json"
+        },
+        {
+          "label": "历史玩法测试与精确源码记录",
+          "url": "docs/showcase/hyper3d-relic-room/gameplay-tests.public.json"
+        },
+        {
+          "label": "历史 PCK22f Web 冒烟与阻塞范围",
+          "url": "docs/showcase/hyper3d-relic-room/web-acceptance.public.json"
+        },
+        {
+          "label": "影片抽样画面审查",
+          "url": "docs/showcase/hyper3d-relic-room/film-pixel-review.public.json"
+        },
+        {
+          "label": "源与派生的原生视觉诊断",
+          "url": "docs/showcase/hyper3d-relic-room/ASSET-DIAGNOSIS.md"
+        },
+        {
+          "label": "诊断文件与哈希清单",
+          "url": "docs/showcase/hyper3d-relic-room/diagnosis/manifest.json"
+        },
+        {
+          "label": "诊断测量与验收范围",
+          "url": "docs/showcase/hyper3d-relic-room/diagnosis/evidence.json"
+        },
+        {
+          "label": "角色获取与原始输入哈希",
+          "url": "docs/showcase/hyper3d-relic-room/diagnosis/hero-acquisition.public.json"
+        },
+        {
+          "label": "扩展付费台账",
+          "url": "docs/showcase/hyper3d-relic-room/diagnosis/budget-ledger.public.json"
+        },
+        {
+          "label": "ARPG 动作与交互宝箱交接记录",
+          "url": "docs/showcase/hyper3d-relic-room/arpg-assets.public.json"
+        },
+        {
+          "label": "许可与第三方通知",
+          "url": "docs/showcase/hyper3d-relic-room/LICENSES.md"
+        },
+        {
+          "label": "历史 API 功能验收报告",
+          "url": "https://github.com/dcc-mcp/dcc-ai-hyper3d/blob/main/docs/live-acceptance-2026-10-24.md"
+        },
+        {
+          "label": "Hyper3D 服务条款",
+          "url": "https://hyper3d.ai/legal/terms"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP showcase contributors",
+        "license": "作者创作的游戏设计、界面与媒体保留所有权利；Kenney 控制器代码保留 MIT，RPG Audio 保留 CC0，Noto 衍生字体保留 SIL OFL 1.1，Godot 保留 MIT 与第三方通知；Hyper3D 模型输出适用服务条款。",
+        "note": "输入含原创文本、原生几何参考和获批原创单视图概念；早期宝箱参考为提供方根据原创提示生成的渲染。生成静态模型/PBR 与作者骨架、动作、内衬、建筑、物理和特效分别归因。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-ai-hyper3d/tree/b4357b44bc1b635455dc7bc912f86ccc8b54fb78/skill/hyper3d",
+        "commit": "b4357b44bc1b635455dc7bc912f86ccc8b54fb78",
+        "title": "已发布 Hyper3D Skill 基线；当前游戏源码与打包见独立冻结记录"
+      },
+      "verified_at": "2026-10-24",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "城镇到林地的 ARPG 范围与证据边界"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "生成角色/道具、作者绑定与原生场景"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "纯规则、碰撞、接触、装备、存档与双语 UI"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "原创单视图概念、几何参考与官方复用来源"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "历史 ec13 原生脚本影片与编辑处理；解码和抽样画面通过，正常速度播放/听评未测"
+        },
+        {
+          "stage_id": "review_visual",
+          "stage": "视觉审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "源与派生比较、神龛修复、角色/战斗/宝箱样片与影片首中尾抽样"
+        },
+        {
+          "stage_id": "review_technical",
+          "stage": "技术审查",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "没有独立核验的模型与推理配置记录；保持未知，不从作品反推。",
+          "scope": "API、源与派生、当前存档引擎/文件系统回归与精确导出；历史原生/Web/影片证据独立，最新界面受遮挡阻塞"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "v1 候选",
+          "date": "2026-10-24",
+          "change": "准备真实 Hyper3D 资产到 Godot 场景与小游戏的双语候选；最终资产和实际游玩验收未完成。"
+        },
+        {
+          "version": "v2 ARPG 候选",
+          "date": "2026-10-24",
+          "change": "在同一工程中改为城镇、林地、战斗掉落、装备奥术与返回循环，加入作者动作、真实开盖宝箱与存档契约；旧版媒体保留为历史，当前实际输入、Web、重开与媒体待验收。"
+        },
+        {
+          "version": "v2 原生验收",
+          "date": "2026-10-24",
+          "change": "冻结当前运行文件，完成干净源码提取导入、实际原生完整循环与新进程恢复，导出并检查精确 Web 包和预算；当前影片、浏览器生命周期与听评仍分别待验。"
+        },
+        {
+          "version": "v2 分阶段收口",
+          "date": "2026-10-24",
+          "change": "补留存 120 项核心检查、实际原生完整路线/重开、高 DPI Web 15 次冒烟及当前影片解码/抽样证据；完整 Web 因窗口重叠在后续输入前阻塞，正常速度播放与听评保持未测。"
+        },
+        {
+          "version": "v2 存档失败保护",
+          "date": "2026-10-24",
+          "change": "仅修改运行文件 main.gd 并补充已有专项测试：失败返回标题保留内存进度，胜利探索/失败重试不回滚旧档，修复缓存未拾取掉落定位。57+5+25 项限定检查通过，重打包并导出；最新实际界面在输入前遮挡阻塞，新 Web 包未测，原生完整路线/Web 冒烟/影片保留为历史精确版本。"
         }
       ]
     }

@@ -37,8 +37,8 @@
   },
   "package": {
     "filename": "houdini-ecosystem-assets-2026-10-20.zip",
-    "sha256": "5bd2cefb43707bdeb6788a7803f9ca8671d2bc244bbb7c84040d09d92880ce1a",
-    "bytes": 9229292,
+    "sha256": "89e3461e9b9618dd72b5b52bc874464b65235a54230d2b68d9bd6fb22d61e04b",
+    "bytes": 9229359,
     "archive_member_count": 62,
     "download_url": "docs/showcase/houdini-procedural-study/houdini-ecosystem-assets-2026-10-20.zip",
     "license": "MIT",

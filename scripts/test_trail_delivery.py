@@ -5,7 +5,9 @@ import hashlib
 import io
 import json
 from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import Mock
 import wave
 import zipfile
 
@@ -69,6 +71,21 @@ def atlas_for(metadata):
     return {'sample_rate': 48000, 'assets': assets}
 
 
+def package_opener(members, api, observed):
+    # Exercise the delivered function with a stub host, without importing REAPER.
+    source = members[PREFIX + 'Skills/reaper-stem-session/scripts/open_project.py']
+    tree = ast.parse(source)
+    nodes = [n for n in tree.body if (isinstance(n, ast.ImportFrom) and n.module == 'pathlib')
+             or (isinstance(n, ast.FunctionDef) and n.name == 'main')]
+    namespace = {'R': api, 'active_project': lambda: 'stub-project',
+                 'resolve_rpp': lambda value: Path(value).resolve(),
+                 'audit': lambda: {'project': str(observed), 'dirty': False},
+                 'skill_entry': lambda function: function,
+                 'skill_success': lambda message, **context: {'success': True, 'context': context}}
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), '<packaged reopen>', 'exec'), namespace)
+    return namespace['main']
+
+
 class TrailDeliveryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -120,6 +137,29 @@ class TrailDeliveryTests(unittest.TestCase):
                 bad['tracks'] = copy.deepcopy(bad['assets'])
                 with self.assertRaises(AssertionError):
                     validate_delivery(bad, self.members)
+
+    def test_packaged_reopen_accepts_native_path_alias(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / 'session.rpp'; target.write_text('stub project')
+            child = Path(directory) / 'child'; child.mkdir()
+            observed = child / '..' / target.name
+            api = Mock(); api.IsProjectDirty.return_value = False
+            result = package_opener(self.members, api, observed)(project_path=str(target))
+            self.assertTrue(result['success'])
+            self.assertEqual(result['context']['project'], str(observed))
+            api.Main_openProject.assert_called_once_with(str(target.resolve()))
+
+    def test_packaged_reopen_still_rejects_different_project_and_dirty_host(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / 'session.rpp'; target.write_text('stub project')
+            api = Mock(); api.IsProjectDirty.return_value = True
+            reopen = package_opener(self.members, api, target.with_name('other.rpp'))
+            with self.assertRaisesRegex(RuntimeError, 'Save the active project'):
+                reopen(project_path=str(target))
+            api.Main_openProject.assert_not_called()
+            api.IsProjectDirty.return_value = False
+            with self.assertRaisesRegex(RuntimeError, 'did not open requested project'):
+                reopen(project_path=str(target))
 
 
 if __name__ == '__main__':

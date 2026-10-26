@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "acceptance": "pending",
+  "case_slug": "hyper3d-relic-room",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "threads": false,
+  "renderer": "gl_compatibility",
+  "template_sha256": "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9",
+  "pck_sha256": "bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea",
+  "pack_name": "relic-bc6af9db60ea.pck",
+  "source_files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 81,
+      "sha256": "9f50a7566c3bfd373d9b83e30284ecd860820136c0a5e85abb271bbb5915908a"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 58,
+      "sha256": "96e29bedfdaeec760ceb900bbea819d6497bf870dc048ad510929bf2245a09cd"
+    },
+    {
+      "path": "assets/arch.glb",
+      "bytes": 309912,
+      "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b"
+    },
+    {
+      "path": "assets/asset-map.json",
+      "bytes": 7198,
+      "sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5"
+    },
+    {
+      "path": "assets/chest-interactive.glb",
+      "bytes": 2444872,
+      "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5"
+    },
+    {
+      "path": "assets/column.glb",
+      "bytes": 1308584,
+      "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9"
+    },
+    {
+      "path": "assets/courier-character.glb",
+      "bytes": 11962060,
+      "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2"
+    },
+    {
+      "path": "assets/crystal.glb",
+      "bytes": 692044,
+      "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf"
+    },
+    {
+      "path": "assets/derivative-provenance.json",
+      "bytes": 35419,
+      "sha256": "06b3abfc5b09f834efc3344868ffe49da6ec70b7294b74b8a2a55bd003876805"
+    },
+    {
+      "path": "assets/gate.glb",
+      "bytes": 2213668,
+      "sha256": "06d83425c4e3880eb2759cad754d52942e417851ab0d4fe7a8faa436fd7dd958"
+    },
+    {
+      "path": "assets/guardian-character.glb",
+      "bytes": 17455464,
+      "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60"
+    },
+    {
+      "path": "assets/pedestal.glb",
+      "bytes": 680392,
+      "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84"
+    },
+    {
+      "path": "assets/portal.glb",
+      "bytes": 2592960,
+      "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2"
+    },
+    {
+      "path": "assets/shrine.glb",
+      "bytes": 4550948,
+      "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7"
+    },
+    {
+      "path": "assets/stairs.glb",
+      "bytes": 1081016,
+      "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556"
+    },
+    {
+      "path": "audio/AUDIO-SOURCES.json",
+      "bytes": 2119,
+      "sha256": "c2051c95c576168608374fa87fb4b4e3847602a09c058be0b9e520ce2f0497b3"
+    },
+    {
+      "path": "audio/chop.ogg",
+      "bytes": 9370,
+      "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486"
+    },
+    {
+      "path": "audio/creak1.ogg",
+      "bytes": 15761,
+      "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e"
+    },
+    {
+      "path": "audio/footstep00.ogg",
+      "bytes": 9475,
+      "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+    },
+    {
+      "path": "audio/handleCoins.ogg",
+      "bytes": 25394,
+      "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+    },
+    {
+      "path": "audio/knifeSlice.ogg",
+      "bytes": 15532,
+      "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+    },
+    {
+      "path": "audio/metalLatch.ogg",
+      "bytes": 10208,
+      "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+    },
+    {
+      "path": "data/arpg.json",
+      "bytes": 2097,
+      "sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d"
+    },
+    {
+      "path": "export_presets.cfg",
+      "bytes": 604,
+      "sha256": "f95adb3d22d4c5ea199673fd18bbe4866b23a35dd34614d62ecc54764c008b49"
+    },
+    {
+      "path": "notices/ASSET-RIGHTS.md",
+      "bytes": 2606,
+      "sha256": "f840867af70be2478aeecef5787d258c38faa48ec04706cccea4f5466940df38"
+    },
+    {
+      "path": "notices/KENNEY-MIT.txt",
+      "bytes": 1062,
+      "sha256": "f755bf8f21002f8d5baedaf75564141d363971f3f7bc8c4062956b0b15a6f04f"
+    },
+    {
+      "path": "notices/kenney-player-original.gd.txt",
+      "bytes": 3229,
+      "sha256": "bfb8edfce98b95e7f7116dbc3e884604db277904dd9c329d4493521fa363e269"
+    },
+    {
+      "path": "notices/KENNEY-RPG-AUDIO.txt",
+      "bytes": 478,
+      "sha256": "5735dfd72cb64cbbceda4ebc00c380c41ca680edb82ff153aa7c9ab97614c539"
+    },
+    {
+      "path": "PRODUCTION.md",
+      "bytes": 11473,
+      "sha256": "29f82b0004307029070a99e09ab1ee6191e2ed727dbad66380601eee9e75cd7e"
+    },
+    {
+      "path": "project.godot",
+      "bytes": 1021,
+      "sha256": "2befb72f5dfaa8095b2e18e19a3373dc71713c1966907a74357f6528e2b4c935"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7753,
+      "sha256": "669af9b008424a492ba7b04fd82da8c39cc0fee91e27f428664219bf0b7ffd64"
+    },
+    {
+      "path": "scenes/main.tscn",
+      "bytes": 211,
+      "sha256": "ac774ec55bdd520c48184c1930e1aed77f369c627282cdc27e5a377a6a180938"
+    },
+    {
+      "path": "scripts/archive_stage.gd",
+      "bytes": 12167,
+      "sha256": "b83ccfee7215e960eac6f5d17883c2a877a1d70d6fefe4c3a0da25338a44f10d"
+    },
+    {
+      "path": "scripts/archive_stage.gd.uid",
+      "bytes": 18,
+      "sha256": "31eb8e5072008259db1836df4bd6522bed3b4a2f02237ac59e9bdbc6b8fe48ff"
+    },
+    {
+      "path": "scripts/courier.gd",
+      "bytes": 4174,
+      "sha256": "8b2d66d6ed9d4a9bc3f5c3c72e17aeeff96ffc5508b2f8e7ca8cc1c2d620af07"
+    },
+    {
+      "path": "scripts/courier.gd.uid",
+      "bytes": 20,
+      "sha256": "bc3f84a2bdf7451bac00945e403936582275f8f76ebb092630700488e98e8141"
+    },
+    {
+      "path": "scripts/enemy_actor.gd",
+      "bytes": 4342,
+      "sha256": "1139bb54eca11b017856ebd0497c25510f1ecf6124ec8c97d69850a5f2c496a0"
+    },
+    {
+      "path": "scripts/enemy_actor.gd.uid",
+      "bytes": 20,
+      "sha256": "f9ec4382bae48c80544ac7ea7f410504cfcb55a8b459194178db31b1ffb3302d"
+    },
+    {
+      "path": "scripts/expedition.gd",
+      "bytes": 15243,
+      "sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65"
+    },
+    {
+      "path": "scripts/expedition.gd.uid",
+      "bytes": 20,
+      "sha256": "cc95070698cd589e0f78c490eef8eb50f20f0f4d967b57214987fc787b474d45"
+    },
+    {
+      "path": "scripts/interface.gd",
+      "bytes": 22691,
+      "sha256": "bd50f0dd39cdd76acfd9071a4d397e9010b8bd7dec09fd39a1cbdcd89b1624fc"
+    },
+    {
+      "path": "scripts/interface.gd.uid",
+      "bytes": 20,
+      "sha256": "302c091568ed70e02af1e44003f2837ba9fed25ee12b47d8f374b3befceb727c"
+    },
+    {
+      "path": "scripts/main.gd",
+      "bytes": 43427,
+      "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+    },
+    {
+      "path": "scripts/main.gd.uid",
+      "bytes": 20,
+      "sha256": "450b0abcd14539030f71f3e34f0737d49791bb6cda412711c81b04e2e450b370"
+    },
+    {
+      "path": "ui/FONT-LICENSE.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "path": "ui/FONT-SOURCE.json",
+      "bytes": 509,
+      "sha256": "aeccfeed92c46d1f3de3e0cf5ecf4f2a107d00a05f799927944e0f388b0afee1"
+    },
+    {
+      "path": "ui/relic-sans.otf",
+      "bytes": 111548,
+      "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54"
+    }
+  ],
+  "source_transformations": [
+    "Omit editor plugin and debug autoload sections from the isolated export copy.",
+    "Omit addons, tests and local adapter metadata from the exported candidate.",
+    "Omit only the unused historical assets/chest.glb and assets/guardian.glb before import; current interactive chest, generated characters and their textures are unchanged."
+  ],
+  "omitted_source_assets": [
+    {
+      "path": "assets/chest.glb",
+      "bytes": 2144840,
+      "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+    },
+    {
+      "path": "assets/guardian.glb",
+      "bytes": 705016,
+      "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+    }
+  ],
+  "shared_runtime_comparison": {
+    "index.js": {
+      "shared_path": "play/runtime/godot-4.6.3.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981",
+      "matches_official_and_showcase": true
+    },
+    "index.wasm": {
+      "shared_path": "play/runtime/godot-4.6.3.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6",
+      "matches_official_and_showcase": true
+    },
+    "index.audio.worklet.js": {
+      "shared_path": "play/runtime/godot-4.6.3.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "matches_official_and_showcase": true
+    },
+    "index.audio.position.worklet.js": {
+      "shared_path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "matches_official_and_showcase": true
+    }
+  },
+  "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+  "verified_scopes": [
+    "Current save correction: 57 staged engine/actual filesystem checks, separate process read 5 and native integration 25",
+    "Current clean native extraction and fresh resource import; zero game inputs"
+  ],
+  "historical_accepted_scopes": [
+    "ec13ca4d runtime: native OS complete course and fresh normal-process reopen",
+    "22f7d1c3 PCK: 15-action actual HiDPI Web continue/movement/pause/SFX/language smoke",
+    "ec13ca4d scripted native course: editorial film full decode and sampled-frame review"
+  ],
+  "not_claimed": [
+    "Current native Menu/Continue/failure pixels: partial occlusion and foreground=false blocked before input; no IO-fault fixture",
+    "Current PCK actual browser run",
+    "Full Web combat/loot/save-reopen/quit/fullscreen/restart acceptance",
+    "Portrait or physical-phone support",
+    "Natural-speed film playback and subjective audio listening"
+  ],
+  "web_config": {
+    "args": [],
+    "canvasResizePolicy": 0,
+    "emscriptenPoolSize": 0,
+    "ensureCrossOriginIsolationHeaders": false,
+    "executable": "../runtime/godot-4.6.3",
+    "experimentalVK": false,
+    "fileSizes": {
+      "../runtime/godot-4.6.3.wasm": 37700666,
+      "relic-bc6af9db60ea.pck": 41192572
+    },
+    "focusCanvas": true,
+    "gdextensionLibs": [],
+    "godotPoolSize": 0,
+    "mainPack": "relic-bc6af9db60ea.pck",
+    "showcasePackSha256": "bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea"
+  }
+}

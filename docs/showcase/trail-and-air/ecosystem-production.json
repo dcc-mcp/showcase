@@ -600,7 +600,7 @@
     {
       "archive": {
         "path": "docs/showcase/trail-and-air/Trail-and-Air-Source.zip",
-        "sha256": "d1efd0e37a1ae6815f60cec45595a0b9042afe5cb2c1f6dd24dcbda297592eab"
+        "sha256": "e2d72ba86773479c93f792f3b7470ac50485c2dae7fda3c749a6985bb56dcdbf"
       },
       "members": [
         {
@@ -759,7 +759,7 @@
           "member": "Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/open_project.py",
           "source": {
             "path": "docs/showcase/trail-and-air/delivery-members/Trail-and-Air-UE-Audio/Skills/reaper-stem-session/scripts/open_project.py",
-            "sha256": "e32fc2dcac5f161012f1d7451d946dc5d9666335ef04b29d27da05fb2d0d7cab"
+            "sha256": "b96b693977b24dda1eb44b13d1d9f262dbb876fbb7d0376f2ca5847d1c944f41"
           },
           "kind": "support",
           "reason": "Existing reproducibility source, license, configuration or verification documentation; inclusion does not claim new execution."
@@ -1023,7 +1023,7 @@
     },
     {
       "path": "docs/showcase/trail-and-air/downloads.json",
-      "sha256": "d12062286cfd582407a4ed857b66087f6e4eef7db1a3fcbd72cf4d6e538d43bc",
+      "sha256": "982808726be377394c4d416286cdb5969d20570eb2f2ee97621e8428ec63995a",
       "reason": "Retained asset specifications, download inventory or source signal measurements; no audio data transformation."
     },
     {
@@ -1065,10 +1065,11 @@
     }
   ],
   "review": {
-    "status": "verified",
+    "status": "stale",
     "evidence": {
       "path": "docs/showcase/trail-and-air/ecosystem-evidence/independent-review.json",
       "sha256": "ed0304e88a9b287f1bd5462f1a2b74e1f926441f3b1f3fefc779feee910ea8a0"
-    }
+    },
+    "reason": "Historical independent review predates the 2026-10-27 support-source/package repair; current graph review is pending. Native outputs and native acceptance receipts are unchanged; no new native execution or acceptance is claimed."
   }
 }

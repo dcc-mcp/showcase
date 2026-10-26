@@ -1,0 +1,37 @@
+{
+  "license": "CC0-1.0",
+  "creator": "Kay Lousberg",
+  "upstream": [
+    "https://kaylousberg.itch.io/kaykit-adventurers",
+    "https://kaylousberg.itch.io/kaykit-forest"
+  ],
+  "method": "Reuse existing licensed Showcase cache. Sword: select existing independent mesh from Knight GLB, unchanged buffer/accessors/material payload; no invented Hyper3D split. Tree: local glTF buffers and image packed into GLB, unchanged geometry. No network download or plugin execution.",
+  "files": [
+    {
+      "name": "bronze-edge.glb",
+      "bytes": 535416,
+      "sha256": "764336cee935dcb7bef4bdcf3b56ef23b5955a5699828c61c02fb39ce8001945"
+    },
+    {
+      "name": "grove-tree.glb",
+      "bytes": 66168,
+      "sha256": "f2eacc5b54c0394d720bfeef0c65cffa7df3eddc412c56140d042b3fc6a314fc"
+    }
+  ],
+  "source_inputs": [
+    {
+      "project_relative": "dawnkeep/game/assets/kaykit/characters/Knight.glb",
+      "bytes": 601300,
+      "sha256": "284ab4da94b1916e72153999add973335e75ca45946b6dee7e69b484e07ac826"
+    },
+    {
+      "project_relative": "dawnkeep/game/assets/kaykit/forest/Tree_4_B_Color1.gltf",
+      "bytes": 3195,
+      "sha256": "c8e5b94d09e563b1bbf95a9fd573f3d2ffbf297ad7a3044f18295baac1803c97"
+    }
+  ],
+  "license_files": [
+    "../../notices/KAYKIT-adventurers-free2.0.txt",
+    "../../notices/KAYKIT-forest-free.txt"
+  ]
+}

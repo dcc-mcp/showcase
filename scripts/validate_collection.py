@@ -321,7 +321,7 @@ def selected_manifest(entry: Path, location: str, root: Path,
             import validate_ecosystem
             native_downloads = (validate_ecosystem.native_download_paths(root, case, all_cases)
                                 if case else set())
-            relative_downloads = {str((root / p).relative_to(entry)) for p in native_downloads
+            relative_downloads = {(root / p).relative_to(entry).as_posix() for p in native_downloads
                                   if (root / p).is_relative_to(entry)}
             for problem in validate_entry.validate(str(entry), native_downloads=relative_downloads):
                 # The legacy checker includes artifact paths in diagnostics.

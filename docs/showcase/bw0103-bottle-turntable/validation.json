@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-22",
+  "status": "selected production study; visual acceptance failed",
+  "selected_for_gallery": true,
+  "environment": {
+    "historical_host": "Blender 4.5.13 LTS",
+    "historical_adapter": "dcc-mcp-blender 0.2.22",
+    "historical_core": "0.20.46",
+    "native_render": "Cycles CPU",
+    "native_render_samples": 64,
+    "native_video_encoding": "Blender VSE through official MCP scripting",
+    "review": "Original media reviewed read-only; the measurement addendum reuses a separately recorded qualified native readback of the unchanged original source. This packaging revision launched no host."
+  },
+  "media": {
+    "path": "turntable.mp4",
+    "sha256": "70b3062f308d8de2ef83417b56de9e3b91b70c19be6cba61d0e76a0cbdaa1a33",
+    "bytes": 584419,
+    "codec": "H.264",
+    "width": 1080,
+    "height": 1080,
+    "fps": 30,
+    "duration_seconds": 6,
+    "decoded_frames": 180,
+    "unique_decoded_frames": 180,
+    "audio_streams": 0
+  },
+  "counts": {
+    "historical_scene_objects": 17,
+    "historical_scene_materials": 6,
+    "retained_source_frames": 180,
+    "retained_request_response_pairs_checked": 126,
+    "original_source_mesh_objects": 10,
+    "original_source_mesh_datablocks": 10,
+    "original_source_mesh_vertices": 3312,
+    "original_source_mesh_edges": 6016,
+    "original_source_mesh_faces": 2720,
+    "original_source_image_datablocks": 0,
+    "original_source_top_level_nodes": 18
+  },
+  "checks": [
+    {
+      "name": "Unchanged film and full decode",
+      "result": "pass",
+      "observed": "The original SHA-256 matches; all 180 frames decode at 1080 square, 30 fps and 6 seconds. Intentionally silent."
+    },
+    {
+      "name": "Historical MCP record identities",
+      "result": "pass",
+      "observed": "All 126 request/response pairs match their retained original SHA-256 values. Excerpts and limitations are in provenance.json."
+    },
+    {
+      "name": "Publication-quality visual review",
+      "result": "fail",
+      "expected": "Clean manufactured-looking pump, stem and collar reflections.",
+      "observed": "The silver components retain conspicuous dented or melted-looking reflections; visual acceptance remains failed. The blank label is intentional.",
+      "frames_reviewed": [
+        1,
+        61,
+        121,
+        180
+      ]
+    },
+    {
+      "name": "Historical gallery selection (2026-10-22)",
+      "result": "pass",
+      "observed": "On 2026-10-22 this slug was absent from collection.json, and that revision added no site, locale catalog or accepted-case selection. The current catalog selects it as a production study with the visual-review failure retained."
+    }
+  ],
+  "acceptance": {
+    "visual": "failed",
+    "complete_public_production_graph": "not-tested",
+    "sanitized_native_public_copy": "blocked",
+    "independent_blank_scene_rebuild": "not-tested",
+    "bilingual_site_and_browser_playback": "not-tested",
+    "gallery_publication": "selected as a production study; site/browser acceptance remains not-tested",
+    "repository_review": "ready_for_review",
+    "final_world_bounding_boxes": "not-tested"
+  },
+  "rights_review": {
+    "case_id": "bw_0103",
+    "verified_at": "2026-10-22",
+    "source_url": "https://blenderworld.github.io/#case=bw_0103",
+    "source_record_url": "https://github.com/BlenderWorld/BlenderWorld.github.io/blob/main/data/site-data.js",
+    "source_blob_sha": "f17ba5434f8cc62ee3bffe6e01b31134920ed83c",
+    "source_sha256": "5f9e24cb0c4f88596f4ebebe7c3e7c047025a8ffa5e39d1b5c416cfd126ab031",
+    "modality": "text",
+    "reference_media_count": 0,
+    "attachments_count": 0,
+    "scope": "Original numerical geometry and procedural materials, with no external model, image, texture, HDRI, font, logo or audio imported in the retained construction records. No third-party task text or media is redistributed. No dataset MIT grant is inferred."
+  },
+  "privacy_review": {
+    "text": "All selected text was reviewed. Original routing, native paths, job/process IDs, Library IDs and unrelated records are omitted.",
+    "media": "Container/stream metadata reviewed; no private path or identifying comment found. Frames 1, 61, 121 and 180 were visually inspected: product-only renders with no UI or personal information. No claim of exhaustive manual inspection of every frame.",
+    "excluded": [
+      "Original .blend files",
+      "Raw MCP transcripts",
+      "Source PNGs and decoded verification PNGs",
+      "External brief, references, model outputs and scores"
+    ]
+  },
+  "not_claimed": [
+    "Visual acceptance or a publication-quality product render.",
+    "Complete public provenance or independent reproduction.",
+    "A sanitized downloadable native scene or new native run.",
+    "All-locale site or browser-playback acceptance.",
+    "An official benchmark score, blind evaluation or comparison with another model.",
+    "Mechanical 24/410 manufacturing certification.",
+    "Verified historical model or reasoning-effort attribution.",
+    "Final world-space bounding-box endpoints; these were not retained in the qualified readback."
+  ],
+  "model_attribution": [
+    {
+      "stage_id": "planning",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "creation",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "code",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "reference",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "post_production",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "review_visual",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    },
+    {
+      "stage_id": "review_technical",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "No verified accepted model configuration record is available for this stage."
+    }
+  ],
+  "production_context": {
+    "brief": "Based on the BlenderWorld BW0103 text prompt.",
+    "production": "Created entirely through the DCC-MCP ecosystem: native authoring, rendering and video encoding used official MCP tools and bounded official MCP scripting.",
+    "brief_zh": "参考 BlenderWorld BW0103 提示词。",
+    "production_zh": "全部通过我们的 DCC-MCP 生态制作：原生创作、渲染与视频编码使用官方 MCP 工具和受限的官方 MCP 脚本。",
+    "revision_scope": "Documentation, PR review status and sanitized retained measurements only; no asset replacement or new acceptance claim."
+  },
+  "geometry": {
+    "evidence": "provenance.json#original_source_measurement_addendum",
+    "frame": 1,
+    "meters_per_blender_unit": 1.0,
+    "objects": {
+      "BW_BlankLabel": {
+        "dimensions_m": [
+          0.03809148445725441,
+          0.01363354455679655,
+          0.03999999910593033
+        ]
+      },
+      "BW_Body": {
+        "dimensions_m": [
+          0.03999999910593033,
+          0.03999999910593033,
+          0.10499999672174454
+        ]
+      },
+      "BW_Collar": {
+        "dimensions_m": [
+          0.02800000086426735,
+          0.02800000086426735,
+          0.013999998569488525
+        ]
+      },
+      "BW_ConcealedThread": {
+        "dimensions_m": [
+          0.023996591567993164,
+          0.023991771042346954,
+          0.0045297518372535706
+        ]
+      },
+      "BW_Gasket": {
+        "dimensions_m": [
+          0.02500000037252903,
+          0.02500000037252903,
+          0.001999996602535248
+        ]
+      },
+      "BW_LeftFlag": {
+        "dimensions_m": [
+          0.0,
+          0.1599999964237213,
+          0.25999999046325684
+        ]
+      },
+      "BW_Neck": {
+        "dimensions_m": [
+          0.02280000038444996,
+          0.02280000038444996,
+          0.015999995172023773
+        ]
+      },
+      "BW_Nozzle": {
+        "dimensions_m": [
+          0.005600001197308302,
+          0.0292154960334301,
+          0.016513720154762268
+        ]
+      },
+      "BW_PumpTop": {
+        "dimensions_m": [
+          0.019999999552965164,
+          0.019999999552965164,
+          0.012000009417533875
+        ]
+      },
+      "BW_RightFlag": {
+        "dimensions_m": [
+          0.0,
+          0.1599999964237213,
+          0.25999999046325684
+        ]
+      },
+      "BW_SeamlessBackdrop": {
+        "dimensions_m": [
+          1.5,
+          1.0,
+          0.6509999632835388
+        ]
+      },
+      "BW_Stem": {
+        "dimensions_m": [
+          0.00800000037997961,
+          0.00800000037997961,
+          0.01199999451637268
+        ]
+      }
+    },
+    "bounding_boxes": {
+      "status": "not-recorded",
+      "bbox_min_m": null,
+      "bbox_max_m": null,
+      "reason": "This readback retained dimensions and geometry fingerprints, not bounding-box corners or vertex coordinates. Dimensions and texture-space fields are not substituted for final world-space bounds."
+    }
+  },
+  "measurement_scope": "Counts and dimensions of the unchanged original native source were read through official MCP on 2026-10-22 before diagnostic changes. Mesh totals exclude curve tessellation; node totals cover top-level trees. Original creation and this later readback remain separate.",
+  "catalog_admission": {
+    "recorded_at": "2026-10-26",
+    "selected_as": "production study with conspicuous visual-review failure",
+    "historical_selection_status": "excluded from collection on2026-10-22",
+    "visual_verdict_changed": false,
+    "native_source_distributed": false,
+    "poster": {
+      "path": "hero.jpg",
+      "source": "turntable.mp4",
+      "source_frame": 61,
+      "source_time_seconds": 2,
+      "processing": "decode original frame61 and JPEG encode; no crop, repaint or artwork regeneration",
+      "source_sha256": "70b3062f308d8de2ef83417b56de9e3b91b70c19be6cba61d0e76a0cbdaa1a33"
+    }
+  }
+}

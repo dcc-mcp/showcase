@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "slug": "blender-mcp-gimbal-turntable",
+      "status": "unlisted",
+      "reason": "Historical adapter and rendering evidence retained for inspection; not selected as a current curated gallery work."
+    },
+    {
+      "slug": "blender-to-maya-obj",
+      "status": "unlisted",
+      "reason": "Historical cross-host calibration and measurement contrast retained as supporting evidence; not a standalone curated gallery work."
+    }
+  ]
+}

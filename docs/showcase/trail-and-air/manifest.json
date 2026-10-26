@@ -23,8 +23,8 @@
     },
     {
       "path": "Trail-and-Air-Source.zip",
-      "bytes": 59262,
-      "sha256": "d1efd0e37a1ae6815f60cec45595a0b9042afe5cb2c1f6dd24dcbda297592eab"
+      "bytes": 59282,
+      "sha256": "e2d72ba86773479c93f792f3b7470ac50485c2dae7fda3c749a6985bb56dcdbf"
     },
     {
       "path": "Trail-and-Air-audition.mp3",
@@ -39,7 +39,7 @@
     {
       "path": "downloads.json",
       "bytes": 611,
-      "sha256": "d12062286cfd582407a4ed857b66087f6e4eef7db1a3fcbd72cf4d6e538d43bc"
+      "sha256": "982808726be377394c4d416286cdb5969d20570eb2f2ee97621e8428ec63995a"
     },
     {
       "path": "ecosystem-evidence/build_audio_scene.py.source.json",
@@ -193,8 +193,8 @@
     },
     {
       "path": "ecosystem-production.json",
-      "bytes": 56175,
-      "sha256": "2a21405e6db79fafeef06e7791616ca3b49538b2c89a6dcc5a942b17e156813a"
+      "bytes": 56418,
+      "sha256": "509cc9a393d640da9594fe74fd1d7951e236a0ae77ff39b03bf867969c3d59f3"
     },
     {
       "path": "hero.jpg",
