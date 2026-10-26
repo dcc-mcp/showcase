@@ -42,6 +42,13 @@ docs/showcase/<slug>/
 `README.md`, `manifest.json` and `validation.json` are all three mandatory.
 An entry missing one of them is a draft, not an entry.
 
+Every complete entry must have an explicit publication decision: select it in
+`collection.json`, or record its slug, status and concrete reason in
+`unlisted-cases.json`. The build rejects missing, conflicting and stale
+decisions before replacing its output. Unlisted assets remain unpublished.
+See [the submission guide](../../agent.dm) for exact model identifiers,
+host builds, named adapter/package versions and post-deployment checks.
+
 ## 1. `README.md` — the report
 
 Written for someone who will not run anything. It must contain, in this order:

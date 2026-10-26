@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "draft; not ready for public collection",
+  "status": "selected public evidence case with limited verification; full-film acceptance incomplete",
   "environment": {
     "native_host": "3ds Max2024.2.14",
     "native_python": "3.10.14",
@@ -221,5 +221,12 @@
       "cleanup_pending": false
     },
     "source_max_sha256": "08c42b0eebce6605f52593c2c82707adaa0d88c965ad6c2ff4ffc41a0ccbd732"
+  },
+  "catalog_admission": {
+    "recorded_at": "2026-10-26",
+    "selected": true,
+    "scope": "native geometry, same-input guided denoise comparison and two real Max UI captures",
+    "historical_status": "draft; not ready for public collection",
+    "full_film_or_general_acceptance": false
   }
 }

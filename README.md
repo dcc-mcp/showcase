@@ -53,12 +53,15 @@ available evidence before reproducing it. Source availability, reproduction
 checks and rights are case-specific; the gallery does not grant blanket reuse
 or model-training permission.
 
+Contributors: follow [agent.dm](agent.dm) for required model and exact
+host/adapter version records, explicit gallery selection, checks and deployment
+readback. Every complete case is selected or deliberately listed with a reason
+in [unlisted-cases.json](unlisted-cases.json); missing decisions fail the build.
+
 ## Collection and evidence
 
-The collection currently contains thirteen individually documented cases: Brass Pendulum, a Houdini
-vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
-Relay, Seismic Lens, Orbit Post Office, Trail & Air, Rainroom, Resonance Atlas,
-Sonic Loom and Prism Tide. Each page separates original production from later
+The current selection and counts come from `collection.json` and the generated
+gallery. Each page separates original production from later
 visual/technical review. Historical exact models and reasoning effort remain
 unknown where production records did not capture them; a later review
 does not establish the attribution of earlier artwork. The existing review

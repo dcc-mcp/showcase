@@ -3,6 +3,8 @@
 For creating, revising or accepting a DCC-MCP showcase, load
 [the production Skill](skills/dcc-showcase-production/SKILL.md).
 It composes with the existing `dcc-mcp` live-host Skill and Core workflow.
+Follow [agent.dm](agent.dm) for submission fields, exact model/host/adapter
+versions, explicit gallery selection and deployment verification.
 
 - Publication data: [entry contract](docs/showcase/CONTRACT.md), `collection.json`.
 - Site work: [README build/check instructions](README.md#build-and-check) and
