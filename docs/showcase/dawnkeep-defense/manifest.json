@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "reference": "https://github.com/dcc-mcp/showcase/tree/957c1d3928d4d7382535a5b50ae2990aa4cf5854/scripts/godot_web/dawnkeep",
+  "godot_application": "Godot",
+  "godot_version": "4.6.3.stable.official.7d41c59c4",
+  "blender_application": "Blender",
+  "blender_version": "4.3.2",
+  "capture_provider": "desktop",
+  "capture_scope": "Actual native X11 game-window recording/screenshots and Chrome page captures; no generated replacements.",
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "files": [
+    {
+      "path": "Dawnkeep-native-957c1d3.zip",
+      "sha256": "cca032f2296ee25d9b01a3e44a23d1991fd7fc92c072dffda8045965d5ed4b59",
+      "bytes": 4822730,
+      "container_kind": "ZIP",
+      "member_count": 79
+    },
+    {
+      "path": "LICENSES.md",
+      "sha256": "8b501aea95ae973a23994424b3851e633701aebb434947cbb1fd0ae8eefbb15d",
+      "bytes": 3356
+    },
+    {
+      "path": "boss.jpg",
+      "sha256": "691e78f2e9a6b92530b090a729c2b4be9cc2f44a5d4deba5229300e2d6281c93",
+      "bytes": 109965,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "defeat.jpg",
+      "sha256": "0b1d8064746dea23cf7947cf7a7dbf43eab6721787f61df6d9c1d703266cfd54",
+      "bytes": 70546,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "evidence/art-downloads.json",
+      "sha256": "77ac09251d06b7fc6a1769b41a148e8a4edb657c1eda5fc5edc6b81efdb59b4c",
+      "bytes": 2891
+    },
+    {
+      "path": "evidence/art-runtime-sources.json",
+      "sha256": "e4baa69701fb5efc15c90d1dfb58117dec35290e9b709132f91bbebd45f3dc55",
+      "bytes": 20168
+    },
+    {
+      "path": "evidence/blender-rebuild.json",
+      "sha256": "e2f1f4affcd5bc72be1dbc00d51ca5b52c3a5e5caf1a7fa2732fef49e2eb7d26",
+      "bytes": 1915
+    },
+    {
+      "path": "evidence/blender-reopen.json",
+      "sha256": "432f7e799efcb4af858db3cb5de432847cdb2d72a1e59007ac116e4a9d37d60d",
+      "bytes": 4430
+    },
+    {
+      "path": "evidence/font-source.json",
+      "sha256": "ddc9ae802379b089c6b5c44c7749f01a00e76bbff908b5f980c3ab7f34ee12be",
+      "bytes": 441
+    },
+    {
+      "path": "evidence/headless-acceptance.json",
+      "sha256": "d48776d65f9bd7c015b6e1fa95c178fcc3de6e6188873db1abbeb6543843963a",
+      "bytes": 10438
+    },
+    {
+      "path": "evidence/image-derivatives.json",
+      "sha256": "cd4951df9eba89290658a7b185af5d1d2a851d40333b753890dfe5e56cbc7635",
+      "bytes": 2256
+    },
+    {
+      "path": "evidence/input-acceptance.json",
+      "sha256": "2e2f409473443347903fbecd03baf8fd78e7cf9c25e6b2d416fa03a52358c8c5",
+      "bytes": 449774
+    },
+    {
+      "path": "evidence/mcp-public.json",
+      "sha256": "0a6195d9c90118d3813ff9c8b6b5ada3cfe35d20751e37e5cf3d7d1cfd09004c",
+      "bytes": 34033
+    },
+    {
+      "path": "evidence/music-sources.json",
+      "sha256": "6b31207373ad1c19432fd22049327951bdfa6f6cc62b0357c1f7dddd1f435a6e",
+      "bytes": 1974
+    },
+    {
+      "path": "evidence/native-manifest.json",
+      "sha256": "9624c26dca469cc242e64ee9bd5e9060c80b8efd31d524ac1134aae39f691341",
+      "bytes": 12964
+    },
+    {
+      "path": "evidence/native-package.json",
+      "sha256": "2171d0cabbecf1480dfd8167a41c4c5d56e160a38620f316e3aec477907ee8e8",
+      "bytes": 14248
+    },
+    {
+      "path": "evidence/publication-review.json",
+      "sha256": "66edf79e21892eb74cdea3849a85112636556e45ebc71583b3afa970821ccc3f",
+      "bytes": 2954
+    },
+    {
+      "path": "evidence/video-edit.json",
+      "sha256": "798453491a072d5cb430be24bde27b60c6e7db6b28cad1e599ef444011295dae",
+      "bytes": 1587
+    },
+    {
+      "path": "evidence/visual-review-historical.json",
+      "sha256": "620a2a68e8daafb55121a3f6bad11baaf6277792d78cd10624e832f64f7032e8",
+      "bytes": 11509
+    },
+    {
+      "path": "gameplay.mp4",
+      "sha256": "2d8101c73a87a8fd7e1aef4257f071d4b9835a6fc36b48cd127a489fc6302b18",
+      "bytes": 2610871,
+      "container_kind": "MP4",
+      "video_codec": "H.264",
+      "width": 1280,
+      "height": 720,
+      "duration_seconds": 58,
+      "frame_rate": 20,
+      "audio_codec": "AAC",
+      "audio_channels": 2
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "ab8fcfad4554aa6d7da257ed7303e7615019981f50222fba12318ea6173c3bab",
+      "bytes": 112041,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "portrait.jpg",
+      "sha256": "b0a62c2691b856539d3702d763625bd9f1c3a5c0ee6cffec921fca4bab815e70",
+      "bytes": 69153,
+      "width": 390,
+      "height": 844,
+      "bit_depth": 8
+    },
+    {
+      "path": "victory.jpg",
+      "sha256": "a2b4c6cbe64f4786cb0a4b1b4af3eaee5783d599f7b4f578c8060767b6863998",
+      "bytes": 63645,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    }
+  ]
+}

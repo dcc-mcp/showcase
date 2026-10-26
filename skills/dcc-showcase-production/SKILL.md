@@ -2,7 +2,7 @@
 name: dcc-showcase-production
 description: Create, revise, or accept a DCC-MCP showcase with real host output, reproducible assets, media and interaction review, and evidence-backed publication boundaries. Use for showcase production and case acceptance, not generic adapter development or site-only styling.
 metadata:
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # DCC showcase production
@@ -24,6 +24,10 @@ package. Do not build another runtime, installer, or marketplace.
 - For **review or delivery**, read [Acceptance](references/acceptance.md).
   Inspect actual output and run applicable tests; do not rerun production merely
   to fill a report. Missing access is a blocker, not proof of failure or success.
+- For **Godot native menus, HUDs or responsive UI**, read
+  [Native UI](references/godot-native-ui.md) before authoring or accepting layout.
+  Reuse installed scene/node/Theme tools; separate stored properties, settled
+  runtime geometry, visual review and real input evidence.
 - For **evidence recording or legacy audit**, read [Evidence](references/evidence.md).
   Keep creation and review attribution separate and unknown where unsupported.
 - For **another agent or installation**, read [Discovery](references/discovery.md).

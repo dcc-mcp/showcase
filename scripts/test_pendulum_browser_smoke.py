@@ -228,7 +228,7 @@ class TrackedBytesTests(unittest.TestCase):
         self.original = b'\x00actual binary media\xff\n'
         self.file = self.repo / 'sample.bin'
         self.file.write_bytes(self.original)
-        (self.repo / '.gitattributes').write_text('sample.bin filter=fixture -text\n')
+        (self.repo / '.gitattributes').write_bytes(b'sample.bin filter=fixture -text\n')
         self.git('add', '.')
         self.git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
                  'commit', '-qm', 'fixture raw blob')
@@ -243,6 +243,58 @@ class TrackedBytesTests(unittest.TestCase):
         receipt = self.receipt()
         self.assertTrue(receipt['passed'], receipt)
         self.assertEqual(receipt['raw_hashes_matched'], 2)
+
+    def commit_pointer(self, payload, pointer=None):
+        if pointer is None:
+            pointer = ('version https://git-lfs.github.com/spec/v1\noid sha256:' +
+                hashlib.sha256(payload).hexdigest() + '\nsize ' + str(len(payload)) + '\n').encode()
+        self.file.write_bytes(pointer)
+        self.git('add', 'sample.bin')
+        self.git('-c', 'user.name=Test', '-c', 'user.email=test@example.invalid',
+                 'commit', '-qm', 'LFS pointer fixture')
+        self.file.write_bytes(payload)
+        return pointer
+
+    def test_hydrated_lfs_and_unhydrated_pointer_both_match(self):
+        pointer = self.commit_pointer(b'actual hydrated media\x00\xff')
+        with patch.object(Path, 'read_bytes', side_effect=AssertionError('Unbounded payload read')):
+            receipt = self.receipt()
+        self.assertTrue(receipt['passed'], receipt)
+        self.assertEqual(receipt['raw_hashes_matched'], 1)
+        self.assertEqual(receipt['lfs_objects_matched'], 1)
+        self.file.write_bytes(pointer)
+        self.assertTrue(self.receipt()['passed'])
+
+    def test_hydrated_lfs_requires_exact_size_and_hash(self):
+        payload = b'actual hydrated media'
+        self.commit_pointer(payload)
+        for wrong in (b'x' * len(payload), payload + b'x', b''):
+            with self.subTest(payload=wrong), patch.object(Path, 'read_bytes',
+                    side_effect=AssertionError('Unbounded payload read')):
+                self.file.write_bytes(wrong)
+                self.assertFalse(self.receipt()['passed'])
+
+    def test_malformed_committed_pointer_cannot_authorize_payload(self):
+        self.commit_pointer(b'actual hydrated media',
+            b'version https://git-lfs.github.com/spec/v1\noid sha256:INVALID\nsize 21\n')
+        with patch.object(Path, 'read_bytes', side_effect=AssertionError('Unbounded payload read')):
+            self.assertFalse(self.receipt()['passed'])
+
+    def test_large_committed_blob_is_not_loaded_as_pointer(self):
+        self.commit_pointer(b'changed bytes', b'ordinary committed media' * 20)
+        with patch('pendulum_browser_smoke.subprocess.check_output',
+                   wraps=subprocess.check_output) as git:
+            self.assertFalse(self.receipt()['passed'])
+        self.assertFalse(any('cat-file' in call.args[0] and 'blob' in call.args[0]
+                             for call in git.call_args_list))
+
+    def test_hydrated_lfs_does_not_hide_index_changes(self):
+        self.commit_pointer(b'actual hydrated media')
+        (self.repo / 'extra.txt').write_text('staged addition')
+        self.git('add', 'extra.txt')
+        receipt = self.receipt()
+        self.assertFalse(receipt['passed'])
+        self.assertEqual(receipt['lfs_objects_matched'], 1)
 
     def test_clean_filter_false_dirty_keeps_status_and_requires_exact_raw_bytes(self):
         code = "import sys; sys.stdin.buffer.read(); sys.stdout.write('synthetic pointer\\n')"
@@ -282,6 +334,7 @@ class TrackedBytesTests(unittest.TestCase):
         self.git('rm', '--cached', 'sample.bin')
         self.assertFalse(self.receipt()['passed'])
 
+    @unittest.skipUnless(os.name == 'posix', 'POSIX executable modes')
     def test_executable_mode_change_fails(self):
         self.file.chmod(0o755)
         self.assertFalse(self.receipt()['passed'])

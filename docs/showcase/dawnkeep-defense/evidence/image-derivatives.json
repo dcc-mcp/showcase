@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "files": [
+    {
+      "source": "dawnkeep-native-full/prepared-defense.png",
+      "source_sha256": "8bbcd76bd4f5a0e91e2a4b2f43e0cf085283b6d27bb8b038e27e12d187135b2c",
+      "public": "hero.jpg",
+      "public_sha256": "ab8fcfad4554aa6d7da257ed7303e7615019981f50222fba12318ea6173c3bab",
+      "transform": "JPEG quality 82, metadata omitted; original dimensions, no crop or pixel retouch",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "source": "dawnkeep-native-full/uncrowned-king.png",
+      "source_sha256": "5e523dbb7a7923ce3ad4b9116267c91625e3c397f50723cfead19224cf1d99eb",
+      "public": "boss.jpg",
+      "public_sha256": "691e78f2e9a6b92530b090a729c2b4be9cc2f44a5d4deba5229300e2d6281c93",
+      "transform": "JPEG quality 82, metadata omitted; original dimensions, no crop or pixel retouch",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "source": "dawnkeep-native-full/eight-wave-victory.png",
+      "source_sha256": "2ed64c321df9e297303fd8b48a1960f854fce7b6848982d9943e099831e3b8ab",
+      "public": "victory.jpg",
+      "public_sha256": "a2b4c6cbe64f4786cb0a4b1b4af3eaee5783d599f7b4f578c8060767b6863998",
+      "transform": "JPEG quality 82, metadata omitted; original dimensions, no crop or pixel retouch",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "source": "dawnkeep-native-full/natural-defeat.png",
+      "source_sha256": "142ba6a7a59bff23d422d64067e73fc31bf37694452706842844a6c1ae0c5a57",
+      "public": "defeat.jpg",
+      "public_sha256": "0b1d8064746dea23cf7947cf7a7dbf43eab6721787f61df6d9c1d703266cfd54",
+      "transform": "JPEG quality 82, metadata omitted; original dimensions, no crop or pixel retouch",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "source": "dawnkeep-browser/portrait/combat-progress.png",
+      "source_sha256": "1d19aca5ec2c1d66acd0fab084c053bdba1866bcec200088ca3f6b56472a1d80",
+      "public": "portrait.jpg",
+      "public_sha256": "b0a62c2691b856539d3702d763625bd9f1c3a5c0ee6cffec921fca4bab815e70",
+      "transform": "JPEG quality 82, metadata omitted; original dimensions, no crop or pixel retouch",
+      "width": 390,
+      "height": 844
+    }
+  ]
+}

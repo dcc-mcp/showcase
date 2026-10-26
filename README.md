@@ -53,12 +53,15 @@ available evidence before reproducing it. Source availability, reproduction
 checks and rights are case-specific; the gallery does not grant blanket reuse
 or model-training permission.
 
+Contributors: follow [AGENTS.md](AGENTS.md) for required model and exact
+host/adapter version records, explicit gallery selection, checks and deployment
+readback. Every complete case is selected or deliberately listed with a reason
+in [unlisted-cases.json](unlisted-cases.json); missing decisions fail the build.
+
 ## Collection and evidence
 
-The collection currently contains thirteen individually documented cases: Brass Pendulum, a Houdini
-vessel, two historical Substance3D Designer studies, Crystal Freight, Brass
-Relay, Seismic Lens, Orbit Post Office, Trail & Air, Rainroom, Resonance Atlas,
-Sonic Loom and Prism Tide. Each page separates original production from later
+The current selection and counts come from `collection.json` and the generated
+gallery. Each page separates original production from later
 visual/technical review. Historical exact models and reasoning effort remain
 unknown where production records did not capture them; a later review
 does not establish the attribution of earlier artwork. The existing review
@@ -298,3 +301,24 @@ the iframe, releasing that session; unsaved state is lost. A standalone link
 works without the collection's JavaScript. No manifest means no demo assets or
 player script are added to the build. Run `python scripts/test_playable.py` when
 changing this contract.
+
+## Model preview and benchmark pilot (draft infrastructure)
+
+Case details now expose an honest evaluation-record empty state and a machine
+index, with a proposed task/run schema in `benchmark/`. This is not a benchmark
+release: no scores, accepted runs, frozen task IDs or evaluation-use grants are
+invented from historical production records. See `benchmark/PROTOCOL.md`.
+
+The reusable GLB viewer uses locally vendored model-viewer 4.4.0 and opt-in
+loading, orbit/zoom/reset controls and static case-image fallback. Its production
+allowlist remains empty. Activation requires the complete case ecosystem gate
+(PR #46), public inventory hash binding, scoped display permission, and a
+self-contained GLB within the 8-MiB budget. Single-asset reconstruction does not
+certify an entire case or authorize release.
+
+For local UI development, `scripts/model_preview_pilot.py` accepts an explicit
+asset, SHA-256 and license path and writes only `_model-preview-pilot/`.
+`python scripts/model_preview_browser_smoke.py --test-fixture --output <qa-dir>`
+tests a clearly synthetic software fixture in Chromium, separately from genuine
+DCC production/visual acceptance. Nothing from that harness enters `_site/`.
+Run `python scripts/test_model_previews.py` with the ordinary site checks.

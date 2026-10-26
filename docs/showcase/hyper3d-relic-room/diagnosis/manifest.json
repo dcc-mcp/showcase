@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "scope": "Diagnostic addendum only; main case manifest is intentionally unchanged pending final freeze.",
+  "files": [
+    {
+      "path": "ASSET-DIAGNOSIS.md",
+      "sha256": "14dd4ee9c9d98a3034d8e5186644caa9b96334c7fd234c89357250089413ef67",
+      "bytes": 10152
+    },
+    {
+      "path": "diagnosis/budget-ledger.public.json",
+      "sha256": "ce208e6cbe1205e16799dfb1f06653e14bd47e549877d1332257e69b460a4c5f",
+      "bytes": 3061
+    },
+    {
+      "path": "diagnosis/chest-previous-v2.jpg",
+      "sha256": "482a2088153c38bf656f51d04e8f1ce3d28977e5cd0fba6147ce68751b2019f8",
+      "bytes": 50081,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/chest-source.jpg",
+      "sha256": "7531ab51b184b935ff10ef0426ba73fc343b673e162e4acf2a37aa5a059a07cb",
+      "bytes": 51278,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/courier-new-static.jpg",
+      "sha256": "613e313ceb32926f7d52d919e65db0eef733b641aa5525b911a47c0c3915bc0b",
+      "bytes": 34737,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/courier-previous-runtime.jpg",
+      "sha256": "afa30e2ca7bd63c7b7e351d70d533903116a7018e54b36be094ba5612e7f6829",
+      "bytes": 138297,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/evidence.json",
+      "sha256": "767034a30163d82f33ef59393582355a100184d2df1ebdd0400fda2eabf7e44c",
+      "bytes": 72989
+    },
+    {
+      "path": "diagnosis/guardian-new-static.jpg",
+      "sha256": "888db7121d07255540b741a54a73d4488af0189c66d25ceebb708869fd2685ef",
+      "bytes": 53130,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/guardian-previous-generated.jpg",
+      "sha256": "176b700712c847a30e51b3eb714bfc7b404cf581bb49c84a1d02f0e8c5fb0718",
+      "bytes": 20113,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/hero-acquisition.public.json",
+      "sha256": "7d361e51a80a49abe58da5a6c2313a76d1e16e0627ef2cee2c07ea138598a550",
+      "bytes": 3282
+    },
+    {
+      "path": "diagnosis/portal-previous-v2.jpg",
+      "sha256": "1c89310dd094a98716b29458d1b0be8c1a353c481ed53fed578e330fd2b1f73f",
+      "bytes": 40727,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/portal-source.jpg",
+      "sha256": "4652ae9f2866118d8963e956599ce006e95a271d47d30856de6ab52570a2a998",
+      "bytes": 41969,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/shrine-previous-v2-5k.jpg",
+      "sha256": "81ebea489ab457e9e9f19555d11bd26026890b6f72723d4938f06f9e90df8bf7",
+      "bytes": 59208,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/shrine-repaired-60k.jpg",
+      "sha256": "d5c8ade06723dd602f9eb47efcd7043f4ee65f53a3059098b9712d366d74b8f8",
+      "bytes": 55007,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/shrine-repaired-godot.jpg",
+      "sha256": "309243c760e7f9f7e54b4ae809bad0a24e4186054d55c0ec15bb0a05824cee6c",
+      "bytes": 120507,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "diagnosis/shrine-source.jpg",
+      "sha256": "1e87ee50ef5d4810124e8729c0283ac740dd0124f579dc1cbe46d88cbb201aba",
+      "bytes": 55201,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    }
+  ]
+}

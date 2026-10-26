@@ -72,12 +72,12 @@ def read_and_validate(root, cases):
 
 def section(demo, prefix='../../'):
     import build_site as site
-    return '''<section class="detail-section playable-section" id="play" data-playable>
+    return '''<section class="detail-section playable-section" id="play" data-playable data-play-case="%s">
 <h2>在浏览器中体验</h2><p>%s</p><p class="prompt-note">%s</p>
 <p class="prompt-note">WebGL 2 · %s · 点击后才加载。关闭体验会丢弃未保存的状态。</p>
 <div class="playable-actions"><button class="primary-button" type="button" data-play-start data-play-url="%s" hidden>打开交互体验</button>
 <button class="copy-button" type="button" data-play-exit hidden>关闭体验</button>
 <a class="text-link" data-play-link href="%s?lang=zh">在独立页面打开 ↗</a></div>
 <div class="playable-frame" data-play-frame></div><p role="status" aria-live="polite" data-play-status></p>
-</section>''' % (site.esc(demo['controls']['zh']), site.esc(demo['notes']['zh']), site.esc(demo['engine']),
+</section>''' % (site.esc(demo['case_slug']), site.esc(demo['controls']['zh']), site.esc(demo['notes']['zh']), site.esc(demo['engine']),
                 site.esc(prefix + demo['url']), site.esc(prefix + demo['url']))

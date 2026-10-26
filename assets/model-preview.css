@@ -1,0 +1,8 @@
+.model-preview { margin-block: 1.5rem; padding: 1rem; border: 1px solid var(--line, #8886); border-radius: 1rem; }
+.model-preview model-viewer { width: 100%; height: clamp(260px, 50vh, 560px); background: #182025; border-radius: .75rem; }
+.model-preview button { min-width: 44px; min-height: 44px; margin: .25rem; padding: .5rem .75rem; cursor: pointer; }
+.model-preview button:focus-visible { outline: 3px solid #da9b34; outline-offset: 3px; }
+.model-preview [hidden] { display: none !important; }
+.benchmark-record dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+.benchmark-record dt { font-size: .85rem; opacity: .7; }
+.benchmark-record dd { margin: .35rem 0 0; }

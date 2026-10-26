@@ -66,3 +66,21 @@ Kenney, Poly Haven and KayKit upstream content retains CC0 1.0 Universal,
 and the subset font retains the
 SIL Open Font License; their upstream notices and rights are unchanged. This
 exclusion does not change the scope of any other case's recorded rights.
+
+Dawnkeep original game exclusion
+
+The original gameplay, game scene/script/content, interface, visual design,
+authored artwork, generated feedback sound, production recipes and resulting
+media in scripts/godot_web/dawnkeep/ are excluded from the MIT grant above and
+retain the rights recorded in scripts/godot_web/dawnkeep/LICENSES.md. Shared
+acceptance/tooling adaptations retain their existing notices. Credited upstream
+CC0 model/music assets, OFL font and Godot runtime keep their original licenses.
+This exclusion does not change any other case's rights.
+
+BW0103 bottle turntable case exclusion
+
+The original film and case-specific creative documentation and evidence in
+docs/showcase/bw0103-bottle-turntable/ retain their existing rights and are
+excluded from the MIT grant above. Authorized public review makes no
+additional license grant or ownership transfer. See that case's LICENSES.md.
+Shared website code and other cases' rights are unchanged.

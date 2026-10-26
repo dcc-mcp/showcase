@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "status": "WEB_POINTER_KEYBOARD_SMOKE_PASS_WITH_BLOCKED_EXTENDED_GATES",
+  "scope": "Actual isolated Chromium Web load and15 physical pointer/key actions. This is input smoke acceptance only.",
+  "route": {
+    "provider": "dcc-cua",
+    "runtime_version": "1.13.0",
+    "core_version": "0.20.46",
+    "browser": "Chromium isolated_new",
+    "physical_delivery": "windows_exact_pixel_final_input",
+    "compatibility": "Task-local Core game_navigation/duration forwarding; stock observation/native-birth/window/delivery fences retained.",
+    "pixel_fence": "Exact owned native window and native process birth",
+    "separate_semantic_checks": "Same retained typed browser target/tab/local origin and focused canvas checked before and after each input.",
+    "atomic_tab_origin_authority": false,
+    "cross_route_limit": "Native pixel input is window fenced. Separate typed browser checks are not an atomic tab/origin fence."
+  },
+  "display": {
+    "window_physical_pixels": [
+      1420,
+      1208
+    ],
+    "window_dpi": 240,
+    "captured_pixels": [
+      1394,
+      1195
+    ],
+    "downscaled": false,
+    "hi_dpi_scope": "Current bounded device-pixel-ratio shell displayed usable gameplay/pause/localized UI at this one tested configuration."
+  },
+  "verified_counts": {
+    "successful_physical_actions": 15,
+    "left_clicks": 5,
+    "key_actions": 10,
+    "movement_holds": 8,
+    "movement_hold_total_ms": 3075,
+    "maximum_hold_ms": 500,
+    "escape_taps": 2,
+    "successful_pixel_snapshots": 30,
+    "explicit_fresh_snapshot_token_joins": 15,
+    "typed_pre_post_pairs": 15,
+    "same_native_binding_and_birth": true,
+    "post_dispatch_fences_passed": 15,
+    "unobscured_exact_window_captures": 29,
+    "partially_redacted_captures": 1,
+    "redacted_capture_input_scope": "Initial Continue click was outside its redacted area; native final input and post-dispatch fences passed. All key-action observations were unobscured.",
+    "whole_desktop_capture": false
+  },
+  "gates": {
+    "current_web_build_load": "PASS",
+    "canvas_continue": "PASS",
+    "pointer_keyboard_input_smoke": "PASS",
+    "bridge_and_court_movement_smoke": "PASS",
+    "pause_resume_ui": "PASS",
+    "sfx_off_on_ui_state": "PASS_UI_ONLY",
+    "english_chinese_ui_toggle": "PASS",
+    "full_course": "NOT_RUN_BLOCKED",
+    "loot": "NOT_RUN_BLOCKED",
+    "battle": "NOT_RUN_BLOCKED",
+    "persistence": "NOT_RUN_BLOCKED",
+    "quit": "NOT_RUN_BLOCKED",
+    "fullscreen": "NOT_RUN_BLOCKED",
+    "restart": "NOT_RUN_BLOCKED"
+  },
+  "stop_condition": {
+    "code": "capture_failed",
+    "capture_reason": "root_overlap",
+    "scope": "Next observation could not prove an unobscured exact target. No further action appears in the saved run ledger.",
+    "failed_action_replayed": false
+  },
+  "cleanup": {
+    "pixel_session_ack": "PASS",
+    "owned_browser_ack": "PASS",
+    "ordered_pixel_session_then_browser_owner": true,
+    "active_after_cleanup": false,
+    "pending": false,
+    "issues": 0
+  },
+  "not_claimed": {
+    "continuous_web_gameplay_video": "NOT_RUN",
+    "experimental_PV_JPEG_contract": "NOT_RUN",
+    "browser_console": "NOT_RUN",
+    "arbitrary_javascript_evaluation": "NOT_USED",
+    "physical_mobile_device": "NOT_RUN",
+    "subjective_audio_mix_listening": "NOT_RUN",
+    "engine_position_injection": "None in the recorded input route; requests are physical clicks/keys only."
+  },
+  "actions": [
+    {
+      "action": 1,
+      "purpose": "Continue expedition inside canvas",
+      "completed": true
+    },
+    {
+      "action": 2,
+      "purpose": "Walk from safe town spawn",
+      "completed": true
+    },
+    {
+      "action": 3,
+      "purpose": "Cross bridge",
+      "completed": true
+    },
+    {
+      "action": 4,
+      "purpose": "Reach court entrance",
+      "completed": true
+    },
+    {
+      "action": 5,
+      "purpose": "Pause Web expedition",
+      "completed": true
+    },
+    {
+      "action": 6,
+      "purpose": "Mute SFX Web",
+      "completed": true
+    },
+    {
+      "action": 7,
+      "purpose": "Restore SFX Web",
+      "completed": true
+    },
+    {
+      "action": 8,
+      "purpose": "Chinese pause UI Web",
+      "completed": true
+    },
+    {
+      "action": 9,
+      "purpose": "Return English Web UI",
+      "completed": true
+    },
+    {
+      "action": 10,
+      "purpose": "Resume Web",
+      "completed": true
+    },
+    {
+      "action": 11,
+      "purpose": "Move into court",
+      "completed": true
+    },
+    {
+      "action": 12,
+      "purpose": "Align court route",
+      "completed": true
+    },
+    {
+      "action": 13,
+      "purpose": "Cross court 1",
+      "completed": true
+    },
+    {
+      "action": 14,
+      "purpose": "Cross court 2",
+      "completed": true
+    },
+    {
+      "action": 15,
+      "purpose": "Cross court 3",
+      "completed": true
+    }
+  ],
+  "selected_images": [
+    {
+      "image": "web-playing.jpg",
+      "subject": "Playing after Continue expedition",
+      "source_capture_index": 2,
+      "source_png_sha256": "fc71543b16bbd9e3f33ca40167901a398da366d4cc35d699d65064b24f0eb420",
+      "jpeg_sha256": "dc0063ea0f61dbaf5e5a2c75d6093d630230e20038862683601e0ee2d74bddaa",
+      "bytes": 168739,
+      "width": 1394,
+      "height": 1195,
+      "quality": 82,
+      "lossy": true,
+      "pixel_identity": false,
+      "source_rgb_pixels_sha256": "914325ea8492a4a794c3bb70a83f0e13c26a0a7ca90cd180d2a8204ae357ef1e",
+      "decoded_jpeg_pixels_sha256": "858a4183283074e4d0e6b47133a029e5bcd03b5fecdab63462538bc92a10784c",
+      "metadata_removed": true,
+      "resize": false,
+      "crop": false,
+      "retouch": false
+    },
+    {
+      "image": "web-pause.jpg",
+      "subject": "English pause interface",
+      "source_capture_index": 10,
+      "source_png_sha256": "84f49063b0507185c7452a462147fe91969cceea8962f392e21cd3ee7b9bd46f",
+      "jpeg_sha256": "044074089f606b1924a74dd91751bbee988ac675fd6a0d164b880e60876a9bc6",
+      "bytes": 146320,
+      "width": 1394,
+      "height": 1195,
+      "quality": 82,
+      "lossy": true,
+      "pixel_identity": false,
+      "source_rgb_pixels_sha256": "b5ce02f3fc76a56ea02198c25a2ea192dcab876f402a24a4df422a9ef70ea132",
+      "decoded_jpeg_pixels_sha256": "4c8ab5184486f07b6669993455bf20761b9d905fb8f17156a4e2e195bf86a66d",
+      "metadata_removed": true,
+      "resize": false,
+      "crop": false,
+      "retouch": false
+    },
+    {
+      "image": "web-zh.jpg",
+      "subject": "Chinese pause interface",
+      "source_capture_index": 16,
+      "source_png_sha256": "a3a026394228e9d075c7748bf2964491489af7acdfd927a96327361418affe02",
+      "jpeg_sha256": "4512be0b4169b3c39119dcc565be689bbac99c4b6e1f04f524e8ed953db77e30",
+      "bytes": 140989,
+      "width": 1394,
+      "height": 1195,
+      "quality": 82,
+      "lossy": true,
+      "pixel_identity": false,
+      "source_rgb_pixels_sha256": "9286a4f17470431683136cbd2c3822c030906a2b265aa6296f547e5064890c11",
+      "decoded_jpeg_pixels_sha256": "7b8511675317ce79b8bfeaeb9e087f9f3b7edea25369c8fae9b85c70ac1e4f8e",
+      "metadata_removed": true,
+      "resize": false,
+      "crop": false,
+      "retouch": false
+    }
+  ],
+  "build_files": [
+    {
+      "path": "play/hyper3d-relic-room/index.html",
+      "sha256": "96b6b129c928b33c7309469fbd6026f05483def0340b982647192f510457a95d",
+      "bytes": 5754
+    },
+    {
+      "path": "play/hyper3d-relic-room/publication-shell.js",
+      "sha256": "28ec429e991e9d0500840ec78b96979e65b744c2d139345332c421bb306ca5e8",
+      "bytes": 1600
+    },
+    {
+      "path": "play/hyper3d-relic-room/relic-shell.js",
+      "sha256": "713ba9658db488027e258f9e155ebc5f2c14ff8c70829d6e26d7a81870391ab9",
+      "bytes": 7218
+    },
+    {
+      "path": "play/hyper3d-relic-room/relic-22f7d1c3f45a.pck",
+      "sha256": "22f7d1c3f45a8a553715f1c6d79f6f5595836e650484f51ffabd640647ec27c3",
+      "bytes": 41192268
+    }
+  ],
+  "build_hash_scope": "Local served-file readback; no independent network-byte or browser-cache proof.",
+  "evidence_hashes": [
+    {
+      "role": "physical_action_ledger",
+      "sha256": "f9211618eb606c8f0e81cad58195b87bf903e9d5b56c656556505760eb4c87f7",
+      "bytes": 108693
+    },
+    {
+      "role": "browser_owner_start",
+      "sha256": "42e03c288975cd0fdc2eca622dee739ea5b20a49d44786c982972fb08943624a",
+      "bytes": 916
+    },
+    {
+      "role": "blocked_capture_response",
+      "sha256": "113fd93fdd434bba19172370944d65ecf4fbf0756a383ba10f9e8a245cc15ee1",
+      "bytes": 2207
+    },
+    {
+      "role": "pixel_cleanup_ack",
+      "sha256": "c47ce838460b8e116a14ba42c2b7d1d258bb7c29a9eab45193aa1b42b9d3b89b",
+      "bytes": 2414
+    },
+    {
+      "role": "browser_owner_cleanup_ack",
+      "sha256": "10e1b4997589254e52877b1d05427bc765cbbc4e3bb4f01fb0e320f6dc560336",
+      "bytes": 2519
+    }
+  ],
+  "typed_browser_run_slice": {
+    "calls": 38,
+    "sha256": "a11edae2cf4371c5ed756b57846b120a70eb73c6004afbc8359c1a207f99cabb"
+  },
+  "private_capture_inventory": {
+    "captures": 30,
+    "canonical_sha256": "371c363e0721390640e8dc6be54143d71f6ecab3194c6729615e162caae2e8c1"
+  },
+  "audit_execution": {
+    "new_ui_actions": 0,
+    "new_api_calls": 0,
+    "raw_pngs_preserved": true
+  }
+}

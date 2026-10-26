@@ -1,0 +1,61 @@
+{
+  "group": "tower_sunbow",
+  "passed": true,
+  "scope": "actual native GLB reimport; world-space geometry and material-presence check",
+  "objects": [
+    {
+      "name": "sunbow_foundation",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 80,
+      "materials": 2
+    },
+    {
+      "name": "sunbow_shaft",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 112,
+      "materials": 2
+    },
+    {
+      "name": "sunbow_gold_collar",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 48,
+      "materials": 2
+    },
+    {
+      "name": "Sunbow_crossbar",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Sunbow_wing",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 36,
+      "materials": 2
+    },
+    {
+      "name": "Sunbow_wing.001",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 36,
+      "materials": 2
+    },
+    {
+      "name": "Sunbow_string",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Sunbow_bolt",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 24,
+      "materials": 1
+    },
+    {
+      "name": "Sunbow_glass_eye",
+      "max_symmetric_point_error": 0.0,
+      "vertices_after_gltf_split": 50,
+      "materials": 1
+    }
+  ]
+}

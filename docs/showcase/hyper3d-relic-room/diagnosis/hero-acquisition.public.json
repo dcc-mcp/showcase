@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "skill_version": "0.1.2",
+  "core_version": "0.20.46",
+  "no_more_paid_calls": true,
+  "cases": [
+    {
+      "case": "courier",
+      "input_image": {
+        "name": "courier-input-white.png",
+        "bytes": 1662330,
+        "sha256": "5db48d1b6db3d15bcedca1c8d6623a52bbfa5baa04db0b79dbfd34cf05e678fa",
+        "type": "approved original ImageGen single-view concept"
+      },
+      "parameters": {
+        "tier": "Gen-2.5-High",
+        "mesh_mode": "Raw",
+        "quality_override": 30000,
+        "material": "PBR",
+        "texture_mode": "high",
+        "geometry_file_format": "glb",
+        "TAPose": true,
+        "is_symmetric": "balanced",
+        "preview_render": true,
+        "use_original_alpha": false,
+        "seed": 313
+      },
+      "transport": "actual MCP HTTP tools/call create_rodin_task",
+      "accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "credits": 0.5,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 11134316,
+          "sha256": "4831d672f8ae37be04f0525ae1dfd8ffe6198039c53d375ab9b8bc05a2ee559c"
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 4554,
+          "sha256": "ba850c33fda1e86e1622c56ccd97f2a301b593c7e40f36e97496828c3bf485df"
+        },
+        {
+          "name": "render.jpg",
+          "size_bytes": 12018,
+          "sha256": "9cf43adc338286f8aadd68b424b477e191d5668f03fee51717293103ce3b393b"
+        }
+      ],
+      "native_blender_static_inspection": "passed; rig/deformation/Godot integration pending"
+    },
+    {
+      "case": "guardian",
+      "input_image": {
+        "name": "guardian-concept-01.png",
+        "bytes": 2351157,
+        "sha256": "be40db89eaabefa678ae734763d0084670b8811396233c630e219586bca320ce",
+        "type": "approved original ImageGen single-view concept"
+      },
+      "parameters": {
+        "tier": "Gen-2.5-High",
+        "mesh_mode": "Raw",
+        "quality_override": 30000,
+        "material": "PBR",
+        "texture_mode": "high",
+        "geometry_file_format": "glb",
+        "TAPose": true,
+        "is_symmetric": "balanced",
+        "preview_render": true,
+        "use_original_alpha": false,
+        "seed": 317
+      },
+      "transport": "actual MCP HTTP tools/call create_rodin_task",
+      "accepted": true,
+      "all_jobs_done": true,
+      "downloaded": true,
+      "credits": 0.5,
+      "files": [
+        {
+          "name": "base_basic_pbr.glb",
+          "size_bytes": 16458320,
+          "sha256": "a6b0bd4ffa9dce137026cce0e80cbe536158641145c7a093729c795f996f87cd"
+        },
+        {
+          "name": "preview.webp",
+          "size_bytes": 5992,
+          "sha256": "18d219382f67e9ee9a228b73c2ac5ba326ac71afade606b43a22cd35697a24b6"
+        },
+        {
+          "name": "render.jpg",
+          "size_bytes": 14204,
+          "sha256": "91fdc4af7ef460f1a95b7d5a77920930c76c6e098171870eab1975172533fc4b"
+        }
+      ],
+      "native_blender_static_inspection": "passed; rig/deformation/Godot integration pending"
+    }
+  ],
+  "not_claimed": [
+    "Automatic rigging or animation supplied by Hyper3D",
+    "Multiview consistency",
+    "Final Godot/native/Web gameplay acceptance",
+    "Concept images as runtime evidence"
+  ]
+}

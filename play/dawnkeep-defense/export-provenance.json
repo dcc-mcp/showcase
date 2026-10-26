@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "full_acceptance_run": "https://github.com/dcc-mcp/showcase/actions/runs/39285690349",
+  "engine": "Godot 4.6.3",
+  "threads": false,
+  "renderer": "gl_compatibility",
+  "native_pck_sha256": "649ccf7ed6a762fb00315c07fe6253d35a626fe907f0cb23a238537bb0c3b29b",
+  "pack_name": "dawnkeep-649ccf7ed6a7.pck",
+  "source_export_html_sha256": "9d543fec55a4a76fb88bd0c40e9fe0a19ad54d3570af3ef39a55a3368be014b4",
+  "source_shell_sha256": "a661f205d7827c9a4fb0f13873f7f38dd7372db79b78e861206905681b24761b",
+  "template_sha256": "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9",
+  "game_source_manifest": {
+    "schema": 1,
+    "files": [
+      {
+        "path": "assets/kaykit/SOURCE.json",
+        "sha256": "e4baa69701fb5efc15c90d1dfb58117dec35290e9b709132f91bbebd45f3dc55",
+        "bytes": 20168
+      },
+      {
+        "path": "assets/kaykit/characters/Knight.glb",
+        "sha256": "284ab4da94b1916e72153999add973335e75ca45946b6dee7e69b484e07ac826",
+        "bytes": 601300
+      },
+      {
+        "path": "assets/kaykit/characters/Knight_Unarmed.glb",
+        "sha256": "3eb8a06efe828a0be0ce02f32393e91c7062756053609a6f8ed8af319f8249b5",
+        "bytes": 549252
+      },
+      {
+        "path": "assets/kaykit/characters/Knight_Unarmed_knight_texture.png",
+        "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+        "bytes": 12914
+      },
+      {
+        "path": "assets/kaykit/characters/Knight_knight_texture.png",
+        "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+        "bytes": 12914
+      },
+      {
+        "path": "assets/kaykit/characters/Knight_knight_texture_1.png",
+        "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+        "bytes": 12914
+      },
+      {
+        "path": "assets/kaykit/characters/Knight_knight_texture_2.png",
+        "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+        "bytes": 12914
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Mage.glb",
+        "sha256": "4909c2ad54d1c43238e270f829ba8c0f2aee07b3f9cb7b4700193d0bc92fd46b",
+        "bytes": 696720
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Mage_skeleton_texture.png",
+        "sha256": "15741a25c53e04fa9bf3beac3bc0de442359404b1ff9be863b892cb551ad3657",
+        "bytes": 17037
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Minion.glb",
+        "sha256": "1c105c5f8ff581fdd2353a684cd139c359c8d6d1998b25664ed02efdcae115de",
+        "bytes": 705292
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Minion_skeleton_texture.png",
+        "sha256": "15741a25c53e04fa9bf3beac3bc0de442359404b1ff9be863b892cb551ad3657",
+        "bytes": 17037
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Rogue.glb",
+        "sha256": "23f9e235d5efa86b6c4a5c920788f1267ec4062a0d28480c77aa0eefbb961d8c",
+        "bytes": 717988
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Rogue_skeleton_texture.png",
+        "sha256": "15741a25c53e04fa9bf3beac3bc0de442359404b1ff9be863b892cb551ad3657",
+        "bytes": 17037
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Warrior.glb",
+        "sha256": "70ffe24ee3fb3a8d596615c99c5d74a669e5ed8d6f047b5f85f930d18c907ee2",
+        "bytes": 754264
+      },
+      {
+        "path": "assets/kaykit/characters/Skeleton_Warrior_skeleton_texture.png",
+        "sha256": "15741a25c53e04fa9bf3beac3bc0de442359404b1ff9be863b892cb551ad3657",
+        "bytes": 17037
+      },
+      {
+        "path": "assets/kaykit/forest/Bush_1_A_Color1.bin",
+        "sha256": "66ba041776959c19849954c9d2393528783461ca6dd11ebe1c1f6b9026b63c0c",
+        "bytes": 2352
+      },
+      {
+        "path": "assets/kaykit/forest/Bush_1_A_Color1.gltf",
+        "sha256": "bc6cf33dbed296a181d8afbd82ffe1c44ee5e57cb095f9efdf4b63e93c165b70",
+        "bytes": 3054
+      },
+      {
+        "path": "assets/kaykit/forest/Bush_2_A_Color1.bin",
+        "sha256": "156a986b87b097725a1c675ea20eeaf3f788014742dbf4b8f0fd2c69f27cad98",
+        "bytes": 1032
+      },
+      {
+        "path": "assets/kaykit/forest/Bush_2_A_Color1.gltf",
+        "sha256": "c41284ba3191bdda026380527edf9fb0dcf03b5dd26c8779ed056edb6526c444",
+        "bytes": 3050
+      },
+      {
+        "path": "assets/kaykit/forest/Grass_1_A_Color1.bin",
+        "sha256": "d293510be3ca4a6062dc305c22a143ba134fc49af65aaba064cc8f8d868d6c6e",
+        "bytes": 2056
+      },
+      {
+        "path": "assets/kaykit/forest/Grass_1_A_Color1.gltf",
+        "sha256": "58686904164d636e8731544fbb6911bf1ebc068841fe6c127f0c509b1449212b",
+        "bytes": 3058
+      },
+      {
+        "path": "assets/kaykit/forest/Grass_2_A_Color1.bin",
+        "sha256": "07fc84eda0b374b3fd4afed280452f0be21f75c0e53fbf6778d3997c09832a64",
+        "bytes": 2056
+      },
+      {
+        "path": "assets/kaykit/forest/Grass_2_A_Color1.gltf",
+        "sha256": "fa822543a17721c40b3386557ed37af6c44fd6d4ce6b4fc16f9187d69cde8fe1",
+        "bytes": 3056
+      },
+      {
+        "path": "assets/kaykit/forest/Rock_1_A_Color1.bin",
+        "sha256": "1c94027b4b01e479f14c6a0288445f2ec74c4971bd5154095c4ea261ddea5b95",
+        "bytes": 2848
+      },
+      {
+        "path": "assets/kaykit/forest/Rock_1_A_Color1.gltf",
+        "sha256": "ca24326b9c24556227c68df64933122f34a972cd38b6e95c53353fefa97dbc80",
+        "bytes": 3032
+      },
+      {
+        "path": "assets/kaykit/forest/Rock_2_A_Color1.bin",
+        "sha256": "ffee05221dda59936ba6c94112b65bb3c8a38e938fbb219a2808a1590daab050",
+        "bytes": 840
+      },
+      {
+        "path": "assets/kaykit/forest/Rock_2_A_Color1.gltf",
+        "sha256": "bbe5254a4c13be7f4aa017297a9458db441e99234028af378d29207d80be4696",
+        "bytes": 3052
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_1_A_Color1.bin",
+        "sha256": "76a10ffa74960d730f0895a2599e5d56cc50a553d6624a14422420eb9b083979",
+        "bytes": 17484
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_1_A_Color1.gltf",
+        "sha256": "9d972eba9d61fc563cb7c3248f1be057190859ce2554ad2032df27c3d09e06c6",
+        "bytes": 3061
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_2_A_Color1.bin",
+        "sha256": "fd413ad809ff30939faf1190194654892066aba94f67ec6f96ce257fa5b34e35",
+        "bytes": 8192
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_2_A_Color1.gltf",
+        "sha256": "793570b93cd350b935bc88c766317675890f102d157965d2aca3d8daef5ee49b",
+        "bytes": 3057
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_3_A_Color1.bin",
+        "sha256": "ea2f20e847bd3bcf748b9f1cf9932abe45967db8dcacfeafaea1f07e3da6a2e9",
+        "bytes": 29740
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_3_A_Color1.gltf",
+        "sha256": "a5140f21978004544844df4c2969625724c2c263e74f798716ea9e115216a230",
+        "bytes": 3061
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_4_B_Color1.bin",
+        "sha256": "155be76b0ec5d12a246c6b686156a2fa0d8ca086a67ef156633b7df681143d54",
+        "bytes": 16092
+      },
+      {
+        "path": "assets/kaykit/forest/Tree_4_B_Color1.gltf",
+        "sha256": "7dad365ccc9e9da3e1cbcdbd5ec16b67f0058a3c76aaa06a1bfaa17c706f1ce5",
+        "bytes": 3059
+      },
+      {
+        "path": "assets/kaykit/forest/forest_texture.png",
+        "sha256": "406c01e0ac1d3368fc7b26ff5fb0d3335ba5e48bd19a703540ed92ee3971ea39",
+        "bytes": 48679
+      },
+      {
+        "path": "assets/original/moonfern.glb",
+        "sha256": "0cddb5742bee5dd7e23e36b2a46a1bab4f857514fb7b25189b33704c9b662082",
+        "bytes": 5756
+      },
+      {
+        "path": "assets/original/shrine.glb",
+        "sha256": "22d2a4d53a27f8b96b1abb36a39da49ea4ab330513073e051caae40d8884b8f0",
+        "bytes": 67052
+      },
+      {
+        "path": "assets/original/standard.glb",
+        "sha256": "d62c86a49690bd38f54ed50defce5fe3796e7bad3bd277160da5234bdab75ce1",
+        "bytes": 6708
+      },
+      {
+        "path": "assets/original/tower_ember.glb",
+        "sha256": "e6d67ec7a9cc25bc012c9a768e274e4fd7c16c7cfa138ef46a799a84860fc04d",
+        "bytes": 29216
+      },
+      {
+        "path": "assets/original/tower_frost.glb",
+        "sha256": "fd4afc35a23fad1a94f436d97fe1431683c483002e2d2ddf9fe26f0d53f07eb6",
+        "bytes": 32572
+      },
+      {
+        "path": "assets/original/tower_storm.glb",
+        "sha256": "443e60d1d3ac0e95656cc5768b0427a790346d26f75907e1c477900fe8fadc23",
+        "bytes": 30760
+      },
+      {
+        "path": "assets/original/tower_sunbow.glb",
+        "sha256": "33b15216305e080c6b53b67e169e42276765f86501ccea8e19d45678c0a16032",
+        "bytes": 21740
+      },
+      {
+        "path": "assets/original/watchwood_tree.glb",
+        "sha256": "f3935a48d6105974bc174f803aa4a8f5e2882633277e40d01bd6c146163c4dec",
+        "bytes": 58312
+      },
+      {
+        "path": "assets/original/world.glb",
+        "sha256": "bd31693d5ccfe5d457f3a4e534bc2a33715a01cdea9c1f7b5fb69f59219cdc35",
+        "bytes": 116424
+      },
+      {
+        "path": "audio/AUDIO-LICENSE.txt",
+        "sha256": "c084e9e03edcbf247da49b57ff2e7e93c736eb1ec43fa969be67f000aad55d29",
+        "bytes": 613
+      },
+      {
+        "path": "audio/SOURCE.json",
+        "sha256": "6b31207373ad1c19432fd22049327951bdfa6f6cc62b0357c1f7dddd1f435a6e",
+        "bytes": 1974
+      },
+      {
+        "path": "audio/determined-pursuit.ogg",
+        "sha256": "fe968cd8bd0cb49b86fce0bd4a318490b1db6b54e13c4a9cd3f6ab307c28daa2",
+        "bytes": 1520845
+      },
+      {
+        "path": "audio/field-of-dreams.ogg",
+        "sha256": "438e56482edc68ee6d86913fac2c14e5574afd71514771e8ff25d0f0053ab956",
+        "bytes": 1150360
+      },
+      {
+        "path": "gameplay.gd",
+        "sha256": "ce08d740821c403a908cc64ddafa1e5f3b6eb537a1afb0d4ac275006440a91b4",
+        "bytes": 34977
+      },
+      {
+        "path": "gameplay.gd.uid",
+        "sha256": "3288d78d0e67dbdf34d2b6c353c0ef7e7a59c65169cbbdbcd9598adb8071ba8c",
+        "bytes": 19
+      },
+      {
+        "path": "hud.gd",
+        "sha256": "f9e7f12aebb393fcf2dd9981db5389805756f602f2e81413d24c07d2de6b27cd",
+        "bytes": 48774
+      },
+      {
+        "path": "hud.gd.uid",
+        "sha256": "7264333ce094be0de74c4fb8f4bf5a38218e0e42d8cd21cdbcfe1516609f8ee8",
+        "bytes": 20
+      },
+      {
+        "path": "main.gd",
+        "sha256": "3b19482ae5edab578fe75160772111650c212fd78fcfcb97463e064467bb74a7",
+        "bytes": 17079
+      },
+      {
+        "path": "main.gd.uid",
+        "sha256": "8d782d3dc3b203ed2ae2aa68744d8bbee65ff24e461cb5e628375c8d32ce352d",
+        "bytes": 20
+      },
+      {
+        "path": "notices/ART-LICENSES.md",
+        "sha256": "50f6919960f960a3df8599637821cc59aceebeb90cf67d9c8014cf563ce1e766",
+        "bytes": 3225
+      },
+      {
+        "path": "notices/KAYKIT-LICENSE-adventurers-free2.0.txt",
+        "sha256": "d4adc31660d1db22eb60eba648e01db41577548f6fa1a3576cb4a6283dae0a58",
+        "bytes": 1554
+      },
+      {
+        "path": "notices/KAYKIT-LICENSE-character-animations-free1.1.txt",
+        "sha256": "373b159044d1a886ed15f57ca5a7673ba14e2623c460283452705f2056912ed9",
+        "bytes": 1548
+      },
+      {
+        "path": "notices/KAYKIT-LICENSE-forest-free.txt",
+        "sha256": "987811fa42c7548ad487324531813b0210ee6d1ebd410089e881820630e3be54",
+        "bytes": 1469
+      },
+      {
+        "path": "notices/KAYKIT-LICENSE-skeletons-free1.1.txt",
+        "sha256": "327a1aac6e6ff1259d82d0024cdaf088bcef302f8d7a116b5142538ac2b5cf8d",
+        "bytes": 1552
+      },
+      {
+        "path": "notices/LICENSES.md",
+        "sha256": "82befe4199145dcb343e6d4a5d548e1e9e34a7d99604896fa39d9a37068872d6",
+        "bytes": 1661
+      },
+      {
+        "path": "project.godot",
+        "sha256": "71d1f625a889c3b5787ee39ad471c131580416e0f0ebd44abca4897e77ea873c",
+        "bytes": 908
+      },
+      {
+        "path": "shaders/meadow.gdshader",
+        "sha256": "86d01aaa6acb091379478d81a83dfeb53300b1b1f41d9a66dec6d18d7b41c7ca",
+        "bytes": 537
+      },
+      {
+        "path": "shaders/meadow.gdshader.uid",
+        "sha256": "6678e118f3a017f660f4bed2d1d64bb7bb0547452a3ad2ff40b1fa854827b0b6",
+        "bytes": 20
+      },
+      {
+        "path": "start.tscn",
+        "sha256": "da40385399409f4e30184e397b574e12b88e3785d6d1ea8c184aaff0a5aaafc4",
+        "bytes": 153
+      },
+      {
+        "path": "ui/FONT-LICENSE.txt",
+        "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b",
+        "bytes": 14712
+      },
+      {
+        "path": "ui/FONT-SOURCE.json",
+        "sha256": "ddc9ae802379b089c6b5c44c7749f01a00e76bbff908b5f980c3ab7f34ee12be",
+        "bytes": 441
+      },
+      {
+        "path": "ui/dawnkeep-sans.otf",
+        "sha256": "e3d7facdd92929429041d2d818b2506aba76b9b19d4bbb68d87344aadeb6f6a3",
+        "bytes": 146992
+      },
+      {
+        "path": "verify_gameplay.gd",
+        "sha256": "028a1ac86c1eced63bce0f5fa7c40f559ac71cdb160d2ac5171c35ef55eb293d",
+        "bytes": 15364
+      },
+      {
+        "path": "verify_gameplay.gd.uid",
+        "sha256": "4e3dec9a24a7d75f5e5e972182bd1c8682610e9846bffa6499d5b7686ff08e9f",
+        "bytes": 19
+      },
+      {
+        "path": "verify_runtime.gd",
+        "sha256": "af5f2d3d607c69493c6098c0716f7914711660465c2521c8cb41a64af0f195d7",
+        "bytes": 17147
+      },
+      {
+        "path": "verify_runtime.gd.uid",
+        "sha256": "4f55102c033d5077f488c056ff5dcf4bb308c7bc4ea0c94bb65525e8ddff23bc",
+        "bytes": 20
+      },
+      {
+        "path": "verify_shutdown.gd",
+        "sha256": "08412ae31fb95b4846fe165e1aaff8d270696214dd07e4d97cfb542e010f3ef4",
+        "bytes": 2774
+      },
+      {
+        "path": "verify_ui.gd",
+        "sha256": "800754d49950228b8fd9cfb84c1c81e7592014c127a897d95b2868f946be0bd9",
+        "bytes": 14803
+      },
+      {
+        "path": "verify_ui.gd.uid",
+        "sha256": "e3ec04b64bd131c621ed21e3f828795d6b9686945b9cd1dc202dbfa9868ccedb",
+        "bytes": 20
+      },
+      {
+        "path": "visuals.gd",
+        "sha256": "89d2a1529f8280c02efa882a09bd29bd6de19f91062c78cac6421ef86264a179",
+        "bytes": 22632
+      },
+      {
+        "path": "visuals.gd.uid",
+        "sha256": "59184df10e33a3818bce431996dff688527b653a0ad65701cadf73d9706beefd",
+        "bytes": 20
+      }
+    ]
+  },
+  "promotion": [
+    "PCK and native gameplay bytes unchanged from passed full acceptance.",
+    "Official runtime files reused byte for byte from existing same-origin shared engine.",
+    "Official HTML references relocated to shared engine and immutable hash-named PCK.",
+    "Small same-origin parent-page readiness/error/reset bridge added; reset reloads the real engine rather than injecting state.",
+    "Lifecycle shell now initializes pre-engine loading/retry labels from the page lang query, falling back to document language then English. Real native language receipts remain authoritative once running.",
+    "Native EN/ZH controls retained; initial native language remains Chinese."
+  ],
+  "native_controls": "L or EN/中文 switches language; native music button or M controls sound.",
+  "not_claimed": [
+    "Physical-phone/multitouch acceptance",
+    "Subjective music listening",
+    "Physical-GPU performance",
+    "Manual native OS-window-close acceptance"
+  ],
+  "published_files": [
+    {
+      "path": "COPYRIGHT.txt",
+      "bytes": 99790,
+      "sha256": "b3330849267d56ddd3d62a513817506606c2195034411fe05859f0140bff9d8a"
+    },
+    {
+      "path": "LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "README.txt",
+      "bytes": 656,
+      "sha256": "9b1be1ecace6724a75ef0b21110f5eeabba6c428b415ca9658b535c4b74bbbce"
+    },
+    {
+      "path": "assets/kaykit/SOURCE.json",
+      "bytes": 20168,
+      "sha256": "e4baa69701fb5efc15c90d1dfb58117dec35290e9b709132f91bbebd45f3dc55"
+    },
+    {
+      "path": "audio/AUDIO-LICENSE.txt",
+      "bytes": 613,
+      "sha256": "c084e9e03edcbf247da49b57ff2e7e93c736eb1ec43fa969be67f000aad55d29"
+    },
+    {
+      "path": "audio/SOURCE.json",
+      "bytes": 1974,
+      "sha256": "6b31207373ad1c19432fd22049327951bdfa6f6cc62b0357c1f7dddd1f435a6e"
+    },
+    {
+      "path": "dawnkeep-649ccf7ed6a7.pck",
+      "bytes": 5315168,
+      "sha256": "649ccf7ed6a762fb00315c07fe6253d35a626fe907f0cb23a238537bb0c3b29b"
+    },
+    {
+      "path": "dawnkeep-shell.js",
+      "bytes": 6581,
+      "sha256": "741bc1b4daeae035eada6c026769c4cc9fbdf9c44906a11d6844dda1b037b752"
+    },
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 11952,
+      "sha256": "9b374ecbc8558f480421e646f38aaa8a69d5b1d65ff7b48d0735da214c46773a"
+    },
+    {
+      "path": "index.html",
+      "bytes": 6033,
+      "sha256": "34689522b6c4210450d2ea85ea54afe2031a10f6bde4727ffb0ad13c21b903e1"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 5702,
+      "sha256": "08808dd5397e9a502cb3624944151f87a9705b5b66b5c365c5ca4c6ab51525f5"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "notices/ART-LICENSES.md",
+      "bytes": 3225,
+      "sha256": "50f6919960f960a3df8599637821cc59aceebeb90cf67d9c8014cf563ce1e766"
+    },
+    {
+      "path": "notices/KAYKIT-LICENSE-adventurers-free2.0.txt",
+      "bytes": 1554,
+      "sha256": "d4adc31660d1db22eb60eba648e01db41577548f6fa1a3576cb4a6283dae0a58"
+    },
+    {
+      "path": "notices/KAYKIT-LICENSE-character-animations-free1.1.txt",
+      "bytes": 1548,
+      "sha256": "373b159044d1a886ed15f57ca5a7673ba14e2623c460283452705f2056912ed9"
+    },
+    {
+      "path": "notices/KAYKIT-LICENSE-forest-free.txt",
+      "bytes": 1469,
+      "sha256": "987811fa42c7548ad487324531813b0210ee6d1ebd410089e881820630e3be54"
+    },
+    {
+      "path": "notices/KAYKIT-LICENSE-skeletons-free1.1.txt",
+      "bytes": 1552,
+      "sha256": "327a1aac6e6ff1259d82d0024cdaf088bcef302f8d7a116b5142538ac2b5cf8d"
+    },
+    {
+      "path": "notices/LICENSES.md",
+      "bytes": 1661,
+      "sha256": "82befe4199145dcb343e6d4a5d548e1e9e34a7d99604896fa39d9a37068872d6"
+    },
+    {
+      "path": "publication-shell.js",
+      "bytes": 1643,
+      "sha256": "8074df2f75d21e4bfc9ea408241f583ca71e6b61a1dc0cc69d30bf2a0a201c3c"
+    },
+    {
+      "path": "ui/FONT-LICENSE.txt",
+      "bytes": 14712,
+      "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b"
+    },
+    {
+      "path": "ui/FONT-SOURCE.json",
+      "bytes": 441,
+      "sha256": "ddc9ae802379b089c6b5c44c7749f01a00e76bbff908b5f980c3ab7f34ee12be"
+    }
+  ]
+}

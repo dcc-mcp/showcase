@@ -110,6 +110,16 @@ def fixture_case() -> dict:
     }
 
 
+def benchmark_fixture(root):
+    """Site-only fixture; no synthetic production or benchmark run evidence."""
+    import shutil
+    from pathlib import Path
+    source = Path(__file__).resolve().parents[1]
+    dest = Path(root)
+    shutil.copytree(source / 'benchmark', dest / 'benchmark')
+    shutil.copyfile(source / 'assets/model-preview.css', dest / 'assets/model-preview.css')
+
+
 def integration_guards() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         case_dir = os.path.join(tmp, "docs", "showcase", "sample-case")
@@ -143,6 +153,7 @@ def integration_guards() -> None:
                 json.dump({"schema_version": 1, "cases": [case]}, fh)
 
         save()
+        benchmark_fixture(tmp)
         with open(os.path.join(tmp, "private.txt"), "w", encoding="utf-8") as fh:
             fh.write("not selected")
         # Evidence contracts are tested by test_validate_collection.py. This
@@ -225,6 +236,27 @@ def integration_guards() -> None:
                   build_site.refs_of('<a href="../../#works"><a href="../other/">',
                                      "cases/sample/index.html"),
                   ["index.html", "cases/other/index.html"])
+            sentinel = os.path.join(tmp, "_site", "sentinel.txt")
+            with open(sentinel, "w", encoding="utf-8") as fh:
+                fh.write("keep prior output on missing publication decision")
+            forgotten = os.path.join(tmp, "docs", "showcase", "forgotten-case")
+            os.makedirs(forgotten)
+            for name in ("README.md", "manifest.json", "validation.json", "private.txt"):
+                with open(os.path.join(forgotten, name), "w", encoding="utf-8") as fh:
+                    fh.write("private bytes are not publication input")
+            _, problems, _ = build_site.build(tmp, "_site", localize=False)
+            check("new complete entry cannot be silently omitted",
+                  any("forgotten-case needs" in item for item in problems), True)
+            check("missing publication decision preserves prior output", os.path.isfile(sentinel), True)
+            with open(os.path.join(tmp, "unlisted-cases.json"), "w", encoding="utf-8") as fh:
+                json.dump({"schema_version": 1, "cases": [{"slug": "forgotten-case", "status": "review",
+                           "reason": "Visual review remains pending."}]}, fh)
+            published, problems, notes = build_site.build(tmp, "_site", localize=False)
+            check("explicit unlisted decision permits the selected build", problems, [])
+            check("unlisted private case bytes are not published",
+                  any(path.startswith("docs/showcase/forgotten-case/") for path in published), False)
+            check("intentional omission is visible in build output",
+                  any("Unlisted forgotten-case (review):" in note for note in notes), True)
             with open(os.path.join(tmp, "_site", "sentinel.txt"), "w", encoding="utf-8") as fh:
                 fh.write("keep prior output on failed validation")
             case["resources"].append({"label": "Unsafe", "url": "../private.txt"})

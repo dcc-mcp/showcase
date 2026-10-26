@@ -1,0 +1,276 @@
+{
+  "head": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "run": "https://github.com/dcc-mcp/showcase/actions/runs/39285690349",
+  "reviewed_at": "2026-10-19T17:29:00Z",
+  "screenshots": [
+    {
+      "file": "dawnkeep-native-full/defeat-restart.png",
+      "sha256": "1d0328b53c868cc7c7d9433030bbfb36b6b831888573230b24482c9812fc87b7",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/eight-wave-victory.png",
+      "sha256": "2ed64c321df9e297303fd8b48a1960f854fce7b6848982d9943e099831e3b8ab",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/equipment.png",
+      "sha256": "aa9e64876d2ce6d0fe4907ef015a09581abba59eef8a92bfbf41d5cafb727272",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/initial-zh.png",
+      "sha256": "446fc93b6fe667941ee4136e1c4211398563ca4528bc471cf2c0ae1fc89cf7cb",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/input-gate.png",
+      "sha256": "767bb7b04d84f015f8997a38cfe652f811a1ef95e0b49c997c570bc4ad8fca4b",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/language-en.png",
+      "sha256": "79709d306c16f61e47a3777095304006fa6dc0bcfdeca20c8a133580becb524e",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/natural-core-damage.png",
+      "sha256": "960fed3320ba6a34a23c62817b91af1ec28fbbe779e2b4d19a31ce00e9e66726",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/natural-defeat.png",
+      "sha256": "142ba6a7a59bff23d422d64067e73fc31bf37694452706842844a6c1ae0c5a57",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/paused-en.png",
+      "sha256": "49970835392a4f0083c036c507df159523ec82baf4fed147b25d8f498958659d",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/prepared-defense.png",
+      "sha256": "8bbcd76bd4f5a0e91e2a4b2f43e0cf085283b6d27bb8b038e27e12d187135b2c",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/uncrowned-king.png",
+      "sha256": "5e523dbb7a7923ce3ad4b9116267c91625e3c397f50723cfead19224cf1d99eb",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/victory-restart.png",
+      "sha256": "8597778ee63052670c1b5271b6a0bb283b5683c9dec2d70c4e8f33eee9de773d",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/wave-1.png",
+      "sha256": "e1a17a0ce588d1571576905d2843881b222afae42ea72e64bb760acfd7ef0676",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/wave-4.png",
+      "sha256": "c6861ede77319fa84233868fc937bd67ee8faa3469235d8c7c0591e1c4e21916",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-native-full/wave-8.png",
+      "sha256": "975b44e6250240760f2d48aa526fdad8db1ec7141edf7fa6fefef0f60a2a0db7",
+      "review": "direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/build-panel.png",
+      "sha256": "0e61e9f194d107408dac3b286052382ae0e58f3b13e66f5789264f5cf3346325",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/defeat-restart.png",
+      "sha256": "e6aa6fc70013ed4ed36188222e4a78d01f992589744cf9fdd42179e1ff5826a0",
+      "review": "contact-sheet overview and direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/eight-wave-victory.png",
+      "sha256": "83d973644c9dae3ba7019dc12ba485952cd3ed6e56a3a424342a673722a7281d",
+      "review": "contact-sheet overview and direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/engine-exited.png",
+      "sha256": "9b23d751b66d2f0626020313ee0129d13d43917efa8ed3e6eca474f9caa2d29d",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/equipment-panel.png",
+      "sha256": "6646cb6f8ddc6562a6a5896c85f77474e3a44cb1b03c79b9db53cc56dfc4b329",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/equipment.png",
+      "sha256": "a3f2a08a8631df9fdac0045601fafb7a4b5c7a3cca74468c2cb15327238a66c1",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/initial-zh.png",
+      "sha256": "2592d39c79a7a28aa26ee7b7df2b82050d94bff59a83809157d578323343b03f",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/input-gate.png",
+      "sha256": "0dfa965294811711e72ae7f8b0259cb8824a466e9e68bd442009ffc34eb44997",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/intro-zh.png",
+      "sha256": "758f1b56c2c987cb16410f2a8a775056b1fc1e8819b939b927989e26dd6bb81f",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/language-en.png",
+      "sha256": "3c09e3deb44f27a66377aa50908edb0abe0611d30ed33eae8b692e19e0412475",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/loading-retry.png",
+      "sha256": "38874a8df6c3531bb4f45fa3151d2171134ab1bf9492613ba2425c4734ee239f",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/natural-core-damage.png",
+      "sha256": "93900d2272ba2684a2d1876121a680a430a8df2d89237b9f23f5a162f93a4903",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/natural-defeat.png",
+      "sha256": "be58d231736b027f0918974d2fd663d09615f210068a3efb6ee08012adbd15a0",
+      "review": "contact-sheet overview and direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/paused-en.png",
+      "sha256": "9ad7e5c09d9fbaefc5f48d8bd65d73bf8fadd1d776741778cf8f29a8315d5abe",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/prepared-defense.png",
+      "sha256": "32584445b0825ae84f29e6c24463723e2005be4d8932b79e205590c97a0ded84",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/uncrowned-king.png",
+      "sha256": "07c942a2de4dfc6b50bbc46c664a3d57e5bc3a0d7f051a4b9a1eb112c3df4056",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/victory-restart.png",
+      "sha256": "87dd00087aee9ded7a0edd7f6c76a4efe4b62c320211fc758353b3f22260f54f",
+      "review": "contact-sheet overview and direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/wave-1.png",
+      "sha256": "f778d9eab17f60fefd398381ae33e90ad3a9452bc94163c21ca1c0ab475b791a",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/wave-4.png",
+      "sha256": "fb1fadb3dc754df6a0da195754a888b17cf8427205e27537721585ec14a32e51",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/desktop/wave-8.png",
+      "sha256": "64b4a0c64f33e9135d156f5b0e525f1c7e30dad2f03176660a04e1f7a3d9261c",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/build-panel.png",
+      "sha256": "c157252efc6f29b15ac6c70388db34b2e282b4ddcaa44e06a65fa5711a0af80c",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/combat-progress.png",
+      "sha256": "1d19aca5ec2c1d66acd0fab084c053bdba1866bcec200088ca3f6b56472a1d80",
+      "review": "contact-sheet overview and direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/combat.png",
+      "sha256": "183bc7f6b3734c37d200ebd17faec4a512a057a061f6ee377c91f58b679b004e",
+      "review": "contact-sheet overview and direct image at full size"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/engine-exited.png",
+      "sha256": "bb69742fb17370404429470d737dcc9389d00d96381c0fd675f5baeede03ffcd",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/equipment-panel.png",
+      "sha256": "d2e927db6580d2fd153e25311d7d11b0f534f1a7d7128185649052b6f34bed54",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/equipment.png",
+      "sha256": "e228ab362f1de39083543e89762aaec54b88f72b5d6aee175d6a65340fd571a5",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/initial-zh.png",
+      "sha256": "c935434be18c4059841c1fd5db334fd58ce045162db88ba98a1de66f0a1c16c4",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/input-gate.png",
+      "sha256": "a845351a0379fd6407fc69e91f9211b01e79493dcd15ec741ca188a9b2abaa25",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/intro-zh.png",
+      "sha256": "f55dd3e7e2dd9116f68896009af519db27d24e3fb0cdefea2ced14fb97b974da",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/language-en.png",
+      "sha256": "a29ea62b1ac9af23483c9afce1297c059d3798d6cae3e9d37b180c8a44d1a43f",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/loading-retry.png",
+      "sha256": "0a0eb37df0cf883610eb8f0fa82d8b3eedb8961d261ead1ef3235b1654485812",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/paused-en.png",
+      "sha256": "6758d81389a57e39a5cdd87b31f69f72b97465fe91fe654a4614c4e0bc5fe908",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/prepared-defense.png",
+      "sha256": "8be9f1fcdf2257a65805fae8ea2c5b0a2e38414a26f774acc91eb71732bbe807",
+      "review": "contact-sheet overview"
+    },
+    {
+      "file": "dawnkeep-browser/portrait/restart.png",
+      "sha256": "4160a3abb1a9459837560fd2da45161abafed42d29ead7908115a606fb39c603",
+      "review": "contact-sheet overview and direct image at full size"
+    }
+  ],
+  "native_full_images": 15,
+  "web_contact_images": 34,
+  "web_full_size_images": 7,
+  "observations": [
+    "No blocking clipping, shop-control occlusion, or missing glyphs observed in the reviewed frames.",
+    "Portrait scene deliberately uses closer camera framing; HUD controls remain reachable in the captured viewport.",
+    "Terminal overlay briefly has the matching decorative toast behind its dimmed backdrop; both actual restart frames clear all previous terminal UI.",
+    "Actual native and Web campaign outcomes and restarts are independently evidenced by input logs, not inferred only from screenshots."
+  ],
+  "video_review": {
+    "uncut_native_sha256": "aecb7f63e2c50ccd9700ec94d353acd90715eb0f79f1185d756faa9ffa40fc6b",
+    "method": "15-second interval contact samples plus half-second interval terminal samples, all 15 native screenshot captures, excerpt contact samples and direct excerpt victory/final restart frames. Not continuous subjective playback review.",
+    "excerpt_sha256": "e30a75e366e6f3c952193285ea3b14a1f4a674063c3874a1f40ed7b6950d72b9",
+    "excerpt_full_decode_passed": true,
+    "excerpt_duration": 70.4,
+    "source_unchanged": true
+  },
+  "remaining_unverified": [
+    "Subjective audio listening",
+    "Physical phone/multitouch",
+    "Manual native OS window close",
+    "Physical GPU performance"
+  ],
+  "scope": "Visual sampling, objective media decoding/amplitude, and automated real-input receipts are explicitly separate."
+}

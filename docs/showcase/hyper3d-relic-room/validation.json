@@ -1,0 +1,2371 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "status": "DRAFT_CURRENT_SAVE_FIX_ENGINE_ACCEPTED_UI_BLOCKED",
+  "environment": {
+    "os": "Windows x64",
+    "godot": "4.6.3.stable.official.7d41c59c4",
+    "renderer": "GL Compatibility",
+    "physics_3d": "Jolt",
+    "dcc_cua": "1.13.0",
+    "ui_control_core": "0.20.46",
+    "installed_core_commit": "Unknown",
+    "historical_static_asset_diagnosis": {
+      "blender": {
+        "application": "Blender",
+        "version": "5.2.0 LTS",
+        "adapter": "0.2.4",
+        "core": "0.20.41",
+        "renderer": "EEVEE",
+        "samples": 32
+      },
+      "godot": {
+        "application": "Godot",
+        "version": "4.6.3-stable (official)",
+        "renderer": "gl_compatibility",
+        "device": "NVIDIA GeForce RTX 5080"
+      }
+    },
+    "editorial_renderer": "HyperFrames0.8.189; task-local pinned tooling",
+    "native_os_capture_size_px": [
+      1286,
+      795
+    ],
+    "film_size_px": [
+      1280,
+      720
+    ]
+  },
+  "runtime_freeze": {
+    "files": [
+      {
+        "path": "assets/arch.glb",
+        "bytes": 309912,
+        "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b"
+      },
+      {
+        "path": "assets/asset-map.json",
+        "bytes": 7198,
+        "sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5"
+      },
+      {
+        "path": "assets/chest-interactive.glb",
+        "bytes": 2444872,
+        "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5"
+      },
+      {
+        "path": "assets/chest.glb",
+        "bytes": 2144840,
+        "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+      },
+      {
+        "path": "assets/column.glb",
+        "bytes": 1308584,
+        "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9"
+      },
+      {
+        "path": "assets/courier-character.glb",
+        "bytes": 11962060,
+        "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2"
+      },
+      {
+        "path": "assets/crystal.glb",
+        "bytes": 692044,
+        "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf"
+      },
+      {
+        "path": "assets/derivative-provenance.json",
+        "bytes": 35419,
+        "sha256": "06b3abfc5b09f834efc3344868ffe49da6ec70b7294b74b8a2a55bd003876805"
+      },
+      {
+        "path": "assets/gate.glb",
+        "bytes": 2213668,
+        "sha256": "06d83425c4e3880eb2759cad754d52942e417851ab0d4fe7a8faa436fd7dd958"
+      },
+      {
+        "path": "assets/guardian-character.glb",
+        "bytes": 17455464,
+        "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60"
+      },
+      {
+        "path": "assets/guardian.glb",
+        "bytes": 705016,
+        "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+      },
+      {
+        "path": "assets/pedestal.glb",
+        "bytes": 680392,
+        "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84"
+      },
+      {
+        "path": "assets/portal.glb",
+        "bytes": 2592960,
+        "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2"
+      },
+      {
+        "path": "assets/shrine.glb",
+        "bytes": 4550948,
+        "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7"
+      },
+      {
+        "path": "assets/stairs.glb",
+        "bytes": 1081016,
+        "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556"
+      },
+      {
+        "path": "audio/AUDIO-SOURCES.json",
+        "bytes": 2119,
+        "sha256": "c2051c95c576168608374fa87fb4b4e3847602a09c058be0b9e520ce2f0497b3"
+      },
+      {
+        "path": "audio/chop.ogg",
+        "bytes": 9370,
+        "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486"
+      },
+      {
+        "path": "audio/creak1.ogg",
+        "bytes": 15761,
+        "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e"
+      },
+      {
+        "path": "audio/footstep00.ogg",
+        "bytes": 9475,
+        "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+      },
+      {
+        "path": "audio/handleCoins.ogg",
+        "bytes": 25394,
+        "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+      },
+      {
+        "path": "audio/knifeSlice.ogg",
+        "bytes": 15532,
+        "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+      },
+      {
+        "path": "audio/metalLatch.ogg",
+        "bytes": 10208,
+        "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+      },
+      {
+        "path": "data/arpg.json",
+        "bytes": 2097,
+        "sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d"
+      },
+      {
+        "path": "export_presets.cfg",
+        "bytes": 604,
+        "sha256": "f95adb3d22d4c5ea199673fd18bbe4866b23a35dd34614d62ecc54764c008b49"
+      },
+      {
+        "path": "project.godot",
+        "bytes": 1021,
+        "sha256": "2befb72f5dfaa8095b2e18e19a3373dc71713c1966907a74357f6528e2b4c935"
+      },
+      {
+        "path": "scenes/main.tscn",
+        "bytes": 211,
+        "sha256": "ac774ec55bdd520c48184c1930e1aed77f369c627282cdc27e5a377a6a180938"
+      },
+      {
+        "path": "scripts/archive_stage.gd",
+        "bytes": 12167,
+        "sha256": "b83ccfee7215e960eac6f5d17883c2a877a1d70d6fefe4c3a0da25338a44f10d"
+      },
+      {
+        "path": "scripts/archive_stage.gd.uid",
+        "bytes": 18,
+        "sha256": "31eb8e5072008259db1836df4bd6522bed3b4a2f02237ac59e9bdbc6b8fe48ff"
+      },
+      {
+        "path": "scripts/courier.gd",
+        "bytes": 4174,
+        "sha256": "8b2d66d6ed9d4a9bc3f5c3c72e17aeeff96ffc5508b2f8e7ca8cc1c2d620af07"
+      },
+      {
+        "path": "scripts/courier.gd.uid",
+        "bytes": 20,
+        "sha256": "bc3f84a2bdf7451bac00945e403936582275f8f76ebb092630700488e98e8141"
+      },
+      {
+        "path": "scripts/enemy_actor.gd",
+        "bytes": 4342,
+        "sha256": "1139bb54eca11b017856ebd0497c25510f1ecf6124ec8c97d69850a5f2c496a0"
+      },
+      {
+        "path": "scripts/enemy_actor.gd.uid",
+        "bytes": 20,
+        "sha256": "f9ec4382bae48c80544ac7ea7f410504cfcb55a8b459194178db31b1ffb3302d"
+      },
+      {
+        "path": "scripts/expedition.gd",
+        "bytes": 15243,
+        "sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65"
+      },
+      {
+        "path": "scripts/expedition.gd.uid",
+        "bytes": 20,
+        "sha256": "cc95070698cd589e0f78c490eef8eb50f20f0f4d967b57214987fc787b474d45"
+      },
+      {
+        "path": "scripts/interface.gd",
+        "bytes": 22691,
+        "sha256": "bd50f0dd39cdd76acfd9071a4d397e9010b8bd7dec09fd39a1cbdcd89b1624fc"
+      },
+      {
+        "path": "scripts/interface.gd.uid",
+        "bytes": 20,
+        "sha256": "302c091568ed70e02af1e44003f2837ba9fed25ee12b47d8f374b3befceb727c"
+      },
+      {
+        "path": "scripts/main.gd",
+        "bytes": 43427,
+        "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+      },
+      {
+        "path": "scripts/main.gd.uid",
+        "bytes": 20,
+        "sha256": "450b0abcd14539030f71f3e34f0737d49791bb6cda412711c81b04e2e450b370"
+      },
+      {
+        "path": "ui/FONT-LICENSE.txt",
+        "bytes": 4301,
+        "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+      },
+      {
+        "path": "ui/FONT-SOURCE.json",
+        "bytes": 509,
+        "sha256": "aeccfeed92c46d1f3de3e0cf5ecf4f2a107d00a05f799927944e0f388b0afee1"
+      },
+      {
+        "path": "ui/relic-sans.otf",
+        "bytes": 111548,
+        "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54"
+      }
+    ],
+    "file_count": 41,
+    "aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+    "unchanged_from_accepted_baseline": 40,
+    "changed_from_accepted_baseline": [
+      "scripts/main.gd"
+    ],
+    "aggregate_algorithm": "SHA256 of compact JSON file table with sorted object keys"
+  },
+  "measurements": {
+    "acquisition": {
+      "paid_cases": 23,
+      "credits": 15.5,
+      "hard_cap_credits": 15.5,
+      "direct_python_cases": 21,
+      "mcp_tools_call_hero_cases": 2,
+      "hero_credits": 1,
+      "http_endpoints": 7,
+      "tools": 8,
+      "receipt": "diagnosis/budget-ledger.public.json"
+    },
+    "actors": {
+      "provider_triangles_each": 30000,
+      "provider_pbr_images_each": 3,
+      "provider_pbr_size_px": [
+        2048,
+        2048
+      ],
+      "rigging": "authored; provider outputs static and unskinned",
+      "courier_clips": 5,
+      "guardian_clips": 4,
+      "receipt": "arpg-assets.public.json"
+    },
+    "authored_assets": {
+      "scope": "Immutable asset handoff measured before gameplay acceptance; its pending labels are historical.",
+      "receipt_values": {
+        "status": "THREE_CANONICAL_ARPG_ASSETS_STABLE",
+        "actors": [
+          {
+            "actor": "courier",
+            "file": "courier-character-arpg-candidate.glb",
+            "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2",
+            "bytes": 11962060,
+            "clips_seconds": {
+              "Idle": 2.0,
+              "Walk": 1.0,
+              "Dash": 0.25,
+              "Attack": 0.45,
+              "Cast": 0.65
+            },
+            "event_seconds": {
+              "Attack": 0.18,
+              "Cast": 0.32
+            },
+            "new_clips_loop": false,
+            "original_binary_prefix_exact": true,
+            "original_animation_values_exact": true,
+            "skins_mesh_uv_material_images_unchanged": true,
+            "root_motion": false,
+            "new_clips_native_exported": true
+          },
+          {
+            "actor": "guardian",
+            "file": "guardian-character-arpg-candidate.glb",
+            "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60",
+            "bytes": 17455464,
+            "clips_seconds": {
+              "Idle": 2.0,
+              "Walk": 1.0,
+              "Dash": 0.25,
+              "Attack": 0.65
+            },
+            "event_seconds": {
+              "Attack": 0.38
+            },
+            "new_clips_loop": false,
+            "original_binary_prefix_exact": true,
+            "original_animation_values_exact": true,
+            "skins_mesh_uv_material_images_unchanged": true,
+            "root_motion": false,
+            "new_clips_native_exported": true
+          }
+        ],
+        "chest": {
+          "status": "CANONICAL_INTERACTIVE_CHEST_STABLE_ISOLATED_GODOT_PASS_GAMEPLAY_PENDING",
+          "file": "chest-interactive-candidate-02.glb",
+          "bytes": 2444872,
+          "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5",
+          "original_source_vertices_and_uvs_retained": true,
+          "max_position_error_m": 5.960464477539063e-08,
+          "max_uv_error": 0.0,
+          "all_three_embedded_png_payloads_exact": true,
+          "pbr_channel_bindings_exact": true,
+          "source_triangles": 5000,
+          "derivative_triangles": 5338,
+          "closed_front_mean_absolute_rgba_difference_0_255": [
+            0.05279369212962963,
+            0.05202980324074074,
+            0.05121672453703704,
+            0.0
+          ],
+          "hinge": {
+            "node": "Lid",
+            "children": [
+              "LidExterior",
+              "LidInterior"
+            ],
+            "pivot_xyz": [
+              0,
+              1.221228003501892,
+              -0.800000011920929
+            ],
+            "axis": "X",
+            "closed_degrees": 0,
+            "open_degrees": -100,
+            "front_axis": "+Z"
+          },
+          "authored_interior": "Base lining5quads andlid underside1quad, separate authored wood material",
+          "native_open_view": "chest-derivative-open-quarter-full.png",
+          "original_chest_file_unchanged": true,
+          "paid_calls": 0,
+          "canonical_file": "chest-interactive.glb",
+          "map_key": "chest_interactive",
+          "height_m": 1.35,
+          "previous_twelve_records_and_assets_unchanged": true,
+          "godot_hinge_probe": "PASS_4.6.3",
+          "map_sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5",
+          "source_parent_glb_sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+          "provider_output_glb_sha256": "060fbec0f44be2b69736e502f2d8f8b37d2d1f86648a1ce5f833c361869d261e"
+        },
+        "chest_closed_bounds_m": {
+          "min": [
+            -0.9529910087585449,
+            0.0,
+            -0.9563140273094177
+          ],
+          "max": [
+            0.9682940244674683,
+            1.8765920400619507,
+            0.956125020980835
+          ]
+        },
+        "chest_open_bounds_m": {
+          "min": [
+            -0.9529910087585449,
+            0.0,
+            -1.5573270504085166
+          ],
+          "max": [
+            0.9682940244674683,
+            2.8080978001268457,
+            0.956125020980835
+          ]
+        },
+        "chest_open_height_when_closed_height_1_35_m": 2.0201151604831993,
+        "old_ten_glbs_unchanged": true,
+        "old_rigged_blend_unchanged": true,
+        "provider_hero_glbs_unchanged": true,
+        "original_three_clip_binary_values_exact": true,
+        "native_file_render_and_isolated_godot_probes": "PASS",
+        "full_arpg_gameplay_os_web": "PENDING",
+        "source_or_gameplay_scripts_modified_by_this_worker": false,
+        "paid_calls": 0,
+        "ui_actions": 0
+      }
+    },
+    "historical_diagnosis": {
+      "receipt": "diagnosis/evidence.json",
+      "shrine_previous_triangles": 5000,
+      "shrine_current_triangles": 60000,
+      "shrine_preserved_image_size_px": [
+        1024,
+        1024
+      ]
+    },
+    "baseline_gameplay": {
+      "schema_version": 1,
+      "scope": "Saved terminal summaries from scripted Godot4.6.3 engine tests. Receipt compilation reran no tests; the core result is a separately authorized isolated execution. Staged setup and injected input remain separate from real OS acceptance, rendered pixel review and physical touch.",
+      "source_freeze": {
+        "basename": "arpg-freeze-01.public.json",
+        "sha256": "132bfb3506cde4344acc540004ee9face4e351d3895007c540a841e5886bfdea",
+        "runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+        "engine": "4.6.3.stable.official.7d41c59c4"
+      },
+      "core": {
+        "status": "PASS",
+        "checks": 120,
+        "scope": "Pure deterministic model in Godot4.6.3; no Nodes, physical input, rendered contact or filesystem save acceptance",
+        "log_basename": "console.log",
+        "log_sha256": "5b4408df7dcc572791b256138ca1d0e87368ff66f1d7a6d258e7345470441ee4",
+        "log_bytes": 244,
+        "terminal_marker": "ARCHIVE_EXPEDITION_TESTS_PASS",
+        "terminal_line": 3,
+        "secondary_log_basename": "godot.log",
+        "secondary_log_sha256": "1daad324492a57cbe154d1673ea4e213ceb28c4d28324a620577acdb330656a3",
+        "process_exit_code": 0,
+        "process_exit_evidence": "Reported by test execution owner; saved terminal log independently parsed.",
+        "contradictory_terminal_markers": 0,
+        "warning_markers": 0,
+        "test_script_sha256": "04c7676e9ccb8b9ea2cd3b9be0f22483959a269d20770a5dfc7f8c3d209f66c6",
+        "core_script_sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65",
+        "data_sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d",
+        "execution": "One isolated existing pure-model script, headless Godot4.6.3; no code/UI changes.",
+        "frozen_runtime_changes_reported": 0
+      },
+      "frozen_runtime_results": [
+        {
+          "log_basename": "test_expedition_course-final-01.console.log",
+          "sha256": "46070cdde8e5f6a13851e21afe72f6a5de39f812c73c5b2617f68f9b9f01d4a4",
+          "bytes": 35782,
+          "terminal_marker": "RELIC_EXPEDITION_COURSE_PASS",
+          "terminal_line": 32,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "continuous_expedition_course",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "distance_m": 101.769830666482,
+            "elapsed": 29.9666666666662,
+            "actions": {
+              "arc_bolt": 2,
+              "equip": 2,
+              "interact": 5,
+              "melee": 3
+            },
+            "equipment": {
+              "focus": "arc_focus",
+              "weapon": "bronze_edge"
+            },
+            "health": 50,
+            "inventory": {
+              "arc_focus": 1,
+              "bronze_edge": 1
+            },
+            "opened_chests": [
+              "town_chest"
+            ],
+            "quest_complete": true,
+            "scope": "continuous native controller + same action handlers, no teleports or OS input",
+            "route_waypoints": 20,
+            "all_route_waypoints_report_floor": true
+          }
+        },
+        {
+          "log_basename": "test_expedition_route-05.console.log",
+          "sha256": "892e5aa10ab5bd935a384bdeb1814cbc5e6d7fbf51686f4487287ac95bdbb24a",
+          "bytes": 25586,
+          "terminal_marker": "RELIC_EXPEDITION_ROUTE_PASS",
+          "terminal_line": 9,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "continuous_grounded_route",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "distance_m": 116.092924688011,
+            "floor_ratio": 0.999443516972732,
+            "min_y": -0.0500000007450581,
+            "max_y": 0.655563354492188,
+            "scope": "actual engine continuous controller physics, no OS input",
+            "waypoint_count": 24,
+            "waypoints_on_floor": 24
+          }
+        },
+        {
+          "log_basename": "test_layout-final-01.console.log",
+          "sha256": "fc65a6f935bebac983d65775eccfff62ba1343447f581f5f46429397b71fa087",
+          "bytes": 497082,
+          "terminal_marker": "RELIC_LAYOUT_TESTS_PASS",
+          "terminal_line": 133,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "layout",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "cases": 64,
+            "summary": "64 size/locale/state cases; no button/label/panel outside supported viewport"
+          }
+        },
+        {
+          "log_basename": "test_native-final-01.console.log",
+          "sha256": "2b446736f01bbb9923190de2c4e304e5a9b6fc95ca30bf1e7ba1feec104f93c8",
+          "bytes": 53004,
+          "terminal_marker": "RELIC_NATIVE_TESTS_PASS",
+          "terminal_line": 12,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "native_ui_and_injected_touch",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "summary": "actual native UI transitions, bundled font coverage, touch/cancel, pause, inventory, focus-loss handler, bilingual and mood; no OS-input claim",
+            "check_count": "NOT_RECORDED",
+            "physical_touch": "NOT_TESTED",
+            "os_input": "NOT_ESTABLISHED_BY_THIS_TEST"
+          }
+        },
+        {
+          "log_basename": "test_enemy_cadence-final-01.console.log",
+          "sha256": "8f4188b56994c032563ffac75332745a62ff85223fc980ee38ae5ca1103170f4",
+          "bytes": 45732,
+          "terminal_marker": "RELIC_ENEMY_CADENCE_PASS",
+          "terminal_line": 20,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "enemy_contact_cadence",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "hit_frames": [
+              24,
+              122,
+              220
+            ],
+            "scope": "native engine staged range/contact/dodge regression, not OS input"
+          }
+        },
+        {
+          "log_basename": "test_stage-final-02.console.log",
+          "sha256": "23cbd81664b7f430044f49caf90dedf28e0de1110d27bdbd61a9ca69d5e3283c",
+          "bytes": 30867,
+          "terminal_marker": "RELIC_STAGE_PASS",
+          "terminal_line": 8,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "stage_edge_occlusion_and_asset_contract",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "summary": "edge recovery, observed occlusion recovery, actual assets/clip contract, 300k instanced budget; continuous geometry is test_expedition_route",
+            "check_count": "NOT_RECORDED"
+          }
+        },
+        {
+          "log_basename": "test-chest-write-02.console.log",
+          "sha256": "b9b92810da11c98d9921ab5f6022795a27bbb3ec6ed414a52973e64504ec1326",
+          "bytes": 37631,
+          "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+          "terminal_line": 15,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "chest_persistence_fault_recovery",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "checks": 20,
+            "mode": "write_and_fault_recovery",
+            "scope": "actual Godot engine/file IO with staged approach; no OS input claim"
+          }
+        },
+        {
+          "log_basename": "test-chest-fresh-read-02.console.log",
+          "sha256": "ea51dd6084af11dc4ae81d43d48a006113dd4a2f63dd29d8668d9b58c964101f",
+          "bytes": 22640,
+          "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+          "terminal_line": 7,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "chest_fresh_process_read",
+          "evidence_mode": "scripted_staged_native_engine",
+          "listed_in_runtime_freeze": true,
+          "validated_result": {
+            "checks": 5,
+            "mode": "fresh_process_read",
+            "scope": "actual Godot engine/file IO with staged approach; no OS input claim"
+          }
+        }
+      ],
+      "supplemental_results": [
+        {
+          "log_basename": "test_expedition_native-02.console.log",
+          "sha256": "3a182faeed4a0b2be3ac4ed13941205982772b6b8bc91efa81ceedab1d172daf",
+          "bytes": 47293,
+          "terminal_marker": "RELIC_EXPEDITION_NATIVE_PASS",
+          "terminal_line": 29,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "staged_attack_cast_integration",
+          "evidence_mode": "supplemental_staged_native_engine",
+          "listed_in_runtime_freeze": false,
+          "validated_result": {
+            "checks": 25,
+            "markers": [
+              {
+                "clip": "Attack",
+                "contact_seconds": 0.18,
+                "health_after": 20
+              },
+              {
+                "clip": "Cast",
+                "health_after": 30,
+                "release_seconds": 0.32
+              }
+            ],
+            "scope": "actual Godot engine staged scene integration; no OS input/pixel claim"
+          }
+        },
+        {
+          "log_basename": "test_character_motion-arpg-01.console.log",
+          "sha256": "c4e91b879821fc0b214bb8eb02d5e1202920540612b97a387945010909d703bc",
+          "bytes": 52264,
+          "terminal_marker": "RELIC_CHARACTER_MOTION_PASS",
+          "terminal_line": 14,
+          "status": "PASS",
+          "contradictory_terminal_markers": 0,
+          "warning_markers": 0,
+          "process_exit_code": "NOT_RECORDED_IN_LOG",
+          "id": "imported_skin_and_instrumented_motion",
+          "evidence_mode": "supplemental_staged_native_engine",
+          "listed_in_runtime_freeze": false,
+          "validated_result": {
+            "bone_count": 17,
+            "guardian_clips": {
+              "Attack": 0.649999976158142,
+              "Dash": 0.25,
+              "Idle": 2.0,
+              "Walk": 1.0
+            },
+            "courier_idle_seconds": 2.0,
+            "courier_ready": true,
+            "scope": "Native imported skins, changing joint poses and instrumented movement; no OS-input or rendered-deformation claim"
+          }
+        }
+      ],
+      "verification": {
+        "selected_logs": 11,
+        "each_has_single_terminal_pass": true,
+        "all_selected_logs_scanned_for_errors_assertion_failures_fail_markers_and_warnings": true,
+        "contradictory_terminal_markers_found": 0,
+        "warning_markers_found": 0,
+        "new_test_runs": 1,
+        "new_test_run_scope": "Only the separately authorized existing pure-core script, executed by its owner; this receipt author reran no tests."
+      },
+      "scope_limits": [
+        "Native UI terminal summary includes touch/cancel, pause, inventory, focus-loss, bilingual and mood; a dedicated current physical-touch result is not established.",
+        "Supplemental integration/motion logs are identified separately from the eight logs listed by the final runtime freeze.",
+        "Earlier missing-chest run is excluded because its PASS marker coexists with a Godot ERROR.",
+        "Source logs remain private; only basenames, hashes, terminal line numbers and whitelisted result fields are included.",
+        "Actual OS interaction, fresh real-client reopening, Web behavior and subjective listening require their separate receipts."
+      ]
+    },
+    "baseline_native_course": {
+      "status": "PASS",
+      "state": "won",
+      "distance_m": 94.2953090034425,
+      "game_elapsed_s": 116.899999999995,
+      "qa_enabled_in_all_logged_states": false,
+      "logged_runtime_states_checked": 25,
+      "position_injection": "None in the recorded acceptance route; ledger contains only physical keys/clicks and frozen package has no adapter autoload",
+      "quest_complete": true,
+      "enemies_defeated": 2,
+      "chests_opened": 1,
+      "chest_animation_progress": 1,
+      "inventory": {
+        "arc_focus": 1,
+        "bronze_edge": 1
+      },
+      "equipment": {
+        "focus": "arc_focus",
+        "weapon": "bronze_edge"
+      },
+      "effective_arc_hits": 2,
+      "arc_damage_per_hit": [
+        24,
+        24
+      ],
+      "actual_enemy_contacts": [
+        {
+          "variant": "scout",
+          "damage": 5,
+          "health_after": 35
+        },
+        {
+          "variant": "sentinel",
+          "damage": 8,
+          "health_after": 27
+        }
+      ],
+      "duplicate_item_count_capped": true,
+      "final_level": 2,
+      "final_xp": 25
+    },
+    "baseline_native_reopen": {
+      "status": "PASS",
+      "distinct_fresh_native_process": true,
+      "prior_process_absent_recorded": true,
+      "normal_save_notice": "save_loaded",
+      "save_restored_event": true,
+      "persisted_fields_match": [
+        "inventory",
+        "equipment",
+        "opened_chests",
+        "killed_enemies",
+        "quest_complete",
+        "xp",
+        "level"
+      ],
+      "zone": "town",
+      "town_spawn_matches_frozen_source": true,
+      "distance_m": 0,
+      "qa_enabled": false,
+      "normal_playing_then_paused": [
+        "playing",
+        "paused"
+      ],
+      "explicit_native_cleanup_both_runs": "PASS"
+    },
+    "save_recovery_correction": {
+      "schema_version": 1,
+      "scope": "Save-and-title recovery after the prior runtime freeze: staged headless Godot engine and actual isolated filesystem tests. Receipt compilation ran no tests or UI actions. No new OS input, GUI pixels, Web, GPU film or subjective audio acceptance.",
+      "environment": {
+        "version": "4.6.3.stable.official.7d41c59c4",
+        "sha256": "63b3b2208819714c9677fbfdd8217c5b7dee8ecf5f383502e826bc9e2227ff5a"
+      },
+      "source_freeze": {
+        "basename": "current-runtime-freeze-03.public.json",
+        "sha256": "64a9ed8163a439d428449cc448c0012f65305732fa9a2aa2539f73c3fb34f70c",
+        "prior_basename": "arpg-freeze-01.public.json",
+        "prior_sha256": "132bfb3506cde4344acc540004ee9face4e351d3895007c540a841e5886bfdea",
+        "prior_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+        "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+        "aggregate_algorithm": "SHA256 of compact JSON file table with sorted object keys",
+        "files_independently_rehashed": 41,
+        "only_changed_runtime_file": "scripts/main.gd",
+        "other_runtime_files_independently_verified_unchanged": 40,
+        "files": [
+          {
+            "path": "assets/arch.glb",
+            "bytes": 309912,
+            "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b"
+          },
+          {
+            "path": "assets/asset-map.json",
+            "bytes": 7198,
+            "sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5"
+          },
+          {
+            "path": "assets/chest-interactive.glb",
+            "bytes": 2444872,
+            "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5"
+          },
+          {
+            "path": "assets/chest.glb",
+            "bytes": 2144840,
+            "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+          },
+          {
+            "path": "assets/column.glb",
+            "bytes": 1308584,
+            "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9"
+          },
+          {
+            "path": "assets/courier-character.glb",
+            "bytes": 11962060,
+            "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2"
+          },
+          {
+            "path": "assets/crystal.glb",
+            "bytes": 692044,
+            "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf"
+          },
+          {
+            "path": "assets/derivative-provenance.json",
+            "bytes": 35419,
+            "sha256": "06b3abfc5b09f834efc3344868ffe49da6ec70b7294b74b8a2a55bd003876805"
+          },
+          {
+            "path": "assets/gate.glb",
+            "bytes": 2213668,
+            "sha256": "06d83425c4e3880eb2759cad754d52942e417851ab0d4fe7a8faa436fd7dd958"
+          },
+          {
+            "path": "assets/guardian-character.glb",
+            "bytes": 17455464,
+            "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60"
+          },
+          {
+            "path": "assets/guardian.glb",
+            "bytes": 705016,
+            "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+          },
+          {
+            "path": "assets/pedestal.glb",
+            "bytes": 680392,
+            "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84"
+          },
+          {
+            "path": "assets/portal.glb",
+            "bytes": 2592960,
+            "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2"
+          },
+          {
+            "path": "assets/shrine.glb",
+            "bytes": 4550948,
+            "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7"
+          },
+          {
+            "path": "assets/stairs.glb",
+            "bytes": 1081016,
+            "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556"
+          },
+          {
+            "path": "audio/AUDIO-SOURCES.json",
+            "bytes": 2119,
+            "sha256": "c2051c95c576168608374fa87fb4b4e3847602a09c058be0b9e520ce2f0497b3"
+          },
+          {
+            "path": "audio/chop.ogg",
+            "bytes": 9370,
+            "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486"
+          },
+          {
+            "path": "audio/creak1.ogg",
+            "bytes": 15761,
+            "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e"
+          },
+          {
+            "path": "audio/footstep00.ogg",
+            "bytes": 9475,
+            "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+          },
+          {
+            "path": "audio/handleCoins.ogg",
+            "bytes": 25394,
+            "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+          },
+          {
+            "path": "audio/knifeSlice.ogg",
+            "bytes": 15532,
+            "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+          },
+          {
+            "path": "audio/metalLatch.ogg",
+            "bytes": 10208,
+            "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+          },
+          {
+            "path": "data/arpg.json",
+            "bytes": 2097,
+            "sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d"
+          },
+          {
+            "path": "export_presets.cfg",
+            "bytes": 604,
+            "sha256": "f95adb3d22d4c5ea199673fd18bbe4866b23a35dd34614d62ecc54764c008b49"
+          },
+          {
+            "path": "project.godot",
+            "bytes": 1021,
+            "sha256": "2befb72f5dfaa8095b2e18e19a3373dc71713c1966907a74357f6528e2b4c935"
+          },
+          {
+            "path": "scenes/main.tscn",
+            "bytes": 211,
+            "sha256": "ac774ec55bdd520c48184c1930e1aed77f369c627282cdc27e5a377a6a180938"
+          },
+          {
+            "path": "scripts/archive_stage.gd",
+            "bytes": 12167,
+            "sha256": "b83ccfee7215e960eac6f5d17883c2a877a1d70d6fefe4c3a0da25338a44f10d"
+          },
+          {
+            "path": "scripts/archive_stage.gd.uid",
+            "bytes": 18,
+            "sha256": "31eb8e5072008259db1836df4bd6522bed3b4a2f02237ac59e9bdbc6b8fe48ff"
+          },
+          {
+            "path": "scripts/courier.gd",
+            "bytes": 4174,
+            "sha256": "8b2d66d6ed9d4a9bc3f5c3c72e17aeeff96ffc5508b2f8e7ca8cc1c2d620af07"
+          },
+          {
+            "path": "scripts/courier.gd.uid",
+            "bytes": 20,
+            "sha256": "bc3f84a2bdf7451bac00945e403936582275f8f76ebb092630700488e98e8141"
+          },
+          {
+            "path": "scripts/enemy_actor.gd",
+            "bytes": 4342,
+            "sha256": "1139bb54eca11b017856ebd0497c25510f1ecf6124ec8c97d69850a5f2c496a0"
+          },
+          {
+            "path": "scripts/enemy_actor.gd.uid",
+            "bytes": 20,
+            "sha256": "f9ec4382bae48c80544ac7ea7f410504cfcb55a8b459194178db31b1ffb3302d"
+          },
+          {
+            "path": "scripts/expedition.gd",
+            "bytes": 15243,
+            "sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65"
+          },
+          {
+            "path": "scripts/expedition.gd.uid",
+            "bytes": 20,
+            "sha256": "cc95070698cd589e0f78c490eef8eb50f20f0f4d967b57214987fc787b474d45"
+          },
+          {
+            "path": "scripts/interface.gd",
+            "bytes": 22691,
+            "sha256": "bd50f0dd39cdd76acfd9071a4d397e9010b8bd7dec09fd39a1cbdcd89b1624fc"
+          },
+          {
+            "path": "scripts/interface.gd.uid",
+            "bytes": 20,
+            "sha256": "302c091568ed70e02af1e44003f2837ba9fed25ee12b47d8f374b3befceb727c"
+          },
+          {
+            "path": "scripts/main.gd",
+            "bytes": 43427,
+            "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+          },
+          {
+            "path": "scripts/main.gd.uid",
+            "bytes": 20,
+            "sha256": "450b0abcd14539030f71f3e34f0737d49791bb6cda412711c81b04e2e450b370"
+          },
+          {
+            "path": "ui/FONT-LICENSE.txt",
+            "bytes": 4301,
+            "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+          },
+          {
+            "path": "ui/FONT-SOURCE.json",
+            "bytes": 509,
+            "sha256": "aeccfeed92c46d1f3de3e0cf5ecf4f2a107d00a05f799927944e0f388b0afee1"
+          },
+          {
+            "path": "ui/relic-sans.otf",
+            "bytes": 111548,
+            "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54"
+          }
+        ]
+      },
+      "source_change": {
+        "file": "scripts/main.gd",
+        "before": {
+          "path": "scripts/main.gd",
+          "bytes": 43170,
+          "sha256": "e7327164aeec654a73f32f0646a09efd520fcf2a6f73f3ed99b5c722fe4d965c"
+        },
+        "after": {
+          "path": "scripts/main.gd",
+          "bytes": 43427,
+          "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+        },
+        "diff_basename": "main-03.patch",
+        "diff_sha256": "c4032e24760908153bd59a2c2e5dfcc1c5656fdba921d8876028dbbb429ffd43",
+        "hunks": [
+          {
+            "current_line": 477,
+            "function": "_consume_events",
+            "change": "Rebuild each drop interaction anchor before checking whether its visual already exists. Cached unpicked chest loot remains interactable after Title Continue."
+          },
+          {
+            "current_line": 504,
+            "function": "_on_action / start",
+            "change": "Won Explore and lost Retry restore canonical in-memory progress before resetting transients; normal Title Continue retains the existing start-and-load-disk path."
+          },
+          {
+            "current_line": 527,
+            "function": "_on_action / menu",
+            "change": "Failed save reports the existing localized failure in the current modal and returns before entering Title. Successful save still closes the bag and enters Title."
+          }
+        ]
+      },
+      "focused_test": {
+        "file": "tests/test_chest_persistence.gd",
+        "sha256": "f0aa2d2c79bec0535cb832cc5495c420bfdd7c449a6d65f65ac240ca4afee4fe",
+        "bytes": 11615,
+        "write_and_recovery_checks": 57,
+        "separate_fresh_process_checks": 5,
+        "asserted_scenarios": [
+          {
+            "name": "Paused Save & Title failure, repeat and Resume preserve in-memory gear/progress and older disk bytes",
+            "test_lines": [
+              106,
+              107,
+              110,
+              113,
+              116,
+              118
+            ],
+            "result": "PASS"
+          },
+          {
+            "name": "English and Chinese modal failure message and effective visibility",
+            "test_lines": [
+              109,
+              114
+            ],
+            "result": "PASS",
+            "boundary": "Native UI property assertions; no pixel or physical-input claim"
+          },
+          {
+            "name": "Won failed Save & Title followed by Explore preserves current completion and unique equipped rewards; picked chest visual stays hidden",
+            "test_lines": [
+              134,
+              136,
+              137
+            ],
+            "result": "PASS"
+          },
+          {
+            "name": "Lost failed Save & Title followed by Retry preserves current gear/rewards and resets transient health safely",
+            "test_lines": [
+              150,
+              152,
+              153
+            ],
+            "result": "PASS"
+          },
+          {
+            "name": "Successful Menu/Title/Continue reloads newly saved gear after write obstruction is removed",
+            "test_lines": [
+              154,
+              157,
+              159
+            ],
+            "result": "PASS"
+          },
+          {
+            "name": "Normal Title Continue restores cached unpicked chest interaction anchor and pickup",
+            "test_lines": [
+              64,
+              67,
+              69
+            ],
+            "result": "PASS"
+          },
+          {
+            "name": "Hinge cancel/pause, fixed base/real lid, one-time reward and backup/corrupt/oversized-primary recovery",
+            "test_lines": [
+              47,
+              48,
+              56,
+              59,
+              60,
+              61,
+              75,
+              81,
+              82,
+              85,
+              86,
+              87,
+              90,
+              91
+            ],
+            "result": "PASS"
+          },
+          {
+            "name": "Separate fresh process restores safe-town gear/opened chest/lid state; repeated interaction cannot duplicate reward",
+            "test_lines": [
+              26,
+              27,
+              28,
+              29,
+              32
+            ],
+            "result": "PASS"
+          }
+        ]
+      },
+      "expected_induced_io_failure": {
+        "method": "An older valid empty QA primary and a unique empty directory at its staging-file path force a real FileAccess WRITE refusal. The obstruction is removed before normal-success checks.",
+        "normal_player_data_accessed": false,
+        "expected_feedback_key": "save_failed",
+        "failure_preserves_older_primary_and_current_in_memory_progress": true,
+        "diagnostic_boundary": "The expected save refusal is checked through return/control-flow and localized modal assertions. Final console logs contain no unhandled ERROR/SCRIPT ERROR/WARNING markers; no such marker is waived."
+      },
+      "test_results": [
+        {
+          "log_basename": "parse-main-03.console.log",
+          "bytes": 75,
+          "sha256": "b16651cbedbab0a7b519f9e5b498eea40cb33bfb72252e264a7f4c2412765d58",
+          "status": "PASS",
+          "process_exit_code": 0,
+          "exit_code_source": "Hash-bound runtime freeze from execution owner",
+          "unhandled_error_warning_or_failure_markers": 0,
+          "scope": "Parse-only engine run; no assertion-count claim",
+          "checks": null
+        },
+        {
+          "log_basename": "parse-test-03.console.log",
+          "bytes": 75,
+          "sha256": "b16651cbedbab0a7b519f9e5b498eea40cb33bfb72252e264a7f4c2412765d58",
+          "status": "PASS",
+          "process_exit_code": 0,
+          "exit_code_source": "Hash-bound runtime freeze from execution owner",
+          "unhandled_error_warning_or_failure_markers": 0,
+          "scope": "Parse-only engine run; no assertion-count claim",
+          "checks": null
+        },
+        {
+          "log_basename": "chest-write-03.console.log",
+          "bytes": 142857,
+          "sha256": "dc5fd62ae593a7fde4c5ee4da944b8e9c4f95d1320f732c0193af82497cc11df",
+          "status": "PASS",
+          "process_exit_code": 0,
+          "exit_code_source": "Hash-bound runtime freeze from execution owner",
+          "unhandled_error_warning_or_failure_markers": 0,
+          "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+          "terminal_line": 35,
+          "checks": 57,
+          "scope": "actual Godot engine/file IO with staged approach; no OS input claim",
+          "mode": "write_and_fault_recovery",
+          "caller_failure_scopes": [
+            "paused",
+            "won_explore",
+            "lost_retry",
+            "en",
+            "zh"
+          ]
+        },
+        {
+          "log_basename": "chest-read-03.console.log",
+          "bytes": 23228,
+          "sha256": "1fa41bb009c4065d6dfa4dba2951b622c773cf93b86e9938e1475fbabe95a903",
+          "status": "PASS",
+          "process_exit_code": 0,
+          "exit_code_source": "Hash-bound runtime freeze from execution owner",
+          "unhandled_error_warning_or_failure_markers": 0,
+          "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+          "terminal_line": 7,
+          "checks": 5,
+          "scope": "actual Godot engine/file IO with staged approach; no OS input claim",
+          "mode": "fresh_process_read",
+          "caller_failure_scopes": []
+        },
+        {
+          "log_basename": "native-integration-03.console.log",
+          "bytes": 48415,
+          "sha256": "675acffc7adb80e0d7445aaa602876760e0fbd189c5bef74694214ddfbfb03c7",
+          "status": "PASS",
+          "process_exit_code": 0,
+          "exit_code_source": "Hash-bound runtime freeze from execution owner",
+          "unhandled_error_warning_or_failure_markers": 0,
+          "terminal_marker": "RELIC_EXPEDITION_NATIVE_PASS",
+          "terminal_line": 29,
+          "checks": 25,
+          "scope": "actual Godot engine staged scene integration; no OS input/pixel claim",
+          "markers": [
+            {
+              "clip": "Attack",
+              "contact_seconds": 0.18,
+              "health_after": 20
+            },
+            {
+              "clip": "Cast",
+              "health_after": 30,
+              "release_seconds": 0.32
+            }
+          ]
+        },
+        {
+          "log_basename": "native-interface-03.console.log",
+          "bytes": 53004,
+          "sha256": "2b446736f01bbb9923190de2c4e304e5a9b6fc95ca30bf1e7ba1feec104f93c8",
+          "status": "PASS",
+          "process_exit_code": 0,
+          "exit_code_source": "Hash-bound runtime freeze from execution owner",
+          "unhandled_error_warning_or_failure_markers": 0,
+          "terminal_marker": "RELIC_NATIVE_TESTS_PASS",
+          "terminal_line": 12,
+          "summary": "actual native UI transitions, bundled font coverage, touch/cancel, pause, inventory, focus-loss handler, bilingual and mood; no OS-input claim",
+          "checks": null
+        }
+      ],
+      "excluded_initial_diagnostic": {
+        "log_basename": "chest-write.console.log",
+        "sha256": "182aef8555cf91f7a489bada25b00f00cd085ec7c5fd9e65a1900d46d7149d13",
+        "result": "FAIL_WITH_PASS_MARKER",
+        "script_error_lines": [
+          22,
+          32
+        ],
+        "reason": "Cached chest anchor access failed despite a PASS print; excluded from acceptance. Final repaired57-check log is clean."
+      },
+      "boundaries": [
+        "Earlier runtime ec13, its ZIP/PCK, real OS course/reopen, Web smoke and film remain retained historical evidence; this receipt does not relabel them as this changed runtime.",
+        "No new visible-process, physical-input, pixel, Web, packaged-source or exported-PCK acceptance is established here.",
+        "Existing equip-from-bag save-failure footer feedback can be hidden by the bag overlay; that interface behavior was outside these three control-flow changes."
+      ]
+    },
+    "current_export": {
+      "schema_version": 1,
+      "scope": "Current corrected runtime source package, official4.6.3 single-thread export and native-mounted PCK inspection. Browser/WASM and real OS input remain separate gates.",
+      "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "native_source": {
+        "archive": "RelicCourier-native.zip",
+        "bytes": 44273997,
+        "sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+        "file_count": 72,
+        "integrity": "passed"
+      },
+      "fresh_native_extraction": {
+        "runtime_files_verified": 41,
+        "fresh_import_exit_code": 0,
+        "real_gui_menu_followup": "BLOCKED_BEFORE_FIRST_GAME_INPUT; see current-native-followup.public.json"
+      },
+      "web": {
+        "pck_name": "relic-bc6af9db60ea.pck",
+        "pck_bytes": 41192572,
+        "pck_sha256": "bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea",
+        "pck_gzip_bytes": 40836717,
+        "template_sha256": "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9",
+        "editor_sha256": "ef90e929ba1a6a4322860285d97f40f4aa349c90329a91b0e8b55b8df0f4cb00",
+        "renderer": "gl_compatibility",
+        "threads": false,
+        "four_shared_runtime_files": {
+          "index.js": {
+            "shared_path": "play/runtime/godot-4.6.3.js",
+            "bytes": 315759,
+            "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981",
+            "matches_official_and_showcase": true
+          },
+          "index.wasm": {
+            "shared_path": "play/runtime/godot-4.6.3.wasm",
+            "bytes": 37700666,
+            "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6",
+            "matches_official_and_showcase": true
+          },
+          "index.audio.worklet.js": {
+            "shared_path": "play/runtime/godot-4.6.3.audio.worklet.js",
+            "bytes": 7298,
+            "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+            "matches_official_and_showcase": true
+          },
+          "index.audio.position.worklet.js": {
+            "shared_path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+            "bytes": 2973,
+            "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+            "matches_official_and_showcase": true
+          }
+        },
+        "pack_inspection": {
+          "engine": "4.6.3-stable (official)",
+          "physics_3d": "Jolt Physics",
+          "uncompressed_file_bytes": 41179877,
+          "file_count": 125
+        },
+        "pack_scene_probe": {
+          "courier_clips": {
+            "Attack": 0.449999988079071,
+            "Cast": 0.649999976158142,
+            "Dash": 0.25,
+            "Idle": 2.0,
+            "Walk": 1.0
+          },
+          "guardian_clips": {
+            "Attack": 0.649999976158142,
+            "Dash": 0.25,
+            "Idle": 2.0,
+            "Walk": 1.0
+          },
+          "instanced_triangle_upper_bound": 258525,
+          "loaded_asset_types": [
+            "arch",
+            "gate",
+            "column",
+            "portal",
+            "shrine",
+            "chest_interactive",
+            "stairs",
+            "guardian_character",
+            "pedestal",
+            "crystal",
+            "courier_character"
+          ],
+          "scope": "exported PCK mounted in native headless Godot; not WASM/browser input",
+          "state": "title",
+          "zone": "town",
+          "hinged_lid_present": true
+        },
+        "actual_current_browser_input": "NOT_RUN; earlier15-action smoke binds only the previous22f7d1c3f45a pack"
+      },
+      "omitted_source_assets": [
+        {
+          "path": "assets/chest.glb",
+          "bytes": 2144840,
+          "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+        },
+        {
+          "path": "assets/guardian.glb",
+          "bytes": 705016,
+          "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+        }
+      ],
+      "source_manifest_sha256": "c759113c225497f1ddd088ed005d40cb6adb736809abce0df8dedb8667a6df35",
+      "logs": [
+        {
+          "basename": "import.log",
+          "bytes": 9377,
+          "sha256": "a67f17a6291ace689cef98c581e242dc4a8d33329b5f847ab33020236325060c"
+        },
+        {
+          "basename": "export.log",
+          "bytes": 15575,
+          "sha256": "08e494524057de140bca99530ca973fbe0aeabbef113b943bb82c52318e22dd4"
+        },
+        {
+          "basename": "inspection.console.log",
+          "bytes": 10589,
+          "sha256": "a87d55dfa6150984ab44f7729df03011808f708aa302f7ac465a5e5e96dd270b"
+        },
+        {
+          "basename": "scene.console.log",
+          "bytes": 15703,
+          "sha256": "8a19651cbbfb0c86fc67d3efd4d024083a8a792abd292dc53badcc4070411024"
+        }
+      ],
+      "historical_baseline": "package-export.public.json, os-acceptance.public.json and web-acceptance.public.json retain their earlier exact artifact bindings."
+    },
+    "current_native_followup": {
+      "schema_version": 1,
+      "date": "2026-10-24",
+      "status": "CURRENT_NATIVE_GUI_FOLLOWUP_NOT_RUN_BLOCKED",
+      "scope": "Current save/title-fix build launched at untouched title. Window metadata and one partially redacted observation do not establish game input or affected save-menu acceptance.",
+      "current_build": {
+        "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+        "native_zip_sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+        "native_zip_bytes": 44273997,
+        "native_archive_files": 72,
+        "fresh_extracted_runtime_files_matching_freeze": 41,
+        "fresh_import": "PASS_RECORDED",
+        "engine": "Godot4.6.3 stable official"
+      },
+      "branch_current_ui_status": {
+        "normal_gui_launch": "STARTED_WITH_NATIVE_FIRST_FRAME_MARKER",
+        "logged_game_state": "title",
+        "initial_foreground": false,
+        "qa_requested": false,
+        "qa_enabled_in_logged_state": false,
+        "save_and_return_to_title": "NOT_RUN_BLOCKED",
+        "title_continue": "NOT_RUN_BLOCKED",
+        "failed_save_visible_feedback": "NOT_RUN_BLOCKED",
+        "new_course_or_reopen": "NOT_RUN"
+      },
+      "project_route": {
+        "provider": "dcc-cua",
+        "runtime_version": "1.13.0",
+        "exact_owned_native_binding_and_birth_consistent": true
+      },
+      "operations": {
+        "window_metadata_reads": 1,
+        "fixed_frame_changes": 1,
+        "frame_change_automatic_input": false,
+        "frame_change_activated_window": false,
+        "pixel_observations": 1,
+        "physical_game_input_actions": 0,
+        "write_failure_fixture_created": false,
+        "scope": "Window metadata/frame operations are separate from game pointer/key input."
+      },
+      "capture_limit": {
+        "mode": "redacted_desktop_crop",
+        "reason": "root_overlap",
+        "captured_pixels": [
+          1286,
+          795
+        ],
+        "partially_redacted": true,
+        "whole_desktop_capture": false,
+        "unobscured_gameplay_pixels": "NOT_ESTABLISHED",
+        "public_image_included": false,
+        "further_game_input": "NOT_ATTEMPTED"
+      },
+      "accepted_profile": {
+        "reused_prior_real_course_profile": true,
+        "injected_state": false,
+        "recorded_primary_bytes_unchanged": true,
+        "primary_sha256": "88c632fd15dc905cfdb24c3ced622094f42c42bee852ed2e053150beadc13355",
+        "current_save_restore_or_persistence_acceptance": "NOT_RUN; process remained at title"
+      },
+      "cleanup": {
+        "explicit_native_ack": "PASS",
+        "active_after_ack": false,
+        "pending": false,
+        "issues": 0,
+        "owner_report": "After ACK, root terminated only its own untouched-title process and task-owned bridge.",
+        "independent_process_query_by_receipt_audit": "NOT_PERFORMED"
+      },
+      "historical_evidence": {
+        "prior_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+        "native_course_and_fresh_process_reopen": {
+          "receipt": "os-acceptance.public.json",
+          "scope": "Valid historical actual OS course/reopen; not relabeled as this changed build."
+        },
+        "web_smoke": {
+          "receipt": "web-acceptance.public.json",
+          "scope": "Historical earlier PCK input smoke; not the current export."
+        }
+      },
+      "current_web": {
+        "pck_sha256": "bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea",
+        "export": "PASS",
+        "actual_new_browser_session": "NOT_RUN",
+        "current_web_input_or_failure_claim": "NONE"
+      },
+      "evidence_hashes": [
+        {
+          "role": "launch",
+          "sha256": "a4e9526e6d370d39fbd874650af89657475366cd6f57d3349b3689fba4387cbc",
+          "bytes": 414
+        },
+        {
+          "role": "accepted_primary_before",
+          "sha256": "88c632fd15dc905cfdb24c3ced622094f42c42bee852ed2e053150beadc13355",
+          "bytes": 505
+        },
+        {
+          "role": "unchanged_primary",
+          "sha256": "4cb687a019a3324cbbd6dd452d464f73fa5509d985e0ec6fec37f1df81b1bc31",
+          "bytes": 196
+        },
+        {
+          "role": "window_metadata",
+          "sha256": "79a25ab50fada605585666026da3df7293225d63e58776f5ed863b0b2f434fc2",
+          "bytes": 2756
+        },
+        {
+          "role": "fixed_frame",
+          "sha256": "df1c75a8cd94cd978bafed3a3627fe781226cc87b11ca403fabd399fdca7f88e",
+          "bytes": 6174
+        },
+        {
+          "role": "redacted_capture_response",
+          "sha256": "d023b620502dd5c76853e5286a5a69ea96d60ccba21a65f290efcb790028e635",
+          "bytes": 298633
+        },
+        {
+          "role": "private_redacted_capture_png",
+          "sha256": "71bb3ea8523d4fdae241c41c5491c222e2632c71b0039a16e3ad1bc801132213",
+          "bytes": 211714
+        },
+        {
+          "role": "cleanup_ack",
+          "sha256": "56e52bcc097f5728d23889594e573352d9b8895f465ae95d8304c765958e86b1",
+          "bytes": 2390
+        },
+        {
+          "role": "native_stdout",
+          "sha256": "705350fbeed6b1a0a99759a5375fe37179a06e07da0d4453558ddb6ad2edb86e",
+          "bytes": 22780
+        },
+        {
+          "role": "native_engine_log",
+          "sha256": "5e14b9c6284bb6af8fe7ad7e1b48234e66996955c58637acad9d2efa1c2160d4",
+          "bytes": 22773
+        },
+        {
+          "role": "current_freeze",
+          "sha256": "64a9ed8163a439d428449cc448c0012f65305732fa9a2aa2539f73c3fb34f70c",
+          "bytes": 12261
+        },
+        {
+          "role": "current_native_package",
+          "sha256": "69c929efa8ba83c9ddb1829eddde85745466692b0d355931e437564bb0a7085f",
+          "bytes": 13130
+        },
+        {
+          "role": "fresh_import_log",
+          "sha256": "35f727c7cd68f9a7b546c33193c0843f0bc2f30fc51a1f9bfaad389e6d8ba4e3",
+          "bytes": 11094
+        },
+        {
+          "role": "current_web_export",
+          "sha256": "acdced2dd0cf198a60d0e61d7138a593e987bb2a500aa358ae20029bae38f7c2",
+          "bytes": 11577
+        }
+      ],
+      "audit_scope": {
+        "new_ui_actions": 0,
+        "new_api_calls": 0,
+        "source_or_runtime_edits": 0,
+        "private_obscured_png_published": false
+      }
+    },
+    "native_package": {
+      "archive": "RelicCourier-native.zip",
+      "bytes": 44273997,
+      "sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+      "file_count": 72,
+      "integrity": "passed"
+    },
+    "accepted_native_launch": {
+      "engine": "4.6.3.stable.official.7d41c59c4",
+      "archive_sha256": "22762aebd5a67f3f6f7cde20c8de236ef71d75c8d3edfe586b144579822a0dc5",
+      "archive_bytes": 44269347,
+      "archive_crc_and_all_file_hashes": "PASS",
+      "packaged_files_verified": 72,
+      "frozen_runtime_files_verified_in_zip_and_extraction": 41,
+      "extracted_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+      "aggregate_algorithm": "SHA256 of compact JSON file table with sorted object keys",
+      "freeze_manifest_sha256": "132bfb3506cde4344acc540004ee9face4e351d3895007c540a841e5886bfdea"
+    },
+    "package_and_export": {
+      "schema_version": 1,
+      "scope": "Clean native packaging/import and official single-thread Web export/PCK inspection. No OS-input or Web-browser acceptance claim.",
+      "engine": "Godot4.6.3 stable official",
+      "runtime_freeze_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+      "source_receipt_sha256": "796cf4e9f1a2fb1c411afe7d8339027dfa66693228252da805512ea9dd792d0b",
+      "fresh_extraction": {
+        "frozen_runtime_files": 41,
+        "changed_runtime_files": 0
+      },
+      "assets": {
+        "bundled_glb_files": 13,
+        "loaded_asset_types": [
+          "arch",
+          "gate",
+          "column",
+          "portal",
+          "shrine",
+          "chest_interactive",
+          "stairs",
+          "guardian_character",
+          "pedestal",
+          "crystal",
+          "courier_character"
+        ],
+        "loaded_asset_type_count": 11,
+        "instanced_triangle_upper_bound": 258525
+      },
+      "web": {
+        "pck_name": "index.pck",
+        "pck_bytes": 41192268,
+        "pck_sha256": "22f7d1c3f45a8a553715f1c6d79f6f5595836e650484f51ffabd640647ec27c3",
+        "pck_gzip_bytes": 40836378,
+        "official_template_sha256": "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9",
+        "shared_runtime_comparison": {
+          "index.js": {
+            "shared_path": "play/runtime/godot-4.6.3.js",
+            "bytes": 315759,
+            "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981",
+            "matches_official_and_showcase": true
+          },
+          "index.wasm": {
+            "shared_path": "play/runtime/godot-4.6.3.wasm",
+            "bytes": 37700666,
+            "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6",
+            "matches_official_and_showcase": true
+          },
+          "index.audio.worklet.js": {
+            "shared_path": "play/runtime/godot-4.6.3.audio.worklet.js",
+            "bytes": 7298,
+            "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+            "matches_official_and_showcase": true
+          },
+          "index.audio.position.worklet.js": {
+            "shared_path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+            "bytes": 2973,
+            "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+            "matches_official_and_showcase": true
+          }
+        },
+        "omitted_source_assets": [
+          {
+            "path": "assets/chest.glb",
+            "bytes": 2144840,
+            "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+          },
+          {
+            "path": "assets/guardian.glb",
+            "bytes": 705016,
+            "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+          }
+        ],
+        "pack_inspection": {
+          "engine": "4.6.3-stable (official)",
+          "file_count": 125,
+          "physics_3d": "Jolt Physics",
+          "uncompressed_file_bytes": 41179582
+        },
+        "pack_scene_probe": {
+          "courier_clips": {
+            "Attack": 0.449999988079071,
+            "Cast": 0.649999976158142,
+            "Dash": 0.25,
+            "Idle": 2.0,
+            "Walk": 1.0
+          },
+          "guardian_clips": {
+            "Attack": 0.649999976158142,
+            "Dash": 0.25,
+            "Idle": 2.0,
+            "Walk": 1.0
+          },
+          "instanced_triangle_upper_bound": 258525,
+          "loaded_asset_types": [
+            "arch",
+            "gate",
+            "column",
+            "portal",
+            "shrine",
+            "chest_interactive",
+            "stairs",
+            "guardian_character",
+            "pedestal",
+            "crystal",
+            "courier_character"
+          ],
+          "scope": "exported PCK mounted in native headless Godot; not WASM/browser input",
+          "state": "title",
+          "zone": "town"
+        }
+      },
+      "acceptance_boundary": "Native headless import and exported-PCK inspection; OS acceptance is separately recorded, Web browser acceptance and final publication are separate gates.",
+      "native_launch_zip": {
+        "archive": "historical-native-launch.zip (retained acceptance evidence)",
+        "bytes": 44269347,
+        "sha256": "22762aebd5a67f3f6f7cde20c8de236ef71d75c8d3edfe586b144579822a0dc5",
+        "file_count": 72,
+        "integrity": "passed"
+      },
+      "current_download": {
+        "receipt": "native-package.public.json",
+        "bytes": 44273997,
+        "sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+        "runtime_identical_to_accepted_launch": false,
+        "unchanged_runtime_files_from_accepted_baseline": 40,
+        "current_runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+        "current_export_receipt": "current-export.public.json",
+        "scope": "Three scoped main.gd save/restart corrections; all41 runtime files and all archive members rehashed. Prior OS/course and film evidence retains its earlier source binding."
+      }
+    },
+    "web_budget": {
+      "raw_bytes": 41227974,
+      "gzip_equivalent_bytes": 40851951,
+      "raw_limit_bytes": 41943040,
+      "gzip_limit_bytes": 41943040,
+      "shared_runtime_files": 4,
+      "scope": "Build measurement; excludes shared runtime and browser transfer"
+    },
+    "web_smoke": {
+      "schema_version": 1,
+      "date": "2026-10-24",
+      "status": "WEB_POINTER_KEYBOARD_SMOKE_PASS_WITH_BLOCKED_EXTENDED_GATES",
+      "scope": "Actual isolated Chromium Web load and15 physical pointer/key actions. This is input smoke acceptance only.",
+      "route": {
+        "provider": "dcc-cua",
+        "runtime_version": "1.13.0",
+        "core_version": "0.20.46",
+        "browser": "Chromium isolated_new",
+        "physical_delivery": "windows_exact_pixel_final_input",
+        "compatibility": "Task-local Core game_navigation/duration forwarding; stock observation/native-birth/window/delivery fences retained.",
+        "pixel_fence": "Exact owned native window and native process birth",
+        "separate_semantic_checks": "Same retained typed browser target/tab/local origin and focused canvas checked before and after each input.",
+        "atomic_tab_origin_authority": false,
+        "cross_route_limit": "Native pixel input is window fenced. Separate typed browser checks are not an atomic tab/origin fence."
+      },
+      "display": {
+        "window_physical_pixels": [
+          1420,
+          1208
+        ],
+        "window_dpi": 240,
+        "captured_pixels": [
+          1394,
+          1195
+        ],
+        "downscaled": false,
+        "hi_dpi_scope": "Current bounded device-pixel-ratio shell displayed usable gameplay/pause/localized UI at this one tested configuration."
+      },
+      "verified_counts": {
+        "successful_physical_actions": 15,
+        "left_clicks": 5,
+        "key_actions": 10,
+        "movement_holds": 8,
+        "movement_hold_total_ms": 3075,
+        "maximum_hold_ms": 500,
+        "escape_taps": 2,
+        "successful_pixel_snapshots": 30,
+        "explicit_fresh_snapshot_token_joins": 15,
+        "typed_pre_post_pairs": 15,
+        "same_native_binding_and_birth": true,
+        "post_dispatch_fences_passed": 15,
+        "unobscured_exact_window_captures": 29,
+        "partially_redacted_captures": 1,
+        "redacted_capture_input_scope": "Initial Continue click was outside its redacted area; native final input and post-dispatch fences passed. All key-action observations were unobscured.",
+        "whole_desktop_capture": false
+      },
+      "gates": {
+        "current_web_build_load": "PASS",
+        "canvas_continue": "PASS",
+        "pointer_keyboard_input_smoke": "PASS",
+        "bridge_and_court_movement_smoke": "PASS",
+        "pause_resume_ui": "PASS",
+        "sfx_off_on_ui_state": "PASS_UI_ONLY",
+        "english_chinese_ui_toggle": "PASS",
+        "full_course": "NOT_RUN_BLOCKED",
+        "loot": "NOT_RUN_BLOCKED",
+        "battle": "NOT_RUN_BLOCKED",
+        "persistence": "NOT_RUN_BLOCKED",
+        "quit": "NOT_RUN_BLOCKED",
+        "fullscreen": "NOT_RUN_BLOCKED",
+        "restart": "NOT_RUN_BLOCKED"
+      },
+      "stop_condition": {
+        "code": "capture_failed",
+        "capture_reason": "root_overlap",
+        "scope": "Next observation could not prove an unobscured exact target. No further action appears in the saved run ledger.",
+        "failed_action_replayed": false
+      },
+      "cleanup": {
+        "pixel_session_ack": "PASS",
+        "owned_browser_ack": "PASS",
+        "ordered_pixel_session_then_browser_owner": true,
+        "active_after_cleanup": false,
+        "pending": false,
+        "issues": 0
+      },
+      "not_claimed": {
+        "continuous_web_gameplay_video": "NOT_RUN",
+        "experimental_PV_JPEG_contract": "NOT_RUN",
+        "browser_console": "NOT_RUN",
+        "arbitrary_javascript_evaluation": "NOT_USED",
+        "physical_mobile_device": "NOT_RUN",
+        "subjective_audio_mix_listening": "NOT_RUN",
+        "engine_position_injection": "None in the recorded input route; requests are physical clicks/keys only."
+      },
+      "actions": [
+        {
+          "action": 1,
+          "purpose": "Continue expedition inside canvas",
+          "completed": true
+        },
+        {
+          "action": 2,
+          "purpose": "Walk from safe town spawn",
+          "completed": true
+        },
+        {
+          "action": 3,
+          "purpose": "Cross bridge",
+          "completed": true
+        },
+        {
+          "action": 4,
+          "purpose": "Reach court entrance",
+          "completed": true
+        },
+        {
+          "action": 5,
+          "purpose": "Pause Web expedition",
+          "completed": true
+        },
+        {
+          "action": 6,
+          "purpose": "Mute SFX Web",
+          "completed": true
+        },
+        {
+          "action": 7,
+          "purpose": "Restore SFX Web",
+          "completed": true
+        },
+        {
+          "action": 8,
+          "purpose": "Chinese pause UI Web",
+          "completed": true
+        },
+        {
+          "action": 9,
+          "purpose": "Return English Web UI",
+          "completed": true
+        },
+        {
+          "action": 10,
+          "purpose": "Resume Web",
+          "completed": true
+        },
+        {
+          "action": 11,
+          "purpose": "Move into court",
+          "completed": true
+        },
+        {
+          "action": 12,
+          "purpose": "Align court route",
+          "completed": true
+        },
+        {
+          "action": 13,
+          "purpose": "Cross court 1",
+          "completed": true
+        },
+        {
+          "action": 14,
+          "purpose": "Cross court 2",
+          "completed": true
+        },
+        {
+          "action": 15,
+          "purpose": "Cross court 3",
+          "completed": true
+        }
+      ],
+      "selected_images": [
+        {
+          "image": "web-playing.jpg",
+          "subject": "Playing after Continue expedition",
+          "source_capture_index": 2,
+          "source_png_sha256": "fc71543b16bbd9e3f33ca40167901a398da366d4cc35d699d65064b24f0eb420",
+          "jpeg_sha256": "dc0063ea0f61dbaf5e5a2c75d6093d630230e20038862683601e0ee2d74bddaa",
+          "bytes": 168739,
+          "width": 1394,
+          "height": 1195,
+          "quality": 82,
+          "lossy": true,
+          "pixel_identity": false,
+          "source_rgb_pixels_sha256": "914325ea8492a4a794c3bb70a83f0e13c26a0a7ca90cd180d2a8204ae357ef1e",
+          "decoded_jpeg_pixels_sha256": "858a4183283074e4d0e6b47133a029e5bcd03b5fecdab63462538bc92a10784c",
+          "metadata_removed": true,
+          "resize": false,
+          "crop": false,
+          "retouch": false
+        },
+        {
+          "image": "web-pause.jpg",
+          "subject": "English pause interface",
+          "source_capture_index": 10,
+          "source_png_sha256": "84f49063b0507185c7452a462147fe91969cceea8962f392e21cd3ee7b9bd46f",
+          "jpeg_sha256": "044074089f606b1924a74dd91751bbee988ac675fd6a0d164b880e60876a9bc6",
+          "bytes": 146320,
+          "width": 1394,
+          "height": 1195,
+          "quality": 82,
+          "lossy": true,
+          "pixel_identity": false,
+          "source_rgb_pixels_sha256": "b5ce02f3fc76a56ea02198c25a2ea192dcab876f402a24a4df422a9ef70ea132",
+          "decoded_jpeg_pixels_sha256": "4c8ab5184486f07b6669993455bf20761b9d905fb8f17156a4e2e195bf86a66d",
+          "metadata_removed": true,
+          "resize": false,
+          "crop": false,
+          "retouch": false
+        },
+        {
+          "image": "web-zh.jpg",
+          "subject": "Chinese pause interface",
+          "source_capture_index": 16,
+          "source_png_sha256": "a3a026394228e9d075c7748bf2964491489af7acdfd927a96327361418affe02",
+          "jpeg_sha256": "4512be0b4169b3c39119dcc565be689bbac99c4b6e1f04f524e8ed953db77e30",
+          "bytes": 140989,
+          "width": 1394,
+          "height": 1195,
+          "quality": 82,
+          "lossy": true,
+          "pixel_identity": false,
+          "source_rgb_pixels_sha256": "9286a4f17470431683136cbd2c3822c030906a2b265aa6296f547e5064890c11",
+          "decoded_jpeg_pixels_sha256": "7b8511675317ce79b8bfeaeb9e087f9f3b7edea25369c8fae9b85c70ac1e4f8e",
+          "metadata_removed": true,
+          "resize": false,
+          "crop": false,
+          "retouch": false
+        }
+      ],
+      "build_files": [
+        {
+          "path": "play/hyper3d-relic-room/index.html",
+          "sha256": "96b6b129c928b33c7309469fbd6026f05483def0340b982647192f510457a95d",
+          "bytes": 5754
+        },
+        {
+          "path": "play/hyper3d-relic-room/publication-shell.js",
+          "sha256": "28ec429e991e9d0500840ec78b96979e65b744c2d139345332c421bb306ca5e8",
+          "bytes": 1600
+        },
+        {
+          "path": "play/hyper3d-relic-room/relic-shell.js",
+          "sha256": "713ba9658db488027e258f9e155ebc5f2c14ff8c70829d6e26d7a81870391ab9",
+          "bytes": 7218
+        },
+        {
+          "path": "play/hyper3d-relic-room/relic-22f7d1c3f45a.pck",
+          "sha256": "22f7d1c3f45a8a553715f1c6d79f6f5595836e650484f51ffabd640647ec27c3",
+          "bytes": 41192268
+        }
+      ],
+      "build_hash_scope": "Local served-file readback; no independent network-byte or browser-cache proof.",
+      "evidence_hashes": [
+        {
+          "role": "physical_action_ledger",
+          "sha256": "f9211618eb606c8f0e81cad58195b87bf903e9d5b56c656556505760eb4c87f7",
+          "bytes": 108693
+        },
+        {
+          "role": "browser_owner_start",
+          "sha256": "42e03c288975cd0fdc2eca622dee739ea5b20a49d44786c982972fb08943624a",
+          "bytes": 916
+        },
+        {
+          "role": "blocked_capture_response",
+          "sha256": "113fd93fdd434bba19172370944d65ecf4fbf0756a383ba10f9e8a245cc15ee1",
+          "bytes": 2207
+        },
+        {
+          "role": "pixel_cleanup_ack",
+          "sha256": "c47ce838460b8e116a14ba42c2b7d1d258bb7c29a9eab45193aa1b42b9d3b89b",
+          "bytes": 2414
+        },
+        {
+          "role": "browser_owner_cleanup_ack",
+          "sha256": "10e1b4997589254e52877b1d05427bc765cbbc4e3bb4f01fb0e320f6dc560336",
+          "bytes": 2519
+        }
+      ],
+      "typed_browser_run_slice": {
+        "calls": 38,
+        "sha256": "a11edae2cf4371c5ed756b57846b120a70eb73c6004afbc8359c1a207f99cabb"
+      },
+      "private_capture_inventory": {
+        "captures": 30,
+        "canonical_sha256": "371c363e0721390640e8dc6be54143d71f6ecab3194c6729615e162caae2e8c1"
+      },
+      "audit_execution": {
+        "new_ui_actions": 0,
+        "new_api_calls": 0,
+        "raw_pngs_preserved": true
+      }
+    },
+    "film": {
+      "schema_version": 1,
+      "scope": "Scripted native Godot GPU course with editorial title, source/authorship card and final-frame hold. Separate from real OS/Web input acceptance.",
+      "artifact": {
+        "file": "showcase.mp4",
+        "bytes": 20157741,
+        "sha256": "134579f9e7995f038764b7a27989e6bd073eb62ec2b8d8b75054ceeba1059634",
+        "width": 1280,
+        "height": 720,
+        "video_codec": "h264",
+        "pixel_format": "yuv420p",
+        "fps": "30/1",
+        "frames": 1771,
+        "duration_seconds": 59.03333333333333,
+        "audio_codec": "aac",
+        "audio_sample_rate_hz": 48000,
+        "audio_channels": 2,
+        "faststart": true
+      },
+      "staging": {
+        "byte_identical_to_review02": true,
+        "destination_sha256_verified": true,
+        "destination_full_decode": "PASS",
+        "destination_decode_errors": 0
+      },
+      "source_course": {
+        "file_basename": "continuous-02.avi",
+        "sha256": "621b99bef0f42d2456e0b9a0da78a31cb3115c669d7c8b34837e1d6c64f59a5b",
+        "bytes": 140377294,
+        "source_hash_reverified_at_staging": true,
+        "source_frames": 1351,
+        "duration_seconds": 45.03333333333333,
+        "retained_frames": 1351,
+        "cuts": 0,
+        "retimed": false,
+        "source_unchanged": true,
+        "full_frame_preserved_without_crop": true,
+        "presentation_size_pixels": [
+          1152,
+          648
+        ],
+        "presentation_note": "Uniformly fit into the1280x720 editorial canvas with a separate bottom caption strip; pixels are resampled and lossily encoded.",
+        "adopted_transcode_sha256": "94750fb99732148e08c67141e8974426bc4b77103373b7b027619e34df9aec9e",
+        "runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19"
+      },
+      "timeline": [
+        {
+          "scene": "title",
+          "frames": 90,
+          "seconds": 3
+        },
+        {
+          "scene": "source_and_authorship",
+          "frames": 180,
+          "seconds": 6
+        },
+        {
+          "scene": "complete_native_scripted_course",
+          "frames": 1351,
+          "seconds": 45.03333333333333
+        },
+        {
+          "scene": "final_source_frame_editorial_hold",
+          "frames": 150,
+          "seconds": 5,
+          "source_frame_index": 1350,
+          "editorial_not_additional_gameplay": true
+        }
+      ],
+      "hyperframes_check": {
+        "source_report_basename": "check-03.json",
+        "source_report_sha256": "7bd367e59384da015406fd71bd0fa68ce45b55b5d5a6a0513bcf52b8a1ef4dac",
+        "version": "0.8.189",
+        "ok": true,
+        "browser_skipped": false,
+        "lint_findings": 0,
+        "runtime_findings": 0,
+        "layout_findings": 0,
+        "contrast_passed": 19,
+        "contrast_checked": 19,
+        "craft_findings": 0,
+        "craft_samples": 474
+      },
+      "review02": {
+        "source_report_basename": "film-review-02.public.json",
+        "source_report_sha256": "2161c6d8ba275474d95a8f3b43025e7a5adf1a712a7ad5c01ae0958b62d030a8",
+        "full_decode_errors": 0,
+        "course_frame_comparison": {
+          "method": "Full course output region vs same-index bicubic-scaled source, decoded SSIM; lossy encodings/resampling differ",
+          "compared_frames": 1351,
+          "mean_ssim": 0.9864378978534419,
+          "minimum_ssim": 0.975314,
+          "lowest_frame_indices": [
+            [
+              1165,
+              0.975314
+            ],
+            [
+              1185,
+              0.976603
+            ],
+            [
+              1161,
+              0.976729
+            ],
+            [
+              1181,
+              0.976784
+            ],
+            [
+              1169,
+              0.976799
+            ],
+            [
+              1157,
+              0.976825
+            ],
+            [
+              1149,
+              0.976915
+            ],
+            [
+              1145,
+              0.976967
+            ]
+          ],
+          "source_frames": 1351,
+          "output_course_region": [
+            64,
+            0,
+            1152,
+            648
+          ]
+        },
+        "audio_decoded_pcm_samples_per_channel": 2834432,
+        "audio_statistics": {
+          "scalar_samples": 5668864,
+          "nonzero_samples": 2454342,
+          "digital_zero_samples": 3214522,
+          "full_scale_rail_samples": 0,
+          "peak_dbfs": -8.12080288826705,
+          "rms_dbfs": -33.58078294332517
+        },
+        "course_audio_correlation_at_9_seconds": 0.9983200318214737,
+        "silent_editorial_cards_and_ending_hold_intentional": true
+      },
+      "pixel_review": {
+        "receipt": "film-pixel-review.public.json",
+        "sha256": "5697c16d0ee18b2f49014a4856556a858bcb2643636f65a7900d59ba884a12e5",
+        "root_review": "PASS; first, course-middle and last frames inspected",
+        "natural_speed_playback": "NOT_RUN",
+        "subjective_listening": "NOT_RUN"
+      },
+      "natural_speed_playback": "NOT_RUN",
+      "subjective_listening": "NOT_RUN",
+      "new_generation_calls": false,
+      "publication": "NOT_CLAIMED",
+      "final_pixel_review": {
+        "receipt": "film-pixel-review.public.json",
+        "sha256": "5697c16d0ee18b2f49014a4856556a858bcb2643636f65a7900d59ba884a12e5",
+        "root_review": "PASS; first, course-middle and last frames inspected",
+        "natural_speed_playback": "NOT_RUN",
+        "subjective_listening": "NOT_RUN"
+      },
+      "later_revision": {
+        "receipt": "save-recovery.public.json",
+        "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+        "scope": "Later save/restart correction; published footage was not rerendered and does not prove these changed failure paths."
+      }
+    },
+    "gameplay_constants": {
+      "melee_contact_s": 0.18,
+      "cast_release_s": 0.32,
+      "guardian_contact_s": 0.38,
+      "supported_landscape_min_px": [
+        960,
+        600
+      ]
+    }
+  },
+  "checks": [
+    {
+      "name": "approved_acquisition_cap",
+      "result": "pass",
+      "observed": "23 completed paid cases;15.5 credits; no automatic paid retry",
+      "receipt": "diagnosis/budget-ledger.public.json"
+    },
+    {
+      "name": "frozen_runtime_and_download_archive",
+      "result": "pass",
+      "observed": "41 current runtime files match source ZIP;40 match the prior accepted baseline, with three main.gd save/restart corrections; all archive members hash-verified"
+    },
+    {
+      "name": "baseline_pure_gameplay_model",
+      "result": "pass",
+      "observed": {
+        "checks": 120
+      },
+      "receipt": "gameplay-tests.public.json",
+      "source_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19"
+    },
+    {
+      "name": "baseline_native_staged_integration_physics_and_save",
+      "result": "pass",
+      "observed": "Historical ec13 staged contact/cadence/controller/course/layout/chest/fresh-read tests passed; engine-controlled QA. Current ba6b save/restart checks have a separate scoped receipt.",
+      "receipt": "gameplay-tests.public.json",
+      "source_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19"
+    },
+    {
+      "name": "baseline_actual_native_keyboard_mouse_course",
+      "result": "pass",
+      "observed": {
+        "status": "PASS",
+        "state": "won",
+        "distance_m": 94.2953090034425,
+        "game_elapsed_s": 116.899999999995,
+        "qa_enabled_in_all_logged_states": false,
+        "logged_runtime_states_checked": 25,
+        "position_injection": "None in the recorded acceptance route; ledger contains only physical keys/clicks and frozen package has no adapter autoload",
+        "quest_complete": true,
+        "enemies_defeated": 2,
+        "chests_opened": 1,
+        "chest_animation_progress": 1,
+        "inventory": {
+          "arc_focus": 1,
+          "bronze_edge": 1
+        },
+        "equipment": {
+          "focus": "arc_focus",
+          "weapon": "bronze_edge"
+        },
+        "effective_arc_hits": 2,
+        "arc_damage_per_hit": [
+          24,
+          24
+        ],
+        "actual_enemy_contacts": [
+          {
+            "variant": "scout",
+            "damage": 5,
+            "health_after": 35
+          },
+          {
+            "variant": "sentinel",
+            "damage": 8,
+            "health_after": 27
+          }
+        ],
+        "duplicate_item_count_capped": true,
+        "final_level": 2,
+        "final_xp": 25
+      },
+      "receipt": "os-acceptance.public.json",
+      "source_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19"
+    },
+    {
+      "name": "baseline_fresh_normal_native_save_reopen",
+      "result": "pass",
+      "observed": {
+        "status": "PASS",
+        "distinct_fresh_native_process": true,
+        "prior_process_absent_recorded": true,
+        "normal_save_notice": "save_loaded",
+        "save_restored_event": true,
+        "persisted_fields_match": [
+          "inventory",
+          "equipment",
+          "opened_chests",
+          "killed_enemies",
+          "quest_complete",
+          "xp",
+          "level"
+        ],
+        "zone": "town",
+        "town_spawn_matches_frozen_source": true,
+        "distance_m": 0,
+        "qa_enabled": false,
+        "normal_playing_then_paused": [
+          "playing",
+          "paused"
+        ],
+        "explicit_native_cleanup_both_runs": "PASS"
+      },
+      "receipt": "os-acceptance.public.json",
+      "source_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19"
+    },
+    {
+      "name": "current_scoped_save_failure_and_restart_regression",
+      "result": "pass",
+      "observed": "57 actual bounded-filesystem/caller checks;5 fresh-process read checks;25 native staged integration checks",
+      "receipt": "save-recovery.public.json"
+    },
+    {
+      "name": "official_current_web_export_and_resource_budget",
+      "result": "pass",
+      "observed": {
+        "raw_bytes": 41227974,
+        "gzip_equivalent_bytes": 40851951
+      },
+      "receipt": "current-export.public.json"
+    },
+    {
+      "name": "current_affected_native_ui_followup",
+      "result": "fail",
+      "observed": "First exact-window capture partially occluded; foreground remained false; zero game input; no IO fault fixture; explicit cleanup acknowledged; save bytes unchanged",
+      "expected": "Current Save-and-Title / Continue / failure-feedback actual UI checks",
+      "classification": "blocked_before_first_game_input",
+      "receipt": "current-native-followup.public.json"
+    },
+    {
+      "name": "current_web_input",
+      "result": "fail",
+      "observed": "NOT_RUN; latest bc6af9db60ea pack exported and inspected only. Earlier physical Web smoke binds the previous pack.",
+      "expected": "Actual input on current Web pack",
+      "classification": "not_tested"
+    },
+    {
+      "name": "baseline_actual_web_input_smoke",
+      "result": "pass",
+      "observed": "15 actual canvas continue/movement/pause/SFX/language actions on the earlier22f7d1c3f45a PCK; scoped window and separate DOM checks",
+      "receipt": "web-acceptance.public.json"
+    },
+    {
+      "name": "baseline_incomplete_web_course_and_lifecycle",
+      "result": "fail",
+      "observed": "Historical 22f7d1c3f45a Web smoke stopped before further input because another native window overlapped; exact test sessions explicitly stopped. Current bc6af9db60ea browser acceptance is NOT_RUN.",
+      "expected": "Complete historical Web loot/combat/save-reopen/quit/fullscreen/restart acceptance",
+      "classification": "blocked_historical_smoke",
+      "receipt": "web-acceptance.public.json"
+    },
+    {
+      "name": "full_film_decode_frame_conservation_and_digital_audio",
+      "result": "pass",
+      "observed": "1771 frames/59.033333 seconds;0 decode errors; all1351 course frames retained;5-second final-frame editorial hold; sampled visual review passed",
+      "receipt": "film-validation.public.json"
+    },
+    {
+      "name": "natural_speed_playback_and_subjective_listening",
+      "result": "fail",
+      "observed": "NOT_RUN; no subjective listening approval",
+      "expected": "Natural-speed playback and full mix listening",
+      "classification": "not_tested"
+    },
+    {
+      "name": "native_os_gameplay_recording",
+      "result": "fail",
+      "observed": {
+        "status": "FAILED_GAMEPLAY_RECORDING_NOT_CLAIMED",
+        "start_acknowledged": true,
+        "first_failure_code": "overlay_exclusion_unavailable",
+        "first_failure_evidence": "Operator-reported bounded diagnostic; first raw response was not persisted because observation threw before write",
+        "bounded_diagnostic": "OverlayExclusionUnavailable: exclude control banner; timed out serializing cross-process DCC-CUA overlay capture exclusion (Uncategorized)",
+        "first_failure_request_id": "UNKNOWN",
+        "first_failure_call_latency_ms": "UNKNOWN",
+        "subsequent_stop_call": "backend_unavailable from closed local client",
+        "explicit_cleanup_ack": "PASS",
+        "title_only_video_finalized": true,
+        "video_sha256": "d61eb8e035c32c5b1d3f0ab6b56f563e1914393b2c9f57f947340a1d24024223",
+        "video_frames": 3,
+        "video_duration_ms": 2159,
+        "all_encoded_frames_before_first_game_input": true,
+        "capture_sidecar_sha256": "e6f0b44fc2506658ed59853a181be347ed27c03b8c63e071c618ac464958a79b",
+        "root_cause": "NOT_ESTABLISHED; no Host crash, source-commit mapping or fix claim"
+      },
+      "expected": "Continuous OS gameplay recording",
+      "classification": "capture_probe_blocked"
+    },
+    {
+      "name": "actual_os_chest_step_away_cancel",
+      "result": "fail",
+      "observed": "NOT_PASS; chest opening completed before the actor left interaction range; engine-only chest cancellation check passed separately",
+      "expected": "Actor leaves range before opening completes",
+      "classification": "attempt_not_accepted_not_logic_failure"
+    }
+  ],
+  "not_claimed": [
+    "Every Hyper3D website feature, option combination or semantic parameter effect; seed reproducibility.",
+    "Provider-supplied automatic rigging/animation, all-angle deformation quality or a distance-based LOD system.",
+    "Full Web course/combat/loot/persistence or fullscreen/quit/restart/lifecycle acceptance; Web smoke is narrower.",
+    "Continuous OS gameplay video; the published film is scripted native GPU/audio capture with declared editorial cards/hold.",
+    "Subjective sound mix or natural-speed playback approval, physical-phone touch, gamepads, portrait layout or cross-device performance.",
+    "Physical-user interruption or an accepted actual OS step-away chest-cancellation attempt.",
+    "Independent blank-scene reconstruction, installed marketplace0.1.2 acceptance, deployment or release.",
+    "Unknown creator/reviewer model configuration; historical evidence is not newly executed acceptance."
+  ]
+}

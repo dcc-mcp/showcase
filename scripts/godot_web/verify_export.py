@@ -23,7 +23,7 @@ for case in ['sonic-loom','prism-tide']:
     assert config['emscriptenPoolSize']==0 and config['godotPoolSize']==0
 wasm=ROOT/'play/runtime/godot-4.6.3.wasm'
 assert wasm.read_bytes()[:4]==b'\0asm'
-assert sum((ROOT/p).stat().st_size for p in assets)<=40*1024*1024
-assert sum(len(gzip.compress((ROOT/p).read_bytes(),mtime=0)) for p in assets)<=11*1024*1024
+from resource_budget import measure, validate
+validate(measure(ROOT, assets))
 assert not any('service.worker' in p for p in assets)
 print('Source provenance, native PCK/WASM signatures, allowlist, hashes and budgets passed.')

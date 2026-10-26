@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-20",
+  "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+  "public_video_sha256": "2d8101c73a87a8fd7e1aef4257f071d4b9835a6fc36b48cd127a489fc6302b18",
+  "media_review": {
+    "status": "passed",
+    "scope": "Visual sampling of the exact public encode, not continuous subjective playback or listening.",
+    "full_size_video_frames_seconds": [
+      0,
+      21,
+      40,
+      56,
+      57.8
+    ],
+    "contact_sampling": "4-second overview samples; half-second samples around victory/restart and quarter-second samples around natural defeat/restart.",
+    "images_reviewed": [
+      {
+        "file": "hero.jpg",
+        "sha256": "ab8fcfad4554aa6d7da257ed7303e7615019981f50222fba12318ea6173c3bab"
+      },
+      {
+        "file": "boss.jpg",
+        "sha256": "691e78f2e9a6b92530b090a729c2b4be9cc2f44a5d4deba5229300e2d6281c93"
+      },
+      {
+        "file": "victory.jpg",
+        "sha256": "a2b4c6cbe64f4786cb0a4b1b4af3eaee5783d599f7b4f578c8060767b6863998"
+      },
+      {
+        "file": "defeat.jpg",
+        "sha256": "0b1d8064746dea23cf7947cf7a7dbf43eab6721787f61df6d9c1d703266cfd54"
+      },
+      {
+        "file": "portrait.jpg",
+        "sha256": "b0a62c2691b856539d3702d763625bd9f1c3a5c0ee6cffec921fca4bab815e70"
+      }
+    ],
+    "observations": [
+      "All public screenshots are compression-only derivatives of real game captures, with no cropping or retouching.",
+      "The native overview shows the complete arena, readable resource and ability panels, and the supporting-tower placement.",
+      "Portrait is deliberately close-framed, with visible movement and ability controls; this is emulated touch.",
+      "Victory and defeat overlays retain the matching decorative toast behind the dimmed backdrop. Actual restart visibly clears terminal UI and restores initial state.",
+      "The exact public excerpt visibly retains combat, boss, victory, natural defeat and both restarts. No private desktop chrome, path or token was visible in reviewed pixels."
+    ],
+    "subjective_audio_listening": "not-tested"
+  },
+  "privacy_review": {
+    "public_text_pattern_scan": "passed",
+    "archive_text_pattern_scan": "passed except reviewed upstream license reference",
+    "reviewed_exception": {
+      "member": "game/ui/FONT-LICENSE.txt",
+      "sha256": "849f4ea9c214fa4ac3593b770c699f387534b11ce671264c1b10d85bdcb5997b",
+      "reason": "The unchanged upstream Debian font copyright notice cites the standard system common-licenses GPL reference. This is generic legal boilerplate, not a private user or execution path."
+    },
+    "zip_unchanged": true,
+    "native_source_sha256": "cca032f2296ee25d9b01a3e44a23d1991fd7fc92c072dffda8045965d5ed4b59"
+  },
+  "not_claimed": [
+    "Subjective music listening",
+    "Physical phone or multitouch",
+    "Native manual OS-window close",
+    "Physical GPU performance",
+    "Deployed-site acceptance from this file"
+  ]
+}

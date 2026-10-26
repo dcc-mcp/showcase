@@ -1,0 +1,47 @@
+{
+  "blender": "4.3.2",
+  "seed": 18026,
+  "pipeline": "native Blender Python (not MCP)",
+  "object_count": 67,
+  "mesh_count": 64,
+  "vertices": 3674,
+  "polygons": 2655,
+  "files": {
+    "tower_storm.glb": {
+      "bytes": 30760,
+      "sha256": "443e60d1d3ac0e95656cc5768b0427a790346d26f75907e1c477900fe8fadc23"
+    },
+    "watchwood_tree.glb": {
+      "bytes": 58312,
+      "sha256": "f3935a48d6105974bc174f803aa4a8f5e2882633277e40d01bd6c146163c4dec"
+    },
+    "tower_sunbow.glb": {
+      "bytes": 21740,
+      "sha256": "33b15216305e080c6b53b67e169e42276765f86501ccea8e19d45678c0a16032"
+    },
+    "moonfern.glb": {
+      "bytes": 5756,
+      "sha256": "0cddb5742bee5dd7e23e36b2a46a1bab4f857514fb7b25189b33704c9b662082"
+    },
+    "tower_ember.glb": {
+      "bytes": 29216,
+      "sha256": "e6d67ec7a9cc25bc012c9a768e274e4fd7c16c7cfa138ef46a799a84860fc04d"
+    },
+    "standard.glb": {
+      "bytes": 6708,
+      "sha256": "d62c86a49690bd38f54ed50defce5fe3796e7bad3bd277160da5234bdab75ce1"
+    },
+    "world.glb": {
+      "bytes": 116424,
+      "sha256": "bd31693d5ccfe5d457f3a4e534bc2a33715a01cdea9c1f7b5fb69f59219cdc35"
+    },
+    "shrine.glb": {
+      "bytes": 67052,
+      "sha256": "22d2a4d53a27f8b96b1abb36a39da49ea4ab330513073e051caae40d8884b8f0"
+    },
+    "tower_frost.glb": {
+      "bytes": 32572,
+      "sha256": "fd4afc35a23fad1a94f436d97fe1431683c483002e2d2ddf9fe26f0d53f07eb6"
+    }
+  }
+}

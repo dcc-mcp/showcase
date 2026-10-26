@@ -1,7 +1,7 @@
 name: Parcel Web and mobile acceptance
 on:
   pull_request:
-    paths: ['play/**', 'scripts/godot_web/**', 'scripts/parcel_page_smoke.py', 'docs/showcase/parcel-switchyard/**', 'collection.json', 'locales/**', 'assets/playable.js', 'assets/games.js', '.github/workflows/parcel-web-acceptance.yml']
+    paths: ['play/**', 'scripts/godot_web/**', 'scripts/parcel_page_smoke.py', 'scripts/tracked_file_bytes.py', 'scripts/test_tracked_file_bytes.py', 'docs/showcase/parcel-switchyard/**', 'collection.json', 'locales/**', 'assets/playable.js', 'assets/games.js', '.github/workflows/parcel-web-acceptance.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,6 +30,7 @@ jobs:
         run: |
           python scripts/godot_web/parcel-switchyard/test_package.py
           python scripts/godot_web/parcel-switchyard/test_browser_guards.py
+          python scripts/test_tracked_file_bytes.py
           python scripts/godot_web/parcel-switchyard/test_tracked_bytes.py
           node --check play/parcel-switchyard/shell.js
           node scripts/godot_web/parcel-switchyard/test_fullscreen.js

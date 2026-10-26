@@ -50,3 +50,9 @@ __pycache__/
 
 # Pinned official Godot runtime, materialized and hash-checked during CI build.
 /play/runtime/godot-4.6.3.*
+
+# Local model-control harness is not accepted production content.
+_model-preview-pilot/
+
+# Godot extracts these embedded GLB textures during import.
+scripts/godot_web/hyper3d-relic-room/game/assets/reused/*_texture*.png

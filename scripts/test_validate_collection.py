@@ -13,6 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import validate_collection
+import validate_entry
 
 
 class CollectionContractTests(unittest.TestCase):
@@ -70,6 +71,38 @@ class CollectionContractTests(unittest.TestCase):
         path = self.root / "collection.json"
         self.write_json(path, {"schema_version": 1, "cases": cases or [self.case]})
         return validate_collection.validate(path)
+
+    def write_entry_check(self, check):
+        path = self.entry / "validation.json"
+        validation = json.loads(path.read_text(encoding="utf-8"))
+        validation["checks"] = [check]
+        self.write_json(path, validation)
+
+    def test_entry_accepts_explicit_not_run_reason(self):
+        self.write_entry_check({"name": "Full animation", "result": "not_run",
+                                "observed": "Deferred until the render resource handoff."})
+        self.assertEqual(validate_entry.validate(str(self.entry)), [])
+        self.assertEqual(self.problems(), [])
+
+    def test_entry_not_run_requires_nonempty_textual_reason(self):
+        for reason in ({}, {"observed": None}, {"observed": ""}, {"observed": "  "},
+                       {"observed": 42}, {"observed": []}, {"observed": {}}):
+            with self.subTest(reason=reason):
+                self.write_entry_check(dict(name="Full animation", result="not_run", **reason))
+                self.assertTrue(any("nonempty observed reason" in problem
+                                    for problem in validate_entry.validate(str(self.entry))))
+
+    def test_entry_preserves_legacy_fail_evidence(self):
+        self.write_entry_check({"name": "Visual review", "result": "fail",
+                                "expected": "Clean manufactured reflections.",
+                                "observed": "The silver surface still has visible dents."})
+        self.assertEqual(validate_entry.validate(str(self.entry)), [])
+
+    def test_entry_does_not_treat_arbitrary_result_as_not_run(self):
+        self.write_entry_check({"name": "Full animation", "result": "skipped",
+                                "observed": "Not executed."})
+        self.assertTrue(any("expected pass/fail/not_run" in problem
+                            for problem in validate_entry.validate(str(self.entry))))
 
     def attribution(self):
         return {"stage_id": "creation", "stage": "Creation", "model": "Unknown", "reasoning_effort": "Unknown",
@@ -485,10 +518,47 @@ class ReviewedPublicTextTests(unittest.TestCase):
         repo = Path(__file__).resolve().parents[1]
         files = json.loads((repo / "play/manifest.json").read_text(encoding="utf-8"))["files"]
         hashes = {item["path"]: item["sha256"] for item in files}
+        vendor = json.loads((repo / "assets/vendor/model-viewer/VENDOR.json").read_text())
+        hashes["assets/vendor/model-viewer/model-viewer.min.js"] = vendor["sha256"]
         self.assertEqual(set(validate_collection.REVIEWED_TEXT_FALSE_POSITIVES),
-                         {"play/README.md", "play/runtime/godot-4.6.3.js"})
+                         {"assets/vendor/model-viewer/model-viewer.min.js", "play/README.md", "play/runtime/godot-4.6.3.js",
+                          "play/dawnkeep-defense/ui/FONT-LICENSE.txt", "play/parcel-switchyard/FONT-LICENSE.txt"})
         for path, (digest, _) in validate_collection.REVIEWED_TEXT_FALSE_POSITIVES.items():
             self.assertEqual(digest, hashes[path])
+
+    def test_unmodified_font_notices_are_reviewed_but_edits_and_moves_are_not(self):
+        repo = Path(__file__).resolve().parents[1]
+        for rel in ('play/dawnkeep-defense/ui/FONT-LICENSE.txt', 'play/parcel-switchyard/FONT-LICENSE.txt'):
+            data = (repo / rel).read_bytes()
+            path = self.root / rel
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+            self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+            self.assertEqual(path.read_bytes(), data)  # Legal text is never rewritten.
+            path.write_bytes(data + b'\nchanged\n')
+            self.assertTrue(validate_collection.scan_text_file(path, self.root))
+            path.write_bytes(data + b'\n/home/private-user/secret\n')
+            issues = validate_collection.scan_text_file(path, self.root)
+            self.assertTrue(any('private filesystem path' in issue for issue in issues))
+            moved = self.root / 'assets/FONT-LICENSE.txt'
+            moved.parent.mkdir(exist_ok=True)
+            moved.write_bytes(data)
+            self.assertTrue(validate_collection.scan_text_file(moved, self.root))
+
+    def test_exact_vendor_bundle_review_and_modified_bundle_rejection(self):
+        repo = Path(__file__).resolve().parents[1]
+        rel = 'assets/vendor/model-viewer/model-viewer.min.js'
+        data = (repo / rel).read_bytes()
+        path = self.root / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        self.assertEqual(validate_collection.scan_text_file(path, self.root), [])
+        self.assertEqual(path.read_bytes(), data)
+        path.write_bytes(data + b'\n// edited\n')
+        self.assertEqual(len(validate_collection.scan_text_file(path, self.root)), 2)
+        moved = self.root / 'assets/other-model-viewer.js'
+        moved.write_bytes(data)
+        self.assertEqual(len(validate_collection.scan_text_file(moved, self.root)), 2)
 
     def test_tracked_public_readme_matches_review_and_preserves_content(self):
         repo = Path(__file__).resolve().parents[1]

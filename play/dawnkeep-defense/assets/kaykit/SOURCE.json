@@ -1,0 +1,287 @@
+{
+  "method": "Exact-name animation channel remap; byte-preserving accessor/bufferView import; no re-rigging",
+  "license": "CC0-1.0; original license files included",
+  "knight_equipment": "Official sword_1handed in handslot.r and shield_badge in handslot.l, original local transforms",
+  "characters": [
+    {
+      "file": "characters/Knight_Unarmed.glb",
+      "bytes": 549252,
+      "sha256": "3eb8a06efe828a0be0ce02f32393e91c7062756053609a6f8ed8af319f8249b5",
+      "sources": [
+        "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Knight.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb"
+      ],
+      "animations": {
+        "Idle_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Hit_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Death_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Walking_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Running_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Melee_1H_Attack_Chop": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_1H_Attack_Slice_Diagonal": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_Blocking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb"
+      }
+    },
+    {
+      "file": "characters/Knight.glb",
+      "bytes": 601300,
+      "sha256": "284ab4da94b1916e72153999add973335e75ca45946b6dee7e69b484e07ac826",
+      "sources": [
+        "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Characters/gltf/Knight.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_1handed.gltf",
+        "adventurers-free2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_badge.gltf"
+      ],
+      "animations": {
+        "Idle_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Hit_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Death_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Walking_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Running_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Melee_1H_Attack_Chop": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_1H_Attack_Slice_Diagonal": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_Blocking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb"
+      }
+    },
+    {
+      "file": "characters/Skeleton_Minion.glb",
+      "bytes": 705292,
+      "sha256": "1c105c5f8ff581fdd2353a684cd139c359c8d6d1998b25664ed02efdcae115de",
+      "sources": [
+        "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Minion.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb"
+      ],
+      "animations": {
+        "Idle_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Hit_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Death_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Walking_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Running_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Melee_1H_Attack_Chop": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_1H_Attack_Slice_Diagonal": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_Blocking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Skeletons_Idle": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Walking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Death": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Spawn_Ground": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb"
+      }
+    },
+    {
+      "file": "characters/Skeleton_Warrior.glb",
+      "bytes": 754264,
+      "sha256": "70ffe24ee3fb3a8d596615c99c5d74a669e5ed8d6f047b5f85f930d18c907ee2",
+      "sources": [
+        "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Warrior.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb"
+      ],
+      "animations": {
+        "Idle_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Hit_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Death_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Walking_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Running_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Melee_1H_Attack_Chop": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_1H_Attack_Slice_Diagonal": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_Blocking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Skeletons_Idle": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Walking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Death": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Spawn_Ground": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb"
+      }
+    },
+    {
+      "file": "characters/Skeleton_Rogue.glb",
+      "bytes": 717988,
+      "sha256": "23f9e235d5efa86b6c4a5c920788f1267ec4062a0d28480c77aa0eefbb961d8c",
+      "sources": [
+        "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Rogue.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb"
+      ],
+      "animations": {
+        "Idle_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Hit_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Death_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Walking_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Running_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Melee_1H_Attack_Chop": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_1H_Attack_Slice_Diagonal": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_Blocking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Skeletons_Idle": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Walking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Death": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Spawn_Ground": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb"
+      }
+    },
+    {
+      "file": "characters/Skeleton_Mage.glb",
+      "bytes": 696720,
+      "sha256": "4909c2ad54d1c43238e270f829ba8c0f2aee07b3f9cb7b4700193d0bc92fd46b",
+      "sources": [
+        "skeletons-free1.1/KayKit_Skeletons_1.1_FREE/characters/gltf/Skeleton_Mage.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatRanged.glb"
+      ],
+      "animations": {
+        "Idle_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Hit_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Death_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "Walking_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Running_A": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "Melee_1H_Attack_Chop": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_1H_Attack_Slice_Diagonal": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Melee_Blocking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatMelee.glb",
+        "Skeletons_Idle": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Walking": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Death": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Skeletons_Spawn_Ground": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_Special.glb",
+        "Ranged_Magic_Shoot": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatRanged.glb",
+        "Ranged_Magic_Spellcasting": "character-animations-free1.1/KayKit_Character_Animations_1.1/Animations/gltf/Rig_Medium/Rig_Medium_CombatRanged.glb"
+      }
+    }
+  ],
+  "forest": [
+    {
+      "file": "forest/Bush_1_A_Color1.bin",
+      "bytes": 2352,
+      "sha256": "66ba041776959c19849954c9d2393528783461ca6dd11ebe1c1f6b9026b63c0c",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_A_Color1.bin"
+    },
+    {
+      "file": "forest/Bush_1_A_Color1.gltf",
+      "bytes": 3054,
+      "sha256": "bc6cf33dbed296a181d8afbd82ffe1c44ee5e57cb095f9efdf4b63e93c165b70",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_1_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Bush_2_A_Color1.bin",
+      "bytes": 1032,
+      "sha256": "156a986b87b097725a1c675ea20eeaf3f788014742dbf4b8f0fd2c69f27cad98",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_A_Color1.bin"
+    },
+    {
+      "file": "forest/Bush_2_A_Color1.gltf",
+      "bytes": 3050,
+      "sha256": "c41284ba3191bdda026380527edf9fb0dcf03b5dd26c8779ed056edb6526c444",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Bush_2_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Grass_1_A_Color1.bin",
+      "bytes": 2056,
+      "sha256": "d293510be3ca4a6062dc305c22a143ba134fc49af65aaba064cc8f8d868d6c6e",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_A_Color1.bin"
+    },
+    {
+      "file": "forest/Grass_1_A_Color1.gltf",
+      "bytes": 3058,
+      "sha256": "58686904164d636e8731544fbb6911bf1ebc068841fe6c127f0c509b1449212b",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_1_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Grass_2_A_Color1.bin",
+      "bytes": 2056,
+      "sha256": "07fc84eda0b374b3fd4afed280452f0be21f75c0e53fbf6778d3997c09832a64",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_A_Color1.bin"
+    },
+    {
+      "file": "forest/Grass_2_A_Color1.gltf",
+      "bytes": 3056,
+      "sha256": "fa822543a17721c40b3386557ed37af6c44fd6d4ce6b4fc16f9187d69cde8fe1",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Grass_2_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Rock_1_A_Color1.bin",
+      "bytes": 2848,
+      "sha256": "1c94027b4b01e479f14c6a0288445f2ec74c4971bd5154095c4ea261ddea5b95",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_A_Color1.bin"
+    },
+    {
+      "file": "forest/Rock_1_A_Color1.gltf",
+      "bytes": 3032,
+      "sha256": "ca24326b9c24556227c68df64933122f34a972cd38b6e95c53353fefa97dbc80",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_1_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Rock_2_A_Color1.bin",
+      "bytes": 840,
+      "sha256": "ffee05221dda59936ba6c94112b65bb3c8a38e938fbb219a2808a1590daab050",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_A_Color1.bin"
+    },
+    {
+      "file": "forest/Rock_2_A_Color1.gltf",
+      "bytes": 3052,
+      "sha256": "bbe5254a4c13be7f4aa017297a9458db441e99234028af378d29207d80be4696",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Rock_2_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Tree_1_A_Color1.bin",
+      "bytes": 17484,
+      "sha256": "76a10ffa74960d730f0895a2599e5d56cc50a553d6624a14422420eb9b083979",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_1_A_Color1.bin"
+    },
+    {
+      "file": "forest/Tree_1_A_Color1.gltf",
+      "bytes": 3061,
+      "sha256": "9d972eba9d61fc563cb7c3248f1be057190859ce2554ad2032df27c3d09e06c6",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_1_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Tree_2_A_Color1.bin",
+      "bytes": 8192,
+      "sha256": "fd413ad809ff30939faf1190194654892066aba94f67ec6f96ce257fa5b34e35",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_A_Color1.bin"
+    },
+    {
+      "file": "forest/Tree_2_A_Color1.gltf",
+      "bytes": 3057,
+      "sha256": "793570b93cd350b935bc88c766317675890f102d157965d2aca3d8daef5ee49b",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_2_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Tree_3_A_Color1.bin",
+      "bytes": 29740,
+      "sha256": "ea2f20e847bd3bcf748b9f1cf9932abe45967db8dcacfeafaea1f07e3da6a2e9",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_3_A_Color1.bin"
+    },
+    {
+      "file": "forest/Tree_3_A_Color1.gltf",
+      "bytes": 3061,
+      "sha256": "a5140f21978004544844df4c2969625724c2c263e74f798716ea9e115216a230",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_3_A_Color1.gltf"
+    },
+    {
+      "file": "forest/Tree_4_B_Color1.bin",
+      "bytes": 16092,
+      "sha256": "155be76b0ec5d12a246c6b686156a2fa0d8ca086a67ef156633b7df681143d54",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_4_B_Color1.bin"
+    },
+    {
+      "file": "forest/Tree_4_B_Color1.gltf",
+      "bytes": 3059,
+      "sha256": "7dad365ccc9e9da3e1cbcdbd5ec16b67f0058a3c76aaa06a1bfaa17c706f1ce5",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/Tree_4_B_Color1.gltf"
+    },
+    {
+      "file": "forest/forest_texture.png",
+      "bytes": 48679,
+      "sha256": "406c01e0ac1d3368fc7b26ff5fb0d3335ba5e48bd19a703540ed92ee3971ea39",
+      "source": "forest-free/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/gltf/forest_texture.png"
+    }
+  ],
+  "license_notice_directory": "res://notices (KAYKIT-LICENSE-*.txt)"
+}

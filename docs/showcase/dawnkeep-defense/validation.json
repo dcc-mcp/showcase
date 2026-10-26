@@ -1,0 +1,1195 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "source_commit": "957c1d3928d4d7382535a5b50ae2990aa4cf5854",
+    "ci_run": "https://github.com/dcc-mcp/showcase/actions/runs/39285690349",
+    "godot_version": "4.6.3.stable.official.7d41c59c4",
+    "godot_adapter": "0.9.6",
+    "core": "0.20.42",
+    "server": "0.20.45",
+    "blender": "4.3.2",
+    "native_input": "X11/XTest through xdotool",
+    "native_render": "Compatibility OpenGL / Xvfb / Mesa software rendering",
+    "browser": "Chrome 155.0.8059.39",
+    "physics_backend": "Jolt",
+    "web_threads": false,
+    "web_renderer": "gl_compatibility",
+    "native_viewport_px": [
+      1280,
+      720
+    ],
+    "portrait_window_css_px": [
+      390,
+      844
+    ],
+    "portrait_canvas_px": [
+      390,
+      800
+    ],
+    "verification_level": "real tool return and in-host native/browser execution; not cross-host mesh conservation",
+    "verified_at": "2026-10-19T17:29:00Z",
+    "publication_review_date": "2026-10-20"
+  },
+  "counts": {
+    "campaign_waves": 8,
+    "incoming_lanes": 2,
+    "hero_abilities": 3,
+    "equipment_options": 5,
+    "support_tower_classes": 4,
+    "upgrade_branches_per_tower": 2,
+    "build_pads": 12,
+    "typed_recorded_calls": 37,
+    "published_mcp_calls": 36,
+    "authored_scripts": 4,
+    "native_recorded_checks": 132,
+    "desktop_web_recorded_checks": 128,
+    "portrait_web_recorded_checks": 39,
+    "headless_mechanics_assertions": 78,
+    "headless_layout_assertions": 28051,
+    "headless_integration_assertions": 135,
+    "headless_shutdown_assertions": 56,
+    "native_archive_entries": 79,
+    "native_project_files": 77,
+    "public_screenshots": 5,
+    "public_video_segments": 5
+  },
+  "geometry": {
+    "native_canvas_dims_px": [
+      1280,
+      720
+    ],
+    "portrait_capture_dims_px": [
+      390,
+      844
+    ],
+    "portrait_canvas_dims_px": [
+      390,
+      800
+    ]
+  },
+  "media": {
+    "video_duration_s": 58,
+    "video_width_px": 1280,
+    "video_height_px": 720,
+    "video_fps": 20,
+    "video_frames": 1160,
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_channels": 2,
+    "audio_sample_rate_hz": 48000,
+    "video_bytes": 2610871,
+    "video_sha256": "2d8101c73a87a8fd7e1aef4257f071d4b9835a6fc36b48cd127a489fc6302b18",
+    "source_video_duration_s": 366.4,
+    "source_video_sha256": "aecb7f63e2c50ccd9700ec94d353acd90715eb0f79f1185d756faa9ffa40fc6b",
+    "cuts_seconds": [
+      [
+        0,
+        5
+      ],
+      [
+        27,
+        35
+      ],
+      [
+        70,
+        78
+      ],
+      [
+        145,
+        168
+      ],
+      [
+        352,
+        366
+      ]
+    ],
+    "image_jpeg_quality": 82
+  },
+  "native_archive": {
+    "file": "Dawnkeep-native-957c1d3.zip",
+    "bytes": 4822730,
+    "sha256": "cca032f2296ee25d9b01a3e44a23d1991fd7fc92c072dffda8045965d5ed4b59",
+    "files": 79,
+    "native_files": 77,
+    "difference_from_input_source": [
+      "start.tscn"
+    ],
+    "difference_explanation": "The typed-MCP-created, saved and reopened start scene has its actual native serialization; other native files match the pinned source. The archive matches the verified author output."
+  },
+  "outcomes": {
+    "native": {
+      "victory": {
+        "phase": "victory",
+        "wave": 8,
+        "core_hp": 20,
+        "core_max_hp": 20,
+        "kills": 159,
+        "deaths": 0,
+        "gold": 2181,
+        "speed": 2.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "victory",
+        "elapsed": 200.033333333325,
+        "physics_frame": 6592,
+        "sample_id": 412,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": true,
+        "cooldowns": {
+          "e": 11.5933333333333,
+          "q": 6.04666666666667,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -25.9007472991943,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 10,
+          "hp": 393.148166666671,
+          "max_hp": 687.0,
+          "dead": false,
+          "damage": 122.0,
+          "position": [
+            -9.41769409179688,
+            0.0,
+            -0.653462171554565
+          ],
+          "equipment": {
+            "blade": 3,
+            "boots": 2,
+            "focus": 3,
+            "plate": 3,
+            "potion": 2
+          }
+        }
+      },
+      "natural_defeat": {
+        "phase": "defeat",
+        "wave": 5,
+        "core_hp": 0,
+        "core_max_hp": 20,
+        "kills": 51,
+        "deaths": 4,
+        "gold": 1125,
+        "speed": 2.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "defeat",
+        "elapsed": 236.299999999989,
+        "physics_frame": 13760,
+        "sample_id": 860,
+        "spawn_remaining": 0,
+        "enemies_left": 17,
+        "r_unlocked": true,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -19.0897598266602,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 6,
+          "hp": 0.0,
+          "max_hp": 380.0,
+          "dead": true,
+          "damage": 62.0,
+          "position": [
+            10.0,
+            0.0,
+            5.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      },
+      "victory_restart": {
+        "phase": "build",
+        "wave": 0,
+        "core_hp": 20,
+        "core_max_hp": 20,
+        "kills": 0,
+        "deaths": 0,
+        "gold": 420,
+        "speed": 1.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "ready",
+        "elapsed": 0.266666666666667,
+        "physics_frame": 6656,
+        "sample_id": 416,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": false,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -37.8588638305664,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 1,
+          "hp": 240.0,
+          "max_hp": 240.0,
+          "dead": false,
+          "damage": 32.0,
+          "position": [
+            -6.0,
+            0.0,
+            0.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      },
+      "defeat_restart": {
+        "phase": "build",
+        "wave": 0,
+        "core_hp": 20,
+        "core_max_hp": 20,
+        "kills": 0,
+        "deaths": 0,
+        "gold": 420,
+        "speed": 1.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "ready",
+        "elapsed": 0.266666666666667,
+        "physics_frame": 13824,
+        "sample_id": 864,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": false,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -40.0371322631836,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 1,
+          "hp": 240.0,
+          "max_hp": 240.0,
+          "dead": false,
+          "damage": 32.0,
+          "position": [
+            -6.0,
+            0.0,
+            0.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      }
+    },
+    "desktop_web": {
+      "victory": {
+        "phase": "victory",
+        "wave": 8,
+        "core_hp": 8,
+        "core_max_hp": 20,
+        "kills": 149,
+        "deaths": 0,
+        "gold": 2143,
+        "speed": 2.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "victory",
+        "elapsed": 342.73333333339,
+        "physics_frame": 12560,
+        "sample_id": 785,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": true,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 2.54666666666668,
+          "r": 12.333333333333
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -29.8810939788818,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 10,
+          "hp": 607.886666666672,
+          "max_hp": 687.0,
+          "dead": false,
+          "damage": 122.0,
+          "position": [
+            4.76660919189453,
+            0.0,
+            -4.00679063796997
+          ],
+          "equipment": {
+            "blade": 3,
+            "boots": 2,
+            "focus": 3,
+            "plate": 3,
+            "potion": 0
+          }
+        }
+      },
+      "natural_defeat": {
+        "phase": "defeat",
+        "wave": 5,
+        "core_hp": 0,
+        "core_max_hp": 20,
+        "kills": 52,
+        "deaths": 4,
+        "gold": 1142,
+        "speed": 2.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "defeat",
+        "elapsed": 245.433333333322,
+        "physics_frame": 20096,
+        "sample_id": 1256,
+        "spawn_remaining": 0,
+        "enemies_left": 16,
+        "r_unlocked": true,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -25.0546970367432,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 6,
+          "hp": 0.0,
+          "max_hp": 380.0,
+          "dead": true,
+          "damage": 62.0,
+          "position": [
+            10.0,
+            0.0,
+            5.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      },
+      "victory_restart": {
+        "phase": "build",
+        "wave": 0,
+        "core_hp": 20,
+        "core_max_hp": 20,
+        "kills": 0,
+        "deaths": 0,
+        "gold": 420,
+        "speed": 1.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "ready",
+        "elapsed": 0.133333333333333,
+        "physics_frame": 12672,
+        "sample_id": 792,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": false,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -34.3873252868652,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 1,
+          "hp": 240.0,
+          "max_hp": 240.0,
+          "dead": false,
+          "damage": 32.0,
+          "position": [
+            -6.0,
+            0.0,
+            0.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      },
+      "defeat_restart": {
+        "phase": "build",
+        "wave": 0,
+        "core_hp": 20,
+        "core_max_hp": 20,
+        "kills": 0,
+        "deaths": 0,
+        "gold": 420,
+        "speed": 1.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "ready",
+        "elapsed": 0.266666666666667,
+        "physics_frame": 20224,
+        "sample_id": 1264,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": false,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -35.1072158813477,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 1,
+          "hp": 240.0,
+          "max_hp": 240.0,
+          "dead": false,
+          "damage": 32.0,
+          "position": [
+            -6.0,
+            0.0,
+            0.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      }
+    },
+    "portrait_web": {
+      "max_observed_wave": 2,
+      "activated_skills": [
+        "e",
+        "q",
+        "r"
+      ],
+      "restart": {
+        "phase": "build",
+        "wave": 0,
+        "core_hp": 20,
+        "core_max_hp": 20,
+        "kills": 0,
+        "deaths": 0,
+        "gold": 420,
+        "speed": 1.0,
+        "language": "en",
+        "paused": false,
+        "last_action": "ready",
+        "elapsed": 0.133333333333333,
+        "physics_frame": 4848,
+        "sample_id": 303,
+        "spawn_remaining": 0,
+        "enemies_left": 0,
+        "r_unlocked": false,
+        "cooldowns": {
+          "e": 0.0,
+          "q": 0.0,
+          "r": 0.0
+        },
+        "music": {
+          "muted": false,
+          "peak_db": -199.999984741211,
+          "playing": true,
+          "track": "field-of-dreams",
+          "unlocked": true
+        },
+        "hero": {
+          "level": 1,
+          "hp": 240.0,
+          "max_hp": 240.0,
+          "dead": false,
+          "damage": 32.0,
+          "position": [
+            -6.0,
+            0.0,
+            0.0
+          ],
+          "equipment": {
+            "blade": 0,
+            "boots": 0,
+            "focus": 0,
+            "plate": 0,
+            "potion": 0
+          }
+        }
+      },
+      "touch_emulation": true
+    }
+  },
+  "checks": [
+    {
+      "name": "typed_mcp_author_save_reopen",
+      "result": "pass",
+      "observed": {
+        "passed": true,
+        "total_recorded_calls": 37,
+        "public_calls": 36,
+        "scene_reopened": true
+      },
+      "evidence": "evidence/mcp-public.json"
+    },
+    {
+      "name": "native_eight_wave_victory_and_natural_defeat",
+      "result": "pass",
+      "observed": {
+        "victory": {
+          "phase": "victory",
+          "wave": 8,
+          "core_hp": 20,
+          "core_max_hp": 20,
+          "kills": 159,
+          "deaths": 0,
+          "gold": 2181,
+          "speed": 2.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "victory",
+          "elapsed": 200.033333333325,
+          "physics_frame": 6592,
+          "sample_id": 412,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": true,
+          "cooldowns": {
+            "e": 11.5933333333333,
+            "q": 6.04666666666667,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -25.9007472991943,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 10,
+            "hp": 393.148166666671,
+            "max_hp": 687.0,
+            "dead": false,
+            "damage": 122.0,
+            "position": [
+              -9.41769409179688,
+              0.0,
+              -0.653462171554565
+            ],
+            "equipment": {
+              "blade": 3,
+              "boots": 2,
+              "focus": 3,
+              "plate": 3,
+              "potion": 2
+            }
+          }
+        },
+        "natural_defeat": {
+          "phase": "defeat",
+          "wave": 5,
+          "core_hp": 0,
+          "core_max_hp": 20,
+          "kills": 51,
+          "deaths": 4,
+          "gold": 1125,
+          "speed": 2.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "defeat",
+          "elapsed": 236.299999999989,
+          "physics_frame": 13760,
+          "sample_id": 860,
+          "spawn_remaining": 0,
+          "enemies_left": 17,
+          "r_unlocked": true,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -19.0897598266602,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 6,
+            "hp": 0.0,
+            "max_hp": 380.0,
+            "dead": true,
+            "damage": 62.0,
+            "position": [
+              10.0,
+              0.0,
+              5.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        },
+        "victory_restart": {
+          "phase": "build",
+          "wave": 0,
+          "core_hp": 20,
+          "core_max_hp": 20,
+          "kills": 0,
+          "deaths": 0,
+          "gold": 420,
+          "speed": 1.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "ready",
+          "elapsed": 0.266666666666667,
+          "physics_frame": 6656,
+          "sample_id": 416,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": false,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -37.8588638305664,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 1,
+            "hp": 240.0,
+            "max_hp": 240.0,
+            "dead": false,
+            "damage": 32.0,
+            "position": [
+              -6.0,
+              0.0,
+              0.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        },
+        "defeat_restart": {
+          "phase": "build",
+          "wave": 0,
+          "core_hp": 20,
+          "core_max_hp": 20,
+          "kills": 0,
+          "deaths": 0,
+          "gold": 420,
+          "speed": 1.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "ready",
+          "elapsed": 0.266666666666667,
+          "physics_frame": 13824,
+          "sample_id": 864,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": false,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -40.0371322631836,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 1,
+            "hp": 240.0,
+            "max_hp": 240.0,
+            "dead": false,
+            "damage": 32.0,
+            "position": [
+              -6.0,
+              0.0,
+              0.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        }
+      },
+      "evidence": "evidence/input-acceptance.json"
+    },
+    {
+      "name": "desktop_web_eight_wave_victory_and_natural_defeat",
+      "result": "pass",
+      "observed": {
+        "victory": {
+          "phase": "victory",
+          "wave": 8,
+          "core_hp": 8,
+          "core_max_hp": 20,
+          "kills": 149,
+          "deaths": 0,
+          "gold": 2143,
+          "speed": 2.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "victory",
+          "elapsed": 342.73333333339,
+          "physics_frame": 12560,
+          "sample_id": 785,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": true,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 2.54666666666668,
+            "r": 12.333333333333
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -29.8810939788818,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 10,
+            "hp": 607.886666666672,
+            "max_hp": 687.0,
+            "dead": false,
+            "damage": 122.0,
+            "position": [
+              4.76660919189453,
+              0.0,
+              -4.00679063796997
+            ],
+            "equipment": {
+              "blade": 3,
+              "boots": 2,
+              "focus": 3,
+              "plate": 3,
+              "potion": 0
+            }
+          }
+        },
+        "natural_defeat": {
+          "phase": "defeat",
+          "wave": 5,
+          "core_hp": 0,
+          "core_max_hp": 20,
+          "kills": 52,
+          "deaths": 4,
+          "gold": 1142,
+          "speed": 2.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "defeat",
+          "elapsed": 245.433333333322,
+          "physics_frame": 20096,
+          "sample_id": 1256,
+          "spawn_remaining": 0,
+          "enemies_left": 16,
+          "r_unlocked": true,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -25.0546970367432,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 6,
+            "hp": 0.0,
+            "max_hp": 380.0,
+            "dead": true,
+            "damage": 62.0,
+            "position": [
+              10.0,
+              0.0,
+              5.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        },
+        "victory_restart": {
+          "phase": "build",
+          "wave": 0,
+          "core_hp": 20,
+          "core_max_hp": 20,
+          "kills": 0,
+          "deaths": 0,
+          "gold": 420,
+          "speed": 1.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "ready",
+          "elapsed": 0.133333333333333,
+          "physics_frame": 12672,
+          "sample_id": 792,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": false,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -34.3873252868652,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 1,
+            "hp": 240.0,
+            "max_hp": 240.0,
+            "dead": false,
+            "damage": 32.0,
+            "position": [
+              -6.0,
+              0.0,
+              0.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        },
+        "defeat_restart": {
+          "phase": "build",
+          "wave": 0,
+          "core_hp": 20,
+          "core_max_hp": 20,
+          "kills": 0,
+          "deaths": 0,
+          "gold": 420,
+          "speed": 1.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "ready",
+          "elapsed": 0.266666666666667,
+          "physics_frame": 20224,
+          "sample_id": 1264,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": false,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -35.1072158813477,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 1,
+            "hp": 240.0,
+            "max_hp": 240.0,
+            "dead": false,
+            "damage": 32.0,
+            "position": [
+              -6.0,
+              0.0,
+              0.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        }
+      },
+      "evidence": "evidence/input-acceptance.json"
+    },
+    {
+      "name": "portrait_two_wave_real_touch_emulation",
+      "result": "pass",
+      "observed": {
+        "max_observed_wave": 2,
+        "activated_skills": [
+          "e",
+          "q",
+          "r"
+        ],
+        "restart": {
+          "phase": "build",
+          "wave": 0,
+          "core_hp": 20,
+          "core_max_hp": 20,
+          "kills": 0,
+          "deaths": 0,
+          "gold": 420,
+          "speed": 1.0,
+          "language": "en",
+          "paused": false,
+          "last_action": "ready",
+          "elapsed": 0.133333333333333,
+          "physics_frame": 4848,
+          "sample_id": 303,
+          "spawn_remaining": 0,
+          "enemies_left": 0,
+          "r_unlocked": false,
+          "cooldowns": {
+            "e": 0.0,
+            "q": 0.0,
+            "r": 0.0
+          },
+          "music": {
+            "muted": false,
+            "peak_db": -199.999984741211,
+            "playing": true,
+            "track": "field-of-dreams",
+            "unlocked": true
+          },
+          "hero": {
+            "level": 1,
+            "hp": 240.0,
+            "max_hp": 240.0,
+            "dead": false,
+            "damage": 32.0,
+            "position": [
+              -6.0,
+              0.0,
+              0.0
+            ],
+            "equipment": {
+              "blade": 0,
+              "boots": 0,
+              "focus": 0,
+              "plate": 0,
+              "potion": 0
+            }
+          }
+        },
+        "touch_emulation": true
+      },
+      "evidence": "evidence/input-acceptance.json"
+    },
+    {
+      "name": "headless_regressions",
+      "result": "pass",
+      "observed": {
+        "mechanics": 78,
+        "layout": 28051,
+        "integration": 135,
+        "shutdown": 56
+      },
+      "evidence": "evidence/headless-acceptance.json"
+    },
+    {
+      "name": "strict_web_lifecycle",
+      "result": "pass",
+      "observed": {
+        "desktop_web": {
+          "fullscreen": true,
+          "actual_engine_quit": true,
+          "fresh_engine_restart": true,
+          "loading_retry": true
+        },
+        "portrait_web": {
+          "fullscreen": true,
+          "actual_engine_quit": true,
+          "fresh_engine_restart": true,
+          "loading_retry": true
+        }
+      },
+      "evidence": "evidence/input-acceptance.json"
+    },
+    {
+      "name": "blender_native_reopen_and_rebuild",
+      "result": "pass",
+      "observed": {
+        "passed": true,
+        "scope": "Historical Blender-native art checks; no new render or MCP claim"
+      },
+      "evidence": "evidence/blender-rebuild.json"
+    },
+    {
+      "name": "native_archive_integrity",
+      "result": "pass",
+      "observed": {
+        "file": "Dawnkeep-native-957c1d3.zip",
+        "bytes": 4822730,
+        "sha256": "cca032f2296ee25d9b01a3e44a23d1991fd7fc92c072dffda8045965d5ed4b59",
+        "files": 79,
+        "native_files": 77,
+        "difference_from_input_source": [
+          "start.tscn"
+        ],
+        "difference_explanation": "The typed-MCP-created, saved and reopened start scene has its actual native serialization; other native files match the pinned source. The archive matches the verified author output."
+      },
+      "evidence": "evidence/native-package.json"
+    },
+    {
+      "name": "public_video_decode",
+      "result": "pass",
+      "observed": {
+        "video_duration_s": 58,
+        "video_width_px": 1280,
+        "video_height_px": 720,
+        "video_fps": 20,
+        "video_frames": 1160,
+        "video_codec": "h264",
+        "audio_codec": "aac",
+        "audio_channels": 2,
+        "audio_sample_rate_hz": 48000,
+        "video_bytes": 2610871,
+        "video_sha256": "2d8101c73a87a8fd7e1aef4257f071d4b9835a6fc36b48cd127a489fc6302b18",
+        "source_video_duration_s": 366.4,
+        "source_video_sha256": "aecb7f63e2c50ccd9700ec94d353acd90715eb0f79f1185d756faa9ffa40fc6b",
+        "cuts_seconds": [
+          [
+            0,
+            5
+          ],
+          [
+            27,
+            35
+          ],
+          [
+            70,
+            78
+          ],
+          [
+            145,
+            168
+          ],
+          [
+            352,
+            366
+          ]
+        ],
+        "image_jpeg_quality": 82
+      },
+      "evidence": "evidence/video-edit.json"
+    },
+    {
+      "name": "public_visual_sampling_and_privacy",
+      "result": "pass",
+      "observed": {
+        "passed": true,
+        "scope": "Reviewed public JPEGs and sampled exact public encode; listening untested"
+      },
+      "evidence": "evidence/publication-review.json"
+    }
+  ],
+  "not_claimed": [
+    "Subjective audio listening remains not-tested; numerical amplitude and decoding cannot certify music quality, sync or unobtrusive looping.",
+    "Portrait checks use Chrome device emulation, not a physical phone or multitouch.",
+    "Native OS-window close and physical GPU performance are not tested.",
+    "The 58-second film contains disclosed time cuts; it is not a continuous full-campaign movie and uses the visible public in-game 2x setting.",
+    "Automated real input establishes these recorded strategies and outcomes, not universal difficulty balance or compatibility.",
+    "Godot author/save/reopen uses real typed MCP; original art uses native Blender Python, not Blender MCP.",
+    "Initial native UI language is Chinese. L or EN switches to English; page locale is not inherited automatically.",
+    "The native ZIP needs official Godot 4.6.3 and is not a standalone executable.",
+    "Model and reasoning-effort attribution are unknown; no configuration provenance is inferred.",
+    "Full-game CI is separate from deployed page, download and playback acceptance.",
+    "Publication and source availability do not grant new rights in original artwork, gameplay, code or media."
+  ]
+}

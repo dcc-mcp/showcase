@@ -19,7 +19,7 @@ import sys
 
 MANDATORY = ("README.md", "manifest.json", "validation.json")
 REQUIRED_VALIDATION_KEYS = ("schema_version", "environment", "checks")
-VALID_RESULTS = ("pass", "fail")
+VALID_RESULTS = ("pass", "fail", "not_run")
 
 IMAGE_EXT = (".png", ".jpg", ".jpeg", ".gif", ".mp4", ".webm")
 MAX_IMAGE_WIDTH = 1600
@@ -114,8 +114,12 @@ def validate(entry_dir: str) -> list[str]:
         if "name" not in chk:
             problems.append("%s: a check has no name" % name)
         if chk.get("result") not in VALID_RESULTS:
-            problems.append("%s: check '%s' has result %r (expected pass/fail)"
+            problems.append("%s: check '%s' has result %r (expected pass/fail/not_run)"
                             % (name, chk.get("name"), chk.get("result")))
+        if chk.get("result") == "not_run" and (
+                not isinstance(chk.get("observed"), str) or not chk["observed"].strip()):
+            problems.append("%s: not_run check '%s' requires a nonempty observed reason"
+                            % (name, chk.get("name")))
 
     if not validation.get("not_claimed"):
         problems.append("%s: validation.json has no not_claimed[] -- say what the entry does not prove"

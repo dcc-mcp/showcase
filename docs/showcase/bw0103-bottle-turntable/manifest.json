@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "reference": "https://blenderworld.github.io/#case=bw_0103",
+  "blender_application": "Blender",
+  "blender_version": "4.5.13 LTS",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "hero.jpg",
+      "bytes": 18363,
+      "sha256": "e65f133fbcf498c661283f9dbda7fbc667ea5fc5ec8d97141f0ba61c9ed87916",
+      "width": 1080,
+      "height": 1080,
+      "bit_depth": 8
+    },
+    {
+      "path": "LICENSES.md",
+      "sha256": "977c626e6615c1c81e7a1a096eeba9f20bb0b112075cff57939282716d5784f6",
+      "bytes": 2397
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "92cfcb6ef4e5cc1fb7888cedfa3c8acae821bccf9bb2d19e4d77de7675327bf5",
+      "bytes": 11876
+    },
+    {
+      "path": "README.md",
+      "sha256": "43e06f30b4ef79767661619a383d0eb7745c2649e8d79c07fab5c98b8c2a17c0",
+      "bytes": 3836
+    },
+    {
+      "path": "README.zh.md",
+      "sha256": "1601eb558e9e8af1ecec206d28966764a617f51f6b9ea17ebe44c5202a7aea7c",
+      "bytes": 3335
+    },
+    {
+      "path": "turntable.mp4",
+      "sha256": "70b3062f308d8de2ef83417b56de9e3b91b70c19be6cba61d0e76a0cbdaa1a33",
+      "bytes": 584419,
+      "codec": "H.264",
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "duration_seconds": 6,
+      "decoded_frames": 180,
+      "audio_streams": 0
+    },
+    {
+      "path": "validation.json",
+      "sha256": "ba673084c826b6a0e10073ea7fe22412dd351ea21aae85adf24597d32da12d7c",
+      "bytes": 10728
+    }
+  ],
+  "review_status": "selected production study; publication-quality visual review failed"
+}
