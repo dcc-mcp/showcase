@@ -35,3 +35,5 @@ Use the adapted discovery-intent recipe with the source candidate, verify millim
 Sources: [Max candidate](https://github.com/dcc-mcp/dcc-mcp-3dsmax/tree/e1b724483193dd6476d117cb7ecf15ccaab91422), [media-enhance candidate](https://github.com/dcc-mcp/dcc-media-enhance/tree/f7073694ea2abef5c5b94f36e1442be076c9bb75). Both remain unmerged candidates. Native camera regression and exact-head CI pass; final independent review is incomplete.
 
 Full-film/reversal review, actual natural-speed playback, real Max UI/wireframes, normal MZP installation, MCP transport and public native-source sanitization remain open. This case is intentionally **not added to collection.json**. No source merge, public deployment or complete engineering validation is claimed.
+
+[UI capture plan](UI-CAPTURE-PLAN.md) · [Video verification](video-verification.json)
