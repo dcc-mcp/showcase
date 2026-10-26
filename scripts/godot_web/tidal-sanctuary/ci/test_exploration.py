@@ -332,6 +332,22 @@ class ControllerTests(unittest.TestCase):
         self.assertNotIn('actual',evidence)
         self.assertEqual(moves[-1][1],(0,0))
 
+    def test_waypoint_read_returning_at_navigation_deadline_never_steers(self):
+        for returned_at in (35.,36.):
+            with self.subTest(returned_at=returned_at):
+                clock,moves,evidence=[0.],[],{}
+                state=self.trace_state(1,[1.3,10.],[0,0])
+                def observe():
+                    clock[0]=returned_at
+                    return state
+                def pause(seconds):clock[0]+=seconds
+                with patch('exploration.time.monotonic',side_effect=lambda:clock[0]):
+                    with self.assertRaises(TimeoutError):
+                        navigate_chart_waypoint(observe,lambda direction:moves.append((clock[0],direction)),
+                                                pause,[2.6,6.4],evidence=evidence)
+                self.assertEqual(moves,[(returned_at,(0,0))])
+                self.assertNotIn('actual',evidence)
+
     def test_near_deadline_nonsettling_and_outside_staging_still_fail_closed(self):
         for kind,changes in [('nonsettling',{'velocity':[.2,0,0]}),
                              ('outside-staging',{'position':[1.94553954601288,.53,6.09238624572754]})]:

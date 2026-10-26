@@ -328,6 +328,8 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
     try:
         while time.monotonic() < deadline:
             state = observe()
+            if time.monotonic() >= deadline:
+                break
             if state["sample_id"] == last_decided_sample:
                 pause(.05)
                 continue
