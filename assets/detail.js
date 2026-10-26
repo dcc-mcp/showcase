@@ -130,7 +130,18 @@ update();
       run.timer = null;
       state(entry, run.automatic ? "preview" : "watching");
     };
-    const handlers = {playing, error: failed};
+    const paused = () => {
+      if (active !== run || run.automatic || !video.paused) return;
+      window.clearTimeout(run.timer);
+      run.timer = null;
+      state(entry, "watching");
+    };
+    const loading = () => {
+      if (active !== run || run.automatic || video.paused || run.timer !== null) return;
+      state(entry, "loading");
+      run.timer = window.setTimeout(failed, 12000);
+    };
+    const handlers = {playing, pause: paused, play: loading, waiting: loading, error: failed};
     Object.entries(handlers).forEach(([name, callback]) => video.addEventListener(name, callback));
     run.dispose = () => {
       window.clearTimeout(run.timer);
@@ -220,9 +231,9 @@ update();
       }
     };
     listen(video, "pointerdown", nativeIntent, {capture: true});
+    const released = () => !video.controls && !video.hasAttribute("src") && !sources.some(item => item.hasAttribute("src"));
     listen(video, "click", event => {
-      const released = !video.controls && !video.hasAttribute("src") && !sources.some(item => item.hasAttribute("src"));
-      if (released && available(entry)) {
+      if (released() && available(entry)) {
         event.preventDefault();
         start(entry, false); // One poster click restores the source and native controls.
         return;
@@ -230,9 +241,7 @@ update();
       nativeIntent(); // Preserve every active native pause/seek/volume gesture.
     }, {capture: true});
     listen(video, "keydown", event => {
-      const released = entry.host.dataset.videoState === "idle" && !video.hasAttribute("src") &&
-        !sources.some(item => item.hasAttribute("src"));
-      if ([" ", "Enter"].includes(event.key) && released && available(entry)) {
+      if ([" ", "Enter"].includes(event.key) && released() && available(entry)) {
         // With no source, Chromium disables its native play control. Handle
         // this one restart ourselves; otherwise preserve native key behavior.
         event.preventDefault();
