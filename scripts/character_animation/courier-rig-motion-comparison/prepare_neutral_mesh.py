@@ -78,7 +78,8 @@ def main():
     if output.exists() and any(output.iterdir()):
         parser.error("refusing a nonempty output-dir; select a new or empty directory to preserve prior evidence")
     raw = source.read_bytes()
-    assert sha(raw) == args.expected_sha256, "source differs from the selected hash-bound derivative"
+    if sha(raw) != args.expected_sha256:
+        raise ValueError("source differs from the selected hash-bound derivative")
     assert struct.unpack_from("<4sII", raw) == (b"glTF", 2, len(raw))
     chunks, offset = [], 12
     while offset < len(raw):
