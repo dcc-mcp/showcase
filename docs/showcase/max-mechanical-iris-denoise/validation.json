@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "status": "draft; not ready for public collection",
+  "environment": {
+    "native_host": "3ds Max2024.2.14",
+    "native_python": "3.10.14",
+    "adapter": "0.2.18 source candidate e1b724483193dd6476d117cb7ecf15ccaab91422",
+    "native_core_and_server": "0.20.45",
+    "Skill_bridge": "Python3.12 canonical Core Skill main(**params), in-process; not MCP transport",
+    "media_enhance": "0.2.0 source candidate f7073694ea2abef5c5b94f36e1442be076c9bb75",
+    "backend": "Blender5.1.1 compositor OIDN; embedded OIDN version unknown",
+    "native_reference": "MAXtoA Arnold Noice7.2.4.1",
+    "threads": 2,
+    "display": "same scene-linear Rec709 inputs; explicit RGB gamma1/2.2 clamp; video limitedBT709matrix,gamma22tag"
+  },
+  "native_case": {
+    "success_calls": 203,
+    "object_count": 84,
+    "unique_fasteners": 48,
+    "bounds_mm": [
+      440,
+      440,
+      34
+    ],
+    "matrix_frames": [
+      1,
+      24,
+      72,
+      96,
+      144
+    ],
+    "native_reopen_max_delta": 0.0,
+    "fbx_reimport_max_delta": 0.0
+  },
+  "hero": {
+    "resolution": [
+      1920,
+      1440
+    ],
+    "AA_samples": 3,
+    "render_seconds": 316.875,
+    "Noice_seconds": 79.657,
+    "actual_camera_fov_degrees": 45
+  },
+  "short_sequence": {
+    "frames": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "natural_fps": 24,
+    "natural_duration_seconds": 0.3333333333333333,
+    "slow_review_fps": 6,
+    "new_native_frames": [
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55
+    ],
+    "reference_frame": 48,
+    "reference_AA_samples": 6,
+    "AA6_reference_seconds": 272.515,
+    "source_unchanged": true,
+    "decode_all_frames": true,
+    "natural_speed_viewing": "not tested; scoped Max UI capture does not verify video playback",
+    "sampling_boundary": "frame48 historical AA3;49–55 new locked seed-2082661815;not an isolated flicker test at48→49",
+    "full144frame_film": "deferred; not replaced by this short clip"
+  },
+  "checks": [
+    {
+      "name": "camera native request readback and rollback",
+      "result": "pass",
+      "observed": "Target65mm rejected and rolled back;Physical65mm native readback;84 original objects and scene hash unchanged"
+    },
+    {
+      "name": "formal Skill completed manifests",
+      "result": "pass",
+      "observed": "retained raw source hashes unchanged;actual Blender OIDN backend;in-process Core Skill entry, not MCP wire"
+    },
+    {
+      "name": "real guide pixels",
+      "result": "pass",
+      "observed": "beauty/normal/albedo passthrough compared to source channels within1e-6;root enum warning absent in final source"
+    },
+    {
+      "name": "bounded interval decode",
+      "result": "pass",
+      "observed": "8 source frames48–55,24fps natural clip,6fps labelled review;full decode;not proof of real-time playback"
+    },
+    {
+      "name": "new full-film temporal acceptance",
+      "result": "fail",
+      "expected": "complete new144frame production/continuous and reverse-motion review",
+      "observed": "only short interval produced;full production deferred by user"
+    }
+  ],
+  "guide_verification": {
+    "source_channels": [
+      "R",
+      "G",
+      "B",
+      "N.X",
+      "N.Y",
+      "N.Z",
+      "denoise_albedo.R",
+      "denoise_albedo.G",
+      "denoise_albedo.B"
+    ],
+    "socket_roles": {
+      "beauty": "Combined:RGBA",
+      "normal": "N:VECTOR",
+      "albedo": "denoise_albedo:RGBA"
+    },
+    "source_layer": "unnamed flat root",
+    "native_passthrough_max_abs_error_threshold": 1e-06,
+    "native_passthrough_result": "pass",
+    "root_enum_warning": "absent in final candidate;old/final OIDN pixels match within1e-6"
+  },
+  "camera_fix": {
+    "Target65mm_request": "explicit rejection and verified owned-node rollback",
+    "Physical65mm_request": "actual focal_length_mm65 verified",
+    "original84_objects_and_hash_unchanged": true
+  },
+  "artistic_review": {
+    "scope": "three sparse full-frame stills,AA6 crops and all8 consecutive frame crops;not actual natural-speed playback",
+    "observed": "Both methods reduce visible grain;Noice smoother,OIDN retains fine texture;iris corners/brass ring/pin outlines remain visible at inspected scales;no obvious global hue shift",
+    "quality_ranking": "not established;higher sample reference is not ground truth"
+  },
+  "source_hashes": {
+    "original_max": "08c42b0eebce6605f52593c2c82707adaa0d88c965ad6c2ff4ffc41a0ccbd732",
+    "frame72_raw_EXR": "300b9eece73972df454776eb71a947c1d07d8cf2bacfa1d1c2b7fd89f85ae3e8",
+    "frame72_first_Skill_output_EXR": "30dc3b5067fd203f2f9acf5cca1de964b256cd8e79e8096789dfef0081e51fe5"
+  },
+  "not_claimed": [
+    "full-film or reversal temporal stability",
+    "actual natural-speed video playback",
+    "wireframe capture or modifier-parameter GUI inspection",
+    "MCP transport or normalMZPinstall acceptance",
+    "high-sample ground truth",
+    "independent final code review",
+    "new published adapter orCLIrelease",
+    "collision-free engineering mechanism",
+    "public nativeMax/FBX distribution; originals retained privately",
+    "model/reasoning identity attestation"
+  ],
+  "native_ui": {
+    "schema_version": 1,
+    "recorded_date": "2026-10-26",
+    "provider": "dcc-cua",
+    "runtime": "1.12.2",
+    "native_host": "3ds Max2024.2.14",
+    "actual_ui_images": 2,
+    "wireframe_images": 0,
+    "captures": [
+      {
+        "file": "max-native-scene.jpg",
+        "raw_sha256": "5eeca33d956e70b7d7a4ddd43ca45989d3c26b3481ec9c020b2936d5929c236e",
+        "raw_dimensions": [
+          3840,
+          2088
+        ],
+        "crop_rectangle": [
+          0,
+          190,
+          3840,
+          2040
+        ],
+        "processing": "crop top application toolbar containing a private project path, trim bottom status strip, resize if wider than1600px, JPEG; no repaint or compositing",
+        "scope": "original iris scene, native Scene Explorer, camera viewport and command panel"
+      },
+      {
+        "file": "max-native-modify-tab.jpg",
+        "raw_sha256": "aedcc411250531f488674fb1fb83e7874f59f3c78fa2a5f99cbe78df0b3103f7",
+        "raw_dimensions": [
+          1568,
+          852
+        ],
+        "crop_rectangle": [
+          0,
+          76,
+          1568,
+          832
+        ],
+        "processing": "crop top application toolbar containing a private project path, trim bottom status strip, resize if wider than1600px, JPEG; no repaint or compositing",
+        "scope": "original iris scene, native Scene Explorer, camera viewport and command panel"
+      }
+    ],
+    "capture_backends": {
+      "max-native-scene.jpg": "dcc-cua-wgc-exact-window, background window-content capture",
+      "max-native-modify-tab.jpg": "cua-driver-sdk with windows_uia; exact-window semantic snapshot"
+    },
+    "verified_action": {
+      "action": "click native Modify TabItem using fresh UIA element reference",
+      "delivery_mode": "background",
+      "target_foreground": false,
+      "uia_action_executed": true,
+      "post_action_pixels_reviewed": true,
+      "scope": "native panel selection only; no scene-object edits"
+    },
+    "failure": {
+      "stage": "earlier restore_activate foreground request",
+      "error": "foreground_activation_refused",
+      "input_sent": false,
+      "classification": "Windows foreground activation was refused; not proof of a capture failure or a general CUA defect"
+    },
+    "remaining": [
+      "object rows in Scene Explorer not exposed in this UIA observation",
+      "modifier values, wireframe view, timeline frame change and natural-speed playback not accepted",
+      "PrintWindow-specific occlusion/minimized/GPU behavior not tested"
+    ],
+    "cleanup": {
+      "session_stopped": true,
+      "cleanup_pending": false
+    },
+    "source_max_sha256": "08c42b0eebce6605f52593c2c82707adaa0d88c965ad6c2ff4ffc41a0ccbd732"
+  }
+}

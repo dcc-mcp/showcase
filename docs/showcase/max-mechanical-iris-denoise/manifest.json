@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "capture_provider": "native renderer and dcc-cua1.12.2 exact-window captures",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "blade-detail.jpg",
+      "bytes": 7178,
+      "sha256": "89f19942c6add4ab77d99ec0b39cf7f9f74e972e7374d4758980c4f8633bb9c4",
+      "width": 560,
+      "height": 123,
+      "bit_depth": 8
+    },
+    {
+      "path": "comparison-24fps.mp4",
+      "bytes": 31566,
+      "sha256": "298c5de88c72e71dd314d9e1d6fb5393578a59308a95e4052b52001c4cb954fa"
+    },
+    {
+      "path": "comparison-slow-review-6fps.mp4",
+      "bytes": 61153,
+      "sha256": "6c5f3d89259c805f446262b042229b8688fa0eb42e3a8fb9d5234f3a2e7d59d8"
+    },
+    {
+      "path": "eight-frame-detail.jpg",
+      "bytes": 89122,
+      "sha256": "70fd818723dfe5152b926cbecb44ce0f460447c746321f027ff62dbd8e78f923",
+      "width": 1600,
+      "height": 454,
+      "bit_depth": 8
+    },
+    {
+      "path": "fastener-detail.jpg",
+      "bytes": 10709,
+      "sha256": "df4fb74e1af6a3cb88e182588f579a7c2cbfff660e3bb5ebd5666ca15f9b7ceb",
+      "width": 640,
+      "height": 118,
+      "bit_depth": 8
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 60782,
+      "sha256": "a22df6cdbb4372feb59567f07f4d3e4d33e42746ec100046dad28ad3d7b99cfd",
+      "width": 1600,
+      "height": 1200,
+      "bit_depth": 8
+    },
+    {
+      "path": "higher-sample-comparison.jpg",
+      "bytes": 28991,
+      "sha256": "c8ef71b9979ffc9e725cd73c97232cced8ad8cfa8df626222f4eb1aa59d8fbc0",
+      "width": 1600,
+      "height": 313,
+      "bit_depth": 8
+    },
+    {
+      "path": "max-native-modify-tab.jpg",
+      "bytes": 102500,
+      "sha256": "5ccc1db685b73ee9fc7005dfb63920cf6d48cf5e0de84f0880efaca891006530",
+      "width": 1568,
+      "height": 756,
+      "bit_depth": 8
+    },
+    {
+      "path": "max-native-scene.jpg",
+      "bytes": 108590,
+      "sha256": "a8858cdb7c9d740d43d3047695c34475fbea7f2302460a3951647021f93bf2e7",
+      "width": 1600,
+      "height": 771,
+      "bit_depth": 8
+    },
+    {
+      "path": "oidn-24fps.mp4",
+      "bytes": 40614,
+      "sha256": "2925dfea9da0f4bc80b8171e87b182752b4f0fc0f9988d526c7b7f77eb56ef02"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5969,
+      "sha256": "d2b46b4115c63f362d6c047cf5a3dac2a8d139e5d30b54d0d349368b9382d2e4"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 3597,
+      "sha256": "2515be168a418ff9e825e16f55a57131901b50926796bd77d57f4247e4ac470f"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 78908,
+      "sha256": "dfcaa2bc760ae6e0aba9aa4363a16e8a7dedda5d36a649e87d86a24a5827edb6"
+    },
+    {
+      "path": "RIGHTS.md",
+      "bytes": 1099,
+      "sha256": "3d0bbce2c0897116c215c7804a285c1560abec1554b52942c1c23cec79012b20"
+    },
+    {
+      "path": "UI-CAPTURE-PLAN.md",
+      "bytes": 1657,
+      "sha256": "359c76cf0a16de7fcb3caa4e439b3ab99b5253b1e6389d3e5edc20101f921d15"
+    },
+    {
+      "path": "ui-verification.json",
+      "bytes": 2568,
+      "sha256": "eaefa28bd3213398cf11d83cf68604caaca2b6eba67de0a525533d6150a4a425"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 7911,
+      "sha256": "7665bfb07cee21a0d738e1e0541f3f3d6338cb117f31dbbb2a5efbc8fb7e51a5"
+    },
+    {
+      "path": "video-verification.json",
+      "bytes": 2898,
+      "sha256": "a6a3e90f90cf2225eb49ac63b785793ff32f27b770692fb7c2b4120a0d17d405"
+    }
+  ]
+}
