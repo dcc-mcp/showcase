@@ -21,7 +21,7 @@ Progress is written locally to a version-2 save. On Web, use **Save & return** a
 
 The isolated `ci` tools reuse Showcase's artifact-only acceptance architecture: pinned official Godot, actual typed DCC-MCP script and scene authoring, save, editor restart/reopen, standalone native input, real X11 capture, official single-thread Web export and actual Chromium interaction.
 
-Physical keyboard and emulated touch routes are separate from the explicitly scripted traversal movie. Capture artifacts are unpublished review candidates. A technical pass does not establish visual quality, fun, broad device performance or physical-phone compatibility. The latest actual frames must be inspected before any quality claim. The game now includes an original music loop and four story cues, started by Begin; the native X11 videos remain silent captures. Browser audible-output, mute and loop-continuity acceptance is still required.
+Physical keyboard and emulated touch routes are separate from the explicitly scripted traversal movie. Capture artifacts are unpublished review candidates. A technical pass does not establish visual quality, fun, broad device performance or physical-phone compatibility. The latest actual frames must be inspected before any quality claim. The game now includes an original music loop and four story cues, started by Begin; the native X11 videos remain silent captures. Browser audio measurements are recorded in the dated checkpoint below; changed integration candidates require fresh CI, and subjective listening remains unrun.
 
 Headless regressions exercise repeated shore transitions at several physics rates, stationary hysteresis, idle buoyancy, exploration bounds, save sanitization and the complete treasure loop. Native and Web acceptance separately exercise real user input, route continuity, completion and a new process loading its own saved progress.
 
@@ -31,7 +31,7 @@ The sculpted cove, ruins, layout, palm and broad-leaf models, surface variation,
 
 All exact third-party sources, hashes and conversion notices remain bundled. Sanctuary Sans is a renamed subset of Noto CJK under SIL OFL; the subset includes the new treasure and swimming labels. No third-party music, sound or game code was copied. See `LICENSES.md` and `game/FONT-LICENSE.txt`.
 
-The rejected darker experiment remains in history and is not the current visual baseline. No gallery, publishing manifest, merge or deployment is part of this Draft.
+The rejected darker experiment remains in history and is not the current visual baseline. This source/prototype change adds no gallery selection or public playable; merging it does not establish final showcase acceptance.
 
 ## Blender art iteration
 
