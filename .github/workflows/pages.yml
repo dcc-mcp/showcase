@@ -29,6 +29,9 @@ jobs:
       - name: Materialize pinned official Godot Web runtime
         run: python scripts/godot_web/materialize_runtime.py
 
+      - name: Verify courier offline preflight refusals
+        run: python scripts/character_animation/courier-rig-motion-comparison/test_preflight.py
+
       - name: Validate showcase entries
         run: python scripts/validate_entry.py docs/showcase
 
