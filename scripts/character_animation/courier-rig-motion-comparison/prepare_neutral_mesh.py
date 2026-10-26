@@ -80,6 +80,8 @@ def main():
     raw = source.read_bytes()
     if sha(raw) != args.expected_sha256:
         raise ValueError("source differs from the selected hash-bound derivative")
+    if not __debug__:
+        raise ValueError("optimized Python is unsupported; runtime validation requires assertions")
     assert struct.unpack_from("<4sII", raw) == (b"glTF", 2, len(raw))
     chunks, offset = [], 12
     while offset < len(raw):

@@ -20,6 +20,8 @@ if OUTPUT_DIR.exists() and (not OUTPUT_DIR.is_dir() or any(OUTPUT_DIR.iterdir())
 raw = PATH.read_bytes()
 if hashlib.sha256(raw).hexdigest() != args.expected_sha256:
     raise ValueError("source differs from the selected hash-bound derivative")
+if not __debug__:
+    raise ValueError("optimized Python is unsupported; runtime validation requires assertions")
 assert struct.unpack_from("<4sII", raw) == (b"glTF", 2, len(raw))
 chunks = []
 offset = 12

@@ -46,6 +46,14 @@ and retain the original notices. Do not silently accept a different GLB.
 Use a new empty output directory for each run; both tools preserve previous
 evidence by refusing nonempty destinations.
 
+Both scripts require runtime assertions: optimized Python (`-O` or `-OO`) is
+unsupported and is refused before parsing or writing output. Wrong-hash and
+nonempty-output refusals remain explicit even in optimized mode; that does not
+qualify optimized conversion or measurement. The script hashes in
+`measured-input.json` belong to its recorded historical source commit, not the
+latest scripts. [Dated offline revalidation](offline-revalidation-2026-10-27.json)
+separately records the updated script hashes and new offline checks.
+
 ## Discovered capabilities
 
 | Candidate | Current evidence | Remaining proof |

@@ -245,7 +245,8 @@
       }
     ],
     "corrected_transfer_artifact_hashes_match_independent_run": true,
-    "motion_measurements_match_independent_run": true
+    "motion_measurements_match_independent_run": true,
+    "scope": "Historical checks at recorded_source_commit; script hashes identify the script bytes in that commit, not subsequent revisions. New checks are recorded separately in offline-revalidation-2026-10-27.json."
   },
   "limitations": [
     "No host, plugin, renderer, export or reopen execution.",
@@ -270,5 +271,6 @@
     "save_export_reopen": "blocked",
     "blank_scene_rebuild": "blocked",
     "visual_motion_acceptance": "not-tested"
-  }
+  },
+  "recorded_source_commit": "9a94e40eef850b6d7d724048aa798c6d4bb915fc"
 }
