@@ -235,10 +235,11 @@ test("pause-interrupted play rejection preserves a resumable frame instead of re
   assert.equal(card.dataset.previewState, "playing"); assert.equal(card.video.currentTime, 5);
 });
 
-test("genuine play rejection while paused reports the error and releases resources", async () => {
-  for (const name of ["NotAllowedError", "NotSupportedError", "Error"]) {
+test("genuine play rejection after a pause still fails before or after native resume", async () => {
+  for (const name of ["NotAllowedError", "NotSupportedError", "Error"]) for (const resume of [false, true]) {
     const f = fixture({playMode: "defer"}), card = f.cards[0];
     click(card); card.video.currentTime = 5; card.video.pause();
+    if (resume) { card.video.paused = false; card.video.emit("play"); }
     card.video.requests[0].reject(Object.assign(new Error("AbortError text is not an error name"), {name}));
     await flush();
     assert.equal(card.dataset.previewState, "error");
@@ -247,13 +248,53 @@ test("genuine play rejection while paused reports the error and releases resourc
   }
 });
 
-test("AbortError is not suppressed when the current media is no longer paused", async () => {
+test("AbortError without an actual pause event is not suppressed by paused state synchronization", async () => {
   const f = fixture({playMode: "defer"}), card = f.cards[0];
-  click(card); card.video.pause(); card.video.paused = false;
+  click(card); card.video.paused = true; card.video.emit("playing"); card.video.paused = false;
   card.video.requests[0].reject(Object.assign(new Error("Request aborted"), {name: "AbortError"}));
   await flush();
   assert.equal(card.dataset.previewState, "error"); assert.equal(card.video.hasAttribute("src"), false);
   assert.equal(card.video.listenerCount(), 0); assert.equal(f.timers.size, 0);
+});
+
+test("native resume survives the old AbortError before or after its queued play event", async () => {
+  for (const order of [["pause", "reject", "play"], ["pause", "play", "reject"], ["play", "pause", "reject"]]) {
+    const f = fixture({playMode: "defer"}), card = f.cards[0];
+    click(card); card.video.currentTime = 5;
+    const source = card.video.src;
+    card.video.paused = true; card.video.paused = false;
+    for (const event of order) {
+      if (event === "reject") {
+        card.video.requests[0].reject(Object.assign(new Error("Old pause interrupted playback"), {name: "AbortError"}));
+        await flush();
+      } else card.video.emit(event); // The queued pause observes an already resumed video.
+    }
+    assert.equal(card.dataset.previewState, "loading");
+    assert.equal(card.video.src, source); assert.equal(card.video.currentTime, 5);
+    assert.equal(card.video.loadCount, 0); assert.equal(f.timers.size, 1);
+    card.video.emit("playing");
+    assert.equal(card.dataset.previewState, "playing"); assert.equal(f.timers.size, 0);
+  }
+});
+
+test("native resume rearms its deadline and rejects stale callbacks without repeated play calls", async () => {
+  const f = fixture({playMode: "defer"}), card = f.cards[0];
+  click(card); const oldTimeout = [...f.timers.values()][0].action;
+  f.advance(11000); card.video.paused = true; card.video.paused = false; card.video.emit("play");
+  card.video.emit("pause"); oldTimeout();
+  assert.equal(card.dataset.previewState, "loading"); assert.equal(f.timers.size, 1);
+  f.advance(11999); assert.equal(card.dataset.previewState, "loading");
+  f.advance(1); assert.equal(card.dataset.previewState, "error");
+  assert.equal(card.video.playCount, 1); assert.equal(card.video.hasAttribute("src"), false);
+});
+
+test("old play fulfillment cannot clear a native resume watchdog without its actual playing event", async () => {
+  const f = fixture({playMode: "defer"}), card = f.cards[0];
+  click(card); card.video.currentTime = 5; card.video.pause();
+  card.video.paused = false; card.video.emit("play");
+  card.video.requests[0].resolve(); await flush();
+  assert.equal(card.dataset.previewState, "loading"); assert.equal(f.timers.size, 1);
+  f.advance(12000); assert.equal(card.dataset.previewState, "error");
 });
 
 test("manual playing and paused previews still release resources on explicit replacement or hidden lifecycle", async () => {
@@ -520,7 +561,7 @@ test("a stale same-card play promise cannot pause or fail a newer session", asyn
     const pauses = card.video.pauseCount;
     card.video.requests[0][completion](new Error("Superseded")); await flush();
     assert.equal(card.dataset.previewState, "playing"); assert.equal(card.video.paused, false);
-    assert.equal(card.video.pauseCount, pauses); assert.equal(card.video.listenerCount(), 6);
+    assert.equal(card.video.pauseCount, pauses); assert.equal(card.video.listenerCount(), 7);
   }
 });
 

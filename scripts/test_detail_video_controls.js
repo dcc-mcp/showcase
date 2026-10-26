@@ -40,7 +40,7 @@ function fixture(options = {}) {
       play() {
         this.playCount++;
         this.paused = false;
-        this.emit("play");
+        if (!options.deferPlayEvent) this.emit("play");
         if (this.mode === "reject") return Promise.reject(new Error("blocked"));
         if (this.mode === "defer") return new Promise((resolve, reject) => this.requests.push({
           resolve: () => { this.paused = false; resolve(); }, reject
@@ -209,6 +209,64 @@ test("native resume before queued pause gets a fresh deadline and ignores its ol
   assert.equal(f.timers.size, 1); assert.equal(f.timers.has(resumedWatchdog), true);
   f.timers.get(resumedWatchdog)();
   assert.equal(e.host.dataset.videoState, "error");
+});
+
+test("queued pause AbortError cannot cancel native resume before or after its play event", async () => {
+  for (const resumePlayFirst of [false, true]) {
+    const f = fixture({mode: "defer", deferPlayEvent: true}), e = f.entries[0];
+    watch(e); e.video.emit("play"); // The controller's first play event is asynchronous too.
+    const source = e.video.src, assignments = e.video.srcAssignments;
+    e.video.currentTime = 3; e.video.pause(); e.video.paused = false;
+    if (resumePlayFirst) e.video.emit("play");
+    const watchdog = [...f.timers.keys()][0];
+    e.video.emit("pause");
+    e.video.requests[0].reject(Object.assign(new Error("interrupted by pause"), {name: "AbortError"}));
+    await flush();
+    assert.equal(e.host.dataset.videoState, "loading"); assert.equal(f.timers.has(watchdog), true);
+    if (!resumePlayFirst) e.video.emit("play");
+    assert.equal(f.timers.size, 1); assert.equal(e.video.currentTime, 3);
+    assert.equal(e.video.src, source); assert.equal(e.video.srcAssignments, assignments);
+    assert.equal(e.video.playCount, 1);
+    e.video.emit("playing");
+    assert.equal(e.host.dataset.videoState, "watching"); assert.equal(f.timers.size, 0);
+  }
+});
+
+test("the first asynchronous play event does not suppress genuine promise failures", async () => {
+  for (const name of ["AbortError", "NotAllowedError"]) {
+    const f = fixture({mode: "defer", deferPlayEvent: true}), e = f.entries[0];
+    watch(e); e.video.emit("play");
+    e.video.requests[0].reject(Object.assign(new Error("genuine failure"), {name}));
+    await flush();
+    assert.equal(e.host.dataset.videoState, "error"); assert.equal(f.timers.size, 0);
+  }
+});
+
+test("a paused controller promise cannot confirm playback for a pending native resume", async () => {
+  const f = fixture({mode: "defer"}), e = f.entries[0];
+  watch(e); e.video.pause(); e.video.paused = false; e.video.emit("play"); e.video.emit("pause");
+  const watchdog = [...f.timers.keys()][0];
+  e.video.requests[0].resolve(); await flush();
+  assert.equal(e.host.dataset.videoState, "loading"); assert.equal(f.timers.has(watchdog), true);
+  e.video.emit("playing");
+  assert.equal(e.host.dataset.videoState, "watching"); assert.equal(f.timers.size, 0);
+});
+
+test("a paused controller promise never hides current errors or the resume deadline", async () => {
+  for (const failure of ["promise", "media", "watchdog"]) {
+    const f = fixture({mode: "defer"}), e = f.entries[0];
+    watch(e); e.video.pause(); e.video.paused = false; e.video.emit("play"); e.video.emit("pause");
+    e.video.requests[0].reject(Object.assign(new Error("play failure"), {
+      name: failure === "promise" ? "NotSupportedError" : "AbortError"
+    }));
+    await flush();
+    if (failure !== "promise") {
+      assert.equal(e.host.dataset.videoState, "loading");
+      if (failure === "media") e.video.emit("error");
+      else [...f.timers.values()].forEach(fn => fn());
+    }
+    assert.equal(e.host.dataset.videoState, "error"); assert.equal(f.timers.size, 0);
+  }
 });
 
 test("stale pause and timeout callbacks cannot clear a newer run's watchdog", () => {

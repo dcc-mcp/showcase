@@ -118,16 +118,30 @@
     } else stopAll();
     const video = entry.video;
     const run = {entry, automatic, loadingTimer: null, removeListeners: () => {}};
+    let pauseObserved = false;
     active = run;
     setState(entry, "loading");
 
     const failed = () => { if (active === run) stop(entry, "error"); };
-    const paused = () => {
-      if (active !== run || !video.paused) return;
+    const armWatchdog = () => {
+      window.clearTimeout(run.loadingTimer);
+      const timer = window.setTimeout(() => { if (run.loadingTimer === timer) failed(); }, 12000);
+      run.loadingTimer = timer;
+    };
+    const paused = event => {
+      if (active !== run) return;
+      // A queued pause may be delivered after native playback already resumed.
+      if (event) pauseObserved = true;
+      if (!video.paused) return;
       window.clearTimeout(run.loadingTimer);
       run.loadingTimer = null;
       setState(entry, "paused");
       progress(entry);
+    };
+    const loading = () => {
+      if (active !== run || video.paused) return;
+      setState(entry, "loading");
+      armWatchdog();
     };
     const playing = () => {
       if (active !== run) {
@@ -145,7 +159,7 @@
     };
     const update = () => { if (active === run) progress(entry); };
     const ended = () => { if (active === run) stop(entry); };
-    const listeners = {playing, pause: paused, error: failed, timeupdate: update, durationchange: update, ended};
+    const listeners = {playing, play: loading, pause: paused, error: failed, timeupdate: update, durationchange: update, ended};
     Object.entries(listeners).forEach(([event, action]) => video.addEventListener(event, action));
     run.removeListeners = () => {
       window.clearTimeout(run.loadingTimer);
@@ -153,7 +167,7 @@
     };
     // A stalled network or unresolved play promise must not leave a card busy
     // forever. Manual retry remains available and starts a fresh bounded request.
-    run.loadingTimer = window.setTimeout(failed, 12000);
+    armWatchdog();
 
     // Source assignment happens only after a deliberate hover or button press.
     if (!resuming) {
@@ -164,10 +178,12 @@
     }
     try {
       const promise = video.play();
-      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(playing, error => {
+      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(() => {
+        // Native playing events own completion after a pause/resume interruption.
+        if (active !== run || !pauseObserved) playing();
+      }, error => {
         if (active !== run) return;
-        // Only a browser pause interruption preserves the resumable frame.
-        if (video.paused && entry.card.dataset.previewState === "paused" && error?.name === "AbortError") return;
+        if (pauseObserved && error?.name === "AbortError") return;
         failed();
       });
       // Browsers without a play promise are handled by the playing event.

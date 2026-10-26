@@ -109,6 +109,7 @@ update();
     stopAll();
     const video = entry.video;
     const run = {entry, automatic, timer: null, dispose() {}};
+    let nativePauseObserved = false;
     active = run;
     const failed = error => {
       if (active !== run) return;
@@ -136,7 +137,9 @@ update();
       state(entry, run.automatic ? "preview" : "watching");
     };
     const paused = () => {
-      if (active !== run || run.automatic || !video.paused) return;
+      if (active !== run || run.automatic) return;
+      nativePauseObserved = true;
+      if (!video.paused) return;
       window.clearTimeout(run.timer);
       run.timer = null;
       state(entry, "watching");
@@ -161,7 +164,13 @@ update();
     if (adoptNativePlayback) return; // The native play action is already underway.
     try {
       const promise = video.play();
-      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(playing, failed);
+      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(() => {
+        if (active !== run || !nativePauseObserved) playing();
+      }, error => {
+        // A queued pause may reject this sole play promise after native resume.
+        if (nativePauseObserved && error && error.name === "AbortError") return;
+        failed(error);
+      });
     } catch (_) { failed(); }
   }
   videos.forEach(video => {
