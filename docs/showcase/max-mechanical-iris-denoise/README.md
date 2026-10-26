@@ -24,7 +24,7 @@ The comparison columns are **RAW / Skill OIDN / Autodesk Noice**. All source pic
 
 ![AA3 RAW / OIDN / Noice / independent AA6 reference](higher-sample-comparison.jpg)
 
-AA6 at frame48 took272.515seconds. It is a higher-sample observation, not ground truth. Frames49–55 share actual seed-2082661815; frame48 is retained from an older sampling pattern, so its boundary cannot isolate algorithm flicker. All8pictures were fully decoded and inspected as chronological crops; actual real-time player viewing remains untested while CUA is disabled.
+AA6 at frame48 took272.515seconds. It is a higher-sample observation, not ground truth. Frames49–55 share actual seed-2082661815; frame48 is retained from an older sampling pattern, so its boundary cannot isolate algorithm flicker. All8pictures were fully decoded and inspected as chronological crops; actual real-time player viewing remains untested in this scoped run.
 
 Both denoisers reduce grain. Noice looks smoother and OIDN retains more fine texture; pin outlines, iris corners and the thin brass ring remain visible in inspected stills. No universal accuracy ranking follows. The short opening interval does not cover reversal or the full144-frame film.
 
@@ -34,6 +34,14 @@ Use the adapted discovery-intent recipe with the source candidate, verify millim
 
 Sources: [Max candidate](https://github.com/dcc-mcp/dcc-mcp-3dsmax/tree/e1b724483193dd6476d117cb7ecf15ccaab91422), [media-enhance candidate](https://github.com/dcc-mcp/dcc-media-enhance/tree/f7073694ea2abef5c5b94f36e1442be076c9bb75). Both remain unmerged candidates. Native camera regression and exact-head CI pass; final independent review is incomplete.
 
-Full-film/reversal review, actual natural-speed playback, real Max UI/wireframes, normal MZP installation, MCP transport and public native-source sanitization remain open. This case is intentionally **not added to collection.json**. No source merge, public deployment or complete engineering validation is claimed.
+Full-film/reversal review, actual natural-speed playback, wireframe and modifier-parameter UI inspection, normal MZP installation, MCP transport and public native-source sanitization remain open. This case is intentionally **not added to collection.json**. No source merge, public deployment or complete engineering validation is claimed.
 
 [UI capture plan](UI-CAPTURE-PLAN.md) · [Video verification](video-verification.json)
+
+## Actual Max UI capture
+
+![Actual Max scene and Scene Explorer](max-native-scene.jpg)
+
+![Native Modify panel selected through background UIA](max-native-modify-tab.jpg)
+
+Two real DCC-CUA1.12.2 captures show the original scene. The second follows a successful background UIA click on the native Modify tab; no object is selected, so this does not inspect a modifier stack. The first exact-window WGC capture succeeded without foreground focus. An earlier foreground activation request was refused and sent no input. These are separate outcomes. Top application toolbars containing a private project path and bottom status strips were cropped; images were resized/JPEG encoded, with no repaint or compositing. Raw captures remain private and hashed. [UI verification](ui-verification.json).

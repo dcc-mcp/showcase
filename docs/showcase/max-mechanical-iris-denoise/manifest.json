@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "capture_provider": "native renderer; no UI screenshots",
+  "capture_provider": "native renderer and dcc-cua1.12.2 exact-window captures",
   "files": [
     {
       "path": ".gitattributes",
@@ -58,19 +58,35 @@
       "bit_depth": 8
     },
     {
+      "path": "max-native-modify-tab.jpg",
+      "bytes": 102500,
+      "sha256": "5ccc1db685b73ee9fc7005dfb63920cf6d48cf5e0de84f0880efaca891006530",
+      "width": 1568,
+      "height": 756,
+      "bit_depth": 8
+    },
+    {
+      "path": "max-native-scene.jpg",
+      "bytes": 108590,
+      "sha256": "a8858cdb7c9d740d43d3047695c34475fbea7f2302460a3951647021f93bf2e7",
+      "width": 1600,
+      "height": 771,
+      "bit_depth": 8
+    },
+    {
       "path": "oidn-24fps.mp4",
       "bytes": 40614,
       "sha256": "2925dfea9da0f4bc80b8171e87b182752b4f0fc0f9988d526c7b7f77eb56ef02"
     },
     {
       "path": "README.md",
-      "bytes": 5157,
-      "sha256": "aeb0dc7457cd25ad46272bc0d78fdf9f35f1eb24a061becddaaa5dd5bd323d38"
+      "bytes": 5969,
+      "sha256": "d2b46b4115c63f362d6c047cf5a3dac2a8d139e5d30b54d0d349368b9382d2e4"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 2942,
-      "sha256": "41f3ab4a9e153f333ab319aa7966536ab4cb2af4434f1cdc1590889199ba0acf"
+      "bytes": 3597,
+      "sha256": "2515be168a418ff9e825e16f55a57131901b50926796bd77d57f4247e4ac470f"
     },
     {
       "path": "recipe.json",
@@ -84,13 +100,18 @@
     },
     {
       "path": "UI-CAPTURE-PLAN.md",
-      "bytes": 2519,
-      "sha256": "e310f5e282f137449c3f2dd45cf8bf2f858768fb9c0361d70bdb62abe2b5e4f6"
+      "bytes": 1657,
+      "sha256": "359c76cf0a16de7fcb3caa4e439b3ab99b5253b1e6389d3e5edc20101f921d15"
+    },
+    {
+      "path": "ui-verification.json",
+      "bytes": 2568,
+      "sha256": "eaefa28bd3213398cf11d83cf68604caaca2b6eba67de0a525533d6150a4a425"
     },
     {
       "path": "validation.json",
-      "bytes": 5123,
-      "sha256": "d47d6c2b003f163eb29ff2cd3c05f36d8d5af59e11e43755523fdf0f4108b54f"
+      "bytes": 7911,
+      "sha256": "7665bfb07cee21a0d738e1e0541f3f3d6338cb117f31dbbb2a5efbc8fb7e51a5"
     },
     {
       "path": "video-verification.json",

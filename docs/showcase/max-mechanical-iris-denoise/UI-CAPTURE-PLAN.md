@@ -1,23 +1,13 @@
-# Native Max UI evidence to add
+# Native Max UI evidence
 
-Status: blocked. Actual Max UI screenshots0; wireframe UI screenshots0. The project DCC-CUA route remains disabled/unavailable. No editor image is fabricated from renders.
+Actual captures:2; wireframe captures:0. DCC-CUA1.12.2 exact-window capture and one background UIA tab action passed. [Evidence](ui-verification.json).
 
-| Shot | Actual UI content | What it would support |
-|---|---|---|
-| Scene and wireframe | The original84-object iris with Scene Explorer and a wireframe/edged view | Editable scene organization,48distinct fasteners and layered blades |
-| Housing modifier stack | Select housing; expose native Lathe modifier,128segments and axis gizmo | Native procedural construction; screenshots complement the measured440×440×34mm bounds |
-| Blade modifier stack | Select one blade; show closed spline and0.45mm Extrude | Editable blade geometry and independent pivot |
-| Closed/open timeline | Same camera at frames1 and72 with the timeline visible;24fps/range1–144 verified separately | Real keyframed state, not a synthesized UI or a still-image animation |
-| Materials, lights and camera | Native material and Arnold Quad settings; actual original45°FOV | Inspectable scene parameters and accurate separation from the new65mm Physical-camera regression |
+The scene capture shows native Scene Explorer, camera viewport and command panel. The second capture verifies selection of the Modify tab through UIA, without foreground focus. No object is selected; this is not modifier-stack verification.
 
-Before any observation or input, report `provider=dcc-cua`, actual runtime version and the task-owned target's exact PID/HWND. Resume only after the original DCC-CUA recovery owner releases the supported route and a fresh desktop handoff establishes an available foreground window. Never switch to a generic screenshot provider.
+Still open: housing Lathe128segments, blade Extrude0.45mm, wireframe, frame1/72 comparison, material/light/camera controls, and real video playback. Scene Explorer object rows were not exposed in the observed UIA tree. Foreground activation was refused in an earlier raw-input preparation step; no input was sent then. This is not a general screenshot failure.
 
-Capture unretouched UI, retain native provenance and source hashes, and redact by selecting a clean task-owned profile/view before capture rather than painting over a failure. Keep raw capture privately and only publish cleared derivatives. Stop the scoped session and verify cleanup afterward; do not save over the original project.
+Crops remove top toolbars containing private project paths and bottom status strips; no repaint or compositing. Raw captures and target binding receipts remain private. The scoped CUA task stopped with no pending cleanup. Source file retained unchanged.
 
-These pictures would strengthen visual reproducibility. They do not prove MCP transport, normal MZP installation, full-film temporal stability or collision-free engineering.
+PrintWindow-specific behavior was not tested. Capture, background semantic input and foreground physical input require separate capability/readiness reporting. These images do not establish normal MZP installation, MCP transport, full-film stability or engineering collision clearance.
 
-## 中文
-
-拟补：整体场景和线框；Lathe外壳修改器；闭合Spline与0.45mm Extrude叶片；帧1/72的开合关键帧；材质、Arnold灯光与实际45°FOV参数。
-
-当前实际界面图和线框图均为0。DCC-CUA入口仍禁用／不可用，原维护任务未解除原生控制冻结。恢复受支持路由并完成新桌面交接后，先公开provider/runtime/PID/HWND绑定，再拍真实本工程界面。不能改用通用截图或合成编辑器图；结束后核清理，原工程不覆写。
+中文：已补2张真实Max界面图及后台UIA切换Modify页签的操作后证据；线框、对象修改器参数、关键帧对比和实际播放仍未验收。截图成功、语义操作成功、前台激活被拒分别记录，不扩大结论。原图私有留存，公开图仅裁剪与缩放编码，原工程不覆写。
