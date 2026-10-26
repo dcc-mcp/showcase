@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-27",
+  "scope": "New offline script revalidation; no DCC host or control-rig acceptance",
+  "historical_record": {
+    "path": "measured-input.json",
+    "recorded_source_commit": "9a94e40eef850b6d7d724048aa798c6d4bb915fc",
+    "recorded_script_hashes_verified_against_git_blobs": true,
+    "original_measurements_and_script_hashes_preserved": true
+  },
+  "current_script_bytes": [
+    {
+      "path": "audit_existing_motion.py",
+      "sha256": "3e385cc4cbca26ad074e1401650fc76947076386f61ed9881f6ce1504841a078"
+    },
+    {
+      "path": "prepare_neutral_mesh.py",
+      "sha256": "cbe801b2420de6259f3fc8a1bdb7b6c15bc798097c9236766ca59e19d9f7525a"
+    },
+    {
+      "path": "test_preflight.py",
+      "sha256": "855c40de7d821ce6830a4d544565508950e237f61b6de42f08798f8d80b7f727"
+    }
+  ],
+  "runtime_validation": {
+    "normal_python": "supported; runtime assertions required",
+    "optimized_python": "unsupported; -O and -OO are refused before parsing or output writes",
+    "early_refusals": "Wrong-source hash and nonempty-output checks remain explicit in normal and optimized Python",
+    "regression_tests": 4,
+    "cli_subcases": 12,
+    "synthetic_input": "One triangle glTF2 binary with matching hash; no generated or private character bytes in the test",
+    "result": "passed"
+  },
+  "real_input": {
+    "bytes": 11962060,
+    "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2",
+    "unchanged": true
+  },
+  "normal_real_input_replay": {
+    "audit_exit_code": 0,
+    "transfer_exit_code": 0,
+    "audit_measurements_equal_previous_retained_run": true,
+    "transfer_measurements_and_artifact_hashes_equal_previous_retained_run": true,
+    "matching_optimized_real_input_refused_before_output": true,
+    "counts": {
+      "vertices": 36287,
+      "uv_entries": 36287,
+      "normal_entries": 36287,
+      "triangles": 30000,
+      "objects": 1
+    },
+    "skin_joint_count": 17,
+    "weighted_joint_count": 16,
+    "clip_names": [
+      "Idle",
+      "Walk",
+      "Dash",
+      "Attack",
+      "Cast"
+    ],
+    "inverse_scale_max_abs_error_m": 5.000000413701855e-12,
+    "uv_inverse_origin_conversion_max_abs_error": 5.000444502911705e-13,
+    "transformed_normal_max_abs_serialization_error": 5.000444502911705e-13,
+    "transfer_files": [
+      {
+        "path": "courier-neutral-maya-cm.mtl",
+        "bytes": 328,
+        "sha256": "5adc0054a3078022aa7e9b5414f021b705d454fe39987b0d535c7a07c2bdeca1"
+      },
+      {
+        "path": "courier-neutral-maya-cm.obj",
+        "bytes": 6225898,
+        "sha256": "800b241adeac5547dd5fc42e839d897360db0ca8aa5cd22d2759896af5a9b145"
+      },
+      {
+        "path": "textures/courier-image-00.png",
+        "bytes": 3438712,
+        "sha256": "a2e58c69c806872a56d8030f7cc6813711fb3d96348a3d596ca28b26aeb2c85c"
+      },
+      {
+        "path": "textures/courier-image-01.png",
+        "bytes": 3702813,
+        "sha256": "6c0b65753f81f58dcc4335e5788a12c12cbbfb31f54976a01adbe62f62375f4e"
+      },
+      {
+        "path": "textures/courier-image-02.png",
+        "bytes": 2651261,
+        "sha256": "e4591e2c06daa987d9e070f93642cdd63c59f567591146c70e829b95ee581e2c"
+      }
+    ],
+    "motion_trajectories_sha256": "b1e7c308a8350f12af420326e69e1d57ce386c8e193461d47a00d97b9b0d08d5"
+  },
+  "evidence_basis": {
+    "mode": "Retained private CLI stdout/stderr and complete output manifests; selected measurements and hashes only are published",
+    "private_run_receipt_sha256": "c067e19d9bb68d3c562ab2857456e4e8e0c9061347e95151b3cdcb027a0f9ca8",
+    "authenticity": "Hashes bind retained bytes; this public summary does not independently authenticate execution or a model identity"
+  },
+  "not_claimed": [
+    "Optimized conversion or optimized numerical measurement",
+    "Maya/Blender import, shader parity, rig generation, skinning or control animation",
+    "Native save/export reopen, blank-scene rig rebuild, foot contact or visual motion acceptance",
+    "A new generated character asset, additional redistribution license or model attribution"
+  ]
+}
