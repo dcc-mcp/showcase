@@ -131,6 +131,69 @@ class GameplayObserverTests(unittest.TestCase):
             driver.request_action(drifted,ROUTE[0])
         driver.interact.assert_not_called()
 
+    def map_pulse_fixture(self, reapproach=False, failure=None):
+        # Callback-order fixture only; no browser, OS input or game is launched.
+        samples=[self.state(position=[1.3,1,9 if reapproach else 10],
+                            interaction_available=reapproach,
+                            velocity=[0,0,-3] if reapproach else [0,0,0])]
+        clock,held,drifted=[0.],[False],[False];events=[]
+        driver=RouteDriver(lambda:samples,Mock(),Mock(),Mock(),Mock(),
+                           physics_timeout=15,absolute_wall_timeout=240)
+        def append(z,velocity=0,movement=0):
+            before=samples[-1]
+            samples.append(self.state(sample_id=before['sample_id']+1,
+                physics_frame=before['physics_frame']+13,position=[1.3,1,z],
+                velocity=[0,0,velocity],movement_input=[0,movement],
+                interaction_available=abs(z-7.8)<1.55))
+        def read():
+            events.append(('read',samples[-1]['sample_id']))
+            if held[0]:raise RuntimeError('passive observation while map movement is held')
+            return samples
+        def move(direction):
+            events.append(('move',direction));held[0]=tuple(direction)!=(0,0)
+        def pause(seconds):
+            events.append(('pause',seconds));clock[0]+=seconds
+            if held[0]:
+                append(9.1 if reapproach else 9.3,2 if reapproach else -2,1 if reapproach else -1)
+                if failure=='budget':samples[-1]['physics_frame']+=900
+            elif reapproach and driver.stop_boundary is not None and not drifted[0]:
+                drifted[0]=True;append(8.37)
+            elif failure!='stale':
+                append(9.2 if reapproach else 9.1,.01)
+        def interact(_):raise RuntimeError('actual action callback reached')
+        driver.read_states=read;driver.move.side_effect=move;driver.pause.side_effect=pause
+        driver.interact.side_effect=interact
+        expected={'budget':'budget expired','stale':'stopped advancing'}.get(failure,'actual action callback reached')
+        with patch('gameplay.time.monotonic',side_effect=lambda:clock[0]),patch('gameplay.ROUTE',[ROUTE[0]]):
+            with self.assertRaisesRegex((RuntimeError,TimeoutError),expected):driver.run()
+        return driver,events
+
+    def test_map_pulse_releases_before_any_further_passive_observation(self):
+        driver,events=self.map_pulse_fixture()
+        steering=next(i for i,e in enumerate(events) if e[0]=='move' and e[1]!=(0,0))
+        self.assertEqual(events[steering+1],('pause',.1))
+        self.assertEqual(events[steering+2],('move',(0,0)))
+        stop=driver.snapshot_stops[0]
+        self.assertGreaterEqual(stop['settled']['sample_id'],stop['after_release']['sample_id']+2)
+        driver.interact.assert_called_once()
+        self.assertEqual(driver.milestones,[])  # A callback request is not actual acceptance.
+
+    def test_map_drift_reapproach_uses_the_same_release_before_observe_pulse(self):
+        driver,events=self.map_pulse_fixture(reapproach=True)
+        steering=next(i for i,e in enumerate(events) if e[0]=='move' and e[1]!=(0,0))
+        self.assertEqual(events[steering+1:steering+3],[('pause',.1),('move',(0,0))])
+        self.assertIn('drifted_sample_id',driver.stops[0])
+        driver.interact.assert_called_once()
+
+    def test_map_pulse_requires_fresh_physics_and_keeps_existing_budget(self):
+        for failure in ('stale','budget'):
+            with self.subTest(failure=failure):
+                driver,_=self.map_pulse_fixture(failure=failure)
+                driver.interact.assert_not_called()
+                self.assertNotIn('settled',driver.snapshot_stops[0])
+                self.assertEqual(len(driver.budgets),1)
+                if failure=='budget':self.assertEqual(driver.budgets[0]['expired_budgets'],['physics'])
+
     def corridor_turn_fixture(self, drift=False, failure=None):
         # Counterfactual input fixture around actual portrait samples103/104;
         # the unchanged real corridor validates every resulting sparse segment.
@@ -788,7 +851,8 @@ class GameplayObserverTests(unittest.TestCase):
 
 
     def test_stop_drift_then_reapproach_sends_one_action_after_second_stop(self):
-        point = {**ROUTE[0], "screenshot": "checkpoint.png"}
+        point = {**{key:value for key,value in ROUTE[0].items() if key!='map_staging'},
+                 "screenshot": "checkpoint.png"}
         initial = self.state(position=[1.3, 1, 9], movement_input=[0, 1], velocity=[0, 0, 3])
         outside = self.state(sample_id=2, physics_frame=72, position=[1.3, 1, 10.52])
         samples, clock = [initial], [1.0]
@@ -1151,6 +1215,9 @@ class WaypointBudgetTests(unittest.TestCase):
     def test_absolute_wall_limit_counts_capture_time_and_preserves_failure_receipts(self):
         samples, clock = [self.state()], [0.0]
         driver = self.driver(samples)
+        # Exercise the ordinary held-input capture path; map pulses have their
+        # own fresh-state and unchanged-budget fixtures above.
+        point={key:value for key,value in ROUTE[0].items() if key!='map_staging'}
         def move(direction):
             if direction != (0, 0) and len(samples) == 1:
                 samples.append(self.state(sample_id=2, physics_frame=72, locomotion="wade", water_depth=.2))
@@ -1164,7 +1231,7 @@ class WaypointBudgetTests(unittest.TestCase):
                 number=samples[-1]["sample_id"]+1
                 samples.append(self.state(sample_id=number,physics_frame=48+number*12,locomotion="wade",water_depth=.2))
         driver.pause.side_effect=settle
-        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [ROUTE[0]]), \
+        with patch("gameplay.time.monotonic", side_effect=lambda: clock[0]), patch("gameplay.ROUTE", [point]), \
                 self.assertRaisesRegex(TimeoutError, "absolute_wall"):
             driver.run()
         diagnostics = route_diagnostics(driver)

@@ -559,6 +559,10 @@ class RouteDriver:
                             self.stop_for_action(state, point)
                     else:
                         self.move(direction_to(state, approach))
+                    if point.get("map_staging") and self.pending_action is None and self.stop_boundary is None:
+                        # Release before slow passive reads can prolong a map steer.
+                        self.pause(.1)
+                        state = self.settled_snapshot_state(state)
                     if self.physics_timeout is not None:
                         # Count slow input delivery and captures too. An action
                         # callback cannot finish beyond a limit and still pass.
