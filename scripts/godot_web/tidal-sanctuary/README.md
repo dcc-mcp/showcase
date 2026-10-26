@@ -35,7 +35,7 @@ The rejected darker experiment remains in history and is not the current visual 
 
 ## Blender art iteration
 
-The editable palm/understory library and explorer source are under `artwork`. Their scripts use Blender 4.3.2 built-ins and verified static CC0 inputs, with no external plugin or network execution. The source scenes were saved and reopened in independent Blender processes; GLBs are self-contained. This is native Blender production, not a claim of Blender MCP execution. Godot creation/save/reopen continues through the actual DCC-MCP acceptance workflow.
+The editable palm/understory library and explorer source under `artwork` preserve the historical Blender 4.3.2 built-in production and independent save/reopen checks. The current `game/assets/tropical/SOURCE.json` records a later Blender 4.5.13 DCC-MCP rebuild, retaining the earlier attribution under `historical_production`. Its eight game GLB hashes identify the actual runtime inputs; the historical `.blend` files do not establish a fresh reopen of that later rebuild. Godot creation/save/reopen continues through the actual DCC-MCP acceptance workflow.
 
 This art candidate keeps the same gameplay camera, controls, water-depth controller, objectives and save protocol; the collision/interaction repair adds semantically selected physical blockers and shared reachability checks. Screenshots must be compared at matching playable views before judging it an improvement.
 
@@ -46,3 +46,21 @@ Visible walls, large shoreline rocks, palm trunks, quest pedestals and chest bod
 Prompt and action share a single check: less than 1.55 m horizontal reach, at most 1.2 m vertical separation, and unobstructed line of sight. The target's own physical body is allowed; another wall or rock is not. Unreachable targets explain whether to move closer, reach the same level or walk around. Repeated actions still cannot skip stages.
 
 The earlier portrait attempt used a stale moving position and missed the final interaction. The repaired input harness waits for a newer neutral, settled physics observation after the real stop callback, and re-approaches before its single action when necessary. The beacon has a reachable front approach outside its solid base. Exact-head real rendering/input/save validation is still required; local physics fixtures alone do not establish experience quality.
+
+## Retained acceptance checkpoint, 2026-10-27
+
+Commit `3952d4687c44a2be34bc64e99d32f304d3f79b61` passed the full
+[CI lane](https://github.com/dcc-mcp/showcase/actions/runs/39507662879).
+Its retained artifacts record actual Linux Godot keyboard input, all four quest
+stages, native save restoration, and desktop/portrait Chromium input, audio
+measurement and fresh-process save restoration. The two native videos fully
+decode at 1280 x 720 and 24 fps: 3,977 physical-input frames and 866 scripted
+traversal frames. The scripted movie remains separate from input evidence;
+native captures are silent.
+
+This review checked those media bytes and the actual native stills. Bright sand
+and dense foreground foliage remain visual limitations. PCM measurements do not
+establish subjective listening, and emulated touch is not a physical phone test.
+Windows DCC-CUA, public-site playback and final gallery acceptance remain unrun.
+Integration with current main requires new candidate CI; no collection entry or
+public playable is added by this source/prototype merge.
