@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "replacement_hashes": [
+    {
+      "file": "bush-a.glb",
+      "old_sha256": "80029cdd4b83a11f7e903f13733113a62ec810c0e0569b90d907be63b796fafe",
+      "new_sha256": "abdede3a9261b5f0f1f00907b0234d75e95819dcc162259d75e7758da07c0d1c",
+      "new_bytes": 6488
+    },
+    {
+      "file": "explorer.glb",
+      "old_sha256": "eae7218d3ca960b10710216a2cda6c9ddd7eab088ee98854381099f5cabd36b3",
+      "new_sha256": "055acf10abbfd9e8c57c4144c4bbdb2fae9676d0bb0b09a18342a77c142b17a8",
+      "new_bytes": 608396
+    },
+    {
+      "file": "palm-a.glb",
+      "old_sha256": "fb11d7daafed2c56bd3d973b8cec0041aa0cfed76b3a3328f796f283d293a3cb",
+      "new_sha256": "a3624b45b4a54a1887421147e3087a7abcfb2a564a5d0e158e13a91b88521916",
+      "new_bytes": 604304
+    },
+    {
+      "file": "palm-b.glb",
+      "old_sha256": "e0b9795379607da157b033c49249b22208cd01dcdbba64ef1e8cdf3ca0b97f62",
+      "new_sha256": "07dfcff46724f50bed2e130a0d4aaa1fef8d82850ffbe461bc80d6a6a1c8c27c",
+      "new_bytes": 604300
+    },
+    {
+      "file": "shore-stone-a.glb",
+      "old_sha256": "1fb23d62486a84c3b5aaaf4a360052924e6c6e6a1b3b7216e439f0f50a6ff929",
+      "new_sha256": "b781455928a4493d74341ec75b6392cfc0edd5c332ad6851959e5f183d01946f",
+      "new_bytes": 5920
+    },
+    {
+      "file": "shore-stone-b.glb",
+      "old_sha256": "8ffb9d77bebfcd0c997b5042931ed15cac5830e63c97dec9d0b7bd1b726b519b",
+      "new_sha256": "015555b3cd0cb8ec7b3d7714ffb95cf5bc8ad716be60fe822f43ed43d10a1a5f",
+      "new_bytes": 4588
+    },
+    {
+      "file": "understory-a.glb",
+      "old_sha256": "455305525f0f8bf2bc1c0d7864c23f01fbb48dd1ab5839e819ade540cea14141",
+      "new_sha256": "65241bd4f33a5feb5426adce71fcf87fb94cc39ce41262fc0ef2d8369b0694dc",
+      "new_bytes": 32128
+    },
+    {
+      "file": "understory-b.glb",
+      "old_sha256": "08c917d52a3583ffd73d671619ee0398f439deebe4a39d2205f9eb68eddd624d",
+      "new_sha256": "f45c204d837bee5a0ad8b3cd6b885f43defb7fb558d7472c82ea4442b149622a",
+      "new_bytes": 32124
+    }
+  ],
+  "consumer_visual_review": {
+    "schema": 1,
+    "run_url": "https://github.com/dcc-mcp/showcase/actions/runs/39467625636",
+    "head": "2e109d3b77bcbc88519e56ee399f1c65a0198128",
+    "reviewed_utc": "2026-10-20T17:43:50Z",
+    "technical_stage": "passed",
+    "visual_stage": "passed",
+    "review_scope": "Eight actual fixed-camera rendered comparisons of five imported models; parent independently reviewed all eight. Not full gameplay or deformed bounds proof.",
+    "models": [
+      "explorer",
+      "palm-a",
+      "palm-b",
+      "understory-a",
+      "understory-b"
+    ],
+    "samples": 30,
+    "images": {
+      "explorer-idle.png": "29f1b4dbee052b9917d1081b9523312553c844a2a10a8ca9e82b5173afc3d22e",
+      "explorer-swim-game-wrapper.png": "4398457105040d2ee92a1f2fe0cf8495ee5a730804f08bffc8b067fc289300c4",
+      "explorer-swim.png": "044e7861296bd5de0d0bc1f2faf61bb1ebdcb91feaab4e6111f3fb7a60759203",
+      "explorer-walk.png": "f099c9b3dc7499c8f90d42bf30dbb26897bf6d3638742271580d0cab2fac0c7f",
+      "palm-a.png": "c990716787524257c1c529185ba8efc7480b580eed284a82f12c3861377558b6",
+      "palm-b.png": "96106ab21b114d4233a315398e5edd7d167ab84523104b28c61c30322c98e919",
+      "understory-a.png": "dfad9e61390638b842672e200393bf36269ac76840f03a0c8f2b5ba73df97c0c",
+      "understory-b.png": "1d55b86116e556ce391cade9a353b14daef574b5a4be44ba3cff0ef0df9a8788"
+    },
+    "limitations": [
+      "Understory pair floating is fixture placement, not grounding acceptance.",
+      "Game Swim fixture only applies local game wrapper parameters; no physics/water/interaction.",
+      "Bush and shore stones require full-game visibility/usability acceptance.",
+      "Original full-game results do not qualify new asset bytes."
+    ]
+  },
+  "full_game": "pending_on_new_integrated_asset_head",
+  "native_files_published": false
+}

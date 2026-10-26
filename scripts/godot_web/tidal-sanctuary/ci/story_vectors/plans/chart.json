@@ -1,0 +1,53 @@
+{
+  "output_file": "native/chart.svg",
+  "plan": {
+    "canvas": {
+      "width": 64,
+      "height": 64,
+      "view_box": "0 0 64 64"
+    },
+    "nodes": [
+      {
+        "type": "path",
+        "id": "chart-1",
+        "fill": "#102B31",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M10 13 25 9 40 14 54 10V49L40 54 25 49 10 53Z"
+      },
+      {
+        "type": "path",
+        "id": "chart-2",
+        "fill": "none",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M25 9V49M40 14V54",
+        "opacity": 0.45
+      },
+      {
+        "type": "path",
+        "id": "chart-3",
+        "fill": "none",
+        "stroke": "#77D3C5",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M15 36q5-6 10 0t10 0t11 0"
+      },
+      {
+        "type": "path",
+        "id": "chart-4",
+        "fill": "#D9BD7B",
+        "stroke": "none",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "m38 22 3-6 3 6 6 3-6 3-3 6-3-6-6-3Z"
+      }
+    ]
+  }
+}

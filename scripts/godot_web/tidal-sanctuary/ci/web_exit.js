@@ -1,6 +1,6 @@
 /* Task-owned Web save/return UI using Godot's public Engine callbacks only. */
 (function (root) {
-  function attach(config, requestQuit, ui) {
+  function attach(config, requestQuit, ui, audio = null) {
     let language = 'en', requested = false, finished = false, hadError = false;
     let trusted = false, finalSave = null, timer = null;
     const emit = (name, value) => console.log(name + ' ' + JSON.stringify(value));
@@ -31,14 +31,24 @@
       hadError = true;
       if (requested) fail();
     };
-    config.onExit = function (code) {
+    config.onExit = async function (code) {
+      let audioClosed = null;
+      if (audio) {
+        try {
+          const closed = await audio.close();
+          const state = JSON.parse(audio.getState());
+          audioClosed = closed === true && state.context_state === 'closed' &&
+            state.music_playing === false && state.cue_playing === false;
+          if (!audioClosed) hadError = true;
+        } catch (_) { audioClosed = false; hadError = true; }
+      }
       clearTimeout(timer);
       const ok = requested && trusted && code === 0 && !hadError &&
         finalSave !== null && finalSave.persistent === true;
       finished = ok;
       ui.show(ok ? words().saved : words().failed, ok, words().resume);
       emit('TIDAL_WEB_EXIT', {schema: 1, code, requested, trusted, ok,
-        save_after_request: finalSave !== null, saved: finalSave});
+        save_after_request: finalSave !== null, saved: finalSave, audio_closed: audioClosed});
     };
     ui.click(function (event) {
       if (requested || finished) return;
@@ -75,6 +85,6 @@
       }
     };
   }
-  root.TidalSaveExit = {attach: (config, requestQuit) => attach(config, requestQuit, browserUI())};
+  root.TidalSaveExit = {attach: (config, requestQuit) => attach(config, requestQuit, browserUI(), root.TidalWebAudio)};
   if (typeof module !== 'undefined') module.exports = {attach};
 }(typeof window === 'undefined' ? globalThis : window));
