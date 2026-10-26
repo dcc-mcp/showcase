@@ -283,6 +283,67 @@ class ControllerTests(unittest.TestCase):
                      camera_right=[.953733861446381,.300652146339417],camera_forward=[.300652146339417,-.953733861446381])
         return state
 
+    def near_deadline_waypoint(self, final_changes=None, read_delay=0):
+        # Controller fixture from failed native samples196/198/200/201. It is
+        # not new physical-input proof; the real gate must rerun separately.
+        clock, moves, evidence = [0.], [], {}
+        approaching=self.trace_state(195,[1.87268590927124,5.97809886932373],[-1.54617989063263,1.30887258052826])
+        approaching.update(physics_frame=784,camera_forward=[.28783371941117125,-.9576804007443878],
+                           camera_right=[.9576804007443878,.28783371941117125])
+        ray=chart_approach_ray(approaching,[0,-1])
+        before=self.trace_state(101,[2.65575480461121,6.7246561050415],[0,0])
+        released=self.trace_state(197,[1.77263760566711,6.06501865386963],[-.407568603754044,.345015078783035]);released['physics_frame']=792
+        coasting=self.trace_state(199,[1.74836039543152,6.0886926651001],[-.107433922588825,.0909449830651283]);coasting['physics_frame']=800
+        stopped=self.trace_state(200,[1.74553954601288,6.09238624572754],[-.0551584176719189,.0466927140951157]);stopped['physics_frame']=804
+        stopped.update(camera_forward=approaching['camera_forward'],camera_right=approaching['camera_right'])
+        if final_changes:stopped.update(final_changes)
+        current=[before]
+        def pause(seconds):
+            if clock[0] == 0:
+                clock[0]=34.9;current[0]=approaching
+            else:
+                clock[0]+=seconds
+                current[0]=stopped if clock[0]>=35.8 else coasting
+        def move(direction):
+            moves.append((clock[0],direction))
+            if tuple(direction)==(0,0) and current[0] is approaching:
+                clock[0]+=.25;current[0]=released  # Completed physical keyup barrier.
+        def observe():
+            if current[0] is stopped:clock[0]+=read_delay
+            return current[0]
+        with patch('exploration.time.monotonic',side_effect=lambda:clock[0]):
+            try:result=navigate_chart_waypoint(observe,move,pause,ray['target'],ray=ray,
+                                               braking={'seconds':.09},evidence=evidence)
+            except TimeoutError as error:result=error
+        return result,moves,evidence,clock[0],stopped
+
+    def test_near_deadline_keyup_gets_independent_bounded_settle_window(self):
+        result,moves,evidence,elapsed,stopped=self.near_deadline_waypoint()
+        self.assertIs(result,stopped)
+        self.assertIs(evidence['actual'],stopped)
+        self.assertGreater(elapsed,35)
+        self.assertLessEqual(elapsed,45)
+        self.assertTrue(all(tuple(direction)==(0,0) for at,direction in moves if at>=35))
+        self.assertEqual(moves[-1][1],(0,0))
+
+    def test_settled_receipt_returning_after_final_deadline_cannot_pass(self):
+        result,moves,evidence,_,_=self.near_deadline_waypoint(read_delay=9.5)
+        self.assertIsInstance(result,TimeoutError)
+        self.assertNotIn('actual',evidence)
+        self.assertEqual(moves[-1][1],(0,0))
+
+    def test_near_deadline_nonsettling_and_outside_staging_still_fail_closed(self):
+        for kind,changes in [('nonsettling',{'velocity':[.2,0,0]}),
+                             ('outside-staging',{'position':[1.94553954601288,.53,6.09238624572754]})]:
+            with self.subTest(kind=kind):
+                result,moves,evidence,elapsed,_=self.near_deadline_waypoint(changes)
+                self.assertIsInstance(result,TimeoutError)
+                self.assertNotIn('actual',evidence)
+                self.assertLessEqual(elapsed,45.05)
+                if kind=='nonsettling':self.assertGreaterEqual(elapsed,45)
+                self.assertTrue(all(tuple(direction)==(0,0) for at,direction in moves if at>=35))
+                self.assertEqual(moves[-1][1],(0,0))
+
     def test_camera_relative_W_and_S_target_opposing_flat_faces(self):
         state=self.trace_state(0,[1.3,10],[0,0]);first=chart_approach_ray(state,[0,1]);second=chart_approach_ray(state,[0,-1])
         self.assertEqual(first["keys"],["w"]);self.assertEqual(second["keys"],["s"])
@@ -306,7 +367,7 @@ class ControllerTests(unittest.TestCase):
                              [self.trace_state(i,position,[.2,0]) for i in range(1,20)]):
             result,moves,evidence,elapsed=self.run_waypoint(observations,ray,timeout=.2)
             self.assertIsInstance(result,TimeoutError);self.assertNotIn("actual",evidence)
-            self.assertLessEqual(elapsed,.25)
+            self.assertLessEqual(elapsed,10.05)
         moving=self.trace_state(1,position,[.2,0]);stopped=self.trace_state(2,position,[0,0])
         ray=chart_approach_ray(moving,[0,1]);moving["position"]=[ray["target"][0],.53,ray["target"][1]];stopped["position"]=moving["position"]
         result,moves,evidence,_=self.run_waypoint([moving,stopped],ray)
@@ -340,7 +401,7 @@ class ControllerTests(unittest.TestCase):
                         target,radius=.2,timeout=.2,ray=None,evidence=evidence)
             self.assertNotIn("actual",evidence)
             self.assertEqual(moves[-1],(0,0))
-            self.assertLessEqual(clock[0],.25)
+            self.assertLessEqual(clock[0],.25 if kind == 'drift' else 10.05)
         clock,cursor,moves,evidence=[0.],[0],[],{}
         observations=[self.trace_state(1,target,[0,0]),self.trace_state(2,target,[0,0])]
         def pause(seconds):

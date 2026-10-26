@@ -287,6 +287,8 @@ def settle_chart_movement(observe, move, pause, deadline=None):
         limit = min(limit, deadline)
     while time.monotonic() < limit:
         state = observe()
+        if time.monotonic() >= limit:
+            break
         if (state["sample_id"] > boundary["sample_id"] and state["physics_frame"] > boundary["physics_frame"]
                 and math.hypot(*state["movement_input"]) <= .01
                 and math.hypot(state["velocity"][0], state["velocity"][2]) <= .08):
@@ -302,6 +304,8 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
     Final contact staging needs alignment across the flat-face held ray,
     not an exact longitudinal point. Its controller-only band stays well outside
     contact; validate_chart_contact remains the sole contact acceptance gate.
+    Steering ends at timeout; an in-progress key release and brake may finish
+    within ten further seconds (45 seconds total with the default timeout).
     """
     braking = {"seconds": .12} if braking is None else braking
     evidence = {} if evidence is None else evidence
@@ -341,7 +345,7 @@ def navigate_chart_waypoint(observe, move, pause, target, radius=.45, timeout=35
                 decision = {"observed": state, "predicted_stop": predicted,
                             "coast_seconds": braking["seconds"]}
                 evidence["brakes"].append(decision)
-                stopped = settle_chart_movement(observe, move, pause, deadline)
+                stopped = settle_chart_movement(observe, move, pause, deadline+10)
                 decision["settled"] = stopped
                 actual = [stopped["position"][0], stopped["position"][2]]
                 if ray is not None:
