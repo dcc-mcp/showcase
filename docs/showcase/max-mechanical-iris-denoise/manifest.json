@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "capture_provider": "native renderer; no UI screenshots",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "blade-detail.jpg",
+      "bytes": 7178,
+      "sha256": "89f19942c6add4ab77d99ec0b39cf7f9f74e972e7374d4758980c4f8633bb9c4",
+      "width": 560,
+      "height": 123,
+      "bit_depth": 8
+    },
+    {
+      "path": "comparison-24fps.mp4",
+      "bytes": 31510,
+      "sha256": "537081cb672dd51c030b2d39138bded13651951e5b51d478f44368a44b29d610"
+    },
+    {
+      "path": "comparison-slow-review-6fps.mp4",
+      "bytes": 60686,
+      "sha256": "1fc5e05a5958ae890003c15e29ba9048eb6b0e09278a3de13110daf28edd3aea"
+    },
+    {
+      "path": "eight-frame-detail.jpg",
+      "bytes": 89122,
+      "sha256": "70fd818723dfe5152b926cbecb44ce0f460447c746321f027ff62dbd8e78f923",
+      "width": 1600,
+      "height": 454,
+      "bit_depth": 8
+    },
+    {
+      "path": "fastener-detail.jpg",
+      "bytes": 10709,
+      "sha256": "df4fb74e1af6a3cb88e182588f579a7c2cbfff660e3bb5ebd5666ca15f9b7ceb",
+      "width": 640,
+      "height": 118,
+      "bit_depth": 8
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 60782,
+      "sha256": "a22df6cdbb4372feb59567f07f4d3e4d33e42746ec100046dad28ad3d7b99cfd",
+      "width": 1600,
+      "height": 1200,
+      "bit_depth": 8
+    },
+    {
+      "path": "higher-sample-comparison.jpg",
+      "bytes": 28991,
+      "sha256": "c8ef71b9979ffc9e725cd73c97232cced8ad8cfa8df626222f4eb1aa59d8fbc0",
+      "width": 1600,
+      "height": 313,
+      "bit_depth": 8
+    },
+    {
+      "path": "oidn-24fps.mp4",
+      "bytes": 40731,
+      "sha256": "fbc9f429c6e352f8ce063f9e49d922b136f3216142587c0ad923f812a872ed43"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5069,
+      "sha256": "1445e9eb001793bf6a02d505e0ccfb99f236676afd29ea3c49f00e1d3360353f"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 2845,
+      "sha256": "0a3a38f5d320de6219fb209952f54caa2de569e8de1412ab1208cbf6f46d6200"
+    },
+    {
+      "path": "recipe.json",
+      "bytes": 78908,
+      "sha256": "dfcaa2bc760ae6e0aba9aa4363a16e8a7dedda5d36a649e87d86a24a5827edb6"
+    },
+    {
+      "path": "RIGHTS.md",
+      "bytes": 1099,
+      "sha256": "3d0bbce2c0897116c215c7804a285c1560abec1554b52942c1c23cec79012b20"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 5123,
+      "sha256": "d47d6c2b003f163eb29ff2cd3c05f36d8d5af59e11e43755523fdf0f4108b54f"
+    }
+  ]
+}
