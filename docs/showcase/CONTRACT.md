@@ -42,6 +42,13 @@ docs/showcase/<slug>/
 `README.md`, `manifest.json` and `validation.json` are all three mandatory.
 An entry missing one of them is a draft, not an entry.
 
+Every complete entry must have an explicit publication decision: select it in
+`collection.json`, or record its slug, status and concrete reason in
+`unlisted-cases.json`. The build rejects missing, conflicting and stale
+decisions before replacing its output. Unlisted assets remain unpublished.
+See [the submission guide](../../agent.dm) for exact model identifiers,
+host builds, named adapter/package versions and post-deployment checks.
+
 ## 1. `README.md` — the report
 
 Written for someone who will not run anything. It must contain, in this order:
@@ -115,8 +122,10 @@ What it must capture:
 - **Conservation results**, for a cross-host entry: the same quantity measured
   at each stage, with a `match: true | false` per stage pair.
 - **Explicit verdicts**: a `checks[]` array, one item per claim, each with
-  `name`, `result` (`pass` / `fail`) and the observed values. A `fail` carries
-  `expected` and `observed`.
+  `name`, `result` (`pass` / `fail` / `not_run`) and the observed values. A
+  `fail` carries `expected` and `observed`. A `not_run` carries a nonempty
+  textual `observed` reason explaining why it was not performed; it does not
+  describe a failed execution. Existing historical verdicts are not bulk-migrated.
 - **Boundaries**: a `not_claimed[]` array. Say plainly what the run did not
   establish.
 

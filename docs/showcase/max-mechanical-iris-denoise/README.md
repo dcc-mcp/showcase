@@ -2,7 +2,7 @@
 
 ![Native Arnold render, Noice reference, reduced for presentation](hero.jpg)
 
-An original **84-object**, **440×440×34mm** mechanical iris contains12blades,12pivot caps and48distinct fasteners. Native Max save/reopen and FBX reimport matched sampled animation matrices. A **1920×1440 AA3** hero and an **8-frame48–55** comparison retain actual render inputs. The canonical media-enhance Core Skill invokes Blender OIDN; Autodesk Noice is a separate native reference. **This is a draft evidence case, not an accepted full-film showcase.**
+An original **84-object**, **440×440×34mm** mechanical iris contains12blades,12pivot caps and48distinct fasteners. Native Max save/reopen and FBX reimport matched sampled animation matrices. A **1920×1440 AA3** hero and an **8-frame48–55** comparison retain actual render inputs. The canonical media-enhance Core Skill invokes Blender OIDN; Autodesk Noice is a separate native reference. **Published as a limited evidence case; full-film acceptance remains incomplete.**
 
 [24fps comparison](comparison-24fps.mp4) · [6fps slowed review](comparison-slow-review-6fps.mp4) · [960×720 OIDN clip](oidn-24fps.mp4) · [higher-sample comparison](higher-sample-comparison.jpg) · [pin detail](fastener-detail.jpg) · [blade detail](blade-detail.jpg) · [all-frame crops](eight-frame-detail.jpg) · [recipe](recipe.json) · [validation](validation.json) · [manifest](manifest.json) · [rights](RIGHTS.md) · [中文](README.zh-CN.md)
 
@@ -32,9 +32,9 @@ Both denoisers reduce grain. Noice looks smoother and OIDN retains more fine tex
 
 Use the adapted discovery-intent recipe with the source candidate, verify millimeter units and native cameraFOV, save retained linear EXRs, finish the render worker, then run the canonical Skill with explicit actual pass names. Keep original/raw output and a completed manifest with matching hashes. Native source files and private diagnostic logs are retained separately, pending public sanitization.
 
-Sources: [Max candidate](https://github.com/dcc-mcp/dcc-mcp-3dsmax/tree/e1b724483193dd6476d117cb7ecf15ccaab91422), [media-enhance candidate](https://github.com/dcc-mcp/dcc-media-enhance/tree/f7073694ea2abef5c5b94f36e1442be076c9bb75). Both remain unmerged candidates. Native camera regression and exact-head CI pass; final independent review is incomplete.
+Sources: [Max candidate](https://github.com/dcc-mcp/dcc-mcp-3dsmax/tree/e1b724483193dd6476d117cb7ecf15ccaab91422), [media-enhance candidate](https://github.com/dcc-mcp/dcc-media-enhance/tree/f7073694ea2abef5c5b94f36e1442be076c9bb75). The measured runs used these source candidates. Native camera regression and exact-head CI are recorded separately; final independent review is incomplete.
 
-Full-film/reversal review, actual natural-speed playback, wireframe and modifier-parameter UI inspection, normal MZP installation, MCP transport and public native-source sanitization remain open. This case is intentionally **not added to collection.json**. No source merge, public deployment or complete engineering validation is claimed.
+Full-film/reversal review, actual natural-speed playback, wireframe and modifier-parameter UI inspection, normal MZP installation, MCP transport and public native-source sanitization remain open. This case is selected in collection.json with those limits visible. Catalog admission does not establish full-film, source-release or complete engineering acceptance.
 
 [UI capture plan](UI-CAPTURE-PLAN.md) · [Video verification](video-verification.json)
 

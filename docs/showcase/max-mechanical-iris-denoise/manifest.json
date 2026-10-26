@@ -3,11 +3,6 @@
   "capture_provider": "native renderer and dcc-cua1.12.2 exact-window captures",
   "files": [
     {
-      "path": ".gitattributes",
-      "bytes": 8,
-      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
-    },
-    {
       "path": "blade-detail.jpg",
       "bytes": 7178,
       "sha256": "89f19942c6add4ab77d99ec0b39cf7f9f74e972e7374d4758980c4f8633bb9c4",
@@ -80,13 +75,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 5969,
-      "sha256": "d2b46b4115c63f362d6c047cf5a3dac2a8d139e5d30b54d0d349368b9382d2e4"
+      "bytes": 6039,
+      "sha256": "8422f373acbd458ec0c40add5de5ad750afc5b259c93f660ae03e8f6ac668c2a"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 3597,
-      "sha256": "2515be168a418ff9e825e16f55a57131901b50926796bd77d57f4247e4ac470f"
+      "bytes": 3636,
+      "sha256": "059386cd2ffa77b842d9371dc7aa2c533ec9c9dd7e9da7db8b2ead4177f19aee"
     },
     {
       "path": "recipe.json",
@@ -110,8 +105,8 @@
     },
     {
       "path": "validation.json",
-      "bytes": 7911,
-      "sha256": "7665bfb07cee21a0d738e1e0541f3f3d6338cb117f31dbbb2a5efbc8fb7e51a5"
+      "bytes": 8261,
+      "sha256": "9e02b64329283ec790d1784a312991f53d71261cd507eb41f20b9a882e9b2520"
     },
     {
       "path": "video-verification.json",

@@ -2,7 +2,7 @@
 
 ![真实Arnold渲染，Noice参考，缩小展示](hero.jpg)
 
-原生工程含84对象：12叶片、12轴帽、48个独立紧固件，外壳440×440×34mm。1920×1440/AA3主图、帧48–55的8帧短段和AA6参考均来自真实Max渲染。正式media-enhance Core Skill调用Blender OIDN；Autodesk Noice作为独立原生参考。本案例是草稿，未作为完整影片验收或加入线上精选集。
+原生工程含84对象：12叶片、12轴帽、48个独立紧固件，外壳440×440×34mm。1920×1440/AA3主图、帧48–55的8帧短段和AA6参考均来自真实Max渲染。正式media-enhance Core Skill调用Blender OIDN；Autodesk Noice作为独立原生参考。本案例以有限证据公开加入案例目录，不代表完整影片验收。
 
 [24fps三路原速](comparison-24fps.mp4) · [6fps慢速审阅](comparison-slow-review-6fps.mp4) · [960×720 OIDN](oidn-24fps.mp4) · [AA6对照](higher-sample-comparison.jpg) · [紧固件](fastener-detail.jpg) · [叶片边缘](blade-detail.jpg) · [连续帧裁剪](eight-frame-detail.jpg) · [配方](recipe.json) · [验证](validation.json) · [文件哈希](manifest.json) · [权利边界](RIGHTS.md) · [English](README.md)
 
@@ -14,7 +14,7 @@
 
 AA6参考用时272.515秒，是更高采样观察而非真值。两后端均减轻可见颗粒；Noice较平顺，OIDN略多细纹理，孔尖角、细金环及紧固件轮廓在已检查静帧中仍可辨。没有据此做无依据质量评分。全部帧解码和连续裁剪检查不等于真实自然速度播放；本轮已补真实编辑器截图，但线框和播放仍未验收。
 
-复现需使用适配器候选与改写配方，重新发现工具、核原生单位与FOV，保存真实引导EXR，退出渲染进程后再执行正式Skill，并验证完成manifest和原始哈希。原生工程及私有日志仍保留待公开副本清理。完整144帧、换向时序、实际播放、线框与修改器参数界面、正常MZP安装、MCP通信及最终独立评审尚未通过，不合并或部署此草稿。
+复现需使用适配器候选与改写配方，重新发现工具、核原生单位与FOV，保存真实引导EXR，退出渲染进程后再执行正式Skill，并验证完成manifest和原始哈希。原生工程及私有日志仍保留待公开副本清理。完整144帧、换向时序、实际播放、线框与修改器参数界面、正常MZP安装、MCP通信及最终独立评审尚未通过；本次目录收录不把这些未完成阶段改记为通过。
 
 [真实界面截图计划](UI-CAPTURE-PLAN.md) · [Video verification](video-verification.json)
 
