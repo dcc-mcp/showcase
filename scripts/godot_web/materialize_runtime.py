@@ -7,7 +7,7 @@ HTTP ranges avoid fetching the 1.2 GB cross-platform export-template archive.
 import argparse,hashlib,http.client,io,json,tempfile,time,urllib.error,urllib.request,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
-URL='https://godot-releases.nbg1.your-objectstorage.com/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz'
+URL='https://github.com/godotengine/godot-builds/releases/download/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz'
 TEMPLATE_SHA='1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9'
 MEMBER='templates/web_nothreads_release.zip'
 RANGE_CHUNK_SIZE=1024*1024
