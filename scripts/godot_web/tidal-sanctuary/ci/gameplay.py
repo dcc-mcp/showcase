@@ -3,15 +3,15 @@ from __future__ import annotations
 import math
 import time
 from observers import finite_vector, positive_integer
-from corridor import ChartCorridor, REGIONS, inside_region, xz
+from corridor import ChartCorridor, FORBIDDEN, REGIONS, inside_region, xz
 
 # The authored public route is intentionally explicit. CI must physically reach each
 # point through the same controller as a player. No game-state setter is exposed.
 ROUTE = [
-    {"name": "read the beach map", "target": [1.3, 7.8], "stage": 1},
+    {"name": "read the beach map", "target": [1.3, 7.8], "approach": [1.3, 9.0], "map_staging": True, "stage": 1},
     # Keep real input outside the legitimate map plinth plus player capsule.
-    {"name": "step east clear of the map plinth", "target": [2.6, 8.7], "corridor_region": "southeast"},
-    {"name": "walk around the east side of the map plinth", "target": [2.6, 6.4], "corridor_region": "northeast"},
+    {"name": "step east clear of the map plinth", "target": [2.8, 9.1], "corridor_region": "southeast"},
+    {"name": "walk around the east side of the map plinth", "target": [2.8, 6.4], "corridor_region": "northeast"},
     {"name": "open the inland cache", "target": [-3.8, 3.4], "stage": 2, "screenshot": "tidal-02.png"},
     {"name": "enter the sheltered bay", "target": [1.5, 6.2]},
     {"name": "recover the sea treasure", "target": [8.2, 5.5], "stage": 3},
@@ -152,7 +152,8 @@ def inside_interaction_region(state, point):
     # The approach point guides steering, not the game's usable pickup region.
     # Actual availability also establishes production height/line-of-sight checks.
     return (state.get("interaction_available") is True
-            and horizontal_distance(state, point["target"]) < INTERACTION_RADIUS)
+            and horizontal_distance(state, point["target"]) < INTERACTION_RADIUS
+            and (not point.get("map_staging") or xz(state)[1] > FORBIDDEN[3]))
 
 
 def mode_sequence(samples):
@@ -344,6 +345,8 @@ class RouteDriver:
             raise ValueError("A physical action is already pending for this milestone")
         if horizontal_distance(state, point["target"]) >= INTERACTION_RADIUS:
             raise ValueError("Physical action was requested outside the authored interaction range")
+        if point.get("map_staging") and xz(state)[1] <= FORBIDDEN[3]:
+            raise ValueError("Map action requires actual south staging outside chart clearance")
         if not self.settled_after_stop(state, point):
             raise ValueError("Physical action requires fresh neutral and settled physics after the stop callback")
         if state.get("interaction_available") is not True:
@@ -511,6 +514,19 @@ class RouteDriver:
                     approach = point.get("approach", point["target"])
                     if self.chart_corridor is not None and self.chart_corridor.escaping:
                         approach = self.chart_corridor.receipt["entry_escape"]["target"]
+                    elif "corridor_region" in point:
+                        # A conservative .2 physics-second coast only triggers
+                        # braking. Fresh neutral actual position decides arrival.
+                        position, velocity = state["position"], state["velocity"]
+                        predicted = {**state, "position": [position[0]+velocity[0]*.2,
+                                     position[1], position[2]+velocity[2]*.2]}
+                        if inside_approach(state, point) or inside_approach(predicted, point):
+                            state = self.settled_snapshot_state(state)
+                            self.check_waypoint_budget(state)
+                            if not inside_approach(state, point):
+                                self.move(direction_to(state, approach))
+                                self.pause(.1)
+                                continue
                     if self.milestone_reached(state, point):
                         if "corridor_region" in point:
                             self.chart_corridor.arrive(point["corridor_region"], state)
