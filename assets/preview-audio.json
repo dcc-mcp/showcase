@@ -127,6 +127,18 @@
       "sha256": "c067855b6aae03ec7fa628cb00c7c4d2b0a9a104490d1f7512f08a4157852a83",
       "has_audio": false,
       "audio_streams": []
+    },
+    {
+      "src": "docs/showcase/godot-mage-vfx/demo.mp4",
+      "sha256": "5a8c590c3eb2b2067c92a9e0142a1aeea3e9ef538505d934473ed0c361000bd2",
+      "has_audio": true,
+      "audio_streams": [
+        {
+          "codec_name": "aac",
+          "sample_rate": "48000",
+          "channels": 2
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "godot_application": "Godot Engine",
+  "godot_version": "4.7.2.stable.official.ed1daf0bf",
+  "capture_provider": "host-native",
+  "files": [
+    {
+      "path": "capture_public.gd",
+      "bytes": 8040,
+      "sha256": "29f2869ca1d3901ec419f72f6a339de28f1d8e8f781d621cf952e7a1c2d9a602"
+    },
+    {
+      "path": "demo.mp4",
+      "bytes": 2351301,
+      "sha256": "5a8c590c3eb2b2067c92a9e0142a1aeea3e9ef538505d934473ed0c361000bd2",
+      "width": 1280,
+      "height": 720,
+      "frames": 480,
+      "fps": 30
+    },
+    {
+      "path": "godot-mage-vfx.zip",
+      "bytes": 1644173,
+      "sha256": "6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248"
+    },
+    {
+      "path": "hero.jpg",
+      "bytes": 60939,
+      "sha256": "7fffcf10045378d4433aeb0d8946be32015c42c1d3b7dbc65a20fc4d393b327a",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 1131,
+      "sha256": "8abbc364538db2422dbba6495d148b5b44867a7b84c1b7dc0027bb5d0c5877cc"
+    },
+    {
+      "path": "public-media-evidence.json",
+      "bytes": 4178,
+      "sha256": "83832059828df138de2d3c0a75ad31fe6113c3e9fbd0e2fdbc2982947e37c772"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3885,
+      "sha256": "0c884dab5c0353844ca3656386dfc8ca9e718509d041337338dce821bd8e8090"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 6996,
+      "sha256": "755cf5fbcda7276a2845715c79f6e3b6ab0680b0685ef5f033cbcc9f30520270"
+    }
+  ]
+}

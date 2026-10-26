@@ -5950,6 +5950,276 @@
           "change": "仅修改运行文件 main.gd 并补充已有专项测试：失败返回标题保留内存进度，胜利探索/失败重试不回滚旧档，修复缓存未拾取掉落定位。57+5+25 项限定检查通过，重打包并导出；最新实际界面在输入前遮挡阻塞，新 Web 包未测，原生完整路线/Web 冒烟/影片保留为历史精确版本。"
         }
       ]
+    },
+    {
+      "slug": "godot-mage-vfx",
+      "title": "法师施法与可复用特效",
+      "subtitle": "Godot · Hyper3D 法师与原生有声特效 · Draft 候选",
+      "software": [
+        "Godot"
+      ],
+      "capabilities": [
+        "法术特效",
+        "动画与声音联动",
+        "可复用技能"
+      ],
+      "cover": {
+        "src": "docs/showcase/godot-mage-vfx/hero.jpg",
+        "alt": "Hyper3D 法师与紫色法术命中、地面光环和动态光照"
+      },
+      "evidence_label": "Draft 候选 · 原生与导出检查通过 · 人工视听待验",
+      "evidence_scope": "16 秒自然速度原生影片，含 Godot 生成的施法声音。全新解包、保存重开和 Windows 导出启动通过；完整解码与 54 帧抽样审阅完成。人工视听、实际输入和目标设备性能未验；参考视频完整动效不可用，未声称高保真复刻。",
+      "summary": "将 Hyper3D 法师的骨骼施法动画与蓄力、飞行、接触、光环及声音连接，保留六类可复用原生预设。",
+      "goal": "把攻击、法术和光环整理为可复制到未来游戏的原生场景、技能说明与验证记录，并保持表现与伤害逻辑分离。",
+      "prompt": {
+        "kind": "reusable",
+        "text": "在同一 Godot 工程中复用六类预设，为已授权模型绑定施法骨骼与声音事件；保留可编辑参数、原生影片、可重开工程和明确验收边界。",
+        "note": "面向复现的可复用制作说明，并非私人对话逐字稿。"
+      },
+      "environment": [
+        {
+          "label": "宿主版本读取",
+          "value": "Godot 4.7.2.stable.official.ed1daf0bf"
+        },
+        {
+          "label": "适配器版本读取",
+          "value": "dcc-mcp-godot 0.9.12 · 可编辑安装；VFX 为未发布候选"
+        },
+        {
+          "label": "核心组件",
+          "value": "dcc-mcp-core 0.20.48"
+        },
+        {
+          "label": "服务端组件",
+          "value": "dcc-mcp-server 0.20.48"
+        },
+        {
+          "label": "后期工具版本读取",
+          "value": "FFmpeg 8.1.1-full_build-www.gyan.dev"
+        },
+        {
+          "label": "本片渲染范围",
+          "value": "Godot 桌面 Forward+ 原生帧；不代表 Web 或实体手机验收"
+        }
+      ],
+      "tools": [
+        {
+          "name": "godot-vfx / godot-shader",
+          "description": "现有技能与模板提供六类原生预设、法师演示和参数说明；本次 MCP 桥接运行仍因 ownership_conflict 阻塞。"
+        },
+        {
+          "name": "Godot Movie Maker / FFmpeg",
+          "description": "原生引擎输出画面和声音；编码保留原速度，含两处硬切和片尾淡出，不含 AI 生成帧或后期补加法术音效。"
+        }
+      ],
+      "steps": [
+        {
+          "title": "复用授权法师",
+          "description": "Hyper3D / Rodin Gen-2.5 提供网格和 PBR；本地制作 20 骨骼、Idle/Cast 动画和施法挂点，模型来源与软件许可分别说明。"
+        },
+        {
+          "title": "组合六类预设",
+          "description": "网格火焰、粒子火焰、斩击、命中、光环与弹体共享现有画廊及生命周期约定，可复制到游戏工程。"
+        },
+        {
+          "title": "绑定真实施法与接触事件",
+          "description": "蓄力、释放和接触分别驱动画面与声音；测试 7 次释放、6 次接触和一次落空，落空没有命中反馈。"
+        },
+        {
+          "title": "分别记录原生与媒体证据",
+          "description": "保留六预设、保存重开与 ZIP 解包运行结果，并将影片解码、模型画面审阅和人工视觉验收分开。"
+        }
+      ],
+      "results": [
+        {
+          "src": "docs/showcase/godot-mage-vfx/demo.mp4",
+          "poster": "docs/showcase/godot-mage-vfx/hero.jpg",
+          "alt": "法师施法与六预设的原生有声演示",
+          "caption": "480 帧、1280×720、30 fps、H.264 与 AAC 立体声。视频 16 秒，容器 16.021 秒含音频编码尾部；脚本驱动，人工听感与视觉验收待完成。"
+        }
+      ],
+      "checks": [
+        {
+          "name": "工程与声音原生验证",
+          "result": "pass",
+          "observed": "32 文件 ZIP 全新解包导入、默认入口、Hyper3D 与程序化角色、六预设通过；自定义音频保存重开后仍由事件驱动。"
+        },
+        {
+          "name": "Windows 导出启动",
+          "result": "pass",
+          "observed": "Godot 4.7.2 Windows debug 导出成功，独立 EXE 无界面启动 300 帧并退出；不代表窗口输入或渲染验收。"
+        },
+        {
+          "name": "影片解码与声音测量",
+          "result": "pass",
+          "observed": "480 帧完整解码；音轨峰值 -20.74 dBFS，削波样本为零。测量不代替人工听感判断。"
+        },
+        {
+          "name": "人工视听审阅",
+          "result": "not_run",
+          "observed": "仅完成模型抽样审阅 54 帧；10.667–10.767 秒命中光芒经过画廊标签，仍可读。未完成自然速度人工视听。"
+        },
+        {
+          "name": "MCP 工具桥接",
+          "result": "unknown",
+          "observed": "blocked：当前桥接因 ownership_conflict 无法完成，未声明本轮 MCP 工具调用验收通过。"
+        },
+        {
+          "name": "原生键鼠输入",
+          "result": "not_run",
+          "observed": "未执行普通键鼠输入验收；脚本施法与计数检查不能代替。"
+        },
+        {
+          "name": "Godot Web 导出与交互",
+          "result": "not_run",
+          "observed": "本候选限定为影片与原生源码；未执行 Web 导出或浏览器游戏交互验收。"
+        },
+        {
+          "name": "实体手机运行",
+          "result": "not_run",
+          "observed": "未在实体手机运行；桌面渲染不代表手机表现。"
+        },
+        {
+          "name": "游戏规模并发性能",
+          "result": "not_run",
+          "observed": "未测游戏规模并发特效的帧时间、显存或目标设备预算。"
+        },
+        {
+          "name": "线上双语播放器",
+          "result": "not_run",
+          "observed": "尚未部署；未验证线上英文或中文页面的播放、暂停、跳转与资源下载。"
+        }
+      ],
+      "limitations": [
+        "这是同一案例的普通 Draft PR 候选，未合并、发布或部署。",
+        "高质量法阵参考的完整视频不可用；章节与缩略图不能证明动效、曝光或光影匹配。",
+        "当前声音是原创合成提示音；人工视听、真实键鼠、Web、实体手机和游戏规模性能尚未验收。",
+        "本轮 MCP 桥接因 ownership_conflict 阻塞，原生引擎通过不等于 MCP 调用通过。",
+        "特效属于表现层；伤害、命中权威、输入缓冲和游戏连招窗口尚未实现。",
+        "Hyper3D 生成网格和 PBR 按用户明确授权纳入并署名；未伪造供应商许可证，也不将其列为 MIT。"
+      ],
+      "resources": [
+        {
+          "label": "法师与特效工程 ZIP",
+          "url": "docs/showcase/godot-mage-vfx/godot-mage-vfx.zip"
+        },
+        {
+          "label": "原生演示影片",
+          "url": "docs/showcase/godot-mage-vfx/demo.mp4"
+        },
+        {
+          "label": "原生主图",
+          "url": "docs/showcase/godot-mage-vfx/hero.jpg"
+        },
+        {
+          "label": "制作与复现说明",
+          "url": "docs/showcase/godot-mage-vfx/README.md"
+        },
+        {
+          "label": "机器可读验证",
+          "url": "docs/showcase/godot-mage-vfx/validation.json"
+        },
+        {
+          "label": "文件清单与哈希",
+          "url": "docs/showcase/godot-mage-vfx/manifest.json"
+        },
+        {
+          "label": "权利与来源",
+          "url": "docs/showcase/godot-mage-vfx/LICENSES.md"
+        },
+        {
+          "label": "公开媒体证据",
+          "url": "docs/showcase/godot-mage-vfx/public-media-evidence.json"
+        },
+        {
+          "label": "独立 Shader 使用手册",
+          "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837/docs/shader-manual.md"
+        }
+      ],
+      "credits": {
+        "author": "DCC-MCP contributors",
+        "license": "原创代码、特效和文档采用 MIT；Hyper3D 网格和 PBR 另列来源及许可范围。",
+        "note": "模型：Hyper3D / Rodin Gen-2.5。骨骼、动画、声音和 Godot 特效：DCC-MCP contributors。未分发教程影片或第三方纹理库资产。"
+      },
+      "source": {
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
+        "commit": "3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837",
+        "title": "Shader 与 VFX 源码 · 未发布候选"
+      },
+      "verified_at": "2026-10-27",
+      "model_attribution": [
+        {
+          "stage_id": "planning",
+          "stage": "策划",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
+          "scope": "策划阶段；原角色施法研究及其修订"
+        },
+        {
+          "stage_id": "creation",
+          "stage": "制作",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
+          "scope": "制作阶段；原角色施法研究及其修订"
+        },
+        {
+          "stage_id": "code",
+          "stage": "代码",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
+          "scope": "代码阶段；原角色施法研究及其修订"
+        },
+        {
+          "stage_id": "reference",
+          "stage": "参考",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
+          "scope": "参考阶段；原角色施法研究及其修订"
+        },
+        {
+          "stage_id": "post_production",
+          "stage": "媒体处理",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
+          "scope": "媒体处理阶段；原角色施法研究及其修订"
+        },
+        {
+          "stage_id": "review",
+          "stage": "审阅",
+          "model": "Unknown",
+          "reasoning_effort": "Unknown",
+          "record_status": "unknown",
+          "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
+          "scope": "审阅阶段；原角色施法研究及其修订"
+        }
+      ],
+      "revision_notes": [
+        {
+          "version": "未发布收录草稿",
+          "date": "2026-10-26",
+          "change": "准备历史基线、明确限制和双语候选；未发布、合并或部署。"
+        },
+        {
+          "version": "程序化六预设 v4 · Draft 候选",
+          "date": "2026-10-27",
+          "change": "候选改用原创程序化角色、六预设、16 秒影片与已验收源码 ZIP；绑定实际源码提交，保留 Unknown 阶段归属及未测项。未部署。"
+        },
+        {
+          "version": "Hyper3D 有声版本 · Draft 候选",
+          "date": "2026-10-27",
+          "change": "按用户授权纳入现有模型并署名，补充事件声音、原生工程包、音频保存重开、Windows 导出和独立 Shader 手册；保留历史研究和未测项。"
+        }
+      ]
     }
   ]
 }
