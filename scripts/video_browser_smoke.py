@@ -144,6 +144,7 @@ def assert_paused_gallery_preview(before, after):
         assert frame['readyState'] >= 2 and frame['width'] > 0 and frame['height'] > 0 \
             and frame['visible'] is True, 'Paused decoded frame hidden or cleared'
         _finite_time(frame['currentTime'])
+        assert frame['currentTime'] > 0, 'Paused playback never advanced'
     assert before['src'] == after['src'] and before['currentSrc'] == after['currentSrc'], 'Paused source changed'
     assert before['currentTime'] == after['currentTime'], 'Paused position changed'
 
@@ -293,6 +294,7 @@ def run(site: Path, output: Path):
                             page.keyboard.press('Enter')
                             expect(card).to_have_attribute('data-preview-state', 'playing')
                             assert video.evaluate('(v)=>!v.paused && v.videoWidth>0 && v.loop')
+                            page.wait_for_function('(v)=>v.currentTime>0.05', arg=video.element_handle())
                             video.evaluate('(v)=>v.pause()')
                             expect(card).to_have_attribute('data-preview-state', 'paused')
                             page.wait_for_function('(v)=>Number(getComputedStyle(v).opacity)>0 && v.readyState>=2', arg=video.element_handle())

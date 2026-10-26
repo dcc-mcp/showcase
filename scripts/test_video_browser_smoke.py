@@ -157,6 +157,11 @@ class GalleryPauseObservationTests(unittest.TestCase):
     def test_short_loop_pause_keeps_its_frame_without_requiring_time_progress(self):
         assert_paused_gallery_preview(self.paused, dict(self.paused))
 
+    def test_two_zero_positions_do_not_prove_pause_retention(self):
+        self.paused['currentTime'] = 0
+        with self.assertRaisesRegex(AssertionError, 'never advanced'):
+            assert_paused_gallery_preview(self.paused, dict(self.paused))
+
     def test_hover_cannot_restart_detach_seek_or_hide_the_paused_frame(self):
         for changes in [{'state': 'idle'}, {'state': 'playing', 'paused': False}, {'src': None},
                         {'currentSrc': ''}, {'src': 'other.mp4'}, {'currentTime': 0}, {'readyState': 0},

@@ -193,6 +193,24 @@ test("a native resume that never plays still reaches the load timeout", () => {
   assert.equal(e.video.src, null); assert.equal(e.source.hasAttribute("src"), false);
 });
 
+test("native resume before queued pause gets a fresh deadline and ignores its old watchdog", () => {
+  const f = fixture(), e = f.entries[0];
+  e.video.emit("pointerdown"); e.video.paused = false; e.video.emit("play");
+  const oldWatchdog = [...f.timers.keys()][0], oldTimeout = f.timers.get(oldWatchdog);
+  e.video.pause(); // Its pause event is still queued when the user resumes.
+  e.video.paused = false; e.video.emit("play");
+  assert.equal(f.timers.size, 1); assert.equal(f.timers.has(oldWatchdog), false);
+  const resumedWatchdog = [...f.timers.keys()][0];
+  e.video.emit("pause"); oldTimeout();
+  assert.equal(e.host.dataset.videoState, "loading");
+  assert.equal(f.timers.has(resumedWatchdog), true);
+  // Repeated buffering events cannot postpone the resumed attempt's deadline.
+  e.video.emit("waiting"); e.video.emit("waiting");
+  assert.equal(f.timers.size, 1); assert.equal(f.timers.has(resumedWatchdog), true);
+  f.timers.get(resumedWatchdog)();
+  assert.equal(e.host.dataset.videoState, "error");
+});
+
 test("stale pause and timeout callbacks cannot clear a newer run's watchdog", () => {
   const f = fixture({mode: "defer"}), e = f.entries[0];
   e.video.emit("pointerdown"); e.video.paused = false; e.video.emit("play");

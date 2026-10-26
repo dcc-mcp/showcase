@@ -120,6 +120,11 @@ update();
         state(entry, "watching");
       } else stop(entry, "error");
     };
+    const armWatchdog = () => {
+      window.clearTimeout(run.timer);
+      const timer = window.setTimeout(() => { if (run.timer === timer) failed(); }, 12000);
+      run.timer = timer;
+    };
     const playing = () => {
       if (active !== run) {
         if (!active || active.entry !== entry) video.pause();
@@ -136,12 +141,12 @@ update();
       run.timer = null;
       state(entry, "watching");
     };
-    const loading = () => {
-      if (active !== run || run.automatic || video.paused || run.timer !== null) return;
+    const loading = (restart = false) => {
+      if (active !== run || run.automatic || video.paused || (!restart && run.timer !== null)) return;
       state(entry, "loading");
-      run.timer = window.setTimeout(failed, 12000);
+      armWatchdog();
     };
-    const handlers = {playing, pause: paused, play: loading, waiting: loading, error: failed};
+    const handlers = {playing, pause: paused, play: () => loading(true), waiting: () => loading(), error: failed};
     Object.entries(handlers).forEach(([name, callback]) => video.addEventListener(name, callback));
     run.dispose = () => {
       window.clearTimeout(run.timer);
@@ -152,7 +157,7 @@ update();
     video.loop = automatic;
     if (!adoptNativePlayback) video.src = entry.source;
     state(entry, "loading");
-    run.timer = window.setTimeout(failed, 12000);
+    armWatchdog();
     if (adoptNativePlayback) return; // The native play action is already underway.
     try {
       const promise = video.play();

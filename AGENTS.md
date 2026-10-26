@@ -33,7 +33,7 @@ permission to publish, merge or deploy.
 
 `Maya 2025` 是宿主版本，`dcc-mcp-maya` 的包版本必须另行读取。`dcc-mcp-blender` 与 `dcc-mcp-maya` 也不能统称为同一个“DCC-MCP 版本”。
 
-将版本写入 `collection.json` 的 `environment` 行，网页与 Agent/Data 会展示这些行。下面仅演示已有案例的格式，**不能复制成另一个案例的事实**：
+新案例或实质制作修订需在 `collection.json` 的 `environment` 行展示其公开范围所用版本，网页与 Agent/Data 会展示这些行。保留已有历史行及其范围，不以本轮审阅或升级后的环境覆盖旧事实。下面仅演示已有案例的格式，**不能复制成另一个案例的事实**：
 
 ```json
 "environment": [
@@ -44,7 +44,7 @@ permission to publish, merge or deploy.
 ]
 ```
 
-保留可核对的原始读取结果，在公开记录中使用脱敏的依据和哈希。可选的 `production-evidence.json.environment` 已有 `role/component/version/evidence` 格式；需要结构化证据时复用它，不再维护另一套版本清单。
+保留可核对的原始读取结果，在公开记录中使用脱敏的依据和哈希。新执行或审阅可按[证据规则](skills/dcc-showcase-production/references/evidence.md)使用可选的 `production-evidence.json`，注明日期、来源与范围，在案例中链接并纳入 `manifest.json`；其 `environment` 已有 `role/component/version/evidence` 格式，不另建必填版本清单，也不以新记录回填历史结果或归属。后续补作仍按下节既有 `supplement_*` 规则记录。
 
 ## 2. 模型归属必须分阶段
 
