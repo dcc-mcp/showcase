@@ -122,8 +122,10 @@ What it must capture:
 - **Conservation results**, for a cross-host entry: the same quantity measured
   at each stage, with a `match: true | false` per stage pair.
 - **Explicit verdicts**: a `checks[]` array, one item per claim, each with
-  `name`, `result` (`pass` / `fail`) and the observed values. A `fail` carries
-  `expected` and `observed`.
+  `name`, `result` (`pass` / `fail` / `not_run`) and the observed values. A
+  `fail` carries `expected` and `observed`. A `not_run` carries a nonempty
+  textual `observed` reason explaining why it was not performed; it does not
+  describe a failed execution. Existing historical verdicts are not bulk-migrated.
 - **Boundaries**: a `not_claimed[]` array. Say plainly what the run did not
   establish.
 

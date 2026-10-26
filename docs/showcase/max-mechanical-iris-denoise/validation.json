@@ -97,7 +97,7 @@
     },
     {
       "name": "new full-film temporal acceptance",
-      "result": "fail",
+      "result": "not_run",
       "expected": "complete new144frame production/continuous and reverse-motion review",
       "observed": "only short interval produced;full production deferred by user"
     }

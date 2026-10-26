@@ -6,7 +6,6 @@
   "渲染": "Rendering",
   "后期处理": "Post-production",
   "验证": "Verification",
-  "真实 Arnold 渲染中的青铜色机械光圈与金色紧固件": "A teal mechanical iris and brass fasteners in an actual Arnold render",
   "有限验证 · 原生结构、真实通道与两张 Max 界面": "Limited verification · Native geometry, real guide channels and two Max UI captures",
   "84 个对象的原生保存重开与 FBX 重导入、同源 OIDN/Noice 对照及 8 帧短段。两张 DCC-CUA 实际界面图包含一次后台 UIA 页签操作；完整影片、线框、安装与 MCP 通信尚未验收。": "Native save/reopen and FBX reimport of 84 objects, same-input OIDN/Noice comparisons and an eight-frame interval. Two actual DCC-CUA UI captures include one background UIA tab action; full-film, wireframe, installation and MCP transport acceptance remain open.",
   "12 片叶片、12 个轴帽和 48 个独立紧固件组成 440 × 440 × 34 mm 机械光圈。展示原生主图、真实 Max 界面及 RAW／Skill OIDN／Noice 对照；短段不替代完整动画。": "Twelve blades, twelve pivot caps and 48 distinct fasteners form a 440 × 440 × 34 mm mechanical iris. Native renders, real Max UI captures and RAW / Skill OIDN / Noice comparisons are available; the short interval does not replace a complete animation.",
@@ -73,5 +72,6 @@
   "Core / Server 运行组件": "Core / Server runtime packages",
   "0.2.0 源码候选 / f7073694ea2abef5c5b94f36e1442be076c9bb75": "0.2.0 source candidate / f7073694ea2abef5c5b94f36e1442be076c9bb75",
   "Blender 5.1.1 compositor OIDN；内嵌 OIDN 版本未独立记录，保持未知": "Blender 5.1.1 compositor OIDN; embedded OIDN version was not independently recorded and remains unknown",
-  "加入可见案例目录，完整影片与换向审阅按用户安排延后、保持未测，并保留安装、通信、线框缺口；公开不等于所有阶段验收。": "Added to the visible case catalog; full-film and reversal review are deferred at the user’s direction and remain untested, alongside installation, transport and wireframe gaps. Publication does not mean acceptance of every stage."
+  "加入可见案例目录，完整影片与换向审阅按用户安排延后、保持未测，并保留安装、通信、线框缺口；公开不等于所有阶段验收。": "Added to the visible case catalog; full-film and reversal review are deferred at the user’s direction and remain untested, alongside installation, transport and wireframe gaps. Publication does not mean acceptance of every stage.",
+  "真实 Arnold 渲染中的青绿色机械光圈与金色紧固件": "A teal mechanical iris and gold fasteners in an actual Arnold render"
 }

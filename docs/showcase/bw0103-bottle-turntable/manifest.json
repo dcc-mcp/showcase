@@ -25,12 +25,12 @@
     },
     {
       "path": "README.md",
-      "sha256": "bb088658c54f97429b52a4ce3bc2f89dd1f73d53f6ce8cffef16cfe3ef250031",
+      "sha256": "43e06f30b4ef79767661619a383d0eb7745c2649e8d79c07fab5c98b8c2a17c0",
       "bytes": 3836
     },
     {
       "path": "README.zh.md",
-      "sha256": "3f359646f810e5818e5b790302f63a9a6021662cdd62ccc03deabe4ed43eb4fd",
+      "sha256": "1601eb558e9e8af1ecec206d28966764a617f51f6b9ea17ebe44c5202a7aea7c",
       "bytes": 3335
     },
     {
@@ -47,8 +47,8 @@
     },
     {
       "path": "validation.json",
-      "sha256": "3615325451b118dc2cf173ec48f30f3f81806e7c675a2740cf8006ba78b30904",
-      "bytes": 10604
+      "sha256": "ba673084c826b6a0e10073ea7fe22412dd351ea21aae85adf24597d32da12d7c",
+      "bytes": 10728
     }
   ],
   "review_status": "selected production study; publication-quality visual review failed"

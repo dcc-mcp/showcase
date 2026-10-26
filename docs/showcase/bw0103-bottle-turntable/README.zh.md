@@ -2,15 +2,15 @@
 
 ![原片第61帧；银色组件反光缺陷仍可见](hero.jpg)
 
+**作为真实制作研究公开，视觉验收保持失败。** 这段真实 Blender 视频为 1080 × 1080 像素、30 fps、180 帧、6 秒，完整解码通过。但银色泵头、泵杆和项圈仍有明显凹陷或融化般的反光，视觉验收保持失败。空白标签是原设计要求。
+
+[原片第61帧](hero.jpg) · [视频](turntable.mp4) · [测量与验收状态](validation.json) · [历史 MCP 证据摘录](provenance.json) · [文件清单](manifest.json) · [权利说明](LICENSES.md)
+
 <video controls preload="metadata" src="turntable.mp4" aria-label="BW0103 原始泵瓶转台视频，视觉验收尚未通过">
   <a href="turntable.mp4">下载原始转台视频</a>
 </video>
 
 [观看原始转台视频](turntable.mp4) · [English](README.md)
-
-**作为真实制作研究公开，视觉验收保持失败。** 这段真实 Blender 视频为 1080 × 1080 像素、30 fps、180 帧、6 秒，完整解码通过。但银色泵头、泵杆和项圈仍有明显凹陷或融化般的反光，视觉验收保持失败。空白标签是原设计要求。
-
-[原片第61帧](hero.jpg) · [视频](turntable.mp4) · [测量与验收状态](validation.json) · [历史 MCP 证据摘录](provenance.json) · [文件清单](manifest.json) · [权利说明](LICENSES.md)
 
 ## 实际制作内容
 

@@ -21,7 +21,7 @@
       ],
       "cover": {
         "src": "docs/showcase/max-mechanical-iris-denoise/hero.jpg",
-        "alt": "真实 Arnold 渲染中的青铜色机械光圈与金色紧固件"
+        "alt": "真实 Arnold 渲染中的青绿色机械光圈与金色紧固件"
       },
       "evidence_label": "有限验证 · 原生结构、真实通道与两张 Max 界面",
       "evidence_scope": "84 个对象的原生保存重开与 FBX 重导入、同源 OIDN/Noice 对照及 8 帧短段。两张 DCC-CUA 实际界面图包含一次后台 UIA 页签操作；完整影片、线框、安装与 MCP 通信尚未验收。",

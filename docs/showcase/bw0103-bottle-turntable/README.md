@@ -2,15 +2,15 @@
 
 ![Original frame61; silver-component defects remain visible](hero.jpg)
 
+**Published as a production study. Visual acceptance remains failed.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
+
+[Original frame61](hero.jpg) · [Film](turntable.mp4) · [Measurements and review](validation.json) · [Historical MCP excerpts](provenance.json) · [Inventory](manifest.json) · [Rights](LICENSES.md)
+
 <video controls preload="metadata" src="turntable.mp4" aria-label="Original BW0103 bottle turntable, pending visual acceptance">
   <a href="turntable.mp4">Download the original turntable</a>
 </video>
 
 [Watch the original turntable](turntable.mp4) · [简体中文](README.zh.md)
-
-**Published as a production study. Visual acceptance remains failed.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
-
-[Original frame61](hero.jpg) · [Film](turntable.mp4) · [Measurements and review](validation.json) · [Historical MCP excerpts](provenance.json) · [Inventory](manifest.json) · [Rights](LICENSES.md)
 
 ## What was actually produced
 

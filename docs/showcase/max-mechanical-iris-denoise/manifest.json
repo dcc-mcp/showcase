@@ -105,8 +105,8 @@
     },
     {
       "path": "validation.json",
-      "bytes": 8258,
-      "sha256": "00f3667e4223f949418a2805ebc6eecdb993140ea8d564859357558ae80b8d00"
+      "bytes": 8261,
+      "sha256": "9e02b64329283ec790d1784a312991f53d71261cd507eb41f20b9a882e9b2520"
     },
     {
       "path": "video-verification.json",

@@ -64,7 +64,7 @@
     {
       "name": "Historical gallery selection (2026-10-22)",
       "result": "pass",
-      "observed": "This slug is absent from collection.json. No site, locale catalog or accepted-case selection is added."
+      "observed": "On 2026-10-22 this slug was absent from collection.json, and that revision added no site, locale catalog or accepted-case selection. The current catalog selects it as a production study with the visual-review failure retained."
     }
   ],
   "acceptance": {
