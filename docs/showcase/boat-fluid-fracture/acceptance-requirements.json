@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "case_slug": "boat-fluid-fracture",
+  "selected": false,
+  "record_kind": "Acceptance requirements; unmeasured targets are not results",
+  "requirements": [
+    {
+      "id": "source_geometry",
+      "status": "passed",
+      "scope": "Portable split-source import, HIP save/reopen and Bgeo geometry export/reimport",
+      "evidence": "portable-acceptance-summary.json"
+    },
+    {
+      "id": "source_diffuse_scalar_material",
+      "status": "passed",
+      "scope": "Later repair candidate only; original diffuse-binding failure is retained",
+      "evidence": "material-repair-summary.json"
+    },
+    {
+      "id": "fluid_driven_breakage",
+      "status": "not-tested",
+      "needed": "Terminal consecutive-frame metrics with part identities, measured hydrodynamic loads, threshold crossings, release events and a comparable no-impact-loading control"
+    },
+    {
+      "id": "fragment_flotation",
+      "status": "not-tested",
+      "needed": "Cached water-only surface and actual high-resolution released-mesh samples across a declared contiguous settling interval, including local waterline, immersion, mass/density/proxy caveats and vertical motion. Both visible and collision-proxy bounds must clear floor/walls by at least 0.2 m; boundary-supported pieces cannot pass as free-floating.",
+      "solid_boundary_clearance_m": 0.2
+    },
+    {
+      "id": "complete_cache",
+      "status": "not-tested",
+      "needed": "Terminal cache status; frame/fps range; every expected water/piece file with bytes and SHA-256; finite geometry and stable part identities"
+    },
+    {
+      "id": "final_simulation_reopen",
+      "status": "not-tested",
+      "needed": "Native final scene save/reopen and exported result reopen with declared geometry, material, cache-link and frame tolerances"
+    },
+    {
+      "id": "blank_scene_rebuild",
+      "status": "passed",
+      "needed": "Full-sequence comparison and terminal fracture/flotation equivalence remain a separate requirement",
+      "scope": "Independent blank-scene recipe and frames 1 and 2 only; source/proxy and exact initial cache comparison",
+      "evidence": "rebuild-summary.json"
+    },
+    {
+      "id": "continuous_final_media",
+      "status": "not-tested",
+      "needed": "Actual consecutive native frame sequence, final MP4/poster, hashes, codec/dimensions/fps/frame count/duration, full decode and source timing provenance"
+    },
+    {
+      "id": "pixel_motion_audio_review",
+      "status": "not-tested",
+      "needed": "Recorded inspected final frames, complete normal-speed motion review and audio/silence intent with the applicable playback/listening scope"
+    },
+    {
+      "id": "browser_qa",
+      "status": "blocked",
+      "needed": "Official DCC-CUA exact-bound supported browser runtime for English/Chinese desktop/mobile page, links and final video playback",
+      "evidence": "browser-qa-summary.json"
+    },
+    {
+      "id": "localized_selection",
+      "status": "not-tested",
+      "needed": "Root accepts final media and flotation before adding collection-case.draft.json to collection.json, installing the presentation translations, building and reviewing both locales"
+    },
+    {
+      "id": "rights_and_publication",
+      "status": "not-tested",
+      "needed": "Complete the existing source/terms review and confirm exact cleared public assets; publication and live readback remain separate from a source PR"
+    },
+    {
+      "id": "full_sequence_rebuild",
+      "status": "not-tested",
+      "needed": "Full 96-frame independent solve and declared terminal fracture/flotation equivalence; the passing two-frame check does not cover this"
+    },
+    {
+      "id": "first_frame_rebuild_render",
+      "status": "passed",
+      "scope": "Frame 1 only, after native HIP reopening; decoded float RGB SHA-256 matches while EXR metadata/container bytes differ",
+      "evidence": "render-rebuild-summary.json"
+    },
+    {
+      "id": "short_feedback_disabled_control",
+      "status": "passed",
+      "scope": "Same-setup four-frame feedback-disabled control only; all 17 parts attached and zero nonzero loading/release",
+      "evidence": "feedback-control-summary.json"
+    }
+  ]
+}

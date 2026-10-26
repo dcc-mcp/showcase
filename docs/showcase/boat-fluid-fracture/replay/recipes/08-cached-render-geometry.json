@@ -1,0 +1,78 @@
+{
+  "parent_path": "/obj/boat_fluid_output",
+  "nodes": [
+    {
+      "node_type": "file",
+      "node_name": "cached_pieces",
+      "parameters": {
+        "file": "@RUN_DIR@/cache/pieces.$F4.bgeo.sc"
+      }
+    },
+    {
+      "node_type": "file",
+      "node_name": "cached_water_particles",
+      "parameters": {
+        "file": "@RUN_DIR@/cache/water_particles.$F4.bgeo.sc"
+      }
+    },
+    {
+      "node_type": "particlefluidsurface::3.0",
+      "node_name": "cached_water_surface",
+      "parameters": {
+        "particlesep": 0.1,
+        "voxelsize": 0.75,
+        "dosurfunion": 0,
+        "conversion": "polysoup",
+        "dotransferattribs": 1,
+        "transferattribs": "v"
+      }
+    },
+    {
+      "node_type": "material",
+      "node_name": "cached_wood_material",
+      "parameters": {
+        "num_materials": 1,
+        "shop_materialpath1": "/mat/boat_split_wood"
+      }
+    },
+    {
+      "node_type": "material",
+      "node_name": "cached_water_material",
+      "parameters": {
+        "num_materials": 1,
+        "shop_materialpath1": "/mat/boat_water"
+      }
+    },
+    {
+      "node_type": "merge",
+      "node_name": "BEAUTY"
+    }
+  ],
+  "connections": [
+    {
+      "input": "cached_water_surface",
+      "output": "cached_water_particles",
+      "input_index": 0
+    },
+    {
+      "input": "cached_wood_material",
+      "output": "cached_pieces"
+    },
+    {
+      "input": "cached_water_material",
+      "output": "cached_water_surface"
+    },
+    {
+      "input": "BEAUTY",
+      "output": "cached_wood_material",
+      "input_index": 0
+    },
+    {
+      "input": "BEAUTY",
+      "output": "cached_water_material",
+      "input_index": 1
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

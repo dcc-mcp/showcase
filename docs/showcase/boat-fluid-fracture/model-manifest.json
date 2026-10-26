@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "scope": "Actual generated split source and native inspection; no completed boat simulation",
+  "generation": {
+    "image_generator": "built-in",
+    "image_generator_model": "Unknown",
+    "reference": "boat-reference.jpg",
+    "rodin_parameters": {
+      "tier": "Gen-2.5-Medium",
+      "geometry_file_format": "obj",
+      "material": "PBR",
+      "mesh_mode": "Raw",
+      "seed": 4172,
+      "prompt": "One intact wooden workboat hull with thick timber planks, open interior, two bench seats and visible internal ribs. Match the image silhouette and construction. Single complete boat, no water or ground, no mast, sails, ropes, people, engine or cargo. Clean watertight hull, preserve hollow open interior, retain full bow and stern. Realistic aged brown timber, PBR textures."
+    },
+    "rodin_native_triangle_count": 500000,
+    "bang_parameters": {
+      "instruction": "Split this wooden boat into separate construction parts: individual long hull timber planks, internal curved ribs, gunwale strips, bow and stern posts, and bench seat boards. Preserve the intact boat silhouette and existing surfaces. Components must remain in their original assembled positions, with independent mesh parts suitable for rigid body destruction. No exploded view, no added parts, no water.",
+      "strength": 7,
+      "mesh_mode": "Raw",
+      "quality_override": 150000,
+      "seed": 4172,
+      "geometry_file_format": "obj",
+      "material": "PBR",
+      "resolution": "Basic"
+    },
+    "bang_input": "previous completed Rodin output; provider identifiers omitted"
+  },
+  "geometry": {
+    "object_count": 17,
+    "vertex_position_count": 75003,
+    "uv_coordinate_count": 86122,
+    "normal_count": 136900,
+    "triangle_count": 150000,
+    "objects": [
+      {
+        "name": "root.18",
+        "triangles": 5258
+      },
+      {
+        "name": "root.17",
+        "triangles": 7784
+      },
+      {
+        "name": "root.16",
+        "triangles": 1874
+      },
+      {
+        "name": "root.15",
+        "triangles": 19844
+      },
+      {
+        "name": "root.14",
+        "triangles": 7462
+      },
+      {
+        "name": "root.13",
+        "triangles": 820
+      },
+      {
+        "name": "root.11",
+        "triangles": 57178
+      },
+      {
+        "name": "root.10",
+        "triangles": 3924
+      },
+      {
+        "name": "root.9",
+        "triangles": 21938
+      },
+      {
+        "name": "root.8",
+        "triangles": 2624
+      },
+      {
+        "name": "root.6",
+        "triangles": 1012
+      },
+      {
+        "name": "root.5",
+        "triangles": 2462
+      },
+      {
+        "name": "root.4",
+        "triangles": 3946
+      },
+      {
+        "name": "root.3",
+        "triangles": 3606
+      },
+      {
+        "name": "root.2",
+        "triangles": 1216
+      },
+      {
+        "name": "root.1",
+        "triangles": 6658
+      },
+      {
+        "name": "root.0",
+        "triangles": 2394
+      }
+    ],
+    "object_vertex_indices_disjoint": true,
+    "native_import": {
+      "point_count": 75003,
+      "primitive_count": 150000,
+      "vertex_count": 450000,
+      "bounds_min_source_units": [
+        -0.39545300602912903,
+        -0.26061201095581055,
+        -0.9493370056152344
+      ],
+      "bounds_max_source_units": [
+        0.39746999740600586,
+        0.24879999458789825,
+        0.9484689831733704
+      ],
+      "bounds_size_source_units": [
+        0.7929230034351349,
+        0.5094120055437088,
+        1.8978059887886047
+      ]
+    },
+    "native_vertex_uv_present": true,
+    "native_assembled_scene": {
+      "parts": 17,
+      "primitives": 150000,
+      "bounds_min_m": [
+        -1.2534310817718506,
+        -0.2500000596046448,
+        -3.0
+      ],
+      "bounds_max_m": [
+        1.2534310817718506,
+        1.3605291843414307,
+        3.0
+      ]
+    },
+    "source_physical_units": "unspecified"
+  },
+  "original_obj": {
+    "sha256": "2006679c54d817ef83fb0057132438acc5efc509530b890ff242193fb2cc107c",
+    "bytes": 15968189
+  },
+  "portable_obj": {
+    "path": "boat.obj",
+    "sha256": "87abff3aa0601b83bcf90b918b7a5dfaffaf9a933a968826a85497391c8f0abb",
+    "bytes": 15968217,
+    "modification": "Prepended only relative mtllib and usemtl directives; original OBJ payload retained byte-for-byte after that prefix."
+  },
+  "archive": {
+    "path": "source-model.zip",
+    "sha256": "acf4c00f3d47e5da477f76db40548a714ffd1ac3b124f341149f2d995ef628b9",
+    "bytes": 16276511,
+    "members": [
+      {
+        "path": "SOURCE.md",
+        "sha256": "7eed858803b7adccc86f63956183ce6ad5a7e1482c493803d58550bf961045d7",
+        "bytes": 3699
+      },
+      {
+        "path": "boat.mtl",
+        "sha256": "815df82a2f8d5225ff43b85086f4436d549806d18dfa1932b1617f4733e0b667",
+        "bytes": 63
+      },
+      {
+        "path": "boat.obj",
+        "sha256": "87abff3aa0601b83bcf90b918b7a5dfaffaf9a933a968826a85497391c8f0abb",
+        "bytes": 15968217
+      },
+      {
+        "path": "material.json",
+        "sha256": "1f59c050985bf5789ce0eb468914014ec6ec9b72b99f0a3d74cdc774fb9ce19e",
+        "bytes": 522
+      },
+      {
+        "path": "textures/texture_diffuse.png",
+        "sha256": "9bdb48c74e4f71387a26f147d5edbc30e876099b26d746766237940ee25bf096",
+        "bytes": 4748213
+      },
+      {
+        "path": "textures/texture_metallic.png",
+        "sha256": "100d0fbcb688d676cc3814fcc16b440e0b2c1826cd3a3574ab62b7dc4b3b09e2",
+        "bytes": 300369
+      },
+      {
+        "path": "textures/texture_normal.png",
+        "sha256": "41e5778c2ae5ca4a4a1fb68848b4e4ae777692e78b691d7f0e727a0885160356",
+        "bytes": 3917475
+      },
+      {
+        "path": "textures/texture_pbr.png",
+        "sha256": "b42c3965d50c376c86f5bdead723495ca569b4ec671545ae4bf0f4fc66efffa5",
+        "bytes": 2240044
+      },
+      {
+        "path": "textures/texture_roughness.png",
+        "sha256": "3ff0a088b30942b65464975c023ab8a3f9bdf54ff7d9827fdfc95c9df4316513",
+        "bytes": 1222235
+      }
+    ]
+  },
+  "textures": [
+    {
+      "path": "textures/texture_diffuse.png",
+      "sha256": "9bdb48c74e4f71387a26f147d5edbc30e876099b26d746766237940ee25bf096",
+      "bytes": 4748213,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8
+    },
+    {
+      "path": "textures/texture_metallic.png",
+      "sha256": "100d0fbcb688d676cc3814fcc16b440e0b2c1826cd3a3574ab62b7dc4b3b09e2",
+      "bytes": 300369,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8
+    },
+    {
+      "path": "textures/texture_normal.png",
+      "sha256": "41e5778c2ae5ca4a4a1fb68848b4e4ae777692e78b691d7f0e727a0885160356",
+      "bytes": 3917475,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8
+    },
+    {
+      "path": "textures/texture_pbr.png",
+      "sha256": "b42c3965d50c376c86f5bdead723495ca569b4ec671545ae4bf0f4fc66efffa5",
+      "bytes": 2240044,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8
+    },
+    {
+      "path": "textures/texture_roughness.png",
+      "sha256": "3ff0a088b30942b65464975c023ab8a3f9bdf54ff7d9827fdfc95c9df4316513",
+      "bytes": 1222235,
+      "width": 2048,
+      "height": 2048,
+      "bit_depth": 8
+    }
+  ],
+  "provider_sources": [
+    {
+      "url": "https://hyper3d.ai/legal/terms",
+      "checked_on": "2026-10-26"
+    },
+    {
+      "url": "https://hyper3d.ai/legal/copyright-license",
+      "checked_on": "2026-10-26"
+    },
+    {
+      "url": "https://docs.hyper3d.ai/en/api-specification/rodin-gen2-5",
+      "checked_on": "2026-10-26"
+    },
+    {
+      "url": "https://docs.hyper3d.ai/en/api-specification/bang",
+      "checked_on": "2026-10-26"
+    }
+  ],
+  "rights_status": "Provider terms linked; no independent legal clearance or additional artwork/training license claimed"
+}

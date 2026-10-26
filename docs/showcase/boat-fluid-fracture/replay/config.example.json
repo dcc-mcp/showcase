@@ -1,0 +1,7 @@
+{
+  "asset_dir": "./assets",
+  "output_root": "./local-output",
+  "run_name": "short-check",
+  "end_frame": 2,
+  "release_enabled": true
+}

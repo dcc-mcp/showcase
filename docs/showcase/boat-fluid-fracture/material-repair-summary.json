@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "pull_request": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/361",
+  "source_commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+  "native_record_source_revision": "candidate-uncommitted",
+  "native_record": {
+    "version": "22.0.368",
+    "diffuse_texture_enabled_and_existing": true,
+    "roughness_expected": 0.408248290463863,
+    "scalar_metallic": 0,
+    "scalar_opacity": 1,
+    "save_reopen_parity": true,
+    "missing_texture_status": "partial",
+    "source_revision": "candidate-uncommitted",
+    "scope": "Local OBJ diffuse map and scalar material values; not full PBR texture parity"
+  },
+  "source_binding_note": "Native observations were recorded from the uncommitted repair candidate; the later commit identifies the repaired source. This summary does not independently reattest a committed-head host run.",
+  "targeted_tests": {
+    "passed": 224,
+    "basis": "Production operator test report"
+  },
+  "scope": "Typed portable split-source import, diffuse map, scalar material values, HIP save/reopen and missing-required-texture result; no final boat simulation or complete PBR map parity."
+}

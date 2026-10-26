@@ -1,0 +1,897 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "record_kind": "sanitized diagnostic excerpt",
+  "scope": "Sanitized diagnostic and production observations. Local paths, credentials, account details and private routing/provider identifiers are omitted. This is a derived excerpt, not a complete transport transcript.",
+  "transport": {
+    "source": "local_mcp",
+    "control_route": "local_mcp_direct",
+    "gateway_stats_recorded": false
+  },
+  "probes": [
+    {
+      "backend_tool": "hyper3d__get_balance",
+      "arguments": {},
+      "result": {
+        "success": false,
+        "message": "Set HYPER3D_API_KEY in the adapter process environment",
+        "error": "authentication_missing"
+      },
+      "private_original_sha256": "ccc09deb27210e5a81ef48333bf778211ca67ab6535b90d2544795495654f8ba",
+      "sequence_role": "initial failure, retained as history"
+    },
+    {
+      "backend_tool": "hyper3d__get_balance",
+      "sequence_role": "later recovery after credential setup",
+      "arguments": {},
+      "result": {
+        "success": true,
+        "message": "Hyper3D operation completed",
+        "error": null
+      },
+      "omitted_fields": [
+        "account balance"
+      ],
+      "private_original_sha256": "e213e21b75405ce5198daddcdb9a284866f954374f2e1088440e3d56ea411cf3"
+    },
+    {
+      "backend_tool": "houdini_simulation__create_constraint_network",
+      "arguments": {
+        "dopnet_path": "/obj/constraint_probe_dop",
+        "constraint_type": "glue",
+        "relationship_parent": "/obj/constraint_probe"
+      },
+      "result": {
+        "success": false,
+        "message": "Failed to create constraint network",
+        "error": "OperationFailed",
+        "native_error": "Invalid node type name"
+      },
+      "private_original_sha256": "52c4a76f272ebe3fe5b48351250bbaa0f402dc60427427e19ec686b75a52e390"
+    },
+    {
+      "backend_tool": "houdini_dev__introspect_hom",
+      "arguments": {
+        "category": "Dop",
+        "name_filter": "conrel",
+        "limit": 30
+      },
+      "result": {
+        "success": true,
+        "message": "Listed node types",
+        "error": null,
+        "context": {
+          "category": "Dop",
+          "count": 10,
+          "node_types": [
+            "bulletsoftconrel",
+            "conetwistconrel",
+            "conrelationship",
+            "glueconrel",
+            "hardconrel",
+            "noconrel",
+            "sliderconrel",
+            "softattachconrel",
+            "springconrel",
+            "twostateconrel"
+          ]
+        }
+      },
+      "private_original_sha256": "6a077f26650f24f4c8b3f4bb9eaf254f46c4c44264815c9682492039c983c92c"
+    }
+  ],
+  "limits": [
+    "Private execution originals are not delivered as complete raw transcripts.",
+    "Model generation/import and calibration results are scoped separately from the unfinished boat destruction and flotation solve.",
+    "DOP graph creation returns a skeleton and does not establish a completed simulation."
+  ],
+  "constraint_recovery": {
+    "source_commit": "c89e52559f9e26867cc12d7676f7c482d63c100b",
+    "pull_request": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/360",
+    "native_checks": {
+      "host_version": "22.0.368",
+      "checks": [
+        {
+          "constraint_type": "glue",
+          "native_type": "glueconrel",
+          "input_1_matches": true,
+          "sop_source_preserved": true
+        },
+        {
+          "constraint_type": "soft",
+          "native_type": "bulletsoftconrel",
+          "input_1_matches": true,
+          "sop_source_preserved": true
+        },
+        {
+          "constraint_type": "cone",
+          "native_type": "conetwistconrel",
+          "input_1_matches": true,
+          "sop_source_preserved": true
+        }
+      ],
+      "sop_rejection_left_no_nodes": true,
+      "simulation_verified": false
+    },
+    "setup_state": "skeleton",
+    "private_original_sha256": "4a8538075bc14b23b07fd49f403408fc79d026b36278799da7fb50a91e9b2b06"
+  },
+  "model_observations": {
+    "rodin_native_triangles": 500000,
+    "bang_native_triangles": 150000,
+    "named_parts": 17,
+    "vertex_uv_present": true,
+    "public_inventory": "model-manifest.json",
+    "private_geometry_receipt_sha256": "18aecf92dc4fe70d05d2dcf066b32fc51a2ac7bbf44c9f870e828d7523cc6278",
+    "private_assembly_receipt_sha256": "474369b3c71d71fb9b1cd9e0477c0724d985925d73f254a9ecffded7b0480dd5",
+    "private_uv_receipt_sha256": "e022c317b00b572c9b0f856579e181f7080962d0f742fb6d8d03d9ccbed1a09d"
+  },
+  "cube_feedback_calibration": {
+    "scope": "Independent cube calibration, not the boat or final fragment solve",
+    "feedback_enabled": {
+      "feedback_scale": 1,
+      "frame_count": 48,
+      "frames": [
+        {
+          "frame": 1,
+          "body_center_y_m": 0.14999999105930328,
+          "body_min_y_m": -0.3499999940395355,
+          "body_max_y_m": 0.6499999761581421,
+          "fluid_points": 18000,
+          "fluid_height_m": 1.4099901840090752,
+          "pressure_max": 0.0,
+          "errors": []
+        },
+        {
+          "frame": 2,
+          "body_center_y_m": 0.15981736406683922,
+          "body_min_y_m": -0.3401847114807063,
+          "body_max_y_m": 0.6598194396143847,
+          "fluid_points": 48526,
+          "fluid_height_m": 1.529556319117546,
+          "pressure_max": 629.2222900390625,
+          "errors": []
+        },
+        {
+          "frame": 3,
+          "body_center_y_m": 0.17726337909698486,
+          "body_min_y_m": -0.3227594008461112,
+          "body_max_y_m": 0.6772861590400809,
+          "fluid_points": 48954,
+          "fluid_height_m": 1.528955563902855,
+          "pressure_max": 631.3546142578125,
+          "errors": []
+        },
+        {
+          "frame": 4,
+          "body_center_y_m": 0.201172523200512,
+          "body_min_y_m": -0.29888458838828147,
+          "body_max_y_m": 0.7012296347893054,
+          "fluid_points": 49250,
+          "fluid_height_m": 1.52849992364645,
+          "pressure_max": 631.9402465820312,
+          "errors": []
+        },
+        {
+          "frame": 5,
+          "body_center_y_m": 0.22990384697914173,
+          "body_min_y_m": -0.2702698629318476,
+          "body_max_y_m": 0.7300775568901311,
+          "fluid_points": 49502,
+          "fluid_height_m": 1.527989037334919,
+          "pressure_max": 632.9789428710938,
+          "errors": []
+        },
+        {
+          "frame": 6,
+          "body_center_y_m": 0.2614101096987739,
+          "body_min_y_m": -0.23887157978739637,
+          "body_max_y_m": 0.7616917991849441,
+          "fluid_points": 49703,
+          "fluid_height_m": 1.5274405740201473,
+          "pressure_max": 633.7659912109375,
+          "errors": []
+        },
+        {
+          "frame": 7,
+          "body_center_y_m": 0.29071456193924194,
+          "body_min_y_m": -0.209631853245142,
+          "body_max_y_m": 0.7910609771236259,
+          "fluid_points": 49835,
+          "fluid_height_m": 1.5269585736095905,
+          "pressure_max": 635.52294921875,
+          "errors": []
+        },
+        {
+          "frame": 8,
+          "body_center_y_m": 0.31833960115909943,
+          "body_min_y_m": -0.18211233804690607,
+          "body_max_y_m": 0.8187915403651049,
+          "fluid_points": 49913,
+          "fluid_height_m": 1.5264625363051891,
+          "pressure_max": 633.7621459960938,
+          "errors": []
+        },
+        {
+          "frame": 9,
+          "body_center_y_m": 0.34398753941059507,
+          "body_min_y_m": -0.15652753264807018,
+          "body_max_y_m": 0.8445026114692603,
+          "fluid_points": 50032,
+          "fluid_height_m": 1.5259427651762962,
+          "pressure_max": 634.591064453125,
+          "errors": []
+        },
+        {
+          "frame": 10,
+          "body_center_y_m": 0.3671593517065115,
+          "body_min_y_m": -0.13350760744984314,
+          "body_max_y_m": 0.8678263108628661,
+          "fluid_points": 50129,
+          "fluid_height_m": 1.5253555700182915,
+          "pressure_max": 635.3116455078125,
+          "errors": []
+        },
+        {
+          "frame": 11,
+          "body_center_y_m": 0.3861031085252866,
+          "body_min_y_m": -0.11472754081253808,
+          "body_max_y_m": 0.8869337578631113,
+          "fluid_points": 50209,
+          "fluid_height_m": 1.5246101953089237,
+          "pressure_max": 635.00341796875,
+          "errors": []
+        },
+        {
+          "frame": 12,
+          "body_center_y_m": 0.39974062144757555,
+          "body_min_y_m": -0.10116644072022044,
+          "body_max_y_m": 0.9006476836153715,
+          "fluid_points": 50296,
+          "fluid_height_m": 1.52373718470335,
+          "pressure_max": 634.5326538085938,
+          "errors": []
+        },
+        {
+          "frame": 13,
+          "body_center_y_m": 0.4074888080358638,
+          "body_min_y_m": -0.09345000338220188,
+          "body_max_y_m": 0.9084276194539295,
+          "fluid_points": 50340,
+          "fluid_height_m": 1.5243266969919205,
+          "pressure_max": 633.8953857421875,
+          "errors": []
+        },
+        {
+          "frame": 14,
+          "body_center_y_m": 0.4095537215471402,
+          "body_min_y_m": -0.091389648960785,
+          "body_max_y_m": 0.9104970920550655,
+          "fluid_points": 50347,
+          "fluid_height_m": 1.5364055633544922,
+          "pressure_max": 633.5194091796875,
+          "errors": []
+        },
+        {
+          "frame": 15,
+          "body_center_y_m": 0.40685604512692786,
+          "body_min_y_m": -0.09406783536508101,
+          "body_max_y_m": 0.9077799256189367,
+          "fluid_points": 50356,
+          "fluid_height_m": 1.55093365162611,
+          "pressure_max": 633.51513671875,
+          "errors": []
+        },
+        {
+          "frame": 16,
+          "body_center_y_m": 0.40185166895390523,
+          "body_min_y_m": -0.09888442795204355,
+          "body_max_y_m": 0.902587765859854,
+          "fluid_points": 50405,
+          "fluid_height_m": 1.5647805090993643,
+          "pressure_max": 634.0882568359375,
+          "errors": []
+        },
+        {
+          "frame": 17,
+          "body_center_y_m": 0.3959249258041466,
+          "body_min_y_m": -0.1046346352541718,
+          "body_max_y_m": 0.8964844868624651,
+          "fluid_points": 50484,
+          "fluid_height_m": 1.57706065941602,
+          "pressure_max": 633.9814453125,
+          "errors": []
+        },
+        {
+          "frame": 18,
+          "body_center_y_m": 0.3886519074440088,
+          "body_min_y_m": -0.11198652791608765,
+          "body_max_y_m": 0.8892903428041052,
+          "fluid_points": 50535,
+          "fluid_height_m": 1.588202296756208,
+          "pressure_max": 632.9951171875,
+          "errors": []
+        },
+        {
+          "frame": 19,
+          "body_center_y_m": 0.38045132160187706,
+          "body_min_y_m": -0.12029727700283388,
+          "body_max_y_m": 0.881199920206588,
+          "fluid_points": 50552,
+          "fluid_height_m": 1.5978611502796412,
+          "pressure_max": 632.7138061523438,
+          "errors": []
+        },
+        {
+          "frame": 20,
+          "body_center_y_m": 0.371851354837428,
+          "body_min_y_m": -0.12897468836587225,
+          "body_max_y_m": 0.8726773980407282,
+          "fluid_points": 50574,
+          "fluid_height_m": 1.6048885136842728,
+          "pressure_max": 632.4164428710938,
+          "errors": []
+        },
+        {
+          "frame": 21,
+          "body_center_y_m": 0.3633855432272073,
+          "body_min_y_m": -0.1374926265724525,
+          "body_max_y_m": 0.8642637130268671,
+          "fluid_points": 50605,
+          "fluid_height_m": 1.6090386100113392,
+          "pressure_max": 632.1428833007812,
+          "errors": []
+        },
+        {
+          "frame": 22,
+          "body_center_y_m": 0.3555066138506064,
+          "body_min_y_m": -0.1454037404550377,
+          "body_max_y_m": 0.8564169681562505,
+          "fluid_points": 50636,
+          "fluid_height_m": 1.6100971214473248,
+          "pressure_max": 631.8236083984375,
+          "errors": []
+        },
+        {
+          "frame": 23,
+          "body_center_y_m": 0.3485038727522031,
+          "body_min_y_m": -0.15237598632458574,
+          "body_max_y_m": 0.849383731828992,
+          "fluid_points": 50662,
+          "fluid_height_m": 1.6083302944898605,
+          "pressure_max": 631.4991455078125,
+          "errors": []
+        },
+        {
+          "frame": 24,
+          "body_center_y_m": 0.34263373911382206,
+          "body_min_y_m": -0.15814700366723858,
+          "body_max_y_m": 0.8434144818948827,
+          "fluid_points": 50706,
+          "fluid_height_m": 1.6041385252028704,
+          "pressure_max": 631.245361328125,
+          "errors": []
+        },
+        {
+          "frame": 25,
+          "body_center_y_m": 0.3380630612373519,
+          "body_min_y_m": -0.162768075071142,
+          "body_max_y_m": 0.8388941975458458,
+          "fluid_points": 50734,
+          "fluid_height_m": 1.59767459705472,
+          "pressure_max": 631.1500244140625,
+          "errors": []
+        },
+        {
+          "frame": 26,
+          "body_center_y_m": 0.3347023427486669,
+          "body_min_y_m": -0.16643214588521005,
+          "body_max_y_m": 0.8358368313825438,
+          "fluid_points": 50759,
+          "fluid_height_m": 1.5896275043487549,
+          "pressure_max": 630.9880981445312,
+          "errors": []
+        },
+        {
+          "frame": 27,
+          "body_center_y_m": 0.33229647576812993,
+          "body_min_y_m": -0.16924628985270831,
+          "body_max_y_m": 0.8338392413889681,
+          "fluid_points": 50797,
+          "fluid_height_m": 1.5805826056748629,
+          "pressure_max": 630.8928833007812,
+          "errors": []
+        },
+        {
+          "frame": 28,
+          "body_center_y_m": 0.33020824193960396,
+          "body_min_y_m": -0.17170492612603994,
+          "body_max_y_m": 0.8321214100052479,
+          "fluid_points": 50825,
+          "fluid_height_m": 1.5701484344899654,
+          "pressure_max": 630.817138671875,
+          "errors": []
+        },
+        {
+          "frame": 29,
+          "body_center_y_m": 0.3287058919669005,
+          "body_min_y_m": -0.17355178361481197,
+          "body_max_y_m": 0.8309635675486129,
+          "fluid_points": 50860,
+          "fluid_height_m": 1.5596722858026624,
+          "pressure_max": 630.8671875,
+          "errors": []
+        },
+        {
+          "frame": 30,
+          "body_center_y_m": 0.3278122842312893,
+          "body_min_y_m": -0.17475464993003698,
+          "body_max_y_m": 0.8303792183926155,
+          "fluid_points": 50900,
+          "fluid_height_m": 1.549596207216382,
+          "pressure_max": 630.8392333984375,
+          "errors": []
+        },
+        {
+          "frame": 31,
+          "body_center_y_m": 0.3274933248759571,
+          "body_min_y_m": -0.17533708863538774,
+          "body_max_y_m": 0.830323738387302,
+          "fluid_points": 50946,
+          "fluid_height_m": 1.5415492467582226,
+          "pressure_max": 630.8065795898438,
+          "errors": []
+        },
+        {
+          "frame": 32,
+          "body_center_y_m": 0.3276066035033732,
+          "body_min_y_m": -0.17544343449571898,
+          "body_max_y_m": 0.8306566415024653,
+          "fluid_points": 50989,
+          "fluid_height_m": 1.5380521975457668,
+          "pressure_max": 630.6201782226562,
+          "errors": []
+        },
+        {
+          "frame": 33,
+          "body_center_y_m": 0.32802835106866046,
+          "body_min_y_m": -0.17519429940375628,
+          "body_max_y_m": 0.8312510015410772,
+          "fluid_points": 51010,
+          "fluid_height_m": 1.5355552397668362,
+          "pressure_max": 630.5179443359375,
+          "errors": []
+        },
+        {
+          "frame": 34,
+          "body_center_y_m": 0.3286441713573335,
+          "body_min_y_m": -0.17470996677138828,
+          "body_max_y_m": 0.8319983094860552,
+          "fluid_points": 51025,
+          "fluid_height_m": 1.5347813069820404,
+          "pressure_max": 630.3993530273438,
+          "errors": []
+        },
+        {
+          "frame": 35,
+          "body_center_y_m": 0.32933869957942946,
+          "body_min_y_m": -0.17410819535416522,
+          "body_max_y_m": 0.8327855945130241,
+          "fluid_points": 51044,
+          "fluid_height_m": 1.5343940518796444,
+          "pressure_max": 630.3261108398438,
+          "errors": []
+        },
+        {
+          "frame": 36,
+          "body_center_y_m": 0.3300532847644977,
+          "body_min_y_m": -0.17352863320229517,
+          "body_max_y_m": 0.8336352027312905,
+          "fluid_points": 51053,
+          "fluid_height_m": 1.5338134728372097,
+          "pressure_max": 630.403076171875,
+          "errors": []
+        },
+        {
+          "frame": 37,
+          "body_center_y_m": 0.33067545294783857,
+          "body_min_y_m": -0.17301463939156744,
+          "body_max_y_m": 0.8343655452872446,
+          "fluid_points": 51084,
+          "fluid_height_m": 1.534781139343977,
+          "pressure_max": 630.4684448242188,
+          "errors": []
+        },
+        {
+          "frame": 38,
+          "body_center_y_m": 0.3311573863031806,
+          "body_min_y_m": -0.17261621202396785,
+          "body_max_y_m": 0.834930984630329,
+          "fluid_points": 51113,
+          "fluid_height_m": 1.5369406081736088,
+          "pressure_max": 630.5303344726562,
+          "errors": []
+        },
+        {
+          "frame": 39,
+          "body_center_y_m": 0.3315609246494857,
+          "body_min_y_m": -0.17232837688698058,
+          "body_max_y_m": 0.835450226185952,
+          "fluid_points": 51160,
+          "fluid_height_m": 1.5394471399486065,
+          "pressure_max": 630.6080322265625,
+          "errors": []
+        },
+        {
+          "frame": 40,
+          "body_center_y_m": 0.33191046118762096,
+          "body_min_y_m": -0.17206144033207235,
+          "body_max_y_m": 0.8358823627073143,
+          "fluid_points": 51207,
+          "fluid_height_m": 1.5391122102737427,
+          "pressure_max": 630.6959228515625,
+          "errors": []
+        },
+        {
+          "frame": 41,
+          "body_center_y_m": 0.3322085291149816,
+          "body_min_y_m": -0.17177693631856528,
+          "body_max_y_m": 0.8361939945485285,
+          "fluid_points": 51253,
+          "fluid_height_m": 1.5373875722289085,
+          "pressure_max": 630.7548217773438,
+          "errors": []
+        },
+        {
+          "frame": 42,
+          "body_center_y_m": 0.33238774538063864,
+          "body_min_y_m": -0.17143090380159265,
+          "body_max_y_m": 0.8362063945628699,
+          "fluid_points": 51279,
+          "fluid_height_m": 1.5358279794454575,
+          "pressure_max": 630.7434692382812,
+          "errors": []
+        },
+        {
+          "frame": 43,
+          "body_center_y_m": 0.33248716592807737,
+          "body_min_y_m": -0.17093519864192785,
+          "body_max_y_m": 0.8359095304980826,
+          "fluid_points": 51304,
+          "fluid_height_m": 1.5350773707032204,
+          "pressure_max": 630.7454833984375,
+          "errors": []
+        },
+        {
+          "frame": 44,
+          "body_center_y_m": 0.3325137048961041,
+          "body_min_y_m": -0.17028197443914905,
+          "body_max_y_m": 0.8353093842313573,
+          "fluid_points": 51352,
+          "fluid_height_m": 1.5354086197912693,
+          "pressure_max": 630.7427978515625,
+          "errors": []
+        },
+        {
+          "frame": 45,
+          "body_center_y_m": 0.3324429839850174,
+          "body_min_y_m": -0.16954694814489815,
+          "body_max_y_m": 0.834432916114933,
+          "fluid_points": 51371,
+          "fluid_height_m": 1.5354613475501537,
+          "pressure_max": 630.7152099609375,
+          "errors": []
+        },
+        {
+          "frame": 46,
+          "body_center_y_m": 0.33242337405683925,
+          "body_min_y_m": -0.16858735376263215,
+          "body_max_y_m": 0.8334341018763106,
+          "fluid_points": 51386,
+          "fluid_height_m": 1.5378478467464447,
+          "pressure_max": 630.6891479492188,
+          "errors": []
+        },
+        {
+          "frame": 47,
+          "body_center_y_m": 0.33242811262608185,
+          "body_min_y_m": -0.16817449872466736,
+          "body_max_y_m": 0.8330307239768311,
+          "fluid_points": 51394,
+          "fluid_height_m": 1.5434968322515488,
+          "pressure_max": 630.5928344726562,
+          "errors": []
+        },
+        {
+          "frame": 48,
+          "body_center_y_m": 0.3326300084590982,
+          "body_min_y_m": -0.1679842830391749,
+          "body_max_y_m": 0.8332442999573713,
+          "fluid_points": 51407,
+          "fluid_height_m": 1.5501624587923288,
+          "pressure_max": 630.5070190429688,
+          "errors": []
+        }
+      ],
+      "private_original_sha256": "df48cd6550d7abac2c523d163f0802b843342e2dd6d6e3b0799e210e35b44655"
+    },
+    "feedback_disabled_control": {
+      "feedback_scale": 0,
+      "frame_count": 24,
+      "frames": [
+        {
+          "frame": 1,
+          "body_center_y_m": 0.14999999105930328,
+          "body_min_y_m": -0.3499999940395355,
+          "body_max_y_m": 0.6499999761581421,
+          "fluid_points": 18000,
+          "fluid_height_m": 1.4099901840090752,
+          "pressure_max": 0.0,
+          "errors": []
+        },
+        {
+          "frame": 2,
+          "body_center_y_m": 0.13297455571591854,
+          "body_min_y_m": -0.36702542938292027,
+          "body_max_y_m": 0.6329745408147573,
+          "fluid_points": 48526,
+          "fluid_height_m": 1.5387711003422737,
+          "pressure_max": 670.6256103515625,
+          "errors": []
+        },
+        {
+          "frame": 3,
+          "body_center_y_m": 0.0989236831665039,
+          "body_min_y_m": -0.4010763019323349,
+          "body_max_y_m": 0.5989236682653427,
+          "fluid_points": 48973,
+          "fluid_height_m": 1.544445127248764,
+          "pressure_max": 678.6980590820312,
+          "errors": []
+        },
+        {
+          "frame": 4,
+          "body_center_y_m": 0.04784737527370453,
+          "body_min_y_m": -0.4521526098251343,
+          "body_max_y_m": 0.5478473603725433,
+          "fluid_points": 49390,
+          "fluid_height_m": 1.5523404479026794,
+          "pressure_max": 690.6822509765625,
+          "errors": []
+        },
+        {
+          "frame": 5,
+          "body_center_y_m": -0.020254358649253845,
+          "body_min_y_m": -0.5202543437480927,
+          "body_max_y_m": 0.47974562644958496,
+          "fluid_points": 49833,
+          "fluid_height_m": 1.5631055664271116,
+          "pressure_max": 708.07763671875,
+          "errors": []
+        },
+        {
+          "frame": 6,
+          "body_center_y_m": -0.10538153350353241,
+          "body_min_y_m": -0.6053815186023712,
+          "body_max_y_m": 0.3946184515953064,
+          "fluid_points": 50232,
+          "fluid_height_m": 1.5731729534454644,
+          "pressure_max": 342.716796875,
+          "errors": []
+        },
+        {
+          "frame": 7,
+          "body_center_y_m": -0.20753414928913116,
+          "body_min_y_m": -0.70753413438797,
+          "body_max_y_m": 0.29246583580970764,
+          "fluid_points": 50618,
+          "fluid_height_m": 1.583069073036313,
+          "pressure_max": 353.6828308105469,
+          "errors": []
+        },
+        {
+          "frame": 8,
+          "body_center_y_m": -0.3267121762037277,
+          "body_min_y_m": -0.8267121613025665,
+          "body_max_y_m": 0.17328780889511108,
+          "fluid_points": 51333,
+          "fluid_height_m": 1.5908095370978117,
+          "pressure_max": 355.8008728027344,
+          "errors": []
+        },
+        {
+          "frame": 9,
+          "body_center_y_m": -0.46291564404964447,
+          "body_min_y_m": -0.9629156291484833,
+          "body_max_y_m": 0.037084341049194336,
+          "fluid_points": 52262,
+          "fluid_height_m": 1.5931943729519844,
+          "pressure_max": 388.720947265625,
+          "errors": []
+        },
+        {
+          "frame": 10,
+          "body_center_y_m": -0.616144523024559,
+          "body_min_y_m": -1.1161445081233978,
+          "body_max_y_m": -0.11614453792572021,
+          "fluid_points": 53193,
+          "fluid_height_m": 1.6022617779672146,
+          "pressure_max": 429.6015930175781,
+          "errors": []
+        },
+        {
+          "frame": 11,
+          "body_center_y_m": -0.7863988727331161,
+          "body_min_y_m": -1.286398857831955,
+          "body_max_y_m": -0.28639888763427734,
+          "fluid_points": 53986,
+          "fluid_height_m": 1.6153851225972176,
+          "pressure_max": 597.5352172851562,
+          "errors": []
+        },
+        {
+          "frame": 12,
+          "body_center_y_m": -0.9736786931753159,
+          "body_min_y_m": -1.4736786782741547,
+          "body_max_y_m": -0.47367870807647705,
+          "fluid_points": 54505,
+          "fluid_height_m": 1.6263261437416077,
+          "pressure_max": 1932.183349609375,
+          "errors": []
+        },
+        {
+          "frame": 13,
+          "body_center_y_m": -1.1779838651418686,
+          "body_min_y_m": -1.6779838502407074,
+          "body_max_y_m": -0.6779838800430298,
+          "fluid_points": 55021,
+          "fluid_height_m": 1.6204533576965332,
+          "pressure_max": 477.6676025390625,
+          "errors": []
+        },
+        {
+          "frame": 14,
+          "body_center_y_m": -1.399314507842064,
+          "body_min_y_m": -1.8993144929409027,
+          "body_max_y_m": -0.8993145227432251,
+          "fluid_points": 55134,
+          "fluid_height_m": 1.609132081270218,
+          "pressure_max": 489.24755859375,
+          "errors": []
+        },
+        {
+          "frame": 15,
+          "body_center_y_m": -1.6376706212759018,
+          "body_min_y_m": -2.1376706063747406,
+          "body_max_y_m": -1.137670636177063,
+          "fluid_points": 55222,
+          "fluid_height_m": 1.5947876907885075,
+          "pressure_max": 282.9579772949219,
+          "errors": []
+        },
+        {
+          "frame": 16,
+          "body_center_y_m": -1.8930522054433823,
+          "body_min_y_m": -2.393052190542221,
+          "body_max_y_m": -1.3930522203445435,
+          "fluid_points": 55357,
+          "fluid_height_m": 1.5829419288784266,
+          "pressure_max": 279.6029357910156,
+          "errors": []
+        },
+        {
+          "frame": 17,
+          "body_center_y_m": -2.1654592603445053,
+          "body_min_y_m": -2.665459245443344,
+          "body_max_y_m": -1.6654592752456665,
+          "fluid_points": 55506,
+          "fluid_height_m": 1.569045904558152,
+          "pressure_max": 440.49566650390625,
+          "errors": []
+        },
+        {
+          "frame": 18,
+          "body_center_y_m": -2.454891547560692,
+          "body_min_y_m": -2.9548915326595306,
+          "body_max_y_m": -1.954891562461853,
+          "fluid_points": 55606,
+          "fluid_height_m": 1.5620257509872317,
+          "pressure_max": 3108.93505859375,
+          "errors": []
+        },
+        {
+          "frame": 19,
+          "body_center_y_m": -2.761349305510521,
+          "body_min_y_m": -3.2613492906093597,
+          "body_max_y_m": -2.261349320411682,
+          "fluid_points": 55690,
+          "fluid_height_m": 1.5590051300823689,
+          "pressure_max": 442.09185791015625,
+          "errors": []
+        },
+        {
+          "frame": 20,
+          "body_center_y_m": -3.0848325341939926,
+          "body_min_y_m": -3.5848325192928314,
+          "body_max_y_m": -2.584832549095154,
+          "fluid_points": 55770,
+          "fluid_height_m": 1.5551803410053253,
+          "pressure_max": 366.30810546875,
+          "errors": []
+        },
+        {
+          "frame": 21,
+          "body_center_y_m": -3.425341233611107,
+          "body_min_y_m": -3.9253412187099457,
+          "body_max_y_m": -2.925341248512268,
+          "fluid_points": 55819,
+          "fluid_height_m": 1.5719726979732513,
+          "pressure_max": 349.0934753417969,
+          "errors": []
+        },
+        {
+          "frame": 22,
+          "body_center_y_m": -3.7828754037618637,
+          "body_min_y_m": -4.2828753888607025,
+          "body_max_y_m": -3.282875418663025,
+          "fluid_points": 55929,
+          "fluid_height_m": 1.7327162623405457,
+          "pressure_max": 341.4618835449219,
+          "errors": []
+        },
+        {
+          "frame": 23,
+          "body_center_y_m": -4.157435044646263,
+          "body_min_y_m": -4.657435029745102,
+          "body_max_y_m": -3.6574350595474243,
+          "fluid_points": 55963,
+          "fluid_height_m": 1.885650873184204,
+          "pressure_max": 343.6297607421875,
+          "errors": []
+        },
+        {
+          "frame": 24,
+          "body_center_y_m": -4.549019917845726,
+          "body_min_y_m": -5.049019902944565,
+          "body_max_y_m": -4.049019932746887,
+          "fluid_points": 56041,
+          "fluid_height_m": 2.023917943239212,
+          "pressure_max": 341.4244689941406,
+          "errors": []
+        }
+      ],
+      "private_original_sha256": "f26e9166c65ca4b7dc69ba1110a9573be7e667547f65649deeb25f3f405594e7"
+    },
+    "headline_measurements": {
+      "feedback_enabled_frame24_center_y_m": 0.34263373911382206,
+      "feedback_enabled_frame48_center_y_m": 0.3326300084590982,
+      "feedback_disabled_frame24_center_y_m": -4.549019917845726,
+      "display_rounded_m": [
+        0.34263,
+        0.33263,
+        -4.54902
+      ]
+    },
+    "limits": [
+      "No boat fracture acceptance",
+      "No settled fragment-flotation acceptance",
+      "Only the corrected feedback-disabled control is used; the earlier bounds-biased control is excluded."
+    ]
+  },
+  "first_boat_diagnostic": {
+    "scope": "Retained first boat diagnostic; not the final production solve",
+    "frame_count": 26,
+    "source_part_count": 17,
+    "last_frame": 26,
+    "last_frame_attached_count": 17,
+    "last_frame_released_count": 0,
+    "last_frame_fluid_particles": 1002489,
+    "fracture_verified": false,
+    "flotation_verified": false,
+    "private_original_sha256": "d88a27c9da8169a7372daa1d996edad4f949d3f9037a30840a18aaedac8ec8ba",
+    "limits": [
+      "Cache and native scene are not part of this public source package.",
+      "The intended fracture outcome was not achieved."
+    ]
+  }
+}

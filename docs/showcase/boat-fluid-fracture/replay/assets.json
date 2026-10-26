@@ -1,0 +1,42 @@
+{
+  "archive": "../source-model.zip",
+  "archive_sha256": "acf4c00f3d47e5da477f76db40548a714ffd1ac3b124f341149f2d995ef628b9",
+  "members": {
+    "SOURCE.md": {
+      "bytes": 3699,
+      "sha256": "7eed858803b7adccc86f63956183ce6ad5a7e1482c493803d58550bf961045d7"
+    },
+    "boat.mtl": {
+      "bytes": 63,
+      "sha256": "815df82a2f8d5225ff43b85086f4436d549806d18dfa1932b1617f4733e0b667"
+    },
+    "boat.obj": {
+      "bytes": 15968217,
+      "sha256": "87abff3aa0601b83bcf90b918b7a5dfaffaf9a933a968826a85497391c8f0abb"
+    },
+    "material.json": {
+      "bytes": 522,
+      "sha256": "1f59c050985bf5789ce0eb468914014ec6ec9b72b99f0a3d74cdc774fb9ce19e"
+    },
+    "textures/texture_diffuse.png": {
+      "bytes": 4748213,
+      "sha256": "9bdb48c74e4f71387a26f147d5edbc30e876099b26d746766237940ee25bf096"
+    },
+    "textures/texture_metallic.png": {
+      "bytes": 300369,
+      "sha256": "100d0fbcb688d676cc3814fcc16b440e0b2c1826cd3a3574ab62b7dc4b3b09e2"
+    },
+    "textures/texture_normal.png": {
+      "bytes": 3917475,
+      "sha256": "41e5778c2ae5ca4a4a1fb68848b4e4ae777692e78b691d7f0e727a0885160356"
+    },
+    "textures/texture_pbr.png": {
+      "bytes": 2240044,
+      "sha256": "b42c3965d50c376c86f5bdead723495ca569b4ec671545ae4bf0f4fc66efffa5"
+    },
+    "textures/texture_roughness.png": {
+      "bytes": 1222235,
+      "sha256": "3ff0a088b30942b65464975c023ab8a3f9bdf54ff7d9827fdfc95c9df4316513"
+    }
+  }
+}

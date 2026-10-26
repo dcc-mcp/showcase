@@ -1,0 +1,813 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "status": "production_draft_in_progress",
+  "verification_level": "Independent split-source native geometry save/reopen and Bgeo round-trip; repaired diffuse/scalar import; graph repair and cube calibration. Final boat simulation and film unaccepted.",
+  "environment": {
+    "houdini": {
+      "version": "22.0.368",
+      "license_category": "Commercial",
+      "scope": "Task-owned native diagnostic, source acceptance and production-candidate hosts; final solve still in progress"
+    },
+    "adapter": {
+      "source_commit": "c89e52559f9e26867cc12d7676f7c482d63c100b",
+      "scope": "Constraint repair source and a separate material repair candidate are identified independently; no final simulation acceptance inferred",
+      "initial_failure_source_commit": "f518d59b24ccb0edfebcceccbc89435dea8321cb",
+      "material_repair_source_commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3"
+    },
+    "core": {
+      "version": "0.20.48"
+    },
+    "hyper3d_skill": {
+      "version": "0.1.1",
+      "authentication": "validated after initial failure"
+    },
+    "image_generator": {
+      "mode": "built-in",
+      "model": "Unknown",
+      "scope": "Reference image generation only"
+    },
+    "version_basis": "Production operator host/version inspection; the public probe excerpt demonstrates native tool calls and their returned fields.",
+    "renderer": {
+      "name": "Mantra",
+      "host_version": "22.0.368",
+      "scope": "Assembled/initial native stills and reopened independent frame-1 controlled pixel comparison; final production batches still in progress"
+    },
+    "dcc_cua": {
+      "version": "1.12.2",
+      "scope": "Owned-browser launch refused; no browser PID/HWND and no UI observation/input"
+    }
+  },
+  "reference": {
+    "source_format": "PNG",
+    "source_width_px": 1254,
+    "source_height_px": 1254,
+    "source_bytes": 2372878,
+    "source_sha256": "a5e9efa09fce8fd6093fa3622247fb5890e519102e44ca48ca3f0b0bac6a94fc",
+    "public_file": "boat-reference.jpg",
+    "public_width_px": 1254,
+    "public_height_px": 1254,
+    "jpeg_quality": 82,
+    "derivation": "Full frame, RGB JPEG; no crop, compositing or simulated output added."
+  },
+  "checks": [
+    {
+      "name": "Generated reference packaged",
+      "result": "pass",
+      "observed": {
+        "file": "boat-reference.jpg",
+        "width_px": 1254,
+        "height_px": 1254,
+        "mode": "built-in",
+        "prompt": "imagegen-prompt.json"
+      }
+    },
+    {
+      "name": "Initial Hyper3D account access before credential setup",
+      "result": "fail",
+      "expected": "Authenticated account balance response before model generation",
+      "observed": {
+        "success": false,
+        "error": "authentication_missing"
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "Hyper3D authentication recovery",
+      "result": "pass",
+      "observed": {
+        "success": true,
+        "error": null,
+        "account_details": "omitted"
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "Glue constraint relationship under SOP parent",
+      "result": "fail",
+      "expected": "A valid relationship node and constraint network",
+      "observed": {
+        "success": false,
+        "error": "OperationFailed",
+        "native_error": "Invalid node type name"
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "Native DOP type introspection",
+      "result": "pass",
+      "observed": {
+        "success": true,
+        "category": "Dop",
+        "count": 10,
+        "glueconrel_present": true
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "Generated split model native import",
+      "result": "pass",
+      "observed": {
+        "source": "model-manifest.json",
+        "named_parts": 17,
+        "triangles": 150000,
+        "rodin_intact_triangles": 500000,
+        "vertex_uv_present": true,
+        "native_assembled_bounds_min_m": [
+          -1.2534310817718506,
+          -0.2500000596046448,
+          -3.0
+        ],
+        "native_assembled_bounds_max_m": [
+          1.2534310817718506,
+          1.3605291843414307,
+          3.0
+        ]
+      },
+      "evidence": "model-manifest.json"
+    },
+    {
+      "name": "Constraint relationship repair",
+      "result": "pass",
+      "observed": {
+        "host_version": "22.0.368",
+        "checks": [
+          {
+            "constraint_type": "glue",
+            "native_type": "glueconrel",
+            "input_1_matches": true,
+            "sop_source_preserved": true
+          },
+          {
+            "constraint_type": "soft",
+            "native_type": "bulletsoftconrel",
+            "input_1_matches": true,
+            "sop_source_preserved": true
+          },
+          {
+            "constraint_type": "cone",
+            "native_type": "conetwistconrel",
+            "input_1_matches": true,
+            "sop_source_preserved": true
+          }
+        ],
+        "sop_rejection_left_no_nodes": true,
+        "simulation_verified": false
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "Independent cube fluid-feedback control",
+      "result": "pass",
+      "observed": {
+        "feedback_enabled_frame24_center_y_m": 0.34263373911382206,
+        "feedback_enabled_frame48_center_y_m": 0.3326300084590982,
+        "feedback_disabled_frame24_center_y_m": -4.549019917845726,
+        "display_rounded_m": [
+          0.34263,
+          0.33263,
+          -4.54902
+        ],
+        "feedback_enabled_frames": 48,
+        "feedback_disabled_frames": 24,
+        "scope": "Independent cube calibration, not the boat or final fragment solve"
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "First boat diagnostic fracture",
+      "result": "fail",
+      "expected": "At least one part released in response to fluid impact",
+      "observed": {
+        "scope": "Retained first boat diagnostic; not the final production solve",
+        "frame_count": 26,
+        "source_part_count": 17,
+        "last_frame": 26,
+        "last_frame_attached_count": 17,
+        "last_frame_released_count": 0,
+        "last_frame_fluid_particles": 1002489,
+        "fracture_verified": false,
+        "flotation_verified": false,
+        "private_original_sha256": "d88a27c9da8169a7372daa1d996edad4f949d3f9037a30840a18aaedac8ec8ba",
+        "limits": [
+          "Cache and native scene are not part of this public source package.",
+          "The intended fracture outcome was not achieved."
+        ]
+      },
+      "evidence": "probe-summary.json"
+    },
+    {
+      "name": "Portable split source package integrity",
+      "result": "pass",
+      "observed": {
+        "archive": "source-model.zip",
+        "member_count": 9,
+        "mesh_objects": 17,
+        "triangles": 150000,
+        "objects_use_disjoint_vertex_indices": true,
+        "original_obj_payload_retained": true
+      },
+      "evidence": "model-manifest.json"
+    },
+    {
+      "name": "Archive integrity and no-overwrite extraction",
+      "result": "pass",
+      "observed": {
+        "verified_members": 9,
+        "sha256_matches": true,
+        "relative_members_only": true
+      },
+      "evidence": "portable-acceptance-summary.json"
+    },
+    {
+      "name": "Typed as-authored geometry import",
+      "result": "pass",
+      "observed": {
+        "parts": 17,
+        "triangles": 150000,
+        "vertex_uv_present": true
+      },
+      "evidence": "portable-acceptance-summary.json"
+    },
+    {
+      "name": "Native HIP save and reopen geometry",
+      "result": "pass",
+      "observed": {
+        "part_counts_equal": true,
+        "bounds_equal": true,
+        "ordered_position_float32_sha256_equal": true,
+        "ordered_uv_float32_sha256_equal": true,
+        "ordered_normal_float32_sha256_equal": true
+      },
+      "evidence": "portable-acceptance-summary.json"
+    },
+    {
+      "name": "Typed Bgeo export and reimport geometry",
+      "result": "pass",
+      "observed": {
+        "part_counts_equal": true,
+        "bounds_equal": true,
+        "primitive_topology_equal": true,
+        "part_paths_equal": true,
+        "primitive_material_assignment_strings_equal": true,
+        "position_max_abs_difference_source_units": 0.0,
+        "compared_primitive_corners": 450000,
+        "corner_aligned_uv_max_abs_difference": 0.0,
+        "corner_aligned_normal_max_abs_difference": 0.0
+      },
+      "evidence": "portable-acceptance-summary.json"
+    },
+    {
+      "name": "As-authored diffuse texture binding",
+      "result": "fail",
+      "expected": {
+        "basecolor_useTexture": 1,
+        "basecolor_texture": "relative diffuse texture resolved from the packaged MTL"
+      },
+      "observed": {
+        "material_binding_present": true,
+        "basecolor_useTexture": 0,
+        "basecolor_texture_empty": true,
+        "material_fallback_warning": true,
+        "same_failure_after_hip_reopen": true
+      },
+      "evidence": "portable-acceptance-summary.json"
+    },
+    {
+      "name": "Repaired portable diffuse and scalar material import",
+      "result": "pass",
+      "observed": {
+        "pull_request_number": 361,
+        "source_commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+        "targeted_tests_passed": 224,
+        "native_observation_source": "candidate-uncommitted",
+        "diffuse_texture_enabled_and_existing": true,
+        "roughness_observed": 0.408248290463863,
+        "metallic_observed": 0,
+        "opacity_observed": 1,
+        "save_reopen_parity": true,
+        "missing_required_texture_status": "partial",
+        "scope": "Local OBJ diffuse map and scalar material values; not full PBR texture parity",
+        "evidence": "material-repair-summary.json"
+      },
+      "evidence": "material-repair-summary.json"
+    },
+    {
+      "name": "Independent blank-scene two-frame rebuild",
+      "result": "pass",
+      "observed": {
+        "evidence": "rebuild-summary.json",
+        "source_commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+        "host_version": "22.0.368",
+        "node_count": 51,
+        "recipe_stages_dry_run_and_applied": 12,
+        "named_source_parts": 17,
+        "simulation_proxy_triangle_count": 4000,
+        "restored_visual_triangle_count": 150000,
+        "restored_visual_rest_position_max_error_m": 0.0,
+        "comparison": {
+          "scope": "independent_blank_scene_short_rebuild",
+          "frames_compared": [
+            1,
+            2
+          ],
+          "position_tolerance_m": 1e-05,
+          "passed": true,
+          "comparisons": [
+            {
+              "frame": 1,
+              "cache": "pieces",
+              "points": 75003,
+              "primitives": 150000,
+              "position_max_component_error_m": 0.0,
+              "names_paths_uv_normals_match": true
+            },
+            {
+              "frame": 1,
+              "cache": "water_particles",
+              "points": 104506,
+              "primitives": 0,
+              "position_max_component_error_m": 0.0
+            },
+            {
+              "frame": 2,
+              "cache": "pieces",
+              "points": 75003,
+              "primitives": 150000,
+              "position_max_component_error_m": 0.0,
+              "names_paths_uv_normals_match": true
+            },
+            {
+              "frame": 2,
+              "cache": "water_particles",
+              "points": 205344,
+              "primitives": 0,
+              "position_max_component_error_m": 0.0
+            }
+          ],
+          "full_sequence_equivalence_verified": false
+        },
+        "native_hip_reopen_passed": true,
+        "controlled_render_pixel_parity": "pending",
+        "scope": "Blank-scene reconstruction and exact comparison of frames 1 and 2 only; full 96-frame independent rebuild is not performed",
+        "basis": "Public cache comparison summary plus production operator native recipe/reopen report"
+      },
+      "evidence": "rebuild-summary.json"
+    },
+    {
+      "name": "Reopened independent frame-1 controlled render",
+      "result": "pass",
+      "observed": {
+        "scope": "reopened independent blank-scene replay frame1 controlled Mantra render",
+        "resolution": [
+          960,
+          540
+        ],
+        "pixel_format": "gbrpf32le",
+        "native_source_exr_sha256": "743df4f35dca141405558cc3d3a33845483a874f009dd928a6f9edff4c4cac0c",
+        "rebuild_exr_sha256": "74723775315ae79a7ec514c0dc7b9df63bd60fb26920c1147f500e89797a7dbe",
+        "decoded_pixel_sha256": "e52da462ce19f8d335d60cf6bc38b1084666417242827ab31410d0559d62cf38",
+        "decoded_pixels_match": true,
+        "container_bytes_match": false,
+        "all_frames_render_equivalence_verified": false
+      },
+      "evidence": "render-rebuild-summary.json"
+    },
+    {
+      "name": "Same-setup feedback-disabled short control",
+      "result": "pass",
+      "observed": {
+        "evidence": "feedback-control-summary.json",
+        "scope": "Four-frame feedback-disabled control; no final production verdict",
+        "frame_count": 4,
+        "all_17_parts_attached": true,
+        "released_parts": 0,
+        "feedback_scale": 0.0,
+        "feedback_record_body_count": 0,
+        "nonzero_load_body_count": 0,
+        "diagnostic_note": "Hydrodynamic diagnostic records exist after frame 1 but contain zero feedback count and zero load ratio."
+      },
+      "evidence": "feedback-control-summary.json"
+    }
+  ],
+  "production_stages": {
+    "reference_generation": {
+      "status": "passed",
+      "scope": "Generated reference and full-frame JPEG derivative only"
+    },
+    "model_generation": {
+      "status": "passed",
+      "scope": "Rodin generated intact model; Bang returned split model; native import measured counts and UVs"
+    },
+    "constraint_repair": {
+      "status": "passed",
+      "scope": "Three native relationship types and SOP rejection checks only; graph skeleton, not completed simulation"
+    },
+    "mesh_import_and_repair": {
+      "status": "passed",
+      "scope": "Imported split mesh and inspected UVs/counts; no watertightness or topology repair certification"
+    },
+    "fluid_driven_fracture": {
+      "status": "not-tested",
+      "scope": "Current final candidate remains in progress; the first 26-frame boat diagnostic failed and remains in checks and first_boat_diagnostic."
+    },
+    "fragment_flotation": {
+      "status": "not-tested",
+      "reason": "No terminal released-boat-fragment waterline and settling-window report"
+    },
+    "cache": {
+      "status": "not-tested",
+      "reason": "Partial diagnostic cache exists; final complete cache acceptance pending"
+    },
+    "render_and_video": {
+      "status": "not-tested",
+      "reason": "Two actual native stills exist; continuous final film has not been delivered"
+    },
+    "native_save_reopen": {
+      "status": "passed",
+      "scope": "Portable split-source geometry and repaired diffuse/scalar material only; final simulation reopening is not covered",
+      "evidence": "portable-acceptance-summary.json and material-repair-summary.json"
+    },
+    "export_reopen": {
+      "status": "passed",
+      "scope": "Split-source Bgeo geometry only; topology/part paths and all 450000 primitive-corner UV/normal values retained with zero measured differences",
+      "evidence": "portable-acceptance-summary.json"
+    },
+    "independent_rebuild": {
+      "status": "passed",
+      "scope": "Blank-scene recipe and frames 1 and 2 only; 51 nodes across 12 dry-run/applied stages, source/proxy restoration and exact initial cache comparison",
+      "evidence": "rebuild-summary.json"
+    },
+    "rights": {
+      "status": "not-tested",
+      "reason": "No model redistribution or generated-artwork rights review completed"
+    },
+    "visual_motion_review": {
+      "status": "not-tested",
+      "reason": "No simulated motion to review"
+    },
+    "audio_review": {
+      "status": "not-tested",
+      "reason": "No delivered video or audio"
+    },
+    "localization": {
+      "status": "not-tested",
+      "reason": "Bilingual presentation draft prepared outside the selected collection; no rendered case page or browser review"
+    },
+    "public_playback": {
+      "status": "not-tested",
+      "reason": "No publication or video"
+    },
+    "cube_calibration": {
+      "status": "passed",
+      "scope": "Independent feedback-enabled cube and corrected feedback-disabled control only"
+    },
+    "native_simulation_save_reopen": {
+      "status": "not-tested",
+      "reason": "Final simulation state and cache-linked reopen not accepted"
+    },
+    "exported_simulation_reopen": {
+      "status": "not-tested",
+      "reason": "No accepted exported final simulation sequence"
+    },
+    "material_import_repair": {
+      "status": "passed",
+      "scope": "Local OBJ diffuse map and scalar material values; not full PBR texture parity",
+      "evidence": "material-repair-summary.json"
+    },
+    "browser_qa": {
+      "status": "blocked",
+      "reason": "Official DCC-CUA 1.12.2 owned-browser launch returned browser_refused from an elevated runtime before target binding; no observation/input",
+      "evidence": "browser-qa-summary.json"
+    },
+    "independent_full_sequence_rebuild": {
+      "status": "not-tested",
+      "reason": "Full 96-frame independent reconstruction and terminal fracture/flotation equivalence have not been run"
+    },
+    "first_frame_rebuild_render": {
+      "status": "passed",
+      "scope": "Reopened independent blank-scene replay frame 1 only; decoded RGB float pixels match production, EXR metadata/container hashes differ",
+      "evidence": "render-rebuild-summary.json"
+    }
+  },
+  "acceptance_targets": {
+    "record_kind": "targets only, not measured results",
+    "fluid_driven_breakage": "At least one glue constraint breaks under measured fluid loading; compare a control without that impact loading.",
+    "floating_fragments": "At least one retained wood fragment stays partially submerged for a declared contiguous settling interval with measured motion and immersion.",
+    "details": "reproduction-brief.md"
+  },
+  "not_claimed": [
+    "Watertight, structurally correct or engineering-calibrated generated model",
+    "Successful terminal boat fracture or later settled fragment flotation",
+    "A complete final simulation cache or continuous final film",
+    "Final simulation HIP save/reopen, exported-result reopening or full-sequence independent recipe equivalence",
+    "Full PBR texture import, rendered material equivalence or cross-application parity",
+    "Public native HIP/Bgeo redistribution; these acceptance artifacts remain private",
+    "Gallery selection, bilingual browser/playback acceptance, deployment or public playback",
+    "Independent legal clearance or additional artwork/training/evaluation-data license",
+    "Image-generator model identity verification"
+  ],
+  "model": {
+    "source": "model-manifest.json",
+    "named_parts": 17,
+    "triangles": 150000,
+    "rodin_intact_triangles": 500000,
+    "vertex_uv_present": true,
+    "native_assembled_bounds_min_m": [
+      -1.2534310817718506,
+      -0.2500000596046448,
+      -3.0
+    ],
+    "native_assembled_bounds_max_m": [
+      1.2534310817718506,
+      1.3605291843414307,
+      3.0
+    ]
+  },
+  "cube_calibration": {
+    "feedback_enabled_frame24_center_y_m": 0.34263373911382206,
+    "feedback_enabled_frame48_center_y_m": 0.3326300084590982,
+    "feedback_disabled_frame24_center_y_m": -4.549019917845726,
+    "display_rounded_m": [
+      0.34263,
+      0.33263,
+      -4.54902
+    ],
+    "feedback_enabled_frames": 48,
+    "feedback_disabled_frames": 24,
+    "scope": "Independent cube calibration, not the boat or final fragment solve"
+  },
+  "first_boat_diagnostic": {
+    "scope": "Retained first boat diagnostic; not the final production solve",
+    "frame_count": 26,
+    "source_part_count": 17,
+    "last_frame": 26,
+    "last_frame_attached_count": 17,
+    "last_frame_released_count": 0,
+    "last_frame_fluid_particles": 1002489,
+    "fracture_verified": false,
+    "flotation_verified": false,
+    "private_original_sha256": "d88a27c9da8169a7372daa1d996edad4f949d3f9037a30840a18aaedac8ec8ba",
+    "limits": [
+      "Cache and native scene are not part of this public source package.",
+      "The intended fracture outcome was not achieved."
+    ]
+  },
+  "constraint_repair": {
+    "pull_request_number": 360,
+    "source_commit": "c89e52559f9e26867cc12d7676f7c482d63c100b",
+    "native_types": [
+      "glueconrel",
+      "bulletsoftconrel",
+      "conetwistconrel"
+    ],
+    "setup_state": "skeleton",
+    "simulation_verified": false,
+    "ci": "Exact-head CI passed; licensed Docker E2E skipped",
+    "ci_basis": "Production operator exact-head CI observation"
+  },
+  "collection_selection": {
+    "selected": false,
+    "condition": "Root acceptance of terminal simulation, measured fragment flotation and delivered final media; browser and publication gates remain separate."
+  },
+  "portable_source_acceptance": {
+    "evidence": "portable-acceptance-summary.json",
+    "scope": "Independent headless native acceptance of the delivered split-model archive; no boat simulation acceptance",
+    "archive_sha256": "acf4c00f3d47e5da477f76db40548a714ffd1ac3b124f341149f2d995ef628b9",
+    "measurements": {
+      "part_count": 17,
+      "point_count": 75003,
+      "triangle_count": 150000,
+      "vertex_count": 450000,
+      "parts": [
+        {
+          "label": "root.18",
+          "triangles": 5258
+        },
+        {
+          "label": "root.17",
+          "triangles": 7784
+        },
+        {
+          "label": "root.16",
+          "triangles": 1874
+        },
+        {
+          "label": "root.15",
+          "triangles": 19844
+        },
+        {
+          "label": "root.14",
+          "triangles": 7462
+        },
+        {
+          "label": "root.13",
+          "triangles": 820
+        },
+        {
+          "label": "root.11",
+          "triangles": 57178
+        },
+        {
+          "label": "root.10",
+          "triangles": 3924
+        },
+        {
+          "label": "root.9",
+          "triangles": 21938
+        },
+        {
+          "label": "root.8",
+          "triangles": 2624
+        },
+        {
+          "label": "root.6",
+          "triangles": 1012
+        },
+        {
+          "label": "root.5",
+          "triangles": 2462
+        },
+        {
+          "label": "root.4",
+          "triangles": 3946
+        },
+        {
+          "label": "root.3",
+          "triangles": 3606
+        },
+        {
+          "label": "root.2",
+          "triangles": 1216
+        },
+        {
+          "label": "root.1",
+          "triangles": 6658
+        },
+        {
+          "label": "root.0",
+          "triangles": 2394
+        }
+      ],
+      "uv_present": true,
+      "normal_present": true,
+      "bounds_min_source_units": [
+        -0.39545300602912903,
+        -0.26061201095581055,
+        -0.9493370056152344
+      ],
+      "bounds_max_source_units": [
+        0.39746999740600586,
+        0.24879999458789825,
+        0.9484689831733704
+      ],
+      "bounds_size_source_units": [
+        0.7929230034351349,
+        0.5094120055437088,
+        1.8978059887886047
+      ],
+      "source_physical_units": "unspecified"
+    },
+    "geometry_fingerprints": {
+      "import_position_float32_sha256": "7797f54364bd9c164b4b303e22fdd24185219904dd48081508e5260c4f9e6e5a",
+      "import_uv_float32_sha256": "72689c8ae537359b231b6c2315c043540cde616442767b7c05b844c5040ed3f6",
+      "import_normal_float32_sha256": "1c4d3fa8df0d7253eb0a3c81f80481e3bc45a9a6cee07f276d5be0176f255b21",
+      "hip_reopen_matches_import": true,
+      "bgeo_vertex_storage_order_changed": true,
+      "note": "Flat vertex-storage UV/normal hashes differ after Bgeo loading. Full per-primitive/local-corner alignment establishes zero value difference across every corresponding vertex; raw storage hashes are not used as a semantic parity verdict."
+    },
+    "material_failure_retained": {
+      "materials_detected": 1,
+      "materials_imported_reported": 1,
+      "materials_lost_reported": 0,
+      "reported_status": "as_authored",
+      "warning_codes": [
+        "material_fallback"
+      ],
+      "unapplied_parameters": [
+        "metallic",
+        "roughness",
+        "opacity"
+      ],
+      "basecolor_useTexture": 0,
+      "basecolor_texture_empty": true,
+      "roughness_observed": 0.3,
+      "metallic_observed": 0.0,
+      "opacity_observed": 1.0,
+      "scope": "A material node and assignment exist, but diffuse texture binding failed. Separate PBR maps are delivered in the archive; importer parity is not claimed."
+    }
+  },
+  "material_repair": {
+    "pull_request_number": 361,
+    "source_commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "targeted_tests_passed": 224,
+    "native_observation_source": "candidate-uncommitted",
+    "diffuse_texture_enabled_and_existing": true,
+    "roughness_observed": 0.408248290463863,
+    "metallic_observed": 0,
+    "opacity_observed": 1,
+    "save_reopen_parity": true,
+    "missing_required_texture_status": "partial",
+    "scope": "Local OBJ diffuse map and scalar material values; not full PBR texture parity",
+    "evidence": "material-repair-summary.json"
+  },
+  "production_checkpoint": {
+    "candidate": "final01",
+    "state": "in_progress",
+    "frame": 36,
+    "released_parts_at_checkpoint": 10,
+    "basis": "Production operator partial checkpoint, not a terminal acceptance report",
+    "fracture_verified": false,
+    "flotation_verified": false,
+    "render_state": "Native Mantra batches running; no continuous final film delivered",
+    "early_release_checkpoint": {
+      "frame": 2,
+      "attached_count": 13,
+      "released_count": 4,
+      "basis": "Production operator checkpoint; final solve has not reached acceptance"
+    },
+    "last_12_frame_kinetic_preanalysis": {
+      "frames": [
+        25,
+        36
+      ],
+      "settled_piece_found": false,
+      "scope": "Motion preanalysis only; no terminal local-waterline flotation verdict"
+    }
+  },
+  "short_rebuild_acceptance": {
+    "evidence": "rebuild-summary.json",
+    "source_commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "host_version": "22.0.368",
+    "node_count": 51,
+    "recipe_stages_dry_run_and_applied": 12,
+    "named_source_parts": 17,
+    "simulation_proxy_triangle_count": 4000,
+    "restored_visual_triangle_count": 150000,
+    "restored_visual_rest_position_max_error_m": 0.0,
+    "comparison": {
+      "scope": "independent_blank_scene_short_rebuild",
+      "frames_compared": [
+        1,
+        2
+      ],
+      "position_tolerance_m": 1e-05,
+      "passed": true,
+      "comparisons": [
+        {
+          "frame": 1,
+          "cache": "pieces",
+          "points": 75003,
+          "primitives": 150000,
+          "position_max_component_error_m": 0.0,
+          "names_paths_uv_normals_match": true
+        },
+        {
+          "frame": 1,
+          "cache": "water_particles",
+          "points": 104506,
+          "primitives": 0,
+          "position_max_component_error_m": 0.0
+        },
+        {
+          "frame": 2,
+          "cache": "pieces",
+          "points": 75003,
+          "primitives": 150000,
+          "position_max_component_error_m": 0.0,
+          "names_paths_uv_normals_match": true
+        },
+        {
+          "frame": 2,
+          "cache": "water_particles",
+          "points": 205344,
+          "primitives": 0,
+          "position_max_component_error_m": 0.0
+        }
+      ],
+      "full_sequence_equivalence_verified": false
+    },
+    "native_hip_reopen_passed": true,
+    "controlled_render_pixel_parity": "passed for frame 1 only",
+    "scope": "Blank-scene reconstruction and exact comparison of frames 1 and 2 only; full 96-frame independent rebuild is not performed",
+    "basis": "Public cache comparison summary plus production operator native recipe/reopen report",
+    "controlled_render_evidence": "render-rebuild-summary.json"
+  },
+  "render_delivery_plan": {
+    "source": "Unretouched native Mantra EXRs",
+    "preview_transfer": "Explicit gamma 2.2 conversion for presentation",
+    "adopted_denoising": false,
+    "scope": "Final media still pending; no filmic or ACES accuracy claim"
+  },
+  "feedback_disabled_control": {
+    "evidence": "feedback-control-summary.json",
+    "scope": "Four-frame feedback-disabled control; no final production verdict",
+    "frame_count": 4,
+    "all_17_parts_attached": true,
+    "released_parts": 0,
+    "feedback_scale": 0.0,
+    "feedback_record_body_count": 0,
+    "nonzero_load_body_count": 0,
+    "diagnostic_note": "Hydrodynamic diagnostic records exist after frame 1 but contain zero feedback count and zero load ratio."
+  }
+}

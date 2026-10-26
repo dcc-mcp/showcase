@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "scope": "Four-frame feedback-disabled control; no final production verdict",
+  "metrics_status": "cached",
+  "source_part_count": 17,
+  "frame_count": 4,
+  "feedback_scale": 0.0,
+  "feedback_observed": false,
+  "collision_sdf_divsize_m": 0.04,
+  "collision_surface_offset_m": 0.08,
+  "particle_separation_m": 0.1,
+  "grid_scale": 1.25,
+  "particles_per_voxel": 4,
+  "max_glueimpulse": 0.0,
+  "frames": [
+    {
+      "frame": 1,
+      "attached_count": 17,
+      "released_count": 0,
+      "fluid_points": 104506,
+      "feedback_record_body_count": 0,
+      "hydrodynamic_diagnostic_body_count": 0,
+      "total_native_feedback_record_count": 0,
+      "nonzero_load_body_count": 0,
+      "release_flags_true": 0
+    },
+    {
+      "frame": 2,
+      "attached_count": 17,
+      "released_count": 0,
+      "fluid_points": 205344,
+      "feedback_record_body_count": 0,
+      "hydrodynamic_diagnostic_body_count": 17,
+      "total_native_feedback_record_count": 0,
+      "nonzero_load_body_count": 0,
+      "release_flags_true": 0
+    },
+    {
+      "frame": 3,
+      "attached_count": 17,
+      "released_count": 0,
+      "fluid_points": 216860,
+      "feedback_record_body_count": 0,
+      "hydrodynamic_diagnostic_body_count": 17,
+      "total_native_feedback_record_count": 0,
+      "nonzero_load_body_count": 0,
+      "release_flags_true": 0
+    },
+    {
+      "frame": 4,
+      "attached_count": 17,
+      "released_count": 0,
+      "fluid_points": 224148,
+      "feedback_record_body_count": 0,
+      "hydrodynamic_diagnostic_body_count": 17,
+      "total_native_feedback_record_count": 0,
+      "nonzero_load_body_count": 0,
+      "release_flags_true": 0
+    }
+  ],
+  "comparison_setup": {
+    "simulation_proxy_triangles": 4000,
+    "restored_visual_triangles": 150000,
+    "walled_domain": true,
+    "basis": "Production operator confirmed the same proxy/walls/high-resolution reconstruction setup as the in-progress final candidate"
+  },
+  "original_metrics_sha256": "f1330919ddf6b907308e558ad8e3571f830c26351b1d4b449ae9c95072f06e36",
+  "fracture_verified": false,
+  "flotation_verified": false,
+  "not_claimed": [
+    "Complete production solve acceptance",
+    "Settled-fragment flotation",
+    "Full-duration control equivalence"
+  ]
+}

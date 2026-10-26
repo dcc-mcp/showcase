@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "provider": "dcc-cua",
+  "runtime_version": "1.12.2",
+  "status": "blocked",
+  "stage": "owned_browser_launch",
+  "code": "browser_refused",
+  "reason": "The official owned-browser route refused the elevated runtime before returning a browser target.",
+  "process_id": null,
+  "window_handle": null,
+  "ui_observations": 0,
+  "ui_inputs": 0,
+  "scope": "Local bilingual gallery and final media playback were not performed.",
+  "next_condition": "Run the official project route from a supported non-elevated runtime and obtain a task-owned exact PID/HWND binding before observation."
+}

@@ -1,0 +1,283 @@
+{
+  "slug": "boat-fluid-fracture",
+  "title": "17 块生成船体通过原生几何往返，流体破碎仍在解算",
+  "subtitle": "imagegen → Hyper3D → Houdini · 未入选的制作草稿",
+  "software": [
+    "imagegen",
+    "Hyper3D",
+    "Houdini"
+  ],
+  "capabilities": [
+    "流体解算",
+    "刚体破碎",
+    "原生往返验证"
+  ],
+  "cover": {
+    "src": "docs/showcase/boat-fluid-fracture/split-assembled.jpg",
+    "alt": "真实 Mantra 渲染的组装船体，尚未证明流体破碎"
+  },
+  "evidence_label": "源几何与材质修复通过 · 最终破碎和漂浮未验收",
+  "evidence_scope": "17 块、150000 三角形的生成源通过独立 HIP 保存重开和 Bgeo 几何往返。原始漫反射绑定失败保留；PR #361 后续候选通过原生纹理和标量回读。PR #360 约束图及独立立方体反馈通过。最终船体解算和影片尚未完成；DCC-CUA 浏览器在绑定前被拒绝。",
+  "summary": "从实际生成参考和模型出发，在 Houdini 建立流体与刚体制作链。已完成源模型的几何往返与有限材质修复，最终水流破碎、碎片漂浮和连续影片仍待终态证据。",
+  "goal": "保留真实生成源与可复现解算，把水流加载、约束释放、刚体反馈和后续漂浮逐项验证；以实际连续帧交付，不把预分件、脚本位移或局部缓存当作终态验收。",
+  "prompt": {
+    "kind": "reusable",
+    "text": "用内置 imagegen 生成开放船舱木船参考，经 Hyper3D Rodin 建模和 Bang 分件。导入 Houdini 并保留 UV，建立真实水流冲击、按流体加载释放的约束及后续刚体反馈。记录实际质量、代理限制、水线和碎片运动，完成连续缓存、原生重开、独立复现和成片检查后再入选 showcase。",
+    "note": "按当前制作链整理的可复用说明；不包含私有对话、任务标识或凭据。"
+  },
+  "environment": [
+    {
+      "label": "Houdini",
+      "value": "Houdini 22.0.368 Commercial · 无界面原生解算与 Mantra"
+    },
+    {
+      "label": "Hyper3D",
+      "value": "Hyper3D Skill 0.1.1 · Rodin Gen-2.5-Medium / Bang；提供方内部版本未知"
+    },
+    {
+      "label": "imagegen",
+      "value": "imagegen 内置工具；具体图像模型与版本未知"
+    },
+    {
+      "label": "适配器源码",
+      "value": "约束修复 c89e525；材质修复 73e9db1；公开证据分别限定，不宣称已正式发布"
+    },
+    {
+      "label": "DCC-MCP 核心",
+      "value": "DCC-MCP Core 0.20.48 · 真实 typed 工具与有范围的宿主脚本"
+    },
+    {
+      "label": "dcc-cua",
+      "value": "dcc-cua 1.12.2 · elevated runtime 的 owned-browser 启动被拒绝；无界面输入"
+    }
+  ],
+  "tools": [
+    {
+      "name": "imagegen",
+      "description": "内置工具生成完整木船参考；参考图与真实模拟画面分开记录。"
+    },
+    {
+      "name": "Hyper3D Rodin / Bang",
+      "description": "真实生成与分件输出保留网格、贴图、参数和哈希；不公开提供方任务标识或临时链接。"
+    },
+    {
+      "name": "Houdini typed DCC-MCP",
+      "description": "导入、节点链、参数、保存重开、几何导出回导入和渲染经正式工具执行；缺口修复单列 PR。"
+    },
+    {
+      "name": "有范围的物理与回读脚本",
+      "description": "流体加载阈值、缓存与局部水线测量使用公开参数化宿主脚本；它们不冒称已发布的专用 typed 能力。"
+    }
+  ],
+  "steps": [
+    {
+      "title": "保留生成源",
+      "description": "Rodin 生成 500000 三角形完整船体，Bang 输出 17 块、150000 三角形。保留原图、独立贴图与源哈希。"
+    },
+    {
+      "title": "验证几何并修复材质边界",
+      "description": "源几何通过 HIP 和 Bgeo 往返；最初纹理为空的失败保留。后续候选启用实际漫反射文件、转换标量材质并验证保存重开。"
+    },
+    {
+      "title": "从失败的船体诊断继续",
+      "description": "最初 26 帧中全部 17 块仍相连。后续真实流体加载候选仍在解算；不能从局部释放数推断终态破碎或漂浮。"
+    },
+    {
+      "title": "等待终态证据后入选",
+      "description": "完成水线与碎片稳定区间、连续缓存、复现和成片验收；浏览器严格使用官方 DCC-CUA 精确绑定路由。"
+    }
+  ],
+  "results": [
+    {
+      "src": "docs/showcase/boat-fluid-fracture/split-assembled.jpg",
+      "alt": "组装分件船体的原生 Mantra 静帧",
+      "caption": "真实 1280 × 720 原生静帧；未展示接受的水流破碎或后续漂浮。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/initial-water-state.jpg",
+      "alt": "真实船体与水面的初始状态",
+      "caption": "真实 960 × 540 原生初始状态；不作为最终解算或稳定漂浮证明。"
+    }
+  ],
+  "checks": [
+    {
+      "name": "可移植源几何往返",
+      "result": "pass",
+      "observed": "17 块、75003 点、150000 三角形；HIP 指纹一致，Bgeo 对应图元角点的 UV/法线差值为零。"
+    },
+    {
+      "name": "原始漫反射绑定失败",
+      "result": "fail",
+      "observed": "材质节点与指派存在，但贴图关闭且路径为空；重开后仍失败，原始报告保留。"
+    },
+    {
+      "name": "后续材质修复",
+      "result": "pass",
+      "observed": "PR #361 候选通过 224 项测试及原生 typed 导入、保存重开和必需贴图缺失检查；不证明完整 PBR 贴图或渲染一致。"
+    },
+    {
+      "name": "独立空场景两帧复现",
+      "result": "pass",
+      "observed": "51 个节点、12 阶段 dry-run 与实际构建通过；前两帧刚体和水粒子位置误差为零。17 块源、4000 三角形代理和 150000 三角形可视恢复通过；完整 96 帧未重跑。"
+    },
+    {
+      "name": "重开后的首帧渲染一致",
+      "result": "pass",
+      "observed": "独立复现重开后的 960 × 540 Mantra 首帧与制作源的 RGB float 解码像素完全一致；EXR 元数据和容器哈希不同。仅限首帧，不证明全序列。"
+    },
+    {
+      "name": "关闭反馈的四帧控制",
+      "result": "pass",
+      "observed": "相同代理、边界墙和高分辨率恢复配置下，feedback scale=0 的四帧中全部 17 块相连，原生反馈记录、非零水动力加载和释放均为零；不是完整时长或漂浮验证。"
+    },
+    {
+      "name": "最终破碎、漂浮与影片",
+      "result": "not_run",
+      "observed": "终态连续缓存、水线稳定区间、完整影片和最终视觉复核尚未交付。"
+    },
+    {
+      "name": "中英文浏览器验收",
+      "result": "not_run",
+      "observed": "官方 DCC-CUA 1.12.2 在取得 PID/HWND 前返回 browser_refused；没有界面观察或输入。"
+    }
+  ],
+  "limitations": [
+    "这是未入选草稿；最终船体解算、释放碎片稳定漂浮和连续影片尚未验收。",
+    "几何往返验证源模型，独立空场景只比较前两帧；最终模拟、完整序列复现、跨应用材质一致及公开播放没有通过。",
+    "生成模型不具有工程船体、准确质量或封闭流形认证；代理碰撞和浮力参数须按实际限制解释。",
+    "生成资产适用提供方条款；仓库软件许可不增加艺术品、模型训练或评估数据授权。"
+  ],
+  "resources": [
+    {
+      "label": "分件模型与贴图 ZIP",
+      "url": "docs/showcase/boat-fluid-fracture/source-model.zip"
+    },
+    {
+      "label": "源记录与适用条款",
+      "url": "docs/showcase/boat-fluid-fracture/SOURCE.md"
+    },
+    {
+      "label": "可移植几何验收摘要",
+      "url": "docs/showcase/boat-fluid-fracture/portable-acceptance-summary.json"
+    },
+    {
+      "label": "材质修复验收摘要",
+      "url": "docs/showcase/boat-fluid-fracture/material-repair-summary.json"
+    },
+    {
+      "label": "独立短程复现摘要",
+      "url": "docs/showcase/boat-fluid-fracture/rebuild-summary.json"
+    },
+    {
+      "label": "重开首帧渲染比较",
+      "url": "docs/showcase/boat-fluid-fracture/render-rebuild-summary.json"
+    },
+    {
+      "label": "关闭反馈的短程控制",
+      "url": "docs/showcase/boat-fluid-fracture/feedback-control-summary.json"
+    },
+    {
+      "label": "剩余验收要求",
+      "url": "docs/showcase/boat-fluid-fracture/acceptance-requirements.json"
+    },
+    {
+      "label": "验证数据",
+      "url": "docs/showcase/boat-fluid-fracture/validation.json"
+    },
+    {
+      "label": "文件清单与哈希",
+      "url": "docs/showcase/boat-fluid-fracture/manifest.json"
+    },
+    {
+      "label": "约束修复 PR #360",
+      "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/360"
+    },
+    {
+      "label": "材质修复 PR #361",
+      "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/361"
+    }
+  ],
+  "credits": {
+    "author": "DCC-MCP showcase · 实际生成与原生宿主制作",
+    "license": "软件按仓库许可；生成资产适用提供方条款",
+    "note": "保留生成参考、模型和贴图的来源与修改边界；不添加艺术品、训练数据或评估数据许可。"
+  },
+  "source": {
+    "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/tree/73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "title": "材质边界修复源码；最终物理另按公开配方验收"
+  },
+  "verified_at": "2026-10-26",
+  "model_attribution": [
+    {
+      "stage_id": "planning",
+      "stage": "策划与方向",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "creation",
+      "stage": "资产与原生制作",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "code",
+      "stage": "工具与物理代码",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "reference",
+      "stage": "参考图生成",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "post_production",
+      "stage": "成片后期",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "review_technical",
+      "stage": "独立技术复核",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "review_visual",
+      "stage": "独立视觉复核",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    }
+  ],
+  "revision_notes": [
+    {
+      "version": "制作草稿与源往返补录",
+      "date": "2026-10-26",
+      "change": "保留原始失败，增加独立源几何与后续材质修复验收；最终解算、影片和浏览器仍未验收，不加入选集。"
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "parent_path": "/obj/boat_fluid_dop",
+  "nodes": [
+    {
+      "node_type": "rbdglueobject",
+      "node_name": "boat_pieces",
+      "parameters": {
+        "objname": "boat_glue_root",
+        "soppath": "/obj/boat_fluid_source/SIM_PARTS_4K",
+        "fracturebyname": 1,
+        "internal_gluethreshold": 500,
+        "internal_glueimpulsehalflife": 0.1,
+        "computemass": 1,
+        "density": 400,
+        "bounce": 0,
+        "friction": 0.4,
+        "usevolume": 1,
+        "mode": "rayintersect",
+        "uniformvoxels": "size",
+        "divsize": 0.04,
+        "offset": 0.08
+      }
+    },
+    {
+      "node_type": "flipobject",
+      "node_name": "boat_water",
+      "parameters": {
+        "soppath": "/obj/boat_fluid_source/WATER_VOLUME",
+        "surfacetype": 0,
+        "inittype": "grid",
+        "particlesep": 0.1,
+        "radiusscale": 1.2,
+        "gridscale": 1.25,
+        "closedends": 1,
+        "closeypos": 0,
+        "initvel": 1,
+        "velocity": [
+          3.5,
+          0,
+          0
+        ],
+        "density": 1000,
+        "bounce": 0
+      }
+    },
+    {
+      "node_type": "flipsolver::2.0",
+      "node_name": "water_solver",
+      "parameters": {
+        "feedbackscale": 1,
+        "collision": "particle",
+        "limit_size": [
+          8,
+          4,
+          10
+        ],
+        "limit_t": [
+          0,
+          0.8,
+          0
+        ],
+        "substeps": 4,
+        "partpervoxel": 4
+      }
+    },
+    {
+      "node_type": "merge",
+      "node_name": "mutual_coupling",
+      "parameters": {
+        "affectortype": "mutual",
+        "relationship": "SIM_RelationshipCollide"
+      }
+    },
+    {
+      "node_type": "gravity",
+      "node_name": "gravity",
+      "parameters": {
+        "force": [
+          0,
+          -9.80665,
+          0
+        ],
+        "uniquedataname": 0
+      }
+    },
+    {
+      "node_type": "scriptsolver",
+      "node_name": "fluid_load_failure",
+      "parameters": {
+        "usesnippet": 1,
+        "pythonsnippet": "@HYDRODYNAMIC_GLUE@"
+      }
+    },
+    {
+      "node_type": "rigidbodysolver",
+      "node_name": "ship_rbd_stress",
+      "parameters": {
+        "solver": "rbd"
+      }
+    },
+    {
+      "node_type": "multisolver",
+      "node_name": "ship_with_material_failure"
+    },
+    {
+      "node_type": "staticobject",
+      "node_name": "boat_container",
+      "parameters": {
+        "soppath": "/obj/boat_fluid_source/CONTAINER_COLLISION",
+        "usevolume": 1,
+        "uniformvoxels": "size",
+        "divsize": 0.08,
+        "bounce": 0,
+        "friction": 0.4
+      }
+    }
+  ],
+  "connections": [
+    {
+      "input": "water_solver",
+      "output": "boat_water",
+      "input_index": 0
+    },
+    {
+      "input": "ship_with_material_failure",
+      "output": "boat_pieces",
+      "input_index": 0
+    },
+    {
+      "input": "ship_with_material_failure",
+      "output": "fluid_load_failure",
+      "input_index": 1
+    },
+    {
+      "input": "ship_with_material_failure",
+      "output": "ship_rbd_stress",
+      "input_index": 2
+    },
+    {
+      "input": "mutual_coupling",
+      "output": "ship_with_material_failure",
+      "input_index": 0
+    },
+    {
+      "input": "mutual_coupling",
+      "output": "water_solver",
+      "input_index": 1
+    },
+    {
+      "input": "mutual_coupling",
+      "output": "boat_container",
+      "input_index": 2
+    },
+    {
+      "input": "gravity",
+      "output": "mutual_coupling",
+      "input_index": 0
+    },
+    {
+      "input": "file_output",
+      "output": "gravity",
+      "input_index": 0
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

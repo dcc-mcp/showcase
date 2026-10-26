@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "status": "unselected_production_draft_in_progress",
+  "houdini_application": "Houdini Commercial",
+  "houdini_version": "22.0.368",
+  "reference": "imagegen-prompt.json",
+  "capture_provider": "host-native Mantra renders; built-in image generator for reference only",
+  "files": [
+    {
+      "path": "acceptance-requirements.json",
+      "sha256": "7ea1fc5bdf49084794d50feae8ba4f15127a068b2ed03736caded1c2b22a19e2",
+      "bytes": 4341
+    },
+    {
+      "path": "boat-reference.jpg",
+      "sha256": "0ea942e5b36290245f78911dc151b73640113aa3349f286a0f9bffdd81d81992",
+      "bytes": 190605,
+      "width": 1254,
+      "height": 1254,
+      "bit_depth": 8
+    },
+    {
+      "path": "browser-qa-summary.json",
+      "sha256": "ad9d9d2be11cf57d395c2494d157a4d0b29d390d3fb5c535f17b8c805b4f97e5",
+      "bytes": 659
+    },
+    {
+      "path": "collection-case.draft.json",
+      "sha256": "37d14e705f4b6db02e3a3a0edefb3be9a8ed60ad2faa961ba6822c2084beff1b",
+      "bytes": 12770
+    },
+    {
+      "path": "feedback-control-summary.json",
+      "sha256": "f6c5005a476f6c3ec9f889fb474146847d62198343a0ebf785f3bee23a73575b",
+      "bytes": 2382
+    },
+    {
+      "path": "imagegen-prompt.json",
+      "sha256": "df77bc3c9b3d66730d392de651dffd384abc2b6ec5b3bbe18b775fd2a734331c",
+      "bytes": 1431
+    },
+    {
+      "path": "initial-water-state.jpg",
+      "sha256": "9155d6c3ec0be01eec50c59501a412da6c1d5cc3ed526f58a964527992fc417d",
+      "bytes": 43946,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8
+    },
+    {
+      "path": "localization-en.draft.json",
+      "sha256": "89c966d8423d595afb3db5178c849d69ba1a6b84214798ffa5f3756ec52baea0",
+      "bytes": 15376
+    },
+    {
+      "path": "material-repair-summary.json",
+      "sha256": "60bbe9f43dfb492c2243374cdaff4295d9d4619bd52be7a50c648d8b9fa18f2c",
+      "bytes": 1198
+    },
+    {
+      "path": "model-manifest.json",
+      "sha256": "ba35413f4c9f68f224dffea27b96b399f1b184abee2b38312fd33940dc239f88",
+      "bytes": 7786
+    },
+    {
+      "path": "portable-acceptance-summary.json",
+      "sha256": "b7fccf042c35dc1db5448051776b0e47c07306157af12755488f254058e3777a",
+      "bytes": 8007
+    },
+    {
+      "path": "probe-summary.json",
+      "sha256": "f86f01618695768e50b50991af761c4632d247e94a5c97de85929ce6359bec01",
+      "bytes": 30326
+    },
+    {
+      "path": "rebuild-summary.json",
+      "sha256": "a39c15dcd28e57e21d2da1f264024d303268912eed8926767722f140afb8c299",
+      "bytes": 961
+    },
+    {
+      "path": "render-rebuild-summary.json",
+      "sha256": "013edda7a173927a7d6014e0df9bf69881298fbdea23d078099938a2b8ddbc2e",
+      "bytes": 575
+    },
+    {
+      "path": "replay/assets.json",
+      "sha256": "f6ca4b6f815520049aa4ce2218b37a460269abb69ad63cf83167136958a33c5b",
+      "bytes": 1468
+    },
+    {
+      "path": "replay/config.example.json",
+      "sha256": "1bf2a5c7448dc03484778a2b715dc3e247adf08531494ebfcaaf3ee3e1f78d5d",
+      "bytes": 139
+    },
+    {
+      "path": "replay/prepare.py",
+      "sha256": "8c9001145e65cc8a3d88a6842ff751483ef565c316b692ca8eca31e42b77d19f",
+      "bytes": 6342
+    },
+    {
+      "path": "replay/recipes/01-containers.json",
+      "sha256": "563bb621eb93b6fb49db234d46786b2f1ea8be74ef72dc2e90103419e8915146",
+      "bytes": 420
+    },
+    {
+      "path": "replay/recipes/02-sources-and-proxy.json",
+      "sha256": "f80f9b0ce1beb4a13b2ab036b4bcec66e0bb973d41f60bc8199a6785945ea513",
+      "bytes": 4682
+    },
+    {
+      "path": "replay/recipes/03-coupled-physics.json",
+      "sha256": "c96ab8f3e9319735e5b67fd831e9b4124cf9d430a33fa1068d35ba864277ede7",
+      "bytes": 3801
+    },
+    {
+      "path": "replay/recipes/04-live-output-imports.json",
+      "sha256": "8eef9747b2d0e2f88003f804020b491f698a1af4c3401cc4de84de1dde60771a",
+      "bytes": 2282
+    },
+    {
+      "path": "replay/recipes/05-materials.json",
+      "sha256": "9391d038e286ff7b05d721a549f0f71df5d7fcaacf4cf96f5a59eff284956a74",
+      "bytes": 1450
+    },
+    {
+      "path": "replay/recipes/06-camera-and-lights.json",
+      "sha256": "8b784fc7414a97be50f9a60fc53f8ad0c6e1d41c489f1327ae18d96cea2191c5",
+      "bytes": 2008
+    },
+    {
+      "path": "replay/recipes/07-render-floor.json",
+      "sha256": "0167b543328f862fcdd7ac9fb99ff4049ce9339be0535bec5be63327ae675794",
+      "bytes": 342
+    },
+    {
+      "path": "replay/recipes/08-cached-render-geometry.json",
+      "sha256": "9e6c25c317f120229044fada606423194a15631724cae5b35b5f5116c5363ad6",
+      "bytes": 1810
+    },
+    {
+      "path": "replay/recipes/09-mantra-rop.json",
+      "sha256": "cc531899ce520c1ea4d20a1627d23136b6a96acb181eab67bb3227fe961c205d",
+      "bytes": 544
+    },
+    {
+      "path": "replay/recipes/control-feedback-off.json",
+      "sha256": "09a09de1bf574b2f0ab4a258933eb5f21bc13605ba89cf6d65033b24e9c0b6ba",
+      "bytes": 106
+    },
+    {
+      "path": "replay/recipes/control-feedback-on.json",
+      "sha256": "a517cf4ff69d2a5e86bbf175ffe25c5c7076fd4cf819e5d63c1ae36c28debcc5",
+      "bytes": 106
+    },
+    {
+      "path": "replay/scripts/cache_and_measure.py",
+      "sha256": "c5644e4e5d7af0a329433eb71278061c044c96233e658a6c359303e03b6699d1",
+      "bytes": 8497
+    },
+    {
+      "path": "replay/scripts/check_flotation.py",
+      "sha256": "5118d788f7962476d70059bf276011cc418765c0e32799f5b6a0a3fcf3533f51",
+      "bytes": 12759
+    },
+    {
+      "path": "replay/scripts/finish_scene.py",
+      "sha256": "a22f64105262d347e70e57166399f670f53f941ec842c06f56a3979de80f5251",
+      "bytes": 1490
+    },
+    {
+      "path": "replay/scripts/hydrodynamic_glue.py",
+      "sha256": "aa6585a8fc6573bd5b490d46f14119ee3277697e9e9346d3a689233d4d82732a",
+      "bytes": 3210
+    },
+    {
+      "path": "replay/scripts/test_hydrodynamic_glue.py",
+      "sha256": "1ebbcd30163911be4fad58459ca6f2eec98151c1bece42d70d0d25e33bb7a3fb",
+      "bytes": 5359
+    },
+    {
+      "path": "replay/scripts/validate_sim_proxy.py",
+      "sha256": "52acac044ec02cf82924f98ad69759f16d15e36e5a8cf677ad6fa38c1f14aaee",
+      "bytes": 1996
+    },
+    {
+      "path": "replay/selfcheck.py",
+      "sha256": "01d6a35584d2358c9cbfd9736766887fb9698ef47aec6b9d5c920eb13856e665",
+      "bytes": 6367
+    },
+    {
+      "path": "replay/USAGE.md",
+      "sha256": "f98cac23cbb1b3cd82ddedc04f0b90141c953585656868bbba69f8b2b06d42b1",
+      "bytes": 8285
+    },
+    {
+      "path": "reproduction-brief.md",
+      "sha256": "666ce09fff5645b4ded8c8ce8d95ffffb4d064cafedc7887f64c965175841799",
+      "bytes": 4593
+    },
+    {
+      "path": "source-model.zip",
+      "sha256": "acf4c00f3d47e5da477f76db40548a714ffd1ac3b124f341149f2d995ef628b9",
+      "bytes": 16276511,
+      "container_kind": "ZIP",
+      "member_count": 9,
+      "mesh_objects": 17,
+      "triangles": 150000
+    },
+    {
+      "path": "SOURCE.md",
+      "sha256": "10e299cc632a62f95384182bcb342a03c66c588980cf20b10cd9ce7b8a64b269",
+      "bytes": 4438
+    },
+    {
+      "path": "split-assembled.jpg",
+      "sha256": "ac7306ca0f2850cbdcd5a218a56874c28a966e8fe59e7a13397b105d9781d527",
+      "bytes": 22723,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    }
+  ],
+  "inventory_scope": "Current public artifacts and parameterized replay; final simulation cache and movie are not included. Rehash after any further replay or media change."
+}

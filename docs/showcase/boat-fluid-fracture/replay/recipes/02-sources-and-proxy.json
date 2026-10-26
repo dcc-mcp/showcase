@@ -1,0 +1,245 @@
+{
+  "parent_path": "/obj/boat_fluid_source",
+  "nodes": [
+    {
+      "node_type": "file",
+      "node_name": "hyper3d_parts",
+      "parameters": {
+        "file": "@ASSET_DIR@/boat.obj"
+      }
+    },
+    {
+      "node_type": "xform",
+      "node_name": "normalize_ship",
+      "parameters": {
+        "xOrd": "srt",
+        "scale": 3.1615454898972812,
+        "t": [
+          -0.003188418626561394,
+          0.5739366932131102,
+          0.0013721107426153882
+        ]
+      }
+    },
+    {
+      "node_type": "attribwrangle",
+      "node_name": "name_parts",
+      "parameters": {
+        "class": "primitive",
+        "snippet": "s@name = re_replace(\"[^a-zA-Z0-9_]\", \"_\", s@path);"
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "SHIP_PARTS"
+    },
+    {
+      "node_type": "box",
+      "node_name": "pool",
+      "parameters": {
+        "size": [
+          8,
+          1.2,
+          10
+        ],
+        "t": [
+          0,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node_type": "box",
+      "node_name": "water_pulse",
+      "parameters": {
+        "size": [
+          1.2,
+          2.2,
+          7
+        ],
+        "t": [
+          -3,
+          -0.1,
+          0
+        ]
+      }
+    },
+    {
+      "node_type": "boolean::2.0",
+      "node_name": "initial_water",
+      "parameters": {
+        "booleanop": "union"
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "WATER_VOLUME"
+    },
+    {
+      "node_type": "polyreduce::2.0",
+      "node_name": "ship_proxy_4k",
+      "parameters": {
+        "target": "poly_count",
+        "finalcount": 4000
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "SIM_PARTS_4K"
+    },
+    {
+      "node_type": "box",
+      "node_name": "wall_x_negative",
+      "parameters": {
+        "size": [
+          0.2,
+          4,
+          10.6
+        ],
+        "t": [
+          -4.15,
+          0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node_type": "box",
+      "node_name": "wall_x_positive",
+      "parameters": {
+        "size": [
+          0.2,
+          4,
+          10.6
+        ],
+        "t": [
+          4.15,
+          0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node_type": "box",
+      "node_name": "wall_z_negative",
+      "parameters": {
+        "size": [
+          8.6,
+          4,
+          0.2
+        ],
+        "t": [
+          0,
+          0.6,
+          -5.15
+        ]
+      }
+    },
+    {
+      "node_type": "box",
+      "node_name": "wall_z_positive",
+      "parameters": {
+        "size": [
+          8.6,
+          4,
+          0.2
+        ],
+        "t": [
+          0,
+          0.6,
+          5.15
+        ]
+      }
+    },
+    {
+      "node_type": "box",
+      "node_name": "container_floor",
+      "parameters": {
+        "size": [
+          8.6,
+          0.2,
+          10.6
+        ],
+        "t": [
+          0,
+          -1.4,
+          0
+        ]
+      }
+    },
+    {
+      "node_type": "merge",
+      "node_name": "CONTAINER_COLLISION"
+    }
+  ],
+  "connections": [
+    {
+      "input": "normalize_ship",
+      "output": "hyper3d_parts",
+      "input_index": 0
+    },
+    {
+      "input": "name_parts",
+      "output": "normalize_ship",
+      "input_index": 0
+    },
+    {
+      "input": "SHIP_PARTS",
+      "output": "name_parts",
+      "input_index": 0
+    },
+    {
+      "input": "initial_water",
+      "output": "pool",
+      "input_index": 0
+    },
+    {
+      "input": "initial_water",
+      "output": "water_pulse",
+      "input_index": 1
+    },
+    {
+      "input": "WATER_VOLUME",
+      "output": "initial_water",
+      "input_index": 0
+    },
+    {
+      "input": "ship_proxy_4k",
+      "output": "SHIP_PARTS",
+      "input_index": 0
+    },
+    {
+      "input": "SIM_PARTS_4K",
+      "output": "ship_proxy_4k",
+      "input_index": 0
+    },
+    {
+      "input": "CONTAINER_COLLISION",
+      "output": "wall_x_negative",
+      "input_index": 0
+    },
+    {
+      "input": "CONTAINER_COLLISION",
+      "output": "wall_x_positive",
+      "input_index": 1
+    },
+    {
+      "input": "CONTAINER_COLLISION",
+      "output": "wall_z_negative",
+      "input_index": 2
+    },
+    {
+      "input": "CONTAINER_COLLISION",
+      "output": "wall_z_positive",
+      "input_index": 3
+    },
+    {
+      "input": "CONTAINER_COLLISION",
+      "output": "container_floor",
+      "input_index": 4
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

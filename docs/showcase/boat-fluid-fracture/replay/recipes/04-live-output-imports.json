@@ -1,0 +1,91 @@
+{
+  "parent_path": "/obj/boat_fluid_output",
+  "nodes": [
+    {
+      "node_type": "dopimport::2.0",
+      "node_name": "solved_pieces",
+      "parameters": {
+        "doppath": "/obj/boat_fluid_dop",
+        "objpattern": "_root_*",
+        "importstyle": "fetch",
+        "geodatapath": "Geometry",
+        "pointvels": "instant",
+        "addtoexistingvel": 0,
+        "adddopobjectpath": 1
+      }
+    },
+    {
+      "node_type": "dopimport::2.0",
+      "node_name": "water_particles",
+      "parameters": {
+        "doppath": "/obj/boat_fluid_dop",
+        "objpattern": "boat_water",
+        "importstyle": "fetch",
+        "geodatapath": "Geometry",
+        "pointvels": "none",
+        "keepworldspacepos": 0
+      }
+    },
+    {
+      "node_type": "particlefluidsurface::3.0",
+      "node_name": "water_surface",
+      "parameters": {
+        "particlesep": 0.1,
+        "voxelsize": 0.75,
+        "dosurfunion": 0,
+        "conversion": "polysoup",
+        "dotransferattribs": 1,
+        "transferattribs": "v"
+      }
+    },
+    {
+      "node_type": "object_merge",
+      "node_name": "original_hires_parts",
+      "parameters": {
+        "objpath1": "/obj/boat_fluid_source/SHIP_PARTS",
+        "xformtype": "local"
+      }
+    },
+    {
+      "node_type": "dopimport::2.0",
+      "node_name": "fragment_transforms",
+      "parameters": {
+        "doppath": "/obj/boat_fluid_dop",
+        "objpattern": "_root_*",
+        "importstyle": "points",
+        "pointvels": "instant",
+        "addtoexistingvel": 0
+      }
+    },
+    {
+      "node_type": "xformpieces",
+      "node_name": "solved_hires_pieces",
+      "parameters": {
+        "attribmode": 1,
+        "attrib": "name",
+        "attribstotransform": "*",
+        "pointvels": 1,
+        "docopyattribs": 0
+      }
+    }
+  ],
+  "connections": [
+    {
+      "input": "water_surface",
+      "output": "water_particles",
+      "input_index": 0
+    },
+    {
+      "input": "solved_hires_pieces",
+      "output": "original_hires_parts",
+      "input_index": 0
+    },
+    {
+      "input": "solved_hires_pieces",
+      "output": "fragment_transforms",
+      "input_index": 1
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

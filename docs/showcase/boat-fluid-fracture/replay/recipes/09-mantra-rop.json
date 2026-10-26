@@ -1,0 +1,23 @@
+{
+  "parent_path": "/out",
+  "nodes": [
+    {
+      "node_type": "ifd",
+      "node_name": "boat_fluid_beauty",
+      "parameters": {
+        "camera": "/obj/boat_camera",
+        "vm_picture": "@RUN_DIR@/renders/boat.$F4.exr",
+        "vm_renderengine": "pbrraytrace",
+        "vm_samples": [
+          3,
+          3
+        ],
+        "vm_minraysamples": 1,
+        "vm_maxraysamples": 6,
+        "vobject": "boat_fluid_output boat_pool_base",
+        "override_camerares": 0
+      }
+    }
+  ],
+  "cook_last": false
+}
