@@ -46,7 +46,7 @@ Every complete entry must have an explicit publication decision: select it in
 `collection.json`, or record its slug, status and concrete reason in
 `unlisted-cases.json`. The build rejects missing, conflicting and stale
 decisions before replacing its output. Unlisted assets remain unpublished.
-See [the submission guide](../../agent.dm) for exact model identifiers,
+See [the repository agent instructions](../../AGENTS.md) for exact model identifiers,
 host builds, named adapter/package versions and post-deployment checks.
 
 ## 1. `README.md` — the report

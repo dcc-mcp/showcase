@@ -53,7 +53,7 @@ available evidence before reproducing it. Source availability, reproduction
 checks and rights are case-specific; the gallery does not grant blanket reuse
 or model-training permission.
 
-Contributors: follow [agent.dm](agent.dm) for required model and exact
+Contributors: follow [AGENTS.md](AGENTS.md) for required model and exact
 host/adapter version records, explicit gallery selection, checks and deployment
 readback. Every complete case is selected or deliberately listed with a reason
 in [unlisted-cases.json](unlisted-cases.json); missing decisions fail the build.
