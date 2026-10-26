@@ -1,4 +1,4 @@
-"""Prepare five hash-pinned LFS data files; never execute downloaded bytes."""
+"""Prepare hash-pinned Hyper3D LFS data files; never execute downloaded bytes."""
 import hashlib
 import json
 import os
@@ -22,6 +22,12 @@ PINS = {
         (41192572, 'bc6af9db60ea88bb87c6c1adaaace410fb0fcdbb1a13f522b99b17fd73fae5ea'),
     'docs/showcase/hyper3d-relic-room/RelicCourier-native.zip':
         (44273997, '8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79'),
+    'docs/showcase/godot-mage-vfx/demo.mp4':
+        (2351301, '5a8c590c3eb2b2067c92a9e0142a1aeea3e9ef538505d934473ed0c361000bd2'),
+    'docs/showcase/godot-mage-vfx/godot-mage-vfx.zip':
+        (1644173, '6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248'),
+    'docs/showcase/godot-mage-vfx/hero.jpg':
+        (60939, '7fffcf10045378d4433aeb0d8946be32015c42c1d3b7dbc65a20fc4d393b327a'),
 }
 SHA = re.compile(r'[0-9a-fA-F]{40}\Z')
 POINTER = re.compile(rb'version https://git-lfs.github.com/spec/v1\r?\n'
