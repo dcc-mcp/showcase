@@ -583,6 +583,13 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         problems = validate_collection.validate(collection_path, root=root)
         if problems:
             return [], problems, []
+        with open(collection_path, encoding="utf-8-sig") as fh:
+            cases = json.load(fh)["cases"]
+        import publication_intent
+        problems, intent_notes = publication_intent.validate(root, cases)
+        if problems:
+            return [], problems, []
+        notes.extend(intent_notes)
         import validate_brand_gallery
         brand_catalog, brand_assets, problems = validate_brand_gallery.read_and_validate(root)
         if problems:
@@ -599,8 +606,6 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         if brand_preview:
             notes.append("LOCAL DEVELOPMENT PREVIEW: pending brand assets are not approved for publication")
             brand_portal = '<aside class="evidence-note"><strong>品牌画廊开发预览</strong><p>等待修正版资产与验证记录；占位内容仅用于本地开发。</p></aside>' + brand_portal
-        with open(collection_path, encoding="utf-8-sig") as fh:
-            cases = json.load(fh)["cases"]
         import model_previews
         import benchmark_records
         model_records, model_assets = model_previews.read_and_validate(root, cases)

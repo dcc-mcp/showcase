@@ -6,24 +6,32 @@
   "capture_provider": "host-native",
   "files": [
     {
+      "path": "hero.jpg",
+      "bytes": 18363,
+      "sha256": "e65f133fbcf498c661283f9dbda7fbc667ea5fc5ec8d97141f0ba61c9ed87916",
+      "width": 1080,
+      "height": 1080,
+      "bit_depth": 8
+    },
+    {
       "path": "LICENSES.md",
       "sha256": "977c626e6615c1c81e7a1a096eeba9f20bb0b112075cff57939282716d5784f6",
       "bytes": 2397
     },
     {
-      "path": "README.md",
-      "sha256": "56db9957c0d36f6067750c7d6dedab55b17f7094cb2915c4e3116e6af832c219",
-      "bytes": 3692
-    },
-    {
-      "path": "README.zh.md",
-      "sha256": "e7027c3db2947749423a82522ed8138d1dad739f1a7b67ec1f38d0ce2af8d5f6",
-      "bytes": 3224
-    },
-    {
       "path": "provenance.json",
       "sha256": "92cfcb6ef4e5cc1fb7888cedfa3c8acae821bccf9bb2d19e4d77de7675327bf5",
       "bytes": 11876
+    },
+    {
+      "path": "README.md",
+      "sha256": "43e06f30b4ef79767661619a383d0eb7745c2649e8d79c07fab5c98b8c2a17c0",
+      "bytes": 3836
+    },
+    {
+      "path": "README.zh.md",
+      "sha256": "1601eb558e9e8af1ecec206d28966764a617f51f6b9ea17ebe44c5202a7aea7c",
+      "bytes": 3335
     },
     {
       "path": "turntable.mp4",
@@ -39,9 +47,9 @@
     },
     {
       "path": "validation.json",
-      "sha256": "d81a75e04cca39e1dcab162d348e6cac696600f9dc2f072b4cefbbe9f3ecea7e",
-      "bytes": 9859
+      "sha256": "ba673084c826b6a0e10073ea7fe22412dd351ea21aae85adf24597d32da12d7c",
+      "bytes": 10728
     }
   ],
-  "review_status": "submitted for review; pending visual acceptance; excluded from gallery"
+  "review_status": "selected production study; publication-quality visual review failed"
 }

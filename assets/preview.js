@@ -45,7 +45,8 @@
     }
     entry.button.setAttribute("aria-pressed", String(busy));
     if (entry.status) entry.status.textContent = state === "error" ? entry.errorLabel
-      : state === "loading" ? entry.loadingLabel : state === "playing" ? entry.playingLabel : "";
+      : state === "loading" ? entry.loadingLabel : state === "playing" ? entry.playingLabel
+      : state === "paused" ? entry.pausedLabel : "";
     updateSound(entry);
   }
 
@@ -110,13 +111,38 @@
 
   function start(entry, automatic) {
     if (!available(entry) || (automatic && !canAutoplay())) { stop(entry); return; }
-    stopAll();
+    const resuming = active && active.entry === entry && entry.card.dataset.previewState === "paused";
+    if (resuming) {
+      active.removeListeners();
+      active = null;
+    } else stopAll();
     const video = entry.video;
     const run = {entry, automatic, loadingTimer: null, removeListeners: () => {}};
+    let pauseObserved = false;
     active = run;
     setState(entry, "loading");
 
     const failed = () => { if (active === run) stop(entry, "error"); };
+    const armWatchdog = () => {
+      window.clearTimeout(run.loadingTimer);
+      const timer = window.setTimeout(() => { if (run.loadingTimer === timer) failed(); }, 12000);
+      run.loadingTimer = timer;
+    };
+    const paused = event => {
+      if (active !== run) return;
+      // A queued pause may be delivered after native playback already resumed.
+      if (event) pauseObserved = true;
+      if (!video.paused) return;
+      window.clearTimeout(run.loadingTimer);
+      run.loadingTimer = null;
+      setState(entry, "paused");
+      progress(entry);
+    };
+    const loading = () => {
+      if (active !== run || video.paused) return;
+      setState(entry, "loading");
+      armWatchdog();
+    };
     const playing = () => {
       if (active !== run) {
         // A late play() fulfillment must not resurrect an abandoned card, nor
@@ -124,7 +150,8 @@
         if (!active || active.entry !== entry) video.pause();
         return;
       }
-      if (!available(entry) || (automatic && !canAutoplay())) { stop(entry); return; }
+      if (!available(entry) || (run.automatic && !canAutoplay())) { stop(entry); return; }
+      if (video.paused) { paused(); return; }
       window.clearTimeout(run.loadingTimer);
       run.loadingTimer = null;
       setState(entry, "playing");
@@ -132,7 +159,7 @@
     };
     const update = () => { if (active === run) progress(entry); };
     const ended = () => { if (active === run) stop(entry); };
-    const listeners = {playing, error: failed, timeupdate: update, durationchange: update, ended};
+    const listeners = {playing, play: loading, pause: paused, error: failed, timeupdate: update, durationchange: update, ended};
     Object.entries(listeners).forEach(([event, action]) => video.addEventListener(event, action));
     run.removeListeners = () => {
       window.clearTimeout(run.loadingTimer);
@@ -140,23 +167,32 @@
     };
     // A stalled network or unresolved play promise must not leave a card busy
     // forever. Manual retry remains available and starts a fresh bounded request.
-    run.loadingTimer = window.setTimeout(failed, 12000);
+    armWatchdog();
 
     // Source assignment happens only after a deliberate hover or button press.
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.src = entry.source;
+    if (!resuming) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.src = entry.source;
+    }
     try {
       const promise = video.play();
-      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(playing, failed);
+      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(() => {
+        // Native playing events own completion after a pause/resume interruption.
+        if (active !== run || !pauseObserved) playing();
+      }, error => {
+        if (active !== run) return;
+        if (pauseObserved && error?.name === "AbortError") return;
+        failed();
+      });
       // Browsers without a play promise are handled by the playing event.
     } catch (_) { failed(); }
   }
 
   function hoverStart(entry, event) {
     if (event.pointerType === "touch" || !canAutoplay() || !available(entry)) return;
-    if (active && active.entry === entry) return;
+    if (active && (!active.automatic || active.entry === entry)) return;
     // The whole card is the hover target. Request the first frame immediately;
     // retain the poster and show loading feedback until playback really starts.
     start(entry, true);
@@ -178,6 +214,7 @@
       sound:card.querySelector('.preview-sound'), hasAudio:card.dataset.previewAudio || 'unknown',
       inViewport: true,
       loadingLabel: card.dataset.loadingLabel || "", playingLabel: card.dataset.playingLabel || "",
+      pausedLabel: card.dataset.pausedLabel || (zh ? "预览已暂停" : "Preview paused"),
       errorLabel: card.dataset.errorLabel || button.dataset.errorLabel || (status && status.dataset.errorLabel) || ""};
     entries.push(entry);
     card.dataset.previewAutoplay = String(canAutoplay());
@@ -205,13 +242,15 @@
       // Touch dispatches pointerleave when contact ends, often around click.
       // Lifting the finger must not undo explicit mobile playback immediately.
       if (event.pointerType === "touch") return;
-      stop(entry);
+      if (active && active.entry === entry && active.automatic) stop(entry);
     });
-    listen(card, "pointercancel", () => stop(entry));
+    listen(card, "pointercancel", () => {
+      if (active && active.entry === entry && active.automatic) stop(entry);
+    });
     listen(button, "click", event => {
       event.preventDefault();
       event.stopPropagation();
-      if (active && active.entry === entry) stop(entry);
+      if (active && active.entry === entry && entry.card.dataset.previewState !== "paused") stop(entry);
       else start(entry, false); // Explicit activation also works on touch/reduced-motion/data-saving devices.
     });
     if (entry.sound) listen(entry.sound, 'click', event => {
@@ -221,13 +260,14 @@
       // Do not restart video or navigate the card when toggling sound.
       if (!active || active.entry !== entry || entry.card.dataset.previewState !== 'playing' || entry.hasAudio === 'false') return;
       video.muted = !video.muted;
+      if (!video.muted) active.automatic = false;
       updateSound(entry);
     });
   });
   if (!entries.length) return;
 
   function policyChange() {
-    stopAll();
+    if (active && active.automatic) stopAll();
     entries.forEach(entry => { entry.card.dataset.previewAutoplay = String(canAutoplay()); });
   }
   [hover, reducedMotion, connection].forEach(target => {
@@ -239,7 +279,10 @@
     }
   });
   listen(document, "visibilitychange", () => { if (document.hidden) stopAll(); });
-  listen(document, "gallery:filter", stopAll);
+  listen(document, "gallery:filter", () => {
+    if (active && active.automatic) stopAll();
+    else stopUnavailable();
+  });
   listen(document, "keydown", event => { if (event.key === "Escape") stopAll(); });
 
   if (window.IntersectionObserver) {

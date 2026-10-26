@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "artifact": {
+    "file": "showcase.mp4",
+    "sha256": "134579f9e7995f038764b7a27989e6bd073eb62ec2b8d8b75054ceeba1059634"
+  },
+  "scope": "Sampled decoded-frame visual inspection; separate from natural-speed playback, subjective listening and real OS/Web acceptance.",
+  "reviewed_frame_indices": [
+    0,
+    180,
+    360,
+    945,
+    1620,
+    1770
+  ],
+  "observations": [
+    "Frame0 displays title and actual native pre-rig courier inspection immediately.",
+    "Source card distinguishes generated mesh/PBR from authored rigs/actions/hinge/physics/UI.",
+    "Native course region is complete and uncropped; all1351 frames have same-index source comparisons.",
+    "Winning UI is visible at course final frame1620, then held with explicit5s editorial label.",
+    "Caption strip stays outside native footage.",
+    "Silent first cards and ending hold are intentional; engine audio is retained in the full course."
+  ],
+  "sampled_pixel_review": "PASS",
+  "parent_final_pixel_readback": "PASS",
+  "natural_speed_playback": "NOT_RUN",
+  "subjective_listening": "NOT_RUN",
+  "source_review_basename": "film-visual-review-02.public.json",
+  "source_review_sha256": "74e1b0d62cc8704fce28e6c29307f174cab930ef8dfed6b5741ab43e15dcafa8",
+  "parent_review": {
+    "status": "PASS",
+    "reviewed_frames": [
+      {
+        "label": "first",
+        "frame_index": 0
+      },
+      {
+        "label": "course-middle",
+        "frame_index": 945
+      },
+      {
+        "label": "last",
+        "frame_index": 1770
+      }
+    ],
+    "observations": [
+      "Framing and text are legible.",
+      "Final frame clearly labels the editorial5s hold."
+    ],
+    "natural_speed_playback": "NOT_RUN",
+    "subjective_listening": "NOT_RUN"
+  }
+}

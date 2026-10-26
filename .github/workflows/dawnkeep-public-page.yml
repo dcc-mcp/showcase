@@ -10,6 +10,7 @@ on:
       - 'scripts/build_site.py'
       - 'scripts/browser_preview.py'
       - 'scripts/test_media_ranges.py'
+      - 'scripts/tracked_file_bytes.py'
       - 'scripts/games.py'
       - 'scripts/playable.py'
       - 'scripts/test_playable_runtime.js'
@@ -68,6 +69,21 @@ jobs:
           test -f "$CHROME" && test -x "$CHROME"
           test "$(readlink -f "$CHROME")" = "$CHROME"
           "$CHROME" --version
+      - name: Prefer the runner's HTTPS Ubuntu archive mirror
+        run: |
+          sudo python3 - <<'PY'
+          from pathlib import Path
+          mirrors = Path('/etc/apt/apt-mirrors.txt')
+          entries = mirrors.read_bytes().splitlines(keepends=True)
+          azure = b'http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n'
+          archive = b'https://archive.ubuntu.com/ubuntu/\tpriority:2\n'
+          if entries.count(azure) != 1 or entries.count(archive) != 1:
+              raise SystemExit('Unexpected runner Ubuntu mirror priorities')
+          # Successful but slow Azure transfers exhausted the acceptance budget.
+          entries[entries.index(azure)] = azure.replace(b'priority:1', b'priority:2')
+          entries[entries.index(archive)] = archive.replace(b'priority:2', b'priority:1')
+          mirrors.write_bytes(b''.join(entries))
+          PY
       - name: Install hash-pinned browser client and official media tools
         run: |
           set -euo pipefail
