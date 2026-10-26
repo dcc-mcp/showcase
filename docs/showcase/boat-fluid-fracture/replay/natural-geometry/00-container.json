@@ -1,0 +1,11 @@
+{
+  "parent_path": "/obj",
+  "nodes": [
+    {
+      "node_type": "geo",
+      "node_name": "natural_v2_source"
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

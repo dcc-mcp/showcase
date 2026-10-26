@@ -17,3 +17,7 @@ Extract the archive into one directory, retain the relative structure and import
 Authoritative sources checked 2026-10-26: [Hyper3D Terms of Service](https://hyper3d.ai/legal/terms), [Hyper3D Copyright License](https://hyper3d.ai/legal/copyright-license), [Rodin Gen-2.5 API](https://docs.hyper3d.ai/en/api-specification/rodin-gen2-5). Applicable provider terms, account entitlement, input rights and restrictions govern use. These links and this record do not establish independent legal clearance.
 
 The generated image, model, textures and render derivatives are not assigned the repository MIT software license. No additional blanket redistribution, model-training or evaluation-data license is granted here. Further distribution or new uses remain subject to the relevant terms and rights.
+
+## Separately accepted native static derivative
+
+The unchanged source package now feeds a measured native wood-fracture derivative:71 closed positive-volume pieces,171 adjacency bonds and655084 render triangles. [native-geometry-summary.json](native-geometry-summary.json) records its portable cold rebuild, source-correspondence sample limits and cache-reader save/reopen. [fractured-rest.zip](fractured-rest.zip) contains three sanitized static geometry caches; [native-media-summary.json](native-media-summary.json) binds three actual static Mantra inspections. These additional records do not alter the source ZIP or its manifest, establish71 independent fluid actors, or accept coupled calm-water, blast, flotation or final film.

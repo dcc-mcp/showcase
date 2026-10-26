@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "recorded_on": "2026-10-26",
-  "status": "unselected_intact_native_wood_water_blast_pilot_pending",
+  "status": "unselected_native_static_geometry_media_passed_coupled_dynamics_pending",
   "houdini_application": "Houdini Commercial",
   "houdini_version": "22.0.368",
   "reference": "imagegen-prompt.json",
@@ -9,8 +9,8 @@
   "files": [
     {
       "path": "acceptance-requirements.json",
-      "sha256": "10c1f1201892d879284e61e829d950d984b9eedcf5f0f2e64c5b623ceed07ae0",
-      "bytes": 5022
+      "sha256": "3261bde91d3853c8b2cb37cb6e5daa81e0143f541e9a54eb3b661545cb4c2ae4",
+      "bytes": 6131
     },
     {
       "path": "boat-reference.jpg",
@@ -27,8 +27,8 @@
     },
     {
       "path": "collection-case.draft.json",
-      "sha256": "9e2d184ca2ad262836ccc1901dc035472ac447a5f5943137c0a7e9212fbab237",
-      "bytes": 17836
+      "sha256": "281ae74dadd0b671ef360f9f82068315ecdfa1ef5a6a15327ffa9ce9577a2861",
+      "bytes": 20744
     },
     {
       "path": "color-pipeline-summary.json",
@@ -39,6 +39,17 @@
       "path": "feedback-control-summary.json",
       "sha256": "f6c5005a476f6c3ec9f889fb474146847d62198343a0ebf785f3bee23a73575b",
       "bytes": 2382
+    },
+    {
+      "path": "fractured-rest.zip",
+      "bytes": 25684528,
+      "sha256": "08c289710dfaf7d2bf93f5e65b84fefdfeedf52461ea05de794d49acb609175f",
+      "container_kind": "ZIP",
+      "cache_files": 3,
+      "native_pieces": 71,
+      "native_constraints": 171,
+      "scope": "Static native rest geometry only",
+      "source_manifest": "native-geometry-summary.json"
     },
     {
       "path": "imagegen-prompt.json",
@@ -73,9 +84,43 @@
       }
     },
     {
+      "path": "intact-native.jpg",
+      "bytes": 20169,
+      "sha256": "3f4d8d3ca4782a7a8c3dfb3d823a371eabae2c63fe90dee8fe0e128babc8add2",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "evidence": "native-media-summary.json",
+        "source_srgb_png": {
+          "name": "intact-srgb.png",
+          "bytes": 114673,
+          "sha256": "fd38c27a8e9965eb1c365545d853038606ebee0c05babe27957eacdba16a09cd"
+        },
+        "source_native_exr": {
+          "name": "intact.exr",
+          "bytes": 284317,
+          "sha256": "9acbcae40bc44d4dbda321ff962bd8cdd0914518a8cf80143b736b873580b43a",
+          "oiio:ColorSpace": "lin_rec709"
+        },
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
       "path": "localization-en.draft.json",
-      "sha256": "1cd09d83df45a14b244897c773c9d73239963ac76986bc6329a3920445e0c902",
-      "bytes": 28705
+      "sha256": "4980d665e1167b5dfa1db2b8a05f246ec8f138c76a94d65ff7216ea310aae9cb",
+      "bytes": 25395
     },
     {
       "path": "material-repair-summary.json",
@@ -88,9 +133,19 @@
       "bytes": 7786
     },
     {
+      "path": "native-geometry-summary.json",
+      "bytes": 3765,
+      "sha256": "555a9906fd5f21b7be97813a1aba4c5f6d459d4defd48b323a15b684e47a159d"
+    },
+    {
+      "path": "native-media-summary.json",
+      "bytes": 8293,
+      "sha256": "f8bc77ab70e674fadf168ecdcacb2d1c51aab9c2d309d98ef8281a91b89f1db0"
+    },
+    {
       "path": "natural-fracture-brief.json",
-      "sha256": "0708565175302c1dbdf4467584d326ac78a1a970fa74b3c7ea1cdcd52b9efaf2",
-      "bytes": 7609
+      "sha256": "4ed1105c21593d76d81e6cd30eb7797fa9141913007bc1385b454efe4c14d4ec",
+      "bytes": 9255
     },
     {
       "path": "parts-exploded.jpg",
@@ -136,8 +191,8 @@
     },
     {
       "path": "production-references.json",
-      "sha256": "cf8f6cb7beb703b4acab46c455d863c217a979b6ec3515ef7fb3adef108f82d2",
-      "bytes": 4232
+      "sha256": "138d525a560f1e113042aa61d6385851b1d1765be66a8e1f8b41af2e21e1c93c",
+      "bytes": 5355
     },
     {
       "path": "rebuild-summary.json",
@@ -158,6 +213,66 @@
       "path": "replay/config.example.json",
       "sha256": "1bf2a5c7448dc03484778a2b715dc3e247adf08531494ebfcaaf3ee3e1f78d5d",
       "bytes": 139
+    },
+    {
+      "path": "replay/natural-geometry/00-container.json",
+      "bytes": 175,
+      "sha256": "38b0d150db9d806c3610cf2d3fe89cbb878a2cdc9b1d974c5679f01282c3f20f"
+    },
+    {
+      "path": "replay/natural-geometry/01-source.json",
+      "bytes": 1227,
+      "sha256": "bf3c75720cdf256964a688f9f765ab123139c88b0c94a91ac7c73c9b3c49eb5e"
+    },
+    {
+      "path": "replay/natural-geometry/02-wood-fracture.json",
+      "bytes": 3245,
+      "sha256": "fff474bf1558b42eada2eceed696a7bb03bd6dc721e30abb195bebf6c5f6fcf3"
+    },
+    {
+      "path": "replay/natural-geometry/03-filter-native-artifact.json",
+      "bytes": 1520,
+      "sha256": "01e16f93eb7e9bb21841c8d1f76f9065f8bdb3602f851c1abfc51504009dc3ae"
+    },
+    {
+      "path": "replay/natural-geometry/05-ready-readers.json",
+      "bytes": 828,
+      "sha256": "7207ad304c256dc2b1bac132228cb571be5c7b937e869b1198649d814a61657d"
+    },
+    {
+      "path": "replay/natural-geometry/cache_and_verify.py",
+      "bytes": 9007,
+      "sha256": "fcb460689b1d6117ca804e9972db9fbd310ce42d6d41963fc68c625d6b719b3b"
+    },
+    {
+      "path": "replay/natural-geometry/mass_properties.py",
+      "bytes": 7121,
+      "sha256": "8fc2302571026901611f5633e40be03fdf1dc4b82f980bccc5f66dc980332d55"
+    },
+    {
+      "path": "replay/natural-geometry/normalization.json",
+      "bytes": 691,
+      "sha256": "b6d63bc87862cf49b2026b9e1e160b14add7dff7bea658b469521934b8f87a99"
+    },
+    {
+      "path": "replay/natural-geometry/prepare.py",
+      "bytes": 4023,
+      "sha256": "982b56d774ee8171dec3127fbdeea8f0e80640f200e0eebc9433ffcda6aed03e"
+    },
+    {
+      "path": "replay/natural-geometry/selfcheck.py",
+      "bytes": 3972,
+      "sha256": "d24dc22f92d9099dd65d2112e62f71442de71cd27aa7cd7237b8ad60b6d546d8"
+    },
+    {
+      "path": "replay/natural-geometry/USAGE.md",
+      "bytes": 4636,
+      "sha256": "778a2971af0d6498b332312627ce5665e79d6f571ff8a701980071398cbd5f32"
+    },
+    {
+      "path": "replay/natural-geometry/verify_reopened.py",
+      "bytes": 4699,
+      "sha256": "f868a05bcdb0a97c338bfc62b0198bc14065930e976681d47947f58562c266e1"
     },
     {
       "path": "replay/prepare.py",
@@ -261,8 +376,8 @@
     },
     {
       "path": "reproduction-brief.md",
-      "sha256": "d2291099354f0b2105f61fbadab179594f3d71c2e9c5473ec5468f47d76f2376",
-      "bytes": 3948
+      "sha256": "df0912124c3b3b6f8026ab9c98bd23b4bcc6573dc7d9e972ebf05acd4f15c4cd",
+      "bytes": 4590
     },
     {
       "path": "source-intact-manifest.json",
@@ -271,8 +386,8 @@
     },
     {
       "path": "SOURCE-INTACT.md",
-      "sha256": "cf9a64b2dd45ec6c271d370f3f8ed9dbdd956fee1a74eb498aab1a725fd3b418",
-      "bytes": 2877
+      "sha256": "611c77dabb29789097c170c043b08253fb8b22bfa1f1032584866db73b6252b7",
+      "bytes": 3617
     },
     {
       "path": "source-intact.zip",
@@ -323,7 +438,75 @@
         "retouched": false,
         "exif_preserved": false
       }
+    },
+    {
+      "path": "wood-cut-detail.jpg",
+      "bytes": 82314,
+      "sha256": "745c9e8f59f9f8366119a58af560bd21f82a741cdcdbce0df6b60a3eb6205e8c",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "evidence": "native-media-summary.json",
+        "source_srgb_png": {
+          "name": "cut-perpixel-srgb.png",
+          "bytes": 557957,
+          "sha256": "5cbe9f0aeebd03b18e0e2e6e3f0154ca80192793182f31fce6aabc31601f4223"
+        },
+        "source_native_exr": {
+          "name": "cut-perpixel.exr",
+          "bytes": 1556829,
+          "sha256": "654daecf595b9783beb1c19c4a2cd7bef76d5d228f0501253f88f597356c952a",
+          "oiio:ColorSpace": "lin_rec709"
+        },
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "wood-fracture-exploded.jpg",
+      "bytes": 33230,
+      "sha256": "b9bbb426343f818440580c43b76843bac12c4dbf2f390ed62add6c6c75bffd4f",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "evidence": "native-media-summary.json",
+        "source_srgb_png": {
+          "name": "exploded71-perpixel-srgb.png",
+          "bytes": 171214,
+          "sha256": "83920d05a88332018845f2d057e523957bed0ddcd497b22ec68a497934d2c5d3"
+        },
+        "source_native_exr": {
+          "name": "exploded71-perpixel.exr",
+          "bytes": 420789,
+          "sha256": "293e2a241847ad27f41aff81a86ba985230cf40b9fe97dffe4d32195fe036a3d",
+          "oiio:ColorSpace": "lin_rec709"
+        },
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
     }
   ],
-  "inventory_scope": "Current public artifacts and parameterized replay; final simulation cache and movie are not included. Rehash after any further replay or media change."
+  "inventory_scope": "Current public source/static native geometry and inspection media plus scoped historical comparison replay. No accepted blast/flotation cache or final movie is included; rehash after further changes."
 }

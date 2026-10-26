@@ -7,9 +7,26 @@
   "requirements": [
     {
       "id": "intact_source_native_acceptance",
-      "status": "not-tested",
-      "needed": "Delivered intact archive import/save/reopen/export/reopen; actual native wood-fracture piece counts, cut/UV policy, grain, constraints, mass data and collision guides",
-      "packaging_evidence": "source-intact-manifest.json"
+      "status": "partially-passed",
+      "needed": "Dynamic collision/coupling, local blast break events, force diagnostics and final simulation acceptance remain separate",
+      "packaging_evidence": "source-intact-manifest.json",
+      "scope": "Actual intact native inspection and cold source-to-native static fracture rebuild passed; portable static geometry reader save/reopen passed",
+      "evidence": [
+        "native-geometry-summary.json",
+        "native-media-summary.json"
+      ]
+    },
+    {
+      "id": "native_static_wood_geometry",
+      "status": "passed",
+      "scope": "71 closed positive-volume native wood pieces, 171 adjacency bonds; cold typed rebuild with exact P/topology/UV/N/names and native cache-reader save/reopen",
+      "evidence": "native-geometry-summary.json"
+    },
+    {
+      "id": "native_static_inspection_media",
+      "status": "passed",
+      "scope": "Native intact source, cut close-up and art-directed 0.35 exploded view; full-frame sRGB JPEG format derivatives only, no dynamic result",
+      "evidence": "native-media-summary.json"
     },
     {
       "id": "source_geometry",
@@ -22,6 +39,11 @@
       "status": "passed",
       "scope": "Later repair candidate only; original diffuse-binding failure is retained",
       "evidence": "material-repair-summary.json"
+    },
+    {
+      "id": "full_boat_calm_water_control",
+      "status": "not-tested",
+      "needed": "Accepted calm-water collision/coupling and stability of the 43 compound actors before the burst; earlier weak pilot failed and corrective grid controls remain under test"
     },
     {
       "id": "fluid_driven_breakage",

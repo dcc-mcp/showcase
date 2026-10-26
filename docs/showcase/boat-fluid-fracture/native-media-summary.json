@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "status": "native_static_inspection_passed",
+  "scope": "Actual intact source and static native wood fracture; art-directed exploded inspection, not simulated breakage or flotation",
+  "houdini_version": "22.0.368",
+  "source_archive": "source-intact.zip",
+  "native_geometry_evidence": "native-geometry-summary.json",
+  "images": [
+    {
+      "path": "intact-native.jpg",
+      "bytes": 20169,
+      "sha256": "3f4d8d3ca4782a7a8c3dfb3d823a371eabae2c63fe90dee8fe0e128babc8add2",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "scope": "intact",
+      "source_srgb_png": {
+        "name": "intact-srgb.png",
+        "bytes": 114673,
+        "sha256": "fd38c27a8e9965eb1c365545d853038606ebee0c05babe27957eacdba16a09cd"
+      },
+      "source_native_exr": {
+        "name": "intact.exr",
+        "bytes": 284317,
+        "sha256": "9acbcae40bc44d4dbda321ff962bd8cdd0914518a8cf80143b736b873580b43a",
+        "oiio:ColorSpace": "lin_rec709"
+      },
+      "native_render": {
+        "renderer": "Mantra",
+        "engine": "pbrraytrace",
+        "pixel_samples": [
+          4,
+          4
+        ],
+        "min_ray_samples": 1,
+        "max_ray_samples": 9,
+        "elapsed_seconds": 17.677,
+        "warnings": 0,
+        "resolution_px": [
+          960,
+          540
+        ]
+      },
+      "camera": {
+        "position_m": [
+          8,
+          6,
+          10
+        ],
+        "look_at_m": [
+          0,
+          0.6,
+          0
+        ],
+        "focal_length_mm": 55
+      },
+      "jpeg_derivation": {
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "wood-cut-detail.jpg",
+      "bytes": 82314,
+      "sha256": "745c9e8f59f9f8366119a58af560bd21f82a741cdcdbce0df6b60a3eb6205e8c",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "scope": "native_cut_closeup",
+      "source_srgb_png": {
+        "name": "cut-perpixel-srgb.png",
+        "bytes": 557957,
+        "sha256": "5cbe9f0aeebd03b18e0e2e6e3f0154ca80192793182f31fce6aabc31601f4223"
+      },
+      "source_native_exr": {
+        "name": "cut-perpixel.exr",
+        "bytes": 1556829,
+        "sha256": "654daecf595b9783beb1c19c4a2cd7bef76d5d228f0501253f88f597356c952a",
+        "oiio:ColorSpace": "lin_rec709"
+      },
+      "native_render": {
+        "renderer": "Mantra",
+        "engine": "pbrraytrace",
+        "pixel_samples": [
+          4,
+          4
+        ],
+        "min_ray_samples": 1,
+        "max_ray_samples": 9,
+        "elapsed_seconds": 30.188,
+        "warnings": 0,
+        "resolution_px": [
+          960,
+          540
+        ]
+      },
+      "camera": {
+        "position_m": [
+          4.5,
+          3,
+          4.5
+        ],
+        "look_at_m": [
+          0,
+          0.55,
+          0.3
+        ],
+        "focal_length_mm": 65
+      },
+      "jpeg_derivation": {
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "wood-fracture-exploded.jpg",
+      "bytes": 33230,
+      "sha256": "b9bbb426343f818440580c43b76843bac12c4dbf2f390ed62add6c6c75bffd4f",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "scope": "native_exploded_inspection",
+      "source_srgb_png": {
+        "name": "exploded71-perpixel-srgb.png",
+        "bytes": 171214,
+        "sha256": "83920d05a88332018845f2d057e523957bed0ddcd497b22ec68a497934d2c5d3"
+      },
+      "source_native_exr": {
+        "name": "exploded71-perpixel.exr",
+        "bytes": 420789,
+        "sha256": "293e2a241847ad27f41aff81a86ba985230cf40b9fe97dffe4d32195fe036a3d",
+        "oiio:ColorSpace": "lin_rec709"
+      },
+      "native_render": {
+        "renderer": "Mantra",
+        "engine": "pbrraytrace",
+        "pixel_samples": [
+          4,
+          4
+        ],
+        "min_ray_samples": 1,
+        "max_ray_samples": 9,
+        "elapsed_seconds": 19.593,
+        "warnings": 0,
+        "resolution_px": [
+          960,
+          540
+        ]
+      },
+      "camera": {
+        "position_m": [
+          8,
+          7,
+          11
+        ],
+        "look_at_m": [
+          0,
+          0.6,
+          0
+        ],
+        "focal_length_mm": 55
+      },
+      "jpeg_derivation": {
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    }
+  ],
+  "geometry": {
+    "intact_triangles": 500000,
+    "native_pieces": 71,
+    "native_render_triangles": 655084,
+    "native_render_points": 327616,
+    "inside_triangles": 91465,
+    "constraint_bonds": 171,
+    "rest_bounds_m": {
+      "min": [
+        -1.2548620700836182,
+        -0.25,
+        -3.0
+      ],
+      "max": [
+        1.2548620700836182,
+        1.3696212768554688,
+        3.0
+      ]
+    }
+  },
+  "exploded_view": {
+    "node_type": "explodedview::2.0",
+    "piece_attribute": "name",
+    "scale": 0.35,
+    "applies_to": [
+      "wood-cut-detail.jpg",
+      "wood-fracture-exploded.jpg"
+    ],
+    "art_directed_spacing": true,
+    "physical_motion": false
+  },
+  "materials": {
+    "outside": {
+      "shader": "Principled Shader 2.0",
+      "diffuse_map": "texture_diffuse.png",
+      "diffuse_space": "sRGB",
+      "roughness_map": "texture_roughness.png",
+      "metallic_map": "texture_metallic.png",
+      "data_map_space": "raw",
+      "point_color_multiply": false
+    },
+    "inside": {
+      "assignment": "native inside group",
+      "triangles": 91465,
+      "shader": "Native varying rest-position/normal bindings through Inline VOP into Principled basecolor",
+      "appearance": "Art-directed directional fibers and ring bands; no species, pore or detailed end-grain certification",
+      "coordinate_space": "untransformed rest coordinates before exploded view",
+      "roughness": 0.78,
+      "metallic": 0,
+      "point_color_multiply": false,
+      "geometry_displacement": false
+    },
+    "unverified_unused": [
+      "normal-map convention",
+      "packed PBR channel layout"
+    ],
+    "full_PBR_equivalence_claimed": false
+  },
+  "invariance": {
+    "scope": "Accepted native rest-v02 cache to material staging before art-directed separation",
+    "all_P_UV_N_names_exact": true,
+    "rest_position_float32_sha256": "1c833cd444cfe66968f84d2d53c3d71adc3b5042d08acec2cfdc29728b4066ef",
+    "original_physical_cache_bytes_unchanged": true,
+    "source_to_fracture_outside_attribute_scope": "Separate geometry summary: 768 exterior vertex samples, not all exterior corners"
+  },
+  "color": {
+    "native_EXR_header": "lin_rec709",
+    "PNG_conversion": "FFmpeg 8.1.1 linear Rec.709 RGB to sRGB using recorded zscale RGB24 filter",
+    "pipeline_evidence": "color-pipeline-summary.json",
+    "JPEG_step": "Already-sRGB PNG to full-frame RGB JPEG q82 with sRGB ICC; no repeated transfer",
+    "tutorial_reader_VX_composition": "Separate tool experiment; its FFmpeg 9 is not used for these boat-media conversions",
+    "denoising": false,
+    "filmic_or_ACES_transform": false
+  },
+  "not_claimed": [
+    "Water blast or fluid-driven break events",
+    "71 independent fluid actors",
+    "43-compound-actor calm-water or burst qualification",
+    "Post-impact free flotation",
+    "Continuous native film or motion/audio/browser playback acceptance"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "parent_path": "/obj/natural_v2_source",
+  "nodes": [
+    {
+      "node_type": "file",
+      "node_name": "intact_obj",
+      "parameters": {
+        "file": "{{MODEL_ROOT}}/boat.obj"
+      }
+    },
+    {
+      "node_type": "xform",
+      "node_name": "normalize_si",
+      "parameters": {
+        "xOrd": "srt",
+        "scale": 3.161550487590124,
+        "t": [
+          -0.001569709817088443,
+          0.5828314371934284,
+          0.0006718294786129151
+        ]
+      }
+    },
+    {
+      "node_type": "attribwrangle",
+      "node_name": "source_identity",
+      "parameters": {
+        "class": "primitive",
+        "snippet": "i@sourceprim = @primnum; s@name = \"intact_hull\"; v@grain_dir = set(0,0,1);"
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "SOURCE_SI"
+    }
+  ],
+  "connections": [
+    {
+      "input": "normalize_si",
+      "output": "intact_obj",
+      "input_index": 0
+    },
+    {
+      "input": "source_identity",
+      "output": "normalize_si",
+      "input_index": 0
+    },
+    {
+      "input": "SOURCE_SI",
+      "output": "source_identity",
+      "input_index": 0
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "recorded_on": "2026-10-26",
-  "record_kind": "Public reference metadata and documentation review; not video playback or production acceptance",
+  "record_kind": "Public reference metadata, five private sampled tutorial frames and documentation review; not full-video playback or production acceptance",
   "asset_reuse": "Concept and API references only; no tutorial media, project files or private user screenshots copied",
   "sources": [
     {
@@ -32,6 +32,27 @@
         }
       ],
       "application": "Reference for initial velocity shaping and readable liquid-plume silhouette, not a copied setup or accepted result."
+    },
+    {
+      "id": "user_bullet_solver_p12",
+      "uploader": "特效向",
+      "title": "国语houdini舰船爆炸破碎课程 p12 12 3.01. BulletSolver setup_Mux",
+      "url": "https://www.bilibili.com/video/BV1Vr4y1i7Qr/?p=12",
+      "duration_seconds": 2387.2,
+      "review_scope": "Actual metadata and five privately retained sampled frames at 180, 600, 1200, 1800 and 2250 seconds; visible Houdini 18.0.287 interface and selected burned-in caption lines only",
+      "sample_times_seconds": [
+        180,
+        600,
+        1200,
+        1800,
+        2250
+      ],
+      "caption_tracks": "unavailable",
+      "full_video_watched": false,
+      "audio_listened": false,
+      "tutorial_media_published": false,
+      "attribution_limit": "Bilibili uploader is recorded; original authorship is not independently asserted",
+      "application": "Reference for native Bullet/constraint workflow and diagnostics. Metal-ship parameters are not transferred directly to the 400 kg/m3 wooden boat; current dynamics requires its own native tests."
     },
     {
       "id": "large_scale_fluids_overview",

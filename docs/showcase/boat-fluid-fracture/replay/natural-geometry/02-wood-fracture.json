@@ -1,0 +1,129 @@
+{
+  "parent_path": "/obj/natural_v2_source",
+  "nodes": [
+    {
+      "node_type": "rbdmaterialfracture::2.0",
+      "node_name": "native_wood_fracture",
+      "parameters": {
+        "materialtype": "wood",
+        "usenamespace": 1,
+        "fracturenamespace": "naturalwood",
+        "fractureperpiece": 0,
+        "enablecompiling": 1,
+        "wood_guidegeo": "none",
+        "wood_enablegrain": 1,
+        "wood_grainfracturedir": "vector",
+        "wood_graindirvector": [
+          1,
+          0,
+          0
+        ],
+        "wood_grainspacing": 0.5,
+        "wood_grainoffset": 0.04,
+        "wood_grainoffsetseed": 7,
+        "wood_grainheight": 0.012,
+        "wood_grainelementsize": 0.45,
+        "wood_graindetailsize": 0.035,
+        "wood_enablecut": 1,
+        "wood_cutfracturedir": "vector",
+        "wood_cutdirvector": [
+          0,
+          0,
+          1
+        ],
+        "wood_cutspacing": 1.1,
+        "wood_cutoffset": 0.12,
+        "wood_cutoffsetseed": 13,
+        "wood_cutnoiseheight": 0.05,
+        "wood_cutelementsize": 0.5,
+        "wood_splinterdensity": 8,
+        "wood_splinterlength": 0.12,
+        "wood_detriangulate": "none",
+        "wood_convexdecomp": 0,
+        "wood_enablecluster": 1,
+        "wood_clustertype": "groupconstraints",
+        "wood_clustersize": [
+          0.65,
+          0.5,
+          1.6
+        ],
+        "wood_randomdetach": 0,
+        "wood_applyconstraints": 0
+      }
+    },
+    {
+      "node_type": "attribwrangle",
+      "node_name": "surface_roles",
+      "parameters": {
+        "class": "primitive",
+        "snippet": "i@is_cutface = inprimgroup(0, \"inside\", @primnum); s@surface_role = i@is_cutface ? \"cutwood\" : \"original\"; v@grain_dir = set(0,0,1);"
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "RENDER_PIECES"
+    },
+    {
+      "node_type": "null",
+      "node_name": "CONSTRAINTS_RAW"
+    },
+    {
+      "node_type": "null",
+      "node_name": "NATIVE_PROXY"
+    },
+    {
+      "node_type": "polyreduce::2.0",
+      "node_name": "proxy_reduce",
+      "parameters": {
+        "target": "poly_count",
+        "finalcount": 20000
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "COLLISION_PROXY"
+    }
+  ],
+  "connections": [
+    {
+      "input": "native_wood_fracture",
+      "output": "SOURCE_SI",
+      "input_index": 0
+    },
+    {
+      "input": "surface_roles",
+      "output": "native_wood_fracture",
+      "input_index": 0,
+      "output_index": 0
+    },
+    {
+      "input": "RENDER_PIECES",
+      "output": "surface_roles",
+      "input_index": 0
+    },
+    {
+      "input": "CONSTRAINTS_RAW",
+      "output": "native_wood_fracture",
+      "input_index": 0,
+      "output_index": 1
+    },
+    {
+      "input": "NATIVE_PROXY",
+      "output": "native_wood_fracture",
+      "input_index": 0,
+      "output_index": 2
+    },
+    {
+      "input": "proxy_reduce",
+      "output": "NATIVE_PROXY",
+      "input_index": 0
+    },
+    {
+      "input": "COLLISION_PROXY",
+      "output": "proxy_reduce",
+      "input_index": 0
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

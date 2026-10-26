@@ -1,0 +1,34 @@
+{
+  "source_sha256": "0b4757cd60e5912c9f6a756f418f409d6dc6529dbaf00283b03c6ef21942ee02",
+  "scale": 3.161550487590124,
+  "translation_m": [
+    -0.001569709817088443,
+    0.5828314371934284,
+    0.0006718294786129151
+  ],
+  "target_length_z_m": 6,
+  "target_keel_y_m": -0.25,
+  "density_kg_m3": 400,
+  "source_true_signed_volume_m3": 2.4491800571683586,
+  "target_piece_count_range": [
+    40,
+    80
+  ],
+  "physical_grain_direction": [
+    0,
+    0,
+    1
+  ],
+  "grain_cutter_normal": [
+    1,
+    0,
+    0
+  ],
+  "crosscut_normal": [
+    0,
+    0,
+    1
+  ],
+  "capping_or_repair": false,
+  "source_self_intersection_status": "not_yet_native_checked"
+}

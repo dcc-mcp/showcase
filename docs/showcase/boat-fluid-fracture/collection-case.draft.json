@@ -1,7 +1,7 @@
 {
   "slug": "boat-fluid-fracture",
-  "title": "完整船体源已打包，原生木材破碎与局部 FLIP 水爆待验收",
-  "subtitle": "imagegen → Rodin → Houdini 船底水爆 · 未入选制作草稿",
+  "title": "71 块原生木材几何通过，局部 FLIP 水爆与漂浮待验收",
+  "subtitle": "imagegen → Rodin → Houdini 原生木材 · 未入选制作草稿",
   "software": [
     "imagegen",
     "Hyper3D",
@@ -13,16 +13,16 @@
     "原生往返验证"
   ],
   "cover": {
-    "src": "docs/showcase/boat-fluid-fracture/split-assembled.jpg",
-    "alt": "旧 Bang 分件方案的原生比较图，不是新原生木材破碎结果"
+    "src": "docs/showcase/boat-fluid-fracture/intact-native.jpg",
+    "alt": "实际 500000 三角形完整源的原生 Mantra 静态检查图"
   },
-  "evidence_label": "完整源包已核验 · 新原生破碎、动力学和漂浮待验收",
-  "evidence_scope": "实际完整 Rodin 源包含 500000 个三角形及有效 UV/法线索引，独立归档保留五张原始贴图。新目标是船底局部 FLIP 水爆向上、向外驱动原生木材约束破坏；新原生几何与动力学仍待测量。旧 Bang17 诊断和渲染已停止，未被验收为自然破碎终态。",
-  "summary": "保留完整生成船体，用船底局部 FLIP 水爆耦合原生木材破碎，展示木纹切口、局部受力、碰撞和质量细节，再验证下落碎片的水线与自由漂浮；当前无新原生成功结论。",
+  "evidence_label": "71 块 / 171 条约束静态几何与三张原生图通过 · 动力学待验收",
+  "evidence_scope": "完整 Rodin 源经原生木材破碎得到 71 块闭合正体积几何、171 条约束及 655084 个可视三角形，冷启动重建与保存重开通过。三张真实 Mantra 图展示完整源、木材切面和 scale0.35 美术展开；43 个复合刚体的静水、局部水爆、漂浮和影片仍待验收，不能把 71 块静态几何当成 71 个独立流体刚体。",
+  "summary": "保留完整生成船体，先验证原生木材切口、约束和便携几何，再用船底局部 FLIP 水爆验证真实破坏与漂浮。当前仅静态几何和原生检查图通过，未入选。",
   "goal": "让真实向上、向外的水体冲击通过流体反馈加载空间约束，形成可读的局部木材破坏前沿，再用实际质量、碰撞和连续水线数据检验碎片漂浮。",
   "prompt": {
     "kind": "reusable",
-    "text": "用内置 imagegen 生成开放船舱木船参考，经 Hyper3D Rodin 建模和 Bang 分件。导入 Houdini 并保留 UV，建立真实水流冲击、按流体加载释放的约束及后续刚体反馈。记录实际质量、代理限制、水线和碎片运动，完成连续缓存、原生重开、独立复现和成片检查后再入选 showcase。",
+    "text": "用内置 imagegen 生成开放船舱木船参考，经 Hyper3D Rodin 建模。保留完整源，在 Houdini 使用原生 RBD 木材破碎、空间约束与 Bullet，记录切口、UV、质量和碰撞，再用船底局部 FLIP 水爆的真实反馈验证破坏与碎片水线。完成连续缓存、保存重开、独立复现和成片检查后再入选 showcase；旧 Bang 分件只作比较。",
     "note": "按当前制作链整理的可复用说明；不包含私有对话、任务标识或凭据。"
   },
   "environment": [
@@ -79,11 +79,11 @@
       "description": "完整 Rodin 源解析得到 500000 个三角形；独立新包保留有效 UV/法线索引及五张原始贴图。旧 Bang17 包和清单字节保持不变。"
     },
     {
-      "title": "独立观察生成源分件",
-      "description": "原生 Exploded View 按 name 以 scale1 展示 17 块、150000 三角形的源模型，UV 保留。分离间距是美术检查设置，不是流体破碎或漂浮结果。",
+      "title": "检查实际原生木材切面",
+      "description": "实际 71 块、655084 三角形的原生木材切面使用独立程序化纤维与环纹材质；P、UV、法线和名称在材质暂存前后精确一致。scale0.35 的展开仅用于看清切口，不是模拟破坏。",
       "image": {
-        "src": "docs/showcase/boat-fluid-fracture/parts-exploded.jpg",
-        "alt": "美术指导下展开的源模型部件，非真实破碎帧"
+        "src": "docs/showcase/boat-fluid-fracture/wood-cut-detail.jpg",
+        "alt": "原生木材切面近景及美术程序纹理，非物理破坏帧"
       }
     },
     {
@@ -92,11 +92,11 @@
     },
     {
       "title": "建立新的原生木材破碎方案",
-      "description": "新目标是船底局部 FLIP 水爆，真实流体反馈耦合原生 RBD 木材破碎、空间约束与 Bullet；新分件、受力、碰撞、质量及终态尚待测量。旧全局加载释放已停止，仅作比较。"
+      "description": "71 块闭合正体积原生几何与 171 条约束已通过冷启动重建和保存重开；当前用 43 个复合刚体验证碰撞与流体耦合，弱静水试验失败后仍在修正控制。局部水爆与漂浮尚未验收。"
     },
     {
       "title": "补足可读的原生细节",
-      "description": "需要木纹切口近景、带单位的约束与受力视图、碰撞导向和质量表；高机位同时容纳水爆羽流与船体，再跟踪真实碎片水线。白水细节仅在主解算通过后另行制作。"
+      "description": "完整源、实际切口近景及 71 块展开已有真实原生静帧。带单位的约束受力、碰撞导向、质量诊断和爆破后水线仍待实际结果；白水仅在主解算通过后另行制作。"
     },
     {
       "title": "等待终态证据后入选",
@@ -104,6 +104,21 @@
     }
   ],
   "results": [
+    {
+      "src": "docs/showcase/boat-fluid-fracture/intact-native.jpg",
+      "alt": "实际 500000 三角形完整源的原生 Mantra 静态检查图",
+      "caption": "真实 960 × 540 Mantra 完整源静帧；既有 sRGB PNG 仅作全帧 q82 JPEG 编码并嵌入 sRGB ICC，无再次颜色转换。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/wood-cut-detail.jpg",
+      "alt": "原生木材切面近景及美术程序纹理，非物理破坏帧",
+      "caption": "实际 71 块原生木材切面，scale0.35 美术展开；独立原生着色采样生成纤维与环纹，无几何位移，不作为流体破坏或漂浮证明。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/wood-fracture-exploded.jpg",
+      "alt": "71 块实际原生木材的静态展开检查图",
+      "caption": "真实 960 × 540 Mantra 全景，71 块、655084 三角形与 171 条原生约束单独核验；图中的分离间距是美术检查设置，不是动力学。"
+    },
     {
       "src": "docs/showcase/boat-fluid-fracture/split-assembled.jpg",
       "alt": "组装分件船体的原生 Mantra 静帧",
@@ -170,17 +185,47 @@
       "name": "完整源包结构检查",
       "result": "pass",
       "observed": "500000 个三角形，所有面角 UV/法线索引有效，五张贴图字节保留，ZIP 路径及相对材质链接检查通过；不代表新宿主导入或破碎通过。"
+    },
+    {
+      "name": "71 块原生静态几何",
+      "result": "pass",
+      "observed": "71 块闭合正体积、171 条约束和 655084 个可视三角形；便携冷重建的 P、拓扑、UV、法线、名称及原生保存重开通过。并不证明 71 个独立流体刚体。"
+    },
+    {
+      "name": "三张新原生静态检查图",
+      "result": "pass",
+      "observed": "完整源、切面近景和 71 块展开均完成 Mantra 渲染且零警告；既有正确 sRGB PNG 仅转 q82 全帧 JPEG，附源 PNG/EXR 哈希、相机与美术展开范围。"
     }
   ],
   "limitations": [
-    "参考范围仅为作者、索引说明、报告章节和官方文档；未播放或聆听参考视频，不公开用户私有截图。",
-    "旧 17 块 Bang 全局加载释放与影片计划保留为比较；新的原生木材破碎结果、局部受力与漂浮尚未通过。",
+    "参考范围包括索引说明、报告章节、官方文档及 P12 的五张私有采样帧；未完整观看或聆听视频，无可用字幕轨，不发布第三方画面或私有用户截图。",
+    "旧 17 块 Bang 全局加载释放保留为未验收比较；新 71 块静态原生几何通过，43 个复合刚体的静水、局部水爆、受力和漂浮仍待验收。",
     "这是未入选草稿；最终船体解算、释放碎片稳定漂浮和连续影片尚未验收。",
     "几何往返验证源模型，独立空场景只比较前两帧；最终模拟、完整序列复现、跨应用材质一致及公开播放没有通过。",
     "生成模型不具有工程船体、准确质量或封闭流形认证；代理碰撞和浮力参数须按实际限制解释。",
     "生成资产适用提供方条款；仓库软件许可不增加艺术品、模型训练或评估数据授权。"
   ],
   "resources": [
+    {
+      "label": "原生木材便携静态几何 ZIP",
+      "url": "docs/showcase/boat-fluid-fracture/fractured-rest.zip"
+    },
+    {
+      "label": "71 块原生几何与冷重建摘要",
+      "url": "docs/showcase/boat-fluid-fracture/native-geometry-summary.json"
+    },
+    {
+      "label": "新原生静帧参数、派生与边界",
+      "url": "docs/showcase/boat-fluid-fracture/native-media-summary.json"
+    },
+    {
+      "label": "原生静态几何复现说明",
+      "url": "docs/showcase/boat-fluid-fracture/replay/natural-geometry/USAGE.md"
+    },
+    {
+      "label": "用户 P12 Bullet 设置参考",
+      "url": "https://www.bilibili.com/video/BV1Vr4y1i7Qr/?p=12"
+    },
     {
       "label": "原生木材破碎详细计划",
       "url": "docs/showcase/boat-fluid-fracture/natural-fracture-brief.json"
@@ -374,6 +419,11 @@
       "version": "船底局部水爆目标与参考范围",
       "date": "2026-10-26",
       "change": "将新目标明确为原生木材破碎加船底 FLIP 水爆，旧 Bang 诊断及渲染停止且未验收；补充公开参考的有限查阅范围，不复制私有截图、不宣称视频已观看或新原生结果通过。"
+    },
+    {
+      "version": "原生 71 块静态几何与细节图",
+      "date": "2026-10-26",
+      "change": "加入便携原生几何、冷重建与保存重开证据，以及完整源、程序木纹切口和 71 块美术展开三张静帧。保护既有源包和参考字节；动力学、漂浮、影片仍待验收，保持未入选。"
     }
   ]
 }

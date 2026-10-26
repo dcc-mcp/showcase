@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "recorded_on": "2026-10-26",
-  "status": "intact_native_wood_water_blast_pilot_pending",
-  "verification_level": "Intact-source packaging checks plus historical Bang split-source native geometry/material and bounded replay checks. New native wood fracture, localized FLIP water blast, flotation and final film remain unaccepted.",
+  "status": "native_static_geometry_media_passed_coupled_dynamics_pending",
+  "verification_level": "Intact source, static 71-piece native wood geometry, portable cold-rebuild/save-reopen and three native inspection stills passed. Full-boat calm-water, localized FLIP blast, free flotation and final film remain unaccepted. Historical Bang checks retain their original scopes.",
   "environment": {
     "houdini": {
       "version": "22.0.368",
       "license_category": "Commercial",
-      "scope": "Earlier source/diagnostic acceptance hosts; Bang comparison stopped unaccepted; new intact-source native wood/water-blast pilot awaits measured acceptance"
+      "scope": "Native static intact/71-piece wood geometry and Mantra media plus earlier independently scoped comparison checks; coupled dynamics not accepted"
     },
     "adapter": {
       "source_commit": "c89e52559f9e26867cc12d7676f7c482d63c100b",
@@ -31,7 +31,7 @@
     "renderer": {
       "name": "Mantra",
       "host_version": "22.0.368",
-      "scope": "Historical Bang assembled/initial/source-inspection stills and reopened frame1 comparison; earlier render batches stopped; no new native water-blast media accepted"
+      "scope": "Actual intact and native 71-piece cut/exploded static Mantra views plus historical comparison stills; no new water-blast film accepted"
     },
     "dcc_cua": {
       "version": "1.12.2",
@@ -414,6 +414,18 @@
       },
       "evidence": "source-intact-manifest.json",
       "scope": "Source byte/OBJ/archive checks only; not native wood-fracture acceptance"
+    },
+    {
+      "name": "Native static wood geometry cold rebuild and reopen",
+      "result": "pass",
+      "observed": "71 closed positive-volume pieces, 171 native bonds, 655084 render triangles; exact P/topology/UV/N/names vs original accepted native caches; native cache reader save/reopen passed",
+      "evidence": "native-geometry-summary.json"
+    },
+    {
+      "name": "Native intact and static wood inspection media",
+      "result": "pass",
+      "observed": "Three completed Mantra views with zero warnings; native EXR lin_rec709 to sRGB PNG by FFmpeg8.1.1, then q82 full-frame RGB JPEG with embedded sRGB ICC and no repeated color transfer. Exploded spacing 0.35 and grain are art-directed, not physical motion.",
+      "evidence": "native-media-summary.json"
     }
   ],
   "production_stages": {
@@ -435,7 +447,7 @@
     },
     "fluid_driven_fracture": {
       "status": "not-tested",
-      "scope": "Historical Bang diagnostics stopped without final acceptance; new intact-source native wood fracture and localized under-hull FLIP water-blast pilot awaits measured geometry/load/failure evidence"
+      "scope": "Localized under-hull FLIP water-blast coupling, local loads and break events remain pending after accepted static native geometry"
     },
     "fragment_flotation": {
       "status": "not-tested",
@@ -447,12 +459,16 @@
     },
     "render_and_video": {
       "status": "not-tested",
-      "reason": "Historical comparison stills exist and old batches are stopped; no continuous new water-blast film is accepted"
+      "reason": "Three actual static native inspection stills passed; continuous new water-blast film remains unaccepted"
     },
     "native_save_reopen": {
       "status": "passed",
-      "scope": "Portable split-source geometry and repaired diffuse/scalar material only; final simulation reopening is not covered",
-      "evidence": "portable-acceptance-summary.json and material-repair-summary.json"
+      "scope": "Static native geometry cache reader and earlier split-source geometry/material only; final coupled simulation reopening not covered",
+      "evidence": [
+        "native-geometry-summary.json",
+        "portable-acceptance-summary.json",
+        "material-repair-summary.json"
+      ]
     },
     "export_reopen": {
       "status": "passed",
@@ -466,7 +482,7 @@
     },
     "rights": {
       "status": "not-tested",
-      "reason": "No model redistribution or generated-artwork rights review completed"
+      "reason": "Provider terms and asset boundaries recorded; no independent legal clearance or extra artwork/training/evaluation permission claimed"
     },
     "visual_motion_review": {
       "status": "not-tested",
@@ -514,6 +530,20 @@
       "status": "passed",
       "scope": "Reopened independent blank-scene replay frame 1 only; decoded RGB float pixels match production, EXR metadata/container hashes differ",
       "evidence": "render-rebuild-summary.json"
+    },
+    "native_static_wood_geometry": {
+      "status": "passed",
+      "scope": "71 rest/render pieces and 171 bonds; no inference of 71 independent fluid actors",
+      "evidence": "native-geometry-summary.json"
+    },
+    "native_static_inspection_media": {
+      "status": "passed",
+      "scope": "Intact source, static native cuts and art-directed exploded inspection only",
+      "evidence": "native-media-summary.json"
+    },
+    "full_boat_calm_water": {
+      "status": "not-tested",
+      "reason": "43 compound actors remain under collision/coupling and grid-control validation; weak calm-water pilot failed"
     }
   },
   "acceptance_targets": {
@@ -528,12 +558,13 @@
     "A complete final simulation cache or continuous final film",
     "Final simulation HIP save/reopen, exported-result reopening or full-sequence independent recipe equivalence",
     "Full PBR texture import, rendered material equivalence or cross-application parity",
-    "Public native HIP/Bgeo redistribution; these acceptance artifacts remain private",
     "Gallery selection, bilingual browser/playback acceptance, deployment or public playback",
     "Independent legal clearance or additional artwork/training/evaluation-data license",
     "Image-generator model identity verification",
-    "New intact-source native wood-fracture counts, localized breakage, coupled dynamics or stable flotation",
-    "New final-film timing or acceptance inferred from the earlier Bang17 comparison film plan"
+    "New final-film timing or acceptance inferred from the earlier Bang17 comparison film plan",
+    "Native HIP redistribution; only the sanitized static rest Bgeo package is public",
+    "71 independent fluid actors; 43 compound actors are being validated for coupled dynamics",
+    "Successful full-boat calm-water control, localized blast breakage or stable free flotation"
   ],
   "model": {
     "source": "model-manifest.json",
@@ -932,6 +963,105 @@
         "retouched": false,
         "exif_preserved": false
       }
+    },
+    {
+      "path": "intact-native.jpg",
+      "bytes": 20169,
+      "sha256": "3f4d8d3ca4782a7a8c3dfb3d823a371eabae2c63fe90dee8fe0e128babc8add2",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "source_srgb_png": {
+        "name": "intact-srgb.png",
+        "bytes": 114673,
+        "sha256": "fd38c27a8e9965eb1c365545d853038606ebee0c05babe27957eacdba16a09cd"
+      },
+      "source_native_exr": {
+        "name": "intact.exr",
+        "bytes": 284317,
+        "sha256": "9acbcae40bc44d4dbda321ff962bd8cdd0914518a8cf80143b736b873580b43a",
+        "oiio:ColorSpace": "lin_rec709"
+      },
+      "jpeg_derivation": {
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "wood-cut-detail.jpg",
+      "bytes": 82314,
+      "sha256": "745c9e8f59f9f8366119a58af560bd21f82a741cdcdbce0df6b60a3eb6205e8c",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "source_srgb_png": {
+        "name": "cut-perpixel-srgb.png",
+        "bytes": 557957,
+        "sha256": "5cbe9f0aeebd03b18e0e2e6e3f0154ca80192793182f31fce6aabc31601f4223"
+      },
+      "source_native_exr": {
+        "name": "cut-perpixel.exr",
+        "bytes": 1556829,
+        "sha256": "654daecf595b9783beb1c19c4a2cd7bef76d5d228f0501253f88f597356c952a",
+        "oiio:ColorSpace": "lin_rec709"
+      },
+      "jpeg_derivation": {
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "wood-fracture-exploded.jpg",
+      "bytes": 33230,
+      "sha256": "b9bbb426343f818440580c43b76843bac12c4dbf2f390ed62add6c6c75bffd4f",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "source_srgb_png": {
+        "name": "exploded71-perpixel-srgb.png",
+        "bytes": 171214,
+        "sha256": "83920d05a88332018845f2d057e523957bed0ddcd497b22ec68a497934d2c5d3"
+      },
+      "source_native_exr": {
+        "name": "exploded71-perpixel.exr",
+        "bytes": 420789,
+        "sha256": "293e2a241847ad27f41aff81a86ba985230cf40b9fe97dffe4d32195fe036a3d",
+        "oiio:ColorSpace": "lin_rec709"
+      },
+      "jpeg_derivation": {
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
     }
   ],
   "source_model_inspection": {
@@ -950,7 +1080,10 @@
     "native_image_artifacts": [
       "split-assembled.jpg",
       "initial-water-state.jpg",
-      "parts-exploded.jpg"
+      "parts-exploded.jpg",
+      "intact-native.jpg",
+      "wood-cut-detail.jpg",
+      "wood-fracture-exploded.jpg"
     ],
     "not_a_quality_or_flotation_verdict": true
   },
@@ -958,12 +1091,20 @@
     "brief": "natural-fracture-brief.json",
     "source_manifest": "source-intact-manifest.json",
     "source_archive": "source-intact.zip",
-    "native_geometry_counts": "not measured",
-    "physics_acceptance": "not-tested",
-    "media_acceptance": "not-tested",
+    "native_geometry_counts": {
+      "pieces": 71,
+      "constraints": 171,
+      "render_triangles": 655084
+    },
+    "physics_acceptance": "pending after failed weak calm-water pilot; corrective controls under test",
+    "media_acceptance": "static inspection only; dynamic film pending",
     "historical_scope": "Existing Bang17 roundtrip/replay/render checks and global-load-release diagnostics are comparison-only",
     "primary_effect": "Localized under-hull FLIP water blast up/out; actual feedback must break native wood constraints",
-    "pilot_status": "pending native geometry and physics acceptance; no new measured native proof in this revision"
+    "pilot_status": "Static native geometry and media accepted; no full-boat calm/burst/flotation/film verdict",
+    "native_geometry_evidence": "native-geometry-summary.json",
+    "static_media_acceptance": "passed",
+    "static_media_evidence": "native-media-summary.json",
+    "fluid_actor_count_under_validation": 43
   },
   "intact_source_package": {
     "geometry": {
@@ -1009,7 +1150,7 @@
       "relative_material_links_resolve_within_archive": true
     },
     "evidence": "source-intact-manifest.json",
-    "native_import_reopen_acceptance": "not-tested"
+    "native_import_reopen_acceptance": "Cold source-to-static-fracture rebuild and cache-reader save/reopen passed; see native-geometry-summary.json; no standalone intact exported-roundtrip claim"
   },
   "active_render_delivery_plan": {
     "record_kind": "unmeasured new-candidate targets",
@@ -1023,6 +1164,33 @@
   },
   "reference_research": {
     "evidence": "production-references.json",
-    "scope": "Author/indexed description or chapter metadata and official docs only; no video playback/listening or private screenshot reproduction"
+    "scope": "Author/indexed descriptions and chapter metadata, official docs, and five privately sampled Bilibili P12 frames; no full-video playback/audio/caption-track review or third-party media publication"
+  },
+  "native_static_geometry": {
+    "evidence": "native-geometry-summary.json",
+    "piece_count": 71,
+    "constraint_count": 171,
+    "render_points": 327616,
+    "render_triangles": 655084,
+    "contact_proxy_points": 10074,
+    "contact_proxy_triangles": 20000,
+    "inside_triangles": 91465,
+    "density_kg_m3": 400,
+    "total_wood_volume_m3": 2.449180135276925,
+    "total_mass_kg": 979.67205411077,
+    "native_source_volume_relative_error": 1.70344769403473e-09,
+    "ideal_obj_scale_volume_relative_error": 3.189172068134866e-08,
+    "raw_native_piece_count": 72,
+    "raw_native_constraint_count": 172,
+    "removed_zero_volume_artifacts": 1,
+    "removed_incident_bonds": 1,
+    "cold_rebuild_and_save_reopen": "passed"
+  },
+  "native_static_media": {
+    "evidence": "native-media-summary.json",
+    "scope": "Actual intact source and static native wood fracture; art-directed exploded inspection, not simulated breakage or flotation",
+    "art_directed_exploded_scale": 0.35,
+    "all_P_UV_N_names_exact_before_explode": true,
+    "source_physical_cache_bytes_unchanged": true
   }
 }

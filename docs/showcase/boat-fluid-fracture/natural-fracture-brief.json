@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "recorded_on": "2026-10-26",
-  "record_kind": "Derived production brief and artifact plan; targets are not measurements",
-  "status": "working_tree_unselected_not_accepted",
+  "record_kind": "Measured static native geometry/media plus a derived dynamics and artifact plan; planned stages are not measurements",
+  "status": "native_static_geometry_media_passed_dynamics_pending_unselected",
   "active_candidate": "intact_Rodin_native_wood_fracture_FLIP_water_blast",
   "source": {
     "archive": "source-intact.zip",
     "manifest": "source-intact-manifest.json",
     "role": "unchanged intact Rodin source",
     "triangle_count": 500000,
-    "count_basis": "parsed source OBJ; no new native-fracture output count"
+    "count_basis": "Parsed source OBJ and actual native intact inspection; original source package unchanged"
   },
   "historical_comparison": {
     "archive": "source-model.zip",
@@ -32,32 +32,40 @@
   "runtime_plan": {
     "constraint_fix": "c89e52559f9e26867cc12d7676f7c482d63c100b",
     "material_fix": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
-    "combined_runtime_status": "planned; source PR CI and earlier native stages remain independently scoped"
+    "combined_runtime_status": "Native static geometry/media stages executed on integrated source; independent source PR checks do not accept coupled dynamics"
   },
   "unmeasured_native_fields": [
-    "actual wood-fracture piece/point/face counts",
-    "constraint types/counts/strengths and spatial distribution",
-    "grain direction and fracture sizes",
-    "fracture interior surface and UV policy",
-    "mass/density/volume distribution",
-    "collision-proxy topology and fit",
-    "fluid loading/coupling and break-event timeline",
-    "complete cache range and original fps",
-    "post-impact waterline/settling interval",
-    "new native save/reopen, export/reopen and independent rebuild"
+    "43-compound-actor full-boat calm-water stability and collision/coupling qualification",
+    "actual blast loading/coupling, break-event timeline and sampled constraint forces with units",
+    "collision-proxy fit and force/mass diagnostic imagery",
+    "complete accepted cache range and original fps",
+    "post-impact free-floating waterline and settling interval",
+    "final simulation save/reopen and full-sequence independent rebuild",
+    "continuous final film and motion/playback review"
   ],
   "required_artifacts": [
     {
       "id": "intact_source",
       "planned_output": "Native intact-model inspection plus source archive and counts",
       "purpose": "Confirm the recognizable full hull and source correspondence",
-      "status": "source package checked; new native artifact pending"
+      "status": "passed for native intact static inspection and unchanged source package",
+      "evidence": [
+        "intact-native.jpg",
+        "native-media-summary.json",
+        "source-intact-manifest.json"
+      ]
     },
     {
       "id": "wood_fracture_closeup",
       "planned_output": "Native close-up and piece/UV/interior measurements",
       "purpose": "Show wood-grain fracture detail and realistic scale variations",
-      "status": "not-tested"
+      "status": "passed for static native cuts and art-directed procedural grain; no dynamics",
+      "evidence": [
+        "wood-cut-detail.jpg",
+        "wood-fracture-exploded.jpg",
+        "native-geometry-summary.json",
+        "native-media-summary.json"
+      ]
     },
     {
       "id": "constraints_and_loads",
@@ -91,7 +99,7 @@
     }
   ],
   "camera_plan": {
-    "record_kind": "art direction target, not executed native settings",
+    "record_kind": "Executed static inspection cameras in native-media-summary.json; impact framing remains an unexecuted target",
     "view": "Elevated three-quarter framing that contains both the localized water-blast plume and the hull break front",
     "occlusion": "Use the actual peak plume/debris bounds to frame the shot; avoid a foreground wall or liquid curtain concealing the critical wood failure region",
     "detail": "Use actual close-up diagnostics for constraint failure and timber debris; label any hidden-water guide view",
@@ -104,7 +112,8 @@
     "tone_mapping": "none currently adopted",
     "denoise": "none currently adopted",
     "final_review": "Native pixels, normal-speed motion, silence/audio intent and exact-bound DCC-CUA playback are separate pending stages",
-    "whitewater": "Deferred secondary foam/spray/bubbles from actual cached surface/vel fields, container and collisions after the primary pass; no primary-physics acceptance inferred"
+    "whitewater": "Deferred secondary foam/spray/bubbles from actual cached surface/vel fields, container and collisions after the primary pass; no primary-physics acceptance inferred",
+    "static_inspection": "Three native full-frame q82 JPEGs; source PNG/EXR hashes, camera/render parameters and art-directed scope in native-media-summary.json"
   },
   "publication": {
     "selected": false,
@@ -114,10 +123,11 @@
   },
   "rights": "SOURCE-INTACT.md",
   "not_claimed": [
-    "New native wood-fracture geometry counts or successful solve",
+    "Successful coupled full-boat calm-water or localized blast solve",
     "Natural local breakage or stable flotation from the earlier Bang diagnostic",
+    "71 independent fluid actors inferred from 71 static native pieces",
     "Completed new film, original timing verification, full-sequence replay or browser playback",
-    "Combined adapter runtime acceptance from independent PR CI"
+    "Combined dynamics acceptance inferred from source PR CI or static geometry/media"
   ],
   "primary_effect": {
     "record_kind": "current user-directed target, not a measured result",
@@ -126,5 +136,23 @@
     "physical_goal": "Actual FLIP feedback loads native wood constraints; detached debris then falls, interacts with water and may float",
     "final_hero": "Water-blast plume and native wood break front together; the prior dam-wave is not the current hero"
   },
-  "reference_metadata": "production-references.json"
+  "reference_metadata": "production-references.json",
+  "native_static_geometry": {
+    "evidence": "native-geometry-summary.json",
+    "archive": "fractured-rest.zip",
+    "pieces": 71,
+    "constraints": 171,
+    "render_triangles": 655084,
+    "render_points": 327616,
+    "closed_positive_volume_pieces": 71,
+    "cold_native_rebuild": "passed",
+    "native_save_reopen": "passed",
+    "actor_limit": "71 render/rest pieces; active dynamics validates 43 compound actors, not 71 independent fluid actors"
+  },
+  "native_static_media": {
+    "evidence": "native-media-summary.json",
+    "status": "passed",
+    "dynamic_result": false
+  },
+  "physics_status": "Pending: a weak calm-water pilot failed, grid/coupling controls are being corrected; no accepted full-boat calm, burst, flotation or film"
 }
