@@ -14,8 +14,8 @@
     },
     {
       "path": "production-evidence.json",
-      "sha256": "49354f225c21939b8a306c21aee7b976d56393f7fe294b80c5301b68aa3f55c5",
-      "bytes": 11046
+      "sha256": "8d928dfb53c9e71e2c5083b91353c42b912619db21679f488c3f5ed9105dc522",
+      "bytes": 12204
     },
     {
       "path": "publication-plan.json",
@@ -24,8 +24,8 @@
     },
     {
       "path": "README.zh.md",
-      "sha256": "37fd528db061601b0fe29b0107376c7d5940fd9747ea46cebc84751d0a85871b",
-      "bytes": 3914
+      "sha256": "43218fae09c3f715c6cc5b730cc0545aa8fbf059c9f2a4e99e104abbe55368d0",
+      "bytes": 4457
     },
     {
       "path": "RECIPE.md",
@@ -34,8 +34,8 @@
     },
     {
       "path": "source-inventory.json",
-      "sha256": "8ed90c19716665b984b3401bf25045c9a305867988437abdba2335fa65801287",
-      "bytes": 5574
+      "sha256": "1f5c438d74be09b1448a80989f0bc0e381706be1e262b74d79103651a4d86cd0",
+      "bytes": 5958
     }
   ]
 }

@@ -53,6 +53,15 @@ silently switch to headless execution.
 The builder also refuses a nonempty graph except for a default Viewer. It does
 not clear an existing scene. A direct script run is not typed MCP coverage.
 
+Undo recording must be enabled before construction starts; the builder refuses
+disabled recording without changing that global setting. Construction failure
+or interruption cancels the current undo group; only success ends it. See the
+official [Nuke 17 Undo reference](https://learn.foundry.com/nuke/developers/17.0/pythondevguide/_autosummary/nuke.Undo.html)
+and [offline transaction checks](transaction-checks-2026-10-27.json). These stub
+checks do not establish in-host rollback. Undo concerns the in-memory graph,
+not files already written to disk; existing native candidates remain protected
+by the versioned-output refusal rather than being automatically deleted.
+
 ## Configuration contract
 
 All paths are relative to the config directory; paths outside that directory are

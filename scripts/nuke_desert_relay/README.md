@@ -12,6 +12,7 @@ Blender session has run for this case, and no final composite is supplied.
 - [Asset reuse audit](asset-reuse.json), [source notices](LICENSES.md)
 - [Nuke builder](build_nuke.py), [Nuke preflight contract](TEMPLATE-NOTES.md), [Blender scene builder](build_prop_scene.py)
 - [Offline shadow/version checks](offline-revision-checks.json) and [failed edge-repair request](edge-repair-attempt.json)
+- [2026-10-27 offline build transaction checks](transaction-checks-2026-10-27.json) and [stub regression](test_build_nuke.py)
 
 The generated ruins have red/yellow edge contamination. They require actual
 Nuke alpha/premultiplication and edge-color work before acceptance. They are
@@ -26,6 +27,13 @@ and 16.1v2 remains a legacy candidate. Matching pure-value fixtures do not prove
 native API, pixel or license acceptance. The initial `preparation-checks.json`
 and `preflight-status.json` remain historical initial-preproduction records;
 current offline changes are separately recorded in `offline-revision-checks.json`.
+
+The later transaction correction refuses disabled undo recording, cancels the
+current graph group on construction failure or interruption, and ends it only
+on success. Seven offline stub tests exercise the public build path, including
+retry after a missing enum, constructor error or revoked binding. They do not
+import a real Nuke host or establish native rollback/save acceptance. Earlier
+source hashes remain historical; the dated transaction record binds the new source.
 
 Only execute the native builders after a fresh task-owned instance, valid
 software entitlement and a serial resource window have been assigned. Discover

@@ -29,7 +29,7 @@
   "sources": [
     {
       "path": "docs/showcase/nuke-desert-relay/source-inventory.json",
-      "sha256": "8ed90c19716665b984b3401bf25045c9a305867988437abdba2335fa65801287"
+      "sha256": "1f5c438d74be09b1448a80989f0bc0e381706be1e262b74d79103651a4d86cd0"
     }
   ],
   "checks": {
@@ -153,15 +153,15 @@
     },
     "privacy": {
       "status": "passed",
-      "summary": "Current public case text scanned for private paths, credentials and task/session literals; no native files exist to sanitize",
+      "summary": "2026-10-27: current public case/source text and CI caller scanned; no private path, credential or task/session literal found; no native file exists to sanitize",
       "evidence": [
         {
           "path": "docs/showcase/nuke-desert-relay/source-inventory.json",
-          "sha256": "8ed90c19716665b984b3401bf25045c9a305867988437abdba2335fa65801287"
+          "sha256": "1f5c438d74be09b1448a80989f0bc0e381706be1e262b74d79103651a4d86cd0"
         }
       ],
       "evidence_origin": "current-run",
-      "scope": "Prepared public source files only; no native files exist to sanitize"
+      "scope": "Current public text only; does not certify native/binary privacy or account-specific rights"
     },
     "locales": {
       "status": "not-tested",
@@ -205,6 +205,18 @@
       ],
       "evidence_origin": "current-run",
       "scope": "One source-image edit request, no CLI/API fallback or native operation"
+    },
+    "offline_build_transaction": {
+      "status": "passed",
+      "summary": "2026-10-27: seven public-build stub regressions pass after five historical-source failures; no real Nuke host executed",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/transaction-checks-2026-10-27.json",
+          "sha256": "541cd1c82f6fc8d7940daef462f5f0ac61aa997fc6308480bb4849eb3f932176"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Python stub only; graph cancellation, disabled recording, error/interruption preservation and retry"
     }
   },
   "interactive": false,
@@ -271,5 +283,14 @@
     }
   },
   "initial_preproduction_recorded_at": "2026-10-24T22:55:00.541906+00:00",
-  "revision_scope": "Offline shadow graph and exact version-target guard correction plus one failed source-image edit; no native execution or permission clearance"
+  "revision_scope": "Offline shadow graph and exact version-target guard correction plus one failed source-image edit; no native execution or permission clearance",
+  "source_revision_2026_10_27": {
+    "recorded_at": "2026-10-27T01:09:54.866648+00:00",
+    "based_on_commit": "22094194fffd4b95e17d1c93cd98861c33bf2238",
+    "evidence": {
+      "path": "scripts/nuke_desert_relay/transaction-checks-2026-10-27.json",
+      "sha256": "541cd1c82f6fc8d7940daef462f5f0ac61aa997fc6308480bb4849eb3f932176"
+    },
+    "scope": "Current source inventory and supplemental offline transaction check only; prior dated stage outcomes and native blockers are preserved"
+  }
 }

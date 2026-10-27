@@ -75,8 +75,8 @@
     },
     {
       "path": "scripts/nuke_desert_relay/build_nuke.py",
-      "sha256": "76e6757ac17445bc3c71a2add73e051a85d187a56a54da75431dcb802e2bd5d5",
-      "bytes": 25460
+      "sha256": "24c236f58eb53635c18fecefcdc0526939588d522b3963f4960892d533a83379",
+      "bytes": 25607
     },
     {
       "path": "scripts/nuke_desert_relay/build_prop_scene.py",
@@ -140,13 +140,23 @@
     },
     {
       "path": "scripts/nuke_desert_relay/README.md",
-      "sha256": "fb2dce29517757a51b650a77e7fca23534a353b12683f71f40263b0fe45b250a",
-      "bytes": 3019
+      "sha256": "32cd90928f7d55a65a62f05cc80705d8c708b5fbc31e59dc4bec3a1c8d44b302",
+      "bytes": 3621
     },
     {
       "path": "scripts/nuke_desert_relay/TEMPLATE-NOTES.md",
-      "sha256": "b78063d9b79a27928af44d60652c4daf31f1f10e3638d73a4c2ab275c7d002c4",
-      "bytes": 12267
+      "sha256": "43807591da5497c3eb347b13139316921a3a2467355d651c5b4813c24a44830e",
+      "bytes": 12938
+    },
+    {
+      "path": "scripts/nuke_desert_relay/test_build_nuke.py",
+      "sha256": "d8bd507da763c3b207757ada9f78baf3aa547a4cb4494c4e352ae74fa4b691ad",
+      "bytes": 8929
+    },
+    {
+      "path": "scripts/nuke_desert_relay/transaction-checks-2026-10-27.json",
+      "sha256": "541cd1c82f6fc8d7940daef462f5f0ac61aa997fc6308480bb4849eb3f932176",
+      "bytes": 2740
     }
   ]
 }

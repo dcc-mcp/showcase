@@ -364,6 +364,8 @@ def build(config_path, *, runtime_session_id=None, expected_owner_id=None,
         return output
 
     undo = nuke.Undo()
+    if undo.disabled():
+        raise RuntimeError("Build requires enabled undo recording")
     undo.begin("Build Desert Relay preflighted graph")
     try:
         # Recheck the fresh binding before the first Root/node mutation.
@@ -448,9 +450,12 @@ def build(config_path, *, runtime_session_id=None, expected_owner_id=None,
                    "write_nodes": [node.name() for node in writes],
                    "privacy_reviewed": False, "typed_mcp_coverage": "not-established-by-this-script"}
         (root_dir / "build-readback.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
-        return receipt
-    finally:
+    except BaseException:
+        undo.cancel()
+        raise
+    else:
         undo.end()
+    return receipt
 
 
 def main():

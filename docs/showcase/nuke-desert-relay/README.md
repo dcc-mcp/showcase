@@ -63,6 +63,16 @@ explicitly. The case is an offline composite; it does not claim real-time or
 interactive rendering. Silence is intentional, while final audiovisual review
 has not run.
 
+## Offline builder correction, 2026-10-27
+
+The deferred builder now refuses disabled undo recording and cancels its graph
+group on a construction error or interruption. Only success ends the group.
+[Seven stub regressions](../../../scripts/nuke_desert_relay/transaction-checks-2026-10-27.json)
+exercise the public build function and retry after partial mutation; they are
+not Nuke execution or native rollback acceptance. The earlier shadow/version
+record and its source hashes remain historical, with the new source bound
+separately. Original imagery and all pending production gates are unchanged.
+
 ## Publication boundary
 
 The stable slug is `nuke-desert-relay`. It is absent from `collection.json`;
