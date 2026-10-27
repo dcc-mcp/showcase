@@ -228,7 +228,11 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
                     alt, url, AUDIO_TYPES[extension], url, esc(os.path.basename(rel)), extension[1:].upper())
     if os.path.splitext(rel)[1].lower() in (".mp4", ".webm"):
         poster = (' poster="%s"' % esc(resource_url(media["poster"], prefix))) if media.get("poster") else ""
-        return '<video controls playsinline preload="none" data-hover-preview data-preview-audio="%s"%s aria-label="%s"><source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>' % (esc(media.get("preview_audio", "unknown")), poster, alt, url, url)
+        return ('<video controls playsinline preload="none" data-hover-preview data-preview-audio="%s"%s aria-label="%s">'
+                '<source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>'
+                '<p class="media-fallback"><a href="%s" download="%s">打开或下载视频</a></p>') % (
+                    esc(media.get("preview_audio", "unknown")), poster, alt, url, url, url,
+                    esc(os.path.basename(rel)))
     load = ' loading="eager" fetchpriority="high"' if eager else ' loading="lazy"'
     return '<img src="%s" alt="%s"%s%s decoding="async">' % (url, alt, dimensions(root, rel), load)
 

@@ -89,6 +89,7 @@
 .case-card[data-preview-state=paused] .card-preview,.case-card[data-preview-state=paused] .preview-progress{opacity:1}.case-card[data-preview-state=paused] .card-kind{display:none}.case-card[data-preview-state=paused] .preview-toggle{opacity:1;pointer-events:auto}.case-card[data-preview-state=paused] .preview-audio-note{top:42px}
 /* Detail films: hover is silent; explicit viewing retains native controls. */
 .detail-video{min-width:0;background:#0b0e0c}.detail-video video{width:100%;aspect-ratio:16/9;object-fit:contain;background:#0b0e0c}.detail-video-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--line)}.video-watch{min-height:44px;border:1px solid var(--line);border-radius:5px;padding:8px 13px;background:var(--surface);color:var(--accent);font-size:13px}.video-watch[aria-pressed=true]{border-color:var(--accent)}.video-status,.video-audio-note{font-size:12px;line-height:1.5;color:var(--muted)}.video-audio-note{margin-left:auto}.detail-video[data-video-state=error] .video-status{color:var(--text)}
+.media-fallback{margin:0;padding:8px 16px 12px;border-top:1px solid var(--line);font-size:12px}.media-fallback a{color:var(--accent)}
 
 /* Dawnkeep's full-width native controls must not trap phone page scrolling. */
 .playable-section[data-play-case="dawnkeep-defense"][data-play-open="true"] .playable-actions{position:sticky;top:0;z-index:30;background:var(--bg);padding-block:8px;margin-block:0;border-bottom:1px solid var(--line)}

@@ -219,14 +219,14 @@
     "source_commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
     "package_sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34",
     "counts": {
-      "archive_files": 36,
+      "archive_files": 32,
       "model_triangles": 18756,
       "model_joints": 20,
       "embedded_model_images": 3,
-      "film_frames": 450,
-      "sampled_frames_reviewed": 51
+      "film_frames": 480,
+      "sampled_frames_reviewed": 54
     },
-    "scope": "Historical 16-second candidate; not acceptance of revised files"
+    "scope": "Historical 16-second, 32-file candidate; not acceptance of revised files"
   },
   "audio_measurement": {
     "sample_rate": 48000,
