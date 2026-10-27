@@ -23,11 +23,11 @@ PINS = {
     'docs/showcase/hyper3d-relic-room/RelicCourier-native.zip':
         (44273997, '8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79'),
     'docs/showcase/godot-mage-vfx/demo.mp4':
-        (5338633, 'b9171a70f7ca223baf44ea26937a5af7cf1759cec64458be9b04f5daa9306b25'),
+        (11982150, 'a1fe48d36787ebf7f4c69fa2c26160fab024b89dcccf9a457e4d02a8ca237904'),
     'docs/showcase/godot-mage-vfx/godot-mage-vfx.zip':
-        (1909029, '2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34'),
+        (2017429, '4e424fac796c8cc447d0c908b3966225f5ca5ac2efe50d191df423d000dc5618'),
     'docs/showcase/godot-mage-vfx/hero.jpg':
-        (103629, 'd1125339adc0645bf2ec6dfbd00d49a40308eb1d6c63bd2ae3d4e43049d93232'),
+        (131339, 'd61015bec99946975ef9b87a375a8b8342cfd3e3365ca7c336a78bd41e41bf23'),
 }
 SHA = re.compile(r'[0-9a-fA-F]{40}\Z')
 POINTER = re.compile(rb'version https://git-lfs.github.com/spec/v1\r?\n'
