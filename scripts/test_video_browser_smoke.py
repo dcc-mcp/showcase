@@ -78,6 +78,40 @@ class MediaReleaseGuardTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'Media refetched after stop'):
             assert_no_media_requests_after_stop(self.observation([self.request(2234)]))
 
+    def test_buffering_after_decoded_playback_retains_stop_ownership(self):
+        self.intent.update(state='loading', src='film.mp4', currentSrc='film.mp4', paused=False)
+        playing = {'event': 'playing', 'target': 'video', 'video_index': 1,
+                   'trusted': True, 'time': 2100, 'src': 'film.mp4', 'currentSrc': 'film.mp4'}
+        self.snapshot['events'][0] = playing
+        assert_no_media_requests_after_stop(self.observation([self.request(2201.2)]))
+        with self.assertRaisesRegex(AssertionError, 'Media refetched after stop'):
+            assert_no_media_requests_after_stop(self.observation([self.request(2234)]))
+
+    def test_loading_without_same_run_decoded_playback_does_not_prove_ownership(self):
+        self.intent.update(state='loading', src='film.mp4', currentSrc='film.mp4', paused=False)
+        playing = {'event': 'playing', 'target': 'video', 'video_index': 1,
+                   'trusted': True, 'time': 2100, 'src': 'film.mp4', 'currentSrc': 'film.mp4'}
+        for changes in [{'event': 'loadstart'}, {'event': 'emptied'}, {'event': 'abort'},
+                        {'event': 'error'}, {'trusted': False}, {'video_index': 0},
+                        {'src': 'old.mp4'}, {'src': None}, {'currentSrc': 'old.mp4'}]:
+            with self.subTest(changes=changes):
+                self.snapshot['events'][0] = {**playing, **changes}
+                with self.assertRaisesRegex(AssertionError, 'active player'):
+                    self.observation([self.request(2201.2)])
+        self.snapshot['events'][0] = playing
+        self.intent['paused'] = True
+        with self.assertRaisesRegex(AssertionError, 'active player'):
+            self.observation([self.request(2201.2)])
+
+    def test_source_reload_invalidates_earlier_playing_receipt(self):
+        self.intent.update(state='loading', src='film.mp4', currentSrc='film.mp4', paused=False)
+        self.snapshot['events'][0:1] = [
+            {'event': 'playing', 'target': 'video', 'video_index': 1, 'trusted': True,
+             'time': 2100, 'src': 'film.mp4', 'currentSrc': 'film.mp4'},
+            {'event': 'loadstart', 'target': 'video', 'video_index': 1, 'trusted': True, 'time': 2150}]
+        with self.assertRaisesRegex(AssertionError, 'active player'):
+            self.observation([self.request(2201.2)])
+
     def test_missing_untrusted_wrong_target_or_wrong_video_intent_fails(self):
         for changes in [{'trusted': False}, {'target': 'video'}, {'video_index': 0}, {'event': 'pointerleave'}]:
             with self.subTest(changes=changes):

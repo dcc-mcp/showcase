@@ -12,6 +12,11 @@
       "reason": "Historical cross-host calibration and measurement contrast retained as supporting evidence; not a standalone curated gallery work."
     },
     {
+      "slug": "nuke-desert-relay",
+      "status": "review",
+      "reason": "Preproduction source and offline checks only; native Nuke production, generated ruins edge cleanup, save/reopen, final composite and film review remain incomplete."
+    },
+    {
       "slug": "stairkeep",
       "status": "review",
       "reason": "Three-floor source prototype retained for review, with historical Godot 4.7.2 import, rule checks and Web export and the original resource-exhaustion counterexamples preserved. Native rendered UI, real keyboard/mouse, browser WebGL startup, IndexedDB reload persistence and an accepted gameplay movie remain blocked or untested. The prototype is silent with an English desktop UI; mobile and full localization remain pending. This archive is not gallery selection or playable deployment."

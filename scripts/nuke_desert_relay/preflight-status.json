@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "scope": "Sanitized preproduction tool outcomes; no native tool was called",
+  "dcc_inventory": {
+    "command": "dcc-mcp-cli list --output toon",
+    "exit_code": 1,
+    "result": "blocked",
+    "reason": "Filesystem denied shared gateway-launch.lock creation; no ACL or lock change attempted"
+  },
+  "doctor": {
+    "command": "dcc-mcp-cli doctor --output toon",
+    "cli_version": "0.20.46",
+    "exit_code": 0,
+    "inventory_ok": false,
+    "gateway_healthy": false,
+    "server_binary": "missing",
+    "would_download_on_start": true,
+    "action": "No bootstrap, installation or update performed"
+  },
+  "coordination": {
+    "fresh_host_granted": false,
+    "status": "pending",
+    "instruction": "Protect shared Nuke regression; no host connection/start until an explicit serial window"
+  },
+  "hyper3d": {
+    "generation_requests": 0,
+    "paid_requests": 0,
+    "historical_restriction": "Not released; no quota/network reactivation evidence"
+  },
+  "imagegen": {
+    "tool_invocations": 4,
+    "schema_failures": 2,
+    "images_returned": 2,
+    "backend_model": "unknown",
+    "remaining_quota": "unknown",
+    "result_shape": "image_url data URL; no model ID, request receipt ID or server file path returned",
+    "cli_api_fallback": false
+  },
+  "creative_production_board": {
+    "status": "unavailable",
+    "reason": "Skill requires direct board call; this environment exposed it only through orchestration. No board ID or save receipt is claimed."
+  },
+  "native_calls": 0,
+  "native_files_created": [],
+  "render_passes_created": [],
+  "final_films_created": [],
+  "future_integration_gap": "Inspect actual multilayer EXR channels and extract premultiplied beauty plus a white-neutral shadow factor before the Nuke builder's flat-input contract can pass.",
+  "host_window_request_delivery": "An initial coordination message succeeded; a later detailed follow-up returned a turn/start path-deserialization error. No later grant is established."
+}

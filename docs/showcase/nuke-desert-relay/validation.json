@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "status": "preproduction-blocked-native",
+  "environment": {
+    "python": "3.12.10",
+    "opencv": "5.0.0",
+    "nuke": "not-run",
+    "blender": "not-run",
+    "image_tool": "image_gen.imagegen",
+    "image_backend_model": "unknown",
+    "native_mcp_calls": 0
+  },
+  "target": {
+    "width_px": 1280,
+    "height_px": 720,
+    "fps": 30,
+    "frames": 240,
+    "duration_s": 8,
+    "status": "planned_final_shot"
+  },
+  "measured": {
+    "plate": {
+      "source_range_seconds": [
+        13,
+        21
+      ],
+      "width_px": 1280,
+      "height_px": 720,
+      "fps": 30,
+      "decoded_frames": 240,
+      "unique_decoded_frames": 240,
+      "duration_s": 8,
+      "encoding": "H264 CRF16 BT709 yuv420p",
+      "audio_streams": 0,
+      "bytes": 2169184,
+      "sha256": "9c7da38e347d1a9be02d3f16654f85685aaffb9bfb5db3ef8463910d6bbf746f"
+    },
+    "motion": {
+      "scope": "Offline ground-feature partial-affine fit from each decoded frame to the first. Not Nuke Tracker4, lens calibration, camera solve, or final matchmove acceptance.",
+      "plate_sha256": "9c7da38e347d1a9be02d3f16654f85685aaffb9bfb5db3ef8463910d6bbf746f",
+      "opencv_version": "5.0.0",
+      "frames_decoded": 240,
+      "unique_decoded_frames": 240,
+      "feature_roi_xyxy_px": [
+        40,
+        310,
+        1240,
+        690
+      ],
+      "max_translation_px": 0.7393451772923609,
+      "max_scale_delta": 0.0001016529459503257,
+      "max_rotation_deg": 0.010246253196469202,
+      "max_median_fit_error_px": 0.07317667162766672,
+      "minimum_inlier_tracks": 61
+    },
+    "generated_sky": {
+      "width_px": 1672,
+      "height_px": 941,
+      "channels": "RGB",
+      "bytes": 1576092
+    },
+    "generated_ruins": {
+      "width_px": 1672,
+      "height_px": 941,
+      "channels": "RGBA",
+      "bytes": 1427751,
+      "edge_color_defect": true
+    },
+    "model": {
+      "asset": "bronze-edge.glb",
+      "package_path": "assets/bronze-edge.glb",
+      "creator": "Kay Lousberg",
+      "pack": "KayKit Adventurers Character Pack 2.0",
+      "source": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_evidence": "Original pack license text retained by the prior Showcase cache; it identifies Kay Lousberg and CC0 and permits personal, educational and commercial projects. Copy that text and the selection provenance with this project.",
+      "film_display": "permitted_under_CC0",
+      "engineering_asset_redistribution": "permitted_under_CC0",
+      "credit": "Kay Lousberg / KayKit (credit optional under the supplied CC0 notice, retained for provenance)",
+      "prior_derivative": "Separate existing sword mesh selected from Knight.glb; source buffer/accessors/material payload retained, not a Hyper3D-generated asset or automatic generated-mesh split.",
+      "bytes": 535416,
+      "sha256": "764336cee935dcb7bef4bdcf3b56ef23b5955a5699828c61c02fb39ce8001945",
+      "input_member": {
+        "name": "Knight.glb",
+        "bytes": 601300,
+        "sha256": "284ab4da94b1916e72153999add973335e75ca45946b6dee7e69b484e07ac826"
+      },
+      "local_glb_readback": {
+        "version": 2,
+        "declared_length_matches": true,
+        "meshes": 1,
+        "materials": 3,
+        "images": 3,
+        "triangles": 300,
+        "animations": 0,
+        "skins": 0,
+        "external_uris": []
+      },
+      "native_execution_this_case": "not_run",
+      "native_render_reopen_this_case": "not_run",
+      "design_only": {
+        "use": "Upright half-buried relic in a practical desert plate",
+        "axial_extent_m": 1.5,
+        "burial_depth_m": 0.08,
+        "camera_match": "pending plate survey and authorized host validation"
+      }
+    },
+    "image_tool_invocations": 4,
+    "images_returned": 2
+  },
+  "checks": [
+    {
+      "name": "exact-source-hash",
+      "result": "pass",
+      "observed": {
+        "sha256": "eb6806c70655ace293e06d94767cc9a76e561da5ba4494103ce5d0ed70cc3d08",
+        "bytes": 41972962
+      }
+    },
+    {
+      "name": "excerpt-full-byte-decode",
+      "result": "pass",
+      "observed": {
+        "frames": 240,
+        "duration_s": 8,
+        "width_px": 1280,
+        "height_px": 720,
+        "audio_streams": 0
+      }
+    },
+    {
+      "name": "actual-generated-layer-bytes",
+      "result": "pass",
+      "observed": [
+        {
+          "path": "scripts/nuke_desert_relay/assets/ai-sky.png",
+          "sha256": "c5bf94e5e189972a704965c8f88d431a12d074cee913e5bfe616167899c46a12"
+        },
+        {
+          "path": "scripts/nuke_desert_relay/assets/ai-distant-ruins.png",
+          "sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a"
+        }
+      ]
+    },
+    {
+      "name": "raw-ruins-clean-alpha-color-edge",
+      "result": "fail",
+      "expected": "No conspicuous red/yellow edge contamination",
+      "observed": "Colored fringe pixels visible around the raw transparent ruin; source retained unchanged; no Nuke repair executed"
+    },
+    {
+      "name": "cleared-model-hash",
+      "result": "pass",
+      "observed": {
+        "path": "scripts/nuke_desert_relay/assets/bronze-edge.glb",
+        "sha256": "764336cee935dcb7bef4bdcf3b56ef23b5955a5699828c61c02fb39ce8001945"
+      }
+    },
+    {
+      "name": "not-selected-for-publication",
+      "result": "pass",
+      "observed": {
+        "collection_selected": false,
+        "official_site_writes": 0
+      }
+    },
+    {
+      "name": "offline-shadow-factor-algebra",
+      "result": "pass",
+      "observed": {
+        "evidence": {
+          "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+          "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8"
+        },
+        "scenarios": 5,
+        "scope": "Independent scalar formula and bounding-box counterexample; no native pixels"
+      }
+    },
+    {
+      "name": "explicit-version-target-value-guards",
+      "result": "pass",
+      "observed": {
+        "matching": 2,
+        "rejected": 9,
+        "scope": "Pure values only; not host compatibility or authorization"
+      }
+    },
+    {
+      "name": "image-tool-edge-edit-output",
+      "result": "fail",
+      "expected": "Corrected RGBA layer returned",
+      "observed": {
+        "error": "AbsolutePathBuf deserialized without a base path at line 1 column 894",
+        "new_output": false,
+        "raw_layer_preserved": true
+      }
+    }
+  ],
+  "not_claimed": [
+    "Native Nuke/Blender execution, licensed-host validation or actual native MCP calls",
+    "A saved/reopened .nk or .blend, render passes, final shot, before/after or breakdown",
+    "Native tracker, calibrated camera, lens distortion, Roto, contact shadow, occlusion or color-match acceptance",
+    "Completed edge repair, final visual/audio review or browser playback",
+    "New Hyper3D generation or redistribution clearance for historical Hyper3D props",
+    "Real-time or interactive output, continuous 3D motion or a solved moving camera",
+    "Website selection, merge, release or deployment",
+    "Verified backend image model, seed, remaining quota or exact account service agreement"
+  ],
+  "offline_revision": {
+    "recorded_at": "2026-10-25T11:30:03.924104+00:00",
+    "baseline_commit": "100309882f5123854bcfbd9bf2f36273590b71ec",
+    "shadow_algebra_scenarios": 5,
+    "matching_version_fixtures": 2,
+    "rejected_version_fixtures": 9,
+    "planned_targets": [
+      "16.1v2",
+      "17.0v3"
+    ],
+    "selected_target": "17.0v3",
+    "target_status": "planned-unvalidated",
+    "new_native_calls": 0,
+    "edge_edit_requests_this_revision": 1,
+    "new_images_returned": 0,
+    "initial_image_tool_requests": 4,
+    "cumulative_image_tool_requests": 5,
+    "existing_source_images_changed": false
+  }
+}

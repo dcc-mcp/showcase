@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "tool": "image_gen.imagegen",
+  "mode": "built-in generation",
+  "model": "unknown",
+  "model_reason": "Tool returned only image_url; no model identity or generation receipt was returned.",
+  "prompt": "Use case: photorealistic-natural.\nAsset type: standalone distant-sky matte layer for an offline Nuke composite.\nPrimary request: one continuous wide 16:9 image of sky only, a very restrained desert atmosphere matte.\nScene/backdrop: pale dusty blue in the upper sky, gradually fading to warm ivory near the bottom horizon. One delicate elongated band of thin high cirrus cloud. High dry midday light from upper camera-left, matching the pale, low-saturation light of a telephoto Death Valley dry-lake photograph. Low saturation, natural soft luminance, realistic photographic color.\nComposition: sky fills the entire image, no visible horizon line or terrestrial surface. Clean usable sky field with the cirrus band as a subtle detail.\nConstraints: no sun disc, no ground, no mountains, no architecture, no moon, no people, no animals, no text, no logo, no watermark, no UI, no border, no collage. This is an individual background layer, not a final shot.",
+  "attempts": [
+    {
+      "number": 1,
+      "result": "failed_before_output",
+      "error": "AbsolutePathBuf deserialized without a base path at line 1 column 1144",
+      "input_reference": "plate-reference-wide.jpg; inspected locally, initial referenced_image_paths rejected Windows absolute-path serialization",
+      "tool_output": "No image, path or model returned."
+    },
+    {
+      "number": 2,
+      "result": "image_returned",
+      "transparent_background": false,
+      "reference_images_submitted": 0,
+      "tool_return_fields": [
+        "image_url"
+      ],
+      "response_format": "data:image/png;base64"
+    }
+  ],
+  "saved_file": "assets/ai-sky.png",
+  "transformation": "None. PNG bytes are decoded verbatim from the returned data URL.",
+  "visual_review": {
+    "result": "inspected",
+    "observed": "Sky-only pale blue-to-warm-ivory gradient with one thin elongated cirrus band; no ground, mountains, architecture, sun disc, people, text, logo or UI observed.",
+    "scope": "Generated source layer only. No Nuke composite, motion, color-match acceptance or final-shot validation."
+  },
+  "quota": {
+    "remaining": "unknown",
+    "reason": "No image-generation quota endpoint exposed."
+  },
+  "recorded_at": "2026-10-24T22:39:38.429528+00:00",
+  "bytes": 1576092,
+  "sha256": "c5bf94e5e189972a704965c8f88d431a12d074cee913e5bfe616167899c46a12",
+  "width": 1672,
+  "height": 941,
+  "bit_depth": 8,
+  "png_color_type": 2,
+  "reference_sha256": "96dd8bbcbc28321c390e35fd72fb5263db3aaf2a6cd60c55767347705fd74b4b"
+}

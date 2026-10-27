@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-27T01:09:54.866648+00:00",
+  "scope": "Offline execution of the actual public build function with a Nuke stub and fixture-only external preflight/grant/window checks; no real host or native artifact acceptance",
+  "historical_source": {
+    "commit": "22094194fffd4b95e17d1c93cd98861c33bf2238",
+    "build_nuke_sha256": "76e6757ac17445bc3c71a2add73e051a85d187a56a54da75431dcb802e2bd5d5",
+    "offline_revision_checks_sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8",
+    "scope": "Earlier dated shadow/version records and their source hashes are unchanged"
+  },
+  "current_sources": [
+    {
+      "path": "scripts/nuke_desert_relay/build_nuke.py",
+      "sha256": "24c236f58eb53635c18fecefcdc0526939588d522b3963f4960892d533a83379",
+      "bytes": 25607
+    },
+    {
+      "path": "scripts/nuke_desert_relay/test_build_nuke.py",
+      "sha256": "d8bd507da763c3b207757ada9f78baf3aa547a4cb4494c4e352ae74fa4b691ad",
+      "bytes": 8929
+    }
+  ],
+  "command": "python scripts/nuke_desert_relay/test_build_nuke.py",
+  "ci_caller": {
+    "path": ".github/workflows/pages.yml",
+    "sha256": "9efa8648bfa1a777f75cb96c800e4a45b1d5a5203fe6df84b967a071efebb300",
+    "bytes": 3119
+  },
+  "before_fix": {
+    "tests": 7,
+    "failures": 5,
+    "scope": "Same stub regression against the historical source commit"
+  },
+  "after_fix": {
+    "tests": 7,
+    "failures": 0,
+    "checks": [
+      {
+        "name": "missing enum: cancel partial graph and retry",
+        "status": "passed"
+      },
+      {
+        "name": "constructor failure: preserve error, cancel and retry",
+        "status": "passed"
+      },
+      {
+        "name": "KeyboardInterrupt: preserve interruption, cancel and retry",
+        "status": "passed"
+      },
+      {
+        "name": "revoked binding before save: cancel and retry",
+        "status": "passed"
+      },
+      {
+        "name": "disabled undo: refuse before begin/mutation",
+        "status": "passed"
+      },
+      {
+        "name": "successful build: end without cancel and return saved receipt",
+        "status": "passed"
+      },
+      {
+        "name": "unbound public build: refuse before preflight",
+        "status": "passed"
+      }
+    ]
+  },
+  "official_api_reference": "https://learn.foundry.com/nuke/developers/17.0/pythondevguide/_autosummary/nuke.Undo.html",
+  "host_imported": false,
+  "live_window_checked": false,
+  "native_rendered": false,
+  "limitations": [
+    "Stub behavior is not in-host rollback or save/reopen acceptance",
+    "Undo concerns graph memory and does not remove files already written to disk",
+    "All native, entitlement, edge repair, final composite and film gates remain incomplete"
+  ]
+}
