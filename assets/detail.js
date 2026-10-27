@@ -47,11 +47,11 @@ update();
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const zh = String(document.documentElement.lang || "").startsWith("zh");
   const labels = zh ? {
-    watch: "观看视频", stop: "停止观看", hover: "悬停即静音预览，点击观看", tap: "点击观看视频", loading: "正在加载视频…",
+    watch: "观看视频", retry: "重试视频", stop: "停止观看", hover: "悬停即静音预览，点击观看", tap: "点击观看视频", loading: "正在加载视频…",
     preview: "静音预览中，点击观看", watching: "使用播放器控制声音与进度", error: "视频暂不可用，请重试或使用下载链接。",
     silent: "无音轨", unknown: "音轨未核验"
   } : {
-    watch: "Watch video", stop: "Stop watching", hover: "Hover for muted preview; click to watch", tap: "Click to watch video", loading: "Loading video…",
+    watch: "Watch video", retry: "Retry video", stop: "Stop watching", hover: "Hover for muted preview; click to watch", tap: "Click to watch video", loading: "Loading video…",
     preview: "Muted preview; click to watch", watching: "Use player controls for sound and seeking", error: "Video unavailable. Retry or use the download link.",
     silent: "No audio track", unknown: "Audio unverified"
   };
@@ -65,7 +65,7 @@ update();
   function state(entry, value) {
     entry.host.dataset.videoState = value;
     const watching = active && active.entry === entry && !active.automatic;
-    entry.button.textContent = watching ? labels.stop : labels.watch;
+    entry.button.textContent = value === "error" ? labels.retry : watching ? labels.stop : labels.watch;
     entry.button.setAttribute("aria-pressed", String(Boolean(watching)));
     entry.status.textContent = value === "error" ? labels.error : value === "loading" ? labels.loading :
       value === "preview" ? labels.preview : value === "watching" ? labels.watching : automaticAllowed() ? labels.hover : labels.tap;

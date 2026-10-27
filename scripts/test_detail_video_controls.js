@@ -350,7 +350,7 @@ test("late fulfillment cannot resume an exited preview or interrupt newer watchi
 test("stalled/rejected media releases resources and allows explicit retry", async () => {
   const f = fixture({mode: "defer"}), e = f.entries[0]; enter(e);
   [...f.timers.values()].forEach(fn => fn());
-  assert.equal(e.host.dataset.videoState, "error"); assert.equal(e.video.src, null);
+  assert.equal(e.host.dataset.videoState, "error"); assert.equal(e.button.textContent, "Retry video"); assert.equal(e.video.src, null);
   e.video.mode = "reject"; watch(e); await flush(); assert.equal(e.host.dataset.videoState, "error");
   e.video.mode = "resolve"; watch(e); await flush(); assert.equal(e.host.dataset.videoState, "watching");
 });
