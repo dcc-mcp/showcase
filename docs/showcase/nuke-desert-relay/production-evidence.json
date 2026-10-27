@@ -1,0 +1,296 @@
+{
+  "schema": "dcc-showcase-production/v1",
+  "case_slug": "nuke-desert-relay",
+  "recorded_at": "2026-10-25T11:30:03.924104+00:00",
+  "environment": [
+    {
+      "role": "host",
+      "component": "Nuke and Blender",
+      "version": "unknown",
+      "reason": "No assigned native production host/adapter/gateway was connected for this case"
+    },
+    {
+      "role": "adapter",
+      "component": "Nuke and Blender adapters",
+      "version": "unknown",
+      "reason": "No assigned native production host/adapter/gateway was connected for this case"
+    },
+    {
+      "role": "core",
+      "component": "deployed gateway Core",
+      "version": "unknown",
+      "reason": "No assigned native production host/adapter/gateway was connected for this case"
+    }
+  ],
+  "recipe": {
+    "path": "docs/showcase/nuke-desert-relay/RECIPE.md",
+    "sha256": "25108a21a7039e41f909e1b456c612b273d9e98ba24281d0729b909c7241d809"
+  },
+  "sources": [
+    {
+      "path": "docs/showcase/nuke-desert-relay/source-inventory.json",
+      "sha256": "1f5c438d74be09b1448a80989f0bc0e381706be1e262b74d79103651a4d86cd0"
+    }
+  ],
+  "checks": {
+    "research": {
+      "status": "passed",
+      "summary": "Official exact-plate rights, reuse sources, current site mapping and actual generated source layers inspected",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/plate-candidates.json",
+          "sha256": "82814028f1571d353efe47eeb3c98440dda7c58e1b002291343b2ae92103ed3f"
+        },
+        {
+          "path": "scripts/nuke_desert_relay/asset-reuse.json",
+          "sha256": "a7dd182886a281e6dd89cb734aca1c128affe04994e628ec002d6592f37f13cd"
+        },
+        {
+          "path": "docs/showcase/nuke-desert-relay/publication-plan.json",
+          "sha256": "be59c6ac70e816c67432f50f32e307c0ca6ed87e1dcd9fa21b2e29bca24a402b"
+        }
+      ],
+      "evidence_origin": "historical",
+      "scope": "Preproduction research only"
+    },
+    "reuse_discovery": {
+      "status": "blocked",
+      "summary": "Exact local CC0 asset audited; live provider/gateway capability and installation discovery remain blocked",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/asset-reuse.json",
+          "sha256": "a7dd182886a281e6dd89cb734aca1c128affe04994e628ec002d6592f37f13cd"
+        },
+        {
+          "path": "scripts/nuke_desert_relay/preflight-status.json",
+          "sha256": "f2e3767df3e2ecff4e6439529334709bfe867b99554bfc70ff9498e6d66543ba"
+        }
+      ],
+      "evidence_origin": "not-run",
+      "scope": "Partial reuse investigation; not a completed live production gate"
+    },
+    "rights": {
+      "status": "blocked",
+      "summary": "Specific NPS plate and CC0 model display/source redistribution documented; account-specific generated-output agreement and Nuke entitlement remain unverified",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/LICENSES.md",
+          "sha256": "fa1adbf6aa90471142a3619a88825cb7f991cb252911e0116434d5535bc45442"
+        }
+      ],
+      "evidence_origin": "not-run",
+      "scope": "Per-input source rights separated from software/account and publication authority"
+    },
+    "real_mcp": {
+      "status": "blocked",
+      "summary": "Zero native DCC-MCP calls; shared gateway inventory refused and no fresh host assigned",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/preflight-status.json",
+          "sha256": "f2e3767df3e2ecff4e6439529334709bfe867b99554bfc70ff9498e6d66543ba"
+        }
+      ],
+      "evidence_origin": "not-run",
+      "scope": "Native production and final acceptance not run"
+    },
+    "save_reopen": {
+      "status": "blocked",
+      "summary": "No fresh task-owned native window or completed final deliverable; see exact scope.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Native production and final acceptance not run"
+    },
+    "export_reopen": {
+      "status": "blocked",
+      "summary": "No fresh task-owned native window or completed final deliverable; see exact scope.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Native production and final acceptance not run"
+    },
+    "recipe_rebuild": {
+      "status": "blocked",
+      "summary": "No fresh task-owned native window or completed final deliverable; see exact scope.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Native production and final acceptance not run"
+    },
+    "continuous_frames": {
+      "status": "blocked",
+      "summary": "No fresh task-owned native window or completed final deliverable; see exact scope.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Native production and final acceptance not run"
+    },
+    "visual_review": {
+      "status": "blocked",
+      "summary": "Generated source layers inspected and raw ruins edge defect retained; final composite has not been produced",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/generation-ruins.json",
+          "sha256": "67e2ddf6e33b9bede405727190fe415ed4d091660e3befac9eadcce45af99607"
+        },
+        {
+          "path": "scripts/nuke_desert_relay/generation-sky.json",
+          "sha256": "669abd4d83fa3beb7f6439ea034cdf5f35435f89b9487c49b961d81827e297d7"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Source-only pixel inspection, not final/native visual acceptance"
+    },
+    "audio_review": {
+      "status": "not-tested",
+      "summary": "Planned intentional silence; excerpt omits source AAC; no final film to listen to",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Final audiovisual review not run"
+    },
+    "browser_playback": {
+      "status": "blocked",
+      "summary": "No fresh task-owned native window or completed final deliverable; see exact scope.",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Native production and final acceptance not run"
+    },
+    "privacy": {
+      "status": "passed",
+      "summary": "2026-10-27: current public case/source text and CI caller scanned; no private path, credential or task/session literal found; no native file exists to sanitize",
+      "evidence": [
+        {
+          "path": "docs/showcase/nuke-desert-relay/source-inventory.json",
+          "sha256": "1f5c438d74be09b1448a80989f0bc0e381706be1e262b74d79103651a4d86cd0"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Current public text only; does not certify native/binary privacy or account-specific rights"
+    },
+    "locales": {
+      "status": "not-tested",
+      "summary": "English and Chinese source reports prepared; no selected site detail page exists for browser acceptance",
+      "evidence": [],
+      "evidence_origin": "not-run",
+      "scope": "Draft prose only, website localization acceptance remains pending"
+    },
+    "offline_node_math": {
+      "status": "passed",
+      "summary": "Independent shadow factor algebra covers outside, unshadowed, shadowed, soft-edge and non-unit background alpha cases",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+          "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Scalar equations and planned node graph only, not rendered Nuke pixels"
+    },
+    "deferred_target_guard": {
+      "status": "passed",
+      "summary": "Explicit target/grant/observed-version value checks preserve exact matching and refusal",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/offline-revision-checks.json",
+          "sha256": "4888a9dfdc22360d6a5610c64e77cff93642e9daf4c8437a0e3a16aaed0df7a8"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Pure-value fixtures; both Nuke targets remain native-unvalidated"
+    },
+    "source_edge_repair": {
+      "status": "blocked",
+      "summary": "Built-in edit failed Windows source-path deserialization before output; no repaired layer exists",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/edge-repair-attempt.json",
+          "sha256": "ff48abe26b2ff284df9db2b940e1231f82a37bab4986f2ef627e5f1119acc86e"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "One source-image edit request, no CLI/API fallback or native operation"
+    },
+    "offline_build_transaction": {
+      "status": "passed",
+      "summary": "2026-10-27: seven public-build stub regressions pass after five historical-source failures; no real Nuke host executed",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/transaction-checks-2026-10-27.json",
+          "sha256": "541cd1c82f6fc8d7940daef462f5f0ac61aa997fc6308480bb4849eb3f932176"
+        }
+      ],
+      "evidence_origin": "current-run",
+      "scope": "Python stub only; graph cancellation, disabled recording, error/interruption preservation and retry"
+    }
+  },
+  "interactive": false,
+  "task": {
+    "goal": "Composite the cleared real desert plate, generated background layers and cleared 3D prop in Nuke; deliver native sources and reviewed 8-second film after host assignment",
+    "inputs": [
+      {
+        "path": "scripts/nuke_desert_relay/assets/plate-8s.mp4",
+        "sha256": "9c7da38e347d1a9be02d3f16654f85685aaffb9bfb5db3ef8463910d6bbf746f"
+      },
+      {
+        "path": "scripts/nuke_desert_relay/assets/ai-sky.png",
+        "sha256": "c5bf94e5e189972a704965c8f88d431a12d074cee913e5bfe616167899c46a12"
+      },
+      {
+        "path": "scripts/nuke_desert_relay/assets/ai-distant-ruins.png",
+        "sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a"
+      },
+      {
+        "path": "scripts/nuke_desert_relay/assets/bronze-edge.glb",
+        "sha256": "764336cee935dcb7bef4bdcf3b56ef23b5955a5699828c61c02fb39ce8001945"
+      }
+    ],
+    "capabilities": [
+      "offline plate excerpt preparation",
+      "offline ground-motion measurement",
+      "built-in raster sky generation",
+      "built-in raster architecture generation",
+      "existing CC0 model provenance audit",
+      "deferred native graph and scene recipes",
+      "offline shadow-factor node algebra correction",
+      "explicit deferred host-version target guards"
+    ],
+    "reproduction_budget": {
+      "estimated_seconds": null,
+      "measured_seconds": null,
+      "cost_ceiling": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "docs/showcase/nuke-desert-relay/plate-first.jpg",
+      "sha256": "dc83a0cfc0c3de3c512aa4ec458a0648ac565df5bb817236deb5835f6806fa06"
+    }
+  ],
+  "failure_recovery": [],
+  "usage_rights": {
+    "display": {
+      "status": "unknown",
+      "evidence": [
+        {
+          "path": "scripts/nuke_desert_relay/LICENSES.md",
+          "sha256": "fa1adbf6aa90471142a3619a88825cb7f991cb252911e0116434d5535bc45442"
+        }
+      ]
+    },
+    "training": {
+      "status": "not-granted",
+      "evidence": []
+    },
+    "evaluation": {
+      "status": "not-granted",
+      "evidence": []
+    }
+  },
+  "initial_preproduction_recorded_at": "2026-10-24T22:55:00.541906+00:00",
+  "revision_scope": "Offline shadow graph and exact version-target guard correction plus one failed source-image edit; no native execution or permission clearance",
+  "source_revision_2026_10_27": {
+    "recorded_at": "2026-10-27T01:09:54.866648+00:00",
+    "based_on_commit": "22094194fffd4b95e17d1c93cd98861c33bf2238",
+    "evidence": {
+      "path": "scripts/nuke_desert_relay/transaction-checks-2026-10-27.json",
+      "sha256": "541cd1c82f6fc8d7940daef462f5f0ac61aa997fc6308480bb4849eb3f932176"
+    },
+    "scope": "Current source inventory and supplemental offline transaction check only; prior dated stage outcomes and native blockers are preserved"
+  }
+}

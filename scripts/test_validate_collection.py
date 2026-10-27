@@ -13,6 +13,7 @@ import unittest
 from unittest.mock import patch
 
 import validate_collection
+import validate_entry
 
 
 class CollectionContractTests(unittest.TestCase):
@@ -70,6 +71,38 @@ class CollectionContractTests(unittest.TestCase):
         path = self.root / "collection.json"
         self.write_json(path, {"schema_version": 1, "cases": cases or [self.case]})
         return validate_collection.validate(path)
+
+    def write_entry_check(self, check):
+        path = self.entry / "validation.json"
+        validation = json.loads(path.read_text(encoding="utf-8"))
+        validation["checks"] = [check]
+        self.write_json(path, validation)
+
+    def test_entry_accepts_explicit_not_run_reason(self):
+        self.write_entry_check({"name": "Full animation", "result": "not_run",
+                                "observed": "Deferred until the render resource handoff."})
+        self.assertEqual(validate_entry.validate(str(self.entry)), [])
+        self.assertEqual(self.problems(), [])
+
+    def test_entry_not_run_requires_nonempty_textual_reason(self):
+        for reason in ({}, {"observed": None}, {"observed": ""}, {"observed": "  "},
+                       {"observed": 42}, {"observed": []}, {"observed": {}}):
+            with self.subTest(reason=reason):
+                self.write_entry_check(dict(name="Full animation", result="not_run", **reason))
+                self.assertTrue(any("nonempty observed reason" in problem
+                                    for problem in validate_entry.validate(str(self.entry))))
+
+    def test_entry_preserves_legacy_fail_evidence(self):
+        self.write_entry_check({"name": "Visual review", "result": "fail",
+                                "expected": "Clean manufactured reflections.",
+                                "observed": "The silver surface still has visible dents."})
+        self.assertEqual(validate_entry.validate(str(self.entry)), [])
+
+    def test_entry_does_not_treat_arbitrary_result_as_not_run(self):
+        self.write_entry_check({"name": "Full animation", "result": "skipped",
+                                "observed": "Not executed."})
+        self.assertTrue(any("expected pass/fail/not_run" in problem
+                            for problem in validate_entry.validate(str(self.entry))))
 
     def attribution(self):
         return {"stage_id": "creation", "stage": "Creation", "model": "Unknown", "reasoning_effort": "Unknown",

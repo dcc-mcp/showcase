@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-24",
+  "audit_scope": "Read-only local provenance, license-text, SHA-256 and GLB-container inspection. No DCC, provider request, network acquisition or payment.",
+  "selected": {
+    "asset": "bronze-edge.glb",
+    "package_path": "assets/bronze-edge.glb",
+    "creator": "Kay Lousberg",
+    "pack": "KayKit Adventurers Character Pack 2.0",
+    "source": "https://kaylousberg.itch.io/kaykit-adventurers",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "license_evidence": "Original pack license text retained by the prior Showcase cache; it identifies Kay Lousberg and CC0 and permits personal, educational and commercial projects. Copy that text and the selection provenance with this project.",
+    "film_display": "permitted_under_CC0",
+    "engineering_asset_redistribution": "permitted_under_CC0",
+    "credit": "Kay Lousberg / KayKit (credit optional under the supplied CC0 notice, retained for provenance)",
+    "prior_derivative": "Separate existing sword mesh selected from Knight.glb; source buffer/accessors/material payload retained, not a Hyper3D-generated asset or automatic generated-mesh split.",
+    "bytes": 535416,
+    "sha256": "764336cee935dcb7bef4bdcf3b56ef23b5955a5699828c61c02fb39ce8001945",
+    "input_member": {
+      "name": "Knight.glb",
+      "bytes": 601300,
+      "sha256": "284ab4da94b1916e72153999add973335e75ca45946b6dee7e69b484e07ac826"
+    },
+    "local_glb_readback": {
+      "version": 2,
+      "declared_length_matches": true,
+      "meshes": 1,
+      "materials": 3,
+      "images": 3,
+      "triangles": 300,
+      "animations": 0,
+      "skins": 0,
+      "external_uris": []
+    },
+    "native_execution_this_case": "not_run",
+    "native_render_reopen_this_case": "not_run",
+    "design_only": {
+      "use": "Upright half-buried relic in a practical desert plate",
+      "axial_extent_m": 1.5,
+      "burial_depth_m": 0.08,
+      "camera_match": "pending plate survey and authorized host validation"
+    }
+  },
+  "rejected_pending_rights": [
+    {
+      "asset": "chest.glb",
+      "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+      "bytes": 2144840,
+      "triangles": 5000,
+      "provenance": "Historical Hyper3D retextured chest plus recorded Blender derivative",
+      "reason": "Local notices preserve applicable Hyper3D Terms sections 5(b), 6.3 and account-agreement conditions; no asset-specific transfer/account entitlement proof was available for a new independently redistributed project. Not MIT or CC0."
+    },
+    {
+      "asset": "column.glb",
+      "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9",
+      "bytes": 1308584,
+      "triangles": 4000,
+      "provenance": "Historical Hyper3D geometry with Blender-authored stone UV/bakes",
+      "reason": "Same unresolved model rights and permitted-transfer conditions; authored textures do not relicense the source geometry."
+    },
+    {
+      "asset": "arch.glb",
+      "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b",
+      "bytes": 309912,
+      "triangles": 5000,
+      "provenance": "Historical Hyper3D shaded USDZ converted to GLB",
+      "reason": "Same unresolved model rights; shaded texture is also unsuitable as proof of relightable PBR."
+    },
+    {
+      "asset": "shrine.glb",
+      "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7",
+      "bytes": 4550948,
+      "triangles": 60000,
+      "provenance": "Historical Hyper3D shrine with recorded Blender derivative",
+      "reason": "Same unresolved model rights; higher geometry budget is unnecessary for the first bounded test."
+    }
+  ],
+  "historical_hyper3d_restriction": {
+    "status": "unchanged",
+    "new_submissions": 0,
+    "new_paid_calls": 0,
+    "network_or_quota_revocation_lifted": false,
+    "terms_reference_only": ["https://hyper3d.ai/legal/terms", "https://hyper3d.ai/legal/copyright-license"]
+  },
+  "boundaries": [
+    "Container readback is not a native import, render, physical-scale or visual acceptance test.",
+    "The current selection is reused CC0 geometry, not a newly generated Hyper3D prop.",
+    "No copied model or license is asserted present in this package until the coordinator copies and rehashes the files.",
+    "The build recipe does not launch Blender, does not render, refuses an opened project and requires a fresh exact-PID/session/version coordination grant."
+  ]
+}

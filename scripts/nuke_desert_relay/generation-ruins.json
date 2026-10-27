@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-24T22:41:46.492691+00:00",
+  "role": "Generated far architecture layer for offline Nuke compositing",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "model": "unknown",
+  "attempt_count": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "failed_before_generation",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "transparent_background": true,
+      "input_reference": "plate-reference-wide.jpg",
+      "prompt": "Use case: photorealistic-natural.\nAsset type: isolated transparent far-architecture layer for an offline Nuke desert live-action composite.\nPrimary request: A distant eroded sandstone astronomical ruin: one huge broken circular observatory ring and exactly three low stepped terraces, monumental but restrained.\nInput image: The supplied live-action desert plate is a lighting, camera and color reference only. Do not composite into the plate and do not recreate its mountains or ground.\nStyle/medium: Photoreal architectural visual effects matte element, convincing weathered warm beige stone with erosion and fine chipped edges. Long-lens near-level view, nearly frontal, little perspective convergence.\nComposition/framing: One wide 16:9 image. The whole complete ruin silhouette and its base are visible in the lower half with transparent margins on all sides. Keep architectural forms legible at a distance.\nLighting/mood: Match the reference's front/camera-left high warm sunlight, cool dusty shadows, pale dusty atmospheric desaturation. No dramatic sunset or neon.\nConstraints: Genuine alpha transparency everywhere outside the ruin. No desert ground, no sky, no background or mountains behind the object. This is a separate distant architectural insert, not a final composited scene. Do not include a sword.\nAvoid: people, writing, glyphs, captions, text, logos, brands, UI, watermark, collage, contact sheet, fake checkerboard.",
+      "error": "AbsolutePathBuf deserialized without a base path at line 1 column 1548",
+      "output": null,
+      "note": "Windows reference-path argument failed schema deserialization. No generated output was returned."
+    },
+    {
+      "attempt": 2,
+      "status": "generated",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "transparent_background": true,
+      "input_reference": null,
+      "prompt": "Use case: photorealistic-natural.\nAsset type: isolated transparent far-architecture layer for an offline Nuke desert live-action composite.\nPrimary request: A distant eroded sandstone astronomical ruin: one huge broken circular observatory ring and exactly three low stepped terraces, monumental but restrained.\nScene/backdrop: Transparent background. The intended live-action plate has pale blue sky, dusty tan cracked flat desert, distant gray-beige eroded mountains and high daylight. Do not render these surroundings; they are context for matching the separate architectural layer.\nStyle/medium: Photoreal architectural visual effects matte element, convincing weathered warm beige stone with erosion and fine chipped edges. Long-lens near-level view, nearly frontal, little perspective convergence.\nComposition/framing: One wide 16:9 image. The whole complete ruin silhouette and its base are visible in the lower half with transparent margins on all sides. Keep architectural forms legible at a distance.\nLighting/mood: Front/camera-left high warm sunlight, cool dusty shadows, pale dusty atmospheric desaturation. No dramatic sunset or neon.\nConstraints: Genuine alpha transparency everywhere outside the ruin. No desert ground, no sky, no background or mountains behind the object. This is a separate distant architectural insert, not a final composited scene. Do not include a sword.\nAvoid: people, writing, glyphs, captions, text, logos, brands, UI, watermark, collage, contact sheet, fake checkerboard.",
+      "returned_keys": [
+        "image_url"
+      ],
+      "return_container": "object",
+      "return_image_encoding": "data:image/png;base64",
+      "returned_file_path": null,
+      "model": "unknown",
+      "model_reason": "The result carried no model ID.",
+      "output": {
+        "path": "assets/ai-distant-ruins.png",
+        "bytes": 1427751,
+        "sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a",
+        "width": 1672,
+        "height": 941,
+        "mode": "RGBA",
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "transparent_pixels": 1034500,
+        "opaque_pixels": 472,
+        "partial_alpha_pixels": 538380,
+        "alpha_bbox": [
+          34,
+          17,
+          1643,
+          941
+        ]
+      }
+    }
+  ],
+  "status": "generated_candidate_requires_compositing_review",
+  "output_created": true,
+  "output": {
+    "path": "assets/ai-distant-ruins.png",
+    "bytes": 1427751,
+    "sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a",
+    "width": 1672,
+    "height": 941,
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "transparent_pixels": 1034500,
+    "opaque_pixels": 472,
+    "partial_alpha_pixels": 538380,
+    "alpha_bbox": [
+      34,
+      17,
+      1643,
+      941
+    ]
+  },
+  "pixel_review": {
+    "status": "candidate_with_defects",
+    "scope": "Original generatedImage result visually inspected; saved PNG pixels/alpha numerically inspected. No Nuke compositing review ran.",
+    "observed": [
+      "Broken circular observatory ring and low stepped terraces are present.",
+      "The PNG has genuine zero-alpha exterior and a transparent open ring.",
+      "Stone material and front/camera-left daylight fit the intended dusty plate direction.",
+      "Thin red/yellow fringe pixels are visible around parts of the alpha edge.",
+      "The main object fills most of the image rather than only the requested lower half.",
+      "Saved-PNG local view_image displayed black interior, while original generatedImage rendered stone and sampled RGBA values were normal. This display discrepancy is unresolved."
+    ],
+    "next_action": "Inspect actual PNG in the task-owned Nuke window; assess alpha edge, premultiplication, despill and distant scale before use."
+  },
+  "boundaries": [
+    "No CLI/API fallback or extra paid generation was invoked.",
+    "No third generation attempt was made.",
+    "No DCC was started or connected.",
+    "No final plate composite, native project, camera solve or live interaction is established.",
+    "The returned raster was preserved unchanged; no alpha/RGB image editing was performed."
+  ]
+}

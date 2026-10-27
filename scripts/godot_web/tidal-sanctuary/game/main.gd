@@ -2,7 +2,13 @@ extends Node3D
 
 const SAVE_PATH = "user://tidal-sanctuary-v2.json"
 const SwimController = preload("res://swim_controller.gd")
+const TideInterface = preload("res://tide_interface.gd")
+const TideAudio = preload("res://tide_audio.gd")
 const SEA_LEVEL := -0.15
+const WORLD_LAYER := 1
+const PLAYER_LAYER := 2
+const INTERACTION_RADIUS := 1.55
+const INTERACTION_HEIGHT := 1.2
 var rng := RandomNumberGenerator.new()
 var noise := FastNoiseLite.new()
 var terrain_mesh: MeshInstance3D
@@ -64,8 +70,8 @@ var hero_camera_locked:=false
 var stone_materials:Array[StandardMaterial3D]=[]
 var swim := SwimController.new()
 var avatar_body:Node3D
-var arms:Array[Node3D]=[]
-var legs:Array[Node3D]=[]
+var explorer_animation:AnimationPlayer
+var explorer_clip:StringName=&""
 var swim_wake:MeshInstance3D
 var compass:Label
 var state_clock:=0.0
@@ -79,8 +85,22 @@ var route_phase:=0
 var demo_captures:Dictionary={}
 var loaded_found:=false
 var last_move:=Vector3.ZERO
-var fern_material:StandardMaterial3D
-var fern_meshes:Array[Mesh]=[]
+var story:Dictionary={}
+var interface:CanvasLayer
+var tide_audio:Node
+var pending_begin_trigger := ""
+var opening_audio_status := ""
+var modal_touch_index := -1
+var modal_touch_mode := ""
+var modal_touch_action := ""
+var modal_mouse_owned := false
+var web_touch_cancel_callback:JavaScriptObject
+var web_document:JavaScriptObject
+var web_window:JavaScriptObject
+var journey_started:=false
+var audio_muted:=false
+var restart_pending:=false
+
 
 func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  var m := StandardMaterial3D.new()
@@ -89,6 +109,9 @@ func mat(c: Color, roughness: float = .9) -> StandardMaterial3D:
  return m
 
 func _ready() -> void:
+ var story_data=JSON.parse_string(FileAccess.get_file_as_string("res://assets/story/story.en-zh.json"))
+ assert(story_data is Dictionary and story_data.get("schema")==1,"Story source failed to load")
+ story=story_data
  if OS.has_feature("web"):
   game_font=load("res://sanctuary-font.otf")
  else:
@@ -117,15 +140,27 @@ func _ready() -> void:
  make_lanterns()
  make_beacon()
  make_birds()
+ tide_audio=TideAudio.new();add_child(tide_audio)
  make_ui()
- if OS.has_feature("web"):get_tree().auto_accept_quit=false
+ if OS.has_feature("web"):
+  get_tree().auto_accept_quit=false
+  # Godot 4.6.3 maps DOM touchcancel to an ordinary touch release. Observe
+  # cancellation first through the public bridge; never turn it into Begin.
+  web_document=JavaScriptBridge.get_interface("document")
+  web_touch_cancel_callback=JavaScriptBridge.create_callback(_web_touch_canceled)
+  web_document.addEventListener("touchcancel",web_touch_cancel_callback,true)
+  web_document.addEventListener("visibilitychange",web_touch_cancel_callback,true)
+  web_window=JavaScriptBridge.get_interface("window")
+  web_window.addEventListener("blur",web_touch_cancel_callback,true)
  load_game()
  if demo:
   activated=[false,false,false]
   beacon_awakened=false
   player.position=Vector3(1.3,height_at(1.3,10.0)+.08,10)
- route_points=[lantern_points[0],lantern_points[1],Vector3(1.5,0,6.2),lantern_points[2],Vector3(7,0,.5),Vector3(2,0,-3),beacon.position]
+ route_points=[lantern_points[0],lantern_points[1],Vector3(1.5,0,6.2),lantern_points[2],Vector3(7,0,.5),Vector3(2,0,-3),Vector3(0,beacon.position.y,-10.25)]
+ journey_started=demo
  update_state()
+ if not demo:show_opening()
  emit_load_receipt()
  if "--audit" in OS.get_cmdline_user_args(): audit.call_deferred()
  mark_frame_ready.call_deferred()
@@ -178,6 +213,7 @@ func make_environment() -> void:
  sea.position.y=SEA_LEVEL
  sea.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
  add_child(sea)
+ sea.set_meta("collision_intent","query-only");sea.set_meta("collision_reason","Depth controller detects water; surface never blocks swimming")
 
 func shore_radius(a: float) -> float:
  return 1.0+.075*sin(a*3.0+.6)+.055*sin(a*7.0)+.025*cos(a*11.0)
@@ -204,9 +240,11 @@ func path_x(z:float) -> float:
 
 func terrain_color(p: Vector3) -> Color:
  var patch:=noise.get_noise_2d(p.x*.72+35,p.z*.72-50)*.5+.5
- var c:=Color("6a8064").lerp(Color("87916e"),smoothstep(.30,.72,patch))
- var sand:=Color("b9b496").lerp(Color("a7aa8f"),patch*.35)
- c=c.lerp(sand,1.0-smoothstep(.35,1.3,p.y))
+ var c:=Color("6c855f").lerp(Color("8b9d74"),smoothstep(.25,.77,patch))
+ var sand:=Color("c9bd97").lerp(Color("b5b38d"),patch*.32)
+ var grove:=maxf(exp(-pow((p.x+6.0)/3.5,2.0)-pow((p.z-4.5)/5.0,2.0)),exp(-pow((p.x-7.0)/2.7,2.0)-pow((p.z+3.0)/4.0,2.0)))
+ c=c.lerp(sand,1.0-smoothstep(.40,1.5,p.y))
+ c=c.lerp(Color("617c58"),grove*.22)
  var trail:=1.0-smoothstep(.55,1.7,abs(p.x-path_x(p.z)))
  if p.z<3 and p.z> -8:c=c.lerp(Color("a1a18a"),trail*.55)
  if p.y<.0:c=c.lerp(Color("718c7c"),smoothstep(0.0,-1.6,p.y)*.6)
@@ -233,9 +271,12 @@ func make_terrain() -> void:
  st.index()
  terrain_mesh=MeshInstance3D.new();terrain_mesh.name="SculptedCove";terrain_mesh.mesh=st.commit()
  var m:=mat(Color.WHITE);m.vertex_color_use_as_albedo=true;m.vertex_color_is_srgb=true
- m.albedo_texture=surface_noise(Color("d6d7cd"),Color("ffffff"),.8)
+ m.albedo_texture=surface_noise(Color("efefdf"),Color("ffffff"),.14)
  m.uv1_triplanar=true;m.uv1_world_triplanar=true;m.uv1_scale=Vector3.ONE*.7
  terrain_mesh.material_override=m;add_child(terrain_mesh);terrain_mesh.create_trimesh_collision()
+ terrain_mesh.set_meta("collision_intent","solid");terrain_mesh.set_meta("collision_reason","Walkable island and seabed, matching visual triangles")
+ for child in terrain_mesh.get_children():
+  if child is StaticBody3D:child.collision_layer=WORLD_LAYER;child.collision_mask=PLAYER_LAYER
 
 func terrain_triangle(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3) -> void:
  for p in [a,b,c]:
@@ -246,6 +287,7 @@ func terrain_triangle(st:SurfaceTool,a:Vector3,b:Vector3,c:Vector3) -> void:
 func mesh_node(mesh: Mesh, p: Vector3, m: Material, parent: Node = self) -> MeshInstance3D:
  var n:=MeshInstance3D.new()
  n.mesh=mesh;n.position=p;n.material_override=m;parent.add_child(n)
+ n.set_meta("collision_intent","none");n.set_meta("collision_reason","Small decoration or nonblocking visual; solid call sites opt in explicitly")
  return n
 
 func box(p:Vector3,sz:Vector3,m:Material,parent:Node=self) -> MeshInstance3D:
@@ -293,15 +335,59 @@ func make_rocks() -> void:
    var x:float=center.x+rng.randf_range(-1.4,1.4);var z:float=center.z+rng.randf_range(-1.3,1.3)
    var size:=rng.randf_range(1.1,2.8)
    var path:="res://assets/shore-rock-a.tscn" if i%3==0 else "res://assets/shore-rock-d.tscn"
-   place_asset(path,Vector3(x,height_at(x,z)-.20,z),Vector3(size,size*rng.randf_range(.7,1.3),size*.9),rng.randf()*TAU)
+   var boulder:=place_asset(path,Vector3(x,height_at(x,z)-.20,z),Vector3(size,size*rng.randf_range(.7,1.3),size*.9),rng.randf()*TAU)
+   solid_asset(boulder,"Large shoreline rock blocks walkers and swimmers")
  for i in range(4):
   var x:float=12.6+i*.75;var z:float=5.2-i*.65
-  place_asset("res://assets/shore-rock-d.tscn",Vector3(x,-1.35,z),Vector3(2.3-i*.22,2.5-i*.3,2.2),i*.82)
+  var boulder:=place_asset("res://assets/shore-rock-d.tscn",Vector3(x,-1.35,z),Vector3(2.3-i*.22,2.5-i*.3,2.2),i*.82)
+  solid_asset(boulder,"Exposed reef rock blocks swimmers")
 
 func place_asset(path:String,p:Vector3,sz:Vector3,yaw:float) -> Node3D:
  var node:Node3D=load(path).instantiate()
  node.position=p;node.scale=sz;node.rotation.y=yaw;add_child(node)
+ mark_soft_asset(node)
  return node
+
+func solid_mesh(mesh:MeshInstance3D,reason:String,target_stage:int=-1,trunk_only:bool=false,exact_faces:bool=false) -> StaticBody3D:
+ # Bake the visible world-space basis into the shape. Nonuniform imported scales
+ # must not scale a PhysicsBody, and fronds must never become invisible walls.
+ var points:=PackedVector3Array()
+ var faces:=PackedVector3Array()
+ for surface in range(mesh.mesh.get_surface_count()):
+  var material:=mesh.mesh.surface_get_material(surface)
+  if trunk_only and (material==null or not material.resource_name.begins_with("Trunk ")):continue
+  var arrays:=mesh.mesh.surface_get_arrays(surface)
+  var vertices:PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+  for vertex in vertices:points.append(mesh.global_basis*vertex)
+  var indices=arrays[Mesh.ARRAY_INDEX]
+  if indices!=null and indices.size()>0:
+   for index in indices:faces.append(mesh.global_basis*vertices[index])
+  else:
+   for vertex in vertices:faces.append(mesh.global_basis*vertex)
+ if points.size()<4:return null
+ var body:=StaticBody3D.new();body.name="Solid_"+str(mesh.get_instance_id())
+ body.collision_layer=WORLD_LAYER;body.collision_mask=PLAYER_LAYER
+ body.set_meta("collision_intent","solid");body.set_meta("collision_reason",reason)
+ body.set_meta("interaction_target",target_stage)
+ add_child(body);body.global_position=mesh.global_position
+ var collider:=CollisionShape3D.new()
+ if exact_faces:
+  var shape:=ConcavePolygonShape3D.new();shape.set_faces(faces);collider.shape=shape
+ else:
+  var shape:=ConvexPolygonShape3D.new();shape.points=points;collider.shape=shape
+ body.add_child(collider)
+ mesh.set_meta("collision_intent","solid");mesh.set_meta("collision_reason",reason)
+ mesh.set_meta("solid_body",body.get_path())
+ return body
+
+func solid_asset(node:Node,reason:String,trunk_only:bool=false) -> void:
+ if node is MeshInstance3D and node.mesh:solid_mesh(node,reason,-1,trunk_only,true)
+ for child in node.get_children():solid_asset(child,reason,trunk_only)
+
+func mark_soft_asset(node:Node) -> void:
+ node.set_meta("collision_intent","none")
+ node.set_meta("collision_reason","Soft leaves or low decorative pebble; no movement barrier")
+ for child in node.get_children():mark_soft_asset(child)
 
 func encoded_texture(path:String) -> ImageTexture:
  var image:=Image.new()
@@ -314,20 +400,14 @@ func encoded_texture(path:String) -> ImageTexture:
 func prepare_surface_assets() -> void:
  var normal:=encoded_texture("res://assets/polyhaven/stone-normal.png.bin")
  var rough:=encoded_texture("res://assets/polyhaven/stone-rough.jpg.bin")
- for tint in [Color("a7afa4"),Color("919f95"),Color("b2b5a6"),Color("96a59a")]:
+ for tint in [Color("b1b5a7"),Color("a1aca1"),Color("babba9"),Color("a6b1a5")]:
   var material:=mat(tint)
-  material.albedo_texture=surface_noise(Color("b7bdb1"),Color("f3f0de"),1.1)
-  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.25
+  material.albedo_texture=surface_noise(Color("e0e3d6"),Color("fffbed"),.28)
+  material.normal_enabled=true;material.normal_texture=normal;material.normal_scale=.07
   material.roughness_texture=rough
   material.uv1_triplanar=true;material.uv1_world_triplanar=true;material.uv1_scale=Vector3.ONE*.58
   material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
   stone_materials.append(material)
- fern_material=mat(Color("a3b59a"))
- fern_material.albedo_texture=encoded_texture("res://assets/polyhaven/fern-albedo.png.bin")
- fern_material.normal_enabled=true;fern_material.normal_texture=encoded_texture("res://assets/polyhaven/fern-normal.jpg.bin");fern_material.normal_scale=.3
- fern_material.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR;fern_material.alpha_scissor_threshold=.38
- fern_material.cull_mode=BaseMaterial3D.CULL_DISABLED;fern_material.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
- for i in range(4):fern_meshes.append(load("res://assets/polyhaven/fern-%d.res"%i))
 
 func surface_noise(dark:Color,light:Color,frequency:float) -> NoiseTexture2D:
  var field:=FastNoiseLite.new();field.seed=713;field.frequency=.028*frequency;field.fractal_octaves=4
@@ -362,6 +442,54 @@ func beveled_block(p:Vector3,sz:Vector3,m:Material,seed_value:int,wear:float=.08
  for key in points:stone_face(st,points[key])
  return mesh_node(st.commit(),p,m)
 
+func terrain_surface_height(x:float,z:float) -> float:
+ # Interpolate the exact triangles used by make_terrain, not the analytic
+ # height function between its samples. Paving is a thin surface treatment.
+ var step:=.48
+ var x0:=floorf((x+24.0)/step)*step-24.0
+ var z0:=floorf((z+24.0)/step)*step-24.0
+ var u:=(x-x0)/step;var v:=(z-z0)/step
+ var a:=height_at(x0,z0);var b:=height_at(x0+step,z0)
+ var c:=height_at(x0,z0+step);var d:=height_at(x0+step,z0+step)
+ if u+v<=1.0:return a+(b-a)*u+(c-a)*v
+ return d+(c-d)*(1.0-u)+(b-d)*(1.0-v)
+
+func conform_paving(mesh:MeshInstance3D) -> void:
+ # Subdivide before projection: projecting just four corners bridges the
+ # terrain inside a broad stone. The existing terrain remains the sole support.
+ var surface:=SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+ var faces:=mesh.mesh.get_faces()
+ var center_floor:=height_at(mesh.global_position.x,mesh.global_position.z)
+ for i in range(0,faces.size(),3):
+  paving_triangle(surface,faces[i],faces[i+1],faces[i+2],mesh.global_transform,center_floor,0)
+ surface.generate_normals();mesh.mesh=surface.commit()
+ mesh.set_meta("collision_intent","none")
+ mesh.set_meta("collision_reason","Buried paving surface follows the existing solid terrain; no raised barrier")
+ mesh.set_meta("support_body",terrain_mesh.get_child(0).get_path())
+
+func paving_triangle(surface:SurfaceTool,a:Vector3,b:Vector3,c:Vector3,placement:Transform3D,center_floor:float,depth:int) -> void:
+ var ab:=Vector2(a.x-b.x,a.z-b.z).length()
+ var bc:=Vector2(b.x-c.x,b.z-c.z).length()
+ var ca:=Vector2(c.x-a.x,c.z-a.z).length()
+ if maxf(ab,maxf(bc,ca))>.24 and depth<8:
+  if ab>=bc and ab>=ca:
+   var middle:=(a+b)*.5
+   paving_triangle(surface,a,middle,c,placement,center_floor,depth+1)
+   paving_triangle(surface,middle,b,c,placement,center_floor,depth+1)
+  elif bc>=ca:
+   var middle:=(b+c)*.5
+   paving_triangle(surface,a,b,middle,placement,center_floor,depth+1)
+   paving_triangle(surface,a,middle,c,placement,center_floor,depth+1)
+  else:
+   var middle:=(c+a)*.5
+   paving_triangle(surface,a,b,middle,placement,center_floor,depth+1)
+   paving_triangle(surface,middle,b,c,placement,center_floor,depth+1)
+  return
+ for local:Vector3 in [a,b,c]:
+  var world:=placement*local
+  world.y=terrain_surface_height(world.x,world.z)+(placement.origin.y-center_floor)+local.y
+  surface.set_color(Color.WHITE);surface.add_vertex(placement.affine_inverse()*world)
+
 func stone_face(st:SurfaceTool,points:Array) -> void:
  var center:=Vector3.ZERO
  for p:Vector3 in points:center+=p
@@ -377,45 +505,52 @@ func make_ruins() -> void:
   for i in range(3):
    var z:float=group_z+rng.randf_range(-.6,.6)
    var x:=path_x(z)+rng.randf_range(-.7,.7)
-   var slab:=beveled_block(Vector3(x,height_at(x,z)+.005,z),Vector3(rng.randf_range(.58,1.05),.14,rng.randf_range(.43,.7)),stone_materials[i%4],1000+i+int(group_z*10),.32)
+   var slab:=beveled_block(Vector3(x,height_at(x,z)-.052,z),Vector3(rng.randf_range(.58,1.05),.12,rng.randf_range(.43,.7)),stone_materials[i%4],1000+i+int(group_z*10),.32)
    slab.rotation=Vector3(rng.randf_range(-.06,.06),rng.randf_range(-.6,.6),rng.randf_range(-.04,.04))
+   conform_paving(slab)
  # Broad, uneven threshold steps follow the existing walkable terrain.
  for row in range(4):
   var z:float=-4.2-row*.63
   var x:=path_x(z)*.5
   for side in [-1,1]:
    var px:float=x+side*.75+rng.randf_range(-.08,.08)
-   var slab:=beveled_block(Vector3(px,height_at(px,z)+.015,z),Vector3(1.5,.22,rng.randf_range(.60,.76)),stone_materials[row%4],1210+row*3+side,.38)
+   var slab:=beveled_block(Vector3(px,height_at(px,z)-.042,z),Vector3(1.5,.10,rng.randf_range(.60,.76)),stone_materials[row%4],1210+row*3+side,.38)
    slab.rotation.y=rng.randf_range(-.09,.09)
+   conform_paving(slab)
+   slab.set_meta("threshold_step",true)
  var h:=height_at(0,-8.0)
  for row in range(4):
   for col in range(5):
    if (row==0 and col==0) or (row==2 and col==4) or (row==3 and col==0):continue
    var x:float=-2.65+col*1.32+rng.randf_range(-.10,.10)
    var z:float=-6.5-row*1.30+rng.randf_range(-.11,.11)
-   var tile:=beveled_block(Vector3(x,h-.06+rng.randf_range(-.04,.025),z),Vector3(rng.randf_range(1.12,1.28),.22,rng.randf_range(1.11,1.3)),stone_materials[(row+col)%4],1500+row*5+col,.40)
+   var tile:=beveled_block(Vector3(x,height_at(x,z)-.102+rng.randf_range(-.003,.003),z),Vector3(rng.randf_range(1.12,1.28),.22,rng.randf_range(1.11,1.3)),stone_materials[(row+col)%4],1500+row*5+col,.40)
    tile.rotation.y=rng.randf_range(-.05,.05)
+   conform_paving(tile)
  # Four survivors, different heights and broken caps, replace the clean colonnade.
  for info in [Vector3(-3.8,1.0,-5.9),Vector3(-3.65,3.5,-9.3),Vector3(3.7,.75,-6.2),Vector3(3.8,2.55,-10.1)]:
   var base:=height_at(info.x,info.z)
   var material:=stone_materials[rng.randi_range(0,3)]
   var foot:=beveled_block(Vector3(info.x,base+.13,info.z),Vector3(1.0,.30,1.0),material,rng.randi(),.3)
   foot.rotation.y=.12
+  solid_mesh(foot,"Column footing blocks and supports the player")
   var column:=cylinder(Vector3(info.x,base+info.y*.5+.23,info.z),.37,info.y,material,self,.32)
-  column.create_trimesh_collision()
+  solid_mesh(column,"Stone column blocks the player")
   var cap:=beveled_block(Vector3(info.x,base+info.y+.23,info.z),Vector3(.82,.22,.75),material,rng.randi(),.34)
   cap.rotation=Vector3(.045,-.09,.07)
+  solid_mesh(cap,"Broken column cap is physical stone")
  # Worn arch stones: narrow dark joints and chipped edges, no smooth white facade.
  var center:=Vector3(0,h+2.68,-10.0)
  for side in [-1,1]:
   for layer in range(5):
    var n:=beveled_block(Vector3(side*1.65,h+.25+layer*.49,-10),Vector3(.66,.48,.92),stone_materials[(layer+2)%4],2000+layer*3+side,.24)
    n.rotation.y=rng.randf_range(-.035,.035)
-   n.create_trimesh_collision()
+   solid_mesh(n,"Ruin arch pier blocks the player")
  for i in range(11):
   var a:=float(i)/10.0*PI
   var n:=beveled_block(center+Vector3(cos(a)*1.65,sin(a)*1.65,0),Vector3(.62,.69,.94),stone_materials[i%4],2100+i,.20)
   n.rotation.z=a-PI/2
+  solid_mesh(n,"Overhead arch stone blocks camera and tall probes")
  # Broken return wall, tapering irregularly toward the entrance.
  for row in range(4):
   for column in range(5-row):
@@ -423,6 +558,7 @@ func make_ruins() -> void:
    var x:float=-4.25+rng.randf_range(-.045,.045)
    var wall:=beveled_block(Vector3(x,height_at(x,z)+.24+row*.43,z),Vector3(.67,.44,.87),stone_materials[(row+column)%4],2300+row*8+column,.29)
    wall.rotation.y=rng.randf_range(-.04,.04)
+   solid_mesh(wall,"Broken return wall blocks movement and interaction sight")
  for i in range(19):
   var x:=rng.randf_range(-5.1,5.2);var z:=rng.randf_range(-11.5,-4.1)
   if abs(x)<2.6:continue
@@ -430,14 +566,12 @@ func make_ruins() -> void:
   slab.rotation=Vector3(rng.randf_range(-.25,.25),rng.randf()*TAU,rng.randf_range(-.2,.2))
 
 func make_sanctuary_details() -> void:
- # Ferns grow in clustered damp seams; the central walking line stays open.
+ # Stylized broad-leaf pockets soften broken walls without blocking the walk line.
  for center in [Vector3(-3.0,0,-4.6),Vector3(-4.9,0,-6.0),Vector3(-4.5,0,-9.5),Vector3(3.5,0,-5.1),Vector3(4.9,0,-8.4),Vector3(2.7,0,-11.6)]:
-  for i in range(7):
-   var x:float=center.x+rng.randf_range(-.7,.7);var z:float=center.z+rng.randf_range(-.55,.55)
-   var variant:=2+i%2 if i>1 else i
-   var fern:=mesh_node(fern_meshes[variant],Vector3(x,height_at(x,z)+.01,z),fern_material)
-   fern.scale=Vector3.ONE*rng.randf_range(.85,1.65)
-   fern.rotation.y=rng.randf()*TAU
+  for i in range(4):
+   var x:float=center.x+rng.randf_range(-.65,.65);var z:float=center.z+rng.randf_range(-.45,.45)
+   var variant:="a" if i%2==0 else "b"
+   place_asset("res://assets/tropical/understory-%s.glb"%variant,Vector3(x,height_at(x,z)-.01,z),Vector3.ONE*rng.randf_range(.62,1.05),rng.randf()*TAU)
  # Small stone/moss pockets ground the wall and leave larger quiet areas intact.
  for i in range(48):
   var side:float=-1 if i%2==0 else 1
@@ -449,40 +583,42 @@ func make_sanctuary_details() -> void:
   pebble.rotation.y=rng.randf()*TAU
 
 func make_nature() -> void:
- for info in [Vector3(-6.8,4.5,5.7),Vector3(-8.1,3.2,4.4),Vector3(-6.1,2.5,7.0),Vector3(-7.3,4.1,-3.0),Vector3(-8.9,3.1,-5),Vector3(7.7,3.8,-2.2),Vector3(9.3,2.8,-3.8)]:
-  var n:=place_asset("res://assets/coastal-tree.tscn",Vector3(info.x,height_at(info.x,info.z)-.08,info.z),Vector3(info.y*.95,info.y,info.y*.85),rng.randf()*TAU)
-  n.rotation.z=rng.randf_range(-.07,.07)
- for center in [Vector3(-5.6,0,4.5),Vector3(-6.9,0,6.2),Vector3(-7.7,0,-2.7),Vector3(6.5,0,-2.0),Vector3(7.8,0,-4),Vector3(-3.6,0,2.0)]:
-  for i in range(10):
+ # Hand-authored leaning palms frame the cache and cove; the chart route stays open.
+ var palm_index:=0
+ for info in [Vector3(-7.4,.86,5.9),Vector3(-8.6,.76,4.2),Vector3(-7.1,.62,7.3),Vector3(-7.3,1.0,-3.0),Vector3(-8.9,.75,-5),Vector3(7.7,.91,-2.2),Vector3(9.3,.73,-3.8)]:
+  var variant:="a" if palm_index%2==0 else "b"
+  var palm:=place_asset("res://assets/tropical/palm-%s.glb"%variant,Vector3(info.x,height_at(info.x,info.z)-.04,info.z),Vector3.ONE*info.y,rng.randf()*TAU)
+  solid_asset(palm,"Palm trunk blocks movement; leaves remain nonblocking",true)
+  palm_index+=1
+ for center in [Vector3(-5.6,0,4.5),Vector3(-6.9,0,6.2),Vector3(-7.7,0,-2.7),Vector3(6.5,0,-2.0),Vector3(7.8,0,-4),Vector3(-5.4,0,1.7)]:
+  for i in range(6):
    var x:float=center.x+rng.randf_range(-1.0,1.0);var z:float=center.z+rng.randf_range(-.9,.9)
    if height_at(x,z)<.5:continue
-   var fern:=mesh_node(fern_meshes[2+i%2],Vector3(x,height_at(x,z)+.01,z),fern_material)
-   fern.scale=Vector3.ONE*rng.randf_range(1.1,2.3);fern.rotation.y=rng.randf()*TAU
+   var kind:="understory-a" if i%3!=0 else "bush-a"
+   var size:=rng.randf_range(.8,1.25)
+   place_asset("res://assets/tropical/%s.glb"%kind,Vector3(x,height_at(x,z)-.03,z),Vector3(size,size*.85,size),rng.randf()*TAU)
  for center in [Vector3(-5.4,0,7.7),Vector3(-8,0,1.8),Vector3(6.2,0,-1.3),Vector3(-5.9,0,-5.5)]:
-  for i in range(6):
+  for i in range(4):
    var x:float=center.x+rng.randf_range(-.9,.9);var z:float=center.z+rng.randf_range(-.7,.7)
-   var size:=rng.randf_range(.4,.8)
-   rock(Vector3(x,height_at(x,z)+size*.16,z),Vector3(size,size*.65,size*.9),mat(Color("4a705e").lightened(i*.018)),4900+i)
+   var size:=rng.randf_range(.30,.65)
+   var variant:="a" if i%2==0 else "b"
+   place_asset("res://assets/tropical/shore-stone-%s.glb"%variant,Vector3(x,height_at(x,z)-.08,z),Vector3(size,size*.65,size),rng.randf()*TAU)
 
 func make_player() -> void:
  player=CharacterBody3D.new();player.name="Wayfarer";add_child(player)
+ player.collision_layer=PLAYER_LAYER;player.collision_mask=WORLD_LAYER
  player.position=Vector3(1.3,height_at(1.3,10)+.08,10)
  var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.22;shape.height=.95;col.shape=shape;col.position.y=.48;player.add_child(col)
  avatar=Node3D.new();player.add_child(avatar)
  avatar_body=Node3D.new();avatar_body.position.y=.6;avatar.add_child(avatar_body)
- var cloth:=mat(Color("315e72"));var skin:=mat(Color("d4b486"));var trousers:=mat(Color("405664"))
- var torso:=CapsuleMesh.new();torso.radius=.20;torso.height=.55;torso.radial_segments=12;torso.rings=4
- mesh_node(torso,Vector3.ZERO,cloth,avatar_body)
- var head:=SphereMesh.new();head.radius=.16;head.height=.32;head.radial_segments=16;head.rings=8
- mesh_node(head,Vector3(0,.4,-.035),skin,avatar_body)
- cylinder(Vector3(0,.52,0),.20,.13,mat(Color("b8925b")),avatar_body)
- cylinder(Vector3(0,.48,-.015),.28,.035,mat(Color("c9ab70")),avatar_body)
- box(Vector3(0,.03,.19),Vector3(.25,.31,.16),mat(Color("a8603d")),avatar_body)
- for side in [-1,1]:
-  var arm:=Node3D.new();arm.position=Vector3(side*.23,.13,0);avatar_body.add_child(arm);arms.append(arm)
-  cylinder(Vector3(0,-.17,0),.065,.34,cloth,arm);cylinder(Vector3(0,-.36,0),.053,.13,skin,arm)
-  var leg:=Node3D.new();leg.position=Vector3(side*.105,-.19,0);avatar_body.add_child(leg);legs.append(leg)
-  cylinder(Vector3(0,-.16,0),.075,.32,trousers,leg);box(Vector3(0,-.34,-.04),Vector3(.15,.12,.23),mat(Color("394e50")),leg)
+ var explorer:Node3D=load("res://assets/tropical/explorer.glb").instantiate()
+ explorer.position.y=-.6;avatar_body.add_child(explorer)
+ explorer_animation=explorer.find_child("AnimationPlayer",true,false) as AnimationPlayer
+ assert(explorer_animation!=null,"Explorer animation player is required")
+ for clip in ["Idle","Walk","Swim"]:
+  assert(explorer_animation.has_animation(clip),"Missing explorer clip: "+clip)
+  explorer_animation.get_animation(clip).loop_mode=Animation.LOOP_LINEAR
+ explorer_animation.play("Idle");explorer_clip=&"Idle"
  var wake_mesh:=TorusMesh.new();wake_mesh.inner_radius=.27;wake_mesh.outer_radius=.32;wake_mesh.rings=24;wake_mesh.ring_segments=4
  var wm:=mat(Color(.65,.86,.83,.45));wm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;wm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
  swim_wake=mesh_node(wake_mesh,Vector3.ZERO,wm);swim_wake.visible=false
@@ -496,7 +632,8 @@ func make_lanterns() -> void:
   var p:Vector3=lantern_points[i];p.y=height_at(p.x,p.z) if i<2 else SEA_LEVEL-.12;lantern_points[i]=p
   var root:=Node3D.new();root.position=p;root.name=["MarinersChart","GroveCache","ReefCache"][i];add_child(root);lanterns.append(root)
   if i==0:
-   beveled_block(p+Vector3(0,.35,0),Vector3(.85,.7,.7),stone_materials[0],5100,.4)
+   var pedestal:=beveled_block(p+Vector3(0,.35,0),Vector3(.85,.7,.7),stone_materials[0],5100,.4)
+   solid_mesh(pedestal,"Chart pedestal is solid; chart is query-only",0)
    box(Vector3(0,.73,0),Vector3(.64,.035,.47),mat(Color("e4d9b1")),root)
    for j in range(3):box(Vector3(-.2+j*.18,.756,0),Vector3(.055,.007,.30-j*.055),mat(Color("817b61")),root)
   else:
@@ -504,9 +641,10 @@ func make_lanterns() -> void:
    if i==2:
     cylinder(Vector3(0,.16,0),.42,.22,mat(Color("bd7150")),root)
     cylinder(Vector3(0,.7,0),.032,.98,band,root)
-    var flag:=box(Vector3(.20,1.12,0),Vector3(.4,.26,.025),mat(Color("d5b57c")),root);flag.rotation.z=-.10
+    var flag:=box(Vector3(.20,1.12,0),Vector3(.4,.26,.025),mat(Color("c95f4f")),root);flag.rotation.z=-.10
    else:
-    box(Vector3(0,.24,0),Vector3(.82,.45,.55),wood,root)
+    var chest:=box(Vector3(0,.24,0),Vector3(.82,.45,.55),wood,root)
+    solid_mesh(chest,"Grove chest body blocks movement; treasure is query-only",1)
     for side in [-1,1]:box(Vector3(side*.27,.25,0),Vector3(.065,.48,.58),band,root)
    var lid:=Node3D.new();lid.position=Vector3(0,.46,.27);root.add_child(lid);chest_lids.append(lid)
    box(Vector3(0,.025,-.27),Vector3(.86,.12,.59),wood,lid)
@@ -518,8 +656,10 @@ func make_lanterns() -> void:
 
 func make_beacon() -> void:
  beacon=Node3D.new();beacon.position=Vector3(0,height_at(0,-11.7),-11.7);add_child(beacon)
- cylinder(Vector3(0,.17,0),1.15,.34,material_stone,beacon)
- cylinder(Vector3(0,.5,0),.80,.35,material_stone,beacon)
+ var base:=cylinder(Vector3(0,.17,0),1.15,.34,material_stone,beacon)
+ solid_mesh(base,"Beacon stone base blocks movement",3)
+ var plinth:=cylinder(Vector3(0,.5,0),.80,.35,material_stone,beacon)
+ solid_mesh(plinth,"Beacon plinth is solid",3)
  var torus:=TorusMesh.new();torus.inner_radius=.60;torus.outer_radius=.76;torus.rings=24;torus.ring_segments=12
  var ring_mat:=mat(Color("b18a48"),.5);ring_mat.emission_enabled=true;ring_mat.emission=Color("ffc771");ring_mat.emission_energy_multiplier=0
  beacon_ring=mesh_node(torus,Vector3(0,1.55,0),ring_mat,beacon);beacon_ring.rotation.x=PI/2
@@ -547,45 +687,120 @@ func ui_panel(p:Vector2,sz:Vector2,color:Color,parent:Node) -> Panel:
 func label_at(text_value:String,size:int,color:Color) -> Label:
  var l:=Label.new();l.text=text_value;l.add_theme_font_size_override("font_size",size);l.add_theme_font_override("font",game_font);l.add_theme_color_override("font_color",color);l.add_theme_color_override("font_shadow_color",Color(0,0,0,.4));l.add_theme_constant_override("shadow_offset_x",1);l.add_theme_constant_override("shadow_offset_y",2);return l
 
+func tr_text(value:Dictionary) -> String:
+ return str(value.get(language,value.get("en","")))
+
 func make_ui() -> void:
- ui=CanvasLayer.new();add_child(ui)
- var root:=Control.new();root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);root.mouse_filter=Control.MOUSE_FILTER_IGNORE;ui.add_child(root)
- title_panel=ui_panel(Vector2(16,16),Vector2(350,120),Color(.035,.10,.12,.84),root)
- footer_panel=ui_panel(Vector2(20,0),Vector2(460,30),Color(.035,.10,.12,.72),root)
- title=label_at("TIDAL SANCTUARY",13,Color("b7d6d0"));title.position=Vector2(28,25);root.add_child(title)
- objective=label_at("Find the mariner's chart",18,Color("f4e9cb"));objective.position=Vector2(28,49);root.add_child(objective)
- progress=label_at("",13,Color("dfca94"));progress.position=Vector2(28,78);root.add_child(progress)
- subtitle=label_at("",12,Color("bdd1ca"));subtitle.position=Vector2(28,102);root.add_child(subtitle)
- compass=label_at("",13,Color("e8dcae"));compass.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;root.add_child(compass)
- prompt_panel=ui_panel(Vector2.ZERO,Vector2(440,38),Color(.035,.10,.12,.86),root)
- prompt=label_at("",16,Color("fff1ce"));prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER;root.add_child(prompt)
- message=label_at("",12,Color("d2e2d9"));root.add_child(message)
- action_button=Button.new();action_button.add_theme_font_override("font",game_font);action_button.size=Vector2(132,50)
- var style:=StyleBoxFlat.new();style.bg_color=Color(.055,.17,.19,.95);style.border_color=Color("cdb887");style.set_border_width_all(1);style.set_corner_radius_all(12)
- action_button.add_theme_stylebox_override("normal",style);action_button.add_theme_color_override("font_color",Color("fff1d2"));action_button.add_theme_font_size_override("font_size",15);action_button.pressed.connect(on_action_pressed);root.add_child(action_button)
- language_button=Button.new();language_button.text="EN";language_button.add_theme_font_override("font",game_font);language_button.add_theme_font_size_override("font_size",12);language_button.add_theme_stylebox_override("normal",style);language_button.add_theme_color_override("font_color",Color("fff1d2"));language_button.size=Vector2(40,28);language_button.pressed.connect(change_language.bind("button"));root.add_child(language_button)
+ interface=TideInterface.new();add_child(interface);interface.setup(game_font);ui=interface
+ title=interface.title;objective=interface.objective;progress=interface.progress;subtitle=interface.subtitle
+ compass=interface.compass;prompt=interface.prompt;message=interface.message
+ action_button=interface.action_button;language_button=interface.language_button
+ title_panel=interface.title_panel;footer_panel=interface.footer_panel;prompt_panel=interface.prompt_panel
+ interface.action_requested.connect(on_action_pressed)
+ interface.language_requested.connect(change_language.bind("button"))
+ interface.audio_requested.connect(toggle_audio.bind("button"))
+ interface.journal_requested.connect(show_journal)
+ interface.card_primary_requested.connect(card_primary)
+ interface.card_secondary_requested.connect(card_secondary)
+ interface.card_changed.connect(_disarm_modal_touch)
+
+func control_help(touch_available:bool) -> String:
+ return tr_text(story.ui.controls_touch if touch_available else story.ui.controls_keyboard)
+
+func show_opening() -> void:
+ var opening:Dictionary=story.opening
+ var heading:=tr_text(story.title) if loaded_found else tr_text(opening.title)
+ var body:=tr_text(story.ending.clue) if quest_stage()==4 else tr_text(opening.body)
+ body+="\n\n"+control_help(DisplayServer.is_touchscreen_available())
+ var primary:=tr_text(story.ui.continue) if loaded_found else tr_text(opening.button)
+ var disabled:=false
+ if OS.has_feature("web"):
+  var audio_state:Dictionary=tide_audio.get_state()
+  opening_audio_status=str(audio_state.get("status","loading"))+":"+str(audio_state.get("start_pending",false))
+  if audio_state.get("status")=="error":
+   body+="\n\n"+tr_text(story.ui.audio_error)
+   primary=tr_text(story.ui.audio_retry)
+  elif audio_state.get("start_pending",false):
+   primary=tr_text(story.ui.audio_starting);disabled=true
+  elif not audio_state.get("ready",false):
+   primary=tr_text(story.ui.audio_loading);disabled=true
+ interface.show_card("opening",heading,body,primary)
+ interface.card_primary.disabled=disabled
+
+func begin_journey(trigger:String) -> void:
+ if journey_started:return
+ if OS.has_feature("web"):
+  var audio_state:Dictionary=tide_audio.get_state()
+  if audio_state.get("status")=="error":
+   pending_begin_trigger="";tide_audio.retry_web_audio();show_opening();return
+  if not audio_state.get("ready",false) or audio_state.get("start_pending",false):return
+ pending_begin_trigger=trigger
+ if not tide_audio.start_from_gesture(trigger):
+  pending_begin_trigger=""
+  if OS.has_feature("web"):show_opening()
+  return
+ # The Web resume promise must succeed before movement/story is enabled.
+ # Native playback starts synchronously through the unchanged Godot backend.
+ if tide_audio.get_state().started:confirm_journey_begin()
+
+func confirm_journey_begin() -> void:
+ if journey_started or pending_begin_trigger.is_empty():return
+ journey_started=true;interface.hide_card()
+ print("TIDAL_JOURNEY ",JSON.stringify({"schema":1,"started":true,"trigger":pending_begin_trigger,"demo":demo,"stage":quest_stage()}))
+ pending_begin_trigger=""
+ update_state()
+
+func show_audio_recovery() -> void:
+ restart_pending=false;touch_move=Vector2.ZERO
+ interface.show_card("audio_retry",tr_text(story.ui.audio_retry),tr_text(story.ui.audio_recovery),tr_text(story.ui.audio_retry))
+
+func show_journal() -> void:
+ if not journey_started:return
+ var body:=tr_text(story.opening.body)
+ for i in range(mini(quest_stage(),4)):
+  var entry:Dictionary=story.stages[i]
+  body+="\n\n"+tr_text(entry.story_title)+"\n"+tr_text(entry.story_body)
+ interface.show_card("journal",tr_text(story.ui.journal),body,tr_text(story.ui.continue),tr_text(story.ending.secondary))
+ touch_move=Vector2.ZERO
+
+func request_restart() -> void:
+ if not journey_started:return
+ restart_pending=true
+ interface.show_card("restart",tr_text(story.ending.secondary),tr_text(story.ui.restart_prompt),tr_text(story.ending.secondary),tr_text(story.ui.cancel))
+ print("TIDAL_RESTART_REQUEST ",JSON.stringify({"schema":1,"pending":true,"demo":demo}))
+
+func card_primary() -> void:
+ if interface.card_mode=="opening":begin_journey("begin_button")
+ elif interface.card_mode=="audio_retry":tide_audio.resume_from_gesture("audio_retry_button")
+ elif interface.card_mode=="restart":
+  restart_pending=false;interface.hide_card();reset_game()
+ else:interface.hide_card()
+
+func card_secondary() -> void:
+ if interface.card_mode=="journal":request_restart();return
+ restart_pending=false;interface.hide_card()
+
+func toggle_audio(trigger:String) -> void:
+ audio_muted=not audio_muted;tide_audio.set_muted(audio_muted,trigger)
+ interface.set_status(quest_stage(),language,audio_muted);save_game()
 
 func update_state() -> void:
  completed=activated==[true,true,true]
  for i in range(3):
   lantern_lights[i].light_energy=.35 if activated[i] else 0.0
-  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.visible=activated[i] and i>0
- if chest_lids.size()>0:chest_lids[0].rotation.x=-1.1 if activated[1] else 0.0
+  var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.visible=not activated[i] and i>0
+ for i in range(chest_lids.size()):chest_lids[i].rotation.x=-1.1 if activated[i+1] else 0.0
  beam.visible=beacon_awakened
  beacon.get_node("RingLight").light_energy=.65 if beacon_awakened else (.2 if completed else 0.0)
  var ring_material:StandardMaterial3D=beacon_ring.material_override
  ring_material.emission_energy_multiplier=.65 if beacon_awakened else (.18 if completed else 0.0)
  var stage:=quest_stage()
- var english:=["Find the mariner's chart","Search beneath the grove","Swim to the red reef buoy","Bring the pearl to the ruins","Treasure recovered"]
- var chinese:=["寻找航海图","搜寻树林下的宝箱","游向红色浮标","将珍珠带回遗迹","寻宝完成"]
- objective.text=english[stage] if language=="en" else chinese[stage]
+ var entry:Dictionary=story.stages[stage] if stage<4 else story.ending
+ objective.text=tr_text(entry.objective)
  title.text="TIDAL SANCTUARY" if language=="en" else "潮 汐 圣 所"
- progress.text=("Chart  %s    Key  %s    Pearl  %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"]) if language=="en" else ("海图 %s   钥匙 %s   珍珠 %s" % ["●" if activated[0] else "○","●" if activated[1] else "○","●" if activated[2] else "○"])
- var clues:=["A weathered chart waits on the shore.","Look between the leaning trees.","A red flag marks the sheltered cove.","Leave the water by the northern beach.","The sea's story is yours."]
- var zh:=["岸边的石台上留着一张海图","线索藏在倾斜的树木之间","红旗标记着海湾里的宝藏","从北侧沙滩上岸，返回遗迹","海的故事属于你"]
- subtitle.text=clues[stage] if language=="en" else zh[stage]
- language_button.text="EN" if language=="en" else "ZH"
- action_button.text=("RESTART" if beacon_awakened else "E · INTERACT") if language=="en" else ("重新开始" if beacon_awakened else "E · 互动")
+ progress.text="%d / 4"%stage
+ subtitle.text=tr_text(entry.clue)
+ interface.set_status(stage,language,audio_muted)
  update_prompt()
 
 func quest_stage() -> int:
@@ -600,21 +815,55 @@ func target_point() -> Vector3:
 func flat_distance(a:Vector3,b:Vector3) -> float:
  return Vector2(a.x-b.x,a.z-b.z).length()
 
+func interaction_status() -> Dictionary:
+ var stage:=quest_stage()
+ var focus:=mini(stage,3)
+ var points:Array[Vector3]=[lantern_points[0],lantern_points[1],lantern_points[2],beacon.position]
+ var nearest:=2.8
+ for i in range(4):
+  var distance:=flat_distance(player.position,points[i])
+  if distance<nearest:focus=i;nearest=distance
+ var target:Vector3=points[focus]
+ var result:={"available":false,"reason":"too_far","target":target,"target_index":focus,"distance":flat_distance(player.position,target)}
+ if result.distance>=INTERACTION_RADIUS:return result
+ if absf(player.position.y-target.y)>INTERACTION_HEIGHT:result.reason="too_high";return result
+ var anchors:=[.65,.35,.55,1.20]
+ var ray:=PhysicsRayQueryParameters3D.create(player.position+Vector3(0,.65,0),target+Vector3(0,anchors[focus],0),WORLD_LAYER)
+ ray.exclude=[player.get_rid()]
+ var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
+ if not hit.is_empty() and hit.collider.get_meta("interaction_target",-1)!=focus:
+  result.reason="occluded";return result
+ if focus<stage:
+  result.reason="already_read" if focus==0 else ("complete" if focus==3 else "already_open")
+  return result
+ if focus>stage:
+  result.reason="missing_key" if focus==2 else ("missing_pearl" if focus==3 else "read_chart_first")
+  return result
+ if not journey_started or not interface.card_mode.is_empty():result.reason="reading";return result
+ result.available=true;result.reason="ready"
+ return result
+
+func blocked_prompt(reason:String) -> String:
+ var keys:={"too_far":"out_of_range","too_high":"too_high","occluded":"blocked","already_read":"already_read","already_open":"already_open","missing_key":"missing_key","missing_pearl":"missing_pearl"}
+ if reason=="complete":return tr_text(story.ending.objective)
+ if reason=="read_chart_first":return tr_text(story.stages[0].clue)
+ return tr_text(story.ui[keys[reason]]) if keys.has(reason) else ""
+
 func update_prompt() -> void:
+ var reach:=interaction_status()
+ var stage:=quest_stage()
+ action_button.disabled=not reach.available and not beacon_awakened
+ var verb:=tr_text(story.stages[stage].action) if stage<4 else tr_text(story.ending.primary)
+ action_button.text=verb
  if game_time<tip_until:
   prompt.text=hint_text;return
- if beacon_awakened:
-  prompt.text="Treasure recovered" if language=="en" else "寻宝完成";return
- var stage:=quest_stage()
- if flat_distance(player.position,target_point())<1.55:
-  var en:=["E · Read the chart","E · Open the grove chest","E · Recover the tide pearl","E · Place the pearl"]
-  var zh:=["E · 阅读海图","E · 打开林间宝箱","E · 取回潮汐珍珠","E · 放入珍珠"]
-  prompt.text=en[stage] if language=="en" else zh[stage]
- elif swim.is_swimming():prompt.text="Swim with the same controls · no breath limit" if language=="en" else "方向键游泳 · 可自由停留水面"
+ if reach.distance<2.8:
+  prompt.text=("E · "+verb) if reach.available else blocked_prompt(reach.reason)
+ elif swim.is_swimming():prompt.text=tr_text(story.ui.swim_hint)
  else:prompt.text=""
 
 func progress_data() -> Dictionary:
- return {"quest_stage":quest_stage(),"treasures":[activated[1],activated[2]],"completed":beacon_awakened,"position":[player.position.x,player.position.y,player.position.z],"language":language}
+ return {"quest_stage":quest_stage(),"treasures":[activated[1],activated[2]],"completed":beacon_awakened,"position":[player.position.x,player.position.y,player.position.z],"language":language,"audio_muted":audio_muted}
 
 func emit_load_receipt() -> void:
  var data:=progress_data();data["schema"]=1;data["found"]=loaded_found
@@ -622,8 +871,25 @@ func emit_load_receipt() -> void:
 
 func observed_state() -> Dictionary:
  var data:=progress_data();data["schema"]=1;data["sample_id"]=sample_id;data["physics_frame"]=Engine.get_physics_frames();data["demo"]=demo
+ # Informational only: physics frames are not rendered FPS. These passive
+ # counters let failed runs distinguish wall-time/render stalls from simulation.
+ data["render_diagnostics"]={"draw_frame":Engine.get_frames_drawn(),"monotonic_usec":Time.get_ticks_usec()}
  data["locomotion"]=str(swim.state);data["water_depth"]=swim.water_depth
  data["movement_input"]=[last_move.x,last_move.z];data["velocity"]=[player.velocity.x,player.velocity.y,player.velocity.z]
+ if swim.observe_chart_motion:data["chart_motion"]=swim.chart_motion_snapshot()
+ var reach:=interaction_status()
+ data["interaction_available"]=reach.available;data["interaction_reason"]=reach.reason;data["interaction_target"]=reach.target_index
+ data["journey_started"]=journey_started;data["audio_muted"]=audio_muted
+ if OS.has_feature("web"):
+  var audio_state:Dictionary=tide_audio.get_state()
+  data["audio_ready"]=audio_state.get("ready",false)
+  data["audio_status"]=audio_state.get("status","loading")
+  data["audio_error"]=audio_state.get("error","")
+  data["audio_start_pending"]=audio_state.get("start_pending",false)
+  data["audio_driver"]=AudioServer.get_driver_name()
+ for field in ["begin_rect","audio_rect","journal_rect"]:
+  var control:Control=interface.card_primary if field=="begin_rect" else (interface.audio_button if field=="audio_rect" else interface.journal_button)
+  var bounds:=control.get_global_rect();data[field]=[bounds.position.x,bounds.position.y,bounds.size.x,bounds.size.y]
  data["steering_touch_active"]=touch_active;data["steering_touch_index"]=touch_index
  var right:=camera.global_basis.x;right.y=0;right=right.normalized()
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
@@ -653,35 +919,100 @@ func emit_presented_state() -> void:
  presentation_pending=false
 
 func interact() -> void:
+ if not journey_started or not interface.card_mode.is_empty():return
  if beacon_awakened:return
  var stage:=quest_stage()
- if flat_distance(player.position,target_point())>=1.55:return
+ var reach:=interaction_status()
+ if not reach.available:
+  hint_text=blocked_prompt(reach.reason);tip_until=game_time+1.8;update_prompt()
+  print("TIDAL_INTERACTION_BLOCKED ",JSON.stringify({"stage":stage,"reason":reach.reason,"distance":reach.distance,"demo":demo}))
+  return
  if stage<3:
   # The map reveals the grove key; the key opens the cache tied to the reef buoy.
   activated[stage]=true
-  var en:=["Chart found · search the leaning grove","Brass key found · follow the red buoy","Tide pearl recovered · return ashore"]
-  var zh:=["找到海图 · 前往倾斜的树林","找到铜钥匙 · 寻找红色浮标","取回潮汐珍珠 · 返回岸边"]
-  hint_text=en[stage] if language=="en" else zh[stage]
+  hint_text=tr_text(story.stages[stage].receipt)
   print("TIDAL_TREASURE ",JSON.stringify({"stage":stage+1,"item":["chart","brass_key","tide_pearl"][stage],"demo":demo}))
  else:
   beacon_awakened=true
   restart_available_time=game_time+3.0
-  hint_text="Treasure recovered · the sanctuary glows" if language=="en" else "寻宝完成 · 圣所重现光芒"
+  hint_text=tr_text(story.stages[3].receipt)
   print("TIDAL_COMPLETE ",JSON.stringify({"demo":demo,"stage":4}))
+ tide_audio.play_stage_cue(stage)
  tip_until=game_time+3.0;update_state();save_game()
 
 func _unhandled_input(event: InputEvent) -> void:
  if event is InputEventKey and event.pressed and not event.echo:
   if event.keycode==KEY_E or event.keycode==KEY_SPACE:interact()
-  if event.keycode==KEY_R:reset_game()
+  if event.keycode==KEY_R:request_restart()
+  if event.keycode==KEY_J:show_journal()
+  if event.keycode==KEY_M:toggle_audio("key_M")
   if event.keycode==KEY_L:change_language("key_L")
   if event.keycode==KEY_H:ui_visible=not ui_visible;ui.visible=ui_visible
- if event is InputEventScreenTouch and event.pressed and not touch_active:
+ if event is InputEventScreenTouch and event.pressed and journey_started and interface.card_mode.is_empty() and not touch_active:
   if event.position.x<get_viewport().get_visible_rect().size.x*.65:
    touch_active=true;touch_origin=event.position;touch_index=event.index
    touch_start_position=player.position;touch_start_frame=Engine.get_physics_frames();touch_drag_events=0;touch_gesture_id+=1
 
+func _disarm_modal_touch() -> void:
+ modal_touch_index=-1;modal_touch_mode="";modal_touch_action=""
+
+func _web_touch_canceled(_arguments:Array) -> void:
+ _disarm_modal_touch()
+
+func _modal_touch_valid() -> bool:
+ return modal_touch_index>=0 and is_instance_valid(interface) and interface.card_mode==modal_touch_mode and interface.card_primary.is_visible_in_tree() and not interface.card_primary.disabled and interface.card_primary.text==modal_touch_action
+
+func _handle_modal_touch(event:InputEvent) -> bool:
+ if modal_touch_index>=0 and not _modal_touch_valid():_disarm_modal_touch()
+ var owns_modal:bool=interface.card_mode in ["opening","audio_retry"]
+ # Godot dispatches touch-emulated mouse events BEFORE the original touch.
+ # Own only presses inside this primary action, through their release even if
+ # the card changes. Body gestures remain native RichTextLabel scrolling.
+ if event is InputEventMouseButton and event.device==InputEvent.DEVICE_ID_EMULATION:
+  if event.pressed:
+   modal_mouse_owned=owns_modal and interface.card_primary.is_visible_in_tree() and interface.card_primary.get_global_rect().has_point(event.position)
+   return modal_mouse_owned
+  var owned:=modal_mouse_owned
+  modal_mouse_owned=false
+  return owned
+ if not owns_modal:return false
+ if event is InputEventScreenDrag and event.index==modal_touch_index:
+  if not interface.card_primary.get_global_rect().has_point(event.position):_disarm_modal_touch()
+  return true
+ if not event is InputEventScreenTouch:return false
+ if event.pressed:
+  if not interface.card_primary.is_visible_in_tree() or not interface.card_primary.get_global_rect().has_point(event.position):return false
+  if modal_touch_index<0 and not event.canceled and not interface.card_primary.disabled:
+   modal_touch_index=event.index;modal_touch_mode=interface.card_mode;modal_touch_action=interface.card_primary.text
+  return true
+ if event.index!=modal_touch_index:return false
+ var activate:bool=not event.canceled and _modal_touch_valid() and interface.card_primary.get_global_rect().has_point(event.position)
+ var mode:=modal_touch_mode
+ _disarm_modal_touch()
+ # A touch grants browser transient activation on release, not on press.
+ if activate:
+  if mode=="opening":begin_journey("touch_begin")
+  else:tide_audio.resume_from_gesture("touch_audio_retry")
+ return true
+
 func _input(event:InputEvent) -> void:
+ if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
+  touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
+  print("TIDAL_TOUCH_RELEASE ",JSON.stringify({"schema":1,"gesture_id":touch_gesture_id,"touch_index":event.index,"before":[touch_start_position.x,touch_start_position.y,touch_start_position.z],"after":[player.position.x,player.position.y,player.position.z],"physics_frames_elapsed":Engine.get_physics_frames()-touch_start_frame,"drag_events":touch_drag_events,"canceled":event.canceled,"demo":demo,"active_after":touch_active,"move_after":[touch_move.x,touch_move.y]}))
+
+  return
+ if _handle_modal_touch(event):get_viewport().set_input_as_handled();return
+ if not journey_started:
+  if event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_ENTER,KEY_KP_ENTER,KEY_E,KEY_SPACE]:
+   begin_journey("key_enter" if event.keycode in [KEY_ENTER,KEY_KP_ENTER] else "key_begin")
+   get_viewport().set_input_as_handled();return
+  return
+ if not interface.card_mode.is_empty():
+  if event is InputEventKey and event.pressed and not event.echo:
+   if event.keycode in [KEY_ENTER,KEY_KP_ENTER]:card_primary();get_viewport().set_input_as_handled();return
+   if event.keycode in [KEY_ESCAPE,KEY_J] or (event.keycode in [KEY_E,KEY_SPACE] and not restart_pending):
+    restart_pending=false;interface.hide_card();get_viewport().set_input_as_handled();return
+  return
  # Button uses primary-pointer mouse emulation; a second finger must remain a
  # real touch action while finger one continues steering the swimmer.
  if event is InputEventScreenTouch and event.pressed and touch_active and event.index!=touch_index:
@@ -689,12 +1020,13 @@ func _input(event:InputEvent) -> void:
    var before:=quest_stage();on_action_pressed()
    print("TIDAL_ACTION_TOUCH ",JSON.stringify({"schema":1,"touch_index":event.index,"steering_index":touch_index,"before":before,"after":quest_stage(),"demo":demo}))
    get_viewport().set_input_as_handled();return
+  if interface.audio_button.get_global_rect().has_point(event.position):
+   toggle_audio("touch_button");get_viewport().set_input_as_handled();return
+  if interface.journal_button.get_global_rect().has_point(event.position):
+   show_journal();get_viewport().set_input_as_handled();return
   if language_button.get_global_rect().has_point(event.position):
    change_language("touch_button");get_viewport().set_input_as_handled();return
- if event is InputEventScreenTouch and not event.pressed and event.index==touch_index:
-  touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
-  print("TIDAL_TOUCH_RELEASE ",JSON.stringify({"schema":1,"gesture_id":touch_gesture_id,"touch_index":event.index,"before":[touch_start_position.x,touch_start_position.y,touch_start_position.z],"after":[player.position.x,player.position.y,player.position.z],"physics_frames_elapsed":Engine.get_physics_frames()-touch_start_frame,"drag_events":touch_drag_events,"canceled":event.canceled,"demo":demo,"active_after":touch_active,"move_after":[touch_move.x,touch_move.y]}))
- elif event is InputEventScreenDrag and touch_active and event.index==touch_index:
+ if event is InputEventScreenDrag and touch_active and event.index==touch_index:
   touch_move=(event.position-touch_origin).limit_length(70)/70
   touch_drag_events+=1
 
@@ -702,18 +1034,21 @@ func _notification(what:int) -> void:
  if what==NOTIFICATION_WM_CLOSE_REQUEST and OS.has_feature("web"):
   save_game("exit");get_tree().quit();return
  if what==NOTIFICATION_APPLICATION_FOCUS_OUT:
+  _disarm_modal_touch()
   touch_active=false;touch_move=Vector2.ZERO;touch_index=-1
+  if is_instance_valid(tide_audio):tide_audio.set_focus_active(false)
+ if what==NOTIFICATION_APPLICATION_FOCUS_IN and is_instance_valid(tide_audio):tide_audio.set_focus_active(true)
 
 func _physics_process(delta:float) -> void:
  if player==null:return
  game_time+=delta
- action_button.disabled=beacon_awakened and game_time<restart_available_time
  var input:=Vector2.ZERO
  if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT):input.x-=1
  if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT):input.x+=1
  if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):input.y-=1
  if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):input.y+=1
  input=(input+touch_move).limit_length()
+ if not journey_started or not interface.card_mode.is_empty():input=Vector2.ZERO
  var right:=camera.global_basis.x;right.y=0;right=right.normalized()
  var forward:=-camera.global_basis.z;forward.y=0;forward=forward.normalized()
  var move:Vector3=(right*input.x-forward*input.y).normalized()*input.length()
@@ -722,24 +1057,24 @@ func _physics_process(delta:float) -> void:
   if route_phase<route_points.size():
    var target:=route_points[route_phase]
    var flat:=Vector3(target.x-player.position.x,0,target.z-player.position.z)
-   if flat.length()>.65:move=flat.normalized()*.92;demo_wait=0.0
+   if flat.length()>(.22 if route_phase==6 else .65):move=flat.normalized()*.92;demo_wait=0.0
    else:
     demo_wait+=delta
     if demo_wait>.75:
      if route_phase in [0,1,3,6]:interact()
      route_phase+=1;demo_wait=0.0;demo_phase=quest_stage()
+ swim.observe_chart_motion=not OS.has_feature("web") and not demo
  swim.step(player,move,delta,height_at(player.position.x,player.position.z))
  last_move=move
  if move.length()>.1:avatar.rotation.y=lerp_angle(avatar.rotation.y,atan2(-move.x,-move.z),1.0-exp(-delta*10))
  var afloat:=swim.is_swimming()
- avatar_body.rotation.x=lerpf(avatar_body.rotation.x,-PI*.43 if afloat else 0.0,1-exp(-delta*7))
- avatar_body.position.y=lerpf(avatar_body.position.y,.65 if afloat else .6,1-exp(-delta*7))
- avatar.position.y=sin(game_time*(4.4 if afloat else 10))* (.025 if move.length()>.1 else .006)
- for i in range(2):
-  var phase:=game_time*(4.2 if afloat else 9.0)+i*PI
-  arms[i].rotation.x=sin(phase)*(.9 if afloat else .5)*move.length()
-  arms[i].rotation.z=sin(phase)*.38+(-.4 if i==0 else .4) if afloat else 0.0
-  legs[i].rotation.x=sin(phase+PI)*(.32 if afloat else .55)*move.length()
+ avatar_body.rotation.x=lerpf(avatar_body.rotation.x,-PI*.5 if afloat else 0.0,1-exp(-delta*7))
+ avatar_body.position.y=lerpf(avatar_body.position.y,.70 if afloat else .6,1-exp(-delta*7))
+ avatar.position.y=sin(game_time*(4.4 if afloat else 10))* (.018 if move.length()>.1 else .006)
+ var desired_clip:StringName=&"Swim" if afloat else (&"Walk" if move.length()>.1 else &"Idle")
+ if desired_clip!=explorer_clip:
+  explorer_animation.play(desired_clip,.22);explorer_clip=desired_clip
+ explorer_animation.speed_scale=(.60+.40*move.length()) if afloat else (1.15 if swim.state==&"walk" else .8)
  swim_wake.visible=swim.state!=&"walk"
  swim_wake.position=Vector3(player.position.x,SEA_LEVEL+.035,player.position.z)
  swim_wake.rotation.y=avatar.rotation.y;swim_wake.scale=Vector3(1.25+move.length()*.2,1,1.5+move.length()*.5)
@@ -749,10 +1084,14 @@ func _physics_process(delta:float) -> void:
  var desired:=player.position+Vector3(-3.4,7.3,10.0)
  var portrait:=get_viewport().get_visible_rect().size.x/get_viewport().get_visible_rect().size.y<.85
  if portrait:desired=player.position+Vector3(-2.0,9.3,12.5)
- var ray:=PhysicsRayQueryParameters3D.create(aim,desired);ray.exclude=[player.get_rid()]
+ var camera_pivot:=player.position+Vector3(0,.85,0)
+ var ray:=PhysicsRayQueryParameters3D.create(camera_pivot,desired,WORLD_LAYER);ray.exclude=[player.get_rid()]
  var hit:=get_world_3d().direct_space_state.intersect_ray(ray)
  if not hit.is_empty():desired=hit.position+hit.normal*.55
- camera.position=camera.position.lerp(desired,1-exp(-delta*4.5));camera.look_at(aim)
+ var smoothed:=camera.position.lerp(desired,1-exp(-delta*4.5))
+ ray.to=smoothed;hit=get_world_3d().direct_space_state.intersect_ray(ray)
+ camera.position=hit.position+hit.normal*.55 if not hit.is_empty() else smoothed
+ camera.look_at(aim)
  update_prompt()
  var dist:=flat_distance(player.position,target_point())
  var dir:=Vector3(target_point().x-player.position.x,0,target_point().z-player.position.z).normalized()
@@ -760,26 +1099,36 @@ func _physics_process(delta:float) -> void:
  var arrow:="↑" if front>.45 else ("↓" if front<-.45 else ("→" if side>0 else "←"))
  compass.text=("%s  %dm  ·  %s" % [arrow,int(dist),str(swim.state).to_upper()]) if language=="en" else ("%s  %d米  ·  %s" % [arrow,int(dist),{"walk":"行走","wade":"涉水","swim":"游泳"}[str(swim.state)]])
  state_clock+=delta
- if state_clock>=.2:state_clock=0;emit_state()
+ # Native collision evidence must not alias a 13-step log cadence against an
+ # eight-step software-render burst. These are passive real-physics snapshots;
+ # input, simulation, rendering and Web observation are unchanged.
+ var chart_observation:bool=swim.observe_chart_motion and quest_stage()==0 and flat_distance(player.position,lantern_points[0])<3.0
+ if chart_observation:
+  if Engine.get_physics_frames()%4==0:state_clock=0;emit_state()
+ elif state_clock>=.2:state_clock=0;emit_state()
 
 func _process(delta:float) -> void:
  timer+=delta
+ if modal_touch_index>=0 and not _modal_touch_valid():_disarm_modal_touch()
+ if OS.has_feature("web") and not journey_started and is_instance_valid(tide_audio):
+  var audio_state:Dictionary=tide_audio.get_state()
+  if audio_state.get("started",false):confirm_journey_begin()
+  elif is_instance_valid(interface) and interface.card_mode=="opening":
+   var status:=str(audio_state.get("status","loading"))+":"+str(audio_state.get("start_pending",false))
+   if status!=opening_audio_status:show_opening()
+ elif OS.has_feature("web") and journey_started and is_instance_valid(tide_audio):
+  var audio_state:Dictionary=tide_audio.get_state()
+  if audio_state.get("status")=="error" and interface.card_mode!="audio_retry":show_audio_recovery()
+  if interface.card_mode=="audio_retry":
+   if audio_state.get("status")=="ready" and audio_state.get("context_state")=="running" and not audio_state.get("start_pending",false):
+    interface.hide_card()
+   else:
+    interface.card_primary.disabled=bool(audio_state.get("start_pending",false))
+    interface.card_primary.text=tr_text(story.ui.audio_starting if interface.card_primary.disabled else story.ui.audio_retry)
  if objective:
-  var view_size:=get_viewport().get_visible_rect().size;var width:=view_size.x;var height:=view_size.y
-  var narrow:=width<600
-  title_panel.size.x=minf(350,width-32);title_panel.size.y=120
-  language_button.position=Vector2(width-60,20)
-  title.position=Vector2(28,25);objective.position=Vector2(28,49);progress.position=Vector2(28,78);subtitle.position=Vector2(28,103)
-  objective.add_theme_font_size_override("font_size",16 if narrow else 18)
-  subtitle.add_theme_font_size_override("font_size",11 if narrow else 12)
-  compass.position=Vector2(width*.5-120,150 if narrow else 22);compass.size=Vector2(240,28)
-  prompt_panel.size=Vector2(minf(440,width-32),38);prompt_panel.position=Vector2((width-prompt_panel.size.x)*.5,height-130)
-  prompt.position=prompt_panel.position+Vector2(8,6);prompt.size=prompt_panel.size-Vector2(16,8);prompt_panel.visible=not prompt.text.is_empty()
-  prompt.add_theme_font_size_override("font_size",12 if narrow else 16)
-  action_button.position=Vector2(width-152,height-82)
-  footer_panel.position=Vector2(16,height-29);footer_panel.size=Vector2(minf(480,width-32),25)
-  message.position=Vector2(26,height-25);message.add_theme_font_size_override("font_size",10 if narrow else 12)
-  message.text=("Left drag · Move / Swim   Right button · Interact" if language=="en" else "左侧拖动行走或游泳 · 右侧按钮互动") if narrow else ("WASD / arrows · Move & swim     E · Interact     R · Restart     L · Language" if language=="en" else "方向键行走或游泳 · E 互动 · R 重来 · L 语言")
+  interface.layout()
+  var narrow:=get_viewport().get_visible_rect().size.x<600
+  message.text=("Left drag · Move / swim" if language=="en" else "左侧拖动 · 行走或游泳") if narrow else ("WASD · Move / swim     E · Act     J · Journal     M · Sound" if language=="en" else "方向键行走或游泳 · E 互动 · J 手记 · M 声音")
  for i in range(lanterns.size()):
   var gem:MeshInstance3D=lanterns[i].get_node("Gem");gem.position.y=1.0+sin(timer*1.7+i)*.06;gem.rotation.y=timer*.45
  if lanterns.size()>2:lanterns[2].position.y=SEA_LEVEL-.12+sin(timer*1.4)*.035
@@ -835,10 +1184,12 @@ func load_game() -> void:
   var ground:=height_at(saved.x,saved.z) if saved.is_finite() else NAN
   player.position=swim.restored_position(saved,ground,swim.safe_spawn_position)
  language="zh" if data.get("language","en")=="zh" else "en"
+ audio_muted=data.get("audio_muted",false)==true;tide_audio.set_muted(audio_muted,"load")
  beacon_awakened=save_flag(data.get("beacon_awakened",false)) and activated==[true,true,true]
  loaded_found=true
 
 func reset_game() -> void:
+ restart_pending=false;interface.hide_card();tide_audio.reset_cues()
  activated=[false,false,false];completed=false;beacon_awakened=false;tip_until=0.0;restart_available_time=0.0
  player.position=swim.safe_spawn_position;player.velocity=Vector3.ZERO;swim=SwimController.new();swim.safe_spawn_position=player.position
  update_state();save_game()
@@ -866,6 +1217,12 @@ func audit() -> void:
  get_tree().quit()
 
 func _exit_tree() -> void:
+ if web_document!=null and web_touch_cancel_callback!=null:
+  web_document.removeEventListener("touchcancel",web_touch_cancel_callback,true)
+  web_document.removeEventListener("visibilitychange",web_touch_cancel_callback,true)
+ if web_window!=null and web_touch_cancel_callback!=null:
+  web_window.removeEventListener("blur",web_touch_cancel_callback,true)
+ web_touch_cancel_callback=null;web_document=null;web_window=null
  if is_instance_valid(player):print("TIDAL_FINAL ",JSON.stringify({"time":game_time,"position":str(player.position),"activated":activated,"demo_phase":demo_phase,"velocity":str(player.velocity),"floor":player.is_on_floor(),"wall":player.is_on_wall(),"ceiling":player.is_on_ceiling(),"height_expected":height_at(player.position.x,player.position.z),"collisions":player.get_slide_collision_count()}))
  if is_instance_valid(player):
   for i in range(player.get_slide_collision_count()):print("TIDAL_COLLISION ",player.get_slide_collision(i).get_normal()," ",player.get_slide_collision(i).get_collider().get_parent().name," ",player.get_slide_collision(i).get_position())
@@ -878,13 +1235,16 @@ func mark_frame_ready() -> void:
  print("TIDAL_FRAME_READY ",JSON.stringify({"time":game_time,"viewport":str(get_viewport().get_visible_rect().size),"font_ascii":game_font.has_char(65)}))
 
 func on_action_pressed() -> void:
- if beacon_awakened:
-  if game_time>=restart_available_time:reset_game()
+ if beacon_awakened:interface.hide_card()
  else:interact()
 
 func change_language(trigger:String) -> void:
  var previous:=language
- language="zh" if language=="en" else "en";update_state();save_game()
+ language="zh" if language=="en" else "en";hint_text="";tip_until=0.0;update_state();save_game()
+ if interface.card_mode=="opening":show_opening()
+ elif interface.card_mode=="journal":show_journal()
+ elif interface.card_mode=="restart":request_restart()
+ elif interface.card_mode=="audio_retry":show_audio_recovery()
  language_change_id+=1
  capture_language_frame.call_deferred(previous,language_change_id,trigger)
 

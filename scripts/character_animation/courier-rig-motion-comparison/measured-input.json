@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "case_slug": "courier-rig-motion-comparison",
+  "record_kind": "current_offline_measurements_of_historical_input_not_new_rig_production",
+  "checked_utc": "2026-10-24T22:41:47.717199+00:00",
+  "source": {
+    "identifier": "Relic Courier courier-character.glb",
+    "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2",
+    "bytes": 11962060,
+    "rights_notice": "Existing Relic Courier asset notice; Hyper3D terms and account/plan conditions apply; not MIT-relicensed"
+  },
+  "mesh": {
+    "vertices": 36287,
+    "uv_entries": 36287,
+    "normal_entries": 36287,
+    "triangles": 30000,
+    "objects": 1
+  },
+  "source_bbox_default_world_m": {
+    "min": [
+      -0.4120546579360962,
+      0.0,
+      -0.21179917454719543
+    ],
+    "max": [
+      0.4120546579360962,
+      1.649999976158142,
+      0.21179918944835663
+    ]
+  },
+  "skin_weight_audit": [
+    {
+      "node": "CourierHeroMesh",
+      "primitive": 0,
+      "vertex_count": 36287,
+      "skin_joint_count": 17,
+      "weight_sum_min": 0.9999998696148396,
+      "weight_sum_max": 1.0000001266598701,
+      "max_abs_weight_sum_error": 1.30385160446167e-07,
+      "vertices_outside_sum_tolerance_1e_5": 0,
+      "zero_total_weight_vertices": 0,
+      "negative_weight_components": 0,
+      "nonfinite_weight_components": 0,
+      "illegal_joint_components_any_weight": 0,
+      "illegal_joint_components_positive_weight": 0,
+      "weighted_joint_names": [
+        "Hips",
+        "Spine",
+        "Chest",
+        "Head",
+        "UpperArm.L",
+        "Forearm.L",
+        "Hand.L",
+        "UpperArm.R",
+        "Forearm.R",
+        "Hand.R",
+        "Thigh.L",
+        "Shin.L",
+        "Foot.L",
+        "Thigh.R",
+        "Shin.R",
+        "Foot.R"
+      ]
+    }
+  ],
+  "rest_inverse_bind_audit": [
+    {
+      "skinned_node": "CourierHeroMesh",
+      "check": "world_rest_joint * inverse_bind versus world_rest_skinned_node",
+      "max_abs_component_residual": 3.851974821889037e-07,
+      "per_joint_residuals": {
+        "Root": 0.0,
+        "Hips": 0.0,
+        "Spine": 0.0,
+        "Chest": 0.0,
+        "Head": 0.0,
+        "UpperArm.L": 1.3407959320588247e-07,
+        "Forearm.L": 1.4214077448393425e-07,
+        "Hand.L": 3.851974821889037e-07,
+        "UpperArm.R": 1.3407959320588247e-07,
+        "Forearm.R": 1.4214077448393425e-07,
+        "Hand.R": 3.851974821889037e-07,
+        "Thigh.L": 8.717349359206594e-08,
+        "Shin.L": 1.0364472857564422e-07,
+        "Foot.L": 1.2388399994733845e-07,
+        "Thigh.R": 8.717349359206594e-08,
+        "Shin.R": 1.0364472857564422e-07,
+        "Foot.R": 1.2388399994733845e-07
+      },
+      "scope": "Numeric consistency check at stored rest TRS; does not establish deformed surface quality."
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "start_seconds": 0.0,
+      "end_seconds": 2.0,
+      "samples": 273,
+      "endpoint_joint_position_max_error_m": 0.0,
+      "endpoint_joint_matrix_max_abs_error": 0.0,
+      "root_net_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Walk",
+      "start_seconds": 0.0,
+      "end_seconds": 1.0,
+      "samples": 137,
+      "endpoint_joint_position_max_error_m": 0.0,
+      "endpoint_joint_matrix_max_abs_error": 0.0,
+      "root_net_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Dash",
+      "start_seconds": 0.0,
+      "end_seconds": 0.25,
+      "samples": 35,
+      "endpoint_joint_position_max_error_m": 0.0,
+      "endpoint_joint_matrix_max_abs_error": 0.0,
+      "root_net_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Attack",
+      "start_seconds": 0.0,
+      "end_seconds": 0.44999998807907104,
+      "samples": 107,
+      "endpoint_joint_position_max_error_m": 0.0,
+      "endpoint_joint_matrix_max_abs_error": 0.0,
+      "root_net_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Cast",
+      "start_seconds": 0.0,
+      "end_seconds": 0.6499999761581421,
+      "samples": 155,
+      "endpoint_joint_position_max_error_m": 0.0,
+      "endpoint_joint_matrix_max_abs_error": 0.0,
+      "root_net_displacement_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "transfer": {
+    "scope": "Mesh-only default pose; no skeleton, skin, animation or control rig",
+    "output_coordinates": {
+      "source": "glTF +Y up, metres, right-handed",
+      "output": "OBJ +Y up, centimetres, right-handed",
+      "position_scale": 100,
+      "z_sign_change": false,
+      "axis_rotation": "none",
+      "host_axis_or_unit_conversion_executed": false
+    },
+    "uv_conversion": {
+      "source": "glTF TEXCOORD_0 with upper-left image origin",
+      "output": "conventional OBJ/MTL vt with lower-left image origin",
+      "forward": "obj_u = gltf_u; obj_v = 1 - gltf_v",
+      "inverse": "gltf_u = obj_u; gltf_v = 1 - obj_v",
+      "image_bytes_flipped": false,
+      "scope": "Base-color lookup convention bridge; target importer behavior and full PBR reconstruction require actual host validation"
+    },
+    "counts": {
+      "vertices": 36287,
+      "uv_entries": 36287,
+      "normal_entries": 36287,
+      "triangles": 30000,
+      "objects": 1
+    },
+    "obj_bbox_cm": {
+      "min": [
+        -41.2054657936,
+        0.0,
+        -21.1799174547
+      ],
+      "max": [
+        41.2054657936,
+        164.999997616,
+        21.1799189448
+      ]
+    },
+    "inverse_scale_max_abs_error_m": 5.000000413701855e-12,
+    "uv_inverse_origin_conversion_max_abs_error": 5.000444502911705e-13,
+    "files": [
+      {
+        "path": "courier-neutral-maya-cm.mtl",
+        "bytes": 328,
+        "sha256": "5adc0054a3078022aa7e9b5414f021b705d454fe39987b0d535c7a07c2bdeca1"
+      },
+      {
+        "path": "courier-neutral-maya-cm.obj",
+        "bytes": 6225898,
+        "sha256": "800b241adeac5547dd5fc42e839d897360db0ca8aa5cd22d2759896af5a9b145"
+      },
+      {
+        "path": "textures/courier-image-00.png",
+        "bytes": 3438712,
+        "sha256": "a2e58c69c806872a56d8030f7cc6813711fb3d96348a3d596ca28b26aeb2c85c"
+      },
+      {
+        "path": "textures/courier-image-01.png",
+        "bytes": 3702813,
+        "sha256": "6c0b65753f81f58dcc4335e5788a12c12cbbfb31f54976a01adbe62f62375f4e"
+      },
+      {
+        "path": "textures/courier-image-02.png",
+        "bytes": 2651261,
+        "sha256": "e4591e2c06daa987d9e070f93642cdd63c59f567591146c70e829b95ee581e2c"
+      }
+    ]
+  },
+  "verification": {
+    "source_unchanged": true,
+    "runs": [
+      {
+        "script": "audit_existing_motion.py",
+        "script_sha256": "86d1c6ee9193fbd3810057cd001d1d2f904678720696911e0ee6bdf98e440d51",
+        "actual_asset_run_exit_code": 0,
+        "nonempty_output_refused": true,
+        "nonempty_output_unchanged": true,
+        "wrong_source_hash_refused_before_output": true
+      },
+      {
+        "script": "prepare_neutral_mesh.py",
+        "script_sha256": "3a977ff477994ceeff111461125d383c907de88be076fa07103b0fc79c5edef1",
+        "actual_asset_run_exit_code": 0,
+        "nonempty_output_refused": true,
+        "nonempty_output_unchanged": true,
+        "wrong_source_hash_refused_before_output": true
+      }
+    ],
+    "corrected_transfer_artifact_hashes_match_independent_run": true,
+    "motion_measurements_match_independent_run": true,
+    "scope": "Historical checks at recorded_source_commit; script hashes identify the script bytes in that commit, not subsequent revisions. New checks are recorded separately in offline-revalidation-2026-10-27.json."
+  },
+  "limitations": [
+    "No host, plugin, renderer, export or reopen execution.",
+    "Joint trajectories describe origins, not actual foot soles or skinned mesh contacts.",
+    "Low-foot proxy is a numeric motion flag, not a grounding or foot-slide acceptance result.",
+    "In-place clips require separately authored actor locomotion; zero Root displacement is not a defect by itself.",
+    "Loop endpoint similarity is numerical continuity only; Attack/Cast are intentionally nonloop in source metadata.",
+    "Endpoint checks do not test velocity or angular-velocity continuity across a loop seam.",
+    "No visible joint deformation, intersections, silhouette or natural-speed motion review is established.",
+    "Blender generator metadata and prior authored rig attribution do not establish a live compatible host or controller rig.",
+    "No Maya/Blender host launched; no import, shader reconstruction, save/reopen, rig, skinning, foot contact, deformation, animation export or visual acceptance.",
+    "OBJ/MTL base color mapping cannot faithfully encode the full glTF PBR shader. Original normal and packed metallic/roughness images are preserved as bytes and in bindings, but require correct host material wiring.",
+    "This bridge is static mesh geometry only. The previous 17-joint skin and five clips are deliberately omitted to permit independent rig comparisons.",
+    "Default TRS/inverse-bind consistency is a numerical source audit, not evidence that mGear/AdvancedSkeleton/Rigify can fit or build this character."
+  ],
+  "stage_status": {
+    "offline_preparation": "passed",
+    "plugin_license_clearance": "blocked",
+    "actual_marketplace_skill_calls": "blocked",
+    "native_rig_projects": "blocked",
+    "native_video": "blocked",
+    "save_export_reopen": "blocked",
+    "blank_scene_rebuild": "blocked",
+    "visual_motion_acceptance": "not-tested"
+  },
+  "recorded_source_commit": "9a94e40eef850b6d7d724048aa798c6d4bb915fc"
+}

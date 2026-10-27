@@ -109,6 +109,7 @@ update();
     stopAll();
     const video = entry.video;
     const run = {entry, automatic, timer: null, dispose() {}};
+    let nativePauseObserved = false;
     active = run;
     const failed = error => {
       if (active !== run) return;
@@ -120,6 +121,11 @@ update();
         state(entry, "watching");
       } else stop(entry, "error");
     };
+    const armWatchdog = () => {
+      window.clearTimeout(run.timer);
+      const timer = window.setTimeout(() => { if (run.timer === timer) failed(); }, 12000);
+      run.timer = timer;
+    };
     const playing = () => {
       if (active !== run) {
         if (!active || active.entry !== entry) video.pause();
@@ -130,7 +136,20 @@ update();
       run.timer = null;
       state(entry, run.automatic ? "preview" : "watching");
     };
-    const handlers = {playing, error: failed};
+    const paused = () => {
+      if (active !== run || run.automatic) return;
+      nativePauseObserved = true;
+      if (!video.paused) return;
+      window.clearTimeout(run.timer);
+      run.timer = null;
+      state(entry, "watching");
+    };
+    const loading = (restart = false) => {
+      if (active !== run || run.automatic || video.paused || (!restart && run.timer !== null)) return;
+      state(entry, "loading");
+      armWatchdog();
+    };
+    const handlers = {playing, pause: paused, play: () => loading(true), waiting: () => loading(), error: failed};
     Object.entries(handlers).forEach(([name, callback]) => video.addEventListener(name, callback));
     run.dispose = () => {
       window.clearTimeout(run.timer);
@@ -141,11 +160,17 @@ update();
     video.loop = automatic;
     if (!adoptNativePlayback) video.src = entry.source;
     state(entry, "loading");
-    run.timer = window.setTimeout(failed, 12000);
+    armWatchdog();
     if (adoptNativePlayback) return; // The native play action is already underway.
     try {
       const promise = video.play();
-      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(playing, failed);
+      if (promise && typeof promise.then === "function") Promise.resolve(promise).then(() => {
+        if (active !== run || !nativePauseObserved) playing();
+      }, error => {
+        // A queued pause may reject this sole play promise after native resume.
+        if (nativePauseObserved && error && error.name === "AbortError") return;
+        failed(error);
+      });
     } catch (_) { failed(); }
   }
   videos.forEach(video => {
@@ -220,9 +245,9 @@ update();
       }
     };
     listen(video, "pointerdown", nativeIntent, {capture: true});
+    const released = () => !video.controls && !video.hasAttribute("src") && !sources.some(item => item.hasAttribute("src"));
     listen(video, "click", event => {
-      const released = !video.controls && !video.hasAttribute("src") && !sources.some(item => item.hasAttribute("src"));
-      if (released && available(entry)) {
+      if (released() && available(entry)) {
         event.preventDefault();
         start(entry, false); // One poster click restores the source and native controls.
         return;
@@ -230,9 +255,7 @@ update();
       nativeIntent(); // Preserve every active native pause/seek/volume gesture.
     }, {capture: true});
     listen(video, "keydown", event => {
-      const released = entry.host.dataset.videoState === "idle" && !video.hasAttribute("src") &&
-        !sources.some(item => item.hasAttribute("src"));
-      if ([" ", "Enter"].includes(event.key) && released && available(entry)) {
+      if ([" ", "Enter"].includes(event.key) && released() && available(entry)) {
         // With no source, Chromium disables its native play control. Handle
         // this one restart ourselves; otherwise preserve native key behavior.
         event.preventDefault();

@@ -1,0 +1,130 @@
+{
+  "status": "THREE_CANONICAL_ARPG_ASSETS_STABLE",
+  "actors": [
+    {
+      "actor": "courier",
+      "file": "courier-character-arpg-candidate.glb",
+      "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2",
+      "bytes": 11962060,
+      "clips_seconds": {
+        "Idle": 2.0,
+        "Walk": 1.0,
+        "Dash": 0.25,
+        "Attack": 0.45,
+        "Cast": 0.65
+      },
+      "event_seconds": {
+        "Attack": 0.18,
+        "Cast": 0.32
+      },
+      "new_clips_loop": false,
+      "original_binary_prefix_exact": true,
+      "original_animation_values_exact": true,
+      "skins_mesh_uv_material_images_unchanged": true,
+      "root_motion": false,
+      "new_clips_native_exported": true
+    },
+    {
+      "actor": "guardian",
+      "file": "guardian-character-arpg-candidate.glb",
+      "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60",
+      "bytes": 17455464,
+      "clips_seconds": {
+        "Idle": 2.0,
+        "Walk": 1.0,
+        "Dash": 0.25,
+        "Attack": 0.65
+      },
+      "event_seconds": {
+        "Attack": 0.38
+      },
+      "new_clips_loop": false,
+      "original_binary_prefix_exact": true,
+      "original_animation_values_exact": true,
+      "skins_mesh_uv_material_images_unchanged": true,
+      "root_motion": false,
+      "new_clips_native_exported": true
+    }
+  ],
+  "chest": {
+    "status": "CANONICAL_INTERACTIVE_CHEST_STABLE_ISOLATED_GODOT_PASS_GAMEPLAY_PENDING",
+    "file": "chest-interactive-candidate-02.glb",
+    "bytes": 2444872,
+    "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5",
+    "original_source_vertices_and_uvs_retained": true,
+    "max_position_error_m": 5.960464477539063e-08,
+    "max_uv_error": 0.0,
+    "all_three_embedded_png_payloads_exact": true,
+    "pbr_channel_bindings_exact": true,
+    "source_triangles": 5000,
+    "derivative_triangles": 5338,
+    "closed_front_mean_absolute_rgba_difference_0_255": [
+      0.05279369212962963,
+      0.05202980324074074,
+      0.05121672453703704,
+      0.0
+    ],
+    "hinge": {
+      "node": "Lid",
+      "children": [
+        "LidExterior",
+        "LidInterior"
+      ],
+      "pivot_xyz": [
+        0,
+        1.221228003501892,
+        -0.800000011920929
+      ],
+      "axis": "X",
+      "closed_degrees": 0,
+      "open_degrees": -100,
+      "front_axis": "+Z"
+    },
+    "authored_interior": "Base lining5quads andlid underside1quad, separate authored wood material",
+    "native_open_view": "chest-derivative-open-quarter-full.png",
+    "original_chest_file_unchanged": true,
+    "paid_calls": 0,
+    "canonical_file": "chest-interactive.glb",
+    "map_key": "chest_interactive",
+    "height_m": 1.35,
+    "previous_twelve_records_and_assets_unchanged": true,
+    "godot_hinge_probe": "PASS_4.6.3",
+    "map_sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5",
+    "source_parent_glb_sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7",
+    "provider_output_glb_sha256": "060fbec0f44be2b69736e502f2d8f8b37d2d1f86648a1ce5f833c361869d261e"
+  },
+  "chest_closed_bounds_m": {
+    "min": [
+      -0.9529910087585449,
+      0.0,
+      -0.9563140273094177
+    ],
+    "max": [
+      0.9682940244674683,
+      1.8765920400619507,
+      0.956125020980835
+    ]
+  },
+  "chest_open_bounds_m": {
+    "min": [
+      -0.9529910087585449,
+      0.0,
+      -1.5573270504085166
+    ],
+    "max": [
+      0.9682940244674683,
+      2.8080978001268457,
+      0.956125020980835
+    ]
+  },
+  "chest_open_height_when_closed_height_1_35_m": 2.0201151604831993,
+  "old_ten_glbs_unchanged": true,
+  "old_rigged_blend_unchanged": true,
+  "provider_hero_glbs_unchanged": true,
+  "original_three_clip_binary_values_exact": true,
+  "native_file_render_and_isolated_godot_probes": "PASS",
+  "full_arpg_gameplay_os_web": "PENDING",
+  "source_or_gameplay_scripts_modified_by_this_worker": false,
+  "paid_calls": 0,
+  "ui_actions": 0
+}

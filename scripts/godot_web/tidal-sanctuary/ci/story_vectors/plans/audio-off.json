@@ -1,0 +1,32 @@
+{
+  "output_file": "native/audio-off.svg",
+  "plan": {
+    "canvas": {
+      "width": 64,
+      "height": 64,
+      "view_box": "0 0 64 64"
+    },
+    "nodes": [
+      {
+        "type": "path",
+        "id": "audio-off-1",
+        "fill": "#102B31",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M10 25h11l12-11v36L21 39H10Z"
+      },
+      {
+        "type": "path",
+        "id": "audio-off-2",
+        "fill": "none",
+        "stroke": "#AAC8BF",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "m43 25 12 14m0-14L43 39"
+      }
+    ]
+  }
+}

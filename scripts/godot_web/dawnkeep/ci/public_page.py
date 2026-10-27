@@ -40,6 +40,7 @@ ROOT = Path(__file__).resolve().parents[4]
 # The exported-runtime preview handler intentionally has no media range logic.
 sys.path.append(str(ROOT / 'scripts'))
 from browser_preview import QuietHandler as RangeHTTPHandler
+from tracked_file_bytes import MAX_LFS_POINTER_BYTES, matches_lfs_content
 
 
 def require(condition, message):
@@ -132,12 +133,13 @@ def installed_chrome():
 
 
 def verify_tracked_bytes(repo):
-    """Match raw HEAD blobs and file modes, without Git clean/smudge filters.
+    """Match raw HEAD blobs or hydrated LFS content and modes, without filters.
 
     Legacy media blobs in this repository inherit filter=lfs despite being
     committed as ordinary binary blobs. A runner with LFS installed therefore
     reports synthetic pointer conversions in a normal worktree diff. Never
-    waive those paths: hash every raw tracked byte against its actual HEAD blob.
+    waive those paths: ordinary blobs must match raw bytes, while hydrated LFS
+    files must match the committed pointer size and SHA-256.
     """
     repo = Path(repo).resolve()
     tree = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-r', '-z', '--full-tree', 'HEAD'])
@@ -172,19 +174,30 @@ def verify_tracked_bytes(repo):
                 if executable != (mode == '100755'):
                     raise ValueError('tracked executable mode differs')
                 digest.update(b'blob ' + str(before.st_size).encode() + b'\0')
+                content_digest = hashlib.sha256()
+                content_size = 0
                 with path.open('rb') as stream:
                     for chunk in iter(lambda: stream.read(1024 * 1024), b''):
                         digest.update(chunk)
+                        content_digest.update(chunk)
+                        content_size += len(chunk)
+            if digest.hexdigest() != expected:
+                pointer = b''
+                if mode in ('100644', '100755') and int(subprocess.check_output(
+                        ['git', '-C', str(repo), 'cat-file', '-s', expected])) <= MAX_LFS_POINTER_BYTES:
+                    pointer = subprocess.check_output(
+                        ['git', '-C', str(repo), 'cat-file', 'blob', expected])
+                if not pointer or not matches_lfs_content(
+                        pointer, content_size, content_digest.hexdigest()):
+                    raise ValueError('raw tracked bytes differ from HEAD blob')
             after = path.lstat()
             if (before.st_ino, before.st_size, before.st_mtime_ns, before.st_mode) != (after.st_ino, after.st_size, after.st_mtime_ns, after.st_mode):
                 raise ValueError('tracked file changed while hashing')
-            if digest.hexdigest() != expected:
-                raise ValueError('raw tracked bytes differ from HEAD blob')
         except (OSError, ValueError) as error:
             mismatches.append(name + ': ' + str(error))
     require(count > 0, 'Expected source tree has no tracked blobs')
     require(not mismatches, 'Tracked source differs from exact HEAD: ' + '; '.join(mismatches))
-    return {'method': 'Raw Git blob hash and executable/symlink mode comparison; no clean/smudge filters',
+    return {'method': 'Raw Git blobs or exact LFS pointer content and executable/symlink modes; no clean/smudge filters',
             'tracked_blobs_checked': count, 'tree_listing_sha256': hashlib.sha256(tree).hexdigest()}
 
 

@@ -1,14 +1,16 @@
-# A real six-second bottle turntable, pending visual acceptance
+# A real six-second bottle turntable with a failed visual review
+
+![Original frame61; silver-component defects remain visible](hero.jpg)
+
+**Published as a production study. Visual acceptance remains failed.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
+
+[Original frame61](hero.jpg) · [Film](turntable.mp4) · [Measurements and review](validation.json) · [Historical MCP excerpts](provenance.json) · [Inventory](manifest.json) · [Rights](LICENSES.md)
 
 <video controls preload="metadata" src="turntable.mp4" aria-label="Original BW0103 bottle turntable, pending visual acceptance">
   <a href="turntable.mp4">Download the original turntable</a>
 </video>
 
 [Watch the original turntable](turntable.mp4) · [简体中文](README.zh.md)
-
-**Submitted for review. Not yet accepted for the gallery.** The real Blender-made film contains 180 frames at 30 fps, 1080 × 1080 pixels, and lasts 6 seconds. Full decode passes. The pump, stem and collar still have visibly dented or melted-looking reflections, so visual acceptance remains failed. The blank label is intentional.
-
-[Film](turntable.mp4) · [Measurements and review](validation.json) · [Historical MCP excerpts](provenance.json) · [Inventory](manifest.json) · [Rights](LICENSES.md)
 
 ## What was actually produced
 
@@ -22,13 +24,13 @@ A later qualified native readback of the unchanged original source records 10 un
 
 Download the film and verify it against manifest.json. The original native project remains preserved but is not distributed: it still needs a sanitized copy saved and reopened in the qualified host. There is no complete public blank-scene recipe yet.
 
-Before gallery acceptance: repair the silver shading in a controlled native comparison, obtain independent visual approval, finish the public production graph and sanitized native copy, rebuild independently, then validate both site languages and actual video playback. Do not replace the film or claim a fresh run merely to make the record pass.
+Before publication-quality visual acceptance: repair the silver shading in a controlled native comparison, obtain independent visual approval, finish the public production graph and sanitized native copy, rebuild independently, then validate both site languages and actual video playback. Do not replace the film or claim a fresh run merely to make the record pass.
 
 ## Rights and site selection
 
 The cited BlenderWorld task is text-only, with no reference media or attachments. The video contains original numerical geometry and procedural materials, not third-party task media. The brief, benchmark rubrics, other model outputs and scores are not included. See LICENSES.md for the preserved rights scope.
 
-The case is deliberately absent from collection.json. The existing site builder publishes only explicitly selected files; this review submission does not add an accepted gallery page. Making the pull request ready for review does not mean the artwork has passed acceptance. No gallery gate, source requirement, merge or deployment is waived.
+The case is now selected in collection.json as a production study with an explicit visual-review failure. Visibility does not mean artwork-quality acceptance or completion of the missing reproduction stages. The original film is unchanged. The cover is a full-frame JPEG extracted from original frame61, with no crop, repaint or artwork regeneration.
 
 ## Boundaries
 

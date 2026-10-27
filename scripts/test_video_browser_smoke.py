@@ -5,6 +5,7 @@ import unittest
 
 from video_browser_smoke import (
     assert_no_media_requests_after_stop,
+    assert_paused_gallery_preview,
     media_release_observation,
     media_request_started,
 )
@@ -69,6 +70,47 @@ class MediaReleaseGuardTests(unittest.TestCase):
         self.before.update(event='pointerleave', target='detail-host')
         self.intent.update(event='pointerleave', target='detail-host', state='preview')
         assert_no_media_requests_after_stop(self.observation([self.request(2201.2)]))
+
+    def test_gallery_manual_stop_uses_the_same_native_release_guard(self):
+        self.before['target'] = self.intent['target'] = 'preview-toggle'
+        self.intent['state'] = 'playing'
+        assert_no_media_requests_after_stop(self.observation([self.request(2201.2)]))
+        with self.assertRaisesRegex(AssertionError, 'Media refetched after stop'):
+            assert_no_media_requests_after_stop(self.observation([self.request(2234)]))
+
+    def test_buffering_after_decoded_playback_retains_stop_ownership(self):
+        self.intent.update(state='loading', src='film.mp4', currentSrc='film.mp4', paused=False)
+        playing = {'event': 'playing', 'target': 'video', 'video_index': 1,
+                   'trusted': True, 'time': 2100, 'src': 'film.mp4', 'currentSrc': 'film.mp4'}
+        self.snapshot['events'][0] = playing
+        assert_no_media_requests_after_stop(self.observation([self.request(2201.2)]))
+        with self.assertRaisesRegex(AssertionError, 'Media refetched after stop'):
+            assert_no_media_requests_after_stop(self.observation([self.request(2234)]))
+
+    def test_loading_without_same_run_decoded_playback_does_not_prove_ownership(self):
+        self.intent.update(state='loading', src='film.mp4', currentSrc='film.mp4', paused=False)
+        playing = {'event': 'playing', 'target': 'video', 'video_index': 1,
+                   'trusted': True, 'time': 2100, 'src': 'film.mp4', 'currentSrc': 'film.mp4'}
+        for changes in [{'event': 'loadstart'}, {'event': 'emptied'}, {'event': 'abort'},
+                        {'event': 'error'}, {'trusted': False}, {'video_index': 0},
+                        {'src': 'old.mp4'}, {'src': None}, {'currentSrc': 'old.mp4'}]:
+            with self.subTest(changes=changes):
+                self.snapshot['events'][0] = {**playing, **changes}
+                with self.assertRaisesRegex(AssertionError, 'active player'):
+                    self.observation([self.request(2201.2)])
+        self.snapshot['events'][0] = playing
+        self.intent['paused'] = True
+        with self.assertRaisesRegex(AssertionError, 'active player'):
+            self.observation([self.request(2201.2)])
+
+    def test_source_reload_invalidates_earlier_playing_receipt(self):
+        self.intent.update(state='loading', src='film.mp4', currentSrc='film.mp4', paused=False)
+        self.snapshot['events'][0:1] = [
+            {'event': 'playing', 'target': 'video', 'video_index': 1, 'trusted': True,
+             'time': 2100, 'src': 'film.mp4', 'currentSrc': 'film.mp4'},
+            {'event': 'loadstart', 'target': 'video', 'video_index': 1, 'trusted': True, 'time': 2150}]
+        with self.assertRaisesRegex(AssertionError, 'active player'):
+            self.observation([self.request(2201.2)])
 
     def test_missing_untrusted_wrong_target_or_wrong_video_intent_fails(self):
         for changes in [{'trusted': False}, {'target': 'video'}, {'video_index': 0}, {'event': 'pointerleave'}]:
@@ -139,6 +181,27 @@ class MediaReleaseGuardTests(unittest.TestCase):
         self.assertEqual(request['range'], 'bytes=137950-')
         self.assertAlmostEqual(request['started_at_ms'], self.origin + 2201.2, places=2)
         self.assertIsNone(media_request_started({'requestId': 'css', 'request': {'url': 'style.css'}}))
+
+
+class GalleryPauseObservationTests(unittest.TestCase):
+    def setUp(self):
+        self.paused = {'state': 'paused', 'paused': True, 'src': 'film.mp4', 'currentSrc': 'https://example.test/film.mp4',
+                       'currentTime': 0.2, 'readyState': 4, 'width': 960, 'height': 720, 'visible': True}
+
+    def test_short_loop_pause_keeps_its_frame_without_requiring_time_progress(self):
+        assert_paused_gallery_preview(self.paused, dict(self.paused))
+
+    def test_two_zero_positions_do_not_prove_pause_retention(self):
+        self.paused['currentTime'] = 0
+        with self.assertRaisesRegex(AssertionError, 'never advanced'):
+            assert_paused_gallery_preview(self.paused, dict(self.paused))
+
+    def test_hover_cannot_restart_detach_seek_or_hide_the_paused_frame(self):
+        for changes in [{'state': 'idle'}, {'state': 'playing', 'paused': False}, {'src': None},
+                        {'currentSrc': ''}, {'src': 'other.mp4'}, {'currentTime': 0}, {'readyState': 0},
+                        {'width': 0}, {'height': 0}, {'visible': False}, {'currentTime': float('nan')}]:
+            with self.subTest(changes=changes), self.assertRaises(AssertionError):
+                assert_paused_gallery_preview(self.paused, {**self.paused, **changes})
 
 
 if __name__ == '__main__':

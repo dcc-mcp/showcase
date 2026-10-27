@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "record_kind": "plate-candidate-rights-research",
+  "checked_date_utc": "2026-10-24",
+  "recorded_at_utc": "2026-10-24T22:35:27Z",
+  "selected_candidate_id": "nps-deva-racetrack",
+  "status_scope_en": "Copyright-source research only. Candidate selection does not establish shot acceptance, artifact hash verification, native-host execution or publication approval.",
+  "status_scope_zh": "仅版权来源研究。选定候选不代表镜头验收、素材哈希核验、宿主实测或发布批准。",
+  "source_acquisition": {
+    "method": "official HTML source inspection and HTTP HEAD via Python urllib with default TLS certificate verification",
+    "media_downloaded_by_this_research": false,
+    "tls_verification_disabled": false,
+    "metadata_authority": "Official player labels, file names, page descriptions and HTTP response headers; media bytes were not decoded."
+  },
+  "rights_sources": {
+    "nps-ownership": {
+      "url": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "title": "NPS Disclaimer — Ownership",
+      "checked_date_utc": "2026-10-24",
+      "short_excerpt": "It may be distributed or copied as permitted by applicable law.",
+      "summary_en": "NPS-created material is generally public domain unless otherwise indicated. Commercial republication copyright notices must refer to the original U.S. Government work. Third-party rights and protected government marks are excluded from a blanket clearance.",
+      "summary_zh": "NPS 自制素材除另有说明外通常为公有领域。商业再发布的版权说明须提及原美国政府作品。第三方权利及受保护政府标记不属于一概授权范围。"
+    },
+    "deva-broll": {
+      "url": "https://www.nps.gov/deva/learn/photosmultimedia/b-roll-footage.htm",
+      "title": "Death Valley National Park — B-Roll Footage",
+      "checked_date_utc": "2026-10-24",
+      "short_excerpt": "These silent videos are in the public domain and can be used for any purpose.",
+      "summary_en": "The collection explicitly clears these silent videos for any purpose and requests an NPS courtesy credit.",
+      "summary_zh": "合集明确静音视频为公有领域、可作任何用途，并请求保留 NPS courtesy 署名。",
+      "credit_spelling_note": "The source page spells Courtesy as Courtsey. The delivered credit corrects the spelling."
+    },
+    "jotr-broll": {
+      "url": "https://www.nps.gov/jotr/learn/photosmultimedia/broll.htm",
+      "title": "Joshua Tree National Park — B-Roll Video Index",
+      "checked_date_utc": "2026-10-24",
+      "short_excerpt": "All video files in this archive are \"public domain\" clips.",
+      "summary_en": "The collection permits free use without an NPS release, prohibits implying NPS endorsement and excludes the protected arrowhead from public use.",
+      "summary_zh": "合集允许免费使用、无需 NPS release；不得暗示 NPS 背书，受保护 arrowhead 不可擅自使用。"
+    }
+  },
+  "shared_obligations": {
+    "credit_en": "Courtesy of the National Park Service.",
+    "commercial_copyright_notice_en": "No claim to original U.S. Government works.",
+    "no_nps_endorsement": true,
+    "no_unlicensed_government_marks": true,
+    "retain_provenance": true,
+    "license_is_cc0": false,
+    "basis_en": "Official NPS public-domain statements and NPS ownership policy; this record does not assert identical copyright treatment in every jurisdiction.",
+    "basis_zh": "依据 NPS 官方公有领域声明及所有权政策；不声称所有司法辖区版权规则相同。",
+    "other_rights_en": "Evaluate any visible people, trademarks, third-party works or restricted material separately. Generated images, models, software, fonts and audio are outside this plate clearance.",
+    "other_rights_zh": "如画面存在人物、商标、第三方作品或受限内容须另行核查。生成图片、模型、软件、字体及音频不包含于本 plate 授权核验。"
+  },
+  "candidates": [
+    {
+      "id": "nps-deva-racetrack",
+      "selection": "primary-candidate",
+      "title": "Racetrack",
+      "creator_credit": "NPS Video",
+      "page_url": "https://www.nps.gov/media/video/view.htm?id=582F570D-B9C7-8138-0C0BDC270BD0D080",
+      "player_source_url": "https://www.nps.gov/media/video/embed.htm?id=582F570D-B9C7-8138-0C0BDC270BD0D080",
+      "file_url": "https://www.nps.gov/nps-audiovideo/legacy/deva/582F570D-B9C7-8138-0C0BDC270BD0D080/deva-RacetrackBRoll_1280x720.mp4",
+      "checked_date_utc": "2026-10-24",
+      "per_asset_copyright": {
+        "status": "passed",
+        "credit_nps_without_copyright_symbol": true,
+        "summary_en": "Official asset page credits NPS Video without a copyright symbol. Its usage note identifies NPS-credited multimedia without that symbol as public domain.",
+        "summary_zh": "官方单片页署名 NPS Video、无版权符号；其说明将无该符号的 NPS 署名媒体识别为公有领域。"
+      },
+      "rights_review": {
+        "final_film_public_display": {
+          "status": "passed",
+          "scope": "official copyright permission, subject to shared obligations; not final publication approval",
+          "evidence_refs": ["page_url", "deva-broll", "nps-ownership"]
+        },
+        "editable_project_plate_redistribution": {
+          "status": "passed",
+          "scope": "original or cropped plate, subject to shared obligations; only this plate's copyright",
+          "evidence_refs": ["page_url", "deva-broll", "nps-ownership"]
+        }
+      },
+      "advertised_media": {
+        "width_px": 1280,
+        "height_px": 720,
+        "player_label": "720p",
+        "duration_seconds_from_page": 168,
+        "audio_from_page": "silent",
+        "metadata_decoded": false,
+        "fps": null
+      },
+      "head_verification": {
+        "http_status": 200,
+        "content_type": "video/mp4",
+        "content_length_bytes": 41972962,
+        "last_modified": "Tue, 27 Apr 2021 22:38:06 GMT",
+        "etag": "\"50e95ea9f263a3d741d8e9c3d084ce95-6\""
+      },
+      "fit_en": "Dry-lake terrain is a candidate for an eight-second prop integration with a ground contact shadow. Actual framing and stable duration still require visual selection.",
+      "fit_zh": "干湖地面可作为八秒道具及接触阴影合成候选；实际构图和稳定时长仍须看片选段。",
+      "sha256": null,
+      "technical_inspection": {
+        "status": "not-tested",
+        "unverified": ["decoded dimensions and fps", "selected frame range", "actual camera movement", "lens distortion", "color metadata", "people and marks", "pixel quality"]
+      }
+    },
+    {
+      "id": "nps-deva-badwater-basin",
+      "selection": "alternate-candidate",
+      "title": "Badwater Basin",
+      "creator_credit": "NPS Video",
+      "page_url": "https://www.nps.gov/media/video/view.htm?id=55850C7D-FFC3-6103-D5C288C1FF969A31",
+      "player_source_url": "https://www.nps.gov/media/video/embed.htm?id=55850C7D-FFC3-6103-D5C288C1FF969A31",
+      "file_url": "https://www.nps.gov/nps-audiovideo/legacy/deva/55850C7D-FFC3-6103-D5C288C1FF969A31/deva-BadwaterBasinBRoll_1280x720.mp4",
+      "checked_date_utc": "2026-10-24",
+      "per_asset_copyright": {
+        "status": "passed",
+        "credit_nps_without_copyright_symbol": true,
+        "summary_en": "Official asset page credits NPS Video without a copyright symbol and carries the NPS public-domain usage note.",
+        "summary_zh": "官方单片页署名 NPS Video、无版权符号，并附 NPS 公有领域使用说明。"
+      },
+      "rights_review": {
+        "final_film_public_display": {
+          "status": "passed",
+          "scope": "official copyright permission, subject to shared obligations; not final publication approval",
+          "evidence_refs": ["page_url", "deva-broll", "nps-ownership"]
+        },
+        "editable_project_plate_redistribution": {
+          "status": "passed",
+          "scope": "original or cropped plate, subject to shared obligations; only this plate's copyright",
+          "evidence_refs": ["page_url", "deva-broll", "nps-ownership"]
+        }
+      },
+      "advertised_media": {
+        "width_px": 1280,
+        "height_px": 720,
+        "player_label": "720p",
+        "duration_seconds_from_page": 203,
+        "audio_from_page": "silent",
+        "metadata_decoded": false,
+        "fps": null
+      },
+      "head_verification": {
+        "http_status": 200,
+        "content_type": "video/mp4",
+        "content_length_bytes": 58673341,
+        "last_modified": "Tue, 27 Apr 2021 22:37:51 GMT",
+        "etag": "\"30ff2e4d87ae7b318851c703e8fb6bfc-7\""
+      },
+      "fit_en": "Open salt-flat terrain is an alternate for distant structures or a grounded prop; no specific shot or camera behavior has been accepted.",
+      "fit_zh": "开阔盐湖地面可作为远景建筑或落地道具备选；尚未验收具体镜头或机位运动。",
+      "sha256": null,
+      "technical_inspection": {
+        "status": "not-tested",
+        "unverified": ["decoded dimensions and fps", "selected frame range", "actual camera movement", "lens distortion", "color metadata", "people and marks", "pixel quality"]
+      }
+    },
+    {
+      "id": "nps-jotr-pinto-basin-fog",
+      "selection": "alternate-candidate",
+      "title": "Fog and Sunrise at the Pinto Basin",
+      "creator_credit": "NPS Video",
+      "page_url": "https://www.nps.gov/media/video/view.htm?id=C9DD7913-D28D-446B-A93F-72E3B7764F8B",
+      "collection_clip_page_url": "https://www.nps.gov/jotr/learn/photosmultimedia/fog-clips.htm",
+      "player_source_url": "https://www.nps.gov/media/video/embed.htm?id=C9DD7913-D28D-446B-A93F-72E3B7764F8B",
+      "file_url": "https://www.nps.gov/nps-audiovideo/audiovideo/020d2f3c-1521-4478-9a7c-03aff82c8a071080p.mp4",
+      "checked_date_utc": "2026-10-24",
+      "per_asset_copyright": {
+        "status": "passed",
+        "credit_nps_without_copyright_symbol": true,
+        "summary_en": "Official asset-page HTML credits NPS Video without a copyright symbol and carries the NPS public-domain usage note.",
+        "summary_zh": "官方单片页 HTML 署名 NPS Video、无版权符号，并附 NPS 公有领域使用说明。"
+      },
+      "rights_review": {
+        "final_film_public_display": {
+          "status": "passed",
+          "scope": "official copyright permission, subject to shared obligations; not final publication approval",
+          "evidence_refs": ["page_url", "jotr-broll", "nps-ownership"]
+        },
+        "editable_project_plate_redistribution": {
+          "status": "passed",
+          "scope": "original or cropped plate, subject to shared obligations; only this plate's copyright",
+          "evidence_refs": ["page_url", "jotr-broll", "nps-ownership"]
+        }
+      },
+      "advertised_media": {
+        "width_px": null,
+        "height_px": 1080,
+        "player_label": "1080p",
+        "duration_seconds_from_page": 15.015,
+        "audio_from_page": "unknown",
+        "metadata_decoded": false,
+        "fps": null
+      },
+      "head_verification": {
+        "http_status": 200,
+        "content_type": "video/mp4",
+        "content_length_bytes": 7005252,
+        "last_modified": "Fri, 07 May 2021 04:40:43 GMT",
+        "etag": "\"c22cc0a35105e13018c3716d183b795c\""
+      },
+      "fit_en": "Small HD-labelled source with rolling fog; possible depth-layer integration, with a higher occlusion/matte workload than open dry terrain. Actual motion is unreviewed.",
+      "fit_zh": "体积较小、官方标为高清并包含流雾，可尝试景深分层；遮挡与蒙版工作量预计高于开阔干地，实际运动尚未评审。",
+      "sha256": null,
+      "technical_inspection": {
+        "status": "not-tested",
+        "unverified": ["decoded dimensions and fps", "selected frame range", "actual camera movement", "lens distortion", "color metadata", "audio track", "people and marks", "pixel quality"]
+      }
+    }
+  ]
+}

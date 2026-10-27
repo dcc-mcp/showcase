@@ -7,11 +7,79 @@ import unittest
 import signal
 from unittest.mock import Mock, patch
 from pathlib import Path
-from author_native import envelope
-from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, check_engine_log, copy_game, isolated_env, isolated_output
-from capture_native import collect_composition_studies, stop_input_runtime, wait_for
+from author_native import envelope, script_authoring_plan, script_request_size, SCRIPT_REQUEST_BUDGET
+from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, TROPICAL_FILES, TROPICAL_NOTICES, check_engine_log, copy_game, isolated_env, isolated_output
+from capture_native import import_native_resources, collect_composition_studies, stop_input_runtime, wait_for
 from observers import CHINESE_LABELS, observer_receipts, validate_language_frame, validate_touch_release
-from export_web import copy_asset_notices, raw_include_filter
+from export_web import copy_asset_notices, raw_include_filter, copy_web_audio, WEB_AUDIO_FILES, prepare_audio_before_game
+
+
+class BoundedScriptAuthoringTests(unittest.TestCase):
+    @staticmethod
+    def restore(plan):
+        assert plan[0][0] == "create_script"
+        source = plan[0][1]["source"]
+        for action, arguments in plan[1:]:
+            assert action == "edit_script"
+            assert arguments["replace_all"] is False
+            assert source.count(arguments["search"]) == 1
+            source = source.replace(arguments["search"], arguments["replace"], 1)
+        return source
+
+    def test_small_source_uses_one_typed_create(self):
+        source = "extends Node\nfunc sample() -> void:\n pass\n"
+        plan = script_authoring_plan("res://sample.gd", source)
+        self.assertEqual(len(plan), 1)
+        self.assertEqual(self.restore(plan), source)
+
+    def test_current_main_is_bounded_and_restores_exact_utf8_bytes(self):
+        source = (Path(__file__).resolve().parent.parent / "game/main.gd").read_text()
+        self.assertGreater(script_request_size("create_script", {"path":"res://main.gd", "source":source, "overwrite":True}), 65535)
+        plan = script_authoring_plan("res://main.gd", source)
+        self.assertGreater(len(plan), 1)
+        for action, arguments in plan:
+            self.assertLessEqual(script_request_size(action, arguments), SCRIPT_REQUEST_BUDGET)
+        self.assertEqual(self.restore(plan).encode(), source.encode())
+
+    def test_encoded_budget_counts_unicode_quotes_and_backslashes(self):
+        source = 'extends Node\n'
+        for index in range(12):
+            source += f'func sample_{index}() -> void:\n var label = ' + json.dumps('海岛路径\\"' * 200, ensure_ascii=False) + '\n\n'
+        self.assertLess(len(source.encode()), SCRIPT_REQUEST_BUDGET)
+        plan = script_authoring_plan("res://sample.gd", source)
+        self.assertGreater(len(plan), 1)
+        for action, arguments in plan:
+            self.assertLessEqual(script_request_size(action, arguments), SCRIPT_REQUEST_BUDGET)
+        self.assertEqual(self.restore(plan), source)
+
+    def test_oversized_individual_function_fails_before_mutation(self):
+        source = 'extends Node\nfunc huge() -> void:\n #' + 'x' * 65536 + '\n'
+        with self.assertRaisesRegex(ValueError, "complete void function"):
+            script_authoring_plan("res://sample.gd", source)
+
+    def test_no_safe_void_body_fails_before_mutation(self):
+        source = 'extends Node\nconst VALUE = "' + 'x' * 65536 + '"\n'
+        with self.assertRaisesRegex(ValueError, "cannot be authored"):
+            script_authoring_plan("res://sample.gd", source)
+
+    def test_intervening_global_or_annotation_is_not_silently_removed(self):
+        for declaration in ('var sentinel: int = 42', '@warning_ignore("unused_variable")', 'static func other() -> void:'):
+            source = 'extends Node\nfunc huge() -> void:\n #' + 'x' * 40000 + '\n' + declaration + '\nfunc second() -> void:\n #' + 'y' * 20000 + '\n'
+            with self.subTest(declaration=declaration), self.assertRaisesRegex(ValueError, "unsupported top-level"):
+                script_authoring_plan("res://sample.gd", source)
+
+    def test_multiline_string_is_refused_in_staged_subset(self):
+        source = 'extends Node\nfunc huge() -> void:\n var text = """' + 'x' * 40000 + '"""\nfunc second() -> void:\n #' + 'y' * 20000 + '\n'
+        with self.assertRaisesRegex(ValueError, "multiline syntax"):
+            script_authoring_plan("res://sample.gd", source)
+
+    def test_invalid_paths_and_empty_sources_fail_closed(self):
+        for path in ('main.gd', 'res://../main.gd', 'res://main.txt', None):
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                script_authoring_plan(path, "extends Node")
+        for source in ('', ' \n', None):
+            with self.subTest(source=source), self.assertRaises(ValueError):
+                script_authoring_plan("res://main.gd", source)
 
 
 class HarnessTests(unittest.TestCase):
@@ -153,7 +221,7 @@ class HarnessTests(unittest.TestCase):
 
     def language_receipt(self):
         return {"schema": 1, "change_id": 1, "previous": "en", "language": "zh", "trigger": "key_L",
-                "labels": {**CHINESE_LABELS, "prompt": "E · 阅读海图"}, "missing_codepoints": []}
+                "labels": {**CHINESE_LABELS, "prompt": "靠近后即可互动"}, "missing_codepoints": []}
 
     def test_touch_validation_computes_actual_horizontal_distance(self):
         self.assertAlmostEqual(validate_touch_release(self.touch_receipt()), .5)
@@ -188,7 +256,7 @@ class HarnessTests(unittest.TestCase):
     def test_language_validation_requires_actual_rendered_chinese_labels(self):
         labels = validate_language_frame(self.language_receipt())
         self.assertEqual(labels["title"], "潮 汐 圣 所")
-        self.assertEqual(labels["prompt"], "E · 阅读海图")
+        self.assertEqual(labels["prompt"], "靠近后即可互动")
 
     def test_language_validation_rejects_untranslated_prompt_and_missing_glyph(self):
         receipt = self.language_receipt()
@@ -203,6 +271,13 @@ class HarnessTests(unittest.TestCase):
         receipt["labels"]["title"] = "TIDAL SANCTUARY"
         with self.assertRaisesRegex(ValueError, "title"):
             validate_language_frame(receipt)
+
+    def test_fresh_spawn_language_rejects_empty_or_reachable_prompt(self):
+        for prompt in ("", "E · 阅读海图", "Move closer to interact", None):
+            receipt = self.language_receipt()
+            receipt["labels"]["prompt"] = prompt
+            with self.subTest(prompt=prompt), self.assertRaisesRegex(ValueError, "prompt"):
+                validate_language_frame(receipt)
 
     def test_language_validation_rejects_stale_or_non_keyboard_transition(self):
         with self.assertRaisesRegex(ValueError, "stale"):
@@ -285,12 +360,96 @@ class HarnessTests(unittest.TestCase):
             "assets/polyhaven/stone-rough.jpg.bin",
         }
         self.assertEqual(set(RAW_IMAGE_FILES), expected_buffers)
-        self.assertEqual(set(raw_include_filter().split(",")), {"*.otf", *expected_buffers})
+        self.assertEqual(set(raw_include_filter().split(",")), {"*.otf", "assets/story/story.en-zh.json", *expected_buffers})
         self.assertNotIn("*.bin", raw_include_filter())
         expected = expected_buffers | {f"assets/polyhaven/fern-{index}.res" for index in range(4)}
         expected |= {"assets/POLYHAVEN-LICENSE.txt", "assets/POLYHAVEN-SOURCE.json"}
         self.assertTrue(expected.issubset(GAME_FILES))
         self.assertEqual(len(GAME_FILES), len(set(GAME_FILES)))
+
+    def test_fresh_native_import_is_bounded_and_checks_every_scene(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); project = root / "game"; out = root / "out"; out.mkdir()
+            for name in TROPICAL_FILES:
+                path = project / name; path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"unit fixture, not a real model")
+                Path(str(path) + ".import").write_text('importer="scene"\ntype="PackedScene"\n')
+            result = Mock(returncode=0, stdout="Import complete", stderr="")
+            with patch("capture_native.subprocess.run", return_value=result) as run:
+                receipt = import_native_resources("godot", project, out)
+            self.assertEqual(run.call_args.args[0], ["godot", "--headless", "--path", str(project), "--editor", "--import", "--quit"])
+            self.assertEqual(run.call_args.kwargs["timeout"], 240)
+            self.assertEqual(len(receipt["source_imports"]), 8)
+            self.assertTrue(receipt["passed"])
+            self.assertEqual((out / "native-import.log").read_text(), "Import complete")
+
+    def test_fresh_native_import_refuses_error_nonzero_and_missing_metadata(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); out = root / "out"; out.mkdir()
+            for result in [Mock(returncode=1, stdout="", stderr=""),
+                           Mock(returncode=0, stdout="", stderr="ERROR: import failed"),
+                           Mock(returncode=0, stdout="Import complete", stderr="")]:
+                with self.subTest(result=result), patch("capture_native.subprocess.run", return_value=result), self.assertRaises(RuntimeError):
+                    import_native_resources("godot", root / "game", out)
+
+    def test_tropical_manifest_has_exact_scene_and_notice_paths(self):
+        names = {"palm-a", "palm-b", "understory-a", "understory-b", "bush-a",
+                 "shore-stone-a", "shore-stone-b", "explorer"}
+        self.assertEqual(set(TROPICAL_FILES), {f"assets/tropical/{name}.glb" for name in names})
+        self.assertEqual(set(TROPICAL_NOTICES), {"assets/tropical/FOREST-LICENSE.txt",
+            "assets/tropical/ADVENTURERS-LICENSE.txt", "assets/tropical/SOURCE.json"})
+        self.assertTrue(set(TROPICAL_FILES + TROPICAL_NOTICES).issubset(GAME_FILES))
+        self.assertTrue(set(TROPICAL_NOTICES).issubset(ASSET_NOTICE_FILES))
+
+    def test_tropical_glbs_match_source_manifest_and_are_embedded(self):
+        import hashlib
+        import json
+        source = Path(__file__).resolve().parent.parent / "game/assets/tropical"
+        records = json.loads((source / "SOURCE.json").read_text())["game_assets"]
+        self.assertEqual(set(records), {Path(name).name for name in TROPICAL_FILES})
+        for filename, record in records.items():
+            with self.subTest(filename=filename):
+                raw = (source / filename).read_bytes()
+                self.assertEqual(len(raw), record["bytes"])
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), record["sha256"])
+                self.assertEqual(struct.unpack_from("<4sII", raw), (b"glTF", 2, len(raw)))
+                size, kind = struct.unpack_from("<I4s", raw, 12)
+                self.assertEqual(kind, b"JSON")
+                content = json.loads(raw[20:20+size])
+                self.assertFalse([row for field in ("buffers", "images")
+                                  for row in content.get(field, []) if "uri" in row])
+                if filename == "explorer.glb":
+                    self.assertEqual({clip["name"] for clip in content["animations"]}, {"Idle", "Walk", "Swim"})
+                    self.assertEqual(len(content["skins"][0]["joints"]), 23)
+
+    def test_export_copies_original_web_audio_and_public_helper_byte_for_byte(self):
+        native = Path(__file__).parent.parent / "game"
+        with tempfile.TemporaryDirectory() as temporary:
+            site = Path(temporary)
+            copy_web_audio(native, site)
+            self.assertEqual({p.relative_to(site).as_posix() for p in site.rglob("*") if p.is_file()},
+                             {"web_audio.js", *WEB_AUDIO_FILES})
+            for name in ("web_audio.js", *WEB_AUDIO_FILES):
+                self.assertEqual((site / name).read_bytes(), (native / name).read_bytes())
+        project = (native / "project.godot").read_text()
+        self.assertIn('driver/driver.web="Dummy"', project)
+        self.assertIn('driver/mix_rate.web=44100', project)
+        self.assertNotIn('driver/driver="Dummy"', project)
+
+    def test_official_boot_predecodes_before_engine_start_without_audio_activation(self):
+        shell = "(function () {\nengine.startGame({onProgress: report}).then(done, failed);\n}());"
+        patched = prepare_audio_before_game(shell)
+        self.assertIn("(async function () {", patched)
+        self.assertLess(patched.index("await window.TidalWebAudio.initialize("), patched.index("engine.startGame({"))
+        self.assertIn("engine.startGame({onProgress: report}).then(done, failed);", patched)
+        self.assertNotIn(".resume(", patched)
+        self.assertNotIn("TidalWebAudio.start(", patched)
+        for name in WEB_AUDIO_FILES:
+            self.assertIn(name, patched)
+        for changed in (shell.replace("(function () {", "(() => {"), shell + shell,
+                        shell.replace("engine.startGame({", "engine.start({")):
+            with self.assertRaisesRegex(RuntimeError, "boot scope changed"):
+                prepare_audio_before_game(changed)
 
     def test_export_preserves_all_asset_notices_byte_for_byte(self):
         with tempfile.TemporaryDirectory() as root:
@@ -302,7 +461,7 @@ class HarnessTests(unittest.TestCase):
             copy_asset_notices(native, site)
             for name in ASSET_NOTICE_FILES:
                 self.assertEqual((site / name).read_bytes(), (native / name).read_bytes())
-            self.assertEqual(len(list(site.rglob("*.txt"))) + len(list(site.rglob("*.json"))), 4)
+            self.assertEqual(len(list(site.rglob("*.txt"))) + len(list(site.rglob("*.json"))), len(ASSET_NOTICE_FILES))
 
 
 if __name__ == "__main__":

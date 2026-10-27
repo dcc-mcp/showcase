@@ -1,0 +1,9 @@
+Tidekeeper original audio
+
+The music loop and four event cues in this directory are original synthesized
+audio created for the Tidal Sanctuary case. They contain no third-party audio
+samples. These original case assets retain their existing rights and are
+excluded from the repository-wide MIT grant. Publication of a playable export
+makes no additional license grant.
+
+SOURCE.json records the runtime assets and their SHA-256 checksums.

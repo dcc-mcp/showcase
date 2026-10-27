@@ -1,9 +1,13 @@
-"""Read-only comparison to Git objects, without invoking clean/smudge filters."""
+"""Read-only Git content comparison, including exact hydrated LFS objects."""
 import argparse
 import hashlib
 import os
 from pathlib import Path
 import subprocess
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from tracked_file_bytes import MAX_LFS_POINTER_BYTES, matches_lfs_content
 
 
 def verify(root: Path, ref='HEAD'):
@@ -29,7 +33,12 @@ def verify(root: Path, ref='HEAD'):
             data = path.read_bytes()
         actual = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
         if actual != expected:
-            raise ValueError(f'Tracked bytes changed: {path}')
+            pointer = b''
+            if mode != '120000' and int(subprocess.check_output(
+                    ['git', 'cat-file', '-s', expected], cwd=root)) <= MAX_LFS_POINTER_BYTES:
+                pointer = subprocess.check_output(['git', 'cat-file', 'blob', expected], cwd=root)
+            if not matches_lfs_content(pointer, len(data), hashlib.sha256(data).hexdigest()):
+                raise ValueError(f'Tracked bytes changed: {path}')
         checked += 1
     if not checked:
         raise ValueError('No tracked files checked')
@@ -40,4 +49,4 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ref', default='HEAD')
     args = parser.parse_args()
-    print(f'Exact raw Git bytes and modes match for {verify(Path.cwd(), args.ref)} tracked files.')
+    print(f'Exact Git content and modes match for {verify(Path.cwd(), args.ref)} tracked files.')

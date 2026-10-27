@@ -31,7 +31,7 @@ def envelope(response):
 
 # Regression fixtures depend on the authored scripts and never belong in the
 # editor's initial scan. They enter only the stopped, finished native package.
-DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd")
+DEFERRED_TEST_FILES = ("verify_swimming.gd", "verify_treasure.gd", "verify_collision.gd", "verify_audio.gd", "verify_story.gd")
 EDITOR_PROBE_PATH = "res://tidal_ci_editor_probe.gd"
 EDITOR_PROBE_SOURCE = """@tool
 extends RefCounted
@@ -47,8 +47,80 @@ func inspect(arguments: Dictionary) -> Dictionary:
 """
 
 
+# Pinned addon 0.9.6 retains WebSocketPeer's 65,535-byte inbound buffer.
+# Leave substantial room for bridge authorization/envelope metadata. Count JSON
+# escapes and UTF-8 bytes, not source characters. No addon limits are modified.
+SCRIPT_REQUEST_BUDGET = 48 * 1024
+
+
+def script_request_size(action, arguments):
+    wire = {"type":"request", "jsonrpc":"2.0", "id":"0"*64,
+            "method":"capability."+action, "params":arguments}
+    return len(json.dumps(wire, ensure_ascii=True).encode("utf-8"))
+
+
+def script_authoring_plan(path, source):
+    """Typed create/exact-edit plan whose temporary scripts remain valid.
+
+    Only complete explicitly void function bodies may be staged as `pass`.
+    Names/signatures/globals remain available to the parser. Every body is then
+    restored through the official exact-search edit action. Any ambiguity,
+    oversized individual edit or impossible scaffold fails before host mutation.
+    """
+    if not isinstance(path, str) or not path.startswith("res://") or not path.endswith(".gd") or ".." in path:
+        raise ValueError("Script authoring requires an explicit project GDScript path")
+    if not isinstance(source, str) or not source.strip():
+        raise ValueError("Script authoring source is empty")
+    arguments = {"path":path, "source":source, "overwrite":True}
+    if script_request_size("create_script", arguments) <= SCRIPT_REQUEST_BUDGET:
+        return [("create_script", arguments)]
+    starts = list(re.finditer(r"^func [^\n]*\n", source, re.M))
+    candidates = []
+    for index, match in enumerate(starts):
+        header = match.group()
+        if not re.search(r"->\s*void:\n$", header):
+            continue
+        end = starts[index+1].start() if index+1 < len(starts) else len(source)
+        body = source[match.start():end]
+        # This bounded planner is intentionally narrower than a GDScript parser.
+        # Never drop an intervening global, annotation or static function while
+        # staging a body. Reject multiline strings whose indentation semantics
+        # cannot be established from this line-oriented subset.
+        if any(line and not line[0].isspace() and not line.startswith("#")
+               for line in body.splitlines()[1:]) or "\"\"\"" in body or "'''" in body:
+            raise ValueError("Staged function contains unsupported top-level or multiline syntax")
+        marker = "TIDAL_MCP_BODY_"+hashlib.sha256(body.encode()).hexdigest()[:24]
+        if marker in source:
+            raise ValueError("Temporary script marker collides with source")
+        stub = header+" # "+marker+"\n pass\n\n"
+        edit = {"path":path, "search":stub, "replace":body, "replace_all":False}
+        if script_request_size("edit_script", edit) > SCRIPT_REQUEST_BUDGET:
+            raise ValueError("A complete void function exceeds the bounded typed edit budget")
+        if len(body) > len(stub):
+            candidates.append((body, stub, edit))
+    scaffold, edits = source, []
+    for body, stub, edit in sorted(candidates, key=lambda item:len(item[0].encode()), reverse=True):
+        if scaffold.count(body) != 1:
+            raise ValueError("A staged function is not uniquely identifiable")
+        scaffold = scaffold.replace(body, stub, 1)
+        edits.append(("edit_script", edit))
+        arguments = {"path":path, "source":scaffold, "overwrite":True}
+        if script_request_size("create_script", arguments) <= SCRIPT_REQUEST_BUDGET:
+            break
+    else:
+        raise ValueError("Script cannot be authored within the pinned bridge byte budget")
+    reconstructed = scaffold
+    for _, edit in edits:
+        if reconstructed.count(edit["search"]) != 1:
+            raise ValueError("Exact typed script edit is ambiguous")
+        reconstructed = reconstructed.replace(edit["search"], edit["replace"], 1)
+    if reconstructed != source:
+        raise ValueError("Typed script plan does not restore the exact source bytes")
+    return [("create_script", arguments), *edits]
+
+
 def initial_copy_files():
-    excluded = {"main.gd", "swim_controller.gd", "start.tscn", "project.godot", *DEFERRED_TEST_FILES}
+    excluded = {"main.gd", "swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "start.tscn", "project.godot", "water.gdshader", *DEFERRED_TEST_FILES}
     return tuple(name for name in GAME_FILES if name not in excluded)
 
 
@@ -223,21 +295,50 @@ def main():
             time.sleep(.1)
         raise TimeoutError("Editor did not establish scan-idle file readback at " + boundary)
 
+    def author_script(filename, known_scripts):
+        path = "res://"+filename
+        original = (source / filename).read_text()
+        plan = script_authoring_plan(path, original)
+        # Build and validate the whole plan before the first mutation. A failed
+        # step aborts this isolated candidate; no partial file is ever packaged.
+        for index, (action, arguments) in enumerate(plan):
+            call("godot_script__"+action, arguments)
+            wait_editor_idle("after %s typed step %d" % (filename, index+1),
+                             {**known_scripts, path:"GDScript"})
+            call("godot_script__validate_script", {"path":path})
+        if sha256(project / filename) != sha256(source / filename):
+            raise RuntimeError("Typed script final byte identity failed: "+filename)
+        report.setdefault("script_transfers", []).append({"path":path,
+            "source_sha256":sha256(source / filename), "source_bytes":len(original.encode()),
+            "request_budget_bytes":SCRIPT_REQUEST_BUDGET,
+            "steps":[{"action":action,"encoded_request_bytes":script_request_size(action,args)} for action,args in plan]})
+
     try:
         editor = launch()
         ready()
         inventory()
-        call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script", "godot-editor"]})
+        call("load_skill", {"skill_names": ["godot-project-management", "godot-scene-management", "godot-script", "godot-editor", "godot-shader"]})
         inventory()
         wait_editor_idle("initial dependency-free project", {})
         call("godot_project_management__get_project_info", {})
-        call("godot_script__create_script", {"path": "res://swim_controller.gd", "source": (source / "swim_controller.gd").read_text(), "overwrite": True})
-        wait_editor_idle("after swim script creation", {"res://swim_controller.gd": "GDScript"})
-        call("godot_script__validate_script", {"path": "res://swim_controller.gd"})
-        call("godot_script__create_script", {"path": "res://main.gd", "source": (source / "main.gd").read_text(), "overwrite": True})
-        scripts = {"res://swim_controller.gd": "GDScript", "res://main.gd": "GDScript"}
-        wait_editor_idle("after main script creation", scripts)
-        call("godot_script__validate_script", {"path": "res://main.gd"})
+        shader_source = (source / "water.gdshader").read_text()
+        shader_arguments = {"path":"res://water.gdshader", "shader_type":"spatial", "source":shader_source}
+        if script_request_size("create_shader", shader_arguments) > SCRIPT_REQUEST_BUDGET:
+            raise RuntimeError("Shader exceeds the established typed request budget")
+        written = call("godot_shader__create_shader", shader_arguments)
+        written = written.get("context", written)
+        if written.get("written") is not True:
+            raise RuntimeError("Official shader creation did not write the resource")
+        wait_editor_idle("after typed shader creation", {"res://water.gdshader":"Shader"})
+        shader_readback = call("godot_shader__read_shader", {"path":"res://water.gdshader"})
+        shader_readback = shader_readback.get("context", shader_readback)
+        if shader_readback.get("content") != shader_source or sha256(project / "water.gdshader") != sha256(source / "water.gdshader"):
+            raise RuntimeError("Actual shader saved text differs from source")
+        report["shader_transfer"] = {"route":"official create_shader/read_shader", "path":"res://water.gdshader", "sha256":sha256(project / "water.gdshader")}
+        scripts = {}
+        for dependency in ("swim_controller.gd", "tide_audio.gd", "tide_interface.gd", "main.gd"):
+            author_script(dependency, scripts)
+            scripts["res://"+dependency] = "GDScript"
         wait_editor_idle("before scene creation", scripts)
         call("godot_scene_management__create_scene", {"path": "res://start.tscn", "root_type": "Node3D", "root_name": "TidalSanctuary", "open": True})
         wait_editor_idle("after scene creation before attachment", {**scripts, "res://start.tscn": "PackedScene"})
@@ -292,7 +393,7 @@ def main():
         server.stop()
         log.close()
         report["typed_calls"] = [{"name": item["request"]["params"]["name"],
-            "arguments": {key: {"sha256": hashlib.sha256(value.encode()).hexdigest()} if key == "source" else value
+            "arguments": {key: {"sha256": hashlib.sha256(value.encode()).hexdigest()} if key in ("source", "replace") else value
                 for key, value in item["request"]["params"]["arguments"].items()}}
             for item in receipts if item["request"]["method"] == "tools/call"]
         write_json(out / "authoring.json", report)
