@@ -43,6 +43,9 @@ jobs:
       - name: Verify courier offline preflight refusals
         run: python scripts/character_animation/courier-rig-motion-comparison/test_preflight.py
 
+      - name: Verify deferred Nuke build transactions without a host
+        run: python scripts/nuke_desert_relay/test_build_nuke.py
+
       - name: Validate showcase entries
         run: python scripts/validate_entry.py docs/showcase
 
