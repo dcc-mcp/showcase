@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "scope": "Save-and-title recovery after the prior runtime freeze: staged headless Godot engine and actual isolated filesystem tests. Receipt compilation ran no tests or UI actions. No new OS input, GUI pixels, Web, GPU film or subjective audio acceptance.",
+  "environment": {
+    "version": "4.6.3.stable.official.7d41c59c4",
+    "sha256": "63b3b2208819714c9677fbfdd8217c5b7dee8ecf5f383502e826bc9e2227ff5a"
+  },
+  "source_freeze": {
+    "basename": "current-runtime-freeze-03.public.json",
+    "sha256": "64a9ed8163a439d428449cc448c0012f65305732fa9a2aa2539f73c3fb34f70c",
+    "prior_basename": "arpg-freeze-01.public.json",
+    "prior_sha256": "132bfb3506cde4344acc540004ee9face4e351d3895007c540a841e5886bfdea",
+    "prior_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+    "runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+    "aggregate_algorithm": "SHA256 of compact JSON file table with sorted object keys",
+    "files_independently_rehashed": 41,
+    "only_changed_runtime_file": "scripts/main.gd",
+    "other_runtime_files_independently_verified_unchanged": 40,
+    "files": [
+      {
+        "path": "assets/arch.glb",
+        "bytes": 309912,
+        "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b"
+      },
+      {
+        "path": "assets/asset-map.json",
+        "bytes": 7198,
+        "sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5"
+      },
+      {
+        "path": "assets/chest-interactive.glb",
+        "bytes": 2444872,
+        "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5"
+      },
+      {
+        "path": "assets/chest.glb",
+        "bytes": 2144840,
+        "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+      },
+      {
+        "path": "assets/column.glb",
+        "bytes": 1308584,
+        "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9"
+      },
+      {
+        "path": "assets/courier-character.glb",
+        "bytes": 11962060,
+        "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2"
+      },
+      {
+        "path": "assets/crystal.glb",
+        "bytes": 692044,
+        "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf"
+      },
+      {
+        "path": "assets/derivative-provenance.json",
+        "bytes": 35419,
+        "sha256": "06b3abfc5b09f834efc3344868ffe49da6ec70b7294b74b8a2a55bd003876805"
+      },
+      {
+        "path": "assets/gate.glb",
+        "bytes": 2213668,
+        "sha256": "06d83425c4e3880eb2759cad754d52942e417851ab0d4fe7a8faa436fd7dd958"
+      },
+      {
+        "path": "assets/guardian-character.glb",
+        "bytes": 17455464,
+        "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60"
+      },
+      {
+        "path": "assets/guardian.glb",
+        "bytes": 705016,
+        "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+      },
+      {
+        "path": "assets/pedestal.glb",
+        "bytes": 680392,
+        "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84"
+      },
+      {
+        "path": "assets/portal.glb",
+        "bytes": 2592960,
+        "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2"
+      },
+      {
+        "path": "assets/shrine.glb",
+        "bytes": 4550948,
+        "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7"
+      },
+      {
+        "path": "assets/stairs.glb",
+        "bytes": 1081016,
+        "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556"
+      },
+      {
+        "path": "audio/AUDIO-SOURCES.json",
+        "bytes": 2119,
+        "sha256": "c2051c95c576168608374fa87fb4b4e3847602a09c058be0b9e520ce2f0497b3"
+      },
+      {
+        "path": "audio/chop.ogg",
+        "bytes": 9370,
+        "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486"
+      },
+      {
+        "path": "audio/creak1.ogg",
+        "bytes": 15761,
+        "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e"
+      },
+      {
+        "path": "audio/footstep00.ogg",
+        "bytes": 9475,
+        "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+      },
+      {
+        "path": "audio/handleCoins.ogg",
+        "bytes": 25394,
+        "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+      },
+      {
+        "path": "audio/knifeSlice.ogg",
+        "bytes": 15532,
+        "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+      },
+      {
+        "path": "audio/metalLatch.ogg",
+        "bytes": 10208,
+        "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+      },
+      {
+        "path": "data/arpg.json",
+        "bytes": 2097,
+        "sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d"
+      },
+      {
+        "path": "export_presets.cfg",
+        "bytes": 604,
+        "sha256": "f95adb3d22d4c5ea199673fd18bbe4866b23a35dd34614d62ecc54764c008b49"
+      },
+      {
+        "path": "project.godot",
+        "bytes": 1021,
+        "sha256": "2befb72f5dfaa8095b2e18e19a3373dc71713c1966907a74357f6528e2b4c935"
+      },
+      {
+        "path": "scenes/main.tscn",
+        "bytes": 211,
+        "sha256": "ac774ec55bdd520c48184c1930e1aed77f369c627282cdc27e5a377a6a180938"
+      },
+      {
+        "path": "scripts/archive_stage.gd",
+        "bytes": 12167,
+        "sha256": "b83ccfee7215e960eac6f5d17883c2a877a1d70d6fefe4c3a0da25338a44f10d"
+      },
+      {
+        "path": "scripts/archive_stage.gd.uid",
+        "bytes": 18,
+        "sha256": "31eb8e5072008259db1836df4bd6522bed3b4a2f02237ac59e9bdbc6b8fe48ff"
+      },
+      {
+        "path": "scripts/courier.gd",
+        "bytes": 4174,
+        "sha256": "8b2d66d6ed9d4a9bc3f5c3c72e17aeeff96ffc5508b2f8e7ca8cc1c2d620af07"
+      },
+      {
+        "path": "scripts/courier.gd.uid",
+        "bytes": 20,
+        "sha256": "bc3f84a2bdf7451bac00945e403936582275f8f76ebb092630700488e98e8141"
+      },
+      {
+        "path": "scripts/enemy_actor.gd",
+        "bytes": 4342,
+        "sha256": "1139bb54eca11b017856ebd0497c25510f1ecf6124ec8c97d69850a5f2c496a0"
+      },
+      {
+        "path": "scripts/enemy_actor.gd.uid",
+        "bytes": 20,
+        "sha256": "f9ec4382bae48c80544ac7ea7f410504cfcb55a8b459194178db31b1ffb3302d"
+      },
+      {
+        "path": "scripts/expedition.gd",
+        "bytes": 15243,
+        "sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65"
+      },
+      {
+        "path": "scripts/expedition.gd.uid",
+        "bytes": 20,
+        "sha256": "cc95070698cd589e0f78c490eef8eb50f20f0f4d967b57214987fc787b474d45"
+      },
+      {
+        "path": "scripts/interface.gd",
+        "bytes": 22691,
+        "sha256": "bd50f0dd39cdd76acfd9071a4d397e9010b8bd7dec09fd39a1cbdcd89b1624fc"
+      },
+      {
+        "path": "scripts/interface.gd.uid",
+        "bytes": 20,
+        "sha256": "302c091568ed70e02af1e44003f2837ba9fed25ee12b47d8f374b3befceb727c"
+      },
+      {
+        "path": "scripts/main.gd",
+        "bytes": 43427,
+        "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+      },
+      {
+        "path": "scripts/main.gd.uid",
+        "bytes": 20,
+        "sha256": "450b0abcd14539030f71f3e34f0737d49791bb6cda412711c81b04e2e450b370"
+      },
+      {
+        "path": "ui/FONT-LICENSE.txt",
+        "bytes": 4301,
+        "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+      },
+      {
+        "path": "ui/FONT-SOURCE.json",
+        "bytes": 509,
+        "sha256": "aeccfeed92c46d1f3de3e0cf5ecf4f2a107d00a05f799927944e0f388b0afee1"
+      },
+      {
+        "path": "ui/relic-sans.otf",
+        "bytes": 111548,
+        "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54"
+      }
+    ]
+  },
+  "source_change": {
+    "file": "scripts/main.gd",
+    "before": {
+      "path": "scripts/main.gd",
+      "bytes": 43170,
+      "sha256": "e7327164aeec654a73f32f0646a09efd520fcf2a6f73f3ed99b5c722fe4d965c"
+    },
+    "after": {
+      "path": "scripts/main.gd",
+      "bytes": 43427,
+      "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+    },
+    "diff_basename": "main-03.patch",
+    "diff_sha256": "c4032e24760908153bd59a2c2e5dfcc1c5656fdba921d8876028dbbb429ffd43",
+    "hunks": [
+      {
+        "current_line": 477,
+        "function": "_consume_events",
+        "change": "Rebuild each drop interaction anchor before checking whether its visual already exists. Cached unpicked chest loot remains interactable after Title Continue."
+      },
+      {
+        "current_line": 504,
+        "function": "_on_action / start",
+        "change": "Won Explore and lost Retry restore canonical in-memory progress before resetting transients; normal Title Continue retains the existing start-and-load-disk path."
+      },
+      {
+        "current_line": 527,
+        "function": "_on_action / menu",
+        "change": "Failed save reports the existing localized failure in the current modal and returns before entering Title. Successful save still closes the bag and enters Title."
+      }
+    ]
+  },
+  "focused_test": {
+    "file": "tests/test_chest_persistence.gd",
+    "sha256": "f0aa2d2c79bec0535cb832cc5495c420bfdd7c449a6d65f65ac240ca4afee4fe",
+    "bytes": 11615,
+    "write_and_recovery_checks": 57,
+    "separate_fresh_process_checks": 5,
+    "asserted_scenarios": [
+      {
+        "name": "Paused Save & Title failure, repeat and Resume preserve in-memory gear/progress and older disk bytes",
+        "test_lines": [
+          106,
+          107,
+          110,
+          113,
+          116,
+          118
+        ],
+        "result": "PASS"
+      },
+      {
+        "name": "English and Chinese modal failure message and effective visibility",
+        "test_lines": [
+          109,
+          114
+        ],
+        "result": "PASS",
+        "boundary": "Native UI property assertions; no pixel or physical-input claim"
+      },
+      {
+        "name": "Won failed Save & Title followed by Explore preserves current completion and unique equipped rewards; picked chest visual stays hidden",
+        "test_lines": [
+          134,
+          136,
+          137
+        ],
+        "result": "PASS"
+      },
+      {
+        "name": "Lost failed Save & Title followed by Retry preserves current gear/rewards and resets transient health safely",
+        "test_lines": [
+          150,
+          152,
+          153
+        ],
+        "result": "PASS"
+      },
+      {
+        "name": "Successful Menu/Title/Continue reloads newly saved gear after write obstruction is removed",
+        "test_lines": [
+          154,
+          157,
+          159
+        ],
+        "result": "PASS"
+      },
+      {
+        "name": "Normal Title Continue restores cached unpicked chest interaction anchor and pickup",
+        "test_lines": [
+          64,
+          67,
+          69
+        ],
+        "result": "PASS"
+      },
+      {
+        "name": "Hinge cancel/pause, fixed base/real lid, one-time reward and backup/corrupt/oversized-primary recovery",
+        "test_lines": [
+          47,
+          48,
+          56,
+          59,
+          60,
+          61,
+          75,
+          81,
+          82,
+          85,
+          86,
+          87,
+          90,
+          91
+        ],
+        "result": "PASS"
+      },
+      {
+        "name": "Separate fresh process restores safe-town gear/opened chest/lid state; repeated interaction cannot duplicate reward",
+        "test_lines": [
+          26,
+          27,
+          28,
+          29,
+          32
+        ],
+        "result": "PASS"
+      }
+    ]
+  },
+  "expected_induced_io_failure": {
+    "method": "An older valid empty QA primary and a unique empty directory at its staging-file path force a real FileAccess WRITE refusal. The obstruction is removed before normal-success checks.",
+    "normal_player_data_accessed": false,
+    "expected_feedback_key": "save_failed",
+    "failure_preserves_older_primary_and_current_in_memory_progress": true,
+    "diagnostic_boundary": "The expected save refusal is checked through return/control-flow and localized modal assertions. Final console logs contain no unhandled ERROR/SCRIPT ERROR/WARNING markers; no such marker is waived."
+  },
+  "test_results": [
+    {
+      "log_basename": "parse-main-03.console.log",
+      "bytes": 75,
+      "sha256": "b16651cbedbab0a7b519f9e5b498eea40cb33bfb72252e264a7f4c2412765d58",
+      "status": "PASS",
+      "process_exit_code": 0,
+      "exit_code_source": "Hash-bound runtime freeze from execution owner",
+      "unhandled_error_warning_or_failure_markers": 0,
+      "scope": "Parse-only engine run; no assertion-count claim",
+      "checks": null
+    },
+    {
+      "log_basename": "parse-test-03.console.log",
+      "bytes": 75,
+      "sha256": "b16651cbedbab0a7b519f9e5b498eea40cb33bfb72252e264a7f4c2412765d58",
+      "status": "PASS",
+      "process_exit_code": 0,
+      "exit_code_source": "Hash-bound runtime freeze from execution owner",
+      "unhandled_error_warning_or_failure_markers": 0,
+      "scope": "Parse-only engine run; no assertion-count claim",
+      "checks": null
+    },
+    {
+      "log_basename": "chest-write-03.console.log",
+      "bytes": 142857,
+      "sha256": "dc5fd62ae593a7fde4c5ee4da944b8e9c4f95d1320f732c0193af82497cc11df",
+      "status": "PASS",
+      "process_exit_code": 0,
+      "exit_code_source": "Hash-bound runtime freeze from execution owner",
+      "unhandled_error_warning_or_failure_markers": 0,
+      "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+      "terminal_line": 35,
+      "checks": 57,
+      "scope": "actual Godot engine/file IO with staged approach; no OS input claim",
+      "mode": "write_and_fault_recovery",
+      "caller_failure_scopes": [
+        "paused",
+        "won_explore",
+        "lost_retry",
+        "en",
+        "zh"
+      ]
+    },
+    {
+      "log_basename": "chest-read-03.console.log",
+      "bytes": 23228,
+      "sha256": "1fa41bb009c4065d6dfa4dba2951b622c773cf93b86e9938e1475fbabe95a903",
+      "status": "PASS",
+      "process_exit_code": 0,
+      "exit_code_source": "Hash-bound runtime freeze from execution owner",
+      "unhandled_error_warning_or_failure_markers": 0,
+      "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+      "terminal_line": 7,
+      "checks": 5,
+      "scope": "actual Godot engine/file IO with staged approach; no OS input claim",
+      "mode": "fresh_process_read",
+      "caller_failure_scopes": []
+    },
+    {
+      "log_basename": "native-integration-03.console.log",
+      "bytes": 48415,
+      "sha256": "675acffc7adb80e0d7445aaa602876760e0fbd189c5bef74694214ddfbfb03c7",
+      "status": "PASS",
+      "process_exit_code": 0,
+      "exit_code_source": "Hash-bound runtime freeze from execution owner",
+      "unhandled_error_warning_or_failure_markers": 0,
+      "terminal_marker": "RELIC_EXPEDITION_NATIVE_PASS",
+      "terminal_line": 29,
+      "checks": 25,
+      "scope": "actual Godot engine staged scene integration; no OS input/pixel claim",
+      "markers": [
+        {
+          "clip": "Attack",
+          "contact_seconds": 0.18,
+          "health_after": 20
+        },
+        {
+          "clip": "Cast",
+          "health_after": 30,
+          "release_seconds": 0.32
+        }
+      ]
+    },
+    {
+      "log_basename": "native-interface-03.console.log",
+      "bytes": 53004,
+      "sha256": "2b446736f01bbb9923190de2c4e304e5a9b6fc95ca30bf1e7ba1feec104f93c8",
+      "status": "PASS",
+      "process_exit_code": 0,
+      "exit_code_source": "Hash-bound runtime freeze from execution owner",
+      "unhandled_error_warning_or_failure_markers": 0,
+      "terminal_marker": "RELIC_NATIVE_TESTS_PASS",
+      "terminal_line": 12,
+      "summary": "actual native UI transitions, bundled font coverage, touch/cancel, pause, inventory, focus-loss handler, bilingual and mood; no OS-input claim",
+      "checks": null
+    }
+  ],
+  "excluded_initial_diagnostic": {
+    "log_basename": "chest-write.console.log",
+    "sha256": "182aef8555cf91f7a489bada25b00f00cd085ec7c5fd9e65a1900d46d7149d13",
+    "result": "FAIL_WITH_PASS_MARKER",
+    "script_error_lines": [
+      22,
+      32
+    ],
+    "reason": "Cached chest anchor access failed despite a PASS print; excluded from acceptance. Final repaired57-check log is clean."
+  },
+  "boundaries": [
+    "Earlier runtime ec13, its ZIP/PCK, real OS course/reopen, Web smoke and film remain retained historical evidence; this receipt does not relabel them as this changed runtime.",
+    "No new visible-process, physical-input, pixel, Web, packaged-source or exported-PCK acceptance is established here.",
+    "Existing equip-from-bag save-failure footer feedback can be hidden by the bag overlay; that interface behavior was outside these three control-flow changes."
+  ]
+}

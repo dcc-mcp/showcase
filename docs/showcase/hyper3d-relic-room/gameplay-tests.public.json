@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "scope": "Saved terminal summaries from scripted Godot4.6.3 engine tests. Receipt compilation reran no tests; the core result is a separately authorized isolated execution. Staged setup and injected input remain separate from real OS acceptance, rendered pixel review and physical touch.",
+  "source_freeze": {
+    "basename": "arpg-freeze-01.public.json",
+    "sha256": "132bfb3506cde4344acc540004ee9face4e351d3895007c540a841e5886bfdea",
+    "runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+    "engine": "4.6.3.stable.official.7d41c59c4"
+  },
+  "core": {
+    "status": "PASS",
+    "checks": 120,
+    "scope": "Pure deterministic model in Godot4.6.3; no Nodes, physical input, rendered contact or filesystem save acceptance",
+    "log_basename": "console.log",
+    "log_sha256": "5b4408df7dcc572791b256138ca1d0e87368ff66f1d7a6d258e7345470441ee4",
+    "log_bytes": 244,
+    "terminal_marker": "ARCHIVE_EXPEDITION_TESTS_PASS",
+    "terminal_line": 3,
+    "secondary_log_basename": "godot.log",
+    "secondary_log_sha256": "1daad324492a57cbe154d1673ea4e213ceb28c4d28324a620577acdb330656a3",
+    "process_exit_code": 0,
+    "process_exit_evidence": "Reported by test execution owner; saved terminal log independently parsed.",
+    "contradictory_terminal_markers": 0,
+    "warning_markers": 0,
+    "test_script_sha256": "04c7676e9ccb8b9ea2cd3b9be0f22483959a269d20770a5dfc7f8c3d209f66c6",
+    "core_script_sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65",
+    "data_sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d",
+    "execution": "One isolated existing pure-model script, headless Godot4.6.3; no code/UI changes.",
+    "frozen_runtime_changes_reported": 0
+  },
+  "frozen_runtime_results": [
+    {
+      "log_basename": "test_expedition_course-final-01.console.log",
+      "sha256": "46070cdde8e5f6a13851e21afe72f6a5de39f812c73c5b2617f68f9b9f01d4a4",
+      "bytes": 35782,
+      "terminal_marker": "RELIC_EXPEDITION_COURSE_PASS",
+      "terminal_line": 32,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "continuous_expedition_course",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "distance_m": 101.769830666482,
+        "elapsed": 29.9666666666662,
+        "actions": {
+          "arc_bolt": 2,
+          "equip": 2,
+          "interact": 5,
+          "melee": 3
+        },
+        "equipment": {
+          "focus": "arc_focus",
+          "weapon": "bronze_edge"
+        },
+        "health": 50,
+        "inventory": {
+          "arc_focus": 1,
+          "bronze_edge": 1
+        },
+        "opened_chests": [
+          "town_chest"
+        ],
+        "quest_complete": true,
+        "scope": "continuous native controller + same action handlers, no teleports or OS input",
+        "route_waypoints": 20,
+        "all_route_waypoints_report_floor": true
+      }
+    },
+    {
+      "log_basename": "test_expedition_route-05.console.log",
+      "sha256": "892e5aa10ab5bd935a384bdeb1814cbc5e6d7fbf51686f4487287ac95bdbb24a",
+      "bytes": 25586,
+      "terminal_marker": "RELIC_EXPEDITION_ROUTE_PASS",
+      "terminal_line": 9,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "continuous_grounded_route",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "distance_m": 116.092924688011,
+        "floor_ratio": 0.999443516972732,
+        "min_y": -0.0500000007450581,
+        "max_y": 0.655563354492188,
+        "scope": "actual engine continuous controller physics, no OS input",
+        "waypoint_count": 24,
+        "waypoints_on_floor": 24
+      }
+    },
+    {
+      "log_basename": "test_layout-final-01.console.log",
+      "sha256": "fc65a6f935bebac983d65775eccfff62ba1343447f581f5f46429397b71fa087",
+      "bytes": 497082,
+      "terminal_marker": "RELIC_LAYOUT_TESTS_PASS",
+      "terminal_line": 133,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "layout",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "cases": 64,
+        "summary": "64 size/locale/state cases; no button/label/panel outside supported viewport"
+      }
+    },
+    {
+      "log_basename": "test_native-final-01.console.log",
+      "sha256": "2b446736f01bbb9923190de2c4e304e5a9b6fc95ca30bf1e7ba1feec104f93c8",
+      "bytes": 53004,
+      "terminal_marker": "RELIC_NATIVE_TESTS_PASS",
+      "terminal_line": 12,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "native_ui_and_injected_touch",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "summary": "actual native UI transitions, bundled font coverage, touch/cancel, pause, inventory, focus-loss handler, bilingual and mood; no OS-input claim",
+        "check_count": "NOT_RECORDED",
+        "physical_touch": "NOT_TESTED",
+        "os_input": "NOT_ESTABLISHED_BY_THIS_TEST"
+      }
+    },
+    {
+      "log_basename": "test_enemy_cadence-final-01.console.log",
+      "sha256": "8f4188b56994c032563ffac75332745a62ff85223fc980ee38ae5ca1103170f4",
+      "bytes": 45732,
+      "terminal_marker": "RELIC_ENEMY_CADENCE_PASS",
+      "terminal_line": 20,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "enemy_contact_cadence",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "hit_frames": [
+          24,
+          122,
+          220
+        ],
+        "scope": "native engine staged range/contact/dodge regression, not OS input"
+      }
+    },
+    {
+      "log_basename": "test_stage-final-02.console.log",
+      "sha256": "23cbd81664b7f430044f49caf90dedf28e0de1110d27bdbd61a9ca69d5e3283c",
+      "bytes": 30867,
+      "terminal_marker": "RELIC_STAGE_PASS",
+      "terminal_line": 8,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "stage_edge_occlusion_and_asset_contract",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "summary": "edge recovery, observed occlusion recovery, actual assets/clip contract, 300k instanced budget; continuous geometry is test_expedition_route",
+        "check_count": "NOT_RECORDED"
+      }
+    },
+    {
+      "log_basename": "test-chest-write-02.console.log",
+      "sha256": "b9b92810da11c98d9921ab5f6022795a27bbb3ec6ed414a52973e64504ec1326",
+      "bytes": 37631,
+      "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+      "terminal_line": 15,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "chest_persistence_fault_recovery",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "checks": 20,
+        "mode": "write_and_fault_recovery",
+        "scope": "actual Godot engine/file IO with staged approach; no OS input claim"
+      }
+    },
+    {
+      "log_basename": "test-chest-fresh-read-02.console.log",
+      "sha256": "ea51dd6084af11dc4ae81d43d48a006113dd4a2f63dd29d8668d9b58c964101f",
+      "bytes": 22640,
+      "terminal_marker": "RELIC_CHEST_PERSISTENCE_PASS",
+      "terminal_line": 7,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "chest_fresh_process_read",
+      "evidence_mode": "scripted_staged_native_engine",
+      "listed_in_runtime_freeze": true,
+      "validated_result": {
+        "checks": 5,
+        "mode": "fresh_process_read",
+        "scope": "actual Godot engine/file IO with staged approach; no OS input claim"
+      }
+    }
+  ],
+  "supplemental_results": [
+    {
+      "log_basename": "test_expedition_native-02.console.log",
+      "sha256": "3a182faeed4a0b2be3ac4ed13941205982772b6b8bc91efa81ceedab1d172daf",
+      "bytes": 47293,
+      "terminal_marker": "RELIC_EXPEDITION_NATIVE_PASS",
+      "terminal_line": 29,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "staged_attack_cast_integration",
+      "evidence_mode": "supplemental_staged_native_engine",
+      "listed_in_runtime_freeze": false,
+      "validated_result": {
+        "checks": 25,
+        "markers": [
+          {
+            "clip": "Attack",
+            "contact_seconds": 0.18,
+            "health_after": 20
+          },
+          {
+            "clip": "Cast",
+            "health_after": 30,
+            "release_seconds": 0.32
+          }
+        ],
+        "scope": "actual Godot engine staged scene integration; no OS input/pixel claim"
+      }
+    },
+    {
+      "log_basename": "test_character_motion-arpg-01.console.log",
+      "sha256": "c4e91b879821fc0b214bb8eb02d5e1202920540612b97a387945010909d703bc",
+      "bytes": 52264,
+      "terminal_marker": "RELIC_CHARACTER_MOTION_PASS",
+      "terminal_line": 14,
+      "status": "PASS",
+      "contradictory_terminal_markers": 0,
+      "warning_markers": 0,
+      "process_exit_code": "NOT_RECORDED_IN_LOG",
+      "id": "imported_skin_and_instrumented_motion",
+      "evidence_mode": "supplemental_staged_native_engine",
+      "listed_in_runtime_freeze": false,
+      "validated_result": {
+        "bone_count": 17,
+        "guardian_clips": {
+          "Attack": 0.649999976158142,
+          "Dash": 0.25,
+          "Idle": 2.0,
+          "Walk": 1.0
+        },
+        "courier_idle_seconds": 2.0,
+        "courier_ready": true,
+        "scope": "Native imported skins, changing joint poses and instrumented movement; no OS-input or rendered-deformation claim"
+      }
+    }
+  ],
+  "verification": {
+    "selected_logs": 11,
+    "each_has_single_terminal_pass": true,
+    "all_selected_logs_scanned_for_errors_assertion_failures_fail_markers_and_warnings": true,
+    "contradictory_terminal_markers_found": 0,
+    "warning_markers_found": 0,
+    "new_test_runs": 1,
+    "new_test_run_scope": "Only the separately authorized existing pure-core script, executed by its owner; this receipt author reran no tests."
+  },
+  "scope_limits": [
+    "Native UI terminal summary includes touch/cancel, pause, inventory, focus-loss, bilingual and mood; a dedicated current physical-touch result is not established.",
+    "Supplemental integration/motion logs are identified separately from the eight logs listed by the final runtime freeze.",
+    "Earlier missing-chest run is excluded because its PASS marker coexists with a Godot ERROR.",
+    "Source logs remain private; only basenames, hashes, terminal line numbers and whitelisted result fields are included.",
+    "Actual OS interaction, fresh real-client reopening, Web behavior and subjective listening require their separate receipts."
+  ]
+}

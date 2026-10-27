@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "status": "NATIVE_KEYBOARD_COURSE_AND_REOPEN_PASS_WITH_LIMITATIONS",
+  "scope": "Saved evidence audit of Windows standalone Godot game from the extracted source package; no application calls during audit.",
+  "artifact": {
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "archive_sha256": "22762aebd5a67f3f6f7cde20c8de236ef71d75c8d3edfe586b144579822a0dc5",
+    "archive_bytes": 44269347,
+    "archive_crc_and_all_file_hashes": "PASS",
+    "packaged_files_verified": 72,
+    "frozen_runtime_files_verified_in_zip_and_extraction": 41,
+    "extracted_runtime_aggregate_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+    "aggregate_algorithm": "SHA256 of compact JSON file table with sorted object keys",
+    "freeze_manifest_sha256": "132bfb3506cde4344acc540004ee9face4e351d3895007c540a841e5886bfdea"
+  },
+  "input_route": {
+    "provider": "dcc-cua",
+    "runtime_version": "1.13.0",
+    "installed_core_version": "0.20.46",
+    "installed_core_commit": "NOT_ESTABLISHED",
+    "route": "windows_exact_pixel_final_input",
+    "task_local_compatibility": "game_navigation maps to physical keypress and forwards bounded hold duration; stock native fences retained",
+    "successful_actions": 107,
+    "game_key_actions": 99,
+    "left_click_actions": 8,
+    "bounded_movement_holds_with_matching_key_release": 55,
+    "maximum_hold_ms": 500,
+    "native_target_groups": 2,
+    "actions_per_run": [
+      104,
+      3
+    ],
+    "exact_targets_and_native_instances_consistent": true,
+    "native_post_dispatch_fences_passed": true,
+    "saved_unique_snapshot_ids": 133,
+    "distinct_preceding_snapshots_matched": 107,
+    "freshness_basis": "Chronological same-task saved snapshots plus stock consumed-observation enforcement; action ledger omits wire request snapshot_id",
+    "direct_wire_snapshot_id_join_available": false,
+    "matched_capture_mode": "visible_desktop_crop",
+    "whole_desktop_capture": false,
+    "matched_input_frames_unobscured": true,
+    "input_ack_semantics": "Delivery verified; gameplay effects established separately by runtime events/state and saved pixels"
+  },
+  "course": {
+    "status": "PASS",
+    "state": "won",
+    "distance_m": 94.2953090034425,
+    "game_elapsed_s": 116.899999999995,
+    "qa_enabled_in_all_logged_states": false,
+    "logged_runtime_states_checked": 25,
+    "position_injection": "None in the recorded acceptance route; ledger contains only physical keys/clicks and frozen package has no adapter autoload",
+    "quest_complete": true,
+    "enemies_defeated": 2,
+    "chests_opened": 1,
+    "chest_animation_progress": 1,
+    "inventory": {
+      "arc_focus": 1,
+      "bronze_edge": 1
+    },
+    "equipment": {
+      "focus": "arc_focus",
+      "weapon": "bronze_edge"
+    },
+    "effective_arc_hits": 2,
+    "arc_damage_per_hit": [
+      24,
+      24
+    ],
+    "actual_enemy_contacts": [
+      {
+        "variant": "scout",
+        "damage": 5,
+        "health_after": 35
+      },
+      {
+        "variant": "sentinel",
+        "damage": 8,
+        "health_after": 27
+      }
+    ],
+    "duplicate_item_count_capped": true,
+    "final_level": 2,
+    "final_xp": 25
+  },
+  "reopen": {
+    "status": "PASS",
+    "distinct_fresh_native_process": true,
+    "prior_process_absent_recorded": true,
+    "normal_save_notice": "save_loaded",
+    "save_restored_event": true,
+    "persisted_fields_match": [
+      "inventory",
+      "equipment",
+      "opened_chests",
+      "killed_enemies",
+      "quest_complete",
+      "xp",
+      "level"
+    ],
+    "zone": "town",
+    "town_spawn_matches_frozen_source": true,
+    "distance_m": 0,
+    "qa_enabled": false,
+    "normal_playing_then_paused": [
+      "playing",
+      "paused"
+    ],
+    "explicit_native_cleanup_both_runs": "PASS"
+  },
+  "recording_probe": {
+    "status": "FAILED_GAMEPLAY_RECORDING_NOT_CLAIMED",
+    "start_acknowledged": true,
+    "first_failure_code": "overlay_exclusion_unavailable",
+    "first_failure_evidence": "Operator-reported bounded diagnostic; first raw response was not persisted because observation threw before write",
+    "bounded_diagnostic": "OverlayExclusionUnavailable: exclude control banner; timed out serializing cross-process DCC-CUA overlay capture exclusion (Uncategorized)",
+    "first_failure_request_id": "UNKNOWN",
+    "first_failure_call_latency_ms": "UNKNOWN",
+    "subsequent_stop_call": "backend_unavailable from closed local client",
+    "explicit_cleanup_ack": "PASS",
+    "title_only_video_finalized": true,
+    "video_sha256": "d61eb8e035c32c5b1d3f0ab6b56f563e1914393b2c9f57f947340a1d24024223",
+    "video_frames": 3,
+    "video_duration_ms": 2159,
+    "all_encoded_frames_before_first_game_input": true,
+    "capture_sidecar_sha256": "e6f0b44fc2506658ed59853a181be347ed27c03b8c63e071c618ac464958a79b",
+    "root_cause": "NOT_ESTABLISHED; no Host crash, source-commit mapping or fix claim"
+  },
+  "selected_saved_frames": [
+    {
+      "snapshot_index": 6,
+      "label": "English gameplay",
+      "sha256": "daafbbd012a89a228fc924d71b68dcf88693a8e15f597dbc4a044cd831c26a71",
+      "bytes": 1105385,
+      "width": 1286,
+      "height": 795,
+      "local_pixels_reviewed": true
+    },
+    {
+      "snapshot_index": 17,
+      "label": "Chinese pause UI",
+      "sha256": "e5439bc6c158a8544db362a63d465f568bdab5ffe1b4cde1b3f855bc5207cdcd",
+      "bytes": 949951,
+      "width": 1286,
+      "height": 795,
+      "local_pixels_reviewed": true
+    },
+    {
+      "snapshot_index": 39,
+      "label": "Opened chest",
+      "sha256": "b632d3c85ffa901d26ab99eaf1d554bcfa7f2b6fb742dcd2d1afd7ce669f576a",
+      "bytes": 1659474,
+      "width": 1286,
+      "height": 795,
+      "local_pixels_reviewed": true
+    },
+    {
+      "snapshot_index": 76,
+      "label": "Bag with both items equipped",
+      "sha256": "67303db2964e9eec76bb5bf2ccf4f3f49249d4a2c45a044ece56b4392907bc9f",
+      "bytes": 826263,
+      "width": 1286,
+      "height": 795,
+      "local_pixels_reviewed": true
+    },
+    {
+      "snapshot_index": 124,
+      "label": "Won course",
+      "sha256": "634bd894fa70890238b0ebbe12cc2e6964849044a65cc0e8cbcccc1ac7b1398d",
+      "bytes": 986251,
+      "width": 1286,
+      "height": 795,
+      "local_pixels_reviewed": true
+    },
+    {
+      "snapshot_index": 131,
+      "label": "Fresh-process restored town",
+      "sha256": "6ce59eb84c625897e500b9e209e3f8052f2018ec74520e027e66a925b2110581",
+      "bytes": 1094846,
+      "width": 1286,
+      "height": 795,
+      "local_pixels_reviewed": true
+    }
+  ],
+  "limitations": {
+    "chest_step_away_native_attempt": "NOT_PASS; chest opening completed before the actor left interaction range; engine-only chest cancellation check passed separately",
+    "cua_physical_user_interruption": "NOT_RUN; not attempted during the current course",
+    "gameplay_video": "NOT_ESTABLISHED",
+    "experimental_PV_JPEG_workflow": "NOT_RUN_UNSUPPORTED",
+    "physical_mobile_device": "NOT_RUN",
+    "subjective_audio_mix_listening": "NOT_RUN",
+    "web_acceptance": "SEPARATE_NOT_COVERED_BY_THIS_RECEIPT"
+  },
+  "evidence_hashes": {
+    "course_log": {
+      "sha256": "3b77f347bec2aa5812e00be688b8e6cae2bebf35dc82bdc6009d5e7beb1debfa",
+      "bytes": 195740
+    },
+    "reopen_log": {
+      "sha256": "4dc42eb6c5049dd8826bc54c6e55603079a5c9f4ab2a89310e70296401b56932",
+      "bytes": 39754
+    },
+    "native_actions": {
+      "sha256": "cdad4f5f283f01bcc2b368612d2e085e00a79271eb4c514a694c603793579e60",
+      "bytes": 533512
+    },
+    "won_state": {
+      "sha256": "46875be8375170cacf17970c0984ffdd0c541d0b6bf56c7591334c3674437636",
+      "bytes": 12214
+    },
+    "reopen_state": {
+      "sha256": "9daa73028d5ef8444dc39ec6ccfe2406cda6fca8648fcd4cab457db8a8479af8",
+      "bytes": 12070
+    },
+    "saved_progress": {
+      "sha256": "fc9130eba941704073144f833ac999050021145394911c334852be6a19f5e672",
+      "bytes": 501
+    },
+    "course_cleanup": {
+      "sha256": "29a39b5d350e20eab0a4df51da18d2962a9315a2e1dd1d18e4a4133ee71e404a",
+      "bytes": 1992
+    },
+    "reopen_cleanup": {
+      "sha256": "692844fd7a55aeb6e1ff85fc27ff30266c16cc9264bdac84ee1e963f9429741e",
+      "bytes": 1994
+    },
+    "recording_probe_cleanup": {
+      "sha256": "fa282e35d102f12e2995b4ef9c24cd3b9ce4b5262cf669081219e2809e2b7ccb",
+      "bytes": 4320
+    }
+  }
+}

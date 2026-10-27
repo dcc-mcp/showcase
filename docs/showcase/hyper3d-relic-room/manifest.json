@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "godot_application": "Godot",
+  "godot_version": "4.6.3",
+  "capture_provider": "dcc-cua for actual OS/Web stills; native GPU for scripted film/hero; native Blender for historical diagnosis",
+  "files": [
+    {
+      "path": "api-before-heroes.public.json",
+      "sha256": "16d175f8bf76e667cd47de20055e41a8841c1d45b171c6987b6ccc750e0d56c3",
+      "bytes": 32207
+    },
+    {
+      "path": "arpg-assets.public.json",
+      "sha256": "836bf51295d4c2423a4fe4b70d1e6752c08cf5d9b80a1e97de9ef781bb6c696b",
+      "bytes": 4088
+    },
+    {
+      "path": "ASSET-DIAGNOSIS.md",
+      "sha256": "14dd4ee9c9d98a3034d8e5186644caa9b96334c7fd234c89357250089413ef67",
+      "bytes": 10152
+    },
+    {
+      "path": "capture-derivatives.public.json",
+      "sha256": "71be86d41fc0c16ab7000b8fabe38c855e979b34ae663db855a3e032e4049726",
+      "bytes": 6344
+    },
+    {
+      "path": "current-export.public.json",
+      "sha256": "57385cb8c1e677db39352d5e3b8a67e071e8f7914c6c97c43023915383c4a115",
+      "bytes": 4640
+    },
+    {
+      "path": "current-native-followup.public.json",
+      "sha256": "eb97ba6600678f6de53f158683e68eaeb1739eea40794eee890a12f34fcdd79b",
+      "bytes": 5662
+    },
+    {
+      "path": "diagnosis/budget-ledger.public.json",
+      "sha256": "ce208e6cbe1205e16799dfb1f06653e14bd47e549877d1332257e69b460a4c5f",
+      "bytes": 3061
+    },
+    {
+      "path": "diagnosis/chest-previous-v2.jpg",
+      "sha256": "482a2088153c38bf656f51d04e8f1ce3d28977e5cd0fba6147ce68751b2019f8",
+      "bytes": 50081,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/chest-source.jpg",
+      "sha256": "7531ab51b184b935ff10ef0426ba73fc343b673e162e4acf2a37aa5a059a07cb",
+      "bytes": 51278,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/courier-new-static.jpg",
+      "sha256": "613e313ceb32926f7d52d919e65db0eef733b641aa5525b911a47c0c3915bc0b",
+      "bytes": 34737,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/courier-previous-runtime.jpg",
+      "sha256": "afa30e2ca7bd63c7b7e351d70d533903116a7018e54b36be094ba5612e7f6829",
+      "bytes": 138297,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/evidence.json",
+      "sha256": "767034a30163d82f33ef59393582355a100184d2df1ebdd0400fda2eabf7e44c",
+      "bytes": 72989
+    },
+    {
+      "path": "diagnosis/guardian-new-static.jpg",
+      "sha256": "888db7121d07255540b741a54a73d4488af0189c66d25ceebb708869fd2685ef",
+      "bytes": 53130,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/guardian-previous-generated.jpg",
+      "sha256": "176b700712c847a30e51b3eb714bfc7b404cf581bb49c84a1d02f0e8c5fb0718",
+      "bytes": 20113,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/hero-acquisition.public.json",
+      "sha256": "7d361e51a80a49abe58da5a6c2313a76d1e16e0627ef2cee2c07ea138598a550",
+      "bytes": 3282
+    },
+    {
+      "path": "diagnosis/manifest.json",
+      "sha256": "d700fc2c6baa1ffa3fa98d1d29ad2910df9d618d699752a9bab1495703fa3f65",
+      "bytes": 3721
+    },
+    {
+      "path": "diagnosis/portal-previous-v2.jpg",
+      "sha256": "1c89310dd094a98716b29458d1b0be8c1a353c481ed53fed578e330fd2b1f73f",
+      "bytes": 40727,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/portal-source.jpg",
+      "sha256": "4652ae9f2866118d8963e956599ce006e95a271d47d30856de6ab52570a2a998",
+      "bytes": 41969,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/shrine-previous-v2-5k.jpg",
+      "sha256": "81ebea489ab457e9e9f19555d11bd26026890b6f72723d4938f06f9e90df8bf7",
+      "bytes": 59208,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/shrine-repaired-60k.jpg",
+      "sha256": "d5c8ade06723dd602f9eb47efcd7043f4ee65f53a3059098b9712d366d74b8f8",
+      "bytes": 55007,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/shrine-repaired-godot.jpg",
+      "sha256": "309243c760e7f9f7e54b4ae809bad0a24e4186054d55c0ec15bb0a05824cee6c",
+      "bytes": 120507,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "diagnosis/shrine-source.jpg",
+      "sha256": "1e87ee50ef5d4810124e8729c0283ac740dd0124f579dc1cbe46d88cbb201aba",
+      "bytes": 55201,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "film-pixel-review.public.json",
+      "sha256": "5697c16d0ee18b2f49014a4856556a858bcb2643636f65a7900d59ba884a12e5",
+      "bytes": 1816
+    },
+    {
+      "path": "film-validation.public.json",
+      "sha256": "f838793e700b81688bb16e6313a13ccb8553a0a8c031ef86a56d9a6d462f8766",
+      "bytes": 5328
+    },
+    {
+      "path": "gameplay-tests.public.json",
+      "sha256": "c9d88af5d40efbb917f9e18e6410da78cf3daeb8c9856d0324bcf643ea5be012",
+      "bytes": 11892
+    },
+    {
+      "path": "hero.jpg",
+      "sha256": "71f9214c1aefe95a0c6a53b7f36c30a871c94d4ed65f71993c038939964713ac",
+      "bytes": 120995,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "LICENSES.md",
+      "sha256": "6704b146ebb8c642383371f1998f3daa21d0f582f2e50dae8b5d148a7eed9f6a",
+      "bytes": 4427
+    },
+    {
+      "path": "native-bag.jpg",
+      "sha256": "3ad43eca062474a5aaa7d971ad90b2c51f25ddcb6e8b5b7b2eb789e99acf0fb1",
+      "bytes": 83355,
+      "width": 1286,
+      "height": 795,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "native-chest-open.jpg",
+      "sha256": "7243f270b211cf8cce30629a433e3b81fed29acccc3b65306bbc3a6e7c465c21",
+      "bytes": 155632,
+      "width": 1286,
+      "height": 795,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "native-en.jpg",
+      "sha256": "413fde7d6467ba511980eb7c3f7ace6fe540af8727806e274794a1ffb0dfab6b",
+      "bytes": 133225,
+      "width": 1286,
+      "height": 795,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "native-package.public.json",
+      "sha256": "69c929efa8ba83c9ddb1829eddde85745466692b0d355931e437564bb0a7085f",
+      "bytes": 13130
+    },
+    {
+      "path": "native-reopened.jpg",
+      "sha256": "e3c92d726378593ab6a6d33b1260b168dd8b6df0ef16ddcf603685773c621051",
+      "bytes": 129682,
+      "width": 1286,
+      "height": 795,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "native-win.jpg",
+      "sha256": "2f6d509e1ba1194aa5cfe5710da26b09d44ae411a2aeec609443a5d99df40201",
+      "bytes": 105875,
+      "width": 1286,
+      "height": 795,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "native-zh.jpg",
+      "sha256": "c101ffb21e0c712d31f9f43e7db9078fb4dfd9c1c9f9c3e8bcbb1bf1da6fbb9d",
+      "bytes": 103096,
+      "width": 1286,
+      "height": 795,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "os-acceptance.public.json",
+      "sha256": "c943f807e19ed5aa5cb6820caf5391d99acb17bdb9e8c36f24e36368f03eadad",
+      "bytes": 8565
+    },
+    {
+      "path": "package-export.public.json",
+      "sha256": "aaccb12cb5d3c448c1963a3939e5406bb032d6040a819d1e9fc467491cf0f5a7",
+      "bytes": 4778
+    },
+    {
+      "path": "README.md",
+      "sha256": "0f4e5d24f70ba75aa08bf6e3d6272966e5eda30fc6535784c08b32c9293456f2",
+      "bytes": 16832
+    },
+    {
+      "path": "RelicCourier-native.zip",
+      "sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+      "bytes": 44273997,
+      "container": "ZIP",
+      "members": 72
+    },
+    {
+      "path": "save-recovery.public.json",
+      "sha256": "e345c84b0ff7993e0860c5f58364487296db78dbd61f7a0e8c1ba8d153c2ffb9",
+      "bytes": 17022
+    },
+    {
+      "path": "showcase.mp4",
+      "sha256": "134579f9e7995f038764b7a27989e6bd073eb62ec2b8d8b75054ceeba1059634",
+      "bytes": 20157741,
+      "container": "MP4",
+      "codec": "H264",
+      "width": 1280,
+      "height": 720,
+      "frames": 1771,
+      "duration_s": 59.03333333333333
+    },
+    {
+      "path": "validation.json",
+      "sha256": "e4b4e5fc5a77ba2a9af7c297990ad98846c436489bd7cd82de31459d899b1ca8",
+      "bytes": 93255
+    },
+    {
+      "path": "web-acceptance.public.json",
+      "sha256": "8b2e3a548205eacf72c74b33e39f5b5911e2698c84015bc6c8bd9064dae0a167",
+      "bytes": 9212
+    },
+    {
+      "path": "web-pause.jpg",
+      "sha256": "044074089f606b1924a74dd91751bbee988ac675fd6a0d164b880e60876a9bc6",
+      "bytes": 146320,
+      "width": 1394,
+      "height": 1195,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "web-playing.jpg",
+      "sha256": "dc0063ea0f61dbaf5e5a2c75d6093d630230e20038862683601e0ee2d74bddaa",
+      "bytes": 168739,
+      "width": 1394,
+      "height": 1195,
+      "bit_depth": 8,
+      "mode": "RGB"
+    },
+    {
+      "path": "web-zh.jpg",
+      "sha256": "4512be0b4169b3c39119dcc565be689bbac99c4b6e1f04f524e8ed953db77e30",
+      "bytes": 140989,
+      "width": 1394,
+      "height": 1195,
+      "bit_depth": 8,
+      "mode": "RGB"
+    }
+  ]
+}

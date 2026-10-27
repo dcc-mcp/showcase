@@ -55,7 +55,12 @@ func run_checks() -> void:
  root.add_child(game)
  await process_frame
  game.reset_game()
+ # Exercise the story opening with the same declared engine-input route.
+ key(KEY_ENTER,true)
+ await process_frame
+ key(KEY_ENTER,false)
  await physics_frame
+ check(game.journey_started,"Enter begins the journey before movement")
  var start: Vector3=game.player.position
  # Stop on the actual chart approach. A fixed 78-frame press overshot the
  # chart on the current camera-relative controller and was never run by CI.
@@ -77,6 +82,9 @@ func run_checks() -> void:
  check(FileAccess.file_exists(SAVE_PATH),"input route writes its test save")
  checks.append({"check":"keyboard_movement_and_chart","start":str(start),"end":str(finish),"activated":game.activated.duplicate()})
  game.queue_free()
+ await process_frame
+ # Let the real audio mixing thread release fixed-fps fixture playback.
+ OS.delay_msec(200)
  await process_frame
  restore_save()
  checks.append({"check":"save_restoration","had_save":had_save,"save_exists":FileAccess.file_exists(SAVE_PATH),"byte_count":original_save.size()})

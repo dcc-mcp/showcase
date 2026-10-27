@@ -1,0 +1,12 @@
+{
+  "source": "https://github.com/notofonts/noto-cjk/blob/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+  "source_filename": "NotoSansCJKsc-Regular.otf",
+  "source_sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+  "family": "Relic Sans",
+  "license": "SIL OFL 1.1",
+  "output": "relic-sans.otf",
+  "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54",
+  "bytes": 111548,
+  "required_codepoints": 333,
+  "missing_codepoints": []
+}

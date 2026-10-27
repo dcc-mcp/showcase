@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "case_slug": "courier-rig-motion-comparison",
+  "record_kind": "planned_targets_not_measured_results",
+  "input_sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2",
+  "variants": ["maya-mgear", "maya-advancedskeleton", "blender-rigify"],
+  "timing": {
+    "fps": 24,
+    "first_frame": 1,
+    "last_frame": 240,
+    "frame_count": 240,
+    "duration_seconds": 10,
+    "segments": [
+      {"frames_inclusive": [1, 24], "action": "ready_pose"},
+      {"frames_inclusive": [25, 96], "action": "walk_three_cycles", "actor_travel_m": 3.6, "target_speed_m_per_s": 1.2},
+      {"frames_inclusive": [97, 144], "action": "run_four_cycles", "actor_travel_m": 6.0, "target_speed_m_per_s": 3.0},
+      {"frames_inclusive": [145, 168], "action": "planted_turn", "turn_degrees": 180},
+      {"frames_inclusive": [169, 216], "action": "reach_to_same_marker_and_return"},
+      {"frames_inclusive": [217, 240], "action": "settle"}
+    ]
+  },
+  "scene": {
+    "source_coordinates": "glTF +Y up, meters; host conversions explicitly measured",
+    "maya_coordinates": "Y up, centimeters, +Z retained by offline bridge",
+    "blender_coordinates": "Z up, meters, host importer conversion verified",
+    "floor_height_m": 0.0,
+    "camera": "same matched orthographic three-quarter framing and front/side diagnostic views",
+    "lighting": "same neutral key, fill and floor; record actual color-management settings",
+    "render_recipe": "same framing/material intent; renderer-specific differences declared",
+    "audio_intent": "intentional silence"
+  },
+  "planned_acceptance_limits": {
+    "source_triangle_count": 30000,
+    "source_bbox_dimension_max_absolute_error_m": 0.00001,
+    "rest_pose_inverse_bind_max_component_error": 0.00001,
+    "skin_weight_sum_max_absolute_error": 0.00001,
+    "invalid_joint_index_count": 0,
+    "zero_weight_vertex_count": 0,
+    "sole_floor_penetration_max_m": 0.005,
+    "sole_stance_horizontal_drift_max_m_per_stance": 0.015,
+    "fresh_import_joint_world_position_max_error_m": 0.001,
+    "fresh_import_joint_world_orientation_max_error_degrees": 0.1,
+    "fresh_import_skinned_probe_vertex_max_error_m": 0.002,
+    "animation_frame_count_error": 0
+  },
+  "qualitative_checks": [
+    "Natural-speed walk and run support the declared actor motion without visible skating",
+    "Planted turn has stable support, readable weight shift and no knee pop",
+    "Shoulders, elbows, hips, knees and garment silhouette stay usable in pose tests",
+    "Reach/return has no hand penetration and settles without a discontinuity",
+    "Native project reopens with editable controls, textures and no missing dependencies",
+    "Blank-scene recipe rebuild is separately compared with declared tolerances"
+  ],
+  "not_claimed": [
+    "No target is an observed pass until actual host evidence is bound to it",
+    "Foot-joint origins are not sole contact points",
+    "Historical in-place clips do not establish new rig animation or matched locomotion",
+    "No installed-host, license, source redistribution or paid entitlement is inferred from catalog metadata"
+  ]
+}

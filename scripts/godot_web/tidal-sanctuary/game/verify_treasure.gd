@@ -39,6 +39,8 @@ func reopen() -> void:
  game.set_physics_process(false)
  game.set_process(false)
  await process_frame
+ check(not game.journey_started,"fresh scene waits for an explicit Begin")
+ game.begin_journey("fixture")
 
 func place_at(point: Vector3, offset := Vector3.ZERO) -> void:
  game.player.position = point + offset
@@ -142,12 +144,18 @@ func run() -> void:
  saved = read_save()
  check(saved.get("completed") == true and saved.get("beacon_awakened") == true, "completed state persists")
  game.on_action_pressed()
- check(game.quest_stage() == 0, "same-session completion button restarts after feedback cooldown")
+ check(game.quest_stage() == 4, "completion primary keeps exploring without destructive reset")
+ game.request_restart()
+ check(game.quest_stage() == 4 and game.restart_pending, "restart request waits for explicit confirmation")
+ game.card_primary()
+ check(game.quest_stage() == 0, "confirmed same-session restart clears progress")
  write_raw_save(JSON.stringify(saved))
  await reopen()
  check(game.quest_stage() == 4 and game.beam.visible, "fresh scene reload restores completion and lit ring")
  game.on_action_pressed()
- check(game.quest_stage() == 0 and game.activated == [false, false, false], "completion action button resets quest")
+ check(game.quest_stage() == 4,"loaded completion primary also keeps exploring")
+ game.request_restart();game.card_primary()
+ check(game.quest_stage() == 0 and game.activated == [false, false, false], "confirmed restart resets quest")
  check(game.player.position.distance_to(safe_spawn) < 0.001 and game.player.velocity == Vector3.ZERO, "reset returns to safe spawn with zero velocity")
  check(game.swim.state == &"walk" and not game.beam.visible, "reset clears swim state and ring glow")
  await reopen()
@@ -204,6 +212,9 @@ func run() -> void:
  checks.append({"check": "malformed_save_flags", "cases": flag_results})
 
  game.queue_free()
+ await process_frame
+ # Fixed-fps fixtures advance simulated timers faster than the audio mixing thread.
+ OS.delay_msec(200)
  await process_frame
  if had_save:
   var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)

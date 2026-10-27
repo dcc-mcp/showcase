@@ -1,0 +1,3420 @@
+{
+  "schema_version": 1,
+  "mode": "adapted discovery-intent recipe; not callable gateway slugs or proof of new rebuild",
+  "source_adapter_commit": "e1b724483193dd6476d117cb7ecf15ccaab91422",
+  "system_unit": "millimeters",
+  "calls": [
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_scene_units",
+      "arguments": {
+        "system_unit": "millimeters",
+        "system_scale": 1.0
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-animation",
+      "tool_name": "set_timeline_settings",
+      "arguments": {
+        "start_frame": 1,
+        "end_frame": 144,
+        "frame_rate": 24
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-lookdev",
+      "tool_name": "get_color_management",
+      "arguments": {},
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "create_physical_material",
+      "arguments": {
+        "name": "IM_BlackOxide",
+        "base_color": [
+          28,
+          32,
+          36
+        ],
+        "roughness": 0.32,
+        "metalness": 0.9
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "create_physical_material",
+      "arguments": {
+        "name": "IM_Brass",
+        "base_color": [
+          162,
+          119,
+          59
+        ],
+        "roughness": 0.24,
+        "metalness": 1.0
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "create_physical_material",
+      "arguments": {
+        "name": "IM_Petrol",
+        "base_color": [
+          17,
+          57,
+          62
+        ],
+        "roughness": 0.3,
+        "metalness": 0.75
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "create_physical_material",
+      "arguments": {
+        "name": "IM_Ground",
+        "base_color": [
+          18,
+          21,
+          25
+        ],
+        "roughness": 0.6,
+        "metalness": 0.0
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "lathe_profile",
+      "arguments": {
+        "name": "IM_Housing",
+        "profile_points": [
+          [
+            112,
+            0
+          ],
+          [
+            216,
+            0
+          ],
+          [
+            220,
+            4
+          ],
+          [
+            220,
+            30
+          ],
+          [
+            216,
+            34
+          ],
+          [
+            112,
+            34
+          ],
+          [
+            112,
+            0
+          ]
+        ],
+        "segments": 128
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Petrol",
+        "node_names": [
+          "IM_Housing"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Torus",
+        "name": "IM_Trim_114",
+        "position": [
+          0,
+          0,
+          34
+        ],
+        "params": {
+          "radius1": 114,
+          "radius2": 1.5,
+          "segments": 128,
+          "sides": 12
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Trim_114"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Torus",
+        "name": "IM_Trim_216",
+        "position": [
+          0,
+          0,
+          34
+        ],
+        "params": {
+          "radius1": 216,
+          "radius2": 1.5,
+          "segments": 128,
+          "sides": 12
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Trim_216"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_01",
+        "points": [
+          [
+            65.0,
+            -80.0,
+            10.0
+          ],
+          [
+            110.0,
+            -60.0,
+            10.0
+          ],
+          [
+            140.0,
+            50.0,
+            10.0
+          ],
+          [
+            65.0,
+            110.0,
+            10.0
+          ],
+          [
+            18.0,
+            80.0,
+            10.0
+          ],
+          [
+            18.0,
+            -60.0,
+            10.0
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_01"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_01",
+        "property": "pivot",
+        "value": [
+          100.0,
+          80.0,
+          10.0
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_01",
+        "position": [
+          100.0,
+          80.0,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_01"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_02",
+        "points": [
+          [
+            96.291651,
+            -36.782032,
+            10.5
+          ],
+          [
+            125.262794,
+            3.038476,
+            10.5
+          ],
+          [
+            96.243557,
+            113.30127,
+            10.5
+          ],
+          [
+            1.291651,
+            127.762794,
+            10.5
+          ],
+          [
+            -24.411543,
+            78.282032,
+            10.5
+          ],
+          [
+            45.588457,
+            -42.961524,
+            10.5
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_02"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_02",
+        "property": "pivot",
+        "value": [
+          46.60254,
+          119.282032,
+          10.5
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_02",
+        "position": [
+          46.60254,
+          119.282032,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_02"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_03",
+        "points": [
+          [
+            101.782032,
+            16.291651,
+            11.0
+          ],
+          [
+            106.961524,
+            65.262794,
+            11.0
+          ],
+          [
+            26.69873,
+            146.243557,
+            11.0
+          ],
+          [
+            -62.762794,
+            111.291651,
+            11.0
+          ],
+          [
+            -60.282032,
+            55.588457,
+            11.0
+          ],
+          [
+            60.961524,
+            -14.411543,
+            11.0
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_03"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_03",
+        "property": "pivot",
+        "value": [
+          -19.282032,
+          126.60254,
+          11.0
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_03",
+        "position": [
+          -19.282032,
+          126.60254,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_03"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_04",
+        "points": [
+          [
+            80.0,
+            65.0,
+            11.5
+          ],
+          [
+            60.0,
+            110.0,
+            11.5
+          ],
+          [
+            -50.0,
+            140.0,
+            11.5
+          ],
+          [
+            -110.0,
+            65.0,
+            11.5
+          ],
+          [
+            -80.0,
+            18.0,
+            11.5
+          ],
+          [
+            60.0,
+            18.0,
+            11.5
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_04"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_04",
+        "property": "pivot",
+        "value": [
+          -80.0,
+          100.0,
+          11.5
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_04",
+        "position": [
+          -80.0,
+          100.0,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_04"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_05",
+        "points": [
+          [
+            36.782032,
+            96.291651,
+            12.0
+          ],
+          [
+            -3.038476,
+            125.262794,
+            12.0
+          ],
+          [
+            -113.30127,
+            96.243557,
+            12.0
+          ],
+          [
+            -127.762794,
+            1.291651,
+            12.0
+          ],
+          [
+            -78.282032,
+            -24.411543,
+            12.0
+          ],
+          [
+            42.961524,
+            45.588457,
+            12.0
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_05"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_05",
+        "property": "pivot",
+        "value": [
+          -119.282032,
+          46.60254,
+          12.0
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_05",
+        "position": [
+          -119.282032,
+          46.60254,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_05"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_06",
+        "points": [
+          [
+            -16.291651,
+            101.782032,
+            12.5
+          ],
+          [
+            -65.262794,
+            106.961524,
+            12.5
+          ],
+          [
+            -146.243557,
+            26.69873,
+            12.5
+          ],
+          [
+            -111.291651,
+            -62.762794,
+            12.5
+          ],
+          [
+            -55.588457,
+            -60.282032,
+            12.5
+          ],
+          [
+            14.411543,
+            60.961524,
+            12.5
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_06"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_06",
+        "property": "pivot",
+        "value": [
+          -126.60254,
+          -19.282032,
+          12.5
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_06",
+        "position": [
+          -126.60254,
+          -19.282032,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_06"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_07",
+        "points": [
+          [
+            -65.0,
+            80.0,
+            13.0
+          ],
+          [
+            -110.0,
+            60.0,
+            13.0
+          ],
+          [
+            -140.0,
+            -50.0,
+            13.0
+          ],
+          [
+            -65.0,
+            -110.0,
+            13.0
+          ],
+          [
+            -18.0,
+            -80.0,
+            13.0
+          ],
+          [
+            -18.0,
+            60.0,
+            13.0
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_07"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_07",
+        "property": "pivot",
+        "value": [
+          -100.0,
+          -80.0,
+          13.0
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_07",
+        "position": [
+          -100.0,
+          -80.0,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_07"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_08",
+        "points": [
+          [
+            -96.291651,
+            36.782032,
+            13.5
+          ],
+          [
+            -125.262794,
+            -3.038476,
+            13.5
+          ],
+          [
+            -96.243557,
+            -113.30127,
+            13.5
+          ],
+          [
+            -1.291651,
+            -127.762794,
+            13.5
+          ],
+          [
+            24.411543,
+            -78.282032,
+            13.5
+          ],
+          [
+            -45.588457,
+            42.961524,
+            13.5
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_08"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_08",
+        "property": "pivot",
+        "value": [
+          -46.60254,
+          -119.282032,
+          13.5
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_08",
+        "position": [
+          -46.60254,
+          -119.282032,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_08"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_09",
+        "points": [
+          [
+            -101.782032,
+            -16.291651,
+            14.0
+          ],
+          [
+            -106.961524,
+            -65.262794,
+            14.0
+          ],
+          [
+            -26.69873,
+            -146.243557,
+            14.0
+          ],
+          [
+            62.762794,
+            -111.291651,
+            14.0
+          ],
+          [
+            60.282032,
+            -55.588457,
+            14.0
+          ],
+          [
+            -60.961524,
+            14.411543,
+            14.0
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_09"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_09",
+        "property": "pivot",
+        "value": [
+          19.282032,
+          -126.60254,
+          14.0
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_09",
+        "position": [
+          19.282032,
+          -126.60254,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_09"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_10",
+        "points": [
+          [
+            -80.0,
+            -65.0,
+            14.5
+          ],
+          [
+            -60.0,
+            -110.0,
+            14.5
+          ],
+          [
+            50.0,
+            -140.0,
+            14.5
+          ],
+          [
+            110.0,
+            -65.0,
+            14.5
+          ],
+          [
+            80.0,
+            -18.0,
+            14.5
+          ],
+          [
+            -60.0,
+            -18.0,
+            14.5
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_10"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_10",
+        "property": "pivot",
+        "value": [
+          80.0,
+          -100.0,
+          14.5
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_10",
+        "position": [
+          80.0,
+          -100.0,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_10"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_11",
+        "points": [
+          [
+            -36.782032,
+            -96.291651,
+            15.0
+          ],
+          [
+            3.038476,
+            -125.262794,
+            15.0
+          ],
+          [
+            113.30127,
+            -96.243557,
+            15.0
+          ],
+          [
+            127.762794,
+            -1.291651,
+            15.0
+          ],
+          [
+            78.282032,
+            24.411543,
+            15.0
+          ],
+          [
+            -42.961524,
+            -45.588457,
+            15.0
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_11"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_11",
+        "property": "pivot",
+        "value": [
+          119.282032,
+          -46.60254,
+          15.0
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_11",
+        "position": [
+          119.282032,
+          -46.60254,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_11"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "draw_spline",
+      "arguments": {
+        "name": "IM_Blade_12",
+        "points": [
+          [
+            16.291651,
+            -101.782032,
+            15.5
+          ],
+          [
+            65.262794,
+            -106.961524,
+            15.5
+          ],
+          [
+            146.243557,
+            -26.69873,
+            15.5
+          ],
+          [
+            111.291651,
+            62.762794,
+            15.5
+          ],
+          [
+            55.588457,
+            60.282032,
+            15.5
+          ],
+          [
+            -14.411543,
+            -60.961524,
+            15.5
+          ]
+        ],
+        "closed": true,
+        "knot_type": "corner",
+        "curve_type": "line"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-mesh-ops",
+      "tool_name": "add_modifier",
+      "arguments": {
+        "modifier_class": "Extrude",
+        "node_names": [
+          "IM_Blade_12"
+        ],
+        "properties": {
+          "amount": 0.45,
+          "capStart": true,
+          "capEnd": true
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "set_object_property",
+      "arguments": {
+        "node_name": "IM_Blade_12",
+        "property": "pivot",
+        "value": [
+          126.60254,
+          19.282032,
+          15.5
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Pin_12",
+        "position": [
+          126.60254,
+          19.282032,
+          34
+        ],
+        "params": {
+          "radius": 4.5,
+          "height": 5,
+          "sides": 32
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Pin_12"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_BlackOxide",
+        "node_names": [
+          "IM_Blade_01",
+          "IM_Blade_02",
+          "IM_Blade_03",
+          "IM_Blade_04",
+          "IM_Blade_05",
+          "IM_Blade_06",
+          "IM_Blade_07",
+          "IM_Blade_08",
+          "IM_Blade_09",
+          "IM_Blade_10",
+          "IM_Blade_11",
+          "IM_Blade_12"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-animation",
+      "tool_name": "set_keyframes",
+      "arguments": {
+        "node_names": [
+          "IM_Blade_01",
+          "IM_Blade_02",
+          "IM_Blade_03",
+          "IM_Blade_04",
+          "IM_Blade_05",
+          "IM_Blade_06",
+          "IM_Blade_07",
+          "IM_Blade_08",
+          "IM_Blade_09",
+          "IM_Blade_10",
+          "IM_Blade_11",
+          "IM_Blade_12"
+        ],
+        "keys": [
+          {
+            "frame": 1,
+            "property": "rotation",
+            "value": [
+              0,
+              0,
+              10
+            ],
+            "interpolation": "bezier"
+          },
+          {
+            "frame": 24,
+            "property": "rotation",
+            "value": [
+              0,
+              0,
+              10
+            ],
+            "interpolation": "bezier"
+          },
+          {
+            "frame": 72,
+            "property": "rotation",
+            "value": [
+              0,
+              0,
+              -45
+            ],
+            "interpolation": "bezier"
+          },
+          {
+            "frame": 96,
+            "property": "rotation",
+            "value": [
+              0,
+              0,
+              -45
+            ],
+            "interpolation": "bezier"
+          },
+          {
+            "frame": 144,
+            "property": "rotation",
+            "value": [
+              0,
+              0,
+              10
+            ],
+            "interpolation": "bezier"
+          }
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_01",
+        "position": [
+          198.0,
+          0.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          0.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_01"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_02",
+        "position": [
+          196.306083,
+          25.844186,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          7.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_02"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_03",
+        "position": [
+          191.253314,
+          51.246171,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          15.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_03"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_04",
+        "position": [
+          182.928147,
+          75.77132,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          22.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_04"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_05",
+        "position": [
+          171.47303,
+          99.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          30.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_05"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_06",
+        "position": [
+          157.083961,
+          120.534763,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          37.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_06"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_07",
+        "position": [
+          140.007143,
+          140.007143,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          45.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_07"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_08",
+        "position": [
+          120.534763,
+          157.083961,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          52.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_08"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_09",
+        "position": [
+          99.0,
+          171.47303,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          60.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_09"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_10",
+        "position": [
+          75.77132,
+          182.928147,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          67.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_10"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_11",
+        "position": [
+          51.246171,
+          191.253314,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          75.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_11"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_12",
+        "position": [
+          25.844186,
+          196.306083,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          82.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_12"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_13",
+        "position": [
+          0.0,
+          198.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          90.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_13"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_14",
+        "position": [
+          -25.844186,
+          196.306083,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          97.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_14"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_15",
+        "position": [
+          -51.246171,
+          191.253314,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          105.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_15"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_16",
+        "position": [
+          -75.77132,
+          182.928147,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          112.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_16"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_17",
+        "position": [
+          -99.0,
+          171.47303,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          120.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_17"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_18",
+        "position": [
+          -120.534763,
+          157.083961,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          127.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_18"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_19",
+        "position": [
+          -140.007143,
+          140.007143,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          135.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_19"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_20",
+        "position": [
+          -157.083961,
+          120.534763,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          142.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_20"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_21",
+        "position": [
+          -171.47303,
+          99.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          150.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_21"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_22",
+        "position": [
+          -182.928147,
+          75.77132,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          157.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_22"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_23",
+        "position": [
+          -191.253314,
+          51.246171,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          165.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_23"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_24",
+        "position": [
+          -196.306083,
+          25.844186,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          172.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_24"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_25",
+        "position": [
+          -198.0,
+          0.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          180.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_25"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_26",
+        "position": [
+          -196.306083,
+          -25.844186,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          187.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_26"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_27",
+        "position": [
+          -191.253314,
+          -51.246171,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          195.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_27"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_28",
+        "position": [
+          -182.928147,
+          -75.77132,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          202.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_28"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_29",
+        "position": [
+          -171.47303,
+          -99.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          210.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_29"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_30",
+        "position": [
+          -157.083961,
+          -120.534763,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          217.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_30"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_31",
+        "position": [
+          -140.007143,
+          -140.007143,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          225.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_31"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_32",
+        "position": [
+          -120.534763,
+          -157.083961,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          232.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_32"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_33",
+        "position": [
+          -99.0,
+          -171.47303,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          240.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_33"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_34",
+        "position": [
+          -75.77132,
+          -182.928147,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          247.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_34"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_35",
+        "position": [
+          -51.246171,
+          -191.253314,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          255.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_35"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_36",
+        "position": [
+          -25.844186,
+          -196.306083,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          262.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_36"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_37",
+        "position": [
+          -0.0,
+          -198.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          270.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_37"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_38",
+        "position": [
+          25.844186,
+          -196.306083,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          277.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_38"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_39",
+        "position": [
+          51.246171,
+          -191.253314,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          285.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_39"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_40",
+        "position": [
+          75.77132,
+          -182.928147,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          292.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_40"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_41",
+        "position": [
+          99.0,
+          -171.47303,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          300.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_41"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_42",
+        "position": [
+          120.534763,
+          -157.083961,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          307.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_42"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_43",
+        "position": [
+          140.007143,
+          -140.007143,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          315.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_43"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_44",
+        "position": [
+          157.083961,
+          -120.534763,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          322.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_44"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_45",
+        "position": [
+          171.47303,
+          -99.0,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          330.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_45"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_46",
+        "position": [
+          182.928147,
+          -75.77132,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          337.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_46"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_47",
+        "position": [
+          191.253314,
+          -51.246171,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          345.0
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_47"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "create_object",
+      "arguments": {
+        "object_type": "Cylinder",
+        "name": "IM_Fastener_48",
+        "position": [
+          196.306083,
+          -25.844186,
+          34
+        ],
+        "rotation": [
+          0,
+          0,
+          352.5
+        ],
+        "params": {
+          "radius": 2.5,
+          "height": 3,
+          "sides": 6
+        }
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Brass",
+        "node_names": [
+          "IM_Fastener_48"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-modeling",
+      "tool_name": "create_plane",
+      "arguments": {
+        "name": "IM_GroundPlane",
+        "width": 3000,
+        "length": 3000,
+        "position": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-materials",
+      "tool_name": "apply_material",
+      "arguments": {
+        "material_name": "IM_Ground",
+        "node_names": [
+          "IM_GroundPlane"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-camera-lighting",
+      "tool_name": "create_camera",
+      "arguments": {
+        "name": "IM_HeroCamera",
+        "camera_type": "target",
+        "position": [
+          420,
+          -540,
+          760
+        ],
+        "target_position": [
+          0,
+          0,
+          15
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution",
+      "historical_unverified_focal_length_mm": 65,
+      "reproduction_note": "Historical rendering actually used45degree FOV; the target-camera focal request is now explicitly rejected if unsupported. Verify native FOV rather than restoring the false65mm claim."
+    },
+    {
+      "skill": "3dsmax-camera-lighting",
+      "tool_name": "set_active_camera",
+      "arguments": {
+        "camera_name": "IM_HeroCamera"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-render",
+      "tool_name": "configure_renderer",
+      "arguments": {
+        "renderer_type": "arnold"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-camera-lighting",
+      "tool_name": "lighting_capabilities",
+      "arguments": {},
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-camera-lighting",
+      "tool_name": "create_renderer_light",
+      "arguments": {
+        "provider": "arnold",
+        "lights": [
+          {
+            "name": "IM_Key",
+            "kind": "area",
+            "shape": "quad",
+            "targeted": true,
+            "position": [
+              -300,
+              -240,
+              550
+            ],
+            "target_position": [
+              0,
+              0,
+              20
+            ],
+            "size_u": 420,
+            "size_v": 120,
+            "intensity": 1,
+            "exposure": 4,
+            "color": [
+              255,
+              231,
+              202
+            ]
+          },
+          {
+            "name": "IM_Fill",
+            "kind": "area",
+            "shape": "quad",
+            "targeted": true,
+            "position": [
+              380,
+              140,
+              370
+            ],
+            "target_position": [
+              0,
+              0,
+              20
+            ],
+            "size_u": 260,
+            "size_v": 320,
+            "intensity": 1,
+            "exposure": 2,
+            "color": [
+              179,
+              215,
+              255
+            ]
+          },
+          {
+            "name": "IM_Rim",
+            "kind": "area",
+            "shape": "quad",
+            "targeted": true,
+            "position": [
+              -200,
+              320,
+              240
+            ],
+            "target_position": [
+              0,
+              0,
+              20
+            ],
+            "size_u": 400,
+            "size_v": 70,
+            "intensity": 1,
+            "exposure": 3,
+            "color": [
+              255,
+              249,
+              229
+            ]
+          }
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-render",
+      "tool_name": "set_render_resolution",
+      "arguments": {
+        "width": 1280,
+        "height": 960
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-animation",
+      "tool_name": "get_anim_curves",
+      "arguments": {
+        "node_names": [
+          "IM_Blade_01",
+          "IM_Blade_02",
+          "IM_Blade_03",
+          "IM_Blade_04",
+          "IM_Blade_05",
+          "IM_Blade_06",
+          "IM_Blade_07",
+          "IM_Blade_08",
+          "IM_Blade_09",
+          "IM_Blade_10",
+          "IM_Blade_11",
+          "IM_Blade_12"
+        ]
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-animation",
+      "tool_name": "set_current_time",
+      "arguments": {
+        "frame": 72
+      },
+      "execution_status": "adapted reproduction intent; not a new execution"
+    },
+    {
+      "skill": "3dsmax-scene",
+      "tool_name": "save_scene_as",
+      "arguments": {
+        "file_path": "${ABSOLUTE_OUTPUT_DIRECTORY}/iris-mechanism.max"
+      },
+      "execution_status": "adapted reproduction intent; not a new execution",
+      "reproduction_note": "Resolve the explicit output directory before calling the typed tool; this placeholder is not a runnable request."
+    }
+  ],
+  "camera_actual_fov_degrees": 45,
+  "source_geometry_count": 84,
+  "new_rebuild_from_this_adapted_recipe": "not run"
+}

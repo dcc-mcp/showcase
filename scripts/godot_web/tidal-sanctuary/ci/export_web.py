@@ -7,13 +7,14 @@ import re
 import shutil
 import subprocess
 from pathlib import Path
-from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
+from mcp_export import export_through_mcp, inspect_clean_pck
+from common import ASSET_NOTICE_FILES, GAME_FILES, RAW_IMAGE_FILES, RAW_STORY_FILES, WEB_TEMPLATE_SHA256, checked_godot, check_engine_log, copy_game, isolated_env, isolated_output, sha256, write_json
 
 
 def raw_include_filter():
     # Godot imports ordinary resources normally. Static image byte buffers are
     # retained by exact manifest path, never a blanket binary-file inclusion.
-    return ",".join(("*.otf", *RAW_IMAGE_FILES))
+    return ",".join(("*.otf", *RAW_IMAGE_FILES, *RAW_STORY_FILES))
 
 
 def copy_asset_notices(native, site):
@@ -21,6 +22,39 @@ def copy_asset_notices(native, site):
         destination = site / name
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(native / name, destination)
+
+
+WEB_AUDIO_FILES = ("assets/audio/tidekeeper-loop.ogg", "assets/audio/chart_read.wav",
+                   "assets/audio/key_pickup.wav", "assets/audio/pearl_pickup.wav",
+                   "assets/audio/beacon_resolve.wav")
+
+
+def prepare_audio_before_game(page):
+    """Use the pinned shell's existing boot flow, before its first 3D frame.
+
+    The bounded preload never resumes the context or creates a source. On a
+    loading error the native opening still owns Retry; no automatic retry or
+    false playing state is introduced by the shell.
+    """
+    scope = "(function () {"
+    start = "engine.startGame({"
+    if page.count(scope) != 1 or page.count(start) != 1:
+        raise RuntimeError("Official shell boot scope changed")
+    urls = dict(zip(("music", "chart_read", "key_pickup", "pearl_pickup", "beacon_resolve"), WEB_AUDIO_FILES))
+    page = page.replace(scope, "(async function () {")
+    return page.replace(start, "await window.TidalWebAudio.initialize(" + json.dumps(urls) + ");\n\t\t" + start)
+
+
+def copy_web_audio(native, site):
+    """Publish only exact manifest-owned original audio bytes, never substitutes."""
+    for name in ("web_audio.js", *WEB_AUDIO_FILES):
+        if name not in GAME_FILES:
+            raise ValueError("Browser audio is outside the source manifest: " + name)
+        destination = site / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(native / name, destination)
+        if sha256(destination) != sha256(native / name):
+            raise ValueError("Browser audio changed while copying: " + name)
 
 
 def main():
@@ -54,7 +88,7 @@ platform="Web"
 runnable=true
 export_filter="all_resources"
 include_filter="__RAW_INCLUDE_FILTER__"
-exclude_filter=""
+exclude_filter="addons/*,tidal_export_*,web-output/*"
 export_path=""
 script_export_mode=2
 
@@ -75,15 +109,17 @@ progressive_web_app/enabled=false
               "raw_image_files": list(RAW_IMAGE_FILES), "include_filter": raw_include_filter(),
               "native_sha256": {name: sha256(args.native / name) for name in GAME_FILES}}
     try:
-        for name, extra in (("import", ["--editor", "--import", "--quit"]),
-                            ("export", ["--export-release", "Web", str(site / "index.html")])):
-            process = subprocess.run([godot, "--headless", "--path", str(project), *extra],
-                                      env=env, capture_output=True, text=True, timeout=240)
-            output = process.stdout + process.stderr
-            (out / (name + ".log")).write_text(output)
-            check_engine_log(output)
-            if process.returncode != 0 or "ERROR:" in output:
-                raise RuntimeError(f"Official Godot {name} failed; inspect {name}.log")
+        native_hashes = {name: sha256(args.native / name) for name in GAME_FILES}
+        exported = export_through_mcp(godot, project, out, env, native_hashes)
+        report["ecosystem_export"] = json.loads((out / "export-mcp.json").read_text())
+        report["pack_inspection"] = inspect_clean_pck(exported / "index.pck")
+        for item in exported.iterdir():
+            if item.name == ".gdignore":
+                assert item.read_bytes() == b""
+                continue  # Explicit manager control file, not a public product.
+            if not item.is_file():
+                raise RuntimeError("Unexpected directory in owned Web export")
+            shutil.copyfile(item, site / item.name)
         page = (site / "index.html").read_text()
         match = re.search(r'const GODOT_CONFIG = (\{.*?\});', page)
         if not match:
@@ -96,21 +132,27 @@ progressive_web_app/enabled=false
         config["ensureCrossOriginIsolationHeaders"] = False
         config["emscriptenPoolSize"] = 0
         config["godotPoolSize"] = 0
+        # Public engine CLI selection, Web export only. The owned browser graph
+        # handles ALL five sounds; no silent second Godot AudioContext is allowed.
+        config["args"] = [*config.get("args", []), "--audio-driver", "Dummy"]
         page = page[:match.start(1)] + json.dumps(config) + page[match.end(1):]
         marker = "const engine = new Engine(GODOT_CONFIG);"
         if page.count(marker) != 1:
             raise RuntimeError("Official shell engine marker changed")
         page = page.replace(marker, "const tidalExit = window.TidalSaveExit.attach(GODOT_CONFIG, () => engine.requestQuit());\n" + marker)
-        page = page.replace('<script src="index.js"></script>', '<script src="index.js"></script>\n<script src="save-exit.js"></script>')
+        page = page.replace('<script src="index.js"></script>', '<script src="index.js"></script>\n<script src="web_audio.js"></script>\n<script src="save-exit.js"></script>')
         if 'src="save-exit.js"' not in page:
             raise RuntimeError("Official shell script marker changed")
+        page = prepare_audio_before_game(page)
         (site / "index.html").write_text(page)
         shutil.copyfile(Path(__file__).with_name("web_exit.js"), site / "save-exit.js")
         shutil.copyfile(args.native / "sanctuary-font.otf", site / "sanctuary-font.otf")
         for name in ("LICENSE.txt", "COPYRIGHT.txt"):
             shutil.copyfile(args.license_dir / name, site / name)
-        shutil.copyfile(args.native / "FONT-LICENSE.txt", site / "FONT-LICENSE.txt")
+        for name in ("FONT-LICENSE.txt", "FONT-NOTICE.txt", "FONT-SOURCE.json"):
+            shutil.copyfile(args.native / name, site / name)
         copy_asset_notices(args.native, site)
+        copy_web_audio(args.native, site)
         for name in ("index.html", "index.js", "index.wasm", "index.pck"):
             if not (site / name).is_file() or (site / name).stat().st_size == 0:
                 raise RuntimeError(f"Expected official Web export file is missing: {name}")
@@ -118,13 +160,16 @@ progressive_web_app/enabled=false
             "Tidal Sanctuary: unpublished original 3D playable prototype\n\n"
             "Keep this folder together. Run: python -m http.server 8000\n"
             "Open http://localhost:8000/ in a WebGL 2-capable browser.\n\n"
-            "WASD / arrows: walk, wade and swim. E: interact. R: restart. L: language. H: hide UI.\n"
-            "Touch: drag on the left to move; tap the action button to interact.\n"
+            "Choose Begin / Continue before playing or enabling music.\n"
+            "WASD / arrows: move/swim. E: interact. J: journal. M: sound. R: request restart. L: language.\n"
+            "Touch: drag left to move; tap action to interact. Journal includes confirmed restart.\n"
             "Read the beach map, recover the inland and sea treasures, then return to the ring.\n\n"
             "Web: use Save & return and wait for Saved before leaving. Immediate tab close can interrupt storage.\n"
             "This is CI staging, not a public deployment.\n"
             "The native movie is an explicitly scripted traversal of the real game.\n"
             "Browser portrait evidence is emulation, not a physical-phone test.\n"
+            "Web audio: one browser-native looping graph via Godot JavaScriptBridge; desktop uses Godot audio.\n"
+            "If audio preparation fails, use the native Retry audio action before Begin.\n"
             "Godot runtime notices: LICENSE.txt and COPYRIGHT.txt.\n"
             "Subset font: SIL Open Font License, see FONT-LICENSE.txt.\n"
             "Kenney models: CC0, see assets/KENNEY-LICENSE.txt and assets/SOURCE.json.\n"

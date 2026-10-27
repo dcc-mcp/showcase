@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "archive": "RelicCourier-native.zip",
+  "bytes": 44273997,
+  "sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+  "file_count": 72,
+  "integrity": "passed",
+  "files": [
+    {
+      "path": "RelicCourier/assets/arch.glb",
+      "bytes": 309912,
+      "sha256": "7899ea9735ffa8647a4cb132bef5f98ea48224b3dd6ec10d8fae14ba0a98957b"
+    },
+    {
+      "path": "RelicCourier/assets/asset-map.json",
+      "bytes": 7198,
+      "sha256": "85c689de59c16a93c29e6030d350087bf438bf54935ada132a2930b1cc0a29c5"
+    },
+    {
+      "path": "RelicCourier/assets/chest-interactive.glb",
+      "bytes": 2444872,
+      "sha256": "061193e05d493394a880ec4a3705fa18bb282484d47e418f41b5e8a103dce3a5"
+    },
+    {
+      "path": "RelicCourier/assets/chest.glb",
+      "bytes": 2144840,
+      "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+    },
+    {
+      "path": "RelicCourier/assets/column.glb",
+      "bytes": 1308584,
+      "sha256": "99e0675dbe4ea3c7e4fa70621e9eda25dc00efdac97d0522b151369a053ac1f9"
+    },
+    {
+      "path": "RelicCourier/assets/courier-character.glb",
+      "bytes": 11962060,
+      "sha256": "82a7b7456137eb133753650e2d9cda4f016ea810df68adcbfdc267f83ab29cd2"
+    },
+    {
+      "path": "RelicCourier/assets/crystal.glb",
+      "bytes": 692044,
+      "sha256": "9eee33f48e1cef6370dd0360fe109857715445b515b8e04025180bd3972d41cf"
+    },
+    {
+      "path": "RelicCourier/assets/derivative-provenance.json",
+      "bytes": 35419,
+      "sha256": "06b3abfc5b09f834efc3344868ffe49da6ec70b7294b74b8a2a55bd003876805"
+    },
+    {
+      "path": "RelicCourier/assets/gate.glb",
+      "bytes": 2213668,
+      "sha256": "06d83425c4e3880eb2759cad754d52942e417851ab0d4fe7a8faa436fd7dd958"
+    },
+    {
+      "path": "RelicCourier/assets/guardian-character.glb",
+      "bytes": 17455464,
+      "sha256": "9735ae377cd9cccbfa3bbc75f53f12874158bc71a5b0fed3fc2f6ae4a6b14a60"
+    },
+    {
+      "path": "RelicCourier/assets/guardian.glb",
+      "bytes": 705016,
+      "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+    },
+    {
+      "path": "RelicCourier/assets/pedestal.glb",
+      "bytes": 680392,
+      "sha256": "0fca9564e63ee62d07f9e16c516af265c56379bfeaccb7edd61e4680d26c5a84"
+    },
+    {
+      "path": "RelicCourier/assets/portal.glb",
+      "bytes": 2592960,
+      "sha256": "e4ff28b1e47d9cb7b9ddeb5a4a27061921275512c38bd3d30373eaf96c181da2"
+    },
+    {
+      "path": "RelicCourier/assets/shrine.glb",
+      "bytes": 4550948,
+      "sha256": "267fd55b9773b109a7dea93f832d80b68f8191b6cf874210ce6ce3e3a84f27d7"
+    },
+    {
+      "path": "RelicCourier/assets/stairs.glb",
+      "bytes": 1081016,
+      "sha256": "746e1c205fbcb07c9a2ab40b008b402e6d004e2655b792bd9983ae2580637556"
+    },
+    {
+      "path": "RelicCourier/audio/AUDIO-SOURCES.json",
+      "bytes": 2119,
+      "sha256": "c2051c95c576168608374fa87fb4b4e3847602a09c058be0b9e520ce2f0497b3"
+    },
+    {
+      "path": "RelicCourier/audio/chop.ogg",
+      "bytes": 9370,
+      "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486"
+    },
+    {
+      "path": "RelicCourier/audio/creak1.ogg",
+      "bytes": 15761,
+      "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e"
+    },
+    {
+      "path": "RelicCourier/audio/footstep00.ogg",
+      "bytes": 9475,
+      "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+    },
+    {
+      "path": "RelicCourier/audio/handleCoins.ogg",
+      "bytes": 25394,
+      "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+    },
+    {
+      "path": "RelicCourier/audio/knifeSlice.ogg",
+      "bytes": 15532,
+      "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+    },
+    {
+      "path": "RelicCourier/audio/metalLatch.ogg",
+      "bytes": 10208,
+      "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708"
+    },
+    {
+      "path": "RelicCourier/data/arpg.json",
+      "bytes": 2097,
+      "sha256": "cc3104caa9687ab25ea2112d928161a7a0aea1bcd385944c97f772a77e6f1f0d"
+    },
+    {
+      "path": "RelicCourier/export_presets.cfg",
+      "bytes": 604,
+      "sha256": "f95adb3d22d4c5ea199673fd18bbe4866b23a35dd34614d62ecc54764c008b49"
+    },
+    {
+      "path": "RelicCourier/notices/ASSET-RIGHTS.md",
+      "bytes": 2606,
+      "sha256": "f840867af70be2478aeecef5787d258c38faa48ec04706cccea4f5466940df38"
+    },
+    {
+      "path": "RelicCourier/notices/KENNEY-MIT.txt",
+      "bytes": 1062,
+      "sha256": "f755bf8f21002f8d5baedaf75564141d363971f3f7bc8c4062956b0b15a6f04f"
+    },
+    {
+      "path": "RelicCourier/notices/kenney-player-original.gd.txt",
+      "bytes": 3229,
+      "sha256": "bfb8edfce98b95e7f7116dbc3e884604db277904dd9c329d4493521fa363e269"
+    },
+    {
+      "path": "RelicCourier/notices/KENNEY-RPG-AUDIO.txt",
+      "bytes": 478,
+      "sha256": "5735dfd72cb64cbbceda4ebc00c380c41ca680edb82ff153aa7c9ab97614c539"
+    },
+    {
+      "path": "RelicCourier/PRODUCTION.md",
+      "bytes": 11473,
+      "sha256": "29f82b0004307029070a99e09ab1ee6191e2ed727dbad66380601eee9e75cd7e"
+    },
+    {
+      "path": "RelicCourier/project.godot",
+      "bytes": 1021,
+      "sha256": "2befb72f5dfaa8095b2e18e19a3373dc71713c1966907a74357f6528e2b4c935"
+    },
+    {
+      "path": "RelicCourier/README.md",
+      "bytes": 7753,
+      "sha256": "669af9b008424a492ba7b04fd82da8c39cc0fee91e27f428664219bf0b7ffd64"
+    },
+    {
+      "path": "RelicCourier/scenes/main.tscn",
+      "bytes": 211,
+      "sha256": "ac774ec55bdd520c48184c1930e1aed77f369c627282cdc27e5a377a6a180938"
+    },
+    {
+      "path": "RelicCourier/scripts/archive_stage.gd",
+      "bytes": 12167,
+      "sha256": "b83ccfee7215e960eac6f5d17883c2a877a1d70d6fefe4c3a0da25338a44f10d"
+    },
+    {
+      "path": "RelicCourier/scripts/archive_stage.gd.uid",
+      "bytes": 18,
+      "sha256": "31eb8e5072008259db1836df4bd6522bed3b4a2f02237ac59e9bdbc6b8fe48ff"
+    },
+    {
+      "path": "RelicCourier/scripts/courier.gd",
+      "bytes": 4174,
+      "sha256": "8b2d66d6ed9d4a9bc3f5c3c72e17aeeff96ffc5508b2f8e7ca8cc1c2d620af07"
+    },
+    {
+      "path": "RelicCourier/scripts/courier.gd.uid",
+      "bytes": 20,
+      "sha256": "bc3f84a2bdf7451bac00945e403936582275f8f76ebb092630700488e98e8141"
+    },
+    {
+      "path": "RelicCourier/scripts/enemy_actor.gd",
+      "bytes": 4342,
+      "sha256": "1139bb54eca11b017856ebd0497c25510f1ecf6124ec8c97d69850a5f2c496a0"
+    },
+    {
+      "path": "RelicCourier/scripts/enemy_actor.gd.uid",
+      "bytes": 20,
+      "sha256": "f9ec4382bae48c80544ac7ea7f410504cfcb55a8b459194178db31b1ffb3302d"
+    },
+    {
+      "path": "RelicCourier/scripts/expedition.gd",
+      "bytes": 15243,
+      "sha256": "22a6a18aa7b17898a6148c700af49c14f310d309dd337c7176ba75ad9d626d65"
+    },
+    {
+      "path": "RelicCourier/scripts/expedition.gd.uid",
+      "bytes": 20,
+      "sha256": "cc95070698cd589e0f78c490eef8eb50f20f0f4d967b57214987fc787b474d45"
+    },
+    {
+      "path": "RelicCourier/scripts/interface.gd",
+      "bytes": 22691,
+      "sha256": "bd50f0dd39cdd76acfd9071a4d397e9010b8bd7dec09fd39a1cbdcd89b1624fc"
+    },
+    {
+      "path": "RelicCourier/scripts/interface.gd.uid",
+      "bytes": 20,
+      "sha256": "302c091568ed70e02af1e44003f2837ba9fed25ee12b47d8f374b3befceb727c"
+    },
+    {
+      "path": "RelicCourier/scripts/main.gd",
+      "bytes": 43427,
+      "sha256": "5fc4d8ac574e62c8d9d7d0c3cb4785f45977243be9521a053b96f3bb83afdb22"
+    },
+    {
+      "path": "RelicCourier/scripts/main.gd.uid",
+      "bytes": 20,
+      "sha256": "450b0abcd14539030f71f3e34f0737d49791bb6cda412711c81b04e2e450b370"
+    },
+    {
+      "path": "RelicCourier/tests/inspect_pack.gd",
+      "bytes": 1901,
+      "sha256": "f0eacebc6205da0ddbdc3c63044a55bb7366574c1e1af90d913a1fd0b3e50280"
+    },
+    {
+      "path": "RelicCourier/tests/inspect_pack.gd.uid",
+      "bytes": 20,
+      "sha256": "a4b92c0d70e941871fb0ee19b4dede4f91bc55f714e9080afd4bfd1e2ecdbeaf"
+    },
+    {
+      "path": "RelicCourier/tests/subset_font.py",
+      "bytes": 1887,
+      "sha256": "6c79e5c86070bc47a032540763dc92557c930943472c3775edeed17a646aa45c"
+    },
+    {
+      "path": "RelicCourier/tests/test_character_motion.gd",
+      "bytes": 4760,
+      "sha256": "11f2fd8b7914cbf447caf7296c3f1402efb893b9658f9827c5f7a52488148144"
+    },
+    {
+      "path": "RelicCourier/tests/test_character_motion.gd.uid",
+      "bytes": 19,
+      "sha256": "c03357eb50cc2d2c9f81531aa624854c04c4b2fcb017ef0ab0e9d88cc122cb9a"
+    },
+    {
+      "path": "RelicCourier/tests/test_chest_persistence.gd",
+      "bytes": 11615,
+      "sha256": "f0aa2d2c79bec0535cb832cc5495c420bfdd7c449a6d65f65ac240ca4afee4fe"
+    },
+    {
+      "path": "RelicCourier/tests/test_chest_persistence.gd.uid",
+      "bytes": 20,
+      "sha256": "75c93983f2f08355f07ed87e04380dd0f195d4bef5d6389794d56e27f14da1f7"
+    },
+    {
+      "path": "RelicCourier/tests/test_enemy_cadence.gd",
+      "bytes": 2436,
+      "sha256": "017f4195636b26d493e8e9a20582db13f22e865d66331c34525327166da580b9"
+    },
+    {
+      "path": "RelicCourier/tests/test_enemy_cadence.gd.uid",
+      "bytes": 20,
+      "sha256": "779f68e7231fa901294be8d7233aba57bf1d5e02b29a3692b85dfd7a04e0bcc0"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition.gd",
+      "bytes": 11781,
+      "sha256": "04c7676e9ccb8b9ea2cd3b9be0f22483959a269d20770a5dfc7f8c3d209f66c6"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition.gd.uid",
+      "bytes": 20,
+      "sha256": "2d8eced80b27d938bd63f2bbe298b198bde11b439cbc27e2dcf87beffe4836a1"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition_course.gd",
+      "bytes": 4695,
+      "sha256": "825052ce32776f360b4b9b585279de53088d5a3fc6933633a2286e178adb69b5"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition_course.gd.uid",
+      "bytes": 20,
+      "sha256": "9095ad17084d57b7419d748c38967843098d3dc7b7b47b5a8a061f27b2a18be6"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition_native.gd",
+      "bytes": 5502,
+      "sha256": "52b3b53b6b3423a96ea8c20ee8ac465a60d86cd542df1cfd21543ed988ae72de"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition_native.gd.uid",
+      "bytes": 20,
+      "sha256": "e54fbdb20fc8b0e5ddd933fbc5d483f59836accbaebf0755f9134917a793c82e"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition_route.gd",
+      "bytes": 3243,
+      "sha256": "2add5b540f8adc8a2e6289d53875ab3aeb688f5f60e2d3b7d0f12b979d56396a"
+    },
+    {
+      "path": "RelicCourier/tests/test_expedition_route.gd.uid",
+      "bytes": 20,
+      "sha256": "bb11f6f1d69501f64c16badec02f91b87057a907ed5656fd2163973f1357d0fb"
+    },
+    {
+      "path": "RelicCourier/tests/test_layout.gd",
+      "bytes": 2439,
+      "sha256": "a4ed2ca4006898367027c702b8aa0c8253dde5d1673b5837ac1eaa08280b2d9d"
+    },
+    {
+      "path": "RelicCourier/tests/test_layout.gd.uid",
+      "bytes": 19,
+      "sha256": "53e913cccd7337708e598d15da851ec00b96670d54f59417669c89e7f4a8c923"
+    },
+    {
+      "path": "RelicCourier/tests/test_native.gd",
+      "bytes": 3046,
+      "sha256": "bcc4eee3ce7eaec32fb25d8a0a2756867772845800f86fbfd761a5c5292d444c"
+    },
+    {
+      "path": "RelicCourier/tests/test_native.gd.uid",
+      "bytes": 19,
+      "sha256": "ae2131b5233c764f3fae1ac04aa0986b1196cb54259bced3d1156adeb7c7948f"
+    },
+    {
+      "path": "RelicCourier/tests/test_stage.gd",
+      "bytes": 2235,
+      "sha256": "f253ac16299969f6ad30c2a50f9161d5d0c5a3b38e0f6af8b6fc6009b2673750"
+    },
+    {
+      "path": "RelicCourier/tests/test_stage.gd.uid",
+      "bytes": 19,
+      "sha256": "13c742836ef5c954fc096140cf42f6a650ebd9e3513b06cd3c570f6a3360cdf5"
+    },
+    {
+      "path": "RelicCourier/tests/test_touch.gd",
+      "bytes": 2359,
+      "sha256": "965b3eaebf814ddc019660c761befffb904aed4c6e2e592746d9dff4726bd427"
+    },
+    {
+      "path": "RelicCourier/tests/test_touch.gd.uid",
+      "bytes": 20,
+      "sha256": "487db091db93366343a200764c7cc8b7e41b2a8634bc456fd63fe92041082a42"
+    },
+    {
+      "path": "RelicCourier/ui/FONT-LICENSE.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "path": "RelicCourier/ui/FONT-SOURCE.json",
+      "bytes": 509,
+      "sha256": "aeccfeed92c46d1f3de3e0cf5ecf4f2a107d00a05f799927944e0f388b0afee1"
+    },
+    {
+      "path": "RelicCourier/ui/relic-sans.otf",
+      "bytes": 111548,
+      "sha256": "393d93421cd5201ded7e8341639c209aec16114a273eae77c0d607e89dec3e54"
+    }
+  ],
+  "excluded": [
+    "editor caches",
+    "adapter and debugger",
+    "logs",
+    "original provider downloads",
+    "extracted texture sidecars"
+  ],
+  "acceptance": "Packaging only; native and Web input are separate gates."
+}

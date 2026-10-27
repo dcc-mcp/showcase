@@ -5,7 +5,10 @@ LEGACY_RAW = 40 * 1024 * 1024
 LEGACY_GZIP = 11 * 1024 * 1024
 # Dawnkeep adds a measured 5.1 MiB pack with licensed 3D art and two music tracks.
 # It reuses the existing engine. This does not expand the legacy demos' budget.
-ADDITIONAL = {'dawnkeep-defense': (6 * 1024 * 1024, 5 * 1024 * 1024)}
+ADDITIONAL = {
+    'dawnkeep-defense': (6 * 1024 * 1024, 5 * 1024 * 1024),
+    'hyper3d-relic-room': (40 * 1024 * 1024, 40 * 1024 * 1024),
+}
 
 def measure(root, assets):
     groups = {'legacy': [0, 0], **{slug: [0, 0] for slug in ADDITIONAL}}
