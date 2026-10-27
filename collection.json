@@ -6061,7 +6061,7 @@
         },
         {
           "name": "MCP 工具桥接",
-          "result": "unknown",
+          "result": "not_run",
           "observed": "blocked：当前桥接因 ownership_conflict 无法完成，未声明本轮 MCP 工具调用验收通过。"
         },
         {
