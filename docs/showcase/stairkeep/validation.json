@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-24T22:57:55.751260+00:00",
+  "environment": {
+    "engine": "4.7.2.stable.official.ed1daf0bf",
+    "engine_binary": {
+      "file": "Godot_v4.7.2-stable_win64.exe",
+      "bytes": 180858888,
+      "sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424"
+    },
+    "renderer": "Compatibility",
+    "language": "GDScript",
+    "web_threads": false,
+    "native_viewport_px": [
+      1280,
+      800
+    ],
+    "route": "existing editor CLI, headless",
+    "adapter": "not used / no typed MCP claim",
+    "core": "not used / no gateway claim"
+  },
+  "counts": {
+    "floors": 3,
+    "objects": 34,
+    "rule_checks": 42,
+    "projected_cells": 34,
+    "hud_resource_symbols": 6,
+    "simulation_runs": 10000,
+    "unique_sequences": 7970,
+    "combat_comparisons": 69968,
+    "wins": 9980,
+    "resource_dead_ends": 20
+  },
+  "checks": [
+    {
+      "name": "native deterministic rules and four strict route budgets",
+      "result": "pass",
+      "observed": {
+        "checks": 42,
+        "remaining_hp": [
+          49,
+          78,
+          20,
+          85
+        ]
+      },
+      "evidence": "rules-checks.json"
+    },
+    {
+      "name": "native projection and settled desktop control bounds",
+      "result": "pass",
+      "observed": {
+        "roundtrips": 34,
+        "inspector_compass_overlap": false
+      },
+      "evidence": "layout-checks.json"
+    },
+    {
+      "name": "real official single-thread Web export",
+      "result": "pass",
+      "observed": {
+        "runtime_members": 4,
+        "threads": false,
+        "source_hashes_match": true
+      },
+      "evidence": "export-provenance.json"
+    },
+    {
+      "name": "multi-policy real-core invariants",
+      "result": "pass",
+      "observed": {
+        "runs": 10000,
+        "preview_comparisons": 69968,
+        "invariant_errors": 0
+      },
+      "evidence": "simulation-10000.json"
+    },
+    {
+      "name": "all sampled resource orders can win",
+      "result": "fail",
+      "expected": {
+        "wins": 10000,
+        "dead_ends": 0
+      },
+      "observed": {
+        "wins": 9980,
+        "dead_ends": 20
+      },
+      "evidence": "simulation-10000.json",
+      "interpretation": "Planning failures are retained, not silently balanced away. No universal solvability claim."
+    }
+  ],
+  "stage_status": {
+    "native_import": "passed",
+    "native_rules": "passed",
+    "native_scene_geometry": "passed",
+    "web_export": "passed",
+    "native_pixels": "blocked",
+    "native_real_input": "blocked",
+    "web_http_browser": "blocked",
+    "physical_mobile": "not-tested",
+    "sound": "not-tested / intentionally silent",
+    "full_21_floor_campaign": "not-implemented"
+  },
+  "not_claimed": [
+    "Rendered native gameplay screenshots, animation/occlusion or subjective visual acceptance",
+    "Human/native or actual HTTP browser input and IndexedDB persistence",
+    "Typed DCC-MCP execution, gateway routing or automated provider install",
+    "Every reachable resource state is solvable; the sampled counterexamples are real",
+    "21 implemented floors, hours of measured play, death/mirror/respawn or save-v2",
+    "Mobile/portrait localization or physical-device performance",
+    "Publication, deployment, merge or release"
+  ]
+}

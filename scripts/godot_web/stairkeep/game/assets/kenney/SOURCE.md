@@ -1,0 +1,1 @@
+Kenney Isometric Miniature Dungeon, retrieved 2026-10-24 from https://kenney.nl/assets/isometric-miniature-dungeon . Included archive License.txt is CC0 1.0. Pure PNG files copied without edits. Player source: Characters/Male/Male_0_Idle0.png. Archive SHA256 187a0888451317fe47caac5f26e984bb79c5ddce9b8630926f0f5d9c0247d343.

@@ -1,0 +1,21 @@
+{
+  "scope": "Independent read-only source review of rules, native UI/world, exporter and actual generated Web runtime; no GUI/browser interaction",
+  "findings": [
+    {
+      "issue": "A successful virtual file write could overpromise browser persistence when IndexedDB is unavailable",
+      "status": "fixed",
+      "change": "Web Save now checks OS.is_userfs_persistent and explicitly labels session-only saves; actual browser persistence is still pending"
+    },
+    {
+      "issue": "Loading a valid victory save hid the overlay and exposed an already-won board",
+      "status": "fixed",
+      "change": "Load restores the victory modal when won is true",
+      "regression": "Actual Godot headless dedicated save fixture: victory_save_ui_restored=true; not a played human victory"
+    }
+  ],
+  "remaining": [
+    "Twenty sampled resource-exhausted randomized runs are real planning losses; explicit losing-route UX/balance needs review",
+    "Render/occlusion/animation and real browser canvas input remain untested",
+    "21-floor campaign, controlled death variants and Save v2 are design-only"
+  ]
+}
