@@ -32,6 +32,43 @@ var last_transition: Dictionary = {}
 var transition_receipts: Array[Dictionary] = []
 var _elapsed := 0.0
 
+# Passive native evidence only. Never changes input, motion, collider or position.
+# Main enables this for native human-input sessions; Web pays no capture cost.
+const CHART_MOTION_CONTRACT := "chart-blocked-normal-v2"
+const CHART_MOTION_LIMIT := 32
+var observe_chart_motion := false
+var _chart_motion: Array[Dictionary] = []
+var _chart_sources: Dictionary = {}
+
+func chart_motion_snapshot() -> Dictionary:
+ if _chart_sources.is_empty():
+  _chart_sources = {"swim_controller.gd":FileAccess.get_sha256("res://swim_controller.gd"), "main.gd":FileAccess.get_sha256("res://main.gd")}
+ return {"schema":2, "contract":CHART_MOTION_CONTRACT, "source_sha256":_chart_sources.duplicate(), "frames":_chart_motion.duplicate(true)}
+
+func _motion_vector(value: Vector3) -> Array:
+ return [value.x, value.y, value.z]
+
+func _record_chart_motion(body: CharacterBody3D, before: Vector3, attempted: Vector3, desired: Vector3, delta: float) -> void:
+ var contacts: Array[Dictionary] = []
+ for index in range(body.get_slide_collision_count()):
+  var hit: KinematicCollision3D = body.get_slide_collision(index)
+  # One slide result may contain the floor AND a wall. Index zero alone
+  # silently loses the uphill chart contact even though physics blocks it.
+  for contact_index in range(hit.get_collision_count()):
+   var collider := hit.get_collider(contact_index) as Node
+   if collider == null:continue
+   contacts.append({"slide_index":index, "contact_index":contact_index,
+    "body":str(collider.get_path()), "class":collider.get_class(),
+    "interaction_target":collider.get_meta("interaction_target", -1),
+    "intent":str(collider.get_meta("collision_intent", "")),
+    "reason":str(collider.get_meta("collision_reason", "")),
+    "normal":_motion_vector(hit.get_normal(contact_index)), "point":_motion_vector(hit.get_position(contact_index))})
+ _chart_motion.append({"physics_frame":Engine.get_physics_frames(), "delta":delta, "max_slides":body.max_slides,
+  "before":_motion_vector(before), "after":_motion_vector(body.global_position),
+  "requested_velocity":_motion_vector(attempted), "velocity":_motion_vector(body.velocity),
+  "movement_input":[desired.x, desired.z], "collisions":contacts})
+ if _chart_motion.size() > CHART_MOTION_LIMIT:_chart_motion.pop_front()
+
 func is_swimming() -> bool:
  return state == SWIM
 
@@ -45,6 +82,7 @@ func reset() -> void:
  _elapsed = 0.0
  last_transition = {}
  transition_receipts.clear()
+ _chart_motion.clear()
 
 func restored_position(saved: Vector3, ground_height: float, fallback: Vector3) -> Vector3:
  ## Only for loading a save, never to constrain normal play. Invalid/out-of-world
@@ -128,7 +166,16 @@ func step(body: CharacterBody3D, desired_move: Vector3, delta: float, ground_hei
   body.velocity.y = clampf((target_y - body.global_position.y) * (1.0 - exp(-7.0 * delta)) / delta, -2.6, 2.6)
  else:
   body.velocity.y = maxf(-20.0, body.velocity.y - 18.0 * delta)
+ # Snapshot immediately around the production move, including its real slide
+ # collisions. The small rolling buffer also records frames with NO collision.
+ var record_motion := observe_chart_motion and Vector2(body.global_position.x - 1.3, body.global_position.z - 7.8).length() < 3.0
+ var before := body.global_position
+ var attempted := body.velocity
  body.move_and_slide()
+ if record_motion:
+  _record_chart_motion(body, before, attempted, desired_move, delta)
+ elif not _chart_motion.is_empty():
+  _chart_motion.clear()
 
 func _transition(next_state: StringName, body: CharacterBody3D, reason: String) -> void:
  if next_state == state and reason != "invalid_position_recovery":

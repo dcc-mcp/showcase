@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "title": "Tidekeeper original audio",
+  "created": "2026-10-17",
+  "provenance": "Original synthesized music and event cues prepared for Tidal Sanctuary. Runtime files are unchanged copies of the original verified audio exports.",
+  "sample_rate_hz": 48000,
+  "channels": 2,
+  "rights": "Original case content; existing rights reserved. No additional license is granted by publication.",
+  "files": [
+    {
+      "file": "tidekeeper-loop.ogg",
+      "role": "music",
+      "duration_seconds": 32.0,
+      "bytes": 473881,
+      "sha256": "8e6c858574496d6f9c903224626fa98f8beb921fbfe926bd79af24caefd4ba9a"
+    },
+    {
+      "file": "chart_read.wav",
+      "role": "stage_0_to_1",
+      "duration_seconds": 0.72,
+      "bytes": 138318,
+      "sha256": "afe98709f197693e2d7c439c21a7038060100efcd911f1f6f5a6019f0089b7d6"
+    },
+    {
+      "file": "key_pickup.wav",
+      "role": "stage_1_to_2",
+      "duration_seconds": 1.05,
+      "bytes": 201678,
+      "sha256": "93ffb7ae211d62d47665e61955f7460b5cd11719f62098c46fe4eb5fc8e531bb"
+    },
+    {
+      "file": "pearl_pickup.wav",
+      "role": "stage_2_to_3",
+      "duration_seconds": 1.65,
+      "bytes": 316878,
+      "sha256": "8cfb5f2f1b41d1c3c7a51cc6dcb494b532ab3af23cdeb994a70ff3c9df3b92a7"
+    },
+    {
+      "file": "beacon_resolve.wav",
+      "role": "stage_3_to_4",
+      "duration_seconds": 4.8,
+      "bytes": 921678,
+      "sha256": "276f3af29fdb90306e355f0858e4f6a94a0a5e3ff3b6ab973ad1624d0f300b76"
+    }
+  ]
+}

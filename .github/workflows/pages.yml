@@ -40,6 +40,9 @@ jobs:
       - name: Require ecosystem provenance for every selected case
         run: python scripts/validate_ecosystem.py
 
+      - name: Verify courier offline preflight refusals
+        run: python scripts/character_animation/courier-rig-motion-comparison/test_preflight.py
+
       - name: Validate showcase entries
         run: python scripts/validate_entry.py docs/showcase
 

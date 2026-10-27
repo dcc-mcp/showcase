@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64px"
+   height="64px"
+   viewBox="0.0 0.0 64.0 64.0"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="audio-off.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1" />
+  <path
+     id="audio-off-1"
+     d="M10 25h11l12-11v36L21 39H10Z"
+     style="stroke-width:3.0;stroke-linecap:round;fill:#102B31;stroke-linejoin:round;stroke:#D9BD7B" />
+  <path
+     id="audio-off-2"
+     d="m43 25 12 14m0-14L43 39"
+     style="stroke-width:3.0;stroke-linecap:round;fill:none;stroke-linejoin:round;stroke:#AAC8BF" />
+</svg>

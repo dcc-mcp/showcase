@@ -1,0 +1,42 @@
+{
+  "output_file": "native/beacon.svg",
+  "plan": {
+    "canvas": {
+      "width": 64,
+      "height": 64,
+      "view_box": "0 0 64 64"
+    },
+    "nodes": [
+      {
+        "type": "path",
+        "id": "beacon-1",
+        "fill": "#102B31",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M14 55h36M20 49h24M24 49l3-23h10l3 23"
+      },
+      {
+        "type": "path",
+        "id": "beacon-2",
+        "fill": "#D9BD7B",
+        "stroke": "#D9BD7B",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "m32 13 8 8-8 8-8-8Z"
+      },
+      {
+        "type": "path",
+        "id": "beacon-3",
+        "fill": "none",
+        "stroke": "#77D3C5",
+        "stroke_width": 3.0,
+        "stroke_linecap": "round",
+        "stroke_linejoin": "round",
+        "d": "M32 4v4M14 11l5 5M50 11l-5 5M9 26h8M47 26h8"
+      }
+    ]
+  }
+}

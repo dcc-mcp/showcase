@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "title": "The Tidekeeper's Promise",
+  "origin": "Original bilingual story and SVG icon artwork created for Tidal Sanctuary",
+  "tools": "Seven SVG icons rebuilt through official Inkscape typed document_build/inspect/export/reopen, via official CLI and gateway. Story JSON is original text/configuration, unchanged.",
+  "rights": "Original creative content retains the Tidal Sanctuary case rights; font is separately OFL",
+  "files": [
+    {
+      "path": "story.en-zh.json",
+      "bytes": 8326,
+      "sha256": "427680995d310fb68f285b68f49c8dc8d4bcc406de498713036fb47f4b524f63"
+    },
+    {
+      "path": "chart.svg",
+      "bytes": 1560,
+      "sha256": "e65871fadd604fb1846706ee1f3e0f9e840642104f3395742aba7dfcafc8bcea"
+    },
+    {
+      "path": "key.svg",
+      "bytes": 1527,
+      "sha256": "6c7cb727e294f7f244d8fa53f2fc2d9d100c704756ccf17ae70355f8ad1e3775"
+    },
+    {
+      "path": "pearl.svg",
+      "bytes": 1686,
+      "sha256": "4657299d8e9f28c857a5e2d88227ce06005c8196242c06373085dd3e5cdb7de5"
+    },
+    {
+      "path": "beacon.svg",
+      "bytes": 1394,
+      "sha256": "6def15c7a944011fcf65b6bb5c815e3d663c6389a6f5fe16ca894eb851a52bba"
+    },
+    {
+      "path": "check.svg",
+      "bytes": 1203,
+      "sha256": "b973d3df3b123f8988634b2236856cd75215ffec4f6319638bce1fbdc0a76603"
+    },
+    {
+      "path": "audio-on.svg",
+      "bytes": 1220,
+      "sha256": "2e87e38694c2d56e439fada2ac8e458cfb66c16458b880eb11712c7fb19544f6"
+    },
+    {
+      "path": "audio-off.svg",
+      "bytes": 1214,
+      "sha256": "7045d84451f5e54e66fbb6890e0ccfd465fadc967cc591da5deb411bd85595c8"
+    }
+  ],
+  "historical_production": {
+    "schema": 1,
+    "title": "The Tidekeeper's Promise",
+    "origin": "Original bilingual story and SVG icon artwork created for Tidal Sanctuary",
+    "tools": "Original writing and SVG authoring; native Inkscape open/export validation",
+    "rights": "Original creative content retains the Tidal Sanctuary case rights; font is separately OFL",
+    "files": [
+      {
+        "path": "story.en-zh.json",
+        "bytes": 8326,
+        "sha256": "427680995d310fb68f285b68f49c8dc8d4bcc406de498713036fb47f4b524f63"
+      },
+      {
+        "path": "chart.svg",
+        "bytes": 551,
+        "sha256": "3fa16ef313adea196d62ffed95a42345dd9fc432e13036cc1610bc45997bed13"
+      },
+      {
+        "path": "key.svg",
+        "bytes": 481,
+        "sha256": "65138bbbc8276bdb422c3b5df8b8cb0f5590e01bab6405c500632fb828c5e0fb"
+      },
+      {
+        "path": "pearl.svg",
+        "bytes": 553,
+        "sha256": "cd3426b1f9f1aa7c17131e7789cee3a2177f5be34173f985220bc41300ee3d9c"
+      },
+      {
+        "path": "beacon.svg",
+        "bytes": 489,
+        "sha256": "d6307173bcb1b1d04a7fd85f38937101bfd3281f403c4778bc98cc611d871c2d"
+      },
+      {
+        "path": "check.svg",
+        "bytes": 417,
+        "sha256": "e98bcb8179cf7042812e8959dfc37a5d6af0603d5bed57baf8975157aa1271b9"
+      },
+      {
+        "path": "audio-on.svg",
+        "bytes": 425,
+        "sha256": "7b43c2ca0c4a58572c60e912ad8f4e2696db727e68b85e8e05616022a82a2e5a"
+      },
+      {
+        "path": "audio-off.svg",
+        "bytes": 417,
+        "sha256": "f8c8b5fee4faece69f515f1d67b7282ceb46040d6201ab10db4bc9bce0808217"
+      }
+    ]
+  },
+  "ecosystem_svg_rebuild": {
+    "run": "https://github.com/dcc-mcp/showcase/actions/runs/39468800378",
+    "head": "04d58a57b6c5b80915f23ac737e09318c660b26e",
+    "native_version": "Inkscape 1.4.4 (1:1.4.4+202605061436+dcaf3e7d9e)",
+    "adapter_commit": "d0edb439f6b2d5983cde4c3cc257d33cb2879a8c",
+    "components": {
+      "dcc-mcp-inkscape": "0.1.0",
+      "dcc-mcp-core": "0.20.42",
+      "dcc-mcp-cli": "0.20.42"
+    },
+    "actual_calls": 43,
+    "native_build_export_reopen": "passed",
+    "rgba256_comparison": "all seven exact",
+    "independent_visual_review": "passed",
+    "game_ui_interaction": "pending_on_new_integrated_head",
+    "historical_failed_runs": [
+      39465686492,
+      39466495430
+    ],
+    "failure_boundary": "Inkscape 1.2.2 was outside documented 1.4 support. Successful 1.4.4 rerun does not isolate a single causal mechanism."
+  }
+}

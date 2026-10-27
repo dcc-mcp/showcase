@@ -1,0 +1,109 @@
+{
+  "file": "explorer.glb",
+  "bytes": 612892,
+  "sha256": "eae7218d3ca960b10710216a2cda6c9ddd7eab088ee98854381099f5cabd36b3",
+  "glb_version": 2,
+  "skins": 1,
+  "bones": 23,
+  "meshes": 36,
+  "material_count": 8,
+  "triangles": 6256,
+  "embedded_images": 1,
+  "external_uris": [],
+  "animations": {
+    "Idle": {
+      "channels": 69,
+      "start_seconds": 0.0,
+      "end_seconds": 1.0,
+      "root_motion": {
+        "first": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "last": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "Walk": {
+      "channels": 69,
+      "start_seconds": 0.0,
+      "end_seconds": 1.0,
+      "root_motion": {
+        "first": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "last": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "Swim": {
+      "channels": 69,
+      "start_seconds": 0.0,
+      "end_seconds": 1.0,
+      "root_motion": {
+        "first": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "last": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "delta": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "roots": [
+    {
+      "children": [
+        59
+      ],
+      "extras": {
+        "asset": "Tidal Sanctuary beach explorer",
+        "forward": "Godot -Z",
+        "up": "Godot +Y",
+        "height_m": 1.2,
+        "swim_wrapper_pitch_degrees": -90.0,
+        "feet_origin": true
+      },
+      "name": "Explorer",
+      "rotation": [
+        0,
+        -1,
+        0,
+        4.371139183945161e-08
+      ],
+      "scale": [
+        0.4938271641731262,
+        0.4938271641731262,
+        0.4938271641731262
+      ]
+    }
+  ],
+  "internal_path_strings": false
+}
