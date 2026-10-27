@@ -1,0 +1,10 @@
+__pycache__/
+build-readback.json
+prop-scene-readback.json
+host-grant.private.json
+calibration/
+renders/
+outputs/
+*.nk
+*.blend
+*.blend1

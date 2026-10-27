@@ -10,6 +10,11 @@
       "slug": "blender-to-maya-obj",
       "status": "unlisted",
       "reason": "Historical cross-host calibration and measurement contrast retained as supporting evidence; not a standalone curated gallery work."
+    },
+    {
+      "slug": "nuke-desert-relay",
+      "status": "review",
+      "reason": "Preproduction source and offline checks only; native Nuke production, generated ruins edge cleanup, save/reopen, final composite and film review remain incomplete."
     }
   ]
 }

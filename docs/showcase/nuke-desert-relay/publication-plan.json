@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "case_slug": "nuke-desert-relay",
+  "state": "preproduction_not_selected",
+  "collection_selected": false,
+  "official_site_modified": false,
+  "routes_planned_not_live": {
+    "en": "https://dcc-mcp.github.io/showcase/cases/nuke-desert-relay/",
+    "zh": "https://dcc-mcp.github.io/showcase/zh/cases/nuke-desert-relay/"
+  },
+  "canonical_source": "docs/showcase/nuke-desert-relay/",
+  "source_package": "scripts/nuke_desert_relay/",
+  "current_official_site_source": {
+    "repository": "dcc-mcp/dcc-mcp.github.io",
+    "main_commit": "9c4ccf13e19f0c729c964e826423550ef164749b",
+    "homepage_en": "docs/index.md",
+    "homepage_en_blob": "43b2bc5279b3d04b30280aadd9cf3de1fb359268",
+    "homepage_zh": "docs/zh/index.md",
+    "homepage_zh_blob": "280b382737b24bc87afe5323491eae3e9cb7c3fb",
+    "gallery": "docs/.vitepress/theme/components/ShowcaseGallery.vue",
+    "gallery_blob": "31b63d2d3bce350dbcbd5fe970719ea8f9183fb9",
+    "source_checked_via": "gh api; local checkout was not treated as current main",
+    "observed": "Current homepage has a Nuke adapter logo link and a general Showcase collection link; no Nuke Desert Relay film or case is present."
+  },
+  "future_homepage_mapping": {
+    "stable_key": "nuke-desert-relay",
+    "software": "Nuke",
+    "case_url_source": "routes_planned_not_live",
+    "candidate_media": null,
+    "status": "await_native_film_and_separate_site_review",
+    "not_to_replace": "Nuke issue 110/111 regression evidence or unrelated existing cases"
+  },
+  "gates": [
+    "fresh owned licensed hosts",
+    "actual MCP execution and sanitized returns",
+    "native save/reopen and independent rebuild",
+    "render passes and final film",
+    "before-after and breakdown",
+    "alpha/contact/perspective/color visual acceptance",
+    "portable source extraction/reopen",
+    "full video decode and playback",
+    "English and Simplified Chinese acceptance",
+    "explicit publication decision"
+  ],
+  "website_writes": []
+}

@@ -60,7 +60,18 @@ def media_release_observation(requests, before, snapshot):
     intent = intents[0]
     intent_at = origin + _finite_time(intent['time'])
     assert intent_at >= armed, 'Stop intent predates its guard'
-    assert intent['state'] in {'preview', 'watching', 'playing'}, 'Stop intent did not target an active player'
+    active = intent['state'] in {'preview', 'watching', 'playing'}
+    if intent['state'] == 'loading':
+        # waiting can race the stop click after decoding; prove the same playback run.
+        boundaries = [e for e in snapshot['events'][:snapshot['events'].index(intent)]
+                      if e.get('target') == 'video' and e.get('video_index') == before['video_index']
+                      and e.get('trusted') is True
+                      and e.get('event') in {'playing', 'loadstart', 'emptied', 'abort', 'error'}]
+        last = boundaries[-1] if boundaries else {}
+        active = (last.get('event') == 'playing' and intent.get('paused') is False
+                  and bool(intent.get('src')) and last.get('src') == intent['src']
+                  and bool(intent.get('currentSrc')) and last.get('currentSrc') == intent['currentSrc'])
+    assert active, 'Stop intent did not target an active player'
     detached = [e for e in events[events.index(intent) + 1:] if e['event'] == 'emptied' and e['target'] == 'video'
                 and e['video_index'] == before['video_index'] and e['trusted'] is True
                 and e['src'] is None and e['live_sources'] == 0 and e['paused'] is True and e['state'] == 'idle']

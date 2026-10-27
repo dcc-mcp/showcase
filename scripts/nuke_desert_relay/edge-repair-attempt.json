@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "scope": "New conservative edge-repair edit request; no generated output",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in edit",
+  "input_reference": "assets/ai-distant-ruins.png",
+  "input_sha256": "830058c8e70e304485e12db672fe4565d76d2e743cdf9821d6d77c1546a0866a",
+  "transparent_background": true,
+  "prompt": "Use case: precise-object-edit. Edit target: the supplied transparent RGBA sandstone observatory ruin. Repair ONLY the bright red and yellow contaminated fringe pixels on its outer and inner cutout boundary. Replace contaminated edge color with the immediately adjacent natural beige/gray stone color and clean alpha antialiasing. Preserve the stone texture, lighting, broken circular ring, exact architecture, terrace arrangement, scale, framing, silhouette and all genuine transparent negative space. Do not redesign, sharpen, add any element, add a sky/ground/background, introduce text, or add new colors. Keep a genuine transparent background. Output a separate corrected source layer for later offline Nuke compositing; this is not a final composite.",
+  "attempts_this_revision": 1,
+  "result": "failed-before-output",
+  "exact_error": "AbsolutePathBuf deserialized without a base path at line 1 column 894",
+  "output_created": false,
+  "output_path": null,
+  "backend_model": "unknown",
+  "remaining_quota": "unknown",
+  "raw_source_preserved": true,
+  "cli_api_fallback": false,
+  "host_operation": false,
+  "remaining_dependency": "The normal image tool must accept the existing Windows source path, or the original transparent image must be attached directly to the conversation as an edit target. No corrected layer is claimed."
+}
