@@ -1,8 +1,8 @@
-# 首章体验05：网页存档限制与方向按钮焦点，尚未导出或发布
+# 首章体验06：网页完整快照存档候选，尚未运行验收或发布
 
-这轮只修改已交付 1–10 层的显示和输入反馈。原版首章 ZIP、已交付体验01源码包保留；21–30 层工作继续暂停。当前 `http://127.0.0.1:18764/` 仍是原试玩包，不能把本目录当作已经更新的网页。
+这轮延续已交付 1–10 层的显示、输入修复，并补充网页存档传输。原版首章 ZIP、已交付体验01源码包保留；21–30 层工作继续暂停。当前 `http://127.0.0.1:18764/` 仍是原试玩包，不能把本目录当作已经更新的网页。
 
-原稿定位、投影根因、代表F1差异见 [INPUT-AND-F1-REVIEW.md](INPUT-AND-F1-REVIEW.md)。键盘规则见 [KEYBOARD-03.md](KEYBOARD-03.md)，体验04异步焦点修正及真实验收序列见 [FOCUS-04.md](FOCUS-04.md)，历史检查见 [validation-focus-04.json](validation-focus-04.json)。[validation-keyboard-03.json](validation-keyboard-03.json)、[validation-input-f1-02.json](validation-input-f1-02.json) 与 [validation.json](validation.json) 保留体验03／02／01历史检查；这些记录均不覆盖体验05。
+原稿定位、投影根因、代表F1差异见 [INPUT-AND-F1-REVIEW.md](INPUT-AND-F1-REVIEW.md)。键盘规则见 [KEYBOARD-03.md](KEYBOARD-03.md)，体验04异步焦点修正及真实验收序列见 [FOCUS-04.md](FOCUS-04.md)，历史检查见 [validation-focus-04.json](validation-focus-04.json)。[validation-keyboard-03.json](validation-keyboard-03.json)、[validation-input-f1-02.json](validation-input-f1-02.json) 与 [validation.json](validation.json) 保留体验03／02／01历史检查；这些记录均不覆盖体验05或06。
 
 体验03实际替换体验02的延迟物理键回读：真实按键进入单意图控制器，持键有界续步，转角保留最新一步，锁定方向后不逐格弹歧义。Esc／GUI和窗口失焦／手动交互清空后续移动。门、战斗和道具先预览，再用新的确认操作执行。70ms只收集初始组合，首次续步240ms、后续180ms，忙碌不补发。同一帧至多一步，规则调用与行动经济不变。实际键盘手感仍未验证。
 
@@ -10,7 +10,13 @@
 
 体验04修正每次动画结束无条件清GUI焦点的问题。仅发起动作的同一有效按钮可以自动归还；路径期间新取得的图鉴／Tab焦点保留，后续路径格也不会把它误当发起按钮。生产控制器本体及玩法规则没有变化。
 
-体验05（`recovery-05`）恢复接续补充：首章原存档模块仍主动阻断 Web 持久化，当前无 Web 持久写入与完成回执流程，IndexedDB 刷新恢复未验证。当前源码禁用网页的存档／读档按钮，并在模式选择、暂停与完成提示中说明刷新或关闭会丢失进度；原生存档行为不变。点击方向按钮仅预览物件时，也只归还该发起按钮仍持有的焦点，使后续 E 确认可交给地图；动画期间新取得的图鉴／标签焦点继续保留。这些补充尚未运行 Godot、真实输入或 Web，下面各历史 ZIP 与 validation 不覆盖本次新增变更。
+体验05（`recovery-05`）恢复接续时，首章原存档模块主动阻断 Web 持久化，该版本没有 Web 持久写入与完成回执流程。因此体验05禁用网页的存档／读档按钮，说明刷新或关闭会丢失进度；原生存档行为不变。该版本还修复了方向按钮仅预览物件后归还原按钮焦点的问题，并保留新取得的图鉴／标签焦点。体验06替代其中的 Web 禁用状态；方向按钮修复继续保留。下面各历史 ZIP 与 validation 不覆盖体验05或06。
+
+体验06（`web-save-06`）新增 `web_saves.gd` 与 `indexeddb_source.gd`。网页使用新命名的 IndexedDB 数据库，保存原 `FiftySave.encode_slot` 生成的 v1 完整快照；读取与覆盖前仍调用原 `decode_slot`，不改原生存档模块、版本、规则指纹或关卡数据。写入比较已读取的旧原文，在同一读写事务中拒绝并发覆盖；只有事务提交后重新读取相同原文才显示“已保存”。事务中止、配额不足、访问失败及超时均返回失败；提交是否完成不明确时明确提示“不确定”，不声称旧档未变。操作期间暂停游戏动作，加载先在独立 runtime 校验和导入，成功后才替换当前塔。
+
+兼容迁移只处理原 `user://stairkeep-fifty-save-v1/slots/<mode>/<slot>.json` 中通过当前完整校验的 v1 槽位：新数据库没有该槽位时进行 add-only 复制，原文件和 `.pending` 文件均不删除或改写；有 pending、损坏、未来版本或身份不匹配时拒绝迁移。旧三层、第二／第三章存档根不会被探测。原生槽位与源文件不迁移、不改写。浏览器存档限同一 origin／浏览器配置；浏览器清理站点数据及设备断电不在此次保证范围。
+
+后端依据 [Godot JavaScriptBridge 回调约定](https://docs.godotengine.org/en/stable/classes/class_javascriptbridge.html) 和 [IndexedDB transaction complete](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction/complete_event) 实现。没有使用无结果回执的 `force_fs_sync()` 作为保存成功依据。纯逻辑回归可从仓库根运行 `node scripts/godot_web/stairkeep/game/fifty/experience/tests/test_indexeddb_storage.cjs`；它直接提取并执行生产 JS 常量，使用内存事务夹具，**不是实际 IndexedDB、浏览器或 Godot 运行**。Godot 解析、JavaScriptBridge 回调时序、导出、真实页面保存／刷新／重新打开恢复仍未验证。
 
 来源基线是 `../review/firstchapter-source.zip`，SHA256 `544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42`。参考图仍为仓库 `docs/showcase/stairkeep/concept.jpg`，它是概念图，不是本候选的运行截图。
 
@@ -40,7 +46,9 @@ python -B fifty/tools/prepare_firstchapter_export.py prepare --project <新的�
 
 ## 已做检查与验收缺口
 
-体验04历史源码ZIP、静态接线和字体覆盖结果以 `validation-focus-04.json` 为准；生产GDScript控制器探针和432项真实TileMap几何探针仍只已准备，均未执行。这不能证明体验05的引擎解析、键盘手感、导出字体加载或没有裁切。
+体验06当前来源与检查见 [validation-web-save-06.json](validation-web-save-06.json)。新增28项 Node 事务合同回归通过，原41项输入策略参考与14项静态接线检查通过；207项覆盖文件、65个保留基线文件和显式资源引用已核对。测试只覆盖注明的源码／夹具范围，真实 IndexedDB 和刷新恢复仍为 blocked。
+
+体验04历史源码ZIP、静态接线和字体覆盖结果以 `validation-focus-04.json` 为准；生产GDScript控制器探针和432项真实TileMap几何探针仍只已准备，均未执行。这不能证明体验06的引擎解析、键盘手感、导出字体加载或没有裁切。
 
 体验04源码ZIP为13,163,761B，SHA256 `a308e09df740d73db7646f3b5bc382f552810086ca9b8bbcef841ac20103d82a`。205项overlay、65个保留基线文件、207处静态资源引用通过；字体覆盖671码点／552汉字且缺字为零。41项Python参考和14项静态接线检查通过，均不计为生产GDScript或真实窗口通过。
 

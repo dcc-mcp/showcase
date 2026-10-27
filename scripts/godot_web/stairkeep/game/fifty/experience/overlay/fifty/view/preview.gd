@@ -4,6 +4,7 @@ extends Node2D
 
 const Runtime = preload("res://fifty/scripts/runtime.gd")
 const Saves = preload("res://fifty/scripts/save.gd")
+const WebSaves = preload("res://fifty/view/web_saves.gd")
 const World = preload("res://fifty/view/experience_world.gd")
 const ExperienceAudio = preload("res://fifty/view/experience_audio.gd")
 const ScreenInput = preload("res://fifty/view/screen_input.gd")
@@ -19,12 +20,13 @@ const SLOT := "first-chapter"
 const CLASSIC := "classic_restart"
 const PRACTICE := "practice_checkpoint"
 const UI_FONT_PATH := "res://assets/experience/fonts/cjk-ui.otf"
-const EXPERIENCE_REVISION := "recovery-05"
-const WEB_SAVE_NOTICE := "网页存档暂不可用；刷新或关闭页面会丢失当前进度。"
+const EXPERIENCE_REVISION := "web-save-06"
+const WEB_SAVE_NOTICE := "网页存档保留在当前浏览器和地址；请等待“已保存”提示后再关闭。"
 const AREAS := ["归潮门厅", "绳桥库", "回声索室", "双庭水闸", "盐封档案", "绕潮盘道", "守灯人廊", "三径蓄池", "四翼校准室", "无火信台"]
 const STAT_NAMES := {"hp":"生命", "potion":"生命", "atk":"攻击", "def":"防御", "gold":"金币", "yellow":"黄钥匙", "blue":"蓝钥匙"}
 
 var rules = Runtime.new()
+var _web_saves = WebSaves.new()
 var world
 var ui: Control
 var world_host: Control
@@ -177,7 +179,7 @@ func _build_ui() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(brand)
 	brand.add_child(_label("阶 塔", 27, GOLD))
-	brand.add_child(_label("潮痕信号 · 第一章 · 体验05", 12, MUTED))
+	brand.add_child(_label("潮痕信号 · 第一章 · 体验06", 12, MUTED))
 	var actions := HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 7)
 	heading.add_child(actions)
@@ -327,8 +329,8 @@ func _fit_world() -> void:
 func _set_actions_enabled(enabled: bool) -> void:
 	for key: String in ["save", "load", "restart"]:
 		header_actions[key].disabled = not enabled
-	header_actions.save.disabled = not enabled or OS.has_feature("web")
-	header_actions.load.disabled = not enabled or _classic_failed() or OS.has_feature("web")
+	header_actions.save.disabled = not enabled
+	header_actions.load.disabled = not enabled or _classic_failed()
 	approach_button.disabled = not enabled
 	_sync_control_lock()
 
@@ -468,7 +470,7 @@ func _refresh_mode_buttons() -> void:
 	var valid: bool = selected_mode in [CLASSIC, PRACTICE] and _seed_value() >= 1
 	start_button.disabled = not valid or (started and selected_mode == active_mode)
 	start_button.tooltip_text = "当前模式请使用“重开 / 回溯”。" if started and selected_mode == active_mode else "以所选模式进入第一章。"
-	mode_load_button.disabled = not valid or (started and selected_mode != active_mode) or OS.has_feature("web")
+	mode_load_button.disabled = not valid or (started and selected_mode != active_mode)
 	if selected_mode == CLASSIC and _classic_failed():
 		mode_load_button.disabled = true
 	mode_load_button.tooltip_text = "请先主动进入该模式，再读取其存档。" if started and selected_mode != active_mode else "读取所选模式的首章存档。"
@@ -527,7 +529,7 @@ func _do_begin(mode: String, seed: int) -> void:
 	_sync_control_lock()
 	_set_actions_enabled(true)
 	_refresh()
-	_message("体验05 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
+	_message("体验06 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
 
 
 func _snapshot() -> Dictionary:
@@ -558,7 +560,7 @@ func _refresh() -> void:
 	availability_label.text = "首章已完成 · " + revisit_copy + " · 11—50 层尚未制作" if bool(snap.get("slice_complete",false)) else "首章目标：F1 → F2 → F3，继续攀登至 F10 · 楼梯上按 E 可往返"
 	if OS.has_feature("web"): availability_label.text += " · " + WEB_SAVE_NOTICE
 	world.refresh()
-	header_actions.load.disabled = _classic_failed() or OS.has_feature("web")
+	header_actions.load.disabled = _classic_failed()
 	_inspect(selected)
 	_refresh_bestiary()
 	_refresh_journal(snap)
@@ -575,7 +577,6 @@ func _refresh() -> void:
 		_open_modal("slice", "首章信号已点亮", completion_copy + "\n11—50 层尚未制作，当前并非 50 层全塔通关。")
 		_button(overlay_box, "返回塔内", _close_modal).call_deferred("grab_focus")
 		var save_button: Button = _button(overlay_box, "保存当前塔", _save_slot)
-		save_button.disabled = OS.has_feature("web")
 		if OS.has_feature("web"): save_button.tooltip_text = WEB_SAVE_NOTICE
 
 
@@ -1145,6 +1146,8 @@ func _result_text(result: Dictionary, before: Dictionary, item: Dictionary) -> S
 			"abandoned": return "已主动结束本次挑战，请选择重开或回溯。"
 			"combat_death": return "本次战斗已结束挑战，请按当前模式继续。"
 			"saved_native": return "已保存当前模式的首章进度。"
+			"saved_web": return "已保存：浏览器已确认提交并读回当前模式的首章进度。"
+			"loaded_web": return "已恢复首章存档；旧文件已复制到浏览器存档，原文件保留。" if bool(result.get("migrated",false)) else "已恢复此浏览器中所选模式的完整首章存档。"
 			"loaded_native", "snapshot_loaded": return "已恢复所选模式的完整首章存档。"
 		return "操作已完成。"
 	match code:
@@ -1168,6 +1171,13 @@ func _result_text(result: Dictionary, before: Dictionary, item: Dictionary) -> S
 		"unknown_checkpoint", "checkpoint_mismatch": return "该记录点不属于当前塔，当前进度没有改变。"
 		"not_found": return "没有找到此模式的首章存档。当前塔没有改变。"
 		"blocked_web_persistence_unvalidated": return "此浏览器的持久存档尚未验证，本次没有保存或恢复进度。"
+		"web_commit_unconfirmed": return "浏览器未确认保存完成，存档可能已更新。请保留页面，重新读取核对；当前塔没有被替换。"
+		"web_conflict": return "存档已被另一页面更新，本次没有覆盖。请保留当前页面并核对存档。"
+		"web_unavailable", "web_storage_unavailable", "web_open_blocked", "web_open_failed", "web_transaction_failed", "web_transaction_aborted", "web_read_failed", "web_write_failed", "web_storage_changed", "web_invalid_database", "web_timeout":
+			if result.get("error_name", "") == "QuotaExceededError": return "浏览器存档空间不足，未完成保存。请保留当前页面和已有存档。"
+			return "浏览器无法完成本地存档操作。当前塔仍在页面中，请保留页面并重试；没有收到保存成功回执。"
+		"web_runtime_changed", "web_storage_busy": return "进度或存档操作仍在变化，本次未保存。请等待动作结束后再试。"
+		"web_invalid_reply", "web_invalid_record", "web_invalid_request": return "浏览器存档未通过校验。请保留页面和原存档，本次没有保存或恢复进度。"
 		"identity_mismatch", "snapshot_rejected", "snapshot_identity_mismatch": return "存档与当前版本或模式不匹配，当前塔和存档均保持原样。"
 		"mode_mismatch": return "存档模式不同，请先主动选择相同模式。当前塔没有改变。"
 		"existing_slot_rejected": return "原存档与当前塔不兼容或已损坏，已保留原文件，本次没有覆盖。"
@@ -1194,10 +1204,16 @@ func _save_slot() -> void:
 	if started:
 		_busy = true
 		_sync_control_lock()
-		var result: Dictionary = Saves.write_slot(rules, SLOT)
+		var result: Dictionary
+		if OS.has_feature("web"):
+			_message("正在等待浏览器确认存档，请保留此页面……")
+			result = await _web_saves.write_slot(rules, SLOT)
+		else:
+			result = Saves.write_slot(rules, SLOT)
 		_busy = false
 		_sync_control_lock()
 		_message(_result_text(result,{},{}))
+		_apply_pending_pause()
 
 
 func _load_slot() -> void:
@@ -1240,7 +1256,12 @@ func _do_load_slot(intended_mode: String) -> void:
 		_sync_control_lock()
 		_message(_result_text(chosen,{},{}))
 		return
-	var result: Dictionary = Saves.load_slot(candidate, SLOT)
+	var result: Dictionary
+	if OS.has_feature("web"):
+		_message("正在读取浏览器存档并校验完整进度……")
+		result = await _web_saves.load_slot(candidate, SLOT)
+	else:
+		result = Saves.load_slot(candidate, SLOT)
 	if bool(result.get("ok",false)):
 		rules = candidate
 		active_mode = intended_mode
@@ -1262,6 +1283,7 @@ func _do_load_slot(intended_mode: String) -> void:
 	_busy = false
 	_sync_control_lock()
 	_message(_result_text(result,{},{}))
+	_apply_pending_pause()
 
 
 func _confirm(title: String, copy: String, callback: Callable) -> void:
@@ -1374,7 +1396,6 @@ func _pause() -> void:
 	_open_modal("pause","灯下歇一会儿", pause_copy)
 	_button(overlay_box,"返回塔内",_close_modal).call_deferred("grab_focus")
 	var save_button: Button = _button(overlay_box,"保存当前塔",_save_slot)
-	save_button.disabled = OS.has_feature("web")
 	if OS.has_feature("web"): save_button.tooltip_text = WEB_SAVE_NOTICE
 	_button(overlay_box,"重开 / 回溯",_show_recovery)
 	_button(overlay_box,"结束本次挑战",func(): _confirm("确认结束本次挑战？","经典模式需要换新塔重开；练习模式可回到已到达的记录点。这会记为你主动结束本次挑战。",_end_run))

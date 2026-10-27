@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "revision": "recovery-05",
-  "status": "source-only-engine-blocked",
+  "revision": "web-save-06",
+  "status": "source-web-storage-implemented-runtime-blocked",
   "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
   "overlay": [
     {
@@ -941,8 +941,8 @@
     },
     {
       "path": "assets/experience/fonts/cmap-report.json",
-      "bytes": 7408,
-      "sha256": "5a858a8eb662bafb7e19e60beb7e6264c387fb57ad551c22bdea02b846766d11"
+      "bytes": 7718,
+      "sha256": "a9426c2ef31a35501e9707f98587599902f16d5cacbff765c0ee5db7e7b9c673"
     },
     {
       "path": "assets/experience/fonts/FONT-LICENSE.txt",
@@ -1015,19 +1015,29 @@
       "sha256": "eae7a14fceda7b66f90db4b1ba912f29327eb9f18d2204bb8c657a990b619f4f"
     },
     {
+      "path": "fifty/view/indexeddb_source.gd",
+      "bytes": 9193,
+      "sha256": "f21cd4fefa96b1e1257f602518fb3258b385b5bbb68ea4acd751dc8856085938"
+    },
+    {
       "path": "fifty/view/keyboard_controller.gd",
       "bytes": 9192,
       "sha256": "938e03d9e1a2c21a93de95dfd87cbb9426b83f17ac8a427bbedef5427f3e4c78"
     },
     {
       "path": "fifty/view/preview.gd",
-      "bytes": 66872,
-      "sha256": "45ba35dcc5a38792ae8499f10b664d1786dcc2b61bb1e6f883db000cf5125e6a"
+      "bytes": 68637,
+      "sha256": "4213736e03dd815e50a06ee4c107ae15f0a46aa38943be1c1ed95b200150a3dd"
     },
     {
       "path": "fifty/view/screen_input.gd",
       "bytes": 3872,
       "sha256": "2528bd43687502ca7cae90e9f715ed6cb62bc557d89aa6ec150e75c2a0750e9b"
+    },
+    {
+      "path": "fifty/view/web_saves.gd",
+      "bytes": 7233,
+      "sha256": "690713d116bd5ddc717e33e15685382cb785e647077fcdf1b9a7390e87c8bce0"
     }
   ],
   "rules_economy_save_data_modified": false,
@@ -1035,5 +1045,14 @@
   "browser_accepted": false,
   "served_url_updated": false,
   "font_report_post_assembly_refresh_pending": false,
-  "native_probe": "tests/screen_input_probe.gd and tests/keyboard_controller_probe.gd; not-run"
+  "native_probe": "tests/screen_input_probe.gd and tests/keyboard_controller_probe.gd; not-run",
+  "web_persistence": {
+    "implementation": "IndexedDB transaction completion plus independent readback; compare-and-swap",
+    "database": "stairkeep-chapter-one-storage-v1",
+    "envelope_version": 1,
+    "native_save_module_modified": false,
+    "legacy_files_modified_or_deleted": false,
+    "gdscripts_executed": false,
+    "real_indexeddb_refresh_accepted": false
+  }
 }
