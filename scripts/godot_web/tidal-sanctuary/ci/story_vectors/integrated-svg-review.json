@@ -1,0 +1,376 @@
+{
+  "schema": 1,
+  "production": {
+    "run": "https://github.com/dcc-mcp/showcase/actions/runs/39468800378",
+    "head": "04d58a57b6c5b80915f23ac737e09318c660b26e",
+    "native_version": "Inkscape 1.4.4 (1:1.4.4+202605061436+dcaf3e7d9e)",
+    "adapter_commit": "d0edb439f6b2d5983cde4c3cc257d33cb2879a8c",
+    "components": {
+      "dcc-mcp-inkscape": "0.1.0",
+      "dcc-mcp-core": "0.20.42",
+      "dcc-mcp-cli": "0.20.42"
+    },
+    "actual_calls": 43,
+    "native_build_export_reopen": "passed",
+    "rgba256_comparison": "all seven exact",
+    "independent_visual_review": "passed",
+    "game_ui_interaction": "pending_on_new_integrated_head",
+    "historical_failed_runs": [
+      39465686492,
+      39466495430
+    ],
+    "failure_boundary": "Inkscape 1.2.2 was outside documented 1.4 support. Successful 1.4.4 rerun does not isolate a single causal mechanism."
+  },
+  "calls": [
+    {
+      "name": "capabilities",
+      "request_id": "dcc-mcp-cli-3376-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-off-build",
+      "request_id": "dcc-mcp-cli-3399-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-off-reopen",
+      "request_id": "dcc-mcp-cli-3423-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-off-svg-export",
+      "request_id": "dcc-mcp-cli-3440-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-off-exported-reopen",
+      "request_id": "dcc-mcp-cli-3457-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-off-old-png",
+      "request_id": "dcc-mcp-cli-3474-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-off-new-png",
+      "request_id": "dcc-mcp-cli-3491-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-on-build",
+      "request_id": "dcc-mcp-cli-3508-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-on-reopen",
+      "request_id": "dcc-mcp-cli-3532-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-on-svg-export",
+      "request_id": "dcc-mcp-cli-3549-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-on-exported-reopen",
+      "request_id": "dcc-mcp-cli-3566-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-on-old-png",
+      "request_id": "dcc-mcp-cli-3583-0",
+      "route": "gateway"
+    },
+    {
+      "name": "audio-on-new-png",
+      "request_id": "dcc-mcp-cli-3601-0",
+      "route": "gateway"
+    },
+    {
+      "name": "beacon-build",
+      "request_id": "dcc-mcp-cli-3618-0",
+      "route": "gateway"
+    },
+    {
+      "name": "beacon-reopen",
+      "request_id": "dcc-mcp-cli-3642-0",
+      "route": "gateway"
+    },
+    {
+      "name": "beacon-svg-export",
+      "request_id": "dcc-mcp-cli-3659-0",
+      "route": "gateway"
+    },
+    {
+      "name": "beacon-exported-reopen",
+      "request_id": "dcc-mcp-cli-3676-0",
+      "route": "gateway"
+    },
+    {
+      "name": "beacon-old-png",
+      "request_id": "dcc-mcp-cli-3693-0",
+      "route": "gateway"
+    },
+    {
+      "name": "beacon-new-png",
+      "request_id": "dcc-mcp-cli-3710-0",
+      "route": "gateway"
+    },
+    {
+      "name": "chart-build",
+      "request_id": "dcc-mcp-cli-3727-0",
+      "route": "gateway"
+    },
+    {
+      "name": "chart-reopen",
+      "request_id": "dcc-mcp-cli-3751-0",
+      "route": "gateway"
+    },
+    {
+      "name": "chart-svg-export",
+      "request_id": "dcc-mcp-cli-3768-0",
+      "route": "gateway"
+    },
+    {
+      "name": "chart-exported-reopen",
+      "request_id": "dcc-mcp-cli-3785-0",
+      "route": "gateway"
+    },
+    {
+      "name": "chart-old-png",
+      "request_id": "dcc-mcp-cli-3802-0",
+      "route": "gateway"
+    },
+    {
+      "name": "chart-new-png",
+      "request_id": "dcc-mcp-cli-3819-0",
+      "route": "gateway"
+    },
+    {
+      "name": "check-build",
+      "request_id": "dcc-mcp-cli-3836-0",
+      "route": "gateway"
+    },
+    {
+      "name": "check-reopen",
+      "request_id": "dcc-mcp-cli-3861-0",
+      "route": "gateway"
+    },
+    {
+      "name": "check-svg-export",
+      "request_id": "dcc-mcp-cli-3878-0",
+      "route": "gateway"
+    },
+    {
+      "name": "check-exported-reopen",
+      "request_id": "dcc-mcp-cli-3895-0",
+      "route": "gateway"
+    },
+    {
+      "name": "check-old-png",
+      "request_id": "dcc-mcp-cli-3912-0",
+      "route": "gateway"
+    },
+    {
+      "name": "check-new-png",
+      "request_id": "dcc-mcp-cli-3929-0",
+      "route": "gateway"
+    },
+    {
+      "name": "key-build",
+      "request_id": "dcc-mcp-cli-3946-0",
+      "route": "gateway"
+    },
+    {
+      "name": "key-reopen",
+      "request_id": "dcc-mcp-cli-3970-0",
+      "route": "gateway"
+    },
+    {
+      "name": "key-svg-export",
+      "request_id": "dcc-mcp-cli-3987-0",
+      "route": "gateway"
+    },
+    {
+      "name": "key-exported-reopen",
+      "request_id": "dcc-mcp-cli-4004-0",
+      "route": "gateway"
+    },
+    {
+      "name": "key-old-png",
+      "request_id": "dcc-mcp-cli-4021-0",
+      "route": "gateway"
+    },
+    {
+      "name": "key-new-png",
+      "request_id": "dcc-mcp-cli-4038-0",
+      "route": "gateway"
+    },
+    {
+      "name": "pearl-build",
+      "request_id": "dcc-mcp-cli-4055-0",
+      "route": "gateway"
+    },
+    {
+      "name": "pearl-reopen",
+      "request_id": "dcc-mcp-cli-4081-0",
+      "route": "gateway"
+    },
+    {
+      "name": "pearl-svg-export",
+      "request_id": "dcc-mcp-cli-4098-0",
+      "route": "gateway"
+    },
+    {
+      "name": "pearl-exported-reopen",
+      "request_id": "dcc-mcp-cli-4116-0",
+      "route": "gateway"
+    },
+    {
+      "name": "pearl-old-png",
+      "request_id": "dcc-mcp-cli-4133-0",
+      "route": "gateway"
+    },
+    {
+      "name": "pearl-new-png",
+      "request_id": "dcc-mcp-cli-4150-0",
+      "route": "gateway"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "audio-off.svg",
+      "plan_sha256": "62e79f35355066f498cf3a976bc25917085ec24a8d392a879ef5dd71aa6cb222",
+      "original_sha256": "f8c8b5fee4faece69f515f1d67b7282ceb46040d6201ab10db4bc9bce0808217",
+      "svg_sha256": "7045d84451f5e54e66fbb6890e0ccfd465fadc967cc591da5deb411bd85595c8",
+      "png_sha256": [
+        "2ce2e11bb69bb5ad274802526f6227d9cd5d3e2e731811a4a491409d5a03b038",
+        "2ce2e11bb69bb5ad274802526f6227d9cd5d3e2e731811a4a491409d5a03b038"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "audio-on.svg",
+      "plan_sha256": "442d9a3503c6411234e35290514d64ed4daaf5de7f9fe0f80ecca44c26235cd4",
+      "original_sha256": "7b43c2ca0c4a58572c60e912ad8f4e2696db727e68b85e8e05616022a82a2e5a",
+      "svg_sha256": "2e87e38694c2d56e439fada2ac8e458cfb66c16458b880eb11712c7fb19544f6",
+      "png_sha256": [
+        "3677551a29a2642f895a0fbe3891e85a093ea2bdd7bffed76cc8f84f7c7cab08",
+        "3677551a29a2642f895a0fbe3891e85a093ea2bdd7bffed76cc8f84f7c7cab08"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "beacon.svg",
+      "plan_sha256": "e2208323ab62690701073a083b8f1695d7231d3a15756ccf3598e357b5123c43",
+      "original_sha256": "d6307173bcb1b1d04a7fd85f38937101bfd3281f403c4778bc98cc611d871c2d",
+      "svg_sha256": "6def15c7a944011fcf65b6bb5c815e3d663c6389a6f5fe16ca894eb851a52bba",
+      "png_sha256": [
+        "2e193ce78dbbf24bb80eb67519d81478c8f27626e4395f793a5a06d6f6543c96",
+        "2e193ce78dbbf24bb80eb67519d81478c8f27626e4395f793a5a06d6f6543c96"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "chart.svg",
+      "plan_sha256": "d144ad6bff7354c10ffc3aeaaeeb2630e5acd413f292b3911c794f36b08a7eed",
+      "original_sha256": "3fa16ef313adea196d62ffed95a42345dd9fc432e13036cc1610bc45997bed13",
+      "svg_sha256": "e65871fadd604fb1846706ee1f3e0f9e840642104f3395742aba7dfcafc8bcea",
+      "png_sha256": [
+        "7ac5a0f86fb68270b546240e6e57565905ad504ae8f099790482808208acb700",
+        "7ac5a0f86fb68270b546240e6e57565905ad504ae8f099790482808208acb700"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "check.svg",
+      "plan_sha256": "a6a94af67f525cf465014639c679e960a25bc460b65a12b98857993eab9ed33a",
+      "original_sha256": "e98bcb8179cf7042812e8959dfc37a5d6af0603d5bed57baf8975157aa1271b9",
+      "svg_sha256": "b973d3df3b123f8988634b2236856cd75215ffec4f6319638bce1fbdc0a76603",
+      "png_sha256": [
+        "c04f0ce0aa271518afbc73abc9df1a7a4e7edf8acc05441f2edd1a579dc387b8",
+        "c04f0ce0aa271518afbc73abc9df1a7a4e7edf8acc05441f2edd1a579dc387b8"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "key.svg",
+      "plan_sha256": "ca2b6962ae60c9f02987167d823a44c8bc95a19f298a228dff8147d249078f29",
+      "original_sha256": "65138bbbc8276bdb422c3b5df8b8cb0f5590e01bab6405c500632fb828c5e0fb",
+      "svg_sha256": "6c7cb727e294f7f244d8fa53f2fc2d9d100c704756ccf17ae70355f8ad1e3775",
+      "png_sha256": [
+        "a0784eb93600792474121f47f7efdee087ed19f7423ac5f0c723057d505dde89",
+        "a0784eb93600792474121f47f7efdee087ed19f7423ac5f0c723057d505dde89"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "pearl.svg",
+      "plan_sha256": "458b5b6ef1c7a99c875d125dd7baded103e59c543b9f1aaf211e21e6f0546221",
+      "original_sha256": "cd3426b1f9f1aa7c17131e7789cee3a2177f5be34173f985220bc41300ee3d9c",
+      "svg_sha256": "4657299d8e9f28c857a5e2d88227ce06005c8196242c06373085dd3e5cdb7de5",
+      "png_sha256": [
+        "1269a7d3004a82e1eaac6ef2ab2655e66470c341b762c98a6fe23258db549ef9",
+        "1269a7d3004a82e1eaac6ef2ab2655e66470c341b762c98a6fe23258db549ef9"
+      ],
+      "pixel_comparison": {
+        "exact": true,
+        "channel_maxima": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

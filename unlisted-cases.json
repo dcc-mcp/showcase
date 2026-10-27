@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "slug": "blender-mcp-gimbal-turntable",
+      "status": "unlisted",
+      "reason": "Historical adapter and rendering evidence retained for inspection; not selected as a current curated gallery work."
+    },
+    {
+      "slug": "blender-to-maya-obj",
+      "status": "unlisted",
+      "reason": "Historical cross-host calibration and measurement contrast retained as supporting evidence; not a standalone curated gallery work."
+    },
+    {
+      "slug": "stairkeep",
+      "status": "review",
+      "reason": "Three-floor source prototype retained for review, with historical Godot 4.7.2 import, rule checks and Web export and the original resource-exhaustion counterexamples preserved. Native rendered UI, real keyboard/mouse, browser WebGL startup, IndexedDB reload persistence and an accepted gameplay movie remain blocked or untested. The prototype is silent with an English desktop UI; mobile and full localization remain pending. This archive is not gallery selection or playable deployment."
+    }
+  ]
+}

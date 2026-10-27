@@ -1,0 +1,131 @@
+{
+  "status": "encoded-and-fully-decoded",
+  "display_input": "Gamma2.2RGB; explicit BT709 matrix limited YUV420, no transfer conversion; gamma22 serializes as bt470m",
+  "rows": [
+    {
+      "file": "comparison-24fps.mp4",
+      "bytes": 31566,
+      "sha256": "298c5de88c72e71dd314d9e1d6fb5393578a59308a95e4052b52001c4cb954fa",
+      "frames": 8,
+      "fps": 24,
+      "full_decode": true,
+      "width": 1280,
+      "height": 334,
+      "time_base": "1/12288",
+      "pts_seconds": [
+        "0",
+        "1/24",
+        "1/12",
+        "1/8",
+        "1/6",
+        "5/24",
+        "1/4",
+        "7/24"
+      ],
+      "matrix": "bt709",
+      "primaries": "bt709",
+      "transfer": "bt470m",
+      "range": "tv"
+    },
+    {
+      "file": "comparison-slow-review-6fps.mp4",
+      "bytes": 61153,
+      "sha256": "6c5f3d89259c805f446262b042229b8688fa0eb42e3a8fb9d5234f3a2e7d59d8",
+      "frames": 8,
+      "fps": 6,
+      "full_decode": true,
+      "width": 1280,
+      "height": 334,
+      "time_base": "1/12288",
+      "pts_seconds": [
+        "0",
+        "1/6",
+        "1/3",
+        "1/2",
+        "2/3",
+        "5/6",
+        "1",
+        "7/6"
+      ],
+      "matrix": "bt709",
+      "primaries": "bt709",
+      "transfer": "bt470m",
+      "range": "tv"
+    },
+    {
+      "file": "raw-24fps.mp4",
+      "bytes": 51759,
+      "sha256": "db38219842cac923618c1bcfa563aed9006025c201f4c23346b682ed6e763320",
+      "frames": 8,
+      "fps": 24,
+      "full_decode": true,
+      "width": 960,
+      "height": 720,
+      "time_base": "1/12288",
+      "pts_seconds": [
+        "0",
+        "1/24",
+        "1/12",
+        "1/8",
+        "1/6",
+        "5/24",
+        "1/4",
+        "7/24"
+      ],
+      "matrix": "bt709",
+      "primaries": "bt709",
+      "transfer": "bt470m",
+      "range": "tv"
+    },
+    {
+      "file": "oidn-24fps.mp4",
+      "bytes": 40614,
+      "sha256": "2925dfea9da0f4bc80b8171e87b182752b4f0fc0f9988d526c7b7f77eb56ef02",
+      "frames": 8,
+      "fps": 24,
+      "full_decode": true,
+      "width": 960,
+      "height": 720,
+      "time_base": "1/12288",
+      "pts_seconds": [
+        "0",
+        "1/24",
+        "1/12",
+        "1/8",
+        "1/6",
+        "5/24",
+        "1/4",
+        "7/24"
+      ],
+      "matrix": "bt709",
+      "primaries": "bt709",
+      "transfer": "bt470m",
+      "range": "tv"
+    },
+    {
+      "file": "noice-24fps.mp4",
+      "bytes": 35219,
+      "sha256": "047c27d5e2bbd79f8293d9b46beab400bb50b8700811ca14da68dc9dd7ccf1a2",
+      "frames": 8,
+      "fps": 24,
+      "full_decode": true,
+      "width": 960,
+      "height": 720,
+      "time_base": "1/12288",
+      "pts_seconds": [
+        "0",
+        "1/24",
+        "1/12",
+        "1/8",
+        "1/6",
+        "5/24",
+        "1/4",
+        "7/24"
+      ],
+      "matrix": "bt709",
+      "primaries": "bt709",
+      "transfer": "bt470m",
+      "range": "tv"
+    }
+  ]
+}

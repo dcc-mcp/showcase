@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c8n0obyrijeuj"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+
+[node name="RelicCourier" type="Node3D" unique_id=1957436275]
+script = ExtResource("1_main")

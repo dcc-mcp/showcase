@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "recorded_at": "2026-10-22",
-  "status": "submitted_for_review",
-  "selected_for_gallery": false,
+  "status": "selected production study; visual acceptance failed",
+  "selected_for_gallery": true,
   "environment": {
     "historical_host": "Blender 4.5.13 LTS",
     "historical_adapter": "dcc-mcp-blender 0.2.22",
@@ -62,9 +62,9 @@
       ]
     },
     {
-      "name": "Gallery selection",
+      "name": "Historical gallery selection (2026-10-22)",
       "result": "pass",
-      "observed": "This slug is absent from collection.json. No site, locale catalog or accepted-case selection is added."
+      "observed": "On 2026-10-22 this slug was absent from collection.json, and that revision added no site, locale catalog or accepted-case selection. The current catalog selects it as a production study with the visual-review failure retained."
     }
   ],
   "acceptance": {
@@ -73,7 +73,7 @@
     "sanitized_native_public_copy": "blocked",
     "independent_blank_scene_rebuild": "not-tested",
     "bilingual_site_and_browser_playback": "not-tested",
-    "gallery_publication": "blocked",
+    "gallery_publication": "selected as a production study; site/browser acceptance remains not-tested",
     "repository_review": "ready_for_review",
     "final_world_bounding_boxes": "not-tested"
   },
@@ -100,10 +100,10 @@
     ]
   },
   "not_claimed": [
-    "Visual acceptance or a ready-to-merge case.",
+    "Visual acceptance or a publication-quality product render.",
     "Complete public provenance or independent reproduction.",
     "A sanitized downloadable native scene or new native run.",
-    "Published gallery, all-locale site or browser-playback acceptance.",
+    "All-locale site or browser-playback acceptance.",
     "An official benchmark score, blind evaluation or comparison with another model.",
     "Mechanical 24/410 manufacturing certification.",
     "Verified historical model or reasoning-effort attribution.",
@@ -264,5 +264,20 @@
       "reason": "This readback retained dimensions and geometry fingerprints, not bounding-box corners or vertex coordinates. Dimensions and texture-space fields are not substituted for final world-space bounds."
     }
   },
-  "measurement_scope": "Counts and dimensions of the unchanged original native source were read through official MCP on 2026-10-22 before diagnostic changes. Mesh totals exclude curve tessellation; node totals cover top-level trees. Original creation and this later readback remain separate."
+  "measurement_scope": "Counts and dimensions of the unchanged original native source were read through official MCP on 2026-10-22 before diagnostic changes. Mesh totals exclude curve tessellation; node totals cover top-level trees. Original creation and this later readback remain separate.",
+  "catalog_admission": {
+    "recorded_at": "2026-10-26",
+    "selected_as": "production study with conspicuous visual-review failure",
+    "historical_selection_status": "excluded from collection on2026-10-22",
+    "visual_verdict_changed": false,
+    "native_source_distributed": false,
+    "poster": {
+      "path": "hero.jpg",
+      "source": "turntable.mp4",
+      "source_frame": 61,
+      "source_time_seconds": 2,
+      "processing": "decode original frame61 and JPEG encode; no crop, repaint or artwork regeneration",
+      "source_sha256": "70b3062f308d8de2ef83417b56de9e3b91b70c19be6cba61d0e76a0cbdaa1a33"
+    }
+  }
 }

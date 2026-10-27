@@ -60,7 +60,7 @@ def media_release_observation(requests, before, snapshot):
     intent = intents[0]
     intent_at = origin + _finite_time(intent['time'])
     assert intent_at >= armed, 'Stop intent predates its guard'
-    assert intent['state'] in {'preview', 'watching'}, 'Stop intent did not target an active player'
+    assert intent['state'] in {'preview', 'watching', 'playing'}, 'Stop intent did not target an active player'
     detached = [e for e in events[events.index(intent) + 1:] if e['event'] == 'emptied' and e['target'] == 'video'
                 and e['video_index'] == before['video_index'] and e['trusted'] is True
                 and e['src'] is None and e['live_sources'] == 0 and e['paused'] is True and e['state'] == 'idle']
@@ -92,7 +92,7 @@ def arm_release_guard(video, event='click'):
       armed_at_ms: performance.timeOrigin + performance.now(),
       event_count: (window.__mediaDiagnosticEvents || []).length,
       video_index: Array.from(document.querySelectorAll('video')).indexOf(v), event,
-      target: event === 'pointerleave' ? 'detail-host' : 'video-watch'})""", event)
+      target: event === 'pointerleave' ? 'detail-host' : v.closest('.case-card') ? 'preview-toggle' : 'video-watch'})""", event)
 
 
 # Observers only: no media methods or browser policies are replaced.
@@ -101,8 +101,9 @@ MEDIA_DIAGNOSTICS = """(() => {
   for (const event of ['loadstart', 'emptied', 'loadedmetadata', 'loadeddata', 'suspend', 'progress', 'abort', 'error', 'play', 'playing', 'pause', 'waiting', 'pointerenter', 'pointerleave', 'pointerdown', 'click']) {
     document.addEventListener(event, e => {
       const target = e.target instanceof HTMLVideoElement ? 'video' :
-        e.target.matches?.('.video-watch') ? 'video-watch' : e.target.matches?.('.detail-video') ? 'detail-host' : null;
-      const v = target === 'video' ? e.target : target ? e.target.closest('.detail-video')?.querySelector('video') : null;
+        e.target.matches?.('.video-watch') ? 'video-watch' : e.target.closest?.('.preview-toggle') ? 'preview-toggle' :
+        e.target.matches?.('.detail-video') ? 'detail-host' : null;
+      const v = target === 'video' ? e.target : target ? e.target.closest('.detail-video, .case-card')?.querySelector('video') : null;
       if (!v || window.__mediaDiagnosticEvents.length >= 500) return;
       window.__mediaDiagnosticEvents.push({event, target, video_index: Array.from(document.querySelectorAll('video')).indexOf(v),
         time: performance.now(), src: v.getAttribute('src'), live_sources: v.querySelectorAll('source[src]').length, currentSrc: v.currentSrc,
@@ -126,6 +127,26 @@ def media_snapshot(page):
         rect: v.getBoundingClientRect().toJSON()})),
       resources: performance.getEntriesByType('resource').filter(r => /\.(mp4|webm)(\?|$)/.test(r.name)).map(r => r.toJSON()),
       events: window.__mediaDiagnosticEvents || []})""")
+
+
+GALLERY_PREVIEW_STATE = """v => ({src: v.getAttribute('src'), currentSrc: v.currentSrc,
+  paused: v.paused, currentTime: v.currentTime, readyState: v.readyState,
+  width: v.videoWidth, height: v.videoHeight,
+  visible: Number(getComputedStyle(v).opacity) > 0 && getComputedStyle(v).visibility === 'visible' && getComputedStyle(v).display !== 'none',
+  state: v.closest('.case-card').dataset.previewState})"""
+
+
+def assert_paused_gallery_preview(before, after):
+    """Manual pause retains its source, seek position and visible decoded frame."""
+    for frame in (before, after):
+        assert frame['state'] == 'paused' and frame['paused'] is True, 'Manual pause ownership lost'
+        assert frame['src'] and frame['currentSrc'], 'Paused source detached'
+        assert frame['readyState'] >= 2 and frame['width'] > 0 and frame['height'] > 0 \
+            and frame['visible'] is True, 'Paused decoded frame hidden or cleared'
+        _finite_time(frame['currentTime'])
+        assert frame['currentTime'] > 0, 'Paused playback never advanced'
+    assert before['src'] == after['src'] and before['currentSrc'] == after['currentSrc'], 'Paused source changed'
+    assert before['currentTime'] == after['currentTime'], 'Paused position changed'
 
 
 def request_diagnostic(request):
@@ -195,7 +216,7 @@ def run(site: Path, output: Path):
     films = {slug: items for slug, items in films.items() if items}
     output.mkdir(parents=True, exist_ok=True)
     report = {'passed': False, 'checks': [], 'screenshots': [], 'gallery_videos': len(films),
-              'detail_videos': sum(map(len, films.values())), 'release_observations': [],
+              'detail_videos': sum(map(len, films.values())), 'release_observations': [], 'gallery_manual_observations': [],
               'scope': 'Real decoded local media; Chromium desktop and touch-viewport emulation. No subjective listening.'}
     server = ThreadingHTTPServer(('127.0.0.1', 0), partial(MountHandler, directory=str(site)))
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -260,6 +281,49 @@ def run(site: Path, output: Path):
                         page.goto(base + prefix, wait_until='networkidle')
                         expect(page.locator('.case-card[data-preview-src]')).to_have_count(len(films))
                         assert not any(url.split('?')[0].endswith(('.mp4', '.webm', '.wasm', '.pck')) for url in requests)
+                        if not mobile:
+                            stage = f'{locale}/{kind}: gallery manual pause/resume ownership'
+                            cards = page.locator('.case-card[data-preview-src]')
+                            card, other = cards.nth(0), cards.nth(1)
+                            card.scroll_into_view_if_needed()
+                            other.scroll_into_view_if_needed()
+                            for adjacent in (card, other):
+                                assert adjacent.evaluate('(c)=>{const r=c.getBoundingClientRect();return r.bottom>0 && r.right>0 && r.top<innerHeight && r.left<innerWidth}')
+                            video, toggle = card.locator('video'), card.locator('.preview-toggle')
+                            toggle.focus()
+                            page.keyboard.press('Enter')
+                            expect(card).to_have_attribute('data-preview-state', 'playing')
+                            assert video.evaluate('(v)=>!v.paused && v.videoWidth>0 && v.loop')
+                            page.wait_for_function('(v)=>v.currentTime>0.05', arg=video.element_handle())
+                            video.evaluate('(v)=>v.pause()')
+                            expect(card).to_have_attribute('data-preview-state', 'paused')
+                            page.wait_for_function('(v)=>Number(getComputedStyle(v).opacity)>0 && v.readyState>=2', arg=video.element_handle())
+                            paused = video.evaluate(GALLERY_PREVIEW_STATE)
+                            other.locator('.card-title').hover()
+                            page.wait_for_timeout(250)
+                            after_hover = video.evaluate(GALLERY_PREVIEW_STATE)
+                            assert_paused_gallery_preview(paused, after_hover)
+                            expect(other).to_have_attribute('data-preview-state', 'idle')
+                            assert other.locator('video').get_attribute('src') is None
+                            toggle.focus()
+                            page.keyboard.press('Enter')
+                            expect(card).to_have_attribute('data-preview-state', 'playing')
+                            assert video.get_attribute('src') == paused['src']
+                            assert video.evaluate('(v)=>v.currentSrc') == paused['currentSrc']
+                            page.mouse.move(1, 1)
+                            other.locator('.card-title').hover()
+                            expect(card).to_have_attribute('data-preview-state', 'playing')
+                            assert video.evaluate('(v)=>!v.paused && v.videoWidth>0')
+                            expect(other).to_have_attribute('data-preview-state', 'idle')
+                            assert other.locator('video').get_attribute('src') is None
+                            before_stop = arm_release_guard(video)
+                            toggle.click()
+                            expect(card).to_have_attribute('data-preview-state', 'idle')
+                            assert_released(video, before_stop, f'{locale}-{kind}-gallery-manual-stop')
+                            report['gallery_manual_observations'].append({'locale': locale, 'case': card.get_attribute('data-case'),
+                                                                         'paused': paused, 'after_adjacent_hover': after_hover})
+                            page.mouse.move(1, 1)
+                            check(f'{locale}/{kind}: gallery keyboard start, retained paused frame, adjacent-hover ownership, same-source resume and explicit stop')
                         for slug in films:
                             stage = f'{locale}/{kind}: gallery {slug}'
                             card = page.locator(f'.case-card[data-case="{slug}"]')

@@ -1,0 +1,7 @@
+Original Tidal Sanctuary story and vector interface artwork.
+
+Authored for this case; original creative-content rights are retained under the
+Tidal Sanctuary case notice in ../../../LICENSES.md in the source repository.
+No additional license grant is made by publication. The supplied SVG sources
+remain editable; Inkscape was used to validate native opening and image export.
+The separate Sanctuary Sans font retains its existing SIL Open Font License.

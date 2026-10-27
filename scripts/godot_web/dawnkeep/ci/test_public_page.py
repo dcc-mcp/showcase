@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 import subprocess
 import tempfile
+import textwrap
 import unittest
 from unittest.mock import Mock, patch
 
@@ -121,7 +122,7 @@ class RawTrackedSourceTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         subprocess.run(['git', 'init', '-q', str(self.root)], check=True)
-        (self.root / '.gitattributes').write_text('*.bin filter=fixture\n')
+        (self.root / '.gitattributes').write_bytes(b'*.bin filter=fixture\n')
         (self.root / 'image.bin').write_bytes(b'actual committed image bytes\x00\xff')
         self.git('add', '.gitattributes', 'image.bin')
         self.git('-c', 'user.name=Acceptance fixture', '-c', 'user.email=fixture@example.invalid',
@@ -157,6 +158,59 @@ class RawTrackedSourceTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
             gate.source_receipt(self.root, self.head)
 
+    def commit_pointer(self, payload, pointer=None):
+        if pointer is None:
+            pointer = ('version https://git-lfs.github.com/spec/v1\noid sha256:' +
+                hashlib.sha256(payload).hexdigest() + '\nsize ' + str(len(payload)) + '\n').encode()
+        (self.root / 'image.bin').write_bytes(pointer)
+        self.git('add', 'image.bin')
+        self.git('-c', 'user.name=Acceptance fixture', '-c', 'user.email=fixture@example.invalid',
+                 'commit', '-qm', 'LFS pointer fixture')
+        self.head = self.git('rev-parse', 'HEAD').stdout.strip()
+        (self.root / 'image.bin').write_bytes(payload)
+        return pointer
+
+    def test_hydrated_lfs_and_unhydrated_pointer_both_match(self):
+        pointer = self.commit_pointer(b'actual hydrated media\x00\xff')
+        with patch.object(Path, 'read_bytes', side_effect=AssertionError('Unbounded payload read')):
+            self.assertEqual(gate.verify_tracked_bytes(self.root)['tracked_blobs_checked'], 2)
+        (self.root / 'image.bin').write_bytes(pointer)
+        self.assertEqual(gate.verify_tracked_bytes(self.root)['tracked_blobs_checked'], 2)
+
+    def test_hydrated_lfs_requires_exact_size_and_hash(self):
+        payload = b'actual hydrated media'
+        self.commit_pointer(payload)
+        for wrong in (b'x' * len(payload), payload + b'x', b''):
+            with self.subTest(payload=wrong), patch.object(Path, 'read_bytes',
+                    side_effect=AssertionError('Unbounded payload read')), self.assertRaisesRegex(RuntimeError,
+                    'image.bin: raw tracked bytes differ'):
+                (self.root / 'image.bin').write_bytes(wrong)
+                gate.verify_tracked_bytes(self.root)
+
+    def test_malformed_committed_pointer_cannot_authorize_payload(self):
+        self.commit_pointer(b'actual hydrated media',
+            b'version https://git-lfs.github.com/spec/v1\noid sha256:INVALID\nsize 21\n')
+        with patch.object(Path, 'read_bytes', side_effect=AssertionError('Unbounded payload read')), \
+                self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
+            gate.verify_tracked_bytes(self.root)
+
+    def test_large_committed_blob_is_not_loaded_as_pointer(self):
+        self.commit_pointer(b'changed bytes', b'ordinary committed media' * 20)
+        with patch.object(gate.subprocess, 'check_output',
+                          wraps=subprocess.check_output) as git, \
+                self.assertRaisesRegex(RuntimeError, 'image.bin: raw tracked bytes differ'):
+            gate.verify_tracked_bytes(self.root)
+        self.assertFalse(any('cat-file' in call.args[0] and 'blob' in call.args[0]
+                             for call in git.call_args_list))
+
+    def test_hydrated_lfs_does_not_hide_index_changes(self):
+        self.commit_pointer(b'actual hydrated media')
+        (self.root / 'extra.txt').write_text('staged addition')
+        self.git('add', 'extra.txt')
+        with self.assertRaisesRegex(RuntimeError, 'Tracked index differs'):
+            gate.source_receipt(self.root, self.head)
+
+    @unittest.skipUnless(os.name == 'posix', 'POSIX executable modes')
     def test_executable_mode_mutation_is_fatal(self):
         path = self.root / 'image.bin'
         path.chmod(path.stat().st_mode | stat.S_IXUSR)
@@ -205,6 +259,60 @@ class PublicMatrixTests(unittest.TestCase):
         self.assertIn("'complete_four_pair_matrix': len(pairs) == 4", source)
         self.assertIn("len(report['viewports']) == len(pairs)", source)
         self.assertIn('publication needs all four workflow matrix jobs', source)
+
+
+class AptMirrorWorkflowTests(unittest.TestCase):
+    def setUp(self):
+        self.workflow = (gate.ROOT / '.github/workflows/dawnkeep-public-page.yml').read_text()
+        step = self.workflow.split("- name: Prefer the runner's HTTPS Ubuntu archive mirror\n", 1)[1]
+        block = step.split("sudo python3 - <<'PY'\n", 1)[1].split('\n          PY', 1)[0]
+        self.script = compile(textwrap.dedent(block), '<workflow Ubuntu mirror step>', 'exec')
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.mirrors = Path(self.temp.name) / 'apt-mirrors.txt'
+        self.azure = b'http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n'
+        self.archive = b'https://archive.ubuntu.com/ubuntu/\tpriority:2\n'
+        self.security = b'https://security.ubuntu.com/ubuntu/\tpriority:3\n'
+
+    def run_mirror_step(self):
+        def exact_path(value):
+            self.assertEqual(value, '/etc/apt/apt-mirrors.txt')
+            return self.mirrors
+
+        with patch('pathlib.Path', side_effect=exact_path) as target:
+            exec(self.script, {})
+        target.assert_called_once_with('/etc/apt/apt-mirrors.txt')
+
+    def test_only_existing_archive_and_azure_priorities_change(self):
+        extra = b'# retained comment\r\nhttps://mirror.example.invalid/\tpriority:4\n'
+        self.mirrors.write_bytes(self.azure + self.archive + self.security + extra)
+        self.run_mirror_step()
+        self.assertEqual(self.mirrors.read_bytes(),
+                         self.azure.replace(b'priority:1', b'priority:2') +
+                         self.archive.replace(b'priority:2', b'priority:1') + self.security + extra)
+
+    def test_unexpected_mirror_entries_fail_before_any_write(self):
+        valid = self.azure + self.archive + self.security
+        swapped = (self.azure.replace(b'priority:1', b'priority:2') +
+                   self.archive.replace(b'priority:2', b'priority:1') + self.security)
+        for data in (b'', valid.replace(self.azure, b''), valid.replace(self.archive, b''),
+                     valid + self.azure, valid + self.archive,
+                     valid.replace(self.azure, b'# ' + self.azure),
+                     valid.replace(b'archive.ubuntu.com/ubuntu/', b'archive.ubuntu.com/ubuntu-evil/'),
+                     valid.replace(b'\tpriority:1\n', b' priority:1\n'),
+                     valid.replace(b'\n', b'\r\n'), swapped):
+            with self.subTest(data=data):
+                self.mirrors.write_bytes(data)
+                with self.assertRaisesRegex(SystemExit, 'Unexpected runner Ubuntu mirror priorities'), \
+                        patch.object(Path, 'write_bytes', side_effect=AssertionError('Unexpected mirror write')):
+                    self.run_mirror_step()
+                self.assertEqual(self.mirrors.read_bytes(), data)
+
+    def test_mirror_step_precedes_both_dependency_installs(self):
+        position = self.workflow.index("- name: Prefer the runner's HTTPS Ubuntu archive mirror")
+        for command in ('python -m playwright install-deps chromium',
+                        'sudo apt-get install --yes --no-install-recommends ffmpeg'):
+            self.assertLess(position, self.workflow.index(command))
 
 
 class PublicMediaRangeTests(unittest.TestCase):

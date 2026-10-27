@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "scope": "Clean native packaging/import and official single-thread Web export/PCK inspection. No OS-input or Web-browser acceptance claim.",
+  "engine": "Godot4.6.3 stable official",
+  "runtime_freeze_sha256": "ec13ca4d545658c76201ad1dadd838e31a8ee769506f86322b171fc7ed876b19",
+  "source_receipt_sha256": "796cf4e9f1a2fb1c411afe7d8339027dfa66693228252da805512ea9dd792d0b",
+  "fresh_extraction": {
+    "frozen_runtime_files": 41,
+    "changed_runtime_files": 0
+  },
+  "assets": {
+    "bundled_glb_files": 13,
+    "loaded_asset_types": [
+      "arch",
+      "gate",
+      "column",
+      "portal",
+      "shrine",
+      "chest_interactive",
+      "stairs",
+      "guardian_character",
+      "pedestal",
+      "crystal",
+      "courier_character"
+    ],
+    "loaded_asset_type_count": 11,
+    "instanced_triangle_upper_bound": 258525
+  },
+  "web": {
+    "pck_name": "index.pck",
+    "pck_bytes": 41192268,
+    "pck_sha256": "22f7d1c3f45a8a553715f1c6d79f6f5595836e650484f51ffabd640647ec27c3",
+    "pck_gzip_bytes": 40836378,
+    "official_template_sha256": "1446f79dc12f60ce5d244c39fb6628ec298337ca5c4f91a16491feea72aa1bc9",
+    "shared_runtime_comparison": {
+      "index.js": {
+        "shared_path": "play/runtime/godot-4.6.3.js",
+        "bytes": 315759,
+        "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981",
+        "matches_official_and_showcase": true
+      },
+      "index.wasm": {
+        "shared_path": "play/runtime/godot-4.6.3.wasm",
+        "bytes": 37700666,
+        "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6",
+        "matches_official_and_showcase": true
+      },
+      "index.audio.worklet.js": {
+        "shared_path": "play/runtime/godot-4.6.3.audio.worklet.js",
+        "bytes": 7298,
+        "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+        "matches_official_and_showcase": true
+      },
+      "index.audio.position.worklet.js": {
+        "shared_path": "play/runtime/godot-4.6.3.audio.position.worklet.js",
+        "bytes": 2973,
+        "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+        "matches_official_and_showcase": true
+      }
+    },
+    "omitted_source_assets": [
+      {
+        "path": "assets/chest.glb",
+        "bytes": 2144840,
+        "sha256": "db8ed454dfcf8d440c3bff7776a4f930503b11164bbb2693d05c86de6b913ff7"
+      },
+      {
+        "path": "assets/guardian.glb",
+        "bytes": 705016,
+        "sha256": "76d60eb1ba2898af6cf25ccf6675e971196c2c585b4ebb68796f5f7bd4153ab1"
+      }
+    ],
+    "pack_inspection": {
+      "engine": "4.6.3-stable (official)",
+      "file_count": 125,
+      "physics_3d": "Jolt Physics",
+      "uncompressed_file_bytes": 41179582
+    },
+    "pack_scene_probe": {
+      "courier_clips": {
+        "Attack": 0.449999988079071,
+        "Cast": 0.649999976158142,
+        "Dash": 0.25,
+        "Idle": 2.0,
+        "Walk": 1.0
+      },
+      "guardian_clips": {
+        "Attack": 0.649999976158142,
+        "Dash": 0.25,
+        "Idle": 2.0,
+        "Walk": 1.0
+      },
+      "instanced_triangle_upper_bound": 258525,
+      "loaded_asset_types": [
+        "arch",
+        "gate",
+        "column",
+        "portal",
+        "shrine",
+        "chest_interactive",
+        "stairs",
+        "guardian_character",
+        "pedestal",
+        "crystal",
+        "courier_character"
+      ],
+      "scope": "exported PCK mounted in native headless Godot; not WASM/browser input",
+      "state": "title",
+      "zone": "town"
+    }
+  },
+  "acceptance_boundary": "Native headless import and exported-PCK inspection; OS acceptance is separately recorded, Web browser acceptance and final publication are separate gates.",
+  "native_launch_zip": {
+    "archive": "historical-native-launch.zip (retained acceptance evidence)",
+    "bytes": 44269347,
+    "sha256": "22762aebd5a67f3f6f7cde20c8de236ef71d75c8d3edfe586b144579822a0dc5",
+    "file_count": 72,
+    "integrity": "passed"
+  },
+  "current_download": {
+    "receipt": "native-package.public.json",
+    "bytes": 44273997,
+    "sha256": "8822a8da38a23c2ab4194d82fa49b97c0d99d5b13533b7bc1164a24498b64b79",
+    "runtime_identical_to_accepted_launch": false,
+    "unchanged_runtime_files_from_accepted_baseline": 40,
+    "current_runtime_aggregate_sha256": "ba6b22f5eee335c41717dfa8989113e7e40494fe5a60ce177a73c95aa701248f",
+    "current_export_receipt": "current-export.public.json",
+    "scope": "Three scoped main.gd save/restart corrections; all41 runtime files and all archive members rehashed. Prior OS/course and film evidence retains its earlier source binding."
+  }
+}

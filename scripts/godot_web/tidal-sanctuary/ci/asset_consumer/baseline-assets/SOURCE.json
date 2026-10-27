@@ -1,0 +1,324 @@
+{
+  "schema": 1,
+  "official_sources": [
+    "https://kaylousberg.itch.io/kaykit-forest",
+    "https://kaylousberg.itch.io/kaykit-adventurers"
+  ],
+  "licenses": {
+    "KayKit": "CC0-1.0",
+    "original": "See case LICENSES.md"
+  },
+  "archive_sha256": {
+    "forest-free.zip": "2ee83e63bb7695f2d884ec27ddf6fce020789a452e7d5c5b0bbdfc4f6ea1fc8c",
+    "adventurers-free-2.zip": "abe48f4763fba0896bab486ee9e6d08ca6b5b3884b9601f235c8847ae94dc479"
+  },
+  "nature": {
+    "blender": "4.3.2",
+    "production": "actual headless Blender data import, original palm modelling, native save and GLB export",
+    "third_party": [
+      {
+        "output": "bush-a.glb",
+        "source": "Bush_3_A_Color1.gltf",
+        "gltf_sha256": "c1806cb5331a53bbd57a57fa678dce6484ac45e8b609caf4c619d3dae0fcd7b8",
+        "license": "CC0-1.0",
+        "author": "Kay Lousberg",
+        "modifications": "geometry retained; shared matte island material replaces original palette texture"
+      },
+      {
+        "output": "bush-b.glb",
+        "source": "Bush_4_A_Color1.gltf",
+        "gltf_sha256": "56b56b9187350ad1222a4bd61112ed3c2a839a49ad876ca6e01ef17b426f3d02",
+        "license": "CC0-1.0",
+        "author": "Kay Lousberg",
+        "modifications": "geometry retained; shared matte island material replaces original palette texture"
+      },
+      {
+        "output": "shore-stone-a.glb",
+        "source": "Rock_3_A_Color1.gltf",
+        "gltf_sha256": "65484de298f09f7ed5bcf781d7febde1a2df4f0f76b8a6396591240963152c88",
+        "license": "CC0-1.0",
+        "author": "Kay Lousberg",
+        "modifications": "geometry retained; shared matte island material replaces original palette texture"
+      },
+      {
+        "output": "shore-stone-b.glb",
+        "source": "Rock_2_C_Color1.gltf",
+        "gltf_sha256": "22ef2dedc006b9a5bffaa2b4f8779face5a92c34e2bb813d1e2904fa7c554cbf",
+        "license": "CC0-1.0",
+        "author": "Kay Lousberg",
+        "modifications": "geometry retained; shared matte island material replaces original palette texture"
+      }
+    ],
+    "original": [
+      "palm-a",
+      "palm-b",
+      "understory-a",
+      "understory-b"
+    ],
+    "assets": [
+      {
+        "name": "palm-a",
+        "objects": 1,
+        "triangles": 8524,
+        "blender_bounds": [
+          [
+            -1.8363088369369507,
+            -2.161997079849243,
+            -0.030288944020867348
+          ],
+          [
+            3.1163628101348877,
+            2.156266927719116,
+            4.542733669281006
+          ]
+        ],
+        "bytes": 604308,
+        "sha256": "fb11d7daafed2c56bd3d973b8cec0041aa0cfed76b3a3328f796f283d293a3cb"
+      },
+      {
+        "name": "palm-b",
+        "objects": 1,
+        "triangles": 8524,
+        "blender_bounds": [
+          [
+            -3.1517860889434814,
+            -2.3006961345672607,
+            -0.03714049234986305
+          ],
+          [
+            1.5009183883666992,
+            2.403373956680298,
+            3.9408652782440186
+          ]
+        ],
+        "bytes": 604316,
+        "sha256": "e0b9795379607da157b033c49249b22208cd01dcdbba64ef1e8cdf3ca0b97f62"
+      },
+      {
+        "name": "understory-a",
+        "objects": 1,
+        "triangles": 560,
+        "blender_bounds": [
+          [
+            -0.5549494028091431,
+            -0.5638052821159363,
+            0.056008219718933105
+          ],
+          [
+            0.607170820236206,
+            0.5050787329673767,
+            0.5569291114807129
+          ]
+        ],
+        "bytes": 32156,
+        "sha256": "455305525f0f8bf2bc1c0d7864c23f01fbb48dd1ab5839e819ade540cea14141"
+      },
+      {
+        "name": "understory-b",
+        "objects": 1,
+        "triangles": 560,
+        "blender_bounds": [
+          [
+            -0.5160753726959229,
+            -0.4023604989051819,
+            0.0562952421605587
+          ],
+          [
+            0.5098779797554016,
+            0.6470407843589783,
+            0.569377601146698
+          ]
+        ],
+        "bytes": 32152,
+        "sha256": "08c917d52a3583ffd73d671619ee0398f439deebe4a39d2205f9eb68eddd624d"
+      },
+      {
+        "name": "bush-a",
+        "objects": 1,
+        "triangles": 208,
+        "blender_bounds": [
+          [
+            -0.5165291428565979,
+            -0.5165291428565979,
+            -0.025402218103408813
+          ],
+          [
+            0.5165290832519531,
+            0.5165290832519531,
+            0.459860622882843
+          ]
+        ],
+        "bytes": 6512,
+        "sha256": "80029cdd4b83a11f7e903f13733113a62ec810c0e0569b90d907be63b796fafe"
+      },
+      {
+        "name": "bush-b",
+        "objects": 1,
+        "triangles": 44,
+        "blender_bounds": [
+          [
+            -0.288410484790802,
+            -0.288410484790802,
+            -0.00021919608116149902
+          ],
+          [
+            0.2884104251861572,
+            0.288410484790802,
+            0.4341813921928406
+          ]
+        ],
+        "bytes": 2288,
+        "sha256": "7b7524e5e9b137179a4f8343230f73c8af539b9c6efa344622672d1b1bb329c3"
+      },
+      {
+        "name": "shore-stone-a",
+        "objects": 1,
+        "triangles": 84,
+        "blender_bounds": [
+          [
+            -0.5295201539993286,
+            -0.39257872104644775,
+            -0.465302437543869
+          ],
+          [
+            0.42677390575408936,
+            0.4149000942707062,
+            0.393566370010376
+          ]
+        ],
+        "bytes": 5936,
+        "sha256": "1fb23d62486a84c3b5aaaf4a360052924e6c6e6a1b3b7216e439f0f50a6ff929"
+      },
+      {
+        "name": "shore-stone-b",
+        "objects": 1,
+        "triangles": 108,
+        "blender_bounds": [
+          [
+            -0.6476109027862549,
+            -0.6476311087608337,
+            4.047247057314962e-05
+          ],
+          [
+            0.6476513743400574,
+            0.6476311087608337,
+            1.326242446899414
+          ]
+        ],
+        "bytes": 4604,
+        "sha256": "8ffb9d77bebfcd0c997b5042931ed15cac5830e63c97dec9d0b7bd1b726b519b"
+      }
+    ]
+  },
+  "explorer": {
+    "source": "KayKit Adventurers 2.0 FREE",
+    "source_license": "CC0-1.0",
+    "source_url": "https://kaylousberg.itch.io/kaykit-adventurers",
+    "source_official_url": "https://kaylousberg.com/game-assets/characters-adventurers",
+    "source_archive": {
+      "name": "adventurers-free-2.zip",
+      "sha256": "abe48f4763fba0896bab486ee9e6d08ca6b5b3884b9601f235c8847ae94dc479",
+      "bytes": 13024345
+    },
+    "source_files": [
+      {
+        "path": "Characters/gltf/Ranger.glb",
+        "sha256": "3a0b0166b9d61d58dcaaa739c3cc0538be46e00d2928dd5cb513d9a41770d2e9"
+      },
+      {
+        "path": "Animations/gltf/Rig_Medium/Rig_Medium_General.glb",
+        "sha256": "5f725c0f745f36078c7238968cd5c04843cbc6260689eb6e7f5e2bbd7ffdd7ad"
+      },
+      {
+        "path": "Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb",
+        "sha256": "11422afd50abf7e8c92ea107e2e0bc94abd38023d6d15f55ad580347efbfa29e"
+      }
+    ],
+    "created_with": "Blender 4.3.2",
+    "original_additions": [
+      "Coral short-sleeved shirt",
+      "Teal shorts and hems",
+      "Skin limbs and sandals",
+      "Canvas sun hat and compass details",
+      "Swim action with 24 fps keyframes"
+    ],
+    "rig_bones": 23,
+    "animations": {
+      "Idle": {
+        "frames": [
+          0.0,
+          24.0
+        ],
+        "duration_seconds": 1.0
+      },
+      "Walk": {
+        "frames": [
+          0.0,
+          24.0
+        ],
+        "duration_seconds": 1.0
+      },
+      "Swim": {
+        "frames": [
+          1.0,
+          25.0
+        ],
+        "duration_seconds": 1.0
+      }
+    },
+    "orientation": {
+      "godot_forward": [
+        0,
+        0,
+        -1
+      ],
+      "godot_up": [
+        0,
+        1,
+        0
+      ],
+      "feet_origin": [
+        0,
+        0,
+        0
+      ],
+      "height_m": 1.2,
+      "swim_game_wrapper_rotation_x_degrees": -90,
+      "swim_action_contains_prone_rotation": false
+    }
+  },
+  "game_assets": {
+    "bush-a.glb": {
+      "bytes": 6512,
+      "sha256": "80029cdd4b83a11f7e903f13733113a62ec810c0e0569b90d907be63b796fafe"
+    },
+    "explorer.glb": {
+      "bytes": 612892,
+      "sha256": "eae7218d3ca960b10710216a2cda6c9ddd7eab088ee98854381099f5cabd36b3"
+    },
+    "palm-a.glb": {
+      "bytes": 604308,
+      "sha256": "fb11d7daafed2c56bd3d973b8cec0041aa0cfed76b3a3328f796f283d293a3cb"
+    },
+    "palm-b.glb": {
+      "bytes": 604316,
+      "sha256": "e0b9795379607da157b033c49249b22208cd01dcdbba64ef1e8cdf3ca0b97f62"
+    },
+    "shore-stone-a.glb": {
+      "bytes": 5936,
+      "sha256": "1fb23d62486a84c3b5aaaf4a360052924e6c6e6a1b3b7216e439f0f50a6ff929"
+    },
+    "shore-stone-b.glb": {
+      "bytes": 4604,
+      "sha256": "8ffb9d77bebfcd0c997b5042931ed15cac5830e63c97dec9d0b7bd1b726b519b"
+    },
+    "understory-a.glb": {
+      "bytes": 32156,
+      "sha256": "455305525f0f8bf2bc1c0d7864c23f01fbb48dd1ab5839e819ade540cea14141"
+    },
+    "understory-b.glb": {
+      "bytes": 32152,
+      "sha256": "08c917d52a3583ffd73d671619ee0398f439deebe4a39d2205f9eb68eddd624d"
+    }
+  }
+}

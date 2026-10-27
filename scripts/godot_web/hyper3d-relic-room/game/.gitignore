@@ -1,0 +1,4 @@
+.godot/
+*.import
+/assets/*.png
+/tests/layout-results.json
