@@ -5968,7 +5968,7 @@
         "alt": "Hyper3D 法师释放紫色法术，脚下三层符文光环"
       },
       "evidence_label": "Draft 候选 · 原生与导出检查通过 · 人工视听待验",
-      "evidence_scope": "15 秒原生影片与三层法阵，含调整后的魔法音色和降低 6 dB 的默认音量。36 文件工程通过解包、保存重开和导出启动；51 帧抽查完成。最终试听、独立质量审阅、真实输入和性能仍待验。",
+      "evidence_scope": "15 秒原生影片：补充腰背、肩和手腕动作，加入环流粒子、倾斜法阵与石质仪式场，收小命中核心。36 文件工程通过解包、保存重开和导出启动，51 帧抽查完成。最终视听、真实输入和性能仍待验。",
       "summary": "将 Hyper3D 法师的骨骼施法动画与蓄力、飞行、接触、光环及声音连接，保留六类可复用原生预设。",
       "goal": "把攻击、法术和光环整理为可复制到未来游戏的原生场景、技能说明与验证记录，并保持表现与伤害逻辑分离。",
       "prompt": {
@@ -6052,12 +6052,12 @@
         {
           "name": "影片解码与声音测量",
           "result": "pass",
-          "observed": "450 帧完整解码，均值 -27.38 dBFS、峰值 -4.53 dBFS，无削波；这些测量不代替试听。"
+          "observed": "450 帧完整解码，均值 -29.22 dBFS、峰值 -6.16 dBFS，无削波；这些测量不代替试听。"
         },
         {
           "name": "人工视听审阅",
           "result": "not_run",
-          "observed": "用户要求替换提示音式音色，再要求更柔和；已换分层魔法音色并降低 6 dB。最终试听待验，模型已抽查 51 帧。"
+          "observed": "用户在柔和音量版后要求同时调整动作、特效和场景；本版已修订三项，模型抽查 51 帧，最终视听验收仍待完成。"
         },
         {
           "name": "MCP 工具桥接",
@@ -6133,7 +6133,7 @@
         },
         {
           "label": "独立 Shader 使用手册",
-          "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/ac8242ca951ebffdf4646783d435cf016a1c700a/docs/shader-manual.md"
+          "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/5998d429542022ab5c34da46e3ce70e0eabb5494/docs/shader-manual.md"
         }
       ],
       "credits": {
@@ -6142,8 +6142,8 @@
         "note": "模型：Hyper3D / Rodin Gen-2.5。骨骼、动画、声音和 Godot 特效：DCC-MCP contributors。未分发教程影片或第三方纹理库资产。"
       },
       "source": {
-        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/ac8242ca951ebffdf4646783d435cf016a1c700a/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
-        "commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/5998d429542022ab5c34da46e3ce70e0eabb5494/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
+        "commit": "5998d429542022ab5c34da46e3ce70e0eabb5494",
         "title": "Shader 与 VFX 源码 · 未发布候选"
       },
       "verified_at": "2026-10-27",
@@ -6223,6 +6223,11 @@
           "version": "分层光环与柔和魔法声音 · Draft 候选",
           "date": "2026-10-27",
           "change": "光环拆为三层，增加图解手册；按两轮反馈替换提示音式音色并降低 6 dB，重新录制原生影片并验证最终工程。保留历史记录，未部署。"
+        },
+        {
+          "version": "施法动作与仪式场修订 · Draft 候选",
+          "date": "2026-10-27",
+          "change": "按反馈补充身体重心、肩和手腕动作，加入环流粒子、法阵倾角、较小命中核心及石质仪式场；修正台面高度，重录并验证工程。保留历史失败与未测项，尚未部署。"
         }
       ]
     }

@@ -5,7 +5,7 @@
     "host": "Godot 4.7.2.stable.official.ed1daf0bf",
     "renderer": "Forward+",
     "dcc-mcp-godot": "0.9.12 editable candidate; unreleased VFX",
-    "source_commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
+    "source_commit": "5998d429542022ab5c34da46e3ce70e0eabb5494",
     "dcc-mcp-core": "0.20.48",
     "dcc-mcp-server": "0.20.48",
     "post": "FFmpeg 8.1.1-full_build-www.gyan.dev",
@@ -88,12 +88,12 @@
     {
       "name": "Film decoding and audio measurement",
       "result": "pass",
-      "observed": "All 450 frames decoded; measured mean -27.38 dBFS and peak -4.53 dBFS with zero clipped samples. Measurement does not replace listening."
+      "observed": "All 450 frames decoded; measured mean -29.22 dBFS and peak -6.16 dBFS with zero clipped samples. Measurement does not replace listening."
     },
     {
       "name": "Human audiovisual review",
       "result": "not_run",
-      "observed": "The user rejected the beep-like mix, then requested a softer layered mix. Native gain was reduced by 6 dB to -4 dB. Final listening acceptance is pending; a model viewed 51 sampled frames."
+      "observed": "The user requested further motion, VFX and staging changes after the softer mix. The revision adds support-bone motion, inclined auras, circulating motes, restrained contact and a stone arena. Root inspected 51 samples; exact final audiovisual acceptance is pending."
     },
     {
       "name": "MCP tool bridge",
@@ -131,7 +131,7 @@
     "Local MCP fixture readiness, UI input, Web/phone or game-scale performance",
     "Merge, deployment, vendor license certification or relabeling generated mesh/PBR as MIT"
   ],
-  "package_sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34",
+  "package_sha256": "4e424fac796c8cc447d0c908b3966225f5ca5ac2efe50d191df423d000dc5618",
   "native_receipts": {
     "package": {
       "status": "passed",
@@ -160,7 +160,7 @@
         "name": "mage",
         "returncode": 0,
         "passed": true,
-        "log_sha256": "da0e8c1426fcf56c4cf5bfb29dfd07994d433679cd19d7041a009e7d723824ea",
+        "log_sha256": "52209e1b3775236deef8389cd4780a8b73548f68c4ce2f16dcacc1c2a6e356a5",
         "marker_found": true,
         "owned_process_exited": true
       },
@@ -184,7 +184,7 @@
         "name": "save",
         "returncode": 0,
         "passed": true,
-        "log_sha256": "ac1ee1c33d8114788b04cfbc7205f8dcd9476d7a0ddad2527406a83e6bfc28c7",
+        "log_sha256": "29ac40fd8d3d1cbccb53f06a61c73148601e7eb1dcc6820db4a6ee1f3bdc63b0",
         "marker_found": true,
         "owned_process_exited": true
       },
@@ -216,8 +216,8 @@
     "scope": "Exact ZIP extraction; native headless behavior/save/reopen/export; no UI, listening or device performance acceptance"
   },
   "previous_revision": {
-    "source_commit": "3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837",
-    "package_sha256": "6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248",
+    "source_commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
+    "package_sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34",
     "counts": {
       "archive_files": 36,
       "model_triangles": 18756,
@@ -231,9 +231,24 @@
   "audio_measurement": {
     "sample_rate": 48000,
     "channels": 2,
-    "peak_dbfs": -4.531090680100101,
-    "mean_dbfs": -27.38449422038729,
+    "peak_dbfs": -6.163200901738638,
+    "mean_dbfs": -29.223117115479177,
     "clipped_samples": 0,
-    "scope": "Decoded native mix, not human listening acceptance"
-  }
+    "scope": "Decoded native mix; not human listening"
+  },
+  "revision_history": [
+    {
+      "source_commit": "3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837",
+      "package_sha256": "6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248",
+      "counts": {
+        "archive_files": 32,
+        "model_triangles": 18756,
+        "model_joints": 20,
+        "embedded_model_images": 3,
+        "film_frames": 480,
+        "sampled_frames_reviewed": 54
+      },
+      "scope": "Historical 16-second candidate; not acceptance of revised files"
+    }
+  ]
 }

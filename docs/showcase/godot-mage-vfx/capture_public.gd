@@ -51,7 +51,7 @@ func _setup() -> void:
 	var layer := CanvasLayer.new()
 	root.add_child(layer)
 	var heading := Label.new()
-	heading.text = "ARCANE / LAYERED STUDY" if case_name != "gallery" else "SIX REUSABLE EFFECTS"
+	heading.text = "ARCANE / RITUAL STUDY" if case_name != "gallery" else "SIX REUSABLE EFFECTS"
 	heading.position = Vector2(42, 28)
 	heading.add_theme_font_size_override("font_size", 25)
 	layer.add_child(heading)
@@ -89,6 +89,7 @@ func _seed_particles(node: Node) -> void:
 		seeded_particles += 1
 
 func _set_camera() -> void:
+	var sweep := smoothstep(0.0, duration, maxf(0.0, float(frame - PREWARM) / FPS))
 	if case_name == "gallery":
 		fixed_camera.position = Vector3(0.0,13.8,13.45)
 		fixed_camera.fov = 43.0
@@ -96,17 +97,17 @@ func _set_camera() -> void:
 		return
 	# Capture-only framing for the authorized imported mage and impact.
 	if case_name == "single":
-		fixed_camera.position = Vector3(-3.9, 2.6, 4.7)
-		fixed_camera.fov = 47.0
-		fixed_camera.look_at(Vector3(-2.4, 1.05, 0.0))
+		fixed_camera.position = Vector3(-0.5 - sweep * 0.35, 2.6, 5.3 - sweep * 0.2)
+		fixed_camera.fov = 44.0
+		fixed_camera.look_at(Vector3(-2.0, 1.15, 0.0))
 	elif case_name == "detail":
-		fixed_camera.position = Vector3(-3.6, 4.7, 4.3)
+		fixed_camera.position = Vector3(0.7 - sweep * 0.4, 4.8, 5.5 - sweep * 0.3)
 		fixed_camera.fov = 50.0
-		fixed_camera.look_at(Vector3(-2.8, 0.8, 0.0))
+		fixed_camera.look_at(Vector3(-2.4, 0.9, 0.0))
 	else:
-		fixed_camera.position = Vector3(-1.25, 2.8, 8.0)
+		fixed_camera.position = Vector3(-0.3 + sweep * 0.5, 3.2, 8.0 - sweep * 0.5)
 		fixed_camera.fov = 49.0
-		fixed_camera.look_at(Vector3(0.0, 1.25, -0.1))
+		fixed_camera.look_at(Vector3(0.0, 1.1, -0.4))
 
 func _record(_delta: float) -> void:
 	_set_camera()
@@ -157,7 +158,7 @@ func _record(_delta: float) -> void:
 			"rights_scope":"User authorized public model use; provider account license independently unverified; no new generation or legal certification",
 			"fixed_seed":12345,"seeded_particle_nodes":seeded_particles,
 			"camera_binding":"after-controller observer process_priority 1000 before render sync",
-			"editorial_changes":"native captions and three fixed cameras; three independent natural-speed performances; no retiming, AI frames or post-added audio; gallery remains in the editable project",
+			"editorial_changes":"native captions and three native camera moves; three independent natural-speed performances; no retiming, AI frames or post-added audio; gallery remains in the editable project",
 			"timing_scope":"observer frames; compare encoded pixel transitions separately",
 			"final_state":state,"frames":frames}
 		var file := FileAccess.open(output,FileAccess.WRITE)

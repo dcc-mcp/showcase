@@ -3,8 +3,8 @@
   "files": [
     {
       "file": "demo.mp4",
-      "bytes": 5338633,
-      "sha256": "b9171a70f7ca223baf44ea26937a5af7cf1759cec64458be9b04f5daa9306b25",
+      "bytes": 11982150,
+      "sha256": "a1fe48d36787ebf7f4c69fa2c26160fab024b89dcccf9a457e4d02a8ca237904",
       "width": 1280,
       "height": 720,
       "frames": 450,
@@ -21,8 +21,8 @@
     "source": "demo.mp4",
     "frame": 380,
     "pts": 12.666666666666666,
-    "bytes": 103629,
-    "sha256": "d1125339adc0645bf2ec6dfbd00d49a40308eb1d6c63bd2ae3d4e43049d93232",
+    "bytes": 131339,
+    "sha256": "d61015bec99946975ef9b87a375a8b8342cfd3e3365ca7c336a78bd41e41bf23",
     "model_viewed": true
   },
   "review_status": "bounded_pixel_review_complete",
@@ -85,25 +85,25 @@
   "audio_measurement": {
     "sample_rate": 48000,
     "channels": 2,
-    "peak_dbfs": -4.531090680100101,
-    "mean_dbfs": -27.38449422038729,
+    "peak_dbfs": -6.163200901738638,
+    "mean_dbfs": -29.223117115479177,
     "clipped_samples": 0,
-    "scope": "Decoded native mix, not human listening acceptance"
+    "scope": "Decoded native mix; not human listening"
   },
   "previous_feedback": [
-    "Beep-like original rejected; replaced with layered magic sound.",
-    "Heavy candidate requested softer or lower volume; native gain reduced from +2 dB to -4 dB."
+    "Earlier beep-like mix rejected; then gain reduced by 6 dB.",
+    "The user rejected the balanced candidate motion/picture and requested all three visual areas improved."
   ],
   "observations": [
     "All 51 listed frames viewed on undistorted contact sheets; layered sigil, release, wide contact and tail cleanup are visible.",
     "Single/detail shots intentionally crop the distant target; combo covers full contact.",
-    "A brief bright core obscures detail at impact; no reference-fidelity claim.",
+    "The smaller/shorter contact core gives way to the colored envelope; source reference fidelity remains unverified.",
     "Hard cuts at 4.0 and 9.5 seconds; final frame returns to idle."
   ],
   "capture": {
     "host": "Godot 4.7.2.stable.official.ed1daf0bf",
     "renderer": "Forward+",
-    "method": "native Movie Maker, fixed 30 fps, equal video/audio 1 s prewarm removal; three separate performances; no retiming, AI frames, added fades or post-added spell sound",
+    "method": "native Movie Maker, fixed 30 fps, equal video/audio 1 s prewarm removal; three separate performances with native camera moves; no retiming, AI frames, added fades or post-added spell sound",
     "model": "Hyper3D Rodin Gen-2.5 mesh/PBR; local rig and animation",
     "glb_sha256": "17d22ede10e0719333136ffe35cb3681b0c4873ed208aca56c783cb7307399ab",
     "native_player_gain_db": -4.0,
