@@ -1,0 +1,399 @@
+{
+  "candidate": "stairkeep",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "editor_file": "Godot_v4.7.2-stable_win64_console.exe",
+  "editor_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "engine_binary": {
+    "file": "Godot_v4.7.2-stable_win64.exe",
+    "bytes": 180858888,
+    "sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424"
+  },
+  "renderer": "gl_compatibility",
+  "language": "GDScript",
+  "threads": false,
+  "extensions": false,
+  "pwa": false,
+  "service_worker": false,
+  "browser_http_acceptance": "not-tested",
+  "official_release": "https://godotengine.org/download/archive/4.7.2-stable/",
+  "archive_sha512": "ca4d71c4d7b81dfc15d1a98baa07534aa95b03fdda78a0075b06672e1648d2e5f40980c9adc28d23e1b92e732ee7bf3461997aa804af74ec2fcd7a93ccb84079",
+  "template_files": [
+    {
+      "name": "web_nothreads_release.zip",
+      "bytes": 10245903,
+      "sha256": "d3ee2f08cef0cf3cf6678a6355a92a8db48ccdd35cbd2e8bfd5f0e8a0b4032a0",
+      "crc32": 2036152553
+    },
+    {
+      "name": "web_nothreads_debug.zip",
+      "bytes": 10232720,
+      "sha256": "08962aefef811b603541d7951ac67ef00413aad2d978855183c28adee98f626a",
+      "crc32": 2521048025
+    },
+    {
+      "name": "version.txt",
+      "bytes": 13,
+      "sha256": "38885c88f75abbc797a1db7559719800279a00cfb9fa8b2e2868a7f6f84bad2e",
+      "crc32": 1150721213
+    }
+  ],
+  "runtime_license_sources": [
+    {
+      "name": "LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "name": "COPYRIGHT.txt",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/COPYRIGHT.txt",
+      "bytes": 100108,
+      "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d"
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/kenney/barrel_N.png",
+      "bytes": 5797,
+      "sha256": "7a4852bce0a67bde638c7e25ae5f35698f60f98af23f6feccb42ab0a7bb3424b"
+    },
+    {
+      "path": "assets/kenney/barrel_N.png.import",
+      "bytes": 942,
+      "sha256": "61e557437cde387d58410c31550c313caa96b5aaf6ab0dae09067746daa0e4f4"
+    },
+    {
+      "path": "assets/kenney/License.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "assets/kenney/SOURCE.json",
+      "bytes": 2760,
+      "sha256": "9a9db3298bc1cbe9ea8f49f61aac68023e02e4b863460d18c7bc1770f3fd58fc"
+    },
+    {
+      "path": "assets/kenney/SOURCE.md",
+      "bytes": 326,
+      "sha256": "f967f7ee89be69a392d157c5aa2399c522b6d0f8e9cc1a7df0f1a458a4162cc1"
+    },
+    {
+      "path": "assets/kenney/stairs_N.png",
+      "bytes": 25470,
+      "sha256": "4085feccb370df75658b40f1ef0c4e8ae2678404e89cf218473fd67944178ea3"
+    },
+    {
+      "path": "assets/kenney/stairs_N.png.import",
+      "bytes": 941,
+      "sha256": "6d6221fd3a81d4095955ee7affa831d0c1fbbfc99f127a2edda96632cef26d3c"
+    },
+    {
+      "path": "assets/kenney/stone_N.png",
+      "bytes": 21500,
+      "sha256": "0ac4c1481dcdfccbd571c854b23e9a47d8be5941ae236aa60ea85ba09856c75c"
+    },
+    {
+      "path": "assets/kenney/stone_N.png.import",
+      "bytes": 939,
+      "sha256": "3aff173615a02f0466ebd05da4d2dc012a000fddafdfa865261a31cb0020c7f2"
+    },
+    {
+      "path": "assets/kenney/stoneColumn_N.png",
+      "bytes": 9204,
+      "sha256": "2007a1e676c76737162c34aab713c8ebc0c7dd148c95949b8b0f6eda784c2a6d"
+    },
+    {
+      "path": "assets/kenney/stoneColumn_N.png.import",
+      "bytes": 956,
+      "sha256": "d27948d1fe9850036d5ccc5d3cfdfe20ecf365fd80d19713941b44c7586c1fa8"
+    },
+    {
+      "path": "assets/kenney/stoneTile_N.png",
+      "bytes": 21149,
+      "sha256": "b2fbc7dfcd755fc6e91df07ac0ce9bb4acc695a8d27e995d677e7c5019f3bfcd"
+    },
+    {
+      "path": "assets/kenney/stoneTile_N.png.import",
+      "bytes": 950,
+      "sha256": "f7763f06190aaf3597412c59eb087948927f9fefea71da93bf869ea82f250fdd"
+    },
+    {
+      "path": "assets/kenney/stoneUneven_N.png",
+      "bytes": 21302,
+      "sha256": "07cd05a717e45082002305896b8ac296f812ae6e38bcb59ce6a3de9539668aa8"
+    },
+    {
+      "path": "assets/kenney/stoneUneven_N.png.import",
+      "bytes": 957,
+      "sha256": "1db6f0675931c6636e42d59f35a51d6a96fdcf256179c88f8cc692794fc4891f"
+    },
+    {
+      "path": "assets/kenney/stoneWallDoorClosed_N.png",
+      "bytes": 23209,
+      "sha256": "144a3d117e9aa11782965bca1bb28654e5c5395964f649b760ebbce109a05412"
+    },
+    {
+      "path": "assets/kenney/stoneWallDoorClosed_N.png.import",
+      "bytes": 980,
+      "sha256": "2187fcd539883ddbad528ebdf743aaace4dd0761cd966845ed1be0f6949b7c94"
+    },
+    {
+      "path": "assets/kenney/tableRoundItemsChairs_N.png",
+      "bytes": 8731,
+      "sha256": "5931a78448e50f7438cd6d304a17d1e25cf95acb4757ff47406100a140eff028"
+    },
+    {
+      "path": "assets/kenney/tableRoundItemsChairs_N.png.import",
+      "bytes": 987,
+      "sha256": "34bb59db3e9ca837182cf95bc784efd74d883881ae6ee75f8c2f8c93c58bc56d"
+    },
+    {
+      "path": "assets/kenney/wanderer.png",
+      "bytes": 4903,
+      "sha256": "d3b1fe7f2b34ee3077b3f853fbf36cfdcbb40324368f54f2673f35bf341b1059"
+    },
+    {
+      "path": "assets/kenney/wanderer.png.import",
+      "bytes": 942,
+      "sha256": "c25c339b1abc25cd1e824e07fe459b530b17897bbb1647bbf31a4bcc21d38860"
+    },
+    {
+      "path": "assets/kenney/woodenCrates_N.png",
+      "bytes": 6427,
+      "sha256": "7a289f71c98a6c55f339dd856a633e1336168775870d36bbbaf5257c6680c492"
+    },
+    {
+      "path": "assets/kenney/woodenCrates_N.png.import",
+      "bytes": 960,
+      "sha256": "7bedfc896897a9b4615a3ff74d7392d450599f072092d6ea6adc72ed2899effc"
+    },
+    {
+      "path": "data/levels.json",
+      "bytes": 43487,
+      "sha256": "1b1f66cd7191b5fa5a8cdab6ecc5caae34533c1adf9d8148eed93fa0ad182787"
+    },
+    {
+      "path": "export_presets.cfg",
+      "bytes": 554,
+      "sha256": "4fb7128fc1fe6d2925be0b829c5c286f1ac671ea9844b16aa840be6dd24ad190"
+    },
+    {
+      "path": "main.tscn",
+      "bytes": 165,
+      "sha256": "6ce0cbfd5aba61c76d258e18ba60a465c692b835ebc527fcffa3cb406957907c"
+    },
+    {
+      "path": "project.godot",
+      "bytes": 730,
+      "sha256": "5f65a4b26d1c251081c5b4b3110573ad8d2defff854304aef34e8cfdbe00c07e"
+    },
+    {
+      "path": "scripts/main.gd",
+      "bytes": 19474,
+      "sha256": "974882c5b911497e6160c2da2e834b2aeb166cecbe54d12889a62f2d310d174c"
+    },
+    {
+      "path": "scripts/main.gd.uid",
+      "bytes": 19,
+      "sha256": "94782e1a059a7895902fcd2221e01d0cdb376dbffa0c190ff58734dacedafe41"
+    },
+    {
+      "path": "scripts/rules.gd",
+      "bytes": 15632,
+      "sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495"
+    },
+    {
+      "path": "scripts/rules.gd.uid",
+      "bytes": 20,
+      "sha256": "1449c56ebba8898edd5f2c5a4904c7bcf30a9cb5a13145dce1bec09107bf62f6"
+    },
+    {
+      "path": "scripts/ui_icon.gd",
+      "bytes": 1240,
+      "sha256": "5b4ff2c85661d27d820abaa5923f92ea93716b8a0a540afeb7dff5f307f60ef8"
+    },
+    {
+      "path": "scripts/world.gd",
+      "bytes": 15783,
+      "sha256": "f1860bed91688cc5f81eedfa2fb14a153d1917473415acd9c21558b9320876c2"
+    },
+    {
+      "path": "scripts/world.gd.uid",
+      "bytes": 20,
+      "sha256": "fe40056e7cb13ded3c2e2197d20b4d5816c847a32a45f3ae37515b7e1e5feb7c"
+    },
+    {
+      "path": "tests/simulate.gd",
+      "bytes": 14014,
+      "sha256": "ebc6eefccba0a5ba0a0d11dc1d66e17892606bc52bdd81abb95be0c293104adc"
+    },
+    {
+      "path": "tests/test_rules.gd",
+      "bytes": 13727,
+      "sha256": "9189cc942a4e4db77fd224f8beb8b4f8983a698e3cc83c6dd59ea6dfbee401a9"
+    },
+    {
+      "path": "tests/test_rules.gd.uid",
+      "bytes": 20,
+      "sha256": "f14eee8fbe70b9627b14ca839a45c44e9330b1a7b7bdb8dfde7a2b75b4f89d05"
+    },
+    {
+      "path": "vendor/godot-isometric/ADAPTATION.md",
+      "bytes": 841,
+      "sha256": "dbdffa5b0bd00e6e1ae9a78d02250248cc69f4b268ec6d85273f4ac2fc78f054"
+    },
+    {
+      "path": "vendor/godot-isometric/LICENSE.md",
+      "bytes": 1134,
+      "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.gd",
+      "bytes": 1391,
+      "sha256": "c634c7f6e7f293625414ff329bb4756aa008c3e712d298ab62db9e42cd5ec521"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.gd.uid",
+      "bytes": 20,
+      "sha256": "23051510459064308d0b822d47b445dcf4cb9e7cccffa7bd8b6bc7fc189c221d"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.png",
+      "bytes": 3032343,
+      "sha256": "c820bb4ee88295e71fc9b186b7c77f33fb1dd53a8aca3ceeece8adf84097fc91"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.png.import",
+      "bytes": 951,
+      "sha256": "a5f3ff664fdc6c79ec0603d3de86c8aa468d6a7b06cb3d99172c83dce0fb9c72"
+    },
+    {
+      "path": "vendor/godot-isometric/player/goblin.tscn",
+      "bytes": 45211,
+      "sha256": "47e1d2d3d8cac9eacfa29727dd16a9c2a5d86fbce89bf2d33e4b7b556efc7c2f"
+    },
+    {
+      "path": "vendor/godot-isometric/SOURCE.json",
+      "bytes": 1858,
+      "sha256": "bdb3ec7d03772fd257f4bb7605b96ddb7f8c39e018e5abdfee52bccbe7b398ff"
+    },
+    {
+      "path": "vendor/godot-isometric/tileset/isotiles.png",
+      "bytes": 227977,
+      "sha256": "c8e987cca2c6eb9928ecfe089dfe5e977f8fc1a4ccb07878db8c601ccbee9ed4"
+    },
+    {
+      "path": "vendor/godot-isometric/tileset/isotiles.png.import",
+      "bytes": 959,
+      "sha256": "883f0ab91f59d63af356c37575fb4c6005407a0737296d07f870184786d76f9b"
+    },
+    {
+      "path": "vendor/godot-isometric/tileset/tileset.tres",
+      "bytes": 6230,
+      "sha256": "fb8e68c61257b4c65e3ecae4f2f05c4ba43737d5c4540145106255e4f3c49d99"
+    }
+  ],
+  "runtime": [
+    {
+      "path": "index.js",
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+      "template_member": "godot.js"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+      "template_member": "godot.wasm"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "template_member": "godot.audio.worklet.js"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "template_member": "godot.audio.position.worklet.js"
+    }
+  ],
+  "files": [
+    {
+      "path": "export.log",
+      "bytes": 11573,
+      "sha256": "8c3f679652757dd0206db4366cc8879f8fc4f2dea9bb5f55db284426f9a0ddfc"
+    },
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 11944,
+      "sha256": "01d4f63e525941e06ce74f5187dad030d20a8d52a07ce365ae4e94af97a3b1f5"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 5458,
+      "sha256": "c1c28fddb8dbd1c742494b0c9a20478d6d15a5ab82c1ba46dff54f783eebbcc1"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 5700,
+      "sha256": "ad3c35ad0facf487c618204bd98db543034fc95224eadc7f08c7a9ff38d5b3b5"
+    },
+    {
+      "path": "index.js",
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    {
+      "path": "index.pck",
+      "bytes": 3836620,
+      "sha256": "07c316f0f5ca59d661f0281bb1be4220717a6e5d85f87edde12bde2ea0429fa7"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+    },
+    {
+      "path": "notices/GODOT-COPYRIGHT.txt",
+      "bytes": 100108,
+      "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d"
+    },
+    {
+      "path": "notices/GODOT-DEMO-MIT.txt",
+      "bytes": 1134,
+      "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c"
+    },
+    {
+      "path": "notices/GODOT-LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "notices/KENNEY-CC0.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "notices/STAIRKEEP-MIT.txt",
+      "bytes": 4531,
+      "sha256": "b32521e6c5978e65ecb5bc369d39459d9a764a7830b4576fb04585a0e1f2c77a"
+    }
+  ]
+}

@@ -1,0 +1,2017 @@
+{
+  "schema_version": 1,
+  "title": "阶塔",
+  "title_note": "临时名，可改名。English working title: Stairkeep.",
+  "rules": {
+    "turn_order": "hero_first",
+    "player_damage": "max(0, player.atk - enemy.def)",
+    "enemy_damage": "max(0, enemy.atk - player.def)",
+    "rounds": "ceil(enemy.hp / player_damage)",
+    "damage": "max(0, rounds - 1) * enemy_damage",
+    "win_condition": "player_damage > 0 and player.hp > damage",
+    "key_consumption": "one key on first successful open, opened doors persist",
+    "health_cap": null,
+    "movement": "4-neighbor logical grid; isometric presentation; no diagonal moves",
+    "object_collision": "enemy and locked door stop movement until successful interaction; stairs explicitly transfer to target position",
+    "save_schema_version": 1
+  },
+  "initial_player": {
+    "hp": 260,
+    "atk": 24,
+    "def": 8,
+    "gold": 0,
+    "keys": {
+      "yellow": 0,
+      "blue": 0
+    }
+  },
+  "enemies": {
+    "moss": {
+      "name": "苔团",
+      "hp": 35,
+      "atk": 13,
+      "def": 4,
+      "gold": 8
+    },
+    "cinder": {
+      "name": "余烬妖",
+      "hp": 50,
+      "atk": 18,
+      "def": 8,
+      "gold": 12
+    },
+    "goblin": {
+      "name": "铜齿盗",
+      "hp": 60,
+      "atk": 23,
+      "def": 12,
+      "gold": 20
+    },
+    "skeleton": {
+      "name": "碎骨弓手",
+      "hp": 88,
+      "atk": 28,
+      "def": 16,
+      "gold": 22
+    },
+    "stone_guard": {
+      "name": "石甲守卫",
+      "hp": 36,
+      "atk": 24,
+      "def": 27,
+      "gold": 25
+    },
+    "hall_guard": {
+      "name": "回廊卫士",
+      "hp": 70,
+      "atk": 30,
+      "def": 18,
+      "gold": 20
+    },
+    "warden": {
+      "name": "塔心监守",
+      "hp": 150,
+      "atk": 36,
+      "def": 18,
+      "gold": 50
+    },
+    "sealed_sentinel": {
+      "name": "封印哨兵",
+      "hp": 500,
+      "atk": 80,
+      "def": 99,
+      "gold": 0,
+      "note": "可避开；此切片内始终不可胜，用于清晰验证攻击不足提示。"
+    }
+  },
+  "shops": {
+    "forge": {
+      "name": "巡塔锻炉",
+      "offers": [
+        {
+          "id": "edge",
+          "label": "磨刃",
+          "cost": 20,
+          "kind": "atk",
+          "amount": 6,
+          "limit": 1
+        },
+        {
+          "id": "ward",
+          "label": "铸甲",
+          "cost": 20,
+          "kind": "def",
+          "amount": 4,
+          "limit": 1
+        },
+        {
+          "id": "flask",
+          "label": "补给",
+          "cost": 15,
+          "kind": "potion",
+          "amount": 120,
+          "limit": 2
+        }
+      ]
+    }
+  },
+  "floors": [
+    {
+      "id": 1,
+      "name": "苔门层",
+      "theme": "teal moss, warm brass",
+      "grid": [
+        "#########",
+        "#...#...#",
+        "#...#...#",
+        "##.###.##",
+        "#.......#",
+        "#.#####.#",
+        "#...#...#",
+        "#...#...#",
+        "#########"
+      ],
+      "spawn": [
+        1,
+        7
+      ],
+      "design_intent": "一把初始黄钥匙：直上楼或先开攻房；右下余烬妖后有第二把，先开支线也不会锁死。",
+      "objects": [
+        {
+          "id": "f1_key_start",
+          "kind": "key",
+          "pos": [
+            2,
+            7
+          ],
+          "type": "yellow",
+          "amount": 1
+        },
+        {
+          "id": "f1_moss",
+          "kind": "enemy",
+          "pos": [
+            1,
+            5
+          ],
+          "type": "moss"
+        },
+        {
+          "id": "f1_door_armory",
+          "kind": "door",
+          "pos": [
+            2,
+            3
+          ],
+          "type": "yellow"
+        },
+        {
+          "id": "f1_atk",
+          "kind": "atk",
+          "pos": [
+            1,
+            1
+          ],
+          "amount": 3
+        },
+        {
+          "id": "f1_potion",
+          "kind": "potion",
+          "pos": [
+            3,
+            1
+          ],
+          "amount": 60
+        },
+        {
+          "id": "f1_cinder",
+          "kind": "enemy",
+          "pos": [
+            7,
+            5
+          ],
+          "type": "cinder"
+        },
+        {
+          "id": "f1_key_spare",
+          "kind": "key",
+          "pos": [
+            7,
+            7
+          ],
+          "type": "yellow",
+          "amount": 1
+        },
+        {
+          "id": "f1_door_stairs",
+          "kind": "door",
+          "pos": [
+            6,
+            3
+          ],
+          "type": "yellow"
+        },
+        {
+          "id": "f1_up",
+          "kind": "stairs",
+          "pos": [
+            7,
+            1
+          ],
+          "target": {
+            "floor": 2,
+            "pos": [
+              1,
+              7
+            ]
+          },
+          "direction": "up"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "锻炉层",
+      "theme": "warm amber, slate blue",
+      "grid": [
+        "#########",
+        "#...#...#",
+        "#...#...#",
+        "##.###.##",
+        "#.......#",
+        "#.#####.#",
+        "#...#...#",
+        "#...#...#",
+        "#########"
+      ],
+      "spawn": [
+        1,
+        7
+      ],
+      "design_intent": "商店磨刃越过高防门槛；蓝钥匙可先换护甲与金币，右下战斗可补第二把通向塔顶。",
+      "objects": [
+        {
+          "id": "f2_down",
+          "kind": "stairs",
+          "pos": [
+            1,
+            7
+          ],
+          "target": {
+            "floor": 1,
+            "pos": [
+              7,
+              1
+            ]
+          },
+          "direction": "down"
+        },
+        {
+          "id": "f2_key_start",
+          "kind": "key",
+          "pos": [
+            2,
+            7
+          ],
+          "type": "blue",
+          "amount": 1
+        },
+        {
+          "id": "f2_shop",
+          "kind": "shop",
+          "pos": [
+            3,
+            7
+          ],
+          "type": "forge"
+        },
+        {
+          "id": "f2_coin_cache",
+          "kind": "gold",
+          "pos": [
+            3,
+            6
+          ],
+          "amount": 20
+        },
+        {
+          "id": "f2_goblin",
+          "kind": "enemy",
+          "pos": [
+            1,
+            5
+          ],
+          "type": "goblin"
+        },
+        {
+          "id": "f2_door_vault",
+          "kind": "door",
+          "pos": [
+            2,
+            3
+          ],
+          "type": "blue"
+        },
+        {
+          "id": "f2_def",
+          "kind": "def",
+          "pos": [
+            1,
+            1
+          ],
+          "amount": 4
+        },
+        {
+          "id": "f2_vault_gold",
+          "kind": "gold",
+          "pos": [
+            3,
+            1
+          ],
+          "amount": 20
+        },
+        {
+          "id": "f2_skeleton",
+          "kind": "enemy",
+          "pos": [
+            7,
+            5
+          ],
+          "type": "skeleton"
+        },
+        {
+          "id": "f2_potion",
+          "kind": "potion",
+          "pos": [
+            5,
+            6
+          ],
+          "amount": 80
+        },
+        {
+          "id": "f2_key_spare",
+          "kind": "key",
+          "pos": [
+            7,
+            7
+          ],
+          "type": "blue",
+          "amount": 1
+        },
+        {
+          "id": "f2_stone_guard",
+          "kind": "enemy",
+          "pos": [
+            6,
+            3
+          ],
+          "type": "stone_guard"
+        },
+        {
+          "id": "f2_up",
+          "kind": "stairs",
+          "pos": [
+            7,
+            1
+          ],
+          "target": {
+            "floor": 3,
+            "pos": [
+              1,
+              7
+            ]
+          },
+          "direction": "up"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "塔心层",
+      "theme": "moonlit indigo, coral ember",
+      "grid": [
+        "#########",
+        "#...#...#",
+        "#...#...#",
+        "##.###.##",
+        "#.......#",
+        "#.#####.#",
+        "#...#...#",
+        "#...#...#",
+        "#########"
+      ],
+      "spawn": [
+        1,
+        7
+      ],
+      "design_intent": "最后一把黄钥匙选择攻击或补给；蓝钥匙开塔心，封印哨兵只需避开。击败塔心监守即完成切片。",
+      "objects": [
+        {
+          "id": "f3_down",
+          "kind": "stairs",
+          "pos": [
+            1,
+            7
+          ],
+          "target": {
+            "floor": 2,
+            "pos": [
+              7,
+              1
+            ]
+          },
+          "direction": "down"
+        },
+        {
+          "id": "f3_key_choice",
+          "kind": "key",
+          "pos": [
+            2,
+            7
+          ],
+          "type": "yellow",
+          "amount": 1
+        },
+        {
+          "id": "f3_hall_guard",
+          "kind": "enemy",
+          "pos": [
+            1,
+            5
+          ],
+          "type": "hall_guard"
+        },
+        {
+          "id": "f3_door_blade",
+          "kind": "door",
+          "pos": [
+            2,
+            3
+          ],
+          "type": "yellow"
+        },
+        {
+          "id": "f3_atk",
+          "kind": "atk",
+          "pos": [
+            1,
+            1
+          ],
+          "amount": 5
+        },
+        {
+          "id": "f3_blade_gold",
+          "kind": "gold",
+          "pos": [
+            3,
+            1
+          ],
+          "amount": 20
+        },
+        {
+          "id": "f3_door_supply",
+          "kind": "door",
+          "pos": [
+            7,
+            5
+          ],
+          "type": "yellow"
+        },
+        {
+          "id": "f3_potion",
+          "kind": "potion",
+          "pos": [
+            7,
+            7
+          ],
+          "amount": 60
+        },
+        {
+          "id": "f3_supply_def",
+          "kind": "def",
+          "pos": [
+            5,
+            6
+          ],
+          "amount": 1
+        },
+        {
+          "id": "f3_door_heart",
+          "kind": "door",
+          "pos": [
+            6,
+            3
+          ],
+          "type": "blue"
+        },
+        {
+          "id": "f3_sealed_sentinel",
+          "kind": "enemy",
+          "pos": [
+            5,
+            2
+          ],
+          "type": "sealed_sentinel"
+        },
+        {
+          "id": "f3_warden",
+          "kind": "enemy",
+          "pos": [
+            7,
+            1
+          ],
+          "type": "warden",
+          "victory": true
+        }
+      ]
+    }
+  ],
+  "validated_routes": [
+    {
+      "name": "resource_blade",
+      "final": {
+        "hp": 49,
+        "atk": 38,
+        "def": 16,
+        "gold": 177,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        }
+      },
+      "ledger": [
+        {
+          "event": "f1_key_start",
+          "state": {
+            "hp": 260,
+            "atk": 24,
+            "def": 8,
+            "gold": 0,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_moss",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 5,
+          "hits": 2,
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_armory",
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_atk",
+          "state": {
+            "hp": 255,
+            "atk": 27,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_potion",
+          "state": {
+            "hp": 315,
+            "atk": 27,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_cinder",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 20,
+          "hits": 3,
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_key_spare",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_stairs",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_start",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_coin_cache",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:edge",
+          "state": {
+            "hp": 295,
+            "atk": 33,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_goblin",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 30,
+          "hits": 3,
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_door_vault",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_def",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 12,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_vault_gold",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 12,
+            "gold": 60,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "buy:ward",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 16,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_skeleton",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 60,
+          "hits": 6,
+          "state": {
+            "hp": 205,
+            "atk": 33,
+            "def": 16,
+            "gold": 62,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_potion",
+          "state": {
+            "hp": 285,
+            "atk": 33,
+            "def": 16,
+            "gold": 62,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_spare",
+          "state": {
+            "hp": 285,
+            "atk": 33,
+            "def": 16,
+            "gold": 62,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_stone_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 40,
+          "hits": 6,
+          "state": {
+            "hp": 245,
+            "atk": 33,
+            "def": 16,
+            "gold": 87,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_key_choice",
+          "state": {
+            "hp": 245,
+            "atk": 33,
+            "def": 16,
+            "gold": 87,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_hall_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 56,
+          "hits": 5,
+          "state": {
+            "hp": 189,
+            "atk": 33,
+            "def": 16,
+            "gold": 107,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_blade",
+          "state": {
+            "hp": 189,
+            "atk": 33,
+            "def": 16,
+            "gold": 107,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_atk",
+          "state": {
+            "hp": 189,
+            "atk": 38,
+            "def": 16,
+            "gold": 107,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_blade_gold",
+          "state": {
+            "hp": 189,
+            "atk": 38,
+            "def": 16,
+            "gold": 127,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_heart",
+          "state": {
+            "hp": 189,
+            "atk": 38,
+            "def": 16,
+            "gold": 127,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f3_warden",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 140,
+          "hits": 8,
+          "state": {
+            "hp": 49,
+            "atk": 38,
+            "def": 16,
+            "gold": 177,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "resource_supply",
+      "final": {
+        "hp": 78,
+        "atk": 33,
+        "def": 17,
+        "gold": 157,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        }
+      },
+      "ledger": [
+        {
+          "event": "f1_key_start",
+          "state": {
+            "hp": 260,
+            "atk": 24,
+            "def": 8,
+            "gold": 0,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_moss",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 5,
+          "hits": 2,
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_armory",
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_atk",
+          "state": {
+            "hp": 255,
+            "atk": 27,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_potion",
+          "state": {
+            "hp": 315,
+            "atk": 27,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_cinder",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 20,
+          "hits": 3,
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_key_spare",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_stairs",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_start",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_coin_cache",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:edge",
+          "state": {
+            "hp": 295,
+            "atk": 33,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_goblin",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 30,
+          "hits": 3,
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_door_vault",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_def",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 12,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_vault_gold",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 12,
+            "gold": 60,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "buy:ward",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 16,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_skeleton",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 60,
+          "hits": 6,
+          "state": {
+            "hp": 205,
+            "atk": 33,
+            "def": 16,
+            "gold": 62,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_potion",
+          "state": {
+            "hp": 285,
+            "atk": 33,
+            "def": 16,
+            "gold": 62,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_spare",
+          "state": {
+            "hp": 285,
+            "atk": 33,
+            "def": 16,
+            "gold": 62,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_stone_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 40,
+          "hits": 6,
+          "state": {
+            "hp": 245,
+            "atk": 33,
+            "def": 16,
+            "gold": 87,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_key_choice",
+          "state": {
+            "hp": 245,
+            "atk": 33,
+            "def": 16,
+            "gold": 87,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_hall_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 56,
+          "hits": 5,
+          "state": {
+            "hp": 189,
+            "atk": 33,
+            "def": 16,
+            "gold": 107,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_supply",
+          "state": {
+            "hp": 189,
+            "atk": 33,
+            "def": 16,
+            "gold": 107,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_potion",
+          "state": {
+            "hp": 249,
+            "atk": 33,
+            "def": 16,
+            "gold": 107,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_supply_def",
+          "state": {
+            "hp": 249,
+            "atk": 33,
+            "def": 17,
+            "gold": 107,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_heart",
+          "state": {
+            "hp": 249,
+            "atk": 33,
+            "def": 17,
+            "gold": 107,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f3_warden",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 171,
+          "hits": 10,
+          "state": {
+            "hp": 78,
+            "atk": 33,
+            "def": 17,
+            "gold": 157,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "skip_f1_armory",
+      "final": {
+        "hp": 20,
+        "atk": 35,
+        "def": 16,
+        "gold": 150,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        }
+      },
+      "ledger": [
+        {
+          "event": "f1_key_start",
+          "state": {
+            "hp": 260,
+            "atk": 24,
+            "def": 8,
+            "gold": 0,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_moss",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 5,
+          "hits": 2,
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_stairs",
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_start",
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_coin_cache",
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 28,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:edge",
+          "state": {
+            "hp": 255,
+            "atk": 30,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_goblin",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 45,
+          "hits": 4,
+          "state": {
+            "hp": 210,
+            "atk": 30,
+            "def": 8,
+            "gold": 28,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_door_vault",
+          "state": {
+            "hp": 210,
+            "atk": 30,
+            "def": 8,
+            "gold": 28,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_def",
+          "state": {
+            "hp": 210,
+            "atk": 30,
+            "def": 12,
+            "gold": 28,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_vault_gold",
+          "state": {
+            "hp": 210,
+            "atk": 30,
+            "def": 12,
+            "gold": 48,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "buy:ward",
+          "state": {
+            "hp": 210,
+            "atk": 30,
+            "def": 16,
+            "gold": 28,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_skeleton",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 72,
+          "hits": 7,
+          "state": {
+            "hp": 138,
+            "atk": 30,
+            "def": 16,
+            "gold": 50,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_potion",
+          "state": {
+            "hp": 218,
+            "atk": 30,
+            "def": 16,
+            "gold": 50,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_spare",
+          "state": {
+            "hp": 218,
+            "atk": 30,
+            "def": 16,
+            "gold": 50,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_stone_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 88,
+          "hits": 12,
+          "state": {
+            "hp": 130,
+            "atk": 30,
+            "def": 16,
+            "gold": 75,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:flask",
+          "state": {
+            "hp": 250,
+            "atk": 30,
+            "def": 16,
+            "gold": 60,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_key_choice",
+          "state": {
+            "hp": 250,
+            "atk": 30,
+            "def": 16,
+            "gold": 60,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_hall_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 70,
+          "hits": 6,
+          "state": {
+            "hp": 180,
+            "atk": 30,
+            "def": 16,
+            "gold": 80,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_blade",
+          "state": {
+            "hp": 180,
+            "atk": 30,
+            "def": 16,
+            "gold": 80,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_atk",
+          "state": {
+            "hp": 180,
+            "atk": 35,
+            "def": 16,
+            "gold": 80,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_blade_gold",
+          "state": {
+            "hp": 180,
+            "atk": 35,
+            "def": 16,
+            "gold": 100,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_heart",
+          "state": {
+            "hp": 180,
+            "atk": 35,
+            "def": 16,
+            "gold": 100,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f3_warden",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 160,
+          "hits": 9,
+          "state": {
+            "hp": 20,
+            "atk": 35,
+            "def": 16,
+            "gold": 150,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "save_blue_skip_vault",
+      "final": {
+        "hp": 85,
+        "atk": 38,
+        "def": 12,
+        "gold": 120,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        }
+      },
+      "ledger": [
+        {
+          "event": "f1_key_start",
+          "state": {
+            "hp": 260,
+            "atk": 24,
+            "def": 8,
+            "gold": 0,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_moss",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 5,
+          "hits": 2,
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_armory",
+          "state": {
+            "hp": 255,
+            "atk": 24,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_atk",
+          "state": {
+            "hp": 255,
+            "atk": 27,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_potion",
+          "state": {
+            "hp": 315,
+            "atk": 27,
+            "def": 8,
+            "gold": 8,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_cinder",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 20,
+          "hits": 3,
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_key_spare",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f1_door_stairs",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f2_key_start",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_coin_cache",
+          "state": {
+            "hp": 295,
+            "atk": 27,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:edge",
+          "state": {
+            "hp": 295,
+            "atk": 33,
+            "def": 8,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_goblin",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 30,
+          "hits": 3,
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 8,
+            "gold": 40,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:ward",
+          "state": {
+            "hp": 265,
+            "atk": 33,
+            "def": 12,
+            "gold": 20,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f2_stone_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 60,
+          "hits": 6,
+          "state": {
+            "hp": 205,
+            "atk": 33,
+            "def": 12,
+            "gold": 45,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "buy:flask",
+          "state": {
+            "hp": 325,
+            "atk": 33,
+            "def": 12,
+            "gold": 30,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_key_choice",
+          "state": {
+            "hp": 325,
+            "atk": 33,
+            "def": 12,
+            "gold": 30,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_hall_guard",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 72,
+          "hits": 5,
+          "state": {
+            "hp": 253,
+            "atk": 33,
+            "def": 12,
+            "gold": 50,
+            "keys": {
+              "yellow": 1,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_blade",
+          "state": {
+            "hp": 253,
+            "atk": 33,
+            "def": 12,
+            "gold": 50,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_atk",
+          "state": {
+            "hp": 253,
+            "atk": 38,
+            "def": 12,
+            "gold": 50,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_blade_gold",
+          "state": {
+            "hp": 253,
+            "atk": 38,
+            "def": 12,
+            "gold": 70,
+            "keys": {
+              "yellow": 0,
+              "blue": 1
+            }
+          }
+        },
+        {
+          "event": "f3_door_heart",
+          "state": {
+            "hp": 253,
+            "atk": 38,
+            "def": 12,
+            "gold": 70,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        },
+        {
+          "event": "f3_warden",
+          "can_win": true,
+          "reason": "ok",
+          "damage": 168,
+          "hits": 8,
+          "state": {
+            "hp": 85,
+            "atk": 38,
+            "def": 12,
+            "gold": 120,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "validation_summary": {
+    "all_object_ids_unique": true,
+    "all_object_positions_distinct_per_floor": true,
+    "all_objects_on_walkable_cells": true,
+    "all_stair_targets_on_walkable_cells": true,
+    "route_count": 4,
+    "initial_stone_guard_preview": {
+      "can_win": false,
+      "reason": "attack_insufficient",
+      "damage": null,
+      "hits": null
+    },
+    "upgraded_stone_guard_preview": {
+      "can_win": true,
+      "reason": "ok",
+      "damage": 80,
+      "hits": 6
+    },
+    "lethal_boundary_preview": {
+      "can_win": false,
+      "reason": "hp_insufficient",
+      "damage": 80,
+      "hits": 6
+    },
+    "sentinel_preview": {
+      "can_win": false,
+      "reason": "attack_insufficient",
+      "damage": null,
+      "hits": null
+    },
+    "single_entry_gate_topology_checks": 9,
+    "boss_reachable_while_sentinel_blocked": true,
+    "ledger_snapshots_deep_copied": true,
+    "shop_key_snapshot_corrections": 7
+  }
+}

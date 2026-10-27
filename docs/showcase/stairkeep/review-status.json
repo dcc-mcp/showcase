@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-24T22:57:55.751260+00:00",
+  "status": "draft candidate",
+  "selected_in_collection": false,
+  "gallery_or_play_manifest_changed": false,
+  "browser": {
+    "status": "blocked",
+    "action": "Run exact exported game over loopback HTTP with real pointer/keyboard input",
+    "target": "stairkeep Web candidate",
+    "reason": "Coordinated host/browser window is not currently authorized; existing desktop/browser restriction is retained",
+    "outcome": "not attempted"
+  },
+  "next": "Review native pixels and actual browser first; resolve sampled losing-route UX/balance, then implement the 21-floor design."
+}

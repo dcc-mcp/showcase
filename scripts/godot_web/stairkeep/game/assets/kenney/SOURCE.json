@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "source": "https://kenney.nl/assets/isometric-miniature-dungeon",
+  "retrieved": "2026-10-24",
+  "archive_sha256": "187a0888451317fe47caac5f26e984bb79c5ddce9b8630926f0f5d9c0247d343",
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "path": "barrel_N.png",
+      "source_member": "Isometric/barrel_N.png",
+      "sha256": "7a4852bce0a67bde638c7e25ae5f35698f60f98af23f6feccb42ab0a7bb3424b",
+      "bytes": 5797,
+      "modification": "unmodified"
+    },
+    {
+      "path": "stairs_N.png",
+      "source_member": "Isometric/stairs_N.png",
+      "sha256": "4085feccb370df75658b40f1ef0c4e8ae2678404e89cf218473fd67944178ea3",
+      "bytes": 25470,
+      "modification": "unmodified"
+    },
+    {
+      "path": "stone_N.png",
+      "source_member": "Isometric/stone_N.png",
+      "sha256": "0ac4c1481dcdfccbd571c854b23e9a47d8be5941ae236aa60ea85ba09856c75c",
+      "bytes": 21500,
+      "modification": "unmodified"
+    },
+    {
+      "path": "stoneColumn_N.png",
+      "source_member": "Isometric/stoneColumn_N.png",
+      "sha256": "2007a1e676c76737162c34aab713c8ebc0c7dd148c95949b8b0f6eda784c2a6d",
+      "bytes": 9204,
+      "modification": "unmodified"
+    },
+    {
+      "path": "stoneTile_N.png",
+      "source_member": "Isometric/stoneTile_N.png",
+      "sha256": "b2fbc7dfcd755fc6e91df07ac0ce9bb4acc695a8d27e995d677e7c5019f3bfcd",
+      "bytes": 21149,
+      "modification": "unmodified"
+    },
+    {
+      "path": "stoneUneven_N.png",
+      "source_member": "Isometric/stoneUneven_N.png",
+      "sha256": "07cd05a717e45082002305896b8ac296f812ae6e38bcb59ce6a3de9539668aa8",
+      "bytes": 21302,
+      "modification": "unmodified"
+    },
+    {
+      "path": "stoneWallDoorClosed_N.png",
+      "source_member": "Isometric/stoneWallDoorClosed_N.png",
+      "sha256": "144a3d117e9aa11782965bca1bb28654e5c5395964f649b760ebbce109a05412",
+      "bytes": 23209,
+      "modification": "unmodified"
+    },
+    {
+      "path": "tableRoundItemsChairs_N.png",
+      "source_member": "Isometric/tableRoundItemsChairs_N.png",
+      "sha256": "5931a78448e50f7438cd6d304a17d1e25cf95acb4757ff47406100a140eff028",
+      "bytes": 8731,
+      "modification": "unmodified"
+    },
+    {
+      "path": "wanderer.png",
+      "source_member": "Characters/Male/Male_0_Idle0.png",
+      "sha256": "d3b1fe7f2b34ee3077b3f853fbf36cfdcbb40324368f54f2673f35bf341b1059",
+      "bytes": 4903,
+      "modification": "renamed only"
+    },
+    {
+      "path": "woodenCrates_N.png",
+      "source_member": "Isometric/woodenCrates_N.png",
+      "sha256": "7a289f71c98a6c55f339dd856a633e1336168775870d36bbbaf5257c6680c492",
+      "bytes": 6427,
+      "modification": "unmodified"
+    }
+  ]
+}

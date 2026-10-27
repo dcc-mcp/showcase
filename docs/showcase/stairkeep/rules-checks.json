@@ -1,0 +1,484 @@
+{
+  "checks": [
+    {
+      "name": "use stairs elsewhere is blocked without mutation",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "key picked",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "door consumes exactly one",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "reenter opened door for free",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "stair up",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "use stairs on landing descends to return stair",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "use stairs on return landing ascends",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "explicit stair roundtrip preserves full state",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "stair down preserves cleared objects",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "defeated enemy stays gone",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "opened door stays free across floor roundtrip",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "inspection is pure",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "preview equals HP actually spent",
+      "observed": {
+        "actual": 6,
+        "preview": {
+          "damage": 6,
+          "hit": 19,
+          "reason": "Safe",
+          "retaliation": 6,
+          "rounds": 2,
+          "win": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "hero first strike avoids final retaliation",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "armor impossible action changes nothing",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "fatal damage action changes nothing",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "zero remaining HP is not victory",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "final boss sets victory only after actual fight",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "adjacent forge buys attack",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "alternate spend buys defense",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "upgrade changes armor from impossible to winnable",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "finite stock does not spend twice",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "cannot buy remotely",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "insufficient gold leaves state intact",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "save writes validated snapshot",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "reset restores initial resources and world",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "load restores exact resources floor objects and purchases",
+      "observed": {
+        "atk": 24,
+        "cleared": [
+          "key",
+          "door",
+          "moss"
+        ],
+        "def": 12,
+        "floor": 1,
+        "gold": 28,
+        "hp": 78,
+        "keys": {
+          "blue": 0,
+          "yellow": 0
+        },
+        "pos": [
+          1,
+          3
+        ],
+        "purchases": {
+          "shop/ward": 1
+        },
+        "won": false
+      },
+      "passed": true
+    },
+    {
+      "name": "corrupt JSON is rejected without mutation",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "unknown cleared id is rejected without mutation",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "wall-position save is rejected without mutation",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "future save schema is rejected",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "delivered level data loads",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "delivered slice has three floors",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "new game can save",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "production guard golden preview",
+      "observed": {
+        "damage": 80,
+        "hit": 6,
+        "reason": "Safe",
+        "retaliation": 16,
+        "rounds": 6,
+        "win": true
+      },
+      "passed": true
+    },
+    {
+      "name": "production guard rejects exactly lethal result",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "production guard rejects armor tie",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "production sealed sentinel cannot be fought at route maximum",
+      "observed": null,
+      "passed": true
+    },
+    {
+      "name": "production route resource_blade",
+      "observed": {
+        "error": "",
+        "expected": {
+          "atk": 38.0,
+          "def": 16.0,
+          "gold": 177.0,
+          "hp": 49.0,
+          "keys": {
+            "blue": 0.0,
+            "yellow": 0.0
+          }
+        },
+        "state": {
+          "atk": 38,
+          "cleared": [
+            "f1_key_start",
+            "f1_moss",
+            "f1_door_armory",
+            "f1_atk",
+            "f1_potion",
+            "f1_cinder",
+            "f1_key_spare",
+            "f1_door_stairs",
+            "f2_key_start",
+            "f2_coin_cache",
+            "f2_goblin",
+            "f2_door_vault",
+            "f2_def",
+            "f2_vault_gold",
+            "f2_skeleton",
+            "f2_potion",
+            "f2_key_spare",
+            "f2_stone_guard",
+            "f3_key_choice",
+            "f3_hall_guard",
+            "f3_door_blade",
+            "f3_atk",
+            "f3_blade_gold",
+            "f3_door_heart",
+            "f3_warden"
+          ],
+          "def": 16,
+          "floor": 2,
+          "gold": 177,
+          "hp": 49,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          },
+          "pos": [
+            7,
+            1
+          ],
+          "purchases": {
+            "f2_shop/edge": 1,
+            "f2_shop/ward": 1
+          },
+          "won": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "production route resource_supply",
+      "observed": {
+        "error": "",
+        "expected": {
+          "atk": 33.0,
+          "def": 17.0,
+          "gold": 157.0,
+          "hp": 78.0,
+          "keys": {
+            "blue": 0.0,
+            "yellow": 0.0
+          }
+        },
+        "state": {
+          "atk": 33,
+          "cleared": [
+            "f1_key_start",
+            "f1_moss",
+            "f1_door_armory",
+            "f1_atk",
+            "f1_potion",
+            "f1_cinder",
+            "f1_key_spare",
+            "f1_door_stairs",
+            "f2_key_start",
+            "f2_coin_cache",
+            "f2_goblin",
+            "f2_door_vault",
+            "f2_def",
+            "f2_vault_gold",
+            "f2_skeleton",
+            "f2_potion",
+            "f2_key_spare",
+            "f2_stone_guard",
+            "f3_key_choice",
+            "f3_hall_guard",
+            "f3_door_supply",
+            "f3_potion",
+            "f3_supply_def",
+            "f3_door_heart",
+            "f3_warden"
+          ],
+          "def": 17,
+          "floor": 2,
+          "gold": 157,
+          "hp": 78,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          },
+          "pos": [
+            7,
+            1
+          ],
+          "purchases": {
+            "f2_shop/edge": 1,
+            "f2_shop/ward": 1
+          },
+          "won": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "production route skip_f1_armory",
+      "observed": {
+        "error": "",
+        "expected": {
+          "atk": 35.0,
+          "def": 16.0,
+          "gold": 150.0,
+          "hp": 20.0,
+          "keys": {
+            "blue": 0.0,
+            "yellow": 0.0
+          }
+        },
+        "state": {
+          "atk": 35,
+          "cleared": [
+            "f1_key_start",
+            "f1_moss",
+            "f1_door_stairs",
+            "f2_key_start",
+            "f2_coin_cache",
+            "f2_goblin",
+            "f2_door_vault",
+            "f2_def",
+            "f2_vault_gold",
+            "f2_skeleton",
+            "f2_potion",
+            "f2_key_spare",
+            "f2_stone_guard",
+            "f3_key_choice",
+            "f3_hall_guard",
+            "f3_door_blade",
+            "f3_atk",
+            "f3_blade_gold",
+            "f3_door_heart",
+            "f3_warden"
+          ],
+          "def": 16,
+          "floor": 2,
+          "gold": 150,
+          "hp": 20,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          },
+          "pos": [
+            7,
+            1
+          ],
+          "purchases": {
+            "f2_shop/edge": 1,
+            "f2_shop/flask": 1,
+            "f2_shop/ward": 1
+          },
+          "won": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "production route save_blue_skip_vault",
+      "observed": {
+        "error": "",
+        "expected": {
+          "atk": 38.0,
+          "def": 12.0,
+          "gold": 120.0,
+          "hp": 85.0,
+          "keys": {
+            "blue": 0.0,
+            "yellow": 0.0
+          }
+        },
+        "state": {
+          "atk": 38,
+          "cleared": [
+            "f1_key_start",
+            "f1_moss",
+            "f1_door_armory",
+            "f1_atk",
+            "f1_potion",
+            "f1_cinder",
+            "f1_key_spare",
+            "f1_door_stairs",
+            "f2_key_start",
+            "f2_coin_cache",
+            "f2_goblin",
+            "f2_stone_guard",
+            "f3_key_choice",
+            "f3_hall_guard",
+            "f3_door_blade",
+            "f3_atk",
+            "f3_blade_gold",
+            "f3_door_heart",
+            "f3_warden"
+          ],
+          "def": 12,
+          "floor": 2,
+          "gold": 120,
+          "hp": 85,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          },
+          "pos": [
+            7,
+            1
+          ],
+          "purchases": {
+            "f2_shop/edge": 1,
+            "f2_shop/flask": 1,
+            "f2_shop/ward": 1
+          },
+          "won": true
+        }
+      },
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "suite": "StairRules"
+}

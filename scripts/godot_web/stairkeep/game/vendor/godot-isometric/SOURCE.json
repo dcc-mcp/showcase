@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "source": "https://github.com/godotengine/godot-demo-projects/tree/6ad6167e0577fe3622c18546138f456b107ce93c/2d/isometric",
+  "commit": "6ad6167e0577fe3622c18546138f456b107ce93c",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "tileset/tileset.tres",
+      "source_sha256": "ddc1266b2425800b6b913be4c313f3adbb87e680a1db63ff507959a1d012b59d",
+      "delivered_sha256": "fb8e68c61257b4c65e3ecae4f2f05c4ba43737d5c4540145106255e4f3c49d99",
+      "bytes": 6230,
+      "modification": "res:// paths rebased; stale upstream external-resource UIDs removed"
+    },
+    {
+      "path": "tileset/isotiles.png",
+      "source_sha256": "c8e987cca2c6eb9928ecfe089dfe5e977f8fc1a4ccb07878db8c601ccbee9ed4",
+      "delivered_sha256": "c8e987cca2c6eb9928ecfe089dfe5e977f8fc1a4ccb07878db8c601ccbee9ed4",
+      "bytes": 227977,
+      "modification": "unmodified"
+    },
+    {
+      "path": "player/goblin.tscn",
+      "source_sha256": "22eedb16efbf4e91de6a961a50a7c299ed633670329f5ef0427e876361302419",
+      "delivered_sha256": "47e1d2d3d8cac9eacfa29727dd16a9c2a5d86fbce89bf2d33e4b7b556efc7c2f",
+      "bytes": 45211,
+      "modification": "res:// paths rebased; stale upstream external-resource UIDs removed"
+    },
+    {
+      "path": "player/goblin.gd",
+      "source_sha256": "c634c7f6e7f293625414ff329bb4756aa008c3e712d298ab62db9e42cd5ec521",
+      "delivered_sha256": "c634c7f6e7f293625414ff329bb4756aa008c3e712d298ab62db9e42cd5ec521",
+      "bytes": 1391,
+      "modification": "unmodified"
+    },
+    {
+      "path": "player/goblin.png",
+      "source_sha256": "c820bb4ee88295e71fc9b186b7c77f33fb1dd53a8aca3ceeece8adf84097fc91",
+      "delivered_sha256": "c820bb4ee88295e71fc9b186b7c77f33fb1dd53a8aca3ceeece8adf84097fc91",
+      "bytes": 3032343,
+      "modification": "unmodified"
+    }
+  ]
+}
