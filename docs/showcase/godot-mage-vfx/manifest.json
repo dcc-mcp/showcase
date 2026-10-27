@@ -6,50 +6,50 @@
   "files": [
     {
       "path": "capture_public.gd",
-      "bytes": 8040,
-      "sha256": "29f2869ca1d3901ec419f72f6a339de28f1d8e8f781d621cf952e7a1c2d9a602"
+      "bytes": 8387,
+      "sha256": "2af0ad541f77a16e4aef4691d166aa531767a0d7e1effd5b3ea6c302d80d4102"
     },
     {
       "path": "demo.mp4",
-      "bytes": 2351301,
-      "sha256": "5a8c590c3eb2b2067c92a9e0142a1aeea3e9ef538505d934473ed0c361000bd2",
+      "bytes": 5338633,
+      "sha256": "b9171a70f7ca223baf44ea26937a5af7cf1759cec64458be9b04f5daa9306b25",
       "width": 1280,
       "height": 720,
-      "frames": 480,
+      "frames": 450,
       "fps": 30
     },
     {
       "path": "godot-mage-vfx.zip",
-      "bytes": 1644173,
-      "sha256": "6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248"
+      "bytes": 1909029,
+      "sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34"
     },
     {
       "path": "hero.jpg",
-      "bytes": 60939,
-      "sha256": "7fffcf10045378d4433aeb0d8946be32015c42c1d3b7dbc65a20fc4d393b327a",
+      "bytes": 103629,
+      "sha256": "d1125339adc0645bf2ec6dfbd00d49a40308eb1d6c63bd2ae3d4e43049d93232",
       "width": 1280,
       "height": 720,
       "bit_depth": 8
     },
     {
       "path": "LICENSES.md",
-      "bytes": 1131,
-      "sha256": "8abbc364538db2422dbba6495d148b5b44867a7b84c1b7dc0027bb5d0c5877cc"
+      "bytes": 1420,
+      "sha256": "00aa12c053609390dc6e6a2fa7af93bade7c27db3a05979752c0923834691ed3"
     },
     {
       "path": "public-media-evidence.json",
-      "bytes": 4178,
-      "sha256": "83832059828df138de2d3c0a75ad31fe6113c3e9fbd0e2fdbc2982947e37c772"
+      "bytes": 2785,
+      "sha256": "f78bbe709076959978169467f9cb87f80d123f3781a51cb44c1b8a027c2caaac"
     },
     {
       "path": "README.md",
-      "bytes": 3885,
-      "sha256": "0c884dab5c0353844ca3656386dfc8ca9e718509d041337338dce821bd8e8090"
+      "bytes": 3988,
+      "sha256": "d4da9cc7dde11cadc7736e465730f4e3bfa2993cbf3602cf8e53929dfc02f384"
     },
     {
       "path": "validation.json",
-      "bytes": 6996,
-      "sha256": "755cf5fbcda7276a2845715c79f6e3b6ab0680b0685ef5f033cbcc9f30520270"
+      "bytes": 9108,
+      "sha256": "0b7d117edbfc97f837fce724f083e20de9c69ed66b4dccb07ccfe34891dd88bb"
     }
   ]
 }

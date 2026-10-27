@@ -5,7 +5,7 @@
     "host": "Godot 4.7.2.stable.official.ed1daf0bf",
     "renderer": "Forward+",
     "dcc-mcp-godot": "0.9.12 editable candidate; unreleased VFX",
-    "source_commit": "3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837",
+    "source_commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
     "dcc-mcp-core": "0.20.48",
     "dcc-mcp-server": "0.20.48",
     "post": "FFmpeg 8.1.1-full_build-www.gyan.dev",
@@ -67,18 +67,18 @@
     ]
   },
   "counts": {
-    "archive_files": 32,
+    "archive_files": 36,
     "model_triangles": 18756,
     "model_joints": 20,
     "embedded_model_images": 3,
-    "film_frames": 480,
-    "sampled_frames_reviewed": 54
+    "film_frames": 450,
+    "sampled_frames_reviewed": 51
   },
   "checks": [
     {
       "name": "Native project and audio validation",
       "result": "pass",
-      "observed": "The 32-file ZIP passed fresh import, main entry, Hyper3D and procedural character, and six-preset checks. Custom audio survives save/reopen and remains event-driven."
+      "observed": "The 36-file ZIP passed fresh import, main entry, both mage routes and all six presets. Custom audio and -3 dB saved gain survived a separate-process reopen; the delivered default is -4 dB."
     },
     {
       "name": "Windows export launch",
@@ -88,12 +88,12 @@
     {
       "name": "Film decoding and audio measurement",
       "result": "pass",
-      "observed": "All 480 frames decoded; audio peaked at -20.74 dBFS with zero clipped samples. Measurement does not replace listening judgment."
+      "observed": "All 450 frames decoded; measured mean -27.38 dBFS and peak -4.53 dBFS with zero clipped samples. Measurement does not replace listening."
     },
     {
       "name": "Human audiovisual review",
       "result": "not_run",
-      "observed": "Only a model review of 54 sampled frames was completed. At 10.667–10.767 seconds, impact spokes cross a gallery label, which remains readable. Human natural-speed audiovisual review is pending."
+      "observed": "The user rejected the beep-like mix, then requested a softer layered mix. Native gain was reduced by 6 dB to -4 dB. Final listening acceptance is pending; a model viewed 51 sampled frames."
     },
     {
       "name": "MCP tool bridge",
@@ -131,44 +131,109 @@
     "Local MCP fixture readiness, UI input, Web/phone or game-scale performance",
     "Merge, deployment, vendor license certification or relabeling generated mesh/PBR as MIT"
   ],
-  "package_sha256": "6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248",
+  "package_sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34",
   "native_receipts": {
     "package": {
-      "status": "native_headless_validated",
-      "native_code_and_scenes_copied_exactly": true,
-      "archive_unchanged_after_validation": true,
-      "source_files_unchanged": true,
+      "status": "passed",
+      "archive_unchanged": true,
       "extracted_payload_unchanged": true,
-      "all_owned_native_processes_exited": true
+      "owned_processes_exited": true
     },
-    "save_reopen_export": {
-      "checks": [
-        {
-          "name": "save",
-          "exit_code": 0,
-          "passed": true,
-          "log_sha256": "bf44669f7f1a976a40a7bce56105eb6ea6a2051392a37ef35e63451d49d6f48d"
-        },
-        {
-          "name": "reopen",
-          "exit_code": 0,
-          "passed": true,
-          "log_sha256": "7d1eae4a7dff7255550ea8a09a01b6f550eb9c557c2a2cb3b53378e18fe58466"
-        },
-        {
-          "name": "export",
-          "exit_code": 0,
-          "passed": true,
-          "log_sha256": "f27528c0eb2214f738bbac8452b8f4922ef8a446c3d958a0991286ea0676e0eb"
-        },
-        {
-          "name": "launch-export",
-          "exit_code": 0,
-          "passed": true,
-          "log_sha256": "b6ead9ab6927a530783679558754836320d4c53369cec39c6be8fc82b4e19451"
-        }
-      ],
-      "scope": "Native resource save/reopen and Windows debug executable headless launch; no GPU/input acceptance"
-    }
+    "checks": [
+      {
+        "name": "import",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "a43a22656a259949a0306ae5a04b6b2cc6ed6b6a7d2950fc10b0251c9d268255",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "main",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "a7f19d48696c9d540fb016f95373717bee8f47f76e091d0707826c313e595c13",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "mage",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "da0e8c1426fcf56c4cf5bfb29dfd07994d433679cd19d7041a009e7d723824ea",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "fallback",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "096863621ad5cf93b45cfc5f4e9ff686d417ebda4d5d3064cc083c36a4b23f67",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "presets",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "d6ced99a549b171f37d58fbcade5164a342ec9769a0554e607a53dc5c9f63ead",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "save",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "ac1ee1c33d8114788b04cfbc7205f8dcd9476d7a0ddad2527406a83e6bfc28c7",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "reopen",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "f4c21541e4d3fd7d98cddf83057de2b132244b1bffb89711499d3c8fdc8fac02",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "export",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "615dd8bb78bee7a6437d602e04d9e368fd46abcb53100f5ae2119555d1510360",
+        "marker_found": true,
+        "owned_process_exited": true
+      },
+      {
+        "name": "launch-export",
+        "returncode": 0,
+        "passed": true,
+        "log_sha256": "d0401a52d10fa525efe9ecf0adaeb29d5a5a67c05e2c489f4ed0abdd7dac7fc5",
+        "marker_found": true,
+        "owned_process_exited": true
+      }
+    ],
+    "scope": "Exact ZIP extraction; native headless behavior/save/reopen/export; no UI, listening or device performance acceptance"
+  },
+  "previous_revision": {
+    "source_commit": "3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837",
+    "package_sha256": "6b660efd8b329a40dca455f9a36f7e7a70fa5705e93f14a4cc691bfa10214248",
+    "counts": {
+      "archive_files": 36,
+      "model_triangles": 18756,
+      "model_joints": 20,
+      "embedded_model_images": 3,
+      "film_frames": 450,
+      "sampled_frames_reviewed": 51
+    },
+    "scope": "Historical 16-second candidate; not acceptance of revised files"
+  },
+  "audio_measurement": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "peak_dbfs": -4.531090680100101,
+    "mean_dbfs": -27.38449422038729,
+    "clipped_samples": 0,
+    "scope": "Decoded native mix, not human listening acceptance"
   }
 }
