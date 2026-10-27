@@ -19,7 +19,8 @@ const SLOT := "first-chapter"
 const CLASSIC := "classic_restart"
 const PRACTICE := "practice_checkpoint"
 const UI_FONT_PATH := "res://assets/experience/fonts/cjk-ui.otf"
-const EXPERIENCE_REVISION := "focus-04"
+const EXPERIENCE_REVISION := "recovery-05"
+const WEB_SAVE_NOTICE := "网页存档暂不可用；刷新或关闭页面会丢失当前进度。"
 const AREAS := ["归潮门厅", "绳桥库", "回声索室", "双庭水闸", "盐封档案", "绕潮盘道", "守灯人廊", "三径蓄池", "四翼校准室", "无火信台"]
 const STAT_NAMES := {"hp":"生命", "potion":"生命", "atk":"攻击", "def":"防御", "gold":"金币", "yellow":"黄钥匙", "blue":"蓝钥匙"}
 
@@ -176,12 +177,15 @@ func _build_ui() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(brand)
 	brand.add_child(_label("阶 塔", 27, GOLD))
-	brand.add_child(_label("潮痕信号 · 第一章 · 体验04", 12, MUTED))
+	brand.add_child(_label("潮痕信号 · 第一章 · 体验05", 12, MUTED))
 	var actions := HBoxContainer.new()
 	actions.add_theme_constant_override("separation", 7)
 	heading.add_child(actions)
 	header_actions.save = _button(actions, "存档", _save_slot)
 	header_actions.load = _button(actions, "读档", _load_slot)
+	if OS.has_feature("web"):
+		header_actions.save.tooltip_text = WEB_SAVE_NOTICE
+		header_actions.load.tooltip_text = WEB_SAVE_NOTICE
 	header_actions.restart = _button(actions, "重开 / 回溯", _show_recovery)
 	header_actions.mode = _button(actions, "模式", _show_modes)
 	sound_button = _button(actions, "声音 开", _toggle_sound)
@@ -227,6 +231,7 @@ func _build_ui() -> void:
 	world_host.resized.connect(_schedule_fit)
 	world_column.add_child(_label("暖色地砖可走 · 深色石墙阻挡 · 青色楼梯通往上下层",13,MUTED,true))
 	availability_label = _label("目标 50 层 · 当前开放 1—10 层，11—50 层尚未制作", 14, MUTED)
+	if OS.has_feature("web"): availability_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	world_column.add_child(availability_label)
 	var compass := HBoxContainer.new()
 	compass.add_theme_constant_override("separation", 8)
@@ -322,7 +327,8 @@ func _fit_world() -> void:
 func _set_actions_enabled(enabled: bool) -> void:
 	for key: String in ["save", "load", "restart"]:
 		header_actions[key].disabled = not enabled
-	header_actions.load.disabled = not enabled or _classic_failed()
+	header_actions.save.disabled = not enabled or OS.has_feature("web")
+	header_actions.load.disabled = not enabled or _classic_failed() or OS.has_feature("web")
 	approach_button.disabled = not enabled
 	_sync_control_lock()
 
@@ -412,8 +418,9 @@ func _show_modes() -> void:
 	if _input_locked() or not content_ready:
 		return
 	selected_mode = ""
-	_open_modal("mode", "选择你的登塔方式", "当前为首章 1—10 层。目标共 50 层，11—50 层尚未制作。\n请主动选择模式，两种模式的存档分别保存。")
-	overlay_box.add_child(_label("经典模式的失败限制适用于当前打开的游戏；关闭并重新打开后，仍可恢复已有手动存档。",14,MUTED,true))
+	var save_copy: String = WEB_SAVE_NOTICE if OS.has_feature("web") else "两种模式的存档分别保存。"
+	_open_modal("mode", "选择你的登塔方式", "当前为首章 1—10 层。目标共 50 层，11—50 层尚未制作。\n请主动选择模式，" + save_copy)
+	overlay_box.add_child(_label("经典失败限制与练习回溯均适用于本次打开的游戏。" if OS.has_feature("web") else "经典模式的失败限制适用于当前打开的游戏；关闭并重新打开后，仍可恢复已有手动存档。",14,MUTED,true))
 	var group := ButtonGroup.new()
 	group.allow_unpress = false
 	for entry: Array in [[CLASSIC,"经典模式 · 失败后换新塔，从头再来"],[PRACTICE,"练习模式 · 可回溯已到达楼层的完整记录"]]:
@@ -434,6 +441,7 @@ func _show_modes() -> void:
 	start_button.disabled = true
 	mode_load_button = _button(overlay_box, "读取所选模式的存档", _load_slot)
 	mode_load_button.disabled = true
+	if OS.has_feature("web"): mode_load_button.tooltip_text = WEB_SAVE_NOTICE
 	if started:
 		overlay_box.add_child(_label("当前模式请使用“重开 / 回溯”。切换另一种模式时，确认后才会开始新塔。",14,MUTED,true))
 		if bool(_snapshot().get("failed",false)):
@@ -460,12 +468,13 @@ func _refresh_mode_buttons() -> void:
 	var valid: bool = selected_mode in [CLASSIC, PRACTICE] and _seed_value() >= 1
 	start_button.disabled = not valid or (started and selected_mode == active_mode)
 	start_button.tooltip_text = "当前模式请使用“重开 / 回溯”。" if started and selected_mode == active_mode else "以所选模式进入第一章。"
-	mode_load_button.disabled = not valid or (started and selected_mode != active_mode)
+	mode_load_button.disabled = not valid or (started and selected_mode != active_mode) or OS.has_feature("web")
 	if selected_mode == CLASSIC and _classic_failed():
 		mode_load_button.disabled = true
 	mode_load_button.tooltip_text = "请先主动进入该模式，再读取其存档。" if started and selected_mode != active_mode else "读取所选模式的首章存档。"
 	if selected_mode == CLASSIC and _classic_failed():
 		mode_load_button.tooltip_text = "本次经典挑战已结束，请换新塔种子重开。"
+	if OS.has_feature("web"): mode_load_button.tooltip_text = WEB_SAVE_NOTICE
 
 
 func _begin() -> void:
@@ -477,7 +486,8 @@ func _begin() -> void:
 	var mode: String = selected_mode
 	var seed: int = _seed_value()
 	if started:
-		_confirm("确认开始另一种模式？", "将从 F1 开始新塔，替换当前未保存的进度。手动存档在再次保存前保持原样。", _do_begin.bind(mode, seed))
+		var change_copy: String = "将从 F1 开始新塔，替换当前进度。" + WEB_SAVE_NOTICE if OS.has_feature("web") else "将从 F1 开始新塔，替换当前未保存的进度。手动存档在再次保存前保持原样。"
+		_confirm("确认开始另一种模式？", change_copy, _do_begin.bind(mode, seed))
 	else:
 		_do_begin(mode, seed)
 
@@ -517,7 +527,7 @@ func _do_begin(mode: String, seed: int) -> void:
 	_sync_control_lock()
 	_set_actions_enabled(true)
 	_refresh()
-	_message("体验04 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
+	_message("体验05 · 已进入 F1。点地面走空路，方向键可按住续步；物件先看代价，再按 E 确认。")
 
 
 func _snapshot() -> Dictionary:
@@ -544,9 +554,11 @@ func _refresh() -> void:
 	var floor_index: int = int(state.get("floor", 0))
 	floor_label.text = "F%d / F10 · %s" % [floor_index + 1, str(rules.floor_data().get("name", AREAS[clampi(floor_index, 0, 9)]))]
 	mode_label.text = "%s · 首章体验 · 暂定名，可更改" % ("经典模式 · 失败后整塔重开" if active_mode == CLASSIC else "练习模式 · 可完整回溯")
-	availability_label.text = "首章已完成 · 可上下楼回访与存档 · 11—50 层尚未制作" if bool(snap.get("slice_complete",false)) else "首章目标：F1 → F2 → F3，继续攀登至 F10 · 楼梯上按 E 可往返"
+	var revisit_copy: String = "可上下楼回访" if OS.has_feature("web") else "可上下楼回访与存档"
+	availability_label.text = "首章已完成 · " + revisit_copy + " · 11—50 层尚未制作" if bool(snap.get("slice_complete",false)) else "首章目标：F1 → F2 → F3，继续攀登至 F10 · 楼梯上按 E 可往返"
+	if OS.has_feature("web"): availability_label.text += " · " + WEB_SAVE_NOTICE
 	world.refresh()
-	header_actions.load.disabled = _classic_failed()
+	header_actions.load.disabled = _classic_failed() or OS.has_feature("web")
 	_inspect(selected)
 	_refresh_bestiary()
 	_refresh_journal(snap)
@@ -559,9 +571,12 @@ func _refresh() -> void:
 			_show_recovery()
 	elif bool(snap.get("slice_complete", false)) and not _last_slice_notice:
 		_last_slice_notice = true
-		_open_modal("slice", "首章信号已点亮", "第一章已完成。仍可回访早先楼层、交换线索并保存当前塔。\n11—50 层尚未制作，当前并非 50 层全塔通关。")
+		var completion_copy: String = "第一章已完成。仍可回访早先楼层、交换线索。" + WEB_SAVE_NOTICE if OS.has_feature("web") else "第一章已完成。仍可回访早先楼层、交换线索并保存当前塔。"
+		_open_modal("slice", "首章信号已点亮", completion_copy + "\n11—50 层尚未制作，当前并非 50 层全塔通关。")
 		_button(overlay_box, "返回塔内", _close_modal).call_deferred("grab_focus")
-		_button(overlay_box, "保存当前塔", _save_slot)
+		var save_button: Button = _button(overlay_box, "保存当前塔", _save_slot)
+		save_button.disabled = OS.has_feature("web")
+		if OS.has_feature("web"): save_button.tooltip_text = WEB_SAVE_NOTICE
 
 
 func _clear_children(parent: Node) -> void:
@@ -621,7 +636,7 @@ func _inspect(cell: Array) -> void:
 			approach_button.text = "%s至 F%d" % [stair_verb,target]
 		"boundary":
 			inspect_title.text = "后续楼层尚未制作"
-			inspect_copy.text = "本次首章开放至 F10。11—50 层尚不可进入，已开放楼层可继续回访和存档。"
+			inspect_copy.text = "本次首章开放至 F10。11—50 层尚不可进入，已开放楼层可继续回访。" + WEB_SAVE_NOTICE if OS.has_feature("web") else "本次首章开放至 F10。11—50 层尚不可进入，已开放楼层可继续回访和存档。"
 			approach_button.disabled = true
 		"npc":
 			inspect_title.text = str(item.get("name","制图人" if int(rules.state.floor) == 0 else "守灯人"))
@@ -860,6 +875,8 @@ func _step(dx: int, dy: int) -> void:
 func _screen_step(intent: Vector2) -> void:
 	_cancel_keyboard("direction_button")
 	if not started or modal_kind != "" or _input_locked(): return
+	var initiating_focus: Control = get_viewport().gui_get_focus_owner()
+	if not (initiating_focus is BaseButton): initiating_focus = null
 	var resolved: Dictionary = ScreenInput.resolve(intent,world.projected_step_options())
 	world.set_direction_candidates([])
 	if resolved.get("status","") == "step":
@@ -874,6 +891,9 @@ func _screen_step(intent: Vector2) -> void:
 		world.set_action_hint("选择亮框中的邻格 · 例如 ↑+← 对应画面左上")
 	elif resolved.get("status","") == "blocked":
 		_message("该方向被墙挡住；请选另一格，不会自动改走别的方向。")
+	# Object previews do not reach _commit; return only the same button's focus.
+	if modal_kind == "" and is_instance_valid(initiating_focus) and get_viewport().gui_get_focus_owner() == initiating_focus:
+		get_viewport().gui_release_focus()
 
 
 func _direction_bit(key: int) -> int:
@@ -1156,7 +1176,7 @@ func _result_text(result: Dictionary, before: Dictionary, item: Dictionary) -> S
 		"read_failed", "invalid_utf8", "invalid_json", "invalid_payload_size", "payload_checksum_mismatch", "snapshot_checksum_mismatch": return "存档无法完整读取或校验未通过，当前塔与原存档保持不变。"
 		"format_mismatch", "save_version_mismatch", "envelope_schema_mismatch", "slot_mismatch": return "此存档不属于当前首章版本或存档位，未读取或改写进度。"
 		"directory_failed", "write_failed", "commit_failed": return "存档写入未完成，请勿关闭当前塔；原存档未被删除。"
-		"action_limit": return "本次操作记录已达上限，请保存当前塔后再决定后续操作。"
+		"action_limit": return "本次操作记录已达上限。" + WEB_SAVE_NOTICE if OS.has_feature("web") else "本次操作记录已达上限，请保存当前塔后再决定后续操作。"
 		"attempt_limit": return "本次重开次数已达上限，当前塔没有改变。"
 	return "操作未完成，当前进度保持原样。请重新选择目标或查看重开 / 回溯选项。"
 
@@ -1267,7 +1287,8 @@ func _show_recovery() -> void:
 	if not outcome_copy.is_empty():
 		outcome_copy += "\n\n"
 	if active_mode == CLASSIC:
-		_open_modal("recovery", str(failure_view.get("title","从 F1 开始一座新塔？")), outcome_copy + "经典模式会换一个新种子，从 F1 重开。当前塔的资源、房间状态和选择全部重置。\n本次挑战结束后，当前游戏中不能读档撤销失败。手动存档仍保留。")
+		var recovery_copy: String = WEB_SAVE_NOTICE if OS.has_feature("web") else "本次挑战结束后，当前游戏中不能读档撤销失败。手动存档仍保留。"
+		_open_modal("recovery", str(failure_view.get("title","从 F1 开始一座新塔？")), outcome_copy + "经典模式会换一个新种子，从 F1 重开。当前塔的资源、房间状态和选择全部重置。\n" + recovery_copy)
 		var next_seed := LineEdit.new()
 		next_seed.text = str((selected_seed % 4294967295) + 1)
 		next_seed.placeholder_text = "新的塔种子"
@@ -1292,6 +1313,7 @@ func _show_recovery() -> void:
 		)
 	else:
 		_open_modal("recovery",str(failure_view.get("title","回到已到达的楼层记录点？")),outcome_copy + "练习模式会恢复记录点当时的完整世界。之后获得或消耗的生命、钥匙、金币、库存与线索全部回退；保留同一座塔和同一布局。")
+		if OS.has_feature("web"): overlay_box.add_child(_label(WEB_SAVE_NOTICE,14,MUTED,true))
 		var checkpoints: Array = snap.get("checkpoints",[])
 		var checkpoint_choice := OptionButton.new()
 		checkpoint_choice.custom_minimum_size.y = 44
@@ -1348,9 +1370,12 @@ func _restore_checkpoint(id: String, failure_id: String) -> void:
 
 func _pause() -> void:
 	if _input_locked(): return
-	_open_modal("pause","灯下歇一会儿", "离开前请保存。你可上下楼回访；门、怪物和补给保留当前状态。")
+	var pause_copy: String = WEB_SAVE_NOTICE + "当前打开期间，你可上下楼回访；门、怪物和补给保留当前状态。" if OS.has_feature("web") else "离开前请保存。你可上下楼回访；门、怪物和补给保留当前状态。"
+	_open_modal("pause","灯下歇一会儿", pause_copy)
 	_button(overlay_box,"返回塔内",_close_modal).call_deferred("grab_focus")
-	_button(overlay_box,"保存当前塔",_save_slot)
+	var save_button: Button = _button(overlay_box,"保存当前塔",_save_slot)
+	save_button.disabled = OS.has_feature("web")
+	if OS.has_feature("web"): save_button.tooltip_text = WEB_SAVE_NOTICE
 	_button(overlay_box,"重开 / 回溯",_show_recovery)
 	_button(overlay_box,"结束本次挑战",func(): _confirm("确认结束本次挑战？","经典模式需要换新塔重开；练习模式可回到已到达的记录点。这会记为你主动结束本次挑战。",_end_run))
 	_button(overlay_box,"选择模式",_show_modes)

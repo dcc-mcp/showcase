@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "focus-04",
+  "revision": "recovery-05",
   "status": "source-only-engine-blocked",
   "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
   "overlay": [
@@ -1021,8 +1021,8 @@
     },
     {
       "path": "fifty/view/preview.gd",
-      "bytes": 64332,
-      "sha256": "d6cacce9eb565e670af579ca17c96d7678895ec76ce3a7b4d3f81c0275bbfef8"
+      "bytes": 66872,
+      "sha256": "45ba35dcc5a38792ae8499f10b664d1786dcc2b61bb1e6f883db000cf5125e6a"
     },
     {
       "path": "fifty/view/screen_input.gd",
