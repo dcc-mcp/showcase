@@ -119,5 +119,15 @@
   "Hyper3D 有声版本 · Draft 候选": "Hyper3D audiovisual revision · Draft candidate",
   "按用户授权纳入现有模型并署名，补充事件声音、原生工程包、音频保存重开、Windows 导出和独立 Shader 手册；保留历史研究和未测项。": "Included and attributed the existing model under user authorization; added event audio, the native package, audio save/reopen, Windows export and the standalone Shader manual. Preserved historical research and untested boundaries.",
   "核心组件": "Core",
-  "服务端组件": "Server"
+  "服务端组件": "Server",
+  "Hyper3D 法师释放紫色法术，脚下三层符文光环": "Hyper3D mage releasing a purple spell above a three-layer rune aura",
+  "15 秒原生影片与三层法阵，含调整后的魔法音色和降低 6 dB 的默认音量。36 文件工程通过解包、保存重开和导出启动；51 帧抽查完成。最终试听、独立质量审阅、真实输入和性能仍待验。": "A 15-second native film with a three-layer sigil, revised magic timbre and default gain reduced by 6 dB. The 36-file project passed extraction, save/reopen and export launch; 51 sampled frames were reviewed. Final listening, independent quality review, real input and performance remain unverified.",
+  "原生引擎输出画面和声音；三段独立表演以两处硬切连接，无调速、片尾淡出、AI 帧或后期补加音效。固定帧率录制不代表实时帧率。": "Native picture and sound from three separate performances joined by two hard cuts; no retiming, final fade, AI frames or post-added cues. Fixed-rate capture does not establish realtime fps.",
+  "分层法阵、施法与原生魔法声音演示": "Layered sigil, casting and native magic sound study",
+  "450 帧、15 秒、1280×720、30 fps、H.264 与 AAC 立体声。按反馈替换提示音式音色并将默认增益降至 -4 dB；最终试听待确认。": "450 frames, 15 seconds, 1280x720, 30 fps, H.264 and AAC stereo. Feedback replaced beep-like timbre and reduced default gain to -4 dB; final listening confirmation is pending.",
+  "36 文件 ZIP 全新导入、默认入口、两种角色和六预设通过；自定义音频与 -3 dB 测试增益保存重开通过，交付默认增益为 -4 dB。": "The 36-file ZIP passed fresh import, main entry, both mage routes and all six presets. Custom audio and -3 dB saved gain survived a separate-process reopen; the delivered default is -4 dB.",
+  "450 帧完整解码，均值 -27.38 dBFS、峰值 -4.53 dBFS，无削波；这些测量不代替试听。": "All 450 frames decoded; measured mean -27.38 dBFS and peak -4.53 dBFS with zero clipped samples. Measurement does not replace listening.",
+  "用户要求替换提示音式音色，再要求更柔和；已换分层魔法音色并降低 6 dB。最终试听待验，模型已抽查 51 帧。": "The user rejected the beep-like mix, then requested a softer layered mix. Native gain was reduced by 6 dB to -4 dB. Final listening acceptance is pending; a model viewed 51 sampled frames.",
+  "分层光环与柔和魔法声音 · Draft 候选": "Layered aura and softer magic sound · Draft candidate",
+  "光环拆为三层，增加图解手册；按两轮反馈替换提示音式音色并降低 6 dB，重新录制原生影片并验证最终工程。保留历史记录，未部署。": "Split the aura into three layers and add an illustrated manual. Two feedback rounds replaced beep-like cues and lowered gain by 6 dB; native footage was rerendered and the final project revalidated. History is retained; not deployed."
 }

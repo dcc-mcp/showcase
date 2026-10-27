@@ -16,3 +16,8 @@ The film and hero are original native Godot output incorporating the attributed
 model. Tutorial footage, circle images and third-party texture-library assets
 are not redistributed. The research is documented in the standalone Shader
 manual; access and source rights remain separate from implementation.
+
+Public terms and API FAQ were reviewed on 2026-10-27:
+https://hyper3d.ai/legal/terms and https://hyper3d.ai/features/api. Output use
+remains subject to the agreement, plan and source rights. No authenticated
+account-entitlement receipt was obtained; attribution is not that receipt.

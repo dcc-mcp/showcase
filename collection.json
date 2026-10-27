@@ -5965,10 +5965,10 @@
       ],
       "cover": {
         "src": "docs/showcase/godot-mage-vfx/hero.jpg",
-        "alt": "Hyper3D 法师与紫色法术命中、地面光环和动态光照"
+        "alt": "Hyper3D 法师释放紫色法术，脚下三层符文光环"
       },
       "evidence_label": "Draft 候选 · 原生与导出检查通过 · 人工视听待验",
-      "evidence_scope": "16 秒自然速度原生影片，含 Godot 生成的施法声音。全新解包、保存重开和 Windows 导出启动通过；完整解码与 54 帧抽样审阅完成。人工视听、实际输入和目标设备性能未验；参考视频完整动效不可用，未声称高保真复刻。",
+      "evidence_scope": "15 秒原生影片与三层法阵，含调整后的魔法音色和降低 6 dB 的默认音量。36 文件工程通过解包、保存重开和导出启动；51 帧抽查完成。最终试听、独立质量审阅、真实输入和性能仍待验。",
       "summary": "将 Hyper3D 法师的骨骼施法动画与蓄力、飞行、接触、光环及声音连接，保留六类可复用原生预设。",
       "goal": "把攻击、法术和光环整理为可复制到未来游戏的原生场景、技能说明与验证记录，并保持表现与伤害逻辑分离。",
       "prompt": {
@@ -6009,7 +6009,7 @@
         },
         {
           "name": "Godot Movie Maker / FFmpeg",
-          "description": "原生引擎输出画面和声音；编码保留原速度，含两处硬切和片尾淡出，不含 AI 生成帧或后期补加法术音效。"
+          "description": "原生引擎输出画面和声音；三段独立表演以两处硬切连接，无调速、片尾淡出、AI 帧或后期补加音效。固定帧率录制不代表实时帧率。"
         }
       ],
       "steps": [
@@ -6034,15 +6034,15 @@
         {
           "src": "docs/showcase/godot-mage-vfx/demo.mp4",
           "poster": "docs/showcase/godot-mage-vfx/hero.jpg",
-          "alt": "法师施法与六预设的原生有声演示",
-          "caption": "480 帧、1280×720、30 fps、H.264 与 AAC 立体声。视频 16 秒，容器 16.021 秒含音频编码尾部；脚本驱动，人工听感与视觉验收待完成。"
+          "alt": "分层法阵、施法与原生魔法声音演示",
+          "caption": "450 帧、15 秒、1280×720、30 fps、H.264 与 AAC 立体声。按反馈替换提示音式音色并将默认增益降至 -4 dB；最终试听待确认。"
         }
       ],
       "checks": [
         {
           "name": "工程与声音原生验证",
           "result": "pass",
-          "observed": "32 文件 ZIP 全新解包导入、默认入口、Hyper3D 与程序化角色、六预设通过；自定义音频保存重开后仍由事件驱动。"
+          "observed": "36 文件 ZIP 全新导入、默认入口、两种角色和六预设通过；自定义音频与 -3 dB 测试增益保存重开通过，交付默认增益为 -4 dB。"
         },
         {
           "name": "Windows 导出启动",
@@ -6052,12 +6052,12 @@
         {
           "name": "影片解码与声音测量",
           "result": "pass",
-          "observed": "480 帧完整解码；音轨峰值 -20.74 dBFS，削波样本为零。测量不代替人工听感判断。"
+          "observed": "450 帧完整解码，均值 -27.38 dBFS、峰值 -4.53 dBFS，无削波；这些测量不代替试听。"
         },
         {
           "name": "人工视听审阅",
           "result": "not_run",
-          "observed": "仅完成模型抽样审阅 54 帧；10.667–10.767 秒命中光芒经过画廊标签，仍可读。未完成自然速度人工视听。"
+          "observed": "用户要求替换提示音式音色，再要求更柔和；已换分层魔法音色并降低 6 dB。最终试听待验，模型已抽查 51 帧。"
         },
         {
           "name": "MCP 工具桥接",
@@ -6133,7 +6133,7 @@
         },
         {
           "label": "独立 Shader 使用手册",
-          "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837/docs/shader-manual.md"
+          "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/ac8242ca951ebffdf4646783d435cf016a1c700a/docs/shader-manual.md"
         }
       ],
       "credits": {
@@ -6142,8 +6142,8 @@
         "note": "模型：Hyper3D / Rodin Gen-2.5。骨骼、动画、声音和 Godot 特效：DCC-MCP contributors。未分发教程影片或第三方纹理库资产。"
       },
       "source": {
-        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
-        "commit": "3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837",
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/ac8242ca951ebffdf4646783d435cf016a1c700a/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
+        "commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
         "title": "Shader 与 VFX 源码 · 未发布候选"
       },
       "verified_at": "2026-10-27",
@@ -6218,6 +6218,11 @@
           "version": "Hyper3D 有声版本 · Draft 候选",
           "date": "2026-10-27",
           "change": "按用户授权纳入现有模型并署名，补充事件声音、原生工程包、音频保存重开、Windows 导出和独立 Shader 手册；保留历史研究和未测项。"
+        },
+        {
+          "version": "分层光环与柔和魔法声音 · Draft 候选",
+          "date": "2026-10-27",
+          "change": "光环拆为三层，增加图解手册；按两轮反馈替换提示音式音色并降低 6 dB，重新录制原生影片并验证最终工程。保留历史记录，未部署。"
         }
       ]
     }

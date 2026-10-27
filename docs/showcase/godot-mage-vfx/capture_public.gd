@@ -25,7 +25,7 @@ func _initialize() -> void:
 		if arg.begins_with("--case="): case_name = arg.trim_prefix("--case=")
 		if arg.begins_with("--duration="): duration = float(arg.trim_prefix("--duration="))
 		if arg.begins_with("--output="): output = arg.trim_prefix("--output=")
-	assert(case_name in ["single", "combo", "gallery"])
+	assert(case_name in ["single", "combo", "detail", "gallery"])
 	assert(not output.is_empty())
 	call_deferred("_setup")
 
@@ -51,12 +51,12 @@ func _setup() -> void:
 	var layer := CanvasLayer.new()
 	root.add_child(layer)
 	var heading := Label.new()
-	heading.text = "ARCANE STUDIES" if case_name != "gallery" else "SIX REUSABLE EFFECTS"
+	heading.text = "ARCANE / LAYERED STUDY" if case_name != "gallery" else "SIX REUSABLE EFFECTS"
 	heading.position = Vector2(42, 28)
 	heading.add_theme_font_size_override("font_size", 25)
 	layer.add_child(heading)
 	var subheading := Label.new()
-	subheading.text = {"single":"01 / FIRE CAST", "combo":"02 / ARCANE COMBINATION", "gallery":"03 / FIRE  /  AURA  /  ATTACK  /  IMPACT"}[case_name]
+	subheading.text = {"single":"01 / GATHER + RELEASE", "combo":"02 / FLIGHT + CONTACT", "detail":"03 / SIGIL LAYERS + DECAY", "gallery":"03 / FIRE  /  AURA  /  ATTACK  /  IMPACT"}[case_name]
 	subheading.position = Vector2(44, 65)
 	subheading.add_theme_font_size_override("font_size", 15)
 	subheading.modulate = Color("9bb6cf")
@@ -95,9 +95,18 @@ func _set_camera() -> void:
 		fixed_camera.look_at(Vector3(0.0,0.0,-2.3))
 		return
 	# Capture-only framing for the authorized imported mage and impact.
-	fixed_camera.position = Vector3(-1.87, 2.5725, 8.755)
-	fixed_camera.fov = 49.0
-	fixed_camera.look_at(Vector3(0.2, 1.25, -0.1))
+	if case_name == "single":
+		fixed_camera.position = Vector3(-3.9, 2.6, 4.7)
+		fixed_camera.fov = 47.0
+		fixed_camera.look_at(Vector3(-2.4, 1.05, 0.0))
+	elif case_name == "detail":
+		fixed_camera.position = Vector3(-3.6, 4.7, 4.3)
+		fixed_camera.fov = 50.0
+		fixed_camera.look_at(Vector3(-2.8, 0.8, 0.0))
+	else:
+		fixed_camera.position = Vector3(-1.25, 2.8, 8.0)
+		fixed_camera.fov = 49.0
+		fixed_camera.look_at(Vector3(0.0, 1.25, -0.1))
 
 func _record(_delta: float) -> void:
 	_set_camera()
@@ -106,7 +115,7 @@ func _record(_delta: float) -> void:
 	if frame == PREWARM:
 		if case_name == "gallery": study.play_cycle()
 	if frame == PREWARM + 15 and case_name == "single": study.cast_spell()
-	if frame == PREWARM + 12 and case_name == "combo": assert(study.cast_combo("arcane_surge"))
+	if frame == PREWARM + 12 and case_name in ["combo", "detail"]: assert(study.cast_combo("arcane_surge"))
 	if frame == PREWARM + 156 and case_name == "gallery": study.get_node("Timeline").stop()
 	if frame < PREWARM: return
 	var elapsed := float(frame - PREWARM) / FPS
@@ -148,7 +157,7 @@ func _record(_delta: float) -> void:
 			"rights_scope":"User authorized public model use; provider account license independently unverified; no new generation or legal certification",
 			"fixed_seed":12345,"seeded_particle_nodes":seeded_particles,
 			"camera_binding":"after-controller observer process_priority 1000 before render sync",
-			"editorial_changes":"native editorial captions replace demonstration HUD; capture-only fixed framing; gallery schedules two complete cycles then stops its timeline at5.2s with ambient fires/auras continuing; no effect timing/speed edits",
+			"editorial_changes":"native captions and three fixed cameras; three independent natural-speed performances; no retiming, AI frames or post-added audio; gallery remains in the editable project",
 			"timing_scope":"observer frames; compare encoded pixel transitions separately",
 			"final_state":state,"frames":frames}
 		var file := FileAccess.open(output,FileAccess.WRITE)

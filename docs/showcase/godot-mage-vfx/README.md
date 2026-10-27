@@ -1,63 +1,67 @@
-# Mage casting and reusable Godot VFX
+# Layered mage casting and reusable Godot VFX
 
-An editable Godot casting study using a Hyper3D mage, six portable effects and
-native event-driven sound. **Draft: human audiovisual review and reference
-fidelity remain unverified.** This is a scripted in-host demonstration.
+![Native Godot layered sigil](hero.jpg)
 
-![Native Godot spell contact](hero.jpg)
+A Hyper3D mage drives three-layer auras, projectile contact and spatial magic
+sound in an editable Godot study. The 15-second film is 1280x720 at 30 fps
+(450 frames); it is a fixed-rate native Movie Maker capture, not a realtime
+performance benchmark. **Draft: final listening and independent quality review
+remain pending.**
 
-- [Natural-speed film with audio](demo.mp4): 1280x720, 30 fps, 480 frames;
-  16-second video / 16.021-second container including AAC padding.
-- [Native project ZIP](godot-mage-vfx.zip): 32 files; 18,756-triangle mage,
-  20-joint local rig, embedded PBR maps and six reusable presets.
-- [Shader manual](https://github.com/dcc-mcp/dcc-mcp-godot/blob/3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837/docs/shader-manual.md),
-  [source PR](https://github.com/dcc-mcp/dcc-mcp-godot/pull/97),
-  [media evidence](public-media-evidence.json), [validation](validation.json),
-  [manifest](manifest.json), [rights](LICENSES.md).
+[Film](demo.mp4) · [36-file native ZIP](godot-mage-vfx.zip) ·
+[Shader manual](https://github.com/dcc-mcp/dcc-mcp-godot/blob/ac8242ca951ebffdf4646783d435cf016a1c700a/docs/shader-manual.md) ·
+[Capture helper](capture_public.gd) · [Validation](validation.json) ·
+[Media evidence](public-media-evidence.json) · [Manifest](manifest.json) ·
+[Rights](LICENSES.md) · [Source PR](https://github.com/dcc-mcp/dcc-mcp-godot/pull/97)
 
-## Reproduce
+## Reproduce and reuse
 
-Unzip, open project.godot in Godot 4.7.2, allow GLB import, and run the default
-mage scene. Space casts; Q/E choose example combinations; 1/2/3 select palette.
-These bindings are implemented but ordinary keyboard acceptance is not claimed.
-The procedural character remains an alternative scene. See the included guides
-for animation sockets, optional sound streams, lifecycle and gameplay contracts.
+Extract the ZIP, import project.godot in Godot 4.7.2, then run its main scene.
+The 4.4 project marker is an intended minimum, not a tested host. Disable
+auto_cast for deliberate casts; Space casts, Q/E run examples, 1/2/3 select
+palette. Physical-input acceptance is unverified. The alternative procedural
+mage and six-preset gallery remain in the project. Copy complete effect folders
+with their scripts/shaders. MANUAL.md includes local screenshots for offline use.
 
-Reusable brief: combine the existing six native presets with an authorized
-rigged mage; synchronize charge, release and actual contact with visual/audio
-cues; retain editable resources and verify hit, miss and cleanup separately.
+Reusable brief: attach an authorized rigged character, use animation-keyed
+release and contact-keyed impact, keep damage/buffs in game code, and verify
+misses, early stop, repeated play and cleanup. Surface, RuneOrbit and InnerSeal
+have separate masks, heights, rotation and reveal envelopes. Local aura light
+is unshadowed; the arena key light casts shadows, not animated rune projections.
 
-The local rig and Idle/Cast clip drive a copied finite animation timeline:
-release at .90 animation seconds, recovery through 1.85. A miss has no contact
-cue. The game owns damage, buffs, costs and input/combination windows. Original
-short PCM cues can be replaced through three exported AudioStream properties.
+The native default mix layers low rumble and air for charge, a rush for release,
+and a short crack/body/tail for contact. The user rejected the initial beep-like
+mix and requested a softer subsequent version. Default sound_gain_db is now
+-4 dB, 6 dB below that second candidate; optional AudioStream overrides remain.
+Final listening approval is pending. The decoded final mix measures -27.38 dBFS
+mean and -4.53 dBFS peak, with no clipped samples.
 
-[capture_public.gd](capture_public.gd) is the exact native Movie Maker observer.
-It asserts imported_skeletal, the 20-joint rig and RightCastSocket, seeds particles
-at 12345 and uses fixed capture framing. Capture each single 4 s, combo 5.5 s and
-gallery 6.5 s at 30 fps after 1 s prewarm; trim the same prewarm from audio and video.
-Two hard cuts and a final .4s fade join these native shots; no speed changes,
-AI frames or post-added spell sounds. The capture helper replaces only the HUD.
+## Production and verification
 
-## Actual verification and limits
+Godot 4.7.2.stable.official.ed1daf0bf / Forward+ rendered the footage.
+dcc-mcp-godot 0.9.12 is an editable unreleased candidate at ac8242ca951ebffdf4646783d435cf016a1c700a.
+Retained component records: Core/Server 0.20.48; FFmpeg 8.1.1-full_build-www.gyan.dev.
+Historical model/effort attribution remains Unknown. No later model label is
+used to fill missing production history.
 
-Godot 4.7.2.stable.official.ed1daf0bf ran Forward+. The source candidate is
-3422a8ebb87950c9ae9fce49ce7e0fb1f82b4837, based on package 0.9.12; Core and Server were 0.20.48.
-FFmpeg 8.1.1-full_build-www.gyan.dev encoded the film. Agent model/effort records
-are Unknown for all historical stages; they are not inferred from the output.
+The capture helper fixes cameras and particle seeds and asserts the imported
+20-joint rig and RightCastSocket. Three separate performances are joined by
+hard cuts: single 4 s, combo 5.5 s, detail 5.5 s. The same 1 s prewarm is removed
+from picture and sound. No retiming, AI frames, final fade or post-added cues.
+The close shots crop the distant target; the wide shot shows full contact.
 
-Fresh ZIP import, both mage routes, six presets and native repeated-cast tests
-passed: seven releases, six contacts, one miss and transient cleanup. Custom
-sound resources survived save/exit/separate-process reopen. Windows debug export
-and a 300-frame headless executable launch passed; that does not establish
-windowed rendering or input. The video fully decoded, and 54 unique sampled
-frames were reviewed by the model. Audio peak was -20.74 dBFS, with zero clipped
-samples; listening quality was not reviewed. At 10.667–10.767 s impact spokes
-cross a readable gallery label. Human natural-speed audiovisual review remains
-pending. The full circle-reference player was unavailable, so its dynamics,
-exposure and lighting have not been matched frame by frame.
+The exact final ZIP passed fresh import, main entry, both character routes,
+six presets, seven releases/six contacts/one miss and cleanup checks. Custom
+audio and gain survived save/exit/separate-process reopen. Windows debug export
+and a 300-frame headless EXE launch passed. All 450 film frames decoded and a
+model reviewed 51 sampled frames; this is not independent human review.
 
-The local MCP fixture has an ownership-receipt conflict; no successful current
-local bridge call is claimed. Target-device CPU/GPU budgets, Web, physical phones,
-ordinary input and live bilingual player behavior are untested. This Draft PR
-selects the case for the collection if later accepted; it is not a deployment.
+## Boundaries
+
+The reference's complete motion was unavailable; this is a research prototype,
+not a high-fidelity recreation. No real-input, Web game, phone, concurrent-load
+or realtime-FPS acceptance is claimed. The existing MCP fixture has an ownership
+conflict; native CLI checks do not establish current MCP calls. The Draft is not
+merged or deployed, and live bilingual player behavior remains unverified.
+Hyper3D mesh/PBR provenance and software MIT rights are recorded separately.
+No authenticated provider-account entitlement receipt was obtained.
