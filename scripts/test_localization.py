@@ -27,6 +27,12 @@ class LocaleGuards(unittest.TestCase):
         self.assertIn('hreflang="zh-CN"', result)
         self.assertIn('hreflang="x-default"', result)
 
+    def test_video_download_label_uses_catalog_translation(self):
+        catalog = json.loads((Path(__file__).resolve().parent.parent / 'locales/en/ui.json').read_text(encoding='utf-8'))
+        result, missing = self.render('<p class="media-fallback"><a href="../../docs/demo.mp4" download="demo.mp4">下载视频</a></p>', translations=catalog)
+        self.assertFalse(missing)
+        self.assertIn('download="demo.mp4">Download video</a>', result)
+
     def test_locale_routes_and_shared_assets_are_not_confused(self):
         markup = '<html><head></head><header><a href="../../#works">说明</a><a href="../../brands/">说明</a></header><img src="../../docs/hero.png" alt="说明"><a href="../../docs/source.zip">说明</a><a href="https://dcc-mcp.github.io/zh/agents">说明</a></html>'
         result, missing = self.render(markup, locale='zh')

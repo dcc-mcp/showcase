@@ -226,7 +226,7 @@ def integration_guards() -> None:
                   "https://github.com/dcc-mcp/dcc-mcp-substance3d-designer" in links, True)
             check("video controls are supported", "controls playsinline" in build_site.media_markup(
                 {"src": "docs/showcase/sample-case/demo.mp4", "alt": "demo"}, tmp), True)
-            check("video fallback download is always visible", 'class="media-fallback"' in build_site.media_markup(
+            check("video fallback offers a correctly labelled download", '<p class="media-fallback"><a href="docs/showcase/sample-case/demo.mp4" download="demo.mp4">下载视频</a></p>' in build_site.media_markup(
                 {"src": "docs/showcase/sample-case/demo.mp4", "alt": "demo"}, tmp), True)
             for value in (".", "docs", "../outside", "/tmp/out", "_site/../docs"):
                 rejects("destructive output rejected: " + value, lambda v=value: build_site.output_path(tmp, v))

@@ -230,7 +230,7 @@ def media_markup(media: dict, root: str, prefix: str = "", eager: bool = False) 
         poster = (' poster="%s"' % esc(resource_url(media["poster"], prefix))) if media.get("poster") else ""
         return ('<video controls playsinline preload="none" data-hover-preview data-preview-audio="%s"%s aria-label="%s">'
                 '<source src="%s"><p>你的浏览器不支持此视频。<a href="%s">下载视频</a></p></video>'
-                '<p class="media-fallback"><a href="%s" download="%s">打开或下载视频</a></p>') % (
+                '<p class="media-fallback"><a href="%s" download="%s">下载视频</a></p>') % (
                     esc(media.get("preview_audio", "unknown")), poster, alt, url, url, url,
                     esc(os.path.basename(rel)))
     load = ' loading="eager" fetchpriority="high"' if eager else ' loading="lazy"'
