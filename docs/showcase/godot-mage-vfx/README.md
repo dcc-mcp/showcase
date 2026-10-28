@@ -55,6 +55,12 @@ Mix mean -28.8234 dBFS, peak -7.7633 dBFS; zero clipped samples. Metrics do not
 replace listening. The outer release ring approaches the lower caption at
 12.667 s. This limitation remains visible in the review preview.
 
+The capture helper targets the locally retained mage_motion_study scene and its
+authorized imported rig, which are excluded from the public kit. It now exits
+after the requested frame reaches Movie Maker. A separate four-second capture
+without --quit-after retained all120 picture frames plus30 prewarm frames and
+exited; the published15-second preview was not rerendered for this helper fix.
+
 ## Boundaries
 
 The intended project target is4.4; the tested host is4.7.2. Fixed-rate capture
