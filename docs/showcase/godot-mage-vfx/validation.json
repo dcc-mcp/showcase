@@ -265,5 +265,15 @@
       "log_sha256": "d0401a52d10fa525efe9ecf0adaeb29d5a5a67c05e2c489f4ed0abdd7dac7fc5",
       "owned_process_exited": true
     }
-  ]
+  ],
+  "capture_helper_check": {
+    "result": "pass",
+    "without_quit_after": true,
+    "requested_picture_frames": 120,
+    "prewarm_frames": 30,
+    "raw_recorded_frames": 150,
+    "process_exit": 0,
+    "scope": "Separate4-second shutdown regression; not rerendered final preview",
+    "public_helper_changes_since_capture": "End-of-recording shutdown only; captured preview/helper hashes retained in private receipts"
+  }
 }

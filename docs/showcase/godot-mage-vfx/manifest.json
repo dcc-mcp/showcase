@@ -6,8 +6,8 @@
   "files": [
     {
       "path": "capture_public.gd",
-      "bytes": 8794,
-      "sha256": "56193f126eaec3091ce325bb1cd70b954f7738cd733040b6a7c312ae5bf05c32"
+      "bytes": 8873,
+      "sha256": "4a61ca5c38f206e5137b5e55a80ef4ded739fbca5d1c242b9cdd9df617f0b37d"
     },
     {
       "path": "demo.mp4",
@@ -72,13 +72,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 4008,
-      "sha256": "974937e46168971c0d12c40723306d278caa7e072261bb3e092a69f8c463309e"
+      "bytes": 4402,
+      "sha256": "455535cc19e8f875162d2e5d4e42b9e93128e39f60bc166887b702945e1c1c59"
     },
     {
       "path": "validation.json",
-      "bytes": 9835,
-      "sha256": "61dd10dc6853e604c8df57f5245bd64ef9b11988d7bf478b0268e6d0bd18dde1"
+      "bytes": 10260,
+      "sha256": "1dcd1b68df8e8085ee9557a9d85cf4b3ce211be73e734090a11b3ec29e8d69c9"
     }
   ]
 }

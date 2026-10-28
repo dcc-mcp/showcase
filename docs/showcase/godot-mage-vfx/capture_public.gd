@@ -112,7 +112,10 @@ func _set_camera() -> void:
 
 func _record(_delta: float) -> void:
 	_set_camera()
-	if done: return
+	if done:
+		# Let the final requested frame reach Movie Maker before exiting.
+		quit()
+		return
 	frame += 1
 	if frame == PREWARM:
 		if case_name == "gallery": study.play_cycle()
