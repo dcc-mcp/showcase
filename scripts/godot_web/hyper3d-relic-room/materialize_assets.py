@@ -28,6 +28,12 @@ PINS = {
         (484267, 'a634b8061b5860ab75a2ea2626d60e5db1c7d1e957b68c5c9a5f0aa4c58f4dec'),
     'docs/showcase/godot-mage-vfx/hero.jpg':
         (172512, '103d44109dfbc327e00100f31fc8ff2293012157b7ef2d49271a2ca042de2cd7'),
+    'docs/showcase/godot-mage-vfx/manual-images/godot-layered-contact.jpg':
+        (113801, '9c94b2eaf577a88197a0cf1d2a454b2b8a80b6279348ddd58acc77d84e68334e'),
+    'docs/showcase/godot-mage-vfx/manual-images/godot-layered-release.jpg':
+        (141150, 'ffb1da9b39b350b4bc7ae6dbc2acf67f42c91d33603b9f205e0d74c2c8a4d0d8'),
+    'docs/showcase/godot-mage-vfx/manual-images/godot-layered-sigil.jpg':
+        (172512, '103d44109dfbc327e00100f31fc8ff2293012157b7ef2d49271a2ca042de2cd7'),
 }
 SHA = re.compile(r'[0-9a-fA-F]{40}\Z')
 POINTER = re.compile(rb'version https://git-lfs.github.com/spec/v1\r?\n'
