@@ -2,9 +2,9 @@
   "public_file": "demo.mp4",
   "files": [
     {
+      "bytes": 12539585,
+      "sha256": "db0bb94905f830799ed6e91d8e15f64ceb6c624f1d938d1ab15ab8d300ee27bd",
       "file": "demo.mp4",
-      "bytes": 11982150,
-      "sha256": "a1fe48d36787ebf7f4c69fa2c26160fab024b89dcccf9a457e4d02a8ca237904",
       "width": 1280,
       "height": 720,
       "frames": 450,
@@ -17,15 +17,14 @@
     }
   ],
   "hero": {
+    "bytes": 172512,
+    "sha256": "103d44109dfbc327e00100f31fc8ff2293012157b7ef2d49271a2ca042de2cd7",
     "file": "hero.jpg",
     "source": "demo.mp4",
     "frame": 380,
     "pts": 12.666666666666666,
-    "bytes": 131339,
-    "sha256": "d61015bec99946975ef9b87a375a8b8342cfd3e3365ca7c336a78bd41e41bf23",
     "model_viewed": true
   },
-  "review_status": "bounded_pixel_review_complete",
   "reviewed_unique_frames": [
     0,
     10,
@@ -80,33 +79,39 @@
     449
   ],
   "unviewed_frame_count": 399,
-  "human_acceptance": "pending",
-  "listening_acceptance": "pending revised mix review",
+  "review_status": "bounded model pixel review; not human quality acceptance",
+  "human_acceptance": "not_run: new preview awaits review",
+  "listening_acceptance": "not_run: no human natural-speed listening receipt",
   "audio_measurement": {
     "sample_rate": 48000,
     "channels": 2,
-    "peak_dbfs": -6.163200901738638,
-    "mean_dbfs": -29.223117115479177,
+    "peak_dbfs": -7.763297863557521,
+    "mean_dbfs": -28.823379003296786,
     "clipped_samples": 0,
     "scope": "Decoded native mix; not human listening"
   },
-  "previous_feedback": [
-    "Earlier beep-like mix rejected; then gain reduced by 6 dB.",
-    "The user rejected the balanced candidate motion/picture and requested all three visual areas improved."
-  ],
   "observations": [
-    "All 51 listed frames viewed on undistorted contact sheets; layered sigil, release, wide contact and tail cleanup are visible.",
-    "Single/detail shots intentionally crop the distant target; combo covers full contact.",
-    "The smaller/shorter contact core gives way to the colored envelope; source reference fidelity remains unverified.",
-    "Hard cuts at 4.0 and 9.5 seconds; final frame returns to idle."
+    "51 samples across start/cuts/charge/release/contact/decay reviewed; representative full-size frame380 inspected",
+    "At frame380 the outer aura approaches the lower caption; retained as a preview quality limitation",
+    "Full reference motion unavailable; no fidelity or final quality acceptance claim"
   ],
   "capture": {
     "host": "Godot 4.7.2.stable.official.ed1daf0bf",
     "renderer": "Forward+",
-    "method": "native Movie Maker, fixed 30 fps, equal video/audio 1 s prewarm removal; three separate performances with native camera moves; no retiming, AI frames, added fades or post-added spell sound",
-    "model": "Hyper3D Rodin Gen-2.5 mesh/PBR; local rig and animation",
-    "glb_sha256": "17d22ede10e0719333136ffe35cb3681b0c4873ed208aca56c783cb7307399ab",
-    "native_player_gain_db": -4.0,
+    "method": "Native Movie Maker 30 fps; hard cuts at4.0 and9.5; no retiming/AI frames/post-added cues",
+    "motion_glb_sha256": "e552b5a57ecb52cac06e3923317d9c92138a774ef9327fab791a2a3d082550c3",
+    "original_glb_sha256": "17d22ede10e0719333136ffe35cb3681b0c4873ed208aca56c783cb7307399ab",
+    "model_publicly_redistributed": false,
+    "native_gains_db": [
+      -8,
+      -4,
+      -8
+    ],
+    "scene_default_gain_db": -4,
     "realtime_fps_measured": false
-  }
+  },
+  "previous_feedback": [
+    "Prior 15-second Q3 motion/VFX failed acceptance",
+    "Later full-pose study body weight remained unaccepted; the new preview preserves the current balanced candidate"
+  ]
 }

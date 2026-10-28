@@ -1,11 +1,12 @@
 {
   "schema_version": 1,
   "verification_level": "in-host",
+  "preview_status": "awaiting human audiovisual review",
   "environment": {
     "host": "Godot 4.7.2.stable.official.ed1daf0bf",
     "renderer": "Forward+",
-    "dcc-mcp-godot": "0.9.12 editable candidate; unreleased VFX",
-    "source_commit": "5998d429542022ab5c34da46e3ce70e0eabb5494",
+    "dcc-mcp-godot": "0.9.12 source candidate; direct native script execution, not MCP acceptance",
+    "source_commit": "304e036575349b0b7f54f6c46d8a4be7667c6e4d",
     "dcc-mcp-core": "0.20.48",
     "dcc-mcp-server": "0.20.48",
     "post": "FFmpeg 8.1.1-full_build-www.gyan.dev",
@@ -64,177 +65,104 @@
         "basis": "未取得可独立核验的实际任务模型与推理配置记录，不从输出推断。",
         "scope": "审阅阶段；原角色施法研究及其修订"
       }
-    ]
+    ],
+    "skills": "godot-shader / godot-vfx from the same source commit; no separate released version"
   },
   "counts": {
-    "archive_files": 36,
+    "archive_files": 34,
     "model_triangles": 18756,
     "model_joints": 20,
     "embedded_model_images": 3,
     "film_frames": 450,
-    "sampled_frames_reviewed": 51
+    "sampled_frames_reviewed": 51,
+    "private_archive_files": 38
   },
   "checks": [
     {
-      "name": "Native project and audio validation",
+      "name": "Native private mage save/reopen/export",
       "result": "pass",
-      "observed": "The 36-file ZIP passed fresh import, main entry, both mage routes and all six presets. Custom audio and -3 dB saved gain survived a separate-process reopen; the delivered default is -4 dB."
+      "observed": "Exact local 38-file mage archive passed import, both characters, six presets, save/exit/separate-process reopen, Windows debug export and 300-frame headless executable launch. It is not public model redistribution or real input acceptance."
     },
     {
-      "name": "Windows export launch",
+      "name": "Public procedural source kit",
       "result": "pass",
-      "observed": "Godot 4.7.2 Windows debug export succeeded; its standalone EXE ran headlessly for 300 frames and exited. This does not qualify windowed input or rendering."
+      "observed": "Exact34-file public kit passed fresh import/main, procedural character, six presets, audio save/exit/separate-process reopen, Windows debug export and300-frame headless launch. Archive excludes model/PBR/retargeted character."
     },
     {
-      "name": "Film decoding and audio measurement",
+      "name": "Native preview decoding and samples",
       "result": "pass",
-      "observed": "All 450 frames decoded; measured mean -29.22 dBFS and peak -6.16 dBFS with zero clipped samples. Measurement does not replace listening."
+      "observed": "All 450 frames decoded; 51 sampled frames plus full-size frame380 viewed. Native mix mean -28.8234 dBFS, peak -7.7633 dBFS; zero clipped samples."
     },
     {
-      "name": "Human audiovisual review",
+      "name": "Human audiovisual acceptance",
       "result": "not_run",
-      "observed": "The user requested further motion, VFX and staging changes after the softer mix. The revision adds support-bone motion, inclined auras, circulating motes, restrained contact and a stone arena. Root inspected 51 samples; exact final audiovisual acceptance is pending."
+      "observed": "The new close-view preview is unaccepted; prior films were rejected for motion/VFX. Current body motion is a candidate and no natural-speed human listening pass is recorded."
     },
     {
-      "name": "MCP tool bridge",
+      "name": "Current MCP or application input",
       "result": "not_run",
-      "observed": "blocked: the current bridge could not complete because of ownership_conflict; no successful MCP tool-call acceptance is claimed for this run."
+      "observed": "No fresh Godot MCP session or dcc-cua PID/HWND binding. Existing ownership_conflict was not bypassed."
     },
     {
-      "name": "Native keyboard and mouse input",
+      "name": "Web game / physical phone / realtime budget",
       "result": "not_run",
-      "observed": "Ordinary keyboard and mouse acceptance was not run; scripted casting and count assertions do not replace it."
-    },
-    {
-      "name": "Godot Web export and interaction",
-      "result": "not_run",
-      "observed": "This candidate is limited to a film and native source; Web export and browser game interaction acceptance were not run."
-    },
-    {
-      "name": "Physical-phone execution",
-      "result": "not_run",
-      "observed": "No physical-phone run was performed; desktop rendering does not establish phone behavior."
-    },
-    {
-      "name": "Game-scale concurrent performance",
-      "result": "not_run",
-      "observed": "Frame time, GPU memory and target-device budgets for game-scale concurrent effects were not measured."
+      "observed": "No Web game export, hardware phone, frame-time or GPU memory performance acceptance. Fixed-rate Movie Maker is offline capture."
     },
     {
       "name": "Deployed bilingual player",
       "result": "not_run",
-      "observed": "Not deployed; playback, pause, seeking and resource downloads on deployed English or Chinese pages were not verified."
+      "observed": "Draft not merged or deployed; generated page/CI fixture tests do not prove live playback."
     }
   ],
-  "not_claimed": [
-    "Full reference-video reconstruction or human quality acceptance",
-    "Local MCP fixture readiness, UI input, Web/phone or game-scale performance",
-    "Merge, deployment, vendor license certification or relabeling generated mesh/PBR as MIT"
-  ],
-  "package_sha256": "4e424fac796c8cc447d0c908b3966225f5ca5ac2efe50d191df423d000dc5618",
-  "native_receipts": {
-    "package": {
-      "status": "passed",
-      "archive_unchanged": true,
-      "extracted_payload_unchanged": true,
-      "owned_processes_exited": true
+  "package_sha256": "a634b8061b5860ab75a2ea2626d60e5db1c7d1e957b68c5c9a5f0aa4c58f4dec",
+  "private_project": {
+    "public": false,
+    "archive": {
+      "sha256": "0e53c82bb989bef26b1c9b12bbf2662076959fd3eed360b3e7cdcf2b94d6f8c7",
+      "bytes": 2077091,
+      "files": 38
     },
-    "checks": [
-      {
-        "name": "import",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "a43a22656a259949a0306ae5a04b6b2cc6ed6b6a7d2950fc10b0251c9d268255",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "main",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "a7f19d48696c9d540fb016f95373717bee8f47f76e091d0707826c313e595c13",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "mage",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "52209e1b3775236deef8389cd4780a8b73548f68c4ce2f16dcacc1c2a6e356a5",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "fallback",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "096863621ad5cf93b45cfc5f4e9ff686d417ebda4d5d3064cc083c36a4b23f67",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "presets",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "d6ced99a549b171f37d58fbcade5164a342ec9769a0554e607a53dc5c9f63ead",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "save",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "29ac40fd8d3d1cbccb53f06a61c73148601e7eb1dcc6820db4a6ee1f3bdc63b0",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "reopen",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "f4c21541e4d3fd7d98cddf83057de2b132244b1bffb89711499d3c8fdc8fac02",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "export",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "615dd8bb78bee7a6437d602e04d9e368fd46abcb53100f5ae2119555d1510360",
-        "marker_found": true,
-        "owned_process_exited": true
-      },
-      {
-        "name": "launch-export",
-        "returncode": 0,
-        "passed": true,
-        "log_sha256": "d0401a52d10fa525efe9ecf0adaeb29d5a5a67c05e2c489f4ed0abdd7dac7fc5",
-        "marker_found": true,
-        "owned_process_exited": true
-      }
-    ],
+    "all_native_checks_passed": true,
     "scope": "Exact ZIP extraction; native headless behavior/save/reopen/export; no UI, listening or device performance acceptance"
   },
-  "previous_revision": {
-    "source_commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
-    "package_sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34",
-    "counts": {
-      "archive_files": 32,
-      "model_triangles": 18756,
-      "model_joints": 20,
-      "embedded_model_images": 3,
-      "film_frames": 480,
-      "sampled_frames_reviewed": 54
-    },
-    "scope": "Historical 16-second, 32-file candidate; not acceptance of revised files"
+  "media": {
+    "bytes": 12539585,
+    "sha256": "db0bb94905f830799ed6e91d8e15f64ceb6c624f1d938d1ab15ab8d300ee27bd"
   },
   "audio_measurement": {
     "sample_rate": 48000,
     "channels": 2,
-    "peak_dbfs": -6.163200901738638,
-    "mean_dbfs": -29.223117115479177,
+    "peak_dbfs": -7.763297863557521,
+    "mean_dbfs": -28.823379003296786,
     "clipped_samples": 0,
     "scope": "Decoded native mix; not human listening"
+  },
+  "capture": {
+    "fps": 30,
+    "video_seconds": 15,
+    "single_seconds": 4,
+    "combo_seconds": 5.5,
+    "detail_seconds": 5.5,
+    "close_gain_db": -8,
+    "wide_gain_db": -4,
+    "scene_default_gain_db": -4,
+    "single_fov": 48,
+    "combo_fov": 49,
+    "detail_fov": 52,
+    "method": "Native Godot Movie Maker; equal audio/video prewarm; hard cuts; no retiming or post-added sound"
+  },
+  "previous_revision": {
+    "source_commit": "5998d429542022ab5c34da46e3ce70e0eabb5494",
+    "package_sha256": "4e424fac796c8cc447d0c908b3966225f5ca5ac2efe50d191df423d000dc5618",
+    "counts": {
+      "archive_files": 36,
+      "model_triangles": 18756,
+      "model_joints": 20,
+      "embedded_model_images": 3,
+      "film_frames": 450,
+      "sampled_frames_reviewed": 51
+    },
+    "scope": "Superseded 15-second Q3 candidate; human motion/VFX acceptance failed"
   },
   "revision_history": [
     {
@@ -249,6 +177,93 @@
         "sampled_frames_reviewed": 54
       },
       "scope": "Historical 16-second candidate; not acceptance of revised files"
+    },
+    {
+      "source_commit": "ac8242ca951ebffdf4646783d435cf016a1c700a",
+      "package_sha256": "2c725f65110b5c6b248167f8ed83cb9c7e89d58d172fc5a9a96e71c3a7d57e34",
+      "counts": {
+        "archive_files": 32,
+        "model_triangles": 18756,
+        "model_joints": 20,
+        "embedded_model_images": 3,
+        "film_frames": 480,
+        "sampled_frames_reviewed": 54
+      },
+      "scope": "Historical 16-second, 32-file candidate; not acceptance of revised files"
+    }
+  ],
+  "not_claimed": [
+    "Human final quality / full reference motion reproduction",
+    "Model/PBR redistribution entitlement",
+    "Current MCP, keyboard/mouse, Web/physical phone, realtime or deployed-player acceptance"
+  ],
+  "known_visual_limitations": [
+    "At 12.667 s the large release ring approaches the lower caption; this is a review preview."
+  ],
+  "public_native_checks": [
+    {
+      "name": "import",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "b36a49eed96aba5a93c0fc26f218c9f11e6589133d42867ef045a64dffddbd40",
+      "owned_process_exited": true
+    },
+    {
+      "name": "main",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "6344bffcf2e46c9a824ffedd0c003135692c8babfb703fd0d0d4f64b825f3f3f",
+      "owned_process_exited": true
+    },
+    {
+      "name": "fallback",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "096863621ad5cf93b45cfc5f4e9ff686d417ebda4d5d3064cc083c36a4b23f67",
+      "owned_process_exited": true
+    },
+    {
+      "name": "presets",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "d6ced99a549b171f37d58fbcade5164a342ec9769a0554e607a53dc5c9f63ead",
+      "owned_process_exited": true
+    },
+    {
+      "name": "save",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "c9a00ecd14217ae6c932e6c6bf8d6922f2e5f31a421ca91279a25c5b91c3c76b",
+      "owned_process_exited": true
+    },
+    {
+      "name": "reopen",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "f4c21541e4d3fd7d98cddf83057de2b132244b1bffb89711499d3c8fdc8fac02",
+      "owned_process_exited": true
+    },
+    {
+      "name": "export",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "23cc73542c675379a19b1d14b96ce56c7898e0ac1a9e98348944c6fe9d19d11f",
+      "owned_process_exited": true
+    },
+    {
+      "name": "launch-export",
+      "returncode": 0,
+      "passed": true,
+      "marker_found": true,
+      "log_sha256": "d0401a52d10fa525efe9ecf0adaeb29d5a5a67c05e2c489f4ed0abdd7dac7fc5",
+      "owned_process_exited": true
     }
   ]
 }

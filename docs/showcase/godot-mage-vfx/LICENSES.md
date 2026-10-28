@@ -1,23 +1,26 @@
 # Rights and attribution
 
-Mage mesh and PBR: **Hyper3D / Rodin Gen-2.5**. The existing generated asset
-was included with the user's explicit 2026-10-27 authorization and attribution.
-This does not manufacture a provider license, certify account entitlement or
-relicense the generated mesh and PBR as MIT. No provider license file accompanied
-the retained asset. No new generation or purchase was performed.
+The publicly downloadable source kit contains original procedural meshes,
+shaders, masks, effects, synthesized cues and documentation by DCC-MCP
+contributors under MIT. It excludes Hyper3D mesh/PBR and the retargeted character.
+No authenticated model-redistribution entitlement was obtained; attribution
+alone is not that permission. The private full mage project stays local.
 
-The 20-joint rig, Idle/Cast animations, casting integration, original synthesized
-PCM cues, Godot shaders, procedural masks and effects are by DCC-MCP contributors.
-Original software and documentation use the MIT notice in the project ZIP.
-That notice does not cover Hyper3D-generated mesh/PBR. The ZIP includes separate
-MODEL-LICENSE.md and SOURCE-ATTRIBUTION.md, plus a procedural mage alternative.
+The rendered film and screenshots incorporate the existing Hyper3D / Rodin
+Gen-2.5 mage under the user's recorded rendered-use authorization. Public output
+use is subject to Hyper3D terms and source rights, separately from model/PBR
+redistribution. No provider license file or authenticated account entitlement
+was supplied. Do not infer a blanket commercial, training or evaluation grant.
 
-The film and hero are original native Godot output incorporating the attributed
-model. Tutorial footage, circle images and third-party texture-library assets
-are not redistributed. The research is documented in the standalone Shader
-manual; access and source rights remain separate from implementation.
+Body motion is derived from Kay Lousberg's CC0 Idle / Spellcast_Long in the
+author-owned KayKit Adventurers1.0 repository at
+672074b73ba276876a19e8816ecdc5241817ab47:
+https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Adventures-1.0
+Contact constraints, fitted rig and lower-coat skin repair are local modifications.
+CC0 motion does not relicense the Hyper3D mesh/PBR. No third-party tutorial film,
+texture database, external audio, new purchase or paid generation is included.
 
-Public terms and API FAQ were reviewed on 2026-10-27:
-https://hyper3d.ai/legal/terms and https://hyper3d.ai/features/api. Output use
-remains subject to the agreement, plan and source rights. No authenticated
-account-entitlement receipt was obtained; attribution is not that receipt.
+Primary public terms, reviewed2026-10-27 and retained for this preview:
+https://hyper3d.ai/legal/terms
+https://hyper3d.ai/features/api
+The source software MIT grant and rendered/model rights remain separate.

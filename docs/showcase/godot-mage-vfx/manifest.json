@@ -6,13 +6,13 @@
   "files": [
     {
       "path": "capture_public.gd",
-      "bytes": 8556,
-      "sha256": "a36929d5999210d9cde4a9203648d0f1803489d6f295a183bc575ce5843a0055"
+      "bytes": 8794,
+      "sha256": "56193f126eaec3091ce325bb1cd70b954f7738cd733040b6a7c312ae5bf05c32"
     },
     {
       "path": "demo.mp4",
-      "bytes": 11982150,
-      "sha256": "a1fe48d36787ebf7f4c69fa2c26160fab024b89dcccf9a457e4d02a8ca237904",
+      "bytes": 12539585,
+      "sha256": "db0bb94905f830799ed6e91d8e15f64ceb6c624f1d938d1ab15ab8d300ee27bd",
       "width": 1280,
       "height": 720,
       "frames": 450,
@@ -20,36 +20,65 @@
     },
     {
       "path": "godot-mage-vfx.zip",
-      "bytes": 2017429,
-      "sha256": "4e424fac796c8cc447d0c908b3966225f5ca5ac2efe50d191df423d000dc5618"
+      "bytes": 484267,
+      "sha256": "a634b8061b5860ab75a2ea2626d60e5db1c7d1e957b68c5c9a5f0aa4c58f4dec"
     },
     {
       "path": "hero.jpg",
-      "bytes": 131339,
-      "sha256": "d61015bec99946975ef9b87a375a8b8342cfd3e3365ca7c336a78bd41e41bf23",
+      "bytes": 172512,
+      "sha256": "103d44109dfbc327e00100f31fc8ff2293012157b7ef2d49271a2ca042de2cd7",
       "width": 1280,
       "height": 720,
       "bit_depth": 8
     },
     {
       "path": "LICENSES.md",
-      "bytes": 1420,
-      "sha256": "00aa12c053609390dc6e6a2fa7af93bade7c27db3a05979752c0923834691ed3"
+      "bytes": 1491,
+      "sha256": "fb40c08842feff5e733b7f51f51319c296704b919131757b2cda58b875214431"
+    },
+    {
+      "path": "manual-images/godot-layered-contact.jpg",
+      "bytes": 113801,
+      "sha256": "9c94b2eaf577a88197a0cf1d2a454b2b8a80b6279348ddd58acc77d84e68334e",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "manual-images/godot-layered-release.jpg",
+      "bytes": 141150,
+      "sha256": "ffb1da9b39b350b4bc7ae6dbc2acf67f42c91d33603b9f205e0d74c2c8a4d0d8",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "manual-images/godot-layered-sigil.jpg",
+      "bytes": 172512,
+      "sha256": "103d44109dfbc327e00100f31fc8ff2293012157b7ef2d49271a2ca042de2cd7",
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8
+    },
+    {
+      "path": "MANUAL.md",
+      "bytes": 3690,
+      "sha256": "8f35a2d4f654f9078ffa11cd97f2fdffae17a94fe707ada73e6c6809eb984856"
     },
     {
       "path": "public-media-evidence.json",
-      "bytes": 2846,
-      "sha256": "664d4184a4f6b82874e128e5c87694fc84fee12a11e837861e0e527a73edd606"
+      "bytes": 2853,
+      "sha256": "3b40456d2d6870c6ef079af94601a58f447e756131d1efe8b099bd1e308b9181"
     },
     {
       "path": "README.md",
-      "bytes": 4471,
-      "sha256": "a5f35abf7056e1a153c6a8fc445ec70c59f80557d3d91e5999d45f5e21b887c0"
+      "bytes": 4008,
+      "sha256": "974937e46168971c0d12c40723306d278caa7e072261bb3e092a69f8c463309e"
     },
     {
       "path": "validation.json",
-      "bytes": 9701,
-      "sha256": "0afc1302dffe0169a59e928f283a15207682144e2adadbcaeb43eac5b06621ac"
+      "bytes": 9835,
+      "sha256": "61dd10dc6853e604c8df57f5245bd64ef9b11988d7bf478b0268e6d0bd18dde1"
     }
   ]
 }

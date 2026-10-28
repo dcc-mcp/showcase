@@ -32,7 +32,7 @@ func _initialize() -> void:
 func _setup() -> void:
 	seed(12345)
 	node_added.connect(_seed_particles)
-	var scene_path := "res://mage_spells/combat_vfx_gallery.tscn" if case_name == "gallery" else "res://mage_spells/spellcasting_demo.tscn"
+	var scene_path := "res://mage_spells/combat_vfx_gallery.tscn" if case_name == "gallery" else "res://mage_spells/mage_motion_study.tscn"
 	study = load(scene_path).instantiate() as Node3D
 	assert(study != null)
 	if case_name == "gallery":
@@ -41,6 +41,7 @@ func _setup() -> void:
 		assert(study.mage_scene != null, "This capture requires the authorized existing imported mage")
 		study.auto_cast = false
 		study.camera_feedback_enabled = false
+		if case_name in ["single", "detail"]: study.sound_gain_db = -8.0
 	root.add_child(study)
 	if case_name != "gallery":
 		assert(study.get_state().mage_kind == "imported_skeletal")
@@ -51,12 +52,12 @@ func _setup() -> void:
 	var layer := CanvasLayer.new()
 	root.add_child(layer)
 	var heading := Label.new()
-	heading.text = "ARCANE / RITUAL STUDY" if case_name != "gallery" else "SIX REUSABLE EFFECTS"
+	heading.text = "ARCANE / COMBAT CAST" if case_name != "gallery" else "SIX REUSABLE EFFECTS"
 	heading.position = Vector2(42, 28)
 	heading.add_theme_font_size_override("font_size", 25)
 	layer.add_child(heading)
 	var subheading := Label.new()
-	subheading.text = {"single":"01 / GATHER + RELEASE", "combo":"02 / FLIGHT + CONTACT", "detail":"03 / SIGIL LAYERS + DECAY", "gallery":"03 / FIRE  /  AURA  /  ATTACK  /  IMPACT"}[case_name]
+	subheading.text = {"single":"01 / SIGIL + GATHER + RELEASE", "combo":"02 / FLIGHT + CONTACT", "detail":"03 / SIGIL LAYERS + DECAY", "gallery":"03 / FIRE  /  AURA  /  ATTACK  /  IMPACT"}[case_name]
 	subheading.position = Vector2(44, 65)
 	subheading.add_theme_font_size_override("font_size", 15)
 	subheading.modulate = Color("9bb6cf")
@@ -67,7 +68,7 @@ func _setup() -> void:
 	caption.modulate = Color("d0deed")
 	layer.add_child(caption)
 	var credit := Label.new()
-	credit.text = "Mage mesh / PBR: Hyper3D Rodin Gen-2.5   |   Rig, cast and Godot VFX: DCC-MCP contributors"
+	credit.text = "Mage mesh / PBR: Hyper3D Rodin Gen-2.5   |   Animation: Kay Lousberg (CC0), retarget and Godot VFX: DCC-MCP contributors"
 	credit.position = Vector2(44, root.size.y - 19)
 	credit.add_theme_font_size_override("font_size", 10)
 	credit.modulate = Color("8d9cae")
@@ -97,13 +98,13 @@ func _set_camera() -> void:
 		return
 	# Capture-only framing for the authorized imported mage and impact.
 	if case_name == "single":
-		fixed_camera.position = Vector3(-0.5 - sweep * 0.35, 2.6, 5.3 - sweep * 0.2)
-		fixed_camera.fov = 44.0
-		fixed_camera.look_at(Vector3(-2.0, 1.15, 0.0))
+		fixed_camera.position = Vector3(-0.7 - sweep * 0.12, 3.15, 3.25 - sweep * 0.12)
+		fixed_camera.fov = 48.0
+		fixed_camera.look_at(Vector3(-2.7, 1.0, 0.0))
 	elif case_name == "detail":
-		fixed_camera.position = Vector3(0.7 - sweep * 0.4, 4.8, 5.5 - sweep * 0.3)
-		fixed_camera.fov = 50.0
-		fixed_camera.look_at(Vector3(-2.4, 0.9, 0.0))
+		fixed_camera.position = Vector3(-1.15 - sweep * 0.12, 3.75, 3.25 - sweep * 0.12)
+		fixed_camera.fov = 52.0
+		fixed_camera.look_at(Vector3(-2.5, 1.05, 0.0))
 	else:
 		fixed_camera.position = Vector3(-0.3 + sweep * 0.5, 3.2, 8.0 - sweep * 0.5)
 		fixed_camera.fov = 49.0
@@ -135,6 +136,11 @@ func _record(_delta: float) -> void:
 		row["state"] = state
 		var origin: Node3D = study.get("_cast_hand")
 		row["cast_origin"] = [origin.global_position.x, origin.global_position.y, origin.global_position.z]
+		var rig := origin.get_parent().get_parent() as Skeleton3D
+		row["stance"] = {}
+		for bone in ["Hips", "LeftFoot", "RightFoot"]:
+			var point := rig.global_transform * rig.get_bone_global_pose(rig.find_bone(bone)).origin
+			row["stance"][bone] = [point.x, point.y, point.z]
 		row["mage_origin_screen"] = _screen(study.get_node("Mage").global_position)
 		row["cast_origin_screen"] = _screen(origin.global_position)
 		caption.text = "Gather  /  Contract  /  Release  /  Contact  /  Settle"
@@ -152,9 +158,9 @@ func _record(_delta: float) -> void:
 		else:
 			assert(study.event_count >= 6)
 		var report := {"case":case_name,"capture_fps":FPS,"prewarm_frames":PREWARM,"duration_seconds":duration,
-			"scene": "res://mage_spells/combat_vfx_gallery.tscn" if case_name == "gallery" else "res://mage_spells/spellcasting_demo.tscn",
+			"scene": "res://mage_spells/combat_vfx_gallery.tscn" if case_name == "gallery" else "res://mage_spells/mage_motion_study.tscn",
 			"public_asset_assertion":"authorized existing imported mage; imported_skeletal, RightCastSocket bone and BoneAttachment CastOrigin asserted every mage frame",
-			"asset_credit":"Hyper3D / Rodin Gen-2.5 generated mesh and PBR; authored 20-joint rig, cast animation and Godot VFX by DCC-MCP contributors",
+			"asset_credit":"Hyper3D / Rodin Gen-2.5 generated mesh and PBR; 20-joint fitted rig, retarget and Godot VFX by DCC-MCP contributors; spell animation by Kay Lousberg (CC0)",
 			"rights_scope":"User authorized public model use; provider account license independently unverified; no new generation or legal certification",
 			"fixed_seed":12345,"seeded_particle_nodes":seeded_particles,
 			"camera_binding":"after-controller observer process_priority 1000 before render sync",

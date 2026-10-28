@@ -5954,7 +5954,7 @@
     {
       "slug": "godot-mage-vfx",
       "title": "法师施法与可复用特效",
-      "subtitle": "Godot · Hyper3D 法师与原生有声特效 · Draft 候选",
+      "subtitle": "Godot · 分层法阵与施法 · 新版预览待验",
       "software": [
         "Godot"
       ],
@@ -5965,10 +5965,10 @@
       ],
       "cover": {
         "src": "docs/showcase/godot-mage-vfx/hero.jpg",
-        "alt": "Hyper3D 法师释放紫色法术，脚下三层符文光环"
+        "alt": "真实 Godot 预览：紫色弹体释放与分层符文法阵"
       },
-      "evidence_label": "Draft 候选 · 原生与导出检查通过 · 人工视听待验",
-      "evidence_scope": "15 秒原生影片：补充腰背、肩和手腕动作，加入环流粒子、倾斜法阵与石质仪式场，收小命中核心。36 文件工程通过解包、保存重开和导出启动，51 帧抽查完成。最终视听、真实输入和性能仍待验。",
+      "evidence_label": "新版预览 · 原生渲染与工程检查通过 · 视听待验",
+      "evidence_scope": "15 秒真实 Godot 预览，450 帧；近景展示法阵层次、蓄力和衰减，远景展示飞行与接触。完整法师工程仅本地保留；公开 34 文件程序化源码包排除 Hyper3D 模型/PBR。原生保存重开与导出通过；人工视听、真实输入和性能未验。",
       "summary": "将 Hyper3D 法师的骨骼施法动画与蓄力、飞行、接触、光环及声音连接，保留六类可复用原生预设。",
       "goal": "把攻击、法术和光环整理为可复制到未来游戏的原生场景、技能说明与验证记录，并保持表现与伤害逻辑分离。",
       "prompt": {
@@ -6000,6 +6000,10 @@
         {
           "label": "本片渲染范围",
           "value": "Godot 桌面 Forward+ 原生帧；不代表 Web 或实体手机验收"
+        },
+        {
+          "label": "本次源码与技能范围",
+          "value": "dcc-mcp-godot 0.9.12 · godot-vfx / godot-shader · 304e036575349b0b7f54f6c46d8a4be7667c6e4d · Draft"
         }
       ],
       "tools": [
@@ -6015,7 +6019,7 @@
       "steps": [
         {
           "title": "复用授权法师",
-          "description": "Hyper3D / Rodin Gen-2.5 提供网格和 PBR；本地制作 20 骨骼、Idle/Cast 动画和施法挂点，模型来源与软件许可分别说明。"
+          "description": "影片使用现有 Hyper3D 法师及 Kay Lousberg CC0 动作，保留当前重心候选；公开源码包使用原创程序化角色，不包含模型/PBR。"
         },
         {
           "title": "组合六类预设",
@@ -6028,36 +6032,35 @@
         {
           "title": "分别记录原生与媒体证据",
           "description": "保留六预设、保存重开与 ZIP 解包运行结果，并将影片解码、模型画面审阅和人工视觉验收分开。"
+        },
+        {
+          "title": "打开、编辑并保存重开",
+          "description": "公开包运行 project.godot；在 MANUAL.md 调整 tint、radius、duration、auto_free、speed、lifetime 和 sound_gain_db。导入自有授权角色前检查 Cast 与 RightCastSocket；表现层不负责伤害权威。"
         }
       ],
       "results": [
         {
           "src": "docs/showcase/godot-mage-vfx/demo.mp4",
           "poster": "docs/showcase/godot-mage-vfx/hero.jpg",
-          "alt": "分层法阵、施法与原生魔法声音演示",
-          "caption": "450 帧、15 秒、1280×720、30 fps、H.264 与 AAC 立体声。按反馈替换提示音式音色并将默认增益降至 -4 dB；最终试听待确认。"
+          "alt": "新版原生法阵施法预览，尚未通过人工视听验收",
+          "caption": "预览待验：15 秒、450 帧、1280×720、30 fps，H.264/AAC。近景原生增益 -8 dB，远景 -4 dB；无调速、AI 帧或后期补加法术音效。"
         }
       ],
       "checks": [
         {
-          "name": "工程与声音原生验证",
+          "name": "新版预览与本地工程",
           "result": "pass",
-          "observed": "36 文件 ZIP 全新导入、默认入口、两种角色和六预设通过；自定义音频与 -3 dB 测试增益保存重开通过，交付默认增益为 -4 dB。"
-        },
-        {
-          "name": "Windows 导出启动",
-          "result": "pass",
-          "observed": "Godot 4.7.2 Windows debug 导出成功，独立 EXE 无界面启动 300 帧并退出；不代表窗口输入或渲染验收。"
-        },
-        {
-          "name": "影片解码与声音测量",
-          "result": "pass",
-          "observed": "450 帧完整解码，均值 -29.22 dBFS、峰值 -6.16 dBFS，无削波；这些测量不代替试听。"
+          "observed": "本地 38 文件法师工程通过保存、退出、独立进程重开与 Windows 导出启动；450 帧完整解码、51 帧抽查完成，均值 -28.8234 dBFS、峰值 -7.7633 dBFS、无削波。"
         },
         {
           "name": "人工视听审阅",
           "result": "not_run",
-          "observed": "用户在柔和音量版后要求同时调整动作、特效和场景；本版已修订三项，模型抽查 51 帧，最终视听验收仍待完成。"
+          "observed": "旧影片动作/特效未通过；新版预览尚未获得人工自然速度视听确认，12.667 秒法阵接近下方说明文字。"
+        },
+        {
+          "name": "公开程序化源码包",
+          "result": "pass",
+          "observed": "34 文件源码包排除模型/PBR；全新导入、程序化角色、六预设、声音保存重开及 Windows 导出启动均通过。"
         },
         {
           "name": "MCP 工具桥接",
@@ -6091,20 +6094,19 @@
         }
       ],
       "limitations": [
-        "这是同一案例的普通 Draft PR 候选，未合并、发布或部署。",
-        "高质量法阵参考的完整视频不可用；章节与缩略图不能证明动效、曝光或光影匹配。",
-        "当前声音是原创合成提示音；人工视听、真实键鼠、Web、实体手机和游戏规模性能尚未验收。",
+        "新版仅为待视听验收的制作预览，未合并、部署或认定最终成片。",
+        "完整参考动效不可访问；局部曝光、动作自然度与观感仍需人工审阅。",
+        "公开源码包不含 Hyper3D 模型/PBR；完整法师工程仅本地保留，供应商再分发权未核实。",
         "本轮 MCP 桥接因 ownership_conflict 阻塞，原生引擎通过不等于 MCP 调用通过。",
-        "特效属于表现层；伤害、命中权威、输入缓冲和游戏连招窗口尚未实现。",
-        "Hyper3D 生成网格和 PBR 按用户明确授权纳入并署名；未伪造供应商许可证，也不将其列为 MIT。"
+        "特效属于表现层；伤害、命中权威、输入缓冲和游戏连招窗口尚未实现。"
       ],
       "resources": [
         {
-          "label": "法师与特效工程 ZIP",
+          "label": "程序化特效源码 ZIP（不含模型/PBR）",
           "url": "docs/showcase/godot-mage-vfx/godot-mage-vfx.zip"
         },
         {
-          "label": "原生演示影片",
+          "label": "15 秒新版原生预览",
           "url": "docs/showcase/godot-mage-vfx/demo.mp4"
         },
         {
@@ -6132,21 +6134,21 @@
           "url": "docs/showcase/godot-mage-vfx/public-media-evidence.json"
         },
         {
-          "label": "独立 Shader 使用手册",
-          "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/5998d429542022ab5c34da46e3ce70e0eabb5494/docs/shader-manual.md"
+          "label": "自包含 Shader 使用手册",
+          "url": "docs/showcase/godot-mage-vfx/MANUAL.md"
         }
       ],
       "credits": {
         "author": "DCC-MCP contributors",
-        "license": "原创代码、特效和文档采用 MIT；Hyper3D 网格和 PBR 另列来源及许可范围。",
-        "note": "模型：Hyper3D / Rodin Gen-2.5。骨骼、动画、声音和 Godot 特效：DCC-MCP contributors。未分发教程影片或第三方纹理库资产。"
+        "license": "原创源码/特效/文档采用 MIT；渲染输出、Hyper3D 资产与 CC0 动作权利分别记录。",
+        "note": "渲染角色：Hyper3D Rodin Gen-2.5；动作：Kay Lousberg（CC0），本地重定向/约束；Godot 特效与声音：DCC-MCP contributors。公开包不再分发模型/PBR。"
       },
       "source": {
-        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/5998d429542022ab5c34da46e3ce70e0eabb5494/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
-        "commit": "5998d429542022ab5c34da46e3ce70e0eabb5494",
+        "url": "https://github.com/dcc-mcp/dcc-mcp-godot/blob/304e036575349b0b7f54f6c46d8a4be7667c6e4d/src/dcc_mcp_godot/skills/godot-vfx/SKILL.md",
+        "commit": "304e036575349b0b7f54f6c46d8a4be7667c6e4d",
         "title": "Shader 与 VFX 源码 · 未发布候选"
       },
-      "verified_at": "2026-10-27",
+      "verified_at": "2026-10-28",
       "model_attribution": [
         {
           "stage_id": "planning",
@@ -6228,6 +6230,11 @@
           "version": "施法动作与仪式场修订 · Draft 候选",
           "date": "2026-10-27",
           "change": "按反馈补充身体重心、肩和手腕动作，加入环流粒子、法阵倾角、较小命中核心及石质仪式场；修正台面高度，重录并验证工程。保留历史失败与未测项，尚未部署。"
+        },
+        {
+          "version": "近景法阵与重心候选 · 预览",
+          "date": "2026-10-28",
+          "change": "保留当前完整动作候选，修正近景构图和空间音量，复用远景；新版预览接入原播放器，公开包排除模型/PBR，视听与最终 CI 门禁保持待验。"
         }
       ]
     }
