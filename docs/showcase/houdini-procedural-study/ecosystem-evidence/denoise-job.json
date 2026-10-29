@@ -1,0 +1,34 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "d1a59d7c5630d7c47757e39149f0cba07ab3f81e636dd87d7ea079b2c1802c4e",
+      "record": {
+        "schema_version": 1,
+        "operation": "denoise",
+        "media": "image",
+        "content": "render",
+        "input": "EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_0001.exr",
+        "output": "EVIDENCE_ROOT/houdini-blender-final/enhanced/denoised.exr",
+        "backend": "blender-oidn",
+        "colorspace": "scene-linear",
+        "alpha": "opaque",
+        "limits": {
+          "threads": 2,
+          "memory_mb": 2048,
+          "timeout_secs": 180,
+          "max_pixels": 1800000,
+          "max_input_mb": 128,
+          "max_output_mb": 64,
+          "min_free_disk_mb": 1000
+        },
+        "passes": {
+          "layer": "ViewLayer",
+          "beauty": "Combined",
+          "albedo": "Denoising Albedo",
+          "normal": "Denoising Normal"
+        }
+      }
+    }
+  ]
+}

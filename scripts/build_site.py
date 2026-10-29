@@ -159,7 +159,7 @@ def gif_info(path: str):
     return width, height, frames, min_delay
 
 
-def check_media(rel: str, src: str) -> list[str]:
+def check_media(rel: str, src: str, native_download: bool = False) -> list[str]:
     """Gallery media contract, enforced on the files the page actually loads."""
     ext = os.path.splitext(rel)[1].lower()
     size = os.path.getsize(src)
@@ -183,7 +183,7 @@ def check_media(rel: str, src: str) -> list[str]:
         if dims is None:
             return ["%s: not a readable image" % rel]
         width, height = dims
-        if width > MAX_STILL_WIDTH:
+        if width > MAX_STILL_WIDTH and not native_download:
             return ["%s: %dpx wide (still max %d)" % (rel, width, MAX_STILL_WIDTH)]
         return []
     return []
@@ -594,6 +594,10 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
         if problems:
             return [], problems, []
         notes.extend(intent_notes)
+        import validate_ecosystem
+        problems = validate_ecosystem.validate(root)
+        if problems:
+            return [], problems, []
         import validate_brand_gallery
         brand_catalog, brand_assets, problems = validate_brand_gallery.read_and_validate(root)
         if problems:
@@ -711,12 +715,14 @@ def build(root: str, out_dir: str, brand_preview: bool = False, localize: bool =
             assets.add("assets/locale.js")
         # Every file is selected explicitly, rather than discovered by crawling.
         sources = {rel: resolve_public(root, rel) for rel in sorted(assets)}
+        native_downloads = set().union(*(validate_ecosystem.native_download_paths(root, case, cases)
+                                        for case in cases))
         problems = []
         for rel, src in sources.items():
             # Brand download sizes, SVG safety and hashes have their own contract.
             # The case display-width ceiling must not reject a verified large PNG download.
             if rel not in brand_assets:
-                problems.extend(check_media(rel, src))
+                problems.extend(check_media(rel, src, native_download=rel in native_downloads))
         for rel, text in pages.items():
             for child in refs_of(text, rel):
                 if child not in pages and child not in sources:

@@ -1,0 +1,16 @@
+{
+  "status": "succeeded",
+  "request_sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39",
+  "response_sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3",
+  "outputs": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/preview.jpg",
+      "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c"
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/hero.jpg",
+      "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b"
+    }
+  ],
+  "scope": "Two actual retained-source RGB encodings; no reconstruction from old JPEG and no geometry render"
+}

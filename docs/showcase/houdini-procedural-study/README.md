@@ -4,7 +4,7 @@
 
 51 个剖面控制点定义外壁、环纹、口沿、内壁和底厚。144 段旋转与两级细分把它们变成可编辑的程序模型，再以釉面材质、三块软箱灯和独立相机完成产品式主图。
 
-**本轮实际运行 · DCC-MCP 创作。** 建模、材质、灯光、相机、保存、Mantra 渲染及工程重开均在本轮专属 Houdini standalone 宿主中，通过 `dcc-mcp-cli call` 的专用 typed 工具完成。公开 PNG 的元数据整理使用已发现的 MCP 自动化能力，作为明确记录的 typed 能力缺口。每次正式调用要求 gateway 路由并记录统计。普通 shell 用于官方适配器启动、CLI 调度、文件审计和网页图片编码。
+**本轮实际运行 · DCC-MCP 创作。** 建模、材质、灯光、相机、保存、Mantra 渲染及工程重开均在本轮专属 Houdini standalone 宿主中，通过 `dcc-mcp-cli call` 的专用 typed 工具完成。公开 PNG 的元数据整理使用已发现的 MCP 自动化能力，作为明确记录的 typed 能力缺口。每次正式调用要求 gateway 路由并记录统计。原历史版本曾使用普通 shell 编码网页图片；2026-10-20 三张当前网页 JPEG 已通过正式 Blender MCP 图像编码重新制作，原生产记录保持历史事实。
 
 [可复用提示词](prompt.md) · [剖面输入](profile.json) · [typed 复用步骤](recipe.json) · [实际调用响应](calls.json) · [验证记录](validation.json) · [文件与哈希](manifest.json) · [网页图片映射](derivatives.json) · [许可](LICENSE.txt)
 
@@ -29,13 +29,19 @@
 
 预览保留最初的强反射和较紧构图，作为实际中间成果；最终图展示后续灯光、构图和背景调整的结果。JPEG 仅是网页编码副本，没有改变构图、颜色或加入生成像素。
 
-![降低灯光曝光、增加留白后的真实中间渲染](lighting-study.jpg)
+![同一Houdini OBJ的新增Blender跨DCC灯光练习](lighting-study.jpg)
 
-这张中间图仍有未遮住的黑色天空，帮助说明后续建立背板的原因。其原 PNG 在下一次实际渲染时被覆盖；当时记录的 PNG 哈希和保留下来的 JPEG 字节均列在 `derivatives.json`。
+2026-10-20 新增灯光练习：将字节与49次真实Houdini空场景重放一致的OBJ通过Blender MCP导入，核对115,776点、115,200四边形、坐标与包围盒。通过正式typed工具与有界宿主属性脚本建立摄影棚、灯光、相机及青釉，再实际保存、清空、重开验证。最终为1200×1500、Cycles64、内置降噪关闭的真实多层EXR；官方dcc-media-enhance CLI消费Combined/Albedo/Normal，独立OIDN后由原生Blender执行AgX Medium High Contrast显示变换。网页JPEG只做Standard保色编码，不再套AgX。
+
+这不是原Mantra中间灯光状态的复刻，也不是同一渲染器benchmark或真实陶艺物理认证。旧中间图的原PNG已被历史渲染覆盖，旧JPEG及原说明保留在历史Release，不用它再编码冒充新制作。原Mantra主图和预览内容保持。
+
+[当前真实制作图与证据](ecosystem-production.json) · [新版交付包](houdini-ecosystem-assets-2026-10-20.zip)
+
+公开多层EXR仅将File属性中的私人路径替换为等长文件名；其他全部字节及压缩像素块不变。官方OpenEXR3.5.2已完整解码原件与公开副本的11通道，尺寸与逐通道像素字节SHA完全一致。原文件保留私有；这是明确的交付元数据表示，不冒称原始文件字节相同。
 
 ## 可下载内容与原工程
 
-[公开资源包：OBJ、像素一致的公开 PNG、复用输入和证据](https://github.com/dcc-mcp/showcase/releases/download/2026-10-01-houdini-procedural-study/houdini-procedural-study-assets.zip)。OBJ 由 typed `export_geometry` 实际导出，再由 typed `import_geometry` 回导入同一 Houdini 版本，点数、面数和包围盒一致。OBJ 提供最终几何及法线，不能保留 HIP 的程序化 SOP 链、完整着色器和灯光场景。
+[2026-10-01历史资源包（原样保留，不代表当前第三图）](https://github.com/dcc-mcp/showcase/releases/download/2026-10-01-houdini-procedural-study/houdini-procedural-study-assets.zip)。OBJ 由 typed `export_geometry` 实际导出，再由 typed `import_geometry` 回导入同一 Houdini 版本，点数、面数和包围盒一致。OBJ 提供最终几何及法线，不能保留 HIP 的程序化 SOP 链、完整着色器和灯光场景。
 
 原始 PNG 的自动 Artist 字段包含本地登录元数据，原件保留私有。专用 typed 元数据整理工具未找到；通过已发现的 `houdini_automation__run_python_file` 正式 MCP 能力执行 [参数化清理代码](sanitize_png_metadata.py)，只移除 Artist 文本 chunk，输出明确命名的 `hero-public.png` 和 `preview-public.png`。CRC、压缩 IDAT 哈希、解码 RGBA 哈希和尺寸逐项验证一致，另用独立 Pillow 解码比较像素。公开副本不是未经元数据整理的原始字节；完整变化与哈希见 [PNG 发布记录](png-publication.json)。
 
@@ -54,8 +60,14 @@
 
 首轮 `set_render_settings` 回报分辨率 640×800，但实际输出仍为相机设置的 960×1200。本轮最终通过 typed 相机参数显式设置 1200×1500，并核对真实 PNG 尺寸；不把工具的 applied 字段单独作为成图证据。专属 loopback gateway 用于避开机器上并发运行时的版本接管，未改动其他宿主。
 
-本例验证保存、重开、计数、渲染落盘、相对输出路径及同一 Houdini 的 OBJ 回导入；未在其他 DCC 重导入 OBJ 验证，也未验证 GUI 交互、其他 Houdini 版本、Karma、动画或封闭流形认证。程序化控制链保存在本地 HIP，公开几何采用 OBJ。
+原始 Houdini 阶段验证保存、重开、计数、渲染落盘、相对输出路径及同一 Houdini 的 OBJ 回导入；当时尚未在其他 DCC 重导入 OBJ。后续生态迁移已通过 Blender MCP 实际导入公开 OBJ 并制作上文的灯光研究。GUI 交互、其他 Houdini 版本、Karma、动画和封闭流形认证仍未验证。程序化控制链保存在本地 HIP，公开几何采用 OBJ。
 
 ## 作者与许可
 
 本轮由 DCC-MCP showcase 任务通过 typed DCC-MCP 生成，未使用外部模型、图片或纹理。案例文档、模型及渲染按本仓库 MIT 许可提供；SideFX 软件和内置着色器不作为独立库重新分发。`LICENSE.txt` 保留许可全文。
+
+## 2026-10-20 网页编码修复的历史阶段
+
+该阶段先将 hero.jpg 与 preview.jpg 由原公开 PNG 经正式 Blender MCP 的原生图像编码重新输出，未重渲、未使用旧 JPEG 作为输入。明确使用 Standard/sRGB 保色并仅保留 RGB，不另加背景；原 PNG 字节未改，完整解码后的平均 RGB 误差均小于 1/255。详见[真实阶段回执](ecosystem-repair-2026-10-20.json)。上文普通 shell 编码和 derivatives.json 保留原历史记录，不倒改其来源。
+
+当时 lighting-study.jpg 的原始 PNG 尚未恢复，因此两图修复并未完成整个案例迁移。后续已实际制作新的灯光研究、经 Blender MCP 输出三张网页 JPEG，并提供上文所列的当前下载包；相应来源与字节清单见 ecosystem-production.json。旧 Release ZIP 仍是历史版本。原 49 次真实重放和原始 Mantra/OBJ 证据继续保留；这些案例级记录不代表整个画廊已经通过严格生态门禁。

@@ -1,0 +1,90 @@
+{
+  "method": "Montage from actual native exports; presentation fades only for loop excerpts",
+  "timeline": [
+    {
+      "start_seconds": 0,
+      "duration_seconds": 0.29,
+      "asset": "footstep_stone_01"
+    },
+    {
+      "start_seconds": 0.62,
+      "duration_seconds": 0.34,
+      "asset": "footstep_stone_02"
+    },
+    {
+      "start_seconds": 1.3,
+      "duration_seconds": 0.31,
+      "asset": "footstep_stone_03"
+    },
+    {
+      "start_seconds": 1.94,
+      "duration_seconds": 0.37,
+      "asset": "footstep_stone_04"
+    },
+    {
+      "start_seconds": 2.64,
+      "duration_seconds": 0.33,
+      "asset": "footstep_stone_05"
+    },
+    {
+      "start_seconds": 3.31,
+      "duration_seconds": 0.41,
+      "asset": "footstep_stone_06"
+    },
+    {
+      "start_seconds": 4.05,
+      "duration_seconds": 0.28,
+      "asset": "footstep_grass_01"
+    },
+    {
+      "start_seconds": 4.66,
+      "duration_seconds": 0.35,
+      "asset": "footstep_grass_02"
+    },
+    {
+      "start_seconds": 5.35,
+      "duration_seconds": 0.32,
+      "asset": "footstep_grass_03"
+    },
+    {
+      "start_seconds": 6.0,
+      "duration_seconds": 0.38,
+      "asset": "footstep_grass_04"
+    },
+    {
+      "start_seconds": 6.71,
+      "duration_seconds": 0.3,
+      "asset": "footstep_grass_05"
+    },
+    {
+      "start_seconds": 7.35,
+      "duration_seconds": 0.42,
+      "asset": "footstep_grass_06"
+    },
+    {
+      "start_seconds": 8.1,
+      "duration_seconds": 8.0,
+      "asset": "environment_soft_wind_foliage_loop"
+    },
+    {
+      "start_seconds": 16.43,
+      "duration_seconds": 8.0,
+      "asset": "music_sparse_tonal_loop"
+    },
+    {
+      "start_seconds": 24.77,
+      "duration_seconds": 0.55,
+      "asset": "interaction_confirm"
+    },
+    {
+      "start_seconds": 25.65,
+      "duration_seconds": 1.65,
+      "asset": "interaction_discovery"
+    },
+    {
+      "start_seconds": 27.63,
+      "duration_seconds": 0.62,
+      "asset": "interaction_soft_impact"
+    }
+  ]
+}

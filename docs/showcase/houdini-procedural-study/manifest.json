@@ -4,8 +4,18 @@
   "application_version": "22.0.368",
   "adapter": "dcc-mcp-houdini 0.43.1",
   "core": "0.20.28",
-  "artifact_policy": "Public web encodings and redacted evidence only. Native HIP and original PNG retained privately. Actual OBJ and explicitly metadata-cleaned pixel-identical public PNG in independently audited Release ZIP.",
+  "artifact_policy": "Current public media plus complete actual evidence; private HIP/BLEND withheld. Published EXR has explicit metadata-only File replacement with all decoded channels independently equal.",
   "files": [
+    {
+      "path": "LICENSE.txt",
+      "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a",
+      "bytes": 1064
+    },
+    {
+      "path": "README.md",
+      "sha256": "ba79504e03e723bc325592dc3415ad7a83bfea0a350f8194694e1f391de2dbc2",
+      "bytes": 10163
+    },
     {
       "path": "calls.json",
       "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0",
@@ -17,27 +27,247 @@
       "bytes": 3581
     },
     {
+      "path": "downloads.json",
+      "sha256": "691302ddd238929567c129e376b241ce31edf6e132be0fc361538b6d6673d35e",
+      "bytes": 3031
+    },
+    {
+      "path": "ecosystem-evidence/denoise-execution.json",
+      "sha256": "7d003f44d9d42937489325912e3ff3a04752d875ed7c77a5cf00a92b02fa7eb2",
+      "bytes": 13703
+    },
+    {
+      "path": "ecosystem-evidence/denoise-job.json",
+      "sha256": "661467c05c4bde918a2bdc516b6f083d3a8dd1779c65b336618ca20d38203ff0",
+      "bytes": 1056
+    },
+    {
+      "path": "ecosystem-evidence/enhanced-verified_output.json",
+      "sha256": "11a1c796d24365c6205e236a19b04094b17a82236b4285d606635ee472f9f5f8",
+      "bytes": 408
+    },
+    {
+      "path": "ecosystem-evidence/final-jpeg-call.json",
+      "sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0",
+      "bytes": 1985
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-display_final_host.py.source.json",
+      "sha256": "bbf26efd0ef9e6bdb82fca0b453338070492a34c0487b2e4e071da39fbc84e63",
+      "bytes": 2095
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-final_display_validation.json",
+      "sha256": "1f072f9148fae061617d1e90e2f3c9181483a3a593a7bae253e79c2d1378285f",
+      "bytes": 792
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-final_source_verified.json",
+      "sha256": "7bb96ac3b6800a2a09f6fb2350c5e45eaa42809fd0967bcc7263809e5d7044f6",
+      "bytes": 785
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-floor-adjustment.json",
+      "sha256": "41951c51ad534bbdfd64a5c0df159514ba903b9141f3818c4c427c44d12cb028",
+      "bytes": 557
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-output-index.json",
+      "sha256": "cdc0562fc94005f05b24f714dbec576bc6591594c2b3eb59f09e6a46a5f95fc5",
+      "bytes": 592
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-prepare_final.py.source.json",
+      "sha256": "5b6b789c3854094ceb6223019b8dc69555fa3b6ef27e0124e4c97992387e0dd3",
+      "bytes": 1421
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-run_final.py.source.json",
+      "sha256": "b0f1594f857804e29b6474c8263cefec3dc31c87d342a49f0b0096d44daccf65",
+      "bytes": 5883
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-run_final_denoise.py.source.json",
+      "sha256": "48948957cdb577a86a4761e3e935ddea4a8e1c140559bbec423ac4a14fc07d20",
+      "bytes": 5345
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-saved-source.json",
+      "sha256": "41b91e37b72d050527703f6f3bee43403f2a56b5f65492ffb9dedea7d289304e",
+      "bytes": 1096
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-source-freeze.json",
+      "sha256": "76f78a452c77405bb822981db0bee37b121598e3b7171479425585ae282184d5",
+      "bytes": 932
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-verify_exr_host.py.source.json",
+      "sha256": "48efd40b5d5f6a41d862172386138bb0c5ca9a66a848210c9af9913a05a01354",
+      "bytes": 1553
+    },
+    {
+      "path": "ecosystem-evidence/houdini-blender-final-verify_final.py.source.json",
+      "sha256": "d51be85152f2c13d36f5c9492aa9abe03cd876c4167aea197594ced2e52dfe98",
+      "bytes": 3684
+    },
+    {
+      "path": "ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+      "sha256": "2e52c46c53ab295f1718a53e94fd8fc36c4ccf5b800e0ff28e2c003ce569a620",
+      "bytes": 2571
+    },
+    {
+      "path": "ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+      "sha256": "c14c29fd5b5717846f90082e3d8fd5ee343cc1a11b1cab18a20a28c04ec18463",
+      "bytes": 9871
+    },
+    {
+      "path": "ecosystem-evidence/houdini-final-jpeg-acceptance.json",
+      "sha256": "ab2e69b9f8d0950b6a0a2d118167661fd83b69a1f24223bd301d01ce5996731e",
+      "bytes": 858
+    },
+    {
+      "path": "ecosystem-evidence/houdini-final-jpeg-encode_jpegs_in_host.py.source.json",
+      "sha256": "0c51d9aa6dceb68c2ff284784270c77493879853d7571efcae95e6248267b82a",
+      "bytes": 2254
+    },
+    {
+      "path": "ecosystem-evidence/houdini-final-jpeg-native-readback.json",
+      "sha256": "725478af03ad4c01ddbacf016c420ab6a85b238529aa98b2520b22115a389fcf",
+      "bytes": 1094
+    },
+    {
+      "path": "ecosystem-evidence/houdini-final-jpeg-source-freeze.json",
+      "sha256": "3f2c247c422855efe98c3df44bd061a6f71a0423a7e9755a4c0f5d36aedaf458",
+      "bytes": 543
+    },
+    {
+      "path": "ecosystem-evidence/houdini-typed-model-replay-measurement.json",
+      "sha256": "da1b0bd862bd022134da3ace8106ba4873d6258998b43a6daec61688dfca642e",
+      "bytes": 701
+    },
+    {
+      "path": "ecosystem-evidence/native-agx-display-measurement.json",
+      "sha256": "960b04476e4ccf03a6d01acb281ed2a0adc8a47b8907c8693f7deb2f0597e63a",
+      "bytes": 693
+    },
+    {
+      "path": "ecosystem-evidence/native-display-call.json",
+      "sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7",
+      "bytes": 3683
+    },
+    {
+      "path": "ecosystem-evidence/native-existing-images-jpeg-measurement.json",
+      "sha256": "459b14ca14f7ef92852945642580bd09c13cf402c8fe90856fbb86e273539320",
+      "bytes": 804
+    },
+    {
+      "path": "ecosystem-evidence/native-final-web-jpeg-measurement.json",
+      "sha256": "833fc2cc482748588a7deb58532a8becc7a4f33940dfb11770d8420753fdcf24",
+      "bytes": 694
+    },
+    {
+      "path": "ecosystem-evidence/new-blender-cross-dcc-lighting-measurement.json",
+      "sha256": "a293a621dd72beebfd81129154c5e6bcf9dc2e3302207efe6a1146257702e049",
+      "bytes": 2458
+    },
+    {
+      "path": "ecosystem-evidence/new-lighting-original-import.json",
+      "sha256": "27d235d15bf38ee58c3bd96500c54aee3cfe449428ad35ee23f5e9bcf1751640",
+      "bytes": 58674
+    },
+    {
+      "path": "ecosystem-evidence/new-lighting-requests.json",
+      "sha256": "bd1cc183b3b020cf1022c20d728507c84fc3a086b207a86a549b5c788808731f",
+      "bytes": 8744
+    },
+    {
+      "path": "ecosystem-evidence/new-lighting-responses.json",
+      "sha256": "734e8ec61945954575794774d5a7b9ccf04ce6ad32b6c08379456be8788d8261",
+      "bytes": 52221
+    },
+    {
+      "path": "ecosystem-evidence/official-cli-independent-oidn-measurement.json",
+      "sha256": "bee6f6c98a2783bb647aa2fd20c72ef60b072fa724534003b3a189ac45f76d5c",
+      "bytes": 2479
+    },
+    {
+      "path": "ecosystem-evidence/original-mantra-and-public-png-measurement.json",
+      "sha256": "323758a7a35f9006a7bcd0dde249370b47085b2b6fdf1cfeccaca9f4f8eeccec",
+      "bytes": 1185
+    },
+    {
+      "path": "ecosystem-evidence/original-render-lineage.json",
+      "sha256": "473ffba5e87ff333bf2ad335bb49937cba44b594eb664bde33a0543229ec3f88",
+      "bytes": 2710
+    },
+    {
+      "path": "ecosystem-production.json",
+      "sha256": "d0ce9f005843b642b9aab262d8bcb2ab568890982f72ad7f91010400f2684478",
+      "bytes": 65639
+    },
+    {
+      "path": "ecosystem-repair-2026-10-20.json",
+      "sha256": "477a37eedad04e082fc6292b815809ecc77e3fa0ab83deeaae2e50efcdf0d670",
+      "bytes": 4291
+    },
+    {
+      "path": "ecosystem-repair-evidence/acceptance.json",
+      "sha256": "42cc6dfd7f54b87be18a4e4b77a5485627b3ce4db021f07a718fc264372b25d4",
+      "bytes": 1009
+    },
+    {
+      "path": "ecosystem-repair-evidence/encode-source.json",
+      "sha256": "84d0cd0d3fb8b3be73f125a363541dc13e04c6dfd8cb5254ae6febe0aecac0ba",
+      "bytes": 2280
+    },
+    {
+      "path": "ecosystem-repair-evidence/measurement.json",
+      "sha256": "e76b17d9e7a56a8fbef0f962d9d3e8ec9166016ddd84fccd299fb1182d0060ff",
+      "bytes": 660
+    },
+    {
+      "path": "ecosystem-repair-evidence/native-readback.json",
+      "sha256": "ad2f96eff293816fb1db79041b62979b385d7992287bbe341caf2530689eb538",
+      "bytes": 1153
+    },
+    {
+      "path": "ecosystem-repair-evidence/request.json",
+      "sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39",
+      "bytes": 379
+    },
+    {
+      "path": "ecosystem-repair-evidence/response.json",
+      "sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3",
+      "bytes": 1405
+    },
+    {
+      "path": "ecosystem-repair-evidence/source-freeze.json",
+      "sha256": "fc595b626519c0298e3df164cb666ee86fe9f6c8c213a3a86953e68f870aa5c9",
+      "bytes": 395
+    },
+    {
       "path": "gateway-receipt.json",
       "sha256": "836770095343c8b6ad8727f48c6d80a8811e41e69a7f10cab5ca415c280f4136",
       "bytes": 1635
     },
     {
       "path": "hero.jpg",
-      "sha256": "ab77fb216e715cdeb44313054de3e2d5ac039755f8c82e21f61a2777011ef623",
-      "bytes": 52728,
+      "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b",
+      "bytes": 54138,
       "width": 1200,
       "height": 1500,
       "bit_depth": 8
     },
     {
-      "path": "LICENSE.txt",
-      "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a",
-      "bytes": 1064
+      "path": "houdini-ecosystem-assets-2026-10-20.zip",
+      "sha256": "89e3461e9b9618dd72b5b52bc874464b65235a54230d2b68d9bd6fb22d61e04b",
+      "bytes": 9229359
     },
     {
       "path": "lighting-study.jpg",
-      "sha256": "4b37fca00dbeaa4d222646cc333eb4fe851c4649859e793a66f4e9b4c9e90e43",
-      "bytes": 54284,
+      "sha256": "879615d15da1c2e6f34bdf80c31027df2aa49c3c56a39cbf83bc03401ebb6eee",
+      "bytes": 62108,
       "width": 1200,
       "height": 1500,
       "bit_depth": 8
@@ -49,11 +279,26 @@
     },
     {
       "path": "preview.jpg",
-      "sha256": "e396bf7044a8feada7ee59ce76e80c6719d37b34847599e9f55657d8db0fb6d8",
-      "bytes": 45736,
+      "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c",
+      "bytes": 43862,
       "width": 960,
       "height": 1200,
       "bit_depth": 8
+    },
+    {
+      "path": "production-intermediates/ceramic.obj",
+      "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9",
+      "bytes": 35869290
+    },
+    {
+      "path": "production-intermediates/lighting-denoised.exr",
+      "sha256": "2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e",
+      "bytes": 19814176
+    },
+    {
+      "path": "production-intermediates/lighting-native.exr",
+      "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac",
+      "bytes": 44042064
     },
     {
       "path": "profile.json",
@@ -64,11 +309,6 @@
       "path": "prompt.md",
       "sha256": "329d100c4bccf7bef00195f0d5b00b94f55d65fbac3497a65372738fe83e610a",
       "bytes": 1820
-    },
-    {
-      "path": "README.md",
-      "sha256": "426bca242dce77cbc4d70bcbb10e905387913d70cafd8932476a87f34d98670c",
-      "bytes": 7904
     },
     {
       "path": "recipe.json",
@@ -96,9 +336,9 @@
       "bytes": 9581
     },
     {
-      "path": "downloads.json",
-      "bytes": 2345,
-      "sha256": "2fbf62b4438e1fcf6aa093c2c56be301e5d413675be96a3d07420b376d6e8668"
+      "path": "ecosystem-evidence/independent-review.json",
+      "bytes": 2017,
+      "sha256": "bb91616125412990e4c2eaf987fc28466976a6cf0af993e023f71ce2977f3947"
     }
   ]
 }

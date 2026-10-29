@@ -1,0 +1,282 @@
+{
+  "schema": "paraview-public-documentation-continuity-v1",
+  "source_identity": {
+    "repository": "https://github.com/dcc-mcp/dcc-mcp-paraview",
+    "pull_request": "https://github.com/dcc-mcp/dcc-mcp-paraview/pull/4",
+    "pr_head": "7380637bb06f75d997379673a63f6eede6714686",
+    "merge_and_current_main_at_fetch": "4c4939b1a6ee6785d86f74461ea97ff2a34815a9",
+    "current_tree": "75f8aa79611f97bdbee4c6337f713dbb7e6c7049",
+    "prior_native_source_commit": "9b9de65d64f77356eaad4709535c79c49a852eb4",
+    "prior_native_source_tree": "48e2e134ab458cafda7ec1ebfed2277bce2fba25"
+  },
+  "comparison": "Every tracked file compared by path, mode, blob, SHA256 and byte count; exactly one documentation file differs.",
+  "tracked_files_each_tree": 85,
+  "unchanged_files": 84,
+  "only_changed_file": {
+    "filename": "docs/presentation-controls-qualification.md",
+    "before": {
+      "mode": "100644",
+      "git_blob": "0441a400a6438883980ffe5d135c221137fbcf91",
+      "sha256": "0d09df442c359cbe76093bf0cc4bab533af458ff6fe8d637192a8eb9b9b2a101",
+      "bytes": 5289
+    },
+    "after": {
+      "mode": "100644",
+      "git_blob": "c4bbd5200c500511dd509edb469000aa4ba70b1e",
+      "sha256": "7087a7753397b47687f51b8d2f5d4b979902679d348e24064309da6954d05bcc",
+      "bytes": 5294
+    },
+    "change": "One line replaces a publisher-specific label with generic publisher wording; no code or qualification claims change."
+  },
+  "all_24_package_files_identical": true,
+  "runtime_schema_tests_runners_configuration_and_readme_identical": true,
+  "current_package_sha256": {
+    "__init__.py": "cb6a9cbc87c6785d940a6af708cd2696105754332fbf9f12c818d252c9925724",
+    "bridge.py": "48aaf72e624f365f4c929b22d7797be440b1db160225d768e194b067e445b94d",
+    "cli.py": "0a96a5dda8ef304bb3d500656e7686098faf91abada0ff570c48e6f9bdf26826",
+    "compatibility.py": "fd435853b0e7472d40508f9efc97431469e3214e83e0b5085dd4809c5bf2ce72",
+    "contracts.py": "569c9a15c46eb14eea94c88056cd2ecaa3159447dc12ee18b6d600e94b000aa1",
+    "host_driver.py": "7bd5b1ee4fe29e8699651a0a92ad88b86527ce550d5ec16ef0772cf610149259",
+    "server.py": "9a8afebddfecb60dbdef3d1aa93e2929bdaed329b619ab9d30184e4902868868",
+    "skills/paraview-pipeline/SKILL.md": "ee8db610306f633468df2d9e2c92711377dc286815ab0dc2d82b42f11204a8fb",
+    "skills/paraview-pipeline/tools.yaml": "5a245035142e5bcfca5ff8bba6d3664181cad66b5dfae9144d2aa2197afff3d2",
+    "skills/paraview-pipeline/agents/openai.yaml": "f1bedb0c7f92dfb40ed0b4923403edcc5a8f7341dbd4d26a809aa098c84ea8a0",
+    "skills/paraview-pipeline/scripts/capture_current_view.py": "d3d316bca03e16720cc1eb6a55d964fcfc455e3d91d40e075fffe1325ceebb02",
+    "skills/paraview-pipeline/scripts/clip_plane.py": "8d86768eb31ea6125a613c04cedfefdbbb0d81d4d1fe24fb31edbc32872dc23a",
+    "skills/paraview-pipeline/scripts/contour.py": "2a5228c31eec057f0601852448c1b4eee7866fe619cb26f4e97ca8a804e793b8",
+    "skills/paraview-pipeline/scripts/create_sphere.py": "11bd6d891c32478e050971c9a99f8aa9422d8852496bf0a06462f62e265f2a45",
+    "skills/paraview-pipeline/scripts/edit_sphere.py": "3c7f210a558e1d7e2f068ab10da7bee3d2220470d42b70aac89b1bdde05fb560",
+    "skills/paraview-pipeline/scripts/export_dataset.py": "0112519f8ae97c521928d62ac03f99e81eaddedb24db9b39c68292f280d325ad",
+    "skills/paraview-pipeline/scripts/get_adapter_info.py": "909850233e0426fed1f58cac99b56ce7d9660978a06c12fda89cc343f56c6697",
+    "skills/paraview-pipeline/scripts/inspect_pipeline.py": "8405e7590d1396916fcadd3b409f1415abfe2ee7f9d37dfc38794625b90fdede",
+    "skills/paraview-pipeline/scripts/inspect_presentation.py": "7743c38fd88c52675a83957bbf3fb8c56399760fa41b703f6048da0a61e54445",
+    "skills/paraview-pipeline/scripts/open_dataset.py": "0358d9cd1ca02bc1bc1029c6481cc67825674e3901d2208ecce7ed22cebac0f3",
+    "skills/paraview-pipeline/scripts/render_preview.py": "cf292e035be2a43899cb1db72b270514123f767a3ce280565118a875eb522421",
+    "skills/paraview-pipeline/scripts/reopen_state.py": "24523ef523be3d5b50330dd5005886f29db2511d85479500756304787557402b",
+    "skills/paraview-pipeline/scripts/save_state.py": "6a3768f493810a40fe35f355c2dd428ed64eaee31475f8b6cd6f6e4f6b4d370e",
+    "skills/paraview-pipeline/scripts/slice_plane.py": "064fc24eb44af2bbafa96c51f94b7c61a14982ec93c15edc654a456dc873f096"
+  },
+  "wheel_comparison": {
+    "current_sha256": "167b1c73796746853c348a03e4918a96eed4a24b7328587217bad0a45b516077",
+    "native_run_wheel_sha256": "65471d7e0c34cb5c3da21127e323becf6a585b9f4f6be4777927dfb0cb89db90",
+    "bytes_each": 41124,
+    "entry_count": 29,
+    "all_uncompressed_entries_identical": true,
+    "all_compressed_sizes_crc_and_other_entry_metadata_identical": true,
+    "changed_entry_metadata_only": [
+      "ZIP date_time"
+    ],
+    "native_wheel_zip_timestamp": [
+      2026,
+      10,
+      4,
+      4,
+      46,
+      38
+    ],
+    "current_wheel_zip_timestamp": [
+      2026,
+      10,
+      4,
+      5,
+      52,
+      52
+    ],
+    "SOURCE_DATE_EPOCH": 1791093173,
+    "zip_timestamp_precision_seconds": 2,
+    "two_current_epoch_builds_identical": true,
+    "current_source_built_with_prior_epoch_1791089198_reproduces_native_wheel_exactly": true,
+    "entries": [
+      {
+        "filename": "dcc_mcp_paraview/__init__.py",
+        "bytes": 274,
+        "sha256": "cb6a9cbc87c6785d940a6af708cd2696105754332fbf9f12c818d252c9925724",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/bridge.py",
+        "bytes": 14757,
+        "sha256": "48aaf72e624f365f4c929b22d7797be440b1db160225d768e194b067e445b94d",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/cli.py",
+        "bytes": 335,
+        "sha256": "0a96a5dda8ef304bb3d500656e7686098faf91abada0ff570c48e6f9bdf26826",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/compatibility.py",
+        "bytes": 815,
+        "sha256": "fd435853b0e7472d40508f9efc97431469e3214e83e0b5085dd4809c5bf2ce72",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/contracts.py",
+        "bytes": 9346,
+        "sha256": "569c9a15c46eb14eea94c88056cd2ecaa3159447dc12ee18b6d600e94b000aa1",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/host_driver.py",
+        "bytes": 54951,
+        "sha256": "7bd5b1ee4fe29e8699651a0a92ad88b86527ce550d5ec16ef0772cf610149259",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/server.py",
+        "bytes": 3996,
+        "sha256": "9a8afebddfecb60dbdef3d1aa93e2929bdaed329b619ab9d30184e4902868868",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/SKILL.md",
+        "bytes": 8006,
+        "sha256": "ee8db610306f633468df2d9e2c92711377dc286815ab0dc2d82b42f11204a8fb",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/tools.yaml",
+        "bytes": 34952,
+        "sha256": "5a245035142e5bcfca5ff8bba6d3664181cad66b5dfae9144d2aa2197afff3d2",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/agents/openai.yaml",
+        "bytes": 321,
+        "sha256": "f1bedb0c7f92dfb40ed0b4923403edcc5a8f7341dbd4d26a809aa098c84ea8a0",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/capture_current_view.py",
+        "bytes": 210,
+        "sha256": "d3d316bca03e16720cc1eb6a55d964fcfc455e3d91d40e075fffe1325ceebb02",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/clip_plane.py",
+        "bytes": 200,
+        "sha256": "8d86768eb31ea6125a613c04cedfefdbbb0d81d4d1fe24fb31edbc32872dc23a",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/contour.py",
+        "bytes": 197,
+        "sha256": "2a5228c31eec057f0601852448c1b4eee7866fe619cb26f4e97ca8a804e793b8",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/create_sphere.py",
+        "bytes": 203,
+        "sha256": "11bd6d891c32478e050971c9a99f8aa9422d8852496bf0a06462f62e265f2a45",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/edit_sphere.py",
+        "bytes": 201,
+        "sha256": "3c7f210a558e1d7e2f068ab10da7bee3d2220470d42b70aac89b1bdde05fb560",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/export_dataset.py",
+        "bytes": 204,
+        "sha256": "0112519f8ae97c521928d62ac03f99e81eaddedb24db9b39c68292f280d325ad",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/get_adapter_info.py",
+        "bytes": 732,
+        "sha256": "909850233e0426fed1f58cac99b56ce7d9660978a06c12fda89cc343f56c6697",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/inspect_pipeline.py",
+        "bytes": 206,
+        "sha256": "8405e7590d1396916fcadd3b409f1415abfe2ee7f9d37dfc38794625b90fdede",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/inspect_presentation.py",
+        "bytes": 210,
+        "sha256": "7743c38fd88c52675a83957bbf3fb8c56399760fa41b703f6048da0a61e54445",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/open_dataset.py",
+        "bytes": 202,
+        "sha256": "0358d9cd1ca02bc1bc1029c6481cc67825674e3901d2208ecce7ed22cebac0f3",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/render_preview.py",
+        "bytes": 204,
+        "sha256": "cf292e035be2a43899cb1db72b270514123f767a3ce280565118a875eb522421",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/reopen_state.py",
+        "bytes": 202,
+        "sha256": "24523ef523be3d5b50330dd5005886f29db2511d85479500756304787557402b",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/save_state.py",
+        "bytes": 200,
+        "sha256": "6a3768f493810a40fe35f355c2dd428ed64eaee31475f8b6cd6f6e4f6b4d370e",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview/skills/paraview-pipeline/scripts/slice_plane.py",
+        "bytes": 201,
+        "sha256": "064fc24eb44af2bbafa96c51f94b7c61a14982ec93c15edc654a456dc873f096",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview-0.1.0.dist-info/METADATA",
+        "bytes": 7016,
+        "sha256": "98bd7c69ab32dd18eede02991bd6fe1adeb6f7e09fe27d6071417baa738b4dd5",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview-0.1.0.dist-info/WHEEL",
+        "bytes": 87,
+        "sha256": "5b77e4a649bbfb07fdbc123967eeecd1e5a478cfaca6eefc23c35e6fdf037848",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview-0.1.0.dist-info/entry_points.txt",
+        "bytes": 129,
+        "sha256": "5f6cff5204c02e6864ddbf0272475d9708528ca1f165b39afb1762ef26614001",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview-0.1.0.dist-info/licenses/LICENSE",
+        "bytes": 1064,
+        "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a",
+        "unchanged_from_native_wheel": true
+      },
+      {
+        "filename": "dcc_mcp_paraview-0.1.0.dist-info/RECORD",
+        "bytes": 3083,
+        "sha256": "30d1b712f86d9ecd82eb79605e78ef920b9ba8ee301d940ead2a4d24fdb3fd75",
+        "unchanged_from_native_wheel": true
+      }
+    ]
+  },
+  "native_proof": {
+    "filename": "PUBLIC_NATIVE_PROOF.json",
+    "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526",
+    "preserved_verbatim": true,
+    "trace_records": 210,
+    "adapter_operations": 52,
+    "source_and_wheel_identity_not_rewritten": true,
+    "new_native_execution_performed": false
+  },
+  "recipe": {
+    "filename": "reproduce_paraview.py",
+    "sha256": "293db4cc47a4e0455cdde2a42dc1e59492079cf30c5493c358c6e1982b3926ef",
+    "bindings_sha256": "9576cb56b93d9399493239b65f9fde59f6ee61f56ca068b609d32965dc459b7b",
+    "change_from_executed_recipe": "Only EXPECTED_COMMIT, EXPECTED_TREE and WHEEL_SHA constants changed; AST otherwise identical. All geometry, pixel, state, relocated-input and cleanup checks retained."
+  },
+  "scope": "File-only source and wheel continuity. Does not assert a new native run or relabel the preserved historical trace."
+}

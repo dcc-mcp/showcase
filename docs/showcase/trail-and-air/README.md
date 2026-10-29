@@ -30,7 +30,7 @@
 
 17 个原生导出全部与原始合成PCM逐样本一致：准确保持mono/stereo、帧数和循环边界。最终加固后再次生成、渲染、重开，全部通过；64项制作技能测试通过。适配器146项host-free测试和精确head的CI通过，另有真实宿主验证。
 
-原生工程已调整到相对 `Audio/` 路径，并再次在真实REAPER中重开保存，17个依赖均可读。交付WAV仅去除BWF/encoder元数据，PCM不变。[信号检查](native-signal-checks.json)和[验证范围](validation.json)明确记录边界。
+保留原真实 REAPER 重开记录。当前交付工程使用相对 `Audio/` 路径，已与原回执的 5 轨、17 项源/位置/长度/增益等进行语义对照；不额外声称这个交付版本又经过一次原生重开。交付WAV仅去除BWF/encoder元数据，PCM不变。[信号检查](native-signal-checks.json)和[验证范围](validation.json)明确记录边界。
 
 ## 许可与边界
 
@@ -41,3 +41,11 @@
 ## Related native MIDI film scores
 
 The same real REAPER/DCC-MCP pipeline now produces individually timed music for [Crystal Freight](https://dcc-mcp.github.io/showcase/cases/crystal-freight-native-film/), [Brass Relay](https://dcc-mcp.github.io/showcase/cases/brass-relay/) and [Orbit Post Office](https://dcc-mcp.github.io/showcase/cases/orbit-post-office/). Each retains the original silent film, adds a separate scored version and offers an editable MIDI/ReaSynth project with source audio and scoped licenses.
+
+## 2026-10-20 展示与试听更新
+
+原 17 个原创声源及三个音频下载 ZIP 保持不变。Source ZIP 仅修正 Audio/manifest.json 的 tracks 别名，使其与交付 assets 的 SHA/格式信息一致；原 BWF SHA 单独保留为 native_file_sha256，其余成员字节不变。新增的 [hero.jpg](hero.jpg) 是正式 Blender MCP 内根据真实 PCM 创建的 mesh/FONT 信息图，经保存、清空、重开与 Cycles 原生渲染；只展示三个代表波形，每组独立归一化。原始 PNG 保留为生产中间文件，页面 JPEG 经正式 MCP 保色编码；旧 JPEG 留在版本历史。
+
+当前 MP3 来自正式 MCP 内的 17 源 VSE 编辑、受管隔离原生 WAV 导出，以及独立官方宿主的 aud 原生转码。原生 WAV 的重复末块仅在长度与原始 PCM 字节精确匹配时显式去重，原文件保留，没有任意剪尾或改变17源。无损母版1372800帧/48k/stereo，参考NRMSE约1.18e-6；MP3完整解码、内容相关性、各段与非零首256瞬态检查通过。没有主观听审。
+
+[生态生产记录](ecosystem-production.json) 区分原始调用、当前测量、明确失败、候选工具版本与交付封装。源码或文档被放入ZIP不意味着重新执行；ZIP逐成员验证不能替代原始资产制作证据。

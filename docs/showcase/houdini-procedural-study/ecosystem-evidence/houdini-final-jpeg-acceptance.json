@@ -1,0 +1,24 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "85537e0a53c742f273a77fbffd293df79a6e7c7c276ea6508c1bea110a2d6594",
+      "record": {
+        "full_decode": true,
+        "files": [
+          {
+            "source_sha256": "50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5",
+            "source_unchanged": true,
+            "output_sha256": "879615d15da1c2e6f34bdf80c31027df2aa49c3c56a39cbf83bc03401ebb6eee",
+            "bytes": 62108,
+            "mean_abs_rgb_error": 0.6344685185185185,
+            "threshold": 6,
+            "passed": true
+          }
+        ],
+        "passed": true,
+        "scope": "One new cross-DCC display RGB encoding; source alpha discarded, no color grading, no new geometry rendering"
+      }
+    }
+  ]
+}

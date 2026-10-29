@@ -1,0 +1,184 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "90656ac686a1d637ecd12b3459055ae2a2ab209c25b79cec332743f1092ed05d",
+      "record": {
+        "backend": {
+          "binary": "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/blender",
+          "id": "blender-oidn",
+          "model_hashes": {},
+          "runtime": {
+            "dynamic_loader_environment_sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+            "linked_libraries": {
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libIex.so.32.3.3.11": "ac2a9940114453e1f57eb39cec1b9d4717d54e7809195478837dde72ab94e36e",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libIlmThread.so.32.3.3.11": "dab6ecb69b6dcb8773c1cb17c163cbcead4ed8bd33fc0473af2b90d10c58e7b2",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libImath.so.30.0.1": "ccb3848a814a59ff687b90b10dc75d59ac9eb3feec484de69e3631119acc6b1a",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libMaterialXCore.so.1.39.2": "34ba72373f2f57f3c54ce66564987b26707b2a7233ee81b2bdef6d8b64ebc4ca",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libMaterialXFormat.so.1.39.2": "3db122deb3c33106e26496a1b18d7c790df370cbca8020d30c49e4914a7882da",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libMaterialXGenGlsl.so.1.39.2": "9682a421182d69817fe6076fa96d924befd51b7bfaa8b71da3dae1db379ccdab",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libMaterialXGenMsl.so.1.39.2": "25152e082271bd601945047522857e8d2b312dfb4afb8cb16c3573ad28a6b7c1",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libMaterialXGenShader.so.1.39.2": "17c8a115e087bcf3a59c437c8307f0c7c837014b3974737f9227d668fa3b5166",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libMaterialXRender.so.1.39.2": "a7f9c9a5a5667e1b42592142c395f3b01b33cff71b1e24a268b19989d006520e",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenColorIO.so.2.4.1": "4ff8a4d25bb4bdacb53314ef9a7107e233d0c32905d60046a50909be2d013696",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenEXR.so.32.3.3.11": "d16cb308c85f7648b4f94ddf1dab17064015dbbf985a5139bf2fadbd5fe6b524",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenEXRCore.so.32.3.3.11": "7b8b56b4038fd278b909d6189a24694b7e4378b5b19b1ec64037fa1b7984ba66",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenImageDenoise.so.2.3.3": "9a220453d6a7ea32a036559e6579768a312653c9da12b819282f91bf8b2acc11",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenImageDenoise_core.so.2.3.3": "5ee271c174239386fa68fcad392a0f3e054aefeb9bc36741d409553b06fc09a3",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenImageDenoise_device_cpu.so.2.3.3": "5aeb212937a174a5990242556716db737462a15846cf99f4e77c825e7e48d3fb",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenImageIO.so.3.0.19": "598a1911824516af18802b2266384f1af59fb13df1cc9c05fc1ae481652c6213",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libOpenImageIO_Util.so.3.0.19": "5f5e734e1e76ac68a4a2a6899bbb66bd616ba47853b1358d06dd6dbc1e796f09",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libblender_cpu_check.so": "d90fd197f32ae0db0ae44e96981d9021c637a4aa9cd8725589da2a3d399c8d3b",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libcycles_kernel_oneapi_aot.so": "d84f83f88470e5df4bdb9351538029cfac7685f1234092df5f7e65b44ad91def",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libembree4.so.4": "f0c17e85fe9ce7a8a063bb2763cacb6fca3588340cb749c4522ccbe019017293",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libopenvdb.so.12.0.0": "511f7faca99764252de6a6d14bdf753272485442df8d6fcf942529e05ae2282b",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libosdCPU.so.3.6.0": "25007eeb3aaa2297b44480410510d4abe9c82cc7e1dab09f8a0650fb13ab2ba5",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libosdGPU.so.3.6.0": "22f4e5cb3c15c4e51942266807f52911de2036ad3813bfb311aaa9caecff0681",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/liboslcomp.so.1.14.4": "294b74f3e19a2bac60d51d4f9bf5bb0a83ee18d89c4f572e776aa65474548ee6",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/liboslexec.so.1.14.4": "6c7faa03f21966c8ca7d29f7a3e383ff7920bee259758f457a1cec9e04a65e7f",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/liboslnoise.so.1.14.4": "f6aa69bce5267e755846bf9680b814478cbb7b36b3642cac11c5f3fb0a0a7a13",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/liboslquery.so.1.14.4": "09d5ef996d34ebd1baf8f120e4445b5c367e148d9170bb05298daaeb5590d9f7",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libsycl.so.8.0.0-0": "9eb4a27ad48a071dab96709adb2482e2cd020b1ad8a0a2df784a740483ee2a0a",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libtbb.so.12.13": "961d3a027b7cd4b74aea59380bb83c601f0cda27b525c741ba2f50defd0c9c6f",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libur_loader.so.0.11.8": "d495da5c6561f6536614d95f0c90e03c5af24ce0238d39609a3e3890a99be11c",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libusd_ms.so": "158a1b990d9b5324c10479a3c027c228d71ede87a82531269a7ed41da9bc1b12",
+              "OFFICIAL_BLENDER_RUNTIME/blender-4.5.13-linux-x64/lib/libvulkan.so.1.3.296": "a8aeecb30d1c544caa8ad46ec3a3c27695f9ceb1bf8fbb470445742c90d56298",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/ld-linux-x86-64.so.2": "c8438e4fde1934e61c88311633f00949ff645d5c04cdb8671fa3d78164d2f307",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libGL.so.1.7.0": "b01915dfedf03be4710d3184bc62a3364880fc950043742fd5e07659b409ef1e",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libGLX.so.0.0.0": "6b9525981881bb388b8726c8862d2ac5c2484e81328738d924415692d873018c",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libGLdispatch.so.0.0.0": "890baeef03fd73560a2fde85ebe9fb49ca3e90686923c5ee22101b28ec8ee7aa",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libICE.so.6.3.0": "551550ecec0044de5548693d3feaa53a10c76b95e1bd1ae21476e3481e00da59",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libSM.so.6.0.1": "8bacaea082b2ce4284bff87ab3c2aa9852d97b38e088206394665788d9e7f1b2",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libX11.so.6.4.0": "b03e563b316b8b53c7988f0ee91d6656cc425538e00947a8b14482d179e80099",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libXau.so.6.0.0": "4275ec5b14bec21770c44447b3a52977e211c7ba08745008f3a1783878e091bb",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libXdmcp.so.6.0.0": "761409b24c818719f8c8a2a64a61c8ac6a3067f3d8882485dca64a98d7500040",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libXext.so.6.4.0": "74cef58f0855cbbe23fce87566249f717e5c8ebeceee09efee393616a9b17697",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libXfixes.so.3.1.0": "85e29f4739a349d94d61db7a696f764d21dfe5c8db6ba7444af21416a0339187",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libXi.so.6.1.0": "8ca60a4e6a90bba494e601e03e792b2d440cced9985deca64431abbd78613adb",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libXrender.so.1.3.0": "39fed75f787ac251cba86e30ccd979e3df1f84dd73c63a75eeb86a18fd413e64",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libc.so.6": "9792e3cbb541c8f44c7acf5f14f4022ea62998ecc787d326bed4d8b6547dfd92",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libdl.so.2": "295fa521a03cd2faa99974f378c9e23dd622021ec7d32bcad4f8ea61aec8a872",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libgcc_s.so.1": "30c61ab012a4241bed033725a09b61f5fdd3bb7df95ee852d0b096520524c7af",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libm.so.6": "6d567d53e895273ca14a1f9dc164fc6c8d39aed2f60aa46a733c2784228915f3",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libpthread.so.0": "85e21f7dba0394411d00959176fd18b470e575b0b05f1f4f41e5636802ce0500",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/librt.so.1": "7b7b84d1aedda0e0b2bdfc68844362782132180b8f02be1300e21e77572e514b",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libstdc++.so.6.0.33": "972bb2a18b71140dab0240f8a1f68ab3fb1d56bcd4c4f824a91b70888faf5a00",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libutil.so.1": "e3981d10efd152a53f083e38f5f9ddde7a049c85d0ab388a5eec91b52fc98a11",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libuuid.so.1.3.0": "632fd43a9d8d6f3496833b7e62e7840f397163373dddf8b8eb0b2b7f36593117",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libxcb.so.1.1.0": "a1cde2cec9b7b8b38e4cca450c55c63651efb80a2458d76964b56b763043f533",
+              "SYSTEM_LIB_ROOT/x86_64-linux-gnu/libxkbcommon.so.0.0.0": "9f26c41577e0e036cbf42352e85b13db6bce953fb730555b4fc7de5362dc93bb"
+            },
+            "version": "Blender 4.5.13 LTS\n\tbuild date: 2026-08-25\n\tbuild time: 01:31:19"
+          },
+          "sha256": "e3ce4e960a2fd3beb1f9d2299e38b3804475ccd395193013aec239a4b75bfbfe"
+        },
+        "cache_hit": false,
+        "cache_key": "bf0a665dfe99d72d578e4ef4f11c247d4a2dc71302489567a5de461f070ca350",
+        "cache_scope": "binary, linked runtime, model, helper and effective request identities; independently loaded plugins are unsupported",
+        "input": "EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_0001.exr",
+        "job_id": "1792516889143-5",
+        "output": "EVIDENCE_ROOT/houdini-blender-final/enhanced/denoised.exr",
+        "output_media": {
+          "audio_codecs": [],
+          "audio_extradata_sha256": [],
+          "color_transfer": "linear",
+          "duration": null,
+          "format_name": "exr_pipe",
+          "frame_rate": "25/1",
+          "frames": 1,
+          "height": 1500,
+          "pixel_format": "gbrapf32le",
+          "probe_level": "decoded_frame_count",
+          "rotation_degrees": 0.0,
+          "sample_aspect_ratio": "1:1",
+          "unsupported_streams": 0,
+          "video_streams": 1,
+          "width": 1200
+        },
+        "output_sha256": "2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e",
+        "provenance": {
+          "factual_detail_restoration_guaranteed": false,
+          "kind": "enhanced_derivative"
+        },
+        "request": {
+          "alpha": "opaque",
+          "backend": "blender-oidn",
+          "colorspace": "scene-linear",
+          "content": "render",
+          "input": "EVIDENCE_ROOT/houdini-blender-final/artifacts/frames/frame_0001.exr",
+          "limits": {
+            "max_input_mb": 128,
+            "max_output_mb": 64,
+            "max_pixels": 1800000,
+            "memory_mb": 2048,
+            "min_free_disk_mb": 1000,
+            "threads": 2,
+            "timeout_secs": 180
+          },
+          "media": "image",
+          "model_dir": null,
+          "operation": "denoise",
+          "output": "EVIDENCE_ROOT/houdini-blender-final/enhanced/denoised.exr",
+          "passes": {
+            "albedo": "Denoising Albedo",
+            "beauty": "Combined",
+            "layer": "ViewLayer",
+            "normal": "Denoising Normal"
+          },
+          "scale": null,
+          "schema_version": 1
+        },
+        "resource_receipt": {
+          "elapsed_ms": 28087,
+          "exit_code": 0,
+          "memory_enforcement": "sampled_process_group_watchdog_not_hard_limit",
+          "sampled_peak_rss_kib": 1728712
+        },
+        "schema_version": 1,
+        "source_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+        "source_unchanged": true,
+        "status": "completed",
+        "success": true,
+        "verification": {
+          "dimensions": true,
+          "pixel_decode": true,
+          "quality_reference": "not_run",
+          "video": null,
+          "visual_review": "not_run"
+        },
+        "warnings": [
+          "Enhanced output is a derivative; source is retained unchanged.",
+          "Memory policy: sampled_process_group_watchdog_not_hard_limit.",
+          "Output EXR contains denoised RGBA beauty only. All original passes remain in the immutable source EXR."
+        ]
+      }
+    },
+    {
+      "original_receipt_sha256": "41911b16092c52f63d0da58c39fdbf9f0c2aaf6c6f05ea67c68dc8ee377fdeec",
+      "record": {
+        "exit_code": 0,
+        "wall_seconds": 29.92256301100133,
+        "initial_budget": {
+          "memory_available_bytes": 3304898560,
+          "disk_free_bytes": 1251532800
+        },
+        "raw_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+        "source_unchanged": true,
+        "cli_sha256": "def1c715610c9936214b32fbb278a280a427f0e361e1e542022a61950a330e1f",
+        "independent_cli_and_descendants_observed_peak_rss_kib": 1730432,
+        "rss_observation_count": 296,
+        "rss_scope": "100ms process-tree samples including CLI; not exact peak, not identical to backend group watchdog",
+        "route": "official dcc-media-enhance CLI; no new rendering; Houdini/Blender source actual AOV independent denoise"
+      }
+    },
+    {
+      "original_receipt_sha256": "e400d9c88f86372d77672a25153bcf2dca4568b29829821d35d1628e543c1c60",
+      "record": {
+        "supervisor_returncode": 0,
+        "outer_owned_group_gone": true,
+        "forced_supervisor_kill": false,
+        "backend_cleanup_contract": "Pinned CLI normal TERM forwards to its recorded backend group, escalates then waits; abrupt supervisor KILL is not a whole-tree guarantee"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "source_sha256": "ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1",
+  "output_sha256": "c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598",
+  "output_bytes": 93870,
+  "size": [
+    1440,
+    960
+  ],
+  "quality": 82,
+  "source_colorspace": "sRGB",
+  "display_device": "sRGB",
+  "view_transform": "Standard",
+  "route": "Official MCP execute_script_file / native image.save_render JPEG",
+  "geometry_render": false,
+  "script_sha256": "eee02fe4a42429f88432f4efad510521ed97bc716e9ffc28c909237e09b26bcc"
+}

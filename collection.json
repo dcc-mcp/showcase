@@ -827,9 +827,10 @@
     {
       "slug": "houdini-procedural-study",
       "title": "青釉环纹器皿",
-      "subtitle": "Houdini · 51 点剖面到真实 Mantra 成图",
+      "subtitle": "Houdini 程序建模与 Mantra 成图 · Blender 跨 DCC 灯光练习",
       "software": [
-        "Houdini"
+        "Houdini",
+        "Blender"
       ],
       "capabilities": [
         "建模",
@@ -843,7 +844,7 @@
         "alt": "Houdini Mantra 渲染的青釉环纹器皿，具有空心口沿、柔和反射和地面接触阴影"
       },
       "evidence_label": "本轮实际运行 · DCC-MCP 创作",
-      "evidence_scope": "2026-10-01 在独立空场景中实际运行：造型、釉面、灯光、相机、保存、四轮单帧 Mantra 渲染、工程重开及 OBJ 导出/同 Houdini 回导入均通过 typed DCC-MCP。Gateway checkpoint 89/89 successful。公开响应日志明确脱敏；早期请求未单独保存，复用 recipe 不是完整原始请求轨迹。原生 HIP 受私人元数据阻塞，仅本地保留；公开 OBJ、像素一致的公开 PNG、复用输入和证据。 最终 gateway session 93/93 successful。原 PNG 自动 Artist 元数据保留私有；公开 -public PNG 通过已发现的 MCP 自动化工具仅移除该文本 chunk，CRC、IDAT 及 decoded RGBA 哈希均保持一致。资产制作和渲染为专用 typed 工具，PNG 元数据整理明确使用 MCP 自动化 fallback。",
+      "evidence_scope": "2026-10-01 在独立空场景中实际运行：造型、釉面、灯光、相机、保存、四轮单帧 Mantra 渲染、工程重开及 OBJ 导出/同 Houdini 回导入均通过 typed DCC-MCP。Gateway checkpoint 89/89 successful。公开响应日志明确脱敏；早期请求未单独保存，复用 recipe 不是完整原始请求轨迹。原生 HIP 受私人元数据阻塞，仅本地保留；公开 OBJ、像素一致的公开 PNG、复用输入和证据。 最终 gateway session 93/93 successful。原 PNG 自动 Artist 元数据保留私有；公开 -public PNG 通过已发现的 MCP 自动化工具仅移除该文本 chunk，CRC、IDAT 及 decoded RGBA 哈希均保持一致。资产制作和渲染为专用 typed 工具，PNG 元数据整理明确使用 MCP 自动化 fallback。 2026-10-20 新增：原字节一致 OBJ 通过 Blender MCP 导入，验证115,776点/115,200四边形及变换后坐标；新建灯光练习，1200×1500 Cycles64真实AOV，经官方 dcc-media-enhance 独立OIDN和原生AgX显示转换。第三图不是原Mantra中间状态重放。三张网页JPEG均经正式MCP图像编码。",
       "summary": "51 点剖面定义环纹、肩部、口沿、内壁与底厚。144 段车削和两级细分形成 115,200 面的可编辑器皿；青釉、三块软箱与暖灰地面完成真实产品式主图。",
       "goal": "通过 DCC-MCP 制作一个有真实厚度和开口的程序化陶瓷器皿，保留剖面控制链，验证地面接触、釉面、真实渲染和保存重开，并公开可复用输入与几何。",
       "prompt": {
@@ -871,6 +872,10 @@
         {
           "label": "工程范围",
           "value": "本地 HIP 重开通过；公开 OBJ + 像素一致 PNG + recipe"
+        },
+        {
+          "label": "新增跨DCC灯光",
+          "value": "Blender4.5.13 / dcc-mcp-blender0.2.22 / dcc-media-enhance0.2.0；1200×1500 Cycles64，独立OIDN，AgX Medium High Contrast"
         }
       ],
       "tools": [
@@ -897,6 +902,10 @@
         {
           "name": "run_python_file（PNG 元数据整理）",
           "description": "专用 typed 净化能力缺口经 scoped search 记录；通过正式 MCP 自动化执行公开参数化 PNG cleaner，仅移除 Artist 文本，保留所有 IDAT 与 RGBA 像素。"
+        },
+        {
+          "name": "Blender MCP + official dcc-media-enhance CLI",
+          "description": "真实OBJ导入、typed场景/保存/重开/渲染作业与受审属性脚本，真实AOV独立降噪及原生显示/JPEG编码；不修改原Mantra图。"
         }
       ],
       "steps": [
@@ -917,11 +926,11 @@
           }
         },
         {
-          "title": "调整灯光与留白",
-          "description": "降低主光和轮廓光，提高粗糙度，并改为 90 mm 镜头；中间图的黑色天空说明后续背板需求。",
+          "title": "新增跨 DCC 灯光练习",
+          "description": "2026-10-20 将同一真实 Houdini OBJ 通过 Blender MCP 导入并核几何，重新建立灯光、釉面和摄影棚；Cycles64真实AOV经官方独立OIDN与AgX显示转换。不是旧Mantra中间图的重放。",
           "image": {
             "src": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
-            "alt": "调整曝光和构图后的实际中间渲染，顶部仍有黑色天空"
+            "alt": "同一Houdini器皿在Blender中的新增灯光练习，完整留边与青釉环纹"
           }
         },
         {
@@ -947,6 +956,11 @@
           "src": "docs/showcase/houdini-procedural-study/preview.jpg",
           "alt": "本轮首次 Mantra 预览",
           "caption": "真实 960×1200 中间图；工具分辨率 applied 字段与实际尺寸存在已记录差异"
+        },
+        {
+          "src": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
+          "alt": "同一Houdini器皿在Blender中的新增灯光练习，完整留边与青釉环纹",
+          "caption": "新增 Blender 灯光练习 · 同一 Houdini OBJ · Cycles64 / 独立OIDN / AgX Medium High Contrast"
         }
       ],
       "checks": [
@@ -1008,7 +1022,7 @@
       ],
       "limitations": [
         "HIP 因私人原生元数据暂不公开，完整净化能力仍待补；可编辑 typed 输入与 CLI 重放入口已提供。",
-        "OBJ 不保留程序化 SOP 链、完整着色器与灯光；本轮未在其他 DCC 回导入 OBJ 验证。",
+        "OBJ不保留SOP链、原着色器与原灯光；2026-10-20 Blender导入已核点数、四边形计数、坐标和包围盒，但不声称原着色器保真或跨渲染器benchmark。",
         "本轮未验证 GUI 交互、其他 Houdini 版本、Karma、动画或封闭流形。",
         "本轮生产未使用后续分辨率修复 PR；最终真实像素尺寸通过 typed 相机设置与文件解析保证。",
         "早期仅保存响应；recipe 按实际输入整理，并在第二个空宿主通过无渲染重放；未重复完整带渲染流程。",
@@ -1016,8 +1030,8 @@
       ],
       "resources": [
         {
-          "label": "资源 ZIP：实际 OBJ / 像素一致的公开 PNG / 复用输入与证据",
-          "url": "https://github.com/dcc-mcp/showcase/releases/download/2026-10-01-houdini-procedural-study/houdini-procedural-study-assets.zip"
+          "label": "新版资源ZIP：同一OBJ / 三张成图 / AOV与实际证据",
+          "url": "docs/showcase/houdini-procedural-study/houdini-ecosystem-assets-2026-10-20.zip"
         },
         {
           "label": "typed 复用步骤",
@@ -1164,6 +1178,11 @@
           "version": "发布复核归属证据状态更正",
           "date": "2026-10-11",
           "change": "保留原任务自报配置及复核范围作为历史线索；因原始接受配置记录未能核验，将对应模型、推理强度及记录状态更正为未知。保留既有修订、资产和配乐证据，不据结构校验宣称归属已核实。"
+        },
+        {
+          "version": "跨DCC灯光与生态发布修订",
+          "date": "2026-10-20",
+          "change": "保留原Mantra主图和预览及旧Release历史，第三图明确替换为新增Blender灯光练习；真实MCP重编码三张网页图，新版包与当前引用一致。"
         }
       ]
     },
@@ -2738,7 +2757,8 @@
       "subtitle": "ParaView → GIMP · 从数值切片到可编辑科学展板",
       "software": [
         "ParaView",
-        "GIMP"
+        "GIMP",
+        "Blender"
       ],
       "capabilities": [
         "科学可视化",
@@ -2787,6 +2807,10 @@
         {
           "label": "新增视频模型记录",
           "value": "实际模型与推理强度均未知；请求配置为 gpt-6-astra / ultra，但未取得可审计的运行配置回执。仅记录本轮视频，不补写历史模型。"
+        },
+        {
+          "label": "2026-10-20 有界补充制作",
+          "value": "ParaView 5.13.2 / Core 0.20.41；typed ImageData candidate source 9100157，实际 wheel f11071f0 绑定。完整网格新生成与历史字节相同；新低采样图在 hosted Python 3.10 验收。Blender 4.5.13 / adapter 0.2.22 仅抽取观察视频海报，不作科学图渲染。"
         }
       ],
       "tools": [
@@ -2818,11 +2842,11 @@
       "steps": [
         {
           "title": "从同一个解析函数出发",
-          "description": "Python 只生成确定性的输入数据；后续切面、等值线和原生视图全部通过 DCC MCP 完成。公式与示意单位直接保留在展板中。"
+          "description": "2026-10-20 通过有界 typed ParaView MCP 新生成完整解析场，510,705 点双字段与历史 VTI 字节完全相同；这是新执行，不追认原生成脚本的未知路由。原五图与 GIMP 展板复用已核实真实调用。"
         },
         {
           "title": "保持数值尺度可比较",
-          "description": "三张切面使用同一色域；两条等值线使用同一相机比例。输入网格从粗采样细化，保留实际早期图供比较。"
+          "description": "三张原切面使用同一色域，两条原等值线使用同一相机比例。另附新制作的 41×33×25 低采样纵切对照，不冒称旧粗网格图重放。"
         },
         {
           "title": "把版式保留为原生图层",
@@ -2832,7 +2856,7 @@
       "results": [
         {
           "src": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
-          "poster": "docs/showcase/seismic-lens/seismic-lens-native-poster.png",
+          "poster": "docs/showcase/seismic-lens/native-observation-poster.png",
           "alt": "八秒 GIMP 原生图层演示",
           "caption": "2026-10-12 新增：连续录制真实 GIMP 窗口，通过 typed MCP 依次显示原母版的五组切片与等值线。8.0 秒、1178 × 814、15 fps、120 帧，有意静音。不是重新绘制，也不是地震场动画。"
         },
@@ -2847,9 +2871,9 @@
           "caption": "原生 ParaView 输入图，720×480；与2560×1600 XCF 母版中的导入面板像素一致。网站1600×1000总览经过原生缩放。"
         },
         {
-          "src": "docs/showcase/seismic-lens/earlier-coarse-section-y.png",
-          "alt": "早期粗网格纵向切片",
-          "caption": "实际较早 ParaView 输出，保留原始像素；不是完整展板的同构图比较"
+          "src": "docs/showcase/seismic-lens/new-coarse-section-y.png",
+          "alt": "新制作的低采样纵向切片对照",
+          "caption": "2026-10-20 新 typed ParaView MCP 制作：41×33×25 解析场、SectionY 与 Viridis 色标，720×480。33,825 点双字段完整数值核验；不是历史粗网格 PNG 重放。"
         }
       ],
       "checks": [
@@ -2894,8 +2918,9 @@
         "当前环境未暴露 CameraClippingRange；验收覆盖实际可读属性与图像像素",
         "MCP 重开限于本会话保存的可信状态；没有放开任意外部 PVSM 导入",
         "开发增量与实际测试版本逐项记录，不冒称 PyPI 已发行能力",
-        "静态科学展板另附八秒真实 GIMP 图层演示；不声称重做 ParaView 计算、原始创作全过程或跨机器像素一致。",
-        "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内"
+        "八秒真实 GIMP 图层演示只记录独立验收观察，不是原始创作全过程或新 ParaView 计算；新增 typed 数据/低采样图另行记录，不声称跨机器像素一致。",
+        "预览工具限定已测试的有界 RGB/RGBA 8-bit 格式与受信任本地目录；仅 Linux GIMP 3.0.4 原生验收，Windows 不在本次资格内",
+        "历史输入生成脚本的执行路由未知；新 typed 全网格与历史输入字节一致不构成历史执行证明。新低采样 PVSM 含 hosted 路径，仅保留在资格 artifact，不声称其可直接迁移；下载提供 VTI 与精确 typed 配方。"
       ],
       "resources": [
         {
@@ -2903,8 +2928,8 @@
           "url": "docs/showcase/seismic-lens/README.md"
         },
         {
-          "label": "完整可编辑工程与复现包 · 5.96 MB",
-          "url": "docs/showcase/seismic-lens/editable-source.zip"
+          "label": "可编辑工程、真实证据与新低采样对照 · 6.72 MB",
+          "url": "docs/showcase/seismic-lens/seismic-lens-ecosystem-2026-10-20.zip"
         },
         {
           "label": "ParaView 实际调用节选",
@@ -3064,6 +3089,11 @@
           "version": "新增真实软件视频 2026-10-12",
           "date": "2026-10-12",
           "change": "增加八秒连续 GIMP 图层演示、单独的本轮环境和请求模型记录；原图、完整下载及历史未知模型保持不变。影片权利保留，无新增许可授权。"
+        },
+        {
+          "version": "真实生态输入与低采样对照",
+          "date": "2026-10-20",
+          "change": "补充新 typed 全网格 byte-identical 生产、新 41×33×25 切片与官方 Blender MCP 海报抽帧。原五图、GIMP 工程和连续观察视频不变；历史未核 coarse 保留在不可变历史，不随新包冒认来源。"
         }
       ]
     },
@@ -3429,7 +3459,8 @@
       "title": "Trail & Air · 原创步行音频素材",
       "subtitle": "REAPER · 17 个可复用脚步、环境循环与交互音效",
       "software": [
-        "REAPER"
+        "REAPER",
+        "Blender"
       ],
       "capabilities": [
         "音频",
@@ -3440,10 +3471,10 @@
       ],
       "cover": {
         "src": "docs/showcase/trail-and-air/hero.jpg",
-        "alt": "根据实际导出音频绘制的脚步、环境与音乐波形图；不是软件或游戏截图"
+        "alt": "原生 Blender 制作并渲染的三组代表性实测音频波形；各图独立归一化，不是软件截图"
       },
       "evidence_label": "本轮原生音频验证 · 可在线试听",
-      "evidence_scope": "本轮通过 typed DCC-MCP 生成原创确定性声源，再由实际 REAPER 导入、建立原生音频图谱、逐资源渲染、保存与重开。17 个导出与声源 PCM 逐样本一致。封面为测量波形，在线试听是实际导出的片段组合，不冒充 GUI 截图、游戏场景或现场录音。使用者已确认制作方向并授权公开；没有记录主观听评，不把数值检测当作听觉验收。",
+      "evidence_scope": "17个原创声源保留原真实REAPER/DCC-MCP生成、原生导出与重开证据，下载PCM和格式/帧数逐项复核不变。2026-10-20经官方Blender MCP重做波形展示、VSE试听编辑、隔离WAV导出与原生MP3转码；当前页面只引用新JPEG/MP3。完整解码与逐段数值检测通过，未进行主观听审，不声称游戏内验证。",
       "summary": "两组各六种单声道脚步、20 秒风与叶片环境循环、19.2 秒轻音乐循环，以及三个克制的交互提示。保留无损 WAV、原生项目与可复用合成/导出技能。",
       "goal": "建立可供步行和探索原型使用的原创通用音频素材库，并用真正的 REAPER / Gateway / CLI 验证资源生成、原生导出、循环长度与工程可移植性。",
       "prompt": {
@@ -3467,6 +3498,10 @@
         {
           "label": "音频规格",
           "value": "48 kHz / 24-bit PCM；12 mono 脚步 + 3 mono SFX + 2 stereo loops"
+        },
+        {
+          "label": "展示与试听修复",
+          "value": "Blender4.5.13 · official dcc-mcp-blender0.2.22 + hash-pinned isolated audio candidate; exact versions and failures retained in ecosystem graph"
         }
       ],
       "tools": [
@@ -3498,14 +3533,18 @@
         },
         {
           "title": "保存、重开与脱敏",
-          "description": "保存原生项目，重开后验证全部媒体。将交付项目调整为相对 Audio 路径，再次通过真实宿主重开。"
+          "description": "保留原生项目真实重开记录；交付RPP的相对Audio依赖与5轨17片段的源/位置/长度/增益等逐项对照。交付WAV的元数据整理不改变PCM，ZIP逐成员实字节校验；不新增声称交付版本再次原生重开。"
+        },
+        {
+          "title": "原生制作试听与波形展示",
+          "description": "复用原17源，在官方Blender MCP内建立VSE试听及mesh/FONT波形图；隔离导出保留原始WAV并严格检查重复尾块，原生MP3转码后独立全解码验收。"
         }
       ],
       "results": [
         {
           "src": "docs/showcase/trail-and-air/Trail-and-Air-audition.mp3",
           "alt": "Trail & Air 28.6 秒音频试听",
-          "caption": "点击播放：石面脚步、草地脚步、8秒环境、8秒音乐与三个交互音效。由真实 REAPER 导出组合；试听循环片段有短淡入淡出，下载的无损循环未改变。播放器不会自动播放。"
+          "caption": "点击播放：28.6秒原17源试听。通过官方Blender MCP/VSE编辑及原生音频转码生成；8秒环境与8秒音乐片段含短淡入淡出，下载无损循环未改变。已完整数值核验，未主观听审；不会自动播放。"
         }
       ],
       "checks": [
@@ -3522,7 +3561,7 @@
         {
           "name": "交付与脱敏",
           "result": "pass",
-          "observed": "四个 ZIP 均小于 6 MB，完整性与逐文件哈希通过；原生项目使用相对 Audio 路径，已重开；无私人场景、画面、路径、软件二进制或账号数据。"
+          "observed": "四ZIP共59成员逐字节校验；17 WAV的PCM/规格/帧数对应真实导出，RPP相对依赖与原5轨17片段状态对照；未声称新增交付版原生重开。"
         },
         {
           "name": "适配器修复",
@@ -3530,9 +3569,9 @@
           "observed": "PR #3；146 项 host-free 测试，精确 head 的 CI / Repo contract 通过。"
         },
         {
-          "name": "实际试听",
-          "result": "not_run",
-          "observed": "当前运行环境不支持音频输入，等待使用者听觉验收；没有以无 clipping 替代听觉评审。"
+          "name": "试听技术验收",
+          "result": "pass",
+          "observed": "原生MP3全解码、有限codec-delay内容对应与17段/非零首256检测通过；没有实际听觉入口，主观听审未进行。"
         },
         {
           "name": "发布授权",
@@ -3606,7 +3645,7 @@
         "commit": "867ce6837c916aa7ca89a5cb14deae9869f09d00",
         "title": "实际验证的 REAPER 适配器修复 commit；附加制作技能在本案例源码包"
       },
-      "verified_at": "2026-10-09T15:43:00Z",
+      "verified_at": "2026-10-20T16:16:00Z",
       "model_attribution": [
         {
           "stage_id": "planning",
@@ -3668,6 +3707,11 @@
           "version": "v1 原生音频素材",
           "date": "2026-10-09",
           "change": "完成真实原生导出、循环/样本验证、便携下载与用户授权；提供点击播放的在线试听，游戏内集成结果不在本案例声称范围内。"
+        },
+        {
+          "version": "v2 真实生态展示与试听",
+          "date": "2026-10-20",
+          "change": "保留原17声源与下载内容，替换原生制作的JPEG和MP3；增加实际调用/产物/ZIP成员关联，主观听审仍未进行。"
         }
       ]
     },

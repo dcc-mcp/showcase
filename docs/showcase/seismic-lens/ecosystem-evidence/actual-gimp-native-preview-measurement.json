@@ -1,0 +1,22 @@
+{
+  "status": "succeeded",
+  "request_sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8",
+  "response_sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8",
+  "outputs": [
+    {
+      "path": "docs/showcase/seismic-lens/hero.png",
+      "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e"
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/previews/seismic-lens-1600.png",
+      "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e"
+    }
+  ],
+  "evidence_selectors": {
+    "phase": "corrected-native-preview",
+    "export_trace": 58
+  },
+  "scope": "Actual corrected native preview retained; source candidate and public base are separately recorded, not a new public release claim.",
+  "measurement_kind": "Current byte verification and original actual-call projection binding; not a new native execution",
+  "normalization_boundary": "Original public projections omit private raw payloads. No missing request or response has been reconstructed."
+}

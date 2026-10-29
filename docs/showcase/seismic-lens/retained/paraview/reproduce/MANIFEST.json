@@ -1,0 +1,49 @@
+{
+  "schema": "paraview-reproduction-handoff-manifest-v4",
+  "source_commit": "4c4939b1a6ee6785d86f74461ea97ff2a34815a9",
+  "source_tree": "75f8aa79611f97bdbee4c6337f713dbb7e6c7049",
+  "scope": "Every payload file except this manifest; archive hash delivered separately. Source recipe and receipts only; no wheel, data, images, native states or raw trace included.",
+  "files": [
+    {
+      "filename": "BUILD_AND_RUN.md",
+      "bytes": 4800,
+      "sha256": "54c69602715d573173006c54de935be12e8480974fb70869827cedb7c090770d"
+    },
+    {
+      "filename": "BUILD_RECEIPT.json",
+      "bytes": 2304,
+      "sha256": "4747f686e2ae237edbbf059feb78269026fb13c639052b2e3e9e2647ea4f1b11"
+    },
+    {
+      "filename": "PUBLIC_NATIVE_PROOF.json",
+      "bytes": 11526,
+      "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526"
+    },
+    {
+      "filename": "README.md",
+      "bytes": 2423,
+      "sha256": "c6413957c341a8c474f1b995239c2e1b4db1028d4a0544b8b53c00effb9195b0"
+    },
+    {
+      "filename": "SOURCE_CONTINUITY.json",
+      "bytes": 13194,
+      "sha256": "6ef188935371efbd4e5cb73cd156f672ad701d85102236d0760351fa87c6e22e"
+    },
+    {
+      "filename": "UPSTREAM-ADAPTER-LICENSE.txt",
+      "bytes": 1064,
+      "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a"
+    },
+    {
+      "filename": "paraview-package-bindings.json",
+      "bytes": 3460,
+      "sha256": "9576cb56b93d9399493239b65f9fde59f6ee61f56ca068b609d32965dc459b7b"
+    },
+    {
+      "filename": "reproduce_paraview.py",
+      "bytes": 17095,
+      "sha256": "293db4cc47a4e0455cdde2a42dc1e59492079cf30c5493c358c6e1982b3926ef"
+    }
+  ],
+  "license_scope": "UPSTREAM-ADAPTER-LICENSE.txt is the verbatim upstream adapter software notice only; it grants no new rights over case artwork, data, native states or the newly authored showcase production recipe."
+}

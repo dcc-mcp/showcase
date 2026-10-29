@@ -1,0 +1,38 @@
+{
+  "scope": "Actual retained records with machine path prefixes redacted; original hashes preserved",
+  "records": [
+    {
+      "original_receipt_sha256": "a6d75d6fa00937e8441af146973ea6afd004e80d9821c362f85e2d0bdd3fb5a6",
+      "record": {
+        "jsonrpc": "2.0",
+        "id": 7760,
+        "method": "tools/call",
+        "params": {
+          "name": "blender_scripting__execute_script_file",
+          "arguments": {
+            "filepath": "EVIDENCE_ROOT/trail-native-jpeg-validation/encode_jpeg_in_host.py"
+          }
+        }
+      }
+    },
+    {
+      "original_receipt_sha256": "a719d4af2b414732b9ef7e9d3220ccd379728724861ad8f0b449ef5d278786a3",
+      "record": {
+        "url": "http://REDACTED_LOOPBACK:33883/mcp",
+        "request": {
+          "jsonrpc": "2.0",
+          "id": 7760,
+          "method": "tools/call",
+          "params": {
+            "name": "blender_scripting__execute_script_file",
+            "arguments": {
+              "filepath": "EVIDENCE_ROOT/trail-native-jpeg-validation/encode_jpeg_in_host.py"
+            }
+          }
+        },
+        "status": 200,
+        "body": "{\"jsonrpc\":\"2.0\",\"id\":7760,\"result\":{\"content\":[{\"type\":\"text\",\"text\":\"{\u005c\"success\u005c\":true,\u005c\"message\u005c\":\u005c\"Script executed: EVIDENCE_ROOT/trail-native-jpeg-validation/encode_jpeg_in_host.py\u005c\",\u005c\"error\u005c\":null,\u005c\"prompt\u005c\":\u005c\"Script completed successfully.\u005c\",\u005c\"context\u005c\":{\u005c\"filepath\u005c\":\u005c\"EVIDENCE_ROOT/trail-native-jpeg-validation/encode_jpeg_in_host.py\u005c\",\u005c\"stdout\u005c\":\u005c\"{\u005c\u005c\u005c\"source_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1\u005c\u005c\u005c\", \u005c\u005c\u005c\"output_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598\u005c\u005c\u005c\", \u005c\u005c\u005c\"output_bytes\u005c\u005c\u005c\": 93870, \u005c\u005c\u005c\"size\u005c\u005c\u005c\": [1440, 960], \u005c\u005c\u005c\"quality\u005c\u005c\u005c\": 82, \u005c\u005c\u005c\"source_colorspace\u005c\u005c\u005c\": \u005c\u005c\u005c\"sRGB\u005c\u005c\u005c\", \u005c\u005c\u005c\"display_device\u005c\u005c\u005c\": \u005c\u005c\u005c\"sRGB\u005c\u005c\u005c\", \u005c\u005c\u005c\"view_transform\u005c\u005c\u005c\": \u005c\u005c\u005c\"Standard\u005c\u005c\u005c\", \u005c\u005c\u005c\"route\u005c\u005c\u005c\": \u005c\u005c\u005c\"Official MCP execute_script_file / native image.save_render JPEG\u005c\u005c\u005c\", \u005c\u005c\u005c\"geometry_render\u005c\u005c\u005c\": false, \u005c\u005c\u005c\"script_sha256\u005c\u005c\u005c\": \u005c\u005c\u005c\"eee02fe4a42429f88432f4efad510521ed97bc716e9ffc28c909237e09b26bcc\u005c\u005c\u005c\"}\u005c\u005cn\u005c\",\u005c\"stderr\u005c\":\u005c\"\u005c\"}}\"}],\"structuredContent\":{\"success\":true,\"message\":\"Script executed: EVIDENCE_ROOT/trail-native-jpeg-validation/encode_jpeg_in_host.py\",\"error\":null,\"prompt\":\"Script completed successfully.\",\"context\":{\"filepath\":\"EVIDENCE_ROOT/trail-native-jpeg-validation/encode_jpeg_in_host.py\",\"stdout\":\"{\u005c\"source_sha256\u005c\": \u005c\"ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1\u005c\", \u005c\"output_sha256\u005c\": \u005c\"c1d4e0e7854cd7d5d68cc7b50372d56735199f1affd759db902edf47b0622598\u005c\", \u005c\"output_bytes\u005c\": 93870, \u005c\"size\u005c\": [1440, 960], \u005c\"quality\u005c\": 82, \u005c\"source_colorspace\u005c\": \u005c\"sRGB\u005c\", \u005c\"display_device\u005c\": \u005c\"sRGB\u005c\", \u005c\"view_transform\u005c\": \u005c\"Standard\u005c\", \u005c\"route\u005c\": \u005c\"Official MCP execute_script_file / native image.save_render JPEG\u005c\", \u005c\"geometry_render\u005c\": false, \u005c\"script_sha256\u005c\": \u005c\"eee02fe4a42429f88432f4efad510521ed97bc716e9ffc28c909237e09b26bcc\u005c\"}\u005cn\",\"stderr\":\"\"}},\"isError\":false}}"
+      }
+    }
+  ]
+}

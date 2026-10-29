@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "cb1eeae8d3fa93f83e6c44b4a6d77c75899999046ae39768d5cc565ffcca9b79",
+  "response_sha256": "04f85ba6074071514341cc966e372a243cd8babe5784149ad8179c800e35fb54",
+  "outputs": [
+    {
+      "path": "docs/showcase/trail-and-air/production-intermediates/Trail-and-Air-audition-master.wav",
+      "sha256": "a30e991b3153953cdd0f92348ec55a8c4a8f5c4cda558a10587d55417c31cc8d"
+    }
+  ],
+  "measurement_role": "Current independent observation of retained production content, not a fabricated native response",
+  "scope": "Existing 17-source VSE edits via official base0.2.22; isolated candidate mixdown accuracy480; explicit strict raw-PCM duplicate-block correction, original native WAV retained locally and hash-bound in real response; no arbitrary trimming"
+}

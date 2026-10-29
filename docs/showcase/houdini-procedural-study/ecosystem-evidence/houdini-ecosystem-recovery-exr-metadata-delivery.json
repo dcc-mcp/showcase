@@ -1,0 +1,84 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "373d9082376b11af07e3160975de62dab3a1e368dbf4582975774dce585385bf",
+      "record": {
+        "operation": "metadata-only delivery representation, not DCC production",
+        "original_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+        "public_sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac",
+        "changed_attribute": "File",
+        "changed_range": [
+          144,
+          238
+        ],
+        "same_file_length": true,
+        "all_bytes_outside_attribute_identical": true,
+        "offset_table_and_compressed_pixel_bytes_identical": true,
+        "all_string_attributes_audited": [
+          {
+            "attribute": "BlenderMultiChannel",
+            "value": "Blender V2.55.1 and newer",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "Camera",
+            "value": "StudyCamera",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "Date",
+            "value": "2026/10/20 10:20:06",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "File",
+            "value": "cross-dcc-lighting-final.blend",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "Frame",
+            "value": "001",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "RenderTime",
+            "value": "00:44.81",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "Scene",
+            "value": "Scene",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "Time",
+            "value": "00:00:00:01",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "cycles.ViewLayer.render_time",
+            "value": "00:44.76",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "cycles.ViewLayer.samples",
+            "value": "64",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "cycles.ViewLayer.synchronization_time",
+            "value": "00:00.05",
+            "utf8_valid": true
+          },
+          {
+            "attribute": "cycles.ViewLayer.total_time",
+            "value": "00:44.81",
+            "utf8_valid": true
+          }
+        ],
+        "mature_reader_reopen": "pending; header byte checks do not substitute consumer verification"
+      }
+    }
+  ]
+}

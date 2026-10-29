@@ -1,0 +1,1749 @@
+{
+  "schema": "dcc-showcase-ecosystem/v1",
+  "case_slug": "seismic-lens",
+  "phases": {
+    "authoring": {
+      "status": "performed"
+    },
+    "rendering": {
+      "status": "performed"
+    },
+    "export": {
+      "status": "performed"
+    },
+    "post-production": {
+      "status": "performed"
+    }
+  },
+  "stages": [
+    {
+      "id": "new-typed-full-vti-byte-identical",
+      "phase": "authoring",
+      "route": "mcp",
+      "component": {
+        "version": "0.1.0 candidate / Core 0.20.41",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-paraview/commit/9100157ebc60bc30e8f49fce0ce887058377059e"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-full-vti-actual-events.json",
+        "sha256": "18bd6175068076237dcc2020e6c3c71c8f55a7f4265225e1edb2899f5404b83f"
+      },
+      "response": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-full-vti-actual-events.json",
+        "sha256": "18bd6175068076237dcc2020e6c3c71c8f55a7f4265225e1edb2899f5404b83f"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-typed-full-vti-byte-identical-measurement.json",
+        "sha256": "cb6596947949eb826834c6af3ce025bd431e20d03876db57332f82cb48b90962"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/data/synthetic-lens.vti",
+          "sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d"
+        }
+      ],
+      "scope": "New actual 2026-10-20 typed generation at all 510705 points. Exact bytes equal retained historical input. This does NOT authenticate the unknown historical input-generation route.",
+      "actual_job_id": "b8fb0144-a2e4-45f8-9062-bcda99f4a842",
+      "evidence_selectors": {
+        "initial_sequence": 115,
+        "terminal_sequence": 423,
+        "all_value_sequence": 424,
+        "artifact_sequence": 425
+      },
+      "temporal_boundary": "New execution precedes the current reproducible data graph, not the historical panel production in wall time."
+    },
+    {
+      "id": "actual-paraview-panels-and-states",
+      "phase": "rendering",
+      "route": "mcp",
+      "component": {
+        "version": "0.1.0 source-qualified",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-paraview/commit/9b9de65d64f77356eaad4709535c79c49a852eb4"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/seismic-lens/paraview-mcp-evidence.public.json",
+        "sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319"
+      },
+      "response": {
+        "path": "docs/showcase/seismic-lens/paraview-mcp-evidence.public.json",
+        "sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-paraview-panels-and-states-measurement.json",
+        "sha256": "5d46d8e1ec1d9453f529ad55a36b339c10dfbc9985e2b00b8e9088600237f49b"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/data/synthetic-lens.vti",
+          "sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-x.png",
+          "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-y.png",
+          "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-z.png",
+          "sha256": "04da32bf7d10ff2dfd9d1f4cb25c363e98622f4fb036dc9efff6fea450969b1c"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-80.png",
+          "sha256": "b57e5df7f9261eb108d071c99f863faf2cde30bbf74a51ae2c4e5c329c2dfd72"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-150.png",
+          "sha256": "157d01a9b833c073c6475cf7db477515d2054dcf30ff2f5f0a007dfd3e7e5e46"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-x.pvsm",
+          "sha256": "d500bbcc485fdbbac8204fc215fa14f2e654d25e80c583470092b0157c5e96e5"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-y.pvsm",
+          "sha256": "69bd828c0944f9e29b874f613f217cbe8bd3519712cde7e6b938553f640f8e02"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-z.pvsm",
+          "sha256": "1d62b78d8242934ed8b3f596cd79d891998b7c9ad26b6b8aa33c9ece6ec534ef"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/isoline-80.pvsm",
+          "sha256": "3dd9f1f10e1f76e15475971a22b1b6e8e95e3cd6cd02a7e522aa279d035cfbf7"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/isoline-150.pvsm",
+          "sha256": "faad34b9b608f50a05ac88f27abe16dc41af2bdb37ffa716c12def4d06a3b90b"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/section-y.png",
+          "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3"
+        }
+      ],
+      "scope": "Original actual 210-record run, 52 selected operations; native slice/contour construction, rendering and state delivery. Existing bytes retained, no re-render.",
+      "input_identity_relationship": {
+        "kind": "byte-identical-new-ecosystem-reconstruction",
+        "historical_input_sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d",
+        "current_reconstruction_stage": "new-typed-full-vti-byte-identical",
+        "not_claimed": "Historical generation route remains unknown; old panel calls were not rerun or relabeled as the new run."
+      }
+    },
+    {
+      "id": "actual-gimp-layered-master",
+      "phase": "post-production",
+      "route": "mcp",
+      "component": {
+        "version": "0.4.1 candidate",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-gimp/commit/ea9270a82bd0821993f0c611d9cad2d36e06405d",
+        "executed_candidate_commit": "5602aa523d58a2c685966a06c90b71279a0bcfab",
+        "public_source_relationship": "Later full-tree byte-equivalent merge, not the runtime commit label"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/seismic-lens/gimp-mcp-evidence.public.json",
+        "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8"
+      },
+      "response": {
+        "path": "docs/showcase/seismic-lens/gimp-mcp-evidence.public.json",
+        "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-gimp-layered-master-measurement.json",
+        "sha256": "6bf04cf3b2713e0b3ec0a46568bae3500c40b2d68b145228701414deb3cc9490"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-x.png",
+          "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-y.png",
+          "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-z.png",
+          "sha256": "04da32bf7d10ff2dfd9d1f4cb25c363e98622f4fb036dc9efff6fea450969b1c"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-80.png",
+          "sha256": "b57e5df7f9261eb108d071c99f863faf2cde30bbf74a51ae2c4e5c329c2dfd72"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-150.png",
+          "sha256": "157d01a9b833c073c6475cf7db477515d2054dcf30ff2f5f0a007dfd3e7e5e46"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.xcf",
+          "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.png",
+          "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/preview/inputs/seismic-lens-master.xcf",
+          "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/preview/inputs/seismic-lens-master.png",
+          "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+        }
+      ],
+      "scope": "Original actual full authoring and independently qualified save/reopen of 30 layers and 19 text layers. Not new production."
+    },
+    {
+      "id": "actual-gimp-native-preview",
+      "phase": "export",
+      "route": "mcp",
+      "component": {
+        "version": "0.4.1 preview candidate",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-gimp/commit/ea9270a82bd0821993f0c611d9cad2d36e06405d",
+        "executed_candidate_commit": "a3b45aaa237aef954247c8571fb0762afe5cface",
+        "public_source_relationship": "Public base plus retained preview-only.patch and exact candidate bindings, not unchanged base runtime"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/seismic-lens/gimp-mcp-evidence.public.json",
+        "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8"
+      },
+      "response": {
+        "path": "docs/showcase/seismic-lens/gimp-mcp-evidence.public.json",
+        "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-gimp-native-preview-measurement.json",
+        "sha256": "666c3423e61653de2578ac963232b8c060910fd989fabd6040c0e902aaa0930b"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.xcf",
+          "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/seismic-lens/hero.png",
+          "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/retained/previews/seismic-lens-1600.png",
+          "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e"
+        }
+      ],
+      "scope": "Actual corrected native preview retained; source candidate and public base are separately recorded, not a new public release claim."
+    },
+    {
+      "id": "new-typed-low-sampling-comparison",
+      "phase": "rendering",
+      "route": "mcp",
+      "component": {
+        "version": "0.1.0 candidate / Core 0.20.41",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-paraview/commit/9100157ebc60bc30e8f49fce0ce887058377059e"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-actual-events.json",
+        "sha256": "24be665f65bd1b9c1d9d0a3e86697c15963c3f8d974b84e9f2ee8d4720550a4e"
+      },
+      "response": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-actual-events.json",
+        "sha256": "24be665f65bd1b9c1d9d0a3e86697c15963c3f8d974b84e9f2ee8d4720550a4e"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-typed-low-sampling-comparison-measurement.json",
+        "sha256": "4ce3fdc409650998f37f0371e7dcfe7b4ee04a31f880bde9bb3fb4d101ef6f2f"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "docs/showcase/seismic-lens/new-coarse/coarse-lens.vti",
+          "sha256": "3e0b08a942420534ff6afa4d0008a445e86d899b3d232c954232ea3449592854"
+        },
+        {
+          "path": "docs/showcase/seismic-lens/new-coarse-section-y.png",
+          "sha256": "f51d94a8102344b3c15b8e369a67cbd25e6913dd1bbd03bd7f22c6ebc336f99c"
+        }
+      ],
+      "scope": "New 41x33x25 typed field and SectionY image on official Kitware ParaView5.13.2 Python3.10, hosted run39486599975. Same analytic formula and historical SectionY camera/LUT; not a replay of the old coarse PNG.",
+      "actual_run": "https://github.com/dcc-mcp/dcc-mcp-paraview/actions/runs/39486599975",
+      "executed_fixture_commit": "aa375b3bb05f19ef3fa1b857f80ef04bb1860b0c",
+      "evidence_selectors": {
+        "create_terminal": 79,
+        "slice_terminal": 110,
+        "render_terminal": 245,
+        "save_terminal": 260,
+        "reopen_terminal": 296
+      },
+      "native_state_qualification_only": {
+        "sha256": "88fa1675b0b3790972142691af1c76196f784510776fcf3ef3fc76138b7c5f76",
+        "scope": "Actually saved/reopened; original CI artifact contains hosted absolute paths and is not presented as a relocated portable state in this download."
+      }
+    },
+    {
+      "id": "native-observation-poster",
+      "phase": "export",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-call.json",
+        "sha256": "741731946e3105c1e3982f44d65f45dfc557901450781c75d4765df32b74504a"
+      },
+      "response": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-call.json",
+        "sha256": "741731946e3105c1e3982f44d65f45dfc557901450781c75d4765df32b74504a"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-measurement.json",
+        "sha256": "8a34e48e630f22db9685b6d0492fd22e3d94ee1995ddf8dc88f02330876b9936"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+          "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/seismic-lens/native-observation-poster.png",
+          "sha256": "4bc82d1edc518083af46dca7822673483ac17535e58c44d92855be762b8663c1"
+        }
+      ],
+      "scope": "Official Blender MCP native VSE extraction of observed video frame119 (scene120), unchanged1178x814 and Standard/sRGB. Full independent decode MAE0.6050764841087422<3. Temporaryscene cleaned; failed earlier black-frame attempt retained, not credited.",
+      "executed_source_sha256": "f23e3556cf4217d716c6f13a7371e82f4e8ddcefb937353028d743785aaf15b5"
+    }
+  ],
+  "external_sources": [
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/lifecycle.py",
+      "sha256": "a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/package_integrity.py",
+      "sha256": "24c9d371d0e020acb2ed9891a0ca80d86bb44e24f9cfa982ba0f6be13f52a5cb",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/png_readback.py",
+      "sha256": "d0ce731086116734a6548dade45868b735157f2e0a8ac9ddcf47c804587751d7",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/reproduce_gimp.py",
+      "sha256": "696d60c54b212af6d29e93308985693bcfd94107b236fcacd6a99d0ddf7c6267",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/verify_copied_xcf.py",
+      "sha256": "331e00b97e2d5d55ae18ebf9ffd6253b88a06b56a8e3b85d596ac25ca0b5a6e7",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/xcf_metadata_readback.py",
+      "sha256": "e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/input-generation/generate_analytic_input.py",
+      "sha256": "e4ee2aceb9479b4295bbf9d98ca63d0dd681ededc77dd264e2a17c9e8d77ebf4",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/reproduce_paraview.py",
+      "sha256": "293db4cc47a4e0455cdde2a42dc1e59492079cf30c5493c358c6e1982b3926ef",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/preview-only.patch",
+      "sha256": "1cb3a823569685762d937fc10bb5b7f7142b1b4d874eeca3245feed4060e8ae9",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/reproduce/binding.py",
+      "sha256": "6dac1016b21aa76deff057dae17b4d7d849be0e4887070139ddbfe20798700d6",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/reproduce/lifecycle.py",
+      "sha256": "a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/reproduce/png_readback.py",
+      "sha256": "d0ce731086116734a6548dade45868b735157f2e0a8ac9ddcf47c804587751d7",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/reproduce/seal_candidate.py",
+      "sha256": "cc788fecc81d99a86940311c0e07b10e4d5171f3b3ef104a9ea2481f50bb9e71",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/reproduce/verify_preview.py",
+      "sha256": "211c5cda4b41df33d83c0687a85b47360fa0b18fcc8ea3ea9670054ca78c0e31",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/reproduce/xcf_metadata_readback.py",
+      "sha256": "e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/94c662efab1c991f89b3e2c632ac4a351bb84f82/docs/showcase/seismic-lens/editable-source.zip",
+      "license": "Rights reserved; separately identified upstream software notices retain their own terms",
+      "scope": "Archived reproduction source/patch, not an artwork and not proof this text was executed."
+    }
+  ],
+  "downloads": [],
+  "reports": [
+    {
+      "path": "docs/showcase/seismic-lens/LICENSES.md",
+      "sha256": "6c356d863e0634514ff2271a046ec187674a22c4c84e0af61f0c0cc71088f78b",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/METHODS.md",
+      "sha256": "0255e5d4ad415586f8561429978e6a19d626ce941fb84b4eb9153be472c21736",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/PROCESS-VIDEO.md",
+      "sha256": "5f3fcedc0c5d1ba138fd4410f89924b9f470316a801480de69096c0c38ac2b22",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/README.md",
+      "sha256": "77c9289aa4a631aa755c2b28f1bb7d62116dbab6ea1f309a8030dc11387dd47c",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/capability-coverage.json",
+      "sha256": "b744cdc39aea130bb2cac72c8f67463985bde05016ed8c8a2eb03caeda135afa",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/PACKAGE.md",
+      "sha256": "e1b3cfe50824f88b1d54e9cfb2337177d797a67f90c337efc4978dcac7bed8aa",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-gimp-layered-master-measurement.json",
+      "sha256": "6bf04cf3b2713e0b3ec0a46568bae3500c40b2d68b145228701414deb3cc9490",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-gimp-native-preview-measurement.json",
+      "sha256": "666c3423e61653de2578ac963232b8c060910fd989fabd6040c0e902aaa0930b",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-paraview-panels-and-states-measurement.json",
+      "sha256": "5d46d8e1ec1d9453f529ad55a36b339c10dfbc9985e2b00b8e9088600237f49b",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/capture-decode-measurement.json",
+      "sha256": "fc9859f7de1477902af2a60e48b8c20376fdbff11de75c4f13bdf0ff9cff56b9",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-call.json",
+      "sha256": "741731946e3105c1e3982f44d65f45dfc557901450781c75d4765df32b74504a",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-measurement.json",
+      "sha256": "8a34e48e630f22db9685b6d0492fd22e3d94ee1995ddf8dc88f02330876b9936",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-actual-events.json",
+      "sha256": "24be665f65bd1b9c1d9d0a3e86697c15963c3f8d974b84e9f2ee8d4720550a4e",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-native-summary.json",
+      "sha256": "f2ab87141abf449d589087f8bf8fc1c910a1b8cfbf9520309d050e0e364b9037",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-typed-parameters.json",
+      "sha256": "abc4dabbb847c639b89d43a3a5356a5f8a474c40b9f6e2b6609b555978c5b255",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-full-vti-actual-events.json",
+      "sha256": "18bd6175068076237dcc2020e6c3c71c8f55a7f4265225e1edb2899f5404b83f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-full-vti-preservation-scope.json",
+      "sha256": "0d90c9b27b11dedacc0625c803adb784d697d662167bd238dd827c97d2af787a",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-typed-full-vti-byte-identical-measurement.json",
+      "sha256": "cb6596947949eb826834c6af3ce025bd431e20d03876db57332f82cb48b90962",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-typed-low-sampling-comparison-measurement.json",
+      "sha256": "4ce3fdc409650998f37f0371e7dcfe7b4ee04a31f880bde9bb3fb4d101ef6f2f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-acceptance.json",
+      "sha256": "134013a489d633d8e83fa7dbe2066063a0f8d5beecabd2b9d0e0f0eadc6604a8",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-host-source.json",
+      "sha256": "21df96ebf0f0e86186de626f8bb50b0c2539895e3a62a9ba3cb0d1cd5e6a4644",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-inputs.json",
+      "sha256": "55f16fc3c4bfa196f2d0e84a8fa861110c3841159961ba30a122fb25718808a6",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-source-freeze.json",
+      "sha256": "9c5e03aabd2c95a9619be310403226b571a04988b22be1bce4340dbb2ef3905c",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/fresh-gimp-native-validation.json",
+      "sha256": "0c6afba536bea9fd1e93cda452ac1e8c6e678851e36943b207cbf9d88357698f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/gimp-mcp-evidence.public.json",
+      "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/native-preview-validation.json",
+      "sha256": "a635e2234eafa28ef8fb41736022974d30391784130c91bb6822259340ae8daa",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/native-process-video.json",
+      "sha256": "13ae30d71993685621a74a080a2a7a9b4e09d515da900361c55a5fc8cef70668",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/paraview-mcp-evidence.public.json",
+      "sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/paraview-public-native-validation.json",
+      "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/preview-png-privacy.json",
+      "sha256": "7616b5774f6244fef0e9d9d1b71209e552658e61f0f74bd019461f12720089a9",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/METHODS.md",
+      "sha256": "0255e5d4ad415586f8561429978e6a19d626ce941fb84b4eb9153be472c21736",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/README.md",
+      "sha256": "adfd65de1962513c93b0e7db0ff98409cf6f5d85b37c778d6d1bb04d1f4fb20c",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/RIGHTS.md",
+      "sha256": "b69a41f8aefe044ed9b1461aa3271a496508fd59cacaaae450de1cdf32528ac7",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/evidence/capability-coverage.json",
+      "sha256": "c82d3632d30d36967c068df44e07e84847a08f81c0ccd480ca53dfe344e63c9f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/evidence/gimp-selected-actual-calls.json",
+      "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/evidence/historical-active-readback-correction.json",
+      "sha256": "9addec03cc6c342efc67e432c6e06705fd3375bcc6a62598a9b5e9eba4455276",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/evidence/native-preview-validation.json",
+      "sha256": "a635e2234eafa28ef8fb41736022974d30391784130c91bb6822259340ae8daa",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/evidence/paraview-selected-actual-calls.json",
+      "sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/evidence/preview-png-privacy.json",
+      "sha256": "7616b5774f6244fef0e9d9d1b71209e552658e61f0f74bd019461f12720089a9",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/README.md",
+      "sha256": "22235f68da21504c857bbccb43cfe6bfb24d368d4f514f5e7ed124bd7bea6c2c",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/independent-fresh-native-qualification.json",
+      "sha256": "0c6afba536bea9fd1e93cda452ac1e8c6e678851e36943b207cbf9d88357698f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/public-source-equivalence.json",
+      "sha256": "a8d4ddc56b58821fd9182d4fee0172ce0d1e1028f40b5ea86910eac3567fb50d",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/qualified-master-baseline.json",
+      "sha256": "0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-binary-review.json",
+      "sha256": "af8e257e24d6a4f6224ba4d071a75f1b502f77adc045f1e052d6abf5d117e046",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-copied-xcf-proof.json",
+      "sha256": "2ec9b99d6e8329d5d48fe13e7c5860d2bb6f555f797eed5e1a41904c66940ce0",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-gimp-receipt.json",
+      "sha256": "50422f12317ac92dde7b680a01cd55647ce780957a0445fc48ea0f4efa023b6d",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-public-full-authoring.json",
+      "sha256": "72cbd9e89fee1ddf26ecf4a2fd756784c04470b6bd62627eef9164fa7e798926",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-wheel-rebuild.json",
+      "sha256": "9c12e297913924d27c1701523df10966dff2c5e1c34547b82f06eca2756b6803",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/input-manifest.json",
+      "sha256": "6ad57de93b9ccb7ce60babc24bb5cfa4530f25916e33f3d4b29b02a6bdf97b3f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/inputs/production-manifest.json",
+      "sha256": "f87f43cec8475f9464cfebc2b1aa83b6e20973df723e9ad2f20ee2a2a30f8614",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/notices/DejaVu-font-notice.txt",
+      "sha256": "693235cc6b005a7f64aee581edb069fd334b3981884ec60b04b09b73d69d097a",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/notices/RIGHTS.txt",
+      "sha256": "0186eea70f95d28e2a17838fc2b35f08d09720857c267b6edb47b4a2bc63cde5",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/package-manifest.json",
+      "sha256": "6f63d6362866952a45be2f2824d6713ee8d9e9d9fc0540bb40d7b9d015e7c706",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/adapter-package-bindings.json",
+      "sha256": "06124ba1f6ebac36821fd36bdb65f20c920348feab842562cfbc920f1535f50b",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/adapter-source-files.json",
+      "sha256": "65f97518d6657bff0878244384bf75d4a4940ac258fd4bef11b2d3de5cb3dfeb",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/production-plan.json",
+      "sha256": "b8676a720f902831f26b627c21e73a7103e2094d44d5242c71d62e2c54006b72",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/public-source-provenance.json",
+      "sha256": "e6dfa51f791edbc16703ef890b956a6ce038233f117af5a3f326a297f6597ae0",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/qualified-runtime-versions.txt",
+      "sha256": "c6c556d22838af1aeb5785f77c6a52d1e7d82cd7f14e01a71d9bf3f0f1b8ea42",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/wheel-build-tool-versions.json",
+      "sha256": "9c9569e9b0b5b65109edb7e0dced4c73e1007d531b625cc4dd02a3adc1333d2f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/manifest.json",
+      "sha256": "4c9a00fa66e880bafbd23e4ebeccba323622bcbba1f77ce60f82085500377307",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/README.md",
+      "sha256": "06f17b1a046b4ac13046c103bf9f57a616abeb7daf5d8de538419c1840f767bf",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/BUILD_AND_RUN.md",
+      "sha256": "54c69602715d573173006c54de935be12e8480974fb70869827cedb7c090770d",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/BUILD_RECEIPT.json",
+      "sha256": "4747f686e2ae237edbbf059feb78269026fb13c639052b2e3e9e2647ea4f1b11",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/MANIFEST.json",
+      "sha256": "e9175006e5a96b3bb0e34c1360b19171f19e3e838dd1482c07003a2dcc6c999f",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/PUBLIC_NATIVE_PROOF.json",
+      "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/README.md",
+      "sha256": "c6413957c341a8c474f1b995239c2e1b4db1028d4a0544b8b53c00effb9195b0",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/SOURCE_CONTINUITY.json",
+      "sha256": "6ef188935371efbd4e5cb73cd156f672ad701d85102236d0760351fa87c6e22e",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/UPSTREAM-ADAPTER-LICENSE.txt",
+      "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/paraview-package-bindings.json",
+      "sha256": "9576cb56b93d9399493239b65f9fde59f6ee61f56ca068b609d32965dc459b7b",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/README.md",
+      "sha256": "9cee1b6af21efd8d921f0591254775b6d2f4cb08450e5da64ecb485d09fd9b9e",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/REPRODUCE_WHEEL.md",
+      "sha256": "861ed15ff4b8702b876dcd0b7e2252f759fd3f141a020442595167fbb9837b0e",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/UPSTREAM-ADAPTER-LICENSE.txt",
+      "sha256": "93ba6635fa61cab17d5bfe130f02f74d30ae283011773ac21e68594f8c953228",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/build-requirements.txt",
+      "sha256": "239cf4b02af9e4fd209939cb8475d7ccbdbeb020c43347703031589489f52619",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/candidate-binding.json",
+      "sha256": "1af1dbea7d5c8fdf84d4d2f61b2bc0c0336a2487e5f51892fe064d736fa984f4",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/inputs/qualified-master-baseline.json",
+      "sha256": "0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/retained/preview/wheel-reproduction.json",
+      "sha256": "f41aff13739ddd5155f5526b1aa449a4fbffcfb4cd92f1ede3214d84d957cb4c",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    },
+    {
+      "path": "docs/showcase/seismic-lens/validation.json",
+      "sha256": "a7b885eb9dfa31d278b07a0b3c917e45c8e252bfd326a5f1541a536bdaacb7bf",
+      "reason": "Actual evidence, historical measurements, license, explicit reproduction parameters or documentation; not a DCC native asset."
+    }
+  ],
+  "external_links": [
+    {
+      "url": "https://github.com/dcc-mcp/dcc-mcp-gimp/pull/22",
+      "kind": "reference",
+      "reason": "Software readiness change discussion, not a production asset download."
+    }
+  ],
+  "delivery_packages": [
+    {
+      "archive": {
+        "path": "docs/showcase/seismic-lens/seismic-lens-ecosystem-2026-10-20.zip",
+        "sha256": "e7f6fb394aea04e8c309a8b2c37c0345e24688143a42a6580280944cc84f610e"
+      },
+      "members": [
+        {
+          "member": "qualified-source/METHODS.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/METHODS.md",
+            "sha256": "0255e5d4ad415586f8561429978e6a19d626ce941fb84b4eb9153be472c21736"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/README.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/README.md",
+            "sha256": "adfd65de1962513c93b0e7db0ff98409cf6f5d85b37c778d6d1bb04d1f4fb20c"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/RIGHTS.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/RIGHTS.md",
+            "sha256": "b69a41f8aefe044ed9b1461aa3271a496508fd59cacaaae450de1cdf32528ac7"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/evidence/capability-coverage.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/evidence/capability-coverage.json",
+            "sha256": "c82d3632d30d36967c068df44e07e84847a08f81c0ccd480ca53dfe344e63c9f"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/evidence/gimp-selected-actual-calls.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/evidence/gimp-selected-actual-calls.json",
+            "sha256": "2a78bf955f32d41d7a7a42642ecf066642a0056f24166af1c82ec3a85bbde6f8"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/evidence/historical-active-readback-correction.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/evidence/historical-active-readback-correction.json",
+            "sha256": "9addec03cc6c342efc67e432c6e06705fd3375bcc6a62598a9b5e9eba4455276"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/evidence/native-preview-validation.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/evidence/native-preview-validation.json",
+            "sha256": "a635e2234eafa28ef8fb41736022974d30391784130c91bb6822259340ae8daa"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/evidence/paraview-selected-actual-calls.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/evidence/paraview-selected-actual-calls.json",
+            "sha256": "eb00b616410a6b4de70822f8deb210f9423ff74ae15ffba87293d0e4c39b4319"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/evidence/preview-png-privacy.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/evidence/preview-png-privacy.json",
+            "sha256": "7616b5774f6244fef0e9d9d1b71209e552658e61f0f74bd019461f12720089a9"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/README.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/README.md",
+            "sha256": "22235f68da21504c857bbccb43cfe6bfb24d368d4f514f5e7ed124bd7bea6c2c"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/independent-fresh-native-qualification.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/independent-fresh-native-qualification.json",
+            "sha256": "0c6afba536bea9fd1e93cda452ac1e8c6e678851e36943b207cbf9d88357698f"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/public-source-equivalence.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/public-source-equivalence.json",
+            "sha256": "a8d4ddc56b58821fd9182d4fee0172ce0d1e1028f40b5ea86910eac3567fb50d"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/qualified-master-baseline.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/qualified-master-baseline.json",
+            "sha256": "0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/selected-binary-review.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-binary-review.json",
+            "sha256": "af8e257e24d6a4f6224ba4d071a75f1b502f77adc045f1e052d6abf5d117e046"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/selected-copied-xcf-proof.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-copied-xcf-proof.json",
+            "sha256": "2ec9b99d6e8329d5d48fe13e7c5860d2bb6f555f797eed5e1a41904c66940ce0"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/selected-gimp-receipt.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-gimp-receipt.json",
+            "sha256": "50422f12317ac92dde7b680a01cd55647ce780957a0445fc48ea0f4efa023b6d"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/selected-public-full-authoring.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-public-full-authoring.json",
+            "sha256": "72cbd9e89fee1ddf26ecf4a2fd756784c04470b6bd62627eef9164fa7e798926"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/evidence/selected-wheel-rebuild.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/evidence/selected-wheel-rebuild.json",
+            "sha256": "9c12e297913924d27c1701523df10966dff2c5e1c34547b82f06eca2756b6803"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/inputs/input-manifest.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/input-manifest.json",
+            "sha256": "6ad57de93b9ccb7ce60babc24bb5cfa4530f25916e33f3d4b29b02a6bdf97b3f"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/inputs/isoline-150.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-150.png",
+            "sha256": "157d01a9b833c073c6475cf7db477515d2054dcf30ff2f5f0a007dfd3e7e5e46"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/inputs/isoline-80.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/isoline-80.png",
+            "sha256": "b57e5df7f9261eb108d071c99f863faf2cde30bbf74a51ae2c4e5c329c2dfd72"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/inputs/panel-x.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-x.png",
+            "sha256": "b1c92c184250afa422d7ddd717f128af85afd75886d31c842f15f739b43106d9"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/inputs/panel-y.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-y.png",
+            "sha256": "87c33c9d1892c967e95801ccfb48e84bc77bce7a4a3a6103cacb941c3a5d9eb3"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/inputs/panel-z.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/panel-z.png",
+            "sha256": "04da32bf7d10ff2dfd9d1f4cb25c363e98622f4fb036dc9efff6fea450969b1c"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/inputs/production-manifest.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/inputs/production-manifest.json",
+            "sha256": "f87f43cec8475f9464cfebc2b1aa83b6e20973df723e9ad2f20ee2a2a30f8614"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/native/gimp/seismic-lens-master.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.png",
+            "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/native/gimp/seismic-lens-master.xcf",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.xcf",
+            "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/gimp/notices/DejaVu-font-notice.txt",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/notices/DejaVu-font-notice.txt",
+            "sha256": "693235cc6b005a7f64aee581edb069fd334b3981884ec60b04b09b73d69d097a"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/notices/RIGHTS.txt",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/notices/RIGHTS.txt",
+            "sha256": "0186eea70f95d28e2a17838fc2b35f08d09720857c267b6edb47b4a2bc63cde5"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/package-manifest.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/package-manifest.json",
+            "sha256": "6f63d6362866952a45be2f2824d6713ee8d9e9d9fc0540bb40d7b9d015e7c706"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/adapter-package-bindings.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/adapter-package-bindings.json",
+            "sha256": "06124ba1f6ebac36821fd36bdb65f20c920348feab842562cfbc920f1535f50b"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/adapter-source-files.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/adapter-source-files.json",
+            "sha256": "65f97518d6657bff0878244384bf75d4a4940ac258fd4bef11b2d3de5cb3dfeb"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/lifecycle.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/lifecycle.py",
+            "sha256": "a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/package_integrity.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/package_integrity.py",
+            "sha256": "24c9d371d0e020acb2ed9891a0ca80d86bb44e24f9cfa982ba0f6be13f52a5cb"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/png_readback.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/png_readback.py",
+            "sha256": "d0ce731086116734a6548dade45868b735157f2e0a8ac9ddcf47c804587751d7"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/production-plan.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/production-plan.json",
+            "sha256": "b8676a720f902831f26b627c21e73a7103e2094d44d5242c71d62e2c54006b72"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/public-source-provenance.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/public-source-provenance.json",
+            "sha256": "e6dfa51f791edbc16703ef890b956a6ce038233f117af5a3f326a297f6597ae0"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/qualified-runtime-versions.txt",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/qualified-runtime-versions.txt",
+            "sha256": "c6c556d22838af1aeb5785f77c6a52d1e7d82cd7f14e01a71d9bf3f0f1b8ea42"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/reproduce_gimp.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/reproduce_gimp.py",
+            "sha256": "696d60c54b212af6d29e93308985693bcfd94107b236fcacd6a99d0ddf7c6267"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/verify_copied_xcf.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/verify_copied_xcf.py",
+            "sha256": "331e00b97e2d5d55ae18ebf9ffd6253b88a06b56a8e3b85d596ac25ca0b5a6e7"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/wheel-build-tool-versions.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/wheel-build-tool-versions.json",
+            "sha256": "9c9569e9b0b5b65109edb7e0dced4c73e1007d531b625cc4dd02a3adc1333d2f"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/gimp/reproduce/xcf_metadata_readback.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/gimp/reproduce/xcf_metadata_readback.py",
+            "sha256": "e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/manifest.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/manifest.json",
+            "sha256": "4c9a00fa66e880bafbd23e4ebeccba323622bcbba1f77ce60f82085500377307"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/README.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/README.md",
+            "sha256": "06f17b1a046b4ac13046c103bf9f57a616abeb7daf5d8de538419c1840f767bf"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/input-generation/generate_analytic_input.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/input-generation/generate_analytic_input.py",
+            "sha256": "e4ee2aceb9479b4295bbf9d98ca63d0dd681ededc77dd264e2a17c9e8d77ebf4"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/native/paraview/data/synthetic-lens.vti",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/data/synthetic-lens.vti",
+            "sha256": "43ade20b1f2b78149e7d948894568b599db55f5aa8f9a5ceb62050e970e93d9d"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/paraview/native/paraview/isoline-150.pvsm",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/isoline-150.pvsm",
+            "sha256": "faad34b9b608f50a05ac88f27abe16dc41af2bdb37ffa716c12def4d06a3b90b"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/paraview/native/paraview/isoline-80.pvsm",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/isoline-80.pvsm",
+            "sha256": "3dd9f1f10e1f76e15475971a22b1b6e8e95e3cd6cd02a7e522aa279d035cfbf7"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/paraview/native/paraview/panel-x.pvsm",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-x.pvsm",
+            "sha256": "d500bbcc485fdbbac8204fc215fa14f2e654d25e80c583470092b0157c5e96e5"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/paraview/native/paraview/panel-y.pvsm",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-y.pvsm",
+            "sha256": "69bd828c0944f9e29b874f613f217cbe8bd3519712cde7e6b938553f640f8e02"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/paraview/native/paraview/panel-z.pvsm",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/native/paraview/panel-z.pvsm",
+            "sha256": "1d62b78d8242934ed8b3f596cd79d891998b7c9ad26b6b8aa33c9ece6ec534ef"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/BUILD_AND_RUN.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/BUILD_AND_RUN.md",
+            "sha256": "54c69602715d573173006c54de935be12e8480974fb70869827cedb7c090770d"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/BUILD_RECEIPT.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/BUILD_RECEIPT.json",
+            "sha256": "4747f686e2ae237edbbf059feb78269026fb13c639052b2e3e9e2647ea4f1b11"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/MANIFEST.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/MANIFEST.json",
+            "sha256": "e9175006e5a96b3bb0e34c1360b19171f19e3e838dd1482c07003a2dcc6c999f"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/PUBLIC_NATIVE_PROOF.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/PUBLIC_NATIVE_PROOF.json",
+            "sha256": "5469c24cb305705fac8a2df41b5c0789346723e21a0953efe28e8cc1faac1526"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/README.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/README.md",
+            "sha256": "c6413957c341a8c474f1b995239c2e1b4db1028d4a0544b8b53c00effb9195b0"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/SOURCE_CONTINUITY.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/SOURCE_CONTINUITY.json",
+            "sha256": "6ef188935371efbd4e5cb73cd156f672ad701d85102236d0760351fa87c6e22e"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/UPSTREAM-ADAPTER-LICENSE.txt",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/UPSTREAM-ADAPTER-LICENSE.txt",
+            "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/paraview-package-bindings.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/paraview-package-bindings.json",
+            "sha256": "9576cb56b93d9399493239b65f9fde59f6ee61f56ca068b609d32965dc459b7b"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/paraview/reproduce/reproduce_paraview.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/paraview/reproduce/reproduce_paraview.py",
+            "sha256": "293db4cc47a4e0455cdde2a42dc1e59492079cf30c5493c358c6e1982b3926ef"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/README.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/README.md",
+            "sha256": "9cee1b6af21efd8d921f0591254775b6d2f4cb08450e5da64ecb485d09fd9b9e"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/REPRODUCE_WHEEL.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/REPRODUCE_WHEEL.md",
+            "sha256": "861ed15ff4b8702b876dcd0b7e2252f759fd3f141a020442595167fbb9837b0e"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/UPSTREAM-ADAPTER-LICENSE.txt",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/UPSTREAM-ADAPTER-LICENSE.txt",
+            "sha256": "93ba6635fa61cab17d5bfe130f02f74d30ae283011773ac21e68594f8c953228"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/build-requirements.txt",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/build-requirements.txt",
+            "sha256": "239cf4b02af9e4fd209939cb8475d7ccbdbeb020c43347703031589489f52619"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/candidate-binding.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/candidate-binding.json",
+            "sha256": "1af1dbea7d5c8fdf84d4d2f61b2bc0c0336a2487e5f51892fe064d736fa984f4"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/inputs/qualified-master-baseline.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/inputs/qualified-master-baseline.json",
+            "sha256": "0dcb1e9d0732b7918e0b97a68317ece282575351d7c8cc7cbea2aed6a073b1ce"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/inputs/seismic-lens-master.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/inputs/seismic-lens-master.png",
+            "sha256": "43962deba479131f476baaa7c33854292f5d36404420e0c5804c72fbad288594"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/preview/inputs/seismic-lens-master.xcf",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/inputs/seismic-lens-master.xcf",
+            "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "qualified-source/preview/preview-only.patch",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/preview-only.patch",
+            "sha256": "1cb3a823569685762d937fc10bb5b7f7142b1b4d874eeca3245feed4060e8ae9"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/reproduce/binding.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/reproduce/binding.py",
+            "sha256": "6dac1016b21aa76deff057dae17b4d7d849be0e4887070139ddbfe20798700d6"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/reproduce/lifecycle.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/reproduce/lifecycle.py",
+            "sha256": "a9da35132b75de2997fe07af7e3e80d5dd16a3256f2a07898643ff05977d6bf7"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/reproduce/png_readback.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/reproduce/png_readback.py",
+            "sha256": "d0ce731086116734a6548dade45868b735157f2e0a8ac9ddcf47c804587751d7"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/reproduce/seal_candidate.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/reproduce/seal_candidate.py",
+            "sha256": "cc788fecc81d99a86940311c0e07b10e4d5171f3b3ef104a9ea2481f50bb9e71"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/reproduce/verify_preview.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/reproduce/verify_preview.py",
+            "sha256": "211c5cda4b41df33d83c0687a85b47360fa0b18fcc8ea3ea9670054ca78c0e31"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/reproduce/xcf_metadata_readback.py",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/reproduce/xcf_metadata_readback.py",
+            "sha256": "e16e1729f23c77665ecb7c66db9c3e0858e1a661cb46192661801d87b52d5aa4"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/preview/wheel-reproduction.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/preview/wheel-reproduction.json",
+            "sha256": "f41aff13739ddd5155f5526b1aa449a4fbffcfb4cd92f1ede3214d84d957cb4c"
+          },
+          "kind": "support",
+          "reason": "Retained reproduction code, software source diff, production parameter plan or historical evidence/documentation; inclusion is not a claim of execution. Actual native/media outputs have separate producer records."
+        },
+        {
+          "member": "qualified-source/previews/seismic-lens-1600.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/retained/previews/seismic-lens-1600.png",
+            "sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "ecosystem-2026-10-20/new-coarse/coarse-lens.vti",
+          "source": {
+            "path": "docs/showcase/seismic-lens/new-coarse/coarse-lens.vti",
+            "sha256": "3e0b08a942420534ff6afa4d0008a445e86d899b3d232c954232ea3449592854"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "ecosystem-2026-10-20/new-coarse-section-y.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/new-coarse-section-y.png",
+            "sha256": "f51d94a8102344b3c15b8e369a67cbd25e6913dd1bbd03bd7f22c6ebc336f99c"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "ecosystem-2026-10-20/native-observation-poster.png",
+          "source": {
+            "path": "docs/showcase/seismic-lens/native-observation-poster.png",
+            "sha256": "4bc82d1edc518083af46dca7822673483ac17535e58c44d92855be762b8663c1"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "README.md",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/PACKAGE.md",
+            "sha256": "e1b3cfe50824f88b1d54e9cfb2337177d797a67f90c337efc4978dcac7bed8aa"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/actual-gimp-layered-master-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-gimp-layered-master-measurement.json",
+            "sha256": "6bf04cf3b2713e0b3ec0a46568bae3500c40b2d68b145228701414deb3cc9490"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/actual-gimp-native-preview-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-gimp-native-preview-measurement.json",
+            "sha256": "666c3423e61653de2578ac963232b8c060910fd989fabd6040c0e902aaa0930b"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/actual-paraview-panels-and-states-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/actual-paraview-panels-and-states-measurement.json",
+            "sha256": "5d46d8e1ec1d9453f529ad55a36b339c10dfbc9985e2b00b8e9088600237f49b"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/capture-decode-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/capture-decode-measurement.json",
+            "sha256": "fc9859f7de1477902af2a60e48b8c20376fdbff11de75c4f13bdf0ff9cff56b9"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/native-observation-poster-call.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-call.json",
+            "sha256": "741731946e3105c1e3982f44d65f45dfc557901450781c75d4765df32b74504a"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/native-observation-poster-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/native-observation-poster-measurement.json",
+            "sha256": "8a34e48e630f22db9685b6d0492fd22e3d94ee1995ddf8dc88f02330876b9936"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-coarse-actual-events.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-actual-events.json",
+            "sha256": "24be665f65bd1b9c1d9d0a3e86697c15963c3f8d974b84e9f2ee8d4720550a4e"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-coarse-native-summary.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-native-summary.json",
+            "sha256": "f2ab87141abf449d589087f8bf8fc1c910a1b8cfbf9520309d050e0e364b9037"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-coarse-typed-parameters.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-coarse-typed-parameters.json",
+            "sha256": "abc4dabbb847c639b89d43a3a5356a5f8a474c40b9f6e2b6609b555978c5b255"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-full-vti-actual-events.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-full-vti-actual-events.json",
+            "sha256": "18bd6175068076237dcc2020e6c3c71c8f55a7f4265225e1edb2899f5404b83f"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-full-vti-preservation-scope.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-full-vti-preservation-scope.json",
+            "sha256": "0d90c9b27b11dedacc0625c803adb784d697d662167bd238dd827c97d2af787a"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-typed-full-vti-byte-identical-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-typed-full-vti-byte-identical-measurement.json",
+            "sha256": "cb6596947949eb826834c6af3ce025bd431e20d03876db57332f82cb48b90962"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/new-typed-low-sampling-comparison-measurement.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/new-typed-low-sampling-comparison-measurement.json",
+            "sha256": "4ce3fdc409650998f37f0371e7dcfe7b4ee04a31f880bde9bb3fb4d101ef6f2f"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/poster-acceptance.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-acceptance.json",
+            "sha256": "134013a489d633d8e83fa7dbe2066063a0f8d5beecabd2b9d0e0f0eadc6604a8"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/poster-host-source.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-host-source.json",
+            "sha256": "21df96ebf0f0e86186de626f8bb50b0c2539895e3a62a9ba3cb0d1cd5e6a4644"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/poster-inputs.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-inputs.json",
+            "sha256": "55f16fc3c4bfa196f2d0e84a8fa861110c3841159961ba30a122fb25718808a6"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        },
+        {
+          "member": "ecosystem-2026-10-20/ecosystem-evidence/poster-source-freeze.json",
+          "source": {
+            "path": "docs/showcase/seismic-lens/ecosystem-evidence/poster-source-freeze.json",
+            "sha256": "9c5e03aabd2c95a9619be310403226b571a04988b22be1bce4340dbb2ef3905c"
+          },
+          "kind": "support",
+          "reason": "Actual recorded evidence, independent measurements or explicit reproduction source; not a separate artwork or a substitute for execution."
+        }
+      ],
+      "scope": "Current byte-preserving delivery; original 77 files are isolated under qualified-source to preserve their closed inventories. No unverified historical coarse image included."
+    }
+  ],
+  "verification_captures": [
+    {
+      "kind": "continuous-native-window-observation",
+      "artifact": {
+        "path": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+        "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5"
+      },
+      "route": "Original task-owned GIMP X11 window observation with FFmpeg capture/encoding, no content editing; five actual typed MCP visibility changes. Not original creation replay.",
+      "constraints": {
+        "task_owned_window": true,
+        "continuous": true,
+        "cuts": false,
+        "retiming": false,
+        "compositing": false,
+        "synthetic_ui": false
+      },
+      "source_artifacts": [
+        {
+          "path": "docs/showcase/seismic-lens/retained/gimp/native/gimp/seismic-lens-master.xcf",
+          "sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5"
+        }
+      ],
+      "native_actions_evidence": {
+        "path": "docs/showcase/seismic-lens/native-process-video.json",
+        "sha256": "13ae30d71993685621a74a080a2a7a9b4e09d515da900361c55a5fc8cef70668"
+      },
+      "capture_evidence": {
+        "path": "docs/showcase/seismic-lens/native-process-video.json",
+        "sha256": "13ae30d71993685621a74a080a2a7a9b4e09d515da900361c55a5fc8cef70668"
+      },
+      "decode_evidence": {
+        "path": "docs/showcase/seismic-lens/ecosystem-evidence/capture-decode-measurement.json",
+        "sha256": "fc9859f7de1477902af2a60e48b8c20376fdbff11de75c4f13bdf0ff9cff56b9"
+      },
+      "actual_action_selector": "$.capture.events",
+      "independent_review": "Independently reviewed as continuous task-owned native-window observation; this is not original creative production replay."
+    }
+  ],
+  "review": {
+    "status": "verified",
+    "evidence": {
+      "path": "docs/showcase/seismic-lens/ecosystem-evidence/independent-review.json",
+      "sha256": "a2d6cfc340fa0746f9d290f1d81de0e5a0beb905025781f8e9f51866ac7e1141"
+    }
+  }
+}

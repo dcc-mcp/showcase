@@ -1,0 +1,24 @@
+{
+  "production_graph_sha256": "ef924fedf2fae595f4176e84612d939da9a6b36fde1f62d755b3d941e744f5f6",
+  "raw_calls_verified": true,
+  "all_production_steps_covered": true,
+  "reviewer": "Independent parent reviewer; original calls and pixels plus new actual native/CLI production and delivery review",
+  "reviewed_at": "2026-10-20T17:48:40Z",
+  "scope": [
+    "Original actual Houdini calls 68/70/106/107/124 independently inspected; two PNG file/IDAT/RGBA hashes and dimensions recomputed",
+    "49 actual typed fresh-scene replay and exact OBJ lineage preserved",
+    "New Blender import/scene/save/reopen/render, independent official OIDN, native AgX display and JPEG actual route and output reviewed",
+    "Final PNG and JPEG visually inspected; original Mantra images remain distinct from new cross-DCC lighting exercise",
+    "All162 graph path/SHA references independently checked; current62 ZIP members compared byte-for-byte with retained repository sources",
+    "Native EXR4a0f4902 and public metadata representation d39c6b74 explicitly separated in structured execution inputs/outputs;11 complete decoded channels equal",
+    "PowerShell support classification is reviewed source code, not a DCC execution claim"
+  ],
+  "limitations": [
+    "Original call68 request was not retained; actual response and subsequent matching job poll retained.",
+    "Original render terminal records have no same-call content digest; actual MCP124 later PNG measurement is not signed temporal attestation.",
+    "Private HIP and native Blender scene withheld; public OBJ does not preserve original procedural SOP/material/light setup.",
+    "New Blender lighting is not a replay of the missing original Mantra intermediate PNG or a same-renderer benchmark.",
+    "Only File metadata is changed in public native EXR; original file bytes are not falsely claimed identical. CLI consumed the private original, not the later public representation.",
+    "Review applies only to this exact graph and selected output hashes."
+  ]
+}

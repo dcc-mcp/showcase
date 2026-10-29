@@ -1,0 +1,17 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "30c12102003d3f30e99ee70f17345c1ce3683d029b53d9047aa1039f85539ff9",
+      "record": {
+        "verify_final.py": "2834a8d546b5b8a6d463db4fa89a98be4cc29060539e37d545243e159e7dc5e7",
+        "run_final_denoise.py": "5dd18e6cf0e5445a45211a1e1d2cbba290a6a41b88d89a7b3336386c0c10b5d5",
+        "display_final_host.py": "80e2540f6f4a572e7656f8319f5f02a29a10af6caa27b53ff39292bd8788fff4",
+        "run_final.py": "e43d2fb01de537016a5dc6ed0e06d15ac94baed89048e563f09ade05076b0eba",
+        "prepare_final.py": "67e0e9e595269f7a158d1a387e2ef098b1fcf0dc86913aabfe3f8124279088c4",
+        "verify_exr_host.py": "8e21684b50b44d4323eb6d36e4b4438531c276218d04eed6ddbc29d4e636cb6f",
+        "denoise-job.json": "d1a59d7c5630d7c47757e39149f0cba07ab3f81e636dd87d7ea079b2c1802c4e"
+      }
+    }
+  ]
+}

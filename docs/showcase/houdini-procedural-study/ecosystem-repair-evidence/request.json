@@ -1,0 +1,14 @@
+{
+  "original_receipt_sha256": "7a87cc8e7d0953a62b016217f5ca23318052d9cd5c57de4f56cab5eda4a2ba65",
+  "record": {
+    "jsonrpc": "2.0",
+    "id": 7770,
+    "method": "tools/call",
+    "params": {
+      "name": "blender_scripting__execute_script_file",
+      "arguments": {
+        "filepath": "EVIDENCE_ROOT/houdini-ecosystem-recovery/encode_jpegs_in_host.py"
+      }
+    }
+  }
+}

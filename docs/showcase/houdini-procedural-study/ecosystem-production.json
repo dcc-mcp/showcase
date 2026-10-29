@@ -1,0 +1,1191 @@
+{
+  "schema": "dcc-showcase-ecosystem/v1",
+  "case_slug": "houdini-procedural-study",
+  "phases": {
+    "authoring": {
+      "status": "performed"
+    },
+    "rendering": {
+      "status": "performed"
+    },
+    "export": {
+      "status": "performed"
+    },
+    "post-production": {
+      "status": "performed"
+    }
+  },
+  "stages": [
+    {
+      "id": "houdini-typed-model-replay",
+      "phase": "authoring",
+      "route": "mcp",
+      "component": {
+        "version": "0.43.1",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-houdini/commit/9957e58e987147e448819384a0e8a8be5756de18"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/replay-smoke.json",
+        "sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/replay-smoke.json",
+        "sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-typed-model-replay-measurement.json",
+        "sha256": "da1b0bd862bd022134da3ace8106ba4873d6258998b43a6daec61688dfca642e"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/ceramic.obj",
+          "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9"
+        }
+      ],
+      "scope": "49 actual typed calls in a fresh host, 47 non-render recipe steps; OBJ byte-identical to original. This is a later replay, not reconstructed original requests."
+    },
+    {
+      "id": "original-mantra-and-public-png",
+      "phase": "rendering",
+      "route": "mcp",
+      "component": {
+        "version": "0.43.1",
+        "source": "https://github.com/dcc-mcp/dcc-mcp-houdini/commit/9957e58e987147e448819384a0e8a8be5756de18"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/calls.json",
+        "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/calls.json",
+        "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/original-mantra-and-public-png-measurement.json",
+        "sha256": "323758a7a35f9006a7bcd0dde249370b47085b2b6fdf1cfeccaca9f4f8eeccec"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/hero-public.png",
+          "sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9"
+        },
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/preview-public.png",
+          "sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be"
+        }
+      ],
+      "scope": "Actual original 68/70 preview and 106/107 final render job/path terminal records, followed by actual MCP124 metadata-only publication with source/public/IDAT/RGBA hashes. 68 launch request was not retained; response and later actual poll were. Terminal has no same-call digest; 124 is later measurement. No signed temporal attestation or private HIP publication is claimed. Later OBJ replay is NOT falsely labeled input to these older renders."
+    },
+    {
+      "id": "native-existing-images-jpeg",
+      "phase": "export",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/request.json",
+        "sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/response.json",
+        "sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-existing-images-jpeg-measurement.json",
+        "sha256": "459b14ca14f7ef92852945642580bd09c13cf402c8fe90856fbb86e273539320"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/hero-public.png",
+          "sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9"
+        },
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/preview-public.png",
+          "sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/hero.jpg",
+          "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b"
+        },
+        {
+          "path": "docs/showcase/houdini-procedural-study/preview.jpg",
+          "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c"
+        }
+      ],
+      "scope": "Actual MCP7770 Standard/sRGB RGB JPEG encoding, source pixels preserved within measured compression error; no geometry render."
+    },
+    {
+      "id": "new-blender-cross-dcc-lighting",
+      "phase": "rendering",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-requests.json",
+        "sha256": "bd1cc183b3b020cf1022c20d728507c84fc3a086b207a86a549b5c788808731f"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-responses.json",
+        "sha256": "734e8ec61945954575794774d5a7b9ccf04ce6ad32b6c08379456be8788d8261"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-blender-cross-dcc-lighting-measurement.json",
+        "sha256": "a293a621dd72beebfd81129154c5e6bcf9dc2e3302207efe6a1146257702e049"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/ceramic.obj",
+          "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+          "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+        }
+      ],
+      "scope": "New Blender lighting exercise from exact Houdini OBJ, actual MCP import point/quad/bounds verification; typed scene and bounded property edits, saved/cleared/reopened. Final1200x1500 Cycles64 true AOVs, OIDN disabled. Only support floor extended after pilot. Published EXR is a metadata-only delivery representation: native SHA4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801, public SHA d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac; only File attribute changed with all other bytes identical and all11 channels independently fully decoded equal. Not the old Mantra intermediate state, not same-renderer benchmark.",
+      "native_outputs": [
+        {
+          "logical_name": "frame_0001.exr",
+          "sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+          "retained": "private original, not published"
+        }
+      ],
+      "delivery_representations": [
+        {
+          "native_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+          "public_artifact": {
+            "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+            "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+          },
+          "transformation": "metadata-only File attribute same-length replacement",
+          "pixel_identity": "all 11 complete decoded channel arrays byte-identical",
+          "metadata_evidence": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+            "sha256": "2e52c46c53ab295f1718a53e94fd8fc36c4ccf5b800e0ff28e2c003ce569a620"
+          },
+          "decoded_equality_evidence": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+            "sha256": "c14c29fd5b5717846f90082e3d8fd5ee343cc1a11b1cab18a20a28c04ec18463"
+          }
+        }
+      ]
+    },
+    {
+      "id": "official-cli-independent-oidn",
+      "phase": "post-production",
+      "route": "ecosystem-cli",
+      "component": {
+        "version": "0.2.0",
+        "source": "https://github.com/dcc-mcp/dcc-media-enhance/commit/fd611114996e77063e431347a9a3dfd9cc430108",
+        "binary_sha256": "def1c715610c9936214b32fbb278a280a427f0e361e1e542022a61950a330e1f"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/denoise-job.json",
+        "sha256": "661467c05c4bde918a2bdc516b6f083d3a8dd1779c65b336618ca20d38203ff0"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/denoise-execution.json",
+        "sha256": "7d003f44d9d42937489325912e3ff3a04752d875ed7c77a5cf00a92b02fa7eb2"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/official-cli-independent-oidn-measurement.json",
+        "sha256": "bee6f6c98a2783bb647aa2fd20c72ef60b072fa724534003b3a189ac45f76d5c"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+          "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-denoised.exr",
+          "sha256": "2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e"
+        }
+      ],
+      "scope": "Official version-pinned dcc-media-enhance CLI consumed the private original EXR SHA4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801, NOT the later public metadata-only representation listed as the verifiable input artifact. Exact decoded channel identity is independently measured. Its blender-oidn mature decoder consumes real Combined/Albedo/Normal;2048MiB sampled budget,2threads,original unchanged,exit0 with owned backend cleanup. Not a hard memory limit.",
+      "execution_inputs": [
+        {
+          "logical_name": "frame_0001.exr",
+          "sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+          "public_representation": {
+            "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+            "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+          },
+          "relationship": {
+            "native_sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+            "public_artifact": {
+              "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-native.exr",
+              "sha256": "d39c6b746cbb7c6b36186238c8f511d4dbacb4d436128573ddc5b0438697b4ac"
+            },
+            "transformation": "metadata-only File attribute same-length replacement",
+            "pixel_identity": "all 11 complete decoded channel arrays byte-identical",
+            "metadata_evidence": {
+              "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+              "sha256": "2e52c46c53ab295f1718a53e94fd8fc36c4ccf5b800e0ff28e2c003ce569a620"
+            },
+            "decoded_equality_evidence": {
+              "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+              "sha256": "c14c29fd5b5717846f90082e3d8fd5ee343cc1a11b1cab18a20a28c04ec18463"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "native-agx-display",
+      "phase": "post-production",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-display-call.json",
+        "sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-display-call.json",
+        "sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-agx-display-measurement.json",
+        "sha256": "960b04476e4ccf03a6d01acb281ed2a0adc8a47b8907c8693f7deb2f0597e63a"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-denoised.exr",
+          "sha256": "2719e09814cb627a4f713dcda3f699f9c5f378fb8bbe4e3a18e02e6ec0763f5e"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-display.png",
+          "sha256": "50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5"
+        }
+      ],
+      "scope": "Full native single-layer EXR pixel decode finite/opaque, image.save_render AgX Medium High Contrast/exposure0/gamma1/sRGB; no geometry render."
+    },
+    {
+      "id": "native-final-web-jpeg",
+      "phase": "export",
+      "route": "mcp",
+      "component": {
+        "version": "0.2.22",
+        "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+      },
+      "status": "succeeded",
+      "request": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/final-jpeg-call.json",
+        "sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0"
+      },
+      "response": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/final-jpeg-call.json",
+        "sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0"
+      },
+      "artifact_measurement": {
+        "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-final-web-jpeg-measurement.json",
+        "sha256": "833fc2cc482748588a7deb58532a8becc7a4f33940dfb11770d8420753fdcf24"
+      },
+      "inputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-display.png",
+          "sha256": "50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
+          "sha256": "879615d15da1c2e6f34bdf80c31027df2aa49c3c56a39cbf83bc03401ebb6eee"
+        }
+      ],
+      "scope": "Standard/None/sRGB/exposure0/gamma1 JPEG82 encoding of already display-transformed PNG; no double AgX, source unchanged,full independent decode and measured error/budget."
+    }
+  ],
+  "external_sources": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/sanitize_png_metadata.py",
+      "sha256": "876b1810518ad7547260413db2c0ec99eb66d562f85ef1a0bdb064f1c0e2ab96",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/9a6f01faa437ab1fe236d47a980c3dbc2f624cdc/docs/showcase/houdini-procedural-study/sanitize_png_metadata.py",
+      "license": "MIT",
+      "scope": "Existing published reproduction source, not an output asset or evidence that this source was newly executed."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/replay-cli.ps1",
+      "sha256": "6c9f43a13e99b73c9cddb0281fdd57b6ae06a4fb834da70ed4ea4f22fb358fa9",
+      "origin": "https://github.com/dcc-mcp/showcase/blob/9a6f01faa437ab1fe236d47a980c3dbc2f624cdc/docs/showcase/houdini-procedural-study/replay-cli.ps1",
+      "license": "MIT",
+      "scope": "Existing published reproduction source, not an output asset or evidence that this source was newly executed."
+    }
+  ],
+  "downloads": [],
+  "reports": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/LICENSE.txt",
+      "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/README.md",
+      "sha256": "ba79504e03e723bc325592dc3415ad7a83bfea0a350f8194694e1f391de2dbc2",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/calls.json",
+      "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/derivatives.json",
+      "sha256": "69a75b3aeb080cd4fca4c163fdc99dff73d43dee9430d0ca667801aad3f5633f",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/downloads.json",
+      "sha256": "691302ddd238929567c129e376b241ce31edf6e132be0fc361538b6d6673d35e",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/denoise-execution.json",
+      "sha256": "7d003f44d9d42937489325912e3ff3a04752d875ed7c77a5cf00a92b02fa7eb2",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/denoise-job.json",
+      "sha256": "661467c05c4bde918a2bdc516b6f083d3a8dd1779c65b336618ca20d38203ff0",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/enhanced-verified_output.json",
+      "sha256": "11a1c796d24365c6205e236a19b04094b17a82236b4285d606635ee472f9f5f8",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/final-jpeg-call.json",
+      "sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-display_final_host.py.source.json",
+      "sha256": "bbf26efd0ef9e6bdb82fca0b453338070492a34c0487b2e4e071da39fbc84e63",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-final_display_validation.json",
+      "sha256": "1f072f9148fae061617d1e90e2f3c9181483a3a593a7bae253e79c2d1378285f",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-final_source_verified.json",
+      "sha256": "7bb96ac3b6800a2a09f6fb2350c5e45eaa42809fd0967bcc7263809e5d7044f6",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-floor-adjustment.json",
+      "sha256": "41951c51ad534bbdfd64a5c0df159514ba903b9141f3818c4c427c44d12cb028",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-output-index.json",
+      "sha256": "cdc0562fc94005f05b24f714dbec576bc6591594c2b3eb59f09e6a46a5f95fc5",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-prepare_final.py.source.json",
+      "sha256": "5b6b789c3854094ceb6223019b8dc69555fa3b6ef27e0124e4c97992387e0dd3",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-run_final.py.source.json",
+      "sha256": "b0f1594f857804e29b6474c8263cefec3dc31c87d342a49f0b0096d44daccf65",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-run_final_denoise.py.source.json",
+      "sha256": "48948957cdb577a86a4761e3e935ddea4a8e1c140559bbec423ac4a14fc07d20",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-saved-source.json",
+      "sha256": "41b91e37b72d050527703f6f3bee43403f2a56b5f65492ffb9dedea7d289304e",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-source-freeze.json",
+      "sha256": "76f78a452c77405bb822981db0bee37b121598e3b7171479425585ae282184d5",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-verify_exr_host.py.source.json",
+      "sha256": "48efd40b5d5f6a41d862172386138bb0c5ca9a66a848210c9af9913a05a01354",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-verify_final.py.source.json",
+      "sha256": "d51be85152f2c13d36f5c9492aa9abe03cd876c4167aea197594ced2e52dfe98",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+      "sha256": "2e52c46c53ab295f1718a53e94fd8fc36c4ccf5b800e0ff28e2c003ce569a620",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+      "sha256": "c14c29fd5b5717846f90082e3d8fd5ee343cc1a11b1cab18a20a28c04ec18463",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-acceptance.json",
+      "sha256": "ab2e69b9f8d0950b6a0a2d118167661fd83b69a1f24223bd301d01ce5996731e",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-encode_jpegs_in_host.py.source.json",
+      "sha256": "0c51d9aa6dceb68c2ff284784270c77493879853d7571efcae95e6248267b82a",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-native-readback.json",
+      "sha256": "725478af03ad4c01ddbacf016c420ab6a85b238529aa98b2520b22115a389fcf",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-source-freeze.json",
+      "sha256": "3f2c247c422855efe98c3df44bd061a6f71a0423a7e9755a4c0f5d36aedaf458",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-typed-model-replay-measurement.json",
+      "sha256": "da1b0bd862bd022134da3ace8106ba4873d6258998b43a6daec61688dfca642e",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-agx-display-measurement.json",
+      "sha256": "960b04476e4ccf03a6d01acb281ed2a0adc8a47b8907c8693f7deb2f0597e63a",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-display-call.json",
+      "sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-existing-images-jpeg-measurement.json",
+      "sha256": "459b14ca14f7ef92852945642580bd09c13cf402c8fe90856fbb86e273539320",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-final-web-jpeg-measurement.json",
+      "sha256": "833fc2cc482748588a7deb58532a8becc7a4f33940dfb11770d8420753fdcf24",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-blender-cross-dcc-lighting-measurement.json",
+      "sha256": "a293a621dd72beebfd81129154c5e6bcf9dc2e3302207efe6a1146257702e049",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-original-import.json",
+      "sha256": "27d235d15bf38ee58c3bd96500c54aee3cfe449428ad35ee23f5e9bcf1751640",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-requests.json",
+      "sha256": "bd1cc183b3b020cf1022c20d728507c84fc3a086b207a86a549b5c788808731f",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-responses.json",
+      "sha256": "734e8ec61945954575794774d5a7b9ccf04ce6ad32b6c08379456be8788d8261",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/official-cli-independent-oidn-measurement.json",
+      "sha256": "bee6f6c98a2783bb647aa2fd20c72ef60b072fa724534003b3a189ac45f76d5c",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/original-mantra-and-public-png-measurement.json",
+      "sha256": "323758a7a35f9006a7bcd0dde249370b47085b2b6fdf1cfeccaca9f4f8eeccec",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/original-render-lineage.json",
+      "sha256": "473ffba5e87ff333bf2ad335bb49937cba44b594eb664bde33a0543229ec3f88",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-2026-10-20.json",
+      "sha256": "477a37eedad04e082fc6292b815809ecc77e3fa0ab83deeaae2e50efcdf0d670",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/acceptance.json",
+      "sha256": "42cc6dfd7f54b87be18a4e4b77a5485627b3ce4db021f07a718fc264372b25d4",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/encode-source.json",
+      "sha256": "84d0cd0d3fb8b3be73f125a363541dc13e04c6dfd8cb5254ae6febe0aecac0ba",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/measurement.json",
+      "sha256": "e76b17d9e7a56a8fbef0f962d9d3e8ec9166016ddd84fccd299fb1182d0060ff",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/native-readback.json",
+      "sha256": "ad2f96eff293816fb1db79041b62979b385d7992287bbe341caf2530689eb538",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/request.json",
+      "sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/response.json",
+      "sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/source-freeze.json",
+      "sha256": "fc595b626519c0298e3df164cb666ee86fe9f6c8c213a3a86953e68f870aa5c9",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/gateway-receipt.json",
+      "sha256": "836770095343c8b6ad8727f48c6d80a8811e41e69a7f10cab5ca415c280f4136",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/png-publication.json",
+      "sha256": "a1715f1e72f0d6034c39cbf344bf8142b805f6d5bfd342f09c76bcfb60a1a797",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/profile.json",
+      "sha256": "64032138438d5acb395de7f83e09a0bdc856c04818c116b603e43f640a3e33d3",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/prompt.md",
+      "sha256": "329d100c4bccf7bef00195f0d5b00b94f55d65fbac3497a65372738fe83e610a",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/recipe.json",
+      "sha256": "df014d3210393e196d95910a37b7a1bb2edd22d6d75df9e253da1baa1d4e1b30",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/replay-smoke.json",
+      "sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    },
+    {
+      "path": "docs/showcase/houdini-procedural-study/validation.json",
+      "sha256": "6a875a57ed8766ac1ef444527babaee34b48e8499a3f9948585e6f9a88b2e966",
+      "reason": "Recorded evidence, measurements, historical records, license or reproduction documentation; not a native DCC asset."
+    }
+  ],
+  "external_links": [
+    {
+      "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/tree/9957e58e987147e448819384a0e8a8be5756de18",
+      "kind": "reference",
+      "reason": "Official adapter source or historical capability PR, not a selected production download."
+    },
+    {
+      "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/333",
+      "kind": "reference",
+      "reason": "Official adapter source or historical capability PR, not a selected production download."
+    }
+  ],
+  "delivery_packages": [
+    {
+      "archive": {
+        "path": "docs/showcase/houdini-procedural-study/houdini-ecosystem-assets-2026-10-20.zip",
+        "sha256": "89e3461e9b9618dd72b5b52bc874464b65235a54230d2b68d9bd6fb22d61e04b"
+      },
+      "members": [
+        {
+          "member": "LICENSE.txt",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/LICENSE.txt",
+            "sha256": "97057072595502f904a5c649649e9a05144db86ba071b55314a0062e48265d6a"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "README.md",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/README.md",
+            "sha256": "ba79504e03e723bc325592dc3415ad7a83bfea0a350f8194694e1f391de2dbc2"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "calls.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/calls.json",
+            "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "derivatives.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/derivatives.json",
+            "sha256": "69a75b3aeb080cd4fca4c163fdc99dff73d43dee9430d0ca667801aad3f5633f"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/denoise-execution.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/denoise-execution.json",
+            "sha256": "7d003f44d9d42937489325912e3ff3a04752d875ed7c77a5cf00a92b02fa7eb2"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/denoise-job.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/denoise-job.json",
+            "sha256": "661467c05c4bde918a2bdc516b6f083d3a8dd1779c65b336618ca20d38203ff0"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/enhanced-verified_output.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/enhanced-verified_output.json",
+            "sha256": "11a1c796d24365c6205e236a19b04094b17a82236b4285d606635ee472f9f5f8"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/final-jpeg-call.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/final-jpeg-call.json",
+            "sha256": "3d93731960b933962e2c64e365268238eea3c22e8e8c274b2b46579a1864ded0"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-display_final_host.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-display_final_host.py.source.json",
+            "sha256": "bbf26efd0ef9e6bdb82fca0b453338070492a34c0487b2e4e071da39fbc84e63"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-final_display_validation.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-final_display_validation.json",
+            "sha256": "1f072f9148fae061617d1e90e2f3c9181483a3a593a7bae253e79c2d1378285f"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-final_source_verified.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-final_source_verified.json",
+            "sha256": "7bb96ac3b6800a2a09f6fb2350c5e45eaa42809fd0967bcc7263809e5d7044f6"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-floor-adjustment.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-floor-adjustment.json",
+            "sha256": "41951c51ad534bbdfd64a5c0df159514ba903b9141f3818c4c427c44d12cb028"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-output-index.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-output-index.json",
+            "sha256": "cdc0562fc94005f05b24f714dbec576bc6591594c2b3eb59f09e6a46a5f95fc5"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-prepare_final.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-prepare_final.py.source.json",
+            "sha256": "5b6b789c3854094ceb6223019b8dc69555fa3b6ef27e0124e4c97992387e0dd3"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-run_final.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-run_final.py.source.json",
+            "sha256": "b0f1594f857804e29b6474c8263cefec3dc31c87d342a49f0b0096d44daccf65"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-run_final_denoise.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-run_final_denoise.py.source.json",
+            "sha256": "48948957cdb577a86a4761e3e935ddea4a8e1c140559bbec423ac4a14fc07d20"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-saved-source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-saved-source.json",
+            "sha256": "41b91e37b72d050527703f6f3bee43403f2a56b5f65492ffb9dedea7d289304e"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-source-freeze.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-source-freeze.json",
+            "sha256": "76f78a452c77405bb822981db0bee37b121598e3b7171479425585ae282184d5"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-verify_exr_host.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-verify_exr_host.py.source.json",
+            "sha256": "48efd40b5d5f6a41d862172386138bb0c5ca9a66a848210c9af9913a05a01354"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-blender-final-verify_final.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-blender-final-verify_final.py.source.json",
+            "sha256": "d51be85152f2c13d36f5c9492aa9abe03cd876c4167aea197594ced2e52dfe98"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-exr-metadata-delivery.json",
+            "sha256": "2e52c46c53ab295f1718a53e94fd8fc36c4ccf5b800e0ff28e2c003ce569a620"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-ecosystem-recovery-public-exr-full-decoding.json",
+            "sha256": "c14c29fd5b5717846f90082e3d8fd5ee343cc1a11b1cab18a20a28c04ec18463"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-final-jpeg-acceptance.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-acceptance.json",
+            "sha256": "ab2e69b9f8d0950b6a0a2d118167661fd83b69a1f24223bd301d01ce5996731e"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-final-jpeg-encode_jpegs_in_host.py.source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-encode_jpegs_in_host.py.source.json",
+            "sha256": "0c51d9aa6dceb68c2ff284784270c77493879853d7571efcae95e6248267b82a"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-final-jpeg-native-readback.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-native-readback.json",
+            "sha256": "725478af03ad4c01ddbacf016c420ab6a85b238529aa98b2520b22115a389fcf"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-final-jpeg-source-freeze.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-final-jpeg-source-freeze.json",
+            "sha256": "3f2c247c422855efe98c3df44bd061a6f71a0423a7e9755a4c0f5d36aedaf458"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/houdini-typed-model-replay-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/houdini-typed-model-replay-measurement.json",
+            "sha256": "da1b0bd862bd022134da3ace8106ba4873d6258998b43a6daec61688dfca642e"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/native-agx-display-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-agx-display-measurement.json",
+            "sha256": "960b04476e4ccf03a6d01acb281ed2a0adc8a47b8907c8693f7deb2f0597e63a"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/native-display-call.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-display-call.json",
+            "sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/native-existing-images-jpeg-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-existing-images-jpeg-measurement.json",
+            "sha256": "459b14ca14f7ef92852945642580bd09c13cf402c8fe90856fbb86e273539320"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/native-final-web-jpeg-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/native-final-web-jpeg-measurement.json",
+            "sha256": "833fc2cc482748588a7deb58532a8becc7a4f33940dfb11770d8420753fdcf24"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/new-blender-cross-dcc-lighting-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-blender-cross-dcc-lighting-measurement.json",
+            "sha256": "a293a621dd72beebfd81129154c5e6bcf9dc2e3302207efe6a1146257702e049"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/new-lighting-original-import.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-original-import.json",
+            "sha256": "27d235d15bf38ee58c3bd96500c54aee3cfe449428ad35ee23f5e9bcf1751640"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/new-lighting-requests.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-requests.json",
+            "sha256": "bd1cc183b3b020cf1022c20d728507c84fc3a086b207a86a549b5c788808731f"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/new-lighting-responses.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/new-lighting-responses.json",
+            "sha256": "734e8ec61945954575794774d5a7b9ccf04ce6ad32b6c08379456be8788d8261"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/official-cli-independent-oidn-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/official-cli-independent-oidn-measurement.json",
+            "sha256": "bee6f6c98a2783bb647aa2fd20c72ef60b072fa724534003b3a189ac45f76d5c"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/original-mantra-and-public-png-measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/original-mantra-and-public-png-measurement.json",
+            "sha256": "323758a7a35f9006a7bcd0dde249370b47085b2b6fdf1cfeccaca9f4f8eeccec"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-evidence/original-render-lineage.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/original-render-lineage.json",
+            "sha256": "473ffba5e87ff333bf2ad335bb49937cba44b594eb664bde33a0543229ec3f88"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-2026-10-20.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-2026-10-20.json",
+            "sha256": "477a37eedad04e082fc6292b815809ecc77e3fa0ab83deeaae2e50efcdf0d670"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/acceptance.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/acceptance.json",
+            "sha256": "42cc6dfd7f54b87be18a4e4b77a5485627b3ce4db021f07a718fc264372b25d4"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/encode-source.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/encode-source.json",
+            "sha256": "84d0cd0d3fb8b3be73f125a363541dc13e04c6dfd8cb5254ae6febe0aecac0ba"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/measurement.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/measurement.json",
+            "sha256": "e76b17d9e7a56a8fbef0f962d9d3e8ec9166016ddd84fccd299fb1182d0060ff"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/native-readback.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/native-readback.json",
+            "sha256": "ad2f96eff293816fb1db79041b62979b385d7992287bbe341caf2530689eb538"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/request.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/request.json",
+            "sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/response.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/response.json",
+            "sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "ecosystem-repair-evidence/source-freeze.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/source-freeze.json",
+            "sha256": "fc595b626519c0298e3df164cb666ee86fe9f6c8c213a3a86953e68f870aa5c9"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "gateway-receipt.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/gateway-receipt.json",
+            "sha256": "836770095343c8b6ad8727f48c6d80a8811e41e69a7f10cab5ca415c280f4136"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "hero.jpg",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/hero.jpg",
+            "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "lighting-study.jpg",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/lighting-study.jpg",
+            "sha256": "879615d15da1c2e6f34bdf80c31027df2aa49c3c56a39cbf83bc03401ebb6eee"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "png-publication.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/png-publication.json",
+            "sha256": "a1715f1e72f0d6034c39cbf344bf8142b805f6d5bfd342f09c76bcfb60a1a797"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "preview.jpg",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/preview.jpg",
+            "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "production-intermediates/ceramic.obj",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/production-intermediates/ceramic.obj",
+            "sha256": "74e814b5c81a57a4dc14080a08b7ef7f4abf0ed3a35be283ad0ba303a6006ba9"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "production-intermediates/hero-public.png",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/production-intermediates/hero-public.png",
+            "sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "production-intermediates/lighting-display.png",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-display.png",
+            "sha256": "50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "production-intermediates/preview-public.png",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/production-intermediates/preview-public.png",
+            "sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be"
+          },
+          "kind": "production"
+        },
+        {
+          "member": "profile.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/profile.json",
+            "sha256": "64032138438d5acb395de7f83e09a0bdc856c04818c116b603e43f640a3e33d3"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "prompt.md",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/prompt.md",
+            "sha256": "329d100c4bccf7bef00195f0d5b00b94f55d65fbac3497a65372738fe83e610a"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "recipe.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/recipe.json",
+            "sha256": "df014d3210393e196d95910a37b7a1bb2edd22d6d75df9e253da1baa1d4e1b30"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "replay-cli.ps1",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/replay-cli.ps1",
+            "sha256": "6c9f43a13e99b73c9cddb0281fdd57b6ae06a4fb834da70ed4ea4f22fb358fa9"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "replay-smoke.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/replay-smoke.json",
+            "sha256": "fcba16c736b5ff756734c7d8960bc7ce019a9d44967173ba24ea16154e9ea2cc"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "sanitize_png_metadata.py",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/sanitize_png_metadata.py",
+            "sha256": "876b1810518ad7547260413db2c0ec99eb66d562f85ef1a0bdb064f1c0e2ab96"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        },
+        {
+          "member": "validation.json",
+          "source": {
+            "path": "docs/showcase/houdini-procedural-study/validation.json",
+            "sha256": "6a875a57ed8766ac1ef444527babaee34b48e8499a3f9948585e6f9a88b2e966"
+          },
+          "kind": "support",
+          "reason": "Actual recorded calls, measurements, reproduction source or documentation; source code inclusion does not claim execution."
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "stale",
+    "evidence": {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-evidence/independent-review.json",
+      "sha256": "bb91616125412990e4c2eaf987fc28466976a6cf0af993e023f71ce2977f3947"
+    },
+    "reason": "Historical independent review predates the 2026-10-27 support-source/package repair; current graph review is pending. Native outputs and native acceptance receipts are unchanged; no new native execution or acceptance is claimed."
+  }
+}

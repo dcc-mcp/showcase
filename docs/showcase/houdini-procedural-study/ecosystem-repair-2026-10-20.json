@@ -1,0 +1,104 @@
+{
+  "schema": "dcc-showcase-production-stage-repair/v1",
+  "date": "2026-10-20",
+  "whole_case_verified": false,
+  "stage": {
+    "id": "native-web-jpeg-encoding",
+    "phase": "export",
+    "status": "succeeded",
+    "route": "mcp",
+    "component": {
+      "version": "0.2.22",
+      "source": "https://pypi.org/project/dcc-mcp-blender/0.2.22/"
+    },
+    "request": {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/request.json",
+      "sha256": "054b91a3e1f99ced94b86a800f1d2d64034fc0aade0f9e36a2d26ed61ad4fb39"
+    },
+    "response": {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/response.json",
+      "sha256": "ace6404afdf746b037af6ec9266c6287a3b246d39efc5a23fac4100ae1b3f9b3"
+    },
+    "artifact_measurement": {
+      "path": "docs/showcase/houdini-procedural-study/ecosystem-repair-evidence/measurement.json",
+      "sha256": "e76b17d9e7a56a8fbef0f962d9d3e8ec9166016ddd84fccd299fb1182d0060ff"
+    },
+    "inputs": [
+      {
+        "path": "docs/showcase/houdini-procedural-study/production-intermediates/preview-public.png",
+        "sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be"
+      },
+      {
+        "path": "docs/showcase/houdini-procedural-study/production-intermediates/hero-public.png",
+        "sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9"
+      }
+    ],
+    "outputs": [
+      {
+        "path": "docs/showcase/houdini-procedural-study/preview.jpg",
+        "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c"
+      },
+      {
+        "path": "docs/showcase/houdini-procedural-study/hero.jpg",
+        "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b"
+      }
+    ]
+  },
+  "original_source_provenance": {
+    "publication": {
+      "path": "docs/showcase/houdini-procedural-study/png-publication.json",
+      "sha256": "a1715f1e72f0d6034c39cbf344bf8142b805f6d5bfd342f09c76bcfb60a1a797"
+    },
+    "actual_calls": {
+      "path": "docs/showcase/houdini-procedural-study/calls.json",
+      "sha256": "f43461f775c1dcf77ad4e002c9f604f126bb8a762cf77025fe1e5dff4a6c4fe0"
+    },
+    "release_sha256": "7ec68e566f2d70b88206c342ff15ed77c5fab80186dc2127f338735c1647f1c7"
+  },
+  "remaining": [
+    "The lighting-study original PNG was overwritten; its legacy JPEG is not relabeled as ecosystem production.",
+    "The historical release ZIP retains the three legacy documentation JPEGs. A later complete version must align package and page assets without rewriting that old release.",
+    "Original early response-only calls and later complete replay records remain separate; no missing historical requests are invented."
+  ],
+  "quality": {
+    "full_decode": true,
+    "files": [
+      {
+        "source_sha256": "8358b0cbb26a6e9a83bceda05cfc0c84474f51ff6a8494d3ac5f0ff4d3a755be",
+        "source_unchanged": true,
+        "output_sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c",
+        "bytes": 43862,
+        "mean_abs_rgb_error": 0.7456105324074075,
+        "threshold": 6,
+        "passed": true
+      },
+      {
+        "source_sha256": "d88015b9b5405301edde9617b8ca93852dcc260699980f76832079309e314be9",
+        "source_unchanged": true,
+        "output_sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b",
+        "bytes": 54138,
+        "mean_abs_rgb_error": 0.63584,
+        "threshold": 6,
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "scope": "Two existing display RGB encodings; source alpha discarded, no color grading, no new geometry rendering"
+  },
+  "visual_review": {
+    "status": "passed",
+    "reviewed_at": "2026-10-20T16:47:00Z",
+    "reviewer": "Independent parent reviewer",
+    "scope": "The two new JPEG encodings only: readable content and no visible new framing/color damage. Not a new modeling/render or whole-case acceptance.",
+    "outputs": [
+      {
+        "path": "docs/showcase/houdini-procedural-study/preview.jpg",
+        "sha256": "13fe535fc14b48b629c1fd628c9881b2164e289307014eb0f3dc9d4727e9809c"
+      },
+      {
+        "path": "docs/showcase/houdini-procedural-study/hero.jpg",
+        "sha256": "fad9edcae9d3139affd3420e5828a8a13ff401870051fe7322399ae78df9e45b"
+      }
+    ]
+  }
+}

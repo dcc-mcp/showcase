@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "ab60f3cb30c9b847fea2f25cc7e66a575833852e7d7ab0a511ae15b47344625f",
+  "response_sha256": "5c4a5ef5c8ba09929d49a7c7d43b7b36a402a353180404187e3c1b001033887d",
+  "outputs": [
+    {
+      "path": "docs/showcase/trail-and-air/production-intermediates/hero-native.png",
+      "sha256": "ac2103f65ae6864af63803176ebf31a47309a7710c470ab093d1c953cd1371a1"
+    }
+  ],
+  "measurement_role": "Current independent observation of retained production content, not a fabricated native response",
+  "scope": "Original native mesh/FONT authoring, save/clear/reopen, Cycles16 final render; three representative independently normalized waveforms; no old JPEG used"
+}

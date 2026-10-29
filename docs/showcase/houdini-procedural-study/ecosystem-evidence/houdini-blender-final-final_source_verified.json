@@ -1,0 +1,22 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "c5c274b7903c6ae697fdcb2a0eca46e29746e3a18b897c464edc374152be357e",
+      "record": {
+        "worker_returncode": 0,
+        "true_passes": true,
+        "pass_names": [
+          "Combined",
+          "Alpha",
+          "Denoising Albedo",
+          "Denoising Depth",
+          "Denoising Normal"
+        ],
+        "beauty_full_decode": false,
+        "auxiliary_decode_scope": "Native node exposes actual AOVs; full selected-pass decode pending official denoise backend. Image.pixels is unavailable for this multilayer EXR.",
+        "sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801"
+      }
+    }
+  ]
+}

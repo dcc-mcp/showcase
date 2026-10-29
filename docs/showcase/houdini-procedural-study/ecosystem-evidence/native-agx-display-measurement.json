@@ -1,0 +1,13 @@
+{
+  "status": "succeeded",
+  "request_sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7",
+  "response_sha256": "248442d52fd8ecdb7b4318bbfa37d085a892f31c6750f638d08b7947557bc5e7",
+  "outputs": [
+    {
+      "path": "docs/showcase/houdini-procedural-study/production-intermediates/lighting-display.png",
+      "sha256": "50e2b3fef640b7fdb07214b717bb5cc85abec1a0d5b7e40d932426a418abe6e5"
+    }
+  ],
+  "measurement_role": "Current observed bytes linked to retained actual calls; not a fabricated native response",
+  "scope": "Full native single-layer EXR pixel decode finite/opaque, image.save_render AgX Medium High Contrast/exposure0/gamma1/sRGB; no geometry render."
+}

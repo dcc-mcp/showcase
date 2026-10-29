@@ -1,0 +1,240 @@
+{
+  "schema": "gimp-preview-selected-native-qualification-v2",
+  "status": "PASS_SELECTED_NATIVE_PREVIEW_CASES",
+  "scope": "Selected independently reviewed results from a fresh Linux GIMP 3.0.4 native MCP run using verification helper revision 2. This corrects the active-image assertion and cleanup tail while retaining the original adapter source, wheel, plugin and fixture inputs. No complete acceptance-suite or Windows qualification claim.",
+  "source_identity": {
+    "public_base_commit": "ea9270a82bd0821993f0c611d9cad2d36e06405d",
+    "candidate_commit": "a3b45aaa237aef954247c8571fb0762afe5cface",
+    "candidate_tree": "4e855af540036b3ab5ee041be5402f3bc0f98dc7",
+    "candidate_identity_scope": "Execution is pinned to the reviewed historical local candidate based on the public base. This receipt does not assert a subsequent public preview merge or release.",
+    "bound_source_files": 69,
+    "source_wheel_installed_package_files": 42,
+    "wheel_sha256": "adb43849349ca54944bd9280a8497d90bca77e6726733c3fca5991164fe1a1ad",
+    "native_plugin_sha256": "8bcec953df8fa072ec26c24a0576803634d234d638a0f18f9a57ca6b8ae51065",
+    "binding_receipt_sha256": "1af1dbea7d5c8fdf84d4d2f61b2bc0c0336a2487e5f51892fe064d736fa984f4",
+    "native_fixture_sha256": "211c5cda4b41df33d83c0687a85b47360fa0b18fcc8ea3ea9670054ca78c0e31",
+    "adapter_runtime_changed_for_correction": false
+  },
+  "validation": {
+    "full_source_tests_passed": 283,
+    "historical_platform_tests_skipped": 14,
+    "independent_focused_host_free_tests_passed": 111,
+    "native_trace_records": 195,
+    "terminal_native_jobs": 53,
+    "successful_native_jobs": 52,
+    "intended_rejected_native_jobs": 1,
+    "successful_preview_exports": 3,
+    "transport": "Default environment-aware HTTPX transport with explicit timeouts; no trust_env override.",
+    "adapter_test_scope": "The recorded 283 source tests and 111 independent focused checks belong to the unchanged original adapter qualification; they were not rerun as new adapter suites for this helper-only correction.",
+    "verification_r2_host_free_tests_passed": 48,
+    "additional_independent_cleanup_fault_tests_passed": 5,
+    "post_native_package_binding_check": "PASS: 69 source files, 42 installed package files, 6 helpers, 3 inputs and exact wheel binding; no native launch from the check."
+  },
+  "master_source": {
+    "dimensions": [
+      2560,
+      1600
+    ],
+    "original_xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+    "original_input_xcf_bytes_unchanged": true,
+    "reference_and_before_after_export_rgba_equal": true,
+    "rgba_sha256": "463c1e2a47d4188e124039f1f2b9909386b659c89d5193f1b35ab11ebae47ba5",
+    "layer_nodes": 30,
+    "groups": 5,
+    "editable_text_layers": 19,
+    "complete_inspection_before_after_equal": true,
+    "metadata_matches_qualified_reference": true,
+    "metadata_and_parasite_previews_untruncated": true,
+    "native_text_parasites_matching_saved_bytes": 19,
+    "text_parasites_exercising_high_bit_unicode": 3,
+    "original_before_after_text_parasite_payloads_equal": true,
+    "dirty_before_and_after": false,
+    "selected_layers_and_active_image_readback_unchanged": true
+  },
+  "previews": {
+    "master": {
+      "dimensions": [
+        1600,
+        1000
+      ],
+      "bytes": 249425,
+      "file_sha256": "f6be178989166bff47294a1513b1913eddb14b877ce498c4ba998beafee324ba",
+      "rgba_sha256": "6a009a9e9fb6dc9585d59a2b6981bb523d0f3d1b4011e1f5c6754d8c181823be",
+      "source_dirty_before_after": false,
+      "source_state_before_after_equal": true,
+      "alpha_every_pixel": 255,
+      "intended_source_image_id": 1,
+      "active_image_id_before": 1,
+      "active_image_id_after": 1,
+      "active_ids_match_intended_source": true,
+      "proof_receipt_sha256": "82c74f39fe7ee0f648233b78fbc8040acb0c05a64add437a5889b16ed2b2bab6"
+    },
+    "rgba_no_upscale": {
+      "dimensions": [
+        7,
+        13
+      ],
+      "bytes": 1562,
+      "file_sha256": "ed98c3060ab435b49d9f33a63b11e939ad92272070b93816178a4d21850c3a25",
+      "rgba_sha256": "cf742e89ee2a65042103308935b18c3e4b5c2aa8140373a007bd1252dff710bc",
+      "source_dirty_before_after": true,
+      "source_state_before_after_equal": true,
+      "every_pixel_rgba": [
+        80,
+        120,
+        220,
+        128
+      ],
+      "intended_source_image_id": 8,
+      "active_image_id_before": 8,
+      "active_image_id_after": 8,
+      "active_ids_match_intended_source": true,
+      "proof_receipt_sha256": "31f645d87d95accc5e396ab7365eccdb8f606e626ca20b8fcf3ea5c81f9e8041"
+    },
+    "rgba_rounded_aspect": {
+      "dimensions": [
+        3,
+        6
+      ],
+      "bytes": 1495,
+      "file_sha256": "9bc1e2609dee4e889a0d0865ae257c7cc361984dc16a8ef0dffea151432723c8",
+      "rgba_sha256": "50cba67b9ebd65cb5f149669f5572d1aa452b6093288e964cca96f27b97aa790",
+      "source_dirty_before_after": true,
+      "source_state_before_after_equal": true,
+      "every_pixel_rgba": [
+        80,
+        120,
+        220,
+        128
+      ],
+      "intended_source_image_id": 8,
+      "active_image_id_before": 8,
+      "active_image_id_after": 8,
+      "active_ids_match_intended_source": true,
+      "proof_receipt_sha256": "afc3643573ae19c5e0344d048eb7b795ec451f6bab912be972c4e5d00930fd87"
+    }
+  },
+  "native_reopen": {
+    "preview_dimensions": [
+      1600,
+      1000
+    ],
+    "all_preview_rgba_equal_after_native_reopen_and_export": true,
+    "png_container_bytes_equal": false
+  },
+  "rejection": {
+    "case": "Unsupported JPEG output extension",
+    "distinct_native_cases": 1,
+    "native_job_rejected": true,
+    "source_inspection_and_image_inventory_unchanged": true,
+    "output_not_created": true
+  },
+  "native_retention": {
+    "duplicate_scale_export_route": "Native image duplicate, verified NoHalo interpolation, native scale and PNG export",
+    "source_fingerprint_before_after_equal": true,
+    "fingerprint_scope": "Native layer RGBA including hidden layers; mask geometry/bytes/flags; selection bytes; supported text attributes; item parasites; metadata; composition settings; ICC bytes; selected items, dirty state and image inventory. Full composite RGBA is checked separately by exported pixels.",
+    "successful_preview_responses_attest_published_and_nohalo": true,
+    "temporary_native_images_deleted": true,
+    "pushed_context_restored_before_publication": true,
+    "preview_staging_directories_absent_at_end": true,
+    "native_image_inventory_empty_at_end": true
+  },
+  "cleanup": {
+    "normal_owned_shutdown_pass": true,
+    "owned_sigterm_used": true,
+    "force_kill_used": false,
+    "native_host_returncode": 1,
+    "native_host_exited": true,
+    "plugin_observed_status": "zombie; exited/inactive, not absent or reaped",
+    "owned_listeners_closed": true,
+    "server_stopped": true,
+    "native_log_collector_stopped": true,
+    "gateway_port": 0,
+    "gateway_failover": false,
+    "ephemeral_environment_token_removed": true,
+    "cleanup_errors": []
+  },
+  "limits": {
+    "source_type": "RGB/RGBA U8_NON_LINEAR",
+    "maximum_output_side": 2048,
+    "maximum_source_side": 8192,
+    "maximum_source_pixels": 16777216,
+    "maximum_layer_nodes": 256,
+    "maximum_aggregate_layer_and_mask_pixels": 134217728,
+    "maximum_parasites_per_item": 256,
+    "native_pixel_hash_strip_limit_bytes": 1048576,
+    "unsupported": "Saved channels, paths, floating selections, nonempty drawable filters, indexed/HDR source formats.",
+    "aspect_fit": "No upscale; nonlimiting dimension is floored to an integer with a one-pixel minimum.",
+    "retention_claim": "The original input XCF is byte-identical and full master RGBA is retained. Before/after native checkpoint XCF byte identity is not claimed. PNG equality claims use decoded RGBA except where a specific file hash is provided.",
+    "filesystem_scope": "Trusted isolated host and caller-controlled allowed directories; no hostile same-user or cross-user Windows ACL guarantee. A cleanup error after publication is not a rollback or retry-safe outcome.",
+    "native_coverage": "Three successful preview exports, one preview reopen/readback, and one unsupported-extension rejection. Other failure/collision paths have host-free coverage only. No native Windows, complete suite, every GIMP property or full showcase acceptance claim.",
+    "binary_privacy_scope": "This selected receipt contains no raw metadata, raw trace, private filesystem location, credentials, host identifier, process identifier or job identifier. It includes only the specifically reported run-local image IDs. It does not grant publication clearance to arbitrary raw logs or binary metadata.",
+    "active_image_scope": "Actual source-matching IDs are checked before and after all three successful previews. The unsupported-extension rejection retains source inspection, image inventory and no-output checks without a separate active-image sample.",
+    "cleanup_correction_scope": "The entered guarded cleanup tail releases process-local lifecycle state despite final metrics or receipt failures. Startup before that protected block and pathological error-formatting failures are outside this narrow guarantee; no force-kill or transactional host rollback is introduced."
+  },
+  "evidence_sha256": {
+    "native_qualification": "8ec8ba4e3ccd1b418a5c784b6eb1bdd7261601a8b4456843006c2c5e5adbac13",
+    "native_trace": "5a4ff6bef3e8b219a8ca8af68bf91f1d77d9c26d9c8fef32bef22feeced0d813",
+    "cleanup": "a2d4edd92a5fdb533531270ad1212bbab1c3c8a33217a485723c218e6fdfaf30",
+    "native_text_parasite_checks": "f00d6286dff7d261b410b64e20c909a422be7825b9226120f01f6df3e07e925b",
+    "package_binding_run_receipt": "52ea831b09476745e3e1dec1aa80df8c861c0c80f3eef6d9ca1f16e00ae15895",
+    "launch_receipt": "fef32e9a1f978259b21943972c9eaa45202b14cd26e76c83a6a4c069ee0bac68",
+    "master_preview_proof": "82c74f39fe7ee0f648233b78fbc8040acb0c05a64add437a5889b16ed2b2bab6",
+    "rgba_no_upscale_proof": "31f645d87d95accc5e396ab7365eccdb8f606e626ca20b8fcf3ea5c81f9e8041",
+    "rgba_rounded_aspect_proof": "afc3643573ae19c5e0344d048eb7b795ec451f6bab912be972c4e5d00930fd87"
+  },
+  "full_acceptance_claimed": false,
+  "execution_phase": "corrected-verification-native02",
+  "active_image_verification": {
+    "assertion": "Explicit completed native result.context.image.image_id must be a positive built-in integer, excluding booleans, and must equal the intended source before and after each successful preview.",
+    "actual_completed_response_ids": [
+      {
+        "case": "master",
+        "intended_source_image_id": 1,
+        "before": 1,
+        "after": 1
+      },
+      {
+        "case": "rgba_no_upscale",
+        "intended_source_image_id": 8,
+        "before": 8,
+        "after": 8
+      },
+      {
+        "case": "rgba_rounded_aspect",
+        "intended_source_image_id": 8,
+        "before": 8,
+        "after": 8
+      }
+    ],
+    "identifiers_scope": "Run-local native image IDs requested for verification; they are not process, account, host or job identifiers.",
+    "all_six_ids_cross_checked_against_raw_completed_responses": true,
+    "original_generic_lookup_equality_credited": false,
+    "rejection_case_active_image_sampled": false
+  },
+  "historical_correction": {
+    "original_native01_trace_sha256": "73c67e73963d63d0d8e9ffa19ad5f074965ef484e90c926e5a5c7acc8e5c8ca9",
+    "original_native01_qualification_sha256": "a868793346aef881d7eb11e629392942523be5b4ad674272cba722aff772acdc",
+    "original_selected_receipt_sha256": "2982b528513ac63eaca70b9bf1323acb72a56e50f5eb17330dbca14835450947",
+    "original_helper_sha256": "b8f028455e64c971a20ea89925eeebd4ab5e321f134e9dfba59e34cafab99503",
+    "original_binding_sha256": "fa4800032e018ed17e328edbb3bc64e40a1a6d4fd36503d3e2afe997126623ce",
+    "original_artifacts_and_receipts_preserved_unchanged": true,
+    "explanation": "The original generic image_id lookup did not descend into the nested image object. Its six lookups returned None, so their equality was not valid active-image assertion evidence. Independent read-only analysis of the intact original completed responses found actual pairs 1 to 1, 8 to 8 and 8 to 8. The fresh native02 run executes the corrected strict assertions and supplies the current qualification; native01 remains historical.",
+    "separate_historical_response_audit_sha256": "9addec03cc6c342efc67e432c6e06705fd3375bcc6a62598a9b5e9eba4455276",
+    "separate_cleanup_correction": "The verification helper now executes token removal, signal-handler restoration and lane-lock release through the guarded cleanup finalizer before attempting its cleanup receipt. Host-free metric, serialization and receipt-failure checks pass; such errors block cleanup success. The fresh native run follows normal owned shutdown without those injected faults."
+  },
+  "accepted_media_retention": {
+    "accepted_native01_preview_png_sha256": "08cb592dc6b94cbf6974cba6a75cd91d415d3aabf23cce596717d654a262eb0e",
+    "corrected_native02_preview_png_sha256": "f6be178989166bff47294a1513b1913eddb14b877ce498c4ba998beafee324ba",
+    "dimensions": [
+      1600,
+      1000
+    ],
+    "complete_decoded_rgba_equal": true,
+    "rgba_sha256": "6a009a9e9fb6dc9585d59a2b6981bb523d0f3d1b4011e1f5c6754d8c181823be",
+    "all_png_chunks_except_time_equal": true,
+    "only_changed_png_chunk_type": "tIME",
+    "accepted_original_preview_may_be_preserved": true,
+    "scope": "Container bytes differ only in the ancillary PNG timestamp chunk and its checksum. All native02 preview pixels, native reopened pixels, full master before/after pixels and both alpha fixtures also equal their native01 counterparts."
+  }
+}

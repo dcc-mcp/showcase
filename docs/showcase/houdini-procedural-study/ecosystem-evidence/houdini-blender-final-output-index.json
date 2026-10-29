@@ -1,0 +1,15 @@
+{
+  "scope": "Actual retained records, machine paths redacted; original byte hashes retained",
+  "records": [
+    {
+      "original_receipt_sha256": "38abaf3cf7e669dfdcfec8ac9639f60a96ab962078cd938c847b78f59799b9ea",
+      "record": {
+        "sha256": "4a0f4902805dcd2f6c6a41d7117a66c025396b3fb9cd8080f597c2bf715a0801",
+        "bytes": 44042064,
+        "source_blend_sha256": "b297ebbdf20f033195b34b84b9866ffa3110ff446fe87ef6bf52240dcc559b63",
+        "full_decode": "pending native mature decoder; file existence is NOT acceptance",
+        "visual_review": "pending"
+      }
+    }
+  ]
+}

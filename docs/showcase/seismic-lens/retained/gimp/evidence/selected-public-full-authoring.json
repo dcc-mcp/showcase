@@ -1,0 +1,36 @@
+{
+  "status": "PASS_NATIVE_FULL_D015_GIMP_COMPOSITION",
+  "scope": "2560x1600 five-panel synthetic analytic exhibition plate; publication/visual/privacy review remain separate",
+  "planned_gimp_operations_completed": 45,
+  "editable_text_layers": 19,
+  "independent_panel_groups": 5,
+  "exact_native_font": "DejaVu Sans Book",
+  "checks": {
+    "all_five_imported_native_rgba_exact": true,
+    "native_saved_parasite_bytes_equal": true,
+    "native_xcf_structure_equal": true,
+    "native_reopened_parasite_bytes_equal": true,
+    "full_plate_rgba_equal_after_xcf_reopen": true,
+    "master_rgba_sha256": "463c1e2a47d4188e124039f1f2b9909386b659c89d5193f1b35ab11ebae47ba5"
+  },
+  "xcf_sha256": "8efc1515de37d6e917d0b55bdfa24a8c9faae087f2cbe63b60d0f1aa1c7c09e5",
+  "real_mcp_events": 202,
+  "metadata_unchanged_claimed": false,
+  "PNG_byte_equality_claimed": false,
+  "full_D015_acceptance": false,
+  "projection_schema": "d015-selected-public-full-authoring-v1",
+  "raw_qualification_sha256": "85ab9b8bb5372d4232ab6d884b04973fd78c22efb84ac635ee998e54f6316187",
+  "raw_trace_sha256": "8698ef9c54ba153a1bc516661bbe3b3a79a5edbe2be101a8539f5572059701e9",
+  "raw_evidence_included": false,
+  "verified_recipe_sha256": "696d60c54b212af6d29e93308985693bcfd94107b236fcacd6a99d0ddf7c6267",
+  "qualified_package_manifest_sha256": "b2ad55faf41b12be8658c160ad3d8d5a005d397ab956a08b1dad71eaafba60d0",
+  "native_xcf_byte_identical_to_distributed_original": true,
+  "cleanup": {
+    "normal_owned_shutdown_pass": true,
+    "force_kill_used": false,
+    "listeners_closed": true,
+    "owned_plugin_exited": true
+  },
+  "independent_reference_pixel_review": "PASS_ALL_REFERENCE_RGBA_XCF_BYTES_19_PARASITES_CANONICAL_TREE_COMPLETE_METADATA",
+  "independent_review_projection_sha256": "0c6afba536bea9fd1e93cda452ac1e8c6e678851e36943b207cbf9d88357698f"
+}

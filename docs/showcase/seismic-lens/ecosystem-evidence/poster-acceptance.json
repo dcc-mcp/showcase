@@ -1,0 +1,23 @@
+{
+  "representation": "actual recorded values with only declared task-root path substitution; not reconstructed calls",
+  "original_file_sha256": "130cff4c42f342120ef1b9f95c44fa09f5f888ba3b513525ad29c3e2e35c6f68",
+  "normalization": "task-root, qualification-root, hosted-temp, candidate-checkout, hosted-toolchain, system-bin, system-lib, temporary-root, agent-home and owned-loopback placeholders; raw hashes remain hashes of original bytes",
+  "records": {
+    "source_sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5",
+    "source_unchanged": true,
+    "output_sha256": "4bc82d1edc518083af46dca7822673483ac17535e58c44d92855be762b8663c1",
+    "full_decode": true,
+    "dimensions": [
+      1178,
+      814
+    ],
+    "reference_frame_zero_based": 119,
+    "reference_rgb_sha256": "cf08d2c6b0e8382dd6fbb72a834e3f170d95959b48f2fc61152defeb25aaf4a9",
+    "mae_rgb_255": 0.6050764841087422,
+    "threshold": 3,
+    "bytes": 296550,
+    "budget": 409600,
+    "passed": true,
+    "visual_review": "pending"
+  }
+}

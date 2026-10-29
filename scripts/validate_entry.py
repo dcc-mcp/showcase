@@ -34,7 +34,7 @@ def sha256_of(path: str) -> str:
     return h.hexdigest()
 
 
-def validate(entry_dir: str) -> list[str]:
+def validate(entry_dir: str, native_downloads=()) -> list[str]:
     """Return a list of problems; empty means the entry is complete."""
     problems: list[str] = []
     name = os.path.basename(entry_dir.rstrip(os.sep))
@@ -81,10 +81,12 @@ def validate(entry_dir: str) -> list[str]:
             width = rec.get("width")
             if width is None:
                 problems.append("%s: %s image without width" % (name, rel))
-            elif width > MAX_IMAGE_WIDTH:
+            elif width > MAX_IMAGE_WIDTH and rel not in native_downloads:
                 problems.append("%s: %s is %dpx wide (max %d)"
                                 % (name, rel, width, MAX_IMAGE_WIDTH))
-            if os.path.getsize(path) > MAX_IMAGE_BYTES and not rel.lower().endswith((".jpg", ".jpeg")):
+            if (os.path.getsize(path) > MAX_IMAGE_BYTES
+                    and not rel.lower().endswith((".jpg", ".jpeg"))
+                    and rel not in native_downloads):
                 problems.append("%s: %s is over %d bytes and is not JPEG (convert at q82)"
                                 % (name, rel, MAX_IMAGE_BYTES))
 

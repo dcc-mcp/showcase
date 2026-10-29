@@ -1,0 +1,18 @@
+{
+  "scope": "Independent full decode of unchanged historical native-window observation; not new artwork production or a claim original raw transcript is complete",
+  "artifact": {
+    "path": "docs/showcase/seismic-lens/seismic-lens-native-layers.mp4",
+    "sha256": "864429ad81c61178b39079b3aea677a430ce9ed6d2e6cb43ec9852cb87420db5"
+  },
+  "full_decode": true,
+  "decoded_frames": 120,
+  "unique_decoded_frame_hashes": 98,
+  "width": 1178,
+  "height": 814,
+  "fps": "15/1",
+  "duration_seconds": 8.0,
+  "audio_streams": 0,
+  "decode_route": "Independent FFmpeg single-thread decoder to framemd5, no encoding or content output",
+  "frame_measurements_sha256": "3971b49de406a04b0cf7d1c7868be6d20ba6402afaf65746bce6cd5d3b032e76",
+  "source_unchanged": true
+}
