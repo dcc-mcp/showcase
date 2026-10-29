@@ -79,6 +79,11 @@
       "path": "validation.json",
       "bytes": 10260,
       "sha256": "1dcd1b68df8e8085ee9557a9d85cf4b3ce211be73e734090a11b3ec29e8d69c9"
+    },
+    {
+      "path": "publication-review-2026-10-29.json",
+      "bytes": 2775,
+      "sha256": "56ddd43a7b88df60850e0f288958ca58a642d62faffebe28066ef7a5f08e4cd5"
     }
   ]
 }

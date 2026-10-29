@@ -161,5 +161,10 @@
   "dcc-mcp-godot 0.9.12 · godot-vfx / godot-shader · 304e036575349b0b7f54f6c46d8a4be7667c6e4d · Draft": "dcc-mcp-godot 0.9.12 · godot-vfx / godot-shader · 304e036575349b0b7f54f6c46d8a4be7667c6e4d · Draft",
   "近景法阵与重心候选 · 预览": "Close sigil and balance candidate · Preview",
   "保留当前完整动作候选，修正近景构图和空间音量，复用远景；新版预览接入原播放器，公开包排除模型/PBR，视听与最终 CI 门禁保持待验。": "Preserved current complete motion candidate; corrected close framing/spatial gain and reused the wide shot. New preview uses the existing player; public kit excludes model/PBR; audiovisual/final CI gates remain open.",
-  "34 文件源码包排除模型/PBR；全新导入、程序化角色、六预设、声音保存重开及 Windows 导出启动均通过。": "The34-file source kit excludes model/PBR; fresh import,procedural character,six presets,audio save/reopen and Windows export launch all passed."
+  "34 文件源码包排除模型/PBR；全新导入、程序化角色、六预设、声音保存重开及 Windows 导出启动均通过。": "The34-file source kit excludes model/PBR; fresh import,procedural character,six presets,audio save/reopen and Windows export launch all passed.",
+  "2026-10-28 已部署为制作预览；2026-10-29 已核实英中页面 HTTP 响应及影片/源码下载哈希。线上播放、暂停、跳转和真实交互仍未验证；下载成功不等于播放器或 Web 可玩验收。": "Deployed as a production preview on 2026-10-28. On 2026-10-29, English/Chinese page HTTP responses and film/source download hashes were verified. Live play, pause, seeking and real interaction remain untested; successful downloads do not establish player or Web-playable acceptance.",
+  "本制作预览已随 PR #59 于 2026-10-28 合并并部署；仍待人工视听验收，不是已认定的最终成片或已验收的 Web 游戏。": "This production preview was merged through PR #59 and deployed on 2026-10-28. Human audiovisual acceptance remains pending; it is not an accepted final film or an accepted Web game.",
+  "2026-10-29 发布与下载核验（非播放验收）": "2026-10-29 publication and download checks (not playback acceptance)",
+  "发布事实回读 · 验收范围不变": "Publication readback · acceptance scope unchanged",
+  "记录 PR #59 合并及 Pages 部署提交 8221f82a4e73eade6fcd94e425c6847e51132cc5；核实英中页面与当前下载字节，保留人工视听、MCP、真实输入和 Web 未验边界，不改历史制作记录。": "Record PR #59 merge and Pages deployment commit 8221f82a4e73eade6fcd94e425c6847e51132cc5; verify English/Chinese pages and current download bytes while preserving unverified human audiovisual, MCP, real-input and Web boundaries. Historical production records are unchanged."
 }

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "case_slug": "godot-mage-vfx",
+  "recorded_at": "2026-10-29T01:22:42Z",
+  "scope": "Read-only production-site HTTP, downloaded-byte and offline decode/archive checks; not a native, browser interaction, visual or listening review.",
+  "publication": {
+    "pull_request": "https://github.com/dcc-mcp/showcase/pull/59",
+    "merged_at": "2026-10-28T08:58:21Z",
+    "commit": "8221f82a4e73eade6fcd94e425c6847e51132cc5",
+    "pages_deployment_id": 7381149961,
+    "deployment_api": "https://api.github.com/repos/dcc-mcp/showcase/deployments/7381149961/statuses",
+    "pages_status": "success",
+    "pages_status_at": "2026-10-28T08:59:44Z"
+  },
+  "http_checks": [
+    {
+      "url": "https://dcc-mcp.github.io/showcase/",
+      "status": 200
+    },
+    {
+      "url": "https://dcc-mcp.github.io/showcase/zh/",
+      "status": 200
+    },
+    {
+      "url": "https://dcc-mcp.github.io/showcase/cases/godot-mage-vfx/",
+      "status": 200
+    },
+    {
+      "url": "https://dcc-mcp.github.io/showcase/zh/cases/godot-mage-vfx/",
+      "status": 200
+    }
+  ],
+  "gallery": {
+    "en_selected_cards": 20,
+    "zh_selected_cards": 20,
+    "mage_link_present_in_both": true
+  },
+  "downloads": [
+    {
+      "url": "https://dcc-mcp.github.io/showcase/docs/showcase/godot-mage-vfx/demo.mp4",
+      "status": 200,
+      "bytes": 12539585,
+      "sha256": "db0bb94905f830799ed6e91d8e15f64ceb6c624f1d938d1ab15ab8d300ee27bd",
+      "matches_manifest_at_commit": "8221f82a4e73eade6fcd94e425c6847e51132cc5"
+    },
+    {
+      "url": "https://dcc-mcp.github.io/showcase/docs/showcase/godot-mage-vfx/godot-mage-vfx.zip",
+      "status": 200,
+      "bytes": 484267,
+      "sha256": "a634b8061b5860ab75a2ea2626d60e5db1c7d1e957b68c5c9a5f0aa4c58f4dec",
+      "matches_manifest_at_commit": "8221f82a4e73eade6fcd94e425c6847e51132cc5"
+    }
+  ],
+  "offline_video_check": {
+    "tool": "FFmpeg 7.1.5-0+deb13u1",
+    "decoder_threads": 1,
+    "full_video_and_audio_decode_exit": 0,
+    "video_frames": 450,
+    "fps": "30/1",
+    "width": 1280,
+    "height": 720,
+    "video_duration_seconds": 15.0,
+    "audio_codec": "AAC",
+    "audio_duration_seconds": 15.018,
+    "scope": "Decoded downloaded public film; not real-time playback, production continuity or quality acceptance."
+  },
+  "offline_archive_check": {
+    "files": 34,
+    "crc_error": null,
+    "scope": "ZIP integrity and inventory only; source project was not executed or reopened."
+  },
+  "not_tested": [
+    "live browser play/pause/seek",
+    "native input and save/reopen",
+    "DCC-MCP production/ownership",
+    "Godot Web export/gameplay/touch",
+    "human visual/listening acceptance",
+    "physical-device performance",
+    "additional license entitlements"
+  ],
+  "historical_records_changed": false
+}
