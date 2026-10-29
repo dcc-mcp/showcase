@@ -166,5 +166,5 @@
   "本制作预览已随 PR #59 于 2026-10-28 合并并部署；仍待人工视听验收，不是已认定的最终成片或已验收的 Web 游戏。": "This production preview was merged through PR #59 and deployed on 2026-10-28. Human audiovisual acceptance remains pending; it is not an accepted final film or an accepted Web game.",
   "2026-10-29 发布与下载核验（非播放验收）": "2026-10-29 publication and download checks (not playback acceptance)",
   "发布事实回读 · 验收范围不变": "Publication readback · acceptance scope unchanged",
-  "记录 PR #59 合并及 Pages 部署提交 8221f82a4e73eade6fcd94e425c6847e51132cc5；核实英中页面与当前下载字节，保留人工视听、MCP、真实输入和 Web 未验边界，不改历史制作记录。": "Record PR #59 merge and Pages deployment commit 8221f82a4e73eade6fcd94e425c6847e51132cc5; verify English/Chinese pages and current download bytes while preserving unverified human audiovisual, MCP, real-input and Web boundaries. Historical production records are unchanged."
+  "记录 PR #59 合并及 Pages 部署提交 8221f82；核实英中页面与当前下载字节，保留人工视听、MCP、真实输入和 Web 未验边界，不改历史制作记录。": "Record PR #59 merge and Pages deployment commit 8221f82; verify English/Chinese pages and current download bytes while preserving unverified human audiovisual, MCP, real-input and Web boundaries. Historical production records are unchanged."
 }
