@@ -1,0 +1,73 @@
+{
+  "scope": "art_directed_exploded_source_model_not_simulation",
+  "part_count": 17,
+  "triangles": 150000,
+  "uv_preserved": true,
+  "sop": "explodedview::2.0",
+  "piece_attribute": "name",
+  "separation_scale": 1.0,
+  "bbox_min_m": [
+    -2.392392873764038,
+    -0.7434484362602234,
+    -5.370928764343262
+  ],
+  "bbox_max_m": [
+    1.9539291858673096,
+    1.589045524597168,
+    5.134231090545654
+  ],
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "artifact": "parts-exploded.jpg",
+  "physical_breakage": false,
+  "simulation_motion": false,
+  "camera": {
+    "translate_m": [
+      11,
+      10,
+      15
+    ],
+    "focal_mm": 55,
+    "target_m": [
+      0,
+      0.7,
+      0
+    ],
+    "resolution_px": [
+      960,
+      540
+    ]
+  },
+  "renderer": {
+    "engine": "Mantra",
+    "vm_renderengine": "pbrraytrace",
+    "pixel_samples": [
+      4,
+      4
+    ],
+    "min_ray_samples": 1,
+    "max_ray_samples": 9,
+    "water_visible": false,
+    "floor_visible": false
+  },
+  "parameter_basis": "Native node parameters and source-model measurement, supplied by the production operator; output paths and instance/job identities omitted",
+  "derivation": {
+    "source_native_exr": "parts-exploded-close.exr",
+    "source_exr_sha256": "aef7881ea95b68559866c58b7bede1cde9c3360c508971f329cba40025077cf6",
+    "source_exr_bytes": 282751,
+    "source_oiio_color_space": "lin_rec709",
+    "source_resolution_px": [
+      960,
+      540
+    ],
+    "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+    "output_rgb_format": "RGB24",
+    "jpeg_quality": 82,
+    "jpeg_encoder": "Pillow 12.3.0",
+    "jpeg_subsampling": 2,
+    "full_frame": true,
+    "resized": false,
+    "retouched": false,
+    "exif_preserved": false
+  }
+}

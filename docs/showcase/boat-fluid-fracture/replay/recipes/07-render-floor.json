@@ -1,0 +1,22 @@
+{
+  "parent_path": "/obj/boat_pool_base",
+  "nodes": [
+    {
+      "node_type": "box",
+      "node_name": "base",
+      "parameters": {
+        "size": [
+          8.1,
+          0.08,
+          10.1
+        ],
+        "t": [
+          0,
+          -1.25,
+          0
+        ]
+      }
+    }
+  ],
+  "cook_last": false
+}

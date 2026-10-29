@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "scope": "native static wood fracture geometry and portable cold-rebuild proof",
+  "status": "passed",
+  "recorded_date": "2026-10-26",
+  "houdini_version": "22.0.368",
+  "native_fracture_type": "rbdmaterialfracture::2.0",
+  "source": {
+    "archive": "source-intact.zip",
+    "archive_sha256": "0a8583b3f25cfcf40d1b1df5f91369310bb1a35f6a5b010de1f87946dc3caef3",
+    "obj_member": "boat.obj",
+    "original_triangles": 500000,
+    "original_obj_sha256": "0b4757cd60e5912c9f6a756f418f409d6dc6529dbaf00283b03c6ef21942ee02",
+    "archive_obj_sha256": "c728f8aa93f934c8339fe9f47543eea99103ac0d5a098f30ffe595a905a783fc"
+  },
+  "package": {
+    "path": "fractured-rest.zip",
+    "bytes": 25684528,
+    "sha256": "08c289710dfaf7d2bf93f5e65b84fefdfeedf52461ea05de794d49acb609175f",
+    "roles": {
+      "render": "geometry/rest/render_pieces.bgeo.sc",
+      "full_wood_source_for_fluid_sdf": "geometry/rest/render_pieces.bgeo.sc",
+      "contact_proxy_candidate": "geometry/rest/collision_proxy.bgeo.sc",
+      "native_adjacency_constraints": "geometry/rest/constraints_raw.bgeo.sc"
+    },
+    "cache_files": 3,
+    "hip_included": false
+  },
+  "geometry": {
+    "piece_count": 71,
+    "constraint_count": 171,
+    "render_points": 327616,
+    "render_triangles": 655084,
+    "contact_proxy_points": 10074,
+    "contact_proxy_triangles": 20000,
+    "inside_triangles": 91465,
+    "density_kg_m3": 400,
+    "total_wood_volume_m3": 2.449180135276925,
+    "total_mass_kg": 979.67205411077,
+    "native_source_volume_relative_error": 1.70344769403473e-09,
+    "ideal_obj_scale_volume_relative_error": 3.189172068134866e-08,
+    "raw_native_piece_count": 72,
+    "raw_native_constraint_count": 172,
+    "removed_zero_volume_artifacts": 1,
+    "removed_incident_bonds": 1
+  },
+  "checks": {
+    "blank_scene_typed_rebuild": "passed",
+    "exact_P_topology_UV_N_names_vs_original": "passed",
+    "all_71_closed_positive_volumes": "passed",
+    "per_piece_mass_COM_vs_original": "passed",
+    "all_constraint_endpoints_restlength_groups_vs_original": "passed",
+    "original_binary_string_tables_privacy": "passed",
+    "original_four_cache_bytes_preserved": "passed",
+    "native_cache_reader_save_reopen": "passed",
+    "archive_roundtrip_and_hashes": "passed",
+    "portable_public_HIP": "not_included"
+  },
+  "outside_attribute_samples": {
+    "sampled_outside_vertices": 768,
+    "max_uv_component_error": 6.25614973159827e-08,
+    "max_source_triangle_projection_error_m": 4.9188829898128006e-08,
+    "min_normal_cosine": 0.9999999999999968,
+    "uv_tolerance": 0.0001,
+    "normal_cosine_minimum": 0.999,
+    "sampled_uv_normal_preservation_pass": true,
+    "inside_uv_scope": "new cut faces labeled for separate procedural cutwood shader; original texture UV meaning is not claimed for inside"
+  },
+  "full_sdf_source_equals_render": {
+    "point_count": true,
+    "primitive_count": true,
+    "P_exact": true,
+    "topology_exact": true,
+    "name_exact": true,
+    "path_exact": true,
+    "surface_role_exact": true,
+    "sourceprim_exact": true,
+    "is_cutface_exact": true,
+    "uv_exact": true,
+    "N_exact": true
+  },
+  "transport": {
+    "initial_full_audit_cli_wait_seconds": 300,
+    "initial_wait_result": "timed_out",
+    "native_audit_completed_seconds": 422.34086950001074,
+    "native_report_recovered_by_typed_readback": true,
+    "mutation_retried": false,
+    "save_and_reopen_typed_returns": "passed"
+  },
+  "replay_directory": "replay/natural-geometry",
+  "not_claimed": [
+    "71 independent FLIP solids or actors",
+    "blast fracture or flotation",
+    "contact/inertia/shrink qualification of collision proxies",
+    "native full inertia tensor override",
+    "self intersection or minimum thickness certification"
+  ]
+}

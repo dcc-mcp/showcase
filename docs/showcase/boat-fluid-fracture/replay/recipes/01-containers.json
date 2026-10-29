@@ -1,0 +1,23 @@
+{
+  "parent_path": "/obj",
+  "nodes": [
+    {
+      "node_type": "geo",
+      "node_name": "boat_fluid_source"
+    },
+    {
+      "node_type": "geo",
+      "node_name": "boat_fluid_output"
+    },
+    {
+      "node_type": "dopnet",
+      "node_name": "boat_fluid_dop",
+      "parameters": {
+        "startframe": 1,
+        "substep": 2
+      }
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

@@ -1,0 +1,65 @@
+{
+  "parent_path": "/obj/natural_v2_source",
+  "nodes": [
+    {
+      "node_type": "blast",
+      "node_name": "drop_zero_volume_artifact",
+      "parameters": {
+        "group": "@name=naturalwood-intact_hull-8-10",
+        "negate": 0
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "REST_RENDER"
+    },
+    {
+      "node_type": "null",
+      "node_name": "REST_FULL_SDF"
+    },
+    {
+      "node_type": "attribwrangle",
+      "node_name": "drop_artifact_bonds",
+      "parameters": {
+        "class": "primitive",
+        "snippet": "int pts[] = primpoints(0, @primnum); foreach (int pt; pts) { if (point(0, \"name\", pt) == \"naturalwood-intact_hull-8-10\") { removeprim(0, @primnum, 1); break; } }"
+      }
+    },
+    {
+      "node_type": "null",
+      "node_name": "REST_CONSTRAINTS"
+    },
+    {
+      "node_type": "null",
+      "node_name": "REST_PROXY"
+    }
+  ],
+  "connections": [
+    {
+      "input": "drop_zero_volume_artifact",
+      "output": "RENDER_PIECES"
+    },
+    {
+      "input": "REST_RENDER",
+      "output": "drop_zero_volume_artifact"
+    },
+    {
+      "input": "REST_FULL_SDF",
+      "output": "REST_RENDER"
+    },
+    {
+      "input": "drop_artifact_bonds",
+      "output": "CONSTRAINTS_RAW"
+    },
+    {
+      "input": "REST_CONSTRAINTS",
+      "output": "drop_artifact_bonds"
+    },
+    {
+      "input": "REST_PROXY",
+      "output": "COLLISION_PROXY"
+    }
+  ],
+  "layout": false,
+  "cook_last": false
+}

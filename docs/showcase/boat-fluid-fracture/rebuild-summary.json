@@ -1,0 +1,42 @@
+{
+  "scope": "independent_blank_scene_short_rebuild",
+  "frames_compared": [
+    1,
+    2
+  ],
+  "position_tolerance_m": 1e-05,
+  "passed": true,
+  "comparisons": [
+    {
+      "frame": 1,
+      "cache": "pieces",
+      "points": 75003,
+      "primitives": 150000,
+      "position_max_component_error_m": 0.0,
+      "names_paths_uv_normals_match": true
+    },
+    {
+      "frame": 1,
+      "cache": "water_particles",
+      "points": 104506,
+      "primitives": 0,
+      "position_max_component_error_m": 0.0
+    },
+    {
+      "frame": 2,
+      "cache": "pieces",
+      "points": 75003,
+      "primitives": 150000,
+      "position_max_component_error_m": 0.0,
+      "names_paths_uv_normals_match": true
+    },
+    {
+      "frame": 2,
+      "cache": "water_particles",
+      "points": 205344,
+      "primitives": 0,
+      "position_max_component_error_m": 0.0
+    }
+  ],
+  "full_sequence_equivalence_verified": false
+}

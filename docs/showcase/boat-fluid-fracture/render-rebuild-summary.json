@@ -1,0 +1,14 @@
+{
+  "scope": "reopened independent blank-scene replay frame1 controlled Mantra render",
+  "resolution": [
+    960,
+    540
+  ],
+  "pixel_format": "gbrpf32le",
+  "native_source_exr_sha256": "743df4f35dca141405558cc3d3a33845483a874f009dd928a6f9edff4c4cac0c",
+  "rebuild_exr_sha256": "74723775315ae79a7ec514c0dc7b9df63bd60fb26920c1147f500e89797a7dbe",
+  "decoded_pixel_sha256": "e52da462ce19f8d335d60cf6bc38b1084666417242827ab31410d0559d62cf38",
+  "decoded_pixels_match": true,
+  "container_bytes_match": false,
+  "all_frames_render_equivalence_verified": false
+}

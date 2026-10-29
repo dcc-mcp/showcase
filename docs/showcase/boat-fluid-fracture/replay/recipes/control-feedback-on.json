@@ -1,0 +1,6 @@
+{
+  "node_path": "/obj/boat_fluid_dop/water_solver",
+  "parameters": {
+    "feedbackscale": 1
+  }
+}

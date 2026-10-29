@@ -1,0 +1,8 @@
+{
+  "mode": "built-in",
+  "prompt": "Use case: product-mockup\nAsset type: reference image for Hyper3D single-image 3D reconstruction and Houdini destruction simulation\nPrimary request: one complete small wooden workboat hull, strong recognizable boat silhouette, intact before fracture. Broad open interior with thick timber planks, visible ribs and simple bench seats. No mast, sails, ropes, engine, people or cargo.\nScene/backdrop: neutral light grey studio background, isolated object with subtle contact shadow, no water.\nStyle/medium: realistic high quality studio 3D product render, honest wooden construction and clean readable geometry.\nComposition/framing: one single full boat in a three-quarter elevated view showing the bow, long side, open interior and stern. Entire boat in frame, generous clean margin, square image. Bow slightly towards viewer.\nMaterials/textures: weathered medium brown wood, restrained variation between planks, visible thick gunwale and watertight hull.\nConstraints: a single object, no diagram, no collage, no extra views, no text, no logos, no watermark. Boat proportions about 6 metres long and 2 metres wide. Make structural wooden hull easy to reconstruct.",
+  "source": "boat-reference.jpg",
+  "generated_on": "2026-10-26",
+  "image_generator_model": "Unknown",
+  "source_note": "Full-frame JPEG derivative; the prompt is preserved verbatim and its dimensions are design intent."
+}

@@ -1,0 +1,512 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "status": "unselected_native_static_geometry_media_passed_coupled_dynamics_pending",
+  "houdini_application": "Houdini Commercial",
+  "houdini_version": "22.0.368",
+  "reference": "imagegen-prompt.json",
+  "capture_provider": "host-native Mantra renders; built-in image generator for reference only",
+  "files": [
+    {
+      "path": "acceptance-requirements.json",
+      "sha256": "3261bde91d3853c8b2cb37cb6e5daa81e0143f541e9a54eb3b661545cb4c2ae4",
+      "bytes": 6131
+    },
+    {
+      "path": "boat-reference.jpg",
+      "sha256": "0ea942e5b36290245f78911dc151b73640113aa3349f286a0f9bffdd81d81992",
+      "bytes": 190605,
+      "width": 1254,
+      "height": 1254,
+      "bit_depth": 8
+    },
+    {
+      "path": "browser-qa-summary.json",
+      "sha256": "ad9d9d2be11cf57d395c2494d157a4d0b29d390d3fb5c535f17b8c805b4f97e5",
+      "bytes": 659
+    },
+    {
+      "path": "collection-case.draft.json",
+      "sha256": "281ae74dadd0b671ef360f9f82068315ecdfa1ef5a6a15327ffa9ce9577a2861",
+      "bytes": 20744
+    },
+    {
+      "path": "color-pipeline-summary.json",
+      "sha256": "66b114aebdb09ceebaa2f6760711155d1a607800879666c46e0a22687ed54a5c",
+      "bytes": 1013
+    },
+    {
+      "path": "feedback-control-summary.json",
+      "sha256": "f6c5005a476f6c3ec9f889fb474146847d62198343a0ebf785f3bee23a73575b",
+      "bytes": 2382
+    },
+    {
+      "path": "fractured-rest.zip",
+      "bytes": 25684528,
+      "sha256": "08c289710dfaf7d2bf93f5e65b84fefdfeedf52461ea05de794d49acb609175f",
+      "container_kind": "ZIP",
+      "cache_files": 3,
+      "native_pieces": 71,
+      "native_constraints": 171,
+      "scope": "Static native rest geometry only",
+      "source_manifest": "native-geometry-summary.json"
+    },
+    {
+      "path": "imagegen-prompt.json",
+      "sha256": "df77bc3c9b3d66730d392de651dffd384abc2b6ec5b3bbe18b775fd2a734331c",
+      "bytes": 1431
+    },
+    {
+      "path": "initial-water-state.jpg",
+      "sha256": "7b9a6de7f0aac598e71a953bec80f86e9be873e07e77080ba4795a4f72e5ad7b",
+      "bytes": 47601,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "source_native_exr": "boat.0001.exr",
+        "source_exr_sha256": "3d723f36659e2294e10f569adf801b85d750cafc8348e77542b1be820e96fc24",
+        "source_exr_bytes": 989554,
+        "source_oiio_color_space": "lin_rec709",
+        "source_resolution_px": [
+          960,
+          540
+        ],
+        "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+        "output_rgb_format": "RGB24",
+        "jpeg_quality": 82,
+        "jpeg_encoder": "Pillow 12.3.0",
+        "jpeg_subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "retouched": false,
+        "exif_preserved": false
+      }
+    },
+    {
+      "path": "intact-native.jpg",
+      "bytes": 20169,
+      "sha256": "3f4d8d3ca4782a7a8c3dfb3d823a371eabae2c63fe90dee8fe0e128babc8add2",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "evidence": "native-media-summary.json",
+        "source_srgb_png": {
+          "name": "intact-srgb.png",
+          "bytes": 114673,
+          "sha256": "fd38c27a8e9965eb1c365545d853038606ebee0c05babe27957eacdba16a09cd"
+        },
+        "source_native_exr": {
+          "name": "intact.exr",
+          "bytes": 284317,
+          "sha256": "9acbcae40bc44d4dbda321ff962bd8cdd0914518a8cf80143b736b873580b43a",
+          "oiio:ColorSpace": "lin_rec709"
+        },
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "localization-en.draft.json",
+      "sha256": "4980d665e1167b5dfa1db2b8a05f246ec8f138c76a94d65ff7216ea310aae9cb",
+      "bytes": 25395
+    },
+    {
+      "path": "material-repair-summary.json",
+      "sha256": "60bbe9f43dfb492c2243374cdaff4295d9d4619bd52be7a50c648d8b9fa18f2c",
+      "bytes": 1198
+    },
+    {
+      "path": "model-manifest.json",
+      "sha256": "ba35413f4c9f68f224dffea27b96b399f1b184abee2b38312fd33940dc239f88",
+      "bytes": 7786
+    },
+    {
+      "path": "native-geometry-summary.json",
+      "bytes": 3765,
+      "sha256": "555a9906fd5f21b7be97813a1aba4c5f6d459d4defd48b323a15b684e47a159d"
+    },
+    {
+      "path": "native-media-summary.json",
+      "bytes": 8293,
+      "sha256": "f8bc77ab70e674fadf168ecdcacb2d1c51aab9c2d309d98ef8281a91b89f1db0"
+    },
+    {
+      "path": "natural-fracture-brief.json",
+      "sha256": "4ed1105c21593d76d81e6cd30eb7797fa9141913007bc1385b454efe4c14d4ec",
+      "bytes": 9255
+    },
+    {
+      "path": "parts-exploded.jpg",
+      "sha256": "38b6d7aeb7249d95ed44b85a0ebf5d259073b6a8eaeb6daaa43aa4868f06842c",
+      "bytes": 21605,
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "source_native_exr": "parts-exploded-close.exr",
+        "source_exr_sha256": "aef7881ea95b68559866c58b7bede1cde9c3360c508971f329cba40025077cf6",
+        "source_exr_bytes": 282751,
+        "source_oiio_color_space": "lin_rec709",
+        "source_resolution_px": [
+          960,
+          540
+        ],
+        "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+        "output_rgb_format": "RGB24",
+        "jpeg_quality": 82,
+        "jpeg_encoder": "Pillow 12.3.0",
+        "jpeg_subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "retouched": false,
+        "exif_preserved": false
+      }
+    },
+    {
+      "path": "parts-preview.json",
+      "sha256": "4e175bb0d54bc87dce2395e95632e79598b0936876eb85afadcfd8651f1e3406",
+      "bytes": 1849
+    },
+    {
+      "path": "portable-acceptance-summary.json",
+      "sha256": "b7fccf042c35dc1db5448051776b0e47c07306157af12755488f254058e3777a",
+      "bytes": 8007
+    },
+    {
+      "path": "probe-summary.json",
+      "sha256": "f86f01618695768e50b50991af761c4632d247e94a5c97de85929ce6359bec01",
+      "bytes": 30326
+    },
+    {
+      "path": "production-references.json",
+      "sha256": "138d525a560f1e113042aa61d6385851b1d1765be66a8e1f8b41af2e21e1c93c",
+      "bytes": 5355
+    },
+    {
+      "path": "rebuild-summary.json",
+      "sha256": "a39c15dcd28e57e21d2da1f264024d303268912eed8926767722f140afb8c299",
+      "bytes": 961
+    },
+    {
+      "path": "render-rebuild-summary.json",
+      "sha256": "013edda7a173927a7d6014e0df9bf69881298fbdea23d078099938a2b8ddbc2e",
+      "bytes": 575
+    },
+    {
+      "path": "replay/assets.json",
+      "sha256": "f6ca4b6f815520049aa4ce2218b37a460269abb69ad63cf83167136958a33c5b",
+      "bytes": 1468
+    },
+    {
+      "path": "replay/config.example.json",
+      "sha256": "1bf2a5c7448dc03484778a2b715dc3e247adf08531494ebfcaaf3ee3e1f78d5d",
+      "bytes": 139
+    },
+    {
+      "path": "replay/natural-geometry/00-container.json",
+      "bytes": 175,
+      "sha256": "38b0d150db9d806c3610cf2d3fe89cbb878a2cdc9b1d974c5679f01282c3f20f"
+    },
+    {
+      "path": "replay/natural-geometry/01-source.json",
+      "bytes": 1227,
+      "sha256": "bf3c75720cdf256964a688f9f765ab123139c88b0c94a91ac7c73c9b3c49eb5e"
+    },
+    {
+      "path": "replay/natural-geometry/02-wood-fracture.json",
+      "bytes": 3245,
+      "sha256": "fff474bf1558b42eada2eceed696a7bb03bd6dc721e30abb195bebf6c5f6fcf3"
+    },
+    {
+      "path": "replay/natural-geometry/03-filter-native-artifact.json",
+      "bytes": 1520,
+      "sha256": "01e16f93eb7e9bb21841c8d1f76f9065f8bdb3602f851c1abfc51504009dc3ae"
+    },
+    {
+      "path": "replay/natural-geometry/05-ready-readers.json",
+      "bytes": 828,
+      "sha256": "7207ad304c256dc2b1bac132228cb571be5c7b937e869b1198649d814a61657d"
+    },
+    {
+      "path": "replay/natural-geometry/cache_and_verify.py",
+      "bytes": 9007,
+      "sha256": "fcb460689b1d6117ca804e9972db9fbd310ce42d6d41963fc68c625d6b719b3b"
+    },
+    {
+      "path": "replay/natural-geometry/mass_properties.py",
+      "bytes": 7121,
+      "sha256": "8fc2302571026901611f5633e40be03fdf1dc4b82f980bccc5f66dc980332d55"
+    },
+    {
+      "path": "replay/natural-geometry/normalization.json",
+      "bytes": 691,
+      "sha256": "b6d63bc87862cf49b2026b9e1e160b14add7dff7bea658b469521934b8f87a99"
+    },
+    {
+      "path": "replay/natural-geometry/prepare.py",
+      "bytes": 4023,
+      "sha256": "982b56d774ee8171dec3127fbdeea8f0e80640f200e0eebc9433ffcda6aed03e"
+    },
+    {
+      "path": "replay/natural-geometry/selfcheck.py",
+      "bytes": 3972,
+      "sha256": "d24dc22f92d9099dd65d2112e62f71442de71cd27aa7cd7237b8ad60b6d546d8"
+    },
+    {
+      "path": "replay/natural-geometry/USAGE.md",
+      "bytes": 4636,
+      "sha256": "778a2971af0d6498b332312627ce5665e79d6f571ff8a701980071398cbd5f32"
+    },
+    {
+      "path": "replay/natural-geometry/verify_reopened.py",
+      "bytes": 4699,
+      "sha256": "f868a05bcdb0a97c338bfc62b0198bc14065930e976681d47947f58562c266e1"
+    },
+    {
+      "path": "replay/prepare.py",
+      "sha256": "8c9001145e65cc8a3d88a6842ff751483ef565c316b692ca8eca31e42b77d19f",
+      "bytes": 6342
+    },
+    {
+      "path": "replay/recipes/01-containers.json",
+      "sha256": "563bb621eb93b6fb49db234d46786b2f1ea8be74ef72dc2e90103419e8915146",
+      "bytes": 420
+    },
+    {
+      "path": "replay/recipes/02-sources-and-proxy.json",
+      "sha256": "f80f9b0ce1beb4a13b2ab036b4bcec66e0bb973d41f60bc8199a6785945ea513",
+      "bytes": 4682
+    },
+    {
+      "path": "replay/recipes/03-coupled-physics.json",
+      "sha256": "c96ab8f3e9319735e5b67fd831e9b4124cf9d430a33fa1068d35ba864277ede7",
+      "bytes": 3801
+    },
+    {
+      "path": "replay/recipes/04-live-output-imports.json",
+      "sha256": "8eef9747b2d0e2f88003f804020b491f698a1af4c3401cc4de84de1dde60771a",
+      "bytes": 2282
+    },
+    {
+      "path": "replay/recipes/05-materials.json",
+      "sha256": "9391d038e286ff7b05d721a549f0f71df5d7fcaacf4cf96f5a59eff284956a74",
+      "bytes": 1450
+    },
+    {
+      "path": "replay/recipes/06-camera-and-lights.json",
+      "sha256": "8b784fc7414a97be50f9a60fc53f8ad0c6e1d41c489f1327ae18d96cea2191c5",
+      "bytes": 2008
+    },
+    {
+      "path": "replay/recipes/07-render-floor.json",
+      "sha256": "0167b543328f862fcdd7ac9fb99ff4049ce9339be0535bec5be63327ae675794",
+      "bytes": 342
+    },
+    {
+      "path": "replay/recipes/08-cached-render-geometry.json",
+      "sha256": "9e6c25c317f120229044fada606423194a15631724cae5b35b5f5116c5363ad6",
+      "bytes": 1810
+    },
+    {
+      "path": "replay/recipes/09-mantra-rop.json",
+      "sha256": "cc531899ce520c1ea4d20a1627d23136b6a96acb181eab67bb3227fe961c205d",
+      "bytes": 544
+    },
+    {
+      "path": "replay/recipes/control-feedback-off.json",
+      "sha256": "09a09de1bf574b2f0ab4a258933eb5f21bc13605ba89cf6d65033b24e9c0b6ba",
+      "bytes": 106
+    },
+    {
+      "path": "replay/recipes/control-feedback-on.json",
+      "sha256": "a517cf4ff69d2a5e86bbf175ffe25c5c7076fd4cf819e5d63c1ae36c28debcc5",
+      "bytes": 106
+    },
+    {
+      "path": "replay/scripts/cache_and_measure.py",
+      "sha256": "1c92a47e8f4202e0aa16b5f006e3f0fb065aac01fb34cf3ac636f93a562b3c37",
+      "bytes": 8684
+    },
+    {
+      "path": "replay/scripts/check_flotation.py",
+      "sha256": "0518c6f42f3f9b0de6f4a224d5c515384aead070bfaa2db1cff3d9d488ff1b4a",
+      "bytes": 14604
+    },
+    {
+      "path": "replay/scripts/finish_scene.py",
+      "sha256": "a22f64105262d347e70e57166399f670f53f941ec842c06f56a3979de80f5251",
+      "bytes": 1490
+    },
+    {
+      "path": "replay/scripts/hydrodynamic_glue.py",
+      "sha256": "aa6585a8fc6573bd5b490d46f14119ee3277697e9e9346d3a689233d4d82732a",
+      "bytes": 3210
+    },
+    {
+      "path": "replay/scripts/test_hydrodynamic_glue.py",
+      "sha256": "1ebbcd30163911be4fad58459ca6f2eec98151c1bece42d70d0d25e33bb7a3fb",
+      "bytes": 5359
+    },
+    {
+      "path": "replay/scripts/validate_sim_proxy.py",
+      "sha256": "52acac044ec02cf82924f98ad69759f16d15e36e5a8cf677ad6fa38c1f14aaee",
+      "bytes": 1996
+    },
+    {
+      "path": "replay/selfcheck.py",
+      "sha256": "01d6a35584d2358c9cbfd9736766887fb9698ef47aec6b9d5c920eb13856e665",
+      "bytes": 6367
+    },
+    {
+      "path": "replay/USAGE.md",
+      "sha256": "082a289a857abed79b902b89e9ef31d47fb35d696e37e92d4f137e3adef1d5d7",
+      "bytes": 8536
+    },
+    {
+      "path": "reproduction-brief.md",
+      "sha256": "df0912124c3b3b6f8026ab9c98bd23b4bcc6573dc7d9e972ebf05acd4f15c4cd",
+      "bytes": 4590
+    },
+    {
+      "path": "source-intact-manifest.json",
+      "sha256": "27e56e7642b5115ffb113de6323428971cd675b7cf7567809c84d724453e0be3",
+      "bytes": 6837
+    },
+    {
+      "path": "SOURCE-INTACT.md",
+      "sha256": "611c77dabb29789097c170c043b08253fb8b22bfa1f1032584866db73b6252b7",
+      "bytes": 3617
+    },
+    {
+      "path": "source-intact.zip",
+      "sha256": "0a8583b3f25cfcf40d1b1df5f91369310bb1a35f6a5b010de1f87946dc3caef3",
+      "bytes": 25372781,
+      "container_kind": "ZIP",
+      "member_count": 9,
+      "triangle_count": 500000,
+      "source_manifest": "source-intact-manifest.json"
+    },
+    {
+      "path": "source-model.zip",
+      "sha256": "acf4c00f3d47e5da477f76db40548a714ffd1ac3b124f341149f2d995ef628b9",
+      "bytes": 16276511,
+      "container_kind": "ZIP",
+      "member_count": 9,
+      "mesh_objects": 17,
+      "triangles": 150000
+    },
+    {
+      "path": "SOURCE.md",
+      "sha256": "9bc4c3b4126c0917b37657254459fee37c9e1863bf898359b32dd872a5f1b681",
+      "bytes": 4660
+    },
+    {
+      "path": "split-assembled.jpg",
+      "sha256": "3e7c3c19df7ea968b03a12866e0e094a4333a4be01833ed52ca526a1da0c3068",
+      "bytes": 21637,
+      "width": 1280,
+      "height": 720,
+      "bit_depth": 8,
+      "derivation": {
+        "source_native_exr": "split-assembled.exr",
+        "source_exr_sha256": "0a99275de5782dd848ef70606b240148980fb0e4bf17cda31f5372373de3a28e",
+        "source_exr_bytes": 280771,
+        "source_oiio_color_space": "lin_rec709",
+        "source_resolution_px": [
+          1280,
+          720
+        ],
+        "color_conversion": "linear Rec.709 RGB to sRGB through the recorded FFmpeg zscale filter",
+        "output_rgb_format": "RGB24",
+        "jpeg_quality": 82,
+        "jpeg_encoder": "Pillow 12.3.0",
+        "jpeg_subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "retouched": false,
+        "exif_preserved": false
+      }
+    },
+    {
+      "path": "wood-cut-detail.jpg",
+      "bytes": 82314,
+      "sha256": "745c9e8f59f9f8366119a58af560bd21f82a741cdcdbce0df6b60a3eb6205e8c",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "evidence": "native-media-summary.json",
+        "source_srgb_png": {
+          "name": "cut-perpixel-srgb.png",
+          "bytes": 557957,
+          "sha256": "5cbe9f0aeebd03b18e0e2e6e3f0154ca80192793182f31fce6aabc31601f4223"
+        },
+        "source_native_exr": {
+          "name": "cut-perpixel.exr",
+          "bytes": 1556829,
+          "sha256": "654daecf595b9783beb1c19c4a2cd7bef76d5d228f0501253f88f597356c952a",
+          "oiio:ColorSpace": "lin_rec709"
+        },
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    },
+    {
+      "path": "wood-fracture-exploded.jpg",
+      "bytes": 33230,
+      "sha256": "b9bbb426343f818440580c43b76843bac12c4dbf2f390ed62add6c6c75bffd4f",
+      "width": 960,
+      "height": 540,
+      "bit_depth": 8,
+      "derivation": {
+        "evidence": "native-media-summary.json",
+        "source_srgb_png": {
+          "name": "exploded71-perpixel-srgb.png",
+          "bytes": 171214,
+          "sha256": "83920d05a88332018845f2d057e523957bed0ddcd497b22ec68a497934d2c5d3"
+        },
+        "source_native_exr": {
+          "name": "exploded71-perpixel.exr",
+          "bytes": 420789,
+          "sha256": "293e2a241847ad27f41aff81a86ba985230cf40b9fe97dffe4d32195fe036a3d",
+          "oiio:ColorSpace": "lin_rec709"
+        },
+        "input": "already converted sRGB RGB PNG",
+        "operation": "format encoding only",
+        "quality": 82,
+        "encoder": "Pillow 12.3.0",
+        "subsampling": 2,
+        "full_frame": true,
+        "resized": false,
+        "cropped": false,
+        "retouched": false,
+        "additional_tone_or_color_transform": false,
+        "embedded_profile": "sRGB ICC",
+        "exif_included": false
+      }
+    }
+  ],
+  "inventory_scope": "Current public source/static native geometry and inspection media plus scoped historical comparison replay. No accepted blast/flotation cache or final movie is included; rehash after further changes."
+}

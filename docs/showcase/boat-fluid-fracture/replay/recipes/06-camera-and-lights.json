@@ -1,0 +1,104 @@
+{
+  "parent_path": "/obj",
+  "nodes": [
+    {
+      "node_type": "null",
+      "node_name": "boat_camera_target",
+      "parameters": {
+        "t": [
+          0,
+          0.3,
+          0
+        ]
+      }
+    },
+    {
+      "node_type": "cam",
+      "node_name": "boat_camera",
+      "parameters": {
+        "t": [
+          8,
+          6.5,
+          10
+        ],
+        "lookatpath": "/obj/boat_camera_target",
+        "resx": 960,
+        "resy": 540,
+        "focal": 40
+      }
+    },
+    {
+      "node_type": "hlight::2.0",
+      "node_name": "boat_key",
+      "parameters": {
+        "light_type": 2,
+        "t": [
+          -5,
+          8,
+          4
+        ],
+        "lookatpath": "/obj/boat_camera_target",
+        "light_color": [
+          1,
+          0.88,
+          0.72
+        ],
+        "light_intensity": 1,
+        "light_exposure": 8,
+        "areasize": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "node_type": "hlight::2.0",
+      "node_name": "boat_rim",
+      "parameters": {
+        "light_type": 2,
+        "t": [
+          3,
+          5,
+          -5
+        ],
+        "lookatpath": "/obj/boat_camera_target",
+        "light_color": [
+          0.6,
+          0.76,
+          1
+        ],
+        "light_intensity": 1,
+        "light_exposure": 7,
+        "areasize": [
+          4,
+          3
+        ]
+      }
+    },
+    {
+      "node_type": "envlight",
+      "node_name": "boat_world",
+      "parameters": {
+        "env_mode": "direct",
+        "light_color": [
+          0.64,
+          0.76,
+          1
+        ],
+        "light_intensity": 0.3,
+        "light_exposure": 0
+      }
+    },
+    {
+      "node_type": "geo",
+      "node_name": "boat_pool_base",
+      "parameters": {
+        "shop_materialpath": "/mat/boat_pool_floor"
+      }
+    }
+  ],
+  "connections": [],
+  "layout": false,
+  "cook_last": false,
+  "dry_run": false
+}

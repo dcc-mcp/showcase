@@ -1,0 +1,429 @@
+{
+  "slug": "boat-fluid-fracture",
+  "title": "71 块原生木材几何通过，局部 FLIP 水爆与漂浮待验收",
+  "subtitle": "imagegen → Rodin → Houdini 原生木材 · 未入选制作草稿",
+  "software": [
+    "imagegen",
+    "Hyper3D",
+    "Houdini"
+  ],
+  "capabilities": [
+    "流体解算",
+    "刚体破碎",
+    "原生往返验证"
+  ],
+  "cover": {
+    "src": "docs/showcase/boat-fluid-fracture/intact-native.jpg",
+    "alt": "实际 500000 三角形完整源的原生 Mantra 静态检查图"
+  },
+  "evidence_label": "71 块 / 171 条约束静态几何与三张原生图通过 · 动力学待验收",
+  "evidence_scope": "完整 Rodin 源经原生木材破碎得到 71 块闭合正体积几何、171 条约束及 655084 个可视三角形，冷启动重建与保存重开通过。三张真实 Mantra 图展示完整源、木材切面和 scale0.35 美术展开；43 个复合刚体的静水、局部水爆、漂浮和影片仍待验收，不能把 71 块静态几何当成 71 个独立流体刚体。",
+  "summary": "保留完整生成船体，先验证原生木材切口、约束和便携几何，再用船底局部 FLIP 水爆验证真实破坏与漂浮。当前仅静态几何和原生检查图通过，未入选。",
+  "goal": "让真实向上、向外的水体冲击通过流体反馈加载空间约束，形成可读的局部木材破坏前沿，再用实际质量、碰撞和连续水线数据检验碎片漂浮。",
+  "prompt": {
+    "kind": "reusable",
+    "text": "用内置 imagegen 生成开放船舱木船参考，经 Hyper3D Rodin 建模。保留完整源，在 Houdini 使用原生 RBD 木材破碎、空间约束与 Bullet，记录切口、UV、质量和碰撞，再用船底局部 FLIP 水爆的真实反馈验证破坏与碎片水线。完成连续缓存、保存重开、独立复现和成片检查后再入选 showcase；旧 Bang 分件只作比较。",
+    "note": "按当前制作链整理的可复用说明；不包含私有对话、任务标识或凭据。"
+  },
+  "environment": [
+    {
+      "label": "Houdini",
+      "value": "Houdini 22.0.368 Commercial · 无界面原生解算与 Mantra"
+    },
+    {
+      "label": "Hyper3D",
+      "value": "Hyper3D Skill 0.1.1 · Rodin Gen-2.5-Medium / Bang；提供方内部版本未知"
+    },
+    {
+      "label": "imagegen",
+      "value": "imagegen 内置工具；具体图像模型与版本未知"
+    },
+    {
+      "label": "适配器源码",
+      "value": "约束修复 c89e525；材质修复 73e9db1；公开证据分别限定，不宣称已正式发布"
+    },
+    {
+      "label": "DCC-MCP 核心",
+      "value": "DCC-MCP Core 0.20.48 · 真实 typed 工具与有范围的宿主脚本"
+    },
+    {
+      "label": "dcc-cua",
+      "value": "dcc-cua 1.12.2 · elevated runtime 的 owned-browser 启动被拒绝；无界面输入"
+    },
+    {
+      "label": "FFmpeg 媒体转换",
+      "value": "FFmpeg 8.1.1 · 原生 lin_rec709；静帧转 sRGB，影片采用显式 BT.709 管线"
+    }
+  ],
+  "tools": [
+    {
+      "name": "imagegen",
+      "description": "内置工具生成完整木船参考；参考图与真实模拟画面分开记录。"
+    },
+    {
+      "name": "Hyper3D Rodin / Bang",
+      "description": "真实生成与分件输出保留网格、贴图、参数和哈希；不公开提供方任务标识或临时链接。"
+    },
+    {
+      "name": "Houdini typed DCC-MCP",
+      "description": "导入、节点链、参数、保存重开、几何导出回导入和渲染经正式工具执行；缺口修复单列 PR。"
+    },
+    {
+      "name": "有范围的物理与回读脚本",
+      "description": "流体加载阈值、缓存与局部水线测量使用公开参数化宿主脚本；它们不冒称已发布的专用 typed 能力。"
+    }
+  ],
+  "steps": [
+    {
+      "title": "保留生成源",
+      "description": "完整 Rodin 源解析得到 500000 个三角形；独立新包保留有效 UV/法线索引及五张原始贴图。旧 Bang17 包和清单字节保持不变。"
+    },
+    {
+      "title": "检查实际原生木材切面",
+      "description": "实际 71 块、655084 三角形的原生木材切面使用独立程序化纤维与环纹材质；P、UV、法线和名称在材质暂存前后精确一致。scale0.35 的展开仅用于看清切口，不是模拟破坏。",
+      "image": {
+        "src": "docs/showcase/boat-fluid-fracture/wood-cut-detail.jpg",
+        "alt": "原生木材切面近景及美术程序纹理，非物理破坏帧"
+      }
+    },
+    {
+      "title": "验证几何并修复材质边界",
+      "description": "源几何通过 HIP 和 Bgeo 往返；最初纹理为空的失败保留。后续候选启用实际漫反射文件、转换标量材质并验证保存重开。"
+    },
+    {
+      "title": "建立新的原生木材破碎方案",
+      "description": "71 块闭合正体积原生几何与 171 条约束已通过冷启动重建和保存重开；当前用 43 个复合刚体验证碰撞与流体耦合，弱静水试验失败后仍在修正控制。局部水爆与漂浮尚未验收。"
+    },
+    {
+      "title": "补足可读的原生细节",
+      "description": "完整源、实际切口近景及 71 块展开已有真实原生静帧。带单位的约束受力、碰撞导向、质量诊断和爆破后水线仍待实际结果；白水仅在主解算通过后另行制作。"
+    },
+    {
+      "title": "等待终态证据后入选",
+      "description": "完成水线与碎片稳定区间、连续缓存、复现和成片验收；浏览器严格使用官方 DCC-CUA 精确绑定路由。"
+    }
+  ],
+  "results": [
+    {
+      "src": "docs/showcase/boat-fluid-fracture/intact-native.jpg",
+      "alt": "实际 500000 三角形完整源的原生 Mantra 静态检查图",
+      "caption": "真实 960 × 540 Mantra 完整源静帧；既有 sRGB PNG 仅作全帧 q82 JPEG 编码并嵌入 sRGB ICC，无再次颜色转换。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/wood-cut-detail.jpg",
+      "alt": "原生木材切面近景及美术程序纹理，非物理破坏帧",
+      "caption": "实际 71 块原生木材切面，scale0.35 美术展开；独立原生着色采样生成纤维与环纹，无几何位移，不作为流体破坏或漂浮证明。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/wood-fracture-exploded.jpg",
+      "alt": "71 块实际原生木材的静态展开检查图",
+      "caption": "真实 960 × 540 Mantra 全景，71 块、655084 三角形与 171 条原生约束单独核验；图中的分离间距是美术检查设置，不是动力学。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/split-assembled.jpg",
+      "alt": "组装分件船体的原生 Mantra 静帧",
+      "caption": "真实 1280 × 720 原生静帧；lin_rec709 EXR 经 sRGB 转换并作全帧 q82 JPEG 编码。未展示接受的水流破碎或后续漂浮。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/parts-exploded.jpg",
+      "alt": "生成木船的原生分件检查图",
+      "caption": "真实 960 × 540 Mantra 源检查；17 块与 UV 保留，展开由 Exploded View 控制。lin_rec709 原生 EXR 经 sRGB 转换生成全帧 q82 JPEG，不作为物理破碎证据。"
+    },
+    {
+      "src": "docs/showcase/boat-fluid-fracture/initial-water-state.jpg",
+      "alt": "真实船体与水面的初始状态",
+      "caption": "真实 960 × 540 原生初始状态；lin_rec709 EXR 经 sRGB 转换并作全帧 q82 JPEG 编码，不作为最终解算或稳定漂浮证明。"
+    }
+  ],
+  "checks": [
+    {
+      "name": "可移植源几何往返",
+      "result": "pass",
+      "observed": "17 块、75003 点、150000 三角形；HIP 指纹一致，Bgeo 对应图元角点的 UV/法线差值为零。"
+    },
+    {
+      "name": "原始漫反射绑定失败",
+      "result": "fail",
+      "observed": "材质节点与指派存在，但贴图关闭且路径为空；重开后仍失败，原始报告保留。"
+    },
+    {
+      "name": "后续材质修复",
+      "result": "pass",
+      "observed": "PR #361 候选通过 224 项测试及原生 typed 导入、保存重开和必需贴图缺失检查；不证明完整 PBR 贴图或渲染一致。"
+    },
+    {
+      "name": "独立空场景两帧复现",
+      "result": "pass",
+      "observed": "51 个显式配方节点、12 阶段 dry-run 与实际构建通过；不计原生 HDA 内部和自动默认节点。前两帧刚体和水粒子位置误差为零。17 块源、4000 三角形代理和 150000 三角形可视恢复通过；完整 96 帧未重跑。"
+    },
+    {
+      "name": "重开后的首帧渲染一致",
+      "result": "pass",
+      "observed": "独立复现重开后的 960 × 540 Mantra 首帧与制作源的 RGB float 解码像素完全一致；EXR 元数据和容器哈希不同。仅限首帧，不证明全序列。"
+    },
+    {
+      "name": "关闭反馈的四帧控制",
+      "result": "pass",
+      "observed": "相同代理、边界墙和高分辨率恢复配置下，feedback scale=0 的四帧中全部 17 块相连，原生反馈记录、非零水动力加载和释放均为零；不是完整时长或漂浮验证。"
+    },
+    {
+      "name": "最终破碎、漂浮与影片",
+      "result": "not_run",
+      "observed": "终态连续缓存、水线稳定区间、完整影片和最终视觉复核尚未交付。"
+    },
+    {
+      "name": "中英文浏览器验收",
+      "result": "not_run",
+      "observed": "官方 DCC-CUA 1.12.2 在取得 PID/HWND 前返回 browser_refused；没有界面观察或输入。"
+    },
+    {
+      "name": "原生静帧颜色派生",
+      "result": "pass",
+      "observed": "逐一检查三张源 EXR 的 oiio:ColorSpace=lin_rec709；FFmpeg8.1.1 zscale 转 sRGB 后输出全帧 RGB24/q82 JPEG，无裁切、缩放或修图。AI 参考图保持不变。"
+    },
+    {
+      "name": "完整源包结构检查",
+      "result": "pass",
+      "observed": "500000 个三角形，所有面角 UV/法线索引有效，五张贴图字节保留，ZIP 路径及相对材质链接检查通过；不代表新宿主导入或破碎通过。"
+    },
+    {
+      "name": "71 块原生静态几何",
+      "result": "pass",
+      "observed": "71 块闭合正体积、171 条约束和 655084 个可视三角形；便携冷重建的 P、拓扑、UV、法线、名称及原生保存重开通过。并不证明 71 个独立流体刚体。"
+    },
+    {
+      "name": "三张新原生静态检查图",
+      "result": "pass",
+      "observed": "完整源、切面近景和 71 块展开均完成 Mantra 渲染且零警告；既有正确 sRGB PNG 仅转 q82 全帧 JPEG，附源 PNG/EXR 哈希、相机与美术展开范围。"
+    }
+  ],
+  "limitations": [
+    "参考范围包括索引说明、报告章节、官方文档及 P12 的五张私有采样帧；未完整观看或聆听视频，无可用字幕轨，不发布第三方画面或私有用户截图。",
+    "旧 17 块 Bang 全局加载释放保留为未验收比较；新 71 块静态原生几何通过，43 个复合刚体的静水、局部水爆、受力和漂浮仍待验收。",
+    "这是未入选草稿；最终船体解算、释放碎片稳定漂浮和连续影片尚未验收。",
+    "几何往返验证源模型，独立空场景只比较前两帧；最终模拟、完整序列复现、跨应用材质一致及公开播放没有通过。",
+    "生成模型不具有工程船体、准确质量或封闭流形认证；代理碰撞和浮力参数须按实际限制解释。",
+    "生成资产适用提供方条款；仓库软件许可不增加艺术品、模型训练或评估数据授权。"
+  ],
+  "resources": [
+    {
+      "label": "原生木材便携静态几何 ZIP",
+      "url": "docs/showcase/boat-fluid-fracture/fractured-rest.zip"
+    },
+    {
+      "label": "71 块原生几何与冷重建摘要",
+      "url": "docs/showcase/boat-fluid-fracture/native-geometry-summary.json"
+    },
+    {
+      "label": "新原生静帧参数、派生与边界",
+      "url": "docs/showcase/boat-fluid-fracture/native-media-summary.json"
+    },
+    {
+      "label": "原生静态几何复现说明",
+      "url": "docs/showcase/boat-fluid-fracture/replay/natural-geometry/USAGE.md"
+    },
+    {
+      "label": "用户 P12 Bullet 设置参考",
+      "url": "https://www.bilibili.com/video/BV1Vr4y1i7Qr/?p=12"
+    },
+    {
+      "label": "原生木材破碎详细计划",
+      "url": "docs/showcase/boat-fluid-fracture/natural-fracture-brief.json"
+    },
+    {
+      "label": "完整源记录与适用条款",
+      "url": "docs/showcase/boat-fluid-fracture/SOURCE-INTACT.md"
+    },
+    {
+      "label": "完整源字节与几何清单",
+      "url": "docs/showcase/boat-fluid-fracture/source-intact-manifest.json"
+    },
+    {
+      "label": "完整 Rodin 源与贴图 ZIP",
+      "url": "docs/showcase/boat-fluid-fracture/source-intact.zip"
+    },
+    {
+      "label": "分件模型与贴图 ZIP",
+      "url": "docs/showcase/boat-fluid-fracture/source-model.zip"
+    },
+    {
+      "label": "源记录与适用条款",
+      "url": "docs/showcase/boat-fluid-fracture/SOURCE.md"
+    },
+    {
+      "label": "源分件观察参数与范围",
+      "url": "docs/showcase/boat-fluid-fracture/parts-preview.json"
+    },
+    {
+      "label": "原生图像与影片颜色管线",
+      "url": "docs/showcase/boat-fluid-fracture/color-pipeline-summary.json"
+    },
+    {
+      "label": "可移植几何验收摘要",
+      "url": "docs/showcase/boat-fluid-fracture/portable-acceptance-summary.json"
+    },
+    {
+      "label": "材质修复验收摘要",
+      "url": "docs/showcase/boat-fluid-fracture/material-repair-summary.json"
+    },
+    {
+      "label": "独立短程复现摘要",
+      "url": "docs/showcase/boat-fluid-fracture/rebuild-summary.json"
+    },
+    {
+      "label": "重开首帧渲染比较",
+      "url": "docs/showcase/boat-fluid-fracture/render-rebuild-summary.json"
+    },
+    {
+      "label": "关闭反馈的短程控制",
+      "url": "docs/showcase/boat-fluid-fracture/feedback-control-summary.json"
+    },
+    {
+      "label": "剩余验收要求",
+      "url": "docs/showcase/boat-fluid-fracture/acceptance-requirements.json"
+    },
+    {
+      "label": "验证数据",
+      "url": "docs/showcase/boat-fluid-fracture/validation.json"
+    },
+    {
+      "label": "文件清单与哈希",
+      "url": "docs/showcase/boat-fluid-fracture/manifest.json"
+    },
+    {
+      "label": "约束修复 PR #360",
+      "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/360"
+    },
+    {
+      "label": "材质修复 PR #361",
+      "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/pull/361"
+    },
+    {
+      "label": "公开参考与查阅范围",
+      "url": "docs/showcase/boat-fluid-fracture/production-references.json"
+    },
+    {
+      "label": "DanCortesVfx 水爆参考",
+      "url": "https://www.youtube.com/watch?v=w3yHqQQ1ODQ"
+    },
+    {
+      "label": "Diyz3n H20 水下爆发参考",
+      "url": "https://www.youtube.com/watch?v=o2E8LtnitvY"
+    },
+    {
+      "label": "SideFX 大尺度流体公开概览",
+      "url": "https://www.sidefx.com/tutorials/houdini-essentials-large-scale-fluids/"
+    },
+    {
+      "label": "SideFX 原生木材破碎文档",
+      "url": "https://www.sidefx.com/docs/houdini/nodes/sop/rbdmaterialfracture.html"
+    },
+    {
+      "label": "SideFX 白水源文档",
+      "url": "https://www.sidefx.com/docs/houdini/nodes/sop/whitewatersource.html"
+    }
+  ],
+  "credits": {
+    "author": "DCC-MCP showcase · 实际生成与原生宿主制作",
+    "license": "软件按仓库许可；生成资产适用提供方条款",
+    "note": "保留生成参考、模型和贴图的来源与修改边界；不添加艺术品、训练数据或评估数据许可。"
+  },
+  "source": {
+    "url": "https://github.com/dcc-mcp/dcc-mcp-houdini/tree/73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "commit": "73e9db1e4dc85da16d33ab385cfa2f52e08b49f3",
+    "title": "材质边界修复源码；最终物理另按公开配方验收"
+  },
+  "verified_at": "2026-10-26",
+  "model_attribution": [
+    {
+      "stage_id": "planning",
+      "stage": "策划与方向",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "creation",
+      "stage": "资产与原生制作",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "code",
+      "stage": "工具与物理代码",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "reference",
+      "stage": "参考图生成",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "post_production",
+      "stage": "成片后期",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "review_technical",
+      "stage": "独立技术复核",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    },
+    {
+      "stage_id": "review_visual",
+      "stage": "独立视觉复核",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "basis": "未核验可公开的接受配置记录，模型与推理强度保持未知。",
+      "scope": "只记录该制作或复核阶段，不从当前默认配置推断其他阶段。"
+    }
+  ],
+  "revision_notes": [
+    {
+      "version": "制作草稿与源往返补录",
+      "date": "2026-10-26",
+      "change": "保留原始失败，增加独立源几何与后续材质修复验收；最终解算、影片和浏览器仍未验收，不加入选集。"
+    },
+    {
+      "version": "颜色派生与源分件检查更新",
+      "date": "2026-10-26",
+      "change": "从保留的线性 Rec.709 EXR 重新派生原生 JPEG，增加独立源分件检查与明确颜色记录。生成参考、模型 ZIP 与模型清单字节未变；终态影片和漂浮仍未验收，继续不入选。"
+    },
+    {
+      "version": "完整源与原生木材破碎方向",
+      "date": "2026-10-26",
+      "change": "按制作方向保留旧 Bang 比较，新增完整 Rodin 源包、逐字节清单与原生木材破碎详细计划；不提交、不入选，也不宣称新解算成功。"
+    },
+    {
+      "version": "船底局部水爆目标与参考范围",
+      "date": "2026-10-26",
+      "change": "将新目标明确为原生木材破碎加船底 FLIP 水爆，旧 Bang 诊断及渲染停止且未验收；补充公开参考的有限查阅范围，不复制私有截图、不宣称视频已观看或新原生结果通过。"
+    },
+    {
+      "version": "原生 71 块静态几何与细节图",
+      "date": "2026-10-26",
+      "change": "加入便携原生几何、冷重建与保存重开证据，以及完整源、程序木纹切口和 71 块美术展开三张静帧。保护既有源包和参考字节；动力学、漂浮、影片仍待验收，保持未入选。"
+    }
+  ]
+}

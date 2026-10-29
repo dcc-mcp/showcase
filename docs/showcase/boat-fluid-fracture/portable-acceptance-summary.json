@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-10-26",
+  "scope": "Independent headless native acceptance of the delivered split-model archive; no boat simulation acceptance",
+  "environment": {
+    "houdini_version": "22.0.368",
+    "houdini_license": "Commercial",
+    "adapter_reported_version": "0.44.2",
+    "adapter_source_commit": "c89e52559f9e26867cc12d7676f7c482d63c100b",
+    "core_version": "0.20.48",
+    "control_route": "DCC-MCP CLI to one isolated task-owned headless host; no UI"
+  },
+  "source_assets": {
+    "archive_sha256": "acf4c00f3d47e5da477f76db40548a714ffd1ac3b124f341149f2d995ef628b9",
+    "archive_bytes": 16276511,
+    "archive_members_verified": 9,
+    "original_provider_obj_sha256": "2006679c54d817ef83fb0057132438acc5efc509530b890ff242193fb2cc107c",
+    "portable_obj_sha256": "87abff3aa0601b83bcf90b918b7a5dfaffaf9a933a968826a85497391c8f0abb",
+    "texture_sha256": [
+      {
+        "name": "texture_diffuse.png",
+        "sha256": "9bdb48c74e4f71387a26f147d5edbc30e876099b26d746766237940ee25bf096"
+      },
+      {
+        "name": "texture_metallic.png",
+        "sha256": "100d0fbcb688d676cc3814fcc16b440e0b2c1826cd3a3574ab62b7dc4b3b09e2"
+      },
+      {
+        "name": "texture_normal.png",
+        "sha256": "41e5778c2ae5ca4a4a1fb68848b4e4ae777692e78b691d7f0e727a0885160356"
+      },
+      {
+        "name": "texture_pbr.png",
+        "sha256": "b42c3965d50c376c86f5bdead723495ca569b4ec671545ae4bf0f4fc66efffa5"
+      },
+      {
+        "name": "texture_roughness.png",
+        "sha256": "3ff0a088b30942b65464975c023ab8a3f9bdf54ff7d9827fdfc95c9df4316513"
+      }
+    ]
+  },
+  "measurements": {
+    "part_count": 17,
+    "point_count": 75003,
+    "triangle_count": 150000,
+    "vertex_count": 450000,
+    "parts": [
+      {
+        "label": "root.18",
+        "triangles": 5258
+      },
+      {
+        "label": "root.17",
+        "triangles": 7784
+      },
+      {
+        "label": "root.16",
+        "triangles": 1874
+      },
+      {
+        "label": "root.15",
+        "triangles": 19844
+      },
+      {
+        "label": "root.14",
+        "triangles": 7462
+      },
+      {
+        "label": "root.13",
+        "triangles": 820
+      },
+      {
+        "label": "root.11",
+        "triangles": 57178
+      },
+      {
+        "label": "root.10",
+        "triangles": 3924
+      },
+      {
+        "label": "root.9",
+        "triangles": 21938
+      },
+      {
+        "label": "root.8",
+        "triangles": 2624
+      },
+      {
+        "label": "root.6",
+        "triangles": 1012
+      },
+      {
+        "label": "root.5",
+        "triangles": 2462
+      },
+      {
+        "label": "root.4",
+        "triangles": 3946
+      },
+      {
+        "label": "root.3",
+        "triangles": 3606
+      },
+      {
+        "label": "root.2",
+        "triangles": 1216
+      },
+      {
+        "label": "root.1",
+        "triangles": 6658
+      },
+      {
+        "label": "root.0",
+        "triangles": 2394
+      }
+    ],
+    "uv_present": true,
+    "normal_present": true,
+    "bounds_min_source_units": [
+      -0.39545300602912903,
+      -0.26061201095581055,
+      -0.9493370056152344
+    ],
+    "bounds_max_source_units": [
+      0.39746999740600586,
+      0.24879999458789825,
+      0.9484689831733704
+    ],
+    "bounds_size_source_units": [
+      0.7929230034351349,
+      0.5094120055437088,
+      1.8978059887886047
+    ],
+    "source_physical_units": "unspecified"
+  },
+  "checks": [
+    {
+      "name": "Archive integrity and no-overwrite extraction",
+      "result": "pass",
+      "observed": {
+        "verified_members": 9,
+        "sha256_matches": true,
+        "relative_members_only": true
+      }
+    },
+    {
+      "name": "Typed as-authored geometry import",
+      "result": "pass",
+      "observed": {
+        "parts": 17,
+        "triangles": 150000,
+        "vertex_uv_present": true
+      }
+    },
+    {
+      "name": "Native HIP save and reopen geometry",
+      "result": "pass",
+      "observed": {
+        "part_counts_equal": true,
+        "bounds_equal": true,
+        "ordered_position_float32_sha256_equal": true,
+        "ordered_uv_float32_sha256_equal": true,
+        "ordered_normal_float32_sha256_equal": true
+      }
+    },
+    {
+      "name": "Typed Bgeo export and reimport geometry",
+      "result": "pass",
+      "observed": {
+        "part_counts_equal": true,
+        "bounds_equal": true,
+        "primitive_topology_equal": true,
+        "part_paths_equal": true,
+        "primitive_material_assignment_strings_equal": true,
+        "position_max_abs_difference_source_units": 0.0,
+        "compared_primitive_corners": 450000,
+        "corner_aligned_uv_max_abs_difference": 0.0,
+        "corner_aligned_normal_max_abs_difference": 0.0
+      }
+    },
+    {
+      "name": "As-authored diffuse texture binding",
+      "result": "fail",
+      "expected": {
+        "basecolor_useTexture": 1,
+        "basecolor_texture": "relative diffuse texture resolved from the packaged MTL"
+      },
+      "observed": {
+        "material_binding_present": true,
+        "basecolor_useTexture": 0,
+        "basecolor_texture_empty": true,
+        "material_fallback_warning": true,
+        "same_failure_after_hip_reopen": true
+      }
+    }
+  ],
+  "material_observations": {
+    "materials_detected": 1,
+    "materials_imported_reported": 1,
+    "materials_lost_reported": 0,
+    "reported_status": "as_authored",
+    "warning_codes": [
+      "material_fallback"
+    ],
+    "unapplied_parameters": [
+      "metallic",
+      "roughness",
+      "opacity"
+    ],
+    "basecolor_useTexture": 0,
+    "basecolor_texture_empty": true,
+    "roughness_observed": 0.3,
+    "metallic_observed": 0.0,
+    "opacity_observed": 1.0,
+    "scope": "A material node and assignment exist, but diffuse texture binding failed. Separate PBR maps are delivered in the archive; importer parity is not claimed."
+  },
+  "geometry_fingerprints": {
+    "import_position_float32_sha256": "7797f54364bd9c164b4b303e22fdd24185219904dd48081508e5260c4f9e6e5a",
+    "import_uv_float32_sha256": "72689c8ae537359b231b6c2315c043540cde616442767b7c05b844c5040ed3f6",
+    "import_normal_float32_sha256": "1c4d3fa8df0d7253eb0a3c81f80481e3bc45a9a6cee07f276d5be0176f255b21",
+    "hip_reopen_matches_import": true,
+    "bgeo_vertex_storage_order_changed": true,
+    "note": "Flat vertex-storage UV/normal hashes differ after Bgeo loading. Full per-primitive/local-corner alignment establishes zero value difference across every corresponding vertex; raw storage hashes are not used as a semantic parity verdict."
+  },
+  "private_artifacts": {
+    "hip_bytes": 227894,
+    "hip_sha256": "9540c90ab9ee001905afccf16d7ee0bfaa3baab1306ad688029a633be93fdf11",
+    "bgeo_bytes": 9514198,
+    "bgeo_sha256": "5124dd3a5f4076fabfa3e7e156702356e5a2ca5d1448b8b179f9471ab1233109",
+    "availability": "Retained privately; native metadata and source references are not cleared for publication."
+  },
+  "method_limits": [
+    "Typed tools performed import, parameter readback, HIP save/load and interchange export/import. A bounded read-only automation script aggregated part counts and compared geometry/UV/normal values because the typed geometry tools do not expose whole-mesh aggregate fingerprints or aligned comparisons.",
+    "The export returned a pending core job and was polled to completion without resubmission.",
+    "This acceptance inspected data, not rendered material appearance or cross-application parity."
+  ],
+  "not_claimed": [
+    "Faithful as-authored diffuse or full PBR material import",
+    "Rendered visual equivalence",
+    "Other DCC interoperability",
+    "Portable native HIP redistribution",
+    "Completed boat fracture or fragment flotation",
+    "Independent recipe rebuild, final movie or public playback"
+  ]
+}
