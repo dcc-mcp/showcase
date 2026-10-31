@@ -11,6 +11,7 @@ var _wall_nodes: Array = []
 var _hero_node: Node2D
 var _hero_body: AnimatedSprite2D
 var _route_layer: Node2D
+var _walkable_layer: Node2D
 var _route_cells: Array = []
 var _animating := false
 var _facing := 2
@@ -85,6 +86,11 @@ func refresh() -> void:
 		_route_layer.name = "WalkRouteFeedback"
 		_route_layer.z_index = -1
 		_board.add_child(_route_layer)
+		_walkable_layer = Node2D.new()
+		_walkable_layer.name = "WalkableTileGuides"
+		_walkable_layer.z_index = -2
+		_board.add_child(_walkable_layer)
+		_draw_walkable_guides()
 		_direction_layer = Node2D.new()
 		_direction_layer.z_index = -1
 		_board.add_child(_direction_layer)
@@ -105,6 +111,21 @@ func refresh() -> void:
 
 func _center(cell: Array) -> Vector2:
 	return _floor.map_to_local(Vector2i(int(cell[0]), int(cell[1])))
+
+
+func _draw_walkable_guides() -> void:
+	if not is_instance_valid(_walkable_layer):
+		return
+	var edge_color := Color("f5d39b", 0.30) if int(_rules.state.get("floor", 0)) == 0 else Color("8bc5c4", 0.22)
+	var rows: Array = _rules.floor_data().get("grid", [])
+	for y: int in range(rows.size()):
+		for x: int in range(str(rows[y]).length()):
+			if not _rules.walkable([x, y]):
+				continue
+			var outline := _diamond(117, 57)
+			outline.append(outline[0])
+			var line := _line(outline, edge_color, 2.0, _walkable_layer)
+			line.position = _center([x, y])
 
 
 func _add_pier(center: Vector2, _seed_index: int) -> void:

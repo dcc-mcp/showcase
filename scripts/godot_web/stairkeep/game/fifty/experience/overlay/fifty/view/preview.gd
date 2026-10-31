@@ -232,6 +232,7 @@ func _build_ui() -> void:
 	world_column.add_child(world_host)
 	world_host.resized.connect(_schedule_fit)
 	world_column.add_child(_label("暖色地砖可走 · 深色石墙阻挡 · 青色楼梯通往上下层",13,MUTED,true))
+	world_column.add_child(_label("图例：金/蓝门消耗同色钥匙 · 金色物件可拾取 · 金色人物/纸签可交互 · 路线亮框表示将要走的格子",13,CREAM,true))
 	availability_label = _label("目标 50 层 · 当前开放 1—10 层，11—50 层尚未制作", 14, MUTED)
 	if OS.has_feature("web"): availability_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	world_column.add_child(availability_label)
@@ -658,7 +659,7 @@ func _inspect(cell: Array) -> void:
 		"shop":
 			var shop: Dictionary = info.get("shop", {})
 			inspect_title.text = str(shop.get("name","修补商店"))
-			inspect_copy.text = "站在商店格或相邻格即可购买。库存有限，先比较升级对后续路线的帮助。\n当前持有 %d 金币。" % int(rules.state.get("gold",0))
+			inspect_copy.text = "站在商店格或相邻格即可购买。库存有限，先比较升级对后续路线的帮助。\n当前持有 %d 金币。\n\n下方每件商品都有独立购买按钮；E / 空格只负责前往商店，不会自动购买。" % int(rules.state.get("gold",0))
 			approach_button.text = "前往商店"
 			if _cell_distance(cell,rules.state.get("pos",[])) <= 1: approach_button.hide()
 			for offer: Dictionary in shop.get("offers", []):

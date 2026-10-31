@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "revision": "web-save-06",
-  "status": "source-web-storage-implemented-runtime-blocked",
+  "revision": "readability-07",
+  "status": "source-web-storage-and-readability-implemented-runtime-blocked",
   "baseline_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
   "overlay": [
     {
@@ -1006,8 +1006,8 @@
     },
     {
       "path": "fifty/view/experience_world.gd",
-      "bytes": 27922,
-      "sha256": "aa1bb58d59052f11033aa31b8855d73d090bb726e520bb6e76494b9a4c2b3cd0"
+      "bytes": 28674,
+      "sha256": "fe2a98e9056b776e0b1f0e96d4d9fbd31460a34207a54bee9cf9e12a63bb7b12"
     },
     {
       "path": "fifty/view/hero_frames.tres",
@@ -1026,8 +1026,8 @@
     },
     {
       "path": "fifty/view/preview.gd",
-      "bytes": 68637,
-      "sha256": "4213736e03dd815e50a06ee4c107ae15f0a46aa38943be1c1ed95b200150a3dd"
+      "bytes": 68925,
+      "sha256": "efa867a0d460907c6febdcebf570eac7eae08d4aa2a10d7d68915d1a9fde8d9a"
     },
     {
       "path": "fifty/view/screen_input.gd",

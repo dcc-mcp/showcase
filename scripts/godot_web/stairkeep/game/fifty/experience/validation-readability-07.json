@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "revision": "readability-07",
+  "scope": "static source contract only; no engine, browser, audio or UI execution",
+  "changed_overlay": [
+    {
+      "path": "fifty/view/experience_world.gd",
+      "bytes": 28674,
+      "sha256": "fe2a98e9056b776e0b1f0e96d4d9fbd31460a34207a54bee9cf9e12a63bb7b12"
+    },
+    {
+      "path": "fifty/view/preview.gd",
+      "bytes": 68925,
+      "sha256": "efa867a0d460907c6febdcebf570eac7eae08d4aa2a10d7d68915d1a9fde8d9a"
+    }
+  ],
+  "checks": {
+    "readability_contract": "tests/test_readability_contract.py",
+    "hyper3d": "not used; no current authorization/compatibility/license receipt",
+    "fixed_url_updated": false,
+    "server_touched": false,
+    "browser_visual_input_audio": "not-tested"
+  }
+}
