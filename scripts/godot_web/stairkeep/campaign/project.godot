@@ -1,0 +1,11 @@
+config_version=5
+
+[application]
+config/name="Stairkeep campaign rules laboratory"
+config/description="Independent 21-floor data/rules/headless validation. No playable or visual acceptance claim."
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+

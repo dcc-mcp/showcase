@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "observed_date": "2026-10-25",
+  "scope": "New first-chapter reuses original licensed project components; not a complete game template or new visual acceptance.",
+  "core_reuse_gate": {
+    "contract": "dcc-mcp-production-reuse/v1",
+    "verified_canonical_source": "https://raw.githubusercontent.com/dcc-mcp/dcc-mcp-core/main/crates/dcc-mcp-gateway/src/gateway/native_resources/agent_workflows.md",
+    "live_gateway_resources_available_in_current_tools": false,
+    "typed_mcp_import_claimed": false
+  },
+  "selected": [
+    {
+      "source": "https://kenney.nl/assets/isometric-miniature-dungeon",
+      "license": "CC0-1.0",
+      "commit": null,
+      "retrieval_date": "2026-10-24",
+      "source_manifest": "assets/kenney/SOURCE.json",
+      "source_manifest_sha256": "9a9db3298bc1cbe9ea8f49f61aac68023e02e4b863460d18c7bc1770f3fd58fc",
+      "license_path": "assets/kenney/License.txt",
+      "license_sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc",
+      "files": [
+        {
+          "path": "assets/kenney/barrel_N.png",
+          "bytes": 5797,
+          "sha256": "7a4852bce0a67bde638c7e25ae5f35698f60f98af23f6feccb42ab0a7bb3424b",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/stairs_N.png",
+          "bytes": 25470,
+          "sha256": "4085feccb370df75658b40f1ef0c4e8ae2678404e89cf218473fd67944178ea3",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/stone_N.png",
+          "bytes": 21500,
+          "sha256": "0ac4c1481dcdfccbd571c854b23e9a47d8be5941ae236aa60ea85ba09856c75c",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/stoneColumn_N.png",
+          "bytes": 9204,
+          "sha256": "2007a1e676c76737162c34aab713c8ebc0c7dd148c95949b8b0f6eda784c2a6d",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/stoneTile_N.png",
+          "bytes": 21149,
+          "sha256": "b2fbc7dfcd755fc6e91df07ac0ce9bb4acc695a8d27e995d677e7c5019f3bfcd",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/stoneUneven_N.png",
+          "bytes": 21302,
+          "sha256": "07cd05a717e45082002305896b8ac296f812ae6e38bcb59ce6a3de9539668aa8",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/stoneWallDoorClosed_N.png",
+          "bytes": 23209,
+          "sha256": "144a3d117e9aa11782965bca1bb28654e5c5395964f649b760ebbce109a05412",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/tableRoundItemsChairs_N.png",
+          "bytes": 8731,
+          "sha256": "5931a78448e50f7438cd6d304a17d1e25cf95acb4757ff47406100a140eff028",
+          "modification": "unmodified"
+        },
+        {
+          "path": "assets/kenney/wanderer.png",
+          "bytes": 4903,
+          "sha256": "d3b1fe7f2b34ee3077b3f853fbf36cfdcbb40324368f54f2673f35bf341b1059",
+          "modification": "renamed only"
+        },
+        {
+          "path": "assets/kenney/woodenCrates_N.png",
+          "bytes": 6427,
+          "sha256": "7a289f71c98a6c55f339dd856a633e1336168775870d36bbbaf5257c6680c492",
+          "modification": "unmodified"
+        }
+      ],
+      "current_hash_verification_passed": true,
+      "new_download_or_install": false
+    },
+    {
+      "source": "https://github.com/godotengine/godot-demo-projects/tree/6ad6167e0577fe3622c18546138f456b107ce93c/2d/isometric",
+      "license": "MIT",
+      "commit": "6ad6167e0577fe3622c18546138f456b107ce93c",
+      "retrieval_date": "historical pinned source; see SOURCE.json",
+      "source_manifest": "vendor/godot-isometric/SOURCE.json",
+      "source_manifest_sha256": "bdb3ec7d03772fd257f4bb7605b96ddb7f8c39e018e5abdfee52bccbe7b398ff",
+      "license_path": "vendor/godot-isometric/LICENSE.md",
+      "license_sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c",
+      "files": [
+        {
+          "path": "vendor/godot-isometric/tileset/tileset.tres",
+          "bytes": 6230,
+          "sha256": "fb8e68c61257b4c65e3ecae4f2f05c4ba43737d5c4540145106255e4f3c49d99",
+          "modification": "res:// paths rebased; stale upstream external-resource UIDs removed"
+        },
+        {
+          "path": "vendor/godot-isometric/tileset/isotiles.png",
+          "bytes": 227977,
+          "sha256": "c8e987cca2c6eb9928ecfe089dfe5e977f8fc1a4ccb07878db8c601ccbee9ed4",
+          "modification": "unmodified"
+        },
+        {
+          "path": "vendor/godot-isometric/player/goblin.tscn",
+          "bytes": 45211,
+          "sha256": "47e1d2d3d8cac9eacfa29727dd16a9c2a5d86fbce89bf2d33e4b7b556efc7c2f",
+          "modification": "res:// paths rebased; stale upstream external-resource UIDs removed"
+        },
+        {
+          "path": "vendor/godot-isometric/player/goblin.gd",
+          "bytes": 1391,
+          "sha256": "c634c7f6e7f293625414ff329bb4756aa008c3e712d298ab62db9e42cd5ec521",
+          "modification": "unmodified"
+        },
+        {
+          "path": "vendor/godot-isometric/player/goblin.png",
+          "bytes": 3032343,
+          "sha256": "c820bb4ee88295e71fc9b186b7c77f33fb1dd53a8aca3ceeece8adf84097fc91",
+          "modification": "unmodified"
+        }
+      ],
+      "current_hash_verification_passed": true,
+      "new_download_or_install": false
+    }
+  ],
+  "existing_native_code": [
+    {
+      "path": "scripts/rules.gd",
+      "sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495",
+      "license": "Repository MIT",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/world.gd",
+      "sha256": "f1860bed91688cc5f81eedfa2fb14a153d1917473415acd9c21558b9320876c2",
+      "license": "Repository MIT",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/ui_icon.gd",
+      "sha256": "5b4ff2c85661d27d820abaa5923f92ea93716b8a0a540afeb7dff5f307f60ef8",
+      "license": "Repository MIT",
+      "unchanged": true
+    }
+  ],
+  "discovery": [
+    {
+      "source": "https://godotengine.org/asset-library/asset/2718",
+      "listing_version": "4.2-31d1c0c",
+      "listing_license": "MIT",
+      "fit": "Maintained official isometric depth-sorting component, GDScript/Compatibility; existing pinned 4.7 matching upstream component reused instead of downloading older library artifact.",
+      "selected": "existing pinned component only; listing not reacquired"
+    },
+    {
+      "source": "https://godotengine.org/asset-library/asset/112",
+      "listing_version": "3.5-9e68af3",
+      "listing_license": "MIT",
+      "rejected_reason": "Older Godot 3/GLES2 component; not target installed 4.7.2"
+    },
+    {
+      "source": "https://godotengine.org/asset-library/asset/2174",
+      "rejected_reason": "3D city-builder template is the wrong genre and would replace existing isometric game; not acquired or executed"
+    }
+  ],
+  "new_external_assets_fonts_audio": [],
+  "new_payments_or_legal_acceptance": false,
+  "visual_and_real_input_acceptance": "blocked/not-tested; prior OS5 input gate unchanged",
+  "original_maps_dialogue_or_assets_from_reference_game_copied": false
+}

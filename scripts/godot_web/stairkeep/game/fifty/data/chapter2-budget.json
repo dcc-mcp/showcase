@@ -1,0 +1,4260 @@
+{
+  "scope": "New chapter2 build-time static geometry/key-cut and planning evidence only. No Godot/native/GUI run.",
+  "engine_tested": false,
+  "chapter1_frozen_source_sha256": "3703b2cbc43d2297d42d335ad85ebac3f464d9f6c68d536d75a990e9bdd75fd5",
+  "floors_1_to_9_deep_equal": true,
+  "floor10_bridge_edits": [
+    "grid[1][8] wall to floor",
+    "f10_signal no longer slice_goal",
+    "ev_signal milestone copy updated without resource-effect changes",
+    "new f10_up at [8,1]"
+  ],
+  "target_floors": 50,
+  "authored_floor_count": 20,
+  "unmade_floor_count": 30,
+  "checkpoint_floors": [
+    1,
+    5,
+    11,
+    15
+  ],
+  "new_topology_checks": [
+    {
+      "id": 11,
+      "name": "回潮廊桥",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 68,
+      "independent_cycles": 3,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "N": [
+          3,
+          5
+        ],
+        "K": [
+          3,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "A": [
+          12,
+          13
+        ],
+        "a": [
+          15,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 12,
+      "name": "折页书庭",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 72,
+      "independent_cycles": 5,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "H": [
+          14,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "q": [
+          5,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G",
+        "H"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 13,
+      "name": "双井环渠",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 90,
+      "independent_cycles": 9,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "q": [
+          5,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 14,
+      "name": "偏轴风桥",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 69,
+      "independent_cycles": 4,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "B": [
+          14,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "q": [
+          5,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G",
+        "B"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 15,
+      "name": "锁匣回路",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 86,
+      "independent_cycles": 9,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "H": [
+          14,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "K": [
+          3,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "A": [
+          12,
+          13
+        ],
+        "a": [
+          15,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G",
+        "H"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 16,
+      "name": "盐灯市廊",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 82,
+      "independent_cycles": 11,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "N": [
+          3,
+          5
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "M": [
+          11,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 17,
+      "name": "回声栈桥",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 78,
+      "independent_cycles": 7,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "K": [
+          3,
+          7
+        ],
+        "q": [
+          5,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "A": [
+          12,
+          13
+        ],
+        "a": [
+          15,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 18,
+      "name": "横闸内海",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 80,
+      "independent_cycles": 9,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "H": [
+          14,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "q": [
+          5,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G",
+        "H"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 19,
+      "name": "四向门集",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 84,
+      "independent_cycles": 7,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "B": [
+          14,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "K": [
+          3,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "M": [
+          11,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "A": [
+          12,
+          13
+        ],
+        "a": [
+          15,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G",
+        "B"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    },
+    {
+      "id": 20,
+      "name": "折光镜台",
+      "width": 17,
+      "height": 17,
+      "walkable_cells": 101,
+      "independent_cycles": 10,
+      "markers": {
+        "G": [
+          12,
+          3
+        ],
+        "H": [
+          14,
+          3
+        ],
+        "U": [
+          15,
+          3
+        ],
+        "q": [
+          5,
+          7
+        ],
+        "g": [
+          5,
+          9
+        ],
+        "i": [
+          5,
+          11
+        ],
+        "h": [
+          5,
+          13
+        ],
+        "V": [
+          1,
+          14
+        ],
+        "S": [
+          2,
+          14
+        ],
+        "e": [
+          9,
+          15
+        ]
+      },
+      "main_gate_cuts": [
+        "G",
+        "H"
+      ],
+      "all_cells_connected": true,
+      "unlabeled_D4_unique_against_prior": true,
+      "scope": "static planar geometry; no resource or engine claim"
+    }
+  ],
+  "object_count": 237,
+  "object_kinds": {
+    "atk": 30,
+    "def": 10,
+    "door": 31,
+    "enemy": 41,
+    "event": 14,
+    "gold": 20,
+    "key": 14,
+    "npc": 4,
+    "potion": 30,
+    "shop": 5,
+    "stairs": 38
+  },
+  "all_stairs_bidirectional": true,
+  "loose_independent_resource_upper_envelope": {
+    "atk": 129,
+    "def": 55,
+    "gold": 1583,
+    "hp": 2760,
+    "key:blue": 3,
+    "key:yellow": 15
+  },
+  "upper_envelope_note": "Not jointly attainable: finite keys cannot open every optional door, and finite shop stock still costs gold.",
+  "new_yellow_budget": {
+    "fixed_pickups": [
+      "f11_yellow_key",
+      "f15_yellow_key",
+      "f17_yellow_key",
+      "f19_yellow_key"
+    ],
+    "one_time_event": "ev_c2_rigger_supply",
+    "total": 5,
+    "mandatory_main_gates": [
+      "f12_main_gate",
+      "f15_main_gate",
+      "f18_main_gate",
+      "f20_main_gate"
+    ],
+    "safe_optional_choices": [
+      "f17_side_gate",
+      "f19_side_gate"
+    ],
+    "spare_keys": 1
+  },
+  "new_blue_budget": {
+    "one_time_events": [
+      "ev_c2_first_blue",
+      "ev_c2_second_blue"
+    ],
+    "total": 2,
+    "mandatory_blue_gates": [
+      "f14_blue_gate",
+      "f19_blue_gate"
+    ]
+  },
+  "routes": [
+    {
+      "name": "keen",
+      "events": 201,
+      "final": {
+        "hp": 227,
+        "atk": 111,
+        "def": 32,
+        "gold": 733,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        },
+        "won": false
+      },
+      "engine_tested": false,
+      "scope": "Reused non-authoritative Python design arithmetic/BFS, root actual API replay required.",
+      "ordinary_combats": 40,
+      "planned_walk_steps": 1277,
+      "minimum_hp": 36
+    },
+    {
+      "name": "reserve",
+      "events": 201,
+      "final": {
+        "hp": 244,
+        "atk": 106,
+        "def": 34,
+        "gold": 733,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        },
+        "won": false
+      },
+      "engine_tested": false,
+      "scope": "Reused non-authoritative Python design arithmetic/BFS, root actual API replay required.",
+      "ordinary_combats": 40,
+      "planned_walk_steps": 1255,
+      "minimum_hp": 36
+    }
+  ],
+  "checkpoint_planning_worlds": {
+    "1": {
+      "prefix_length": 0,
+      "world": {
+        "core_state": {
+          "hp": 180,
+          "atk": 14,
+          "def": 5,
+          "gold": 0,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 0,
+          "pos": [
+            7,
+            13
+          ],
+          "cleared": [],
+          "purchases": {}
+        },
+        "flags": {
+          "met_mapper": false,
+          "copper_found": false,
+          "copper_redeemed": false,
+          "archive_read": false,
+          "met_keeper": false,
+          "keeper_supplied": false,
+          "relay_lit": false,
+          "c2_met_surveyor": false,
+          "c2_scale_read": false,
+          "c2_ink_found": false,
+          "c2_first_blue_claimed": false,
+          "c2_register_read": false,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [],
+        "slice_complete": false
+      }
+    },
+    "5": {
+      "prefix_length": 45,
+      "world": {
+        "core_state": {
+          "hp": 137,
+          "atk": 29,
+          "def": 9,
+          "gold": 142,
+          "keys": {
+            "yellow": 0,
+            "blue": 1
+          },
+          "won": false,
+          "floor": 4,
+          "pos": [
+            6,
+            13
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": false,
+          "met_keeper": false,
+          "keeper_supplied": false,
+          "relay_lit": false,
+          "c2_met_surveyor": false,
+          "c2_scale_read": false,
+          "c2_ink_found": false,
+          "c2_first_blue_claimed": false,
+          "c2_register_read": false,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange"
+        ],
+        "slice_complete": false
+      }
+    },
+    "11": {
+      "prefix_length": 107,
+      "world": {
+        "core_state": {
+          "hp": 77,
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 10,
+          "pos": [
+            1,
+            14
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard",
+            "f05_core_potion",
+            "f05_core_atk",
+            "f05_choice_key",
+            "f05_scout",
+            "f05_attack_door",
+            "f05_attack_gold",
+            "f05_attack_gem",
+            "f05_archive_door",
+            "f05_guard",
+            "f06_core_potion",
+            "f06_core_atk",
+            "f06_choice_key",
+            "f06_scout",
+            "f06_attack_door",
+            "f06_attack_gold",
+            "f06_attack_gem",
+            "f06_guard",
+            "f07_core_potion",
+            "f07_core_atk",
+            "f07_choice_key",
+            "f07_scout",
+            "f07_attack_door",
+            "f07_attack_gold",
+            "f07_attack_gem",
+            "f07_guard",
+            "f08_core_potion",
+            "f08_core_atk",
+            "f08_choice_key",
+            "f08_scout",
+            "f08_attack_door",
+            "f08_attack_gold",
+            "f08_attack_gem",
+            "f08_guard",
+            "f09_core_potion",
+            "f09_core_atk",
+            "f09_choice_key",
+            "f09_scout",
+            "f09_attack_door",
+            "f09_attack_gold",
+            "f09_attack_gem",
+            "f09_guard",
+            "f10_core_potion",
+            "f10_core_atk",
+            "f10_choice_key",
+            "f10_scout",
+            "f10_attack_door",
+            "f10_attack_gold",
+            "f10_attack_gem",
+            "f10_guard"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": true,
+          "met_keeper": false,
+          "keeper_supplied": true,
+          "relay_lit": true,
+          "c2_met_surveyor": false,
+          "c2_scale_read": false,
+          "c2_ink_found": false,
+          "c2_first_blue_claimed": false,
+          "c2_register_read": false,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange",
+          "ev_archive",
+          "ev_keeper_supply",
+          "ev_signal"
+        ],
+        "slice_complete": false
+      }
+    },
+    "15": {
+      "prefix_length": 143,
+      "world": {
+        "core_state": {
+          "hp": 98,
+          "atk": 72,
+          "def": 22,
+          "gold": 724,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 14,
+          "pos": [
+            1,
+            14
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard",
+            "f05_core_potion",
+            "f05_core_atk",
+            "f05_choice_key",
+            "f05_scout",
+            "f05_attack_door",
+            "f05_attack_gold",
+            "f05_attack_gem",
+            "f05_archive_door",
+            "f05_guard",
+            "f06_core_potion",
+            "f06_core_atk",
+            "f06_choice_key",
+            "f06_scout",
+            "f06_attack_door",
+            "f06_attack_gold",
+            "f06_attack_gem",
+            "f06_guard",
+            "f07_core_potion",
+            "f07_core_atk",
+            "f07_choice_key",
+            "f07_scout",
+            "f07_attack_door",
+            "f07_attack_gold",
+            "f07_attack_gem",
+            "f07_guard",
+            "f08_core_potion",
+            "f08_core_atk",
+            "f08_choice_key",
+            "f08_scout",
+            "f08_attack_door",
+            "f08_attack_gold",
+            "f08_attack_gem",
+            "f08_guard",
+            "f09_core_potion",
+            "f09_core_atk",
+            "f09_choice_key",
+            "f09_scout",
+            "f09_attack_door",
+            "f09_attack_gold",
+            "f09_attack_gem",
+            "f09_guard",
+            "f10_core_potion",
+            "f10_core_atk",
+            "f10_choice_key",
+            "f10_scout",
+            "f10_attack_door",
+            "f10_attack_gold",
+            "f10_attack_gem",
+            "f10_guard",
+            "f11_water",
+            "f11_blade",
+            "f11_coins",
+            "f11_yellow_key",
+            "f11_scout",
+            "f11_guard",
+            "f12_water",
+            "f12_blade",
+            "f12_coins",
+            "f12_scout",
+            "f12_guard",
+            "f12_main_gate",
+            "f13_water",
+            "f13_blade",
+            "f13_coins",
+            "f13_scout",
+            "f13_guard",
+            "f14_water",
+            "f14_blade",
+            "f14_coins",
+            "f14_scout",
+            "f14_guard",
+            "f14_blue_gate"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": true,
+          "met_keeper": false,
+          "keeper_supplied": true,
+          "relay_lit": true,
+          "c2_met_surveyor": true,
+          "c2_scale_read": true,
+          "c2_ink_found": true,
+          "c2_first_blue_claimed": true,
+          "c2_register_read": true,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange",
+          "ev_archive",
+          "ev_keeper_supply",
+          "ev_signal",
+          "ev_c2_surveyor_intro",
+          "ev_c2_scale",
+          "ev_c2_ink",
+          "ev_c2_first_blue",
+          "ev_c2_register"
+        ],
+        "slice_complete": false
+      }
+    }
+  },
+  "recovery_scenarios": [
+    {
+      "id": "bad_early_side_gate_f11",
+      "name": "F11 spends its forward key on an early side cache",
+      "goal_object_id": "f20_signal",
+      "checkpoint_id": "entry_11",
+      "checkpoint_floor": 11,
+      "mode": "practice_checkpoint",
+      "requested_seed": "00000001",
+      "prefix_events": [
+        "f01_core_potion",
+        "f01_core_atk",
+        "f01_choice_key",
+        "f01_scout",
+        "f01_mapper",
+        "f01_attack_door",
+        "f01_attack_gold",
+        "f01_attack_gem",
+        "f01_guard",
+        "f01_up",
+        "f02_core_potion",
+        "f02_core_atk",
+        "f02_choice_key",
+        "f02_scout",
+        "f02_attack_door",
+        "f02_attack_gold",
+        "f02_attack_gem",
+        "buy:f02_shop/ward",
+        "buy:f02_shop/flask",
+        "f02_guard",
+        "f02_up",
+        "f03_core_potion",
+        "f03_core_atk",
+        "f03_choice_key",
+        "f03_scout",
+        "f03_attack_door",
+        "f03_attack_gold",
+        "f03_attack_gem",
+        "f03_copper",
+        "f03_guard",
+        "f03_down",
+        "f02_down",
+        "f01_mapper",
+        "f01_up",
+        "f02_up",
+        "f03_up",
+        "f04_core_potion",
+        "f04_core_atk",
+        "f04_choice_key",
+        "f04_scout",
+        "f04_attack_door",
+        "f04_attack_gold",
+        "f04_attack_gem",
+        "f04_guard",
+        "f04_up",
+        "f05_core_potion",
+        "f05_core_atk",
+        "f05_choice_key",
+        "f05_scout",
+        "f05_attack_door",
+        "f05_attack_gold",
+        "f05_attack_gem",
+        "buy:f05_shop/ward",
+        "buy:f05_shop/flask",
+        "f05_archive_door",
+        "f05_archive",
+        "f05_guard",
+        "f05_up",
+        "f06_core_potion",
+        "f06_core_atk",
+        "f06_choice_key",
+        "f06_scout",
+        "f06_attack_door",
+        "f06_attack_gold",
+        "f06_attack_gem",
+        "f06_guard",
+        "f06_up",
+        "f07_core_potion",
+        "f07_core_atk",
+        "f07_choice_key",
+        "f07_scout",
+        "f07_attack_door",
+        "f07_attack_gold",
+        "f07_attack_gem",
+        "f07_keeper",
+        "f07_guard",
+        "f07_up",
+        "f08_core_potion",
+        "f08_core_atk",
+        "f08_choice_key",
+        "f08_scout",
+        "f08_attack_door",
+        "f08_attack_gold",
+        "f08_attack_gem",
+        "buy:f08_shop/ward",
+        "buy:f08_shop/flask",
+        "f08_guard",
+        "f08_up",
+        "f09_core_potion",
+        "f09_core_atk",
+        "f09_choice_key",
+        "f09_scout",
+        "f09_attack_door",
+        "f09_attack_gold",
+        "f09_attack_gem",
+        "f09_guard",
+        "f09_up",
+        "f10_core_potion",
+        "f10_core_atk",
+        "f10_choice_key",
+        "f10_scout",
+        "f10_attack_door",
+        "f10_attack_gold",
+        "f10_attack_gem",
+        "f10_guard",
+        "f10_signal",
+        "f10_up"
+      ],
+      "bad_suffix_events": [
+        "f11_water",
+        "f11_blade",
+        "f11_coins",
+        "f11_yellow_key",
+        "f11_scout",
+        "f11_surveyor",
+        "f11_side_gate",
+        "f11_side_cache",
+        "f11_guard",
+        "f11_up",
+        "f12_water",
+        "f12_blade",
+        "f12_coins",
+        "f12_scout",
+        "f12_scale",
+        "f12_guard"
+      ],
+      "bad_ledger": [
+        {
+          "event": "f11_water",
+          "before": {
+            "hp": 77,
+            "atk": 57,
+            "def": 19,
+            "gold": 418,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 157,
+            "atk": 57,
+            "def": 19,
+            "gold": 418,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            5,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": false,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 82,
+          "planned_walk_steps": 5
+        },
+        {
+          "event": "f11_blade",
+          "before": {
+            "hp": 157,
+            "atk": 57,
+            "def": 19,
+            "gold": 418,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 157,
+            "atk": 60,
+            "def": 19,
+            "gold": 418,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            5,
+            11
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": false,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 83,
+          "planned_walk_steps": 2
+        },
+        {
+          "event": "f11_coins",
+          "before": {
+            "hp": 157,
+            "atk": 60,
+            "def": 19,
+            "gold": 418,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 157,
+            "atk": 60,
+            "def": 19,
+            "gold": 430,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            5,
+            9
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": false,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 84,
+          "planned_walk_steps": 2
+        },
+        {
+          "event": "f11_yellow_key",
+          "before": {
+            "hp": 157,
+            "atk": 60,
+            "def": 19,
+            "gold": 430,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 157,
+            "atk": 60,
+            "def": 19,
+            "gold": 430,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            3,
+            7
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": false,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 85,
+          "planned_walk_steps": 4
+        },
+        {
+          "event": "f11_scout",
+          "before": {
+            "hp": 157,
+            "atk": 60,
+            "def": 19,
+            "gold": 430,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 123,
+            "atk": 60,
+            "def": 19,
+            "gold": 454,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            9,
+            15
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": false,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 86,
+          "planned_walk_steps": 14,
+          "damage": 34
+        },
+        {
+          "event": "f11_surveyor",
+          "before": {
+            "hp": 123,
+            "atk": 60,
+            "def": 19,
+            "gold": 454,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 123,
+            "atk": 60,
+            "def": 19,
+            "gold": 454,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            4,
+            5
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 86,
+          "planned_walk_steps": 15,
+          "selected_event_id": "ev_c2_surveyor_intro"
+        },
+        {
+          "event": "f11_side_gate",
+          "before": {
+            "hp": 123,
+            "atk": 60,
+            "def": 19,
+            "gold": 454,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 123,
+            "atk": 60,
+            "def": 19,
+            "gold": 454,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            12,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 87,
+          "planned_walk_steps": 16
+        },
+        {
+          "event": "f11_side_cache",
+          "before": {
+            "hp": 123,
+            "atk": 60,
+            "def": 19,
+            "gold": 454,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 213,
+            "atk": 60,
+            "def": 19,
+            "gold": 484,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            15,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 87,
+          "planned_walk_steps": 2,
+          "selected_event_id": "ev_c2_f11_cache"
+        },
+        {
+          "event": "f11_guard",
+          "before": {
+            "hp": 213,
+            "atk": 60,
+            "def": 19,
+            "gold": 484,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 150,
+            "atk": 60,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 11,
+          "pos": [
+            12,
+            3
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 88,
+          "planned_walk_steps": 27,
+          "damage": 63
+        },
+        {
+          "event": "f11_up",
+          "before": {
+            "hp": 150,
+            "atk": 60,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 150,
+            "atk": 60,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            1,
+            14
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 88,
+          "planned_walk_steps": 3
+        },
+        {
+          "event": "f12_water",
+          "before": {
+            "hp": 150,
+            "atk": 60,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 250,
+            "atk": 60,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            5,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 89,
+          "planned_walk_steps": 5
+        },
+        {
+          "event": "f12_blade",
+          "before": {
+            "hp": 250,
+            "atk": 60,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 250,
+            "atk": 63,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            5,
+            11
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 90,
+          "planned_walk_steps": 2
+        },
+        {
+          "event": "f12_coins",
+          "before": {
+            "hp": 250,
+            "atk": 63,
+            "def": 19,
+            "gold": 517,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 250,
+            "atk": 63,
+            "def": 19,
+            "gold": 529,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            5,
+            9
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 91,
+          "planned_walk_steps": 2
+        },
+        {
+          "event": "f12_scout",
+          "before": {
+            "hp": 250,
+            "atk": 63,
+            "def": 19,
+            "gold": 529,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 212,
+            "atk": 63,
+            "def": 19,
+            "gold": 555,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            9,
+            15
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": false,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 92,
+          "planned_walk_steps": 10,
+          "damage": 38
+        },
+        {
+          "event": "f12_scale",
+          "before": {
+            "hp": 212,
+            "atk": 63,
+            "def": 19,
+            "gold": 555,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 212,
+            "atk": 63,
+            "def": 19,
+            "gold": 555,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            5,
+            7
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache",
+            "ev_c2_scale"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 92,
+          "planned_walk_steps": 11,
+          "selected_event_id": "ev_c2_scale"
+        },
+        {
+          "event": "f12_guard",
+          "before": {
+            "hp": 212,
+            "atk": 63,
+            "def": 19,
+            "gold": 555,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 143,
+            "atk": 63,
+            "def": 19,
+            "gold": 591,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 12,
+          "pos": [
+            12,
+            3
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": false,
+            "c2_first_blue_claimed": false,
+            "c2_register_read": false,
+            "c2_f11_cache_taken": true,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_f11_cache",
+            "ev_c2_scale"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 93,
+          "planned_walk_steps": 11,
+          "damage": 69
+        }
+      ],
+      "canonical_checkpoint_world": {
+        "core_state": {
+          "hp": 77,
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 10,
+          "pos": [
+            1,
+            14
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard",
+            "f05_core_potion",
+            "f05_core_atk",
+            "f05_choice_key",
+            "f05_scout",
+            "f05_attack_door",
+            "f05_attack_gold",
+            "f05_attack_gem",
+            "f05_archive_door",
+            "f05_guard",
+            "f06_core_potion",
+            "f06_core_atk",
+            "f06_choice_key",
+            "f06_scout",
+            "f06_attack_door",
+            "f06_attack_gold",
+            "f06_attack_gem",
+            "f06_guard",
+            "f07_core_potion",
+            "f07_core_atk",
+            "f07_choice_key",
+            "f07_scout",
+            "f07_attack_door",
+            "f07_attack_gold",
+            "f07_attack_gem",
+            "f07_guard",
+            "f08_core_potion",
+            "f08_core_atk",
+            "f08_choice_key",
+            "f08_scout",
+            "f08_attack_door",
+            "f08_attack_gold",
+            "f08_attack_gem",
+            "f08_guard",
+            "f09_core_potion",
+            "f09_core_atk",
+            "f09_choice_key",
+            "f09_scout",
+            "f09_attack_door",
+            "f09_attack_gold",
+            "f09_attack_gem",
+            "f09_guard",
+            "f10_core_potion",
+            "f10_core_atk",
+            "f10_choice_key",
+            "f10_scout",
+            "f10_attack_door",
+            "f10_attack_gold",
+            "f10_attack_gem",
+            "f10_guard"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": true,
+          "met_keeper": false,
+          "keeper_supplied": true,
+          "relay_lit": true,
+          "c2_met_surveyor": false,
+          "c2_scale_read": false,
+          "c2_ink_found": false,
+          "c2_first_blue_claimed": false,
+          "c2_register_read": false,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange",
+          "ev_archive",
+          "ev_keeper_supply",
+          "ev_signal"
+        ],
+        "slice_complete": false
+      },
+      "canonical_bad_world": {
+        "core_state": {
+          "hp": 143,
+          "atk": 63,
+          "def": 19,
+          "gold": 591,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 11,
+          "pos": [
+            12,
+            3
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard",
+            "f05_core_potion",
+            "f05_core_atk",
+            "f05_choice_key",
+            "f05_scout",
+            "f05_attack_door",
+            "f05_attack_gold",
+            "f05_attack_gem",
+            "f05_archive_door",
+            "f05_guard",
+            "f06_core_potion",
+            "f06_core_atk",
+            "f06_choice_key",
+            "f06_scout",
+            "f06_attack_door",
+            "f06_attack_gold",
+            "f06_attack_gem",
+            "f06_guard",
+            "f07_core_potion",
+            "f07_core_atk",
+            "f07_choice_key",
+            "f07_scout",
+            "f07_attack_door",
+            "f07_attack_gold",
+            "f07_attack_gem",
+            "f07_guard",
+            "f08_core_potion",
+            "f08_core_atk",
+            "f08_choice_key",
+            "f08_scout",
+            "f08_attack_door",
+            "f08_attack_gold",
+            "f08_attack_gem",
+            "f08_guard",
+            "f09_core_potion",
+            "f09_core_atk",
+            "f09_choice_key",
+            "f09_scout",
+            "f09_attack_door",
+            "f09_attack_gold",
+            "f09_attack_gem",
+            "f09_guard",
+            "f10_core_potion",
+            "f10_core_atk",
+            "f10_choice_key",
+            "f10_scout",
+            "f10_attack_door",
+            "f10_attack_gold",
+            "f10_attack_gem",
+            "f10_guard",
+            "f11_water",
+            "f11_blade",
+            "f11_coins",
+            "f11_yellow_key",
+            "f11_scout",
+            "f11_side_gate",
+            "f11_guard",
+            "f12_water",
+            "f12_blade",
+            "f12_coins",
+            "f12_scout",
+            "f12_guard"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": true,
+          "met_keeper": false,
+          "keeper_supplied": true,
+          "relay_lit": true,
+          "c2_met_surveyor": true,
+          "c2_scale_read": true,
+          "c2_ink_found": false,
+          "c2_first_blue_claimed": false,
+          "c2_register_read": false,
+          "c2_f11_cache_taken": true,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange",
+          "ev_archive",
+          "ev_keeper_supply",
+          "ev_signal",
+          "ev_c2_surveyor_intro",
+          "ev_c2_f11_cache",
+          "ev_c2_scale"
+        ],
+        "slice_complete": false
+      },
+      "failed_interaction": {
+        "object_id": "f12_main_gate",
+        "expected_action": "door_locked",
+        "gameplay_state_unchanged": true
+      },
+      "key_cut_proof": {
+        "classification": "known_yellow_key_cut_in_design_model",
+        "complete_relaxed_graph": true,
+        "queue_exhausted": true,
+        "nodes": 727,
+        "reachable_floor_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "per_floor_reachable_cells": {
+          "1": 43,
+          "2": 54,
+          "3": 50,
+          "4": 62,
+          "5": 55,
+          "6": 71,
+          "7": 55,
+          "8": 63,
+          "9": 63,
+          "10": 73,
+          "11": 68,
+          "12": 70
+        },
+        "ordinary_enemy_costs_ignored": true,
+        "blue_doors_and_npcs_relaxed_open": true,
+        "event_conditions_relaxed_true": true,
+        "yellow_keys": 0,
+        "remaining_yellow_pickup_ids": [
+          "f15_yellow_key",
+          "f17_yellow_key",
+          "f19_yellow_key"
+        ],
+        "reachable_yellow_pickup_ids": [],
+        "reachable_unclaimed_yellow_event_ids": [],
+        "reachable_yellow_shop_offers": [],
+        "forward_cut_gate": "f12_main_gate",
+        "cut_gate_reachable_from_this_side": true,
+        "gate_floor_exit_unreachable": true,
+        "goal_object_id": "f20_signal",
+        "goal_and_approach_unreachable": true,
+        "engine_reproduced": false,
+        "scope": "Complete graph overapproximation proves a zero-yellow-key cut for this exact planning prefix. It is not a generic combat/resource solver and not a runtime failure event."
+      },
+      "restore_contract": {
+        "complete_checkpoint_required": true,
+        "same_seed_and_layout": true,
+        "later_gains_and_consumption_both_rollback": true,
+        "runtime_failure_if_marked": "explicit_give_up_is_abandoned_not_unsat",
+        "resources_injected": false
+      },
+      "recovery_route": "keen",
+      "recovery_suffix_events": [
+        "f11_water",
+        "f11_blade",
+        "f11_coins",
+        "f11_yellow_key",
+        "f11_scout",
+        "f11_surveyor",
+        "f11_guard",
+        "f11_up",
+        "f12_water",
+        "f12_blade",
+        "f12_coins",
+        "f12_scout",
+        "f12_scale",
+        "f12_guard",
+        "f12_main_gate",
+        "f12_up",
+        "f13_water",
+        "f13_blade",
+        "f13_coins",
+        "f13_scout",
+        "f13_ink_seal",
+        "f13_guard",
+        "f13_down",
+        "f12_down",
+        "f11_surveyor",
+        "f11_up",
+        "f12_up",
+        "f13_up",
+        "f14_water",
+        "f14_blade",
+        "f14_coins",
+        "f14_scout",
+        "f14_register",
+        "f14_guard",
+        "f14_blue_gate",
+        "f14_up",
+        "f15_water",
+        "f15_blade",
+        "f15_coins",
+        "f15_yellow_key",
+        "f15_scout",
+        "f15_guard",
+        "f15_main_gate",
+        "f15_up",
+        "f16_water",
+        "f16_blade",
+        "f16_coins",
+        "f16_scout",
+        "f16_rigger",
+        "buy:f16_shop/edge",
+        "buy:f16_shop/ward",
+        "f16_guard",
+        "f16_up",
+        "f17_water",
+        "f17_blade",
+        "f17_coins",
+        "f17_yellow_key",
+        "f17_scout",
+        "f17_mirror_plan",
+        "f17_side_gate",
+        "f17_side_cache",
+        "f17_guard",
+        "f17_up",
+        "f18_water",
+        "f18_blade",
+        "f18_coins",
+        "f18_scout",
+        "f18_tide_seal",
+        "f18_guard",
+        "f18_main_gate",
+        "f18_down",
+        "f17_down",
+        "f16_rigger",
+        "f16_up",
+        "f17_up",
+        "f18_up",
+        "f19_water",
+        "f19_blade",
+        "f19_coins",
+        "f19_yellow_key",
+        "f19_scout",
+        "buy:f19_shop/edge",
+        "buy:f19_shop/ward",
+        "f19_guard",
+        "f19_blue_gate",
+        "f19_up",
+        "f20_water",
+        "f20_blade",
+        "f20_coins",
+        "f20_scout",
+        "f20_alignment",
+        "f20_guard",
+        "f20_main_gate",
+        "f20_signal"
+      ],
+      "expected_recovered_final": {
+        "hp": 227,
+        "atk": 111,
+        "def": 32,
+        "gold": 733,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        },
+        "won": false,
+        "slice_complete": true
+      },
+      "engine_tested": false
+    },
+    {
+      "id": "bad_early_side_gate_f15",
+      "name": "F15 spends its forward key on an early side cache",
+      "goal_object_id": "f20_signal",
+      "checkpoint_id": "entry_15",
+      "checkpoint_floor": 15,
+      "mode": "practice_checkpoint",
+      "requested_seed": "00000001",
+      "prefix_events": [
+        "f01_core_potion",
+        "f01_core_atk",
+        "f01_choice_key",
+        "f01_scout",
+        "f01_mapper",
+        "f01_attack_door",
+        "f01_attack_gold",
+        "f01_attack_gem",
+        "f01_guard",
+        "f01_up",
+        "f02_core_potion",
+        "f02_core_atk",
+        "f02_choice_key",
+        "f02_scout",
+        "f02_attack_door",
+        "f02_attack_gold",
+        "f02_attack_gem",
+        "buy:f02_shop/ward",
+        "buy:f02_shop/flask",
+        "f02_guard",
+        "f02_up",
+        "f03_core_potion",
+        "f03_core_atk",
+        "f03_choice_key",
+        "f03_scout",
+        "f03_attack_door",
+        "f03_attack_gold",
+        "f03_attack_gem",
+        "f03_copper",
+        "f03_guard",
+        "f03_down",
+        "f02_down",
+        "f01_mapper",
+        "f01_up",
+        "f02_up",
+        "f03_up",
+        "f04_core_potion",
+        "f04_core_atk",
+        "f04_choice_key",
+        "f04_scout",
+        "f04_attack_door",
+        "f04_attack_gold",
+        "f04_attack_gem",
+        "f04_guard",
+        "f04_up",
+        "f05_core_potion",
+        "f05_core_atk",
+        "f05_choice_key",
+        "f05_scout",
+        "f05_attack_door",
+        "f05_attack_gold",
+        "f05_attack_gem",
+        "buy:f05_shop/ward",
+        "buy:f05_shop/flask",
+        "f05_archive_door",
+        "f05_archive",
+        "f05_guard",
+        "f05_up",
+        "f06_core_potion",
+        "f06_core_atk",
+        "f06_choice_key",
+        "f06_scout",
+        "f06_attack_door",
+        "f06_attack_gold",
+        "f06_attack_gem",
+        "f06_guard",
+        "f06_up",
+        "f07_core_potion",
+        "f07_core_atk",
+        "f07_choice_key",
+        "f07_scout",
+        "f07_attack_door",
+        "f07_attack_gold",
+        "f07_attack_gem",
+        "f07_keeper",
+        "f07_guard",
+        "f07_up",
+        "f08_core_potion",
+        "f08_core_atk",
+        "f08_choice_key",
+        "f08_scout",
+        "f08_attack_door",
+        "f08_attack_gold",
+        "f08_attack_gem",
+        "buy:f08_shop/ward",
+        "buy:f08_shop/flask",
+        "f08_guard",
+        "f08_up",
+        "f09_core_potion",
+        "f09_core_atk",
+        "f09_choice_key",
+        "f09_scout",
+        "f09_attack_door",
+        "f09_attack_gold",
+        "f09_attack_gem",
+        "f09_guard",
+        "f09_up",
+        "f10_core_potion",
+        "f10_core_atk",
+        "f10_choice_key",
+        "f10_scout",
+        "f10_attack_door",
+        "f10_attack_gold",
+        "f10_attack_gem",
+        "f10_guard",
+        "f10_signal",
+        "f10_up",
+        "f11_water",
+        "f11_blade",
+        "f11_coins",
+        "f11_yellow_key",
+        "f11_scout",
+        "f11_surveyor",
+        "f11_guard",
+        "f11_up",
+        "f12_water",
+        "f12_blade",
+        "f12_coins",
+        "f12_scout",
+        "f12_scale",
+        "f12_guard",
+        "f12_main_gate",
+        "f12_up",
+        "f13_water",
+        "f13_blade",
+        "f13_coins",
+        "f13_scout",
+        "f13_ink_seal",
+        "f13_guard",
+        "f13_down",
+        "f12_down",
+        "f11_surveyor",
+        "f11_up",
+        "f12_up",
+        "f13_up",
+        "f14_water",
+        "f14_blade",
+        "f14_coins",
+        "f14_scout",
+        "f14_register",
+        "f14_guard",
+        "f14_blue_gate",
+        "f14_up"
+      ],
+      "bad_suffix_events": [
+        "f15_water",
+        "f15_blade",
+        "f15_coins",
+        "f15_yellow_key",
+        "f15_scout",
+        "f15_side_gate",
+        "f15_side_cache",
+        "f15_guard"
+      ],
+      "bad_ledger": [
+        {
+          "event": "f15_water",
+          "before": {
+            "hp": 98,
+            "atk": 72,
+            "def": 22,
+            "gold": 724,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 198,
+            "atk": 72,
+            "def": 22,
+            "gold": 724,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            5,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 105,
+          "planned_walk_steps": 5
+        },
+        {
+          "event": "f15_blade",
+          "before": {
+            "hp": 198,
+            "atk": 72,
+            "def": 22,
+            "gold": 724,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 198,
+            "atk": 75,
+            "def": 22,
+            "gold": 724,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            5,
+            11
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 106,
+          "planned_walk_steps": 2
+        },
+        {
+          "event": "f15_coins",
+          "before": {
+            "hp": 198,
+            "atk": 75,
+            "def": 22,
+            "gold": 724,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 198,
+            "atk": 75,
+            "def": 22,
+            "gold": 736,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            5,
+            9
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 107,
+          "planned_walk_steps": 2
+        },
+        {
+          "event": "f15_yellow_key",
+          "before": {
+            "hp": 198,
+            "atk": 75,
+            "def": 22,
+            "gold": 736,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 198,
+            "atk": 75,
+            "def": 22,
+            "gold": 736,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            3,
+            7
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 108,
+          "planned_walk_steps": 4
+        },
+        {
+          "event": "f15_scout",
+          "before": {
+            "hp": 198,
+            "atk": 75,
+            "def": 22,
+            "gold": 736,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 154,
+            "atk": 75,
+            "def": 22,
+            "gold": 768,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            9,
+            15
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 109,
+          "planned_walk_steps": 14,
+          "damage": 44
+        },
+        {
+          "event": "f15_side_gate",
+          "before": {
+            "hp": 154,
+            "atk": 75,
+            "def": 22,
+            "gold": 768,
+            "keys": {
+              "yellow": 1,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 154,
+            "atk": 75,
+            "def": 22,
+            "gold": 768,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            12,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": false,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 110,
+          "planned_walk_steps": 5
+        },
+        {
+          "event": "f15_side_cache",
+          "before": {
+            "hp": 154,
+            "atk": 75,
+            "def": 22,
+            "gold": 768,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 264,
+            "atk": 75,
+            "def": 22,
+            "gold": 808,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            15,
+            13
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": true,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register",
+            "ev_c2_f15_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 110,
+          "planned_walk_steps": 2,
+          "selected_event_id": "ev_c2_f15_cache"
+        },
+        {
+          "event": "f15_guard",
+          "before": {
+            "hp": 264,
+            "atk": 75,
+            "def": 22,
+            "gold": 808,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "state": {
+            "hp": 186,
+            "atk": 75,
+            "def": 22,
+            "gold": 853,
+            "keys": {
+              "yellow": 0,
+              "blue": 0
+            }
+          },
+          "floor": 15,
+          "pos": [
+            12,
+            3
+          ],
+          "flags": {
+            "met_mapper": true,
+            "copper_found": true,
+            "copper_redeemed": true,
+            "archive_read": true,
+            "met_keeper": false,
+            "keeper_supplied": true,
+            "relay_lit": true,
+            "c2_met_surveyor": true,
+            "c2_scale_read": true,
+            "c2_ink_found": true,
+            "c2_first_blue_claimed": true,
+            "c2_register_read": true,
+            "c2_f11_cache_taken": false,
+            "c2_f15_cache_taken": true,
+            "c2_met_rigger": false,
+            "c2_rigger_supplied": false,
+            "c2_sigil_found": false,
+            "c2_second_blue_claimed": false,
+            "c2_mirror_plan_read": false,
+            "c2_edge_cache_taken": false,
+            "c2_reserve_cache_taken": false,
+            "c2_mirror_aligned": false,
+            "c2_beacon_lit": false
+          },
+          "completed_events": [
+            "ev_mapper_intro",
+            "ev_copper",
+            "ev_mapper_exchange",
+            "ev_archive",
+            "ev_keeper_supply",
+            "ev_signal",
+            "ev_c2_surveyor_intro",
+            "ev_c2_scale",
+            "ev_c2_ink",
+            "ev_c2_first_blue",
+            "ev_c2_register",
+            "ev_c2_f15_cache"
+          ],
+          "slice_complete": false,
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          },
+          "cleared_count": 111,
+          "planned_walk_steps": 15,
+          "damage": 78
+        }
+      ],
+      "canonical_checkpoint_world": {
+        "core_state": {
+          "hp": 98,
+          "atk": 72,
+          "def": 22,
+          "gold": 724,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 14,
+          "pos": [
+            1,
+            14
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard",
+            "f05_core_potion",
+            "f05_core_atk",
+            "f05_choice_key",
+            "f05_scout",
+            "f05_attack_door",
+            "f05_attack_gold",
+            "f05_attack_gem",
+            "f05_archive_door",
+            "f05_guard",
+            "f06_core_potion",
+            "f06_core_atk",
+            "f06_choice_key",
+            "f06_scout",
+            "f06_attack_door",
+            "f06_attack_gold",
+            "f06_attack_gem",
+            "f06_guard",
+            "f07_core_potion",
+            "f07_core_atk",
+            "f07_choice_key",
+            "f07_scout",
+            "f07_attack_door",
+            "f07_attack_gold",
+            "f07_attack_gem",
+            "f07_guard",
+            "f08_core_potion",
+            "f08_core_atk",
+            "f08_choice_key",
+            "f08_scout",
+            "f08_attack_door",
+            "f08_attack_gold",
+            "f08_attack_gem",
+            "f08_guard",
+            "f09_core_potion",
+            "f09_core_atk",
+            "f09_choice_key",
+            "f09_scout",
+            "f09_attack_door",
+            "f09_attack_gold",
+            "f09_attack_gem",
+            "f09_guard",
+            "f10_core_potion",
+            "f10_core_atk",
+            "f10_choice_key",
+            "f10_scout",
+            "f10_attack_door",
+            "f10_attack_gold",
+            "f10_attack_gem",
+            "f10_guard",
+            "f11_water",
+            "f11_blade",
+            "f11_coins",
+            "f11_yellow_key",
+            "f11_scout",
+            "f11_guard",
+            "f12_water",
+            "f12_blade",
+            "f12_coins",
+            "f12_scout",
+            "f12_guard",
+            "f12_main_gate",
+            "f13_water",
+            "f13_blade",
+            "f13_coins",
+            "f13_scout",
+            "f13_guard",
+            "f14_water",
+            "f14_blade",
+            "f14_coins",
+            "f14_scout",
+            "f14_guard",
+            "f14_blue_gate"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": true,
+          "met_keeper": false,
+          "keeper_supplied": true,
+          "relay_lit": true,
+          "c2_met_surveyor": true,
+          "c2_scale_read": true,
+          "c2_ink_found": true,
+          "c2_first_blue_claimed": true,
+          "c2_register_read": true,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": false,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange",
+          "ev_archive",
+          "ev_keeper_supply",
+          "ev_signal",
+          "ev_c2_surveyor_intro",
+          "ev_c2_scale",
+          "ev_c2_ink",
+          "ev_c2_first_blue",
+          "ev_c2_register"
+        ],
+        "slice_complete": false
+      },
+      "canonical_bad_world": {
+        "core_state": {
+          "hp": 186,
+          "atk": 75,
+          "def": 22,
+          "gold": 853,
+          "keys": {
+            "yellow": 0,
+            "blue": 0
+          },
+          "won": false,
+          "floor": 14,
+          "pos": [
+            12,
+            3
+          ],
+          "cleared": [
+            "f01_core_potion",
+            "f01_core_atk",
+            "f01_choice_key",
+            "f01_scout",
+            "f01_attack_door",
+            "f01_attack_gold",
+            "f01_attack_gem",
+            "f01_guard",
+            "f02_core_potion",
+            "f02_core_atk",
+            "f02_choice_key",
+            "f02_scout",
+            "f02_attack_door",
+            "f02_attack_gold",
+            "f02_attack_gem",
+            "f02_guard",
+            "f03_core_potion",
+            "f03_core_atk",
+            "f03_choice_key",
+            "f03_scout",
+            "f03_attack_door",
+            "f03_attack_gold",
+            "f03_attack_gem",
+            "f03_guard",
+            "f04_core_potion",
+            "f04_core_atk",
+            "f04_choice_key",
+            "f04_scout",
+            "f04_attack_door",
+            "f04_attack_gold",
+            "f04_attack_gem",
+            "f04_guard",
+            "f05_core_potion",
+            "f05_core_atk",
+            "f05_choice_key",
+            "f05_scout",
+            "f05_attack_door",
+            "f05_attack_gold",
+            "f05_attack_gem",
+            "f05_archive_door",
+            "f05_guard",
+            "f06_core_potion",
+            "f06_core_atk",
+            "f06_choice_key",
+            "f06_scout",
+            "f06_attack_door",
+            "f06_attack_gold",
+            "f06_attack_gem",
+            "f06_guard",
+            "f07_core_potion",
+            "f07_core_atk",
+            "f07_choice_key",
+            "f07_scout",
+            "f07_attack_door",
+            "f07_attack_gold",
+            "f07_attack_gem",
+            "f07_guard",
+            "f08_core_potion",
+            "f08_core_atk",
+            "f08_choice_key",
+            "f08_scout",
+            "f08_attack_door",
+            "f08_attack_gold",
+            "f08_attack_gem",
+            "f08_guard",
+            "f09_core_potion",
+            "f09_core_atk",
+            "f09_choice_key",
+            "f09_scout",
+            "f09_attack_door",
+            "f09_attack_gold",
+            "f09_attack_gem",
+            "f09_guard",
+            "f10_core_potion",
+            "f10_core_atk",
+            "f10_choice_key",
+            "f10_scout",
+            "f10_attack_door",
+            "f10_attack_gold",
+            "f10_attack_gem",
+            "f10_guard",
+            "f11_water",
+            "f11_blade",
+            "f11_coins",
+            "f11_yellow_key",
+            "f11_scout",
+            "f11_guard",
+            "f12_water",
+            "f12_blade",
+            "f12_coins",
+            "f12_scout",
+            "f12_guard",
+            "f12_main_gate",
+            "f13_water",
+            "f13_blade",
+            "f13_coins",
+            "f13_scout",
+            "f13_guard",
+            "f14_water",
+            "f14_blade",
+            "f14_coins",
+            "f14_scout",
+            "f14_guard",
+            "f14_blue_gate",
+            "f15_water",
+            "f15_blade",
+            "f15_coins",
+            "f15_yellow_key",
+            "f15_scout",
+            "f15_side_gate",
+            "f15_guard"
+          ],
+          "purchases": {
+            "f02_shop/ward": 1,
+            "f02_shop/flask": 1,
+            "f05_shop/ward": 1,
+            "f05_shop/flask": 1,
+            "f08_shop/ward": 1,
+            "f08_shop/flask": 1
+          }
+        },
+        "flags": {
+          "met_mapper": true,
+          "copper_found": true,
+          "copper_redeemed": true,
+          "archive_read": true,
+          "met_keeper": false,
+          "keeper_supplied": true,
+          "relay_lit": true,
+          "c2_met_surveyor": true,
+          "c2_scale_read": true,
+          "c2_ink_found": true,
+          "c2_first_blue_claimed": true,
+          "c2_register_read": true,
+          "c2_f11_cache_taken": false,
+          "c2_f15_cache_taken": true,
+          "c2_met_rigger": false,
+          "c2_rigger_supplied": false,
+          "c2_sigil_found": false,
+          "c2_second_blue_claimed": false,
+          "c2_mirror_plan_read": false,
+          "c2_edge_cache_taken": false,
+          "c2_reserve_cache_taken": false,
+          "c2_mirror_aligned": false,
+          "c2_beacon_lit": false
+        },
+        "completed_events": [
+          "ev_mapper_intro",
+          "ev_copper",
+          "ev_mapper_exchange",
+          "ev_archive",
+          "ev_keeper_supply",
+          "ev_signal",
+          "ev_c2_surveyor_intro",
+          "ev_c2_scale",
+          "ev_c2_ink",
+          "ev_c2_first_blue",
+          "ev_c2_register",
+          "ev_c2_f15_cache"
+        ],
+        "slice_complete": false
+      },
+      "failed_interaction": {
+        "object_id": "f15_main_gate",
+        "expected_action": "door_locked",
+        "gameplay_state_unchanged": true
+      },
+      "key_cut_proof": {
+        "classification": "known_yellow_key_cut_in_design_model",
+        "complete_relaxed_graph": true,
+        "queue_exhausted": true,
+        "nodes": 968,
+        "reachable_floor_ids": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "per_floor_reachable_cells": {
+          "1": 43,
+          "2": 54,
+          "3": 50,
+          "4": 62,
+          "5": 55,
+          "6": 71,
+          "7": 55,
+          "8": 63,
+          "9": 63,
+          "10": 73,
+          "11": 64,
+          "12": 72,
+          "13": 90,
+          "14": 69,
+          "15": 84
+        },
+        "ordinary_enemy_costs_ignored": true,
+        "blue_doors_and_npcs_relaxed_open": true,
+        "event_conditions_relaxed_true": true,
+        "yellow_keys": 0,
+        "remaining_yellow_pickup_ids": [
+          "f17_yellow_key",
+          "f19_yellow_key"
+        ],
+        "reachable_yellow_pickup_ids": [],
+        "reachable_unclaimed_yellow_event_ids": [],
+        "reachable_yellow_shop_offers": [],
+        "forward_cut_gate": "f15_main_gate",
+        "cut_gate_reachable_from_this_side": true,
+        "gate_floor_exit_unreachable": true,
+        "goal_object_id": "f20_signal",
+        "goal_and_approach_unreachable": true,
+        "engine_reproduced": false,
+        "scope": "Complete graph overapproximation proves a zero-yellow-key cut for this exact planning prefix. It is not a generic combat/resource solver and not a runtime failure event."
+      },
+      "restore_contract": {
+        "complete_checkpoint_required": true,
+        "same_seed_and_layout": true,
+        "later_gains_and_consumption_both_rollback": true,
+        "runtime_failure_if_marked": "explicit_give_up_is_abandoned_not_unsat",
+        "resources_injected": false
+      },
+      "recovery_route": "keen",
+      "recovery_suffix_events": [
+        "f15_water",
+        "f15_blade",
+        "f15_coins",
+        "f15_yellow_key",
+        "f15_scout",
+        "f15_guard",
+        "f15_main_gate",
+        "f15_up",
+        "f16_water",
+        "f16_blade",
+        "f16_coins",
+        "f16_scout",
+        "f16_rigger",
+        "buy:f16_shop/edge",
+        "buy:f16_shop/ward",
+        "f16_guard",
+        "f16_up",
+        "f17_water",
+        "f17_blade",
+        "f17_coins",
+        "f17_yellow_key",
+        "f17_scout",
+        "f17_mirror_plan",
+        "f17_side_gate",
+        "f17_side_cache",
+        "f17_guard",
+        "f17_up",
+        "f18_water",
+        "f18_blade",
+        "f18_coins",
+        "f18_scout",
+        "f18_tide_seal",
+        "f18_guard",
+        "f18_main_gate",
+        "f18_down",
+        "f17_down",
+        "f16_rigger",
+        "f16_up",
+        "f17_up",
+        "f18_up",
+        "f19_water",
+        "f19_blade",
+        "f19_coins",
+        "f19_yellow_key",
+        "f19_scout",
+        "buy:f19_shop/edge",
+        "buy:f19_shop/ward",
+        "f19_guard",
+        "f19_blue_gate",
+        "f19_up",
+        "f20_water",
+        "f20_blade",
+        "f20_coins",
+        "f20_scout",
+        "f20_alignment",
+        "f20_guard",
+        "f20_main_gate",
+        "f20_signal"
+      ],
+      "expected_recovered_final": {
+        "hp": 227,
+        "atk": 111,
+        "def": 32,
+        "gold": 733,
+        "keys": {
+          "yellow": 0,
+          "blue": 0
+        },
+        "won": false,
+        "slice_complete": true
+      },
+      "engine_tested": false
+    }
+  ],
+  "content_file_sha256": "a02704a4b9a9e871cca23054980e8f9dc45827ee58e8326ed19f5fbbc3953d58"
+}

@@ -1,0 +1,836 @@
+{
+  "schema_version": 1,
+  "suite": "fifty_first_chapter_native_evidence/v1",
+  "passed": true,
+  "routes": {
+    "cases": 32,
+    "events": 3344,
+    "actions": 19108,
+    "combat_comparisons": 640,
+    "door_revisits": 352,
+    "stock_refusals": 144,
+    "npc_once_refusals": 96,
+    "native_roundtrips": 2,
+    "unique_layouts": 8,
+    "policies": 2,
+    "authored_floors": 10,
+    "target_floors": 50,
+    "not_authored_floors": 40,
+    "cases_table": [
+      {
+        "mode": "classic_restart",
+        "seed": "00000001",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000001",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000002",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "96071437a4a14085d2d7df845834c0b03b848a19dab83de563372d73e0f85980",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000002",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "96071437a4a14085d2d7df845834c0b03b848a19dab83de563372d73e0f85980",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000003",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "bb3eb50e3ddeb8279518b9de9a9839f207e57d7dcb922dbf7694318665513d8b",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000003",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "bb3eb50e3ddeb8279518b9de9a9839f207e57d7dcb922dbf7694318665513d8b",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000004",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "370a8c62b1777cf2c0844ef681d15213c05c88fc2173e290033102b69e6bf8f8",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000004",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "370a8c62b1777cf2c0844ef681d15213c05c88fc2173e290033102b69e6bf8f8",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000005",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 556,
+        "layout_sha256": "b34823cf297fec4d85daa6662342d087ff267730e08426e51eab9f6a3e7d1e5f",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000005",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 643,
+        "layout_sha256": "b34823cf297fec4d85daa6662342d087ff267730e08426e51eab9f6a3e7d1e5f",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000006",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "3c8e0d3911f9f52520b65ab852e0f1737e883d2e953e6a8f58fe051a48240987",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000006",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "3c8e0d3911f9f52520b65ab852e0f1737e883d2e953e6a8f58fe051a48240987",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000007",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 556,
+        "layout_sha256": "8bb3bfa9ed92f1012aa3b4fa669699ae7c31982f9332c459e8f6da03efa64168",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000007",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 643,
+        "layout_sha256": "8bb3bfa9ed92f1012aa3b4fa669699ae7c31982f9332c459e8f6da03efa64168",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000008",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 556,
+        "layout_sha256": "f1f966bac30ce1bc127482e628112cf76c677672505e8bb8e0a53accb1adcda1",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000008",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "f1f966bac30ce1bc127482e628112cf76c677672505e8bb8e0a53accb1adcda1",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000001",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000001",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000002",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "96071437a4a14085d2d7df845834c0b03b848a19dab83de563372d73e0f85980",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000002",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "96071437a4a14085d2d7df845834c0b03b848a19dab83de563372d73e0f85980",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000003",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "bb3eb50e3ddeb8279518b9de9a9839f207e57d7dcb922dbf7694318665513d8b",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000003",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "bb3eb50e3ddeb8279518b9de9a9839f207e57d7dcb922dbf7694318665513d8b",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000004",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "370a8c62b1777cf2c0844ef681d15213c05c88fc2173e290033102b69e6bf8f8",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000004",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "370a8c62b1777cf2c0844ef681d15213c05c88fc2173e290033102b69e6bf8f8",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000005",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 556,
+        "layout_sha256": "b34823cf297fec4d85daa6662342d087ff267730e08426e51eab9f6a3e7d1e5f",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000005",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 643,
+        "layout_sha256": "b34823cf297fec4d85daa6662342d087ff267730e08426e51eab9f6a3e7d1e5f",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000006",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 558,
+        "layout_sha256": "3c8e0d3911f9f52520b65ab852e0f1737e883d2e953e6a8f58fe051a48240987",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000006",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "3c8e0d3911f9f52520b65ab852e0f1737e883d2e953e6a8f58fe051a48240987",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000007",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 556,
+        "layout_sha256": "8bb3bfa9ed92f1012aa3b4fa669699ae7c31982f9332c459e8f6da03efa64168",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000007",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 643,
+        "layout_sha256": "8bb3bfa9ed92f1012aa3b4fa669699ae7c31982f9332c459e8f6da03efa64168",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000008",
+        "route": "blade",
+        "events": 106,
+        "actual_actions": 556,
+        "layout_sha256": "f1f966bac30ce1bc127482e628112cf76c677672505e8bb8e0a53accb1adcda1",
+        "final_budget": {
+          "atk": 57,
+          "def": 19,
+          "gold": 418,
+          "hp": 77,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000008",
+        "route": "bulwark",
+        "events": 103,
+        "actual_actions": 635,
+        "layout_sha256": "f1f966bac30ce1bc127482e628112cf76c677672505e8bb8e0a53accb1adcda1",
+        "final_budget": {
+          "atk": 45,
+          "def": 28,
+          "gold": 333,
+          "hp": 183,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        },
+        "slice_complete": true,
+        "campaign_complete": false
+      }
+    ],
+    "scope": "32 mode/seed/route cases use eight actual D4 layouts and two authored policies. Calibration probes are not counted. No exhaustive-policy or human-duration claim."
+  },
+  "runs": [
+    {
+      "id": "d4-golden",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "9af3f66ba8108a1de7e78b32393b5363bb860aded5358909a6ede23864ad485b",
+      "public_member": "reports/d4-golden.json.gz"
+    },
+    {
+      "id": "runtime-smoke",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "8e79b5db4a59c1527dbc552c3d0581ebc9f63712658c216093b207c49ebaf82e",
+      "public_member": "reports/runtime-smoke.json.gz"
+    },
+    {
+      "id": "routes-classic",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "ec593893e2fc8778d87d215914ca6f3ec6c5b6107b752451ea4cd165bf4ae676",
+      "public_member": "reports/routes-classic.json.gz"
+    },
+    {
+      "id": "routes-practice",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "c85acc93e52223e851254abb9d8f102cdf0ee2eec1404f1018a53d9b09d211c0",
+      "public_member": "reports/routes-practice.json.gz"
+    },
+    {
+      "id": "combat-death",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "7f0fd6c98082160006a47d9e9bc9528aa0e3c2d67cd52f47a95e77e1e5311727",
+      "public_member": "reports/combat-death.json.gz"
+    },
+    {
+      "id": "save-semantics",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "28ff9571cdb3cfc837aced0470f1ab79f437a713b6942da9fc91e9f5231d62a0",
+      "public_member": "reports/save-semantics.json.gz"
+    },
+    {
+      "id": "save-update",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "2f0acbeb39f4fd2c46cead67476261a3d11efb16c6cea01f6f569cddaa12bfaa",
+      "public_member": "reports/save-update.json.gz"
+    },
+    {
+      "id": "direction-enter",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "ede15535b420b11ae2a7673ede6d4d78f2e1914936a62617bb631e24b231dedf",
+      "public_member": "reports/direction-enter.json.gz"
+    },
+    {
+      "id": "legacy21-native-fixture",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "eaf871360b821174c6012d5e67e4152559e94c0c8c92947b905ed8fad4ed339f",
+      "public_member": "reports/legacy21-native-fixture.json.gz"
+    },
+    {
+      "id": "preview-final",
+      "role": "current",
+      "classification": "accepted_current",
+      "raw_sha256": "28ad19388702c6a48db3078ad3dc7f0d5be1dad0e52d71e6414c4c2c88b1e69d",
+      "public_member": "reports/preview-final.json.gz"
+    },
+    {
+      "id": "history-obsolete-assertion",
+      "role": "history",
+      "classification": "test_assertion_assumed_empty_classic_audit_but_session_history_is_required",
+      "raw_sha256": "d04215c268f29b5e0516e245fa46d058f483c6022b54f46072d32c6559ac9014",
+      "public_member": "reports/history-obsolete-assertion.json.gz"
+    },
+    {
+      "id": "history-typed-enter-red",
+      "role": "history",
+      "classification": "one_real_attached_enter_bug_and_one_invalid_overlapping_fixture_not_two_runtime_bugs",
+      "raw_sha256": "add77fe83da1be0de575259ef5ebb2e794a5cd3171095a3861c1d27874124ceb",
+      "public_member": "reports/history-typed-enter-red.json.gz"
+    },
+    {
+      "id": "history-resource-import-failure",
+      "role": "history",
+      "classification": "producer_passed_but_real_stderr581254_resource_errors_not_accepted",
+      "raw_sha256": "94b61d1f976abc4e8de608087f59be8090129ab18f96dd72624beba1022c09d5",
+      "public_member": "reports/history-resource-import-failure.json.gz"
+    },
+    {
+      "id": "history-completed-failure-red",
+      "role": "history",
+      "classification": "failed_complete_overlay_hid_recovery",
+      "raw_sha256": "ec0fb8313950f5b7e9cc455b1d4e1169d9498adc4474de0ecd916e6df0aaf12a",
+      "public_member": "reports/history-completed-failure-red.json.gz"
+    },
+    {
+      "id": "history-preview-green05",
+      "role": "history",
+      "classification": "superseded_green_before_quantity_display_assertions",
+      "raw_sha256": "78582ae50661df4b8a3c24e179c15fc1c02d12e0cad70cc30bb8dd9a56c27bf5",
+      "public_member": "reports/history-preview-green05.json.gz"
+    }
+  ],
+  "current_suite_checks": [
+    {
+      "suite": "fifty_d4_independent_geometry_golden/v1",
+      "checks": 75,
+      "passed": true,
+      "elapsed_ms": 45
+    },
+    {
+      "suite": "fifty_runtime_initial_smoke/v1",
+      "checks": 35,
+      "passed": true,
+      "elapsed_ms": 5487
+    },
+    {
+      "suite": "fifty_actual_finite_combat_death/v1",
+      "checks": 16,
+      "passed": true,
+      "elapsed_ms": 3176
+    },
+    {
+      "suite": "fifty_full_native_save_semantics/v1",
+      "checks": 26,
+      "passed": true,
+      "elapsed_ms": 24076
+    },
+    {
+      "suite": "fifty_native_valid_slot_update/v1",
+      "checks": 5,
+      "passed": true,
+      "elapsed_ms": 1891
+    },
+    {
+      "suite": "fifty_positive_direction_enter_adapter/v1",
+      "checks": 12,
+      "passed": true,
+      "elapsed_ms": 1071
+    },
+    {
+      "suite": "native_legacy21_save_v2_fixture/v1",
+      "checks": 18,
+      "passed": true,
+      "elapsed_ms": null
+    },
+    {
+      "suite": "fifty-preview-instrumented-scene/v1",
+      "checks": 26,
+      "passed": true,
+      "elapsed_ms": 10899
+    }
+  ],
+  "human_pixels_reviewed": false,
+  "real_keyboard_mouse_touch_tested": false,
+  "browser_play_persistence_tested": false,
+  "scope": "Original 1-10 authored slice toward 50. Headless native checks and direct UI instrumentation only. Failed/historical runs remain classified; no historical producer passed flag overrides real exit/stderr/resource failure. Complete route/world/action/snapshot/preview/hash semantics are unchanged by host-metadata projection.",
+  "publication_projection": {
+    "passed": true,
+    "raw_and_public_typed_tree_comparison": true,
+    "raw_reports_modified": false,
+    "owner_receipts_exact_safe_whitelist": true,
+    "report_records": 15,
+    "auxiliary_records": 6,
+    "history_source_byte_matches": 18,
+    "exact_leaf_projection_operations": 64,
+    "protected_subtrees_equal": 1247,
+    "scope": "Native bundle and privacy projection only; not visual, browser, export or 50-floor acceptance."
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "schema": "stairkeep-experience-door-source/v2",
+  "source_url": "https://kenney.nl/assets/isometric-miniature-dungeon",
+  "source_archive": "research/kenney_isometric-miniature-dungeon.zip",
+  "source_archive_sha256": "187a0888451317fe47caac5f26e984bb79c5ddce9b8630926f0f5d9c0247d343",
+  "license": "CC0-1.0",
+  "license_file": "License.txt",
+  "license_sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc",
+  "candidate_overlay_only": true,
+  "image_editing": false,
+  "engine_executed": false,
+  "files": [
+    {
+      "path": "stoneWallDoorClosed_N.png",
+      "source_member": "Isometric/stoneWallDoorClosed_N.png",
+      "sha256": "144a3d117e9aa11782965bca1bb28654e5c5395964f649b760ebbce109a05412",
+      "bytes": 23209,
+      "modification": "unmodified byte copy",
+      "direction": "N",
+      "state": "closed",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        275,
+        161,
+        512
+      ],
+      "last_opaque_row": 511,
+      "bottom_16px_alpha_bbox_exclusive": [
+        96,
+        496,
+        160,
+        512
+      ]
+    },
+    {
+      "path": "stoneWallDoorOpen_N.png",
+      "source_member": "Isometric/stoneWallDoorOpen_N.png",
+      "sha256": "96e12c80c437fdc65a514539840466fc04cc2308b592909082865b3b4b16c17e",
+      "bytes": 23758,
+      "modification": "unmodified byte copy",
+      "direction": "N",
+      "state": "open",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        275,
+        174,
+        512
+      ],
+      "last_opaque_row": 511,
+      "bottom_16px_alpha_bbox_exclusive": [
+        96,
+        496,
+        160,
+        512
+      ]
+    },
+    {
+      "path": "stoneWallDoorClosed_E.png",
+      "source_member": "Isometric/stoneWallDoorClosed_E.png",
+      "sha256": "fd9e2572c0b04a0e5b8999f3bdd9790e884f858eade390f57fa4b151639e3a03",
+      "bytes": 23893,
+      "modification": "unmodified byte copy",
+      "direction": "E",
+      "state": "closed",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        227,
+        161,
+        464
+      ],
+      "last_opaque_row": 463,
+      "bottom_16px_alpha_bbox_exclusive": [
+        0,
+        448,
+        64,
+        464
+      ]
+    },
+    {
+      "path": "stoneWallDoorOpen_E.png",
+      "source_member": "Isometric/stoneWallDoorOpen_E.png",
+      "sha256": "36d95e2408538b6c0ee34b5c15e76af83fc7724a0200c74b1b490db94b37b95f",
+      "bytes": 23472,
+      "modification": "unmodified byte copy",
+      "direction": "E",
+      "state": "open",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        0,
+        227,
+        161,
+        471
+      ],
+      "last_opaque_row": 470,
+      "bottom_16px_alpha_bbox_exclusive": [
+        14,
+        455,
+        90,
+        471
+      ]
+    },
+    {
+      "path": "stoneWallDoorClosed_S.png",
+      "source_member": "Isometric/stoneWallDoorClosed_S.png",
+      "sha256": "1fe3adff24ee6efeb2d1665f44e1882d1635cc13a1b32d33dc19cea7faa33849",
+      "bytes": 23569,
+      "modification": "unmodified byte copy",
+      "direction": "S",
+      "state": "closed",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        95,
+        227,
+        256,
+        464
+      ],
+      "last_opaque_row": 463,
+      "bottom_16px_alpha_bbox_exclusive": [
+        192,
+        448,
+        256,
+        464
+      ]
+    },
+    {
+      "path": "stoneWallDoorOpen_S.png",
+      "source_member": "Isometric/stoneWallDoorOpen_S.png",
+      "sha256": "dad2342a91f0b9d0427345be74b6d171aa77f4041bba773585d710cb211d61c5",
+      "bytes": 24820,
+      "modification": "unmodified byte copy",
+      "direction": "S",
+      "state": "open",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        82,
+        227,
+        256,
+        464
+      ],
+      "last_opaque_row": 463,
+      "bottom_16px_alpha_bbox_exclusive": [
+        192,
+        448,
+        256,
+        464
+      ]
+    },
+    {
+      "path": "stoneWallDoorClosed_W.png",
+      "source_member": "Isometric/stoneWallDoorClosed_W.png",
+      "sha256": "fc331713ad189bfb4f50e72fc04bf4abacda476513ad0ae5e54c1be5fa4df5cc",
+      "bytes": 23636,
+      "modification": "unmodified byte copy",
+      "direction": "W",
+      "state": "closed",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        95,
+        275,
+        256,
+        512
+      ],
+      "last_opaque_row": 511,
+      "bottom_16px_alpha_bbox_exclusive": [
+        96,
+        496,
+        160,
+        512
+      ]
+    },
+    {
+      "path": "stoneWallDoorOpen_W.png",
+      "source_member": "Isometric/stoneWallDoorOpen_W.png",
+      "sha256": "59b40f9276536d276e9eeb54c426af502bd62a9ca700739504ff4c79cdf4306f",
+      "bytes": 23653,
+      "modification": "unmodified byte copy",
+      "direction": "W",
+      "state": "open",
+      "size": [
+        256,
+        512
+      ],
+      "encoded_mode": "P",
+      "alpha_bbox_exclusive": [
+        95,
+        275,
+        256,
+        512
+      ],
+      "last_opaque_row": 511,
+      "bottom_16px_alpha_bbox_exclusive": [
+        96,
+        496,
+        160,
+        512
+      ]
+    }
+  ],
+  "validation": {
+    "all_8_archive_members_byte_equal": true,
+    "all_8_copies_byte_equal": true,
+    "all_transparent_256x512": true,
+    "bbox_convention": "x0,y0,x1,y1 with right/bottom exclusive",
+    "alpha_analysis": "Indexed PNG converted to RGBA in memory only for read-only detection; output PNG bytes are unchanged."
+  },
+  "anchor_recommendation": {
+    "status": "static_candidate_not_engine_or_pixel_accepted",
+    "basis": "Legacy N placement (-80,-448). Direction offsets align the closed masonry alpha bounds near the same horizontal center and bottom; they are not an asserted pack-authored pivot. Use one fixed offset for both states of each direction. Never recenter on the moving open leaf bbox.",
+    "centered_false_offsets": {
+      "N": [
+        -80,
+        -448
+      ],
+      "E": [
+        -80,
+        -400
+      ],
+      "S": [
+        -176,
+        -400
+      ],
+      "W": [
+        -176,
+        -448
+      ]
+    },
+    "centered_true_offset_formula": "centered_false + (128,256)",
+    "closed_masonry_last_opaque_row_after_offset": 63,
+    "same_direction_closed_open_canvas_preserved": true,
+    "passage_plane_observation": {
+      "N_S": "wall span projects upper-left/lower-right; passage follows the other isometric axis",
+      "E_W": "wall span projects upper-right/lower-left; passage follows the other isometric axis"
+    },
+    "world_grid_mapping_accepted": false
+  },
+  "facade": {
+    "path": "res://fifty/view/experience_assets.gd",
+    "sha256": "22c6d5d6e450ff6962d7de50374ee61690cf0637edf91465ab489553529c10a5",
+    "engine_parse_tested": false
+  }
+}

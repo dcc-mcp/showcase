@@ -1,0 +1,612 @@
+{
+	"app_name": "Stairkeep · working title",
+	"browser_http_acceptance": "not-tested",
+	"cases": {
+		"classic_restart": {
+			"runtime_identity": {
+				"content_id": "stairkeep-fifty-slice/v1",
+				"content_sha256": "6dd777d1f667b9ba89f132ba7d62802655fbf6d0985ec80374eccf70cbd713cb",
+				"rules_sha256": "caa8dbd9f0e67d48de7cc25a059676778cbdb6a1d6e764324455e7ac3848f4a5",
+				"snapshot_schema": "stairkeep-fifty-state/v1",
+				"variant_spec": "fifty/xorshift32-d4-v1"
+			},
+			"snapshot": {
+				"actions": [],
+				"attempt_index": 0,
+				"campaign_complete": false,
+				"checkpoints": [
+					{
+						"floor_id": 1,
+						"id": "entry_01",
+						"label": "归潮门厅",
+						"layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+						"seed": "00000001",
+						"world": {
+							"completed_events": [],
+							"core_state": {
+								"atk": 14,
+								"cleared": [],
+								"def": 5,
+								"floor": 0,
+								"gold": 0,
+								"hp": 180,
+								"keys": {
+									"blue": 0,
+									"yellow": 0
+								},
+								"pos": [
+									7,
+									13
+								],
+								"purchases": {},
+								"won": false
+							},
+							"flags": {
+								"archive_read": false,
+								"copper_found": false,
+								"copper_redeemed": false,
+								"keeper_supplied": false,
+								"met_keeper": false,
+								"met_mapper": false,
+								"relay_lit": false
+							},
+							"slice_complete": false
+						}
+					}
+				],
+				"completed_events": [],
+				"consumed_loss_ids": [],
+				"content_id": "stairkeep-fifty-slice/v1",
+				"content_sha256": "6dd777d1f667b9ba89f132ba7d62802655fbf6d0985ec80374eccf70cbd713cb",
+				"core_state": {
+					"atk": 14,
+					"cleared": [],
+					"def": 5,
+					"floor": 0,
+					"gold": 0,
+					"hp": 180,
+					"keys": {
+						"blue": 0,
+						"yellow": 0
+					},
+					"pos": [
+						7,
+						13
+					],
+					"purchases": {},
+					"won": false
+				},
+				"failed": false,
+				"failure": {},
+				"failure_history": [],
+				"flags": {
+					"archive_read": false,
+					"copper_found": false,
+					"copper_redeemed": false,
+					"keeper_supplied": false,
+					"met_keeper": false,
+					"met_mapper": false,
+					"relay_lit": false
+				},
+				"floor_transforms": {
+					"1": 0,
+					"10": 7,
+					"2": 0,
+					"3": 4,
+					"4": 6,
+					"5": 0,
+					"6": 3,
+					"7": 1,
+					"8": 1,
+					"9": 4
+				},
+				"layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+				"layout_signature": "9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c",
+				"mode": "classic_restart",
+				"origin_consumed_loss_ids": [],
+				"previous_layout_signature": "",
+				"recovery_count": 0,
+				"root_seed": "00000001",
+				"rules_sha256": "caa8dbd9f0e67d48de7cc25a059676778cbdb6a1d6e764324455e7ac3848f4a5",
+				"seed": "00000001",
+				"selection_receipt": {
+					"all_codes": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"base_codes": {
+						"1": 1,
+						"10": 4,
+						"2": 1,
+						"3": 5,
+						"4": 7,
+						"5": 1,
+						"6": 0,
+						"7": 2,
+						"8": 2,
+						"9": 5
+					},
+					"candidate_groups": [
+						{
+							"global_codes": [
+								0
+							],
+							"representative_code": 0,
+							"signature": "794fc1db8786ed376634640c0499b80a3d91c9cf2d8effb0210838b75cfa23ff"
+						},
+						{
+							"global_codes": [
+								1
+							],
+							"representative_code": 1,
+							"signature": "a2e1fef4d0a0c59ade43ea6b48ef75b583939a2afd77ce5c3058641004717cf3"
+						},
+						{
+							"global_codes": [
+								2
+							],
+							"representative_code": 2,
+							"signature": "d23ff56c249c1a7380e54fb3cff8d2f1b869e6d24dd3cb0810b161c6e7513701"
+						},
+						{
+							"global_codes": [
+								3
+							],
+							"representative_code": 3,
+							"signature": "9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c"
+						},
+						{
+							"global_codes": [
+								4
+							],
+							"representative_code": 4,
+							"signature": "0d9055dfcab27a3aeb3b2f05b63fd3645d9c5ff6438659bd4ebb4195ec5842a4"
+						},
+						{
+							"global_codes": [
+								5
+							],
+							"representative_code": 5,
+							"signature": "9f5967ae9571cf933b8fb33bd0454633e6ae761ffb07a2525cc46b9149da9512"
+						},
+						{
+							"global_codes": [
+								6
+							],
+							"representative_code": 6,
+							"signature": "1af724ad8e1bea270ccc88b7b90191a3463d776ce598f7433d36342b05f322f6"
+						},
+						{
+							"global_codes": [
+								7
+							],
+							"representative_code": 7,
+							"signature": "436185fd12d4d8cde4387bf788ce94318c8114b343678caa1aea947163fc5a6f"
+						}
+					],
+					"candidate_signatures": [
+						"794fc1db8786ed376634640c0499b80a3d91c9cf2d8effb0210838b75cfa23ff",
+						"a2e1fef4d0a0c59ade43ea6b48ef75b583939a2afd77ce5c3058641004717cf3",
+						"d23ff56c249c1a7380e54fb3cff8d2f1b869e6d24dd3cb0810b161c6e7513701",
+						"9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c",
+						"0d9055dfcab27a3aeb3b2f05b63fd3645d9c5ff6438659bd4ebb4195ec5842a4",
+						"9f5967ae9571cf933b8fb33bd0454633e6ae761ffb07a2525cc46b9149da9512",
+						"1af724ad8e1bea270ccc88b7b90191a3463d776ce598f7433d36342b05f322f6",
+						"436185fd12d4d8cde4387bf788ce94318c8114b343678caa1aea947163fc5a6f"
+					],
+					"comparison_signature": "839b7d8b1657864c7305d91ab22d0a6f028e23c045dcce76d8dfcff048c8b3e7",
+					"draw_count": 11,
+					"draws": [
+						270369,
+						67634689,
+						2647435461,
+						307599695,
+						2398689233,
+						745495504,
+						632435482,
+						435756210,
+						2005365029,
+						2916098932,
+						2657092299
+					],
+					"eligible_global_codes": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"eligible_signatures": [
+						"794fc1db8786ed376634640c0499b80a3d91c9cf2d8effb0210838b75cfa23ff",
+						"a2e1fef4d0a0c59ade43ea6b48ef75b583939a2afd77ce5c3058641004717cf3",
+						"d23ff56c249c1a7380e54fb3cff8d2f1b869e6d24dd3cb0810b161c6e7513701",
+						"9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c",
+						"0d9055dfcab27a3aeb3b2f05b63fd3645d9c5ff6438659bd4ebb4195ec5842a4",
+						"9f5967ae9571cf933b8fb33bd0454633e6ae761ffb07a2525cc46b9149da9512",
+						"1af724ad8e1bea270ccc88b7b90191a3463d776ce598f7433d36342b05f322f6",
+						"436185fd12d4d8cde4387bf788ce94318c8114b343678caa1aea947163fc5a6f"
+					],
+					"previous_signature": "",
+					"rng_final": "9e6002cb",
+					"selected_global_code": 3,
+					"selected_index": 3,
+					"spatial_change_possible": true,
+					"spec": "fifty/xorshift32-d4-v1"
+				},
+				"sequence_state": "00000001",
+				"slice_complete": false,
+				"snapshot_schema": "stairkeep-fifty-state/v1",
+				"variant_spec": "fifty/xorshift32-d4-v1"
+			},
+			"snapshot_sha256": "be093fb7919049434fff0ebab85346902da639a4d875567ea6256e0bf3c83cc3"
+		},
+		"practice_checkpoint": {
+			"runtime_identity": {
+				"content_id": "stairkeep-fifty-slice/v1",
+				"content_sha256": "6dd777d1f667b9ba89f132ba7d62802655fbf6d0985ec80374eccf70cbd713cb",
+				"rules_sha256": "caa8dbd9f0e67d48de7cc25a059676778cbdb6a1d6e764324455e7ac3848f4a5",
+				"snapshot_schema": "stairkeep-fifty-state/v1",
+				"variant_spec": "fifty/xorshift32-d4-v1"
+			},
+			"snapshot": {
+				"actions": [],
+				"attempt_index": 0,
+				"campaign_complete": false,
+				"checkpoints": [
+					{
+						"floor_id": 1,
+						"id": "entry_01",
+						"label": "归潮门厅",
+						"layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+						"seed": "00000001",
+						"world": {
+							"completed_events": [],
+							"core_state": {
+								"atk": 14,
+								"cleared": [],
+								"def": 5,
+								"floor": 0,
+								"gold": 0,
+								"hp": 180,
+								"keys": {
+									"blue": 0,
+									"yellow": 0
+								},
+								"pos": [
+									7,
+									13
+								],
+								"purchases": {},
+								"won": false
+							},
+							"flags": {
+								"archive_read": false,
+								"copper_found": false,
+								"copper_redeemed": false,
+								"keeper_supplied": false,
+								"met_keeper": false,
+								"met_mapper": false,
+								"relay_lit": false
+							},
+							"slice_complete": false
+						}
+					}
+				],
+				"completed_events": [],
+				"consumed_loss_ids": [],
+				"content_id": "stairkeep-fifty-slice/v1",
+				"content_sha256": "6dd777d1f667b9ba89f132ba7d62802655fbf6d0985ec80374eccf70cbd713cb",
+				"core_state": {
+					"atk": 14,
+					"cleared": [],
+					"def": 5,
+					"floor": 0,
+					"gold": 0,
+					"hp": 180,
+					"keys": {
+						"blue": 0,
+						"yellow": 0
+					},
+					"pos": [
+						7,
+						13
+					],
+					"purchases": {},
+					"won": false
+				},
+				"failed": false,
+				"failure": {},
+				"failure_history": [],
+				"flags": {
+					"archive_read": false,
+					"copper_found": false,
+					"copper_redeemed": false,
+					"keeper_supplied": false,
+					"met_keeper": false,
+					"met_mapper": false,
+					"relay_lit": false
+				},
+				"floor_transforms": {
+					"1": 0,
+					"10": 7,
+					"2": 0,
+					"3": 4,
+					"4": 6,
+					"5": 0,
+					"6": 3,
+					"7": 1,
+					"8": 1,
+					"9": 4
+				},
+				"layout_sha256": "d9699edba49cabac9e77baed9a3968f4db8de2a7f8760a1f63384171d84467c3",
+				"layout_signature": "9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c",
+				"mode": "practice_checkpoint",
+				"origin_consumed_loss_ids": [],
+				"previous_layout_signature": "",
+				"recovery_count": 0,
+				"root_seed": "00000001",
+				"rules_sha256": "caa8dbd9f0e67d48de7cc25a059676778cbdb6a1d6e764324455e7ac3848f4a5",
+				"seed": "00000001",
+				"selection_receipt": {
+					"all_codes": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"base_codes": {
+						"1": 1,
+						"10": 4,
+						"2": 1,
+						"3": 5,
+						"4": 7,
+						"5": 1,
+						"6": 0,
+						"7": 2,
+						"8": 2,
+						"9": 5
+					},
+					"candidate_groups": [
+						{
+							"global_codes": [
+								0
+							],
+							"representative_code": 0,
+							"signature": "794fc1db8786ed376634640c0499b80a3d91c9cf2d8effb0210838b75cfa23ff"
+						},
+						{
+							"global_codes": [
+								1
+							],
+							"representative_code": 1,
+							"signature": "a2e1fef4d0a0c59ade43ea6b48ef75b583939a2afd77ce5c3058641004717cf3"
+						},
+						{
+							"global_codes": [
+								2
+							],
+							"representative_code": 2,
+							"signature": "d23ff56c249c1a7380e54fb3cff8d2f1b869e6d24dd3cb0810b161c6e7513701"
+						},
+						{
+							"global_codes": [
+								3
+							],
+							"representative_code": 3,
+							"signature": "9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c"
+						},
+						{
+							"global_codes": [
+								4
+							],
+							"representative_code": 4,
+							"signature": "0d9055dfcab27a3aeb3b2f05b63fd3645d9c5ff6438659bd4ebb4195ec5842a4"
+						},
+						{
+							"global_codes": [
+								5
+							],
+							"representative_code": 5,
+							"signature": "9f5967ae9571cf933b8fb33bd0454633e6ae761ffb07a2525cc46b9149da9512"
+						},
+						{
+							"global_codes": [
+								6
+							],
+							"representative_code": 6,
+							"signature": "1af724ad8e1bea270ccc88b7b90191a3463d776ce598f7433d36342b05f322f6"
+						},
+						{
+							"global_codes": [
+								7
+							],
+							"representative_code": 7,
+							"signature": "436185fd12d4d8cde4387bf788ce94318c8114b343678caa1aea947163fc5a6f"
+						}
+					],
+					"candidate_signatures": [
+						"794fc1db8786ed376634640c0499b80a3d91c9cf2d8effb0210838b75cfa23ff",
+						"a2e1fef4d0a0c59ade43ea6b48ef75b583939a2afd77ce5c3058641004717cf3",
+						"d23ff56c249c1a7380e54fb3cff8d2f1b869e6d24dd3cb0810b161c6e7513701",
+						"9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c",
+						"0d9055dfcab27a3aeb3b2f05b63fd3645d9c5ff6438659bd4ebb4195ec5842a4",
+						"9f5967ae9571cf933b8fb33bd0454633e6ae761ffb07a2525cc46b9149da9512",
+						"1af724ad8e1bea270ccc88b7b90191a3463d776ce598f7433d36342b05f322f6",
+						"436185fd12d4d8cde4387bf788ce94318c8114b343678caa1aea947163fc5a6f"
+					],
+					"comparison_signature": "839b7d8b1657864c7305d91ab22d0a6f028e23c045dcce76d8dfcff048c8b3e7",
+					"draw_count": 11,
+					"draws": [
+						270369,
+						67634689,
+						2647435461,
+						307599695,
+						2398689233,
+						745495504,
+						632435482,
+						435756210,
+						2005365029,
+						2916098932,
+						2657092299
+					],
+					"eligible_global_codes": [
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					],
+					"eligible_signatures": [
+						"794fc1db8786ed376634640c0499b80a3d91c9cf2d8effb0210838b75cfa23ff",
+						"a2e1fef4d0a0c59ade43ea6b48ef75b583939a2afd77ce5c3058641004717cf3",
+						"d23ff56c249c1a7380e54fb3cff8d2f1b869e6d24dd3cb0810b161c6e7513701",
+						"9095ee34d5fa4a1d7b25aaffec09e1fd3cb15f9ef90d5f94f01f1b8bd57dea0c",
+						"0d9055dfcab27a3aeb3b2f05b63fd3645d9c5ff6438659bd4ebb4195ec5842a4",
+						"9f5967ae9571cf933b8fb33bd0454633e6ae761ffb07a2525cc46b9149da9512",
+						"1af724ad8e1bea270ccc88b7b90191a3463d776ce598f7433d36342b05f322f6",
+						"436185fd12d4d8cde4387bf788ce94318c8114b343678caa1aea947163fc5a6f"
+					],
+					"previous_signature": "",
+					"rng_final": "9e6002cb",
+					"selected_global_code": 3,
+					"selected_index": 3,
+					"spatial_change_possible": true,
+					"spec": "fifty/xorshift32-d4-v1"
+				},
+				"sequence_state": "00000001",
+				"slice_complete": false,
+				"snapshot_schema": "stairkeep-fifty-state/v1",
+				"variant_spec": "fifty/xorshift32-d4-v1"
+			},
+			"snapshot_sha256": "f31d73525d74ae7bd22b0e1966aef3c4b0b72d347709cd7971aa54b6df5f4166"
+		}
+	},
+	"check_count": 22,
+	"checks": [
+		{
+			"name": "original_engine_headless_probe_only",
+			"passed": true
+		},
+		{
+			"name": "expected_original_472_engine_version",
+			"passed": true
+		},
+		{
+			"name": "expected_text_single_thread_manifest",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/data/content.json",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/scripts/content.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/scripts/d4.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/scripts/runtime.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/scripts/save.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/view/preview.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_fifty/view/world.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_scripts/rules.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_scripts/ui_icon.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_scripts/world.gd",
+			"passed": true
+		},
+		{
+			"name": "exact_readable_bytes_vendor/godot-isometric/player/goblin.gd",
+			"passed": true
+		},
+		{
+			"name": "compatibility_renderer",
+			"passed": true
+		},
+		{
+			"name": "packed_runtime_scripts_load",
+			"passed": true
+		},
+		{
+			"name": "classic_restart_content_starts_unselected",
+			"passed": true
+		},
+		{
+			"name": "classic_restart_explicit_seed1_choose",
+			"passed": true
+		},
+		{
+			"name": "classic_restart_complete_snapshot_authoritatively_validates",
+			"passed": true
+		},
+		{
+			"name": "practice_checkpoint_content_starts_unselected",
+			"passed": true
+		},
+		{
+			"name": "practice_checkpoint_explicit_seed1_choose",
+			"passed": true
+		},
+		{
+			"name": "practice_checkpoint_complete_snapshot_authoritatively_validates",
+			"passed": true
+		}
+	],
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"engine_binary_sha256": "ab1824f85bfd8e0e4128182c000c4003a3e042245b2967848d089b2a04b22424",
+	"errors": [],
+	"main_scene": "res://main.tscn",
+	"native_visual_input": "not-tested",
+	"passed": true,
+	"phase": "native",
+	"renderer": "gl_compatibility",
+	"schema_version": 1,
+	"suite": "firstchapter_native_pck_source_identity/v1",
+	"web_persistence": "not-tested"
+}

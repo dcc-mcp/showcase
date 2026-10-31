@@ -1,0 +1,298 @@
+{
+  "schema": 1,
+  "scope": "Independent hand-authored golden traces for the Python input policy reference. Not production GDScript execution or native feel acceptance.",
+  "bits": {"UP": 1, "DOWN": 2, "LEFT": 4, "RIGHT": 8},
+  "geometry": [
+    {"grid": [-1, 0], "screen": [-128, -64]},
+    {"grid": [0, -1], "screen": [128, -64]},
+    {"grid": [0, 1], "screen": [-128, 64]},
+    {"grid": [1, 0], "screen": [128, 64]}
+  ],
+  "timing_contract": {
+    "chord_window_ms": 70,
+    "first_repeat_after_dispatched_step_ms": 240,
+    "subsequent_repeat_after_dispatched_step_ms": 180,
+    "completed_tap_ready_when_all_physical_movement_keys_released": true,
+    "compatible_partial_release_preserves_latch_and_repeat_deadline": true,
+    "neutral_release_resume_requires_70ms_stable_hold_and_is_not_a_completed_press_tap": true,
+    "physical_sync_removals_are_atomic": true,
+    "busy_polls_dispatch_nothing": true,
+    "pending_limit": 1,
+    "catch_up": false,
+    "same_resolved_direction_modifier_preserves_repeat_deadline": true,
+    "new_press_turn_inside_held_segment_is_immediately_pending": true,
+    "initial_window_deadline_is_not_extended_by_second_press": true,
+    "blocked_is_emitted_once_then_stops_until_new_accepted_press": true,
+    "rank_all_geometry_before_intersecting_walkable_edges": true,
+    "lower_angle_fallback": false
+  },
+  "cases": [
+    {"name": "hold_three_steps", "options": [[-1,0]], "events": [
+      {"t":0,"op":"press","bit":1},
+      {"t":69,"op":"poll","expect":[]},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":309,"op":"poll","expect":[]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":489,"op":"poll","expect":[]},
+      {"t":490,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"busy_next_turn", "options":[[0,-1]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":80,"op":"options","value":[[-1,0],[0,-1],[0,1],[1,0]]},
+      {"t":100,"op":"press","bit":4},
+      {"t":170,"op":"poll","busy":true,"expect":[],"state":{"pending_count":1}},
+      {"t":300,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":300,"op":"poll","expect":[]}
+    ]},
+    {"name":"busy_completed_tap_once", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","busy":true,"expect":[]},
+      {"t":90,"op":"release","bit":1,"state":{"pending_count":1}},
+      {"t":90,"op":"poll","busy":true,"expect":[]},
+      {"t":200,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":200,"op":"poll","expect":[]},
+      {"t":1000,"op":"poll","expect":[],"state":{"pending_count":0}}
+    ]},
+    {"name":"busy_burst_latest_slot", "options":[[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"release","bit":1},
+      {"t":20,"op":"press","bit":8}, {"t":30,"op":"release","bit":8},
+      {"t":40,"op":"press","bit":2}, {"t":50,"op":"release","bit":2},
+      {"t":50,"op":"poll","busy":true,"expect":[],"state":{"pending_count":1,"pending_mask":2}},
+      {"t":200,"op":"poll","expect":[{"kind":"step","grid":[1,0]}]},
+      {"t":200,"op":"poll","expect":[]}, {"t":1000,"op":"poll","expect":[]}
+    ]},
+    {"name":"keyup_stops_repeat", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":100,"op":"release","bit":1},
+      {"t":100,"op":"poll","expect":[]}, {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"hardcancel_clears_queued_tap", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"release","bit":1},
+      {"t":20,"op":"poll","busy":true,"expect":[]},
+      {"t":30,"op":"cancel","reason":"esc","physical":0,"state":{"pending_count":0,"need_all_up":false}},
+      {"t":100,"op":"poll","expect":[]},
+      {"t":110,"op":"press","bit":1},
+      {"t":180,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"ui_focus_ghost", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":100,"op":"cancel","reason":"ui_focus","physical":1,"state":{"need_all_up":true}},
+      {"t":1000,"op":"poll","expect":[]},
+      {"t":1001,"op":"press","bit":8,"state":{"pending_count":0}},
+      {"t":1010,"op":"sync","physical":1,"state":{"need_all_up":true}},
+      {"t":1020,"op":"sync","physical":0,"state":{"need_all_up":false}},
+      {"t":1030,"op":"sync","physical":1,"state":{"pending_count":0}},
+      {"t":1500,"op":"poll","expect":[]},
+      {"t":1510,"op":"release","bit":1}, {"t":1600,"op":"press","bit":1},
+      {"t":1670,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"opposite_keys_are_not_all_up", "options":[[0,-1]], "events":[
+      {"t":0,"op":"cancel","reason":"modal","physical":3,"state":{"need_all_up":true}},
+      {"t":10,"op":"sync","physical":3,"state":{"need_all_up":true}},
+      {"t":20,"op":"poll","expect":[]},
+      {"t":30,"op":"sync","physical":1,"state":{"need_all_up":true}},
+      {"t":40,"op":"sync","physical":0,"state":{"need_all_up":false}},
+      {"t":50,"op":"press","bit":1},
+      {"t":120,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]}
+    ]},
+    {"name":"opposite_keys_cancel_direction", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"press","bit":2},
+      {"t":100,"op":"poll","expect":[],"state":{"pending_count":0,"physical_mask":3}},
+      {"t":110,"op":"release","bit":2}, {"t":120,"op":"release","bit":1},
+      {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"neutral_release_early_all_up_no_ghost_tap", "options":[[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"press","bit":2},
+      {"t":20,"op":"release","bit":1}, {"t":20,"op":"poll","expect":[]},
+      {"t":30,"op":"release","bit":2},
+      {"t":30,"op":"poll","expect":[],"state":{"pending_count":0}},
+      {"t":200,"op":"poll","expect":[]}
+    ]},
+    {"name":"neutral_release_stable_hold_can_resume", "options":[[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"press","bit":2},
+      {"t":20,"op":"release","bit":1},
+      {"t":89,"op":"poll","expect":[]},
+      {"t":90,"op":"poll","expect":[{"kind":"step","grid":[1,0]}]},
+      {"t":330,"op":"poll","expect":[{"kind":"step","grid":[1,0]}]},
+      {"t":340,"op":"release","bit":2}, {"t":1000,"op":"poll","expect":[]}
+    ]},
+    {"name":"neutral_sync_atomic_all_up_no_ghost", "options":[[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"press","bit":2},
+      {"t":20,"op":"sync","physical":0,"state":{"pending_count":0}},
+      {"t":20,"op":"poll","expect":[]}, {"t":100,"op":"poll","expect":[]},
+      {"t":200,"op":"press","bit":1}, {"t":210,"op":"press","bit":2},
+      {"t":220,"op":"press","bit":4}, {"t":230,"op":"press","bit":8},
+      {"t":240,"op":"sync","physical":0,"state":{"pending_count":0}},
+      {"t":240,"op":"poll","expect":[]}, {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"fast_overlapping_chord_release", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"press","bit":8},
+      {"t":25,"op":"release","bit":8},
+      {"t":25,"op":"poll","expect":[],"state":{"pending_mask":9}},
+      {"t":30,"op":"release","bit":1},
+      {"t":30,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"initial_partial_chord_keeps_accepted_diagonal", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"press","bit":8},
+      {"t":25,"op":"release","bit":8},
+      {"t":25,"op":"poll","expect":[],"state":{"pending_mask":9}},
+      {"t":69,"op":"poll","expect":[]},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":320,"op":"release","bit":1}, {"t":1000,"op":"poll","expect":[]}
+    ]},
+    {"name":"partial_release_keeps_latch_and_deadline", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"press","bit":8},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":100,"op":"release","bit":8,"state":{"continuous":true,"repeat_due":310,"latch":[0,-1]}},
+      {"t":100,"op":"poll","expect":[]}, {"t":309,"op":"poll","expect":[]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":320,"op":"release","bit":1}, {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"partial_release_keeps_pending_turn", "options":[[0,-1]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":90,"op":"options","value":[[-1,0],[0,-1],[0,1],[1,0]]},
+      {"t":100,"op":"press","bit":4}, {"t":110,"op":"release","bit":4},
+      {"t":110,"op":"poll","busy":true,"expect":[],"state":{"pending_mask":5}},
+      {"t":170,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":410,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":420,"op":"release","bit":1}, {"t":1000,"op":"poll","expect":[]}
+    ]},
+    {"name":"nonoverlapping_taps_do_not_chord", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"release","bit":1},
+      {"t":30,"op":"press","bit":8}, {"t":40,"op":"release","bit":8},
+      {"t":40,"op":"poll","expect":[{"kind":"choose","choices":[[0,-1],[1,0]]}]},
+      {"t":100,"op":"poll","expect":[]}
+    ]},
+    {"name":"idle_two_taps_release_pumped", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"release","bit":1},
+      {"t":10,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":20,"op":"press","bit":1}, {"t":30,"op":"release","bit":1},
+      {"t":30,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":300,"op":"poll","expect":[]}
+    ]},
+    {"name":"choose_emitted_once", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"choose","choices":[[-1,0],[0,-1]]}]},
+      {"t":71,"op":"poll","expect":[]}, {"t":310,"op":"poll","expect":[]},
+      {"t":1000,"op":"poll","expect":[]}, {"t":1010,"op":"press","bit":1,"repeat":true},
+      {"t":1200,"op":"poll","expect":[]}
+    ]},
+    {"name":"unique_latch_survives_fork", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":100,"op":"options","value":[[-1,0],[0,-1],[0,1],[1,0]]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":490,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"latch_wall_never_swaps_equal_branch", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":100,"op":"options","value":[[0,-1]]},
+      {"t":310,"op":"poll","expect":[{"kind":"blocked","grid":[-1,0]}],"state":{"continuous":false,"repeat_due":null,"latch":null}},
+      {"t":311,"op":"poll","expect":[]},
+      {"t":490,"op":"poll","expect":[]},
+      {"t":495,"op":"press","bit":1,"repeat":true}, {"t":495,"op":"poll","expect":[]},
+      {"t":500,"op":"press","bit":8},
+      {"t":500,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":739,"op":"poll","expect":[]},
+      {"t":740,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]}
+    ]},
+    {"name":"no_lower_angle_fallback_up_left", "options":[[0,1]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"press","bit":4},
+      {"t":70,"op":"poll","expect":[{"kind":"blocked","grid":[-1,0]}],"state":{"continuous":false,"repeat_due":null}},
+      {"t":310,"op":"poll","expect":[]}, {"t":490,"op":"poll","expect":[]}
+    ]},
+    {"name":"no_lower_angle_fallback_down_right", "options":[[0,-1]], "events":[
+      {"t":0,"op":"press","bit":2}, {"t":20,"op":"press","bit":8},
+      {"t":70,"op":"poll","expect":[{"kind":"blocked","grid":[1,0]}],"state":{"continuous":false,"repeat_due":null}},
+      {"t":310,"op":"poll","expect":[]}, {"t":490,"op":"poll","expect":[]}
+    ]},
+    {"name":"long_frame_no_catchup", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":1000,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":1000,"op":"poll","expect":[]}, {"t":1179,"op":"poll","expect":[]},
+      {"t":1180,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"long_busy_repeat_no_catchup", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":310,"op":"poll","busy":true,"expect":[]},
+      {"t":2000,"op":"poll","busy":true,"expect":[]},
+      {"t":2001,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":2001,"op":"poll","expect":[]},
+      {"t":2181,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"echo_never_arms", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":100,"op":"press","bit":1,"repeat":true},
+      {"t":170,"op":"poll","expect":[]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":330,"op":"release","bit":1}, {"t":1000,"op":"poll","expect":[]}
+    ]},
+    {"name":"physical_poll_never_arms", "options":[[-1,0]], "events":[
+      {"t":0,"op":"sync","physical":1}, {"t":1000,"op":"poll","expect":[]},
+      {"t":1001,"op":"sync","physical":0}, {"t":1010,"op":"press","bit":1},
+      {"t":1080,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]}
+    ]},
+    {"name":"same_direction_modifier_no_acceleration", "options":[[0,-1]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":90,"op":"options","value":[[-1,0],[0,-1],[0,1],[1,0]]},
+      {"t":100,"op":"press","bit":8}, {"t":100,"op":"poll","expect":[]},
+      {"t":170,"op":"poll","expect":[]},
+      {"t":309,"op":"poll","expect":[]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]}
+    ]},
+    {"name":"same_direction_quick_modifier_not_bonus_tap", "options":[[0,-1]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":100,"op":"press","bit":8}, {"t":110,"op":"release","bit":8},
+      {"t":110,"op":"poll","expect":[]}, {"t":120,"op":"release","bit":1},
+      {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"chord_window_and_latch", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":20,"op":"press","bit":8},
+      {"t":69,"op":"poll","expect":[]},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":490,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]}
+    ]},
+    {"name":"logical_turn_resolves_new_direction", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":90,"op":"options","value":[[-1,0],[0,-1],[0,1],[1,0]]},
+      {"t":100,"op":"press","bit":8},
+      {"t":100,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":100,"op":"poll","expect":[]}, {"t":310,"op":"poll","expect":[]},
+      {"t":340,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]}
+    ]},
+    {"name":"busy_initial_window_not_extended_by_late_overlap", "options":[[-1,0],[0,-1],[0,1],[1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","busy":true,"expect":[]},
+      {"t":80,"op":"press","bit":8}, {"t":80,"op":"poll","busy":true,"expect":[]},
+      {"t":90,"op":"poll","expect":[{"kind":"step","grid":[0,-1]}]},
+      {"t":90,"op":"poll","expect":[]}
+    ]},
+    {"name":"hardcancel_reason_matrix", "options":[[-1,0]], "repeat_for_reasons":["esc","ui_focus","modal","window","load","floor"], "events":[
+      {"t":0,"op":"press","bit":1}, {"t":10,"op":"release","bit":1},
+      {"t":10,"op":"poll","busy":true,"expect":[]},
+      {"t":20,"op":"cancel","reason":"$reason","physical":0,"state":{"pending_count":0}},
+      {"t":500,"op":"poll","expect":[]}
+    ]},
+    {"name":"double_pump_primary_and_repeat", "options":[[-1,0]], "events":[
+      {"t":0,"op":"press","bit":1},
+      {"t":70,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":70,"op":"poll","expect":[]},
+      {"t":310,"op":"poll","expect":[{"kind":"step","grid":[-1,0]}]},
+      {"t":310,"op":"poll","expect":[]}
+    ]}
+  ]
+}

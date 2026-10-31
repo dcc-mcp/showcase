@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "revision": "web-save-06",
+  "recorded_at": "2026-10-27T02:59:54.744517+00:00",
+  "scope": "Source assembly, source conservation, font coverage and executable JS logic only",
+  "runtime_acceptance": "blocked",
+  "checks": [
+    {
+      "name": "keyboard_reference.py",
+      "tests": 41,
+      "status": "passed",
+      "scope": "independent Python input timing policy; not production GDScript"
+    },
+    {
+      "name": "test_keyboard_wiring.py",
+      "tests": 14,
+      "status": "passed",
+      "scope": "static architecture guards; not GDScript parsing"
+    },
+    {
+      "name": "test_indexeddb_storage.cjs",
+      "tests": 28,
+      "status": "passed",
+      "scope": "Actual production JS constant in a pure Node memory transaction fixture; NOT real IndexedDB"
+    }
+  ],
+  "overlay_files": 207,
+  "conserved_baseline_files": 65,
+  "overlaid_baseline_files": [
+    "fifty/view/preview.gd"
+  ],
+  "explicit_resource_references_checked": 189,
+  "font_required_codepoints_full_static_scan": 680,
+  "font_required_cjk_full_static_scan": 559,
+  "missing_font_codepoints": [],
+  "native_slot_format_and_save_module_unchanged": true,
+  "web_compatibility": "Copy only current v1 slots after complete decode; add-only CAS into a separate browser database; never delete or write old files",
+  "source_files": [
+    {
+      "path": "overlay/fifty/view/preview.gd",
+      "bytes": 68637,
+      "sha256": "4213736e03dd815e50a06ee4c107ae15f0a46aa38943be1c1ed95b200150a3dd"
+    },
+    {
+      "path": "overlay/fifty/view/web_saves.gd",
+      "bytes": 7233,
+      "sha256": "690713d116bd5ddc717e33e15685382cb785e647077fcdf1b9a7390e87c8bce0"
+    },
+    {
+      "path": "overlay/fifty/view/indexeddb_source.gd",
+      "bytes": 9193,
+      "sha256": "f21cd4fefa96b1e1257f602518fb3258b385b5bbb68ea4acd751dc8856085938"
+    },
+    {
+      "path": "tests/test_indexeddb_storage.cjs",
+      "bytes": 23041,
+      "sha256": "32e69fb9841f1cd4fb14971983df4da6b72689db4b6aea03c577b510cd1ba0d9"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 37964,
+      "sha256": "6f7f0e9aea10ec4cb9e0c7131e9b00ae6ff507813115db44e8ab0e15124fccb9"
+    }
+  ],
+  "blocked_stages": [
+    "Godot parse/import",
+    "JavaScriptBridge call and callback execution",
+    "actual IndexedDB browser writes and failures",
+    "refresh and close/reopen recovery",
+    "native pixels and real input",
+    "WebGL playable export"
+  ],
+  "engine_executed": false,
+  "real_indexeddb_executed": false,
+  "web_exported": false,
+  "browser_accepted": false,
+  "served_url_changed": false,
+  "blocker": "Original console CreateProcess returned WinError5 before process creation; no retry or alternate execution route. DCC-CUA restoration remains unapproved.",
+  "review": "Separate read-only source review found no blocking source defect; it does not establish parser or runtime behavior."
+}

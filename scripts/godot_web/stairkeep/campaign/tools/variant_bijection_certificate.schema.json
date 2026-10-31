@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stairkeep-initial-layout-bijection/v1",
+  "title": "Conditional initial-layout bijection certificate",
+  "type": "object",
+  "required": ["schema_version", "certificate_spec", "status", "passed", "errors", "scope"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "certificate_spec": {"const": "stairkeep-initial-layout-bijection/v1"},
+    "variant_spec": {"const": "stairkeep-variant/xorshift32-hv-v1"},
+    "status": {"enum": ["passed", "failed"]},
+    "passed": {"type": "boolean"},
+    "errors": {"type": "array", "items": {"type": "string"}},
+    "scope": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "sources": {
+      "type": "object",
+      "required": ["data", "variant", "base_rules", "navigation", "simulation", "canonical_replayer"],
+      "additionalProperties": {"$ref": "#/$defs/file"}
+    },
+    "auditor_sha256": {"$ref": "#/$defs/hash"},
+    "canonical_content_hash": {"$ref": "#/$defs/hash"},
+    "economic_catalog_hashes": {
+      "type": "object",
+      "required": ["initial_player", "enemies", "shops"],
+      "additionalProperties": {"$ref": "#/$defs/hash"}
+    },
+    "witness_premise": {
+      "type": "object",
+      "required": ["status", "report", "engine", "routes", "scope"],
+      "properties": {
+        "status": {"const": "accepted-recorded-premise"},
+        "report": {"$ref": "#/$defs/file"},
+        "engine": {"type": "object"},
+        "scope": {"type": "string"},
+        "routes": {
+          "type": "array", "minItems": 4, "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["name", "won", "events_sha256", "decision_count", "final_hp"],
+            "properties": {
+              "name": {"enum": ["blade", "bulwark", "balanced", "frugal"]},
+              "won": {"const": true},
+              "events_sha256": {"$ref": "#/$defs/hash"},
+              "decision_count": {"type": "integer", "minimum": 1},
+              "final_hp": {"type": "integer", "minimum": 1}
+            }
+          }
+        }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "required": ["report", "runs", "indices", "layout_hashes_matched", "serialization_adjustments_after_comparison"],
+      "properties": {
+        "report": {"$ref": "#/$defs/file"},
+        "runs": {"const": 100},
+        "indices": {"const": [0, 99]},
+        "layout_hashes_matched": {"const": 100},
+        "serialization_adjustments_after_comparison": {"const": false}
+      }
+    },
+    "local_transform_certificates": {
+      "type": "array", "minItems": 84, "maxItems": 84,
+      "items": {
+        "type": "object",
+        "required": ["id", "floor", "mirror_code", "grid_bijection", "grid_adjacency_preserved", "object_attributes_preserved", "safe_spawn_prefixes"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^floor-[0-9]{2}-mirror-[0-3]$"},
+          "floor": {"type": "integer", "minimum": 1, "maximum": 21},
+          "mirror_code": {"type": "integer", "minimum": 0, "maximum": 3},
+          "grid_bijection": {"const": true},
+          "grid_adjacency_preserved": {"const": true},
+          "object_attributes_preserved": {"const": true},
+          "safe_spawn_prefixes": {
+            "type": "array",
+            "items": {
+              "type": "object", "required": ["chosen_canonical", "resolved", "empty_path"],
+              "properties": {
+                "chosen_canonical": {"$ref": "#/$defs/cell"},
+                "resolved": {"$ref": "#/$defs/cell"},
+                "empty_path": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/cell"}}
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["expected_runs", "expected_start_index", "expected_last_index", "observed_unique_indices", "passed_run_certificates", "missing_indices", "unexpected_indices", "floor_transform_instances", "object_instances", "stair_link_instances", "observed_policy_outcomes_retained"],
+      "properties": {
+        "expected_runs": {"type": "integer", "minimum": 1},
+        "expected_start_index": {"type": "integer", "minimum": 0},
+        "expected_last_index": {"type": "integer", "minimum": 0},
+        "observed_unique_indices": {"type": "integer", "minimum": 0},
+        "passed_run_certificates": {"type": "integer", "minimum": 0},
+        "missing_indices": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "unexpected_indices": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "floor_transform_instances": {"type": "integer", "minimum": 0},
+        "object_instances": {"type": "integer", "minimum": 0},
+        "stair_link_instances": {"type": "integer", "minimum": 0},
+        "observed_policy_outcomes_retained": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}}
+      }
+    },
+    "input_reports": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/file"}},
+    "runs": {"type": "array", "items": {"$ref": "#/$defs/run"}},
+    "proof_steps": {"type": "array", "minItems": 6, "items": {"type": "string"}},
+    "limitations": {"type": "array", "minItems": 6, "items": {"type": "string"}},
+    "elapsed_seconds": {"type": "number", "minimum": 0}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"passed": {"const": true}}},
+      "then": {
+        "required": ["variant_spec", "sources", "auditor_sha256", "canonical_content_hash", "economic_catalog_hashes", "witness_premise", "calibration", "local_transform_certificates", "coverage", "input_reports", "runs", "proof_steps", "limitations", "elapsed_seconds"],
+        "properties": {"status": {"const": "passed"}, "errors": {"maxItems": 0}, "coverage": {"properties": {"missing_indices": {"maxItems": 0}, "unexpected_indices": {"maxItems": 0}}}}
+      },
+      "else": {"properties": {"status": {"const": "failed"}, "errors": {"minItems": 1}}}
+    }
+  ],
+  "$defs": {
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "cell": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 0}},
+    "file": {
+      "type": "object", "required": ["path", "sha256", "bytes"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/hash"}, "bytes": {"type": "integer", "minimum": 0}}
+    },
+    "run": {
+      "type": "object",
+      "required": ["index", "seed", "layout_hash", "draw_count", "draws_sha256", "floor_transform_codes", "spawn_choice_index", "resolved_start", "empty_prefix", "object_count", "stairs_checked", "structural_invariants", "layout_hash_matches_recorded_godot", "initial_winning_path_exists_conditionally", "observed_policy", "observed_policy_outcome"],
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "seed": {"type": "string", "pattern": "^[0-9a-f]{8}$"},
+        "layout_hash": {"$ref": "#/$defs/hash"},
+        "draw_count": {"const": 43},
+        "draws_sha256": {"$ref": "#/$defs/hash"},
+        "floor_transform_codes": {"type": "string", "pattern": "^[0-3]{21}$"},
+        "spawn_choice_index": {"type": "integer", "minimum": 0, "maximum": 3},
+        "resolved_start": {"$ref": "#/$defs/cell"},
+        "empty_prefix": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/cell"}},
+        "object_count": {"const": 410},
+        "stairs_checked": {"const": 40},
+        "structural_invariants": {"const": true},
+        "layout_hash_matches_recorded_godot": {"const": true},
+        "initial_winning_path_exists_conditionally": {"const": true},
+        "observed_policy": {"type": "string"},
+        "observed_policy_outcome": {"type": "string"}
+      }
+    }
+  }
+}

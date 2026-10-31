@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "scope": "Measured export-04 sources preserved. PCK probe failed at same_original_engine_as_native_reference because GDScript typed Dictionary equality differs for JSON-parsed floats vs native integers; root independently observed equal engine values/binary hashes and complete cases, but this is not a passing native PCK probe.",
+  "archive": {
+    "preserved_as": "firstchapter-source.original.zip",
+    "bytes": 3561643,
+    "sha256": "61ea9d2469cecc042dcb63fa8016c87b95d2e5b6ed4eadd25f5bfcf787757778"
+  },
+  "sources": [
+    {
+      "member": "recipe/prepare_firstchapter_export.py",
+      "raw_sha256": "ae528f5f3f89f6201d5a92787ab85355b46fd943d59aecdb746e99c5a90fafb3",
+      "raw_bytes": 29358,
+      "preserved_as": "prepare_firstchapter_export.py.txt.gz",
+      "gzip_sha256": "58942e15c1625596454c8698121e3520a7dbe16cf3d00cded56b8def6f277c21"
+    },
+    {
+      "member": "recipe/probe_firstchapter_pck.gd",
+      "raw_sha256": "638cc626359f2b730e3e8a22a2d59970d649fc99c7c5cd08c555264125677aab",
+      "raw_bytes": 12776,
+      "preserved_as": "probe_firstchapter_pck.gd.txt.gz",
+      "gzip_sha256": "d431263a1b1a082887fce127bb0d82df99309f2f36aa33e5955aad8b2bece349"
+    },
+    {
+      "member": "recipe/agent_launch_firstchapter_probe.py",
+      "raw_sha256": "15557bdde19182414e4b54cf285dd30725de406c1505251ff6ca2a295ca99a2b",
+      "raw_bytes": 8070,
+      "preserved_as": "agent_launch_firstchapter_probe.py.txt.gz",
+      "gzip_sha256": "1e6518a6fec7300172837e82999278d6b243888ec8790746a841ccb7705dce4f"
+    }
+  ],
+  "source_reconstructed": false,
+  "new_native_run": false,
+  "original_unchanged": true
+}

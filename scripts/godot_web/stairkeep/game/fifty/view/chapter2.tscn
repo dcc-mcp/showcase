@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://fifty/view/preview.gd" id="1_preview"]
+
+[node name="StairkeepChapterTwoPreview" type="Node2D"]
+script = ExtResource("1_preview")
+content_path = "res://fifty/data/chapter2-content.json"
+slot_id = "chapter2-preview"
+profile_label = "Chapters 1–2"

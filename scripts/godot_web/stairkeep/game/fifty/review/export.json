@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "exported": true,
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "editor_name": "Godot_v4.7.2-stable_win64_console.exe",
+  "editor_sha256": "c8f0a6bc45a19b33541501e57f6f7cd972ab18453743266339d495cbbe846643",
+  "phases": [
+    {
+      "phase": "version",
+      "owner_sha256": "e40e4e9523630192e88b6715fd522a77b5acec9225eba800bf42cadec782305e",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.032,
+      "actual_priority_class": 16384,
+      "cpu_seconds": 0.796875,
+      "sources_and_protected_after_passed": true
+    },
+    {
+      "phase": "import",
+      "owner_sha256": "b26dae5254e8331c4318310c448ac50f0785e46a44127d0a2f44f2d39e91ffce",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.016,
+      "actual_priority_class": 16384,
+      "cpu_seconds": 0.046875,
+      "sources_and_protected_after_passed": true
+    },
+    {
+      "phase": "export",
+      "owner_sha256": "c96f844c6cb66ee9c617309749d817964671a61b1fbb0bdadbd235a5c917bd8b",
+      "exit_code": 0,
+      "stderr_bytes": 0,
+      "elapsed_seconds": 5.157,
+      "actual_priority_class": 16384,
+      "cpu_seconds": 0.0625,
+      "sources_and_protected_after_passed": true
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "language": "GDScript",
+  "script_export_mode": 0,
+  "threads": false,
+  "extensions": false,
+  "pwa": false,
+  "service_worker": false,
+  "thread_validation": {
+    "method": "Literal HTML toggle plus exact verified no-thread runtime bytes and complete WASM memory-limit parsing",
+    "official_export_source": "https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/platform/web/export/export_plugin.cpp",
+    "html_threads_enabled": false,
+    "pool_hints": {
+      "threadPoolSize": null,
+      "emscriptenPoolSize": 8,
+      "godotPoolSize": 4
+    },
+    "pool_hints_are_thread_enable_evidence": false,
+    "raw_godot_config": {
+      "args": [],
+      "canvasResizePolicy": 2,
+      "emscriptenPoolSize": 8,
+      "ensureCrossOriginIsolationHeaders": false,
+      "executable": "index",
+      "experimentalVK": false,
+      "fileSizes": {
+        "index.pck": 4417112,
+        "index.wasm": 39514754
+      },
+      "focusCanvas": true,
+      "gdextensionLibs": [],
+      "godotPoolSize": 4
+    },
+    "template_zip_sha256": "d3ee2f08cef0cf3cf6678a6355a92a8db48ccdd35cbd2e8bfd5f0e8a0b4032a0",
+    "runtime": [
+      {
+        "path": "index.js",
+        "bytes": 279815,
+        "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+        "template_member": "godot.js",
+        "template_sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+        "byte_hash_equal": true
+      },
+      {
+        "path": "index.wasm",
+        "bytes": 39514754,
+        "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+        "template_member": "godot.wasm",
+        "template_sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+        "byte_hash_equal": true
+      },
+      {
+        "path": "index.audio.worklet.js",
+        "bytes": 7298,
+        "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+        "template_member": "godot.audio.worklet.js",
+        "template_sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+        "byte_hash_equal": true
+      },
+      {
+        "path": "index.audio.position.worklet.js",
+        "bytes": 2973,
+        "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+        "template_member": "godot.audio.position.worklet.js",
+        "template_sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+        "byte_hash_equal": true
+      }
+    ],
+    "wasm": {
+      "wasm_v1_parsed": true,
+      "bytes": 39514754,
+      "section_count": 12,
+      "import_count": 337,
+      "all_import_and_defined_memories": [
+        {
+          "origin": "defined",
+          "index": 0,
+          "flags": 1,
+          "shared": false,
+          "memory64": false,
+          "min_pages": 512,
+          "max_pages": 32768
+        }
+      ],
+      "shared_memory_count": 0,
+      "wasm_executed": false
+    },
+    "extension_libraries": [],
+    "cross_origin_isolation_headers": false,
+    "service_worker_files": [],
+    "browser_executed": false
+  },
+  "runtime": [
+    {
+      "path": "index.js",
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+      "template_member": "godot.js",
+      "template_sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba",
+      "byte_hash_equal": true
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+      "template_member": "godot.wasm",
+      "template_sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+      "byte_hash_equal": true
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "template_member": "godot.audio.worklet.js",
+      "template_sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
+      "byte_hash_equal": true
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "template_member": "godot.audio.position.worklet.js",
+      "template_sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+      "byte_hash_equal": true
+    }
+  ],
+  "files": [
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 11944,
+      "sha256": "01d4f63e525941e06ce74f5187dad030d20a8d52a07ce365ae4e94af97a3b1f5"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 5466,
+      "sha256": "3ce2305f9d56b025586f8fc721d81e8a182732b24917ae98114fe775261d87d1"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 5700,
+      "sha256": "ad3c35ad0facf487c618204bd98db543034fc95224eadc7f08c7a9ff38d5b3b5"
+    },
+    {
+      "path": "index.js",
+      "bytes": 279815,
+      "sha256": "33c94cb3175f3333b82e2a3be5e8e86f77986f0aa2042b1631f6367a4e5bb6ba"
+    },
+    {
+      "path": "index.pck",
+      "bytes": 4417112,
+      "sha256": "38215f56f998f4a77b1d63e624053ec2af7dfe7fea1f67f54137a6fefb660e4b"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 39514754,
+      "sha256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0"
+    },
+    {
+      "path": "notices/GODOT-DEMO-MIT.txt",
+      "bytes": 1134,
+      "sha256": "0339177149b474f7ff676d32218ecb3a8f2538955610023c3769763720d09e4c"
+    },
+    {
+      "path": "notices/GODOT-ENGINE-COPYRIGHT.txt",
+      "bytes": 100108,
+      "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d"
+    },
+    {
+      "path": "notices/GODOT-ENGINE-LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
+    },
+    {
+      "path": "notices/KENNEY-CC0.txt",
+      "bytes": 613,
+      "sha256": "b8ccba95d4ad747b96d8824868b5417a1dc05ba8dbf4a36946d59c5049aeb3bc"
+    },
+    {
+      "path": "notices/SOURCE.json",
+      "bytes": 10763,
+      "sha256": "b829a8776c2712d992cb130ced6c0f5a9299c23653cc7bf0dc09d9a9f8fc03ca"
+    },
+    {
+      "path": "notices/STAIRKEEP-MIT.txt",
+      "bytes": 4448,
+      "sha256": "c27b28fc3654651d64bbcbd066289ea9a30de460b973c1988597d58edc3b147a"
+    }
+  ],
+  "original_sources_unchanged": true,
+  "shared_template_cache_written": false,
+  "native_pck_probe": "not-run",
+  "browser_http_acceptance": "not-tested"
+}

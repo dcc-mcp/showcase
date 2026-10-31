@@ -1,0 +1,662 @@
+{
+  "schema_version": 1,
+  "suite": "fifty_chapter2_bounded_native_evidence/v1",
+  "passed": false,
+  "logic_passed": true,
+  "full_acceptance": false,
+  "overall_scope": "logic_passed_scene_blocked",
+  "scene": {
+    "status": "blocked",
+    "process_created": false,
+    "import_executed": false,
+    "scene_executed": false,
+    "reason": "PermissionError: [WinError 5] Access is denied at subprocess.Popen / _winapi.CreateProcess"
+  },
+  "matrix": {
+    "cases": 32,
+    "events": 6432,
+    "actions": 44512,
+    "preview_actual_comparisons": 1280,
+    "door_revisits": 576,
+    "stair_roundtrips": 992,
+    "stock_refusals": 320,
+    "npc_repeat_refusals": 224,
+    "unique_layouts": 8,
+    "policies": [
+      "keen",
+      "reserve"
+    ],
+    "cases_table": [
+      {
+        "mode": "classic_restart",
+        "seed": "00000001",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "34bfdcfd1e03b10d3f2d2a56bb070e306a5419f578b7b67cc8c479b7540fb44d",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000001",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "34bfdcfd1e03b10d3f2d2a56bb070e306a5419f578b7b67cc8c479b7540fb44d",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000002",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "6c127c6c41df3b1038bae5af1641fdb937181903ad8e5ce8df84865fc2a5a805",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000002",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "6c127c6c41df3b1038bae5af1641fdb937181903ad8e5ce8df84865fc2a5a805",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000003",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "35f4fb4c90c7f9a0443b8768e871f2f3cb81b6b5045d9aa19c7bc5b5edec4740",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000003",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "35f4fb4c90c7f9a0443b8768e871f2f3cb81b6b5045d9aa19c7bc5b5edec4740",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000004",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "5c5c87e3862b09ee093cd2e0bf1d9a75b4d423f936f25eca47504dc7203db6c6",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000004",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "5c5c87e3862b09ee093cd2e0bf1d9a75b4d423f936f25eca47504dc7203db6c6",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000005",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "a76d090e19507ee19546230891ab1d2c215834c759454e44c597977409fb289f",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000005",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "a76d090e19507ee19546230891ab1d2c215834c759454e44c597977409fb289f",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000006",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "9e179fcd8284a693e65744ded42f9afab206d66b270b884965b79a3788e4d201",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000006",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "9e179fcd8284a693e65744ded42f9afab206d66b270b884965b79a3788e4d201",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000007",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "ac80c629e1ca67d5a7f6814c98d0bc5c4ec26ca569482ca1153e76dab265c46b",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000007",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "ac80c629e1ca67d5a7f6814c98d0bc5c4ec26ca569482ca1153e76dab265c46b",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000008",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "279c24e3478f3181f9a6d1ecf8cd8399f06c49ff8c44e23b95e10af7b8d5f965",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "classic_restart",
+        "seed": "00000008",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "279c24e3478f3181f9a6d1ecf8cd8399f06c49ff8c44e23b95e10af7b8d5f965",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000001",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "34bfdcfd1e03b10d3f2d2a56bb070e306a5419f578b7b67cc8c479b7540fb44d",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000001",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "34bfdcfd1e03b10d3f2d2a56bb070e306a5419f578b7b67cc8c479b7540fb44d",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000002",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "6c127c6c41df3b1038bae5af1641fdb937181903ad8e5ce8df84865fc2a5a805",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000002",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "6c127c6c41df3b1038bae5af1641fdb937181903ad8e5ce8df84865fc2a5a805",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000003",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "35f4fb4c90c7f9a0443b8768e871f2f3cb81b6b5045d9aa19c7bc5b5edec4740",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000003",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "35f4fb4c90c7f9a0443b8768e871f2f3cb81b6b5045d9aa19c7bc5b5edec4740",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000004",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "5c5c87e3862b09ee093cd2e0bf1d9a75b4d423f936f25eca47504dc7203db6c6",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000004",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "5c5c87e3862b09ee093cd2e0bf1d9a75b4d423f936f25eca47504dc7203db6c6",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000005",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "a76d090e19507ee19546230891ab1d2c215834c759454e44c597977409fb289f",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000005",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "a76d090e19507ee19546230891ab1d2c215834c759454e44c597977409fb289f",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000006",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "9e179fcd8284a693e65744ded42f9afab206d66b270b884965b79a3788e4d201",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000006",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "9e179fcd8284a693e65744ded42f9afab206d66b270b884965b79a3788e4d201",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000007",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1401,
+        "layout_sha256": "ac80c629e1ca67d5a7f6814c98d0bc5c4ec26ca569482ca1153e76dab265c46b",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000007",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1379,
+        "layout_sha256": "ac80c629e1ca67d5a7f6814c98d0bc5c4ec26ca569482ca1153e76dab265c46b",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000008",
+        "route": "keen",
+        "events": 201,
+        "actual_actions": 1403,
+        "layout_sha256": "279c24e3478f3181f9a6d1ecf8cd8399f06c49ff8c44e23b95e10af7b8d5f965",
+        "final_budget": {
+          "atk": 111,
+          "def": 32,
+          "gold": 733,
+          "hp": 227,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      },
+      {
+        "mode": "practice_checkpoint",
+        "seed": "00000008",
+        "route": "reserve",
+        "events": 201,
+        "actual_actions": 1381,
+        "layout_sha256": "279c24e3478f3181f9a6d1ecf8cd8399f06c49ff8c44e23b95e10af7b8d5f965",
+        "final_budget": {
+          "atk": 106,
+          "def": 34,
+          "gold": 733,
+          "hp": 244,
+          "keys": {
+            "blue": 0,
+            "yellow": 0
+          }
+        }
+      }
+    ],
+    "authored_floors": 20,
+    "target_floors": 50,
+    "not_authored_floors": 30,
+    "scope": "Two complete final-source matrices, not a union of overlapping probes. No exhaustive strategy, 10k-run, physical input/browser, human-duration or full-fifty-floor claim."
+  },
+  "specialized": {
+    "recovery_cases": 2,
+    "key_cut_counterexamples": 2,
+    "native_save_checks": 24,
+    "scene_checks": 0,
+    "scene_status": "blocked",
+    "legacy_fixture_payload_distributed": false,
+    "key_cut_scope": "Exact two later ordinary-play zero-yellow-key worlds; no generic combat solver and no initial unsatisfiability claim."
+  },
+  "cache_ab": {
+    "passed": true,
+    "before_report_sha256": "2a8b8d1db116d432f8ce391a949c0a1c055a42752ac73476e5cf930075d2c47c",
+    "after_report_sha256": "c33536619da6f7beb6c6516f893a361d907490583a1bb58fdfbd0913106ea60f",
+    "actual_actions_equal": 1403,
+    "full_snapshot_comparison_allowed_difference": [
+      "/initial_full_snapshot/rules_sha256",
+      "/full_final_snapshot/rules_sha256"
+    ],
+    "before_process_seconds": 39.359,
+    "after_process_seconds": 5.234,
+    "scope": "Same actual route, initial/final complete snapshots and commands except the declared code fingerprint. Wall/process runtime, not FPS or input latency. Raw snapshots are never normalized for publication."
+  },
+  "legacy_fixture": {
+    "payload_distributed": false,
+    "payload_sha256": "ace0ca57f3c42501075537b1706f7ba614d485acd72ce40647a471a3bf0cb824",
+    "payload_bytes": 5006,
+    "source_recipe": "res://fifty/tests/chapter2_legacy_fixture.gd",
+    "native_origin_report_member": "reports/legacy-fixture.json.gz",
+    "scope": "Original payload is private and byte-bound; slot metadata aliases do not rename or recompute that payload's checksums."
+  },
+  "human_pixels_reviewed": false,
+  "real_keyboard_mouse_touch_tested": false,
+  "browser_play_persistence_tested": false,
+  "scope": "Bounded native tests and typed public evidence projection only. Twenty authored floors toward fifty, thirty unmade; no visual, real input, browser, deployment, human-duration or full-campaign acceptance.",
+  "qa_source_followups": {
+    "fifty/tests/chapter2_replay.gd": {
+      "status": "not-tested_optional_native_save_followup",
+      "measured_sha256": "19a569299222a2bbd6b138b048a60329faf9d64b4b761d1e87413531b5f22123",
+      "current_unexecuted_sha256": "06dc26e8dbbc8b54979f5e34251a0644dd8636b775675a7ee55042a37919159a",
+      "measured_source_snapshot": "chapter2-source-history/replay-19a569.gd",
+      "scope": "Only optional _roundtrip path adds explicit runtime content_id to Save.slot_path and requires the actual profile file plus nonempty SHA. Native-save flag was false and native_saves arrays empty in all final 32 matrix cases. Original 19a source is preserved. Production rules/content/save/data exactly match measured bytes. No native rerun of this QA followup because CreateProcess was denied; no retry.",
+      "diff": "--- measured19a\n+++ current-untested\n@@ -253,7 +253,7 @@\n \n func _roundtrip(game: RefCounted, index: int) -> Dictionary:\n \tvar slot: String = \"qa50c2-\" + str(OS.get_process_id()) + \"-\" + str(index)\n-\tvar path: String = Save.slot_path(slot, selected_mode)\n+\tvar path: String = Save.slot_path(slot, selected_mode, str(game.runtime_identity()[\"content_id\"]))\n \tvar before: Dictionary = game.export_snapshot()\n \tvar receipt: Dictionary = {\"slot_id\": slot, \"native_path\": path, \"before_full_snapshot_sha256\": Geometry.content_hash(before), \"passed\": false}\n \tif FileAccess.file_exists(path):\n@@ -262,6 +262,9 @@\n \tvar saved: Dictionary = Save.write_slot(game, slot)\n \treceipt[\"save\"] = saved\n \tif not bool(saved.get(\"ok\", false)): return {\"ok\": false, \"receipt\": receipt}\n+\tif not FileAccess.file_exists(path) or FileAccess.get_sha256(path).is_empty():\n+\t\treceipt[\"error\"] = \"The actual selected-profile slot file is absent or has no SHA; this optional roundtrip did not pass.\"\n+\t\treturn {\"ok\": false, \"receipt\": receipt}\n \tvar next = Runtime.new()\n \tnext.load_content(DATA)\n \tnext.choose_mode(selected_mode, \"6d2b79f5\")\n"
+    }
+  },
+  "projection": {
+    "records": 10,
+    "exact_leaf_operations": 26,
+    "protected_roots": 1581,
+    "history_source_bytes_verified": 5
+  }
+}

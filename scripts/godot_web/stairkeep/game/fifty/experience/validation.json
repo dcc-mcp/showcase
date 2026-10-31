@@ -1,0 +1,69 @@
+{
+  "scope": "Static file, source conservation, cmap and source ZIP checks only",
+  "baseline_files_unchanged": 65,
+  "changed_baseline_files": [
+    "fifty/view/preview.gd"
+  ],
+  "rule_economy_save_identity_files": [
+    {
+      "path": "scripts/rules.gd",
+      "sha256": "e89070d800c3a7769c4440b6eec8ed4702afaa45ef0055e78c67959b310c0495"
+    },
+    {
+      "path": "fifty/scripts/runtime.gd",
+      "sha256": "1d3ab254eedf81e6a591d57c89110641c29171407e0b51f3441664145ba61463"
+    },
+    {
+      "path": "fifty/scripts/content.gd",
+      "sha256": "947c56a0f0fbfd68d071cb02f6a26695747de891c5fa7925fe46867c8d6d7dbd"
+    },
+    {
+      "path": "fifty/scripts/save.gd",
+      "sha256": "4e08ddffc85edf89a3207a85080d2b4ec5abc4b97514c845e64047a1b3ed440b"
+    },
+    {
+      "path": "fifty/scripts/d4.gd",
+      "sha256": "be66aa8198f777d72778b1fd2dde9b75798419254139a4f44956f133983220b2"
+    },
+    {
+      "path": "fifty/data/content.json",
+      "sha256": "3703b2cbc43d2297d42d335ad85ebac3f464d9f6c68d536d75a990e9bdd75fd5"
+    },
+    {
+      "path": "fifty/data/design-budget.json",
+      "sha256": "8efb30513c1bfe300499c099625670faa97f871b1f9d161e7870ea418ac4cf1e"
+    },
+    {
+      "path": "fifty/data/manifest.json",
+      "sha256": "32857fe177db828ff4314d504f5c1cabd54eb7bb5390668210754c636ab7fd1c"
+    },
+    {
+      "path": "project.godot",
+      "sha256": "b61ff860450e9a1eef0c95402f397dad89ff5f436cec0644759223d291c0d7cf"
+    }
+  ],
+  "literal_resource_references_checked": 196,
+  "required_codepoints": 659,
+  "required_cjk_codepoints": 539,
+  "missing_glyphs": 0,
+  "utf8_decode_errors": 0,
+  "replacement_characters": 0,
+  "source_zip": {
+    "bytes": 12943025,
+    "sha256": "5153ae00a454535a362f606b5fc5ed34c44bd2ae791cb3d2ea72a4e2a94efc16",
+    "crc_passed": true,
+    "every_member_hash_verified": true,
+    "name": "firstchapter-source.zip (new isolated prepared output; not Web)"
+  },
+  "preserved_source_zip_sha256": "544ea650aeed6a57e206526aa5d0fda7df1ed69cd47e521de3715811c893ec42",
+  "preserved_web_zip_sha256": "dd4ad602c1dda4cd534092cc172992f204d201fb4e2b44df909f61755513dc7f",
+  "new_native_parse_import": "blocked-historical-CreateProcess-denial-not-retried",
+  "new_web_export": "not-run",
+  "new_pck_wasm_execution": "not-run",
+  "browser_visual_input_audio": "not-tested",
+  "fixed_url_updated": false,
+  "godot_launched": false,
+  "server_touched": false,
+  "full_acceptance": false,
+  "source_preparation_engine_executed": false
+}
