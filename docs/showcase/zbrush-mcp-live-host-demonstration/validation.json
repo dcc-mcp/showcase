@@ -1,0 +1,277 @@
+{
+  "artifacts_in_entry": [
+    "README.md",
+    "README.zh.md",
+    "manifest.json",
+    "validation.json",
+    ".gitattributes",
+    "live_host_evidence.json",
+    "verify_live_host_evidence.py",
+    "live_host_evidence_result.json",
+    "live_input_cube.obj",
+    "live_exported.obj"
+  ],
+  "checks": [
+    {
+      "name": "real_gui_host_launch",
+      "observed": "A signed ZBrush.exe (ProductVersion 2027, 0, 1, 1; Authenticode Valid; recorded SHA-256) was launched from a clean process state. The host reported zbrush_info(0)=2027.0009765625 and zbrush_info(1)=2 through the real zbrush.commands SDK.",
+      "result": "pass"
+    },
+    {
+      "name": "layer0_in_host_real_tool_returns",
+      "observed": "5 real bridge-handler invocations inside the ZBrush embedded Python VM: get_session_info, get_scene_info, list_subtools, inspect_active_mesh, execute_python. A real get/set/read/restore on Draw:DrawSize changed 64.0 to 64.05000305175781 and restored 64.0.",
+      "result": "pass"
+    },
+    {
+      "name": "layer1_tcp_jsonrpc_real_work",
+      "observed": "10 real JSON-RPC calls through the host main-thread pump. A real quad cube was imported, refined one subdivision level and exported. Mesh reads changed from 8 points / 6 faces / area 24.0 to 26 points / 24 faces / area 11.936315536499023.",
+      "result": "pass"
+    },
+    {
+      "name": "real_obj_artifacts",
+      "observed": "live_input_cube.obj (219 B, 8 vertices / 6 quad faces) is the real import input; live_exported.obj (1057 B, 26 vertices / 24 quad faces) is the real output of export_active_subtool_obj. Both SHA-256 values are recorded in manifest.json and recomputed by verify_live_host_evidence.py.",
+      "result": "pass"
+    },
+    {
+      "name": "layer2_real_mcp_tool_returns",
+      "observed": "Real MCP initialize (dcc-mcp-zbrush 0.2.32, protocol 2025-06-18), tools/list (32 tools, nextCursor 3332) and 7 real tools/call over /mcp. 3 succeeded: list_skills, load_skill, and zbrush_dialog__get_active_dialog (success=true, bridge_state=ready, zbrush_blocked=false).",
+      "result": "pass"
+    },
+    {
+      "name": "documented_main_affinity_limitation",
+      "observed": "4 real tools/call returned isError=true with THREAD_AFFINITY_UNAVAILABLE. In sidecar mode attach_dispatcher is a no-op and host_dispatcher_attached=False, so main-affinity tools cannot be deferred. Recorded as a genuine product limitation with its root cause, not suppressed or fixed out of scope.",
+      "result": "pass"
+    },
+    {
+      "name": "honest_failure_retention",
+      "observed": "inspect_active_mesh genuinely fails on the startup SimpleBrush in both Layer 0 and Layer 1 (ValueError: Unable to begin a Script tool editing-session). Both failed returns are retained in the evidence, then a real polymesh is imported before retrying.",
+      "result": "pass"
+    },
+    {
+      "name": "clean_lifecycle",
+      "observed": "The one launched GUI process was closed gracefully. driver exit 0, post-run ZBrush process count 0, bridge and MCP listener counts both 0. No real user assets, documents, shared gateway or other running instances were touched.",
+      "result": "pass"
+    },
+    {
+      "name": "evidence_verifier",
+      "observed": "python verify_live_host_evidence.py returned verdict=pass with 15 checks, 15 pass and 0 fail; result written to live_host_evidence_result.json. It recomputes host identity, mutation reversibility, geometry delta, OBJ hashes and geometry, MCP counts, the affinity finding, lifecycle cleanup and a private-data scan.",
+      "result": "pass"
+    },
+    {
+      "name": "official_entry_validator",
+      "observed": "python scripts/validate_entry.py docs/showcase/zbrush-mcp-live-host-demonstration returned PASS for the mandatory trio, exact artifact hashes and validation shape.",
+      "result": "pass"
+    },
+    {
+      "name": "private_data_scan",
+      "observed": "The published ledger, both OBJ files and both READMEs carry no drive letters, UNC or home paths, machine names, loopback addresses, internal task IDs, tokens or credentials. Raw captures with local paths were retained privately, not published.",
+      "result": "pass"
+    },
+    {
+      "name": "number_traceability",
+      "observed": "Every numeric token in the English and Chinese reports appears in validation.json, manifest.json or live_host_evidence.json.",
+      "result": "pass"
+    },
+    {
+      "name": "real_host_session_reexecution",
+      "observed": "The live session is a recorded capture. verify_live_host_evidence.py checks the retained evidence and OBJ artifacts; it does not launch ZBrush or re-issue MCP calls. Re-running requires a real ZBrush installation, a disposable user-assets directory and a GUI-capable host.",
+      "result": "not_run"
+    },
+    {
+      "name": "real_host_viewport_media",
+      "observed": "No viewport screenshot, render, turntable or video is claimed. A content-free GUI window diagnostic was collected but reported proof_passed=false with reason root_overlap, so it is not used as visual evidence.",
+      "result": "not_run"
+    },
+    {
+      "name": "bilingual_gallery_detail_pages",
+      "observed": "Registered as an unlisted review case in unlisted-cases.json. No collection.json card, locales/en or locales/zh detail page and no cover review were produced. Both README languages are present in the case directory.",
+      "result": "not_run"
+    },
+    {
+      "name": "gallery_publication_merge_deploy_readback",
+      "observed": "Delivered in a Draft PR. No gallery selection, merge, Pages deployment or live-page read-back was performed; publication authority is separate from contribution authority.",
+      "result": "not_run"
+    },
+    {
+      "name": "independent_exact_head_review",
+      "observed": "No independent reviewer ACK bound to the PR head is recorded. The implementer does not approve their own change; review remains a separate gate.",
+      "result": "not_run"
+    }
+  ],
+  "counts": {
+    "adapter_version": "0.2.32",
+    "core_version": "0.20.52",
+    "embedded_python": "3.11.9",
+    "executable_sha256_length": 64,
+    "exported_faces": 24,
+    "exported_obj_bytes": 1057,
+    "exported_vertices": 26,
+    "gui_diagnostic_proof_passed": false,
+    "host_product_version": "2027, 0, 1, 1",
+    "host_version": "2027.0.1",
+    "input_faces": 6,
+    "input_obj_bytes": 219,
+    "input_vertices": 8,
+    "layer0_in_host_calls": 5,
+    "layer1_tcp_jsonrpc_calls": 10,
+    "layer2_mcp_tools_calls": 7,
+    "layer2_successful_calls": 3,
+    "layer2_main_affinity_blocked": 4,
+    "layer2_tools_list_page": 32,
+    "layer2_tools_list_next_cursor": "3332",
+    "main_thread_subdivision_levels": 1,
+    "mesh_area_before": 24.0,
+    "mesh_area_after": 11.936315536499023,
+    "mesh_points_before": 8,
+    "mesh_points_after": 26,
+    "model_attribution_stages": 6,
+    "mcp_protocol_version": "2025-06-18",
+    "new_viewport_captures": 0,
+    "post_run_zbrush_processes": 0,
+    "post_run_listeners": 0,
+    "public_sdk_callables": 149,
+    "real_tool_errors_recorded": 6,
+    "reversible_mutation_after": 64.05000305175781,
+    "reversible_mutation_before": 64.0,
+    "reversible_mutation_restored": 64.0,
+    "verifier_checks": 15,
+    "verifier_checks_pass": 15,
+    "verifier_checks_fail": 0,
+    "zbrush_info_edition_int": 2,
+    "zbrush_info_version_float": 2027.0009765625
+  },
+  "environment": {
+    "adapter_package": "dcc-mcp-zbrush",
+    "adapter_version": "0.2.32",
+    "core_package": "dcc-mcp-core",
+    "core_version": "0.20.52",
+    "host_product": "ZBrush",
+    "host_python_version": "3.11.9",
+    "host_version": "2027.0.1",
+    "min_python": "3.10",
+    "python_application": "CPython",
+    "python_version": "3.12.10",
+    "real_host_probe_origin": "this_run",
+    "scope": "One real ZBrush 2027.0.1 GUI session: real in-host SDK calls, real socket-bridge JSON-RPC work on a real mesh, and real MCP tool returns from the sidecar bound to that host. Includes an honest main-thread affinity limitation and a clean process/port teardown.",
+    "sidecar_gateway_port": 0,
+    "signed_product_version": "2027, 0, 1, 1",
+    "verification_level": "real_host_tool_returns_recorded_and_self_consistency_verified",
+    "zbrush_host_executed_this_run": true,
+    "zbrush_mcp_instances_this_run": 1
+  },
+  "model_attribution": [
+    {
+      "basis": "No accepted task configuration record for the live-demonstration scoping stage was available to this run.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Three-layer live-host demonstration design",
+      "stage": "Planning",
+      "stage_id": "planning"
+    },
+    {
+      "basis": "The cube OBJ was authored as test geometry by the run harness; no generative artwork model was called.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Real quad-cube import geometry, no generative artwork",
+      "stage": "Creation",
+      "stage_id": "creation"
+    },
+    {
+      "basis": "The adapter and core sources predate this run; per-stage model configuration was not recorded.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "dcc-mcp-zbrush 0.2.32 and dcc-mcp-core 0.20.52 sources",
+      "stage": "Code",
+      "stage_id": "code"
+    },
+    {
+      "basis": "No reference-generation model call is part of a real-host tool-return ledger.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Evidence ledger and bilingual reports",
+      "stage": "Reference generation",
+      "stage_id": "reference"
+    },
+    {
+      "basis": "No media retouching and no generated hero image were produced for this entry.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "No host media, no hero diagram",
+      "stage": "Post-production",
+      "stage_id": "post_production"
+    },
+    {
+      "basis": "No independent exact-head review run is recorded for this Draft PR; review remains a separate gate.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Draft case, not accepted",
+      "stage": "Independent review",
+      "stage_id": "review"
+    }
+  ],
+  "not_claimed": [
+    "That any viewport screenshot, render, turntable, video or host pixel capture was produced; the content-free GUI diagnostic did not pass.",
+    "That the four affinity:main tools (get_session_info, get_scene_info, list_subtools, execute_python) work over MCP HTTP in sidecar mode; they genuinely returned THREAD_AFFINITY_UNAVAILABLE.",
+    "That the main-thread dispatcher limitation was fixed, patched or reviewed as part of this showcase.",
+    "That inspect_active_mesh succeeded on the startup SimpleBrush; it failed and the failure is retained.",
+    "That the live session can be reproduced by verify_live_host_evidence.py; the verifier checks retained evidence only.",
+    "That this case is selected for the gallery, merged, deployed or visible on a live page.",
+    "That a formal approval, independent exact-head review, CI gate or release authorization was completed.",
+    "Any private path, machine name, loopback address, internal task ID, token, credential or unredacted raw log."
+  ],
+  "publication_decision": {
+    "case_count_in_set": 5,
+    "decision_file": "unlisted-cases.json",
+    "reason": "Real host tool returns and real geometry artifacts are present, but the entry has no accepted gallery card, no independent exact-head review and no production-reuse record. Registered as an unlisted review case in the same Draft PR. Selection, review, merge and deploy read-back remain separate gates.",
+    "status": "unlisted_review_real_host_evidence_pending_acceptance"
+  },
+  "real_tool_return_failures": [
+    {
+      "layer": "layer0_in_host_main_thread",
+      "method": "inspect_active_mesh",
+      "reason": "ValueError: Unable to begin a Script tool editing-session (startup tool is SimpleBrush, not a Polymesh3D)."
+    },
+    {
+      "layer": "layer1_tcp_jsonrpc",
+      "method": "inspect_active_mesh",
+      "reason": "ValueError: Unable to begin a Script tool editing-session (same startup tool, before the real OBJ import)."
+    },
+    {
+      "layer": "layer2_mcp_http",
+      "method": "zbrush_scripting__get_session_info",
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+    },
+    {
+      "layer": "layer2_mcp_http",
+      "method": "zbrush_scene__get_scene_info",
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+    },
+    {
+      "layer": "layer2_mcp_http",
+      "method": "list_subtools",
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+    },
+    {
+      "layer": "layer2_mcp_http",
+      "method": "execute_python",
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+    }
+  ],
+  "revision_notes": [
+    {
+      "change": "Initial real-host demonstration: one ZBrush 2027.0.1 GUI session with real in-host SDK calls, real socket-bridge JSON-RPC work (import, subdivide, measure, export) and real MCP tool returns. Main-thread affinity limitation, failed mesh probes, missing viewport media, gallery acceptance and independent review are explicitly NOT_RUN/NOT_CLAIMED.",
+      "date": "2026-11-03",
+      "version": "0.2.32 (draft case)"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "zbrush-mcp-live-host-demonstration",
+  "status_note": "A real ZBrush 2027.0.1 host did real work and returned real tool returns; 4 main-affinity MCP calls remain genuinely blocked in sidecar mode, no viewport media is claimed, and the case is unlisted/review only.",
+  "verification_level": "real_host_tool_returns_recorded_and_self_consistency_verified"
+}

@@ -1,0 +1,403 @@
+{
+  "deployment": {
+    "adapter_package": "dcc-mcp-zbrush",
+    "adapter_version": "0.2.32",
+    "bridge_module": "bridge/plugin/mcp_socket_bridge.py",
+    "bridge_module_sha256": "ae8999410015bf335d8106fcf26a7c03f61d87a6828bc47acb04c7fe81d806c9",
+    "bridge_socket": "loopback TCP port 19876",
+    "core_package": "dcc-mcp-core",
+    "core_version": "0.20.52",
+    "gateway_port": 0,
+    "install_id": "zbrush-live-demonstration-2027.0.1-disposable",
+    "main_thread_pump": "Windows user32 SetTimer driving zbc.update(redraw_ui=True)",
+    "mcp_endpoint": "loopback TCP port 19877, path /mcp",
+    "mode": "sidecar",
+    "startup_hook": "ZStartup/Python/init.py executed as __main__ inside the host VM",
+    "user_assets_dir": "disposable copy; QuickSave and Scratch paths redirected to the run output"
+  },
+  "host": {
+    "active_subtool_index": 0,
+    "active_tool_at_start": "SimpleBrush",
+    "authenticode_signature": "Valid",
+    "embedded_python": "3.11.9",
+    "executable_sha256": "94FCFEC1070FB008B5687DBA868182DEA97D924738115E1956A3E083B63CD456",
+    "product": "ZBrush",
+    "public_zbrush_commands_callables": 149,
+    "rez_package_version": "2027.0.1",
+    "signed_product_version": "2027, 0, 1, 1",
+    "subtool_count_at_start": 1,
+    "zbrush_info_edition_int": 2,
+    "zbrush_info_version_float": 2027.0009765625
+  },
+  "layer0_in_host_main_thread": {
+    "artifact": {
+      "path": "host_measured_values.json (raw, private) -> live_host_evidence.json (derived, public)",
+      "sha256_raw": "e3c7e936ace108de26c548b8f6ecfb8ccb05897051772dd24266dadb37baa64b"
+    },
+    "call_count": 5,
+    "calls": [
+      {
+        "elapsed_ms": 0.5,
+        "method": "get_session_info",
+        "ok": true
+      },
+      {
+        "elapsed_ms": 0.02,
+        "method": "get_scene_info",
+        "ok": true
+      },
+      {
+        "elapsed_ms": 0.02,
+        "method": "list_subtools",
+        "ok": true
+      },
+      {
+        "elapsed_ms": 3.08,
+        "method": "inspect_active_mesh",
+        "ok": false
+      },
+      {
+        "elapsed_ms": 7.5,
+        "method": "execute_python",
+        "ok": true
+      }
+    ],
+    "description": "Real bridge handlers invoked directly inside the ZBrush embedded Python VM on the host main thread, without any network transport.",
+    "honest_failure": {
+      "error": "ValueError: Unable to begin a Script tool editing-session.",
+      "method": "inspect_active_mesh",
+      "reason": "The session starts on SimpleBrush, which is not a Polymesh3D. query_mesh3d legitimately refuses. A real polymesh is imported in Layer 1 before mesh inspection is retried."
+    },
+    "reversible_state_mutation": {
+      "after": 64.05000305175781,
+      "before": 64.0,
+      "changed": true,
+      "control": "Draw:DrawSize",
+      "performed": true,
+      "restored": 64.0,
+      "reversible": true
+    },
+    "sdk_identity": {
+      "edition_int": 2,
+      "version_float": 2027.0009765625
+    }
+  },
+  "layer1_tcp_jsonrpc": {
+    "artifacts": {
+      "live_exported.obj": {
+        "bytes": 1057,
+        "sha256": "1a389c303c08ac1a6f11437fffd6f0bc8a354883850a4846761ef5d949ac423c"
+      },
+      "live_input_cube.obj": {
+        "bytes": 219,
+        "sha256": "90ce581309a5d5e6bb3a788e87acfb3fd516dde9386dae497bc4e7dbd9e6b845"
+      }
+    },
+    "call_count": 10,
+    "calls": [
+      {
+        "method": "ping",
+        "ok": true
+      },
+      {
+        "method": "get_scene_info",
+        "ok": true
+      },
+      {
+        "method": "get_session_info",
+        "ok": true
+      },
+      {
+        "method": "inspect_active_mesh",
+        "ok": false
+      },
+      {
+        "method": "import_to_scene",
+        "ok": true
+      },
+      {
+        "method": "list_subtools",
+        "ok": true
+      },
+      {
+        "method": "inspect_active_mesh",
+        "ok": true
+      },
+      {
+        "method": "refine_active_subtool",
+        "ok": true
+      },
+      {
+        "method": "inspect_active_mesh",
+        "ok": true
+      },
+      {
+        "method": "export_active_subtool_obj",
+        "ok": true
+      }
+    ],
+    "description": "Real JSON-RPC requests sent over the socket bridge to the live ZBrush VM. The main-thread pump dispatches each request to the genuine SDK handlers and returns real values.",
+    "export_active_subtool_obj": {
+      "ok": true,
+      "output_artifact": "live_exported.obj"
+    },
+    "import_to_scene": {
+      "imported_nodes": [
+        "live_input_cube"
+      ],
+      "source_artifact": "live_input_cube.obj",
+      "source_face_count": 6,
+      "source_vertex_count": 8
+    },
+    "mesh_after_refine": {
+      "face_count": 24,
+      "has_uvs": false,
+      "mesh_area": 11.936315536499023,
+      "point_count": 26,
+      "solid": true
+    },
+    "mesh_before_refine": {
+      "face_count": 6,
+      "has_uvs": false,
+      "mesh_area": 24.0,
+      "point_count": 8,
+      "solid": true
+    },
+    "pump_operational": true,
+    "refine_active_subtool": {
+      "subdivision_levels": 1
+    }
+  },
+  "layer2_mcp_http": {
+    "blocked_calls": [
+      {
+        "error": "handler error: THREAD_AFFINITY_UNAVAILABLE: action 'zbrush_scripting__get_session_info' declares thread_affinity=main, but no DeferredExecutor is wired",
+        "is_error": true,
+        "tool": "zbrush_scripting__get_session_info"
+      },
+      {
+        "error": "handler error: THREAD_AFFINITY_UNAVAILABLE: action 'zbrush_scene__get_scene_info' declares thread_affinity=main, but no DeferredExecutor is wired",
+        "is_error": true,
+        "tool": "zbrush_scene__get_scene_info"
+      },
+      {
+        "error": "handler error: THREAD_AFFINITY_UNAVAILABLE: action 'zbrush_scene__list_subtools' declares thread_affinity=main, but no DeferredExecutor is wired",
+        "is_error": true,
+        "tool": "list_subtools"
+      },
+      {
+        "error": "handler error: THREAD_AFFINITY_UNAVAILABLE: action 'zbrush_scripting__execute_python' declares thread_affinity=main, but no DeferredExecutor is wired",
+        "is_error": true,
+        "tool": "execute_python"
+      }
+    ],
+    "description": "Real MCP initialize, tools/list and tools/call requests over the sidecar HTTP /mcp endpoint, connected to the live ZBrush bridge.",
+    "finding": "Real MCP tools/call succeeded for affinity:any tools. ZBrush tools declare affinity: main; in sidecar mode no host QueueDispatcher/BlockingDispatcher is attached, so core returns THREAD_AFFINITY_UNAVAILABLE instead of dispatching. The same tools do real work through the socket-bridge JSON-RPC path (Layer 1).",
+    "initialize": {
+      "protocol_version": "2025-06-18",
+      "server_name": "dcc-mcp-zbrush",
+      "server_version": "0.2.32"
+    },
+    "main_affinity_blocked_count": 4,
+    "real_tools_call_count": 7,
+    "root_cause": "In sidecar mode dcc_mcp_core/_runtime/sidecar_skill_server.py makes attach_dispatcher a no-op and dcc_mcp_core/_server/inprocess_executor.py resolve_host_dispatcher() returns None (host_dispatcher_attached=False). Tools declaring thread_affinity=main cannot be deferred, so the Rust dispatcher returns THREAD_AFFINITY_UNAVAILABLE. Only affinity:any tools execute.",
+    "server_ready": true,
+    "server_ready_elapsed_s": 2.03,
+    "server_ready_signal": "server_log_listening_line",
+    "successful_calls": [
+      {
+        "is_error": false,
+        "return_kind": "real skill catalog from the running sidecar",
+        "tool": "list_skills"
+      },
+      {
+        "arguments": {
+          "skill_name": "zbrush-dialog"
+        },
+        "is_error": false,
+        "return": {
+          "activated_groups": [],
+          "already_loaded": [],
+          "available_groups": [],
+          "loaded": true,
+          "newly_loaded": [
+            "zbrush-dialog"
+          ],
+          "partial": false,
+          "registered_tools": [
+            "zbrush_dialog__get_active_dialog",
+            "zbrush_dialog__click_dialog_button"
+          ],
+          "tool_count": 2,
+          "tools": [
+            {
+              "annotations": {
+                "destructive_hint": true,
+                "idempotent_hint": false,
+                "read_only_hint": false
+              },
+              "description": "Click one labelled button (for example OK, Cancel, Yes, No) on the modal ZBrush note that blocks ZBrush, then verify that the bridge answers again. Reads the window first, matches exactly one visible label, posts one mouse click at its centre, and returns dismissed=true only when ZBrush is free. Refuses when no dialog blocks ZBrush unless force=true.",
+              "inputSchema": {
+                "properties": {
+                  "allow_destructive": {
+                    "default": false,
+                    "description": "Confirm a destructive note (delete, overwrite, discard, undo). Set only after the user approved; Cancel never needs it.",
+                    "type": "boolean"
+                  },
+                  "button_name": {
+                    "description": "Button label exactly as returned in button_candidates by get_active_dialog.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "force": {
+                    "default": false,
+                    "description": "Click even when the bridge answers (a non-blocking note).",
+                    "type": "boolean"
+                  },
+                  "match": {
+                    "default": "exact",
+                    "description": "How button_name is compared with the visible labels (case-insensitive).",
+                    "enum": [
+                      "exact",
+                      "contains"
+                    ],
+                    "type": "string"
+                  },
+                  "output_dir": {
+                    "description": "Optional existing directory for the PNG screenshot taken before the click.",
+                    "type": "string"
+                  },
+                  "probe_timeout_secs": {
+                    "default": 3,
+                    "description": "Seconds to wait for each bridge ping.",
+                    "maximum": 30,
+                    "minimum": 0.5,
+                    "type": "number"
+                  },
+                  "process_id": {
+                    "description": "Optional ZBrush process id when several ZBrush processes run.",
+                    "minimum": 1,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "button_name"
+                ],
+                "type": "object"
+              },
+              "metadata": {
+                "dcc": {
+                  "affinity": "any",
+                  "enforceThreadAffinity": true,
+                  "execution": "sync",
+                  "jobStrategy": "monolithic",
+                  "timeoutHintSecs": 180
+                }
+              },
+              "name": "zbrush_dialog__click_dialog_button",
+              "outputSchema": null,
+              "skill_name": "zbrush-dialog"
+            },
+            {
+              "annotations": {
+                "destructive_hint": false,
+                "idempotent_hint": true,
+                "read_only_hint": true
+              },
+              "description": "Detect whether a modal ZBrush note or popup dialog is blocking ZBrush, and read it. Probes the socket bridge from the sidecar with a short timeout (it never queues work on the ZBrush main thread); when the status is blocked, captures the ZBrush window (ZBrush draws its notes inside it) or a message box window, and returns the OCR dialog_text, the clickable button_candidates, dialog_kind (informational, question, destructive_confirmation), and the screenshot path.",
+              "inputSchema": {
+                "properties": {
+                  "force_capture": {
+                    "default": false,
+                    "description": "Capture and read the window even when ZBrush answers the bridge, for example to read a non-blocking note.",
+                    "type": "boolean"
+                  },
+                  "output_dir": {
+                    "description": "Optional existing directory for the PNG screenshot (default is the system temp directory).",
+                    "type": "string"
+                  },
+                  "probe_timeout_secs": {
+                    "default": 3,
+                    "description": "Seconds to wait for the bridge ping before ZBrush counts as blocked.",
+                    "maximum": 30,
+                    "minimum": 0.5,
+                    "type": "number"
+                  },
+                  "process_id": {
+                    "description": "Optional ZBrush process id when several ZBrush processes run.",
+                    "minimum": 1,
+                    "type": "integer"
+                  }
+                },
+                "type": "object"
+              },
+              "metadata": {
+                "dcc": {
+                  "affinity": "any",
+                  "enforceThreadAffinity": true,
+                  "execution": "sync",
+                  "jobStrategy": "monolithic",
+                  "timeoutHintSecs": 120
+                }
+              },
+              "name": "zbrush_dialog__get_active_dialog",
+              "outputSchema": null,
+              "skill_name": "zbrush-dialog"
+            }
+          ]
+        },
+        "tool": "load_skill"
+      },
+      {
+        "is_error": false,
+        "return": {
+          "context": {
+            "active_method": null,
+            "bridge_state": "ready",
+            "dialog_open": false,
+            "zbrush_blocked": false
+          },
+          "error": null,
+          "message": "No modal dialog is blocking ZBrush",
+          "prompt": null,
+          "success": true
+        },
+        "tool": "zbrush_dialog__get_active_dialog"
+      }
+    ],
+    "successful_tools_call_count": 3,
+    "tools_list": {
+      "discovered_tool_count": 32,
+      "next_cursor": "3332",
+      "tool_name_source": "tools/list"
+    }
+  },
+  "lifecycle": {
+    "bridge_port_listeners_after": 0,
+    "closed_gracefully": true,
+    "content_free_gui_diagnostic": {
+      "claim": "No viewport screenshot or video is claimed by this entry.",
+      "collected": true,
+      "contains_pixels": false,
+      "proof_passed": false,
+      "reason": "root_overlap"
+    },
+    "driver_exit_code": 0,
+    "gui_process_launched": true,
+    "layer0_ready": true,
+    "mcp_port_listeners_after": 0,
+    "post_zbrush_process_count": 0,
+    "pre_zbrush_process_count": 0,
+    "window_handle_recorded": true
+  },
+  "note": "Derived, redacted ledger of one real ZBrush 2027.0.1 GUI session. Every value below is taken from a real tool return produced during that session. Filesystem paths, machine names, loopback addresses, process identifiers and internal task identifiers were removed before publication. The raw captures are retained privately; this file is the public evidence.",
+  "publication": {
+    "deploy": false,
+    "gallery_selection": false,
+    "independent_exact_head_review": false,
+    "merge": false,
+    "status": "draft_unlisted_review"
+  },
+  "recorded_at": "2026-11-03",
+  "schema": "zbrush-mcp-live-host-demonstration/1"
+}

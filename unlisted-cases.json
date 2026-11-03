@@ -40,6 +40,11 @@
       "slug": "zbrush-mcp-recovery-and-lifecycle",
       "status": "review",
       "reason": "Contract-verified postsend unknown-outcome, blocked-dialog and install-lifecycle matrix with source-invariant rechecks, but no live fault injection, no live MCP tool returns and no host media. Retained for review; not selected as a gallery card."
+    },
+    {
+      "slug": "zbrush-mcp-live-host-demonstration",
+      "status": "review",
+      "reason": "One real ZBrush 2027.0.1 GUI session produced real in-host SDK returns, real socket-bridge JSON-RPC work (OBJ import, one subdivision, mesh measurement, OBJ export) and real MCP tool returns, with two real OBJ artifacts published and hashed. Four main-affinity MCP calls genuinely return THREAD_AFFINITY_UNAVAILABLE in sidecar mode, no viewport media is claimed (content-free GUI diagnostic did not pass), and there is no gallery acceptance record or independent exact-head review. Retained for review; not selected as a gallery card."
     }
   ]
 }

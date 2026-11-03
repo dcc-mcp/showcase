@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "name": "schema_and_scope",
+      "observed": "Live-host demonstration ledger for ZBrush via dcc-mcp-zbrush sidecar; host was really launched, not a contract-only audit.",
+      "result": "pass"
+    },
+    {
+      "name": "real_host_identity",
+      "observed": "Signed ProductVersion 2027, 0, 1, 1; zbrush_info(0)=2027.0009765625, zbrush_info(1)=2; embedded Python 3.11.9; 149 public callables; executable SHA-256 recorded.",
+      "result": "pass"
+    },
+    {
+      "name": "layer0_real_handler_calls",
+      "observed": "5 real in-host handler calls; inspect_active_mesh honestly fails on the default SimpleBrush and is recorded, not hidden.",
+      "result": "pass"
+    },
+    {
+      "name": "real_reversible_state_mutation",
+      "observed": "Draw:DrawSize read 64.0, set to 64.05000305175781, read back changed, restored to 64.0. A real host-side get/set/restore, not a mock.",
+      "result": "pass"
+    },
+    {
+      "name": "honest_mesh_failure_boundary",
+      "observed": "query_mesh3d refuses the starting brush tool in both Layer 0 and Layer 1; the failure is retained before a real polymesh is imported.",
+      "result": "pass"
+    },
+    {
+      "name": "layer1_real_jsonrpc_sequence",
+      "observed": "10 real TCP JSON-RPC calls through the host main-thread pump: ping, session/scene reads, a failed mesh probe, real OBJ import, real subdivision, two successful mesh reads and a real OBJ export.",
+      "result": "pass"
+    },
+    {
+      "name": "real_geometry_change",
+      "observed": "Imported quad cube: 8 points / 6 faces / area 24.0. After one real Divide: 26 points / 24 faces / area 11.936315536499023. The mutated mesh was exported to a real OBJ file.",
+      "result": "pass"
+    },
+    {
+      "name": "real_obj_artifact_hashes",
+      "observed": "live_exported.obj: 1057 B sha256 1a389c303c08… ok; live_input_cube.obj: 219 B sha256 90ce581309a5… ok",
+      "result": "pass"
+    },
+    {
+      "name": "real_obj_artifact_geometry",
+      "observed": "Input OBJ: 8 vertices / 6 quad faces. Exported OBJ: 26 vertices / 24 quad faces. The exported mesh is the subdivided result, not a copy of the input.",
+      "result": "pass"
+    },
+    {
+      "name": "layer2_real_mcp_server",
+      "observed": "Real MCP initialize and tools/list over /mcp: dcc-mcp-zbrush 0.2.32, protocol 2025-06-18, 32 tools discovered on page 1 (cursor 3332).",
+      "result": "pass"
+    },
+    {
+      "name": "layer2_real_tool_returns",
+      "observed": "3 real successful tools/call returns (list_skills, load_skill, get_active_dialog); the dialog tool reports bridge_state=ready against the live host. 4 real tools/call returns are recorded as errors.",
+      "result": "pass"
+    },
+    {
+      "name": "documented_thread_affinity_limitation",
+      "observed": "All 4 blocked calls carry THREAD_AFFINITY_UNAVAILABLE. Root cause is recorded: sidecar mode attaches no DeferredExecutor for main-affinity tools. This is a real product limitation, not a demo failure.",
+      "result": "pass"
+    },
+    {
+      "name": "clean_host_lifecycle",
+      "observed": "One isolated GUI process launched from a clean state, driver exit 0, graceful close, 0 ZBrush processes and 0 listeners left behind.",
+      "result": "pass"
+    },
+    {
+      "name": "no_viewport_capture_claim",
+      "observed": "The content-free GUI diagnostic did not pass (root_overlap); no viewport image or video is claimed, and the case is not gallery selected, merged or deployed.",
+      "result": "pass"
+    },
+    {
+      "name": "no_private_paths_or_ids",
+      "observed": "Private-pattern hits: [].",
+      "result": "pass"
+    }
+  ],
+  "counts": {
+    "checks": 15,
+    "checks_fail": 0,
+    "checks_pass": 15,
+    "exported_faces": 24,
+    "input_faces": 6,
+    "layer0_in_host_calls": 5,
+    "layer1_tcp_jsonrpc_calls": 10,
+    "layer2_main_affinity_blocked": 4,
+    "layer2_mcp_tools_calls": 7,
+    "layer2_successful_calls": 3,
+    "new_viewport_captures": 0
+  },
+  "gallery_published": false,
+  "note": "Verifies the published, redacted evidence ledger and the two real OBJ artifacts. It does not re-run ZBrush or re-issue MCP calls; those happened once in the recorded live session.",
+  "real_host_executed": "recorded_in_evidence",
+  "schema_version": 1,
+  "slug": "zbrush-mcp-live-host-demonstration",
+  "verdict": "pass",
+  "verification_level": "retained_real_host_evidence_self_consistency"
+}
