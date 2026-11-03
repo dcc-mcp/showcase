@@ -3,7 +3,10 @@
 This case is **not** a generated picture, a capability inventory, or a record of
 loading MCP skills. It is a machine-readable ledger of one real ZBrush 2027.0.1
 GUI session in which `dcc-mcp-zbrush` actually did work on a real scene and
-returned real values from real tool calls.
+returned real values from real tool calls. The scene work ran through the
+adapter's socket-bridge JSON-RPC layer; MCP `tools/call` succeeded only for
+`affinity: any` tools, so this is **not** a completed MCP capability
+demonstration (see **Acceptance boundary**).
 
 ## What really happened
 
@@ -18,7 +21,7 @@ listeners behind.
 | --- | --- | --- | --- |
 | 0 | direct in-host invocation | 5 | Real `zbrush.commands` SDK values and a real reversible state mutation |
 | 1 | JSON-RPC over the socket bridge | 10 | The main-thread pump dispatches real SDK handlers: import, subdivide, measure, export |
-| 2 | MCP `initialize` / `tools/list` / `tools/call` over `/mcp` | 7 | A real MCP server bound to the live host returns real tool results |
+| 2 | MCP `initialize` / `tools/list` / `tools/call` over `/mcp` | 7 | A real MCP server bound to the live host returns 3 real tool results and 4 real main-affinity errors |
 
 ### Layer 0 — inside the real host VM
 
@@ -56,20 +59,45 @@ MCP tool return that reaches the live host bridge.
 
 Four further `tools/call` results returned real `isError: true` responses:
 `THREAD_AFFINITY_UNAVAILABLE`. The tools `get_session_info`, `get_scene_info`,
-`list_subtools` and `execute_python` declare `thread_affinity=main`, but in sidecar
-mode `dcc-mcp-core` attaches no `DeferredExecutor`
-(`attach_dispatcher` is a no-op and `host_dispatcher_attached=False`). So the Rust
-dispatcher refuses them. **This is a genuine, reproducible product limitation, not
-a demonstration failure.** The same tools do real work through Layer 1's socket
-bridge. Fixing it belongs to the core sidecar dispatcher design and is out of scope
-for this showcase.
+`list_subtools` and `execute_python` declare `thread_affinity=main`. Core is not
+the defect: with no host dispatcher attached (`host_dispatcher_attached=False`)
+its Rust dispatcher correctly refuses declared main-affinity actions rather than
+running them off the host main thread. The missing wiring is in the adapter. In
+sidecar mode `dcc-mcp-zbrush` registers only its in-process executor
+(`_executor.py` calls `register_inprocess_executor()` and attaches no
+`QueueDispatcher` or `BlockingDispatcher`), and the sidecar main loop (`cli.py`)
+only sleeps instead of pumping main-thread work. Core's `attach_dispatcher()` is
+a no-op in sidecar mode, so `resolve_host_dispatcher()` returns `None` and only
+`affinity: any` tools execute over MCP HTTP. **This is an unfixed adapter-side
+wiring defect, not a Core design defect and not a demonstration failure.** The
+same tools do real work through Layer 1's socket bridge, which has its own host
+main-thread pump. Closing this gap requires a separately authorized adapter
+change; this entry does not make that change, does not change Core, and does not
+claim the defect is fixed.
+
+## Acceptance boundary
+
+**"A complete capability demonstration using MCP to do real work" is NOT closed
+by this case.** Only 3 of 7 MCP `tools/call` succeeded, and all 3 were
+`affinity: any` catalog or dialog tools. The four real scene-work tools returned
+`THREAD_AFFINITY_UNAVAILABLE`. The OBJ import, subdivision, measurement and
+export were performed through Layer 1's socket-bridge JSON-RPC, which is a
+transport inside `dcc-mcp-zbrush` but is **not** the MCP `tools/call` path.
+Socket-bridge success therefore does not establish that MCP HTTP can complete
+ZBrush scene work. The case stays a Draft, unlisted, media-free, unmerged and
+undeployed evidence archive; no acceptance, approval, gallery selection or
+release is claimed.
 
 ## What is deliberately not claimed
 
 - No viewport screenshot, render, turntable or video. A content-free GUI window
   diagnostic was collected but reported `proof_passed: false` (`root_overlap`),
   so no host media is claimed. The OBJ artifacts are real geometry, not images.
-- No claim that the four `affinity: main` tools work over MCP HTTP in sidecar mode.
+- No claim that MCP HTTP `tools/call` completed ZBrush scene work, or that the
+  "complete capability demonstration" acceptance is met. Only 3 of 7 calls
+  succeeded (`affinity: any` catalog/dialog tools); the four `affinity: main`
+  scene tools returned `THREAD_AFFINITY_UNAVAILABLE`. The real OBJ import,
+  subdivision and export are Layer 1 socket-bridge JSON-RPC, not MCP `tools/call`.
 - No gallery selection, merge, deployment or live-page read-back. This case is
   registered as an unlisted review case in `unlisted-cases.json` in the same Draft
   PR.
@@ -77,6 +105,9 @@ for this showcase.
 - No private paths, machine names, loopback addresses, task IDs or credentials.
   The published ledger is a redacted derivation of the privately retained raw
   captures.
+- No full raw TCP/MCP capture set and no independently verifiable raw-to-derived
+  transform receipt. Only the redacted derived ledger plus recorded hashes are
+  published, so a reader cannot re-derive the ledger from this entry alone.
 
 ## Reproducing the verification
 

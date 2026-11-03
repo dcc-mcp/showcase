@@ -34,13 +34,23 @@
     },
     {
       "name": "layer2_real_mcp_tool_returns",
-      "observed": "Real MCP initialize (dcc-mcp-zbrush 0.2.32, protocol 2025-06-18), tools/list (32 tools, nextCursor 3332) and 7 real tools/call over /mcp. 3 succeeded: list_skills, load_skill, and zbrush_dialog__get_active_dialog (success=true, bridge_state=ready, zbrush_blocked=false).",
+      "observed": "Real MCP initialize (dcc-mcp-zbrush 0.2.32, protocol 2025-06-18), tools/list (32 tools, nextCursor 3332) and 7 real tools/call over /mcp. Only 3 succeeded, all affinity:any catalog/dialog tools: list_skills, load_skill, and zbrush_dialog__get_active_dialog (success=true, bridge_state=ready, zbrush_blocked=false). The 4 main-affinity scene tools genuinely failed, so MCP HTTP scene work is not demonstrated.",
       "result": "pass"
     },
     {
       "name": "documented_main_affinity_limitation",
-      "observed": "4 real tools/call returned isError=true with THREAD_AFFINITY_UNAVAILABLE. In sidecar mode attach_dispatcher is a no-op and host_dispatcher_attached=False, so main-affinity tools cannot be deferred. Recorded as a genuine product limitation with its root cause, not suppressed or fixed out of scope.",
+      "observed": "4 real tools/call returned isError=true with THREAD_AFFINITY_UNAVAILABLE. With no host dispatcher attached (host_dispatcher_attached=False) Core correctly refuses declared main-affinity actions. The missing wiring is adapter-side: _executor.py registers only the in-process executor and cli.py's sidecar main loop only sleeps, so no main-thread pump exists. Recorded as an unfixed adapter wiring defect, not a Core design defect; this entry changes neither and does not claim a fix.",
       "result": "pass"
+    },
+    {
+      "name": "mcp_http_scene_work_acceptance",
+      "observed": "NOT CLOSED. 3 of 7 MCP tools/call succeeded, all affinity:any catalog/dialog tools; the 4 main-affinity scene tools returned THREAD_AFFINITY_UNAVAILABLE. The real OBJ import, subdivision, measurement and export were done over Layer 1 socket-bridge JSON-RPC, not MCP tools/call. Socket-bridge success does not establish that MCP HTTP can complete ZBrush scene work, so the requested full MCP capability demonstration remains open. Closing it needs a separately authorized adapter-side dispatcher fix and a fresh live MCP HTTP scene-work run.",
+      "result": "not_run"
+    },
+    {
+      "name": "raw_capture_binding_and_derived_ledger_receipt",
+      "observed": "Only a redacted derived ledger and recorded SHA-256 hashes are published. The full raw TCP/MCP capture set and a reproducible raw-to-derived transform receipt are not published, so the derivation cannot be independently re-derived by a reader; the raw captures are retained privately.",
+      "result": "not_run"
     },
     {
       "name": "honest_failure_retention",
@@ -54,7 +64,7 @@
     },
     {
       "name": "evidence_verifier",
-      "observed": "python verify_live_host_evidence.py returned verdict=pass with 15 checks, 15 pass and 0 fail; result written to live_host_evidence_result.json. It recomputes host identity, mutation reversibility, geometry delta, OBJ hashes and geometry, MCP counts, the affinity finding, lifecycle cleanup and a private-data scan.",
+      "observed": "python verify_live_host_evidence.py returned verdict=pass with 17 checks, 17 pass and 0 fail; result written to live_host_evidence_result.json. It recomputes host identity, mutation reversibility, geometry delta, OBJ hashes and geometry, MCP counts, the adapter-side affinity attribution, the not-closed acceptance boundary, lifecycle cleanup and a private-data scan.",
       "result": "pass"
     },
     {
@@ -134,8 +144,8 @@
     "reversible_mutation_after": 64.05000305175781,
     "reversible_mutation_before": 64.0,
     "reversible_mutation_restored": 64.0,
-    "verifier_checks": 15,
-    "verifier_checks_pass": 15,
+    "verifier_checks": 17,
+    "verifier_checks_pass": 17,
     "verifier_checks_fail": 0,
     "zbrush_info_edition_int": 2,
     "zbrush_info_version_float": 2027.0009765625
@@ -152,7 +162,7 @@
     "python_application": "CPython",
     "python_version": "3.12.10",
     "real_host_probe_origin": "this_run",
-    "scope": "One real ZBrush 2027.0.1 GUI session: real in-host SDK calls, real socket-bridge JSON-RPC work on a real mesh, and real MCP tool returns from the sidecar bound to that host. Includes an honest main-thread affinity limitation and a clean process/port teardown.",
+    "scope": "One real ZBrush 2027.0.1 GUI session: real in-host SDK calls, real socket-bridge JSON-RPC work on a real mesh, and real MCP tool returns from the sidecar bound to that host. Only 3 of 7 MCP tools/call succeeded; the 4 main-affinity scene tools were blocked by an unfixed adapter-side dispatcher wiring gap, not a Core defect. MCP HTTP scene work and the full capability-demonstration acceptance are not established. Includes a clean process/port teardown.",
     "sidecar_gateway_port": 0,
     "signed_product_version": "2027, 0, 1, 1",
     "verification_level": "real_host_tool_returns_recorded_and_self_consistency_verified",
@@ -217,18 +227,19 @@
   ],
   "not_claimed": [
     "That any viewport screenshot, render, turntable, video or host pixel capture was produced; the content-free GUI diagnostic did not pass.",
-    "That the four affinity:main tools (get_session_info, get_scene_info, list_subtools, execute_python) work over MCP HTTP in sidecar mode; they genuinely returned THREAD_AFFINITY_UNAVAILABLE.",
-    "That the main-thread dispatcher limitation was fixed, patched or reviewed as part of this showcase.",
+    "That MCP HTTP tools/call completed ZBrush scene work or that the full MCP capability-demonstration acceptance is met: only 3 of 7 calls succeeded (affinity:any catalog/dialog tools), the four affinity:main scene tools (get_session_info, get_scene_info, list_subtools, execute_python) genuinely returned THREAD_AFFINITY_UNAVAILABLE, and the real OBJ work was Layer 1 socket-bridge JSON-RPC.",
+    "That the main-thread dispatcher limitation was fixed, patched or reviewed as part of this showcase, or that Core is its defect: the missing wiring is adapter-side and remains unfixed.",
     "That inspect_active_mesh succeeded on the startup SimpleBrush; it failed and the failure is retained.",
     "That the live session can be reproduced by verify_live_host_evidence.py; the verifier checks retained evidence only.",
     "That this case is selected for the gallery, merged, deployed or visible on a live page.",
     "That a formal approval, independent exact-head review, CI gate or release authorization was completed.",
-    "Any private path, machine name, loopback address, internal task ID, token, credential or unredacted raw log."
+    "Any private path, machine name, loopback address, internal task ID, token, credential or unredacted raw log.",
+    "That the full raw TCP/MCP capture set or a reproducible raw-to-derived transform receipt was published; only the redacted derived ledger and recorded hashes are public."
   ],
   "publication_decision": {
     "case_count_in_set": 5,
     "decision_file": "unlisted-cases.json",
-    "reason": "Real host tool returns and real geometry artifacts are present, but the entry has no accepted gallery card, no independent exact-head review and no production-reuse record. Registered as an unlisted review case in the same Draft PR. Selection, review, merge and deploy read-back remain separate gates.",
+    "reason": "Real host tool returns and real geometry artifacts are present, but MCP HTTP scene work was not demonstrated: only 3 of 7 tools/call succeeded and the full capability-demonstration acceptance remains open. There is no accepted gallery card, no independent exact-head review and no production-reuse record. Registered as an unlisted review case in the same Draft PR. Selection, review, merge and deploy read-back remain separate gates.",
     "status": "unlisted_review_real_host_evidence_pending_acceptance"
   },
   "real_tool_return_failures": [
@@ -245,22 +256,22 @@
     {
       "layer": "layer2_mcp_http",
       "method": "zbrush_scripting__get_session_info",
-      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main. Core correctly refuses it because the adapter sidecar wires no host main-thread dispatcher (host_dispatcher_attached=False); the gap is adapter-side, not a Core defect."
     },
     {
       "layer": "layer2_mcp_http",
       "method": "zbrush_scene__get_scene_info",
-      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main. Core correctly refuses it because the adapter sidecar wires no host main-thread dispatcher (host_dispatcher_attached=False); the gap is adapter-side, not a Core defect."
     },
     {
       "layer": "layer2_mcp_http",
       "method": "list_subtools",
-      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main. Core correctly refuses it because the adapter sidecar wires no host main-thread dispatcher (host_dispatcher_attached=False); the gap is adapter-side, not a Core defect."
     },
     {
       "layer": "layer2_mcp_http",
       "method": "execute_python",
-      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main, but no DeferredExecutor is wired."
+      "reason": "THREAD_AFFINITY_UNAVAILABLE: declares thread_affinity=main. Core correctly refuses it because the adapter sidecar wires no host main-thread dispatcher (host_dispatcher_attached=False); the gap is adapter-side, not a Core defect."
     }
   ],
   "revision_notes": [
@@ -268,10 +279,15 @@
       "change": "Initial real-host demonstration: one ZBrush 2027.0.1 GUI session with real in-host SDK calls, real socket-bridge JSON-RPC work (import, subdivide, measure, export) and real MCP tool returns. Main-thread affinity limitation, failed mesh probes, missing viewport media, gallery acceptance and independent review are explicitly NOT_RUN/NOT_CLAIMED.",
       "date": "2026-11-03",
       "version": "0.2.32 (draft case)"
+    },
+    {
+      "change": "Corrected the root-cause attribution of the four THREAD_AFFINITY_UNAVAILABLE results from a Core design issue to an unfixed adapter-side sidecar wiring gap (in-process executor only, no main-thread pump); made the not-closed MCP HTTP scene-work acceptance boundary explicit; added honest raw-capture and acceptance NOT_RUN checks plus two new verifier checks. No Core or adapter code changed, no acceptance or approval claimed.",
+      "date": "2026-11-03",
+      "version": "0.2.32 (draft case, review correction 1)"
     }
   ],
   "schema_version": 1,
   "slug": "zbrush-mcp-live-host-demonstration",
-  "status_note": "A real ZBrush 2027.0.1 host did real work and returned real tool returns; 4 main-affinity MCP calls remain genuinely blocked in sidecar mode, no viewport media is claimed, and the case is unlisted/review only.",
+  "status_note": "A real ZBrush 2027.0.1 host did real work through the adapter socket-bridge JSON-RPC layer and returned real tool returns; only 3 of 7 MCP tools/call succeeded and the 4 main-affinity scene tools remain genuinely blocked by an unfixed adapter-side wiring gap, not a Core defect. The full MCP capability-demonstration acceptance is NOT closed; no viewport media is claimed, and the case stays Draft, unlisted, unmerged and undeployed.",
   "verification_level": "real_host_tool_returns_recorded_and_self_consistency_verified"
 }

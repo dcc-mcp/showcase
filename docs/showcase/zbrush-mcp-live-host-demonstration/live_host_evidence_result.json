@@ -57,7 +57,17 @@
     },
     {
       "name": "documented_thread_affinity_limitation",
-      "observed": "All 4 blocked calls carry THREAD_AFFINITY_UNAVAILABLE. Root cause is recorded: sidecar mode attaches no DeferredExecutor for main-affinity tools. This is a real product limitation, not a demo failure.",
+      "observed": "All 4 blocked calls carry THREAD_AFFINITY_UNAVAILABLE. The root cause is recorded as an adapter-side sidecar wiring gap (no host dispatcher and no main-thread pump), with Core correctly enforcing the declared affinity. It is not attributed to a Core design defect.",
+      "result": "pass"
+    },
+    {
+      "name": "correct_adapter_side_attribution",
+      "observed": "The four THREAD_AFFINITY_UNAVAILABLE results are attributed to a missing adapter-side host dispatcher and main-thread pump, not to a Core design defect; the entry makes no Core change and claims no fix.",
+      "result": "pass"
+    },
+    {
+      "name": "acceptance_boundary_not_closed",
+      "observed": "The full MCP capability-demonstration acceptance is explicitly NOT closed: only 3 of 7 MCP tools/call succeeded and the real OBJ work was done over the Layer 1 socket bridge, not MCP tools/call.",
       "result": "pass"
     },
     {
@@ -77,9 +87,9 @@
     }
   ],
   "counts": {
-    "checks": 15,
+    "checks": 17,
     "checks_fail": 0,
-    "checks_pass": 15,
+    "checks_pass": 17,
     "exported_faces": 24,
     "input_faces": 6,
     "layer0_in_host_calls": 5,

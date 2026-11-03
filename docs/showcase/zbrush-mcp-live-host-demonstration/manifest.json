@@ -7,25 +7,31 @@
   "core_version": "0.20.52",
   "files": [
     {
-      "bytes": 5382,
-      "path": "README.zh.md",
-      "sha256": "08e5dbb1444a45d361a2ee91fba6ab1a315ddcb3856058715e8766b20aa4c92e"
+      "bytes": 7743,
+      "path": "README.md",
+      "sha256": "4ec43392c6452fca9a2abe7975e5f54d1ffa772aabc9d582d5538cdd0a20fdcb"
     },
     {
-      "bytes": 15212,
+      "bytes": 7427,
+      "path": "README.zh.md",
+      "sha256": "b155bdfa2254c625cd043eecc79ee026de218c445a5d2be823b19cd3ee85b40f"
+    },
+    {
+      "bytes": 1057,
+      "path": "live_exported.obj",
+      "role": "Real OBJ exported by export_active_subtool_obj after one subdivision",
+      "sha256": "1a389c303c08ac1a6f11437fffd6f0bc8a354883850a4846761ef5d949ac423c"
+    },
+    {
+      "bytes": 16258,
       "path": "live_host_evidence.json",
       "role": "Redacted derived ledger of the real host tool returns",
-      "sha256": "7b9cbb0a720e7445d743bda9171d89934cc7c1fc63c585fbb939cbbf4657303c"
+      "sha256": "cef44bbd6ed11bcaf032af596553bbe824f33ca3ba2abc7af4fa72a70ab5a635"
     },
     {
-      "bytes": 12582,
-      "path": "verify_live_host_evidence.py",
-      "sha256": "7eacaeb3c51a43dd24cba2cf3a7ca59bc83c289434f9edfb106ba2d77144c944"
-    },
-    {
-      "bytes": 4430,
+      "bytes": 5104,
       "path": "live_host_evidence_result.json",
-      "sha256": "98ce9013433bdbe1d29b195f43e09efcf1041d2ed6ef34689bf312498d2cfa1d"
+      "sha256": "ccec9a1a014d4d648cd83416369ef25ead7832da506bbc502aa7b0005afb8104"
     },
     {
       "bytes": 219,
@@ -34,10 +40,9 @@
       "sha256": "90ce581309a5d5e6bb3a788e87acfb3fd516dde9386dae497bc4e7dbd9e6b845"
     },
     {
-      "bytes": 1057,
-      "path": "live_exported.obj",
-      "role": "Real OBJ exported by export_active_subtool_obj after one subdivision",
-      "sha256": "1a389c303c08ac1a6f11437fffd6f0bc8a354883850a4846761ef5d949ac423c"
+      "bytes": 13896,
+      "path": "verify_live_host_evidence.py",
+      "sha256": "4db2f1dd9219cb2c8f8ded80dafdf27a779494193aa25c361bf1a292f55f8ea9"
     }
   ],
   "publication_decision": "unlisted_review_real_host_evidence_pending_acceptance",

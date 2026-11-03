@@ -192,7 +192,7 @@
       }
     ],
     "description": "Real MCP initialize, tools/list and tools/call requests over the sidecar HTTP /mcp endpoint, connected to the live ZBrush bridge.",
-    "finding": "Real MCP tools/call succeeded for affinity:any tools. ZBrush tools declare affinity: main; in sidecar mode no host QueueDispatcher/BlockingDispatcher is attached, so core returns THREAD_AFFINITY_UNAVAILABLE instead of dispatching. The same tools do real work through the socket-bridge JSON-RPC path (Layer 1).",
+    "finding": "Real MCP tools/call succeeded only for affinity:any catalog and dialog tools; 3 of 7 calls succeeded. ZBrush scene tools declare affinity: main. Core is not the defect: with no host dispatcher attached (host_dispatcher_attached=False) its Rust dispatcher correctly refuses declared main-affinity actions rather than running them off the host main thread. The missing wiring is in the adapter, which registers only an in-process executor and runs a sleeping sidecar main loop with no main-thread pump. The same tools do real work through the socket-bridge JSON-RPC path (Layer 1), which does not establish that MCP HTTP can complete ZBrush scene work. The full MCP capability-demonstration acceptance is therefore not closed.",
     "initialize": {
       "protocol_version": "2025-06-18",
       "server_name": "dcc-mcp-zbrush",
@@ -200,7 +200,7 @@
     },
     "main_affinity_blocked_count": 4,
     "real_tools_call_count": 7,
-    "root_cause": "In sidecar mode dcc_mcp_core/_runtime/sidecar_skill_server.py makes attach_dispatcher a no-op and dcc_mcp_core/_server/inprocess_executor.py resolve_host_dispatcher() returns None (host_dispatcher_attached=False). Tools declaring thread_affinity=main cannot be deferred, so the Rust dispatcher returns THREAD_AFFINITY_UNAVAILABLE. Only affinity:any tools execute.",
+    "root_cause": "The adapter, not Core, is where the wiring is missing. In sidecar mode dcc-mcp-zbrush _executor.py calls only register_inprocess_executor() and attaches no host QueueDispatcher/BlockingDispatcher, while cli.py's sidecar main loop only sleeps and pumps no main-thread work. Core behaves as designed: sidecar_skill_server.py attach_dispatcher is a no-op and inprocess_executor.py resolve_host_dispatcher() returns None (host_dispatcher_attached=False), so the Rust dispatcher returns THREAD_AFFINITY_UNAVAILABLE for declared thread_affinity=main actions and only affinity:any tools execute. This is an unfixed adapter-side defect; this entry makes no Core change and claims no fix.",
     "server_ready": true,
     "server_ready_elapsed_s": 2.03,
     "server_ready_signal": "server_log_listening_line",
@@ -390,11 +390,13 @@
     "pre_zbrush_process_count": 0,
     "window_handle_recorded": true
   },
-  "note": "Derived, redacted ledger of one real ZBrush 2027.0.1 GUI session. Every value below is taken from a real tool return produced during that session. Filesystem paths, machine names, loopback addresses, process identifiers and internal task identifiers were removed before publication. The raw captures are retained privately; this file is the public evidence.",
+  "note": "Derived, redacted ledger of one real ZBrush 2027.0.1 GUI session. Every value below is taken from a real tool return produced during that session. Filesystem paths, machine names, loopback addresses, process identifiers and internal task identifiers were removed before publication. Only this derived ledger and recorded hashes are published: the full raw TCP/MCP capture set and a reproducible raw-to-derived transform receipt are not published, so a reader cannot independently re-derive this ledger from this entry. The raw captures are retained privately; this file is the public evidence.",
   "publication": {
+    "acceptance_closed": false,
     "deploy": false,
     "gallery_selection": false,
     "independent_exact_head_review": false,
+    "mcp_http_scene_work_demonstrated": false,
     "merge": false,
     "status": "draft_unlisted_review"
   },

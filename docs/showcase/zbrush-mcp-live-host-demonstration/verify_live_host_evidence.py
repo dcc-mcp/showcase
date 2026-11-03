@@ -187,9 +187,32 @@ def main():
         all("THREAD_AFFINITY_UNAVAILABLE" in c["error"] for c in blocked)
         and "host_dispatcher_attached=False" in l2["root_cause"]
         and "affinity: main" in l2["finding"],
-        "All 4 blocked calls carry THREAD_AFFINITY_UNAVAILABLE. Root cause is "
-        "recorded: sidecar mode attaches no DeferredExecutor for main-affinity "
-        "tools. This is a real product limitation, not a demo failure."))
+        "All 4 blocked calls carry THREAD_AFFINITY_UNAVAILABLE. The root cause "
+        "is recorded as an adapter-side sidecar wiring gap (no host dispatcher "
+        "and no main-thread pump), with Core correctly enforcing the declared "
+        "affinity. It is not attributed to a Core design defect."))
+
+    checks.append(check("correct_adapter_side_attribution",
+        "The adapter, not Core" in l2["root_cause"]
+        and "not Core" in l2["root_cause"]
+        and "Core behaves as designed" in l2["root_cause"]
+        and "register_inprocess_executor()" in l2["root_cause"]
+        and "main loop only sleeps" in l2["root_cause"]
+        and "no Core change" in l2["root_cause"],
+        "The four THREAD_AFFINITY_UNAVAILABLE results are attributed to a "
+        "missing adapter-side host dispatcher and main-thread pump, not to a "
+        "Core design defect; the entry makes no Core change and claims no fix."))
+
+    checks.append(check("acceptance_boundary_not_closed",
+        l2["successful_tools_call_count"] == 3
+        and l2["main_affinity_blocked_count"] == 4
+        and ev["publication"]["acceptance_closed"] is False
+        and ev["publication"]["mcp_http_scene_work_demonstrated"] is False
+        and "not closed" in l2["finding"].lower()
+        and "socket-bridge" in l2["finding"],
+        "The full MCP capability-demonstration acceptance is explicitly NOT "
+        "closed: only 3 of 7 MCP tools/call succeeded and the real OBJ work "
+        "was done over the Layer 1 socket bridge, not MCP tools/call."))
 
     life = ev["lifecycle"]
     checks.append(check("clean_host_lifecycle",
