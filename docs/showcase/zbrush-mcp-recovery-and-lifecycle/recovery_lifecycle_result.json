@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "verdict_states_integrity",
+      "observed": "4 probe verdict states are declared: ready / busy / blocked / unreachable.",
+      "result": "pass"
+    },
+    {
+      "name": "error_code_map_integrity",
+      "observed": "3 client-visible bridge codes are mapped, including -32002 for the unknown-outcome path.",
+      "result": "pass"
+    },
+    {
+      "name": "unknown_outcome_invariant",
+      "observed": "Post-submit connection loss is classified as execution_state=unknown and non-retryable.",
+      "result": "pass"
+    },
+    {
+      "name": "retryable_busy_invariant",
+      "observed": "Only a refused-but-servable -32001 busy verdict is retried; blocked never is.",
+      "result": "pass"
+    },
+    {
+      "name": "blocked_label_integrity",
+      "observed": "A blocked host surfaces ZBRUSH_BLOCKED instead of being retried or auto-answered.",
+      "result": "pass"
+    },
+    {
+      "name": "lifecycle_exit_codes_integrity",
+      "observed": "6 distinct lifecycle exit codes: 0 / 10 / 20 / 30 / 40 / 50.",
+      "result": "pass"
+    },
+    {
+      "name": "runtime_modes_integrity",
+      "observed": "2 runtime modes expose the same typed tools and progressive stages.",
+      "result": "pass"
+    },
+    {
+      "name": "source_invariant_recheck",
+      "observed": "6 source literals rechecked against the adapter checkout; missing: [].",
+      "result": "pass"
+    },
+    {
+      "name": "no_private_paths_or_ids",
+      "observed": "Private-pattern hits: [].",
+      "result": "pass"
+    }
+  ],
+  "counts": {
+    "bridge_only_tools": 3,
+    "error_codes": 3,
+    "lifecycle_exit_codes": 6,
+    "runtime_modes": 2,
+    "source_invariants": 6,
+    "ui_capabilities_not_registered": 3,
+    "verdict_states": 4
+  },
+  "live_typed_tool_returns_claimed": false,
+  "schema_version": 1,
+  "slug": "zbrush-mcp-recovery-and-lifecycle",
+  "source_recheck_performed": true,
+  "verdict": "pass"
+}

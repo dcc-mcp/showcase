@@ -1,0 +1,54 @@
+{
+  "adapter_package": "dcc-mcp-zbrush",
+  "adapter_version": "0.2.32",
+  "capture_note": "No host capture. No hero image is published; this entry is real tool returns and real OBJ geometry.",
+  "capture_provider": "none",
+  "core_package": "dcc-mcp-core",
+  "core_version": "0.20.52",
+  "files": [
+    {
+      "bytes": 7743,
+      "path": "README.md",
+      "sha256": "4ec43392c6452fca9a2abe7975e5f54d1ffa772aabc9d582d5538cdd0a20fdcb"
+    },
+    {
+      "bytes": 7427,
+      "path": "README.zh.md",
+      "sha256": "b155bdfa2254c625cd043eecc79ee026de218c445a5d2be823b19cd3ee85b40f"
+    },
+    {
+      "bytes": 1057,
+      "path": "live_exported.obj",
+      "role": "Real OBJ exported by export_active_subtool_obj after one subdivision",
+      "sha256": "1a389c303c08ac1a6f11437fffd6f0bc8a354883850a4846761ef5d949ac423c"
+    },
+    {
+      "bytes": 16258,
+      "path": "live_host_evidence.json",
+      "role": "Redacted derived ledger of the real host tool returns",
+      "sha256": "cef44bbd6ed11bcaf032af596553bbe824f33ca3ba2abc7af4fa72a70ab5a635"
+    },
+    {
+      "bytes": 5104,
+      "path": "live_host_evidence_result.json",
+      "sha256": "ccec9a1a014d4d648cd83416369ef25ead7832da506bbc502aa7b0005afb8104"
+    },
+    {
+      "bytes": 219,
+      "path": "live_input_cube.obj",
+      "role": "Real quad-cube OBJ imported by import_to_scene",
+      "sha256": "90ce581309a5d5e6bb3a788e87acfb3fd516dde9386dae497bc4e7dbd9e6b845"
+    },
+    {
+      "bytes": 13896,
+      "path": "verify_live_host_evidence.py",
+      "sha256": "4db2f1dd9219cb2c8f8ded80dafdf27a779494193aa25c361bf1a292f55f8ea9"
+    }
+  ],
+  "publication_decision": "unlisted_review_real_host_evidence_pending_acceptance",
+  "python_application": "CPython",
+  "python_version": "3.12.10",
+  "reference": "One real ZBrush 2027.0.1 GUI session, delivered in the same Draft PR as the four contract-verified ZBrush MCP cases",
+  "schema_version": 1,
+  "zbrush_host_executed_this_run": true
+}

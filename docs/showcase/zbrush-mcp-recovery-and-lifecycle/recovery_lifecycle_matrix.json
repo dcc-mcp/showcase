@@ -1,0 +1,86 @@
+{
+  "blocked_label": "ZBRUSH_BLOCKED",
+  "bridge_only_tools": [
+    "click_dialog_button",
+    "execute_python",
+    "get_active_dialog"
+  ],
+  "error_codes": {
+    "-32001": "ZBRUSH_BUSY",
+    "-32002": "ZBRUSH_TIMEOUT_STILL_RUNNING",
+    "-32004": "ZBRUSH_REQUEST_EXPIRED"
+  },
+  "lifecycle_exit_codes": {
+    "EXIT_ACQUIRE": 20,
+    "EXIT_INSTALL": 30,
+    "EXIT_OK": 0,
+    "EXIT_PREFLIGHT": 10,
+    "EXIT_REQUIRES_RESTART": 50,
+    "EXIT_VERIFY": 40
+  },
+  "note": "Contract matrix for the ZBrush-specific postsend, blocked-dialog and install-verify behaviour. Source literals are rechecked with --source-root against the adapter checkout; no live ZBrush MCP tool return was produced.",
+  "retryable_busy": {
+    "condition": "code == -32001 and data.retryable is true; a blocked verdict is never retried",
+    "error_code": -32001
+  },
+  "runtime_modes": [
+    "embedded",
+    "sidecar"
+  ],
+  "schema_version": 1,
+  "source_invariants": [
+    {
+      "file": "src/dcc_mcp_zbrush/bridge.py",
+      "id": "unknown_outcome_state",
+      "literal": "\"execution_state\": \"unknown\"",
+      "meaning": "A lost reply after a submitted call is recorded as an unknown execution state."
+    },
+    {
+      "file": "src/dcc_mcp_zbrush/bridge.py",
+      "id": "unknown_outcome_non_retryable",
+      "literal": "data={\"retryable\": False, \"execution_state\": \"unknown\", \"active_method\": method}",
+      "meaning": "Unknown outcomes are explicitly non-retryable so a side-effecting call is not replayed."
+    },
+    {
+      "file": "src/dcc_mcp_zbrush/bridge.py",
+      "id": "unknown_outcome_code",
+      "literal": "code=-32002,",
+      "meaning": "The unknown-outcome error uses the dedicated -32002 code."
+    },
+    {
+      "file": "src/dcc_mcp_zbrush/api.py",
+      "id": "blocked_never_retried",
+      "literal": "\"ZBRUSH_BLOCKED\",",
+      "meaning": "A blocked host verdict is surfaced, not retried blind or auto-answered."
+    },
+    {
+      "file": "src/dcc_mcp_zbrush/api.py",
+      "id": "blocked_prompt",
+      "literal": "Do not retry automatically.",
+      "meaning": "The caller is told to report the block to a human."
+    },
+    {
+      "file": "src/dcc_mcp_zbrush/install_lifecycle.py",
+      "id": "exit_verify_constant",
+      "literal": "EXIT_VERIFY = 40",
+      "meaning": "The verification/rollback exit code is a distinct lifecycle stage."
+    }
+  ],
+  "ui_capabilities_not_registered": [
+    "Selection Sets",
+    "Bake Current",
+    "UV Apply/Cancel"
+  ],
+  "unknown_outcome": {
+    "error_code": -32002,
+    "execution_state": "unknown",
+    "policy": "Once a real method is on the wire, a lost or malformed reply leaves the outcome unknown; the call is never replayed automatically.",
+    "retryable": false
+  },
+  "verdict_states": [
+    "ready",
+    "busy",
+    "blocked",
+    "unreachable"
+  ]
+}

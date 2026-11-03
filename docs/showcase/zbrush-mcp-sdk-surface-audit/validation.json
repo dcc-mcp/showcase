@@ -1,0 +1,229 @@
+{
+  "artifacts_in_entry": [
+    "README.zh.md",
+    "hero-sdk-surface.jpg",
+    "live_2027_sdk_callables.json",
+    "sdk_tool_backing.json",
+    "audit_sdk_surface.py",
+    "sdk_surface_audit_result.json"
+  ],
+  "bridge_error_codes": {
+    "-32001": "ZBRUSH_BUSY",
+    "-32002": "ZBRUSH_TIMEOUT_STILL_RUNNING",
+    "-32004": "ZBRUSH_REQUEST_EXPIRED"
+  },
+  "checks": [
+    {
+      "name": "clean_wheel_pytest",
+      "observed": "Wheel 0.2.32 installed in a clean venv with core 0.20.52; full suite re-run in this turn: 596 passed, 2 skipped, 0 failed, exit 0.",
+      "result": "pass"
+    },
+    {
+      "name": "skills_lint",
+      "observed": "tools/lint_skills.py completed with exit 0 on the bundled skill packages.",
+      "result": "pass"
+    },
+    {
+      "name": "sdk_surface_audit_verifier",
+      "observed": "audit_sdk_surface.py with --skills-root: 8 checks pass, 149 real-host callables, 22 package SDK calls, 0 missing, 17 typed tools bound.",
+      "result": "pass"
+    },
+    {
+      "name": "official_entry_validator",
+      "observed": "python scripts/validate_entry.py docs/showcase/zbrush-mcp-sdk-surface-audit returned PASS for the mandatory trio, artifact hashes and validation shape.",
+      "result": "pass"
+    },
+    {
+      "name": "private_data_scan",
+      "observed": "No drive letters, UNC paths, home-directory paths, internal host names, task IDs or credential-shaped tokens appear in the published case files.",
+      "result": "pass"
+    },
+    {
+      "name": "number_traceability",
+      "observed": "Every numeric token in the English and Chinese reports is present in validation.json or manifest.json.",
+      "result": "pass"
+    },
+    {
+      "name": "live_zbrush_2027_typed_tool_returns",
+      "observed": "No ZBrush process, no zbrush MCP instance in the gateway and no open sidecar port were present; the 2027 host has no adapter/plugin deployment receipt. Real tools/call values for the 17 typed tools were therefore not produced. An owner-authorized deployment receipt, a GUI/document lease and a normal zbrush instance under /instances are required before this check can run.",
+      "result": "not_run"
+    },
+    {
+      "name": "real_host_gui_media",
+      "observed": "No live ZBrush viewport was launched and no new PSD/GIF/MP4 or viewport screenshot was captured. The hero is a generated diagram of the machine-readable ledger, not a host capture.",
+      "result": "not_run"
+    },
+    {
+      "name": "bilingual_gallery_detail_pages",
+      "observed": "All four cases in this set carry explicit unlisted decisions, so no collection.json card, locales/en or locales/zh detail page and no cover review were produced for them. Both README languages are present in each case directory.",
+      "result": "not_run"
+    },
+    {
+      "name": "gallery_publication_merge_deploy_readback",
+      "observed": "One deduplicated Draft PR carries the set to the showcase repository. No merge, no Pages deployment and no live-page read-back were performed; publication authority is separate from contribution authority.",
+      "result": "not_run"
+    },
+    {
+      "name": "independent_exact_head_review",
+      "observed": "No independent reviewer ACK bound to the PR head is recorded. The implementer does not approve their own change; review remains a separate gate.",
+      "result": "not_run"
+    }
+  ],
+  "counts": {
+    "audit_checks_not_run": 0,
+    "audit_checks_pass": 8,
+    "automatic_replays_of_unknown_outcomes": 0,
+    "bridge_error_codes": 3,
+    "case_count_in_set": 4,
+    "default_loaded_stages": 2,
+    "demo_steps": 12,
+    "destructive_tools": 11,
+    "distinct_sdk_calls_used": 17,
+    "fixed_edition": 2,
+    "fixed_version_string": "2027.001",
+    "hero_bit_depth": 8,
+    "hero_height_px": 720,
+    "hero_width_px": 1280,
+    "lifecycle_exit_codes": 6,
+    "live_typed_tool_returns": 0,
+    "missing_sdk_callables": 0,
+    "new_host_media_captured": 0,
+    "package_sdk_calls_used": 22,
+    "progressive_stages": 7,
+    "pytest_failed": 0,
+    "pytest_passed": 596,
+    "pytest_skipped": 2,
+    "read_only_tools": 6,
+    "real_host_public_callables": 149,
+    "registered_ui_only_capabilities": 0,
+    "retained_probe_runs": 2,
+    "runtime_modes": 2,
+    "sdk_keyword_callables": 27,
+    "skills": 8,
+    "source_invariants": 6,
+    "tamper_rejections": 4,
+    "tools_with_sdk_backing": 14,
+    "tools_without_direct_sdk_calls": 3,
+    "total_set_pass_checks": 29,
+    "typed_tools": 17,
+    "ui_only_capabilities_listed": 3,
+    "uncovered_categories": 0,
+    "uncovered_items": 0,
+    "verdict_states": 4,
+    "zbrush_info_0_raw": "2027.0009765625",
+    "zbrush_info_1_raw": "2.0"
+  },
+  "environment": {
+    "adapter_package": "dcc-mcp-zbrush",
+    "adapter_revision": "6028d02c8896759c2c3546f86fac874375478e2a",
+    "adapter_version": "0.2.32",
+    "core_package": "dcc-mcp-core",
+    "core_version": "0.20.52",
+    "gateway_other_instances_this_run": 1,
+    "host_product": "ZBrush",
+    "host_python_version": "3.11.9",
+    "host_version": "2027.0.1",
+    "min_python": "3.10",
+    "pytest_version": "9.0.2",
+    "python_application": "CPython",
+    "python_version": "3.12.10",
+    "real_host_probe_origin": "retained",
+    "scope": "Static contract and source verification, clean-wheel tests, a retained real ZBrush 2027.0.1 SDK probe, and reproducible ledger audits. No GUI launch, no scene mutation, no adapter deployment and no live MCP typed-tool call.",
+    "sidecar_ports_open_this_run": 0,
+    "signed_product_version": "2027, 0, 1, 1",
+    "verification_level": "contract_verified_with_retained_real_host_sdk_inventory",
+    "zbrush_host_executed_this_run": false,
+    "zbrush_mcp_instances_this_run": 0
+  },
+  "lifecycle_exit_codes": {
+    "EXIT_ACQUIRE": 20,
+    "EXIT_INSTALL": 30,
+    "EXIT_OK": 0,
+    "EXIT_PREFLIGHT": 10,
+    "EXIT_REQUIRES_RESTART": 50,
+    "EXIT_VERIFY": 40
+  },
+  "model_attribution": [
+    {
+      "basis": "No accepted task configuration record for the original planning stage was available to this run.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Capability audit scoping and case-set design",
+      "stage": "Planning",
+      "stage_id": "planning"
+    },
+    {
+      "basis": "No new DCC artwork was produced in this run; historical production configuration is not part of the public record.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "No new native asset; generated evidence diagrams only",
+      "stage": "Creation",
+      "stage_id": "creation"
+    },
+    {
+      "basis": "The adapter source predates this run; per-stage model configuration was not recorded.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "dcc-mcp-zbrush 0.2.32 source and skill contracts",
+      "stage": "Code",
+      "stage_id": "code"
+    },
+    {
+      "basis": "No reference-generation model call is part of these contract-only audits.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Capability ledger, SDK backing map and prompts",
+      "stage": "Reference generation",
+      "stage_id": "reference"
+    },
+    {
+      "basis": "No media retouching was performed; the hero diagrams are generated directly from the ledgers.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Generated hero diagrams, no host capture",
+      "stage": "Post-production",
+      "stage_id": "post_production"
+    },
+    {
+      "basis": "No independent exact-head review run is recorded for this Draft PR; review remains a separate gate.",
+      "model": "Unknown",
+      "reasoning_effort": "Unknown",
+      "record_status": "unknown",
+      "scope": "Draft cases, not accepted",
+      "stage": "Independent review",
+      "stage_id": "review"
+    }
+  ],
+  "not_claimed": [
+    "That any of the 17 typed tools returned a real value from a live ZBrush 2027 GUI host during this run.",
+    "That the ZBrush 2027 host has the adapter or plugin deployed, or that a zbrush instance is registered with the gateway.",
+    "That Selection Sets, Bake Current or UV Apply/Cancel are callable capabilities of this adapter.",
+    "That any turntable, render, viewport screenshot or video was newly captured; the hero diagrams are generated from the ledgers.",
+    "That the retained real-host SDK probe was re-executed in this run; it is historical in-host evidence kept separate.",
+    "That these entries are selected for the gallery, merged, deployed, or visible on a live page.",
+    "That a formal approval, independent exact-head review, CI gate or release authorization was completed.",
+    "Any private task ID, raw prompt, account, credential, internal path or unredacted log."
+  ],
+  "publication_decision": {
+    "case_count_in_set": 4,
+    "decision_file": "unlisted-cases.json",
+    "reason": "Structurally complete and machine-checkable, but the showcase standard requires real MCP tool-return evidence and a production-reuse/acceptance record before a gallery card. Real 2027 host tool calls are not_run, so each case is registered as an unlisted/review case in unlisted-cases.json of the same Draft PR. Review, merge and deploy read-back are separate gates.",
+    "status": "unlisted_review_pending_real_host_tool_returns"
+  },
+  "revision_notes": [
+    {
+      "change": "Initial contract-verified capability audit, bundled with the ZBrush MCP showcase set. Live 2027 host tool calls, gallery selection, independent review, merge and deploy remain explicitly NOT_RUN.",
+      "date": "2026-11-03",
+      "version": "0.2.32 (draft case)"
+    }
+  ],
+  "schema_version": 1,
+  "slug": "zbrush-mcp-sdk-surface-audit",
+  "status_note": "Real ZBrush 2027.0.1 SDK inventory bound to all adapter SDK calls with zero gaps; live typed-tool returns are NOT_RUN.",
+  "verification_level": "contract_verified_with_retained_real_host_sdk_inventory"
+}

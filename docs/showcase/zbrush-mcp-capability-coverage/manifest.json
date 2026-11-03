@@ -1,0 +1,45 @@
+{
+  "adapter_package": "dcc-mcp-zbrush",
+  "adapter_version": "0.2.32",
+  "capture_note": "No host capture. The hero is a generated diagram of the coverage ledger.",
+  "capture_provider": "none",
+  "core_package": "dcc-mcp-core",
+  "core_version": "0.20.52",
+  "files": [
+    {
+      "bytes": 5377,
+      "path": "README.zh.md",
+      "sha256": "0c7e2d8e7c77503d5c01c01f9e27eafcd46789cb831014cb42c28963911f0c7e"
+    },
+    {
+      "bit_depth": 8,
+      "bytes": 62370,
+      "encoding": "JPEG q82, generated ledger diagram, not a host capture",
+      "height": 720,
+      "path": "hero-capability-coverage.jpg",
+      "sha256": "41f474fe18fbbc74e17bdf6f1bc69b10d65eb3351861d8001a2ae78f657883e9",
+      "width": 1280
+    },
+    {
+      "bytes": 13658,
+      "path": "capability_coverage.json",
+      "sha256": "d556df6ce2682372f16e128f8eb8d64094c0ec17581008c287a8061deff48b55"
+    },
+    {
+      "bytes": 4119,
+      "path": "audit_capability_coverage.py",
+      "sha256": "e6a4bcb65e4badd1b0fa1243dc2c05a4a1cfc15175909a04e4cbe6abcbe0e66f"
+    },
+    {
+      "bytes": 2533,
+      "path": "capability_coverage_result.json",
+      "sha256": "65200bbad5a4e45646e432a3e620acf2326641f0917988ff7f2eaad1e76af942"
+    }
+  ],
+  "publication_decision": "unlisted_review_pending_real_host_tool_returns",
+  "python_application": "CPython",
+  "python_version": "3.12.10",
+  "reference": "The four ZBrush MCP showcase cases delivered together in one Draft PR",
+  "schema_version": 1,
+  "zbrush_host_executed_this_run": false
+}

@@ -1,0 +1,292 @@
+{
+  "absent_ui_capabilities": [
+    "Selection Sets",
+    "Bake Current",
+    "UV Apply/Cancel"
+  ],
+  "adapter_version": "0.2.32",
+  "backing_kinds": [
+    "embedded_interpreter",
+    "socket_bridge_and_window_ocr",
+    "zbrush_commands"
+  ],
+  "distinct_sdk_call_count": 17,
+  "distinct_sdk_calls": [
+    "exists",
+    "get",
+    "get_active_subtool_index",
+    "get_active_tool_path",
+    "get_subtool_count",
+    "get_subtool_status",
+    "get_transform",
+    "is_enabled",
+    "is_polymesh3d_solid",
+    "press",
+    "press_key",
+    "query_mesh3d",
+    "select_subtool",
+    "set",
+    "set_next_filename",
+    "set_transform",
+    "update"
+  ],
+  "package_sdk_call_count": 22,
+  "package_sdk_calls": [
+    "add_button",
+    "add_palette",
+    "exists",
+    "get",
+    "get_active_subtool_index",
+    "get_active_tool_path",
+    "get_subtool_count",
+    "get_subtool_status",
+    "get_transform",
+    "is_enabled",
+    "is_polymesh3d_solid",
+    "message_ok",
+    "press",
+    "press_key",
+    "query_mesh3d",
+    "select_subtool",
+    "set",
+    "set_next_filename",
+    "set_transform",
+    "show_actions",
+    "update",
+    "zbrush_info"
+  ],
+  "row_count": 17,
+  "rows": [
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 7,
+      "sdk_calls": [
+        "exists",
+        "get",
+        "is_enabled",
+        "press",
+        "query_mesh3d",
+        "set",
+        "set_next_filename"
+      ],
+      "skill": "zbrush-subtool",
+      "source_file": "zbrush-subtool/scripts/bake_active_subtool_map.py",
+      "stage": "authoring",
+      "tool": "bake_active_subtool_map"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 8,
+      "sdk_calls": [
+        "exists",
+        "get",
+        "get_transform",
+        "press",
+        "press_key",
+        "set_next_filename",
+        "set_transform",
+        "update"
+      ],
+      "skill": "zbrush-viewport",
+      "source_file": "zbrush-viewport/scripts/capture_turntable.py",
+      "stage": "presentation",
+      "tool": "capture_turntable"
+    },
+    {
+      "backing_kind": "socket_bridge_and_window_ocr",
+      "sdk_call_count": 0,
+      "sdk_calls": [],
+      "skill": "zbrush-dialog",
+      "source_file": "zbrush-dialog/scripts/click_dialog_button.py",
+      "stage": "recovery",
+      "tool": "click_dialog_button"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 5,
+      "sdk_calls": [
+        "exists",
+        "get",
+        "press",
+        "set",
+        "set_next_filename"
+      ],
+      "skill": "zbrush-brush",
+      "source_file": "zbrush-brush/scripts/wrinkle_brush.py",
+      "stage": "authoring",
+      "tool": "create_wrinkle_brush"
+    },
+    {
+      "backing_kind": "embedded_interpreter",
+      "sdk_call_count": 0,
+      "sdk_calls": [],
+      "skill": "zbrush-scripting",
+      "source_file": "zbrush-scripting/scripts/execute_python.py",
+      "stage": "bootstrap",
+      "tool": "execute_python"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 3,
+      "sdk_calls": [
+        "get_active_tool_path",
+        "press",
+        "set_next_filename"
+      ],
+      "skill": "zbrush-interchange",
+      "source_file": "zbrush-interchange/scripts/export_active_subtool_obj.py",
+      "stage": "interchange",
+      "tool": "export_active_subtool_obj"
+    },
+    {
+      "backing_kind": "socket_bridge_and_window_ocr",
+      "sdk_call_count": 0,
+      "sdk_calls": [],
+      "skill": "zbrush-dialog",
+      "source_file": "zbrush-dialog/scripts/get_active_dialog.py",
+      "stage": "recovery",
+      "tool": "get_active_dialog"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 3,
+      "sdk_calls": [
+        "get_active_subtool_index",
+        "get_active_tool_path",
+        "get_subtool_count"
+      ],
+      "skill": "zbrush-scene",
+      "source_file": "zbrush-scene/scripts/get_scene_info.py",
+      "stage": "scene",
+      "tool": "get_scene_info"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 2,
+      "sdk_calls": [
+        "get_active_tool_path",
+        "get_subtool_count"
+      ],
+      "skill": "zbrush-scripting",
+      "source_file": "zbrush-scripting/scripts/get_session_info.py",
+      "stage": "bootstrap",
+      "tool": "get_session_info"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 3,
+      "sdk_calls": [
+        "get_active_subtool_index",
+        "get_active_tool_path",
+        "get_subtool_status"
+      ],
+      "skill": "zbrush-subtool",
+      "source_file": "zbrush-subtool/scripts/get_subtool_status.py",
+      "stage": "authoring",
+      "tool": "get_subtool_status"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 6,
+      "sdk_calls": [
+        "exists",
+        "get_active_tool_path",
+        "get_subtool_count",
+        "is_enabled",
+        "press",
+        "set_next_filename"
+      ],
+      "skill": "zbrush-import-to-scene",
+      "source_file": "zbrush-import-to-scene/scripts/import_to_scene.py",
+      "stage": "pipeline",
+      "tool": "import_to_scene"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 3,
+      "sdk_calls": [
+        "get_active_tool_path",
+        "is_polymesh3d_solid",
+        "query_mesh3d"
+      ],
+      "skill": "zbrush-subtool",
+      "source_file": "zbrush-subtool/scripts/inspect_active_mesh.py",
+      "stage": "authoring",
+      "tool": "inspect_active_mesh"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 2,
+      "sdk_calls": [
+        "get_subtool_count",
+        "get_subtool_status"
+      ],
+      "skill": "zbrush-scene",
+      "source_file": "zbrush-scene/scripts/list_subtools.py",
+      "stage": "scene",
+      "tool": "list_subtools"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 5,
+      "sdk_calls": [
+        "exists",
+        "get",
+        "press",
+        "set",
+        "set_next_filename"
+      ],
+      "skill": "zbrush-brush",
+      "source_file": "zbrush-brush/scripts/wrinkle_brush.py",
+      "stage": "authoring",
+      "tool": "load_wrinkle_brush"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 3,
+      "sdk_calls": [
+        "get_active_tool_path",
+        "press",
+        "set"
+      ],
+      "skill": "zbrush-subtool",
+      "source_file": "zbrush-subtool/scripts/refine_active_subtool.py",
+      "stage": "authoring",
+      "tool": "refine_active_subtool"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 5,
+      "sdk_calls": [
+        "exists",
+        "get_active_tool_path",
+        "press",
+        "query_mesh3d",
+        "set"
+      ],
+      "skill": "zbrush-subtool",
+      "source_file": "zbrush-subtool/scripts/remesh_active_subtool.py",
+      "stage": "authoring",
+      "tool": "remesh_active_subtool"
+    },
+    {
+      "backing_kind": "zbrush_commands",
+      "sdk_call_count": 3,
+      "sdk_calls": [
+        "get_active_tool_path",
+        "get_subtool_count",
+        "select_subtool"
+      ],
+      "skill": "zbrush-subtool",
+      "source_file": "zbrush-subtool/scripts/select_subtool.py",
+      "stage": "authoring",
+      "tool": "select_subtool"
+    }
+  ],
+  "schema_version": 1,
+  "tools_without_direct_sdk_calls": [
+    "click_dialog_button",
+    "execute_python",
+    "get_active_dialog"
+  ]
+}
