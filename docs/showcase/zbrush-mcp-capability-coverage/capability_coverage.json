@@ -1,0 +1,599 @@
+{
+  "case_count": 4,
+  "cases": [
+    {
+      "detail": "Full 17-tool / 8-skill contract inventory and the ordered demo chain.",
+      "role": "baseline_inventory",
+      "slug": "zbrush-mcp-capability-tour"
+    },
+    {
+      "detail": "Maps every adapter SDK call to the real 2027.0.1 host callable surface.",
+      "role": "real_host_sdk_binding",
+      "slug": "zbrush-mcp-sdk-surface-audit"
+    },
+    {
+      "detail": "Machine-checkable zero-gap proof across the whole set.",
+      "role": "coverage_ledger",
+      "slug": "zbrush-mcp-capability-coverage"
+    },
+    {
+      "detail": "Post-submit unknown-outcome classification, blocked verdicts, exit codes and modes.",
+      "role": "recovery_and_lifecycle",
+      "slug": "zbrush-mcp-recovery-and-lifecycle"
+    }
+  ],
+  "coverage": {
+    "demo_steps": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "1"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "2"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "3"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "4"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "5"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "6"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "7"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "8"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "9"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "10"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "11"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "12"
+      }
+    ],
+    "destructive_tools": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "execute_python"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "select_subtool"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "remesh_active_subtool"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "refine_active_subtool"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "bake_active_subtool_map"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "create_wrinkle_brush"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "load_wrinkle_brush"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "capture_turntable"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "export_active_subtool_obj"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "import_to_scene"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "click_dialog_button"
+      }
+    ],
+    "lifecycle_exit_codes": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "EXIT_OK"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "EXIT_PREFLIGHT"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "EXIT_ACQUIRE"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "EXIT_INSTALL"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "EXIT_VERIFY"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "EXIT_REQUIRES_RESTART"
+      }
+    ],
+    "read_only_tools": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_session_info"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_scene_info"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "list_subtools"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_subtool_status"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "inspect_active_mesh"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_active_dialog"
+      }
+    ],
+    "runtime_modes": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "embedded"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "sidecar"
+      }
+    ],
+    "skills": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-scripting"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-scene"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-subtool"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-brush"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-viewport"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-interchange"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-import-to-scene"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "zbrush-dialog"
+      }
+    ],
+    "stages": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "bootstrap"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "scene"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "authoring"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "presentation"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "interchange"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour"
+        ],
+        "item": "pipeline"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "recovery"
+      }
+    ],
+    "typed_tools": [
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "bake_active_subtool_map"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "capture_turntable"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "click_dialog_button"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "create_wrinkle_brush"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "execute_python"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "export_active_subtool_obj"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-recovery-and-lifecycle"
+        ],
+        "item": "get_active_dialog"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_scene_info"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_session_info"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "get_subtool_status"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "import_to_scene"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "inspect_active_mesh"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "list_subtools"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "load_wrinkle_brush"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "refine_active_subtool"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "remesh_active_subtool"
+      },
+      {
+        "cases": [
+          "zbrush-mcp-capability-tour",
+          "zbrush-mcp-sdk-surface-audit"
+        ],
+        "item": "select_subtool"
+      }
+    ]
+  },
+  "declared_uncovered": [],
+  "expected": {
+    "demo_steps": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "destructive_tools": [
+      "execute_python",
+      "select_subtool",
+      "remesh_active_subtool",
+      "refine_active_subtool",
+      "bake_active_subtool_map",
+      "create_wrinkle_brush",
+      "load_wrinkle_brush",
+      "capture_turntable",
+      "export_active_subtool_obj",
+      "import_to_scene",
+      "click_dialog_button"
+    ],
+    "lifecycle_exit_codes": {
+      "EXIT_ACQUIRE": 20,
+      "EXIT_INSTALL": 30,
+      "EXIT_OK": 0,
+      "EXIT_PREFLIGHT": 10,
+      "EXIT_REQUIRES_RESTART": 50,
+      "EXIT_VERIFY": 40
+    },
+    "read_only_tools": [
+      "get_session_info",
+      "get_scene_info",
+      "list_subtools",
+      "get_subtool_status",
+      "inspect_active_mesh",
+      "get_active_dialog"
+    ],
+    "runtime_modes": [
+      "embedded",
+      "sidecar"
+    ],
+    "skills": [
+      "zbrush-scripting",
+      "zbrush-scene",
+      "zbrush-subtool",
+      "zbrush-brush",
+      "zbrush-viewport",
+      "zbrush-interchange",
+      "zbrush-import-to-scene",
+      "zbrush-dialog"
+    ],
+    "stages": [
+      "bootstrap",
+      "scene",
+      "authoring",
+      "presentation",
+      "interchange",
+      "pipeline",
+      "recovery"
+    ],
+    "typed_tools": [
+      "bake_active_subtool_map",
+      "capture_turntable",
+      "click_dialog_button",
+      "create_wrinkle_brush",
+      "execute_python",
+      "export_active_subtool_obj",
+      "get_active_dialog",
+      "get_scene_info",
+      "get_session_info",
+      "get_subtool_status",
+      "import_to_scene",
+      "inspect_active_mesh",
+      "list_subtools",
+      "load_wrinkle_brush",
+      "refine_active_subtool",
+      "remesh_active_subtool",
+      "select_subtool"
+    ]
+  },
+  "note": "One baseline inventory case plus three depth cases. Every published capability is covered by at least one case; the ledger is recomputed by the bundled verifier rather than asserted. Coverage means the capability is inventoried and bound to a reproducible check, not that a live ZBrush tool call returned a value.",
+  "schema_version": 1,
+  "set_name": "zbrush-mcp-capability-showcases"
+}

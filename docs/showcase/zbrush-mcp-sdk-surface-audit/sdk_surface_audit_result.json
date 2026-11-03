@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "host_callable_inventory_integrity",
+      "observed": "149 unique public callables from the retained real-host probe; declared count 149; no new host run this time.",
+      "result": "pass"
+    },
+    {
+      "name": "tool_backing_rows_integrity",
+      "observed": "17 tool rows, 17 unique tool names, all source paths repository-relative.",
+      "result": "pass"
+    },
+    {
+      "name": "sdk_calls_resolve_in_real_host",
+      "observed": "22 distinct SDK calls across the whole adapter package (17 inside typed-tool sources); 0 missing from the real host surface. Missing list: [].",
+      "result": "pass"
+    },
+    {
+      "name": "bridge_only_tools_declared",
+      "observed": "3 tools operate through the socket bridge, window OCR or the embedded interpreter and declare no direct zbrush.commands call: ['click_dialog_button', 'execute_python', 'get_active_dialog'].",
+      "result": "pass"
+    },
+    {
+      "name": "ui_only_capabilities_absent",
+      "observed": "Selection Sets / Bake Current / UV Apply/Cancel have no dedicated callable and no typed tool.",
+      "result": "pass"
+    },
+    {
+      "name": "identity_gate_evidence",
+      "observed": "Retained real-host identity: 2027.001 / edition 2, consistent, old formula would roll back, 4 tamper shapes rejected.",
+      "result": "pass"
+    },
+    {
+      "name": "contract_recompute_from_skills_root",
+      "observed": "Re-derived 17 tool source files from the adapter checkout; all per-tool SDK call lists match the published ledger: True.",
+      "result": "pass"
+    },
+    {
+      "name": "no_private_paths_or_ids",
+      "observed": "Private-pattern hits: [].",
+      "result": "pass"
+    }
+  ],
+  "counts": {
+    "distinct_sdk_calls_used": 17,
+    "missing_sdk_callables": 0,
+    "package_sdk_calls_used": 22,
+    "real_host_public_callables": 149,
+    "registered_ui_only_capabilities": 0,
+    "sdk_keyword_callables": 27,
+    "tamper_rejections": 4,
+    "tools_with_sdk_backing": 14,
+    "tools_without_direct_sdk_calls": 3,
+    "typed_tools": 17
+  },
+  "live_typed_tool_returns_claimed": false,
+  "missing_sdk_callables": [],
+  "recompute_performed": true,
+  "schema_version": 1,
+  "slug": "zbrush-mcp-sdk-surface-audit",
+  "verdict": "pass",
+  "zero_gap": true
+}

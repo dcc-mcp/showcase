@@ -1,0 +1,4 @@
+# Keep committed bytes byte-for-byte stable so sha256 in manifest.json stays valid.
+# capability_tour_result.json retains CRLF from its Windows producer; cr-at-eol
+# keeps Git's whitespace check from flagging that intentional provenance.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -20,6 +20,26 @@
       "slug": "stairkeep",
       "status": "review",
       "reason": "Three-floor source prototype retained for review, with historical Godot 4.7.2 import, rule checks and Web export and the original resource-exhaustion counterexamples preserved. Native rendered UI, real keyboard/mouse, browser WebGL startup, IndexedDB reload persistence and an accepted gameplay movie remain blocked or untested. The prototype is silent with an English desktop UI; mobile and full localization remain pending. This archive is not gallery selection or playable deployment."
+    },
+    {
+      "slug": "zbrush-mcp-capability-tour",
+      "status": "review",
+      "reason": "Contract-complete capability inventory with a clean-wheel test suite, but no live ZBrush 2027 MCP typed-tool returns, no adapter deployment receipt and no new host media. Retained for review as the baseline case of the ZBrush MCP set; not selected as a gallery card."
+    },
+    {
+      "slug": "zbrush-mcp-sdk-surface-audit",
+      "status": "review",
+      "reason": "Binds all adapter SDK calls to a retained real ZBrush 2027.0.1 SDK inventory with zero gaps, but the probe is historical in-host evidence and no live MCP typed-tool return was produced. Retained for review; not selected as a gallery card."
+    },
+    {
+      "slug": "zbrush-mcp-capability-coverage",
+      "status": "review",
+      "reason": "Machine-recomputed zero-gap coverage ledger across the four ZBrush MCP cases. Structural coverage only; no real ZBrush tool execution, no host media and no gallery acceptance record. Retained for review; not selected as a gallery card."
+    },
+    {
+      "slug": "zbrush-mcp-recovery-and-lifecycle",
+      "status": "review",
+      "reason": "Contract-verified postsend unknown-outcome, blocked-dialog and install-lifecycle matrix with source-invariant rechecks, but no live fault injection, no live MCP tool returns and no host media. Retained for review; not selected as a gallery card."
     }
   ]
 }

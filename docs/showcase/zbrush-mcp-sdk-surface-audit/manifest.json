@@ -1,0 +1,50 @@
+{
+  "adapter_package": "dcc-mcp-zbrush",
+  "adapter_version": "0.2.32",
+  "capture_note": "No host capture. The hero is a generated ledger diagram; the real-host callable inventory is retained historical in-host evidence.",
+  "capture_provider": "none",
+  "core_package": "dcc-mcp-core",
+  "core_version": "0.20.52",
+  "files": [
+    {
+      "bytes": 6503,
+      "path": "README.zh.md",
+      "sha256": "5247bdc70229e4bb6ac1f5c1492147f78fe8aeb842acc090fcb5986d085fc2bd"
+    },
+    {
+      "bit_depth": 8,
+      "bytes": 67194,
+      "encoding": "JPEG q82, generated ledger diagram, not a host capture",
+      "height": 720,
+      "path": "hero-sdk-surface.jpg",
+      "sha256": "e0fad3066a8efdb7fb1d5724f26d5d05f887c0abeef1f6ff3663ed5872aefcc5",
+      "width": 1280
+    },
+    {
+      "bytes": 5399,
+      "path": "live_2027_sdk_callables.json",
+      "sha256": "3e5f3641cd0205f6eca3a0b5aea32d692b70a4ebb4854f8960022815347be7ed"
+    },
+    {
+      "bytes": 7387,
+      "path": "sdk_tool_backing.json",
+      "sha256": "40c579f25ddc6dc3e4c1513ee62f46254ba14de59224347fccd9d5c20595b98a"
+    },
+    {
+      "bytes": 7302,
+      "path": "audit_sdk_surface.py",
+      "sha256": "2d6720e8b362719cbb50689e7af96b6426914dcbddf660e4d8d673341052ab76"
+    },
+    {
+      "bytes": 2291,
+      "path": "sdk_surface_audit_result.json",
+      "sha256": "5331b0aced5f992c13449efedf4265820c0956f241f0ea20dad043a5b54e2806"
+    }
+  ],
+  "publication_decision": "unlisted_review_pending_real_host_tool_returns",
+  "python_application": "CPython",
+  "python_version": "3.12.10",
+  "reference": "dcc-mcp-zbrush 0.2.32 skill contracts and a retained ZBrush 2027.0.1 SDK probe",
+  "schema_version": 1,
+  "zbrush_host_executed_this_run": false
+}

@@ -1,0 +1,82 @@
+{
+  "checks": [
+    {
+      "name": "expected_inventory_integrity",
+      "observed": "Expected inventory: 17 tools / 8 skills / 7 stages / 2 modes / 6 exit codes / 12 demo steps / 6 read-only / 11 destructive / 4 cases.",
+      "result": "pass"
+    },
+    {
+      "name": "demo_steps_coverage",
+      "observed": "12 expected items, 12 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "destructive_tools_coverage",
+      "observed": "11 expected items, 11 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "lifecycle_exit_codes_coverage",
+      "observed": "6 expected items, 6 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "read_only_tools_coverage",
+      "observed": "6 expected items, 6 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "runtime_modes_coverage",
+      "observed": "2 expected items, 2 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "skills_coverage",
+      "observed": "8 expected items, 8 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "stages_coverage",
+      "observed": "7 expected items, 7 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "typed_tools_coverage",
+      "observed": "17 expected items, 17 covered by at least one case in the set; uncovered: [].",
+      "result": "pass"
+    },
+    {
+      "name": "read_only_destructive_partition",
+      "observed": "6 read-only and 11 destructive tools are disjoint and partition the 17 typed tools.",
+      "result": "pass"
+    },
+    {
+      "name": "declared_uncovered_is_empty",
+      "observed": "The ledger declares no uncovered capability.",
+      "result": "pass"
+    },
+    {
+      "name": "no_private_paths_or_ids",
+      "observed": "Private-pattern hits: [].",
+      "result": "pass"
+    }
+  ],
+  "counts": {
+    "case_count": 4,
+    "demo_steps": 12,
+    "destructive_tools": 11,
+    "lifecycle_exit_codes": 6,
+    "read_only_tools": 6,
+    "runtime_modes": 2,
+    "skills": 8,
+    "stages": 7,
+    "typed_tools": 17,
+    "uncovered_categories": 0
+  },
+  "live_typed_tool_returns_claimed": false,
+  "schema_version": 1,
+  "slug": "zbrush-mcp-capability-coverage",
+  "uncovered": {},
+  "verdict": "pass",
+  "zero_gap": true
+}

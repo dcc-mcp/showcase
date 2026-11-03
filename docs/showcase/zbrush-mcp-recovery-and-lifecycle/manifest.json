@@ -1,0 +1,45 @@
+{
+  "adapter_package": "dcc-mcp-zbrush",
+  "adapter_version": "0.2.32",
+  "capture_note": "No host capture. The hero is a generated diagram of the recovery/lifecycle matrix.",
+  "capture_provider": "none",
+  "core_package": "dcc-mcp-core",
+  "core_version": "0.20.52",
+  "files": [
+    {
+      "bytes": 6555,
+      "path": "README.zh.md",
+      "sha256": "72533a771be213debcf6ae298dfb754004b6e8c4c3d01cb9ce53d82d69d286be"
+    },
+    {
+      "bit_depth": 8,
+      "bytes": 66051,
+      "encoding": "JPEG q82, generated ledger diagram, not a host capture",
+      "height": 720,
+      "path": "hero-recovery-lifecycle.jpg",
+      "sha256": "9e25d21253c880e3ccf26c9db90672ab97c8b58a7c368cd8ed54c55d463ea984",
+      "width": 1280
+    },
+    {
+      "bytes": 2831,
+      "path": "recovery_lifecycle_matrix.json",
+      "sha256": "ff49e6edc51fd85d8ea8d4a98ae878494e6bc818e7d94ab64ecf2358dfef1d7e"
+    },
+    {
+      "bytes": 4864,
+      "path": "verify_recovery_lifecycle.py",
+      "sha256": "2d7d8bcac1bbb527b2cf0e0cf463b968dc27e84c57b5187b2aba9d55905a0394"
+    },
+    {
+      "bytes": 1942,
+      "path": "recovery_lifecycle_result.json",
+      "sha256": "c458d78d1aef82ee8da02236b194cb8f1c4d7493105f187cc24eb70ae680e42c"
+    }
+  ],
+  "publication_decision": "unlisted_review_pending_real_host_tool_returns",
+  "python_application": "CPython",
+  "python_version": "3.12.10",
+  "reference": "dcc-mcp-zbrush 0.2.32 bridge.py, api.py and install_lifecycle.py source invariants",
+  "schema_version": 1,
+  "zbrush_host_executed_this_run": false
+}
